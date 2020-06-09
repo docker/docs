@@ -4,9 +4,13 @@ keywords: Windows 10 Home, Home, Windows, install, download, run, Docker, local
 title: Install Docker Desktop on Windows Home
 ---
 
-You can now install Docker Desktop on Windows Home machines using the WSL 2 backend. Docker Desktop on Windows Home is a full version of Docker Desktop for Linux container development.
+You can now install Docker Desktop on Windows Home machines using the WSL 2 backend.
+Docker Desktop on Windows Home is a full version of Docker Desktop for Linux container
+development.
 
-This page contains information on installing Docker Desktop on Windows 10 Home. If you are looking for information about installing Docker Desktop on Windows 10 Pro, Enterprise, or Education, see [Install Docker Desktop on Windows](/install.md).
+This page contains information on installing Docker Desktop on Windows 10 Home.
+If you are looking for information about installing Docker Desktop on Windows 10
+Pro, Enterprise, or Education, see [Install Docker Desktop on Windows](install.md).
 
 [Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
 .button .outline-btn}
@@ -30,7 +34,8 @@ For detailed information about WSL 2, see [Docker Desktop WSL 2 backend](wsl.md)
 Windows 10 Home machines must meet the following requirements to install Docker Desktop:
 
   - Install Windows 10, version 2004 or higher.
-  - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+  - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
   - The following hardware prerequisites are required to successfully run
 WSL 2 on Windows 10 Home:
 
@@ -43,19 +48,21 @@ WSL 2 on Windows 10 Home:
 
 > **Note**
 >
-> Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+> Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle
+> for Windows 10 operating system. For more information, see the
+> [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
 ### What's included in the installer
 
-The Docker Desktop installation includes [Docker Engine](/engine/index.md),
-Docker CLI client, [Docker Compose](/compose/index.md),
-[Notary](/notary/getting_started.md),
+The Docker Desktop installation includes [Docker Engine](../engine/index.md),
+Docker CLI client, [Docker Compose](../compose/index.md),
+[Notary](../notary/getting_started.md),
 [Kubernetes](https://github.com/kubernetes/kubernetes/),
 and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 Nested virtualization scenarios, such as running Docker Desktop on a
 VMWare or Parallels instance might work, but there are no guarantees. For
-more information, see [Running Docker Desktop in nested virtualization scenarios](troubleshoot.md#running-docker-desktop-for-windows-in-nested-virtualization-scenarios).
+more information, see [Running Docker Desktop in nested virtualization scenarios](troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
 ## Install Docker Desktop on Windows 10 Home
 
@@ -117,29 +124,29 @@ To safely switch between Edge and Stable versions, ensure you save images and ex
 You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
 
 1. Use `docker save -o images.tar image1 [image2 ...]` to save any images you
-    want to keep. See [save](/engine/reference/commandline/save) in the Docker
+    want to keep. See [save](../engine/reference/commandline/save.md) in the Docker
     Engine command line reference.
 
 2. Use `docker export -o myContainner1.tar container1` to export containers you
-    want to keep. See [export](/engine/reference/commandline/export) in the
+    want to keep. See [export](../engine/reference/commandline/export.md) in the
     Docker Engine command line reference.
 
 3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
 
 4. Use `docker load -i images.tar` to reload previously saved images. See
-    [load](/engine/reference/commandline/load) in the Docker Engine.
+    [load](../engine/reference/commandline/load.md) in the Docker Engine.
 
 5. Use `docker import -i myContainer1.tar` to create a file system image
     corresponding to the previously exported containers. See
-    [import](/engine/reference/commandline/import) in the Docker Engine.
+    [import](../engine/reference/commandline/import.md) in the Docker Engine.
 
-For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](/storage/volumes/#backup-restore-or-migrate-data-volumes).
+For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](../storage/volumes.md#backup-restore-or-migrate-data-volumes).
 
 ## Where to go next
 
 * [Getting started](index.md) introduces Docker Desktop for Windows.
-* [Get started with Docker](/get-started/) is a tutorial that teaches you how to
-  deploy a multi-service stack.
+* [Get started with Docker](../get-started/index.md) is a tutorial that teaches
+  you how to deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](faqs.md) provides answers to frequently asked questions.
