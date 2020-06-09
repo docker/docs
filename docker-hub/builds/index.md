@@ -277,6 +277,14 @@ You could also use capture groups to build and label images that come from vario
 
 `/(alice|bob)-v([0-9.]+)/` -->
 
+### Build images with BuildKit
+
+You can enable the BuildKit builder by setting the `DOCKER_BUILDKIT=1`
+[environment variable](#environment-variables-for-builds) in the
+[Configure automated build settings](#configure-automated-build-settings) section.
+Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+page for more information on BuildKit.
+
 ## Build repositories with linked private submodules
 
 Docker Hub sets up a deploy key in your source code repository that allows it
