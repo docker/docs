@@ -279,7 +279,9 @@ You could also use capture groups to build and label images that come from vario
 
 ### Build images with BuildKit
 
-You can enable the Buildkit builder by setting the environment variable `DOCKER_BUILDKIT=1`([enviroment variables](index.md#environment-variables-for-builds)) in the Configure automated build section ([configure builds](index.md#configure-automated-build-settings)).
+You can enable the BuildKit builder by setting the `DOCKER_BUILDKIT=1`
+[environment variable](#environment-variables-for-builds) in the
+[Configure automated build settings](#configure-automated-build-settings) section.
 For more information on Buildkit please see [buildkit](https://docs.docker.com/develop/develop-images/build_enhancements/).
 
 ## Build repositories with linked private submodules
