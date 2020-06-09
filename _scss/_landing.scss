@@ -127,6 +127,22 @@ body#landing {
     padding: 7.5px;
   }
 
+  .video-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 6.5px;
+    margin-bottom: 6.5px;
+
+    .video-image {
+      margin-right: 13px;
+    }
+
+    .video-title {
+      flex: 1;
+    }
+  }
+
   %icon-card {
     background-image:  none;
     background-origin: content-box;

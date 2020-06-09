@@ -439,7 +439,7 @@ docker app.
 
 ### Docker Desktop fails to start when anti-virus software is installed
 
-Some anti-virus software may be incompatible with with Hyper-V and Microsoft
+Some anti-virus software may be incompatible with Hyper-V and Microsoft
 Windows 10 builds. The conflict
 typically occurs after a Windows update and
 manifests as an error response from the Docker daemon and a Docker Desktop start failure.

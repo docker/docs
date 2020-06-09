@@ -48,8 +48,6 @@ Nested virtualization scenarios, such as running Docker Desktop on a
 VMWare or Parallels instance might work, but there are no guarantees. For
 more information, see [Running Docker Desktop in nested virtualization scenarios](troubleshoot.md#running-docker-desktop-for-windows-in-nested-virtualization-scenarios).
 
-**Note**: Refer to the [Docker compatibility matrix](https://success.docker.com/article/compatibility-matrix) for complete Docker compatibility information with Windows Server.
-
 ### About Windows containers
 
 Looking for information on using Windows containers?
