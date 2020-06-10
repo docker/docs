@@ -74,12 +74,12 @@ you need to add this configuration in the Docker systemd service file.
 
 > **Note for rootless mode**
 >
-> The location of systemd configuration files are different when running docker
+> The location of systemd configuration files are different when running Docker
 > in [rootless mode](../../engine/security/rootless.md). When running in rootless
-> mode, docker is started as a user-mode systemd service, and uses files stored
+> mode, Docker is started as a user-mode systemd service, and uses files stored
 > in each users' home directory in `~/.config/systemd/user/docker.service.d/`.
 > In addition, `systemctl` must be executed without `sudo` and with the `--user`
-> flag. Select the _"rootless mode"_ tab below if you are running docker in rootless mode.
+> flag. Select the _"rootless mode"_ tab below if you are running Docker in rootless mode.
 
 
 <ul class="nav nav-tabs">
@@ -146,7 +146,7 @@ you need to add this configuration in the Docker systemd service file.
     Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
     ```
 
-4.  Flush changes and restart docker
+4.  Flush changes and restart Docker
 
     ```bash
     sudo systemctl daemon-reload
@@ -197,7 +197,7 @@ you need to add this configuration in the Docker systemd service file.
     ```
      
 3.  If you have internal Docker registries that you need to contact without
-    proxying you can specify them via the `NO_PROXY` environment variable.
+    proxying, you can specify them via the `NO_PROXY` environment variable.
 
     The `NO_PROXY` variable specifies a string that contains comma-separated
     values for hosts that should be excluded from proxying. These are the
@@ -222,7 +222,7 @@ you need to add this configuration in the Docker systemd service file.
     Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
     ```
 
-4.  Flush changes and restart docker
+4.  Flush changes and restart Docker
 
     ```bash
     systemctl --user daemon-reload
