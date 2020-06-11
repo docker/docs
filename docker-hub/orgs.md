@@ -4,7 +4,6 @@ keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Doc
 title: Teams and Organizations
 redirect_from:
 - /docker-cloud/orgs/
-- /docker-hub/convert-account/
 ---
 
 Docker Hub organizations let you create teams so you can give your team access
