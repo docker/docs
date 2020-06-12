@@ -375,6 +375,23 @@ Introduces the following additional parameters:
 - Support for extension fields at the root of service, network, volume, secret
   and config definitions
 
+### Version 3.8
+
+An upgrade of [version 3](#version-3) that introduces new parameters. It is
+only available with Docker Engine version **19.03.0** and higher.
+
+Introduces the following additional parameters:
+
+- [`max_replicas_per_node`](index.md#max_replicas_per_node) in placement
+  configurations
+- `template_driver` option for [config](index.md#configs-configuration-reference)
+   and [secret](index.md#secrets-configuration-reference) configurations. This
+   option is only supported when deploying swarm services using
+   `docker stack deploy`.
+- `driver` and `driver_opts` option for [secret](index.md#secrets-configuration-reference)
+   configurations. This option is only supported when deploying swarm services
+   using `docker stack deploy`.
+
 ## Upgrading
 
 ### Version 2.x to 3.x
