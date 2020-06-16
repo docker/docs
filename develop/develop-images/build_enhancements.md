@@ -24,14 +24,12 @@ For more information on build options, see the reference guide on the
 
 ## Requirements
 
-* System requirements are docker-ce x86_64, ppc64le, s390x, aarch64, armhf; or
-  docker-ee x86_64 only
+* A current version of Docker (18.09 or higher)
 * Network connection required for downloading images of custom frontends 
 
 ## Limitations
 
 * Only supported for building Linux containers
-* BuildKit mode is compatible with UCP 3.2 or newer
 
 ## To enable BuildKit builds
 
@@ -184,7 +182,8 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 
 ## Using SSH to access private data in builds
 
-> **Acknowledgment**:
+> **Acknowledgment**
+>
 > Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 > for more information and examples.
 
