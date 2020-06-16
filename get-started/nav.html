@@ -1,8 +1,5 @@
 <ul class="pagination">
-  <li {% if include.selected=="1"%}class="active"{% endif %}><a href="part1">1: Orientation</a></li>
-  <li {% if include.selected=="2"%}class="active"{% endif %}><a href="part2">2: Containers</a></li>
-  <li {% if include.selected=="3"%}class="active"{% endif %}><a href="part3">3: Services</a></li>
-  <li {% if include.selected=="4"%}class="active"{% endif %}><a href="part4">4: Swarms</a></li>
-  <li {% if include.selected=="5"%}class="active"{% endif %}><a href="part5">5: Stacks</a></li>
-  <li {% if include.selected=="6"%}class="active"{% endif %}><a href="part6">6: Deploy your app</a></li>
+  <li {% if include.selected=="1"%}class="active"{% endif %}><a href="/get-started/part1">Orientation and setup</a></li>
+  <li {% if include.selected=="2"%}class="active"{% endif %}><a href="/get-started/part2">Build and run your image</a></li>
+  <li {% if include.selected=="3"%}class="active"{% endif %}><a href="/get-started/part3">Share images on Docker Hub</a></li>
 </ul>

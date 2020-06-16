@@ -24,14 +24,14 @@ host.
   [documentation for the `nginx` image](https://hub.docker.com/_/nginx/)
 
 - The `host` networking driver only works on Linux hosts, and is not supported
-  on Docker for Mac, Docker for Windows, or Docker EE for Windows Server.
+  on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
 
 ## Procedure
 
-1.  Create and start the container as a detached process.
+1.  Create and start the container as a detached process. The `--rm` option means to remove the container once it exits/stops. The `-d` flag means to start the container detached (in the background). 
 
     ```bash
-    docker run --rm -dit --network host --name my_nginx nginx
+    docker run --rm -d --network host --name my_nginx nginx
     ```
 
 2.  Access Nginx by browsing to
@@ -53,11 +53,10 @@ host.
       sudo netstat -tulpn | grep :80
       ```
 
-4.  Stop the container.
+4.  Stop the container. It will be removed automatically as it was started using the `--rm` option.
 
     ```basn
     docker container stop my_nginx
-    docker container rm my_nginx
     ```
 
 ## Other networking tutorials

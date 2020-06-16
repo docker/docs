@@ -37,9 +37,9 @@ In the first case, your logs are processed in other ways and you may choose not
 to use `docker logs`. In the second case, the official `nginx` image shows one
 workaround, and the official Apache `httpd` image shows another.
 
-The official `nginx` image creates a symbolic link from
-`/dev/stdout` to `/var/log/nginx/access.log`, and creates another symbolic link
-from `/dev/stderr` to `/var/log/nginx/error.log`, overwriting the log files and
+The official `nginx` image creates a symbolic link from `/var/log/nginx/access.log`
+to `/dev/stdout`, and creates another symbolic link
+from `/var/log/nginx/error.log` to `/dev/stderr`, overwriting the log files and
 causing logs to be sent to the relevant special device instead. See the
 [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23).
 
@@ -51,4 +51,4 @@ its errors to `/proc/self/fd/2` (which is `STDERR`). See the
 ## Next steps
 
 - Configure [logging drivers](configure.md).
-- Write a [Dockerfile](/engine/reference/builder.md).
+- Write a [Dockerfile](../../../engine/reference/builder.md).

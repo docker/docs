@@ -7,11 +7,11 @@ title: Link environment variables (superseded)
 notoc: true
 ---
 
-> **Note**: Environment variables are no longer the recommended method for connecting to linked services. Instead, you should use the link name (by default, the name of the linked service) as the hostname to connect to. See the [docker-compose.yml documentation](compose-file.md#links) for details.
+> **Note**: Environment variables are no longer the recommended method for connecting to linked services. Instead, you should use the link name (by default, the name of the linked service) as the hostname to connect to. See the [docker-compose.yml documentation](compose-file/#links) for details.
 >
-> Environment variables are only populated if you're using the [legacy version 1 Compose file format](compose-file.md#versioning).
+> Environment variables are only populated if you're using the [legacy version 1 Compose file format](compose-file/compose-versioning.md#versioning).
 
-Compose uses [Docker links](/engine/userguide/networking/default_network/dockerlinks.md)
+Compose uses [Docker links](../network/links.md)
 to expose services' containers to one another. Each linked container injects a set of
 environment variables, each of which begins with the uppercase name of the container.
 
@@ -39,5 +39,5 @@ Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 
 - [User guide](index.md)
 - [Installing Compose](install.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

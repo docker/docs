@@ -1,10 +1,10 @@
-<!-- This file is included in Docker CE or EE installation docs for Linux. -->
+<!-- This file is included in Docker Engine - Community or EE installation docs for Linux. -->
 
 ### Install using the convenience script
 
 Docker provides convenience scripts at [get.docker.com](https://get.docker.com/)
 and [test.docker.com](https://test.docker.com/) for installing edge and
-testing versions of Docker CE into development environments quickly and
+testing versions of Docker Engine - Community into development environments quickly and
 non-interactively. The source code for the scripts is in the
 [`docker-install` repository](https://github.com/docker/docker-install).
 **Using these scripts is not recommended for production
@@ -27,7 +27,7 @@ them:
   host machine using another mechanism.
 
 This example uses the script at [get.docker.com](https://get.docker.com/) to
-install the latest release of Docker CE on Linux. To install the latest
+install the latest release of Docker Engine - Community on Linux. To install the latest
 testing version, use [test.docker.com](https://test.docker.com/) instead. In
 each of the commands below, replace each occurrence of `get` with `test`.
 
@@ -38,29 +38,40 @@ Always examine scripts downloaded from the internet before
 {:.warning}
 
 ```bash
-$ curl -fsSL get.docker.com -o get-docker.sh
+$ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
 
 <output truncated>
+```
 
 If you would like to use Docker as a non-root user, you should now consider
 adding your user to the "docker" group with something like:
 
+```bash
   sudo usermod -aG docker your-user
+```
 
 Remember to log out and back in for this to take effect!
 
-WARNING: Adding a user to the "docker" group grants the ability to run
-         containers which can be used to obtain root privileges on the
-         docker host.
-         Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
-         for more information.
-```
+> **Warning**:
+>
+> Adding a user to the "docker" group grants them the ability to run containers
+> which can be used to obtain root privileges on the Docker host. Refer to
+> [Docker Daemon Attack Surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface)
+> for more information.
+{:.warning}
 
-Docker CE is installed. It starts automatically on `DEB`-based distributions. On
+Docker Engine - Community is installed. It starts automatically on `DEB`-based distributions. On
 `RPM`-based distributions, you need to start it manually using the appropriate
 `systemctl` or `service` command. As the message indicates, non-root users can't
 run Docker commands by default.
+
+> **Note**:
+>
+> To install Docker without root privileges, see
+> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless/).
+>
+> Rootless mode is currently available as an experimental feature.
 
 #### Upgrade Docker after using the convenience script
 

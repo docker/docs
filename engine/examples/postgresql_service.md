@@ -1,10 +1,10 @@
 ---
 description: Running and installing a PostgreSQL service
-keywords: docker, example, package installation,  postgresql
+keywords: docker, example, package installation, postgresql
 title: Dockerize PostgreSQL
 ---
 
-## Installing PostgreSQL on Docker
+## Install PostgreSQL on Docker
 
 Assuming there is no Docker image that suits your needs on the [Docker
 Hub](http://hub.docker.com), you can create one yourself.
@@ -16,12 +16,12 @@ This PostgreSQL setup is for development-only purposes. Refer to the
 PostgreSQL documentation to fine-tune these settings so that it is
 suitably secure.
 
-```conf
+```dockerfile
 #
 # example Dockerfile for https://docs.docker.com/engine/examples/postgresql_service/
 #
 
-FROM ubuntu
+FROM ubuntu:16.04
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
@@ -67,7 +67,7 @@ VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
 ```
 
-Build an image from the Dockerfile assign it a name.
+Build an image from the Dockerfile and assign it a name.
 
 ```bash
 $ docker build -t eg_postgresql .
@@ -79,17 +79,17 @@ Run the PostgreSQL server container (in the foreground):
 $ docker run --rm -P --name pg_test eg_postgresql
 ```
 
-There are 2 ways to connect to the PostgreSQL server. We can use [*Link
-Containers*](../userguide/networking/default_network/dockerlinks.md), or we can access it from our host
-(or the network).
+There are two ways to connect to the PostgreSQL server. We can use
+[*Link Containers*](../../network/links.md),
+or we can access it from our host (or the network).
 
 > **Note**: The `--rm` removes the container and its image when
 the container exits successfully.
 
-### Using container linking
+### Use container linking
 
 Containers can be linked to another container's ports directly using
-`-link remote_name:local_alias` in the client's
+`--link remote_name:local_alias` in the client's
 `docker run`. This sets a number of environment
 variables that can then be used to connect:
 
@@ -99,7 +99,7 @@ $ docker run --rm -t -i --link pg_test:pg eg_postgresql bash
 postgres@7ef98b1b7243:/$ psql -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_PORT -d docker -U docker --password
 ```
 
-### Connecting from your host system
+### Connect from your host system
 
 Assuming you have the postgresql-client installed, you can use the
 host-mapped port to test as well. You need to use `docker ps`
@@ -115,7 +115,7 @@ CONTAINER ID        IMAGE                  COMMAND                CREATED       
 $ psql -h localhost -p 49153 -d docker -U docker --password
 ```
 
-### Testing the database
+### Test the database
 
 Once you have authenticated and have a `docker =#`
 prompt, you can create a table and populate it.
@@ -138,7 +138,7 @@ $ docker=# select * from cities;
 (1 row)
 ```
 
-### Using the container volumes
+### Use the container volumes
 
 You can use the defined volumes to inspect the PostgreSQL log files and
 to backup your configuration and data:

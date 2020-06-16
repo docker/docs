@@ -1,17 +1,18 @@
 ---
 description: Release notes for Docker
 keywords: docker, documentation, about, technology, understanding,  release
-title: Docker Release Notes
+title: Docker release notes
 ---
 
-Find out what's new in Docker products!
+Find out what's new in Docker! Release notes contain information about new
+features, improvements, known issues, and bug fixes in each release. You can
+find release notes for each component in the product manuals section. We suggest
+that you regularly visit the release notes to learn about updates.
 
-- [Docker EE](/ee/engine/release-notes.md) or [Commercially Supported Docker Engine](/cs-engine/1.13/release-notes/)
-- [Docker CE](docker-ce.md)
-- [Docker Engine (archived)](docker-engine.md)
-- [Docker for Mac](/docker-for-mac/release-notes.md) ([Edge Releases](/docker-for-mac/edge-release-notes.md))
-- [Docker for Windows](/docker-for-windows/release-notes.md) ([Edge Releases](/docker-for-windows/edge-release-notes.md))
-- [Docker for Azure](/docker-for-azure/release-notes.md) or [Docker for AWS](/docker-for-aws/release-notes.md)
-- [Docker Compose](docker-compose.md)
-- [Docker Machine](docker-machine.md)
-- [Docker Swarm (standalone)](docker-swarm.md)
+- [Docker Engine](/engine/release-notes/)
+- [Docker Desktop for Mac (Stable)](/docker-for-mac/release-notes/)
+- [Docker Desktop for Mac (Edge)](/docker-for-mac/edge-release-notes/)
+- [Docker Desktop for Windows (Stable)](/docker-for-windows/release-notes/)
+- [Docker Desktop for Windows (Edge)](/docker-for-windows/edge-release-notes/)
+- [Docker Hub](/docker-hub/release-notes/)
+- [Docker Compose](/compose/release-notes/)

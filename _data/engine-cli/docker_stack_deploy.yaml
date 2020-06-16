@@ -2,8 +2,14 @@ command: docker stack deploy
 aliases: up
 short: Deploy a new stack or update an existing stack
 long: |-
-  Create and update a stack from a `compose` or a `dab` file on the swarm. This command
-  has to be run targeting a manager node.
+  Create and update a stack from a `compose` file on the swarm.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker stack deploy [OPTIONS] STACK
 pname: docker stack
 plink: docker_stack.yaml
@@ -20,12 +26,20 @@ options:
   shorthand: c
   value_type: stringSlice
   default_value: '[]'
-  description: Path to a Compose file
+  description: Path to a Compose file, or "-" to read from stdin
   deprecated: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
   kubernetes: false
+  swarm: false
+- option: namespace
+  value_type: string
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
   swarm: false
 - option: prune
   value_type: bool
@@ -63,17 +77,16 @@ inherited_options:
   description: Kubernetes config file
   deprecated: false
   experimental: false
-  experimentalcli: true
+  experimentalcli: false
   kubernetes: true
   swarm: false
-- option: namespace
+- option: orchestrator
   value_type: string
-  default_value: default
-  description: Kubernetes namespace to use
+  description: Orchestrator to use (swarm|kubernetes|all)
   deprecated: false
   experimental: false
-  experimentalcli: true
-  kubernetes: true
+  experimentalcli: false
+  kubernetes: false
   swarm: false
 examples: |-
   ### Compose file
@@ -117,7 +130,7 @@ examples: |-
   `--compose-file` flags.
 
   ```bash
-  $ docker stack deploy --compose-file docker-compose.yml -f docker-compose.prod.yml vossibility
+  $ docker stack deploy --compose-file docker-compose.yml -c docker-compose.prod.yml vossibility
 
   Ignoring unsupported options: links
 
@@ -176,6 +189,6 @@ deprecated: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false
-kubernetes: true
-swarm: true
+kubernetes: false
+swarm: false
 

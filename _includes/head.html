@@ -1,0 +1,67 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style type="text/css">
+      @charset "UTF-8";
+      [ng\:cloak],
+      [ng-cloak],
+      [data-ng-cloak],
+      [x-ng-cloak],
+      .ng-cloak,
+      .x-ng-cloak,
+      .ng-hide:not(.ng-hide-animate) {
+          display: none !important;
+      }
+
+      ng\:form {
+          display: block;
+      }
+  </style>
+  {% if site.google_analytics != '' %}{% include analytics/google_analytics.html GOOGLE_ID=site.google_analytics %}{% endif %}
+  {% if site.GH_ENV == "gh_pages" %}
+  <meta name="robots" content="noindex">{% endif %}
+  <!-- favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/favicons/docs@2x.ico">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128">
+  <meta property="og:image" content="/favicons/docs@2x.ico"/>
+  <!-- metadata -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:updated_time" itemprop="dateUpdated" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="/images/docs@2x.png"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:domain" content="docs.docker.com"/>
+  <meta name="twitter:site" content="@docker_docs"/>
+  <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+  <meta name="twitter:title" itemprop="title name" content="{{ page.title }}"/>
+  <meta name="twitter:description" property="og:description" itemprop="description" content="{{ content | strip_html | truncatewords: 30}}" />
+  <meta name="twitter:image:src" content="/images/docs@2x.png"/>
+  <meta name="twitter:image:alt" content="Docker Documentation"/>
+  <meta property="article:published_time" itemprop="datePublished" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link id="pygments" rel="stylesheet" href="/css/pygments/perldoc.css">
+  <link id="pagestyle" rel="stylesheet" href="/css/style.css">
+
+  <!-- Go get "Open Sans" font from Google -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- SEO stuff -->
+  <title>{{ page.title }} | Docker Documentation</title>
+  <meta property="og:title" content="{{ page.title }}" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="description" content="{{ page.description }}" />
+  <meta property="og:description" content="{{ page.description }}" />
+  <link rel="canonical" href="{{ page.url }}" />
+  <meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
+  <meta property="og:site_name" content="Docker Documentation" />
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
+  <!-- END SEO STUFF -->
+  {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
+  <script>
+  // Default to assuming this is an archive and hiding some stuff
+  // See js/archive.js and js/docs.js for logic relating to this
+  var dockerVersion = 'v{{ site.docker_ce_version }}';
+  </script>
+</head>

@@ -8,7 +8,7 @@ Compose supports two methods of sharing common configuration:
 
 1. Extending an entire Compose file by
    [using multiple Compose files](extends.md#multiple-compose-files)
-2. Extending individual services with [the `extends` field](extends.md#extending-services)
+2. Extending individual services with [the `extends` field](extends.md#extending-services) (for Compose file versions up to 2.1)
 
 
 ## Multiple Compose files
@@ -25,14 +25,14 @@ contain configuration overrides for existing services or entirely new
 services.
 
 If a service is defined in both files, Compose merges the configurations using
-the rules described in [Adding and overriding
-configuration](extends.md#adding-and-overriding-configuration).
+the rules described in
+[Adding and overriding configuration](extends.md#adding-and-overriding-configuration).
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
-the order they're specified on the command line. See the [`docker-compose`
-command reference](/compose/reference/overview.md) for more information about
-using `-f`.
+the order they're specified on the command line. See the
+[`docker-compose` command reference](reference/overview.md) for more information
+about using `-f`.
 
 When you use multiple configuration files, you must make sure all paths in the
 files are relative to the base Compose file (the first Compose file specified
@@ -44,7 +44,7 @@ relative to the base file.
 
 ### Example use case
 
-In this section are two common use cases for multiple compose files: changing a
+In this section, there are two common use cases for multiple Compose files: changing a
 Compose app for different environments, and running administrative tasks
 against a Compose app.
 
@@ -62,7 +62,7 @@ services.
 
     web:
       image: example/my_web_app:latest
-      links:
+      depends_on:
         - db
         - cache
 
@@ -136,7 +136,7 @@ Start with a **docker-compose.yml**.
 
     web:
       image: example/my_web_app:latest
-      links:
+      depends_on:
         - db
 
     db:
@@ -147,7 +147,7 @@ export or backup.
 
     dbadmin:
       build: database_admin/
-      links:
+      depends_on:
         - db
 
 To start a normal environment run `docker-compose up -d`. To run a database
@@ -159,17 +159,16 @@ backup, include the `docker-compose.admin.yml` as well.
 
 ## Extending services
 
-> **Note**: The `extends` keyword is supported in earlier Compose file formats
-up to Compose file version 2.1 (see [extends in
-v1](/compose/compose-file/compose-file-v1.md#extends) and [extends in
-v2](/compose/compose-file/compose-file-v2.md#extends)), but is not supported in
-Compose version 3.x. See the [Version 3
-summary](/compose/compose-file/compose-versioning.md#version-3) of keys added
-and removed, along with information on [how to
-upgrade](/compose/compose-file/compose-versioning.md#upgrading). See
-[moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
-discussion thread on possibility of adding support for `extends` in some form in
-future versions.
+> **Note**
+>
+> The `extends` keyword is supported in earlier Compose file formats up to Compose
+> file version 2.1 (see [extends in v1](compose-file/compose-file-v1.md#extends)
+> and [extends in v2](compose-file/compose-file-v2.md#extends)), but is
+> not supported in Compose version 3.x. See the [Version 3 summary](compose-file/compose-versioning.md#version-3)
+> of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
+> See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
+> discussion thread on possibility of adding support for `extends` in some form in
+> future versions.
 
 Docker Compose's `extends` keyword enables sharing of common configurations
 among different files, or even different projects entirely. Extending services
@@ -177,9 +176,9 @@ is useful if you have several services that reuse a common set of configuration
 options. Using `extends` you can define a common set of service options in one
 place and refer to it from anywhere.
 
-Keep in mind that `links`, `volumes_from`, and `depends_on` are never shared
-between services using `extends`. These exceptions exist to avoid implicit
-dependencies; you always define `links` and `volumes_from` locally. This ensures
+Keep in mind that `volumes_from` and `depends_on` are never shared between
+services using `extends`. These exceptions exist to avoid implicit
+dependencies; you always define `volumes_from` locally. This ensures
 dependencies between services are clearly visible when reading the current file.
 Defining these locally also ensures that changes to the referenced file don't
 break anything.
@@ -233,7 +232,7 @@ You can also write other services and link your `web` service to them:
       environment:
         - DEBUG=1
       cpu_shares: 5
-      links:
+      depends_on:
         - db
     db:
       image: postgres
@@ -264,7 +263,7 @@ common configuration:
       command: /code/run_web_app
       ports:
         - 8080:8080
-      links:
+      depends_on:
         - queue
         - db
 
@@ -273,7 +272,7 @@ common configuration:
         file: common.yml
         service: app
       command: /code/run_worker
-      links:
+      depends_on:
         - queue
 
 ## Adding and overriding configuration
@@ -297,7 +296,7 @@ replaces the old value.
 >  `build` and `image` in Compose file version 1
 >
 > In the case of `build` and `image`, when using
-> [version 1 of the Compose file format](compose-file.md#version-1), using one
+> [version 1 of the Compose file format](compose-file/compose-file-v1.md), using one
 > option in the local service causes Compose to discard the other option if it
 > was defined in the original service.
 >
@@ -376,5 +375,5 @@ container:
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

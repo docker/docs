@@ -11,16 +11,16 @@ argument to indicate the name of the created machine.
 > Looking for the full list of available drivers?
 >
 >For a full list of drivers that work with `docker-machine create` and
-information on how to use them, see [Machine
-drivers](/machine/drivers/index.md).
+information on how to use them, see [Machine drivers](../drivers/index.md).
 {: .important}
 
 ## Example
 
 Here is an example of using the `--virtualbox` driver to create a machine called `dev`.
 
-```none
+```bash
 $ docker-machine create --driver virtualbox dev
+
 Creating CA: /home/username/.docker/machine/certs/ca.pem
 Creating client certificate: /home/username/.docker/machine/certs/cert.pem
 Image cache does not exist, creating it at /home/username/.docker/machine/cache...
@@ -40,8 +40,9 @@ drivers.  These largely control aspects of Machine's provisioning process
 (including the creation of Docker Swarm containers) that the user may wish to
 customize.
 
-```none
+```bash
 $ docker-machine create
+
 Docker Machine Version: 0.5.0 (45e3688)
 Usage: docker-machine create [OPTIONS] [arg...]
 
@@ -78,7 +79,7 @@ geographical region (`--amazonec2-region us-west-1`), and so on.
 To see the provider-specific flags, simply pass a value for `--driver` when
 invoking the `create` help text.
 
-```none
+```bash
 $ docker-machine create --driver virtualbox --help
 Usage: docker-machine create [OPTIONS] [arg...]
 
@@ -128,13 +129,12 @@ Docker Machine uses them for the default value of the flag.
 As part of the process of creation, Docker Machine installs Docker and
 configures it with some sensible defaults. For instance, it allows connection
 from the outside world over TCP with TLS-based encryption and defaults to AUFS
-as the [storage
-driver](/engine/reference/commandline/dockerd.md#daemon-storage-driver-option)
+as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver-option)
 when available.
 
 There are several cases where the user might want to set options for the created
 Docker engine (also known as the Docker _daemon_) themselves. For example, they
-may want to allow connection to a [registry](/registry/index.md)
+may want to allow connection to a [registry](../../registry/index.md)
 that they are running themselves using the `--insecure-registry` flag for the
 daemon. Docker Machine supports the configuration of such options for the
 created engines via the `create` command flags which begin with `--engine`.
@@ -147,7 +147,7 @@ filesystem has been created, and so on.
 
 The following is an example usage:
 
-```none
+```bash
 $ docker-machine create -d virtualbox \
     --engine-label foo=bar \
     --engine-label spam=eggs \
@@ -156,15 +156,16 @@ $ docker-machine create -d virtualbox \
     foobarmachine
 ```
 
-This creates a virtual machine running locally in Virtualbox which uses the
+This creates a virtual machine running locally in VirtualBox which uses the
 `overlay` storage backend, has the key-value pairs `foo=bar` and `spam=eggs` as
 labels on the engine, and allows pushing / pulling from the insecure registry
 located at `registry.myco.com`. You can verify much of this by inspecting the
 output of `docker info`:
 
-```none
+```bash
 $ eval $(docker-machine env foobarmachine)
 $ docker info
+
 Containers: 0
 Images: 0
 Storage Driver: overlay
@@ -179,10 +180,10 @@ Labels:
 
 The supported flags are as follows:
 
--   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/cli.md#insecure-registries) to allow with the created engine
--   `--engine-registry-mirror`: Specify [registry mirrors](/registry/recipes/mirror.md) to use
--   `--engine-label`: Specify [labels](/engine/userguide/labels-custom-metadata.md#daemon-labels) for the created engine
--   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli.md#daemon-storage-driver-option) to use with the engine
+-   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/cli/#insecure-registries) to allow with the created engine
+-   `--engine-registry-mirror`: Specify [registry mirrors](../../registry/recipes/mirror.md) to use
+-   `--engine-label`: Specify [labels](../../config/labels-custom-metadata.md) for the created engine
+-   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli/#daemon-storage-driver-option) to use with the engine
 
 If the engine supports specifying the flag multiple times (such as with
 `--label`), then so does Docker Machine.
@@ -191,11 +192,10 @@ In addition to this subset of daemon flags which are directly supported, Docker
 Machine also supports an additional flag, `--engine-opt`, which can be used to
 specify arbitrary daemon options with the syntax `--engine-opt flagname=value`.
 For example, to specify that the daemon should use `8.8.8.8` as the DNS server
-for all containers, and always use the `syslog` [log
-driver](/engine/reference/run.md#logging-drivers-log-driver) you
-could run the following create command:
+for all containers, and always use the `syslog` [log driver](../../config/containers/logging/configure.md)
+you could run the following create command:
 
-```none
+```bash
 $ docker-machine create -d virtualbox \
     --engine-opt dns=8.8.8.8 \
     --engine-opt log-driver=syslog \
@@ -205,18 +205,20 @@ $ docker-machine create -d virtualbox \
 Additionally, Docker Machine supports a flag, `--engine-env`, which can be used to
 specify arbitrary environment variables to be set within the engine with the syntax `--engine-env name=value`. For example, to specify that the engine should use `example.com` as the proxy server, you could run the following create command:
 
-    $ docker-machine create -d virtualbox \
-        --engine-env HTTP_PROXY=http://example.com:8080 \
-        --engine-env HTTPS_PROXY=https://example.com:8080 \
-        --engine-env NO_PROXY=example2.com \
-        proxbox
+```bash
+$ docker-machine create -d virtualbox \
+    --engine-env HTTP_PROXY=http://example.com:8080 \
+    --engine-env HTTPS_PROXY=https://example.com:8080 \
+    --engine-env NO_PROXY=example2.com \
+    proxbox
+```
 
 ## Specifying Docker Swarm options for the created machine
 
 In addition to configuring Docker Engine options as listed above,
 you can use Machine to specify how the created swarm manager is
 configured. There is a `--swarm-strategy` flag, which you can use to specify
-the [scheduling strategy](/swarm/scheduler/strategy.md)
+the [scheduling strategy](../../swarm/scheduler/strategy.md)
 which Docker Swarm should use (Machine defaults to the `spread` strategy).
 There is also a general purpose `--swarm-opt` option which works similar to the aforementioned `--engine-opt` option, except that it specifies options
 for the `swarm manage` command (used to boot a master node) instead of the base
@@ -232,7 +234,7 @@ you don't need to worry about it.
 
 Example create:
 
-```none
+```bash
 $ docker-machine create -d virtualbox \
     --swarm \
     --swarm-master \

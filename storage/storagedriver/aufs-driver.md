@@ -9,29 +9,26 @@ redirect_from:
 AUFS is a *union filesystem*. The `aufs` storage driver was previously the default
 storage driver used for managing images and layers on Docker for Ubuntu, and for
 Debian versions prior to Stretch. If your Linux kernel is version 4.0 or higher,
-and you use Docker CE, consider using the newer
+and you use Docker Engine - Community, consider using the newer
 [overlay2](overlayfs-driver.md){: target="_blank" class="_" }, which has
 potential performance advantages over the `aufs` storage driver.
 
-> **Note**: AUFS is not supported on some distributions and Docker editions. See
-> [Prerequisites](#prerequisites) > for more information about supported
-> platforms, and see also
-> [the order of preferences for storage drivers](selectadriver.md#storage-driver-order).
+> **Note**
+>
+> AUFS is not supported on some distributions and Docker editions. See
+> [Prerequisites](#prerequisites) for more information about supported
+> platforms.
 
 ## Prerequisites
 
-- For Docker CE, AUFS is supported on Ubuntu, and on Debian versions prior to
+- For Docker Engine - Community, AUFS is supported on Ubuntu, and on Debian versions prior to
   Stretch.
 - For Docker EE, AUFS is supported on Ubuntu.
-- If you use Ubuntu, you need to
-  [install extra packages](/install/linux/ubuntu.md#recommended-extra-packages-for-trusty-1404){: target="_blank" class="_"}
-  to add the AUFS module to the kernel. If you do not install these packages,
-  you need to use `devicemapper` on Ubuntu 14.04 (which is not recommended),
-  or `overlay2` on Ubuntu 16.04 and higher, which is also supported.
+- If you use Ubuntu, you need to add the AUFS module to the kernel. If you do
+  not install these packages, you need to use  `overlay2`.
 - AUFS cannot use the following backing filesystems: `aufs`, `btrfs`, or
   `ecryptfs`. This means that the filesystem which contains
   `/var/lib/docker/aufs` cannot be one of these filesystem types.
-
 
 ## Configure Docker with the `aufs` storage driver
 
@@ -66,13 +63,13 @@ storage driver is configured, Docker uses it by default.
     `/etc/docker/daemon.json` or the output of `ps auxw | grep dockerd` to see
     if Docker has been started with the `--storage-driver` flag.
 
-
 ## How the `aufs` storage driver works
 
 AUFS is a *union filesystem*, which means that it layers multiple directories on
 a single Linux host and presents them as a single directory. These directories
 are called _branches_ in AUFS terminology, and _layers_ in Docker terminology.
-The unification process is referred to a a _union mount_.
+
+The unification process is referred to as a _union mount_.
 
 The diagram below shows a Docker container based on the `ubuntu:latest` image.
 
@@ -169,7 +166,7 @@ Consider some scenarios where files in a container are modified.
   However, AUFS works at the file level rather than the block level. This
   means that all copy_up operations copy the entire file, even if the file is
   very large and only a small part of it is being modified. This can have a
-  noticeable impact on container write performance. AUFS, which can suffer
+  noticeable impact on container write performance. AUFS can suffer
   noticeable latencies when searching for files in images with many layers.
   However, it is worth noting that the copy_up operation only occurs the first
   time a given file is written to. Subsequent writes to the same file operate
@@ -228,7 +225,6 @@ The following generic performance best practices also apply to AUFS.
 
 ## Related information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
-
+- [Volumes](../volumes.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)

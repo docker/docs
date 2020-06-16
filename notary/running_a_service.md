@@ -8,7 +8,7 @@ This document is for anyone who wants to run their own Notary
 service (such as those who want to use Notary with a
 private Docker registry). Running a Notary service requires that you are already
 familiar with using [Docker Engine](/engine/userguide/)
-and [Docker Compose](/compose/overview/).
+and [Docker Compose](/compose/).
 
 ## Run a service for testing or development
 
@@ -17,7 +17,7 @@ purposes is to use the Docker compose file in the
 [Notary project](https://github.com/docker/notary).
 
 ```bash
-$ git clone https://github.com/docker/notary.git
+$ git clone https://github.com/theupdateframework/notary.git
 $ cd notary
 $ docker-compose up
 ```
@@ -178,7 +178,7 @@ One way to do this would be:
 		{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
 
 You can do the same using
-[Docker Compose](/compose/overview/) by setting volumes,
+[Docker Compose](/compose/) by setting volumes,
 environment variables, and overriding the default command for the Notary server
 containers in the Compose file.
 
@@ -205,7 +205,7 @@ and using them in a production deployment is highly insecure.
 Notary is a user/client-based system, and it searches for certificates in the
 user's home directory, at `~/.docker/trust`. To streamline using Notary from
 the command line, create an alias that maps the user's `trust` directory to
-the the system's `ca-certificates` directory.
+the system's `ca-certificates` directory.
 
 ```bash
 $ alias notary="notary -s https://<dtr-url> -d ~/.docker/trust --tlscacert /usr/local/share/ca-certificates/<dtr-url>.crt"

@@ -6,12 +6,12 @@ keywords: documentation, docs,  docker, compose, orchestration, containers, swar
 title: Use Compose with Swarm
 ---
 
-Docker Compose and [Docker Swarm](/swarm/overview.md) aim to have full integration, meaning
+Docker Compose and [Docker Swarm](../swarm/overview.md) aim to have full integration, meaning
 you can point a Compose app at a Swarm cluster and have it all just work as if
 you were using a single Docker host.
 
-The actual extent of integration depends on which version of the [Compose file
-format](compose-file.md#versioning) you are using:
+The actual extent of integration depends on which version of the
+[Compose file format](compose-file/compose-versioning.md) you are using:
 
 1.  If you're using version 1 along with `links`, your app works, but Swarm
     schedules all containers on one host, because links between containers
@@ -21,11 +21,11 @@ format](compose-file.md#versioning) you are using:
 
     - subject to the [limitations](swarm.md#limitations) described below,
 
-    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/#an-overlay-network-with-docker-engine-swarm-mode),
+    - as long as the Swarm cluster is configured to use the [overlay driver](../network/overlay.md),
       or a custom driver which supports multi-host networking.
 
-Read [Get started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to
-set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
+Read [Get started with multi-host networking](../network/network-tutorial-overlay.md) to see how to
+set up a Swarm cluster with [Docker Machine](../machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
 
     $ eval "$(docker-machine env --swarm <name of swarm master machine>)"
     $ docker-compose up
@@ -55,7 +55,7 @@ from `docker-compose.yml`:
 ### Multiple dependencies
 
 If a service has multiple dependencies of the type which force co-scheduling
-(see [Automatic scheduling](swarm.md#automatic-scheduling) below), it's possible that
+(see [Automatic scheduling](#automatic-scheduling) below), it's possible that
 Swarm schedules the dependencies on different nodes, making the dependent
 service impossible to schedule. For example, here `foo` needs to be co-scheduled
 with `bar` and `baz`:
@@ -75,7 +75,7 @@ The problem is that Swarm might first schedule `bar` and `baz` on different
 nodes (since they're not dependent on one another), making it impossible to
 pick an appropriate node for `foo`.
 
-To work around this, use [manual scheduling](swarm.md#manual-scheduling) to ensure that
+To work around this, use [manual scheduling](#manual-scheduling) to ensure that
 all three services end up on the same node:
 
     version: "2"
@@ -170,5 +170,5 @@ them.
     environment:
       - "affinity:image==redis"
 
-For the full set of available filters and expressions, see the [Swarm
-documentation](/swarm/scheduler/filter.md).
+For the full set of available filters and expressions, see the
+[Swarm documentation](../swarm/scheduler/filter.md).

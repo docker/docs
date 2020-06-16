@@ -6,19 +6,17 @@ title: Deploy a stack to a swarm
 
 When running Docker Engine in swarm mode, you can use `docker stack deploy` to
 deploy a complete application stack to the swarm. The `deploy` command accepts
-a stack description in the form of a [Compose file](/compose/compose-file.md).
+a stack description in the form of a [Compose file](../../compose/compose-file/index.md).
 
 The `docker stack deploy` command supports any Compose file of version "3.0" or
-above. If you have an older version, see the [upgrade
-guide](/compose/compose-file.md#upgrading).
+above. If you have an older version, see the [upgrade guide](../../compose/compose-file/compose-versioning.md#upgrading).
 
 To run through this tutorial, you need:
 
-1.  A Docker Engine of version 1.13.0 or later, running in [swarm
-    mode](/engine/swarm/swarm-mode.md). If you're not familiar with swarm mode,
-    you might want to read
-    [Swarm mode key concepts](/engine/swarm/key-concepts.md)
-    and [How services work](/engine/swarm/how-swarm-mode-works/services.md).
+1.  A Docker Engine of version 1.13.0 or later, running in [swarm mode](swarm-mode.md).
+    If you're not familiar with swarm mode, you might want to read
+    [Swarm mode key concepts](key-concepts.md)
+    and [How services work](how-swarm-mode-works/services.md).
 
     > **Note**: If you're trying things out on a local development environment,
     > you can put your engine into swarm mode with `docker swarm init`.
@@ -27,7 +25,7 @@ To run through this tutorial, you need:
     > `docker stack` and `docker service` commands must be run from a manager
     > node.
 
-2.  [Docker Compose](/compose/install.md) version 1.10 or later.
+2.  [Docker Compose](../../compose/install.md) version 1.10 or later.
 
 
 ## Set up a Docker registry
@@ -66,7 +64,7 @@ a throwaway registry, which you can discard afterward.
 ## Create the example application
 
 The app used in this guide is based on the hit counter app in the
-[Get started with Docker Compose](/compose/gettingstarted.md) guide. It consists
+[Get started with Docker Compose](../../compose/gettingstarted.md) guide. It consists
 of a Python app which maintains a counter in a Redis instance and increments the
 counter whenever you visit it.
 
@@ -104,7 +102,7 @@ counter whenever you visit it.
 
 4.  Create a file called `Dockerfile` and paste this in:
 
-    ```Dockerfile
+    ```dockerfile
     FROM python:3.4-alpine
     ADD . /code
     WORKDIR /code
@@ -136,7 +134,7 @@ counter whenever you visit it.
 ## Test the app with Compose
 
 1.  Start the app with `docker-compose up`. This builds the web app image,
-    pull the Redis image if you don't already have it, and create two
+    pulls the Redis image if you don't already have it, and creates two
     containers.
 
     You see a warning about the Engine being in swarm mode. This is because

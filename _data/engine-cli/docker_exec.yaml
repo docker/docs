@@ -94,28 +94,80 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
-examples: "### Run `docker exec` on a running container\n\nFirst, start a container.\n\n```bash\n$
-  docker run --name ubuntu_bash --rm -i -t ubuntu bash\n```\n\nThis will create a
-  container named `ubuntu_bash` and start a Bash session.\n\nNext, execute a command
-  on the container.\n\n```bash\n$ docker exec -d ubuntu_bash touch /tmp/execWorks\n```\n\nThis
-  will create a new file `/tmp/execWorks` inside the running container\n`ubuntu_bash`,
-  in the background.\n\nNext, execute an interactive `bash` shell on the container.\n\n```bash\n$
-  docker exec -it ubuntu_bash bash\n```\n\nThis will create a new Bash session in
-  the container `ubuntu_bash`.\n\nNext, set an environment variable in the current
-  bash session.\n\n```bash\n$ docker exec -it -e VAR=1 ubuntu_bash bash\n```\n\nThis
-  will create a new Bash session in the container `ubuntu_bash` with environment \nvariable
-  `$VAR` set to \"1\". Note that this environment variable will only be valid \non
-  the current Bash session.\n\nBy default `docker exec` command runs in the same working
-  directory set when container was created.\n\n```bash\n$ docker exec -it ubuntu_bash
-  pwd\n/\n```\n\nYou can select working directory for the command to execute into\n\n```bash\n$
-  docker exec -it -w /root ubuntu_bash pwd\n/root\n```\n\n\n### Try to run `docker
-  exec` on a paused container\n\nIf the container is paused, then the `docker exec`
-  command will fail with an error:\n\n```bash\n$ docker pause test\n\ntest\n\n$ docker
-  ps\n\nCONTAINER ID        IMAGE               COMMAND             CREATED             STATUS
-  \                  PORTS               NAMES\n1ae3b36715d2        ubuntu:latest
-  \      \"bash\"              17 seconds ago      Up 16 seconds (Paused)                       test\n\n$
-  docker exec test ls\n\nFATA[0000] Error response from daemon: Container test is
-  paused, unpause the container before exec\n\n$ echo $?\n1\n```"
+examples: |-
+  ### Run `docker exec` on a running container
+
+  First, start a container.
+
+  ```bash
+  $ docker run --name ubuntu_bash --rm -i -t ubuntu bash
+  ```
+
+  This will create a container named `ubuntu_bash` and start a Bash session.
+
+  Next, execute a command on the container.
+
+  ```bash
+  $ docker exec -d ubuntu_bash touch /tmp/execWorks
+  ```
+
+  This will create a new file `/tmp/execWorks` inside the running container
+  `ubuntu_bash`, in the background.
+
+  Next, execute an interactive `bash` shell on the container.
+
+  ```bash
+  $ docker exec -it ubuntu_bash bash
+  ```
+
+  This will create a new Bash session in the container `ubuntu_bash`.
+
+  Next, set an environment variable in the current bash session.
+
+  ```bash
+  $ docker exec -it -e VAR=1 ubuntu_bash bash
+  ```
+
+  This will create a new Bash session in the container `ubuntu_bash` with environment
+  variable `$VAR` set to "1". Note that this environment variable will only be valid
+  on the current Bash session.
+
+  By default `docker exec` command runs in the same working directory set when container was created.
+
+  ```bash
+  $ docker exec -it ubuntu_bash pwd
+  /
+  ```
+
+  You can select working directory for the command to execute into
+
+  ```bash
+  $ docker exec -it -w /root ubuntu_bash pwd
+  /root
+  ```
+
+
+  ### Try to run `docker exec` on a paused container
+
+  If the container is paused, then the `docker exec` command will fail with an error:
+
+  ```bash
+  $ docker pause test
+
+  test
+
+  $ docker ps
+
+  CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                   PORTS               NAMES
+  1ae3b36715d2        ubuntu:latest       "bash"              17 seconds ago      Up 16 seconds (Paused)                       test
+
+  $ docker exec test ls
+
+  FATA[0000] Error response from daemon: Container test is paused, unpause the container before exec
+
+  $ echo $?
+  1
+  ```
 deprecated: false
 experimental: false
 experimentalcli: false

@@ -6,6 +6,13 @@ long: |-
   given template for each result. Go's
   [text/template](http://golang.org/pkg/text/template/) package describes all the
   details of the format.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker node inspect [OPTIONS] self|NODE [NODE...]
 pname: docker node
 plink: docker_node.yaml
@@ -28,42 +35,134 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
-examples: "### Inspect a node\n\n```none\n$ docker node inspect swarm-manager\n\n[\n{\n
-  \   \"ID\": \"e216jshn25ckzbvmwlnh5jr3g\",\n    \"Version\": {\n        \"Index\":
-  10\n    },\n    \"CreatedAt\": \"2017-05-16T22:52:44.9910662Z\",\n    \"UpdatedAt\":
-  \"2017-05-16T22:52:45.230878043Z\",\n    \"Spec\": {\n        \"Role\": \"manager\",\n
-  \       \"Availability\": \"active\"\n    },\n    \"Description\": {\n        \"Hostname\":
-  \"swarm-manager\",\n        \"Platform\": {\n            \"Architecture\": \"x86_64\",\n
-  \           \"OS\": \"linux\"\n        },\n        \"Resources\": {\n            \"NanoCPUs\":
-  1000000000,\n            \"MemoryBytes\": 1039843328\n        },\n        \"Engine\":
-  {\n            \"EngineVersion\": \"17.06.0-ce\",\n            \"Plugins\": [\n
-  \               {\n                    \"Type\": \"Volume\",\n                    \"Name\":
-  \"local\"\n                },\n                {\n                    \"Type\":
-  \"Network\",\n                    \"Name\": \"overlay\"\n                },\n                {\n
-  \                   \"Type\": \"Network\",\n                    \"Name\": \"null\"\n
-  \               },\n                {\n                    \"Type\": \"Network\",\n
-  \                   \"Name\": \"host\"\n                },\n                {\n
-  \                   \"Type\": \"Network\",\n                    \"Name\": \"bridge\"\n
-  \               },\n                {\n                    \"Type\": \"Network\",\n
-  \                   \"Name\": \"overlay\"\n                }\n            ]\n        },\n
-  \       \"TLSInfo\": {\n            \"TrustRoot\": \"-----BEGIN CERTIFICATE-----\\nMIIBazCCARCgAwIBAgIUOzgqU4tA2q5Yv1HnkzhSIwGyIBswCgYIKoZIzj0EAwIw\\nEzERMA8GA1UEAxMIc3dhcm0tY2EwHhcNMTcwNTAyMDAyNDAwWhcNMzcwNDI3MDAy\\nNDAwWjATMREwDwYDVQQDEwhzd2FybS1jYTBZMBMGByqGSM49AgEGCCqGSM49AwEH\\nA0IABMbiAmET+HZyve35ujrnL2kOLBEQhFDZ5MhxAuYs96n796sFlfxTxC1lM/2g\\nAh8DI34pm3JmHgZxeBPKUURJHKWjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMB\\nAf8EBTADAQH/MB0GA1UdDgQWBBS3sjTJOcXdkls6WSY2rTx1KIJueTAKBggqhkjO\\nPQQDAgNJADBGAiEAoeVWkaXgSUAucQmZ3Yhmx22N/cq1EPBgYHOBZmHt0NkCIQC3\\nzONcJ/+WA21OXtb+vcijpUOXtNjyHfcox0N8wsLDqQ==\\n-----END
-  CERTIFICATE-----\\n\",\n            \"CertIssuerSubject\": \"MBMxETAPBgNVBAMTCHN3YXJtLWNh\",\n
-  \           \"CertIssuerPublicKey\": \"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAExuICYRP4dnK97fm6OucvaQ4sERCEUNnkyHEC5iz3qfv3qwWV/FPELWUz/aACHwMjfimbcmYeBnF4E8pRREkcpQ==\"\n
-  \       }\n    },\n    \"Status\": {\n        \"State\": \"ready\",\n        \"Addr\":
-  \"168.0.32.137\"\n    },\n    \"ManagerStatus\": {\n        \"Leader\": true,\n
-  \       \"Reachability\": \"reachable\",\n        \"Addr\": \"168.0.32.137:2377\"\n
-  \   }\n}\n]\n```\n\n### Specify an output format\n\n```none\n$ docker node inspect
-  --format '{{ .ManagerStatus.Leader }}' self\n\nfalse\n\n$ docker node inspect --pretty
-  self\nID:                     e216jshn25ckzbvmwlnh5jr3g\nHostname:               swarm-manager\nJoined
-  at:              2017-05-16 22:52:44.9910662 +0000 utc\nStatus:\n State:                 Ready\n
-  Availability:          Active\n Address:               172.17.0.2\nManager Status:\n
-  Address:               172.17.0.2:2377\n Raft Status:           Reachable\n Leader:
-  \               Yes\nPlatform:\n Operating System:      linux\n Architecture:          x86_64\nResources:\n
-  CPUs:                  4\n Memory:                7.704 GiB\nPlugins:\n  Network:
-  \             overlay, bridge, null, host, overlay\n  Volume:               local\nEngine
-  Version:         17.06.0-ce\nTLS Info:\n TrustRoot:\n-----BEGIN CERTIFICATE-----\nMIIBazCCARCgAwIBAgIUOzgqU4tA2q5Yv1HnkzhSIwGyIBswCgYIKoZIzj0EAwIw\nEzERMA8GA1UEAxMIc3dhcm0tY2EwHhcNMTcwNTAyMDAyNDAwWhcNMzcwNDI3MDAy\nNDAwWjATMREwDwYDVQQDEwhzd2FybS1jYTBZMBMGByqGSM49AgEGCCqGSM49AwEH\nA0IABMbiAmET+HZyve35ujrnL2kOLBEQhFDZ5MhxAuYs96n796sFlfxTxC1lM/2g\nAh8DI34pm3JmHgZxeBPKUURJHKWjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMB\nAf8EBTADAQH/MB0GA1UdDgQWBBS3sjTJOcXdkls6WSY2rTx1KIJueTAKBggqhkjO\nPQQDAgNJADBGAiEAoeVWkaXgSUAucQmZ3Yhmx22N/cq1EPBgYHOBZmHt0NkCIQC3\nzONcJ/+WA21OXtb+vcijpUOXtNjyHfcox0N8wsLDqQ==\n-----END
-  CERTIFICATE-----\n\n Issuer Public Key:\tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAExuICYRP4dnK97fm6OucvaQ4sERCEUNnkyHEC5iz3qfv3qwWV/FPELWUz/aACHwMjfimbcmYeBnF4E8pRREkcpQ==\n
-  Issuer Subject:\tMBMxETAPBgNVBAMTCHN3YXJtLWNh\n```"
+examples: |-
+  ### Inspect a node
+
+  ```bash
+  $ docker node inspect swarm-manager
+  ```
+
+  ```json
+  [
+    {
+      "ID": "e216jshn25ckzbvmwlnh5jr3g",
+      "Version": {
+        "Index": 10
+      },
+      "CreatedAt": "2017-05-16T22:52:44.9910662Z",
+      "UpdatedAt": "2017-05-16T22:52:45.230878043Z",
+      "Spec": {
+        "Role": "manager",
+        "Availability": "active"
+      },
+      "Description": {
+        "Hostname": "swarm-manager",
+        "Platform": {
+          "Architecture": "x86_64",
+          "OS": "linux"
+        },
+        "Resources": {
+          "NanoCPUs": 1000000000,
+          "MemoryBytes": 1039843328
+        },
+        "Engine": {
+          "EngineVersion": "17.06.0-ce",
+          "Plugins": [
+            {
+              "Type": "Volume",
+              "Name": "local"
+            },
+            {
+              "Type": "Network",
+              "Name": "overlay"
+            },
+            {
+              "Type": "Network",
+              "Name": "null"
+            },
+            {
+              "Type": "Network",
+              "Name": "host"
+            },
+            {
+              "Type": "Network",
+              "Name": "bridge"
+            },
+            {
+              "Type": "Network",
+              "Name": "overlay"
+            }
+          ]
+        },
+        "TLSInfo": {
+          "TrustRoot": "-----BEGIN CERTIFICATE-----\nMIIBazCCARCgAwIBAgIUOzgqU4tA2q5Yv1HnkzhSIwGyIBswCgYIKoZIzj0EAwIw\nEzERMA8GA1UEAxMIc3dhcm0tY2EwHhcNMTcwNTAyMDAyNDAwWhcNMzcwNDI3MDAy\nNDAwWjATMREwDwYDVQQDEwhzd2FybS1jYTBZMBMGByqGSM49AgEGCCqGSM49AwEH\nA0IABMbiAmET+HZyve35ujrnL2kOLBEQhFDZ5MhxAuYs96n796sFlfxTxC1lM/2g\nAh8DI34pm3JmHgZxeBPKUURJHKWjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMB\nAf8EBTADAQH/MB0GA1UdDgQWBBS3sjTJOcXdkls6WSY2rTx1KIJueTAKBggqhkjO\nPQQDAgNJADBGAiEAoeVWkaXgSUAucQmZ3Yhmx22N/cq1EPBgYHOBZmHt0NkCIQC3\nzONcJ/+WA21OXtb+vcijpUOXtNjyHfcox0N8wsLDqQ==\n-----END CERTIFICATE-----\n",
+          "CertIssuerSubject": "MBMxETAPBgNVBAMTCHN3YXJtLWNh",
+          "CertIssuerPublicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAExuICYRP4dnK97fm6OucvaQ4sERCEUNnkyHEC5iz3qfv3qwWV/FPELWUz/aACHwMjfimbcmYeBnF4E8pRREkcpQ=="
+        }
+      },
+      "Status": {
+        "State": "ready",
+        "Addr": "168.0.32.137"
+      },
+      "ManagerStatus": {
+        "Leader": true,
+        "Reachability": "reachable",
+        "Addr": "168.0.32.137:2377"
+      }
+    }
+  ]
+  ```
+
+  ### Specify an output format
+
+  ```bash
+  $ docker node inspect --format '{{ .ManagerStatus.Leader }}' self
+
+  false
+  ```
+
+  Use `--format=pretty` or the `--pretty` shorthand to pretty-print the output:
+
+  ```bash
+  $ docker node inspect --format=pretty self
+
+  ID:                     e216jshn25ckzbvmwlnh5jr3g
+  Hostname:               swarm-manager
+  Joined at:              2017-05-16 22:52:44.9910662 +0000 utc
+  Status:
+   State:                 Ready
+   Availability:          Active
+   Address:               172.17.0.2
+  Manager Status:
+   Address:               172.17.0.2:2377
+   Raft Status:           Reachable
+   Leader:                Yes
+  Platform:
+   Operating System:      linux
+   Architecture:          x86_64
+  Resources:
+   CPUs:                  4
+   Memory:                7.704 GiB
+  Plugins:
+    Network:              overlay, bridge, null, host, overlay
+    Volume:               local
+  Engine Version:         17.06.0-ce
+  TLS Info:
+   TrustRoot:
+  -----BEGIN CERTIFICATE-----
+  MIIBazCCARCgAwIBAgIUOzgqU4tA2q5Yv1HnkzhSIwGyIBswCgYIKoZIzj0EAwIw
+  EzERMA8GA1UEAxMIc3dhcm0tY2EwHhcNMTcwNTAyMDAyNDAwWhcNMzcwNDI3MDAy
+  NDAwWjATMREwDwYDVQQDEwhzd2FybS1jYTBZMBMGByqGSM49AgEGCCqGSM49AwEH
+  A0IABMbiAmET+HZyve35ujrnL2kOLBEQhFDZ5MhxAuYs96n796sFlfxTxC1lM/2g
+  Ah8DI34pm3JmHgZxeBPKUURJHKWjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMB
+  Af8EBTADAQH/MB0GA1UdDgQWBBS3sjTJOcXdkls6WSY2rTx1KIJueTAKBggqhkjO
+  PQQDAgNJADBGAiEAoeVWkaXgSUAucQmZ3Yhmx22N/cq1EPBgYHOBZmHt0NkCIQC3
+  zONcJ/+WA21OXtb+vcijpUOXtNjyHfcox0N8wsLDqQ==
+  -----END CERTIFICATE-----
+
+   Issuer Public Key: MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAExuICYRP4dnK97fm6OucvaQ4sERCEUNnkyHEC5iz3qfv3qwWV/FPELWUz/aACHwMjfimbcmYeBnF4E8pRREkcpQ==
+   Issuer Subject:    MBMxETAPBgNVBAMTCHN3YXJtLWNh
+  ```
 deprecated: false
 min_api_version: "1.24"
 experimental: false

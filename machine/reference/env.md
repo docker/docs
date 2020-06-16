@@ -2,12 +2,13 @@
 description: Set environment variables on a machine
 keywords: machine, env, subcommand
 title: docker-machine env
+hide_from_sitemap: true
 ---
 
 Set environment variables to dictate that `docker` should run a command against
 a particular machine.
 
-```none
+```bash
 $ docker-machine env --help
 
 Usage: docker-machine env [OPTIONS] [arg...]
@@ -29,10 +30,11 @@ Options:
 run in a subshell. Running `docker-machine env -u` prints `unset` commands
 which reverse this effect.
 
-```none
+```bash
 $ env | grep DOCKER
 $ eval "$(docker-machine env dev)"
 $ env | grep DOCKER
+
 DOCKER_HOST=tcp://192.168.99.101:2376
 DOCKER_CERT_PATH=/Users/nathanleclaire/.docker/machines/.client
 DOCKER_TLS_VERIFY=1
@@ -53,7 +55,7 @@ If you are using `fish` and the `SHELL` environment variable is correctly set to
 the path where `fish` is located, `docker-machine env name` prints out the
 values in the format which `fish` expects:
 
-```none
+```fish
 set -x DOCKER_TLS_VERIFY 1;
 set -x DOCKER_CERT_PATH "/Users/nathanleclaire/.docker/machine/machines/overlay";
 set -x DOCKER_HOST tcp://192.168.99.102:2376;
@@ -68,8 +70,9 @@ If you are on Windows and using either PowerShell or `cmd.exe`, `docker-machine 
 
 For PowerShell:
 
-```none
+```bash
 $ docker-machine.exe env --shell powershell dev
+
 $Env:DOCKER_TLS_VERIFY = "1"
 $Env:DOCKER_HOST = "tcp://192.168.99.101:2376"
 $Env:DOCKER_CERT_PATH = "C:\Users\captain\.docker\machine\machines\dev"
@@ -80,8 +83,9 @@ $Env:DOCKER_MACHINE_NAME = "dev"
 
 For `cmd.exe`:
 
-```none
+```bash
 $ docker-machine.exe env --shell cmd dev
+
 set DOCKER_TLS_VERIFY=1
 set DOCKER_HOST=tcp://192.168.99.101:2376
 set DOCKER_CERT_PATH=C:\Users\captain\.docker\machine\machines\dev
@@ -89,7 +93,7 @@ set DOCKER_MACHINE_NAME=dev
 # Run this command to configure your shell: copy and paste the above values into your command prompt
 ```
 
->**Tip:** See also, how to [unset environment variables in the current shell](/machine/get-started.md#unset-environment-variables-in-the-current-shell).
+>**Tip:** See also, how to [unset environment variables in the current shell](../get-started.md#unset-environment-variables-in-the-current-shell).
 
 ## Excluding the created machine from proxies
 
@@ -101,8 +105,9 @@ This is useful when using `docker-machine` with a local VM provider, such as
 `virtualbox` or `vmwarefusion`, in network environments where an HTTP proxy is
 required for internet access.
 
-```none
+```bash
 $ docker-machine env --no-proxy default
+
 export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://192.168.99.104:2376"
 export DOCKER_CERT_PATH="/Users/databus23/.docker/machine/certs"
@@ -112,6 +117,6 @@ export NO_PROXY="192.168.99.104"
 # eval "$(docker-machine env default)"
 ```
 
-You may also want to visit the [documentation on setting `HTTP_PROXY` for the
-created daemon using the `--engine-env` flag for `docker-machine
-create`](/machine/reference/create.md#specifying-configuration-options-for-the-created-docker-engine).
+You may also want to visit the documentation on setting `HTTP_PROXY` for the
+created daemon using the `--engine-env` flag for 
+[`docker-machine create`](create.md#specifying-configuration-options-for-the-created-docker-engine).

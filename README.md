@@ -1,17 +1,39 @@
 # Docs @ Docker
+Welcome to the repo for our documentation. This is the source for	
+[https://docs.docker.com/](https://docs.docker.com/).	
 
-Welcome to the repo for our documentation. This is the source for
-[https://docs.docker.com/](https://docs.docker.com/).
-
-Feel free to send us pull requests and file issues. Our docs are completely
+Feel free to send us pull requests and file issues. Our docs are completely	
 open source and we deeply appreciate contributions from our community!
+## Table of Contents
+
+- [Providing feedback](#providing-feedback)
+- [Contributing](#contributing)
+  - [Files not edited here](#files-not-edited-here)
+  - [Overall doc improvements](#overall-doc-improvements)
+  - [Specific new features for a project](#specific-new-features-for-a-project)
+- [Per-PR staging on GitHub](#per-pr-staging-on-github)
+- [Staging the docs](#staging-the-docs)
+- [Read these docs offline](#read-these-docs-offline)
+- [Important files](#important-files)
+- [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
+  - [Testing changes and practical guidance](#testing-changes-and-practical-guidance)
+  - [Per-page front-matter](#per-page-front-matter)
+  - [Creating tabs](#creating-tabs)
+  - [Running in-page Javascript](#running-in-page-javascript)
+  - [Images](#images)
+- [Beta content disclaimer](#beta-content-disclaimer)
+- [Accessing unsupported archived documentation](#accessing-unsupported-archived-documentation)
+- [Building archives and the live published docs](#building-archives-and-the-live-published-docs)
+- [Creating a new archive](#creating-a-new-archive)
+- [Copyright and license](#copyright-and-license)
+
 
 ## Providing feedback
 
-We really want your feedback, and we've made it easy.  You can edit a page or 
-request changes in the right column of every page on [https://docs.docker.com/]
-(https://docs.docker.com/).  You can also rate each page by clicking a link at 
-the footer.
+We really want your feedback, and we've made it easy. You can edit a page or
+request changes in the right column of every page on
+[docs.docker.com](https://docs.docker.com/). You can also rate each page by
+clicking a link at the footer.
 
 **Only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
@@ -118,7 +140,7 @@ You have three options:
     ```
 
     If you haven't got Docker Compose installed,
-    [follow these installation instructions](/compose/install/).
+    [follow these installation instructions](https://docs.docker.com/compose/install/).
 
     The container runs in the background and incrementally rebuilds the site each
     time a file changes. You can keep your browser open to http://localhost:4000/
@@ -159,7 +181,7 @@ You have three options:
        bundle install
        ```
 
-       >**Note**: You may need to install some packages manually.   
+       >**Note**: You may need to install some packages manually.
 
     f. Change the directory to `docker.github.io`.
 
@@ -170,11 +192,22 @@ You have three options:
     You can continue working in a second terminal and Jekyll will rebuild the
     website incrementally. Refresh the browser to preview your changes.
 
+3. Build and run a Docker image for your working branch.
+
+   ```bash
+   $ docker build -t docker build -t docs/docker.github.io:<branch_name> .
+   $ docker run --rm -it -p 4000:4000 docs/docker.github.io:<branch_name>
+    ```
+
+   After the `docker run` command, copy the URL provided in the container build output in a browser,
+   http://0.0.0.0:4000, and verify your changes.
+
 ## Read these docs offline
 
 To read the docs offline, you can use either a standalone container or a swarm service.
 To see all available tags, go to
-[Docker Cloud](https://cloud.docker.com/app/docs/repository/docker/docs/docker.github.io/tags).
+[Docker Hub](https://docs.docker.com/docker-hub/).
+
 The following examples use the `latest` tag:
 
 - Run a single container:
@@ -197,7 +230,7 @@ Either way, you can now access the docs at port 4000 on your Docker host.
 
 - `/_data/toc.yaml` defines the left-hand navigation for the docs
 - `/js/menu.js` defines most of the docs-specific JS such as TOC generation and menu syncing
-- `/css/documentation.css` defines the docs-specific style rules
+- `/css/style.scss` defines the docs-specific style rules
 - `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
 
 ## Relative linking for GitHub viewing
@@ -229,6 +262,7 @@ following keys are supported. The title, description, and keywords are required.
 | toc_max                | no        | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
 | tree                   | no        | Either `true` or `false`. Set to `false` to disable the left-hand site-wide navigation for this page. Appropriate for some pages like the search page or the 404 page. |
 | no_ratings             | no        | Either `true` or `false`. Set to `true` to disable the page-ratings applet for this page. Defaults to `false`. |
+| skip_read_time             | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
 
 The following is an example of valid (but contrived) page metadata. The order of
 the metadata elements in the front-matter is not important.
@@ -244,7 +278,7 @@ redirect_from:
 title: Get Docker for Ubuntu
 toc_min: 1
 toc_max: 6
-tree: false
+skip_read_time: true
 no_ratings: true
 ---
 ```
@@ -279,11 +313,63 @@ Bootstrap JS are loaded.
 
 > **Note**: In general, this is a bad idea.
 
+### Images
+
+Don't forget to remove images that are no longer used. Keep the images sorted
+in the local `images/` directory, with names that naturally group related images
+together in alphabetical order. For instance prefer `settings-file-share.png`
+and `settings-proxies.png` to `file-share-settings.png` and
+`proxies-settings.png`. You may also use numbers, especially in the case of a
+sequence, e.g., `run-only-the-images-you-trust-1.svg`
+`run-only-the-images-you-trust-2.png` `run-only-the-images-you-trust-3.png`.
+
+When applicable, capture windows rather than rectangular regions. This
+eliminates unpleasant background and saves the editors the need to crop.
+
+On Mac, capture windows without shadows. To this end, once you pressed
+`Command-Shift-4`, press Option while clicking on the window. To disable
+shadows once for all, run:
+
+```bash
+$ defaults write com.apple.screencapture disable-shadow -bool TRUE
+$ killall SystemUIServer  # restart it.
+```
+
+You can restore shadows later with `-bool FALSE`.
+
+In order to keep the Git repository light, _please_ compress the images
+(losslessly). On Mac you may use (ImageOptim)[https://imageoptim.com] for
+instance. Be sure to compress the images *before* adding them to the
+repository, doing it afterwards actually worsens the impact on the Git repo (but
+still optimizes the bandwidth during browsing).
+
+## Beta content disclaimer
+```bash
+> BETA DISCLAIMER
+>
+> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
+```
+
+## Accessing unsupported archived documentation
+
+Supported documentation includes the current version plus the previous five versions.
+
+If you are using a version of the documentation that is no longer supported, which means that the version number is not listed in the site dropdown list, you can still access that documentation in the following ways:
+
+- By entering your version number and selecting it from the branch selection list for this repo
+- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9`
+- By running a container of the specific [tag for your documentation version](https://hub.docker.com/r/docs/docker.github.io/tags)
+in Docker Hub. For example, run the following to access `v1.9`:
+
+ ```bash
+  docker run -it -p 4000:4000 docs/docker.github.io:v1.9
+  ```
+
 ## Building archives and the live published docs
 
-All the images described below are automatically built using Docker Cloud. To
-build the site manually, from scratch, including all utility and archive
-images, see the [README in the publish-tools branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
+All the images described below are automatically built using Docker Hub. To
+build the site manually, from scratch, including all utility and archive images,
+see the [README in the publish-tools branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
 
 - Some utility images are built from Dockerfiles in the `publish-tools` branch.
   See its [README](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
@@ -299,7 +385,7 @@ images, see the [README in the publish-tools branch](https://github.com/docker/d
 
 ## Creating a new archive
 
-When a new Docker CE Stable version is released, the previous state of `master`
+When a new Docker Engine - Community Stable version is released, the previous state of `master`
 is archived into a version-specific branch like `v17.09`, by doing the following:
 
 1.  Create branch based off the commit hash before the new version was released.
@@ -310,7 +396,7 @@ is archived into a version-specific branch like `v17.09`, by doing the following
     ```
 
 2.  Run the `_scripts/fetch-upstream-resources.sh` script. This puts static
-    copies of the files in place that the `master`  build typically fetches
+    copies of the files in place that the `master` build typically fetches
     each build.
 
     ```bash

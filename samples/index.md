@@ -23,29 +23,27 @@ repository]({{ labsbase }}).
 | [Docker Security]({{ labsbase }}/security/README.md){: target="_blank"} | How to take advantage of Docker security features. |
 | [Building a 12-factor application with Docker]({{ labsbase}}/12factor){: target="_blank"} | Use Docker to create an app that conforms to Heroku's "12 factors for cloud-native applications." |
 
-## Library references
-
-These docs are imported from
-[the official Docker Library docs](https://github.com/docker-library/docs/),
-and help you use some of the most popular software that has been
-"Dockerized" into Docker images.
-
-| Image name | Description |
-| ---------- | ----------- |
-{% for page in site.samples %}| [{{ page.title }}]({{ page.url }}) | {{ page.description | strip }} |
-{% endfor %}
-
 ## Sample applications
 
 Run popular software using Docker.
 
 | Sample | Description |
 | ------ | ----------- |
-| [apt-cacher-ng](/engine/examples/apt-cacher-ng) | Run a Dockerized apt-cacher-ng instance. |
-| [ASP.NET Core + SQL Server on Linux](/compose/aspnet-mssql-compose) | Run a Dockerized ASP.NET Core + SQL Server environment. |
-| [CouchDB](/engine/examples/couchdb_data_volumes) | Run a Dockerized CouchDB instance. |
+| [apt-cacher-ng](/engine/examples/apt-cacher-ng/) | Run a Dockerized apt-cacher-ng instance. |
+| [.Net Core application](/engine/examples/dotnetcore/) | Run a Dockerized ASP.NET Core application. |
+| [ASP.NET Core + SQL Server on Linux](/compose/aspnet-mssql-compose/) | Run a Dockerized ASP.NET Core + SQL Server environment. |
+| [CouchDB](/engine/examples/couchdb_data_volumes/) | Run a Dockerized CouchDB instance. |
 | [Django + PostgreSQL](/compose/django/) | Run a Dockerized Django + PostgreSQL environment. |
-| [PostgreSQL](/engine/examples/postgresql_service) | Run a Dockerized PosgreSQL instance. |
+| [PostgreSQL](/engine/examples/postgresql_service/) | Run a Dockerized PostgreSQL instance. |
 | [Rails + PostgreSQL](/compose/rails/) | Run a Dockerized Rails + PostgreSQL environment. |
-| [Riak](/engine/examples/running_riak_service) | Run a Dockerized Riak instance. |
-| [SSHd](/engine/examples/running_ssh_service) | Run a Dockerized SSHd instance. |
+| [Riak](/engine/examples/running_riak_service/) | Run a Dockerized Riak instance. |
+| [SSHd](/engine/examples/running_ssh_service/) | Run a Dockerized SSHd instance. |
+
+## Library references
+
+The following table provides a list of popular official Docker images. For detailed documentation, select the specific image name. 
+
+| Image name | Description |
+| ---------- | ----------- |
+{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}){: target="_blank"} | {{ page.description | strip }} |
+{% endfor %}

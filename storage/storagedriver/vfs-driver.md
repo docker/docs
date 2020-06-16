@@ -13,8 +13,6 @@ performance and more space used on disk than other storage drivers. However, it
 is robust, stable, and works in every environment. It can also be used as a
 mechanism to verify other storage back-ends against, in a testing environment.
 
-Docker 17.12 and higher include support for quotas when using the VFS driver.
-
 ## Configure Docker with the `vfs` storage driver
 
 1. Stop Docker.
@@ -33,11 +31,12 @@ Docker 17.12 and higher include support for quotas when using the VFS driver.
     ```
 
     If you want to set a quota to control the maximum size the VFS storage
-    driver can use, set the `size` option on the `storage-drivers` key. Quotas
-    are only supported in Docker 17.12 CE and higher.
+    driver can use, set the `size` option on the `storage-opts` key. Quotas
+    are only supported in Docker 17.12 and higher.
 
     ```json
     {
+      "storage-driver": "vfs",
       "storage-opts": ["size=256M"]
     }
     ```
@@ -51,14 +50,13 @@ Docker 17.12 and higher include support for quotas when using the VFS driver.
     ```
 
 4.  Verify that the daemon is using the `vfs` storage driver.
-    Use the `docker info` command and look for `Storage Driver` and
-    `Backing filesystem`.
+    Use the `docker info` command and look for `Storage Driver`.
 
     ```bash
     $ docker info
 
     Storage Driver: vfs
-    <output truncated>
+    ...
     ```
 
 Docker is now using the `vfs` storage driver. Docker has automatically
@@ -75,7 +73,7 @@ directory names do not directly correspond to the IDs of the layers themselves.
 
 VFS does not support copy-on-write (COW), so each time a new layer is created,
 it is a deep copy of its parent layer. These layers are all located under
-`/var/lib/docker/dir/`.
+`/var/lib/docker/vfs/dir/`.
 
 ### Example: Image and container on-disk constructs
 
@@ -132,6 +130,6 @@ same amount of room on disk. This is one of the disadvantages of using the
 
 ## Related information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)
 

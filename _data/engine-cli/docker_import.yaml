@@ -35,6 +35,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: platform
+  value_type: string
+  description: Set platform if server is multi-platform capable
+  deprecated: false
+  min_api_version: "1.32"
+  experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 examples: |-
   ### Import from a remote location
 
@@ -61,7 +70,7 @@ examples: |-
   - Import to docker from a local archive.
 
     ```bash
-      $ docker import /path/to/exampleimage.tgz
+    $ docker import /path/to/exampleimage.tgz
     ```
 
   ### Import from a local directory

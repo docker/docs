@@ -18,19 +18,13 @@ easily combine multiple physical block devices into a single Btrfs filesystem.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
 Btrfs Filesystem as Btrfs.
 
-> **Note**: The `btrfs` storage driver is only supported on Docker CE on Ubuntu
-> or Debian, and Docker EE / CS Engine on SLES.
+> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu or Debian.
 
 ## Prerequisites
 
 `btrfs` is supported if you meet the following prerequisites:
 
-- **Docker CE**: For Docker CE, `btrfs` is only recommended on Ubuntu or Debian.
-
-- **Docker EE**: For Docker EE and CS-Engine, `btrfs` is only supported on SLES.
-  See the
-  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix)
-  for all supported configurations for commercially-supported Docker.
+- **Docker Engine - Community**: For Docker Engine - Community, `btrfs` is only recommended on Ubuntu or Debian.
 
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
@@ -112,10 +106,8 @@ This procedure is essentially identical on SLES and Ubuntu.
     }
     ```
 
-    See all storage options for each storage driver:
-
-    - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
-    - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+    See all storage options for each storage driver in the
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
 
 7.  Start Docker. After it is running, verify that `btrfs` is being used as the
     storage driver.
@@ -313,6 +305,6 @@ storage driver.
 
 ## Related Information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
+- [Volumes](../volumes.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)

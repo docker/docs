@@ -20,10 +20,10 @@ These syntax rules apply to the `.env` file:
 
 ## Compose file and CLI variables
 
-The environment variables you define here are used for [variable
-substitution](compose-file/index.md#variable-substitution) in your Compose file,
-and can also be used to define the following [CLI
-variables](reference/envvars.md):
+The environment variables you define here are used for
+[variable substitution](compose-file/index.md#variable-substitution)
+in your Compose file, and can also be used to define the following
+[CLI variables](reference/envvars.md):
 
 - `COMPOSE_API_VERSION`
 - `COMPOSE_CONVERT_WINDOWS_PATHS`
@@ -37,19 +37,18 @@ variables](reference/envvars.md):
 
 > **Notes**
 >
-> * Values present in the environment at runtime always override
-those defined inside the `.env` file. Similarly, values passed via command-line
-arguments take precedence as well.
->
-> * Environment variables defined in the `.env` file are not
-automatically visible inside containers. To set container-applicable
-environment variables, follow the guidelines in the topic [Environment variables
-in Compose](/compose/environment-variables.md), which describes how to pass
-shell environment variables through to containers, define environment variables
-in Compose files, and more.
+> * Values present in the environment at runtime always override those defined
+>   inside the `.env` file. Similarly, values passed via command-line arguments
+>   take precedence as well.
+> * Environment variables defined in the `.env` file are not automatically
+>   visible inside containers. To set container-applicable environment variables,
+>   follow the guidelines in the topic
+>   [Environment variables in Compose](environment-variables.md), which
+>   describes how to pass shell environment variables through to containers,
+>   define environment variables in Compose files, and more.
 
 ## More Compose documentation
 
 - [User guide](index.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

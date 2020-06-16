@@ -37,7 +37,7 @@ builder pattern above:
 
 **`Dockerfile.build`**:
 
-```conf
+```dockerfile
 FROM golang:1.7.3
 WORKDIR /go/src/github.com/alexellis/href-counter/
 COPY app.go .
@@ -52,7 +52,7 @@ and forget to continue the line using the `\` character, for example.
 
 **`Dockerfile`**:
 
-```conf
+```dockerfile
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
@@ -92,12 +92,12 @@ With multi-stage builds, you use multiple `FROM` statements in your Dockerfile.
 Each `FROM` instruction can use a different base, and each of them begins a new
 stage of the build. You can selectively copy artifacts from one stage to
 another, leaving behind everything you don't want in the final image. To show
-how this works, Let's adapt the Dockerfile from the previous section to use
+how this works, let's adapt the Dockerfile from the previous section to use
 multi-stage builds.
 
 **`Dockerfile`**:
 
-```conf
+```dockerfile
 FROM golang:1.7.3
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
@@ -131,13 +131,13 @@ intermediate artifacts are left behind, and not saved in the final image.
 
 By default, the stages are not named, and you refer to them by their integer
 number, starting with 0 for the first `FROM` instruction. However, you can
-name your stages, by adding an `as <NAME>` to the `FROM` instruction. This
+name your stages, by adding an `AS <NAME>` to the `FROM` instruction. This
 example improves the previous one by naming the stages and using the name in
 the `COPY` instruction. This means that even if the instructions in your
 Dockerfile are re-ordered later, the `COPY` doesn't break.
 
-```conf
-FROM golang:1.7.3 as builder
+```dockerfile
+FROM golang:1.7.3 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
 COPY app.go    .
@@ -177,7 +177,23 @@ copy from a separate image, either using the local image name, a tag available
 locally or on a Docker registry, or a tag ID. The Docker client pulls the image
 if necessary and copies the artifact from there. The syntax is:
 
-```Dockerfile
+```dockerfile
 COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 ```
 
+## Use a previous stage as a new stage
+
+You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
+
+```dockerfile
+FROM alpine:latest as builder
+RUN apk --no-cache add build-base
+
+FROM builder as build1
+COPY source1.cpp source.cpp
+RUN g++ -o /binary source.cpp
+
+FROM builder as build2
+COPY source2.cpp source.cpp
+RUN g++ -o /binary source.cpp
+```

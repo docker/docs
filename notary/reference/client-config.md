@@ -22,14 +22,14 @@ JSON keys to learn more about the configuration section corresponding to that ke
 
 
 <pre><code class="language-json">{
-  <a href="client-config.md#trust_dir-section-optional">"trust_dir"</a> : "~/.docker/trust",
-  <a href="client-config.md#remote_server-section-optional">"remote_server"</a>: {
+  <a href="#trust_dir-section-optional">"trust_dir"</a> : "~/.docker/trust",
+  <a href="#remote_server-section-optional">"remote_server"</a>: {
     "url": "https://my-notary-server.my-private-registry.com",
     "root_ca": "./fixtures/root-ca.crt",
     "tls_client_cert": "./fixtures/secure.example.com.crt",
     "tls_client_key": "./fixtures/secure.example.com.crt"
   },
-  <a href="client-config.md#trust_pinning-section-optional">"trust_pinning"</a>: {
+  <a href="#trust_pinning-section-optional">"trust_pinning"</a>: {
     "certs": {
       "docker.com/notary": ["49cf5c6404a35fa41d5a5aa2ce539dfee0d7a2176d0da488914a38603b1f4292"]
     }
@@ -125,7 +125,7 @@ but the pinned certificates take highest priority for validation, followed
 by the pinned CA, followed by TOFUS (TOFU over HTTPS).  The diagram below
 describes this validation flow:
 
-![validation flow](https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/trust-pinning-flow.png")
+![validation flow](https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/trust-pinning-flow.png)
 
 Only one trust pinning option is used to validate a GUN even if multiple
 sections are specified, and any validation failure results in a failed
@@ -176,6 +176,7 @@ passphrase.
 |`NOTARY_TARGETS_PASSPHRASE`    | The targets (an online) key passphrase    |
 |`NOTARY_SNAPSHOT_PASSPHRASE`   | The snapshot (an online) key passphrase   |
 |`NOTARY_DELEGATION_PASSPHRASE` | The delegation (an online) key passphrase |
+|`NOTARY_AUTH`                  | The notary server credentials: `<username>:<password>` encoded in base64 |
 
 
 If provided, the passphrase in `NOTARY_DELEGATION_PASSPHRASE`

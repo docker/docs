@@ -1,12 +1,6 @@
 command: docker search
 short: Search the Docker Hub for images
-long: |-
-  Search [Docker Hub](https://hub.docker.com) for images
-
-  See [*Find Public Images on Docker Hub*](https://docs.docker.com/engine/tutorials/dockerrepos/#searching-for-images) for
-  more details on finding shared images from the command line.
-
-  > **Note**: Search queries return a maximum of 25 results.
+long: Search [Docker Hub](https://hub.docker.com) for images
 usage: docker search [OPTIONS] TERM
 pname: docker
 plink: docker.yaml
@@ -65,87 +59,161 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
-examples: "### Search images by name\n\nThis example displays images with a name containing
-  'busybox':\n\n```none\n$ docker search busybox\n\nNAME                             DESCRIPTION
-  \                                    STARS     OFFICIAL   AUTOMATED\nbusybox                          Busybox
-  base image.                             316       [OK]       \nprogrium/busybox
-  \                                                                50                   [OK]\nradial/busyboxplus
-  \              Full-chain, Internet enabled, busybox made...   8                    [OK]\nodise/busybox-python
-  \                                                            2                    [OK]\nazukiapp/busybox
-  \                This image is meant to be used as the base...   2                    [OK]\nofayau/busybox-jvm
-  \              Prepare busybox to install a 32 bits JVM.       1                    [OK]\nshingonoide/archlinux-busybox
-  \   Arch Linux, a lightweight and flexible Lin...   1                    [OK]\nodise/busybox-curl
-  \                                                              1                    [OK]\nofayau/busybox-libc32
-  \           Busybox with 32 bits (and 64 bits) libs         1                    [OK]\npeelsky/zulu-openjdk-busybox
-  \                                                    1                    [OK]\nskomma/busybox-data
-  \             Docker image suitable for data volume cont...   1                    [OK]\nelektritter/busybox-teamspeak
-  \   Lightweight teamspeak3 container based on...    1                    [OK]\nsocketplane/busybox
-  \                                                             1                    [OK]\noveits/docker-nginx-busybox
-  \     This is a tiny NginX docker image based on...   0                    [OK]\nggtools/busybox-ubuntu
-  \          Busybox ubuntu version with extra goodies       0                    [OK]\nnikfoundas/busybox-confd
-  \        Minimal busybox based distribution of confd     0                    [OK]\nopenshift/busybox-http-app
-  \                                                      0                    [OK]\njllopis/busybox
-  \                                                                 0                    [OK]\nswyckoff/busybox
-  \                                                                0                    [OK]\npowellquiring/busybox
-  \                                                           0                    [OK]\nwilliamyeh/busybox-sh
-  \           Docker image for BusyBox's sh                   0                    [OK]\nsimplexsys/busybox-cli-powered
-  \  Docker busybox images, with a few often us...   0                    [OK]\nfhisamoto/busybox-java
-  \          Busybox java                                    0                    [OK]\nscottabernethy/busybox
-  \                                                          0                    [OK]\nmarclop/busybox-solr\n```\n\n###
-  Display non-truncated description (--no-trunc)\n\nThis example displays images with
-  a name containing 'busybox',\nat least 3 stars and the description isn't truncated
-  in the output:\n\n```bash\n$ docker search --stars=3 --no-trunc busybox\nNAME                 DESCRIPTION
-  \                                                                              STARS
-  \    OFFICIAL   AUTOMATED\nbusybox              Busybox base image.                                                                       325
-  \      [OK]       \nprogrium/busybox                                                                                               50
-  \                  [OK]\nradial/busyboxplus   Full-chain, Internet enabled, busybox
-  made from scratch. Comes in git and cURL flavors.   8                    [OK]\n```\n\n###
-  Limit search results (--limit)\n\nThe flag `--limit` is the maximum number of results
-  returned by a search. This value could\nbe in the range between 1 and 100. The default
-  value of `--limit` is 25.\n\n### Filtering\n\nThe filtering flag (`-f` or `--filter`)
-  format is a `key=value` pair. If there is more\nthan one filter, then pass multiple
-  flags (e.g. `--filter \"foo=bar\" --filter \"bif=baz\"`)\n\nThe currently supported
-  filters are:\n\n* stars (int - number of stars the image has)\n* is-automated (boolean
-  - true or false) - is the image automated or not\n* is-official (boolean - true
-  or false) - is the image official or not\n\n#### stars\n\nThis example displays
-  images with a name containing 'busybox' and at\nleast 3 stars:\n\n```bash\n$ docker
-  search --filter stars=3 busybox\n\nNAME                 DESCRIPTION                                     STARS
-  \    OFFICIAL   AUTOMATED\nbusybox              Busybox base image.                             325
-  \      [OK]       \nprogrium/busybox                                                     50
-  \                  [OK]\nradial/busyboxplus   Full-chain, Internet enabled, busybox
-  made...   8                    [OK]\n```\n\n#### is-automated\n\nThis example displays
-  images with a name containing 'busybox'\nand are automated builds:\n\n```bash\n$
-  docker search --filter is-automated busybox\n\nNAME                 DESCRIPTION
-  \                                    STARS     OFFICIAL   AUTOMATED\nprogrium/busybox
-  \                                                    50                   [OK]\nradial/busyboxplus
-  \  Full-chain, Internet enabled, busybox made...   8                    [OK]\n```\n\n####
-  is-official\n\nThis example displays images with a name containing 'busybox', at
-  least\n3 stars and are official builds:\n\n```bash\n$ docker search --filter \"is-official=true\"
-  --filter \"stars=3\" busybox\n\nNAME                 DESCRIPTION                                     STARS
-  \    OFFICIAL   AUTOMATED\nprogrium/busybox                                                     50
-  \                  [OK]\nradial/busyboxplus   Full-chain, Internet enabled, busybox
-  made...   8                    [OK]\n```\n\n### Format the output\n\nThe formatting
-  option (`--format`) pretty-prints search output\nusing a Go template.\n\nValid placeholders
-  for the Go template are:\n\n| Placeholder    | Description                       |\n|
-  -------------- | --------------------------------- |\n| `.Name`        | Image Name
-  \                       |\n| `.Description` | Image description                 |\n|
-  `.StarCount`   | Number of stars for the image     |\n| `.IsOfficial`  | \"OK\"
-  if image is official         |\n| `.IsAutomated` | \"OK\" if image build was automated
-  |\n\nWhen you use the `--format` option, the `search` command will\noutput the data
-  exactly as the template declares. If you use the\n`table` directive, column headers
-  are included as well.\n\nThe following example uses a template without headers and
-  outputs the\n`Name` and `StarCount` entries separated by a colon for all images:\n\n```bash\n{%
-  raw %}\n$ docker search --format \"{{.Name}}: {{.StarCount}}\" nginx\n\nnginx: 5441\njwilder/nginx-proxy:
-  953\nricharvey/nginx-php-fpm: 353\nmillion12/nginx-php: 75\nwebdevops/php-nginx:
-  70\nh3nrik/nginx-ldap: 35\nbitnami/nginx: 23\nevild/alpine-nginx: 14\nmillion12/nginx:
-  9\nmaxexcloo/nginx: 7\n{% endraw %}\n```\n\nThis example outputs a table format:\n\n```bash\n{%
-  raw %}\n$ docker search --format \"table {{.Name}}\\t{{.IsAutomated}}\\t{{.IsOfficial}}\"
-  nginx\n\nNAME                                     AUTOMATED           OFFICIAL\nnginx
-  \                                                       [OK]\njwilder/nginx-proxy
-  \                     [OK]                \nricharvey/nginx-php-fpm                  [OK]
-  \               \njrcs/letsencrypt-nginx-proxy-companion   [OK]                \nmillion12/nginx-php
-  \                     [OK]                \nwebdevops/php-nginx                      [OK]
-  \               \n{% endraw %}\n```"
+examples: |-
+  ### Search images by name
+
+  This example displays images with a name containing 'busybox':
+
+  ```none
+  $ docker search busybox
+
+  NAME                             DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+  busybox                          Busybox base image.                             316       [OK]
+  progrium/busybox                                                                 50                   [OK]
+  radial/busyboxplus               Full-chain, Internet enabled, busybox made...   8                    [OK]
+  odise/busybox-python                                                             2                    [OK]
+  azukiapp/busybox                 This image is meant to be used as the base...   2                    [OK]
+  ofayau/busybox-jvm               Prepare busybox to install a 32 bits JVM.       1                    [OK]
+  shingonoide/archlinux-busybox    Arch Linux, a lightweight and flexible Lin...   1                    [OK]
+  odise/busybox-curl                                                               1                    [OK]
+  ofayau/busybox-libc32            Busybox with 32 bits (and 64 bits) libs         1                    [OK]
+  peelsky/zulu-openjdk-busybox                                                     1                    [OK]
+  skomma/busybox-data              Docker image suitable for data volume cont...   1                    [OK]
+  elektritter/busybox-teamspeak    Lightweight teamspeak3 container based on...    1                    [OK]
+  socketplane/busybox                                                              1                    [OK]
+  oveits/docker-nginx-busybox      This is a tiny NginX docker image based on...   0                    [OK]
+  ggtools/busybox-ubuntu           Busybox ubuntu version with extra goodies       0                    [OK]
+  nikfoundas/busybox-confd         Minimal busybox based distribution of confd     0                    [OK]
+  openshift/busybox-http-app                                                       0                    [OK]
+  jllopis/busybox                                                                  0                    [OK]
+  swyckoff/busybox                                                                 0                    [OK]
+  powellquiring/busybox                                                            0                    [OK]
+  williamyeh/busybox-sh            Docker image for BusyBox's sh                   0                    [OK]
+  simplexsys/busybox-cli-powered   Docker busybox images, with a few often us...   0                    [OK]
+  fhisamoto/busybox-java           Busybox java                                    0                    [OK]
+  scottabernethy/busybox                                                           0                    [OK]
+  marclop/busybox-solr
+  ```
+
+  ### Display non-truncated description (--no-trunc)
+
+  This example displays images with a name containing 'busybox',
+  at least 3 stars and the description isn't truncated in the output:
+
+  ```bash
+  $ docker search --filter=stars=3 --no-trunc busybox
+  NAME                 DESCRIPTION                                                                               STARS     OFFICIAL   AUTOMATED
+  busybox              Busybox base image.                                                                       325       [OK]
+  progrium/busybox                                                                                               50                   [OK]
+  radial/busyboxplus   Full-chain, Internet enabled, busybox made from scratch. Comes in git and cURL flavors.   8                    [OK]
+  ```
+
+  ### Limit search results (--limit)
+
+  The flag `--limit` is the maximum number of results returned by a search. This value could
+  be in the range between 1 and 100. The default value of `--limit` is 25.
+
+  ### Filtering
+
+  The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there is more
+  than one filter, then pass multiple flags (e.g. `--filter is-automated=true --filter stars=3`)
+
+  The currently supported filters are:
+
+  - stars (int - number of stars the image has)
+  - is-automated (boolean - true or false) - is the image automated or not
+  - is-official (boolean - true or false) - is the image official or not
+
+  #### stars
+
+  This example displays images with a name containing 'busybox' and at
+  least 3 stars:
+
+  ```bash
+  $ docker search --filter stars=3 busybox
+
+  NAME                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+  busybox              Busybox base image.                             325       [OK]
+  progrium/busybox                                                     50                   [OK]
+  radial/busyboxplus   Full-chain, Internet enabled, busybox made...   8                    [OK]
+  ```
+
+  #### is-automated
+
+  This example displays images with a name containing 'busybox'
+  and are automated builds:
+
+  ```bash
+  $ docker search --filter is-automated=true busybox
+
+  NAME                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+  progrium/busybox                                                     50                   [OK]
+  radial/busyboxplus   Full-chain, Internet enabled, busybox made...   8                    [OK]
+  ```
+
+  #### is-official
+
+  This example displays images with a name containing 'busybox', at least
+  3 stars and are official builds:
+
+  ```bash
+  $ docker search --filter is-official=true --filter stars=3 busybox
+
+  NAME                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+  progrium/busybox                                                     50                   [OK]
+  radial/busyboxplus   Full-chain, Internet enabled, busybox made...   8                    [OK]
+  ```
+
+  ### Format the output
+
+  The formatting option (`--format`) pretty-prints search output
+  using a Go template.
+
+  Valid placeholders for the Go template are:
+
+  | Placeholder    | Description                       |
+  | -------------- | --------------------------------- |
+  | `.Name`        | Image Name                        |
+  | `.Description` | Image description                 |
+  | `.StarCount`   | Number of stars for the image     |
+  | `.IsOfficial`  | "OK" if image is official         |
+  | `.IsAutomated` | "OK" if image build was automated |
+
+  When you use the `--format` option, the `search` command will
+  output the data exactly as the template declares. If you use the
+  `table` directive, column headers are included as well.
+
+  The following example uses a template without headers and outputs the
+  `Name` and `StarCount` entries separated by a colon (`:`) for all images:
+
+  ```bash
+  $ docker search --format "{{.Name}}: {{.StarCount}}" nginx
+
+  nginx: 5441
+  jwilder/nginx-proxy: 953
+  richarvey/nginx-php-fpm: 353
+  million12/nginx-php: 75
+  webdevops/php-nginx: 70
+  h3nrik/nginx-ldap: 35
+  bitnami/nginx: 23
+  evild/alpine-nginx: 14
+  million12/nginx: 9
+  maxexcloo/nginx: 7
+  ```
+
+  This example outputs a table format:
+
+  ```bash
+  $ docker search --format "table {{.Name}}\t{{.IsAutomated}}\t{{.IsOfficial}}" nginx
+
+  NAME                                     AUTOMATED           OFFICIAL
+  nginx                                                        [OK]
+  jwilder/nginx-proxy                      [OK]
+  richarvey/nginx-php-fpm                  [OK]
+  jrcs/letsencrypt-nginx-proxy-companion   [OK]
+  million12/nginx-php                      [OK]
+  webdevops/php-nginx                      [OK]
+  ```
 deprecated: false
 experimental: false
 experimentalcli: false

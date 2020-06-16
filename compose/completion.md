@@ -13,69 +13,95 @@ for the bash and zsh shell.
 
 Make sure bash completion is installed.
 
-*  On a current Linux OS (in a non-minimal installation), bash completion should be
+#### Linux
+
+1. On a current Linux OS (in a non-minimal installation), bash completion should be
 available.
 
-*  On a Mac, install with `brew install bash-completion`.
+2. Place the completion script in `/etc/bash_completion.d/`.
 
-Place the completion script in `/etc/bash_completion.d/`
-(or `/usr/local/etc/bash_completion.d/` on a Mac):
+    ```shell
+    sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+    ```
 
-```shell
-sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
-```
+### Mac
 
-On a Mac, add the following to your `~/.bash_profile`:
+##### Install via Homebrew
 
-```shell
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-. $(brew --prefix)/etc/bash_completion
-fi
-```
+1. Install with `brew install bash-completion`.
+2. After the installation, Brew displays the installation path. Make sure to place the completion script in the path.
 
-You can source your `~/.bash_profile` or launch a new terminal to utilize
+    For example, when running this command on Mac 10.13.2, place the completion script in `/usr/local/etc/bash_completion.d/`.
+
+    ```shell
+    sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /usr/local/etc/bash_completion.d/docker-compose
+    ```
+
+3. Add the following to your `~/.bash_profile`:
+
+    ```shell
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+    fi
+    ```
+
+4. You can source your `~/.bash_profile` or launch a new terminal to utilize
 completion.
 
-If you're using MacPorts instead of brew, use the following steps instead:
+##### Install via MacPorts
 
-Run `sudo port install bash-completion` to install bash completion.
-Add the following lines to `~/.bash_profile`:
+1. Run `sudo port install bash-completion` to install bash completion.
 
-```shell
-if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+2. Add the following lines to `~/.bash_profile`:
+
+    ```shell
+    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
     . /opt/local/etc/profile.d/bash_completion.sh
-fi
-```
+    fi
+    ```
 
-You can source your `~/.bash_profile` or launch a new terminal to utilize
+3. You can source your `~/.bash_profile` or launch a new terminal to utilize
 completion.
 
 ### Zsh
 
-Place the completion script in your `/path/to/zsh/completion` (typically `~/.zsh/completion/`):
+Make sure you have [installed `oh-my-zsh`](https://ohmyz.sh/) on your computer. 
+
+#### With oh-my-zsh shell
+
+Add `docker` and `docker-compose` to the plugins list in `~/.zshrc` to run autocompletion within the oh-my-zsh shell. In the following example, `...` represent other Zsh plugins you may have installed.
 
 ```shell
-$ mkdir -p ~/.zsh/completion
-$ curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
-```
+plugins=(... docker docker-compose
+)
+ ```
 
-Include the directory in your `$fpath` by adding in `~/.zshrc`:
+#### Without oh-my-zsh shell
 
-```shell
-fpath=(~/.zsh/completion $fpath)
-```
+1. Place the completion script in your `/path/to/zsh/completion` (typically `~/.zsh/completion/`):
 
-Make sure `compinit` is loaded or do it by adding in `~/.zshrc`:
+    ```shell
+    $ mkdir -p ~/.zsh/completion
+    $ curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
+    ```
 
-```shell
-autoload -Uz compinit && compinit -i
-```
+2. Include the directory in your `$fpath` by adding in `~/.zshrc`:
 
-Then reload your shell:
+    ```shell
+    fpath=(~/.zsh/completion $fpath)
+    ```
 
-```shell
-exec $SHELL -l
-```
+3. Make sure `compinit` is loaded or do it by adding in `~/.zshrc`:
+
+    ```shell
+    autoload -Uz compinit && compinit -i
+    ```
+
+4. Then reload your shell:
+
+    ```shell
+    exec $SHELL -l
+    ```
 
 ## Available completions
 
@@ -86,7 +112,7 @@ Depending on what you typed on the command line so far, it completes:
  - service names that make sense in a given context, such as services with running or stopped instances or services based on images vs. services based on Dockerfiles. For `docker-compose scale`, completed service names automatically have "=" appended.
  - arguments for selected options. For example, `docker-compose kill -s` completes some signals like SIGHUP and SIGUSR1.
 
-Enjoy working with Compose faster and with less typos!
+Enjoy working with Compose faster and with fewer typos!
 
 ## Compose documentation
 
@@ -95,5 +121,5 @@ Enjoy working with Compose faster and with less typos!
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

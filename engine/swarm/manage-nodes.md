@@ -132,7 +132,7 @@ node-1
 
 The labels you set for nodes using docker node update apply only to the node
 entity within the swarm. Do not confuse them with the docker daemon labels for
-[dockerd](../userguide/labels-custom-metadata.md#daemon-labels).
+[dockerd](../../config/labels-custom-metadata.md#daemon-labels).
 
 Therefore, node labels can be used to limit critical tasks to nodes that meet
 certain requirements. For example, schedule only on machines where special
@@ -186,8 +186,6 @@ respectively.
 
 ## Install plugins on swarm nodes
 
-{% include edge_only.md section="option" %}
-
 If your swarm service relies on one or more
 [plugins](/engine/extend/plugin_api/), these plugins need to be available on
 every node where the service could potentially be deployed. You can manually
@@ -239,5 +237,5 @@ $ docker node rm node-2
 ## Learn more
 
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](/engine/reference/commandline/docker.md)
+* [Docker Engine command line reference](../reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

@@ -73,7 +73,7 @@ subnet and uses default options. You can see information about the network using
 When no containers are connected to the overlay network, its configuration is
 not very exciting:
 
-```json
+```bash
 $ docker network inspect my-network
 [
     {
@@ -192,22 +192,38 @@ $ docker network create \
   my-network
 ```
 
+##### Using custom default address pools
+
+To customize subnet allocation for your Swarm networks, you can [optionally configure them](swarm-mode.md) during `swarm init`.
+
+For example, the following command is used when initializing Swarm:
+
+```bash
+$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
+```
+
+Whenever a user creates a network, but does not use the `--subnet` command line option, the subnet for this network will be allocated sequentially from the next available subnet from the pool. If the specified network is already allocated, that network will not be used for Swarm. 
+
+Multiple pools can be configured if discontiguous address space is required. However, allocation from specific pools is not supported. Network subnets will be allocated sequentially from the IP pool space and subnets will be reused as they are deallocated from networks that are deleted.
+
+The default mask length can be configured and is the same for all networks. It is set to `/24` by default. To change the default subnet mask length, use the `--default-addr-pool-mask-length` command line option.
+
+> **Note**: Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
+
 ##### Overlay network size limitations
 
-You should create overlay networks with `/24` blocks (the default), which limits
-you to 256 IP addresses, when you create networks using the default VIP-based
-endpoint-mode. This recommendation addresses
-[limitations with swarm mode](https://github.com/moby/moby/issues/30820). If you
-need more than 256 IP addresses, do not increase the IP block size. You can either
-use `dnsrr` endpoint mode with an external load balancer, or use multiple smaller
-overlay networks. See [Configure service discovery](#configure-service-discovery)
-for more information about different endpoint modes.
+Docker recommends creating overlay networks with `/24` blocks. The `/24` overlay network blocks, which limits the network to 256 IP addresses. 
+
+This recommendation addresses [limitations with swarm mode](https://github.com/moby/moby/issues/30820). 
+If you need more than 256 IP addresses, do not increase the IP block size. You can either use `dnsrr` 
+endpoint mode with an external load balancer, or use multiple smaller overlay networks. See 
+[Configure service discovery](#configure-service-discovery) or more information about different endpoint modes.
 
 #### Configure encryption of application data
 
 Management and control plane data related to a swarm is always encrypted.
 For more details about the encryption mechanisms, see the
-[Docker swarm mode overlay network security model](/engine/userguide/networking/overlay-security-model.md).
+[Docker swarm mode overlay network security model](../../network/overlay.md).
 
 Application data among swarm nodes is not encrypted by default. To encrypt this
 traffic on a given overlay network, use the `--opt encrypted` flag on `docker
@@ -347,7 +363,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
 
 4.  Create or re-create the `docker_gwbridge` bridge with your custom settings.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](/engine/reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../reference/commandline/network_create.md#bridge-driver-options).
 
     ```bash
     $ docker network create \
@@ -399,6 +415,6 @@ $ docker swarm join \
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
-* [Docker CLI reference](/engine/reference/commandline/docker.md)
+* [Docker CLI reference](../reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
 * [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }

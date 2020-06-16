@@ -18,12 +18,12 @@ Docker. Volumes have several advantages over bind mounts:
 - You can manage volumes using Docker CLI commands or the Docker API.
 - Volumes work on both Linux and Windows containers.
 - Volumes can be more safely shared among multiple containers.
-- Volume drivers allow you to store volumes on remote hosts or cloud providers,
-  to encrypt the contents of volumes, or to add other functionality.
-- A new volume's contents can be pre-populated by a container.
+- Volume drivers let you store volumes on remote hosts or cloud providers, to
+  encrypt the contents of volumes, or to add other functionality.
+- New volumes can have their content pre-populated by a container.
 
 In addition, volumes are often a better choice than persisting data in a
-container's writable layer, because using a volume does not increase the size of
+container's writable layer, because a volume does not increase the size of the
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 
@@ -46,9 +46,7 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
-> **Tip**: New users should use the `--mount` syntax. Experienced users may
-> be more familiar with the `-v` or `--volume` syntax, but are encouraged to
-> use `--mount`, because research has shown it to be easier to use.
+> New users should try `--mount` syntax which is simpler than `--volume` syntax.
 
 If you need to specify volume driver options, you must use `--mount`.
 
@@ -80,6 +78,23 @@ If you need to specify volume driver options, you must use `--mount`.
     the container as read-only](#use-a-read-only-volume).
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
+
+> Escape values from outer CSV parser
+>
+> If your volume driver accepts a comma-separated list as an option,
+> you must escape the value from the outer CSV parser. To escape a `volume-opt`,
+> surround it with double quotes (`"`) and surround the entire mount parameter
+> with single quotes (`'`).
+>
+> For example, the `local` driver accepts mount options as a comma-separated
+> list in the `o` parameter. This example shows the correct way to escape the list.
+>
+>     $ docker service create \
+>         --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+>         --name myservice \
+>         <IMAGE>
+> {: .warning}
+
 
 The examples below show both the `--mount` and `-v` syntax where possible, and
     `--mount` is presented first.
@@ -190,7 +205,8 @@ correctly. Look for the `Mounts` section:
 This shows that the mount is a volume, it shows the correct source and
 destination, and that the mount is read-write.
 
-Stop the container and remove the volume.
+Stop the container and remove the volume. Note volume removal is a separate
+step.
 
 ```bash
 $ docker container stop devtest
@@ -224,7 +240,7 @@ Use `docker service ps devtest-service` to verify that the service is running:
 $ docker service ps devtest-service
 
 ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
-4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago   
+4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago
 ```
 
 Remove the service, which stops all its tasks:
@@ -232,6 +248,9 @@ Remove the service, which stops all its tasks:
 ```bash
 $ docker service rm devtest-service
 ```
+
+Removing the service does not remove any volumes created by the service.
+Volume removal is a separate step.
 
 #### Syntax differences for services
 
@@ -281,8 +300,9 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-After running either of these examples, run the following commands to clean up the
-containers and volumes.
+After running either of these examples, run the following commands to clean up
+the containers and volumes.  Note volume removal is a separate step.
+
 
 ```bash
 $ docker container stop nginxtest
@@ -334,7 +354,7 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Use `docker inspect nginxtest` to verify that the bind mount was created
+Use `docker inspect nginxtest` to verify that the readonly mount was created
 correctly. Look for the `Mounts` section:
 
 ```json
@@ -352,7 +372,8 @@ correctly. Look for the `Mounts` section:
 ],
 ```
 
-Stop and remove the container, and remove the volume:
+Stop and remove the container, and remove the volume. Volume removal is a
+separate step.
 
 ```bash
 $ docker container stop nginxtest
@@ -426,8 +447,117 @@ $ docker run -d \
   nginx:latest
 ```
 
+### Create a service which creates an NFS volume
+
+This example shows how you can create an NFS volume when creating a service. This example uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
+
+#### NFSv3
+```bash
+$ docker service create -d \
+  --name nfs-service \
+  --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10' \
+  nginx:latest
+```
+
+#### NFSv4
+```bash
+docker service create -d \
+    --name nfs-service \
+    --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=10.0.0.10,rw,nfsvers=4,async"' \
+    nginx:latest
+```
+
+## Backup, restore, or migrate data volumes
+
+Volumes are useful for backups, restores, and migrations. Use the
+`--volumes-from` flag to create a new container that mounts that volume.
+
+### Backup a container
+
+For example, create a new container named `dbstore`:
+
+```
+$ docker run -v /dbdata --name dbstore ubuntu /bin/bash
+```
+
+Then in the next command, we:
+
+- Launch a new container and mount the volume from the `dbstore` container
+- Mount a local host directory as `/backup`
+- Pass a command that tars the contents of the `dbdata` volume to a `backup.tar` file inside our `/backup` directory.
+
+```
+$ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
+```
+
+When the command completes and the container stops, we are left with a backup of
+our `dbdata` volume.
+
+### Restore container from backup
+
+With the backup just created, you can restore it to the same container, or
+another that you made elsewhere.
+
+For example, create a new container named `dbstore2`:
+
+```
+$ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
+```
+
+Then un-tar the backup file in the new container`s data volume:
+
+```
+$ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
+```
+
+You can use the techniques above to automate backup, migration and restore
+testing using your preferred tools.
+
+## Remove volumes
+
+A Docker data volume persists after a container is deleted. There are two types
+of volumes to consider:
+
+- **Named volumes** have a specific source from outside the container, for example `awesome:/bar`.
+- **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
+
+### Remove anonymous volumes
+
+To automatically remove anonymous volumes, use the `--rm` option. For example,
+this command creates an anonymous `/foo` volume. When the container is removed,
+the Docker Engine removes the `/foo` volume but not the `awesome` volume.
+
+```
+$ docker run --rm -v /foo -v awesome:/bar busybox top
+```
+
+### Remove all volumes
+
+To remove all unused volumes and free up space:
+
+```
+$ docker volume prune
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Next steps
 
 - Learn about [bind mounts](bind-mounts.md).
 - Learn about [tmpfs mounts](tmpfs.md).
 - Learn about [storage drivers](/storage/storagedriver/).
+- Learn about [third-party volume driver plugins](/engine/extend/legacy_plugins/).

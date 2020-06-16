@@ -38,7 +38,7 @@ free-to-use, hosted Registry, plus additional features (organization accounts,
 automated builds, and more).
 
 Users looking for a commercially supported version of the Registry should look
-into [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md).
+into [Docker Trusted Registry](/ee/dtr/).
 
 ## Requirements
 
@@ -72,6 +72,5 @@ Now stop your registry and remove all data
 
 ## Next
 
-You should now read the [detailed introduction about the
-registry](introduction.md), or jump directly to [deployment
-instructions](deploying.md).
+You should now read the [detailed introduction about the registry](introduction.md),
+or jump directly to [deployment instructions](deploying.md).

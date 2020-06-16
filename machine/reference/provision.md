@@ -2,6 +2,7 @@
 description: Re-run provisioning on a created machine.
 keywords: machine, provision, subcommand
 title: docker-machine provision
+hide_from_sitemap: true
 ---
 
 Re-run provisioning on a created machine.
@@ -13,7 +14,7 @@ originally specified Swarm or Engine configuration).
 
 Usage is `docker-machine provision [name]`.  Multiple names may be specified.
 
-```none
+```bash
 $ docker-machine provision foo bar
 
 Copying certs to the local machine directory...

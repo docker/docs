@@ -10,7 +10,7 @@ Variables starting with `DOCKER_` are the same as those used to configure the
 Docker command-line client. If you're using `docker-machine`, then the `eval "$(docker-machine env my-docker-vm)"` command should set them to their correct values. (In this example, `my-docker-vm` is the name of a machine you created.)
 
 > **Note**: Some of these variables can also be provided using an
-> [environment file](/compose/env-file.md).
+> [environment file](../env-file.md).
 
 ## COMPOSE\_PROJECT\_NAME
 
@@ -93,7 +93,7 @@ using this character as path separator.
 
 ## COMPOSE\_FORCE\_WINDOWS\_HOST
 
-If set, volume declarations using the [short syntax](../compose-file/index.md#short-syntax-3)
+If set, volume declarations using the [short syntax](../compose-file/#short-syntax-3)
 are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
@@ -117,7 +117,7 @@ Supported: `true` or `1` to enable, `false` or `0` to disable.
 
 ## Related information
 
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
-- [Compose file reference](/compose/compose-file.md)
-- [Environment file](/compose/env-file.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
+- [Compose file reference](../compose-file/index.md)
+- [Environment file](../env-file.md)

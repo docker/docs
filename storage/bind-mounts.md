@@ -17,13 +17,13 @@ directory's contents.
 The file or directory does not need to exist on the Docker host already. It is
 created on demand if it does not yet exist. Bind mounts are very performant, but
 they rely on the host machine's filesystem having a specific directory structure
-available. If you are developing new Docker applications, consider using [named
-volumes](volumes.md) instead. You can't use Docker CLI commands to directly
+available. If you are developing new Docker applications, consider using
+[named volumes](volumes.md) instead. You can't use Docker CLI commands to directly
 manage bind mounts.
 
 ![bind mounts on the Docker host](images/types-of-mounts-bind.png)
 
-## Choosing the -v or --mount flag
+## Choose the -v or --mount flag
 
 Originally, the `-v` or `--volume` flag was used for standalone containers and
 the `--mount` flag was used for swarm services. However, starting with Docker
@@ -66,7 +66,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
     `private`, `rshared`, `shared`, `rslave`, `slave`.
   - The [`consistency`](#configure-mount-consistency-for-macos) option, if
     present, may be one of `consistent`, `delegated`, or `cached`. This setting
-    only applies to Docker for Mac, and is ignored on all other platforms.
+    only applies to Docker Desktop for Mac, and is ignored on all other platforms.
   - The `--mount` flag does not support `z` or `Z` options for modifying
     selinux labels.
 
@@ -90,7 +90,7 @@ you, but generates an error.
 ## Start a container with a bind mount
 
 Consider a case where you have a directory `source` and that when you build the
-source  code, the artifacts are saved into another directory `source/target/`.
+source code, the artifacts are saved into another directory, `source/target/`.
 You want the artifacts to be available to the container at `/app/`, and you
 want the container to get access to a new build each time you build the source
 on your development host. Use the following command to bind-mount the `target/`
@@ -159,7 +159,7 @@ $ docker container stop devtest
 $ docker container rm devtest
 ```
 
-### Mounting into a non-empty directory on the container
+### Mount into a non-empty directory on the container
 
 If you bind-mount into a non-empty directory on the container, the directory's
 existing contents are obscured by the bind mount. This can be beneficial,
@@ -383,9 +383,9 @@ $ docker run -d \
 
 ## Configure mount consistency for macOS
 
-Docker for Mac uses `osxfs` to propagate directories and files shared from macOS
+Docker Desktop for Mac uses `osxfs` to propagate directories and files shared from macOS
 to the Linux VM. This propagation makes these directories and files available to
-Docker containers running on Docker for Mac.
+Docker containers running on Docker Desktop for Mac.
 
 By default, these shares are fully-consistent, meaning that every time a write
 happens on the macOS host or through a mount in a container, the changes are

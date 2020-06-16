@@ -3,6 +3,7 @@ published: false
 title: "Machine plugins"
 description: "Machine plugins"
 keywords: ["Docker, documentation, manual, guide, reference, api"]
+hide_from_sitemap: true
 ---
 
 
@@ -139,6 +140,19 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>CloudSigma</td>
+      <td>
+        <a href=
+        "https://github.com/cloudsigma/docker-machine-driver-cloudsigma">https://github.com/cloudsigma/docker-machine-driver-cloudsigma</a>
+      </td>
+      <td>
+        <a href="https://github.com/cloudsigma">CloudSigma</a>
+      </td>
+      <td>
+        <a href="mailto:bogdan.despotov@cloudsigma.com">bogdan.despotov@cloudsigma.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>Docker-In-Docker</td>
       <td>
         <a href=
@@ -180,6 +194,23 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>Hetzner Cloud</td>
+      <td>
+        <a href=
+        "https://github.com/JonasProgrammer/docker-machine-driver-hetzner">https://github.com/JonasProgrammer/docker-machine-driver-hetzner</a>
+      </td>
+      <td>
+        <a href="https://github.com/JonasProgrammer">JonasProgrammer</a><br>
+        <a href="https://github.com/monochromata">monochromata</a><br>
+        <a href="https://github.com/mxschmitt">mxschmitt</a>
+      </td>
+      <td>
+        <a href="mailto:jonass@dev.jsje.de">jonass@dev.jsje.de</a><br>
+        <a href="mailto:sl@monochromata.de">sl@monochromata.de</a><br>
+        <a href="mailto:max@schmitt.mx">max@schmitt.mx</a>
+      </td>
+    </tr>
+    <tr>
       <td>HPE OneView</td>
       <td>
         <a href=
@@ -195,6 +226,20 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>Kamatera</td>
+      <td>
+        <a href=
+        "https://github.com/OriHoch/docker-machine-driver-kamatera">https://github.com/OriHoch/docker-machine-driver-kamatera</a>
+      </td>
+      <td>
+        <a href="https://github.com/OriHoch">OriHoch</a>
+      </td>
+      <td>
+        <a href=
+        "mailto:support@kamatera.com">support@kamatera.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>KVM</td>
       <td>
         <a href=
@@ -206,6 +251,18 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       <td>
         <a href=
         "mailto:daniel.hiltgen@docker.com">daniel.hiltgen@docker.com</a>
+      </td>
+    </tr>
+    <tr>
+      <td>Linode</td>
+      <td>
+        <a href="https://github.com/linode/docker-machine-driver-linode">https://github.com/linode/docker-machine-driver-linode</a>
+      </td>
+      <td>
+        <a href="https://github.com/linode">Linode</a>
+      </td>
+      <td>
+        <a href="mailto:developers@linode.com">developers@linode.com</a>
       </td>
     </tr>
     <tr>

@@ -294,7 +294,7 @@ connected to both networks.
 
 3.  Create your four containers. Notice the `--network` flags. You can only
     connect to one network during the `docker run` command, so you need to use
-    `docker network attach` afterward to connect `alpine4` to the `bridge`
+    `docker network connect` afterward to connect `alpine4` to the `bridge`
     network as well.
 
     ```bash

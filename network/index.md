@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Networking overview
 description: Overview of Docker networks and networking concepts
 keywords: networking, bridge, routing, routing mesh, overlay, ports
 redirect_from:
@@ -29,9 +29,9 @@ This topic does **not** go into OS-specific details about how Docker networks
 work, so you will not find information about how Docker manipulates `iptables`
 rules on Linux or how it manipulates routing rules on Windows servers, and you
 will not find detailed information about how Docker forms and encapsulates
-packets or handles encryption. See [Docker and iptables](/network/iptables.md)
+packets or handles encryption. See [Docker and iptables](iptables.md)
 and
-[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
+[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](http://success.docker.com/article/networking)
 for a much greater depth of technical detail.
 
 In addition, this topic does not provide any tutorials for how to create,
@@ -75,7 +75,7 @@ exist by default, and provide core networking functionality:
 
 - [Network plugins](/engine/extend/plugins_services/): You can install and use
   third-party network plugins with Docker. These plugins are available from
-  [Docker Store](https://store.docker.com/search?category=network&q=&type=plugin)
+  [Docker Hub](https://hub.docker.com/search?category=network&q=&type=plugin)
   or from third-party vendors. See the vendor's documentation for installing and
   using a given network plugin.
 
@@ -95,20 +95,6 @@ exist by default, and provide core networking functionality:
 - **Third-party network plugins** allow you to integrate Docker with specialized
   network stacks.
 
-## Docker EE networking features
-
-The following two features are only possible when using Docker EE and managing
-your Docker services using Universal Control Plane (UCP):
-
-- The [HTTP routing mesh](/datacenter/ucp/2.2/guides/admin/configure/use-domain-names-to-access-services/)
-  allows you to share the same network IP address and port among multiple
-  services. UCP routes the traffic to the appropriate service using the
-  combination of hostname and port, as requested from the client.
-
-- [Session stickiness](/datacenter/ucp/2.2/guides/user/services/use-domain-names-to-access-services/#sticky-sessions) allows you to specify information in the HTTP header
-  which UCP uses to route subsequent requests to the same service task, for
-  applications which require stateful sessions.
-
 ## Networking tutorials
 
 Now that you understand the basics about Docker networks, deepen your
@@ -118,4 +104,3 @@ understanding using the following tutorials:
 - [Host networking tutorial](network-tutorial-host.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)
 - [Macvlan networking tutorial](network-tutorial-macvlan.md)
-

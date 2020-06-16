@@ -2,12 +2,13 @@
 description: Remove a machine.
 keywords: machine, rm, subcommand
 title: docker-machine rm
+hide_from_sitemap: true
 ---
 
-Remove a machine. This removese the local reference and deletes it
+Remove a machine. This removes the local reference and deletes it
 on the cloud provider or virtualization management platform.
 
-```none
+```bash
 $ docker-machine rm --help
 
 Usage: docker-machine rm [OPTIONS] [arg...]
@@ -25,8 +26,9 @@ Options:
 
 ## Examples
 
-```none
+```bash
 $ docker-machine ls
+
 NAME   ACTIVE   URL          STATE     URL                         SWARM   DOCKER   ERRORS
 bar    -        virtualbox   Running   tcp://192.168.99.101:2376           v1.9.1
 baz    -        virtualbox   Running   tcp://192.168.99.103:2376           v1.9.1
@@ -35,12 +37,14 @@ qix    -        virtualbox   Running   tcp://192.168.99.102:2376           v1.9.
 
 
 $ docker-machine rm baz
+
 About to remove baz
 Are you sure? (y/n): y
 Successfully removed baz
 
 
 $ docker-machine ls
+
 NAME   ACTIVE   URL          STATE     URL                         SWARM   DOCKER   ERRORS
 bar    -        virtualbox   Running   tcp://192.168.99.101:2376           v1.9.1
 foo    -        virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1
@@ -48,6 +52,7 @@ qix    -        virtualbox   Running   tcp://192.168.99.102:2376           v1.9.
 
 
 $ docker-machine rm bar qix
+
 About to remove bar, qix
 Are you sure? (y/n): y
 Successfully removed bar
@@ -55,10 +60,12 @@ Successfully removed qix
 
 
 $ docker-machine ls
+
 NAME   ACTIVE   URL          STATE     URL                         SWARM   DOCKER   ERRORS
 foo    -        virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1
 
 $ docker-machine rm -y foo
+
 About to remove foo
 Successfully removed foo
 ```

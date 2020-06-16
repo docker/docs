@@ -5,7 +5,7 @@ keywords: docker, documentation, about, technology, kitematic, gui, toolbox
 title: Docker Toolbox overview
 ---
 
-Docker Toolbox is an installer for quick setup and launch of a Docker environment on older Mac and Windows systems that do not meet the requirements of the new [Docker for Mac](/docker-for-mac/index.md) and [Docker for Windows](/docker-for-windows/index.md) apps.
+Docker Toolbox is an installer for quick setup and launch of a Docker environment on older Mac and Windows systems that do not meet the requirements of the new [Docker Desktop for Mac](../docker-for-mac/index.md) and [Docker Desktop for Windows](../docker-for-windows/index.md) apps.
 
 ![Toolbox installer](images/toolbox-installer.png)
 
@@ -30,39 +30,20 @@ You can find various versions of the tools on [Toolbox Releases](https://github.
 
 ## Ready to get started?
 
-1. Get the latest Toolbox installer for your platform:
+Choose the install instructions for your platform, and follow the steps:
 
-    <table style="width:100%">
-      <tr>
-        <th style="font-size: medium; font-family: arial;  text-align: center">
-        Toolbox for Mac</th>
-        <th style="font-size: medium; font-family: arial; text-align: center">
-        Toolbox for Windows</th>
-      </tr>
-      <tr valign="top">
-        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
-        </td>
-        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/win/stable/DockerToolbox.exe">Get Docker Toolbox for Windows</a>
-        </td>
-      </tr>
-    </table>
+ - [Install Docker Toolbox for macOS](toolbox_install_mac.md)
 
-2. Choose the install instructions for your platform, and follow the steps:
-
-    * [Install Docker Toolbox on macOS](toolbox_install_mac.md)
-
-    * [Install Docker Toolbox for Windows](toolbox_install_windows.md)
+ - [Install Docker Toolbox for Windows](toolbox_install_windows.md)
 
 ## Next steps
 
-* Try the [Get started](/get-started/) tutorial.
+* Try the [Get started](../get-started/index.md) tutorial.
 
-* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [more tutorials and examples](../engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 
-* [Learn about Kitematic](/kitematic/userguide.md)
+* [Learn about Kitematic](../kitematic/userguide.md)
 
-* [Learn about Docker Machine](/machine/overview.md)
+* [Learn about Docker Machine](../machine/overview.md)
 
-* [Learn about Docker Compose](/compose/overview.md)
+* [Learn about Docker Compose](../compose/index.md)

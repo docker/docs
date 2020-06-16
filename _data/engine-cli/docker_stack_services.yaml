@@ -1,8 +1,14 @@
 command: docker stack services
 short: List the services in the stack
 long: |-
-  Lists the services that are running as part of the specified stack. This
-  command has to be run targeting a manager node.
+  Lists the services that are running as part of the specified stack.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker stack services [OPTIONS] STACK
 pname: docker stack
 plink: docker_stack.yaml
@@ -15,7 +21,7 @@ options:
   experimental: false
   experimentalcli: false
   kubernetes: false
-  swarm: true
+  swarm: false
 - option: format
   value_type: string
   description: Pretty-print services using a Go template
@@ -23,6 +29,14 @@ options:
   experimental: false
   experimentalcli: false
   kubernetes: false
+  swarm: false
+- option: namespace
+  value_type: string
+  description: Kubernetes namespace to use
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: true
   swarm: false
 - option: quiet
   shorthand: q
@@ -40,17 +54,16 @@ inherited_options:
   description: Kubernetes config file
   deprecated: false
   experimental: false
-  experimentalcli: true
+  experimentalcli: false
   kubernetes: true
   swarm: false
-- option: namespace
+- option: orchestrator
   value_type: string
-  default_value: default
-  description: Kubernetes namespace to use
+  description: Orchestrator to use (swarm|kubernetes|all)
   deprecated: false
   experimental: false
-  experimentalcli: true
-  kubernetes: true
+  experimentalcli: false
+  kubernetes: false
   swarm: false
 examples: |-
   The following command shows all services in the `myapp` stack:
@@ -82,8 +95,23 @@ examples: |-
   The currently supported filters are:
 
   * id / ID (`--filter id=7be5ei6sqeye`, or `--filter ID=7be5ei6sqeye`)
-  * name (`--filter name=myapp_web`)
+    * Swarm: supported
+    * Kubernetes: not supported
   * label (`--filter label=key=value`)
+    * Swarm: supported
+    * Kubernetes: supported
+  * mode (`--filter mode=replicated`, or `--filter mode=global`)
+    * Swarm: not supported
+    * Kubernetes: supported
+  * name (`--filter name=myapp_web`)
+    * Swarm: supported
+    * Kubernetes: supported
+  * node (`--filter node=mynode`)
+    * Swarm: not supported
+    * Kubernetes: supported
+  * service (`--filter service=web`)
+    * Swarm: not supported
+    * Kubernetes: supported
 
   ### Formatting
 
@@ -93,7 +121,7 @@ examples: |-
   Valid placeholders for the Go template are listed below:
 
   Placeholder | Description
-  ------------|------------------------------------------------------------------------------------------
+  ------------|-------------------------------------------------------------------
   `.ID`       | Service ID
   `.Name`     | Service name
   `.Mode`     | Service mode (replicated, global)
@@ -105,7 +133,7 @@ examples: |-
   `table` directive, includes column headers as well.
 
   The following example uses a template without headers and outputs the
-  `ID`, `Mode`, and `Replicas` entries separated by a colon for all services:
+  `ID`, `Mode`, and `Replicas` entries separated by a colon (`:`) for all services:
 
   ```bash
   $ docker stack services --format "{{.ID}}: {{.Mode}} {{.Replicas}}"
@@ -117,6 +145,6 @@ deprecated: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false
-kubernetes: true
-swarm: true
+kubernetes: false
+swarm: false
 

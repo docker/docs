@@ -56,3 +56,9 @@ This opens an interactive PostgreSQL shell for the linked `db` container.
 If you do not want the `run` command to start linked containers, use the `--no-deps` flag:
 
     docker-compose run --no-deps web python manage.py shell
+
+If you want to remove the container after running while overriding the container's restart policy, use the `--rm` flag:
+
+    docker-compose run --rm web python manage.py db upgrade
+
+This runs a database upgrade script, and removes the container when finished running, even if a restart policy is specified in the service configuration.

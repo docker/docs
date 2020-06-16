@@ -92,7 +92,7 @@ the Docker CLI to see details about the service running in the swarm.
     ```bash
     [manager1]$ docker service ps helloworld
 
-    NAME                                    IMAGE   NODE     DESIRED STATE  LAST STATE
+    NAME                                    IMAGE   NODE     DESIRED STATE  CURRENT STATE           ERROR               PORTS
     helloworld.1.8p1vev3fq5zm0mi8g0as41w35  alpine  worker2  Running        Running 3 minutes
     ```
 
@@ -100,7 +100,7 @@ the Docker CLI to see details about the service running in the swarm.
     `worker2` node. You may see the service running on your manager node. By
     default, manager nodes in a swarm can execute tasks just like worker nodes.
 
-    Swarm also shows you the `DESIRED STATE` and `LAST STATE` of the service
+    Swarm also shows you the `DESIRED STATE` and `CURRENT STATE` of the service
     task so you can see if tasks are running according to the service
     definition.
 
@@ -111,7 +111,7 @@ the Docker CLI to see details about the service running in the swarm.
     you must ssh to that node.
 
     ```bash
-    [worker2]$docker ps
+    [worker2]$ docker ps
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     e609dde94e47        alpine:latest       "ping docker.com"   3 minutes ago       Up 3 minutes                            helloworld.1.8p1vev3fq5zm0mi8g0as41w35

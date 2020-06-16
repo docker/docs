@@ -20,8 +20,8 @@ production. These changes may include:
 - Removing any volume bindings for application code, so that code stays inside
   the container and can't be changed from outside
 - Binding to different ports on the host
-- Setting environment variables differently, such as when you need to decrease the verbosity of
-  logging, or to enable email sending)
+- Setting environment variables differently, such as reducing the verbosity of
+  logging, or to specify settings for external services such as an email server
 - Specifying a restart policy like `restart: always` to avoid downtime
 - Adding extra services such as a log aggregator
 
@@ -57,7 +57,7 @@ recreating any services which `web` depends on.
 You can use Compose to deploy an app to a remote Docker host by setting the
 `DOCKER_HOST`, `DOCKER_TLS_VERIFY`, and `DOCKER_CERT_PATH` environment variables
 appropriately. For tasks like this,
-[Docker Machine](/machine/overview.md) makes managing local and
+[Docker Machine](../machine/overview.md) makes managing local and
 remote Docker hosts very easy, and is recommended even if you're not deploying
 remotely.
 
@@ -66,7 +66,7 @@ commands work with no further configuration.
 
 ### Running Compose on a Swarm cluster
 
-[Docker Swarm](/swarm/overview.md), a Docker-native clustering
+[Docker Swarm](../swarm/overview.md), a Docker-native clustering
 system, exposes the same API as a single Docker host, which means you can use
 Compose against a Swarm instance and run your apps across multiple hosts.
 
@@ -76,5 +76,5 @@ Read more about the Compose/Swarm integration in the
 ## Compose documentation
 
 - [Installing Compose](install.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)

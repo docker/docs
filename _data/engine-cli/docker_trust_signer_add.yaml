@@ -1,6 +1,6 @@
 command: docker trust signer add
 short: Add a signer
-long: Add a signer
+long: '`docker trust signer add` adds signers to signed repositories.'
 usage: 'docker trust signer add OPTIONS NAME REPOSITORY [REPOSITORY...] '
 pname: docker trust signer
 plink: docker_trust_signer.yaml
@@ -13,6 +13,54 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+examples: |-
+  ### Add a signer to a repo
+
+  To add a new signer, `alice`, to this repository:
+
+  ```bash
+  $ docker trust inspect --pretty example/trust-demo
+
+  No signatures for example/trust-demo
+
+
+  List of signers and their keys:
+
+  SIGNER              KEYS
+  bob                 5600f5ab76a2
+
+  Administrative keys for example/trust-demo:
+  Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+  Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+  ```
+
+  Add `alice` with `docker trust signer add`:
+
+  ```bash
+  $ docker trust signer add alice example/trust-demo --key alice.crt
+    Adding signer "alice" to example/trust-demo...
+    Enter passphrase for repository key with ID 642692c:
+  Successfully added signer: alice to example/trust-demo
+  ```
+
+  `docker trust inspect --pretty` now lists `alice` as a valid signer:
+
+  ```bash
+  $ docker trust inspect --pretty example/trust-demo
+
+  No signatures for example/trust-demo
+
+
+  List of signers and their keys:
+
+  SIGNER              KEYS
+  alice               05e87edcaecb
+  bob                 5600f5ab76a2
+
+  Administrative keys for example/trust-demo:
+  Repository Key: 642692c14c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+  Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+  ```
 deprecated: false
 experimental: false
 experimentalcli: false

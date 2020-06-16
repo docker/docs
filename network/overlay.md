@@ -11,9 +11,9 @@ redirect_from:
 The `overlay` network driver creates a distributed network among multiple
 Docker daemon hosts. This network sits on top of (overlays) the host-specific
 networks, allowing containers connected to it (including swarm service
-containers) to communicate securely. Docker transparently handles routing of
-each packet to and from the correct Docker daemon host and the correct
-destination container.
+containers) to communicate securely when encryption is enabled. Docker
+transparently handles routing of each packet to and from the correct Docker
+daemon host and the correct destination container.
 
 When you initialize a swarm or join a Docker host to an existing swarm, two
 new networks are created on that Docker host:
@@ -188,7 +188,7 @@ from the swarm.
 4.  Create or re-create the `docker_gwbridge` bridge manually with your custom
     settings, using the `docker network create` command.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](/engine/reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../engine/reference/commandline/network_create.md#bridge-driver-options).
 
     ```bash
     $ docker network create \
@@ -230,7 +230,7 @@ preferred because it is somewhat self-documenting.
 </tr>
 <tr>
 <td><tt>-p 8080:80/tcp -p 8080:80/udp</tt> or <br /><tt>-p published=8080,target=80,protocol=tcp -p published=8080,target=80,protocol=udp</tt></td>
-<td>Map TCP port 80 on the service to TCP port 8080 on the routing mesh, and map UDP port 80 on the service to UDP port 8080 on the routine mesh.</td>
+<td>Map TCP port 80 on the service to TCP port 8080 on the routing mesh, and map UDP port 80 on the service to UDP port 8080 on the routing mesh.</td>
 </tr>
 </table>
 
@@ -241,9 +241,9 @@ When you connect to a published port on any swarm node (whether it is running a
 given service or not), you are redirected to a worker which is running that
 service, transparently. Effectively, Docker acts as a load balancer for your
 swarm services. Services using the routing mesh are running in _virtual IP (VIP)
-mode_. Even a service running on each node (by means of the `--global` flag)
-uses the routing mesh. When using the routing mesh, there is no guarantee about
-which Docker node services client requests.
+mode_. Even a service running on each node (by means of the `--mode global`
+flag) uses the routing mesh. When using the routing mesh, there is no guarantee
+about which Docker node services client requests.
 
 To bypass the routing mesh, you can start a service using _DNS Round Robin
 (DNSRR) mode_, by setting the `--endpoint-mode` flag to `dnsrr`. You must run
@@ -265,7 +265,7 @@ this for each node joining the swarm.
 
 ### Attach a standalone container to an overlay network
 
-The `ingress` network is create without the `--attachable` flag, which means
+The `ingress` network is created without the `--attachable` flag, which means
 that only swarm services can use it, and not standalone containers. You can
 connect standalone containers to user-defined overlay networks which are created
 with the `--attachable` flag. This gives standalone containers running on
@@ -279,7 +279,7 @@ routing on the individual Docker daemon hosts.
 | `-p 8080:80`                    | Map TCP port 80 in the container to port 8080 on the overlay network.                                                                               |
 | `-p 8080:80/udp`                | Map UDP port 80 in the container to port 8080 on the overlay network.                                                                               |
 | `-p 8080:80/sctp`               | Map SCTP port 80 in the container to port 8080 on the overlay network.                                                                              |
-| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port 8080 on the overlay network, and map UDP port 80 in the container to UDP port 8080 on the overlay networkt. |
+| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port 8080 on the overlay network, and map UDP port 80 in the container to UDP port 8080 on the overlay network. |
 
 ### Container discovery
 
@@ -287,7 +287,7 @@ For most situations, you should connect to the service name, which is load-balan
 
 ## Next steps
 
-- Go through the [overlay networking tutorial](/network/network-tutorial-overlay.md)
-- Learn about [networking from the container's point of view](/config/containers/container-networking.md)
-- Learn about [standalone bridge networks](/network/bridge.md)
-- Learn about [Macvlan networks](/network/macvlan.md)
+- Go through the [overlay networking tutorial](network-tutorial-overlay.md)
+- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Learn about [standalone bridge networks](bridge.md)
+- Learn about [Macvlan networks](macvlan.md)

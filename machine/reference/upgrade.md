@@ -2,6 +2,7 @@
 description: Upgrade Docker on a machine
 keywords: machine, upgrade, subcommand
 title: docker-machine upgrade
+hide_from_sitemap: true
 ---
 
 Upgrade a machine to the latest version of Docker. How this upgrade happens
@@ -14,7 +15,7 @@ example, if the machine uses boot2docker for its OS, this command downloads
 the latest boot2docker ISO and replace the machine's existing ISO with the
 latest.
 
-```none
+```bash
 $ docker-machine upgrade default
 
 Stopping machine to do the upgrade...

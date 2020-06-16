@@ -2,6 +2,7 @@
 description: Gracefully stop a machine
 keywords: machine, stop, subcommand
 title: docker-machine stop
+hide_from_sitemap: true
 ---
 
 ```none
@@ -15,7 +16,7 @@ Description:
 
 For example:
 
-```none
+```bash
 $ docker-machine ls
 
 NAME   ACTIVE   DRIVER       STATE     URL

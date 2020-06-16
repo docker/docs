@@ -4,19 +4,18 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> **Note**: This document only applies if you're using [version 2 or higher of the Compose file format](compose-file.md#versioning). Networking features are not supported for version 1 (legacy) Compose files.
+> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1.md).
 
 By default Compose sets up a single
-[network](/engine/reference/commandline/network_create/) for your app. Each
+[network](../engine/reference/commandline/network_create.md) for your app. Each
 container for a service joins the default network and is both *reachable* by
 other containers on that network, and *discoverable* by them at a hostname
 identical to the container name.
 
 > **Note**: Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name`
-> flag](reference/overview.md) or the [`COMPOSE_PROJECT_NAME` environment
-> variable](reference/envvars.md#compose-project-name).
+> project name with either the [`--project-name` flag](reference/overview.md)
+> or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
@@ -83,15 +82,15 @@ Links allow you to define extra aliases by which a service is reachable from ano
       db:
         image: postgres
 
-See the [links reference](compose-file.md#links) for more information.
+See the [links reference](compose-file/compose-file-v2.md#links) for more information.
 
 ## Multi-host networking
 
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](/compose/bundles.md) documentation.
+> **Note**: The instructions in this section refer to [legacy Docker Swarm](swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](../engine/reference/commandline/stack_deploy.md) documentation.
 
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
 
-Consult the [Getting started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
+Consult the [Getting started with multi-host networking](../network/network-tutorial-overlay.md) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
 
 ## Specify custom networks
 
@@ -129,12 +128,20 @@ Here's an example Compose file defining two custom networks. The `proxy` service
           foo: "1"
           bar: "2"
 
-Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file.md#ipv4-address-ipv6-address) for each attached network.
+Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/compose-file-v2.md#ipv4_address-ipv6_address) for each attached network.
+
+Networks can also be given a [custom name](compose-file/index.md#network-configuration-reference) (since version 3.5):
+
+    version: "3.5"
+    networks:
+      frontend:
+        name: custom_frontend
+        driver: custom-driver-1
 
 For full details of the network configuration options available, see the following references:
 
-- [Top-level `networks` key](compose-file.md#network-configuration-reference)
-- [Service-level `networks` key](compose-file.md#networks)
+- [Top-level `networks` key](compose-file/compose-file-v2.md#network-configuration-reference)
+- [Service-level `networks` key](compose-file/compose-file-v2.md#networks)
 
 ## Configure the default network
 
@@ -157,7 +164,7 @@ Instead of (or as well as) specifying your own networks, you can also change the
 
 ## Use a pre-existing network
 
-If you want your containers to join a pre-existing network, use the [`external` option](compose-file.md#network-configuration-reference):
+If you want your containers to join a pre-existing network, use the [`external` option](compose-file/compose-file-v2.md#network-configuration-reference):
 
     networks:
       default:

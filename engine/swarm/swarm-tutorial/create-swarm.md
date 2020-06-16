@@ -20,14 +20,15 @@ machines.
 2.  Run the following command to create a new swarm:
 
     ```bash
-    docker swarm init --advertise-addr <MANAGER-IP>
+    $ docker swarm init --advertise-addr <MANAGER-IP>
     ```
 
-    >**Note**: If you are using Docker for Mac or Docker for Windows to test
-single-node swarm, simply run `docker swarm init` with no arguments. There is no
-need to specify `--advertise-addr` in this case. To learn more, see the topic
-on how to [Use Docker for Mac or Docker for
-Windows](/engine/swarm/swarm-tutorial/index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
+    > **Note**: If you are using Docker Desktop for Mac or Docker Desktop for Windows to test
+    > single-node swarm, simply run `docker swarm init` with no arguments. There is no
+    > need to specify `--advertise-addr` in this case. To learn more, see the topic
+    > on how to
+    > [Use Docker Desktop or Mac or Docker Desktop for Windows](index.md#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
+    > with Swarm.
 
     In the tutorial, the following command creates a swarm on the `manager1`
     machine:

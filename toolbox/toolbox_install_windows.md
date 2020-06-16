@@ -5,14 +5,9 @@ keywords: docker, documentation, install, toolbox, win
 title: Install Docker Toolbox on Windows
 ---
 
-Docker Toolbox provides a way to use Docker on
-Windows systems that do not
-meet minimal system requirements for the [Docker for
-Windows](/docker-for-windows/index.md) app.
-
-If you have not done so already, download the installer here:
-
-[Get Docker Toolbox for Windows](https://download.docker.com/win/stable/DockerToolbox.exe){: class="button outline-btn" }
+Docker Toolbox provides a way to use Docker on Windows systems that do not meet
+minimal system requirements for the [Docker Desktop for Windows](../docker-for-windows/index.md)
+app.
 
 ## What you get and how it works
 
@@ -33,8 +28,7 @@ small Linux VM on your machine. This VM hosts Docker Engine
 for you on your Windows system.
 
 >**Tip**: One of the advantages of the newer
-[Docker for
-Windows](/docker-for-windows/index.md) solution is that
+[Docker Desktop for Windows](../docker-for-windows/index.md) solution is that
 it uses native virtualization and does not require
 VirtualBox to run Docker.
 
@@ -50,16 +44,21 @@ To verify your machine meets these requirements, do the following:
 
     If you have a newer system, specifically 64bit Windows 10 Pro, with
     Enterprise and Education (1607 Anniversary update, Build 14393 or later),
-    consider using [Docker for Windows](/docker-for-windows) instead. It runs
+    consider using [Docker Desktop for Windows](/docker-for-windows) instead. It runs
     natively on the Windows, so there is no need for a pre-configured Docker
     QuickStart shell. It also uses Hyper-V for virtualization, so the
     instructions below for checking virtualization will be out of date for newer
-    Windows systems. Full install prerequisites are provided in the Docker for
+    Windows systems. Full install prerequisites are provided in the Docker Desktop for
     Windows topic in [What to know before you
     install](/docker-for-windows/#what-to-know-before-you-install).
 
 2.  Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.
 
+    <br>
+    **For Windows 10**
+    
+    Run [Speccy](https://www.piriform.com/speccy){: target="_blank" class="_"}, and look at the CPU information.    
+    
     <br>
     **For Windows 8 or 8.1**
 
@@ -96,11 +95,15 @@ If you have a previous version of VirtualBox installed, do not reinstall it with
 If you have Virtual Box running, you must shut it down before running the
 installer.
 
-1. Go to the [Docker Toolbox](https://www.docker.com/toolbox){: target="_blank" class="_" } page.
+> **Note**: Docker no longer maintains the download.docker.com url for
+> Docker Toolbox, therefore an unsigned warning (verified publisher dialog) is
+> displayed during the installation process. 
 
-2. Click the installer link to download.
+1. To download the latest version of Docker Toolbox, go to [Toolbox
+   Releases](https://github.com/docker/toolbox/releases) and download the
+   latest `.exe` file.
 
-3. Install Docker Toolbox by double-clicking the installer.
+2. Install Docker Toolbox by double-clicking the installer.
 
     The installer launches the "Setup - Docker Toolbox" dialog.
 
@@ -110,17 +113,17 @@ installer.
 
       ![Release page](images/installer_open.png)
 
-4. Press **Next** to accept all the defaults and then **Install**.
+3. Press **Next** to accept all the defaults and then **Install**.
 
 	  Accept all the installer defaults. The installer takes a few minutes to install all the components:
 
-5.  When notified by Windows Security the installer will make changes, make sure you allow the installer to make the necessary changes.
+4.  When notified by Windows Security the installer will make changes, make sure you allow the installer to make the necessary changes.
 
     When it completes, the installer reports it was successful:
 
     ![Success](images/finish.png)
 
-6. Uncheck "View Shortcuts in File Explorer" and press **Finish**.
+5. Uncheck "View Shortcuts in File Explorer" and press **Finish**.
 
 
 ## Step 3: Verify your installation
@@ -225,7 +228,7 @@ Removing Toolbox involves removing all the Docker components it includes.
 
 A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
 
-For example, if you plan to re-install Docker Machine as a part of Docker for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
+For example, if you plan to re-install Docker Machine as a part of Docker Desktop for Windows you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them. So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on Windows, do the following:
 
@@ -246,12 +249,9 @@ To uninstall Toolbox on Windows, do the following:
     Successfully removed my-docker-machine
     ```
 
-    This step is optional because if you plan
-    to re-install Docker Machine as a part
-    of [Docker for
-    Windows](/docker-for-windows/index.md), you can import and
-    continue to manage those machines
-    through Docker.
+    This step is optional because if you plan to re-install Docker Machine as a
+    part of [Docker Desktop for Windows](../docker-for-windows/index.md), you can
+    import and continue to manage those machines through Docker.
 
 3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel (programs and features).
 
@@ -274,12 +274,12 @@ To uninstall Toolbox on Windows, do the following:
 
 ## Next steps
 
-* Try out the [Get started](/get-started/) tutorial.
+* Try out the [Get started](../get-started/index.md) tutorial.
 
-* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [more tutorials and examples](../engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 
-* [Learn about Kitematic](/kitematic/userguide.md)
+* [Learn about Kitematic](../kitematic/userguide.md)
 
-* [Learn about Docker Machine](/machine/overview.md)
+* [Learn about Docker Machine](../machine/overview.md)
 
-* [Learn about Docker Compose](/compose/overview.md)
+* [Learn about Docker Compose](../compose/index.md)

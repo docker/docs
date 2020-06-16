@@ -3,8 +3,10 @@ variable values from the shell environment in which `docker-compose` is run. For
 example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply this
 configuration:
 
-    db:
-      image: "postgres:${POSTGRES_VERSION}"
+```yaml
+db:
+  image: "postgres:${POSTGRES_VERSION}"
+```
 
 When you run `docker-compose up` with this configuration, Compose looks for the
 `POSTGRES_VERSION` environment variable in the shell and substitutes its value
@@ -16,15 +18,17 @@ string. In the example above, if `POSTGRES_VERSION` is not set, the value for
 the `image` option is `postgres:`.
 
 You can set default values for environment variables using a
-[`.env` file](../env-file.md), which Compose automatically looks for. Values
+[`.env` file](/compose/env-file/), which Compose automatically looks for. Values
 set in the shell environment override those set in the `.env` file.
 
-> **Important**: The `.env file` feature only works when you use the
-> `docker-compose up` command and does not work with `docker stack deploy`.
+> Note when using docker stack deploy
+>
+> The `.env file` feature only works when you use the `docker-compose up` command
+> and does not work with `docker stack deploy`.
 {: .important }
 
 Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Additionally when using
-the [2.1 file format](compose-versioning.md#version-21), it is possible to
+the [2.1 file format](/compose/compose-file/compose-versioning/#version-21), it is possible to
 provide inline default values using typical shell syntax:
 
 - `${VARIABLE:-default}` evaluates to `default` if `VARIABLE` is unset or
@@ -47,9 +51,11 @@ dollar sign. This also prevents Compose from interpolating a value, so a `$$`
 allows you to refer to environment variables that you don't want processed by
 Compose.
 
-    web:
-      build: .
-      command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
+```yaml
+web:
+  build: .
+  command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"
+```
 
 If you forget and use a single dollar sign (`$`), Compose interprets the value
 as an environment variable and warns you:

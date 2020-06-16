@@ -6,14 +6,14 @@ redirect_from:
 title: File system sharing (osxfs)
 ---
 
-`osxfs` is a new shared file system solution, exclusive to Docker for Mac.
+`osxfs` is a new shared file system solution, exclusive to Docker Desktop for Mac.
 `osxfs` provides a close-to-native user experience for bind mounting macOS file
 system trees into Docker containers. To this end, `osxfs` features a number of
 unique capabilities as well as differences from a classical Linux file system.
 
 ### Case sensitivity
 
-With Docker for Mac, file systems operate in containers in the same way as they
+With Docker Desktop for Mac, file systems operate in containers in the same way as they
 operate in macOS. If a file system on macOS is case-insensitive, that behavior
 is shared by any bind mount from macOS into a container.
 
@@ -31,7 +31,7 @@ on case-insensitivity to function.
 ### Access control
 
 `osxfs`, and therefore Docker, can access only those file system resources that
-the Docker for Mac user has access to. `osxfs` does not run as `root`. If the macOS
+the Docker Desktop for Mac user has access to. `osxfs` does not run as `root`. If the macOS
 user is an administrator, `osxfs` inherits those administrator privileges. We
 are still evaluating which privileges to drop in the file system process to
 balance security and ease-of-use. `osxfs` performs no additional permissions
@@ -61,9 +61,9 @@ bin	dev	home	lib32	libx32	mnt	proc	run	srv	tmp	var
 
 By default, you can share files in `/Users/`, `/Volumes/`, `/private/`, and
 `/tmp` directly. To add or remove directory trees that are exported to Docker,
-use the **File sharing** tab in Docker preferences ![whale
-menu](images/whale-x.png){: .inline} -> **Preferences** ->
-**File sharing**. (See [Preferences](index.md#preferences).)
+use the **File sharing** tab in Docker preferences
+![whale menu](images/whale-x.png){: .inline} -> **Preferences** ->
+**File sharing**. (See [Preferences](index.md#file-sharing).)
 
 All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
@@ -117,7 +117,7 @@ The following are **unsupported file system events**:
 * Open
 * Access
 * Close events
-* Unmount events (see <a href="osxfs.md#mounts">Mounts</a>)
+* Unmount events (see [Mounts](#mounts))
 
 Some events may be delivered multiple times. These limitations do not apply to
 events between containers, only to those events originating in macOS.
@@ -153,6 +153,32 @@ Extended attributes are not yet supported.
 `osxfs` does not use OSXFUSE. `osxfs` does not run under, inside, or
 between macOS userspace processes and the macOS kernel.
 
+### SSH agent forwarding
+
+Docker Desktop for Mac allows you to use the host’s SSH agent inside a container. To do this:
+
+1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
+
+    `--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock`
+
+1. Add the `SSH_AUTH_SOCK` environment variable in your container:
+
+    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+
+To enable the SSH agent in Docker Compose, add the following flags to your service:
+
+ ```yaml
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - type: bind
+        source: /run/host-services/ssh-auth.sock
+        target: /run/host-services/ssh-auth.sock
+    environment:
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+ ```
+
 ### Performance issues, solutions, and roadmap
 
 > See **[Performance tuning for volume mounts (shared filesystems)](osxfs-caching.md)**
@@ -160,13 +186,13 @@ between macOS userspace processes and the macOS kernel.
 
 With regard to reported performance issues ([GitHub issue 77: File access in
 mounted volumes extremely slow](https://github.com/docker/for-mac/issues/77)),
-and a similar thread on [Docker for Mac forums on topic: File access in mounted
+and a similar thread on [Docker Desktop for Mac forums on topic: File access in mounted
 volumes extremely
 slow](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/),
 this topic provides an explanation of the issues, recent progress in addressing
 them, how the community can help us, and what you can expect in the
 future. This explanation derives from a [post about understanding
-performance](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158?u=orangesnap)
+performance](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/8076/158)
 by David Sheets (@dsheets) on the [Docker development
 team](https://forums.docker.com/groups/Docker) to the forum topic just
 mentioned. We want to surface it in the documentation for wider reach.
@@ -176,7 +202,7 @@ mentioned. We want to surface it in the documentation for wider reach.
 Perhaps the most important thing to understand is that shared file system
 performance is multi-dimensional. This means that, depending on your workload,
 you may experience exceptional, adequate, or poor performance with `osxfs`, the
-file system server in Docker for Mac. File system APIs are very wide (20-40
+file system server in Docker Desktop for Mac. File system APIs are very wide (20-40
 message types) with many intricate semantics  involving on-disk state, in-memory
 cache state, and concurrent access by multiple  processes. Additionally, `osxfs`
 integrates a mapping between macOS's FSEvents API and Linux's `inotify` API
@@ -207,7 +233,7 @@ haven't implemented all those improvements yet (more on this below in
 [What you can do](osxfs.md#what-you-can-do)).
 
 A second approach to improving performance is to reduce the number of
-roundtrips by caching data.  Recent versions of Docker for Mac (17.04 onwards)
+roundtrips by caching data.  Recent versions of Docker Desktop for Mac (17.04 onwards)
 include caching support that brings significant (2-4×) improvements to many
 applications.  Much of the overhead of osxfs arises from the requirement to
 keep the container's and the host's view of the file system consistent, but
@@ -237,7 +263,7 @@ coherence:
 different files that don't exist on the shared volume. Even with a 2× speedup
 via latency reduction this use case still seems "slow".
 With caching enabled the performance increases around 3.5×, as described in
-the [user-guided caching post](link-TODO).
+the [user-guided caching post](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/).
 We expect to see further performance improvements for rake with a "negative dcache" that
 keeps track of, in the Linux kernel itself, the files that do not exist.
 However, even this is not sufficient for the first time rake is run on a
@@ -310,7 +336,7 @@ can be easily tracked.
 #### What you can expect
 
 We continue to work toward an optimized shared file system implementation
-on the Edge channel of Docker for Mac.
+on the Edge channel of Docker Desktop for Mac.
 
 You can expect some of the performance improvement work mentioned above to reach
 the Edge channel in the coming release cycles.
@@ -330,7 +356,7 @@ We hope this gives you a rough idea of where `osxfs` performance is and where
 it's going. We are treating good performance as a top priority feature of the
 file system sharing component and we are actively working on improving it
 through a number of different avenues. The osxfs project started in December
-2015. Since the first integration into Docker for Mac in February 2016, we've
+2015. Since the first integration into Docker Desktop for Mac in February 2016, we've
 improved performance by 50x or more for many workloads while achieving nearly
 complete POSIX compliance and without compromising coherence (it is shared and
 not simply synced). Of course, in the beginning there was lots of low-hanging

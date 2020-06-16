@@ -4,7 +4,7 @@ keywords: guide, swarm mode, node
 title: Join nodes to a swarm
 ---
 
-When you first create a swarm, you place a single Docker Engine (Engine) into
+When you first create a swarm, you place a single Docker Engine into
 swarm mode. To take full advantage of swarm mode you can add nodes to the swarm:
 
 * Adding worker nodes increases capacity. When you deploy a service to a swarm,
@@ -25,6 +25,10 @@ The Docker Engine joins the swarm depending on the **join-token** you provide to
 the `docker swarm join` command. The node only uses the token at join time. If
 you subsequently rotate the token, it doesn't affect existing swarm nodes. Refer
 to [Run Docker Engine in swarm mode](swarm-mode.md#view-the-join-command-or-update-a-swarm-join-token).
+
+> **Note**: Docker engine allows a non-FIPS node to join a FIPS-enabled swarm cluster.
+
+While a mixed FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed FIPS environment in production.
 
 ## Join as a worker node
 
@@ -89,7 +93,7 @@ To add a manager to this swarm, run the following command:
     192.168.99.100:2377
 ```
 
-Run the command from the output on the manager to join the swarm:
+Run the command from the output on the new manager node to join it to the swarm:
 
 ```bash
 $ docker swarm join \

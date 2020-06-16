@@ -1,12 +1,13 @@
 ---
-description: Digital Ocean driver for machine
-keywords: machine, Digital Ocean, driver
-title: Digital Ocean
+description: DigitalOcean driver for machine
+keywords: machine, digitalocean, driver
+title: DigitalOcean
+hide_from_sitemap: true
 ---
 
-Create Docker machines on [Digital Ocean](https://www.digitalocean.com/).
+Create Docker machines on [DigitalOcean](https://www.digitalocean.com/).
 
-You need to create a personal access token under "Apps & API" in the Digital Ocean
+You need to create a personal access token under "Apps & API" in the DigitalOcean
 Control Panel and pass that to `docker-machine create` with the `--digitalocean-access-token` option.
 
 ## Usage
@@ -26,15 +27,16 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 
 ## Options
 
--   `--digitalocean-access-token`: **required**. Your personal access token for the Digital Ocean API.
--   `--digitalocean-backups`: Enable Digital Ocean backups for the droplet.
--   `--digitalocean-image`: The name of the Digital Ocean image to use.
+-   `--digitalocean-access-token`: **required**. Your personal access token for the DigitalOcean API.
+-   `--digitalocean-backups`: Enable DigitalOcean backups for the droplet.
+-   `--digitalocean-image`: The name of the DigitalOcean image to use.
 -   `--digitalocean-ipv6`: Enable IPv6 support for the droplet.
 -   `--digitalocean-monitoring`: Enable monitoring for the droplet.
 -   `--digitalocean-private-networking`: Enable private networking support for the droplet.
 -   `--digitalocean-region`: The region to create the droplet in, see [Regions API](https://developers.digitalocean.com/documentation/v2/#regions) for how to get a list.
--   `--digitalocean-size`: The size of the Digital Ocean droplet (larger than default options are of the form `2gb`).
+-   `--digitalocean-size`: The size of the DigitalOcean droplet (larger than default options are of the form `2gb`).
 -   `--digitalocean-ssh-key-fingerprint`: Use an existing SSH key instead of creating a new one, see [SSH keys](https://developers.digitalocean.com/documentation/v2/#ssh-keys).
+-   `--digitalocean-ssh-key-path`: SSH private key path.
 -   `--digitalocean-ssh-port`: SSH port.
 -   `--digitalocean-ssh-user`: SSH username.
 -   `--digitalocean-tags`: Comma-separated list of tags to apply to the Droplet, see [Droplet tagging](https://developers.digitalocean.com/documentation/v2/#tags)
@@ -54,6 +56,7 @@ The DigitalOcean driver uses `ubuntu-16-04-x64` as the default image.
 | `--digitalocean-region`             | `DIGITALOCEAN_REGION`             | `nyc3`             |
 | `--digitalocean-size`               | `DIGITALOCEAN_SIZE`               | `s-1vcpu-1gb`      |
 | `--digitalocean-ssh-key-fingerprint`| `DIGITALOCEAN_SSH_KEY_FINGERPRINT`| -                  |
+| `--digitalocean-ssh-key-path`       | `DIGITALOCEAN_SSH_KEY_PATH`       | -                  |
 | `--digitalocean-ssh-port`           | `DIGITALOCEAN_SSH_PORT`           | 22                 |
 | `--digitalocean-ssh-user`           | `DIGITALOCEAN_SSH_USER`           | `root`             |
 | `--digitalocean-tags`               | `DIGITALOCEAN_TAGS`               | -                  |

@@ -2,6 +2,7 @@
 description: Get the status of a machine
 keywords: machine, status, subcommand
 title: docker-machine status
+hide_from_sitemap: true
 ---
 
 ```none
@@ -15,7 +16,8 @@ Description:
 
 For example:
 
-```
+```bash
 $ docker-machine status dev
+
 Running
 ```

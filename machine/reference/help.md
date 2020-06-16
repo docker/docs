@@ -2,6 +2,7 @@
 description: Show command help
 keywords: machine, help, subcommand
 title: docker-machine help
+hide_from_sitemap: true
 ---
 
 ```none
@@ -14,8 +15,9 @@ Usage: docker-machine help _subcommand_
 
 For example:
 
-```none
+```bash
 $ docker-machine help config
+
 Usage: docker-machine config [OPTIONS] [arg...]
 
 Print the connection config for machine

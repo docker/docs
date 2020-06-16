@@ -2,6 +2,7 @@
 description: Start a machine
 keywords: machine, start, subcommand
 title: docker-machine start
+hide_from_sitemap: true
 ---
 
 ```none
@@ -16,7 +17,8 @@ Description:
 
 For example:
 
-```none
+```bash
 $ docker-machine start dev
+
 Starting VM...
 ```

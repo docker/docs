@@ -2,6 +2,8 @@
 description: Restricting access to your registry using a nginx proxy
 keywords: registry, on-prem, images, tags, repository, distribution, nginx, proxy, authentication, TLS, recipe, advanced
 title: Authenticate proxy with nginx
+redirect_from:
+- /registry/nginx/
 ---
 
 ## Use-case
@@ -38,6 +40,11 @@ you want through the secondary authentication mechanism implemented inside your
 proxy, it also requires that you move TLS termination from the Registry to the
 proxy itself.
 
+> **Note**: Docker does not recommend binding your registry to `localhost:5000` without
+> authentication. This creates a potential loophole in your Docker Registry security.
+> As a result, anyone who can log on to the server where your Docker Registry is running
+> can push images without authentication.
+
 Furthermore, introducing an extra http layer in your communication pipeline
 makes it more complex to deploy, maintain, and debug. Make sure the extra
 complexity is required.
@@ -67,7 +74,7 @@ properly. For more information, see
 
 ## Setting things up
 
-Review the [requirements](/registry/recipes/index.md#requirements), then follow these steps.
+Review the [requirements](index.md#requirements), then follow these steps.
 
 1.  Create the required directories
 
@@ -176,8 +183,6 @@ Review the [requirements](/registry/recipes/index.md#requirements), then follow 
 
     registry:
       image: registry:2
-      ports:
-        - 127.0.0.1:5000:5000
       volumes:
         - ./data:/var/lib/registry
     ```

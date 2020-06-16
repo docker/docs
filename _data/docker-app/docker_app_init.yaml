@@ -1,0 +1,51 @@
+command: docker app init
+short: Initialize Docker Application definition
+long: Start building a Docker Application package. If there is a docker-compose.yml
+  file in the current directory it will be copied and used.
+usage: docker app init APP_NAME [--compose-file COMPOSE_FILE] [--description DESCRIPTION]
+  [--maintainer NAME:EMAIL ...] [OPTIONS]
+pname: docker app
+plink: docker_app.yaml
+options:
+- option: compose-file
+  value_type: string
+  description: Compose file to use as application base (optional)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: description
+  value_type: string
+  description: Human readable description of your application (optional)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: maintainer
+  value_type: stringArray
+  default_value: '[]'
+  description: |
+    Name and email address of person responsible for the application (name:email) (optional)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: single-file
+  value_type: bool
+  default_value: "false"
+  description: Create a single-file Docker Application definition
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: $ docker app init myapp --description "a useful description"
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

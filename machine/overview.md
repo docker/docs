@@ -2,6 +2,7 @@
 description: Introduction and Overview of Machine
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Docker Machine Overview
+hide_from_sitemap: true
 ---
 
 You can use Docker Machine to:
@@ -15,7 +16,7 @@ You can use Docker Machine to:
 Docker Machine is a tool that lets you install Docker Engine on virtual hosts,
 and manage the hosts with `docker-machine` commands. You can use Machine to
 create Docker hosts on your local Mac or Windows box, on your company network,
-in your data center, or on cloud providers like Azure, AWS, or Digital Ocean.
+in your data center, or on cloud providers like Azure, AWS, or DigitalOcean.
 
 Using `docker-machine` commands, you can start, inspect, stop, and restart a
 managed host, upgrade the Docker client and daemon, and configure a Docker
@@ -27,14 +28,14 @@ point to a host called `default`, follow on-screen instructions to complete
 `env` setup, and run `docker ps`, `docker run hello-world`, and so forth.
 
 Machine _was_ the _only_ way to run Docker on Mac or Windows previous to Docker
-v1.12. Starting with the beta program and Docker v1.12, [Docker for
-Mac](/docker-for-mac/index.md) and [Docker for
-Windows](/docker-for-windows/index.md) are available as native apps and the
+v1.12. Starting with the beta program and Docker v1.12,
+[Docker Desktop for Mac](../docker-for-mac/index.md) and
+[Docker Desktop for Windows](../docker-for-windows/index.md) are available as native apps and the
 better choice for this use case on newer desktops and laptops. We encourage you
-to try out these new apps. The installers for Docker for Mac and Docker for
+to try out these new apps. The installers for Docker Desktop for Mac and Docker Desktop for
 Windows include Docker Machine, along with Docker Compose.
 
-If you aren't sure where to begin, see [Get Started with Docker](/get-started/),
+If you aren't sure where to begin, see [Get Started with Docker](../get-started/index.md),
 which guides you through a brief end-to-end tutorial on Docker.
 
 ## Why should I use it?
@@ -51,7 +52,7 @@ Docker Machine has these two broad use cases.
 
   ![Docker Machine on Mac and Windows](img/machine-mac-win.png){: .white-bg}
 
-  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker for Mac](/docker-for-mac/index.md) and [Docker for Windows](/docker-for-windows/index.md) apps, then you need Docker Machine run Docker Engine locally. Installing Docker Machine on a Mac or Windows box with the [Docker Toolbox](/toolbox/overview.md) installer provisions a local virtual machine with Docker Engine, gives you the ability to connect it, and run `docker` commands.
+  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker Desktop for Mac](../docker-for-mac/index.md) and [Docker Desktop for Windows](../docker-for-windows/index.md) apps, then you need Docker Machine to run Docker Engine locally. Installing Docker Machine on a Mac or Windows box with the [Docker Toolbox](../toolbox/overview.md) installer provisions a local virtual machine with Docker Engine, gives you the ability to connect it, and run `docker` commands.
 
 *  **I want to provision Docker hosts on remote systems**
 
@@ -98,8 +99,8 @@ and are sometimes referred to as, managed "**_machines_**".
 - [Install Docker Machine](install-machine.md)
 - Create and run a Docker host on your [local system using VirtualBox](get-started.md)
 - Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
-- [Provision a Docker Swarm cluster with Docker Machine](/swarm/provision-with-machine.md) (Legacy Swarm)
-- [Getting started with swarm mode](/engine/swarm/swarm-tutorial/) (Docker Engine 1.12 and above)
+- [Provision a Docker Swarm cluster with Docker Machine](../swarm/provision-with-machine.md) (Legacy Swarm)
+- [Getting started with swarm mode](../engine/swarm/swarm-tutorial/) (Docker Engine 1.12 and above)
 - [Understand Machine concepts](concepts.md)
 - [Docker Machine driver reference](drivers/index.md)
 - [Docker Machine subcommand reference](reference/index.md)

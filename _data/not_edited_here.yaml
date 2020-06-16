@@ -11,14 +11,11 @@
 # Make sure directories have the trailing slash, keep the list alphabetical
 
 overrides:
-- path: /apidocs/
-  description: "Auto-generated API docs for Docker Cloud, DTR, UCP. File an issue."
-
 - path: /engine/api/
   description: "ReDoc/Swagger API specs"
-  source: https://github.com/docker/docker-ce/tree/master/components/engine/api
+  source: https://github.com/docker/docker/tree/master/docs/api
 
-- path: /engine/deprecated.md
+- path: /engine/deprecated/
   description: Docker Engine deprecation reference
   source: https://github.com/docker/cli/tree/master/docs/deprecated.md
 
@@ -32,16 +29,16 @@ overrides:
 
 - path: /notary/reference/
   description: Reference docs for Docker Notary
-  source: https://github.com/docker/notary/tree/master/docs/reference/
+  source: https://github.com/theupdateframework/notary/tree/master/docs/reference/
 
 - path: /registry/configuration/
   description: Reference docs for configuring Docker Registry
-  source: https://github.com/docker/distribution/tree/release/2.5/docs/configuration.md
+  source: https://github.com/docker/distribution/tree/release/2.7/docs/configuration.md
 
 - path: /registry/spec/
   description: Docker Registry API references
-  source: https://github.com/docker/distribution/tree/release/2.5/docs/spec/
+  source: https://github.com/docker/distribution/tree/release/2.7/docs/spec/
 
 - path: /compliance/
   description: Docker compliance
-  source: https://github.com/docker/compliance/tree/master/docs/compliance
+  source: https://github.com/mirantis/compliance/tree/master/docs/compliance

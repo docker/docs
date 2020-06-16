@@ -4,14 +4,12 @@ keywords: mac, osxfs, volumes
 title: Performance tuning for volume mounts (shared filesystems)
 ---
 
-[Docker 17.04 CE
-Edge](/edge/index.md#docker-ce-edge-new-features) adds support
-for two new flags to the [docker run `-v`,
-`--volume`](/engine/reference/run/#volume-shared-filesystems)
+[Docker 17.04 CE Edge](https://github.com/docker/docker.github.io/blob/v17.03/edge/index.md#docker-ce-edge-new-features) adds support
+for two new flags to the [docker run `-v`, `--volume`](../engine/reference/run.md#volume-shared-filesystems)
 option, `cached` and `delegated`, that can significantly improve the performance
-of mounted volume access on Docker for Mac. These options begin to solve some of
-the challenges discussed in [Performance issues, solutions, and
-roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
+of mounted volume access on Docker Desktop for Mac. These options begin to solve some of
+the challenges discussed in 
+[Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
 
 > **Tip:** Release notes for Docker CE Edge 17.04 are
 [here](https://github.com/moby/moby/releases/tag/v17.04.0-ce), and the
@@ -26,8 +24,7 @@ Performance](https://stories.amazee.io/docker-on-mac-performance-docker-machine-
 gives a nice, quick summary.
 
 For information on how to configure these options in a Compose file, see
-[Caching options for volume
-mounts](/compose/compose-file.md#caching-options-for-volume-mounts-docker-for-mac)
+[Caching options for volume mounts](../compose/compose-file/index.md#caching-options-for-volume-mounts-docker-desktop-for-mac)
 the Docker Compose topics.
 
 ## Performance implications of host-container file system consistency
@@ -98,8 +95,8 @@ temporary discrepancies are allowed between container and host.
 
 Each of these configurations (`consistent`, `cached`, `delegated`) can be
 specified as a suffix to the
-[`-v`](/engine/reference/run/#volume-shared-filesystems)
-option of [`docker run`](/engine/reference/run.md). For
+[`-v`](../engine/reference/run.md#volume-shared-filesystems)
+option of [`docker run`](../engine/reference/commandline/run.md). For
 example, to bind-mount `/Users/yallop/project` in a container under the path
 `/project`, you might run the following command:
 
@@ -191,7 +188,7 @@ visible to the host, but there may be a delay before writes performed on the
 host are visible within containers.
 
 >**Tip:** To learn more about `cached`, see the article on
-[User-guided caching in Docker for Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/).
+[User-guided caching in Docker Desktop for Mac](https://blog.docker.com/2017/05/user-guided-caching-in-docker-for-mac/).
 
 1. Implementations **_must_** obey `delegated` Semantics 1-5.
 

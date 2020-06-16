@@ -5,8 +5,7 @@ title: Dockerize a CouchDB service
 ---
 
 > **Note**:
-> - **If you don't like sudo** then see [*Giving non-root
->   access*](../installation/binaries.md#giving-non-root-access)
+> - **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 
 Here's an example of using data volumes to share the same data between
 two CouchDB containers. This could be used for hot upgrades, testing

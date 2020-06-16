@@ -1,14 +1,18 @@
 ---
 description: Performing basic operation to use Notary in tandem with Docker Content Trust.
 keywords: docker, Notary, notary-client, docker content trust, content trust
-title: Getting started with Docker Notary
+title: Get started with Notary
 ---
 
 This document describes basic use of the Notary CLI as a tool supporting Docker
 Content Trust. For more advanced use cases, you must
 [run your own Notary service](running_a_service.md). Read the
 [use the Notary client for advanced users](advanced_usage.md) documentation.
+> **Warning**:  Assistance with the open-source notary client or server is not provided by 
+Docker Enterprise Customer Support.
 
+
+  
 ## What is Notary
 
 Notary is a tool for publishing and managing trusted collections of content.
@@ -27,8 +31,6 @@ freshness of your content.
 You can download precompiled notary binary for 64 bit Linux or macOS from the
 Notary repository's
 [Releases page on Github](https://github.com/docker/notary/releases).
-Windows is not officially tested, but if you are a developer and Windows user,
-we would appreciate any insight you can provide regarding issues.
 
 ## Understand Notary naming
 
@@ -37,7 +39,7 @@ enable Notary to run in a multi-tenant fashion, you must use this format
 when interacting with Docker Hub through the Notary client. When specifying
 Docker image names for the Notary client, the GUN format is:
 
-- For official images (identifiable by the "Official Repository" moniker), the
+- For official images (identifiable by the "Official Image" moniker), the
   image name as displayed on Docker Hub, prefixed with `docker.io/library/`. For
   example, if you would normally type `docker pull ubuntu` you must enter `notary
   {cmd} docker.io/library/ubuntu`.

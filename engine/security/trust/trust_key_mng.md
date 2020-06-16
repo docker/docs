@@ -27,14 +27,14 @@ the image repository:
 
 Delegation keys are optional, and not generated as part of the normal `docker`
 workflow.  They need to be
-[manually generated and added to the repository](trust_delegation.md#generating-delegation-keys).
+[manually generated and added to the repository](trust_delegation.md#creating-delegation-keys).
 
 **Note**: Prior to Docker Engine 1.11, the snapshot key was also generated and stored
-locally client-side. [Use the Notary CLI to manage your snapshot key locally
-again](/notary/advanced_usage.md#rotate-keys) for
-repositories created with newer versions of Docker.
+locally client-side.
+Use the Notary CLI to [manage your snapshot key locally again](../../../notary/advanced_usage.md#rotate-keys)
+for repositories created with newer versions of Docker.
 
-## Choosing a passphrase
+## Choose a passphrase
 
 The passphrases you chose for both the root key and your repository key should
 be randomly generated and stored in a password manager. Having the repository key
@@ -64,7 +64,7 @@ Docker Content Trust can store and sign with root keys from a Yubikey 4. The
 Yubikey is prioritized over keys stored in the filesystem. When you initialize a
 new repository with content trust, Docker Engine looks for a root key locally. If a
 key is not found and the Yubikey 4 exists, Docker Engine creates a root key in the
-Yubikey 4. Consult the [Notary documentation](/notary/advanced_usage.md#use-a-yubikey)
+Yubikey 4. Consult the [Notary documentation](../../../notary/advanced_usage.md#use-a-yubikey)
 for more details.
 
 Prior to Docker Engine 1.11, this feature was only in the experimental branch.
@@ -72,8 +72,8 @@ Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 ## Lost keys
 
 If a publisher loses keys it means losing the ability to sign trusted content for
-your repositories.  If you lose a key, contact [Docker
-Support](https://support.docker.com) (support@docker.com) to reset the repository
+your repositories.  If you lose a key, send an email to [Docker Hub
+Support](mailto:hub-support@docker.com) to reset the repository
 state.
 
 This loss also requires **manual intervention** from every consumer that pulled

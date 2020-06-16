@@ -1,0 +1,17 @@
+command: docker buildx imagetools
+short: Commands to work on images in registry
+long: Commands to work on images in registry
+pname: docker buildx
+plink: docker_buildx.yaml
+cname:
+- docker buildx imagetools create
+- docker buildx imagetools inspect
+clink:
+- docker_buildx_imagetools_create.yaml
+- docker_buildx_imagetools_inspect.yaml
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

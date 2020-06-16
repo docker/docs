@@ -10,8 +10,8 @@ This page explains how to set up and use a sandbox for experimenting with trust.
 The sandbox allows you to configure and try trust operations locally without
 impacting your production images.
 
-Before working through this sandbox, you should have read through the [trust
-overview](content_trust.md).
+Before working through this sandbox, you should have read through the
+[trust overview](content_trust.md).
 
 ### Prerequisites
 
@@ -21,9 +21,9 @@ have privileges to run docker commands on your local machine or in the VM.
 
 This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
-[list of supported platforms](../../installation/index.md). To install
+[list of supported platforms](../../install/index.md). To install
 Docker Compose, see the
-[detailed instructions here](/compose/install/).
+[detailed instructions here](../../../compose/install.md).
 
 ## What is in the sandbox?
 
@@ -38,7 +38,7 @@ production trust environment, and sets up these additional components.
 | Notary server   | The service that does all the heavy-lifting of managing trust                                                                               |
 
 This means you run your own content trust (Notary) server and registry.
-If you work exclusively with the Docker Hub, you would not need with these components.
+If you work exclusively with the Docker Hub, you would not need these components.
 They are built into the Docker Hub for you. For the sandbox, however, you build
 your own entire, mock production environment.
 
@@ -77,9 +77,9 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         version: "2"
         services:
           notaryserver:
-            image: dockersecurity/notary_autobuilds:server-v0.4.2
+            image: dockersecurity/notary_autobuilds:server-v0.5.1
             volumes:
-              - notarycerts:/go/src/github.com/docker/notary/fixtures
+              - notarycerts:/var/lib/notary/fixtures
             networks:
               - sandbox
             environment:
@@ -121,7 +121,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
     images are downloaded from Docker Hub.
 
 
-## Playing in the sandbox
+## Play in the sandbox
 
 Now that everything is setup, you can go into your `trustsandbox` container and
 start testing Docker content trust. From your host machine, obtain a shell
@@ -283,7 +283,7 @@ feel free to play with it and see how it behaves. If you find any security
 issues with Docker, feel free to send us an email at <security@docker.com>.
 
 
-## Cleaning up your sandbox
+## Clean up your sandbox
 
 When you are done, and want to clean up all the services you've started and any
 anonymous volumes that have been created, just run the following command in the

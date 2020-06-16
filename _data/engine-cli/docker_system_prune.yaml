@@ -117,11 +117,13 @@ examples: |-
   Total reclaimed space: 13.5 MB
   ```
 
-  > **Note**: The `--volumes` option was added in Docker 17.06.1. Older versions
-  > of Docker prune volumes by default, along with other Docker objects. On older
-  > versions, run `docker container prune`, `docker network prune`, and
-  > `docker image prune` separately to remove unused containers, networks, and
-  > images, without removing volumes.
+  > **Note**
+  >
+  > The `--volumes` option was added in Docker 17.06.1. Older versions of Docker
+  > prune volumes by default, along with other Docker objects. On older versions,
+  > run `docker container prune`, `docker network prune`, and `docker image prune`
+  > separately to remove unused containers, networks, and images, without removing
+  > volumes.
 
 
   ### Filtering

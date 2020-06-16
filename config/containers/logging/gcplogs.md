@@ -17,7 +17,7 @@ and `log-opt` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
 `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
 configuring Docker using `daemon.json`, see
-[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `gcplogs` and sets the
 `gcp-meta-name` option.
@@ -65,8 +65,8 @@ Cloud Logging driver options:
 |:----------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `gcp-project`   | optional | Which GCP project to log to. Defaults to discovering this value from the GCE metadata service.                                                               |
 | `gcp-log-cmd`   | optional | Whether to log the command that the container was started with. Defaults to false.                                                                           |
-| `labels`        | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container.                                    |
-| `env`           | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for the container.                  |
+| `labels`        | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container.                                |
+| `env`           | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for the container.              |
 | `env-regex`     | optional | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md). |
 | `gcp-meta-zone` | optional | Zone name for the instance.                                                                                                                                  |
 | `gcp-meta-name` | optional | Instance name.                                                                                                                                               |
@@ -79,13 +79,16 @@ logging message.
 Below is an example of the logging options required to log to the default
 logging destination which is discovered by querying the GCE metadata server.
 
-    docker run --log-driver=gcplogs \
-        --log-opt labels=location \
-        --log-opt env=TEST \
-        --log-opt gcp-log-cmd=true \
-        --env "TEST=false" \
-        --label location=west \
-        your/application
+```bash
+$ docker run \
+    --log-driver=gcplogs \
+    --log-opt labels=location \
+    --log-opt env=TEST \
+    --log-opt gcp-log-cmd=true \
+    --env "TEST=false" \
+    --label location=west \
+    your/application
+```
 
 This configuration also directs the driver to include in the payload the label
 `location`, the environment variable `ENV`, and the command used to start the
@@ -94,8 +97,11 @@ container.
 An example of the logging options for running outside of GCE (the daemon must be
 configured with GOOGLE_APPLICATION_CREDENTIALS):
 
-    docker run --log-driver=gcplogs \
-        --log-opt gcp-project=test-project
-        --log-opt gcp-meta-zone=west1 \
-        --log-opt gcp-meta-name=`hostname` \
-        your/application
+```bash
+$ docker run \
+    --log-driver=gcplogs \
+    --log-opt gcp-project=test-project
+    --log-opt gcp-meta-zone=west1 \
+    --log-opt gcp-meta-name=`hostname` \
+    your/application
+```

@@ -72,7 +72,7 @@ pre code {
     padding: 5px 0 10px 20px;
     float: left;
     min-height: 100px;
-    margin: 0px 0 15px 0;
+    margin: 0 0 15px 0;
     width: 100%;
 }
 
@@ -116,8 +116,26 @@ pre code {
 }
 
 a.anchorLink {
+    font-size: 0.5em;
     margin-left: 5px;
     visibility: hidden;
+}
+
+h1:hover > a.anchorLink,
+h2:hover > a.anchorLink,
+h3:hover > a.anchorLink
+{
+    visibility: visible;
+}
+
+a.glossary {
+    color: $body-text-color;
+    text-decoration: none;
+    outline: none;
+     &:hover {
+        opacity: 1;
+        text-decoration: none;
+    }
 }
 
 .highlighter-rouge {

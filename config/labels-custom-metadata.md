@@ -78,33 +78,33 @@ the lifetime of the object. To change these labels you must recreate the object.
 Labels on swarm nodes and services can be updated dynamically.
 
 - Images and containers
-  - [Adding labels to images](/engine/reference/builder.md#label)
-  - [Overriding a container's labels at runtime](/engine/reference/commandline/run.md#set-metadata-on-container--l---label---label-file)
-  - [Inspecting labels on images or containers](/engine/reference/commandline/inspect.md)
-  - [Filtering images by label](/engine/reference/commandline/images.md#filtering)
-  - [Filtering containers by label](/engine/reference/commandline/ps.md#filtering)
+  - [Adding labels to images](../engine/reference/builder.md#label)
+  - [Overriding a container's labels at runtime](../engine/reference/commandline/run.md#set-metadata-on-container--l---label---label-file)
+  - [Inspecting labels on images or containers](../engine/reference/commandline/inspect.md)
+  - [Filtering images by label](../engine/reference/commandline/images.md#filtering)
+  - [Filtering containers by label](../engine/reference/commandline/ps.md#filtering)
 
 - Local Docker daemons
-  - [Adding labels to a Docker daemon at runtime](/engine/reference/commandline/dockerd.md)
-  - [Inspecting a Docker daemon's labels](/engine/reference/commandline/info.md)
+  - [Adding labels to a Docker daemon at runtime](../engine/reference/commandline/dockerd.md)
+  - [Inspecting a Docker daemon's labels](../engine/reference/commandline/info.md)
 
 - Volumes
-  - [Adding labels to volumes](/engine/reference/commandline/volume_create.md)
-  - [Inspecting a volume's labels](/engine/reference/commandline/volume_inspect.md)
-  - [Filtering volumes by label](/engine/reference/commandline/volume_ls.md#filtering)
+  - [Adding labels to volumes](../engine/reference/commandline/volume_create.md)
+  - [Inspecting a volume's labels](../engine/reference/commandline/volume_inspect.md)
+  - [Filtering volumes by label](../engine/reference/commandline/volume_ls.md#filtering)
 
 - Networks
-  - [Adding labels to a network](/engine/reference/commandline/network_create.md)
-  - [Inspecting a network's labels](/engine/reference/commandline/network_inspect.md)
-  - [Filtering networks by label](/engine/reference/commandline/network_ls.md#filtering)
+  - [Adding labels to a network](../engine/reference/commandline/network_create.md)
+  - [Inspecting a network's labels](../engine/reference/commandline/network_inspect.md)
+  - [Filtering networks by label](../engine/reference/commandline/network_ls.md#filtering)
 
 - Swarm nodes
-  - [Adding or updating a swarm node's labels](/engine/reference/commandline/node_update.md#add-label-metadata-to-a-node)
-  - [Inspecting a swarm node's labels](/engine/reference/commandline/node_inspect.md)
-  - [Filtering swarm nodes by label](/engine/reference/commandline/node_ls.md#filtering)
+  - [Adding or updating a swarm node's labels](../engine/reference/commandline/node_update.md#add-label-metadata-to-a-node)
+  - [Inspecting a swarm node's labels](../engine/reference/commandline/node_inspect.md)
+  - [Filtering swarm nodes by label](../engine/reference/commandline/node_ls.md#filtering)
 
 - Swarm services
-  - [Adding labels when creating a swarm service](/engine/reference/commandline/service_create.md#set-metadata-on-a-service-l-label)
-  - [Updating a swarm service's labels](/engine/reference/commandline/service_update.md)
-  - [Inspecting a swarm service's labels](/engine/reference/commandline/service_inspect.md)
-  - [Filtering swarm services by label](/engine/reference/commandline/service_ls.md#filtering)
+  - [Adding labels when creating a swarm service](../engine/reference/commandline/service_create.md#set-metadata-on-a-service-l-label)
+  - [Updating a swarm service's labels](../engine/reference/commandline/service_update.md)
+  - [Inspecting a swarm service's labels](../engine/reference/commandline/service_inspect.md)
+  - [Filtering swarm services by label](../engine/reference/commandline/service_ls.md#filtering)

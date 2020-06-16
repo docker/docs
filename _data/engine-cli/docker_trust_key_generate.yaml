@@ -1,6 +1,8 @@
 command: docker trust key generate
 short: Generate and load a signing key-pair
-long: Generate and load a signing key-pair
+long: |-
+  `docker trust key generate` generates a key-pair to be used with signing,
+   and loads the private key into the local docker trust keystore.
 usage: docker trust key generate NAME
 pname: docker trust key
 plink: docker_trust_key.yaml
@@ -13,6 +15,38 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+examples: |-
+  ### Generate a key-pair
+
+  ```bash
+  $ docker trust key generate alice
+
+  Generating key for alice...
+  Enter passphrase for new alice key with ID 17acf3c:
+  Repeat passphrase for new alice key with ID 17acf3c:
+  Successfully generated and loaded private key. Corresponding public key available: alice.pub
+  $ ls
+  alice.pub
+  ```
+
+  The private signing key is encrypted by the passphrase and loaded into the docker trust keystore.
+  All passphrase requests to sign with the key will be referred to by the provided `NAME`.
+
+  The public key component `alice.pub` will be available in the current working directory, and can
+  be used directly by `docker trust signer add`.
+
+  Provide the `--dir` argument to specify a directory to generate the key in:
+
+  ```bash
+  $ docker trust key generate alice --dir /foo
+
+  Generating key for alice...
+  Enter passphrase for new alice key with ID 17acf3c:
+  Repeat passphrase for new alice key with ID 17acf3c:
+  Successfully generated and loaded private key. Corresponding public key available: alice.pub
+  $ ls /foo
+  alice.pub
+  ```
 deprecated: false
 experimental: false
 experimentalcli: false

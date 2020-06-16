@@ -46,6 +46,7 @@ swarm to maintain a consistent view of the swarm and all services running on it.
 swarm.
 * creates an overlay network named `ingress` for publishing service ports
 external to the swarm.
+* creates an overlay default IP addresses and subnet mask for your networks
 
 The output for `docker swarm init` provides the connection command to use when
 you join new worker nodes to the swarm:
@@ -62,6 +63,50 @@ To add a worker to this swarm, run the following command:
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
+### Configuring default address pools
+
+By default Docker Swarm uses a default address pool `10.0.0.0/8` for global scope (overlay) networks. Every 
+network that does not have a subnet specified will have a subnet sequentially allocated from this pool. In 
+some circumstances it may be desirable to use a different default IP address pool for networks. 
+
+For example, if the default `10.0.0.0/8` range conflicts with already allocated address space in your network, 
+then it is desirable to ensure that networks use a different range without requiring Swarm users to specify 
+each subnet with the `--subnet` command. 
+
+To configure custom default address pools, you must define pools at Swarm initialization using the 
+`--default-addr-pool` command line option. This command line option uses CIDR notation for defining the subnet mask.
+To create the custom address pool for Swarm, you must define at least one default address pool, and an optional default address pool subnet mask. For example, for the `10.0.0.0/27`, use the value `27`.
+
+Docker allocates subnet addresses from the address ranges specified by the `--default-addr-pool` option. For example, a command line option `--default-addr-pool 10.10.0.0/16` indicates that Docker will allocate subnets from that `/16` address range. If `--default-addr-pool-mask-len` were unspecified or set explicitly to 24, this would result in 256 `/24` networks of the form `10.10.X.0/24`.
+
+The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`). The size of 16 there represents the number of networks one can create within that `default-addr-pool` range. The `--default-addr-pool` option may occur multiple times with each option providing additional addresses for docker to use for overlay subnets.
+
+The format of the command is:
+
+```bash
+$ docker swarm init --default-addr-pool <IP range in CIDR> [--default-addr-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
+```
+
+To create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
+
+```bash
+$ docker swarm init --default-addr-pool 10.20.0.0/16
+```
+
+To create a default IP address pool with a `/16` (class B) for the `10.20.0.0` and `10.30.0.0` networks, and to 
+create a subnet mask of `/26` for each network looks like this:
+
+```bash
+$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool 10.30.0.0/16 --default-addr-pool-mask-length 26
+```
+
+In this example, `docker network create -d overlay net1` will result in `10.20.0.0/26` as the allocated subnet for `net1`, 
+and `docker network create -d overlay net2` will result in `10.20.0.64/26` as the allocated subnet for `net2`. This continues until 
+all the subnets are exhausted. 
+
+Refer to the following pages for more information:
+- [Swarm networking](./networking.md) for more information about the default address pool usage
+- `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md) for more detail on the `--default-addr-pool` flag.
 
 ### Configure the advertise address
 

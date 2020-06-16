@@ -35,7 +35,7 @@ of another container. Of course, if the host system is setup
 accordingly, containers can interact with each other through their
 respective network interfaces — just like they can interact with
 external hosts. When you specify public ports for your containers or use
-[*links*](../userguide/networking/default_network/dockerlinks.md)
+[*links*](../../network/links.md)
 then IP traffic is allowed between containers. They can ping each other,
 send/receive UDP packets, and establish TCP connections, but that can be
 restricted if necessary. From a network architecture point of view, all
@@ -78,8 +78,9 @@ started in 2006, and initially merged in kernel 2.6.24.
 ## Docker daemon attack surface
 
 Running containers (and applications) with Docker implies running the
-Docker daemon. This daemon currently requires `root` privileges, and you
-should therefore be aware of some important details.
+Docker daemon. This daemon requires `root` privileges unless you opt-in
+to [Rootless mode](rootless.md) (experimental), and you should therefore
+be aware of some important details.
 
 First of all, **only trusted users should be allowed to control your
 Docker daemon**. This is a direct consequence of some powerful Docker
@@ -108,10 +109,17 @@ socket.
 
 You can also expose the REST API over HTTP if you explicitly decide to do so.
 However, if you do that, be aware of the above mentioned security
-implications. Ensure that it is reachable only from a
-trusted network or VPN or protected with a mechanism such as `stunnel` and
-client SSL certificates. You can also secure API endpoints with [HTTPS and
-certificates](https.md).
+implications.
+Note that even if you have a firewall to limit accesses to the REST API 
+endpoint from other hosts in the network, the endpoint can be still accessible
+from containers, and it can easily result in the privilege escalation.
+Therefore it is *mandatory* to secure API endpoints with 
+[HTTPS and certificates](https.md).
+It is also recommended to ensure that it is reachable only from a trusted
+network or VPN.
+
+You can also use `DOCKER_HOST=ssh://USER@HOST` or `ssh -L /path/to/docker.sock:/var/run/docker.sock`
+instead if you prefer SSH over TLS.
 
 The daemon is also potentially vulnerable to other inputs, such as image
 loading from either disk with `docker load`, or from the network with
@@ -199,6 +207,21 @@ capability removal, or less secure through the addition of capabilities.
 The best practice for users would be to remove all capabilities except
 those explicitly required for their processes.
 
+## Docker Content Trust Signature Verification
+
+The Docker Engine can be configured to only run signed images. The Docker Content 
+Trust signature verification feature is built directly into the `dockerd` binary.  
+This is configured in the Dockerd configuration file. 
+
+To enable this feature, trustpinning can be configured in `daemon.json`, whereby 
+only repositories signed with a user-specified root key can be pulled and run.
+  
+This feature provides more insight to administrators than previously available with
+the CLI for enforcing and performing image signature verification. 
+
+For more information on configuring Docker Content Trust Signature Verificiation, go to 
+[Content trust in Docker](trust/content_trust.md).
+
 ## Other kernel security features
 
 Capabilities are just one of the many security features provided by
@@ -252,8 +275,8 @@ pull requests, or comments on the Docker community forums.
 
 ## Related information
 
-* [Use trusted images](../security/trust/index.md)
-* [Seccomp security profiles for Docker](../security/seccomp.md)
-* [AppArmor security profiles for Docker](../security/apparmor.md)
+* [Use trusted images](trust/index.md)
+* [Seccomp security profiles for Docker](seccomp.md)
+* [AppArmor security profiles for Docker](apparmor.md)
 * [On the Security of Containers (2014)](https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e)
-* [Docker swarm mode overlay network security model](../userguide/networking/overlay-security-model.md)
+* [Docker swarm mode overlay network security model](../../network/overlay.md)

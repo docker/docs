@@ -8,7 +8,7 @@ redirect_from:
 title: Start containers automatically
 ---
 
-Docker provides [restart policies](/engine/reference/run.md#restart-policies---restart)
+Docker provides [restart policies](../../engine/reference/run.md#restart-policies---restart)
 to control whether your containers start automatically when they exit, or when
 Docker restarts. Restart policies ensure that linked containers are started in
 the correct order. Docker recommends that you use restart policies, and avoid
@@ -28,14 +28,14 @@ any of the following:
 |:-----------------|:------------------------------------------------------------------------------------------------|
 | `no`             | Do not automatically restart the container. (the default)                                       |
 | `on-failure`     | Restart the container if it exits due to an error, which manifests as a non-zero exit code.     |
-| `unless-stopped` | Restart the container unless it is explicitly stopped or Docker itself is stopped or restarted. |
-| `always`         | Always restart the container if it stops.                                                       |
+| `always`         | Always restart the container if it stops. If it is manually stopped, it is restarted only when Docker daemon restarts or the container itself is manually restarted. (See the second bullet listed in [restart policy details](#restart-policy-details)) |
+| `unless-stopped` | Similar to `always`, except that when the container is stopped (manually or otherwise), it is not restarted even after Docker daemon restarts. |
 
 The following example starts a Redis container and configures it to always
 restart unless it is explicitly stopped or Docker is restarted.
 
 ```bash
-$ docker run -dit --restart unless-stopped redis
+$ docker run -d --restart unless-stopped redis
 ```
 
 ### Restart policy details
@@ -53,7 +53,7 @@ Keep the following in mind when using restart policies:
 
 - Restart policies only apply to _containers_. Restart policies for swarm
   services are configured differently. See the
-  [flags related to service restart](/engine/reference/commandline/service_create/).
+  [flags related to service restart](../../engine/reference/commandline/service_create.md).
 
 
 ## Use a process manager
@@ -64,8 +64,11 @@ Docker depend on Docker containers, you can use a process manager such as
 [systemd](http://freedesktop.org/wiki/Software/systemd/), or
 [supervisor](http://supervisord.org/) instead.
 
-> **Warning**: Do not try to combine Docker restart policies with host-level
-> process managers, because this creates conflicts.
+> **Warning**
+>
+> Do not try to combine Docker restart policies with host-level process managers,
+> because this creates conflicts.
+{:.warning}
 
 To use a process manager, configure it to start your container or service using
 the same `docker start` or `docker service` command you would normally use to
@@ -77,7 +80,10 @@ process manager for more details.
 Process managers can also run within the container to check whether a process is
 running and starts/restart it if not.
 
-> **Warning**: These are not Docker-aware and just monitor operating system processes within the container.
+> **Warning**
 >
-> Docker does not recommend this approach, because it is platform-dependent and even differs within different versions of a given Linux distribution.
-
+> These are not Docker-aware and just monitor operating system processes within
+> the container. Docker does not recommend this approach, because it is
+> platform-dependent and even differs within different versions of a given Linux
+> distribution.
+{:.warning}

@@ -1,6 +1,7 @@
 User-agent: *
 
 # Docker Engine archives
+Disallow: /edge/
 Disallow: /v1.4/
 Disallow: /v1.5/
 Disallow: /v1.6/
@@ -13,12 +14,23 @@ Disallow: /v1.12/
 Disallow: /v1.13/
 Disallow: /v17.03/
 Disallow: /v17.06/
+Disallow: /v17.09/
+Disallow: /v17.12/
+Disallow: /v18.03/
+Disallow: /v18.09/
 
 # Docker Datacenter archives
-Disallow: /datacenter/dtr/2.2
-Disallow: /datacenter/dtr/2.1
 Disallow: /datacenter/dtr/2.0
+Disallow: /datacenter/dtr/2.1
+Disallow: /datacenter/dtr/2.2
+Disallow: /datacenter/dtr/2.3
+Disallow: /datacenter/dtr/2.4
+Disallow: /datacenter/dtr/2.5
+Disallow: /datacenter/dtr/2.6
 
+Disallow: /datacenter/ucp/3.1
+Disallow: /datacenter/ucp/3.0
+Disallow: /datacenter/ucp/2.2
 Disallow: /datacenter/ucp/2.1
 Disallow: /datacenter/ucp/2.0
 Disallow: /datacenter/ucp/1.1

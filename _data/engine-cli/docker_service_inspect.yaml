@@ -1,14 +1,20 @@
 command: docker service inspect
 short: Display detailed information on one or more services
 long: |-
-  Inspects the specified service. This command has to be run targeting a manager
-  node.
+  Inspects the specified service.
 
   By default, this renders all results in a JSON array. If a format is specified,
   the given template will be executed for each result.
 
   Go's [text/template](http://golang.org/pkg/text/template/) package
   describes all the details of the format.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker service inspect [OPTIONS] SERVICE [SERVICE...]
 pname: docker service
 plink: docker_service.yaml
@@ -31,37 +37,125 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
-examples: "### Inspect a service by name or ID\n\nYou can inspect a service, either
-  by its *name*, or *ID*\n\nFor example, given the following service;\n\n```bash\n$
-  docker service ls\nID            NAME   MODE        REPLICAS  IMAGE\ndmu1ept4cxcf
-  \ redis  replicated  3/3       redis:3.0.6\n```\n\nBoth `docker service inspect
-  redis`, and `docker service inspect dmu1ept4cxcf`\nproduce the same result:\n\n```none\n$
-  docker service inspect redis\n\n[\n    {\n        \"ID\": \"dmu1ept4cxcfe8k8lhtux3ro3\",\n
-  \       \"Version\": {\n            \"Index\": 12\n        },\n        \"CreatedAt\":
-  \"2016-06-17T18:44:02.558012087Z\",\n        \"UpdatedAt\": \"2016-06-17T18:44:02.558012087Z\",\n
-  \       \"Spec\": {\n            \"Name\": \"redis\",\n            \"TaskTemplate\":
-  {\n                \"ContainerSpec\": {\n                    \"Image\": \"redis:3.0.6\"\n
-  \               },\n                \"Resources\": {\n                    \"Limits\":
-  {},\n                    \"Reservations\": {}\n                },\n                \"RestartPolicy\":
-  {\n                    \"Condition\": \"any\",\n                    \"MaxAttempts\":
-  0\n                },\n                \"Placement\": {}\n            },\n            \"Mode\":
-  {\n                \"Replicated\": {\n                    \"Replicas\": 1\n                }\n
-  \           },\n            \"UpdateConfig\": {},\n            \"EndpointSpec\":
-  {\n                \"Mode\": \"vip\"\n            }\n        },\n        \"Endpoint\":
-  {\n            \"Spec\": {}\n        }\n    }\n]\n```\n\n```bash\n$ docker service
-  inspect dmu1ept4cxcf\n\n[\n    {\n        \"ID\": \"dmu1ept4cxcfe8k8lhtux3ro3\",\n
-  \       \"Version\": {\n            \"Index\": 12\n        },\n        ...\n    }\n]\n```\n\n###
-  Formatting\n\nYou can print the inspect output in a human-readable format instead
-  of the default\nJSON output, by using the `--pretty` option:\n\n```bash\n$ docker
-  service inspect --pretty frontend\n\nID:\t\tc8wgl7q4ndfd52ni6qftkvnnp\nName:\t\tfrontend\nLabels:\n
-  - org.example.projectname=demo-app\nService Mode:\tREPLICATED\n Replicas:\t\t5\nPlacement:\nUpdateConfig:\n
-  Parallelism:\t0\n On failure:\tpause\n Max failure ratio:\t0\nContainerSpec:\n Image:\t\tnginx:alpine\nResources:\nNetworks:\tnet1\nEndpoint
-  Mode:  vip\nPorts:\n PublishedPort = 4443\n  Protocol = tcp\n  TargetPort = 443\n
-  \ PublishMode = ingress\n```\n\nYou can also use `--format pretty` for the same
-  effect.\n\n\n#### Find the number of tasks running as part of a service\n\nThe `--format`
-  option can be used to obtain specific information about a\nservice. For example,
-  the following command outputs the number of replicas\nof the \"redis\" service.\n\n```bash\n$
-  docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis\n\n10\n```"
+examples: |-
+  ### Inspect a service by name or ID
+
+  You can inspect a service, either by its *name*, or *ID*
+
+  For example, given the following service;
+
+  ```bash
+  $ docker service ls
+  ID            NAME   MODE        REPLICAS  IMAGE
+  dmu1ept4cxcf  redis  replicated  3/3       redis:3.0.6
+  ```
+
+  Both `docker service inspect redis`, and `docker service inspect dmu1ept4cxcf`
+  produce the same result:
+
+  ```bash
+  $ docker service inspect redis
+
+  [
+    {
+      "ID": "dmu1ept4cxcfe8k8lhtux3ro3",
+      "Version": {
+        "Index": 12
+      },
+      "CreatedAt": "2016-06-17T18:44:02.558012087Z",
+      "UpdatedAt": "2016-06-17T18:44:02.558012087Z",
+      "Spec": {
+        "Name": "redis",
+        "TaskTemplate": {
+          "ContainerSpec": {
+            "Image": "redis:3.0.6"
+          },
+          "Resources": {
+            "Limits": {},
+            "Reservations": {}
+          },
+          "RestartPolicy": {
+            "Condition": "any",
+            "MaxAttempts": 0
+          },
+          "Placement": {}
+        },
+        "Mode": {
+          "Replicated": {
+            "Replicas": 1
+          }
+        },
+        "UpdateConfig": {},
+        "EndpointSpec": {
+          "Mode": "vip"
+        }
+      },
+      "Endpoint": {
+        "Spec": {}
+      }
+    }
+  ]
+  ```
+
+  ```bash
+  $ docker service inspect dmu1ept4cxcf
+
+  [
+    {
+      "ID": "dmu1ept4cxcfe8k8lhtux3ro3",
+      "Version": {
+        "Index": 12
+      },
+      ...
+    }
+  ]
+  ```
+
+  ### Formatting
+
+  You can print the inspect output in a human-readable format instead of the default
+  JSON output, by using the `--pretty` option:
+
+  ```bash
+  $ docker service inspect --pretty frontend
+
+  ID:     c8wgl7q4ndfd52ni6qftkvnnp
+  Name:   frontend
+  Labels:
+   - org.example.projectname=demo-app
+  Service Mode:   REPLICATED
+   Replicas:      5
+  Placement:
+  UpdateConfig:
+   Parallelism:   0
+   On failure:    pause
+   Max failure ratio: 0
+  ContainerSpec:
+   Image:     nginx:alpine
+  Resources:
+  Networks:   net1
+  Endpoint Mode:  vip
+  Ports:
+   PublishedPort = 4443
+    Protocol = tcp
+    TargetPort = 443
+    PublishMode = ingress
+  ```
+
+  You can also use `--format pretty` for the same effect.
+
+
+  #### Find the number of tasks running as part of a service
+
+  The `--format` option can be used to obtain specific information about a
+  service. For example, the following command outputs the number of replicas
+  of the "redis" service.
+
+  ```bash
+  $ docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis
+
+  10
+  ```
 deprecated: false
 min_api_version: "1.24"
 experimental: false

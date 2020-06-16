@@ -27,7 +27,7 @@ a.button.outline-btn.min-hgt {
 
 .button {
     margin: 10px 10px 10px 0;
-    font-family: Geomanist Book;
+    font-family: Geomanist Book, sans-serif;
     padding: 12px 35px 10px;
     min-width: 200px;
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
@@ -61,8 +61,7 @@ a.button.outline-btn.min-hgt {
 
 .outline-btn {
     background: #fff;
-    border: 1px solid;
-    border-color: #0087C8;
+    border: 1px solid #0087C8;
     text-decoration: none;
     margin: 0;
 }

@@ -7,7 +7,7 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](opensource/).
+[Contribution guidelines](/opensource/).
 
 ### Files not edited here
 
@@ -30,7 +30,7 @@ you give it a try!
 
 ### Overall doc improvements
 
-Most commits will be made against the `master` branch. This include:
+Most commits will be made against the `master` branch. This includes:
 
 - Conceptual and task-based information not specific to new features
 - Restructuring / rewriting
@@ -121,8 +121,5 @@ know.
 
 ## Style guide
 
-If you have questions about how to write for Docker's documentation, have a look
-at the [style guide](/opensource/doc-style/). The style
-guide provides guidance about grammar, syntax, formatting, styling, language, or
-tone. If something isn't clear in the guide, submit an issue to let us
-know or submit a pull request to help us improve it.
+Docker does not currently maintain a style guide. Use your best judgment, and
+try to follow the example set by the existing documentation.

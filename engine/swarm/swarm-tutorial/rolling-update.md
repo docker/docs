@@ -7,15 +7,15 @@ notoc: true
 
 In a previous step of the tutorial, you [scaled](scale-service.md) the number of
 instances of a service. In this part of the tutorial, you deploy a service based
-on the Redis 3.0.6 container image. Then you upgrade the service to use the
+on the Redis 3.0.6 container tag. Then you upgrade the service to use the
 Redis 3.0.7 container image using rolling updates.
 
 1.  If you haven't already, open a terminal and ssh into the machine where you
     run your manager node. For example, the tutorial uses a machine named
     `manager1`.
 
-2.  Deploy Redis 3.0.6 to the swarm and configure the swarm with a 10 second
-    update delay:
+2.  Deploy your Redis tag to the swarm and configure the swarm with a 10 second
+    update delay. Note that the following example shows an older Redis tag:
 
     ```bash
     $ docker service create \

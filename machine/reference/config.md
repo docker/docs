@@ -2,6 +2,7 @@
 description: Show client configuration
 keywords: machine, config, subcommand
 title: docker-machine config
+hide_from_sitemap: true
 ---
 
 ```none
@@ -19,11 +20,11 @@ Options:
 
 For example:
 
-```none
+```bash
 $ docker-machine config dev \
---tlsverify \
---tlscacert="/Users/ehazlett/.docker/machines/dev/ca.pem" \
---tlscert="/Users/ehazlett/.docker/machines/dev/cert.pem" \
---tlskey="/Users/ehazlett/.docker/machines/dev/key.pem" \
--H tcp://192.168.99.103:2376
+    --tlsverify \
+    --tlscacert="/Users/ehazlett/.docker/machines/dev/ca.pem" \
+    --tlscert="/Users/ehazlett/.docker/machines/dev/cert.pem" \
+    --tlskey="/Users/ehazlett/.docker/machines/dev/key.pem" \
+    -H tcp://192.168.99.103:2376
 ```

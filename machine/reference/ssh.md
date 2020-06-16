@@ -2,14 +2,16 @@
 description: Log into or run a command on a machine using SSH.
 keywords: machine, ssh, subcommand
 title: docker-machine ssh
+hide_from_sitemap: true
 ---
 
 Log into or run a command on a machine using SSH.
 
 To login, just run `docker-machine ssh machinename`:
 
-```none
+```bash
 $ docker-machine ssh dev
+
                         ##        .
                   ## ## ##       ==
                ## ## ## ##      ===
@@ -33,7 +35,7 @@ bin/     etc/     init     linuxrc  opt/     root/    sbin/    tmp      var/
 You can also specify commands to run remotely by appending them directly to the
 `docker-machine ssh` command, much like the regular `ssh` program works:
 
-```none
+```bash
 $ docker-machine ssh dev free
 
 total         used         free       shared      buffers
@@ -44,7 +46,7 @@ Swap:      1212036            0      1212036
 
 Commands with flags work as well:
 
-```none
+```bash
 $ docker-machine ssh dev df -h
 
 Filesystem                Size      Used Available Use% Mounted on

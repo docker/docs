@@ -2,6 +2,7 @@
 description: Oracle VirtualBox driver for machine
 keywords: machine, Oracle VirtualBox, driver
 title: Oracle VirtualBox
+hide_from_sitemap: true
 ---
 
 Create machines locally using [VirtualBox](https://www.virtualbox.org/).
@@ -35,11 +36,11 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-hostonly-no-dhcp`: Disable the Host Only DHCP Server
 -   `--virtualbox-import-boot2docker-vm`: The name of a Boot2Docker VM to import.
 -   `--virtualbox-memory`: Size of memory for the host in MB.
--   `--virtualbox-nat-nictype`: Specify the NAT Network Adapter Type. Possible values are are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III) and 'virtio' Paravirtualized network adapter.
+-   `--virtualbox-nat-nictype`: Specify the NAT Network Adapter Type. Possible values are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III) and 'virtio' Paravirtualized network adapter.
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the vm is started
--   `--virtualbox-share-folder`: Mount the specified directory instead of the default home location. Format: dir:name
+-   `--virtualbox-share-folder`: Mount the specified directory instead of the default home location.
 -   `--virtualbox-ui-type`: Specify the UI Type: (gui|sdl|headless|separate)
 
 The `--virtualbox-boot2docker-url` flag takes a few different forms. By
@@ -67,6 +68,12 @@ Machine specifies the DHCP lower bound to `.100` and the upper bound
 to `.254`. For example, a specified CIDR of `192.168.24.1/24` would have a
 DHCP server between `192.168.24.2-25`, a lower bound of `192.168.24.100` and
 upper bound of `192.168.24.254`.
+
+With the flag `--virtualbox-share-folder`, you can specify which folder the host 
+shares with the created machine. The format is `local-folder:machine-folder`. 
+For example, `\\?\C:\docker-share:\home\users\`. if you specify the flag with the
+docker-toolbox using docker-machine from a Windows cmd, it looks like 
+`C:\docker-share\\:/home/users`. The `:` sign needs to be escaped.
 
 #### Environment variables and default values
 

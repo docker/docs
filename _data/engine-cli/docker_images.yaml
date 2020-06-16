@@ -214,8 +214,7 @@ examples: |-
   511136ea3c5a
   ```
 
-  > **Note**: Docker warns you if any containers exist that are using these
-  > untagged images.
+  Docker warns you if any containers exist that are using these untagged images.
 
 
   #### Show images with a given label
@@ -307,6 +306,16 @@ examples: |-
   busybox             glibc               21c16b6787c6        5 weeks ago         4.19 MB
   ```
 
+  Filtering with multiple `reference` would give, either match A or B:
+
+  ```bash
+  $ docker images --filter=reference='busy*:uclibc' --filter=reference='busy*:glibc'
+
+  REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+  busybox             uclibc              e02e811dd08f        5 weeks ago         1.09 MB
+  busybox             glibc               21c16b6787c6        5 weeks ago         4.19 MB
+  ```
+
   ### Format the output
 
   The formatting option (`--format`) will pretty print container output
@@ -329,7 +338,7 @@ examples: |-
   `table` directive, will include column headers as well.
 
   The following example uses a template without headers and outputs the
-  `ID` and `Repository` entries separated by a colon for all images:
+  `ID` and `Repository` entries separated by a colon (`:`) for all images:
 
   ```bash
   $ docker images --format "{{.ID}}: {{.Repository}}"

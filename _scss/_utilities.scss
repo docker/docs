@@ -64,7 +64,7 @@ i.fa.fa-outdent {
 
 
 .block {
-    padding: 0px 15px 10px 15px;
+    padding: 0 15px 10px 15px;
 }
 
 
@@ -86,14 +86,13 @@ img.inline {
 
 .search-form {
     float: left;
-    margin: 5px 0 0px;
+    margin: 5px 0 0;
     // width: 200px;
     & input[type=text] {
-        background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
-        background-position: 10px 9px;
+        background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
         border: 0;
         color: #0C5176;
-        border-radius: 0px;
+        border-radius: 0;
         margin: 0;
         transition: all 0.2s ease;
         width: 230px;
@@ -101,8 +100,7 @@ img.inline {
 }
 
 .nav-secondary-tabs .search-form input[type=search] {
-    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
-    background-position: 10px 9px;
+    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
     border: 0;
     box-shadow: none;
     color: #fff;
@@ -111,7 +109,7 @@ img.inline {
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
-    padding: 0px 0 0 35px;
+    padding: 0 0 0 35px;
     width: 100%;
 }
 
@@ -128,22 +126,19 @@ input[type=text],
 }
 
 .nav-secondary-tabs .search-form input[type=search]:focus {
-    background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat;
-    background-position: 10px 9px;
+    background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
 }
 
 .nav-secondary-tabs.affix input[type=search],
 input[type=text] {
-    background: rgba(0, 0, 0, 0.17) url(/images/search.png) no-repeat;
-    background-position: 10px 9px;
+    background: rgba(0, 0, 0, 0.17) url(/images/search.png) no-repeat 10px 9px;
     border: 1px solid transparent;
     box-shadow: none;
     transition: all 0.2s ease;
 }
 
 .nav-secondary input[type=search] {
-    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
-    background-position: 10px 9px;
+    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
     border: 0;
     box-shadow: none;
     color: #fff;
@@ -152,12 +147,11 @@ input[type=text] {
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
-    padding: 0px 0 0 35px;
+    padding: 0 0 0 35px;
 }
 
 .nav-secondary .search-form input[type=search]:focus {
-    background: rgba(255,255,255,0.17) url(/images/search.png) no-repeat;
-    background-position: 10px 9px;
+    background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
 }
 
 .search-form input[type=search]::-webkit-input-placeholder {
@@ -214,19 +208,25 @@ div#autocompleteResults {
     background: #E6F5FD;
     border: 1px solid #eee;
     box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.28);
-    padding: 20px 0 15px 0px;
+    padding: 20px 0 15px 0;
     margin: 10px 0 0 0;
     position: absolute;
-    width: 600px!important;
+    width: 600px;
     z-index: 9999;
 }
 
 ul.autocompleteList {
     list-style: none;
+    max-width: 100%;
+
+    @include before-lg-width {
+        padding: 0;
+    }
 }
 
 .autocompleteList li {
     padding: 5px 0 7px 0;
+    max-width: 100%;
 }
 
 div#autocompleteResults span {
@@ -246,25 +246,29 @@ div#autocompleteResults span {
 .autocompleteList {
   list-style-type: none;
   width: 400px;
-/* commented out 0px padding to allow inherit padding, search results on autocompleteList were getting smashed up against left margin due to this */
-/*  padding:0px; */
-  margin-bottom: 0px;
+/* commented out 0 padding to allow inherit padding, search results on autocompleteList were getting smashed up against left margin due to this */
+/*  padding: 0; */
+  margin-bottom: 0;
 }
 
 .autoCompleteResult {
     border-bottom: 1px solid rgba(203, 205, 209, 0.4);
     padding: 15px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 #autocompleteShowAll {
-  padding: 20px 15px 0 0;
+  padding: 20px 15px;
 }
 
 .autocompleteList li {
   width: 380px;
-  border: 0px;
+  border: 0;
   padding-right: 20px;
-  margin: 0px;
+  margin: 0;
 }
 /*
   *
@@ -301,18 +305,16 @@ input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:
     {
       display: none !important;
     }
-    #ratings-div 
+    #ratings-div
     {
       display: none !important;
     }
 }
 
 .alert-info {
-    border: 0;
+    border: 0 #bce8f1;
     border-radius: 0;
-    color: #31708f;
     background-color: #3F51B5!important;
-    border-color: #bce8f1;
     text-align: center;
     color: #fff;
     margin-bottom: 0;

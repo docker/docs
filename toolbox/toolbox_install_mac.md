@@ -7,11 +7,7 @@ title: Install Docker Toolbox on macOS
 
 Docker Toolbox provides a way to use Docker on older Macs
 that do not meet
-minimal system requirements for [Docker for Mac](/docker-for-mac/index.md).
-
-If you have not done so already, download the installer here:
-
-[Get Docker Toolbox for Mac](https://download.docker.com/mac/stable/DockerToolbox.pkg){: class="button outline-btn" }
+minimal system requirements for [Docker Desktop for Mac](../docker-for-mac/index.md).
 
 ## What you get and how it works
 
@@ -32,7 +28,7 @@ attach to a small Linux VM on your machine. This VM hosts
 Docker Engine for you on your Mac.
 
 >**Tip**: One of the advantages of the newer
-[Docker for Mac](/docker-for-mac/index.md) solution is that
+[Docker Desktop for Mac](../docker-for-mac/index.md) solution is that
 it uses native virtualization and does not require
 VirtualBox to run Docker.
 
@@ -51,23 +47,31 @@ software. To find out what version of the OS you have:
     If you aren't using a supported version, you could consider upgrading your
     operating system.
 
-    If you have macOS 10.10.3 Yosemite or newer, consider using [Docker for
+    If you have macOS 10.13.0 High Sierra or newer, consider using [Docker Desktop for
     Mac](/docker-for-mac/) instead. It runs natively on the Mac, so there is no
     need for a pre-configured Docker QuickStart shell. It uses the native macOS
     Hypervisor framework for virtualization, instead of Oracle VirutalBox. Full
-    install prerequisites are provided in the Docker for Mac topic in [Docker
-    for Mac](/docker-for-mac/#what-to-know-before-you-install).
+    install prerequisites are provided in the Docker Desktop for Mac topic in [Docker
+    Desktop for Mac](/docker-for-mac/#what-to-know-before-you-install).
 
 ## Step 2: Install Docker Toolbox
 
-1. Install Docker Toolbox by double-clicking the package or by right-clicking
+> **Note**: Docker are no longer maintaining the download.docker.com url for
+> Docker Toolbox, therefore an unsigned warning (verified publisher dialog) is
+> displayed during the installation process. 
+
+1. To download the latest version of Docker Toolbox, go to [Toolbox
+   Releases](https://github.com/docker/toolbox/releases) and download the
+   latest `.pkg` file.
+
+2. Install Docker Toolbox by double-clicking the package or by right-clicking
 and choosing "Open" from the pop-up menu.
 
     The installer launches an introductory dialog, followed by an overview of what's installed.
 
     ![Install Docker Toolbox](images/mac-welcome-page.png)
 
-2. Press **Continue** to install the toolbox.
+3. Press **Continue** to install the toolbox.
 
     The installer presents you with options to customize the standard
     installation.
@@ -82,13 +86,13 @@ and choosing "Open" from the pop-up menu.
 
     For now, don't change any of the defaults.
 
-3. Press **Install** to perform the standard installation.
+4. Press **Install** to perform the standard installation.
 
      The system prompts you for your password.
 
      ![Password prompt](images/mac-password-prompt.png)
 
-4. Provide your password to continue with the installation.
+5. Provide your password to continue with the installation.
 
      When it completes, the installer provides you with some
      shortcuts. You can ignore this for now and click **Continue**.
@@ -245,7 +249,7 @@ you created with Docker Machine. In some cases, you might want to keep
 machines created with Docker Machine.
 
 For example, if you plan to re-install Docker Machine as a part of
-Docker for Mac you can continue to manage those machines through
+Docker Desktop for Mac you can continue to manage those machines through
 Docker. Or, if you have remote machines on a cloud provider and you
 plan to manage them using the provider, you wouldn't want to remove
 them. So the step to remove machines is described here as optional.
@@ -271,7 +275,7 @@ To uninstall Toolbox on a Mac, do the following:
 
     This step is optional because if you plan
     to re-install Docker Machine as a part
-    of [Docker for Mac](/docker-for-mac/index.md), you can import and
+    of [Docker Desktop for Mac](../docker-for-mac/index.md), you can import and
     continue to manage those machines through Docker.
 
 3.  In your "Applications" folder, remove the "Docker" directory,
@@ -284,9 +288,9 @@ To uninstall Toolbox on a Mac, do the following:
     ```
 
 5.  Remove the `docker`, `docker-compose`, and `docker-machine` commands from
-    the `/usr/local/bin` folder.  Docker for Mac and Brew may also have
+    the `/usr/local/bin` folder.  Docker Desktop for Mac and Brew may also have
     installed them; in case of doubt leave them, or reinstall them via Brew, or
-    rerun Docker for Mac (no need to reinstall it).
+    rerun Docker Desktop for Mac (no need to reinstall it).
 
     ```
     $ rm -f /usr/local/bin/docker
@@ -304,12 +308,12 @@ To uninstall Toolbox on a Mac, do the following:
 
 ## Next steps
 
-* Try the [Get started](/get-started/) tutorial.
+* Try the [Get started](../get-started/index.md) tutorial.
 
-* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [more tutorials and examples](../engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 
-* [Learn about Kitematic](/kitematic/userguide.md)
+* [Learn about Kitematic](../kitematic/userguide.md)
 
-* [Learn about Docker Machine](/machine/overview.md)
+* [Learn about Docker Machine](../machine/overview.md)
 
-* [Learn about Docker Compose](/compose/overview.md)
+* [Learn about Docker Compose](../compose/index.md)

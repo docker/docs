@@ -39,7 +39,7 @@ Some options are supported by specifying `--log-opt` as many times as needed:
  located in `/etc/docker/` on Linux hosts or
  `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
  +configuring Docker using `daemon.json`, see
- +[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+ +[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `fluentd` and sets the
 `fluentd-address` option.
@@ -53,7 +53,14 @@ The following example sets the log driver to `fluentd` and sets the
  }
  ```
 
- Restart Docker for the changes to take effect.
+Restart Docker for the changes to take effect.
+
+> **Note**
+>
+> `log-opts` configuration options in the `daemon.json` configuration file must
+> be provided as strings. Boolean and numeric values (such as the value for
+> `fluentd-async-connect` or `fluentd-max-retries`) must therefore be enclosed
+> in quotes (`"`).
 
 To set the logging driver for a specific container, pass the
 `--log-driver` option to `docker run`:
@@ -105,7 +112,7 @@ for advanced [log tag options](log_tags.md).
 ### fluentd-async-connect
 
 Docker connects to Fluentd in the background. Messages are buffered until the
-connection is established.
+connection is established. Defaults to `false`.
 
 ### fluentd-buffer-limit
 
@@ -118,11 +125,11 @@ How long to wait between retries. Defaults to 1 second.
 
 ### fluentd-max-retries
 
-The maximum number of retries. Defaults to 10.
+The maximum number of retries. Defaults to `4294967295` (2**32 - 1).
 
 ### fluentd-sub-second-precision
 
-Generates event logs in nanosecond resolution. Defaults to false.
+Generates event logs in nanosecond resolution. Defaults to `false`.
 
 ## Fluentd daemon management with Docker
 

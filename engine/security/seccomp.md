@@ -20,7 +20,7 @@ CONFIG_SECCOMP=y
 
 > **Note**: `seccomp` profiles require seccomp 2.2.1 which is not available on
 > Ubuntu 14.04, Debian Wheezy, or Debian Jessie. To use `seccomp` on these
-> distributions, you must download the [latest static Linux binaries](/engine/installation/linux/docker-ce/binaries.md)
+> distributions, you must download the [latest static Linux binaries](../install/binaries.md)
 > (rather than packages).
 
 ## Pass a profile for a container
@@ -29,7 +29,7 @@ The default `seccomp` profile provides a sane default for running containers wit
 seccomp and disables around 44 system calls out of 300+. It is moderately
 protective while providing wide application compatibility. The default Docker
 profile can be found
-[here](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json)).
+[here](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json).
 
 In effect, the profile is a whitelist which denies access to system calls by
 default, then whitelists specific system calls. The profile works by defining a
@@ -37,9 +37,8 @@ default, then whitelists specific system calls. The profile works by defining a
 system calls. The effect of `SCMP_ACT_ERRNO` is to cause a `Permission Denied`
 error. Next, the profile defines a specific list of system calls which are fully
 allowed, because their `action` is overridden to be `SCMP_ACT_ALLOW`. Finally,
-some specific rules are for individual system calls such as `personality`,
-`socket`, `socketcall`, and others, to allow variants of those system calls with
-specific arguments.
+some specific rules are for individual system calls such as `personality`, and others, 
+to allow variants of those system calls with specific arguments.
 
 `seccomp` is instrumental for running Docker containers with least privilege. It
 is not recommended to change the default `seccomp` profile.
@@ -66,7 +65,6 @@ the reason each syscall is blocked rather than white-listed.
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | `acct`              | Accounting syscall which could let containers disable their own resource limits or process accounting. Also gated by `CAP_SYS_PACCT`. |
 | `add_key`           | Prevent containers from using the kernel keyring, which is not namespaced.                                   |
-| `adjtimex`          | Similar to `clock_settime` and `settimeofday`, time/date is not namespaced.  Also gated by `CAP_SYS_TIME`.   |
 | `bpf`               | Deny loading potentially persistent bpf programs into kernel, already gated by `CAP_SYS_ADMIN`.              |
 | `clock_adjtime`     | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                   |
 | `clock_settime`     | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                   |
@@ -79,7 +77,7 @@ the reason each syscall is blocked rather than white-listed.
 | `init_module`       | Deny manipulation and functions on kernel modules. Also gated by `CAP_SYS_MODULE`.                           |
 | `ioperm`            | Prevent containers from modifying kernel I/O privilege levels. Already gated by `CAP_SYS_RAWIO`.             |
 | `iopl`              | Prevent containers from modifying kernel I/O privilege levels. Already gated by `CAP_SYS_RAWIO`.             |
-| `kcmp`              | Restrict process inspection capabilities, already blocked by dropping `CAP_PTRACE`.                          |
+| `kcmp`              | Restrict process inspection capabilities, already blocked by dropping `CAP_SYS_PTRACE`.                          |
 | `kexec_file_load`   | Sister syscall of `kexec_load` that does the same thing, slightly different arguments. Also gated by `CAP_SYS_BOOT`. |
 | `kexec_load`        | Deny loading a new kernel for later execution. Also gated by `CAP_SYS_BOOT`.                                 |
 | `keyctl`            | Prevent containers from using the kernel keyring, which is not namespaced.                                   |
@@ -87,24 +85,23 @@ the reason each syscall is blocked rather than white-listed.
 | `mbind`             | Syscall that modifies kernel memory and NUMA settings. Already gated by `CAP_SYS_NICE`.                      |
 | `mount`             | Deny mounting, already gated by `CAP_SYS_ADMIN`.                                                             |
 | `move_pages`        | Syscall that modifies kernel memory and NUMA settings.                                                       |
-| `name_to_handle_at` | Sister syscall to `open_by_handle_at`. Already gated by `CAP_SYS_NICE`.                                      |
+| `name_to_handle_at` | Sister syscall to `open_by_handle_at`. Already gated by `CAP_DAC_READ_SEARCH`.                                      |
 | `nfsservctl`        | Deny interaction with the kernel nfs daemon. Obsolete since Linux 3.1.                                       |
 | `open_by_handle_at` | Cause of an old container breakout. Also gated by `CAP_DAC_READ_SEARCH`.                                     |
 | `perf_event_open`   | Tracing/profiling syscall, which could leak a lot of information on the host.                                |
 | `personality`       | Prevent container from enabling BSD emulation. Not inherently dangerous, but poorly tested, potential for a lot of kernel vulns. |
 | `pivot_root`        | Deny `pivot_root`, should be privileged operation.                                                           |
-| `process_vm_readv`  | Restrict process inspection capabilities, already blocked by dropping `CAP_PTRACE`.                          |
-| `process_vm_writev` | Restrict process inspection capabilities, already blocked by dropping `CAP_PTRACE`.                          |
-| `ptrace`            | Tracing/profiling syscall, which could leak a lot of information on the host. Already blocked by dropping `CAP_PTRACE`. |
+| `process_vm_readv`  | Restrict process inspection capabilities, already blocked by dropping `CAP_SYS_PTRACE`.                          |
+| `process_vm_writev` | Restrict process inspection capabilities, already blocked by dropping `CAP_SYS_PTRACE`.                          |
+| `ptrace`            | Tracing/profiling syscall. Blocked in Linux kernel versions before 4.8 to avoid seccomp bypass. Tracing/profiling arbitrary processes is already blocked by dropping `CAP_SYS_PTRACE`, because it could leak a lot of information on the host. |
 | `query_module`      | Deny manipulation and functions on kernel modules. Obsolete.                                                  |
 | `quotactl`          | Quota syscall which could let containers disable their own resource limits or process accounting. Also gated by `CAP_SYS_ADMIN`. |
 | `reboot`            | Don't let containers reboot the host. Also gated by `CAP_SYS_BOOT`.                                           |
 | `request_key`       | Prevent containers from using the kernel keyring, which is not namespaced.                                    |
 | `set_mempolicy`     | Syscall that modifies kernel memory and NUMA settings. Already gated by `CAP_SYS_NICE`.                       |
 | `setns`             | Deny associating a thread with a namespace. Also gated by `CAP_SYS_ADMIN`.                                    |
-| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.
-| `socket`, `socketcall` | Used to send or receive packets and for other socket operations. All `socket` and `socketcall` calls are blocked except communication domains `AF_UNIX`, `AF_INET`, `AF_INET6`, `AF_NETLINK`, and `AF_PACKET`. |
-| `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                    |
+| `settimeofday`      | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.         |
+| `stime`             | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.         |
 | `swapon`            | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |
 | `swapoff`           | Deny start/stop swapping to file/device. Also gated by `CAP_SYS_ADMIN`.                                       |
 | `sysfs`             | Obsolete syscall.                                                                                             |
