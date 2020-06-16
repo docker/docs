@@ -205,11 +205,13 @@ troubleshoot the application. Clear the check box to opt out. Docker may periodi
 
 ### Resources
 
-The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
+The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources. Different settings are available for configuration depending whether you are using Linux containers in WSL 2 mode, Linux containers in Hyper-V mode, or Windows containers.
 
 ![Resources](images/settings-resources.png){:width="750px"}
 
 #### Advanced
+
+_This tab is only available in Hyper-V mode, because in WSL 2 mode and Windows container mode these resources are managed by Windows. In WSL 2 mode, you can configure limits on the memory, CPU and swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945)._
 
 Use the **Advanced** tab to limit resources available to Docker.
 
@@ -230,10 +232,11 @@ You can also move the disk image to a different location. If you attempt to move
 
 #### File sharing
 
+_This tab is only available in Hyper-V mode, because in WSL 2 mode and Windows container mode all files are automatically shared by Windows._
+
 Use File sharing to allow local drives on Windows to be shared with Linux containers.
 This is especially useful for
 editing source code in an IDE on the host while running and testing the code in a container.
-Note that configuring file sharing is not necessary for Windows containers, only [Linux containers](#switch-between-windows-and-linux-containers).
  If a drive is not shared with a Linux container you may get `file not found` or `cannot start service` errors at runtime. See [Volume mounting requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).
 
 **Apply & Restart** makes the drives available to containers using Docker's bind mount (`-v`) feature.
@@ -292,6 +295,8 @@ to keep running across restarts, you should consider using
 
 #### Network
 
+_This tab is not available in Windows container mode because networking is then managed by Windows._
+
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
 **DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
@@ -304,6 +309,16 @@ You can configure Docker Desktop networking to work on a virtual private network
 > [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
 Updating these settings requires a reconfiguration and reboot of the Linux VM.
+
+#### WSL Integration
+
+In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker WSL integration.
+
+By default, the integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`. (For example, to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
+
+You can also select any additional distributions you would like to enable the WSL 2 integration on.
+
+For more details on configuring Docker Desktop to use WSL 2, see [Docker Desktop WSL 2 backend](wsl.md).
 
 ### Docker Engine
 
@@ -365,6 +380,8 @@ Server: Docker Engine - Community
 ```
 
 ### Kubernetes
+
+_This tab is not available in Windows container mode._
 
 Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
 
