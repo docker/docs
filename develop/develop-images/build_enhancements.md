@@ -157,8 +157,8 @@ RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 ```
 
 This Dockerfile is only to demonstrate that the secret can be accessed. As you
-can see the secret printed in the build output. The final image built will not
-have the secret file:
+can see the secret printed in the build output. The final image built will have the secret file,
+but without any content:
 
 ```console
 $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt .
