@@ -13,8 +13,10 @@ the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
 
 Rootless mode was introduced in Docker Engine v19.03.
 
-> **Note**:
-> Rootless mode is an experimental feature and has some limitations. For details, see [Known limitations](#known-limitations).
+> **Note**
+>
+> Rootless mode is an experimental feature and has some limitations. For details, 
+> see [Known limitations](#known-limitations).
 
 ## How it works
 
