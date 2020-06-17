@@ -205,13 +205,21 @@ troubleshoot the application. Clear the check box to opt out. Docker may periodi
 
 ### Resources
 
-The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources. Different settings are available for configuration depending whether you are using Linux containers in WSL 2 mode, Linux containers in Hyper-V mode, or Windows containers.
+The **Resources** tab allows you to configure CPU, memory, disk, proxies, 
+network, and other resources. Different settings are available for 
+configuration depending on whether you are using Linux containers in WSL 2 
+mode, Linux containers in Hyper-V mode, or Windows containers.
 
 ![Resources](images/settings-resources.png){:width="750px"}
 
 #### Advanced
 
-_This tab is only available in Hyper-V mode, because in WSL 2 mode and Windows container mode these resources are managed by Windows. In WSL 2 mode, you can configure limits on the memory, CPU and swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945)._
+> **Note**
+>
+> The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
+> Windows container mode these resources are managed by Windows. In WSL 2 
+> mode, you can configure limits on the memory, CPU, and swap size allocated
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
 
 Use the **Advanced** tab to limit resources available to Docker.
 
@@ -232,7 +240,10 @@ You can also move the disk image to a different location. If you attempt to move
 
 #### File sharing
 
-_This tab is only available in Hyper-V mode, because in WSL 2 mode and Windows container mode all files are automatically shared by Windows._
+> **Note**
+>
+> The File sharing tab is only available in Hyper-V mode, because in WSL 2 mode 
+> and Windows container mode all files are automatically shared by Windows.
 
 Use File sharing to allow local drives on Windows to be shared with Linux containers.
 This is especially useful for
@@ -295,7 +306,10 @@ to keep running across restarts, you should consider using
 
 #### Network
 
-_This tab is not available in Windows container mode because networking is then managed by Windows._
+> **Note**
+>
+> The Network tab is not available in Windows container mode because networking is 
+> managed by Windows.
 
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
@@ -312,13 +326,18 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 #### WSL Integration
 
-In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker WSL integration.
+In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker 
+WSL integration.
 
-By default, the integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`. (For example, to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
+By default, the integration will be enabled on your default WSL distribution. 
+To change your default WSL distro, run `wsl --set-default <distro name>`. (For example, 
+to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 
-You can also select any additional distributions you would like to enable the WSL 2 integration on.
+You can also select any additional distributions you would like to enable the WSL 2 
+integration on.
 
-For more details on configuring Docker Desktop to use WSL 2, see [Docker Desktop WSL 2 backend](wsl.md).
+For more details on configuring Docker Desktop to use WSL 2, see 
+[Docker Desktop WSL 2 backend](wsl.md).
 
 ### Docker Engine
 
@@ -381,7 +400,9 @@ Server: Docker Engine - Community
 
 ### Kubernetes
 
-_This tab is not available in Windows container mode._
+> **Note**
+>
+> The Kubernetes tab is not available in Windows container mode.
 
 Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
 
