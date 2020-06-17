@@ -20,7 +20,9 @@ Rootless mode was introduced in Docker Engine v19.03.
 
 Rootless mode executes the Docker daemon and containers inside a user namespace.
 This is very similar to [`userns-remap` mode](userns-remap.md), except that
-with `userns-remap` mode, the daemon itself is running with root privileges, whereas in rootless mode, both the daemon and the container are running without root privileges.
+with `userns-remap` mode, the daemon itself is running with root privileges,
+whereas in rootless mode, both the daemon and the container are running without
+root privileges.
 
 Rootless mode does not use binaries with `SETUID` bits or file capabilities,
 except `newuidmap` and `newgidmap`, which are needed to allow multiple
@@ -171,7 +173,8 @@ or `$HOME/bin`.
 
 ### Nightly channel
 
-To install a nightly version of the Rootless Docker, run the installation script using `CHANNEL="nightly"`:
+To install a nightly version of the Rootless Docker, run the installation script
+using `CHANNEL="nightly"`:
 
 ```console
 $ curl -fsSL https://get.docker.com/rootless | CHANNEL="nightly" sh
@@ -208,7 +211,9 @@ $ dockerd-rootless.sh --experimental --storage-driver vfs
 As Rootless mode is experimental, you need to run
 `dockerd-rootless.sh` with `--experimental`.
 
-You also need `--storage-driver vfs` unless you are using Ubuntu or Debian 10 kernel. You don't need to care about these flags if you manage the daemon using systemd, as these flags are automatically added to the systemd unit file.
+You also need `--storage-driver vfs` unless you are using Ubuntu or Debian 10
+kernel. You don't need to care about these flags if you manage the daemon using
+systemd, as these flags are automatically added to the systemd unit file.
 
 Remarks about directory paths:
 
@@ -279,7 +284,8 @@ $ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
 
 ### Expose Docker API socket through SSH
 
-To expose the Docker API socket through SSH, you need to make sure `$DOCKER_HOST` is set on the remote host.
+To expose the Docker API socket through SSH, you need to make sure `$DOCKER_HOST`
+is set on the remote host.
 
 ```console
 $ ssh -l <REMOTEUSER> <REMOTEHOST> 'echo $DOCKER_HOST'
@@ -310,13 +316,14 @@ Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 In Docker 19.03, rootless mode ignores cgroup-related `docker run` flags such as
 `--cpus`, `--memory`, --pids-limit`.
 
-However, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit), though they work in process-granularity rather than in container-granularity, and can be arbitrarily disabled by the container process.
+However, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
+though they work in process-granularity rather than in container-granularity,
+and can be arbitrarily disabled by the container process.
 
 For example:
 
 - To limit CPU usage to 0.5 cores (similar to `docker run --cpus 0.5`):
   `docker run <IMAGE> cpulimit --limit=50 --include-children <COMMAND>`
-
 - To limit max VSZ to 64MiB (similar to `docker run --memory 64m`):
   `docker run <IMAGE> sh -c "ulimit -v 65536; <COMMAND>"`
 
