@@ -469,7 +469,8 @@ For details, see [Routing ping packets](#routing-ping-packets).
 
 **`IPAddress` shown in `docker inspect` is unreachable**
 
-This is an expected behavior, as the daemon is namespaced inside RootlessKit's network namespace. Use `docker run -p` instead.
+This is an expected behavior, as the daemon is namespaced inside RootlessKit's
+network namespace. Use `docker run -p` instead.
 
 **`--net=host` doesn't listen ports on the host network namespace**
 
