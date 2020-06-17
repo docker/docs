@@ -435,7 +435,9 @@ This is an expected behavior in Docker 19.03. For more information, see [Limitin
 
 **Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.**
 
-This error occurs mostly when the host is running in cgroup v2. See the section [Fedora 31 or later](#fedora-31-or-later) for information on switching the host to use cgroup v1.
+This error occurs mostly when the host is running in cgroup v2. See the section
+[Fedora 31 or later](#fedora-31-or-later) for information on switching the host
+to use cgroup v1.
 
 ### Networking errors
 
