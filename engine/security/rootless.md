@@ -15,7 +15,7 @@ Rootless mode was introduced in Docker Engine v19.03.
 
 > **Note**
 >
-> Rootless mode is an experimental feature and has some limitations. For details, 
+> Rootless mode is an experimental feature and has some limitations. For details,
 > see [Known limitations](#known-limitations).
 
 ## How it works
@@ -47,7 +47,7 @@ testuser
 $ grep ^$(whoami): /etc/subuid
 testuser:231072:65536
 $ grep ^$(whoami): /etc/subgid
-testuser::231072:65536
+testuser:231072:65536
 ```
 
 ### Distribution-specific hint
