@@ -8,7 +8,8 @@ Rootless mode allows running the Docker daemon and containers as a non-root
 user to mitigate potential vulnerabilities in the daemon and
 the container runtime.
 
-Rootless mode does not require root privileges even during the installation of the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
+Rootless mode does not require root privileges even during the installation of
+the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
 
 Rootless mode was introduced in Docker Engine v19.03.
 
