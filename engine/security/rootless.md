@@ -423,9 +423,12 @@ See [Usage](#usage).
 
 ### `docker pull` errors
 
-**docker: failed to register layer: Error processing tar file(exit status 1): lchown <FILE>: invalid argument**
+**docker: failed to register layer: Error processing tar file(exit status 1): lchown &lt;FILE&gt;: invalid argument**
 
-This error occurs when the number of available entries in `/etc/subuid` or `/etc/subgid` is not sufficient. The number of entries required vary across images. However, 65,536 entries are sufficient for most images. See [Prerequisites](#prerequisites).
+This error occurs when the number of available entries in `/etc/subuid` or
+`/etc/subgid` is not sufficient. The number of entries required vary across
+images. However, 65,536 entries are sufficient for most images. See
+[Prerequisites](#prerequisites).
 
 ### `docker run` errors
 
