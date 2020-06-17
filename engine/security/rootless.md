@@ -473,4 +473,5 @@ This is an expected behavior, as the daemon is namespaced inside RootlessKit's n
 
 **`--net=host` doesn't listen ports on the host network namespace**
 
-This is an expected behavior, as the daemon is namespaced inside RootlessKit's network namespace. Use `docker run -p` instead.
+This is an expected behavior, as the daemon is namespaced inside RootlessKit's
+network namespace. Use `docker run -p` instead.
