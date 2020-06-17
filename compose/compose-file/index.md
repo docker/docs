@@ -59,6 +59,7 @@ services:
       - backend
     deploy:
       placement:
+        max_replicas_per_node: 1
         constraints:
           - "node.role==manager"
 
@@ -672,6 +673,8 @@ services:
     image: redis:alpine
     deploy:
       replicas: 6
+      placement:
+        max_replicas_per_node: 1
       update_config:
         parallelism: 2
         delay: 10s
@@ -791,8 +794,9 @@ services:
 
 Specify placement of constraints and preferences. See the docker service create
 documentation for a full description of the syntax and available types of
-[constraints](../../engine/reference/commandline/service_create.md#specify-service-constraints---constraint)
-and [preferences](../../engine/reference/commandline/service_create.md#specify-service-placement-preferences---placement-pref).
+[constraints](../../engine/reference/commandline/service_create.md#specify-service-constraints---constraint),
+[preferences](../../engine/reference/commandline/service_create.md#specify-service-placement-preferences---placement-pref),
+and [specifying the maximum replicas per node](../../engine/reference/commandline/service_create.md#specify-maximum-replicas-per-node---replicas-max-per-node)
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -806,6 +810,31 @@ services:
           - "engine.labels.operatingsystem==ubuntu 18.04"
         preferences:
           - spread: node.labels.zone
+```
+
+#### max_replicas_per_node
+
+> Added in [version 3.8](compose-versioning.md#version-38) file format.
+
+If the service is `replicated` (which is the default), [limit the number of replicas](../../engine/reference/commandline/service_create.md#specify-maximum-replicas-per-node---replicas-max-per-node)
+that can run on a node at any time.
+
+When there are more tasks requested than running nodes, an error
+`no suitable node (max replicas per node limit exceed)` is raised.
+
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    networks:
+      - frontend
+      - backend
+    deploy:
+      mode: replicated
+      replicas: 6
+      placement:
+        max_replicas_per_node: 1
 ```
 
 #### replicas
@@ -824,30 +853,6 @@ services:
     deploy:
       mode: replicated
       replicas: 6
-```
-
-#### max_replicas_per_node
-
-If the service is `replicated` (which is the default), [limit the number of replicas](/engine/reference/commandline/service_create.md#specify-maximum-replicas-per-node---replicas-max-per-node)
-that can run on an node at any time.
-
-> **[Version 3.8](compose-versioning.md#version-3) and above.**
-
-When there are more tasks requested than running nodes, an error `no suitable node (max replicas per node limit exceed)` is raised.
-
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  worker:
-    image: dockersamples/examplevotingapp_worker
-    networks:
-      - frontend
-      - backend
-    deploy:
-      mode: replicated
-      replicas: 6
-      placement:
-        max_replicas_per_node: 1
 ```
 
 #### resources
@@ -2621,8 +2626,8 @@ networks:
 ## configs configuration reference
 
 The top-level `configs` declaration defines or references
-[configs](../../engine/swarm/configs.md) that can be granted to the services in this
-stack. The source of the config is either `file` or `external`.
+[configs](../../engine/swarm/configs.md) that can be granted to the services in
+this stack. The source of the config is either `file` or `external`.
 
 - `file`: The config is created with the contents of the file at the specified
   path.
@@ -2630,9 +2635,18 @@ stack. The source of the config is either `file` or `external`.
   created. Docker does not attempt to create it, and if it does not exist, a
   `config not found` error occurs.
 - `name`: The name of the config object in Docker. This field can be used to
-   reference configs that contain special characters. The name is used as is
-   and will **not** be scoped with the stack name. Introduced in version 3.5
-   file format.
+  reference configs that contain special characters. The name is used as is
+  and will **not** be scoped with the stack name. Introduced in version 3.5
+  file format.
+- `driver` and `driver_opts`: The name of a custom secret driver, and driver-specific
+  options passed as key/value pairs. Introduced in version 3.8 file format, and
+  only supported when using `docker stack`.
+- `template_driver`: The name of the templating driver to use, which controls
+  whether and how to evaluate the secret payload as a template. If no driver
+  is set, no templating is used. The only driver currently supported is `golang`,
+  which uses a `golang`. Introduced in version 3.8 file format, and only supported
+  when using `docker stack`. Refer to [use a templated config](../../engine/swarm/configs.md#example-use-a-templated-config)
+  for a examples of templated configs.
 
 In this example, `my_first_config` is created (as
 `<stack_name>_my_first_config)`when the stack is deployed,
@@ -2668,8 +2682,8 @@ stack.
 ## secrets configuration reference
 
 The top-level `secrets` declaration defines or references
-[secrets](../../engine/swarm/secrets.md) that can be granted to the services in this
-stack. The source of the secret is either `file` or `external`.
+[secrets](../../engine/swarm/secrets.md) that can be granted to the services in
+this stack. The source of the secret is either `file` or `external`.
 
 - `file`: The secret is created with the contents of the file at the specified
   path.
@@ -2677,9 +2691,14 @@ stack. The source of the secret is either `file` or `external`.
   created. Docker does not attempt to create it, and if it does not exist, a
   `secret not found` error occurs.
 - `name`: The name of the secret object in Docker. This field can be used to
-   reference secrets that contain special characters. The name is used as is
-   and will **not** be scoped with the stack name. Introduced in version 3.5
-   file format.
+  reference secrets that contain special characters. The name is used as is
+  and will **not** be scoped with the stack name. Introduced in version 3.5
+  file format.
+- `template_driver`: The name of the templating driver to use, which controls
+  whether and how to evaluate the secret payload as a template. If no driver
+  is set, no templating is used. The only driver currently supported is `golang`,
+  which uses a `golang`. Introduced in version 3.8 file format, and only
+  supported when using `docker stack`.
 
 In this example, `my_first_secret` is created as
 `<stack_name>_my_first_secret `when the stack is deployed,

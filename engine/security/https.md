@@ -93,7 +93,7 @@ Now, generate the signed certificate:
     Getting CA Private Key
     Enter pass phrase for ca-key.pem:
 
-[Authorization plugins](../extend/plugins_authorization) offer more
+[Authorization plugins](/engine/extend/plugins_authorization/) offer more
 fine-grained control to supplement authentication from mutual TLS. In addition
 to other information described in the above document, authorization plugins
 running on a Docker daemon receive the certificate information for connecting
