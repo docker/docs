@@ -59,9 +59,4 @@
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
   <!-- END SEO STUFF -->
   {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
-  <script>
-  // Default to assuming this is an archive and hiding some stuff
-  // See js/archive.js and js/docs.js for logic relating to this
-  var dockerVersion = 'v{{ site.docker_ce_version }}';
-  </script>
 </head>
