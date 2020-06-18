@@ -397,7 +397,7 @@ $ dockerd-rootless.sh --experimental
 On a systemd host, log into the host using `pam_systemd` (see below).
 The value is automatically set to `/run/user/$UID` and cleaned up on every logout.
 
-**systemctl --user` fails with `Failed to connect to bus: No such file or directory**
+**`systemctl --user` fails with `Failed to connect to bus: No such file or directory**
 
 This error occurs mostly when you switch from the root user to an non-root user with `sudo`:
 
