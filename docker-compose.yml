@@ -3,8 +3,6 @@ services:
   docs:
     build:
       context: .
-      args:
-        - ENABLE_ARCHIVES=false
     image: docs/docstage
     ports:
      - "4000:4000"

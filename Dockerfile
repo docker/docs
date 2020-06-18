@@ -19,7 +19,7 @@ ARG ENGINE_BRANCH="19.03"
 ARG DISTRIBUTION_BRANCH="release/2.7"
 
 # Set to "false" to build the documentation without archives
-ARG ENABLE_ARCHIVES=true
+ARG ENABLE_ARCHIVES=false
 
 ###
 # Set up base stages for building and deploying
