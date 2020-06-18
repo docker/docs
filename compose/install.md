@@ -51,7 +51,7 @@ Python package manager or installing Compose as a container.
 
 ### Install Compose on macOS
 
-**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** and **Docker Toolbox** already includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
 Docker install instructions for these are here:
 
