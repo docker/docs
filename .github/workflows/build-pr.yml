@@ -13,7 +13,7 @@ jobs:
         run: docker version && docker info
       - uses: actions/checkout@v2
       - name: build image
-        run: docker build --build-arg=ENABLE_ARCHIVES=false --target=current -t documentation:latest .
+        run: docker build --target=current -t documentation:latest .
       # Disabled netlify-deploy due to flakey 502 http errors
       # - name: copy static files
       #   if: github.event.pull_request.head.repo.fork == false
