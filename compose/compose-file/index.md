@@ -1897,10 +1897,10 @@ Mount a temporary file system inside the container. Size parameter specifies the
 of the tmpfs mount in bytes. Unlimited by default.
 
 ```yaml
- - type: tmpfs
-     target: /app
-     tmpfs:
-       size: 1000
+- type: tmpfs
+  target: /app
+  tmpfs:
+    size: 1000
 ```
 
 ### ulimits
