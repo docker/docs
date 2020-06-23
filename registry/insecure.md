@@ -107,6 +107,24 @@ This is more secure than the insecure registry solution.
 
 This section lists some common failures and how to recover from them.
 
+### Known issue on buildkit
+
+When using [buildkit](https://github.com/moby/buildkit), if the registry is not configured with `https` mode, the `http` needs to be added. The specific reason can be found on [issue:41059](https://github.com/moby/moby/issues/41059),[issue:41080](https://github.com/moby/moby/issues/41080).
+
+Example:
+```json
+# cat /etc/docker/daemon.json
+{
+  "insecure-registries" : [ "myregistrydomain.com" ]
+}
+```
+change it to
+```
+{
+  "insecure-registries" : [ "http://myregistrydomain.com" ]
+}
+```
+
 ### Failing...
 
 Failing to configure the Engine daemon and trying to pull from a registry that is not using
