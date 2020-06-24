@@ -19,7 +19,7 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 ### System Requirements
 
-  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 15063 or later).
+  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 16299 or later).
   - Hyper-V and Containers Windows features must be enabled.
   - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
