@@ -224,7 +224,7 @@ subsystem used:
 |:----------------------|:-----------------------------------------------------------------------------------------|
 | RHEL, Oracle Linux    | `/var/log/messages`                                                                      |
 | Debian                | `/var/log/daemon.log`                                                                    |
-| Ubuntu 16.04+, CentOS | Use the command `journalctl -u docker.service`                                           |
+| Ubuntu 16.04+, CentOS | Use the command `journalctl -u docker.service` or `/var/log/syslog`                      |
 | Ubuntu 14.10-         | `/var/log/upstart/docker.log`                                                            |
 | macOS (Docker 18.01+) | `~/Library/Containers/com.docker.docker/Data/vms/0/console-ring`                         |
 | macOS (Docker <18.01) | `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring` |
