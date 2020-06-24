@@ -10,9 +10,8 @@ open source and we deeply appreciate contributions from our community!
 - [Contributing](#contributing)
   - [Files not edited here](#files-not-edited-here)
   - [Overall doc improvements](#overall-doc-improvements)
-  - [Specific new features for a project](#specific-new-features-for-a-project)
 - [Per-PR staging on GitHub](#per-pr-staging-on-github)
-- [Staging the docs](#staging-the-docs)
+- [Build the docs locally](#build-the-docs-locally)
 - [Read these docs offline](#read-these-docs-offline)
 - [Important files](#important-files)
 - [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
@@ -21,10 +20,6 @@ open source and we deeply appreciate contributions from our community!
   - [Creating tabs](#creating-tabs)
   - [Running in-page Javascript](#running-in-page-javascript)
   - [Images](#images)
-- [Beta content disclaimer](#beta-content-disclaimer)
-- [Accessing unsupported archived documentation](#accessing-unsupported-archived-documentation)
-- [Building archives and the live published docs](#building-archives-and-the-live-published-docs)
-- [Creating a new archive](#creating-a-new-archive)
 - [Copyright and license](#copyright-and-license)
 
 
@@ -68,66 +63,26 @@ in the `source:` key in the YAML file.
 
 ### Overall doc improvements
 
-Most commits will be made against the `master` branch. This include:
+Pull requests should be opened against the `master` branch, this includes:
 
 - Conceptual and task-based information not specific to new features
 - Restructuring / rewriting
 - Doc bug fixing
 - Typos and grammar errors
 
-One quirk of this project is that the `master` branch is where the live docs are
-published from, so upcoming features can't be documented there. See
-[Specific new features for a project](#specific-new-features-for-a-project)
-for how to document upcoming features. These feature branches will be periodically
-merged with `master`, so don't worry about fixing typos and documentation bugs
-there.
-
->Do you enjoy creating graphics? Good graphics are key to great documentation,
-and we especially value contributions in this area.
-
-### Specific new features for a project
-
-Our docs cover many projects which release at different times. **If, and only if,
-your pull request relates to a currently unreleased feature of a project, base
-your work on that project's `vnext` branch.** These branches were created by
-cloning `master` and then importing a project's `master` branch's docs into it
-(at the time of the migration), in a way that preserved the commit history. When
-a project has a release, its `vnext` branch will be merged into `master` and your
-work will be visible on [https://docs.docker.com/](https://docs.docker.com/).
-
-The following `vnext` branches currently exist:
-
-- **[vnext-engine](https://github.com/docker/docker.github.io/tree/vnext-engine):**
-  docs for upcoming features in the [docker/docker](https://github.com/moby/moby/)
-  project
-
-- **[vnext-compose](https://github.com/docker/docker.github.io/tree/vnext-compose):**
-  docs for upcoming features in the [docker/compose](https://github.com/docker/compose/)
-  project
-
-- **[vnext-distribution](https://github.com/docker/docker.github.io/tree/vnext-distribution):**
-  docs for upcoming features in the [docker/distribution](https://github.com/docker/distribution/)
-  project
-
-- **[vnext-swarm](https://github.com/docker/docker.github.io/tree/vnext-swarm):**
-  docs for upcoming features in the [docker/swarm](https://github.com/docker/swarm/)
-  project
-
-- **[vnext-toolbox](https://github.com/docker/docker.github.io/tree/vnext-toolbox):**
-  docs for upcoming features in the [docker/toolbox](https://github.com/docker/toolbox/)
-  project
+> Do you enjoy creating graphics? Good graphics are key to great documentation,
+> and we especially value contributions in this area.
 
 ## Per-PR staging on GitHub
 
-For every PR against `master` and all the long-lived branches, a staged version
-of the site is built using Netlify. If the site builds, you will see
-**deploy/netlify — Deploy preview ready**. Otherwise, you will see an error.
-Click **Details** to review the staged site or the errors that prevented it from
-building. Review the staged site and amend your commit if necessary. Reviewers
-will also check the staged site before merging the PR, to protect the integrity
-of [https://docs.docker.com/](https://docs.docker.com/).
+For every PR against `master`, a staged version of the site is built using Netlify.
+If the site builds, you will see **deploy/netlify — Deploy preview ready**.
+Otherwise, you will see an error. Click **Details** to review the staged site or
+the errors that prevented it from building. Review the staged site and amend your
+commit if necessary. Reviewers will also check the staged site before merging the
+PR, to protect the integrity of [https://docs.docker.com/](https://docs.docker.com/).
 
-## Staging the docs
+## Build the docs locally
 
 You have three options:
 
@@ -136,7 +91,7 @@ You have three options:
     ```bash
     git clone --recursive https://github.com/docker/docker.github.io.git
     cd docker.github.io
-    docker-compose up
+    docker-compose up --build
     ```
 
     If you haven't got Docker Compose installed,
@@ -152,7 +107,17 @@ You have three options:
     docker-compose down
     ```
 
-2.  Install Jekyll and GitHub Pages on your local machine.
+2. Build and run a Docker image for your working branch.
+
+   ```bash
+   DOCKER_BUILDKIT=1 docker build -t docker build -t docker-docs
+   docker run --rm -it -p 4000:4000 docker-docs
+   ```
+
+   After the `docker run` command, copy the URL provided in the container build output in a browser,
+   http://0.0.0.0:4000, and verify your changes.
+
+3.  Install Jekyll and GitHub Pages on your local machine.
 
     a. Clone this repo by running:
 
@@ -191,16 +156,6 @@ You have three options:
     running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
     You can continue working in a second terminal and Jekyll will rebuild the
     website incrementally. Refresh the browser to preview your changes.
-
-3. Build and run a Docker image for your working branch.
-
-   ```bash
-   $ docker build -t docker build -t docs/docker.github.io:<branch_name> .
-   $ docker run --rm -it -p 4000:4000 docs/docker.github.io:<branch_name>
-    ```
-
-   After the `docker run` command, copy the URL provided in the container build output in a browser,
-   http://0.0.0.0:4000, and verify your changes.
 
 ## Read these docs offline
 
@@ -342,105 +297,6 @@ In order to keep the Git repository light, _please_ compress the images
 instance. Be sure to compress the images *before* adding them to the
 repository, doing it afterwards actually worsens the impact on the Git repo (but
 still optimizes the bandwidth during browsing).
-
-## Beta content disclaimer
-```bash
-> BETA DISCLAIMER
->
-> This is beta content. It is not yet complete and should be considered a work in progress. This content is subject to change without notice.
-```
-
-## Accessing unsupported archived documentation
-
-Supported documentation includes the current version plus the previous five versions.
-
-If you are using a version of the documentation that is no longer supported, which means that the version number is not listed in the site dropdown list, you can still access that documentation in the following ways:
-
-- By entering your version number and selecting it from the branch selection list for this repo
-- By directly accessing the Github URL for your version. For example, https://github.com/docker/docker.github.io/tree/v1.9 for `v1.9`
-- By running a container of the specific [tag for your documentation version](https://hub.docker.com/r/docs/docker.github.io/tags)
-in Docker Hub. For example, run the following to access `v1.9`:
-
- ```bash
-  docker run -it -p 4000:4000 docs/docker.github.io:v1.9
-  ```
-
-## Building archives and the live published docs
-
-All the images described below are automatically built using Docker Hub. To
-build the site manually, from scratch, including all utility and archive images,
-see the [README in the publish-tools branch](https://github.com/docker/docker.github.io/blob/publish-tools/README.md).
-
-- Some utility images are built from Dockerfiles in the `publish-tools` branch.
-  See its [README](https://github.com/docker/docker.github.io/blob/publish-tools/README.md)
-  for details.
-- Each archive branch automatically builds an image tagged
-  `docs/docker.github.io:v<VERSION>` when a change is merged into that branch.
-- The `master` branch has a Dockerfile which uses the static HTML from each
-  archive image, in combination with the Markdown
-  files in `master` and some upstream resources which are fetched at build-time,
-  to create the full site at [https://docs.docker.com/](/). All
-  of the long-running branches, such as `vnext-engine`, `vnext-compose`, etc,
-  use the same logic.
-
-## Creating a new archive
-
-When a new Docker Engine - Community Stable version is released, the previous state of `master`
-is archived into a version-specific branch like `v17.09`, by doing the following:
-
-1.  Create branch based off the commit hash before the new version was released.
-
-    ```bash
-    $ git checkout <HASH>
-    $ git checkout -b v17.09
-    ```
-
-2.  Run the `_scripts/fetch-upstream-resources.sh` script. This puts static
-    copies of the files in place that the `master` build typically fetches
-    each build.
-
-    ```bash
-    $ _scripts/fetch-upstream/resources.sh
-    ```
-
-3.  Overwrite the `Dockerfile` with the `Dockerfile.archive` (use `cp` rather
-    than `mv` so you don't inadvertently remove either file). Edit the resulting
-    `Dockerfile` and set the `VER` build argument to the appropriate value, like
-    `v17.09`.
-
-    ```bash
-    $ mv Dockerfile.archive Dockerfile
-    $ vi Dockerfile
-
-      < edit the variable and save >
-    ```
-
-4.  Do `git status` and add all changes, being careful not to add anything extra
-    by accident. Commit your work.
-
-    ```bash
-    $ git status
-    $ git add <filename>
-    $ git add <filename> (etc etc etc)
-    $ git commit -m "Creating archive for 17.09 docs"
-    ```
-
-5.  Make sure the archive builds.
-
-    ```bash
-    $ docker build -t docker build -t docs/docker.github.io:v17.09 .
-    $ docker run --rm -it -p 4000:4000 docs/docker.github.io:v17.09
-    ```
-
-    After the `docker run` command, browse to `http://localhost:4000/` and
-    verify that the archive is self-browseable.
-
-6.  Push the branch to the upstream repository. Do not create a pull request
-    as there is no reference branch to compare against.
-
-    ```bash
-    $ git push upstream v17.09
-    ```
 
 ## Copyright and license
 

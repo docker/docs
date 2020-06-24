@@ -109,7 +109,7 @@
     </div>
 
     {% if page.path == "404.md" %}
-    <script type="text/javascript">
+    <script>
         var path = window.location.pathname.replace("#", "");
         var ghIssueQueryString = "https://github.com/docker/docker.github.io/issues/new?" + "title=404%20at%20" + path + "&body=URL%3A%20" + path;
         document.getElementsByClassName("nomunge")[1].onclick = function () {
@@ -128,24 +128,11 @@
         hljs.initHighlightingOnLoad();
     </script>
     {% endif %}
+    <script>var pageURL = "{{ page.url }}";</script>
     <script defer src="/js/anchorlinks.js"></script>
     <script defer src="/js/menu.js"></script>
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
-    <script>
-        // Default to assuming this is an archive and hiding some stuff
-        // See js/archive.js and js/docs.js for logic relating to this
-        var dockerVersion = 'v{{ site.docker_ce_version }}';
-        // In archives, we need to know the page root and we get it from JEKYLL_ENV in the jekyll build command
-        var jekyllEnv = '{{ jekyll.environment }}';
-        // If unset (in non-archive branches), defaults to "development". In that case, reset it to empty
-        if (jekyllEnv === 'development') {
-            jekyllEnv = '';
-        }
-        var pageURL = jekyllEnv + '{{ page.url }}';
-    </script>
-    <script src="/js/archive.js"></script>
     <script src="/js/stickyfill.min.js"></script>
     <script defer src="/js/metadata.js"></script>
     <script src="/js/glossary.js"></script>

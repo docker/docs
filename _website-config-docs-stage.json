@@ -344,6 +344,45 @@
         "ReplaceKeyPrefixWith": null,
         "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/index.html"
       }
+    },
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": null,
+        "KeyPrefixEquals": "v17.06/"
+      },
+      "Redirect": {
+        "HostName": "docs-stage.docker.com",
+        "HttpRedirectCode": null,
+        "Protocol": "https",
+        "ReplaceKeyPrefixWith": "",
+        "ReplaceKeyWith": null
+      }
+    },
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": null,
+        "KeyPrefixEquals": "v18.03/"
+      },
+      "Redirect": {
+        "HostName": "docs-stage.docker.com",
+        "HttpRedirectCode": null,
+        "Protocol": "https",
+        "ReplaceKeyPrefixWith": "",
+        "ReplaceKeyWith": null
+      }
+    },
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": null,
+        "KeyPrefixEquals": "v18.09/"
+      },
+      "Redirect": {
+        "HostName": "docs-stage.docker.com",
+        "HttpRedirectCode": null,
+        "Protocol": "https",
+        "ReplaceKeyPrefixWith": "",
+        "ReplaceKeyWith": null
+      }
     }
   ]
 }
