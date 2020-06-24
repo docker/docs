@@ -56,8 +56,17 @@ flag to specify an additional network alias for the container on that network.
 
 ## DNS services
 
-By default, a container inherits the DNS settings of the Docker daemon,
-including the `/etc/hosts` and `/etc/resolv.conf`.You can override these
+By default, a container inherits the DNS settings of the host, as defined in the
+`/etc/resolv.conf` configuration file. Containers that use the default `bridge`
+network get a copy of this file, whereas containers that use a
+[custom network](../../network/network-tutorial-standalone.md#use-user-defined-bridge-networks)
+use Docker's embedded DNS server, which forwards external DNS lookups to the DNS
+servers configured on the host.
+
+Custom hosts defined in `/etc/hosts` are not inherited. To pass additional hosts
+into your container, refer to [add entries to container hosts file](../../engine/reference/commandline/run.md#add-entries-to-container-hosts-file---add-host)
+in the `docker run` reference documentation. You can override these settings on
+a per-container basis.
 settings on a per-container basis.
 
 | Flag           | Description                                                                                                                                                                                                                                                         |
