@@ -964,7 +964,7 @@ updates.
 - `delay`: The time to wait between updating a group of containers.
 - `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause`
   (default: `pause`).
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 5s). **Note**: Setting to 0 will use the default 5s.
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 - `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
 
