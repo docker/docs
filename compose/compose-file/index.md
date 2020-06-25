@@ -1689,10 +1689,11 @@ ports:
 
 ### restart
 
-`no` is the default restart policy, and it does not restart a container under
+`no` is the default [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy), and it does not restart a container under
 any circumstance. When `always` is specified, the container always restarts. The
 `on-failure` policy restarts a container if the exit code indicates an
-on-failure error.
+on-failure error. `unless-stopped` always restarts a container, except when the
+container is stopped (manually or otherwise).
 
     restart: "no"
     restart: always

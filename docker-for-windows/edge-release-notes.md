@@ -11,6 +11,34 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.2.0
+2020-06-25
+
+> [Download](https://desktop.docker.com/win/edge/46268/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
+- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
+- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
+
+### Bug fixes and minor changes
+
+- Fixed application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117).
+- Fixed opening a CLI from the dashboard for Windows containers. See [docker/for-win#7079](https://github.com/docker/for-win/issues/7079).
+- Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](docker/for-win#6797).
+- Fixed an issue when updating Windows to a WSL 2 capable version, where a configuration file is locked by the old Hyper-V VM.
+- Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
+- Left-clicking on the Docker icon in the system tray now launches the container view Dashboard. See [docker/for-win#6650](https://github.com/docker/for-win/issues/6650).
+- Fixed an issue which blocks Docker Desktop startup if `localhost:2375` is used by another program. See [docker/for-win#6929](https://github.com/docker/for-win/issues/6929) and [docker/for-win#6961](https://github.com/docker/for-win/issues/6961).
+- Docker contexts are now synced between Windows and WSL 2 distributions.
+- Docker Desktop now prompts users to share drives for paths like `////c/Users/foo`, rather than only paths like `C:\Users\foo` and `C:/Users/foo`.
+- The installer now returns a non-zero exit code on error or when the user cancels the installation.
+- Avoid failing withFixed an issue which caused Docker Desktop to fail with `Function not implemented` error during file I/O on shared volumes. See [docker/for-win#5955](https://github.com/docker/for-win/issues/5955).
+- Fixed an issue when bind mounting a mounted host directory inside a container. See [docker/for-win#5089](https://github.com/docker/for-win/issues/5089).
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. See [docker/for-win#5089](https://github.com/docker/for-win/issues/5089).
+
 ## Docker Desktop Community 2.3.1.0
 2020-05-20
 

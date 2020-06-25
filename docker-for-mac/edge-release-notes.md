@@ -11,6 +11,29 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.2.0
+2020-06-25
+
+> [Download](https://desktop.docker.com/mac/edge/46268/Docker.dmg)
+
+### Upgrades
+
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
+- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
+- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
+
+### Bug fixes and minor changes
+
+- Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594).
+- Fixed `hyperkit` on newer Macs / newer versions of `Hypervisor.framework`.
+- Added support for the global Mutagen config file `~/.mutagen.yml`.
+- Automatically set up a two-way file sync using `:delegated` option with `docker run -v` command.
+- Re-added device-mapper to the embedded Linux kernel. See [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
+- Improved diagnostics when using two-way synchronization with the Mutagen cache.
+- Switched to Mutagen `posix-raw` symlink mode which fixes cases where the symlinks point outside the synchronized directory. See [docker/for-mac#4595](https://github.com/docker/for-mac/issues/4595).
+- Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. See [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
+
 ## Docker Desktop Community 2.3.1.0
 2020-05-20
 

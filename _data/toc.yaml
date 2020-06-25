@@ -1091,6 +1091,8 @@ manuals:
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
+  - path: /engine/context/aci-integration/
+    title: Docker and ACI (Beta)
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
