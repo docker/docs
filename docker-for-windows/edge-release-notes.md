@@ -18,7 +18,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 ### Upgrades
 
-- [Docker 19.03.11](https://github.com/docker/docker-ce/releases/tag/v19.03.11)
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
 - [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
 - [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
 - Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
