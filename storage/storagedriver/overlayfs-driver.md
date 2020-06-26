@@ -21,6 +21,8 @@ storage driver as `overlay` or `overlay2`.
 > For more information about differences between `overlay` vs `overlay2`, check
 > [Docker storage drivers](select-storage-driver.md).
 
+> **Note**: For `fuse-overlayfs` driver, check [Rootless mode documentation](../../engine/security/rootless.md).
+
 ## Prerequisites
 
 OverlayFS is the recommended storage driver, and supported if you meet the following
