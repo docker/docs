@@ -165,8 +165,8 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 ### Manual installation
 
 To install the binaries manually without using the installer, extract
-`docker-rootless-extras-<version>.tar.gz` along with `docker-<version>.tar.gz`:
-from [https://download.docker.com/linux/static/stable/x86_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" class="_" }
+`docker-rootless-extras-<version>.tar.gz` along with `docker-<version>.tar.gz`
+from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" class="_" }
 
 If you already have the Docker daemon running as the root, you only need to
 extract `docker-rootless-extras-<version>.tar.gz`. The archive can be extracted
@@ -183,8 +183,8 @@ $ curl -fsSL https://get.docker.com/rootless | CHANNEL="nightly" sh
 ```
 
 The raw binary archives are available at:
-- https://master.dockerproject.org/linux/x86_64/docker-rootless-extras.tgz
-- https://master.dockerproject.org/linux/x86_64/docker.tgz
+- https://master.dockerproject.org/linux/x86\_64/docker-rootless-extras.tgz
+- https://master.dockerproject.org/linux/x86\_64/docker.tgz
 
 ## Usage
 
@@ -397,7 +397,7 @@ $ dockerd-rootless.sh --experimental
 On a systemd host, log into the host using `pam_systemd` (see below).
 The value is automatically set to `/run/user/$UID` and cleaned up on every logout.
 
-**`systemctl --user` fails with `Failed to connect to bus: No such file or directory**
+**`systemctl --user` fails with "Failed to connect to bus: No such file or directory"**
 
 This error occurs mostly when you switch from the root user to an non-root user with `sudo`:
 
@@ -418,7 +418,7 @@ Instead of `sudo -iu <USERNAME>`, you need to log in using `pam_systemd`. For ex
 You need `sudo loginctl enable-linger $(whoami)` to enable the daemon to start
 up automatically. See [Usage](#usage).
 
-#### `rootless mode is supported only when running in experimental mode`
+**`dockerd` fails with "rootless mode is supported only when running in experimental mode"**
 
 This error occurs when the daemon is launched without the `--experimental` flag.
 See [Usage](#usage).
