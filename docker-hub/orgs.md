@@ -15,9 +15,13 @@ to shared image repositories.
 > **Note:** in Docker Hub, users cannot belong directly to an organization.
 They belong only to teams within an organization.
 
+[![overview of organizations in Docker Hub](images/vid-org-overview.png)](https://youtu.be/G7lvSnAqed8){: target="_blank" class="_”}
+
 ## Working with organizations
 
 ### Create an organization
+
+[![How to create an organization in Docker Hub](images/vid-create-org.png)](https://youtu.be/b0TKcIqa9Po){: target="_blank" class="_”}
 
 1. Start by clicking on **[Organizations](https://hub.docker.com/orgs)** in
 Docker Hub.
@@ -55,7 +59,11 @@ If you don't see the organization, then you are neither a member or an owner of 
 
 ## Working with teams and members
 
+[![Overview of Team in Docker Hub](images/vid-teams-overview.png)](https://www.youtube.com/watch?v=MROKmtmWCVI){: target="_blank" class="_”}
+
 ### Create a team
+
+[![Create and Manage Teams in Docker Hub](images/vid-teams-manage.png)](https://www.youtube.com/watch?v=78wbbBoasIc){: target="_blank" class="_”}
 
 1. Go to **Organizations** in Docker Hub, and select your organization.
 
