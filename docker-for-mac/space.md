@@ -79,7 +79,7 @@ To query the actual size of the file on the host from a terminal, run:
 
 ```bash
 $ cd ~/Library/Containers/com.docker.docker/Data
-$ cd vms/0/data
+$ cd vms/0
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 username  staff    64G Dec 13 17:42 Docker.raw
 ```
