@@ -16,7 +16,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 > [Download](https://desktop.docker.com/win/edge/46329/Docker%20Desktop%20Installer.exe)
 
-## Security
+### Security
 
 - Fixed a regression in Docker Desktop Edge 2.3.2.0 on Windows where the Docker API was exposed by default on a random port on all interfaces.
 
