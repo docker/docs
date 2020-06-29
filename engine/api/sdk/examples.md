@@ -471,7 +471,7 @@ func main() {
 		panic(err)
 	}
 
-	images, err := cli.ImageList(context.Background(), types.ImageListOptions{})
+	images, err := cli.ImageList(ctx, types.ImageListOptions{})
 	if err != nil {
 		panic(err)
 	}
