@@ -18,8 +18,8 @@ Storage drivers allow you to create data in the writable layer of your container
 The files won't be persisted after the container is deleted, and both read and
 write speeds are lower than native file system performance. 
 
- > **Note**: Operations that are known to be problematic include write-intensive database storage, 
-particularly when pre-existing data exists in the write-only layer. More details are provided in this document.
+ > **Note**: Operations that are known to be problematic include write-intensive database storage,
+particularly when pre-existing data exists in the read-only layer. More details are provided in this document.
 
 [Learn how to use volumes](../volumes.md) to persist data and improve performance.
 
