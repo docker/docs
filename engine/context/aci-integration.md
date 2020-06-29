@@ -27,8 +27,8 @@ To deploy Docker containers on Azure, you must meet the following requirements:
 
 1. Download and install Docker Desktop Edge version 2.3.2.0 or later.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/46268/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/46268/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
 
     Alternatively, install the [Docker ACI Integration for Linux](#install-the-docker-aci-integration-cli-on-linux).
 
