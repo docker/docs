@@ -31,5 +31,5 @@ services:
 
   service2:
     build: .
-    image: yourDockerID/yourimage  # goes to your repository on Docker Hub
+    image: your-dockerid/yourimage  # goes to your repository on Docker Hub
 ```
