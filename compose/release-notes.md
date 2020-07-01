@@ -7,6 +7,19 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.26.1
+(2020-06-30)
+
+### Features
+
+- Bumped `docker-py` from 4.2.1 to 4.2.2.
+
+### Bug fixes
+
+- Enforced `docker-py` 4.2.1 as minimum version when installing with pip.
+
+- Fixed context load for non-docker endpoints.
+
 ## 1.26.0
 (2020-06-03)
 
