@@ -175,28 +175,26 @@ For more information, see:
 #### Proxies
 
 Docker Desktop detects HTTP/HTTPS Proxy Settings from macOS and automatically
-propagates these to Docker and to your containers. For example, if you set your
+propagates these to Docker. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
 pulling containers.
 
-When you start a container, your proxy settings propagate into the containers.
-For example:
+Your proxy settings, however, will not be propagated into the containers you start.
+If you wish to set the proxy settings for your containers, you need to define
+environment variables for them, just like you would do on Linux, for example:
 
 ```
-$ docker run -it alpine env
+$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
 TERM=xterm
 HOME=/root
 HTTP_PROXY=http://proxy.example.com:3128
-http_proxy=http://proxy.example.com:3128
-no_proxy=*.local, 169.254/16
 ```
 
-You can see from the above output that the `HTTP_PROXY`, `http_proxy`, and
-`no_proxy` environment variables are set. When your proxy configuration changes,
-Docker restarts automatically to pick up the new settings. If you have any
-containers that you would like to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart).
+For more information on setting environment variables for running containers,
+see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
 
 #### Network
 
