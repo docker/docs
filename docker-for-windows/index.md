@@ -283,7 +283,8 @@ HOME=/root
 HTTP_PROXY=http://proxy.example.com:3128
 ```
 
-For more information on setting environment variables for running containers see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
+For more information on setting environment variables for running containers,
+see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
 
 #### Network
 
