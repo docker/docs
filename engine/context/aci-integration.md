@@ -71,6 +71,11 @@ myacicontext        aci                 myResourceGroupGTA@eastus
 default *           moby              Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                          swarm
 ```
 
+> **Note**
+>
+> If you need to change the subscription and create a new context, you must 
+execute the `docker login azure` command again.
+
 ### Run a container
 
 Now that you've logged in and created an ACI context, you can start using Docker commands to deploy containers on ACI.
