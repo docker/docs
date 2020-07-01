@@ -12,13 +12,13 @@ redirect_from:
 
 ### Features
 
-- Bump `docker-py` from 4.2.1 to 4.2.2
+- Bumped `docker-py` from 4.2.1 to 4.2.2.
 
 ### Bug fixes
 
-- Enforce `docker-py` 4.2.1 as minimum version when installing with pip
+- Enforced `docker-py` 4.2.1 as minimum version when installing with pip.
 
-- Fix context load for non-docker endpoints
+- Fixed context load for non-docker endpoints.
 
 ## 1.26.0
 (2020-06-03)
