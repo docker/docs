@@ -267,7 +267,7 @@ my-app              1                   Swarm
 
 Now that the app is running, you can point a web browser at the DNS name or public IP of the Docker node on 
 port 8080 and see the app. You must ensure traffic to port 8080 is allowed on 
-the connection form your browser to your Docker host.
+the connection from your browser to your Docker host.
 
 Now change the port of the application using `docker app upgrade <app-name>` command.
 ```
