@@ -50,7 +50,6 @@ docker login azure
 
 This opens your web browser and prompts you to enter your Azure login credentials.
 
-
 ### Create an ACI context
 
 After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI. For example, let us create a new context called `myacicontext`:
@@ -74,7 +73,8 @@ default *           moby              Current DOCKER_HOST based configuration   
 
 > **Note**
 >
-> If there is a need to change the subscription and create a new context you will have to execute `docker login azure` again.
+> If you need to change the subscription and create a new context, you must 
+execute the `docker login azure` command again.
 
 ### Run a container
 
