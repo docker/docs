@@ -24,9 +24,9 @@ implement and use [logging driver plugins](plugins.md).
 To configure the Docker daemon to default to a specific logging driver, set the
 value of `log-driver` to the name of the logging driver in the `daemon.json`
 file, which is located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\` on Windows server hosts. The default logging
-driver is `json-file`. The following example explicitly sets the default
-logging driver to `syslog`:
+`C:\ProgramData\docker\config\` on Windows server hosts. Note that you should create `daemon.json`
+file, if the file does not exist. 
+The default logging driver is `json-file`. The following example explicitly sets the default logging driver to `syslog`:
 
 ```json
 {
