@@ -191,10 +191,10 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
     $ sudo systemctl restart docker.service
     ```
 
-6.  Check to see whether the change was honored by reviewing the output of `netstat` to confirm `dockerd` is listening on the configured port.
+6.  Check to see whether the change was honored by reviewing the output of `ss` to confirm `dockerd` is listening on the configured port.
 
     ```bash
-    $ sudo netstat -lntp | grep dockerd
+    $ sudo ss -lntp | grep dockerd
     tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
     ``` 
     
@@ -210,10 +210,10 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 
 2.  Restart Docker. 
 
-3.  Check to see whether the change was honored by reviewing the output of `netstat` to confirm `dockerd` is listening on the configured port.
+3.  Check to see whether the change was honored by reviewing the output of `ss` to confirm `dockerd` is listening on the configured port.
 
     ```bash
-    $ sudo netstat -lntp | grep dockerd
+    $ sudo ss -lntp | grep dockerd
     tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
     ``` 
         
