@@ -36,12 +36,12 @@ If you do not export this variable in self-hosted environments, you may see
 errors such as: 
 
 ```
-$ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
-Adding signer "jeff" to dtr.example.com/admin/demo...
+$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
+Adding signer "jeff" to registry.example.com/admin/demo...
 [...]
-Error: trust data missing for remote repository dtr.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
+Error: trust data missing for remote repository registry.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
 
-$ docker trust inspect dtr.example.com/admin/demo --pretty
+$ docker trust inspect registry.example.com/admin/demo --pretty
 WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
 [...]
 ```
@@ -50,28 +50,28 @@ If you have enabled authentication for your notary server, or are using DTR, you
 before you can push data to the notary server. 
 
 ```
-$ docker login dtr.example.com/user/repo
+$ docker login registry.example.com/user/repo
 Username: admin
 Password:
 
 Login Succeeded
 
-$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
-Adding signer "jeff" to dtr.example.com/user/repo...
-Initializing signed repository for dtr.example.com/user/repo...
-Successfully initialized "dtr.example.com/user/repo"
-Successfully added signer: jeff to dtr.example.com/user/repo
+$ docker trust signer add --key cert.pem jeff registry.example.com/user/repo
+Adding signer "jeff" to registry.example.com/user/repo...
+Initializing signed repository for registry.example.com/user/repo...
+Successfully initialized "registry.example.com/user/repo"
+Successfully added signer: jeff to registry.example.com/user/repo
 ```
 
 If you do not log in, you will see:
 
 ```bash
-$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
-Adding signer "jeff" to dtr.example.com/user/repo...
-Initializing signed repository for dtr.example.com/user/repo...
+$ docker trust signer add --key cert.pem jeff registry.example.com/user/repo
+Adding signer "jeff" to registry.example.com/user/repo...
+Initializing signed repository for registry.example.com/user/repo...
 you are not authorized to perform this operation: server returned 401.
 
-Failed to add signer to: dtr.example.com/user/repo
+Failed to add signer to: registry.example.com/user/repo
 ```
 
 ## Configuring the Notary Client
@@ -88,7 +88,7 @@ and ensure that it is available on your path.
 {
   "trust_dir" : "~/.docker/trust",
   "remote_server": {
-    "url": "https://dtr.example.com",
+    "url": "https://registry.example.com",
     "root_ca": "../.docker/ca.pem"
   }
 }
@@ -211,32 +211,32 @@ For DCT the name of the second delegation, in the below example
 advanced use cases of Notary additional delegations are used for hierarchy. 
 
 ```bash
-$ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
+$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 
-Adding signer "jeff" to dtr.example.com/admin/demo...
-Initializing signed repository for dtr.example.com/admin/demo...
+Adding signer "jeff" to registry.example.com/admin/demo...
+Initializing signed repository for registry.example.com/admin/demo...
 Enter passphrase for root key with ID f6c6a4b: 
 Enter passphrase for new repository key with ID b0014f8: 
 Repeat passphrase for new repository key with ID b0014f8: 
-Successfully initialized "dtr.example.com/admin/demo"
-Successfully added signer: jeff to dtr.example.com/admin/demo
+Successfully initialized "registry.example.com/admin/demo"
+Successfully added signer: jeff to registry.example.com/admin/demo
 ```
 
 You can see which keys have been pushed to the Notary server for each repository
 with the `$ docker trust inspect` command. 
 
 ```bash
-$ docker trust inspect --pretty dtr.example.com/admin/demo
+$ docker trust inspect --pretty registry.example.com/admin/demo
 
-No signatures for dtr.example.com/admin/demo
+No signatures for registry.example.com/admin/demo
 
 
-List of signers and their keys for dtr.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 jeff                1091060d7bfd
 
-Administrative keys for dtr.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
@@ -246,7 +246,7 @@ You could also use the Notary CLI to list delegations and keys. Here you can
 clearly see the keys were attached to `targets/releases` and `targets/jeff`.
 
 ```bash
-$ notary delegation list dtr.example.com/admin/demo
+$ notary delegation list registry.example.com/admin/demo
 
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
 ----                -----             -------                                                             ---------
@@ -266,27 +266,27 @@ the `targets/release` role.
 > configured when you first initiated the repository.
 
 ```bash
-$ docker trust signer add --key ben.pub ben dtr.example.com/admin/demo
+$ docker trust signer add --key ben.pub ben registry.example.com/admin/demo
 
-Adding signer "ben" to dtr.example.com/admin/demo...
+Adding signer "ben" to registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
-Successfully added signer: ben to dtr.example.com/admin/demo
+Successfully added signer: ben to registry.example.com/admin/demo
 ```
 
 Check to prove that there are now 2 delegations (Signer).
 
 ```bash
-$ docker trust inspect --pretty dtr.example.com/admin/demo
+$ docker trust inspect --pretty registry.example.com/admin/demo
 
-No signatures for dtr.example.com/admin/demo
+No signatures for registry.example.com/admin/demo
 
-List of signers and their keys for dtr.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 ben                 afa404703b25
 jeff                1091060d7bfd
 
-Administrative keys for dtr.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
@@ -303,27 +303,27 @@ will automatically handle adding this new key to `targets/releases`.
 > configured when you first initiated the repository.
 
 ```bash
-$ docker trust signer add --key cert2.pem jeff dtr.example.com/admin/demo
+$ docker trust signer add --key cert2.pem jeff registry.example.com/admin/demo
 
-Adding signer "jeff" to dtr.example.com/admin/demo...
+Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
-Successfully added signer: jeff to dtr.example.com/admin/demo
+Successfully added signer: jeff to registry.example.com/admin/demo
 ```
 
 Check to prove that the delegation (Signer) now contains multiple Key IDs. 
 
 ```bash
-$ docker trust inspect --pretty dtr.example.com/admin/demo
+$ docker trust inspect --pretty registry.example.com/admin/demo
 
-No signatures for dtr.example.com/admin/demo
+No signatures for registry.example.com/admin/demo
 
 
-List of signers and their keys for dtr.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 jeff                1091060d7bfd, 5570b88df073
 
-Administrative keys for dtr.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
@@ -339,10 +339,10 @@ attached to the `targets/releases` role, you can use the
 > by an active delegation
 
 ```bash
-$ docker trust signer remove dtr.example.com/admin/demo
-Removing signer "ben" from dtr.example.com/admin/demo...
+$ docker trust signer remove registry.example.com/admin/demo
+Removing signer "ben" from registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
-Successfully removed ben from dtr.example.com/admin/demo
+Successfully removed ben from registry.example.com/admin/demo
 ```
 
 #### Troubleshooting
@@ -366,7 +366,7 @@ WARN[0000] Error getting targets/releases: valid signatures did not meet thresho
 Resigning the delegation file is done with the `$ notary witness` command
 
 ```bash
-$ notary witness dtr.example.com/admin/demo targets/releases --publish
+$ notary witness registry.example.com/admin/demo targets/releases --publish
 ```
 
 More information on the `$ notary witness` command can be found 
@@ -383,7 +383,7 @@ and the role specific to that signer `targets/<name>`.
 1) We will need to grab the Key ID from the Notary Server
 
 ```bash
-$ notary delegation list dtr.example.com/admin/demo
+$ notary delegation list registry.example.com/admin/demo
 
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
 ----                -----             -------                                                             ---------
@@ -396,33 +396,33 @@ targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075
 2) Remove from the `targets/releases` delegation
 
 ```bash
-$ notary delegation remove dtr.example.com/admin/demo targets/targets 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
+$ notary delegation remove registry.example.com/admin/demo targets/targets 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 
-Auto-publishing changes to dtr.example.com/admin/demo
+Auto-publishing changes to registry.example.com/admin/demo
 Enter username: admin
 Enter password: 
 Enter passphrase for targets key with ID b0014f8: 
-Successfully published changes for repository dtr.example.com/admin/demo
+Successfully published changes for repository registry.example.com/admin/demo
 ```
 
 3) Remove from the `targets/<name>` delegation
 
 ```bash
-$ notary delegation remove dtr.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
+$ notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 
-Removal of delegation role targets/jeff with keys [5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository "dtr.example.com/admin/demo" staged for next publish.
+Removal of delegation role targets/jeff with keys [5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository "registry.example.com/admin/demo" staged for next publish.
 
-Auto-publishing changes to dtr.example.com/admin/demo
+Auto-publishing changes to registry.example.com/admin/demo
 Enter username: admin    
 Enter password: 
 Enter passphrase for targets key with ID b0014f8: 
-Successfully published changes for repository dtr.example.com/admin/demo
+Successfully published changes for repository registry.example.com/admin/demo
 ```
 
 4) Check the remaining delegation list 
 
 ```bash
-$ notary delegation list dtr.example.com/admin/demo
+$ notary delegation list registry.example.com/admin/demo
 
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
 ----                -----             -------                                                             ---------
@@ -468,16 +468,16 @@ This is often required by a container registry before a particular repository
 can be deleted. 
 
 ```bash
-$ notary delete dtr.example.com/admin/demo --remote
+$ notary delete registry.example.com/admin/demo --remote
 
-Deleting trust data for repository dtr.example.com/admin/demo
+Deleting trust data for repository registry.example.com/admin/demo
 Enter username: admin
 Enter password: 
-Successfully deleted local and remote trust data for repository dtr.example.com/admin/demo
+Successfully deleted local and remote trust data for repository registry.example.com/admin/demo
 
-$ docker trust inspect --pretty dtr.example.com/admin/demo
+$ docker trust inspect --pretty registry.example.com/admin/demo
 
-No signatures or cannot access dtr.example.com/admin/demo
+No signatures or cannot access registry.example.com/admin/demo
 ```
 
 ## Related information

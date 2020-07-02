@@ -212,7 +212,7 @@ true
 ##### Insecure registries
 
 You can set up a custom and insecure [registry](https://docs.docker.com/registry/introduction) to store your public or private images (instead of
-using [Docker Hub](https://hub.docker.com/) or [Docker Trusted Registry](https://docs.docker.com/ee/dtr/). Add URLs for
+using [Docker Hub](https://hub.docker.com/). Add URLs for
 your insecure registries and registry mirrors on which to host your images.
 
 For more information, see:

@@ -17,7 +17,7 @@ toc_max: 2
 
 Welcome to Docker Desktop!
 
-The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/desktop/enterprise/).
+The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes.md). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/desktop/enterprise/).
 
 Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker _on Windows_.
 
@@ -547,7 +547,7 @@ Docker Desktop creates a certificate bundle of all user-trusted CAs based on
 the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.
 
 To learn more about how to install a CA root certificate for the registry, see
-[Verify repository client with certificates](/engine/security/certificates)
+[Verify repository client with certificates](../engine/security/certificates.md)
 in the Docker Engine topics.
 
 ### How do I add client certificates?

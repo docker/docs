@@ -213,7 +213,7 @@ There are two steps: (1) configure credentials, and (2) configure endpoints.
       -get-logs-script string
         	 An optional custom script used to retrieve the logs.
       -insecure-skip-verify
-           Optional. Specifies to disable SSL verification for an insecure private Docker Trusted Registry.         
+           Optional. Specifies to disable SSL verification for an insecure private Docker Registry.         
       -help
         	 Help on the command.
       -html

@@ -352,8 +352,7 @@ Server:
 
 You can set up your own [registries](https://docs.docker.com/registry/introduction) on the **Basic** Daemon settings.
 
-Normally, you store public or private images in [Docker Hub](https://hub.docker.com/)
-and [Docker Trusted Registry](https://docs.docker.com/ee/dtr/). Here, you
+Normally, you store public or private images in [Docker Hub](https://hub.docker.com/). Here, you
 can use Docker to set up your own [insecure registry](https://docs.docker.com/registry/insecure/).
 Simply add URLs for insecure registries and registry mirrors on which to host your images.
 

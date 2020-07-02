@@ -108,21 +108,18 @@ Within the Docker CLI we can sign and push a container image with the
 set, more information on Notary can be found [here](/notary/getting_started/).
 
 A prerequisite for signing an image is a Docker Registry with a Notary server
-attached (Such as the Docker Hub or Docker Trusted Registry). Instructions for
+attached (Such as the Docker Hub ). Instructions for
 standing up a self-hosted environment can be found [here](/engine/security/trust/deploying_notary/).
 
 To sign a Docker Image you will need a delegation key pair. These keys
-can be generated locally using `$ docker trust key generate`, generated
-by a certificate authority, or if you are using Docker Enterprise's
-Universal Control Plane (UCP), a user's Client Bundle provides adequate keys for a
-delegation. Find more information on Delegation Keys
-[here](trust_delegation/#creating-delegation-keys).
+can be generated locally using `$ docker trust key generate` or generated
+by a certificate authority.
 
 First we will add the delegation private key to the local Docker trust
 repository. (By default this is stored in `~/.docker/trust/`). If you are
 generating delegation keys with `$ docker trust key generate`, the private key
 is automatically added to the local trust store. If you are importing a separate
-key, such as one from a UCP Client Bundle you will need to use the
+key, you will need to use the
 `$ docker trust key load` command.
 
 ```
@@ -152,8 +149,8 @@ role of delegations, head to
 [delegations for content trust](trust_delegation/#managing-delegations-in-a-notary-server).
 
 ```
-$ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
-Adding signer "jeff" to dtr.example.com/admin/demo...
+$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
+Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94:
 ```
 
@@ -161,14 +158,14 @@ Finally, we will use the delegation private key to sign a particular tag and
 push it up to the registry.
 
 ```
-$ docker trust sign dtr.example.com/admin/demo:1
-Signing and pushing trust data for local image dtr.example.com/admin/demo:1, may overwrite remote trust data
-The push refers to repository [dtr.example.com/admin/demo]
+$ docker trust sign registry.example.com/admin/demo:1
+Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
+The push refers to repository [registry.example.com/admin/demo]
 7bff100f35cb: Pushed
 1: digest: sha256:3d2e482b82608d153a374df3357c0291589a61cc194ec4a9ca2381073a17f58e size: 528
 Signing and pushing trust metadata
 Enter passphrase for signer key with ID 8ae710e:
-Successfully signed dtr.example.com/admin/demo:1
+Successfully signed registry.example.com/admin/demo:1
 ```
 
 Alternatively, once the keys have been imported an image can be pushed with the
@@ -177,32 +174,32 @@ Alternatively, once the keys have been imported an image can be pushed with the
 ```
 $ export DOCKER_CONTENT_TRUST=1
 
-$ docker push dtr.example.com/admin/demo:1
-The push refers to repository [dtr.example.com/admin/demo:1]
+$ docker push registry.example.com/admin/demo:1
+The push refers to repository [registry.example.com/admin/demo:1]
 7bff100f35cb: Pushed
 1: digest: sha256:3d2e482b82608d153a374df3357c0291589a61cc194ec4a9ca2381073a17f58e size: 528
 Signing and pushing trust metadata
 Enter passphrase for signer key with ID 8ae710e:
-Successfully signed dtr.example.com/admin/demo:1
+Successfully signed registry.example.com/admin/demo:1
 ```
 
 Remote trust data for a tag or a repository can be viewed by the
 `$ docker trust inspect` command:
 
 ```
-$ docker trust inspect --pretty dtr.example.com/admin/demo:1
+$ docker trust inspect --pretty registry.example.com/admin/demo:1
 
-Signatures for dtr.example.com/admin/demo:1
+Signatures for registry.example.com/admin/demo:1
 
 SIGNED TAG          DIGEST                                                             SIGNERS
 1                   3d2e482b82608d153a374df3357c0291589a61cc194ec4a9ca2381073a17f58e   jeff
 
-List of signers and their keys for dtr.example.com/admin/demo:1
+List of signers and their keys for registry.example.com/admin/demo:1
 
 SIGNER              KEYS
 jeff                8ae710e3ba82
 
-Administrative keys for dtr.example.com/admin/demo:1
+Administrative keys for registry.example.com/admin/demo:1
 
   Repository Key:	10b5e94c916a0977471cc08fa56c1a5679819b2005ba6a257aa78ce76d3a1e27
   Root Key:	84ca6e4416416d78c4597e754f38517bea95ab427e5f95871f90d460573071fc
@@ -211,9 +208,9 @@ Administrative keys for dtr.example.com/admin/demo:1
 Remote Trust data for a tag can be removed by the `$ docker trust revoke` command:
 
 ```
-$ docker trust revoke dtr.example.com/admin/demo:1
+$ docker trust revoke registry.example.com/admin/demo:1
 Enter passphrase for signer key with ID 8ae710e:
-Successfully deleted signature for dtr.example.com/admin/demo:1
+Successfully deleted signature for registry.example.com/admin/demo:1
 ```
 
 ## Runtime Enforcement with Docker Content Trust
@@ -416,15 +413,15 @@ succeeds if `someimage:latest` is signed. However, an operation with an explicit
 content hash always succeeds as long as the hash exists:
 
 ```
-$ docker pull dtr.example.com/user/image:1
-Error: remote trust data does not exist for dtr.example.com/user/image: dtr.example.com does not have trust data for dtr.example.com/user/image
+$ docker pull registry.example.com/user/image:1
+Error: remote trust data does not exist for registry.example.com/user/image: registry.example.com does not have trust data for registry.example.com/user/image
 
-$ docker pull dtr.example.com/user/image@sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
+$ docker pull registry.example.com/user/image@sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
 sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1: Pulling from user/image
 ff3a5c916c92: Pull complete
 a59a168caba3: Pull complete
 Digest: sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
-Status: Downloaded newer image for dtr.example.com/user/image@sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
+Status: Downloaded newer image for registry.example.com/user/image@sha256:ee7491c9c31db1ffb7673d91e9fac5d6354a89d0e97408567e09df069a1687c1
 ```
 
 ## Related information
