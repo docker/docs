@@ -177,7 +177,7 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
     ```
 
-3. Save the file.
+3. Save the file. ( this will create `/etc/systemd/system/docker.service.d/override.conf` )
 
 4. Reload the `systemctl` configuration.
 
@@ -191,11 +191,11 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
     $ sudo systemctl restart docker.service
     ```
 
-6.  Check to see whether the change was honored by reviewing the output of `netstat` to confirm `dockerd` is listening on the configured port.
+6.  Check to see whether the change was honored by reviewing the output of `ss` to confirm `dockerd` is listening on the configured port.
 
     ```bash
-    $ sudo netstat -lntp | grep dockerd
-    tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
+    $ sudo ss -lntp | grep dockerd
+    LISTEN 0      4096       127.0.0.1:2375        0.0.0.0:*    users:(("dockerd",pid=30509,fd=3))
     ``` 
     
 ### Configuring remote access with `daemon.json`
@@ -210,11 +210,11 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 
 2.  Restart Docker. 
 
-3.  Check to see whether the change was honored by reviewing the output of `netstat` to confirm `dockerd` is listening on the configured port.
+3.  Check to see whether the change was honored by reviewing the output of `ss` to confirm `dockerd` is listening on the configured port.
 
     ```bash
-    $ sudo netstat -lntp | grep dockerd
-    tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
+    $ sudo ss -lntp | grep dockerd
+    LISTEN 0      4096       127.0.0.1:2375        0.0.0.0:*    users:(("dockerd",pid=30509,fd=3))
     ``` 
         
 ## Enable IPv6 on the Docker daemon
