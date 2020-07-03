@@ -61,7 +61,7 @@ Welcome! We are excited that you want to learn Docker.
 
 This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from Dockercon 2020.
 
-[![How to get started with Docker](images/vid-get-started-pmckee.png)](https://docker.events.cube365.net/docker/dockercon/content/Videos/hgMFTyX5kYKmTPWZo){: target="_blank" class="_”}
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 The Docker Quickstart training module teaches you how to:
 

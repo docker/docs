@@ -20,20 +20,8 @@ Disallow: /v18.03/
 Disallow: /v18.09/
 
 # Docker Datacenter archives
-Disallow: /datacenter/dtr/2.0
-Disallow: /datacenter/dtr/2.1
-Disallow: /datacenter/dtr/2.2
-Disallow: /datacenter/dtr/2.3
-Disallow: /datacenter/dtr/2.4
-Disallow: /datacenter/dtr/2.5
-Disallow: /datacenter/dtr/2.6
-
-Disallow: /datacenter/ucp/3.1
-Disallow: /datacenter/ucp/3.0
-Disallow: /datacenter/ucp/2.2
-Disallow: /datacenter/ucp/2.1
-Disallow: /datacenter/ucp/2.0
-Disallow: /datacenter/ucp/1.1
+Disallow: /datacenter/
+Disallow: /ee/
 
 Disallow: /apidocs/v*
 

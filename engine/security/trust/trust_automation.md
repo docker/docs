@@ -43,11 +43,11 @@ $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="repopassphrase123"
 
 # Initialise Repo and Push Delegation
-$ docker trust signer add --key delegation.crt jeff dtr.example.com/admin/demo
-Adding signer "jeff" to dtr.example.com/admin/demo...
-Initializing signed repository for dtr.example.com/admin/demo...
-Successfully initialized "dtr.example.com/admin/demo"
-Successfully added signer: dtr.example.com/admin/demo
+$ docker trust signer add --key delegation.crt jeff registry.example.com/admin/demo
+Adding signer "jeff" to registry.example.com/admin/demo...
+Initializing signed repository for registry.example.com/admin/demo...
+Successfully initialized "registry.example.com/admin/demo"
+Successfully added signer: registry.example.com/admin/demo
 ```
 
 ## Sign an image
@@ -59,13 +59,13 @@ trust store with `$ docker trust key load`.
 ```
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
-$ docker trust sign dtr.example.com/admin/demo:1
-Signing and pushing trust data for local image dtr.example.com/admin/demo:1, may overwrite remote trust data
-The push refers to repository [dtr.example.com/admin/demo]
+$ docker trust sign registry.example.com/admin/demo:1
+Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
+The push refers to repository [registry.example.com/admin/demo]
 428c97da766c: Layer already exists
 2: digest: sha256:1a6fd470b9ce10849be79e99529a88371dff60c60aab424c077007f6979b4812 size: 524
 Signing and pushing trust metadata
-Successfully signed dtr.example.com/admin/demo:1
+Successfully signed registry.example.com/admin/demo:1
 ```
 
 ## Build with content trust

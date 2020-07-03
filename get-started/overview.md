@@ -127,8 +127,7 @@ Docker API. The Docker client can communicate with more than one daemon.
 
 A Docker _registry_ stores Docker images. Docker Hub is a public
 registry that anyone can use, and Docker is configured to look for images on
-Docker Hub by default. You can even run your own private registry. If you use
-Docker Datacenter (DDC), it includes Docker Trusted Registry (DTR).
+Docker Hub by default. You can even run your own private registry.
 
 When you use the `docker pull` or `docker run` commands, the required images are
 pulled from your configured registry. When you use the `docker push` command,
