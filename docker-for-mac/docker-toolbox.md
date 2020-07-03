@@ -159,8 +159,6 @@ is running a different version of server.
     default          *        virtualbox     Running   tcp://192.168.99.100:2376           v19.03.2
     docker-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v19.03.1
 
-You might also run into a similar situation with Docker Universal Control Plane (UCP).
-
 There are a few ways to address this problem and keep using your older
 machines. One solution is to use a version manager like
 [DVM](https://github.com/getcarina/dvm).

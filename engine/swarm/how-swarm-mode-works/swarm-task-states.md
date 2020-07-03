@@ -10,7 +10,7 @@ Docker lets you create services, which can start tasks. A service is a
 description of a desired state, and a task does the work. Work is scheduled on
 swarm nodes in this sequence:
 
-1.  Create a service by using `docker service create` or the UCP web UI or CLI.
+1.  Create a service by using `docker service create`.
 2.  The request goes to a Docker manager node.
 3.  The Docker manager node schedules the service to run on particular nodes.
 4.  Each service can start multiple tasks.

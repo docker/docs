@@ -271,10 +271,6 @@ You can back up the swarm using any manager. Use the following procedure.
 
 To restore, see [Restore from a backup](#restore-from-a-backup). 
 
-> Note
-> 
-> When trying to restore swarm with UCP installed, swarm mode relies on UCP to provide the CA certificates that allow nodes in the cluster to identify one another.
-
 ## Recover from disaster
 
 ### Restore from a backup
