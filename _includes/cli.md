@@ -27,9 +27,10 @@ your client and daemon API versions.
 
 {% if page.enterprise_only == true %}
 
-> This command is only available on Docker Enterprise Edition.
+> Docker Desktop Enterprise
 >
-> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" class="_"}.
+> This command is only available on Docker Desktop Enterprise. Learn more
+> about [Docker Desktop Enterprise](/desktop/enterprise/).
 {: .important }
 
 {% endif %}
