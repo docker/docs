@@ -32,7 +32,7 @@ Define the application dependencies.
         from flask import Flask
 
         app = Flask(__name__)
-        cache = redis.Redis(host='redis', port=6379)
+        cache = redis.Redis(host='redis', port=5000)
 
 
         def get_hit_count():
@@ -90,6 +90,7 @@ following:
     COPY requirements.txt requirements.txt
     RUN pip install -r requirements.txt
     COPY . .
+    EXPOSE 5000
     CMD ["flask", "run"]
 
 This tells Docker to:
