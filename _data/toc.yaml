@@ -1153,8 +1153,8 @@ manuals:
       title: Stable release notes
     - path: /docker-for-mac/edge-release-notes/
       title: Edge release notes
-    - path: /docker-for-mac/mutagen-caching/
-      title: Mutagen-based caching
+    - path: /docker-for-mac/mutagen/
+      title: File synchronization
   - sectiontitle: Windows
     section:
     - path: /docker-for-windows/install/

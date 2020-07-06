@@ -2,6 +2,8 @@
 description: High-performance two-way file sync for volume mounts
 keywords: mac, mutagen, volumes, file sync,
 title: Mutagen-based file synchronization
+redirect_from:
+- /docker-for-mac//mutagen-caching/
 ---
 
 Docker Desktop for Mac on Edge has a new file sharing feature which performs
@@ -27,9 +29,10 @@ development container.
 
 First, create a directory which will contain the app:
 
-```
+```bash
 $ mkdir ~/workspace/my-app
 ```
+
 Next, enable the two-way file sync feature in Docker Desktop:
 
 1. From the Docker Desktop menu, click **Preferences** > **Resources** > **File sharing**.
@@ -38,7 +41,7 @@ Next, enable the two-way file sync feature in Docker Desktop:
 
 3. Click on the toggle next to the directory name.
 
-4.  Click **Apply & Restart** for the changes to take effect.
+4. Click **Apply & Restart** for the changes to take effect.
 
 When Docker Desktop has restarted, the **File sharing** page looks like
 this:
@@ -47,7 +50,7 @@ this:
 
 Run the following command to start a container and bootstrap the app with `npx`:
 
-```
+```bash
 $ docker run -it -v ~/workspace/my-app:/my-app -w /my-app -p 3000:3000 node:lts bash
 root@95441305251a:/my-app# npx create-react-app app
 root@95441305251a:/my-app# cd app
@@ -81,14 +84,14 @@ Many projects have scripts which modify files in a container and then read them 
 the host, or the other way around. To support these, Docker Desktop automatically flushes
 file changes around `docker run` calls. Therefore, the following will work as expected:
 
-```
+```bash
 docker run -v ~/foo:/foo:delegated touch /foo/new-file-in-container
 stat ~/foo/new-file-in-container
 ```
 
 and
 
-```
+```bash
 touch ~/foo/new-file-on-host
 docker run -v ~/foo:/foo:delegated stat /foo/new-file-on-host
 ```
@@ -96,7 +99,7 @@ docker run -v ~/foo:/foo:delegated stat /foo/new-file-on-host
 Note that changes are not flushed around `docker exec` calls, so this will not work as
 expected:
 
-```
+```bash
 docker exec existing-container touch /foo/new-file-from-existing-container
 stat ~/foo/new-file-from-existing-container # file will not be found
 ```
@@ -124,14 +127,14 @@ the host, then use a named docker volume to bypass the sync.
 
 First create a volume using:
 
-```
+```bash
 $ docker volume create donotsyncme
 donotsyncme
 ```
 
 Use the volume for the subdirectory you want to avoid syncing:
 
-```
+```bash
 $ docker run -it -v ~/workspace/my-app:/my-app -v donotsyncme:/my-app/dontsyncme -w /my-app -p 3000:3000 node:lts bash
 ```
 
@@ -149,7 +152,7 @@ To completely avoid synchronization in both directions, create a
 [global mutagen config file](https://mutagen.io/documentation/introduction/configuration#configuration-files).
 For example, create a file `~/.mutagen.yml` containing:
 
-```
+```bash
 sync:
   defaults:
     ignore:
