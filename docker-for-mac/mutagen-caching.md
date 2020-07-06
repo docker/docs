@@ -16,7 +16,8 @@ This page contains an example to show how the Mutagen feature should be used to 
 
 > **Important**
 >
-> After completing the synchronizing process, you must delete and re-create any containers which will make use of the synchronized directories.
+> After completing the synchronizing process, you must delete and re-create any 
+containers which will make use of the synchronized directories.
 
 ## A simple React app
 
@@ -56,7 +57,8 @@ root@95441305251a:/my-app# npm start
 Once the development webserver has started, open [https://localhost:3000/](https://localhost:3000/) in
 your browser and observe the app is running.
 
-Return to the **File sharing** page in the UI and observe the status of the synchronize toggle located next to the directory name. The status will be
+Return to the **File sharing** page in the UI and observe the status of the 
+synchronize toggle located next to the directory name. The status will be
 updated as file changes are detected and then synchronized between the host
 and the containers.
 
@@ -67,17 +69,17 @@ on the webserver.
 As you edit code on the host, the changes are detected and transferred to the
 container for testing. Changes inside the container (for example, the creation of build artifacts) are detected and transferred back to the host.
 
-## Adding synchronized directories via the CLI
+## Adding synchronized directories through the CLI
 
 As of Docker Desktop Edge 2.3.2.0 the `:delegated` flag on a shared volume will 
 automatically enable synchronization. This is particularly useful if you want to share
-the synchronization setting with other developers in your team, via your source code.
+the synchronization setting with other developers in your team, through your source code.
 
 ## Scripting
 
 Many projects have scripts which modify files in a container and then read them back on
 the host, or the other way around. To support these, Docker Desktop automatically flushes
-file changes around `docker run` calls. Therefore the following will work as expected:
+file changes around `docker run` calls. Therefore, the following will work as expected:
 
 ```
 docker run -v ~/foo:/foo:delegated touch /foo/new-file-in-container
@@ -101,14 +103,14 @@ stat ~/foo/new-file-from-existing-container # file will not be found
 
 ## Bypassing a two-way sync for a volume
 
-By default if a directory has two-way sync enabled, then shared volumes will use the
-sync. However if you want to *avoid* using a two-way file synchronization, choose
+By default, if a directory has two-way sync enabled, then shared volumes will use the
+sync. However, if you want to *avoid* using a two-way file synchronization, choose
 one of the following volume sharing options:
 
 - `:consistent`: this will bypass both the file caching and the two-way sync.
-- `:cached`: this will bypass the two-way sync but still use the file caching.
+- `:cached`: this will bypass the two-way sync but still uses the file caching.
 
-Note that these options are backwards compatible with older Docker version. Any existing
+Note that these options are backwards compatible with older Docker versions. Any existing
 projects using `:delegated` to enable file caching can be safely changed to use `:cached`
 without loss of performance.
 
@@ -145,7 +147,7 @@ still be written to the container (although hidden by the `docker volume`).
 
 To completely avoid synchronization in both directions, create a
 [global mutagen config file](https://mutagen.io/documentation/introduction/configuration#configuration-files).
-For example create a file `~/.mutagen.yml` containing:
+For example, create a file `~/.mutagen.yml` containing:
 
 ```
 sync:
