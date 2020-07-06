@@ -25,7 +25,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 3. Add the following content to the `Dockerfile`.
 
-       FROM python:3
+       FROM python:3.8-slim-buster
        ENV PYTHONUNBUFFERED 1
        RUN mkdir /code
        WORKDIR /code
@@ -45,7 +45,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 6. Add the required software in the file.
 
-       Django>=2.0,<3.0
+       Django>=3.0,<4.0
        psycopg2-binary>=2.8
 
 7. Save and close the `requirements.txt` file.
@@ -180,8 +180,7 @@ In this section, you set up the database connection for Django.
 
     . . .
 
-    web_1  | May 30, 2017 - 21:44:49
-    web_1  | Django version 1.11.1, using settings 'composeexample.settings'
+    web_1  | Django version 3.0.8, using settings 'composeexample.settings'
     web_1  | Starting development server at http://0.0.0.0:8000/
     web_1  | Quit the server with CONTROL-C.
     ```
@@ -204,7 +203,7 @@ In this section, you set up the database connection for Django.
     >       ALLOWED_HOSTS = ['*']
     >
     > This value is **not** safe for production usage.  Refer to the
-     [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
+     [Django documentation](https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts)  for more information.
 
 5.  List running containers.
 
