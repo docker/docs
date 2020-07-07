@@ -12,11 +12,11 @@ Docker announced the following plans and pricing changes.
 
 Immediately available for **Individuals** and **Teams**:
 
-- **Free Community** plans will continue to be available for both individuals and development teams that include unlimited public repositories.
+- **Free** plans will continue to be available for both individuals and development teams that include unlimited public repositories.
 
-- **NEW Pro** plan for individuals with unlimited private repositories, unlimited public repositories, and unlimited collaborators starting at $7 per month.
+- **NEW Pro** plan for individuals with unlimited private repositories, unlimited public repositories, and unlimited collaborators starting at $5 per month with the annual plan.
 
-- **NEW Team** plan for development teams with unlimited private repositories and unlimited public repositories starting at $9 per user per month and offers advanced collaboration and management tools, including organization and team management with role-based access controls.
+- **NEW Team** plan for development teams with unlimited private repositories and unlimited public repositories starting at $25 per month for the first 5 users with the annual plan and $7 per month for each user thereafter. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls for the whole team.
 
 ### How can I compare which features are in each plan?
 
@@ -24,7 +24,7 @@ You can see pricing and a full list of features for each product at [Docker Hub 
 
 ### What is the difference between a legacy plan and these new announced plans?
 
-The legacy plans were based on a private repository/parallel autobuild pricing model. The new Pro and Team plans are now based on a per-seat pricing model. Both Pro and Team offer unlimited private repositories. The Community plan offers unlimited public repositories at no cost per month.
+The legacy plans were based on a private repository/parallel autobuild pricing model. The new Pro and Team plans are now based on a per-seat pricing model. Both Pro and Team offer unlimited private repositories. The Free plan offers unlimited public repositories at no cost per month.
 
 ### If I am an existing paid Docker Hub customer, when do I need to change my plan?
 
@@ -42,9 +42,9 @@ Depending on your configuration, you may find it more economical to move to one 
 
 For details on the differences between the Team and Free Team plan, see [Docker Billing](index.md).
 
-### Do collaborator limits differ between Community and Pro?
+### Do collaborator limits differ between Free and Pro?
 
-Pro includes unlimited collaborators for both private and public repositories. Community includes unlimited collaborators for public repositories and up to three collaborators per private repository.
+Pro includes unlimited collaborators for both private and public repositories. Free includes unlimited collaborators for public repositories and up to three collaborators per private repository.
 
 ### How can I create a new Docker Hub account?
 
@@ -58,7 +58,7 @@ For information on how to upgrade to a Pro plan from a legacy (per-repository pl
 
 ### How do I upgrade to a Team plan from a legacy organization plan?
 
-Upgrading your legacy plan to a Team plan offers you unlimited public and unlimited private repositories. Once you’ve upgraded your current legacy organization plan to a Team plan, it is not possible to switch back to the legacy per-repository plan.
+Upgrading your legacy plan to a Team plan offers you unlimited public and private repositories, unlimited teams, and 3 parallel builds. Once you’ve upgraded your current legacy organization plan to a Team plan, it is not possible to switch back to the legacy per-repository plan.
 
 For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](/upgrade.md#upgrade-to-a-team-plan).
 
@@ -72,11 +72,11 @@ Before you downgrade to a Free Team plan, you must convert all private repositor
 
 For information on how to downgrade from a Team plan to a Free plan, see [Downgrade from Team to a Free plan](/downgrade.md#downgrade-from-team-to-a-free-plan).
 
-### How do I downgrade from Pro to a Community plan?
+### How do I downgrade from Pro to a Free plan?
 
-Before you downgrade to a Community plan, ensure that your account details are updated to reflect features available in the Community plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Community plan, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
 
-For information on how to downgrade from Pro to a Community plan, see [Downgrade from Pro to a Community plan](/downgrade.md#downgrade-from-pro-to-a-community-plan).
+For information on how to downgrade from Pro to a Free plan, see [Downgrade from Pro to a Free plan](/downgrade.md#downgrade-from-pro-to-a-free-plan).
 
 ### How many seats do I need for my organization if I select a Team plan?
 
@@ -92,9 +92,19 @@ For information on how to remove paid seats from a monthly plan for your organiz
 
 For information on how to add a member to a team, see [Add a member to a team](../orgs.md#add-a-member-to-a-team).
 
-### Can Docker Hub continue to be used for open source project?
+### Do you offer annual subscriptions?
 
-Yes, Docker will continue to offer a Community plan with unlimited public repositories and unlimited collaborators for public repositories at no cost per month. Docker is committed to supporting the broader open source communities.
+Yes, both the Pro and Team plans are available through annual subscriptions and include a discount from the monthly subscription price.
+
+You can view the annual subscription pricing for each product at [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+
+### Are legacy plans eligible for annual pricing?
+
+You can upgrade to an annual plan from a Pro or a Team plan. It is not possible to upgrade to an annual plan from an existing legacy plan.
+
+### Can Docker Hub continue to be used for open source projects?
+
+Yes, Docker will continue to offer a Free plan with unlimited public repositories and unlimited collaborators for public repositories at no cost per month. Docker is committed to supporting the broader open source communities.
 
 ### What forms of payment do you accept?
 
