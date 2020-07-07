@@ -10,9 +10,10 @@ You can upgrade to a Pro or a Team plan from a Free plan, or from your current l
 
 >**Note:**
 >
-> - If you are on a legacy per-repository plan, you cannot upgrade to another legacy plan. You can only upgrade your legacy plan to the new Pro or Team plan.
+> - If you are on a legacy per-repository plan, you cannot upgrade to another legacy plan. You can only upgrade your legacy plan to the new Pro or Team monthly plan.
+> - It is not possible to upgrade from an existing legacy plan to an annual plan.
 >
-> - Once you’ve upgraded your current legacy plan to a Pro or a Team plan, it is not possible to switch back to the legacy per-repository plan.
+> - Once you’ve upgraded your current legacy plan to a monthly Pro or a Team plan, it is not possible to switch back to the legacy per-repository plan.
 
 The following sections contain instructions on how to upgrade to Pro and Team plans.
 
@@ -26,11 +27,15 @@ To upgrade to a Pro plan:
 
 3. Click **Change plan** to choose a new plan.
 
-4. Click **Upgrade** to upgrade your existing plan to a Pro plan.
+4. Review the plan details in the **Pro** section and click **Buy Now**.
 
-5. Review the card details and the information displayed on the **Payment Method** page and click **Purchase** to confirm.
+5. By default, the **Payment Method** page displays the annual cost to upgrade to a Pro plan. If you prefer to upgrade to a monthly plan, choose **pay monthly**.
+
+6. Review the card details and the information displayed and click **Purchase** to confirm.
 
     The **Billing** page now displays a confirmation of the upgrade with an invoice containing details about your new plan, entitlements, and the total cost.
+
+7. You’ll also receive an email confirming the cancellation of your legacy plan.
 
 ## Upgrade to a Team plan
 
@@ -44,12 +49,14 @@ To upgrade to a Team plan:
 
 4. Click **Change plan** to upgrade to a new plan.
 
-5. Read the information displayed and select **Upgrade** to continue.
+5. Review the plan details in the **Team** section and click **Buy Now**.
 
-6. By default, the plan displays the existing number of users in your team.
+6. By default, the plan displays the annual cost to upgrade the existing number of users to a Team plan. To switch to a monthly plan, click **Pay Monthly**.
 
 7. Review and adjust the number of users as required and click **Continue to payment**.
 
 8. Review the card details and click **Purchase** to confirm.
 
     The **Billing page** now displays a confirmation of the upgrade with an invoice containing details about your new plan, entitlements, and the total cost.
+
+    You’ll also receive an email confirming the cancellation of your legacy plan.

@@ -4,13 +4,16 @@ keywords: Docker, Docker Hub, subscription, update, remove, seats
 title: Remove seats from your plan
 ---
 
-You can manage your Docker Hub subscription anytime by removing seats from your plan. If you remove seats in the middle of the billing cycle, changes will be applied at the end of your billing cycle.
+You can manage your Docker Hub subscription anytime by removing seats from your plan. If you remove seats in the middle of the billing cycle, changes will be applied immediately and the changes will be reflected in the next billing cycle.
+
+For example, if you receive your billing on the 8th of every month for 10 seats and you choose to remove 2 seats on the 15th of the month, the 2 seats will be removed immediately. You will start paying for 8 seats from the next billing cycle.
 
 ## Remove seats from a monthly plan
 
 > **Note:**
 >
-> Note: You must be a member of the ‘Owners’ team to remove seats from your organization.
+> - You must be a member of the ‘Owners’ team to remove seats from your organization.
+> - If you are on an annual plan, you can only remove the additional monthly seats you've added to your annual plan. It is not possible to remove seats from your annual subscription.
 
 To remove seats from a monthly plan:
 
