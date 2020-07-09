@@ -107,15 +107,9 @@ stat ~/foo/new-file-from-existing-container # file will not be found
 ## Bypassing a two-way sync for a volume
 
 By default, if a directory has two-way sync enabled, then shared volumes will use the
-sync. However, if you want to *avoid* using a two-way file synchronization, choose
-one of the following volume sharing options:
-
-- `:consistent`: this will bypass both the file caching and the two-way sync.
-- `:cached`: this will bypass the two-way sync but still uses the file caching.
-
-Note that these options are backwards compatible with older Docker versions. Any existing
-projects using `:delegated` to enable file caching can be safely changed to use `:cached`
-without loss of performance.
+sync. However, if you want to *avoid* using a two-way file synchronization, use
+`:consistent`: this will bypass both file caching and the two-way sync. This is
+backwards compatible with previous Docker versions.
 
 ## Avoiding synchronizing a subdirectory from a container to the host
 
