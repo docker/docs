@@ -160,7 +160,8 @@ curl -L https://github.com/docker/aci-integration-beta/blob/main/scripts/install
 
 ### Manual install
 
-You can download the Docker ACI Integration CLI from [latest release](https://github.com/docker/aci-integration-beta/releases/latest).
+You can download the Docker ACI Integration CLI from the 
+[latest release](https://github.com/docker/aci-integration-beta/releases/latest){: target="_blank" class="_"} page.
 
 You will then need to make it executable:
 
