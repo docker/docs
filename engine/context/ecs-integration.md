@@ -143,7 +143,7 @@ The Docker ECS Integration CLI adds support for running and managing containers 
 You can download the Docker ECS plugin from the [docker/ecs-plugin](https://github.com/docker/ecs-plugin){: target="_blank" class="_"} GitHub repository using the following command:
 
 ```console
-$ curl -L https://github.com/docker/ecs-plugin/releases/latest/download/docker-ecs-linux-amd64
+$ curl -LO https://github.com/docker/ecs-plugin/releases/latest/download/docker-ecs-linux-amd64
 ```
 
 You will then need to make it an executable:
