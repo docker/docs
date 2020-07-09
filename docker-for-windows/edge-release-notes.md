@@ -11,6 +11,21 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+# Docker Desktop Community 2.3.3.0
+2020-07-09
+
+> [Download](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- Beta release of [Docker ECS integration v1.0.0-beta.1.](https://docs.docker.com/engine/context/ecs-integration/)
+- [Docker ACI integration v0.1.7](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.7)
+- [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
+
+### Bug fixes and minor changes
+
+- Compose-on-Kubernetes is no longer included in the Docker Desktop installer. You can download it separately from the compose-on-kubernetes [release page](https://github.com/docker/compose-on-kubernetes/releases).
+
 ## Docker Desktop Community 2.3.2.1
 2020-06-29
 
