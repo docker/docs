@@ -11,6 +11,24 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.3.0
+2020-07-09
+
+> [Download](https://desktop.docker.com/mac/edge/46574/Docker.dmg)
+
+### Upgrades
+
+- Beta release of [Docker ECS integration v1.0.0-beta.1](https://docs.docker.com/engine/context/ecs-integration/)
+- [Docker ACI integration v0.1.7](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.7)
+- [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
+
+### Bug fixes and minor changes
+
+- Compose-on-Kubernetes is no longer included in the Docker Desktop installer. You can download it separately from the compose-on-kubernetes [release page](https://github.com/docker/compose-on-kubernetes/releases).
+- Fixed an incompatibility between `hyperkit` and `osquery` which resulted in excessive `hyperkit` CPU usage. See [docker/for-mac#3499](https://github.com/docker/for-mac/issues/3499#issuecomment-639140844)
+- Docker Desktop now respects consistency flags `cached`, `delegated`, `consistent` even when in a list of options (for example, `z,delegated`). See [docker/for-mac#4089]( https://github.com/docker/for-mac/issues/4590#issuecomment-650221168).
+- Docker Desktop now implements the shared volume flag `:delegated` by automatically setting up a two-way file sync with Mutagen.
+
 ## Docker Desktop Community 2.3.2.0
 2020-06-25
 
