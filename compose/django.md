@@ -144,7 +144,7 @@ In this section, you set up the database connection for Django.
 
 2. Replace the `DATABASES = ...` with the following:
 
-       # setting.py
+       # settings.py
        
        DATABASES = {
            'default': {
