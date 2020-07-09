@@ -57,7 +57,7 @@
 */
 
 .nav-secondary {
-    background: $bg-secondary;
+    background-color: $bg-secondary;
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
     height: 55px;
 }
@@ -76,7 +76,7 @@
     position: absolute;
     width: 100%;
     &.affix {
-        background: $bg-secondary;
+        background-color: $bg-secondary;
         box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
         top: 0;
         position: fixed;
