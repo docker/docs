@@ -30,7 +30,7 @@ body.night {
         color: #c7c9ca !important;
     }
     .header {
-        background-color: #101c29!important;
+        background-color: $bg-header-night;
     }
     hr {
         border-top: 1px solid #4f6071;
@@ -283,7 +283,7 @@ body.night {
     }
     /** apply to images with garbled text **/
     img.white-bg {
-	  background-color: white;
+        background-color: white;
     }
 }
 
@@ -296,10 +296,10 @@ body.night {
 
 body.night {
     /* accordion */
-.panel {
-    color: $body-text-night;
-    margin-bottom: 20px;
-    background-color: #24394c;
+    .panel {
+        color: $body-text-night;
+        margin-bottom: 20px;
+        background-color: #24394c;
     }
     .panel-default {
         border-color: #374656;

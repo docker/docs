@@ -1,11 +1,5 @@
 /*
 *
-* layout
-*
-*/
-
-/*
-*
 * branding *********************************************************************
 *
 */
@@ -41,10 +35,13 @@
 */
 
 .header {
-    background-color: $bg-secondary;
+    background-color: $bg-header;
     position: relative;
     z-index: 1;
     transition: all 0.1s ease;
+    border: unset;
+    border-radius: unset;
+    height: unset;
 }
 
 .columns,
