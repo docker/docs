@@ -57,9 +57,9 @@ You can deploy and manage multi-container applications defined in Compose files 
 
 - Ensure you are using your AWS context. You can do this either by specifying the `--context aws` flag with your command, or by setting the current context using the command `docker context use aws`.
 
-- Run `docker compose ecs up` and `docker compose ecs down` to start and then stop a full Compose application.
+- Run `docker ecs compose up` and `docker ecs compose down` to start and then stop a full Compose application.
 
-  By default, `docker compose ecs up` uses the `docker-compose.yaml` file in the current folder. You can specify the Compose file directly using the `--file` flag.
+  By default, `docker ecs compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the Compose file directly using the `--file` flag.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
