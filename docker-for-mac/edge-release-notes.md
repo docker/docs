@@ -26,7 +26,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 - Compose-on-Kubernetes is no longer included in the Docker Desktop installer. You can download it separately from the compose-on-kubernetes [release page](https://github.com/docker/compose-on-kubernetes/releases).
 - Fixed an incompatibility between `hyperkit` and `osquery` which resulted in excessive `hyperkit` CPU usage. See [docker/for-mac#3499](https://github.com/docker/for-mac/issues/3499#issuecomment-639140844)
-- Docker Desktop now respects consistency flags `cached`, `delegated`, `consistent` even when in a list of options (for example, `z,delegated`). See [docker/for-mac#4718]( https://github.com/docker/for-mac/issues/4718).
+- Docker Desktop now respects consistency flags `cached`, `delegated`, `consistent` even when in a list of options (for example, `z,delegated`). See [docker/for-mac#4718](https://github.com/docker/for-mac/issues/4718).
 - Docker Desktop now implements the shared volume flag `:delegated` by automatically setting up a two-way file sync with Mutagen.
 
 ## Docker Desktop Community 2.3.2.0
