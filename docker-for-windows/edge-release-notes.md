@@ -11,7 +11,16 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-# Docker Desktop Community 2.3.3.0
+## Docker Desktop Community 2.3.3.1
+2020-07-10
+
+> [Download](https://desktop.docker.com/win/edge/46608/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Fixed a bug where the ECS plugin was not visible from WSL 2.
+
+## Docker Desktop Community 2.3.3.0
 2020-07-09
 
 > [Download](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe)
