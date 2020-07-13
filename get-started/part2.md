@@ -140,9 +140,9 @@ At this point, you've successfully built an image, performed a simple containeri
 
 ## Deploying to the cloud
 
-If you want to go ahead and get your containers running in either Azure or AWS then check out our blog posts on getting started with Cloud deployments and Docker
-* [Deploying with Docker and AWS](https://www.docker.com/blog/from-docker-straight-to-aws/)
-* [Deploying with Docker and Azure](https://www.docker.com/blog/running-a-container-in-aci-with-docker-desktop-edge/)
+To run your containers in the cloud with either Azure or AWS, check out our docs on getting started with cloud deployments.
+* [Deploying with Docker and AWS](https://docs.docker.com/engine/context/ecs-integration/)
+* [Deploying with Docker and Azure](https://docs.docker.com/engine/context/aci-integration/)
 
 ## Sample Dockerfile
 
