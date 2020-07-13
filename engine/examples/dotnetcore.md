@@ -65,8 +65,8 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
    to your project folder and copy the following into it.
 
 ```dockerignore
-bin\
-obj\
+bin/
+obj/
 ```
 
 ## Build and run the Docker image
