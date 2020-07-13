@@ -138,6 +138,12 @@ At this point, you've successfully built an image, performed a simple containeri
 
 [On to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
+## Deploying to the cloud
+
+To run your containers in the cloud with either Azure or AWS, check out our docs on getting started with cloud deployments.
+* [Deploying with Docker and AWS](https://docs.docker.com/engine/context/ecs-integration/)
+* [Deploying with Docker and Azure](https://docs.docker.com/engine/context/aci-integration/)
+
 ## Sample Dockerfile
 
 Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up your image. The Dockerfile in the bulletin board app looks like this:
