@@ -86,8 +86,7 @@ repositories of container images.
 * [Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
 * [Publisher Images](publish/customer_faq.md): Pull and use high-
-quality container images provided by external vendors. Certified images also
-include support and guarantee compatibility with Docker Enterprise.
+quality container images provided by external vendors.
 * [Builds](builds/index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push

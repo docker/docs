@@ -19,10 +19,6 @@ This topic defines some basic Docker networking concepts and prepares you to
 design and deploy your applications to take full advantage of these
 capabilities.
 
-Most of this content applies to all Docker installations. However,
-[a few advanced features](#docker-ee-networking-features) are only available to
-Docker EE customers.
-
 ## Scope of this topic
 
 This topic does **not** go into OS-specific details about how Docker networks

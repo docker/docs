@@ -176,7 +176,7 @@ see more options.
   to use the `docker logs` command for any logging driver. Refer to
   [reading logs when using remote logging drivers](dual-logging.md) for
   information about using `docker logs` to read container logs locally for many
-  third party logging solutions, including: 
+  third party logging solutions, including:
     - `syslog`
     - `gelf`
     - `fluentd`
@@ -185,8 +185,7 @@ see more options.
     - `etwlogs`
     - `gcplogs`
     - `Logentries`
-- When using Docker Community Engine, the `docker logs` command is only available
-  on the following drivers:
+- When using Docker Community Engine, the `docker logs` command is only available on the following drivers:
     - `local`
     - `json-file`
     - `journald`
