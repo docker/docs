@@ -6,7 +6,7 @@ title: Docker Billing overview
 
 On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
 
-For existing Docker Hub customers subscribed to a paid plan before May 14, 2020, there is no change to the current pricing at the time of launch. Docker will provide notice six months in advance before any changes to legacy plans are required. Starting with May 14, 2020, new customers who sign up for Docker can choose between the new Free, Pro, and Team plans.
+Existing Docker customers subscribed to a paid plan before May 14, 2020 must upgrade to the new Pro or Team plan by January 31, 2021. Starting with May 14, 2020, new customers who sign up for Docker can choose between the new Free, Pro, and Team plans.
 
 ## Pricing plans
 

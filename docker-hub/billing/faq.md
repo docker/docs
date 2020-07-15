@@ -28,15 +28,11 @@ The legacy plans were based on a private repository/parallel autobuild pricing m
 
 ### If I am an existing paid Docker Hub customer, when do I need to change my plan?
 
-Nothing changes for you today. We will notify users in the coming months and at that time you'll have six months to select a new plan.
-
-### How will the new pricing plan impact existing Docker Hub customers?
-
-Legacy customers can choose to stay on their existing per-repository plan or switch to per-seat pricing. We will notify customers six months before any mandated change to your subscription is required. After May 14, 2020, upgrading or downgrading on the per-repository plan will not be available.
+If you are an existing Docker subscriber, you have until January 31, 2021 to move to the new pricing plans mentioned above. You can convert to either a Monthly plan or an Annual plan.
 
 ### Will my price per month increase or decrease?
 
-Depending on your configuration, you may find it more economical to move to one of the new pricing plans available today. The key factor affecting a price increase or decrease is the total number of seats you need to support your organization.
+Depending on your configuration, you may find it more economical to move to one of the new pricing plans available. The key factor affecting a price increase or decrease is the total number of seats you need to support your organization.
 
 ### What is the difference between the Team and Free Teams plans?
 
@@ -100,7 +96,7 @@ You can view the annual subscription pricing for each product at [Docker Hub Pri
 
 ### Are legacy plans eligible for annual pricing?
 
-You can upgrade to an annual plan from a Pro or a Team plan. It is not possible to upgrade to an annual plan from an existing legacy plan.
+No, you must move to the new Pro or Team plans to take advantage of the Annual pricing.
 
 ### Can Docker Hub continue to be used for open source projects?
 
