@@ -18,7 +18,7 @@ either IPv4 or IPv6 (or both) with any container, service, or network.
 
     ```json
     {
-      "ipv6": true
+      "ipv6": true,
       "fixed-cidr-v6": "2001:db8:1::/64"
     }
     ```
