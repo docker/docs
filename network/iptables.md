@@ -93,7 +93,3 @@ any address on the host. If you want to change that behavior to only
 expose ports on an internal IP address, you can use the `--ip` option to
 specify a different IP address. However, setting `--ip` only changes the
 _default_, it does not _restrict_ services to that IP.
-
-## Next steps
-
-- Read [Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
