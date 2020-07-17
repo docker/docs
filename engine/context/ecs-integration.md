@@ -119,13 +119,19 @@ The Docker ECS integration relies on [Amazon CloudFormation](https://docs.aws.am
 
 By default, the Docker ECS integration creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or you want to manage these yourself, you can use the following custom Compose extensions:
 
-- `x-aws-cluster` can be set as a top-level element in your Compose file to set the ARN of an ECS cluster to use when deploying the Compose application. Otherwise a cluster is created for the compose project.
+- Use `x-aws-cluster` as a top-level element in your Compose file to set the ARN
+of an ECS cluster when deploying a Compose application. Otherwise, a 
+cluster will be created for the Compose project.
 
-- `x-aws-vpc` can be set as a top-level element in your Compose file to set the ARN of a VPC to use when deploying the Compose application.
+- Use `x-aws-vpc` as a top-level element in your Compose file to set the ARN 
+of a VPC when deploying a Compose application.
 
-- `x-aws-loadbalancer` can be set as a top-level element in your Compose file to set the ARN of an existing LoadBalancer.
+- Use `x-aws-loadbalancer` as a top-level element in your Compose file to set
+the ARN of an existing LoadBalancer.
 
-- `x-aws-securitygroup` can be set inside a network definition in your Compose file to set the ARN of an existing SecurityGroup used to implement network connectivity between services.
+- Use `x-aws-securitygroup` inside a network definition in your Compose file to
+set the ARN of an existing SecurityGroup used to implement network connectivity
+between services.
 
 ## Install the Docker ECS Integration CLI on Linux
 
