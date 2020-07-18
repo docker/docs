@@ -237,7 +237,7 @@ redirect_from:
   - Support Service Principal authentication
   - Update base images to Ubuntu 16.04
 - `digitalocean`
-  - Add ability to speicify the private SSH key path
+  - Add ability to specify the private SSH key path
 - `gce`
   - Update base images to Ubuntu 16.04
 - `virtualbox`
