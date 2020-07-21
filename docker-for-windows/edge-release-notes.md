@@ -11,6 +11,16 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.3.2
+2020-07-21
+
+> [Download](https://desktop.docker.com/win/edge/46784/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
+- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" class="_”}
+
 ## Docker Desktop Community 2.3.3.1
 2020-07-10
 
