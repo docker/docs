@@ -205,6 +205,12 @@ $ docker ecs version
 Docker ECS plugin 0.0.1
 ```
 
+## FAQ
+
+**What does the error `this tool requires the "new ARN resource ID format"` mean?**
+
+This error message means that your integration requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"}.
+
 ## Feedback
 
 Thank you for trying out the Docker ECS Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [ecs-plugin](https://github.com/docker/ecs-plugin){: target="_blank" class="_"} GitHub repository.
