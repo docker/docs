@@ -5,7 +5,7 @@ title: docker-compose start
 notoc: true
 ---
 
-```
+```none
 Usage: start [SERVICE...]
 ```
 

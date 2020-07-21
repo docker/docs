@@ -5,7 +5,7 @@ title: docker-compose unpause
 notoc: true
 ---
 
-```
+```none
 Usage: unpause [SERVICE...]
 ```
 

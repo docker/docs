@@ -7,7 +7,6 @@ notoc: true
 
 ```none
 Usage: top [SERVICE...]
-
 ```
 
 Displays the running processes.

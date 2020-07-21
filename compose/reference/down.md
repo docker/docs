@@ -5,7 +5,7 @@ title: docker-compose down
 notoc: true
 ---
 
-```
+```none
 Usage: down [options]
 
 Options:

@@ -5,7 +5,7 @@ title: docker-compose logs
 notoc: true
 ---
 
-```
+```none
 Usage: logs [options] [SERVICE...]
 
 Options:

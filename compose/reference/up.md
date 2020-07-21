@@ -5,7 +5,7 @@ title: docker-compose up
 notoc: true
 ---
 
-```
+```none
 Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
@@ -26,6 +26,7 @@ Options:
     --build                    Build images before starting containers.
     --abort-on-container-exit  Stops all containers if any container was
                                stopped. Incompatible with -d.
+    --attach-dependencies      Attach to dependent containers
     -t, --timeout TIMEOUT      Use this timeout in seconds for container
                                shutdown when attached or when containers are
                                already running. (default: 10)
