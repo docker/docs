@@ -11,6 +11,21 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.3.2
+2020-07-21
+
+> [Download](https://desktop.docker.com/mac/edge/46784/Docker.dmg)
+
+### Upgrades
+
+- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
+- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" class="_”}
+
+### Bug fixes and minor changes
+
+- Mutagen uses the `.dockerignore` file when creating a session to filter the list of synchronized files. See [docker/for-mac#4621](https://github.com/docker/for-mac/issues/4621).
+- Docker CLI commands can now bypass any active Mutagen synchronization for volumes using `:cached`. See [docker/for-mac#1592](https://github.com/docker/for-mac/issues/1592#issuecomment-651309816).
+
 ## Docker Desktop Community 2.3.3.0
 2020-07-09
 
