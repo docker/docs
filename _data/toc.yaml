@@ -53,6 +53,12 @@ guides:
       title: Manage images
     - path: /develop/develop-images/baseimages/
       title: Create your own base image (advanced)
+- sectiontitle: Deploy your app to the cloud
+  section:
+  - path: /engine/context/aci-integration/
+    title: Docker and ACI (Beta)
+  - path: /engine/context/ecs-integration/
+    title: Docker and ECS (Beta)
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Orchestration
@@ -1091,10 +1097,7 @@ manuals:
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
-  - path: /engine/context/aci-integration/
-    title: Docker and ACI (Beta)
-  - path: /engine/context/ecs-integration/
-    title: Docker and ECS (Beta)
+
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
