@@ -32,7 +32,7 @@ CMD python /app/app.py
 Each instruction creates one layer:
 
 - `FROM` creates a layer from the `ubuntu:18.04` Docker image.
-- `COPY` adds files from your Docker client's current directory.
+- `COPY` adds files from your Docker host's current directory.
 - `RUN` builds your application with `make`.
 - `CMD` specifies what command to run within the container.
 
