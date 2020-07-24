@@ -1,84 +1,51 @@
 
 /*
-*
-* global +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-*
+* global
 */
-
 $headings: "Geomanist Book", sans-serif;
-
 $font: "Open Sans", sans-serif;
-
 $body-text-size: 14px;
-
 $global-header-height: 440px;
-
 $bg-secondary-tabs: rgba(0, 0, 0, 0.05);
-
 $white: #fff;
-
 $black: #000;
-
 $clear: 0;
 
-
 /*
-*
 * standard mode
-*
 */
+$body-text:     #33444c;
+$primary-links: #2496ed;
 
-$bg-body: #fff;
+$bg-body:      #ffffff;
+$bg-header:    #2496ed;
+$bg-secondary: #2496ed;
+$bg-sidebar:   #fbfbfc;
+$bg-footer:    #ffffff;
 
-$heading-color: #254356;
-
-$body-text-color: #33444C;//grey #11 in color palette
-
-$bg-footer: #fff;
-
-$bg-secondary: #077CBC;
-
-$bg-sidebar: #FBFBFC;
-
-$bg-component: #FBFBFC;
-
+$bg-component: #fbfbfc;
 $bdr-sidebar: rgba(204, 204, 204, 0.29);
 
-$primary-links: #0090C8;
-
-$slider-bg: #c3e4f7;
-
-$slider-btn: #4fa1d0;
+$slider-bg:  #c3e4f7;
+$slider-btn: #2496ed;
 
 $code-blocks: rgba(12, 81, 118, 0.1);
 
-$table-head: #CFD2D4;
+$table-head: #cfd2d4;
 
 
 /*
-*
 * night mode
-*
 */
+$body-text-night:     #d3d4d4;
+$primary-links-night: #9cd7f7;
 
-$bg-body-night: #061F2F;
-
-$body-text-color-night: #d3d4d4;
-
-$bg-secondary-night: #27343B;
-
-$bg-sidebar-night: #101e26;
+$bg-body-night:      #061F2F;
+$bg-header-night:    #101c29;
+$bg-secondary-night: #101c29;
+$bg-sidebar-night:   #101e26;
+$bg-footer-night:    #000000;
 
 $active-sidebar-night: #077CBC;
-
-$bg-component-night: #101c29;
-
-$heading-color-night: #b9c2cc;
-
-$body-text-night: #cbdbe6;
-
-$primary-links-night: #9CD7F7;
-
-$bg-footer-night: #000;
 
 $bg-search-results-night: rgba(10, 10, 10, 0.95);

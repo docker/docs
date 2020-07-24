@@ -27,7 +27,7 @@ h4,
 h5,
 h6 {
     font-family: $headings;
-    color: $body-text-color;
+    color: $body-text;
     clear: both;
     line-height: 26px;
 }
@@ -61,7 +61,7 @@ h6 {
 }
 
 p {
-    color: $body-text-color;
+    color: $body-text;
     font-family: $font;
     font-size: $body-text-size;
     line-height: 24px;

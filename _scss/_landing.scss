@@ -1,16 +1,7 @@
-$light-blue: #2496ed;
 $dark-blue: #002c66;
-$bg-header-night: #101c29;
-$bg-body-night: #061F2F;
 $bg-card-night: #0F161E;
 
-body#landing {
-  background-color: $bg-sidebar;
-  color: $body-text-color;
-  font-size: $body-text-size;
-  margin: $clear;
-  padding: $clear;
-  overflow-x: hidden;
+body.landing {
 
   h2, h5, h6 {
     font-family: 'Geomanist Regular', sans-serif;
@@ -22,11 +13,6 @@ body#landing {
   }
 
   .header {
-    background-color: $light-blue;
-    border: unset;
-    border-radius: unset;
-    height: unset;
-
     @include md-width {
       .navbar-collapse.collapse {
         display: flex !important;
@@ -390,14 +376,11 @@ body#landing {
   }
 }
 
-body#landing.night {
-  background-color: $bg-body-night;
-  color: $body-text-color-night;
+body.landing:not(.night) {
+  background-color: $bg-sidebar;
+}
 
-  .header {
-    background-color: $bg-body-night;
-  }
-
+body.landing.night {
   .card {
     background-color: $bg-card-night;
   }
