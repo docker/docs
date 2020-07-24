@@ -146,12 +146,12 @@
     cursor: default;
     background: #F3F4F4;
     color: #2089C4;
-    border-left: 4px solid #077CBC;
+    border-left: 4px solid $primary-links;
     font-weight: 600;
 }
 
 .nav-sidebar ul li li a {
-    border-left: 1px solid #077CBC;
+    border-left: 1px solid $primary-links;
     font-size: 12px;
     margin-left: 15px;
 }
@@ -210,7 +210,7 @@
 .toc-nav i.fa {
     font-size: 14px;
     margin: 0 8px 0 0;
-    color: #4fa1d0;
+    color: $primary-links;
 }
 
 i.fa.fa-question {

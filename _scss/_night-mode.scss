@@ -80,10 +80,10 @@ body.night {
     .toc-nav li a.active {
         color: $active-sidebar-night;
         background: #0a151a;
-        border-left: 4px solid #077CBC;//add to variables
+        border-left: 4px solid $primary-links//add to variables
     }
     .tabs li.active a {
-        border-bottom: 4px solid #077CBC;//add to variables
+        border-bottom: 4px solid $primary-links;//add to variables
     }
     .slider {
         background-color: #344658;
