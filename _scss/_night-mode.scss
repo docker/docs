@@ -6,11 +6,11 @@
 
 body.night {
     background-color: $bg-body-night;
-    color: $body-text-color-night;
+    color: $body-text-night;
     p,
     .rating-nero-value,
     .reading-time {
-        color: $body-text-color-night!important;
+        color: $body-text-night!important;
     }
     h1,
     h2,
@@ -30,8 +30,7 @@ body.night {
         color: #c7c9ca !important;
     }
     .header {
-        background-color: #101c29!important;
-        animation: none!important;
+        background-color: $bg-header-night;
     }
     hr {
         border-top: 1px solid #4f6071;
@@ -81,10 +80,10 @@ body.night {
     .toc-nav li a.active {
         color: $active-sidebar-night;
         background: #0a151a;
-        border-left: 4px solid #077CBC;//add to variables
+        border-left: 4px solid $primary-links//add to variables
     }
     .tabs li.active a {
-        border-bottom: 4px solid #077CBC;//add to variables
+        border-bottom: 4px solid $primary-links;//add to variables
     }
     .slider {
         background-color: #344658;
@@ -146,7 +145,7 @@ body.night {
     }
     a.glossary,
         .toc-nav i.fa{
-            color: $body-text-color-night;
+            color: $body-text-night;
         }
     .component img, .component-full-icon img {
         opacity: 1;
@@ -284,7 +283,7 @@ body.night {
     }
     /** apply to images with garbled text **/
     img.white-bg {
-	  background-color: white;
+        background-color: white;
     }
 }
 
@@ -297,10 +296,10 @@ body.night {
 
 body.night {
     /* accordion */
-.panel {
-    color: #d3d4d4;
-    margin-bottom: 20px;
-    background-color: #24394c;
+    .panel {
+        color: $body-text-night;
+        margin-bottom: 20px;
+        background-color: #24394c;
     }
     .panel-default {
         border-color: #374656;

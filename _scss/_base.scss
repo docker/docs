@@ -1,20 +1,14 @@
-/*
-*
-* globals
-*
-*/
-
 html {
     font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
+     -webkit-font-smoothing: antialiased;
 }
 
 body {
     background-color: $bg-body;
-    color: $body-text-color;
+    color: $body-text;
     font-family: $font;
     font-size: $body-text-size;
     margin: $clear;
