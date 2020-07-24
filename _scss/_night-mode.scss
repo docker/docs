@@ -6,11 +6,11 @@
 
 body.night {
     background-color: $bg-body-night;
-    color: $body-text-color-night;
+    color: $body-text-night;
     p,
     .rating-nero-value,
     .reading-time {
-        color: $body-text-color-night!important;
+        color: $body-text-night!important;
     }
     h1,
     h2,
@@ -145,7 +145,7 @@ body.night {
     }
     a.glossary,
         .toc-nav i.fa{
-            color: $body-text-color-night;
+            color: $body-text-night;
         }
     .component img, .component-full-icon img {
         opacity: 1;
@@ -297,7 +297,7 @@ body.night {
 body.night {
     /* accordion */
 .panel {
-    color: #d3d4d4;
+    color: $body-text-night;
     margin-bottom: 20px;
     background-color: #24394c;
     }
