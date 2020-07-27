@@ -13,10 +13,28 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.0.4
+2020-07-27
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+
+### Upgrades
+
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
+- [Go 1.13.14](https://github.com/golang/go/issues?q=milestone%3AGo1.13.14+label%3ACherryPickApproved)
+
+### Bug fixes and minor changes
+
+- Fixed a privilege escalation vulnerability in `com.docker.vmnetd`. See [CVE-2020-15360](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15360)
+- Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594)
+- Fix an incompatibility between `hyperkit` and [osquery](https://osquery.io) which resulted in excessive `hyperkit` CPU usage. See [docker/for-mac#3499](https://github.com/docker/for-mac/issues/3499#issuecomment-619544836)
+- Dashboard: Fixed containers logs which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954)
+
 ## Docker Desktop Community 2.3.0.3
 2020-05-27
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://desktop.docker.com/mac/stable/45519/Docker.dmg)
 
 ### Upgrades
 
