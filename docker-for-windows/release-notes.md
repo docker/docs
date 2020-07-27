@@ -13,10 +13,31 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.0.4
+2020-07-27
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+
+### Upgrades
+
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
+- [Go 1.13.14](https://github.com/golang/go/issues?q=milestone%3AGo1.13.14+label%3ACherryPickApproved)
+
+### Bug fixes and minor changes
+
+- Docker Desktop now prompts users to share directories for paths like `////c/Users/foo`, rather than only paths like `C:\Users\foo` and `C:/Users/foo`.
+- The installer now returns a non-zero exit code on error, or when the user cancels the installation.
+- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#6552](https://github.com/docker/for-win/issues/6552)
+- Dashboard: Fixed opening a CLI for Windows containers. See [docker/for-win#7079](https://github.com/docker/for-win/issues/7079)
+- Dashboard: Fixed containers logs which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954)
+- WSL 2: Fixed an issue where changing the user's default shell blocked WSL integration. Fixes [docker/for-win#7653](https://github.com/docker/for-win/issues/7653)
+- WSL 2: Fixed an issue to recover WSL distributions stuck in the "Installing" state.
+
 ## Docker Desktop Community 2.3.0.3
 2020-05-27
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+> [Download](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
