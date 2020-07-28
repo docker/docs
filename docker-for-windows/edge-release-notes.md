@@ -18,9 +18,9 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 ### New
 
-- Docker Desktop introduces the new Images view to the Docker Dashboard. The Images view allows users to view a list of Docker images on the disk, run an image as a container, pull the latest version of an image from Docker Hub, inspect images, and remove any unwanted images from the disk.
+- Docker Desktop introduces the new **Images** view to the Docker Dashboard. The Images view allows users to view a list of Docker images on the disk, run an image as a container, pull the latest version of an image from Docker Hub, inspect images, and remove any unwanted images from the disk.
 
-  To access the new Images view, from the Docker menu, select `Dashboard` > `Images`.
+  To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
 
 ### Upgrades
 
