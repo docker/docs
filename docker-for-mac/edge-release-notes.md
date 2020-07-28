@@ -11,6 +11,27 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.4.0
+2020-07-28
+
+> [Download](https://desktop.docker.com/mac/edge/46980/Docker.dmg)
+
+### New
+
+- Docker Desktop introduces the new Images view to the Docker Dashboard. The Images view allows users to view a list of Docker images on the disk, run an image as a container, pull the latest version of an image from Docker Hub, inspect images, and remove any unwanted images from the disk.
+
+  To access the new Images view, from the Docker menu, select `Dashboard` > `Images`.
+
+### Upgrades
+
+- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" class="_”}
+- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: target="_blank" class="_”}
+
+### Bug fixes and minor changes
+
+- Copying the container logs from the dashboard does not copy the ANSI color codes to the clipboard anymore.
+- Mutagen two-way sync now uses `.dockersyncignore` rather than `.dockerignore` to exclude files.
+
 ## Docker Desktop Community 2.3.3.2
 2020-07-21
 
