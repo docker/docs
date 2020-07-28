@@ -29,11 +29,17 @@ To deploy Docker containers on ECS, you must meet the following requirements:
     - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
     - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
 
-    Alternatively, install the [Docker ECS Integration for Linux](#install-the-docker-ecs-integration-cli-on-linux).
+    Alternatively, install [Docker ECS Integration for Linux](#install-the-docker-ecs-integration-cli-on-linux).
 
 2. Ensure you have an AWS account.
 
-You can check your installation by running the command `docker ecs version`.
+  > **Note**
+  >
+  > If you had previously installed a Docker Desktop Stable release and now switched to Edge, ensure you turn on the experimental features flag. 
+  >
+  > From the Docker Desktop menu, click **Settings** (Preferences on macOS) > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
+
+Check your installation by running the command `docker ecs version`.
 
 Docker not only runs multi-container applications locally, but also enables developers to seamlessly deploy Docker containers on Amazon ECS using a Compose file with the `docker ecs compose up` command. The following sections contain instructions on how to deploy your Compose application on Amazon ECS.
 

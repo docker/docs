@@ -124,6 +124,8 @@ using Edge features that aren't in Stable yet. Keep this in mind as
 you create and work with Edge containers, perhaps in the spirit of a playground
 space where you are prepared to troubleshoot or start over.
 
+Experimental features are turned on by default on Edge releases. However, when you switch from a Stable to an Edge release, you must turn on the experimental features flag to access experimental features. From the Docker Desktop menu, click **Settings** > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
+
 To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section _Save and Restore data_ below.
 
 ### Save and restore data
