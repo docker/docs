@@ -176,7 +176,7 @@ examples: |-
 
   The `name` filter matches on all or part of a container's name.
 
-  The following filter matches the container named `nostalgic_stallman`.
+  The following filter only matches the container named `nostalgic_stallman`.
 
   ```bash
   $ docker ps --filter "name=^nostalgic_stallman$"
@@ -185,7 +185,7 @@ examples: |-
   9b6247364a03        busybox             "top"               2 minutes ago       Up 2 minutes                            nostalgic_stallman
   ```
 
-  The following filter matches all containers which name contains `nostalgic_stallman`.
+  The following filter matches all containers with the name `nostalgic_stallman`.
 
   ```bash
   $ docker ps --filter "name=nostalgic_stallman"
