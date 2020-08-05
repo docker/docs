@@ -73,8 +73,6 @@ version: "{{ site.compose_file_v3 }}"
 services:
   db:
     image: postgres
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
   web:
