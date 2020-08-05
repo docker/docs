@@ -14,7 +14,7 @@ Start by setting up the files needed to build the app. The app will run inside a
 Dockerfile consists of:
 
     FROM ruby:2.5
-    RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+    RUN apt-get update -qq && apt-get install -y nodejs
     RUN mkdir /myapp
     WORKDIR /myapp
     COPY Gemfile /myapp/Gemfile
