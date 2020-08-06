@@ -167,10 +167,10 @@ backup, include the `docker-compose.admin.yml` as well.
 > not supported in Compose version 3.x. See the [Version 3 summary](compose-file/compose-versioning.md#version-3)
 > of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
 > See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
-> discussion thread on possibility of adding support for `extends` in some form in
+> discussion thread on the possibility of adding support for `extends` in some form in
 > future versions.
 
-Docker Compose's `extends` keyword enables sharing of common configurations
+Docker Compose's `extends` keyword enables the sharing of common configurations
 among different files, or even different projects entirely. Extending services
 is useful if you have several services that reuse a common set of configuration
 options. Using `extends` you can define a common set of service options in one
