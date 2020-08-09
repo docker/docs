@@ -85,6 +85,13 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
     This file defines two services: The `db` service and the `web` service.
 
+    > Note:
+    >
+    > This uses the build in development server to run your application on port 8000.
+    > This is **not** safe for production usage.  Refer to the 
+    [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server)  for more information.
+
+
 10. Save and close the `docker-compose.yml` file.
 
 ### Create a Django project
