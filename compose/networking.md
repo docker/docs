@@ -55,7 +55,7 @@ using the Postgres database.
 It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`.
 In the above example, for `db`, the `HOST_PORT` is `8001` and the container port is
 `5432` (postgres default). Networked service-to-service
-communication use the `CONTAINER_PORT`. When `HOST_PORT` is defined,
+communication uses the `CONTAINER_PORT`. When `HOST_PORT` is defined,
 the service is accessible outside the swarm as well.
 
 Within the `web` container, your connection string to `db` would look like

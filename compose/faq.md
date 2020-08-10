@@ -47,7 +47,7 @@ add an explicit signal handler for `SIGTERM`.
 * If you can't modify the application, wrap the application in a lightweight init
 system (like [s6](http://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
-[tini](https://github.com/krallin/tini)).  Either of these wrappers take care of
+[tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
 handling `SIGTERM` properly.
 
 ## How do I run multiple copies of a Compose file on the same host?
