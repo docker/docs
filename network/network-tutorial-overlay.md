@@ -163,7 +163,7 @@ connect a service to each of them.
     $ docker network create -d overlay nginx-net
     ```
 
-    You don't need to create the overlay network on the other nodes, beacause it
+    You don't need to create the overlay network on the other nodes, because it
     will be automatically created when one of those nodes starts running a
     service task which requires it.
 

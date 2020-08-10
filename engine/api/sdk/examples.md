@@ -245,7 +245,7 @@ func main() {
 		panic(err)
 	}
 
-	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
+	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -659,7 +659,7 @@ print image.id
 
 </div>
 
-<div id="tab-pullimages-curl" class="tab-pane fade" markdown="1">
+<div id="tab-pullimages-auth-curl" class="tab-pane fade" markdown="1">
 
 This example leaves the credentials in your shell's history, so consider
 this a naive implementation. The credentials are passed as a Base-64-encoded
