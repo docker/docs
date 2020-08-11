@@ -177,7 +177,9 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
     ```
 
-3. Save the file. ( this will create `/etc/systemd/system/docker.service.d/override.conf` )
+3. Save the file.
+
+    The file is saved as `/etc/systemd/system/docker.service.d/override.conf`.
 
 4. Reload the `systemctl` configuration.
 
