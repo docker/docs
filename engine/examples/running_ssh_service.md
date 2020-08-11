@@ -25,12 +25,15 @@ FROM ubuntu:16.04
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN echo 'root:THEPASSWORDYOUCREATED' | chpasswd
-RUN sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/#*PermitRootLogin prohibit-password/\#PermitRootLogin yes/g' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
 
+# Demonstration of the correct way to set up an environment variable within the container: 
+# This environment variable is not visible in a users profile
 ENV NOTVISIBLE "in users profile"
+# Whereas this one is.
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
