@@ -1226,8 +1226,6 @@ manuals:
       title: Add seats
     - path: /docker-hub/billing/remove-seats/
       title: Remove seats
-    - path: /docker-hub/billing/faq/
-      title: Billing FAQ
   - path: /docker-hub/orgs/
     title: Teams and organizations
   - path: /docker-hub/repos/

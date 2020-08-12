@@ -2,6 +2,8 @@
 description: Docker Billing overview
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
 title: Docker Billing overview
+redirect_from:
+- /docker-hub/billing/faq/
 ---
 
 On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
@@ -24,9 +26,9 @@ The **Team** plan includes unlimited public and unlimited private repositories s
 
 The **Free Team** plan includes unlimited public repositories at no cost per month. This plan also offers advanced collaboration and management tools, including organization and team management with role-based access controls which are limited to 1 team and 3 team members.
 
-For detailed information about the features available in each plan, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+For detailed information about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
 
-For frequently asked questions about pricing, see [Docker billing FAQ](faq.md).
+For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" class="_"}.
 
 ### Purchase a Pro plan
 

@@ -20,7 +20,7 @@ Immediately available for **Individuals** and **Teams**:
 
 ### How can I compare which features are in each plan?
 
-You can see pricing and a full list of features for each product at [Docker Hub pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+You can see pricing and a full list of features for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
 
 ### What is the difference between a legacy plan and these new announced plans?
 
@@ -64,13 +64,13 @@ When you downgrade your existing plan, changes are applied at the end of your bi
 
 ### How do I downgrade from a Team plan to a Free plan?
 
-Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
 
 For information on how to downgrade from a Team plan to a Free plan, see [Downgrade from Team to a Free plan](/downgrade.md#downgrade-from-team-to-a-free-plan).
 
 ### How do I downgrade from Pro to a Free plan?
 
-Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
 
 For information on how to downgrade from Pro to a Free plan, see [Downgrade from Pro to a Free plan](/downgrade.md#downgrade-from-pro-to-a-free-plan).
 
@@ -92,7 +92,7 @@ For information on how to add a member to a team, see [Add a member to a team](.
 
 Yes, both the Pro and Team plans are available through annual subscriptions and include a discount from the monthly subscription price.
 
-You can view the annual subscription pricing for each product at [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+You can view the annual subscription pricing for each product at [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
 
 ### Are legacy plans eligible for annual pricing?
 
