@@ -40,7 +40,7 @@ redirect_from:
 
 - Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
 
-- Bumped `Pytest` to 5.3.4 and add refactor compatibility with new version.
+- Bumped `Pytest` to 5.3.4 and add refactor compatibility with the new version.
 
 - Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
 
@@ -1128,7 +1128,7 @@ naming scheme accordingly before upgrading.
   to separate the `COMPOSE_FILE` environment value using the
   `COMPOSE_PATH_SEPARATOR` environment variable
 
-- Added support for port range to single port in port mappings, such as
+- Added support for port range to a single port in port mappings, such as
   `8000-8010:80`.
 
 ### Bug Fixes
@@ -1221,7 +1221,7 @@ naming scheme accordingly before upgrading.
 
 ### Bug Fixes
 
-- Fixed an issue where presence of older versions of the docker-py
+- Fixed an issue where the presence of older versions of the docker-py
   package would cause unexpected crashes while running Compose
 
 - Fixed an issue where healthcheck dependencies would be lost when
@@ -1496,8 +1496,8 @@ naming scheme accordingly before upgrading.
 ### Breaking Changes
 
 -   `docker-compose logs` no longer follows log output by default. It now
-    matches the behaviour of `docker logs` and exits after the current logs
-    are printed. Use `-f` to get the old default behaviour.
+    matches the behavior of `docker logs` and exits after the current logs
+    are printed. Use `-f` to get the old default behavior.
 
 -   Booleans are no longer allows as values for mappings in the Compose file
     (for keys `environment`, `labels` and `extra_hosts`). Previously this
@@ -1738,7 +1738,7 @@ naming scheme accordingly before upgrading.
 -   Fixed an incorrect warning when a container volume was defined in
     the Compose file.
 
--   Fixed a bug that prevented the force shutdown behaviour of `up` and
+-   Fixed a bug that prevented the force shutdown behavior of `up` and
     `logs`.
 
 -   Fixed a bug that caused `None` to be printed as the network driver name
@@ -2042,7 +2042,7 @@ Thanks @dano, @josephpage, @kevinsimper, @lieryan, @phemmer, @soulrebel and @ssc
 
 ### New features
 
-- `docker-compose up` has an **experimental** new behaviour: it will only recreate containers for services whose configuration has changed in `docker-compose.yml`. This will eventually become the default, but for now you can take it for a spin:
+- `docker-compose up` has an **experimental** new behavior: it will only recreate containers for services whose configuration has changed in `docker-compose.yml`. This will eventually become the default, but for now you can take it for a spin:
 
         $ docker-compose up --x-smart-recreate
 
@@ -2231,7 +2231,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - The `net` and `workdir` options are now supported in `fig.yml`.
  - The `hostname` option now works in the same way as the Docker CLI, splitting out into a `domainname` option.
- - TTY behaviour is far more robust, and resizes are supported correctly.
+ - TTY behavior is far more robust, and resizes are supported correctly.
  - Load YAML files safely.
 
 Thanks to @d11wtq, @ryanbrainard, @rail44, @j0hnsmith, @binarin, @Elemecca, @mozz100 and @marksteve for their help with this release!
@@ -2355,7 +2355,7 @@ Big thanks to @tomstuart, @EnTeQuAk, @schickling, @aronasorman and @GeoffreyPlit
 
  - Improve documentation
  - Try to connect to Docker on `tcp://localdocker:4243` and a UNIX socket in addition to `localhost`.
- - Improve `fig up` behaviour
+ - Improve `fig up` behavior
  - Add confirmation prompt to `fig rm`
  - Add `fig build` command
 
