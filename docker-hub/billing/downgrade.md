@@ -17,7 +17,7 @@ The following sections contain instructions on how to downgrade from Pro and Tea
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+> - Before you downgrade to a Free plan, ensure that your account details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
 {: .important }
 
 To downgrade from a Pro plan to a Free plan:
@@ -45,7 +45,7 @@ To downgrade from a Pro plan to a Free plan:
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual plan that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual plan if it hasn't expired.
-> - Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+> - Before you downgrade to a Free Team plan, you must convert all private repositories to public repositories and update the organization details to reflect features available in the Free plan. For example, you may need to reduce the number of team members. For information on what’s included in the Free plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
 {: .important }
 
 To downgrade to a Free Team plan from a Team plan:
