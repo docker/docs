@@ -8,7 +8,7 @@ Docker has enabled download rate limits for downloads and pull requests on Docke
 
 A Docker image contains multiple layers. Each layer in a pull request represents a download object. For example, when you download the latest Python image from Docker Hub, you’ll be downloading eight layers and indexes. The download rate limit introduced by Docker caps the number of objects that users can download within a specified timeframe. Any downloads beyond this limit will result in the `429 Too Many Requests` error message.
 
-Docker will gradually impose download rate limits with an eventual limit of  300 downloads per six hours for anonymous users.
+Docker will gradually impose download rate limits with an eventual limit of 100 pulls per six hours for anonymous users.
 
 Logged in users will not be affected at this time. Therefore, we recommend that you log into [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} as an authenticated user. For more information, see the following section [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests).
 
