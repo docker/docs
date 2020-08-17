@@ -142,7 +142,7 @@ EOF
 2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker
    image.
 
-3. Test your docker image locally by running `docker run <your_username>/my-first-repo`.
+3. Test your docker image locally by running `docker run <your_username>/my-first-repo`
 
 4. Run `docker push <your_username>/my-first-repo` to push your Docker image to
 Docker Hub.
