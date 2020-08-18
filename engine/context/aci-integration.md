@@ -113,7 +113,11 @@ To stop and remove a container from ACI, run:
 docker stop <CONTAINER_ID>
 docker rm <CONTAINER_ID>
 ```
-Note: the stop command in ACI differs from the Moby stop command as a stopped container will not retain it's state when it is started again. To find out more please see: https://github.com/docker/aci-integration-beta/issues/28
+> **Note**
+> 
+> The stop command in ACI differs from the Moby stop command as a stopped 
+container will not retain its state when it is started again. For more 
+information, see https://github.com/docker/aci-integration-beta/issues/28.
 
 ## Running Compose applications
 
