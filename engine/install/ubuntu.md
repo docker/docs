@@ -167,7 +167,6 @@ from the repository.
    Engine and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get update
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
