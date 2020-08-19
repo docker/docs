@@ -113,11 +113,112 @@ if [ "${LOCALDOMAIN}x" != "x" ]; then echo "search ${LOCALDOMAIN}" >> /etc/resol
 exec "$@"
 ```
 
+### Secrets
+
+Secrets can be passed to your ECS services using Docker model to bind sensitive data as files 
+under `/run/secrets`. If your compose file declare a secret as file, such a secret will be created
+as part of your application deployment on ECS. Iy you use an existing secret, as an `external: true`
+reference in your compose file, use ECS Secrets Manager full ARN as secret name:
+```yaml
+services:
+  webapp:
+    image: ...
+    secrets:
+      - foo
+
+secrets:
+  foo:
+    name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
+```
+
+Secret will be available at runtime for your service as a plain text file `/run/secrets/foo`.
+
+AWS Secrets Manager allows to both store sensitive data as plain text (like Docker secret does) or as
+a hierarchical JSON document. You can use the latter with ECS integration by using custom field `x-asw-keys` to define which entries in the JSON document to bind as a secret in your service container.
+
+```yaml
+services:
+  webapp:
+    image: ...
+    secrets:
+      - foo
+
+secrets:
+  foo:
+    name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
+    keys: 
+      - "bar"
+```
+
+Doing so, secret for `bar` key will be available at runtime for your service as a plain text file `/run/secrets/foo/bar`. You can use special value `*` to get all keys bound in your container. 
+
+
+### Logging
+
+ECS integration configure AWS CloudWatch Logs service for your containers. A log group is created for the application as `docker-compose/<application_name>`, and log streams are created for each service and container in your application, as `<application_name>/<service_name>/<container_ID>`.
+
+You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention` in your Compose file
+to set the number of retention days for log events. Default behaviour is to keep logs forever.
+
+You can also pass `awslogs` driver parameters to your container as standard Compose file `logging.driver_opts` elements.
+
+
 ### Dependent service startup time and DNS resolution
 
 Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
 
 Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+
+
+
+### Rolling update
+
+Your ECS services are created with rolling update configuration. As you run `docker ecs compose up` with
+a modified Compose file, the stack will be udpated to reflect changes, and if required some services
+will be replaced. This replacement process will follow rolling-update configuration, set by your services
+[`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config) configuration. 
+
+AWS ECS uses a percent-based model to define number of containers to be ran/shutdown during a 
+rolling-update. ECS integration computes rolling-update configuration according to the `prallelism` and
+`replicas` fields. You might prefer to configure directly rolling-update using extension fields `x-aws-min_percent` and `x-aws-max_percent`. The former sets the minimal percent of containers to run
+for service, the latter the max percent of additional container to start before previous version can 
+be removed.
+
+By default, ECS rolling-update is set to run twice the number of containers for a service (200%), and
+ability to shut down 100% containers during the update.
+
+
+### IAM roles
+
+Your ECS Tasks are executed with a dedicated IAM role, granting access to AWS Managed policies
+[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) and [`AmazonEC2ContainerRegistryReadOnly`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html). 
+In addition, if your service uses secrets, IAM Role get additional permission to read and decrypt secret from AWS Secret Manager.
+
+You can grant additional managed policites to your service execution using `x-aws-policies` inside a service definition:
+
+```yaml
+services:
+  foo:
+    x-aws-policies:
+      - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+```
+
+You can also write your own [IAM Policy Document](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) 
+to fine tune the IAM role to be applied to your ECS service, and use `x-aws-role` inside a service definition to 
+pass the yaml-formatted Policy Document.
+
+```yaml
+services:
+  foo:
+    x-aws-role:
+      Version: "2012-10-17"
+      Statement: 
+        - Effect: "Allow"
+          Action: 
+            - "some_aws_service"
+          Resource": 
+            - "*"
+```
 
 ## Tuning the CloudFormation template
 
