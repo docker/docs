@@ -11,90 +11,23 @@ redirect_from:
 - /engine/installation/mac/
 - /docker-for-mac/index/
 - /docker-for-mac/osx/
-title: Get started with Docker Desktop for Mac
+title: Docker Desktop for Mac user manual
 toc_min: 1
 toc_max: 2
 ---
 
-Welcome to Docker Desktop!
+Welcome to Docker Desktop! The Docker Desktop for Mac user manual provides information on how to configure and manage your Docker Desktop settings.
 
-The _Docker Desktop for Mac_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/desktop/enterprise/).
+For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
 
-Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
-
-See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
-
-## Check versions
-
-Ensure your versions of `docker` and `docker-compose` are
-up-to-date and compatible with `Docker.app`. Your output may differ if you are
-running different versions.
-
-```shell
-$ docker --version
-Docker version {{ site.docker_ce_version }}, build c97c6d6
-```
-
-## Explore the application
-
-1.  Open a command-line terminal and test that your installation works by
-    running the simple Docker image,
-    [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank"
-    class="_"}:
-
-    ```shell
-    $ docker run hello-world
-
-    Unable to find image 'hello-world:latest' locally
-    latest: Pulling from library/hello-world
-    ca4f61b1923c: Pull complete
-    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-    Status: Downloaded newer image for hello-world:latest
-
-    Hello from Docker!
-    This message shows that your installation appears to be working correctly.
-    ...
-    ```
-
-2.  Start a Dockerized web server. Like the `hello-world` image above, if the
-    image is not found locally, Docker pulls it from Docker Hub.
-
-    ```bash
-    $ docker run --detach --publish=80:80 --name=webserver nginx
-    ```
-
-3.  In a web browser, go to `http://localhost/` to view the nginx homepage.
-    Because we specified the default HTTP port, it isn't necessary to append
-    `:80` at the end of the URL.
-
-    ![nginx home page](images/hello-world-nginx.png){:width="500px"}
-
-    > Early beta releases used `docker` as the hostname to build the URL. Now,
-    > ports are exposed on the private IP addresses of the VM and forwarded to
-    > `localhost` with no other host name set.
-
-4.  View the details on the container while your web server is running (with
-    `docker container ls` or `docker ps`):
-
-    ```none
-    $ docker container ls
-    CONTAINER ID   IMAGE   COMMAND                  CREATED              STATUS              PORTS                         NAMES
-    56f433965490   nginx   "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   webserver
-    ```
-
-5.  Stop and remove containers and images with the following commands. Use the
-    "all" flag (`--all` or `-a`) to view stopped containers.
-
-    ```shell
-    $ docker container ls
-    $ docker container stop webserver
-    $ docker container ls -a
-    $ docker container rm webserver
-    $ docker image ls
-    $ docker image rm nginx
-    ```
+>**Note**
+>
+> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/).
 
 ## Preferences
+
+The Docker **Preferences** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
+and more.
 
 Choose the Docker menu ![whale menu](images/whale-x.png){: .inline} > **Preferences** from the
 menu bar and configure the runtime options described below.
