@@ -4,13 +4,13 @@ keywords: Docker, pull requests, download, limit,
 title: Download rate limit
 ---
 
-Docker has enabled download rate limits for pull requests on Docker Hub. Limits are determined based on account type - please see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}. 
+Docker has enabled download rate limits for pull requests on Docker Hub. Limits are determined based on account type - please see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
 
 A user's limit will be equal to the highest entitlement of their personal account or any org they belong to. To take advantage of this, you must log into [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} as an authenticated user. For more information, see the following section [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). Unauthenticated (anonymous) users will have limits enforced via IP.
 
 Docker will gradually introduce these rate limits, with full effects starting November 1st, 2020.
 
-A pull request is defined as up to two `GET` requests on registry manifest URLs (`/v2/*/manifests/*`). A normal image pull makes a single manifest request; a pull for a multi-arch image makes two manifest requests. `HEAD` requests are not counted.
+A pull request is defined as up to two `GET` requests on registry manifest URLs (`/v2/*/manifests/*`). A normal image pull makes a single manifest request; a pull for a multi-arch image makes two manifest requests. `HEAD` requests are not counted. Limits are applied based on the user doing the pull, not based on the image being pulled or its owner.
 
 
 ## How do I authenticate pull requests
