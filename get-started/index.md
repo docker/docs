@@ -115,10 +115,9 @@ VMs incur a lot of overhead beyond what is being consumed by your application lo
 
 Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to start coding and containerizing in minutes. Docker Desktop includes everything you need to build, run, and share containerized applications right from your machine.
 
-Follow the instructions appropriate for your operating system to download and install Docker Desktop:
+Follow the instructions appropriate for your operating system to download and install Docker Desktop.
 
- - [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}
- - [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}
+ [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}{: .button .outline-btn} [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}{: .button .outline-btn}
 
 ### Test Docker version
 

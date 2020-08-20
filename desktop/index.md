@@ -29,12 +29,12 @@ Docker Desktop is available for Mac and Windows. For download information, syste
 * [Install Docker Desktop on Mac](../docker-for-mac/install.md)
 * [Install Docker Desktop on Windows](../docker-for-windows/install.md)
 
-## Get started
+## Configure Docker Desktop
 
-For information on how to get to get started with Docker Desktop and to learn about various UI options and their usage, see:
+To learn about the various UI options and their usage, see:
 
-* [Get started with Docker Desktop on Mac](../docker-for-mac/index.md)
-* [Get started with Docker Desktop on Windows](../docker-for-windows/index.md)
+* [Docker Desktop for Mac user manual](../docker-for-mac/index.md)
+* [Docker Desktop for Windows user manual](../docker-for-windows/index.md)
 
 ## Stable and Edge versions
 
