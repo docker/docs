@@ -10,164 +10,20 @@ redirect_from:
 - /installation/windows/
 - /engine/installation/windows/
 - /docker-for-windows/index/
-title: Get started with Docker for Windows
+title: Docker Desktop for Windows user manual
 toc_min: 1
 toc_max: 2
 ---
 
-Welcome to Docker Desktop!
+Welcome to Docker Desktop! The Docker Desktop for Mac user manual provides information on how to configure and manage your Docker Desktop settings.
 
-The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes.md). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/desktop/enterprise/).
+For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
 
-Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker _on Windows_.
+>**Note**
+>
+> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes.md).
 
-See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
-
-## Test your installation
-
-1.  Open a terminal window (Command Prompt or PowerShell, _but not_ PowerShell ISE).
-
-2.  Run `docker --version` to ensure that you have a supported version of Docker:
-
-    ```shell
-    > docker --version
-
-    Docker version 19.03.1
-    ```
-
-3.  Pull the [hello-world image](https://hub.docker.com/r/library/hello-world/) from Docker Hub and run a container:
-
-    ```shell
-    > docker run hello-world
-
-    docker : Unable to find image 'hello-world:latest' locally
-    latest: Pulling from library/hello-world
-    1b930d010525: Pull complete
-    Digest: sha256:c3b4ada4687bbaa170745b3e4dd8ac3f194ca95b2d0518b417fb47e5879d9b5f
-    Status: Downloaded newer image for hello-world:latest
-
-    Hello from Docker!
-    This message shows that your installation appears to be working correctly.
-    ...
-
-    ```
-
-4.  List the `hello-world` _image_ that was downloaded from Docker Hub:
-
-    ```shell
-    > docker image ls
-    ```
-
-5.  List the `hello-world` _container_ (that exited after displaying "Hello from Docker!"):
-
-    ```shell
-    > docker container ls --all
-    ```
-
-6.  Explore the Docker help pages by running some help commands:
-
-    ```shell
-    > docker --help
-    > docker container --help
-    > docker container ls --help
-    > docker run --help
-    ```
-
-## Explore the application
-
-In this section, we demonstrate the ease and power of Dockerized applications by
-running something more complex, such as an OS and a webserver.
-
-1. Pull an image of the [Ubuntu OS](https://hub.docker.com/r/_/ubuntu/) and run an interactive terminal inside the spawned container:
-
-    ```shell
-    > docker run --interactive --tty ubuntu bash
-
-    docker : Unable to find image 'ubuntu:latest' locally
-    latest: Pulling from library/ubuntu
-    22e816666fd6: Pull complete
-    079b6d2a1e53: Pull complete
-    11048ebae908: Pull complete
-    c58094023a2e: Pull complete
-    Digest: sha256:a7b8b7b33e44b123d7f997bd4d3d0a59fafc63e203d17efedf09ff3f6f516152
-    Status: Downloaded newer image for ubuntu:latest
-    ```
-
-    > Do not use PowerShell ISE
-    >
-    > Interactive terminals do not work in PowerShell ISE (but they do in PowerShell). See [docker/for-win/issues/223](https://github.com/docker/for-win/issues/223).
-
-2. You are in the container. At the root `#` prompt, check the `hostname` of the container:
-
-    ```shell
-    root@8aea0acb7423:/# hostname
-    8aea0acb7423
-    ```
-
-    Notice that the hostname is assigned as the container ID (and is also used in the prompt).
-
-3. Exit the shell with the `exit` command (which also stops the container):
-
-    ```shell
-    root@8aea0acb7423:/# exit
-    >
-    ```
-
-4. List containers with the `--all` option (because no containers are running).
-
-    The `hello-world` container (randomly named, `relaxed_sammet`) stopped after displaying its message. The `ubuntu` container (randomly named, `laughing_kowalevski`) stopped when you exited the container.
-
-    ```shell
-    > docker container ls --all
-
-    CONTAINER ID    IMAGE          COMMAND     CREATED          STATUS                      PORTS    NAMES
-    8aea0acb7423    ubuntu         "bash"      2 minutes ago    Exited (0) 2 minutes ago             laughing_kowalevski
-    45f77eb48e78    hello-world    "/hello"    3 minutes ago    Exited (0) 3 minutes ago             relaxed_sammet
-    ```
-
-5. Pull and run a Dockerized [nginx](https://hub.docker.com/_/nginx/) web server that we name, `webserver`:
-
-    ```shell
-    > docker run --detach --publish 80:80 --name webserver nginx
-
-    Unable to find image 'nginx:latest' locally
-    latest: Pulling from library/nginx
-
-    fdd5d7827f33: Pull complete
-    a3ed95caeb02: Pull complete
-    716f7a5f3082: Pull complete
-    7b10f03a0309: Pull complete
-    Digest: sha256:f6a001272d5d324c4c9f3f183e1b69e9e0ff12debeb7a092730d638c33e0de3e
-    Status: Downloaded newer image for nginx:latest
-    dfe13c68b3b86f01951af617df02be4897184cbf7a8b4d5caf1c3c5bd3fc267f
-    ```
-
-6. Point your web browser at `http://localhost` to display the nginx start page. (You don't need to append `:80` because you specified the default HTTP port in the `docker` command.)
-
-    ![Run nginx edge](images/nginx-homepage.png)
-
-7. List only your _running_ containers:
-
-    ```shell
-    > docker container ls
-
-    CONTAINER ID    IMAGE    COMMAND                   CREATED          STATUS          PORTS                 NAMES
-    0e788d8e4dfd    nginx    "nginx -g 'daemon of…"    2 minutes ago    Up 2 minutes    0.0.0.0:80->80/tcp    webserver
-    ```
-
-8. Stop the running nginx container by the name we assigned it, `webserver`:
-
-    ```shell
-    >  docker container stop webserver
-    ```
-
-9. Remove all three containers by their names -- the latter two names will differ for you:
-
-    ```shell
-    > docker container rm webserver laughing_kowalevski relaxed_sammet
-    ```
-
-## Docker Settings dialog
+## Settings
 
 The **Docker Desktop** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
 and more.
@@ -317,12 +173,14 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 **DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
 
-> **Note**: Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
-> `docker` commands that pull images from Docker Hub that are not already
-> downloaded, such as a first time run of `docker run hello-world`. If you
-> encounter this, reset the DNS server to use the Google DNS fixed address:
-> `8.8.8.8`. For more information, see
-> [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+> **Note**
+>
+> Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
+`docker` commands that pull images from Docker Hub that are not already
+downloaded, such as a first time run of `docker run hello-world`. If you
+encounter this, reset the DNS server to use the Google DNS fixed address:
+`8.8.8.8`. For more information, see
+[Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
 Updating these settings requires a reconfiguration and reboot of the Linux VM.
 

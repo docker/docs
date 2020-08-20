@@ -1135,7 +1135,7 @@ manuals:
     - path: /docker-for-mac/install/
       title: Install Docker Desktop for Mac
     - path: /docker-for-mac/
-      title: Getting started
+      title: User manual
     - path: /docker-for-mac/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-mac/docker-toolbox/
@@ -1167,7 +1167,7 @@ manuals:
     - path: /docker-for-windows/install-windows-home/
       title: Install Docker Desktop on Windows Home
     - path: /docker-for-windows/
-      title: Getting started
+      title: User manual
     - path: /docker-for-windows/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-windows/networking/
