@@ -1,4 +1,4 @@
-\---
+---
 description: Download rate limit
 keywords: Docker, pull requests, download, limit,
 title: Download rate limit
