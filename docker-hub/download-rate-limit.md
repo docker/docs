@@ -4,13 +4,30 @@ keywords: Docker, pull requests, download, limit,
 title: Download rate limit
 ---
 
-Docker has enabled download rate limits for downloads and pull requests on Docker Hub.
+Docker has enabled download rate limits for pull requests on 
+Docker Hub. Limits are determined based on the account type. 
+For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
 
-A Docker image contains multiple layers. Each layer in a pull request represents a download object. For example, when you download the latest Python image from Docker Hub, you’ll be downloading eight layers and indexes. The download rate limit introduced by Docker caps the number of objects that users can download within a specified timeframe. Any downloads beyond this limit will result in the `429 Too Many Requests` error message.
+A user's limit will be equal to the highest entitlement of their
+personal account or any organization they belong to. To take 
+advantage of this, you must log into 
+[Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} 
+as an authenticated user. For more information, see
+[How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
+Unauthenticated (anonymous) users will have the limits enforced via IP.
 
-Docker will gradually impose download rate limits with an eventual limit of 100 pulls per six hours for anonymous users.
+- A pull request is defined as up to two `GET` requests on registry 
+manifest URLs (`/v2/*/manifests/*`).
+- A normal image pull makes a 
+single manifest request.
+- A pull request for a multi-arch image makes two 
+manifest requests. 
+- `HEAD` requests are not counted. 
+- Limits are applied based on the user doing the pull, and 
+not based on the image being pulled or its owner.
 
-Logged in users will not be affected at this time. Therefore, we recommend that you log into [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} as an authenticated user. For more information, see the following section [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests).
+Docker will gradually introduce these rate limits, with full
+effects starting from November 1st, 2020.
 
 ## How do I authenticate pull requests
 
