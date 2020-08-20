@@ -11,6 +11,33 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.5.0
+2020-08-20
+
+> [Download](https://desktop.docker.com/win/edge/47357/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- The **Images** view on the Dashboard now allows you to interact with images on Docker Hub. You can now pull a remote repository with specific tags from Docker Hub, or view the details of the repository on the Docker Hub page. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
+
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old docker build experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+
+- Docker Desktop now supports running on WSL 2 on the latest updates of Windows 10 versions 1903 and 1909 (in addition to the existing support for version 2004). This also means that Docker Desktop can be installed on those builds of Windows 10 Home.
+
+### Upgrades
+
+- [Go 1.14.7](https://github.com/golang/go/issues?q=milestone:Go1.14.7+label:CherryPickApproved)
+- [Docker ECS integration v1.0.0-beta.5](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.5)
+- [Docker Engine 19.03.13-beta2](https://github.com/docker/docker-ce/releases/tag/v19.03.13-beta2)
+- [Docker ACI integration 0.1.12](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.12)
+
+### Bug fixes and minor changes
+
+- Moved **Dashboard** to the top of the whale menu.
+- The systray icon now responds to dark or light mode. See [docker/for-win#4113](https://github.com/docker/for-win/issues/4113)
+- Improved the error handling when `dockerd` crashes.
+- Fixed minor bugs in the **Images** view.
+
 ## Docker Desktop Community 2.3.4.0
 2020-07-28
 
