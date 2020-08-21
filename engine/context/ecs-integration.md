@@ -39,11 +39,18 @@ To deploy Docker containers on ECS, you must meet the following requirements:
   >
   > From the Docker Desktop menu, click **Settings** (Preferences on macOS) > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
 
-Docker not only runs multi-container applications locally, but also enables developers to seamlessly deploy Docker containers on Amazon ECS using a Compose file with the `docker  compose up` command. The following sections contain instructions on how to deploy your Compose application on Amazon ECS.
+Docker not only runs multi-container applications locally, but also enables 
+developers to seamlessly deploy Docker containers on Amazon ECS using a 
+Compose file with the `docker  compose up` command. The following sections 
+contain instructions on how to deploy your Compose application on Amazon ECS.
 
 ### Create AWS context
 
-Run the `docker context create ecs myecscontext` command to create an Amazon ECS docker context named `myecscontext`. If you have already installed and configured the AWS CLI, the setup command lets you select an existing AWS profile to connect to Amazon. Otherwise, you can create a new profile by passing an [AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"}.
+Run the `docker context create ecs myecscontext` command to create an Amazon ECS docker 
+context named `myecscontext`. If you have already installed and configured the AWS CLI, 
+the setup command lets you select an existing AWS profile to connect to Amazon. 
+Otherwise, you can create a new profile by passing an 
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"}.
 
 After you have created an AWS context, you can list your Docker contexts by running the `docker context ls` command:
 
@@ -55,19 +62,27 @@ default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock  
 
 ## Run Compose applications
 
-You can deploy and manage multi-container applications defined in Compose files to Amazon ECS using the `docker compose` command. To do this:
+You can deploy and manage multi-container applications defined in Compose files
+to Amazon ECS using the `docker compose` command. To do this:
 
-- Ensure you are using your ECS context. You can do this either by specifying the `--context myecscontext` flag with your command, or by setting the current context using the command `docker context use myecscontext`.
+- Ensure you are using your ECS context. You can do this either by specifying 
+the `--context myecscontext` flag with your command, or by setting the 
+current context using the command `docker context use myecscontext`.
 
-- Run `docker compose up` and `docker compose down` to start and then stop a full Compose application.
+- Run `docker compose up` and `docker compose down` to start and then 
+stop a full Compose application.
 
-  By default, `docker compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the Compose file directly using the `--file` flag.
+  By default, `docker compose up` uses the `docker-compose.yaml` file in 
+  the current folder. You can specify the Compose file directly using the 
+  `--file` flag.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
-- You can view services created for the Compose application on Amazon ECS and their state using the `docker compose ps` command.
+- You can view services created for the Compose application on Amazon ECS and 
+their state using the `docker compose ps` command.
 
-- You can view logs from containers that are part of the Compose application using the `docker compose logs` command.
+- You can view logs from containers that are part of the Compose application 
+using the `docker compose logs` command.
 
 ## Private Docker images
 
@@ -111,10 +126,11 @@ exec "$@"
 
 ### Secrets
 
-Secrets can be passed to your ECS services using Docker model to bind sensitive data as files 
-under `/run/secrets`. If your compose file declare a secret as file, such a secret will be created
-as part of your application deployment on ECS. Iy you use an existing secret, as an `external: true`
-reference in your compose file, use ECS Secrets Manager full ARN as secret name:
+You can pass secrets to your ECS services using Docker model to bind sensitive 
+data as files under `/run/secrets`. If your Compose file declares a secret as 
+file, such a secret will be created as part of your application deployment on 
+ECS. If you use an existing secret as `external: true` reference in your 
+Compose file, use the ECS Secrets Manager full ARN as the secret name:
 ```yaml
 services:
   webapp:
@@ -127,10 +143,13 @@ secrets:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
 ```
 
-Secret will be available at runtime for your service as a plain text file `/run/secrets/foo`.
+Secrets will be available at runtime for your service as a plain text file `/run/secrets/foo`.
 
-AWS Secrets Manager allows to both store sensitive data as plain text (like Docker secret does) or as
-a hierarchical JSON document. You can use the latter with ECS integration by using custom field `x-asw-keys` to define which entries in the JSON document to bind as a secret in your service container.
+The AWS Secrets Manager allows you to store sensitive data either as a plain 
+text (like Docker secret does), or as a hierarchical JSON document. You can 
+use the latter with ECS integration by using custom field `x-asw-keys` to 
+define which entries in the JSON document to bind as a secret in your service 
+container.
 
 ```yaml
 services:
@@ -146,18 +165,23 @@ secrets:
       - "bar"
 ```
 
-Doing so, secret for `bar` key will be available at runtime for your service as a plain text file `/run/secrets/foo/bar`. You can use special value `*` to get all keys bound in your container. 
-
+By doing this, the secret for `bar` key will be available at runtime for your 
+service as a plain text file `/run/secrets/foo/bar`. You can use the special 
+value `*` to get all keys bound in your container. 
 
 ### Logging
 
-ECS integration configure AWS CloudWatch Logs service for your containers. A log group is created for the application as `docker-compose/<application_name>`, and log streams are created for each service and container in your application, as `<application_name>/<service_name>/<container_ID>`.
+The ECS integration configures AWS CloudWatch Logs service for your containers. 
+A log group is created for the application as `docker-compose/<application_name>`, 
+and log streams are created for each service and container in your application 
+as `<application_name>/<service_name>/<container_ID>`.
 
-You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention` in your Compose file
-to set the number of retention days for log events. Default behaviour is to keep logs forever.
+You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention` 
+in your Compose file to set the number of retention days for log events. The 
+default behaviour is to keep logs forever.
 
-You can also pass `awslogs` driver parameters to your container as standard Compose file `logging.driver_opts` elements.
-
+You can also pass `awslogs` driver parameters to your container as standard 
+Compose file `logging.driver_opts` elements.
 
 ### Dependent service startup time and DNS resolution
 
@@ -165,32 +189,39 @@ Services get concurrently scheduled on ECS when a Compose file is deployed. AWS 
 
 Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
 
-
-
 ### Rolling update
 
-Your ECS services are created with rolling update configuration. As you run `docker ecs compose up` with
-a modified Compose file, the stack will be udpated to reflect changes, and if required some services
-will be replaced. This replacement process will follow rolling-update configuration, set by your services
-[`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config) configuration. 
+Your ECS services are created with rolling update configuration. As you run 
+`docker ecs compose up` with a modified Compose file, the stack will be 
+updated to reflect changes, and if required, some services will be replaced. 
+This replacement process will follow the rolling-update configuration set by 
+your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config) 
+configuration. 
 
-AWS ECS uses a percent-based model to define number of containers to be ran/shutdown during a 
-rolling-update. ECS integration computes rolling-update configuration according to the `prallelism` and
-`replicas` fields. You might prefer to configure directly rolling-update using extension fields `x-aws-min_percent` and `x-aws-max_percent`. The former sets the minimal percent of containers to run
-for service, the latter the max percent of additional container to start before previous version can 
-be removed.
+AWS ECS uses a percent-based model to define the number of containers to be 
+run or shut down during a rolling update. The ECS integration computes 
+rolling update configuration according to the `prallelism` and `replicas` 
+fields. However, you might prefer to directly configure a rolling update 
+using the extension fields `x-aws-min_percent` and `x-aws-max_percent`. 
+The former sets the minimum percent of containers to run for service, and the 
+latter sets the maximum percent of additional containers to start before 
+previous versions are removed.
 
-By default, ECS rolling-update is set to run twice the number of containers for a service (200%), and
-ability to shut down 100% containers during the update.
+By default, the ECS rolling update is set to run twice the number of 
+containers for a service (200%), and has the ability to shut down 100% 
+containers during the update.
 
 
 ### IAM roles
 
-Your ECS Tasks are executed with a dedicated IAM role, granting access to AWS Managed policies
-[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) and [`AmazonEC2ContainerRegistryReadOnly`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html). 
-In addition, if your service uses secrets, IAM Role get additional permission to read and decrypt secret from AWS Secret Manager.
+Your ECS Tasks are executed with a dedicated IAM role, granting access 
+to AWS Managed policies[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) 
+and [`AmazonEC2ContainerRegistryReadOnly`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html). 
+In addition, if your service uses secrets, IAM Role gets additional 
+permissions to read and decrypt secrets from the AWS Secret Manager.
 
-You can grant additional managed policites to your service execution using `x-aws-policies` inside a service definition:
+You can grant additional managed policies to your service execution 
+by using `x-aws-policies` inside a service definition:
 
 ```yaml
 services:
@@ -200,8 +231,9 @@ services:
 ```
 
 You can also write your own [IAM Policy Document](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) 
-to fine tune the IAM role to be applied to your ECS service, and use `x-aws-role` inside a service definition to 
-pass the yaml-formatted Policy Document.
+to fine tune the IAM role to be applied to your ECS service, and use 
+`x-aws-role` inside a service definition to pass the 
+yaml-formatted policy document.
 
 ```yaml
 services:
