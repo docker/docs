@@ -15,7 +15,7 @@ toc_min: 1
 toc_max: 2
 ---
 
-Welcome to Docker Desktop! The Docker Desktop for Mac user manual provides information on how to configure and manage your Docker Desktop settings.
+Welcome to Docker Desktop! The Docker Desktop for Windows user manual provides information on how to configure and manage your Docker Desktop settings.
 
 For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
 
@@ -282,7 +282,7 @@ to change context so that `kubectl` is pointing to `docker-desktop`:
   running as a Docker container, select **Enable Kubernetes**.
 
 To set Kubernetes as the
-  [default orchestrator](/docker-for-mac/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
+  [default orchestrator](/docker-for-windows/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
 
 By default, Kubernetes containers are hidden from commands like `docker
 service ls`, because managing them manually is not supported. To make them
