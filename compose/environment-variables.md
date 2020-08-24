@@ -18,6 +18,15 @@ web:
   image: "webapp:${TAG}"
 ```
 
+If you have multiple environment variables, you can substitute them by providing 
+a path to your environment variables file. By default, the `docker-compose` 
+command will look for a file named `.env` in the directory you run the command.
+By passing the file as an argument, you can store it anywhere and name it 
+appropriately, e.g (.env.ci, .env.dev, .env.prod). Passing the file path is 
+done using the `--env-file` option:
+
+``` docker-compose --env-file ./config/.env.dev up ```
+
 For more information, see the
 [Variable substitution](compose-file/index.md#variable-substitution) section in the
 Compose file reference.
