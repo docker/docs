@@ -42,7 +42,7 @@ Btrfs Filesystem as Btrfs.
   command:
 
   ```bash
-  $ sudo cat /proc/filesystems | grep btrfs
+  $ grep btrfs /proc/filesystems
 
   btrfs
   ```
