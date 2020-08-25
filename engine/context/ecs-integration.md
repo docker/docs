@@ -41,7 +41,7 @@ To deploy Docker containers on ECS, you must meet the following requirements:
 
 Docker not only runs multi-container applications locally, but also enables 
 developers to seamlessly deploy Docker containers on Amazon ECS using a 
-Compose file with the `docker  compose up` command. The following sections 
+Compose file with the `docker compose up` command. The following sections 
 contain instructions on how to deploy your Compose application on Amazon ECS.
 
 ### Create AWS context
