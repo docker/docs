@@ -56,13 +56,11 @@ body.night {
         background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px !important;
     }
     .sidebar-home,
-    .sidebar,
     #sidebar-wrapper,
     #sidebar-wrapper-home,
     .sidebar-home .affix,
     #sidebar-right,
     #sidebar-right.affix,
-    .col-toc,
     .col-nav {
         background-color: $bg-sidebar-night;
         border: none;
