@@ -29,8 +29,8 @@ need this level of resilience, you can work around the problem with a wrapper
 script:
 
 - Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-  [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
-  [wait-for](https://github.com/Eficode/wait-for). These are small
+  [dockerize](https://github.com/jwilder/dockerize), sh-compatible
+  [wait-for](https://github.com/Eficode/wait-for), or [RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) template. These are small
   wrapper scripts which you can include in your application's image to
   poll a given host and port until it's accepting TCP connections.
 
