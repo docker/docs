@@ -42,7 +42,15 @@ $ sudo apt-get remove docker docker-engine docker.io containerd runc
 It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine package is now called `docker-ce`.
+networks, are preserved. If you do not need to save anything or you want to
+start with a clean installation, it is safe to remove this directory with the
+command:
+
+```bash
+$ sudo rm -rf /var/lib/docker
+```
+
+The Docker Engine package is now called `docker-ce`.
 
 ### Supported storage drivers
 
