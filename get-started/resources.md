@@ -46,6 +46,7 @@ If books are your preferred learning style, check out these written by the [Dock
 
 A number of Docker Captains have also created video courses on Docker and Kubernetes.
 
+* [Stephen Grider](https://rallycoding.com/courses/docker-and-kubernetes-the-complete-guide/): Docker and Kubernetes: The Complete Guide
 * [Bret Fisher](https://www.bretfisher.com/courses/): Docker Mastery, Docker Swarm Mastery, Docker Mastery for Node.js Projects
 * [Nick Janetakis](https://nickjanetakis.com/courses/) Dive into Docker, Docker for DevOps
 * [Nigel Poulton](https://nigelpoulton.com/video-courses): Kubernetes 101, Getting Started with Kubernetes, Docker and Kubernetes: The Big Picture, Kubernetes Deep Dive, Docker Deep Dive
