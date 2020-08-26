@@ -167,49 +167,31 @@ machines. One solution is to use a version manager like
 
 Docker Desktop does not propose Toolbox image migration as part of its
 installer since version 18.01.0.  You can migrate existing Docker
-Toolbox images with the scripts described below. (This migration
-cannot merge images from both Docker and Toolbox: any existing Docker image is
-*replaced* by the Toolbox images.)
+Toolbox images with the steps described below.
 
-Run the following shell commands in a terminal. You need a working
-`qemu-img`; it is part of the qemu package in both MacPorts and Brew:
+In a terminal while running Toolbox use `docker commit` to create an image snapshot
+from a container, for each container you wish to preserve:
 
-```sh
-$ brew install qemu  # or sudo port install qemu
+```
+$ docker commit nginx
+sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
-First, find your Toolbox disk images. You probably have just one:
-`~/.docker/machine/machines/default/disk.vmdk`.
+Next export each of these images (and any other images you wish to keep):
 
-```sh
-$ vmdk=~/.docker/machine/machines/default/disk.vmdk
-$ file "$vmdk"
-/Users/akim/.docker/machine/machines/default/disk.vmdk: VMware4 disk image
+```
+$ docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
-Second, find out the location and format of the disk image used by your Docker
-Desktop.
+Next, when running Docker Deskton on Mac, reload all these images:
 
-```sh
-$ settings=~/Library/Group\ Containers/group.com.docker/settings.json
-$ dimg=$(sed -En 's/.*diskPath.*:.*"(.*)".*/\1/p' < "$settings")
-$ echo "$dimg"
-/Users/akim/Library/Containers/com.docker.docker/Data/vms/0/Docker.raw
+```
+$ docker load -i nginx.tar
+Loaded image ID: sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
-In this case the format is `raw` (it could have been `qcow2`), and the location
-is `~/Library/Containers/com.docker.docker/Data/vms/0/`.
-
-Then:
-- if your format is qcow2, run
-```sh
-$ qemu-img convert -p -f vmdk -O qcow2 -o lazy_refcounts=on "$vmdk" "$dimg"
-```
-- if your format is raw, run the following command. If you are short on disk
-  space, it is likely to fail.
-```sh
-$ qemu-img convert -p -f vmdk -O raw "$vmdk" "$dimg"
-```
+Note these steps will not migrate any `docker volume` contents: these must
+be copied across manually.
 
 Finally (optional), if you are done with Docker Toolbox, you may fully
 [uninstall
