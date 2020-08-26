@@ -45,7 +45,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 6. Add the required software in the file.
 
-       Django>=2.0,<3.0
+       Django>=3.0,<4.0
        psycopg2-binary>=2.8
 
 7. Save and close the `requirements.txt` file.
@@ -186,8 +186,8 @@ In this section, you set up the database connection for Django.
 
     . . .
 
-    web_1  | May 30, 2017 - 21:44:49
-    web_1  | Django version 1.11.1, using settings 'composeexample.settings'
+    web_1  | July 30, 2020 - 18:35:38
+    web_1  | Django version 3.0.8, using settings 'composeexample.settings'
     web_1  | Starting development server at http://0.0.0.0:8000/
     web_1  | Quit the server with CONTROL-C.
     ```
