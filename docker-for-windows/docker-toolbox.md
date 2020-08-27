@@ -9,29 +9,33 @@ you have them, to Docker Desktop for Windows.
 
 ## How to migrate Docker Toolbox disk images to Docker Desktop
 
-> **Warning**
->
-> Migrating disk images from Docker Toolbox _clobbers_ Docker images if they
-> exist. The migration process replaces the entire VM with your previous Docker
-> Toolbox data.
-{: .warning }
+Docker Desktop does not propose Toolbox image migration as part of its
+installer since version 18.01.0. You can migrate existing Docker
+Toolbox images with the steps described below.
 
-1.  Install [qemu](https://www.qemu.org/){: target="_blank" class="_"} (a machine emulator): [https://cloudbase.it/downloads/qemu-img-win-x64-2_3_0.zip](https://cloudbase.it/downloads/qemu-img-win-x64-2_3_0.zip).
-2.  Install [Docker Desktop for Windows](install.md){: target="_blank" class="_"}.
-3.  Stop Docker Desktop, if running.
-4.  Move your current Docker VM disk to a safe location:
+In a terminal, while running Toolbox, use `docker commit` to create an image snapshot
+from a container, for each container you wish to preserve:
 
-    ```shell
-    mv 'C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx' C:/<any directory>
-    ```
+```
+> docker commit nginx
+sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
+```
 
-5.  Convert your Toolbox disk image:
+Next, export each of these images (and any other images you wish to keep):
 
-    ```shell
-    qemu-img.exe convert 'C:\Users\<username>\.docker\machine\machines\default\disk.vmdk' -O vhdx -o subformat=dynamic -p 'C:\Users\Public\Documents\Hyper-V\Virtual Hard Disks\MobyLinuxVM.vhdx'
-    ```
+```
+> docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
+```
 
-6.  Restart Docker Desktop (with your converted disk).
+Next, when running Docker Desktop on Windows, reload all these images:
+
+```
+> docker load -i nginx.tar
+Loaded image ID: sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
+```
+
+Note these steps will not migrate any `docker volume` contents: these must
+be copied across manually.
 
 ## How to uninstall Docker Toolbox
 
