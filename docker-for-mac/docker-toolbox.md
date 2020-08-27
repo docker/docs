@@ -169,7 +169,7 @@ Docker Desktop does not propose Toolbox image migration as part of its
 installer since version 18.01.0.  You can migrate existing Docker
 Toolbox images with the steps described below.
 
-In a terminal while running Toolbox use `docker commit` to create an image snapshot
+In a terminal, while running Toolbox, use `docker commit` to create an image snapshot
 from a container, for each container you wish to preserve:
 
 ```
@@ -177,13 +177,13 @@ $ docker commit nginx
 sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
-Next export each of these images (and any other images you wish to keep):
+Next, export each of these images (and any other images you wish to keep):
 
 ```
 $ docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
-Next, when running Docker Deskton on Mac, reload all these images:
+Next, when running Docker Desktop on Mac, reload all these images:
 
 ```
 $ docker load -i nginx.tar
