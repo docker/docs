@@ -200,7 +200,7 @@ configuration.
 
 AWS ECS uses a percent-based model to define the number of containers to be 
 run or shut down during a rolling update. The ECS integration computes 
-rolling update configuration according to the `prallelism` and `replicas` 
+rolling update configuration according to the `parallelism` and `replicas` 
 fields. However, you might prefer to directly configure a rolling update 
 using the extension fields `x-aws-min_percent` and `x-aws-max_percent`. 
 The former sets the minimum percent of containers to run for service, and the 
