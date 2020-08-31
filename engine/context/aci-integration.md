@@ -137,6 +137,34 @@ You can also deploy and manage multi-container applications defined in Compose f
 >
 > The current Docker Azure integration does not allow fetching a combined log stream from all the containers that make up the Compose application.
 
+## Using Azure file share as volumes in ACI containers
+
+You can deploy containers or compose applications that use persistent data stored in volumes. Azure File Share can be used to support volumes for ACI containers. 
+
+With an existing Azure File Share, with storage account name `mystorageaccount` and file share name `myfileshare`, you can specify a volume in your deployment `run` command like this:
+
+`docker run -v storageaccount@fileshare:/target/path myimage` and the runtime container will see the file share content in `/target/path`.
+
+In a compose application, the volume specification must use the following syntax in the compose file:
+
+```
+myservice:
+  image: nginx
+  volumes:
+    - mydata:/mount/testvolumes
+
+volumes:
+  mydata:
+    driver: azure_file
+    driver_opts:
+      share_name: myfileshare
+      storage_account_name: mystorageaccount
+```
+
+For Now, you need to create an Azure storage account and File Share using the Azure portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli)
+
+The key to the azure storage account will be automatically fetched from your Azure login, when you deploy a single container or a compose application.
+
 ## Using ACI resource groups as namespaces
 
 You can create several Docker contexts associated with ACI. Each context must be associated with a unique Azure resource group. This allows you to use Docker contexts as namespaces. You can switch between namespaces using `docker context use <CONTEXT>`.
