@@ -50,6 +50,12 @@ docker login azure
 
 This opens your web browser and prompts you to enter your Azure login credentials.
 
+Alternatively, you can login without interaction (typically in scripts ot continuous integration scenarios), using an Azure Service Principal, with `docker login azure --client-id xx --client-secret yy --tenant-id zz`
+
+> Note: Login through Azure Service Provider obtains an access token valid for a short period (typically 1h), but does not allow to automatically and transparently refresh this token. You will need to manually re-login once the access token is expired when logging in with a Service Provider. 
+
+You can also use the `--tenant-id` option alone to specify a tenant, if you have several ones available in Azure.
+
 ### Create an ACI context
 
 After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI. For example, let us create a new context called `myacicontext`:
