@@ -11,6 +11,33 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.6.0
+2020-09-01
+
+> [Download](https://desktop.docker.com/mac/edge/TODO/Docker.dmg)
+
+### New
+
+- In partnership with Snyk, Docker Desktop launches [vulnerability scanning](https://docs.docker.com/engine/scan/) for Docker local images.
+- Docker ECS plugin has been replaced by [ECS cloud integration](https://docs.docker.com/engine/context/ecs-integration/)
+- Docker UI:
+  - The Images view now has search and filter options.
+  - You can now push an image to Docker Hub using the Remote repositories drop-down menu.
+- WSL 2 files and directories can now be mounted from the Windows Docker CLI with e.g. `docker run -v \\wsl$\Ubuntu\my-files:/my-files ...`
+
+### Removal
+
+- Support for MacOS 10.13 has ended, you will need to update your system to keep using Docker Desktop.
+
+### Upgrades
+
+- [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
+- [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
+
+### Bug fixes and minor changes
+
+- Fixed a Mac CPU usage bug by removing the serial console from `hyperkit`, see [docker/roadmap#12]( https://github.com/docker/roadmap/issues/12#issuecomment-663163280). To open a shell in the VM use either `nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock` (on Mac) or `putty -serial \\.\pipe\dockerDebugShell` (on Windows).
+
 ## Docker Desktop Community 2.3.5.0
 2020-08-21
 

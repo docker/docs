@@ -11,6 +11,29 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.6.0
+2020-09-01
+
+> [Download](https://desktop.docker.com/win/edge/TODO/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- In partnership with Snyk, Docker Desktop launches [vulnerability scanning](https://docs.docker.com/engine/scan/) for Docker local images.
+- Docker ECS plugin has been replaced by [ECS cloud integration](https://docs.docker.com/engine/context/ecs-integration/)
+- Docker UI:
+  - The Images view now has search and filter options.
+  - You can now push an image to Docker Hub using the Remote repositories drop-down menu.
+
+### Upgrades
+
+- [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
+- [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
+
+### Bug fixes and minor changes
+
+- Fixed an issue with Docker Desktop integration with other WSL 2 distros. See [docker/for-win#6894](https://github.com/docker/for-win/issues/6894)
+- Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425)
+
 ## Docker Desktop Community 2.3.5.1
 2020-08-25
 
