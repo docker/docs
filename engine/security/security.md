@@ -192,7 +192,7 @@ This doesn't affect regular web apps, but reduces the vectors of attack by
 malicious users considerably. By default Docker
 drops all capabilities except [those
 needed](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30),
-a whitelist instead of a blacklist approach. You can see a full list of
+an allowlist instead of a denylist approach. You can see a full list of
 available capabilities in [Linux
 manpages](http://man7.org/linux/man-pages/man7/capabilities.7.html).
 

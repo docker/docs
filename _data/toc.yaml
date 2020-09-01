@@ -1097,6 +1097,8 @@ manuals:
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
+  - path: /engine/scan/
+    title: Docker Scan
 
 - sectiontitle: Docker Compose
   section:
