@@ -14,7 +14,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.6.0
 2020-09-01
 
-> [Download](https://desktop.docker.com/mac/edge/TODO/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/47622/Docker.dmg)
 
 ### New
 
@@ -23,7 +23,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 - Docker UI:
   - The Images view now has search and filter options.
   - You can now push an image to Docker Hub using the Remote repositories drop-down menu.
-- WSL 2 files and directories can now be mounted from the Windows Docker CLI with e.g. `docker run -v \\wsl$\Ubuntu\my-files:/my-files ...`
+- WSL 2 files and directories can now be mounted from the Windows Docker CLI with e.g. `docker run -v \\wsl$\Ubuntu\my-files:/my-files ...`.
 
 ### Removal
 
