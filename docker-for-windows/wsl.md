@@ -42,7 +42,7 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 5. Click **Apply & Restart**.
 6. Ensure the distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
 
-    To check the WSL mode, run
+    To check the WSL mode, run the following command in cmdexec or PowerShell
 
      `wsl -l -v`
 
