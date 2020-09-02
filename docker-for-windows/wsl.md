@@ -42,17 +42,17 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 5. Click **Apply & Restart**.
 6. Ensure the distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
 
-    To check the WSL mode, run the following command in cmdexec or PowerShell
+    To check the WSL mode, run:
 
-     `wsl -l -v`
+     `wsl.exe -l -v`
 
     To upgrade your existing Linux distro to v2, run:
 
-    `wsl --set-version (distro name) 2`
+    `wsl.exe --set-version (distro name) 2`
 
     To set v2 as the default version for future installations, run:
 
-    `wsl --set-default-version 2`
+    `wsl.exe --set-default-version 2`
 
 7. When Docker Desktop restarts, go to **Settings** > **Resources** > **WSL Integration**.
 
