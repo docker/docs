@@ -88,10 +88,10 @@ using the `docker compose logs` command.
 
 The Docker ECS integration automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [Amazon SSM service](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html){: target="_blank" class="_"}.
 
-For your convenience, Docker ECS integration offers the `docker ecs secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
+For your convenience, Docker ECS integration offers the `docker secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
 
 ```console
-docker ecs secret create dockerhubAccessToken --username <dockerhubuser>  --password <dockerhubtoken>
+docker secret create dockerhubAccessToken --username <dockerhubuser>  --password <dockerhubtoken>
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
@@ -192,7 +192,7 @@ Alternatively, you can use the [depends_on](https://github.com/compose-spec/comp
 ### Rolling update
 
 Your ECS services are created with rolling update configuration. As you run 
-`docker ecs compose up` with a modified Compose file, the stack will be 
+`docker compose up` with a modified Compose file, the stack will be 
 updated to reflect changes, and if required, some services will be replaced. 
 This replacement process will follow the rolling-update configuration set by 
 your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config) 
@@ -250,7 +250,7 @@ services:
 
 ## Tuning the CloudFormation template
 
-The Docker ECS integration relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker ecs compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
+The Docker ECS integration relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 
 By default, the Docker ECS integration creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or you want to manage these yourself, you can use the following custom Compose extensions:
 

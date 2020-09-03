@@ -5,7 +5,7 @@ title: Get started with Docker Machine and a local VM
 hide_from_sitemap: true
 ---
 
-Let's take a look at using `docker-machine` to create, use and manage a
+Let's take a look at using `docker-machine` to create, use, and manage a
 Docker host inside of a local virtual machine.
 
 ## Prerequisite information

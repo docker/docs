@@ -11,6 +11,7 @@ redirect_from:
 - /engine/installation/mac/
 - /docker-for-mac/index/
 - /docker-for-mac/osx/
+- /docker-for-mac/mutagen/
 title: Docker Desktop for Mac user manual
 toc_min: 1
 toc_max: 2

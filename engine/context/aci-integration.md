@@ -50,6 +50,20 @@ docker login azure
 
 This opens your web browser and prompts you to enter your Azure login credentials.
 
+Alternatively, you can log in without interaction (typically in 
+scripts or continuous integration scenarios), using an Azure Service
+Principal, with `docker login azure --client-id xx --client-secret yy --tenant-id zz`
+
+>**Note**
+>
+> Logging in through the Azure Service Provider obtains an access token valid 
+for a short period (typically 1h), but it does not allow you to automatically 
+and transparently refresh this token. You must manually re-login 
+when the access token has expired when logging in with a Service Provider. 
+
+You can also use the `--tenant-id` option alone to specify a tenant, if 
+you have several ones available in Azure.
+
 ### Create an ACI context
 
 After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI. For example, let us create a new context called `myacicontext`:
@@ -136,6 +150,42 @@ You can also deploy and manage multi-container applications defined in Compose f
 > **Note**
 >
 > The current Docker Azure integration does not allow fetching a combined log stream from all the containers that make up the Compose application.
+
+## Using Azure file share as volumes in ACI containers
+
+You can deploy containers or Compose applications that use persistent data 
+stored in volumes. Azure File Share can be used to support volumes for ACI 
+containers. 
+
+With an existing Azure File Share, with storage account name `mystorageaccount` 
+and file share name `myfileshare`, you can specify a volume in your deployment `run`
+command as follows:
+
+`docker run -v storageaccount@fileshare:/target/path myimage` and the runtime 
+container will see the file share content in `/target/path`.
+
+In a Compose application, the volume specification must use the following syntax
+in the Compose file:
+
+```yaml
+myservice:
+  image: nginx
+  volumes:
+    - mydata:/mount/testvolumes
+
+volumes:
+  mydata:
+    driver: azure_file
+    driver_opts:
+      share_name: myfileshare
+      storage_account_name: mystorageaccount
+```
+
+Now, you need to create an Azure storage account and File Share using the Azure
+portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli).
+
+When you deploy a single container or a Compose application, your 
+Azure login will automatically fetch the key to the Azure storage account.
 
 ## Using ACI resource groups as namespaces
 
