@@ -28,7 +28,7 @@ include examples of customizing the output format.
 >
 > {% raw %}
 > ```bash
-> docker inspect --format "{{join .Args \" , \"}}"
+> docker inspect --format '{{join .Args \" , \"}}'
 > ```
 > {% endraw %}
 >
