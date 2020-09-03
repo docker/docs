@@ -24,7 +24,8 @@ include examples of customizing the output format.
 > ```
 > {% endraw %}
 >
-> with single quote. Otherwise, in a Windows shell, e.g Powershell, you need use double quotes like:
+> with single quote. Otherwise, in a Windows shell, e.g Powershell, you need use single quotes, but
+> escape the double quotes inside the params like:
 >
 > {% raw %}
 > ```bash
@@ -32,7 +33,6 @@ include examples of customizing the output format.
 > ```
 > {% endraw %}
 >
-> escaping the double quotes inside the pattern.
 {:.important}
 
 ## join
