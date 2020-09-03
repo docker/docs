@@ -139,15 +139,21 @@ You can also deploy and manage multi-container applications defined in Compose f
 
 ## Using Azure file share as volumes in ACI containers
 
-You can deploy containers or compose applications that use persistent data stored in volumes. Azure File Share can be used to support volumes for ACI containers. 
+You can deploy containers or Compose applications that use persistent data 
+stored in volumes. Azure File Share can be used to support volumes for ACI 
+containers. 
 
-With an existing Azure File Share, with storage account name `mystorageaccount` and file share name `myfileshare`, you can specify a volume in your deployment `run` command like this:
+With an existing Azure File Share, with storage account name `mystorageaccount` 
+and file share name `myfileshare`, you can specify a volume in your deployment `run`
+command as follows:
 
-`docker run -v storageaccount@fileshare:/target/path myimage` and the runtime container will see the file share content in `/target/path`.
+`docker run -v storageaccount@fileshare:/target/path myimage` and the runtime 
+container will see the file share content in `/target/path`.
 
-In a compose application, the volume specification must use the following syntax in the compose file:
+In a Compose application, the volume specification must use the following syntax
+in the Compose file:
 
-```
+```yaml
 myservice:
   image: nginx
   volumes:
@@ -161,9 +167,11 @@ volumes:
       storage_account_name: mystorageaccount
 ```
 
-For Now, you need to create an Azure storage account and File Share using the Azure portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli)
+Now, you need to create an Azure storage account and File Share using the Azure
+portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli).
 
-The key to the azure storage account will be automatically fetched from your Azure login, when you deploy a single container or a compose application.
+When you deploy a single container or a Compose application, your 
+Azure login will automatically fetch the key to the Azure storage account.
 
 ## Using ACI resource groups as namespaces
 
