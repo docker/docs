@@ -16,7 +16,8 @@ include examples of customizing the output format.
 
 >**Note**
 >
-> Whe using the `--format` flag you need observe your shell environment. In a Posix shell you can run:
+> Whe using the `--format` flag, you need observe your shell environment. 
+> In a Posix shell, you can run the following with a single quote:
 >
 > {% raw %}
 > ```bash
@@ -24,8 +25,8 @@ include examples of customizing the output format.
 > ```
 > {% endraw %}
 >
-> with single quote. Otherwise, in a Windows shell, e.g Powershell, you need use single quotes, but
-> escape the double quotes inside the params like:
+> Otherwise, in a Windows shell (for example, PowerShell), you need to use single quotes, but
+> escape the double quotes inside the params as follows:
 >
 > {% raw %}
 > ```bash
