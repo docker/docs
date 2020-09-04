@@ -304,7 +304,7 @@ connected to both networks.
 
     $ docker run -dit --name alpine3 alpine ash
 
-    $ docker run -dit --name alpine4 --network alpine-net alpine ash
+    $ docker run -dit --name alpine4 alpine ash
 
     $ docker network connect bridge alpine4
     ```
