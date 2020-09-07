@@ -11,6 +11,15 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.6.1
+2020-09-07
+
+> [Download](https://desktop.docker.com/win/edge/47757/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Fixed an issue with mount shadowing in WSL 2. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) and [docker/for-win#8316](https://github.com/docker/for-win/issues/8316).
+
 ## Docker Desktop Community 2.3.6.0
 2020-09-01
 
