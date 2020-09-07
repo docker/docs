@@ -5,7 +5,7 @@ title: docker-compose pull
 notoc: true
 ---
 
-```
+```none
 Usage: pull [options] [SERVICE...]
 
 Options:

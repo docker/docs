@@ -5,7 +5,7 @@ title: docker-compose exec
 notoc: true
 ---
 
-```
+```none
 Usage: exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
 
 Options:

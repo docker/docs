@@ -5,7 +5,7 @@ title: docker-compose stop
 notoc: true
 ---
 
-```
+```none
 Usage: stop [options] [SERVICE...]
 
 Options:

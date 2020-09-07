@@ -11,7 +11,7 @@ notoc: true
   the `scale` command, as it incorporates the behaviour of the `up` command.
   {: .warning }
 
-```
+```none
 Usage: scale [options] [SERVICE=NUM...]
 
 Options:

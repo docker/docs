@@ -12,6 +12,7 @@ Options:
     -f, --force   Don't ask to confirm removal
     -s, --stop    Stop the containers, if required, before removing
     -v            Remove any anonymous volumes attached to containers
+    -a, --all     Deprecated - no effect.
 ```
 
 Removes stopped service containers.

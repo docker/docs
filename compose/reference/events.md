@@ -5,7 +5,7 @@ title: docker-compose events
 notoc: true
 ---
 
-```
+```none
 Usage: events [options] [SERVICE...]
 
 Options:
