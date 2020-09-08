@@ -11,43 +11,43 @@ redirect_from:
 
 ### Features
 
-- Merge 2.x and 3.x compose formats and align with COMPOSE_SPEC schema
+- Merged 2.x and 3.x Compose formats and aligned with `COMPOSE_SPEC` schema.
 
-- Implement service mode for ipc
+- Implemented service mode for `ipc`.
 
-- Pass `COMPOSE_PROJECT_NAME` environment variable in container mode
+- Passed `COMPOSE_PROJECT_NAME` environment variable in container mode.
 
-- Make run behave in the same way as up
+- Made `run` behave in the same way as `up`.
 
-- Use `docker build` on `docker-compose run` when `COMPOSE_DOCKER_CLI_BUILD` environment variable is set
+- Used `docker build` on `docker-compose run` when `COMPOSE_DOCKER_CLI_BUILD` environment variable is set.
 
-- Use docker-py default API version for engine queries (`auto`)
+- Used the docker-py default API version for engine queries (`auto`).
 
-- Parse `network_mode` on build
+- Parsed `network_mode` on build.
 
 ### Bugs
 
-- Ignore build context path validation when building is not required
+- Ignored build context path validation when building is not required.
 
-- Fix float to bytes conversion via docker-py bump to 4.3.1
+- Fixed float to bytes conversion via docker-py bump to 4.3.1.
 
-- Fix scale bug when deploy section is set
+- Fixed the scale bug when the deploy section is set.
 
-- Fix `docker-py` bump in `setup.py`
+- Fixed `docker-py` bump in `setup.py`.
 
-- Fix experimental build failure detection
+- Fixed experimental build failure detection.
 
-- Fix context propagation to docker cli
+- Fixed context propagation to the Docker CLI.
 
 ### Miscellaneous
 
-- Bump `docker-py` to 4.3.1
+- Bumped `docker-py` to 4.3.1.
 
-- Bump `tox` to 3.19.0
+- Bumped `tox` to 3.19.0.
 
-- Bump `virtualenv` to 20.0.30
+- Bumped `virtualenv` to 20.0.30.
 
-- Add script for docs syncronization
+- Added script for Docs synchronization.
 
 ## 1.26.2
 (2020-07-02)
