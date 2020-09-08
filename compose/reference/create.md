@@ -9,9 +9,7 @@ notoc: true
 instead.
 {: .warning }
 
-```
-Creates containers for a service.
-
+```none
 Usage: create [options] [SERVICE...]
 
 Options:

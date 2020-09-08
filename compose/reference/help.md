@@ -5,8 +5,8 @@ title: docker-compose help
 notoc: true
 ---
 
-```
-Usage: help COMMAND
+```none
+Usage: help [COMMAND]
 ```
 
 Displays help and usage instructions for a command.

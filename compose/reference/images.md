@@ -5,7 +5,7 @@ title: docker-compose images
 notoc: true
 ---
 
-```
+```none
 Usage: images [options] [SERVICE...]
 
 Options:
