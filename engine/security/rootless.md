@@ -165,11 +165,11 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 ### Manual installation
 
 To install the binaries manually without using the installer, extract
-`docker-rootless-extras-<version>.tar.gz` along with `docker-<version>.tar.gz`
+`docker-rootless-extras-<version>.tgz` along with `docker-<version>.tgz`
 from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" class="_" }
 
 If you already have the Docker daemon running as the root, you only need to
-extract `docker-rootless-extras-<version>.tar.gz`. The archive can be extracted
+extract `docker-rootless-extras-<version>.tgz`. The archive can be extracted
 under an arbitrary directory listed in the `$PATH`. For example, `/usr/local/bin`,
 or `$HOME/bin`.
 

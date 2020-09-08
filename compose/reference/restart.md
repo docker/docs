@@ -5,7 +5,7 @@ title: docker-compose restart
 notoc: true
 ---
 
-```
+```none
 Usage: restart [options] [SERVICE...]
 
 Options:

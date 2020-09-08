@@ -11,6 +11,19 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.6.1
+2020-09-08
+
+> [Download](https://desktop.docker.com/mac/edge/47792/Docker.dmg)
+
+### Upgrades
+
+- [Docker Compose 1.27.0](https://github.com/docker/compose/releases/tag/1.27.0)
+
+### Bug fixes and minor changes
+
+-  Docker Desktop now correctly displays the state of "Use gRPC FUSE for file sharing" in the UI.
+
 ## Docker Desktop Community 2.3.6.0
 2020-09-01
 

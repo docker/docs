@@ -5,7 +5,7 @@ title: docker-compose kill
 notoc: true
 ---
 
-```
+```none
 Usage: kill [options] [SERVICE...]
 
 Options:

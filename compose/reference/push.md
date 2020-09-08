@@ -5,7 +5,7 @@ title: docker-compose push
 notoc: true
 ---
 
-```
+```none
 Usage: push [options] [SERVICE...]
 
 Options:

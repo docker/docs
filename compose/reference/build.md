@@ -6,17 +6,22 @@ notoc: true
 
 ---
 
-```
+```none
 Usage: build [options] [--build-arg key=val...] [SERVICE...]
 
 Options:
+    --build-arg key=val     Set build-time variables for services.
     --compress              Compress the build context using gzip.
     --force-rm              Always remove intermediate containers.
+    -m, --memory MEM        Set memory limit for the build container.
     --no-cache              Do not use cache when building the image.
-    --pull                  Always attempt to pull a newer version of the image.
-    -m, --memory MEM        Sets memory limit for the build container.
-    --build-arg key=val     Set build-time variables for services.
+    --no-rm                 Do not remove intermediate containers after a successful build.
     --parallel              Build images in parallel.
+    --progress string       Set type of progress output (`auto`, `plain`, `tty`).
+                            `EXPERIMENTAL` flag for native builder.
+                            To enable, run with `COMPOSE_DOCKER_CLI_BUILD=1`)
+    --pull                  Always attempt to pull a newer version of the image.
+    -q, --quiet             Don't print anything to `STDOUT`.
 ```
 
 Services are built once and then tagged, by default as `project_service`. For
