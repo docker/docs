@@ -111,9 +111,9 @@ github](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml
 
 ## Compose documentation
 
+- [User guide](index.md)
 - [Installing Compose](install.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
+- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)

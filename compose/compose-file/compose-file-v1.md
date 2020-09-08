@@ -653,5 +653,5 @@ tty: true
 - [User guide](../index.md)
 - [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](../../samples/index.md)
+- [Sample apps with Compose](../samples-for-compose.md)
 - [Command line reference](../reference/index.md)

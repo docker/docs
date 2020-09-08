@@ -142,7 +142,6 @@ network, and the WordPress database.
 - [User guide](index.md)
 - [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)
