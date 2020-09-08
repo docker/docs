@@ -41,8 +41,9 @@ Provider:   Snyk (1.385.0)
 
 > **Note:**
 >
-> Docker scan will use the Snyk binary installed on your environment by default, or fallback to the one embedded in Docker Desktop if it can't find one.
-> The minimal version required for Snyk is `1.385.0`.
+> Docker Scan uses the Snyk binary installed in your environment by default. If 
+this is not available, it uses the Snyk binary embedded in Docker Desktop.
+> The minimum version required for Snyk is `1.385.0`.
 
 ## Supported options
 
