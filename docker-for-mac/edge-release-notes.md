@@ -22,7 +22,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 ### Bug fixes and minor changes
 
--  Docker Desktop now correctly displays the state of "Use gRPC FUSE for file sharing" in the UI.
+-  Docker Desktop now correctly displays the state of "Use gRPC FUSE for file sharing" in the UI. Fixes [docker/for-mac#4864](https://github.com/docker/for-mac/issues/4864).
 
 ## Docker Desktop Community 2.3.6.0
 2020-09-01
