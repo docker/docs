@@ -116,11 +116,13 @@ Follow the instructions appropriate for your operating system to download and in
 
 ### Test Docker version
 
-After you've successfully installed Docker Desktop, open a terminal and run `docker --version` to check the version of Docker installed on your machine.
+After you've successfully installed Docker Desktop, open a terminal 
+and run `docker --version` to check the version of Docker installed 
+on your machine. For example:
 
 ```shell
 $ docker --version
-Docker version 19.03.8, build 633a0ea
+Docker version 19.03.12, build aabbccd
 ```
 
 ### Test Docker installation
