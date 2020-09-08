@@ -39,5 +39,7 @@ Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 
 - [User guide](index.md)
 - [Installing Compose](install.md)
+- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)
