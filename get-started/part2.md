@@ -40,7 +40,7 @@ Let us download the `node-bulletin-board` example project. This is a simple bull
 If you are using Git, you can clone the example project from GitHub:
 
 ```shell
-git clone https://github.com/dockersamples/node-bulletin-board
+git clone https://www.github.com/dockersamples/node-bulletin-board
 cd node-bulletin-board/bulletin-board-app
 ```
 
