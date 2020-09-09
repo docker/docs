@@ -14,8 +14,6 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.6.1
 2020-09-08
 
-> [Download](https://desktop.docker.com/win/edge/47792/Docker%20Desktop%20Installer.exe)
-
 ### Upgrades
 
 - [Docker Compose 1.27.0](https://github.com/docker/compose/releases/tag/1.27.0)
