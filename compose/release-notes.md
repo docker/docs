@@ -6,6 +6,19 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 1.27.1
+(2020-09-10)
+
+### Bugs
+
+- Fixed the `compose run` command when `service.scale` is specified.
+
+- Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
+
+- Pinned the new internal schema version to `3.9` as the default.
+
+- Preserved the version number configured in the Compose file.
+
 ## 1.27.0 
 (2020-09-07)
 
