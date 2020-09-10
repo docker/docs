@@ -268,6 +268,31 @@ the ARN of an existing LoadBalancer.
 set the ARN of an existing SecurityGroup used to implement network connectivity
 between services.
 
+
+## Local simulation
+
+When you deploy your application on ECS, you may also rely on the additional AWS services.
+In such cases, your code must embed the AWS SDK and retrieve API credentials at runtime.
+AWS offers a credentials discovery mechanism which is fully implemented by the SDK, and relies
+on accessing a metadata service on a fixed IP address.
+
+Once you adopt this approach, running your application locally for testing or debug purposes
+can be difficult. Therefore, we have introduced an option on context creation to set the
+`ecs-local` context to maintain application portability between local workstation and the 
+AWS cloud provider.
+
+```console
+$ docker context create ecs --local-simulation ecsLocal
+Successfully created ecs-local context "ecsLocal"
+```
+
+When you select a local simulation context, running the `docker compose up` command doesn't
+deploy your application on ECS. Therefore, you must run it locally, automatically adjusting your Compose
+application so it includes the [ECS local endpoints](https://github.com/awslabs/amazon-ecs-local-container-endpoints/). 
+This allows the AWS SDK used by application code to
+access a local mock container as "AWS metadata API" and retrieve credentials from your own
+local `.aws/credentials` config file.
+
 ## Install the Docker ECS Integration CLI on Linux
 
 The Docker ECS Integration CLI adds support for running and managing containers on ECS.
