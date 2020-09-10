@@ -11,8 +11,10 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-## Docker Desktop Community 2.3.6.1
-2020-09-08
+## Docker Desktop Community 2.3.6.2
+2020-09-09
+
+> [Download](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
