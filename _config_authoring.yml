@@ -21,7 +21,7 @@ exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.htm
 
 latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
-compose_version: "1.27.0"
+compose_version: "1.27.1"
 compose_file_v3: "3.8"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
