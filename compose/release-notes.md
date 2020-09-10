@@ -11,13 +11,13 @@ redirect_from:
 
 ### Bugs
 
-- Fix `compose run` when `service.scale` is specified.
+- Fixed the `compose run` command when `service.scale` is specified.
 
-- Allow `driver` property for external networks as temporary workaround for swarm network propagation issue.
+- Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
 
-- Pin new internal schema version to `3.9` as the default.
+- Pinned the new internal schema version to `3.9` as the default.
 
-- Preserve the version when configured in the compose file.
+- Preserved the version number configured in the Compose file.
 
 ## 1.27.0 
 (2020-09-07)
