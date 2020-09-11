@@ -189,7 +189,7 @@ Azure login automatically fetches the key to the Azure storage account.
 
 ### Managing Azure volumes
 
-To create a volume that you can use in containers or Compose applications, when 
+To create a volume that you can use in containers or Compose applications when 
 using your ACI Docker context, you can use the `docker volume create` command, 
 and specify an Azure storage account name and the file share name:
 
@@ -206,7 +206,7 @@ creates a new storage account using the Standard LRS as a default SKU, and the
 resource group and location associated with you Docker ACI context.
 
 If you specify an existing storage account, the command creates a new 
-fileshare in the exsting account:
+file share in the exsting account:
 
 ```
 $ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume2
