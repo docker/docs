@@ -157,14 +157,15 @@ You can deploy containers or Compose applications that use persistent data
 stored in volumes. Azure File Share can be used to support volumes for ACI 
 containers.
 
-With an existing Azure File Share, with storage account name `mystorageaccount` 
+Using an existing Azure File Share with storage account name `mystorageaccount` 
 and file share name `myfileshare`, you can specify a volume in your deployment `run`
 command as follows:
 
 ```
 docker run -v storageaccount/fileshare:/target/path myimage
 ```
-and the runtime container will see the file share content in `/target/path`.
+
+The runtime container will see the file share content in `/target/path`.
 
 In a Compose application, the volume specification must use the following syntax
 in the Compose file:
@@ -184,11 +185,13 @@ volumes:
 ```
 
 When you deploy a single container or a Compose application, your 
-Azure login will automatically fetch the key to the Azure storage account.
+Azure login automatically fetches the key to the Azure storage account.
 
 ### Managing Azure volumes
 
-To create a volume that you can use in containers or compose applications, when using your ACI DOcker context, you can use the `docker volume create` command, and specify an Azure storage account name and fileshare name:
+To create a volume that you can use in containers or Compose applications, when 
+using your ACI Docker context, you can use the `docker volume create` command, 
+and specify an Azure storage account name and the file share name:
 
 ```
 $ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume
@@ -197,9 +200,14 @@ $ docker --context aci volume create --storage-account mystorageaccount --filesh
  ⠿ test-volume       Created                          0.9s
 mystorageaccount/test-volume
 ```
-By default, if the storage account does not already exist, this command will create a new storage account, using Standard LRS as a default SKU, and the resource group and location associated with you Docker ACI context
 
-If you specify an already existing storage account, the command create a new fileshare in the exsting account:
+By default, if the storage account does not already exist, this command 
+creates a new storage account using the Standard LRS as a default SKU, and the 
+resource group and location associated with you Docker ACI context.
+
+If you specify an existing storage account, the command creates a new 
+fileshare in the exsting account:
+
 ```
 $ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume2
 [+] Running 2/2
@@ -208,10 +216,11 @@ $ docker --context aci volume create --storage-account mystorageaccount --filesh
 mystorageaccount/test-volume2
 ```
 
-> Alternatively, you can create an Azure storage account and/or a fileshare using the Azure
+Alternatively, you can create an Azure storage account or a file share using the Azure
 portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli).
 
-You can list volumes the are available for use in containers or compose applications:
+You can also list volumes that are available for use in containers or Compose applications:
+
 ```
 $ docker --context aci volume ls
 ID                                 DESCRIPTION
@@ -219,15 +228,22 @@ mystorageaccount/test-volume       Fileshare test-volume in mystorageaccount sto
 mystorageaccount/test-volume2      Fileshare test-volume2 in mystorageaccount storage account
 ```
 
-If you want to delete a volume and delete the corresponding Azure fileshare, use the `volume rm` command:
+To delete a volume and the corresponding Azure file share, use the `volume rm` command:
+
 ```
 $ docker --context aci volume rm mystorageaccount/test-volume
 mystorageaccount/test-volume
 ```
-> This will permanently delete the Azure filshare and all its data.
 
-When deleting a volume in Azure, the command will check if the specified fileshare is the only fileshare available in the storage account. If the storage account has been created with the `docker volume create` command, `docker volume rm` will also delete the storage account when it has no more fileshares.
-If you are using a storage account created without the `docker volume create` command (through Azure portal or with the `az` command line for example), `docker volume rm` will not delete the storage account, even when it has zero remaining fileshares.
+This permanently deletes the Azure file share and all its data.
+
+When deleting a volume in Azure, the command checks whether the specified file share
+is the only file share available in the storage account. If the storage account is 
+created with the `docker volume create` command, `docker volume rm` also 
+deletes the storage account when it does not have any file shares.
+If you are using a storage account created without the `docker volume create` command 
+(through Azure portal or with the `az` command line for example), `docker volume rm` 
+does not delete the storage account, even when it has zero remaining file shares.
 
 ## Using ACI resource groups as namespaces
 
