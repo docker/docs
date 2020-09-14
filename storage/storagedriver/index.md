@@ -66,7 +66,7 @@ deleted. The underlying image remains unchanged.
 Because each container has its own writable container layer, and all changes are
 stored in this container layer, multiple containers can share access to the same
 underlying image and yet have their own data state. The diagram below shows
-multiple containers sharing the same Ubuntu 18.04 image.
+multiple containers sharing the same Ubuntu 15.04 image.
 
 ![Containers sharing same image](images/sharing-layers.jpg)
 
