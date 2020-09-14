@@ -9,18 +9,17 @@ redirect_from:
 
 ## 1.27.2
 (2020-09-10)
--------------------
 
 ### Bugs
 
-- Fix bug on `docker-compose run` container attach.
+- Fixed bug on `docker-compose run` container attach.
 
 ## 1.27.1
 (2020-09-10)
 
 ### Bugs
 
-- Fix `docker-compose run` when `service.scale` is specified.
+- Fixed `docker-compose run` when `service.scale` is specified.
 
 - Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
 
