@@ -48,7 +48,7 @@ writable layer on top of the underlying layers. This layer is often called the
 "container layer". All changes made to the running container, such as writing
 new files, modifying existing files, and deleting files, are written to this thin
 writable container layer. The diagram below shows a container based on the Ubuntu
-18.04 image.
+15.04 image.
 
 ![Layers of a container based on the Ubuntu image](images/container-layers.jpg)
 
