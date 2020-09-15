@@ -14,18 +14,18 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.3.0.5
-2020-09-14
+2020-09-15
 
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 
-* New
+### New
   - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
 
-* Upgrades
+### Upgrades
   - [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
   - [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
 
-* Bug fixes and minor changes
+### Bug fixes and minor changes
   - WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
 
 ## Docker Desktop Community 2.3.0.4
