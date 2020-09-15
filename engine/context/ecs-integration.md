@@ -147,7 +147,7 @@ Secrets will be available at runtime for your service as a plain text file `/run
 
 The AWS Secrets Manager allows you to store sensitive data either as a plain 
 text (like Docker secret does), or as a hierarchical JSON document. You can 
-use the latter with ECS integration by using custom field `x-asw-keys` to 
+use the latter with ECS integration by using custom field `x-aws-keys` to 
 define which entries in the JSON document to bind as a secret in your service 
 container.
 
