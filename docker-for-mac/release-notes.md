@@ -14,7 +14,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.3.0.5
-2020-09-14
+2020-09-15
 
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
 
