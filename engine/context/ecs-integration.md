@@ -252,10 +252,9 @@ services:
 
 The Docker ECS integration relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 
-
 ## Using existing AWS network resources
 
-By default, the Docker ECS integration creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or you want to manage these yourself, you can use the following custom Compose extensions:
+By default, the Docker ECS integration creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 
 - Use `x-aws-cluster` as a top-level element in your Compose file to set the ARN
 of an ECS cluster when deploying a Compose application. Otherwise, a 
@@ -267,8 +266,10 @@ of a VPC when deploying a Compose application.
 - Use `x-aws-loadbalancer` as a top-level element in your Compose file to set
 the ARN of an existing LoadBalancer.
 
-- Use `external: true` inside a network definition in your Compose file for Docker ECS integration _not_ to create a Security Group, and 
-  set `name` with ID of existing SecurityGroup you want ot use for network connectivity between services:
+- Use `external: true` inside a network definition in your Compose file for 
+Docker ECS integration to _not_ create a Security Group, and set `name` with the 
+ID of an existing SecurityGroup you want to use for network connectivity between 
+services:
 
 ```yaml
 networks:
@@ -276,7 +277,6 @@ networks:
     external: true
     name: "sg-1234acbd"
 ```  
-
 
 ## Local simulation
 
