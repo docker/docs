@@ -6,6 +6,7 @@ redirect_from:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
 - /install/linux/docker-ce/binaries/
+- /installation/binaries/
 ---
 
 > **Note**: You may have been redirected to this page because there is no longer
