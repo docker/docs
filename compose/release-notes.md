@@ -7,6 +7,21 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.27.3 
+(2020-09-16)
+
+### Bugs
+
+- Merged `max_replicas_per_node` on `docker-compose config`.
+
+- Fixed `depends_on` serialization on `docker-compose config`.
+
+- Fixed scaling when some containers are not running on `docker-compose up`.
+
+- Enabled relative paths for `driver_opts.device` for `local` driver.
+
+- Allowed strings for `cpus` fields.
+
 ## 1.27.2
 (2020-09-10)
 
