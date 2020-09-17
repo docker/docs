@@ -14,7 +14,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
 
-> [Download](https://desktop.docker.com/win/edge/48153/Docker%20Desktop%20Installer.exe))
+> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe))
 
 ### New
 
@@ -23,6 +23,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ### Upgrades
 
 - [Docker ACI integration 0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+- [Snyk v0.393.0](https://github.com/snyk/snyk/releases/tag/v1.393.0)
 
 ### Bug fixes and minor changes
 
@@ -36,6 +37,9 @@ For information about Stable releases, see the [Stable release notes](release-no
 **Other fixes**
 
 - Fixed the VM debug shell used for low-level debugging.
+- Fixed compatibility with Go 1.15 clients. See [docker/for-mac#4855](https://github.com/docker/for-mac/issues/4855).
+- Avoid exposing `/host_mnt` paths in `docker container inspect` and `docker volume inspect`. Fixes [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
+- Fixed container logs lagging under heavy load. See [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
 
 ## Docker Desktop Community 2.3.6.2
 2020-09-09

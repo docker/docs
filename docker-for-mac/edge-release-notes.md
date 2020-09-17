@@ -15,7 +15,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
 
-> [Download](https://desktop.docker.com/mac/edge/48153/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/48173/Docker.dmg)
 
 ### New
 
@@ -24,6 +24,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ### Upgrades
 
 - [Docker ACI integration 0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+- [Snyk v0.393.0](https://github.com/snyk/snyk/releases/tag/v1.393.0)
 
 ### Bug fixes and minor changes
 
@@ -31,6 +32,9 @@ For information about Stable releases, see the [Stable release notes](release-no
 - Docker Desktop now allows symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
 - Removed an artificial file descriptor limit (`setrlimit`) of `10240`. Docker Desktop now relies on the kernel to impose limits via `kern.maxfiles` and `kern.maxfilesperproc`.
 - Fixed the VM debug shell used for low-level debugging.
+- Fixed compatibility with Go 1.15 clients. See [docker/for-mac#4855](https://github.com/docker/for-mac/issues/4855).
+- Avoid exposing `/host_mnt` paths in `docker container inspect` and `docker volume inspect`. Fixes [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
+- Fixed container logs lagging under heavy load. See [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
 
 ## Docker Desktop Community 2.3.6.1
 2020-09-08
