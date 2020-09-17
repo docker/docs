@@ -27,4 +27,7 @@ like so:
       <td>{{ entry[1] | markdownify }}</td>
     </tr>
   {% endfor %}
-</table>
+</table
+  hello docker
+  docker images
+  
