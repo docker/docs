@@ -11,6 +11,33 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.7.0
+2020-09-17
+
+> [Download](https://desktop.docker.com/win/edge/xxxx/Docker%20Desktop%20Installer.exe))
+
+### New
+
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+
+### Upgrades
+
+- [Docker compose 1.27.3](https://github.com/docker/compose/releases/tag/1.27.3)
+- [Docker ACI integration 0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+
+### Bug fixes and minor changes
+
+**WSL 2**
+
+  - Fixed an issue that intermittently make the WSL 2 backend fail to start
+  - Fixed a wsl proxy crash that happened when glibc was not compatible. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
+  - Fixed an issue where restarting Docker Desktop may delete files mounted in a container. See [docker/for-win#8412](https://github.com/docker/for-win/issues/8412).
+  - Fixed an issue when restarting docker desktop truncates files when a single file is mounted in a container. See [docker/for-win#8439](https://github.com/docker/for-win/issues/8439).
+
+**Other fixes**
+
+- Fixed the VM debug shell used for low-level debugging.
+
 ## Docker Desktop Community 2.3.6.2
 2020-09-09
 
