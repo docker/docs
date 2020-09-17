@@ -15,7 +15,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
 
-> [Download](https://desktop.docker.com/mac/edge/xxxx/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/48153/Docker.dmg)
 
 ### New
 
@@ -23,7 +23,6 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 ### Upgrades
 
-- [Docker compose 1.27.3](https://github.com/docker/compose/releases/tag/1.27.3)
 - [Docker ACI integration 0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
 
 ### Bug fixes and minor changes
