@@ -11,6 +11,36 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.3.7.0
+2020-09-17
+
+> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe))
+
+### New
+
+- [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+
+### Upgrades
+
+- [Docker ACI integration 0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+- [Snyk v0.393.0](https://github.com/snyk/snyk/releases/tag/v1.393.0)
+
+### Bug fixes and minor changes
+
+**WSL 2**
+
+  - Fixed an issue that intermittently made the backend fail to start.
+  - Fixed a proxy crash that happened when glibc was not compatible. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
+  - Fixed an issue where restarting Docker Desktop may delete files mounted in a container.
+  - Fixed an issue where restarting Docker Desktop truncates files when a single file is mounted in a container. See [docker/for-win#8439](https://github.com/docker/for-win/issues/8439).
+
+**Other fixes**
+
+- Fixed the VM debug shell used for low-level debugging.
+- Fixed compatibility with Go 1.15 clients. See [docker/for-mac#4855](https://github.com/docker/for-mac/issues/4855).
+- Avoid exposing `/host_mnt` paths in `docker container inspect` and `docker volume inspect`. Fixes [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
+- Fixed container logs lagging under heavy load. See [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
+
 ## Docker Desktop Community 2.3.6.2
 2020-09-09
 
