@@ -125,7 +125,7 @@ After you've successfully installed Docker Desktop, open a terminal and run `doc
 
 ```shell
 $ docker --version
-Docker version 19.03.12, build 48a66213fe
+Docker version 19.03.13, build 4484c46d9d
 ```
 
 ### Test Docker installation
