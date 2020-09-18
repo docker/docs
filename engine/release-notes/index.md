@@ -22,14 +22,15 @@ for Docker Engine.
 
 # Version 19.03
 
-## 19.03.13 (2020-09-16)
+## 19.03.13
+2020-09-16
 
 ### Builder
 
 - buildkit: Fix nil dereference in cache logic [moby/moby#41279](https://github.com/moby/moby/pull/41279)
-- buildkit: Treat unix sockets as regular files during COPY/ADD [moby/moby#41269](https://github.com/moby/moby/pull/41269)
+- buildkit: Treat Unix sockets as regular files during COPY/ADD [moby/moby#41269](https://github.com/moby/moby/pull/41269)
 - buildkit: Ignore system and security xattrs in calculation to ensure consistent COPY caching regardless of SELinux environment [moby/moby#41222](https://github.com/moby/moby/pull/41222)
-- buildkit: Make --cache-from behavior more reliable [moby/moby#41222](https://github.com/moby/moby/pull/41222)
+- buildkit: Make `--cache-from` behavior more reliable [moby/moby#41222](https://github.com/moby/moby/pull/41222)
 - buildkit: Fix infinite loop burning CPU when exporting cache [moby/moby#41185](https://github.com/moby/moby/pull/41185)
 
 ### Client
@@ -56,7 +57,7 @@ for Docker Engine.
 
 ### Windows
 
-- Fix slow windows container start time when using servercore image [moby/moby#41192](https://github.com/moby/moby/pull/41192)
+- Fix slow Windows container start time when using servercore image [moby/moby#41192](https://github.com/moby/moby/pull/41192)
 
 ## 19.03.12
 2020-06-18
