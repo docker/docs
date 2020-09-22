@@ -42,8 +42,7 @@ To verify your machine meets these requirements, do the following:
     If you aren't using a supported version, you could consider upgrading your
   operating system.
 
-    If you have a newer system, specifically 64bit Windows 10 Pro, with
-    Enterprise and Education (1607 Anniversary update, Build 14393 or later),
+    If you have a recent version of Windows,
     consider using [Docker Desktop for Windows](/docker-for-windows) instead. It runs
     natively on the Windows, so there is no need for a pre-configured Docker
     QuickStart shell. It also uses Hyper-V for virtualization, so the
