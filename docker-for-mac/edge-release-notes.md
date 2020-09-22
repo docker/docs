@@ -38,7 +38,9 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 ### Known issues
 
-- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS` in i386 images. The workaround is to disable `seccomp` by using the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
+in i386 images. To work around this issue, disable `seccomp` by using 
+the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
 
 
 ## Docker Desktop Community 2.3.6.1
