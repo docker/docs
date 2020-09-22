@@ -36,6 +36,11 @@ For information about Stable releases, see the [Stable release notes](release-no
 - Avoid exposing `/host_mnt` paths in `docker container inspect` and `docker volume inspect`. Fixes [docker/for-mac#4859](https://github.com/docker/for-mac/issues/4859).
 - Fixed container logs lagging under heavy load. See [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
 
+### Known issues
+
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS` in i386 images. The workaround is to disable `seccomp` by using the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
+
+
 ## Docker Desktop Community 2.3.6.1
 2020-09-08
 

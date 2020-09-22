@@ -28,6 +28,10 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ### Bug fixes and minor changes
   - WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
 
+### Known issues
+
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS` in i386 images. The workaround is to disable `seccomp` by using the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
+
 ## Docker Desktop Community 2.3.0.4
 2020-07-27
 
