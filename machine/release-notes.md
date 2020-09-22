@@ -7,6 +7,34 @@ redirect_from:
   - /release-notes/docker-machine/
 ---
 
+## 0.16.2 (2019-09-02)
+
+### General
+
+* Compile with Golang 1.12.9.
+* Fix VTX detection.
+
+### Drivers
+
+`amazonec2`
+* Add ssh-port flag
+* Add eu-north-1 zone
+
+`vmwarefusion`
+* Add nonempty flag to fix share-folder bug
+
+`hyperv`
+* Allow localized names for Virtual Switch
+
+`google`
+* Add support for non-default service account
+
+`openstack`
+* Add flag for metadata
+
+`softlayer`
+* Don't set the request method again
+
 ## 0.16.0 (2018-11-08)
 
 ### General
