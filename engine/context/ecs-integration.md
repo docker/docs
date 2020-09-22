@@ -141,6 +141,7 @@ services:
 secrets:
   foo:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
+    external: true
 ```
 
 Secrets will be available at runtime for your service as a plain text file `/run/secrets/foo`.
