@@ -30,21 +30,23 @@ so they can be run together in an isolated environment.
 
 A `docker-compose.yml` looks like this:
 
-    version: '3'
-    services:
-      web:
-        build: .
-        ports:
-          - "5000:5000"
-        volumes:
-          - .:/code
-          - logvolume01:/var/log
-        links:
-          - redis
-      redis:
-        image: redis
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
     volumes:
-      logvolume01: {}
+      - .:/code
+      - logvolume01:/var/log
+    links:
+      - redis
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}
+```
 
 For more information about the Compose file, see the
 [Compose file reference](compose-file/index.md).
@@ -150,9 +152,11 @@ is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
 and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
 
-    $ docker-compose up -d
-    $ ./run_tests
-    $ docker-compose down
+```bash
+$ docker-compose up -d
+$ ./run_tests
+$ docker-compose down
+```
 
 ### Single host deployments
 
