@@ -631,7 +631,7 @@ the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
 
 To make new software easier to run, you can use `ENV` to update the
 `PATH` environment variable for the software your container installs. For
-example, `ENV PATH /usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
+example, `ENV PATH=/usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
 just works.
 
 The `ENV` instruction is also useful for providing required environment
@@ -642,10 +642,10 @@ Lastly, `ENV` can also be used to set commonly used version numbers so that
 version bumps are easier to maintain, as seen in the following example:
 
 ```dockerfile
-ENV PG_MAJOR 9.3
-ENV PG_VERSION 9.3.4
+ENV PG_MAJOR=9.3
+ENV PG_VERSION=9.3.4
 RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
-ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 
 Similar to having constant variables in a program (as opposed to hard-coding
