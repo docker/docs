@@ -183,12 +183,20 @@ bookmarking your favorites.
 
  A service account is a Docker ID used by a bot for automating the build pipeline for containerized applications. Service accounts are typically used in an automated workflow and do not share Docker IDs with the members in the Team plan.
 
- To create a new service account:
+ To create a new service account for your Team account:
 
  1. Create a new Docker ID.
  2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
  3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
  4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
+ 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+
+To create a new service account for your Pro account:
+
+ 1. Create a new Docker ID.
+ 2. Click **Repositories** from the main menu.
+ 3. Select a repository from the list and go to the **Collaborators** tab.
+ 4. Add the new Docker ID as a collaborator.
  5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 
  > **Note**

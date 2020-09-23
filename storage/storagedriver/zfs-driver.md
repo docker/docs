@@ -212,7 +212,7 @@ When you start a container, the following steps happen in order:
 
 Each container's writable layer is a ZFS clone which shares all its data with
 the dataset it was created from (the snapshots of its parent layers). Read
-operations are fasst, even if the data being read is from a deep layer.
+operations are fast, even if the data being read is from a deep layer.
 This diagram illustrates how block sharing works:
 
 ![zfs block sharing](images/zpool_blocks.jpg)
