@@ -33,6 +33,14 @@ guides:
       path: /get-started/part2/
     - title: "Part 3: Share images on Docker Hub"
       path: /get-started/part3/
+  - sectiontitle: Node.js
+    section:
+    - title: "Build images"
+      path: /get-started/nodejs/build-images/
+    - title: "Run containers"
+      path: /get-started/nodejs/run-containers/
+    - title: "Develop"
+      path: /get-started/nodejs/develop/
   - path: /get-started/resources/
     title: "Educational resources"
 - sectiontitle: Develop with Docker
