@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: home
 - title: Guides
-  path: /develop/
+  path: /get-started/
   node: guides
 - title: Product manuals
   path: /engine/
@@ -19,12 +19,12 @@ horizontalnav:
 home: {}
 
 guides:
+- title: Docker overview
+  path: /get-started/overview/
 - title: Get Docker
   path: /get-docker/
 - sectiontitle: Get started
   section:
-  - path: /get-started/overview/
-    title: Docker overview
   - sectiontitle: Quickstart
     section:
     - title: "Part 1: Orientation and setup"
