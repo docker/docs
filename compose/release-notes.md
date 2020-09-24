@@ -14,9 +14,9 @@ redirect_from:
 
 - Removed path checks for bind mounts.
 
-- Fixd port rendering to output long form syntax for non-v1.
+- Fixed port rendering to output long form syntax for non-v1.
 
-- Added protocol to the docker socket address.
+- Added protocol to the Docker socket address.
 
 ## 1.27.3 
 (2020-09-16)
