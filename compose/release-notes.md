@@ -7,6 +7,17 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.27.4 
+(2020-09-24)
+
+### Bugs
+
+- Removed path checks for bind mounts.
+
+- Fixed port rendering to output long form syntax for non-v1.
+
+- Added protocol to the Docker socket address.
+
 ## 1.27.3 
 (2020-09-16)
 
