@@ -8,7 +8,7 @@ toc_max: 2
 
 ## Overview
 
-The Docker ECS Integration enables developers to use native Docker commands to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
+The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
 
 The integration between Docker and Amazon ECS allow developers to use the Docker CLI to:
 
@@ -17,14 +17,14 @@ The integration between Docker and Amazon ECS allow developers to use the Docker
 
 >**Note**
 >
-> Docker ECS Integration is currently a beta release. The commands and flags are subject to change in subsequent releases.
+> The Docker ECS Integration is currently a beta release. The commands and flags are subject to change in subsequent releases.
 {:.important}
 
 ## Prerequisites
 
 To deploy Docker containers on ECS, you must meet the following requirements:
 
-1. Download and install Docker Desktop Edge version 2.3.3.0 or later.
+1. Download and install Docker Desktop Edge or Stable version 2.3.3.0 or later.
 
     - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
     - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
@@ -321,7 +321,7 @@ The Docker ECS Integration CLI adds support for running and managing containers 
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/aci-integration-beta/main/scripts/install_linux.sh | sh
+curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 
@@ -333,4 +333,4 @@ This error message means that your integration requires the new ARN resource ID 
 
 ## Feedback
 
-Thank you for trying out the Docker ECS Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [ecs-plugin](https://github.com/docker/ecs-plugin){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker ECS Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
