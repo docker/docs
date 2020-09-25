@@ -2,14 +2,14 @@
 description: Getting Started
 keywords: windows, edge, tutorial, run, docker, local, machine
 redirect_from:
-- /winkit/getting-started/
-- /winkit/
+- /docker-for-windows/index/
+- /docker-for-windows/started/
+- /engine/installation/windows/
+- /installation/windows/
 - /windows/
 - /windows/started/
-- /docker-for-windows/started/
-- /installation/windows/
-- /engine/installation/windows/
-- /docker-for-windows/index/
+- /winkit/
+- /winkit/getting-started/
 title: Docker Desktop for Windows user manual
 toc_min: 1
 toc_max: 2
