@@ -54,7 +54,8 @@ COPY --from=upstream-resources /usr/src/app/md_source/. ./
 # API docs, based on the latest_engine_api_version parameter in _config.yml
 RUN ./_scripts/update-api-toc.sh
 RUN jekyll build -d ${TARGET} \
- && find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
+ && find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done \
+ && sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml"
 
 
 # This stage only contains the generated files. It can be used to host the
