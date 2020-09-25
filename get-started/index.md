@@ -163,6 +163,8 @@ At this point, you've installed Docker Desktop on your development machine, and 
 
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
+For information on how to build and run your first containerized application using Node.js, go to [Build your Node.js image](/nodejs/build-images.md).
+
 ## CLI references
 
 Refer to the following topics for further documentation on all CLI commands used in this article:

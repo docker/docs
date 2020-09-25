@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: home
 - title: Guides
-  path: /develop/
+  path: /get-started/
   node: guides
 - title: Product manuals
   path: /engine/
@@ -19,12 +19,12 @@ horizontalnav:
 home: {}
 
 guides:
+- title: Docker overview
+  path: /get-started/overview/
 - title: Get Docker
   path: /get-docker/
 - sectiontitle: Get started
   section:
-  - path: /get-started/overview/
-    title: Docker overview
   - sectiontitle: Quickstart
     section:
     - title: "Part 1: Orientation and setup"
@@ -33,6 +33,14 @@ guides:
       path: /get-started/part2/
     - title: "Part 3: Share images on Docker Hub"
       path: /get-started/part3/
+  - sectiontitle: Node.js
+    section:
+    - title: "Build images"
+      path: /get-started/nodejs/build-images/
+    - title: "Run containers"
+      path: /get-started/nodejs/run-containers/
+    - title: "Develop"
+      path: /get-started/nodejs/develop/
   - path: /get-started/resources/
     title: "Educational resources"
 - sectiontitle: Develop with Docker
