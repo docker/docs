@@ -61,6 +61,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--token string`  | Use the authentication token to log into the third-party scanning provider |
 | `--version` | Display the Docker Scan plugin version |
 
+
 ## How to Scan images
 
 The `docker scan` command allows you to scan existing Docker images using the image name or ID.  For example, run the following command to scan the hello-world image:
@@ -266,6 +267,8 @@ Tested 200 dependencies for known issues, found 157 issues.
 
 For more free scans that keep your images secure, sign up to Snyk at https://dockr.ly/3ePqVcp.
 ```
+
+For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" class="_"}.
 
 ## Provider authentication
 
