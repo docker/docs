@@ -145,7 +145,7 @@ Unique Name (GUN). If this is the first time you are adding a delegation to that
 repository, this command will also initiate the repository, using a local Notary
 canonical root key. To understand more about initiating a repository, and the
 role of delegations, head to
-[delegations for content trust](trust_delegation/#managing-delegations-in-a-notary-server).
+[delegations for content trust](trust_delegation).
 
 ```
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
