@@ -352,7 +352,8 @@ RUN apt-get update && apt-get install -y \
   cvs \
   git \
   mercurial \
-  subversion
+  subversion \
+  && rm -rf /var/lib/apt/lists/*
 ```
 
 ### Leverage build cache
@@ -482,7 +483,8 @@ statement. For example:
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
-    package-foo
+    package-foo  \
+    && rm -rf /var/lib/apt/lists/*
 ```
 
 Using `apt-get update` alone in a `RUN` statement causes caching issues and
