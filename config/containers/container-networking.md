@@ -19,7 +19,11 @@ point of view of the container.
 
 ## Published ports
 
-By default, when you create/run a container using `docker create` or `docker run`, it does not publish any of its ports
+By default, when you create or run a container using `docker create` or `docker run`,
+it does not publish any of its ports to the outside world. To make a port available
+to services outside of Docker, or to Docker containers which are not connected to
+the container's network, use the `--publish` or `-p` flag. This creates a firewall
+rule which maps a container port to a port on the Docker host. Here are some examples.
 to the outside world. To make a port available to services outside of Docker, or
 to Docker containers which are not connected to the container's network, use the
 `--publish` or `-p` flag. This creates a firewall rule which maps a container
