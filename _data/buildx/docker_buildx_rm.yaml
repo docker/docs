@@ -4,6 +4,15 @@ long: Remove a builder instance
 usage: docker buildx rm [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml
+inherited_options:
+- option: builder
+  value_type: string
+  description: Override the configured builder instance
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
 experimentalcli: true
