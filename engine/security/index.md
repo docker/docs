@@ -4,6 +4,7 @@ keywords: Docker, Docker documentation, security
 redirect_from:
 - /articles/security/
 - /engine/articles/security/
+- /engine/security/security/
 - /security/security/
 title: Docker security
 ---

@@ -143,7 +143,7 @@ guides:
           title: Splunk logging driver
     - sectiontitle: Security
       section:
-      - path: /engine/security/security/
+      - path: /engine/security/
         title: Docker security
       - path: /engine/security/non-events/
         title: Docker security non-events
