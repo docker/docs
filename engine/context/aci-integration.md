@@ -25,12 +25,12 @@ In addition, the integration between Docker and Microsoft developer technologies
 
 To deploy Docker containers on Azure, you must meet the following requirements:
 
-1. Download and install Docker Desktop Edge version 2.3.2.0 or later.
+1. Download and install Docker Desktop Stable version 2.3.0.5 or later, or Edge version 2.3.2.0 or later.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/stable/Docker.dmg){: target="_blank" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
 
-    Alternatively, install the [Docker ACI Integration for Linux](#install-the-docker-aci-integration-cli-on-linux).
+    Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
 2. Ensure you have an Azure subscription. You can get started with an [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" class="_"}.
 
@@ -130,8 +130,7 @@ docker rm <CONTAINER_ID>
 > **Note**
 > 
 > The stop command in ACI differs from the Moby stop command as a stopped 
-container will not retain its state when it is started again. For more 
-information, see https://github.com/docker/aci-integration-beta/issues/28.
+container will not retain its state when it is started again on ACI.
 
 ## Running Compose applications
 
@@ -251,9 +250,9 @@ You can create several Docker contexts associated with ACI. Each context must be
 
 When you run the `docker ps` command, it only lists containers in your current Docker context. There won’t be any contention in container names or Compose application names between two Docker contexts.
 
-## Install the Docker ACI Integration CLI on Linux
+## Install the Docker Compose CLI on Linux
 
-The Docker ACI Integration CLI adds support for running and managing containers on Azure Container Instances (ACI).
+The Docker Compose CLI adds support for running and managing containers on Azure Container Instances (ACI).
 
 >**Note**
 >
@@ -269,13 +268,13 @@ The Docker ACI Integration CLI adds support for running and managing containers 
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/aci-integration-beta/main/scripts/install_linux.sh | sh
+curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 ### Manual install
 
 You can download the Docker ACI Integration CLI from the 
-[latest release](https://github.com/docker/aci-integration-beta/releases/latest){: target="_blank" class="_"} page.
+[latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" class="_"} page.
 
 You will then need to make it executable:
 
@@ -358,4 +357,4 @@ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 
 ## Feedback
 
-Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [aci-integration-beta](https://github.com/docker/aci-integration-beta){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
