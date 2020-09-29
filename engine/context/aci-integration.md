@@ -194,7 +194,7 @@ using your ACI Docker context, you can use the `docker volume create` command,
 and specify an Azure storage account name and the file share name:
 
 ```
-$ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume
+$ docker --context aci volume create test-volume --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount  Created                         26.2s
  ⠿ test-volume       Created                          0.9s
@@ -209,7 +209,7 @@ If you specify an existing storage account, the command creates a new
 file share in the exsting account:
 
 ```
-$ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume2
+$ docker --context aci volume create test-volume2 --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount   Use existing                    0.7s
  ⠿ test-volume2       Created                         0.7s
