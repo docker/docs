@@ -8,48 +8,42 @@ toc_max: 2
 
 ## Overview
 
-The Docker ECS Integration enables developers to use native Docker commands to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
+The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
 
-The integration between Docker and Amazon ECS allow developers to use the Docker CLI to:
+The integration between Docker and Amazon ECS allows developers to use the Docker Compose CLI to:
 
 * Set up an AWS context in one Docker command, allowing you to switch from a local context to a cloud context and run applications quickly and easily
-* Simplify multi-container application development on Amazon ECS using the Compose specification
+* Simplify multi-container application development on Amazon ECS using Compose files
 
 >**Note**
 >
-> Docker ECS Integration is currently a beta release. The commands and flags are subject to change in subsequent releases.
+> The Docker Compose CLI is currently a beta release. The commands and flags are subject to change in subsequent releases.
 {:.important}
 
 ## Prerequisites
 
 To deploy Docker containers on ECS, you must meet the following requirements:
 
-1. Download and install Docker Desktop Edge version 2.3.3.0 or later.
+1. Download and install Docker Desktop Stable or Edge version 2.3.3.0 or later.
 
     - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
     - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
 
-    Alternatively, install the [Docker ECS Integration for Linux](#install-the-docker-ecs-integration-cli-on-linux).
+    Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
 2. Ensure you have an AWS account.
 
-  > **Note**
-  >
-  > If you had previously installed a Docker Desktop Stable release and now switched to Edge, ensure you turn on the experimental features flag. 
-  >
-  > From the Docker Desktop menu, click **Settings** (Preferences on macOS) > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
-
-Docker not only runs multi-container applications locally, but also enables 
-developers to seamlessly deploy Docker containers on Amazon ECS using a 
-Compose file with the `docker compose up` command. The following sections 
+Docker not only runs multi-container applications locally, but also enables
+developers to seamlessly deploy Docker containers on Amazon ECS using a
+Compose file with the `docker compose up` command. The following sections
 contain instructions on how to deploy your Compose application on Amazon ECS.
 
 ### Create AWS context
 
-Run the `docker context create ecs myecscontext` command to create an Amazon ECS docker 
-context named `myecscontext`. If you have already installed and configured the AWS CLI, 
-the setup command lets you select an existing AWS profile to connect to Amazon. 
-Otherwise, you can create a new profile by passing an 
+Run the `docker context create ecs myecscontext` command to create an Amazon ECS Docker
+context named `myecscontext`. If you have already installed and configured the AWS CLI,
+the setup command lets you select an existing AWS profile to connect to Amazon.
+Otherwise, you can create a new profile by passing an
 [AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"}.
 
 After you have created an AWS context, you can list your Docker contexts by running the `docker context ls` command:
@@ -65,30 +59,30 @@ default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock  
 You can deploy and manage multi-container applications defined in Compose files
 to Amazon ECS using the `docker compose` command. To do this:
 
-- Ensure you are using your ECS context. You can do this either by specifying 
-the `--context myecscontext` flag with your command, or by setting the 
+- Ensure you are using your ECS context. You can do this either by specifying
+the `--context myecscontext` flag with your command, or by setting the
 current context using the command `docker context use myecscontext`.
 
-- Run `docker compose up` and `docker compose down` to start and then 
+- Run `docker compose up` and `docker compose down` to start and then
 stop a full Compose application.
 
-  By default, `docker compose up` uses the `docker-compose.yaml` file in 
-  the current folder. You can specify the Compose file directly using the 
+  By default, `docker compose up` uses the `docker-compose.yaml` file in
+  the current folder. You can specify the Compose file directly using the
   `--file` flag.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
-- You can view services created for the Compose application on Amazon ECS and 
+- You can view services created for the Compose application on Amazon ECS and
 their state using the `docker compose ps` command.
 
-- You can view logs from containers that are part of the Compose application 
+- You can view logs from containers that are part of the Compose application
 using the `docker compose logs` command.
 
 ## Private Docker images
 
-The Docker ECS integration automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" class="_"}.
+The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" class="_"}.
 
-For your convenience, Docker ECS integration offers the `docker secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
+For your convenience, the Docker Compose CLI offers the `docker secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
 
 ```console
 docker secret create dockerhubAccessToken --username <dockerhubuser>  --password <dockerhubtoken>
@@ -115,7 +109,7 @@ Service-to-service communication is implemented by the [Security Groups](https:/
 
 ### Service names
 
-Services are registered by the Docker ECS integration on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker ECS integration automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
 
 ```console
 #! /bin/sh
@@ -126,10 +120,10 @@ exec "$@"
 
 ### Secrets
 
-You can pass secrets to your ECS services using Docker model to bind sensitive 
-data as files under `/run/secrets`. If your Compose file declares a secret as 
-file, such a secret will be created as part of your application deployment on 
-ECS. If you use an existing secret as `external: true` reference in your 
+You can pass secrets to your ECS services using Docker model to bind sensitive
+data as files under `/run/secrets`. If your Compose file declares a secret as
+file, such a secret will be created as part of your application deployment on
+ECS. If you use an existing secret as `external: true` reference in your
 Compose file, use the ECS Secrets Manager full ARN as the secret name:
 ```yaml
 services:
@@ -146,10 +140,10 @@ secrets:
 
 Secrets will be available at runtime for your service as a plain text file `/run/secrets/foo`.
 
-The AWS Secrets Manager allows you to store sensitive data either as a plain 
-text (like Docker secret does), or as a hierarchical JSON document. You can 
-use the latter with ECS integration by using custom field `x-aws-keys` to 
-define which entries in the JSON document to bind as a secret in your service 
+The AWS Secrets Manager allows you to store sensitive data either as a plain
+text (like Docker secret does), or as a hierarchical JSON document. You can
+use the latter with Docker Compose CLI by using custom field `x-aws-keys` to
+define which entries in the JSON document to bind as a secret in your service
 container.
 
 ```yaml
@@ -162,26 +156,27 @@ services:
 secrets:
   foo:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
-    keys: 
+    keys:
       - "bar"
 ```
 
-By doing this, the secret for `bar` key will be available at runtime for your 
-service as a plain text file `/run/secrets/foo/bar`. You can use the special 
-value `*` to get all keys bound in your container. 
+By doing this, the secret for `bar` key will be available at runtime for your
+service as a plain text file `/run/secrets/foo/bar`. You can use the special
+value `*` to get all keys bound in your container.
 
 ### Logging
 
-The ECS integration configures AWS CloudWatch Logs service for your containers. 
-A log group is created for the application as `docker-compose/<application_name>`, 
-and log streams are created for each service and container in your application 
+The Docker Compose CLI configures AWS CloudWatch Logs service for your
+containers.
+A log group is created for the application as `docker-compose/<application_name>`,
+and log streams are created for each service and container in your application
 as `<application_name>/<service_name>/<container_ID>`.
 
-You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention` 
-in your Compose file to set the number of retention days for log events. The 
-default behaviour is to keep logs forever.
+You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention`
+in your Compose file to set the number of retention days for log events. The
+default behavior is to keep logs forever.
 
-You can also pass `awslogs` driver parameters to your container as standard 
+You can also pass `awslogs` driver parameters to your container as standard
 Compose file `logging.driver_opts` elements.
 
 ### Dependent service startup time and DNS resolution
@@ -192,36 +187,36 @@ Alternatively, you can use the [depends_on](https://github.com/compose-spec/comp
 
 ### Rolling update
 
-Your ECS services are created with rolling update configuration. As you run 
-`docker compose up` with a modified Compose file, the stack will be 
-updated to reflect changes, and if required, some services will be replaced. 
-This replacement process will follow the rolling-update configuration set by 
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config) 
-configuration. 
+Your ECS services are created with rolling update configuration. As you run
+`docker compose up` with a modified Compose file, the stack will be
+updated to reflect changes, and if required, some services will be replaced.
+This replacement process will follow the rolling-update configuration set by
+your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+configuration.
 
-AWS ECS uses a percent-based model to define the number of containers to be 
-run or shut down during a rolling update. The ECS integration computes 
-rolling update configuration according to the `parallelism` and `replicas` 
-fields. However, you might prefer to directly configure a rolling update 
-using the extension fields `x-aws-min_percent` and `x-aws-max_percent`. 
-The former sets the minimum percent of containers to run for service, and the 
-latter sets the maximum percent of additional containers to start before 
+AWS ECS uses a percent-based model to define the number of containers to be
+run or shut down during a rolling update. The Docker Compose CLI computes
+rolling update configuration according to the `parallelism` and `replicas`
+fields. However, you might prefer to directly configure a rolling update
+using the extension fields `x-aws-min_percent` and `x-aws-max_percent`.
+The former sets the minimum percent of containers to run for service, and the
+latter sets the maximum percent of additional containers to start before
 previous versions are removed.
 
-By default, the ECS rolling update is set to run twice the number of 
-containers for a service (200%), and has the ability to shut down 100% 
+By default, the ECS rolling update is set to run twice the number of
+containers for a service (200%), and has the ability to shut down 100%
 containers during the update.
 
 
 ### IAM roles
 
-Your ECS Tasks are executed with a dedicated IAM role, granting access 
-to AWS Managed policies[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) 
-and [`AmazonEC2ContainerRegistryReadOnly`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html). 
-In addition, if your service uses secrets, IAM Role gets additional 
+Your ECS Tasks are executed with a dedicated IAM role, granting access
+to AWS Managed policies[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
+and [`AmazonEC2ContainerRegistryReadOnly`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html).
+In addition, if your service uses secrets, IAM Role gets additional
 permissions to read and decrypt secrets from the AWS Secret Manager.
 
-You can grant additional managed policies to your service execution 
+You can grant additional managed policies to your service execution
 by using `x-aws-policies` inside a service definition:
 
 ```yaml
@@ -231,9 +226,9 @@ services:
       - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 ```
 
-You can also write your own [IAM Policy Document](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) 
-to fine tune the IAM role to be applied to your ECS service, and use 
-`x-aws-role` inside a service definition to pass the 
+You can also write your own [IAM Policy Document](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
+to fine tune the IAM role to be applied to your ECS service, and use
+`x-aws-role` inside a service definition to pass the
 yaml-formatted policy document.
 
 ```yaml
@@ -241,35 +236,35 @@ services:
   foo:
     x-aws-role:
       Version: "2012-10-17"
-      Statement: 
+      Statement:
         - Effect: "Allow"
-          Action: 
+          Action:
             - "some_aws_service"
-          Resource": 
+          Resource":
             - "*"
 ```
 
 ## Tuning the CloudFormation template
 
-The Docker ECS integration relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
+The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 
 ## Using existing AWS network resources
 
-By default, the Docker ECS integration creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
+By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 
 - Use `x-aws-cluster` as a top-level element in your Compose file to set the ARN
-of an ECS cluster when deploying a Compose application. Otherwise, a 
+of an ECS cluster when deploying a Compose application. Otherwise, a
 cluster will be created for the Compose project.
 
-- Use `x-aws-vpc` as a top-level element in your Compose file to set the ARN 
+- Use `x-aws-vpc` as a top-level element in your Compose file to set the ARN
 of a VPC when deploying a Compose application.
 
 - Use `x-aws-loadbalancer` as a top-level element in your Compose file to set
 the ARN of an existing LoadBalancer.
 
-- Use `external: true` inside a network definition in your Compose file for 
-Docker ECS integration to _not_ create a Security Group, and set `name` with the 
-ID of an existing SecurityGroup you want to use for network connectivity between 
+- Use `external: true` inside a network definition in your Compose file for
+Docker Compose CLI to _not_ create a Security Group, and set `name` with the
+ID of an existing SecurityGroup you want to use for network connectivity between
 services:
 
 ```yaml
@@ -277,7 +272,7 @@ networks:
   back_tier:
     external: true
     name: "sg-1234acbd"
-```  
+```
 
 ## Local simulation
 
@@ -288,7 +283,7 @@ on accessing a metadata service on a fixed IP address.
 
 Once you adopt this approach, running your application locally for testing or debug purposes
 can be difficult. Therefore, we have introduced an option on context creation to set the
-`ecs-local` context to maintain application portability between local workstation and the 
+`ecs-local` context to maintain application portability between local workstation and the
 AWS cloud provider.
 
 ```console
@@ -298,18 +293,18 @@ Successfully created ecs-local context "ecsLocal"
 
 When you select a local simulation context, running the `docker compose up` command doesn't
 deploy your application on ECS. Therefore, you must run it locally, automatically adjusting your Compose
-application so it includes the [ECS local endpoints](https://github.com/awslabs/amazon-ecs-local-container-endpoints/). 
+application so it includes the [ECS local endpoints](https://github.com/awslabs/amazon-ecs-local-container-endpoints/).
 This allows the AWS SDK used by application code to
 access a local mock container as "AWS metadata API" and retrieve credentials from your own
 local `.aws/credentials` config file.
 
-## Install the Docker ECS Integration CLI on Linux
+## Install the Docker Compose CLI on Linux
 
-The Docker ECS Integration CLI adds support for running and managing containers on ECS.
+The Docker Compose CLI adds support for running and managing containers on ECS.
 
 >**Note**
 >
-> Docker ECS Integration is a beta release. The installation process, commands, and flags will change in future releases.
+> The Docker Compose CLI is a beta release. The installation process, commands, and flags will change in future releases.
 {:.important}
 
 ### Prerequisites
@@ -321,7 +316,7 @@ The Docker ECS Integration CLI adds support for running and managing containers 
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/aci-integration-beta/main/scripts/install_linux.sh | sh
+curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 
@@ -329,8 +324,8 @@ curl -L https://raw.githubusercontent.com/docker/aci-integration-beta/main/scrip
 
 **What does the error `this tool requires the "new ARN resource ID format"` mean?**
 
-This error message means that your integration requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"}.
+This error message means that your account requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"}.
 
 ## Feedback
 
-Thank you for trying out the Docker ECS Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [ecs-plugin](https://github.com/docker/ecs-plugin){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
