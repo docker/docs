@@ -151,7 +151,7 @@ examples: |-
 
   #### desired-state
 
-  The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
+  The `desired-state` filter can take the values `running`, `shutdown`, `ready` or `accepted`.
 
   ```bash
   $ docker stack ps -f "desired-state=running" voting
