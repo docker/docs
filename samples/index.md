@@ -1,6 +1,10 @@
 ---
 title: Samples
 description: Learn how to develop and ship containerized applications, by walking through samples that exhibits canonical practices.
+redirect_from:
+- /en/latest/examples/
+- /engine/examples/
+- /examples/
 ---
 
 {% assign labsbase = "https://github.com/docker/labs/tree/master" %}
@@ -30,15 +34,15 @@ Run popular software using Docker.
 
 | Sample                                                                    | Description                                               |
 | ------------------------------------------------------------------------- | --------------------------------------------------------- |
-| [apt-cacher-ng](../engine/examples/apt-cacher-ng.md)                      | Run a Dockerized apt-cacher-ng instance.                  |
-| [.Net Core application](../engine/examples/dotnetcore.md)                 | Run a Dockerized ASP.NET Core application.                |
+| [apt-cacher-ng](apt-cacher-ng.md)                                         | Run a Dockerized apt-cacher-ng instance.                  |
+| [.Net Core application](dotnetcore.md)                                    | Run a Dockerized ASP.NET Core application.                |
 | [ASP.NET Core + SQL Server on Linux](../compose/aspnet-mssql-compose.md)  | Run a Dockerized ASP.NET Core + SQL Server environment.   |
-| [CouchDB](../engine/examples/couchdb_data_volumes.md)                     | Run a Dockerized CouchDB instance.                        |
+| [CouchDB](couchdb_data_volumes.md)                                        | Run a Dockerized CouchDB instance.                        |
 | [Django + PostgreSQL](../compose/django.md)                               | Run a Dockerized Django + PostgreSQL environment.         |
-| [PostgreSQL](../engine/examples/postgresql_service.md)                    | Run a Dockerized PostgreSQL instance.                     |
+| [PostgreSQL](postgresql_service.md)                                       | Run a Dockerized PostgreSQL instance.                     |
 | [Rails + PostgreSQL](../compose/rails.md)                                 | Run a Dockerized Rails + PostgreSQL environment.          |
-| [Riak](../engine/examples/running_riak_service.md)                        | Run a Dockerized Riak instance.                           |
-| [SSHd](../engine/examples/running_ssh_service.md)                         | Run a Dockerized SSHd instance.                           |
+| [Riak](running_riak_service.md)                                           | Run a Dockerized Riak instance.                           |
+| [SSHd](running_ssh_service.md)                                            | Run a Dockerized SSHd instance.                           |
 | [WordPress](../compose/wordpress.md)                                      | Quickstart: Compose and WordPress.                        |
 
 ## Library references

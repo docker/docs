@@ -2,11 +2,13 @@
 description: Installing and running an apt-cacher-ng service
 keywords: docker, example, package installation, networking, debian,  ubuntu
 title: Dockerize an apt-cacher-ng service
+redirect_from:
+  - /engine/examples/apt-cacher-ng/
 ---
 
 > **Note**:
 > - **If you don't like sudo** then see
->   [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user).
+>   [*Giving non-root access*](../engine/install/linux-postinstall.md#manage-docker-as-a-non-root-user).
 > - **If you're using macOS or docker via TCP** then you shouldn't use sudo.
 
 When you have multiple Docker servers, or build unrelated Docker

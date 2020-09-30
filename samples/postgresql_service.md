@@ -2,6 +2,8 @@
 description: Running and installing a PostgreSQL service
 keywords: docker, example, package installation, postgresql
 title: Dockerize PostgreSQL
+redirect_from:
+  - /engine/examples/postgresql_service/
 ---
 
 ## Install PostgreSQL on Docker
@@ -80,7 +82,7 @@ $ docker run --rm -P --name pg_test eg_postgresql
 ```
 
 There are two ways to connect to the PostgreSQL server. We can use
-[*Link Containers*](../../network/links.md),
+[*Link Containers*](../network/links.md),
 or we can access it from our host (or the network).
 
 > **Note**: The `--rm` removes the container and its image when

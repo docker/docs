@@ -1138,25 +1138,25 @@ samples:
   section:
   - path: /samples/
     title: Samples home
-  - path: /engine/examples/apt-cacher-ng/
+  - path: /samples/apt-cacher-ng/
     title: apt-cacher-ng
-  - path: /engine/examples/dotnetcore/
+  - path: /samples/dotnetcore/
     title: ASP.NET Core application
   - path: /compose/aspnet-mssql-compose/
     title: ASP.NET Core + SQL Server on Linux
-  - path: /engine/examples/couchdb_data_volumes/
+  - path: /samples/couchdb_data_volumes/
     title: CouchDB
   - path: /compose/django/
     title: Django and PostgreSQL
   - path: /compose/wordpress/
     title: WordPress
-  - path: /engine/examples/postgresql_service/
+  - path: /samples/postgresql_service/
     title: PostgreSQL
   - path: /compose/rails/
     title: Rails and PostgreSQL
-  - path: /engine/examples/running_riak_service/
+  - path: /samples/running_riak_service/
     title: Riak
-  - path: /engine/examples/running_ssh_service/
+  - path: /samples/running_ssh_service/
     title: SSHd
 - path: /samples/#library-references
   title: Library references
