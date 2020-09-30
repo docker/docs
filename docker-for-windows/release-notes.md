@@ -72,6 +72,8 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 
 ### Known issues
   -  There is a known issue when using `docker-compose` with named volumes and gRPC FUSE: second and subsequent calls to `docker-compose up` will fail due to the volume path having the prefix `/host_mnt`.
+ - There is a known issue when enabling Kubernetes where the settings UI sometimes fails to update the Kubernetes state. A work around is to close and re-open the Window.
+  - There is a known issue when switching users where the images UI sometimes continues to show the repositories of the previous user. A work around is to restart Docker Desktop.
 
 ## Docker Desktop Community 2.3.0.5
 2020-09-15
