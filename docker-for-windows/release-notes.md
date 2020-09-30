@@ -33,7 +33,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
   - [Qemu 4.2.0](https://git.qemu.org/?p=qemu.git;a=tag;h=1e4aa2dad329852aa6c3f59cefd65c2c2ef2062c)
 
 ### Bug fixes and minor changes
-  - Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/5089).
+  - Removed the legacy Kubernetes context `docker-for-desktop`. The context `docker-desktop` should be used instead. Fixes [docker/for-win#5089](https://github.com/docker/for-win/issues/5089) and [docker/for-mac#4089](https://github.com/docker/for-mac/issues/4089).
   - Removed the option to start with Windows containers from the installer
   - Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
   - Left-clicking on the whale in the system tray now launches the dashboard container view.
