@@ -16,7 +16,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ## Docker Desktop Community 2.4.0.0
 2020-09-30
 
-> [Download](https://desktop.docker.com/win/stable/48506/Docker%20Desktop%20Installer.exe)
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 
 ### New
   - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
