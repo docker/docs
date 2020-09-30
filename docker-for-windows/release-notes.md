@@ -54,7 +54,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
   - Fixed bug in handling shared volume paths with ".." characters. Fixes [docker/for-win#5375](https://github.com/docker/for-win/issues/5375).
   - Report check for updates errors in toast notification. Fixes [docker/for-win#6364](https://github.com/docker/for-win/issues/6364).
   - Fixed an upgrade bug where users on versions still using the PowerShell based VM management can experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
-  - Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win/7941](https://github.com/docker/for-win/issues#7941).
+  - Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
   - Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 
 ### WSL 2 changes
