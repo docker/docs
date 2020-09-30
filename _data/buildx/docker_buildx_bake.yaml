@@ -16,6 +16,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: load
+  value_type: bool
+  default_value: "false"
+  description: Shorthand for --set=*.output=type=docker
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-cache
   value_type: bool
   default_value: "false"
@@ -53,10 +62,28 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: push
+  value_type: bool
+  default_value: "false"
+  description: Shorthand for --set=*.output=type=registry
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: set
   value_type: stringArray
   default_value: '[]'
-  description: 'Override target value (eg: target.key=value)'
+  description: 'Override target value (eg: targetpattern.key=value)'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: builder
+  value_type: string
+  description: Override the configured builder instance
   deprecated: false
   experimental: false
   experimentalcli: false

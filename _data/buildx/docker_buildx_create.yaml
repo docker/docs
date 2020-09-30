@@ -14,9 +14,34 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: buildkitd-flags
+  value_type: string
+  description: Flags for buildkitd daemon
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: config
+  value_type: string
+  description: BuildKit config file
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: driver
   value_type: string
   description: 'Driver to use (available: [])'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: driver-opt
+  value_type: stringArray
+  default_value: '[]'
+  description: Options for the driver
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -60,6 +85,15 @@ options:
   value_type: bool
   default_value: "false"
   description: Set the current builder instance
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: builder
+  value_type: string
+  description: Override the configured builder instance
   deprecated: false
   experimental: false
   experimentalcli: false

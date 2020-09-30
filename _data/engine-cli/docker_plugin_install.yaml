@@ -66,8 +66,8 @@ examples: |-
   ```bash
   $ docker plugin ls
 
-  ID                  NAME                  TAG                 DESCRIPTION                ENABLED
-  69553ca1d123        vieux/sshfs           latest              sshFS plugin for Docker    true
+  ID             NAME                  DESCRIPTION                ENABLED
+  69553ca1d123   vieux/sshfs:latest    sshFS plugin for Docker    true
   ```
 deprecated: false
 min_api_version: "1.25"

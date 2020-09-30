@@ -1,14 +1,22 @@
-command: docker buildx imagetools inspect
-short: Show details of image in the registry
-long: Show details of image in the registry
-usage: docker buildx imagetools inspect [OPTIONS] NAME
-pname: docker buildx imagetools
-plink: docker_buildx_imagetools.yaml
+command: docker buildx du
+short: Disk usage
+long: Disk usage
+usage: docker buildx du
+pname: docker buildx
+plink: docker_buildx.yaml
 options:
-- option: raw
+- option: filter
+  value_type: filter
+  description: Provide filter values
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: verbose
   value_type: bool
   default_value: "false"
-  description: Show original JSON manifest
+  description: Provide a more verbose output
   deprecated: false
   experimental: false
   experimentalcli: false
