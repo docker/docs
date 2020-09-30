@@ -1,43 +1,51 @@
-command: docker buildx imagetools create
-short: Create a new image based on source images
-long: Create a new image based on source images
-usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
-pname: docker buildx imagetools
-plink: docker_buildx_imagetools.yaml
+command: docker buildx prune
+short: 'Remove build cache '
+long: 'Remove build cache '
+usage: docker buildx prune
+pname: docker buildx
+plink: docker_buildx.yaml
 options:
-- option: append
+- option: all
+  shorthand: a
   value_type: bool
   default_value: "false"
-  description: Append to existing manifest
+  description: Remove all unused images, not just dangling ones
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
-- option: dry-run
-  value_type: bool
-  default_value: "false"
-  description: Show final image instead of pushing
+- option: filter
+  value_type: filter
+  description: Provide filter values (e.g. 'until=24h')
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
-- option: file
+- option: force
   shorthand: f
-  value_type: stringArray
-  default_value: '[]'
-  description: Read source descriptor from file
+  value_type: bool
+  default_value: "false"
+  description: Do not prompt for confirmation
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
-- option: tag
-  shorthand: t
-  value_type: stringArray
-  default_value: '[]'
-  description: Set reference for new image
+- option: keep-storage
+  value_type: bytes
+  default_value: "0"
+  description: Amount of disk space to keep for cache
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: verbose
+  value_type: bool
+  default_value: "false"
+  description: Provide a more verbose output
   deprecated: false
   experimental: false
   experimentalcli: false

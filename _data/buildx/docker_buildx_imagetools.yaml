@@ -9,6 +9,15 @@ cname:
 clink:
 - docker_buildx_imagetools_create.yaml
 - docker_buildx_imagetools_inspect.yaml
+inherited_options:
+- option: builder
+  value_type: string
+  description: Override the configured builder instance
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
 experimentalcli: true

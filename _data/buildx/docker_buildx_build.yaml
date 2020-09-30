@@ -15,6 +15,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: allow
+  value_type: stringSlice
+  default_value: '[]'
+  description: |
+    Allow extra privileged entitlement, e.g. network.host, security.insecure
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: build-arg
   value_type: stringArray
   default_value: '[]'
@@ -327,6 +337,15 @@ options:
 - option: ulimit
   value_type: string
   description: Ulimit options
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: builder
+  value_type: string
+  description: Override the configured builder instance
   deprecated: false
   experimental: false
   experimentalcli: false
