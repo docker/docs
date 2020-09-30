@@ -46,8 +46,6 @@ networks, are preserved. If you do not need to save your existing data, and want
 start with a clean installation, refer to the [uninstall Docker Engine](#uninstall-docker-engine)
 section at the bottom of this page.
 
-The Docker Engine package is now called `docker-ce`.
-
 ### Supported storage drivers
 
 Docker Engine on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
