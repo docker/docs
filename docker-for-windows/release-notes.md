@@ -78,7 +78,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ## Docker Desktop Community 2.3.0.5
 2020-09-15
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+> [Download](https://desktop.docker.com/win/stable/48029/Docker%20Desktop%20Installer.exe)
 
 ### New
   - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
