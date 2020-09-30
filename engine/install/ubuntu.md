@@ -134,7 +134,7 @@ from the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=amd64] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(lsb_release -cus) \
        stable"
     ```
 
@@ -144,7 +144,7 @@ from the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(lsb_release -cus) \
        stable"
     ```
 
@@ -154,7 +154,7 @@ from the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=arm64] {{ download-url-base }} \
-       $(lsb_release -cs) \
+       $(lsb_release -cus) \
        stable"
     ```
 
