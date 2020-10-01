@@ -11,10 +11,26 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.4.1.0
+2020-10-01
+
+> [Download](https://desktop.docker.com/win/edge/48559/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli)
+- [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
+- [Snyk v1.399.1](https://github.com/snyk/snyk/releases/tag/v1.399.1)
+- [Docker Engine 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
+
+### Bug fixes and minor changes
+
+- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
+
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
 
-> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe))
+> [Download](https://desktop.docker.com/win/edge/48572/Docker%20Desktop%20Installer.exe)
 
 ### New
 

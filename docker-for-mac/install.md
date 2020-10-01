@@ -33,13 +33,13 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
   If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
 
-- **macOS must be version 10.13 or newer**. That is, Catalina, Mojave, or High Sierra. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.14 or newer**. That is, Mojave or Catalina. We recommend upgrading to the latest version of macOS.
 
   If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. Docker Desktop currently supports macOS Catalina, macOS Mojave, and macOS High Sierra.
+  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave and macOS Catalina.
 
-    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
+    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS.
 
 - At least 4 GB of RAM.
 

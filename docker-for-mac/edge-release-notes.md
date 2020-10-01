@@ -11,6 +11,23 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.4.1.0
+2020-10-01
+
+> [Download](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+
+### Upgrades
+
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli)
+- [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
+- [Snyk v1.399.1](https://github.com/snyk/snyk/releases/tag/v1.399.1)
+- [Docker Engine 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
+
+### Bug fixes and minor changes
+
+- Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Docker Desktop now supports `S_ISUID`, `S_ISGID` and `S_ISVTX` in calls to `chmod(2)` on shared filesystems. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Fixed a possible premature file handle close when using `gRPC-FUSE`.
 
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
@@ -41,7 +58,6 @@ For information about Stable releases, see the [Stable release notes](release-no
 - The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
 in i386 images. To work around this issue, disable `seccomp` by using 
 the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
-
 
 ## Docker Desktop Community 2.3.6.1
 2020-09-08
