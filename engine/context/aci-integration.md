@@ -161,7 +161,7 @@ and file share name `myfileshare`, you can specify a volume in your deployment `
 command as follows:
 
 ```
-docker run -v storageaccount/fileshare:/target/path myimage
+docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 
 The runtime container will see the file share content in `/target/path`.
