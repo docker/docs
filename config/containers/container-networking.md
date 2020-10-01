@@ -71,7 +71,6 @@ Custom hosts defined in `/etc/hosts` are not inherited. To pass additional hosts
 into your container, refer to [add entries to container hosts file](../../engine/reference/commandline/run.md#add-entries-to-container-hosts-file---add-host)
 in the `docker run` reference documentation. You can override these settings on
 a per-container basis.
-settings on a per-container basis.
 
 | Flag           | Description                                                                                                                                                                                                                                                         |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
