@@ -30,7 +30,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
 
-> [Download](https://desktop.docker.com/win/edge/48572/Docker%20Desktop%20Installer.exe))
+> [Download](https://desktop.docker.com/win/edge/48572/Docker%20Desktop%20Installer.exe)
 
 ### New
 
