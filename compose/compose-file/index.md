@@ -921,7 +921,7 @@ Configures if and how to restart containers when they exit. Replaces
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
-  [duration](#specifying-durations) (default: 0).
+  [duration](#specifying-durations) (default: 5s).
 - `max_attempts`: How many times to attempt to restart a container before giving
   up (default: never give up). If the restart does not succeed within the configured
   `window`, this attempt doesn't count toward the configured `max_attempts` value.
@@ -954,7 +954,7 @@ update.
 - `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
 - `delay`: The time to wait between each container group's rollback (default 0s).
 - `failure_action`: What to do if a rollback fails. One of `continue` or `pause` (default `pause`)
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 5s) **Note**: Setting to 0 will use the default 5s.
 - `max_failure_ratio`: Failure rate to tolerate during a rollback (default 0).
 - `order`: Order of operations during rollbacks. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`).
 
@@ -967,7 +967,7 @@ updates.
 - `delay`: The time to wait between updating a group of containers.
 - `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause`
   (default: `pause`).
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 5s) **Note**: Setting to 0 will use the default 5s.
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 - `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
 
