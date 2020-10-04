@@ -49,7 +49,7 @@ If you are running Docker Swarm, you must use the `-- with-registry-auth` flag t
 
 ### GitHub Actions
 
-If you are using GitHub Actions to build and push Docker images to Docker Hub, see [username](https://github.com/docker/build-push-action#username){: target="_blank" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
+If you are using GitHub Actions to build and push Docker images to Docker Hub, see our [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
 
 ### Kubernetes
 
