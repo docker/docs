@@ -13,8 +13,10 @@ a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
 Start by setting up the files needed to build the app. The app will run inside a Docker container containing its dependencies. Defining dependencies is done using a file called `Dockerfile`. To begin with, the 
 Dockerfile consists of:
 
-    FROM ruby:2.5
-    RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+    FROM ruby:2.7
+    RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    RUN apt-get update -qq && apt-get install -y nodejs postgresql-client yarn
     RUN mkdir /myapp
     WORKDIR /myapp
     COPY Gemfile /myapp/Gemfile
