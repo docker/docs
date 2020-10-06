@@ -209,8 +209,7 @@ Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
 If you have completed the steps described above and are still experiencing
 Docker Desktop startup issues, this could be because the Hypervisor is installed,
 but not launched during Windows startup. Some tools (such as older versions of 
-Virtual Box) and video game installers require you to manually launch the Hypervisor 
-at Windows startup. To do this:
+Virtual Box) and video game installers disable hypervisor on boot. To reenable it:
 
 1. Open an administrative console prompt.
 2. Run `bcdedit /set hypervisorlaunchtype auto`.
