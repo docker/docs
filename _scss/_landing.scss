@@ -2,7 +2,6 @@ $dark-blue: #002c66;
 $bg-card-night: #0F161E;
 
 body.landing {
-
   h2, h5, h6 {
     font-family: 'Geomanist Regular', sans-serif;
   }
@@ -156,7 +155,11 @@ body.landing {
   $icons: rocket, download-docker, guides, whats-new, manuals, reference;
 
   .card {
-    background-color: $bg-body;
+    @include themer(background-color, (
+      dark: $bg-card-night,
+      light: $bg-body,
+    ));
+
     box-shadow: 0 3px 6px rgba(11, 33, 74, 0.09),
       0 -2px 2px rgba(11, 33, 74, 0.03);
     padding: 24px 36px;
@@ -226,7 +229,11 @@ body.landing {
   }
 
   .cardlet {
-    background-color: #F2F3F5;
+    @include themer(background-color, (
+      dark: $bg-card-night,
+      light: #F2F3F5,
+    ));
+
     padding: 24px 36px;
 
     .title {
@@ -373,19 +380,5 @@ body.landing {
     a, p {
       color: white;
     }
-  }
-}
-
-body.landing:not(.night) {
-  background-color: $bg-sidebar;
-}
-
-body.landing.night {
-  .card {
-    background-color: $bg-card-night;
-  }
-
-  .cardlet {
-    background-color: $bg-card-night;
   }
 }
