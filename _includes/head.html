@@ -16,9 +16,10 @@
           display: block;
       }
   </style>
-  {% if site.google_analytics != '' %}{% include analytics/google_analytics.html GOOGLE_ID=site.google_analytics %}{% endif %}
-  {% if site.GH_ENV == "gh_pages" %}
-  <meta name="robots" content="noindex">{% endif %}
+  {%- if site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}
+  {%- if page.hide_from_sitemap or site.GH_ENV == "gh_pages" %}
+  <meta name="robots" content="noindex"/>
+  {%- endif %}
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128">
   <meta name="msapplication-TileImage" content="/favicons/docs@2x.ico">
@@ -58,5 +59,4 @@
   <meta property="og:site_name" content="Docker Documentation" />
   <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
   <!-- END SEO STUFF -->
-  {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 </head>
