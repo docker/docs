@@ -173,6 +173,8 @@ extract `docker-rootless-extras-<version>.tgz`. The archive can be extracted
 under an arbitrary directory listed in the `$PATH`. For example, `/usr/local/bin`,
 or `$HOME/bin`.
 
+You will need to [install](https://github.com/rootless-containers/rootlesskit#setup) rootlesskit.
+
 ### Nightly channel
 
 To install a nightly version of the Rootless Docker, run the installation script
