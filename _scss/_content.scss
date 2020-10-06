@@ -18,13 +18,20 @@
 /** code formatting **/
 
 pre {
-    background-color: #F5F8FA!important;
+    @include themer(background-color, (
+        dark: #0a121b,
+        light: #F5F8FA,
+    ));
+    @include themer(color, (
+        dark: #f3f3f3,
+        light: #333,
+    ));
+
     display: block;
     padding: 20.5px!important;
     margin: 0 0 10px;
     font-size: 13px;
     line-height: 1.42857143;
-    color: #333;
     word-break: normal !important;
     word-wrap: break-word;
     border: 0!important;
@@ -32,9 +39,16 @@ pre {
 }
 
 code {
-    background-color: #F5F8FA!important;
+    @include themer(background-color, (
+        dark: #0a121b,
+        light: rgba(12, 81, 118, 0.1),
+    ));
+    @include themer(color, (
+        dark: #c1f1f0,
+        light: #0c5176,
+    ));
+
     border-radius: 2px;
-    color: #0c5176 !important;
     font-size: 90%;
     padding: 3px 7px;
     overflow-x: scroll;
@@ -42,6 +56,7 @@ code {
 }
 
 pre code {
+    padding: 0;
     overflow-x: auto;
     overflow-wrap: normal;
     white-space: pre;
@@ -60,6 +75,10 @@ pre code {
 }
 
 .component {
+    @include themer(background, (
+        dark: #101c29,
+    ));
+
     padding: 15px 25px 5px 15px;
     text-align: center;
     margin: 0 8px 15px;
@@ -69,6 +88,10 @@ pre code {
 }
 
 .component-full {
+    @include themer(background, (
+        dark: #101c29,
+    ));
+
     padding: 5px 0 10px 20px;
     float: left;
     min-height: 100px;
@@ -96,6 +119,10 @@ pre code {
 
 .component img,
 .component-full-icon img {
+    @include themer(opacity, (dark: 1));
+    @include themer(-webkit-filter, (dark: grayscale(100%)));
+    @include themer(filter, (dark: grayscale(100%)));
+
     width: 70px;
     height: 70px;
 }
@@ -129,10 +156,15 @@ h3:hover > a.anchorLink
 }
 
 a.glossary {
-    color: $body-text;
+    @include themer(color, (
+        dark: $body-text-night,
+        light: $body-text,
+    ));
+
     text-decoration: none;
     outline: none;
-     &:hover {
+
+    &:hover {
         opacity: 1;
         text-decoration: none;
     }
@@ -140,26 +172,4 @@ a.glossary {
 
 .highlighter-rouge {
     margin: 15px 0;
-}
-
-code {
-    padding: 3px 7px;
-    font-size: 90%;
-    color: #0c5176!important;
-    background-color: rgba(12, 81, 118, 0.1);
-    border-radius: 2px;
-}
-
-pre {
-    display: block;
-    padding: 9.5px;
-    margin: 0 0 10px;
-    font-size: 13px;
-    line-height: 1.42857143;
-    color: #333;
-    word-break: normal!important;
-    word-wrap: break-word;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }

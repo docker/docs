@@ -5,6 +5,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 */
 
 .hljs {
+  @include themer(color, (
+    dark: #f5f5f5,
+  ));
+
   display: block;
   overflow-x: auto;
   padding: 0.5em;
@@ -20,6 +24,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
+  @include themer(color, (
+    dark: #f5f5f5,
+  ));
+
   // color: #333;
   font-weight: bold;
 }
@@ -59,6 +67,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-tag,
 .hljs-name,
 .hljs-attribute {
+  @include themer(color, (
+    dark: #e3e3f2,
+  ));
+
   // color: #000080;
   font-weight: normal;
 }

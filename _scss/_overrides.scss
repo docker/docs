@@ -4,6 +4,28 @@
 *
 */
 
+.nav-tabs {
+    @include themer(border-bottom, (
+        dark: 1px solid #4f6071,
+    ));
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    @include themer(background-color, (
+        dark: #4e6071,
+    ));
+    @include themer(border-color, (
+        dark: transparent,
+    ));
+    @include themer(color, (
+        dark: $white,
+    ));
+
+    cursor: default;
+}
+
 .nav-secondary-tabs .dropdown-btn {
     background: transparent;
     color: #fff;
@@ -14,8 +36,12 @@
     font-weight: 600;
 }
 .nav-secondary .dropdown-btn {
+    @include themer(color, (
+        dark: #d0e8ff,
+        light: #b4d4e4,
+    ));
+
     background: transparent;
-    color: #b4d4e4;
     padding: 5px 11px 0 0;
     margin-top: 7px;
     border: 0;
@@ -50,10 +76,20 @@
     background-color: transparent;
 }
 
+.dropdown-menu {
+    @include themer(background, (
+        dark: $black,
+    ));
+}
+
 .dropdown-menu>li>a {
+    @include themer(color, (
+        dark: #d0e8ff,
+        light: #1488c6,
+    ));
+
     font-size: 13.5px;
     line-height: 16px;
-    color: #1488c6;
     padding: 5px 15px;
     display: block;
 }
@@ -105,6 +141,46 @@
 *
 */
 
+.panel {
+    @include themer(color, (
+        dark: $body-text-night,
+    ));
+    @include themer(background-color, (
+        dark: #24394c,
+    ));
+
+    margin-bottom: 20px;
+}
+
+.panel-default {
+    @include themer(border-color, (
+        dark: #374656,
+    ));
+
+    > .panel-heading {
+        @include themer(background-color, (
+            dark: #101c29,
+        ));
+        @include themer(border-color, (
+            dark: #2f4050,
+        ));
+        @include themer(color, (
+            dark: #c0c3c4,
+        ));
+    }
+}
+
+.panel-body {
+    @include themer(background, (
+        dark: rgb(35, 54, 72),
+    ));
+    @include themer(color, (
+        dark: #bcbfc3,
+    ));
+
+    padding: 15px;
+}
+
 .panel-heading .chevron:after {
     content: "\f0d8";
 }
@@ -117,37 +193,110 @@
     background-color: #fafdfe;
 }
 
+.popover {
+    @include themer(color, (
+        dark: $black,
+    ));
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    @include themer(background-color, (
+        dark: #0f1c2a,
+    ));
+    @include themer(border, (
+        dark: 1px solid #0f1c2a,
+    ));
+}
+
+.pagination>.active>a {
+    @include themer(background, (
+        dark: #000,
+    ));
+    @include themer(color, (
+        dark: $white,
+    ));
+}
 
 /*
 *
 * override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 *
 */
-.gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
-    color: #27343B!important;
-    line-height: 23px!important;
+.gsc-control-cse {
+    @include themer(background-color, (
+        dark: #192837,
+    ));
+    @include themer(border-color, (
+        dark: #192837,
+    ));
 }
-.gsc-webResult .gsc-result {
-    padding: 20px 0 20px 20px!important;
+
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+    @include themer(color, (
+        dark: #a8b0b7 !important,
+        light: #27343B !important,
+    ));
+
+    font-size: 14px !important;
+    line-height: 23px !important;
+}
+
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+    @include themer(background-color, (
+        dark: #192837,
+    ));
+    @include themer(border-color, (
+        dark: #192837,
+    ));
+
+    padding: 20px 0 20px 20px !important;
+
+    &:hover {
+        @include themer(background-color, (
+            dark: #192837,
+        ));
+        @include themer(border-color, (
+            dark: #25374a,
+        ));
+    }
 }
 
 a.gs-title {
-    color: #2089C4!important;
+    @include themer(color, (
+        dark: #cccccc,
+        light: #2089C4,
+    ));
+
     text-decoration: none;
 }
 
-.gs-webResult.gs-result a.gs-title:visited, .gs-webResult.gs-result a.gs-title:visited b, .gs-imageResult a.gs-title:visited, .gs-imageResult a.gs-title:visited b {
-    color: #F993A6!important;
-}
-.gs-webResult div.gs-visibleUrl, .gs-imageResult div.gs-visibleUrl {
-    color: #82949E!important;
-}
-
-.gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
-    font-size: 14px!important;
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+    @include themer(color, (
+        dark: #a9e4ff,
+    ));
 }
 
-.gsc-tabHeader.gsc-tabhActive, .gsc-tabsArea {
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+    color: #F993A6 !important;
+}
+
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+    color: #82949E !important;
+}
+
+.gsc-tabHeader.gsc-tabhActive,
+.gsc-tabsArea {
     border-color: #f7f7f761 !important;
     background: transparent;
 }
@@ -170,4 +319,24 @@ input.gsc-search-button-v2 {
   padding: 6px 27px;
   min-width: 13px;
   margin-top: 2px;
+}
+
+.highlight {
+    .nt {
+        @include themer(color, (dark: #e8a0e8));
+    }
+
+    .k {
+        @include themer(color, (dark: #da5ada));
+    }
+}
+
+img.white-bg {
+    @include themer(background-color, (dark: white));
+}
+
+.rating-nero-value {
+    @include themer(color, (
+        dark: $white !important,
+    ));
 }

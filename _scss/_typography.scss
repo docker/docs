@@ -20,15 +20,34 @@
     font-style: normal;
 }
 
+a {
+    @include themer(color, (
+        dark: $primary-links-night,
+        light: $primary-links,
+    ));
+
+    text-decoration: none;
+    outline: none;
+
+    &:hover {
+        opacity: .8;
+        text-decoration: none;
+    }
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    font-family: $headings;
-    color: $body-text;
+    @include themer(color, (
+        dark: $white,
+        light: $body-text,
+    ));
+
     clear: both;
+    font-family: $headings;
     line-height: 26px;
 }
 
@@ -61,11 +80,23 @@ h6 {
 }
 
 p {
-    color: $body-text;
+    @include themer(color, (
+        dark: $body-text-night,
+        light: $body-text,
+    ));
+
     font-family: $font;
     font-size: $body-text-size;
     line-height: 24px;
     margin: 10px 0 10px 0;
+}
+
+ol,
+ul {
+    @include themer(color, (
+        dark: $body-text-night,
+        light: $body-text,
+    ));
 }
 
 ul {

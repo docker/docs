@@ -35,7 +35,11 @@
 */
 
 .header {
-    background-color: $bg-header;
+    @include themer(background-color, (
+        dark: $bg-header-night,
+        light: $bg-header,
+    ));
+
     position: relative;
     z-index: 1;
     transition: all 0.1s ease;
@@ -122,10 +126,6 @@ section.section {
     min-height: 100vh;
 }
 
-.col-nav {
-    background-color: $bg-sidebar;
-}
-
 .col-toc {
     margin-left: auto;
 }
@@ -139,6 +139,23 @@ section.section {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.sidebar,
+.sidebar-home,
+#sidebar-wrapper,
+#sidebar-wrapper-home,
+.sidebar-home .affix,
+#sidebar-right,
+#sidebar-right.affix,
+.col-nav {
+    @include themer(background-color, (
+        dark: $bg-sidebar-night,
+        light: $bg-sidebar,
+    ));
+
+    border: none;
+}
+
 /***Swagger***/
 
 .swagger-section {
@@ -152,8 +169,17 @@ section.section {
 */
 
 footer {
-    background: $white;
-    border-top: 1px solid #E0E4E7;
+    @include themer(background, (
+        dark: $bg-footer-night,
+        light: $bg-footer,
+    ));
+    @include themer(border-top-color, (
+        dark: rgb(31, 52, 66),
+        light: #E0E4E7,
+    ));
+
+    border-top-style: solid;
+    border-top-width: 1px;
     position: relative;
 }
 
@@ -164,10 +190,16 @@ footer {
 .footer_links {
     list-style: none;
     padding: 0;
+
     li {
         margin-bottom: 10px;
+
         a {
-            color: #637986;
+            @include themer(color, (
+                dark: #b2b2b2,
+                light: #637986,
+            ));
+
             font-size: 12px;
             line-height: 16px;
             text-decoration: none;
@@ -195,9 +227,15 @@ footer {
 }
 
 .bottom_footer {
+    @include themer(border-top-color, (
+        dark: rgb(78, 93, 106),
+        light: #E0E4E7,
+    ));
+
+    border-top-width: 1px;
+    border-top-style: solid;
     clear: both;
     padding: 30px 0 20px;
-    border-top: 1px solid #E0E4E7;
     float: left;
     width: 100%;
 }
@@ -243,9 +281,13 @@ footer {
 }
 
 .footer_social_nav ul li a {
+    @include themer(background-color, (
+        dark: #2f2f2f,
+        light: #82949E,
+    ));
+
     width: 32px;
     height: 32px;
-    background-color: #82949E;
     border-radius: 50px;
     color: $white;
     display: block;

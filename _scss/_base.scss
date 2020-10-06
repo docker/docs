@@ -7,8 +7,15 @@ html {
 }
 
 body {
-    background-color: $bg-body;
-    color: $body-text;
+    @include themer(background-color, (
+        dark: $bg-body-night,
+        light: $bg-body,
+    ));
+    @include themer(color, (
+        dark: $body-text-night,
+        light: $body-text,
+    ));
+
     font-family: $font;
     font-size: $body-text-size;
     margin: $clear;
@@ -16,12 +23,8 @@ body {
     overflow-x: hidden;
 }
 
-a {
-    color: $primary-links;
-    text-decoration: none;
-    outline: none;
-    &:hover {
-        opacity: .8;
-        text-decoration: none;
-    }
+hr {
+    @include themer(border-top, (
+        dark: 1px solid #4f6071,
+    ));
 }

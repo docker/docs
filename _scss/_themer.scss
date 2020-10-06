@@ -1,0 +1,17 @@
+@mixin themer($property, $values) {
+    @at-root .theme-auto & {
+        @media (prefers-color-scheme: dark) {
+            #{$property}: map-get($values, 'dark');
+        }
+    
+        @media (prefers-color-scheme: light) {
+            #{$property}: map-get($values, 'light');
+        }
+    }
+
+    @each $theme, $value in $values {
+        @at-root .theme-#{$theme} & {
+            #{$property}: map-get($values, $theme);
+        }
+    }
+}

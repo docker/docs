@@ -57,7 +57,11 @@
 */
 
 .nav-secondary {
-    background-color: $bg-secondary;
+    @include themer(background-color, (
+        dark: $bg-secondary-night,
+        light: $bg-secondary,
+    ));
+
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
     height: 55px;
 }
@@ -70,18 +74,34 @@
 */
 
 .nav-secondary-tabs {
-    background-color: $bg-secondary-tabs;
+    @include themer(background-color, (
+        dark: rgba(15, 28, 42, 0.35),
+        light: $bg-secondary-tabs,
+    ));
+    @include themer(border-top, (
+        dark: 1px solid rgba(68, 77, 87, 0.38),
+    ));
+    @include themer(border-bottom, (
+        dark: 1px solid #29343f,
+    ));
+
     bottom: 0;
     height: 55px;
     position: absolute;
     width: 100%;
+
     &.affix {
-        background-color: $bg-secondary;
+        @include themer(background-color, (
+            dark: $bg-secondary-night,
+            light: $bg-secondary,
+        ));
+
         box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
         top: 0;
         position: fixed;
         z-index: 100;
     }
+
     .search-form {
         margin: 5px 27px 0 -10px;
         width: 240px;
@@ -143,10 +163,17 @@
 
 .nav-sidebar ul li a.active,
 .nav-sidebar.nav>li>a:focus {
-    cursor: default;
-    background: #F3F4F4;
-    color: #2089C4;
+    @include themer(background, (
+        dark: #0a151a,
+        light: #F3F4F4,
+    ));
+    @include themer(color, (
+        dark: $active-sidebar-night,
+        light: #2089C4,
+    ));
+
     border-left: 4px solid $primary-links;
+    cursor: default;
     font-weight: 600;
 }
 
@@ -202,15 +229,31 @@
 }
 
 .toc-nav li a.active {
-    color: #2089C4;
-    border-left: 4px solid #2089C4;
+    @include themer(background, (
+        dark: #0a151a,
+    ));
+    @include themer(color, (
+        dark: $active-sidebar-night,
+        light: #2089C4,
+    ));
+    @include themer(border-left-color, (
+        dark: $primary-links,
+        light: #2089C4,
+    ));
+
+    border-left-width: 4px;
+    border-left-style: solid;
     font-weight: bold;
 }
 
 .toc-nav i.fa {
+    @include themer(color, (
+        dark: $primary-links-night,
+        light: $primary-links,
+    ));
+
     font-size: 14px;
     margin: 0 8px 0 0;
-    color: $primary-links;
 }
 
 i.fa.fa-question {
@@ -219,6 +262,10 @@ i.fa.fa-question {
 }
 
 div#side-toc-title {
+    @include themer(color, (
+        dark: $white,
+    ));
+
     font-size: 12px;
     font-weight: bold;
     margin: 11px 0 10px 13px;
@@ -265,14 +312,23 @@ div#side-toc-title {
 }
 
 .slider {
+    @include themer(background-color, (
+        dark: #344658,
+        light: $slider-bg,
+    ));
+    @include themer(border-color, (
+        dark: #192837,
+        light: #c3e4f7,
+    ));
+
+    border-style: solid;
+    border-width: 1px;
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $slider-bg;
-    border: 1px solid #c3e4f7;
     // transition: 0.4s;
 }
 
@@ -340,10 +396,16 @@ input:checked+.slider:before {
 }
 
 .tabs li.active a {
+    @include themer(border-bottom-color, (
+        dark: $primary-links,
+        light: $white,
+    ));
+
     background: transparent !important;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
     color: #fff;
     cursor: default;
-    border-bottom: 4px solid #fff;
 }
 
 /*
