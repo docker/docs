@@ -1,3 +1,19 @@
+{%- if page.title == nil -%}
+    {%- comment -%}
+    # This is a very hacky way to extract the page title from pages that do not have
+    # front-matter yaml, but have a H1 header. We need to take (id-) attributes into
+    # account, so some hacking is needed. Taking the following example:
+    # <h1 id="docker-run-reference">Docker run reference</h1>
+    #
+    # a. split on '<h1', which gives us ['content before', '<h1 id="docker-run-reference">Docker run reference</h1>']
+    # b. split the last element on '</h1', which gives us ['<h1 id="docker-run-reference">Docker run reference', '</h1', '>']
+    # c. split the first element on '>', which gives us ['<h1 id="docker-run-reference"', '>', 'Docker run reference']
+    {%- endcomment -%}
+    {%- assign a = content | split: '<h1' | last -%}
+    {%- assign b = a | split: '</h1' | first -%}
+    {%- assign c = b | split: '>' | last -%}
+    {%- assign page_title = c | strip_html | strip | truncatewords: 10 -%}
+{%- endif -%}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <style type="text/css">
@@ -20,7 +36,7 @@
   {%- if page.hide_from_sitemap or site.GH_ENV == "gh_pages" %}
   <meta name="robots" content="noindex"/>
   {%- endif %}
-  <title>{{ page.title }} | Docker Documentation</title>
+  <title>{{ page.title | default: page_title }} | Docker Documentation</title>
   <meta name="description" content="{{ page.description }}" />
   <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
   <link rel="canonical" href="{{ page.url }}" />
@@ -40,7 +56,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 
   <!-- SEO stuff -->
-  <meta name="twitter:title" itemprop="title name" content="{{ page.title }}"/>
+  <meta name="twitter:title" itemprop="title name" content="{{ page.title | default: page_title }}"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="{{ content | strip_html | truncatewords: 30}}" />
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:domain" content="docs.docker.com"/>
@@ -48,7 +64,7 @@
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
   <meta name="twitter:image:src" content="/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker Documentation"/>
-  <meta property="og:title" content="{{ page.title }}" />
+  <meta property="og:title" content="{{ page.title | default: page_title }}" />
   <meta property="og:description" content="{{ page.description }}" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
@@ -57,6 +73,6 @@
   <meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
   <meta property="og:site_name" content="Docker Documentation" />
   <meta property="article:published_time" itemprop="datePublished" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title | default: page_title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
   <!-- END SEO STUFF -->
 </head>
