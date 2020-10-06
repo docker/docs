@@ -1,5 +1,6 @@
 ---
 title: Samples
+description: Learn how to develop and ship containerized applications, by walking through samples that exhibits canonical practices.
 ---
 
 {% assign labsbase = "https://github.com/docker/labs/tree/master" %}
