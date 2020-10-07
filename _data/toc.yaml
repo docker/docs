@@ -1124,8 +1124,6 @@ manuals:
     title: Release notes
   - path: /compose/gettingstarted/
     title: Getting started
-  - path: /compose/swarm/
-    title: Using Compose with Swarm
   - path: /compose/environment-variables/
     title: Environment variables in Compose
   - path: /compose/env-file/
