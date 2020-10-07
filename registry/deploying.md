@@ -1,7 +1,7 @@
 ---
 description: Explains how to deploy a registry
 keywords: registry, on-prem, images, tags, repository, distribution, deployment
-title: Deploy a registry server
+title: Deploy your own registry
 ---
 
 {% include registry.md %}
@@ -26,11 +26,14 @@ $ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 The registry is now ready to use.
 
-> **Warning**: These first few examples show registry configurations that are
+> **Warning**
+>
+> These first few examples show registry configurations that are
 > only appropriate for testing. A production-ready registry must be protected by
 > TLS and should ideally use an access-control mechanism. Keep reading and then
 > continue to the [configuration guide](configuration.md) to deploy a
 > production-ready registry.
+{: .warning }
 
 ## Copy an image from Docker Hub to your registry
 
@@ -395,10 +398,11 @@ The simplest way to achieve access restriction is through basic authentication
 This example uses native basic authentication using `htpasswd` to store the
 secrets.
 
-> **Warning**:
+> **Warning**
+>
 > You **cannot** use authentication with authentication schemes that send
 > credentials as clear text. You must
-> [configure TLS first](deploying.md#running-a-domain-registry) for
+> [configure TLS first](deploying.md#run-an-externally-accessible-registry) for
 > authentication to work.
 {:.warning}
 
@@ -449,7 +453,9 @@ secrets.
     Test that you can now pull an image from the registry or push an image to
     the registry.
 
-> **X509 errors**: X509 errors usually indicate that you are attempting to use
+> **X509 errors**
+>
+> X509 errors usually indicate that you are attempting to use
 > a self-signed certificate without configuring the Docker daemon correctly.
 > See [run an insecure registry](insecure.md).
 
@@ -492,8 +498,8 @@ registry:
     - /path/auth:/auth
 ```
 
-Replace `/path` with the directory which contains the `certs/` and `auth/`
-directories.
+> Replace `/path` with the directory which contains the `certs/` and `auth/`
+> directories.
 {:.warning}
 
 Start your registry by issuing the following command in the directory containing
@@ -548,12 +554,14 @@ following:
   4.  When you push images to the registries in the list, their
       non-distributable layers are pushed to the registry.
 
-      > **Warning**: Non-distributable artifacts typically have restrictions on
+      > **Warning**
+      >
+      > Non-distributable artifacts typically have restrictions on
       > how and where they can be distributed and shared. Only use this feature
       > to push artifacts to private registries and ensure that you are in
       > compliance with any terms that cover redistributing non-distributable
       > artifacts.
-
+      {:.warning}
 
 ## Next steps
 

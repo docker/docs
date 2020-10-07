@@ -1,7 +1,7 @@
 ---
 description: Explains what the Registry is, basic use cases and requirements
 keywords: registry, on-prem, images, tags, repository, distribution, use cases, requirements
-title: About Registry
+title: What is a registry
 ---
 
 {% include registry.md %}

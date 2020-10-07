@@ -1283,11 +1283,11 @@ manuals:
 - sectiontitle: Docker Registry
   section:
     - path: /registry/
-      title: Registry overview
+      title: Overview
     - path: /registry/introduction/
-      title: Understand the Registry
+      title: What is a Registry
     - path: /registry/deploying/
-      title: Deploy a registry server
+      title: Deploy your own registry
     - path: /registry/configuration/
       title: Configure a registry
     - path: /registry/notifications/
