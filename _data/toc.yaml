@@ -153,7 +153,7 @@ guides:
         title: Using certificates for repository client verification
       - sectiontitle: Use trusted images
         section:
-        - path: /engine/security/trust/content_trust/
+        - path: /engine/security/trust/
           title: Content trust in Docker
         - path: /engine/security/trust/trust_automation/
           title: Automation with content trust

@@ -2,6 +2,8 @@
 description: Enabling content trust in Docker
 keywords: content, trust, security, docker, documentation
 title: Content trust in Docker
+redirect_from:
+- /engine/security/trust/content_trust/
 ---
 
 When transferring data among networked systems, *trust* is a central concern. In
