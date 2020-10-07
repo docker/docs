@@ -50,13 +50,13 @@ You can create a new account at [Docker Hub pricing](https://hub.docker.com/pric
 
 Upgrading your legacy plan to a Pro plan offers you unlimited public repositories, unlimited private repositories, and unlimited collaborators. Once you’ve upgraded your current legacy individual plan to a Pro plan, it is not possible to switch back to the legacy per-repository plan.
 
-For information on how to upgrade to a Pro plan from a legacy (per-repository plan) plan, see [Upgrade to a Pro plan](/upgrade.md#upgrade-to-a-pro-plan).
+For information on how to upgrade to a Pro plan from a legacy (per-repository plan) plan, see [Upgrade to a Pro plan](upgrade.md#upgrade-to-a-pro-plan).
 
 ### How do I upgrade to a Team plan from a legacy organization plan?
 
 Upgrading your legacy plan to a Team plan offers you unlimited public and private repositories, unlimited teams, and 3 parallel builds. Once you’ve upgraded your current legacy organization plan to a Team plan, it is not possible to switch back to the legacy per-repository plan.
 
-For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](/upgrade.md#upgrade-to-a-team-plan).
+For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](upgrade.md#upgrade-to-a-team-plan).
 
 ### How do downgrades from a Pro or Team plan work?
 
