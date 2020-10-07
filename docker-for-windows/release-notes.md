@@ -25,6 +25,7 @@ Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
   - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select 'Dashboard' > 'Images'.
   - Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to `Preferences` > `Docker Engine` and then disable the BuildKit feature.
   - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
+  - Docker Desktop now uses gRPC-FUSE for file sharing by default. This uses much less CPU than osxfs, especially when there are lots of file events on the host. To switch back to `osxfs`, go to **Settings** > **General** and disable gRPC-FUSE.
 
 ### Upgrades
   - [Docker 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
@@ -58,6 +59,7 @@ Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
   - Fixed an upgrade bug where users on versions still using the PowerShell based VM management can experience a silent un-installation crash leading to Docker Desktop being uninstalled instead of upgraded.
   - Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#7941](https://github.com/docker/for-win/issues/7941).
   - Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+  - Compose-on-Kubernetes is no longer included in the Docker Desktop installer. You can download it separately from the compose-on-kubernetes [release page](https://github.com/docker/compose-on-kubernetes/releases).
 
 ### WSL 2 changes
   - Docker contexts are now synced between Windows and WSL distros.
