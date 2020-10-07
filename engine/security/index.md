@@ -222,7 +222,7 @@ This feature provides more insight to administrators than previously available w
 the CLI for enforcing and performing image signature verification. 
 
 For more information on configuring Docker Content Trust Signature Verificiation, go to 
-[Content trust in Docker](trust/content_trust.md).
+[Content trust in Docker](trust/index.md).
 
 ## Other kernel security features
 
