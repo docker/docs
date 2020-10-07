@@ -453,10 +453,8 @@ It's more complicated if you're using particular configuration features:
           options:
             syslog-address: "tcp://192.168.0.42:123"
 
--   `links` with environment variables: As documented in the
-    [environment variables reference](../link-env-deprecated.md), environment variables
-    created by
-    links have been deprecated for some time. In the new Docker network system,
+-   `links` with environment variables: environment variables created by
+    links, such as `CONTAINERNAME_PORT`, ` have been deprecated for some time. In the new Docker network system,
     they have been removed. You should either connect directly to the
     appropriate hostname or set the relevant environment variable yourself,
     using the link hostname:
