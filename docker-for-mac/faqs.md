@@ -33,7 +33,7 @@ Yes, you can switch between Stable and Edge versions. You can try out the Edge r
 
 ## What are the system requirements for Docker Desktop?
 
-You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install/#system-requirements).
+You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install.md#system-requirements).
 
 ## What is an experimental feature?
 
@@ -74,7 +74,7 @@ For more information and examples, see
 We recommend that you publish a port, or connect from another container. You can use the same method on Linux if the container is on an overlay network and not a bridge network, as these are not routed.
 
 For more information and examples, see
-[I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) in the [Networking](/docker-for-mac/networking/) topic.
+[I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) in the [Networking](networking.md) topic.
 
 ### Can I use an SSH agent inside a container?
 
@@ -97,7 +97,12 @@ serial port) to a container as it requires support at the hypervisor level.
 
 ### Can I run Docker Desktop in nested virtualization scenarios?
 
-Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, **Docker Desktop is not supported in nested virtualization scenarios**. It might work in some cases, and not in others. For more information, see [Running Docker Desktop in nested virtualization scenarios](/docker-for-windows/troubleshoot/#running-docker-desktop-in-nested-virtualization-scenarios).
+Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or
+VMware Fusion on a Mac provided that the VM is properly configured. However,
+problems and intermittent failures may still occur due to the way these apps
+virtualize the hardware. For these reasons, **Docker Desktop is not supported in
+nested virtualization scenarios**. It might work in some cases, and not in others.
+For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
 ## Components of Docker Desktop
 
@@ -144,7 +149,7 @@ response.
 ### How can I opt out of sending my usage data?
 
 If you do not want to send of usage data, use the Stable channel. For more
-information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-channels).
+information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-releases).
 
 ### How is personal data handled in Docker Desktop?
 

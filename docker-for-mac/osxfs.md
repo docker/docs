@@ -244,7 +244,7 @@ At present there is support for read caching, with which the container's view
 of the file system can temporarily drift apart from the authoritative view on
 the host.  Further caching developments, including support for write caching,
 are planned.
-A [detailed description of the behavior in various caching configurations](osxfs-caching)
+A [detailed description of the behavior in various caching configurations](osxfs-caching.md)
 is available.
 
 #### What we are doing

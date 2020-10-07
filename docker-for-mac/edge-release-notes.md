@@ -213,7 +213,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen-caching.md).
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
 
 We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} repository with the `Mutagen` label.
 
@@ -950,7 +950,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Linux kernel 4.9.60
 
 * Bug fixes and minor changes
-  - Fix login into private repository with certificate issue. [https://github.com/docker/for-mac/issues/2201](docker/for-mac#2201)
+  - Fix login into private repository with certificate issue. [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)
 
 * New
   - For systems running APFS on SSD on High Sierra, use `raw` format virtual machine disks by default. This increases disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.
@@ -1018,7 +1018,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - AUFS 20170911
 
 * Bug fixes and minor changes
-  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING [docker/for-mac#1608](https://github.com/docker/for-mac/issues/1608)
   - Rotate logs in the virtual machine more often
 
 ### Docker Community Edition 17.09.0-ce-rc1-mac28 2017-09-07
@@ -1812,7 +1812,7 @@ events or unexpected unmounts.
 
 **Hotfixes**
 
-* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures) (docker/for-mac)
+* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures)
 
 * osxfs: fixed an issue causing some ATTRIB and CREATE `inotify` events to fail delivery and other `inotify` events to stop
 

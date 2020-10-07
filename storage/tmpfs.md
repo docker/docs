@@ -43,7 +43,7 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `--tmpfs`:
-  - The `type` of the mount, which can be [`bind`](bind-mounts-md), `volume`, or
+  - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
     [`tmpfs`](tmpfs.md). This topic discusses `tmpfs`, so the type is always
     `tmpfs`.
   - The `destination` takes as its value the path where the `tmpfs` mount
