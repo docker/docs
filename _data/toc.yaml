@@ -1280,6 +1280,40 @@ manuals:
     title: Download rate limit
   - path: /docker-hub/release-notes/
     title: Release notes
+- sectiontitle: Docker Registry
+  section:
+    - path: /registry/
+      title: Registry overview
+    - path: /registry/introduction/
+      title: Understand the Registry
+    - path: /registry/deploying/
+      title: Deploy a registry server
+    - path: /registry/configuration/
+      title: Configure a registry
+    - path: /registry/notifications/
+      title: Work with notifications
+    - sectiontitle: Recipes
+      section:
+        - path: /registry/recipes/
+          title: Recipes overview
+        - path: /registry/recipes/apache/
+          title: Authenticating proxy with apache
+        - path: /registry/recipes/nginx/
+          title: Authenticating proxy with nginx
+        - path: /registry/recipes/mirror/
+          title: Mirroring Docker Hub
+        - path: /registry/recipes/osx-setup-guide/
+          title: Running on macOS
+        - path: /registry/garbage-collection/
+          title: Garbage collection
+        - path: /registry/insecure/
+          title: Testing an insecure registry
+    - path: /registry/deprecated/
+      title: Deprecated features
+    - path: /registry/compatibility/
+      title: Compatibility
+    - path: /registry/help/
+      title: Getting help
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Notary
@@ -1304,40 +1338,6 @@ manuals:
         title: Client configuration
       - path: /notary/reference/common-configs/
         title: Common Server and signer configurations
-  - sectiontitle: Docker Registry
-    section:
-    - path: /registry/
-      title: Registry overview
-    - path: /registry/introduction/
-      title: Understand the Registry
-    - path: /registry/deploying/
-      title: Deploy a registry server
-    - path: /registry/configuration/
-      title: Configure a registry
-    - path: /registry/notifications/
-      title: Work with notifications
-    - sectiontitle: Recipes
-      section:
-      - path: /registry/recipes/
-        title: Recipes overview
-      - path: /registry/recipes/apache/
-        title: Authenticating proxy with apache
-      - path: /registry/recipes/nginx/
-        title: Authenticating proxy with nginx
-      - path: /registry/recipes/mirror/
-        title: Mirroring Docker Hub
-      - path: /registry/recipes/osx-setup-guide/
-        title: Running on macOS
-      - path: /registry/garbage-collection/
-        title: Garbage collection
-      - path: /registry/insecure/
-        title: Testing an insecure registry
-    - path: /registry/deprecated/
-      title: Deprecated features
-    - path: /registry/compatibility/
-      title: Compatibility
-    - path: /registry/help/
-      title: Getting help
 - path: /release-notes/
   title: Release notes
 - sectiontitle: Superseded products and tools
