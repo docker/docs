@@ -17,8 +17,6 @@ To get a specific entry while writing a page in the docs, enter Liquid text
 like so:
 {{ site.data.glossary["aufs"] }}
 -->
-<span id="glossaryMatch"></span>
-<span id="topicMatch"></span>
 <table>
   <thead>
     <tr><th>Term</th><th>Definition</th></tr>
