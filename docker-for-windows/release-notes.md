@@ -18,6 +18,8 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 
+Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
+
 ### New
   - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
   - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select 'Dashboard' > 'Images'.
