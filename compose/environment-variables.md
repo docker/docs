@@ -2,6 +2,9 @@
 title: Environment variables in Compose
 description: How to set, use and manage environment variables in Compose
 keywords: compose, orchestration, environment, env file
+redirect_from:
+- /compose/env
+- /compose/link-env-deprecated
 ---
 
 There are multiple parts of Compose that deal with environment variables in one
@@ -192,8 +195,6 @@ documented in [CLI Environment Variables](reference/envvars.md).
 ## Environment variables created by links
 
 When using the ['links' option](compose-file/index.md#links) in a
-[v1 Compose file](compose-file/index.md#version-1), environment variables are created
-for each link. They are documented in
-the [Link environment variables reference](link-env-deprecated.md).
-
-However, these variables are deprecated. Use the link alias as a hostname instead.
+[v1 Compose file](compose-file/compose-file-v1.md#link-environment-variables),
+environment variables are created for each link. These variables are deprecated.
+Use the link alias as a hostname instead.
