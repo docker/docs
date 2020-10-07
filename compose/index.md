@@ -4,6 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
 redirect_from:
  - /compose/overview/
+ - /compose/swarm/
 ---
 
 >**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).

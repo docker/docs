@@ -166,6 +166,8 @@ script](https://github.com/moby/moby/issues/24388).
 
 2. Virtualization enabled in the BIOS
 
+3. Hypervisor enabled at Windows startup
+
 #### Hyper-V
 
 Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
@@ -201,6 +203,17 @@ Performance tab on the Task Manager:
 If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
 Docker Desktop cannot start. See [Unable to run Docker for Windows on
 Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
+
+#### Hypervisor enabled at Windows startup
+
+If you have completed the steps described above and are still experiencing
+Docker Desktop startup issues, this could be because the Hypervisor is installed,
+but not launched during Windows startup. Some tools (such as older versions of 
+Virtual Box) and video game installers disable hypervisor on boot. To reenable it:
+
+1. Open an administrative console prompt.
+2. Run `bcdedit /set hypervisorlaunchtype auto`.
+3. Restart Windows.
 
 ### Networking and WiFi problems upon Docker Desktop for Windows install
 
