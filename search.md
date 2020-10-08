@@ -24,8 +24,6 @@ skip_read_time: true
 .gsc-adBlock { display: none; }
 </style>
 
-<div id="glossaryMatch"></div>
-
 <div id="my-cse1">
 <script>
   (function() {
