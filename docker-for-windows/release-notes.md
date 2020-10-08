@@ -26,7 +26,6 @@ Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
 - Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
 - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
-- Docker Desktop now uses gRPC-FUSE for file sharing by default. This uses much less CPU than osxfs, especially when there are lots of file events on the host. To switch back to `osxfs`, go to **Settings** > **General** and disable gRPC-FUSE.
 
 ### Upgrades
 
