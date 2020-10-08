@@ -13,30 +13,29 @@
                 <div class="col-body">
                     <main class="col-content content">
                         <section class="section">
-                            {% if page.title %}
-                            <h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
+                            {%- if page.title -%}
+                            <h1>{{ page.title }}</h1>
+                            {%- endif -%}
+                            {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
-                            {% endif %}
-                            {% unless page.tree == false or page.skip_read_time == true %}{% include read_time.html %}{% endunless %}
+                            {%- endif -%}
+                            {%- unless page.tree == false or page.skip_read_time == true -%}{% include read_time.html %}{%- endunless -%}
                             {{ content }}
-                            <!-- tags -->
-                            {% unless page.notags == true %}
-                            {% assign keywords = page.keywords | split:"," -%}
-                            {% if keywords.size > 0 -%}
-                            <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span
-                                style="vertical-align: 2px">
+                            {%- unless page.notags == true -%}
+                            {%- assign keywords = page.keywords | split:"," -%}
+                            {%- if keywords.size > 0 -%}
+                            <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">
                                 {%- for keyword in keywords -%}
                                 {%- assign strippedKeyword = keyword | strip -%}
-                                <a
-                                    href="https://docs.docker.com/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
+                                <a href="/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
                                 {%- unless forloop.last %}, {% endunless -%}
-                                {% endfor -%}
+                                {%- endfor -%}
                             </span>
-                            {% endif -%}
-                            {% endunless %}
-                            {% if page.noratings != true %}
+                            {%- endif -%}
+                            {%- endunless %}
+                            {%- if page.noratings != true -%}
                             <div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div>
-                            {% endif %}
+                            {%- endif -%}
                         </section>
                     </main>
                     <nav class="col-nav">
@@ -49,14 +48,10 @@
                             <div class="toc-nav">
                                 <div class="feedback-links">
                                     <ul>
-                                        {% if edit_url != "" %}
-                                        <li><a href="{{ edit_url }}"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this
-                                                page</a></li>{% endif %}
-                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
-                                                class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request
-                                                docs changes</a></li>
-                                        <!-- toggle mode -->
+                                        {%- if edit_url != "" -%}
+                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
+                                        {%- endif -%}
+                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
                                         <li>
                                             <div class="toggle-mode">
                                                 <div class="icon">
@@ -75,13 +70,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                {% unless page.notoc %}
-                                {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %}
-                                {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %}
-                                {% assign my_name = page.url | default: "unnamed" %}
+                                {%- unless page.notoc -%}
+                                {%- assign my_min = page.toc_min | default: site.toc_min | default: 2 -%}
+                                {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
+                                {%- assign my_name = page.url | default: "unnamed" -%}
                                 <div id="side-toc-title">On this page:</div>
-                                {% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}
-                                {% endunless %}
+                                {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
+                                {%- endunless -%}
                             </div>
                         </div>
                     </div>
@@ -92,7 +87,7 @@
     <footer class="footer">
         {% include footer.html %}
     </footer>
-    <script>var pageURL = "{{ page.url }}";</script>
+    <script>const pageURL = "{{ page.url }}";</script>
     <script defer src="/js/anchorlinks.js"></script>
     <script defer src="/js/menu.js"></script>
     <script src="/js/jquery.js"></script>
