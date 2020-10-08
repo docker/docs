@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: home
 - title: Guides
-  path: /get-started/
+  path: /get-started/overview/
   node: guides
 - title: Product manuals
   path: /engine/

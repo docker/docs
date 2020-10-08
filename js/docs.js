@@ -108,6 +108,31 @@ function renderNav(docstoc) {
         element.innerHTML = outputHorzTabs.join("");
     });
     document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
+
+    // Scroll the current menu item into view. We actually pick the item *above*
+    // the current item to give some headroom above
+    scrollMenuItem("#jsTOCLeftNav a.currentPage")
+}
+
+// Scroll the given menu item into view. We actually pick the item *above*
+// the current item to give some headroom above
+function scrollMenuItem(selector) {
+    let item = document.querySelector(selector)
+    if (item) {
+        item = item.closest("li")
+    }
+    if (item) {
+        item = item.previousElementSibling
+    }
+    if (item) {
+        item.scrollIntoView(true)
+        if (window.location.hash.length < 2) {
+            // Scrolling the side-navigation may scroll the whole page as well
+            // this is a dirty hack to scroll the main content back to the top
+            // if we're not on a specific anchor
+            document.querySelector("main.col-content").scrollIntoView(true)
+        }
+    }
 }
 
 function highlightRightNav(heading) {
@@ -327,9 +352,6 @@ if ($(".nav-sidebar ul a.active").length !== 0) {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
-
-// Enable glossary link popovers
-$(".glossLink").popover();
 
 // sync tabs with the same data-group
 window.onload = function () {
