@@ -18,7 +18,6 @@
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {% endif %}
                             {% unless page.tree == false or page.skip_read_time == true %}{% include read_time.html %}{% endunless %}
-                            {% if page.enterprise %}{% include enterprise_moved.html %}{% endif %}
                             {{ content }}
                             <!-- tags -->
                             {% unless page.notags == true %}
