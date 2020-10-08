@@ -71,6 +71,10 @@ defaults:
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
   - scope:
+      path: glossary
+    values:
+      edit_url: "https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml"
+  - scope:
       path: notary/reference
     values:
       edit_url: "https://github.com/theupdateframework/notary/tree/master/docs/reference"
