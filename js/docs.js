@@ -26,11 +26,8 @@ function navClicked(sourceLink) {
     }
 }
 
-var outputHorzTabs = [];
 var outputLetNav = [];
 var totalTopics = 0;
-var currentSection;
-var sectionToHighlight;
 
 function findMyTopic(tree) {
     function processBranch(branch) {
@@ -79,7 +76,6 @@ function walkTree(tree) {
             // just a regular old topic; this is a leaf, not a branch; render a link!
             outputLetNav.push('<li><a href="' + tree[j].path + '"')
             if (tree[j].path === pageURL && !tree[j].nosync) {
-                sectionToHighlight = currentSection;
                 outputLetNav.push('class="active currentPage"')
             }
             outputLetNav.push(">" + tree[j].title + "</a></li>")
@@ -89,24 +85,15 @@ function walkTree(tree) {
 
 function renderNav(docstoc) {
     for (var i = 0; i < docstoc.horizontalnav.length; i++) {
-        currentSection = docstoc.horizontalnav[i].node;
-        // build vertical nav
         var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
         if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
+            // This is the current section. Set the corresponding header-nav link
+            // to active, and build the left-hand (vertical) navigation
+            document.getElementById(docstoc.horizontalnav[i].node).closest("li").classList.add("active")
             walkTree(docstoc[docstoc.horizontalnav[i].node]);
+            document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
         }
-        // build horizontal nav
-        outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
-        if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
-            outputHorzTabs.push(' class="active"');
-        }
-        outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
     }
-    document.querySelectorAll('.jsTOCHorizontal').forEach(function(element) {
-        element.innerHTML = outputHorzTabs.join("");
-    });
-    document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
-
     // Scroll the current menu item into view. We actually pick the item *above*
     // the current item to give some headroom above
     scrollMenuItem("#jsTOCLeftNav a.currentPage")
