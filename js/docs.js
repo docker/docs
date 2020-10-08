@@ -29,30 +29,30 @@ function navClicked(sourceLink) {
 var outputLetNav = [];
 var totalTopics = 0;
 
-function findMyTopic(tree) {
+function pageIsInSection(tree) {
     function processBranch(branch) {
-        for (var k = 0; k < branch.length; k++) {
+        for (let k = 0; k < branch.length; k++) {
             if (branch[k].section) {
                 processBranch(branch[k].section);
             } else {
                 if (branch[k].path === pageURL && !branch[k].nosync) {
-                    thisIsIt = true;
+                    found = true;
                     break;
                 }
             }
         }
     }
 
-    var thisIsIt = false;
+    let found = false;
     processBranch(tree);
-    return thisIsIt;
+    return found;
 }
 
 function walkTree(tree) {
-    for (var j = 0; j < tree.length; j++) {
+    for (let j = 0; j < tree.length; j++) {
         totalTopics++;
         if (tree[j].section) {
-            var sectionHasPath = findMyTopic(tree[j].section);
+            let sectionHasPath = pageIsInSection(tree[j].section);
             outputLetNav.push('<li><a onclick="navClicked(' + totalTopics + ')" data-target="#item' + totalTopics + '" data-toggle="collapse" data-parent="#stacked-menu"')
             if (sectionHasPath) {
                 outputLetNav.push('aria-expanded="true"')
@@ -69,8 +69,7 @@ function walkTree(tree) {
                 outputLetNav.push("false");
             }
             outputLetNav.push('">');
-            var subTree = tree[j].section;
-            walkTree(subTree);
+            walkTree(tree[j].section);
             outputLetNav.push("</ul></li>");
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
@@ -84,9 +83,8 @@ function walkTree(tree) {
 }
 
 function renderNav(docstoc) {
-    for (var i = 0; i < docstoc.horizontalnav.length; i++) {
-        var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
-        if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
+    for (let i = 0; i < docstoc.horizontalnav.length; i++) {
+        if (docstoc.horizontalnav[i].path === pageURL || pageIsInSection(docstoc[docstoc.horizontalnav[i].node])) {
             // This is the current section. Set the corresponding header-nav link
             // to active, and build the left-hand (vertical) navigation
             document.getElementById(docstoc.horizontalnav[i].node).closest("li").classList.add("active")
