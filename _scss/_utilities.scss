@@ -21,6 +21,13 @@
 .break {
     margin-bottom: 20px!important;
 }
+
+.ratings-div {
+  color:      #b9c2cc;
+  margin-top: 150px;
+  text-align: center;
+}
+
 /*
 *
 * tables
@@ -305,7 +312,7 @@ input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:
     {
       display: none !important;
     }
-    #ratings-div
+    .ratings-div
     {
       display: none !important;
     }
