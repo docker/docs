@@ -89,17 +89,6 @@
             </div>
         </div>
     </div>
-
-    {% if page.path == "404.md" %}
-    <script>
-        var path = window.location.pathname.replace("#", "");
-        var ghIssueQueryString = "https://github.com/docker/docker.github.io/issues/new?" + "title=404%20at%20" + path + "&body=URL%3A%20" + path;
-        document.getElementsByClassName("nomunge")[1].onclick = function () {
-            document.getElementsByClassName("nomunge")[1].href = ghIssueQueryString;
-            return true;
-        };
-    </script>
-    {% endif %}
     <footer class="footer">
         {% include footer.html %}
     </footer>
