@@ -26,22 +26,6 @@
 {%- endif -%}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <style type="text/css">
-      @charset "UTF-8";
-      [ng\:cloak],
-      [ng-cloak],
-      [data-ng-cloak],
-      [x-ng-cloak],
-      .ng-cloak,
-      .x-ng-cloak,
-      .ng-hide:not(.ng-hide-animate) {
-          display: none !important;
-      }
-
-      ng\:form {
-          display: block;
-      }
-  </style>
   {%- if site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}
   {%- if page.hide_from_sitemap or site.GH_ENV == "gh_pages" %}
   <meta name="robots" content="noindex"/>
