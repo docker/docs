@@ -89,13 +89,11 @@ function walkTree(tree) {
 
 function renderNav(docstoc) {
     for (var i = 0; i < docstoc.horizontalnav.length; i++) {
-        if (docstoc.horizontalnav[i].node !== "glossary") {
-            currentSection = docstoc.horizontalnav[i].node;
-            // build vertical nav
-            var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
-            if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
-                walkTree(docstoc[docstoc.horizontalnav[i].node]);
-            }
+        currentSection = docstoc.horizontalnav[i].node;
+        // build vertical nav
+        var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
+        if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
+            walkTree(docstoc[docstoc.horizontalnav[i].node]);
         }
         // build horizontal nav
         outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
@@ -136,12 +134,10 @@ function scrollMenuItem(selector) {
 }
 
 function highlightRightNav(heading) {
-    if (document.location.pathname.indexOf("/glossary/") < 0) {
-        $("#my_toc a.active").removeClass("active");
+    $("#my_toc a.active").removeClass("active");
 
-        if (heading !== "title") {
-            $("#my_toc a[href='#" + heading + "']").addClass("active");
-        }
+    if (heading !== "title") {
+        $("#my_toc a[href='#" + heading + "']").addClass("active");
     }
 }
 
