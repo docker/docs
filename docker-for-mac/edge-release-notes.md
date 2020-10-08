@@ -14,7 +14,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.4.1.0
 2020-10-01
 
-> [Download](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
 
 ### Upgrades
 
