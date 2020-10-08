@@ -26,36 +26,33 @@ function navClicked(sourceLink) {
     }
 }
 
-var outputHorzTabs = [];
 var outputLetNav = [];
 var totalTopics = 0;
-var currentSection;
-var sectionToHighlight;
 
-function findMyTopic(tree) {
+function pageIsInSection(tree) {
     function processBranch(branch) {
-        for (var k = 0; k < branch.length; k++) {
+        for (let k = 0; k < branch.length; k++) {
             if (branch[k].section) {
                 processBranch(branch[k].section);
             } else {
                 if (branch[k].path === pageURL && !branch[k].nosync) {
-                    thisIsIt = true;
+                    found = true;
                     break;
                 }
             }
         }
     }
 
-    var thisIsIt = false;
+    let found = false;
     processBranch(tree);
-    return thisIsIt;
+    return found;
 }
 
 function walkTree(tree) {
-    for (var j = 0; j < tree.length; j++) {
+    for (let j = 0; j < tree.length; j++) {
         totalTopics++;
         if (tree[j].section) {
-            var sectionHasPath = findMyTopic(tree[j].section);
+            let sectionHasPath = pageIsInSection(tree[j].section);
             outputLetNav.push('<li><a onclick="navClicked(' + totalTopics + ')" data-target="#item' + totalTopics + '" data-toggle="collapse" data-parent="#stacked-menu"')
             if (sectionHasPath) {
                 outputLetNav.push('aria-expanded="true"')
@@ -72,14 +69,12 @@ function walkTree(tree) {
                 outputLetNav.push("false");
             }
             outputLetNav.push('">');
-            var subTree = tree[j].section;
-            walkTree(subTree);
+            walkTree(tree[j].section);
             outputLetNav.push("</ul></li>");
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
             outputLetNav.push('<li><a href="' + tree[j].path + '"')
             if (tree[j].path === pageURL && !tree[j].nosync) {
-                sectionToHighlight = currentSection;
                 outputLetNav.push('class="active currentPage"')
             }
             outputLetNav.push(">" + tree[j].title + "</a></li>")
@@ -88,27 +83,15 @@ function walkTree(tree) {
 }
 
 function renderNav(docstoc) {
-    for (var i = 0; i < docstoc.horizontalnav.length; i++) {
-        if (docstoc.horizontalnav[i].node !== "glossary") {
-            currentSection = docstoc.horizontalnav[i].node;
-            // build vertical nav
-            var itsHere = findMyTopic(docstoc[docstoc.horizontalnav[i].node]);
-            if (itsHere || docstoc.horizontalnav[i].path === pageURL) {
-                walkTree(docstoc[docstoc.horizontalnav[i].node]);
-            }
+    for (let i = 0; i < docstoc.horizontalnav.length; i++) {
+        if (docstoc.horizontalnav[i].path === pageURL || pageIsInSection(docstoc[docstoc.horizontalnav[i].node])) {
+            // This is the current section. Set the corresponding header-nav link
+            // to active, and build the left-hand (vertical) navigation
+            document.getElementById(docstoc.horizontalnav[i].node).closest("li").classList.add("active")
+            walkTree(docstoc[docstoc.horizontalnav[i].node]);
+            document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
         }
-        // build horizontal nav
-        outputHorzTabs.push('<li id="' + docstoc.horizontalnav[i].node + '"');
-        if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
-            outputHorzTabs.push(' class="active"');
-        }
-        outputHorzTabs.push('><a href="' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
     }
-    document.querySelectorAll('.jsTOCHorizontal').forEach(function(element) {
-        element.innerHTML = outputHorzTabs.join("");
-    });
-    document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
-
     // Scroll the current menu item into view. We actually pick the item *above*
     // the current item to give some headroom above
     scrollMenuItem("#jsTOCLeftNav a.currentPage")
@@ -136,12 +119,10 @@ function scrollMenuItem(selector) {
 }
 
 function highlightRightNav(heading) {
-    if (document.location.pathname.indexOf("/glossary/") < 0) {
-        $("#my_toc a.active").removeClass("active");
+    $("#my_toc a.active").removeClass("active");
 
-        if (heading !== "title") {
-            $("#my_toc a[href='#" + heading + "']").addClass("active");
-        }
+    if (heading !== "title") {
+        $("#my_toc a[href='#" + heading + "']").addClass("active");
     }
 }
 
