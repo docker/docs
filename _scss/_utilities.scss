@@ -91,17 +91,20 @@ img.inline {
     }
 }
 
-.nav-secondary-tabs .search-form input[type=search] {
+.nav-secondary-tabs .search-form input[type=search],
+.nav-secondary input[type=search]
+{
     background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
     border: 0;
     box-shadow: none;
     color: #fff;
     border-radius: 0;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0 0 0 35px;
+    width: 100%;
+}
+
+.nav-secondary-tabs .search-form input[type=search] {
     width: 100%;
 }
 
@@ -129,41 +132,12 @@ input[type=text] {
     transition: all 0.2s ease;
 }
 
-.nav-secondary input[type=search] {
-    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
-    border: 0;
-    box-shadow: none;
-    color: #fff;
-    border-radius: 0;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    padding: 0 0 0 35px;
-}
-
 .nav-secondary .search-form input[type=search]:focus {
     background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
 }
 
-.search-form input[type=search]::-webkit-input-placeholder {
-    color: #fff;
-    opacity: 1;
-}
-
-.search-form input[type=search]:-moz-placeholder {
-    /* Firefox 18- */
-    color: #fff;
-    opacity: 1;
-}
-
-.search-form input[type=search]::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #fff;
-    opacity: 1;
-}
-
-.search-form input[type=search]:-ms-input-placeholder {
+.search-form input[type=search]::placeholder
+{
     color: #fff;
     opacity: 1;
 }

@@ -3,7 +3,6 @@
  */
 
 .hero-text {
-    -ms-flex-align: center;
     align-items: center;
     display: -ms-flexbox;
     display: flex;
@@ -11,6 +10,7 @@
     -webkit-align-items: center;
     min-height: 20em;
     min-width: 400px;
+    -ms-flex-align: center;
     -ms-flex-pack: center;
     justify-content: center;
     & h1 {
