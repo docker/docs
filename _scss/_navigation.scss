@@ -5,45 +5,10 @@
     height: 55px;
 }
 
-.primary {
-    padding: 5px 0 0 20px;
-}
-
-.nav-primary {
-    background: transparent;
-    max-width: 1024px;
-    margin: 0 auto;
-    a {
-        color: #fff;
-    }
-    li:nth-child(5n) {
-        padding-right: 50px;
-    }
-}
-
 .sidebar-toggle {
     margin: 4px 0 0 0;
     float: right;
     padding: 16px 15px 0 0;
-}
-
-/*
- * user-nav ********************************************************************
- */
-
-.user-nav {
-    padding: 20px 0 0;
-    float: right;
-    ul {
-        li {
-            list-style-type: none;
-            display: inline;
-            padding-right: 10px;
-            a {
-                display: inline;
-            }
-        }
-    }
 }
 
 /*
@@ -56,29 +21,6 @@
     height: 55px;
 }
 
-
-/*
- * nav-secondary-tabs  *********************************************************
- */
-
-.nav-secondary-tabs {
-    background-color: $bg-secondary-tabs;
-    bottom: 0;
-    height: 55px;
-    position: absolute;
-    width: 100%;
-    &.affix {
-        background-color: $bg-secondary;
-        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-        top: 0;
-        position: fixed;
-        z-index: 100;
-    }
-    .search-form {
-        margin: 5px 27px 0 -10px;
-        width: 240px;
-    }
-}
 
 /*
  * NAV SIDEBAR *****************************************************************
@@ -151,10 +93,6 @@
     margin-top: 10px;
 }
 
-.leftnav {
-    padding: 0 20px 20px 0;
-}
-
 /* pointer for collapsed sidebar list items */
 
 .collapsed
@@ -199,11 +137,6 @@
     font-size: 14px;
     margin: 0 8px 0 0;
     color: $primary-links;
-}
-
-i.fa.fa-question {
-    font-size: 21px;
-    margin: 0 11px 0 0;
 }
 
 div#side-toc-title {
@@ -329,8 +262,8 @@ input:checked+.slider:before {
  * feedback links **************************************************************
  */
 
-#sidebar-right.affix .feedback-links {
-    margin: 50px 0 10px 0;
+.feedback-links {
+    margin: 0 0 10px 0;
 }
 
 /* polldaddy */

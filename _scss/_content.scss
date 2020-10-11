@@ -63,53 +63,18 @@ code {
     float: left;
     height: 250px;
     width: 100%;
-}
-
-.component-full {
-    padding: 5px 0 10px 20px;
-    float: left;
-    min-height: 100px;
-    margin: 0 0 15px 0;
-    width: 100%;
-}
-
-.component,
-.component-full {
     background: $bg-component;
-}
-
-.component-full-icon {
-    float: left;
-    padding: 5px 15px 0 7px;
-}
-
-.component-full p {
-    margin: 0;
-}
-
-.component-full h3 {
-    margin-top: 10px;
-}
-
-.component img,
-.component-full-icon img {
-    width: 70px;
-    height: 70px;
-}
-
-.component-icon {
-    margin: 0 auto;
-    width: 70px;
-}
-
-.component-full-copy {
-    float: left;
-    width: 80%;
-}
-
-.component h3,
-.component p {
-    margin: 0;
+    img {
+      width: 70px;
+      height: 70px;
+    }
+    .component-icon {
+      margin: 0 auto;
+      width: 70px;
+    }
+    h3, p {
+      margin: 0;
+    }
 }
 
 a.anchorLink {
