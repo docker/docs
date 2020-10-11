@@ -135,73 +135,59 @@ input[type=text] {
  * autocompleteResults *********************************************************
  */
 
-div#autocompleteResults {
+#autocompleteResults {
     display: none; /* toggled through javascript */
 
     background: #E6F5FD;
     border: 1px solid #eee;
     box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.28);
-    padding: 20px 0 15px 0;
     margin: 10px 0 0 0;
     position: absolute;
     width: 600px;
     z-index: 9999;
 }
 
-ul.autocompleteList {
-    list-style: none;
-    max-width: 100%;
-
-    @include before-lg-width {
-        padding: 0;
-    }
-}
-
-.autocompleteList li {
-    padding: 5px 0 7px 0;
-    max-width: 100%;
-}
-
-div#autocompleteResults span {
-    background: transparent!important;
-    color: #518cad;
-}
-
-.autocompleteTitle {
-    font-weight: bold;
-    font-size: large;
-}
-
-.autocompleteSelected {
-  background-color: #f5f5f5;
-}
-
-.autocompleteList {
-  list-style-type: none;
-  width: 400px;
-/* commented out 0 padding to allow inherit padding, search results on autocompleteList were getting smashed up against left margin due to this */
-/*  padding: 0; */
-  margin-bottom: 0;
-}
-
-.autoCompleteResult {
+.autocompleteResult {
     border-bottom: 1px solid rgba(203, 205, 209, 0.4);
+    cursor: pointer;
     padding: 15px;
-
-    &:hover {
-        cursor: pointer;
+    &.selected {
+      background-color: #f5f5f5;
     }
-}
 
-#autocompleteShowAll {
-  padding: 20px 15px;
-}
+    ul {
+      list-style: none;
+      margin: 0 5px 0 5px;
+      padding-inline-start: 0;
 
-.autocompleteList li {
-  width: 380px;
-  border: 0;
-  padding-right: 20px;
-  margin: 0;
+      @include before-lg-width {
+        padding: 0;
+      }
+    }
+
+    li {
+      border: 0;
+      margin: 0;
+      max-width: 100%;
+      padding: 5px 0 7px 0;
+      line-height: normal;
+    }
+
+    .title {
+      font-weight: bold;
+    }
+
+    .keywords {
+      font-size: 12px;
+      .glyphicon {
+        padding-right: 10px
+      }
+    }
+
+    span {
+      background: transparent;
+      color: #518cad;
+    }
 }
 
 @media print {

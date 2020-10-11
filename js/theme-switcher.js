@@ -10,6 +10,14 @@ function getJSON(url, fn) {
     xhr.send();
 }
 
+// throttle / debounce events. taken from https://programmingwithmosh.com/javascript/javascript-throttle-and-debounce-patterns/
+function debounce(fn, msec) {
+    let id;
+    return function(...args) {
+        clearTimeout(id); id = setTimeout(() => fn.apply(this, args), msec);
+    }
+}
+
 const darkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
 const selectedTheme = window.localStorage ? localStorage.getItem("theme") : null;
 
