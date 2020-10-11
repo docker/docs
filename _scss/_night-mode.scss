@@ -151,20 +151,6 @@ body.night {
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
     }
-    .hljs {
-        color: #f5f5f5!important;
-    }
-    .hljs-tag,
-    .hljs-name,
-    .hljs-attribute {
-        color: #e3e3f2!important;
-        font-weight: normal;
-    }
-    .hljs-keyword,
-    .hljs-selector-tag,
-    .hljs-subst {
-        color: #f5f5f5!important;
-    }
     div#autocompleteResults {
         background: $bg-search-results-night;
         border: 1px solid $black;
