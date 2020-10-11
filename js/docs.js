@@ -1,33 +1,12 @@
-// Right nav highlighting
-var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0];
-
-// ensure that the left nav visibly displays the current topic
-var current = document.getElementsByClassName("active currentPage");
-var body = document.getElementsByClassName("col-content content");
-if (current[0]) {
-    if (sidebarObj) {
-        current[0].scrollIntoView(true);
-        body[0].scrollIntoView(true);
-    }
-    // library hack
-    if (document.location.pathname.indexOf("/samples/") > -1) {
-        $(".currentPage").closest("ul").addClass("in");
-    }
-}
 
 function navClicked(sourceLink) {
-    var classString = document.getElementById("#item" + sourceLink).className;
-    if (classString.indexOf(" in") > -1) {
-        //collapse
-        document.getElementById("#item" + sourceLink).className = classString.replace(" in", "");
-    } else {
-        //expand
-        document.getElementById("#item" + sourceLink).className = classString.concat(" in");
+    let el = document.getElementById("#item"+sourceLink)
+    if (el) {
+        el.classList.toggle("in")
     }
 }
 
-var outputLetNav = [];
-var totalTopics = 0;
+let outputLetNav = [], totalTopics = 0;
 
 function pageIsInSection(tree) {
     function processBranch(branch) {
@@ -154,28 +133,6 @@ $(window).scroll(function () {
     }
 });
 
-/*
- * toggle menu *****************************************************************
- */
-
-$("#menu-toggle").click(function (e) {
-    e.preventDefault();
-    $(".wrapper").toggleClass("right-open");
-    $(".col-toc").toggleClass("col-toc-hidden");
-});
-
-$("#menu-toggle-left").click(function (e) {
-    e.preventDefault();
-    $(".col-nav").toggleClass("col-toc-hidden");
-});
-
-$(".navbar-toggle").click(function () {
-    $("#sidebar-nav").each(function () {
-        $(this).toggleClass("hidden-sm");
-        $(this).toggleClass("hidden-xs");
-    });
-});
-
 var navHeight = $(".navbar").outerHeight(true) + 80;
 
 $(document.body).scrollspy({
@@ -233,30 +190,29 @@ $(document).ready(function () {
     });
 });
 
-/*
- * make dropdown show on hover *************************************************
- */
-
-$("ul.nav li.dropdown").hover(function () {
-    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeIn(500);
-}, function () {
-    $(this).find(".dropdown-menu").stop(true, true).delay(200).fadeOut(500);
-});
-
-/*
- * Components ******************************************************************
- */
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
-
-// sync tabs with the same data-group
-window.onload = function () {
-    $(".nav-tabs > li > a").click(function (e) {
-        var group = $(this).attr("data-group");
-        $('.nav-tabs > li > a[data-group="' + group + '"]').tab("show");
+function initNavToggle() {
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $(".wrapper").toggleClass("right-open");
+        $(".col-toc").toggleClass("col-toc-hidden");
     });
-};
 
-ready(renderNav);
+    $(".navbar-toggle").click(function () {
+        $("#sidebar-nav").each(function () {
+            $(this).toggleClass("hidden-sm");
+            $(this).toggleClass("hidden-xs");
+        });
+    });
+}
+
+ready(() => {
+    renderNav()
+    initNavToggle()
+    $('[data-toggle="tooltip"]').tooltip()
+
+    // sync tabs with the same data-group
+    $(".nav-tabs > li > a").click(function () {
+        const group = $(this).attr("data-group");
+        $(`.nav-tabs > li > a[data-group='${ group }']`).tab("show");
+    });
+});
