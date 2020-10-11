@@ -96,7 +96,7 @@ using [docker-compose run](reference/run.md):
     docker-compose run --no-deps web rails new . --force --database=postgresql
 
 First, Compose builds the image for the `web` service using the `Dockerfile`.
-The `--no-deps` tells compose not to start linked services. Then it runs
+The `--no-deps` tells Compose not to start linked services. Then it runs
 `rails new` inside a new container, using that image. Once it's done, you
 should have generated a fresh app.
 
