@@ -2,6 +2,8 @@ body.night {
     background-color: $bg-body-night;
     color: $body-text-night;
     p,
+    ol,
+    ul,
     .rating-nero-value,
     .reading-time {
         color: $body-text-night!important;
@@ -18,10 +20,6 @@ body.night {
     a,
     .toc-nav i.fa {
         color: $primary-links-night;
-    }
-    ol,
-    ul {
-        color: #c7c9ca !important;
     }
     .header {
         background-color: $bg-header-night;
@@ -82,9 +80,6 @@ body.night {
         background-color: #344658;
         border: 1px solid #192837;
     }
-    ul {
-        color: $body-text-night;
-    }
     blockquote {
         background: #1f3341;
     }
@@ -99,42 +94,23 @@ body.night {
         background: #2b4252;
     }
     pre {
-        display: block;
-        padding: 9.5px;
-        margin: 0 0 10px;
-        font-size: 13px;
-        line-height: 1.42857143;
         color: #f3f3f3;
-        word-break: break-all;
-        word-wrap: break-word;
         background-color: #0a121b !important;
         border: 1px solid $black;
-        border-radius: 4px;
     }
     code {
-        padding: 3px 7px;
         color: #c1f1f0 !important;
-        border-radius: 2px;
         background: #0a121b !important;
-    }
-    pre>code {
-        padding: 0;
     }
     .nav-secondary .dropdown-btn {
         color: #d0e8ff;
     }
     .outline-btn {
         background: #101c29;
-        border: 1px solid;
-        border-color: #37404a;
-        text-decoration: none;
-        margin: 0;
+        border: 1px solid #37404a;
     }
     a.button.outline-btn {
         color: #a7e2ff;
-        float: none;
-        margin-bottom: 30px;
-        display: inline-block;
     }
     a.glossary,
         .toc-nav i.fa{
@@ -149,41 +125,19 @@ body.night {
         background: $bg-search-results-night;
         border: 1px solid $black;
         color: $white;
-        padding: 20px 0 15px 0;
-        margin: 10px 0 0 0;
-        position: absolute;
-        width: 800px;
-    }
-    ul.autocompleteList {
-        list-style: none;
     }
     .autocompleteList li {
         color: #b4c3d2;
-        padding: 5px 0 7px 0;
     }
     div#autocompleteResults span {
         color: #b7a4de;
     }
-    .autocompleteTitle {
-        font-weight: bold;
-    }
-    .autocompleteUrl,
-    .autocompleteKeywords,
-    .autocompleteDescription {
-        line-height: normal;
-    }
+
     span.reading-time {
-        font-style: italic;
-        font-size: 12px;
-        display: block;
         color: #bfabe5;
     }
     /* for google results styles - forgive us css gods */
-    .gsc-control-cse {
-        border-color: #192837!important;
-        background-color: #192837!important;
-    }
-    .gsc-webResult.gsc-result, .gsc-results .gsc-imageResult {
+    .gsc-control-cse .gsc-webResult.gsc-result, .gsc-results .gsc-imageResult {
         border-color: #192837!important;
         background-color: #192837!important;
     }
@@ -266,7 +220,6 @@ body.night {
     /* accordion */
     .panel {
         color: $body-text-night;
-        margin-bottom: 20px;
         background-color: #24394c;
     }
     .panel-default {
@@ -278,7 +231,6 @@ body.night {
         }
     }
     .panel-body {
-        padding: 15px;
         background: rgb(35, 54, 72);
         color: #bcbfc3;
     }
@@ -289,7 +241,6 @@ body.night {
     }
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
         color: $white;
-        cursor: default;
         background-color: #4e6071;
         border: 1px solid transparent;
     }
