@@ -181,25 +181,21 @@ body.night {
         background-color: #2f2f2f;
     }
     /* force blockquote styles */
-    blockquote.warning {
+    blockquote.warning, blockquote.warning p:first-child {
         color: #ff7e7a!important;
     }
-    blockquote.warning p:first-child {
-        color: #ff7e7a!important;
-    }
-    blockquote.important {
-        border-left-color: #f5ac45!important;
-    }
-    blockquote.important p:first-child {
+    blockquote.important, blockquote.important p:first-child {
         color: #f5ac45!important;
     }
 
     /* syntax highlighting */
-    .highlight .nt {
+    .highlight {
+      .nt {
         color: #e8a0e8;
-    }
-    .highlight .k {
+      }
+      .k {
         color: #da5ada;
+      }
     }
 
     /* Primary Global Menu Overrides */

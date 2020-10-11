@@ -40,8 +40,7 @@ table>tbody>tr:nth-of-type(even) {
     background-color: #f7f7f7;
 }
 
-td,
-th {
+td {
     padding: 10px;
 }
 
@@ -54,6 +53,12 @@ td.th {
 
 thead {
     background: $table-head;
+}
+
+/* give tables some breathing room */
+.content table {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 i.fa.fa-indent,
@@ -147,10 +152,8 @@ input[type=text] {
  */
 
 div#autocompleteResults {
-    display: none;
-}
+    display: none; /* toggled through javascript */
 
-div#autocompleteResults {
     background: #E6F5FD;
     border: 1px solid #eee;
     box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.28);
@@ -217,33 +220,11 @@ div#autocompleteResults span {
   margin: 0;
 }
 
-/*
- * google-Results  *************************************************************
- */
-
-input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
-    display: none!important;
-}
-
-
-@media print
-{
-    .footer
-    {
-        display: none !important;
-    }
-    .col-toc
-    {
-      display: none !important;
-    }
-    .col-nav
-    {
-      display: none !important;
-    }
-    .glyphicon-tags
-    {
-      display: none !important;
-    }
+@media print {
+    .col-nav,
+    .col-toc,
+    .footer,
+    .glyphicon-tags,
     .ratings-div
     {
       display: none !important;
@@ -273,11 +254,4 @@ input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:
     filter: alpha(opacity=20);
     opacity: .2;
     margin: 10px 15px 0 0;
-}
-
-/* Make table headings  bold, give tables some breathing room */
-
-.content table {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
