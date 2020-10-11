@@ -186,11 +186,8 @@ if (selectedNightTheme === "true" || (selectedNightTheme === null && prefersDark
     $("#switch-style").prop("checked", false);
 }
 
-
 /*
- *
  * toggle menu *********************************************************************
- *
  */
 
 $("#menu-toggle").click(function (e) {
@@ -268,11 +265,8 @@ $(document).ready(function () {
     });
 });
 
-
 /*
- *
  * make dropdown show on hover *********************************************************************
- *
  */
 
 $("ul.nav li.dropdown").hover(function () {
@@ -282,9 +276,7 @@ $("ul.nav li.dropdown").hover(function () {
 });
 
 /*
- *
  * swapStyleSheet*********************************************************************
- *
  */
 
 function applyNight() {
@@ -305,27 +297,8 @@ $("#switch-style").change(function () {
     }
 });
 
-
 /*
- *
- * TEMP HACK For side menu*********************************************************************
- *
- */
-
-$(".nav-sidebar ul li a").click(function () {
-    $(this).addClass("collapse").siblings().toggleClass("in");
-});
-
-if ($(".nav-sidebar ul a.active").length !== 0) {
-    $(".nav-sidebar ul").click(function () {
-        $(this).addClass("collapse in").siblings;
-    });
-}
-
-/*
- *
  * Components *********************************************************************
- *
  */
 
 $(function () {
