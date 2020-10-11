@@ -1,8 +1,6 @@
 /*
-*
-* utilities
-*
-*/
+ * utilities *******************************************************************
+ */
 
 .archive-panel {
     padding: 10px 5px;
@@ -29,10 +27,8 @@
 }
 
 /*
-*
-* tables
-*
-*/
+ * tables **********************************************************************
+ */
 
 table {
     border: 1px solid rgba(204, 204, 204, 0.29);
@@ -68,33 +64,22 @@ i.fa.fa-outdent {
     opacity: 0.5;
 }
 
-
-
 .block {
     padding: 0 15px 10px 15px;
 }
 
 
-/*
-*
-* Inline graphics and icons (like the whale menu icon in d4mac, d4win)
-*
-*/
-
+/* Inline graphics and icons (like the whale menu icon in d4mac, d4win) */
 img.inline {
     display: inline;
 }
 
 /*
-* Search *********************************************************************
-*
-*/
-
-
+ * Search **********************************************************************
+ */
 .search-form {
     float: left;
     margin: 5px 0 0;
-    // width: 200px;
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
         border: 0;
@@ -183,29 +168,9 @@ input[type=text] {
     opacity: 1;
 }
 
-// .search-form input[type=text]::-webkit-input-placeholder {
-//     color: #fff;
-// }
-
-// .search-form input[type=text]:-moz-placeholder {
-//     /* Firefox 18- */
-//     color: #fff;
-// }
-
-// .search-form input[type=text]::-moz-placeholder {
-//     /* Firefox 19+ */
-//     color: #fff;
-// }
-
-// .search-form input[type=text]:-ms-input-placeholder {
-//     color: #fff;
-// }
-
 /*
-  *
-  * autocompleteResults  **********************************************************
-  *
-  */
+ * autocompleteResults *********************************************************
+ */
 
 div#autocompleteResults {
     display: none;
@@ -277,22 +242,15 @@ div#autocompleteResults span {
   padding-right: 20px;
   margin: 0;
 }
+
 /*
-  *
-  * google-Results  **********************************************************
-  *
-  */
+ * google-Results  *************************************************************
+ */
 
 input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
     display: none!important;
 }
 
-
-/*
-*
-* moved from temp css
-*
-*/
 
 @media print
 {
