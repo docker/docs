@@ -63,7 +63,7 @@ use it as a base for 10 different applications. Your ideal PostgreSQL setup can
 be re-used for all your future projects. And so on.
 
  - *Sharing.* Docker has access to a public registry [on Docker
-Hub](https://hub.docker.com/){: target="_blank" class="_"} where thousands of
+Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} where thousands of
 people have uploaded useful images: anything from Redis, CouchDB, PostgreSQL to
 IRC bouncers to Rails app servers to Hadoop to base images for various Linux
 distros. The [*registry*](../registry/index.md) also includes an official "standard
@@ -83,7 +83,7 @@ private containers, for internal server deployments for example.
 ### What is different between a Docker container and a VM?
 
 There's a great StackOverflow answer [showing the differences](
-http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" class="_"}.
+http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
 
 ### Do I lose my data when the container exits?
 
@@ -119,12 +119,12 @@ You can learn about the project's security policy
 ### Why do I need to sign my commits to Docker with the DCO?
 
 Read [our blog post](
-http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" class="_"} on the introduction of the DCO.
+http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
 
 ### When building an image, should I prefer system libraries or bundled ones?
 
 *This is a summary of a discussion on the [docker-dev mailing list](
-https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" class="_"}.*
+https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" rel="noopener" class="_"}.*
 
 Virtually all programs depend on third-party libraries. Most frequently, they
 use dynamic linking and some kind of package dependency, so that when
@@ -186,7 +186,7 @@ Because of this, and because setting `DEBIAN_FRONTEND` to `noninteractive` is
 mainly a 'cosmetic' change, we *discourage* changing it.
 
 If you *really* need to change its setting, make sure to change it back to its
-[default value](https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args){: target="_blank" class="_"}
+[default value](https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args){: target="_blank" rel="noopener" class="_"}
 afterwards.
 
 ### Why do I get `Connection reset by peer` when making a request to a service running in a container?
@@ -225,6 +225,6 @@ You can find more answers on:
 
 - [Docker community Slack channel](http://dockr.ly/slack)
 - [Docker Support Forums](https://forums.docker.com)
-- [GitHub](https://github.com/moby/moby){: target="_blank" class="_"}
-- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" class="_"}
-- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" class="_"}
+- [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
+- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
+- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" rel="noopener" class="_"}

@@ -1,10 +1,10 @@
 <!-- Page generated {{ site.time }} -->
 <!DOCTYPE html>
 <html lang="en">
-{% include head.html %}
-{% if page.landing == true %}
-    {% include body-landing.html %}
-{%else%}
-    {% include body.html %}
-{% endif %}
+{%- include head.html -%}
+{%- if page.landing == true -%}
+    {%- include body-landing.html -%}
+{%- else -%}
+    {%- include body.html -%}
+{%- endif -%}
 </html>

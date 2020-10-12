@@ -10,10 +10,13 @@ toc_max: 2
 
 Vulnerability scanning for Docker local images runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images. Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results.  The scanning function creates the list of Common Vulnerabilities and Exposures (CVEs), and provides recommendations for CVE remediations.
 
+This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+
 >**Note**
 >
 > Docker vulnerability scanning for local images  is currently a beta release. The commands and flags are subject to change in subsequent releases.
 {:.important}
+
 
 ## Prerequisites
 
@@ -21,14 +24,14 @@ To run vulnerability scanning on your Docker images, you must meet the following
 
 1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 
-2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 
 3. From the Docker Desktop menu, select **Sign in/ Create Docker ID**. Alternatively, open a terminal and run the command `docker login`.
 
-4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
+4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
 
 Check your installation by running `docker scan --version`, it should print the current version of docker scan and the Snyk engine version. For example:
 
@@ -268,11 +271,11 @@ Tested 200 dependencies for known issues, found 157 issues.
 For more free scans that keep your images secure, sign up to Snyk at https://dockr.ly/3ePqVcp.
 ```
 
-For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" class="_"}.
+For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
 
 ## Provider authentication
 
-If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" class="_"}:
+If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" rel="noopener" class="_"}:
 
 ```shell
 $ docker scan --login --token SNYK_AUTH_TOKEN
@@ -291,4 +294,4 @@ If you use the `--login` flag without any token, you will be redirected to the S
 
 ## Feedback
 
-Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.

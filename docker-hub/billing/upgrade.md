@@ -6,7 +6,7 @@ redirect_from:
 - /docker-hub/upgrade/
 ---
 
-You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
 >**Note:**
 >
@@ -21,7 +21,7 @@ The following sections contain instructions on how to upgrade to Pro and Team pl
 
 To upgrade to a Pro plan:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
 
@@ -41,7 +41,7 @@ To upgrade to a Pro plan:
 
 To upgrade to a Team plan:
 
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 
 2. Navigate to **Organizations** from the menu at the top of the page, then choose your organization.
 
@@ -65,7 +65,7 @@ To upgrade to a Team plan:
 
 To upgrade from a monthly Team plan to an annual Team plan:
 
-1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. Navigate to **Organizations** from the menu at the top of the page, choose your organization, and select the **Billing** tab.
 3. Click **switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
@@ -76,7 +76,7 @@ To upgrade from a monthly Team plan to an annual Team plan:
 
 To upgrade from a monthly Pro plan to an annual Pro plan:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
 3. Click **switch to annual billing**.
 4. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.

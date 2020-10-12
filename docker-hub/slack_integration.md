@@ -44,4 +44,4 @@ Enjoy your new Slack channel integration!
 
 * From the Slack **Notifications** section you can also change the channel that the integration posts to. Click the reload icon (two arrows) next to the Slack integration to reopen the OAuth channel selector.
 
-* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.
+* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank" rel="noopener">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.

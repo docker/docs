@@ -23,10 +23,12 @@
 <div class="nav-container hidden-sm hidden-xs">
     <div id="tabs">
         <ul class="tabs jsTOCHorizontal">
-
+        {%- for entry in site.data.toc.horizontalnav -%}
+          <li><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
+        {%- endfor -%}
         </ul>
     </div>
     <div class="ctrl-right">
-        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="Current page's menu toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
     </div>
 </div>

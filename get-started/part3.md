@@ -16,13 +16,13 @@ Work through the steps to build an image and run it as a containerized applicati
 
 At this point, you've built a containerized application described in [Part 2](part2.md) on your local development machine.
 
-The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" class="_”}, so they can be easily downloaded and run on any destination machine.
+The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_”}, so they can be easily downloaded and run on any destination machine.
 
 ## Set up your Docker Hub account
 
 If you don't have a Docker ID, follow these steps to create one. A Docker ID allows you to share images on Docker Hub.
 
-1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" class="_”} page.
+1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_”} page.
 
 2.  Fill out the form and submit to create your Docker ID.
 
@@ -61,7 +61,7 @@ Now let's create your first repository, and push your bulletin board image to Do
     docker push <Your Docker ID>/bulletinboard:1.0
     ```
 
-    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
+    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" rel="noopener" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
 
     > **Having trouble pushing?** Remember, you must be signed into Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
 

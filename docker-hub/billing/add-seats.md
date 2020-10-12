@@ -14,7 +14,7 @@ You can manage your Docker Hub subscription anytime by adding seats to your plan
 
 To add seats to a monthly plan:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
 2. Navigate to **Organizations** from the menu at the top of the page and then choose your organization.
 
@@ -35,7 +35,7 @@ To add seats to a monthly plan:
 
 To add monthly seats to an annual plan:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
 2. Navigate to **Organizations** from the menu at the top of the page and then choose your organization.
 

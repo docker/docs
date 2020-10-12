@@ -16,7 +16,7 @@ include examples of customizing the output format.
 
 >**Note**
 >
-> Whe using the `--format` flag, you need observe your shell environment. 
+> When using the `--format` flag, you need observe your shell environment. 
 > In a Posix shell, you can run the following with a single quote:
 >
 > {% raw %}
