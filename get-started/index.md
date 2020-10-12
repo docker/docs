@@ -117,7 +117,7 @@ Docker Desktop is an easy-to-install application for your Mac or Windows environ
 
 Follow the instructions appropriate for your operating system to download and install Docker Desktop.
 
- [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}{: .button .outline-btn} [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}{: .button .outline-btn}
+ [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn} [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" rel="noopener" class="_"}{: .button .outline-btn}
 
 ### Test Docker version
 
@@ -130,7 +130,7 @@ Docker version 19.03.13, build 4484c46d9d
 
 ### Test Docker installation
 
-1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
+1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" rel="noopener" class="_"} Docker image:
 
     ```shell
         $ docker run hello-world

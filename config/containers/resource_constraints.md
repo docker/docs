@@ -48,7 +48,7 @@ number on the daemon or a container, or by setting `--oom-kill-disable` on a
 container.
 
 For more information about the Linux kernel's OOM management, see
-[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" class="_" }.
+[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" rel="noopener" class="_" }.
 
 You can mitigate the risk of system instability due to OOME by:
 

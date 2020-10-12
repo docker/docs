@@ -8,9 +8,9 @@ redirect_from:
 
 Welcome to Docker Desktop Enterprise. This page contains information about the Docker Desktop Enterprise (DDE) release. For information about Docker Desktop Community, see:
 
-- [Docker Desktop for Mac (Community)](/docker-for-mac/){: target="_blank" class="_"}
+- [Docker Desktop for Mac (Community)](/docker-for-mac/){: target="_blank" rel="noopener" class="_"}
 
-- [Docker Desktop for Windows (Community)](/docker-for-windows/){: target="_blank" class="_"}
+- [Docker Desktop for Windows (Community)](/docker-for-windows/){: target="_blank" rel="noopener" class="_"}
 
 Docker Desktop Enterprise provides local development, testing, and building of Docker applications on Mac and Windows. With work performed locally, developers can leverage a rapid feedback loop before pushing code or Docker images to shared servers / continuous integration infrastructure.
 

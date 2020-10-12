@@ -41,4 +41,4 @@ be copied across manually.
 
 Whether or not you migrate your Docker Toolbox images, you may decide to
 uninstall it. For details on how to perform a clean uninstall of Toolbox,
-see [How to uninstall Toolbox](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" class="_"}.
+see [How to uninstall Toolbox](../toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox){: target="_blank" rel="noopener" class="_"}.

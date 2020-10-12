@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 The Google Cloud Logging driver sends container logs to
-[Google Cloud Logging](https://cloud.google.com/logging/docs/){: target="_blank" class="_" }
+[Google Cloud Logging](https://cloud.google.com/logging/docs/){: target="_blank" rel="noopener" class="_" }
 Logging.
 
 ## Usage
@@ -43,11 +43,11 @@ This log driver does not implement a reader so it is incompatible with
 
 If Docker detects that it is running in a Google Cloud Project, it discovers
 configuration from the
-[instance metadata service](https://cloud.google.com/compute/docs/metadata){: target="_blank" class="_"}.
+[instance metadata service](https://cloud.google.com/compute/docs/metadata){: target="_blank" rel="noopener" class="_"}.
 Otherwise, the user must specify
 which project to log to using the `--gcp-project` log option and Docker
 attempts to obtain credentials from the
-[Google Application Default Credential](https://developers.google.com/identity/protocols/application-default-credentials){: target="_blank" class="_"}.
+[Google Application Default Credential](https://developers.google.com/identity/protocols/application-default-credentials){: target="_blank" rel="noopener" class="_"}.
 The `--gcp-project` flag takes precedence over information discovered from the
 metadata server so a Docker daemon running in a Google Cloud Project can be
 overridden to log to a different Google Cloud Project using `--gcp-project`.

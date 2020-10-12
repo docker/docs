@@ -6,7 +6,7 @@ redirect_from:
 - /docker-hub/billing/faq/
 ---
 
-On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
+On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories.
 
 Existing Docker customers subscribed to a paid plan before May 14, 2020 must upgrade to the new Pro or Team plan by January 31, 2021. Starting with May 14, 2020, new customers who sign up for Docker can choose between the new Free, Pro, and Team plans.
 
@@ -30,9 +30,9 @@ The **Team** plan includes unlimited public and unlimited private repositories s
 
 The **Free Team** plan includes unlimited public repositories at no cost per month. This plan also offers advanced collaboration and management tools, including organization and team management with role-based access controls which are limited to 1 team and 3 team members.
 
-For detailed information about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" class="_"}.
+For detailed information about the features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
-For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" class="_"}.
+For frequently asked questions about pricing, see [Docker pricing FAQ](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 
 ### Purchase a Pro plan
 
@@ -40,7 +40,7 @@ The following section contains information on how to purchase a Pro plan for new
 
 To purchase a Pro plan:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
 2. The Docker Hub **Pricing** page displays information about the new pricing plans.
 
@@ -62,7 +62,7 @@ The following section contains information on how to purchase a Team plan for ne
 
 To purchase a Team plan:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
 2. The Docker Hub **Pricing** page displays information about the new pricing plans.
 
