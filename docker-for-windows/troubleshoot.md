@@ -186,7 +186,7 @@ In the subsequent screen, verify that Hyper-V is enabled:
 #### Hyper-V driver for Docker Machine
 
 The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
-[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" class="_"},
+[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"},
 and the [Microsoft Hyper-V driver](../machine/drivers/hyper-v.md) to create local
 virtual machines. _This is tangential to using Docker Desktop_, but if you want to use Docker Machine
 to create multiple local Virtual Machines (VMs), or to provision remote machines, see the

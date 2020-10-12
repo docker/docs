@@ -516,7 +516,7 @@ the service's task containers.
   because they are mounted in a temporary filesystem, so if you set the writable
   bit, it is ignored. The executable bit can be set. If you aren't familiar with
   UNIX file permission modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 
 The following example sets the name of `my_config` to `redis_config` within the
@@ -902,7 +902,7 @@ services or containers in a swarm.
 on non swarm deployments, use
 [Compose file format version 2 CPU, memory, and other resource options](compose-file-v2.md#cpu-and-other-resources).
 If you have further questions, refer to the discussion on the GitHub
-issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" class="_"}.
+issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" rel="noopener" class="_"}.
 {: .important}
 
 ##### Out Of Memory Exceptions (OOME)
@@ -1773,7 +1773,7 @@ the service's task containers.
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
   useful.
 
 The following example sets name of the `my_secret` to `redis_secret` within the

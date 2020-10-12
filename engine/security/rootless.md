@@ -134,7 +134,7 @@ testuser:231072:65536
 
 ## Install
 
-The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" class="_" }.
+The installation script is available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
 
 ```console
 $ curl -fsSL https://get.docker.com/rootless | sh
@@ -166,7 +166,7 @@ export DOCKER_HOST=unix:///run/user/1001/docker.sock
 
 To install the binaries manually without using the installer, extract
 `docker-rootless-extras-<version>.tgz` along with `docker-<version>.tgz`
-from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" class="_" }
+from [https://download.docker.com/linux/static/stable/x86\_64/](https://download.docker.com/linux/static/stable/x86_64/){: target="_blank" rel="noopener" class="_" }
 
 If you already have the Docker daemon running as the root, you only need to
 extract `docker-rootless-extras-<version>.tgz`. The archive can be extracted
