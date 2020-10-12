@@ -93,11 +93,12 @@ to link them together and expose the web app's port.
 With those files in place, you can now generate the Rails skeleton app
 using [docker-compose run](reference/run.md):
 
-    docker-compose run web rails new . --force --no-deps --database=postgresql
+    docker-compose run --no-deps web rails new . --force --database=postgresql
 
-First, Compose builds the image for the `web` service using the
-`Dockerfile`. Then it runs `rails new` inside a new container, using that
-image. Once it's done, you should have generated a fresh app.
+First, Compose builds the image for the `web` service using the `Dockerfile`.
+The `--no-deps` tells Compose not to start linked services. Then it runs
+`rails new` inside a new container, using that image. Once it's done, you
+should have generated a fresh app.
 
 List the files.
 
