@@ -45,7 +45,7 @@ add an explicit signal handler for `SIGTERM`.
         stop_signal: SIGINT
 
 * If you can't modify the application, wrap the application in a lightweight init
-system (like [s6](http://skarnet.org/software/s6/)) or a signal proxy (like
+system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
 [tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
 handling `SIGTERM` properly.
@@ -79,7 +79,7 @@ containers.
 
 ## Can I use json instead of yaml for my Compose file?
 
-Yes. [Yaml is a superset of json](http://stackoverflow.com/a/1729545/444646) so
+Yes. [Yaml is a superset of json](https://stackoverflow.com/a/1729545/444646) so
 any JSON file should be valid Yaml.  To use a JSON file with Compose,
 specify the filename to use, for example:
 

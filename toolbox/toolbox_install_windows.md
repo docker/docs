@@ -71,7 +71,7 @@ To verify your machine meets these requirements, do the following:
     <br>
     **For Windows 7**
 
-    Run a tool like the [Microsoft® Hardware-Assisted Virtualization Detection Tool](http://www.microsoft.com/en-us/download/details.aspx?id=592){: target="_blank" rel="noopener" class="_"} or [Speccy](https://www.piriform.com/speccy){: target="_blank" rel="noopener" class="_"}, and follow the on-screen instructions.
+    Run a tool like the [Microsoft® Hardware-Assisted Virtualization Detection Tool](https://www.microsoft.com/en-us/download/details.aspx?id=592){: target="_blank" rel="noopener" class="_"} or [Speccy](https://www.piriform.com/speccy){: target="_blank" rel="noopener" class="_"}, and follow the on-screen instructions.
     <br><br>
 3. Verify your Windows OS is 64-bit (x64)
 

@@ -4,7 +4,7 @@ keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Command-line completion
 ---
 
-Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
+Compose comes with [command completion](https://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 
 ## Install command completion

@@ -261,7 +261,7 @@ service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
 services on the same network. For instance, if you have a
-[WordPress service that stores its data in a MySQL service](http://training.play-with-docker.com/swarm-service-discovery/),
+[WordPress service that stores its data in a MySQL service](https://training.play-with-docker.com/swarm-service-discovery/),
 and they are connected to the same overlay network, you do not need to publish
 the MySQL port to the client, only the WordPress HTTP port.
 

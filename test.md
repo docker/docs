@@ -327,7 +327,7 @@ This image was originally created on a white background and converted to a trans
 ## Bootstrap and CSS tricks
 
 Here are cool components you can include on Docs pages using
-[Bootstrap](http://getbootstrap.com/) and [CSS](https://www.w3schools.com/css/).
+[Bootstrap](https://getbootstrap.com) and [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS).
 
 ### Tabs
 
@@ -736,7 +736,7 @@ end
 
 Warning: Syntax highlighting breaks easily for JSON if the code you present is
 not a valid JSON document. Try running your snippet through [this
-linter](http://jsonlint.com/) to make sure it's valid, and remember: there is no
+linter](https://jsonlint.com) to make sure it's valid, and remember: there is no
 syntax for comments in JSON!
 
 ```json

@@ -29,7 +29,7 @@ This page contains information about the system requirements and specific instru
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
 
-  - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+  - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
 
   - 4GB system RAM
 

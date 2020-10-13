@@ -195,7 +195,7 @@ combination with the routing mesh or without using the routing mesh at all.
 ### Using the routing mesh
 
 You can configure an external load balancer to route requests to a swarm
-service. For example, you could configure [HAProxy](http://www.haproxy.org) to
+service. For example, you could configure [HAProxy](https://www.haproxy.org) to
 balance requests to an nginx service published to port 8080.
 
 ![ingress with external load balancer image](images/ingress-lb.png)

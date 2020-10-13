@@ -184,7 +184,7 @@ using `pip`, we recommend that you use a
 [virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating
 systems have python system packages that conflict with docker-compose
 dependencies. See the [virtualenv
-tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/) to get
+tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 
 ```bash

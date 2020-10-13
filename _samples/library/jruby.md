@@ -8,10 +8,10 @@ hide_from_sitemap: true
 redirect_from:
 - /samples/jruby/
 description: |
-  JRuby (http://www.jruby.org) is an implementation of Ruby (http://www.ruby-lang.org) on the JVM.
+  JRuby (https://www.jruby.org) is an implementation of Ruby (https://www.ruby-lang.org/en/) on the JVM.
 ---
 
-JRuby (http://www.jruby.org) is an implementation of Ruby (http://www.ruby-lang.org) on the JVM.
+JRuby (https://www.jruby.org) is an implementation of Ruby (https://www.ruby-lang.org/en/) on the JVM.
 
 
 {% include library-samples.md %}
