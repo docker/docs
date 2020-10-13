@@ -4,7 +4,7 @@ keywords: fig, composition, compose, versions, upgrading, docker
 title: Compose file versions and upgrading
 ---
 
-The Compose file is a [YAML](http://yaml.org/) file defining services,
+The Compose file is a [YAML](https://yaml.org) file defining services,
 networks, and volumes for a Docker application.
 
 The Compose file formats are now described in these references, specific to each version.

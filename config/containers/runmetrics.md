@@ -177,7 +177,7 @@ Those times are expressed in ticks of 1/100th of a second, also called "user
 jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 `USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
 "ticks" per second, but higher frequency scheduling and
-[tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
+[tickless kernels](https://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
 
 #### Block I/O metrics

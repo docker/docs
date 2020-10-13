@@ -143,7 +143,7 @@ Compose file.
 
 ## Service configuration reference
 
-The Compose file is a [YAML](http://yaml.org/) file defining
+The Compose file is a [YAML](https://yaml.org) file defining
 [services](#service-configuration-reference),
 [networks](#network-configuration-reference) and
 [volumes](#volume-configuration-reference).

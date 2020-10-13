@@ -9,9 +9,9 @@ title: Fluentd logging driver
 ---
 
 The `fluentd` logging driver sends container logs to the
-[Fluentd](http://www.fluentd.org/) collector as structured log data. Then, users
+[Fluentd](https://www.fluentd.org) collector as structured log data. Then, users
 can use any of the [various output plugins of
-Fluentd](http://www.fluentd.org/plugins) to write these logs to various
+Fluentd](https://www.fluentd.org/plugins) to write these logs to various
 destinations.
 
 In addition to the log message itself, the `fluentd` log
@@ -133,8 +133,8 @@ Generates event logs in nanosecond resolution. Defaults to `false`.
 
 ## Fluentd daemon management with Docker
 
-About `Fluentd` itself, see [the project webpage](http://www.fluentd.org)
-and [its documents](http://docs.fluentd.org/).
+About `Fluentd` itself, see [the project webpage](https://www.fluentd.org)
+and [its documents](https://docs.fluentd.org).
 
 To use this logging driver, start the `fluentd` daemon on a host. We recommend
 that you use [the Fluentd docker

@@ -561,9 +561,9 @@ generate the site key and certificate, name the files `site.key` and
     working. Further configuration is required.</p>
 
     <p>For online documentation and support. refer to
-    <a href="http://nginx.org/">nginx.org</a>.<br/>
+    <a href="https://nginx.org">nginx.org</a>.<br/>
     Commercial support is available at
-    <a href="http://nginx.com/">nginx.com</a>.</p>
+    <a href="https://www.nginx.com">nginx.com</a>.</p>
 
     <p><em>Thank you for using nginx.</em></p>
     </body>

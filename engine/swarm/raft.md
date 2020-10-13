@@ -31,7 +31,7 @@ cope with failures if the manager set is not healthy.
 The implementation of the consensus algorithm in swarm mode means it features
 the properties inherent to distributed systems:
 
-- *agreement on values* in a fault tolerant system. (Refer to [FLP impossibility theorem](http://the-paper-trail.org/blog/a-brief-tour-of-flp-impossibility/)
+- *agreement on values* in a fault tolerant system. (Refer to [FLP impossibility theorem](https://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/)
  and the [Raft Consensus Algorithm paper](https://www.usenix.org/system/files/conference/atc14/atc14-paper-ongaro.pdf))
 - *mutual exclusion* through the leader election process
 - *cluster membership* management
