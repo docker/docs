@@ -1,13 +1,30 @@
 ---
 layout: null
 ---
-var pages = [{% assign firstPage = "yes" %}
-{% for page in site.pages %}{% if page.title and page.hide_from_sitemap != true %}{% if firstPage == "no" %},{% else %}{% assign firstPage = "no" %}{% endif %}
-{
-"url":{{ page.url | jsonify }},
-"title":{{ page.title | jsonify }},
-"description":{{ page.description | jsonify }},
-"keywords":{{ page.keywords | jsonify }}
-}
-{% endif %}{% endfor %}
-]
+const pages = [
+{%- for page in site.html_pages -%}
+    {%- if page.hide_from_sitemap != nil or page.notoc != nil -%}
+        {%- continue -%}
+    {%- endif -%}
+    {%- assign page_title = nil -%}
+    {%- assign page_description = nil -%}
+    {%- if page.title == nil and page.content and page.content contains '<h1' -%}
+        {%- assign a = page.content | split: '<h1' | last -%}
+        {%- assign b = a | split: '</h1' | first -%}
+        {%- assign c = b | split: '>' | last -%}
+        {%- assign page_title = c | strip_html | strip | truncatewords: 10 -%}
+    {%- endif -%}
+    {%- if page.description == nil and page.datafile != nil and page.datafile != '' -%}
+        {%- assign yaml_data = site.data[page.datafolder][page.datafile] -%}
+        {%- if yaml_data.long and yaml_data.long != '' -%}
+            {%- assign page_description = page.title | append: ': ' | append: yaml_data.long | strip_html | strip | truncatewords: 30 -%}
+        {%- elsif yaml_data.short and yaml_data.short != '' -%}
+            {%- assign page_description = page.title | append: ': ' | append: yaml_data.short | strip_html | strip | truncatewords: 30 -%}
+        {%- elsif page.content and page.content != '' -%}
+            {%- assign page_description = page.content | strip_html | strip | truncatewords: 30 -%}
+        {%- endif -%}
+    {%- endif -%}
+    {%- if page.title == nil and page_title == nil -%}{%- continue -%}{%- endif %}
+{"url":{{ page.url | jsonify }},"title":{{ page.title | default: page_title | jsonify }},"description":{{ page.description | default: page_description | jsonify }},"keywords":{{ page.keywords | jsonify }}},
+{%- endfor %}
+{}]
