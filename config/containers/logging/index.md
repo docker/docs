@@ -20,7 +20,7 @@ may include input from the keyboard or input from another command. `STDOUT` is
 usually a command's normal output, and `STDERR` is typically used to output
 error messages. By default, `docker logs` shows the command's `STDOUT` and
 `STDERR`. To read more about I/O and Linux, see the
-[Linux Documentation Project article on I/O redirection](http://www.tldp.org/LDP/abs/html/io-redirection.html).
+[Linux Documentation Project article on I/O redirection](https://tldp.org/LDP/abs/html/io-redirection.html).
 
 In some cases, `docker logs` may not show useful information unless you take
 additional steps.

@@ -97,7 +97,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Bug fixes and minor changes
 
-- Fixed a privilege escalation vulnerability in `com.docker.vmnetd`. See [CVE-2020-15360](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15360)
+- Fixed a privilege escalation vulnerability in `com.docker.vmnetd`. See [CVE-2020-15360](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15360)
 - Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594)
 - Fix an incompatibility between `hyperkit` and [osquery](https://osquery.io) which resulted in excessive `hyperkit` CPU usage. See [docker/for-mac#3499](https://github.com/docker/for-mac/issues/3499#issuecomment-619544836)
 - Dashboard: Fixed containers logs which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954)

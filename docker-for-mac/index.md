@@ -12,6 +12,8 @@ redirect_from:
 - /mac/started/
 - /mackit/
 - /mackit/getting-started/
+- /docker-for-mac/osxfs/
+- /docker-for-mac/osxfs-caching/
 title: Docker Desktop for Mac user manual
 toc_min: 1
 toc_max: 2
@@ -284,8 +286,7 @@ certificates](#directory-structures-for-certificates).
 
 For a complete explanation of how to do this, see the blog post [Adding
 Self-signed Registry Certs to Docker & Docker Desktop for
-Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/){:target="_blank"
-class="_"}.
+Mac](https://blog.container-solutions.com/adding-self-signed-registry-certs-docker-mac){:target="_blank" rel="noopener" class="_"}.
 
 ### Add client certificates
 
@@ -359,7 +360,7 @@ Bash has [built-in support for
 completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1){:target="_blank"
 class="_"} To activate completion for Docker commands, these files need to be
 copied or symlinked to your `bash_completion.d/` directory. For example, if you
-installed bash via [Homebrew](http://brew.sh/):
+installed bash via [Homebrew](https://brew.sh):
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
@@ -384,10 +385,10 @@ fi
 ### Zsh
 
 In Zsh, the [completion
-system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank"
-class="_"} takes care of things. To activate completion for Docker commands,
+system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank" rel="nooopener" class="_"}
+takes care of things. To activate completion for Docker commands,
 these files need to be copied or symlinked to your Zsh `site-functions/`
-directory. For example, if you installed Zsh via [Homebrew](http://brew.sh/):
+directory. For example, if you installed Zsh via [Homebrew](https://brew.sh){:target="_blank" rel="nooopener" class="_"}:
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc

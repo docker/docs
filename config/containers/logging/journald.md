@@ -8,7 +8,7 @@ title: Journald logging driver
 ---
 
 The `journald` logging driver sends container logs to the
-[`systemd` journal](http://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
+[`systemd` journal](https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
 Log entries can be retrieved using the `journalctl` command, through use of the
 `journal` API, or using the `docker logs` command.
 

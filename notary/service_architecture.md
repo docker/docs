@@ -97,7 +97,7 @@ server, and signer:
 ![Notary Service Sequence Diagram](https://cdn.rawgit.com/docker/notary/27469f01fe244bdf70f34219616657b336724bc3/docs/images/metadata-sequence.svg)
 
 1.  Notary server optionally supports authentication from clients using
-    [JWT](http://jwt.io/){:target="_blank" rel="noopener" class="_"} tokens. This requires an
+    [JWT](https://jwt.io){:target="_blank" rel="noopener" class="_"} tokens. This requires an
     authorization server that manages access controls, and a cert bundle from this
     authorization server containing the public key it uses to sign tokens.
 

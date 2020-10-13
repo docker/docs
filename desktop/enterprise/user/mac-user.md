@@ -403,7 +403,7 @@ installed both in Bash and Zsh.
 
 Bash has [built-in support for completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1). To activate completion for Docker commands, these files need to be
 copied or symlinked to your `bash_completion.d/` directory. For example, if you have
-installed bash through [Homebrew](http://brew.sh/).
+installed bash through [Homebrew](https://brew.sh).
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
@@ -416,7 +416,7 @@ ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d
 In Zsh, the [completion
 system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html) takes care of things. To activate completion for Docker commands,
 these files need to be copied or symlinked to your Zsh `site-functions/`
-directory. For example, if you installed Zsh through [Homebrew](http://brew.sh/):
+directory. For example, if you installed Zsh through [Homebrew](https://brew.sh):
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc

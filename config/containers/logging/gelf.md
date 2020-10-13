@@ -9,7 +9,7 @@ title: Graylog Extended Format logging driver
 
 The `gelf` logging driver is a convenient format that is understood by a number of tools such as
 [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and
-[Fluentd](http://www.fluentd.org/). Many tools use this format.
+[Fluentd](https://www.fluentd.org). Many tools use this format.
 
 In GELF, every log message is a dict with the following fields:
 
