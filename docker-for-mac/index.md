@@ -12,6 +12,8 @@ redirect_from:
 - /mac/started/
 - /mackit/
 - /mackit/getting-started/
+- /docker-for-mac/osxfs/
+- /docker-for-mac/osxfs-caching/
 title: Docker Desktop for Mac user manual
 toc_min: 1
 toc_max: 2
