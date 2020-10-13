@@ -82,19 +82,21 @@ function walkTree(tree) {
     }
 }
 
-function renderNav(docstoc) {
-    for (let i = 0; i < docstoc.horizontalnav.length; i++) {
-        if (docstoc.horizontalnav[i].path === pageURL || pageIsInSection(docstoc[docstoc.horizontalnav[i].node])) {
-            // This is the current section. Set the corresponding header-nav link
-            // to active, and build the left-hand (vertical) navigation
-            document.getElementById(docstoc.horizontalnav[i].node).closest("li").classList.add("active")
-            walkTree(docstoc[docstoc.horizontalnav[i].node]);
-            document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
+function renderNav() {
+    getJSON( "/js/toc.json", function( data ) {
+        for (const item of data.horizontalnav) {
+            if (item.path === pageURL || pageIsInSection(data[item.node])) {
+                // This is the current section. Set the corresponding header-nav link
+                // to active, and build the left-hand (vertical) navigation
+                _('#'+item.node).closest("li").classList.add("active")
+                walkTree(data[item.node]);
+                _("#jsTOCLeftNav").innerHTML = outputLetNav.join("");
+            }
         }
-    }
-    // Scroll the current menu item into view. We actually pick the item *above*
-    // the current item to give some headroom above
-    scrollMenuItem("#jsTOCLeftNav a.currentPage")
+        // Scroll the current menu item into view. We actually pick the item *above*
+        // the current item to give some headroom above
+        scrollMenuItem("#jsTOCLeftNav a.currentPage")
+    });
 }
 
 // Scroll the given menu item into view. We actually pick the item *above*
@@ -256,3 +258,5 @@ window.onload = function () {
         $('.nav-tabs > li > a[data-group="' + group + '"]').tab("show");
     });
 };
+
+ready(renderNav);
