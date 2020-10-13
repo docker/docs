@@ -191,4 +191,9 @@ function queryString()
     return vars;
 }
 
-$(document).ready(bindSearch);
+let pages = []
+
+ready(() => {
+    getJSON( "/js/metadata.json", data => pages = data);
+    bindSearch()
+})
