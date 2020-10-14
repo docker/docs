@@ -1,21 +1,16 @@
 /*
-*
-* Custom Content Docs  ******************************************
-*
-*/
-
-/*
-*
-* images
-*
-*/
+ * Images **********************************************************************
+ */
 
 .content img {
     display: block;
     max-width: 100%;
     height: auto;
 }
-/** code formatting **/
+
+/*
+ * Code formatting *************************************************************
+ */
 
 pre {
     background-color: #F5F8FA!important;
@@ -48,10 +43,8 @@ pre code {
 }
 
 /*
-*
-* Guides : components
-*
-*/
+ * Guides : components *********************************************************
+ */
 
 .component-container {
     padding: 0;

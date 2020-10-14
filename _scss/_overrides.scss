@@ -1,8 +1,6 @@
 /*
-*
-* Bootstrap Overrides ***********************************************************************
-*
-*/
+ * Bootstrap Overrides *********************************************************
+ */
 
 .nav-secondary-tabs .dropdown-btn {
     background: transparent;
@@ -100,10 +98,8 @@
 }
 
 /*
-*
-* Bootstrap expand/collapse accordions
-*
-*/
+ * Bootstrap expand/collapse accordions ****************************************
+ */
 
 .panel-heading .chevron:after {
     content: "\f0d8";
@@ -117,12 +113,9 @@
     background-color: #fafdfe;
 }
 
-
 /*
-*
-* override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-*
-*/
+ * override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ */
 .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
     color: #27343B!important;
     line-height: 23px!important;

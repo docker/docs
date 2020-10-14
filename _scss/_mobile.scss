@@ -1,8 +1,6 @@
 /*
-*
-* for rescaling  **********************************************************
-*
-*/
+ * for rescaling  **************************************************************
+ */
 
 @media only screen
     and (min-width : 376px)
@@ -70,10 +68,8 @@
 
 
 /*
-*
-* small displays mobile  **********************************************************
-*
-*/
+ * small displays mobile  **********************************************************
+ */
 
 /* Portrait and Landscape */
 @media only screen
@@ -118,10 +114,6 @@
     .header {
         height: 100px;
     }
-    /*.nav-secondary-tabs,
-    .nav-sidebar a {
-        color: #a8a8a8;
-    }*/
     .tabs {
         float: left;
         margin: 0;
@@ -143,7 +135,6 @@
     .sidebar,
     .sidebar-home {
         background-color: $bg-sidebar;
-        /*border-right: 1px solid rgba(204,204,204,0.29);*/
         top: 51px;
         left: 0;
         display: block;
@@ -237,9 +228,6 @@
     .main-content {
         padding: 0 10px;
     }
-    /*.nav-sidebar a {
-        color: #a8a8a8;
-    }*/
     .sidebar,
     .sidebar-home {
         background-color: $bg-sidebar;
@@ -265,10 +253,8 @@
 
 
 /*
-*
-* medium displays mobile  **********************************************************
-*
-*/
+ * medium displays mobile  *****************************************************
+ */
 
 
 @media only screen
@@ -338,8 +324,6 @@
 
 @media (max-width: 1024px) {
     .nav-secondary-tabs.affix-top {
-        /*background-color: $bg-secondary;
-        background-color: rgba(0,0,0,.05); */
         position: fixed;
         top: 0;
     }

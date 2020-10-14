@@ -1,9 +1,3 @@
-/*
-*
-* night mode
-*
-*/
-
 body.night {
     background-color: $bg-body-night;
     color: $body-text-night;
@@ -151,20 +145,6 @@ body.night {
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
     }
-    .hljs {
-        color: #f5f5f5!important;
-    }
-    .hljs-tag,
-    .hljs-name,
-    .hljs-attribute {
-        color: #e3e3f2!important;
-        font-weight: normal;
-    }
-    .hljs-keyword,
-    .hljs-selector-tag,
-    .hljs-subst {
-        color: #f5f5f5!important;
-    }
     div#autocompleteResults {
         background: $bg-search-results-night;
         border: 1px solid $black;
@@ -198,7 +178,7 @@ body.night {
         display: block;
         color: #bfabe5;
     }
-    /** for google results styles - forgive us css gods **/
+    /* for google results styles - forgive us css gods */
     .gsc-control-cse {
         border-color: #192837!important;
         background-color: #192837!important;
@@ -246,7 +226,7 @@ body.night {
     .footer_social_nav ul li a {
         background-color: #2f2f2f;
     }
-    /** force blockquote styles **/
+    /* force blockquote styles */
     blockquote.warning {
         color: #ff7e7a!important;
     }
@@ -259,18 +239,16 @@ body.night {
     blockquote.important p:first-child {
         color: #f5ac45!important;
     }
-    /** syntax highlighting **/
+
+    /* syntax highlighting */
     .highlight .nt {
         color: #e8a0e8;
     }
     .highlight .k {
         color: #da5ada;
     }
-    /*
-    *
-    * Primary Global Menu Overrides
-    *
-    */
+
+    /* Primary Global Menu Overrides */
     .dropdown-menu{
         background: $black;
     }
@@ -280,20 +258,11 @@ body.night {
     h6.dropdown-header {
         color: $white;
     }
-    /** apply to images with garbled text **/
+    /* apply to images with garbled text */
     img.white-bg {
         background-color: white;
     }
-}
 
-
-/*
-*
-* night mode component overrides
-*
-*/
-
-body.night {
     /* accordion */
     .panel {
         color: $body-text-night;
@@ -313,7 +282,8 @@ body.night {
         background: rgb(35, 54, 72);
         color: #bcbfc3;
     }
-    /** tabs **/
+
+    /* tabs */
     .nav-tabs {
         border-bottom: 1px solid #4f6071;
     }
