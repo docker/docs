@@ -16,6 +16,7 @@ exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.htm
 # Google Analytics, etc.
 # TODO these should only be set when building for production, or passed as an environment variable when building
 google_analytics: GTM-WL2QLG5
+polldaddy_id: 8453675
 
 
 # Component versions -- address like site.docker_ce_version
