@@ -40,9 +40,7 @@
     height: unset;
 }
 
-.columns,
-.col-body {
-    display: flex;
+.columns {
     flex-direction: column;
 }
 
@@ -51,6 +49,7 @@
 }
 
 .col-body {
+    display: flex;
     flex-direction: row;
     flex: 1;
     min-height: 555px;
@@ -77,14 +76,10 @@
 }
 
 .content {
-    padding: 80px 70px 20px 70px;
+    padding: 80px 20px 40px 40px;
     max-width: 1024px;
     min-width: 300px;
     min-height: 500px;
-}
-
-.main-content {
-    padding: 0 35px 25px 30px;
 }
 
 section.section {

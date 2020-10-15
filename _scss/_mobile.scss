@@ -6,13 +6,10 @@
     and (min-width : 376px)
     and (max-width : 1150px) {
     .nav-primary,
-    .hero-text,
-    .banner,
     ul.primary.nav.navbar-nav {
         display: none;
     }
-    .header,
-    .nav-secondary-tabs {
+    .header {
         height: 55px;
     }
     .tabs li a {
@@ -38,7 +35,7 @@
     h4 {
         font-size: 16px;
     }
-    .nav-secondary-tabs .search-form input[type=search] {
+    .nav-secondary .search-form input[type=search] {
         min-width: auto;
     }
     .nav-container,
@@ -61,9 +58,6 @@
         z-index: 100;
         background-color: $bg-sidebar;
     }
-    .main-content {
-        padding: 22px 35px 25px 30px;
-    }
   }
 
 
@@ -76,8 +70,6 @@
   and (min-device-width: 320px)
   and (max-device-width: 670px)  {
     .logo,
-    .hero-text,
-    .banner,
     .ctrl-right {
         display: none;///// CHECK THIS /////
     }
@@ -129,11 +121,7 @@
     .content {
         padding: 65px 25px;
     }
-    .main-content {
-        padding: 10px 25px;
-    }
-    .sidebar,
-    .sidebar-home {
+    .sidebar {
         background-color: $bg-sidebar;
         top: 51px;
         left: 0;
@@ -144,22 +132,8 @@
         position: fixed;
         width: 100%;
     }
-    .sidebar-home,
-    .sidebar-home .affix {
-        background: #192837;
-        width: 100%;
-    }
     .search-form {
         display: block!important;
-    }
-    .component-full {
-        text-align: center;
-    }
-    .component-full-copy {
-        width: 100%;
-    }
-    .component-full-icon {
-        float: none;
     }
     .top_footer {
         padding: 50px 0 35px;
@@ -171,12 +145,6 @@
   and (min-device-width: 320px)
   and (max-device-width: 372px)
   and (orientation: portrait) {
-    .nav-secondary-tabs {
-      > .container-fluid {
-        padding-left: 5px;
-        padding-right: 5px;
-      }
-    }
     .tabs {
       display: -webkit-box;
       display: -moz-box;
@@ -218,18 +186,13 @@
     h4 {
         font-size: 16px;
     }
-    .header,
-    .nav-secondary-tabs {
+    .header {
         height: 100px;
     }
     .content {
         padding: 120px 20px;
     }
-    .main-content {
-        padding: 0 10px;
-    }
-    .sidebar,
-    .sidebar-home {
+    .sidebar {
         background-color: $bg-sidebar;
         top: 51px;
         left: 0;
@@ -239,15 +202,6 @@
         overflow-y: auto;
         position: fixed;
         width: 100%;
-    }
-    .component-full {
-        text-align: center;
-    }
-    .component-full-copy {
-        width: 100%;
-    }
-    .component-full-icon {
-        float: none;
     }
 }
 
@@ -319,12 +273,5 @@
 
     .nav-sidebar.collapse {
         display: block;
-    }
-}
-
-@media (max-width: 1024px) {
-    .nav-secondary-tabs.affix-top {
-        position: fixed;
-        top: 0;
     }
 }

@@ -40,8 +40,7 @@ table>tbody>tr:nth-of-type(even) {
     background-color: #f7f7f7;
 }
 
-td,
-th {
+td {
     padding: 10px;
 }
 
@@ -54,6 +53,12 @@ td.th {
 
 thead {
     background: $table-head;
+}
+
+/* give tables some breathing room */
+.content table {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 i.fa.fa-indent,
@@ -91,15 +96,13 @@ img.inline {
     }
 }
 
-.nav-secondary-tabs .search-form input[type=search] {
+.nav-secondary input[type=search]
+{
     background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
     border: 0;
     box-shadow: none;
     color: #fff;
     border-radius: 0;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0 0 0 35px;
     width: 100%;
@@ -110,60 +113,20 @@ img.inline {
     box-shadow: 0;
 }
 
-input[type=text],
-.nav-secondary-tabs.affix input[type=text] {
-    background: #10628e;
-    border: 0;
-    margin: 0;
-}
-
-.nav-secondary-tabs .search-form input[type=search]:focus {
-    background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
-}
-
-.nav-secondary-tabs.affix input[type=search],
 input[type=text] {
+    margin: 0;
     background: rgba(0, 0, 0, 0.17) url(/images/search.png) no-repeat 10px 9px;
     border: 1px solid transparent;
     box-shadow: none;
     transition: all 0.2s ease;
 }
 
-.nav-secondary input[type=search] {
-    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
-    border: 0;
-    box-shadow: none;
-    color: #fff;
-    border-radius: 0;
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-    padding: 0 0 0 35px;
-}
-
 .nav-secondary .search-form input[type=search]:focus {
     background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
 }
 
-.search-form input[type=search]::-webkit-input-placeholder {
-    color: #fff;
-    opacity: 1;
-}
-
-.search-form input[type=search]:-moz-placeholder {
-    /* Firefox 18- */
-    color: #fff;
-    opacity: 1;
-}
-
-.search-form input[type=search]::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #fff;
-    opacity: 1;
-}
-
-.search-form input[type=search]:-ms-input-placeholder {
+.search-form input[type=search]::placeholder
+{
     color: #fff;
     opacity: 1;
 }
@@ -173,10 +136,8 @@ input[type=text] {
  */
 
 div#autocompleteResults {
-    display: none;
-}
+    display: none; /* toggled through javascript */
 
-div#autocompleteResults {
     background: #E6F5FD;
     border: 1px solid #eee;
     box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.28);
@@ -243,67 +204,13 @@ div#autocompleteResults span {
   margin: 0;
 }
 
-/*
- * google-Results  *************************************************************
- */
-
-input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
-    display: none!important;
-}
-
-
-@media print
-{
-    .footer
-    {
-        display: none !important;
-    }
-    .col-toc
-    {
-      display: none !important;
-    }
-    .col-nav
-    {
-      display: none !important;
-    }
-    .glyphicon-tags
-    {
-      display: none !important;
-    }
+@media print {
+    .col-nav,
+    .col-toc,
+    .footer,
+    .glyphicon-tags,
     .ratings-div
     {
       display: none !important;
     }
-}
-
-.alert-info {
-    border: 0 #bce8f1;
-    border-radius: 0;
-    background-color: #3F51B5!important;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 0;
-}
-
-.alert-info ul {
-  list-style-type: none;
-}
-
-.close {
-    float: right;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 1;
-    color: #fffdfd;
-    text-shadow: 0 1px 0 #fff;
-    filter: alpha(opacity=20);
-    opacity: .2;
-    margin: 10px 15px 0 0;
-}
-
-/* Make table headings  bold, give tables some breathing room */
-
-.content table {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
