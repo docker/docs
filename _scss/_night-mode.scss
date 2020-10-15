@@ -89,16 +89,21 @@ body.night {
     .toc-nav i.fa {
         color: $body-text-night;
     }
-    div#autocompleteResults {
+    #autocompleteResults {
         background: $bg-search-results-night;
         border: 1px solid $black;
-        color: $white;
+        //color: $white;
     }
-    .autocompleteList li {
-        color: #b4c3d2;
-    }
-    div#autocompleteResults span {
-        color: #b7a4de;
+    .autocompleteResult {
+        &.selected {
+            background-color: #1f262e;
+        }
+        li {
+            color: #b4c3d2;
+        }
+        span {
+          color: #b7a4de;
+        }
     }
 
     /* for google results styles - forgive us css gods */
