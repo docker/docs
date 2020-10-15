@@ -6,19 +6,6 @@ hide_from_sitemap: true
 
 For components and controls we are using [Bootstrap](https://getbootstrap.com)
 
-
-<!-- ### Dropdowns
-<div class="dropdown">
-  <a id="dLabel" data-target="#" href="https://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-    Dropdown trigger
-    <span class="caret"></span>
-  </a>
-
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-    ...
-  </ul>
-</div> -->
-
 ### Tooltips
 
 <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>

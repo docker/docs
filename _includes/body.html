@@ -33,8 +33,8 @@
                             </span>
                             {%- endif -%}
                             {%- endunless %}
-                            {%- if page.noratings != true -%}
-                            <div class="ratings-div"><div id="pd_rating_holder_8453675"></div></div>
+                            {%- if site.polldaddy_id and page.noratings != true -%}
+                            <div class="ratings-div"><div id="pd_rating_holder_{{ site.polldaddy_id }}"></div></div>
                             {%- endif -%}
                         </section>
                     </main>
@@ -52,22 +52,7 @@
                                         <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
                                         {%- endif -%}
                                         <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
-                                        <li>
-                                            <div class="toggle-mode">
-                                                <div class="icon">
-                                                    <i class="fa fa-sun-o" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="toggle-switch">
-                                                    <label class="switch">
-                                                        <input type="checkbox" id="switch-style">
-                                                        <div class="slider round"></div>
-                                                    </label>
-                                                </div>
-                                                <div class="icon">
-                                                    <i class="fa fa-moon-o" aria-hidden="true"></i>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        <li>{%- include theme-switch.html -%}</li>
                                     </ul>
                                 </div>
                                 {%- unless page.notoc -%}
@@ -88,29 +73,11 @@
         {% include footer.html %}
     </footer>
     <script>const pageURL = "{{ page.url }}";</script>
+    <script src="/js/theme-switcher.js"></script>
     <script defer src="/js/anchorlinks.js"></script>
-    <script defer src="/js/menu.js"></script>
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script defer src="/js/metadata.js"></script>
     <script defer src="/js/docs.js"></script>
-    <script defer src="/js/toc.js"></script>
     <script defer src="/js/search.js"></script>
-    <script>
-        PDRTJS_settings_8453675 = {
-            "id": "8453675",
-            "unique_id": "{{ page.path }}",
-            "title": "{{ page.title | default: page_title }}",
-            "permalink": "https://github.com/docker/docker.github.io/blob/master/{{ page.path }}"
-        };
-        (function (d, c, j) {
-            if (!document.getElementById(j)) {
-                var pd = d.createElement(c), s;
-                pd.id = j;
-                pd.src = ('https:' === document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
-                s = document.getElementsByTagName(c)[0];
-                s.parentNode.insertBefore(pd, s);
-            }
-        }(document, 'script', 'pd-rating-js'));
-    </script>
+    {%- include analytics/polldaddy.html -%}
 </body>

@@ -1,7 +1,7 @@
 ---
 layout: null
 ---
-const pages = [
+[
 {%- for page in site.html_pages -%}
     {%- if page.hide_from_sitemap != nil or page.notoc != nil -%}
         {%- continue -%}
