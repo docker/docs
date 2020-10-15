@@ -124,7 +124,7 @@ body.night {
         background: $bg-component-night;
         img {
           opacity: 1;
-          filter: grayscale(100%);
+          filter: grayscale(100%) brightness(2);
         }
     }
     .transparent-btn {
