@@ -45,6 +45,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   {%- comment -%}
+  We put these scripts in the head section, but use "defer" loading to allow the
+  browser to start loading them as soon as possible. Actual execution of deferred
+  scripts happens once the HTML is fully parsed.
+  see https://flaviocopes.com/javascript-async-defer/#with-defer-in-the-head
+  {%- endcomment -%}
+  {%- if page.landing == true -%}
+  <!-- landing page scripts -->
+  <script defer src="/js/theme-switcher.js"></script>
+  <script defer src="/js/jquery.js"></script>
+  <script defer src="/js/bootstrap.min.js"></script>
+  <script defer src="/js/search.js"></script>
+  {%- else -%}
+  <script defer src="/js/theme-switcher.js"></script>
+  <script defer src="/js/anchorlinks.js"></script>
+  <script defer src="/js/jquery.js"></script>
+  <script defer src="/js/bootstrap.min.js"></script>
+  <script defer src="/js/docs.js"></script>
+  <script defer src="/js/search.js"></script>
+  {%- endif -%}
+
+  {%- comment -%}
   preload fonts: https://www.freecodecamp.org/news/web-fonts-in-2018-f191a48367e8/
   we only preload the "woff2" variants, as older formats (woff, eot) are only used
   by older browsers, and we don't optimize for those.
