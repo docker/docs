@@ -43,10 +43,21 @@
   <meta name="theme-color" content="#2496ed" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {%- comment -%}
+  preload fonts: https://www.freecodecamp.org/news/web-fonts-in-2018-f191a48367e8/
+  we only preload the "woff2" variants, as older formats (woff, eot) are only used
+  by older browsers, and we don't optimize for those. For fontawesome we "prefetch"
+  to allow the browser to pre-heat the cache, but not load it if the page does not
+  use it.
+  {%- endcomment -%}
+  <link rel="prefetch" as="font" href="/fonts/fontawesome-webfont.woff2?v=4.7.0"     type="font/woff2" crossorigin="anonymous">
+  <link rel="preload"  as="font" href="/fonts/glyphicons-halflings-regular.woff2"    type="font/woff2" crossorigin="anonymous">
+  <link rel="preload"  as="font" href="/fonts/geomanist/hinted-Geomanist-Book.woff2" type="font/woff2" crossorigin="anonymous">
+
   <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css" id="pagestyle">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 
   <!-- SEO stuff -->
   <meta name="twitter:title" itemprop="title name" content="{{ page.title | default: page_title }}"/>
