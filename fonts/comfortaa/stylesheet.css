@@ -10,6 +10,7 @@
 		url('hinted-Comfortaa.svg#Comfortaa') format('svg');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -22,6 +23,7 @@
 		url('hinted-Comfortaa-Light.svg#Comfortaa-Light') format('svg');
 	font-weight: 300;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -34,4 +36,5 @@
 		url('hinted-Comfortaa-Bold.svg#Comfortaa-Bold') format('svg');
 	font-weight: bold;
 	font-style: normal;
+	font-display: swap;
 }
