@@ -22,7 +22,6 @@ is not supported by Docker nor is it eligible to become Certified.
 
 | If your content: | Can publish  | Can be Certified | Supported by publisher |
 |:-----|:--------|:------|:-----|
-| Works on Docker Enterprise  | YES | YES |  Required |
 | Works on Docker Community  | YES | NO  |  Optional |
 | Does not work on Docker Certified Infrastructure | NO                       |   N/A       |    N/A     |
 
@@ -72,11 +71,11 @@ Here are some best practices when it comes to building vulnerability-free Docker
 
 Many base images have a strong record of being secure, including:
 
-* [Debian](https://hub.docker.com/r/library/debian/tags/jessie/){: target="_blank" class="_"}
+* [Debian](https://hub.docker.com/r/library/debian/tags/jessie/){: target="_blank" rel="noopener" class="_"}
   Linux: both small and tightly-controlled, Debian-linux is a good alternative
   if you're currently using Ubuntu.
 
-* [Alpine](https://hub.docker.com/_/alpine/){: target="_blank" class="_"} Linux:
+* [Alpine](https://hub.docker.com/_/alpine/){: target="_blank" rel="noopener" class="_"} Linux:
   Alpine is a minimal linux distribution with an excellent security record.
 
 * Alpine-based application images: these include `python:alpine`, `ruby:alpine`,
@@ -185,84 +184,9 @@ response-time expectations, where applicable.
 
 ## Security and audit policies
 
-Docker Hub [scans](#docker-security-scanning) your content for
-vulnerabilities with the Docker Security Scanning tool, and
+Docker Hub
 [audits](#usage-audit-and-reporting) consumer activity of your images to provide
 you intelligence about the use of your product.
-
-### Docker Security Scanning
-
-Docker Security Scanning automatically and continuously assesses the integrity
-of your products. The Docker Security Scanning tool deconstructs an image,
-conducts a binary scan of the bits to identify the open-source components
-present in each image layer, and associates those components with known
-vulnerabilities and exposures.
-
-Docker then shares the scan results with you as the publisher, so that you can
-modify the content of your images as necessary. Your scan results are private,
-and are never shared with end customers or other publishers.
-
-#### Interpret results
-
-To interpret the results of a scanned image:
-
-1.  Log on to [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
-
-2.  Navigate to the repository details page (for example,
-    [nodejs](https://hub.docker.com/_/nodejs){: target="_blank" class="_"}).
-
-3.  Click **Tags**.
-
-    ![Scanned tags](images/image-tags.png)
-
-    In this section, you can now view the different architectures separately to
-    easily identify the right image for the architecture you need, complete
-    with image size and operating system information.
-
-    ![system info](images/node-tags-system-info.png)
-
-4.  Click on the digest for a particular architecture. You can now also see the
-actual source of the image: the layer-by-layer details that make up the image.
-
-    ![system info](images/node-tags-vulnerabilities.png)
-
-5.  Click on any row in the **Image History** list. You’ll see that the image contains multiple components, and that some of them have known vulnerabilities ranging from minor to critical. To explore further, click on the caret to expand and view all of the found vulnerabilities:
-
-    ![Scanned components](images/node-tags-vulnerability-details.png)
-
-Each vulnerability is linked directly to the CVE (Common Vulnerabilities and Exposures) list entry so that you can learn more about the CVE entry and its implications.
-
-#### Classification of issues
-
-* All Scan results include the CVE numbers and a CVSS (Common Vulnerability
-  Scoring System) Score.
-
-* CVE Identifiers (also referred to by the community as "CVE names," "CVE
-  numbers," "CVE entries," "CVE-IDs," and "CVEs") are unique identifiers for
-  publicly-known, cyber-security vulnerabilities.
-
-* The Common Vulnerability Scoring System (CVSS) provides an open
-  framework for communicating the characteristics and impacts of
-  IT vulnerabilities. Its quantitative model ensures repeatable,
-  accurate measurement while enabling users to see the underlying
-  vulnerability characteristics that were used to generate the scores.
-  As a result, CVSS is well-suited as a standard measurement system
-  for industries, organizations, and governments that need accurate
-  and consistent vulnerability-impact scores. CVSS is commonly used
-  to prioritize vulnerability-remediation activities, and calculate
-  the severity of vulnerabilities discovered on systems. The
-  National Vulnerability Database (NVD) provides CVSS scores for
-  almost all known vulnerabilities.
-
-* In addition to CVSS, the Docker Security team can identify or classify
-  vulnerabilities that need to be fixed, and categorize them in the
-  minor-to-critical range.
-
-* The publisher is presented with initial scan results, including all components
-  with their CVEs and their CVSS scores.
-
-* If you use Docker’s Scanning Service, you can subscribe to a notification
-  service for new vulnerabilities.
 
 ### Usage audit and reporting
 
@@ -300,7 +224,7 @@ additional suite of API compliance testing.
 Docker Certified Container images and plugins are meant to differentiate high
 quality content on Docker Hub. Customers can consume Certified Containers with
 confidence knowing that both Docker and the publisher stands behind the
-solution. Further details and an application can be [found here.](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}.
+solution. Further details and an application can be [found here.](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" rel="noopener" class="_"}.
 
 #### What are the benefits of Docker Certified?
 
@@ -322,7 +246,7 @@ for exchange of support tickets between the publisher and Docker.
 #### How does a publisher apply to the Docker Certified program?
 
 Start by applying to be a [Docker Technology
-Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" class="_"}
+Partner](https://goto.docker.com/2019-Partner-Program-Technology.html){: target="_blank" rel="noopener" class="_"}
 
 #### What is the difference between Official Images and Docker Certified?
 

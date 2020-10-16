@@ -10,7 +10,7 @@ title: Frequently asked questions (FAQ)
 
 You can download the Stable or the Edge version of Docker Desktop from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/).
 
-For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" class="_"}.
+For installation instructions, see [Install Docker Desktop on Windows](install.md){: target="_blank" rel="noopener" class="_"}.
 
 ### What is the difference between the Stable and Edge versions of Docker Desktop?
 
@@ -49,7 +49,7 @@ On Docker Desktop, clients can connect to the Docker Engine through a
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the
 given values (for the named pipe or TCP socket, whichever you use).
 
-See also [Docker Engine API](../engine/api/index.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" class="_"}.
+See also [Docker Engine API](../engine/api/index.md) and the Docker Desktop for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988){: target="_blank" rel="noopener" class="_"}.
 
 ### How do I connect from a container to a service on the host?
 
@@ -74,7 +74,7 @@ For more information and examples, see
 No, at this point, Docker Desktop does not enable you to control (`chmod`)
 the Unix-style permissions on [shared volumes](index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
-[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" class="_"}
+[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for 
 `group`) which is not configurable.
 
@@ -113,7 +113,7 @@ Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or 
 
 ### Can I use VirtualBox alongside Docker Desktop?
 
-Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" class="_"} feature on your machine.
+Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 
 ## Windows requirements
 
@@ -125,7 +125,7 @@ No, running Docker Desktop on Windows Server is not supported.
 
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" class="_"}.
+[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){: target="_blank" rel="noopener" class="_"}.
 
 ### Can I install Docker Desktop on Windows 10 Home?
 
@@ -157,11 +157,11 @@ functionality you'd like to see added.
 You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot.md) topic.
 
 If you do not find a solution in Troubleshooting, browse issues on
-[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" class="_"}
+[Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
 or create a new one. You can also create new issues based on diagnostics. To learn more, see
 [Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
 
-The [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" class="_"}
+The [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows){: target="_blank" rel="noopener" class="_"}
 contains discussion threads. You can also create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.

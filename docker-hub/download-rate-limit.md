@@ -6,12 +6,12 @@ title: Download rate limit
 
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
+For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
 A user's limit will be equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
 advantage of this, you must log into 
-[Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} 
+[Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
 Unauthenticated (anonymous) users will have the limits enforced via IP.
@@ -49,19 +49,19 @@ If you are running Docker Swarm, you must use the `-- with-registry-auth` flag t
 
 ### GitHub Actions
 
-If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
+If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" rel="noopener" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
 
 ### Kubernetes
 
-If you are running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" class="_"} for information on authentication.
+If you are running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" rel="noopener" class="_"} for information on authentication.
 
 ### Third-party platforms
 
 If you are using any third-party platforms, follow your provider’s instructions on using registry authentication.
 
-- [CircleCI](https://circleci.com/docs/2.0/private-images/){: target="_blank" class="_"}
-- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" class="_"}
-- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/){: target="_blank" class="_"}
-- [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker){: target="_blank" class="_"}
-- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html){: target="_blank" class="_"}
-- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" class="_"}
+- [CircleCI](https://circleci.com/docs/2.0/private-images/){: target="_blank" rel="noopener" class="_"}
+- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" rel="noopener" class="_"}
+- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/){: target="_blank" rel="noopener" class="_"}
+- [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker){: target="_blank" rel="noopener" class="_"}
+- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html){: target="_blank" rel="noopener" class="_"}
+- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" rel="noopener" class="_"}

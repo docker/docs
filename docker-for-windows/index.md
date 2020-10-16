@@ -150,7 +150,7 @@ If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
 
 ```ps
-> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
@@ -363,12 +363,12 @@ The Docker Desktop Dashboard enables you to interact with containers and applica
 
 ## Docker Hub
 
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
 
-For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" class="_" }:
+For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" rel="noopener" class="_" }:
 
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" class="_" }
-* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" class="_" }
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
+* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
 
 ### Two-factor authentication
 
@@ -433,8 +433,8 @@ in the Docker Engine topics.
 
 ## Where to go next
 
-* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" class="_"}.
+* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" rel="noopener" class="_"}.
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
-* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" class="_"}.
+* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" rel="noopener" class="_"}.

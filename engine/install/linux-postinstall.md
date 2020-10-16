@@ -424,7 +424,7 @@ To disable `dnsmasq` on RHEL, CentOS, or Fedora:
     ```
 
 2.  Configure the DNS servers manually using the
-    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" class="_"}.
+    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" rel="noopener" class="_"}.
 
 ### Allow access to the remote API through a firewall
 
@@ -436,7 +436,7 @@ otherwise.
 
 Two common firewall daemons are
 [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) (often
-used for Ubuntu systems) and [firewalld](http://www.firewalld.org/) (often used
+used for Ubuntu systems) and [firewalld](https://firewalld.org) (often used
 for RPM-based systems). Consult the documentation for your OS and firewall, but
 the following information might help you get started. These options are fairly
 permissive and you may want to use a different configuration that locks your

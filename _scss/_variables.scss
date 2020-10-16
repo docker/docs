@@ -1,7 +1,7 @@
 
 /*
-* global
-*/
+ * global
+ */
 $headings: "Geomanist Book", sans-serif;
 $font: "Open Sans", sans-serif;
 $body-text-size: 14px;
@@ -12,8 +12,8 @@ $black: #000;
 $clear: 0;
 
 /*
-* standard mode
-*/
+ * standard mode
+ */
 $body-text:     #33444c;
 $primary-links: #2496ed;
 
@@ -35,8 +35,8 @@ $table-head: #cfd2d4;
 
 
 /*
-* night mode
-*/
+ * night mode
+ */
 $body-text-night:     #d3d4d4;
 $primary-links-night: #9cd7f7;
 
@@ -46,6 +46,8 @@ $bg-secondary-night: #101c29;
 $bg-sidebar-night:   #101e26;
 $bg-footer-night:    #000000;
 
-$active-sidebar-night: #077CBC;
+$bg-component-night: #101c29;
+
+$active-sidebar-night: #9cd7f7;
 
 $bg-search-results-night: rgba(10, 10, 10, 0.95);

@@ -1,26 +1,8 @@
 /*
-*
-* Primary navigation - top header **********************************************************
-*
-*/
+ * Primary navigation - top header *********************************************
+ */
 .nav-container {
     height: 55px;
-}
-
-.primary {
-    padding: 5px 0 0 20px;
-}
-
-.nav-primary {
-    background: transparent;
-    max-width: 1024px;
-    margin: 0 auto;
-    a {
-        color: #fff;
-    }
-    li:nth-child(5n) {
-        padding-right: 50px;
-    }
 }
 
 .sidebar-toggle {
@@ -30,31 +12,8 @@
 }
 
 /*
-*
-* user-nav ***********************************************************************
-*
-*/
-
-.user-nav {
-    padding: 20px 0 0;
-    float: right;
-    ul {
-        li {
-            list-style-type: none;
-            display: inline;
-            padding-right: 10px;
-            a {
-                display: inline;
-            }
-        }
-    }
-}
-
-/*
-*
-* Secondary Navigation  **********************************************************
-*
-*/
+ * Secondary Navigation  *******************************************************
+ */
 
 .nav-secondary {
     background-color: $bg-secondary;
@@ -64,35 +23,8 @@
 
 
 /*
-*
-* nav-secondary-tabs  ***********************************************************************
-*
-*/
-
-.nav-secondary-tabs {
-    background-color: $bg-secondary-tabs;
-    bottom: 0;
-    height: 55px;
-    position: absolute;
-    width: 100%;
-    &.affix {
-        background-color: $bg-secondary;
-        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-        top: 0;
-        position: fixed;
-        z-index: 100;
-    }
-    .search-form {
-        margin: 5px 27px 0 -10px;
-        width: 240px;
-    }
-}
-
-/*
-*
-* NAV SIDEBAR ***********************************************************************
-*
-*/
+ * NAV SIDEBAR *****************************************************************
+ */
 
 // Some links don't have 'href' attr, hence no mouse pointer
 .nav-sidebar li a {
@@ -161,10 +93,6 @@
     margin-top: 10px;
 }
 
-.leftnav {
-    padding: 0 20px 20px 0;
-}
-
 /* pointer for collapsed sidebar list items */
 
 .collapsed
@@ -173,10 +101,8 @@
 }
 
 /*
-*
-* Table of contents menu  ***********************************************************************
-*
-*/
+ * Table of contents menu  *****************************************************
+ */
 
 .toc-toggle {
     width: 25px;
@@ -213,11 +139,6 @@
     color: $primary-links;
 }
 
-i.fa.fa-question {
-    font-size: 21px;
-    margin: 0 11px 0 0;
-}
-
 div#side-toc-title {
     font-size: 12px;
     font-weight: bold;
@@ -229,10 +150,8 @@ div#side-toc-title {
 }
 
 /*
-*
-* Toggle Switches **************************************************************
-*
-*/
+ * Toggle Switches *************************************************************
+ */
 
 .toggle-mode {
     float: left;
@@ -273,7 +192,6 @@ div#side-toc-title {
     bottom: 0;
     background-color: $slider-bg;
     border: 1px solid #c3e4f7;
-    // transition: 0.4s;
 }
 
 .slider:before {
@@ -284,7 +202,6 @@ div#side-toc-title {
     width: 15px;
     left: 2px;
     bottom: 1px;
-    // transition: 0.4s;
 }
 
 input:focus+.slider {
@@ -306,10 +223,8 @@ input:checked+.slider:before {
 
 
 /*
-*
-* Tabs ***********************************************************************
-*
-*/
+ * Tabs ************************************************************************
+ */
 #tabs {
     float: left;
     margin: 0;
@@ -319,10 +234,7 @@ input:checked+.slider:before {
     }
 }
 
-
-
 .tabs {
-
     li {
         float: left;
         list-style: none;
@@ -347,13 +259,11 @@ input:checked+.slider:before {
 }
 
 /*
-*
-* feedback links ***********************************************************************
-*
-*/
+ * feedback links **************************************************************
+ */
 
-#sidebar-right.affix .feedback-links {
-    margin: 50px 0 10px 0;
+.feedback-links {
+    margin: 0 0 10px 0;
 }
 
 /* polldaddy */
@@ -368,10 +278,8 @@ input:checked+.slider:before {
 }
 
 /*
-*
-* Controls ***********************************************************************
-*
-*/
+ * Controls ********************************************************************
+ */
 
 .ctrl-left {
     float: left;

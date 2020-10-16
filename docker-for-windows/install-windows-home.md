@@ -33,13 +33,13 @@ For detailed information about WSL 2, see [Docker Desktop WSL 2 backend](wsl.md)
 
 Windows 10 Home machines must meet the following requirements to install Docker Desktop:
 
-  - Install Windows 10, version 2004 or higher. The Docker Desktop Edge release also supports Windows 10, version 1903 or higher.
+  - Install Windows 10, version 1903 or higher.
   - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
   - The following hardware prerequisites are required to successfully run
 WSL 2 on Windows 10 Home:
 
-     - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
      - 4GB system RAM
     - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see

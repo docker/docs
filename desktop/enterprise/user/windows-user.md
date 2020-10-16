@@ -228,7 +228,7 @@ do not need to open port 445 on any other network.
 
 By default, allow connections to `10.0.75.1` on port 445 (the Windows host) from
 `10.0.75.2` (the virtual machine). If your firewall rules seem correct, you may
-need to toggle or [reinstall the File and Print sharing service on the Hyper-V virtual network card](http://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051).
+need to toggle or [reinstall the File and Print sharing service on the Hyper-V virtual network card](https://stackoverflow.com/questions/42203488/settings-to-windows-firewall-to-allow-docker-for-windows-to-share-drive/43904051#43904051).
 
 ##### Shared drives on demand
 

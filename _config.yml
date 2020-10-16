@@ -16,6 +16,7 @@ exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.htm
 # Google Analytics, etc.
 # TODO these should only be set when building for production, or passed as an environment variable when building
 google_analytics: GTM-WL2QLG5
+polldaddy_id: 8453675
 
 
 # Component versions -- address like site.docker_ce_version
@@ -71,6 +72,10 @@ defaults:
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
   - scope:
+      path: glossary
+    values:
+      edit_url: "https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml"
+  - scope:
       path: notary/reference
     values:
       edit_url: "https://github.com/theupdateframework/notary/tree/master/docs/reference"
@@ -87,18 +92,16 @@ defaults:
     values:
       edit_url: "https://github.com/mirantis/compliance/tree/master/docs/compliance"
 
-  # Hide Enterprise content from sitemap, and include banner in stubs that
-  # content has moved to mirantis
+  # Hide Enterprise content from sitemap. These directories still contains stubs
+  # that are needed to redirect old URLs
   - scope:
       path: "datacenter"
     values:
-      enterprise: true
       hide_from_sitemap: true
       title: Docker Enterprise moved to Mirantis
   - scope:
       path: "ee"
     values:
-      enterprise: true
       hide_from_sitemap: true
       title: Docker Enterprise moved to Mirantis
 

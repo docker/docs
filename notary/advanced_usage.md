@@ -117,14 +117,14 @@ without the `-r` flag.
 ### Use a Yubikey
 
 Notary can be used with
-[Yubikey 4](https://www.yubico.com/products/yubikey-hardware/yubikey4/){: target="_blank" class="_"}
+[Yubikey 4](https://www.yubico.com/products/yubikey-hardware/yubikey4/){: target="_blank" rel="noopener" class="_"}
 keys, via a PKCS11 interface when the Yubikey has CCID mode enabled.
 The Yubikey is prioritized to store root keys, and requires user
 touch-input for signing. Yubikey support is included with the Docker Engine 1.11
 client for use with Docker Content Trust.
 
 Yubikey support requires
-[Yubico PIV libraries](https://www.yubico.com/support/knowledge-base/categories/downloads/){: target="_blank" class="_"}
+[Yubico PIV libraries](https://www.yubico.com/support/knowledge-base/categories/downloads/){: target="_blank" rel="noopener" class="_"}
 (bundled with the PIV tools) to be available in standard library locations.
 
 ## Work with delegation roles

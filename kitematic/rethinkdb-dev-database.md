@@ -40,7 +40,7 @@ Now, create the RethinkDB example chat application running on your local
 macOS system to test drive your new containerized database.
 
 First, if you don't have it yet, [download and install
-Node.js](http://nodejs.org/).
+Node.js](https://nodejs.org/en/).
 
 > **Note**: This example needs Xcode installed.
 

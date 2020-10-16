@@ -13,7 +13,7 @@ You need an Azure Subscription to use this Docker Machine driver.
 > Azure driver. If you want to continue managing your existing Azure machines, please
 > download and use machine versions prior to v0.7.0.
 
-[azure]: http://azure.microsoft.com/
+[azure]: https://azure.microsoft.com/
 [trial]: https://azure.microsoft.com/free/
 
 ## Authentication

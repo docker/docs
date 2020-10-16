@@ -12,7 +12,7 @@ title: Frequently asked questions (FAQ)
 
 You can download the Stable or the Edge version of Docker Desktop from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/).
 
-For installation instructions, see [Install Docker Desktop on Mac](install.md){: target="_blank" class="_"}.
+For installation instructions, see [Install Docker Desktop on Mac](install.md){: target="_blank" rel="noopener" class="_"}.
 
 ### What is the difference between the Stable and Edge versions of Docker Desktop?
 
@@ -50,9 +50,9 @@ On Docker Desktop, clients can connect to the Docker Engine through a Unix
 socket: `unix:///var/run/docker.sock`.
 
 See also [Docker Engine API](../engine/api/index.md) and Docker Desktop for Mac forums topic
-[Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" class="_"}.
+[Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" rel="noopener" class="_"}.
 
-If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" class="_"}
+If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" rel="noopener" class="_"}
 that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
 variables, specify these to connect to Docker instances through Unix sockets.
 For example:
@@ -138,10 +138,10 @@ functionality you'd like to see added.
 You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot) topic.
 
 If you do not find a solution in Troubleshooting, browse issues on
-[Docker Desktop for Mac issues on GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} or create a new one. You can also create new issues based on diagnostics. To learn more, see
+[Docker Desktop for Mac issues on GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} or create a new one. You can also create new issues based on diagnostics. To learn more, see
 [Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
 
-The [Docker Desktop for Mac forum](https://forums.docker.com/c/docker-for-mac){: target="_blank" class="_"}
+The [Docker Desktop for Mac forum](https://forums.docker.com/c/docker-for-mac){: target="_blank" rel="noopener" class="_"}
 provides discussion threads as well, and you can create discussion topics there,
 but we recommend using the GitHub issues over the forums for better tracking and
 response.

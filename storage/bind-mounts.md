@@ -307,7 +307,7 @@ Before you can set bind propagation on a mount point, the host filesystem needs
 to already support bind propagation.
 
 For more information about bind propagation, see the
-[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" class="_"}.
+[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" rel="noopener" class="_"}.
 
 The following example mounts the `target/` directory into the container twice,
 and the second mount sets both the `ro` option and the `rslave` bind propagation

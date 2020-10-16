@@ -142,8 +142,8 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Upgrades
 
-- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" class="_”}
-- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: target="_blank" class="_”}
+- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" rel="noopener" class="_”}
+- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: target="_blank" rel="noopener" class="_”}
 
 ### Bug fixes and minor changes
 
@@ -157,8 +157,8 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Upgrades
 
-- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
-- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" class="_”}
+- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" rel="noopener" class="_”}
+- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" rel="noopener" class="_”}
 
 ### Bug fixes and minor changes
 
@@ -213,9 +213,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
 
-We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} repository with the `Mutagen` label.
+We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} repository with the `Mutagen` label.
 
 ### Upgrades
 
@@ -2078,7 +2078,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Upgrades**
 
-* docker-compose 1.7.1 (see [changelog](https://github.com/docker/compose/releases/tag/1.7.1){: target="_blank" class="_" })
+* docker-compose 1.7.1 (see [changelog](https://github.com/docker/compose/releases/tag/1.7.1){: target="_blank" rel="noopener" class="_" })
 * Linux kernel 4.4.9
 
 **Bug fixes and minor changes**

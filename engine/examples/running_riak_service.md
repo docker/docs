@@ -96,6 +96,6 @@ Now you can build a Docker image for Riak:
 
 Riak is a distributed database. Many production deployments consist of
 [at least five nodes](
-http://basho.com/why-your-riak-cluster-should-have-at-least-five-nodes/).
+https://riak.com/why-your-riak-cluster-should-have-at-least-five-nodes/).
 See the [docker-riak](https://github.com/hectcastro/docker-riak) project
 details on how to deploy a Riak cluster using Docker and Pipework.

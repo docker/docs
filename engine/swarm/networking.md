@@ -15,7 +15,7 @@ A Docker swarm generates two different kinds of traffic:
 
 This topic discusses how to manage the application data for your swarm services.
 For more details about swarm networking in general, see the
-[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }.
+[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" rel="noopener" class="_" }.
 
 The following three network concepts are important to swarm services:
 
@@ -261,7 +261,7 @@ service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
 services on the same network. For instance, if you have a
-[WordPress service that stores its data in a MySQL service](http://training.play-with-docker.com/swarm-service-discovery/),
+[WordPress service that stores its data in a MySQL service](https://training.play-with-docker.com/swarm-service-discovery/),
 and they are connected to the same overlay network, you do not need to publish
 the MySQL port to the client, only the WordPress HTTP port.
 
@@ -417,4 +417,4 @@ $ docker swarm join \
 * [Swarm administration guide](admin_guide.md)
 * [Docker CLI reference](../reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
-* [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }
+* [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" rel="noopener" class="_" }

@@ -13,7 +13,7 @@ This page contains information on installing Docker Desktop on Windows 10 Pro, E
 Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
 .button .outline-btn}
 
-By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
 ## What to know before you install
 
@@ -26,7 +26,7 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
   - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
 
-     - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
      - 4GB system RAM
     - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see

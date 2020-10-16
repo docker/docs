@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: home
 - title: Guides
-  path: /get-started/
+  path: /get-started/overview/
   node: guides
 - title: Product manuals
   path: /engine/
@@ -15,6 +15,8 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
+  # TODO unify navbbar links: homepage currently has a custom "articles" link
+  hide_home: true
 
 home: {}
 
@@ -1158,10 +1160,6 @@ manuals:
       title: Leveraging Multi-CPU architecture support
     - path: /docker-for-mac/networking/
       title: Networking
-    - path: /docker-for-mac/osxfs/
-      title: File system sharing
-    - path: /docker-for-mac/osxfs-caching/
-      title: Performance tuning for volume mounts (shared filesystems)
     - path: /docker-for-mac/space/
       title: Disk utilization
     - path: /docker-for-mac/troubleshoot/

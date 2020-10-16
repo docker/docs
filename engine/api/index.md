@@ -104,7 +104,7 @@ You can specify the API version to use, in one of the following ways:
 
 - For the SDKs, you can also specify the API version programmatically, as a
   parameter to the `client` object. See the
-  [Go constructor](https://github.com/moby/moby/blob/v19.03.6/client/client.go#L119){: target="_blank" class="_"}
+  [Go constructor](https://github.com/moby/moby/blob/v19.03.6/client/client.go#L119){: target="_blank" rel="noopener" class="_"}
   or the
   [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 

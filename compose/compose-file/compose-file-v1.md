@@ -22,7 +22,7 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Service configuration reference
 
-The Version 1 Compose file is a [YAML](http://yaml.org/) file that defines [services](#service-configuration-reference).
+The Version 1 Compose file is a [YAML](https://yaml.org) file that defines [services](#service-configuration-reference).
 
 The default path for a Compose file is `./docker-compose.yml`.
 

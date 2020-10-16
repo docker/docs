@@ -20,7 +20,7 @@ x-custom:
 ```
 
 The contents of those fields are ignored by Compose, but they can be
-inserted in your resource definitions using [YAML anchors](http://www.yaml.org/spec/1.2/spec.html#id2765878).
+inserted in your resource definitions using [YAML anchors](https://yaml.org/spec/1.2/spec.html#id2765878).
 For example, if you want several of your services to use the same logging
 configuration:
 
@@ -53,7 +53,7 @@ services:
 ```
 
 It is also possible to partially override values in extension fields using
-the [YAML merge type](http://yaml.org/type/merge.html). For example:
+the [YAML merge type](https://yaml.org/type/merge.html). For example:
 
 ```yaml
 version: '3.4'

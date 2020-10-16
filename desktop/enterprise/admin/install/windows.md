@@ -10,7 +10,7 @@ This page contains information about the system requirements and specific instru
 
 [Download Docker Desktop Enterprise for Windows](https://download.docker.com/win/enterprise/DockerDesktop.msi){: .button .outline-btn}
 
->**Note:** By downloading DDE, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement (DPA)](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+>**Note:** By downloading DDE, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement (DPA)](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
 ## System requirements
 
@@ -29,7 +29,7 @@ This page contains information about the system requirements and specific instru
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
 
-  - 64 bit processor with [Second Level Address Translation (SLAT)](http://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+  - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
 
   - 4GB system RAM
 
