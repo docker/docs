@@ -16,7 +16,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 ### New
 
-- If you have enabled [Vulnerability Scanning](https://docs.docker.com/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
 
 ### Upgrades
 
