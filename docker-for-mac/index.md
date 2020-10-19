@@ -104,8 +104,6 @@ File share settings are:
 
 For more information, see:
 
-- [Namespaces](osxfs.md#namespaces){: target="_blank" rel="noopener" class="_"} in the topic on
-  [osxfs file system sharing](osxfs.md).
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 #### Proxies
