@@ -12,7 +12,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 ## Docker Desktop Community 2.4.2.0
-2020-10-15
+2020-10-19
 
 ### Upgrades
 
