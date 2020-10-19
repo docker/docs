@@ -213,3 +213,9 @@ body.night {
         color: $white!important;
     }
 }
+
+body.landing.night {
+  .header>.container {
+      background-color: $bg-header-night;
+   }
+}

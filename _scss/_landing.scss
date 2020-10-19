@@ -13,6 +13,12 @@ body.landing {
   }
 
   .header {
+    // Container holds both the top-navigation bar (div.navbar-header), and
+    // the "hamburger menu" (div.navbar-collapse)
+    >.container {
+      background-color: $bg-header;
+    }
+
     @include md-width {
       .navbar-collapse.collapse {
         display: flex !important;
