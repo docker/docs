@@ -218,6 +218,42 @@ $ docker container rm devtest
 $ docker volume rm myvol2
 ```
 
+## Use a volume with docker-compose
+
+A single docker compose service with a volume looks like this:
+
+```yml
+version: "3.7"
+services:
+  frontend:
+    image: node:lts
+    volumes:
+      - myapp:/home/node/app
+volumes:
+  myapp:
+```
+
+On the first invocation of `docker-compose up` the volume will be created. The same
+volume will be reused on following invocations.
+
+A volume may be created directly outside of compose with `docker volume create` and
+then referenced inside `docker-compose.yml` as follows:
+
+```yml
+version: "3.7"
+services:
+  frontend:
+    image: node:lts
+    volumes:
+      - myapp:/home/node/app
+volumes:
+  myapp:
+    external: true
+```
+
+For more information about using volumes with compose see
+[the compose reference](../compose/compose-file-v2.md#volume-configuration-reference).
+
 ### Start a service with volumes
 
 When you start a service and define a volume, each service container uses its own
