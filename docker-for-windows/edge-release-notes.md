@@ -14,6 +14,10 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.4.2.0
 2020-10-19
 
+### New
+
+- If you have enabled [Vulnerability Scanning](https://docs.docker.com/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+
 ### Upgrades
 
 - [Docker Engine 20.10.0 beta1](https://github.com/docker/docker-ce/blob/0fc7084265b3786a5867ec311d3f916af7bf7a23/CHANGELOG.md)
