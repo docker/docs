@@ -1,9 +1,18 @@
 body.night {
     background-color: $bg-body-night;
-    color: $body-text-night;
-    p,
-    ol,
-    ul,
+    color:            $body-text-night;
+
+    &.landing {
+        background-color: $bg-body-landing-night;
+        .header > .container {
+            background-color: $bg-header-night;
+        }
+        .card, .cardlet {
+            background-color: $bg-card-night;
+        }
+    }
+
+    p,ol,ul,
     .rating-nero-value,
     .reading-time {
         color: $body-text-night !important;
@@ -212,10 +221,4 @@ body.night {
         background: #000!important;
         color: $white!important;
     }
-}
-
-body.landing.night {
-  .header>.container {
-      background-color: $bg-header-night;
-   }
 }
