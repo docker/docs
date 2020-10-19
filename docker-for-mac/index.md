@@ -98,10 +98,6 @@ File share settings are:
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
-  There are some limitations on the directories that can be shared:
-
-  - The directory must not exist inside of Docker.
-
 For more information, see:
 
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
