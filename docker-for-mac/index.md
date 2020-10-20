@@ -100,16 +100,23 @@ File share settings are:
 
 > Tips on shared folders, permissions, and volume mounts
 >
- * Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
- such as cache directories or databases, the performance will be much better if they are stored in
- the Linux VM, using a [data volume](../storage/volumes.md)
+ * Shared folders are designed to allow application code to be edited 
+ on the host while being executed in containers. For non-code items
+ such as cache directories or databases, the performance will be much 
+ better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
  (named volume) or [data container](../storage/volumes.md).
 >
- * By default Mac filesystems are case-insensitive while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Mac these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a Mac (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
-
-For more information, see:
-
-- [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+ * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
+ On Linux, it is possible to create 2 separate files: `test` and `Test`, 
+ while on Mac these filenames would actually refer to the same underlying file. 
+ This can lead to problems where an app works correctly on a Mac 
+ (where the file contents are shared) but fails when run in Linux in 
+ production (where the file contents are distinct). To avoid this, Docker Desktop 
+ insists that all shared files are accessed as their original case. Therefore, if a file 
+ is created called `test`, it must be opened as `test`. Attempts to open `Test` will 
+ fail with the error `No such file or directory`. Similarly, once a file called `test` 
+ is created, attempts to create a second file called `Test` will fail. For more information, 
+ see [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 #### Proxies
 
