@@ -46,6 +46,7 @@ and architectures:
 | [Fedora](fedora.md)   | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |
 | [Raspbian](debian.md) |                        | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
 | [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) |
+| [openSUSE](opensuse.md)   | [{{ yes }}](opensuse.md) | [{{ yes }}](opensuse.md)   | [{{ yes }}](opensuse.md) |
 
 ##### Other Linux distributions
 
