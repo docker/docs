@@ -1,10 +1,10 @@
 $dark-blue: #002c66;
-$bg-card-night: #0F161E;
 
 body.landing {
+  background-color: $bg-body-landing;
 
   h2, h5, h6 {
-    font-family: 'Geomanist Regular', sans-serif;
+    font-family: $headings-landing;
   }
 
   section {
@@ -13,6 +13,12 @@ body.landing {
   }
 
   .header {
+    // Container holds both the top-navigation bar (div.navbar-header), and
+    // the "hamburger menu" (div.navbar-collapse)
+    >.container {
+      background-color: $bg-header;
+    }
+
     @include md-width {
       .navbar-collapse.collapse {
         display: flex !important;
@@ -156,7 +162,7 @@ body.landing {
   $icons: rocket, download-docker, guides, whats-new, manuals, reference;
 
   .card {
-    background-color: $bg-body;
+    background-color: $bg-card;
     box-shadow: 0 3px 6px rgba(11, 33, 74, 0.09),
       0 -2px 2px rgba(11, 33, 74, 0.03);
     padding: 24px 36px;
@@ -378,14 +384,4 @@ body.landing {
 
 body.landing:not(.night) {
   background-color: $bg-sidebar;
-}
-
-body.landing.night {
-  .card {
-    background-color: $bg-card-night;
-  }
-
-  .cardlet {
-    background-color: $bg-card-night;
-  }
 }

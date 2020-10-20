@@ -2089,7 +2089,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-* FUSE 7.23 for [osxfs](osxfs.md)
+* FUSE 7.23 for osxfs
 
 **Known issues**
 
@@ -2098,13 +2098,13 @@ events or unexpected unmounts.
 **Bug fixes and minor changes**
 
 * UI improvements
-* Fixed a problem in [osxfs](osxfs.md) where`mkdir` returned EBUSY but directory was created.
+* Fixed a problem in osxfs where`mkdir` returned EBUSY but directory was created.
 
 ### Beta 11 Release (2016-05-10 1.11.1-beta11)
 
 **New**
 
-The `osxfs` file system now persists ownership changes in an extended attribute. (See the topic on [ownership](osxfs.md#ownership) in [Sharing the macOS file system with Docker containers](osxfs.md).)
+The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Upgrades**
 

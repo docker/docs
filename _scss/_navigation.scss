@@ -45,7 +45,7 @@
 
 .nav-sidebar ul {
     list-style: none;
-    padding: 0px 15px;
+    padding: 0 15px;
     text-align: left;
 
     li {
@@ -295,11 +295,4 @@ input:checked+.slider:before {
 .ctrl-right .btn-group {
     float: left;
     margin: 2px 0 0;
-}
-
-.divider {
-    height: 1px;
-    margin: 9px 29px;
-    overflow: hidden;
-    background-color: #077CBC;
 }

@@ -2042,9 +2042,6 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
-- `consistency`: the consistency requirements of the mount, one of `consistent`
-  (host and container have identical view), `cached` (read cache, host view is
-  authoritative) or `delegated` (read-write cache, container's view is authoritative)
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -2114,39 +2111,6 @@ services:
       placement:
         constraints: [node.role == manager]
 ```
-
-#### Caching options for volume mounts (Docker Desktop for Mac)
-
-You can configure container-and-host consistency requirements for bind-mounted
-directories in Compose files to allow for better performance on read/write of
-volume mounts. These options address issues specific to `osxfs` file sharing,
-and therefore are only applicable on Docker Desktop for Mac.
-
-The flags are:
-
-* `consistent`: Full consistency. The container runtime and the host maintain an
-  identical view of the mount at all times.  This is the default.
-* `cached`: The host's view of the mount is authoritative. There may be delays
-  before updates made on the host are visible within a container.
-* `delegated`: The container runtime's view of the mount is authoritative. There
-  may be delays before updates made in a container are visible on the host.
-
-Here is an example of configuring a volume as `cached`:
-
-```yaml
-version: "{{ site.compose_file_v3 }}"
-services:
-  php:
-    image: php:7.1-fpm
-    ports:
-      - "9000"
-    volumes:
-      - .:/var/www/project:cached
-```
-
-Full detail on these flags, the problems they solve, and their
-`docker run` counterparts is in the Docker Desktop for Mac topic
-[Performance tuning for volume mounts (shared filesystems)](../../docker-for-mac/osxfs-caching.md).
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
