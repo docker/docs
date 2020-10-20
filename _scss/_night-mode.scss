@@ -1,9 +1,18 @@
 body.night {
     background-color: $bg-body-night;
-    color: $body-text-night;
-    p,
-    ol,
-    ul,
+    color:            $body-text-night;
+
+    &.landing {
+        background-color: $bg-body-landing-night;
+        .header > .container {
+            background-color: $bg-header-night;
+        }
+        .card, .cardlet {
+            background-color: $bg-card-night;
+        }
+    }
+
+    p,ol,ul,
     .rating-nero-value,
     .reading-time {
         color: $body-text-night !important;
@@ -54,7 +63,17 @@ body.night {
         border: 1px solid #192837;
     }
     blockquote {
-        background: #1f3341;
+        color: $note-color-night;
+        background: $note-bg-color-night;
+        &.warning, &.warning p:first-child {
+            color: $warning-color-night !important;
+        }
+        &.important {
+            border-left-color: #f5ac45 !important;
+        }
+        &.important, &.important p:first-child {
+            color: $important-color-night !important;
+        }
     }
     table {
         border: 1px solid #1b1a1a;
@@ -151,13 +170,6 @@ body.night {
     .footer_social_nav ul li a {
         background-color: #2f2f2f;
     }
-    /* force blockquote styles */
-    blockquote.warning, blockquote.warning p:first-child {
-        color: #ff7e7a!important;
-    }
-    blockquote.important, blockquote.important p:first-child {
-        color: #f5ac45!important;
-    }
 
     /* syntax highlighting */
     .highlight {
@@ -212,10 +224,4 @@ body.night {
         background: #000!important;
         color: $white!important;
     }
-}
-
-body.landing.night {
-  .header>.container {
-      background-color: $bg-header-night;
-   }
 }

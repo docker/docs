@@ -2,11 +2,13 @@
 /*
  * global
  */
-$headings: "Geomanist Book", sans-serif;
-$font: "Open Sans", sans-serif;
-$body-text-size: 14px;
-$global-header-height: 440px;
-$bg-secondary-tabs: rgba(0, 0, 0, 0.05);
+$headings:              "Geomanist Book", sans-serif;
+$headings-landing:      'Geomanist Regular', sans-serif;
+$buttons:               "Geomanist Book", sans-serif;
+$font:                  "Open Sans", sans-serif;
+$body-text-size:        14px;
+$global-header-height:  440px;
+$bg-secondary-tabs:     rgba(0, 0, 0, 0.05);
 $white: #fff;
 $black: #000;
 $clear: 0;
@@ -14,40 +16,52 @@ $clear: 0;
 /*
  * standard mode
  */
-$body-text:     #33444c;
-$primary-links: #2496ed;
+$body-text:             #33444c;
+$primary-links:         #2496ed;
 
-$bg-body:      #ffffff;
-$bg-header:    #2496ed;
-$bg-secondary: #2496ed;
-$bg-sidebar:   #fbfbfc;
-$bg-footer:    #ffffff;
+$bg-body:               #ffffff;
+$bg-body-landing:       #fbfbfc;
+$bg-header:             #2496ed;
+$bg-secondary:          #2496ed;
+$bg-sidebar:            #fbfbfc;
+$bg-footer:             #ffffff;
 
-$bg-component: #fbfbfc;
-$bdr-sidebar: rgba(204, 204, 204, 0.29);
+$bg-component:          #fbfbfc;
+$bg-card:               #ffffff;
 
-$slider-bg:  #c3e4f7;
-$slider-btn: #2496ed;
+// notes, warnings
+$note-color:            #1488C6;
+$note-bg-color:         #f4fafe;
+$important-color:       #aa6708;
+$warning-color:         #ce4844;
 
-$code-blocks: rgba(12, 81, 118, 0.1);
+$slider-bg:             #c3e4f7;
+$slider-btn:            #2496ed;
 
-$table-head: #cfd2d4;
-
+$table-head:            #cfd2d4;
 
 /*
  * night mode
  */
-$body-text-night:     #d3d4d4;
-$primary-links-night: #9cd7f7;
+$body-text-night:       #d3d4d4;
+$primary-links-night:   #9cd7f7;
 
-$bg-body-night:      #061F2F;
-$bg-header-night:    #101c29;
-$bg-secondary-night: #101c29;
-$bg-sidebar-night:   #101e26;
-$bg-footer-night:    #000000;
+$bg-body-night:         #061f2f;
+$bg-body-landing-night: #061f2f;
+$bg-header-night:       #101c29;
+$bg-secondary-night:    #101c29;
+$bg-sidebar-night:      #101e26;
+$bg-footer-night:       #000000;
 
-$bg-component-night: #101c29;
+$bg-component-night:    #101c29;
+$bg-card-night:         #0f161e;
 
-$active-sidebar-night: #9cd7f7;
+// notes, warnings
+$note-color-night:      #d3d4d4;
+$note-bg-color-night:   #1f3341;
+$important-color-night: #f5ac45;
+$warning-color-night:   #ff7e7a;
+
+$active-sidebar-night:  #9cd7f7;
 
 $bg-search-results-night: rgba(10, 10, 10, 0.95);

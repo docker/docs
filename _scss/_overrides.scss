@@ -73,11 +73,11 @@
  * Bootstrap expand/collapse accordions ****************************************
  */
 
-.panel-heading .chevron:after {
+.panel-heading .chevron::after {
     content: "\f0d8";
 }
 
-.panel-heading.collapsed .chevron:after {
+.panel-heading.collapsed .chevron::after {
     content: "\f0d7";
 }
 
