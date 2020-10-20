@@ -4,6 +4,7 @@ keywords: mac, tutorial, run, docker, local, machine
 redirect_from:
 - /docker-for-mac/index/
 - /docker-for-mac/mutagen/
+- /docker-for-mac/mutagen-caching/
 - /docker-for-mac/osx/
 - /docker-for-mac/started/
 - /engine/installation/mac/
