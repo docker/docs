@@ -119,8 +119,6 @@ File sharing settings include the following options:
 
 For more information, see:
 
-- [Namespaces](https://docs.docker.com/docker-for-mac/osxfs/#namespaces) in [osxfs file system sharing](https://docs.docker.com/docker-for-mac/osxfs/).
-
 - [Volume mounting requires file sharing for any project directories outside of `/Users`](https://docs.docker.com/docker-for-mac/troubleshoot/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).
 
 #### Disk

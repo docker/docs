@@ -303,7 +303,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 <a name="bind-mounted-dirs"></a>
 
 * There are a number of issues with the performance of directories bind-mounted
-  with `osxfs`. In particular, writes of small blocks, and traversals of large
+  into containers. In particular, writes of small blocks, and traversals of large
   directories are currently slow. Additionally, containers that perform large
   numbers of directory operations, such as repeated scans of large directory
   trees, may suffer from poor performance. Applications that behave in this way
@@ -319,11 +319,10 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 
   As a work-around for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
-  outside of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
+  outside of bind mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
-  actively working on `osxfs` performance using a number of different
-  techniques.  To learn more, see the topic on
-  [Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
+  actively working on performance improvements using a number of different
+  techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
 
 * If your system does not have access to an NTP server, then after a hibernate
   the time seen by Docker Desktop may be considerably out of sync with the host.
