@@ -79,9 +79,15 @@ Verify docker is running:
 $ docker version
 
 ```
+Check to see container deamon is running: 
+
+```bash
+$ sudo docker ps
+
+```
 
 This will pull down and run the, "Hello World" docker container from dockerhub: 
-$ docker run --rm hello-world
+$ sudo docker run --rm hello-world
 
 ```
 Clean up and remove docker image we pulled down: 
