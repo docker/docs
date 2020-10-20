@@ -1154,8 +1154,6 @@ manuals:
       title: User manual
     - path: /docker-for-mac/kubernetes/
       title: Deploy on Kubernetes
-    - path: /docker-for-mac/docker-toolbox/
-      title: Docker Desktop for Mac vs. Docker Toolbox
     - path: /docker-for-mac/multi-arch/
       title: Leveraging Multi-CPU architecture support
     - path: /docker-for-mac/networking/
@@ -1182,8 +1180,6 @@ manuals:
       title: Deploy on Kubernetes
     - path: /docker-for-windows/networking/
       title: Networking
-    - path: /docker-for-windows/docker-toolbox/
-      title: Migrate Docker Toolbox
     - path: /docker-for-windows/troubleshoot/
       title: Logs and troubleshooting
     - path: /docker-for-windows/faqs/
@@ -1446,14 +1442,8 @@ manuals:
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
         title: Migrate from Boot2Docker to Machine
-  - sectiontitle: Docker Toolbox (legacy)
-    section:
-    - path: /toolbox/overview/
-      title: Toolbox overview
-    - path: /toolbox/toolbox_install_mac/
-      title: Install Toolbox on Mac
-    - path: /toolbox/toolbox_install_windows/
-      title: Install Toolbox on Windows
+  - path: /docker-for-windows/docker-toolbox/
+    title: Docker Toolbox (deprecated)
   - sectiontitle: Kitematic
     section:
     - path: /kitematic/userguide/

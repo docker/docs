@@ -51,24 +51,18 @@ Python package manager or installing Compose as a container.
 
 ### Install Compose on macOS
 
-**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-Docker install instructions for these are here:
-
-  * [Get Docker Desktop for Mac](../docker-for-mac/install.md)
-  * [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
+For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
 
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
 
 ### Install Compose on Windows desktop systems
 
-**Docker Desktop for Windows** and **Docker Toolbox** already include Compose
+**Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. Docker install instructions for these are here:
-
-* [Get Docker Desktop for Windows](../docker-for-windows/install.md)
-* [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 
 If you are running the Docker daemon and client directly on Microsoft
 Windows Server, follow the instructions in the Windows Server tab.
