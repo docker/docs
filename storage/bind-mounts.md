@@ -44,7 +44,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   - The second field is the path where the file or directory is mounted in
     the container.
   - The third field is optional, and is a comma-separated list of options, such
-    as `ro`, `consistent`, `delegated`, `cached`, `z`, and `Z`. These options
+    as `ro`, `z`, and `Z`. These options
     are discussed below.
 
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
@@ -64,9 +64,6 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   - The `bind-propagation` option, if present, changes the
     [bind propagation](#configure-bind-propagation). May be one of `rprivate`,
     `private`, `rshared`, `shared`, `rslave`, `slave`.
-  - The [`consistency`](#configure-mount-consistency-for-macos) option, if
-    present, may be one of `consistent`, `delegated`, or `cached`. This setting
-    only applies to Docker Desktop for Mac, and is ignored on all other platforms.
   - The `--mount` flag does not support `z` or `Z` options for modifying
     selinux labels.
 
@@ -380,61 +377,6 @@ $ docker run -d \
   -v "$(pwd)"/target:/app:z \
   nginx:latest
 ```
-
-## Configure mount consistency for macOS
-
-Docker Desktop for Mac uses `osxfs` to propagate directories and files shared from macOS
-to the Linux VM. This propagation makes these directories and files available to
-Docker containers running on Docker Desktop for Mac.
-
-By default, these shares are fully-consistent, meaning that every time a write
-happens on the macOS host or through a mount in a container, the changes are
-flushed to disk so that all participants in the share have a fully-consistent
-view. Full consistency can severely impact performance in some cases. Docker
-17.05 and higher introduce options to tune the consistency setting on a
-per-mount, per-container basis. The following options are available:
-
-- `consistent` or `default`: The default setting with full consistency, as
-  described above.
-
-- `delegated`: The container runtime's view of the mount is authoritative. There
-  may be delays before updates made in a container are visible on the host.
-
-- `cached`: The macOS host's view of the mount is authoritative. There may be
-  delays before updates made on the host are visible within a container.
-
-These options are completely ignored on all host operating systems except macOS.
-
-The `--mount` and `-v` examples have the same result.
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-consistency"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="#v-consistency"><code>-v</code></a></li>
-</ul>
-<div class="tab-content">
-<div id="mount-consistency" class="tab-pane fade in active" markdown="1">
-
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  --mount type=bind,source="$(pwd)"/target,destination=/app,consistency=cached \
-  nginx:latest
-```
-
-</div><!--mount-->
-<div id="v-consistency" class="tab-pane fade" markdown="1">
-
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  -v "$(pwd)"/target:/app:cached \
-  nginx:latest
-```
-
-</div><!--volume-->
-</div><!--tab-content-->
 
 ## Next steps
 
