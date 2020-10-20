@@ -135,14 +135,14 @@ Some use cases for volumes include:
   (such as `/var/lib/docker/volumes/<volume-name>`).
 
 - When your application requires high-performance I/O on Docker Desktop. Volumes
-  are stored in the Linux VM rather than the host, which means that reads and writes
+  are stored in the Linux VM rather than the host, which means that the reads and writes
   have much lower latency and higher throughput.
 
-- When your application requires fully native filesystem behaviour on Docker
-  Desktop. For example a database engine requires precise control over disk
+- When your application requires fully native file system behavior on Docker
+  Desktop. For example, a database engine requires precise control over disk
   flushing to guarantee transaction durability. Volumes are stored in the Linux
   VM and can make these guarantees, whereas bind mounts are remoted to macOS or
-  Windows where the filesystems behave slightly differently.
+  Windows, where the file systems behave slightly differently.
 
 ## Good use cases for bind mounts
 
