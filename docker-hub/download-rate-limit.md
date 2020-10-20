@@ -68,8 +68,17 @@ If you are using any third-party platforms, follow your provider’s instruction
 - [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" rel="noopener" class="_"}
 - [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker){: target="_blank" rel="noopener" class="_"}
 
-## Other Limits
+## Other limits
 
-Docker Hub also has an overall rate limit in place to protect the application and infrastructure. This limit applies to all requests to Hub properties including web pages, APIs, image pulls, etc. It is applied per-IP and while the limit changes over time depending on load and other factors, it is on the order of thousands of requests per minute. This limit applies to all users equally regardless of account level.
+Docker Hub also has an overall rate limit to protect the application 
+and infrastructure. This limit applies to all requests to Hub 
+properties including web pages, APIs, image pulls, etc. The limit is 
+applied per-IP, and while the limit changes over time depending on load
+and other factors, it is in the order of thousands of requests per 
+minute. The overall rate limit applies to all users equally
+regardless of account level.
 
-You can tell the difference between these limits by looking at the error code. The "overall limit" will return a simple 429 Too Many Requests response. The image download limit returns a longer message that includes a link to this page.
+You can differentiate between these limits by looking at the error 
+code. The "overall limit" will return a simple `429 Too Many Requests` 
+response. The image download limit returns a longer error message that 
+includes a link to this page.
