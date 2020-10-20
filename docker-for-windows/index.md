@@ -10,6 +10,7 @@ redirect_from:
 - /windows/started/
 - /winkit/
 - /winkit/getting-started/
+
 title: Docker Desktop for Windows user manual
 toc_min: 1
 toc_max: 2

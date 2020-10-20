@@ -222,13 +222,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 * If `docker` commands aren't working properly or as expected, you may need to
   unset some environment variables, to make sure you are not using the legacy
   Docker Machine environment in your shell or command window. Unset the
-  `DOCKER_HOST` environment variable and related variables.
-
-  * If you use bash, use the following command: `unset ${!DOCKER_*}`
-
-  * For other shells, unset each environment variable individually as described
-    in [Setting up to run Docker Desktop on Mac](docker-toolbox.md#setting-up-to-run-docker-desktop-on-mac)
-    in [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
+  `DOCKER_HOST` environment variable and related variables. If you use bash, use the following command: `unset ${!DOCKER_*}`
 
 * Network connections fail if the macOS Firewall is set to "Block all incoming
   connections". You can enable the firewall, but `bootpd` must be allowed
@@ -236,9 +230,9 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
   the web server on `http://localhost/`. Make sure that the Docker icon is
-  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine (not Engine from Toolbox).
+  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
   Otherwise, you might start the webserver container but get a "web page not
-  available" error when you go to `localhost`. For more information on distinguishing between the two environments, see [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
+  available" error when you go to `localhost`.
 
 * If you see errors like `Bind for 0.0.0.0:8080 failed: port is already
   allocated` or `listen tcp:0.0.0.0:8080: bind: address is already in use`:

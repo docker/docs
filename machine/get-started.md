@@ -11,12 +11,9 @@ Docker host inside of a local virtual machine.
 ## Prerequisite information
 
 With the advent of [Docker Desktop for Mac](../docker-for-mac/index.md) and
-[Docker Desktop for Windows](../docker-for-windows/index.md) as replacements for
-[Docker Toolbox](../toolbox/overview.md), we recommend that you use these for your
+[Docker Desktop for Windows](../docker-for-windows/index.md), we recommend that you use these for your
 primary Docker workflows. You can use these applications to run Docker natively
-on your local system without using Docker Machine at all. (See
-[Docker Desktop for Mac vs. Docker Toolbox](../docker-for-mac/docker-toolbox.md)
-for an explanation on the Mac side.)
+on your local system without using Docker Machine at all.
 
 For now, however, if you want to create _multiple_ local machines, you still
 need Docker Machine to create and manage machines for multi-node
@@ -58,40 +55,10 @@ lightweight macOS virtualization solution built on top of the
 Currently, there is no `docker-machine create` driver for HyperKit, so
 use the `virtualbox` driver to create local machines. (See the
 [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).) You can
-run both HyperKit and Oracle VirtualBox on the same system. To learn more, see
-[Docker Desktop for Mac vs. Docker Toolbox](../docker-for-mac/docker-toolbox.md).
+run both HyperKit and Oracle VirtualBox on the same system.
 
 * Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
-  correctly installed on your system (either as part of an earlier Toolbox install,
-  or manual install).
-
-#### If you are using Docker Toolbox
-
-Docker Desktop for Mac and Docker Desktop for Windows both require newer versions of their
-respective operating systems, so users with older OS versions must use Docker
-Toolbox.
-
-* If you are using Docker Toolbox on either Mac or an older version Windows
-  system (without Hyper-V), use the `virtualbox` driver to create a local machine
-  based on Oracle [VirtualBox](https://www.virtualbox.org/){:target="_blank" rel="noopener" class="_"}.
-  (See the [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).)
-
-* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot
-  run Docker Desktop for Windows (for example Windows 8 Pro), you must use the
-  `hyperv` driver to create local machines. (See th
-   [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md).)
-
-* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" rel="noopener" class="_"}
-  correctly installed on your system. If you used
-  [Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" rel="noopener" class="_"}
-  or [Docker Desktop for Windows](../docker-for-windows/index.md){: target="_blank" rel="noopener" class="_"}
-  to install Docker Machine, VirtualBox is
-  automatically installed.
-
-* If you used the Quickstart Terminal to launch your first machine and set your
-  terminal environment to point to it, a default machine was automatically
-  created. If so, you can still follow along with these steps, but
-  create another machine and name it something other than `default`.
+  correctly installed on your system.
 
 ##  Use Machine to run Docker containers
 
@@ -125,9 +92,7 @@ The examples here show how to create and start a machine, run Docker commands, a
 it `default` as shown in the example. If you already have a "default" machine,
 choose another name for this new machine.
 
-    * If you are using Toolbox on Mac, Toolbox on older Windows systems without Hyper-V, or Docker Desktop for Mac, use `virtualbox` as the driver, as shown in this example. (The Docker Machine VirtualBox driver reference is [here](drivers/virtualbox.md).) (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
-
-    * On Docker Desktop for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
+    On Docker Desktop for Windows systems that support Hyper-V, use the `hyperv` driver as shown in the [Docker Machine Microsoft Hyper-V driver reference](drivers/hyper-v.md) and follow the [example](drivers/hyper-v.md#example), which shows how to use an external network switch and provides the flags for the full command. (See [prerequisites](get-started.md#prerequisite-information) above to learn more.)
 
             $ docker-machine create --driver virtualbox default
             Running pre-create checks...
@@ -292,10 +257,7 @@ For machines other than `default`, and commands other than those listed above, y
 ## Unset environment variables in the current shell
 
 You might want to use the current shell to connect to a different Docker Engine.
-This would be the case if, for example, you are
-[running Docker Desktop for Mac concurrent with Docker Toolbox](../docker-for-mac/docker-toolbox.md)
-and want to talk to two different Docker Engines.
-In both scenarios, you have the option to switch the environment for the current
+In such scenarios, you have the option to switch the environment for the current
 shell to talk to different Docker engines.
 
 1.  Run `env|grep DOCKER` to check whether DOCKER environment variables are set.
@@ -343,10 +305,6 @@ shell to talk to different Docker engines.
 
     If you are running Docker Desktop for Mac, you can run Docker commands to talk
     to the Docker Engine installed with that app.
-
-    Since [Docker Desktop for Windows is incompatible with Toolbox](../docker-for-windows/install.md#what-to-know-before-you-install),
-    this scenario isn't applicable because Docker Desktop for Windows uses the Docker
-    Engine and Docker Machine that come with it.
 
 ## Start local machines on startup
 

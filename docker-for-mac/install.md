@@ -13,17 +13,10 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 ## What to know before you install
 
-> README FIRST for Docker Toolbox and Docker Machine users
->
->If you are already running Docker on your machine, first read
-[Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the
-impact of this installation on your existing setup, how to set your environment
-for Docker Desktop on Mac, and how the two products can coexist.
-
 **Relationship to Docker Machine**: Installing Docker Desktop on Mac does not affect machines you created with Docker Machine. You have the option to copy containers and images from your local `default` machine (if one exists) to the Docker Desktop [HyperKit](https://github.com/docker/HyperKit/) VM. When
 you are running Docker Desktop, you do not need Docker Machine nodes running locally (or anywhere else). With Docker Desktop, you have a new, native
 virtualization system running (HyperKit) which takes the place of the
-VirtualBox system. To learn more, see [Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md).
+VirtualBox system.
 
 ## System requirements
 
