@@ -141,7 +141,7 @@ Parameter values and descriptions for environment configuration on Mac:
 | `swapMiB`                         | Specifies the amount of memory in MiB (1 MiB = 1048576 bytes) allocated for the swap file.                |
 | `dataFolder`                      | Specifies the directory containing the VM disk files.  |
 | `diskSizeMiB`                     | Specifies the amount of disk storage in MiB (1 MiB = 1048576 bytes) allocated for images and containers.                       |
-| `dockerDaemonOptions`             | Overrides the options in the linux daemon config file. For more information, see [Docker engine reference](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file).        |
+| `dockerDaemonOptions`             | Overrides the options in the linux daemon config file. For more information, see [Docker engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file).        |
 | (End of `linuxVM` section.)       |                                   |
 | `kubernetes`                      | Parameters and settings related to kubernetes options - grouped together here for convenience.                  |
 | `enabled`                         | If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is  started.                          |
@@ -149,7 +149,7 @@ Parameter values and descriptions for environment configuration on Mac:
 | `podNetworkCIDR`                  | This is currently unimplemented. `locked` must be set to true.     |
 | `serviceCIDR`                     | This is currently unimplemented. `locked` must be set to true.     |
 | (End of `kubernetes` section.)    |                                   |
-|`template`|Parameters and settings related to Docker Template and Application Designer - grouped together in this example for convenience. For more information, see [`Docker template config`](/engine/reference/commandline/template_config/).|
+|`template`|Parameters and settings related to Docker Template and Application Designer - grouped together in this example for convenience. |
 |`defaultOrg`| Specifies the default organization to be used in Docker Template and Docker Application Designer. If `locked` is set to `true`, the Kubernetes cluster starts when Docker Desktop Enterprise is started. |
 |`defaultRegistry`|Specifies the default registry to be used in Docker Template and Application Designer.|
 |`repositories`|Lists the repositories that are allowed.|

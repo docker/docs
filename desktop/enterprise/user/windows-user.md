@@ -206,13 +206,10 @@ Tips on shared drives, permissions, and volume mounts:
 - Shared drives are only required for mounting volumes in [Linux containers](#switch-between-windows-and-linux-containers), not for Windows containers. For Linux containers, you need to share the drive where the Dockerfile and volume are located. If you get errors such as `file not found` or `cannot start service` you may need to enable shared drives. See [Volume mounting requires shared drives for Linux containers](/docker-for-windows/troubleshoot#volume-mounting-requires-shared-drives-for-linux-containers).
 
 - If possible, avoid volume mounts from the Windows host, and instead mount on
-the Linux VM, or use a [data volume](https://docs.docker.com/storage/volumes/) (named volume) or [data container](https://docs.docker.com/storage/volumes/). There are a number of issues with using host-mounted volumes and network paths
-for database files. See [Volume mounts from host paths use a nobrl option to override database locking](https://docs.docker.com/docker-for-windows/troubleshoot/#volume-mounts-from-host-paths-use-a-nobrl-option-to-override-database-locking).
+the Linux VM, or use a [data volume](../../../storage/volumes.md) (named volume) or [data container](../../../storage/volumes.md).
 
 - Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
-This is not configurable. See [Permissions errors on data directories for shared volumes](https://docs.docker.com/docker-for-windows/troubleshoot/#permissions-errors-on-data-directories-for-shared-volumes).
-
-- Ensure the domain user has access to shared drives, as described in [Verify domain user has permissions for shared drives](https://docs.docker.com/docker-for-windows/troubleshoot/#verify-domain-user-has-permissions-for-shared-drives-volumes).
+This is not configurable. See [Permissions errors on data directories for shared volumes](../../../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 
 ##### Firewall rules for shared drives
 
@@ -271,7 +268,7 @@ You can configure Docker Desktop Enterprise networking to work on a virtual priv
 > `docker` commands that pull images from Docker Hub that are not already
 > downloaded, such as a first time run of `docker run hello-world`. If you
 > encounter this, reset the DNS server to use the Google DNS fixed address:
-> `8.8.8.8`. For more information, see [Networking issues](https://docs.docker.com/docker-for-windows/troubleshoot/#networking-issues) in Troubleshooting.
+> `8.8.8.8`. For more information, see [Networking issues](../../../docker-for-windows/troubleshoot.md#networking-issues) in Troubleshooting.
 
 Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
@@ -302,7 +299,7 @@ In the output above, the `HTTP_PROXY`, `http_proxy`, and `no_proxy` environment
 variables are set. When your proxy configuration changes, Docker restarts
 automatically to pick up the new settings. If you have containers that you wish
 to keep running across restarts, you should consider using
-[restart policies](https://docs.docker.com/engine/reference/run/#restart-policies---restart).
+[restart policies](/engine/reference/run/#restart-policies---restart).
 
 #### Daemon
 
@@ -350,34 +347,34 @@ Server:
 
 ##### Insecure registries
 
-You can set up your own [registries](https://docs.docker.com/registry/introduction) on the **Basic** Daemon settings.
+You can set up your own [registries](../../../registry/index.md) on the **Basic** Daemon settings.
 
 Normally, you store public or private images in [Docker Hub](https://hub.docker.com/). Here, you
-can use Docker to set up your own [insecure registry](https://docs.docker.com/registry/insecure/).
+can use Docker to set up your own [insecure registry](../../../registry/insecure.md).
 Simply add URLs for insecure registries and registry mirrors on which to host your images.
 
 For more information, see:
 
-- [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates)
+- [How do I add custom CA certificates?](../../../docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates)
 
-- [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates)
+- [How do I add client certificates?](../../../docker-for-windows/faqs.md#how-do-i-add-client-certificates)
 
 #### Daemon configuration file
 
 The **Advanced** daemon settings provide the original option to directly edit
-the JSON configuration file for the [daemon](https://docs.docker.com/engine/reference/commandline/dockerd).
+the JSON configuration file for the [daemon](/engine/reference/commandline/dockerd/).
 
 > Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 ![Docker Daemon](../images/settings-daemon-advanced.png)
 
-For a full list of options on the Docker daemon, see [daemon](https://docs.docker.com/engine/reference/commandline/dockerd), and also sub-topics:
+For a full list of options on the Docker daemon, see [daemon](../../../engine/reference/commandline/dockerd/), and also sub-topics:
 
-- [Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file)
+- [Daemon configuration file](../../../engine/reference/commandline/dockerd/#daemon-configuration-file)
 
-- [Linux configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#linux-configuration-file)
+- [Linux configuration file](../../../engine/reference/commandline/dockerd/#linux-configuration-file)
 
-- [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#windows-configuration-file)
+- [Windows configuration file](../../../engine/reference/commandline/dockerd/#windows-configuration-file)
 
 #### Kubernetes
 
@@ -419,7 +416,7 @@ experience conflicts, remove it.
   `kubectl` command is removed.
 
   For more about using the Kubernetes integration with Docker Desktop Enterprise,
-  see [Deploy on Kubernetes](https://docs.docker.com/docker-for-windows/kubernetes).
+  see [Deploy on Kubernetes](../../../docker-for-windows/kubernetes.md).
 
 #### Reset
 
@@ -442,7 +439,7 @@ To switch to a different version pack, simply click on the version pack you woul
 
 ### Troubleshoot
 
-The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](/desktop/enterprise/troubleshoot/windows-issues).
+The **Diagnose and Feedback** option allows you troubleshoot any issues you may be experiencing with Docker Desktop Enterprise. For more information, see [Troubleshoot DDE issues on Windows](../troubleshoot/windows-issues.md).
 
 ### Switch between Windows and Linux containers
 
@@ -454,13 +451,13 @@ For more information on Windows containers, refer to the following documentation
 
 - Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
 
-- [Build and Run Your First Windows Server Container](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) (blog post) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
+- [Build and Run Your First Windows Server Container](https://www.docker.com/blog/build-your-first-docker-windows-server-container/) (blog post) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
   shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/)
   application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
-- To understand how to connect to Windows containers from the local host, see [Limitations of Windows containers for `localhost` and published ports](https://docs.docker.com/docker-for-windows/troubleshoot/#limitations-of-windows-containers-for-localhost-and-published-ports).
+- To understand how to connect to Windows containers from the local host, see [Limitations of Windows containers for `localhost` and published ports](../../../docker-for-windows/troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports).
 
 The **Settings** dialog changes with Windows containers. When you switch to Windows containers, the **Settings** dialog only shows those tabs that are active and apply to your Windows containers:
 
@@ -480,11 +477,11 @@ If you set proxies or daemon configuration in Windows containers mode, these app
 
 Select **Sign in /Create Docker ID** from the Docker Desktop Enterprise menu to access your [Docker Hub](https://hub.docker.com/) account. Once logged in, select **Repositories**  on the Docker Desktop Enterprise menu to access your Docker Hub repositories directly.
 
-See the following [Docker Hub topics](https://docs.docker.com/docker-hub/) to learn more:
+See the following [Docker Hub topics](../../../docker-hub/index.md) to learn more:
 
-- [Organizations and Teams in Docker Hub](https://docs.docker.com/docker-hub/orgs/)
+- [Organizations and Teams in Docker Hub](../../../docker-hub/orgs.md)
 
-- [Builds and Images](https://docs.docker.com/docker-hub/official_images/)
+- [Builds and Images](../../../docker-hub/official_images.md)
 
 ### Design new application
 
@@ -494,5 +491,5 @@ Select this option to open the Application Designer user interface. Application 
 
 You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.
 
-For more information, see [How do I add custom CA certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-custom-ca-certificates) and
-and [How do I add client certificates?](https://docs.docker.com/docker-for-windows/faqs/#how-do-i-add-client-certificates) in the FAQs.
+For more information, see [How do I add custom CA certificates?](../../../docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates) and
+and [How do I add client certificates?](../../../docker-for-windows/faqs.md#how-do-i-add-client-certificates) in the FAQs.
