@@ -10,15 +10,13 @@ title: Install Docker Engine on openSUSE
 toc_max: 4
 ---
 
-To get started with Docker Engine on CentOS, make sure you
+To get started with Docker Engine on openSUSE, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#installation-methods).
 
 ## Prerequisites
 
 ### OS requirements
-
-To install the docker and docker-compose packages start YaST2, select "Software" and start the module "Software Management". Search for docker and choose to install the Packages "docker" and "python3-docker-compose". (Even though the package is called "python3-docker-compose", it installs "docker-compose" binary). Then click "Accept", and if the installation was successful, "Finish".
 
 To start the docker daemon during boot start YaST2, select "System" and start the module "Services Manager". Select the "docker" service and click "Enable/Disable" and "Start/Stop". To apply your changes click "OK".
 
@@ -32,7 +30,7 @@ Older versions of Docker were called `docker` or `python3-docker-compose`. If th
 installed, uninstall them, along with associated dependencies.
 
 ```bash
-$ sudo zypper remove docker python3-docker-compose
+$ sudo zypper remove -u docker python3-docker-compose
 ```
 
 ## Installation methods
@@ -50,8 +48,6 @@ Now you have to "Log out" of your session and "Log in" again for the changes to 
 
 ### with Command line
 
-To install the docker and docker-compose packages: 
-
 ```bash
 $ zypper install docker python3-docker-compose
 
@@ -59,7 +55,7 @@ $ zypper install docker python3-docker-compose
 To start the docker daemon during boot: 
 
 ```bash
-$ sudo systemctl enable docker
+$ sudo systemctl enable --now docker
 
 ```
 To join the docker group that is allowed to use the docker daemon:
