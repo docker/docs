@@ -11,13 +11,7 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
-
-# Google Analytics, etc.
-# TODO these should only be set when building for production, or passed as an environment variable when building
-google_analytics: GTM-WL2QLG5
-polldaddy_id: 8453675
-
+exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html"]
 
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
@@ -121,5 +115,5 @@ defaults:
 #
 # We specify the directory for Jekyll so we can use @imports.
 sass:
-  sass_dir:          _scss
-  style:            :compressed
+  sass_dir: _scss
+  style: expanded

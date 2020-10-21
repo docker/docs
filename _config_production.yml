@@ -1,0 +1,11 @@
+
+# Include files that are excluded in "development" ("enterprise" stubs) for production
+exclude: ["_scripts", "404.html", "index.html"]
+
+# Google Analytics, etc.
+google_analytics: GTM-WL2QLG5
+polldaddy_id:     8453675
+
+# Assets
+sass:
+  style:    compressed
