@@ -2,7 +2,6 @@
 description: DigitalOcean driver for machine
 keywords: machine, digitalocean, driver
 title: DigitalOcean
-sitemap: false
 ---
 
 Create Docker machines on [DigitalOcean](https://www.digitalocean.com/).

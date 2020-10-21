@@ -2,7 +2,6 @@
 description: Get the URL of a host
 keywords: machine, url, subcommand
 title: docker-machine url
-sitemap: false
 ---
 
 Get the URL of a host

@@ -2,7 +2,6 @@
 description: Reference for drivers Docker Machine supports
 keywords: machine, drivers, supports
 title: Machine drivers
-sitemap: false
 ---
 
 -   [Amazon Web Services](aws.md)

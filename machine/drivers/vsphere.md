@@ -2,7 +2,6 @@
 description: VMware vSphere driver for machine
 keywords: machine, VMware vSphere, driver
 title: VMware vSphere
-sitemap: false
 ---
 
 Creates machines on a [VMware vSphere](https://www.vmware.com/products/vsphere.html)

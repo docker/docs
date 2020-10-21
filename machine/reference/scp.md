@@ -2,7 +2,6 @@
 description: Copy files among machines
 keywords: machine, scp, subcommand
 title: docker-machine scp
-sitemap: false
 ---
 
 Copy files from your local host to a machine, from machine to machine, or from a

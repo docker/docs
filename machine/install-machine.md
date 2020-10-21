@@ -2,7 +2,6 @@
 description: How to install Docker Machine
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Install Docker Machine
-sitemap: false
 ---
 
 Install Docker Machine binaries by following the instructions in the following section. You can find the latest

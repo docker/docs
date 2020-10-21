@@ -2,7 +2,6 @@
 description: VMware Fusion driver for machine
 keywords: machine, VMware Fusion, driver
 title: VMware Fusion
-sitemap: false
 ---
 
 Creates machines locally on [VMware Fusion](https://www.vmware.com/products/fusion.html). Requires VMware Fusion to be installed.

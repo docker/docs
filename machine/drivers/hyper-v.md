@@ -3,7 +3,6 @@ description: Microsoft Hyper-V driver for machine
 keywords: machine, Microsoft Hyper-V, driver
 title: Microsoft Hyper-V
 toc_max: 4
-sitemap: false
 ---
 
 Creates a Boot2Docker virtual machine locally on your Windows machine

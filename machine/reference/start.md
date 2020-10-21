@@ -2,7 +2,6 @@
 description: Start a machine
 keywords: machine, start, subcommand
 title: docker-machine start
-sitemap: false
 ---
 
 ```none

@@ -2,7 +2,6 @@
 description: Get the status of a machine
 keywords: machine, status, subcommand
 title: docker-machine status
-sitemap: false
 ---
 
 ```none

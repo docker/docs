@@ -2,7 +2,6 @@
 description: Remove a machine.
 keywords: machine, rm, subcommand
 title: docker-machine rm
-sitemap: false
 ---
 
 Remove a machine. This removes the local reference and deletes it

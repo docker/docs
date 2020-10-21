@@ -2,7 +2,6 @@
 description: OpenStack driver for machine
 keywords: machine, OpenStack, driver
 title: OpenStack
-sitemap: false
 ---
 
 Create machines on [OpenStack](https://www.openstack.org/software/)

@@ -2,7 +2,6 @@
 description: Using Docker Machine to provision hosts on DigitalOcean
 keywords: docker, machine, cloud, digitalocean
 title: DigitalOcean example
-sitemap: false
 ---
 
 Follow along with this example to create a Dockerized [DigitalOcean](https://digitalocean.com) Droplet (cloud host).

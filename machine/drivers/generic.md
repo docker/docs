@@ -2,7 +2,6 @@
 description: Generic driver for machine
 keywords: machine, Generic, driver
 title: Generic
-sitemap: false
 ---
 
 Create machines using an existing VM/Host with SSH.

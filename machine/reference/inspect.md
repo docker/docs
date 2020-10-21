@@ -2,7 +2,6 @@
 description: Inspect information about a machine
 keywords: machine, inspect, subcommand
 title: docker-machine inspect
-sitemap: false
 ---
 
 ```none

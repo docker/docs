@@ -2,7 +2,6 @@
 description: Show command help
 keywords: machine, help, subcommand
 title: docker-machine help
-sitemap: false
 ---
 
 ```none

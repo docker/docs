@@ -2,7 +2,6 @@
 description: Show client configuration
 keywords: machine, config, subcommand
 title: docker-machine config
-sitemap: false
 ---
 
 ```none
