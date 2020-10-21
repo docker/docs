@@ -77,4 +77,4 @@ ways, and create reports.
 
 ### Additional Docker Desktop Enterprise troubleshooting topics
 
-You can also find additional information about various troubleshooting topics in the [Docker Desktop for Mac community](https://docs.docker.com/docker-for-mac/troubleshoot/) documentation.
+You can also find additional information about various troubleshooting topics in the [Docker Desktop for Mac community](../../../docker-for-mac/troubleshoot.md) documentation.

@@ -434,7 +434,7 @@ consult the shell's documentation.
 For the `hello-world-nginx` example and others, Docker Desktop must be
 running to get to the webserver on `http://localhost/`. Make sure that the
 Docker whale is showing in the menu bar, and that you run the Docker commands in
-a shell that is connected to the Docker Desktop Engine (not Engine from Toolbox). Otherwise, you might start the webserver container but get a "web page
+a shell that is connected to the Docker Desktop Engine. Otherwise, you might start the webserver container but get a "web page
 not available" error when you go to `docker`.
 
 ### How to solve `port already allocated` errors

@@ -34,7 +34,7 @@ Double-click the `.pkg` file to begin the installation and follow the on-screen 
 
 Mac administrators can use the command line option `\$ sudo installer -pkg Docker.pkg -target /` for fine tuning and mass installation. After running this command, you can start Docker Desktop from the Applications folder on each machine.
 
-Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](/desktop/enterprise/admin/configure/mac-admin).
+Administrators can configure additional settings by modifying the administrator configuration file. For more information, see [Configure Desktop Enterprise for Mac](../configure/mac-admin.md).
 
 ## License file
 
