@@ -100,6 +100,10 @@ defaults:
       sitemap: false
       title: Docker Enterprise moved to Mirantis
   - scope:
+      path: "desktop/enterprise"
+    values:
+      sitemap: false
+  - scope:
       path: "ee"
     values:
       sitemap: false
