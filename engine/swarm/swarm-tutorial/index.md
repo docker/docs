@@ -80,14 +80,7 @@ serve as the single swarm node.
 <p />
 
 * Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows alone to test a
-_multi-node_ swarm. However, you can use the included version of
-[Docker Machine](../../../machine/overview.md) to create the swarm nodes (see
-[Get started with Docker Machine and a local VM](../../../machine/get-started.md)), then
-follow the tutorial for all multi-node features. For this scenario, you run
-commands from a Docker Desktop for Mac or Docker Desktop for Windows host, but that Docker host itself is
-_not_ participating in the swarm. After you create the nodes, you can run all
-swarm commands as shown from the Mac terminal or Windows PowerShell with
-Docker Desktop for Mac or Docker Desktop for Windows running.
+_multi-node_ swarm, but many examples are applicable to a single-node Swarm setup.
 
 ### The IP address of the manager machine
 

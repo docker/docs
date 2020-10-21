@@ -1,7 +1,7 @@
 ---
 description: Components page
 title: Components
-hide_from_sitemap: true
+sitemap: false
 ---
 
 For components and controls we are using [Bootstrap](https://getbootstrap.com)

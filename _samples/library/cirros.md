@@ -1,17 +1,5 @@
 ---
-title: cirros
-keywords: library, sample, cirros
-repo: cirros
-layout: docs
-permalink: /samples/library/cirros/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/cirros/
 redirect_from:
 - /samples/cirros/
-description: |
-  CirrOS is a Tiny OS that specializes in running on a cloud.
 ---
-
-CirrOS is a Tiny OS that specializes in running on a cloud.
-
-
-{% include library-samples.md %}

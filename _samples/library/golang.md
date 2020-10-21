@@ -1,17 +1,5 @@
 ---
-title: golang
-keywords: library, sample, golang
-repo: golang
-layout: docs
-permalink: /samples/library/golang/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/golang/
 redirect_from:
 - /samples/golang/
-description: |
-  Go (golang) is a general purpose, higher-level, imperative programming language.
 ---
-
-Go (golang) is a general purpose, higher-level, imperative programming language.
-
-
-{% include library-samples.md %}

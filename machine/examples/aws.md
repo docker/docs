@@ -2,7 +2,6 @@
 description: Using Docker Machine to provision hosts on AWS
 keywords: docker, machine, cloud, aws
 title: Amazon Web Services (AWS) EC2 example
-hide_from_sitemap: true
 ---
 
 Follow along with this example to create a Dockerized [Amazon Web Services (AWS)](https://aws.amazon.com/) EC2 instance.

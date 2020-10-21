@@ -97,13 +97,25 @@ defaults:
   - scope:
       path: "datacenter"
     values:
-      hide_from_sitemap: true
+      sitemap: false
       title: Docker Enterprise moved to Mirantis
+  - scope:
+      path: "desktop/enterprise"
+    values:
+      sitemap: false
   - scope:
       path: "ee"
     values:
-      hide_from_sitemap: true
+      sitemap: false
       title: Docker Enterprise moved to Mirantis
+  - scope:
+      path: "machine"
+    values:
+      sitemap: false
+  - scope:
+      path: "samples/library"
+    values:
+      sitemap: false
 
 # Assets
 #

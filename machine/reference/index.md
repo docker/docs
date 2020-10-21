@@ -2,7 +2,6 @@
 description: Docker Machine Commands Overview
 keywords: machine, commands
 title: Docker Machine command-line reference
-hide_from_sitemap: true
 ---
 
 -   [active](active.md)

@@ -3,7 +3,7 @@ layout: null
 ---
 [
 {%- for page in site.html_pages -%}
-    {%- if page.hide_from_sitemap != nil or page.notoc != nil -%}
+    {%- if page.sitemap == false -%}
         {%- continue -%}
     {%- endif -%}
     {%- assign page_title = nil -%}

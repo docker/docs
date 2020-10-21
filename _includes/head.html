@@ -26,10 +26,10 @@
 {%- endif -%}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  {%- if site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}
-  {%- if page.hide_from_sitemap or site.GH_ENV == "gh_pages" %}
+  {%- if page.sitemap == false or site.GH_ENV == "gh_pages" %}
   <meta name="robots" content="noindex"/>
   {%- endif %}
+  {%- if site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}
   <title>{{ page.title | default: page_title }} | Docker Documentation</title>
   <meta name="description" content="{{ page.description | default: page_description | escape}}" />
   <meta name="keywords" content="{{ page.keywords | default: 'docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization' }}">

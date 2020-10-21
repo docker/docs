@@ -2,7 +2,6 @@
 description: IBM Softlayer driver for machine
 keywords: machine, IBM Softlayer, driver
 title: IBM Softlayer
-hide_from_sitemap: true
 ---
 
 Create machines on [Softlayer](http://softlayer.com).
