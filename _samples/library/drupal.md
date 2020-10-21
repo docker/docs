@@ -4,7 +4,7 @@ keywords: library, sample, drupal
 repo: drupal
 layout: docs
 permalink: /samples/library/drupal/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/drupal/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, jruby
 repo: jruby
 layout: docs
 permalink: /samples/library/jruby/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/jruby/
 description: |

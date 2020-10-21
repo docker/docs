@@ -4,7 +4,7 @@ keywords: library, sample, yourls
 repo: yourls
 layout: docs
 permalink: /samples/library/yourls/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/yourls/
 description: |

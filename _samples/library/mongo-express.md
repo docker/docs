@@ -4,7 +4,7 @@ keywords: library, sample, mongo-express
 repo: mongo-express
 layout: docs
 permalink: /samples/library/mongo-express/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/mongo-express/
 description: |

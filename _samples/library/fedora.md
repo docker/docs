@@ -4,7 +4,7 @@ keywords: library, sample, fedora
 repo: fedora
 layout: docs
 permalink: /samples/library/fedora/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/fedora/
 description: |

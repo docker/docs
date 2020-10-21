@@ -4,7 +4,7 @@ keywords: library, sample, rocket.chat
 repo: rocket.chat
 layout: docs
 permalink: /samples/library/rocket.chat/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/rocket.chat/
 description: |

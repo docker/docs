@@ -4,7 +4,7 @@ keywords: library, sample, mongo
 repo: mongo
 layout: docs
 permalink: /samples/library/mongo/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/mongo/
 description: |

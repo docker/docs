@@ -4,7 +4,7 @@ keywords: library, sample, r-base
 repo: r-base
 layout: docs
 permalink: /samples/library/r-base/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/r-base/
 description: |

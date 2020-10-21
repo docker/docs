@@ -4,7 +4,7 @@ keywords: library, sample, odoo
 repo: odoo
 layout: docs
 permalink: /samples/library/odoo/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/odoo/
 description: |

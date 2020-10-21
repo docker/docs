@@ -4,7 +4,7 @@ keywords: library, sample, sonarqube
 repo: sonarqube
 layout: docs
 permalink: /samples/library/sonarqube/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/sonarqube/
 description: |

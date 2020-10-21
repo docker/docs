@@ -4,7 +4,7 @@ keywords: library, sample, nginx
 repo: nginx
 layout: docs
 permalink: /samples/library/nginx/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/nginx/
 description: |

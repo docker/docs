@@ -4,7 +4,7 @@ keywords: library, sample, consul
 repo: consul
 layout: docs
 permalink: /samples/library/consul/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/consul/
 description: |

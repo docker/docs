@@ -4,7 +4,7 @@ keywords: library, sample, composer
 repo: composer
 layout: docs
 permalink: /samples/library/composer/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/composer/
 description: |

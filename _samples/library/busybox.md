@@ -4,7 +4,7 @@ keywords: library, sample, busybox
 repo: busybox
 layout: docs
 permalink: /samples/library/busybox/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/busybox/
 description: |

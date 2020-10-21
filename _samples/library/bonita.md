@@ -4,7 +4,7 @@ keywords: library, sample, bonita
 repo: bonita
 layout: docs
 permalink: /samples/library/bonita/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/bonita/
 description: |

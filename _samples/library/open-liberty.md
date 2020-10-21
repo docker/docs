@@ -4,7 +4,7 @@ keywords: library, sample, open-liberty
 repo: open-liberty
 layout: docs
 permalink: /samples/library/open-liberty/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/open-liberty/
 description: |

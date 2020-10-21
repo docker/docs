@@ -4,7 +4,7 @@ keywords: library, sample, irssi
 repo: irssi
 layout: docs
 permalink: /samples/library/irssi/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/irssi/
 description: |

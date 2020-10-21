@@ -2,7 +2,7 @@
 description: Re-run provisioning on a created machine.
 keywords: machine, provision, subcommand
 title: docker-machine provision
-hide_from_sitemap: true
+sitemap: false
 ---
 
 Re-run provisioning on a created machine.

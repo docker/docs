@@ -4,7 +4,7 @@ keywords: library, sample, haxe
 repo: haxe
 layout: docs
 permalink: /samples/library/haxe/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/haxe/
 description: |

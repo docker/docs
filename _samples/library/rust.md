@@ -4,7 +4,7 @@ keywords: library, sample, rust
 repo: rust
 layout: docs
 permalink: /samples/library/rust/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/rust/
 description: |

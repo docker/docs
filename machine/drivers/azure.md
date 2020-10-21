@@ -2,7 +2,7 @@
 description: Microsoft Azure driver for machine
 keywords: machine, Microsoft Azure, driver
 title: Microsoft Azure
-hide_from_sitemap: true
+sitemap: false
 ---
 
 You need an Azure Subscription to use this Docker Machine driver.

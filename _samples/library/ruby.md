@@ -4,7 +4,7 @@ keywords: library, sample, ruby
 repo: ruby
 layout: docs
 permalink: /samples/library/ruby/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/ruby/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, amazonlinux
 repo: amazonlinux
 layout: docs
 permalink: /samples/library/amazonlinux/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/amazonlinux/
 description: |

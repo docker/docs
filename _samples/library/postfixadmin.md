@@ -4,7 +4,7 @@ keywords: library, sample, postfixadmin
 repo: postfixadmin
 layout: docs
 permalink: /samples/library/postfixadmin/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/postfixadmin/
 description: |

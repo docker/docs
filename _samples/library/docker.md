@@ -4,7 +4,7 @@ keywords: library, sample, docker
 repo: docker
 layout: docs
 permalink: /samples/library/docker/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/docker/
 description: |

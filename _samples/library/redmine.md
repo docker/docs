@@ -4,7 +4,7 @@ keywords: library, sample, redmine
 repo: redmine
 layout: docs
 permalink: /samples/library/redmine/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/redmine/
 description: |

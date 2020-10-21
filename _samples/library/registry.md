@@ -4,7 +4,7 @@ keywords: library, sample, registry
 repo: registry
 layout: docs
 permalink: /samples/library/registry/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/registry/
 description: |

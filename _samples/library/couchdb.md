@@ -4,7 +4,7 @@ keywords: library, sample, couchdb
 repo: couchdb
 layout: docs
 permalink: /samples/library/couchdb/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/couchdb/
 description: |

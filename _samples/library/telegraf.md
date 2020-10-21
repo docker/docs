@@ -4,7 +4,7 @@ keywords: library, sample, telegraf
 repo: telegraf
 layout: docs
 permalink: /samples/library/telegraf/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/telegraf/
 description: |

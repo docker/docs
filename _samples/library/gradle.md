@@ -4,7 +4,7 @@ keywords: library, sample, gradle
 repo: gradle
 layout: docs
 permalink: /samples/library/gradle/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/gradle/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, pypy
 repo: pypy
 layout: docs
 permalink: /samples/library/pypy/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/pypy/
 description: |

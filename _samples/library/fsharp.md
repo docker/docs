@@ -4,7 +4,7 @@ keywords: library, sample, fsharp
 repo: fsharp
 layout: docs
 permalink: /samples/library/fsharp/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/fsharp/
 description: |

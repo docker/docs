@@ -4,7 +4,7 @@ keywords: library, sample, openjdk
 repo: openjdk
 layout: docs
 permalink: /samples/library/openjdk/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/openjdk/
 description: |

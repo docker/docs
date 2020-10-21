@@ -4,7 +4,7 @@ keywords: library, sample, erlang
 repo: erlang
 layout: docs
 permalink: /samples/library/erlang/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/erlang/
 description: |

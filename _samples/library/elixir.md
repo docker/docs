@@ -4,7 +4,7 @@ keywords: library, sample, elixir
 repo: elixir
 layout: docs
 permalink: /samples/library/elixir/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/elixir/
 description: |

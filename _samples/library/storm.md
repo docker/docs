@@ -4,7 +4,7 @@ keywords: library, sample, storm
 repo: storm
 layout: docs
 permalink: /samples/library/storm/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/storm/
 description: |

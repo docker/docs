@@ -4,7 +4,7 @@ keywords: library, sample, python
 repo: python
 layout: docs
 permalink: /samples/library/python/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/python/
 description: |

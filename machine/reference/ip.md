@@ -2,7 +2,7 @@
 description: Show client configuration
 keywords: machine, ip, subcommand
 title: docker-machine ip
-hide_from_sitemap: true
+sitemap: false
 ---
 
 Get the IP address of one or more machines.

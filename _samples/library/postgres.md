@@ -4,7 +4,7 @@ keywords: library, sample, postgres
 repo: postgres
 layout: docs
 permalink: /samples/library/postgres/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/postgres/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, elasticsearch
 repo: elasticsearch
 layout: docs
 permalink: /samples/library/elasticsearch/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/elasticsearch/
 description: |

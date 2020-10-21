@@ -4,7 +4,7 @@ keywords: library, sample, amazoncorretto
 repo: amazoncorretto
 layout: docs
 permalink: /samples/library/amazoncorretto/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/amazoncorretto/
 description: |

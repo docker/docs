@@ -4,7 +4,7 @@ keywords: library, sample, vault
 repo: vault
 layout: docs
 permalink: /samples/library/vault/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/vault/
 description: |

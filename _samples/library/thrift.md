@@ -4,7 +4,7 @@ keywords: library, sample, thrift
 repo: thrift
 layout: docs
 permalink: /samples/library/thrift/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/thrift/
 description: |

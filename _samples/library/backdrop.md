@@ -4,7 +4,7 @@ keywords: library, sample, backdrop
 repo: backdrop
 layout: docs
 permalink: /samples/library/backdrop/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/backdrop/
 description: |

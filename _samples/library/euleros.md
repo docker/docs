@@ -4,7 +4,7 @@ keywords: library, sample, euleros
 repo: euleros
 layout: docs
 permalink: /samples/library/euleros/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/euleros/
 description: |

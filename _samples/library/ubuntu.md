@@ -4,7 +4,7 @@ keywords: library, sample, ubuntu
 repo: ubuntu
 layout: docs
 permalink: /samples/library/ubuntu/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/ubuntu/
 description: |

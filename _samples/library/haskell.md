@@ -4,7 +4,7 @@ keywords: library, sample, haskell
 repo: haskell
 layout: docs
 permalink: /samples/library/haskell/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/haskell/
 description: |

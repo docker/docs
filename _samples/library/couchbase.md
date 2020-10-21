@@ -4,7 +4,7 @@ keywords: library, sample, couchbase
 repo: couchbase
 layout: docs
 permalink: /samples/library/couchbase/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/couchbase/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, geonetwork
 repo: geonetwork
 layout: docs
 permalink: /samples/library/geonetwork/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/geonetwork/
 description: |

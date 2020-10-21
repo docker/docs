@@ -4,7 +4,7 @@ keywords: library, sample, notary
 repo: notary
 layout: docs
 permalink: /samples/library/notary/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/notary/
 description: |

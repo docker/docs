@@ -1,7 +1,7 @@
 ---
 description: Smoketest page
 title: Testing page
-hide_from_sitemap: true
+sitemap: false
 toc_min: 1
 ---
 

@@ -4,7 +4,7 @@ keywords: library, sample, gcc
 repo: gcc
 layout: docs
 permalink: /samples/library/gcc/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/gcc/
 description: |

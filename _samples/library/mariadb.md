@@ -4,7 +4,7 @@ keywords: library, sample, mariadb
 repo: mariadb
 layout: docs
 permalink: /samples/library/mariadb/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/mariadb/
 description: |

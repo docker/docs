@@ -4,7 +4,7 @@ keywords: library, sample, teamspeak
 repo: teamspeak
 layout: docs
 permalink: /samples/library/teamspeak/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/teamspeak/
 description: |

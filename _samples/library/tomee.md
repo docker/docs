@@ -4,7 +4,7 @@ keywords: library, sample, tomee
 repo: tomee
 layout: docs
 permalink: /samples/library/tomee/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/tomee/
 description: |

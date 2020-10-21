@@ -4,7 +4,7 @@ keywords: library, sample, swarm
 repo: swarm
 layout: docs
 permalink: /samples/library/swarm/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/swarm/
 description: |

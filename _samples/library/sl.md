@@ -4,7 +4,7 @@ keywords: library, sample, sl
 repo: sl
 layout: docs
 permalink: /samples/library/sl/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/sl/
 description: |

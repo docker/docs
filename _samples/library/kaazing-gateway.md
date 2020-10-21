@@ -4,7 +4,7 @@ keywords: library, sample, kaazing-gateway
 repo: kaazing-gateway
 layout: docs
 permalink: /samples/library/kaazing-gateway/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/kaazing-gateway/
 description: |

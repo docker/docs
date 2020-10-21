@@ -4,7 +4,7 @@ keywords: library, sample, nextcloud
 repo: nextcloud
 layout: docs
 permalink: /samples/library/nextcloud/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/nextcloud/
 description: |

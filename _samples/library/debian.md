@@ -4,7 +4,7 @@ keywords: library, sample, debian
 repo: debian
 layout: docs
 permalink: /samples/library/debian/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/debian/
 description: |

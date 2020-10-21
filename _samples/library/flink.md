@@ -4,7 +4,7 @@ keywords: library, sample, flink
 repo: flink
 layout: docs
 permalink: /samples/library/flink/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/flink/
 description: |

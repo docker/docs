@@ -4,7 +4,7 @@ keywords: library, sample, sentry
 repo: sentry
 layout: docs
 permalink: /samples/library/sentry/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/sentry/
 description: |

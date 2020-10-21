@@ -4,7 +4,7 @@ keywords: library, sample, maven
 repo: maven
 layout: docs
 permalink: /samples/library/maven/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/maven/
 description: |

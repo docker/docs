@@ -4,7 +4,7 @@ keywords: library, sample, crate
 repo: crate
 layout: docs
 permalink: /samples/library/crate/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/crate/
 description: |

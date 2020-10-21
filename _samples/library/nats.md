@@ -4,7 +4,7 @@ keywords: library, sample, nats
 repo: nats
 layout: docs
 permalink: /samples/library/nats/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/nats/
 description: |

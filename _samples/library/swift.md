@@ -4,7 +4,7 @@ keywords: library, sample, swift
 repo: swift
 layout: docs
 permalink: /samples/library/swift/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/swift/
 description: |

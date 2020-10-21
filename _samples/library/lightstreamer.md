@@ -4,7 +4,7 @@ keywords: library, sample, lightstreamer
 repo: lightstreamer
 layout: docs
 permalink: /samples/library/lightstreamer/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/lightstreamer/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, bash
 repo: bash
 layout: docs
 permalink: /samples/library/bash/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/bash/
 description: |

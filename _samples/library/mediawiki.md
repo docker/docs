@@ -4,7 +4,7 @@ keywords: library, sample, mediawiki
 repo: mediawiki
 layout: docs
 permalink: /samples/library/mediawiki/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/mediawiki/
 description: |

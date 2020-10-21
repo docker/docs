@@ -4,7 +4,7 @@ keywords: library, sample, adminer
 repo: adminer
 layout: docs
 permalink: /samples/library/adminer/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/adminer/
 description: |

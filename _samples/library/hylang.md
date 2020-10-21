@@ -4,7 +4,7 @@ keywords: library, sample, hylang
 repo: hylang
 layout: docs
 permalink: /samples/library/hylang/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/hylang/
 description: |

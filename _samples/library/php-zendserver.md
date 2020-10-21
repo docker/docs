@@ -4,7 +4,7 @@ keywords: library, sample, php-zendserver
 repo: php-zendserver
 layout: docs
 permalink: /samples/library/php-zendserver/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/php-zendserver/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, perl
 repo: perl
 layout: docs
 permalink: /samples/library/perl/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/perl/
 description: |

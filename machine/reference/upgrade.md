@@ -2,7 +2,7 @@
 description: Upgrade Docker on a machine
 keywords: machine, upgrade, subcommand
 title: docker-machine upgrade
-hide_from_sitemap: true
+sitemap: false
 ---
 
 Upgrade a machine to the latest version of Docker. How this upgrade happens

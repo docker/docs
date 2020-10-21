@@ -4,7 +4,7 @@ keywords: library, sample, redis
 repo: redis
 layout: docs
 permalink: /samples/library/redis/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/redis/
 description: |

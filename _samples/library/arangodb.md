@@ -4,7 +4,7 @@ keywords: library, sample, arangodb
 repo: arangodb
 layout: docs
 permalink: /samples/library/arangodb/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/arangodb/
 description: |

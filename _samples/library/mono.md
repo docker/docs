@@ -4,7 +4,7 @@ keywords: library, sample, mono
 repo: mono
 layout: docs
 permalink: /samples/library/mono/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/mono/
 description: |

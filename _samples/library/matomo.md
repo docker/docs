@@ -4,7 +4,7 @@ keywords: library, sample, matomo
 repo: matomo
 layout: docs
 permalink: /samples/library/matomo/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/matomo/
 description: |

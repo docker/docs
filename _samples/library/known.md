@@ -4,7 +4,7 @@ keywords: library, sample, known
 repo: known
 layout: docs
 permalink: /samples/library/known/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/known/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, centos
 repo: centos
 layout: docs
 permalink: /samples/library/centos/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/centos/
 description: |

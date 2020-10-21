@@ -4,7 +4,7 @@ keywords: library, sample, memcached
 repo: memcached
 layout: docs
 permalink: /samples/library/memcached/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/memcached/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, clojure
 repo: clojure
 layout: docs
 permalink: /samples/library/clojure/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/clojure/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, orientdb
 repo: orientdb
 layout: docs
 permalink: /samples/library/orientdb/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/orientdb/
 description: |

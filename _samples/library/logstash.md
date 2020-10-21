@@ -4,7 +4,7 @@ keywords: library, sample, logstash
 repo: logstash
 layout: docs
 permalink: /samples/library/logstash/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/logstash/
 description: |

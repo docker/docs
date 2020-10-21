@@ -4,7 +4,7 @@ keywords: library, sample, kibana
 repo: kibana
 layout: docs
 permalink: /samples/library/kibana/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/kibana/
 description: |

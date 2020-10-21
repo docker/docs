@@ -4,7 +4,7 @@ keywords: library, sample, kong
 repo: kong
 layout: docs
 permalink: /samples/library/kong/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/kong/
 description: |

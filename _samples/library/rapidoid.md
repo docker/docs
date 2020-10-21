@@ -4,7 +4,7 @@ keywords: library, sample, rapidoid
 repo: rapidoid
 layout: docs
 permalink: /samples/library/rapidoid/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/rapidoid/
 description: |

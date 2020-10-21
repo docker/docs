@@ -4,7 +4,7 @@ keywords: library, sample, gazebo
 repo: gazebo
 layout: docs
 permalink: /samples/library/gazebo/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/gazebo/
 description: |

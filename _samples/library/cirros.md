@@ -4,7 +4,7 @@ keywords: library, sample, cirros
 repo: cirros
 layout: docs
 permalink: /samples/library/cirros/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/cirros/
 description: |

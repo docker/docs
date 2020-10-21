@@ -4,7 +4,7 @@ keywords: library, sample, express-gateway
 repo: express-gateway
 layout: docs
 permalink: /samples/library/express-gateway/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/express-gateway/
 description: |

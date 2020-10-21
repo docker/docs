@@ -4,7 +4,7 @@ keywords: library, sample, alt
 repo: alt
 layout: docs
 permalink: /samples/library/alt/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/alt/
 description: |

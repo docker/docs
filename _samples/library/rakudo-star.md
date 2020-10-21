@@ -4,7 +4,7 @@ keywords: library, sample, rakudo-star
 repo: rakudo-star
 layout: docs
 permalink: /samples/library/rakudo-star/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/rakudo-star/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, varnish
 repo: varnish
 layout: docs
 permalink: /samples/library/varnish/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/varnish/
 description: |

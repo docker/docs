@@ -4,7 +4,7 @@ keywords: library, sample, ros
 repo: ros
 layout: docs
 permalink: /samples/library/ros/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/ros/
 description: |

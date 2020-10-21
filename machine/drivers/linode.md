@@ -2,7 +2,7 @@
 description: Linode driver for machine
 keywords: machine, Linode, driver
 title: Linode
-hide_from_sitemap: true
+sitemap: false
 ---
 
 Create machines on [Linode](https://www.linode.com).

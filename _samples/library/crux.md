@@ -4,7 +4,7 @@ keywords: library, sample, crux
 repo: crux
 layout: docs
 permalink: /samples/library/crux/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/crux/
 description: |

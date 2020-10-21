@@ -4,7 +4,7 @@ keywords: library, sample, aerospike
 repo: aerospike
 layout: docs
 permalink: /samples/library/aerospike/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/aerospike/
 description: |

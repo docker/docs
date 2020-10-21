@@ -2,7 +2,7 @@
 description: Google Compute Engine driver for machine
 keywords: machine, Google Compute Engine, driver
 title: Google Compute Engine
-hide_from_sitemap: true
+sitemap: false
 ---
 
 Create machines on [Google Compute Engine](https://cloud.google.com/compute/).

@@ -4,7 +4,7 @@ keywords: library, sample, photon
 repo: photon
 layout: docs
 permalink: /samples/library/photon/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/photon/
 description: |

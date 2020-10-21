@@ -4,7 +4,7 @@ keywords: library, sample, chronograf
 repo: chronograf
 layout: docs
 permalink: /samples/library/chronograf/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/chronograf/
 description: |

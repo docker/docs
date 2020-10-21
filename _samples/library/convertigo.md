@@ -4,7 +4,7 @@ keywords: library, sample, convertigo
 repo: convertigo
 layout: docs
 permalink: /samples/library/convertigo/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/convertigo/
 description: |

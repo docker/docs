@@ -4,7 +4,7 @@ keywords: library, sample, ibmjava
 repo: ibmjava
 layout: docs
 permalink: /samples/library/ibmjava/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/ibmjava/
 description: |

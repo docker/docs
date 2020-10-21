@@ -4,7 +4,7 @@ keywords: library, sample, solr
 repo: solr
 layout: docs
 permalink: /samples/library/solr/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/solr/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, neo4j
 repo: neo4j
 layout: docs
 permalink: /samples/library/neo4j/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/neo4j/
 description: |

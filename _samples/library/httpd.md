@@ -4,7 +4,7 @@ keywords: library, sample, httpd
 repo: httpd
 layout: docs
 permalink: /samples/library/httpd/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/httpd/
 description: |

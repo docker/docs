@@ -4,7 +4,7 @@ keywords: library, sample, groovy
 repo: groovy
 layout: docs
 permalink: /samples/library/groovy/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/groovy/
 description: |

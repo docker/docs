@@ -4,7 +4,7 @@ keywords: library, sample, spiped
 repo: spiped
 layout: docs
 permalink: /samples/library/spiped/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/spiped/
 description: |

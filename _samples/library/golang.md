@@ -4,7 +4,7 @@ keywords: library, sample, golang
 repo: golang
 layout: docs
 permalink: /samples/library/golang/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/golang/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, rethinkdb
 repo: rethinkdb
 layout: docs
 permalink: /samples/library/rethinkdb/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/rethinkdb/
 description: |

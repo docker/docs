@@ -4,7 +4,7 @@ keywords: library, sample, mysql
 repo: mysql
 layout: docs
 permalink: /samples/library/mysql/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/mysql/
 description: |

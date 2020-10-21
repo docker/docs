@@ -4,7 +4,7 @@ keywords: library, sample, fluentd
 repo: fluentd
 layout: docs
 permalink: /samples/library/fluentd/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/fluentd/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, cassandra
 repo: cassandra
 layout: docs
 permalink: /samples/library/cassandra/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/cassandra/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, joomla
 repo: joomla
 layout: docs
 permalink: /samples/library/joomla/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/joomla/
 description: |

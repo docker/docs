@@ -4,7 +4,7 @@ keywords: library, sample, swipl
 repo: swipl
 layout: docs
 permalink: /samples/library/swipl/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/swipl/
 description: |

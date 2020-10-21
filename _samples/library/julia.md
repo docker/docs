@@ -4,7 +4,7 @@ keywords: library, sample, julia
 repo: julia
 layout: docs
 permalink: /samples/library/julia/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/julia/
 description: |

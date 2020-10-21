@@ -4,7 +4,7 @@ keywords: library, sample, traefik
 repo: traefik
 layout: docs
 permalink: /samples/library/traefik/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/traefik/
 description: |

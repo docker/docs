@@ -4,7 +4,7 @@ keywords: library, sample, wordpress
 repo: wordpress
 layout: docs
 permalink: /samples/library/wordpress/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/wordpress/
 description: |

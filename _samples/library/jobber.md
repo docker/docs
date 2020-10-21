@@ -4,7 +4,7 @@ keywords: library, sample, jobber
 repo: jobber
 layout: docs
 permalink: /samples/library/jobber/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/jobber/
 description: |

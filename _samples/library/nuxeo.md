@@ -4,7 +4,7 @@ keywords: library, sample, nuxeo
 repo: nuxeo
 layout: docs
 permalink: /samples/library/nuxeo/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/nuxeo/
 description: |

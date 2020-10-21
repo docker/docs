@@ -4,7 +4,7 @@ keywords: library, sample, jetty
 repo: jetty
 layout: docs
 permalink: /samples/library/jetty/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/jetty/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, node
 repo: node
 layout: docs
 permalink: /samples/library/node/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/node/
 description: |

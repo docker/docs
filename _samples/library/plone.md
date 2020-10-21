@@ -4,7 +4,7 @@ keywords: library, sample, plone
 repo: plone
 layout: docs
 permalink: /samples/library/plone/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/plone/
 description: |

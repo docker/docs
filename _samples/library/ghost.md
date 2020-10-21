@@ -4,7 +4,7 @@ keywords: library, sample, ghost
 repo: ghost
 layout: docs
 permalink: /samples/library/ghost/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/ghost/
 description: |

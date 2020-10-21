@@ -4,7 +4,7 @@ keywords: library, sample, silverpeas
 repo: silverpeas
 layout: docs
 permalink: /samples/library/silverpeas/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/silverpeas/
 description: |

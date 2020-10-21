@@ -2,7 +2,7 @@
 description: Mount directory from machine
 keywords: machine, mount, subcommand
 title: docker-machine mount
-hide_from_sitemap: true
+sitemap: false
 ---
 
 Mount directories from a machine to your local host, using `sshfs`.

@@ -4,7 +4,7 @@ keywords: library, sample, buildpack-deps
 repo: buildpack-deps
 layout: docs
 permalink: /samples/library/buildpack-deps/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/buildpack-deps/
 description: |

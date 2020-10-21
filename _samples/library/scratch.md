@@ -4,7 +4,7 @@ keywords: library, sample, scratch
 repo: scratch
 layout: docs
 permalink: /samples/library/scratch/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/scratch/
 description: |

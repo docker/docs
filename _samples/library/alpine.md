@@ -4,7 +4,7 @@ keywords: library, sample, alpine
 repo: alpine
 layout: docs
 permalink: /samples/library/alpine/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/alpine/
 description: |

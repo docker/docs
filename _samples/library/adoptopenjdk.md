@@ -4,7 +4,7 @@ keywords: library, sample, adoptopenjdk
 repo: adoptopenjdk
 layout: docs
 permalink: /samples/library/adoptopenjdk/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/adoptopenjdk/
 description: |

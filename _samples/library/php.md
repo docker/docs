@@ -4,7 +4,7 @@ keywords: library, sample, php
 repo: php
 layout: docs
 permalink: /samples/library/php/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/php/
 description: |

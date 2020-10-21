@@ -4,7 +4,7 @@ keywords: library, sample, oraclelinux
 repo: oraclelinux
 layout: docs
 permalink: /samples/library/oraclelinux/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/oraclelinux/
 description: |

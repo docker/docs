@@ -4,7 +4,7 @@ keywords: library, sample, sourcemage
 repo: sourcemage
 layout: docs
 permalink: /samples/library/sourcemage/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/sourcemage/
 description: |

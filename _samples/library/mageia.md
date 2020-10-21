@@ -4,7 +4,7 @@ keywords: library, sample, mageia
 repo: mageia
 layout: docs
 permalink: /samples/library/mageia/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/mageia/
 description: |

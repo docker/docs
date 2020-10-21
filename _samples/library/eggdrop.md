@@ -4,7 +4,7 @@ keywords: library, sample, eggdrop
 repo: eggdrop
 layout: docs
 permalink: /samples/library/eggdrop/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/eggdrop/
 description: |

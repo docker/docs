@@ -4,7 +4,7 @@ keywords: library, sample, zookeeper
 repo: zookeeper
 layout: docs
 permalink: /samples/library/zookeeper/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/zookeeper/
 description: |

@@ -4,7 +4,7 @@ keywords: library, sample, xwiki
 repo: xwiki
 layout: docs
 permalink: /samples/library/xwiki/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/xwiki/
 description: |

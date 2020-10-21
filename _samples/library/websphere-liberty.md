@@ -4,7 +4,7 @@ keywords: library, sample, websphere-liberty
 repo: websphere-liberty
 layout: docs
 permalink: /samples/library/websphere-liberty/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/websphere-liberty/
 description: |

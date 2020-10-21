@@ -4,7 +4,7 @@ keywords: library, sample, haproxy
 repo: haproxy
 layout: docs
 permalink: /samples/library/haproxy/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/haproxy/
 description: |

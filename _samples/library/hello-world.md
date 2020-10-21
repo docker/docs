@@ -4,7 +4,7 @@ keywords: library, sample, hello-world
 repo: hello-world
 layout: docs
 permalink: /samples/library/hello-world/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/hello-world/
 description: |

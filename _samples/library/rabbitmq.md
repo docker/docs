@@ -4,7 +4,7 @@ keywords: library, sample, rabbitmq
 repo: rabbitmq
 layout: docs
 permalink: /samples/library/rabbitmq/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/rabbitmq/
 description: |

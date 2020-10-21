@@ -4,7 +4,7 @@ keywords: library, sample, znc
 repo: znc
 layout: docs
 permalink: /samples/library/znc/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/znc/
 description: |

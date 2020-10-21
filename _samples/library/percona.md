@@ -4,7 +4,7 @@ keywords: library, sample, percona
 repo: percona
 layout: docs
 permalink: /samples/library/percona/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/percona/
 description: |

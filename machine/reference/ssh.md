@@ -2,7 +2,7 @@
 description: Log into or run a command on a machine using SSH.
 keywords: machine, ssh, subcommand
 title: docker-machine ssh
-hide_from_sitemap: true
+sitemap: false
 ---
 
 Log into or run a command on a machine using SSH.

@@ -4,7 +4,7 @@ keywords: library, sample, sapmachine
 repo: sapmachine
 layout: docs
 permalink: /samples/library/sapmachine/
-hide_from_sitemap: true
+sitemap: false
 redirect_from:
 - /samples/sapmachine/
 description: |
