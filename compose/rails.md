@@ -212,10 +212,6 @@ That's it. Your app should now be running on port 3000 on your Docker daemon.
 On Docker Desktop for Mac and Docker Desktop for Windows, go to `http://localhost:3000` on a web
 browser to see the Rails Welcome.
 
-If you are using [Docker Machine](../machine/overview.md), then `docker-machine ip
-MACHINE_VM` returns the Docker host IP address, to which you can append the port
-(`<Docker-Host-IP>:3000`).
-
 ![Rails example](images/rails-welcome.png)
 
 ### Stop the application

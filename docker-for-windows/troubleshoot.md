@@ -239,7 +239,7 @@ Here are some steps to take if you experience similar problems:
     ![Hyper-V manager](images/hyperv-manager.png)
 
 4.  Set up an external network switch. If you plan at any point to use
-    [Docker Machine](../machine/overview.md) to set up multiple local VMs, you
+    [Docker Machine](../machine/index.md) to set up multiple local VMs, you
     need this anyway, as described in the topic on the
     [Hyper-V driver for Docker Machine](../machine/drivers/hyper-v.md#example).
     You can replace `DockerNAT` with this switch.

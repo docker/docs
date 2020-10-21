@@ -1340,7 +1340,7 @@ manuals:
   section:
   - sectiontitle: Docker Machine
     section:
-    - path: /machine/overview/
+    - path: /machine/
       title: Machine overview
     - path: /machine/install-machine/
       title: Install Machine

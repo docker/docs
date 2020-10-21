@@ -162,9 +162,7 @@ $ docker-compose down
 ### Single host deployments
 
 Compose has traditionally been focused on development and testing workflows,
-but with each release we're making progress on more production-oriented features. You can use Compose to deploy to a remote Docker Engine. The Docker Engine may be a single instance provisioned with
-[Docker Machine](../machine/overview.md) or an entire
-[Docker Swarm](../engine/swarm/index.md) cluster.
+but with each release we're making progress on more production-oriented features.
 
 For details on using production-oriented features, see
 [compose in production](production.md) in this documentation.
