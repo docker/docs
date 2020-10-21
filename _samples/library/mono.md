@@ -3,7 +3,7 @@ title: mono
 keywords: library, sample, mono
 repo: mono
 layout: docs
-permalink: /samples/library/mono/
+redirect_to: https://hub.docker.com/_/mono/
 sitemap: false
 redirect_from:
 - /samples/mono/

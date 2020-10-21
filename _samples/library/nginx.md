@@ -3,7 +3,7 @@ title: nginx
 keywords: library, sample, nginx
 repo: nginx
 layout: docs
-permalink: /samples/library/nginx/
+redirect_to: https://hub.docker.com/_/nginx/
 sitemap: false
 redirect_from:
 - /samples/nginx/

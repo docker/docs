@@ -3,7 +3,7 @@ title: hello-world
 keywords: library, sample, hello-world
 repo: hello-world
 layout: docs
-permalink: /samples/library/hello-world/
+redirect_to: https://hub.docker.com/_/hello-world/
 sitemap: false
 redirect_from:
 - /samples/hello-world/

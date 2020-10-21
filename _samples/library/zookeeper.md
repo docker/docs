@@ -3,7 +3,7 @@ title: zookeeper
 keywords: library, sample, zookeeper
 repo: zookeeper
 layout: docs
-permalink: /samples/library/zookeeper/
+redirect_to: https://hub.docker.com/_/zookeeper/
 sitemap: false
 redirect_from:
 - /samples/zookeeper/

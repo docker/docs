@@ -3,7 +3,7 @@ title: euleros
 keywords: library, sample, euleros
 repo: euleros
 layout: docs
-permalink: /samples/library/euleros/
+redirect_to: https://hub.docker.com/_/euleros/
 sitemap: false
 redirect_from:
 - /samples/euleros/

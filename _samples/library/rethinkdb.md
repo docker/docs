@@ -3,7 +3,7 @@ title: rethinkdb
 keywords: library, sample, rethinkdb
 repo: rethinkdb
 layout: docs
-permalink: /samples/library/rethinkdb/
+redirect_to: https://hub.docker.com/_/rethinkdb/
 sitemap: false
 redirect_from:
 - /samples/rethinkdb/

@@ -3,7 +3,7 @@ title: orientdb
 keywords: library, sample, orientdb
 repo: orientdb
 layout: docs
-permalink: /samples/library/orientdb/
+redirect_to: https://hub.docker.com/_/orientdb/
 sitemap: false
 redirect_from:
 - /samples/orientdb/

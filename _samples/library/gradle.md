@@ -3,7 +3,7 @@ title: gradle
 keywords: library, sample, gradle
 repo: gradle
 layout: docs
-permalink: /samples/library/gradle/
+redirect_to: https://hub.docker.com/_/gradle/
 sitemap: false
 redirect_from:
 - /samples/gradle/

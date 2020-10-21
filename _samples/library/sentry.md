@@ -3,7 +3,7 @@ title: sentry
 keywords: library, sample, sentry
 repo: sentry
 layout: docs
-permalink: /samples/library/sentry/
+redirect_to: https://hub.docker.com/_/sentry/
 sitemap: false
 redirect_from:
 - /samples/sentry/

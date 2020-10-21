@@ -3,7 +3,7 @@ title: elasticsearch
 keywords: library, sample, elasticsearch
 repo: elasticsearch
 layout: docs
-permalink: /samples/library/elasticsearch/
+redirect_to: https://hub.docker.com/_/elasticsearch/
 sitemap: false
 redirect_from:
 - /samples/elasticsearch/

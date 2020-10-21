@@ -3,7 +3,7 @@ title: adoptopenjdk
 keywords: library, sample, adoptopenjdk
 repo: adoptopenjdk
 layout: docs
-permalink: /samples/library/adoptopenjdk/
+redirect_to: https://hub.docker.com/_/adoptopenjdk/
 sitemap: false
 redirect_from:
 - /samples/adoptopenjdk/

@@ -3,7 +3,7 @@ title: redmine
 keywords: library, sample, redmine
 repo: redmine
 layout: docs
-permalink: /samples/library/redmine/
+redirect_to: https://hub.docker.com/_/redmine/
 sitemap: false
 redirect_from:
 - /samples/redmine/

@@ -3,7 +3,7 @@ title: logstash
 keywords: library, sample, logstash
 repo: logstash
 layout: docs
-permalink: /samples/library/logstash/
+redirect_to: https://hub.docker.com/_/logstash/
 sitemap: false
 redirect_from:
 - /samples/logstash/

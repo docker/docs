@@ -3,7 +3,7 @@ title: geonetwork
 keywords: library, sample, geonetwork
 repo: geonetwork
 layout: docs
-permalink: /samples/library/geonetwork/
+redirect_to: https://hub.docker.com/_/geonetwork/
 sitemap: false
 redirect_from:
 - /samples/geonetwork/

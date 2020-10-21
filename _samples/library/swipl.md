@@ -3,7 +3,7 @@ title: swipl
 keywords: library, sample, swipl
 repo: swipl
 layout: docs
-permalink: /samples/library/swipl/
+redirect_to: https://hub.docker.com/_/swipl/
 sitemap: false
 redirect_from:
 - /samples/swipl/

@@ -3,7 +3,7 @@ title: gcc
 keywords: library, sample, gcc
 repo: gcc
 layout: docs
-permalink: /samples/library/gcc/
+redirect_to: https://hub.docker.com/_/gcc/
 sitemap: false
 redirect_from:
 - /samples/gcc/

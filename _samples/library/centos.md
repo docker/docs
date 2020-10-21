@@ -3,7 +3,7 @@ title: centos
 keywords: library, sample, centos
 repo: centos
 layout: docs
-permalink: /samples/library/centos/
+redirect_to: https://hub.docker.com/_/centos/
 sitemap: false
 redirect_from:
 - /samples/centos/

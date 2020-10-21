@@ -3,7 +3,7 @@ title: rust
 keywords: library, sample, rust
 repo: rust
 layout: docs
-permalink: /samples/library/rust/
+redirect_to: https://hub.docker.com/_/rust/
 sitemap: false
 redirect_from:
 - /samples/rust/

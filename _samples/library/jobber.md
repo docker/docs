@@ -3,7 +3,7 @@ title: jobber
 keywords: library, sample, jobber
 repo: jobber
 layout: docs
-permalink: /samples/library/jobber/
+redirect_to: https://hub.docker.com/_/jobber/
 sitemap: false
 redirect_from:
 - /samples/jobber/

@@ -3,7 +3,7 @@ title: groovy
 keywords: library, sample, groovy
 repo: groovy
 layout: docs
-permalink: /samples/library/groovy/
+redirect_to: https://hub.docker.com/_/groovy/
 sitemap: false
 redirect_from:
 - /samples/groovy/

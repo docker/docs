@@ -3,7 +3,7 @@ title: alt
 keywords: library, sample, alt
 repo: alt
 layout: docs
-permalink: /samples/library/alt/
+redirect_to: https://hub.docker.com/_/alt/
 sitemap: false
 redirect_from:
 - /samples/alt/

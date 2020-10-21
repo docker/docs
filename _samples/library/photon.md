@@ -3,7 +3,7 @@ title: photon
 keywords: library, sample, photon
 repo: photon
 layout: docs
-permalink: /samples/library/photon/
+redirect_to: https://hub.docker.com/_/photon/
 sitemap: false
 redirect_from:
 - /samples/photon/

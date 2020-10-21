@@ -3,7 +3,7 @@ title: rocket.chat
 keywords: library, sample, rocket.chat
 repo: rocket.chat
 layout: docs
-permalink: /samples/library/rocket.chat/
+redirect_to: https://hub.docker.com/_/rocket.chat/
 sitemap: false
 redirect_from:
 - /samples/rocket.chat/

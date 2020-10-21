@@ -3,7 +3,7 @@ title: httpd
 keywords: library, sample, httpd
 repo: httpd
 layout: docs
-permalink: /samples/library/httpd/
+redirect_to: https://hub.docker.com/_/httpd/
 sitemap: false
 redirect_from:
 - /samples/httpd/

@@ -3,7 +3,7 @@ title: clefos
 keywords: library, sample, clefos
 repo: clefos
 layout: docs
-permalink: /samples/library/clefos/
+redirect_to: https://hub.docker.com/_/clefos/
 sitemap: false
 redirect_from:
 - /samples/clefos/

@@ -3,7 +3,7 @@ title: perl
 keywords: library, sample, perl
 repo: perl
 layout: docs
-permalink: /samples/library/perl/
+redirect_to: https://hub.docker.com/_/perl/
 sitemap: false
 redirect_from:
 - /samples/perl/

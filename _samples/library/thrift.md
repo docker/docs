@@ -3,7 +3,7 @@ title: thrift
 keywords: library, sample, thrift
 repo: thrift
 layout: docs
-permalink: /samples/library/thrift/
+redirect_to: https://hub.docker.com/_/thrift/
 sitemap: false
 redirect_from:
 - /samples/thrift/

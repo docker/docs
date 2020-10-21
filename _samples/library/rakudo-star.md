@@ -3,7 +3,7 @@ title: rakudo-star
 keywords: library, sample, rakudo-star
 repo: rakudo-star
 layout: docs
-permalink: /samples/library/rakudo-star/
+redirect_to: https://hub.docker.com/_/rakudo-star/
 sitemap: false
 redirect_from:
 - /samples/rakudo-star/

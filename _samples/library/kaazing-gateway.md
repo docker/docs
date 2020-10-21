@@ -3,7 +3,7 @@ title: kaazing-gateway
 keywords: library, sample, kaazing-gateway
 repo: kaazing-gateway
 layout: docs
-permalink: /samples/library/kaazing-gateway/
+redirect_to: https://hub.docker.com/_/kaazing-gateway/
 sitemap: false
 redirect_from:
 - /samples/kaazing-gateway/

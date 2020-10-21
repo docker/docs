@@ -3,7 +3,7 @@ title: node
 keywords: library, sample, node
 repo: node
 layout: docs
-permalink: /samples/library/node/
+redirect_to: https://hub.docker.com/_/node/
 sitemap: false
 redirect_from:
 - /samples/node/

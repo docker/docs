@@ -3,7 +3,7 @@ title: aerospike
 keywords: library, sample, aerospike
 repo: aerospike
 layout: docs
-permalink: /samples/library/aerospike/
+redirect_to: https://hub.docker.com/_/aerospike/
 sitemap: false
 redirect_from:
 - /samples/aerospike/

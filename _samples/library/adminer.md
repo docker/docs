@@ -3,7 +3,7 @@ title: adminer
 keywords: library, sample, adminer
 repo: adminer
 layout: docs
-permalink: /samples/library/adminer/
+redirect_to: https://hub.docker.com/_/adminer/
 sitemap: false
 redirect_from:
 - /samples/adminer/

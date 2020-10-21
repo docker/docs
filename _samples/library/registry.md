@@ -3,7 +3,7 @@ title: registry
 keywords: library, sample, registry
 repo: registry
 layout: docs
-permalink: /samples/library/registry/
+redirect_to: https://hub.docker.com/_/registry/
 sitemap: false
 redirect_from:
 - /samples/registry/

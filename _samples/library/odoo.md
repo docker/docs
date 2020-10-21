@@ -3,7 +3,7 @@ title: odoo
 keywords: library, sample, odoo
 repo: odoo
 layout: docs
-permalink: /samples/library/odoo/
+redirect_to: https://hub.docker.com/_/odoo/
 sitemap: false
 redirect_from:
 - /samples/odoo/

@@ -3,7 +3,7 @@ title: buildpack-deps
 keywords: library, sample, buildpack-deps
 repo: buildpack-deps
 layout: docs
-permalink: /samples/library/buildpack-deps/
+redirect_to: https://hub.docker.com/_/buildpack-deps/
 sitemap: false
 redirect_from:
 - /samples/buildpack-deps/

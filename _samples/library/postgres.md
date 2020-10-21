@@ -3,7 +3,7 @@ title: postgres
 keywords: library, sample, postgres
 repo: postgres
 layout: docs
-permalink: /samples/library/postgres/
+redirect_to: https://hub.docker.com/_/postgres/
 sitemap: false
 redirect_from:
 - /samples/postgres/

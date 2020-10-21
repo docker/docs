@@ -3,7 +3,7 @@ title: telegraf
 keywords: library, sample, telegraf
 repo: telegraf
 layout: docs
-permalink: /samples/library/telegraf/
+redirect_to: https://hub.docker.com/_/telegraf/
 sitemap: false
 redirect_from:
 - /samples/telegraf/

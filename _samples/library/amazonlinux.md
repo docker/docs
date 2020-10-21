@@ -3,7 +3,7 @@ title: amazonlinux
 keywords: library, sample, amazonlinux
 repo: amazonlinux
 layout: docs
-permalink: /samples/library/amazonlinux/
+redirect_to: https://hub.docker.com/_/amazonlinux/
 sitemap: false
 redirect_from:
 - /samples/amazonlinux/

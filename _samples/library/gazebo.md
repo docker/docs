@@ -3,7 +3,7 @@ title: gazebo
 keywords: library, sample, gazebo
 repo: gazebo
 layout: docs
-permalink: /samples/library/gazebo/
+redirect_to: https://hub.docker.com/_/gazebo/
 sitemap: false
 redirect_from:
 - /samples/gazebo/

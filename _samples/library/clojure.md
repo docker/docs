@@ -3,7 +3,7 @@ title: clojure
 keywords: library, sample, clojure
 repo: clojure
 layout: docs
-permalink: /samples/library/clojure/
+redirect_to: https://hub.docker.com/_/clojure/
 sitemap: false
 redirect_from:
 - /samples/clojure/

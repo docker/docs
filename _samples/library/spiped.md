@@ -3,7 +3,7 @@ title: spiped
 keywords: library, sample, spiped
 repo: spiped
 layout: docs
-permalink: /samples/library/spiped/
+redirect_to: https://hub.docker.com/_/spiped/
 sitemap: false
 redirect_from:
 - /samples/spiped/

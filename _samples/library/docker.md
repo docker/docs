@@ -3,7 +3,7 @@ title: docker
 keywords: library, sample, docker
 repo: docker
 layout: docs
-permalink: /samples/library/docker/
+redirect_to: https://hub.docker.com/_/docker/
 sitemap: false
 redirect_from:
 - /samples/docker/

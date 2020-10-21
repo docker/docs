@@ -3,7 +3,7 @@ title: haxe
 keywords: library, sample, haxe
 repo: haxe
 layout: docs
-permalink: /samples/library/haxe/
+redirect_to: https://hub.docker.com/_/haxe/
 sitemap: false
 redirect_from:
 - /samples/haxe/

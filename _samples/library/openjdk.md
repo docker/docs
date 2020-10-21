@@ -3,7 +3,7 @@ title: openjdk
 keywords: library, sample, openjdk
 repo: openjdk
 layout: docs
-permalink: /samples/library/openjdk/
+redirect_to: https://hub.docker.com/_/openjdk/
 sitemap: false
 redirect_from:
 - /samples/openjdk/

@@ -3,7 +3,7 @@ title: mariadb
 keywords: library, sample, mariadb
 repo: mariadb
 layout: docs
-permalink: /samples/library/mariadb/
+redirect_to: https://hub.docker.com/_/mariadb/
 sitemap: false
 redirect_from:
 - /samples/mariadb/

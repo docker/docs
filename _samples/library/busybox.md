@@ -3,7 +3,7 @@ title: busybox
 keywords: library, sample, busybox
 repo: busybox
 layout: docs
-permalink: /samples/library/busybox/
+redirect_to: https://hub.docker.com/_/busybox/
 sitemap: false
 redirect_from:
 - /samples/busybox/

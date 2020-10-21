@@ -3,7 +3,7 @@ title: memcached
 keywords: library, sample, memcached
 repo: memcached
 layout: docs
-permalink: /samples/library/memcached/
+redirect_to: https://hub.docker.com/_/memcached/
 sitemap: false
 redirect_from:
 - /samples/memcached/

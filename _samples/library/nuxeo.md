@@ -3,7 +3,7 @@ title: nuxeo
 keywords: library, sample, nuxeo
 repo: nuxeo
 layout: docs
-permalink: /samples/library/nuxeo/
+redirect_to: https://hub.docker.com/_/nuxeo/
 sitemap: false
 redirect_from:
 - /samples/nuxeo/

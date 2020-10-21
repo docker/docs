@@ -3,7 +3,7 @@ title: znc
 keywords: library, sample, znc
 repo: znc
 layout: docs
-permalink: /samples/library/znc/
+redirect_to: https://hub.docker.com/_/znc/
 sitemap: false
 redirect_from:
 - /samples/znc/

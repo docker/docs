@@ -3,7 +3,7 @@ title: alpine
 keywords: library, sample, alpine
 repo: alpine
 layout: docs
-permalink: /samples/library/alpine/
+redirect_to: https://hub.docker.com/_/alpine/
 sitemap: false
 redirect_from:
 - /samples/alpine/

@@ -3,7 +3,7 @@ title: drupal
 keywords: library, sample, drupal
 repo: drupal
 layout: docs
-permalink: /samples/library/drupal/
+redirect_to: https://hub.docker.com/_/drupal/
 sitemap: false
 redirect_from:
 - /samples/drupal/

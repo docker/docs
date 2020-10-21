@@ -3,7 +3,7 @@ title: backdrop
 keywords: library, sample, backdrop
 repo: backdrop
 layout: docs
-permalink: /samples/library/backdrop/
+redirect_to: https://hub.docker.com/_/backdrop/
 sitemap: false
 redirect_from:
 - /samples/backdrop/

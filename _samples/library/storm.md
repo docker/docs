@@ -3,7 +3,7 @@ title: storm
 keywords: library, sample, storm
 repo: storm
 layout: docs
-permalink: /samples/library/storm/
+redirect_to: https://hub.docker.com/_/storm/
 sitemap: false
 redirect_from:
 - /samples/storm/

@@ -3,7 +3,7 @@ title: arangodb
 keywords: library, sample, arangodb
 repo: arangodb
 layout: docs
-permalink: /samples/library/arangodb/
+redirect_to: https://hub.docker.com/_/arangodb/
 sitemap: false
 redirect_from:
 - /samples/arangodb/

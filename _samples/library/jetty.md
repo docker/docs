@@ -3,7 +3,7 @@ title: jetty
 keywords: library, sample, jetty
 repo: jetty
 layout: docs
-permalink: /samples/library/jetty/
+redirect_to: https://hub.docker.com/_/jetty/
 sitemap: false
 redirect_from:
 - /samples/jetty/

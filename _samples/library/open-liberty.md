@@ -3,7 +3,7 @@ title: open-liberty
 keywords: library, sample, open-liberty
 repo: open-liberty
 layout: docs
-permalink: /samples/library/open-liberty/
+redirect_to: https://hub.docker.com/_/open-liberty/
 sitemap: false
 redirect_from:
 - /samples/open-liberty/

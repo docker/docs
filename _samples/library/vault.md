@@ -3,7 +3,7 @@ title: vault
 keywords: library, sample, vault
 repo: vault
 layout: docs
-permalink: /samples/library/vault/
+redirect_to: https://hub.docker.com/_/vault/
 sitemap: false
 redirect_from:
 - /samples/vault/

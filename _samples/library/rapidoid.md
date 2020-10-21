@@ -3,7 +3,7 @@ title: rapidoid
 keywords: library, sample, rapidoid
 repo: rapidoid
 layout: docs
-permalink: /samples/library/rapidoid/
+redirect_to: https://hub.docker.com/_/rapidoid/
 sitemap: false
 redirect_from:
 - /samples/rapidoid/

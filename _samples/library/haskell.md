@@ -3,7 +3,7 @@ title: haskell
 keywords: library, sample, haskell
 repo: haskell
 layout: docs
-permalink: /samples/library/haskell/
+redirect_to: https://hub.docker.com/_/haskell/
 sitemap: false
 redirect_from:
 - /samples/haskell/

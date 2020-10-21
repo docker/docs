@@ -3,7 +3,7 @@ title: ibmjava
 keywords: library, sample, ibmjava
 repo: ibmjava
 layout: docs
-permalink: /samples/library/ibmjava/
+redirect_to: https://hub.docker.com/_/ibmjava/
 sitemap: false
 redirect_from:
 - /samples/ibmjava/

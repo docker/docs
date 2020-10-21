@@ -3,7 +3,7 @@ title: bash
 keywords: library, sample, bash
 repo: bash
 layout: docs
-permalink: /samples/library/bash/
+redirect_to: https://hub.docker.com/_/bash/
 sitemap: false
 redirect_from:
 - /samples/bash/

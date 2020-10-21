@@ -3,7 +3,7 @@ title: rabbitmq
 keywords: library, sample, rabbitmq
 repo: rabbitmq
 layout: docs
-permalink: /samples/library/rabbitmq/
+redirect_to: https://hub.docker.com/_/rabbitmq/
 sitemap: false
 redirect_from:
 - /samples/rabbitmq/

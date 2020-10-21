@@ -3,7 +3,7 @@ title: varnish
 keywords: library, sample, varnish
 repo: varnish
 layout: docs
-permalink: /samples/library/varnish/
+redirect_to: https://hub.docker.com/_/varnish/
 sitemap: false
 redirect_from:
 - /samples/varnish/

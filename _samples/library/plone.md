@@ -3,7 +3,7 @@ title: plone
 keywords: library, sample, plone
 repo: plone
 layout: docs
-permalink: /samples/library/plone/
+redirect_to: https://hub.docker.com/_/plone/
 sitemap: false
 redirect_from:
 - /samples/plone/

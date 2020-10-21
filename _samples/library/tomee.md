@@ -3,7 +3,7 @@ title: tomee
 keywords: library, sample, tomee
 repo: tomee
 layout: docs
-permalink: /samples/library/tomee/
+redirect_to: https://hub.docker.com/_/tomee/
 sitemap: false
 redirect_from:
 - /samples/tomee/

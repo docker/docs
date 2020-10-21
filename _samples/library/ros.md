@@ -3,7 +3,7 @@ title: ros
 keywords: library, sample, ros
 repo: ros
 layout: docs
-permalink: /samples/library/ros/
+redirect_to: https://hub.docker.com/_/ros/
 sitemap: false
 redirect_from:
 - /samples/ros/

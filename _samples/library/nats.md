@@ -3,7 +3,7 @@ title: nats
 keywords: library, sample, nats
 repo: nats
 layout: docs
-permalink: /samples/library/nats/
+redirect_to: https://hub.docker.com/_/nats/
 sitemap: false
 redirect_from:
 - /samples/nats/

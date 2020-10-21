@@ -3,7 +3,7 @@ title: jruby
 keywords: library, sample, jruby
 repo: jruby
 layout: docs
-permalink: /samples/library/jruby/
+redirect_to: https://hub.docker.com/_/jruby/
 sitemap: false
 redirect_from:
 - /samples/jruby/

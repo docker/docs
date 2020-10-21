@@ -3,7 +3,7 @@ title: influxdb
 keywords: library, sample, influxdb
 repo: influxdb
 layout: docs
-permalink: /samples/library/influxdb/
+redirect_to: https://hub.docker.com/_/influxdb/
 sitemap: false
 redirect_from:
 - /samples/influxdb/

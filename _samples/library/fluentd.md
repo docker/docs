@@ -3,7 +3,7 @@ title: fluentd
 keywords: library, sample, fluentd
 repo: fluentd
 layout: docs
-permalink: /samples/library/fluentd/
+redirect_to: https://hub.docker.com/_/fluentd/
 sitemap: false
 redirect_from:
 - /samples/fluentd/

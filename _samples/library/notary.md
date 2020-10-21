@@ -3,7 +3,7 @@ title: notary
 keywords: library, sample, notary
 repo: notary
 layout: docs
-permalink: /samples/library/notary/
+redirect_to: https://hub.docker.com/_/notary/
 sitemap: false
 redirect_from:
 - /samples/notary/

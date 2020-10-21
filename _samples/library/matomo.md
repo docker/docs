@@ -3,7 +3,7 @@ title: matomo
 keywords: library, sample, matomo
 repo: matomo
 layout: docs
-permalink: /samples/library/matomo/
+redirect_to: https://hub.docker.com/_/matomo/
 sitemap: false
 redirect_from:
 - /samples/matomo/

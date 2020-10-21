@@ -3,7 +3,7 @@ title: mysql
 keywords: library, sample, mysql
 repo: mysql
 layout: docs
-permalink: /samples/library/mysql/
+redirect_to: https://hub.docker.com/_/mysql/
 sitemap: false
 redirect_from:
 - /samples/mysql/

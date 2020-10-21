@@ -3,7 +3,7 @@ title: mageia
 keywords: library, sample, mageia
 repo: mageia
 layout: docs
-permalink: /samples/library/mageia/
+redirect_to: https://hub.docker.com/_/mageia/
 sitemap: false
 redirect_from:
 - /samples/mageia/

@@ -3,7 +3,7 @@ title: eclipse-mosquitto
 keywords: library, sample, eclipse-mosquitto
 repo: eclipse-mosquitto
 layout: docs
-permalink: /samples/library/eclipse-mosquitto/
+redirect_to: https://hub.docker.com/_/eclipse-mosquitto/
 sitemap: false
 redirect_from:
 - /samples/eclipse-mosquitto/

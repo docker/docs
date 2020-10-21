@@ -3,7 +3,7 @@ title: convertigo
 keywords: library, sample, convertigo
 repo: convertigo
 layout: docs
-permalink: /samples/library/convertigo/
+redirect_to: https://hub.docker.com/_/convertigo/
 sitemap: false
 redirect_from:
 - /samples/convertigo/

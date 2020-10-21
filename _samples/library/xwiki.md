@@ -3,7 +3,7 @@ title: xwiki
 keywords: library, sample, xwiki
 repo: xwiki
 layout: docs
-permalink: /samples/library/xwiki/
+redirect_to: https://hub.docker.com/_/xwiki/
 sitemap: false
 redirect_from:
 - /samples/xwiki/

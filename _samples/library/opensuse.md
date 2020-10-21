@@ -3,7 +3,7 @@ title: opensuse
 keywords: library, sample, opensuse
 repo: opensuse
 layout: docs
-permalink: /samples/library/opensuse/
+redirect_to: https://hub.docker.com/_/opensuse/
 sitemap: false
 redirect_from:
 - /samples/opensuse/

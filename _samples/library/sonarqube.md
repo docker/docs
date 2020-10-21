@@ -3,7 +3,7 @@ title: sonarqube
 keywords: library, sample, sonarqube
 repo: sonarqube
 layout: docs
-permalink: /samples/library/sonarqube/
+redirect_to: https://hub.docker.com/_/sonarqube/
 sitemap: false
 redirect_from:
 - /samples/sonarqube/

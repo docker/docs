@@ -3,7 +3,7 @@ title: wordpress
 keywords: library, sample, wordpress
 repo: wordpress
 layout: docs
-permalink: /samples/library/wordpress/
+redirect_to: https://hub.docker.com/_/wordpress/
 sitemap: false
 redirect_from:
 - /samples/wordpress/

@@ -3,7 +3,7 @@ title: eggdrop
 keywords: library, sample, eggdrop
 repo: eggdrop
 layout: docs
-permalink: /samples/library/eggdrop/
+redirect_to: https://hub.docker.com/_/eggdrop/
 sitemap: false
 redirect_from:
 - /samples/eggdrop/

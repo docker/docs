@@ -3,7 +3,7 @@ title: express-gateway
 keywords: library, sample, express-gateway
 repo: express-gateway
 layout: docs
-permalink: /samples/library/express-gateway/
+redirect_to: https://hub.docker.com/_/express-gateway/
 sitemap: false
 redirect_from:
 - /samples/express-gateway/

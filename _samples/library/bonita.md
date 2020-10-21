@@ -3,7 +3,7 @@ title: bonita
 keywords: library, sample, bonita
 repo: bonita
 layout: docs
-permalink: /samples/library/bonita/
+redirect_to: https://hub.docker.com/_/bonita/
 sitemap: false
 redirect_from:
 - /samples/bonita/

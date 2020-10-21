@@ -3,7 +3,7 @@ title: kong
 keywords: library, sample, kong
 repo: kong
 layout: docs
-permalink: /samples/library/kong/
+redirect_to: https://hub.docker.com/_/kong/
 sitemap: false
 redirect_from:
 - /samples/kong/

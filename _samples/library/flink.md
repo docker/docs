@@ -3,7 +3,7 @@ title: flink
 keywords: library, sample, flink
 repo: flink
 layout: docs
-permalink: /samples/library/flink/
+redirect_to: https://hub.docker.com/_/flink/
 sitemap: false
 redirect_from:
 - /samples/flink/

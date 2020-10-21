@@ -3,7 +3,7 @@ title: swift
 keywords: library, sample, swift
 repo: swift
 layout: docs
-permalink: /samples/library/swift/
+redirect_to: https://hub.docker.com/_/swift/
 sitemap: false
 redirect_from:
 - /samples/swift/

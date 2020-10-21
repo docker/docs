@@ -3,7 +3,7 @@ title: irssi
 keywords: library, sample, irssi
 repo: irssi
 layout: docs
-permalink: /samples/library/irssi/
+redirect_to: https://hub.docker.com/_/irssi/
 sitemap: false
 redirect_from:
 - /samples/irssi/

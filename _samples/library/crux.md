@@ -3,7 +3,7 @@ title: crux
 keywords: library, sample, crux
 repo: crux
 layout: docs
-permalink: /samples/library/crux/
+redirect_to: https://hub.docker.com/_/crux/
 sitemap: false
 redirect_from:
 - /samples/crux/

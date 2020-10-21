@@ -3,7 +3,7 @@ title: traefik
 keywords: library, sample, traefik
 repo: traefik
 layout: docs
-permalink: /samples/library/traefik/
+redirect_to: https://hub.docker.com/_/traefik/
 sitemap: false
 redirect_from:
 - /samples/traefik/

@@ -3,7 +3,7 @@ title: composer
 keywords: library, sample, composer
 repo: composer
 layout: docs
-permalink: /samples/library/composer/
+redirect_to: https://hub.docker.com/_/composer/
 sitemap: false
 redirect_from:
 - /samples/composer/

@@ -3,7 +3,7 @@ title: couchdb
 keywords: library, sample, couchdb
 repo: couchdb
 layout: docs
-permalink: /samples/library/couchdb/
+redirect_to: https://hub.docker.com/_/couchdb/
 sitemap: false
 redirect_from:
 - /samples/couchdb/

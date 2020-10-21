@@ -3,7 +3,7 @@ title: silverpeas
 keywords: library, sample, silverpeas
 repo: silverpeas
 layout: docs
-permalink: /samples/library/silverpeas/
+redirect_to: https://hub.docker.com/_/silverpeas/
 sitemap: false
 redirect_from:
 - /samples/silverpeas/

@@ -3,7 +3,7 @@ title: kapacitor
 keywords: library, sample, kapacitor
 repo: kapacitor
 layout: docs
-permalink: /samples/library/kapacitor/
+redirect_to: https://hub.docker.com/_/kapacitor/
 sitemap: false
 redirect_from:
 - /samples/kapacitor/

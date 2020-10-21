@@ -3,7 +3,7 @@ title: oraclelinux
 keywords: library, sample, oraclelinux
 repo: oraclelinux
 layout: docs
-permalink: /samples/library/oraclelinux/
+redirect_to: https://hub.docker.com/_/oraclelinux/
 sitemap: false
 redirect_from:
 - /samples/oraclelinux/

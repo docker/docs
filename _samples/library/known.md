@@ -3,7 +3,7 @@ title: known
 keywords: library, sample, known
 repo: known
 layout: docs
-permalink: /samples/library/known/
+redirect_to: https://hub.docker.com/_/known/
 sitemap: false
 redirect_from:
 - /samples/known/

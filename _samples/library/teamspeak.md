@@ -3,7 +3,7 @@ title: teamspeak
 keywords: library, sample, teamspeak
 repo: teamspeak
 layout: docs
-permalink: /samples/library/teamspeak/
+redirect_to: https://hub.docker.com/_/teamspeak/
 sitemap: false
 redirect_from:
 - /samples/teamspeak/

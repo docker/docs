@@ -3,7 +3,7 @@ title: clearlinux
 keywords: library, sample, clearlinux
 repo: clearlinux
 layout: docs
-permalink: /samples/library/clearlinux/
+redirect_to: https://hub.docker.com/_/clearlinux/
 sitemap: false
 redirect_from:
 - /samples/clearlinux/

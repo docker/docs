@@ -3,7 +3,7 @@ title: pypy
 keywords: library, sample, pypy
 repo: pypy
 layout: docs
-permalink: /samples/library/pypy/
+redirect_to: https://hub.docker.com/_/pypy/
 sitemap: false
 redirect_from:
 - /samples/pypy/

@@ -3,7 +3,7 @@ title: chronograf
 keywords: library, sample, chronograf
 repo: chronograf
 layout: docs
-permalink: /samples/library/chronograf/
+redirect_to: https://hub.docker.com/_/chronograf/
 sitemap: false
 redirect_from:
 - /samples/chronograf/

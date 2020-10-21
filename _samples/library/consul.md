@@ -3,7 +3,7 @@ title: consul
 keywords: library, sample, consul
 repo: consul
 layout: docs
-permalink: /samples/library/consul/
+redirect_to: https://hub.docker.com/_/consul/
 sitemap: false
 redirect_from:
 - /samples/consul/

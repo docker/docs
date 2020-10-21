@@ -3,7 +3,7 @@ title: redis
 keywords: library, sample, redis
 repo: redis
 layout: docs
-permalink: /samples/library/redis/
+redirect_to: https://hub.docker.com/_/redis/
 sitemap: false
 redirect_from:
 - /samples/redis/

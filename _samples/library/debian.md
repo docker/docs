@@ -3,7 +3,7 @@ title: debian
 keywords: library, sample, debian
 repo: debian
 layout: docs
-permalink: /samples/library/debian/
+redirect_to: https://hub.docker.com/_/debian/
 sitemap: false
 redirect_from:
 - /samples/debian/

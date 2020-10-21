@@ -3,7 +3,7 @@ title: nats-streaming
 keywords: library, sample, nats-streaming
 repo: nats-streaming
 layout: docs
-permalink: /samples/library/nats-streaming/
+redirect_to: https://hub.docker.com/_/nats-streaming/
 sitemap: false
 redirect_from:
 - /samples/nats-streaming/

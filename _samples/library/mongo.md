@@ -3,7 +3,7 @@ title: mongo
 keywords: library, sample, mongo
 repo: mongo
 layout: docs
-permalink: /samples/library/mongo/
+redirect_to: https://hub.docker.com/_/mongo/
 sitemap: false
 redirect_from:
 - /samples/mongo/

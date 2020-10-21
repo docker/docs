@@ -3,7 +3,7 @@ title: amazoncorretto
 keywords: library, sample, amazoncorretto
 repo: amazoncorretto
 layout: docs
-permalink: /samples/library/amazoncorretto/
+redirect_to: https://hub.docker.com/_/amazoncorretto/
 sitemap: false
 redirect_from:
 - /samples/amazoncorretto/

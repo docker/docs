@@ -3,7 +3,7 @@ title: websphere-liberty
 keywords: library, sample, websphere-liberty
 repo: websphere-liberty
 layout: docs
-permalink: /samples/library/websphere-liberty/
+redirect_to: https://hub.docker.com/_/websphere-liberty/
 sitemap: false
 redirect_from:
 - /samples/websphere-liberty/

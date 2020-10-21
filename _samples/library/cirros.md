@@ -3,7 +3,7 @@ title: cirros
 keywords: library, sample, cirros
 repo: cirros
 layout: docs
-permalink: /samples/library/cirros/
+redirect_to: https://hub.docker.com/_/cirros/
 sitemap: false
 redirect_from:
 - /samples/cirros/

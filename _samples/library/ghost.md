@@ -3,7 +3,7 @@ title: ghost
 keywords: library, sample, ghost
 repo: ghost
 layout: docs
-permalink: /samples/library/ghost/
+redirect_to: https://hub.docker.com/_/ghost/
 sitemap: false
 redirect_from:
 - /samples/ghost/

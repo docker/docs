@@ -3,7 +3,7 @@ title: python
 keywords: library, sample, python
 repo: python
 layout: docs
-permalink: /samples/library/python/
+redirect_to: https://hub.docker.com/_/python/
 sitemap: false
 redirect_from:
 - /samples/python/

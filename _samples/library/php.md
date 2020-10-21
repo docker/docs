@@ -3,7 +3,7 @@ title: php
 keywords: library, sample, php
 repo: php
 layout: docs
-permalink: /samples/library/php/
+redirect_to: https://hub.docker.com/_/php/
 sitemap: false
 redirect_from:
 - /samples/php/

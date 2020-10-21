@@ -3,7 +3,7 @@ title: julia
 keywords: library, sample, julia
 repo: julia
 layout: docs
-permalink: /samples/library/julia/
+redirect_to: https://hub.docker.com/_/julia/
 sitemap: false
 redirect_from:
 - /samples/julia/

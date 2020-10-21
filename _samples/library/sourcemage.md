@@ -3,7 +3,7 @@ title: sourcemage
 keywords: library, sample, sourcemage
 repo: sourcemage
 layout: docs
-permalink: /samples/library/sourcemage/
+redirect_to: https://hub.docker.com/_/sourcemage/
 sitemap: false
 redirect_from:
 - /samples/sourcemage/

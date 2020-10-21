@@ -3,7 +3,7 @@ title: ruby
 keywords: library, sample, ruby
 repo: ruby
 layout: docs
-permalink: /samples/library/ruby/
+redirect_to: https://hub.docker.com/_/ruby/
 sitemap: false
 redirect_from:
 - /samples/ruby/

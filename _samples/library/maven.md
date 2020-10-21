@@ -3,7 +3,7 @@ title: maven
 keywords: library, sample, maven
 repo: maven
 layout: docs
-permalink: /samples/library/maven/
+redirect_to: https://hub.docker.com/_/maven/
 sitemap: false
 redirect_from:
 - /samples/maven/

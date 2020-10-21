@@ -3,7 +3,7 @@ title: yourls
 keywords: library, sample, yourls
 repo: yourls
 layout: docs
-permalink: /samples/library/yourls/
+redirect_to: https://hub.docker.com/_/yourls/
 sitemap: false
 redirect_from:
 - /samples/yourls/

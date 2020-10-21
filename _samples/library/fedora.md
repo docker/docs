@@ -3,7 +3,7 @@ title: fedora
 keywords: library, sample, fedora
 repo: fedora
 layout: docs
-permalink: /samples/library/fedora/
+redirect_to: https://hub.docker.com/_/fedora/
 sitemap: false
 redirect_from:
 - /samples/fedora/

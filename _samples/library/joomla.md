@@ -3,7 +3,7 @@ title: joomla
 keywords: library, sample, joomla
 repo: joomla
 layout: docs
-permalink: /samples/library/joomla/
+redirect_to: https://hub.docker.com/_/joomla/
 sitemap: false
 redirect_from:
 - /samples/joomla/

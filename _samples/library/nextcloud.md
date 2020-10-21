@@ -3,7 +3,7 @@ title: nextcloud
 keywords: library, sample, nextcloud
 repo: nextcloud
 layout: docs
-permalink: /samples/library/nextcloud/
+redirect_to: https://hub.docker.com/_/nextcloud/
 sitemap: false
 redirect_from:
 - /samples/nextcloud/

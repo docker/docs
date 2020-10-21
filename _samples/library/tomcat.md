@@ -3,7 +3,7 @@ title: tomcat
 keywords: library, sample, tomcat
 repo: tomcat
 layout: docs
-permalink: /samples/library/tomcat/
+redirect_to: https://hub.docker.com/_/tomcat/
 sitemap: false
 redirect_from:
 - /samples/tomcat/

@@ -3,7 +3,7 @@ title: mongo-express
 keywords: library, sample, mongo-express
 repo: mongo-express
 layout: docs
-permalink: /samples/library/mongo-express/
+redirect_to: https://hub.docker.com/_/mongo-express/
 sitemap: false
 redirect_from:
 - /samples/mongo-express/

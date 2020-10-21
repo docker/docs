@@ -3,7 +3,7 @@ title: neo4j
 keywords: library, sample, neo4j
 repo: neo4j
 layout: docs
-permalink: /samples/library/neo4j/
+redirect_to: https://hub.docker.com/_/neo4j/
 sitemap: false
 redirect_from:
 - /samples/neo4j/

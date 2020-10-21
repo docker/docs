@@ -3,7 +3,7 @@ title: crate
 keywords: library, sample, crate
 repo: crate
 layout: docs
-permalink: /samples/library/crate/
+redirect_to: https://hub.docker.com/_/crate/
 sitemap: false
 redirect_from:
 - /samples/crate/

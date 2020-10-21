@@ -3,7 +3,7 @@ title: cassandra
 keywords: library, sample, cassandra
 repo: cassandra
 layout: docs
-permalink: /samples/library/cassandra/
+redirect_to: https://hub.docker.com/_/cassandra/
 sitemap: false
 redirect_from:
 - /samples/cassandra/

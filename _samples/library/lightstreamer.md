@@ -3,7 +3,7 @@ title: lightstreamer
 keywords: library, sample, lightstreamer
 repo: lightstreamer
 layout: docs
-permalink: /samples/library/lightstreamer/
+redirect_to: https://hub.docker.com/_/lightstreamer/
 sitemap: false
 redirect_from:
 - /samples/lightstreamer/

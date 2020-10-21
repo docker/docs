@@ -3,7 +3,7 @@ title: golang
 keywords: library, sample, golang
 repo: golang
 layout: docs
-permalink: /samples/library/golang/
+redirect_to: https://hub.docker.com/_/golang/
 sitemap: false
 redirect_from:
 - /samples/golang/

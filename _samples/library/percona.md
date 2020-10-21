@@ -3,7 +3,7 @@ title: percona
 keywords: library, sample, percona
 repo: percona
 layout: docs
-permalink: /samples/library/percona/
+redirect_to: https://hub.docker.com/_/percona/
 sitemap: false
 redirect_from:
 - /samples/percona/

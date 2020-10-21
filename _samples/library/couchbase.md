@@ -3,7 +3,7 @@ title: couchbase
 keywords: library, sample, couchbase
 repo: couchbase
 layout: docs
-permalink: /samples/library/couchbase/
+redirect_to: https://hub.docker.com/_/couchbase/
 sitemap: false
 redirect_from:
 - /samples/couchbase/

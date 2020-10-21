@@ -3,7 +3,7 @@ title: neurodebian
 keywords: library, sample, neurodebian
 repo: neurodebian
 layout: docs
-permalink: /samples/library/neurodebian/
+redirect_to: https://hub.docker.com/_/neurodebian/
 sitemap: false
 redirect_from:
 - /samples/neurodebian/

@@ -3,7 +3,7 @@ title: sl
 keywords: library, sample, sl
 repo: sl
 layout: docs
-permalink: /samples/library/sl/
+redirect_to: https://hub.docker.com/_/sl/
 sitemap: false
 redirect_from:
 - /samples/sl/

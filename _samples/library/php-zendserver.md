@@ -3,7 +3,7 @@ title: php-zendserver
 keywords: library, sample, php-zendserver
 repo: php-zendserver
 layout: docs
-permalink: /samples/library/php-zendserver/
+redirect_to: https://hub.docker.com/_/php-zendserver/
 sitemap: false
 redirect_from:
 - /samples/php-zendserver/

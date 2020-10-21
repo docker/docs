@@ -3,7 +3,7 @@ title: ubuntu
 keywords: library, sample, ubuntu
 repo: ubuntu
 layout: docs
-permalink: /samples/library/ubuntu/
+redirect_to: https://hub.docker.com/_/ubuntu/
 sitemap: false
 redirect_from:
 - /samples/ubuntu/

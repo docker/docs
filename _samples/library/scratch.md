@@ -3,7 +3,7 @@ title: scratch
 keywords: library, sample, scratch
 repo: scratch
 layout: docs
-permalink: /samples/library/scratch/
+redirect_to: https://hub.docker.com/_/scratch/
 sitemap: false
 redirect_from:
 - /samples/scratch/

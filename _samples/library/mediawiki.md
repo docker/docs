@@ -3,7 +3,7 @@ title: mediawiki
 keywords: library, sample, mediawiki
 repo: mediawiki
 layout: docs
-permalink: /samples/library/mediawiki/
+redirect_to: https://hub.docker.com/_/mediawiki/
 sitemap: false
 redirect_from:
 - /samples/mediawiki/

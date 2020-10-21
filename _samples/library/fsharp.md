@@ -3,7 +3,7 @@ title: fsharp
 keywords: library, sample, fsharp
 repo: fsharp
 layout: docs
-permalink: /samples/library/fsharp/
+redirect_to: https://hub.docker.com/_/fsharp/
 sitemap: false
 redirect_from:
 - /samples/fsharp/

@@ -3,7 +3,7 @@ title: hylang
 keywords: library, sample, hylang
 repo: hylang
 layout: docs
-permalink: /samples/library/hylang/
+redirect_to: https://hub.docker.com/_/hylang/
 sitemap: false
 redirect_from:
 - /samples/hylang/

@@ -3,7 +3,7 @@ title: r-base
 keywords: library, sample, r-base
 repo: r-base
 layout: docs
-permalink: /samples/library/r-base/
+redirect_to: https://hub.docker.com/_/r-base/
 sitemap: false
 redirect_from:
 - /samples/r-base/

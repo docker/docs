@@ -3,7 +3,7 @@ title: kibana
 keywords: library, sample, kibana
 repo: kibana
 layout: docs
-permalink: /samples/library/kibana/
+redirect_to: https://hub.docker.com/_/kibana/
 sitemap: false
 redirect_from:
 - /samples/kibana/
