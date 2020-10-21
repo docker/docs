@@ -217,7 +217,8 @@ following keys are supported. The title, description, and keywords are required.
 | toc_max                | no        | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
 | tree                   | no        | Either `true` or `false`. Set to `false` to disable the left-hand site-wide navigation for this page. Appropriate for some pages like the search page or the 404 page. |
 | no_ratings             | no        | Either `true` or `false`. Set to `true` to disable the page-ratings applet for this page. Defaults to `false`. |
-| skip_read_time             | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
+| skip_read_time         | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
+| sitemap                | no        | Exclude the page from indexing by search engines. When set to `false`, the page is excluded from `sitemap.xml`, and a `<meta name="robots" content="noindex"/>` header is added to the page. |
 
 The following is an example of valid (but contrived) page metadata. The order of
 the metadata elements in the front-matter is not important.

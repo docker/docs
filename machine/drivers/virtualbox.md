@@ -2,7 +2,6 @@
 description: Oracle VirtualBox driver for machine
 keywords: machine, Oracle VirtualBox, driver
 title: Oracle VirtualBox
-hide_from_sitemap: true
 ---
 
 Create machines locally using [VirtualBox](https://www.virtualbox.org/).

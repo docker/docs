@@ -1,17 +1,5 @@
 ---
-title: r-base
-keywords: library, sample, r-base
-repo: r-base
-layout: docs
-permalink: /samples/library/r-base/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/r-base/
 redirect_from:
 - /samples/r-base/
-description: |
-  R is a system for statistical computation and graphics.
 ---
-
-R is a system for statistical computation and graphics.
-
-
-{% include library-samples.md %}

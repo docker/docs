@@ -210,9 +210,7 @@ In this section, you set up the database connection for Django.
    At this point, your Django app should be running at port `8000` on
    your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
    to `http://localhost:8000` on a web browser to see the Django
-   welcome page. If you are using [Docker Machine](../machine/overview.md),
-   then `docker-machine ip MACHINE_VM` returns the Docker host IP
-   address, to which you can append the port (`<Docker-Host-IP>:8000`).
+   welcome page.
 
    ![Django example](images/django-it-worked.png)
 

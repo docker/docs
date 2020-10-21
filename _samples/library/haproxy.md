@@ -1,17 +1,5 @@
 ---
-title: haproxy
-keywords: library, sample, haproxy
-repo: haproxy
-layout: docs
-permalink: /samples/library/haproxy/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/haproxy/
 redirect_from:
 - /samples/haproxy/
-description: |
-  HAProxy - The Reliable, High Performance TCP/HTTP Load Balancer
 ---
-
-HAProxy - The Reliable, High Performance TCP/HTTP Load Balancer
-
-
-{% include library-samples.md %}

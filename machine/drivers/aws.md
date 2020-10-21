@@ -2,7 +2,6 @@
 description: Amazon Web Services driver for machine
 keywords: machine, Amazon Web Services, driver
 title: Amazon Web Services
-hide_from_sitemap: true
 ---
 
 Create machines on [Amazon Web Services](https://aws.amazon.com).

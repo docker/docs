@@ -2,7 +2,6 @@
 description: How to install Docker Machine
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Install Docker Machine
-hide_from_sitemap: true
 ---
 
 Install Docker Machine binaries by following the instructions in the following section. You can find the latest
@@ -122,7 +121,7 @@ servers.
 
 ## Where to go next
 
--  [Docker Machine overview](overview.md)
+-  [Docker Machine overview](index.md)
 -  Create and run a Docker host on your [local system using virtualization](get-started.md)
 -  Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
 -  [Docker Machine driver reference](drivers/index.md)

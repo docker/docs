@@ -4,7 +4,7 @@ keywords: fig, composition, compose version 1, docker
 title: Compose file version 1 reference
 toc_max: 4
 toc_min: 1
-hide_from_sitemap: true
+sitemap: false
 ---
 
 ## Reference and guidelines
