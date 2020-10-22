@@ -73,5 +73,5 @@
         {% include footer.html %}
     </footer>
     <script>const pageURL = "{{ page.url }}";</script>
-    {%- include analytics/polldaddy.html -%}
+    {%- if jekyll.environment == 'production' -%}{%- include analytics/polldaddy.html -%}{%- endif -%}
 </body>
