@@ -4,7 +4,6 @@ datafile: docker_swarm_unlock
 title: docker swarm unlock
 redirect_from:
   - /edge/engine/reference/commandline/swarm_unlock/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

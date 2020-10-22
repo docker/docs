@@ -4,7 +4,6 @@ datafile: docker_events
 title: docker events
 redirect_from:
   - /edge/engine/reference/commandline/events/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

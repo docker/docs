@@ -4,7 +4,6 @@ datafile: docker_container_logs
 title: docker container logs
 redirect_from:
   - /edge/engine/reference/commandline/container_logs/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

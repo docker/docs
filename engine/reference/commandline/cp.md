@@ -4,7 +4,6 @@ datafile: docker_cp
 title: docker cp
 redirect_from:
   - /edge/engine/reference/commandline/cp/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

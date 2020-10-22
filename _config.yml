@@ -64,6 +64,7 @@ defaults:
       path: engine/reference/commandline
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
+      skip_read_time: true
   - scope:
       path: glossary
     values:

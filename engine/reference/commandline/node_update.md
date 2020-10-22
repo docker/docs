@@ -4,7 +4,6 @@ datafile: docker_node_update
 title: docker node update
 redirect_from:
   - /edge/engine/reference/commandline/node_update/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

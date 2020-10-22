@@ -4,7 +4,6 @@ datafile: docker_cluster
 title: docker cluster
 redirect_from: /cluster/reference/
 enterprise_only: true
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

@@ -4,7 +4,6 @@ datafile: docker_network_prune
 title: docker network prune
 redirect_from:
   - /edge/engine/reference/commandline/network_prune/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

@@ -4,7 +4,6 @@ datafile: docker_image_prune
 title: docker image prune
 redirect_from:
   - /edge/engine/reference/commandline/image_prune/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
