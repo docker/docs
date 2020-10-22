@@ -41,7 +41,6 @@ defaults:
       layout: docs
       toc_min: 2
       toc_max: 3
-      tree: true
 
   # Set the correct edit-URL for upstream resources. We usually don't create a direct
   # edit link for these, and instead point to the directory that contains the file.
