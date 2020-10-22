@@ -57,14 +57,14 @@ COPY --from=upstream-resources /usr/src/app/md_source/. ./
 RUN ./_scripts/update-api-toc.sh
 ARG JEKYLL_ENV
 RUN echo "Building docs for ${JEKYLL_ENV} environment"
-RUN set -eux; \
+RUN set -eu; \
  if [ "${JEKYLL_ENV}" = "production" ]; then \
-    jekyll build -d ${TARGET} --config _config.yml,_config_production.yml; \
+    jekyll build --profile -d ${TARGET} --config _config.yml,_config_production.yml; \
+    sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml"; \
  else \
-    jekyll build -d ${TARGET}; \
+    jekyll build --profile -d ${TARGET}; \
  fi; \
- find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done; \
- sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml";
+ find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done;
 
 
 # This stage only contains the generated files. It can be used to host the
