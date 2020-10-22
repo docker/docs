@@ -1,11 +1,12 @@
-/*
- * Images **********************************************************************
- */
 
-.content img {
-    display: block;
+.content, p {
+  line-height: 24px;
+
+  img {
+    display:   block;
+    height:    auto;
     max-width: 100%;
-    height: auto;
+  }
 }
 
 /*
@@ -95,10 +96,8 @@ h3:hover > a.anchorLink
 
 a.glossary {
     color: $body-text;
-    text-decoration: none;
     outline: none;
      &:hover {
         opacity: 1;
-        text-decoration: none;
     }
 }
