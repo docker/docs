@@ -19,7 +19,12 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            {%- unless page.skip_read_time == true -%}{% include read_time.html %}{%- endunless -%}
+                            {%- unless page.skip_read_time == true -%}
+                            {%- assign words = content | number_of_words -%}
+                            {%- if words >= 360 -%}
+                            <p><em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes</em></p>
+                            {%- endif -%}
+                            {%- endunless -%}
                             {{ content }}
                             {%- unless page.notags == true -%}
                             {%- assign keywords = page.keywords | split:"," -%}
@@ -40,7 +45,10 @@
                     </main>
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
-                            {% include side-menu.html %}
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
                         </div>
                     </nav>
                     <div class="col-toc">
