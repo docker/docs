@@ -4,18 +4,17 @@ keywords: swarm, manager, lock, unlock, autolock, encryption
 title: Lock your swarm to protect its encryption key
 ---
 
-In Docker 1.13 and higher, the Raft logs used by swarm managers are encrypted on
-disk by default. This at-rest encryption protects your service's configuration
-and data from attackers who gain access to the encrypted Raft logs. One of the
-reasons this feature was introduced was in support of the [Docker secrets](secrets.md)
-feature.
+The Raft logs used by swarm managers are encrypted on disk by default. This at-rest
+encryption protects your service's configuration and data from attackers who gain
+access to the encrypted Raft logs. One of the reasons this feature was introduced
+was in support of the [Docker secrets](secrets.md) feature.
 
 When Docker restarts, both the TLS key used to encrypt communication among swarm
 nodes, and the key used to encrypt and decrypt Raft logs on disk, are loaded
-into each manager node's memory. Docker 1.13 introduces the ability to protect
-the mutual TLS encryption key and the key used to encrypt and decrypt Raft logs
-at rest, by allowing you to take ownership of these keys and to require manual
-unlocking of your managers. This feature is called _autolock_.
+into each manager node's memory. Docker has the ability to protect the mutual TLS
+encryption key and the key used to encrypt and decrypt Raft logs at rest, by
+allowing you to take ownership of these keys and to require manual unlocking of
+your managers. This feature is called _autolock_.
 
 When Docker restarts, you must
 [unlock the swarm](#unlock-a-swarm) first, using a

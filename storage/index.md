@@ -107,9 +107,9 @@ mounts is to think about where the data lives on the Docker host.
 
 Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`
-mounts, you can use the `--tmpfs` flag. However, in Docker 17.06 and higher,
-we recommend using the `--mount` flag for both containers and services, for
-bind mounts, volumes, or `tmpfs` mounts, as the syntax is more clear.
+mounts, you can use the `--tmpfs` flag. We recommend using the `--mount` flag
+for both containers and services, for bind mounts, volumes, or `tmpfs` mounts,
+as the syntax is more clear.
 
 ## Good use cases for volumes
 

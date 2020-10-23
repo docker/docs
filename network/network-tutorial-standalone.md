@@ -23,9 +23,8 @@ host running elsewhere.
   running in production.
 
 Although [overlay networks](overlay.md) are generally used for swarm services,
-Docker 17.06 and higher allow you to use an overlay network for standalone
-containers. That's covered as part of the
-[tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
+you can also use an overlay network for standalone containers. That's covered as
+part of the [tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
 
 ## Use the default bridge network
 

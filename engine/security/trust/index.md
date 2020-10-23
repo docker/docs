@@ -86,12 +86,13 @@ The following image depicts the various signing keys and their relationships:
 
 ![Content Trust components](images/trust_components.png)
 
-> **WARNING**:
+> **WARNING**
+>
 > Loss of the root key is **very difficult** to recover from.
->Correcting this loss requires intervention from [Docker
->Support](https://support.docker.com) to reset the repository state. This loss
->also requires **manual intervention** from every consumer that used a signed
->tag from this repository prior to the loss.
+> Correcting this loss requires intervention from [Docker
+> Support](https://support.docker.com) to reset the repository state. This loss
+> also requires **manual intervention** from every consumer that used a signed
+> tag from this repository prior to the loss.
 {:.warning}
 
 You should back up the root key somewhere safe. Given that it is only required
@@ -100,9 +101,6 @@ For details on securing, and backing up your keys, make sure you
 read how to [manage keys for DCT](trust_key_mng.md).
 
 ## Signing Images with Docker Content Trust
-
-> **Note:**
-> This applies to Docker Community Engine 17.12 and newer.
 
 Within the Docker CLI we can sign and push a container image with the
 `$ docker trust` command syntax. This is built on top of the Notary feature

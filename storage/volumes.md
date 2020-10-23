@@ -41,14 +41,9 @@ configurable for volumes.
 
 ## Choose the -v or --mount flag
 
-Originally, the `-v` or `--volume` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
+In general, `--mount` is more explicit and verbose. The biggest difference is that
+the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
-
-> New users should try `--mount` syntax which is simpler than `--volume` syntax.
 
 If you need to specify volume driver options, you must use `--mount`.
 
@@ -222,8 +217,8 @@ $ docker volume rm myvol2
 
 A single docker compose service with a volume looks like this:
 
-```yml
-version: "3.7"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts
@@ -239,8 +234,8 @@ volume will be reused on following invocations.
 A volume may be created directly outside of compose with `docker volume create` and
 then referenced inside `docker-compose.yml` as follows:
 
-```yml
-version: "3.7"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts

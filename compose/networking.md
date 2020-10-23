@@ -12,23 +12,27 @@ container for a service joins the default network and is both *reachable* by
 other containers on that network, and *discoverable* by them at a hostname
 identical to the container name.
 
-> **Note**: Your app's network is given a name based on the "project name",
+> **Note**
+>
+> Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
 > project name with either the [`--project-name` flag](reference/overview.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
-    version: "3"
-    services:
-      web:
-        build: .
-        ports:
-          - "8000:8000"
-      db:
-        image: postgres
-        ports:
-          - "8001:5432"
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres
+    ports:
+      - "8001:5432"
+```
 
 When you run `docker-compose up`, the following happens:
 

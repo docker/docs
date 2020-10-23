@@ -89,10 +89,10 @@ and **nightly**:
 
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
-`18.09`. The year-month name indicates the earliest possible calendar
+`19.03`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v18.09.0` is
-released, all subsequent patch releases are built from the `18.09` branch.
+releases are performed from that branch. For example, once `v19.03.0` is
+released, all subsequent patch releases are built from the `19.03` branch.
 
 ### Test
 
@@ -114,10 +114,8 @@ format:
 where the time is the commit time in UTC and the final suffix is the prefix
 of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
 
-These builds allow for testing from the latest code on the master branch.
-
-> **Note:**
-> No qualifications or guarantees are made for the nightly builds.
+These builds allow for testing from the latest code on the master branch. No
+qualifications or guarantees are made for the nightly builds.
 
 ## Support
 

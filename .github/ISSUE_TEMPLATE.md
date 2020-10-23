@@ -17,7 +17,7 @@
 ### Project version(s) affected
 
 <!-- If this problem only affects specific versions of a project (like Docker
-     Engine 1.13), tell us here. The fix may need to take that into account. -->
+     Engine 19.03), tell us here. The fix may need to take that into account. -->
 
 ### Suggestions for a fix
 
