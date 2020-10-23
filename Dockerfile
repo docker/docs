@@ -63,6 +63,7 @@ RUN set -eu; \
     sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml"; \
  else \
     jekyll build --profile -d ${TARGET}; \
+    echo '[]' > ${TARGET}/js/metadata.json; \
  fi; \
  find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done;
 

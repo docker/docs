@@ -54,18 +54,19 @@
   scripts happens once the HTML is fully parsed.
   see https://flaviocopes.com/javascript-async-defer/#with-defer-in-the-head
   {%- endcomment -%}
-  {%- if page.landing == true -%}
+  {%- if page.layout == 'landing' -%}
   <!-- landing page scripts -->
   <script defer src="/js/theme-switcher.js"></script>
   <script defer src="/js/jquery.js"></script>
   <script defer src="/js/bootstrap.min.js"></script>
-  <script defer src="/js/search.js"></script>
   {%- else -%}
   <script defer src="/js/theme-switcher.js"></script>
   <script defer src="/js/anchorlinks.js"></script>
   <script defer src="/js/jquery.js"></script>
   <script defer src="/js/bootstrap.min.js"></script>
   <script defer src="/js/docs.js"></script>
+  {%- endif -%}
+  {%- if site.local_search -%}
   <script defer src="/js/search.js"></script>
   {%- endif -%}
 

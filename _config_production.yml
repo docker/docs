@@ -11,6 +11,9 @@ exclude: ["_scripts", "404.html", "index.html"]
 google_analytics: GTM-WL2QLG5
 polldaddy_id:     8453675
 
+# Enable search autocompletion (requires metadata.json to be generated)
+local_search: true
+
 plugins:
   - jekyll-redirect-from
   - jekyll-relative-links
