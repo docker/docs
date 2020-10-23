@@ -113,14 +113,14 @@ Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://doc
 
 ### Volumes
 
-ECS integration support volume management based on Amazon EFS filesystems. For a 
-compose file to declare a `volume`, ECS integration will define creation of an EFS
-Filesystem within the CloudFormation template, with `Retiain` policy so data won't
+ECS integration supports volume management based on Amazon Elastic File System (Amazon EFS).
+For a Compose file to declare a `volume`, ECS integration will define creation of an EFS
+file system within the CloudFormation template, with `Retain` policy so data won't
 be deleted on application shut-down. If the same application (same project name) is
-deployed again, Filesystem will be re-attached, to offer the same user-experience
+deployed again, the file system will be re-attached to offer the same user experience
 developers are used to with docker-compose.
 
-Initial Filesystem creation can be customized if necessary using `driver-opts`:
+If required, the initial file system can be customized using `driver-opts`:
 
 ```yaml
 volumes:
@@ -134,11 +134,11 @@ volumes:
       provisioned_throughput: 1024
 ```
 
-Fiesystems created by `docker compose` execution on AWS can be listed using 
+File systems created by executing `docker compose` on AWS can be listed using 
 `docker volume ls` and removed with `docker volume rm <filesystemID>`.
 
-An existing filesystem can also be used for user who already have data stored on EFS
-or want to use filesystem created by another compose stack.
+An existing file system can also be used for users who already have data stored on EFS
+or want to use a file system created by another Compose stack.
 
 ```yaml
 volumes:
@@ -147,11 +147,11 @@ volumes:
     name: fs-123abcd
 ```
 
-Accessing a volume from a container introduce a common issue with POSIX user ID 
-permission issues, as Docker image can define arbitrary user ID / group ID for the
-process to run inside container, but this exact same uid:gid will have to match
-POSIX permissions on filesystem. To workaround possible conflict, you can set volume
-`uid` and `gid` to be used accessing a volume:
+Accessing a volume from a container can introduce POSIX user ID 
+permission issues, as Docker images can define arbitrary user ID / group ID for the
+process to run inside a container. However, the same `uid:gid` will have to match
+POSIX permissions on the file system. To work around the possible conflict, you can set the volume
+`uid` and `gid` to be used when accessing a volume:
 
 ```yaml
 volumes:
@@ -253,8 +253,8 @@ containers during the update.
 
 ### Auto scaling
 
-Compose file model does not define any attribute to declare auto-scaling conditions,
-so we rely on `x-aws-autoscaling` custom extension to define auto-scaling range, as
+The Compose file model does not define any attributes to declare auto-scaling conditions.
+Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
 well as cpu _or_ memory to define target metric, expressed as resource usage percent.
 
 ```yaml
