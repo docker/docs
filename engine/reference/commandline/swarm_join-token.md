@@ -6,7 +6,6 @@ redirect_from:
   - /engine/reference/commandline/swarm_join_token/
   - /edge/engine/reference/commandline/swarm_join_token/
   - /edge/engine/reference/commandline/swarm_join-token/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

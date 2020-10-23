@@ -41,7 +41,6 @@ defaults:
       layout: docs
       toc_min: 2
       toc_max: 3
-      tree: true
 
   # Set the correct edit-URL for upstream resources. We usually don't create a direct
   # edit link for these, and instead point to the directory that contains the file.
@@ -65,6 +64,7 @@ defaults:
       path: engine/reference/commandline
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
+      skip_read_time: true
   - scope:
       path: glossary
     values:

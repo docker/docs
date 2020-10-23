@@ -4,7 +4,6 @@ datafile: docker_service_update
 title: docker service update
 redirect_from:
   - /edge/engine/reference/commandline/service_update/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

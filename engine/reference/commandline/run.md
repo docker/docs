@@ -5,7 +5,6 @@ title: docker run
 redirect_from:
   - /reference/run
   - /edge/engine/reference/commandline/run/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

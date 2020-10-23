@@ -70,14 +70,11 @@
 .nav-sidebar ul li a:focus,
 .nav-sidebar ul li a:hover {
     border-bottom: none;
-    text-decoration: none;
 }
 
 .nav-sidebar ul li a.active,
 .nav-sidebar.nav>li>a:focus {
-    cursor: default;
     background: #F3F4F4;
-    color: #2089C4;
     border-left: 4px solid $primary-links;
     font-weight: 600;
 }
@@ -122,7 +119,6 @@
             display: inline-block;
             font-size: 12px;
             padding: 5px 10px 5px 10px;
-            text-decoration: none;
         }
     }
 }

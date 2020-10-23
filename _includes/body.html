@@ -19,7 +19,7 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            {%- unless page.tree == false or page.skip_read_time == true -%}{% include read_time.html %}{%- endunless -%}
+                            {%- unless page.skip_read_time == true -%}{% include read_time.html %}{%- endunless -%}
                             {{ content }}
                             {%- unless page.notags == true -%}
                             {%- assign keywords = page.keywords | split:"," -%}

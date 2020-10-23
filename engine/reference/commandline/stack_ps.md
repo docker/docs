@@ -6,7 +6,6 @@ redirect_from:
   - /engine/reference/commandline/stack_tasks/
   - /edge/engine/reference/commandline/stack_ps/
   - /edge/engine/reference/commandline/stack_tasks/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

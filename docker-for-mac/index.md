@@ -234,8 +234,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   The status of Kubernetes shows in the Docker menu and the context points to
   `docker-desktop`.
 
-  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: .with-border
-  width="400px"}
+  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them

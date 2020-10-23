@@ -2,7 +2,6 @@
 datafolder: buildx
 datafile: docker_buildx_create
 title: docker buildx create
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

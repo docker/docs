@@ -4,7 +4,6 @@ datafile: docker_image_load
 title: docker image load
 redirect_from:
   - /edge/engine/reference/commandline/image_load/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

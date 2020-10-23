@@ -162,6 +162,7 @@ body.landing {
   $icons: rocket, download-docker, guides, whats-new, manuals, reference;
 
   .card {
+    color: $body-text;
     background-color: $bg-card;
     box-shadow: 0 3px 6px rgba(11, 33, 74, 0.09),
       0 -2px 2px rgba(11, 33, 74, 0.03);
@@ -182,7 +183,7 @@ body.landing {
     .title {
       font-size: 16px;
       line-height: 16px;
-      margin: 8px 0;
+      margin: 10px 0;
 
       @include sm-width {
         font-size: 18px;
@@ -212,11 +213,6 @@ body.landing {
   a.card {
     display: block;
     transition: transform 150ms ease-in-out;
-
-    &:focus,
-    &:visited {
-      text-decoration: none;
-    }
 
     &:hover {
       opacity: 1;

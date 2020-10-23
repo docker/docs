@@ -2,7 +2,6 @@
 datafolder: engine-cli
 datafile: docker_context_rm
 title: docker context rm
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

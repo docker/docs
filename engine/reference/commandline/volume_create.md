@@ -4,7 +4,6 @@ datafile: docker_volume_create
 title: docker volume create
 redirect_from:
   - /edge/engine/reference/commandline/volume_create/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

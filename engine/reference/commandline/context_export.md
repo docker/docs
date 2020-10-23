@@ -2,7 +2,6 @@
 datafolder: engine-cli
 datafile: docker_context_export
 title: docker context export
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
