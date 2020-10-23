@@ -109,13 +109,57 @@ Service-to-service communication is implemented by the [Security Groups](https:/
 
 ### Service names
 
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose) as Docker Compose CLI automatically injects the `LOCALDOMAIN` variable. This works out of the box if your Docker image fully implements domain name resolution standards, otherwise (typically, when using Alpine-based Docker images), you’ll have to include an [entrypoint script](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#entrypoint) in your Docker image to force this option:
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose). 
 
-```console
-#! /bin/sh
+### Volumes
 
-if [ "${LOCALDOMAIN}x" != "x" ]; then echo "search ${LOCALDOMAIN}" >> /etc/resolv.conf; fi
-exec "$@"
+ECS integration supports volume management based on Amazon Elastic File System (Amazon EFS).
+For a Compose file to declare a `volume`, ECS integration will define creation of an EFS
+file system within the CloudFormation template, with `Retain` policy so data won't
+be deleted on application shut-down. If the same application (same project name) is
+deployed again, the file system will be re-attached to offer the same user experience
+developers are used to with docker-compose.
+
+If required, the initial file system can be customized using `driver-opts`:
+
+```yaml
+volumes:
+  my-data: 
+    driver_opts:
+      # Filesystem configuration
+      backup_policy: ENABLED
+      lifecycle_policy: AFTER_14_DAYS
+      performance_mode: maxIO
+      throughput_mode: provisioned
+      provisioned_throughput: 1024
+```
+
+File systems created by executing `docker compose` on AWS can be listed using 
+`docker volume ls` and removed with `docker volume rm <filesystemID>`.
+
+An existing file system can also be used for users who already have data stored on EFS
+or want to use a file system created by another Compose stack.
+
+```yaml
+volumes:
+  my-data: 
+    external: true
+    name: fs-123abcd
+```
+
+Accessing a volume from a container can introduce POSIX user ID 
+permission issues, as Docker images can define arbitrary user ID / group ID for the
+process to run inside a container. However, the same `uid:gid` will have to match
+POSIX permissions on the file system. To work around the possible conflict, you can set the volume
+`uid` and `gid` to be used when accessing a volume:
+
+```yaml
+volumes:
+  my-data: 
+    driver_opts:
+      # Access point configuration
+      uid: 0
+      gid: 0
 ```
 
 ### Secrets
@@ -206,6 +250,23 @@ previous versions are removed.
 By default, the ECS rolling update is set to run twice the number of
 containers for a service (200%), and has the ability to shut down 100%
 containers during the update.
+
+### Auto scaling
+
+The Compose file model does not define any attributes to declare auto-scaling conditions.
+Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
+well as cpu _or_ memory to define target metric, expressed as resource usage percent.
+
+```yaml
+services:
+  foo:
+    deploy:
+      x-aws-autoscaling:
+        min: 1
+        max: 10 #required
+        cpu: 75 
+        # mem: - mutualy exlusive with cpu
+```
 
 
 ### IAM roles
