@@ -4,7 +4,6 @@ datafile: docker_trust_signer_remove
 title: docker trust signer remove
 redirect_from:
   - /edge/engine/reference/commandline/trust_signer_remove/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

@@ -1,41 +1,45 @@
-name: Docker Documentation
-markdown: kramdown
-kramdown:
-  input: GFM
-  gfm_quirks: [paragraph_end, no_auto_typographic]
-  html_to_native: true
-  hard_wrap: false
-  syntax_highlighter: rouge
-  toc_levels: 2..3
-incremental: false
-permalink: pretty
-safe: false
-lsi: false
-exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
+##
+# This file overrides options set in _config.yml for production / deploy
+##
 
-# Component versions -- address like site.docker_ce_version
-# You can't have - characters in these for non-YAML reasons
+# Override the exclusion list to include files that are excluded in "development",
+# such as the "enterprise" stubs, which are in place to facilitate redirects
+# to Mirantis.
+exclude: ["_scripts", "404.html", "index.html"]
 
-# TO USE ME:
-# jekyll serve --incremental --config _config_authoring.yml
+# Google Analytics, etc.
+google_analytics: GTM-WL2QLG5
+polldaddy_id:     8453675
 
-latest_engine_api_version: "1.40"
-docker_ce_version: "19.03"
-compose_version: "1.27.4"
-compose_file_v3: "3.8"
-compose_file_v2: "2.4"
-machine_version: "0.16.0"
-distribution_version: "2.7"
-
-collections:
-  samples:
-    output: true
+# Enable search autocompletion (requires metadata.json to be generated)
+local_search: true
 
 plugins:
   - jekyll-redirect-from
   - jekyll-relative-links
   - jekyll-sitemap
 
+# Assets
+#
+# For production/deploy, we build css with the "compressed" format, to produce
+# smaller files.
+sass:
+  style:    compressed
+
+collections:
+  samples:
+    output: true
+
+# Set default options / metadata for some paths.
+#
+# Setting options here prevents having to repeat the same option in front-matter
+# on every page. Avoid using wildcards, such as "path: engine/api/v1.*", as
+# limitations in Jekyll cause those to introduce a _severe_ impact on build-time,
+# affecting generation of (e.g.) sitemap.xml and metadata.json, resulting in the
+# total build to take 60 seconds longer to build (!).
+#
+# The list below is used for *production* deploys, and overrides the one defined
+# in "_config.yml", which is used for local builds and pull-request previews.
 defaults:
   - scope:
       path: ""
@@ -44,20 +48,15 @@ defaults:
       layout: docs
       toc_min: 2
       toc_max: 3
-      tree: true
 
   # Set the correct edit-URL for upstream resources. We usually don't create a direct
   # edit link for these, and instead point to the directory that contains the file.
   - scope:
-      path: engine/api/v1.*
-    values:
-      edit_url: "https://github.com/docker/docker/tree/master/docs/api"
-  - scope:
-      path: engine/deprecated
+      path: engine/deprecated.md
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/"
   - scope:
-      path: engine/extend
+      path: engine/extend.md
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/extend"
   - scope:
@@ -68,8 +67,9 @@ defaults:
       path: engine/reference/commandline
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
+      skip_read_time: true
   - scope:
-      path: glossary
+      path: glossary.md
     values:
       edit_url: "https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml"
   - scope:
@@ -113,10 +113,3 @@ defaults:
       path: "samples/library"
     values:
       sitemap: false
-
-# Assets
-#
-# We specify the directory for Jekyll so we can use @imports.
-sass:
-  sass_dir:          _scss
-  style:            :compressed

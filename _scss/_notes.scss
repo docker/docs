@@ -2,6 +2,7 @@
 blockquote {
   background-color:  $note-bg-color;
   border-left-color: $note-color;
+  font-size:         unset; // override bootstrap font-size for blockquotes
 
   > p:first-child {
     color:       $note-color;

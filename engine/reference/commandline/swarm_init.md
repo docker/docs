@@ -4,7 +4,6 @@ datafile: docker_swarm_init
 title: docker swarm init
 redirect_from:
   - /edge/engine/reference/commandline/swarm_init/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

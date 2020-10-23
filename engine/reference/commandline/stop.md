@@ -4,7 +4,6 @@ datafile: docker_stop
 title: docker stop
 redirect_from:
   - /edge/engine/reference/commandline/stop/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

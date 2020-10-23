@@ -4,7 +4,6 @@ datafile: docker_network_inspect
 title: docker network inspect
 redirect_from:
   - /edge/engine/reference/commandline/network_inspect/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
