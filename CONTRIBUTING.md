@@ -7,15 +7,7 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](/opensource/).
-
-### Files not edited here
-
-Files and directories listed in the `path:` keys in
-[`.NOT_EDITED_HERE.yaml`](/_data/not_edited_here.yaml) are maintained in other
-repositories and should not be edited in this one. Pull requests against these
-files will be rejected. Make your edits to the files in the repository and path
-in the `source:` key in the YAML file.
+[Contribution guidelines](/opensource/index.md).
 
 ### Quickstart
 
