@@ -26,8 +26,39 @@ manifest requests.
 - Limits are applied based on the user doing the pull, and 
 not based on the image being pulled or its owner.
 
-Docker will gradually introduce these rate limits, with full
-effects starting from November 1st, 2020.
+Docker will gradually introduce these rate limits starting November 2nd, 2020.
+
+## How do I know my pull requests are being limited
+
+When you issue a pull request and you are over the limit for your account type, Hub will return a `429` response code with the following body when the manifest is requested:
+> You have reached your download rate limit: https://docs.docker.com/docker-hub/download-rate-limit/. Upgrade your plan to increase your limit at: https://www.docker.com/pricing
+
+You will see this error message in the Docker CLI or Docker Engine logs.
+
+## How can I check my current rate
+
+Valid, non-rate-limited manifest API reqests to Hub will include the following rate limit headers in the response:
+
+> RateLimit-Limit: \<value\>  
+RateLimit-Remaining \<value\>
+
+If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly.
+
+Otherwise, you can use curl to view these. You will need `curl` and `jq` installed.
+
+> $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)  
+$ curl -I -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest  
+
+Returns for example:
+
+> HTTP/1.1 200 OK  
+Content-Length: 2782  
+Content-Type: application/vnd.docker.distribution.manifest.v1+prettyjws  
+Docker-Content-Digest: sha256:767a3815c34823b355bed31760d5fa3daca0aec2ce15b217c9cd83229e0e2020  
+Docker-Distribution-Api-Version: registry/2.0  
+Etag: "sha256:767a3815c34823b355bed31760d5fa3daca0aec2ce15b217c9cd83229e0e2020"  
+Date: Fri, 23 Oct 2020 20:27:41 GMT  
+Strict-Transport-Security: max-age=31536000  
 
 ## How do I authenticate pull requests
 
