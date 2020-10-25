@@ -180,6 +180,7 @@ file them with the library maintainers.
 | C                     | [libdocker](https://github.com/danielsuo/libdocker)                         |
 | C#                    | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet)            |
 | C++                   | [lasote/docker_client](https://github.com/lasote/docker_client)             |
+| Clojure               | [clj-docker-client](https://github.com/into-docker/clj-docker-client)       |
 | Dart                  | [bwu_docker](https://github.com/bwu-dart/bwu_docker)                        |
 | Erlang                | [erldocker](https://github.com/proger/erldocker)                            |
 | Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin)    |
