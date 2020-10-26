@@ -141,7 +141,7 @@ Docker has created the following demo app that you can deploy to swarm mode or
 to Kubernetes using the `docker stack deploy` command.
 
 ```yaml
-version: '3.3'
+version: "{{ site.compose_file_v3 }}"
 
 services:
   web:

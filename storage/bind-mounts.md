@@ -25,11 +25,8 @@ manage bind mounts.
 
 ## Choose the -v or --mount flag
 
-Originally, the `-v` or `--volume` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
+In general, `--mount` is more explicit and verbose. The biggest difference is that
+the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
 > **Tip**: New users should use the `--mount` syntax. Experienced users may

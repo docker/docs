@@ -10,10 +10,8 @@ administrator associates an AppArmor security profile with each program. Docker
 expects to find an AppArmor policy loaded and enforced.
 
 Docker automatically generates and loads a default profile for containers named
-`docker-default`. On Docker versions `1.13.0` and later, the Docker binary generates
-this profile in `tmpfs` and then loads it into the kernel. On Docker versions
-earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
-instead.
+`docker-default`. The Docker binary generates this profile in `tmpfs` and then
+loads it into the kernel.
 
 > **Note**: This profile is used on containers, _not_ on the Docker Daemon.
 

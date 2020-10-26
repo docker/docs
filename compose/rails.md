@@ -68,25 +68,29 @@ one's Docker image (the database just runs on a pre-made PostgreSQL image, and
 the web app is built from the current directory), and the configuration needed
 to link them together and expose the web app's port.
 
-    version: '3'
-    services:
-      db:
-        image: postgres
-        volumes:
-          - ./tmp/db:/var/lib/postgresql/data
-        environment:
-          POSTGRES_PASSWORD: password
-      web:
-        build: .
-        command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-        volumes:
-          - .:/myapp
-        ports:
-          - "3000:3000"
-        depends_on:
-          - db
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+```
 
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+> **Tip**
+>
+> You can use either a `.yml` or `.yaml` extension for this file.
 
 ### Build the project
 

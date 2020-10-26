@@ -32,8 +32,8 @@ Docker supports the following storage drivers:
 
 * `overlay2` is the preferred storage driver, for all currently supported
    Linux distributions, and requires no extra configuration.
-* `aufs` is the preferred storage driver for Docker 18.06 and older, when
-   running on Ubuntu 14.04 on kernel 3.13 which has no support for `overlay2`.
+* `aufs` was the preferred storage driver for Docker 18.06 and older, when
+   running on Ubuntu 14.04 on kernel 3.13 which had no support for `overlay2`.
 * `devicemapper` is supported, but requires `direct-lvm` for production
    environments, because `loopback-lvm`, while zero-configuration, has very
    poor performance. `devicemapper` was the recommended storage driver for
@@ -62,7 +62,7 @@ After you have narrowed down which storage drivers you can choose from, your cho
 characteristics of your workload and the level of stability you need. See [Other considerations](#other-considerations)
 for help in making the final decision.
 
-> ***NOTE***: Your choice may be limited by your Docker edition, operating system, and distribution. 
+> ***NOTE***: Your choice may be limited by your operating system and distribution. 
 > For instance, `aufs` is only supported on Ubuntu and Debian, and may require extra packages 
 > to be installed, while `btrfs` is only supported on SLES, which is only supported with Docker
 > Enterprise. See [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution) 
@@ -91,13 +91,12 @@ configurations work on recent versions of the Linux distribution:
 | Docker Engine - Community on CentOS | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
 | Docker Engine - Community on Fedora | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
 
-¹) The `overlay` storage driver is deprecated in Docker Engine - Enterprise 18.09, and will be
-removed in a future release. It is recommended that users of the `overlay` storage driver 
-migrate to `overlay2`.
+¹) The `overlay` storage driver is deprecated, and will be removed in a future
+release. It is recommended that users of the `overlay` storage driver migrate to `overlay2`.
 
-²) The `devicemapper` storage driver is deprecated in Docker Engine 18.09, and will be
-removed in a future release. It is recommended that users of the `devicemapper` storage driver 
-migrate to `overlay2`.
+²) The `devicemapper` storage driver is deprecated, and will be removed in a future
+release. It is recommended that users of the `devicemapper` storage driver migrate
+to `overlay2`.
 
 
 When possible, `overlay2` is the recommended storage driver. When installing

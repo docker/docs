@@ -44,7 +44,9 @@ use unless you have substantial experience with ZFS on Linux.
   and push existing images to Docker Hub or a private repository, so that you
   do not need to re-create them later.
 
-> **Note**: There is no need to use `MountFlags=slave` with Docker Engine 18.09 or
+> **Note**
+>
+> There is no need to use `MountFlags=slave` with Docker Engine 18.09 or
 > later because `dockerd` and `containerd` are in different mount namespaces. 
 
 ## Configure Docker with the `zfs` storage driver
