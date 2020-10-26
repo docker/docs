@@ -86,11 +86,12 @@ See the [links reference](compose-file/compose-file-v2.md#links) for more inform
 
 ## Multi-host networking
 
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](../engine/reference/commandline/stack_deploy.md) documentation.
+When deploying a Compose application on an Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+you can make use of the built-in `overlay` driver to enable multi-host communication.
 
-When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
-
-Consult the [Getting started with multi-host networking](../network/network-tutorial-overlay.md) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
+Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
+a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
+to learn about multi-host overlay networks.
 
 ## Specify custom networks
 
