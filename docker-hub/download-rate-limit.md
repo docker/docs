@@ -6,7 +6,7 @@ title: Download rate limit
 
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and our [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"}.
 
 A user's limit will be equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
@@ -31,7 +31,7 @@ Docker will gradually introduce these rate limits starting November 2nd, 2020.
 ## How do I know my pull requests are being limited
 
 When you issue a pull request and you are over the limit for your account type, Hub will return a `429` response code with the following body when the manifest is requested:
-> You have reached your download rate limit: https://docs.docker.com/docker-hub/download-rate-limit/. Upgrade your plan to increase your limit at: https://www.docker.com/pricing
+> You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
 
 You will see this error message in the Docker CLI or Docker Engine logs.
 
