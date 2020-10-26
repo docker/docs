@@ -61,15 +61,6 @@ appropriately.
 Once you've set up your environment variables, all the normal `docker-compose`
 commands work with no further configuration.
 
-### Running Compose on a Swarm cluster
-
-[Docker Swarm](../swarm/overview.md), a Docker-native clustering
-system, exposes the same API as a single Docker host, which means you can use
-Compose against a Swarm instance and run your apps across multiple hosts.
-
-Read more about the Compose/Swarm integration in the
-[integration guide](swarm.md).
-
 ## Compose documentation
 
 - [User guide](index.md)

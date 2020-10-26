@@ -239,9 +239,8 @@ you demote or remove a manager.
 ## Back up the swarm
 
 Docker manager nodes store the swarm state and manager logs in the
-`/var/lib/docker/swarm/` directory. In 1.13 and higher, this data includes the
-keys used to encrypt the Raft logs. Without these keys, you cannot restore the
-swarm.
+`/var/lib/docker/swarm/` directory. This data includes the keys used to encrypt
+the Raft logs. Without these keys, you cannot restore the swarm.
 
 You can back up the swarm using any manager. Use the following procedure.
 
@@ -377,11 +376,10 @@ balance across the swarm. When new tasks start, or when a node with running
 tasks becomes unavailable, those tasks are given to less busy nodes. The goal
 is eventual balance, with minimal disruption to the end user.
 
-In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
-`docker service update` command to force the service to redistribute its tasks
-across the available worker nodes. This causes the service tasks to restart.
-Client applications may be disrupted. If you have configured it, your service
-uses a [rolling update](swarm-tutorial/rolling-update.md).
+You can use the `--force` or `-f` flag with the `docker service update` command
+to force the service to redistribute its tasks across the available worker nodes.
+This causes the service tasks to restart. Client applications may be disrupted.
+If you have configured it, your service uses a [rolling update](swarm-tutorial/rolling-update.md).
 
 If you use an earlier version and you want to achieve an even balance of load
 across workers and don't mind disrupting running tasks, you can force your swarm

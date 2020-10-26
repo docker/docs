@@ -6,11 +6,10 @@ keywords: swarm, configuration, configs
 
 ## About configs
 
-Docker 17.06 introduces swarm service configs, which allow you to store
-non-sensitive information, such as configuration files, outside a service's
-image or running containers. This allows you to keep your images as generic
-as possible, without the need to bind-mount configuration files into the
-containers or use environment variables.
+Docker swarm service configs  allow you to store non-sensitive information,
+such as configuration files, outside a service's image or running containers.
+This allows you to keep your images as generic as possible, without the need to
+bind-mount configuration files into the containers or use environment variables.
 
 Configs operate in a similar way to [secrets](secrets.md), except that they are
 not encrypted at rest and are mounted directly into the container's filesystem
@@ -27,9 +26,9 @@ Configs are supported on both Linux and Windows services.
 
 ### Windows support
 
-Docker 17.06 and higher include support for configs on Windows containers.
-Where there are differences in the implementations, they are called out in the
-examples below. Keep the following notable differences in mind:
+Docker includes support for configs on Windows containers, but there are differences
+in the implementations, which are called out in the examples below. Keep the
+following notable differences in mind:
 
 - Config files with custom targets are not directly bind-mounted into Windows
   containers, since Windows does not support non-directory file bind-mounts.
@@ -230,15 +229,15 @@ real-world example, continue to
 ### Simple example: Use configs in a Windows service
 
 This is a very simple example which shows how to use configs with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-for Windows 17.06 CE on Microsoft Windows 10. It stores the webpage in a config.
+IIS service running on Docker for Windows running Windows containers on
+Microsoft Windows 10.  It is a naive example that stores the webpage in a config.
 
 This example assumes that you have PowerShell installed.
 
 1.  Save the following into a new file `index.html`.
 
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
@@ -287,7 +286,7 @@ name as its argument. The template will be rendered when container is created.
 1.  Save the following into a new file `index.html.tmpl`.
 
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello {% raw %}{{ env "HELLO" }}{% endraw %}! I'm service {% raw %}{{ .Service.Name }}{% endraw %}.</p>
@@ -320,7 +319,7 @@ name as its argument. The template will be rendered when container is created.
     ```bash
     $ curl http://0.0.0.0:3000
 
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! I'm service hello-template.</p>

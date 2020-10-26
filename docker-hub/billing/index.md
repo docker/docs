@@ -20,9 +20,9 @@ The **Pro** plan includes unlimited public repositories, unlimited private repos
 
 > **Note**
 >
-> Pro plans allow one service account for private repositories. For more information, see [service accounts](../repos.md#service-accounts).
+> Pro plans allow one service account for private repositories. For more information, see [service accounts](../repos.md#service-accounts). If you already have more than one collaborator in your private repository, you’ll not be able to add any further collaborators. Any new private repository that you create will be restricted to one service account.
 
-The **Free** plan includes unlimited public repositories and unlimited collaborators for public repositories and zero collaborators for private repositories at no cost per month.
+The **Free** plan includes unlimited public repositories and unlimited collaborators for public repositories and zero service accounts for private repositories at no cost per month.
 
 **For development teams:**
 

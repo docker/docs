@@ -31,11 +31,8 @@ containers.
 
 ## Choose the --tmpfs or --mount flag
 
-Originally, the `--tmpfs` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the
-`--tmpfs` flag does not support any configurable options.
+In general, `--mount` is more explicit and verbose. The biggest difference is
+that the `--tmpfs` flag does not support any configurable options.
 
 - **`--tmpfs`**: Mounts a `tmpfs` mount without allowing you to specify any
   configurable options, and can only be used with standalone containers.

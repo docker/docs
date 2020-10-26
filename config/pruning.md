@@ -144,9 +144,8 @@ for more examples.
 ## Prune everything
 
 The `docker system prune` command is a shortcut that prunes images, containers,
-and networks. In Docker 17.06.0 and earlier, volumes are also pruned. In Docker
-17.06.1 and higher, you must specify the `--volumes` flag for
-`docker system prune` to prune volumes.
+and networks. Volumes are not pruned by default, and you must specify the
+`--volumes` flag for `docker system prune` to prune volumes.
 
 ```bash
 $ docker system prune
@@ -159,8 +158,7 @@ WARNING! This will remove:
 Are you sure you want to continue? [y/N] y
 ```
 
-If you are on Docker 17.06.1 or higher and want to also prune volumes, add
-the `--volumes` flag:
+To also prune volumes, add the `--volumes` flag:
 
 ```bash
 $ docker system prune --volumes

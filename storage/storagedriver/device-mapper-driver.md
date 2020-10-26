@@ -144,12 +144,11 @@ below to configure Docker to use the `devicemapper` storage driver in
 
 #### Allow Docker to configure direct-lvm mode
 
-With Docker `17.06` and higher, Docker can manage the block device for you,
-simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh 
-Docker setups only.** You can only use a single block device. If you need to
-use multiple block devices, [configure direct-lvm mode
-manually](#configure-direct-lvm-mode-manually) instead. The following new
-configuration options have been added:
+Docker can manage the block device for you, simplifying configuration of `direct-lvm`
+mode. **This is appropriate for fresh Docker setups only.** You can only use a
+single block device. If you need to use multiple block devices,
+[configure direct-lvm mode manually](#configure-direct-lvm-mode-manually) instead.
+The following new configuration options are available:
 
 | Option                          | Description                                                                                                                                                                        | Required? | Default | Example                            |
 |:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:--------|:-----------------------------------|

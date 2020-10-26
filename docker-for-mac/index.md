@@ -481,5 +481,4 @@ After you have successfully authenticated, you can access your organizations and
   [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" rel="noopener" class="_"}.
 
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
-  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" rel="noopener" class="_"}.
+  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){: target="_blank" rel="noopener" class="_"}.

@@ -18,17 +18,10 @@ goes down, the remaining manager nodes elect a new leader and resume
 orchestration and maintenance of the swarm state. By default, manager nodes
 also run tasks.
 
-Before you add nodes to a swarm you must install Docker Engine 1.12 or later on
-the host machine.
-
 The Docker Engine joins the swarm depending on the **join-token** you provide to
 the `docker swarm join` command. The node only uses the token at join time. If
 you subsequently rotate the token, it doesn't affect existing swarm nodes. Refer
 to [Run Docker Engine in swarm mode](swarm-mode.md#view-the-join-command-or-update-a-swarm-join-token).
-
-> **Note**: Docker engine allows a non-FIPS node to join a FIPS-enabled swarm cluster.
-
-While a mixed FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed FIPS environment in production.
 
 ## Join as a worker node
 
