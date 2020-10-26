@@ -28,17 +28,17 @@ function pageIsInSection(tree) {
 }
 
 function walkTree(tree) {
-    for (let j = 0; j < tree.length; j++) {
+    for (const page of tree) {
         totalTopics++;
-        if (tree[j].section) {
-            let sectionHasPath = pageIsInSection(tree[j].section);
+        if (page.section) {
+            let sectionHasPath = pageIsInSection(page.section);
             outputLetNav.push('<li><a onclick="navClicked(' + totalTopics + ')" data-target="#item' + totalTopics + '" data-toggle="collapse" data-parent="#stacked-menu"')
             if (sectionHasPath) {
                 outputLetNav.push('aria-expanded="true"')
             } else {
                 outputLetNav.push('class="collapsed" aria-expanded="false"')
             }
-            outputLetNav.push(">" + tree[j].sectiontitle + '<span class="caret arrow"></span></a>');
+            outputLetNav.push(">" + page.sectiontitle + '<span class="caret arrow"></span></a>');
             outputLetNav.push('<ul class="nav collapse');
             if (sectionHasPath) outputLetNav.push(" in");
             outputLetNav.push('" id="#item' + totalTopics + '" aria-expanded="');
@@ -48,15 +48,15 @@ function walkTree(tree) {
                 outputLetNav.push("false");
             }
             outputLetNav.push('">');
-            walkTree(tree[j].section);
+            walkTree(page.section);
             outputLetNav.push("</ul></li>");
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
-            outputLetNav.push('<li><a href="' + tree[j].path + '"')
-            if (tree[j].path === pageURL && !tree[j].nosync) {
+            outputLetNav.push('<li><a href="' + page.path + '"')
+            if (page.path === pageURL && !page.nosync) {
                 outputLetNav.push('class="active currentPage"')
             }
-            outputLetNav.push(">" + tree[j].title + "</a></li>")
+            outputLetNav.push(">" + page.title + "</a></li>")
         }
     }
 }
