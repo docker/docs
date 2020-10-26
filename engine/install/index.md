@@ -14,7 +14,6 @@ redirect_from:
 - /engine/installation/linux/docker-ee/
 - /engine/installation/
 - /en/latest/installation/
-toc_max: 2
 ---
 
 
@@ -25,16 +24,16 @@ Docker Engine is available on a variety of [Linux platforms](#server),
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
-#### Desktop
+### Desktop
 
-{% assign yes = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
 | Platform                                                          | x86_64 / amd64                                   |
 |:------------------------------------------------------------------|:------------------------------------------------:|
 | [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     |
 | [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |
 
-#### Server
+### Server
 
 Docker provides `.deb` and `.rpm` packages from the following Linux distributions
 and architectures:
@@ -47,7 +46,7 @@ and architectures:
 | [Raspbian](debian.md) |                        | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
 | [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) |
 
-##### Other Linux distributions
+### Other Linux distributions
 
 > **Note**
 >
