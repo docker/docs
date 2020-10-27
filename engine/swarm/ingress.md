@@ -101,24 +101,6 @@ you publish both TCP and UDP ports, If you omit the protocol specifier,
 the port is published as a TCP port. If you use the longer syntax (recommended),
 set the `protocol` key to either `tcp` or `udp`.
 
-#### TCP only
-
-**Long syntax:**
-
-```bash
-$ docker service create --name dns-cache \
-  --publish published=53,target=53 \
-  dns-cache
-```
-
-**Short syntax:**
-
-```bash
-$ docker service create --name dns-cache \
-  -p 53:53 \
-  dns-cache
-```
-
 #### TCP and UDP
 
 **Long syntax:**
@@ -126,7 +108,6 @@ $ docker service create --name dns-cache \
 ```bash
 $ docker service create --name dns-cache \
   --publish published=53,target=53 \
-  --publish published=53,target=53,protocol=udp \
   dns-cache
 ```
 
@@ -135,7 +116,26 @@ $ docker service create --name dns-cache \
 ```bash
 $ docker service create --name dns-cache \
   -p 53:53 \
-  -p 53:53/udp \
+  dns-cache
+```
+
+#### TCP only
+
+**Long syntax:**
+
+```bash
+$ docker service create --name dns-cache \
+  --publish published=53,target=53 \
+  --publish published=53,target=53,protocol=tcp \
+  dns-cache
+```
+
+**Short syntax:**
+
+```bash
+$ docker service create --name dns-cache \
+  -p 53:53 \
+  -p 53:53/tcp \
   dns-cache
 ```
 
