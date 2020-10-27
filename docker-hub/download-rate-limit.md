@@ -39,22 +39,33 @@ You will see this error message in the Docker CLI or Docker Engine logs.
 
 Valid, non-rate-limited manifest API reqests to Hub will include the following rate limit headers in the response:
 
-> RateLimit-Limit: \<value\>  
-RateLimit-Remaining \<value\>
+> RateLimit-Limit    
+RateLimit-Remaining
 
 If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly.
 
-Otherwise, you can use curl to view these. You will need `curl` and `jq` installed.
+Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
 
-> $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)  
-$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+To get a token anonymously (if you are pulling anonymously):
 
-Should return something like:
+> $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+
+To get a token with a user account (if you are authenticating your pulls) - insert your username and password in the following command:
+
+> $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+
+Then to get the headers showing your limits, run this:
+
+>$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+
+Which should return something like this:
 
 > < RateLimit-Limit: 100;w=21600  
 < RateLimit-Remaining: 76;w=21600
 
-This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining. Please remember that these headers are best-effort and there will be small variations.
+This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
+
+Please remember that these headers are best-effort and there will be small variations.
 
 ## How do I authenticate pull requests
 
