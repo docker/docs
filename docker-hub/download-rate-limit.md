@@ -47,18 +47,14 @@ If you have a proxy or other layer in place that logs your requests, you can ins
 Otherwise, you can use curl to view these. You will need `curl` and `jq` installed.
 
 > $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)  
-$ curl -I -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest  
+$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
 
-Returns for example:
+Should return something like:
 
-> HTTP/1.1 200 OK  
-Content-Length: 2782  
-Content-Type: application/vnd.docker.distribution.manifest.v1+prettyjws  
-Docker-Content-Digest: sha256:767a3815c34823b355bed31760d5fa3daca0aec2ce15b217c9cd83229e0e2020  
-Docker-Distribution-Api-Version: registry/2.0  
-Etag: "sha256:767a3815c34823b355bed31760d5fa3daca0aec2ce15b217c9cd83229e0e2020"  
-Date: Fri, 23 Oct 2020 20:27:41 GMT  
-Strict-Transport-Security: max-age=31536000  
+> < RateLimit-Limit: 100;w=21600  
+< RateLimit-Remaining: 76;w=21600
+
+This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining. Please remember that these headers are best-effort and there will be small variations.
 
 ## How do I authenticate pull requests
 
@@ -111,5 +107,5 @@ regardless of account level.
 
 You can differentiate between these limits by looking at the error 
 code. The "overall limit" will return a simple `429 Too Many Requests` 
-response. The image download limit returns a longer error message that 
+response. The pull limit returns a longer error message that
 includes a link to this page.
