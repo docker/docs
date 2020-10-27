@@ -110,7 +110,7 @@ boost your own well being.
 
 Docker users are people using Docker in their daily work. To help Docker users, visit:
 
-* the [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
+* the [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
 * the [Docker Community Forum](https://forums.docker.com/){: target="_blank" rel="noopener" class="_"}
 * [StackOverflow](https://stackoverflow.com/questions/tagged/docker){: target="_blank" rel="noopener" class="_"}
 
@@ -122,7 +122,7 @@ You can also check the lists of [open issues on the Docker docs](https://github.
 Docker contributors are people like you, interested in the open source projects
 and product documentation. Contributors may need help with IRC, Go programming,
 Markdown, or with other aspects of contributing. To help Docker contributors,
-join the [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}.
+join the [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}.
 
 ## Contribute to the Moby open source project
 
