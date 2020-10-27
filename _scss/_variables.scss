@@ -16,49 +16,49 @@ $black:                 #000;
 $body-text:               hsl(199,  20%,  25%);
 $primary-links:           hsl(206,  85%,  54%);
 
-$bg-body:                 hsl(  0,   0%, 100%);
-$bg-body-landing:         hsl(240,  14%,  99%);
+$bg-body:                 hsl(206,   0%, 100%);
+$bg-body-landing:         hsl(206,  14%,  99%);
 $bg-header:               hsl(206,  85%,  54%);
 $bg-secondary:            hsl(206,  85%,  54%);
-$bg-sidebar:              hsl(240,  14%,  99%);
-$bg-footer:               hsl(  0,   0%, 100%);
+$bg-sidebar:              hsl(206,  14%,  99%);
+$bg-footer:               hsl(206,   0%, 100%);
 
 $bg-component:            hsl(240,  14%,  99%);
 $bg-card:                 hsl(  0,   0%, 100%);
 
 // notes, warnings
-$note-color:              hsl(201,  82%,  43%);
-$note-bg-color:           hsl(204,  83%,  98%);
+$note-color:              hsl(206,  82%,  43%);
+$note-bg-color:           hsl(206,  83%,  98%);
 $important-color:         hsl( 35,  91%,  35%);
 $warning-color:           hsl(  2,  58%,  54%);
 
-$slider-bg:               hsl(202,  76%,  87%);
+$slider-bg:               hsl(206,  76%,  87%);
 $slider-btn:              hsl(206,  85%,  54%);
 
-$table-head:              hsl(204,   5%,  82%);
+$table-head:              hsl(206,   5%,  82%);
 
 /*
  * night mode
  */
 $body-text-night:         hsl(180,   1%,  83%);
-$primary-links-night:     hsl(201,  85%,  79%);
+$primary-links-night:     hsl(203,  85%,  79%);
 
-$bg-body-night:           hsl(203,  77%,  10%);
-$bg-body-landing-night:   hsl(203,  77%,  10%);
-$bg-header-night:         hsl(211,  44%,  11%);
-$bg-secondary-night:      hsl(211,  44%,  11%);
-$bg-sidebar-night:        hsl(202,  41%,  11%);
-$bg-footer-night:         hsl(  0,   0%,   0%);
+$bg-body-night:           hsl(203,  90%,  10%);
+$bg-body-landing-night:   hsl(203,  90%,  10%);
+$bg-header-night:         hsl(203,  40%,  10%);
+$bg-secondary-night:      hsl(203,  40%,  10%);
+$bg-sidebar-night:        hsl(203,  40%,  10%);
+$bg-footer-night:         hsl(203,   0%,   0%);
 
-$bg-component-night:      hsl(211,  44%,  11%);
-$bg-card-night:           hsl(212,  33%,   9%);
+$bg-component-night:      hsl(203,  44%,  10%);
+$bg-card-night:           hsl(203,  33%,   8%);
 
 // notes, warnings
 $note-color-night:        hsl(180,   1%,  83%);
-$note-bg-color-night:     hsl(205,  35%,  19%);
+$note-bg-color-night:     hsl(203,  35%,  19%);
 $important-color-night:   hsl( 35,  90%,  62%);
 $warning-color-night:     hsl(  2, 100%,  74%);
 
-$active-sidebar-night:    hsl(201,  85%,   79%);
+$active-sidebar-night:    hsl(203,  85%,   79%);
 
 $bg-search-results-night: hsla(0,    0%,    4%, 0.95);
