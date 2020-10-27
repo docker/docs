@@ -63,6 +63,10 @@ guides:
       title: Manage images
     - path: /develop/develop-images/baseimages/
       title: Create your own base image (advanced)
+- sectiontitle: Set up CI/CD
+  section:
+  - path: /ci-cd/github-actions/
+    title: Configure GitHub Actions
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /engine/context/aci-integration/
