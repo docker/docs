@@ -368,16 +368,12 @@ body.landing {
     }
   }
 
-  footer.footer {
-    background-color: $dark-blue;
+  footer {
+    background-color: $bg-footer-landing;
     margin-top: 130px;
 
     a, p {
       color: white;
     }
   }
-}
-
-body.landing:not(.night) {
-  background-color: $bg-sidebar;
 }
