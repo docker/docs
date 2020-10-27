@@ -13,52 +13,52 @@ $black:                 #000;
 /*
  * standard mode
  */
-$body-text:             #33444c;
-$primary-links:         #2496ed;
+$body-text:               hsl(199,  20%,  25%);
+$primary-links:           hsl(206,  85%,  54%);
 
-$bg-body:               #ffffff;
-$bg-body-landing:       #fbfbfc;
-$bg-header:             #2496ed;
-$bg-secondary:          #2496ed;
-$bg-sidebar:            #fbfbfc;
-$bg-footer:             #ffffff;
+$bg-body:                 hsl(  0,   0%, 100%);
+$bg-body-landing:         hsl(240,  14%,  99%);
+$bg-header:               hsl(206,  85%,  54%);
+$bg-secondary:            hsl(206,  85%,  54%);
+$bg-sidebar:              hsl(240,  14%,  99%);
+$bg-footer:               hsl(  0,   0%, 100%);
 
-$bg-component:          #fbfbfc;
-$bg-card:               #ffffff;
+$bg-component:            hsl(240,  14%,  99%);
+$bg-card:                 hsl(  0,   0%, 100%);
 
 // notes, warnings
-$note-color:            #1488C6;
-$note-bg-color:         #f4fafe;
-$important-color:       #aa6708;
-$warning-color:         #ce4844;
+$note-color:              hsl(201,  82%,  43%);
+$note-bg-color:           hsl(204,  83%,  98%);
+$important-color:         hsl( 35,  91%,  35%);
+$warning-color:           hsl(  2,  58%,  54%);
 
-$slider-bg:             #c3e4f7;
-$slider-btn:            #2496ed;
+$slider-bg:               hsl(202,  76%,  87%);
+$slider-btn:              hsl(206,  85%,  54%);
 
-$table-head:            #cfd2d4;
+$table-head:              hsl(204,   5%,  82%);
 
 /*
  * night mode
  */
-$body-text-night:       #d3d4d4;
-$primary-links-night:   #9cd7f7;
+$body-text-night:         hsl(180,   1%,  83%);
+$primary-links-night:     hsl(201,  85%,  79%);
 
-$bg-body-night:         #061f2f;
-$bg-body-landing-night: #061f2f;
-$bg-header-night:       #101c29;
-$bg-secondary-night:    #101c29;
-$bg-sidebar-night:      #101e26;
-$bg-footer-night:       #000000;
+$bg-body-night:           hsl(203,  77%,  10%);
+$bg-body-landing-night:   hsl(203,  77%,  10%);
+$bg-header-night:         hsl(211,  44%,  11%);
+$bg-secondary-night:      hsl(211,  44%,  11%);
+$bg-sidebar-night:        hsl(202,  41%,  11%);
+$bg-footer-night:         hsl(  0,   0%,   0%);
 
-$bg-component-night:    #101c29;
-$bg-card-night:         #0f161e;
+$bg-component-night:      hsl(211,  44%,  11%);
+$bg-card-night:           hsl(212,  33%,   9%);
 
 // notes, warnings
-$note-color-night:      #d3d4d4;
-$note-bg-color-night:   #1f3341;
-$important-color-night: #f5ac45;
-$warning-color-night:   #ff7e7a;
+$note-color-night:        hsl(180,   1%,  83%);
+$note-bg-color-night:     hsl(205,  35%,  19%);
+$important-color-night:   hsl( 35,  90%,  62%);
+$warning-color-night:     hsl(  2, 100%,  74%);
 
-$active-sidebar-night:  #9cd7f7;
+$active-sidebar-night:    hsl(201,  85%,   79%);
 
-$bg-search-results-night: rgba(10, 10, 10, 0.95);
+$bg-search-results-night: hsla(0,    0%,    4%, 0.95);
