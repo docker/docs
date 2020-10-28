@@ -54,7 +54,7 @@ To get a token with a user account (if you are authenticating your pulls) - inse
 
 > $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 
-Then to get the headers showing your limits, run this:
+Then to get the headers showing your limits, run this (keep in mind that requesting a manifest emulates a pull and will count against the limits):
 
 >$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
 
