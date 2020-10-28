@@ -33,4 +33,7 @@ By default, the only things removed are:
 
 Networks and volumes defined as `external` are never removed.
 
-Anonymous volumes are not removed by default but because they don't have a stable name, they will not be automatically mounted by a subsequent `up`. For data that needs to persist between updates, use host or named volumes.
+Anonymous volumes are not removed by default. However, as they don't 
+have a stable name, they will not be automatically mounted by a subsequent
+`up`. For data that needs to persist between updates, use host or
+named volumes.
