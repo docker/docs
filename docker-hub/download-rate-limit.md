@@ -6,7 +6,7 @@ title: Download rate limit
 
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and our [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"}.
+For more information, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} and [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
 A user's limit will be equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
@@ -30,42 +30,51 @@ Docker will gradually introduce these rate limits starting November 2nd, 2020.
 
 ## How do I know my pull requests are being limited
 
-When you issue a pull request and you are over the limit for your account type, Hub will return a `429` response code with the following body when the manifest is requested:
-> You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
+When you issue a pull request and you are over the limit for your account type, Docker Hub will return a `429` response code with the following body when the manifest is requested:
 
-You will see this error message in the Docker CLI or Docker Engine logs.
+`You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits`
+
+You will see this error message in the Docker CLI or in the Docker Engine logs.
 
 ## How can I check my current rate
 
 When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
 
-> RateLimit-Limit    
+```
+RateLimit-Limit    
 RateLimit-Remaining
+```
 
-If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly.
-
-Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
 
 To get a token anonymously (if you are pulling anonymously):
 
-> $ TOKEN=$(curl "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
+$ TOKEN=$(curl "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
 
-To get a token with a user account (if you are authenticating your pulls) - insert your username and password in the following command:
+To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
 
-> $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
+$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+```
 
-Then to get the headers showing your limits, run this (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
 
->$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+```
+$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+```
 
 Which should return something like this:
 
-> < RateLimit-Limit: 100;w=21600  
+```
+< RateLimit-Limit: 100;w=21600  
 < RateLimit-Remaining: 76;w=21600
+```
 
 This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
 
-Please remember that these headers are best-effort and there will be small variations.
+> Remember that these headers are best-effort and there will be small variations.
 
 ## How do I authenticate pull requests
 
