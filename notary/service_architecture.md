@@ -39,7 +39,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   require that a collection owner come online before each timestamp expiry.
 
 - The targets key signs the
-  [targets metadata file](ttps://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" rel="noopener" class="_"},
+  [targets metadata file](https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L678){:target="_blank" rel="noopener" class="_"},
   which lists filenames in the collection, and their sizes and respective
   [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   This file is used to verify the integrity of some or all of the actual contents of the repository.
