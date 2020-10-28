@@ -37,7 +37,7 @@ You will see this error message in the Docker CLI or Docker Engine logs.
 
 ## How can I check my current rate
 
-Valid, non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
 
 > RateLimit-Limit    
 RateLimit-Remaining
