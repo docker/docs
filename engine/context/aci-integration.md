@@ -49,24 +49,28 @@ docker login azure
 ```
 
 This opens your web browser and prompts you to enter your Azure login credentials.
+If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} and lets you connect manually.
+Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} login is separated from the Docker CLI Azure login.
 
-Alternatively, you can log in without interaction (typically in 
+Alternatively, you can log in without interaction (typically in
 scripts or continuous integration scenarios), using an Azure Service
 Principal, with `docker login azure --client-id xx --client-secret yy --tenant-id zz`
 
 >**Note**
 >
-> Logging in through the Azure Service Provider obtains an access token valid 
-for a short period (typically 1h), but it does not allow you to automatically 
-and transparently refresh this token. You must manually re-login 
-when the access token has expired when logging in with a Service Provider. 
+> Logging in through the Azure Service Provider obtains an access token valid
+for a short period (typically 1h), but it does not allow you to automatically
+and transparently refresh this token. You must manually re-login
+when the access token has expired when logging in with a Service Provider.
 
-You can also use the `--tenant-id` option alone to specify a tenant, if 
+You can also use the `--tenant-id` option alone to specify a tenant, if
 you have several ones available in Azure.
 
 ### Create an ACI context
 
-After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI. For example, let us create a new context called `myacicontext`:
+After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI.
+Creating an ACI context requires an Azure subscription, a resource group, and a region.
+For example, let us create a new context called `myacicontext`:
 
 ```console
 docker context create aci myacicontext
@@ -85,11 +89,6 @@ myacicontext        aci                 myResourceGroupGTA@eastus
 default *           moby              Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                          swarm
 ```
 
-> **Note**
->
-> If you need to change the subscription and create a new context, you must 
-execute the `docker login azure` command again.
-
 ### Run a container
 
 Now that you've logged in and created an ACI context, you can start using Docker commands to deploy containers on ACI.
@@ -107,7 +106,7 @@ docker context use myacicontext
 docker run -p 80:80 nginx
 ```
 
-After you've switched to the `myacicontext` context, you can use docker ps to list your containers running on ACI.
+After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
 
 To view logs from your container, run:
 
@@ -127,14 +126,18 @@ To stop and remove a container from ACI, run:
 docker stop <CONTAINER_ID>
 docker rm <CONTAINER_ID>
 ```
+
+You can remove containers using `docker rm`. To remove a running container, you must use the `--force` flag, or stop the container using `docker stop` before removing it.
+
 > **Note**
-> 
-> The stop command in ACI differs from the Moby stop command as a stopped 
-container will not retain its state when it is started again on ACI.
+>
+The semantics of restarting a container on ACI are different to those when using a local Docker context for local development. On ACI, the container will be reset to its initial state and started on a new node. This includes the container's filesystem so all state that is not stored in a volume will be lost on restart.
 
 ## Running Compose applications
 
-You can also deploy and manage multi-container applications defined in Compose files to ACI using the `docker compose` command. To do this:
+You can also deploy and manage multi-container applications defined in Compose files to ACI using the `docker compose` command.
+All containers in the same Compose application are started in the same container group. Service discovery between the containers works using the service name specified in the Compose file.
+Name resolution between containers is achieved by writing service names in the `/etc/hosts` file that is shared automatically by all containers in the container group.
 
 1. Ensure you are using your ACI context. You can do this either by specifying the `--context myacicontext` flag or by setting the default context using the command  `docker context use myacicontext`.
 
@@ -144,23 +147,50 @@ You can also deploy and manage multi-container applications defined in Compose f
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
-  You can view logs from containers that are part of the Compose application using the command `docker logs <CONTAINER_ID>`. To know the container ID, run `docker ps`.
+  Containers started as part of Compose applications will be displayed along with single containers when using `docker ps`. Their container ID will be of the format: `<COMPOSE-PROJECT>_<SERVICE>`.
+  These containers cannot be stopped, started, or removed independently since they are all part of the same ACI container group.
+  You can view each container's logs with `docker logs`. You can list deployed Compose applications with `docker compose ls`. This will list only compose applications, not single containers started with `docker run`. You can remove a Compose application with `docker compose down`.
 
 > **Note**
 >
 > The current Docker Azure integration does not allow fetching a combined log stream from all the containers that make up the Compose application.
 
+## Exposing ports
+
+Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+
+> **Note:**
+>
+> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
+
+> **Note:**
+>
+> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+
+By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
+This IP address can be obtained when listing containers with `docker ps` or using `docker inspect`.
+
+### DNS label name
+
+In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
+You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+
+> **Note:**
+>
+> The domain of a Compose application can only be set once, if you specify the
+> `domain` for several services, the value must be identical.
+
 ## Using Azure file share as volumes in ACI containers
 
-You can deploy containers or Compose applications that use persistent data 
-stored in volumes. Azure File Share can be used to support volumes for ACI 
+You can deploy containers or Compose applications that use persistent data
+stored in volumes. Azure File Share can be used to support volumes for ACI
 containers.
 
-Using an existing Azure File Share with storage account name `mystorageaccount` 
+Using an existing Azure File Share with storage account name `mystorageaccount`
 and file share name `myfileshare`, you can specify a volume in your deployment `run`
 command as follows:
 
-```
+```console
 docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 
@@ -183,16 +213,20 @@ volumes:
       storage_account_name: mystorageaccount
 ```
 
-When you deploy a single container or a Compose application, your 
-Azure login automatically fetches the key to the Azure storage account.
+> **Note:**
+>
+> The volume short syntax in Compose files cannot be used as it is aimed at volume definition for local bind mounts. Using the volume driver and driver option syntax in Compose files makes the volume definition a lot more clear.
+
+In single or multi-container deployments, the Docker CLI will use your Azure login to fetch the key to the storage account, and provide this key with the container deployment information, so that the container can access the volume.
+Volumes can be used from any file share in any storage account you have access to with your Azure login. You can specify `rw` (read/write) or `ro` (read only) when mounting the volume (`rw` is the default).
 
 ### Managing Azure volumes
 
-To create a volume that you can use in containers or Compose applications when 
-using your ACI Docker context, you can use the `docker volume create` command, 
+To create a volume that you can use in containers or Compose applications when
+using your ACI Docker context, you can use the `docker volume create` command,
 and specify an Azure storage account name and the file share name:
 
-```
+```console
 $ docker --context aci volume create test-volume --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount  Created                         26.2s
@@ -200,14 +234,14 @@ $ docker --context aci volume create test-volume --storage-account mystorageacco
 mystorageaccount/test-volume
 ```
 
-By default, if the storage account does not already exist, this command 
-creates a new storage account using the Standard LRS as a default SKU, and the 
+By default, if the storage account does not already exist, this command
+creates a new storage account using the Standard LRS as a default SKU, and the
 resource group and location associated with you Docker ACI context.
 
-If you specify an existing storage account, the command creates a new 
+If you specify an existing storage account, the command creates a new
 file share in the exsting account:
 
-```
+```console
 $ docker --context aci volume create test-volume2 --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount   Use existing                    0.7s
@@ -220,7 +254,7 @@ portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storag
 
 You can also list volumes that are available for use in containers or Compose applications:
 
-```
+```console
 $ docker --context aci volume ls
 ID                                 DESCRIPTION
 mystorageaccount/test-volume       Fileshare test-volume in mystorageaccount storage account
@@ -229,7 +263,7 @@ mystorageaccount/test-volume2      Fileshare test-volume2 in mystorageaccount st
 
 To delete a volume and the corresponding Azure file share, use the `volume rm` command:
 
-```
+```console
 $ docker --context aci volume rm mystorageaccount/test-volume
 mystorageaccount/test-volume
 ```
@@ -237,12 +271,22 @@ mystorageaccount/test-volume
 This permanently deletes the Azure file share and all its data.
 
 When deleting a volume in Azure, the command checks whether the specified file share
-is the only file share available in the storage account. If the storage account is 
-created with the `docker volume create` command, `docker volume rm` also 
+is the only file share available in the storage account. If the storage account is
+created with the `docker volume create` command, `docker volume rm` also
 deletes the storage account when it does not have any file shares.
-If you are using a storage account created without the `docker volume create` command 
-(through Azure portal or with the `az` command line for example), `docker volume rm` 
+If you are using a storage account created without the `docker volume create` command
+(through Azure portal or with the `az` command line for example), `docker volume rm`
 does not delete the storage account, even when it has zero remaining file shares.
+
+## Environment variables
+
+When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
+For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
+
+## Private Docker Hub images and using the Azure Container Registry
+
+You can deploy private images to ACI that are hosted by any container registry. You need to log into the relevant registry using `docker login` before running `docker run` or `docker compose up`. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
+In the case of the Azure Container Registry, the command line will try to automatically log you into ACR from your Azure login. You don't need to manually login to the ACR registry first, if your Azure login has access to the ACR.
 
 ## Using ACI resource groups as namespaces
 
@@ -273,7 +317,7 @@ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/instal
 
 ### Manual install
 
-You can download the Docker ACI Integration CLI from the 
+You can download the Docker ACI Integration CLI from the
 [latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} page.
 
 You will then need to make it executable:
