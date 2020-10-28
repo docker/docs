@@ -49,8 +49,8 @@ docker login azure
 ```
 
 This opens your web browser and prompts you to enter your Azure login credentials.
-If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code) and let you connect yourself.
-Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/) login is separated from the Docker CLI Azure login.
+If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} and lets you connect manually.
+Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} login is separated from the Docker CLI Azure login.
 
 Alternatively, you can log in without interaction (typically in
 scripts or continuous integration scenarios), using an Azure Service
@@ -69,7 +69,7 @@ you have several ones available in Azure.
 ### Create an ACI context
 
 After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI.
-Creating an ACI context requires an Azure subscription, a resource group and a region.
+Creating an ACI context requires an Azure subscription, a resource group, and a region.
 For example, let us create a new context called `myacicontext`:
 
 ```console
@@ -127,12 +127,11 @@ docker stop <CONTAINER_ID>
 docker rm <CONTAINER_ID>
 ```
 
-Containers can be removed using `docker rm`. Removing a running container will require using the `--force` flag, or stopping the container with `docker stop` before removing.
+You can remove containers using `docker rm`. To remove a running container, you must use the `--force` flag, or stop the container using `docker stop` before removing it.
 
 > **Note**
 >
 The semantics of restarting a container on ACI are different to those when using a local Docker context for local development. On ACI, the container will be reset to its initial state and started on a new node. This includes the container's filesystem so all state that is not stored in a volume will be lost on restart.
-
 
 ## Running Compose applications
 
@@ -149,7 +148,7 @@ Name resolution between containers is achieved by writing service names in the `
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
   Containers started as part of Compose applications will be displayed along with single containers when using `docker ps`. Their container ID will be of the format: `<COMPOSE-PROJECT>_<SERVICE>`.
-  These containers cannot be stopped, started or removed independently since they are all part of the same ACI container group.
+  These containers cannot be stopped, started, or removed independently since they are all part of the same ACI container group.
   You can view each container's logs with `docker logs`. You can list deployed Compose applications with `docker compose ls`. This will list only compose applications, not single containers started with `docker run`. You can remove a Compose application with `docker compose down`.
 
 > **Note**
@@ -158,11 +157,11 @@ Name resolution between containers is achieved by writing service names in the `
 
 ## Exposing ports
 
-Single containers and Compose applications can optionally expose ports. For single containers this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications specify exposed ports in the Compose file service definition.
+Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
 
 > **Note:**
 >
-> ACI does not allow port mapping (i.e.: changing port number while exposing port), so the source and target ports must be the same when deploying to ACI.
+> ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
 
 > **Note:**
 >
@@ -174,11 +173,11 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 ### DNS label name
 
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-This name can be set with the `--domain` flag when performing a `docker run` or using the `domain` field in the Compose file when performing a `docker compose up`.
+You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
 
 > **Note:**
 >
-> The domain of a Compose application can only be set once, if you specify
+> The domain of a Compose application can only be set once, if you specify the
 > `domain` for several services, the value must be identical.
 
 ## Using Azure file share as volumes in ACI containers
@@ -281,12 +280,12 @@ does not delete the storage account, even when it has zero remaining file shares
 
 ## Environment variables
 
-When using `docker run`, environment variables can be passed to ACI containers using the `--env` flag.
-Form compose applications, environment variables can be specified in the compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
+When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
+For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
 
 ## Private Docker Hub images and using the Azure Container Registry
 
-You can deploy private images to ACI that are hosted by any container registry. You need to `docker login` to the relevant registry before running `docker run` or `docker compose up`. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
+You can deploy private images to ACI that are hosted by any container registry. You need to log into the relevant registry using `docker login` before running `docker run` or `docker compose up`. The Docker CLI will fetch your registry login for the deployed images and send the credentials along with the image deployment information to ACI.
 In the case of the Azure Container Registry, the command line will try to automatically log you into ACR from your Azure login. You don't need to manually login to the ACR registry first, if your Azure login has access to the ACR.
 
 ## Using ACI resource groups as namespaces
