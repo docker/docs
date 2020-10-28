@@ -131,7 +131,7 @@ You can remove containers using `docker rm`. To remove a running container, you 
 
 > **Note**
 >
-The semantics of restarting a container on ACI are different to those when using a local Docker context for local development. On ACI, the container will be reset to its initial state and started on a new node. This includes the container's filesystem so all state that is not stored in a volume will be lost on restart.
+> The semantics of restarting a container on ACI are different to those when using a local Docker context for local development. On ACI, the container will be reset to its initial state and started on a new node. This includes the container's filesystem so all state that is not stored in a volume will be lost on restart.
 
 ## Running Compose applications
 
