@@ -243,65 +243,46 @@ body.landing {
     }
   }
 
-  section.join-community {
+  section.cta-banner {
     background-color: $dark-blue;
-    padding: 75px 0;
+    padding:          75px 0;
 
     h2, h5, p {
       color: white;
     }
 
-    &.dockercon {
-      text-align: center;
+    text-align: center;
 
-      @include md-width {
-        text-align: left;
-      }
-
-      img {
-        margin-bottom: 20px;
-        max-height: 100px;
-      }
-
-      h2 {
-        color: white;
-        font-size: 32px;
-        line-height: 37px;;
-      }
-
-      a.btn {
-        background-color: #FF3F73;
-        color: white;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 17px;
-        font-weight: bold;
-        padding: 20px 60px;
-        margin-top: 50px;
-      }
+    @include md-width {
+      text-align: left;
     }
 
-    &.slack {
-      a.slack-button {
-        background: #FFFFFF;
-        border: 2px solid #FFFFFF;
-        box-sizing: border-box;
-        border-radius: 3px;
-        align-items: center;
-        display: inline-flex;
-        padding: 0 26px 0 2px;
-        text-transform: none;
-        margin-top: 2rem;
+    img {
+      margin-bottom: 20px;
+      max-height:    100px;
+    }
 
-        img {
-          height: 56px;
-          width: 56px;
-        }
-        span {
-          font-weight: bold;
-          font-size: 17px;
-          line-height: 24px;
-          color: $dark-blue;
-        }
+    h2 {
+      font-size:   32px;
+      line-height: 37px;;
+    }
+
+    a.btn {
+      background:  #FF3F73;
+      color:       white;
+      font-size:   17px;
+      font-weight: bold;
+      margin-top:  50px;
+      padding:     20px 60px;
+
+      img {
+        margin: 0;
+      }
+
+      &.slack-button {
+        background:  white;
+        color:       $dark-blue;
+        padding:     2px 25px 2px 10px;
       }
     }
   }
@@ -368,16 +349,12 @@ body.landing {
     }
   }
 
-  footer.footer {
-    background-color: $dark-blue;
+  footer {
+    background-color: $bg-footer-landing;
     margin-top: 130px;
 
     a, p {
       color: white;
     }
   }
-}
-
-body.landing:not(.night) {
-  background-color: $bg-sidebar;
 }

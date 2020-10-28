@@ -222,7 +222,7 @@ You need to tell Docker to talk to that machine. You can do this with the
 
 You can find more answers on:
 
-- [Docker community Slack channel](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
+- [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
 - [Docker Support Forums](https://forums.docker.com){: target="_blank" rel="noopener" class="_"}
 - [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
 - [Ask questions on Stackoverflow](https://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
