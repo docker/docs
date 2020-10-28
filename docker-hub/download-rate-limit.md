@@ -32,7 +32,9 @@ Docker will gradually introduce these rate limits starting November 2nd, 2020.
 
 When you issue a pull request and you are over the limit for your account type, Docker Hub will return a `429` response code with the following body when the manifest is requested:
 
-`You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits`
+```
+You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
+```
 
 You will see this error message in the Docker CLI or in the Docker Engine logs.
 
