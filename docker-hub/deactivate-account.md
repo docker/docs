@@ -48,5 +48,7 @@ Before deactivating an organization, please complete the following:
 
 Once you have completed all the steps above, you may deactivate your organization. On Docker Hub, go to **Organizations** > **_Your Organization_** > **Settings** > **Deactivate Org**.
 
+4. Remove all other members, including those in the **Owners** team, within the organization.
+
 > This cannot be undone! Be sure you've gathered all the data you need from your organization before deactivating it.
 {: .warning }
