@@ -52,13 +52,13 @@ If you have a proxy or other layer in place that logs your requests, you can ins
 To get a token anonymously (if you are pulling anonymously):
 
 ```
-$ TOKEN=$(curl "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+$ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
 To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
 
 ```
-$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry-1.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+$ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
 Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
