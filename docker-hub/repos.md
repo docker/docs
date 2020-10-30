@@ -122,6 +122,8 @@ repository to see its tags.
 
 ![Repository View](images/repos-create.png)
 
+[//]: # TODO: Replace the image below with one displaying Active and/or Stale information (and Vulnerability scanning?)
+[//]: # ideally keep the same repository "mobythewhale"
 ![View Repo Tags](images/repo-overview.png)
 
 Image sizes are the cumulative space taken up by the image and all its parent
@@ -130,7 +132,20 @@ created when you `docker save` an image.
 
 To view individual tags, click on the **Tags** tab.
 
+[//]: # TODO: Replace the image below with one displaying Active and/or Stale information (and Vulnerability scanning?)
+[//]: # ideally keep the same repository "mobythewhale"
 ![Manage Repo Tags](images/repo-tags-list.png)
+
+An image is considered stale if there has been no push/pull activity for more than 1 month, i.e:
+* It has not been pulled for more than 1 month
+* And it has not been pushed for more than 1 month
+
+A multi-architecture image is considered stale if all single-architecture images part of its manifest are stale.
+
+To delete a tag, select the corresponding checkbox and select the action “Delete” above.
+
+> **Note**:
+> Only a user with administrative access (owner or team member with Admin permission) over the repository can delete tags.
 
 Select a tag's digest to view details.
 
