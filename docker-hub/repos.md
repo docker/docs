@@ -124,7 +124,7 @@ repository to see its tags.
 
 [//]: # TODO: Replace the image below with one displaying Active and/or Stale information (and Vulnerability scanning?)
 [//]: # ideally keep the same repository "mobythewhale"
-![View Repo Tags](images/repo-overview.png)
+![View Repo Tags](images/repo-overview-tag-status.png)
 
 Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the `.tar` file
@@ -134,7 +134,7 @@ To view individual tags, click on the **Tags** tab.
 
 [//]: # TODO: Replace the image below with one displaying Active and/or Stale information (and Vulnerability scanning?)
 [//]: # ideally keep the same repository "mobythewhale"
-![Manage Repo Tags](images/repo-tags-list.png)
+![Manage Repo Tags](images/repo-tags-list-tag-status.png)
 
 An image is considered stale if there has been no push/pull activity for more than 1 month, i.e:
 * It has not been pulled for more than 1 month
