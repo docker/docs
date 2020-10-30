@@ -191,14 +191,6 @@ bookmarking your favorites.
  4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
  5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 
-To create a new service account for your Pro account:
-
- 1. Create a new Docker ID.
- 2. Click **Repositories** from the main menu.
- 3. Select a repository from the list and go to the **Collaborators** tab.
- 4. Add the new Docker ID as a collaborator.
- 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
-
  > **Note**
  >
  > If you want a read-only PAT just for your open source repos, or to access official images and other public images, you do not have to grant any access permissions to the new Docker ID.
