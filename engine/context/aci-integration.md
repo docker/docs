@@ -155,6 +155,21 @@ Name resolution between containers is achieved by writing service names in the `
 >
 > The current Docker Azure integration does not allow fetching a combined log stream from all the containers that make up the Compose application.
 
+## Releasing resources
+
+Single containers and Compose applications can be removed from ACI with 
+the `docker prune` command. The `docker prune` command removes deployments 
+that not currently running. To remove running depoyments, you can specify
+`--force`. The `--dry-run` option lists deployments that are planned for 
+removal, but it doesn't actually remove them.
+
+```console
+$ ./bin/docker --context acicontext prune --dry-run --force
+Resources that would be deleted:
+my-application
+Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
+```
+
 ## Exposing ports
 
 Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
