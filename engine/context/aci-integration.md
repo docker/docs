@@ -157,8 +157,11 @@ Name resolution between containers is achieved by writing service names in the `
 
 ## Releasing resources
 
-Single containers and compose applications can be removed from ACI with the `docker prune` command.
-It will remove deployments not currently running, you can specify `--force` to also remove running depoyments. The `--dry-run` option will list deployments planned for removal but not actually remove them.
+Single containers and Compose applications can be removed from ACI with 
+the `docker prune` command. The `docker prune` command removes deployments 
+that not currently running. To remove running depoyments, you can specify
+`--force`. The `--dry-run` option lists deployments that are planned for 
+removal, but it doesn't actually remove them.
 
 ```console
 $ ./bin/docker --context acicontext prune --dry-run --force
