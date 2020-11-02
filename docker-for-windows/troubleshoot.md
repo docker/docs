@@ -5,6 +5,7 @@ redirect_from:
 - /windows/troubleshoot/
 - /docker-for-win/troubleshoot/
 title: Logs and troubleshooting
+toc_max: 2
 ---
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
@@ -20,7 +21,7 @@ The Troubleshoot page contains the following options:
 
 * **Restart Docker Desktop**: Select to restart Docker Desktop.
 
-* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback).
+* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 
 * **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](index.md#kubernetes).
 
@@ -52,7 +53,7 @@ from the menu.
 
    > **Note**
     >
-    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form.
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
 
 7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
 
@@ -459,3 +460,73 @@ manifests as an error response from the Docker daemon and a Docker Desktop start
 
 For a temporary workaround, uninstall the anti-virus software, or
 explore other workarounds suggested on Docker Desktop forums.
+
+## Support
+
+This section contains information on how to get support on Docker Desktop.
+
+>**Note**
+>
+> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+
+### How do I get Docker Desktop support?
+
+If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+
+Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
+
+### What support can I get?
+
+If you are a Pro or a Team user, you can request for support on the following types of issues:
+
+* Desktop upgrade issues
+* Desktop installation issues
+  * Enabling virtualization in BIOS
+  * Enabling Windows features
+  * Installation crashes
+  * Failure to launch Docker Desktop on first run
+* Usage issues
+  * Crash closing software
+  * Docker Desktop not behaving as expected
+* Configuration issues
+* Basic product ‘how to’ questions such as ‘how to work efficiently on WSL 2’
+
+### What is not supported?
+
+Docker Desktop excludes support for the following types of issues:
+
+* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+* Running on unsupported operating systems, including beta/preview versions of operating systems
+* Support for the Docker engine, Docker CLI, or other bundled Linux components
+* Support for Kubernetes
+* Features labeled as experimental
+* System/Server administration activities
+* Supporting Desktop as a production runtime
+* Scale deployment/multi-machine installation of Desktop
+* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+* Third-party applications not provided by Docker
+* Altered or modified Docker software
+* Defects in the Docker software due to hardware malfunction, abuse, or improper use
+* Any version of the Docker software other than the latest version
+* Reimbursing and expenses spent for third-party services not provided by Docker
+* Docker Support excludes training, customization, and integration
+
+### What versions are supported?
+
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
+
+### How many machines can I get support for Docker Desktop on?
+
+As a Pro user you can get support for Docker Desktop on a single machine.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+
+### What OS’s are supported?
+
+Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
+
+* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+
+### Can I run Docker Desktop on Virtualized hardware?
+
+No, currently this is unsupported and against the terms of use.

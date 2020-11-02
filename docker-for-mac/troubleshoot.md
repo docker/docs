@@ -374,18 +374,13 @@ If you are a Pro or a Team user, you can request for support on the following ty
 
 * Desktop upgrade issues
 * Desktop installation issues
-  * Enabling virtualization in BIOS
-  * Enabling Windows features
-  * Genuine installation crashes
-  * Crashes due to conflicts with other software
-  * Installation issues from enterprise deployment
-* First run issues
-   * Failure to launch Docker Desktop on first run
+  * Installation crashes
+  * Failure to launch Docker Desktop on first run
 * Usage issues
   * Crash closing software
-  * Docker Desktop Not behaving as expected
+  * Docker Desktop not behaving as expected
 * Configuration issues
-* Basic product ‘how to’ questions such as ‘how to work efficiently on WSL 2’
+* Basic product ‘how to’ questions
 
 ### What is not supported?
 
@@ -393,7 +388,6 @@ Docker Desktop excludes support for the following types of issues:
 
 * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 * Running on unsupported operating systems, including beta/preview versions of operating systems
-* Use of Docker/support for learning or fixing Docker commands
 * Support for the Docker engine, Docker CLI, or other bundled Linux components
 * Support for Kubernetes
 * Features labeled as experimental
@@ -402,20 +396,15 @@ Docker Desktop excludes support for the following types of issues:
 * Scale deployment/multi-machine installation of Desktop
 * Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
 * Third-party applications not provided by Docker
-* Altered or modified Docker Software
-* Defects in the Docker Software due to hardware malfunction, abuse or improper use
+* Altered or modified Docker software
+* Defects in the Docker software due to hardware malfunction, abuse, or improper use
 * Any version of the Docker software other than the latest version
 * Reimbursing and expenses spent for third-party services not provided by Docker
-* Docker Support excludes training, customization and integration
+* Docker Support excludes training, customization, and integration
 
 ### What versions are supported?
 
-We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before reviewing your support request.
-
-### Can I deploy Docker Desktop to my team?
-
-You can deploy Docker Desktop to your team as part of the Team Docker subscription.
-Under the standard Desktop agreement, users need to explicitly accept the terms and these cannot be accepted on behalf of the user. With the Team plan we provide you with the rights to distribute Docker Desktop to your team.
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
 
 ### How many machines can I get support for Docker Desktop on?
 
@@ -426,18 +415,9 @@ As a Team, you can get support for Docker Desktop for the number of machines equ
 
 Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
 
-* Mac system requirements](../docker-for-mac/install.md#system-requirements)
+* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
 * [Windows system requirements](../docker-for-windows/install.md#system-requirements)
 
 ### Can I run Docker Desktop on Virtualized hardware?
 
 No, currently this is unsupported and against the terms of use.
-
-### Is Docker Desktop the same as Docker Desktop Enterprise?
-
-No, Docker Desktop Enterprise is a legacy Docker Product which is now deprecated. If you are interested in one of the features which was present in Docker Desktop Enterprise then please join the discussion on our public roadmap:
-
-* Version packs
-* App designer
-* MSI
-* User Settings
