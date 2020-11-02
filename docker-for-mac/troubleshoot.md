@@ -4,6 +4,7 @@ keywords: mac, troubleshooting, logs, issues
 redirect_from:
 - /mackit/troubleshoot/
 title: Logs and troubleshooting
+toc_max: 2
 ---
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
@@ -19,7 +20,7 @@ The Troubleshoot page contains the following options:
 
 * **Restart Docker Desktop**: Select to restart Docker Desktop.
 
-* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback).
+* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 
 * **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/docker-for-mac/index/#kubernetes).
 
@@ -73,7 +74,7 @@ Before you get started, we recommend that you sign into your Docker Desktop appl
 
    > **Note**
     >
-    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form.
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
 
 7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
 
@@ -352,3 +353,91 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
   sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
   ```
+
+## Support
+
+This section contains information on how to get support on Docker Desktop.
+
+>**Note**
+>
+> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+
+### How do I get Docker Desktop support?
+
+If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+
+Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
+
+### What support can I get?
+
+If you are a Pro or a Team user, you can request for support on the following types of issues:
+
+* Desktop upgrade issues
+* Desktop installation issues
+  * Enabling virtualization in BIOS
+  * Enabling Windows features
+  * Genuine installation crashes
+  * Crashes due to conflicts with other software
+  * Installation issues from enterprise deployment
+* First run issues
+   * Failure to launch Docker Desktop on first run
+* Usage issues
+  * Crash closing software
+  * Docker Desktop Not behaving as expected
+* Configuration issues
+* Basic product ‘how to’ questions such as ‘how to work efficiently on WSL 2’
+
+### What is not supported?
+
+Docker Desktop excludes support for the following types of issues:
+
+* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+* Running on unsupported operating systems, including beta/preview versions of operating systems
+* Use of Docker/support for learning or fixing Docker commands
+* Support for the Docker engine, Docker CLI, or other bundled Linux components
+* Support for Kubernetes
+* Features labeled as experimental
+* System/Server administration activities
+* Supporting Desktop as a production runtime
+* Scale deployment/multi-machine installation of Desktop
+* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+* Third-party applications not provided by Docker
+* Altered or modified Docker Software
+* Defects in the Docker Software due to hardware malfunction, abuse or improper use
+* Any version of the Docker software other than the latest version
+* Reimbursing and expenses spent for third-party services not provided by Docker
+* Docker Support excludes training, customization and integration
+
+### What versions are supported?
+
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before reviewing your support request.
+
+### Can I deploy Docker Desktop to my team?
+
+You can deploy Docker Desktop to your team as part of the Team Docker subscription.
+Under the standard Desktop agreement, users need to explicitly accept the terms and these cannot be accepted on behalf of the user. With the Team plan we provide you with the rights to distribute Docker Desktop to your team.
+
+### How many machines can I get support for Docker Desktop on?
+
+As a Pro user you can get support for Docker Desktop on a single machine.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+
+### What OS’s are supported?
+
+Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
+
+* Mac system requirements](../docker-for-mac/install.md#system-requirements)
+* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+
+### Can I run Docker Desktop on Virtualized hardware?
+
+No, currently this is unsupported and against the terms of use.
+
+### Is Docker Desktop the same as Docker Desktop Enterprise?
+
+No, Docker Desktop Enterprise is a legacy Docker Product which is now deprecated. If you are interested in one of the features which was present in Docker Desktop Enterprise then please join the discussion on our public roadmap:
+
+* Version packs
+* App designer
+* MSI
+* User Settings
