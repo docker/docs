@@ -33,8 +33,8 @@ image. Automated tests do not push images to the registry on their own. [Learn m
 
 Depending on your plan, you may get parallel builds, which means that `N`
 autobuilds can be run at the same time. `N` is configured by the plan that you
-subscribe to. Once `N+1` builds are running, any additional builds will
-be queued up to be run later.
+subscribe to. Once `N+1` builds are running, any additional builds are
+queued to be run later.
 
 
 ![An automated build dashboard](images/index-dashboard.png)
