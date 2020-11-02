@@ -7,29 +7,29 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
-This page contains information on how to diagnose and troubleshoot problems, send logs and communicate with the Docker Desktop team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 
 ## Troubleshoot
 
 Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu bar to see the troubleshoot options.
 
-![Uninstall or reset Docker](images/troubleshoot.png){:width="750px"}
+![Troubleshoot Docker Desktop](images/troubleshoot.png){:width="600px"}
 
 The Troubleshoot page contains the following options:
 
 * **Restart Docker Desktop**: Select to restart Docker Desktop.
 
-* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
-
-* **Clean / Purge data**: Select this option to delete container and image data. Choose whether you'd like to delete data from Hyper-V, WSL 2, or Windows Containers and then click **Delete** to confirm.
+* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback).
 
 * **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](index.md#kubernetes).
+
+* **Clean / Purge data**: Select this option to delete container and image data. Choose whether you'd like to delete data from Hyper-V, WSL 2, or Windows Containers and then click **Delete** to confirm.
 
 * **Reset to factory defaults**: Choose this option to reset all options on
 Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
 
-## Diagnose problems, send feedback, and create GitHub issues
+## Diagnose and feedback
 
 ### In-app diagnostics
 
@@ -37,26 +37,26 @@ If you experience issues for which you do not find solutions in this
 documentation, on [Docker Desktop for Windows issues on
 GitHub](https://github.com/docker/for-win/issues), or the [Docker Desktop for Windows
 forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data.
+troubleshoot the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
 
-Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
+1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu.
+2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+3. Click **Get Support**. This opens the in-app **Diagnose & Support** (**Diagnose & Feedback** for free users) page and starts collecting the diagnostics.
 
-![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
+    ![Diagnose & Support](images/diagnose-support.png){:width="600px"}
 
-When the **Diagnose & Feedback** window initiated, it starts collecting diagnostics. When the diagnostics are available, you can upload them and obtain a **Diagnostic ID**, which must be provided when communicating with the Docker
-team. For more information on our policy regarding personal data, see
-[how is personal data handled in Docker
-Desktop](https://docs.docker.com/docker-for-mac/faqs/#how-is-personal-data-handled-in-docker-desktop).
+4. When the diagnostics collection process is complete, click **Upload** to upload your diagnostics to Docker Desktop.
+5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
+6. If you have subscribed to a Pro or a Team plan, click **Get support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
 
-![Diagnose & Feedback with ID](images/diagnostic-id.png){:width="600px"}
+   > **Note**
+    >
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form.
 
-If you click on **Report an issue**, it opens [Docker Desktop for Windows issues on
-GitHub](https://github.com/docker/for-win/issues/) in your web browser in a
-"New issue" template, to be completed before submission. Do not forget to
-include your diagnostic ID.
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade your account** to upgrade your existing account.
 
-![issue-template](images/issue-template.png){:width="600px"}
+    Alternatively, click **Report an issue** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 
 ### Diagnosing from the terminal
 
