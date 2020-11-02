@@ -31,6 +31,11 @@ pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests does not push the built
 image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
 
+Depending on your plan, you may get parallel builds, which means that `N`
+autobuilds can be run at the same time. `N` is configured by the plan that you
+subscribe to. Once `N+1` builds are running, any builds additional builds will
+be queued up to be run later.
+
 
 ![An automated build dashboard](images/index-dashboard.png)
 
