@@ -71,7 +71,7 @@ use unless you have substantial experience with ZFS on Linux.
     $ sudo zpool create -f zpool-docker -m /var/lib/docker /dev/xvdf /dev/xvdg
     ```
 
-    The command creates the `zpool` and names it `zpool-docker`. The name is for
+    The command creates the `zpool` and name it `zpool-docker`. The name is for
     display purposes only, and you can use a different name. Check that the pool
     was created and mounted correctly using `zfs list`.
 
