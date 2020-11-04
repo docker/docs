@@ -222,6 +222,8 @@ the SSH agent.
 $ docker build --ssh default .
 ```
 
+You may need to run `ssh-add` to add private key identities to the authentication agent first for this to work.
+
 ## Troubleshooting : issues with private registries
 
 #### x509: certificate signed by unknown authority
