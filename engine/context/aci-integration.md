@@ -159,7 +159,7 @@ Name resolution between containers is achieved by writing service names in the `
 
 Single containers and Compose applications can be removed from ACI with 
 the `docker prune` command. The `docker prune` command removes deployments 
-that not currently running. To remove running depoyments, you can specify
+that are not currently running. To remove running depoyments, you can specify
 `--force`. The `--dry-run` option lists deployments that are planned for 
 removal, but it doesn't actually remove them.
 
@@ -251,10 +251,10 @@ mystorageaccount/test-volume
 
 By default, if the storage account does not already exist, this command
 creates a new storage account using the Standard LRS as a default SKU, and the
-resource group and location associated with you Docker ACI context.
+resource group and location associated with your Docker ACI context.
 
 If you specify an existing storage account, the command creates a new
-file share in the exsting account:
+file share in the existing account:
 
 ```console
 $ docker --context aci volume create test-volume2 --storage-account mystorageaccount
