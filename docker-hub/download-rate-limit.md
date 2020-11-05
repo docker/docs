@@ -40,14 +40,14 @@ You will see this error message in the Docker CLI or in the Docker Engine logs.
 
 ## How can I check my current rate
 
-When limiting starts, valid non-rate-limited manifest API requests to Hub will include the following rate limit headers in the response:
+Valid manifest API requests to Hub will usually include the following rate limit headers in the response:
 
 ```
 RateLimit-Limit    
 RateLimit-Remaining
 ```
 
-If you have a proxy or other layer in place that logs your requests, you can inspect the headers of these responses directly. Otherwise, you can use curl to view these. You will need `curl`, `grep`, and `jq` installed.
+These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
 
 To get a token anonymously (if you are pulling anonymously):
 
@@ -61,22 +61,26 @@ To get a token with a user account (if you are authenticating your pulls) - don'
 $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
-Then to get the headers showing your limits, run the following (keep in mind that requesting a manifest emulates a pull and will count against the limits):
+Then to get the headers showing your limits, run the following:
 
 ```
-$ curl -v -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 ```
 
-Which should return something like this:
+Which should return headers including these:
 
 ```
-< RateLimit-Limit: 100;w=21600  
-< RateLimit-Remaining: 76;w=21600
+RateLimit-Limit: 100;w=21600
+RateLimit-Remaining: 76;w=21600
 ```
 
 This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
 
 > Remember that these headers are best-effort and there will be small variations.
+
+### I don't see any RateLimit headers
+
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
 
 ## How do I authenticate pull requests
 
