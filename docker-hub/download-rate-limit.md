@@ -64,10 +64,10 @@ $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=
 Then to get the headers showing your limits, run the following:
 
 ```
-$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
+$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 ```
 
-Which should return something like this:
+Which should return headers including these:
 
 ```
 RateLimit-Limit: 100;w=21600
