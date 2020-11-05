@@ -47,7 +47,7 @@ RateLimit-Limit
 RateLimit-Remaining
 ```
 
-These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not. To check your limits, you will need `curl`, `grep`, and `jq` installed.
+These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
 
 To get a token anonymously (if you are pulling anonymously):
 
