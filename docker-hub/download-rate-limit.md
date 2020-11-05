@@ -64,7 +64,7 @@ $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=
 Then to get the headers showing your limits, run the following:
 
 ```
-$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit || echo "No RateLimit headers found (pull not limited)"
+$ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 | grep RateLimit
 ```
 
 Which should return something like this:
@@ -80,7 +80,7 @@ This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls rema
 
 ### I don't see any RateLimit headers
 
-If you do not see these headers, that means pulling that image would not count towards limiting. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
 
 ## How do I authenticate pull requests
 
