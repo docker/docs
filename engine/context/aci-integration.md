@@ -16,11 +16,6 @@ In addition, the integration between Docker and Microsoft developer technologies
 - Set up an ACI context in one Docker command allowing you to switch from a local context to a cloud context and run applications quickly and easily
 - Simplify single container and multi-container application development using the Compose specification, allowing a developer to invoke fully Docker-compatible commands seamlessly for the first time natively within a cloud container service
 
->**Note**
->
-> Docker Azure Integration is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-
 ## Prerequisites
 
 To deploy Docker containers on Azure, you must meet the following requirements:
@@ -174,11 +169,10 @@ Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 
 Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
 
-> **Note:**
+> **Note**
 >
 > ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
-
-> **Note:**
+>
 >
 > All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
 
@@ -190,7 +184,7 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
 You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
 
-> **Note:**
+> **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
 > `domain` for several services, the value must be identical.
@@ -228,7 +222,7 @@ volumes:
       storage_account_name: mystorageaccount
 ```
 
-> **Note:**
+> **Note**
 >
 > The volume short syntax in Compose files cannot be used as it is aimed at volume definition for local bind mounts. Using the volume driver and driver option syntax in Compose files makes the volume definition a lot more clear.
 
@@ -313,11 +307,6 @@ When you run the `docker ps` command, it only lists containers in your current D
 
 The Docker Compose CLI adds support for running and managing containers on Azure Container Instances (ACI).
 
->**Note**
->
-> **Docker Azure Integration is a beta release**. The installation process, commands, and flags will change in future releases.
-{:.important}
-
 ### Prerequisites
 
 * [Docker 19.03 or later](https://docs.docker.com/get-docker/)
@@ -401,11 +390,6 @@ $ docker version
 
 After you have installed the Docker ACI Integration CLI, run `--help` to see the current list of commands.
 
-> **Note**
->
-> Docker Azure Integration is a beta release. The commands and flags will change in future releases.
-{:.important}
-
 ### Uninstall
 
 To remove the Docker Azure Integration CLI, you need to remove the binary you downloaded and `com.docker.cli` from your `PATH`. If you installed using the script, this can be done as follows:
@@ -416,4 +400,4 @@ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 
 ## Feedback
 
-Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out Docker Azure Integration. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
