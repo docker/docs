@@ -70,9 +70,9 @@ guides:
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /engine/context/aci-integration/
-    title: Docker and ACI (Beta)
+    title: Docker and ACI
   - path: /engine/context/ecs-integration/
-    title: Docker and ECS (Beta)
+    title: Docker and ECS
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Orchestration
@@ -1218,6 +1218,10 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
+  - path: /docker-hub/orgs/
+    title: Teams and organizations
+  - path: /docker-hub/repos/
+    title: Repositories
   - sectiontitle: Administration
     section:
      - path: /docker-hub/convert-account/
@@ -1236,18 +1240,10 @@ manuals:
       title: Add seats
     - path: /docker-hub/billing/remove-seats/
       title: Remove seats
-  - path: /docker-hub/orgs/
-    title: Teams and organizations
-  - path: /docker-hub/repos/
-    title: Repositories
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
   - path: /docker-hub/official_images/
     title: Official images
-  - path: /docker-hub/webhooks/
-    title: Webhooks
-  - path: /docker-hub/slack_integration/
-    title: Slack integration
   - sectiontitle: Automated builds
     section:
       - path: /docker-hub/builds/
@@ -1258,6 +1254,10 @@ manuals:
         title: Advanced automated builds
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
+  - path: /docker-hub/webhooks/
+    title: Webhooks
+  - path: /docker-hub/slack_integration/
+    title: Slack integration
   - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
