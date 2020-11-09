@@ -103,7 +103,7 @@ docker run -p 80:80 nginx
 
 After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
 
-In the case of the demonstration nginx container you started above, you will see the result of the ps command showing a value labelled "PORTS" which will show both an IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, in which case you can view the nginx welcome page by browsing `http://52.154.202.35`.
+In the case of the demonstration nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the nginx welcome page by browsing `http://52.154.202.35`.
 
 To view logs from your container, run:
 
