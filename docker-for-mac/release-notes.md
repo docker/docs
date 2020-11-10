@@ -13,10 +13,23 @@ This page contains information about the new features, improvements, known issue
 For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.5.0.1
+2020-11-10
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+
+### Upgrades
+
+- [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
+- [Snyk v1.424.2](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+
+### Bug fixes and minor changes
+- Fixed an issue that caused Docker Desktop to crash on MacOS 11.0 (Big Sur) when VirtualBox was also installed. See [docker/for-mac#4997](https://github.com/docker/for-mac/issues/4997).
+
 ## Docker Desktop Community 2.5.0.0
 2020-11-02
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://desktop.docker.com/mac/stable/49427/Docker.dmg)
 
 Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
