@@ -9,6 +9,12 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2020-11-12
+
+### New features
+
+* The repository views now show which images are stale (without recent push/pull activity). For more information, see [repository tags](repos.md/#viewing-repository-tags)
+
 # 2020-10-07
 
 ### New features
