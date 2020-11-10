@@ -21,7 +21,7 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 ### Upgrades
 
 - [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
-- [Snyk v1.424.2](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+- [Snyk v1.424.4](https://github.com/snyk/snyk/releases/tag/v1.424.4)
 
 ### Bug fixes and minor changes
 - Fixed an issue that caused Docker Desktop to crash on MacOS 11.0 (Big Sur) when VirtualBox was also installed. See [docker/for-mac#4997](https://github.com/docker/for-mac/issues/4997).

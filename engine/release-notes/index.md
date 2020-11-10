@@ -162,7 +162,7 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 ### Swarm
 - Increase refill rate for logger to avoid hanging on service logs. [moby/moby#40628](https://github.com/moby/moby/pull/40628)
 - Fix issue where single swarm manager is stuck in Down state after reboot. [moby/moby#40831](https://github.com/moby/moby/pull/40831)
-- tasks.db no longer grows indefinitely. [moby/moby#40830]
+- tasks.db no longer grows indefinitely. [moby/moby#40831](https://github.com/moby/moby/pull/40831)
 
 ## 19.03.8
 2020-03-10
