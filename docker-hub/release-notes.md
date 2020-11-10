@@ -13,7 +13,8 @@ known issues for each Docker Hub release.
 
 ### New features
 
-* The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. . For more information, see [repository tags](repos.md/#viewing-repository-tags).
+* The **Repositories** view now shows which images have gone stale because they haven't been 
+pulled or pushed recently. For more information, see [repository tags](repos.md/#viewing-repository-tags).
 
 # 2020-10-07
 
