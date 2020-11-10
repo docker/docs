@@ -150,12 +150,20 @@ Name resolution between containers is achieved by writing service names in the `
 >
 > The current Docker Azure integration does not allow fetching a combined log stream from all the containers that make up the Compose application.
 
+## Updating applications
+
+From a deployed Compose application, you can update the application by re-deploying it with the same ACI group name: `docker compose up --project-name` with the Compose project name already used in previous deployments.
+
+Updating an application means the ACI node will be reused, and the application will keep the IP address already allocated to expose ports, if any. ACI also has some limitations on what can be updated in an existing application (you will not be able to change CPU/memory reservation for example), in these cases you need to deploy a new application from scratch.
+
+Updating is the default behaviour if you invoke several times `docker compose up` on the same compose file, since the Compose project name is derived from the compose file location by default. You need to explicitely execute `docker compose down` before running again `docker compose up` in order to totally reset a Compose application.
+
 ## Releasing resources
 
-Single containers and Compose applications can be removed from ACI with 
-the `docker prune` command. The `docker prune` command removes deployments 
+Single containers and Compose applications can be removed from ACI with
+the `docker prune` command. The `docker prune` command removes deployments
 that are not currently running. To remove running depoyments, you can specify
-`--force`. The `--dry-run` option lists deployments that are planned for 
+`--force`. The `--dry-run` option lists deployments that are planned for
 removal, but it doesn't actually remove them.
 
 ```console
@@ -291,6 +299,34 @@ does not delete the storage account, even when it has zero remaining file shares
 
 When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
 For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
+
+## Healthchecks
+
+You can specify container healthchecks either with `docker run --healthcheck-xxx` flags, or in a compose file with the healthcheck section.
+Healthchecks are converted to ACI LivenessProbe. ACI will run the healthcheck command periodically, and when it fails, the container will be terminated.
+Healthchecks must be used in addition to restart policies, to ensure the container is then restarted ; using no restart policy will lead to containers being killed but not restarted by healthchecks.
+
+Example using `docker run`:
+
+```console
+docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+```
+
+Example using compose files:
+
+```yaml
+services:
+  web:
+    image: nginx
+    deploy:
+      restart_policy:
+        condition: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 2s
+      start_period: 40s
+```
 
 ## Private Docker Hub images and using the Azure Container Registry
 
