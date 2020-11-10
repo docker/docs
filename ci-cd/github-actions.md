@@ -72,12 +72,14 @@ jobs:
     runs-on: ubuntu-latest
 ```
 
-Now, we can add the steps required. The first one is to use our PAT and username to log into Docker Hub. The second is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup
+Now, we can add the steps required. The first one checks-out our repository under $GITHUB_WORKSPACE, so our workflow can access it. The second is to use our PAT and username to log into Docker Hub. The third is the Builder, the action  uses BuildKit under the hood through a simple Buildx action which we will also setup
 
 {% raw %}
 ```yaml
     steps:
-
+    
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
 
       - name: Login to Docker Hub
         uses: docker/login-action@v1

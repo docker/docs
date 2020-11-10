@@ -72,7 +72,7 @@ guides:
   - path: /engine/context/aci-integration/
     title: Docker and ACI
   - path: /engine/context/ecs-integration/
-    title: Docker and ECS (Beta)
+    title: Docker and ECS
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Orchestration
