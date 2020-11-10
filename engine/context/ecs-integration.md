@@ -15,11 +15,6 @@ The integration between Docker and Amazon ECS allows developers to use the Docke
 * Set up an AWS context in one Docker command, allowing you to switch from a local context to a cloud context and run applications quickly and easily
 * Simplify multi-container application development on Amazon ECS using Compose files
 
->**Note**
->
-> The Docker Compose CLI is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-
 ## Prerequisites
 
 To deploy Docker containers on ECS, you must meet the following requirements:
@@ -99,7 +94,7 @@ services:
     x-aws-pull_credentials: "arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken"
 ```
 
->**Note**
+> **Note**
 >
 > If you set the Compose file version to 3.8 or later, you can use the same Compose file for local deployment using `docker-compose`. Custom extensions will be ignored in this case.
 
@@ -363,11 +358,6 @@ local `.aws/credentials` config file.
 
 The Docker Compose CLI adds support for running and managing containers on ECS.
 
->**Note**
->
-> The Docker Compose CLI is a beta release. The installation process, commands, and flags will change in future releases.
-{:.important}
-
 ### Prerequisites
 
 [Docker 19.03 or later](https://docs.docker.com/get-docker/)
@@ -380,7 +370,6 @@ You can install the new CLI using the install script:
 curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
-
 ## FAQ
 
 **What does the error `this tool requires the "new ARN resource ID format"` mean?**
@@ -389,4 +378,4 @@ This error message means that your account requires the new ARN resource ID form
 
 ## Feedback
 
-Thank you for trying out the Docker Compose CLI beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out the Docker Compose CLI. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
