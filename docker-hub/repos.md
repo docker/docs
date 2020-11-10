@@ -2,6 +2,8 @@
 description: Using repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation
 title: Repositories
+redirect_from:
+- /engine/tutorials/dockerrepos/
 ---
 
 Docker Hub repositories allow you share container images with your team,
