@@ -235,10 +235,6 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   Docker Machine environment in your shell or command window. Unset the
   `DOCKER_HOST` environment variable and related variables. If you use bash, use the following command: `unset ${!DOCKER_*}`
 
-* Network connections fail if the macOS Firewall is set to "Block all incoming
-  connections". You can enable the firewall, but `bootpd` must be allowed
-  incoming connections so that the VM can get an IP address.
-
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
   the web server on `http://localhost/`. Make sure that the Docker icon is
   displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
@@ -292,21 +288,6 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   export DOCKER_HOST=unix:///var/run/docker.sock
   ```
 
-* `docker-compose` 1.7.1 performs DNS unnecessary lookups for
-  `localunixsocket.local` which can take 5s to timeout on some networks. If
-  `docker-compose` commands seem very slow but seem to speed up when the network
-  is disabled, try appending `127.0.0.1 localunixsocket.local` to the file
-  `/etc/hosts`.  Alternatively you could create a plain-text TCP proxy on
-  localhost:1234 using:
-
-  ```
-  docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:1234:1234 bobrik/socat TCP-LISTEN:1234,fork UNIX-CONNECT:/var/run/docker.sock
-  ```
-
-  and then `export DOCKER_HOST=tcp://localhost:1234`.
-
-<a name="bind-mounted-dirs"></a>
-
 * There are a number of issues with the performance of directories bind-mounted
   into containers. In particular, writes of small blocks, and traversals of large
   directories are currently slow. Additionally, containers that perform large
@@ -322,37 +303,12 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   - PHP applications that use [Composer](https://getcomposer.org) to install
     dependencies in a ```vendor``` folder<br><br>
 
-  As a work-around for this behavior, you can put vendor or third-party library
+  As a workaround for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
   outside of bind mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
   actively working on performance improvements using a number of different
   techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
-
-* If your system does not have access to an NTP server, then after a hibernate
-  the time seen by Docker Desktop may be considerably out of sync with the host.
-  Furthermore, the time may slowly drift out of sync during use. To manually
-  reset the time after hibernation, run:
-
-  ```bash
-  docker run --rm --privileged alpine hwclock -s
-  ```
-
-  Or, to resolve both issues, you can add the local clock as a low-priority
-  (high stratum) fallback NTP time source for the host. To do this, edit the
-  host's `/etc/ntp-restrict.conf` to add:
-
-  ```
-  server 127.127.1.1              # LCL, local clock
-  fudge  127.127.1.1 stratum 12   # increase stratum
-  ```
-
-  Then restart the NTP service with:
-
-  ```bash
-  sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  ```
 
 ## Support
 
