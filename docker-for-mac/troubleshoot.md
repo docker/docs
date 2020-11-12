@@ -295,7 +295,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 * `docker-compose` 1.7.1 performs DNS unnecessary lookups for
   `localunixsocket.local` which can take 5s to timeout on some networks. If
   `docker-compose` commands seem very slow but seem to speed up when the network
-  is disabled, try appending `127.0.0.1 localunixsocket localunixsocket.local localunixsocket.home` to the file
+  is disabled, try appending `127.0.0.1 localunixsocket localunixsocket.local` to the file
   `/etc/hosts`.  Alternatively you could create a plain-text TCP proxy on
   localhost:1234 using:
 
