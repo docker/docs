@@ -154,12 +154,9 @@ Name resolution between containers is achieved by writing service names in the `
 
 From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose up --project-name PROJECT`.
 
+Updating an application means the ACI node will be reused, and the application will keep the same IP address that was previously allocated to expose ports, if any. ACI has some limitations on what can be updated in an existing application (you will not be able to change CPU/memory reservation for example), in these cases, you need to deploy a new application from scratch.
 
-Updating an application means the ACI node will be reused, and the application will keep the same IP address that was previously allocated to expose ports, if any. ACI has some limitations on what can be updated in an existing application (you will not be able to change CPU/memory reservation for example), in these cases you need to deploy a new application from scratch.
-
-
-Updating is the default behavior if you invoke `docker compose up` on the an already deployed Compose file, since the Compose project name is derived from the directory where the Compose file is located by default. You need to explicitly execute `docker compose down` before running `docker compose up` again in order to totally reset a Compose application.
-
+Updating is the default behavior if you invoke `docker compose up` on an already deployed Compose file, as the Compose project name is derived from the directory where the Compose file is located by default. You need to explicitly execute `docker compose down` before running `docker compose up` again in order to totally reset a Compose application.
 
 ## Releasing resources
 
@@ -303,14 +300,13 @@ does not delete the storage account, even when it has zero remaining file shares
 When using `docker run`, you can pass the environment variables to ACI containers using the `--env` flag.
 For Compose applications, you can specify the environment variables in the Compose file with the `environment` or `env-file` service field, or with the `--environment` command line flag.
 
-## Healthchecks
+## Health checks
 
-You can specify a container health checks using either the `--healthcheck-` prefixed. flags with `docker run`, or in a Compose file with the healthcheck section of the service.
+You can specify a container health checks using either the `--healthcheck-` prefixed flags with `docker run`, or in a Compose file with the `healthcheck` section of the service.
 
-Health checks are converted to ACI `LivenessProbe`s. ACI will run the health check command periodically, and if it fails, the container will be terminated.
+Health checks are converted to ACI `LivenessProbe`s. ACI runs the health check command periodically, and if it fails, the container will be terminated.
 
-Health checks must be used in addition to restart policies, to ensure the container is then restarted on termination. The default restart policy for `docker run` is `no` which will not restart the container. The default restart policy for Compose is `any` which will always try restarting the service containers.
-
+Health checks must be used in addition to restart policies to ensure the container is then restarted on termination. The default restart policy for `docker run` is `no` which will not restart the container. The default restart policy for Compose is `any` which will always try restarting the service containers.
 
 Example using `docker run`:
 
