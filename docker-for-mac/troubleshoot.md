@@ -155,6 +155,10 @@ ways, and create reports.
 <a name="troubleshoot"></a>
 ## Troubleshooting
 
+### Support for Apple silicon processors
+
+At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+
 ### Make sure certificates are set up correctly
 
 Docker Desktop ignores certificates listed under insecure registries, and does
