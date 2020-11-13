@@ -35,6 +35,10 @@ Yes, you can switch between Stable and Edge versions. You can try out the Edge r
 
 You need a Mac that supports hardware virtualization. For more information, see [Docker Desktop Mac system requirements](install.md#system-requirements).
 
+## Is Docker Desktop compatible with Apple silicon processors?
+
+At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+
 ## What is an experimental feature?
 
 {% include experimental.md %}
