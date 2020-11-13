@@ -316,7 +316,6 @@ docker --context acicontext run -p 80:80 --restart always --health-cmd "curl htt
 
 Example using Compose files:
 
-
 ```yaml
 services:
   web:
@@ -346,9 +345,9 @@ When you run the `docker ps` command, it only lists containers in your current D
 
 The Docker Compose CLI adds support for running and managing containers on Azure Container Instances (ACI).
 
-### Prerequisites
+### Install Prerequisites
 
-* [Docker 19.03 or later](https://docs.docker.com/get-docker/)
+- [Docker 19.03 or later](https://docs.docker.com/get-docker/)
 
 ### Install script
 
