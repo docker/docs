@@ -110,7 +110,7 @@ Getting Started topic.
 
 #### Permissions errors on data directories for shared volumes
 
-Docker Desktop sets permissions on [shared volumes](index.md#file-sharing)
+When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](index.md#file-sharing)
 to a default value of [0777](http://permissions-calculator.org/decode/0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 
@@ -131,8 +131,7 @@ application file is not found, access is denied to a volume mount, or a service
 cannot start, such as when using [Docker Compose](../compose/gettingstarted.md),
 you might need to enable [shared folders](index.md#file-sharing).
 
-Volume mounting requires shared folders for Linux containers (not for Windows
-containers). Click ![whale menu](images/whale-x.png){: .inline}
+With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. Click ![whale menu](images/whale-x.png){: .inline}
  and then **Settings** > **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
 
@@ -160,16 +159,27 @@ script](https://github.com/moby/moby/issues/24388).
 
 ### Virtualization
 
- Your machine must have the following features for Docker Desktop to function correctly:
+Your machine must have the following features for Docker Desktop to function correctly.
 
-1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview)
-   installed and working
+#### WSL 2 and Windows Home
 
-2. Virtualization enabled in the BIOS
+1. Virtual Machine Platform
+2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}
+3. Virtualization enabled in the BIOS
+4. Hypervisor enabled at Windows startup
 
-3. Hypervisor enabled at Windows startup
+![WSL 2 enabled](images/wsl2-enabled.png){:width="600px"}
 
 #### Hyper-V
+
+On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following features enabled:
+
+1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview){:target="_blank" rel="noopener" class="_"}
+   installed and working
+2. Virtualization enabled in the BIOS
+3. Hypervisor enabled at Windows startup
+
+![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
 
 Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker Desktop installer enables
@@ -180,19 +190,7 @@ Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualizati
 To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
 
 From the start menu, type **Turn Windows features on or off** and press enter.
-In the subsequent screen, verify that Hyper-V is enabled:
-
-![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
-
-#### Hyper-V driver for Docker Machine
-
-The Docker Desktop installation includes the legacy tool Docker Machine which uses the old
-[`boot2docker.iso`](https://github.com/boot2docker/boot2docker){:target="_blank" rel="noopener" class="_"},
-and the [Microsoft Hyper-V driver](../machine/drivers/hyper-v.md) to create local
-virtual machines. _This is tangential to using Docker Desktop_, but if you want to use Docker Machine
-to create multiple local Virtual Machines (VMs), or to provision remote machines, see the
-[Docker Machine](../machine/index.md) topics. This is documented only for users looking for information about Docker Machine on Windows, which requires that Hyper-V is enabled, an external network switch is active, and referenced in the flags for the `docker-machine create` command
-as described in the [Docker Machine driver example](../machine/drivers/hyper-v.md#example).
+In the subsequent screen, verify that Hyper-V is enabled.
 
 #### Virtualization must be enabled
 
@@ -216,43 +214,7 @@ Virtual Box) and video game installers disable hypervisor on boot. To reenable i
 2. Run `bcdedit /set hypervisorlaunchtype auto`.
 3. Restart Windows.
 
-### Networking and WiFi problems upon Docker Desktop for Windows install
-
-Some users may experience networking issues during install and startup of
-Docker Desktop. For example, upon install or auto-reboot, network adapters
-and/or WiFi may get disabled. In some scenarios, problems are due to having
-VirtualBox or its network adapters still installed, but in other scenarios this
-is not the case. See the GitHub issue [Enabling
-Hyper-V feature turns my wi-fi
-off](https://github.com/docker/for-win/issues/139).
-
-Here are some steps to take if you experience similar problems:
-
-1.  Ensure **virtualization** is enabled, as described above in [Virtualization
-    must be enabled](#virtualization-must-be-enabled).
-
-2.  Ensure **Hyper-V** is installed and enabled, as described above in [Hyper-V
-    must be enabled](#hyper-v-must-be-enabled).
-
-3.  Ensure **DockerNAT** is enabled by checking the **Virtual Switch Manager**
-    on the Actions tab on the right side of the **Hyper-V Manager**.
-
-    ![Hyper-V manager](images/hyperv-manager.png)
-
-4.  Set up an external network switch. If you plan at any point to use
-    [Docker Machine](../machine/index.md) to set up multiple local VMs, you
-    need this anyway, as described in the topic on the
-    [Hyper-V driver for Docker Machine](../machine/drivers/hyper-v.md#example).
-    You can replace `DockerNAT` with this switch.
-
-5.  If previous steps fail to solve the problems, follow steps on the
-    [Cleanup README](https://github.com/Microsoft/Virtualization-Documentation/blob/master/windows-server-container-tools/CleanupContainerHostNetworking/README.md).
-
-    > Read the full description before you run the Windows cleanup script.
-    >
-    >The cleanup command has two flags, `-Cleanup` and
-    >`-ForceDeleteAllSwitches`. Read the whole page before running any scripts,
-    >especially warnings about `-ForceDeleteAllSwitches`. {: .warning}
+You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} on Code flow guard (CFG) settings.
 
 ### Windows containers and Windows Server
 
@@ -270,71 +232,6 @@ C:\Program Files\Docker\docker.exe:
  image operating system "linux" cannot be used on this platform.
  See 'C:\Program Files\Docker\docker.exe run --help'.
 ```
-
-### Limitations of Windows containers for `localhost` and published ports
-
-Docker Desktop for Windows provides the option to switch Windows and Linux containers.
-If you are using Windows containers, keep in mind that there are some
-limitations with regard to networking due to the current implementation of
-Windows NAT (WinNAT). These limitations may potentially resolve as the Windows
-containers project evolves.
-
-Windows containers work with published ports on localhost beginning with Windows 10 1809 using Docker Desktop for Windows as well as Windows Server 2019 / 1809 using Docker EE.
-
-If you are working with a version prior to `Windows 10 18.09`, published ports on Windows containers have an issue with loopback to the localhost. You can only reach container endpoints from the host using the container's IP and port. With `Windows 10 18.09`, containers work with published ports on localhost.
-
-So, in a scenario where you use Docker to pull an image and run a webserver with
-a command like this:
-
-```shell
-> docker run -d -p 80:80 --name webserver nginx
-```
-
-Using `curl http://localhost`, or pointing your web browser at
-`http://localhost` does not display the `nginx` web page (as it would do with
-Linux containers).
-
-To reach a Windows container from the local host, you need to specify the IP
-address and port for the container that is running the service.
-
-You can get the container IP address by using [`docker inspect`](../engine/reference/commandline/inspect.md) with some `--format` options
-and the ID or name of the container. For the example above, the command would
-look like this, using the name we gave to the container (`webserver`) instead of
-the container ID:
-
-{% raw %}
-```bash
-$ docker inspect \
-  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-  webserver
-```
-{% endraw %}
-
-This gives you the IP address of the container, for example:
-
-{% raw %}
-```bash
-$ docker inspect \
-  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
-  webserver
-
-172.17.0.2
-```
-{% endraw %}
-
-Now you can connect to the webserver by using `http://172.17.0.2:80` (or simply
-`http://172.17.0.2`, since port `80` is the default HTTP port.)
-
-For more information, see:
-
-* Docker Desktop for Windows issue on GitHub: [Port binding does not work for
-  locahost](https://github.com/docker/for-win/issues/458)
-
-* [Published Ports on Windows Containers Don't Do
-  Loopback](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/)
-
-* [Windows NAT capabilities and
-  limitations](https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/)
 
 ### Running Docker Desktop in nested virtualization scenarios
 
@@ -381,41 +278,9 @@ For best results, we recommend you run Docker Desktop natively on a Windows syst
   settings in **Hardware > CPU & Memory > Advanced Settings > PMU
   Virtualization**.
 
-#### Related issues
-
-Discussion thread on GitHub at [Docker for Windows issue
-267](https://github.com/docker/for-win/issues/267).
-
 ### Networking issues
 
 IPv6 is not (yet) supported on Docker Desktop.
-
-Some users have reported problems connecting to Docker Hub on the Docker Desktop stable version. (See GitHub issue
-[22567](https://github.com/moby/moby/issues/22567).)
-
-Here is an example command and error message:
-
-```shell
-> docker run hello-world
-
-Unable to find image 'hello-world:latest' locally
-Pulling repository docker.io/library/hello-world
-C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
-See 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe run --help'.
-```
-
-As an immediate workaround to this problem, reset the DNS server to use the
-Google DNS fixed address: `8.8.8.8`. You can configure this through the **Settings**
-> **Network** dialog, as described in the topic [Network](index.md#network).
-Docker automatically restarts when you apply this setting, which could take some
-time.
-
-### NAT/IP configuration
-
-By default, Docker Desktop uses an internal network prefix of
-`10.0.75.0/24`. Should this clash with your normal network setup, you can change
-the prefix from the **Settings** menu. See the [Network](index.md#network) topic
-under [Settings](index.md#docker-settings).
 
 ## Workarounds
 
