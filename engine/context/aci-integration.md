@@ -192,12 +192,12 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 ### DNS label name
 
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-You can set this name with the `--domain` flag when performing a `docker run`, or by using the `domain` field in the Compose file when performing a `docker compose up`.
+You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`.
 
 > **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
-> `domain` for several services, the value must be identical.
+> `domainname` for several services, the value must be identical.
 
 ## Using Azure file share as volumes in ACI containers
 
@@ -318,7 +318,6 @@ docker --context acicontext run -p 80:80 --restart always --health-cmd "curl htt
 
 Example using Compose files:
 
-
 ```yaml
 services:
   web:
@@ -348,9 +347,9 @@ When you run the `docker ps` command, it only lists containers in your current D
 
 The Docker Compose CLI adds support for running and managing containers on Azure Container Instances (ACI).
 
-### Prerequisites
+### Install Prerequisites
 
-* [Docker 19.03 or later](https://docs.docker.com/get-docker/)
+- [Docker 19.03 or later](https://docs.docker.com/get-docker/)
 
 ### Install script
 
