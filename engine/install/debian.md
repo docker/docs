@@ -33,7 +33,7 @@ Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```bash
-$ sudo apt-get remove docker docker-engine docker.io containerd runc
+ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -78,9 +78,9 @@ from the repository.
     repository over HTTPS:
 
     ```bash
-    $ sudo apt-get update
+     sudo apt-get update
 
-    $ sudo apt-get install \
+     sudo apt-get install \
         apt-transport-https \
         ca-certificates \
         curl \
@@ -91,7 +91,7 @@ from the repository.
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
+     curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
     ```
 
     Verify that you now have the key with the fingerprint
@@ -99,7 +99,7 @@ from the repository.
     last 8 characters of the fingerprint.
 
     ```bash
-    $ sudo apt-key fingerprint 0EBFCD88
+     sudo apt-key fingerprint 0EBFCD88
 
     pub   4096R/0EBFCD88 2017-02-22
           Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
@@ -127,7 +127,7 @@ from the repository.
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
+     sudo add-apt-repository \
        "deb [arch=amd64] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
@@ -137,7 +137,7 @@ from the repository.
     <div id="armhf_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
+     sudo add-apt-repository \
        "deb [arch=armhf] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
@@ -147,7 +147,7 @@ from the repository.
     <div id="arm64_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
+     sudo add-apt-repository \
        "deb [arch=arm64] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
@@ -165,8 +165,8 @@ from the repository.
    Engine and containerd, or go to the next step to install a specific version:
 
     ```bash
-    $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+     sudo apt-get update
+     sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
@@ -182,7 +182,7 @@ from the repository.
     a. List the versions available in your repo:
 
     ```bash
-    $ apt-cache madison docker-ce
+     apt-cache madison docker-ce
 
       docker-ce | 5:18.09.1~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 5:18.09.0~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
@@ -195,14 +195,14 @@ from the repository.
        for example, `5:18.09.1~3-0~debian-stretch `.
 
     ```bash
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+     sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```bash
-    $ sudo docker run hello-world
+     sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -238,7 +238,7 @@ a new file each time you want to upgrade Docker.
     the Docker package.
 
     ```bash
-    $ sudo dpkg -i /path/to/package.deb
+     sudo dpkg -i /path/to/package.deb
     ```
 
     The Docker daemon starts automatically.
@@ -247,7 +247,7 @@ a new file each time you want to upgrade Docker.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+     sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -271,7 +271,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
     ```bash
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
+     sudo apt-get purge docker-ce docker-ce-cli containerd.io
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
@@ -279,8 +279,8 @@ To upgrade Docker Engine, download the newer package file and repeat the
     volumes:
 
     ```bash
-    $ sudo rm -rf /var/lib/docker
-    $ sudo rm -rf /var/lib/containerd
+     sudo rm -rf /var/lib/docker
+     sudo rm -rf /var/lib/containerd
     ```
 
 You must delete any edited configuration files manually.
