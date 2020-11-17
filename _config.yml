@@ -62,6 +62,7 @@ defaults:
       type: "pages"
     values:
       layout: docs
+      sitemap: false
       toc_min: 2
       toc_max: 3
 
