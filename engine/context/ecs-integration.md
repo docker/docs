@@ -33,6 +33,8 @@ developers to seamlessly deploy Docker containers on Amazon ECS using a
 Compose file with the `docker compose up` command. The following sections
 contain instructions on how to deploy your Compose application on Amazon ECS.
 
+## Run an application on ECS
+
 ### Create AWS context
 
 Run the `docker context create ecs myecscontext` command to create an Amazon ECS Docker
@@ -49,7 +51,7 @@ myecscontext *
 default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock     swarm
 ```
 
-## Run Compose applications
+### Run a Compose application
 
 You can deploy and manage multi-container applications defined in Compose files
 to Amazon ECS using the `docker compose` command. To do this:
@@ -73,6 +75,58 @@ their state using the `docker compose ps` command.
 - You can view logs from containers that are part of the Compose application
 using the `docker compose logs` command.
 
+## Rolling update
+
+To update your application without interrupting production flow you can simply
+use `docker compose up` on the updated Compose project.
+Your ECS services are created with rolling update configuration. As you run
+`docker compose up` with a modified Compose file, the stack will be
+updated to reflect changes, and if required, some services will be replaced.
+This replacement process will follow the rolling-update configuration set by
+your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+configuration.
+
+AWS ECS uses a percent-based model to define the number of containers to be
+run or shut down during a rolling update. The Docker Compose CLI computes
+rolling update configuration according to the `parallelism` and `replicas`
+fields. However, you might prefer to directly configure a rolling update
+using the extension fields `x-aws-min_percent` and `x-aws-max_percent`.
+The former sets the minimum percent of containers to run for service, and the
+latter sets the maximum percent of additional containers to start before
+previous versions are removed.
+
+By default, the ECS rolling update is set to run twice the number of
+containers for a service (200%), and has the ability to shut down 100%
+containers during the update.
+
+## View application logs
+
+The Docker Compose CLI configures AWS CloudWatch Logs service for your
+containers.
+By default you can see logs of your compose application the same way you check logs of local deployments:
+
+```console
+# fetch logs for application in current working directory
+docker compose logs
+
+# specify compose project name
+docker compose logs --project-name PROJECT
+
+# specify compose file
+docker compose logs --file /path/to/docker-compose.yaml
+```
+
+A log group is created for the application as `docker-compose/<application_name>`,
+and log streams are created for each service and container in your application
+as `<application_name>/<service_name>/<container_ID>`.
+
+You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention`
+in your Compose file to set the number of retention days for log events. The
+default behavior is to keep logs forever.
+
+You can also pass `awslogs` driver parameters to your container as standard
+Compose file `logging.driver_opts` elements.
+
 ## Private Docker images
 
 The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" rel="noopener" class="_"}.
@@ -86,8 +140,7 @@ arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 
 Once created, you can use this ARN in you Compose file using using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
 
-```console
-version: 3.8
+```yaml
 services:
   worker:
     image: mycompany/privateimage
@@ -104,9 +157,15 @@ Service-to-service communication is implemented by the [Security Groups](https:/
 
 ### Service names
 
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose). 
+Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose).
 
-### Volumes
+### Dependent service startup time and DNS resolution
+
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+
+Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+
+## Volumes
 
 ECS integration supports volume management based on Amazon Elastic File System (Amazon EFS).
 For a Compose file to declare a `volume`, ECS integration will define creation of an EFS
@@ -115,11 +174,25 @@ be deleted on application shut-down. If the same application (same project name)
 deployed again, the file system will be re-attached to offer the same user experience
 developers are used to with docker-compose.
 
+A basic compose service using a volume can be declared like this:
+
+```yaml
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - mydata:/some/container/path
+volumes:
+  mydata:
+```
+
+With no specific volume options, the volume still must be declared in the `volumes`section for
+the compose file to be valid (in the above example the empty `mydata:` entry)
 If required, the initial file system can be customized using `driver-opts`:
 
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     driver_opts:
       # Filesystem configuration
       backup_policy: ENABLED
@@ -129,7 +202,7 @@ volumes:
       provisioned_throughput: 1024
 ```
 
-File systems created by executing `docker compose` on AWS can be listed using 
+File systems created by executing `docker compose up` on AWS can be listed using
 `docker volume ls` and removed with `docker volume rm <filesystemID>`.
 
 An existing file system can also be used for users who already have data stored on EFS
@@ -137,12 +210,12 @@ or want to use a file system created by another Compose stack.
 
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     external: true
     name: fs-123abcd
 ```
 
-Accessing a volume from a container can introduce POSIX user ID 
+Accessing a volume from a container can introduce POSIX user ID
 permission issues, as Docker images can define arbitrary user ID / group ID for the
 process to run inside a container. However, the same `uid:gid` will have to match
 POSIX permissions on the file system. To work around the possible conflict, you can set the volume
@@ -150,20 +223,21 @@ POSIX permissions on the file system. To work around the possible conflict, you 
 
 ```yaml
 volumes:
-  my-data: 
+  my-data:
     driver_opts:
       # Access point configuration
       uid: 0
       gid: 0
 ```
 
-### Secrets
+## Secrets
 
 You can pass secrets to your ECS services using Docker model to bind sensitive
 data as files under `/run/secrets`. If your Compose file declares a secret as
 file, such a secret will be created as part of your application deployment on
 ECS. If you use an existing secret as `external: true` reference in your
 Compose file, use the ECS Secrets Manager full ARN as the secret name:
+
 ```yaml
 services:
   webapp:
@@ -203,50 +277,7 @@ By doing this, the secret for `bar` key will be available at runtime for your
 service as a plain text file `/run/secrets/foo/bar`. You can use the special
 value `*` to get all keys bound in your container.
 
-### Logging
-
-The Docker Compose CLI configures AWS CloudWatch Logs service for your
-containers.
-A log group is created for the application as `docker-compose/<application_name>`,
-and log streams are created for each service and container in your application
-as `<application_name>/<service_name>/<container_ID>`.
-
-You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention`
-in your Compose file to set the number of retention days for log events. The
-default behavior is to keep logs forever.
-
-You can also pass `awslogs` driver parameters to your container as standard
-Compose file `logging.driver_opts` elements.
-
-### Dependent service startup time and DNS resolution
-
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
-
-Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
-
-### Rolling update
-
-Your ECS services are created with rolling update configuration. As you run
-`docker compose up` with a modified Compose file, the stack will be
-updated to reflect changes, and if required, some services will be replaced.
-This replacement process will follow the rolling-update configuration set by
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
-configuration.
-
-AWS ECS uses a percent-based model to define the number of containers to be
-run or shut down during a rolling update. The Docker Compose CLI computes
-rolling update configuration according to the `parallelism` and `replicas`
-fields. However, you might prefer to directly configure a rolling update
-using the extension fields `x-aws-min_percent` and `x-aws-max_percent`.
-The former sets the minimum percent of containers to run for service, and the
-latter sets the maximum percent of additional containers to start before
-previous versions are removed.
-
-By default, the ECS rolling update is set to run twice the number of
-containers for a service (200%), and has the ability to shut down 100%
-containers during the update.
-
-### Auto scaling
+## Auto scaling
 
 The Compose file model does not define any attributes to declare auto-scaling conditions.
 Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
@@ -259,12 +290,11 @@ services:
       x-aws-autoscaling:
         min: 1
         max: 10 #required
-        cpu: 75 
+        cpu: 75
         # mem: - mutualy exlusive with cpu
 ```
 
-
-### IAM roles
+## IAM roles
 
 Your ECS Tasks are executed with a dedicated IAM role, granting access
 to AWS Managed policies[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
@@ -358,7 +388,7 @@ local `.aws/credentials` config file.
 
 The Docker Compose CLI adds support for running and managing containers on ECS.
 
-### Prerequisites
+### Install Prerequisites
 
 [Docker 19.03 or later](https://docs.docker.com/get-docker/)
 
