@@ -177,14 +177,25 @@ Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
 
 ## Exposing ports
 
-Single containers and Compose applications can optionally expose ports. For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command and for Compose applications, you must specify exposed ports in the Compose file service definition.
+Single containers and Compose applications can optionally expose ports.
+For single containers, this is done using the `--publish` (`-p`) flag of the `docker run` command : `docker run -p 80:80 nginx`.
+
+For Compose applications, you must specify exposed ports in the Compose file service definition:
+
+```yaml
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+```
+
 
 > **Note**
 >
 > ACI does not allow port mapping (that is, changing port number while exposing port). Therefore, the source and target ports must be the same when deploying to ACI.
 >
->
-> All containers in the same Compose application are deployed in the same ACI container group. Containers in the same Compose application cannot expose the same port when deployed to ACI.
+> All containers in the same Compose application are deployed in the same ACI container group. Different containers in the same Compose application cannot expose the same port when deployed to ACI.
 
 By default, when exposing ports for your application, a random public IP address is associated with the container group supporting the deployed application (single container or Compose application).
 This IP address can be obtained when listing containers with `docker ps` or using `docker inspect`.
@@ -192,12 +203,25 @@ This IP address can be obtained when listing containers with `docker ps` or usin
 ### DNS label name
 
 In addition to exposing ports on a random IP address, you can specify a DNS label name to expose your application on an FQDN of the form: `<NAME>.region.azurecontainer.io`.
-You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`.
+
+You can set this name with the `--domainname` flag when performing a `docker run`, or by using the `domainname` field in the Compose file when performing a `docker compose up`:
+
+```yaml
+services:
+  nginx:
+    image: nginx
+    domainname: "myapp"
+    ports:
+      - "80:80"
+```
+
 
 > **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
 > `domainname` for several services, the value must be identical.
+>
+> The FQDN `<DOMAINNAME>.region.azurecontainer.io` must be available.
 
 ## Using Azure file share as volumes in ACI containers
 
@@ -328,8 +352,6 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 10s
-      timeout: 2s
-      start_period: 40s
 ```
 
 ## Private Docker Hub images and using the Azure Container Registry
