@@ -1,6 +1,6 @@
 ---
 description: Compose file reference
-keywords: fig, composition, compose version 3, docker
+keywords: fig, composition, compose version 2, docker
 title: Compose file version 2 reference
 toc_max: 4
 toc_min: 1
