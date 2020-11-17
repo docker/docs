@@ -41,14 +41,23 @@ Run the `docker context create ecs myecscontext` command to create an Amazon ECS
 context named `myecscontext`. If you have already installed and configured the AWS CLI,
 the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
-[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}.
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}. 
+Last but not least, you can configure your ECS context to retrieve AWS credentials by `AWS_*` environment variables, which is a common way to integrate with
+third party tools and single-sign-on providers.
+
+```console
+? Create a Docker context using:  [Use arrows to move, type to filter]
+  An existing AWS profile
+  AWS secret and token credentials
+> AWS environment variables
+```
 
 After you have created an AWS context, you can list your Docker contexts by running the `docker context ls` command:
 
 ```console
-NAME   DESCRIPTION  DOCKER ENDPOINT  KUBERNETES ENDPOINT ORCHESTRATOR
-myecscontext *
-default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock     swarm
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT   ORCHESTRATOR
+myecscontext        ecs                 credentials read from environment                                                             
+default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                         swarm
 ```
 
 ### Run a Compose application
@@ -63,17 +72,23 @@ current context using the command `docker context use myecscontext`.
 - Run `docker compose up` and `docker compose down` to start and then
 stop a full Compose application.
 
-  By default, `docker compose up` uses the `docker-compose.yaml` file in
+  By default, `docker compose up` uses the `compose.yaml` or `docker-compose.yaml` file in
   the current folder. You can specify the Compose file directly using the
   `--file` flag.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
+
+Docker ECS integration converts the compose application model into a set of AWS resources, descibed as a [CloudFormation](https://aws.amazon.com/cloudformation/) template. The actual mapping is described by [technical documentation](https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md).
+You can review the generated template using `docker compose convert` command, and follow CloudFormation applying this model within 
+[AWS web console](https://console.aws.amazon.com/cloudformation/home) when you run `docker compose up`, in addition to CloudFormation events being displayed 
+on your terminal.
 
 - You can view services created for the Compose application on Amazon ECS and
 their state using the `docker compose ps` command.
 
 - You can view logs from containers that are part of the Compose application
 using the `docker compose logs` command.
+
 
 ## Rolling update
 
