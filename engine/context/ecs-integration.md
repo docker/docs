@@ -149,21 +149,28 @@ services:
 
 > **Note**
 >
-> If you set the Compose file version to 3.8 or later, you can use the same Compose file for local deployment using `docker-compose`. Custom extensions will be ignored in this case.
+> If you set the Compose file version to 3.8 or later, you can use the same Compose file for local deployment using `docker-compose`. Custom ECS extensions will be ignored in this case.
 
 ## Service discovery
 
-Service-to-service communication is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together. This allows individual services to run with distinct constraints (memory, cpu) and replication rules. However, it comes with a constraint that Docker images have to handle service discovery and wait for dependent services to be available.
+Service-to-service communication is implemented transparently by default, so you can deploy your Compose applications with multiple interconnected services without changing the compose file between local and ECS deployment. Individual services can run with distinct constraints (memory, cpu) and replication rules.
 
 ### Service names
 
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose).
+Services are registered automatically by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`.
+
+Services can retrieve their dependencies using Compose service names (as they do when deploying locally with docker-compose), or optionally use the fully qualified names.
 
 ### Dependent service startup time and DNS resolution
 
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Note this need to wait for dependent services in your Compose application also exists when deploying locally with docker-compose, but the delay is typically shorter. Issues might become more visible when deploying to ECS if services do not wait for their dependencies to be available.
 
 Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+
+### Service isolation
+
+Service isolation is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together using their Compose service names.
 
 ## Volumes
 
@@ -279,6 +286,15 @@ value `*` to get all keys bound in your container.
 
 ## Auto scaling
 
+Scaling service static information (non auto-scaling) can be specified using the normal Compose syntax:
+
+```yaml
+services:
+  foo:
+    deploy:
+      replicas: 3
+```
+
 The Compose file model does not define any attributes to declare auto-scaling conditions.
 Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
 well as cpu _or_ memory to define target metric, expressed as resource usage percent.
@@ -336,7 +352,19 @@ The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon
 
 ## Using existing AWS network resources
 
-By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
+By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services.
+
+With the following basic compose file, the Docker Compose CLI will automatically create these ECS constructs including the load balancer to route traffic to the exposed port 80.
+
+```yaml
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+```
+
+If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 
 - Use `x-aws-cluster` as a top-level element in your Compose file to set the ARN
 of an ECS cluster when deploying a Compose application. Otherwise, a
