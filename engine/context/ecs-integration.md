@@ -42,8 +42,8 @@ context named `myecscontext`. If you have already installed and configured the A
 the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
 [AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}. 
-Last but not least, you can configure your ECS context to retrieve AWS credentials by `AWS_*` environment variables, which is a common way to integrate with
-third party tools and single-sign-on providers.
+Finally, you can configure your ECS context to retrieve AWS credentials by `AWS_*` environment variables, which is a common way to integrate with
+third-party tools and single-sign-on providers.
 
 ```console
 ? Create a Docker context using:  [Use arrows to move, type to filter]
@@ -78,10 +78,10 @@ stop a full Compose application.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
-Docker ECS integration converts the compose application model into a set of AWS resources, descibed as a [CloudFormation](https://aws.amazon.com/cloudformation/) template. The actual mapping is described by [technical documentation](https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md).
+Docker ECS integration converts the Compose application model into a set of AWS resources, described as a [CloudFormation](https://aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} template. The actual mapping is described in [technical documentation](https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md){: target="_blank" rel="noopener" class="_"}.
 You can review the generated template using `docker compose convert` command, and follow CloudFormation applying this model within 
-[AWS web console](https://console.aws.amazon.com/cloudformation/home) when you run `docker compose up`, in addition to CloudFormation events being displayed 
-on your terminal.
+[AWS web console](https://console.aws.amazon.com/cloudformation/home){: target="_blank" rel="noopener" class="_"} when you run `docker compose up`, in addition to CloudFormation events being displayed 
+in your terminal.
 
 - You can view services created for the Compose application on Amazon ECS and
 their state using the `docker compose ps` command.
