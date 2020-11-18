@@ -351,19 +351,24 @@ the ARN of an existing LoadBalancer.
 The latter can be used for those who want to customize application exposure, typically to
 use an existing domain name for your application:
 
-1. Use AWS web console or CLI to get your VPC and Subnets IDs. You can typically retrieve default VPC ID and attached subnets using this AWS CLI commands:
+1. Use the AWS web console or CLI to get your VPC and Subnets IDs. You can retrieve the default VPC ID and attached subnets using this AWS CLI commands:
+
 ```console
-➜  aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId' 
+$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId' 
+
 "vpc-123456"
-➜  aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
+$ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
+
 [
     "subnet-1234abcd", 
     "subnet-6789ef00", 
 ]
 ```
-1. Use AWS CLI to create your load balancer. The AWS Web Console can also be used but will require to assing at least one listener, which we don't need here.
+1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
+
 ```console
-➜  tutu aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+
 {
     "LoadBalancers": [
         {
@@ -380,9 +385,6 @@ CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you cr
 
 Please note Docker ECS integration won't be aware of this domain name, so `docker compose ps` command will report URLs with loadbalancer DNSName, not your own domain.
 
-
-
-
 You also can use `external: true` inside a network definition in your Compose file for
 Docker Compose CLI to _not_ create a Security Group, and set `name` with the
 ID of an existing SecurityGroup you want to use for network connectivity between
@@ -394,7 +396,6 @@ networks:
     external: true
     name: "sg-1234acbd"
 ```
-
 
 ## Local simulation
 
