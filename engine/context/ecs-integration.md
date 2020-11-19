@@ -41,14 +41,23 @@ Run the `docker context create ecs myecscontext` command to create an Amazon ECS
 context named `myecscontext`. If you have already installed and configured the AWS CLI,
 the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
-[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}.
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}. 
+Finally, you can configure your ECS context to retrieve AWS credentials by `AWS_*` environment variables, which is a common way to integrate with
+third-party tools and single-sign-on providers.
+
+```console
+? Create a Docker context using:  [Use arrows to move, type to filter]
+  An existing AWS profile
+  AWS secret and token credentials
+> AWS environment variables
+```
 
 After you have created an AWS context, you can list your Docker contexts by running the `docker context ls` command:
 
 ```console
-NAME   DESCRIPTION  DOCKER ENDPOINT  KUBERNETES ENDPOINT ORCHESTRATOR
-myecscontext *
-default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock     swarm
+NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT   ORCHESTRATOR
+myecscontext        ecs                 credentials read from environment                                                             
+default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                         swarm
 ```
 
 ### Run a Compose application
@@ -63,17 +72,23 @@ current context using the command `docker context use myecscontext`.
 - Run `docker compose up` and `docker compose down` to start and then
 stop a full Compose application.
 
-  By default, `docker compose up` uses the `docker-compose.yaml` file in
+  By default, `docker compose up` uses the `compose.yaml` or `docker-compose.yaml` file in
   the current folder. You can specify the Compose file directly using the
   `--file` flag.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
+
+Docker ECS integration converts the Compose application model into a set of AWS resources, described as a [CloudFormation](https://aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} template. The actual mapping is described in [technical documentation](https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md){: target="_blank" rel="noopener" class="_"}.
+You can review the generated template using `docker compose convert` command, and follow CloudFormation applying this model within 
+[AWS web console](https://console.aws.amazon.com/cloudformation/home){: target="_blank" rel="noopener" class="_"} when you run `docker compose up`, in addition to CloudFormation events being displayed 
+in your terminal.
 
 - You can view services created for the Compose application on Amazon ECS and
 their state using the `docker compose ps` command.
 
 - You can view logs from containers that are part of the Compose application
 using the `docker compose logs` command.
+
 
 ## Rolling update
 
@@ -149,21 +164,28 @@ services:
 
 > **Note**
 >
-> If you set the Compose file version to 3.8 or later, you can use the same Compose file for local deployment using `docker-compose`. Custom extensions will be ignored in this case.
+> If you set the Compose file version to 3.8 or later, you can use the same Compose file for local deployment using `docker-compose`. Custom ECS extensions will be ignored in this case.
 
 ## Service discovery
 
-Service-to-service communication is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together. This allows individual services to run with distinct constraints (memory, cpu) and replication rules. However, it comes with a constraint that Docker images have to handle service discovery and wait for dependent services to be available.
+Service-to-service communication is implemented transparently by default, so you can deploy your Compose applications with multiple interconnected services without changing the compose file between local and ECS deployment. Individual services can run with distinct constraints (memory, cpu) and replication rules.
 
 ### Service names
 
-Services are registered by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`. Services can retrieve their dependencies using this fully qualified name, or can just use a short service name (as they do with docker-compose).
+Services are registered automatically by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`.
+
+Services can retrieve their dependencies using Compose service names (as they do when deploying locally with docker-compose), or optionally use the fully qualified names.
 
 ### Dependent service startup time and DNS resolution
 
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. As a result, your code needs to be adjusted to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Note this need to wait for dependent services in your Compose application also exists when deploying locally with docker-compose, but the delay is typically shorter. Issues might become more visible when deploying to ECS if services do not wait for their dependencies to be available.
 
 Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+
+### Service isolation
+
+Service isolation is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together using their Compose service names.
 
 ## Volumes
 
@@ -279,6 +301,15 @@ value `*` to get all keys bound in your container.
 
 ## Auto scaling
 
+Scaling service static information (non auto-scaling) can be specified using the normal Compose syntax:
+
+```yaml
+services:
+  foo:
+    deploy:
+      replicas: 3
+```
+
 The Compose file model does not define any attributes to declare auto-scaling conditions.
 Therefore, we rely on `x-aws-autoscaling` custom extension to define the auto-scaling range, as
 well as cpu _or_ memory to define target metric, expressed as resource usage percent.
@@ -326,7 +357,7 @@ services:
         - Effect: "Allow"
           Action:
             - "some_aws_service"
-          Resource":
+          Resource:
             - "*"
 ```
 
@@ -336,7 +367,19 @@ The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon
 
 ## Using existing AWS network resources
 
-By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
+By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services.
+
+With the following basic compose file, the Docker Compose CLI will automatically create these ECS constructs including the load balancer to route traffic to the exposed port 80.
+
+```yaml
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+```
+
+If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 
 - Use `x-aws-cluster` as a top-level element in your Compose file to set the ARN
 of an ECS cluster when deploying a Compose application. Otherwise, a
@@ -348,7 +391,44 @@ of a VPC when deploying a Compose application.
 - Use `x-aws-loadbalancer` as a top-level element in your Compose file to set
 the ARN of an existing LoadBalancer.
 
-- Use `external: true` inside a network definition in your Compose file for
+The latter can be used for those who want to customize application exposure, typically to
+use an existing domain name for your application:
+
+1. Use the AWS web console or CLI to get your VPC and Subnets IDs. You can retrieve the default VPC ID and attached subnets using this AWS CLI commands:
+
+```console
+$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId' 
+
+"vpc-123456"
+$ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
+
+[
+    "subnet-1234abcd", 
+    "subnet-6789ef00", 
+]
+```
+1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
+
+```console
+$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+
+{
+    "LoadBalancers": [
+        {
+            "IpAddressType": "ipv4", 
+            "VpcId": "vpc-123456", 
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456", 
+            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com", 
+...            
+```
+1. To assign your application an existing domain name, you can configure your DNS with a
+CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
+
+1. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
+
+Please note Docker ECS integration won't be aware of this domain name, so `docker compose ps` command will report URLs with loadbalancer DNSName, not your own domain.
+
+You also can use `external: true` inside a network definition in your Compose file for
 Docker Compose CLI to _not_ create a Security Group, and set `name` with the
 ID of an existing SecurityGroup you want to use for network connectivity between
 services:
