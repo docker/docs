@@ -357,7 +357,7 @@ services:
         - Effect: "Allow"
           Action:
             - "some_aws_service"
-          Resource":
+          Resource:
             - "*"
 ```
 
