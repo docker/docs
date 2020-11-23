@@ -11,6 +11,20 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.5.2
+2020-11-24
+
+> [Download](https://desktop.docker.com/win/edge/50073/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- Use of three digit version number.
+- Starting with Docker Desktop 2.5.2, updates will be much smaller as they will be applied using delta patches.
+
+### Bug fixes and minor changes
+
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+
 ## Docker Desktop Community 2.5.1.0
 2020-11-18
 
