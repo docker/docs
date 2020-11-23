@@ -7,6 +7,8 @@ title: Logs and troubleshooting
 toc_max: 2
 ---
 
+> Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Click [here](#support) to learn more.
+
 This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 
 ## Troubleshoot
@@ -316,11 +318,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 
 ## Support
 
-This section contains information on how to get support on Docker Desktop.
-
->**Note**
->
-> Docker Desktop offers support for Pro and Team users only. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+Docker Desktop offers support for developers subscribed to a [Pro or a Team plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}. This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 
 ### How do I get Docker Desktop support?
 

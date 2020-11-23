@@ -1222,24 +1222,6 @@ manuals:
     title: Teams and organizations
   - path: /docker-hub/repos/
     title: Repositories
-  - sectiontitle: Administration
-    section:
-     - path: /docker-hub/convert-account/
-       title: Convert an account into an organization
-     - path: /docker-hub/deactivate-account/
-       title: Deactivate an account or an organization
-  - sectiontitle: Billing
-    section:
-    - path: /docker-hub/billing/
-      title: Overview
-    - path: /docker-hub/billing/upgrade/
-      title: Upgrade your plan
-    - path: /docker-hub/billing/downgrade/
-      title: Downgrade your plan
-    - path: /docker-hub/billing/add-seats/
-      title: Add seats
-    - path: /docker-hub/billing/remove-seats/
-      title: Remove seats
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
   - path: /docker-hub/official_images/
@@ -1258,6 +1240,24 @@ manuals:
     title: Webhooks
   - path: /docker-hub/slack_integration/
     title: Slack integration
+  - sectiontitle: Administration
+    section:
+     - path: /docker-hub/convert-account/
+       title: Convert an account into an organization
+     - path: /docker-hub/deactivate-account/
+       title: Deactivate an account or an organization
+  - sectiontitle: Billing
+    section:
+    - path: /docker-hub/billing/
+      title: Overview
+    - path: /docker-hub/billing/upgrade/
+      title: Upgrade your plan
+    - path: /docker-hub/billing/downgrade/
+      title: Downgrade your plan
+    - path: /docker-hub/billing/add-seats/
+      title: Add seats
+    - path: /docker-hub/billing/remove-seats/
+      title: Remove seats
   - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
