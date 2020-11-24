@@ -330,7 +330,9 @@ explore other workarounds suggested on Docker Desktop forums.
 
 ## Support
 
-Docker Desktop offers support for developers subscribed to a [Pro or a Team plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}. This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
+Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Click [here](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} to upgrade your existing account.
+
+This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 
 ### How do I get Docker Desktop support?
 
