@@ -37,8 +37,10 @@ contain instructions on how to deploy your Compose application on Amazon ECS.
 
 ### Requirements
 
-AWS uses a fine-grained permission model, with specifil Role for each resource type and operation. 
-So that Docker ECS integration is allowed to manage rsources for your compose application, you 
+AWS uses a fine-grained permission model, with specific role for each resource type and operation. 
+
+To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you 
+
 have to ensure your AWS credentials grant access to following AWS IAM permissions:
 
 * cloudformation:*
