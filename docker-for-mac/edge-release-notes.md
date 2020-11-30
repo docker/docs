@@ -22,7 +22,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 
 ### Bug fixes and minor changes
 
-- Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
+- Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is a partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
 - Removed unnecessary log messages which slow down filesystem event injection.
 
 ## Docker Desktop Community 2.5.2
