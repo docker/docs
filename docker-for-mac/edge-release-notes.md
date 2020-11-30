@@ -78,7 +78,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 - Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
 - Diagnostics: avoid hanging when Kubernetes is in a broken state.
-- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+- Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890).
 
 ## Docker Desktop Community 2.4.1.0
 2020-10-01
