@@ -8,7 +8,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-Work through the orientation and setup in Quickstart [Part 1](../index.md).
+Work through the orientation and setup in Get started [Part 1](../index.md).
 
 ## Overview
 
