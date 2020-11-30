@@ -11,6 +11,20 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.5.3
+2020-11-30
+
+> [Download](https://desktop.docker.com/mac/edge/50261/Docker.dmg)
+
+### Upgrades
+
+- [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
+
+### Bug fixes and minor changes
+
+- Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is a partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
+- Removed unnecessary log messages which slow down filesystem event injection.
+
 ## Docker Desktop Community 2.5.2
 2020-11-26
 
@@ -78,7 +92,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
 - Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
 - Diagnostics: avoid hanging when Kubernetes is in a broken state.
-- Fixed automatic start on log in. See [docker/for-mac#4877] and [docker/for-mac#4890].
+- Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890).
 
 ## Docker Desktop Community 2.4.1.0
 2020-10-01

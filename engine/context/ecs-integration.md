@@ -35,6 +35,51 @@ contain instructions on how to deploy your Compose application on Amazon ECS.
 
 ## Run an application on ECS
 
+### Requirements
+
+AWS uses a fine-grained permission model, with specific role for each resource type and operation. 
+
+To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you 
+
+have to ensure your AWS credentials grant access to following AWS IAM permissions:
+
+* cloudformation:*
+* ecs:ListAccountSettings
+* ecs:CreateCluster
+* ecs:CreateService
+* ec2:DescribeVpcs
+* ec2:DescribeSubnets
+* ec2:CreateSecurityGroup
+* ec2:DescribeSecurityGroups
+* ec2:DeleteSecurityGroup
+* iam:CreateRole
+* iam:AttachRolePolicy
+* iam:DetachRolePolicy
+* iam:DeleteRole
+* elasticloadbalancing:*
+* application-autoscaling:*
+* servicediscovery:*
+* logs:CreateLogGroup
+* logs:DescribeLogGroups
+* logs:FilterLogEvents
+* logs:DeleteLogGroup
+* route53:CreateHostedZone
+* route53:DeleteHostedZone
+* route53:GetHealthCheck
+* route53:GetHostedZone
+* route53:ListHostedZonesByName
+
+GPU support, which relies on EC2 instances to run containers with attached GPU devices, 
+require a few additional permissions:
+
+* ec2:DescribeVpcs
+* autoscaling:*
+* iam:CreateInstanceProfile
+* iam:AddRoleToInstanceProfile
+* iam:RemoveRoleFromInstanceProfile
+* iam:DeleteInstanceProfile
+
+
 ### Create AWS context
 
 Run the `docker context create ecs myecscontext` command to create an Amazon ECS Docker
