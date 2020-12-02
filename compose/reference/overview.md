@@ -114,6 +114,10 @@ webapp:
     - DEBUG=1
 ```
 
+When you use multiple Compose files, all paths in the files are relative to the
+first configuration file specified with `-f`. You can use the
+`--project-directory` option to override this base path.
+
 Use a `-f` with `-` (dash) as the filename to read the configuration from
 `stdin`. When `stdin` is used all paths in the configuration are
 relative to the current working directory.
