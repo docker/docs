@@ -121,7 +121,7 @@ No, you must move to the new Pro or Team plans to take advantage of the Annual p
 
 Yes, Docker will continue to offer a Free plan with unlimited public repositories and unlimited collaborators for public repositories at no cost per month. Docker is committed to supporting the broader open source communities.
 
-For questions about open source projects and pricing please visit the [Open Source Community Application](https://www.docker.com/community/open-source/application).
+For questions about open source projects and pricing please visit the [Open Source Community Application](https://www.docker.com/community/open-source/application){: target="blank" rel="noopener" class=""}.
 
 ### I have more questions regarding the new pricing, who can I reach out to?
 
@@ -555,4 +555,3 @@ Or check out: [https://www.docker.com/pricing](https://www.docker.com/pricing)
   ]
 }
 </script>
-
