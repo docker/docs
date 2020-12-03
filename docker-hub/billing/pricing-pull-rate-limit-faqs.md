@@ -57,7 +57,7 @@ For details on the differences for each plan option, please see [Docker Billing]
 
 The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account.
 
-For details on the differences between plans, see [https://www.docker.com/pricing](https://www.docker.com/pricing).
+For details on the differences between plans, see [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
 
 For more information on service accounts visit our [docs](/docker-hub/repos/#service-accounts) page.
 
