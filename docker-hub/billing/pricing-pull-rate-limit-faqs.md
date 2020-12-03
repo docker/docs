@@ -131,7 +131,7 @@ If you have any questions about how the new seat-based pricing impacts you that 
 
 ### What are the Docker Terms of Service?
 
-The Docker Terms of Service is an agreement between you and Docker that governs your use of Docker products and services. Click on the link to view the full [Docker Terms of Service](https://www.docker.com/legal).
+The Docker Terms of Service is an agreement between you and Docker that governs your use of Docker products and services. Click on the link to view the full [Docker Terms of Service](https://www.docker.com/legal){: target="blank" rel="noopener" class=""}.
 
 ### When do the Docker Terms of Service take effect?
 
@@ -555,5 +555,4 @@ Or check out: [https://www.docker.com/pricing](https://www.docker.com/pricing)
   ]
 }
 </script>
-
 
