@@ -61,6 +61,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--json` | Display the result of the scan in JSON format|
 | `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
 | `--reject-license` | Reject the license agreement of the third-party scanning provider |
+| `--severity string` | Only report vulnerabilities of provided level or higher (low|medium|high) |
 | `--token string`  | Use the authentication token to log into the third-party scanning provider |
 | `--version` | Display the Docker Scan plugin version |
 
@@ -272,6 +273,47 @@ For more free scans that keep your images secure, sign up to Snyk at https://doc
 ```
 
 For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
+
+### Limit the level of vulnerabilities displayed
+If you want to only display some level of vulnerabilities, the `--severity` flag allows you to choose between 3 levels of
+vulnerabilities `low`,`medium` or `high`. By using this tag you will only report vulnerabilities of the provided level
+ or higher.
+ 
+ ```console
+$ docker scan --severity=medium docker-scan:e2e 
+./bin/docker-scan_darwin_amd64 scan --severity=medium docker-scan:e2e
+
+Testing docker-scan:e2e...
+
+✗ Medium severity vulnerability found in sqlite3/libsqlite3-0
+  Description: Divide By Zero
+  Info: https://snyk.io/vuln/SNYK-DEBIAN10-SQLITE3-466337
+  Introduced through: gnupg2/gnupg@2.2.12-1+deb10u1, subversion@1.10.4-1+deb10u1, mercurial@4.8.2-1+deb10u1
+  From: gnupg2/gnupg@2.2.12-1+deb10u1 > gnupg2/gpg@2.2.12-1+deb10u1 > sqlite3/libsqlite3-0@3.27.2-3
+  From: subversion@1.10.4-1+deb10u1 > subversion/libsvn1@1.10.4-1+deb10u1 > sqlite3/libsqlite3-0@3.27.2-3
+  From: mercurial@4.8.2-1+deb10u1 > python-defaults/python@2.7.16-1 > python2.7@2.7.16-2+deb10u1 > python2.7/libpython2.7-stdlib@2.7.16-2+deb10u1 > sqlite3/libsqlite3-0@3.27.2-3
+
+✗ Medium severity vulnerability found in sqlite3/libsqlite3-0
+  Description: Uncontrolled Recursion
+...
+✗ High severity vulnerability found in binutils/binutils-common
+  Description: Missing Release of Resource after Effective Lifetime
+  Info: https://snyk.io/vuln/SNYK-DEBIAN10-BINUTILS-403318
+  Introduced through: gcc-defaults/g++@4:8.3.0-1
+  From: gcc-defaults/g++@4:8.3.0-1 > gcc-defaults/gcc@4:8.3.0-1 > gcc-8@8.3.0-6 > binutils@2.31.1-16 > binutils/binutils-common@2.31.1-16
+  From: gcc-defaults/g++@4:8.3.0-1 > gcc-defaults/gcc@4:8.3.0-1 > gcc-8@8.3.0-6 > binutils@2.31.1-16 > binutils/libbinutils@2.31.1-16 > binutils/binutils-common@2.31.1-16
+  From: gcc-defaults/g++@4:8.3.0-1 > gcc-defaults/gcc@4:8.3.0-1 > gcc-8@8.3.0-6 > binutils@2.31.1-16 > binutils/binutils-x86-64-linux-gnu@2.31.1-16 > binutils/binutils-common@2.31.1-16
+  and 4 more...
+
+Organization:      docker-desktop-test
+Package manager:   deb
+Project name:      docker-image|docker-scan
+Docker image:      docker-scan:e2e
+Platform:          linux/amd64
+Licenses:          enabled
+
+Tested 200 dependencies for known issues, found 37 issues.
+```
 
 ## Provider authentication
 
