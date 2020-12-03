@@ -111,7 +111,7 @@ For information on how to add a member to a team, see [Add a member to a team](/
 
 Yes! Both the Pro and Team plans are available via annual subscriptions and include a discount from the monthly subscription price.
 
-You can view the annual subscription pricing for each product at [https://www.docker.com/pricing](https://www.docker.com/pricing).
+You can view the annual subscription pricing for each product at [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
 
 ### Are legacy plans eligible for annual pricing?
 
