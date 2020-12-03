@@ -63,7 +63,7 @@ For more information on service accounts visit our [docs](/docker-hub/repos/#ser
 
 ### How can I create a new Docker Hub account?
 
-You can create a new account at [https://www.docker.com/pricing](https://www.docker.com/pricing) where you can choose a plan for Individuals or a plan for Teams.
+You can create a new account at [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""} where you can choose a plan for Individuals or a plan for Teams.
 
 ### How do I upgrade to a Pro plan from a legacy individual plan?
 
