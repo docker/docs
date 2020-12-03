@@ -70,7 +70,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 bin\
 obj\
 ```
-### Method 2 (CI recommended method):
+### Method 2 (build app outside Docker container):
 
 1.  Create a `Dockerfile` in your project folder.
 2.  Add the text below to your `Dockerfile` for either Linux or [Windows
