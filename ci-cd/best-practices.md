@@ -10,7 +10,7 @@ We have also heard feedback that given the changes [Docker introduced](https://w
 
 ## Inner and outer loops
 
-To get started, one of the most important things when working with Docker and any CI/CD is to understand when you need to test with the CI, and when you can do this locally. At Docker, we think about how how developers work in terms of their inner loop (code, build, run, test) and their outer loop (push changes, CI build, CI test, deployment).
+To get started, one of the most important things when working with Docker and any CI/CD is to understand when you need to test with the CI, and when you can do this locally. At Docker, we think about how developers work in terms of their inner loop (code, build, run, test) and their outer loop (push changes, CI build, CI test, deployment).
 
 ![CI/CD inner and outer loop](images/inner-outer-loop.png)
 
