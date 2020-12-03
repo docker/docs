@@ -274,10 +274,11 @@ For more free scans that keep your images secure, sign up to Snyk at https://doc
 
 For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
 
-### Limit the level of vulnerabilities displayed
-If you want to only display some level of vulnerabilities, the `--severity` flag allows you to choose between 3 levels of
-vulnerabilities `low`,`medium` or `high`. By using this tag you will only report vulnerabilities of the provided level
- or higher.
+### Limiting the level of vulnerabilities displayed
+
+Docker scan allows you to choose the level of vulnerabilities displayed in your scan report using the `--severity` flag.
+You can set the severity flag to `low`, `medium`, or` high` depending on the level of vulnerabilities you’d like to see in your report.  
+For example, if you set the severity level as `medium`, the scan report displays all vulnerabilities that are classified as medium and high.
  
  ```console
 $ docker scan --severity=medium docker-scan:e2e 
