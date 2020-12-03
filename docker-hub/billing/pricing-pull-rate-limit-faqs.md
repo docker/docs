@@ -31,7 +31,7 @@ Legacy customers have until January 31, 2021 to switch to the new pricing plans.
 
 ### How can I compare which features are in each plan?
 
-You can see pricing and a full list of features for each product at [https://www.docker.com/pricing](https://www.docker.com/pricing).
+You can see pricing and a full list of features for each product at [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
 
 ### What is the difference between the legacy plans and the newly announced plans?
 
