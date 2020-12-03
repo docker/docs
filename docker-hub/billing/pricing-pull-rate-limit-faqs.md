@@ -51,7 +51,7 @@ Depending on your configuration you may find it more economical to move to one o
 
 ### What are the differences between the Team and Free Team plans?
 
-For details on the differences for each plan option, please see [https://docs.docker.com/docker-hub/billing/](https://docs.docker.com/docker-hub/billing/).
+For details on the differences for each plan option, please see [Docker Billing](index.md).
 
 ### Do collaborator limits differ between the Free and Pro plans?
 
