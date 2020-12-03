@@ -12,6 +12,8 @@ We have also heard feedback that given the changes [Docker introduced](https://w
 
 To get started, one of the most important things when working with Docker and any CI/CD is to understand when you need to test with the CI, and when you can do this locally. At Docker, we think about how how developers work in terms of their inner loop (code, build, run, test) and their outer loop (push changes, CI build, CI test, deployment).
 
+![CI/CD inner and outer loop](images/inner-outer-loop.png)
+
 Before you think about optimizing your CI/CD, it is important to think about your inner loop and how it relates to the outer loop (the CI). We know that most users don't prefer 'debugging through the CI’. Therefore, it is better if your inner loop and outer loop are as similar as possible. We recommend that you run unit tests as part of your `docker build` command by adding a target for them in your Dockerfile. This way, as you are making changes and rebuilding locally, you can run the same unit tests you would run in the CI on your local machine using a simple command.
 
 The blog post [Go development with Docker](https://www.docker.com/blog/tag/go-env-series/){:target="_blank" rel="noopener" class="_"} is a great example of how you can use tests in your Docker project and re-use them in the CI. This also creates a shorter feedback loop on issues and reduces the amount of pulls and builds your CI needs to do.
@@ -34,8 +36,10 @@ The other change you may want to make is only have your release images go to Doc
 
 ## Next steps
 
-We know there are a lot more tips and tricks for using Docker in CI, however, we think these are some of the important things, considering the recent Hub rate limit updates.
+We know there are a lot more tips and tricks for using Docker in CI, however, we think these are some of the important things, considering the recent Docker Hub rate limit updates.
 
-If you are still experiencing issues with pull limits once you are authenticated, you can consider upgrading to either a [Pro or a Team account](https://www.docker.com/pricing){:target="_blank" rel="noopener" class="_"} .
+  > **Note**
+  >
+  > If you are still experiencing issues with pull limits after you are authenticated, you can consider upgrading to either a [Pro or a Team account](https://www.docker.com/pricing){:target="_blank" rel="noopener" class="_"} .
 
 For information on how to configure GitHub Actions CI/CD pipeline, see [Configure GitHub Actions](github-actions.md).
