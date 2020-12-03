@@ -29,6 +29,7 @@ in your Compose file, and can also be used to define the following
 - `COMPOSE_CONVERT_WINDOWS_PATHS`
 - `COMPOSE_FILE`
 - `COMPOSE_HTTP_TIMEOUT`
+- `COMPOSE_PROFILES`
 - `COMPOSE_PROJECT_NAME`
 - `COMPOSE_TLS_VERSION`
 - `DOCKER_CERT_PATH`
