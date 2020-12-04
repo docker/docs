@@ -59,7 +59,7 @@ The Free plan includes unlimited collaborators for public repositories and 0 col
 
 For details on the differences between plans, see [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
 
-For more information on service accounts visit our [docs](/docker-hub/repos/#service-accounts) page.
+For more information, see [Service accounts](/docker-hub/repos/#service-accounts) page.
 
 ### How can I create a new Docker Hub account?
 
