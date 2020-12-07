@@ -266,7 +266,7 @@ volumes:
       lifecycle_policy: AFTER_14_DAYS
       performance_mode: maxIO
       throughput_mode: provisioned
-      provisioned_throughput: 1024
+      provisioned_throughput: 1
 ```
 
 File systems created by executing `docker compose up` on AWS can be listed using
