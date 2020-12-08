@@ -1,17 +1,68 @@
 ---
-description: Change log / release notes per Stable release
-keywords: Docker Desktop for Mac, stable, release notes
+description: Change log / release notes for Docker Desktop Mac
+keywords: Docker Desktop for Mac, release notes
 redirect_from:
 - /mackit/release-notes/
-title: Docker for Mac Stable release notes
+- /docker-for-mac/edge-release-notes/
+title: Docker for Mac release notes
 toc_min: 1
 toc_max: 2
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+> **Important**
+>
+> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
+{: .important }
+
+## Docker Desktop Community 2.5.4
+2020-12-07
+
+> [Download](https://desktop.docker.com/mac/edge/50534/Docker.dmg)
+
+### Upgrades
+
+- [Docker Engine 20.10.0-rc2](https://github.com/docker/docker-ce/blob/master/CHANGELOG.md#20100)
+- [Go 1.15.6](https://github.com/golang/go/issues?q=milestone%3AGo1.15.6+label%3ACherryPickApproved+)
+
+### Bug fixes and minor changes
+
+- Changed the **Update and quit** menu entry to **Update and restart**.
+- Fixed the check for updates dialog reporting the build number instead of the version number of a new version.
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+-  Fixed a bug that DNS would return `NXDOMAIN` when a name exists but the type of record was not found. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020). Related to https://gitlab.alpinelinux.org/alpine/aports/-/issues/11879
+- Avoid caching bad file sizes and modes when using `osxfs`. Fixes [docker/for-mac#5045](https://github.com/docker/for-mac/issues/5045).
+
+## Docker Desktop Community 2.5.3
+2020-11-30
+
+> [Download](https://desktop.docker.com/mac/edge/50261/Docker.dmg)
+
+### Upgrades
+
+- [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
+
+### Bug fixes and minor changes
+
+- Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is a partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
+- Removed unnecessary log messages which slow down filesystem event injection.
+
+## Docker Desktop Community 2.5.2
+2020-11-26
+
+> [Download](https://desktop.docker.com/mac/edge/50165/Docker.dmg)
+
+### New
+
+- Use of three digit version number.
+- Starting with Docker Desktop 2.5.2, updates will be much smaller as they will be applied using delta patches.
+
+### Bug fixes and minor changes
+
+- Re-enabled the experimental SOCKS proxy. Fixes [docker/for-mac#5048](https://github.com/docker/for-mac/issues/5048).
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+- Display an error message instead of crashing when the application needs write access on specific directories. See [docker/for-mac#5068](https://github.com/docker/for-mac/issues/5068)
 
 ## Docker Desktop Community 2.5.0.1
 2020-11-10

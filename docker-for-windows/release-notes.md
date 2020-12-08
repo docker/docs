@@ -1,17 +1,58 @@
 ---
-description: Change log / release notes per stable release
-keywords: Docker Desktop for Windows, stable, release notes
+description: Docker Desktop for Windows Release notes
+keywords: Docker Desktop for Windows, release notes
 redirect_from:
 - /winkit/release-notes/
-title: Docker Desktop for Windows Stable Release notes
+- /docker-for-windows/edge-release-notes/
+title: Docker for Windows release notes
 toc_min: 1
 toc_max: 2
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+> **Important**
+>
+> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
+{: .important }
+
+## Docker Desktop Community 2.5.4
+2020-12-07
+
+> [Download](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker Engine 20.10.0-rc2](https://github.com/docker/docker-ce/blob/master/CHANGELOG.md#20100)
+- [Go 1.15.6](https://github.com/golang/go/issues?q=milestone%3AGo1.15.6+label%3ACherryPickApproved+)
+
+### Bug fixes and minor changes
+
+- Fixed an issue causing the background update to fail when the current user is not an administrator.
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+
+## Docker Desktop Community 2.5.3
+2020-11-30
+
+> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
+
+## Docker Desktop Community 2.5.2
+2020-11-26
+
+> [Download](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- Use of three digit version number.
+- Starting with Docker Desktop 2.5.2, updates will be much smaller as they will be applied using delta patches.
+
+### Bug fixes and minor changes
+
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
 
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
