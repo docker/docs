@@ -81,16 +81,16 @@ obj\
     [switching containers](../../docker-for-windows/index.md#switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change the `Dockerfile` to use the DLL file of your project. This method assumes that your project is already built and it copies the build artifacts from the publish folder. Refer to the Microsoft documentation on [Containerize a .Net Core app](https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile){: target="blank" rel="noopener" class=“"}.
 
-  The `docker build` step here will be much faster than method 1, as all the artifacts are built outside of the `docker build` step and the size of the base     image is much smaller compared to the build base image.
+    The `docker build` step here will be much faster than method 1, as all the artifacts are built outside of the `docker build` step and the size of the base     image is much smaller compared to the build base image.
 
-  This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Addittionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
+    This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Addittionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
 
-    ```dockerfile
-    FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
-    COPY bin/Release/netcoreapp3.1/publish/ App/
-    WORKDIR /App
-    ENTRYPOINT ["dotnet", "aspnetapp.dll"]
-    ```
+      ```dockerfile
+      FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+      COPY bin/Release/netcoreapp3.1/publish/ App/
+      WORKDIR /App
+      ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+      ```
   
 4.  To make your build context as small as possible add a [`.dockerignore`
    file](/engine/reference/builder/#dockerignore-file)
