@@ -205,7 +205,8 @@ $ docker scan --json hello-world
 }
 ```
 
-In addition to the `--json` flag, you can use the `--group-issues` flag to display only once a vulnerability
+In addition to the `--json` flag, you can also use the `--group-issues` flag to display a vulnerability only once in the scan report:
+
 ```shell
 $ docker scan --json --group-issues docker-scan:e2e
 {
