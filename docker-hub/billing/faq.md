@@ -85,7 +85,7 @@ For information on how to downgrade from a Team plan to a Free plan, see [Downgr
 
 ### How do I downgrade from Pro to a Free plan?
 
-Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Billing/](/docker-hub/billing/).
+Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Billing](/docker-hub/billing/).
 
 For information on how to downgrade from Pro to a Free plan, see [Downgrade from Pro to a Free plan](/docker-hub/billing/downgrade/#downgrade-from-pro-to-a-free-plan).
 
@@ -143,13 +143,13 @@ The most notable changes are in Section 2.5. To see all of the changes, we recom
 
 ### I read that images are going to expire on November 1? What is going on here?
 
-A planned policy for image expiration enforcement for inactive images for free accounts was announced to take effect November 1, 2020. After hearing feedback from customers, this policy has been placed on hold until mid 2021. More information is available in [this blog post](https://www.docker.com/blog/docker-hub-image-retention-policy-delayed-and-subscription-updates/).
+A planned policy for image expiration enforcement for inactive images for free accounts was announced to take effect November 1, 2020. After hearing feedback from customers, this policy has been placed on hold until mid 2021. More information is available in [this blog post](https://www.docker.com/blog/docker-hub-image-retention-policy-delayed-and-subscription-updates/){: target="blank" rel="noopener" class=""}.
 
 ### What are the rate limits for pulling Docker images from the Docker Hub Registry?
 
 Rate limits for Docker image pulls are based on the account type of the user requesting the image - not the account type of the image’s owner. These are defined on the [pricing](https://www.docker.com/pricing) page.
 
-The highest entitlement a user has, based on their personal account and any orgs they belong to, will be used. Unauthenticated pull requests are “anonymous” and will be rate limited based on IP address rather than user ID. For more information on authenticating image pulls, please see ["How do I authenticate pull requests"](/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests).
+The highest entitlement a user has, based on their personal account and any orgs they belong to, will be used. Unauthenticated pull requests are “anonymous” and will be rate limited based on IP address rather than user ID. For more information on authenticating image pulls, please see [How do I authenticate pull requests](/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests).
 
 ### Are there rate limits on Docker Hub container image requests?
 
@@ -169,7 +169,7 @@ Docker Pro subscriptions are designed for use by a single individual. An automat
 
 ### Can I run a local mirror of Docker Hub?
 
-Please see [https://docs.docker.com/registry/recipes/mirror/](https://docs.docker.com/registry/recipes/mirror/) to run [docker/distribution](https://github.com/docker/distribution) as a mirror. Because distribution uses HEAD manifest requests to check if cached content has changed, it will not count towards the rate limit. Note that initial requests for Hub images that are not yet in cache will be counted.
+Please see [https://docs.docker.com/registry/recipes/mirror/](https://docs.docker.com/registry/recipes/mirror/) to run [docker/distribution](https://github.com/docker/distribution){: target="blank" rel="noopener" class=""} as a mirror. Because distribution uses HEAD manifest requests to check if cached content has changed, it will not count towards the rate limit. Note that initial requests for Hub images that are not yet in cache will be counted.
 
 ### Are image layers counted?
 
@@ -177,7 +177,7 @@ No. Because we are limiting on manifest requests, the number of layers (blob req
 
 ### Are anonymous (unauthenticated) pulls rate-limited based on IP address?
 
-Yes. Pull rates are limited based on individual IP address (e.g., for anonymous users: 100 pulls per 6 hours per IP address). See [pricing](https://www.docker.com/pricing) for more details.
+Yes. Pull rates are limited based on individual IP address (e.g., for anonymous users: 100 pulls per 6 hours per IP address). See [pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""} for more details.
 
 ### Are pulls from logged-in accounts rate-limited based on IP address?
 
@@ -203,13 +203,9 @@ We recognize there are some circumstances where many pulls will be made that can
 
 Yes, as part of Docker’s commitment to the open source community, we have created a new program to support free use of Docker in open source projects. [See this blog post](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="blank" rel="noopener" class=""} for more information.
 
-To apply for an open source plan, complete our application at:
+To apply for an open source plan, complete our application at [https://www.docker.com/community/open-source/application](https://www.docker.com/community/open-source/application){: target="blank" rel="noopener" class=""}.
 
-[https://www.docker.com/community/open-source/application](https://www.docker.com/community/open-source/application){: target="blank" rel="noopener" class=""}.
-
-For more information view our blogs on [inactive image retention](https://www.docker.com/blog/scaling-dockers-business-to-serve-millions-more-developers-storage){: target="blank" rel="noopener" class=""} and [pull rate limits](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress){: target="blank" rel="noopener" class=""}.
-
-Or check out [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}
+For more information, view our blogs on [inactive image retention](https://www.docker.com/blog/scaling-dockers-business-to-serve-millions-more-developers-storage){: target="blank" rel="noopener" class=""} and [pull rate limits](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress){: target="blank" rel="noopener" class=""}. Alternatively, check out [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}
 
 <script type="application/ld+json">
 {
