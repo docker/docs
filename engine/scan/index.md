@@ -205,6 +205,56 @@ $ docker scan --json hello-world
 }
 ```
 
+In addition to the `--json` flag, you can use the `--group-issues` flag to display only once a vulnerability
+```shell
+$ docker scan --json --group-issues docker-scan:e2e
+{
+    {
+      "title": "Improper Check for Dropped Privileges",
+      ...
+      "packageName": "bash",
+      "language": "linux",
+      "packageManager": "debian:10",
+      "description": "## Overview\nAn issue was discovered in disable_priv_mode in shell.c in GNU Bash through 5.0 patch 11. By default, if Bash is run with its effective UID not equal to its real UID, it will drop privileges by setting its effective UID to its real UID. However, it does so incorrectly. On Linux and other systems that support \"saved UID\" functionality, the saved UID is not dropped. An attacker with command execution in the shell can use \"enable -f\" for runtime loading of a new builtin, which can be a shared object that calls setuid() and therefore regains privileges. However, binaries running with an effective UID of 0 are unaffected.\n\n## References\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20200430-0003/)\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2019-18276)\n- [GitHub Commit](https://github.com/bminor/bash/commit/951bdaad7a18cc0dc1036bba86b18b90874d39ff)\n- [MISC](http://packetstormsecurity.com/files/155498/Bash-5.0-Patch-11-Privilege-Escalation.html)\n- [MISC](https://www.youtube.com/watch?v=-wGtxJ8opa8)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-18276)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2019-18276"
+        ],
+        "CWE": [
+          "CWE-273"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "cvssScore": 7.8,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H/E:F",
+      ...
+      "from": [
+        "docker-image|docker-scan@e2e",
+        "bash@5.0-4"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "bash",
+      "version": "5.0-4"
+    },
+    ...
+    "summary": "880 vulnerable dependency paths",
+      "filesystemPolicy": false,
+      "filtered": {
+        "ignore": [],
+        "patch": []
+      },
+      "uniqueCount": 158,
+      "projectName": "docker-image|docker-scan",
+      "platform": "linux/amd64",
+      "path": "docker-scan:e2e"
+}
+```
+You can find all the sources of the vulnerability in the `from` section.
+
 ### Checking the dependency tree
 
 To view the dependency tree of your image, use the --dependency-tree flag. This displays all the dependencies before the scan result. For example:
