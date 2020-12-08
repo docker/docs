@@ -1074,6 +1074,8 @@ manuals:
     title: Release notes
   - sectiontitle: Previous versions
     section:
+    - path: /engine/release-notes/19.03/
+      title: Engine 19.03 release notes
     - path: /engine/release-notes/18.09/
       title: Engine 18.09 release notes
     - path: /engine/release-notes/18.06/
