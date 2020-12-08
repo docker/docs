@@ -610,6 +610,8 @@ reference:
         title: docker manifest inspect
       - path: /engine/reference/commandline/manifest_push/
         title: docker manifest push
+      - path: /engine/reference/commandline/manifest_rm/
+        title: docker manifest rm
     - sectiontitle: docker network
       section:
       - path: /engine/reference/commandline/network/
@@ -912,6 +914,8 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.41/
+        title: v1.41 reference
       - path: /engine/api/v1.40/
         title: v1.40 reference
       - path: /engine/api/v1.39/

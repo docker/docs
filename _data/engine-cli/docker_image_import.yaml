@@ -28,7 +28,7 @@ options:
   description: Set platform if server is multi-platform capable
   deprecated: false
   min_api_version: "1.32"
-  experimental: true
+  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
