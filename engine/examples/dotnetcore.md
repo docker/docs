@@ -79,16 +79,19 @@ obj\
     Linux containers depending on what mode is set in
     [Docker Desktop for Windows](../../docker-for-windows/index.md). Read more on
     [switching containers](../../docker-for-windows/index.md#switch-between-windows-and-linux-containers).
-3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change the `Dockerfile` to use the DLL file of your project. This method assumes that your project is already built and copies over the build artifacts from the publish folder. Refer to the Microsoft documentation on [Containerize a .Net Core app](https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile).    
-The docker build step will be much faster than method 1, as all the artifacts are built outside of docker build step and the size of the base image is much smaller as compared to the build base image.   
-This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, e.t.c. as you can use the same artifacts in multiple deployment models if Docker Containers isn't the only deployment model being used. Addittionally, you'll be able to run unit tests and publish code coverage reports or use custom plugins on the artifacts built by the CI.
+3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change the `Dockerfile` to use the DLL file of your project. This method assumes that your project is already built and it copies the build artifacts from the publish folder. Refer to the Microsoft documentation on [Containerize a .Net Core app](https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile){: target="blank" rel="noopener" class=“"}.
 
-```dockerfile
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
-COPY bin/Release/netcoreapp3.1/publish/ App/
-WORKDIR /App
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
-```
+  The `docker build` step here will be much faster than method 1, as all the artifacts are built outside of the `docker build` step and the size of the base     image is much smaller compared to the build base image.
+
+  This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Addittionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
+
+    ```dockerfile
+    FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+    COPY bin/Release/netcoreapp3.1/publish/ App/
+    WORKDIR /App
+    ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+    ```
+  
 4.  To make your build context as small as possible add a [`.dockerignore`
    file](/engine/reference/builder/#dockerignore-file)
    to your project folder.
