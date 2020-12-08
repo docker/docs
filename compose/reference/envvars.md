@@ -115,6 +115,16 @@ and `exec` operations. This option is not available on Windows where the CLI
 is required for the aforementioned operations.
 Supported: `true` or `1` to enable, `false` or `0` to disable.
 
+## COMPOSE\_DOCKER\_CLI\_BUILD
+
+Configure whether to use the Compose python client for building images or the
+native docker cli. By default, Compose uses the `docker` CLI to perform builds,
+which allows you to use [BuildKit](../../develop/develop-images/build_enhancements.md#to-enable-buildkit-builds)
+to perform builds.
+
+Set `COMPOSE_DOCKER_CLI_BUILD=0` to disable native builds, and to use the built-in
+python client.
+
 ## Related information
 
 - [User guide](../index.md)
