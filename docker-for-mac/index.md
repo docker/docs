@@ -43,8 +43,6 @@ On the **General** tab, you can configure when to start and update Docker:
 
 - **Start Docker Desktop when you log in**: Automatically starts Docker Desktop when you open your session.
 
-- **Automatically check for updates**: By default, Docker Desktop automatically checks for updates and notifies you when an update is available. You can manually check for updates anytime by choosing **Check for Updates** from the main Docker menu.
-
 - **Include VM in Time Machine backups**: Select this option to back up the Docker Desktop virtual machine. This option is disabled by default.
 
 - **Securely store Docker logins in macOS keychain**: Docker Desktop stores your Docker login credentials in macOS keychain by default.

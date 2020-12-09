@@ -43,11 +43,6 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 * **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
 
-* **Automatically check for updates** - By default, Docker Desktop automatically checks for updates and notifies you when an update is available.
-Click **OK** to accept and install updates (or cancel to keep the current
-version). You can manually update by choosing **Check for Updates** from the
-main Docker menu.
-
 * **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
 * **Send usage statistics** - By default, Docker Desktop sends diagnostics,
