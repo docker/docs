@@ -20,6 +20,9 @@ ARG ENGINE_BRANCH="master"
 # Distribution
 ARG DISTRIBUTION_BRANCH="release/2.7"
 
+# Compose CLI
+ARG COMPOSE_CLI_BRANCH="main"
+
 ###
 # Set up base stages for building and deploying
 ###
@@ -35,6 +38,9 @@ ENV ENGINE_BRANCH=${ENGINE_BRANCH}
 ARG DISTRIBUTION_BRANCH
 ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
 
+ARG COMPOSE_CLI_BRANCH
+ENV COMPOSE_CLI_BRANCH=${COMPOSE_CLI_BRANCH}
+
 # Fetch upstream resources (reference documentation)
 # Only add the files that are needed to build these reference docs, so that these
 # docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
@@ -45,6 +51,7 @@ WORKDIR /usr/src/app/md_source/
 COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
 ARG ENGINE_BRANCH
 ARG DISTRIBUTION_BRANCH
+ARG COMPOSE_CLI_BRANCH
 RUN ./_scripts/fetch-upstream-resources.sh .
 
 

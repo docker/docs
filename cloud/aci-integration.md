@@ -2,6 +2,8 @@
 title: Deploying Docker containers on Azure
 description: Deploying Docker containers on Azure
 keywords: Docker, Azure, Integration, ACI, context, Compose, cli, deploy, containers, cloud
+redirect_from:
+  - /engine/context/aci-integration/
 toc_min: 1
 toc_max: 2
 ---
@@ -15,6 +17,8 @@ In addition, the integration between Docker and Microsoft developer technologies
 - Easily log into Azure
 - Set up an ACI context in one Docker command allowing you to switch from a local context to a cloud context and run applications quickly and easily
 - Simplify single container and multi-container application development using the Compose specification, allowing a developer to invoke fully Docker-compatible commands seamlessly for the first time natively within a cloud container service
+
+Also see the [full list of container features supported by ACI](aci-container-features.md) and [full list of compose features supported by ACI](aci-compose-features.md).
 
 ## Prerequisites
 
@@ -34,6 +38,7 @@ To deploy Docker containers on Azure, you must meet the following requirements:
 Docker not only runs containers locally, but also enables developers to seamlessly deploy Docker containers on ACI using `docker run` or deploy multi-container applications defined in a Compose file using the `docker compose up` command.
 
 The following sections contain instructions on how to deploy your Docker containers on ACI.
+Also see the [full list of container features supported by ACI](aci-container-features.md).
 
 ### Log into Azure
 
@@ -64,7 +69,7 @@ you have several ones available in Azure.
 ### Create an ACI context
 
 After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI.
-Creating an ACI context requires an Azure subscription, a resource group, and a region.
+Creating an ACI context requires an Azure subscription, a [resource group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal), and a region.
 For example, let us create a new context called `myacicontext`:
 
 ```console
@@ -135,6 +140,8 @@ You can remove containers using `docker rm`. To remove a running container, you 
 You can also deploy and manage multi-container applications defined in Compose files to ACI using the `docker compose` command.
 All containers in the same Compose application are started in the same container group. Service discovery between the containers works using the service name specified in the Compose file.
 Name resolution between containers is achieved by writing service names in the `/etc/hosts` file that is shared automatically by all containers in the container group.
+
+Also see the [full list of compose features supported by ACI](aci-compose-features.md).
 
 1. Ensure you are using your ACI context. You can do this either by specifying the `--context myacicontext` flag or by setting the default context using the command  `docker context use myacicontext`.
 
