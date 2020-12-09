@@ -34,6 +34,11 @@ Docker supports the following storage drivers:
    Linux distributions, and requires no extra configuration.
 * `aufs` was the preferred storage driver for Docker 18.06 and older, when
    running on Ubuntu 14.04 on kernel 3.13 which had no support for `overlay2`.
+*  `fuse-overlayfs` is preferred only for running Rootless Docker
+   on a host that does not provide support for rootless `overlay2`.
+   On Ubuntu and Debian 10, the `fuse-overlayfs` driver does not need to be
+   used `overlay2` works even in rootless mode.
+   See [Rootless mode documentation](../../engine/security/rootless.md).
 * `devicemapper` is supported, but requires `direct-lvm` for production
    environments, because `loopback-lvm`, while zero-configuration, has very
    poor performance. `devicemapper` was the recommended storage driver for
@@ -98,6 +103,10 @@ release. It is recommended that users of the `overlay` storage driver migrate to
 release. It is recommended that users of the `devicemapper` storage driver migrate
 to `overlay2`.
 
+> **Note**
+>
+> The comparison table above is not applicable for Rootless mode.
+> For the drivers available in Rootless mode, see [the Rootless mode documentation](../../engine/security/rootless.md).
 
 When possible, `overlay2` is the recommended storage driver. When installing
 Docker for the first time, `overlay2` is used by default. Previously, `aufs` was
@@ -147,6 +156,7 @@ backing filesystems.
 | Storage driver        | Supported backing filesystems  |
 |:----------------------|:------------------------------|
 | `overlay2`, `overlay` | `xfs` with ftype=1, `ext4`    |
+| `fuse-overlayfs`      | any filesystem                |
 | `aufs`                | `xfs`, `ext4`                 |
 | `devicemapper`        | `direct-lvm`                  |
 | `btrfs`               | `btrfs`                       |

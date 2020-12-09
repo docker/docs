@@ -160,22 +160,13 @@ $ sudo dnf config-manager \
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-3.  Cgroups Exception:
-    For Fedora 31 and higher, you need to enable the [backward compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
-
-    ```bash
-    $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-    ```
-    
-    After running the command, you must reboot for the changes to take effect.
-    
-4.  Start Docker.
+3.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker Engine is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```bash
