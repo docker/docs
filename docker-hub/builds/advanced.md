@@ -92,19 +92,6 @@ the automated build fails.
 
 To learn more about Docker build-time variables, see the [docker build documentation](/engine/reference/commandline/build/#set-build-time-variables-build-arg).
 
-#### Two-phase build
-
-If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the `hooks/pre_build` file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary that is required before the build.
-
-```bash
-#!/bin/bash
-echo "=> Building the binary"
-docker run --privileged \
-  -v $(pwd):/src \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  centurylink/golang-builder
-```
-
 #### Push to multiple repos
 
 By default the build process pushes the image only to the repository where the build settings are configured. If you need to push the same image to multiple repositories, you can set up a `post_push` hook to add additional tags and push to more repositories.
