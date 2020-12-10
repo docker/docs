@@ -1262,6 +1262,8 @@ manuals:
       title: Add seats
     - path: /docker-hub/billing/remove-seats/
       title: Remove seats
+    - path: /docker-hub/billing/faq/
+      title: Pricing FAQs
   - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
