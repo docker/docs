@@ -20,10 +20,6 @@ Welcome to Docker Desktop! The Docker Desktop for Windows user manual provides i
 
 For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
 
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes.md).
-
 ## Settings
 
 The **Docker Desktop** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
@@ -47,18 +43,11 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 * **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
 
-* **Automatically check for updates** - By default, Docker Desktop automatically checks for updates and notifies you when an update is available.
-Click **OK** to accept and install updates (or cancel to keep the current
-version). You can manually update by choosing **Check for Updates** from the
-main Docker menu.
-
 * **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
 * **Send usage statistics** - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
-
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
 
 ### Resources
 
@@ -176,7 +165,7 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 > **Note**
 >
-> Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
+> Some users reported problems connecting to Docker Hub on Docker Desktop. This would manifest as an error when trying to run
 `docker` commands that pull images from Docker Hub that are not already
 downloaded, such as a first time run of `docker run hello-world`. If you
 encounter this, reset the DNS server to use the Google DNS fixed address:
@@ -214,12 +203,9 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 On the Command Line page, you can specify whether or not to enable experimental features.
 
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 
 #### Experimental features
-
-Docker Desktop Edge releases have the experimental version
-of Docker Engine enabled by default, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on GitHub.
 
 {% include experimental.md %}
 
