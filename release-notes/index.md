@@ -10,9 +10,7 @@ find release notes for each component in the product manuals section. We suggest
 that you regularly visit the release notes to learn about updates.
 
 - [Docker Engine](/engine/release-notes/)
-- [Docker Desktop for Mac (Stable)](/docker-for-mac/release-notes/)
-- [Docker Desktop for Mac (Edge)](/docker-for-mac/edge-release-notes/)
-- [Docker Desktop for Windows (Stable)](/docker-for-windows/release-notes/)
-- [Docker Desktop for Windows (Edge)](/docker-for-windows/edge-release-notes/)
+- [Docker Desktop for Mac](/docker-for-mac/release-notes/)
+- [Docker Desktop for Windows](/docker-for-windows/release-notes/)
 - [Docker Hub](/docker-hub/release-notes/)
 - [Docker Compose](/compose/release-notes/)

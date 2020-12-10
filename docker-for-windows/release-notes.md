@@ -1,17 +1,54 @@
 ---
-description: Change log / release notes per stable release
-keywords: Docker Desktop for Windows, stable, release notes
+description: Docker Desktop for Windows Release notes
+keywords: Docker Desktop for Windows, release notes
 redirect_from:
 - /winkit/release-notes/
-title: Docker Desktop for Windows Stable Release notes
+- /docker-for-windows/edge-release-notes/
+title: Docker for Windows release notes
 toc_min: 1
 toc_max: 2
 ---
 
-This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
+This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+> **Important**
+>
+> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
+{: .important }
+
+## Docker Desktop Community 3.0.0
+2020-12-10
+
+> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- Use of three-digit version number for Docker Desktop releases.
+- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
+- First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
+
+  - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`
+  - Supports basic volumes, bind mounts, networks, and environment variables
+
+    Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli/issues){: target="blank" rel="noopener" class=“”} GitHub repository.
+- [Docker Hub Tool v0.2.0](https://github.com/docker/roadmap/issues/117){: target="blank" rel="noopener" class=“”}
+
+### Upgrades
+
+- [Docker Engine 20.10.0](https://docs.docker.com/engine/release-notes/#20100)
+- [Go 1.15.6](https://github.com/golang/go/issues?q=milestone%3AGo1.15.6+label%3ACherryPickApproved+)
+- [Compose CLI v1.0.4](https://github.com/docker/compose-cli/releases/tag/v1.0.4)
+- [Snyk v1.432.0](https://github.com/snyk/snyk/releases/tag/v1.432.0)
+
+### Bug fixes and minor changes
+
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+
+### Known issues
+
+- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
 
 ## Docker Desktop Community 2.5.0.1
 2020-11-10

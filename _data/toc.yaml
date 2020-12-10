@@ -1175,9 +1175,7 @@ manuals:
     - path: /docker-for-mac/faqs/
       title: FAQs
     - path: /docker-for-mac/release-notes/
-      title: Stable release notes
-    - path: /docker-for-mac/edge-release-notes/
-      title: Edge release notes
+      title: Release notes
   - sectiontitle: Windows
     section:
     - path: /docker-for-windows/install/
@@ -1195,9 +1193,7 @@ manuals:
     - path: /docker-for-windows/faqs/
       title: FAQs
     - path: /docker-for-windows/release-notes/
-      title: Stable release notes
-    - path: /docker-for-windows/edge-release-notes/
-      title: Edge release notes
+      title: Release notes
     - path: /docker-for-windows/wsl/
       title: Docker Desktop WSL 2 backend
   - path: /desktop/dashboard/

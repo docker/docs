@@ -36,22 +36,9 @@ To learn about the various UI options and their usage, see:
 * [Docker Desktop for Mac user manual](../docker-for-mac/index.md)
 * [Docker Desktop for Windows user manual](../docker-for-windows/index.md)
 
-## Stable and Edge versions
-
-Docker Desktop offers Stable and Edge download channels.
-
-The Stable release provides a general availability release-ready installer for a fully baked and tested, more reliable app. The Stable version of Docker Desktop includes the latest released version of Docker Engine. The release schedule is synced every three months for major releases, with patch releases to fix minor issues, and to stay up to date with Docker Engine as required. You can choose to opt out of the usage statistics and telemetry data on the Stable channel.
-
-Docker Desktop Edge release is our preview version. It offers an installer with the latest features and comes with the experimental features turned on. When using the Edge release, bugs, crashes, and issues can occur as the new features may not be fully tested. However, you get a chance to preview new functionality, experiment, and provide feedback as Docker Desktop evolves. Edge releases are typically more frequent than Stable releases. Telemetry data and usage statistics are sent by default on the Edge version.
-
 ## Release notes
 
-For information about new features, improvements, and bug fixes in Docker Desktop Stable releases, see:
+For information about new features, improvements, and bug fixes in Docker Desktop releases, see:
 
-* [Docker Desktop for Mac Stable Release notes](../docker-for-mac/release-notes.md)
-* [Docker Desktop for Windows Stable Release notes](../docker-for-windows/release-notes.md)
-
-For information about new features, improvements, and bug fixes in Docker Desktop Edge releases, see:
-
-* [Docker Desktop for Mac Edge Release notes](../docker-for-mac/edge-release-notes.md)
-* [Docker Desktop for Windows Edge Release notes](../docker-for-windows/edge-release-notes.md)
+* [Docker Desktop for Mac Release notes](../docker-for-mac/release-notes.md)
+* [Docker Desktop for Windows Release notes](../docker-for-windows/release-notes.md)

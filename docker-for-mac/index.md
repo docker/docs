@@ -25,10 +25,6 @@ Welcome to Docker Desktop! The Docker Desktop for Mac user manual provides infor
 
 For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
 
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/).
-
 ## Preferences
 
 The Docker **Preferences** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
@@ -47,15 +43,11 @@ On the **General** tab, you can configure when to start and update Docker:
 
 - **Start Docker Desktop when you log in**: Automatically starts Docker Desktop when you open your session.
 
-- **Automatically check for updates**: By default, Docker Desktop automatically checks for updates and notifies you when an update is available. You can manually check for updates anytime by choosing **Check for Updates** from the main Docker menu.
-
 - **Include VM in Time Machine backups**: Select this option to back up the Docker Desktop virtual machine. This option is disabled by default.
 
 - **Securely store Docker logins in macOS keychain**: Docker Desktop stores your Docker login credentials in macOS keychain by default.
 
 - **Send usage statistics**: Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
-
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
 
 ### Resources
 
@@ -163,7 +155,7 @@ On the Command Line page, you can specify whether or not to enable experimental 
 
 {% include experimental.md %}
 
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 
 You can see whether you are running experimental mode at the command line. If
 `Experimental` is `true`, then Docker is running in experimental mode, as shown
