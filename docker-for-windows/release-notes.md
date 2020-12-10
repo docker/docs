@@ -19,7 +19,7 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop Community 3.0.0
 2020-12-10
 
-> [Download](ADD URL)
+> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -45,9 +45,10 @@ This page contains information about the new features, improvements, known issue
 - Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
 - Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
 
-### Known issue
+### Known issues
 
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
 
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
