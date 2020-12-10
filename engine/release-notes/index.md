@@ -127,7 +127,7 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 - Support cgroup2 [moby/moby#40174](https://github.com/moby/moby/pull/40174) [moby/moby#40657](https://github.com/moby/moby/pull/40657) [moby/moby#40662](https://github.com/moby/moby/pull/40662)
 - cgroup2: use "systemd" cgroup driver by default when available [moby/moby#40846](https://github.com/moby/moby/pull/40846)
 - new storage driver: fuse-overlayfs [moby/moby#40483](https://github.com/moby/moby/pull/40483)
-- Update containerd binary to v1.4.0 [moby/moby#40982](https://github.com/moby/moby/pull/40982)
+- Update containerd binary to v1.4.3 [moby/moby#41732](https://github.com/moby/moby/pull/41732)
 - `docker push` now defaults to `latest` tag instead of all tags [moby/moby#40302](https://github.com/moby/moby/pull/40302)
 - Added ability to change the number of reconnect attempts during connection loss while pulling an image by adding max-download-attempts to the config file [moby/moby#39949](https://github.com/moby/moby/pull/39949)
 - Add support for containerd v2 shim by using the now default `io.containerd.runc.v2` runtime [moby/moby#41182](https://github.com/moby/moby/pull/41182)
