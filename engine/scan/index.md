@@ -61,7 +61,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--json` | Display the result of the scan in JSON format|
 | `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
 | `--reject-license` | Reject the license agreement of the third-party scanning provider |
-| `--severity string` | Only report vulnerabilities of provided level or higher (low|medium|high) |
+| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
 | `--token string`  | Use the authentication token to log into the third-party scanning provider |
 | `--version` | Display the Docker Scan plugin version |
 
