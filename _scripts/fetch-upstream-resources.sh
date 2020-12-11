@@ -34,10 +34,6 @@ wget --quiet --directory-prefix=./engine/reference/commandline/ "https://raw.git
 wget --quiet --directory-prefix=./engine/reference/commandline/ "https://raw.githubusercontent.com/docker/cli/${ENGINE_BRANCH}/docs/reference/commandline/dockerd.md" || (echo "Failed engine/reference/commandline/dockerd.md download" && exit 1)
 wget --quiet --directory-prefix=./registry/                     "https://raw.githubusercontent.com/docker/distribution/${DISTRIBUTION_BRANCH}/docs/configuration.md"  || (echo "Failed registry/configuration.md download" && exit 1)
 
-# temporarily fetching API v1.41 by copying from the v20.10.0-rc2 tag
-wget --quiet --directory-prefix=./engine/api/                   "https://raw.githubusercontent.com/moby/moby/v20.10.0-rc2/api/swagger.yaml"  || (echo "Failed engine/deprecated.md download" && exit 1)
-mv ./engine/api/swagger.yaml ./engine/api/v1.41.yaml
-
 # Remove things we don't want in the build
 rm -f ./engine/extend/cli_plugins.md # the cli plugins api is not a stable API, and not included in the TOC for that reason.
 rm -f ./registry/spec/api.md.tmpl
