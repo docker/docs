@@ -16,6 +16,20 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+## Docker Desktop Community 3.0.1
+2020-12-11
+
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that caused certain directories not to be mountable into containers. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115)
+
+### Known issues
+
+- Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+
 ## Docker Desktop Community 3.0.0
 2020-12-10
 
@@ -59,7 +73,7 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://desktop.docker.com/mac/stable/49550/Docker.dmg)
 
 ### Upgrades
 
