@@ -93,3 +93,21 @@ any address on the host. If you want to change that behavior to only
 expose ports on an internal IP address, you can use the `--ip` option to
 specify a different IP address. However, setting `--ip` only changes the
 _default_, it does not _restrict_ services to that IP.
+
+## Integration with Firewalld
+
+If you have [firewalld](https://firewalld.org) running on your system and are running Docker (with a version equal to or higher than `v20.10.0`) with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (e.g. `docker0`) into the `docker` zone which allows for seamless networking
+
+**Note**
+If you have in the past manually added a known docker interface such as `docker0` to a `firewalld` zone (such as `trusted`), and are having trouble starting the `dockerd` daemon due to an error similar to
+```
+failed to start daemon: Error initializing network controller: Error creating default "bridge" network: Failed to program NAT chain: ZONE_CONFLICT: 'docker0' already bound to a zone
+```
+please consider running the below firewalld command similar to
+```bash
+# Please substitute the appropriate zone and docker interface
+$ firewall-cmd --zone=trusted --remove-interface=docker0 --permanent
+$ firewall-cmd --reload
+```
+to remove the docker interface from the zone.
+Restarting `dockerd` daemon will insert the interface into the `docker` zone
