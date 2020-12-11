@@ -96,7 +96,7 @@ _default_, it does not _restrict_ services to that IP.
 
 ## Integration with Firewalld
 
-If you have [firewalld](https://firewalld.org) running on your system and are running Docker (with a version equal to or higher than `v20.10.0`) with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (e.g. `docker0`) into the `docker` zone which allows for seamless networking
+If you are running Docker version 20.10.0 or higher with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} on your system with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (for example, `docker0`) into the `docker` zone to allow seamless networking.
 
 **Note**
 If you have in the past manually added a known docker interface such as `docker0` to a `firewalld` zone (such as `trusted`), and are having trouble starting the `dockerd` daemon due to an error similar to
