@@ -98,16 +98,12 @@ _default_, it does not _restrict_ services to that IP.
 
 If you are running Docker version 20.10.0 or higher with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} on your system with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (for example, `docker0`) into the `docker` zone to allow seamless networking.
 
-**Note**
-If you have in the past manually added a known docker interface such as `docker0` to a `firewalld` zone (such as `trusted`), and are having trouble starting the `dockerd` daemon due to an error similar to
-```
-failed to start daemon: Error initializing network controller: Error creating default "bridge" network: Failed to program NAT chain: ZONE_CONFLICT: 'docker0' already bound to a zone
-```
-please consider running the below firewalld command similar to
+Consider running the following `firewalld` command to remove the docker interface from the zone.
+
 ```bash
 # Please substitute the appropriate zone and docker interface
 $ firewall-cmd --zone=trusted --remove-interface=docker0 --permanent
 $ firewall-cmd --reload
 ```
-to remove the docker interface from the zone.
-Restarting `dockerd` daemon will insert the interface into the `docker` zone
+
+Restarting `dockerd` daemon inserts the interface into the `docker` zone.
