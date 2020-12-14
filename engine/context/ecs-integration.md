@@ -430,7 +430,7 @@ If your AWS account does not have [permissions](https://github.com/docker/ecs-pl
 of an ECS cluster when deploying a Compose application. Otherwise, a
 cluster will be created for the Compose project.
 
-- Use `x-aws-vpc` as a top-level element in your Compose file to set the ARN
+- Use `x-aws-vpc` as a top-level element in your Compose file to set the ID
 of a VPC when deploying a Compose application.
 
 - Use `x-aws-loadbalancer` as a top-level element in your Compose file to set
