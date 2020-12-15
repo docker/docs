@@ -22,6 +22,18 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.1
+2020-12-14
+
+### Builder
+
+- buildkit: updated to [v0.8.1](https://github.com/moby/buildkit/releases/tag/v0.8.1) with various bugfixes [moby/moby#41793](https://github.com/moby/moby/pull/41793)
+
+### Packaging
+
+- Revert a change in the systemd unit that could prevent docker from starting due to a startup order conflict [docker/docker-ce-packaging#514](https://github.com/docker/docker-ce-packaging/pull/514)
+- buildx updated to [v0.5.0](https://github.com/docker/buildx/releases/tag/v0.5.0) [docker/docker-ce-packaging#515](https://github.com/docker/docker-ce-packaging/pull/515)
+
 ## 20.10.0
 2020-12-08
 
