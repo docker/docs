@@ -11,6 +11,10 @@ exclude: ["_scripts", "404.html", "index.html"]
 google_analytics: GTM-WL2QLG5
 polldaddy_id:     8453675
 
+# Optimizely script
+<script src="https://cdn-pci.optimizely.com/js/19408130739.js"></script>
+
+
 # Enable search autocompletion (requires metadata.json to be generated)
 local_search: true
 
