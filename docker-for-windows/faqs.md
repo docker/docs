@@ -170,15 +170,14 @@ response.
 
 ### How can I opt out of sending my usage data?
 
-If you do not want to send usage data, use the Stable channel. For more
-information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-releases).
+If you do not want to send the usage data, from the Docker menu, go to **Settings** > **General** and then clear the **Send usage statistics** box.
 
 ### How is personal data handled in Docker Desktop?
 
 When uploading diagnostics to help Docker with investigating issues, the
 uploaded diagnostics bundle may contain personal data such as usernames and IP
 addresses. The diagnostics bundles are only accessible to Docker, Inc. employees
-who are directly involved in diagnosing Docker Desktop issues. 
+who are directly involved in diagnosing Docker Desktop issues.
 
 By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days unless they are referenced in an open issue on the
 [docker/for-mac](https://github.com/docker/for-mac/issues) or
