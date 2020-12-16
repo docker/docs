@@ -59,7 +59,7 @@ On Docker Desktop, clients can connect to the Docker Engine through a Unix
 socket: `unix:///var/run/docker.sock`.
 
 See also [Docker Engine API](../engine/api/index.md) and Docker Desktop for Mac forums topic
-[Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" rel="noopener" class="_"}.
+[Using pycharm Docker plugin](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" rel="noopener" class="_"}.
 
 If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" rel="noopener" class="_"}
 that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
@@ -140,7 +140,7 @@ functionality you'd like to see added.
 
 ### What if I have problems or questions?
 
-You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](troubleshoot) topic.
+You can find information about diagnosing and troubleshooting common issues in the [Logs and Troubleshooting](../troubleshoot) topic.
 
 If you do not find a solution in Troubleshooting, browse issues on
 [Docker Desktop for Mac issues on GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} or create a new one. You can also create new issues based on diagnostics. To learn more, see
@@ -153,15 +153,14 @@ response.
 
 ### How can I opt out of sending my usage data?
 
-If you do not want to send of usage data, use the Stable channel. For more
-information, see [What is the difference between the Stable and Edge versions of Docker Desktop](#stable-and-edge-releases).
+If you do not want to send the usage data, go to **Preferences** > **General** and then clear the **Send usage statistics** box.
 
 ### How is personal data handled in Docker Desktop?
 
 When uploading diagnostics to help Docker with investigating issues, the
 uploaded diagnostics bundle may contain personal data such as usernames and IP
 addresses. The diagnostics bundles are only accessible to Docker, Inc. employees
-who are directly involved in diagnosing Docker Desktop issues. 
+who are directly involved in diagnosing Docker Desktop issues.
 
 By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days unless they are referenced in an open issue on the
 [docker/for-mac](https://github.com/docker/for-mac/issues) or
