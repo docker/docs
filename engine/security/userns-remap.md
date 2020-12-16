@@ -28,7 +28,7 @@ testuser:231072:65536
 
 This means that `testuser` is assigned a subordinate user ID range of `231072`
 and the next 65536 integers in sequence. UID `231072` is mapped within the
-namespace (within the container, in this case) as UID `0` (`root`). UID `231073`
+namespace (within the container, in this case) as UID `0` (`root`). UID `231072`
 is mapped as UID `1`, and so forth. If a process attempts to escalate privilege
 outside of the namespace, the process is running as an unprivileged high-number
 UID on the host, which does not even map to a real user. This means the process
