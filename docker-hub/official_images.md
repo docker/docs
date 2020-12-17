@@ -24,7 +24,7 @@ designed to:
   authors.
 
 * Ensure that security updates are applied in a timely manner. This is
-  particularly important as many Official Images are some of the most
+  particularly important as Official Images are some of the most
   popular on Docker Hub.
 
 Docker, Inc. sponsors a dedicated team that is responsible for reviewing and
@@ -34,17 +34,21 @@ broader Docker community.
 
 While it is preferable to have upstream software authors maintaining their
 corresponding Official Images, this is not a strict requirement. Creating
-and maintaining images for Official Images is a public process. It takes
+and maintaining images for Official Images is a collaborative process. It takes
 place openly on GitHub where participation is encouraged. Anyone can provide
 feedback, contribute code, suggest process changes, or even propose a new
 Official Image.
 
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+
 ## When to use Official Images
 
-New Docker users are encouraged to use the Official Images in their
+If you are new to Docker, we recommend that you use the Official Images in your
 projects. These images have clear documentation, promote best practices,
-and are designed for the most common use cases. Advanced users are encouraged to
-review the Official Images as part of their `Dockerfile` learning process.
+and are designed for the most common use cases. Advanced users can
+review the Official Images as part of your `Dockerfile` learning process.
 
 A common rationale for diverging from Official Images is to optimize for
 image size. For instance, many of the programming language stack images contain

@@ -1176,6 +1176,8 @@ manuals:
       title: FAQs
     - path: /docker-for-mac/release-notes/
       title: Release notes
+    - path: /docker-for-mac/apple-m1/
+      title: Apple M1 Tech Preview
   - sectiontitle: Windows
     section:
     - path: /docker-for-windows/install/
