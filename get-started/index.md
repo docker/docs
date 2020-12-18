@@ -57,13 +57,13 @@ redirect_from:
 
 Welcome! We are excited that you want to learn Docker.
 
-This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from Dockercon 2020.
+This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from DockerCon 2020.
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 In this tutorial, you'll learn about creating and deploying Docker apps, including using multiple containers with a database, and using Docker Compose. You'll also deploy your containerized app to Azure.
 
-
-## Start the tutorial 
+## Start the tutorial
 
 If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
 
