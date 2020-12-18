@@ -4,7 +4,7 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, containe
 description: Making our lives easier with Compose for our application
 ---
 
-[Docker Compose](https://docs.docker.com/compose/) is a tool that was developed to help define and
+[Docker Compose](/compose/) is a tool that was developed to help define and
 share multi-container applications. With Compose, we can create a YAML file to define the services
 and with a single command, can spin everything up or tear it all down. 
 
@@ -20,7 +20,7 @@ So, how do we get started?
 If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose!
 Play-with-Docker instances already have Docker Compose installed as well. If you are on 
 a Linux machine, you will need to install Docker Compose using 
-[the instructions here](https://docs.docker.com/compose/install/). 
+[the instructions here](/compose/install/). 
 
 After installation, you should be able to run the following and see version information.
 
@@ -344,11 +344,12 @@ quickly see what container is our app and which container is the mysql database.
 When you're ready to tear it all down, simply run `docker-compose down` or hit the trash can on the Docker Dashboard 
 for the entire app. The containers will stop and the network will be removed.
 
-!!! warning "Removing Volumes"
-    By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
-    remove the volumes, you will need to add the `--volumes` flag.
-
-    The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+>**Warning** 
+>Removing Volumes
+>By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
+>remove the volumes, you will need to add the `--volumes` flag.
+>
+>The Docker Dashboard does _not_ remove volumes when you delete the app stack.
 
 Once torn down, you can switch to another project, run `docker-compose up` and be ready to contribute to that project! It really
 doesn't get much simpler than that!

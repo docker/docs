@@ -1,6 +1,7 @@
 ---
 title: "Image building tips"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+description: Tips for building the images for our application
 ---
 ## Security Scanning
 
@@ -117,7 +118,7 @@ a change to the `package.json`. Make sense?
 
 1. Update the Dockerfile to copy in the `package.json` first, install dependencies, and then copy everything else in.
 
-    ```dockerfile hl_lines="3 4 5"
+    ```dockerfile
     FROM node:12-alpine
     WORKDIR /app
     COPY package.json yarn.lock ./
@@ -186,7 +187,7 @@ a change to the `package.json`. Make sense?
 
 1. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
 
-    ```plaintext hl_lines="5 8 11"
+    ```plaintext
     Sending build context to Docker daemon  219.1kB
     Step 1/6 : FROM node:12-alpine
     ---> b0dc3a5e5e9e

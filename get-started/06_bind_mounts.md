@@ -1,6 +1,7 @@
 ---
 title: "Using bind mounts"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+description: Using bind mounts in our application
 ---
 
 In the previous chapter, we talked about and used a **named volume** to persist the data in our database.

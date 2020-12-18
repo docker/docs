@@ -28,4 +28,4 @@ and the entire [CNCF Landscape here](https://landscape.cncf.io/). There are a LO
 solve problems around monitoring, logging, security, image registries, messaging, and more!
 
 So, if you're new to the container landscape and cloud-native application development, welcome! Please
-connect to the community, ask questions, and keep learning! We're excited to have you!
+connect with the community, ask questions, and keep learning! We're excited to have you!

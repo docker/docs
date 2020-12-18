@@ -67,7 +67,7 @@ With the previous experiment, we saw that each container starts from the image d
 While containers can create, update, and delete files, those changes are lost when the container is removed 
 and all changes are isolated to that container. With volumes, we can change all of this.
 
-[Volumes](https://docs.docker.com/storage/volumes/) provide the ability to connect specific filesystem paths of 
+[Volumes](/storage/volumes/) provide the ability to connect specific filesystem paths of 
 the container back to the host machine. If a directory in the container is mounted, changes in that
 directory are also seen on the host machine. If we mount that same directory across container restarts, we'd see
 the same files.

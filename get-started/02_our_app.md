@@ -23,8 +23,7 @@ Before we can run the application, we need to get the application source code on
 our machine. For real projects, you will typically clone the repo. But, for this tutorial,
 we have created a ZIP file containing the application.
 
-1. [Download the ZIP](/assets/app.zip). Open the ZIP file and make sure you extract the
-    contents.
+1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app). You can either pull the entire project or download it as a zip and extract the app folder out to get started with
 
 1. Once extracted, use your favorite code editor to open the project. If you're in need of
     an editor, you can use [Visual Studio Code](https://code.visualstudio.com/). You should

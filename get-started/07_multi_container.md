@@ -1,6 +1,7 @@
 ---
 title: "Multi container apps"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+description: Using more than one container in our application
 ---
 Up to this point, we have been working with single container apps. But, we now want to add MySQL to the
 application stack. The following question often arises - "Where will MySQL run? Install it in the same
@@ -164,7 +165,8 @@ The todo app supports the setting of a few environment variables to specify MySQ
 - `MYSQL_PASSWORD` - the password to use for the connection
 - `MYSQL_DB` - the database to use once connected
 
->**warning** Setting Connection Settings via Env Vars
+>**warning** 
+>Setting Connection Settings via Env Vars
 >While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
 >when running applications in production. Diogo Monica, the former lead of security at Docker, 
 >[wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)
@@ -183,7 +185,6 @@ With all of that explained, let's start our dev-ready container!
 
 1. We'll specify each of the environment variables above, as well as connect the container to our app network.
 
-    ```bash hl_lines="3 4 5 6 7"
     docker run -dp 3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \
@@ -197,7 +198,7 @@ With all of that explained, let's start our dev-ready container!
 
     If you are using PowerShell then use this command.
 
-    ```powershell hl_lines="3 4 5 6 7"
+    ```powershell
     docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
@@ -212,7 +213,7 @@ With all of that explained, let's start our dev-ready container!
 1. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
    using the mysql database.
 
-    ```plaintext hl_lines="7"
+    ```
     # Previous log messages omitted
     $ nodemon src/index.js
     [nodemon] 1.19.2

@@ -74,7 +74,7 @@ ways that we can remove the old container. Feel free to choose the path that you
     docker rm <the-container-id>
     ```
 
->**Pro tip**
+>**Note**
 >
 >You can stop and remove a container in a single command by adding the "force" flag
 >to the `docker rm` command. For example: `docker rm -f <the-container-id>`
