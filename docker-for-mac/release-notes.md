@@ -26,7 +26,7 @@ This page contains information about the new features, improvements, known issue
 - Avoid timeouts during `docker-compose up` by making cache invalidation faster. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
 - Avoid generating a spurious filesystem DELETE event while invalidating caches. Fixes [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
 - It is now possible to share directories in `~/Library` (except Docker Desktop data directories) with a container. Fixes [docker/for-mac#5115](https://github.com/docker/for-mac/issues/5115).
-- You will get a performance warning popup if you create a container that share home or user Library directory.
+- You will now see a performance warning pop-up message if you create a container that shares the `Home` or  a user `Library` directory.
 
 ### Known issues
 
