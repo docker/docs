@@ -33,7 +33,7 @@ so they can be run together in an isolated environment.
 A `docker-compose.yml` looks like this:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{ site.compose_file_v3 }}"  # optional since v1.27.0
 services:
   web:
     build: .
