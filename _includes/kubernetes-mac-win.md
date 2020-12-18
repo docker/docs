@@ -63,8 +63,13 @@ Kubernetes.
 
 ## Use Docker commands
 
-You can deploy a stack on Kubernetes with `docker stack deploy`, the
-`docker-compose.yml` file, and the name of the stack.
+To ensure that the docker stack commands are available on your installation, try
+`docker stack ls`.  If you see the message `failed to find a Stack API version`
+then the commands described on this page are not available.  This can be confirmed
+with `docker version` which should contain the line `StackAPI: Unknown`.
+
+If docker stack commands are working then you can deploy a stack on Kubernetes with
+`docker stack deploy`, the `docker-compose.yml` file, and the name of the stack.
 
 ```bash
 docker stack deploy --compose-file /path/to/docker-compose.yml mystack
