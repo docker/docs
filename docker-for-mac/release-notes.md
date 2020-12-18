@@ -35,7 +35,7 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop Community 3.0.1
 2020-12-11
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
 
 ### Bug fixes and minor changes
 
