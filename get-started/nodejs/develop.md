@@ -18,7 +18,7 @@ In this module, we’ll walk through setting up a local development environment 
 
 First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
 
-Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service. We can use the Docker Official Image for MongoDB and run it in a container.
+Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
 
 Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. I like to use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
 
