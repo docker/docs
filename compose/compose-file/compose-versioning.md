@@ -11,7 +11,8 @@ The Compose file formats are now described in these references, specific to each
 
 | **Reference file**                                    | **What changed in this version** |
 |:------------------------------------------------------|:---------------------------------|
-| [Version 3](index.md) (most current, and recommended) | [Version 3 updates](#version-3)  |
+| [Compose Specification](index.md) (most current, and recommended) | [Versioning](compose-versioning.md#versioning)  |
+| [Version 3](compose-file-v3.md)                       | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
 | [Version 1](compose-file-v1.md)                       | [Version 1 updates](#version-1)  |
 
@@ -41,16 +42,16 @@ For details on versions and how to upgrade, see
 
 ## Versioning
 
-There are currently three versions of the Compose file format:
+There are three legacy versions of the Compose file format:
 
-- Version 1, the legacy format. This is specified by
-omitting a `version` key at the root of the YAML.
+- Version 1. This is specified by omitting a `version` key at the root of the YAML.
 
 - Version 2.x. This is specified with a `version: '2'` or `version: '2.1'`, etc., entry at the root of the YAML.
 
-- Version 3.x, the latest and recommended version, designed to
-be cross-compatible between Compose and the Docker Engine's
+- Version 3.x, designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
+
+The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). This format merges the 2.x and 3.x versions and is implemented by **Compose 1.27.0+**.
 
 > ### v2 and v3 Declaration
 >
@@ -538,7 +539,7 @@ flag with the `config` command.
 
 
 ## Compose file format references
-
-- [Compose file version 3](index.md)
+- [Compose Specification](index.md)
+- [Compose file version 3](compose-file-v3.md)
 - [Compose file version 2](compose-file-v2.md)
 - [Compose file version 1](compose-file-v1.md)
