@@ -72,7 +72,7 @@ Now we can build our image.
 $ docker build --tag node-docker .
 ```
 
-Now let’s run our container. But this time we’ll need to set the CONNECTIONSTRING environment variable so our application knows what connection string to use to access the database. We’ll do this right in the docker run command.
+Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
 
 ```shell
 $ docker run \
