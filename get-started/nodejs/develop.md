@@ -29,7 +29,7 @@ $ docker volume create mongodb
 $ docker volume create mongodb_config
 ```
 
-Now we’ll create a network that our application and database will use to talk with each other. The network is called a user defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
+Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
 
 ```shell
 $ docker network create mongodb
