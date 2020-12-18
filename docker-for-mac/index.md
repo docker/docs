@@ -94,11 +94,20 @@ File share settings are:
 
 > Tips on shared folders, permissions, and volume mounts
 >
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
  * Shared folders are designed to allow application code to be edited 
  on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much 
  better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
  (named volume) or [data container](../storage/volumes.md).
+>
+ * If you share the whole of your home directory into a container, MacOS may
+ prompt you to give Docker access to personal areas of your home directory such as
+ your Reminders or Downloads.
 >
  * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
  On Linux, it is possible to create 2 separate files: `test` and `Test`, 
