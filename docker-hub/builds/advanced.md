@@ -54,6 +54,8 @@ repository at the same directory level as your Dockerfile. Create a file called
 `hooks/build`, `hooks/test`, or `hooks/push` and include commands that the
 builder process can execute, such as `docker` and `bash` commands (prefixed appropriately with `#!/bin/bash`).
 
+These hooks will be running in [Linux](https://aws.amazon.com/es/amazon-linux-ami/), a distro based on Ubuntu, which includes interpreters such as Perl and Python and utilities such as `jq`, `git` or `curl`. Please check the link above for the full list.
+
 ## Custom build phase hooks
 
 You can run custom commands between phases of the build process by creating
