@@ -983,6 +983,8 @@ reference:
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/
+      title: Compose Specification
+    - path: /compose/compose-file/compose-file-v3/
       title: Version 3
     - path: /compose/compose-file/compose-file-v2/
       title: Version 2
