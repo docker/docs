@@ -184,7 +184,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 With all of that explained, let's start our dev-ready container!
 
 1. We'll specify each of the environment variables above, as well as connect the container to our app network.
-
+    ```bash
     docker run -dp 3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \
