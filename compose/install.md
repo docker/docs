@@ -271,7 +271,6 @@ pip uninstall docker-compose
 ## Where to go next
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
