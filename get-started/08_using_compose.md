@@ -43,7 +43,7 @@ docker-compose version
 
 1. Next, we'll define the list of services (or containers) we want to run as part of our application.
 
-    ```yaml hl_lines="3"
+    ```yaml
     version: "3.7"
 
     services:
@@ -85,9 +85,9 @@ docker run -dp 3000:3000 `
 1. First, let's define the service entry and the image for the container. We can pick any name for the service. 
    The name will automatically become a network alias, which will be useful when defining our MySQL service.
 
-    ```yaml hl_lines="4 5"
+    ```yaml
     version: "3.7"
-
+    
     services:
       app:
         image: node:12-alpine
@@ -96,7 +96,7 @@ docker run -dp 3000:3000 `
 1. Typically, you will see the command close to the `image` definition, although there is no requirement on ordering.
    So, let's go ahead and move that into our file.
 
-    ```yaml hl_lines="6"
+    ```yaml
     version: "3.7"
 
     services:
@@ -110,7 +110,7 @@ docker run -dp 3000:3000 `
    [short syntax](https://docs.docker.com/compose/compose-file/#short-syntax-1) here, but there is also a more verbose 
    [long syntax](https://docs.docker.com/compose/compose-file/#long-syntax-1) available as well.
 
-    ```yaml hl_lines="7 8"
+    ```yaml
     version: "3.7"
 
     services:
@@ -126,7 +126,7 @@ docker run -dp 3000:3000 `
 
     One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.
 
-    ```yaml hl_lines="9 10 11"
+    ```yaml
     version: "3.7"
 
     services:
@@ -142,7 +142,7 @@ docker run -dp 3000:3000 `
 
 1. Finally, we need to migrate the environment variable definitions using the `environment` key.
 
-    ```yaml hl_lines="12 13 14 15 16"
+    ```yaml
     version: "3.7"
 
     services:
@@ -189,7 +189,7 @@ docker run -d `
 1. We will first define the new service and name it `mysql` so it automatically gets the network alias. We'll
    go ahead and specify the image to use as well.
 
-    ```yaml hl_lines="6 7"
+    ```yaml
     version: "3.7"
 
     services:
@@ -204,7 +204,7 @@ docker run -d `
    `volumes:` section and then specify the mountpoint in the service config. By simply providing only the volume name,
    the default options are used. There are [many more options available](https://docs.docker.com/compose/compose-file/#volume-configuration-reference) though.
 
-    ```yaml hl_lines="8 9 10 11 12"
+    ```yaml
     version: "3.7"
 
     services:
@@ -221,7 +221,7 @@ docker run -d `
 
 1. Finally, we only need to specify the environment variables.
 
-    ```yaml hl_lines="10 11 12"
+    ```yaml
     version: "3.7"
 
     services:
