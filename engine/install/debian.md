@@ -93,7 +93,16 @@ from the repository.
     ```bash
     $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
     ```
-
+    Newer versions of Debian have deprecated using `apt-key` like this. If you 
+    are receiving the following error:
+    ```
+    Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+    ```
+    then you can avoid it by using the following instead:
+    ```
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key --keyring /etc/apt/trusted.gpg.d/docker-apt-key.gpg add -
+    ```
+    
     Verify that you now have the key with the fingerprint
     `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`, by searching for the
     last 8 characters of the fingerprint.
