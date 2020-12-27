@@ -99,20 +99,7 @@ from the repository.
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
-    ```
-
-    Verify that you now have the key with the fingerprint
-    <span><code>9DC8 5822 9FC7 DD38 854A&nbsp;&nbsp;E2D8 8D81 803C 0EBF CD88</code></span>, by searching for the
-    last 8 characters of the fingerprint.
-
-    ```bash
-    $ sudo apt-key fingerprint 0EBFCD88
-
-    pub   rsa4096 2017-02-22 [SCEA]
-          9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-    uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
-    sub   rsa4096 2017-02-22 [S]
+    $ curl -fsSL {{ download-url-base }}/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/docker-ce-archive-keyring.gpg > /dev/null
     ```
 
 3.  Use the following command to set up the **stable** repository. To add the
@@ -136,7 +123,7 @@ from the repository.
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=amd64] {{ download-url-base }} \
+       "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -146,7 +133,7 @@ from the repository.
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=armhf] {{ download-url-base }} \
+       "deb [arch=armhf signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -156,7 +143,7 @@ from the repository.
 
     ```bash
     $ sudo add-apt-repository \
-       "deb [arch=arm64] {{ download-url-base }} \
+       "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
