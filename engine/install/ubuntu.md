@@ -78,7 +78,7 @@ Before you install Docker Engine for the first time on a new host machine, you n
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 
-#### Set up the repository
+#### (A) Set up the repository
 
 {% assign download-url-base = "https://download.docker.com/linux/ubuntu" %}
 
@@ -164,7 +164,7 @@ from the repository.
     </div>
     </div> <!-- tab-content -->
 
-#### Install Docker Engine
+#### (B) Install Docker Engine
 
 1. Update the `apt` package index, and install the _latest version_ of Docker
    Engine and containerd, or go to the next step to install a specific version:
