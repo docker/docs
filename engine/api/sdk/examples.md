@@ -102,7 +102,7 @@ func main() {
 ```python
 import docker
 client = docker.from_env()
-print client.containers.run("alpine", ["echo", "hello", "world"])
+print  (client.containers.run("alpine", ["echo", "hello", "world"]))
 ```
 
 </div>
@@ -278,7 +278,7 @@ func main() {
 import docker
 client = docker.from_env()
 for container in client.containers.list():
-  print container.id
+  print (container.id)
 ```
 
 </div>
@@ -435,7 +435,7 @@ func main() {
 import docker
 client = docker.from_env()
 container = client.containers.get('f1064a8a4c82')
-print container.logs()
+print (container.logs())
 ```
 
 </div>
@@ -504,7 +504,7 @@ func main() {
 import docker
 client = docker.from_env()
 for image in client.images.list():
-  print image.id
+  print (image.id)
 ```
 
 </div>
@@ -575,7 +575,7 @@ func main() {
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print (image.id)
 ```
 
 </div>
@@ -668,7 +668,7 @@ uses these credentials automatically.
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print (image.id)
 ```
 
 </div>
