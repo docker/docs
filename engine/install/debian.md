@@ -115,30 +115,27 @@ from the repository.
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    $ echo \
+      "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list > /dev/null
     ```
 
     </div>
     <div id="armhf_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=armhf signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    $ echo \
+      "deb [arch=armhf signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list > /dev/null
     ```
 
     </div>
     <div id="arm64_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    $ echo \
+      "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list > /dev/null
     ```
 
     </div>
