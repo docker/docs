@@ -50,9 +50,8 @@ basic `docker` commands, so you must include a similar build, test or push
 command in the hook or your automated process does not complete.
 
 To override these phases, create a folder called `hooks` in your source code
-repository at the same directory level as your Dockerfile. Create a file called
-`hooks/build`, `hooks/test`, or `hooks/push` and include commands that the
-builder process can execute, such as `docker` and `bash` commands (prefixed appropriately with `#!/bin/bash`).
+repository at the same directory level as your Dockerfile. Create a script called
+`hooks/build`, `hooks/test`, or `hooks/push` and give it execution privileges. This can be a shell, Perl or Python script, or anything that can be executed by the Linux based runner.
 
 ## Custom build phase hooks
 
@@ -64,7 +63,7 @@ Create a folder called `hooks` in your source code repository at the same
 directory level as your Dockerfile. Place files that define the hooks in that
 folder. Hook files can include both `docker` commands, and `bash` commands as long as they are prefixed appropriately with `#!/bin/bash`. The builder executes the commands in the files before and after each step.
 
-The following hooks are available:
+The following hooks will be run if present:
 
 * `hooks/post_checkout`
 * `hooks/pre_build`
@@ -73,6 +72,8 @@ The following hooks are available:
 * `hooks/post_test`
 * `hooks/pre_push` (only used when executing a build rule or [automated build](index.md) )
 * `hooks/post_push` (only used when executing a build rule or [automated build](index.md) )
+
+A hook will need to return a 0 exit code to let the next ones be executed; a different exit code will stop the build with and will be marked as failed by the system.
 
 ### Build hook examples
 
