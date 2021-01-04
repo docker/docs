@@ -53,7 +53,7 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+> [Download](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
