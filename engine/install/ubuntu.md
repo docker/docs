@@ -92,8 +92,7 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg-agent \
-        software-properties-common
+        gnupg-agent
     ```
 
 2.  Add Docker's official GPG key:
