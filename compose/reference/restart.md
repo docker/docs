@@ -23,4 +23,4 @@ If you are looking to configure a service's restart policy, please refer to
 [restart](../compose-file/compose-file-v3.md#restart) in Compose file v3 and
 [restart](../compose-file/compose-file-v2.md#restart) in Compose v2. Note that if
 you are [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md),
-you should use [restart_policy](../compose-file/compose-file-v3/#restart_policy), instead.
+you should use [restart_policy](../compose-file/compose-file-v3.md#restart_policy), instead.
