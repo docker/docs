@@ -81,10 +81,20 @@ guides:
     title: Configure GitHub Actions
 - sectiontitle: Deploy your app to the cloud
   section:
-  - path: /engine/context/aci-integration/
+  - path: /cloud/aci-integration/
     title: Docker and ACI
-  - path: /engine/context/ecs-integration/
+  - path: /cloud/aci-container-features/
+    title: ACI container features
+  - path: /cloud/aci-compose-features/
+    title: ACI Compose features
+  - path: /cloud/ecs-integration/
     title: Docker and ECS
+  - path: /cloud/ecs-architecture/
+    title: Docker ECS integration architecture
+  - path: /cloud/ecs-compose-features/
+    title: ECS Compose features
+  - path: /cloud/ecs-compose-examples/
+    title: ECS Compose examples
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Orchestration
