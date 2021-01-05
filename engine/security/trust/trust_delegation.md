@@ -396,7 +396,7 @@ targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075
 2) Remove from the `targets/releases` delegation
 
 ```bash
-$ notary delegation remove registry.example.com/admin/demo targets/targets 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
+$ notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 
 Auto-publishing changes to registry.example.com/admin/demo
 Enter username: admin

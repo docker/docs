@@ -2,6 +2,8 @@
 title: Deploying Docker containers on ECS
 description: Deploying Docker containers on ECS
 keywords: Docker, AWS, ECS, Integration, context, Compose, cli, deploy, containers, cloud
+redirect_from:
+  - /engine/context/ecs-integration/
 toc_min: 1
 toc_max: 2
 ---
@@ -14,6 +16,8 @@ The integration between Docker and Amazon ECS allows developers to use the Docke
 
 * Set up an AWS context in one Docker command, allowing you to switch from a local context to a cloud context and run applications quickly and easily
 * Simplify multi-container application development on Amazon ECS using Compose files
+
+Also see the [ECS integration architecture](ecs-architecture.md), [full list of compose features](ecs-compose-features.md) and [Compose examples for ECS integration](ecs-compose-examples.md).
 
 ## Prerequisites
 
@@ -37,11 +41,9 @@ contain instructions on how to deploy your Compose application on Amazon ECS.
 
 ### Requirements
 
-AWS uses a fine-grained permission model, with specific role for each resource type and operation. 
+AWS uses a fine-grained permission model, with specific role for each resource type and operation.
 
-To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you 
-
-have to ensure your AWS credentials grant access to following AWS IAM permissions:
+To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you have to ensure your AWS credentials [grant access to following AWS IAM permissions](https://aws.amazon.com/iam/features/manage-permissions/):
 
 * cloudformation:*
 * ecs:ListAccountSettings
@@ -69,7 +71,7 @@ have to ensure your AWS credentials grant access to following AWS IAM permission
 * route53:GetHostedZone
 * route53:ListHostedZonesByName
 
-GPU support, which relies on EC2 instances to run containers with attached GPU devices, 
+GPU support, which relies on EC2 instances to run containers with attached GPU devices,
 require a few additional permissions:
 
 * ec2:DescribeVpcs
@@ -79,14 +81,13 @@ require a few additional permissions:
 * iam:RemoveRoleFromInstanceProfile
 * iam:DeleteInstanceProfile
 
-
 ### Create AWS context
 
 Run the `docker context create ecs myecscontext` command to create an Amazon ECS Docker
 context named `myecscontext`. If you have already installed and configured the AWS CLI,
 the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
-[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}. 
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}.
 Finally, you can configure your ECS context to retrieve AWS credentials by `AWS_*` environment variables, which is a common way to integrate with
 third-party tools and single-sign-on providers.
 
@@ -101,7 +102,7 @@ After you have created an AWS context, you can list your Docker contexts by runn
 
 ```console
 NAME                TYPE                DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT   ORCHESTRATOR
-myecscontext        ecs                 credentials read from environment                                                             
+myecscontext        ecs                 credentials read from environment
 default *           moby                Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                         swarm
 ```
 
@@ -124,8 +125,8 @@ stop a full Compose application.
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
 Docker ECS integration converts the Compose application model into a set of AWS resources, described as a [CloudFormation](https://aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} template. The actual mapping is described in [technical documentation](https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md){: target="_blank" rel="noopener" class="_"}.
-You can review the generated template using `docker compose convert` command, and follow CloudFormation applying this model within 
-[AWS web console](https://console.aws.amazon.com/cloudformation/home){: target="_blank" rel="noopener" class="_"} when you run `docker compose up`, in addition to CloudFormation events being displayed 
+You can review the generated template using `docker compose convert` command, and follow CloudFormation applying this model within
+[AWS web console](https://console.aws.amazon.com/cloudformation/home){: target="_blank" rel="noopener" class="_"} when you run `docker compose up`, in addition to CloudFormation events being displayed
 in your terminal.
 
 - You can view services created for the Compose application on Amazon ECS and
@@ -134,6 +135,7 @@ their state using the `docker compose ps` command.
 - You can view logs from containers that are part of the Compose application
 using the `docker compose logs` command.
 
+Also see the [full list of compose features](ecs-compose-features.md).
 
 ## Rolling update
 
@@ -426,11 +428,11 @@ services:
 
 If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 
-- Use `x-aws-cluster` as a top-level element in your Compose file to set the ARN
+- Use `x-aws-cluster` as a top-level element in your Compose file to set the ID
 of an ECS cluster when deploying a Compose application. Otherwise, a
 cluster will be created for the Compose project.
 
-- Use `x-aws-vpc` as a top-level element in your Compose file to set the ID
+- Use `x-aws-vpc` as a top-level element in your Compose file to set the ARN
 of a VPC when deploying a Compose application.
 
 - Use `x-aws-loadbalancer` as a top-level element in your Compose file to set
@@ -442,14 +444,14 @@ use an existing domain name for your application:
 1. Use the AWS web console or CLI to get your VPC and Subnets IDs. You can retrieve the default VPC ID and attached subnets using this AWS CLI commands:
 
 ```console
-$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId' 
+$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
 
 "vpc-123456"
 $ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
 
 [
-    "subnet-1234abcd", 
-    "subnet-6789ef00", 
+    "subnet-1234abcd",
+    "subnet-6789ef00",
 ]
 ```
 1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
@@ -460,11 +462,11 @@ $ aws elbv2 create-load-balancer --name myloadbalancer --type application --subn
 {
     "LoadBalancers": [
         {
-            "IpAddressType": "ipv4", 
-            "VpcId": "vpc-123456", 
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456", 
-            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com", 
-...            
+            "IpAddressType": "ipv4",
+            "VpcId": "vpc-123456",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
+            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
+...
 ```
 1. To assign your application an existing domain name, you can configure your DNS with a
 CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.

@@ -6,6 +6,7 @@
 # which are usually set by the Dockerfile.
 : "${ENGINE_BRANCH?No release branch set for docker/docker and docker/cli}"
 : "${DISTRIBUTION_BRANCH?No release branch set for docker/distribution}"
+: "${COMPOSE_CLI_BRANCH?No release branch set for docker/compose-cli}"
 
 # Translate branches for use by svn
 engine_svn_branch="branches/${ENGINE_BRANCH}"
@@ -16,10 +17,15 @@ distribution_svn_branch="branches/${DISTRIBUTION_BRANCH}"
 if [ "${distribution_svn_branch}" = "branches/master" ]; then
 	distribution_svn_branch=trunk
 fi
+compose_cli_svn_branch="branches/${COMPOSE_CLI_BRANCH}"
+if [ "${compose_cli_svn_branch}" = "branches/main" ]; then
+	compose_cli_svn_branch=trunk
+fi
 
 # Directories to get via SVN. We use this because you can't use git to clone just a portion of a repository
 svn co "https://github.com/docker/cli/${engine_svn_branch}/docs/extend"              ./engine/extend || (echo "Failed engine/extend download" && exit 1)
 svn co "https://github.com/docker/docker/${engine_svn_branch}/docs/api"              ./engine/api    || (echo "Failed engine/api download" && exit 1)
+svn co "https://github.com/docker/compose-cli/${compose_cli_svn_branch}/docs"              ./cloud    || (echo "Failed compose-cli/docs download" && exit 1)
 svn co "https://github.com/docker/distribution/${distribution_svn_branch}/docs/spec" ./registry/spec || (echo "Failed registry/spec download" && exit 1)
 svn co "https://github.com/mirantis/compliance/trunk/docs/compliance"                ./compliance    || (echo "Failed docker/compliance download" && exit 1)
 
@@ -37,3 +43,6 @@ wget --quiet --directory-prefix=./registry/                     "https://raw.git
 # Remove things we don't want in the build
 rm -f ./engine/extend/cli_plugins.md # the cli plugins api is not a stable API, and not included in the TOC for that reason.
 rm -f ./registry/spec/api.md.tmpl
+rm -f ./cloud/README.md # readme to make things nice in the compose-cli repo, but meaningless here
+rm -f ./cloud/architecure.md # Compose-CLI architecture, unrelated to cloud integration
+rm -rf ./cloud/images
