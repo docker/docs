@@ -1,6 +1,8 @@
 ---
 title: "Sharing Our Application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop, docker hub, sharing 
+redirect_from:
+- /get-started/part3/
 description: Sharing our image we built for our example application so we can run it else where and other developers can use it
 ---
 
