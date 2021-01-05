@@ -46,16 +46,8 @@ It can be as simple as this to create an Ubuntu parent image:
     DISTRIB_CODENAME=xenial
     DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 
-There are more example scripts for creating parent images in the Docker
-GitHub Repo:
-
- - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static)
- - CentOS / Scientific Linux CERN (SLC) [on Debian/Ubuntu](
-   https://github.com/moby/moby/blob/master/contrib/mkimage/rinse) or
-   [on CentOS/RHEL/SLC/etc.](
-   https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh)
- - [Debian / Ubuntu](
-   https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap)
+There are more example scripts for creating parent images in [the Docker
+GitHub repository](https://github.com/docker/docker/blob/master/contrib).
 
 ## Create a simple parent image using scratch
 
