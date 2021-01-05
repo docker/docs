@@ -25,6 +25,7 @@ redirect_from:
 - /engine/userguide/dockerimages/
 - /engine/userguide/intro/
 - /get-started/part1/
+- /get-started/part5/
 - /get-started/part6/
 - /getstarted/
 - /getting-started/
