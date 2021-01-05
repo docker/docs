@@ -90,7 +90,8 @@ In addition to deploying to Swarm, we have also described our application as a s
 
 Further documentation for all new Swarm objects and CLI commands used in this article are available here:
 
- - [Swarm Services](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/)
+ - [Swarm Mode](https://docs.docker.com/engine/swarm/)
+ - [Swarm Mode Services](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/)
  - [Swarm Stacks](https://docs.docker.com/engine/swarm/stack-deploy/)
  - [`docker stack *`](https://docs.docker.com/engine/reference/commandline/stack/)
  - [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)
