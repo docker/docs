@@ -53,7 +53,7 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
 
-> [Download](https://desktop.docker.com/win/stable/49550/Docker%20Desktop%20Installer.exe)
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 
 ### Upgrades
 
@@ -382,7 +382,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Known issues
 
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md/#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
 
   However, if your current setup relies on IP addresses for communication, you can use a temporary workaround to reinstate DockerNAT. To do this, open
 `C:\Program Files\Docker\Docker\resources\MobyLinux.ps1` and add `$SwitchName = "DockerNAT"` between line 175 and 176. Note that the temporary workaround to reinstate DockerNAT may be removed from future releases.
