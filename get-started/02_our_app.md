@@ -1,9 +1,7 @@
 ---
 title: "Our Application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
-redirect_from:
-- /get-started/part2/
-description: overview of our simple application for learning docker
+description: overview of our simple applicaiton for learning docker
 ---
 
 
