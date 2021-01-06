@@ -310,7 +310,7 @@ options:
   value_type: stringArray
   default_value: '[]'
   description: |
-    SSH agent socket or keys to expose to the build (format: default|<id>[=<socket>|<key>[,<key>]])
+    SSH agent socket or keys to expose to the build (format: default|\<id\>[=\<socket\>|\<key\>[,\<key\>]])
   deprecated: false
   experimental: false
   experimentalcli: false
