@@ -345,9 +345,7 @@ When you're ready to tear it all down, simply run `docker-compose down` or hit t
 for the entire app. The containers will stop and the network will be removed.
 
 >**Warning** 
->
 >Removing Volumes
->
 >By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
 >remove the volumes, you will need to add the `--volumes` flag.
 >
