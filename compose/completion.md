@@ -24,7 +24,7 @@ available.
     sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
     ```
 
-#### Mac
+### Mac
 
 ##### Install via Homebrew
 
