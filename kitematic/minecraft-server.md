@@ -36,7 +36,7 @@ Open your Minecraft client, log in with your Minecraft account and click on the
 Click the "Add Server" button to add the Minecraft server you want to connect
 to.
 
-![Add server](images/minecraft-login.png)
+![Add server](images/minecraft-add-server.png)
 
 Fill in the "Server Address" text box with the marked IP and port from Kitematic
 you saw earlier.

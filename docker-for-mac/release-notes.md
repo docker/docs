@@ -16,10 +16,42 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+## Docker Desktop Community 3.0.4
+2021-01-06
+
+> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+
+### Upgrades
+
+- [Docker Engine 20.10.2](https://docs.docker.com/engine/release-notes/#20102)
+
+### Bug fixes and minor changes
+
+- Avoid timeouts during `docker-compose up` by making cache invalidation faster. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
+- Avoid generating a spurious filesystem DELETE event while invalidating caches. Fixes [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
+
+### Known issues
+
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+
+## Docker Desktop Community 3.0.3
+2020-12-21
+
+> [Download](https://desktop.docker.com/mac/stable/51017/Docker.dmg)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that caused overlapping volume mounts to fail. Fixes [docker/for-mac#5157](https://github.com/docker/for-mac/issues/5157). However, the fixes for [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) and [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124) have been reverted as a result of this change, so those issues are now present again.
+
+### Known issues
+
+- Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+- There can be timeouts during docker-compose up if there are several services being started. See [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) and [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
+
 ## Docker Desktop Community 3.0.2
 2020-12-18
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-mac/)
+> [Download](https://desktop.docker.com/mac/stable/50996/Docker.dmg)
 
 ### Bug fixes and minor changes
 
