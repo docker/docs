@@ -35,7 +35,7 @@ guides:
       path: /get-started/03_updating_app/
     - title: "Part 4: Sharing Our Application"
       path: /get-started/04_sharing_app/
-    - title: "Part 5: Persisting our DB"
+    - title: "Part 5: Persiting our DB"
       path: /get-started/05_persisting_data/
     - title: "Part 6: Using Bind Mounts"
       path: /get-started/06_bind_mounts/
