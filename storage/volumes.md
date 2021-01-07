@@ -247,7 +247,7 @@ volumes:
 ```
 
 For more information about using volumes with compose see
-[the compose reference](../compose/compose-file/index.md#volume-configuration-reference).
+[the compose reference](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
 
 ### Start a service with volumes
 
