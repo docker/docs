@@ -188,7 +188,7 @@ default behavior is to keep logs forever.
 
 You can also pass `awslogs` 
 parameters to your container as standard
-Compose file `logging.driver_opts` elements. See [AWS documentation](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html){:target="_blank" rel="noopener" class="_"} for details on available logdriver options.
+Compose file `logging.driver_opts` elements. See [AWS documentation](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html){:target="_blank" rel="noopener" class="_"} for details on available log driver options.
 
 ## Private Docker images
 
