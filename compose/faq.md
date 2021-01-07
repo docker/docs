@@ -15,11 +15,11 @@ Yes - see [Controlling startup order](startup-order.md).
 
 ## Why do my services take 10 seconds to recreate or stop?
 
-Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
+Compose stop attempts to stop a container by sending a `SIGQUIT`. It then waits
 for a [default timeout of 10 seconds](reference/stop.md).  After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it.  If you
 are waiting for this timeout, it means that your containers aren't shutting down
-when they receive the `SIGTERM` signal.
+when they receive the `SIGQUIT` signal.
 
 There has already been a lot written about this problem of
 [processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
@@ -36,7 +36,7 @@ in your Dockerfile.
   worry if you override the command or entrypoint in your Compose file.
 
 * If you are able, modify the application that you're running to
-add an explicit signal handler for `SIGTERM`.
+add an explicit signal handler for `SIGQUIT`.
 
 * Set the `stop_signal` to a signal which the application knows how to handle:
 
@@ -48,7 +48,7 @@ add an explicit signal handler for `SIGTERM`.
 system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
 [tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
-handling `SIGTERM` properly.
+handling `SIGQUIT` properly.
 
 ## How do I run multiple copies of a Compose file on the same host?
 
