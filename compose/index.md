@@ -119,7 +119,7 @@ environment very quickly.
 
 Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.
-See [Variable substitution](compose-file/index.md#variable-substitution) for more
+See [Variable substitution](compose-file/compose-file-v3.md#variable-substitution) for more
 details.
 
 You can extend a Compose file using the `extends` field or by creating multiple

@@ -447,7 +447,7 @@ and CSS only.)
 >For each drop-down, the value for `data-target` and
 `collapse` `id` must match, and id's must be unique per page. In this example,
 we name these `collapseSample1` and `collapseSample2`. Check out the
-[Compose file structure example](compose/compose-file/index.md#compose-file-structure-and-examples)
+[Compose file structure example](compose/compose-file/compose-file-v3.md#compose-file-structure-and-examples)
 to see another example.
 {: .important-vanilla}
 
