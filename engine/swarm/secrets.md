@@ -137,7 +137,7 @@ a similar way, see
 
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](../../compose/compose-file/index.md#secrets) for details.
+[the Compose file reference](../../compose/compose-file/compose-file-v3.md#secrets) for details.
 
 ### Simple example: Get started with secrets
 
@@ -1028,5 +1028,5 @@ Each service uses environment variables to specify where the service should look
 for that secret data.
 
 More information on short and long syntax for secrets can be found at
-[Compose file version 3 reference](../../compose/compose-file/index.md#secrets).
+[Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).
 
