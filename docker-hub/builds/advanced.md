@@ -73,7 +73,7 @@ The following hooks will be run if present:
 * `hooks/pre_push` (only used when executing a build rule or [automated build](index.md) )
 * `hooks/post_push` (only used when executing a build rule or [automated build](index.md) )
 
-A hook will need to return a 0 exit code to let the next ones be executed; a different exit code will stop the build with and will be marked as failed by the system.
+A hook will need to return a 0 exit code to let the next ones be executed; a different exit code will stop the build and will be marked as failed by the system.
 
 ### Build hook examples
 
