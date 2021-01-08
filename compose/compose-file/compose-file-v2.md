@@ -1004,19 +1004,19 @@ Network mode. Use the same values as the docker client `--network` parameter, pl
 the special form `service:[service name]`.
 
 ```yaml
-net: "bridge"
+network_mode: "bridge"
 ```
 ```yaml
-net: "host"
+network_mode: "host"
 ```
 ```yaml
-net: "none"
+network_mode: "none"
 ```
 ```yaml
-net: "service:[service name]"
+network_mode: "service:[service name]"
 ```
 ```yaml
-net: "container:[container name/id]"
+network_mode: "container:[container name/id]"
 ```
 
 ### networks
