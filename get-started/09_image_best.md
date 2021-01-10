@@ -13,6 +13,11 @@ For example, to scan the `getting-started` image you created earlier in the tuto
 ```bash
 docker scan getting-started
 ```
+If you are running Docker Engine Community on Ubuntu 20.04 use 
+
+```bash
+docker inspect getitng-started
+```
 
 The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new
 vulnerabilities are discovered, but it might look something like this:
