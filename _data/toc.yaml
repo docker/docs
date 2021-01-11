@@ -47,18 +47,42 @@ guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
+- sectiontitle: Reference architectures
+  section:
+  - path: /reference-architecture/
+    title: Overview
+  - sectiontitle: Node.js
+    section:
+    - title: "Overview"
+      path: /reference-architecture/nodejs/
+    - title: "Build images"
+      path: /reference-architecture/nodejs/build-images/
+    - title: "Run containers"
+      path: /reference-architecture/nodejs/run-containers/
+    - title: "Develop your app"
+      path: /reference-architecture/nodejs/develop/
+    - title: "Configure CI/CD"
+      path: /reference-architecture/nodejs/configure-ci-cd/
+  - sectiontitle: Python
+    section:
+    - title: "Overview"
+      path: /reference-architecture/python/
+    - title: "Build images"
+      path: /reference-architecture/python/build-images/
+    - title: "Run containers"
+      path: /reference-architecture/python/run-containers/
+    - title: "Develop your app"
+      path: /reference-architecture/python/develop/
+    - title: "Configure CI/CD"
+      path: /reference-architecture/python/configure-ci-cd/
+  - sectiontitle: Java
+    section:
+    - title: "Overview"
+      path: /reference-architecture/java/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
     title: Overview
-  - sectiontitle: Node.js
-    section:
-    - title: "Build images"
-      path: /get-started/nodejs/build-images/
-    - title: "Run containers"
-      path: /get-started/nodejs/run-containers/
-    - title: "Develop"
-      path: /get-started/nodejs/develop/
   - path: /develop/dev-best-practices/
     title: Best practices
   - sectiontitle: Build images
