@@ -58,7 +58,11 @@ redirect_from:
 
 Welcome! We are excited that you want to learn Docker.
 
-This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from DockerCon 2020.
+This page contains step-by-step instructions on how to get started with Docker.
+
+If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](/language).
+
+We also recommend the video walkthrough from DockerCon 2020.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
