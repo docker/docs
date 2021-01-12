@@ -143,6 +143,10 @@ Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 - Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
 - Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
 
+### Security
+
+- Fixed local privilege escalation vulnerability caused by inadequate certificate checking
+
 ### Upgrades
 
 - [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
