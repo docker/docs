@@ -127,16 +127,17 @@ randomly created name. So, you'll most likely have a different name.
 ## What is a container?
 
 Now that you've run a container, what _is_ a container? Simply put, a container is
-simply another process on your machine that has been isolated from all other processes
-on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504), features that have been 
-in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use.
+a sandboxed process on your machine that is isolated from all other processes
+on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
+features that have been in Linux for a long time. Docker has worked to make these
+capabilities approachable and easy to use.
 
 > **Creating containers from scratch**
 >
 > If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
-> has a fantastic talk in which she creates a container from scratch in Go. While she makes
-> a simple container, this talk doesn't go into networking, using images for the filesystem, 
-> and more. But, it gives a _fantastic_ deep dive into how things are working.
+> has a fantastic talk in which she creates a container from scratch in Go. While the talk
+> does not go into networking, using images for the filesystem, and other advanced topics, 
+> it gives a _fantastic_ deep dive into how things are working.
 > 
 > <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
