@@ -126,7 +126,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
   <tr>
     <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
     <td markdown="span">{{ option-default }}</td>
-    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip }}</td>
+    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip | escape }}</td>
   </tr>
 {% endfor %} <!-- end for option -->
 </tbody>
