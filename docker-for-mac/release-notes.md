@@ -24,7 +24,7 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-- Docker daemon now runs within a Debian Buster based container (instead of Alpine)
+- Docker daemon now runs within a Debian Buster based container (instead of Alpine).
 
 ### Upgrades
 
@@ -34,7 +34,7 @@ This page contains information about the new features, improvements, known issue
 
   - Fixed UI reliability issues when users create or delete a lot of objects in batches.
   - Fixed an issue with DNS address resolution in Alpine containers. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
-  - Redesigned Support UI screen to improve usability.
+  - Redesigned the **Support** UI to improve usability.
 
 ## Docker Desktop Community 3.0.4
 2021-01-06
