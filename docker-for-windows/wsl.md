@@ -99,14 +99,15 @@ The following section describes how to start developing your applications using 
 
 ## GPU support
 
-Starting with Docker Desktop 3.1.0, we are supporting WSL2 GPU para-virtualization on Nvidia GPUs. To enable that you need:
-- A machine with an Nvidia GPU
-- The latest Windows Insider version form the Dev preview ring
-- [Beta drivers](https://developer.nvidia.com/cuda/wsl) from Nvidia supporting WSL 2 GPU paravirtualization
-- Update WSL 2 Linux Kernel to the latest version using `wsl --update` from an elevated commmand prompt
-- Make sure WSL 2 backend is enabled in Docker Desktop
+Starting with Docker Desktop 3.1.0, Docker Desktop supports WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs. To enable WSL 2 GPU Paravirtualization, you need:
 
-To validate that everything is in order, you can run the following command to run a short benchmark on your GPU:
+- A machine with an NVIDIA GPU
+- The latest Windows Insider version from the Dev Preview ring
+- [Beta drivers](https://developer.nvidia.com/cuda/wsl){:target="_blank" rel="noopener" class="_"} from NVIDIA supporting WSL 2 GPU Paravirtualization
+- Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated commmand prompt
+- Make sure the WSL 2 backend is enabled in Docker Desktop
+
+To validate that everything works as expected, run the following command to run a short benchmark on your GPU:
 
 ```
 ❯ docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
@@ -122,7 +123,9 @@ Run "nbody -benchmark [-numbodies=<numBodies>]" to measure performance.
         -cpu              (run n-body simulation on the CPU)
         -tipsy=<file.bin> (load a tipsy model file for simulation)
 
-NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+>**Note**
+>
+> The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
 
 > Windowed mode
 > Simulation data stored in video memory
