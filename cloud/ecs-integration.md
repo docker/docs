@@ -421,7 +421,7 @@ be updated or added. It will be merged with the generated template before being 
 
 While ECS cluster uses the `HealthCheck` command on container to get service health, Application Load Balancers define
 their own URL-based HealthCheck mechanism so traffic gets routed. As the Compose model does not offer such an 
-abstraction (yet), the default one is be applied, which queries your service under `/` expecting HTTP status code
+abstraction (yet), the default one is applied, which queries your service under `/` expecting HTTP status code
 `200`.
 
 You can tweak this behavior using a cloudformation overlay by following the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html){:target="_blank" rel="noopener" class="_"} for
