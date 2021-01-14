@@ -16,10 +16,30 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+
+## Docker Desktop Community 3.1.0
+2021-01-14
+
+> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+
+### New
+
+- Docker daemon now runs within a Debian Buster based container (instead of Alpine).
+
+### Upgrades
+
+- [Compose CLI v1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
+
+### Bug fixes and minor changes
+
+  - Fixed UI reliability issues when users create or delete a lot of objects in batches.
+  - Fixed an issue with DNS address resolution in Alpine containers. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
+  - Redesigned the **Support** UI to improve usability.
+
 ## Docker Desktop Community 3.0.4
 2021-01-06
 
-> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
 
 ### Upgrades
 
@@ -142,6 +162,10 @@ Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 
 - Users subscribed to a Pro or a Team plan can now see the vulnerability scan report on the Remote repositories tab in Docker Desktop.
 - Docker Desktop introduces a support option for users who have subscribed to a Pro or a Team Plan.
+
+### Security
+
+- Fixed local privilege escalation vulnerability caused by inadequate certificate checking
 
 ### Upgrades
 
