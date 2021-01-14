@@ -33,8 +33,8 @@ This page contains information about the new features, improvements, known issue
 ### Bug fixes and minor changes
 
 - Fixed an issue where disabling proxy settings would not work. Fixes [#9357](https://github.com/docker/for-win/issues/9357).
-- Fixed a lot of UI reliability issues
-
+- Fixed UI reliability issues when users create or delete a lot of objects in batches.
+- Redesigned Support UI screen to improve usability.
 
 ## Docker Desktop Community 3.0.4
 2021-01-06
