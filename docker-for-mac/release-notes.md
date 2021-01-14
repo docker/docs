@@ -33,7 +33,7 @@ This page contains information about the new features, improvements, known issue
 ### Bug fixes and minor changes
 
   - Fixed UI reliability issues when users create or delete a lot of objects in batches.
-  - Fixed an issue with DNS address resolution in Alpine containers. Fixes [#5020](https://github.com/docker/for-mac/issues/5020).
+  - Fixed an issue with DNS address resolution in Alpine containers. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
   - Redesigned Support UI screen to improve usability.
 
 ## Docker Desktop Community 3.0.4

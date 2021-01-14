@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-- Docker daemon now runs within a Debian Buster based container (instead of Alpine)
 - Add experimental support for GPU workloads with WSL 2 backend (requires Windows Insider developer channel)
+- Docker daemon now runs within a Debian Buster based container (instead of Alpine)
 
 ### Upgrades
 
@@ -32,7 +32,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Bug fixes and minor changes
 
-- Fixed an issue where disabling proxy settings would not work. Fixes [#9357](https://github.com/docker/for-win/issues/9357).
+- Fixed an issue where disabling proxy settings would not work. Fixes [docker/for-win#9357](https://github.com/docker/for-win/issues/9357).
 - Fixed UI reliability issues when users create or delete a lot of objects in batches.
 - Redesigned Support UI screen to improve usability.
 
