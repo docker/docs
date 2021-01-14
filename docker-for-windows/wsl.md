@@ -97,6 +97,47 @@ The following section describes how to start developing your applications using 
     Alternatively, you can type the name of your default Linux distro in your Start menu, open it, and then run `code` .
 3. When you are in VSCode, you can use the terminal in VSCode to pull your code and start working natively from your Windows machine.
 
+## GPU support
+
+Starting with Docker Desktop 3.1.0, Docker Desktop supports WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs. To enable WSL 2 GPU Paravirtualization, you need:
+
+- A machine with an NVIDIA GPU
+- The latest Windows Insider version from the Dev Preview ring
+- [Beta drivers](https://developer.nvidia.com/cuda/wsl){:target="_blank" rel="noopener" class="_"} from NVIDIA supporting WSL 2 GPU Paravirtualization
+- Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated commmand prompt
+- Make sure the WSL 2 backend is enabled in Docker Desktop
+
+To validate that everything works as expected, run the following command to run a short benchmark on your GPU:
+
+```
+❯ docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
+Run "nbody -benchmark [-numbodies=<numBodies>]" to measure performance.
+        -fullscreen       (run n-body simulation in fullscreen mode)
+        -fp64             (use double precision floating point values for simulation)
+        -hostmem          (stores simulation data in host memory)
+        -benchmark        (run benchmark to measure performance)
+        -numbodies=<N>    (number of bodies (>= 1) to run in simulation)
+        -device=<d>       (where d=0,1,2.... for the CUDA device to use)
+        -numdevices=<i>   (where i=(number of CUDA devices > 0) to use for simulation)
+        -compare          (compares simulation results running once on the default GPU and once on the CPU)
+        -cpu              (run n-body simulation on the CPU)
+        -tipsy=<file.bin> (load a tipsy model file for simulation)
+        
+> NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+
+> Windowed mode
+> Simulation data stored in video memory
+> Single precision floating point simulation
+> 1 Devices used for simulation
+MapSMtoCores for SM 7.5 is undefined.  Default to use 64 Cores/SM
+GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
+
+> Compute 7.5 CUDA device: [GeForce RTX 2060 with Max-Q Design]
+30720 bodies, total time for 10 iterations: 69.280 ms
+= 136.219 billion interactions per second
+= 2724.379 single-precision GFLOP/s at 20 flops per interaction
+```
+
 ## Feedback
 
 Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues) repository and adding the **WSL 2** label.
