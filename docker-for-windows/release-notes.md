@@ -16,10 +16,30 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+## Docker Desktop Community 3.1.0
+2021-01-14
+
+> [Download](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- Docker daemon now runs within a Debian Buster based container
+- Add support for GPU workloads with WSL 2 backend (requires Windows Insider developer channel)
+- [Compose-CLI 1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
+
+### Bug fixes and minor changes
+
+- Fixed an issue where disabling proxy settings would not work. Fixes [#9357](https://github.com/docker/for-win/issues/9357) and [#9687](https://github.com/docker/for-win/issues/9687).
+- Fixed a lot of UI reliability issued
+- Fixed an issue with ddev and grpcfuse. Fixes [#5157](https://github.com/docker/for-mac/issues/5157).
+- Avoid timeouts during `docker-compose up` by making cache invalidation faster. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
+- Avoid generating a spurious filesystem DELETE event while invalidating caches. Fixes [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
+
+
 ## Docker Desktop Community 3.0.4
 2021-01-06
 
-> [Download](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
