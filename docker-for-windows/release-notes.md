@@ -24,16 +24,13 @@ This page contains information about the new features, improvements, known issue
 ### Upgrades
 
 - Docker daemon now runs within a Debian Buster based container
-- Add support for GPU workloads with WSL 2 backend (requires Windows Insider developer channel)
+- Add experimental support for GPU workloads with WSL 2 backend (requires Windows Insider developer channel)
 - [Compose-CLI 1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
 
 ### Bug fixes and minor changes
 
-- Fixed an issue where disabling proxy settings would not work. Fixes [#9357](https://github.com/docker/for-win/issues/9357) and [#9687](https://github.com/docker/for-win/issues/9687).
+- Fixed an issue where disabling proxy settings would not work. Fixes [#9357](https://github.com/docker/for-win/issues/9357).
 - Fixed a lot of UI reliability issued
-- Fixed an issue with ddev and grpcfuse. Fixes [#5157](https://github.com/docker/for-mac/issues/5157).
-- Avoid timeouts during `docker-compose up` by making cache invalidation faster. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
-- Avoid generating a spurious filesystem DELETE event while invalidating caches. Fixes [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
 
 
 ## Docker Desktop Community 3.0.4

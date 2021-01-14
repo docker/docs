@@ -30,10 +30,7 @@ This page contains information about the new features, improvements, known issue
 ### Bug fixes and minor changes
 
   - Fixed a lot of UI reliability issues
-  - Fixed an issue with DNS address resoltion in Alpine containers. Fixes [#5020](https://github.com/docker/for-mac/issues/5020).
-  - Fixed an issue with ddev and grpcfus. Fixes [#5157](https://github.com/docker/for-mac/issues/5157).
-  - Avoid timeouts during `docker-compose up` by making cache invalidation faster. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
-  - Avoid generating a spurious filesystem DELETE event while invalidating caches. Fixes [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
+  - Fixed an issue with DNS address resolution in Alpine containers. Fixes [#5020](https://github.com/docker/for-mac/issues/5020).
 
 ## Docker Desktop Community 3.0.4
 2021-01-06
