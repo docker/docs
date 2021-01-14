@@ -21,11 +21,14 @@ This page contains information about the new features, improvements, known issue
 
 > [Download](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
 
+### New
+
+- Docker daemon now runs within a Debian Buster based container (instead of Alpine)
+- Add experimental support for GPU workloads with WSL 2 backend (requires Windows Insider developer channel)
+
 ### Upgrades
 
-- Docker daemon now runs within a Debian Buster based container
-- Add experimental support for GPU workloads with WSL 2 backend (requires Windows Insider developer channel)
-- [Compose-CLI 1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
+- [Compose CLI v1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
 
 ### Bug fixes and minor changes
 

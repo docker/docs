@@ -22,10 +22,13 @@ This page contains information about the new features, improvements, known issue
 
 > [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
 
+### New
+
+- Docker daemon now runs within a Debian Buster based container (instead of Alpine)
+
 ### Upgrades
 
-- Docker daemon now runs within a Debian Buster based container
-- [Compose-CLI 1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
+- [Compose CLI v1.0.7](https://github.com/docker/compose-cli/tree/v1.0.7)
 
 ### Bug fixes and minor changes
 
