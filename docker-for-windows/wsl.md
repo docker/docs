@@ -122,10 +122,8 @@ Run "nbody -benchmark [-numbodies=<numBodies>]" to measure performance.
         -compare          (compares simulation results running once on the default GPU and once on the CPU)
         -cpu              (run n-body simulation on the CPU)
         -tipsy=<file.bin> (load a tipsy model file for simulation)
-
->**Note**
->
-> The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+        
+> NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
 
 > Windowed mode
 > Simulation data stored in video memory
