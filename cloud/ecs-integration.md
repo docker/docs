@@ -458,7 +458,7 @@ $ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subn
 1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
 
 ```console
-$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets subnet-1234abcd "subnet-6789ef00
 
 {
     "LoadBalancers": [
