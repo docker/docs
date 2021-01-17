@@ -201,13 +201,19 @@ docker secret create dockerhubAccessToken --username <dockerhubuser>  --password
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
-Once created, you can use this ARN in you Compose file using using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
+Once created, you can use this ARN in you Compose file using using `x-aws-pull_credentials` custom extension with the Docker image URI for your service. For AWS ECR Registry private repository, use `x-aws-pull_policy` to authenticate.
 
 ```yaml
 services:
   worker:
     image: mycompany/privateimage
     x-aws-pull_credentials: "arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken"
+```
+```yaml
+services:
+  worker:
+    image: mycompany/privateimage
+    x-aws-pull_policy: "arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken"
 ```
 
 > **Note**
@@ -458,7 +464,7 @@ $ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subn
 1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
 
 ```console
-$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets subnet-1234abcd subnet-6789ef00
 
 {
     "LoadBalancers": [
