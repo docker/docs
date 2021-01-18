@@ -6,9 +6,7 @@ toc_min: 1
 toc_max: 2
 ---
 
-This page contains information on how to develop language-specific applications using Docker.
-
-The language-specific getting started guides contain best practices and guidelines that explain how to create a new Dockerfile in your preferred language, what to include in the Docker image, how to develop and run your Docker image, set up a CI/CD pipeline, and finally provides information on how to push the application you've developed to the cloud.
+The language-specific getting started guides walk you through the process of setting up your development environment and start containerizing language-specific applications using Docker. The learning modules contain best practices and guidelines that explain how to create a new Dockerfile in your preferred language, what to include in the Docker image, how to develop and run your Docker image, set up a CI/CD pipeline, and finally provides information on how to push the application you've developed to the cloud.
 
 In addition to the language-specific modules, Docker documentation also provides guidelines to build and efficiently manage your development environment. You can find information on the best practices for writing Dockerfiles, building and managing images efficiently, gaining performance improvements by building images using BuildKit, etc. You can also find specific instructions on how to keep your images small, and how to persist application data, how to use multi-stage builds, etc.
 
@@ -26,19 +24,19 @@ Learn how to set up your Docker environment and start containerizing your applic
 <div class="component-container">
     <!--start row-->
     <div class="row" style="display: flex; align-items: center">
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 100px; display: flex; align-items: center">
+        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
                 <div class="component-icon">
                     <a href="/language/nodejs/"><img src="/language/images/nodejs.png" alt="Develop with Node"></a>
                 </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 100px; display: flex; align-items: center">
+        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
         <a href="/language/python/">
                 <div class="component-icon">
                     <img src="/language/images/python.png" alt="Develop with Python">
                 </div>
             </a>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 100px; display: flex; align-items: center">
+        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
                 <div class="component-icon">
                     <a href="/language/java/"><img src="/language/images/java.png" alt="Develop with Java"></a>
                 </div>
