@@ -482,7 +482,7 @@ examples: |-
   ### Build with URL
 
   ```bash
-  $ docker build github.com/creack/docker-firefox
+  $ docker build https://github.com/creack/docker-firefox.git
   ```
 
   This will clone the GitHub repository and use the cloned repository as context.
