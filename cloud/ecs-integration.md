@@ -196,8 +196,19 @@ The Docker Compose CLI automatically configures authorization so you can pull pr
 
 For your convenience, the Docker Compose CLI offers the `docker secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
 
+First, create `token.json` file to define your DockerHub username and access token. 
+See [this document](https://docs.docker.com/docker-hub/access-tokens/) on generating managing access tokens:
+```json
+{
+  "username":"DockerHubUserName",
+  "password":"DockerHubAccessToken"
+}
+```
+
+The you can create a secret from this file using `docker secret`:
+
 ```console
-docker secret create dockerhubAccessToken --username <dockerhubuser>  --password <dockerhubtoken>
+docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
