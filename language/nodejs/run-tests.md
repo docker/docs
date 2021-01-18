@@ -6,19 +6,7 @@ description: How to Build and Run your Tests using Node.js and Mocha frameworks
 
 {% include_relative nav.html selected="4" %}
 
-Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide we take a look at running your unit tests in Docker.
-
-## Sample application
-
-We’ll use a fairly simple node.js application for this guide. To follow along, clone the following github repository.
-
-```shell
-$ git clone [ADD APPLICATION URL]
-```
-
-Our sample application uses an open source framework called Ronin.js for building simple REST services. It also has a mocks server that will accept JSON and return the same JSON when you send a GET request.
-
-So, for example, if we POST a JSON data structure to the endpoint /services/users and then perform a POST request to the same URI, we will receive the JSON which we first posted.
+Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide we take a look at running your unit tests in Docker. Let's assume we have defined Mocha tests in a `/test` folder within our application.
 
 ### Running locally and testing the application
 
@@ -31,7 +19,7 @@ $ docker run -it --rm --name app -p 8080:80 node-docker
 
 Now let’s test our application by POSTing a JSON payload and then make an HTTP GET request to make sure our JSON was saved correctly.
 
-```
+```shell
 $ curl --request POST \
   --url http://localhost:8080/services/test \
   --header 'content-type: application/json' \
@@ -46,6 +34,14 @@ Now, perform a GET request to the same endpoint to make sure our JSON payload wa
 $ curl http://localhost:8080/services/test
 
 {"code":"success","payload":[{"msg":"testing","id":"e88acedb-203d-4a7d-8269-1df6c1377512","createDate":"2020-10-11T23:21:16.378Z"}]}
+```
+
+## Install Mocha
+
+Run the following command to install Mocha and add it to the developer dependencies:
+
+```shell
+$ npm install --save-dev mocha
 ```
 
 ## Refactor Dockerfile to run tests
@@ -73,7 +69,7 @@ $ docker run -it --rm --name app -p 8080:80 node-docker npm run test
 sh: 1: mocha: not found
 ```
 
-As you can see, we received an error. This error is telling us that the mocha executable could not be found. Let’s take a look at the Dockerfile.
+As you can see, we received an error. This error is telling us that the Mocha executable could not be found. Let’s take a look at the Dockerfile.
 
 ```dockerfile
 FROM node:14.15.4
@@ -89,7 +85,7 @@ COPY . .
 CMD [ "node", "server.js" ]
 ```
 
-The error is occurring because we are passing the `--production` flag to the npm ci command when it installs our dependencies. This tells npm to not install packages that are located under the "devDependencies" section in the package.json file. Therefore mocha will not be installed inside the image and will not be found when we try to run it.
+The error is occurring because we are passing the `--production` flag to the npm ci command when it installs our dependencies. This tells npm to not install packages that are located under the "devDependencies" section in the package.json file. Therefore, Mocha will not be installed inside the image and will not be found when we try to run it.
 
 Since we want to follow best practices and not include anything inside the container that we do not need to run our application we can’t just remove the `--production` flag. We have a couple of options to fix this. One option is to create a second Dockerfile that would only be used to run tests. This has a couple of problems. The primary being keeping two Dockerfiles up-to-date. The second option is to use multi-stage builds. We can create a stage for production and one for testing. This is our preferred solution.
 
@@ -146,7 +142,7 @@ $ docker run -it --rm --name app -p 8080:80 node-docker
   4 passing (11ms)
 ```
 
-I’ve truncated the build output but you can see that the mocha test runner completed and all our tests passed.
+I’ve truncated the build output but you can see that the Mocha test runner completed and all our tests passed.
 
 This is great but at the moment we have to run two docker commands to build and run our tests. We can improve this slightly by using a RUN statement instead of the CMD statement in the test stage. The CMD statement is not executed during the building of the image but is executed when you run the image in a container. While with the RUN statement, our tests will be run during the building of the image and stop the build when they fail.
 
