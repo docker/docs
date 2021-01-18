@@ -5,42 +5,43 @@ title: Deploy jobs to a swarm
 toc_max: 4
 ---
 
-Docker Swarm Jobs, available in Docker Engine 20.10 or newer, provide the
+Docker Swarm jobs, available in Docker Engine 20.10 or newer, provide the
 ability for Swarm to support one-off workloads, such as periodic batch
-operations. Traditionally, [Swarm Services](/engine/swarm/services/) are long
+operations. Traditionally, [Swarm Services](services.md) are long
 running workloads, defined in the Swarm in a *declarative* model. When using a
 traditional Swarm Service, the Swarm will maintain its state, for example
 reconciling Tasks to ensuring the number of running Tasks equals the desired
-number of Tasks. This is not the case with Swarm Jobs, a Job will execute until
-*Completion*, once completed the Task will not be restarted.
+number of Tasks. This is not the case with Swarm jobs, a job will execute until
+*completion*, once completed the Task will not be restarted.
 
-There are 2 modes of a Swarm Job:
-  - `ReplicatedJob`
-  - `GlobalJob`
+There are 2 modes of a Swarm job:
+
+- [Replicated jobs](#replicated-jobs)
+- [Global jobs](#global-jobs)
   
-Swarm Job modes are similar to Swarm services, where by a `ReplicatedJob` is
+Swarm job modes are similar to Swarm services, where by a `ReplicatedJob` is
 similar to a `ReplicatedService` and a `GlobalJob` is comparable to a
-`GlobalService`. A Replicated Job deploys a number of parallel Tasks within the
+`GlobalService`. A Replicated job deploys a number of parallel Tasks within the
 Swarm cluster, these Tasks could be scheduled anywhere in the cluster assuming
-scheduling and resource constraints are met. A Global Job deploy a single Task
-onto every node in the cluster. Swarm Jobs can be attached to existing [Swarm
+scheduling and resource constraints are met. A Global job deploy a single Task
+onto every node in the cluster. Swarm jobs can be attached to existing [Swarm
 Overlay Networks](/network/overlay/) and can leverage the Swarm Objects that are
 already defined in the cluster, such as [Configs](/engine/swarm/configs/),
 [Secrets](/engine/swarm/secrets/) and [Volumes](/storage/volumes/).
 
-## Replicated Jobs
+## Replicated jobs
 
 A `ReplicatedJob` is a desired number of parallel Tasks that will be scheduled
 on to the Swarm. A [Task](/engine/swarm/how-swarm-mode-works/swarm-task-states/)
 is a single running container in the cluster, a Task is the scheduled unit for
-both Swarm Services and Swarm Jobs. However, unlike a Swarm Service, a Swarm Job
+both Swarm Services and Swarm jobs. However, unlike a Swarm Service, a Swarm job
 will not reconcile Tasks. Once a Task has exited successfully, it will not be
 rescheduled.
 
-A Replicated Job is defined by creating a Service with the mode
+A Replicated job is defined by creating a Service with the mode
 `replicated-job`. By default the Swarm will schedule a single Task onto an
 available node in the cluster. The Task will stay in the `Running` state until
-the container exits successfully (exit code 0), at which point the Job will
+the container exits successfully (exit code 0), at which point the job will
 transition from a `Running` state into a `Completed` state.
 
 ```bash
@@ -59,12 +60,12 @@ A `ReplicatedJob` can have concurrency with multiple Tasks running the same
 workload deployed on to the cluster at the same time. When creating a
 `ReplicatedJob` the number of `Replicas` controls its concurrency. Additionally
 the number of `Replicas` also sets the number of Tasks that need to be
-successfully completed for the Swarm Job to move into a `Completed` state.
+successfully completed for the Swarm job to move into a `Completed` state.
 
-In this example a Swarm Job is created with `--replicas 2`. This will
+In this example a Swarm job is created with `--replicas 2`. This will
 instruct the Swarm to schedule 2 Tasks on to the Swarm to run in parallel,
 assuming there are resources available to do so. Additionally the required
-number of Completed Tasks for the Swarm Job state to transition from `Running` to
+number of Completed Tasks for the Swarm job state to transition from `Running` to
 `Completed` is also 2.
 
 ```bash
@@ -107,7 +108,7 @@ $ docker service create \
     sleep 30
 ```
 
-Inspecting the Swarm Job the concurrency of the Tasks and the required number of
+Inspecting the Swarm job the concurrency of the Tasks and the required number of
 completed Tasks can be seen.
 
 ```bash
@@ -126,10 +127,10 @@ $ docker service inspect max-concurrent-sleeper | jq -r '.[].Spec.Mode'
 
 ### Scheduling Constraints
 
-When using a Swarm Jobs placement
+When using a Swarm jobs placement
 [constraints](/engine/swarm/services/#placement-constraints) and
 [preferences](/engine/swarm/services/#placement-preferences) can still be used
-to support the scheduling of Swarm Tasks. For example to ensure Swarm Jobs are
+to support the scheduling of Swarm Tasks. For example to ensure Swarm jobs are
 not ran on Nodes labeled `devel` the following `--contraint` can be used.
 
 ```bash
@@ -142,8 +143,8 @@ $ docker service create \
 ```
 
 To limit the number of concurrent tasks scheduled on to each Node in a
-Replicated Job, the `--replicas-max-per-node` flag can be passed when scheduling
-a Swarm Job. In the following example `--replicas 6` defines the number of
+Replicated job, the `--replicas-max-per-node` flag can be passed when scheduling
+a Swarm job. In the following example `--replicas 6` defines the number of
 parallel Tasks and the number of completed Tasks, however
 `--replicas-max-per-node 2` will ensure the Swarm will only schedule 2 Tasks on
 each node.
@@ -160,15 +161,15 @@ $ docker service create \
 
 ### Scaling a services
 
-Once deployed a Swarm Job can be scaled through the `docker service scale`. This
-will adjust the number of `Completed` Tasks required for a Replicated Job, not the
+Once deployed a Swarm job can be scaled through the `docker service scale`. This
+will adjust the number of `Completed` Tasks required for a Replicated job, not the
 number of concurrent Tasks. 
 
-> **Note** when a Swarm Job is scaled the whole Job is restarted. All Tasks that
+> **Note** when a Swarm job is scaled the whole job is restarted. All Tasks that
 > are currently in the `Running` or `Completed` state will be rerun.
 
 ```bash
-# Deploy a Swarm Job
+# Deploy a Swarm job
 $ docker service create \
   --name scale-sleeper \
   --mode replicated-job \
@@ -176,7 +177,7 @@ $ docker service create \
   alpine \
   sleep 30
 
-# Scale the Swarm Job to 4 Replicas
+# Scale the Swarm job to 4 Replicas
 $ docker service scale scale-sleeper:4
 ```
 
@@ -193,12 +194,12 @@ $ docker service inspect scale-sleeper | jq -r '.[].Spec.Mode'
 }
 ```
 
-## Global Jobs
+## Global jobs
 
-For Global Jobs, the scheduler places one Task on each available node in the
-cluster that meets the Job's placement
-[constraints](/engine/swarm/services/#placement-constraints) and [resource
-requirements](/engine/swarm/services/#reserve-memory-or-cpus-for-a-service).
+For global jobs, the scheduler places one task on each available node in the
+cluster that meets the job's [placement
+constraints](services.md#placement-constraints) and [resource
+requirements](services.md#reserve-memory-or-cpus-for-a-service).
 
 ```bash
 $ docker service create \
@@ -208,36 +209,38 @@ $ docker service create \
     sleep 30
 ```
 
-If a Swarm Global Job is in the running state it will not update when new nodes
-are added and removed from the cluster. This is different from a Swarm Global
-Service, where new Tasks are added and removed if the Node inventory changes.
-Once a Global Job has been scheduled the Swarm will not attempt to add / remove
-new Tasks or adjust the concurrency when new Nodes join the cluster. To
-adjust the concurrency of a Swarm Global job, `docker service update
---force <sevice-name>` can be used to reschedule a Global job on all available
-nodes in the cluster. 
+Contrary to global _services_, swarm does not update global jobs in the
+`running` state when new nodes are added or removed from the cluster. Once a
+global job is scheduled, the Swarm will not attempt to add / remove new tasks or
+adjust the concurrency when new nodes join the cluster. 
 
-> **Note** when a Swarm Job is updated all tasks will be restarted, including
-> Tasks that are in the `Running` or `Completed` state.
+Use `docker service update --force <sevice-name>` to adjust the concurrency of a
+global job, and to reschedule a global job on all available nodes in the
+cluster.
 
-## Event or Time based Triggers of Swarm Jobs
+> **Note**
+>
+> When a job is updated, all tasks for that job are restarted, including
+> tasks that are in the `running` or `completed` state.
 
-Docker Swarm does not include a built in Event or Time based trigger for Swarm
-Jobs. Each Swarm Job that is defined is a one-off job that once completed will
-not rerun. Once a Swarm Job has completed it will remain in the Swarm Service
-list until it has been manually removed. At this time, the triggering of Swarm
-Jobs should be implemented outside of the Swarm Cluster for example with tools
-like Cron or a CI/CD pipeline.
+## Event or time-based triggers for jobs
 
-An example deployment leveraging Cron on a Swarm Manager to trigger a Swarm Job
-to run on the cluster can be seen below. In this example a Global Job is
-initially deployed onto the cluster, the cron service will then rerun this Swarm
-Job every 5 minutes, using `docker service update`. This example assumes `crond`
-and `crontab` are already installed on your system, for documentation on getting
-started with Cron on Ubuntu see this guide on the [Ubuntu
+Docker does not include a built-in event or time-based trigger for jobs. jobs
+are "one-off" tasks, which means that, once completed, they will not rerun, and
+will remain in the service list until they are manually removed. At this time,
+the triggering of jobs should be implemented outside of the Swarm cluster for
+example with tools like Cron or a CI/CD pipeline.
+
+### Example: run a job on a time-based interval with cron
+
+In this example a Global job is initially deployed onto the cluster, the
+cron-job will then rerun this Swarm job every 5 minutes, using `docker service
+update`. This example assumes `crond` and `crontab` are already installed on
+your system, for documentation on getting started with Cron on Ubuntu see this
+guide on the [Ubuntu
 documentation](https://help.ubuntu.com/community/CronHowto).
 
-1) Create an initial Swarm Global Job on the cluster.
+1. Create an initial Global job on the cluster.
 
 ```bash
 $ docker service create \
@@ -247,18 +250,19 @@ $ docker service create \
     sleep 60
 ```
 
-2) Open the crontab for the current user and add a new entry to the bottom of
-   the file to trigger a rerun of the Swarm Job. In this example the Swarm
-   Global Job will run every 5 minutes.
+2. Open the crontab for the current user and add a new entry to the bottom of
+   the file to trigger a rerun of the Swarm job. In this example the Swarm
+   Global job will run every 5 minutes.
 
-```bash
+```console
 $ crontab -e
+
 */5 * * * * /usr/bin/docker service update cron-sleeper --force > /dev/null
 ```
 
-3) Wait 5 minutes and a new run of the Job should be triggered. The last
-   execution time of a Job can be seen from the `docker service inspect`
-   command.
+3. Verify that the cron-job ran and that a new execution of the job has been
+   triggered. The last execution time of a job can be seen from the `docker
+   service inspect` command.
 
 ```bash
 $ docker service inspect cron-sleeper | jq -r .[].JobStatus
@@ -269,7 +273,7 @@ $ docker service inspect cron-sleeper | jq -r .[].JobStatus
   "LastExecution": "2020-12-18T17:00:01.231624312Z" # Last Run Was 17:00
 }
 
-# Wait 5 minutes
+# Wait 5 minutes for the next run of the job to be completed
 
 $ docker service inspect cron-sleeper | jq -r .[].JobStatus
 {
