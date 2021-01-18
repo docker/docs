@@ -182,9 +182,11 @@ Step 2/7 : WORKDIR /code
 ...
 Successfully built e03018e56163
 Successfully tagged node-docker:latest
-Viewing Local Images
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use Docker Desktop. Since we are currently working in the terminal let’s take a look at listing images with the CLI.
 ```
+
+## Viewing local images
+
+To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use Docker Desktop. Since we are currently working in the terminal let’s take a look at listing images with the CLI.
 
 To list images, simply run the `images` command.
 
