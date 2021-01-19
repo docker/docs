@@ -6,7 +6,7 @@ description: How to Build and Run your Tests using Node.js and Mocha frameworks
 
 {% include_relative nav.html selected="4" %}
 
-Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide we take a look at running your unit tests in Docker. Let's assume we have defined Mocha tests in a `/test` folder within our application.
+Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide we take a look at running your unit tests in Docker. Let's assume we have defined Mocha tests in a `./test` folder within our application.
 
 ### Running locally and testing the application
 
