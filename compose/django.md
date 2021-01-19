@@ -100,22 +100,22 @@ In this step, you create a Django starter project by building the image from the
 
 1. Change to the root of your project directory.
 
-2. Create the Django project by running
-the [docker-compose run](reference/run.md) command as follows.
+2. Create the Django project by running the [docker-compose run](reference/run.md)
+   command as follows.
 
    ```console
    $ sudo docker-compose run web django-admin startproject composeexample .
    ```
 
-    This instructs Compose to run `django-admin startproject composeexample`
-    in a container, using the `web` service's image and configuration. Because
-    the `web` image doesn't exist yet, Compose builds it from the current
-    directory, as specified by the `build: .` line in `docker-compose.yml`.
+   This instructs Compose to run `django-admin startproject composeexample`
+   in a container, using the `web` service's image and configuration. Because
+   the `web` image doesn't exist yet, Compose builds it from the current
+   directory, as specified by the `build: .` line in `docker-compose.yml`.
 
-    Once the `web` service image is built, Compose runs it and executes the
-    `django-admin startproject` command in the container. This command
-    instructs Django to create a set of files and directories representing a
-    Django project.
+   Once the `web` service image is built, Compose runs it and executes the
+   `django-admin startproject` command in the container. This command
+   instructs Django to create a set of files and directories representing a
+   Django project.
 
 3. After the `docker-compose` command completes, list the contents of your project.
 
@@ -198,7 +198,7 @@ In this section, you set up the database connection for Django.
    db_1   | The default database encoding has accordingly been set to "UTF8".
    db_1   | The default text search configuration will be set to "english".
 
-   . . .
+   <...>
 
    web_1  | July 30, 2020 - 18:35:38
    web_1  | Django version 3.0.8, using settings 'composeexample.settings'
@@ -219,7 +219,9 @@ In this section, you set up the database connection for Django.
    > inside `settings.py` and add your Docker host name or IP address to the list.
    > For demo purposes, you can set the value to:
    >
-   >       ALLOWED_HOSTS = ['*']
+   > ```python
+   > ALLOWED_HOSTS = ['*']
+   > ```      
    >
    > This value is **not** safe for production usage.  Refer to the
    > [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
@@ -238,8 +240,8 @@ In this section, you set up the database connection for Django.
 
 6. Shut down services and clean up by using either of these methods:
 
-    * Stop the application by typing `Ctrl-C`
-    in the same shell in where you started it:
+    * Stop the application by typing `Ctrl-C`  in the same shell in where you
+      started it:
 
       ```console
       Gracefully stopping... (press Ctrl+C again to force)
@@ -247,10 +249,11 @@ In this section, you set up the database connection for Django.
       Killing test_db_1 ... done
       ```
 
-    * Or, for a more elegant shutdown, switch to a different shell, and run [docker-compose down](reference/down.md) from the top level of your Django sample project directory.
+    * Or, for a more elegant shutdown, switch to a different shell, and run
+      [docker-compose down](reference/down.md) from the top level of your
+      Django sample project directory.
 
       ```console
-      vmb at mymachine in ~/sandbox/django
       $ docker-compose down
 
       Stopping django_web_1 ... done
