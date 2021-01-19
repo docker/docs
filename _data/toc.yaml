@@ -47,18 +47,46 @@ guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
+- sectiontitle: Laanguage-specific guides (New)
+  section:
+  - path: /language/
+    title: Overview
+  - sectiontitle: Node.js
+    section:
+    - title: "Overview"
+      path: /language/nodejs/
+    - title: "Build images"
+      path: /language/nodejs/build-images/
+    - title: "Run containers"
+      path: /language/nodejs/run-containers/
+    - title: "Develop your app"
+      path: /language/nodejs/develop/
+    - title: "Run your tests"
+      path: /language/nodejs/run-tests/
+    - title: "Configure CI/CD"
+      path: /language/nodejs/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/nodejs/deploy/
+  - sectiontitle: Python
+    section:
+    - title: "Overview"
+      path: /language/python/
+    - title: "Build images"
+      path: /language/python/build-images/
+    - title: "Run containers"
+      path: /language/python/run-containers/
+    - title: "Develop your app"
+      path: /language/python/develop/
+    - title: "Configure CI/CD"
+      path: /language/python/configure-ci-cd/
+  - sectiontitle: Java
+    section:
+    - title: "Overview"
+      path: /language/java/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
     title: Overview
-  - sectiontitle: Node.js
-    section:
-    - title: "Build images"
-      path: /get-started/nodejs/build-images/
-    - title: "Run containers"
-      path: /get-started/nodejs/run-containers/
-    - title: "Develop"
-      path: /get-started/nodejs/develop/
   - path: /develop/dev-best-practices/
     title: Best practices
   - sectiontitle: Build images

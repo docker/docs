@@ -66,12 +66,11 @@ code {
     width: 100%;
     background: $bg-component;
     img {
-      width: 70px;
       height: 70px;
     }
     .component-icon {
-      margin: 0 auto;
-      width: 70px;
+      display: flex;
+      justify-content: center;
     }
     h2 {
       font-size: 22px;
