@@ -165,7 +165,7 @@ Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 
 ### Security
 
-- Fixed local privilege escalation vulnerability caused by inadequate certificate checking
+- Fixed local privilege escalation vulnerability caused by inadequate certificate checking. See [CVE-2021-3162](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3162).
 
 ### Upgrades
 
