@@ -24,7 +24,7 @@ web:
 If you have multiple environment variables, you can substitute them by providing 
 a path to your environment variables file. By default, the `docker-compose` 
 command will look for a file named `.env` in the project directory (parent folder 
-of your compose file).
+of your Compose file).
 
 By passing the file as an argument, you can store it anywhere and name it 
 appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
