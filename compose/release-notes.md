@@ -7,6 +7,69 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.28.0 
+(2021-01-20)
+
+### Features
+
+- Added support for NVIDIA GPUs through device requests.
+
+- Added support for service profiles.
+
+- Changed the SSH connection approach to the Docker CLI by shelling out to the local SSH client. Set the `COMPOSE_PARAMIKO_SSH=1` environment variable to enable the old behavior.
+
+- Added a flag to disable log prefix.
+
+- Added a flag for ANSI output control.
+
+- Docker Compose now uses the native Docker CLI's `build` command when building images. Set the `COMPOSE_DOCKER_CLI_BUILD=0` environment variable to disable this feature.
+
+### Bugs
+
+- Made `parallel_pull=True` by default.
+
+- Restored the warning for configs in non-swarm mode.
+
+- Took `--file` into account when defining `project_dir`.
+
+- Fixed a service attach bug on `compose up`.
+
+### Miscellaneous
+
+- Added usage metrics.
+
+- Synced schema with COMPOSE specification.
+
+- Improved failure report for missing mandatory environment variables.
+
+- Bumped `attrs` to 20.3.0.
+
+- Bumped `more_itertools` to 8.6.0.
+
+- Bumped `cryptograhy` to 3.2.1.
+
+- Bumped `cffi` to 1.14.4.
+
+- Bumped `virtualenv` to 20.2.2.
+
+- Bumped `bcrypt` to 3.2.0.
+
+- Bumped GitPython to 3.1.11.
+
+- Bumped `docker-py` to 4.4.1.
+
+- Bumped Python to 3.9.
+
+- Linux: bumped Debian base image from stretch to buster (required for Python 3.9).
+
+- macOS: Bumped OpenSSL 1.1.1g to 1.1.1h, and Python 3.7.7 to 3.9.0.
+
+- Bumped PyInstaller to 4.1.
+
+- Relaxed the restriction on base images to latest minor.
+
+- Updated READMEs.
+
 ## 1.27.4 
 (2020-09-24)
 
