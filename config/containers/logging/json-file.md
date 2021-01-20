@@ -17,6 +17,13 @@ only one container.
 {"log":"Log line is here\n","stream":"stdout","time":"2019-01-01T11:11:11.111111111Z"}
 ```
 
+> *Warning*
+>
+> The `json-file` logging driver uses file-based storage. These files are designed
+> to be exclusively accessed by the Docker daemon. Interacting with these files
+> with external tools may interfere with Docker's logging system and result in
+> unexpected behavior, and should be avoided.
+
 ## Usage
 
 To use the `json-file` driver as the default logging driver, set the `log-driver`
@@ -26,7 +33,8 @@ located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
-The following example sets the log driver to `json-file` and sets the `max-size` and `max-file` options.
+The following example sets the log driver to `json-file` and sets the `max-size`
+and `max-file` options to enable automatic log-rotation.
 
 ```json
 {
