@@ -92,40 +92,27 @@ To create the `docker` group and add your user:
 
 ## Configure Docker to start on boot
 
-Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)
-use [`systemd`](#systemd) to manage which services start when the system boots.
-Ubuntu 14.10 and below use [`upstart`](#upstart).
-
-### `systemd`
+Most current Linux distributions (RHEL, CentOS, Fedora, Debian, Ubuntu 16.04 and
+higher) use [`systemd`](#systemd) to manage which services start when the system
+boots. On Debian and Ubuntu, the Docker service is configured to start on boot
+by default. To automatically start Docker and Containerd on boot for other
+distros, use the commands below:
 
 ```console
-$ sudo systemctl enable docker
+$ sudo systemctl enable docker.service
+$ sudo systemctl enable containerd.service
 ```
 
 To disable this behavior, use `disable` instead.
 
 ```console
-$ sudo systemctl disable docker
+$ sudo systemctl disable docker.service
+$ sudo systemctl disable containerd.service
 ```
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
 Docker runtime files, or make other customizations, see
 [customize your systemd Docker daemon options](../../config/daemon/systemd.md).
-
-### `upstart`
-
-Docker is automatically configured to start on boot using
-`upstart`. To disable this behavior, use the following command:
-
-```console
-$ echo manual | sudo tee /etc/init/docker.override
-```
-
-### `chkconfig`
-
-```console
-$ sudo chkconfig docker on
-```
 
 ## Use a different storage engine
 
@@ -167,7 +154,10 @@ the [Docker CLI Reference](/engine/reference/commandline/dockerd/) article.
 > [how to protect the Docker daemon socket](../security/https.md).
 {: .warning}
 
-Configuring Docker to accept remote connections can be done with the `docker.service` systemd unit file for Linux distributions using systemd, such as recent versions of RedHat, CentOS, Ubuntu and SLES, or with the `daemon.json` file which is recommended for Linux distributions that do not use systemd.
+Configuring Docker to accept remote connections can be done with the `docker.service`
+systemd unit file for Linux distributions using systemd, such as recent versions
+of RedHat, CentOS, Ubuntu and SLES, or with the `daemon.json` file which is
+recommended for Linux distributions that do not use systemd.
 
 > systemd vs daemon.json
 > 
@@ -213,7 +203,7 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 
     ```json
     {
-    "hosts": ["unix:///var/run/docker.sock", "tcp://127.0.0.1:2375"]
+      "hosts": ["unix:///var/run/docker.sock", "tcp://127.0.0.1:2375"]
     }
     ```
 
@@ -365,7 +355,7 @@ at `/etc/docker/daemon.json`.
 
     ```json
     {
-    	"dns": ["8.8.8.8", "8.8.4.4"]
+      "dns": ["8.8.8.8", "8.8.4.4"]
     }
     ```
 
