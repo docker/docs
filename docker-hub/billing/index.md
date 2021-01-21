@@ -77,3 +77,35 @@ To purchase a Team plan:
 7. Verify your email address.
 
 8. Navigate to Organizations from the menu at the top of the page, choose your organization, and select **Billing**. The Billing tab displays information about your new Team plan and the total cost.
+
+## Update billing information
+
+> **Note**
+>
+> You must be on owner of the organization to make changes to the billing information.
+
+To update the billing information for your organization:
+
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+
+2. Select **Organizations** from the menu at the top of the page. This displays a list of organizations.
+
+3. Choose the organization from the list and select the **Billing** tab.
+
+4. Select **Payment Methods**.
+
+5. The **Payment Information** page displays your existing billing information and allows you to edit the details.
+
+6. Click **Update** to save your changes.
+
+To update the billing information for your user account:
+
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+
+2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
+
+3. Select **Payment Methods**.
+
+4. The **Payment Information** page displays your existing billing information and allows you to edit the details.
+
+5. Click **Update** to save your changes.
