@@ -96,7 +96,11 @@ To update the billing information for your organization:
 
 5. The **Payment Information** page displays your existing billing information and allows you to edit the details.
 
-6. Click **Update** to save your changes.
+    > **Note**
+    >
+    > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section.
+
+6. Change the details as required and then click **Update** to save your changes.
 
 To update the billing information for your user account:
 
