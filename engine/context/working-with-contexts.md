@@ -13,7 +13,7 @@ A single Docker CLI can have multiple contexts. Each context contains all of the
 
 As an example, a single Docker client on your company laptop might be configured with two contexts; **dev-k8s** and **prod-swarm**. **dev-k8s** contains the endpoint data and security credentials to configure and manage a Kubernetes cluster in a development environment. **prod-swarm** contains everything required to manage a Swarm cluster in a production environment. Once these contexts are configured, you can use the top-level `docker context use <context-name>` to easily switch between them.
 
-For information on using Docker Context to deploy your apps to the cloud, see [Deploying Docker containers on Azure](aci-integration.md) and [Deploying Docker containers on ECS](ecs-integration.md).
+For information on using Docker Context to deploy your apps to the cloud, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md) and [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
 
 ## Prerequisites
 
