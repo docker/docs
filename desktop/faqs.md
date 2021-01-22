@@ -30,7 +30,7 @@ If you do not find a solution in Troubleshooting, browse issues on
 
 To connect to the remote Engine API, you might need to provide the location of the Engine API for Docker clients and development tools.
 
-Mac users can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
+Mac and Windows WSL 2 users can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
 
 If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" rel="noopener" class="_"}
 that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
@@ -44,9 +44,6 @@ export DOCKER_HOST=unix:///var/run/docker.sock
 
 Docker Desktop Windows users can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:
 `tcp://localhost:2375`.
-
-This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the
-given values (for the named pipe or TCP socket, whichever you use).
 
 For details, see [Docker Engine API](../engine/api/index.md).
 
@@ -139,7 +136,9 @@ By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days. 
 
 ### Is Docker Desktop compatible with Apple silicon processors?
 
-At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+At the moment, Docker Desktop is compatible with Intel processors only. For more information, see [Apple M1 Tech preview](../docker-for-mac/apple-m1.md).
+
+You can also follow the status of Apple Silicon support in our [Roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
 
 ### What is HyperKit?
 
