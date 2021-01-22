@@ -27,4 +27,4 @@ do not necessarily increment with each release. For example, Compose file format
 1.10.0](https://github.com/docker/compose/releases/tag/1.10.0), and versioned
 gradually in subsequent releases.
 
-The latest Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:target="_blank" rel="noopener" class="_"} and is implemented by Docker Compose **1.27.0+**).
+The latest Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:target="_blank" rel="noopener" class="_"} and is implemented by Docker Compose **1.27.0+**.
