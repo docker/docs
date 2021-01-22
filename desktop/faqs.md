@@ -169,7 +169,7 @@ Docker Desktop uses the Windows Hyper-V features. While older Windows versions h
 
 ### Can I install Docker Desktop on Windows 10 Home?
 
-If you are running Windows 10 Home (starting with version 2004), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} or a later release with the [WSL 2 backend](../docker-for-windows/wsl.md).
+If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](../docker-for-windows/wsl.md).
 
 ### Can I run Docker Desktop on Windows Server?
 
