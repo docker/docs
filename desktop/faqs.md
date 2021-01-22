@@ -3,7 +3,7 @@ description: Frequently asked questions
 keywords: desktop, mac, windows, faqs
 redirect_from:
 - /mackit/faqs/
-- docker-for-mac/faqs/
+- /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 title: Frequently asked questions
 toc_max: 2
@@ -53,7 +53,7 @@ See also [Docker Engine API](../engine/api/index.md) and Docker Desktop for Mac 
 
 ### How do I connect from a container to a service on the host?
 
-Both Mac and Windows have a changing IP address (or none if you have no network access). On both Mac and Windows, we recommend that you connect to the special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host. This is for development purposes and will not work in a production environment outside of Docker Desktop.
+Both Mac and Windows have a changing IP address (or none if you have no network access). On both Mac and Windows, we recommend that you connect to the special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host. This is for development purposes and does not work in a production environment outside of Docker Desktop.
 
 For more information and examples, see how to connect from a container to a service on the host
 [on Mac](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
@@ -63,7 +63,7 @@ For more information and examples, see how to connect from a container to a serv
 We recommend that you publish a port, or connect from another container. Port forwarding works for `localhost; --publish`, `-p`, or `-P` all work. Ports exposed from Linux are forwarded to the host.
 
 For more information and examples, see
-[I want to connect to a container from Mac](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Mac](../docker-for-windows/networking.md#i-want-to-connect-to-a-container-from-the-mac)
+[I want to connect to a container from Mac](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Mac](../docker-for-windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
 
 ### How do I add custom CA certificates?
 
@@ -93,7 +93,7 @@ Starting with version 3.0.0, Docker Desktop will be available as a single, cumul
 
 ### How do new users install Docker Desktop?
 
-Each Docker Desktop release will also be delivered as a full installer for new users. The same will apply if you have skipped a version, although this will not normally happen as updates will be applied automatically.
+Each Docker Desktop release is also delivered as a full installer for new users. The same will apply if you have skipped a version, although this doesn't normally happen as updates will be applied automatically.
 
 ### How frequent will new releases be?
 
@@ -115,13 +115,15 @@ Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a
 
 ### Does Docker Desktop offer support?
 
-Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](../docker-for-mac/troubleshoot.md#support). For information about the pricing plans, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](../docker-for-mac/troubleshoot.md#support).
+
+For information about the pricing plans and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
 ### What kind of feedback are you looking for?
 
 Everything is fair game. We'd like your impressions on the download-install
 process, startup, functionality available, the GUI, usefulness of the app,
-command line integration, and so on. Tell us about the issues you are experiencing, what you like, or request a new feature through our public [Docker roadmap](https://github.com/docker/roadmap){: target="_blank" rel="noopener" class="_"}.
+command line integration, and so on. Tell us about the issues you are experiencing, what you like, or request a new feature through our public [Docker Roadmap](https://github.com/docker/roadmap){: target="_blank" rel="noopener" class="_"}.
 
 ### How is personal data handled in Docker Desktop?
 
@@ -200,7 +202,7 @@ Docker Desktop does not enable you to control (`chmod`)
 the Unix-style permissions on [shared volumes](../docker-for-windows/index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
 [0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
-(`read`, `write`, `execute` permissions for `user` and for 
+(`read`, `write`, `execute` permissions for `user` and for
 `group`) which is not configurable.
 
 For workarounds and to learn more, see
