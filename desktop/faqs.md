@@ -48,8 +48,7 @@ Docker Desktop Windows users can connect to the Docker Engine through a **named 
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the
 given values (for the named pipe or TCP socket, whichever you use).
 
-See also [Docker Engine API](../engine/api/index.md) and Docker Desktop for Mac forums topic
-[Using pycharm Docker plugin](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617){: target="_blank" rel="noopener" class="_"}.
+For details, see [Docker Engine API](../engine/api/index.md).
 
 ### How do I connect from a container to a service on the host?
 
@@ -60,10 +59,10 @@ For more information and examples, see how to connect from a container to a serv
 
 ### How do I connect to a container from Mac or Windows?
 
-We recommend that you publish a port, or connect from another container. Port forwarding works for `localhost; --publish`, `-p`, or `-P` all work. Ports exposed from Linux are forwarded to the host.
+We recommend that you publish a port, or connect from another container. Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 
 For more information and examples, see
-[I want to connect to a container from Mac](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Mac](../docker-for-windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
+[I want to connect to a container from Mac](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](../docker-for-windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
 
 ### How do I add custom CA certificates?
 
@@ -163,7 +162,7 @@ Docker.app connects to it, so it's safe to ignore.
 
 ### Can I use VirtualBox alongside Docker Desktop?
 
-Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [ Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
+Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 
 ### Why is Windows 10 required?
 
