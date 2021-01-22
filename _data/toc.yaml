@@ -1226,8 +1226,6 @@ manuals:
       title: Disk utilization
     - path: /docker-for-mac/troubleshoot/
       title: Logs and troubleshooting
-    - path: /docker-for-mac/faqs/
-      title: FAQs
     - path: /docker-for-mac/release-notes/
       title: Release notes
     - path: /docker-for-mac/apple-m1/
@@ -1246,14 +1244,14 @@ manuals:
       title: Networking
     - path: /docker-for-windows/troubleshoot/
       title: Logs and troubleshooting
-    - path: /docker-for-windows/faqs/
-      title: FAQs
     - path: /docker-for-windows/release-notes/
       title: Release notes
     - path: /docker-for-windows/wsl/
       title: Docker Desktop WSL 2 backend
   - path: /desktop/dashboard/
     title: Dashboard
+  - path: /desktop/faqs/
+    title: FAQs
   - path: /desktop/opensource/
     title: Open source licensing
 - sectiontitle: Docker Hub
