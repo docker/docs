@@ -6,14 +6,15 @@ notoc: true
 ---
 
 ```none
-Usage: logs [options] [SERVICE...]
+Usage: logs [options] [--] [SERVICE...]
 
 Options:
-    --no-color          Produce monochrome output.
-    -f, --follow        Follow log output.
-    -t, --timestamps    Show timestamps.
-    --tail="all"        Number of lines to show from the end of the logs
-                        for each container.
+    --no-color              Produce monochrome output.
+    -f, --follow            Follow log output.
+    -t, --timestamps        Show timestamps.
+    --tail="all"            Number of lines to show from the end of the logs
+                            for each container.
+    --no-log-prefix         Don't print prefix in logs.
 ```
 
 Displays log output from services.

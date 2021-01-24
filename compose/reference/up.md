@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
+Usage: up [options] [--scale SERVICE=NUM...] [--] [SERVICE...]
 
 Options:
     -d, --detach               Detached mode: Run containers in the background,
@@ -20,13 +20,12 @@ Options:
     --always-recreate-deps     Recreate dependent containers.
                                Incompatible with --no-recreate.
     --no-recreate              If containers already exist, don't recreate
-                               them. Incompatible with --force-recreate and 
-                               --renew-anon-volumes.
+                               them. Incompatible with --force-recreate and -V.
     --no-build                 Don't build an image, even if it's missing.
     --no-start                 Don't start the services after creating them.
     --build                    Build images before starting containers.
     --abort-on-container-exit  Stops all containers if any container was
-                               stopped. Incompatible with --detach.
+                               stopped. Incompatible with -d.
     --attach-dependencies      Attach to dependent containers.
     -t, --timeout TIMEOUT      Use this timeout in seconds for container
                                shutdown when attached or when containers are
@@ -39,6 +38,7 @@ Options:
                                container. Implies --abort-on-container-exit.
     --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the
                                `scale` setting in the Compose file if present.
+    --no-log-prefix            Don't print prefix in logs.
 ```
 
 Builds, (re)creates, starts, and attaches to containers for a service.
