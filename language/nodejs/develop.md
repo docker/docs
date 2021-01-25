@@ -154,16 +154,7 @@ Open the `package.json` file and add the following line to the scripts section:
   "debug": "nodemon --inspect=0.0.0.0:9229 server.js"
 ```
 
-As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s add nodemon to our `package.json` file.
-
-```json
-$ npm install nodemon
-```
-
-To start our application in debug mode, we need to add a line to our `package.json` file to tell npm how to start our application in debug mode.
-
-Open the `package.json` file and add the following line to the scripts section.
-As you can see, we are going to use `nodemon`. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s add nodemon to our `package.json` file.
+As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s run the following command in a terminal to install nodemon into our project directory.
 
 ```json
 $ npm install nodemon

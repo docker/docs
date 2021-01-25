@@ -1260,26 +1260,8 @@ manuals:
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
-  - path: /docker-hub/orgs/
-    title: Teams and organizations
   - path: /docker-hub/repos/
     title: Repositories
-  - path: /docker-hub/vulnerability-scanning/
-    title: Vulnerability scanning
   - path: /docker-hub/official_images/
     title: Official images
   - sectiontitle: Automated builds
@@ -1296,6 +1278,26 @@ manuals:
     title: Webhooks
   - path: /docker-hub/slack_integration/
     title: Slack integration
+  - path: /docker-hub/orgs/
+    title: Teams and organizations
+  - path: /docker-hub/vulnerability-scanning/
+    title: Vulnerability scanning
+  - path: /docker-hub/audit-log/
+    title: Audit log
+  - sectiontitle: Security and authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Manage access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - sectiontitle: Administration
