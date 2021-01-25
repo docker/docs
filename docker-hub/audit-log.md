@@ -21,6 +21,10 @@ To view the Audit log:
 
 The Audit log begins tracking activities from the date the feature is live, that is from **25 January 2021**. Activities that took place before this date are not captured.
 
+> **Note**
+>
+> Docker will retain the Audit log activity data for a period of six months.
+
 ## Customize the Audit log
 
 By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the **Activity** tab displays the Audit log of all the activities that occurred during that period.
