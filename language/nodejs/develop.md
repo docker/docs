@@ -147,7 +147,6 @@ We are exposing `port 9229` so that we can attach a debugger. We are also mappin
 One other really cool feature of using a Compose file is that we have service resolution set up to use the service names. So we are now able to use `“mongo”` in our connection string. The reason we use mongo is because that is what we have named our MongoDB service in the Compose file as.
 
 To start our application in debug mode, we need to add a line to our `package.json` file to tell npm how to start our application in debug mode.
-As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s add nodemon to our `package.json` file.
 
 Open the `package.json` file and add the following line to the scripts section:
 
@@ -155,7 +154,7 @@ Open the `package.json` file and add the following line to the scripts section:
   "debug": "nodemon --inspect=0.0.0.0:9229 server.js"
 ```
 
-Then run the following command in the terminal to install nodemon into our project directory.
+As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s run the following command in a terminal to install nodemon into our project directory.
 
 ```json
 $ npm install nodemon
