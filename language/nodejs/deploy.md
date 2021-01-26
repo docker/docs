@@ -1,7 +1,7 @@
 ---
-title: "Configure CI/CD for your application"
-keywords: CI/CD, GitHub Actions, NodeJS, local, development
-description: Learn how to develop your application locally.
+title: "Deploy your app to the cloud"
+keywords: deploy, cloud, ACI, ECS, NodeJS, local, development
+description: Learn how to deploy your application to the cloud
 ---
 
 {% include_relative nav.html selected="6" %}
