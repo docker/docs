@@ -19,12 +19,12 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 To complete this tutorial, you need the following:
 
 - Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
-- Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
+- Docker running locally: Follow the instructions to [download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 
 ## Sample application
 
-Let’s create a simple Node.js application that we can use as our example. Create a directory on your local machine named `node-docker` and follow the steps below to create a simple REST API.
+Let’s create a simple Node.js application that we can use as our example. Create a directory in your local machine named `node-docker` and follow the steps below to create a simple REST API.
 
 ```shell
 $ cd [path to your node-docker directory]
@@ -49,7 +49,7 @@ server.start()
 
 The mocking server is called `Ronin.js` and will listen on port 8000 by default. You can make POST requests to the root (/) endpoint and any JSON structure you send to the server will be saved in memory. You can also send GET requests to the same endpoint and receive an array of JSON objects that you have previously POSTed.
 
-## Test application
+## Test the application
 
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to your working directory you created.
 
@@ -117,7 +117,7 @@ To make things easier when running the rest of our commands, let’s create a wo
 WORKDIR /app
 ```
 
-Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This will ensure that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
+Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This ensures that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
 
 Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The  `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
 
@@ -182,7 +182,7 @@ Successfully built e03018e56163
 Successfully tagged node-docker:latest
 ```
 
-## Viewing local images
+## View local images
 
 To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use Docker Desktop. Since we are currently working in the terminal let’s take a look at listing images with the CLI.
 
