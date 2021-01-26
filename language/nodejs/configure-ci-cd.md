@@ -233,9 +233,7 @@ In this module, you have learnt how to set up GitHub Actions workflow to an exis
 
 You can also consider deploying your application to the cloud. For detailed instructions, see:
 
-[Deploying Docker containers on Azure](/cloud/aci-integration/){: .button .outline-btn}
-
-[Deploying Docker containers on ECS](/cloud/ecs-integration.md){: .button .outline-btn}
+[Deploy your app to the cloud](/deploy.md){: .button .outline-btn}
 
 ## Feedback
 
