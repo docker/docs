@@ -6,7 +6,9 @@ keywords: cli, compose, profile, profiles reference
 
 Profiles allow adjusting the Compose application model for various usages and
 environments by selectively enabling services.
-This is achieved by assigning each service to zero or more profiles. If unassigned, the service is _always_ started but if assigned, it is only started if the profile is activated.
+This is achieved by assigning each service to zero or more profiles. If
+unassigned, the service is _always_ started but if assigned, it is only started
+if the profile is activated.
 
 This allows one to define additional services in a single `docker-compose.yml` file
 that should only be started in specific scenarios, e.g. for debugging or
