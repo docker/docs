@@ -36,6 +36,19 @@ can also be customized using `COMPOSE_PATH_SEPARATOR`.
 
 See also the `-f` [command-line option](overview.md).
 
+## COMPOSE\_PROFILES
+
+Specify one or multiple active profiles to enable. Calling `docker-compose up`
+with `COMPOSE_PROFILES=frontend` will start the services with the profile
+`frontend` and services without specified profiles.
+
+You can specify a list of profiles separated with a comma:
+`COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
+`debug`.
+
+See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
+[command-line option](overview.md).
+
 ## COMPOSE\_API\_VERSION
 
 The Docker API only supports requests from clients which report a specific

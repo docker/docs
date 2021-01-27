@@ -1194,6 +1194,8 @@ manuals:
     title: Environment variables in Compose
   - path: /compose/env-file/
     title: Environment file
+  - path: /compose/profiles/
+    title: Using service profiles
   - path: /compose/extends/
     title: Extend services in Compose
   - path: /compose/networking/
