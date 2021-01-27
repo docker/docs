@@ -15,8 +15,8 @@ development tasks.
 ## Assigning profiles to services
 
 Services are associated with profiles through the
-[`profiles` attribute](compose-file/index.md#profiles) which takes an array of
-profile names:
+[`profiles` attribute](compose-file/compose-file-v3.md#profiles) which takes an
+array of profile names:
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
