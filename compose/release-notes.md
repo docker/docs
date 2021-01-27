@@ -10,7 +10,7 @@ redirect_from:
 ## 1.28.2
 (2021-01-26)
 
-### Bugs
+### Bug fixes
 
 - Revert to Python 3.7 bump for Linux static builds
 
@@ -37,7 +37,7 @@ redirect_from:
 
 - Docker Compose now uses the native Docker CLI's `build` command when building images. Set the `COMPOSE_DOCKER_CLI_BUILD=0` environment variable to disable this feature.
 
-### Bugs
+### Bug fixes
 
 - Made `parallel_pull=True` by default.
 
@@ -86,7 +86,7 @@ redirect_from:
 ## 1.27.4 
 (2020-09-24)
 
-### Bugs
+### Bug fixes
 
 - Removed path checks for bind mounts.
 
@@ -97,7 +97,7 @@ redirect_from:
 ## 1.27.3 
 (2020-09-16)
 
-### Bugs
+### Bug fixes
 
 - Merged `max_replicas_per_node` on `docker-compose config`.
 
@@ -112,14 +112,14 @@ redirect_from:
 ## 1.27.2
 (2020-09-10)
 
-### Bugs
+### Bug fixes
 
 - Fixed bug on `docker-compose run` container attach.
 
 ## 1.27.1
 (2020-09-10)
 
-### Bugs
+### Bug fixes
 
 - Fixed `docker-compose run` when `service.scale` is specified.
 
@@ -148,7 +148,7 @@ redirect_from:
 
 - Parsed `network_mode` on build.
 
-### Bugs
+### Bug fixes
 
 - Ignored build context path validation when building is not required.
 
