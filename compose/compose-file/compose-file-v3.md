@@ -1687,6 +1687,24 @@ ports:
 >
 > The long syntax is new in the v3.2 file format.
 
+### profiles
+
+```yaml
+profiles: ["frontend", "debug"]
+profiles:
+  - frontend
+  - debug
+```
+
+`profiles` defines a list of named profiles for the service to be enabled under.
+When not set, the service is _always_ enabled. For the services that make up
+your core application you should omit `profiles` so they will always be started.
+
+Valid profile names follow the regex format `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
+
+See also [_Using profiles with Compose_](../profiles.md) to learn more about
+profiles.
+
 ### restart
 
 `no` is the default [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy), and it does not restart a container under

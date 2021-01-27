@@ -23,9 +23,9 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
   If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
-
-    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS.
+  > **Note**
+  >
+  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
 
 - At least 4 GB of RAM.
 
