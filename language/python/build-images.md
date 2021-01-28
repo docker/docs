@@ -26,7 +26,7 @@ Let’s create a simple Python application using the Flask framework that we’l
 
 ```shell
 $ cd /path/to/python-docker
-$ pip install Flask
+$ pip3 install Flask
 $ pip freeze > requirements.txt
 $ touch app.py
 ```
@@ -47,7 +47,7 @@ def hello_world():
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created.
 
 ```shell
-$ python -m flask run
+$ python3 -m flask run
 ```
 
 To test that the application is working properly, open a new browser and navigate to `http://localhost:5000`.
@@ -90,7 +90,7 @@ WORKDIR /app
 
 Usually, the very first thing you do once you’ve downloaded a project written in Python is to install `pip` packages. This ensures that your application has all its dependencies installed.
 
-Before we can run `pip install`, we need to get our `requirements.txt` file into our image. We’ll use the `COPY` command to do this. The `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `requirements.txt` file into our working directory `/app`.
+Before we can run `pip3 install`, we need to get our `requirements.txt` file into our image. We’ll use the `COPY` command to do this. The `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `requirements.txt` file into our working directory `/app`.
 
 ```dockerfile
 COPY requirements.txt requirements.txt

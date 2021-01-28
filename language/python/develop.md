@@ -146,7 +146,7 @@ We’ve added the MySQL module and updated the code to connect to the database s
 First, let’s add the `mysql-connector-python `module to our application using pip.
 
 ```shell
-$ pip install mysql-connector-python
+$ pip3 install mysql-connector-python
 $ pip freeze -r requirements.txt
 ```
 
