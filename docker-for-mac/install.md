@@ -109,6 +109,6 @@ For information on how to back up and restore data volumes, see [Backup, restore
 - [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
-- [FAQs](faqs.md) provide answers to frequently asked questions.
+- [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
 - [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](/get-started/) provides a general Docker tutorial.
