@@ -176,12 +176,6 @@ As well as on the registry. For example:
 For more about using client and server side certificates, see
 [Adding TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
 
-### Docker Desktop does not start if Mac user account and home folder are renamed after installing the app
-
-See
-[Do I need to reinstall Docker Desktop if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
-in the FAQs.
-
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
 If you are using mounted volumes and get runtime errors indicating an

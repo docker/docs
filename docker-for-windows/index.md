@@ -382,10 +382,7 @@ After you have successfully authenticated, you can access your organizations and
 
 ## Adding TLS certificates
 
-You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server
-certificates, and **client certificates**, to authenticate to registries. For more information, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
-in the FAQs.
+You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.
 
 ### How do I add custom CA certificates?
 
