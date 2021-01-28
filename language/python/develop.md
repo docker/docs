@@ -14,7 +14,7 @@ Work through the steps to build an image and run it as a containerized applicati
 
 In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
 
-## Local database and containers
+## Run a database in a container
 
 First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
 
@@ -67,9 +67,13 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 mysql>
 ```
 
+### Connect the application to the database
+
 In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.
 
-Okay, now that we have a running MySQL, let’s update `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
+Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
+
+Okay, now that we have a running MySQL, let’s update the`app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
 
 ```shell
 import mysql.connector
@@ -152,7 +156,7 @@ Now we can build our image.
 $ docker build --tag python-docker .
 ```
 
-Now, let’s run our container.
+Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
 
 ```shell
 $ docker run \

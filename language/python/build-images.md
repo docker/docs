@@ -129,6 +129,17 @@ COPY . .
 CMD [ "python3", "app.py" ]
 ```
 
+### Directory structure
+
+Just to recap, we created a directory in our local machine called `docker-python` and created a simple Python application using the Flask framework. We also used the `requirements.txt` file to gather our requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure would now look like:
+
+```shell
+python-docker
+|____ app.py
+|____ requirements.txt
+|____ Dockerfile
+```
+
 ## Build an image
 
 Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in this context.
