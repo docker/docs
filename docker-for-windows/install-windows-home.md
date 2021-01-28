@@ -143,5 +143,5 @@ For information on how to back up and restore data volumes, see [Backup, restore
   you how to deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
-* [FAQs](faqs.md) provides answers to frequently asked questions.
+* [FAQs](../desktop/faqs.md) provides answers to frequently asked questions.
 * [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
