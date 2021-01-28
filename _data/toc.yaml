@@ -79,6 +79,8 @@ guides:
       path: /language/python/develop/
     - title: "Configure CI/CD"
       path: /language/python/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/python/deploy/
   - sectiontitle: Java
     section:
     - title: "Overview"
