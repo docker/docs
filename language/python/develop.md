@@ -147,7 +147,7 @@ First, let’s add the `mysql-connector-python `module to our application using 
 
 ```shell
 $ pip3 install mysql-connector-python
-$ pip freeze -r requirements.txt
+$ pip3 freeze -r requirements.txt
 ```
 
 Now we can build our image.

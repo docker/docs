@@ -27,7 +27,7 @@ Let’s create a simple Python application using the Flask framework that we’l
 ```shell
 $ cd /path/to/python-docker
 $ pip3 install Flask
-$ pip freeze > requirements.txt
+$ pip3 freeze > requirements.txt
 $ touch app.py
 ```
 
