@@ -32,7 +32,7 @@ Hyper-V on Windows 10:
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
 
-> **Note:** Docker supports Docker Desktop on Windows based on Microsoft’s support lifecycle for Windows 10 operating system. For more information, see the [Windows lifecycle fact sheet](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+> **Note:** Docker supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
 ### What's included in the installer
 
