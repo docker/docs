@@ -27,6 +27,7 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 - The DNS name `host.docker.internal` only works if you add `--add-host=host.docker.internal:host-gateway` to the `docker run` command
 - The DNS name `vm.docker.internal` does not work.
 - Kubernetes does not initialize because of a missing DNS name.
+- osxfs file sharing does not work.
 - The HTTP proxy is not enabled.
 - Not all images are available for ARM64. You can add `--platform linux/amd64` to run an Intel image under emulation.
 
