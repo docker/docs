@@ -52,8 +52,14 @@ if __name__ == '__main__':
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created. Run:
 
 ```shell
+$ source venv/bin/activate
+```
+To ensure your virtual environment is activated. Lastly, run:
+
+```shell
 $ python3 app.py
 ```
+To start the Flask application.
 
 To test that the application is working properly, open a new browser and navigate to `http://localhost:5000`.
 
