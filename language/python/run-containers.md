@@ -27,43 +27,38 @@ After running this command, you’ll notice that you were not returned to the co
 Let’s make a `GET` request to the server using the `curl` command.
 
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-curl: (7) Failed to connect to localhost port 8000: Connection refused
+$ curl --request GET --url http://localhost:5000
+```
+You should get the following output:
+```shell
+curl: (7) Failed to connect to localhost port 5000: Connection refused
 ```
 
-As you can see, our `curl` command failed because the connection to our server was refused. This means, we were not able to connect to the localhost on `port 8000`. This is expected because our container is run in isolation which includes networking. Let’s stop the container and restart with `port 8000` published on our local network.
+As you can see, our `curl` command failed because the connection to our server was refused. This means, we were not able to connect to the localhost on `port 5000`. This is expected because our container is running in isolation i.e. your system is unable to establish a network connection with the container. Let’s stop the container and restart it with `port 5000` published on our local network.
 
 To stop the container, press ctrl-c. This will return you to the terminal prompt.
 
-To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 8000 inside the container to port 3000 outside the container, we would pass `3000:8000` to the `--publish` flag.
+To expose an application that is running on a certain port of the container, the `--publish` flag (`-p` for short) on the `docker run` command should be used. The format of the argument expected by the `--publish` flag is `[host port]:[container port]`. So, if we wanted to expose the container's port 8000 to port 5000 outside the container (i.e. your local network), we would pass `5000:8000` to the `--publish` flag.
 
-Start the container and expose port 8000 to port 8000 on the host:
+Let's start the container and expose port 5000 to port 8000 on the host:
 
 ```shell
-$ docker run --publish 8000:8000 python-docker
+$ docker run --publish 5000:8000 python-docker
 ```
 
-Now, let’s rerun the curl command from above:
+Now, let’s rerun the curl command from above using port 8000 of your local network:
 
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl --request GET --url http://localhost:8000
 ```
-
-Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the POST request logged to the console.
+This time, you should get the following output:
+```shell
+Hello, Docker!%
+```
+Success! We were able to connect to the application running inside our container on port 8000. Switch back to the terminal where your container is running and you should see the POST request logged to the console.
 
 ```shell
-2020-09-01T17:36:09:8770  INFO: POST /test
+"GET / HTTP/1.1" 200 -
 ```
 
 Press ctrl-c to stop the container.
@@ -73,7 +68,10 @@ Press ctrl-c to stop the container.
 This is great so far, but our sample application is a web server and we don't have to be connected to the container. Docker can run your container in detached mode or in the background. To do this, we can use the `--detach` or `-d` for short. Docker starts your container the same as before but this time will “detach” from the container and return you to the terminal prompt.
 
 ```shell
-$ docker run -d -p 8000:8000 python-docker
+$ docker run -d -p 5000:8000 python-docker
+```
+Output should be something like:
+```shell
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
 
@@ -82,13 +80,11 @@ Docker started our container in the background and printed the Container ID on t
 Again, let’s make sure that our container is running properly. Run the same curl command from above.
 
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl --request GET --url http://localhost:8000
+```
+Output:
+```shell
+Hello, Docker!%
 ```
 
 ## List containers
