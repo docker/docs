@@ -11,7 +11,7 @@ The Docker Dashboard provides a simple interface that enables you to manage your
 
 The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications.
 
-The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
+The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
 
 In addition, the Docker Dashboard allows you to:
 
@@ -200,11 +200,15 @@ An **unused** image is an image which is not used by any running or stopped cont
 
 ### Interact with remote repositories
 
-The Images view also allows you to manage and interact with images in remote repositories and lets you switch between organizations.
+The Images view also allows you to manage and interact with images in remote repositories and lets you switch between organizations. Select an organization from the drop-down to view a list of repositories in your organization.
+
+> **Note**
+>
+> If you have subscribed to a Pro or a Team plan and enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will appear on the Remote repositories tab.
 
 The **Pull** option allows you to pull the latest version of the image from Docker Hub. The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 
-![View image in Hub](images/image-details.png){:width="700px"}
+![Images in remote repositories](images/image-details.png){:width="700px"}
 
 To interact with remote repositories:
 
@@ -212,3 +216,7 @@ To interact with remote repositories:
 2. Select an organization from the drop-down list. This displays a list of repositories in your organization.
 3. Click on an image from the list and then select **Pull** to pull the latest image from the remote repository.
 4. To view a detailed information about the image in Docker Hub, select the image and then click **View in Hub**.
+
+    The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
+
+    If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.

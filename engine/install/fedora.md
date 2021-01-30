@@ -20,8 +20,8 @@ To get started with Docker Engine on Fedora, make sure you
 
 To install Docker Engine, you need the 64-bit version of one of these Fedora versions:
 
-- Fedora 30
-- Fedora 31
+- Fedora 32
+- Fedora 33
 
 ### Uninstall old versions
 
@@ -160,22 +160,13 @@ $ sudo dnf config-manager \
 
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
 
-3.  Cgroups Exception:
-    For Fedora 31 and higher, you need to enable the [backward compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
-
-    ```bash
-    $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-    ```
-    
-    After running the command, you must reboot for the changes to take effect.
-    
-4.  Start Docker.
+3.  Start Docker.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-5.  Verify that Docker Engine is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -201,7 +192,7 @@ If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker Engine.
 
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" }
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 

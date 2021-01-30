@@ -1,23 +1,90 @@
-<!-- Page generated {{ site.time }} -->
-<!-- Logic for 'edit this button'
-{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
-{% for entry in site.data.not_edited_here.overrides %}
-    {% if page.path contains entry.path %}
-        {% if entry.source %}
-            {% assign edit_url = entry.source %}
-        {% else %}
-            {% assign edit_url = "" %}
-        {% endif %}
-    {% break %}
-    {% endif %}
-{% endfor %}
--->
+<!-- Page generated {{ site.time }}
+{%- if page.edit_url -%}
+    {%- assign edit_url = page.edit_url -%}
+{%- else -%}
+    {%- assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path -%}
+{%- endif -%} -->
 <!DOCTYPE html>
 <html lang="en">
-{% include head.html %}
-{% if page.landing == true %}
-    {% include body-landing.html %}
-{%else%}
-    {% include body.html %}
-{% endif %}
+{%- include head.html -%}
+<body class="colums">
+    <header>
+        {% include header.html %}
+    </header>
+    <div class="wrapper right-open">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-body">
+                    <main class="col-content content">
+                        <section class="section">
+                            {%- if page.title -%}
+                            <h1>{{ page.title }}</h1>
+                            {%- endif -%}
+                            {%- if page.advisory -%}
+                            <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
+                            {%- endif -%}
+                            {%- unless page.skip_read_time == true -%}
+                            {%- assign words = content | number_of_words -%}
+                            {%- if words >= 360 -%}
+                            <p><em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes</em></p>
+                            {%- endif -%}
+                            {%- endunless -%}
+                            {{ content }}
+                            {%- unless page.notags == true -%}
+                            {%- assign keywords = page.keywords | split:"," -%}
+                            {%- if keywords.size > 0 -%}
+                            <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">
+                                {%- for keyword in keywords -%}
+                                {%- assign strippedKeyword = keyword | strip -%}
+                                <a href="/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
+                                {%- unless forloop.last %}, {% endunless -%}
+                                {%- endfor -%}
+                            </span>
+                            {%- endif -%}
+                            {%- endunless %}
+                            {%- if site.polldaddy_id and page.noratings != true -%}
+                            <div class="ratings-div"><div id="pd_rating_holder_{{ site.polldaddy_id }}"></div></div>
+                            {%- endif -%}
+                        </section>
+                    </main>
+                    <nav class="col-nav">
+                        <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                            <div id="navbar" class="nav-sidebar">
+                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav" id="jsTOCLeftNav"></ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="col-toc">
+                        <div class="sidebar hidden-xs hidden-sm">
+                            <div class="toc-nav">
+                                <div class="feedback-links">
+                                    <ul>
+                                        {%- if edit_url != "" -%}
+                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
+                                        {%- endif -%}
+                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+                                        <li>{%- include theme-switch.html -%}</li>
+                                    </ul>
+                                </div>
+                                {%- unless page.notoc -%}
+                                {%- assign my_min = page.toc_min | default: site.toc_min | default: 2 -%}
+                                {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
+                                {%- assign my_name = page.url | default: "unnamed" -%}
+                                <div id="side-toc-title">On this page:</div>
+                                {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
+                                {%- endunless -%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        {% include footer.html %}
+    </footer>
+    <script>const pageURL = "{{ page.url }}";</script>
+    {%- if jekyll.environment == 'production' -%}{%- include analytics/polldaddy.html -%}{%- endif -%}
+</body>
 </html>

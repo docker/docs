@@ -8,7 +8,7 @@ title: Splunk logging driver
 ---
 
 The `splunk` logging driver sends container logs to
-[HTTP Event Collector](http://dev.splunk.com/view/event-collector/SP-CAAAE6M)
+[HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/)
 in Splunk Enterprise and Splunk Cloud.
 
 ## Usage
@@ -75,6 +75,7 @@ The following properties let you configure the splunk logging driver.
 | `splunk-gzip-level`         | optional | Set compression level for gzip. Valid values are -1 (default), 0 (no compression), 1 (best speed) ... 9 (best compression). Defaults to [DefaultCompression](https://golang.org/pkg/compress/gzip/#DefaultCompression).                                                                                                                     |
 | `tag`                       | optional | Specify tag for message, which interpret some markup. Default value is {% raw %}`{{.ID}}`{% endraw %} (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format.                                                                                                     |
 | `labels`                    | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for container.                                                                                                                                                                                                                   |
+| `labels-regex`              | optional | Similar to and compatible with `labels`. A regular expression to match logging-related labels. Used for advanced [log tag options](log_tags.md).                                                                                                                                                                                            |
 | `env`                       | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for container.                                                                                                                                                                                                 |
 | `env-regex`                 | optional | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                                                                                                |
 

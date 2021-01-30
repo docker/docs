@@ -14,9 +14,96 @@ Work through the steps to build an image and run it as a containerized applicati
 
 In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
 
-## Use Compose to develop locally
+## Local Database and Containers
 
-The notes-service project uses MongoDB as its data store. If you remember from Part I of this series, we had to start the Mongo container manually and connect it to the same network that our notes-service is running on. We also had to create a couple of volumes so we could persist our data across restarts of our application and MongoDB.
+First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+
+Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
+
+Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
+
+Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+
+```shell
+$ docker volume create mongodb
+$ docker volume create mongodb_config
+```
+
+Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
+
+```shell
+$ docker network create mongodb
+```
+
+Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
+
+```shell
+$ docker run -it --rm -d -v mongodb:/data/db \
+  -v mongodb_config:/data/configdb -p 27017:27017 \
+  --network mongodb \
+  --name mongodb \
+  mongo
+```
+
+Okay, now that we have a running mongodb, let’s update `server.js` to use a the MongoDB and not an in-memory data store.
+
+```javascript
+const ronin     = require( 'ronin-server' )
+const mocks     = require( 'ronin-mocks' )
+const database  = require( 'ronin-database' )
+const server = ronin.server()
+
+database.connect( process.env.CONNECTIONSTRING )
+server.use( '/', mocks.server( server.Router(), false, false ) )
+server.start()
+```
+
+We’ve add the ronin-database module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
+
+First let’s add the ronin-database module to our application using npm.
+
+```shell
+$ npm install ronin-database
+```
+
+Now we can build our image.
+
+```shell
+$ docker build --tag node-docker .
+```
+
+Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
+
+```shell
+$ docker run \
+  -it --rm -d \
+  --network mongodb \
+  --name rest-server \
+  -p 8000:8000 \
+  -e CONNECTIONSTRING=mongodb://mongodb:27017/yoda_notes \
+  node-docker
+```
+
+Let’s test that our application is connected to the database and is able to add a note.
+
+```shell
+$ curl --request POST \
+  --url http://localhost:8000/notes \
+  --header 'content-type: application/json' \
+  --data '{
+"name": "this is a note",
+"text": "this is a note that I wanted to take while I was working on writing a blog post.",
+"owner": "peter"
+}'
+```
+
+You should receive the following json back from our service.
+
+```json
+{"code":"success","payload":{"_id":"5efd0a1552cd422b59d4f994","name":"this is a note","text":"this is a note that I wanted to take while I was working on writing a blog post.","owner":"peter","createDate":"2020-07-01T22:11:33.256Z"}}
+```
+
+## Use Compose to develop locally
 
 In this section, we’ll create a Compose file to start our node-docker and the MongoDB with one command. We’ll also set up the Compose file to start the node-docker in debug mode so that we can connect a debugger to the running node process.
 
@@ -27,28 +114,28 @@ version: '3.8'
 
 services:
  notes:
-   build:
-     context: .
-   ports:
-     - 8080:8080
-     - 9229:9229
-   environment:
-     - SERVER_PORT=8080
-     - DATABASE_CONNECTIONSTRING=mongodb://mongo:27017/notes
-   volumes:
-     - ./:/code
-   command: npm run debug
+  build:
+   context: .
+  ports:
+   - 8080:8080
+   - 9229:9229
+  environment:
+   - SERVER_PORT=8080
+   - CONNECTIONSTRING=mongodb://mongo:27017/notes
+  volumes:
+   - ./:/code
+  command: npm run debug
 
  mongo:
-   image: mongo:4.2.8
-   ports:
-     - 27017:27017
-   volumes:
-     - mongodb:/data/db
-     - mongodb_config:/data/configdb
- volumes:
-   mongodb:
-   mongodb_config:
+  image: mongo:4.2.8
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+volumes:
+ mongodb:
+ mongodb_config:
 ```
 
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Compose file.

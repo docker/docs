@@ -9,9 +9,9 @@ title: Fluentd logging driver
 ---
 
 The `fluentd` logging driver sends container logs to the
-[Fluentd](http://www.fluentd.org/) collector as structured log data. Then, users
+[Fluentd](https://www.fluentd.org) collector as structured log data. Then, users
 can use any of the [various output plugins of
-Fluentd](http://www.fluentd.org/plugins) to write these logs to various
+Fluentd](https://www.fluentd.org/plugins) to write these logs to various
 destinations.
 
 In addition to the log message itself, the `fluentd` log
@@ -98,16 +98,17 @@ Refer to the [log tag option documentation](log_tags.md) for customizing
 the log tag format.
 
 
-### labels, env, and env-regex
+### labels, labels-regex, env, and env-regex
 
 The `labels` and `env` options each take a comma-separated list of keys. If
 there is collision between `label` and `env` keys, the value of the `env` takes
 precedence. Both options add additional fields to the extra attributes of a
 logging message.
 
-The `env-regex` option is similar to and compatible with `env`. Its value is a
-regular expression to match logging-related environment variables. It is used
-for advanced [log tag options](log_tags.md).
+The `env-regex` and `labels-regex` options are similar to and compatible with
+respectively `env` and `labels`. Their values are regular expressions to match
+logging-related environment variables and labels. It is used for advanced
+[log tag options](log_tags.md).
 
 ### fluentd-async-connect
 
@@ -133,8 +134,8 @@ Generates event logs in nanosecond resolution. Defaults to `false`.
 
 ## Fluentd daemon management with Docker
 
-About `Fluentd` itself, see [the project webpage](http://www.fluentd.org)
-and [its documents](http://docs.fluentd.org/).
+About `Fluentd` itself, see [the project webpage](https://www.fluentd.org)
+and [its documents](https://docs.fluentd.org).
 
 To use this logging driver, start the `fluentd` daemon on a host. We recommend
 that you use [the Fluentd docker

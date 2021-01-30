@@ -2,7 +2,6 @@
 description: Gracefully stop a machine
 keywords: machine, stop, subcommand
 title: docker-machine stop
-hide_from_sitemap: true
 ---
 
 ```none

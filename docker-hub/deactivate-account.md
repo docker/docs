@@ -44,7 +44,9 @@ Before deactivating an organization, please complete the following:
 
       In Docker Hub, navigate to **Organizations** > **_Your Organization_** > **Billing**.
 
-3. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+3. Remove all other members, including those in the **Owners** team, within the organization.
+
+4. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
 
 Once you have completed all the steps above, you may deactivate your organization. On Docker Hub, go to **Organizations** > **_Your Organization_** > **Settings** > **Deactivate Org**.
 

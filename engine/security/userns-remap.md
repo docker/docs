@@ -7,7 +7,7 @@ title: Isolate containers with a user namespace
 Linux namespaces provide isolation for running processes, limiting their access
 to system resources without the running process being aware of the limitations.
 For more information on Linux namespaces, see
-[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" }.
+[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" rel="noopener" class="_" }.
 
 The best way to prevent privilege-escalation attacks from within a container is
 to configure your container's applications to run as unprivileged users. For

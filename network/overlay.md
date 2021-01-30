@@ -111,10 +111,10 @@ $ docker network create --opt encrypted --driver overlay --attachable my-attacha
 
 ### Customize the default ingress network
 
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
-conflicts with one that already exists on your network, or you need to customize
-other low-level network settings such as the MTU.
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet conflicts with
+one that already exists on your network, or you need to customize other low-level
+network settings such as the MTU.
 
 Customizing the `ingress` network involves removing and recreating it. This is
 usually done before you create any services in the swarm. If you have existing

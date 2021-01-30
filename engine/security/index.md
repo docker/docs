@@ -48,13 +48,13 @@ common Ethernet switch; no more, no less.
 How mature is the code providing kernel namespaces and private
 networking? Kernel namespaces were introduced [between kernel version
 2.6.15 and
-2.6.26](http://man7.org/linux/man-pages/man7/namespaces.7.html).
+2.6.26](https://man7.org/linux/man-pages/man7/namespaces.7.html).
 This means that since July 2008 (date of the 2.6.26 release
 ), namespace code has been exercised and scrutinized on a large
 number of production systems. And there is more: the design and
 inspiration for the namespaces code are even older. Namespaces are
 actually an effort to reimplement the features of [OpenVZ](
-http://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
+https://en.wikipedia.org/wiki/OpenVZ) in such a way that they could be
 merged within the mainstream kernel. And OpenVZ was initially released
 in 2005, so both the design and the implementation are pretty mature.
 
@@ -196,7 +196,7 @@ drops all capabilities except [those
 needed](https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19),
 an allowlist instead of a denylist approach. You can see a full list of
 available capabilities in [Linux
-manpages](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+manpages](https://man7.org/linux/man-pages/man7/capabilities.7.html).
 
 One primary risk with running Docker containers is that the default set
 of capabilities and mounts given to a container may provide incomplete
@@ -222,7 +222,7 @@ This feature provides more insight to administrators than previously available w
 the CLI for enforcing and performing image signature verification. 
 
 For more information on configuring Docker Content Trust Signature Verificiation, go to 
-[Content trust in Docker](trust/content_trust.md).
+[Content trust in Docker](trust/index.md).
 
 ## Other kernel security features
 

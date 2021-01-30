@@ -24,7 +24,7 @@ designed to:
   authors.
 
 * Ensure that security updates are applied in a timely manner. This is
-  particularly important as many Official Images are some of the most
+  particularly important as Official Images are some of the most
   popular on Docker Hub.
 
 Docker, Inc. sponsors a dedicated team that is responsible for reviewing and
@@ -34,17 +34,21 @@ broader Docker community.
 
 While it is preferable to have upstream software authors maintaining their
 corresponding Official Images, this is not a strict requirement. Creating
-and maintaining images for Official Images is a public process. It takes
+and maintaining images for Official Images is a collaborative process. It takes
 place openly on GitHub where participation is encouraged. Anyone can provide
 feedback, contribute code, suggest process changes, or even propose a new
 Official Image.
 
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+
 ## When to use Official Images
 
-New Docker users are encouraged to use the Official Images in their
+If you are new to Docker, we recommend that you use the Official Images in your
 projects. These images have clear documentation, promote best practices,
-and are designed for the most common use cases. Advanced users are encouraged to
-review the Official Images as part of their `Dockerfile` learning process.
+and are designed for the most common use cases. Advanced users can
+review the Official Images as part of your `Dockerfile` learning process.
 
 A common rationale for diverging from Official Images is to optimize for
 image size. For instance, many of the programming language stack images contain
@@ -59,36 +63,6 @@ designed to fill the need for optimization. Even when these "slim" variants are
 insufficient, it is still recommended to inherit from an Official Image
 base OS image to leverage the ongoing maintenance work, rather than duplicating
 these efforts.
-
-## Official Image Vulnerability Scanning
-
-Each of the images in the Official Images is scanned for vulnerabilities. The
-results of these security scans provide valuable information about which images
-contain security vulnerabilities, and allow you to choose images that align with
-your security standards.
-
-To view the Docker Security Scanning results:
-
-1. Make sure you're logged in to Docker Hub. You can view Official Images even
-    while logged out, however the scan results are only available once you log
-    in.
-
-2. Navigate to the repository of the Official Image whose security scan you want
-   to view.
-
-3. Click the `Tags` tab to see a list of tags. and their security scan summaries.
-
-    ![Official Image Tags](images/official_images-tags-home.png)
-
-4. Click on a tag to see the image's security scan summary.
-
-    ![Official Image Tags](images/official_images-tags-2019.png)
-
-
-You can click into a tag's detail page to see more information about which
-layers in the image and which components within the layer are vulnerable.
-Details including a link to the official CVE report for the vulnerability appear
-when you click an individual vulnerable component.
 
 ## Submitting Feedback for Official Images
 

@@ -2,17 +2,16 @@
 description: How to install Docker Machine
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Install Docker Machine
-hide_from_sitemap: true
 ---
 
 Install Docker Machine binaries by following the instructions in the following section. You can find the latest
 versions of the binaries on the [docker/machine release
-page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
+page](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" }
 on GitHub.
 
 ## Install Docker Machine
 
-1.  Install [Docker](../engine/install/index.md){: target="_blank" class="_" }.
+1.  Install [Docker](../engine/install/index.md){: target="_blank" rel="noopener" class="_" }.
 
 2.  Download the Docker Machine binary and extract it to your PATH.
 
@@ -33,7 +32,7 @@ on GitHub.
       chmod +x /usr/local/bin/docker-machine
     ```
 
-    If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
+    If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"}:
 
     ```console
     $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
@@ -43,11 +42,11 @@ on GitHub.
     ```
 
     > The above command works on Windows only if you use a
-    terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}, which supports Linux commands like `chmod`.
+    terminal emulator such as [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"}, which supports Linux commands like `chmod`.
     {: .important}
 
     Otherwise, download one of the releases from the [docker/machine release
-    page](https://github.com/docker/machine/releases/){: target="_blank" class="_" } directly.
+    page](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" } directly.
 
 3.  Check the installation by displaying the Machine version:
 
@@ -90,7 +89,7 @@ PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 You can find additional documentation in the comments at the [top of
 each
 script](https://github.com/docker/machine/tree/master/contrib/completion/bash){:
-target="_blank" class="_"}.
+target="_blank" rel="noopener" class="_"}.
 
 ## How to uninstall Docker Machine
 
@@ -122,7 +121,7 @@ servers.
 
 ## Where to go next
 
--  [Docker Machine overview](overview.md)
+-  [Docker Machine overview](index.md)
 -  Create and run a Docker host on your [local system using virtualization](get-started.md)
 -  Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
 -  [Docker Machine driver reference](drivers/index.md)

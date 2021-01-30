@@ -46,6 +46,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: env-file
+  value_type: list
+  description: Read in a file of environment variables
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: interactive
   shorthand: i
   value_type: bool

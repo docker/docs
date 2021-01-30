@@ -3,7 +3,6 @@ datafolder: registry-cli
 datafile: docker_registry_jobs
 title: docker registry jobs
 enterprise_only: true
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

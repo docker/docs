@@ -2,6 +2,9 @@
 title: Environment variables in Compose
 description: How to set, use and manage environment variables in Compose
 keywords: compose, orchestration, environment, env file
+redirect_from:
+- /compose/env
+- /compose/link-env-deprecated
 ---
 
 There are multiple parts of Compose that deal with environment variables in one
@@ -20,7 +23,9 @@ web:
 
 If you have multiple environment variables, you can substitute them by providing 
 a path to your environment variables file. By default, the `docker-compose` 
-command will look for a file named `.env` in the directory you run the command.
+command will look for a file named `.env` in the project directory (parent folder 
+of your Compose file).
+
 By passing the file as an argument, you can store it anywhere and name it 
 appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
 done using the `--env-file` option:
@@ -30,14 +35,14 @@ docker-compose --env-file ./config/.env.dev up
 ```
 
 For more information, see the
-[Variable substitution](compose-file/index.md#variable-substitution) section in the
+[Variable substitution](compose-file/compose-file-v3.md#variable-substitution) section in the
 Compose file reference.
 
 
 ## Set environment variables in containers
 
 You can set environment variables in a service's containers with the
-['environment' key](compose-file/index.md#environment), just like with
+['environment' key](compose-file/compose-file-v3.md#environment), just like with
 `docker run -e VARIABLE=VALUE ...`:
 
 ```yaml
@@ -49,7 +54,7 @@ web:
 ## Pass environment variables to containers
 
 You can pass environment variables from your shell straight through to a
-service's containers with the ['environment' key](compose-file/index.md#environment)
+service's containers with the ['environment' key](compose-file/compose-file-v3.md#environment)
 by not giving them a value, just like with `docker run -e VARIABLE ...`:
 
 ```yaml
@@ -64,7 +69,7 @@ the same variable in the shell in which Compose is run.
 ## The “env_file” configuration option
 
 You can pass multiple environment variables from an external file through to
-a service's containers with the ['env_file' option](compose-file/index.md#env_file),
+a service's containers with the ['env_file' option](compose-file/compose-file-v3.md#env_file),
 just like with `docker run --env-file=FILE ...`:
 
 ```yaml
@@ -191,9 +196,7 @@ documented in [CLI Environment Variables](reference/envvars.md).
 
 ## Environment variables created by links
 
-When using the ['links' option](compose-file/index.md#links) in a
-[v1 Compose file](compose-file/index.md#version-1), environment variables are created
-for each link. They are documented in
-the [Link environment variables reference](link-env-deprecated.md).
-
-However, these variables are deprecated. Use the link alias as a hostname instead.
+When using the ['links' option](compose-file/compose-file-v3.md#links) in a
+[v1 Compose file](compose-file/compose-file-v1.md#link-environment-variables),
+environment variables are created for each link. These variables are deprecated.
+Use the link alias as a hostname instead.

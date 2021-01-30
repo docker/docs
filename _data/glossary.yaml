@@ -1,37 +1,30 @@
-﻿<h3>Term</h3>: |
-  <h3>Definition</h3>
-<a class="glossary" name="amd64">amd64</a>: |
+﻿amd64: |
   AMD64 is AMD's 64-bit extension of Intel's x86 architecture, and is also
   referred to as x86_64 (or x86-64).
-<a class="glossary" name="aufs">aufs</a>: |
+aufs: |
   aufs (advanced multi layered unification filesystem) is a Linux [filesystem](#filesystem) that
   Docker supports as a storage backend. It implements the
   [union mount](http://en.wikipedia.org/wiki/Union_mount) for Linux file systems.
-<a class="glossary" name="base_image">base image</a>: |
+base image: |
   A **base image** has no parent image specified in its Dockerfile. It is created
   using a Dockerfile with the `FROM scratch` directive.
-<a class="glossary" name="boot2docker">boot2docker</a>: |
-  [boot2docker](http://boot2docker.io/) is a lightweight Linux distribution made
-  specifically to run Docker containers. The boot2docker management tool for Mac
-  and Windows was deprecated and replaced by [`docker-machine`](#machine) which
-  you can install with the Docker Toolbox.
-<a class="glossary" name="btrfs">btrfs</a>: |
+btrfs: |
   btrfs (B-tree file system) is a Linux [filesystem](#filesystem) that Docker
   supports as a storage backend. It is a [copy-on-write](http://en.wikipedia.org/wiki/Copy-on-write)
   filesystem.
-<a class="glossary" name="build">build</a>: |
+build: |
   build is the process of building Docker images using a [Dockerfile](#dockerfile).
   The build uses a Dockerfile and a "context". The context is the set of files in the
   directory in which the image is built.
-<a class="glossary" name="cgroups">cgroups</a>: |
+cgroups: |
   cgroups is a Linux kernel feature that limits, accounts for, and isolates
   the resource usage (CPU, memory, disk I/O, network, etc.) of a collection
   of processes. Docker relies on cgroups to control and isolate resource limits.
 
   *Also known as : control groups*
-<a class="glossary" name="cluster">cluster</a>: |
+cluster: |
   A cluster is a group of machines that work together to run workloads and provide high availability.
-<a class="glossary" name="compose">Compose</a>: |
+Compose: |
   [Compose](https://github.com/docker/compose) is a tool for defining and
   running complex applications with Docker. With Compose, you define a
   multi-container application in a single file, then spin your
@@ -39,7 +32,7 @@
   be done to get it running.
 
   *Also known as : docker-compose, fig*
-<a class="glossary" name="copy-on-write">copy-on-write</a>: |
+copy-on-write: |
   Docker uses a
   [copy-on-write](/engine/userguide/storagedriver/imagesandcontainers/#/the-copy-on-write-strategy)
   technique and a [union file system](#union_file_system) for both images and
@@ -59,7 +52,7 @@
   For more about copy-on-write in the context of Docker, see [Understand images,
   containers, and storage
   drivers](/engine/userguide/storagedriver/imagesandcontainers/).
-<a class="glossary" name="container">container</a>: |
+container: |
   A container is a runtime instance of a [docker image](#image).
 
   A Docker container consists of
@@ -70,22 +63,21 @@
 
   The concept is borrowed from Shipping Containers, which define a standard to ship
   goods globally. Docker defines a standard to ship software.
-<a class="glossary" name="docker">Docker</a>: |
+Docker: |
   The term Docker can refer to
 
   - The Docker project as a whole, which is a platform for developers and sysadmins to
   develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
-<a class="glossary" name="docker_desktop_for_mac">Docker Desktop for Mac</a>: |
+Docker Desktop for Mac: |
   [Docker Desktop for Mac](/docker-for-mac/) is an easy-to-install, lightweight
   Docker development environment designed specifically for the Mac. A native
   Mac application, Docker Desktop for Mac uses the macOS Hypervisor
   framework, networking, and filesystem. It's the best solution if you want
   to build, debug, test, package, and ship Dockerized applications on a
-  Mac. Docker Desktop for Mac supersedes [Docker Toolbox](#toolbox) as
-  state-of-the-art Docker on macOS.
-<a class="glossary" name="docker_desktop_for_windows">Docker Desktop for Windows</a>: |
+  Mac.
+Docker Desktop for Windows: |
   [Docker Desktop for Windows](/docker-for-windows/) is an
   easy-to-install, lightweight Docker development environment designed
   specifically for Windows 10 systems that support Microsoft Hyper-V
@@ -94,9 +86,8 @@
   2016, and gives you the ability to set up and run Windows containers as well as
   the standard Linux containers, with an option to switch between the two. Docker
   for Windows is the best solution if you want to build, debug, test, package, and
-  ship Dockerized applications from Windows machines. Docker Desktop for Windows
-  supersedes [Docker Toolbox](#toolbox) as state-of-the-art Docker on Windows.
-<a class="glossary" name="docker_hub">Docker Hub</a>: |
+  ship Dockerized applications from Windows machines.
+Docker Hub: |
   The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with
   Docker and its components. It provides the following services:
 
@@ -104,11 +95,11 @@
   - User authentication
   - Automated image builds and work-flow tools such as build triggers and web hooks
   - Integration with GitHub and Bitbucket
-<a class="glossary" name="dockerfile">Dockerfile</a>: |
+Dockerfile: |
   A Dockerfile is a text document that contains all the commands you would
   normally execute manually in order to build a Docker image. Docker can
   build images automatically by reading the instructions from a Dockerfile.
-<a class="glossary" name="entrypoint">ENTRYPOINT</a>: |
+ENTRYPOINT: |
   In a Dockerfile, an `ENTRYPOINT` is an optional definition for the first part
   of the command to be run. If you want your Dockerfile to be runnable without
   specifying additional arguments to the `docker run` command, you must specify
@@ -137,7 +128,7 @@
 
   In practice, `ENTRYPOINT` is not often overridden. However, specifying the
   `ENTRYPOINT` can make your images more flexible and easier to reuse.
-<a class="glossary" name="filesystem">filesystem</a>: |
+filesystem: |
   A file system is the method an operating system uses to name files
   and assign them locations for efficient storage and retrieval.
 
@@ -146,51 +137,46 @@
   - Linux : ext4, aufs, btrfs, zfs
   - Windows : NTFS
   - macOS : HFS+
-<a class="glossary" name="image">image</a>: |
+image: |
   Docker images are the basis of [containers](#container). An Image is an
   ordered collection of root filesystem changes and the corresponding
   execution parameters for use within a container runtime. An image typically
   contains a union of layered filesystems stacked on top of each other. An image
   does not have state and it never changes.
-<a class="glossary" name="kitematic">Kitematic</a>: |
-  A legacy GUI, bundled with [Docker Toolbox](#toolbox), for managing Docker
-  containers. We recommend upgrading to [Docker Desktop for Mac](#docker_desktop_for_mac)
-  or [Docker Desktop for Windows](#docker_desktop_for_windows), which have
-  superseded Kitematic.
-<a class="glossary" name="layer">layer</a>: |
+layer: |
   In an image, a layer is modification to the image, represented by an instruction in the
   Dockerfile. Layers are applied in sequence to the base image to create the final image.
   When an image is updated or rebuilt, only layers that change need to be updated, and
   unchanged layers are cached locally. This is part of why Docker images are so fast
   and lightweight. The sizes of each layer add up to equal the size of the final image.
-<a class="glossary" name="libcontainer">libcontainer</a>: |
+libcontainer: |
   libcontainer provides a native Go implementation for creating containers with
   namespaces, cgroups, capabilities, and filesystem access controls. It allows
   you to manage the lifecycle of the container performing additional operations
   after the container is created.
-<a class="glossary" name="libnetwork">libnetwork</a>: |
+libnetwork: |
   libnetwork provides a native Go implementation for creating and managing container
   network namespaces and other network resources. It manages the networking lifecycle
   of the container performing additional operations after the container is created.
-<a class="glossary" name="link">link</a>: |
+link: |
   links provide a legacy interface to connect Docker containers running on the
   same host to each other without exposing the hosts' network ports. Use the
   Docker networks feature instead.
-<a class="glossary" name="machine">Machine</a>: |
+Machine: |
   [Machine](https://github.com/docker/machine) is a Docker tool which
   makes it really easy to create Docker hosts on  your computer, on
   cloud providers and inside your own data center. It creates servers,
   installs Docker on them, then configures the Docker client to talk to them.
 
   *Also known as : docker-machine*
-<a class="glossary" name="namespace">namespace</a>: |
+namespace: |
   A [Linux namespace](http://man7.org/linux/man-pages/man7/namespaces.7.html)
   is a Linux kernel feature that isolates and virtualizes system resources. Processes which are restricted to
   a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
   are an important part of Docker's isolation model. Namespaces exist for each type of
   resource, including `net` (networking), `mnt` (storage), `pid` (processes), `uts` (hostname control),
   and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run/) and [Isolate containers with a user namespace](/engine/security/userns-remap/).
-<a class="glossary" name="node">node</a>: |
+node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
   machine running an instance of the Docker Engine in [swarm mode](#swarm_mode).
 
@@ -198,42 +184,42 @@
   manager nodes are also worker nodes.
 
   **Worker nodes** execute tasks.
-<a class="glossary" name="overlay_network_driver">overlay network driver</a>: |
+overlay network driver: |
   Overlay network driver provides out of the box multi-host network connectivity
   for docker containers in a cluster.
-<a class="glossary" name="overlay_storage_driver">overlay storage driver</a>: |
+overlay storage driver: |
   OverlayFS is a [filesystem](#filesystem) service for Linux which implements a
   [union mount](http://en.wikipedia.org/wiki/Union_mount) for other file systems.
   It is supported by the Docker daemon as a storage driver.
-<a class="glossary" name="parent_image">parent image</a>: |
+parent image: |
   An image's **parent image** is the image designated in the `FROM` directive
   in the image's Dockerfile. All subsequent commands are based on this parent
   image. A Dockerfile with the `FROM scratch` directive uses no parent image, and creates
   a **base image**.
-<a class="glossary" name="persistent_storage">persistent storage</a>: |
+persistent storage: |
   Persistent storage or volume storage provides a way for a user to add a
   persistent layer to the running container's file system. This persistent layer
   could live on the container host or an external device. The lifecycle of this
   persistent layer is not connected to the lifecycle of the container, allowing
   a user to retain state.
-<a class="glossary" name="registry">registry</a>: |
+registry: |
   A Registry is a hosted service containing [repositories](#repository) of [images](#image)
   which responds to the Registry API.
 
   The default registry can be accessed using a browser at [Docker Hub](#docker hub)
   or using the `docker search` command.
-<a class="glossary" name="repository">repository</a>: |
+repository: |
   A repository is a set of Docker images. A repository can be shared by pushing it
   to a [registry](#registry) server. The different images in the repository can be
   labeled using [tags](#tag).
 
   Here is an example of the shared [nginx repository](https://hub.docker.com/_/nginx/)
   and its [tags](https://hub.docker.com/r/library/nginx/tags/).
-<a class="glossary" name="SSH">SSH</a>: |
+SSH: |
   SSH (secure shell) is a secure protocol for accessing remote machines and applications.
   It provides authentication and encrypts data communication over insecure networks such
   as the Internet. SSH uses public/private key pairs to authenticate logins.
-<a class="glossary" name="service">service</a>: |
+service: |
   A [service](/engine/swarm/how-swarm-mode-works/services/) is the definition of how
   you want to run your application containers in a swarm. At the most basic level
   a service  defines which container image to run in the swarm and which commands
@@ -245,7 +231,7 @@
   application. Examples of services might include an HTTP server, a database, or
   any other type of executable program that you wish to run in a distributed
   environment.
-<a class="glossary" name="service_discovery">service discovery</a>: |
+service discovery: |
   Swarm mode [service discovery](/engine/swarm/networking/#use-swarm-mode-service-discovery) is a DNS component
   internal to the swarm that automatically assigns each service on an overlay
   network in the swarm a VIP and DNS entry. Containers on the network share DNS
@@ -255,9 +241,9 @@
   You don’t need to expose service-specific ports to make the service available to
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
-<a class="glossary" name="swarm">swarm</a>: |
+swarm: |
   A [swarm](/engine/swarm/) is a cluster of one or more Docker Engines running in [swarm mode](#swarm_mode).
-<a class="glossary" name="docker_swarm">Docker Swarm</a>: |
+Docker Swarm: |
   Do not confuse [Docker Swarm](https://github.com/docker/swarm) with the [swarm mode](#swarm_mode) features in Docker Engine.
 
   Docker Swarm is the name of a standalone native clustering tool for Docker.
@@ -266,16 +252,16 @@
   works with Docker can now transparently scale up to multiple hosts.
 
   *Also known as : docker-swarm*
-<a class="glossary" name="swarm_mode">swarm mode</a>: |
+swarm mode: |
   [Swarm mode](/engine/swarm/) refers to cluster management and orchestration
   features embedded in Docker Engine. When you initialize a new swarm (cluster) or
   join nodes to a swarm, the Docker Engine runs in swarm mode.
-<a class="glossary" name="tag">tag</a>: |
+tag: |
   A tag is a label applied to a Docker image in a [repository](#repository).
   Tags are how various images in a repository are distinguished from each other.
 
   *Note : This label is not related to the key=value labels set for docker daemon.*
-<a class="glossary" name="task">task</a>: |
+task: |
   A [task](/engine/swarm/how-swarm-mode-works/services/#/tasks-and-scheduling) is the
   atomic unit of scheduling within a swarm. A task carries a Docker container and
   the commands to run inside the container. Manager nodes assign tasks to worker
@@ -285,18 +271,7 @@
   containers.
 
   ![services diagram](/engine/swarm/images/services-diagram.png)
-<a class="glossary" name="toolbox">Toolbox</a>: |
-  [Docker Toolbox](/toolbox/overview/) is a legacy
-  installer for Mac and Windows users. It uses Oracle VirtualBox for
-  virtualization.
-
-  For Macs running OS X El Capitan 10.11 and newer macOS releases, [Docker Desktop for
-  Mac](/docker-for-mac/) is the better solution.
-
-  For Windows 10 systems that support Microsoft Hyper-V (Professional, Enterprise
-  and Education), [Docker Desktop for
-  Windows](/docker-for-windows/) is the better solution.
-<a class="glossary" name="union_file_system">Union file system</a>: |
+Union file system: |
   Union file systems implement a [union
   mount](https://en.wikipedia.org/wiki/Union_mount) and operate by creating
   layers. Docker uses union file systems in conjunction with
@@ -314,7 +289,7 @@
   [UnionFS](https://en.wikipedia.org/wiki/UnionFS),
   [AUFS](https://en.wikipedia.org/wiki/Aufs), and
   [Btrfs](https://btrfs.wiki.kernel.org/index.php/Main_Page).
-<a class="glossary" name="virtual_machine">virtual machine</a>: |
+virtual machine: |
   A virtual machine is a program that emulates a complete computer and imitates dedicated hardware.
   It shares physical hardware resources with other users but isolates the operating system. The
   end user has the same experience on a Virtual Machine as they would have on dedicated hardware.
@@ -323,7 +298,7 @@
   gets its own set of resources and does minimal sharing.
 
   *Also known as : VM*
-<a class="glossary" name="volume">volume</a>: |
+volume: |
   A volume is a specially-designated directory within one or more containers
   that bypasses the Union File System. Volumes are designed to persist data,
   independent of the container's life cycle. Docker therefore never automatically
@@ -340,7 +315,7 @@
 
   - An **anonymous volume** is similar to a named volume, however, it can be difficult, to refer to
     the same volume over time when it is an anonymous volumes. Docker handle where the files are stored.
-<a class="glossary" name="x86_64">x86_64</a>: |
+x86_64: |
   x86_64 (or x86-64) refers to a 64-bit instruction set invented by AMD as an
   extension of Intel's x86 architecture. AMD calls its x86_64 architecture,
   AMD64, and Intel calls its implementation, Intel 64.

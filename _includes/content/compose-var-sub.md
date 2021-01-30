@@ -18,8 +18,9 @@ string. In the example above, if `POSTGRES_VERSION` is not set, the value for
 the `image` option is `postgres:`.
 
 You can set default values for environment variables using a
-[`.env` file](/compose/env-file/), which Compose automatically looks for. Values
-set in the shell environment override those set in the `.env` file.
+[`.env` file](/compose/env-file/), which Compose automatically looks for in
+project directory (parent folder of your Compose file). 
+Values set in the shell environment override those set in the `.env` file.
 
 > Note when using docker stack deploy
 >

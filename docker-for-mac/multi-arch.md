@@ -23,7 +23,7 @@ which means you can run containers for different Linux architectures
 such as `arm`, `mips`, `ppc64le`, and even `s390x`.
 
 This does not require any special configuration in the container itself as it uses
-<a href="http://wiki.qemu.org/" target="_blank">qemu-static</a> from the **Docker for
+<a href="https://wiki.qemu.org/Main_Page" target="_blank" rel="noopener">qemu-static</a> from the **Docker for
 Mac VM**. Because of this, you can run an ARM container, like the `arm32v7` or `ppc64le`
 variants of the busybox image.
 

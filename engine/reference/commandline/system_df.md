@@ -4,7 +4,6 @@ datafile: docker_system_df
 title: docker system df
 redirect_from:
   - /edge/engine/reference/commandline/system_df/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

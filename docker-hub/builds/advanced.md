@@ -54,6 +54,8 @@ repository at the same directory level as your Dockerfile. Create a file called
 `hooks/build`, `hooks/test`, or `hooks/push` and include commands that the
 builder process can execute, such as `docker` and `bash` commands (prefixed appropriately with `#!/bin/bash`).
 
+These hooks will be running on an instance of [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/){:target="_blank" rel="noopener" class="_"}, a distro based on Ubuntu, which includes interpreters such as Perl and Python and utilities such as `git` or `curl`. Please check the link above for the full list.
+
 ## Custom build phase hooks
 
 You can run custom commands between phases of the build process by creating
@@ -91,19 +93,6 @@ used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
 
 To learn more about Docker build-time variables, see the [docker build documentation](/engine/reference/commandline/build/#set-build-time-variables-build-arg).
-
-#### Two-phase build
-
-If your build process requires a component that is not a dependency for your application, you can use a pre-build hook (refers to the `hooks/pre_build` file) to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary that is required before the build.
-
-```bash
-#!/bin/bash
-echo "=> Building the binary"
-docker run --privileged \
-  -v $(pwd):/src \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  centurylink/golang-builder
-```
 
 #### Push to multiple repos
 

@@ -2,10 +2,9 @@
 description: VMware vSphere driver for machine
 keywords: machine, VMware vSphere, driver
 title: VMware vSphere
-hide_from_sitemap: true
 ---
 
-Creates machines on a [VMware vSphere](http://www.vmware.com/products/vsphere)
+Creates machines on a [VMware vSphere](https://www.vmware.com/products/vsphere.html)
 Virtual Infrastructure. The machine must have a working vSphere ESXi
 installation. You can use a paid license or free 60 day trial license. Your
 installation may also include an optional VCenter server.

@@ -15,7 +15,7 @@ A Docker swarm generates two different kinds of traffic:
 
 This topic discusses how to manage the application data for your swarm services.
 For more details about swarm networking in general, see the
-[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }.
+[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" rel="noopener" class="_" }.
 
 The following three network concepts are important to swarm services:
 
@@ -34,8 +34,8 @@ The following three network concepts are important to swarm services:
   `ingress` network.
 
   The `ingress` network is created automatically when you initialize or join a
-  swarm. Most users do not need to customize its configuration, but Docker 17.05
-  and higher allows you to do so.
+  swarm. Most users do not need to customize its configuration, but Docker allows
+  you to do so.
 
 - The **docker_gwbridge** is a bridge network that connects the overlay
   networks (including the `ingress` network) to an individual Docker daemon's
@@ -261,7 +261,7 @@ service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
 services on the same network. For instance, if you have a
-[WordPress service that stores its data in a MySQL service](http://training.play-with-docker.com/swarm-service-discovery/),
+[WordPress service that stores its data in a MySQL service](https://training.play-with-docker.com/swarm-service-discovery/),
 and they are connected to the same overlay network, you do not need to publish
 the MySQL port to the client, only the WordPress HTTP port.
 
@@ -288,8 +288,8 @@ round robin (DNSRR). You can configure this per service.
 
 ## Customize the ingress network
 
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
 other low-level network settings such as the MTU.
 
@@ -382,7 +382,7 @@ By default, all swarm traffic is sent over the same interface, including control
 and management traffic for maintaining the swarm itself and data traffic to and
 from the service containers.
 
-In Docker 17.06 and higher, it is possible to separate this traffic by passing
+You can separate this traffic by passing
 the `--data-path-addr` flag when initializing or joining the swarm. If there are
 multiple interfaces, `--advertise-addr` must be specified explicitly, and
 `--data-path-addr` defaults to `--advertise-addr` if not specified. Traffic about
@@ -417,4 +417,4 @@ $ docker swarm join \
 * [Swarm administration guide](admin_guide.md)
 * [Docker CLI reference](../reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
-* [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }
+* [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" rel="noopener" class="_" }

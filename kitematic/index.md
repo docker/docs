@@ -5,6 +5,6 @@ keywords: docker, documentation, about, technology, kitematic, gui
 title: Kitematic
 ---
 
-Kitematic, the Docker GUI, runs on Mac and Windows operating systems. Beginning with the 1.8 Docker release, you use the [Docker Toolbox](/toolbox/overview/) to install Kitematic.
+Kitematic, the Docker GUI, runs on Mac and Windows operating systems.
 
 For information about using Kitematic, take a look at the [User Guide](userguide.md).

@@ -1,5 +1,5 @@
 html {
-    font-family: sans-serif;
+    font-family: $font;
     -webkit-text-size-adjust: 100%;
         -ms-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
@@ -11,8 +11,8 @@ body {
     color: $body-text;
     font-family: $font;
     font-size: $body-text-size;
-    margin: $clear;
-    padding: $clear;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
 }
 
@@ -20,7 +20,7 @@ a {
     color: $primary-links;
     text-decoration: none;
     outline: none;
-    &:hover {
+    &:hover, &:focus {
         opacity: .8;
         text-decoration: none;
     }

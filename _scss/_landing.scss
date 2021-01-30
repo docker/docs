@@ -1,10 +1,10 @@
 $dark-blue: #002c66;
-$bg-card-night: #0F161E;
 
 body.landing {
+  background-color: $bg-body-landing;
 
   h2, h5, h6 {
-    font-family: 'Geomanist Regular', sans-serif;
+    font-family: $headings-landing;
   }
 
   section {
@@ -13,6 +13,12 @@ body.landing {
   }
 
   .header {
+    // Container holds both the top-navigation bar (div.navbar-header), and
+    // the "hamburger menu" (div.navbar-collapse)
+    >.container {
+      background-color: $bg-header;
+    }
+
     @include md-width {
       .navbar-collapse.collapse {
         display: flex !important;
@@ -99,8 +105,8 @@ body.landing {
     }
 
     #autocompleteResults {
-      left: 10px;
-      right: 10px;
+      left: 14px;
+      right: 14px;
       width: unset;
 
       @include before-lg-width {
@@ -156,7 +162,8 @@ body.landing {
   $icons: rocket, download-docker, guides, whats-new, manuals, reference;
 
   .card {
-    background-color: $bg-body;
+    color: $body-text;
+    background-color: $bg-card;
     box-shadow: 0 3px 6px rgba(11, 33, 74, 0.09),
       0 -2px 2px rgba(11, 33, 74, 0.03);
     padding: 24px 36px;
@@ -176,7 +183,7 @@ body.landing {
     .title {
       font-size: 16px;
       line-height: 16px;
-      margin: 8px 0;
+      margin: 10px 0;
 
       @include sm-width {
         font-size: 18px;
@@ -207,11 +214,6 @@ body.landing {
     display: block;
     transition: transform 150ms ease-in-out;
 
-    &:focus,
-    &:visited {
-      text-decoration: none;
-    }
-
     &:hover {
       opacity: 1;
       transform: scale(1.01);
@@ -241,65 +243,46 @@ body.landing {
     }
   }
 
-  section.join-community {
+  section.cta-banner {
     background-color: $dark-blue;
-    padding: 75px 0;
+    padding:          75px 0;
 
     h2, h5, p {
       color: white;
     }
 
-    &.dockercon {
-      text-align: center;
+    text-align: center;
 
-      @include md-width {
-        text-align: left;
-      }
-
-      img {
-        margin-bottom: 20px;
-        max-height: 100px;
-      }
-
-      h2 {
-        color: white;
-        font-size: 32px;
-        line-height: 37px;;
-      }
-
-      a.btn {
-        background-color: #FF3F73;
-        color: white;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 17px;
-        font-weight: bold;
-        padding: 20px 60px;
-        margin-top: 50px;
-      }
+    @include md-width {
+      text-align: left;
     }
 
-    &.slack {
-      a.slack-button {
-        background: #FFFFFF;
-        border: 2px solid #FFFFFF;
-        box-sizing: border-box;
-        border-radius: 3px;
-        align-items: center;
-        display: inline-flex;
-        padding: 0 26px 0 2px;
-        text-transform: none;
-        margin-top: 2rem;
+    img {
+      margin-bottom: 20px;
+      max-height:    100px;
+    }
 
-        img {
-          height: 56px;
-          width: 56px;
-        }
-        span {
-          font-weight: bold;
-          font-size: 17px;
-          line-height: 24px;
-          color: $dark-blue;
-        }
+    h2 {
+      font-size:   32px;
+      line-height: 37px;;
+    }
+
+    a.btn {
+      background:  #FF3F73;
+      color:       white;
+      font-size:   17px;
+      font-weight: bold;
+      margin-top:  50px;
+      padding:     20px 60px;
+
+      img {
+        margin: 0;
+      }
+
+      &.slack-button {
+        background:  white;
+        color:       $dark-blue;
+        padding:     2px 25px 2px 10px;
       }
     }
   }
@@ -366,26 +349,12 @@ body.landing {
     }
   }
 
-  footer.footer {
-    background-color: $dark-blue;
+  footer {
+    background-color: $bg-footer-landing;
     margin-top: 130px;
 
     a, p {
       color: white;
     }
-  }
-}
-
-body.landing:not(.night) {
-  background-color: $bg-sidebar;
-}
-
-body.landing.night {
-  .card {
-    background-color: $bg-card-night;
-  }
-
-  .cardlet {
-    background-color: $bg-card-night;
   }
 }

@@ -4,26 +4,29 @@ keywords: mac, troubleshooting, logs, issues
 redirect_from:
 - /mackit/troubleshoot/
 title: Logs and troubleshooting
+toc_max: 2
 ---
 
-This page contains information on how to diagnose and troubleshoot Docker Desktop issues, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
+> Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Click [here](#support) to learn more.
+
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 
 ## Troubleshoot
 
 Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
 from the menu bar to see the troubleshoot options.
 
-![Uninstall or reset Docker](images/menu/troubleshoot.png){:width="750px"}
+![Troubleshoot Docker Desktop](images/menu/troubleshoot.png){:width="600px"}
 
 The Troubleshoot page contains the following options:
 
 * **Restart Docker Desktop**: Select to restart Docker Desktop.
 
-* **Run Diagnostics**: Select this option to diagnose any issues on Docker Desktop. For detailed information about diagnostics, see [Diagnose problems, send feedback, and create GitHub issues](#diagnose-problems-send-feedback-and-create-github-issues).
+* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 
 * **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/docker-for-mac/index/#kubernetes).
 
-* **Reset disk image**: This option resets all Docker data _without_ a
+* **Clean / Purge data**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
 
 * **Reset to factory defaults**: Choose this option to reset all options on
@@ -46,27 +49,33 @@ system.
 >You might want to use the command-line uninstall if, for example, you find that
 >the app is non-functional, and you cannot uninstall it from the menu.
 
-## Diagnose problems, send feedback, and create GitHub issues
+## Diagnose and feedback
 
 ### In-app diagnostics
 
 If you encounter problems for which you do not find solutions in this
 documentation, on [Docker Desktop issues on
 GitHub](https://github.com/docker/for-mac/issues), or the [Docker Desktop forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
-the log data.
+the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
 
-Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot** > **Run Diagnostics**.
+>**Note**
+>
+> Docker Desktop offers support for users subscribed to a Pro or a Team plan. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
 
-![Diagnose & Feedback](images/diagnose-feedback.png){:width="600px"}
+Before you get started, we recommend that you sign into your Docker Desktop application and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 
-Once the diagnostics are available, you can upload them and obtain a
-**Diagnostic ID**, which must be provided when communicating with the Docker
-team. For more information on our policy regarding personal data, see
-[how is personal data handled in Docker Desktop](faqs.md#how-is-personal-data-handled-in-docker-desktop).
-
-![Diagnostics & Feedback with ID](images/diagnose-feedback-id.png){:width="600px"}
-
-If you click **Report an issue**, this opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) issues on GitHub in your web browser in a "New issue" template. Add the details before submitting the issue. Do not forget to copy/paste your diagnostic ID.
+1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
+2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
+    ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
+4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
+5. When the diagnostics have been uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
+6. If you have subscribed to a Pro or a Team plan, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+   > **Note**
+    >
+    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
+7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade to benefit from Docker Support** to upgrade your existing account.
+    Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 
 ### Diagnosing from the terminal
 
@@ -103,12 +112,11 @@ $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
 
 <a name="logs"></a>
+
 ## Check the logs
 
 In addition to using the diagnose and feedback option to submit logs, you can
-browse the logs yourself.  The following documentation is about macOS 10.12
-onwards; for older versions, see
-[older documentation](https://github.com/docker/docker.github.io/blob/v17.12/docker-for-mac/troubleshoot.md#check-the-logs).
+browse the logs yourself.
 
 #### In a terminal
 
@@ -144,6 +152,10 @@ ways, and create reports.
 <a name="troubleshoot"></a>
 ## Troubleshooting
 
+### Support for Apple silicon processors
+
+At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+
 ### Make sure certificates are set up correctly
 
 Docker Desktop ignores certificates listed under insecure registries, and does
@@ -163,12 +175,6 @@ As well as on the registry. For example:
 
 For more about using client and server side certificates, see
 [Adding TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
-
-### Docker Desktop does not start if Mac user account and home folder are renamed after installing the app
-
-See
-[Do I need to reinstall Docker Desktop if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
-in the FAQs.
 
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
@@ -222,23 +228,13 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 * If `docker` commands aren't working properly or as expected, you may need to
   unset some environment variables, to make sure you are not using the legacy
   Docker Machine environment in your shell or command window. Unset the
-  `DOCKER_HOST` environment variable and related variables.
-
-  * If you use bash, use the following command: `unset ${!DOCKER_*}`
-
-  * For other shells, unset each environment variable individually as described
-    in [Setting up to run Docker Desktop on Mac](docker-toolbox.md#setting-up-to-run-docker-desktop-on-mac)
-    in [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
-
-* Network connections fail if the macOS Firewall is set to "Block all incoming
-  connections". You can enable the firewall, but `bootpd` must be allowed
-  incoming connections so that the VM can get an IP address.
+  `DOCKER_HOST` environment variable and related variables. If you use bash, use the following command: `unset ${!DOCKER_*}`
 
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
   the web server on `http://localhost/`. Make sure that the Docker icon is
-  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine (not Engine from Toolbox).
+  displayed on the menu bar, and that you run the Docker commands in a shell that is connected to the Docker Desktop Engine.
   Otherwise, you might start the webserver container but get a "web page not
-  available" error when you go to `localhost`. For more information on distinguishing between the two environments, see [Docker Desktop on Mac vs. Docker Toolbox](docker-toolbox.md).
+  available" error when you go to `localhost`.
 
 * If you see errors like `Bind for 0.0.0.0:8080 failed: port is already
   allocated` or `listen tcp:0.0.0.0:8080: bind: address is already in use`:
@@ -287,23 +283,8 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   export DOCKER_HOST=unix:///var/run/docker.sock
   ```
 
-* `docker-compose` 1.7.1 performs DNS unnecessary lookups for
-  `localunixsocket.local` which can take 5s to timeout on some networks. If
-  `docker-compose` commands seem very slow but seem to speed up when the network
-  is disabled, try appending `127.0.0.1 localunixsocket.local` to the file
-  `/etc/hosts`.  Alternatively you could create a plain-text TCP proxy on
-  localhost:1234 using:
-
-  ```
-  docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:1234:1234 bobrik/socat TCP-LISTEN:1234,fork UNIX-CONNECT:/var/run/docker.sock
-  ```
-
-  and then `export DOCKER_HOST=tcp://localhost:1234`.
-
-<a name="bind-mounted-dirs"></a>
-
 * There are a number of issues with the performance of directories bind-mounted
-  with `osxfs`. In particular, writes of small blocks, and traversals of large
+  into containers. In particular, writes of small blocks, and traversals of large
   directories are currently slow. Additionally, containers that perform large
   numbers of directory operations, such as repeated scans of large directory
   trees, may suffer from poor performance. Applications that behave in this way
@@ -317,35 +298,75 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   - PHP applications that use [Composer](https://getcomposer.org) to install
     dependencies in a ```vendor``` folder<br><br>
 
-  As a work-around for this behavior, you can put vendor or third-party library
+  As a workaround for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
-  outside of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
+  outside of bind mounts, and use third-party tools like Unison or `rsync` to
   synchronize between container directories and bind-mounted directories. We are
-  actively working on `osxfs` performance using a number of different
-  techniques.  To learn more, see the topic on
-  [Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
+  actively working on performance improvements using a number of different
+  techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
 
-* If your system does not have access to an NTP server, then after a hibernate
-  the time seen by Docker Desktop may be considerably out of sync with the host.
-  Furthermore, the time may slowly drift out of sync during use. To manually
-  reset the time after hibernation, run:
+## Support
 
-  ```bash
-  docker run --rm --privileged alpine hwclock -s
-  ```
+Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Click [here](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} to upgrade your existing account.
 
-  Or, to resolve both issues, you can add the local clock as a low-priority
-  (high stratum) fallback NTP time source for the host. To do this, edit the
-  host's `/etc/ntp-restrict.conf` to add:
+This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 
-  ```
-  server 127.127.1.1              # LCL, local clock
-  fudge  127.127.1.1 stratum 12   # increase stratum
-  ```
+### How do I get Docker Desktop support?
 
-  Then restart the NTP service with:
+If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
 
-  ```bash
-  sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-  ```
+Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
+
+### What support can I get?
+
+If you are a Pro or a Team user, you can request for support on the following types of issues:
+
+* Desktop upgrade issues
+* Desktop installation issues
+  * Installation crashes
+  * Failure to launch Docker Desktop on first run
+* Usage issues
+  * Crash closing software
+  * Docker Desktop not behaving as expected
+* Configuration issues
+* Basic product ‘how to’ questions
+
+### What is not supported?
+
+Docker Desktop excludes support for the following types of issues:
+
+* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+* Running on unsupported operating systems, including beta/preview versions of operating systems
+* Support for the Docker engine, Docker CLI, or other bundled Linux components
+* Support for Kubernetes
+* Features labeled as experimental
+* System/Server administration activities
+* Supporting Desktop as a production runtime
+* Scale deployment/multi-machine installation of Desktop
+* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+* Third-party applications not provided by Docker
+* Altered or modified Docker software
+* Defects in the Docker software due to hardware malfunction, abuse, or improper use
+* Any version of the Docker software other than the latest version
+* Reimbursing and expenses spent for third-party services not provided by Docker
+* Docker Support excludes training, customization, and integration
+
+### What versions are supported?
+
+We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
+
+### How many machines can I get support for Docker Desktop on?
+
+As a Pro user you can get support for Docker Desktop on a single machine.
+As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+
+### What OS’s are supported?
+
+Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
+
+* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+
+### Can I run Docker Desktop on Virtualized hardware?
+
+No, currently this is unsupported and against the terms of use.

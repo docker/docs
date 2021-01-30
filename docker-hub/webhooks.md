@@ -95,5 +95,5 @@ The following parameters are recognized in callback data:
       "state": "success",
       "description": "387 tests PASSED",
       "context": "Continuous integration by Acme CI",
-      "target_url": "http://ci.acme.com/results/afd339c1c3d27"
+      "target_url": "https://ci.acme.com/results/afd339c1c3d27"
     }

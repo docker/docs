@@ -30,16 +30,13 @@ host running elsewhere.
 
 - [Communicate between a container and a swarm service](#communicate-between-a-container-and-a-swarm-service)
   sets up communication between a standalone container and a swarm service,
-  using an attachable overlay network. This is supported in Docker 17.06 and
-  higher.
+  using an attachable overlay network.
 
 ## Prerequisites
 
-These requires you to have at least a single-node swarm, which means that
+These require you to have at least a single-node swarm, which means that
 you have started Docker and run `docker swarm init` on the host. You can run
 the examples on a multi-node swarm as well.
-
-The last example requires Docker 17.06 or higher.
 
 ## Use the default overlay network
 
@@ -53,9 +50,8 @@ the point of view of a service.
 ### Prerequisites
 
 This tutorial requires three physical or virtual Docker hosts which can all
-communicate with one another, all running new installations of Docker 17.03 or
-higher. This tutorial assumes that the three hosts are running on the same
-network with no firewall involved.
+communicate with one another. This tutorial assumes that the three hosts are
+running on the same network with no firewall involved.
 
 These hosts will be referred to as `manager`, `worker-1`, and `worker-2`. The
 `manager` host will function as both a manager and a worker, which means it can
@@ -290,8 +286,8 @@ overlay network. Steps are:
 ### Prerequisites
 
 For this test, you need two different Docker hosts that can communicate with
-each other. Each host must have Docker 17.06 or higher with the following ports
-open between the two Docker hosts:
+each other. Each host must have the following ports open between the two Docker
+hosts:
 
 - TCP port 2377
 - TCP and UDP port 7946
@@ -436,12 +432,6 @@ example also uses Linux hosts, but the same commands work on Windows.
     ```
 
 ## Communicate between a container and a swarm service
-
-### Prerequisites
-
-You need Docker 17.06 or higher for this example.
-
-### Walkthrough
 
 In this example, you start two different `alpine` containers on the same Docker
 host and do some tests to understand how they communicate with each other. You
@@ -639,7 +629,7 @@ need to have Docker installed and running.
 
 Remember, the default `bridge` network is not recommended for production. To
 learn about user-defined bridge networks, continue to the
-[next tutorial](#use-user-defined-bridge-networks).
+[next tutorial](network-tutorial-standalone.md#use-user-defined-bridge-networks).
 
 ## Other networking tutorials
 

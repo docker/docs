@@ -1,26 +1,8 @@
 /*
-*
-* Primary navigation - top header **********************************************************
-*
-*/
+ * Primary navigation - top header *********************************************
+ */
 .nav-container {
     height: 55px;
-}
-
-.primary {
-    padding: 5px 0 0 20px;
-}
-
-.nav-primary {
-    background: transparent;
-    max-width: 1024px;
-    margin: 0 auto;
-    a {
-        color: #fff;
-    }
-    li:nth-child(5n) {
-        padding-right: 50px;
-    }
 }
 
 .sidebar-toggle {
@@ -30,31 +12,8 @@
 }
 
 /*
-*
-* user-nav ***********************************************************************
-*
-*/
-
-.user-nav {
-    padding: 20px 0 0;
-    float: right;
-    ul {
-        li {
-            list-style-type: none;
-            display: inline;
-            padding-right: 10px;
-            a {
-                display: inline;
-            }
-        }
-    }
-}
-
-/*
-*
-* Secondary Navigation  **********************************************************
-*
-*/
+ * Secondary Navigation  *******************************************************
+ */
 
 .nav-secondary {
     background-color: $bg-secondary;
@@ -64,35 +23,8 @@
 
 
 /*
-*
-* nav-secondary-tabs  ***********************************************************************
-*
-*/
-
-.nav-secondary-tabs {
-    background-color: $bg-secondary-tabs;
-    bottom: 0;
-    height: 55px;
-    position: absolute;
-    width: 100%;
-    &.affix {
-        background-color: $bg-secondary;
-        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-        top: 0;
-        position: fixed;
-        z-index: 100;
-    }
-    .search-form {
-        margin: 5px 27px 0 -10px;
-        width: 240px;
-    }
-}
-
-/*
-*
-* NAV SIDEBAR ***********************************************************************
-*
-*/
+ * NAV SIDEBAR *****************************************************************
+ */
 
 // Some links don't have 'href' attr, hence no mouse pointer
 .nav-sidebar li a {
@@ -113,7 +45,7 @@
 
 .nav-sidebar ul {
     list-style: none;
-    padding: 0px 15px;
+    padding: 0 15px;
     text-align: left;
 
     li {
@@ -138,14 +70,11 @@
 .nav-sidebar ul li a:focus,
 .nav-sidebar ul li a:hover {
     border-bottom: none;
-    text-decoration: none;
 }
 
 .nav-sidebar ul li a.active,
 .nav-sidebar.nav>li>a:focus {
-    cursor: default;
     background: #F3F4F4;
-    color: #2089C4;
     border-left: 4px solid $primary-links;
     font-weight: 600;
 }
@@ -161,10 +90,6 @@
     margin-top: 10px;
 }
 
-.leftnav {
-    padding: 0 20px 20px 0;
-}
-
 /* pointer for collapsed sidebar list items */
 
 .collapsed
@@ -173,10 +98,8 @@
 }
 
 /*
-*
-* Table of contents menu  ***********************************************************************
-*
-*/
+ * Table of contents menu  *****************************************************
+ */
 
 .toc-toggle {
     width: 25px;
@@ -196,7 +119,6 @@
             display: inline-block;
             font-size: 12px;
             padding: 5px 10px 5px 10px;
-            text-decoration: none;
         }
     }
 }
@@ -213,11 +135,6 @@
     color: $primary-links;
 }
 
-i.fa.fa-question {
-    font-size: 21px;
-    margin: 0 11px 0 0;
-}
-
 div#side-toc-title {
     font-size: 12px;
     font-weight: bold;
@@ -229,10 +146,8 @@ div#side-toc-title {
 }
 
 /*
-*
-* Toggle Switches **************************************************************
-*
-*/
+ * Toggle Switches *************************************************************
+ */
 
 .toggle-mode {
     float: left;
@@ -273,7 +188,6 @@ div#side-toc-title {
     bottom: 0;
     background-color: $slider-bg;
     border: 1px solid #c3e4f7;
-    // transition: 0.4s;
 }
 
 .slider:before {
@@ -284,7 +198,6 @@ div#side-toc-title {
     width: 15px;
     left: 2px;
     bottom: 1px;
-    // transition: 0.4s;
 }
 
 input:focus+.slider {
@@ -306,10 +219,8 @@ input:checked+.slider:before {
 
 
 /*
-*
-* Tabs ***********************************************************************
-*
-*/
+ * Tabs ************************************************************************
+ */
 #tabs {
     float: left;
     margin: 0;
@@ -319,10 +230,7 @@ input:checked+.slider:before {
     }
 }
 
-
-
 .tabs {
-
     li {
         float: left;
         list-style: none;
@@ -347,13 +255,11 @@ input:checked+.slider:before {
 }
 
 /*
-*
-* feedback links ***********************************************************************
-*
-*/
+ * feedback links **************************************************************
+ */
 
-#sidebar-right.affix .feedback-links {
-    margin: 50px 0 10px 0;
+.feedback-links {
+    margin: 0 0 10px 0;
 }
 
 /* polldaddy */
@@ -368,10 +274,8 @@ input:checked+.slider:before {
 }
 
 /*
-*
-* Controls ***********************************************************************
-*
-*/
+ * Controls ********************************************************************
+ */
 
 .ctrl-left {
     float: left;
@@ -387,11 +291,4 @@ input:checked+.slider:before {
 .ctrl-right .btn-group {
     float: left;
     margin: 2px 0 0;
-}
-
-.divider {
-    height: 1px;
-    margin: 9px 29px;
-    overflow: hidden;
-    background-color: #077CBC;
 }

@@ -98,8 +98,8 @@ The output shows the `<CONTAINER-PORT>` (labeled `TargetPort`) from the containe
 By default, when you publish a port, it is a TCP port. You can
 specifically publish a UDP port instead of or in addition to a TCP port. When
 you publish both TCP and UDP ports, If you omit the protocol specifier,
-the port is published as a TCP port. If you use the longer syntax (recommended
-  for Docker 1.13 and higher), set the `protocol` key to either `tcp` or `udp`.
+the port is published as a TCP port. If you use the longer syntax (recommended),
+set the `protocol` key to either `tcp` or `udp`.
 
 #### TCP only
 
@@ -195,7 +195,7 @@ combination with the routing mesh or without using the routing mesh at all.
 ### Using the routing mesh
 
 You can configure an external load balancer to route requests to a swarm
-service. For example, you could configure [HAProxy](http://www.haproxy.org) to
+service. For example, you could configure [HAProxy](https://www.haproxy.org) to
 balance requests to an nginx service published to port 8080.
 
 ![ingress with external load balancer image](images/ingress-lb.png)

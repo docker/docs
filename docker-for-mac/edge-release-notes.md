@@ -11,10 +11,111 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.5.4
+2020-12-07
+
+> [Download](https://desktop.docker.com/mac/edge/50534/Docker.dmg)
+
+### Upgrades
+
+- [Docker Engine 20.10.0-rc2](https://github.com/docker/docker-ce/blob/master/CHANGELOG.md#20100)
+- [Go 1.15.6](https://github.com/golang/go/issues?q=milestone%3AGo1.15.6+label%3ACherryPickApproved+)
+
+### Bug fixes and minor changes
+
+- Changed the «Update and quit» menu entry to «Update and restart».
+- Fixed the check for updates dialog reporting the build number instead of the version number of a new version.
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+-  Fixed a bug that DNS would return `NXDOMAIN` when a name exists but the type of record was not found. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020). Related to https://gitlab.alpinelinux.org/alpine/aports/-/issues/11879
+- Avoid caching bad file sizes and modes when using `osxfs`. Fixes [docker/for-mac#5045](https://github.com/docker/for-mac/issues/5045).
+
+## Docker Desktop Community 2.5.3
+2020-11-30
+
+> [Download](https://desktop.docker.com/mac/edge/50261/Docker.dmg)
+
+### Upgrades
+
+- [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
+
+### Bug fixes and minor changes
+
+- Fixed a possible file sharing error where a file may appear to have the wrong size in a container when it is modified on the host. This is a partial fix for [docker/for-mac#4999](https://github.com/docker/for-mac/issues/4999).
+- Removed unnecessary log messages which slow down filesystem event injection.
+
+## Docker Desktop Community 2.5.2
+2020-11-26
+
+> [Download](https://desktop.docker.com/mac/edge/50165/Docker.dmg)
+
+### New
+
+- Use of three digit version number.
+- Starting with Docker Desktop 2.5.2, updates will be much smaller as they will be applied using delta patches.
+
+### Bug fixes and minor changes
+
+- Re-enabled the experimental SOCKS proxy. Fixes [docker/for-mac#5048](https://github.com/docker/for-mac/issues/5048).
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+- Display an error message instead of crashing when the application needs write access on specific directories. See [docker/for-mac#5068](https://github.com/docker/for-mac/issues/5068)
+
+## Docker Desktop Community 2.5.1.0
+2020-11-18
+
+> [Download](https://desktop.docker.com/mac/edge/49923/Docker.dmg)
+
+This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
+
+### Upgrades
+
+- [Docker Engine 20.10.0-rc1](https://github.com/docker/docker-ce/blob/master/CHANGELOG.md#20100)
+- [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
+- [Snyk v1.424.4](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+- [Kubernetes 1.19.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.3)
+
+### Bug fixes and minor changes
+
+- Renamed 'Run Diagnostics' to 'Get support'.
+- Fixed an issue that caused Docker Desktop to crash on MacOS 11.0 (Big Sur) when VirtualBox was also installed. See [docker/for-mac#4997](https://github.com/docker/for-mac/issues/4997).
+- Removed BlueStacks warning message. Fixes [docker/for-mac#4863](https://github.com/docker/for-mac/issues/4863).
+- Made container start faster in cases where shared volumes have lots of files. Fixes [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957).
+- File sharing: fixed changing ownership of read-only files. Fixes [docker/for-mac#4989](https://github.com/docker/for-mac/issues/4989), [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- Fixed an unexpected EOF error when trying to start a non-existing container. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+
+## Docker Desktop Community 2.4.2.0
+2020-10-19
+
+> [Download](https://desktop.docker.com/mac/edge/48975/Docker.dmg)
+
+### New
+
+- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+
+### Upgrades
+
+- [Docker Engine 20.10.0 beta1](https://github.com/docker/docker-ce/blob/0fc7084265b3786a5867ec311d3f916af7bf7a23/CHANGELOG.md)
+- [Docker Compose CLI - 0.1.22](https://github.com/docker/compose-cli/releases/tag/v0.1.22)
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore).
+- [Kubernetes 1.19.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.2)
+- [Go 1.15.2](https://github.com/golang/go/issues?q=milestone:Go1.15.2+label:CherryPickApproved)
+
+### Bug fixes and minor changes
+
+- When sharing Linux directories (`/var`, `/bin`, etc) with containers, Docker Desktop avoids watching paths in the host file system.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+- gRPC FUSE: fix `chown` when the file is read-only. Fixes `rabbitmq`, see [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- gRPC FUSE: generate `ATTRIB` inotify events as well as `MODIFY`. Fixes [docker/for-mac#4962](https://github.com/docker/for-mac/issues/4962).
+- gRPC FUSE: return `EOPNOTSUPP` from `fallocate` for unsupported modes. Fixes `minio`. See [docker/for-mac#4964](https://github.com/docker/for-mac/issues/4964).
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Allow symlinks to point outside of shared volumes. Fixes [docker/for-mac#4862](https://github.com/docker/for-mac/issues/4862).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- Fixed automatic start on log in. See [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) and [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890).
+
 ## Docker Desktop Community 2.4.1.0
 2020-10-01
 
-> [Download](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
 
 ### Upgrades
 
@@ -142,8 +243,8 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Upgrades
 
-- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" class="_”}
-- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: target="_blank" class="_”}
+- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" rel="noopener" class="_”}
+- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: target="_blank" rel="noopener" class="_”}
 
 ### Bug fixes and minor changes
 
@@ -157,8 +258,8 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Upgrades
 
-- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
-- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" class="_”}
+- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" rel="noopener" class="_”}
+- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" rel="noopener" class="_”}
 
 ### Bug fixes and minor changes
 
@@ -213,9 +314,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen-caching.md).
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
 
-We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" class="_"} repository with the `Mutagen` label.
+We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} repository with the `Mutagen` label.
 
 ### Upgrades
 
@@ -950,7 +1051,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - Linux kernel 4.9.60
 
 * Bug fixes and minor changes
-  - Fix login into private repository with certificate issue. [https://github.com/docker/for-mac/issues/2201](docker/for-mac#2201)
+  - Fix login into private repository with certificate issue. [docker/for-mac#2201](https://github.com/docker/for-mac/issues/2201)
 
 * New
   - For systems running APFS on SSD on High Sierra, use `raw` format virtual machine disks by default. This increases disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.
@@ -1018,7 +1119,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - AUFS 20170911
 
 * Bug fixes and minor changes
-  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING (docker/for-mac#1608)
+  - Kernel: Enable TASK_XACCT and TASK_IO_ACCOUNTING [docker/for-mac#1608](https://github.com/docker/for-mac/issues/1608)
   - Rotate logs in the virtual machine more often
 
 ### Docker Community Edition 17.09.0-ce-rc1-mac28 2017-09-07
@@ -1812,7 +1913,7 @@ events or unexpected unmounts.
 
 **Hotfixes**
 
-* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures) (docker/for-mac)
+* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures)
 
 * osxfs: fixed an issue causing some ATTRIB and CREATE `inotify` events to fail delivery and other `inotify` events to stop
 
@@ -2059,7 +2160,7 @@ events or unexpected unmounts.
 
 **Upgrades**
 
-* FUSE 7.23 for [osxfs](osxfs.md)
+* FUSE 7.23 for osxfs
 
 **Known issues**
 
@@ -2068,17 +2169,17 @@ events or unexpected unmounts.
 **Bug fixes and minor changes**
 
 * UI improvements
-* Fixed a problem in [osxfs](osxfs.md) where`mkdir` returned EBUSY but directory was created.
+* Fixed a problem in osxfs where`mkdir` returned EBUSY but directory was created.
 
 ### Beta 11 Release (2016-05-10 1.11.1-beta11)
 
 **New**
 
-The `osxfs` file system now persists ownership changes in an extended attribute. (See the topic on [ownership](osxfs.md#ownership) in [Sharing the macOS file system with Docker containers](osxfs.md).)
+The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Upgrades**
 
-* docker-compose 1.7.1 (see [changelog](https://github.com/docker/compose/releases/tag/1.7.1){: target="_blank" class="_" })
+* docker-compose 1.7.1 (see [changelog](https://github.com/docker/compose/releases/tag/1.7.1){: target="_blank" rel="noopener" class="_" })
 * Linux kernel 4.4.9
 
 **Bug fixes and minor changes**

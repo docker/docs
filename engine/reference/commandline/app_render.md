@@ -2,7 +2,6 @@
 datafolder: docker-app
 datafile: docker_app_render
 title: docker app render
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

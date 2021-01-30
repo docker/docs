@@ -1,0 +1,4 @@
+---
+layout: null
+---
+{{ site.data.toc | jsonify }}

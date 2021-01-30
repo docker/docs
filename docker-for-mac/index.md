@@ -4,6 +4,7 @@ keywords: mac, tutorial, run, docker, local, machine
 redirect_from:
 - /docker-for-mac/index/
 - /docker-for-mac/mutagen/
+- /docker-for-mac/mutagen-caching/
 - /docker-for-mac/osx/
 - /docker-for-mac/started/
 - /engine/installation/mac/
@@ -12,6 +13,9 @@ redirect_from:
 - /mac/started/
 - /mackit/
 - /mackit/getting-started/
+- /docker-for-mac/osxfs/
+- /docker-for-mac/osxfs-caching/
+- /docker-for-mac/docker-toolbox/
 title: Docker Desktop for Mac user manual
 toc_min: 1
 toc_max: 2
@@ -20,10 +24,6 @@ toc_max: 2
 Welcome to Docker Desktop! The Docker Desktop for Mac user manual provides information on how to configure and manage your Docker Desktop settings.
 
 For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
-
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/).
 
 ## Preferences
 
@@ -43,15 +43,11 @@ On the **General** tab, you can configure when to start and update Docker:
 
 - **Start Docker Desktop when you log in**: Automatically starts Docker Desktop when you open your session.
 
-- **Automatically check for updates**: By default, Docker Desktop automatically checks for updates and notifies you when an update is available. You can manually check for updates anytime by choosing **Check for Updates** from the main Docker menu.
-
 - **Include VM in Time Machine backups**: Select this option to back up the Docker Desktop virtual machine. This option is disabled by default.
 
 - **Securely store Docker logins in macOS keychain**: Docker Desktop stores your Docker login credentials in macOS keychain by default.
 
 - **Send usage statistics**: Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
-
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
 
 ### Resources
 
@@ -96,15 +92,34 @@ File share settings are:
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
-  There are some limitations on the directories that can be shared:
-
-  - The directory must not exist inside of Docker.
-
-For more information, see:
-
-- [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on
-  [osxfs file system sharing](osxfs.md).
-- [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+> Tips on shared folders, permissions, and volume mounts
+>
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
+ * Shared folders are designed to allow application code to be edited 
+ on the host while being executed in containers. For non-code items
+ such as cache directories or databases, the performance will be much 
+ better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
+ (named volume) or [data container](../storage/volumes.md).
+>
+ * If you share the whole of your home directory into a container, MacOS may
+ prompt you to give Docker access to personal areas of your home directory such as
+ your Reminders or Downloads.
+>
+ * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
+ On Linux, it is possible to create 2 separate files: `test` and `Test`, 
+ while on Mac these filenames would actually refer to the same underlying file. 
+ This can lead to problems where an app works correctly on a Mac 
+ (where the file contents are shared) but fails when run in Linux in 
+ production (where the file contents are distinct). To avoid this, Docker Desktop 
+ insists that all shared files are accessed as their original case. Therefore, if a file 
+ is created called `test`, it must be opened as `test`. Attempts to open `Test` will 
+ fail with the error `No such file or directory`. Similarly, once a file called `test` 
+ is created, attempts to create a second file called `Test` will fail. For more information, 
+ see [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 #### Proxies
 
@@ -139,8 +154,7 @@ You can configure Docker Desktop networking to work on a virtual private network
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
-class="_"}.
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
@@ -150,7 +164,7 @@ On the Command Line page, you can specify whether or not to enable experimental 
 
 {% include experimental.md %}
 
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 
 You can see whether you are running experimental mode at the command line. If
 `Experimental` is `true`, then Docker is running in experimental mode, as shown
@@ -221,8 +235,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   The status of Kubernetes shows in the Docker menu and the context points to
   `docker-desktop`.
 
-  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: .with-border
-  width="400px"}
+  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
 
 - By default, Kubernetes containers are hidden from commands like `docker
   service ls`, because managing them manually is not supported. To make them
@@ -234,7 +247,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   `/usr/local/bin/kubectl` command is removed.
 
   For more about using the Kubernetes integration with Docker Desktop, see
-  [Deploy on Kubernetes](kubernetes.md){:target="_blank" class="_"}.
+  [Deploy on Kubernetes](kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ### Reset
 
@@ -285,8 +298,7 @@ certificates](#directory-structures-for-certificates).
 
 For a complete explanation of how to do this, see the blog post [Adding
 Self-signed Registry Certs to Docker & Docker Desktop for
-Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/){:target="_blank"
-class="_"}.
+Mac](https://blog.container-solutions.com/adding-self-signed-registry-certs-docker-mac){:target="_blank" rel="noopener" class="_"}.
 
 ### Add client certificates
 
@@ -360,7 +372,7 @@ Bash has [built-in support for
 completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1){:target="_blank"
 class="_"} To activate completion for Docker commands, these files need to be
 copied or symlinked to your `bash_completion.d/` directory. For example, if you
-installed bash via [Homebrew](http://brew.sh/):
+installed bash via [Homebrew](https://brew.sh):
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
@@ -385,10 +397,10 @@ fi
 ### Zsh
 
 In Zsh, the [completion
-system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank"
-class="_"} takes care of things. To activate completion for Docker commands,
+system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank" rel="nooopener" class="_"}
+takes care of things. To activate completion for Docker commands,
 these files need to be copied or symlinked to your Zsh `site-functions/`
-directory. For example, if you installed Zsh via [Homebrew](http://brew.sh/):
+directory. For example, if you installed Zsh via [Homebrew](https://brew.sh){:target="_blank" rel="nooopener" class="_"}:
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
@@ -421,10 +433,10 @@ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-comp
 
 To get help from the community, review current user topics, join or start a
 discussion, log on to our [Docker Desktop for Mac
-forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
+forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}.
 
 To report bugs or problems, log on to Docker Desktop [for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"},
+GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"},
 where you can review community reported issues, and file new ones.  See
 [Logs and Troubleshooting](troubleshoot.md) for more details.
 
@@ -432,13 +444,13 @@ For information about providing feedback on the documentation or update it yours
 
 ## Docker Hub
 
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 
 For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){:target="_blank"
 class="_"}:
 
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" class="_"}
-* [Builds](../docker-hub/builds/index.md){:target="_blank" class="_"}
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
+* [Builds](../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
 
 ### Two-factor authentication
 
@@ -467,8 +479,7 @@ After you have successfully authenticated, you can access your organizations and
   walkthroughs and source code.
 
 * For a summary of Docker command line interface (CLI) commands, see
-  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" class="_"}.
+  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" rel="noopener" class="_"}.
 
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
-  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:
-  target="_blank" class="_"}.
+  (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){: target="_blank" rel="noopener" class="_"}.

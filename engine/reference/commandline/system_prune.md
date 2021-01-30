@@ -4,7 +4,6 @@ datafile: docker_system_prune
 title: docker system prune
 redirect_from:
   - /edge/engine/reference/commandline/system_prune/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

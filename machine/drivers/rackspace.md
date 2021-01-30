@@ -2,10 +2,9 @@
 description: Rackspace driver for machine
 keywords: machine, Rackspace, driver
 title: Rackspace
-hide_from_sitemap: true
 ---
 
-Create machines on [Rackspace cloud](http://www.rackspace.com/cloud)
+Create machines on [Rackspace cloud](https://www.rackspace.com/cloud)
 
 ## Usage
 

@@ -28,7 +28,6 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    ```dockerfile
    FROM python:3
    ENV PYTHONUNBUFFERED=1
-   RUN mkdir /code
    WORKDIR /code
    COPY requirements.txt /code/
    RUN pip install -r requirements.txt
@@ -91,7 +90,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    >
    > This uses the build in development server to run your application
    > on port 8000. Do not use this in a production environment. For more
-   > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”}.
+   > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" rel="noopener" class="_”}.
 
 10. Save and close the `docker-compose.yml` file.
 
@@ -210,9 +209,7 @@ In this section, you set up the database connection for Django.
    At this point, your Django app should be running at port `8000` on
    your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
    to `http://localhost:8000` on a web browser to see the Django
-   welcome page. If you are using [Docker Machine](../machine/overview.md),
-   then `docker-machine ip MACHINE_VM` returns the Docker host IP
-   address, to which you can append the port (`<Docker-Host-IP>:8000`).
+   welcome page.
 
    ![Django example](images/django-it-worked.png)
 

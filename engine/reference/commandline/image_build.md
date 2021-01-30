@@ -4,7 +4,6 @@ datafile: docker_image_build
 title: docker image build
 redirect_from:
   - /edge/engine/reference/commandline/image_build/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

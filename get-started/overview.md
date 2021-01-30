@@ -218,8 +218,8 @@ the consumer, the Docker service appears to be a single application. Docker
 Engine supports swarm mode in Docker 1.12 and higher.
 
 ## The underlying technology
-Docker is written in [Go](https://golang.org/) and takes advantage of several
-features of the Linux kernel to deliver its functionality.
+Docker is written in the [Go programming language](https://golang.org/) and takes
+advantage of several features of the Linux kernel to deliver its functionality.
 
 ### Namespaces
 Docker uses a technology called `namespaces` to provide the isolated workspace

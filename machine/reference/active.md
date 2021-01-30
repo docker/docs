@@ -2,7 +2,6 @@
 description: Identify active machines
 keywords: machine, active, subcommand
 title: docker-machine active
-hide_from_sitemap: true
 ---
 
 See which machine is "active" (a machine is considered active if the

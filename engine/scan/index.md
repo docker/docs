@@ -10,10 +10,13 @@ toc_max: 2
 
 Vulnerability scanning for Docker local images runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images. Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results.  The scanning function creates the list of Common Vulnerabilities and Exposures (CVEs), and provides recommendations for CVE remediations.
 
+This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+
 >**Note**
 >
 > Docker vulnerability scanning for local images  is currently a beta release. The commands and flags are subject to change in subsequent releases.
 {:.important}
+
 
 ## Prerequisites
 
@@ -21,14 +24,14 @@ To run vulnerability scanning on your Docker images, you must meet the following
 
 1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
 
-2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" class="_"}.
+2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 
 3. From the Docker Desktop menu, select **Sign in/ Create Docker ID**. Alternatively, open a terminal and run the command `docker login`.
 
-4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
+4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
 
 Check your installation by running `docker scan --version`, it should print the current version of docker scan and the Snyk engine version. For example:
 
@@ -53,11 +56,12 @@ The high-level `docker scan` command scans local images using the image name or 
 |:------------------------------------------------------------------ :------------------------------------------------|
 | `--accept license` | Accept the license agreement of the third-party scanning provider    |
 | `--dependency-tree` | Display the dependency tree of the image along with scan results |
-| `-exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
+| `--exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
 | `-f`, `--file string` | Specify the location of the Dockerfile associated with the image. This option displays a detailed scan result |
 | `--json` | Display the result of the scan in JSON format|
 | `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
 | `--reject-license` | Reject the license agreement of the third-party scanning provider |
+| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
 | `--token string`  | Use the authentication token to log into the third-party scanning provider |
 | `--version` | Display the Docker Scan plugin version |
 
@@ -201,6 +205,57 @@ $ docker scan --json hello-world
 }
 ```
 
+In addition to the `--json` flag, you can also use the `--group-issues` flag to display a vulnerability only once in the scan report:
+
+```shell
+$ docker scan --json --group-issues docker-scan:e2e
+{
+    {
+      "title": "Improper Check for Dropped Privileges",
+      ...
+      "packageName": "bash",
+      "language": "linux",
+      "packageManager": "debian:10",
+      "description": "## Overview\nAn issue was discovered in disable_priv_mode in shell.c in GNU Bash through 5.0 patch 11. By default, if Bash is run with its effective UID not equal to its real UID, it will drop privileges by setting its effective UID to its real UID. However, it does so incorrectly. On Linux and other systems that support \"saved UID\" functionality, the saved UID is not dropped. An attacker with command execution in the shell can use \"enable -f\" for runtime loading of a new builtin, which can be a shared object that calls setuid() and therefore regains privileges. However, binaries running with an effective UID of 0 are unaffected.\n\n## References\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20200430-0003/)\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2019-18276)\n- [GitHub Commit](https://github.com/bminor/bash/commit/951bdaad7a18cc0dc1036bba86b18b90874d39ff)\n- [MISC](http://packetstormsecurity.com/files/155498/Bash-5.0-Patch-11-Privilege-Escalation.html)\n- [MISC](https://www.youtube.com/watch?v=-wGtxJ8opa8)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-18276)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2019-18276"
+        ],
+        "CWE": [
+          "CWE-273"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "cvssScore": 7.8,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H/E:F",
+      ...
+      "from": [
+        "docker-image|docker-scan@e2e",
+        "bash@5.0-4"
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": "bash",
+      "version": "5.0-4"
+    },
+    ...
+    "summary": "880 vulnerable dependency paths",
+      "filesystemPolicy": false,
+      "filtered": {
+        "ignore": [],
+        "patch": []
+      },
+      "uniqueCount": 158,
+      "projectName": "docker-image|docker-scan",
+      "platform": "linux/amd64",
+      "path": "docker-scan:e2e"
+}
+```
+You can find all the sources of the vulnerability in the `from` section.
+
 ### Checking the dependency tree
 
 To view the dependency tree of your image, use the --dependency-tree flag. This displays all the dependencies before the scan result. For example:
@@ -268,11 +323,53 @@ Tested 200 dependencies for known issues, found 157 issues.
 For more free scans that keep your images secure, sign up to Snyk at https://dockr.ly/3ePqVcp.
 ```
 
-For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" class="_"}.
+For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" rel="noopener" class="_"}.
+
+### Limiting the level of vulnerabilities displayed
+
+Docker scan allows you to choose the level of vulnerabilities displayed in your scan report using the `--severity` flag.
+You can set the severity flag to `low`, `medium`, or` high` depending on the level of vulnerabilities you’d like to see in your report.  
+For example, if you set the severity level as `medium`, the scan report displays all vulnerabilities that are classified as medium and high.
+ 
+ ```console
+$ docker scan --severity=medium docker-scan:e2e 
+./bin/docker-scan_darwin_amd64 scan --severity=medium docker-scan:e2e
+
+Testing docker-scan:e2e...
+
+✗ Medium severity vulnerability found in sqlite3/libsqlite3-0
+  Description: Divide By Zero
+  Info: https://snyk.io/vuln/SNYK-DEBIAN10-SQLITE3-466337
+  Introduced through: gnupg2/gnupg@2.2.12-1+deb10u1, subversion@1.10.4-1+deb10u1, mercurial@4.8.2-1+deb10u1
+  From: gnupg2/gnupg@2.2.12-1+deb10u1 > gnupg2/gpg@2.2.12-1+deb10u1 > sqlite3/libsqlite3-0@3.27.2-3
+  From: subversion@1.10.4-1+deb10u1 > subversion/libsvn1@1.10.4-1+deb10u1 > sqlite3/libsqlite3-0@3.27.2-3
+  From: mercurial@4.8.2-1+deb10u1 > python-defaults/python@2.7.16-1 > python2.7@2.7.16-2+deb10u1 > python2.7/libpython2.7-stdlib@2.7.16-2+deb10u1 > sqlite3/libsqlite3-0@3.27.2-3
+
+✗ Medium severity vulnerability found in sqlite3/libsqlite3-0
+  Description: Uncontrolled Recursion
+...
+✗ High severity vulnerability found in binutils/binutils-common
+  Description: Missing Release of Resource after Effective Lifetime
+  Info: https://snyk.io/vuln/SNYK-DEBIAN10-BINUTILS-403318
+  Introduced through: gcc-defaults/g++@4:8.3.0-1
+  From: gcc-defaults/g++@4:8.3.0-1 > gcc-defaults/gcc@4:8.3.0-1 > gcc-8@8.3.0-6 > binutils@2.31.1-16 > binutils/binutils-common@2.31.1-16
+  From: gcc-defaults/g++@4:8.3.0-1 > gcc-defaults/gcc@4:8.3.0-1 > gcc-8@8.3.0-6 > binutils@2.31.1-16 > binutils/libbinutils@2.31.1-16 > binutils/binutils-common@2.31.1-16
+  From: gcc-defaults/g++@4:8.3.0-1 > gcc-defaults/gcc@4:8.3.0-1 > gcc-8@8.3.0-6 > binutils@2.31.1-16 > binutils/binutils-x86-64-linux-gnu@2.31.1-16 > binutils/binutils-common@2.31.1-16
+  and 4 more...
+
+Organization:      docker-desktop-test
+Package manager:   deb
+Project name:      docker-image|docker-scan
+Docker image:      docker-scan:e2e
+Platform:          linux/amd64
+Licenses:          enabled
+
+Tested 200 dependencies for known issues, found 37 issues.
+```
 
 ## Provider authentication
 
-If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" class="_"}:
+If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" rel="noopener" class="_"}:
 
 ```shell
 $ docker scan --login --token SNYK_AUTH_TOKEN
@@ -291,4 +388,4 @@ If you use the `--login` flag without any token, you will be redirected to the S
 
 ## Feedback
 
-Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.

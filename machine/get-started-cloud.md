@@ -2,7 +2,6 @@
 description: Using Docker Machine to provision hosts on cloud providers
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Use Docker Machine to provision hosts on cloud providers
-hide_from_sitemap: true
 ---
 
 Docker Machine driver plugins are available for many cloud platforms, so you can
@@ -64,9 +63,9 @@ and CPUs, rather than the default behavior of creating smaller servers.
 
 For a full list of the flags/settings available and their defaults, see the
 output of `docker-machine create -h` at the command line, the
-[create](reference/create.md){: target="_blank" class="_" } command in
+[create](reference/create.md){: target="_blank" rel="noopener" class="_" } command in
 the Machine [command line reference](reference/index.md){:
-target="_blank" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" class="_" }
+target="_blank" rel="noopener" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" rel="noopener" class="_" }
 in the Machine driver reference.
 
 ## Drivers for cloud providers
@@ -75,7 +74,7 @@ When you install Docker Machine, you get a set of drivers for various cloud
 providers (like Amazon Web Services, DigitalOcean, or Microsoft Azure) and
 local providers (like Oracle VirtualBox, VMWare Fusion, or Microsoft Hyper-V).
 
-See [Docker Machine driver reference](drivers/index.md){:target="_blank" class="_"}
+See [Docker Machine driver reference](drivers/index.md){:target="_blank" rel="noopener" class="_"}
 for details on the drivers, including required flags and configuration options
 (which vary by provider).
 
@@ -85,7 +84,7 @@ Several Docker Machine driver plugins for use with other cloud platforms are
 available from 3rd party contributors. These are use-at-your-own-risk plugins,
 not maintained by or formally associated with Docker.
 
-See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" class="_"}.
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" rel="noopener" class="_"}.
 
 ## Add a host without a driver
 
@@ -123,4 +122,3 @@ tutorials:
 -   [Understand Machine concepts](concepts.md)
 -   [Docker Machine driver reference](drivers/index.md)
 -   [Docker Machine subcommand reference](reference/index.md)
--   [Provision a Docker Swarm cluster with Docker Machine](../swarm/provision-with-machine.md)

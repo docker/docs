@@ -33,7 +33,7 @@ The network named `bridge` is a special network. Unless you tell it otherwise, D
 
     74695c9cea6d9810718fddadc01a727a5dd3ce6a69d09752239736c030599741
 
-<p style="text-align:center;"><img src="bridge1.png" alt="bridge1"></p>
+![bridge1](bridge1.png)
 
 Inspecting the network is an easy way to find out the container's IP address.
 

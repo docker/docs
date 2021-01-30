@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: home
 - title: Guides
-  path: /get-started/
+  path: /get-started/overview/
   node: guides
 - title: Product manuals
   path: /engine/
@@ -15,6 +15,8 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
+  # TODO unify navbbar links: homepage currently has a custom "articles" link
+  hide_home: true
 
 home: {}
 
@@ -25,24 +27,64 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-  - sectiontitle: Quickstart
-    section:
-    - title: "Part 1: Orientation and setup"
+    - title: "Part 1: Getting started"
       path: /get-started/
-    - title: "Part 2: Build and run your image"
-      path: /get-started/part2/
-    - title: "Part 3: Share images on Docker Hub"
-      path: /get-started/part3/
+    - title: "Part 2: Our Application"
+      path: /get-started/02_our_app/
+    - title: "Part 3: Updating our Application"
+      path: /get-started/03_updating_app/
+    - title: "Part 4: Sharing Our Application"
+      path: /get-started/04_sharing_app/
+    - title: "Part 5: Persisting our DB"
+      path: /get-started/05_persisting_data/
+    - title: "Part 6: Using Bind Mounts"
+      path: /get-started/06_bind_mounts/
+    - title: "Part 7: Multi-Container Applications"
+      path: /get-started/07_multi_container/
+    - title: "Part 8: Using Docker Compose"
+      path: /get-started/08_using_compose/
+    - title: "Part 9: Image building tips"
+      path: /get-started/09_image_best/
+    - title: "Part 10: What next?"
+      path: /get-started/11_what_next/
+- sectiontitle: Language-specific guides (New)
+  section:
+  - path: /language/
+    title: Overview
   - sectiontitle: Node.js
     section:
+    - title: "Overview"
+      path: /language/nodejs/
     - title: "Build images"
-      path: /get-started/nodejs/build-images/
+      path: /language/nodejs/build-images/
     - title: "Run containers"
-      path: /get-started/nodejs/run-containers/
-    - title: "Develop"
-      path: /get-started/nodejs/develop/
-  - path: /get-started/resources/
-    title: "Educational resources"
+      path: /language/nodejs/run-containers/
+    - title: "Develop your app"
+      path: /language/nodejs/develop/
+    - title: "Run your tests"
+      path: /language/nodejs/run-tests/
+    - title: "Configure CI/CD"
+      path: /language/nodejs/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/nodejs/deploy/
+  - sectiontitle: Python
+    section:
+    - title: "Overview"
+      path: /language/python/
+    - title: "Build images"
+      path: /language/python/build-images/
+    - title: "Run containers"
+      path: /language/python/run-containers/
+    - title: "Develop your app"
+      path: /language/python/develop/
+    - title: "Configure CI/CD"
+      path: /language/python/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/python/deploy/
+  - sectiontitle: Java
+    section:
+    - title: "Overview"
+      path: /language/java/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -61,12 +103,28 @@ guides:
       title: Manage images
     - path: /develop/develop-images/baseimages/
       title: Create your own base image (advanced)
+- sectiontitle: Set up CI/CD
+  section:
+  - path: /ci-cd/best-practices/
+    title: CI/CD Best practices
+  - path: /ci-cd/github-actions/
+    title: Configure GitHub Actions
 - sectiontitle: Deploy your app to the cloud
   section:
-  - path: /engine/context/aci-integration/
-    title: Docker and ACI (Beta)
-  - path: /engine/context/ecs-integration/
-    title: Docker and ECS (Beta)
+  - path: /cloud/aci-integration/
+    title: Docker and ACI
+  - path: /cloud/aci-container-features/
+    title: ACI container features
+  - path: /cloud/aci-compose-features/
+    title: ACI Compose features
+  - path: /cloud/ecs-integration/
+    title: Docker and ECS
+  - path: /cloud/ecs-architecture/
+    title: Docker ECS integration architecture
+  - path: /cloud/ecs-compose-features/
+    title: ECS Compose features
+  - path: /cloud/ecs-compose-examples/
+    title: ECS Compose examples
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Orchestration
@@ -153,28 +211,28 @@ guides:
         title: Using certificates for repository client verification
       - sectiontitle: Use trusted images
         section:
-        - path: /engine/security/trust/content_trust/
-          title: Content trust in Docker
+        - path: /engine/security/trust/
+          title: Overview
         - path: /engine/security/trust/trust_automation/
-          title: Automation with content trust
+          title: Automation
         - path: /engine/security/trust/trust_delegation/
-          title: Delegations for content trust
+          title: Delegations
         - path: /engine/security/trust/deploying_notary/
-          title: Deploying Notary
+          title: Deploy Notary
         - path: /engine/security/trust/trust_key_mng/
-          title: Manage keys for content trust
+          title: Manage content trust keys
         - path: /engine/security/trust/trust_sandbox/
           title: Play in a content trust sandbox
       - path: /engine/security/antivirus/
-        title: Antivirus software and Docker
+        title: Antivirus software
       - path: /engine/security/apparmor/
-        title: AppArmor security profiles for Docker
+        title: AppArmor security profiles
       - path: /engine/security/seccomp/
-        title: Seccomp security profiles for Docker
+        title: Seccomp security profiles
       - path: /engine/security/userns-remap/
         title: Isolate containers with a user namespace
       - path: /engine/security/rootless/
-        title: Run the Docker daemon as a non-root user (Rootless mode)
+        title: Rootless mode
     - sectiontitle: Scale your app
       section:
       - path: /engine/swarm/
@@ -315,6 +373,8 @@ guides:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
+- path: /get-started/resources/
+  title: "Educational resources"
 - sectiontitle: Open source at Docker
   section:
   - path: /opensource/
@@ -604,6 +664,8 @@ reference:
         title: docker manifest inspect
       - path: /engine/reference/commandline/manifest_push/
         title: docker manifest push
+      - path: /engine/reference/commandline/manifest_rm/
+        title: docker manifest rm
     - sectiontitle: docker network
       section:
       - path: /engine/reference/commandline/network/
@@ -906,6 +968,8 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.41/
+        title: v1.41 reference
       - path: /engine/api/v1.40/
         title: v1.40 reference
       - path: /engine/api/v1.39/
@@ -959,6 +1023,8 @@ reference:
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/
+      title: Compose Specification
+    - path: /compose/compose-file/compose-file-v3/
       title: Version 3
     - path: /compose/compose-file/compose-file-v2/
       title: Version 2
@@ -1068,6 +1134,8 @@ manuals:
     title: Release notes
   - sectiontitle: Previous versions
     section:
+    - path: /engine/release-notes/19.03/
+      title: Engine 19.03 release notes
     - path: /engine/release-notes/18.09/
       title: Engine 18.09 release notes
     - path: /engine/release-notes/18.06/
@@ -1124,12 +1192,12 @@ manuals:
     title: Release notes
   - path: /compose/gettingstarted/
     title: Getting started
-  - path: /compose/swarm/
-    title: Using Compose with Swarm
   - path: /compose/environment-variables/
     title: Environment variables in Compose
   - path: /compose/env-file/
     title: Environment file
+  - path: /compose/profiles/
+    title: Using service profiles
   - path: /compose/extends/
     title: Extend services in Compose
   - path: /compose/networking/
@@ -1154,26 +1222,18 @@ manuals:
       title: User manual
     - path: /docker-for-mac/kubernetes/
       title: Deploy on Kubernetes
-    - path: /docker-for-mac/docker-toolbox/
-      title: Docker Desktop for Mac vs. Docker Toolbox
     - path: /docker-for-mac/multi-arch/
       title: Leveraging Multi-CPU architecture support
     - path: /docker-for-mac/networking/
       title: Networking
-    - path: /docker-for-mac/osxfs/
-      title: File system sharing
-    - path: /docker-for-mac/osxfs-caching/
-      title: Performance tuning for volume mounts (shared filesystems)
     - path: /docker-for-mac/space/
       title: Disk utilization
     - path: /docker-for-mac/troubleshoot/
       title: Logs and troubleshooting
-    - path: /docker-for-mac/faqs/
-      title: FAQs
     - path: /docker-for-mac/release-notes/
-      title: Stable release notes
-    - path: /docker-for-mac/edge-release-notes/
-      title: Edge release notes
+      title: Release notes
+    - path: /docker-for-mac/apple-m1/
+      title: Apple M1 Tech Preview
   - sectiontitle: Windows
     section:
     - path: /docker-for-windows/install/
@@ -1186,20 +1246,16 @@ manuals:
       title: Deploy on Kubernetes
     - path: /docker-for-windows/networking/
       title: Networking
-    - path: /docker-for-windows/docker-toolbox/
-      title: Migrate Docker Toolbox
     - path: /docker-for-windows/troubleshoot/
       title: Logs and troubleshooting
-    - path: /docker-for-windows/faqs/
-      title: FAQs
     - path: /docker-for-windows/release-notes/
-      title: Stable release notes
-    - path: /docker-for-windows/edge-release-notes/
-      title: Edge release notes
+      title: Release notes
     - path: /docker-for-windows/wsl/
       title: Docker Desktop WSL 2 backend
   - path: /desktop/dashboard/
     title: Dashboard
+  - path: /desktop/faqs/
+    title: FAQs
   - path: /desktop/opensource/
     title: Open source licensing
 - sectiontitle: Docker Hub
@@ -1208,6 +1264,30 @@ manuals:
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
+  - path: /docker-hub/repos/
+    title: Repositories
+  - path: /docker-hub/official_images/
+    title: Official images
+  - sectiontitle: Automated builds
+    section:
+      - path: /docker-hub/builds/
+        title: Set up automated builds
+      - path: /docker-hub/builds/automated-testing/
+        title: Testing in automated builds
+      - path: /docker-hub/builds/advanced/
+        title: Advanced automated builds
+      - path: /docker-hub/builds/link-source/
+        title: Link to GitHub and BitBucket
+  - path: /docker-hub/webhooks/
+    title: Webhooks
+  - path: /docker-hub/slack_integration/
+    title: Slack integration
+  - path: /docker-hub/orgs/
+    title: Teams and organizations
+  - path: /docker-hub/vulnerability-scanning/
+    title: Vulnerability scanning
+  - path: /docker-hub/audit-log/
+    title: Audit log
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
@@ -1222,6 +1302,8 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
+  - path: /docker-hub/download-rate-limit/
+    title: Download rate limit
   - sectiontitle: Administration
     section:
      - path: /docker-hub/convert-account/
@@ -1240,26 +1322,8 @@ manuals:
       title: Add seats
     - path: /docker-hub/billing/remove-seats/
       title: Remove seats
-  - path: /docker-hub/orgs/
-    title: Teams and organizations
-  - path: /docker-hub/repos/
-    title: Repositories
-  - path: /docker-hub/official_images/
-    title: Official images
-  - path: /docker-hub/webhooks/
-    title: Webhooks
-  - path: /docker-hub/slack_integration/
-    title: Slack integration
-  - sectiontitle: Automated builds
-    section:
-      - path: /docker-hub/builds/
-        title: Set up automated builds
-      - path: /docker-hub/builds/automated-testing/
-        title: Testing in automated builds
-      - path: /docker-hub/builds/advanced/
-        title: Advanced automated builds
-      - path: /docker-hub/builds/link-source/
-        title: Link to GitHub and BitBucket
+    - path: /docker-hub/billing/faq/
+      title: Pricing FAQs
   - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
@@ -1278,8 +1342,6 @@ manuals:
       title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
-  - path: /docker-hub/download-rate-limit/
-    title: Download rate limit
   - path: /docker-hub/release-notes/
     title: Release notes
 - sectiontitle: Open-source projects
@@ -1346,7 +1408,7 @@ manuals:
   section:
   - sectiontitle: Docker Machine
     section:
-    - path: /machine/overview/
+    - path: /machine/
       title: Machine overview
     - path: /machine/install-machine/
       title: Install Machine
@@ -1448,14 +1510,8 @@ manuals:
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
         title: Migrate from Boot2Docker to Machine
-  - sectiontitle: Docker Toolbox (legacy)
-    section:
-    - path: /toolbox/overview/
-      title: Toolbox overview
-    - path: /toolbox/toolbox_install_mac/
-      title: Install Toolbox on Mac
-    - path: /toolbox/toolbox_install_windows/
-      title: Install Toolbox on Windows
+  - path: /docker-for-windows/docker-toolbox/
+    title: Docker Toolbox (deprecated)
   - sectiontitle: Kitematic
     section:
     - path: /kitematic/userguide/
@@ -1473,37 +1529,3 @@ manuals:
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
       nosync: true
-- sectiontitle: Docker Desktop Enterprise
-  section:
-  - path: /desktop/enterprise/
-    title: Overview
-  - path: /desktop/enterprise/release-notes/
-    title: Release notes
-  - sectiontitle: Admin
-    section:
-    - sectiontitle: Install
-      section:
-      - path: /desktop/enterprise/admin/install/mac/
-        title: Install DDE on Mac
-      - path: /desktop/enterprise/admin/install/windows/
-        title: Install DDE on Windows
-    - sectiontitle: Configure
-      section:
-      - path: /desktop/enterprise/admin/configure/mac-admin/
-        title: Configure DDE on Mac
-      - path: /desktop/enterprise/admin/configure/windows-admin/
-        title: Configure DDE on Windows
-  - sectiontitle: User
-    section:
-    - path: /desktop/enterprise/user/mac-user/
-      title: Use DDE on Mac
-    - path: /desktop/enterprise/user/windows-user/
-      title: Use DDE on Windows
-  - path: /desktop/enterprise/app-designer/
-    title: Application designer
-  - sectiontitle: Troubleshoot
-    section:
-    - path: /desktop/enterprise/troubleshoot/mac-issues/
-      title: Troubleshoot DDE issues on Mac
-    - path: /desktop/enterprise/troubleshoot/windows-issues/
-      title: Troubleshoot DDE issues on Windows

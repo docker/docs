@@ -1,12 +1,10 @@
 ---
 description: Compose file reference
 keywords: fig, composition, compose version 1, docker
-redirect_from:
-- /compose/yml
 title: Compose file version 1 reference
 toc_max: 4
 toc_min: 1
-hide_from_sitemap: true
+sitemap: false
 ---
 
 ## Reference and guidelines
@@ -24,7 +22,7 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Service configuration reference
 
-The Version 1 Compose file is a [YAML](http://yaml.org/) file that defines [services](#service-configuration-reference).
+The Version 1 Compose file is a [YAML](https://yaml.org) file that defines [services](#service-configuration-reference).
 
 The default path for a Compose file is `./docker-compose.yml`.
 
@@ -438,14 +436,54 @@ Links also express dependency between services in the same way as
 
 > **Note**
 >
-> If you define both links and [networks](index.md#networks), services with
+> If you define both links and [networks](compose-file-v3.md#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
+
+#### link environment variables
+
+> [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and
+> up, custom networks are used, and no environment variables are created.
+
+> **Note**
+>
+> Environment variables are no longer the recommended method for connecting to
+> linked services. Instead, you should use the link name (by default, the name
+> of the linked service) as the hostname to connect to. Refer to the
+> [docker-compose.yml documentation](compose-file/compose-file-v3.md#links) for details.
+>
+> Environment variables are only populated if you use the
+> [legacy version 1 Compose file format](compose-file/compose-versioning.md#versioning).
+{: .warning }
+
+Compose uses [Docker links](../../network/links.md)
+to expose services' containers to one another. Each linked container injects a set of
+environment variables, each of which begins with the uppercase name of the container.
+
+To see what environment variables are available to a service, run `docker-compose run SERVICE env`.
+
+<b><i>name</i>\_PORT</b><br>
+Full URL, such as `DB_PORT=tcp://172.17.0.5:5432`
+
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i></b><br>
+Full URL, such as `DB_PORT_5432_TCP=tcp://172.17.0.5:5432`
+
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_ADDR</b><br>
+Container's IP address, such as `DB_PORT_5432_TCP_ADDR=172.17.0.5`
+
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PORT</b><br>
+Exposed port number, such as `DB_PORT_5432_TCP_PORT=5432`
+
+<b><i>name</i>\_PORT\_<i>num</i>\_<i>protocol</i>\_PROTO</b><br>
+Protocol (tcp or udp), such as `DB_PORT_5432_TCP_PROTO=tcp`
+
+<b><i>name</i>\_NAME</b><br>
+Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 
 ### log_driver
 
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
-> [logging](index.md#logging).
+> [logging](compose-file-v3.md#logging).
 
 Specify a log driver. The default is `json-file`.
 
@@ -456,7 +494,7 @@ log_driver: syslog
 ### log_opt
 
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
-> [logging](index.md#logging).
+> [logging](compose-file-v3.md#logging).
 
 Specify logging options as key-value pairs. An example of `syslog` options:
 
@@ -468,7 +506,7 @@ log_opt:
 ### net
 
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
-> [network_mode](index.md#network_mode) and [networks](index.md#networks).
+> [network_mode](compose-file-v3.md#network_mode) and [networks](compose-file-v3.md#networks).
 
 Network mode. Use the same values as the docker client `--net` parameter.
 The `container:...` form can take a service name instead of a container name or

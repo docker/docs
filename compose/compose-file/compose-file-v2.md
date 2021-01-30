@@ -1,8 +1,6 @@
 ---
 description: Compose file reference
-keywords: fig, composition, compose version 3, docker
-redirect_from:
-- /compose/yml
+keywords: fig, composition, compose version 2, docker
 title: Compose file version 2 reference
 toc_max: 4
 toc_min: 1
@@ -22,7 +20,7 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 ## Service configuration reference
 
-The Compose file is a [YAML](http://yaml.org/) file defining
+The Compose file is a [YAML](https://yaml.org) file defining
 [services](#service-configuration-reference),
 [networks](#network-configuration-reference) and
 [volumes](#volume-configuration-reference).
@@ -1006,19 +1004,19 @@ Network mode. Use the same values as the docker client `--network` parameter, pl
 the special form `service:[service name]`.
 
 ```yaml
-net: "bridge"
+network_mode: "bridge"
 ```
 ```yaml
-net: "host"
+network_mode: "host"
 ```
 ```yaml
-net: "none"
+network_mode: "none"
 ```
 ```yaml
-net: "service:[service name]"
+network_mode: "service:[service name]"
 ```
 ```yaml
-net: "container:[container name/id]"
+network_mode: "container:[container name/id]"
 ```
 
 ### networks

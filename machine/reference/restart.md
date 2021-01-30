@@ -2,7 +2,6 @@
 description: Restart a machine
 keywords: machine, restart, subcommand
 title: docker-machine restart
-hide_from_sitemap: true
 ---
 
 ```none

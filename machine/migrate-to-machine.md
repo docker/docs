@@ -2,7 +2,6 @@
 description: Migrate from Boot2Docker to Docker Machine
 keywords: machine, commands, boot2docker, migrate, docker
 title: Migrate from Boot2Docker to Machine
-hide_from_sitemap: true
 ---
 
 If you were using Boot2Docker previously, you have a pre-existing Docker

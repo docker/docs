@@ -8,7 +8,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-Work through the orientation and setup in Quickstart [Part 1](../index.md).
+Work through the orientation and setup in Get started [Part 1](../index.md).
 
 ## Overview
 
@@ -16,7 +16,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" class="_"}
+- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
 - Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 
@@ -153,7 +153,7 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
-RUN npm install
+RUN npm install --production
 
 COPY . .
 

@@ -36,6 +36,19 @@ can also be customized using `COMPOSE_PATH_SEPARATOR`.
 
 See also the `-f` [command-line option](overview.md).
 
+## COMPOSE\_PROFILES
+
+Specify one or multiple active profiles to enable. Calling `docker-compose up`
+with `COMPOSE_PROFILES=frontend` will start the services with the profile
+`frontend` and services without specified profiles.
+
+You can specify a list of profiles separated with a comma:
+`COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
+`debug`.
+
+See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
+[command-line option](overview.md).
+
 ## COMPOSE\_API\_VERSION
 
 The Docker API only supports requests from clients which report a specific
@@ -83,7 +96,7 @@ Supported values are: `TLSv1`, `TLSv1_1`, `TLSv1_2`.
 ## COMPOSE\_CONVERT\_WINDOWS\_PATHS
 
 Enable path conversion from Windows-style to Unix-style in volume definitions.
-Users of Docker Machine and Docker Toolbox on Windows should always set this. Defaults to `0`.
+Users of Docker Machine on Windows should always set this. Defaults to `0`.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
 
 ## COMPOSE\_PATH\_SEPARATOR
@@ -114,6 +127,16 @@ If set, Compose doesn't attempt to use the Docker CLI for interactive `run`
 and `exec` operations. This option is not available on Windows where the CLI
 is required for the aforementioned operations.
 Supported: `true` or `1` to enable, `false` or `0` to disable.
+
+## COMPOSE\_DOCKER\_CLI\_BUILD
+
+Configure whether to use the Compose python client for building images or the
+native docker cli. By default, Compose uses the `docker` CLI to perform builds,
+which allows you to use [BuildKit](../../develop/develop-images/build_enhancements.md#to-enable-buildkit-builds)
+to perform builds.
+
+Set `COMPOSE_DOCKER_CLI_BUILD=0` to disable native builds, and to use the built-in
+python client.
 
 ## Related information
 

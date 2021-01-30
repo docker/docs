@@ -26,7 +26,7 @@ isolated testing or in a tightly controlled, air-gapped environment.
     `/etc/docker/daemon.json` on Linux or
     `C:\ProgramData\docker\config\daemon.json` on Windows Server. If you use
     Docker Desktop for Mac or Docker Desktop for Windows, click the Docker icon, choose
-    **Preferences**, and choose +**Daemon**.
+    **Preferences** (Mac) or **Settings** (Windows), and choose **Docker Engine**.
 
     If the `daemon.json` file does not exist, create it. Assuming there are no
     other settings in the file, it should have the following contents:
@@ -95,13 +95,12 @@ This is more secure than the insecure registry solution.
 
       3.  Click **Finish**. Restart Docker.
 
-
-    - **Docker Desktop for Mac**: Follow the instructions on
-      [Adding custom CA certificates](../docker-for-mac/faqs.md#how-do-i-add-custom-ca-certificates){: target="_blank" class="_"}.
+    - **Docker Desktop for Mac**: Follow the instructions in
+      [Adding custom CA certificates](../docker-for-mac/index.md#add-tls-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 
-    - **Docker Desktop for Windows**: Follow the instructions on
-      [Adding custom CA certificates](../docker-for-windows/faqs.md#how-do-i-add-custom-ca-certificates){: target="_blank" class="_"}.
+    - **Docker Desktop for Windows**: Follow the instructions in
+      [Adding custom CA certificates](../docker-for-windows/index.md#adding-tls-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 
 

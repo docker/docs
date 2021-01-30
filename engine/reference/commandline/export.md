@@ -4,7 +4,6 @@ datafile: docker_export
 title: docker export
 redirect_from:
   - /edge/engine/reference/commandline/export/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

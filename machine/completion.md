@@ -4,7 +4,7 @@ keywords: machine, docker, orchestration, cli, reference
 title: Command-line completion
 ---
 
-Docker Machine comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
+Docker Machine comes with [command completion](https://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 
 ## Installing Command Completion

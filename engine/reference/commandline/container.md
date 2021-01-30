@@ -4,7 +4,6 @@ datafile: docker_container
 title: docker container
 redirect_from:
   - /edge/engine/reference/commandline/container/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

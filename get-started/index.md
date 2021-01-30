@@ -20,12 +20,12 @@ redirect_from:
 - /engine/getstarted/step_two/
 - /engine/tutorials/dockerimages/
 - /engine/tutorials/dockerizing/
-- /engine/tutorials/dockerrepos/
 - /engine/tutorials/usingdocker/
 - /engine/userguide/containers/dockerimages/
 - /engine/userguide/dockerimages/
 - /engine/userguide/intro/
 - /get-started/part1/
+- /get-started/part5/
 - /get-started/part6/
 - /getstarted/
 - /getting-started/
@@ -55,115 +55,89 @@ redirect_from:
 - /windows/step_two/
 ---
 
-{% include_relative nav.html selected="1" %}
 
 Welcome! We are excited that you want to learn Docker.
 
-This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from Dockercon 2020.
+This page contains step-by-step instructions on how to get started with Docker.
+
+If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](/language).
+
+We also recommend the video walkthrough from DockerCon 2020.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-The Docker Quickstart training module teaches you how to:
+In this tutorial, you'll learn about creating and deploying Docker apps, including using multiple containers with a database, and using Docker Compose. You'll also deploy your containerized app to Azure.
 
-1.  Set up your Docker environment (on this page)
+## Start the tutorial
 
-2.  [Build and run your image](part2.md)
+If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
 
-3.  [Share images on Docker Hub](part3.md)
-
-## Docker concepts
-
-Docker is a platform for developers and sysadmins to **build, run, and share**
-applications with containers. The use of containers to deploy applications
-is called _containerization_. Containers are not new, but their use for easily
-deploying applications is.
-
-Containerization is increasingly popular because containers are:
-
-- **Flexible**: Even the most complex applications can be containerized.
-- **Lightweight**: Containers leverage and share the host kernel,
-  making them much more efficient in terms of system resources than virtual machines.
-- **Portable**: You can build locally, deploy to the cloud, and run anywhere.
-- **Loosely coupled**: Containers are highly self sufficient and encapsulated,
-  allowing you to replace or upgrade one without disrupting others.
-- **Scalable**: You can increase and automatically distribute container replicas across a datacenter.
-- **Secure**: Containers apply aggressive constraints and isolations to processes without any configuration required on the part of the user.
-
-### Images and containers
-
-Fundamentally, a container is nothing but a running process,
-with some added encapsulation features applied to it in order to keep it isolated from the host and from other containers.
-One of the most important aspects of container isolation is that each container interacts with its own private filesystem; this filesystem is provided by a Docker **image**.
-An image includes everything needed to run an application - the code or binary,
-runtimes, dependencies, and any other filesystem objects required.
-
-### Containers and virtual machines
-
-A container runs _natively_ on Linux and shares the kernel of the host
-machine with other containers. It runs a discrete process, taking no more memory
-than any other executable, making it lightweight.
-
-By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
-system with _virtual_ access to host resources through a hypervisor. In general,
-VMs incur a lot of overhead beyond what is being consumed by your application logic.
-
-![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
-
-## Set up your Docker environment
-
-### Download and install Docker Desktop
-
-Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to start coding and containerizing in minutes. Docker Desktop includes everything you need to build, run, and share containerized applications right from your machine.
-
-Follow the instructions appropriate for your operating system to download and install Docker Desktop.
-
- [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}{: .button .outline-btn} [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}{: .button .outline-btn}
-
-### Test Docker version
-
-After you've successfully installed Docker Desktop, open a terminal and run `docker --version` to check the version of Docker installed on your machine.
-
-```shell
-$ docker --version
-Docker version 19.03.13, build 4484c46d9d
+```cli
+docker run -d -p 80:80 docker/getting-started
 ```
 
-### Test Docker installation
+You'll notice a few flags being used. Here's some more info on them:
 
-1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
+- `-d` - run the container in detached mode (in the background)
+- `-p 80:80` - map port 80 of the host to port 80 in the container
+- `docker/getting-started` - the image to use
 
-    ```shell
-        $ docker run hello-world
+>**Pro tip**
+>
+>You can combine single character flags to shorten the full command.
+>As an example, the command above could be written as:
+>```
+>docker run -dp 80:80 docker/getting-started
+>```
+> 
 
-        Unable to find image 'hello-world:latest' locally
-        latest: Pulling from library/hello-world
-        ca4f61b1923c: Pull complete
-        Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-        Status: Downloaded newer image for hello-world:latest
+## The Docker Dashboard
 
-        Hello from Docker!
-        This message shows that your installation appears to be working correctly.
-        ...
-    ```
+Before going too far, we want to highlight the Docker Dashboard, which gives
+you a quick view of the containers running on your machine. It gives you quick
+access to container logs, lets you get a shell inside the container, and lets you
+easily manage container lifecycle (stop, remove, etc.). 
 
-2.  Run `docker image ls` to list the `hello-world` image that you downloaded to your machine.
+To access the dashboard, follow the instructions for either 
+[Mac](https://docs.docker.com/docker-for-mac/dashboard/) or 
+[Windows](https://docs.docker.com/docker-for-windows/dashboard/). If you open the dashboard
+now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
+randomly created name. So, you'll most likely have a different name.
 
-3.  List the `hello-world` container (spawned by the image) which exits after displaying its message. If it is still running, you do not need the `--all` option:
+![Tutorial container running in Docker Dashboard](images/tutorial-in-dashboard.png)
 
-    ```shell
-        $ docker ps --all
 
-        CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
-        54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
-    ```
+## What is a container?
 
-## Conclusion
+Now that you've run a container, what _is_ a container? Simply put, a container is
+simply another process on your machine that has been isolated from all other processes
+on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504), features that have been 
+in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use.
 
-At this point, you've installed Docker Desktop on your development machine, and ran a quick test to ensure you are set up to build and run your first containerized application.
+> **Creating containers from scratch**
+>
+> If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
+> has a fantastic talk in which she creates a container from scratch in Go. While she makes
+> a simple container, this talk doesn't go into networking, using images for the filesystem, 
+> and more. But, it gives a _fantastic_ deep dive into how things are working.
+> 
+> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-[On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+## What is a container image?
 
-For information on how to build and run your first containerized application using Node.js, go to [Build your Node.js image](/nodejs/build-images.md).
+When running a container, it uses an isolated filesystem. This custom filesystem is provided 
+by a **container image**. Since the image contains the container's filesystem, it must contain everything 
+needed to run an application - all dependencies, configuration, scripts, binaries, etc. The 
+image also contains other configuration for the container, such as environment variables,
+a default command to run, and other metadata.
+
+We'll dive deeper into images later on, covering topics such as layering, best practices, and more.
+
+> **Info**
+> 
+> If you're familiar with `chroot`, think of a container as an extended version of `chroot`. The
+> filesystem is simply coming from the image. But, a container adds additional isolation not
+> available when simply using chroot.
 
 ## CLI references
 

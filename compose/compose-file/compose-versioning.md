@@ -4,14 +4,15 @@ keywords: fig, composition, compose, versions, upgrading, docker
 title: Compose file versions and upgrading
 ---
 
-The Compose file is a [YAML](http://yaml.org/) file defining services,
+The Compose file is a [YAML](https://yaml.org) file defining services,
 networks, and volumes for a Docker application.
 
 The Compose file formats are now described in these references, specific to each version.
 
 | **Reference file**                                    | **What changed in this version** |
 |:------------------------------------------------------|:---------------------------------|
-| [Version 3](index.md) (most current, and recommended) | [Version 3 updates](#version-3)  |
+| [Compose Specification](index.md) (most current, and recommended) | [Versioning](compose-versioning.md#versioning)  |
+| [Version 3](compose-file-v3.md)                       | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
 | [Version 1](compose-file-v1.md)                       | [Version 1 updates](#version-1)  |
 
@@ -41,16 +42,16 @@ For details on versions and how to upgrade, see
 
 ## Versioning
 
-There are currently three versions of the Compose file format:
+There are three legacy versions of the Compose file format:
 
-- Version 1, the legacy format. This is specified by
-omitting a `version` key at the root of the YAML.
+- Version 1. This is specified by omitting a `version` key at the root of the YAML.
 
 - Version 2.x. This is specified with a `version: '2'` or `version: '2.1'`, etc., entry at the root of the YAML.
 
-- Version 3.x, the latest and recommended version, designed to
-be cross-compatible between Compose and the Docker Engine's
+- Version 3.x, designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
+
+The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). This format merges the 2.x and 3.x versions and is implemented by **Compose 1.27.0+**.
 
 > ### v2 and v3 Declaration
 >
@@ -81,15 +82,15 @@ These differences are explained below.
 ### Version 1
 
 Compose files that do not declare a version are considered "version 1". In those
-files, all the [services](index.md#service-configuration-reference) are
+files, all the [services](compose-file-v3.md#service-configuration-reference) are
 declared at the root of the document.
 
 Version 1 is supported by **Compose up to 1.6.x**. It will be deprecated in a
 future Compose release.
 
 Version 1 files cannot declare named
-[volumes](index.md#volume-configuration-reference), [networks](index.md#network-configuration-reference) or
-[build arguments](index.md#args).
+[volumes](compose-file-v3.md#volume-configuration-reference), [networks](compose-file-v3.md#network-configuration-reference) or
+[build arguments](compose-file-v3.md#args).
 
 Compose does not take advantage of [networking](../networking.md) when you
 use version 1: every container is placed on the default `bridge` network and is
@@ -219,7 +220,7 @@ Introduces the following additional parameters:
   service definitions
 - `labels` for [volumes](compose-file-v2.md#volume-configuration-reference),
   [networks](compose-file-v2.md#network-configuration-reference), and
-  [build](index.md#build)
+  [build](compose-file-v3.md#build)
 - `name` for [volumes](compose-file-v2.md#volume-configuration-reference)
 - [`userns_mode`](compose-file-v2.md#userns_mode)
 - [`healthcheck`](compose-file-v2.md#healthcheck)
@@ -280,7 +281,7 @@ several more.
 the [upgrading](#upgrading) guide for how to migrate away from these.
 (For more information on `extends`, see [Extending services](../extends.md#extending-services).)
 
-- Added: [deploy](index.md#deploy)
+- Added: [deploy](compose-file-v3.md#deploy)
 
 > **Note**: When specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
@@ -304,7 +305,7 @@ available with Docker Engine version **1.13.1+**, and higher.
 
 Introduces the following additional parameters:
 
-- [`secrets`](index.md#secrets)
+- [`secrets`](compose-file-v3.md#secrets)
 
 ### Version 3.2
 
@@ -313,11 +314,11 @@ available with Docker Engine version **17.04.0+**, and higher.
 
 Introduces the following additional parameters:
 
-- [`cache_from`](index.md#cache_from) in [build configurations](index.md#build)
-- Long syntax for [ports](index.md#ports) and [volume mounts](index.md#volumes)
-- [`attachable`](index.md#attachable) network driver option
-- [deploy `endpoint_mode`](index.md#endpoint_mode)
-- [deploy placement `preference`](index.md#placement)
+- [`cache_from`](compose-file-v3.md#cache_from) in [build configurations](compose-file-v3.md#build)
+- Long syntax for [ports](compose-file-v3.md#ports) and [volume mounts](compose-file-v3.md#volumes)
+- [`attachable`](compose-file-v3.md#attachable) network driver option
+- [deploy `endpoint_mode`](compose-file-v3.md#endpoint_mode)
+- [deploy placement `preference`](compose-file-v3.md#placement)
 
 ### Version 3.3
 
@@ -326,9 +327,9 @@ available with Docker Engine version **17.06.0+**, and higher.
 
 Introduces the following additional parameters:
 
-- [build `labels`](index.md#build)
-- [`credential_spec`](index.md#credential_spec)
-- [`configs`](index.md#configs)
+- [build `labels`](compose-file-v3.md#build)
+- [`credential_spec`](compose-file-v3.md#credential_spec)
+- [`configs`](compose-file-v3.md#configs)
 
 ### Version 3.4
 
@@ -337,11 +338,11 @@ only available with Docker Engine version **17.09.0** and higher.
 
 Introduces the following additional parameters:
 
-- [`target`](index.md#target) and [`network`](index.md#network) in
-  [build configurations](index.md#build)
-- `start_period` for [`healthchecks`](index.md#healthcheck)
-- `order` for [update configurations](index.md#update_config)
-- `name` for [volumes](index.md#volume-configuration-reference)
+- [`target`](compose-file-v3.md#target) and [`network`](compose-file-v3.md#network) in
+  [build configurations](compose-file-v3.md#build)
+- `start_period` for [`healthchecks`](compose-file-v3.md#healthcheck)
+- `order` for [update configurations](compose-file-v3.md#update_config)
+- `name` for [volumes](compose-file-v3.md#volume-configuration-reference)
 
 ### Version 3.5
 
@@ -350,9 +351,9 @@ only available with Docker Engine version **17.12.0** and higher.
 
 Introduces the following additional parameters:
 
-- [`isolation`](index.md#isolation) in service definitions
+- [`isolation`](compose-file-v3.md#isolation) in service definitions
 - `name` for networks, secrets and configs
-- `shm_size` in [build configurations](index.md#build)
+- `shm_size` in [build configurations](compose-file-v3.md#build)
 
 ### Version 3.6
 
@@ -361,7 +362,7 @@ only available with Docker Engine version **18.02.0** and higher.
 
 Introduces the following additional parameters:
 
-- [`tmpfs` size](index.md#long-syntax-3) for `tmpfs`-type mounts
+- [`tmpfs` size](compose-file-v3.md#long-syntax-3) for `tmpfs`-type mounts
 
 ### Version 3.7
 
@@ -370,8 +371,8 @@ only available with Docker Engine version **18.06.0** and higher.
 
 Introduces the following additional parameters:
 
-- [`init`](index.md#init) in service definitions
-- [`rollback_config`](index.md#rollback_config) in deploy configurations
+- [`init`](compose-file-v3.md#init) in service definitions
+- [`rollback_config`](compose-file-v3.md#rollback_config) in deploy configurations
 - Support for extension fields at the root of service, network, volume, secret
   and config definitions
 
@@ -382,13 +383,13 @@ only available with Docker Engine version **19.03.0** and higher.
 
 Introduces the following additional parameters:
 
-- [`max_replicas_per_node`](index.md#max_replicas_per_node) in placement
+- [`max_replicas_per_node`](compose-file-v3.md#max_replicas_per_node) in placement
   configurations
-- `template_driver` option for [config](index.md#configs-configuration-reference)
-   and [secret](index.md#secrets-configuration-reference) configurations. This
+- `template_driver` option for [config](compose-file-v3.md#configs-configuration-reference)
+   and [secret](compose-file-v3.md#secrets-configuration-reference) configurations. This
    option is only supported when deploying swarm services using
    `docker stack deploy`.
-- `driver` and `driver_opts` option for [secret](index.md#secrets-configuration-reference)
+- `driver` and `driver_opts` option for [secret](compose-file-v3.md#secrets-configuration-reference)
    configurations. This option is only supported when deploying swarm services
    using `docker stack deploy`.
 
@@ -401,7 +402,7 @@ several options have been removed:
 
 -   `volume_driver`: Instead of setting the volume driver on the service, define
     a volume using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](compose-file-v3.md#volume-configuration-reference)
     and specify the driver there.
 
         version: "{{ site.compose_file_v3 }}"
@@ -415,12 +416,12 @@ several options have been removed:
             driver: mydriver
 
 -   `volumes_from`: To share a volume between services, define it using the
-    [top-level `volumes` option](index.md#volume-configuration-reference)
+    [top-level `volumes` option](compose-file-v3.md#volume-configuration-reference)
     and reference it from each service that shares it using the
-    [service-level `volumes` option](index.md#driver).
+    [service-level `volumes` option](compose-file-v3.md#driver).
 
 -   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
-    have been replaced by the [resources](index.md#resources) key under
+    have been replaced by the [resources](compose-file-v3.md#resources) key under
     `deploy`. `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
@@ -453,10 +454,8 @@ It's more complicated if you're using particular configuration features:
           options:
             syslog-address: "tcp://192.168.0.42:123"
 
--   `links` with environment variables: As documented in the
-    [environment variables reference](../link-env-deprecated.md), environment variables
-    created by
-    links have been deprecated for some time. In the new Docker network system,
+-   `links` with environment variables: environment variables created by
+    links, such as `CONTAINERNAME_PORT`, ` have been deprecated for some time. In the new Docker network system,
     they have been removed. You should either connect directly to the
     appropriate hostname or set the relevant environment variable yourself,
     using the link hostname:
@@ -477,7 +476,7 @@ It's more complicated if you're using particular configuration features:
     your service's containers to an
     [external network](../networking.md#use-a-pre-existing-network).
 
--   `net`: This is now replaced by [network_mode](index.md#network_mode):
+-   `net`: This is now replaced by [network_mode](compose-file-v3.md#network_mode):
 
         net: host    ->  network_mode: host
         net: bridge  ->  network_mode: bridge
@@ -524,9 +523,9 @@ help developers transition to version 3 more easily. When enabled,
 attempts to translate it into the equivalent version 2 parameter. Currently,
 the following deploy keys are translated:
 
-- [resources](index.md#resources) limits and memory reservations
-- [replicas](index.md#replicas)
-- [restart_policy](index.md#restart_policy) `condition` and `max_attempts`
+- [resources](compose-file-v3.md#resources) limits and memory reservations
+- [replicas](compose-file-v3.md#replicas)
+- [restart_policy](compose-file-v3.md#restart_policy) `condition` and `max_attempts`
 
 All other keys are ignored and produce a warning if present. You can review
 the configuration that will be used to deploy by using the `--compatibility`
@@ -540,7 +539,7 @@ flag with the `config` command.
 
 
 ## Compose file format references
-
-- [Compose file version 3](index.md)
+- [Compose Specification](index.md)
+- [Compose file version 3](compose-file-v3.md)
 - [Compose file version 2](compose-file-v2.md)
 - [Compose file version 1](compose-file-v1.md)

@@ -4,7 +4,6 @@ datafile: docker_stack
 title: docker stack
 redirect_from:
   - /edge/engine/reference/commandline/stack/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

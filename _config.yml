@@ -1,3 +1,8 @@
+##
+# Default configuration file
+#
+# This file overrides options set in _config.yml for production / deploy
+##
 name: Docker Documentation
 markdown: kramdown
 kramdown:
@@ -11,60 +16,57 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude: ["_scripts", "tests", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
-
-# Google Analytics, etc.
-# TODO these should only be set when building for production, or passed as an environment variable when building
-google_analytics: GTM-WL2QLG5
-
+exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html", "js/metadata.json"]
 
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
-
-latest_engine_api_version: "1.40"
-docker_ce_version: "19.03"
-compose_version: "1.27.4"
-compose_file_v3: "3.8"
+latest_engine_api_version: "1.41"
+docker_ce_version: "20.10"
+compose_version: "1.28.2"
+compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
 
-collections:
-  samples:
-    output: true
-
+# List of plugins to enable for local development builds. Mostly the same as
+# for production, but without the "jekyll-sitemap" plugin, which is not needed
+# for previewing, and excluding saves some time to build
 plugins:
   - jekyll-redirect-from
   - jekyll-relative-links
-  - jekyll-sitemap
 
+# Assets
+#
+# We specify the directory for Jekyll so we can use @imports.
+#
+# For local development, we build css with the "expanded" format to produce
+# human-readable output for easier debugging.
+sass:
+  sass_dir: _scss
+  style: expanded
+
+# Set default options / metadata for some paths.
+#
+# Setting options here prevents having to repeat the same option in front-matter
+# on every page. Avoid using wildcards, such as "path: engine/api/v1.*", as
+# limitations in Jekyll cause those to introduce a _severe_ impact on build-time,
+# affecting generation of (e.g.) sitemap.xml and metadata.json, resulting in the
+# total build to take 60 seconds longer to build (!).
+#
+# The list below is for "development" (local builds, and PR previews) builds only,
+# and should be kept minimal to allow for fast builds. Other options should go
+# into _config_production.yml, which is used for production deploys.
 defaults:
   - scope:
       path: ""
       type: "pages"
     values:
       layout: docs
+      sitemap: false
       toc_min: 2
       toc_max: 3
-      tree: true
-  # Hide Enterprise content from sitemap, and include banner in stubs that
-  # content has moved to mirantis
-  - scope:
-      path: "datacenter"
-    values:
-      enterprise: true
-      hide_from_sitemap: true
-      title: Docker Enterprise moved to Mirantis
-  - scope:
-      path: "ee"
-    values:
-      enterprise: true
-      hide_from_sitemap: true
-      title: Docker Enterprise moved to Mirantis
 
-# Assets
-#
-# We specify the directory for Jekyll so we can use @imports.
-sass:
-  sass_dir:          _scss
-  style:            :compressed
+  - scope:
+      path: engine/reference/commandline
+    values:
+      skip_read_time: true

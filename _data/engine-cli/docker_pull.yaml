@@ -53,7 +53,7 @@ options:
   description: Set platform if server is multi-platform capable
   deprecated: false
   min_api_version: "1.32"
-  experimental: true
+  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
@@ -181,7 +181,7 @@ examples: |-
 
   ```dockerfile
   FROM ubuntu@sha256:45b23dee08af5e43a7fea6c4cf9c25ccf269ee113168c19722f87876677c5cb2
-  MAINTAINER some maintainer <maintainer@example.com>
+  LABEL maintainer="some maintainer <maintainer@example.com>"
   ```
 
   > **Note**

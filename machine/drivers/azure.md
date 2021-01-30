@@ -2,7 +2,6 @@
 description: Microsoft Azure driver for machine
 keywords: machine, Microsoft Azure, driver
 title: Microsoft Azure
-hide_from_sitemap: true
 ---
 
 You need an Azure Subscription to use this Docker Machine driver.
@@ -13,7 +12,7 @@ You need an Azure Subscription to use this Docker Machine driver.
 > Azure driver. If you want to continue managing your existing Azure machines, please
 > download and use machine versions prior to v0.7.0.
 
-[azure]: http://azure.microsoft.com/
+[azure]: https://azure.microsoft.com/
 [trial]: https://azure.microsoft.com/free/
 
 ## Authentication

@@ -2,9 +2,6 @@
     for this project's contribution guidelines. Remove these comments
     as you go.
 
-    DO NOT edit files and directories listed in _data/not_edited_here.yaml.
-    These are maintained in upstream repos and changes here will be lost.
-
     Help us merge your changes more quickly by adding details and setting metadata
     (such as labels, milestones, and reviewers) over at the right-hand side.-->
 

@@ -1,6 +1,6 @@
 # Docs @ Docker
-Welcome to the repo for our documentation. This is the source for	
-[https://docs.docker.com/](https://docs.docker.com/).	
+Welcome to the repo for our documentation. This is the source for
+[https://docs.docker.com/](https://docs.docker.com/).
 
 Feel free to send us pull requests and file issues. Our docs are completely	
 open source and we deeply appreciate contributions from our community!
@@ -11,8 +11,8 @@ open source and we deeply appreciate contributions from our community!
   - [Files not edited here](#files-not-edited-here)
   - [Overall doc improvements](#overall-doc-improvements)
 - [Per-PR staging on GitHub](#per-pr-staging-on-github)
-- [Build the docs locally](#build-the-docs-locally)
-- [Read these docs offline](#read-these-docs-offline)
+- [Build and preview the docs locally](#build-and-preview-the-docs-locally)
+  - [Build the docs with deployment features enabled](#build-the-docs-with-deployment-features-enabled)
 - [Important files](#important-files)
 - [Relative linking for GitHub viewing](#relative-linking-for-github-viewing)
   - [Testing changes and practical guidance](#testing-changes-and-practical-guidance)
@@ -82,86 +82,78 @@ the errors that prevented it from building. Review the staged site and amend you
 commit if necessary. Reviewers will also check the staged site before merging the
 PR, to protect the integrity of [https://docs.docker.com/](https://docs.docker.com/).
 
-## Build the docs locally
+## Build and preview the docs locally
 
-You have three options:
+On your local machine, clone this repo:
 
-1.  On your local machine, clone this repo and run our staging container:
+```bash
+git clone --recursive https://github.com/docker/docker.github.io.git
+cd docker.github.io
+```
 
-    ```bash
-    git clone --recursive https://github.com/docker/docker.github.io.git
-    cd docker.github.io
-    docker-compose up --build
-    ```
+Then build and run the documentation with [Docker Compose](https://docs.docker.com/compose/)
 
-    If you haven't got Docker Compose installed,
-    [follow these installation instructions](https://docs.docker.com/compose/install/).
+```bash
+docker-compose up -d --build
+```
 
-    The container runs in the background and incrementally rebuilds the site each
-    time a file changes. You can keep your browser open to http://localhost:4000/
-    and refresh to see your changes. The container runs in the foreground, but
-    you can use `CTRL+C` to get the command prompt back. To stop the container,
-    issue the following command:
+> Docker Compose is included with [Docker Desktop](https://docs.docker.com/desktop/).
+> If you don't have Docker Compose installed, [follow these installation instructions](https://docs.docker.com/compose/install/).
 
-    ```bash
-    docker-compose down
-    ```
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 
-2. Build and run a Docker image for your working branch.
+To rebuild the docs after you made changes, run the `docker-compose up` command
+again. This rebuilds the documentation, and updates the container with your changes:
 
-   ```bash
-   DOCKER_BUILDKIT=1 docker build -t docker build -t docker-docs
-   docker run --rm -it -p 4000:4000 docker-docs
-   ```
+```bash
+docker-compose up -d --build
+```
 
-   After the `docker run` command, copy the URL provided in the container build output in a browser,
-   http://0.0.0.0:4000, and verify your changes.
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 
-3.  Install Jekyll and GitHub Pages on your local machine.
 
-    a. Clone this repo by running:
+To stop the staging container, use the `docker-compose down` command:
 
-       ```bash
-       git clone --recursive https://github.com/docker/docker.github.io.git
-       ```
+```bash
+docker-compose down
+```
 
-    b. Install Ruby 2.3 or later as described in [Installing Ruby](https://www.ruby-lang.org/en/documentation/installation/).
+### Build the docs with deployment features enabled
 
-    c. Install Bundler:
+The default configuration for local builds of the documentation disables some
+features to allow for a shorter build-time. The following options differ between
+local builds, and builds that are deployed to docs.docker.com:
 
-       ```bash
-       gem install bundler
-       ```
+- search auto-completion, and generation of `js/metadata.json`
+- google analytics
+- page ratings
+- `sitemap.xml` generation
+- minification of stylesheets (css/style.css)
+- adjusting "edit this page" links for content in other repositories
 
-    d. If you use Ubuntu, install packages required for the Nokogiri HTML
-       parser:
+If you want to contribute in these areas, you can perform a "production" build
+locally.
 
-       ```bash
-       sudo apt-get install ruby-dev zlib1g-dev liblzma-dev
-       ```
+To preview the documentation with deployment features enabled, you need to set the
+`JEKYLL_ENV` environment variable when building the documentation;
 
-    e. Install Jekyll and other required dependencies:
+```bash
+JEKYLL_ENV=production docker-compose up --build
+```
 
-       ```bash
-       bundle install
-       ```
+Once the container is built and running, visit [http://localhost:4000](http://localhost:4000)
+in your web browser to view the docs.
 
-       >**Note**: You may need to install some packages manually.
+To rebuild the docs after you make changes, repeat the steps above.
 
-    f. Change the directory to `docker.github.io`.
-
-    g. Use the `jekyll serve` command to continuously build the HTML output.
-
-    The `jekyll serve` process runs in the foreground, and starts a web server
-    running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
-    You can continue working in a second terminal and Jekyll will rebuild the
-    website incrementally. Refresh the browser to preview your changes.
-
+<!--
+TODO re-enable auto-builds, or push master builds to Docker hub
 ## Read these docs offline
 
 To read the docs offline, you can use either a standalone container or a swarm service.
-To see all available tags, go to
-[Docker Hub](https://docs.docker.com/docker-hub/).
+To see all available tags, go to [Docker Hub](https://docs.docker.com/docker-hub/).
 
 The following examples use the `latest` tag:
 
@@ -180,11 +172,12 @@ The following examples use the `latest` tag:
   This example uses only a single replica, but you could run as many replicas as you'd like.
 
 Either way, you can now access the docs at port 4000 on your Docker host.
+-->
 
 ## Important files
 
 - `/_data/toc.yaml` defines the left-hand navigation for the docs
-- `/js/menu.js` defines most of the docs-specific JS such as TOC generation and menu syncing
+- `/js/docs.js` defines most of the docs-specific JS such as TOC generation and menu syncing
 - `/css/style.scss` defines the docs-specific style rules
 - `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
 
@@ -215,9 +208,9 @@ following keys are supported. The title, description, and keywords are required.
 | notoc                  | no        | Either `true` or `false`. If `true`, no in-page TOC is generated for the HTML output of this page. Defaults to `false`. Appropriate for some landing pages that have no in-page headings.|
 | toc_min                | no        | Ignored if `notoc` is set to `true`. The minimum heading level included in the in-page TOC. Defaults to `2`, to show `<h2>` headings as the minimum. |
 | toc_max                | no        | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
-| tree                   | no        | Either `true` or `false`. Set to `false` to disable the left-hand site-wide navigation for this page. Appropriate for some pages like the search page or the 404 page. |
 | no_ratings             | no        | Either `true` or `false`. Set to `true` to disable the page-ratings applet for this page. Defaults to `false`. |
-| skip_read_time             | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
+| skip_read_time         | no        | Set to `true` to disable the 'Estimated reading time' banner for this page. |
+| sitemap                | no        | Exclude the page from indexing by search engines. When set to `false`, the page is excluded from `sitemap.xml`, and a `<meta name="robots" content="noindex"/>` header is added to the page. |
 
 The following is an example of valid (but contrived) page metadata. The order of
 the metadata elements in the front-matter is not important.
@@ -246,7 +239,7 @@ advanced usage. For a basic horizontal tab set, copy/paste starting from this
 code and implement from there. Keep an eye on those `href="#id"` and `id="id"`
 references as you rename, add, and remove tabs.
 
-```
+```html
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab1">TAB 1 HEADER</a></li>
   <li><a data-toggle="tab" data-target="#tab2">TAB 2 HEADER</a></li>
@@ -300,4 +293,4 @@ still optimizes the bandwidth during browsing).
 
 ## Copyright and license
 
-Code and documentation copyright 2017 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2021 Docker, inc, released under the Apache 2.0 license.

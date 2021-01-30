@@ -318,10 +318,10 @@ Starting composetest_web_1...
 
 $ docker-compose ps
 
-Name                 Command            State       Ports
--------------------------------------------------------------------
-composetest_redis_1   /usr/local/bin/run         Up
-composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
+       Name                      Command               State           Ports         
+-------------------------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
+composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
 ```
 
 The `docker-compose run` command allows you to run one-off commands for your

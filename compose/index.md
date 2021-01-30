@@ -3,7 +3,9 @@ description: Introduction and Overview of Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
 redirect_from:
+ - /compose/networking/swarm/
  - /compose/overview/
+ - /compose/swarm/
 ---
 
 >**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
@@ -31,7 +33,7 @@ so they can be run together in an isolated environment.
 A `docker-compose.yml` looks like this:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{ site.compose_file_v3 }}"  # optional since v1.27.0
 services:
   web:
     build: .
@@ -117,7 +119,7 @@ environment very quickly.
 
 Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.
-See [Variable substitution](compose-file/index.md#variable-substitution) for more
+See [Variable substitution](compose-file/compose-file-v3.md#variable-substitution) for more
 details.
 
 You can extend a Compose file using the `extends` field or by creating multiple
@@ -161,9 +163,7 @@ $ docker-compose down
 ### Single host deployments
 
 Compose has traditionally been focused on development and testing workflows,
-but with each release we're making progress on more production-oriented features. You can use Compose to deploy to a remote Docker Engine. The Docker Engine may be a single instance provisioned with
-[Docker Machine](../machine/overview.md) or an entire
-[Docker Swarm](../engine/swarm/index.md) cluster.
+but with each release we're making progress on more production-oriented features.
 
 For details on using production-oriented features, see
 [compose in production](production.md) in this documentation.

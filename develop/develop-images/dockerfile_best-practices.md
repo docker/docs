@@ -107,7 +107,7 @@ can be useful to perform one-off builds without writing a Dockerfile to disk,
 or in situations where the `Dockerfile` is generated, and should not persist
 afterwards.
 
-> The examples in this section use [here documents](http://tldp.org/LDP/abs/html/here-docs.html)
+> The examples in this section use [here documents](https://tldp.org/LDP/abs/html/here-docs.html)
 > for convenience, but any method to provide the `Dockerfile` on `stdin` can be
 > used.
 > 
@@ -192,7 +192,7 @@ docker build [OPTIONS] -f- PATH
 
 The example below uses the current directory (`.`) as the build context, and builds
 an image using a `Dockerfile` that is passed through `stdin` using a [here
-document](http://tldp.org/LDP/abs/html/here-docs.html).
+document](https://tldp.org/LDP/abs/html/here-docs.html).
 
 ```bash
 # create a directory to work in
@@ -315,7 +315,7 @@ Limiting each container to one process is a good rule of thumb, but it is not a
 hard and fast rule. For example, not only can containers be
 [spawned with an init process](../../engine/reference/run.md#specify-an-init-process),
 some programs might spawn additional processes of their own accord. For
-instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
+instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 
@@ -646,7 +646,7 @@ version bumps are easier to maintain, as seen in the following example:
 ```dockerfile
 ENV PG_MAJOR=9.3
 ENV PG_VERSION=9.3.4
-RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
 ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 
@@ -729,7 +729,7 @@ have to add another layer in your image. For example, you should avoid doing
 things like:
 
 ```dockerfile
-ADD http://example.com/big.tar.xz /usr/src/things/
+ADD https://example.com/big.tar.xz /usr/src/things/
 RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
 ```
@@ -738,7 +738,7 @@ And instead, do something like:
 
 ```dockerfile
 RUN mkdir -p /usr/src/things \
-    && curl -SL http://example.com/big.tar.xz \
+    && curl -SL https://example.com/big.tar.xz \
     | tar -xJC /usr/src/things \
     && make -C /usr/src/things all
 ```
@@ -802,7 +802,7 @@ exec "$@"
 
 > Configure app as PID 1
 >
-> This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
+> This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec)
 > so that the final running application becomes the container's PID 1. This
 > allows the application to receive any Unix signals sent to the container.
 > For more, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).

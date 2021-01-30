@@ -95,7 +95,7 @@ configure this app to use our SQL Server database, and then create a
     > base 10 digits and/or non-alphanumeric symbols.
 
     ```yaml
-    version: "3"
+    version: "{{ site.compose_file_v3 }}"
     services:
         web:
             build: .

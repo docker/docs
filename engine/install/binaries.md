@@ -40,7 +40,7 @@ meets the prerequisites:
 - `iptables` version 1.4 or higher
 - `git` version 1.7 or higher
 - A `ps` executable, usually provided by `procps` or a similar package.
-- [XZ Utils](http://tukaani.org/xz/) 4.9 or higher
+- [XZ Utils](https://tukaani.org/xz/) 4.9 or higher
 - A [properly mounted](
   https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)
   `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount

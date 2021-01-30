@@ -2,6 +2,8 @@
 description: Using repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation
 title: Repositories
+redirect_from:
+- /engine/tutorials/dockerrepos/
 ---
 
 Docker Hub repositories allow you share container images with your team,
@@ -20,19 +22,14 @@ To create a repository, sign into Docker Hub, click on **Repositories** then
 
 When creating a new repository:
 
- * You can choose to put it in your Docker ID
-namespace, or in any [organization](orgs.md) where you are an
-[_owner_](orgs.md#the-owners-team).
-
+* You can choose to put it in your Docker ID namespace, or in any
+  [organization](orgs.md) where you are an [_owner_](orgs.md#the-owners-team).
 * The repository name needs to be unique in that namespace, can be two
-to 255 characters, and can only contain lowercase letters, numbers or `-` and
-`_`.
-
-* The description can be up to 100 characters and is used in the search
-result.
-
-* You can link a GitHub or Bitbucket account now, or choose to do it
-later in the repository settings.
+  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`),
+  and underscores (`_`).
+* The description can be up to 100 characters and is used in the search result.
+* You can link a GitHub or Bitbucket account now, or choose to do it later in
+  the repository settings.
 
 ![Setting page for creating a repo](images/repo-create-details.png)
 
@@ -50,17 +47,17 @@ them (for example `docs/base:testing`). If it's not specified, the tag defaults
 to `latest`.
 
 Name your local images using one of these methods:
-* When you build them, using
-`docker build -t <hub-user>/<repo-name>[:<tag>]`
 
+* When you build them, using `docker build -t <hub-user>/<repo-name>[:<tag>]`
 * By re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`
-
 * By using `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]`
-to commit changes
+  to commit changes
 
 Now you can push this repository to the registry designated by its name or tag.
 
-    $ docker push <hub-user>/<repo-name>:<tag>
+```console
+$ docker push <hub-user>/<repo-name>:<tag>
+```
 
 The image is then uploaded and available for use by your teammates and/or
 the community.
@@ -72,11 +69,11 @@ own account or within an organization or team.
 
 To create a private repository, select **Private** when creating a repository:
 
-![Create Private Repo](images/repo-create-private.png)
+![Create Private Repo](images/repo-create-private.png){: style="max-width: 60%"}
 
 You can also make an existing repository private by going to its **Settings** tab:
 
-![Convert Repo to Private](images/repo-make-private.png)
+![Convert Repo to Private](images/repo-make-private.png){: style="max-width: 60%"}
 
 You get one private repository for free with your Docker Hub user account (not
 usable for organizations you're a member of). If you need more private
@@ -105,7 +102,8 @@ designated, they can `push` and `pull` to your repositories. They are not
 allowed to perform any administrative tasks such as deleting the repository or
 changing its status from private to public.
 
-> **Note**:
+> **Note**
+>
 > A collaborator cannot add other collaborators. Only the owner of
 > the repository has administrative access.
 
@@ -132,6 +130,23 @@ To view individual tags, click on the **Tags** tab.
 
 ![Manage Repo Tags](images/repo-tags-list.png)
 
+An image is considered stale if there has been no push/pull activity for more
+than 1 month, i.e.:
+
+* It has not been pulled for more than 1 month
+* And it has not been pushed for more than 1 month
+
+A multi-architecture image is considered stale if all single-architecture images
+part of its manifest are stale.
+
+To delete a tag, select the corresponding checkbox and select **Delete** from the
+**Action** drop-down list.
+
+> **Note**
+>
+> Only a user with administrative access (owner or team member with Admin
+> permission) over the repository can delete tags.
+
 Select a tag's digest to view details.
 
 ![View Tag](images/repo-image-layers.png)
@@ -142,8 +157,9 @@ You can search the [Docker Hub](https://hub.docker.com) registry through its
 search interface or by using the command line interface. Searching can find
 images by image name, username, or description:
 
-```
+```console
 $ docker search centos
+
 NAME                                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
 centos                               The official build of CentOS.                   1034      [OK]
 ansible/centos7-ansible              Ansible on Centos7                              43                   [OK]
@@ -160,8 +176,9 @@ a user's repository from the image name.
 
 Once you've found the image you want, you can download it with `docker pull <imagename>`:
 
-```
+```console
 $ docker pull centos
+
 latest: Pulling from centos
 6941bfcbbfca: Pull complete
 41459f052977: Pull complete
@@ -181,24 +198,27 @@ bookmarking your favorites.
 
 ## Service accounts
 
- A service account is a Docker ID used by a bot for automating the build pipeline for containerized applications. Service accounts are typically used in an automated workflow and do not share Docker IDs with the members in the Team plan.
+A service account is a Docker ID used by a bot for automating the build pipeline
+for containerized applications. Service accounts are typically used in automated
+workflows, and do not share Docker IDs with the members in the Team plan.
 
- To create a new service account for your Team account:
+To create a new service account for your Team account:
 
- 1. Create a new Docker ID.
- 2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
- 3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
- 4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
- 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+1. Create a new Docker ID.
+2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
+3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
+4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
+5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 
 To create a new service account for your Pro account:
 
- 1. Create a new Docker ID.
- 2. Click **Repositories** from the main menu.
- 3. Select a repository from the list and go to the **Collaborators** tab.
- 4. Add the new Docker ID as a collaborator.
- 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+1. Create a new Docker ID.
+2. Click **Repositories** from the main menu.
+3. Select a repository from the list and go to the **Collaborators** tab.
+4. Add the new Docker ID as a collaborator.
+5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 
- > **Note**
- >
- > If you want a read-only PAT just for your open source repos, or to access official images and other public images, you do not have to grant any access permissions to the new Docker ID.
+> **Note**
+>
+> If you want a read-only PAT just for your open source repos, or to access
+> official images and other public images, you do not have to grant any access permissions to the new Docker ID.

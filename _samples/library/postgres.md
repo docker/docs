@@ -1,17 +1,5 @@
 ---
-title: postgres
-keywords: library, sample, postgres
-repo: postgres
-layout: docs
-permalink: /samples/library/postgres/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/postgres/
 redirect_from:
 - /samples/postgres/
-description: |
-  The PostgreSQL object-relational database system provides reliability and data integrity.
 ---
-
-The PostgreSQL object-relational database system provides reliability and data integrity.
-
-
-{% include library-samples.md %}

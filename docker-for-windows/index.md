@@ -10,6 +10,7 @@ redirect_from:
 - /windows/started/
 - /winkit/
 - /winkit/getting-started/
+
 title: Docker Desktop for Windows user manual
 toc_min: 1
 toc_max: 2
@@ -18,10 +19,6 @@ toc_max: 2
 Welcome to Docker Desktop! The Docker Desktop for Windows user manual provides information on how to configure and manage your Docker Desktop settings.
 
 For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
-
->**Note**
->
-> This page contains information about the Docker Desktop Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes.md).
 
 ## Settings
 
@@ -46,18 +43,11 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 * **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
 
-* **Automatically check for updates** - By default, Docker Desktop automatically checks for updates and notifies you when an update is available.
-Click **OK** to accept and install updates (or cancel to keep the current
-version). You can manually update by choosing **Check for Updates** from the
-main Docker menu.
-
 * **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
 * **Send usage statistics** - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
-
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
 
 ### Resources
 
@@ -116,6 +106,11 @@ File share settings are:
 
 > Tips on shared folders, permissions, and volume mounts
 >
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
  * Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much better if they are stored in
  the Linux VM, using a [data volume](../storage/volumes.md)
@@ -150,7 +145,7 @@ If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
 
 ```ps
-> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
@@ -175,7 +170,7 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 > **Note**
 >
-> Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
+> Some users reported problems connecting to Docker Hub on Docker Desktop. This would manifest as an error when trying to run
 `docker` commands that pull images from Docker Hub that are not already
 downloaded, such as a first time run of `docker run hello-world`. If you
 encounter this, reset the DNS server to use the Google DNS fixed address:
@@ -213,12 +208,9 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 On the Command Line page, you can specify whether or not to enable experimental features.
 
-On both Docker Desktop Edge and Stable releases, you can toggle the experimental features on and off. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
 
 #### Experimental features
-
-Docker Desktop Edge releases have the experimental version
-of Docker Engine enabled by default, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on GitHub.
 
 {% include experimental.md %}
 
@@ -363,12 +355,12 @@ The Docker Desktop Dashboard enables you to interact with containers and applica
 
 ## Docker Hub
 
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
+Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
 
-For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" class="_" }:
+For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" rel="noopener" class="_" }:
 
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" class="_" }
-* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" class="_" }
+* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
+* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
 
 ### Two-factor authentication
 
@@ -390,10 +382,7 @@ After you have successfully authenticated, you can access your organizations and
 
 ## Adding TLS certificates
 
-You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server
-certificates, and **client certificates**, to authenticate to registries. For more information, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
-in the FAQs.
+You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.
 
 ### How do I add custom CA certificates?
 
@@ -433,8 +422,8 @@ in the Docker Engine topics.
 
 ## Where to go next
 
-* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" class="_"}.
+* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" rel="noopener" class="_"}.
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
-* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" class="_"}.
+* Refer to the [Docker CLI Reference Guide](/engine/reference/commandline/cli/){: target="_blank" rel="noopener" class="_"}.

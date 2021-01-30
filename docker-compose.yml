@@ -1,7 +1,21 @@
 version: "3.7"
 services:
   docs:
+    # By default, docker-compose up --build builds docs for a development
+    # environment (no Google Analytics, omitting some enterprise redirects,
+    # etc.
+    #
+    # To test a "production" build, override the environment using:
+    #
+    # JEKYLL_ENV=production docker-compose up --build
     build:
+      args:
+        # FIXME: docker-compose should behave the same as the docker CLI here
+        # and if `JEKYLL_ENV` is not set in the current environment, ignore
+        # the --build-arg, and use the default that's defined in the Dockerfile.
+        # Setting a default here as a workaround.
+        # - JEKYLL_ENV
+        - JEKYLL_ENV=${JEKYLL_ENV:-development}
       context: .
     image: docs/docstage
     ports:

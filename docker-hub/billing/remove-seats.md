@@ -17,7 +17,7 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 
 To remove seats from a monthly plan:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
 2. Navigate to **Organizations** from the menu at the top of the page and then choose your organization.
 

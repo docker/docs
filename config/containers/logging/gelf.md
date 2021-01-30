@@ -9,7 +9,7 @@ title: Graylog Extended Format logging driver
 
 The `gelf` logging driver is a convenient format that is understood by a number of tools such as
 [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and
-[Fluentd](http://www.fluentd.org/). Many tools use this format.
+[Fluentd](https://www.fluentd.org). Many tools use this format.
 
 In GELF, every log message is a dict with the following fields:
 
@@ -69,6 +69,7 @@ The `gelf` logging driver supports the following options:
 | `gelf-tcp-reconnect-delay` | optional  | `TCP Only` The number of seconds to wait between reconnection attempts. A positive integer. Default value is 1.                                                                                                                                                                     | `--log-opt gelf-tcp-reconnect-delay=1`              |
 | `tag`                      | optional  | A string that is appended to the `APP-NAME` in the `gelf` message. By default, Docker uses the first 12 characters of the container ID to tag log messages. Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format.                            | `--log-opt tag=mailer`                              |
 | `labels`                   | optional  | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon accepts. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).                                        | `--log-opt labels=production_status,geo`            |
+| `labels-regex`             | optional  | Similar to and compatible with `labels`. A regular expression to match logging-related labels. Used for advanced [log tag options](log_tags.md).                                                                                                                                    | `--log-opt labels-regex=^(production_status|geo)`   |
 | `env`                      | optional  | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon accepts. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).                         | `--log-opt env=os,customer`                         |
 | `env-regex`                | optional  | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                                        | `--log-opt env-regex=^(os|customer)`                |
 

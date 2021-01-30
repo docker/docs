@@ -7,7 +7,7 @@ description: Learn how to describe and deploy a simple application on Kubernetes
 ## Prerequisites
 
 - Download and install Docker Desktop as described in [Orientation and setup](index.md).
-- Work through containerizing an application in [Part 2](part2.md).
+- Work through containerizing an application in [Part 2](02_our_app.md).
 - Make sure that Kubernetes is enabled on your Docker Desktop:
   - **Mac**: Click the Docker icon in your menu bar, navigate to **Preferences** and make sure there's a green light beside 'Kubernetes'.
   - **Windows**: Click the Docker icon in the system tray and navigate to **Settings** and make sure there's a green light beside 'Kubernetes'.
@@ -111,7 +111,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
     In addition to the default `kubernetes` service, we see our `bb-entrypoint` service, accepting traffic on port 30001/TCP.
 
-3.  Open a browser and visit your bulletin board at `localhost:30001`; you should see your bulletin board, the same as when we ran it as a stand-alone container in [Part 2](part2.md) of the Quickstart tutorial.
+3.  Open a browser and visit your bulletin board at `localhost:30001`; you should see your bulletin board, the same as when we ran it as a stand-alone container in [Part 2](02_our_app.md) of the Quickstart tutorial.
 
 4.  Once satisfied, tear down your application:
 

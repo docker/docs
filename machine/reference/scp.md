@@ -2,7 +2,6 @@
 description: Copy files among machines
 keywords: machine, scp, subcommand
 title: docker-machine scp
-hide_from_sitemap: true
 ---
 
 Copy files from your local host to a machine, from machine to machine, or from a
@@ -69,8 +68,8 @@ $ docker-machine scp -r /Users/<username>/webapp MACHINE-NAME:/home/ubuntu/webap
 
 Then write a docker-compose file that bind mounts it in:
 
-```none
-version: "3.1"
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   webapp:
     image: alpine

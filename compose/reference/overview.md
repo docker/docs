@@ -17,7 +17,7 @@ command line.
 Define and run multi-container applications with Docker.
 
 Usage:
-  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
+  docker-compose [-f <arg>...] [--profile <name>...] [options] [COMMAND] [ARGS...]
   docker-compose -h|--help
 
 Options:
@@ -25,6 +25,7 @@ Options:
                               (default: docker-compose.yml)
   -p, --project-name NAME     Specify an alternate project name
                               (default: directory name)
+  --profile NAME              Specify a profile to enable
   --verbose                   Show more output
   --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   Do not print ANSI control characters
@@ -114,6 +115,10 @@ webapp:
     - DEBUG=1
 ```
 
+When you use multiple Compose files, all paths in the files are relative to the
+first configuration file specified with `-f`. You can use the
+`--project-directory` option to override this base path.
+
 Use a `-f` with `-` (dash) as the filename to read the configuration from
 `stdin`. When `stdin` is used all paths in the configuration are
 relative to the current working directory.
@@ -169,6 +174,16 @@ Status: Downloaded newer image for postgres:latest
 Each configuration has a project name. If you supply a `-p` flag, you can
 specify a project name. If you don't specify the flag, Compose uses the current
 directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars.md#compose_project_name).
+
+## Use `--profile` to specify one or more active profiles
+
+Calling `docker-compose --profile frontend up` will start the services with the
+profile `frontend` and services without specified profiles. You can also enable
+multiple profiles, e.g. with `docker-compose --profile frontend --profile debug up`
+the profiles `frontend` and `debug` will be enabled.
+
+See also [_Using profiles with Compose_](../profiles.md) and the
+[`COMPOSE_PROFILES` environment variable](envvars.md#compose_profiles).
 
 ## Set up environment variables
 

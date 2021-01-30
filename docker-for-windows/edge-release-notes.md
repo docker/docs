@@ -11,10 +11,99 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
+## Docker Desktop Community 2.5.4
+2020-12-07
+
+> [Download](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker Engine 20.10.0-rc2](https://github.com/docker/docker-ce/blob/master/CHANGELOG.md#20100)
+- [Go 1.15.6](https://github.com/golang/go/issues?q=milestone%3AGo1.15.6+label%3ACherryPickApproved+)
+
+### Bug fixes and minor changes
+
+- Fixed an issue causing the background update to fail when the current user is not an administrator.
+- Downgraded the kernel to [4.19.121](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.121-2a1dbedf3f998dac347c499808d7c7e029fbc4d3-amd64/images/sha256-4e7d94522be4f25f1fbb626d5a0142cbb6e785f37e437f6fd4285e64a199883a?context=repo) to reduce the CPU usage of hyperkit. Fixes [docker/for-mac#5044](https://github.com/docker/for-mac/issues/5044)
+
+## Docker Desktop Community 2.5.3
+2020-11-30
+
+> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
+
+## Docker Desktop Community 2.5.2
+2020-11-26
+
+> [Download](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- Use of three digit version number.
+- Starting with Docker Desktop 2.5.2, updates will be much smaller as they will be applied using delta patches.
+
+### Bug fixes and minor changes
+
+- Fixed an unexpected EOF error when trying to start a non-existing container with `-v /var/run/docker.sock:`. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+
+## Docker Desktop Community 2.5.1.0
+2020-11-18
+
+> [Download](https://desktop.docker.com/win/edge/49923/Docker%20Desktop%20Installer.exe)
+
+This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
+
+### Upgrades
+
+- [Docker Engine 20.10.0-rc1](https://github.com/docker/docker-ce/blob/master/CHANGELOG.md#20100)
+- [Compose CLI v1.0.2](https://github.com/docker/compose-cli/releases/tag/v1.0.2)
+- [Snyk v1.424.4](https://github.com/snyk/snyk/releases/tag/v1.424.4)
+- [Kubernetes 1.19.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.3)
+
+### Bug fixes and minor changes
+
+- Renamed 'Run Diagnostics' to 'Get support'.
+- Fixed an issue with the WSL 2 backend where some network plugins may fail to load, provoking a crash of the Docker daemon.
+- Fixed an unexpected EOF error when trying to start a non-existing container. See [docker/for-mac#5025](https://github.com/docker/for-mac/issues/5025).
+
+## Docker Desktop Community 2.4.2.0
+2020-10-19
+
+> [Download](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- If you have enabled [Vulnerability Scanning](/docker-hub/vulnerability-scanning/) in Docker Hub, the scan results will now appear in Docker Desktop.
+
+### Upgrades
+
+- [Docker Engine 20.10.0 beta1](https://github.com/docker/docker-ce/blob/0fc7084265b3786a5867ec311d3f916af7bf7a23/CHANGELOG.md)
+- [Docker Compose CLI - 0.1.22](https://github.com/docker/compose-cli/releases/tag/v0.1.22)
+- [Linux kernel 5.4.39](https://hub.docker.com/layers/linuxkit/kernel/5.4.39-f39f83d0d475b274938c86eaa796022bfc7063d2/images/sha256-8614670219aca0bb276d4749e479591b60cd348abc770ac9ecd09ee4c1575405?context=explore)
+- [Kubernetes 1.19.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.2)
+- [Go 1.15.2](https://github.com/golang/go/issues?q=milestone:Go1.15.2+label:CherryPickApproved)
+
+* Deprecation
+  - Docker Desktop cannot be installed on Windows 1703 (build 15063) anymore.
+
+### Bug fixes and minor changes
+
+- Fixed an issue that can intermittently cause the WSL 2 backend to fail to start.
+- Fixed an issue related to NFS mounting. See [docker/for-mac#4958](https://github.com/docker/for-mac/issues/4958).
+- Fixed an issue with http proxy exclude lists containing entries such as `localhost` or `127.0.0.1`. Fixes [docker/for-win#8750](https://github.com/docker/for-win/issues/8750).
+- When WSL integration process unexpectedly stops, the user is now notified and can decide to restart it or not, instead of always try to restart it in a loop. fixes [docker/for-win#8968](https://github.com/docker/for-win/issues/8968).
+- Fixed an issue related to container logs that lag under heavy load. Fixes [docker/for-win#8216](https://github.com/docker/for-win/issues/8216).
+- Diagnostics: avoid hanging when Kubernetes is in a broken state.
+- When sharing a file into a container (e.g. `docker run -v ~/.gitconfig`) Docker Desktop does not watch the parent directory. Fixes [docker/for-mac#4981](https://github.com/docker/for-mac/issues/4981).
+- Always flush file system caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+
 ## Docker Desktop Community 2.4.1.0
 2020-10-01
 
-> [Download](https://desktop.docker.com/win/edge/48559/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/edge/48583/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -30,7 +119,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
 
-> [Download](https://desktop.docker.com/win/edge/48572/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -213,7 +302,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 - Fixed application startup if `hosts` is specified inside the Docker `daemon.json`. See [docker/for-win#6895](https://github.com/docker/for-win/issues/6895#issuecomment-637429117).
 - Fixed opening a CLI from the dashboard for Windows containers. See [docker/for-win#7079](https://github.com/docker/for-win/issues/7079).
-- Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](docker/for-win#6797).
+- Fixed an issue where adding a folder on a non-existing drive in the settings would create an empty entry. See [docker/for-win#6797](https://github.com/docker/for-win/issues/6797).
 - Fixed an issue when updating Windows to a WSL 2 capable version, where a configuration file is locked by the old Hyper-V VM.
 - Pinning the application to the taskbar and clicking on it will launch the container view if Docker is already running.
 - Left-clicking on the Docker icon in the system tray now launches the container view Dashboard. See [docker/for-win#6650](https://github.com/docker/for-win/issues/6650).
@@ -405,7 +494,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ### Bug fixes and minor changes
 
 - Added a prerequisite check in the installer for the `LanmanServer` service. Fixes [docker/for-win#5150](https://github.com/docker/for-win/issues/5150).
-- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md#use-cases-and-workarounds).
 - Ceph support has been removed from Docker Desktop to save disk space.
 - Fixed an issue that caused the Windows log file archive to grow indefinitely. Fixes [docker/for-win#5113](https://github.com/docker/for-win/issues/5113).
 
@@ -441,7 +530,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Known issues
 
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](networking.md#use-cases-and-workarounds).
 
   However, if your current setup relies on IP addresses for communication, you can use a temporary workaround to reinstate DockerNAT. To do this, open
 `C:\Program Files\Docker\Docker\resources\MobyLinux.ps1` and add `$SwitchName = "DockerNAT"` between line 175 and 176. Note that the temporary workaround to reinstate DockerNAT may be removed from future releases.

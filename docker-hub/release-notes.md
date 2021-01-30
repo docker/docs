@@ -9,6 +9,27 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2021-01-25
+
+### New feature
+
+Docker introduces Audit log, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
+
+For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
+
+# 2020-11-10
+
+### New feature
+
+The **Repositories** view now shows which images have gone stale because they haven't been 
+pulled or pushed recently. For more information, see [repository tags](repos.md/#viewing-repository-tags).
+
+# 2020-10-07
+
+### New feature
+
+Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
+
 # 2020-05-14
 
 ### New features

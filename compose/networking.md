@@ -12,23 +12,27 @@ container for a service joins the default network and is both *reachable* by
 other containers on that network, and *discoverable* by them at a hostname
 identical to the container name.
 
-> **Note**: Your app's network is given a name based on the "project name",
+> **Note**
+>
+> Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
 > project name with either the [`--project-name` flag](reference/overview.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
-    version: "3"
-    services:
-      web:
-        build: .
-        ports:
-          - "8000:8000"
-      db:
-        image: postgres
-        ports:
-          - "8001:5432"
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres
+    ports:
+      - "8001:5432"
+```
 
 When you run `docker-compose up`, the following happens:
 
@@ -86,11 +90,12 @@ See the [links reference](compose-file/compose-file-v2.md#links) for more inform
 
 ## Multi-host networking
 
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](../engine/reference/commandline/stack_deploy.md) documentation.
+When deploying a Compose application on an Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+you can make use of the built-in `overlay` driver to enable multi-host communication.
 
-When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
-
-Consult the [Getting started with multi-host networking](../network/network-tutorial-overlay.md) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
+Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
+a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
+to learn about multi-host overlay networks.
 
 ## Specify custom networks
 
@@ -130,7 +135,7 @@ Here's an example Compose file defining two custom networks. The `proxy` service
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/compose-file-v2.md#ipv4_address-ipv6_address) for each attached network.
 
-Networks can also be given a [custom name](compose-file/index.md#network-configuration-reference) (since version 3.5):
+Networks can also be given a [custom name](compose-file/compose-file-v3.md#network-configuration-reference) (since version 3.5):
 
     version: "3.5"
     networks:

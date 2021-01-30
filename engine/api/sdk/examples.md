@@ -1,5 +1,6 @@
 ---
 title: Examples using the Docker Engine SDKs and Docker API
+description: Examples on how to perform a given Docker operation using the Go and Python SDKs and the HTTP API using curl.
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
 - /engine/api/getting-started/
@@ -101,7 +102,7 @@ func main() {
 ```python
 import docker
 client = docker.from_env()
-print client.containers.run("alpine", ["echo", "hello", "world"])
+print(client.containers.run("alpine", ["echo", "hello", "world"]))
 ```
 
 </div>
@@ -111,17 +112,30 @@ print client.containers.run("alpine", ["echo", "hello", "world"])
 ```bash
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
-  -X POST http:/v1.24/containers/create
+  -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
 {"Id":"1c6594faf5","Warnings":null}
 
-$ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594faf5/start
+$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/start
 
-$ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594faf5/wait
+$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/wait
 {"StatusCode":0}
 
-$ curl --unix-socket /var/run/docker.sock "http:/v1.24/containers/1c6594faf5/logs?stdout=1"
+$ curl --unix-socket /var/run/docker.sock "http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/logs?stdout=1"
 hello world
 ```
+
+When using cURL to connect over a unix socket, the hostname is not important. The
+examples above use `localhost`, but any hostname would work.
+
+> **Using cURL 7.47.0 or below?**
+>
+> The examples above assume you are using cURL 7.50.0 or above. Older versions of
+> cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960){:target="_blank" rel="noopener" class="_"}
+> when using a socket connection.
+> 
+> If you are using an older version of cURL, use `http:/<API version>/` instead,
+> for example, `http:/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/start`
+{: .important}
 
 </div>
 </div><!-- end tab-content -->
@@ -193,7 +207,7 @@ func main() {
 import docker
 client = docker.from_env()
 container = client.containers.run("bfirsh/reticulate-splines", detach=True)
-print container.id
+print(container.id)
 ```
 
 </div>
@@ -203,10 +217,10 @@ print container.id
 ```bash
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "bfirsh/reticulate-splines"}' \
-  -X POST http:/v1.24/containers/create
+  -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
 {"Id":"1c6594faf5","Warnings":null}
 
-$ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594faf5/start
+$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/start
 ```
 
 </div>
@@ -264,7 +278,7 @@ func main() {
 import docker
 client = docker.from_env()
 for container in client.containers.list():
-  print container.id
+  print(container.id)
 ```
 
 </div>
@@ -272,7 +286,7 @@ for container in client.containers.list():
 <div id="tab-listcontainers-curl" class="tab-pane fade" markdown="1">
 
 ```bash
-$ curl --unix-socket /var/run/docker.sock http:/v1.24/containers/json
+$ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
   "Names":["/tender_wing"],
@@ -352,7 +366,7 @@ for container in client.containers.list():
 <div id="tab-stopcontainers-curl" class="tab-pane fade" markdown="1">
 
 ```bash
-$ curl --unix-socket /var/run/docker.sock http:/v1.24/containers/json
+$ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
   "Names":["/tender_wing"],
@@ -361,7 +375,7 @@ $ curl --unix-socket /var/run/docker.sock http:/v1.24/containers/json
 }]
 
 $ curl --unix-socket /var/run/docker.sock \
-  -X POST http:/v1.24/containers/ae63e8b89a26/stop
+  -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/ae63e8b89a26/stop
 ```
 
 </div>
@@ -421,7 +435,7 @@ func main() {
 import docker
 client = docker.from_env()
 container = client.containers.get('f1064a8a4c82')
-print container.logs()
+print(container.logs())
 ```
 
 </div>
@@ -429,7 +443,7 @@ print container.logs()
 <div id="tab-containerlogs-curl" class="tab-pane fade" markdown="1">
 
 ```bash
-$ curl --unix-socket /var/run/docker.sock "http:/v1.24/containers/ca5f55cdb/logs?stdout=1"
+$ curl --unix-socket /var/run/docker.sock "http://localhost/v{{ site.latest_engine_api_version}}/containers/ca5f55cdb/logs?stdout=1"
 Reticulating spline 1...
 Reticulating spline 2...
 Reticulating spline 3...
@@ -490,7 +504,7 @@ func main() {
 import docker
 client = docker.from_env()
 for image in client.images.list():
-  print image.id
+  print(image.id)
 ```
 
 </div>
@@ -498,7 +512,7 @@ for image in client.images.list():
 <div id="tab-listimages-curl" class="tab-pane fade" markdown="1">
 
 ```bash
-$ curl --unix-socket /var/run/docker.sock http:/v1.24/images/json
+$ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/images/json
 [{
   "Id":"sha256:31d9a31e1dd803470c5a151b8919ef1988ac3efd44281ac59d43ad623f275dcd",
   "ParentId":"sha256:ee4603260daafe1a8c2f3b78fd760922918ab2441cbb2853ed5c439e59c52f96",
@@ -561,7 +575,7 @@ func main() {
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print(image.id)
 ```
 
 </div>
@@ -569,7 +583,7 @@ print image.id
 
 ```bash
 $ curl --unix-socket /var/run/docker.sock \
-  -X POST "http:/v1.24/images/create?fromImage=alpine"
+  -X POST "http://localhost/v{{ site.latest_engine_api_version}}/images/create?fromImage=alpine"
 {"status":"Pulling from library/alpine","id":"3.1"}
 {"status":"Pulling fs layer","progressDetail":{},"id":"8f13703509f7"}
 {"status":"Downloading","progressDetail":{"current":32768,"total":2244027},"progress":"[\u003e                                                  ] 32.77 kB/2.244 MB","id":"8f13703509f7"}
@@ -654,7 +668,7 @@ uses these credentials automatically.
 import docker
 client = docker.from_env()
 image = client.images.pull("alpine")
-print image.id
+print(image.id)
 ```
 
 </div>
@@ -670,7 +684,7 @@ $ JSON=$(echo '{"username": "string", "password": "string", "serveraddress": "st
 
 $ curl --unix-socket /var/run/docker.sock \
   -H "Content-Type: application/tar"
-  -X POST "http:/v1.24/images/create?fromImage=alpine"
+  -X POST "http://localhost/v{{ site.latest_engine_api_version}}/images/create?fromImage=alpine"
   -H "X-Registry-Auth"
   -d "$JSON"
 {"status":"Pulling from library/alpine","id":"3.1"}
@@ -755,7 +769,7 @@ client = docker.from_env()
 container = client.containers.run("alpine", ["touch", "/helloworld"], detach=True)
 container.wait()
 image = container.commit("helloworld")
-print image.id
+print(image.id)
 ```
 
 </div>
@@ -765,7 +779,7 @@ print image.id
 $ docker run -d alpine touch /helloworld
 0888269a9d584f0fa8fc96b3c0d8d57969ceea3a64acf47cd34eebb4744dbc52
 $ curl --unix-socket /var/run/docker.sock\
-  -X POST "http:/v1.24/commit?container=0888269a9d&repo=helloworld"
+  -X POST "http://localhost/v{{ site.latest_engine_api_version}}/commit?container=0888269a9d&repo=helloworld"
 {"Id":"sha256:6c86a5cd4b87f2771648ce619e319f3e508394b5bfc2cdbd2d60f59d52acda6c"}
 ```
 

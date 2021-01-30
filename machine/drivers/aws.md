@@ -2,12 +2,11 @@
 description: Amazon Web Services driver for machine
 keywords: machine, Amazon Web Services, driver
 title: Amazon Web Services
-hide_from_sitemap: true
 ---
 
-Create machines on [Amazon Web Services](http://aws.amazon.com).
+Create machines on [Amazon Web Services](https://aws.amazon.com).
 
-To create machines on [Amazon Web Services](http://aws.amazon.com), you must supply two parameters: the AWS Access Key ID and the AWS Secret Access Key.
+To create machines on [Amazon Web Services](https://aws.amazon.com), you must supply two parameters: the AWS Access Key ID and the AWS Secret Access Key.
 
 ## Configuring credentials
 
@@ -21,7 +20,7 @@ One way to configure credentials is to use the standard credential file for Amaz
     aws_access_key_id = AKID1234567890
     aws_secret_access_key = MY-SECRET-KEY
 
-On Mac OS or various flavors of Linux you can install the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration) (`aws cli`) in the terminal and use the `aws configure` command which guides you through the creation of the credentials file.
+On Mac OS or various flavors of Linux you can install the [AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration) (`aws cli`) in the terminal and use the `aws configure` command which guides you through the creation of the credentials file.
 
 This is the simplest method, you can then create a new machine with:
 

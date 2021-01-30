@@ -225,7 +225,7 @@ If you cannot use Docker's repository to install Docker Engine, you can download
 `.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
+1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Debian version, then browse to `pool/stable/`, choose `amd64`,
     `armhf`, or `arm64` and download the `.deb` file for the Docker version
     you want to install.

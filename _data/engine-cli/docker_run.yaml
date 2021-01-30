@@ -76,6 +76,20 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: cgroupns
+  value_type: string
+  description: |-
+    Cgroup namespace to use (host|private)
+    'host':    Run the container in the Docker host's cgroup namespace
+    'private': Run the container in its own private cgroup namespace
+    '':        Use the cgroup namespace as configured by the
+               default-cgroupns-mode option on the daemon (default)
+  deprecated: false
+  min_api_version: "1.41"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: cidfile
   value_type: string
   description: Write the container ID to the file
@@ -686,7 +700,7 @@ options:
   description: Set platform if server is multi-platform capable
   deprecated: false
   min_api_version: "1.32"
-  experimental: true
+  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
@@ -713,6 +727,15 @@ options:
   value_type: bool
   default_value: "false"
   description: Publish all exposed ports to random ports
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: pull
+  value_type: string
+  default_value: missing
+  description: Pull image before running ("always"|"missing"|"never")
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -1304,7 +1327,8 @@ examples: |-
 
   By default, the container will be able to `read`, `write` and `mknod` these devices.
   This can be overridden using a third `:rwm` set of options to each `--device`
-  flag:
+  flag. If the container is running in privileged mode, then the permissions specified
+  will be ignored.
 
   ```bash
   $ docker run --device=/dev/sda:/dev/xvdc --rm -it ubuntu fdisk  /dev/xvdc

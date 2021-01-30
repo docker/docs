@@ -4,7 +4,6 @@ datafile: docker_config_ls
 title: docker config ls
 redirect_from:
   - /edge/engine/reference/commandline/config_ls/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

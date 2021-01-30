@@ -2,10 +2,9 @@
 description: OpenStack driver for machine
 keywords: machine, OpenStack, driver
 title: OpenStack
-hide_from_sitemap: true
 ---
 
-Create machines on [OpenStack](http://www.openstack.org/software/)
+Create machines on [OpenStack](https://www.openstack.org/software/)
 
 Mandatory:
 

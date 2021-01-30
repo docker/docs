@@ -1,17 +1,5 @@
 ---
-title: fedora
-keywords: library, sample, fedora
-repo: fedora
-layout: docs
-permalink: /samples/library/fedora/
-hide_from_sitemap: true
+redirect_to: https://hub.docker.com/_/fedora/
 redirect_from:
 - /samples/fedora/
-description: |
-  Official Docker builds of Fedora
 ---
-
-Official Docker builds of Fedora
-
-
-{% include library-samples.md %}

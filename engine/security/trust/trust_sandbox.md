@@ -11,7 +11,7 @@ The sandbox allows you to configure and try trust operations locally without
 impacting your production images.
 
 Before working through this sandbox, you should have read through the
-[trust overview](content_trust.md).
+[trust overview](index.md).
 
 ### Prerequisites
 

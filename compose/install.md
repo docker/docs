@@ -16,7 +16,7 @@ have Docker Engine installed either locally or remote, depending on your setup.
 included as part of those desktop installs.
 
 - On Linux systems, first install the
-[Docker Engine](../engine/install/index.md#server){: target="_blank" class="_"}
+[Docker Engine](../engine/install/index.md#server){: target="_blank" rel="noopener" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
@@ -35,7 +35,7 @@ Python package manager or installing Compose as a container.
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
 > Compose, replace the given release number with the one that you want. Compose
 > releases are also listed and available for direct download on the
-> [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+> [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
 > section.
 
@@ -51,24 +51,18 @@ Python package manager or installing Compose as a container.
 
 ### Install Compose on macOS
 
-**Docker Desktop for Mac** and **Docker Toolbox** already include Compose along
+**Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-Docker install instructions for these are here:
-
-  * [Get Docker Desktop for Mac](../docker-for-mac/install.md)
-  * [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
+For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
 
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
 
 ### Install Compose on Windows desktop systems
 
-**Docker Desktop for Windows** and **Docker Toolbox** already include Compose
+**Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. Docker install instructions for these are here:
-
-* [Get Docker Desktop for Windows](../docker-for-windows/install.md)
-* [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 
 If you are running the Docker daemon and client directly on Microsoft
 Windows Server, follow the instructions in the Windows Server tab.
@@ -119,7 +113,7 @@ on Microsoft Windows Server and want to install Docker Compose.
 ### Install Compose on Linux systems
 
 On Linux, you can download the Docker Compose binary from the
-[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 Follow the instructions from the link, which involve running the `curl` command
 in your terminal to download the binaries. These step-by-step instructions are
 also included below.
@@ -184,7 +178,7 @@ using `pip`, we recommend that you use a
 [virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating
 systems have python system packages that conflict with docker-compose
 dependencies. See the [virtualenv
-tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/) to get
+tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 
 ```bash
@@ -216,12 +210,12 @@ sudo chmod +x /usr/local/bin/docker-compose
 ## Install pre-release builds
 
 If you're interested in trying out a pre-release build, you can download release
-candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" class="_"}.
+candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" rel="noopener" class="_"}.
 Follow the instructions from the link, which involves running the `curl` command
 in your terminal to download the binaries.
 
 Pre-releases built from the "master" branch are also available for download at
-[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" class="_"}.
+[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" rel="noopener" class="_"}.
 
 > Pre-release builds allow you to try out new features before they are released,
 > but may be less stable.
@@ -277,7 +271,6 @@ pip uninstall docker-compose
 ## Where to go next
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)

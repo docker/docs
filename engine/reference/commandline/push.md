@@ -4,7 +4,6 @@ datafile: docker_push
 title: docker push
 redirect_from:
   - /edge/engine/reference/commandline/push/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

@@ -4,7 +4,7 @@ keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Command-line completion
 ---
 
-Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
+Compose comes with [command completion](https://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.
 
 ## Install command completion
@@ -24,7 +24,7 @@ available.
     sudo curl -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
     ```
 
-### Mac
+#### Mac
 
 ##### Install via Homebrew
 

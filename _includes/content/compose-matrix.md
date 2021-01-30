@@ -2,6 +2,7 @@ This table shows which Compose file versions support specific Docker releases.
 
 | **Compose file format** | **Docker Engine release** |
 |  -------------------    |    ------------------     |
+|  Compose specification  |       19.03.0+            |
 |      3.8                |       19.03.0+            |
 |      3.7                |       18.06.0+            |
 |      3.6                |       18.02.0+            |
@@ -25,3 +26,5 @@ do not necessarily increment with each release. For example, Compose file format
 3.0 was first introduced in [Compose release
 1.10.0](https://github.com/docker/compose/releases/tag/1.10.0), and versioned
 gradually in subsequent releases.
+
+The latest Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:target="_blank" rel="noopener" class="_"} and is implemented by Docker Compose **1.27.0+**.

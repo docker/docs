@@ -9,12 +9,11 @@ keywords: swarm, secrets, credentials, sensitive strings, sensitive data, securi
 In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
 password, SSH private key, SSL certificate, or another piece of data that should
 not be transmitted over a network or stored unencrypted in a Dockerfile or in
-your application's source code. In Docker 1.13 and higher, you can use Docker
-_secrets_ to centrally manage this data and securely transmit it to only those
-containers that need access to it. Secrets are encrypted during transit and at
-rest in a Docker swarm. A given secret is only accessible to those services
-which have been granted explicit access to it, and only while those service
-tasks are running.
+your application's source code. You can use Docker _secrets_ to centrally manage
+this data and securely transmit it to only those containers that need access to
+it. Secrets are encrypted during transit and at rest in a Docker swarm. A given
+secret is only accessible to those services which have been granted explicit
+access to it, and only while those service tasks are running.
 
 You can use secrets to manage any sensitive data which a container needs at
 runtime but you don't want to store in the image or in source control, such as:
@@ -39,14 +38,14 @@ containers only need to know the name of the secret to function in all
 three environments.
 
 You can also use secrets to manage non-sensitive data, such as configuration
-files. However, Docker 17.06 and higher support the use of [configs](configs.md)
+files. However, Docker supports the use of [configs](configs.md)
 for storing non-sensitive data. Configs are mounted into the container's
 filesystem directly, without the use of a RAM disk.
 
 ### Windows support
 
-Docker 17.06 and higher include support for secrets on Windows containers.
-Where there are differences in the implementations, they are called out in the
+Docker includes support for secrets on Windows containers. Where there are
+differences in the implementations, they are called out in the
 examples below. Keep the following notable differences in mind:
 
 - Microsoft Windows has no built-in driver for managing RAM disks, so within
@@ -81,20 +80,12 @@ encrypted. The entire Raft log is replicated across the other managers, ensuring
 the same high availability guarantees for secrets as for the rest of the swarm
 management data.
 
-> **Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
-> Swarm managers run an earlier version, and one of those managers becomes the
-> manager of the swarm, the secrets are stored unencrypted in that node's
-> Raft logs. Before adding any secrets, update all of your manager nodes to
-> Docker 1.13 or higher to prevent secrets from being written to plain-text Raft
-> logs.
-{:.warning}
-
 When you grant a newly-created or running service access to a secret, the
 decrypted secret is mounted into the container in an in-memory filesystem. The
 location of the mount point within the container defaults to
 `/run/secrets/<secret_name>` in Linux containers, or
-`C:\ProgramData\Docker\secrets` in Windows containers. You can specify a custom
-location in Docker 17.06 and higher.
+`C:\ProgramData\Docker\secrets` in Windows containers. You can also specify a
+custom location.
 
 You can update a service to grant it access to additional secrets or revoke its
 access to a given secret at any time.
@@ -140,14 +131,13 @@ a similar way, see
 
 > **Note**: These examples use a single-Engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
-> support secrets in Docker 17.06 and higher.
-> See [Windows support](#windows-support).
+> support secrets. See [Windows support](#windows-support).
 
 ### Defining and using secrets in compose files
 
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](../../compose/compose-file/index.md#secrets) for details.
+[the Compose file reference](../../compose/compose-file/compose-file-v3.md#secrets) for details.
 
 ### Simple example: Get started with secrets
 
@@ -272,16 +262,15 @@ real-world example, continue to
 ### Simple example: Use secrets in a Windows service
 
 This is a very simple example which shows how to use secrets with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-Desktop for Mac 17.06 on Microsoft Windows 10. It is a naive example that stores the
-webpage in a secret.
+IIS service running on Docker for Windows running Windows containers on
+Microsoft Windows 10. It is a naive example that stores the webpage in a secret.
 
 This example assumes that you have PowerShell installed.
 
 1.  Save the following into a new file `index.html`.
 
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
@@ -311,8 +300,8 @@ This example assumes that you have PowerShell installed.
     ```
 
     > **Note**: There is technically no reason to use secrets for this
-    > example. With Docker 17.06 and higher, [configs](configs.md) are
-    > a better fit. This example is for illustration only.
+    > example; [configs](configs.md) are a better fit. This example is
+    > for illustration only.
 
 5.  Access the IIS service at `http://localhost:8000/`. It should serve
     the HTML content from the first step.
@@ -480,48 +469,46 @@ generate the site key and certificate, name the files `site.key` and
     > This example does not require a custom image. It puts the `site.conf`
     > into place and runs the container all in one step.
 
-    In Docker 17.05 and earlier, secrets are always located within the
-    `/run/secrets/` directory. Docker 17.06 and higher allow you to specify a
-    custom location for a secret within the container. The two examples below
-    illustrate the difference. The older version of this command requires you to
-    create a symbolic link to the true location of the `site.conf` file so that
-    Nginx can read it, but the newer version does not require this. The older
-    example is preserved so that you can see the difference.
+    Secrets are located within the `/run/secrets/` directory in the container
+    by default, which may require extra steps in the container to make the
+    secret available in a different path. The example below creates a symbolic
+    link to the true location of the `site.conf` file so that Nginx can read it:
 
-    - **Docker 17.06 and higher**:
+    ```bash
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
+    ```
 
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "exec nginx -g 'daemon off;'"
-      ```
+    Instead of creating symlinks, secrets allow you to specify a custom location
+    using the `target` option. The example below illustrates how the `site.conf`
+    secret is made available at `/etc/nginx/conf.d/site.conf` inside the container
+    without the use of symbolic links:
 
-    - **Docker 17.05 and earlier**:
+    ```bash
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "exec nginx -g 'daemon off;'"
+    ```
 
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
-      ```
-
-    The first example shows both the short and long syntax for secrets, and the
-    second example shows only the short syntax. The short syntax creates files in
-    `/run/secrets/` with the same name as the secret. Within the running
-    containers, the following three files now exist:
+    The `site.key` and `site.crt` secrets use the short-hand syntax, without a 
+    custom `target` location set. The short syntax mounts the secrets in `/run/secrets/
+    with the same name as the secret. Within the running containers, the following
+    three files now exist:
 
     - `/run/secrets/site.key`
     - `/run/secrets/site.crt`
-    - `/etc/nginx/conf.d/site.conf` (or `/run/secrets/site.conf` if you used the second example)
+    - `/etc/nginx/conf.d/site.conf`
 
 5.  Verify that the Nginx service is running.
 
@@ -561,9 +548,9 @@ generate the site key and certificate, name the files `site.key` and
     working. Further configuration is required.</p>
 
     <p>For online documentation and support. refer to
-    <a href="http://nginx.org/">nginx.org</a>.<br/>
+    <a href="https://nginx.org">nginx.org</a>.<br/>
     Commercial support is available at
-    <a href="http://nginx.com/">nginx.com</a>.</p>
+    <a href="https://www.nginx.com">nginx.com</a>.</p>
 
     <p><em>Thank you for using nginx.</em></p>
     </body>
@@ -974,14 +961,16 @@ their values from a file (`WORDPRESS_DB_PASSWORD_FILE`). This strategy ensures
 that backward compatibility is preserved, while allowing your container to read
 the information from a Docker-managed secret instead of being passed directly.
 
->**Note**: Docker secrets do not set environment variables directly. This was a
-conscious decision, because environment variables can unintentionally be leaked
-between containers (for instance, if you use `--link`).
+> **Note**
+>
+> Docker secrets do not set environment variables directly. This was a
+> conscious decision, because environment variables can unintentionally be leaked
+> between containers (for instance, if you use `--link`).
 
 ## Use Secrets in Compose
 
 ```yaml
-version: '3.1'
+version: "{{ site.compose_file_v3 }}"
 
 services:
    db:
@@ -1039,5 +1028,5 @@ Each service uses environment variables to specify where the service should look
 for that secret data.
 
 More information on short and long syntax for secrets can be found at
-[Compose file version 3 reference](../../compose/compose-file/index.md#secrets).
+[Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).
 

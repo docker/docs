@@ -4,7 +4,6 @@ datafile: docker_swarm_join
 title: docker swarm join
 redirect_from:
   - /edge/engine/reference/commandline/swarm_join/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

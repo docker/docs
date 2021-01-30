@@ -42,8 +42,7 @@ exist by default, and provide core networking functionality:
   [bridge networks](bridge.md).
 
 - `host`: For standalone containers, remove network isolation between the
-  container and the Docker host, and use the host's networking directly. `host`
-  is only available for swarm services on Docker 17.06 and higher. See
+  container and the Docker host, and use the host's networking directly. See
   [use the host network](host.md).
 
 - `overlay`: Overlay networks connect multiple Docker daemons together and

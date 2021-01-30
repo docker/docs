@@ -4,7 +4,6 @@ datafile: docker_service_ps
 title: docker service ps
 redirect_from:
   - /edge/engine/reference/commandline/service_ps/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

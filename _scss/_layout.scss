@@ -1,8 +1,6 @@
 /*
-*
-* branding *********************************************************************
-*
-*/
+ * branding ********************************************************************
+ */
 
 .logo {
     margin: 12px 10px 0 10px;
@@ -29,10 +27,8 @@
 }
 
 /*
-*
-* Header ***********************************************************************
-*
-*/
+ * Header **********************************************************************
+ */
 
 .header {
     background-color: $bg-header;
@@ -44,9 +40,7 @@
     height: unset;
 }
 
-.columns,
-.col-body {
-    display: flex;
+.columns {
     flex-direction: column;
 }
 
@@ -55,6 +49,7 @@
 }
 
 .col-body {
+    display: flex;
     flex-direction: row;
     flex: 1;
     min-height: 555px;
@@ -81,14 +76,10 @@
 }
 
 .content {
-    padding: 80px 70px 20px 70px;
+    padding: 80px 20px 40px 40px;
     max-width: 1024px;
     min-width: 300px;
     min-height: 500px;
-}
-
-.main-content {
-    padding: 0 35px 25px 30px;
 }
 
 section.section {
@@ -100,10 +91,8 @@ section.section {
 }
 
 /*
-*
-* sidebar ***********************************************************************
-*
-*/
+ * sidebar *********************************************************************
+ */
 
 .wrapper.right-open #sidebar-wrapper {
     width: 270px;
@@ -112,10 +101,6 @@ section.section {
 .wrapper.right-open .page-content {
     padding-right: 190px;
 }
-
-/*
-* Sidebar
-*/
 
 .col-nav,
 .col-toc {
@@ -131,7 +116,6 @@ section.section {
 }
 
 .sidebar {
-    position: -webkit-sticky;
     position: sticky;
     top: 55px;
     overflow: auto;
@@ -139,17 +123,10 @@ section.section {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-/***Swagger***/
-
-.swagger-section {
-   padding-top: 2rem;
-}
 
 /*
-*
-* global footer  ***********************************************************************
-*
-*/
+ * global footer  **************************************************************
+ */
 
 footer {
     background: $white;
@@ -170,7 +147,6 @@ footer {
             color: #637986;
             font-size: 12px;
             line-height: 16px;
-            text-decoration: none;
         }
     }
 }
@@ -207,7 +183,6 @@ footer {
 }
 
 .footer-copyright p {
-    font-family: $font;
     font-size: 12px;
     line-height: 17px;
     color: #637986;

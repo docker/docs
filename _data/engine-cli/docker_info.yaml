@@ -41,6 +41,7 @@ examples: |-
   ```bash
   $ docker info
   Client:
+   Context:    default
    Debug Mode: false
 
   Server:
@@ -100,6 +101,7 @@ examples: |-
   ```bash
   $ docker -D info
   Client:
+   Context:    default
    Debug Mode: true
 
   Server:
@@ -199,6 +201,7 @@ examples: |-
   ```console
   E:\docker>docker info
   Client:
+   Context:    default
    Debug Mode: false
 
   Server:

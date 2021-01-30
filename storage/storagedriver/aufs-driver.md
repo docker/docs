@@ -10,7 +10,7 @@ AUFS is a *union filesystem*. The `aufs` storage driver was previously the defau
 storage driver used for managing images and layers on Docker for Ubuntu, and for
 Debian versions prior to Stretch. If your Linux kernel is version 4.0 or higher,
 and you use Docker Engine - Community, consider using the newer
-[overlay2](overlayfs-driver.md){: target="_blank" class="_" }, which has
+[overlay2](overlayfs-driver.md){: target="_blank" rel="noopener" class="_" }, which has
 potential performance advantages over the `aufs` storage driver.
 
 > **Note**
