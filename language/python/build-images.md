@@ -26,6 +26,8 @@ Let’s create a simple Python application using the Flask framework that we’l
 
 ```shell
 $ cd /path/to/python-docker
+$ python3 -m venv venv
+$ source venv/bin/activate
 $ pip3 install Flask
 $ pip3 freeze > requirements.txt
 $ touch app.py
@@ -40,14 +42,17 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return 'Hello, Docker!'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
 ```
 
 ## Test the application
 
-Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created.
+Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created. Run:
 
 ```shell
-$ python3 -m flask run
+$ python3 app.py
 ```
 
 To test that the application is working properly, open a new browser and navigate to `http://localhost:5000`.
