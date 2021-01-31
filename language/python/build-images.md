@@ -69,6 +69,13 @@ Switch back to the terminal where our server is running and you should see the f
 127.0.0.1 - - [22/Sep/2020 11:07:41] "GET / HTTP/1.1" 200 -
 ```
 
+You may now deactivate the virtual environment and remove the respective directory as it will no longer be necessary:
+
+```shell
+$ deactivate
+$ rm -r venv
+```
+
 ## Create a Dockerfile for Python
 
 Now that our application is running properly, let’s take a look at creating a Dockerfile.
