@@ -19,7 +19,7 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 ### System Requirements
 
-  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 16299 or later).
+  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or later).
   
     For Windows 10 Home, see [Install Docker Desktop on Windows Home](install-windows-home.md).
   - Hyper-V and Containers Windows features must be enabled.
