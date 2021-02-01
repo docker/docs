@@ -175,7 +175,7 @@ If all goes will you should see something similar:
 Now let’s test our API endpoint. Run the following curl command:
 
 ```shell
-$ curl --request GET --url http://localhost:8000/services/m/notes
+$ curl --request GET --url http://localhost:8000/notes
 ```
 
 You should receive the following response:
@@ -198,13 +198,7 @@ Click the **Open dedicated DevTools for Node** link. This opens the DevTools tha
 
 Let’s change the source code and then set a breakpoint.
 
-Remove the following code from the server.js file.
-
-```javascript
-server.use( '/', mocks.server( server.Router(), false, false ) )
-```
-
-Add the following code instead, and save the file.
+Add the following code above the existing `server.use()` statement, and save the file.
 
 ```node
  server.use( '/foo', (req, res) => {
