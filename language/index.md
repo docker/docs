@@ -12,10 +12,10 @@ In addition to the language-specific modules, Docker documentation also provides
 
 For more information, refer to the following topics:
 
-* [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/)
-* [Docker development best practices](/develop/dev-best-practices/)
-* [Build images with BuildKit](/develop-images/build_enhancements/)
-* [Manage images](/develop/develop-images/image_management/)
+* [Best practices for writing Dockerfiles](../../develop/develop-images/dockerfile_best-practices.md)
+* [Docker development best practices](../../develop/dev-best-practices.md)
+* [Build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+* [Manage images](../../develop/develop-images/image_management.md)
 
 ## Language-specific getting started guides
 

@@ -10,7 +10,7 @@ redirect_from:
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
+Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
 
 ## Overview
 
@@ -103,7 +103,7 @@ In the same way, when we use the `FROM` command, we tell Docker to include in ou
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> If you want to learn more about creating your own base images, see [Creating base images](../../develop/develop-images/baseimages.md).
 
 The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set `NODE_ENV` to `production`.
 
@@ -249,6 +249,6 @@ In this module, we took a look at setting up our example Node application that w
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 
 <br />
