@@ -22,6 +22,20 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.3
+2021-02-01
+
+### Security
+
+* [CVE-2021-21285](https://github.com/moby/moby/security/advisories/GHSA-6fj5-m822-rqx8) Prevent an invalid image from crashing docker daemon
+* [CVE-2021-21284](https://github.com/moby/moby/security/advisories/GHSA-7452-xqpj-6rpc) Lock down file permissions to prevent remapped root from accessing docker state
+* Ensure AppArmor and SELinux profiles are applied when building with BuildKit
+
+### Client
+
+* Check contexts before importing them to reduce risk of extracted files escaping context store
+* Windows: prevent executing certain binaries from current directory [docker/cli#2950](https://github.com/docker/cli/pull/2950)
+
 ## 20.10.2
 2021-01-04
 
