@@ -22,7 +22,7 @@ Instead of downloading MySQL, installing, configuring, and then running the MySQ
 
 Before we run MySQL in a container, we'll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about [Using volumes](../../storage/volumes.md) in our documentation.
 
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
 
 ```shell
 $ docker volume create mysql
