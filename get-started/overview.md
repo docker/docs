@@ -57,7 +57,10 @@ underlying API and CLI.
 The daemon creates and manages Docker _objects_, such as images, containers,
 networks, and volumes.
 
-> **Note**: Docker is licensed under the open source Apache 2.0 license.
+> **Note**
+>
+> Docker Engine is licensed under the Docker Software End User License Agreement. See the
+[Docker Software EULA](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_”} for details.
 
 For more details, see [Docker Architecture](#docker-architecture) below.
 

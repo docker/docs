@@ -143,9 +143,8 @@ Patch releases are always backward compatible with its year-month version.
 
 ### Licensing
 
-Docker is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
-license text.
+Docker Engine is licensed under the Docker Software End User License Agreement. See the
+[Docker Software EULA](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_”} for details.
 
 ## Reporting security issues
 
