@@ -1,5 +1,5 @@
 ---
-title: "Our Application"
+title: "Sample application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 redirect_from:
 - /get-started/part2/

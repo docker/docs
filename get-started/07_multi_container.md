@@ -27,6 +27,8 @@ Remember that containers, by default, run in isolation and don't know anything a
 or containers on the same machine. So, how do we allow one container to talk to another? The answer is
 **networking**. Now, you don't have to be a network engineer (hooray!). Simply remember this rule...
 
+> **Note**
+>
 > If two containers are on the same network, they can talk to each other. If they aren't, they can't.
 
 ## Start MySQL

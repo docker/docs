@@ -29,7 +29,7 @@ guides:
   section:
     - title: "Part 1: Getting started"
       path: /get-started/
-    - title: "Part 2: The application"
+    - title: "Part 2: Sample application"
       path: /get-started/02_our_app/
     - title: "Part 3: Update the application"
       path: /get-started/03_updating_app/

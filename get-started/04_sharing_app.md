@@ -72,7 +72,6 @@ new instance that has never seen this container image! To do this, we will use P
 3. Once you're logged in, click on the "+ ADD NEW INSTANCE" link in the left side bar. (If you don't see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.
 
     ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
-{: .text-center }
 
 4. In the terminal, start your freshly pushed app.
 
