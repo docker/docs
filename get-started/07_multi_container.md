@@ -3,6 +3,7 @@ title: "Multi container apps"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Using more than one container in our application
 ---
+
 Up to this point, we have been working with single container apps. But, we now want to add MySQL to the
 application stack. The following question often arises - "Where will MySQL run? Install it in the same
 container or run it separately?" In general, **each container should do one thing and do it well.** A few
@@ -20,8 +21,7 @@ And there are more reasons. So, we will update our application to work like this
 ![Todo App connected to MySQL container](images/multi-app-architecture.png)
 {: .text-center }
 
-
-## Container Networking
+## Container networking
 
 Remember that containers, by default, run in isolation and don't know anything about other processes
 or containers on the same machine. So, how do we allow one container to talk to another? The answer is
@@ -29,8 +29,7 @@ or containers on the same machine. So, how do we allow one container to talk to 
 
 > If two containers are on the same network, they can talk to each other. If they aren't, they can't.
 
-
-## Starting MySQL
+## Start MySQL
 
 There are two ways to put a container on a network: 1) Assign it at start or 2) connect an existing container.
 For now, we will create the network first and attach the MySQL container at startup.
@@ -41,7 +40,7 @@ For now, we will create the network first and attach the MySQL container at star
     docker network create todo-app
     ```
 
-1. Start a MySQL container and attach it to the network. We're also going to define a few environment variables that the
+2. Start a MySQL container and attach it to the network. We're also going to define a few environment variables that the
   database will use to initialize the database (see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/)).
 
     ```bash
@@ -66,14 +65,11 @@ For now, we will create the network first and attach the MySQL container at star
 
     You'll also see we specified the `--network-alias` flag. We'll come back to that in just a moment.
 
->**Pro-tip**
->
->You'll notice we're using a volume named `todo-mysql-data` here and mounting it at `/var/lib/mysql`, which is
->where MySQL stores its data. However, we never ran a `docker volume create` command. Docker recognizes we want
->to use a named volume and creates one automatically for us.
->
+    >**Note**
+    >
+    >You'll notice we're using a volume named `todo-mysql-data` here and mounting it at `/var/lib/mysql`, which is where MySQL stores its data. However, we never ran a `docker volume create` command. Docker recognizes we want to use a named volume and creates one automatically for us.
 
-1. To confirm we have the database up and running, connect to the database and verify it connects.
+3. To confirm we have the database up and running, connect to the database and verify it connects.
 
     ```bash
     docker exec -it <mysql-container-id> mysql -p
@@ -103,8 +99,7 @@ For now, we will create the network first and attach the MySQL container at star
 
     Hooray! We have our `todos` database and it's ready for us to use!
 
-
-## Connecting to MySQL
+## Connect to MySQL
 
 Now that we know MySQL is up and running, let's use it! But, the question is... how? If we run
 another container on the same network, how do we find the container (remember each container has its own IP
@@ -119,7 +114,7 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
     docker run -it --network todo-app nicolaka/netshoot
     ```
 
-1. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
+2. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
    the IP address for the hostname `mysql`.
 
     ```bash
@@ -155,8 +150,7 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
     What this means is... our app only simply needs to connect to a host named `mysql` and it'll talk to the
     database! It doesn't get much simpler than that!
 
-
-## Running our App with MySQL
+## Run your app with MySQL
 
 The todo app supports the setting of a few environment variables to specify MySQL connection settings. They are:
 
@@ -165,21 +159,12 @@ The todo app supports the setting of a few environment variables to specify MySQ
 - `MYSQL_PASSWORD` - the password to use for the connection
 - `MYSQL_DB` - the database to use once connected
 
->**warning** 
->Setting Connection Settings via Env Vars
->While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
->when running applications in production. Diogo Monica, the former lead of security at Docker, 
->[wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)
->explaining why. 
->  
->A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
->these secrets are mounted as files in the running container. You'll see many apps (including the MySQL image and the todo app)
->also support env vars with a `_FILE` suffix to point to a file containing the variable. 
->   
->As an example, setting the `MYSQL_PASSWORD_FILE` var will cause the app to use the contents of the referenced file 
->as the connection password. Docker doesn't do anything to support these env vars. Your app will need to know to look for
->the variable and get the file contents.
-
+>**Warning**
+>
+>**Setting Connection Settings via Env Vars**
+>
+>While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED** when running applications in production. Diogo Monica, the former lead of security at Docker, [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"} explaining why. A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases, these secrets are mounted as files in the running container. You'll see many apps (including the MySQL image and the todo app) also support env vars with a `_FILE` suffix to point to a file containing the variable. As an example, setting the `MYSQL_PASSWORD_FILE` var will cause the app to use the contents of the referenced file as the connection password. Docker doesn't do anything to support these env vars. Your app will need to know to look for the variable and get the file contents.
+{: .warning}
 
 With all of that explained, let's start our dev-ready container!
 
@@ -211,7 +196,7 @@ With all of that explained, let's start our dev-ready container!
       sh -c "yarn install && yarn run dev"
     ```
 
-1. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
+2. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
    using the mysql database.
 
     ```
@@ -225,9 +210,9 @@ With all of that explained, let's start our dev-ready container!
     Listening on port 3000
     ```
 
-1. Open the app in your browser and add a few items to your todo list.
+3. Open the app in your browser and add a few items to your todo list.
 
-1. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+4. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
    is **secret**.
 
     ```bash

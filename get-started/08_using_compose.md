@@ -1,10 +1,10 @@
 ---
-title: "Using Docker Compose"
+title: "Use Docker Compose"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Making our lives easier with Compose for our application
 ---
 
-[Docker Compose](/compose/) is a tool that was developed to help define and
+[Docker Compose](../compose/index.md) is a tool that was developed to help define and
 share multi-container applications. With Compose, we can create a YAML file to define the services
 and with a single command, can spin everything up or tear it all down. 
 
@@ -15,12 +15,11 @@ on GitHub/GitLab doing exactly this now.
 
 So, how do we get started?
 
-## Installing Docker Compose
+## Install Docker Compose
 
 If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose!
 Play-with-Docker instances already have Docker Compose installed as well. If you are on 
-a Linux machine, you will need to install Docker Compose using 
-[the instructions here](/compose/install/). 
+a Linux machine, you will need to [install Docker Compose](../compose/install.md). 
 
 After installation, you should be able to run the following and see version information.
 
@@ -28,20 +27,19 @@ After installation, you should be able to run the following and see version info
 docker-compose version
 ```
 
-
-## Creating our Compose File
+## Create the Compose file
 
 1. At the root of the app project, create a file named `docker-compose.yml`.
 
-1. In the compose file, we'll start off by defining the schema version. In most cases, it's best to use 
-   the latest supported version. You can look at the [Compose file reference](https://docs.docker.com/compose/compose-file/)
+2. In the compose file, we'll start off by defining the schema version. In most cases, it's best to use 
+   the latest supported version. You can look at the [Compose file reference](../compose/compose-file/index.md)
    for the current schema versions and the compatibility matrix.
 
     ```yaml
     version: "3.7"
     ```
 
-1. Next, we'll define the list of services (or containers) we want to run as part of our application.
+3. Next, we'll define the list of services (or containers) we want to run as part of our application.
 
     ```yaml
     version: "3.7"
@@ -51,8 +49,7 @@ docker-compose version
 
 And now, we'll start migrating a service at a time into the compose file.
 
-
-## Defining the App Service
+## Define the app service
 
 To remember, this was the command we were using to define our app container.
 
@@ -93,7 +90,7 @@ docker run -dp 3000:3000 `
         image: node:12-alpine
     ```
 
-1. Typically, you will see the command close to the `image` definition, although there is no requirement on ordering.
+2. Typically, you will see the command close to the `image` definition, although there is no requirement on ordering.
    So, let's go ahead and move that into our file.
 
     ```yaml
@@ -106,9 +103,9 @@ docker run -dp 3000:3000 `
     ```
 
 
-1. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
-   [short syntax](https://docs.docker.com/compose/compose-file/#short-syntax-1) here, but there is also a more verbose 
-   [long syntax](https://docs.docker.com/compose/compose-file/#long-syntax-1) available as well.
+3. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
+   [short syntax](../compose/compose-file/index.md#short-syntax-1) here, but there is also a more verbose
+   [long syntax](../compose/compose-file/index.md#long-syntax-1) available as well.
 
     ```yaml
     version: "3.7"
@@ -121,8 +118,8 @@ docker run -dp 3000:3000 `
           - 3000:3000
     ```
 
-1. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
-   the `working_dir` and `volumes` definitions. Volumes also has a [short](https://docs.docker.com/compose/compose-file/#short-syntax-3) and [long](https://docs.docker.com/compose/compose-file/#long-syntax-3) syntax.
+4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
+   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/index.md#short-syntax-3) and [long](../compose/compose-file/index.md#long-syntax-3) syntax.
 
     One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.
 
@@ -140,7 +137,7 @@ docker run -dp 3000:3000 `
           - ./:/app
     ```
 
-1. Finally, we need to migrate the environment variable definitions using the `environment` key.
+5. Finally, we need to migrate the environment variable definitions using the `environment` key.
 
     ```yaml
     version: "3.7"
@@ -161,8 +158,7 @@ docker run -dp 3000:3000 `
           MYSQL_DB: todos
     ```
 
-  
-### Defining the MySQL Service
+### Define the MySQL service
 
 Now, it's time to define the MySQL service. The command that we used for that container was the following:
 
@@ -199,10 +195,10 @@ docker run -d `
         image: mysql:5.7
     ```
 
-1. Next, we'll define the volume mapping. When we ran the container with `docker run`, the named volume was created
+2. Next, we'll define the volume mapping. When we ran the container with `docker run`, the named volume was created
    automatically. However, that doesn't happen when running with Compose. We need to define the volume in the top-level
    `volumes:` section and then specify the mountpoint in the service config. By simply providing only the volume name,
-   the default options are used. There are [many more options available](https://docs.docker.com/compose/compose-file/#volume-configuration-reference) though.
+   the default options are used. There are [many more options available](../compose/compose-file.md#volume-configuration-reference) though.
 
     ```yaml
     version: "3.7"
@@ -219,7 +215,7 @@ docker run -d `
       todo-mysql-data:
     ```
 
-1. Finally, we only need to specify the environment variables.
+3. Finally, we only need to specify the environment variables.
 
     ```yaml
     version: "3.7"
@@ -272,14 +268,13 @@ volumes:
   todo-mysql-data:
 ```
 
-
-## Running our Application Stack
+## Run the application stack
 
 Now that we have our `docker-compose.yml` file, we can start it up!
 
 1. Make sure no other copies of the app/db are running first (`docker ps` and `docker rm -f <ids>`).
 
-1. Start up the application stack using the `docker-compose up` command. We'll add the `-d` flag to run everything in the
+2. Start up the application stack using the `docker-compose up` command. We'll add the `-d` flag to run everything in the
    background.
 
     ```bash
@@ -298,7 +293,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
     You'll notice that the volume was created as well as a network! By default, Docker Compose automatically creates a 
     network specifically for the application stack (which is why we didn't define one in the compose file).
 
-1. Let's look at the logs using the `docker-compose logs -f` command. You'll see the logs from each of the services interleaved
+3. Let's look at the logs using the `docker-compose logs -f` command. You'll see the logs from each of the services interleaved
     into a single stream. This is incredibly useful when you want to watch for timing-related issues. The `-f` flag "follows" the
     log, so will give you live output as it's generated.
 
@@ -315,16 +310,13 @@ Now that we have our `docker-compose.yml` file, we can start it up!
     view the logs for a specific service, you can add the service name to the end of the logs command (for example,
     `docker-compose logs -f app`).
 
->**Pro tip**  Waiting for the DB before starting the app
->
->When the app is starting up, it actually sits and waits for MySQL to be up and ready before trying to connect to it.
->Docker doesn't have any built-in support to wait for another container to be fully up, running, and ready
->before starting another container. For Node-based projects, you can use the 
->[wait-port](https://github.com/dwmkerr/wait-port) dependency. Similar projects exist for other languages/frameworks.
+    >**Waiting for the DB before starting the app**
+    >
+    >When the app is starting up, it actually sits and waits for MySQL to be up and ready before trying to connect to it. Docker doesn't have any built-in support to wait for another container to be fully up, running, and ready before starting another container. For Node-based projects, you can use the [wait-port](https://github.com/dwmkerr/wait-port){:target="_blank" rel="noopener" class="_"} dependency. Similar projects exist for other languages/frameworks.
 
-1. At this point, you should be able to open your app and see it running. And hey! We're down to a single command!
+4. At this point, you should be able to open your app and see it running. And hey! We're down to a single command!
 
-## Seeing our App Stack in Docker Dashboard
+## See the app stack in Docker Dashboard
 
 If we look at the Docker Dashboard, we'll see that there is a group named **app**. This is the "project name" from Docker
 Compose and used to group the containers together. By default, the project name is simply the name of the directory that the
@@ -338,13 +330,12 @@ quickly see what container is our app and which container is the mysql database.
 
 ![Docker Dashboard with app project expanded](images/dashboard-app-project-expanded.png)
 
-
-## Tearing it All Down
+## Tear it all down
 
 When you're ready to tear it all down, simply run `docker-compose down` or hit the trash can on the Docker Dashboard 
 for the entire app. The containers will stop and the network will be removed.
 
->**Warning** 
+>**Warning**
 >
 >Removing Volumes
 >
@@ -352,10 +343,10 @@ for the entire app. The containers will stop and the network will be removed.
 >remove the volumes, you will need to add the `--volumes` flag.
 >
 >The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+{: .warning}
 
 Once torn down, you can switch to another project, run `docker-compose up` and be ready to contribute to that project! It really
 doesn't get much simpler than that!
-
 
 ## Recap
 

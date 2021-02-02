@@ -29,21 +29,21 @@ guides:
   section:
     - title: "Part 1: Getting started"
       path: /get-started/
-    - title: "Part 2: Our Application"
+    - title: "Part 2: The application"
       path: /get-started/02_our_app/
-    - title: "Part 3: Updating our Application"
+    - title: "Part 3: Update the application"
       path: /get-started/03_updating_app/
-    - title: "Part 4: Sharing Our Application"
+    - title: "Part 4: Share the application"
       path: /get-started/04_sharing_app/
-    - title: "Part 5: Persisting our DB"
+    - title: "Part 5: Persist the DB"
       path: /get-started/05_persisting_data/
-    - title: "Part 6: Using Bind Mounts"
+    - title: "Part 6: Use bind mounts"
       path: /get-started/06_bind_mounts/
-    - title: "Part 7: Multi-Container Applications"
+    - title: "Part 7: Multi-container apps"
       path: /get-started/07_multi_container/
-    - title: "Part 8: Using Docker Compose"
+    - title: "Part 8: Use Docker Compose"
       path: /get-started/08_using_compose/
-    - title: "Part 9: Image building tips"
+    - title: "Part 9: Image-building best practices"
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
