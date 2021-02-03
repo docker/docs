@@ -6,7 +6,7 @@ redirect_from:
 title: Verify repository client with certificates
 ---
 
-In [Running Docker with HTTPS](https.md), you learned that, by default,
+In [Running Docker with HTTPS](protect-access.md), you learned that, by default,
 Docker runs via a non-networked Unix socket and TLS must be enabled in order
 to have the Docker client and the daemon communicate securely over HTTPS.  TLS ensures authenticity of the registry endpoint and that traffic to/from registry is encrypted.
 
@@ -92,4 +92,4 @@ If the Docker registry is accessed without a port number, do not add the port to
 ## Related information
 
 * [Use trusted images](trust/index.md)
-* [Protect the Docker daemon socket](https.md)
+* [Protect the Docker daemon socket](protect-access.md)
