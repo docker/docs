@@ -98,7 +98,9 @@ _default_, it does not _restrict_ services to that IP.
 
 If you are running Docker version 20.10.0 or higher with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} on your system with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (for example, `docker0`) into the `docker` zone to allow seamless networking.
 
-In case you have manually inserted a docker network interface to another zone, please remove the interface from that zone, using the commands below - 
+If you manually added the `docker0` network interface to a zone other than `trusted`,
+you need to remove the interface from this zone. Follow the steps below fo to remove
+the interface from other zones:
 
 ```bash
 # Please substitute the appropriate zone and docker interface
