@@ -77,6 +77,8 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 
     Optionally, select any additional distributions you would like to enable WSL 2 on.
 
+    Please note that the WSL Integrations bits running in your distro depend on glibc. This make it difficult to run it on musl-based distros such as Alpine Linux.
+
     ![WSL 2 Choose Linux distro](images/wsl2-choose-distro.png)
 
 8. Click **Apply & Restart**.
