@@ -24,7 +24,7 @@ environment called a container. The isolation and security allow you to run many
 containers simultaneously on a given host. Containers are lightweight and contain
 everything needed to run the application, so you do not need to rely on what is
 currently installed on the host. You can easily share containers while you work,
-and be sire that everyone you share with gets the same container that works in the
+and be sure that everyone you share with gets the same container that works in the
 same way.
 
 Docker provides tooling and a platform to manage the lifecycle of your containers:
