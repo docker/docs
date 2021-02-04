@@ -68,15 +68,18 @@ We also recommend the video walkthrough from DockerCon 2020.
 
 In this tutorial, you'll learn about creating and deploying Docker apps, including using multiple containers with a database, and using Docker Compose. You'll also deploy your containerized app to Azure.
 
-## Download Docker
+## Download and install Docker
 
-You can download and install Docker on multiple platforms. Choose your preferred operating system below.
+This tutorial assumes you have a current version of Docker installed on your
+machine. If you do not have Docker installed, choose your preferred operating system below to download Docker:
 
-- [Mac](https://desktop.docker.com/mac/stable/Docker.dmg)
+- [Download Docker Desktop for Mac](https://desktop.docker.com/mac/stable/Docker.dmg)
 
-- [Windows](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+- [Download Docker Desktop for Windows](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
 
-- [Linux](../engine/install/index.md)
+- [Install Docker Engine on Linux](../engine/install/index.md)
+
+For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 
 ## Start the tutorial
 
@@ -92,14 +95,13 @@ You'll notice a few flags being used. Here's some more info on them:
 - `-p 80:80` - map port 80 of the host to port 80 in the container
 - `docker/getting-started` - the image to use
 
->**Pro tip**
+> **Tip**
 >
->You can combine single character flags to shorten the full command.
->As an example, the command above could be written as:
->```
->docker run -dp 80:80 docker/getting-started
->```
->
+> You can combine single character flags to shorten the full command.
+> As an example, the command above could be written as:
+> ```
+> docker run -dp 80:80 docker/getting-started
+> ```
 
 ## The Docker Dashboard
 
