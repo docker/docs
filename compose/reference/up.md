@@ -39,6 +39,7 @@ Options:
                                container. Implies --abort-on-container-exit.
     --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the
                                `scale` setting in the Compose file if present.
+    --exclude                  Exclude the specified services
 ```
 
 Builds, (re)creates, starts, and attaches to containers for a service.
