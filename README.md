@@ -286,7 +286,7 @@ $ killall SystemUIServer  # restart it.
 You can restore shadows later with `-bool FALSE`.
 
 In order to keep the Git repository light, _please_ compress the images
-(losslessly). On Mac you may use (ImageOptim)[https://imageoptim.com] for
+(losslessly). On Mac you may use [ImageOptim](https://imageoptim.com) for
 instance. Be sure to compress the images *before* adding them to the
 repository, doing it afterwards actually worsens the impact on the Git repo (but
 still optimizes the bandwidth during browsing).
