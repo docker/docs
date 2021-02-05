@@ -77,6 +77,10 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 
     Optionally, select any additional distributions you would like to enable WSL 2 on.
 
+    > **Note**
+    >
+    > WSL Integration components running in your distro depend on glibc. This can cause issues when running WSL 2 on musl-based distros such as Alpine Linux. Alpine users can use the [alpine-pkg-glibc(https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} package to deploy glibc alongside musl to run the integration.
+
     ![WSL 2 Choose Linux distro](images/wsl2-choose-distro.png)
 
 8. Click **Apply & Restart**.
