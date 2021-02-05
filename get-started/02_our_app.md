@@ -1,5 +1,5 @@
 ---
-title: "Our Application"
+title: "Sample application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 redirect_from:
 - /get-started/part2/
@@ -18,23 +18,22 @@ think about how it will work for a large team, multiple developers, etc.
 
 ![Todo List Manager Screenshot](images/todo-list-sample.png){: style="width:50%;" }
 
-
-## Getting our App
+## Get the app
 
 Before we can run the application, we need to get the application source code onto 
 our machine. For real projects, you will typically clone the repo. But, for this tutorial,
 we have created a ZIP file containing the application.
 
-1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app). You can either pull the entire project or download it as a zip and extract the app folder out to get started with
+1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or download it as a zip and extract the app folder out to get started with
 
-1. Once extracted, use your favorite code editor to open the project. If you're in need of
-    an editor, you can use [Visual Studio Code](https://code.visualstudio.com/). You should
+2. Once extracted, use your favorite code editor to open the project. If you're in need of
+    an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should
     see the `package.json` and two subdirectories (`src` and `spec`).
 
     ![Screenshot of Visual Studio Code opened with the app loaded](images/ide-screenshot.png){: style="width:650px;margin-top:20px;"}
     {: .text-center }
 
-## Building the App's Container Image
+## Build the app's container image
 
 In order to build the application, we need to use a `Dockerfile`. A
 Dockerfile is simply a text-based script of instructions that is used to
@@ -53,7 +52,7 @@ see a few flaws in the Dockerfile below. But, don't worry! We'll go over them.
 
     Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
 
-1. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
+2. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
 
     ```bash
     docker build -t getting-started .
@@ -74,7 +73,7 @@ see a few flaws in the Dockerfile below. But, don't worry! We'll go over them.
 
     The `.` at the end of the `docker build` command tells that Docker should look for the `Dockerfile` in the current directory.
 
-## Starting an App Container
+## Start an app container
 
 Now that we have an image, let's run the application! To do so, we will use the `docker run`
 command (remember that from earlier?).
@@ -90,13 +89,13 @@ command (remember that from earlier?).
     background) and creating a mapping between the host's port 3000 to the container's port 3000.
     Without the port mapping, we wouldn't be able to access the application.
 
-1. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
+2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
     You should see our app!
 
     ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
     {: .text-center }
 
-1. Go ahead and add an item or two and see that it works as you expect. You can mark items as
+3. Go ahead and add an item or two and see that it works as you expect. You can mark items as
    complete and remove items. Your frontend is successfully storing items in the backend!
    Pretty quick and easy, huh?
 
@@ -108,7 +107,6 @@ If you take a quick look at the Docker Dashboard, you should see your two contai
 (this tutorial and your freshly launched app container)!
 
 ![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
-
 
 ## Recap
 

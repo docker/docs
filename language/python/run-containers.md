@@ -27,12 +27,7 @@ After running this command, you’ll notice that you were not returned to the co
 Let’s make a `GET` request to the server using the `curl` command.
 
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+$ curl localhost:8000
 curl: (7) Failed to connect to localhost port 8000: Connection refused
 ```
 
@@ -42,28 +37,23 @@ To stop the container, press ctrl-c. This will return you to the terminal prompt
 
 To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 8000 inside the container to port 3000 outside the container, we would pass `3000:8000` to the `--publish` flag.
 
-Start the container and expose port 8000 to port 8000 on the host:
+We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 8000 to work we can map the host's port 8000 to the container's port 5000:
 
 ```shell
-$ docker run --publish 8000:8000 python-docker
+$ docker run --publish 8000:5000 python-docker
 ```
 
 Now, let’s rerun the curl command from above:
 
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl localhost:8000
+Hello, Docker!
 ```
 
 Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the POST request logged to the console.
 
 ```shell
-2020-09-01T17:36:09:8770  INFO: POST /test
+[31/Jan/2021 23:39:31] "GET / HTTP/1.1" 200 -
 ```
 
 Press ctrl-c to stop the container.
@@ -73,7 +63,7 @@ Press ctrl-c to stop the container.
 This is great so far, but our sample application is a web server and we don't have to be connected to the container. Docker can run your container in detached mode or in the background. To do this, we can use the `--detach` or `-d` for short. Docker starts your container the same as before but this time will “detach” from the container and return you to the terminal prompt.
 
 ```shell
-$ docker run -d -p 8000:8000 python-docker
+$ docker run -d -p 8000:5000 python-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
 
@@ -82,13 +72,8 @@ Docker started our container in the background and printed the Container ID on t
 Again, let’s make sure that our container is running properly. Run the same curl command from above.
 
 ```shell
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
-{"code":"success","payload":[{"msg":"testing","id":"dc0e2c2b-793d-433c-8645-b3a553ea26de","createDate":"2020-09-01T17:36:09.897Z"}]}
+$ curl localhost:8000
+Hello, Docker!
 ```
 
 ## List containers
@@ -98,7 +83,7 @@ Since we ran our container in the background, how do we know if our container is
 ```shell
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ce02b3179f0f        python-docker         "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "docker-entrypoint.s…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->5000/tcp   wonderful_kalam
 ```
 
 The `docker ps` command provides a bunch of information about our running containers. We can see the container ID, The image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
@@ -161,7 +146,7 @@ Now that all of our containers are stopped, let’s remove them. When you remove
 ```shell
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
+ce02b3179f0f        python-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
 ec45285c456d        python-docker         "docker-entrypoint.s…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
 fb7a41809e5d        python-docker         "docker-entrypoint.s…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
 ```
@@ -182,11 +167,11 @@ Now, let’s address the random naming issue. Standard practice is to name your 
 To name a container, we just need to pass the `--name` flag to the `docker run` command.
 
 ```shell
-$ docker run -d -p 8000:8000 --name rest-server python-docker
+$ docker run -d -p 8000:5000 --name rest-server python-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-1aa5d46418a6        python-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->8000/tcp   rest-server
+1aa5d46418a6        python-docker         "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        0.0.0.0:8000->5000/tcp   rest-server
 ```
 
 That’s better! We can now easily identify our container based on the name.
