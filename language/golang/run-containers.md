@@ -42,7 +42,7 @@ To publish a port for our container, we’ll use the `--publish` flag (`-p` for 
 Start the container and expose port 8000 to port 8000 on the host.
 
 ```shell
-$ docker run --publish 8000:8000 node-docker
+$ docker run --publish 8000:8000 go-docker
 ```
 
 Now let’s rerun the curl command from above.
