@@ -156,6 +156,12 @@ ways, and create reports.
 
 At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
 
+The technical preview builds of Docker Desktop for Apple silicon require Rosetta 2 to run correctly. To install Rosetta 2 manually from the command line use this command:
+
+```
+softwareupdate --install-rosetta
+```
+
 ### Make sure certificates are set up correctly
 
 Docker Desktop ignores certificates listed under insecure registries, and does
