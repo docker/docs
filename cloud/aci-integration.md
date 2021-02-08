@@ -147,7 +147,7 @@ Also see the [full list of compose features supported by ACI](aci-compose-featur
 
 2. Run `docker compose up` and `docker compose down` to start and then stop a full Compose application.
 
-  By default, `docker compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the working directory using the  --workdir  flag or specify the Compose file directly using the `--file` flag.
+  By default, `docker compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the working directory using the --workdir flag or specify the Compose file directly using `docker compose --file mycomposefile.yaml up`.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
@@ -161,7 +161,7 @@ Also see the [full list of compose features supported by ACI](aci-compose-featur
 
 ## Updating applications
 
-From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose up --project-name PROJECT`.
+From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose --project-name PROJECT up`.
 
 Updating an application means the ACI node will be reused, and the application will keep the same IP address that was previously allocated to expose ports, if any. ACI has some limitations on what can be updated in an existing application (you will not be able to change CPU/memory reservation for example), in these cases, you need to deploy a new application from scratch.
 
