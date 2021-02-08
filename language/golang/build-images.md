@@ -18,7 +18,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Go version 13 or later: [Download Go](https://golang.org/dl/){: target="_blank" rel="noopener" class="_"}.
+- Go version 1.13 or later: [Download Go](https://golang.org/dl/){: target="_blank" rel="noopener" class="_"}.
 - Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
 - An IDE or a text editor to edit files. We recommend using [Visual Studio Code](https://code.visualstudio.com/){: target="_blank" rel="noopener" class="_"}.
 
@@ -39,7 +39,6 @@ Now, let’s add some code to handle our REST requests. We’ll use the [echo](h
 Open this working directory in your IDE and add the following code into the `main.go` file.
 
 ```go
-// TODO update with GET /users and server status
 package main
 
 import (
@@ -222,7 +221,7 @@ Once we have our module files inside the image, we can use the `RUN` command to 
 RUN go mod download
 ```
 
-At this point, we have an image that is based on Go environment version 13.1 (or later minor version) and we have installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the COPY command just like we did with our module files above.
+At this point, we have an image that is based on Go environment version 1.13 (or later minor version) and we have installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the COPY command just like we did with our module files above.
 
 ```dockerfile
 COPY . .
