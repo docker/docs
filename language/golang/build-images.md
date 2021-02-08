@@ -24,11 +24,15 @@ To complete this tutorial, you need the following:
 
 ## Sample application
 
-Let’s create a simple Go application that we can use as our example. Create a directory on your local machine named `go-docker` and follow the steps below to create a simple REST API.
+Let’s create a simple Go application that we can use as our example &ndash; a (naive) key-value store with two operations: `add` and `list`, accessible over a REST API end-point.
+
+If you are in a hurry, the source code is in the [go-docker](https://github.com/olliefr/go-docker) repo. 
+
+Alternatively, to recreate the application from scratch, create a directory on your local machine named `go-docker` and follow the steps below to initialise the Go project.
 
 ```shell
 $ cd [path to your go-docker directory]
-$ go mod init godocker
+$ go mod init go-docker
 $ go get github.com/labstack/echo/v4
 $ go get github.com/labstack/echo/v4/middleware
 $ touch main.go
@@ -48,13 +52,14 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-// User ...
-type User struct {
-	Name  string `json:"name" form:"name" query:"name"`
-	Email string `json:"email" form:"email" query:"email"`
+// Entry is a single key-value pair
+type Entry struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
 }
 
-var users = make([]User, 0)
+// store is an ordered list of key-value pairs
+var store = make([]*Entry, 0)
 
 func main() {
 
@@ -64,48 +69,39 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, Gruffalo!")
+		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
 	})
 
-	e.GET("/users", listUsers)
-	e.POST("/users", addUser)
+	e.GET("/list", listEntries)
+	e.POST("/add", addEntry)
 
 	e.Logger.Fatal(e.Start(":8000"))
 }
 
-func listUsers(c echo.Context) error {
-	return nil
+// listEntries returns a full copy of the store in JSON format to the client.
+func listEntries(c echo.Context) error {
+	return c.JSON(http.StatusOK, store)
 }
 
-func addUser(c echo.Context) error {
-	u := User{}
-	if err := c.Bind(u); err != nil {
+// addEntry adds a new entry to the key-value store
+// and returns the value in JSON format to the client.
+func addEntry(c echo.Context) error {
+	e := new(Entry)
+	if err := c.Bind(e); err != nil {
 		return err
 	}
-	users = append(users, u)
-	return c.JSON(http.StatusOK, u)
+	store = append(store, e)
+	return c.JSON(http.StatusOK, e)
 }
 ```
 
-The server will listen on port 8000. 
+The server will listen on port 8000. It responds to three kinds of query:
 
-* You can make GET requests to the root (`/`) endpoint and it will return server status in JSON format:
+* GET requests to the root (`/`) return server status in JSON format.
+* POST requests to `/add` store a key-value pair on the server.
+* GET requests to `/list` return an array of JSON objects that you have previously POSTed.
 
-  ```json
-  {"Status":"OK"}
-  ```
-
-* You can make POST requests to the `/users` endpoint and the JSON structure you send to the server will be saved in memory.
-* You can also send GET requests to the same endpoint (`/users`) and receive an array of JSON objects that you have previously POSTed.
-
-The `/users` endpoint only accepts the objects of the following type.
-
-```go
-type User struct {
-	Name  string `json:"name" form:"name" query:"name"`
-	Email string `json:"email" form:"email" query:"email"`
-}
-```
+The key-value pairs POSTed to the server must be in (valid) JSON format.
 
 ## Test application
 
@@ -129,41 +125,61 @@ ____________________________________O/_______
 ⇨ http server started on [::]:8000
 ```
 
-To test that the application is working properly, we’ll first POST some JSON to the API and then make a GET request to see that the data has been saved. 
+To test that the application is working properly, let's perform a _smoke test_ first. In a new terminal run the following command.
 
-Open a new terminal and run the following curl command:
+```shell
+$ curl http://localhost:8000/
+```
+
+The server should respond with `{"Status":"OK"}` in the same terminal. 
+
+Having established that the server is running and is accessible, we’ll POST some JSON to the API and then make a GET request to see that the data has been saved.
+
+Run the following `curl` command in the terminal.
 
 ```shell
 $ curl --request POST \
-  --url http://localhost:8000/users \
+  --url http://localhost:8000/add \
   --header 'content-type: application/json' \
-  --data '{"name": "The Mouse", "email": "mouse@deepdarkwood" }'
+  --data '{"key": "name", "value": "Docker"}'
 ```
 
-On success, the output from the server should read:
+With this command, we have sent the following JSON structure to the server.
+
+```json
+{
+	"key": "name",
+	"value": "Docker"
+}
+```
+
+On success, the output from the server should read just that.
+
+```json
+{"key":"name","value":"Docker"}
+```
+
+To see what data has been saved on the server, run the following command.
 
 ```shell
-{"name":"The Mouse","email":"mouse@deepdarkwood"}
+$ curl http://localhost:8000/list
 ```
 
-To see what data has been saved on the server, run:
+This should return a JSON list of length one, comprising of the element we've just added to it.
 
-```shell
-$ curl http://localhost:8000/users
+```json
+[{"key":"name","value":"Docker"}]
 ```
 
-This should produce the following output.
+Switch back to the terminal where our server is running. You should now see thee requests in the server logs. The exact format might be different from the following, and the timestamps will differ too.
 
-```shell
-[{"name":"The Mouse","email":"mouse@deepdarkwood"}]
+```json
+{"time":"2021-02-08T23:49:16.0027265+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"GET","uri":"/","user_agent":"curl/7.68.0","status":200,"error":"","latency":28300,"latency_human":"28.3µs","bytes_in":0,"bytes_out":16}
+{"time":"2021-02-08T23:49:25.8262003+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"POST","uri":"/add","user_agent":"curl/7.68.0","status":200,"error":"","latency":85500,"latency_human":"85.5µs","bytes_in":34,"bytes_out":32}
+{"time":"2021-02-08T23:49:29.695339+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"GET","uri":"/list","user_agent":"curl/7.68.0","status":200,"error":"","latency":27700,"latency_human":"27.7µs","bytes_in":0,"bytes_out":34}
 ```
 
-Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
-
-```node
-{"time":"2021-01-22T19:27:45.1640051+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"POST","uri":"/users","user_agent":"curl/7.68.0","status":200,"error":"","latency":89800,"latency_human":"89.8µs","bytes_in":49,"bytes_out":50}
-{"time":"2021-01-22T19:28:16.2372105+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"GET","uri":"/users","user_agent":"curl/7.68.0","status":200,"error":"","latency":29100,"latency_human":"29.1µs","bytes_in":0,"bytes_out":52}
-```
+You can add more key-value pairs to the store, if you'd like. Once we are satisfied, that the store "works", we can proceed to an exciting part of running this application in Docker.
 
 ## Create a Dockerfile for Go
 
@@ -248,6 +264,8 @@ COPY . .
 
 CMD [ "go", "run", "main.go" ]
 ```
+
+You can also find this `Dockerfile` for this part in [go-docker](https://github.com/olliefr/go-docker) repo.
 
 ## Build image
 
