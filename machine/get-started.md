@@ -7,6 +7,11 @@ title: Get started with Docker Machine and a local VM
 Let's take a look at using `docker-machine` to create, use, and manage a
 Docker host inside of a local virtual machine.
 
+> **Note**
+>
+> Docker Machine is no longer included in the Docker Desktop installer. You can download it separately from the [docker/machine](https://github.com/docker/machine/releases/){: target="_blank" rel="noopener" class="_" } release
+page on GitHub.
+
 ## Prerequisite information
 
 With the advent of [Docker Desktop for Mac](../docker-for-mac/index.md) and
@@ -16,9 +21,7 @@ on your local system without using Docker Machine at all.
 
 For now, however, if you want to create _multiple_ local machines, you still
 need Docker Machine to create and manage machines for multi-node
-experimentation. Both Docker Desktop for Mac and Docker Desktop for Windows include the newest
-version of Docker Machine, so when you install either of these, you get
-`docker-machine`.
+experimentation.
 
 The new solutions come with their own native virtualization solutions rather
 than Oracle VirtualBox, so keep the following considerations in mind when using
