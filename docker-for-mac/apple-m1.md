@@ -23,7 +23,10 @@ Click the following link to download the Apple M1 tech preview build:
 The tech preview of Docker Desktop for Apple M1 currently has the following limitations:
 
 - The tech preview build does not update automatically. You must manually install any future versions of Docker Desktop.
-- You must install Rosetta 2 as some binaries are still Darwin/AMD64.
+- You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line use this command:
+    ```
+    softwareupdate --install-rosetta
+    ```
 - The DNS name `host.docker.internal` only works if you add `--add-host=host.docker.internal:host-gateway` to the `docker run` command
 - The DNS name `vm.docker.internal` does not work.
 - Kubernetes does not initialize because of a missing DNS name.
