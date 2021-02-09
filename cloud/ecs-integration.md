@@ -133,8 +133,8 @@ current context using the command `docker context use myecscontext`.
 stop a full Compose application.
 
   By default, `docker compose up` uses the `compose.yaml` or `docker-compose.yaml` file in
-  the current folder. You can specify the Compose file directly using the
-  `--file` flag.
+  the current folder. You can specify the working directory using the --workdir flag or
+  specify the Compose file directly using `docker compose --file mycomposefile.yaml up`.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
@@ -186,10 +186,10 @@ By default you can see logs of your compose application the same way you check l
 docker compose logs
 
 # specify compose project name
-docker compose logs --project-name PROJECT
+docker compose --project-name PROJECT logs
 
 # specify compose file
-docker compose logs --file /path/to/docker-compose.yaml
+docker compose --file /path/to/docker-compose.yaml logs
 ```
 
 A log group is created for the application as `docker-compose/<application_name>`,
