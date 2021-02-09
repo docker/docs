@@ -120,7 +120,7 @@ in your terminal to download the binaries. These step-by-step instructions are
 also included below.
 
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
+> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
 {: .important}
 
 1.  Run this command to download the current stable release of Docker Compose:

@@ -71,15 +71,15 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 
 7. When Docker Desktop restarts, go to **Settings** > **Resources** > **WSL Integration**.
 
-    WSL Integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`.
+    The Docker-WSL integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`.
 
     For example, to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`.
 
-    Optionally, select any additional distributions you would like to enable WSL 2 on.
+    Optionally, select any additional distributions you would like to enable the Docker-WSL integration on.
 
     > **Note**
     >
-    > WSL Integration components running in your distro depend on glibc. This can cause issues when running WSL 2 on musl-based distros such as Alpine Linux. Alpine users can use the [alpine-pkg-glibc(https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} package to deploy glibc alongside musl to run the integration.
+    > The Docker-WSL integration components running in your distro depend on glibc. This can cause issues when running musl-based distros such as Alpine Linux. Alpine users can use the [alpine-pkg-glibc](https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} package to deploy glibc alongside musl to run the integration.
 
     ![WSL 2 Choose Linux distro](images/wsl2-choose-distro.png)
 
