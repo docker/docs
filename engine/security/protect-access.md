@@ -1,17 +1,84 @@
 ---
-description: How to setup and run Docker with HTTPS
-keywords: docker, docs, article, example, https, daemon, tls, ca,  certificate
+description: How to setup and run Docker with SSH or HTTPS
+keywords: docker, docs, article, example, ssh, https, daemon, tls, ca,  certificate
 redirect_from:
 - /engine/articles/https/
 - /articles/https/
+- /engine/https/
 title: Protect the Docker daemon socket
 ---
 
 By default, Docker runs through a non-networked UNIX socket. It can also
-optionally communicate using an HTTP socket.
+optionally communicate using SSH or a TLS (HTTPS) socket.
 
-If you need Docker to be reachable through the network in a safe manner, you can
-enable TLS by specifying the `tlsverify` flag and pointing Docker's
+## Use SSH to protect the Docker daemon socket
+
+> **Note**
+>
+> The given `USERNAME` must have permissions to access the docker socket on the
+> remote machine. Refer to [manage Docker as a non-root user](../../install/linux-postinstall/#manage-docker-as-a-non-root-user)
+> to learn how to give a non-root user access to the docker socket.
+
+The following example creates a [`docker context`](../../context/working-with-contexts.md)
+to connect with a remote `dockerd` daemon on `host1.example.com` using SSH, and
+as the `docker-user` user on the remote machine:
+
+```console
+$ docker context create \
+    --docker host=ssh://docker-user@host1.example.com \
+    --description="Remote engine" \
+    my-remote-engine
+
+my-remote-engine
+Successfully created context "my-remote-engine"
+```
+
+After creating the context, use `docker context use` to switch the `docker` CLI
+to use it, and to connect to the remote engine:
+
+```console
+$ docker context use my-remote-engine
+my-remote-engine
+Current context is now "my-remote-engine"
+
+$ docker info
+<prints output of the remote engine>
+```
+
+Use the `default` context to switch back to the default (local) daemon:
+
+```console
+$ docker context use default
+default
+Current context is now "default"
+```
+
+Alternatively, use the `DOCKER_HOST` environment variable to temporarily switch
+the `docker` CLI to connect to the remote host using SSH. This does not require
+creating a context, and can be useful to create an ad-hoc connection with a different
+engine:
+
+```console
+$ export DOCKER_HOST=ssh://docker-user@host1.example.com
+$ docker info
+<prints output of the remote engine>
+```
+
+### SSH Tips
+
+For the best user experience with SSH, configure `~/.ssh/config` as follows to allow
+reusing a SSH connection for multiple invocations of the `docker` CLI:
+
+```
+ControlMaster     auto
+ControlPath       ~/.ssh/control-%C
+ControlPersist    yes
+```
+
+## Use TLS (HTTPS) to protect the Docker daemon socket
+
+If you need Docker to be reachable through HTTP rather than SSH in a safe manner,
+you can enable TLS (HTTPS) by specifying the `tlsverify` flag and pointing Docker's
 `tlscacert` flag to a trusted CA certificate.
 
 In the daemon mode, it only allows connections from clients
@@ -24,7 +91,7 @@ it only connects to servers with a certificate signed by that CA.
 > with OpenSSL, x509, and TLS before using it in production.
 {:.important}
 
-## Create a CA, server and client keys with OpenSSL
+### Create a CA, server and client keys with OpenSSL
 
 > **Note**: Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
@@ -177,7 +244,7 @@ certificates and trusted CA:
 > these keys as you would a root password!
 {:.warning}
 
-## Secure by default
+### Secure by default
 
 If you want to secure your Docker client connections by default, you can move
 the files to the `.docker` directory in your home directory --- and set the
@@ -193,17 +260,17 @@ Docker now connects securely by default:
 
     $ docker ps
 
-## Other modes
+### Other modes
 
 If you don't want to have complete two-way authentication, you can run
 Docker in various other modes by mixing the flags.
 
-### Daemon modes
+#### Daemon modes
 
  - `tlsverify`, `tlscacert`, `tlscert`, `tlskey` set: Authenticate clients
  - `tls`, `tlscert`, `tlskey`: Do not authenticate clients
 
-### Client modes
+#### Client modes
 
  - `tls`: Authenticate server based on public/default CA pool
  - `tlsverify`, `tlscacert`: Authenticate server based on given CA
@@ -220,7 +287,7 @@ location using the environment variable `DOCKER_CERT_PATH`.
     $ export DOCKER_CERT_PATH=~/.docker/zone1/
     $ docker --tlsverify ps
 
-### Connecting to the secure Docker port using `curl`
+#### Connecting to the secure Docker port using `curl`
 
 To use `curl` to make test API requests, you need to use three extra command line
 flags:

@@ -151,7 +151,7 @@ the [Docker CLI Reference](/engine/reference/commandline/dockerd/) article.
 > understand the security implications of opening docker to the network. If steps are not taken to secure the connection, 
 > it is possible for remote non-root users to gain root access on the host. For more information on how to use TLS 
 > certificates to secure this connection, check this article on 
-> [how to protect the Docker daemon socket](../security/https.md).
+> [how to protect the Docker daemon socket](../security/protect-access.md).
 {: .warning}
 
 Configuring Docker to accept remote connections can be done with the `docker.service`

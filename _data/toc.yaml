@@ -205,7 +205,7 @@ guides:
         title: Docker security
       - path: /engine/security/non-events/
         title: Docker security non-events
-      - path: /engine/security/https/
+      - path: /engine/security/protect-access/
         title: Protect the Docker daemon socket
       - path: /engine/security/certificates/
         title: Using certificates for repository client verification

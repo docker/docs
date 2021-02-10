@@ -116,7 +116,7 @@ Note that even if you have a firewall to limit accesses to the REST API
 endpoint from other hosts in the network, the endpoint can be still accessible
 from containers, and it can easily result in the privilege escalation.
 Therefore it is *mandatory* to secure API endpoints with 
-[HTTPS and certificates](https.md).
+[HTTPS and certificates](protect-access.md).
 It is also recommended to ensure that it is reachable only from a trusted
 network or VPN.
 
