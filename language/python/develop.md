@@ -42,16 +42,15 @@ $ docker run -it --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
   --name mysqldb \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  -e MYSQL_ROOT_PASSWORD=p@ssw0rd1 \
   mysql
 ```
 
-Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command:
+Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command and enter "p@ssw0rd1" when prompted for the password:
 
 ```shell
-$ docker run -it --network mysqlnet --rm mysql mysql -hmysqldb
-Enter password: ********
-
+$ docker exec -ti mysqldb mysql -u root -p
+Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
 Server version: 8.0.23 MySQL Community Server - GPL
@@ -69,13 +68,11 @@ mysql>
 
 ### Connect the application to the database
 
-In the above command, we used the same MySQL image to connect to the database but this time we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. 
-
-Press CTRL-D to exit the MySQL interactive terminal.
+In the above command, we logged in to the MySQL database by passing the ‘mysql’ command to the `mysqldb` container. Press CTRL-D to exit the MySQL interactive terminal.
 
 Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
 
-Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server: one for fetching records and one for inserting records.
+Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
 
 ```shell
 import mysql.connector
