@@ -35,6 +35,8 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 
 ## Fixes since the Apple Silicon preview 7
 
+**Docker Desktop preview 3.1.0 (60984)**
+
 2021-02-11
 
 - Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
