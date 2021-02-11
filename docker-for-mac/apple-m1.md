@@ -32,7 +32,6 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 
     In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
-- The **Restart** option in the Docker menu may not work.
 
 ## Fixes since the last preview
 
@@ -41,6 +40,7 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 - The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve
 - We removed hard-coded IP addresses: it now dynamically discovers the IP allocated by macOS
 - We made a change that should improve disk performance
+- The **Restart** option in the Docker menu works.
 
 ## Feedback
 
