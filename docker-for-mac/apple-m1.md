@@ -41,7 +41,7 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 - osxfs file sharing works.
 - The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve.
 - Removed hard-coded IP addresses: Docker Desktop now dynamically discovers the IP allocated by macOS.
-- We made a change that should improve disk performance.
+- The updated version includes a  change that should improve disk performance.
 - The **Restart** option in the Docker menu works.
 
 ## Feedback
