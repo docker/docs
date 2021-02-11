@@ -27,7 +27,6 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
     ```
     softwareupdate --install-rosetta
     ```
-- osxfs file sharing does not work.
 - The HTTP proxy is not enabled.
 - Not all images are available for ARM64. You can add `--platform linux/amd64` to run an Intel image under emulation.
 
@@ -38,6 +37,7 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 ## Fixes since the last preview
 
 - Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates)
+- osxfs file sharing works
 - The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve
 - We removed hard-coded IP addresses: it now dynamically discovers the IP allocated by macOS
 - We made a change that should improve disk performance
