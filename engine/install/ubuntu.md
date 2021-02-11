@@ -98,9 +98,16 @@ from the repository.
 
 2.  Add Docker's official GPG key:
 
+    For Ubuntu 20.04 and newer:
+    ```bash
+    $ curl -fsSL {{ download-url-base }}/gpg | sudo cat > /etc/apt/trusted.gpg.d/docker.asc
+    ```
+
+    For older versions of Ubuntu:
     ```bash
     $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
     ```
+    
 
     Verify that you now have the key with the fingerprint
     <span><code>9DC8 5822 9FC7 DD38 854A&nbsp;&nbsp;E2D8 8D81 803C 0EBF CD88</code></span>, by searching for the
