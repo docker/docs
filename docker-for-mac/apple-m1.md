@@ -16,7 +16,7 @@ Welcome to the tech preview of Docker Desktop for Apple M1. This tech preview is
 
 Click the following link to download the Apple M1 tech preview build:
 
-> [Download](https://desktop.docker.com/mac/m1preview/Docker-AppleSilicon-Preview7.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/60984/Docker.dmg)
 
 ## Known issues
 
@@ -27,16 +27,24 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
     ```
     softwareupdate --install-rosetta
     ```
-- The DNS name `host.docker.internal` only works if you add `--add-host=host.docker.internal:host-gateway` to the `docker run` command
-- The DNS name `vm.docker.internal` does not work.
-- Kubernetes does not initialize because of a missing DNS name.
-- osxfs file sharing does not work.
 - The HTTP proxy is not enabled.
 - Not all images are available for ARM64. You can add `--platform linux/amd64` to run an Intel image under emulation.
 
     In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
-- The **Restart** option in the Docker menu may not work.
+
+## Fixes since the Apple Silicon preview 7
+
+**Docker Desktop preview 3.1.0 (60984)**
+
+2021-02-11
+
+- Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
+- osxfs file sharing works.
+- The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve.
+- Removed hard-coded IP addresses: Docker Desktop now dynamically discovers the IP allocated by macOS.
+- The updated version includes a  change that should improve disk performance.
+- The **Restart** option in the Docker menu works.
 
 ## Feedback
 
