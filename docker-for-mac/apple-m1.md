@@ -33,7 +33,9 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
     In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
 
-## Fixes since the last preview
+## Fixes since the Apple Silicon preview 7
+
+2021-02-11
 
 - Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
 - osxfs file sharing works.
