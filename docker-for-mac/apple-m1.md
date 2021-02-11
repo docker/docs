@@ -16,7 +16,7 @@ Welcome to the tech preview of Docker Desktop for Apple M1. This tech preview is
 
 Click the following link to download the Apple M1 tech preview build:
 
-> [Download](https://desktop.docker.com/mac/stable/arm64/60902/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/60984/Docker.dmg)
 
 ## Known issues
 
