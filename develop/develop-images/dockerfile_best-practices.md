@@ -656,7 +656,7 @@ auto-magically bump the version of the software in your container.
 
 Each `ENV` line creates a new intermediate layer, just like `RUN` commands. This
 means that even if you unset the environment variable in a future layer, it
-still persists in this layer and its value can't be dumped. You can test this by
+still persists in this layer and its value can be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
 
 ```dockerfile
