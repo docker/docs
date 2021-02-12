@@ -61,69 +61,6 @@ Kubernetes.
 
 {{ kubectl-warning }}
 
-## Use Docker commands
-
-To ensure that the docker stack commands are available on your installation, try
-`docker stack ls`.  If you see the message `failed to find a Stack API version`
-then the commands described on this page are not available.  This can be confirmed
-with `docker version` which should contain the line `StackAPI: Unknown`.
-
-If docker stack commands are working then you can deploy a stack on Kubernetes with
-`docker stack deploy`, the `docker-compose.yml` file, and the name of the stack.
-
-```bash
-docker stack deploy --compose-file /path/to/docker-compose.yml mystack
-docker stack services mystack
-```
-
-You can see the service deployed with the `kubectl get services` command.
-
-### Specify a namespace
-
-By default, the `default` namespace is used. You can specify a namespace with
-the `--namespace` flag.
-
-```bash
-docker stack deploy --namespace my-app --compose-file /path/to/docker-compose.yml mystack
-```
-
-Run `kubectl get services -n my-app` to see only the services deployed in the
-`my-app` namespace.
-
-### Override the default orchestrator
-
-While testing Kubernetes, you may want to deploy some workloads in swarm mode.
-Use the `DOCKER_STACK_ORCHESTRATOR` variable to override the default orchestrator for
-a given terminal session or a single Docker command. This variable can be unset
-(the default, in which case Kubernetes is the orchestrator) or set to `swarm` or
-`kubernetes`. The following command overrides the orchestrator for a single
-deployment, by setting the variable{% if platform == "mac"" %}
-at the start of the command itself.
-
-```bash
-DOCKER_STACK_ORCHESTRATOR=swarm docker stack deploy --compose-file /path/to/docker-compose.yml mystack
-```{% elsif platform == "windows" %}
-before running the command.
-
-```shell
-set DOCKER_STACK_ORCHESTRATOR=swarm
-docker stack deploy --compose-file /path/to/docker-compose.yml mystack
-```
-
-{% endif %}
-
-Alternatively, the `--orchestrator` flag may be set to `swarm` or `kubernetes`
-when deploying to override the default orchestrator for that deployment.
-
-```bash
-docker stack deploy --orchestrator swarm --compose-file /path/to/docker-compose.yml mystack
-```
-
-> **Note**
->
-> Deploying the same app in Kubernetes and swarm mode may lead to conflicts with
-> ports and service names.
-
 ## Use the kubectl command
 
 The {{ platform }} Kubernetes integration provides the Kubernetes CLI command
@@ -139,35 +76,3 @@ kubectl get nodes
 NAME                 STATUS    ROLES     AGE       VERSION
 docker-desktop       Ready     master    3h        v1.8.2
 ```
-
-## Example app
-
-Docker has created the following demo app that you can deploy to swarm mode or
-to Kubernetes using the `docker stack deploy` command.
-
-```yaml
-version: "{{ site.compose_file_v3 }}"
-
-services:
-  web:
-    image: dockersamples/k8s-wordsmith-web
-    ports:
-     - "80:80"
-
-  words:
-    image: dockersamples/k8s-wordsmith-api
-    deploy:
-      replicas: 5
-      endpoint_mode: dnsrr
-      resources:
-        limits:
-          memory: 50M
-        reservations:
-          memory: 50M
-
-  db:
-    image: dockersamples/k8s-wordsmith-db
-```
-
-If you already have a Kubernetes YAML file, you can deploy it using the
-`kubectl` command.
