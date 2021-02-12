@@ -25,20 +25,20 @@ services:
 
 Docker Compose v1.28.0+ allows to define GPU reservations using the [device](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#devices) structure defined in the Compose Specification. This provides more granular control over a GPU reservation as custom values can be set for the following device properties: 
 
-- [capabilities](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#capabilities) - value specifies as a list of strings (eg. `capabilities: [gpu]`). You must set this field in the Compose file. Otherwise, it returns an error on service deployment.
-- [count](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#count) - value specified as an int or the value `all` representing the number of GPU devices that should be reserved ( providing the host holds that number of GPUs).
-- [device_ids](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#device_ids) - value specified as a list of strings representing GPU device IDs from the host. You can find the device ID in the output of `nvidia-smi` on the host.
-- [driver](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#driver) - value specified as a string (eg. `driver: 'nvidia'`)
-- [options](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#options) - key-value pairs representing driver specific options.
+- [capabilities](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#capabilities){:target="_blank" rel="noopener" class="_"} - value specifies as a list of strings (eg. `capabilities: [gpu]`). You must set this field in the Compose file. Otherwise, it returns an error on service deployment.
+- [count](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#count){:target="_blank" rel="noopener" class="_"} - value specified as an int or the value `all` representing the number of GPU devices that should be reserved ( providing the host holds that number of GPUs).
+- [device_ids](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#device_ids){:target="_blank" rel="noopener" class="_"} - value specified as a list of strings representing GPU device IDs from the host. You can find the device ID in the output of `nvidia-smi` on the host.
+- [driver](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#driver){:target="_blank" rel="noopener" class="_"} - value specified as a string (eg. `driver: 'nvidia'`)
+- [options](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#options){:target="_blank" rel="noopener" class="_"} - key-value pairs representing driver specific options.
 
 
-> ** Note **
+> **Note**
 >
 > You must set the `capabilities` field. Otherwise, it returns an error on service deployment.
 >
 > `count` and `device_ids` are mutually exclusive. You must only define one field at a time.
 
-For more information on these properties, see the `deploy` section in the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#devices).
+For more information on these properties, see the `deploy` section in the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#devices){:target="_blank" rel="noopener" class="_"}.
 
 
 Example of a Compose file for running a service with access to 1 GPU device:
