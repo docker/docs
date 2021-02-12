@@ -1198,6 +1198,8 @@ manuals:
     title: Environment file
   - path: /compose/profiles/
     title: Using service profiles
+  - path: /compose/gpu-support/
+    title: GPU support in Compose
   - path: /compose/extends/
     title: Extend services in Compose
   - path: /compose/networking/

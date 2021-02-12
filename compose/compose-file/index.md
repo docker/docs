@@ -27,4 +27,5 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 - [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
+- [Enabling GPU access with Compose](../gpu-support-in-compose.md)
 - [Command line reference](../reference/index.md)
