@@ -7,6 +7,11 @@ toc_min: 1
 sitemap: false
 ---
 
+>**Deprecated**
+>
+> Docker Compose file version 1 has been deprecated. We recommend that you move to the latest Compose specification. For more information, see [Compose file reference](index.md).
+{: .warning }
+
 ## Reference and guidelines
 
 These topics describe version 1 of the Compose file format. This is the oldest
