@@ -2,9 +2,9 @@
 description: How to setup and run Docker with SSH or HTTPS
 keywords: docker, docs, article, example, ssh, https, daemon, tls, ca,  certificate
 redirect_from:
-- /engine/articles/https/
 - /articles/https/
-- /engine/https/
+- /engine/articles/https/
+- /engine/security/https/
 title: Protect the Docker daemon socket
 ---
 
