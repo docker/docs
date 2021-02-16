@@ -165,7 +165,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 >
 > While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
 > when running applications in production. Diogo Monica, the former lead of security at Docker,
-> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/):target="_blank" rel="noopener" class="_"}
+> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"}
 > explaining why.
 >
 > A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
