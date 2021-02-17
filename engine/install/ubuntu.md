@@ -92,13 +92,13 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg-agent
+        gnupg
     ```
 
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL {{ download-url-base }}/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/docker-ce-archive-keyring.gpg > /dev/null
+    $ curl -fsSL {{ download-url-base }}/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     ```
 
 3.  Use the following command to set up the **stable** repository. To add the
@@ -122,7 +122,7 @@ from the repository.
 
     ```bash
     $ echo \
-      "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list > /dev/null
     ```
 
@@ -131,7 +131,7 @@ from the repository.
 
     ```bash
     $ echo \
-      "deb [arch=armhf signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list > /dev/null
     ```
 
@@ -140,7 +140,7 @@ from the repository.
 
     ```bash
     $ echo \
-      "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-ce-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list > /dev/null
     ```
 
