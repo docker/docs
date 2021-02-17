@@ -6,6 +6,9 @@ toc_min: 1
 toc_max: 2
 ---
 
+
+> You can view the Snyk vulnerability scan results on the Docker Desktop or Hub dashboards with Docker Pro or Team subscriptions. Check out the [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} page for details.
+
 ## Overview
 
 Vulnerability scanning for Docker local images runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images. Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results.  The scanning function creates the list of Common Vulnerabilities and Exposures (CVEs), and provides recommendations for CVE remediations.
