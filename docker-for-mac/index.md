@@ -249,6 +249,10 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
   For more about using the Kubernetes integration with Docker Desktop, see
   [Deploy on Kubernetes](kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
+> Upgrade Kubernetes
+>
+> Docker Desktop does not upgrade your cluster automatically after a new update. In order to upgrade your Kubernetes cluster to the latest version you will have to **Reset the Kubernetes Cluster**.
+
 ### Reset
 
 > Reset and Restart options
