@@ -299,7 +299,7 @@ experience conflicts, remove it.
 
 > Upgrade Kubernetes
 >
-> Docker Desktop does not upgrade your cluster automatically after a new update. In order to upgrade your Kubernetes cluster to the latest version you will have to **Reset the Kubernetes Cluster**.
+> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
 
 ### Reset
 
