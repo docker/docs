@@ -35,7 +35,7 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 
    However, attempts to run Intel-based containers on Apple M1 machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on M1 machines. These containers are also faster and use less memory than Intel-based containers.
 
-- Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly.
+- Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208){: target="blank" rel="noopener" class=“”}.
 
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
 
