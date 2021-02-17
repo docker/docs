@@ -23,11 +23,14 @@ Click the following link to download the Apple M1 tech preview build:
 The tech preview of Docker Desktop for Apple M1 currently has the following limitations:
 
 - The tech preview build does not update automatically. You must manually install any future versions of Docker Desktop.
-- You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line use this command:
+- You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, use this command:
+
     ```
     softwareupdate --install-rosetta
     ```
+
 - The HTTP proxy is not enabled.
+- Attempts to run Intel-based containers on Apple M1 machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on M1 machines as these containers are also faster when compared to Intel-based containers.
 - Not all images are available for ARM64. You can add `--platform linux/amd64` to run an Intel image under emulation.
 
     In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
