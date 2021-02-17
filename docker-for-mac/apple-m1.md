@@ -30,10 +30,13 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
     ```
 
 - The HTTP proxy is not enabled.
-- Attempts to run Intel-based containers on Apple M1 machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on M1 machines as these containers are also faster when compared to Intel-based containers.
-- Not all images are available for ARM64. You can add `--platform linux/amd64` to run an Intel image under emulation.
 
-    In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
+- Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
+
+   However, attempts to run Intel-based containers on Apple M1 machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on M1 machines. These containers are also faster and use less memory than Intel-based containers.
+
+- Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly.
+
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
 
 ## Fixes since the Apple Silicon preview 7
