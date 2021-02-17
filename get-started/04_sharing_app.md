@@ -67,11 +67,11 @@ new instance that has never seen this container image! To do this, we will use P
 
 1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
 
-2. Click on Log in and choose Docker.
+2. Click **Login** and then select **docker** from the drop-down list.
 
 3. Connect with your Docker Hub account.
 
-4. Once you're logged in, click on the "+ ADD NEW INSTANCE" link in the left side bar. (If you don't see it, make your browser a little wider.) After a few seconds, a terminal window will be opened in your browser.
+4. Once you're logged in, click on the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
 
     ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
 
