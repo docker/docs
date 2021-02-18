@@ -7,6 +7,27 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.28.3
+(2021-02-17)
+
+### Bug fixes
+
+- Fixed SSH hostname parsing when it contains a leading 's'/'h', and removed the quiet option that was hiding the error (via docker-py bump to 4.4.2).
+
+- Fixed key error for `--no-log-prefix` option.
+
+- Fixed incorrect CLI environment variable name for service profiles: `COMPOSE_PROFILES` instead of `COMPOSE_PROFILE`.
+
+- Fixed the fish completion.
+
+### Miscellaneous
+
+- Bumped cryptography to 3.3.2.
+
+- Removed the log driver filter.
+
+For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https://github.com/docker/compose/milestone/53?closed=1){:target="_blank" rel="noopener" class="_"}.
+
 ## 1.28.2
 (2021-01-26)
 
