@@ -200,7 +200,7 @@ Let’s change the source code and then set a breakpoint.
 
 Add the following code above the existing `server.use()` statement, and save the file.
 
-```node
+```js
  server.use( '/foo', (req, res) => {
    return res.json({ "foo": "bar" })
  })
