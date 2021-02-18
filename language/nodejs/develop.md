@@ -125,7 +125,7 @@ services:
    - SERVER_PORT=8000
    - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
-   - ./:/code
+   - ./:/app
   command: npm run debug
 
  mongo:
