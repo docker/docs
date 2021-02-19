@@ -7,7 +7,7 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
-1.28.4
+## 1.28.4
 (2021-02-18)
 
 ### Bug fixes
