@@ -1641,8 +1641,10 @@ Expose ports.
 
 #### Short syntax
 
-Either specify both ports (`HOST:CONTAINER`), or just the container
-port (an ephemeral host port is chosen).
+There are three options: 
+* Specify both ports (`HOST:CONTAINER`)
+* Specify just the container port (an ephemeral host port is chosen for the host port).
+* Specify the host IP address to bind to AND both ports (the default is 0.0.0.0, meaning all interfaces): (`IPADDR:HOSTPORT:CONTAINERPORT`). If HOSTPORT is empty (for example `127.0.0.1::80`), an ephemeral port is chosen to bind to on the host.
 
 > **Note**
 >
@@ -1660,6 +1662,7 @@ ports:
   - "49100:22"
   - "127.0.0.1:8001:8001"
   - "127.0.0.1:5000-5010:5000-5010"
+  - "127.0.0.1::5000
   - "6060:6060/udp"
   - "12400-12500:1240"
 ```
