@@ -7,6 +7,17 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.28.4
+(2021-02-18)
+
+### Bug fixes
+
+- Fixed SSH port parsing by bumping docker-py to 4.4.3.
+
+### Miscellaneous
+
+- Bumped Python to 3.7.10.
+
 ## 1.28.3
 (2021-02-17)
 
