@@ -22,7 +22,7 @@ Instead of downloading MySQL, installing, configuring, and then running the MySQ
 
 Before we run MySQL in a container, we'll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about [Using volumes](../../storage/volumes.md) in our documentation.
 
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
 
 ```shell
 $ docker volume create mysql
@@ -35,7 +35,7 @@ Now we’ll create a network that our application and database will use to talk 
 $ docker network create mysqlnet
 ```
 
-Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and run it for you locally.
+Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
 
 ```shell
 $ docker run -it --rm -d -v mysql:/var/lib/mysql \
@@ -69,11 +69,13 @@ mysql>
 
 ### Connect the application to the database
 
-In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.
+In the above command, we used the same MySQL image to connect to the database but this time we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. 
+
+Press CTRL-D to exit the MySQL interactive terminal.
 
 Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
 
-Okay, now that we have a running MySQL, let’s update the`app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
+Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server: one for fetching records and one for inserting records.
 
 ```shell
 import mysql.connector
@@ -143,7 +145,7 @@ if __name__ == "__main__":
 
 We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.
 
-First, let’s add the `mysql-connector-python `module to our application using pip.
+First, let’s add the `mysql-connector-python` module to our application using pip.
 
 ```shell
 $ pip3 install mysql-connector-python
@@ -170,7 +172,7 @@ $ docker run \
 Let’s test that our application is connected to the database and is able to add a note.
 
 ```shell
-$ curl http://localhost:5000/initdb
+$ curl http://localhost:5000/db
 $ curl --request POST \
   --url http://localhost:5000/widgets \
   --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -231,10 +233,11 @@ $ docker-compose -f docker-compose.dev.yml up --build
 
 We pass the `--build` flag so Docker will compile our image and then starts the containers.
 
-Now let’s test our API endpoint. Run the following curl command:
+Now let’s test our API endpoint. Run the following curl commands:
 
 ```shell
-$ curl --request GET --url http://localhost:8080/widgets
+$ curl --request GET --url http://localhost:5000/db
+$ curl --request GET --url http://localhost:5000/widgets
 ```
 
 You should receive the following response:
