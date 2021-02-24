@@ -196,3 +196,7 @@ FROM builder as build2
 COPY source2.cpp source.cpp
 RUN g++ -o /binary source.cpp
 ```
+
+## Version compatibility
+
+Multistage build syntax was introduced in Docker Engine 17.05
