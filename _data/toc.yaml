@@ -1262,6 +1262,8 @@ manuals:
     title: Dashboard
   - path: /desktop/faqs/
     title: FAQs
+  - path: /desktop/backup-and-restore/
+    title: Back up and restore data
   - path: /desktop/opensource/
     title: Open source licensing
 - sectiontitle: Docker Hub
