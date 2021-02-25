@@ -1128,8 +1128,8 @@ manuals:
       title: Install on Ubuntu
     - path: /engine/install/binaries/
       title: Install binaries
-    - path: /engine/install/linux-postinstall/
-      title: Optional post-installation steps
+  - path: /engine/install/linux-postinstall/
+    title: Optional post-installation steps
   - path: /engine/release-notes/
     title: Release notes
   - sectiontitle: Previous versions
