@@ -7,7 +7,8 @@ basePath: /v2
 info:
   title: Docker HUB API
   version: '2.0'
-  x-logo: https://docs.docker.com/images/logo-docker-main.png
+  x-logo:
+    url: https://docs.docker.com/images/logo-docker-main.png
   description: |
     TBD
 tags:
