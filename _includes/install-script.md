@@ -70,8 +70,6 @@ run Docker commands by default.
 >
 > To install Docker without root privileges, see
 > [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless/).
->
-> Rootless mode is currently available as an experimental feature.
 
 #### Upgrade Docker after using the convenience script
 

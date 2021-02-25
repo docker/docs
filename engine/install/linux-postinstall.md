@@ -32,8 +32,6 @@ creates a Unix socket accessible by members of the `docker` group.
 >
 > To run Docker without root privileges, see
 > [Run the Docker daemon as a non-root user (Rootless mode)](../security/rootless.md).
->
-> Rootless mode is currently available as an experimental feature.
 
 To create the `docker` group and add your user:
 
