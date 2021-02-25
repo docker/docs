@@ -32,7 +32,8 @@ most benefits from Docker.
 
 ## Advanced development with the SDK or API
 
-After you can write Dockerfiles or Compose files and use Docker CLI, take it to the next level by using Docker Engine SDK for Go/Python or use the HTTP API directly.
-
-- [Docker Engine SDK](../engine/api/sdk/){: target="_blank" rel="noopener" class="_"}
-- [HTTP API](../engine/api/latest/){: target="_blank" rel="noopener" class="_"}
+After you can write Dockerfiles or Compose files and use Docker CLI, take it to
+the next level by using Docker Engine SDK for Go/Python or use the HTTP API
+directly. Visit the [Develop with Docker Engine API](../engine/api/index.md)
+section to learn more about developing with the Engine API, where to find SDKs
+for your programming language of choice, and to see some examples.
