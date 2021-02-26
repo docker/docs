@@ -110,7 +110,7 @@ def get_widgets() :
 
   return json.dumps(json_data)
 
-@app.route('/db')
+@app.route('/initdb')
 def db_init():
   mydb = mysql.connector.connect(
     host="mysqldb",
