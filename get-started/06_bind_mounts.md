@@ -44,7 +44,7 @@ So, let's do it!
 
     ```bash
     docker run -dp 3000:3000 \
-        -w /app -v "$(pwd):/app" \
+        -w /app -v "$(pwd):/etc/app" \
         node:12-alpine \
         sh -c "yarn install && yarn run dev"
     ```
@@ -53,7 +53,7 @@ So, let's do it!
 
     ```powershell
     docker run -dp 3000:3000 `
-        -w /app -v "$(pwd):/app" `
+        -w /app -v "$(pwd):/etc/app" `
         node:12-alpine `
         sh -c "yarn install && yarn run dev"
     ```
