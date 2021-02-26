@@ -12,13 +12,13 @@ redirect_from:
 
 ### Bugs
 
-- Fixed OpenSSL version mismatch error when shelling out to the ssh client (via bump to docker-py 4.4.4 which contains the fix).
+- Fixed the OpenSSL version mismatch error when shelling out to the SSH client (via bump to docker-py 4.4.4 which contains the fix).
 
 - Added missing build flags to the native builder: `platform`, `isolation` and `extra_hosts`.
 
 - Removed info message on native build.
 
-- Fixed log fetching bug when service logging driver is set to 'none'.
+- Fixed the log fetching bug when service logging driver is set to 'none'.
 
 ## 1.28.4
 (2021-02-18)
