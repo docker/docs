@@ -22,6 +22,63 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.4
+2021-02-26
+
+### Builder
+
+* Fix incorrect cache match for inline cache import with empty layers [moby/moby#42061](https://github.com/moby/moby/pull/42061)
+* Update BuildKit to v0.8.2 [moby/moby#42061](https://github.com/moby/moby/pull/42061)
+  * resolver: avoid error caching on token fetch
+  * fileop: fix checksum to contain indexes of inputs preventing certain cache misses
+  * Fix reference count issues on typed errors with mount references (fixing `invalid mutable ref` errors)
+  * git: set token only for main remote access allowing cloning submodules with different credentials
+* Ensure blobs get deleted in /var/lib/docker/buildkit/content/blobs/sha256 after pull. To clean up old state run `builder prune` [moby/moby#42065](https://github.com/moby/moby/pull/42065)
+* Fix parallel pull synchronization regression [moby/moby#42049](https://github.com/moby/moby/pull/42049)
+* Ensure libnetwork state files do not leak [moby/moby#41972](https://github.com/moby/moby/pull/41972)
+
+### Client
+
+* Fix a panic on `docker login` if no config file is present [docker/cli#2959](https://github.com/docker/cli/pull/2959)
+* Fix `WARNING: Error loading config file: .dockercfg: $HOME is not defined` [docker/cli#2958](https://github.com/docker/cli/pull/2958)
+
+### Runtime
+
+* docker info: silence unhandleable warnings [moby/moby#41958](https://github.com/moby/moby/pull/41958)
+* Avoid creating parent directories for XGlobalHeader [moby/moby#42017](https://github.com/moby/moby/pull/42017)
+* Use 0755 permissions when creating missing directories [moby/moby#42017](https://github.com/moby/moby/pull/42017)
+* Fallback to manifest list when no platform matches in image config [moby/moby#42045](https://github.com/moby/moby/pull/42045) [moby/moby#41873](https://github.com/moby/moby/pull/41873)
+* Fix a daemon panic on setups with a custom default runtime configured [moby/moby#41974](https://github.com/moby/moby/pull/41974)
+* Fix a panic when daemon configuration is empty [moby/moby#41976](https://github.com/moby/moby/pull/41976)
+* Fix daemon panic when starting container with invalid device cgroup rule [moby/moby#42001](https://github.com/moby/moby/pull/42001)
+* Fix userns-remap option when username & UID match [moby/moby#42013](https://github.com/moby/moby/pull/42013)
+* static: update runc binary to v1.0.0-rc93 [moby/moby#42014](https://github.com/moby/moby/pull/42014)
+
+### Logger
+
+* Honor `labels-regex` config even if `labels` is not set [moby/moby#42046](https://github.com/moby/moby/pull/42046)
+* Handle long log messages correctly preventing awslogs in non-blocking mode to split events bigger than 16kB [mobymoby#41975](https://github.com/moby/moby/pull/41975)
+
+### Rootless
+
+* Prevent the service hanging when stopping by setting systemd KillMode to mixed [moby/moby#41956](https://github.com/moby/moby/pull/41956)
+* dockerd-rootless.sh: add typo guard [moby/moby#42070](https://github.com/moby/moby/pull/42070)
+* Update rootlesskit to v0.13.1 to fix handling of IPv6 addresses [moby/moby#42025](https://github.com/moby/moby/pull/42025)
+* allow mknodding FIFO inside userns [moby/moby#41957](https://github.com/moby/moby/pull/41957)
+
+### Security
+
+* profiles: seccomp: update to Linux 5.11 syscall list [moby/moby#41971](https://github.com/moby/moby/pull/41971)
+
+### Swarm
+
+* Fix issue with heartbeat not persisting upon restart [moby/moby#42060](https://github.com/moby/moby/pull/42060)
+* Fix potential stalled tasks [moby/moby#42060](https://github.com/moby/moby/pull/42060)
+* Fix `--update-order` and `--rollback-order` flags when only `--update-order` or `--rollback-order` is provided [docker/cli#2963](https://github.com/docker/cli/pull/2963)
+* Fix `docker service rollback` returning a non-zero exit code in some situations [docker/cli#2964](https://github.com/docker/cli/pull/2964)
+* Fix inconsistent progress-bar direction on `docker service rollback` [docker/cli#2964](https://github.com/docker/cli/pull/2964)
+
+
 ## 20.10.3
 2021-02-01
 
