@@ -29,11 +29,13 @@ definitions:
         description: The username of the Docker Hub account to authenticate with
         type: string
         required: true
+        example: myusername
       password:
         description: The password of the Docker Hub account to authenticate with
         type: string
         required: true
-  UsersLoginSuccessResponse:
+        example: hunter2
+  PostUsersLoginSuccessResponse:
     description: successful user login response
     type: object
     properties:
@@ -44,7 +46,7 @@ definitions:
         type: string
         x-nullable: false
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-  UsersLoginErrorResponse:
+  PostUsersLoginErrorResponse:
     description: failed user login response
     type: object
     properties:
@@ -81,7 +83,7 @@ definitions:
         type: string
       errinfo:
         $ref: '#/definitions/ErrorInfo'
-  NamespaceRepositoryImagesSummaryResponse:
+  GetNamespaceRepositoryImagesSummaryResponse:
     description: Summary information for images in a repository
     type: object
     properties:
@@ -104,7 +106,7 @@ definitions:
             description: Number of images counted as inactive in this repository
             type: integer
             example: 1
-  NamespaceRepositoryImagesResponse:
+  GetNamespaceRepositoryImagesResponse:
     description: Paginated list of images in a repository
     type: object
     properties:
@@ -172,6 +174,176 @@ definitions:
               type: string
               enum: [active, inactive]
               example: active
+  PostNamespacesDeleteImagesRequest:
+    description: Delete images request
+    type: object
+    properties:
+      dry_run: 
+        description: If `true` then will check and return errors and unignored warnings for the deletion request but will not delete any images
+        type: boolean
+        example: false
+      active_from:
+        description: | 
+            Sets the time from which an image must have been pushed or pulled to be counted as active
+
+            Defaults to 1 month before the current time
+        type: string
+        example: '2020-12-01T12:00:00Z'
+      manifests:
+        description: Image manifests to delete
+        type: array
+        items:
+          type: object
+          properties:
+            repository:
+              description: Name of repository to delete the image from
+              required: true
+              type: string
+              example: myrepo
+            digest:
+              description: Digest of the image to delete
+              required: true
+              type: string
+              example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+      ignore_warnings:
+        description: |
+          Warnings to ignore. If a warning is not ignored then no deletions will happen and the warning is returned in the response
+
+          These warnings include:
+
+          * is_active: warning when attempting to delete an image that is marked as active
+          
+          * current_tag: warning when attempting to delete an image that has one or more current tags in the repository
+
+          Warnings can be copied from the response to the request
+        type: array
+        items:
+          type: object
+          properties:
+            repository:
+              description: Name of the repository of the image to ignore the warning for
+              required: true
+              type: string
+              example: myrepo
+            digest:
+              description: Digest of the image to ignore the warning for
+              required: true
+              type: string
+              example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+            warning:
+              description: Warning to ignore
+              required: true
+              type: string
+              enum: [is_active, current_tag]
+              example: current_tag
+            tags:
+              description: Current tags to ignore
+              type: array
+              items:
+                type: string
+                example: latest
+  PostNamespacesDeleteImagesResponseSuccess:
+    description: Successful delete images response
+    type: object
+    properties:
+      dry_run:
+        description: Whether the request was a dry run or not
+        type: boolean
+        example: false
+      metrics:
+        type: object
+        properties:
+          manifest_deletes:
+            description: Number of manifests deleted
+            type: integer
+            example: 3
+          manifest_errors:
+            description: Number of manifests that failed to delete
+            type: integer
+            example: 0
+          tag_deletes:
+            description: Number of tags deleted
+            type: integer
+            example: 1
+          tag_errors:
+            description: Number of tags that failed to delete
+            type: integer
+            example: 0
+  PostNamespacesDeleteImagesResponseError:
+    description: Deletion not possible
+    type: object
+    properties:
+      txnid:
+        description: Unique ID for this call
+        type: string
+      message:
+        description: The error message
+        type: string
+      errinfo:
+        allOf:
+          - $ref: '#/definitions/ErrorInfo'
+          - type: object
+            properties:
+              type:
+                description: Type of error
+                type: string
+                example: validation
+              details:
+                type: object
+                properties:
+                  errors:
+                    description: Errors from validating delete request. These cannot be ignored
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        repository:
+                          description: Name of repository of the image that caused the error
+                          type: string
+                          example: myrepo
+                        digest: 
+                          description: Digest of the image that caused the error
+                          type: string
+                          example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+                        error:
+                          description: Error type
+                          type: string
+                          enum: [not_found, unauthorized, child_manifest]
+                          example: not_found
+                  warnings:
+                    description: |
+                      Warnings that can be ignored
+
+                      These warnings include:
+
+                      * is_active: warning when attempting to delete an image that is marked as active
+                      
+                      * current_tag: warning when attempting to delete an image that has one or more current tags in the repository
+
+                      Warnings can be copied from the response to the request
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        repository:
+                          description: Name of the repository of the image that caused the warning
+                          type: string
+                          example: myrepo
+                        digest:
+                          description: Digest of the image that caused the warning
+                          type: string
+                          example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
+                        warning:
+                          description: Warning type
+                          type: string
+                          enum: [is_active, current_tag]
+                          example: current_tag
+                        tags:
+                          description: Current tags if warning is `current_tag`
+                          type: array
+                          items:
+                            type: string
+                            example: latest
 paths:
   /v2/users/login:
     post:
@@ -199,18 +371,18 @@ paths:
         200:
           description: Authentication successful
           schema:
-            $ref: '#/definitions/UsersLoginSuccessResponse'
+            $ref: '#/definitions/PostUsersLoginSuccessResponse'
         401:
           description: Authentication failed
           schema:
-            $ref: '#/definitions/UsersLoginErrorResponse'
+            $ref: '#/definitions/PostUsersLoginErrorResponse'
   /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
     get:
       tags: [Images]
       summary: Get summary of repository's images
       description: |
         Gets the number of images in a repository and the number of images counted as active and inactive
-      operationId: GetNamespaceRepositoryImagesSummary
+      operationId: GetNamespacesRepositorieImagesSummary
       produces:
         - application/json
       parameters:
@@ -237,7 +409,7 @@ paths:
         200:
           description: Success
           schema: 
-            $ref: '#/definitions/NamespaceRepositoryImagesSummaryResponse'
+            $ref: '#/definitions/GetNamespaceRepositoryImagesSummaryResponse'
         401:
           description: Unauthorized - user does not have read access to the namespace
           schema:
@@ -250,7 +422,7 @@ paths:
         Limited to users on Pro and Team plans
 
         Gets details on the images in a repository
-      operationId: GetNamespaceRepositoryImages
+      operationId: GetNamespacesRepositoriesImages
       produces:
         - application/json
       parameters:
@@ -302,7 +474,7 @@ paths:
         200:
           description: Success
           schema: 
-            $ref: '#/definitions/NamespaceRepositoryImagesResponse'
+            $ref: '#/definitions/GetNamespaceRepositoryImagesResponse'
         401:
           description: Unauthorized - user does not have read access to the namespace
           schema:
@@ -311,4 +483,44 @@ paths:
           description: Forbidden - this API is only available to users on Pro or Team plans
           schema:
             $ref: '#/definitions/ErrorResponse'
+  /v2/namespaces/{namespace}/delete-images:
+    post:
+      tags: [Images]
+      summary: Delete images
+      operationId: PostNamespacesDeleteImages
+      description: |
+        Deletes one or more images withing a namespace (note: currently limited to a single repostiory).
 
+        If you attempt to delete images that are marked as active or are currently tagged then the deletions will not happen and these warnings will be returned.
+        To continue with the deletion you must ignore these warnings by putting them in the `ignore_warnings` property.
+
+        Errors cannot be ignored. Children of multi-arch images cannot be directly deleted.
+      consume:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          description: Namespace of repository
+          type: string
+        - name: body
+          in: body
+          description: Login details
+          required: true
+          schema:
+            $ref: '#/definitions/PostNamespacesDeleteImagesRequest'
+      responses:
+        200:
+          description: Deletion completed
+          schema:
+            $ref: '#/definitions/PostNamespacesDeleteImagesResponseSuccess'
+        400:
+          description: Deletion not possible
+          schema:
+            $ref: '#/definitions/PostNamespacesDeleteImagesResponseError'
+        403:
+          description: Forbidden - this API is only available to users on Pro or Team plans
+          schema:
+            $ref: '#/definitions/ErrorResponse'
