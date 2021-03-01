@@ -509,7 +509,7 @@ paths:
           type: string
         - name: body
           in: body
-          description: Login details
+          description: Delete request
           required: true
           schema:
             $ref: '#/definitions/PostNamespacesDeleteImagesRequest'
