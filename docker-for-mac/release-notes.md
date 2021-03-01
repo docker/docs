@@ -17,7 +17,7 @@ This page contains information about the new features, improvements, known issue
 {: .important }
 
 ## Docker Desktop 3.2.0
-2021-03-NN
+2021-03-01
 
 > [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
 
@@ -30,7 +30,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Upgrades
 
-- [Docker Engine 20.10.4](https://docs.docker.com/engine/release-notes/#20104)
+- [Docker Engine 20.10.3](https://docs.docker.com/engine/release-notes/#20103)
 - [Docker Compose 1.28.5](https://github.com/docker/compose/releases/tag/1.28.5)
 - [Compose CLI v1.0.9](https://github.com/docker/compose-cli/tree/v1.0.9)
 - [Docker Hub Tool v0.3.0](https://github.com/docker/hub-tool/releases/tag/v0.3.0)
