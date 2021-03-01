@@ -494,6 +494,8 @@ paths:
         If you attempt to delete images that are marked as active or are currently tagged then the deletions will not happen and these warnings will be returned.
         To continue with the deletion you must ignore these warnings by putting them in the `ignore_warnings` property.
 
+        Deleting a currently tagged image will delete the tag from the repository.
+
         Errors cannot be ignored. Children of multi-arch images cannot be directly deleted.
       consume:
         - application/json
