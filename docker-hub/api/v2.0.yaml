@@ -10,7 +10,7 @@ info:
   x-logo:
     url: https://docs.docker.com/images/logo-docker-main.png
   description: |
-    TBD
+    API for interacting with images stored on the Docker Hub registry
 tags:
   # Primary objects
   - name: Authentication
