@@ -59,7 +59,7 @@ Restart Docker for the changes to take effect.
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for
-> `fluentd-async-connect` or `fluentd-max-retries`) must therefore be enclosed
+> `fluentd-async` or `fluentd-max-retries`) must therefore be enclosed
 > in quotes (`"`).
 
 To set the logging driver for a specific container, pass the
@@ -74,7 +74,7 @@ connects to this daemon through `localhost:24224` by default. Use the
     docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 
 If container cannot connect to the Fluentd daemon, the container stops
-immediately unless the `fluentd-async-connect` option is used.
+immediately unless the `fluentd-async` option is used.
 
 ## Options
 
@@ -110,7 +110,7 @@ respectively `env` and `labels`. Their values are regular expressions to match
 logging-related environment variables and labels. It is used for advanced
 [log tag options](log_tags.md).
 
-### fluentd-async-connect
+### fluentd-async
 
 Docker connects to Fluentd in the background. Messages are buffered until the
 connection is established. Defaults to `false`.
