@@ -32,3 +32,7 @@ Docker Compose to set up and run a Rails/PostgreSQL app.
 - [Quickstart: Compose and WordPress](wordpress.md) - Shows how to
 use Docker Compose to set up and run WordPress in an isolated environment
 with Docker containers.
+
+## Awesome Compose samples
+
+The Awesome Compose samples provide a starting point on how to integrate different frameworks and technologies using Docker Compose. All samples are available in the [Awesome-compose GitHub repo](https://github.com/docker/awesome-compose){:target="_blank" rel="noopener" class="_"}.
