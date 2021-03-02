@@ -33,7 +33,7 @@ The `overlay2` storage driver is recommended.
 Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them, along with associated dependencies.
 
-```bash
+```console
 $ sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
@@ -79,7 +79,7 @@ from the repository.
 Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the **stable** repository.
 
-```bash
+```console
 $ sudo yum install -y yum-utils
 
 $ sudo yum-config-manager \
@@ -93,13 +93,13 @@ $ sudo yum-config-manager \
 > by default. You can enable them alongside the stable repository.  The following
 > command enables the **nightly** repository.
 >
-> ```bash
+> ```console
 > $ sudo yum-config-manager --enable docker-ce-nightly
 > ```
 >
 > To enable the **test** channel, run the following command:
 >
-> ```bash
+> ```console
 > $ sudo yum-config-manager --enable docker-ce-test
 > ```
 >
@@ -107,7 +107,7 @@ $ sudo yum-config-manager \
 > `yum-config-manager` command with the `--disable` flag. To re-enable it, use
 > the `--enable` flag. The following command disables the **nightly** repository.
 >
-> ```bash
+> ```console
 > $ sudo yum-config-manager --disable docker-ce-nightly
 > ```
 >
@@ -117,7 +117,7 @@ $ sudo yum-config-manager \
 
 1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
 
-    ```bash
+    ```console
     $ sudo yum install docker-ce docker-ce-cli containerd.io
     ```
 
@@ -139,7 +139,7 @@ $ sudo yum-config-manager \
     a. List and sort the versions available in your repo. This example sorts
        results by version number, highest to lowest, and is truncated:
 
-    ```bash
+    ```console
     $ yum list docker-ce --showduplicates | sort -r
 
     docker-ce.x86_64  3:18.09.1-3.el7                     docker-ce-stable
@@ -156,7 +156,7 @@ $ sudo yum-config-manager \
        starting at the first colon (`:`), up to the first hyphen, separated by
        a hyphen (`-`). For example, `docker-ce-18.09.1`.
 
-    ```bash
+    ```console
     $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
@@ -164,14 +164,14 @@ $ sudo yum-config-manager \
 
 3.  Start Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
 4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
@@ -205,7 +205,7 @@ a new file each time you want to upgrade Docker Engine.
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
 
-    ```bash
+    ```console
     $ sudo yum install /path/to/package.rpm
     ```
 
@@ -214,14 +214,14 @@ a new file each time you want to upgrade Docker Engine.
 
 3.  Start Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
 4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
@@ -245,7 +245,7 @@ instead of `yum -y install`, and pointing to the new file.
 
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
-    ```bash
+    ```console
     $ sudo yum remove docker-ce docker-ce-cli containerd.io
     ```
 
@@ -253,7 +253,7 @@ instead of `yum -y install`, and pointing to the new file.
     are not automatically removed. To delete all images, containers, and
     volumes:
 
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker
     ```
 
