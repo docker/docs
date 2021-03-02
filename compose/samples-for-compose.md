@@ -35,6 +35,6 @@ with Docker containers.
 
 ## Awesome Compose samples
 
-These samples provide a starting point for how to integrate different frameworks / technologies using Docker Compose.
+The Awesome Compose samples provide a starting point on how to integrate different frameworks and technologies using Docker Compose.
 
 All samples available in [Awesome-compose githu repo](https://github.com/docker/awesome-compose){:target="_blank" rel="noopener" class="_"}
