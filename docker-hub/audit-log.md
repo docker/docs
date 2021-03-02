@@ -23,7 +23,7 @@ The Audit log begins tracking activities from the date the feature is live, that
 
 > **Note**
 >
-> Docker will retain the Audit log activity data for a period of six months.
+> Docker will retain the Audit log activity data for a period of three months.
 
 ## Customize the Audit log
 
