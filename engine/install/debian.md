@@ -31,7 +31,7 @@ Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` archit
 Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
-```bash
+```console
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
@@ -70,7 +70,7 @@ from the repository.
 1.  Update the `apt` package index and install packages to allow `apt` to use a
     repository over HTTPS:
 
-    ```bash
+    ```console
     $ sudo apt-get update
 
     $ sudo apt-get install \
@@ -83,7 +83,7 @@ from the repository.
 
 2.  Add Docker's official GPG key:
 
-    ```bash
+    ```console
     $ curl -fsSL {{ download-url-base }}/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     ```
 
@@ -110,7 +110,7 @@ from the repository.
     <div class="tab-content">
     <div id="debian_repo" class="tab-pane fade in active" markdown="1">
 
-    ```bash
+    ```console
     $ echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }}/debian \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -119,7 +119,7 @@ from the repository.
     </div>
     <div id="raspbian_repo" class="tab-pane fade" markdown="1">
 
-    ```bash
+    ```console
     $ echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }}/raspbian \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -133,7 +133,7 @@ from the repository.
 1. Update the `apt` package index, and install the _latest version_ of Docker
    Engine and containerd, or go to the next step to install a specific version:
 
-    ```bash
+    ```console
     $ sudo apt-get update
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
@@ -150,27 +150,26 @@ from the repository.
 
     a. List the versions available in your repo:
 
-    ```bash
+    ```console
     $ apt-cache madison docker-ce
 
       docker-ce | 5:20.10.3~3-0~debian-buster | {{ download-url-base }}/debian buster/stable amd64 Packages
       docker-ce | 5:20.10.2~3-0~debian-buster | {{ download-url-base }}/debian buster/stable amd64 Packages
       docker-ce | 18.06.3~ce~3-0~debian       | {{ download-url-base }}/debian buster/stable amd64 Packages
       docker-ce | 18.06.2~ce~3-0~debian       | {{ download-url-base }}/debian buster/stable amd64 Packages
-      ...
     ```
 
     b. Install a specific version using the version string from the second column,
        for example, `5:20.10.3~3-0~debian-buster`.
 
-    ```bash
+    ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
@@ -196,8 +195,8 @@ a new file each time you want to upgrade Docker.
 
 1.  Go to [`{{ download-url-base }}/debian/dists/`]({{ download-url-base }}/debian/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Debian version, then browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64` and download the `.deb` file for the Docker version
-    you want to install.
+    `armhf`, or `arm64`, and download the `.deb` file for the Docker Engine
+    version you want to install.
 
     > **Note**: To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
@@ -206,7 +205,7 @@ a new file each time you want to upgrade Docker.
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
 
-    ```bash
+    ```console
     $ sudo dpkg -i /path/to/package.deb
     ```
 
@@ -215,7 +214,7 @@ a new file each time you want to upgrade Docker.
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
@@ -239,7 +238,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
-    ```bash
+    ```console
     $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
     ```
 
@@ -247,7 +246,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
     are not automatically removed. To delete all images, containers, and
     volumes:
 
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker
     $ sudo rm -rf /var/lib/containerd
     ```

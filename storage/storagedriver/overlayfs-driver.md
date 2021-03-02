@@ -114,7 +114,7 @@ need to use the legacy `overlay` driver, specify it instead.
      Backing Filesystem: xfs
      Supports d_type: true
      Native Overlay Diff: true
-    <output truncated>
+    <...>
     ```
 
 Docker is now using the `overlay2` storage driver and has automatically
