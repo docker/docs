@@ -170,7 +170,6 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
       docker-ce | 5:18.09.0~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 18.06.1~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 18.06.0~ce~3-0~debian        | {{ download-url-base }} stretch/stable amd64 Packages
-      ...
     ```
 
     b. Install a specific version using the version string from the second column,
