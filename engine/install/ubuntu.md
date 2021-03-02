@@ -267,6 +267,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 
     ```console
     $ sudo rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/containerd
     ```
 
 You must delete any edited configuration files manually.

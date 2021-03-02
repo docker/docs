@@ -255,6 +255,7 @@ instead of `yum -y install`, and pointing to the new file.
 
     ```console
     $ sudo rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/containerd
     ```
 
 You must delete any edited configuration files manually.
