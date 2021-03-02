@@ -31,6 +31,13 @@
           user-select: none
 }
 
+// Show a "text" cursor for the prompt. Even though the prompt itself is not
+// selectable, make it appear as if it is, so that users don't get confused
+// when they try to select an example for copying.
+.highlight .gp {
+  cursor: text;
+}
+
 .highlight .gs {} /* Generic.Strong */
 .highlight .gu { color: #800080 } /* Generic.Subheading */
 .highlight .gt { color: #aa0000 } /* Generic.Traceback */
