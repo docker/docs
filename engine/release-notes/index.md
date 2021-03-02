@@ -22,6 +22,13 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.5
+2021-03-02
+
+### Client
+
+* Revert [docker/cli#2960](https://github.com/docker/cli/pull/2960) to fix hanging in `docker start --attach` and remove spurious "Unsupported signal: <nil>. Discarding." messages [docker/cli#2987](https://github.com/docker/cli/pull/2987)
+
 ## 20.10.4
 2021-02-26
 
