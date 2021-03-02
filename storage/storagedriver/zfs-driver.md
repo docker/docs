@@ -112,7 +112,7 @@ use unless you have substantial experience with ZFS on Linux.
        Space Available: 103498395648
        Parent Quota: no
        Compression: off
-    <output truncated>
+    <...>
     ```
 
 ## Manage `zfs`

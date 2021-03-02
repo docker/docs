@@ -168,7 +168,7 @@ recommended for Linux distributions that do not use systemd.
 
 2.  Add or modify the following lines, substituting your own values.
 
-    ```none
+    ```systemd
     [Service]
     ExecStart=
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
@@ -284,13 +284,12 @@ file in `/usr/lib/systemd/network/` on your Docker host
 (ex: `/usr/lib/systemd/network/80-container-host0.network`) and add the
 following block within the `[Network]` section.
 
-```
+```systemd
 [Network]
 ...
 IPForward=kernel
 # OR
 IPForward=true
-...
 ```
 
 This configuration allows IP forwarding from the container as expected.
