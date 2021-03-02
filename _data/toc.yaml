@@ -1188,8 +1188,6 @@ manuals:
     title: Overview of Docker Compose
   - path: /compose/install/
     title: Install Compose
-  - path: /compose/release-notes/
-    title: Release notes
   - path: /compose/gettingstarted/
     title: Getting started
   - path: /compose/environment-variables/
@@ -1210,8 +1208,8 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /release-notes/docker-compose/
-    title: Docker Compose release notes
+  - path: /compose/release-notes/
+    title: Release notes
 - sectiontitle: Docker Desktop
   section:
   - path: /desktop/
