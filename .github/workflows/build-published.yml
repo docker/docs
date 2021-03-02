@@ -8,7 +8,7 @@ on:
 jobs:
   build-static-page:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     timeout-minutes: 10
     env:
       DOCKER_BUILDKIT: '1'

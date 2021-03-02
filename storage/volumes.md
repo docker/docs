@@ -500,6 +500,19 @@ docker service create -d \
     nginx:latest
 ```
 
+### Create CIFS/Samba volumes
+
+You can mount a Samba share directly in docker without configuring a mount point on your host.
+```bash
+docker volume create \
+	--driver local \
+	--opt type=cifs \
+	--opt device=//uxxxxx.your-server.de/backup \
+	--opt o=addr=uxxxxx.your-server.de,username=uxxxxxxx,password=*****,file_mode=0777,dir_mode=0777 \
+	--name cif-volume
+```
+Notice the `addr` option is required if using a hostname instead of an IP so docker can perform the hostname lookup.
+
 ## Backup, restore, or migrate data volumes
 
 Volumes are useful for backups, restores, and migrations. Use the

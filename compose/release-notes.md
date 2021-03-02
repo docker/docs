@@ -7,6 +7,51 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.28.5 
+(2021-02-26)
+
+### Bugs
+
+- Fixed the OpenSSL version mismatch error when shelling out to the SSH client (via bump to docker-py 4.4.4 which contains the fix).
+
+- Added missing build flags to the native builder: `platform`, `isolation` and `extra_hosts`.
+
+- Removed info message on native build.
+
+- Fixed the log fetching bug when service logging driver is set to 'none'.
+
+## 1.28.4
+(2021-02-18)
+
+### Bug fixes
+
+- Fixed SSH port parsing by bumping docker-py to 4.4.3.
+
+### Miscellaneous
+
+- Bumped Python to 3.7.10.
+
+## 1.28.3
+(2021-02-17)
+
+### Bug fixes
+
+- Fixed SSH hostname parsing when it contains a leading 's'/'h', and removed the quiet option that was hiding the error (via docker-py bump to 4.4.2).
+
+- Fixed key error for `--no-log-prefix` option.
+
+- Fixed incorrect CLI environment variable name for service profiles: `COMPOSE_PROFILES` instead of `COMPOSE_PROFILE`.
+
+- Fixed the fish completion.
+
+### Miscellaneous
+
+- Bumped cryptography to 3.3.2.
+
+- Removed the log driver filter.
+
+For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https://github.com/docker/compose/milestone/53?closed=1){:target="_blank" rel="noopener" class="_"}.
+
 ## 1.28.2
 (2021-01-26)
 

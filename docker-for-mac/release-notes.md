@@ -16,11 +16,48 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+## Docker Desktop 3.2.0
+2021-03-01
 
-## Docker Desktop Community 3.1.0
+> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+
+### New
+
+- The Docker Dashboard opens automatically when you start Docker Desktop.
+- The Docker Dashboard displays a tip once a week.
+- Docker Desktop uses iTerm2 to launch the container's terminal if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
+- Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
+
+### Upgrades
+
+- [Docker Engine 20.10.3](https://docs.docker.com/engine/release-notes/#20103)
+- [Docker Compose 1.28.5](https://github.com/docker/compose/releases/tag/1.28.5)
+- [Compose CLI v1.0.9](https://github.com/docker/compose-cli/tree/v1.0.9)
+- [Docker Hub Tool v0.3.0](https://github.com/docker/hub-tool/releases/tag/v0.3.0)
+- [QEMU 5.0.1](https://wiki.qemu.org/ChangeLog/5.0)
+- [Amazon ECR Credential Helper v0.5.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.5.0)
+- [Alpine 3.13](https://alpinelinux.org/posts/Alpine-3.13.0-released.html)
+- [Kubernetes 1.19.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.7)
+- [Go 1.16](https://golang.org/doc/go1.16)
+
+### Bug fixes and minor changes
+
+- Fixed an issue on the container detail screen where the buttons would disappear when scrolling the logs. Fixes [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290)
+- Fixed an issue when port forwarding multiple ports with an IPv6 container network. Fixes [docker/for-mac#5247](https://github.com/docker/for-mac/issues/5247)
+- Fixed a regression where `docker load` could not use an xz archive anymore. Fixes [docker/for-mac#5271](https://github.com/docker/for-mac/issues/5271)
+- Fixed a navigation issue in the **Containers / Apps** view. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160#issuecomment-764660660)
+- Fixed container instance view with long container/image name. Fixes [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290)
+- Fixed an issue when binding ports on specific IPs. Note: It may now take a bit of time before the `docker inspect` command shows the open ports. Fixes [docker/for-mac#4541](https://github.com/docker/for-mac/issues/4541)
+- Fixed an issue where an image deleted from the Docker dashboard was still displayed on the **Images** view.
+
+### Known issue
+
+Docker Desktop can sometimes fail to start after upgrading to version 3.2.0. We are working on a fix for this issue. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.1.0](#docker-desktop-310). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+
+## Docker Desktop 3.1.0
 2021-01-14
 
-> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/51484/Docker.dmg)
 
 ### New
 
@@ -36,7 +73,7 @@ This page contains information about the new features, improvements, known issue
   - Fixed an issue with DNS address resolution in Alpine containers. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
   - Redesigned the **Support** UI to improve usability.
 
-## Docker Desktop Community 3.0.4
+## Docker Desktop 3.0.4
 2021-01-06
 
 > [Download](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
@@ -54,7 +91,7 @@ This page contains information about the new features, improvements, known issue
 
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 
-## Docker Desktop Community 3.0.3
+## Docker Desktop 3.0.3
 2020-12-21
 
 > [Download](https://desktop.docker.com/mac/stable/51017/Docker.dmg)
@@ -68,7 +105,7 @@ This page contains information about the new features, improvements, known issue
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 - There can be timeouts during docker-compose up if there are several services being started. See [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) and [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
 
-## Docker Desktop Community 3.0.2
+## Docker Desktop 3.0.2
 2020-12-18
 
 > [Download](https://desktop.docker.com/mac/stable/50996/Docker.dmg)
@@ -84,7 +121,7 @@ This page contains information about the new features, improvements, known issue
 
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 
-## Docker Desktop Community 3.0.1
+## Docker Desktop 3.0.1
 2020-12-11
 
 > [Download](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
@@ -99,7 +136,7 @@ This page contains information about the new features, improvements, known issue
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 
-## Docker Desktop Community 3.0.0
+## Docker Desktop 3.0.0
 2020-12-10
 
 > [Download](https://desktop.docker.com/mac/stable/50684/Docker.dmg)

@@ -16,10 +16,48 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
-## Docker Desktop Community 3.1.0
+## Docker Desktop 3.2.0
+2021-03-01
+
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- The Docker Dashboard opens automatically when you start Docker Desktop.
+- The Docker Dashboard displays a tip once a week.
+
+### Upgrades
+
+- [Docker Engine 20.10.3](https://docs.docker.com/engine/release-notes/#20103)
+- [Docker Compose 1.28.5](https://github.com/docker/compose/releases/tag/1.28.5)
+- [Compose CLI v1.0.9](https://github.com/docker/compose-cli/tree/v1.0.9)
+- [Docker Hub Tool v0.3.0](https://github.com/docker/hub-tool/releases/tag/v0.3.0)
+- [QEMU 5.0.1](https://wiki.qemu.org/ChangeLog/5.0)
+- [Amazon ECR Credential Helper v0.5.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.5.0)
+- [Alpine 3.13](https://alpinelinux.org/posts/Alpine-3.13.0-released.html)
+- [Kubernetes 1.19.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.7)
+- [Go 1.16](https://golang.org/doc/go1.16)
+
+### Deprecation
+
+- Docker Desktop cannot be installed on Windows 1709 (build 16299) anymore.
+
+### Bug fixes and minor changes
+
+- Fixed an issue on the container detail screen where the buttons would disappear when scrolling the logs. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160)
+- Fixed an issue when port forwarding multiple ports with an IPv6 container network. Fixes [docker/for-mac#5247](https://github.com/docker/for-mac/issues/5247)
+- Fixed a regression where `docker load` could not use an xz archive anymore. Fixes [docker/for-win#10364](https://github.com/docker/for-win/issues/10364)
+- Fixed an issue that caused the WSL 2 backend shutdown process to interfere with Windows shutdown. Fixes [docker/for-win#5825](https://github.com/docker/for-win/issues/5825) [docker/for-win#6933](https://github.com/docker/for-win/issues/6933) [docker/for-win#6446](https://github.com/docker/for-win/issues/6446)
+- Fixed creds store using `desktop.exe` from WSL 2. Fixes [docker/compose-cli#1181](https://github.com/docker/compose-cli/issues/1181)
+- Fixed a navigation issue in the **Containers / Apps** view. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160#issuecomment-764660660)
+- Fixed container instance view with long container/image name. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160)
+- Fixed an issue when binding ports on specific IPs. Note: It may now take a bit of time before the `docker inspect` command shows the open ports. Fixes [docker/for-win#10008](https://github.com/docker/for-win/issues/10008)
+- Fixed an issue where an image deleted from the Docker dashboard was still displayed on the **Images** view.
+
+## Docker Desktop 3.1.0
 2021-01-14
 
-> [Download](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -36,7 +74,7 @@ This page contains information about the new features, improvements, known issue
 - Fixed UI reliability issues when users create or delete a lot of objects in batches.
 - Redesigned the **Support** UI to improve usability.
 
-## Docker Desktop Community 3.0.4
+## Docker Desktop 3.0.4
 2021-01-06
 
 > [Download](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe)
@@ -49,7 +87,7 @@ This page contains information about the new features, improvements, known issue
 
 - Fixed an issue that could cause Docker Desktop to fail to start after upgrading to 3.0.0. Fixes [docker/for-win#9755](https://github.com/docker/for-win/issues/9755).
 
-## Docker Desktop Community 3.0.0
+## Docker Desktop 3.0.0
 2020-12-10
 
 > [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)

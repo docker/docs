@@ -83,7 +83,7 @@ obj/
 
     The `docker build` step here will be much faster than method 1, as all the artifacts are built outside of the `docker build` step and the size of the base     image is much smaller compared to the build base image.
 
-    This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Addittionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
+    This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Additionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
 
       ```dockerfile
       FROM mcr.microsoft.com/dotnet/core/aspnet:3.1

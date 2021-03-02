@@ -119,13 +119,13 @@ services:
   build:
    context: .
   ports:
-   - 8080:8080
+   - 8000:8000
    - 9229:9229
   environment:
-   - SERVER_PORT=8080
+   - SERVER_PORT=8000
    - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
-   - ./:/code
+   - ./:/app
   command: npm run debug
 
  mongo:
@@ -175,7 +175,7 @@ If all goes will you should see something similar:
 Now let’s test our API endpoint. Run the following curl command:
 
 ```shell
-$ curl --request GET --url http://localhost:8080/services/m/notes
+$ curl --request GET --url http://localhost:8000/notes
 ```
 
 You should receive the following response:
@@ -198,7 +198,7 @@ Click the **Open dedicated DevTools for Node** link. This opens the DevTools tha
 
 Let’s change the source code and then set a breakpoint.
 
-Add the following code to the server.js file on line 19 and save the file.
+Add the following code above the existing `server.use()` statement, and save the file.
 
 ```node
  server.use( '/foo', (req, res) => {
@@ -210,13 +210,13 @@ If you take a look at the terminal where our Compose application is running, you
 
  ![nodemon](images/nodemon.png){:width="800px"}
 
-Navigate back to the Chrome DevTools and set a breakpoint on line 20 and then run the following curl command to trigger the breakpoint.
+Navigate back to the Chrome DevTools and set a breakpoint on the line containing the `return res.json({ "foo": "bar" })` statement, and then run the following curl command to trigger the breakpoint.
 
 ```shell
-$ curl --request GET --url http://localhost:8080/foo
+$ curl --request GET --url http://localhost:8000/foo
 ```
 
-You should have seen the code break on line 20 and now you are able to use the debugger just like you would normally. You can inspect and watch variables, set conditional breakpoints, view stack traces, etc.
+You should have seen the code stop at the breakpoint and now you are able to use the debugger just like you would normally. You can inspect and watch variables, set conditional breakpoints, view stack traces, etc.
 
 ## Next steps
 
