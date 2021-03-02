@@ -50,6 +50,10 @@ This page contains information about the new features, improvements, known issue
 - Fixed an issue when binding ports on specific IPs. Note: It may now take a bit of time before the `docker inspect` command shows the open ports. Fixes [docker/for-mac#4541](https://github.com/docker/for-mac/issues/4541)
 - Fixed an issue where an image deleted from the Docker dashboard was still displayed on the **Images** view.
 
+### Known issue
+
+Docker Desktop can sometimes fail to start after upgrading to version 3.2.0. We are working on a fix for this issue. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.1.0](#docker-desktop-310). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+
 ## Docker Desktop 3.1.0
 2021-01-14
 

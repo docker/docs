@@ -84,27 +84,14 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg-agent \
-        software-properties-common
+        gnupg
     ```
 
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
-    ```
+    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-    Verify that you now have the key with the fingerprint
-    `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`, by searching for the
-    last 8 characters of the fingerprint.
-
-    ```bash
-    $ sudo apt-key fingerprint 0EBFCD88
-
-    pub   4096R/0EBFCD88 2017-02-22
-          Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-    uid                  Docker Release (CE deb) <docker@docker.com>
-    sub   4096R/F273FCD8 2017-02-22
     ```
 
 3.  Use the following command to set up the **stable** repository. To add the
@@ -127,30 +114,27 @@ from the repository.
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=amd64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    $ echo \
+      "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
     </div>
     <div id="armhf_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=armhf] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    $ echo \
+      "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
     </div>
     <div id="arm64_repo" class="tab-pane fade" markdown="1">
 
     ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=arm64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    $ echo \
+      "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
     </div>
