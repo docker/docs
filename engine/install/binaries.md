@@ -86,7 +86,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 2.  Extract the archive using the `tar` utility. The `dockerd` and `docker`
     binaries are extracted.
 
-    ```bash
+    ```console
     $ tar xzvf /path/to/<FILE>.tar.gz
     ```
 
@@ -94,13 +94,13 @@ instructions for enabling and configuring AppArmor or SELinux.
     as `/usr/bin/`. If you skip this step, you must provide the path to the
     executable when you invoke `docker` or `dockerd` commands.
 
-    ```bash
+    ```console
     $ sudo cp docker/* /usr/bin/
     ```
 
 4.  Start the Docker daemon:
 
-    ```bash
+    ```console
     $ sudo dockerd &
     ```
 
@@ -111,7 +111,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 5.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
@@ -132,7 +132,7 @@ The macOS binary includes the Docker client only. It does not include the
 2.  Extract the archive using the `tar` utility. The `docker` binary is
     extracted.
 
-    ```bash
+    ```console
     $ tar xzvf /path/to/<FILE>.tar.gz
     ```
 
@@ -140,7 +140,7 @@ The macOS binary includes the Docker client only. It does not include the
     as `/usr/local/bin/`. If you skip this step, you must provide the path to the
     executable when you invoke `docker` or `dockerd` commands.
 
-    ```bash
+    ```console
     $ sudo cp docker/docker /usr/local/bin/
     ```
 
@@ -148,7 +148,7 @@ The macOS binary includes the Docker client only. It does not include the
     image. The value of `<hostname>` is a hostname or IP address running the
     Docker daemon and accessible to the client.
 
-    ```bash
+    ```console
     $ sudo docker -H <hostname> run hello-world
     ```
 

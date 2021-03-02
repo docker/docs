@@ -17,6 +17,27 @@
 .highlight .gi { color: #00aa00 } /* Generic.Inserted */
 .highlight .go { color: #888888 } /* Generic.Output */
 .highlight .gp { color: #555555 } /* Generic.Prompt */
+
+// Prevent selecting comments, command-output and command-prompt in shell
+// examples that use the "console" lexer/highlighter to allow easier copying.
+// See https://github.com/rouge-ruby/rouge/issues/1023
+.highlight .c,
+.highlight .go,
+.highlight .gp
+{
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none
+}
+
+// Show a "text" cursor for the prompt. Even though the prompt itself is not
+// selectable, make it appear as if it is, so that users don't get confused
+// when they try to select an example for copying.
+.highlight .gp {
+  cursor: text;
+}
+
 .highlight .gs {} /* Generic.Strong */
 .highlight .gu { color: #800080 } /* Generic.Subheading */
 .highlight .gt { color: #aa0000 } /* Generic.Traceback */

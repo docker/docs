@@ -228,7 +228,7 @@ Containers: 0
 Images: 0
 Storage Driver: overlay2
  Backing Filesystem: xfs
-<output truncated>
+<...>
 ```
 
 To change the storage driver, see the specific instructions for the new storage
