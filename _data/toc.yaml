@@ -1186,6 +1186,8 @@ manuals:
   section:
   - path: /compose/
     title: Overview of Docker Compose
+  - path: /compose/cli-command/
+    title: Docker Compose in the Docker CLI
   - path: /compose/install/
     title: Install Compose
   - path: /compose/gettingstarted/
