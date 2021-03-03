@@ -1,6 +1,6 @@
 module github.com/docker/docker.github.io/upload-website-config
 
-go 1.14
+go 1.15
 
 require (
 	github.com/aws/aws-sdk-go v1.29.24
