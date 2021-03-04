@@ -16,7 +16,7 @@ The quickest way to spin up a full Notary service for testing and development
 purposes is to use the Docker compose file in the
 [Notary project](https://github.com/docker/notary).
 
-```bash
+```console
 $ git clone https://github.com/theupdateframework/notary.git
 $ cd notary
 $ docker-compose up
@@ -36,7 +36,7 @@ it, you must use the root CA file in `fixtures/root-ca.crt`.
 
 For example, to connect using OpenSSL:
 
-```bash
+```console
 $ openssl s_client -connect <docker host>:4443 -CAfile fixtures/root-ca.crt -no_ssl3 -no_ssl2
 ```
 
@@ -71,13 +71,13 @@ the following command line arguments:
 - `-config=<config file>` - specify the path to the JSON configuration file.
 
 - `-debug` - Passing this flag enables the debugging server on `localhost:8080`.
-	The debugging server provides
-	[pprof](https://golang.org/pkg/net/http/pprof) and
-	[expvar](ttps://golang.org/pkg/expvar/) endpoints.
-	(Remember, this is localhost with respect to the running container - this endpoint is not
-	exposed from the container).
-
-	This option can also be set in the configuration file.
+    The debugging server provides
+    [pprof](https://golang.org/pkg/net/http/pprof) and
+    [expvar](ttps://golang.org/pkg/expvar/) endpoints.
+    (Remember, this is localhost with respect to the running container - this endpoint is not
+    exposed from the container).
+    
+    This option can also be set in the configuration file.
 
 - `-logf=<format>` - This flag sets the output format for the logs. Possible
     formats are "json" and "logfmt".
@@ -105,9 +105,11 @@ For instance, if you wanted to override the storage URL of the Notary server
 configuration:
 
 ```json
-"storage": {
-  "backend": "mysql",
-  "db_url": "dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"
+{
+  "storage": {
+    "backend": "mysql",
+    "db_url": "dockercondemo:dockercondemo@tcp(notary-mysql)/dockercondemo"
+  }
 }
 ```
 
@@ -130,52 +132,57 @@ For example, let's say that you wanted to run a single Notary server instance:
 One way to do this would be:
 
 1. Generate your own TLS certificate and key as `server.crt` and `server.key`,
-	and put them in the directory `/tmp/server-configdir`.
+    and put them in the directory `/tmp/server-configdir`.
 
 2. Write the following configuration file to `/tmp/server-configdir/config.json`:
 
-		{
-		  "server": {
-		    "http_addr": ":4443",
-		    "tls_key_file": "./server.key",
-			"tls_cert_file": "./server.crt"
-		  },
-		  "trust_service": {
-		    "type": "remote",
-		    "hostname": "notarysigner",
-		    "port": "7899",
-		    "tls_ca_file": "./root-ca.crt",
-		    "key_algorithm": "ecdsa",
-		    "tls_client_cert": "./notary-server.crt",
-		    "tls_client_key": "./notary-server.key"
-		  },
-		  "storage": {
-		    "backend": "mysql",
-		    "db_url": "server@tcp(mysql:3306)/notaryserver?parseTime=True"
-		  }
-		}
+```json
+{
+  "server": {
+    "http_addr": ":4443",
+    "tls_key_file": "./server.key",
+    "tls_cert_file": "./server.crt"
+  },
+  "trust_service": {
+    "type": "remote",
+    "hostname": "notarysigner",
+    "port": "7899",
+    "tls_ca_file": "./root-ca.crt",
+    "key_algorithm": "ecdsa",
+    "tls_client_cert": "./notary-server.crt",
+    "tls_client_key": "./notary-server.key"
+  },
+  "storage": {
+    "backend": "mysql",
+    "db_url": "server@tcp(mysql:3306)/notaryserver?parseTime=True"
+  }
+}
+```
 
-	NWe include a remote trust service and a database storage
-	type to demonstrate how environment variables can override
-	configuration parameters.
+    NWe include a remote trust service and a database storage
+    type to demonstrate how environment variables can override
+    configuration parameters.
 
 3. Run the following command (assuming you've already built or pulled a Notary server docker image):
 
-		$ docker run \
-			-p "4443:4443" \
-			-v /tmp/server-configdir:/etc/docker/notary-server/ \
-			-e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
-			-e NOTARY_SERVER_STORAGE_BACKEND=memory \
-			-e NOTARY_SERVER_LOGGING_LEVEL=debug \
-			notary_server \
-				-config=/etc/docker/notary-server/config.json \
-				-logf=json
-		{"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
-		{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
+```console
+$ docker run \
+    -p "4443:4443" \
+    -v /tmp/server-configdir:/etc/docker/notary-server/ \
+    -e NOTARY_SERVER_TRUST_SERVICE_TYPE=local \
+    -e NOTARY_SERVER_STORAGE_BACKEND=memory \
+    -e NOTARY_SERVER_LOGGING_LEVEL=debug \
+    notary_server \
+        -config=/etc/docker/notary-server/config.json \
+        -logf=json
+
+{"level":"info","msg":"Version: 0.2, Git commit: 619f8cf","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using local signing service, which requires ED25519. Ignoring all other trust_service parameters, including keyAlgorithm","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Using memory backend","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting Server","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Enabling TLS","time":"2016-02-25T00:53:59Z"}
+{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
+```
 
 You can do the same using
 [Docker Compose](/compose/) by setting volumes,
@@ -207,7 +214,7 @@ user's home directory, at `~/.docker/trust`. To streamline using Notary from
 the command line, create an alias that maps the user's `trust` directory to
 the system's `ca-certificates` directory.
 
-```bash
+```console
 $ alias notary="notary -s https://<dtr-url> -d ~/.docker/trust --tlscacert /usr/local/share/ca-certificates/<dtr-url>.crt"
 ```
 
