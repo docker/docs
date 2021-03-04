@@ -12,7 +12,9 @@ Welcome to the tech preview of Docker Desktop for Apple M1. This tech preview is
 >
 > Docker Desktop on Apple M1 chip is still under development. We recommend that you do not use tech preview builds in production environments.
 
-## Download
+## Docker Desktop preview 3.1.0
+
+2021-02-11
 
 Click the following link to download the Apple M1 tech preview build:
 
