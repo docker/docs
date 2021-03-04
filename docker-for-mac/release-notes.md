@@ -27,7 +27,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Bug fixes and minor changes
 
-- Fixed a problem starting Docker Desktop 3.2.0 during a canary release. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406)
+- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
 
 ## Docker Desktop 3.2.0
 2021-03-01
@@ -65,7 +65,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Known issue
 
-Docker Desktop can sometimes fail to start after upgrading to version 3.2.0. We are working on a fix for this issue. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.2.1](#docker-desktop-321). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+Docker Desktop can sometimes fail to start after updating to version 3.2.0. We are working on a fix for this issue. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.2.1](#docker-desktop-321). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
 
 ## Docker Desktop 3.1.0
 2021-01-14
