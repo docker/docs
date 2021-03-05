@@ -17,7 +17,7 @@ This page contains information about the new features, improvements, known issue
 {: .important }
 
 ## Docker Desktop 3.2.1
-2021-03-04
+2021-03-05
 
 > [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
 
