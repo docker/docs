@@ -106,8 +106,8 @@ You'll notice a few flags being used. Here's some more info on them:
 ## The Docker Dashboard
 
 Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. It gives you quick
-access to container logs, lets you get a shell inside the container, and lets you
+you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows. 
+It gives you quick access to container logs, lets you get a shell inside the container, and lets you
 easily manage container lifecycle (stop, remove, etc.).
 
 To access the dashboard, follow the instructions for either 
