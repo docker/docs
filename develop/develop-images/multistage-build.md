@@ -199,4 +199,4 @@ RUN g++ -o /binary source.cpp
 
 ## Version compatibility
 
-Multistage build syntax was introduced in Docker Engine 17.05
+Multistage build syntax was introduced in Docker Engine 17.05.
