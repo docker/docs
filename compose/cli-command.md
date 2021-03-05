@@ -12,9 +12,9 @@ title: Compose CLI Tech Preview
 > Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
 {: .important}
 
-The Docker CLI now supports the `compose` command to include (most of) the docker-compose features and flags in the Docker CLI, without the need for a separate tool.
+The Docker CLI now supports the `compose` command to include most of the `docker-compose` features and flags in the Docker CLI, without the need for a separate tool.
 
-You can just replace the dash with a space when you use `docker-compose` to just adopt `docker compose`. You can also use them interchangeably, so that you are not locked-in with the new compose command and can still use docker-compose if needed.
+You can just replace the dash (`-`) with a space when you use `docker-compose` to just adopt `docker compose`. You can also use them interchangeably, so that you are not locked-in with the new compose command and can still use `docker-compose` if needed.
 
 With the introduction of the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}, a clean distinction has been made between the Compose YAML file model and the `docker-compose` implementation. This has made it possible to introduce [Amazon ECS](/cloud/ecs-integration) and [Microsoft ACI](/cloud/aci-integration) support in the Docker CLI so you can start a Compose application on cloud platforms just by switching the Docker context. With this solid backbone in place, we have added Compose in the Docker CLI as a first-class command.
 As the Compose specification evolves, new features land faster in the Docker CLI. While `docker-compose` is still supported and maintained, Compose in the Docker CLI Go implementation relies directly on the compose-go bindings which are maintained as part of the specification. This allows us to include community proposals, experimental implementations by the Docker CLI and/or Engine, and deliver features faster to users. Compose in the Docker CLI already supports some of the newer additions to the Compose specification such as profiles and GPU devices.

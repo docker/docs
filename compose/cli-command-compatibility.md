@@ -1,7 +1,7 @@
 ---
-description: Docker Compose command compatibility with docker-compose
+description: Compose command compatibility with docker-compose
 keywords: documentation, docs, docker, compose, containers
-title: Docker Compose command compatibility with docker-compose
+title: Compose command compatibility with docker-compose
 ---
 
 The `compose` command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. However, there are a few remaining flags that have not been implemented yet. We are prioritizing the implementation of those based on usage metrics and user feedback.
@@ -21,12 +21,10 @@ Let us know if these commands are a higher priority for your usecases.
 * `compose config --services`
 * `compose config --volumes`
 * `compose config --hash`
-* `compose events`
 * `compose images`
 * `compose port`
 * `compose pull --ignore-pull-failures`
 * `compose push --ignore-push-failures`
-* `compose run --service-ports`
 
 ## Flags that will not be implemented
 
