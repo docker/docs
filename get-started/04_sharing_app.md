@@ -9,15 +9,25 @@ description: Sharing our image we built for our example application so we can ru
 Now that we've built an image, let's share it! To share Docker images, you have to use a Docker
 registry. The default registry is Docker Hub and is where all of the images we've used have come from.
 
+> **Docker ID**
+>
+> A Docker ID allows you to access Docker Hub which is the world's largest library and community for container images. Create a [Docker ID](https://hub.docker.com/signup){:target="_blank" rel="noopener" class="_"} for free if you don't have one.
+
 ## Create a repo
 
 To push an image, we first need to create a repository on Docker Hub.
 
-1. Go to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} and log in if you need to.
+1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} and share images using Docker Hub.
+
+2. Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
 
 2. Click the **Create Repository** button.
 
 3. For the repo name, use `getting-started`. Make sure the Visibility is `Public`.
+
+    > **Private repositories**
+    >
+    > Did you know that Docker offers private repositories which allows you to restrict content to specific users or teams? Check out the details on the [Docker pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} page.
 
 4. Click the **Create** button!
 
