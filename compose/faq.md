@@ -40,9 +40,12 @@ add an explicit signal handler for `SIGTERM`.
 
 * Set the `stop_signal` to a signal which the application knows how to handle:
 
-      web:
-        build: .
-        stop_signal: SIGINT
+```yaml
+services:
+  web:
+    build: .
+    stop_signal: SIGINT
+```
 
 * If you can't modify the application, wrap the application in a lightweight init
 system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
@@ -83,8 +86,8 @@ Yes. [Yaml is a superset of json](https://stackoverflow.com/a/1729545/444646) so
 any JSON file should be valid Yaml.  To use a JSON file with Compose,
 specify the filename to use, for example:
 
-```bash
-docker-compose -f docker-compose.json up
+```console
+$ docker-compose -f docker-compose.json up
 ```
 
 ## Should I include my code with `COPY`/`ADD` or a volume?
@@ -106,7 +109,7 @@ the directory contents of the image.
 ## Where can I find example compose files?
 
 There are [many examples of Compose files on
-github](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
+GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
 
 
 ## Compose documentation

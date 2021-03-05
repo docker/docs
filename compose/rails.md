@@ -10,25 +10,28 @@ a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
 ### Define the project
 
 
-Start by setting up the files needed to build the app. The app will run inside a Docker container containing its dependencies. Defining dependencies is done using a file called `Dockerfile`. To begin with, the 
-Dockerfile consists of:
+Start by setting up the files needed to build the app. The app will run inside a
+Docker container containing its dependencies. Defining dependencies is done using
+a file called `Dockerfile`. To begin with, the  Dockerfile consists of:
 
-    FROM ruby:2.5
-    RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-    WORKDIR /myapp
-    COPY Gemfile /myapp/Gemfile
-    COPY Gemfile.lock /myapp/Gemfile.lock
-    RUN bundle install
-    COPY . /myapp
+```dockerfile
+FROM ruby:2.5
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+WORKDIR /myapp
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
+COPY . /myapp
 
-    # Add a script to be executed every time the container starts.
-    COPY entrypoint.sh /usr/bin/
-    RUN chmod +x /usr/bin/entrypoint.sh
-    ENTRYPOINT ["entrypoint.sh"]
-    EXPOSE 3000
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
 
-    # Start the main process.
-    CMD ["rails", "server", "-b", "0.0.0.0"]
+# Configure the main process to run when running the image
+CMD ["rails", "server", "-b", "0.0.0.0"]
+```
 
 That'll put your application code inside an image that builds a container
 with Ruby, Bundler and all your dependencies inside it. For more information on
@@ -43,8 +46,9 @@ in a moment by `rails new`.
 
 Create an empty `Gemfile.lock` to build our `Dockerfile`.
 
-    touch Gemfile.lock
-
+```console
+$ touch Gemfile.lock
+```
 Next, provide an entrypoint script to fix a Rails-specific issue that
 prevents the server from restarting when a certain `server.pid` file pre-exists.
 This script will be executed every time the container gets started.
@@ -96,7 +100,9 @@ services:
 With those files in place, you can now generate the Rails skeleton app
 using [docker-compose run](reference/run.md):
 
-    docker-compose run --no-deps web rails new . --force --database=postgresql
+```console
+$ docker-compose run --no-deps web rails new . --force --database=postgresql
+```
 
 First, Compose builds the image for the `web` service using the `Dockerfile`.
 The `--no-deps` tells Compose not to start linked services. Then it runs
@@ -105,8 +111,9 @@ should have generated a fresh app.
 
 List the files.
 
-```bash
+```console
 $ ls -l
+
 total 64
 -rw-r--r--   1 vmb  staff   222 Jun  7 12:05 Dockerfile
 -rw-r--r--   1 vmb  staff  1738 Jun  7 12:09 Gemfile
@@ -133,8 +140,8 @@ If you are running Docker on Linux, the files `rails new` created are owned by
 root. This happens because the container runs as the root user. If this is the
 case, change the ownership of the new files.
 
-```bash
-sudo chown -R $USER:$USER .
+```console
+$ sudo chown -R $USER:$USER .
 ```
 
 If you are running Docker on Mac or Windows, you should already have ownership
@@ -144,8 +151,9 @@ Now that you’ve got a new Gemfile, you need to build the image again. (This, a
 changes to the `Gemfile` or the Dockerfile, should be the only times you’ll need
 to rebuild.)
 
-    docker-compose build
-
+```console
+$ docker-compose build
+```
 
 ### Connect the database
 
@@ -156,7 +164,7 @@ align with the defaults set by the `postgres` image.
 
 Replace the contents of `config/database.yml` with the following:
 
-```none
+```yaml
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -177,8 +185,9 @@ test:
 
 You can now boot the app with [docker-compose up](reference/up.md):
 
-    docker-compose up
-
+```console
+$ docker-compose up
+```
 If all's well, you should see some PostgreSQL output.
 
 ```bash
@@ -196,13 +205,14 @@ db_1   | 2018-03-21 20:18:37.772 UTC [1] LOG:  database system is ready to accep
 
 Finally, you need to create the database. In another terminal, run:
 
-    docker-compose run web rake db:create
-
+```console
+$ docker-compose run web rake db:create
+```
 Here is an example of the output from that command:
 
-```none
-vmb at snapair in ~/sandbox/rails
+```console
 $ docker-compose run web rake db:create
+
 Starting rails_db_1 ... done
 Created database 'myapp_development'
 Created database 'myapp_test'
@@ -224,9 +234,9 @@ your project directory. You can use the same terminal window in which you
 started the database, or another one where you have access to a command prompt.
 This is a clean way to stop the application.
 
-```none
-vmb at snapair in ~/sandbox/rails
+```console
 $ docker-compose down
+
 Stopping rails_web_1 ... done
 Stopping rails_db_1 ... done
 Removing rails_web_run_1 ... done
@@ -254,8 +264,9 @@ in our first example to `3001`. Make the change to the Compose file to expose
 port `3000` on the container through a new port, `3001`, on the host, and save
 the changes:
 
-```none
-ports: - "3001:3000"
+```yaml
+ports:
+  - "3001:3000"
 ```
 
 Now, rebuild and restart the app with `docker-compose up --build`.

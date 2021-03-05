@@ -16,10 +16,23 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+## Docker Desktop 3.2.1
+2021-03-05
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+
+### Upgrades
+
+- [Docker Engine 20.10.5](https://docs.docker.com/engine/release-notes/#20105)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+
 ## Docker Desktop 3.2.0
 2021-03-01
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg)
 
 ### New
 
@@ -52,7 +65,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Known issue
 
-Docker Desktop can sometimes fail to start after upgrading to version 3.2.0. We are working on a fix for this issue. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.1.0](#docker-desktop-310). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+Docker Desktop can sometimes fail to start after updating to version 3.2.0. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.2.1](#docker-desktop-321). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
 
 ## Docker Desktop 3.1.0
 2021-01-14

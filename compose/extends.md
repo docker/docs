@@ -60,41 +60,44 @@ services.
 
 **docker-compose.yml**
 
-    web:
-      image: example/my_web_app:latest
-      depends_on:
-        - db
-        - cache
+```yaml
+web:
+  image: example/my_web_app:latest
+  depends_on:
+    - db
+    - cache
 
-    db:
-      image: postgres:latest
+db:
+  image: postgres:latest
 
-    cache:
-      image: redis:latest
+cache:
+  image: redis:latest
+```
 
 In this example the development configuration exposes some ports to the
 host, mounts our code as a volume, and builds the web image.
 
 **docker-compose.override.yml**
 
+```yaml
+web:
+  build: .
+  volumes:
+    - '.:/code'
+  ports:
+    - 8883:80
+  environment:
+    DEBUG: 'true'
 
-    web:
-      build: .
-      volumes:
-        - '.:/code'
-      ports:
-        - 8883:80
-      environment:
-        DEBUG: 'true'
+db:
+  command: '-d'
+  ports:
+    - 5432:5432
 
-    db:
-      command: '-d'
-      ports:
-        - 5432:5432
-
-    cache:
-      ports:
-        - 6379:6379
+cache:
+  ports:
+    - 6379:6379
+```
 
 When you run `docker-compose up` it reads the overrides automatically.
 
@@ -104,19 +107,23 @@ repo or managed by a different team).
 
 **docker-compose.prod.yml**
 
-    web:
-      ports:
-        - 80:80
-      environment:
-        PRODUCTION: 'true'
+```yaml
+web:
+  ports:
+    - 80:80
+  environment:
+    PRODUCTION: 'true'
 
-    cache:
-      environment:
-        TTL: '500'
+cache:
+  environment:
+    TTL: '500'
+```
 
 To deploy with this production Compose file you can run
 
-    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```console
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
 
 This deploys all three services using the configuration in
 `docker-compose.yml` and `docker-compose.prod.yml` (but not the
@@ -134,28 +141,33 @@ database backup.
 
 Start with a **docker-compose.yml**.
 
-    web:
-      image: example/my_web_app:latest
-      depends_on:
-        - db
+```yaml
+web:
+  image: example/my_web_app:latest
+  depends_on:
+    - db
 
-    db:
-      image: postgres:latest
+db:
+  image: postgres:latest
+```
 
 In a **docker-compose.admin.yml** add a new service to run the database
 export or backup.
 
+```yaml
     dbadmin:
       build: database_admin/
       depends_on:
         - db
+```
 
 To start a normal environment run `docker-compose up -d`. To run a database
 backup, include the `docker-compose.admin.yml` as well.
 
-    docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
-        run dbadmin db-backup
-
+```console
+$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
+  run dbadmin db-backup
+```
 
 ## Extending services
 
@@ -188,21 +200,27 @@ break anything.
 When defining any service in `docker-compose.yml`, you can declare that you are
 extending another service like this:
 
-    web:
-      extends:
-        file: common-services.yml
-        service: webapp
+```yaml
+services:
+  web:
+    extends:
+      file: common-services.yml
+      service: webapp
+```
 
 This instructs Compose to re-use the configuration for the `webapp` service
 defined in the `common-services.yml` file. Suppose that `common-services.yml`
 looks like this:
 
-    webapp:
-      build: .
-      ports:
-        - "8000:8000"
-      volumes:
-        - "/data"
+```yaml
+services:
+  webapp:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - "/data"
+```
 
 In this case, you get exactly the same result as if you wrote
 `docker-compose.yml` with the same `build`, `ports` and `volumes` configuration
@@ -211,31 +229,37 @@ values defined directly under `web`.
 You can go further and define (or re-define) configuration locally in
 `docker-compose.yml`:
 
-    web:
-      extends:
-        file: common-services.yml
-        service: webapp
-      environment:
-        - DEBUG=1
-      cpu_shares: 5
+```yaml
+services:
+  web:
+    extends:
+      file: common-services.yml
+      service: webapp
+    environment:
+      - DEBUG=1
+    cpu_shares: 5
 
-    important_web:
-      extends: web
-      cpu_shares: 10
+  important_web:
+    extends: web
+    cpu_shares: 10
+```
 
 You can also write other services and link your `web` service to them:
 
-    web:
-      extends:
-        file: common-services.yml
-        service: webapp
-      environment:
-        - DEBUG=1
-      cpu_shares: 5
-      depends_on:
-        - db
-    db:
-      image: postgres
+```yaml
+services:
+  web:
+    extends:
+      file: common-services.yml
+      service: webapp
+    environment:
+      - DEBUG=1
+    cpu_shares: 5
+    depends_on:
+      - db
+  db:
+    image: postgres
+```
 
 ### Example use case
 
@@ -246,34 +270,40 @@ codebase and share many configuration options.
 
 In a **common.yml** we define the common configuration:
 
-    app:
-      build: .
-      environment:
-        CONFIG_FILE_PATH: /code/config
-        API_KEY: xxxyyy
-      cpu_shares: 5
+```yaml
+services:
+  app:
+    build: .
+    environment:
+      CONFIG_FILE_PATH: /code/config
+      API_KEY: xxxyyy
+    cpu_shares: 5
+```
 
 In a **docker-compose.yml** we define the concrete services which use the
 common configuration:
 
-    webapp:
-      extends:
-        file: common.yml
-        service: app
-      command: /code/run_web_app
-      ports:
-        - 8080:8080
-      depends_on:
-        - queue
-        - db
+```yaml
+services:
+  webapp:
+    extends:
+      file: common.yml
+      service: app
+    command: /code/run_web_app
+    ports:
+      - 8080:8080
+    depends_on:
+      - queue
+      - db
 
-    queue_worker:
-      extends:
-        file: common.yml
-        service: app
-      command: /code/run_worker
-      depends_on:
-        - queue
+  queue_worker:
+    extends:
+      file: common.yml
+      service: app
+    command: /code/run_worker
+    depends_on:
+      - queue
+```
 
 ## Adding and overriding configuration
 
@@ -284,14 +314,32 @@ service, the local value *replaces* or *extends* the original value.
 For single-value options like `image`, `command` or `mem_limit`, the new value
 replaces the old value.
 
-    # original service
+original service:
+
+```yaml
+services:
+  myservice:
+    # ...
     command: python app.py
+```
 
-    # local service
-    command: python otherapp.py
+local service:
 
-    # result
+```yaml
+services:
+  myservice:
+    # ...
     command: python otherapp.py
+```
+
+result:
+
+```yaml
+services:
+  myservice:
+    # ...
+    command: python otherapp.py
+```
 
 >  `build` and `image` in Compose file version 1
 >
@@ -310,61 +358,114 @@ replaces the old value.
 For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
 `dns_search`, and `tmpfs`, Compose concatenates both sets of values:
 
-    # original service
+original service:
+
+```yaml
+services:
+  myservice:
+    # ...
     expose:
       - "3000"
+```
 
-    # local service
+local service:
+
+```yaml
+services:
+  myservice:
+    # ...
     expose:
       - "4000"
       - "5000"
+```
 
-    # result
+result:
+
+```yaml
+services:
+  myservice:
+    # ...
     expose:
       - "3000"
       - "4000"
       - "5000"
+```
 
 In the case of `environment`, `labels`, `volumes`, and `devices`, Compose
 "merges" entries together with locally-defined values taking precedence. For
 `environment` and `labels`, the environment variable or label name determines
 which value is used:
 
-    # original service
+original service:
+
+```yaml
+services:
+  myservice:
+    # ...
     environment:
       - FOO=original
       - BAR=original
+```
 
-    # local service
+local service:
+
+```yaml
+services:
+  myservice:
+    # ...
     environment:
       - BAR=local
       - BAZ=local
+```
 
-    # result
+result
+
+```yaml
+services:
+  myservice:
+    # ...
     environment:
       - FOO=original
       - BAR=local
       - BAZ=local
+```
 
 Entries for `volumes` and `devices` are merged using the mount path in the
 container:
 
-    # original service
+original service:
+
+```yaml
+services:
+  myservice:
+    # ...
     volumes:
       - ./original:/foo
       - ./original:/bar
+```
 
-    # local service
+local service:
+
+```yaml
+services:
+  myservice:
+    # ...
     volumes:
       - ./local:/bar
       - ./local:/baz
+```
 
-    # result
+result:
+
+```yaml
+services:
+  myservice:
+    # ...
     volumes:
       - ./original:/foo
       - ./local:/bar
       - ./local:/baz
-
+```
 
 
 ## Compose documentation

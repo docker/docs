@@ -16,10 +16,19 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+## Docker Desktop 3.2.1
+2021-03-05
+
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker Engine 20.10.5](https://docs.docker.com/engine/release-notes/#20105)
+
 ## Docker Desktop 3.2.0
 2021-03-01
 
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe)
 
 ### New
 

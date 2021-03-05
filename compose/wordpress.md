@@ -27,41 +27,43 @@ Compose to set up and run WordPress. Before starting, make sure you have
 
     For example, if you named your directory `my_wordpress`:
 
-        cd my_wordpress/
+    ```console
+    $ cd my_wordpress/
+    ```
 
 3.  Create a `docker-compose.yml` file that starts your
     `WordPress` blog and a separate `MySQL` instance with a volume
     mount for data persistence:
 
-    ```none
-    version: '3.3'
-
+    ```yaml
+    version: "{{ site.compose_file_v3 }}"
+    
     services:
-       db:
-         image: mysql:5.7
-         volumes:
-           - db_data:/var/lib/mysql
-         restart: always
-         environment:
-           MYSQL_ROOT_PASSWORD: somewordpress
-           MYSQL_DATABASE: wordpress
-           MYSQL_USER: wordpress
-           MYSQL_PASSWORD: wordpress
-
-       wordpress:
-         depends_on:
-           - db
-         image: wordpress:latest
-         ports:
-           - "8000:80"
-         restart: always
-         environment:
-           WORDPRESS_DB_HOST: db:3306
-           WORDPRESS_DB_USER: wordpress
-           WORDPRESS_DB_PASSWORD: wordpress
-           WORDPRESS_DB_NAME: wordpress
+      db:
+        image: mysql:5.7
+        volumes:
+          - db_data:/var/lib/mysql
+        restart: always
+        environment:
+          MYSQL_ROOT_PASSWORD: somewordpress
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: wordpress
+          MYSQL_PASSWORD: wordpress
+    
+      wordpress:
+        depends_on:
+          - db
+        image: wordpress:latest
+        ports:
+          - "8000:80"
+        restart: always
+        environment:
+          WORDPRESS_DB_HOST: db:3306
+          WORDPRESS_DB_USER: wordpress
+          WORDPRESS_DB_PASSWORD: wordpress
+          WORDPRESS_DB_NAME: wordpress
     volumes:
-        db_data: {}
+      db_data: {}
     ```
 
    > **Notes**:
@@ -80,14 +82,15 @@ This runs [`docker-compose up`](reference/up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 
-```
+```console
 $ docker-compose up -d
+
 Creating network "my_wordpress_default" with the default driver
 Pulling db (mysql:5.7)...
 5.7: Pulling from library/mysql
 efd26ecc9548: Pull complete
 a3ed95caeb02: Pull complete
-...
+<...>
 Digest: sha256:34a0aca88e85f2efa5edff1cea77cf5d3147ad93545dbec99cfe705b03c520de
 Status: Downloaded newer image for mysql:5.7
 Pulling wordpress (wordpress:latest)...
@@ -95,7 +98,7 @@ latest: Pulling from library/wordpress
 efd26ecc9548: Already exists
 a3ed95caeb02: Pull complete
 589a9d9a7c64: Pull complete
-...
+<...>
 Digest: sha256:ed28506ae44d5def89075fd5c01456610cd6c64006addfe5210b8c675881aff6
 Status: Downloaded newer image for wordpress:latest
 Creating my_wordpress_db_1
