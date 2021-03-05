@@ -27,7 +27,7 @@ for Docker Engine.
 
 ### Client
 
-* Revert [docker/cli#2960](https://github.com/docker/cli/pull/2960) to fix hanging in `docker start --attach` and remove spurious "Unsupported signal: <nil>. Discarding." messages [docker/cli#2987](https://github.com/docker/cli/pull/2987)
+* Revert [docker/cli#2960](https://github.com/docker/cli/pull/2960) to fix hanging in `docker start --attach` and remove spurious `Unsupported signal: <nil>. Discarding` messages. [docker/cli#2987](https://github.com/docker/cli/pull/2987).
 
 ## 20.10.4
 2021-02-26
