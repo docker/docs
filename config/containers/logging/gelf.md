@@ -74,8 +74,8 @@ The `gelf` logging driver supports the following options:
 | `env-regex`                | optional  | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                                        | `--log-opt env-regex=^(os|customer)`                |
 
 > **Note**
-> The `gelf` driver does not currently support tls for tcp connections.
-> Messages sent to TLS-Protected inputs will silently fail
+> 
+> The `gelf` driver does not support TLS for TCP connections. Messages sent to TLS-protected inputs can silently fail.
 
 ### Examples
 
