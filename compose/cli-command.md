@@ -4,6 +4,7 @@ keywords: documentation, docs, docker, compose, containers
 title: Compose CLI Tech Preview
 ---
 
+## New docker compose command
 
 > Important
 >
@@ -20,3 +21,19 @@ With the introduction of the [Compose specification](https://github.com/compose-
 As the Compose specification evolves, new features land faster in the Docker CLI. While `docker-compose` is still supported and maintained, Compose in the Docker CLI Go implementation relies directly on the compose-go bindings which are maintained as part of the specification. This allows us to include community proposals, experimental implementations by the Docker CLI and/or Engine, and deliver features faster to users. Compose in the Docker CLI already supports some of the newer additions to the Compose specification such as profiles and GPU devices.
 
 For more information about the flags that are not yet supported in the new `compose` command, see the [docker-compose compatibility list](cli-command-compatibility.md).
+
+## Installing the Compose CLI Tech Preview
+
+### Install Compose CLI Tech Preview on Mac and Windows
+
+**Docker Desktop for Mac and for Windows** version 3.1.0 and above includes the new Compose command along
+with Docker cli, so Windows and Mac users do not need to install it separately.
+For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+
+### Install Compose CLI Tech Preview on Linux
+
+You can install the new Compose CLI including this Tech Preview using the install script:
+
+```console
+curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+```
