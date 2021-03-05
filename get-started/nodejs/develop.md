@@ -184,7 +184,7 @@ Let’s change the source code and then set a breakpoint.
 
 Add the following code to the server.js file on line 19 and save the file.
 
-```node
+```js
  server.use( '/foo', (req, res) => {
    return res.json({ "foo": "bar" })
  })

@@ -35,7 +35,7 @@ Now, let’s add some code to handle our REST requests. We’ll use a mock serve
 
 Open this working directory in your IDE and add the following code into the `server.js` file.
 
-```node
+```js
 const ronin     = require( 'ronin-server' )
 const mocks     = require( 'ronin-mocks' )
 
@@ -72,7 +72,7 @@ $ curl http://localhost:8000/test
 
 Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
 
-```node
+```
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
