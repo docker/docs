@@ -39,6 +39,8 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 
 - Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208){: target="blank" rel="noopener" class=“”}.
 
+- Docker Desktop is incompatible with macOS Internet Sharing. See [docker/for-mac#5348](https://github.com/docker/for-mac/issues/5348){: target="blank" rel="noopener" class=“”}.
+
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
 
 ## Fixes since the Apple Silicon preview 7
