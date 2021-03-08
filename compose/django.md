@@ -228,7 +228,7 @@ In this section, you set up the database connection for Django.
 
 5. List running containers.
 
-   In another terminal window, list the running Docker processes with the `docker container ls` command.
+   In another terminal window, list the running Docker processes with the `docker ps` or `docker container ls` command.
 
    ```console
    $ docker ps
