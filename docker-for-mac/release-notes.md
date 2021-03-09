@@ -38,7 +38,7 @@ This page contains information about the new features, improvements, known issue
 
 - The Docker Dashboard opens automatically when you start Docker Desktop.
 - The Docker Dashboard displays a tip once a week.
-- Docker Desktop uses iTerm2 to launch the container's terminal if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
+- Docker Desktop uses iTerm2 to launch the terminal on the container if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
 - Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
 
 ### Upgrades
