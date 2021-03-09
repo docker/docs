@@ -24,8 +24,8 @@ configure it in different ways:
 
     You can optionally exclude hosts or ranges from going through the proxy
     server by setting a `noProxy` key to one or more comma-separated IP
-    addresses or hosts. Using the `*` character as a wildcard for hosts and using CIDR notation for IP addresses is supported as
-    shown in this example:
+    addresses or hosts. Prefixing domain with a dot `.` character, will act as a wildcard for hosts and using CIDR notation for IP addresses is supported as
+    shown in this example.
 
     ```json
     {
@@ -35,7 +35,7 @@ configure it in different ways:
        {
          "httpProxy": "http://192.168.1.12:3128",
          "httpsProxy": "http://192.168.1.12:3128",
-         "noProxy": "*.test.example.com,.example2.com,127.0.0.0/8"
+         "noProxy": ".test.example.com,.example2.com,127.0.0.0/8"
        }
      }
     }
@@ -58,7 +58,7 @@ instead.
 
 | Variable      | Dockerfile example                                | `docker run` example                                |
 |:--------------|:--------------------------------------------------|:----------------------------------------------------|
-| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://192.168.1.12:3128"`          | `--env HTTP_PROXY="http://192.168.1.12:3128"`          |
-| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://192.168.1.12:3128"`        | `--env HTTPS_PROXY="https://192.168.1.12:3128"`        |
-| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://192.168.1.12:3128"`            | `--env FTP_PROXY="ftp://192.168.1.12:3128"`            |
-| `NO_PROXY`    | `ENV NO_PROXY="*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
+| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://192.168.1.12:3128"`       | `--env HTTP_PROXY="http://192.168.1.12:3128"`       |
+| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://192.168.1.12:3128"`     | `--env HTTPS_PROXY="https://192.168.1.12:3128"`     |
+| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://192.168.1.12:3128"`         | `--env FTP_PROXY="ftp://192.168.1.12:3128"`         |
+| `NO_PROXY`    | `ENV NO_PROXY=".test.example.com,.example2.com"`  | `--env NO_PROXY=".test.example.com,.example2.com"`  |
