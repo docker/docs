@@ -111,19 +111,19 @@ Here's an example Compose file defining two custom networks. The `proxy` service
 version: "{{ site.compose_file_v3 }}"
 
 services:
-   proxy:
+  proxy:
     build: ./proxy
-      networks:
-        - frontend
-   app:
-     build: ./app
-      networks:
-        - frontend
-        - backend
-   db:
-     image: postgres
-      networks:
-        - backend
+    networks:
+      - frontend
+  app:
+    build: ./app
+    networks:
+      - frontend
+      - backend
+  db:
+    image: postgres
+    networks:
+      - backend
 
 networks:
   frontend:
