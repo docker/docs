@@ -506,6 +506,50 @@ reference:
           title: docker cluster version
     - path: /engine/reference/commandline/commit/
       title: docker commit
+    - sectiontitle: docker compose
+      section:
+        - path: /engine/reference/commandline/compose/
+          title: docker compose
+        - path: /engine/reference/commandline/compose_build/
+          title: docker compose build
+        - path: /engine/reference/commandline/compose_convert/
+          title: docker compose convert
+        - path: /engine/reference/commandline/compose_create/
+          title: docker compose create
+        - path: /engine/reference/commandline/compose_down/
+          title: docker compose down
+        - path: /engine/reference/commandline/compose_events/
+          title: docker compose events
+        - path: /engine/reference/commandline/compose_exec/
+          title: docker compose exec
+        - path: /engine/reference/commandline/compose_kill/
+          title: docker compose kill
+        - path: /engine/reference/commandline/compose_logs/
+          title: docker compose logs
+        - path: /engine/reference/commandline/compose_ls/
+          title: docker compose ls
+        - path: /engine/reference/commandline/compose_pause/
+          title: docker compose pause
+        - path: /engine/reference/commandline/compose_ps/
+          title: docker compose ps
+        - path: /engine/reference/commandline/compose_pull/
+          title: docker compose pull
+        - path: /engine/reference/commandline/compose_push/
+          title: docker compose push
+        - path: /engine/reference/commandline/compose_rm/
+          title: docker compose rm
+        - path: /engine/reference/commandline/compose_run/
+          title: docker compose run
+        - path: /engine/reference/commandline/compose_start/
+          title: docker compose start
+        - path: /engine/reference/commandline/compose_stop/
+          title: docker compose stop
+        - path: /engine/reference/commandline/compose_top/
+          title: docker compose top
+        - path: /engine/reference/commandline/compose_unpause/
+          title: docker compose unpause
+        - path: /engine/reference/commandline/compose_up/
+          title: docker compose up
     - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
