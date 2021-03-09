@@ -92,7 +92,8 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg
+        gnupg \
+        lsb-release
     ```
 
 2.  Add Docker's official GPG key:

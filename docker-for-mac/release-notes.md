@@ -27,7 +27,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Bug fixes and minor changes
 
-- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406). If you are still experiencing this issue when trying to update from 3.2.0 to 3.2.1, we recommend that you uninstall 3.2.0 and manually install Docker Desktop 3.2.1.
 
 ## Docker Desktop 3.2.0
 2021-03-01
@@ -38,7 +38,7 @@ This page contains information about the new features, improvements, known issue
 
 - The Docker Dashboard opens automatically when you start Docker Desktop.
 - The Docker Dashboard displays a tip once a week.
-- Docker Desktop uses iTerm2 to launch the container's terminal if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
+- Docker Desktop uses iTerm2 to launch the terminal on the container if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
 - Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
 
 ### Upgrades

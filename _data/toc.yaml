@@ -1186,6 +1186,12 @@ manuals:
   section:
   - path: /compose/
     title: Overview of Docker Compose
+  - sectiontitle: Compose CLI Tech Preview
+    section:
+    - path: /compose/cli-command/
+      title: Overview
+    - path: /compose/cli-command-compatibility/
+      title: Compose CLI compatibility
   - path: /compose/install/
     title: Install Compose
   - path: /compose/gettingstarted/
@@ -1256,6 +1262,8 @@ manuals:
     title: Dashboard
   - path: /desktop/faqs/
     title: FAQs
+  - path: /desktop/backup-and-restore/
+    title: Back up and restore data
   - path: /desktop/opensource/
     title: Open source licensing
 - sectiontitle: Docker Hub

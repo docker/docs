@@ -73,6 +73,10 @@ The `gelf` logging driver supports the following options:
 | `env`                      | optional  | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon accepts. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).                         | `--log-opt env=os,customer`                         |
 | `env-regex`                | optional  | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                                        | `--log-opt env-regex=^(os|customer)`                |
 
+> **Note**
+> 
+> The `gelf` driver does not support TLS for TCP connections. Messages sent to TLS-protected inputs can silently fail.
+
 ### Examples
 
 This example configures the container to use the GELF server running at

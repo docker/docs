@@ -58,15 +58,20 @@ redirect_from:
 
 Welcome! We are excited that you want to learn Docker.
 
-This page contains step-by-step instructions on how to get started with Docker.
+This page contains step-by-step instructions on how to get started with Docker. In this tutorial, you'll learn how to:
+
+- Build and run an image as a container
+- Share images using Docker Hub
+- Deploy Docker applications using multiple containers with a database
+- Running applications using Docker Compose
+
+In addition, you'll also learn about the best practices for building images, including instructions on how to scan your images for security vulnerabilities.
 
 If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).
 
 We also recommend the video walkthrough from DockerCon 2020.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-In this tutorial, you'll learn about creating and deploying Docker apps, including using multiple containers with a database, and using Docker Compose. You'll also deploy your containerized app to Azure.
 
 ## Download and install Docker
 
@@ -106,8 +111,8 @@ You'll notice a few flags being used. Here's some more info on them:
 ## The Docker Dashboard
 
 Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. It gives you quick
-access to container logs, lets you get a shell inside the container, and lets you
+you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows. 
+It gives you quick access to container logs, lets you get a shell inside the container, and lets you
 easily manage container lifecycle (stop, remove, etc.).
 
 To access the dashboard, follow the instructions for either 

@@ -26,7 +26,7 @@ configure it in different ways:
 
     You can optionally exclude hosts or ranges from going through the proxy
     server by setting a `noProxy` key to one or more comma-separated IP
-    addresses or hosts. Using the `*` character as a wildcard is supported, as
+    addresses or hosts. Using the `*` character as a wildcard for hosts and using CIDR notation for IP addresses is supported as
     shown in this example.
 
     ```json
@@ -37,7 +37,7 @@ configure it in different ways:
        {
          "httpProxy": "http://127.0.0.1:3001",
          "httpsProxy": "http://127.0.0.1:3001",
-         "noProxy": "*.test.example.com,.example2.com"
+         "noProxy": "*.test.example.com,.example2.com,127.0.0.0/8"
        }
      }
     }
