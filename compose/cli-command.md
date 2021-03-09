@@ -26,13 +26,16 @@ For more information about the flags that are not yet supported in the new `comp
 
 ### Install Compose CLI Tech Preview on Mac and Windows
 
-**Docker Desktop for Mac and for Windows** version 3.1.0 and above includes the new Compose command along
-with Docker cli, so Windows and Mac users do not need to install it separately.
-For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+**Docker Desktop for Mac and for Windows** version 3.2.1 and above includes the new Compose command along with the Docker CLI. Therefore, Windows and Mac users do not need to install the Compose CLI Tech Preview separately.
+
+For Docker Desktop installation instructions, see:
+
+- [Install Docker Desktop on Mac](../docker-for-mac/install.md)
+- [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 
 ### Install Compose CLI Tech Preview on Linux
 
-You can install the new Compose CLI including this Tech Preview using the install script:
+You can install the new Compose CLI, including this Tech Preview, using the following install script:
 
 ```console
 curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
