@@ -1189,7 +1189,7 @@ manuals:
   - path: /compose/cli-command/
     title: Compose CLI Tech Preview
   - path: /compose/cli-command-compatibility/
-    title: Compose Tech preview compatibility
+    title: Compose CLI compatibility
   - path: /compose/install/
     title: Install Compose
   - path: /compose/gettingstarted/

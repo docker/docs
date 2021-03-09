@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, containers
 title: Compose command compatibility with docker-compose
 ---
 
-The `compose` command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. However, there are a few remaining flags that have not been implemented yet. We are prioritizing the implementation of those based on usage metrics and user feedback.
+The `compose` command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, and we are prioritizing these implementations based on usage metrics and user feedback.
 
 You can follow progress on the implementation of the remaining commands and flags in the  [Compose-CLI](https://github.com/docker/compose-cli/issues/1283){:target="_blank" rel="noopener" class="_"} GitHub repository.
 
