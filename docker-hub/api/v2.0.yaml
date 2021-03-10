@@ -378,7 +378,7 @@ paths:
       summary: Get summary of repository's images
       description: |
         Gets the number of images in a repository and the number of images counted as active and inactive
-      operationId: GetNamespacesRepositorieImagesSummary
+      operationId: GetNamespacesRepositoriesImagesSummary
       produces:
         - application/json
       parameters:
