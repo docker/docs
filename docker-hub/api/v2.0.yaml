@@ -24,16 +24,15 @@ definitions:
   UsersLoginRequest:
     description: User login details
     type: object
+    required: [username, password]
     properties:
       username: 
         description: The username of the Docker Hub account to authenticate with
         type: string
-        required: true
         example: myusername
       password:
         description: The password of the Docker Hub account to authenticate with
         type: string
-        required: true
         example: hunter2
   PostUsersLoginSuccessResponse:
     description: successful user login response
@@ -194,15 +193,14 @@ definitions:
         type: array
         items:
           type: object
+          required: [repository, digest]
           properties:
             repository:
               description: Name of repository to delete the image from
-              required: true
               type: string
               example: myrepo
             digest:
               description: Digest of the image to delete
-              required: true
               type: string
               example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
       ignore_warnings:
@@ -219,20 +217,18 @@ definitions:
         type: array
         items:
           type: object
+          required: [repository, digest, warning]
           properties:
             repository:
               description: Name of the repository of the image to ignore the warning for
-              required: true
               type: string
               example: myrepo
             digest:
               description: Digest of the image to ignore the warning for
-              required: true
               type: string
               example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
             warning:
               description: Warning to ignore
-              required: true
               type: string
               enum: [is_active, current_tag]
               example: current_tag
@@ -356,7 +352,7 @@ paths:
         The returned token is used in the HTTP Authentication header like `Authentication: JWT {TOKEN}`
 
         Most Docker Hub APIs require this token either to consume or to get detailed information (e.g. listing images of the private repository).
-      consume:
+      consumes:
         - application/json
       produces:
         - application/json
@@ -404,7 +400,6 @@ paths:
 
             Defaults to 1 month before the current time
           type: string
-          example: '2020-12-01T12:00:00Z'
       responses:
         200:
           description: Success
@@ -459,7 +454,6 @@ paths:
 
             Defaults to 1 month before the current time
           type: string
-          example: '2020-12-01T12:00:00Z'
         - name: page
           in: query
           required: false
@@ -497,7 +491,7 @@ paths:
         Deleting a currently tagged image will delete the tag from the repository.
 
         Errors cannot be ignored. Children of multi-arch images cannot be directly deleted.
-      consume:
+      consumes:
         - application/json
       produces:
         - application/json
