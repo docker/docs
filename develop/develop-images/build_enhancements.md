@@ -187,9 +187,9 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 > Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 > for more information and examples.
 
-The `docker build` has a `--ssh` option to allow the Docker Engine to forward
-SSH agent connections. For more information on SSH agent, see the
-[OpenSSH man page](https://man.openbsd.org/ssh-agent).
+The `docker build` has an `--ssh` option to allow the Docker Engine to forward
+SSH agent connections. Passing `--ssh default` is equivilent to `--ssh default=$SSH_AUTH_SOCK`.
+For more information on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).
 
 Only the commands in the `Dockerfile` that have explicitly requested the SSH
 access by defining `type=ssh` mount have access to SSH agent connections. The
