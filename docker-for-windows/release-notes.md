@@ -50,6 +50,7 @@ This page contains information about the new features, improvements, known issue
 ### Deprecation
 
 - Docker Desktop cannot be installed on Windows 1709 (build 16299) anymore.
+- Removed the deprecated DNS name `docker.for.win.localhost`. Use DNS name `host.docker.internal` in a container to access services that are running on the host. [docker/for-win#10619](https://github.com/docker/for-win/issues/10619)
 
 ### Bug fixes and minor changes
 
