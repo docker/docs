@@ -483,6 +483,8 @@ paths:
       summary: Delete images
       operationId: PostNamespacesDeleteImages
       description: |
+        Limited to users on Pro and Team plans
+        
         Deletes one or more images withing a namespace (note: currently limited to a single repostiory).
 
         If you attempt to delete images that are marked as active or are currently tagged then the deletions will not happen and these warnings will be returned.
