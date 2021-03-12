@@ -160,6 +160,14 @@ COPY . .
 CMD [ "node", "server.js" ]
 ```
 
+## Create a .dockerignore file
+
+To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase the build’s performance, exclude files and directories by adding a .dockerignore file to the context directory. To improve the context load time create a `.dockerignore` file and add `node_modules` directory in it.
+
+```.dockerignore
+node_modules
+```
+
 ## Build image
 
 Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in the context.

@@ -5,8 +5,10 @@ title: Declare default environment variables in file
 ---
 
 Compose supports declaring default environment variables in an environment file
-named `.env` placed in the folder where the `docker-compose` command is executed
-*(current working directory)*.
+named `.env` placed in the project directory. The project directory is specified by order of precedence:
+- `--project-dir` flag
+- Folder of the first `--file` flag
+- Current directory
 
 ## Syntax rules
 
