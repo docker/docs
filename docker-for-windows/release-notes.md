@@ -24,8 +24,8 @@ This page contains information about the new features, improvements, known issue
 ### Bug fixes and minor changes
 
 - Fixed an issue that stopped containers binding to port 53. Fixes [docker/for-win#10601](https://github.com/docker/for-win/issues/10601).
-- Fixed an issue running 32-bit Intel binaries in emulation on Intel CPUs. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
-- Fixed an issue related to high CPU consumption and frozen UI when network connection is lost. Fixes [for-win/#10563](https://github.com/docker/for-win/issues/10563).
+- Fixed an issue that 32-bit Intel binaries were emulated on Intel CPUs. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
+- Fixed an issue related to high CPU consumption and frozen UI when the network connection is lost. Fixes [for-win/#10563](https://github.com/docker/for-win/issues/10563).
 
 ## Docker Desktop 3.2.1
 2021-03-05
