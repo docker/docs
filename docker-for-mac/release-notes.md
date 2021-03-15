@@ -16,10 +16,22 @@ This page contains information about the new features, improvements, known issue
 > Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
 {: .important }
 
+## Docker Desktop 3.2.2
+2021-03-15
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+
+### Bug fixes and minor changes
+
+- Allow exposing port 53 (DNS) without clashing with an internal DNS server. Fixes [docker/for-mac#5416](https://github.com/docker/for-mac/issues/5416) [docker/for-mac#5453](https://github.com/docker/for-mac/issues/5453).
+- Fixed an issue related to running iTerm that has no window open. Fixes [docker/roadmap#98](https://github.com/docker/roadmap/issues/98#issuecomment-791927788).
+- Fixed an issue running 32bit Intel binaries in emulation on Intel CPU's. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594) [docker/for-win#10604](https://github.com/docker/for-win/issues/10604) [docker/for-win#10632](https://github.com/docker/for-win/issues/10632).
+- Fixed an issue related to high CPU consumption and frozen UI when network connection lost. Fixes [for-win/#10583](https://github.com/docker/for-win/issues/10563).
+
 ## Docker Desktop 3.2.1
 2021-03-05
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
 
 ### Upgrades
 
