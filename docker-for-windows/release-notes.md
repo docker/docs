@@ -45,8 +45,8 @@ This page contains information about the new features, improvements, known issue
 
 - The Docker Dashboard opens automatically when you start Docker Desktop.
 - The Docker Dashboard displays a tip once a week.
-- BuildKit is now the default builder for all users, not just new installations. It can still be turned off under **Settings** > **Docker Engine** with a block like
-```
+- BuildKit is now the default builder for all users, not just for new installations. To turn this setting off, go to **Settings** > **Docker Engine** and add the following block to the Docker daemon configuration file:
+```json
 "features": {
     "buildkit": false
 }
