@@ -1358,6 +1358,8 @@ manuals:
     title: Download rate limit
   - sectiontitle: Administration
     section:
+     - path: /docker-hub/image-management/
+       title: Advanced Image Management dashboard
      - path: /docker-hub/convert-account/
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/

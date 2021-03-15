@@ -9,6 +9,14 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2021-03-dd
+
+### New feature
+
+**Advanced Image Management dashboard**
+
+Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](/image-management.md).
+
 # 2021-01-25
 
 ### New feature
