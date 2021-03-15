@@ -23,9 +23,9 @@ This page contains information about the new features, improvements, known issue
 
 ### Bug fixes and minor changes
 
-- Allow exposing port 53 (DNS) without clashing with an internal DNS server. Fixes [docker/for-mac#5416](https://github.com/docker/for-mac/issues/5416) [docker/for-mac#5453](https://github.com/docker/for-mac/issues/5453).
+- Allow exposing port 53 (DNS) without clashing with an internal DNS server. Fixes [docker/for-mac#5416](https://github.com/docker/for-mac/issues/5416).
 - Fixed an issue related to running iTerm that has no window open. Fixes [docker/roadmap#98](https://github.com/docker/roadmap/issues/98#issuecomment-791927788).
-- Fixed an issue running 32bit Intel binaries in emulation on Intel CPU's. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594) [docker/for-win#10604](https://github.com/docker/for-win/issues/10604) [docker/for-win#10632](https://github.com/docker/for-win/issues/10632).
+- Fixed an issue running 32bit Intel binaries in emulation on Intel CPU's. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
 - Fixed an issue related to high CPU consumption and frozen UI when network connection lost. Fixes [for-win/#10583](https://github.com/docker/for-win/issues/10563).
 
 ## Docker Desktop 3.2.1
