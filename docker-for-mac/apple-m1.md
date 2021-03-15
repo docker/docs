@@ -43,7 +43,8 @@ The tech preview of Docker Desktop for Apple M1 currently has the following limi
 
 - The kernel may panic. If so, look in `~/Library/Containers/com.docker.docker/Data/vms/0/console.log` for a BUG or kernel panic to report.
 
-- The new Apple Virtualization framework uses port 53 (DNS) when Docker Desktop is started. This port cannot be used to bind a container port to the host.
+- The new Apple Virtualization framework uses port 53 (DNS) when Docker Desktop starts. You cannot use this port to bind a container's port to the host. See [docker/for-mac#5335](https://github.com/docker/for-mac/issues/5335).
+
 
 ## Fixes since the Apple Silicon preview 7
 
