@@ -998,7 +998,7 @@ options:
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
 >
-> The `network_mode` option replaces the version 1 [net](compose-file-v1.md#net) option.
+> The `network_mode` option replaces the Compose file version 1 net option.
 
 Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
@@ -1023,7 +1023,7 @@ network_mode: "container:[container name/id]"
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
 >
-> The `networks` option replaces the version 1 [net](compose-file-v1.md#net) option.
+> The `networks` option replaces the Compose file version 1 net option.
 
 Networks to join, referencing entries under the
 [top-level `networks` key](#network-configuration-reference).

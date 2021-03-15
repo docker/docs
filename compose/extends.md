@@ -174,8 +174,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
 > **Note**
 >
 > The `extends` keyword is supported in earlier Compose file formats up to Compose
-> file version 2.1 (see [extends in v1](compose-file/compose-file-v1.md#extends)
-> and [extends in v2](compose-file/compose-file-v2.md#extends)), but is
+> file version 2.1 (see [extends in v2](compose-file/compose-file-v2.md#extends)), but is
 > not supported in Compose version 3.x. See the [Version 3 summary](compose-file/compose-versioning.md#version-3)
 > of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
 > See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
