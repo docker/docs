@@ -45,6 +45,12 @@ This page contains information about the new features, improvements, known issue
 
 - The Docker Dashboard opens automatically when you start Docker Desktop.
 - The Docker Dashboard displays a tip once a week.
+- BuildKit is now the default builder for all users, not just new installations. It can still be turned off under **Settings** > **Docker Engine** with a block like
+```
+"features": {
+    "buildkit": false
+}
+```
 
 ### Upgrades
 
@@ -201,7 +207,7 @@ Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 
 - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
 - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
-- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Settings** > **Docker Engine** and then disable the BuildKit feature.
 - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
 
 ### Upgrades
