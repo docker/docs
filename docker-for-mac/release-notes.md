@@ -52,7 +52,7 @@ This page contains information about the new features, improvements, known issue
 - The Docker Dashboard displays a tip once a week.
 - Docker Desktop uses iTerm2 to launch the terminal on the container if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
 - Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
-- BuildKit is now the default builder for all users, not just new installations. It can still be turned off under **Preferences** > **Docker Engine** with a block like
+- BuildKit is now the default builder for all users, not just for new installations. To turn this setting off, go to **Preferences** > **Docker Engine** and add the following block to the Docker daemon configuration file:
 ```
 "features": {
     "buildkit": false
