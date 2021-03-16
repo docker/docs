@@ -1072,8 +1072,6 @@ reference:
       title: Version 3
     - path: /compose/compose-file/compose-file-v2/
       title: Version 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
     - path: /compose/compose-file/compose-versioning/
       title: About versions and upgrading
     - path: /compose/faq/

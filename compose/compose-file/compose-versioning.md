@@ -14,7 +14,7 @@ The Compose file formats are now described in these references, specific to each
 | [Compose Specification](index.md) (most current, and recommended) | [Versioning](compose-versioning.md#versioning)  |
 | [Version 3](compose-file-v3.md)                       | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
-| [Version 1](compose-file-v1.md)                       | [Version 1 updates](#version-1)  |
+| Version 1 (Deprecated)                       | [Version 1 updates](#version-1)  |
 
 The topics below explain the differences among the versions, Docker Engine
 compatibility, and [how to upgrade](#upgrading).
@@ -79,7 +79,7 @@ Several things differ depending on which version you use:
 
 These differences are explained below.
 
-### Version 1
+### Version 1 (Deprecated)
 
 Compose files that do not declare a version are considered "version 1". In those
 files, all the [services](compose-file-v3.md#service-configuration-reference) are
@@ -95,7 +95,7 @@ Version 1 files cannot declare named
 Compose does not take advantage of [networking](../networking.md) when you
 use version 1: every container is placed on the default `bridge` network and is
 reachable from every other container at its IP address. You need to use
-[links](compose-file-v1.md#links) to enable discovery between containers.
+`links` to enable discovery between containers.
 
 Example:
 
@@ -128,17 +128,18 @@ discoverable at a hostname that's the same as the service name. This means
 [links](compose-file-v2.md#links) are largely unnecessary. For more details, see
 [Networking in Compose](../networking.md).
 
-> **Note**: When specifying the Compose file version to use, make sure to
+> **Note**
+>
+> When specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
-> `0` is used by default and not the latest minor version. As a result, features added in
-> later versions will not be supported. For example:
+> `0` is used by default and not the latest minor version. As a result, features added in later versions will not be supported. For example:
 >
 > ```yaml
 > version: "2"
 > ```
-> 
+>
 > is equivalent to:
-> 
+>
 > ```yaml
 > version: "2.0"
 > ```
@@ -537,9 +538,7 @@ flag with the `config` command.
 > resulting configuration is only an approximate using non-Swarm mode
 > properties, it may produce unexpected results.
 
-
 ## Compose file format references
 - [Compose Specification](index.md)
 - [Compose file version 3](compose-file-v3.md)
 - [Compose file version 2](compose-file-v2.md)
-- [Compose file version 1](compose-file-v1.md)
