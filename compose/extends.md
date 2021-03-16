@@ -340,20 +340,6 @@ services:
     command: python otherapp.py
 ```
 
->  `build` and `image` in Compose file version 1
->
-> In the case of `build` and `image`, when using
-> [version 1 of the Compose file format](compose-file/compose-file-v1.md), using one
-> option in the local service causes Compose to discard the other option if it
-> was defined in the original service.
->
-> For example, if the original service defines `image: webapp` and the
-> local service defines `build: .` then the resulting service has a
-> `build: .` and no `image` option.
->
-> This is because `build` and `image` cannot be used together in a version 1
-> file.
-
 For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
 `dns_search`, and `tmpfs`, Compose concatenates both sets of values:
 
