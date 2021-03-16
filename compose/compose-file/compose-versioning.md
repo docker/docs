@@ -128,17 +128,18 @@ discoverable at a hostname that's the same as the service name. This means
 [links](compose-file-v2.md#links) are largely unnecessary. For more details, see
 [Networking in Compose](../networking.md).
 
-> **Note**: When specifying the Compose file version to use, make sure to
+> **Note**
+>
+> When specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
-> `0` is used by default and not the latest minor version. As a result, features added in
-> later versions will not be supported. For example:
+> `0` is used by default and not the latest minor version. As a result, features added in later versions will not be supported. For example:
 >
 > ```yaml
 > version: "2"
 > ```
-> 
+>
 > is equivalent to:
-> 
+>
 > ```yaml
 > version: "2.0"
 > ```
