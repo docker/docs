@@ -1,25 +1,37 @@
 swagger: '2.0'
 schemes:
   - https
+host: hub.docker.com
+basePath: "/"
 produces:
   - application/json
-basePath: /v2
+consumes:
+  - application/json
 info:
   title: Docker HUB API
-  version: '2.0'
+  version: 'beta'
   x-logo:
     url: https://docs.docker.com/images/logo-docker-main.png
   description: |
-    API for interacting with images stored on the Docker Hub registry
+    Docker Hub is a service provided by Docker for finding and sharing container images with your team.
+    It is the world's largest library and community for container images.
+    In addition to the [Docker Hub UI](https://docs.docker.com/docker-hub/) and [Docker Hub CLI tool](https://github.com/docker/hub-tool#readme) (currently experimental),
+    Docker provides an API that allows you to interact with Docker Hub.
+    Browse through the Docker Hub API documentation to explore the supported endpoints.
 tags:
   # Primary objects
   - name: Authentication
     x-displayName: Authentication
-    description: Authentication with the API
+    description: |
+      Most Docker Hub API endpoints require you to authenticate using you Docker credentials.
+      
+      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Free, Pro, or Team) and the permissions associated with it.
+      To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing)
   - name: Images
-    x-displayName: Images
-    description: Get and manage images within a repository
-
+    x-displayName: Advanced image management
+    description: |
+      The Advanced Image Management API endpoints aallow you to manage Docker images across all repositories.
+      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/)
 definitions:
   UsersLoginRequest:
     description: User login details
@@ -352,10 +364,6 @@ paths:
         The returned token is used in the HTTP Authentication header like `Authentication: JWT {TOKEN}`
 
         Most Docker Hub APIs require this token either to consume or to get detailed information (e.g. listing images of the private repository).
-      consumes:
-        - application/json
-      produces:
-        - application/json
       parameters:
         - name: body
           in: body
@@ -493,19 +501,15 @@ paths:
         Deleting a currently tagged image will delete the tag from the repository.
 
         Errors cannot be ignored. Children of multi-arch images cannot be directly deleted.
-      consumes:
-        - application/json
-      produces:
-        - application/json
       parameters:
         - name: namespace
           in: path
           required: true
           description: Namespace of repository
           type: string
-        - name: body
+        - description: Delete request
           in: body
-          description: Delete request
+          name: body
           required: true
           schema:
             $ref: '#/definitions/PostNamespacesDeleteImagesRequest'

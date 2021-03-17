@@ -21,7 +21,6 @@ exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html", 
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
 latest_engine_api_version: "1.41"
-latest_hub_api_version: "2.0"
 docker_ce_version: "20.10"
 compose_version: "1.28.4"
 compose_file_v3: "3.9"

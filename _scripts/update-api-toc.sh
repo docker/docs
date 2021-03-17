@@ -16,8 +16,3 @@ sedi () {
 # in toc.yaml. This is brittle!
 latest_engine_api_version="$(grep 'latest_engine_api_version:' ./_config.yml | grep -oh '"[0-9].*"$' | sed 's/"//g')"
 sedi "s/{{ site.latest_engine_api_version }}/${latest_engine_api_version}/g" ./_data/toc.yaml
-
-# Parse latest_hub_api_version variables from _config.yml to replace the value
-# in toc.yaml. This is brittle!
-latest_hub_api_version="$(grep 'latest_hub_api_version:' ./_config.yml | grep -oh '"[0-9].*"$' | sed 's/"//g')"
-sedi "s/{{ site.latest_hub_api_version }}/${latest_hub_api_version}/g" ./_data/toc.yaml
