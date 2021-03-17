@@ -18,7 +18,6 @@ most benefits from Docker.
 
 - Use [multi-stage builds](develop-images/multistage-build.md){: target="_blank" rel="noopener" class="_"} to keep your images lean
 - Manage application data using [volumes](../storage/volumes.md) and [bind mounts](../storage/bind-mounts.md){: target="_blank" rel="noopener" class="_"}
-- [Scale your app with Kubernetes](../get-started/kube-deploy.md){: target="_blank" rel="noopener" class="_"} 
 - [Scale your app as a Swarm service](../get-started/swarm-deploy.md){: target="_blank" rel="noopener" class="_"} 
 - [General application development best practices](dev-best-practices.md){: target="_blank" rel="noopener" class="_"}
 

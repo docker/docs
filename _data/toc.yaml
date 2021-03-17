@@ -131,8 +131,6 @@ guides:
     section:
     - title: "Overview"
       path: /get-started/orchestration/
-    - title: "Deploy to Kubernetes"
-      path: /get-started/kube-deploy/
     - title: "Deploy to Swarm"
       path: /get-started/swarm-deploy/
   - sectiontitle: Configure all objects
