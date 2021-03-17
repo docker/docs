@@ -193,10 +193,3 @@ no Docker Compose entry for `environment` or `env_file`.
 Several environment variables are available for you to configure the Docker
 Compose command-line behavior. They begin with `COMPOSE_` or `DOCKER_`, and are
 documented in [CLI Environment Variables](reference/envvars.md).
-
-## Environment variables created by links
-
-When using the ['links' option](compose-file/compose-file-v3.md#links) in a
-[v1 Compose file](compose-file/compose-file-v1.md#link-environment-variables),
-environment variables are created for each link. These variables are deprecated.
-Use the link alias as a hostname instead.

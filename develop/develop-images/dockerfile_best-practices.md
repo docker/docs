@@ -646,7 +646,7 @@ version bumps are easier to maintain, as seen in the following example:
 ```dockerfile
 ENV PG_MAJOR=9.3
 ENV PG_VERSION=9.3.4
-RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgres && …
 ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 

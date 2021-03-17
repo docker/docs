@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1.md).
+> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file version 1 (deprecated).
 
 By default Compose sets up a single
 [network](../engine/reference/commandline/network_create.md) for your app. Each

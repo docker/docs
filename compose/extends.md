@@ -174,8 +174,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
 > **Note**
 >
 > The `extends` keyword is supported in earlier Compose file formats up to Compose
-> file version 2.1 (see [extends in v1](compose-file/compose-file-v1.md#extends)
-> and [extends in v2](compose-file/compose-file-v2.md#extends)), but is
+> file version 2.1 (see [extends in v2](compose-file/compose-file-v2.md#extends)), but is
 > not supported in Compose version 3.x. See the [Version 3 summary](compose-file/compose-versioning.md#version-3)
 > of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
 > See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
@@ -340,20 +339,6 @@ services:
     # ...
     command: python otherapp.py
 ```
-
->  `build` and `image` in Compose file version 1
->
-> In the case of `build` and `image`, when using
-> [version 1 of the Compose file format](compose-file/compose-file-v1.md), using one
-> option in the local service causes Compose to discard the other option if it
-> was defined in the original service.
->
-> For example, if the original service defines `image: webapp` and the
-> local service defines `build: .` then the resulting service has a
-> `build: .` and no `image` option.
->
-> This is because `build` and `image` cannot be used together in a version 1
-> file.
 
 For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
 `dns_search`, and `tmpfs`, Compose concatenates both sets of values:
