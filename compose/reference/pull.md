@@ -16,7 +16,7 @@ Options:
     --include-deps          Also pull services declared as dependencies
 ```
 
-Pulls an image associated with a service defined in a `docker-compose.yml` or `docker-stack.yml` file, but does not start containers based on those images.
+Pulls images associated with a service defined in a `docker-compose.yml` or `docker-stack.yml` file, but does not start containers based on those images.
 
 For example, suppose you have this `docker-compose.yml` file from the [Quickstart: Compose and Rails](../rails.md) sample.
 
