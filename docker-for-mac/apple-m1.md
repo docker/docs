@@ -10,15 +10,13 @@ Welcome to Docker Desktop for Apple Silicon.
 
 > **Note**
 >
-> Docker Desktop for Apple Silicon is still under development. We encourage you to try these builds and report any issues in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac) repository.
+> We encourage you to try the release candidate and report any issues in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac) repository.
 
 ## Docker Desktop RC 1
 
 2021-03-18
 
-Click on the following link to download the latest preview build of Docker Desktop for Apple Silicon.
-
-> This is our release candidate. If you find that anything is not working as expected (excluding the known issues documented below), please open an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
+Click on the following link to download the latest release candidate of Docker Desktop for Apple Silicon.
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/62029/Docker.dmg)
 
