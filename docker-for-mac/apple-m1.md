@@ -18,13 +18,13 @@ Welcome to Docker Desktop for Apple Silicon.
 
 Click on the following link to download the latest preview build of Docker Desktop for Apple Silicon.
 
-This is our first Release Candidate, and is feature complete. If you find that anything is not working correctly (excluding the Known issues documented below), please open an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
+> This is our release candidate. If you find that anything is not working as expected (excluding the known issues documented below), please open an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/62029/Docker.dmg)
 
 ### Known issues
 
-The following issues are known and are not expected to be resolved in the final GA build for Apple Silicon. We are working on them in collaboration with our partners.
+The following issues are not expected to be resolved in the final GA build for Apple Silicon. We are working with our partners on these.
 
 - You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, use this command:
 
