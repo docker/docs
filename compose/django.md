@@ -69,6 +69,8 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    services:
      db:
        image: postgres
+       volumes:
+         - ./data/db:/var/lib/postgresql/data
        environment:
          - POSTGRES_DB=postgres
          - POSTGRES_USER=postgres

@@ -8,7 +8,7 @@ In the previous chapter, we talked about and used a **named volume** to persist 
 Named volumes are great if we simply want to store data, as we don't have to worry about _where_ the data
 is stored.
 
-With **bind mounts**, we control the exact mountpoint on the host. We can use this to persist data, but is often
+With **bind mounts**, we control the exact mountpoint on the host. We can use this to persist data, but it's often
 used to provide additional data into containers. When working on an application, we can use a bind mount to
 mount our source code into the container to let it see code changes, respond, and let us see the changes right
 away.
@@ -49,7 +49,7 @@ So, let's do it!
         sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using PowerShell then use this command.
+    If you are using PowerShell then use this command:
 
     ```powershell
     docker run -dp 3000:3000 `
@@ -66,7 +66,7 @@ So, let's do it!
       running `yarn install` to install _all_ dependencies and then running `yarn run dev`. If we look in the `package.json`,
       we'll see that the `dev` script is starting `nodemon`.
 
-3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this...
+3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this:
 
     ```bash
     docker logs -f <container-id>
@@ -82,7 +82,7 @@ So, let's do it!
     When you're done watching the logs, exit out by hitting `Ctrl`+`C`.
 
 4. Now, let's make a change to the app. In the `src/static/js/app.js` file, let's change the "Add Item" button to simply say
-   "Add". This change will be on line 109.
+   "Add". This change will be on line 109:
 
     ```diff
     -                         {submitting ? 'Adding...' : 'Add Item'}

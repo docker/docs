@@ -74,7 +74,7 @@ For now, we will create the network first and attach the MySQL container at star
 3. To confirm we have the database up and running, connect to the database and verify it connects.
 
     ```bash
-    docker exec -it <mysql-container-id> mysql -p
+    docker exec -it <mysql-container-id> mysql -u root -p
     ```
 
     When the password prompt comes up, type in **secret**. In the MySQL shell, list the databases and verify
