@@ -35,7 +35,7 @@ The following issues are known and are not expected to be resolved in the final 
 
    However, attempts to run Intel-based containers on Apple M1 machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on M1 machines. These containers are also faster and use less memory than Intel-based containers.
 
-   We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
+   We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/){: target="blank" rel="noopener" class=“”}.
 
 The following issues will also not be fixed for the final release, but we are working on them in collaboration with our partners. We expect to be able to make improvements in future releases.
 
