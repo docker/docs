@@ -10,7 +10,7 @@ Welcome to Docker Desktop for Apple Silicon.
 
 > **Note**
 >
-> Docker Desktop for Apple Silicon is still under development. Please try these builds and report issues on [docker/for-mac](https://github.com/docker/for-mac).
+> Docker Desktop for Apple Silicon is still under development. We encourage you to try these builds and report any issues on [docker/for-mac](https://github.com/docker/for-mac) GitHub repository.
 
 ## Docker Desktop RC 1
 
