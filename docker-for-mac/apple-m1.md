@@ -20,7 +20,7 @@ Click on the following link to download the latest preview build of Docker Deskt
 
 This is our first Release Candidate, and is feature complete. If you find that anything is not working correctly (excluding the Known issues documented below), please open an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
 
-> [Download](https://desktop.docker.com/mac/stable/arm64/62015/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/62029/Docker.dmg)
 
 ### Known issues
 
