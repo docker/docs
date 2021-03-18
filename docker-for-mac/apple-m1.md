@@ -55,7 +55,7 @@ The following issues will also not be fixed for the final release, but we are wo
 
    We are still gathering data and testing alternate kernel versions and hope to make improvements in a future release.
 
-## Fixes since Docker Desktop preview 3.1.0
+### Fixes since Docker Desktop preview 3.1.0
 
 - The build should update automatically to future versions.
 - HTTP proxy support is working, including support for domain name based `no_proxy` rules via TLS SNI. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
