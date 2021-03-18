@@ -51,7 +51,7 @@ The following issues are known and are not expected to be resolved in the final 
 
    This is an artifact of the new `virtualization.framework` in Big Sur. We are investigating possible fixes and hope to make improvements in a future release.
 
-- The new Apple Virtualization framework uses port 53 (DNS) when Docker Desktop starts. Therefore you cannot bind to port 53 on all interfaces with a command like `docker run -p 53:53`. See [docker/for-mac#5335](https://github.com/docker/for-mac/issues/5335).
+- TCP and UDP port 53 (DNS) are bound on the host when Docker Desktop starts. Therefore you cannot bind to port 53 on all interfaces with a command like `docker run -p 53:53`. See [docker/for-mac#5335](https://github.com/docker/for-mac/issues/5335).
 
    This is an artifact of the new `virtualization.framework` in Big Sur. A workaround is to bind to a specific IP address e.g. `docker run -p 127.0.0.1:53:53`.
 
