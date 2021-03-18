@@ -16,7 +16,7 @@ Welcome to Docker Desktop for Apple Silicon.
 
 2021-03-18
 
-Click the following link to diwnload the Apple Silicon RC 1 build:
+Click the following link to download the Apple Silicon RC 1 build:
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/62015/Docker.dmg)
 
