@@ -1,7 +1,7 @@
 ---
-description: Apple M1
+description: Apple Silicon
 keywords: Docker Desktop, M1, Silicon, Apple, tech preview, dev preview
-title: Apple M1
+title: Apple Silicon
 toc_min: 2
 toc_max: 3
 ---
@@ -22,7 +22,7 @@ Click the following link to download the Apple Silicon RC 1 build:
 
 ### Known issues
 
-The following issues are known and are not expected to be resolved in the final GA build for M1.
+The following issues are known and are not expected to be resolved in the final GA build for Apple Silicon.
 
 - You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, use this command:
 
@@ -33,7 +33,7 @@ The following issues are known and are not expected to be resolved in the final 
 
 - Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated){: target="blank" rel="noopener" class=“”} image.
 
-   However, attempts to run Intel-based containers on Apple M1 machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on M1 machines. These containers are also faster and use less memory than Intel-based containers.
+   However, attempts to run Intel-based containers on Apple Silicon machines can crash as QEMU sometimes fails to run the container. Therefore, we recommend that you run ARM64 containers on Apple Silicon machines. These containers are also faster and use less memory than Intel-based containers.
 
    We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/){: target="blank" rel="noopener" class=“”}.
 
