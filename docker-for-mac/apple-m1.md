@@ -1,7 +1,7 @@
 ---
-description: Apple Silicon
+description: Apple Silicon Tech Preview
 keywords: Docker Desktop, M1, Silicon, Apple, tech preview, dev preview
-title: Apple Silicon
+title: Apple Silicon Tech Preview
 toc_min: 2
 toc_max: 3
 ---
@@ -10,13 +10,15 @@ Welcome to Docker Desktop for Apple Silicon.
 
 > **Note**
 >
-> Docker Desktop for Apple Silicon is still under development. We encourage you to try these builds and report any issues on [docker/for-mac](https://github.com/docker/for-mac) GitHub repository.
+> Docker Desktop for Apple Silicon is still under development. We encourage you to try these builds and report any issues in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac) repository.
 
 ## Docker Desktop RC 1
 
 2021-03-18
 
-Click the following link to download the Apple Silicon RC 1 build:
+Click on the following link to download the latest preview build of Docker Desktop for Apple Silicon.
+
+This is our first Release Candidate, and is feature complete. If you find that anything is not working correctly (excluding the Known issues documented below), please open an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/62015/Docker.dmg)
 
