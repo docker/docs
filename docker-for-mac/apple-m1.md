@@ -20,7 +20,7 @@ Click the following link to download the Apple Silicon RC 1 build:
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/62015/Docker.dmg)
 
-## Known issues
+### Known issues
 
 The following issues are known and are not expected to be resolved in the final GA build for M1.
 
