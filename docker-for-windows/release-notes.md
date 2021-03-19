@@ -341,7 +341,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-- Windows 10 Home users can now use Docker Desktop through WSL 2. This requires Windows 10, version 2004 or higher. For more information, see [Install Docker Desktop on Windows Home](install-windows-home.md).
+- Windows 10 Home users can now use Docker Desktop through WSL 2. This requires Windows 10, version 2004 or higher. For more information, see [Install Docker Desktop on Windows](install.md).
 - Docker Desktop introduces a new onboarding tutorial upon first startup. The Quick Start tutorial guides users to get started with Docker in a few easy steps. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 - Docker Desktop now allows sharing individual folders, rather than whole drives, giving more control to users over what is being shared.
 
