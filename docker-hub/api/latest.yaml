@@ -30,7 +30,7 @@ tags:
   - name: Images
     x-displayName: Advanced image management
     description: |
-      The Advanced Image Management API endpoints aallow you to manage Docker images across all repositories.
+      The Advanced Image Management API endpoints allow you to manage Docker images across all repositories.
       For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/)
 definitions:
   UsersLoginRequest:
