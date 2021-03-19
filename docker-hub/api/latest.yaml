@@ -25,7 +25,7 @@ tags:
     description: |
       Most Docker Hub API endpoints require you to authenticate using your Docker credentials.
       
-      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Free, Pro, or Team) and the permissions associated with it.
+      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Free, Pro, or Team) and your account's permissions.
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
   - name: Images
     x-displayName: Advanced image management
