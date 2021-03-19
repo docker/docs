@@ -15,7 +15,7 @@ Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
-## What to know before you install
+## System requirements
 
 ### System requirements for Hyper-V backend and/or Windows containers
 
@@ -36,7 +36,8 @@ Hyper-V on Windows 10:
 
  Windows 10 Home machines must meet the following requirements to install Docker Desktop:
 
-  - Install Windows 10, version 1903 or higher.
+  - Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362) or higher.
+``
   - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
   - The following hardware prerequisites are required to successfully run
