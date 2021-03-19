@@ -17,38 +17,37 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 ## System requirements
 
-### System requirements for Hyper-V backend and/or Windows containers
+Your Windows machine must meet the following requirements to successfully install Docker Desktop.
 
-  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or later).
+### Hyper-V backend and Windows containers
 
-    For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
-  - Hyper-V and Containers Windows features must be enabled.
-  - The following hardware prerequisites are required to successfully run Client
+- Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or higher).
+
+  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
+- Hyper-V and Containers Windows features must be enabled.
+- The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
 
-     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
-     - 4GB system RAM
-    - BIOS-level hardware virtualization support must be enabled in the
+  - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
 
-### System requirements for WSL 2 backend
+### WSL 2 backend
 
- Windows 10 Home machines must meet the following requirements to install Docker Desktop:
-
-  - Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362) or higher.
-``
-  - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
-    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
-  - The following hardware prerequisites are required to successfully run
+- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
+- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
+- The following hardware prerequisites are required to successfully run
 WSL 2 on Windows 10:
 
-     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
-     - 4GB system RAM
-    - BIOS-level hardware virtualization support must be enabled in the
+  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
-  - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
+- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
 
 > **Note**
 >
