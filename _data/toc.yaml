@@ -1286,8 +1286,6 @@ manuals:
     section:
     - path: /docker-for-windows/install/
       title: Install Docker Desktop for Windows
-    - path: /docker-for-windows/install-windows-home/
-      title: Install Docker Desktop on Windows Home
     - path: /docker-for-windows/
       title: User manual
     - path: /docker-for-windows/kubernetes/

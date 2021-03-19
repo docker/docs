@@ -2,12 +2,12 @@
 description: How to install Docker Desktop for Windows
 keywords: windows, install, download, run, docker, local
 title: Install Docker Desktop on Windows
+redirect_from:
+- /docker-for-windows/install-windows-home/
 ---
 
 Docker Desktop for Windows is the [Community](https://www.docker.com/community-edition) version of Docker for Microsoft Windows.
 You can download Docker Desktop for Windows from Docker Hub.
-
-This page contains information on installing Docker Desktop on Windows 10 Pro, Enterprise, and Education. If you are looking for information about installing Docker Desktop on Windows 10 Home, see [Install Docker Desktop on Windows Home](/install-windows-home.md).
 
 [Download from Docker
 Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
@@ -17,11 +17,11 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 ## What to know before you install
 
-### System Requirements
+### System requirements
 
   - Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or later).
-  
-    For Windows 10 Home, see [Install Docker Desktop on Windows Home](install-windows-home.md).
+
+    For Windows 10 Home, see [Windows 10 Home system requirements](#windows-10-home-system-requirements).
   - Hyper-V and Containers Windows features must be enabled.
   - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
@@ -31,6 +31,23 @@ Hyper-V on Windows 10:
     - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+
+### Windows 10 Home system requirements
+
+ Windows 10 Home machines must meet the following requirements to install Docker Desktop:
+
+  - Install Windows 10, version 1903 or higher.
+  - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+  - The following hardware prerequisites are required to successfully run
+WSL 2 on Windows 10 Home:
+
+     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
+     - 4GB system RAM
+    - BIOS-level hardware virtualization support must be enabled in the
+    BIOS settings.  For more information, see
+    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+  - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 
 > **Note**
 >
@@ -73,15 +90,13 @@ Looking for information on using Windows containers?
     It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
-2. When prompted, ensure the **Enable Hyper-V Windows Features** option is selected on the Configuration page.
+2. When prompted, ensure the **Enable Hyper-V Windows Features** or the **Install required Windows components for WSL 2** option is selected on the Configuration page.
 
 3. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
 4. When the installation is successful, click **Close** to complete the installation process.
 
-5. If your admin account is different to your user account, you must add the user to 
-the **docker-users** group. Run **Computer Management** as an administrator and navigate to 
-**Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
+5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
 Log out and log back in for the changes to take effect.
 
 ## Start Docker Desktop
@@ -103,8 +118,7 @@ When the initialization is complete, Docker Desktop launches the onboarding tuto
 
 Congratulations! You are now successfully running Docker Desktop on Windows.
 
-If you would like to rerun the tutorial, go to the Docker Desktop menu 
-and select **Learn**.
+If you would like to rerun the tutorial, go to the Docker Desktop menu and select **Learn**.
 
 ## Automatic updates
 
@@ -127,7 +141,6 @@ To uninstall Docker Desktop from your Windows machine:
 > by the application. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
 
-
 ## Where to go next
 
 * [Getting started](index.md) introduces Docker Desktop for Windows.
@@ -135,7 +148,6 @@ To uninstall Docker Desktop from your Windows machine:
   deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
-* [FAQs](../desktop/faqs.md) provides answers to frequently asked questions.
+* [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
 * [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-* [Back up and restore data](../desktop/backup-and-restore.md) provides instructions
-  on backing up and restoring data related to Docker.
+* [Back up and restore data](../desktop/backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.
