@@ -17,11 +17,11 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 ## What to know before you install
 
-### System requirements
+### System requirements for Hyper-V backend and/or Windows containers
 
   - Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or later).
 
-    For Windows 10 Home, see [Windows 10 Home system requirements](#windows-10-home-system-requirements).
+    For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
   - Hyper-V and Containers Windows features must be enabled.
   - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
@@ -32,7 +32,7 @@ Hyper-V on Windows 10:
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
 
-### Windows 10 Home system requirements
+### System requirements for WSL 2 backend
 
  Windows 10 Home machines must meet the following requirements to install Docker Desktop:
 
@@ -40,7 +40,7 @@ Hyper-V on Windows 10:
   - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
   - The following hardware prerequisites are required to successfully run
-WSL 2 on Windows 10 Home:
+WSL 2 on Windows 10:
 
      - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
      - 4GB system RAM
