@@ -23,15 +23,15 @@ tags:
   - name: Authentication
     x-displayName: Authentication
     description: |
-      Most Docker Hub API endpoints require you to authenticate using you Docker credentials.
+      Most Docker Hub API endpoints require you to authenticate using your Docker credentials.
       
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your subscription (Free, Pro, or Team) and the permissions associated with it.
-      To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing)
+      To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
   - name: Images
     x-displayName: Advanced image management
     description: |
       The Advanced Image Management API endpoints allow you to manage Docker images across all repositories.
-      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/)
+      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
 definitions:
   UsersLoginRequest:
     description: User login details
@@ -39,11 +39,11 @@ definitions:
     required: [username, password]
     properties:
       username: 
-        description: The username of the Docker Hub account to authenticate with
+        description: The username of the Docker Hub account to authenticate with.
         type: string
         example: myusername
       password:
-        description: The password of the Docker Hub account to authenticate with
+        description: The password of the Docker Hub account to authenticate with.
         type: string
         example: hunter2
   PostUsersLoginSuccessResponse:
@@ -53,239 +53,239 @@ definitions:
       token:
         description: |
           Created authentication token.
-          This token can be used in the HTTP Authentication header as a JWT to authenticate with the Docker Hub APIs
+          This token can be used in the HTTP Authentication header as a JWT to authenticate with the Docker Hub APIs.
         type: string
         x-nullable: false
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
   PostUsersLoginErrorResponse:
-    description: failed user login response
+    description: failed user login response.
     type: object
     properties:
       details:
-        description: Description of the error
+        description: Description of the error.
         type: string
         x-nullable: false
         example: Incorrect authentication credentials
   ErrorInfo:
-    description: Context information for an error used for diagnostics
+    description: Context information for an error used for diagnostics.
     type: object
     properties:
       api_call_docker_id:
-        description: ID of docker user
+        description: ID of docker user.
         type: string
       api_call_name:
-        description: Name of the API operation called
+        description: Name of the API operation called.
         type: string
       api_call_start:
-        description: Date/time of call start
+        description: Date/time of call start.
         type: string
       api_call_txnid:
-        description: Unique ID for this call
+        description: Unique ID for this call.
         type: string
   ErrorResponse:
     description: Represents an error.
     type: object
     properties:
       txnid:
-        description: Unique ID for this call
+        description: Unique ID for this call.
         type: string
       message:
-        description: The error message
+        description: The error message.
         type: string
       errinfo:
         $ref: '#/definitions/ErrorInfo'
   GetNamespaceRepositoryImagesSummaryResponse:
-    description: Summary information for images in a repository
+    description: Summary information for images in a repository.
     type: object
     properties:
       active_from:
-        description: Time from which an image must have been pushed or pulled to be counted as active
+        description: Time from which an image must have been pushed or pulled to be counted as active.
         type: string
         example: '2021-01-25T14:25:37.076343059Z'
       statistics:
         type: object
         properties:
           total:
-            description: Number of images in this repository
+            description: Number of images in this repository.
             type: integer
             example: 3
           active:
-            description: Number of images counted as active in this repository
+            description: Number of images counted as active in this repository.
             type: integer
             example: 2
           inactive:
-            description: Number of images counted as inactive in this repository
+            description: Number of images counted as inactive in this repository.
             type: integer
             example: 1
   GetNamespaceRepositoryImagesResponse:
-    description: Paginated list of images in a repository
+    description: Paginated list of images in a repository.
     type: object
     properties:
       count:
-        description: Total count of images in the repository
+        description: Total count of images in the repository.
         type: integer
         example: 100
       next:
-        description: Link to the next page with the same query parameters if there are more images
+        description: Link to the next page with the same query parameters if there are more images.
         type: string
         example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=4&page_size=20
         x-nullable: true
       previous:
-        description: Link to the previous page with the same query parameters if not on first page
+        description: Link to the previous page with the same query parameters if not on first page.
         type: string
         example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=2&page_size=20
         x-nullable: true
       results:
         type: array
-        description: Image details
+        description: Image details.
         items:
           type: object
           properties:
             namespace:
-              description: The repository namespace
+              description: The repository namespace.
               type: string
               example: mynamespace
             repository:
-              description: The repository name
+              description: The repository name.
               type: string
               example: myrepo
             digest:
-              description: The image's digest
+              description: The image's digest.
               type: string
               example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
             tags:
-              description: The current and historical tags for this image
+              description: The current and historical tags for this image.
               type: array
               items:
                 type: object
                 properties:
                   tag:
-                    description: The tag
+                    description: The tag.
                     type: string
                     example: latest
                   is_current:
                     description: |
-                      `true` if the tag currently points to this image
+                      `true` if the tag currently points to this image.
 
-                      `false` if it has been overwritten to point at a different image
+                      `false` if it has been overwritten to point at a different image.
                     type: boolean
                     example: true
             last_pushed:
-              description: Time when this image was last pushed
+              description: Time when this image was last pushed.
               type: string
               x-nullable: true
               example: '2021-02-24T22:05:27.526308Z'
             last_pulled:
-              description: Time when this image was last pulled. Note this is updated at most once per hour
+              description: Time when this image was last pulled. Note this is updated at most once per hour.
               type: string
               x-nullable: true
               example: '2021-02-24T23:16:10.200008Z'
             status:
-              description: The status of the image based on it's last activity against the active_from time
+              description: The status of the image based on its last activity against the `active_from` time.
               type: string
               enum: [active, inactive]
               example: active
   PostNamespacesDeleteImagesRequest:
-    description: Delete images request
+    description: Delete images request.
     type: object
     properties:
       dry_run: 
-        description: If `true` then will check and return errors and unignored warnings for the deletion request but will not delete any images
+        description: If `true` then will check and return errors and unignored warnings for the deletion request but will not delete any images.
         type: boolean
         example: false
       active_from:
         description: | 
-            Sets the time from which an image must have been pushed or pulled to be counted as active
+            Sets the time from which an image must have been pushed or pulled to be counted as active.
 
-            Defaults to 1 month before the current time
+            Defaults to 1 month before the current time.
         type: string
         example: '2020-12-01T12:00:00Z'
       manifests:
-        description: Image manifests to delete
+        description: Image manifests to delete.
         type: array
         items:
           type: object
           required: [repository, digest]
           properties:
             repository:
-              description: Name of repository to delete the image from
+              description: Name of the repository to delete the image from.
               type: string
               example: myrepo
             digest:
-              description: Digest of the image to delete
+              description: Digest of the image to delete.
               type: string
               example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
       ignore_warnings:
         description: |
-          Warnings to ignore. If a warning is not ignored then no deletions will happen and the warning is returned in the response
+          Warnings to ignore. If a warning is not ignored then no deletions will happen and the warning is returned in the response.
 
           These warnings include:
 
-          * is_active: warning when attempting to delete an image that is marked as active
+          * is_active: warning when attempting to delete an image that is marked as active.
           
-          * current_tag: warning when attempting to delete an image that has one or more current tags in the repository
+          * current_tag: warning when attempting to delete an image that has one or more current tags in the repository.
 
-          Warnings can be copied from the response to the request
+          Warnings can be copied from the response to the request.
         type: array
         items:
           type: object
           required: [repository, digest, warning]
           properties:
             repository:
-              description: Name of the repository of the image to ignore the warning for
+              description: Name of the repository of the image to ignore the warning for.
               type: string
               example: myrepo
             digest:
-              description: Digest of the image to ignore the warning for
+              description: Digest of the image to ignore the warning for.
               type: string
               example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
             warning:
-              description: Warning to ignore
+              description: Warning to ignore.
               type: string
               enum: [is_active, current_tag]
               example: current_tag
             tags:
-              description: Current tags to ignore
+              description: Current tags to ignore.
               type: array
               items:
                 type: string
                 example: latest
   PostNamespacesDeleteImagesResponseSuccess:
-    description: Successful delete images response
+    description: Successful delete images response.
     type: object
     properties:
       dry_run:
-        description: Whether the request was a dry run or not
+        description: Whether the request was a dry run or not.
         type: boolean
         example: false
       metrics:
         type: object
         properties:
           manifest_deletes:
-            description: Number of manifests deleted
+            description: Number of manifests deleted.
             type: integer
             example: 3
           manifest_errors:
-            description: Number of manifests that failed to delete
+            description: Number of manifests that failed to delete.
             type: integer
             example: 0
           tag_deletes:
-            description: Number of tags deleted
+            description: Number of tags deleted.
             type: integer
             example: 1
           tag_errors:
-            description: Number of tags that failed to delete
+            description: Number of tags that failed to delete.
             type: integer
             example: 0
   PostNamespacesDeleteImagesResponseError:
-    description: Deletion not possible
+    description: Deletion not possible.
     type: object
     properties:
       txnid:
-        description: Unique ID for this call
+        description: Unique ID for this call.
         type: string
       message:
-        description: The error message
+        description: The error message.
         type: string
       errinfo:
         allOf:
@@ -293,61 +293,61 @@ definitions:
           - type: object
             properties:
               type:
-                description: Type of error
+                description: Type of error.
                 type: string
                 example: validation
               details:
                 type: object
                 properties:
                   errors:
-                    description: Errors from validating delete request. These cannot be ignored
+                    description: Errors from validating delete request. These cannot be ignored.
                     type: array
                     items:
                       type: object
                       properties:
                         repository:
-                          description: Name of repository of the image that caused the error
+                          description: Name of the repository of the image that caused the error.
                           type: string
                           example: myrepo
                         digest: 
-                          description: Digest of the image that caused the error
+                          description: Digest of the image that caused the error.
                           type: string
                           example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
                         error:
-                          description: Error type
+                          description: Error type.
                           type: string
                           enum: [not_found, unauthorized, child_manifest]
                           example: not_found
                   warnings:
                     description: |
-                      Warnings that can be ignored
+                      Warnings that can be ignored.
 
                       These warnings include:
 
-                      * is_active: warning when attempting to delete an image that is marked as active
+                      * is_active: warning when attempting to delete an image that is marked as active.
                       
-                      * current_tag: warning when attempting to delete an image that has one or more current tags in the repository
+                      * current_tag: warning when attempting to delete an image that has one or more current tags in the repository.
 
-                      Warnings can be copied from the response to the request
+                      Warnings can be copied from the response to the request.
                     type: array
                     items:
                       type: object
                       properties:
                         repository:
-                          description: Name of the repository of the image that caused the warning
+                          description: Name of the repository of the image that caused the warning.
                           type: string
                           example: myrepo
                         digest:
-                          description: Digest of the image that caused the warning
+                          description: Digest of the image that caused the warning.
                           type: string
                           example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
                         warning:
-                          description: Warning type
+                          description: Warning type.
                           type: string
                           enum: [is_active, current_tag]
                           example: current_tag
                         tags:
-                          description: Current tags if warning is `current_tag`
+                          description: Current tags if warning is `current_tag`.
                           type: array
                           items:
                             type: string
@@ -361,13 +361,13 @@ paths:
       description: |
         Creates an authentication token that can be used to authenticate with the Docker Hub APIs.
 
-        The returned token is used in the HTTP Authentication header like `Authentication: JWT {TOKEN}`
+        The returned token is used in the HTTP Authentication header like `Authentication: JWT {TOKEN}`.
 
-        Most Docker Hub APIs require this token either to consume or to get detailed information (e.g. listing images of the private repository).
+        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
       parameters:
         - name: body
           in: body
-          description: Login details
+          description: Login details.
           required: true
           schema:
             $ref: '#/definitions/UsersLoginRequest'
@@ -385,7 +385,7 @@ paths:
       tags: [Images]
       summary: Get summary of repository's images
       description: |
-        Gets the number of images in a repository and the number of images counted as active and inactive
+        Gets the number of images in a repository and the number of images counted as active and inactive.
       operationId: GetNamespacesRepositoriesImagesSummary
       produces:
         - application/json
@@ -393,20 +393,20 @@ paths:
         - name: namespace
           in: path
           required: true
-          description: Namespace of repository
+          description: Namespace of the repository.
           type: string
         - name: repository
           in: path
           required: true
-          description: Name of repository
+          description: Name of the repository.
           type: string
         - name: active_from
           in: query
           required: false
           description: | 
-            Sets the time from which an image must have been pushed or pulled to be counted as active
+            Sets the time from which an image must have been pushed or pulled to be counted as active.
 
-            Defaults to 1 month before the current time
+            Defaults to 1 month before the current time.
           type: string
       responses:
         200:
@@ -421,7 +421,7 @@ paths:
     get:
       tags: [Images]
       summary: Get details of repository's images
-      description: Gets details on the images in a repository
+      description: Gets details on the images in a repository.
       operationId: GetNamespacesRepositoriesImages
       produces:
         - application/json
@@ -429,40 +429,40 @@ paths:
         - name: namespace
           in: path
           required: true
-          description: Namespace of repository
+          description: Namespace of the repository.
           type: string
         - name: repository
           in: path
           required: true
-          description: Name of repository
+          description: Name of the repository.
           type: string
         - name: status
           in: query
           required: false
-          description: Filters to only show images of this status
+          description: Filters to only show images of this status.
           type: string
           enum: [active, inactive]
         - name: ordering
           in: query
           required: false
           description: |
-            Orders the results by this property
+            Orders the results by this property.
 
-            Prefixing with `-` sorts by descending order
+            Prefixing with `-` sorts by descending order.
           type: string
           enum: [last_activity, -last_activity, digest, -digest]
         - name: active_from
           in: query
           required: false
           description: | 
-            Sets the time from which an image must have been pushed or pulled to be counted as active
+            Sets the time from which an image must have been pushed or pulled to be counted as active.
 
-            Defaults to 1 month before the current time
+            Defaults to 1 month before the current time.
           type: string
         - name: page
           in: query
           required: false
-          description: Page number to get. Defaults to 1
+          description: Page number to get. Defaults to 1.
           type: integer
         - name: page_size
           in: query
@@ -488,21 +488,21 @@ paths:
       summary: Delete images
       operationId: PostNamespacesDeleteImages
       description: |
-        Deletes one or more images withing a namespace (note: currently limited to a single repostiory).
+        Deletes one or more images within a namespace. This is currently limited to a single repostiory.
 
-        If you attempt to delete images that are marked as active or are currently tagged then the deletions will not happen and these warnings will be returned.
-        To continue with the deletion you must ignore these warnings by putting them in the `ignore_warnings` property.
+        If you attempt to delete images that are marked as active or are currently tagged, the deletion does not happen and it displays the warnings.
+        To continue with the deletion, you must ignore these warnings by putting them in the `ignore_warnings` property.
 
-        Deleting a currently tagged image will delete the tag from the repository.
+        Deleting a currently tagged image deletes the tag from the repository.
 
-        Errors cannot be ignored. Children of multi-arch images cannot be directly deleted.
+        You cannot ignore errors. It is not possible to directly delete children of multi-arch images.
       parameters:
         - name: namespace
           in: path
           required: true
-          description: Namespace of repository
+          description: Namespace of the repository.
           type: string
-        - description: Delete request
+        - description: Delete request.
           in: body
           name: body
           required: true
