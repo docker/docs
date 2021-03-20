@@ -58,6 +58,7 @@ $ docker ps nostalgic_morse
 
 CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
 bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds  0.0.0.0:49155->5000/tcp  nostalgic_morse
+```
 
 You also saw how you can bind a container's ports to a specific port using
 the `-p` flag. Here port 80 of the host is mapped to port 5000 of the
