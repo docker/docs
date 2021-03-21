@@ -24,7 +24,7 @@ $ docker run python-docker
 
 After running this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
-Let’s make a `GET` request to the server using the `curl` command.
+Let’s open a new terminal then make a `GET` request to the server using the `curl` command.
 
 ```shell
 $ curl localhost:8000
@@ -43,7 +43,7 @@ We did not specify a port when running the flask application in the container an
 $ docker run --publish 8000:5000 python-docker
 ```
 
-Now, let’s rerun the curl command from above:
+Now, let’s rerun the curl command from above. Remember to open a new terminal.
 
 ```shell
 $ curl localhost:8000
