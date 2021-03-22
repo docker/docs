@@ -9,7 +9,7 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-# 2021-03-dd
+# 2021-03-22
 
 ### New feature
 
