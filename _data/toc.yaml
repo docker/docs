@@ -1060,6 +1060,8 @@ reference:
         title: v1.19 reference
       - path: /engine/api/v1.18/
         title: v1.18 reference
+  - title: Docker Hub API
+    path: /docker-hub/api/latest/
   - title: Registry API
     path: /registry/spec/api/
 - title: Dockerfile reference
@@ -1354,6 +1356,8 @@ manuals:
     title: Download rate limit
   - sectiontitle: Administration
     section:
+     - path: /docker-hub/image-management/
+       title: Advanced Image Management dashboard
      - path: /docker-hub/convert-account/
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
