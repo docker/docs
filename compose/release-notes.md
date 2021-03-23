@@ -14,7 +14,7 @@ redirect_from:
 
 - Made `--env-file` relative to the current working directory. Environment file paths set with `--env-file` are now relative to the current working directory and override the default `.env` file located in the project directory.
 
-- Fixed missing service property `storage_opt` by updating the compose schema.
+- Fixed missing service property `storage_opt` by updating the Compose schema.
 
 - Fixed build `extra_hosts` list format.
 
