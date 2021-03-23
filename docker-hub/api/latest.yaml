@@ -32,6 +32,10 @@ tags:
     description: |
       The Advanced Image Management API endpoints allow you to manage Docker images across all repositories.
       For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
+  - name: Audit Logs
+    x-displayName: Audit Logs
+    description: |
+      The Audit Logs API endpoints allow you to query audit log events across your repositories and organizations.
 definitions:
   UsersLoginRequest:
     description: User login details
@@ -352,6 +356,89 @@ definitions:
                           items:
                             type: string
                             example: latest
+  protobufAny:
+    type: object
+    properties:
+      type_url:
+        type: string
+      value:
+        type: string
+        format: byte
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+  AuditLogAction:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of audit log action.
+      description:
+        type: string
+        description: Description of audit log action.
+      label:
+        type: string
+        description: Label for audit log action.
+    description: Audit Log action
+  AuditLogActions:
+    type: object
+    properties:
+      actions:
+        type: array
+        items:
+          $ref: '#/definitions/AuditLogAction'
+        description: List of audit log actions.
+      label:
+        type: string
+        description: Grouping label for a particular set of audit log actions.
+  GetAuditActionsResponse:
+    type: object
+    properties:
+      actions:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/AuditLogActions'
+        description: Map of audit log actions.
+    description: GetAuditActions response.
+  GetAuditLogsResponse:
+    type: object
+    properties:
+      logs:
+        type: array
+        items:
+          $ref: '#/definitions/AuditLog'
+        description: List of audit log events.
+    description: GetAuditLogs response.
+  AuditLog:
+    type: object
+    properties:
+      account:
+        type: string
+      action:
+        type: string
+      name:
+        type: string
+      actor:
+        type: string
+      data:
+        type: object
+        additionalProperties:
+          type: string
+      timestamp:
+        type: string
+        format: date-time
+      action_description:
+        type: string
+    description: Audit log event.
 paths:
   /v2/users/login:
     post:
@@ -521,3 +608,165 @@ paths:
           description: Forbidden - this API is only available to users on Pro or Team plans
           schema:
             $ref: '#/definitions/ErrorResponse'
+  /v2/auditlogs/{namespace}:
+    get:
+      summary: Returns list of audit log  events.
+      description: Get audit log events.
+      operationId: AuditLogs_GetAuditLogs
+      responses:
+        200:
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetAuditLogsResponse'
+          examples:
+            application/json:
+              logs:
+                - account: docker
+                  action: repo.tag.push
+                  name: docker/example
+                  actor: docker
+                  data:
+                    digest: 'sha256:c1ae9c435032a276f80220c7d9b40f76266bbe79243d34f9cda30b76fe114dfa'
+                    tag: latest
+                  timestamp: '2021-02-19T01:34:35Z'
+                  action_description: 'pushed the tag latest with the digest sha256:c1ae9c435032a to the repository docker/example'
+        429:
+          description: ''
+          schema: {}
+          examples:
+            application/json:
+              detail: Rate limit exceeded
+              error: false
+        500:
+          description: ''
+          schema: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: namespace
+          description: Account or namespace to query audit logs for.
+          in: path
+          required: true
+          type: string
+        - name: action
+          description: 'action name one of ["repo.tag.push", ...]. Optional parameter to filter specific audit log actions.'
+          in: query
+          required: false
+          type: string
+        - name: name
+          description: 'name. Optional parameter to filter audit log events to a specific name. For repository events, this is the repository name. For organization events, this is the organization name. For team member events, this is a username.'
+          in: query
+          required: false
+          type: string
+        - name: actor
+          description: actor name. Optional parameter to filter audit log events to the specific user who triggered the event.
+          in: query
+          required: false
+          type: string
+        - name: from
+          description: Start of the time window you wish to query audit events for.
+          in: query
+          required: true
+          type: string
+          format: date-time
+        - name: to
+          description: End of the time window you wish to query audit events for.
+          in: query
+          required: true
+          type: string
+          format: date-time
+        - name: page
+          description: page - specify page number. Page number to get.
+          in: query
+          required: false
+          type: integer
+          format: int32
+          default: '1'
+        - name: page_size
+          description: page_size - specify page size. Number of events to return per page.
+          in: query
+          required: false
+          type: integer
+          format: int32
+          default: '25'
+      tags:
+        - AuditLogs
+  /v2/auditlogs/{namespace}/actions:
+    get:
+      summary: Returns list of audit log actions.
+      description: Get audit log actions.
+      operationId: AuditLogs_GetAuditActions
+      responses:
+        200:
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/GetAuditActionsResponse'
+          examples:
+            application/json:
+              actions:
+                org:
+                  actions:
+                    - name: team.create
+                      description: contains team create events
+                      label: Team Created
+                    - name: team.delete
+                      description: contains team delete events
+                      label: Team Deleted
+                    - name: team.member.add
+                      description: contains team member add events
+                      label: Team Member Added
+                    - name: team.member.remove
+                      description: contains team member remove events
+                      label: Team Member Removed
+                    - name: team.member.invite
+                      description: contains team member invite events
+                      label: Team Member Invited
+                    - name: member.removed
+                      description: contains org member removeevents
+                      label: Organization Member Removed
+                    - name: create
+                      description: contains organization create events
+                      label: Organization Created
+                  label: Organization
+                repo:
+                  actions:
+                    - name: create
+                      description: contains repository create events
+                      label: Repository Created
+                    - name: delete
+                      description: contains repository delete events
+                      label: Repository Deleted
+                    - name: change_privacy
+                      description: contains repository privacy change events
+                      label: Privacy Changed
+                    - name: tag.push
+                      description: contains image tag push events
+                      label: Tag Pushed
+                    - name: tag.delete
+                      description: contains image tag delete events
+                      label: Tag Deleted
+                  label: Repository
+        429:
+          description: ''
+          schema: {}
+          examples:
+            application/json:
+              detail: Rate limit exceeded
+              error: false
+        500:
+          description: ''
+          schema: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: namespace
+          description: Account or namespace to query audit log actions for.
+          in: path
+          required: true
+          type: string
+      tags:
+        - AuditLogs
