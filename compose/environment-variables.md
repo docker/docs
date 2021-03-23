@@ -31,10 +31,11 @@ path to your environment variables file using the `--env-file` command line opti
 You can set default values for any environment variables referenced in the
 Compose file, or used to configure Compose, in an [environment file](env-file.md)
 named `.env`. The `.env` file path is as follows:
-  - Since `+v1.28`, `.env.` file is placed at the base of the project directory 
+
+  - Starting with `+v1.28`, `.env.` file is placed at the base of the project directory 
   - For previous versions, it is placed in the current working directory where the
-  Docker Compose command is executed unless a --project-directory is defined which
-  overrides the path for the `.env` file. This inconsistency has been addressed
+  Docker Compose command is executed unless a `--project-directory` is defined which
+  overrides the path for the `.env` file. This inconsistency is addressed
   in `+v1.28` by limiting the filepath to the project directory.
 
 
@@ -78,9 +79,9 @@ services:
     image: 'webapp:v2.0'
 ```
 
-The environment file path can be overriden by using a commandline argument `--env-file`.
+You can override the environment file path using a command line argument `--env-file`.
 
-### Using “--env-file”  option 
+### Using the “--env-file”  option 
 
 By passing the file as an argument, you can store it anywhere and name it 
 appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
@@ -108,6 +109,7 @@ services:
 ```
 
 The `.env` file is loaded by default:
+
 ```shell
 $ docker-compose config 
 version: '3'
@@ -126,11 +128,11 @@ services:
 ```
 
 When an invalid file path is being passed as `--env-file` argument, Compose returns an error:
+
 ```
 $ docker-compose --env-file ./doesnotexist/.env.dev  config
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```
-
 
 For more information, see the
 [Variable substitution](compose-file/compose-file-v3.md#variable-substitution) section in the
@@ -178,14 +180,14 @@ web:
 
 ## Set environment variables with 'docker-compose run'
 
-Just like with `docker run -e`, you can set environment variables on a one-off
+Similar to `docker run -e`, you can set environment variables on a one-off
 container with `docker-compose run -e`:
 
 ```shell
 docker-compose run -e DEBUG=1 web python console.py
 ```
 
-You can also pass a variable through from the shell by not giving it a value:
+You can also pass a variable from the shell by not giving it a value:
 
 ```shell
 docker-compose run -e DEBUG web python console.py
@@ -193,8 +195,6 @@ docker-compose run -e DEBUG web python console.py
 
 The value of the `DEBUG` variable in the container is taken from the value for
 the same variable in the shell in which Compose is run.
-
-
 
 When you set the same environment variable in multiple files, here's the
 priority used by Compose to choose which value to use:
