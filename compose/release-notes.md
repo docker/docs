@@ -7,6 +7,23 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.28.6
+(2021-03-23)
+
+### Bug fixes
+
+- Made `--env-file` relative to the current working directory. Environment file paths set with `--env-file` are now relative to the current working directory and override the default `.env` file located in the project directory.
+
+- Fixed missing service property `storage_opt` by updating the Compose schema.
+
+- Fixed build `extra_hosts` list format.
+
+- Removed additional error message on `exec`.
+
+### Miscellaneous
+
+- Added `compose.yml` and `compose.yaml` to the default filename list.
+
 ## 1.28.5 
 (2021-02-26)
 
