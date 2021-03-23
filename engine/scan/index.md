@@ -7,68 +7,20 @@ toc_max: 2
 ---
 
 
-> You can view the Snyk vulnerability scan results on the Docker Desktop or Hub dashboards with Docker Pro or Team subscriptions. Check out the [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} page for details.
+> Looking to speed up your development cycles? Quickly detect and learn how to remediate CVEs in your images by running `docker scan IMAGE_NAME`. Check out [How to scan images](#how-to-scan-images) for details.
 
-## Overview
+Vulnerability scanning for Docker local images  allows developers and development teams to review the security state of the container images and take actions to fix issues identified during the scan, resulting in more secure deployments. Docker Scan runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images.
 
-Vulnerability scanning for Docker local images runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images. Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results.  The scanning function creates the list of Common Vulnerabilities and Exposures (CVEs), and provides recommendations for CVE remediations.
+Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan result contains a list of Common Vulnerabilities and Exposures (CVEs), the source of the vulnerability, such as OS packages and libraries, version in which it was introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
+
+For information about the system requirements to run vulnerability scanning, see [Prerequisites](#prerequisites).
 
 This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
 
->**Note**
->
 > Docker vulnerability scanning for local images  is currently a beta release. The commands and flags are subject to change in subsequent releases.
 {:.important}
 
-## Prerequisites
-
-To run vulnerability scanning on your Docker images, you must meet the following requirements:
-
-1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
-
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
-
-2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-
-3. From the Docker Desktop menu, select **Sign in/ Create Docker ID**. Alternatively, open a terminal and run the command `docker login`.
-
-4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
-
-Check your installation by running `docker scan --version`, it should print the current version of docker scan and the Snyk engine version. For example:
-
-```shell
-$ docker scan --version
-Version:    v0.5.0
-Git commit: 5a09266
-Provider:   Snyk (1.432.0)
-```
-
-> **Note:**
->
-> Docker Scan uses the Snyk binary installed in your environment by default. If 
-this is not available, it uses the Snyk binary embedded in Docker Desktop.
-> The minimum version required for Snyk is `1.385.0`.
-
-## Supported options
-
-The high-level `docker scan` command scans local images using the image name or the image ID. It supports the following options:
-
-| Option                                                       | Description                                   |
-|:------------------------------------------------------------------ :------------------------------------------------|
-| `--accept license` | Accept the license agreement of the third-party scanning provider    |
-| `--dependency-tree` | Display the dependency tree of the image along with scan results |
-| `--exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
-| `-f`, `--file string` | Specify the location of the Dockerfile associated with the image. This option displays a detailed scan result |
-| `--json` | Display the result of the scan in JSON format|
-| `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
-| `--reject-license` | Reject the license agreement of the third-party scanning provider |
-| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
-| `--token string`  | Use the authentication token to log into the third-party scanning provider |
-| `--version` | Display the Docker Scan plugin version |
-
-
-## How to Scan images
+## How to scan images
 
 The `docker scan` command allows you to scan existing Docker images using the image name or ID.  For example, run the following command to scan the hello-world image:
 
@@ -88,7 +40,7 @@ $  docker scan hello-world
   Note that we do not currently have vulnerability data for your image.
 ```
 
-### Getting a detailed scan report
+### Get a detailed scan report
 
 You can get a detailed scan report about a Docker image by providing the Dockerfile used to create the image. The syntax is `docker scan --file PATH_TO_DOCKERFILE DOCKER_IMAGE`.
 
@@ -380,6 +332,53 @@ Your account has been authenticated. Snyk is now ready to be used.
 ```
 
 If you use the `--login` flag without any token, you will be redirected to the Snyk website to login.
+
+## Prerequisites
+
+To run vulnerability scanning on your Docker images, you must meet the following requirements:
+
+1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
+
+    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
+    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+
+2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+
+3. From the Docker Desktop menu, select **Sign in/ Create Docker ID**. Alternatively, open a terminal and run the command `docker login`.
+
+4. (Optional) You can create a [Snyk account](https://dockr.ly/3ePqVcp){: target="_blank" rel="noopener" class="_"} for scans, or use the additional monthly free scans provided by Snyk with your Docker Hub account.
+
+Check your installation by running `docker scan --version`, it should print the current version of docker scan and the Snyk engine version. For example:
+
+```shell
+$ docker scan --version
+Version:    v0.5.0
+Git commit: 5a09266
+Provider:   Snyk (1.432.0)
+```
+
+> **Note:**
+>
+> Docker Scan uses the Snyk binary installed in your environment by default. If 
+this is not available, it uses the Snyk binary embedded in Docker Desktop.
+> The minimum version required for Snyk is `1.385.0`.
+
+## Supported options
+
+The high-level `docker scan` command scans local images using the image name or the image ID. It supports the following options:
+
+| Option                                                       | Description                                   |
+|:------------------------------------------------------------------ :------------------------------------------------|
+| `--accept license` | Accept the license agreement of the third-party scanning provider    |
+| `--dependency-tree` | Display the dependency tree of the image along with scan results |
+| `--exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
+| `-f`, `--file string` | Specify the location of the Dockerfile associated with the image. This option displays a detailed scan result |
+| `--json` | Display the result of the scan in JSON format|
+| `--login` | Log into Snyk using an optional token (using the flag --token), or by using a web-based token |
+| `--reject-license` | Reject the license agreement of the third-party scanning provider |
+| `--severity string` | Only report vulnerabilities of provided level or higher (low, medium, high) |
+| `--token string`  | Use the authentication token to log into the third-party scanning provider |
+| `--version` | Display the Docker Scan plugin version |
 
 ## Known issues
 
