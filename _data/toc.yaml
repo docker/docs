@@ -1270,8 +1270,6 @@ manuals:
       title: Install Docker Desktop for Mac
     - path: /docker-for-mac/
       title: User manual
-    - path: /docker-for-mac/kubernetes/
-      title: Deploy on Kubernetes
     - path: /docker-for-mac/multi-arch/
       title: Leveraging Multi-CPU architecture support
     - path: /docker-for-mac/networking/
@@ -1290,8 +1288,6 @@ manuals:
       title: Install Docker Desktop for Windows
     - path: /docker-for-windows/
       title: User manual
-    - path: /docker-for-windows/kubernetes/
-      title: Deploy on Kubernetes
     - path: /docker-for-windows/networking/
       title: Networking
     - path: /docker-for-windows/troubleshoot/
@@ -1302,6 +1298,8 @@ manuals:
       title: Docker Desktop WSL 2 backend
   - path: /desktop/dashboard/
     title: Dashboard
+  - path: /desktop/kubernetes/
+    title: Deploy on Kubernetes
   - path: /desktop/faqs/
     title: FAQs
   - path: /desktop/backup-and-restore/

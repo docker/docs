@@ -205,53 +205,9 @@ Server: Docker Engine - Community
 ### Kubernetes
 
 Docker Desktop includes a standalone Kubernetes server that runs on your Mac, so
-that you can test deploying your Docker workloads on Kubernetes.
+that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
-The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server. If you have `kubectl` already installed and
-pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-desktop`:
-
-```bash
-$ kubectl config get-contexts
-$ kubectl config use-context docker-desktop
-```
-
-If you installed `kubectl` with Homebrew, or by some other method, and
-experience conflicts, remove `/usr/local/bin/kubectl`.
-
-- To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes**. To set Kubernetes as the
-  [default orchestrator](kubernetes.md#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
-
-   Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the
-  `/usr/local/bin/kubectl` command on your Mac.
-
-  ![Enable Kubernetes](images/kubernetes/kube.png){:width="750px"}
-
-  When Kubernetes is enabled and running, an additional status bar item displays
-  at the bottom right of the Docker Desktop Settings dialog.
-
-  The status of Kubernetes shows in the Docker menu and the context points to
-  `docker-desktop`.
-
-  ![Docker Menu with Kubernetes](images/kubernetes/kube-context.png){: width="400px"}
-
-- By default, Kubernetes containers are hidden from commands like `docker
-  service ls`, because managing them manually is not supported. To make them
-  visible, select **Show system containers (advanced)** and click **Apply and
-  Restart**. Most users do not need this option.
-
-- To disable Kubernetes support at any time, clear the **Enable Kubernetes** check box. The
-  Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
-
-  For more about using the Kubernetes integration with Docker Desktop, see
-  [Deploy on Kubernetes](kubernetes.md){:target="_blank" rel="noopener" class="_"}.
-
-> Upgrade Kubernetes
->
-> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset the Kubernetes Cluster**.
+For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ### Reset
 
