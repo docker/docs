@@ -17,9 +17,6 @@ For information about the system requirements to run vulnerability scanning, see
 
 This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
 
-> Docker vulnerability scanning for local images  is currently a beta release. The commands and flags are subject to change in subsequent releases.
-{:.important}
-
 ## How to scan images
 
 The `docker scan` command allows you to scan existing Docker images using the image name or ID.  For example, run the following command to scan the hello-world image:
@@ -389,4 +386,4 @@ The high-level `docker scan` command scans local images using the image name or 
 
 ## Feedback
 
-Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out the vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" rel="noopener" class="_"} GitHub repository.
