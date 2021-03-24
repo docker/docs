@@ -38,5 +38,5 @@ For Docker Desktop installation instructions, see:
 You can install the new Compose CLI, including this Tech Preview, using the following install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```

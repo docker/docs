@@ -95,6 +95,10 @@ a custom project name by using the
 [`-p` command line option](reference/overview.md) or the
 [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 
+The default project directory is the base directory of the Compose file. A custom value
+for it can be defined with the `--project-directory` command line option.
+
+
 ### Preserve volume data when containers are created
 
 Compose preserves all volumes used by your services. When `docker-compose up`
