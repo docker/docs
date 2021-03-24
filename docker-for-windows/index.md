@@ -256,50 +256,10 @@ Server: Docker Engine - Community
 >
 > The Kubernetes tab is not available in Windows container mode.
 
-Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
+Docker Desktop includes a standalone Kubernetes server that runs on your Windows machince, so
+that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
-![Enable Kubernetes](images/settings-kubernetes.png){:width="750px"}
-
-The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server. If you have `kubectl` already installed and
-pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-desktop`:
-
-```bash
-> kubectl config get-contexts
-> kubectl config use-context docker-desktop
-```
-
- To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes**.
-
-To set Kubernetes as the
-  [default orchestrator](/docker-for-windows/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
-
-By default, Kubernetes containers are hidden from commands like `docker
-service ls`, because managing them manually is not supported. To make them
-visible, select **Show system containers (advanced)**. Most users do not need this option.
-
-Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
-
-- When Kubernetes is enabled and running, an additional status bar item displays
-at the bottom right of the Docker Desktop Settings dialog. The status of Kubernetes shows in the Docker menu and the context points to
-  `docker-desktop`.
-
-- To disable Kubernetes support at any time, clear the **Enable Kubernetes** check box.
-  The Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
-
-- To delete all stacks and Kubernetes resources, select **Reset Kubernetes Cluster**.
-
-- If you installed `kubectl` by another method, and
-experience conflicts, remove it.
-
-  For more information on using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
-
-> Upgrade Kubernetes
->
-> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
+For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ### Reset
 
