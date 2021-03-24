@@ -38,7 +38,7 @@ $ docker network create mysqlnet
 Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
 
 ```shell
-$ docker run -it --rm -d -v mysql:/var/lib/mysql \
+$ docker run --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
   --name mysqldb \
@@ -146,7 +146,7 @@ First, let’s add the `mysql-connector-python` module to our application using 
 
 ```shell
 $ pip3 install mysql-connector-python
-$ pip3 freeze -r requirements.txt
+$ pip3 freeze > requirements.txt
 ```
 
 Now we can build our image.
@@ -159,7 +159,7 @@ Now, let’s add the container to the database network and then run our containe
 
 ```shell
 $ docker run \
-  -it --rm -d \
+  --rm -d \
   --network mysqlnet \
   --name rest-server \
   -p 5000:5000 \
@@ -169,18 +169,14 @@ $ docker run \
 Let’s test that our application is connected to the database and is able to add a note.
 
 ```shell
-$ curl http://localhost:5000/db
-$ curl --request POST \
-  --url http://localhost:5000/widgets \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data 'name=widget01' \
-  --data 'description=this is a test widget'
+$ curl http://localhost:5000/initdb
+$ curl http://localhost:5000/widgets
 ```
 
 You should receive the following JSON back from our service.
 
 ```shell
-[{"name": "widget01", "description": "this is a test widget"}]
+[]
 ```
 
 ## Use Compose to develop locally
@@ -233,8 +229,8 @@ We pass the `--build` flag so Docker will compile our image and then starts the 
 Now let’s test our API endpoint. Run the following curl commands:
 
 ```shell
-$ curl --request GET --url http://localhost:5000/db
-$ curl --request GET --url http://localhost:5000/widgets
+$ curl http://localhost:5000/initdb
+$ curl http://localhost:5000/widgets
 ```
 
 You should receive the following response:
