@@ -469,13 +469,6 @@ Probably the most common use-case for `RUN` is an application of `apt-get`.
 Because it installs packages, the `RUN apt-get` command has several gotchas to
 look out for.
 
-Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
-packages from the parent images cannot upgrade inside an
-[unprivileged container](../../engine/reference/run.md#security-configuration). If a package
-contained in the parent image is out-of-date, contact its maintainers. If you
-know there is a particular package, `foo`, that needs to be updated, use
-`apt-get install -y foo` to update automatically.
-
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
