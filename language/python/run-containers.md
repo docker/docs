@@ -35,7 +35,7 @@ As you can see, our `curl` command failed because the connection to our server w
 
 To stop the container, press ctrl-c. This will return you to the terminal prompt.
 
-To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 5000 inside the container to port 5000 outside the container, we would pass `3000:5000` to the `--publish` flag.
+To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 5000 inside the container to port 5000 outside the container, we would pass `5000:5000` to the `--publish` flag.
 
 We did not specify a port when running the flask application in the container and the default is 5000. If we want our previous request going to port 5000 to work we can map the host's port 5000 to the container's port 5000:
 
