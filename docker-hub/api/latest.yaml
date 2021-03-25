@@ -609,10 +609,10 @@ paths:
           description: Forbidden - this API is only available to users on Pro or Team plans
           schema:
             $ref: '#/definitions/ErrorResponse'
-  /v2/auditlogs/{namespace}:
+  /v2/auditlogs/{account}:
     get:
       summary: Returns list of audit log  events.
-      description: Get audit log events for a given namespace.
+      description: Get audit log events for a given account or namespace.
       operationId: AuditLogs_GetAuditLogs
       responses:
         200:
@@ -646,7 +646,7 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: namespace
+        - name: account
           description: Account or namespace to query audit logs for.
           in: path
           required: true
@@ -669,13 +669,13 @@ paths:
         - name: from
           description: Start of the time window you wish to query audit events for.
           in: query
-          required: true
+          required: false
           type: string
           format: date-time
         - name: to
           description: End of the time window you wish to query audit events for.
           in: query
-          required: true
+          required: false
           type: string
           format: date-time
         - name: page
@@ -684,20 +684,20 @@ paths:
           required: false
           type: integer
           format: int32
-          default: '1'
+          default: 1
         - name: page_size
           description: page_size - specify page size. Number of events to return per page.
           in: query
           required: false
           type: integer
           format: int32
-          default: '25'
+          default: 25
       tags:
         - "Audit Logs"
-  /v2/auditlogs/{namespace}/actions:
+  /v2/auditlogs/{account}/actions:
     get:
       summary: Returns list of audit log actions.
-      description: Get audit log actions for a namespace to be used as a filter for querying audit events.
+      description: Get audit log actions for an account or namespace to be used as a filter for querying audit events.
       operationId: AuditLogs_GetAuditActions
       responses:
         200:
@@ -764,7 +764,7 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-        - name: namespace
+        - name: account
           description: Account or namespace to query audit log actions for.
           in: path
           required: true
