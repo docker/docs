@@ -12,13 +12,13 @@ Welcome to Docker Desktop for Apple Silicon.
 >
 > We encourage you to try the release candidate and report any issues in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac) repository.
 
-## Docker Desktop RC 1
+## Docker Desktop RC 2
 
-2021-03-18
+2021-03-25
 
 Click on the following link to download the latest release candidate of Docker Desktop for Apple Silicon.
 
-> [Download](https://desktop.docker.com/mac/stable/arm64/62029/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/62293/Docker.dmg)
 
 ### Known issues
 
@@ -57,10 +57,23 @@ The following issues are not expected to be resolved in the final GA build for A
 
    We are still gathering data and testing alternate kernel versions.
 
+### Fixes since Docker Desktop RC 1
+
+- Inter-container HTTP and HTTPS traffic is now routed correctly. Previously it was accidentally forwarded to an HTTP proxy on the host. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+
 ### Fixes since Docker Desktop preview 3.1.0
 
 - The build should update automatically to future versions.
 - HTTP proxy support is working, including support for domain name based `no_proxy` rules via TLS SNI. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
+
+### Fixes since the Apple Silicon preview 7
+
+- Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
+- osxfs file sharing works.
+- The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve.
+- Removed hard-coded IP addresses: Docker Desktop now dynamically discovers the IP allocated by macOS.
+- The updated version includes a  change that should improve disk performance.
+- The **Restart** option in the Docker menu works.
 
 ## Feedback
 
