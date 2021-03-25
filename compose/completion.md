@@ -25,7 +25,7 @@ available.
        -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose \
        -o /etc/bash_completion.d/docker-compose
    ```
-3. Reload your terminal. You can close then open new one or in current bash reload your setting with `source ~/.bashrc` command.
+3. Reload your terminal. You can close and then open a new terminal, or reload your setting with `source ~/.bashrc` command in your current terminal.
 
 #### Mac
 
