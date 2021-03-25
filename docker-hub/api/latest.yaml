@@ -36,6 +36,7 @@ tags:
     x-displayName: Audit Logs
     description: |
       The Audit Logs API endpoints allow you to query audit log events across your repositories and organizations.
+      For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/)
 definitions:
   UsersLoginRequest:
     description: User login details
@@ -611,7 +612,7 @@ paths:
   /v2/auditlogs/{namespace}:
     get:
       summary: Returns list of audit log  events.
-      description: Get audit log events.
+      description: Get audit log events for a given namespace.
       operationId: AuditLogs_GetAuditLogs
       responses:
         200:
@@ -692,11 +693,11 @@ paths:
           format: int32
           default: '25'
       tags:
-        - AuditLogs
+        - "Audit Logs"
   /v2/auditlogs/{namespace}/actions:
     get:
       summary: Returns list of audit log actions.
-      description: Get audit log actions.
+      description: Get audit log actions for a namespace to be used as a filter for querying audit events.
       operationId: AuditLogs_GetAuditActions
       responses:
         200:
@@ -769,4 +770,4 @@ paths:
           required: true
           type: string
       tags:
-        - AuditLogs
+        - "Audit Logs"
