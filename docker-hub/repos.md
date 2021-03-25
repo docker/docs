@@ -218,7 +218,10 @@ To create a new service account for your Pro account:
 4. Add the new Docker ID as a collaborator.
 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 
+If you want a read-only PAT just for your open source repos, or to access
+official images and other public images, you do not have to grant any access permissions to the new Docker ID.
+
 > **Note**
 >
-> If you want a read-only PAT just for your open source repos, or to access
-> official images and other public images, you do not have to grant any access permissions to the new Docker ID.
+> Service accounts are still subject to Docker's fair pull limit policy 
+> To learn more about these limits please see our [usage FAQ](https://www.docker.com/pricing/resource-consumption-updates)
