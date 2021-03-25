@@ -40,7 +40,9 @@ Current versions of Docker include *swarm mode* for natively managing a cluster
 of Docker Engines called a *swarm*. Use the Docker CLI to create a swarm, deploy
 application services to a swarm, and manage swarm behavior.
 
-Docker Swarm mode is included in Docker Engine. Do not confuse Docker Swarm mode with the deprecated predecessor [Docker Classic Swarm](https://github.com/docker/classicswarm).
+Docker Swarm mode is built into the Docker Engine. Do not confuse Docker Swarm mode
+with [Docker Classic Swarm](https://github.com/docker/classicswarm){:target="_blank" rel="noopener" class="_"}
+which is no longer actively developed.
 
 ## Feature highlights
 
