@@ -223,5 +223,5 @@ official images and other public images, you do not have to grant any access per
 
 > **Note**
 >
-> Service accounts are still subject to Docker's fair pull limit policy 
-> To learn more about these limits please see our [usage FAQ](https://www.docker.com/pricing/resource-consumption-updates)
+> Service accounts are still subject to Docker's fair pull limit policy. 
+> To learn more about these limits, see our [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){:target="_blank" rel="noopener" class="_"}.
