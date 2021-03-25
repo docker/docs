@@ -11,7 +11,7 @@ toc_max: 2
 
 Vulnerability scanning for Docker local images  allows developers and development teams to review the security state of the container images and take actions to fix issues identified during the scan, resulting in more secure deployments. Docker Scan runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images.
 
-Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan result contains a list of Common Vulnerabilities and Exposures (CVEs), the source of the vulnerability, such as OS packages and libraries, version in which it was introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
+Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan results contain a list of Common Vulnerabilities and Exposures (CVEs), the sources, such as OS packages and libraries, versions in which they were introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
 
 For information about the system requirements to run vulnerability scanning, see [Prerequisites](#prerequisites).
 
