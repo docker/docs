@@ -657,7 +657,7 @@ paths:
           required: false
           type: string
         - name: name
-          description: 'name. Optional parameter to filter audit log events to a specific name. For repository events, this is the repository name. For organization events, this is the organization name. For team member events, this is a username.'
+          description: 'name. Optional parameter to filter audit log events to a specific name. For repository events, this is the name of the repository. For organization events, this is the name of the organization. For team member events, this is the username of the team member.'
           in: query
           required: false
           type: string
@@ -725,7 +725,7 @@ paths:
                       description: contains team member invite events
                       label: Team Member Invited
                     - name: member.removed
-                      description: contains org member removeevents
+                      description: contains org member remove events
                       label: Organization Member Removed
                     - name: create
                       description: contains organization create events
