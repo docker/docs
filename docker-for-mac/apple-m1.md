@@ -12,17 +12,21 @@ Welcome to Docker Desktop for Apple Silicon.
 >
 > We encourage you to try the release candidate and report any issues in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac) repository.
 
-## Docker Desktop RC 1
+## Docker Desktop RC 2
 
-2021-03-18
+2021-03-26
 
 Click on the following link to download the latest release candidate of Docker Desktop for Apple Silicon.
 
-> [Download](https://desktop.docker.com/mac/stable/arm64/62029/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
+
+In this build, we have defaulted to a `qemu`-based virtual machine, which we believe resolves some of the issues noted as known issues in the previous release candidate. You can switch between `qemu`-based and `virtualization.framework`-based virtual machines using the **Preferences** > **Experimental** tab.
+
+The backend that we choose for the GA release will depend on user feedback and bug reports. We are interested in your feedback on whether the known issues noted below are resolved with the `qemu` backend. We are equally interested in whether the `qemu` backend introduces other issues that we have not discovered in our in-house testing. Please help us by reporting any issues you have with this build, particularly in areas where your experience with the `qemu` backend is worse than the `virtualization.framework` backend.
 
 ### Known issues
 
-The following issues are not expected to be resolved in the final GA build for Apple Silicon. We are working with our partners on these.
+The following issues are not expected to be resolved in the final GA build for Apple Silicon.
 
 - You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, use this command:
 
@@ -36,6 +40,8 @@ The following issues are not expected to be resolved in the final GA build for A
    However, attempts to run Intel-based containers on Apple Silicon machines can crash as QEMU sometimes fails to run the container. Filesystem change notification APIs (e.g. `inotify`) do not work under QEMU emulation, see [docker/for-mac#5321](https://github.com/docker/for-mac/issues/5321). Therefore, we recommend that you run ARM64 containers on Apple Silicon machines. These containers are also faster and use less memory than Intel-based containers.
 
    We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
+
+The following issues are seen when using the `virtualization.framework` back end.
 
 - Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
 
@@ -57,10 +63,23 @@ The following issues are not expected to be resolved in the final GA build for A
 
    We are still gathering data and testing alternate kernel versions.
 
+### Fixes since Docker Desktop RC 1
+
+- Inter-container HTTP and HTTPS traffic is now routed correctly. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+
 ### Fixes since Docker Desktop preview 3.1.0
 
 - The build should update automatically to future versions.
 - HTTP proxy support is working, including support for domain name based `no_proxy` rules via TLS SNI. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
+
+### Fixes since the Apple Silicon preview 7
+
+- Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
+- osxfs file sharing works.
+- The `host.docker.internal` and `vm.docker.internal` DNS entries now resolve.
+- Removed hard-coded IP addresses: Docker Desktop now dynamically discovers the IP allocated by macOS.
+- The updated version includes a  change that should improve disk performance.
+- The **Restart** option in the Docker menu works.
 
 ## Feedback
 
