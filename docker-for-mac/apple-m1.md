@@ -20,7 +20,7 @@ Click on the following link to download the latest release candidate of Docker D
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
 
-This build allows users to switch between `qemu`-based and `virtualization.framework`-based virtual machines. The default is `qemu`, but it can be switched back to `virtualization.framework` in the experimental tab of the Preferences.
+This build allows you to switch between `qemu`-based and `virtualization.framework`-based virtual machines. The default is `qemu`, however, you can switch it back to `virtualization.framework` using the **Preferences** > **Experimental** tab.
 
 This is still a tech preview, and we are not committing to include either of these specific back ends for the final release. Which we release eventually will depend on user feedback. We hope that the new `qemu` back end will avoid some of the known issues listed below, and we would welcome confirmation of this. However, it may introduce other issues that we have not discovered in in-house testing, so we would also welcome reports of problems with it, especially areas where it is inferior to the `virtualization.framework`.
 
