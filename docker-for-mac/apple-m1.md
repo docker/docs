@@ -14,7 +14,7 @@ Welcome to Docker Desktop for Apple Silicon.
 
 ## Docker Desktop RC 2
 
-2021-03-25
+2021-03-26
 
 Click on the following link to download the latest release candidate of Docker Desktop for Apple Silicon.
 
