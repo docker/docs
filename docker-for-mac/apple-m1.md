@@ -20,9 +20,9 @@ Click on the following link to download the latest release candidate of Docker D
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
 
-This build allows you to switch between `qemu`-based and `virtualization.framework`-based virtual machines. The default is `qemu`, however, you can switch it back to `virtualization.framework` using the **Preferences** > **Experimental** tab.
+With this build, we have now defaulted to `qemu`-based virtual machine which we believe resolves some of the issues noted as known issues in the previous release candidate. You will also be able to switch between `qemu`-based and `virtualization.framework`-based virtual machines using the **Preferences** > **Experimental** tab.
 
-Docker Desktop for Apple Silicon is still a tech preview. We are not committing to include either of these specific backends for the final release. The backend that we choose to release eventually depends on user feedback. We hope that the new `qemu` backend will avoid some of the known issues listed below. We welcome your confirmation on this. However, it may introduce other issues that we have not discovered in in-house testing, so we would also welcome any reports of problems with it, especially areas where it is inferior to the `virtualization.framework`.
+The backend that we choose for the GA release  depends on user feedback and bug reports. We are interested in your feedback in whether the known issues noted below are resolved with the `qemu` backend. We are equally interested in whether the `qemu` backend introduces other issues that we have not discovered in our in-house testing. Please help us by reporting any issues you have with this build, particularly in areas where your experience with the `qemu` backend performs worse than the `virtualization.framework` backend.
 
 ### Known issues
 
