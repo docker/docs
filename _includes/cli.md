@@ -81,7 +81,7 @@ your client and daemon API versions.
 ## Usage
 
 ```console
-{{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
+$ {{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
 ```
 
 {% endif %}
