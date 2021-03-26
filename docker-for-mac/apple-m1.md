@@ -22,7 +22,7 @@ Click on the following link to download the latest release candidate of Docker D
 
 This build allows you to switch between `qemu`-based and `virtualization.framework`-based virtual machines. The default is `qemu`, however, you can switch it back to `virtualization.framework` using the **Preferences** > **Experimental** tab.
 
-This is still a tech preview, and we are not committing to include either of these specific back ends for the final release. Which we release eventually will depend on user feedback. We hope that the new `qemu` back end will avoid some of the known issues listed below, and we would welcome confirmation of this. However, it may introduce other issues that we have not discovered in in-house testing, so we would also welcome reports of problems with it, especially areas where it is inferior to the `virtualization.framework`.
+Docker Desktop for Apple Silicon is still a tech preview. We are not committing to include either of these specific backends for the final release. The backend that we choose to release eventually depends on user feedback. We hope that the new `qemu` backend will avoid some of the known issues listed below. We welcome your confirmation on this. However, it may introduce other issues that we have not discovered in in-house testing, so we would also welcome any reports of problems with it, especially areas where it is inferior to the `virtualization.framework`.
 
 ### Known issues
 
