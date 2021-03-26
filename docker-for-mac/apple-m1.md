@@ -18,11 +18,15 @@ Welcome to Docker Desktop for Apple Silicon.
 
 Click on the following link to download the latest release candidate of Docker Desktop for Apple Silicon.
 
-> [Download](https://desktop.docker.com/mac/stable/arm64/62293/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
+
+This build allows users to switch between `qemu`-based and `virtualization.framework`-based virtual machines. The default is `qemu`, but it can be switched back to `virtualization.framework` in the experimental tab of the Preferences.
+
+This is still a tech preview, and we are not committing to include either of these specific back ends for the final release. Which we release eventually will depend on user feedback. We hope that the new `qemu` back end will avoid some of the known issues listed below, and we would welcome confirmation of this. However, it may introduce other issues that we have not discovered in in-house testing, so we would also welcome reports of problems with it, especially areas where it is inferior to the `virtualization.framework`.
 
 ### Known issues
 
-The following issues are not expected to be resolved in the final GA build for Apple Silicon. We are working with our partners on these.
+The following issues are not expected to be resolved in the final GA build for Apple Silicon.
 
 - You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, use this command:
 
@@ -36,6 +40,8 @@ The following issues are not expected to be resolved in the final GA build for A
    However, attempts to run Intel-based containers on Apple Silicon machines can crash as QEMU sometimes fails to run the container. Filesystem change notification APIs (e.g. `inotify`) do not work under QEMU emulation, see [docker/for-mac#5321](https://github.com/docker/for-mac/issues/5321). Therefore, we recommend that you run ARM64 containers on Apple Silicon machines. These containers are also faster and use less memory than Intel-based containers.
 
    We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
+
+The following issues are seen when using the `virtualization.framework` back end.
 
 - Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
 
@@ -59,7 +65,7 @@ The following issues are not expected to be resolved in the final GA build for A
 
 ### Fixes since Docker Desktop RC 1
 
-- Inter-container HTTP and HTTPS traffic is now routed correctly. Previously it was accidentally forwarded to an HTTP proxy on the host. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+- Inter-container HTTP and HTTPS traffic is now routed correctly. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
 
 ### Fixes since Docker Desktop preview 3.1.0
 
