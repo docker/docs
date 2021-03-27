@@ -61,62 +61,51 @@ it initializes a new project based on the Compose file.
 Use the following command to initialize a new empty project called "hello-world".
 
 ```
-$ docker app init --single-file hello-world
+$ docker app init hello-world
 Created "hello-world.dockerapp"
 ```
 
-The command produces a single file in your current directory called `hello-world.dockerapp`. 
-The format of the file name is <project-name> appended with `.dockerapp`.
-
-```
-$ ls
-hello-world.dockerapp
-```
-
-If you run `docker app init` without the `--single-file` flag, you get a new directory containing three YAML files. 
-The name of the directory is the name of the project with `.dockerapp` appended, and the three YAML files are:
+The command produces a new directory containing three YAML files. The name of the directory is the name of the
+project with `.dockerapp` appended, and the three YAML files are:
 
 - `docker-compose.yml`
 - `metadata.yml`
 - `parameters.yml`
 
-However, the `--single-file` option merges the three YAML files into a single YAML file with three sections. 
-Each of these sections relates to one of the three YAML files mentioned previously: `docker-compose.yml`, 
-`metadata.yml`, and `parameters.yml`. Using the `--single-file` option enables you to share your application 
-using a single configuration file.
-
-Inspect the YAML with the following command.
+Inspect the YAML files with the following commands.
 
 ```
-$ cat hello-world.dockerapp
-# Application metadata - equivalent to metadata.yml.
+$ cd hello-world.dockerapp/
+
+$ cat docker-compose.yml
+version: "3.6"
+services: {}
+
+$ cat metadata.yml
 version: 0.1.0
 name: hello-world
 description:
----
-# Application services - equivalent to docker-compose.yml.
-version: "3.6"
-services: {}
----
-# Default application parameters - equivalent to parameters.yml.
+
+$ cat parameters.yml
+
 ```
 
-Your file might be more verbose.
+Your files might be more verbose.
 
-Notice that each of the three sections is separated by a set of three dashes ("---"). Let's quickly describe each section.
+Let's quickly describe each file.
 
-The first section of the file specifies identification metadata such as name, version, 
-description and maintainers. It accepts key-value pairs. This part of the file can be a separate file called `metadata.yml`
+`docker-compose.yml` describes the application.
 
-The second section of the file describes the application. It can be a separate file called `docker-compose.yml`.
+`metadata.yml` specifies identification metadata such as name, version, description and maintainers. It accepts
+key-value pairs.
 
-The final section specifies default values for application parameters. It can be a separate file called `parameters.yml`
+`parameters.yml` specifies default values for application parameters.
 
 ### Populate the project
 
-This section describes editing the project YAML file so that it runs a simple web app.
+This section describes editing the project YAML files so that it runs a simple web app.
 
-Use your preferred editor to edit the `hello-world.dockerapp` YAML file and update the application section with 
+Use your preferred editor to edit the `docker-compose.yml` YAML file and update it with 
 the following information:
 
 ```
@@ -129,15 +118,13 @@ services:
       - ${hello.port}:5678
 ```
 
-Update the `Parameters` section to the following:
+Update the `parameters.yml` file to the following:
 
 ```
 hello:
   port: 8080
   text: Hello world!
 ```
-
-The sections of the YAML file are currently order-based. This means it's important they remain in the order we've explained, with the _metadata_ section being first, the _app_ section being second, and the _parameters_ section being last. This may change to name-based sections in future releases.
 
 Save the changes.
 
