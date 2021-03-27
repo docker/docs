@@ -462,6 +462,8 @@ reference:
           title: docker buildx imagetools inspect
         - path: /engine/reference/commandline/buildx_inspect/
           title: docker buildx inspect
+        - path: /engine/reference/commandline/buildx_install/
+          title: docker buildx install
         - path: /engine/reference/commandline/buildx_ls/
           title: docker buildx ls
         - path: /engine/reference/commandline/buildx_prune/
@@ -470,6 +472,8 @@ reference:
           title: docker buildx rm
         - path: /engine/reference/commandline/buildx_stop/
           title: docker buildx stop
+        - path: /engine/reference/commandline/buildx_uninstall/
+          title: docker buildx uninstall
         - path: /engine/reference/commandline/buildx_use/
           title: docker buildx use
         - path: /engine/reference/commandline/buildx_version/
