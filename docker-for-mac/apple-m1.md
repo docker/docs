@@ -63,6 +63,10 @@ The following issues are seen when using the `virtualization.framework` back end
 
    We are still gathering data and testing alternate kernel versions.
 
+The following issues are seen when using the `qemu` backend.
+
+- `ping` from inside a container to the Internet does not work as expected. To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+
 ### Fixes since Docker Desktop RC 1
 
 - Inter-container HTTP and HTTPS traffic is now routed correctly. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
