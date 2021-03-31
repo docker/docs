@@ -18,7 +18,7 @@ changes won't be seen in another container, _even if_ they are using the same im
 To see this in action, we're going to start two containers and create a file in each.
 What you'll see is that the files created in one container aren't available in another.
 
-1. Start a `ubuntu` container that will create a file named `/data.txt` with a random number
+1. Start an `ubuntu` container that will create a file named `/data.txt` with a random number
    between 1 and 10000.
 
     ```bash
