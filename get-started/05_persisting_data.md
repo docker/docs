@@ -95,7 +95,7 @@ Every time you use the volume, Docker will make sure the correct data is provide
     docker volume create todo-db
     ```
 
-2. Stop the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
+2. Remove the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
 
 3. Start the todo app container, but add the `-v` flag to specify a volume mount. We will use the named volume and mount
    it to `/etc/todos`, which will capture all files created at the path.
