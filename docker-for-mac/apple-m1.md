@@ -12,13 +12,13 @@ Welcome to Docker Desktop for Apple Silicon.
 >
 > We encourage you to try the release candidate and report any issues in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac) repository.
 
-## Docker Desktop RC 2
+## Docker Desktop RC 3
 
-2021-03-26
+2021-04-01
 
 Click on the following link to download the latest release candidate of Docker Desktop for Apple Silicon.
 
-> [Download](https://desktop.docker.com/mac/stable/arm64/62345/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/arm64/62632/Docker.dmg)
 
 In this build, we have defaulted to a `qemu`-based virtual machine, which we believe resolves some of the issues noted as known issues in the previous release candidate. You can switch between `qemu`-based and `virtualization.framework`-based virtual machines using the **Preferences** > **Experimental** tab.
 
@@ -66,6 +66,10 @@ The following issues are seen when using the `virtualization.framework` back end
 The following issues are seen when using the `qemu` backend.
 
 - `ping` from inside a container to the Internet does not work as expected. To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+
+### Fixes since Docker Desktop RC 2
+
+- Update to [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo) to improve reliability.
 
 ### Fixes since Docker Desktop RC 1
 
