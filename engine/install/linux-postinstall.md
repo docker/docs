@@ -21,6 +21,16 @@ If you don't want to preface the `docker` command with `sudo`, create a Unix
 group called `docker` and add users to it. When the Docker daemon starts, it
 creates a Unix socket accessible by members of the `docker` group.
 
+> **Note**: 
+> 
+> For Docker: 
+If you run this command: "docker pull registry.gitlab.com/fsci/resources:debian-dev" you might get a message that access is denied.
+Just add sudo in front and it will run just fine. 
+That's one way around.
+
+This is because on production servers, you would prefer to avoid running docker as root user (as that would mean that docker gets access to the entire computer and any insecurities in docker can lead to your server being compromised). And therefore in such systems you would do this:
+sudo docker pull registry.gitlab.com/fsci/resources:debian-dev 
+
 > Warning
 >
 > The `docker` group grants privileges equivalent to the `root`
