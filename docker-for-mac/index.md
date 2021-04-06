@@ -47,7 +47,13 @@ On the **General** tab, you can configure when to start and update Docker:
 
 - **Securely store Docker logins in macOS keychain**: Docker Desktop stores your Docker login credentials in macOS keychain by default.
 
+- **Use gRPC FUSE for file sharing**: Clear this checkbox to use the legacy osxfs file sharing instead.
+
 - **Send usage statistics**: Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
+
+* **Show weekly tips**: Displays useful advice and suggestions about using Docker.
+
+* **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
 ### Resources
 

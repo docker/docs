@@ -41,13 +41,19 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 ![Settings](images/settings-general.png){:width="750px"}
 
-* **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
+* **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
 
-* **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+* **Expose daemon on tcp://localhost:2375 without TLS**: Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
-* **Send usage statistics** - By default, Docker Desktop sends diagnostics,
+* **Use the WSL 2 based engine**: WSL 2 provides better performance than the legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
+
+* **Send usage statistics**: By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
+
+* **Show weekly tips**: Displays useful advice and suggestions about using Docker.
+
+* **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
 ### Resources
 
