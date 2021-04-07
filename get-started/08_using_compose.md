@@ -354,8 +354,8 @@ doesn't get much simpler than that!
 
 ## Recap
 
-In this section, we learned about Docker Compose and how it helps us dramatically simplify the defining and
-sharing of multi-service applications. We created a Compose file by translating the commands we were
+In this section, we learned about Docker Compose and how it helps us dramatically simplify defining and
+sharing multi-service applications. We created a Compose file by translating the commands we were
 using into the appropriate compose format.
 
 At this point, we're starting to wrap up the tutorial. However, there are a few best practices about
