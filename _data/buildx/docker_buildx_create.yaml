@@ -1,6 +1,15 @@
 command: docker buildx create
 short: Create a new builder instance
-long: Create a new builder instance
+long: |-
+  Create makes a new builder instance pointing to a docker context or endpoint,
+  where context is the name of a context from `docker context ls` and endpoint is
+  the address for docker socket (eg. `DOCKER_HOST` value).
+
+  By default, the current Docker configuration is used for determining the
+  context/endpoint value.
+
+  Builder instances are isolated environments where builds can be invoked. All
+  Docker contexts also get the default builder instance.
 usage: docker buildx create [OPTIONS] [CONTEXT|ENDPOINT]
 pname: docker buildx
 plink: docker_buildx.yaml
@@ -9,6 +18,7 @@ options:
   value_type: bool
   default_value: "false"
   description: Append a node to builder instead of changing it
+  details_url: '#append'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,6 +27,7 @@ options:
 - option: buildkitd-flags
   value_type: string
   description: Flags for buildkitd daemon
+  details_url: '#buildkitd-flags'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -25,6 +36,7 @@ options:
 - option: config
   value_type: string
   description: BuildKit config file
+  details_url: '#config'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -33,6 +45,7 @@ options:
 - option: driver
   value_type: string
   description: 'Driver to use (available: [])'
+  details_url: '#driver'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -42,6 +55,7 @@ options:
   value_type: stringArray
   default_value: '[]'
   description: Options for the driver
+  details_url: '#driver-opt'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -51,6 +65,7 @@ options:
   value_type: bool
   default_value: "false"
   description: Remove a node from builder instead of changing it
+  details_url: '#leave'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -59,6 +74,7 @@ options:
 - option: name
   value_type: string
   description: Builder instance name
+  details_url: '#name'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -67,6 +83,7 @@ options:
 - option: node
   value_type: string
   description: Create/modify node with given name
+  details_url: '#node'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -76,6 +93,7 @@ options:
   value_type: stringArray
   default_value: '[]'
   description: Fixed platforms for current node
+  details_url: '#platform'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -85,6 +103,7 @@ options:
   value_type: bool
   default_value: "false"
   description: Set the current builder instance
+  details_url: '#use'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -99,9 +118,152 @@ inherited_options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+examples: |-
+  ### Append a new node to an existing builder (--append) {#append}
+
+  The `--append` flag changes the action of the command to append a new node to an
+  existing builder specified by `--name`. Buildx will choose an appropriate node
+  for a build based on the platforms it supports.
+
+  **Examples**
+
+  ```console
+  $ docker buildx create mycontext1
+  eager_beaver
+
+  $ docker buildx create --name eager_beaver --append mycontext2
+  eager_beaver
+  ```
+
+  ### Specify options for the buildkitd daemon (--buildkitd-flags) {#buildkitd-flags}
+
+  ```
+  --buildkitd-flags FLAGS
+  ```
+
+  Adds flags when starting the buildkitd daemon. They take precedence over the
+  configuration file specified by [`--config`](#--config-file). See `buildkitd --help`
+  for the available flags.
+
+  **Example**
+
+  ```
+  --buildkitd-flags '--debug --debugaddr 0.0.0.0:6666'
+  ```
+
+  ### Specify a configuration file for the buildkitd daemon (--config) {#config}
+
+  ```
+  --config FILE
+  ```
+
+  Specifies the configuration file for the buildkitd daemon to use. The configuration
+  can be overridden by [`--buildkitd-flags`](#--buildkitd-flags-flags).
+  See an [example buildkitd configuration file](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md).
+
+  ### Set the builder driver to use (--driver) {#driver}
+
+  ```
+  --driver DRIVER
+  ```
+
+  Sets the builder driver to be used. There are two available drivers, each have
+  their own specificities.
+
+  - `docker` - Uses the builder that is built into the docker daemon. With this
+    driver, the [`--load`](buildx_build.md#--load) flag is implied by default on
+    `buildx build`. However, building multi-platform images or exporting cache is
+    not currently supported.
+  - `docker-container` - Uses a buildkit container that will be spawned via docker.
+    With this driver, both building multi-platform images and exporting cache are
+    supported. However, images built will not automatically appear in `docker images`
+    (see [`build --load`](buildx_build.md#--load)).
+  - `kubernetes` - Uses a kubernetes pods. With this driver, you can spin up pods
+    with defined buildkit container image to build your images.
+
+
+  ### Set additional driver-specific options (--driver-opt) {#driver-opt}
+
+  ```
+  --driver-opt OPTIONS
+  ```
+
+  Passes additional driver-specific options. Details for each driver:
+
+  - `docker` - No driver options
+  - `docker-container`
+      - `image=IMAGE` - Sets the container image to be used for running buildkit.
+      - `network=NETMODE` - Sets the network mode for running the buildkit container.
+      - Example:
+
+        ```console
+        --driver docker-container --driver-opt image=moby/buildkit:master,network=host
+        ```
+  - `kubernetes`
+      - `image=IMAGE` - Sets the container image to be used for running buildkit.
+      - `namespace=NS` - Sets the Kubernetes namespace. Defaults to the current namespace.
+      - `replicas=N` - Sets the number of `Pod` replicas. Defaults to 1.
+      - `nodeselector="label1=value1,label2=value2"` - Sets the kv of `Pod` nodeSelector. No Defaults. Example `nodeselector=kubernetes.io/arch=arm64`
+      - `rootless=(true|false)` - Run the container as a non-root user without `securityContext.privileged`. [Using Ubuntu host kernel is recommended](https://github.com/moby/buildkit/blob/master/docs/rootless.md). Defaults to false.
+      - `loadbalance=(sticky|random)` - Load-balancing strategy. If set to "sticky", the pod is chosen using the hash of the context path. Defaults to "sticky"
+
+  ### Remove a node from a builder (--leave) {#leave}
+
+  The `--leave` flag changes the action of the command to remove a node from a
+  builder. The builder needs to be specified with `--name` and node that is removed
+  is set with `--node`.
+
+  **Examples**
+
+  ```console
+  $ docker buildx create --name mybuilder --node mybuilder0 --leave
+  ```
+
+  ### Specify the name of the builder (--name) {#name}
+
+  ```
+  --name NAME
+  ```
+
+  The `--name` flag specifies the name of the builder to be created or modified.
+  If none is specified, one will be automatically generated.
+
+  ### Specify the name of the node (--node) {#node}
+
+  ```
+  --node NODE
+  ```
+
+  The `--node` flag specifies the name of the node to be created or modified. If
+  none is specified, it is the name of the builder it belongs to, with an index
+  number suffix.
+
+  ### Set the platforms supported by the node {#platform}
+
+  ```
+  --platform PLATFORMS
+  ```
+
+  The `--platform` flag sets the platforms supported by the node. It expects a
+  comma-separated list of platforms of the form OS/architecture/variant. The node
+  will also automatically detect the platforms it supports, but manual values take
+  priority over the detected ones and can be used when multiple nodes support
+  building for the same platform.
+
+  **Examples**
+
+  ```console
+  $ docker buildx create --platform linux/amd64
+  $ docker buildx create --platform linux/arm64,linux/arm/v8
+  ```
+
+  ### Automatically switch to the newly created builder {#use}
+
+  The `--use` flag automatically switches the current builder to the newly created
+  one. Equivalent to running `docker buildx use $(docker buildx create ...)`.
 deprecated: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 
