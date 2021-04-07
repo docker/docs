@@ -226,7 +226,7 @@ docker run -d `
         image: mysql:5.7
         volumes:
           - todo-mysql-data:/var/lib/mysql
-        environment: 
+        environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: todos
     
@@ -259,7 +259,7 @@ services:
     image: mysql:5.7
     volumes:
       - todo-mysql-data:/var/lib/mysql
-    environment: 
+    environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: todos
 
