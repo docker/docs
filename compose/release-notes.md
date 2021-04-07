@@ -7,6 +7,27 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.29.0
+(2021-04-06)
+
+### Features
+
+- Added profile filter to `docker-compose config`.
+
+- Added a `depends_on` condition to wait for successful service completion.
+
+### Miscellaneous
+
+- Added an image scan message on build.
+
+- Updated warning message for `--no-ansi` to mention `--ansi never` as alternative.
+
+- Bumped docker-py to 5.0.0.
+
+- Bumped PyYAML to 5.4.1.
+
+- Bumped python-dotenv to 0.17.0.
+
 ## 1.28.6
 (2021-03-23)
 
