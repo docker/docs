@@ -90,7 +90,7 @@ docker run -dp 3000:3000 `
         image: node:12-alpine
     ```
 
-2. Typically, you will see the command close to the `image` definition, although there is no requirement on ordering.
+2. Typically, you will see the `command` close to the `image` definition, although there is no requirement on ordering.
    So, let's go ahead and move that into our file.
 
     ```yaml
