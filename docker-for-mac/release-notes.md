@@ -11,15 +11,48 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-> **Important**
->
-> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
-{: .important }
+## Docker Desktop 3.3.0
+2021-04-08
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+
+### New
+
+You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
+
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+
+For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
+
+### Upgrades
+
+- [Docker Compose 1.29.0](https://github.com/docker/compose/releases/tag/1.29.0)
+- [Compose CLI v1.0.12](https://github.com/docker/compose-cli/tree/v1.0.12)
+- [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo)
+- [Snyk v1.461.0](https://github.com/snyk/snyk/releases/tag/v1.461.0)
+- [Docker Hub Tool v0.3.1](https://github.com/docker/hub-tool/releases/tag/v0.3.1)
+- [containerd v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4)
+- [runc v1.0.0-rc93](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc93)
+
+### Bug fixes and minor changes
+
+- Fixed an issue when viewing compose applications that have been started with an explicit project name. Fixes [docker/for-win#10564](https://github.com/docker/for-win/issues/10564).
+- Fixed a bug that `--add-host host.docker.internal:host-gateway` caused `host.docker.internal` to resolve to the wrong IP address. See [docker/for-linux#264](https://github.com/docker/for-linux/issues/264#issuecomment-785137844).
+- Fixed a bug that caused inter-container HTTP traffic to be misrouted to the external HTTP proxy. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+- Fixed a bug that could cause other files in the same folder as the VM disk to be deleted when the disk was resized. Fixes [docker/for-mac#5486](https://github.com/docker/for-mac/issues/5486).
+- Fixed an issue where delta downloads caused an `Illegal instruction exception`. Fixes [docker/for-mac#5459](https://github.com/docker/for-mac/issues/5459).
+- Apply domain-based HTTPS proxy `no_proxy` rules for encrypted connections. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
+- Fixed missing text in reset to factory defaults dialog. Fixes [docker/for-mac#5457](https://github.com/docker/for-mac/issues/5457).
+- Fixed an issue where running a container with a random port on the host caused Docker Desktop dashboard to incorrectly open a browser with port 0, instead of using the allocated port.
+- Fixed an issue where pulling an image from Docker Hub using the Docker Desktop dashboard was failing silently.
+- Removed unused DNS name `docker.for.mac.http.internal`.
+- Perform a filesystem check when starting the Linux VM.
+- Detect Linux kernel crashes and escalate them to the user.
 
 ## Docker Desktop 3.2.2
 2021-03-15
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
 
 ### Bug fixes and minor changes
 
