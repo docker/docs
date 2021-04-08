@@ -41,19 +41,19 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 ![Settings](images/settings-general.png){:width="750px"}
 
-* **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
+- **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
 
-* **Expose daemon on tcp://localhost:2375 without TLS**: Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+- **Expose daemon on tcp://localhost:2375 without TLS**: Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
-* **Use the WSL 2 based engine**: WSL 2 provides better performance than the legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
+- **Use the WSL 2 based engine**: WSL 2 provides better performance than the legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
 
-* **Send usage statistics**: By default, Docker Desktop sends diagnostics,
+- **Send usage statistics**: By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
 
-* **Show weekly tips**: Displays useful advice and suggestions about using Docker.
+- **Show weekly tips**: Displays useful advice and suggestions about using Docker.
 
-* **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
+- **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
 ### Resources
 
@@ -75,18 +75,18 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 
 Use the **Advanced** tab to limit resources available to Docker.
 
-**CPUs**: By default, Docker Desktop is set to use half the number of processors
+- **CPUs**: By default, Docker Desktop is set to use half the number of processors
 available on the host machine. To increase processing power, set this to a
 higher number; to decrease, lower the number.
 
-**Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
+- **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
 allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
 
-**Swap**: Configure swap file size as needed. The default is 1 GB.
+- **Swap**: Configure swap file size as needed. The default is 1 GB.
 
-**Disk image size**: Specify the size of the disk image.
+- **Disk image size**: Specify the size of the disk image.
 
-**Disk image location**: Specify the location of the Linux volume where containers and images are stored.
+- **Disk image location**: Specify the location of the Linux volume where containers and images are stored.
 
 You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you get a prompt asking if you want to use the existing image or replace it.
 
