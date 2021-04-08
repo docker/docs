@@ -90,8 +90,7 @@ script:
 - Another alternative is to use [holdup](https://github.com/ionelmc/python-holdup):
 
   ```yaml
-
-      command: ["holdup", "tcp://memcached:11211", "pg://user:password@db:5432/dbname", "--", "python", "app.py"]
+  command: ["holdup", "tcp://memcached:11211", "pg://user:password@db:5432/dbname", "--", "python", "app.py"]
   ```
 
   The tradeoff is that you need to install said Python package, and some extras for
