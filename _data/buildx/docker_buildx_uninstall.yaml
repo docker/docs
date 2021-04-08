@@ -1,9 +1,7 @@
-command: docker buildx rm
-short: Remove a builder instance
-long: |-
-  Removes the specified or current builder. It is a no-op attempting to remove the
-  default builder.
-usage: docker buildx rm [NAME]
+command: docker buildx uninstall
+short: Uninstall the 'docker builder' alias
+long: Uninstall the 'docker builder' alias
+usage: docker buildx uninstall
 pname: docker buildx
 plink: docker_buildx.yaml
 inherited_options:
