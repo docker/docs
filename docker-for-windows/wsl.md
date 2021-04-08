@@ -108,7 +108,7 @@ Starting with Docker Desktop 3.1.0, Docker Desktop supports WSL 2 GPU Paravirtua
 - A machine with an NVIDIA GPU
 - The latest Windows Insider version from the Dev Preview ring
 - [Beta drivers](https://developer.nvidia.com/cuda/wsl){:target="_blank" rel="noopener" class="_"} from NVIDIA supporting WSL 2 GPU Paravirtualization
-- Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated commmand prompt
+- Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated command prompt
 - Make sure the WSL 2 backend is enabled in Docker Desktop
 
 To validate that everything works as expected, run the following command to run a short benchmark on your GPU:
