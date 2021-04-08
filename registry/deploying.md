@@ -407,9 +407,7 @@ secrets.
 
     ```bash
     $ mkdir auth
-    $ docker run \
-      --entrypoint htpasswd \
-      registry:2 -Bbn testuser testpassword > auth/htpasswd
+    $ docker run --rm xmartlabs/htpasswd testuser testpassword > auth/htpasswd
     ```
 
 2.  Stop the registry.
