@@ -41,6 +41,8 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 ![Settings](images/settings-general.png){:width="750px"}
 
+- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
+
 - **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
 
 - **Expose daemon on tcp://localhost:2375 without TLS**: Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
