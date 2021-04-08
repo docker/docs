@@ -41,6 +41,8 @@ menu bar and configure the runtime options described below.
 
 On the **General** tab, you can configure when to start and update Docker:
 
+- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
+
 - **Start Docker Desktop when you log in**: Automatically starts Docker Desktop when you open your session.
 
 - **Include VM in Time Machine backups**: Select this option to back up the Docker Desktop virtual machine. This option is disabled by default.
