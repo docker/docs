@@ -73,7 +73,7 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 > The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
 > Windows container mode these resources are managed by Windows. In WSL 2 
 > mode, you can configure limits on the memory, CPU, and swap size allocated
-> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 
 Use the **Advanced** tab to limit resources available to Docker.
 
