@@ -43,32 +43,13 @@ $ sudo sh get-docker.sh
 <...>
 ```
 
-If you would like to use Docker as a non-root user, you should now consider
-adding your user to the "docker" group with something like:
-
-```console
-$ sudo usermod -aG docker <your-user>
-```
-
-Remember to log out and back in for this to take effect!
-
-> **Warning**:
->
-> Adding a user to the "docker" group grants them the ability to run containers
-> which can be used to obtain root privileges on the Docker host. Refer to
-> [Docker Daemon Attack Surface](/engine/security/#docker-daemon-attack-surface)
-> for more information.
-{:.warning}
+If you would like to use Docker as a non-root user please see the
+[post-installation steps for Linux](linux-postinstall.md#manage-docker-as-a-non-root-user).
 
 Docker Engine - Community is installed. It starts automatically on `DEB`-based distributions. On
 `RPM`-based distributions, you need to start it manually using the appropriate
 `systemctl` or `service` command. As the message indicates, non-root users can't
 run Docker commands by default.
-
-> **Note**:
->
-> To install Docker without root privileges, see
-> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless/).
 
 #### Upgrade Docker after using the convenience script
 
