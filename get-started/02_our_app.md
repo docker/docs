@@ -9,7 +9,7 @@ description: overview of our simple application for learning docker
 
 For the rest of this tutorial, we will be working with a simple todo
 list manager that is running in Node.js. If you're not familiar with Node.js,
-don't worry! No real JavaScript experience is needed!
+don't worry. No real JavaScript experience is needed.
 
 At this point, your development team is quite small and you're simply
 building an app to prove out your MVP (minimum viable product). You want
@@ -38,7 +38,7 @@ we have created a ZIP file containing the application.
 In order to build the application, we need to use a `Dockerfile`. A
 Dockerfile is simply a text-based script of instructions that is used to
 create a container image. If you've created Dockerfiles before, you might
-see a few flaws in the Dockerfile below. But, don't worry! We'll go over them.
+see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
 
 1. Create a file named `Dockerfile` in the same folder as the file `package.json` with the following contents.
 
@@ -76,7 +76,7 @@ see a few flaws in the Dockerfile below. But, don't worry! We'll go over them.
 
 ## Start an app container
 
-Now that we have an image, let's run the application! To do so, we will use the `docker run`
+Now that we have an image, let's run the application. To do so, we will use the `docker run`
 command (remember that from earlier?).
 
 1. Start your container using the `docker run` command and specify the name of the image we 
@@ -91,28 +91,28 @@ command (remember that from earlier?).
     Without the port mapping, we wouldn't be able to access the application.
 
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
-    You should see our app!
+    You should see our app.
 
     ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
     {: .text-center }
 
 3. Go ahead and add an item or two and see that it works as you expect. You can mark items as
-   complete and remove items. Your frontend is successfully storing items in the backend!
+   complete and remove items. Your frontend is successfully storing items in the backend.
    Pretty quick and easy, huh?
 
 
-At this point, you should have a running todo list manager with a few items, all built by you!
+At this point, you should have a running todo list manager with a few items, all built by you.
 Now, let's make a few changes and learn about managing our containers.
 
 If you take a quick look at the Docker Dashboard, you should see your two containers running now 
-(this tutorial and your freshly launched app container)!
+(this tutorial and your freshly launched app container).
 
 ![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
 
 ## Recap
 
 In this short section, we learned the very basics about building a container image and created a
-Dockerfile to do so. Once we built an image, we started the container and saw the running app!
+Dockerfile to do so. Once we built an image, we started the container and saw the running app.
 
 Next, we're going to make a modification to our app and learn how to update our running application
 with a new image. Along the way, we'll learn a few other useful commands.
