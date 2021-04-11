@@ -18,7 +18,7 @@ daemon host and the correct destination container.
 When you initialize a swarm or join a Docker host to an existing swarm, two
 new networks are created on that Docker host:
 
-- an overlay network called `ingress`, which handles control and data traffic
+- an overlay network called `ingress`, which handles and control the data traffic
   related to swarm services. When you create a swarm service and do not
   connect it to a user-defined overlay network, it connects to the `ingress`
   network by default.
