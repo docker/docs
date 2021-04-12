@@ -9,6 +9,18 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2021-04-09
+
+### New feature
+
+**Update billing information**
+
+You can now specify a new email address to receive billing-related emails for your organization. You must be an owner of the organization to update any billing details.
+
+To add a new email address, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Contact Information**. Add the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
+
+For details on how to update your billing information, see [Update billing information](/billing/index.md#update-billing-information).
+
 # 2021-03-22
 
 ### New feature
