@@ -1284,8 +1284,8 @@ manuals:
       title: Logs and troubleshooting
     - path: /docker-for-mac/release-notes/
       title: Release notes
-    - path: /docker-for-mac/apple-m1/
-      title: Apple Silicon Tech Preview
+    - path: /docker-for-mac/apple-silicon/
+      title: Apple silicon
   - sectiontitle: Windows
     section:
     - path: /docker-for-windows/install/

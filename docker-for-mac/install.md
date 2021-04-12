@@ -4,16 +4,23 @@ keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 ---
 
-Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
-You can download Docker Desktop for Mac from Docker Hub.
+Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, installation instructions, and automatic updates.
 
-[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/){: .button .outline-btn}
+Click one of the following buttons to download Docker Desktop for Mac:
+
+[Docker Desktop for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg){: .button .primary-button}
+
+[Docker Desktop for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg){: .button .primary-button}
+
+##### Docker EULA
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
 ## System requirements
 
-Your Mac must meet the following requirements to successfully install Docker Desktop:
+Your Mac must meet the following requirements to successfully install Docker Desktop.
+
+### Mac with Intel chip
 
 - **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
 
@@ -26,6 +33,16 @@ Your Mac must meet the following requirements to successfully install Docker Des
 - At least 4 GB of RAM.
 
 - VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.
+
+### Mac with Apple chip
+
+- You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
+
+  ```bash
+    softwareupdate --install-rosetta
+  ```
+
+ For more information about Docker Desktop for Apple silicon, see [Apple silicon](apple-silicon.md).
 
 ## What's included in the installer
 
@@ -87,6 +104,7 @@ To uninstall Docker Desktop from your Mac:
 ## Where to go next
 
 - [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
+- [Docker Desktop for Apple silicon](apple-silicon.md)for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
