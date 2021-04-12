@@ -1639,6 +1639,10 @@ Expose ports.
 >
 > Port mapping is incompatible with `network_mode: host`
 
+> **Note**
+>
+> `ports` is ignored by `docker-compose run` unless you include `--service-ports`
+
 #### Short syntax
 
 There are three options: 
