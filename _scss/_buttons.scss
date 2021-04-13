@@ -9,7 +9,7 @@ a.button {
 }
 
 a.button.outline-btn {
-    color: #0087C8;
+    color: $primary-links;
     float: none;
     margin-bottom: 30px;
     display: inline-block;
@@ -34,19 +34,12 @@ a.button.outline-btn.min-hgt {
 }
 
 .primary-btn {
-    background: #1488C6;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
-}
-
-
-.primary-button {
-    background-color: #0073EC;
+    background:    $primary-links;
+    border:        1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    min-width: 196px;
-    height: 54px;
-    text-align: center;
+    padding-top:   16px
 }
+
 /*
 .secondary-btn {
     background-color: rgba(255, 255, 255, 0.2);
