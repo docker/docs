@@ -9,11 +9,15 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 20201-04-13
+
+### Enhancement
+
+The **Billing Details** page now provides a consolidated billing page for your personal and organization accounts. This allows you to clearly identify the billing details of your chosen namespace, and enables you to switch between your personal and your organization accounts to view or update the details.
+
 # 2021-04-09
 
-### New feature
-
-**Update billing information**
+### Enhancement
 
 You can now specify a new email address to receive billing-related emails for your organization. You must be an owner of the organization to update any billing details.
 
