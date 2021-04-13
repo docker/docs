@@ -6,12 +6,12 @@ redirect_from:
 - /docker-for-windows/install-windows-home/
 ---
 
-Docker Desktop for Windows is the [Community](https://www.docker.com/community-edition) version of Docker for Microsoft Windows.
-You can download Docker Desktop for Windows from Docker Hub.
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, installation instructions, and automatic updates.
 
-[Download from Docker
-Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
+[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
 .button .primary-btn}
+
+##### Docker EULA
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
