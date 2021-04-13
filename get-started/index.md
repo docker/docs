@@ -76,17 +76,14 @@ We also recommend the video walkthrough from DockerCon 2020.
 ## Download and install Docker
 
 This tutorial assumes you have a current version of Docker installed on your
-machine. If you do not have Docker installed, choose your preferred operating system below to download Docker.
+machine. If you do not have Docker installed, choose your preferred operating system below to download Docker:
+
+[Docker Desktop for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg){: .button .primary-btn}{: style="min-width: 337px" }
+[Docker Desktop for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg){: .button .primary-btn}{: style="min-width: 337px" }
+[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn}{: style="min-width: 337px" }
+[Docker for Linux](../engine/install/index.md){: .button .primary-btn}{: style="min-width: 337px" }
 
 For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
-
-[Docker Desktop for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg){: .button .primary-button}
-
-[Docker Desktop for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg){: .button .primary-button}
-
-[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-button}
-
-[Docker for Linux](../engine/install/index.md){: .button .primary-button}
 
 ## Start the tutorial
 

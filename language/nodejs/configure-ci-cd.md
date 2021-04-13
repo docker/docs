@@ -233,7 +233,7 @@ In this module, you have learnt how to set up GitHub Actions workflow to an exis
 
 You can also consider deploying your application to the cloud. For detailed instructions, see:
 
-[Deploy your app to the cloud](/deploy.md){: .button .outline-btn}
+[Deploy your app to the cloud](/deploy.md){: .button .primary-btn}
 
 ## Feedback
 
