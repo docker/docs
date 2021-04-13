@@ -224,7 +224,7 @@ In this module, we took a look at creating a general development image that we c
 
 In the next module, we’ll take a look at how to run unit tests in Docker. See:
 
-[Run your tests](run-tests.md){: .button .outline-btn}
+[Run your tests](run-tests.md){: .button .primary-btn}
 
 ## Feedback
 

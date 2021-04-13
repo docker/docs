@@ -243,11 +243,11 @@ only need to do it on the first one. If you have a `<th>`, set it there.
   </tr>
   <tr>
   <td>
-  <p><a class="button outline-btn" href="/">Go to the docs!</a></p>
+  <p><a class="button primary-btn" href="/">Go to the docs!</a></p>
   <p><a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a></p>
   </td>
   <td>
-  <p><a class="button outline-btn" href="/">Go to the docs!</a></p>
+  <p><a class="button primary-btn" href="/">Go to the docs!</a></p>
   <p><a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a></p>
   </td>
   </tr>
