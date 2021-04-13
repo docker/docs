@@ -16,15 +16,7 @@ The following commands have not been implemented yet, and maybe implemented at a
 Let us know if these commands are a higher priority for your usecases.
 
 * `compose build --memory`
-* `compose build --no-cache`
-* `compose config --no-interpolate`
-* `compose config --services`
-* `compose config --volumes`
-* `compose config --hash`
-* `compose images`
-* `compose port`
-* `compose pull --ignore-pull-failures`
-* `compose push --ignore-push-failures`
+* `compose config --profiles`
 
 ## Flags that will not be implemented
 
