@@ -23,7 +23,7 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.0
 2021-04-08
 
-> [Download](Add URL)
+> [Download](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe)
 
 ### New
 

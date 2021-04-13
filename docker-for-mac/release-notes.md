@@ -29,7 +29,7 @@ Docker Desktop for Mac on Apple silicon is now available a GA release. For more 
 ## Docker Desktop 3.3.0
 2021-04-08
 
-> [Download](ADD URL)
+> [Download](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
 
 ### New
 
