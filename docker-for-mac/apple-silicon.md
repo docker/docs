@@ -1,7 +1,7 @@
 ---
-description: Apple silicon
-keywords: Docker Desktop, M1, Silicon, Apple, dev preview
-title: Apple silicon
+description: Docker Desktop for Apple silicon
+keywords: Docker Desktop, M1, Silicon, Apple,
+title: Docker Desktop for Apple silicon
 toc_min: 2
 toc_max: 3
 redirect_from:
@@ -10,7 +10,7 @@ redirect_from:
 
 Welcome to Docker Desktop for Apple Silicon.
 
-## Docker Desktop Apple silicon GA
+## Docker Desktop for Apple silicon
 
 2021-04-14
 
@@ -18,16 +18,16 @@ Click on the following link to download the GA version of Docker Desktop for App
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/Docker.dmg)
 
-### Known issues
+### System requirements
 
-The following issues are not expected to be resolved in the final GA build for Apple Silicon.
-
-- You must install Rosetta 2 as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, use this command:
+You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
 
     ```
     softwareupdate --install-rosetta
     ```
     We expect to fix this in a future release.
+
+### Known issues
 
 - Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated) image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated) image.
 
@@ -35,7 +35,7 @@ The following issues are not expected to be resolved in the final GA build for A
 
    We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
 
-The following issues are seen when using the `virtualization.framework` back end.
+The following issues are seen when using the `virtualization.framework` experimental feature:
 
 - Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
 
@@ -89,6 +89,6 @@ ADD list of issues fixed
 
 ## Feedback
 
-Thank you for trying out the Docker Desktop for Apple Silicon. Your feedback is important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues)repository.
+Thank you for trying out the Docker Desktop for Apple silicon. Your feedback is important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues)repository.
 
 We also recommend that you join the [Docker Community Slack](https://www.docker.com/docker-community) and ask questions in **#docker-desktop-mac** channel.

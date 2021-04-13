@@ -11,10 +11,19 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 3.3.1
+2021-04-14
+
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+ - Fixed an issue that caused `docker run` to fail when using `\\wsl.localhost` path to a directory. Fixes [docker/for-win#10786](https://github.com/docker/for-win/issues/10786)
+
 ## Docker Desktop 3.3.0
 2021-04-08
 
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+> [Download](Add URL)
 
 ### New
 

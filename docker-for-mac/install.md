@@ -34,7 +34,7 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
 - VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.
 
-### Mac with Apple chip
+### Mac with Apple silicon
 
 - You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
 
@@ -42,7 +42,7 @@ Your Mac must meet the following requirements to successfully install Docker Des
     softwareupdate --install-rosetta
   ```
 
- For more information about Docker Desktop for Apple silicon, see [Apple silicon](apple-silicon.md).
+ For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
 
 ## What's included in the installer
 

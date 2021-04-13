@@ -11,10 +11,25 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 3.3.1
+2021-04-14
+
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg)
+
+### New
+
+Docker Desktop for Mac on Apple silicon is now available a GA release. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+
+### Bug fixes and minor changes
+
+- **Mac with Apple silicon**: Docker Desktop now ensures the permissions of `/dev/null` are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
+
 ## Docker Desktop 3.3.0
 2021-04-08
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [Download](ADD URL)
 
 ### New
 
