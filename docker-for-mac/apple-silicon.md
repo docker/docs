@@ -40,7 +40,10 @@ We expect to fix this in a future release.
 
 ### Fixes since Docker Desktop RC 3
 
-ADD list of issues fixed
+- Docker Desktop now ensures the permissions of `/dev/null` are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
+- Fixed an issue where ICMP echo responses (`ping` responses) had incorrect sequence numbers.
+- Fixed an issue where data was dropped when a TCP stream was half-closed.
+- Docker Desktop now reduces the idle CPU consumption.
 
 ### Fixes since Docker Desktop RC 2
 
