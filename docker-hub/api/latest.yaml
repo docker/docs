@@ -121,7 +121,7 @@ definitions:
           inactive:
             description: Number of images counted as inactive in this repository.
             type: integer
-            example: 1
+            example: 1      
   GetNamespaceRepositoryImagesResponse:
     description: Paginated list of images in a repository.
     type: object
@@ -190,6 +190,23 @@ definitions:
               type: string
               enum: [active, inactive]
               example: active
+  GetNamespaceRepositoryImagesTagsResponse:
+    description: The current and historical tags for this image.
+    type: array
+    items:
+      type: object
+      properties:
+        tag:
+          description: The tag.
+          type: string
+          example: latest
+        is_current:
+          description: |
+            `true` if the tag currently points to this image.
+
+            `false` if it has been overwritten to point at a different image.
+          type: boolean
+          example: true
   PostNamespacesDeleteImagesRequest:
     description: Delete images request.
     type: object
@@ -562,6 +579,43 @@ paths:
           description: Success
           schema: 
             $ref: '#/definitions/GetNamespaceRepositoryImagesResponse'
+        401:
+          description: Unauthorized - user does not have read access to the namespace
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: Forbidden - this API is only available to users on Pro or Team plans
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
+    get:
+      tags: [Images]
+      summary: Get image's tags
+      description: Gets current and history tags for an image.
+      operationId: GetNamespacesRepositoriesImagesTags
+      produces:
+        - application/json
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          description: Namespace of the repository.
+          type: string
+        - name: repository
+          in: path
+          required: true
+          description: Name of the repository.
+          type: string
+        - name: digest
+          in: path
+          required: true
+          description: Digest of the image.
+          type: string
+      responses:
+        200:
+          description: Success
+          schema: 
+            $ref: '#/definitions/GetNamespaceRepositoryImagesTagsResponse'
         401:
           description: Unauthorized - user does not have read access to the namespace
           schema:
