@@ -81,7 +81,7 @@ and select **Learn**.
 
 Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
 
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. You can start downloading the update in the background whenever it is convenient for you.
+When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. You can start downloading the update in the background whenever it is convenient for you. Alternatively, you can click **Snooze** to pause the update.
 
 After downloading the update, all you need to do is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
 
