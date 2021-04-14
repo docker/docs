@@ -9,6 +9,22 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2021-04-13
+
+### Enhancement
+
+The **Billing Details** page now shows any organizations you own, in addition to your personal account. This allows you to clearly identify the billing details of your chosen namespace, and enables you to switch between your personal and your organization accounts to view or update the details.
+
+# 2021-04-09
+
+### Enhancement
+
+You can now specify any email address to receive billing-related emails for your organization. The email address doesn't have to be associated with an organization owner account. You must be an owner of the organization to update any billing details.
+
+To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Contact Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
+
+For details on how to update your billing information, see [Update billing information](/billing/index.md#update-billing-information).
+
 # 2021-03-22
 
 ### New feature
