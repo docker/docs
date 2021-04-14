@@ -10,11 +10,11 @@ redirect_from:
 
 Welcome to Docker Desktop for Apple Silicon.
 
-## Docker Desktop for Apple silicon
+## Docker Desktop 3.3.1
 
 2021-04-15
 
-Click on the following link to download the GA version of Docker Desktop for Apple silicon.
+Click the following link to download the GA version of Docker Desktop for Apple silicon.
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/Docker.dmg)
 
