@@ -26,6 +26,8 @@ Docker Desktop for Mac on Apple silicon is now available as a GA release. For mo
 
 - **Mac with Apple silicon**: Docker Desktop now ensures the permissions of `/dev/null` are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
 
+- Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
+
 ## Docker Desktop 3.3.0
 2021-04-08
 
