@@ -14,13 +14,14 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 
 ### Bug fixes and minor changes
 
 - Docker Desktop now ensures the permissions of `/dev/null` are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
 - Fixed an issue that caused `docker run` to fail when using `\\wsl.localhost` path to a directory. Fixes [docker/for-win#10786](https://github.com/docker/for-win/issues/10786)
 - Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
+-  Fixed file permission when creating a file from a delta update. Fixes [docker/for-win#10881](https://github.com/docker/for-win/issues/10881)
 
 ## Docker Desktop 3.3.0
 2021-04-08
