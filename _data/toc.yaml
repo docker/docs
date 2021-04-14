@@ -1092,8 +1092,30 @@ reference:
     path: /docker-hub/api/latest/
   - title: Registry API
     path: /registry/spec/api/
-- title: Dockerfile reference
-  path: /engine/reference/builder/
+- sectiontitle: Dockerfile reference
+  section:
+  - title: Dockerfile reference
+    path: /engine/reference/builder/
+  - title: FROM
+    path: /engine/reference/builder/#from
+  - title: RUN
+    path: /engine/reference/builder/#run
+  - title: CMD
+    path: /engine/reference/builder/#cmd
+  - title: LABEL
+    path: /engine/reference/builder/#label
+  - title: MAINTAINER
+    path: /engine/reference/builder/#maintainer-deprecated
+  - title: EXPOSE
+    path: /engine/reference/builder/#expose
+  - title: ENV
+    path: /engine/reference/builder/#env
+  - title: ADD
+    path: /engine/reference/builder/#add
+  - title: COPY
+    path: /engine/reference/builder/#copy
+  - title: ENTRYPOINT
+    path: /engine/reference/builder/#entrypoint
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/
