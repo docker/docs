@@ -12,13 +12,15 @@ toc_max: 2
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
 ## Docker Desktop 3.3.1
-2021-04-14
+2021-04-15
 
 > [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
- - Fixed an issue that caused `docker run` to fail when using `\\wsl.localhost` path to a directory. Fixes [docker/for-win#10786](https://github.com/docker/for-win/issues/10786)
+- Fixed an issue that caused `docker run` to fail when using `\\wsl.localhost` path to a directory. Fixes [docker/for-win#10786](https://github.com/docker/for-win/issues/10786)
+
+- Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
 
 ## Docker Desktop 3.3.0
 2021-04-08
@@ -47,7 +49,7 @@ For developers in IT managed environments, who don’t have administrative acces
 
 - Fixed an issue when viewing compose applications that have been started with an explicit project name. Fixes [docker/for-win#10564](https://github.com/docker/for-win/issues/10564).
 - Ensure `--add-host host.docker.internal:host-gateway` causes `host.docker.internal` resolves to the host IP, rather than the IP of the IP router. See [docker/for-linux#264](https://github.com/docker/for-linux/issues/264).
-- Fixed port allocation for Windows containers. Fixes[docker/for-win#10552](https://github.com/docker/for-win/issues/10552).
+- Fixed port allocation for Windows containers. Fixes [docker/for-win#10552](https://github.com/docker/for-win/issues/10552).
 - Fixed an issue where running a container with a random port on the host caused Docker Desktop dashboard to incorrectly open a browser with port 0, instead of using the allocated port.
 - Fixed an issue where pulling an image from Docker Hub using the Docker Desktop dashboard was failing silently.
 - Perform a filesystem check when starting the Linux VM.

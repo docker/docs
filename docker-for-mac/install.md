@@ -8,11 +8,9 @@ Welcome to Docker Desktop for Mac. This page contains information about Docker D
 
 Click one of the following buttons to download Docker Desktop for Mac:
 
-[Docker Desktop for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg){: .button .primary-btn}
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg){: .button .primary-btn}
 
-[Docker Desktop for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg){: .button .primary-btn}
-
-##### Docker EULA
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg){: .button .primary-btn}
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
