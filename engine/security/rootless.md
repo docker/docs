@@ -116,6 +116,7 @@ testuser:231072:65536
 - Only the following storage drivers are supported:
   - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
+  - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
 - Cgroup is supported only when running with cgroup v2 and systemd. See [Limiting resources](#limiting-resources).
 - Following features are not supported:
@@ -268,7 +269,7 @@ Remarks about directory paths:
 
 ### Client
 
-You need to specify the socket path explicitly.
+You need to specify either the socket path or the CLI context explicitly.
 
 To specify the socket path using `$DOCKER_HOST`:
 
@@ -277,12 +278,9 @@ $ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 $ docker run -d -p 8080:80 nginx
 ```
 
-To specify the socket path using `docker context`:
+To specify the CLI context using `docker context`:
 
 ```console
-$ docker context create rootless --description "for rootless mode" --docker "host=unix://$XDG_RUNTIME_DIR/docker.sock"
-rootless
-Successfully created context "rootless"
 $ docker context use rootless
 rootless
 Current context is now "rootless"
