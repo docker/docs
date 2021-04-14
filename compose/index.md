@@ -64,9 +64,9 @@ Compose has commands for managing the whole lifecycle of your application:
 
 - [Installing Compose](install.md)
 - [Getting started with Compose](gettingstarted.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
+- [Get started with Django](../samples/django.md)
+- [Get started with Rails](../samples/rails.md)
+- [Get started with WordPress](../samples/wordpress.md)
 - [Frequently asked questions](faq.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)

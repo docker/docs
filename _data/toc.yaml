@@ -1142,17 +1142,17 @@ samples:
     title: apt-cacher-ng
   - path: /samples/dotnetcore/
     title: ASP.NET Core application
-  - path: /compose/aspnet-mssql-compose/
+  - path: /samples/aspnet-mssql-compose/
     title: ASP.NET Core + SQL Server on Linux
   - path: /samples/couchdb_data_volumes/
     title: CouchDB
-  - path: /compose/django/
+  - path: /samples/django/
     title: Django and PostgreSQL
-  - path: /compose/wordpress/
+  - path: /samples/wordpress/
     title: WordPress
   - path: /samples/postgresql_service/
     title: PostgreSQL
-  - path: /compose/rails/
+  - path: /samples/rails/
     title: Rails and PostgreSQL
   - path: /samples/running_riak_service/
     title: Riak

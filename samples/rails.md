@@ -2,10 +2,12 @@
 description: Getting started with Docker Compose and Rails
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: "Quickstart: Compose and Rails"
+redirect_from:
+  - /compose/rails/
 ---
 
 This Quickstart guide shows you how to use Docker Compose to set up and run
-a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
+a Rails/PostgreSQL app. Before starting, [install Compose](../compose/install.md).
 
 ### Define the project
 
@@ -21,7 +23,7 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY ../compose /myapp
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
@@ -229,7 +231,7 @@ browser to see the Rails Welcome.
 
 ### Stop the application
 
-To stop the application, run [docker-compose down](reference/down.md) in
+To stop the application, run [docker-compose down](../compose/reference/down.md) in
 your project directory. You can use the same terminal window in which you
 started the database, or another one where you have access to a command prompt.
 This is a clean way to stop the application.
@@ -277,9 +279,9 @@ host.
 
 ## More Compose documentation
 
-- [User guide](index.md)
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [Docker Compose overview](../compose/index.md)
+- [Install Docker Compose](../compose/install.md)
+- [Getting Started with Docker Compose](../compose/gettingstarted.md)
+- [Docker Compose Command line reference](../compose/reference/index.md)
+- [Compose file reference](../compose/compose-file/index.md)
+- [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}

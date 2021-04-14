@@ -32,18 +32,18 @@ repository]({{ labsbase }}).
 
 Run popular software using Docker.
 
-| Sample                                                                    | Description                                               |
-| ------------------------------------------------------------------------- | --------------------------------------------------------- |
-| [apt-cacher-ng](apt-cacher-ng.md)                                         | Run a Dockerized apt-cacher-ng instance.                  |
-| [.Net Core application](dotnetcore.md)                                    | Run a Dockerized ASP.NET Core application.                |
-| [ASP.NET Core + SQL Server on Linux](../compose/aspnet-mssql-compose.md)  | Run a Dockerized ASP.NET Core + SQL Server environment.   |
-| [CouchDB](couchdb_data_volumes.md)                                        | Run a Dockerized CouchDB instance.                        |
-| [Django + PostgreSQL](../compose/django.md)                               | Run a Dockerized Django + PostgreSQL environment.         |
-| [PostgreSQL](postgresql_service.md)                                       | Run a Dockerized PostgreSQL instance.                     |
-| [Rails + PostgreSQL](../compose/rails.md)                                 | Run a Dockerized Rails + PostgreSQL environment.          |
-| [Riak](running_riak_service.md)                                           | Run a Dockerized Riak instance.                           |
-| [SSHd](running_ssh_service.md)                                            | Run a Dockerized SSHd instance.                           |
-| [WordPress](../compose/wordpress.md)                                      | Quickstart: Compose and WordPress.                        |
+| Sample                                                        | Description                                               |
+| --------------------------------------------------------------| --------------------------------------------------------- |
+| [apt-cacher-ng](apt-cacher-ng.md)                             | Run a Dockerized apt-cacher-ng instance.                  |
+| [.Net Core application](dotnetcore.md)                        | Run a Dockerized ASP.NET Core application.                |
+| [ASP.NET Core + SQL Server on Linux](aspnet-mssql-compose.md) | Run a Dockerized ASP.NET Core + SQL Server environment.   |
+| [CouchDB](couchdb_data_volumes.md)                            | Run a Dockerized CouchDB instance.                        |
+| [Django + PostgreSQL](django.md)                              | Run a Dockerized Django + PostgreSQL environment.         |
+| [PostgreSQL](postgresql_service.md)                           | Run a Dockerized PostgreSQL instance.                     |
+| [Rails + PostgreSQL](rails.md)                                | Run a Dockerized Rails + PostgreSQL environment.          |
+| [Riak](running_riak_service.md)                               | Run a Dockerized Riak instance.                           |
+| [SSHd](running_ssh_service.md)                                | Run a Dockerized SSHd instance.                           |
+| [WordPress](wordpress.md)                                     | Quickstart: Compose and WordPress.                        |
 
 ## Library references
 
