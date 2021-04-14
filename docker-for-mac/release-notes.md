@@ -20,7 +20,7 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-Docker Desktop for Mac on Apple silicon is now available a GA release. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+Docker Desktop for Mac on Apple silicon is now available as a GA release. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
 
 ### Bug fixes and minor changes
 

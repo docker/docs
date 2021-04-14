@@ -8,13 +8,13 @@ redirect_from:
 - /docker-for-mac/apple-m1/
 ---
 
-Welcome to Docker Desktop for Apple Silicon.
+Welcome to Docker Desktop for Apple silicon.
 
 ## Docker Desktop 3.3.1
 
 2021-04-15
 
-Click the following link to download the GA version of Docker Desktop for Apple silicon.
+Click on the following link to download the GA version of Docker Desktop for Apple silicon.
 
 > [Download](https://desktop.docker.com/mac/stable/arm64/Docker.dmg)
 
@@ -22,10 +22,11 @@ Click the following link to download the GA version of Docker Desktop for Apple 
 
 You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
 
-    ```
-    softwareupdate --install-rosetta
-    ```
-    We expect to fix this in a future release.
+```
+softwareupdate --install-rosetta
+```
+
+We expect to fix this in a future release.
 
 ### Known issues
 

@@ -17,20 +17,12 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 Your Windows machine must meet the following requirements to successfully install Docker Desktop.
 
-### Hyper-V backend and Windows containers
-
-- Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or higher).
-
-  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
-- Hyper-V and Containers Windows features must be enabled.
-- The following hardware prerequisites are required to successfully run Client
-Hyper-V on Windows 10:
-
-  - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
-  - 4GB system RAM
-  - BIOS-level hardware virtualization support must be enabled in the
-    BIOS settings.  For more information, see
-    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 backend</a></li>
+<li><a data-toggle="tab" data-target="#win-hyper-v">Hyper-V backend and Windows containers</a></li>
+</ul>
+<div class="tab-content">
+<div id="win-wsl2" class="tab-pane fade in active" markdown="1">
 
 ### WSL 2 backend
 
@@ -46,6 +38,27 @@ WSL 2 on Windows 10:
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
 - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
+
+</div>
+<div id="win-hyper-v" class="tab-pane fade" markdown="1">
+
+### Hyper-V backend and Windows containers
+
+- Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or higher).
+
+  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
+- Hyper-V and Containers Windows features must be enabled.
+- The following hardware prerequisites are required to successfully run Client
+Hyper-V on Windows 10:
+
+  - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
+    BIOS settings.  For more information, see
+    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+
+</div>
+</div>
 
 > **Note**
 >

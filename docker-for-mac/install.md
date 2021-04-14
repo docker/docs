@@ -18,6 +18,13 @@ By downloading Docker Desktop, you agree to the terms of the [Docker Software En
 
 Your Mac must meet the following requirements to successfully install Docker Desktop.
 
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#mac-intel">Mac with Intel chip</a></li>
+<li><a data-toggle="tab" data-target="#mac-apple-silicon">Mac with Apple silicon</a></li>
+</ul>
+<div class="tab-content">
+<div id="mac-intel" class="tab-pane fade in active" markdown="1">
+
 ### Mac with Intel chip
 
 - **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
@@ -32,6 +39,9 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
 - VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.
 
+</div>
+<div id="mac-apple-silicon" class="tab-pane fade" markdown="1">
+
 ### Mac with Apple silicon
 
 - You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
@@ -41,6 +51,9 @@ Your Mac must meet the following requirements to successfully install Docker Des
   ```
 
  For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+
+</div>
+</div>
 
 ## What's included in the installer
 
@@ -102,7 +115,7 @@ To uninstall Docker Desktop from your Mac:
 ## Where to go next
 
 - [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
-- [Docker Desktop for Apple silicon](apple-silicon.md)for detailed information about Docker Desktop for Apple silicon.
+- [Docker Desktop for Apple silicon](apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
