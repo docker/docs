@@ -45,11 +45,7 @@ Run popular software using Docker.
 | [SSHd](running_ssh_service.md)                                | Run a Dockerized SSHd instance.                           |
 | [WordPress](wordpress.md)                                     | Quickstart: Compose and WordPress.                        |
 
-## Library references
+## Samples and documentation for official Docker images {#library-references}
 
-The following table provides a list of popular official Docker images. For detailed documentation, select the specific image name. 
-
-| Image name | Description |
-| ---------- | ----------- |
-{% for page in site.samples %}| [{{ page.title }}](https://hub.docker.com/_/{{ page.title }}){: target="_blank"} | {{ page.description | strip }} |
-{% endfor %}
+For samples and detailed information about [official Docker images](../docker-hub/official_images.md),
+refer to the documentation [for each image on Docker Hub](https://hub.docker.com/search?q=&type=image&image_filter=official){: target="_blank"}.
