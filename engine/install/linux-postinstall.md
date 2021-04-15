@@ -410,8 +410,8 @@ IP address, follow these instructions to disable `dnsmasq` in NetworkManager.
     your system.
 
     ```console
-    $ sudo restart network-manager
-    $ sudo restart docker
+    $ sudo systemctl restart network-manager
+    $ sudo systemctl restart docker
     ```
 
 ##### RHEL, CentOS, or Fedora
@@ -421,8 +421,7 @@ To disable `dnsmasq` on RHEL, CentOS, or Fedora:
 1.  Disable the `dnsmasq` service:
 
     ```console
-    $ sudo service dnsmasq stop
-
+    $ sudo systemctl stop dnsmasq
     $ sudo systemctl disable dnsmasq
     ```
 
