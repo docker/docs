@@ -81,8 +81,8 @@ started in 2006, and initially merged in kernel 2.6.24.
 
 Running containers (and applications) with Docker implies running the
 Docker daemon. This daemon requires `root` privileges unless you opt-in
-to [Rootless mode](rootless.md) (experimental), and you should therefore
-be aware of some important details.
+to [Rootless mode](rootless.md), and you should therefore be aware of
+some important details.
 
 First of all, **only trusted users should be allowed to control your
 Docker daemon**. This is a direct consequence of some powerful Docker
