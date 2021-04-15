@@ -421,8 +421,7 @@ To disable `dnsmasq` on RHEL, CentOS, or Fedora:
 1.  Disable the `dnsmasq` service:
 
     ```console
-    $ sudo service dnsmasq stop
-
+    $ sudo systemctl stop dnsmasq
     $ sudo systemctl disable dnsmasq
     ```
 
