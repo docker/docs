@@ -8,15 +8,19 @@ redirect_from:
 - /docker-for-mac/apple-m1/
 ---
 
-Welcome to Docker Desktop for Apple silicon.
+Docker Desktop for Mac on Apple silicon is now available as a GA release. This enables you to develop applications with your choice of local development environments, and extends development pipelines for ARM-based applications.
+
+Docker Desktop for Apple silicon also supports multi-platform images, which allows you to build and run images for both x86 and ARM architectures without having to set up a complex cross-compilation development environment. Additionally, you can use [docker buildx](../engine/reference/commandline/buildx.md){:target="_blank" rel="noopener" class="_"} to seamlessly integrate multi-platform builds into your build pipeline, and use [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} to identify and share repositories that provide multi-platform images.
 
 ## Docker Desktop 3.3.1
 
 2021-04-15
 
-Click on the following link to download the GA version of Docker Desktop for Apple silicon.
+Click the following link to download Docker Desktop.
 
 [Download](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+<br>
 
 ### System requirements
 
@@ -28,18 +32,19 @@ softwareupdate --install-rosetta
 
 We expect to fix this in a future release.
 
-### Known issue
+### Known issues
 
-Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated) image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated) image.
+- Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated) image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated) image.
 
    However, attempts to run Intel-based containers on Apple Silicon machines can crash as QEMU sometimes fails to run the container. Filesystem change notification APIs (e.g. `inotify`) do not work under QEMU emulation, see [docker/for-mac#5321](https://github.com/docker/for-mac/issues/5321). Therefore, we recommend that you run ARM64 containers on Apple Silicon machines. These containers are also faster and use less memory than Intel-based containers.
 
    We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
 
+- When using the `qemu` backend, `ping` from inside a container to the Internet does not work as expected.  To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+
 ### Fixes since Docker Desktop RC 3
 
-- Fixed an issue where `ping` from inside a container to the Internet did not work as expected when using the `qemu` backend. Fixes [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
-- Docker Desktop now ensures the permissions of `/dev/null` are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
+- Docker Desktop now ensures the permissions of `/dev/null` and other devices are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
 - Fixed an issue where ICMP echo responses (`ping` responses) had incorrect sequence numbers.
 - Fixed an issue where data was dropped when a TCP stream was half-closed.
 - Docker Desktop now reduces the idle CPU consumption.

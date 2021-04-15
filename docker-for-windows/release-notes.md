@@ -18,10 +18,10 @@ This page contains information about the new features, improvements, known issue
 
 ### Bug fixes and minor changes
 
-- Docker Desktop now ensures the permissions of `/dev/null` are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
+- Docker Desktop now ensures the permissions of `/dev/null` and other devices are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
 - Fixed an issue that caused `docker run` to fail when using `\\wsl.localhost` path to a directory. Fixes [docker/for-win#10786](https://github.com/docker/for-win/issues/10786)
 - Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
--  Fixed file permission when creating a file from a delta update. Fixes [docker/for-win#10881](https://github.com/docker/for-win/issues/10881)
+- Fixed file permission when creating a file from a delta update. Fixes [docker/for-win#10881](https://github.com/docker/for-win/issues/10881)
 
 ## Docker Desktop 3.3.0
 2021-04-08

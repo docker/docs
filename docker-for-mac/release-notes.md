@@ -14,23 +14,20 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-### Download
-
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 
 ### New
 
-Docker Desktop for Mac on Apple silicon is now available as a GA release. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+Docker Desktop is now available for Apple silicon as well as Intel chips. This enables developers with their choice of local development environments, and extends development pipelines for ARM-based applications. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
 
 ### Bug fixes and minor changes
 
-- Docker Desktop now ensures the permissions of `/dev/null` are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527)
+- Docker Desktop now ensures the permissions of `/dev/null` and other devices are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527)
 - Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
 
 **Mac with Apple silicon**
 
-- Fixed an issue where `ping` from inside a container to the Internet did not work as expected when using the `qemu` backend. Fixes [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861)
 - Fixed an issue where ICMP echo responses (`ping` responses) had incorrect sequence numbers.
 - Fixed an issue where data was dropped when a TCP stream was half-closed.
 - Docker Desktop now reduces the idle CPU consumption.
