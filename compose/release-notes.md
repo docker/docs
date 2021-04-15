@@ -14,7 +14,7 @@ redirect_from:
 
 - Fixed invalid handler warning on Windows builds.
 
-- Fixed config hash to trigger container recreation on IPC mode updates.
+- Fixed config hash to trigger container re-creation on IPC mode updates.
 
 - Fixed conversion map for `placement.max_replicas_per_node`.
 
