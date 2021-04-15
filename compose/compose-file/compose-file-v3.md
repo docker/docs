@@ -501,7 +501,7 @@ configs:
 The long syntax provides more granularity in how the config is created within
 the service's task containers.
 
-- `source`: The name of the config as it exists in Docker.
+- `source`: The identifier of the config as it is defined in this configuration.
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the mounted config file
@@ -1778,7 +1778,7 @@ secrets:
 The long syntax provides more granularity in how the secret is created within
 the service's task containers.
 
-- `source`: The name of the secret as it exists in Docker.
+- `source`: The identifier of the secret as it is defined in this configuration.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task containers. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the file within
