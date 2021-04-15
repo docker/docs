@@ -136,9 +136,7 @@ By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days. 
 
 ### Is Docker Desktop compatible with Apple silicon processors?
 
-At the moment, Docker Desktop is compatible with Intel processors only. For more information, see [Apple M1 Tech preview](../docker-for-mac/apple-m1.md).
-
-You can also follow the status of Apple Silicon support in our [Roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
+Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](../docker-for-mac/apple-silicon.md).
 
 ### What is HyperKit?
 
