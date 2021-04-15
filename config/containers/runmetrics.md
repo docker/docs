@@ -101,7 +101,7 @@ and run `sudo update-grub`.
 
 ### Running Docker on cgroup v2
 
-Docker supports cgroup v2 experimentally since Docker 20.10.
+Docker supports cgroup v2 since Docker 20.10.
 Running Docker on cgroup v2 also requires the following conditions to be satisfied:
 * containerd: v1.4 or later
 * runc: v1.0.0-rc91 or later
