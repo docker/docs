@@ -6,18 +6,41 @@ redirect_from:
 - /docker-for-windows/install-windows-home/
 ---
 
-Docker Desktop for Windows is the [Community](https://www.docker.com/community-edition) version of Docker for Microsoft Windows.
-You can download Docker Desktop for Windows from Docker Hub.
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, installation instructions, and automatic updates.
 
-[Download from Docker
-Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
-.button .outline-btn}
+[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
+.button .primary-btn}
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
 ## System requirements
 
 Your Windows machine must meet the following requirements to successfully install Docker Desktop.
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 backend</a></li>
+<li><a data-toggle="tab" data-target="#win-hyper-v">Hyper-V backend and Windows containers</a></li>
+</ul>
+<div class="tab-content">
+<div id="win-wsl2" class="tab-pane fade in active" markdown="1">
+
+### WSL 2 backend
+
+- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
+- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
+- The following hardware prerequisites are required to successfully run
+WSL 2 on Windows 10:
+
+  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
+    BIOS settings.  For more information, see
+    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
+
+</div>
+<div id="win-hyper-v" class="tab-pane fade" markdown="1">
 
 ### Hyper-V backend and Windows containers
 
@@ -34,20 +57,8 @@ Hyper-V on Windows 10:
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
 
-### WSL 2 backend
-
-- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
-- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
-    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
-- The following hardware prerequisites are required to successfully run
-WSL 2 on Windows 10:
-
-  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
-  - 4GB system RAM
-  - BIOS-level hardware virtualization support must be enabled in the
-    BIOS settings.  For more information, see
-    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
-- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
+</div>
+</div>
 
 > **Note**
 >

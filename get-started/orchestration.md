@@ -317,7 +317,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 At this point, you've confirmed that you can run simple containerized workloads in Kubernetes and Swarm. The next step will be to write the Kubernetes yaml that describes how to run and manage these containers on Kubernetes.
 
-[On to deploying to Kubernetes >>](kube-deploy.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 200%"}
+[On to deploying to Kubernetes >>](kube-deploy.md){: class="button primary-btn" style="margin-bottom: 30px; margin-right: 200%"}
 
 To learn how to write the stack file to help you run and manage containers on Swarm, see [Deploying to Swarm](swarm-deploy.md).
 
