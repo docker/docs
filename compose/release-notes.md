@@ -7,6 +7,19 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.29.1
+(2021-04-13)
+
+### Bugs
+
+- Fixed invalid handler warning on Windows builds.
+
+- Fixed config hash to trigger container re-creation on IPC mode updates.
+
+- Fixed conversion map for `placement.max_replicas_per_node`.
+
+- Removed extra scan suggestion on build.
+
 ## 1.29.0
 (2021-04-06)
 
