@@ -112,10 +112,10 @@ $ docker build --progress=plain .
 
 The new syntax features in `Dockerfile` are available if you override the default
 frontend. To override the default frontend, set the first line of the
-`Dockerfile` as a comment with a specific frontend image: 
+`Dockerfile` as a comment with a specific frontend image:
 
 ```dockerfile
-# syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
+# syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.2
 ```
 
 ## New Docker Build secret information
@@ -139,12 +139,10 @@ $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
 And with a Dockerfile that specifies use of a BuildKit frontend
-`docker/dockerfile:1.0-experimental`, the secret can be accessed. 
-
-For example:
+`docker/dockerfile:1.2`, the secret can be accessed when performing a `RUN`:
 
 ```dockerfile
-# syntax = docker/dockerfile:1.0-experimental
+# syntax = docker/dockerfile:1.2
 FROM alpine
 
 # shows secret from default secret location:
@@ -154,6 +152,7 @@ RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret
 RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 ```
 
+The secret needs to be passed to the build using the `--secret` flag.
 This Dockerfile is only to demonstrate that the secret can be accessed. As you
 can see the secret printed in the build output. The final image built will not
 have the secret file:
