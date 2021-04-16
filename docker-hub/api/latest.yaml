@@ -591,7 +591,7 @@ paths:
     get:
       tags: [Images]
       summary: Get image's tags
-      description: Gets current and history tags for an image.
+      description: Gets current and historical tags for an image.
       operationId: GetNamespacesRepositoriesImagesTags
       produces:
         - application/json
