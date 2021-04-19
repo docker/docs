@@ -76,6 +76,7 @@ this in a few different ways.
   Next, the Dockerfile:
 
   ```dockerfile
+  # syntax=docker/dockerfile:1
   FROM ubuntu:latest
   COPY my_first_process my_first_process
   COPY my_second_process my_second_process
@@ -110,6 +111,7 @@ this in a few different ways.
   ```
 
   ```dockerfile
+  # syntax=docker/dockerfile:1
   FROM ubuntu:latest
   COPY my_main_process my_main_process
   COPY my_helper_process my_helper_process
@@ -127,6 +129,7 @@ this in a few different ways.
   Dockerfile.
 
   ```dockerfile
+  # syntax=docker/dockerfile:1
   FROM ubuntu:latest
   RUN apt-get update && apt-get install -y supervisor
   RUN mkdir -p /var/log/supervisor

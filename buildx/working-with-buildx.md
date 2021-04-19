@@ -148,6 +148,7 @@ inside your Dockerfile and can be leveraged by the processes running as part
 of your build.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM --platform=$BUILDPLATFORM golang:alpine AS build
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM

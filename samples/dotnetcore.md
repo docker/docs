@@ -46,6 +46,7 @@ clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/m
    the `Dockerfile` to use the DLL file of your project.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 
@@ -88,6 +89,7 @@ obj/
     This method is preferred for CI tools like Jenkins, Azure DevOps, GitLab CI, etc. as you can use the same artifacts in multiple deployment models if Docker     isn't the only deployment model being used. Additionally, you'll be able to run unit tests and publish code coverage reports, or use custom plugins on the     artifacts built by the CI.
 
       ```dockerfile
+      # syntax=docker/dockerfile:1
       FROM mcr.microsoft.com/dotnet/aspnet:5.0
       COPY bin/Release/netcoreapp3.1/publish/ App/
       WORKDIR /App
