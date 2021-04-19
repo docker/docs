@@ -16,7 +16,6 @@ The following commands have not been implemented yet, and maybe implemented at a
 Let us know if these commands are a higher priority for your usecases.
 
 * `compose build --memory`
-* `compose config --profiles`
 
 ## Flags that will not be implemented
 
