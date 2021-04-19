@@ -27,8 +27,8 @@ either because they are already deprecated in `docker-compose`, or because they 
 * `compose build --no-rm` Not relevant as commpose command is using buildkit by default.
 * `compose build --parallel` Not relevant as commpose command is using buildkit by default.
 * `compose ps --filter KEY-VALUE` Not relevant due to its complicated usage with the `service` command and also because it is not documented properly in `docker-compose`.
-* `compose pull --parallel` Deprecated in docker-compose
-* `compose pull --no-parallel` Deprecated in docker-compose
+* `compose pull --parallel` Deprecated in docker-compose (Still parsed, but ignored)
+* `compose pull --no-parallel` Deprecated in docker-compose (Still parsed, but ignored)
 * `compose rm --all` Deprecated in docker-compose.
 * `compose scale` Deprecated in docker-compose (use `compose up --scale` instead)
 
