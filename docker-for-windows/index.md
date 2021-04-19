@@ -6,6 +6,7 @@ redirect_from:
 - /docker-for-windows/started/
 - /engine/installation/windows/
 - /installation/windows/
+- /win/
 - /windows/
 - /windows/started/
 - /winkit/

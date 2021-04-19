@@ -2,6 +2,8 @@
 description: Installing and running an SSHd service on Docker
 keywords: docker, example, package installation,  networking
 title: Dockerize an SSH service
+redirect_from:
+  - /engine/examples/running_ssh_service/
 ---
 
 Running sshd inside a container is discouraged, however, it might be still useful
