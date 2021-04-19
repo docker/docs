@@ -64,9 +64,9 @@ Compose has commands for managing the whole lifecycle of your application:
 
 - [Installing Compose](install.md)
 - [Getting started with Compose](gettingstarted.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
+- [Get started with Django](../samples/django.md)
+- [Get started with Rails](../samples/rails.md)
+- [Get started with WordPress](../samples/wordpress.md)
 - [Frequently asked questions](faq.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
@@ -92,7 +92,7 @@ Compose uses a project name to isolate environments from each other. You can mak
 
 The default project name is the basename of the project directory. You can set
 a custom project name by using the
-[`-p` command line option](reference/overview.md) or the
+[`-p` command line option](reference/index.md) or the
 [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 
 The default project directory is the base directory of the Compose file. A custom value

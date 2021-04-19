@@ -18,6 +18,8 @@ redirect_from:
 - /engine/getstarted/step_six/
 - /engine/getstarted/step_three/
 - /engine/getstarted/step_two/
+- /engine/quickstart/
+- /engine/tutorials/
 - /engine/tutorials/dockerimages/
 - /engine/tutorials/dockerizing/
 - /engine/tutorials/usingdocker/

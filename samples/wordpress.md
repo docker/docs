@@ -2,12 +2,14 @@
 description: Getting started with Compose and WordPress
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "Quickstart: Compose and WordPress"
+redirect_from:
+  - /compose/wordpress/
 ---
 
 You can use Docker Compose to easily run WordPress in an isolated environment
 built with Docker containers. This quick-start guide demonstrates how to use
 Compose to set up and run WordPress. Before starting, make sure you have
-[Compose installed](install.md).
+[Compose installed](../compose/install.md).
 
 ### Define the project
 
@@ -78,7 +80,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
 
 Now, run `docker-compose up -d` from your project directory.
 
-This runs [`docker-compose up`](reference/up.md) in detached mode, pulls
+This runs [`docker-compose up`](../compose/reference/up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 
@@ -134,7 +136,7 @@ browser.
 
 ### Shutdown and cleanup
 
-The command [`docker-compose down`](reference/down.md) removes the
+The command [`docker-compose down`](../compose/reference/down.md) removes the
 containers and default network, but preserves your WordPress database.
 
 The command `docker-compose down --volumes` removes the containers, default
@@ -142,9 +144,9 @@ network, and the WordPress database.
 
 ## More Compose documentation
 
-- [User guide](index.md)
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [Docker Compose overview](../compose/index.md)
+- [Install Docker Compose](../compose/install.md)
+- [Getting Started with Docker Compose](../compose/gettingstarted.md)
+- [Docker Compose Command line reference](../compose/reference/index.md)
+- [Compose file reference](../compose/compose-file/index.md)
+- [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}

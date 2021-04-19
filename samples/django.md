@@ -2,10 +2,12 @@
 description: Getting started with Docker Compose and Django
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "Quickstart: Compose and Django"
+redirect_from:
+  - /compose/django/
 ---
 
 This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting,
-[install Compose](install.md).
+[install Compose](../compose/install.md).
 
 ### Define the project components
 
@@ -58,7 +60,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     also describes which Docker images these services use, how they link
     together, any volumes they might need to be mounted inside the containers.
     Finally, the `docker-compose.yml` file describes which ports these services
-    expose. See the [`docker-compose.yml` reference](compose-file/index.md) for more
+    expose. See the [`docker-compose.yml` reference](../compose/compose-file/index.md) for more
     information on how this file works.
 
 9. Add the following configuration to the file.
@@ -102,7 +104,7 @@ In this step, you create a Django starter project by building the image from the
 
 1. Change to the root of your project directory.
 
-2. Create the Django project by running the [docker-compose run](reference/run.md)
+2. Create the Django project by running the [docker-compose run](../compose/reference/run.md)
    command as follows.
 
    ```console
@@ -184,7 +186,7 @@ In this section, you set up the database connection for Django.
 
 3. Save and close the file.
 
-4. Run the [docker-compose up](reference/up.md) command from the top level directory for your project.
+4. Run the [docker-compose up](../compose/reference/up.md) command from the top level directory for your project.
 
    ```console
    $ docker-compose up
@@ -252,7 +254,7 @@ In this section, you set up the database connection for Django.
       ```
 
     * Or, for a more elegant shutdown, switch to a different shell, and run
-      [docker-compose down](reference/down.md) from the top level of your
+      [docker-compose down](../compose/reference/down.md) from the top level of your
       Django sample project directory.
 
       ```console
@@ -270,9 +272,9 @@ In this section, you set up the database connection for Django.
 
 ## More Compose documentation
 
-- [User guide](index.md)
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [Docker Compose overview](../compose/index.md)
+- [Install Docker Compose](../compose/install.md)
+- [Getting Started with Docker Compose](../compose/gettingstarted.md)
+- [Docker Compose Command line reference](../compose/reference/index.md)
+- [Compose file reference](../compose/compose-file/index.md)
+- [Awesome Compose samples](https://github.com/docker/awesome-compose/){:target="_blank" rel="noopener" class="_"}

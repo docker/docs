@@ -24,12 +24,12 @@ The samples should help you to:
 
 These samples focus specifically on Docker Compose:
 
-- [Quickstart: Compose and Django](django.md) - Shows how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
+- [Quickstart: Compose and Django](../samples/django.md) - Shows how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
 
-- [Quickstart: Compose and Rails](rails.md) - Shows how to use
+- [Quickstart: Compose and Rails](../samples/rails.md) - Shows how to use
 Docker Compose to set up and run a Rails/PostgreSQL app.
 
-- [Quickstart: Compose and WordPress](wordpress.md) - Shows how to
+- [Quickstart: Compose and WordPress](../samples/wordpress.md) - Shows how to
 use Docker Compose to set up and run WordPress in an isolated environment
 with Docker containers.
 
