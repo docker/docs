@@ -110,7 +110,7 @@ func main() {
     resp, err := cli.ContainerCreate(ctx, &container.Config{
         Image: "alpine",
         Cmd:   []string{"echo", "hello world"},
-    }, nil, nil, "")
+    }, nil, nil, nil, "")
     if err != nil {
         panic(err)
     }
