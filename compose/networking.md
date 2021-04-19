@@ -16,7 +16,7 @@ identical to the container name.
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/overview.md)
+> project name with either the [`--project-name` flag](reference/index.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:

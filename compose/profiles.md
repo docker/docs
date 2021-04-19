@@ -57,7 +57,7 @@ Valid profile names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
 ## Enabling profiles
 
-To enable a profile supply the `--profile` [command-line option](reference/overview.md) or
+To enable a profile supply the `--profile` [command-line option](reference/index.md) or
 use the [`COMPOSE_PROFILES` environment variable](reference/envvars.md#compose_profiles):
 
 ```sh

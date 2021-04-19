@@ -948,7 +948,7 @@ reference:
       title: docker wait
   - sectiontitle: Docker Compose CLI reference
     section:
-    - path: /compose/reference/overview/
+    - path: /compose/reference/
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
