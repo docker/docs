@@ -121,7 +121,7 @@ definitions:
           inactive:
             description: Number of images counted as inactive in this repository.
             type: integer
-            example: 1      
+            example: 1
   GetNamespaceRepositoryImagesResponse:
     description: Paginated list of images in a repository.
     type: object
