@@ -21,9 +21,9 @@
 // Prevent selecting comments, command-output and command-prompt in shell
 // examples that use the "console" lexer/highlighter to allow easier copying.
 // See https://github.com/rouge-ruby/rouge/issues/1023
-.highlight .c,
-.highlight .go,
-.highlight .gp
+.language-console .highlight .c,
+.language-console .highlight .go,
+.language-console .highlight .gp
 {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -34,7 +34,7 @@
 // Show a "text" cursor for the prompt. Even though the prompt itself is not
 // selectable, make it appear as if it is, so that users don't get confused
 // when they try to select an example for copying.
-.highlight .gp {
+.language-console .highlight .gp {
   cursor: text;
 }
 
