@@ -35,7 +35,7 @@ Hub can be mirrored.
 
 > **Note**
 >
-> Mirrors of Docker Hub are still subject to Dockers [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates) 
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}. 
 
 ### Solution
 
