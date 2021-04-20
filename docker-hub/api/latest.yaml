@@ -598,11 +598,11 @@ paths:
           schema: 
             $ref: '#/definitions/GetNamespaceRepositoryImagesResponse'
         401:
-          description: Unauthorized - user does not have read access to the namespace
+          description: Unauthorized - user does not have read access to the namespace.
           schema:
             $ref: '#/definitions/ErrorResponse'
         403:
-          description: Forbidden - this API is only available to users on Pro or Team plans
+          description: Forbidden - this API is only available to users on Pro or Team plans.
           schema:
             $ref: '#/definitions/ErrorResponse'
   /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
