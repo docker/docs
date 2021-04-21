@@ -100,6 +100,7 @@ times for your container images.
 Let's look at the Dockerfile we were using one more time...
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12-alpine
 WORKDIR /app
 COPY . .
@@ -119,6 +120,7 @@ a change to the `package.json`. Make sense?
 1. Update the Dockerfile to copy in the `package.json` first, install dependencies, and then copy everything else in.
 
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM node:12-alpine
     WORKDIR /app
     COPY package.json yarn.lock ./
@@ -229,6 +231,7 @@ that JDK isn't needed in production. Also, you might be using tools like Maven o
 Those also aren't needed in our final image. Multi-stage builds help.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM maven AS build
 WORKDIR /app
 COPY . .
@@ -249,6 +252,7 @@ and more into static HTML, JS, and CSS. If we aren't doing server-side rendering
 for our production build. Why not ship the static resources in a static nginx container?
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12 AS build
 WORKDIR /app
 COPY package* yarn.lock ./

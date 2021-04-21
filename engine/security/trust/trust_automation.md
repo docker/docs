@@ -75,6 +75,7 @@ you should set the environment variable `DOCKER_CONTENT_TRUST` either manually o
 in a scripted fashion. Consider the simple Dockerfile below.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM docker/trusttest:latest
 RUN echo
 ```

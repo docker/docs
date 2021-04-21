@@ -22,6 +22,7 @@ of. We use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
 `trusty`), which is available on [Docker Hub](https://hub.docker.com):
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 # Riak
 #
 # VERSION       0.1.1

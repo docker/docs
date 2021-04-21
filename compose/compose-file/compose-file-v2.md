@@ -182,6 +182,8 @@ build process.
 First, specify the arguments in your Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG buildno
 ARG gitcommithash
 

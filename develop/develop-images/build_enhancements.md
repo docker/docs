@@ -19,7 +19,8 @@ on performance, storage management, feature functionality, and security.
   information for building new images with a specified Dockerfile 
 
 For more information on build options, see the reference guide on the
-[command line build options](/engine/reference/commandline/build/).
+[command line build options](../../engine/reference/commandline/build.md) and
+the [Dockerfile reference](/engine/reference/builder/) page.
 
 
 ## Requirements
@@ -115,8 +116,15 @@ frontend. To override the default frontend, set the first line of the
 `Dockerfile` as a comment with a specific frontend image: 
 
 ```dockerfile
-# syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
+# syntax=<frontend image>, e.g. # syntax=docker/dockerfile:1
 ```
+
+The examples on this page use features that are available in `docker/dockerfile`
+version 1.2.0 and up. We recommend using `docker/dockerfile:1`, which always
+points to the latest release of the version 1 syntax. BuildKit automatically
+checks for updates of the syntax before building, making sure you are using the
+most current version. Learn more about the `syntax` directive in the
+[Dockerfile reference](/engine/reference/builder/#syntax).
 
 ## New Docker Build secret information
 
@@ -138,13 +146,11 @@ For example, with a secret piece of information stored in a text file:
 $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
-And with a Dockerfile that specifies use of a BuildKit frontend
-`docker/dockerfile:1.0-experimental`, the secret can be accessed. 
-
-For example:
+Within a Dockerfile that uses BuildKit frontend `docker/dockerfile:1.2` or up,
+the secret can be accessed using the `--mount` option:
 
 ```dockerfile
-# syntax = docker/dockerfile:1.0-experimental
+# syntax=docker/dockerfile:1
 FROM alpine
 
 # shows secret from default secret location:
@@ -202,7 +208,7 @@ make programs relying on SSH automatically use that socket.
 Here is an example Dockerfile using SSH in the container:
 
 ```dockerfile
-# syntax=docker/dockerfile:experimental
+# syntax=docker/dockerfile:1
 FROM alpine
 
 # Install ssh client and git
