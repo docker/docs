@@ -19,7 +19,8 @@ the second download of any package almost instant.
 Use the following Dockerfile:
 
 ```dockerfile
-#
+# syntax=docker/dockerfile:1
+
 # Build: docker build -t apt-cacher .
 # Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
 #
@@ -74,6 +75,7 @@ container.
 a local version of a common base:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu
 RUN echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
 RUN apt-get update && apt-get install -y vim git

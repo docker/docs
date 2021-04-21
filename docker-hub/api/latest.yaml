@@ -190,6 +190,41 @@ definitions:
               type: string
               enum: [active, inactive]
               example: active
+  GetNamespaceRepositoryImagesTagsResponse:
+    description: Paginated list of tags for this repository.
+    type: object
+    properties:
+      count:
+        description: Total count of tags for this image.
+        type: integer
+        example: 100
+      next:
+        description: Link to the next page if there are more tags.
+        type: string
+        example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images/sha256:mydigest/tags?&page=4&page_size=20
+        x-nullable: true
+      previous:
+        description: Link to the previous page if not on first page.
+        type: string
+        example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images/sha256:mydigest/tags?&page=2&page_size=20
+        x-nullable: true
+      results:
+        description: The current and historical tags for this image.
+        type: array
+        items:
+          type: object
+          properties:
+            tag:
+              description: The tag.
+              type: string
+              example: latest
+            is_current:
+              description: |
+                `true` if the tag currently points to this image.
+
+                `false` if it has been overwritten to point at a different image.
+              type: boolean
+              example: true
   PostNamespacesDeleteImagesRequest:
     description: Delete images request.
     type: object
@@ -562,6 +597,53 @@ paths:
           description: Success
           schema: 
             $ref: '#/definitions/GetNamespaceRepositoryImagesResponse'
+        401:
+          description: Unauthorized - user does not have read access to the namespace.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        403:
+          description: Forbidden - this API is only available to users on Pro or Team plans.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
+    get:
+      tags: [Images]
+      summary: Get image's tags
+      description: Gets current and historical tags for an image.
+      operationId: GetNamespacesRepositoriesImagesTags
+      produces:
+        - application/json
+      parameters:
+        - name: namespace
+          in: path
+          required: true
+          description: Namespace of the repository.
+          type: string
+        - name: repository
+          in: path
+          required: true
+          description: Name of the repository.
+          type: string
+        - name: digest
+          in: path
+          required: true
+          description: Digest of the image.
+          type: string
+        - name: page
+          in: query
+          required: false
+          description: Page number to get. Defaults to 1.
+          type: integer
+        - name: page_size
+          in: query
+          required: false
+          description: Number of images to get per page. Defaults to 10. Max of 100.
+          type: integer
+      responses:
+        200:
+          description: Success
+          schema: 
+            $ref: '#/definitions/GetNamespaceRepositoryImagesTagsResponse'
         401:
           description: Unauthorized - user does not have read access to the namespace
           schema:

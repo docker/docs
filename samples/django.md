@@ -28,6 +28,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 3. Add the following content to the `Dockerfile`.
 
    ```dockerfile
+   # syntax=docker/dockerfile:1
    FROM python:3
    ENV PYTHONUNBUFFERED=1
    WORKDIR /code
