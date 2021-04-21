@@ -366,7 +366,7 @@ The high-level `docker scan` command scans local images using the image name or 
 
 | Option                                                       | Description                                   |
 |:------------------------------------------------------------------ :------------------------------------------------|
-| `--accept license` | Accept the license agreement of the third-party scanning provider    |
+| `--accept-license` | Accept the license agreement of the third-party scanning provider    |
 | `--dependency-tree` | Display the dependency tree of the image along with scan results |
 | `--exclude-base` | Exclude the base image during scanning. This option requires the --file option to be set |
 | `-f`, `--file string` | Specify the location of the Dockerfile associated with the image. This option displays a detailed scan result |
