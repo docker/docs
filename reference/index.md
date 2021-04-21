@@ -12,7 +12,7 @@ various APIs, CLIs, and file formats.
 | File format                                                         | Description                                                     |
 |:--------------------------------------------------------------------|:----------------------------------------------------------------|
 | [Dockerfile](/engine/reference/builder/)                            | Defines the contents and startup behavior of a single container |
-| [Compose file](/compose/compose-file/index.md)                      | Defines a multi-container application                           |
+| [Compose file](/compose/compose-file/)                              | Defines a multi-container application                           |
 
 
 ## Command-line interfaces (CLIs)
@@ -20,7 +20,7 @@ various APIs, CLIs, and file formats.
 | CLI                                                            | Description                                                                                |
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
 | [Docker CLI](/engine/reference/commandline/cli/)               | The main CLI for Docker, includes all `docker` commands                                    |
-| [Compose CLI](/compose/reference/index.md)                     | The CLI for Docker Compose, which allows you to build and run multi-container applications |
+| [Compose CLI](/compose/reference/)                             | The CLI for Docker Compose, which allows you to build and run multi-container applications |
 | [Daemon CLI (dockerd)](/engine/reference/commandline/dockerd/) | Persistent process that manages containers                                                 |
 
 
