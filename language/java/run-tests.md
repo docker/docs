@@ -16,7 +16,7 @@ Testing is an essential part of modern software development. Testing can mean a 
 
 ## Refactor Dockerfile to run tests
 
-The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You just need to update the JaCoCo version in your `pom.xml` to ensure your tests work with JDK v15 or higher `<jacoco.version>0.8.6</jacoco.version>` so we can use the following Docker command to start the container and run tests:
+The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You just need to update the JaCoCo version in your `pom.xml` to ensure your tests work with JDK v15 or higher with `<jacoco.version>0.8.6</jacoco.version>`, so we can use the following Docker command to start the container and run tests:
 
 ```shell
 $ docker run -it --rm --name springboot-test java-docker ./mvnw test

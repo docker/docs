@@ -40,7 +40,7 @@ Now we can run MySQL in a container and attach to the volumes and network we cre
 ```console
 $ docker run -it --rm -d -v mysql_data:/var/lib/mysql \
 -v mysql_config:/etc/mysql/conf.d \
---network mysql \
+--network mysqlnet \
 --name mysqlserver \
 -e MYSQL_USER=petclinic -e MYSQL_PASSWORD=petclinic \
 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=petclinic \
@@ -51,7 +51,7 @@ Okay, now that we have a running MySQL, let’s update our Dockerfile to activat
 
 We only need to add the MySQL profil as an argument to the `CMD` definition.
 
-```console
+```dockerfile
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]
 ```
 
@@ -64,9 +64,9 @@ $ docker build --tag java-docker .
 Now, let’s run our container. This time, we need to set the `MYSQL_URL` environment variable so that our application knows what connection string to use to access the database. We’ll do this using the `docker run` command.
 
 ```console
-$ docker run -rm -d \
+$ docker run --rm -d \
 --name springboot-server \
---network mysql \
+--network mysqlnet \
 -e MYSQL_URL=jdbc:mysql://mysqlserver/petclinic \
 -p 8080:8080 java-docker
 ```
@@ -89,7 +89,7 @@ You should receive the following json back from our service.
 
 In this section, we’ll create a Compose file to start our `java-docker` and the MySQL database using a single command. We’ll also set up the Compose file to start the `java-docker` application in debug mode so that we can connect a debugger to the running Java process.
 
-Open the `notes-service` in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
+Open the `petclinic` in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 
 ```yaml
 version: '3.8'

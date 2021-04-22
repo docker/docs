@@ -161,7 +161,7 @@ Now, let’s address the random naming issue. The standard practice is to name y
 To name a container, we just need to pass the `--name` flag to the `docker run` command.
 
 ```console
-$ docker run -d -p 8080:8080 --name springboot-server java-docker
+$ docker run --rm -d -p 8080:8080 --name springboot-server java-docker
 2e907c68d1c98be37d2b2c2ac6b16f353c85b3757e549254de68746a94a8a8d3
 $ docker ps
 CONTAINER ID   IMAGE   COMMAND                  CREATED         STATUS         PORTS                    NAMES
