@@ -23,6 +23,7 @@ Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -271,7 +272,8 @@ frequently changed:
 A Dockerfile for a Go application could look like:
 
 ```dockerfile
-FROM golang:1.11-alpine AS build
+# syntax=docker/dockerfile:1
+FROM golang:1.16-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -485,6 +487,7 @@ subsequent `apt-get install` instructions fail. For example, say you have a
 Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
@@ -494,6 +497,7 @@ After building the image, all layers are in the Docker cache. Suppose you later
 modify `apt-get install` by adding extra package:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
@@ -653,6 +657,7 @@ still persists in this layer and its value can be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
@@ -674,6 +679,7 @@ improves readability. You could also put all of the commands into a shell script
 and have the `RUN` command just run that shell script.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \

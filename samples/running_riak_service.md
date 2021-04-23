@@ -2,6 +2,8 @@
 description: Build a Docker image with Riak pre-installed
 keywords: docker, example, package installation, networking,  riak
 title: Dockerize a Riak service
+redirect_from:
+  - /engine/examples/running_riak_service/
 ---
 
 The goal of this example is to show you how to build a Docker image with
@@ -20,6 +22,7 @@ of. We use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
 `trusty`), which is available on [Docker Hub](https://hub.docker.com):
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 # Riak
 #
 # VERSION       0.1.1

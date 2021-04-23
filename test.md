@@ -779,7 +779,9 @@ command=/usr/sbin/sshd -D
 To enable syntax highlighting for Dockerfiles, use the `conf` lexer, for now.
 In the future, native Dockerfile support is coming to Rouge.
 
-```conf
+```dockerfile
+# syntax=docker/dockerfile:1
+
 #
 # example Dockerfile for https://docs.docker.com/examples/postgresql_service/
 #

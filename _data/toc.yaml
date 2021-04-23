@@ -526,6 +526,8 @@ reference:
           title: docker compose events
         - path: /engine/reference/commandline/compose_exec/
           title: docker compose exec
+        - path: /engine/reference/commandline/compose_images/
+          title: docker compose images
         - path: /engine/reference/commandline/compose_kill/
           title: docker compose kill
         - path: /engine/reference/commandline/compose_logs/
@@ -946,7 +948,7 @@ reference:
       title: docker wait
   - sectiontitle: Docker Compose CLI reference
     section:
-    - path: /compose/reference/overview/
+    - path: /compose/reference/
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
@@ -966,6 +968,8 @@ reference:
       title: docker-compose exec
     - path: /compose/reference/help/
       title: docker-compose help
+    - path: /compose/reference/images/
+      title: docker-compose images
     - path: /compose/reference/kill/
       title: docker-compose kill
     - path: /compose/reference/logs/
@@ -1134,25 +1138,25 @@ samples:
   section:
   - path: /samples/
     title: Samples home
-  - path: /engine/examples/apt-cacher-ng/
+  - path: /samples/apt-cacher-ng/
     title: apt-cacher-ng
-  - path: /engine/examples/dotnetcore/
+  - path: /samples/dotnetcore/
     title: ASP.NET Core application
-  - path: /compose/aspnet-mssql-compose/
+  - path: /samples/aspnet-mssql-compose/
     title: ASP.NET Core + SQL Server on Linux
-  - path: /engine/examples/couchdb_data_volumes/
+  - path: /samples/couchdb_data_volumes/
     title: CouchDB
-  - path: /compose/django/
+  - path: /samples/django/
     title: Django and PostgreSQL
-  - path: /compose/wordpress/
+  - path: /samples/wordpress/
     title: WordPress
-  - path: /engine/examples/postgresql_service/
+  - path: /samples/postgresql_service/
     title: PostgreSQL
-  - path: /compose/rails/
+  - path: /samples/rails/
     title: Rails and PostgreSQL
-  - path: /engine/examples/running_riak_service/
+  - path: /samples/running_riak_service/
     title: Riak
-  - path: /engine/examples/running_ssh_service/
+  - path: /samples/running_ssh_service/
     title: SSHd
 - path: /samples/#library-references
   title: Library references

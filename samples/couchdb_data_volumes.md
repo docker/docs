@@ -2,11 +2,13 @@
 description: Sharing data between 2 couchdb databases
 keywords: docker, example, package installation, networking, couchdb,  data volumes
 title: Dockerize a CouchDB service
+redirect_from:
+  - /engine/examples/couchdb_data_volumes/
 ---
 
 > **Note**
 >
-> **If you don't like sudo** then see [*Giving non-root access*](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
+> **If you don't like sudo** then see [*Giving non-root access*](../engine/install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 
 Here's an example of using data volumes to share the same data between
 two CouchDB containers. This could be used for hot upgrades, testing

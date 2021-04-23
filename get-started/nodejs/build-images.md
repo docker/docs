@@ -87,9 +87,27 @@ Let’s walk through the process of creating a Dockerfile for our application. I
 >
 > The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
 
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
+While _optional_, this directive instructs the Docker builder what syntax to use
+when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
+to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
+must appear before any other comment, whitespace, or Dockerfile instruction in
+your Dockerfile, should be the first line in Dockerfiles.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+```
+
+We recommend using `docker/dockerfile:1`, which always points to the latest release
+of the version 1 syntax. BuildKit automatically checks for updates of the syntax
+before building, making sure you are using the most current version.
+
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ```
 
@@ -146,6 +164,8 @@ CMD [ "node", "server.js" ]
 Here's the complete Dockerfile.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ENV NODE_ENV=production
 

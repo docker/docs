@@ -27,8 +27,8 @@ most benefits from Docker.
 - [Docker for Java developers lab](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" rel="noopener" class="_"} 
 - [Port a node.js app to Docker lab](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" rel="noopener" class="_"}
 - [Ruby on Rails app on Docker lab](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" rel="noopener" class="_"}
-- [Dockerize a .Net Core application](../engine/examples/dotnetcore.md){: target="_blank" rel="noopener" class="_"}
-- [Dockerize an ASP.NET Core application with SQL Server on Linux](../compose/aspnet-mssql-compose.md){: target="_blank" rel="noopener" class="_"} using Docker Compose
+- [Dockerize a .Net Core application](../samples/dotnetcore.md){: target="_blank" rel="noopener" class="_"}
+- [Dockerize an ASP.NET Core application with SQL Server on Linux](../samples/aspnet-mssql-compose.md){: target="_blank" rel="noopener" class="_"} using Docker Compose
 
 ## Advanced development with the SDK or API
 

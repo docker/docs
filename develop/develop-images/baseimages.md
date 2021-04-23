@@ -62,6 +62,7 @@ in your `Dockerfile`. For example, to create a minimal container using
 `scratch`:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM scratch
 ADD hello /
 CMD ["/hello"]

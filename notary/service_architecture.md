@@ -53,7 +53,7 @@ but here is a brief recap of the TUF roles and corresponding key hierarchy:
   [hashes](https://en.wikipedia.org/wiki/Cryptographic_hash_function){:target="_blank" rel="noopener" class="_"}.
   These files are used to verify the integrity of some or all of the actual contents of the repository.
   They are also used to
-  [delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
+  delegate trust to other collaborators via lower level [delegation roles](advanced_usage.md#work-with-delegation-roles).
   Delegation keys are held by anyone from the collection owner or administrator to
   collection collaborators.
 
