@@ -34,8 +34,6 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 To enable Kubernetes support and install a standalone instance of Kubernetes
 running as a Docker container, go to **Preferences** > **Kubernetes** and then click **Enable Kubernetes**.
 
-To set Kubernetes as the default orchestrator, select **Deploy Docker Stacks to Kubernetes by default**.
-
 By default, Kubernetes containers are hidden from commands like `docker
 service ls`, because managing them manually is not supported. To see these internal containers, select **Show system containers (advanced)**. Most users do not need this option.
 
