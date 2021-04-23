@@ -280,9 +280,9 @@ The production image built in this way only contains a runtime environment with 
 $ docker build --tag java-docker:jdk . --target development
 $ docker build --tag java-docker:jre .
 $  docker images
-REPOSITORY               TAG        IMAGE ID         CREATED        SIZE
-java-docker                     jre         c17469b9e2f3   3 hours ago     270MB
-java-docker                     jdk        4c15436d8ab7   5 hours ago    567MB
+REPOSITORY       TAG        IMAGE ID         CREATED        SIZE
+java-docker      jre        c17469b9e2f3     3 hours ago    270MB
+java-docker      jdk        4c15436d8ab7     5 hours ago    567MB
 ```
 
 ## Next steps

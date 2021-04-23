@@ -16,7 +16,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Java OpenJDK version 15 or later. [Download Java](https://jdk.java.net/){: target="_blank" rel="noopener" class="_"}
+- Java OpenJDK version 15 or later. [Download and install Java](https://jdk.java.net/){: target="_blank" rel="noopener" class="_"}
 - Docker running locally. Follow the instructions to [download and install Docker](../../get-docker.md)
 - A Git client
 - An IDE or a text editor to edit files. We recommend using [IntelliJ Community Edition](https://www.jetbrains.com/idea/download/){: target="_blank" rel="noopener" class="_"}.
@@ -178,7 +178,7 @@ To list images, simply run the `docker images` command.
 
 ```console
 $ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+REPOSITORY          TAG                 IMAGE ID            CREATED          SIZE
 java-docker         latest              b1b5f29f74f0        47 minutes ago   567MB
 ```
 
@@ -202,7 +202,7 @@ Now, run the `docker images` command to see a list of our local images.
 
 ```console
 $ docker images
-REPOSITORY    TAG      IMAGE ID		  CREATED		    SIZE
+REPOSITORY    TAG      IMAGE ID		  CREATED		  SIZE
 java-docker   latest   b1b5f29f74f0	  59 minutes ago	567MB
 java-docker   v1.0.0   b1b5f29f74f0	  59 minutes ago	567MB
 ```

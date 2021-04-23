@@ -1,12 +1,12 @@
 ---
-title: What will you learn in this module?
+title: Getting started with Java
 keywords: Docker, getting started, java, language
 description: Containerize Java apps using Docker
 toc_min: 1
 toc_max: 2
 ---
 
-The Java getting started guide teaches you how to create a containerized Spring Boot application using Docker. In this guide, you’ll learn how to:
+The Java getting started guide teaches you how to create a containerized Spring Boot application using Docker. In this module, you’ll learn how to:
 
 * Clone and run a Spring Boot application with Maven
 * Create a new Dockerfile which contains instructions required to build a Java image

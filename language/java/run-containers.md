@@ -110,10 +110,10 @@ You can start, stop, and restart Docker containers. When we stop a container, it
 
 ```console
 $ docker ps -a
-CONTAINER ID   IMAGE    COMMAND                  CREATED          STATUS                        PORTS                    NAMES
-5ff83001608c   java-docker                                                "./mvnw spring-boot:…"   5 minutes ago    Exited (143) 18 seconds ago                            trusting_beaver
-630f2872ddf5   java-docker                                                "./mvnw spring-boot:…"   11 minutes ago   Exited (1) 8 minutes ago                               modest_khayyam
-a28f9d587d95   java-docker                                                "./mvnw spring-boot:…"   17 minutes ago   Exited (1) 11 minutes ago                              lucid_greider
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                        PORTS                    NAMES
+5ff83001608c   java-docker         "./mvnw spring-boot:…"   5 minutes ago    Exited (143) 18 seconds ago                            trusting_beaver
+630f2872ddf5   java-docker         "./mvnw spring-boot:…"   11 minutes ago   Exited (1) 8 minutes ago                               modest_khayyam
+a28f9d587d95   java-docker         "./mvnw spring-boot:…"   17 minutes ago   Exited (1) 11 minutes ago                              lucid_greider
 ```
 
 You should now see several containers listed. These are containers that we started and stopped, but have not been removed.
@@ -128,10 +128,10 @@ Now, list all the containers again using the `docker ps` command.
 
 ```console
 $ docker ps -a
-CONTAINER ID   IMAGE                                                      COMMAND                  CREATED          STATUS                      PORTS                    NAMES
-5ff83001608c   java-docker                                                "./mvnw spring-boot:…"   10 minutes ago   Up 2 seconds                0.0.0.0:8080->8080/tcp   trusting_beaver
-630f2872ddf5   java-docker                                                "./mvnw spring-boot:…"   16 minutes ago   Exited (1) 13 minutes ago                            modest_khayyam
-a28f9d587d95   java-docker                                                "./mvnw spring-boot:…"   22 minutes ago   Exited (1) 16 minutes ago                            lucid_greider
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS                      PORTS                    NAMES
+5ff83001608c   java-docker   "./mvnw spring-boot:…"   10 minutes ago   Up 2 seconds                0.0.0.0:8080->8080/tcp   trusting_beaver
+630f2872ddf5   java-docker   "./mvnw spring-boot:…"   16 minutes ago   Exited (1) 13 minutes ago                            modest_khayyam
+a28f9d587d95   java-docker   "./mvnw spring-boot:…"   22 minutes ago   Exited (1) 16 minutes ago                            lucid_greider
 ```
 
 Notice that the container we just restarted has been started in detached mode and has port 8080 exposed. Also, observe the status of the container is “Up X seconds”. When you restart a container, it starts with the same flags or commands that it was originally started with.
@@ -164,7 +164,7 @@ To name a container, we just need to pass the `--name` flag to the `docker run` 
 $ docker run --rm -d -p 8080:8080 --name springboot-server java-docker
 2e907c68d1c98be37d2b2c2ac6b16f353c85b3757e549254de68746a94a8a8d3
 $ docker ps
-CONTAINER ID   IMAGE   COMMAND                  CREATED         STATUS         PORTS                    NAMES
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                    NAMES
 2e907c68d1c9   java-docker   "./mvnw spring-boot:…"   8 seconds ago   Up 8 seconds   0.0.0.0:8080->8080/tcp   springboot-server
 ```
 
