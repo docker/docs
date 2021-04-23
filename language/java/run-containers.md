@@ -22,7 +22,7 @@ To run an image inside a container, we use the `docker run` command. The `docker
 $ docker run java-docker
 ```
 
-After running this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
+After running this command, you’ll notice that we did not to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
 Let’s open a new terminal then make a `GET` request to the server using the `curl` command.
 
@@ -90,7 +90,7 @@ CONTAINER ID   IMAGE            COMMAND                  CREATED              ST
 
 The `docker ps` command provides a bunch of information about our running containers. We can see the container ID, the image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
 
-You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute, but first we need to stop the container. To stop the container, run the `docker stop` command which does just that, stops the container. You need to pass the name of the container or you can use the container ID.
+You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute, but first we need to stop the container. To stop the container, run the `docker stop` command which does just that, stops the container. We need to pass the name of the container or we can use the container ID.
 
 ```console
 $ docker stop trusting_beaver

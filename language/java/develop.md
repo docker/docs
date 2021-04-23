@@ -35,7 +35,7 @@ Now we’ll create a network that our application and database will use to talk 
 $ docker network create mysqlnet
 ```
 
-Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
+Now, let's run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it locally.
 
 ```console
 $ docker run -it --rm -d -v mysql_data:/var/lib/mysql \

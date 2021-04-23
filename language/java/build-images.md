@@ -33,9 +33,9 @@ $ cd spring-petclinic
 
 ## Test the application
 
-Let’s start our application and make sure it is running properly. Maven will manage all the project processes (compiling, tests, packaging, etc). The **Spring Pets Clinic** project you cloned earlier contains an embedded version of Maven. Therefore, you don't need to install Maven separately on your local machine.
+Let’s start our application and make sure it is running properly. Maven will manage all the project processes (compiling, tests, packaging, etc). The **Spring Pets Clinic** project we cloned earlier contains an embedded version of Maven. Therefore, we don't need to install Maven separately on your local machine.
 
-Open your terminal and navigate to the working directory you created and run the following command:
+Open your terminal and navigate to the working directory we created and run the following command:
 
 ```console
 $ ./mvnw spring-boot:run
@@ -153,7 +153,7 @@ To use a file in the build context, the Dockerfile refers to the file specified 
 
 Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in this context.
 
-The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `name:tag`. We’ll leave off the optional `tag` for now to help simplify things. If you do not pass a tag, Docker uses “latest” as its default tag. You can see this in the last line of the build output.
+The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `name:tag`. We’ll leave off the optional `tag` for now to help simplify things. If we do not pass a tag, Docker uses “latest” as its default tag. You can see this in the last line of the build output.
 
 Let’s build our first Docker image.
 
