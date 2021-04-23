@@ -186,7 +186,7 @@ func main() {
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: imageName,
-	}, nil, nil, "")
+	}, nil, nil, nil, "")
 	if err != nil {
 		panic(err)
 	}
@@ -732,7 +732,7 @@ func main() {
 	createResp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: "alpine",
 		Cmd:   []string{"touch", "/helloworld"},
-	}, nil, nil, "")
+	}, nil, nil, nil, "")
 	if err != nil {
 		panic(err)
 	}
