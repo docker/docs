@@ -315,6 +315,8 @@ guides:
       title: Use overlay networks
     - path: /network/host/
       title: Use host networking
+    - path: /network/ipvlan/
+      title: Use IPvlan networks
     - path: /network/macvlan/
       title: Use Macvlan networks
     - path: /network/none/
