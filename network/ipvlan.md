@@ -12,7 +12,7 @@ see the [multi-host overlay](network-tutorial-overlay.md) driver.
 
 IPvlan is a new twist on the tried and true network virtualization technique.
 The Linux implementations are extremely lightweight because rather than using
-the traditional Linux bridge for isolation, they are simply associated to a Linux
+the traditional Linux bridge for isolation, they are associated to a Linux
 Ethernet interface or sub-interface to enforce separation between networks and
 connectivity to the physical network.
 
@@ -22,8 +22,8 @@ are, the positive performance implications of bypassing the Linux bridge and the
 simplicity of having fewer moving parts. Removing the bridge that traditionally
 resides in between the Docker host NIC and container interface leaves a simple
 setup consisting of container interfaces, attached directly to the Docker host
-interface. This result is easy access for external facing services as there is
-no need for port mappings in these scenarios.
+interface. This result is easy to access for external facing services as there
+is no need for port mappings in these scenarios.
 
 ## Prerequisites
 
@@ -87,7 +87,7 @@ and IPvlan L2 mode.
 ![Multiple IPvlan Hosts](images/macvlan-bridge-ipvlan-l2.png)
 
 The following will create the exact same network as the network `db_net` created
-prior, with the driver defaults for `--gateway=192.168.1.1` and `-o ipvlan_mode=l2`.
+earlier, with the driver defaults for `--gateway=192.168.1.1` and `-o ipvlan_mode=l2`.
 
 ```console
 # IPvlan  (-o ipvlan_mode= Defaults to L2 mode if not specified)
@@ -163,38 +163,38 @@ in isolating tenant traffic.
 
 ![Docker VLANs in Depth](images/vlans-deeper-look.png)
 
-The Linux sub-interface tagged with a vlan can either already exist or will be
+The Linux sub-interface tagged with a VLAN can either already exist or will be
 created when you call a `docker network create`. `docker network rm` will delete
 the sub-interface. Parent interfaces such as `eth0` are not deleted, only
 sub-interfaces with a netlink parent index > 0.
 
-For the driver to add/delete the vlan sub-interfaces the format needs to be
+For the driver to add/delete the VLAN sub-interfaces the format needs to be
 `interface_name.vlan_tag`. Other sub-interface naming can be used as the
 specified parent, but the link will not be deleted automatically when
 `docker network rm` is invoked. 
 
-The option to use either existing parent vlan sub-interfaces or let Docker manage
+The option to use either existing parent VLAN sub-interfaces or let Docker manage
 them enables the user to either completely manage the Linux interfaces and
-networking or let Docker create and delete the Vlan parent sub-interfaces
+networking or let Docker create and delete the VLAN parent sub-interfaces
 (netlink `ip link`) with no effort from the user.
 
 For example: use `eth0.10` to denote a sub-interface of `eth0` tagged with the
-vlan id of `10`. The equivalent `ip link` command would be
+VLAN id of `10`. The equivalent `ip link` command would be
 `ip link add link eth0 name eth0.10 type vlan id 10`.
 
-The example creates the vlan tagged networks and then start two containers to
-test connectivity between containers. Different Vlans cannot ping one another
+The example creates the VLAN tagged networks and then starts two containers to
+test connectivity between containers. Different VLANs cannot ping one another
 without a router routing between the two networks. The default namespace is not
 reachable per IPvlan design in order to isolate container namespaces from the
 underlying host.
 
-**Vlan ID 20**
+### VLAN ID 20
 
 In the first network tagged and isolated by the Docker host, `eth0.20` is the
-parent interface tagged with vlan id `20` specified with `-o parent=eth0.20`.
+parent interface tagged with VLAN id `20` specified with `-o parent=eth0.20`.
 Other naming formats can be used, but the links need to be added and deleted
 manually using `ip link` or Linux configuration files. As long as the `-o parent`
-exists anything can be used if compliant with Linux netlink.
+exists, anything can be used if it is compliant with Linux netlink.
 
 ```console
 # now add networks and hosts as you would normally by attaching to the master (sub)interface that is tagged
@@ -208,10 +208,10 @@ $ docker run --net=ipvlan20 -it --name ivlan_test1 --rm alpine /bin/sh
 $ docker run --net=ipvlan20 -it --name ivlan_test2 --rm alpine /bin/sh
 ```
 
-**Vlan ID 30**
+### VLAN ID 30
 
 In the second network, tagged and isolated by the Docker host, `eth0.30` is the
-parent interface tagged with vlan id `30` specified with `-o parent=eth0.30`. The
+parent interface tagged with VLAN id `30` specified with `-o parent=eth0.30`. The
 `ipvlan_mode=` defaults to l2 mode `ipvlan_mode=l2`. It can also be explicitly
 set with the same result as shown in the next example.
 
@@ -243,7 +243,7 @@ and pinging one another. In order for the `192.168.114.0/24` to reach
 between subnets that share a common `-o parent=`. 
 
 Secondary addresses on network routers are common as an address space becomes
-exhausted to add another secondary to an L3 vlan interface or commonly referred
+exhausted to add another secondary to an L3 VLAN interface or commonly referred
 to as a "switched virtual interface" (SVI).
 
 ```console
@@ -259,7 +259,7 @@ $ docker run --net=ipvlan114 --ip=192.168.114.11 -it --rm alpine /bin/sh
 
 A key takeaway is, operators have the ability to map their physical network into
 their virtual network for integrating containers into their environment with no
-operational overhauls required. NetOps simply drops an 802.1q trunk into the
+operational overhauls required. NetOps drops an 802.1q trunk into the
 Docker host. That virtual link would be the `-o parent=` passed in the network
 creation. For untagged (non-VLAN) links, it is as simple as `-o parent=eth0` or
 for 802.1q trunks with VLAN IDs each network gets mapped to the corresponding
@@ -267,11 +267,11 @@ VLAN/Subnet from the network.
 
 An example being, NetOps provides VLAN ID and the associated subnets for VLANs
 being passed on the Ethernet link to the Docker host server. Those values are
-simply plugged into the `docker network create` commands when provisioning the
+plugged into the `docker network create` commands when provisioning the
 Docker networks. These are persistent configurations that are applied every time
 the Docker engine starts which alleviates having to manage often complex
 configuration files. The network interfaces can also be managed manually by
-being pre-created and docker networking will never modify them, simply use them
+being pre-created and Docker networking will never modify them, and use them
 as parent interfaces. Example mappings from NetOps to Docker network commands
 are as follows:
 
@@ -290,7 +290,7 @@ distribution throughout a cluster is beyond the initial implementation of this
 single host scoped driver. In L3 mode, the Docker host is very similar to a
 router starting new networks in the container. They are on networks that the
 upstream network will not know about without route distribution. For those
-curious how IPvlan L3 will fit into container networking see the following
+curious how IPvlan L3 will fit into container networking, see the following
 examples.
 
 ![Docker IPvlan L2 Mode](images/ipvlan-l3.png)
@@ -327,7 +327,7 @@ $$ ip a show eth0
 
 - A traditional gateway doesn't mean much to an L3 mode IPvlan interface since
   there is no broadcast traffic allowed. Because of that, the container default
-  gateway simply points to the containers `eth0` device. See below for CLI output
+  gateway points to the containers `eth0` device. See below for CLI output
   of `ip route` or `ip -6 route` from inside an L3 container for details.
 
 The mode ` -o ipvlan_mode=l3` must be explicitly specified since the default
@@ -372,7 +372,7 @@ $ docker run --net=ipnet210 --ip=10.1.214.9 -it --rm alpine ping -c 2 192.168.21
 In order to ping the containers from a remote Docker host or the container be
 able to ping a remote host, the remote host or the physical network in between
 need to have a route pointing to the host IP address of the container's Docker
-host eth interface. More on this as we evolve the IPvlan `L3` story.
+host eth interface.
 
 ## Dual stack IPv4 IPv6 IPvlan L2 mode
 
@@ -497,7 +497,7 @@ $ docker run --net=ipvlan140 --ip=192.168.140.10 -it --rm alpine /bin/sh
 
 ## Dual stack IPv4 IPv6 IPvlan L3 mode 
 
-**Example:** IPvlan L3 Mode Dual Stack IPv4/IPv6, Multi-Subnet w/ 802.1q Vlan Tag:118
+**Example:** IPvlan L3 Mode Dual Stack IPv4/IPv6, Multi-Subnet w/ 802.1q VLAN Tag:118
 
 As in all of the examples, a tagged VLAN interface does not have to be used. The
 sub-interfaces can be swapped with `eth0`, `eth1`, `bond0` or any other valid
@@ -546,7 +546,7 @@ $$ ip a show eth0
     inet6 2001:db8:abc6::10/64 scope link nodad
        valid_lft forever preferred_lft forever
      
-# Note the default route is simply the eth device because ARPs are filtered.
+# Note the default route is the eth device because ARPs are filtered.
 $$ ip route
   default dev eth0  scope link
   192.168.112.0/24 dev eth0  proto kernel  scope link  src 192.168.112.2
@@ -570,10 +570,10 @@ docker: Error response from daemon: Address already in use.
 
 ## Manually create 802.1q links
 
-**Vlan ID 40**
+### VLAN ID 40
 
-If a user does not want the driver to create the vlan sub-interface it simply
-needs to exist prior to the `docker network create`. If you have sub-interface
+If a user does not want the driver to create the VLAN sub-interface, it needs to
+exist before running `docker network create`. If you have sub-interface
 naming that is not `interface.vlan_id` it is honored in the `-o parent=` option
 again as long as the interface exists and is up.
 
@@ -599,7 +599,7 @@ $ docker run --net=ipvlan40 -it --name ivlan_test5 --rm alpine /bin/sh
 $ docker run --net=ipvlan40 -it --name ivlan_test6 --rm alpine /bin/sh
 ```
 
-**Example:** Vlan sub-interface manually created with any name:
+**Example:** VLAN sub-interface manually created with any name:
 
 ```console
 # create a new sub interface tied to dot1q vlan 40
