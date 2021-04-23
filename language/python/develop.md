@@ -36,6 +36,7 @@ $ docker network create mysqlnet
 ```
 
 Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
+In the following command, option `-v` is for starting the container with volumes. More information about [Docker volumes](../../storage/volumes.md) in the documentation.
 
 ```shell
 $ docker run --rm -d -v mysql:/var/lib/mysql \
@@ -181,7 +182,7 @@ You should receive the following JSON back from our service.
 
 ## Use Compose to develop locally
 
-In this section, we’ll create a Compose file to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
+In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
 
 Open the `python-docker` code in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 
