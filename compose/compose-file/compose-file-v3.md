@@ -1641,7 +1641,7 @@ Expose ports.
 
 > **Note**
 >
-> `ports` is ignored by `docker-compose run` unless you include `--service-ports`
+> `docker-compose run` ignores `ports` unless you include `--service-ports`.
 
 #### Short syntax
 
