@@ -24,6 +24,7 @@ To get started with Docker Engine on Ubuntu, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Ubuntu Hirsute 21.04
 - Ubuntu Groovy 20.10
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
@@ -92,7 +93,8 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg
+        gnupg \
+        lsb-release
     ```
 
 2.  Add Docker's official GPG key:

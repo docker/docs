@@ -182,11 +182,11 @@
         "KeyPrefixEquals": "ee/licensing/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/licensing.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -195,11 +195,11 @@
         "KeyPrefixEquals": "ee/get-support/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/get-support.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -208,11 +208,11 @@
         "KeyPrefixEquals": "ee/cluster/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/cluster.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -221,11 +221,11 @@
         "KeyPrefixEquals": "ee/supported-platforms/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/dee-intro.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -234,11 +234,11 @@
         "KeyPrefixEquals": "ee/ucp/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/ucp.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -247,11 +247,11 @@
         "KeyPrefixEquals": "ee/dtr/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/dtr.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -260,11 +260,11 @@
         "KeyPrefixEquals": "compliance/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/compliance.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -273,11 +273,11 @@
         "KeyPrefixEquals": "datacenter/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v2.1/"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -286,11 +286,11 @@
         "KeyPrefixEquals": "v18.09/ee/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v2.1/"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -299,11 +299,11 @@
         "KeyPrefixEquals": "v18.03/ee/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v18.03/"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -312,11 +312,11 @@
         "KeyPrefixEquals": "v17.06/enterprise/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v2.0/"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -325,11 +325,11 @@
         "KeyPrefixEquals": "ee/docker-ee/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/docker-engine-enterprise/dee-linux.html"
+        "ReplaceKeyWith": ""
       }
     },
     {
@@ -338,11 +338,11 @@
         "KeyPrefixEquals": "ee/"
       },
       "Redirect": {
-        "HostName": "docs.mirantis.com",
+        "HostName": "docs-stage.docker.com",
         "HttpRedirectCode": null,
         "Protocol": "https",
         "ReplaceKeyPrefixWith": null,
-        "ReplaceKeyWith": "docker-enterprise/v3.0/dockeree-products/index.html"
+        "ReplaceKeyWith": ""
       }
     },
     {

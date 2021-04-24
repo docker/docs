@@ -37,7 +37,7 @@ Now, let’s add some code to handle our REST requests. We’ll use a mock serve
 
 Open this working directory in your IDE and add the following code into the `server.js` file.
 
-```node
+```js
 const ronin     = require( 'ronin-server' )
 const mocks     = require( 'ronin-mocks' )
 
@@ -72,7 +72,7 @@ $ curl http://localhost:8000/test
 
 Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
 
-```node
+```
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
@@ -87,9 +87,27 @@ Let’s walk through the process of creating a Dockerfile for our application. I
 >
 > The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
 
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
+While _optional_, this directive instructs the Docker builder what syntax to use
+when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
+to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
+must appear before any other comment, whitespace, or Dockerfile instruction in
+your Dockerfile, should be the first line in Dockerfiles.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+```
+
+We recommend using `docker/dockerfile:1`, which always points to the latest release
+of the version 1 syntax. BuildKit automatically checks for updates of the syntax
+before building, making sure you are using the most current version.
+
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ```
 
@@ -146,6 +164,8 @@ CMD [ "node", "server.js" ]
 Here's the complete Dockerfile.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ENV NODE_ENV=production
 
@@ -158,6 +178,14 @@ RUN npm install --production
 COPY . .
 
 CMD [ "node", "server.js" ]
+```
+
+## Create a .dockerignore file
+
+To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase the build’s performance, exclude files and directories by adding a .dockerignore file to the context directory. To improve the context load time create a `.dockerignore` file and add `node_modules` directory in it.
+
+```.dockerignore
+node_modules
 ```
 
 ## Build image
@@ -245,7 +273,7 @@ Our image that was tagged with `:v1.0.0` has been removed but we still have the 
 
 In this module, we took a look at setting up our example Node application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module, we’ll take a look at how to:
 
-[Run your image as a container](run-containers.md){: .button .outline-btn}
+[Run your image as a container](run-containers.md){: .button .primary-btn}
 
 ## Feedback
 

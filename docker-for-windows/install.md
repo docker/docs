@@ -2,35 +2,63 @@
 description: How to install Docker Desktop for Windows
 keywords: windows, install, download, run, docker, local
 title: Install Docker Desktop on Windows
+redirect_from:
+- /docker-for-windows/install-windows-home/
 ---
 
-Docker Desktop for Windows is the [Community](https://www.docker.com/community-edition) version of Docker for Microsoft Windows.
-You can download Docker Desktop for Windows from Docker Hub.
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, installation instructions, and automatic updates.
 
-This page contains information on installing Docker Desktop on Windows 10 Pro, Enterprise, and Education. If you are looking for information about installing Docker Desktop on Windows 10 Home, see [Install Docker Desktop on Windows Home](/install-windows-home.md).
-
-[Download from Docker
-Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
-.button .outline-btn}
+[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
+.button .primary-btn}
 
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
-## What to know before you install
+## System requirements
 
-### System Requirements
+Your Windows machine must meet the following requirements to successfully install Docker Desktop.
 
-  - Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or later).
-  
-    For Windows 10 Home, see [Install Docker Desktop on Windows Home](install-windows-home.md).
-  - Hyper-V and Containers Windows features must be enabled.
-  - The following hardware prerequisites are required to successfully run Client
-Hyper-V on Windows 10:
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 backend</a></li>
+<li><a data-toggle="tab" data-target="#win-hyper-v">Hyper-V backend and Windows containers</a></li>
+</ul>
+<div class="tab-content">
+<div id="win-wsl2" class="tab-pane fade in active" markdown="1">
 
-     - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
-     - 4GB system RAM
-    - BIOS-level hardware virtualization support must be enabled in the
+### WSL 2 backend
+
+- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
+- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+    [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
+- The following hardware prerequisites are required to successfully run
+WSL 2 on Windows 10:
+
+  - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
     [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
+
+</div>
+<div id="win-hyper-v" class="tab-pane fade" markdown="1">
+
+### Hyper-V backend and Windows containers
+
+- Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or higher).
+
+  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
+- Hyper-V and Containers Windows features must be enabled.
+- The following hardware prerequisites are required to successfully run Client
+Hyper-V on Windows 10:
+
+  - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
+  - 4GB system RAM
+  - BIOS-level hardware virtualization support must be enabled in the
+    BIOS settings.  For more information, see
+    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+
+</div>
+</div>
 
 > **Note**
 >
@@ -73,15 +101,13 @@ Looking for information on using Windows containers?
     It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
-2. When prompted, ensure the **Enable Hyper-V Windows Features** option is selected on the Configuration page.
+2. When prompted, ensure the **Enable Hyper-V Windows Features** or the **Install required Windows components for WSL 2** option is selected on the Configuration page.
 
 3. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
 4. When the installation is successful, click **Close** to complete the installation process.
 
-5. If your admin account is different to your user account, you must add the user to 
-the **docker-users** group. Run **Computer Management** as an administrator and navigate to 
-**Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
+5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
 Log out and log back in for the changes to take effect.
 
 ## Start Docker Desktop
@@ -103,14 +129,15 @@ When the initialization is complete, Docker Desktop launches the onboarding tuto
 
 Congratulations! You are now successfully running Docker Desktop on Windows.
 
-If you would like to rerun the tutorial, go to the Docker Desktop menu 
-and select **Learn**.
+If you would like to rerun the tutorial, go to the Docker Desktop menu and select **Learn**.
 
 ## Automatic updates
 
 Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
 
-When an update is available, Docker Desktop automatically downloads it to your machine and displays an icon to indicate the availability of a newer version. All you need to do now is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. Whenever convenient, you can start the download of the update in the background.
+
+When the download finishes, all you need to do is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
 
 ## Uninstall Docker Desktop
 
@@ -120,32 +147,12 @@ To uninstall Docker Desktop from your Windows machine:
 2. Select **Docker Desktop** from the **Apps & features** list and then select **Uninstall**.
 3. Click **Uninstall** to confirm your selection.
 
-> **Note** 
+> **Important**
 >
-> Uninstalling Docker Desktop will destroy Docker containers and images local to the machine and remove the files generated by the application.
-
-### Save and restore data
-
-You can use the following procedure to save and restore images and container data. For example, if you want to reset your VM disk:
-
-1. Use `docker save -o images.tar image1 [image2 ...]` to save any images you
-    want to keep. See [save](/engine/reference/commandline/save) in the Docker
-    Engine command line reference.
-
-2. Use `docker export -o myContainner1.tar container1` to export containers you
-    want to keep. See [export](/engine/reference/commandline/export) in the
-    Docker Engine command line reference.
-
-3. Uninstall the current version of Docker Desktop and install a different version, or reset your VM disk.
-
-4. Use `docker load -i images.tar` to reload previously saved images. See
-    [load](/engine/reference/commandline/load) in the Docker Engine.
-
-5. Use `docker import -i myContainer1.tar` to create a file system image
-    corresponding to the previously exported containers. See
-    [import](/engine/reference/commandline/import) in the Docker Engine.
-
-For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](/storage/volumes/#backup-restore-or-migrate-data-volumes).
+> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
+> other Docker related data local to the machine, and removes the files generated
+> by the application. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
+> section to learn how to preserve important data before uninstalling.
 
 ## Where to go next
 
@@ -154,5 +161,6 @@ For information on how to back up and restore data volumes, see [Backup, restore
   deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
-* [FAQs](../desktop/faqs.md) provides answers to frequently asked questions.
+* [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
 * [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+* [Back up and restore data](../desktop/backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.

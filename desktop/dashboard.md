@@ -49,7 +49,7 @@ Let's start a sample application. Download the [Example voting app](https://gith
 
 To start the application, navigate to the directory containing the example voting application in the CLI and run `docker-compose up --build`.
 
-```shell
+```console
 $ docker-compose up --build
 Creating network "example-voting-app-master_front-tier" with the default driver
 Creating network "example-voting-app-master_back-tier" with the default driver

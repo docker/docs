@@ -165,7 +165,7 @@ Note that all pull requests, including ones for images you already have, are cou
 
 ### Can I use a Docker Pro subscription to run a service account that makes unlimited container pull requests to Docker Hub on behalf of an organization?
 
-Docker Pro subscriptions are designed for use by a single individual. An automated service account (such as an account used for a teams CI) needs to must be licensed as part of a Docker Team subscription.
+Docker Pro subscriptions are designed for use by a single individual. Daily pulls are limited to 50,000 image pulls from Docker Hub per 24 hours.
 
 ### Can I run a local mirror of Docker Hub?
 

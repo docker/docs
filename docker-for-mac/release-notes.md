@@ -11,22 +11,110 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-> **Important**
->
-> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
-{: .important }
+## Docker Desktop 3.3.1
+2021-04-15
+
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+### New
+
+Docker Desktop is now available for Apple silicon as well as Intel chips. This enables developers with their choice of local development environments, and extends development pipelines for ARM-based applications. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+
+### Bug fixes and minor changes
+
+- Docker Desktop now ensures the permissions of `/dev/null` and other devices are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527)
+- Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
+
+- **Mac with Apple silicon**: Docker Desktop now reduces the idle CPU consumption.
+
+### Known issues
+
+**Apple silicon**
+
+- `ping` from inside a container to the Internet does not work as expected. To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+- Users may occasionally experience data drop when a TCP stream is half-closed.
+
+## Docker Desktop 3.3.0
+2021-04-08
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
+
+### New
+
+You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
+
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+
+For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
+
+### Upgrades
+
+- [Docker Compose 1.29.0](https://github.com/docker/compose/releases/tag/1.29.0)
+- [Compose CLI v1.0.12](https://github.com/docker/compose-cli/tree/v1.0.12)
+- [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo)
+- [Snyk v1.461.0](https://github.com/snyk/snyk/releases/tag/v1.461.0)
+- [Docker Hub Tool v0.3.1](https://github.com/docker/hub-tool/releases/tag/v0.3.1)
+- [containerd v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4)
+- [runc v1.0.0-rc93](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc93)
+
+### Bug fixes and minor changes
+
+- Fixed an issue when viewing compose applications that have been started with an explicit project name. Fixes [docker/for-win#10564](https://github.com/docker/for-win/issues/10564).
+- Fixed a bug that `--add-host host.docker.internal:host-gateway` caused `host.docker.internal` to resolve to the wrong IP address. See [docker/for-linux#264](https://github.com/docker/for-linux/issues/264#issuecomment-785137844).
+- Fixed a bug that caused inter-container HTTP traffic to be misrouted to the external HTTP proxy. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+- Fixed a bug that could cause other files in the same folder as the VM disk to be deleted when the disk was resized. Fixes [docker/for-mac#5486](https://github.com/docker/for-mac/issues/5486).
+- Fixed an issue where delta downloads caused an `Illegal instruction exception`. Fixes [docker/for-mac#5459](https://github.com/docker/for-mac/issues/5459).
+- Apply domain-based HTTPS proxy `no_proxy` rules for encrypted connections. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
+- Fixed missing text in reset to factory defaults dialog. Fixes [docker/for-mac#5457](https://github.com/docker/for-mac/issues/5457).
+- Fixed an issue where running a container with a random port on the host caused Docker Desktop dashboard to incorrectly open a browser with port 0, instead of using the allocated port.
+- Fixed an issue where pulling an image from Docker Hub using the Docker Desktop dashboard was failing silently.
+- Removed unused DNS name `docker.for.mac.http.internal`.
+- Perform a filesystem check when starting the Linux VM.
+- Detect Linux kernel crashes and escalate them to the user.
+
+## Docker Desktop 3.2.2
+2021-03-15
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that stopped containers binding to port 53. Fixes [docker/for-mac#5416](https://github.com/docker/for-mac/issues/5416).
+- Fixed an issue that 32-bit Intel binaries were emulated on Intel CPUs. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
+- Fixed an issue related to high CPU consumption and frozen UI when the network connection is lost. Fixes [for-win/#10563](https://github.com/docker/for-win/issues/10563).
+- Fixed an issue opening a terminal in iTerm2 when it has no other windows open. Fixes [docker/roadmap#98](https://github.com/docker/roadmap/issues/98#issuecomment-791927788).
+
+## Docker Desktop 3.2.1
+2021-03-05
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
+
+### Upgrades
+
+- [Docker Engine 20.10.5](https://docs.docker.com/engine/release-notes/#20105)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406). If you are still experiencing this issue when trying to update from 3.2.0 to 3.2.1, we recommend that you uninstall 3.2.0 and manually install Docker Desktop 3.2.1.
 
 ## Docker Desktop 3.2.0
 2021-03-01
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg)
 
 ### New
 
 - The Docker Dashboard opens automatically when you start Docker Desktop.
 - The Docker Dashboard displays a tip once a week.
-- Docker Desktop uses iTerm2 to launch the container's terminal if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
+- Docker Desktop uses iTerm2 to launch the terminal on the container if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
 - Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
+- BuildKit is now the default builder for all users, not just for new installations. To turn this setting off, go to **Preferences** > **Docker Engine** and add the following block to the Docker daemon configuration file:
+```json
+"features": {
+    "buildkit": false
+}
+```
 
 ### Upgrades
 
@@ -52,7 +140,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Known issue
 
-Docker Desktop can sometimes fail to start after upgrading to version 3.2.0. We are working on a fix for this issue. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.1.0](#docker-desktop-310). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+Docker Desktop can sometimes fail to start after updating to version 3.2.0. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.2.1](#docker-desktop-321). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
 
 ## Docker Desktop 3.1.0
 2021-01-14

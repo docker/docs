@@ -110,6 +110,7 @@ Creating node-docker_notes_run ...
 In addition to running the tests on command, we can run them when we build our image, using a multi-stage Dockerfile. The following Dockerfile will run our tests and build our production image.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:14.15.4 as base
 
 WORKDIR /code
@@ -166,6 +167,7 @@ This is great but at the moment we have to run two docker commands to build and 
 Update your Dockerfile with the highlighted line below.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:14.15.4 as base
 
 WORKDIR /code
@@ -186,8 +188,8 @@ CMD [ "node", "server.js" ]
 
 Now to run our tests, we just need to run the docker build command as above.
 
-```dockerfile
-docker build -t node-docker --target test .
+```console
+$ docker build -t node-docker --target test .
 Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
  ---> f5be1883c8e0
@@ -235,8 +237,8 @@ Open the test/test.js fiole and change line 5 as follows.
 
 Now, run the same docker build command from above and observe that the build fails and the failing testing information is printed to the console.
 
-```shell
-docker build -t node-docker --target test .
+```console
+$ docker build -t node-docker --target test .
 Sending build context to Docker daemon  22.35MB
 Step 1/8 : FROM node:14.15.4 as base
  ---> 995ff80c793e
@@ -285,7 +287,7 @@ In this module, we took a look at running tests as part of our Docker image buil
 
 In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
 
-[Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
+[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
 
 ## Feedback
 

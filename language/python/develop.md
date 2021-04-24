@@ -22,7 +22,7 @@ Instead of downloading MySQL, installing, configuring, and then running the MySQ
 
 Before we run MySQL in a container, we'll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about [Using volumes](../../storage/volumes.md) in our documentation.
 
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
 
 ```shell
 $ docker volume create mysql
@@ -35,23 +35,22 @@ Now we’ll create a network that our application and database will use to talk 
 $ docker network create mysqlnet
 ```
 
-Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and run it for you locally.
+Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
 
 ```shell
-$ docker run -it --rm -d -v mysql:/var/lib/mysql \
+$ docker run --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
   --name mysqldb \
-  -e MYSQL_ALLOW_EMPTY_PASSWORD=true \
+  -e MYSQL_ROOT_PASSWORD=p@ssw0rd1 \
   mysql
 ```
 
-Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command:
+Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command and enter "p@ssw0rd1" when prompted for the password:
 
 ```shell
-$ docker run -it --network mysqlnet --rm mysql mysql -hmysqldb
-Enter password: ********
-
+$ docker exec -ti mysqldb mysql -u root -p
+Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 8
 Server version: 8.0.23 MySQL Community Server - GPL
@@ -69,11 +68,11 @@ mysql>
 
 ### Connect the application to the database
 
-In the above command, we used the same MySQL image to connect to the database but this time, we passed the ‘mysql’ command to the container with the `-h` flag containing the name of our MySQL container name. Press CTRL-D to exit the MySQL  interactive terminal.
+In the above command, we logged in to the MySQL database by passing the ‘mysql’ command to the `mysqldb` container. Press CTRL-D to exit the MySQL interactive terminal.
 
 Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
 
-Okay, now that we have a running MySQL, let’s update the`app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
+Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
 
 ```shell
 import mysql.connector
@@ -143,11 +142,11 @@ if __name__ == "__main__":
 
 We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.
 
-First, let’s add the `mysql-connector-python `module to our application using pip.
+First, let’s add the `mysql-connector-python` module to our application using pip.
 
 ```shell
 $ pip3 install mysql-connector-python
-$ pip3 freeze -r requirements.txt
+$ pip3 freeze > requirements.txt
 ```
 
 Now we can build our image.
@@ -160,7 +159,7 @@ Now, let’s add the container to the database network and then run our containe
 
 ```shell
 $ docker run \
-  -it --rm -d \
+  --rm -d \
   --network mysqlnet \
   --name rest-server \
   -p 5000:5000 \
@@ -171,17 +170,13 @@ Let’s test that our application is connected to the database and is able to ad
 
 ```shell
 $ curl http://localhost:5000/initdb
-$ curl --request POST \
-  --url http://localhost:5000/widgets \
-  --header 'Content-Type: application/x-www-form-urlencoded' \
-  --data 'name=widget01' \
-  --data 'description=this is a test widget'
+$ curl http://localhost:5000/widgets
 ```
 
 You should receive the following JSON back from our service.
 
 ```shell
-[{"name": "widget01", "description": "this is a test widget"}]
+[]
 ```
 
 ## Use Compose to develop locally
@@ -231,10 +226,11 @@ $ docker-compose -f docker-compose.dev.yml up --build
 
 We pass the `--build` flag so Docker will compile our image and then starts the containers.
 
-Now let’s test our API endpoint. Run the following curl command:
+Now let’s test our API endpoint. Run the following curl commands:
 
 ```shell
-$ curl --request GET --url http://localhost:8080/widgets
+$ curl http://localhost:5000/initdb
+$ curl http://localhost:5000/widgets
 ```
 
 You should receive the following response:
@@ -251,7 +247,7 @@ In this module, we took a look at creating a general development image that we c
 
 In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
 
-[Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
+[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
 
 ## Feedback
 

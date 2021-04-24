@@ -100,7 +100,7 @@ Now, we can add the steps required. The first one checks-out our repository unde
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -153,7 +153,7 @@ Using the cache we set up earlier for it to store to and to retrieve
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
@@ -233,7 +233,7 @@ In this module, you have learnt how to set up GitHub Actions workflow to an exis
 
 You can also consider deploying your application to the cloud. For detailed instructions, see:
 
-[Deploy your app to the cloud](/deploy.md){: .button .outline-btn}
+[Deploy your app to the cloud](/deploy.md){: .button .primary-btn}
 
 ## Feedback
 

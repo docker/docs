@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1.md).
+> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file version 1 (deprecated).
 
 By default Compose sets up a single
 [network](../engine/reference/commandline/network_create.md) for your app. Each
@@ -16,7 +16,7 @@ identical to the container name.
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/overview.md)
+> project name with either the [`--project-name` flag](reference/index.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
@@ -76,15 +76,17 @@ If any containers have connections open to the old container, they are closed. I
 
 Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
 
-    version: "3"
-    services:
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
 
-      web:
-        build: .
-        links:
-          - "db:database"
-      db:
-        image: postgres
+  web:
+    build: .
+    links:
+      - "db:database"
+  db:
+    image: postgres
+```
 
 See the [links reference](compose-file/compose-file-v2.md#links) for more information.
 
@@ -105,43 +107,49 @@ Each service can specify what networks to connect to with the *service-level* `n
 
 Here's an example Compose file defining two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common - only `app` can talk to both.
 
-    version: "3"
-    services:
+```yaml
+version: "{{ site.compose_file_v3 }}"
 
-      proxy:
-        build: ./proxy
-        networks:
-          - frontend
-      app:
-        build: ./app
-        networks:
-          - frontend
-          - backend
-      db:
-        image: postgres
-        networks:
-          - backend
-
+services:
+  proxy:
+    build: ./proxy
     networks:
-      frontend:
-        # Use a custom driver
-        driver: custom-driver-1
-      backend:
-        # Use a custom driver which takes special options
-        driver: custom-driver-2
-        driver_opts:
-          foo: "1"
-          bar: "2"
+      - frontend
+  app:
+    build: ./app
+    networks:
+      - frontend
+      - backend
+  db:
+    image: postgres
+    networks:
+      - backend
+
+networks:
+  frontend:
+    # Use a custom driver
+    driver: custom-driver-1
+  backend:
+    # Use a custom driver which takes special options
+    driver: custom-driver-2
+    driver_opts:
+    foo: "1"
+    bar: "2"
+```
 
 Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/compose-file-v2.md#ipv4_address-ipv6_address) for each attached network.
 
 Networks can also be given a [custom name](compose-file/compose-file-v3.md#network-configuration-reference) (since version 3.5):
 
-    version: "3.5"
-    networks:
-      frontend:
-        name: custom_frontend
-        driver: custom-driver-1
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  # ...
+networks:
+  frontend:
+    name: custom_frontend
+    driver: custom-driver-1
+```
 
 For full details of the network configuration options available, see the following references:
 
@@ -152,28 +160,32 @@ For full details of the network configuration options available, see the followi
 
 Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 
-    version: "3"
-    services:
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+ db:
+   image: postgres
 
-      web:
-        build: .
-        ports:
-          - "8000:8000"
-      db:
-        image: postgres
-
-    networks:
-      default:
-        # Use a custom driver
-        driver: custom-driver-1
-
+networks:
+  default:
+    # Use a custom driver
+    driver: custom-driver-1
+```
 ## Use a pre-existing network
 
 If you want your containers to join a pre-existing network, use the [`external` option](compose-file/compose-file-v2.md#network-configuration-reference):
 
-    networks:
-      default:
-        external:
-          name: my-pre-existing-network
+```yaml
+services:
+  # ...
+networks:
+  default:
+    external:
+      name: my-pre-existing-network
+```
 
 Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connect your app's containers to it.

@@ -51,25 +51,25 @@ These headers will be returned on both GET and HEAD requests. Note that using GE
 
 To get a token anonymously (if you are pulling anonymously):
 
-```
+```console
 $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
 To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
 
-```
+```console
 $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
 Then to get the headers showing your limits, run the following:
 
-```
+```console
 $ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 ```
 
 Which should return headers including these:
 
-```
+```http
 RateLimit-Limit: 100;w=21600
 RateLimit-Remaining: 76;w=21600
 ```

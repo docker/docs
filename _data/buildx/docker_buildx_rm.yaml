@@ -1,6 +1,8 @@
 command: docker buildx rm
 short: Remove a builder instance
-long: Remove a builder instance
+long: |-
+  Removes the specified or current builder. It is a no-op attempting to remove the
+  default builder.
 usage: docker buildx rm [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml
@@ -15,7 +17,7 @@ inherited_options:
   swarm: false
 deprecated: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

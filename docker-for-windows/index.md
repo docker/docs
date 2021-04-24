@@ -6,6 +6,7 @@ redirect_from:
 - /docker-for-windows/started/
 - /engine/installation/windows/
 - /installation/windows/
+- /win/
 - /windows/
 - /windows/started/
 - /winkit/
@@ -41,13 +42,21 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 
 ![Settings](images/settings-general.png){:width="750px"}
 
-* **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
+- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
 
-* **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+- **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
 
-* **Send usage statistics** - By default, Docker Desktop sends diagnostics,
+- **Expose daemon on tcp://localhost:2375 without TLS**: Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+
+- **Use the WSL 2 based engine**: WSL 2 provides better performance than the legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
+
+- **Send usage statistics**: By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
+
+- **Show weekly tips**: Displays useful advice and suggestions about using Docker.
+
+- **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
 ### Resources
 
@@ -65,22 +74,22 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 > The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
 > Windows container mode these resources are managed by Windows. In WSL 2 
 > mode, you can configure limits on the memory, CPU, and swap size allocated
-> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 
 Use the **Advanced** tab to limit resources available to Docker.
 
-**CPUs**: By default, Docker Desktop is set to use half the number of processors
+- **CPUs**: By default, Docker Desktop is set to use half the number of processors
 available on the host machine. To increase processing power, set this to a
 higher number; to decrease, lower the number.
 
-**Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
+- **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
 allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
 
-**Swap**: Configure swap file size as needed. The default is 1 GB.
+- **Swap**: Configure swap file size as needed. The default is 1 GB.
 
-**Disk image size**: Specify the size of the disk image.
+- **Disk image size**: Specify the size of the disk image.
 
-**Disk image location**: Specify the location of the Linux volume where containers and images are stored.
+- **Disk image location**: Specify the location of the Linux volume where containers and images are stored.
 
 You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you get a prompt asking if you want to use the existing image or replace it.
 
@@ -256,50 +265,10 @@ Server: Docker Engine - Community
 >
 > The Kubernetes tab is not available in Windows container mode.
 
-Docker Desktop includes a standalone Kubernetes server that runs on your Windows host, so that you can test deploying your Docker workloads on Kubernetes.
+Docker Desktop includes a standalone Kubernetes server that runs on your Windows machince, so
+that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
-![Enable Kubernetes](images/settings-kubernetes.png){:width="750px"}
-
-The Kubernetes client command, `kubectl`, is included and configured to connect
-to the local Kubernetes server. If you have `kubectl` already installed and
-pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-desktop`:
-
-```bash
-> kubectl config get-contexts
-> kubectl config use-context docker-desktop
-```
-
- To enable Kubernetes support and install a standalone instance of Kubernetes
-  running as a Docker container, select **Enable Kubernetes**.
-
-To set Kubernetes as the
-  [default orchestrator](/docker-for-windows/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
-
-By default, Kubernetes containers are hidden from commands like `docker
-service ls`, because managing them manually is not supported. To make them
-visible, select **Show system containers (advanced)**. Most users do not need this option.
-
-Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
-
-- When Kubernetes is enabled and running, an additional status bar item displays
-at the bottom right of the Docker Desktop Settings dialog. The status of Kubernetes shows in the Docker menu and the context points to
-  `docker-desktop`.
-
-- To disable Kubernetes support at any time, clear the **Enable Kubernetes** check box.
-  The Kubernetes containers are stopped and removed, and the
-  `/usr/local/bin/kubectl` command is removed.
-
-- To delete all stacks and Kubernetes resources, select **Reset Kubernetes Cluster**.
-
-- If you installed `kubectl` by another method, and
-experience conflicts, remove it.
-
-  For more information on using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
-
-> Upgrade Kubernetes
->
-> Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
+For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ### Reset
 

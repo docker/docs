@@ -26,7 +26,7 @@ $ docker run node-docker
 
 When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without return control back to the OS until we stop the container.
 
-Let’s make a GET request to the server using the curl command.
+Let’s open a new terminal then make a GET request to the server using the curl command.
 
 ```shell
 $ curl --request POST \
@@ -50,7 +50,7 @@ Start the container and expose port 8000 to port 8000 on the host.
 $ docker run --publish 8000:8000 node-docker
 ```
 
-Now let’s rerun the curl command from above.
+Now let’s rerun the curl command from above. Remember to open a new terminal.
 
 ```shell
 $ curl --request POST \
@@ -197,7 +197,7 @@ Now, we can easily identify our container based on the name.
 
 In this module, we took a look at running containers, publishing ports, and running containers in detached mode. We also took a look at managing containers by starting, stopping, and restarting them. We also looked at naming our containers so they are more easily identifiable. In the next module, we’ll learn how to run a database in a container and connect it to our application. See:
 
-[How to develop your application](develop.md){: .button .outline-btn}
+[How to develop your application](develop.md){: .button .primary-btn}
 
 ## Feedback
 

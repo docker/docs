@@ -200,7 +200,7 @@ Let’s change the source code and then set a breakpoint.
 
 Add the following code above the existing `server.use()` statement, and save the file.
 
-```node
+```js
  server.use( '/foo', (req, res) => {
    return res.json({ "foo": "bar" })
  })
@@ -224,7 +224,7 @@ In this module, we took a look at creating a general development image that we c
 
 In the next module, we’ll take a look at how to run unit tests in Docker. See:
 
-[Run your tests](run-tests.md){: .button .outline-btn}
+[Run your tests](run-tests.md){: .button .primary-btn}
 
 ## Feedback
 

@@ -323,7 +323,7 @@ $ docker run -it --rm --gpus device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubu
 Exposes that specific GPU.
 
 ```bash
-$ docker run -it --rm --gpus device=0,2 ubuntu nvidia-smi
+$ docker run -it --rm --gpus '"device=0,2"' ubuntu nvidia-smi
 ```
 
 Exposes the first and third GPUs.

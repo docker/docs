@@ -70,9 +70,27 @@ Let’s walk through creating a Dockerfile for our application. In the root of y
 >
 > The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. Therefore, we’ll use that as our filename throughout this series.
 
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
+While _optional_, this directive instructs the Docker builder what syntax to use
+when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
+to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
+must appear before any other comment, whitespace, or Dockerfile instruction in
+your Dockerfile, should be the first line in Dockerfiles.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+```
+
+We recommend using `docker/dockerfile:1`, which always points to the latest release
+of the version 1 syntax. BuildKit automatically checks for updates of the syntax
+before building, making sure you are using the most current version.
+
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM python:3.8-slim-buster
 ```
 
@@ -117,6 +135,8 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 Here's the complete Dockerfile.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM python:3.8-slim-buster
 
 WORKDIR /app
@@ -131,7 +151,7 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 
 ### Directory structure
 
-Just to recap, we created a directory in our local machine called `docker-python` and created a simple Python application using the Flask framework. We also used the `requirements.txt` file to gather our requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure would now look like:
+Just to recap, we created a directory in our local machine called `python-docker` and created a simple Python application using the Flask framework. We also used the `requirements.txt` file to gather our requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure would now look like:
 
 ```shell
 python-docker
@@ -233,7 +253,7 @@ Our image that was tagged with `:v1.0.0` has been removed, but we still have the
 
 In this module, we took a look at setting up our example Python application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module we’ll take a look at how to:
 
-[Run your image as a container](run-containers.md){: .button .outline-btn}
+[Run your image as a container](run-containers.md){: .button .primary-btn}
 
 ## Feedback
 

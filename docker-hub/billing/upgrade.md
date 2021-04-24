@@ -23,19 +23,23 @@ To upgrade to a Pro plan:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
+2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The **Billing Details** page displays billing information about your existing user account.
 
-3. Click **Change plan** to choose a new plan.
+3. Ensure you have selected your personal account on the left side of the **Billing Details** page.
 
-4. Review the plan details in the **Pro** section and click **Buy Now**.
+    ![Billing details personal account](images/billing-personal-account.png){:width="750px"}
 
-5. By default, the **Payment Method** page displays the annual cost to upgrade to a Pro plan. If you prefer to upgrade to a monthly plan, choose **pay monthly**.
+4. Click **Change plan** to choose a new plan.
 
-6. Review the card details and the information displayed and click **Purchase** to confirm.
+5. Review the plan details in the **Pro** section and click **Buy Now**.
+
+6. By default, the **Payment Method** page displays the annual cost to upgrade to a Pro plan. If you prefer to upgrade to a monthly plan, choose **pay monthly**.
+
+7. Review the card details and the information displayed and click **Purchase** to confirm.
 
     The **Billing** page now displays a confirmation of the upgrade with an invoice containing details about your new plan, entitlements, and the total cost.
 
-7. You’ll also receive an email confirming the cancellation of your legacy plan.
+8. You’ll also receive an email confirming the cancellation of your legacy plan.
 
 ## Upgrade to a Team plan
 
@@ -77,8 +81,9 @@ To upgrade from a monthly Team plan to an annual Team plan:
 To upgrade from a monthly Pro plan to an annual Pro plan:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
-2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
-3. Click **switch to annual billing**.
-4. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
+2. Open the drop-down menu next to your username in the top-right corner and select **Billing** to go to the **Billing Details** page. This page displays billing information about your existing user account.
+3. Ensure you have selected your personal account on the left side of the **Billing Details** page.
+4. Click **switch to annual billing**.
+5. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
 
     The Billing page now displays a confirmation of the upgrade with an invoice containing details about your new plan, entitlements, and the total cost.
