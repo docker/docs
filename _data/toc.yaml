@@ -85,6 +85,18 @@ guides:
     section:
     - title: "Overview"
       path: /language/java/
+    - title: "Build images"
+      path: /language/java/build-images/
+    - title: "Run containers"
+      path: /language/java/run-containers/
+    - title: "Develop your app"
+      path: /language/java/develop/
+    - title: "Run your tests"
+      path: /language/java/run-tests/
+    - title: "Configure CI/CD"
+      path: /language/java/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/java/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
