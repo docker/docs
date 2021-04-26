@@ -1170,8 +1170,6 @@ samples:
     title: Rails and PostgreSQL
   - path: /samples/running_riak_service/
     title: Riak
-  - path: /samples/running_ssh_service/
-    title: SSHd
 - path: /samples/#library-references
   title: Library references
 

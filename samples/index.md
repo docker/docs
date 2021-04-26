@@ -42,7 +42,6 @@ Run popular software using Docker.
 | [PostgreSQL](postgresql_service.md)                           | Run a Dockerized PostgreSQL instance.                     |
 | [Rails + PostgreSQL](rails.md)                                | Run a Dockerized Rails + PostgreSQL environment.          |
 | [Riak](running_riak_service.md)                               | Run a Dockerized Riak instance.                           |
-| [SSHd](running_ssh_service.md)                                | Run a Dockerized SSHd instance.                           |
 | [WordPress](wordpress.md)                                     | Quickstart: Compose and WordPress.                        |
 
 ## Samples and documentation for official Docker images {#library-references}
