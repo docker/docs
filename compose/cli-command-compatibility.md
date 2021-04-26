@@ -15,25 +15,17 @@ If you see some Compose functionality that is not available in the `compose` com
 The following commands have not been implemented yet, and maybe implemented at a later time.
 Let us know if these commands are a higher priority for your usecases.
 
-* `compose build --memory`
-* `compose config --profiles`
+`compose build --memory`. This option is not yet supported by buildkit. The flag is currently supported but is hidden to avoid breaking existing Compose usage. It does not have any effect.
 
 ## Flags that will not be implemented
 
 The list below includes the flags that we are not planning to support in Compose in the Docker CLI,
 either because they are already deprecated in `docker-compose`, or because they are not relevant for Compose in the Docker CLI.
 
-* `compose build --compress` Not relevant as the 'compose' command uses buildkit by default.
-* `compose build --force-rm` Not relevant as commpose command is using buildkit by default.
-* `compose build --no-rm` Not relevant as commpose command is using buildkit by default.
-* `compose build --parallel` Not relevant as commpose command is using buildkit by default.
 * `compose ps --filter KEY-VALUE` Not relevant due to its complicated usage with the `service` command and also because it is not documented properly in `docker-compose`.
-* `compose pull --parallel` Deprecated in docker-compose
-* `compose pull --no-parallel` Deprecated in docker-compose
 * `compose rm --all` Deprecated in docker-compose.
 * `compose scale` Deprecated in docker-compose (use `compose up --scale` instead)
 
 Global flags:
 
-* `compose --no-ansi` Deprecated in docker-compose.
 * `compose --compatibility` Deprecated in docker-compose.
