@@ -15,7 +15,7 @@ If you see some Compose functionality that is not available in the `compose` com
 The following commands have not been implemented yet, and maybe implemented at a later time.
 Let us know if these commands are a higher priority for your usecases.
 
-* `compose build --memory`. This option is not yet supported by buildkit. The flag is currently supported but hidden to avoid breaking existing compose usage, it will have actually no effect.
+`compose build --memory`. This option is not yet supported by buildkit. The flag is currently supported but is hidden to avoid breaking existing Compose usage. It does not have any effect.
 
 ## Flags that will not be implemented
 
