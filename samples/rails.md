@@ -44,6 +44,7 @@ and the [Dockerfile reference](/engine/reference/builder/).
 Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
 in a moment by `rails new`.
 
+    # What is this supposed to do? Doesn't work on linux!
     source 'https://rubygems.org'
     gem 'rails', '~>5'
 
