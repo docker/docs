@@ -7,7 +7,7 @@ description: Making changes to our example learning application
 
 As a small feature request, we've been asked by the product team to
 change the "empty text" when we don't have any todo list items. They
-would like to transition it to the following:
+would like to translate it to the following:
 
 > You have no todo items yet! Add one above!
 
