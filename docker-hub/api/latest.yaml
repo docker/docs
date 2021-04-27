@@ -565,6 +565,14 @@ paths:
           description: Filters to only show images of this status.
           type: string
           enum: [active, inactive]
+        - name: currently_tagged
+          in: query
+          required: false
+          type: boolean
+          description: | 
+            Filters to only show images with:
+            * `true`: at least 1 current tag.
+            * `false`: no current tags.
         - name: ordering
           in: query
           required: false
