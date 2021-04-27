@@ -382,6 +382,7 @@ The high-level `docker scan` command scans local images using the image name or 
 **WSL 2**
 
 - The Vulnerability scanning feature doesn’t work with Alpine distributions.
+- The instalation processed must need to be more cleared.
 - If you are using Debian and OpenSUSE distributions, the login process only works with the `--token` flag, you won’t be redirected to the Snyk website for authentication.
 
 ## Feedback
