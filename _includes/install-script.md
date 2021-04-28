@@ -44,7 +44,7 @@ $ sudo sh get-docker.sh
 ```
 
 If you would like to use Docker as a non-root user please see the
-[post-installation steps for Linux](linux-postinstall.md#manage-docker-as-a-non-root-user).
+[post-installation steps for Linux](../linux-postinstall#manage-docker-as-a-non-root-user).
 
 Docker Engine - Community is installed. It starts automatically on `DEB`-based distributions. On
 `RPM`-based distributions, you need to start it manually using the appropriate
