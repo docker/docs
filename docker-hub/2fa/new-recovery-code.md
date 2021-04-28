@@ -8,6 +8,7 @@ If you have lost your two-factor authentication recovery code and still have
 access to your Docker Hub account, you can generate a new recovery code.
 
 ## Prerequisites
+
 Two-factor authentication is enabled on your Docker Hub account.
 
 ## Generate a new recovery code
