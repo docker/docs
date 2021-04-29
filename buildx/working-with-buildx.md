@@ -82,7 +82,7 @@ while creating the new builder. After creating a new instance, you can manage it
 lifecycle using the [`docker buildx inspect`](../engine/reference/commandline/buildx_inspect.md),
 [`docker buildx stop`](../engine/reference/commandline/buildx_stop.md), and
 [`docker buildx rm`](../engine/reference/commandline/buildx_rm.md) commands.
-To list all available builders, use [`docker buildx ls`](../engine/reference/commandline/buildx_ls.md].
+To list all available builders, use [`docker buildx ls`](../engine/reference/commandline/buildx_ls.md).
 After creating a new builder you can also append new nodes to it.
 
 To switch between different builders, use [`docker buildx use <name>`](../engine/reference/commandline/buildx_use.md).
