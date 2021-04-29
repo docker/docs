@@ -25,9 +25,9 @@ This page contains information about the new features, improvements, known issue
 
 ## Bug fixes and minor changes
 
+- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. We recommand using [kompose.io](https://kompose.io) to deploy docker compose applications to Kubernetes. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
 - Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
 - Fixed a leak dynamic ports ("ephemeral ports") e.g. `docker run -p 80`. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
-- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
 - Enable buildkit garbage collection by default.
 - Fixed a bug which blocked `docker run -p 123`. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
 - Disable the HTTP and HTTPS transparent proxies when there is no upstream proxy set. Fixes [docker/for-mac#5572](https://github.com/docker/for-mac/issues/5572).
