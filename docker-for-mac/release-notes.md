@@ -11,6 +11,31 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 3.3.2
+2021-04-29
+
+[Mac with Intel chip](?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+## Upgrades
+
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+
+## Bug fixes and minor changes
+
+- Fixed a bug with an Apple chip where the last byte in a network transfer was occasionally lost.
+- Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
+- Fixed a leak dynamic ports ("ephemeral ports") e.g. `docker run -p 80`. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
+- Emulate a more modern Intel CPU with `qemu` on an Apple chip, for better image compatibility. See [docker/for-mac#5561](https://github.com/docker/for-mac/issues/5561).
+- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
+- Enable buildkit garbage collection by default.
+- Fixed a bug which blocked `docker run -p 123`. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
+- Disable the HTTP and HTTPS transparent proxies when there is no upstream proxy set. Fixes [docker/for-mac#5572](https://github.com/docker/for-mac/issues/5572).
+- Revert to the HTTP and HTTPS proxy implementation used in 3.2.2.
+
 ## Docker Desktop 3.3.1
 2021-04-15
 
