@@ -32,7 +32,7 @@ This page contains information about the new features, improvements, known issue
 - Emulate a more modern Intel CPU with `qemu` on an Apple chip, for better image compatibility. See [docker/for-mac#5561](https://github.com/docker/for-mac/issues/5561).
 - Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
 - Enable buildkit garbage collection by default.
-- Fixed a bug which blocked `docker run -p 123`. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
+- Fixed a bug which blocked binding to port 123. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
 - Disable the HTTP and HTTPS transparent proxies when there is no upstream proxy set. Fixes [docker/for-mac#5572](https://github.com/docker/for-mac/issues/5572).
 - Revert to the HTTP and HTTPS proxy implementation used in 3.2.2.
 
