@@ -31,9 +31,6 @@ This page contains information about the new features, improvements, known issue
 - Fixed a bug which blocked binding to port 123. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
 - Disable the HTTP and HTTPS transparent proxies when there is no upstream proxy set. Fixes [docker/for-mac#5572](https://github.com/docker/for-mac/issues/5572).
 - Revert to the HTTP and HTTPS proxy implementation used in 3.2.2.
-
-## Removed features
-
 - Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. The component was removed in 2.4.0.0 but we forgot to remove the setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
 
 ## Docker Desktop 3.3.1
