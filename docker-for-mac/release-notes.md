@@ -39,8 +39,8 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 
 ### New
 

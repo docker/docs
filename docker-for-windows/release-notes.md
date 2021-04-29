@@ -36,7 +36,7 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 
 ### Bug fixes and minor changes
 
