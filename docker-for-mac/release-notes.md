@@ -28,7 +28,7 @@ This page contains information about the new features, improvements, known issue
 
 - Fixed a bug with an Apple chip where the last byte in a network transfer was occasionally lost.
 - Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
-- Fixed a leak dynamic ports ("ephemeral ports") e.g. `docker run -p 80`. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
+- Fixed a leak of ephemeral ports. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
 - Emulate a more modern Intel CPU with `qemu` on an Apple chip, for better image compatibility. See [docker/for-mac#5561](https://github.com/docker/for-mac/issues/5561).
 - Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
 - Enable buildkit garbage collection by default.
