@@ -6,10 +6,10 @@ description: Making our lives easier with Compose for our application
 
 [Docker Compose](../compose/index.md) is a tool that was developed to help define and
 share multi-container applications. With Compose, we can create a YAML file to define the services
-and with a single command, can spin everything up or tear it all down. 
+and with a single command, can spin everything up or tear it all down.
 
 The _big_ advantage of using Compose is you can define your application stack in a file, keep it at the root of
-your project repo (it's now version controlled), and easily enable someone else to contribute to your project. 
+your project repo (it's now version controlled), and easily enable someone else to contribute to your project.
 Someone would only need to clone your repo and start the compose app. In fact, you might see quite a few projects
 on GitHub/GitLab doing exactly this now.
 
@@ -18,8 +18,8 @@ So, how do we get started?
 ## Install Docker Compose
 
 If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose!
-Play-with-Docker instances already have Docker Compose installed as well. If you are on 
-a Linux machine, you will need to [install Docker Compose](../compose/install.md). 
+Play-with-Docker instances already have Docker Compose installed as well. If you are on
+a Linux machine, you will need to [install Docker Compose](../compose/install.md).
 
 After installation, you should be able to run the following and see version information.
 
@@ -31,7 +31,7 @@ docker-compose version
 
 1. At the root of the app project, create a file named `docker-compose.yml`.
 
-2. In the compose file, we'll start off by defining the schema version. In most cases, it's best to use 
+2. In the compose file, we'll start off by defining the schema version. In most cases, it's best to use
    the latest supported version. You can look at the [Compose file reference](../compose/compose-file/index.md)
    for the current schema versions and the compatibility matrix.
 
@@ -79,7 +79,7 @@ docker run -dp 3000:3000 `
   sh -c "yarn install && yarn run dev"
 ```
 
-1. First, let's define the service entry and the image for the container. We can pick any name for the service. 
+1. First, let's define the service entry and the image for the container. We can pick any name for the service.
    The name will automatically become a network alias, which will be useful when defining our MySQL service.
 
     ```yaml
@@ -209,7 +209,7 @@ docker run -d `
         image: mysql:5.7
         volumes:
           - todo-mysql-data:/var/lib/mysql
-    
+
     volumes:
       todo-mysql-data:
     ```
@@ -226,10 +226,10 @@ docker run -d `
         image: mysql:5.7
         volumes:
           - todo-mysql-data:/var/lib/mysql
-        environment: 
+        environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: todos
-    
+
     volumes:
       todo-mysql-data:
     ```
@@ -259,7 +259,7 @@ services:
     image: mysql:5.7
     volumes:
       - todo-mysql-data:/var/lib/mysql
-    environment: 
+    environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: todos
 
@@ -289,8 +289,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
     Creating app_mysql_1 ... done
     ```
 
-    You'll notice that the volume was created as well as a network! By default, Docker Compose automatically creates a 
-    network specifically for the application stack (which is why we didn't define one in the compose file).
+    You'll notice that the volume was created as well as a network! By default, Docker Compose automatically creates a network specifically for the application stack (which is why we didn't define one in the compose file).
 
 3. Let's look at the logs using the `docker-compose logs -f` command. You'll see the logs from each of the services interleaved
     into a single stream. This is incredibly useful when you want to watch for timing-related issues. The `-f` flag "follows" the
@@ -336,7 +335,7 @@ quickly see what container is our app and which container is the mysql database.
 
 ## Tear it all down
 
-When you're ready to tear it all down, simply run `docker-compose down` or hit the trash can on the Docker Dashboard 
+When you're ready to tear it all down, simply run `docker-compose down` or hit the trash can on the Docker Dashboard
 for the entire app. The containers will stop and the network will be removed.
 
 >**Warning**
