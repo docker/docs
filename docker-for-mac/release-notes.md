@@ -12,7 +12,7 @@ toc_max: 2
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
 ## Docker Desktop 3.3.2
-2021-04-29
+2021-04-30
 
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
