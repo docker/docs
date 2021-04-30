@@ -9,6 +9,7 @@ $font:                  "Open Sans", sans-serif;
 $body-text-size:        14px;
 $white:                 #fff;
 $black:                 #000;
+$top-navigation-height: 92px; // top navigation height is: nav (55px) + breadcrumbs (37px)
 
 /*
  * standard mode
@@ -21,6 +22,7 @@ $bg-body-landing:         hsl(206,  14%,  99%);
 $bg-header:               hsl(206,  85%,  54%);
 $bg-secondary:            hsl(206,  85%,  54%);
 $bg-sidebar:              hsl(206,  14%,  99%);
+$bg-sidebar-active:       hsl(206,  33%,  97%);
 $bg-footer:               hsl(206,   0%, 100%);
 $bg-footer-landing:       hsl(214, 100%,  20%);
 
@@ -49,6 +51,7 @@ $bg-body-landing-night:   hsl(203,  90%,  10%);
 $bg-header-night:         hsl(203,  40%,  10%);
 $bg-secondary-night:      hsl(203,  40%,  10%);
 $bg-sidebar-night:        hsl(203,  40%,  10%);
+$bg-sidebar-night-active: hsl(203,  40%,   7%);
 $bg-footer-night:         hsl(203,   0%,   0%);
 $bg-footer-landing-night: hsl(214, 100%,  20%);
 
