@@ -11,10 +11,30 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 3.3.2
+2021-05-03
+
+> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+
+## Upgrades
+
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+
+## Bug fixes and minor changes
+
+- Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
+- Fixed a leak of ephemeral ports. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
+- Enable buildkit garbage collection by default.
+- Fixed a bug which blocked binding to port 123. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
+- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. The component was removed in 2.4.0.0 but we forgot to remove the setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
+
 ## Docker Desktop 3.3.1
 2021-04-15
 
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 
 ### Bug fixes and minor changes
 
