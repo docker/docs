@@ -1,6 +1,6 @@
 ---
 title: "Configure CI/CD for your application"
-keywords: CI/CD, GitHub Actions, go, golang, local, development
+keywords: ci, cd, ci/cd, continuous integration, continuous deployment, deployment, github, github actions, go, golang, development
 description: Learn how to set up CI/CD pipeline for your application.
 redirect_from:
 - /get-started/golang/configure-ci-cd/
@@ -17,11 +17,6 @@ This guide contains instructions on how to:
 3. Optimize your workflow to reduce the number of pull requests and the total build time, and finally,
 4. Push only specific versions to Docker Hub.
 
-## TODO
-
-This section is work in progress... stay tuned!
-
-<!-- 
 ## Set up a Docker project
 
 Let’s get started. This guide uses a simple Docker project as an example. The [SimpleWhaleDemo](https://github.com/usha-mandya/SimpleWhaleDemo){:target="_blank" rel="noopener" class="_"} repository contains an Ngnix alpine image. You can either clone this repository, or use your own Docker project.
@@ -234,17 +229,16 @@ Remember to change how the image is tagged. The following example keeps ‘lates
 
 Now, we will have two different flows: one for our changes to master, and one for our pull requests. Next, we need to modify what we had before to ensure we are pushing our PRs to the GitHub registry rather than to Docker Hub.
 
--->
 
 ## Next steps
 
 In this module, you have learnt how to set up GitHub Actions workflow to an existing Docker project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. You can also set up nightly tests against the latest tag, test each PR, or do something more elegant with the tags we are using and make use of the Git tag for the same tag in our image.
 
-You can also consider deploying your application to the cloud. For detailed instructions, see:
+You can also consider deploying your application to a public Cloud provider, such as Azure and AWS.
 
-[Deploying Docker containers on Azure](/cloud/aci-integration/){: .button .outline-btn}
+In the next module, we’ll look into some options for doing so:
 
-[Deploying Docker containers on ECS](/cloud/ecs-integration.md){: .button .outline-btn}
+[Deploy to the Cloud](deploy.md){: .button .outline-btn}
 
 ## Feedback
 

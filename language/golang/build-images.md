@@ -10,7 +10,8 @@ redirect_from:
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
+* Some understanding of Go and its toolchain. This is not a tutorial on Go. If you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"} is a good starting point, so go (pun intended) check it out.
+* Some awareness of basic Docker concepts. If unsure, work through the orientation and setup in Get started [Part 1](/get-started/).
 
 ## Overview
 
@@ -18,48 +19,40 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Go version 1.13 or later: [Download Go](https://golang.org/dl/){: target="_blank" rel="noopener" class="_"}.
-- Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
+- Go version 1.16 or later. 
+- Docker running locally. Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
 - An IDE or a text editor to edit files. We recommend using [Visual Studio Code](https://code.visualstudio.com/){: target="_blank" rel="noopener" class="_"}.
 
-## Sample application
+## Introducting the sample application
 
-Let’s create a simple Go application that we can use as our example &ndash; a (naive) key-value store with two operations: `add` and `list`, accessible over a REST API end-point.
+To avoid losing focus on Docker's features, the sample application is a minimal HTTP server that has only three features:
 
-If you are in a hurry, the source code is in the [go-docker](https://github.com/olliefr/go-docker) repo. 
+* It responds with a text message containing a heart symbol ("<3") on requests to `/`.
+* It responds with `{"Status" : "OK"}` to the health check request on requests to `/ping`.
+* The port it listens on is configurable using the environment variable `HTTP_PORT`. The default value is `8080`.
 
-Alternatively, to recreate the application from scratch, create a directory on your local machine named `go-docker` and follow the steps below to initialise the Go project.
+Thus, it somewhat mimics enough basic properties of a REST microservice to be useful for our learning of Docker.
+
+The source code for the application is in the [olliefr/docker-gs-ping](https://github.com/olliefr/docker-gs-ping){: target="_blank" rel="noopener" class="_"} GitHub repo. Please feel free to clone or fork it.
+
+For our present study, we clone it to our local machine:
 
 ```shell
-$ cd [path to your go-docker directory]
-$ go mod init go-docker
-$ go get github.com/labstack/echo/v4
-$ go get github.com/labstack/echo/v4/middleware
-$ touch main.go
+$ git clone github.com/olliefr/docker-gs-ping
 ```
 
-Now, let’s add some code to handle our REST requests. We’ll use the [echo](https://echo.labstack.com/){: target="_blank" rel="noopener" class="_"} framework to quickly build a minimal server so we can focus on Dockerizing the application.
-
-Open this working directory in your IDE and add the following code into the `main.go` file.
+The application's `main.go` file is fairly straightforward, if you are familiar with Go:
 
 ```go
 package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
-
-// Entry is a single key-value pair
-type Entry struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
-}
-
-// store is an ordered list of key-value pairs
-var store = make([]*Entry, 0)
 
 func main() {
 
@@ -69,43 +62,25 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
+		return c.HTML(http.StatusOK, "Hello, Docker! <3")
+	})
+
+	e.GET("/ping", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
 	})
 
-	e.GET("/list", listEntries)
-	e.POST("/add", addEntry)
-
-	e.Logger.Fatal(e.Start(":8000"))
-}
-
-// listEntries returns a full copy of the store in JSON format to the client.
-func listEntries(c echo.Context) error {
-	return c.JSON(http.StatusOK, store)
-}
-
-// addEntry adds a new entry to the key-value store
-// and returns the value in JSON format to the client.
-func addEntry(c echo.Context) error {
-	e := new(Entry)
-	if err := c.Bind(e); err != nil {
-		return err
+	httpPort := os.Getenv("HTTP_PORT")
+	if httpPort == "" {
+		httpPort = "8080"
 	}
-	store = append(store, e)
-	return c.JSON(http.StatusOK, e)
+
+	e.Logger.Fatal(e.Start(":" + httpPort))
 }
 ```
 
-The server will listen on port 8000. It responds to three kinds of query:
+## Quickly smoke test the application
 
-* GET requests to the root (`/`) return server status in JSON format.
-* POST requests to `/add` store a key-value pair on the server.
-* GET requests to `/list` return an array of JSON objects that you have previously POSTed.
-
-The key-value pairs POSTed to the server must be in (valid) JSON format.
-
-## Test application
-
-Let’s start our application and make sure it’s running properly. Open your terminal and navigate to your working directory you created.
+Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the directory into which you cloned the project's repo.
 
 ```shell
 $ go run main.go
@@ -117,107 +92,50 @@ This should compile and start the server as a foreground application, outputting
    ____    __
   / __/___/ /  ___
  / _// __/ _ \/ _ \
-/___/\__/_//_/\___/ v4.1.17
+/___/\__/_//_/\___/ v4.2.2
 High performance, minimalist Go web framework
 https://echo.labstack.com
 ____________________________________O/_______
                                     O\
-⇨ http server started on [::]:8000
+⇨ http server started on [::]:8080
 ```
 
-To test that the application is working properly, let's perform a _smoke test_ first. In a new terminal run the following command.
+Let's run a quick _smoke test_ on the application. **In a new terminal**, run a request using `curl`. Alternatively, you can use your favourite web browser as well.
 
 ```shell
-$ curl http://localhost:8000/
+$ curl http://localhost:8080/
+Hello, Docker! <3
 ```
 
-The server should respond with `{"Status":"OK"}` in the same terminal. 
+So, the application responds with a greeting, just as the first business requirement says it should. Great.
 
-Having established that the server is running and is accessible, we’ll POST some JSON to the API and then make a GET request to see that the data has been saved.
+Having established that the server is running and is accessible, let's proceed to "dockerising" it.
 
-Run the following `curl` command in the terminal.
+## Create a Dockerfile for the application
 
-```shell
-$ curl --request POST \
-  --url http://localhost:8000/add \
-  --header 'content-type: application/json' \
-  --data '{"key": "name", "value": "Docker"}'
-```
+A `Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
 
-With this command, we have sent the following JSON structure to the server.
-
-```json
-{
-	"key": "name",
-	"value": "Docker"
-}
-```
-
-On success, the output from the server should read just that.
-
-```json
-{"key":"name","value":"Docker"}
-```
-
-To see what data has been saved on the server, run the following command.
-
-```shell
-$ curl http://localhost:8000/list
-```
-
-This should return a JSON list of length one, comprising of the element we've just added to it.
-
-```json
-[{"key":"name","value":"Docker"}]
-```
-
-Switch back to the terminal where our server is running. You should now see thee requests in the server logs. The exact format might be different from the following, and the timestamps will differ too.
-
-```json
-{"time":"2021-02-08T23:49:16.0027265+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"GET","uri":"/","user_agent":"curl/7.68.0","status":200,"error":"","latency":28300,"latency_human":"28.3µs","bytes_in":0,"bytes_out":16}
-{"time":"2021-02-08T23:49:25.8262003+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"POST","uri":"/add","user_agent":"curl/7.68.0","status":200,"error":"","latency":85500,"latency_human":"85.5µs","bytes_in":34,"bytes_out":32}
-{"time":"2021-02-08T23:49:29.695339+02:00","id":"","remote_ip":"127.0.0.1","host":"localhost:8000","method":"GET","uri":"/list","user_agent":"curl/7.68.0","status":200,"error":"","latency":27700,"latency_human":"27.7µs","bytes_in":0,"bytes_out":34}
-```
-
-You can add more key-value pairs to the store, if you'd like. Once we are satisfied, that the store "works", we can proceed to an exciting part of running this application in Docker.
-
-## Create a Dockerfile for Go
-
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
-
-Let’s walk through the process of creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
+Let’s walk through the process of creating a `Dockerfile` for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
 
 > **Note**
 >
-> The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
+> The name of the file is not _that_ important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
 
 The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
 
 ```dockerfile
-FROM golang:1.15-alpine
+FROM golang:1.16-alpine
 ```
 
-Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Go image that already has all the tools and packages to compile and run a Go application. You can think of this in the same way you would think about class inheritance in object oriented programming. For example, if we were able to create Docker images in JavaScript, we might write something like the following.
+Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Go image that already has all the tools and packages to compile and run a Go application. You can think of this in the same way you would think about class inheritance in object oriented programming or functional composition in functional programming.
 
-`class MyImage extends NodeBaseImage {}`
-
-This would create a class called `MyImage` that inherited functionality from the base class `NodeBaseImage`.
-
-In the same way, when we use the `FROM` command, we tell Docker to include in our image all the functionality from the `golang:1.15-alpine` image.
+When we have used that `FROM` command, we told Docker to include in our image all the functionality from the `golang:1.16-alpine` image. All of our consequent commands would build on top of that "base" image.
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> If you want to learn more about creating your own base images, see [creating base images](https://docs.docker.com/develop/develop-images/baseimages/) section of the guide.
 
-<!-- TODO something about env variables?
-The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set `NODE_ENV` to `production`.
-
-```dockerfile
-ENV NODE_ENV=production
-```
--->
-
-To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. This way we do not have to type out full file paths but can use relative paths based on the working directory.
+To make things easier when running the rest of our commands, let’s create a working directory _inside_ the image that we are building. This instructs Docker to use this path as the default _destination path_ for all subsequent commands. This way we do not have to type out full file paths but can use relative paths based on this working directory.
 
 ```dockerfile
 WORKDIR /app
@@ -225,94 +143,127 @@ WORKDIR /app
 
 Usually the very first thing you do once you’ve downloaded a project written in Go is to install the modules necessary to compile it.
 
-Before we can run `go mod download`, we need to get our `go.mod` and `go.sum` files into our images. We use the `COPY` command to do this. The  `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `go.mod` and `go.sum` file into our working directory `/app`.
+Before we can run `go mod download`, we need to get our `go.mod` and `go.sum` files into our images. We use the `COPY` command to do this. 
+
+In its simplest form, the `COPY` command takes two parameters. The first parameter tells Docker what file you would like to copy into the image. The second parameter tells Docker where you want that file to be copied to. 
+
+We’ll copy the `go.mod` and `go.sum` file into our working directory `/app` which, owing to our use of `WORKDIR`, is the current directory (`.`)
 
 ```dockerfile
-COPY ["go.mod", "go.sum", "./"]
+COPY go.mod .
+COPY go.sum .
 ```
 
-Once we have our module files inside the image, we can use the `RUN` command to execute the command `go mod download`. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the a directory inside our image.
+Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the a directory inside our image.
 
 ```dockerfile
 RUN go mod download
 ```
 
-At this point, we have an image that is based on Go environment version 1.13 (or later minor version) and we have installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the COPY command just like we did with our module files above.
+At this point, we have an image that is based on Go environment version 1.16 (or a later minor version, since we had specified `1.16` as our tag in the `FROM` command) and we have installed our dependencies. 
+
+The next thing we need to do is to add our source code into the image. We’ll use the `COPY` command just like we did with our module files before.
 
 ```dockerfile
-COPY . .
+COPY *.go .
 ```
 
-The COPY command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is run inside of a container. We do this with the `CMD` command.
+This `COPY` command uses a wildcard to copy all files with `.go` extension located in the current directory into the image. 
+
+Now, we would like to compile our application. To that end, we use the familiar `RUN` command.
 
 ```dockerfile
-CMD [ "go", "run", "main.go" ]
+RUN go build -o /docker-gs-ping
 ```
 
-Here's the complete Dockerfile.
+This should be familiar. The result of that command will be a static application binary named `docker-gs-ping` and located in the root of the filesystem of the image that we are building. We could have put the binary into any other place we desire inside that image, there is no special significance for placing it in the root.
+
+Now, all that is left to do is to tell Docker what command to execute when our image is used to start a container. 
+
+We do this with the `CMD` command.
 
 ```dockerfile
-FROM golang:1.15-alpine
+CMD [ "/docker-gs-ping" ]
+```
+
+Here's the complete `Dockerfile`. The file in the repository that you cloned may also contain comments. They always begin with a `#` symbol and make no difference to Docker. The comments are there for the convenience of humans tasked to maintain the `Dockerfile`.
+
+```dockerfile
+FROM golang:1.16-alpine
 
 WORKDIR /app
 
-COPY ["go.mod", "go.sum", "./"]
-
+COPY go.mod .
+COPY go.sum .
 RUN go mod download
 
-COPY . .
+COPY *.go .
 
-CMD [ "go", "run", "main.go" ]
+RUN go build -o /docker-gs-ping
+
+EXPOSE 8080
+
+CMD [ "/docker-gs-ping" ]
 ```
 
 You can also find this `Dockerfile` for this part in [go-docker](https://github.com/olliefr/go-docker) repo.
 
-## Build image
+## Build the image
 
-Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in the context.
+Now that we've created our `Dockerfile`, let’s build an image from it. The `docker build` command creates Docker images from a Dockerfile and a "context". A build's _context_ is the set of files located in the specified `PATH` or `URL`. The Docker build process can access any of the files located in the context.
 
-The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `‘name:tag’`. We’ll leave off the optional “tag” for now to help simplify things. If you do not pass a tag, Docker will use “latest” as its default tag. You’ll see this in the last line of the build output.
+The build command optionally takes a `--tag` flag. This flag is used to label the image with a string value, which is easy for humans to read and recognise. If you do not pass a `--tag`, Docker will use `latest` as the default value.
 
-Let’s build our first Docker image.
+Let's build our first Docker image!
 
 ```shell
-$ docker build --tag go-docker .
+$ docker build --tag docker-gs-ping .
 ```
 
 ```shell
-[+] Building 15.4s (10/10) FINISHED
- => [internal] load build definition from Dockerfile                               0.0s
- => => transferring dockerfile: 179B                                               0.0s
- => [internal] load .dockerignore                                                  0.0s
- => => transferring context: 2B                                                    0.0s
- => [internal] load metadata for docker.io/library/golang:1.15-alpine              0.0s
- => CACHED [1/5] FROM docker.io/library/golang:1.15-alpine                         0.0s
- => [internal] load build context                                                  0.0s
- => => transferring context: 5.75kB                                                0.0s
- => [2/5] WORKDIR /app                                                             0.0s
- => [3/5] COPY [go.mod, go.sum, ./]                                                0.0s
- => [4/5] RUN go mod download                                                     14.7s
- => [5/5] COPY . .                                                                 0.0s
- => exporting to image                                                             0.5s
- => => exporting layers                                                            0.5s
- => => writing image sha256:94a23bb01d3d00f1866efc1be139785e9c3e83f1363df7dc63d41457b8a06423  0.0s
- => => naming to docker.io/library/go-docker                                       0.0s
+[+] Building 3.6s (12/12) FINISHED
+ => [internal] load build definition from Dockerfile                                      0.1s
+ => => transferring dockerfile: 38B                                                       0.0s
+ => [internal] load .dockerignore                                                         0.1s
+ => => transferring context: 2B                                                           0.0s
+ => [internal] load metadata for docker.io/library/golang:1.16-alpine                     3.0s
+ => [1/7] FROM docker.io/library/golang:1.16-alpine@sha256:49c07aa83790aca732250c2258b59  0.0s
+ => => resolve docker.io/library/golang:1.16-alpine@sha256:49c07aa83790aca732250c2258b59  0.0s
+ => [internal] load build context                                                         0.1s
+ => => transferring context: 114B                                                         0.0s
+ => CACHED [2/7] WORKDIR /app                                                             0.0s
+ => CACHED [3/7] COPY go.mod .                                                            0.0s
+ => CACHED [4/7] COPY go.sum .                                                            0.0s
+ => CACHED [5/7] RUN go mod download                                                      0.0s
+ => CACHED [6/7] COPY *.go .                                                              0.0s
+ => CACHED [7/7] RUN go build -o /docker-gs-ping                                          0.0s
+ => exporting to image                                                                    0.1s
+ => => exporting layers                                                                   0.0s
+ => => writing image sha256:336a3f164d0f079f2e42cd1d38f24ab9110d47d481f1db7f2a0b0d2859ec  0.0s
+ => => naming to docker.io/library/docker-gs-ping                                         0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 ```
+
+Your exact output will vary, but provided there aren't any errors, you should see the `FINISHED` line in the build output.
 
 ## Viewing local images
 
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](https://www.docker.com/products/docker-desktop){: target="_blank" rel="noopener" class="_"}. Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
+To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](/products/docker-desktop). Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
 
 To list images, simply run the `images` command.
 
 ```shell
 $ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-go-docker           latest              94a23bb01d3d        6 minutes ago       378MB
-golang              1.15-alpine         1463476d8605        5 weeks ago         299MB
 ```
 
-You should see _at least_ two images listed. One for the base image `1.15-alpine` and the other for our image we just build `go-docker:latest`.
+```
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+docker-gs-ping   latest    336a3f164d0f   39 minutes ago   540MB
+postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
+```
+
+Your exact output may vary, but you should see `docker-gs-ping` image with the `latest` tag.
 
 ## Tag images
 
@@ -323,40 +274,106 @@ An image is made up of a manifest and a list of layers. In simple terms, a “ta
 To create a new tag for the image we built above, run the following command.
 
 ```shell
-$ docker tag go-docker:latest go-docker:v1.0.0
+$ docker tag docker-gs-ping:latest docker-gs-ping:v1.0
 ```
 
 The Docker tag command creates a new tag for an image. It does not create a new image. The tag points to the same image and is just another way to reference the image.
 
 Now run the `docker images` command to see a list of our local images.
 
-```
-$ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-go-docker           v1.0.0              94a23bb01d3d        42 minutes ago      378MB
-go-docker           latest              94a23bb01d3d        6 minutes ago       378MB
-golang              1.15-alpine         1463476d8605        5 weeks ago         299MB
-```
-
-You can see that we have two images that start with `go-docker`. We know they are the same image because if you look at the IMAGE ID column, you can see that the values are the same for the two images.
-
-Let’s remove the tag that we just created. To do this, we’ll use the rmi command. The rmi command stands for “remove image”.
-
-```shell
-$ docker rmi go-docker:v1.0.0
-Untagged: go-docker:v1.0.0
-```
-
-Notice that the response from Docker tells us that the image has not been removed but only “untagged”. Verify this by running the images command.
-
 ```shell
 $ docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-go-docker           latest              94a23bb01d3d        45 minutes ago      378MB
-golang              1.15-alpine         1463476d8605        5 weeks ago         299MB
 ```
 
-Our image that was tagged with `:v1.0.0` has been removed but we still have the `go-docker:latest` tag available on our machine.
+```
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+docker-gs-ping   latest    336a3f164d0f   43 minutes ago   540MB
+docker-gs-ping   v1.0      336a3f164d0f   43 minutes ago   540MB
+postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
+```
+
+You can see that we have two images that start with `docker-gs-ping`. We know they are the same image because if you look at the `IMAGE ID` column, you can see that the values are the same for the two images. This value is a checksum Docker uses internally to identify the image.
+
+Let’s remove the tag that we just created. To do this, we’ll use the `rmi` command. The `rmi` command stands for "remove image".
+
+```shell
+$ docker rmi docker-gs-ping:v1.0
+Untagged: docker-gs-ping:v1.0
+```
+
+Notice that the response from Docker tells us that the image has not been removed but only "untagged". Verify this by running the images command.
+
+```shell
+$ docker images
+```
+
+```
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+docker-gs-ping   latest    336a3f164d0f   45 minutes ago   540MB
+postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
+```
+
+Our image that was tagged with `v1.0` has been removed but we still have the `docker-gs-ping:latest` tag available on our machine.
+
+## Multi-stage builds
+
+You may have noticed that our `docker-gs-ping` image stands at 540MB, which you may think is a lot. You may also be wondering whether our dockerised application still needs the full suite of Go tools, including the compiler, after the application binary had been compiled.
+
+These are legit concerns. Both can be solved by using _multi-stage builds_. The following example is provided with little explanation because this would derail us from our current concerns, but please feel free to explore on your own later.
+
+The `Dockerfile.multistage` in the sample application's repo has the following content.
+
+```dockerfile
+##
+## Build
+##
+
+FROM golang:1.16-buster AS build
+
+WORKDIR /app
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
+COPY *.go .
+
+RUN go build -o /docker-gs-ping
+
+##
+## Deploy
+##
+
+FROM gcr.io/distroless/base-debian10
+
+WORKDIR /
+
+COPY --from=build /docker-gs-ping /docker-gs-ping
+
+EXPOSE 8080
+
+USER nonroot:nonroot
+
+ENTRYPOINT ["/docker-gs-ping"]
+```
+
+The application can be built and tagged with the following.
+
+```shell
+docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
+```
+
+Compare the sizes of `docker-gs-ping:multistage` and `docker-gs-ping:latest` we see an order-of-magnitude difference!
+
+```
+REPOSITORY       TAG          IMAGE ID       CREATED              SIZE
+docker-gs-ping   multistage   e3fdde09f172   About a minute ago   27.1MB
+docker-gs-ping   latest       336a3f164d0f   About an hour ago    540MB
+```
+
+This is due to the fact that ["distroless" base images](https://github.com/GoogleContainerTools/distroless) are very barebones and are meant for lean deployments of static binaries, such as our Go server application.
+
+For more information on multi-stage builds, please feel free to check out [other parts](/develop/develop-images/multistage-build/) of Docker documentation. This is, however, not essential for our progress here, so we'll leave it at that.
 
 ## Next steps
 
