@@ -11,11 +11,26 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-## Docker Desktop 3.3.2
-2021-05-03
+## Docker Desktop 3.3.3
+2021-05-05
 
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+## Upgrades
+
+- [Snyk v1.563.0](https://github.com/snyk/snyk/releases/tag/v1.563.0)
+- [Docker Scan v0.8.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.8.0)
+
+## Bug fixes and minor changes
+
+- Fixed the diagnostics failing to upload from the Troubleshoot screen.
+
+## Docker Desktop 3.3.2
+2021-05-03
+
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 
 ## Upgrades
 
