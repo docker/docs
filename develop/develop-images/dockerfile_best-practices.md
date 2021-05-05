@@ -40,7 +40,7 @@ Each instruction creates one layer:
 When you run an image and generate a container, you add a new _writable layer_
 (the "container layer") on top of the underlying layers. All changes made to
 the running container, such as writing new files, modifying existing files, and
-deleting files, are written to this thin writable container layer.
+deleting files, are written to this writable container layer.
 
 For more on image layers (and how Docker builds and stores images), see
 [About storage drivers](../../storage/storagedriver/index.md).
