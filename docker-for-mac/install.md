@@ -89,13 +89,9 @@ Congratulations! You are now successfully running Docker Desktop.
 If you would like to rerun the tutorial, go to the Docker Desktop menu 
 and select **Learn**.
 
-## Automatic updates
+## Updates
 
-Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
-
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. You can start downloading the update in the background whenever it is convenient for you.
-
-After downloading the update, all you need to do is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+{% include desktop-update.md %}
 
 ## Uninstall Docker Desktop
 
@@ -105,7 +101,7 @@ To uninstall Docker Desktop from your Mac:
 2. Click **Uninstall** to confirm your selection.
 
 > **Important**
-> 
+>
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker related data local to the machine, and removes the files generated
 > by the application. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
