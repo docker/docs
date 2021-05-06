@@ -99,16 +99,16 @@ There are two ways to use your new ACI context. You can use the `--context` flag
 docker --context myacicontext run -p 80:80 nginx
 ```
 
-Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an ngnix container:
+Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an Nginx container:
 
 ```console
 docker context use myacicontext
-docker run -p 80:80 nginx
+docker run -p 80:80 Nginx
 ```
 
 After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
 
-In the case of the demonstration nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the nginx welcome page by browsing `http://52.154.202.35`.
+In the case of the demonstration Nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the Nginx welcome page by browsing `http://52.154.202.35`.
 
 To view logs from your container, run:
 
