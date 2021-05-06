@@ -134,7 +134,7 @@ testuser:231072:65536
 > **Note**
 >
 > If the system-wide Docker daemon is already running, consider disabling it:
-> `$ sudo systemctl disable --now docker.service`
+> `$ sudo systemctl disable --now docker.service docker.socket`
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#install-with-packages">With packages (RPM/DEB)</a></li>
