@@ -12,7 +12,7 @@ toc_max: 2
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
 ## Docker Desktop 3.3.3
-2021-05-05
+2021-05-06
 
 > [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 
