@@ -98,8 +98,7 @@ services:
     build:
       context: .
     ports:
-      - 8000:8000
-      - 8080:8080
+      - "8000:8000"
     environment:
       - SERVER_PORT=8080
       - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
@@ -110,7 +109,7 @@ services:
   mysqlserver:
     image: mysql:8.0.23
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
