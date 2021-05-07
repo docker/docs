@@ -99,7 +99,6 @@ services:
       context: .
     ports:
       - 8000:8000
-      - 8080:8080
     environment:
       - SERVER_PORT=8080
       - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
