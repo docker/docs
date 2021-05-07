@@ -10,11 +10,9 @@ cname:
 - docker app inspect
 - docker app install
 - docker app list
-- docker app merge
 - docker app pull
 - docker app push
 - docker app render
-- docker app split
 - docker app status
 - docker app uninstall
 - docker app upgrade
@@ -27,11 +25,9 @@ clink:
 - docker_app_inspect.yaml
 - docker_app_install.yaml
 - docker_app_list.yaml
-- docker_app_merge.yaml
 - docker_app_pull.yaml
 - docker_app_push.yaml
 - docker_app_render.yaml
-- docker_app_split.yaml
 - docker_app_status.yaml
 - docker_app_uninstall.yaml
 - docker_app_upgrade.yaml
@@ -42,4 +38,3 @@ experimental: false
 experimentalcli: true
 kubernetes: false
 swarm: false
-

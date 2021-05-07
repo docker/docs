@@ -424,16 +424,12 @@ reference:
           title: docker app install
         - path: /engine/reference/commandline/app_list/
           title: docker app list
-        - path: /engine/reference/commandline/app_merge/
-          title: docker app merge
         - path: /engine/reference/commandline/app_pull/
           title: docker app pull
         - path: /engine/reference/commandline/app_push/
           title: docker app push
         - path: /engine/reference/commandline/app_render/
           title: docker app render
-        - path: /engine/reference/commandline/app_split/
-          title: docker app split
         - path: /engine/reference/commandline/app_status/
           title: docker app status
         - path: /engine/reference/commandline/app_uninstall/
