@@ -21,7 +21,7 @@ func TestRespondsWithLove(t *testing.T) {
 	pool, err := dockertest.NewPool("")
 	require.NoError(t, err, "could not connect to Docker")
 
-	resource, err := pool.Run("docker-gs-ping", "test", []string{})
+	resource, err := pool.Run("docker-gs-ping", "latest", []string{})
 	require.NoError(t, err, "could not start container")
 
 	t.Cleanup(func() {
