@@ -136,6 +136,7 @@ ofr@NEON:~$
 
 Now that we have started and configured the database engine, let’s update `main.go` to use it and not an in-memory data store.
 
+{% raw %}
 ```go
 package main
 
@@ -261,6 +262,7 @@ func addEntry(db *sql.DB, c echo.Context) error {
 	return c.JSON(http.StatusOK, e)
 }
 ```
+{% endraw %}
 
 Depending on the IDE you use, you might need to `go get` the modules imported in `main.go`:
 
@@ -437,10 +439,6 @@ You should receive the following response:
 ```json
 {"Status":"OK"}
 ```
-
-## TODO
-
-TODO Two-stage build (no Go compiler present in the final image, only the app binary)
 
 ## Things we didn't cover
 

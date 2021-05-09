@@ -14,6 +14,7 @@ Testing is an essential part of modern software development. Yet, testing can me
 
 Each test is going to test a single business requirement for our sample application. The following is an example of a test, taken from `main_test.go` in our sample application.
 
+{% raw %}
 ```go
 func TestRespondsWithLove(t *testing.T) {
 
@@ -49,10 +50,14 @@ func TestRespondsWithLove(t *testing.T) {
 	require.Contains(t, string(body), "<3", "does not respond with love?")
 }
 ```
+{% endraw %}
 
-As you can see, the test is using `ory/dockertest` library and it assumes that the Docker instance is running on the same machine where the test is being run.
+As you can see, 
 
-The second test is very similar in nature but it is testing another business requirement of our application. You are welcome to have a look in `main_test.go`.
+* the test is using [`ory/dockertest`](https://github.com/ory/dockertest) Go module;
+* the test assumes that the Docker engine instance is running on the same machine where the test is being run.
+
+The second test in `main_test.go` has almost identical structure but it tests _another_ business requirement of our application. You are welcome to have a look at all available tests in [`docker-gs-ping/main_test.go`](https://github.com/olliefr/docker-gs-ping/blob/main/main_test.go).
 
 ## Running locally
 

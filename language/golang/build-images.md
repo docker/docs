@@ -170,7 +170,7 @@ COPY *.go .
 
 This `COPY` command uses a wildcard to copy all files with `.go` extension located in the current directory into the image. 
 
-Now, we would like to compile our application. To that end, we use the familiar `RUN` command.
+Now, we would like to compile our application. To that end, we use the familiar `RUN` command:
 
 ```dockerfile
 RUN go build -o /docker-gs-ping
@@ -180,13 +180,13 @@ This should be familiar. The result of that command will be a static application
 
 Now, all that is left to do is to tell Docker what command to execute when our image is used to start a container. 
 
-We do this with the `CMD` command.
+We do this with the `CMD` command:
 
 ```dockerfile
 CMD [ "/docker-gs-ping" ]
 ```
 
-Here's the complete `Dockerfile`. The file in the repository that you cloned may also contain comments. They always begin with a `#` symbol and make no difference to Docker. The comments are there for the convenience of humans tasked to maintain the `Dockerfile`.
+Here's the complete `Dockerfile`:
 
 ```dockerfile
 FROM golang:1.16-alpine
@@ -206,7 +206,23 @@ EXPOSE 8080
 CMD [ "/docker-gs-ping" ]
 ```
 
-You can also find this `Dockerfile` for this part in [go-docker](https://github.com/olliefr/go-docker) repo.
+The `Dockerfile` from the []() repository that we cloned in the beginning of this chapter may also contain _comments_. They always begin with a `#` symbol and make no difference to Docker. The comments are there for the convenience of humans tasked to maintain the `Dockerfile`:
+
+```dockerfile
+# Alpine is chosen for its small footprint
+# compared to Ubuntu
+FROM golang:1.16-alpine
+
+WORKDIR /app
+
+# Download necessary Go modules
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
+# ... the rest of the Dockerfile is ...
+# ...   omitted from this example   ...
+```
 
 ## Build the image
 
