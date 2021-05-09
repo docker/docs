@@ -38,7 +38,7 @@ The source code for the application is in the [olliefr/docker-gs-ping](https://g
 For our present study, we clone it to our local machine:
 
 ```shell
-$ git clone github.com/olliefr/docker-gs-ping
+$ git clone https://github.com/olliefr/docker-gs-ping
 ```
 
 The application's `main.go` file is fairly straightforward, if you are familiar with Go:
@@ -206,7 +206,7 @@ EXPOSE 8080
 CMD [ "/docker-gs-ping" ]
 ```
 
-The `Dockerfile` from the []() repository that we cloned in the beginning of this chapter may also contain _comments_. They always begin with a `#` symbol and make no difference to Docker. The comments are there for the convenience of humans tasked to maintain the `Dockerfile`:
+The `Dockerfile` may also contain _comments_. They always begin with a `#` symbol and make no difference to Docker. The comments are there for the convenience of humans tasked to maintain the `Dockerfile`:
 
 ```dockerfile
 # Alpine is chosen for its small footprint

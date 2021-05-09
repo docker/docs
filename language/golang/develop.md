@@ -304,8 +304,8 @@ Let’s test that our application is connected to the database and is able to sa
 
 ```shell
 $ curl --request POST \
-  --url http://localhost:8000/add
-  --header 'content-type: application/json'
+  --url http://localhost:8000/add \
+  --header 'content-type: application/json' \
   --data '{"key": "name", "value": "Docker"}'
 ```
 
@@ -431,7 +431,7 @@ TODO add link to pruning tutorial?
 Now let’s test our API endpoint. Run the following curl command.
 
 ```shell
-$ curl --request GET --url http://localhost:8080/
+$ curl --request GET --url http://localhost:8000/
 ```
 
 You should receive the following response:
