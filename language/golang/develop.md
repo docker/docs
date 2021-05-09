@@ -14,42 +14,51 @@ Work through the steps to build an image and run it as a containerized applicati
 
 ## Introduction
 
-In this module, we’ll walk through connecting a database to the application we built in the previous modules. The database will run in its own container with Docker providing a link between that container and the container in which our Go application is running. We’ll then learn how to use Docker Compose to manage such multi-container local development environments effectively.
+In this module, we’ll walk through connecting a database to the _extended version_ of the example application from the previous modules. The database will run in its own container with Docker providing the link between that container and the container in which our example application is running. We’ll then learn how to use Docker Compose to manage such multi-container local development environments effectively.
 
 ## Local database and containers
 
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll also take a look at connecting to a running container to run some commands _inside_ a container.
+First, we’ll take a look at running a database engine in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Docker _compose file_ which will allow us to setup and run a local development environment with a single command. Finally, we’ll also take a look at connecting to a running container to run some commands _inside_ a container.
 
 The database engine we are going to use is called [CockroachDB](https://www.cockroachlabs.com/product/). It's a modern, Cloud-native, distributed SQL database.
 
-Instead of downloading CockroachDB, installing, configuring and then running it using the operating system's native package manager, we can use the Docker Official Image for CockroachDB and run it in a container.
+Instead of downloading CockroachDB, installing, configuring, and then running it using the operating system's native package manager, we can use the [Docker image for CockroachDB](https://hub.docker.com/r/cockroachdb/cockroach) and run it in a container.
 
 ### Storage 
 
-Before we run CockroachDB in a container, we want to create a volume that Docker can manage to store our persistent data and configuration. Let’s create a managed volume now.
+Before we run CockroachDB in a container, we are going to to create a _volume_ that Docker can manage to store our persistent data and configuration. Let’s create a managed volume now:
 
 ```shell
 $ docker volume create roach1
+roach1
 ```
 
-You can view a list of all managed volumes in your Docker instance with the following command.
+You can view a list of all managed volumes in your Docker instance with the following command:
 
 ```shell
 $ docker volume list
+DRIVER    VOLUME NAME
+local     roach1
 ```
 
 ### Networking
 
-Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and provides us with a DNS lookup service which we can use when creating our database connection string.
+Now we’ll create a network that our application and database will use to talk with each other. There are different types of network configurations possible, we are going to use what is called a user-defined _bridge network_. It would provide us with a DNS lookup service which we can use when creating our database connection string.
 
 ```shell
-$ docker network create -d bridge godockernet
+$ docker network create -d bridge mynet
+51344edd6430b5acd121822cacc99f8bc39be63dd125a3b3cd517b6485ab7709
 ```
 
 As it was the case with the managed volumes, there is a command to list all networks set up in your Docker instance.
 
 ```shell
 $ docker network list
+NETWORK ID     NAME          DRIVER    SCOPE
+0ac2b1819fa4   bridge        bridge    local
+51344edd6430   mynet         bridge    local
+daed20bbecce   host          host      local
+6aee44f40a39   none          null      local
 ```
 
 Note, that although we've named our managed volume `roach` and the name `godockernet` was given to a network which is going to link the database container to the application container, both names are arbitrary and we could have named them however we wanted. It's useful though to choose a name which is indicative of the intended purpose.
@@ -62,243 +71,284 @@ Now we can run CockroachDB in a container and attach to the volume and network w
 $ docker run -d \
   --name roach1 \
   --hostname roach1 \
-  --network godockernet \
+  --network mynet \
   -p 26257:26257 -p 8080:8080 \
   -v roach1:/cockroach/cockroach-data \
   cockroachdb/cockroach:v20.2.5 start-single-node \
   --insecure
+
+# ... output omitted ...
 ```
 
 ### Configure the database engine
 
-Now that the database engine is live, we can start the built-in SQL shell in the _same_ container where it is running.
+Now that the database engine is live, there is some housekeeping to do before we can begin using it. Fortunately, it's not a lot. We must:
+
+1. Create a blank database.
+2. Register a new user account with the database engine.
+3. Grant that new user access rights to the database.
+
+We can do that with the help of CockroachDB built-in SQL shell. To start the SQL shell in the _same_ container where the database engine is running, type:
 
 ```shell
 $ docker exec -it roach1 ./cockroach sql --insecure
 ```
 
-1. In the SQL shell, create the database that our application will use:
+1. In the SQL shell, create the database that our example application is going to use:
 
    ```sql
-   CREATE DATABASE godocker;
+   CREATE DATABASE mydb;
    ```
 
-2. Create a SQL user for our application:
+2. Register a new SQL user account with the database engine. We pick the username `totoro`.
 
    ```sql
-   CREATE USER <username>;
+   CREATE USER totoro;
    ```
-   
-   Take a note of the username. We will use it in our application code later.
 
-3. Give the user the necessary permissions:
+3. Give the new user the necessary permissions:
    
    ```sql
-   GRANT ALL ON DATABASE godocker TO <username>;
+   GRANT ALL ON DATABASE mydb TO totoro;
    ```
 
-You can type `quit` to exit the shell. 
+4. Type `quit` to exit the shell. 
 
-An example interaction with SQL shell is quoted below.
+An example interaction with the SQL shell is presented below.
 
-```sql
-ofr@NEON:~$ docker exec -it roach1 ./cockroach sql --insecure
+{% raw %}
+```
+ofr@hki:~/docker-gs-ping-roach$ sudo docker exec -it roach1 ./cockroach sql --insecure
 #
 # Welcome to the CockroachDB SQL shell.
 # All statements must be terminated by a semicolon.
 # To exit, type: \q.
 #
 # Server version: CockroachDB CCL v20.2.5 (x86_64-unknown-linux-gnu, built 2021/02/16 12:52:58, go1.13.14) (same version as client)
-# Cluster ID: 42125797-c8d5-4542-9281-18473783abdc
+# Cluster ID: 6819a1fc-9da9-48d9-a87f-2b916f0dd0f7
 #
 # Enter \? for a brief introduction.
 #
-root@:26257/defaultdb> CREATE DATABASE godocker;
+root@:26257/defaultdb> CREATE DATABASE mydb;
 CREATE DATABASE
 
-Time: 83ms total (execution 83ms / network 0ms)
+Time: 22ms total (execution 22ms / network 0ms)
 
-root@:26257/defaultdb> create user wumpus;
+root@:26257/defaultdb> CREATE USER totoro;
 CREATE ROLE
 
-Time: 39ms total (execution 39ms / network 0ms)
+Time: 15ms total (execution 15ms / network 0ms)
 
-root@:26257/defaultdb> GRANT ALL ON DATABASE godocker TO wumpus;
+root@:26257/defaultdb> GRANT ALL ON DATABASE mydb TO totoro;
 GRANT
 
-Time: 161ms total (execution 66ms / network 95ms)
+Time: 57ms total (execution 21ms / network 36ms)
 
 root@:26257/defaultdb> quit
-ofr@NEON:~$
+ofr@hki:~/docker-gs-ping-roach$
 ```
+{% endraw %}
 
 ### Update the application
 
-Now that we have started and configured the database engine, let’s update `main.go` to use it and not an in-memory data store.
+Now that we have started and configured the database engine, we can swith our attention to the application. 
+
+The example application for this module is an extended version of `docker-gs-ping` application we've used in the previous modules. You have two options:
+
+* You can update your local copy of `docker-gs-ping` to match the new extended version presented in this chapter; or
+* You can clone the [olliefr/docker-gs-ping-roach](https://github.com/olliefr/docker-gs-ping-roach) repo. This latter approach is recommended.
+
+To checkout the example application, run:
+
+```shell
+$ git clone https://github.com/olliefr/docker-gs-ping-roach.git
+# ... output omitted ...
+```
+
+The application's `main.go` now includes database initialisation code, as well as the code to implement a new business requirement:
+
+* An HTTP `POST` request to `/send` containing a `{ "value" : string }` JSON must save the value to the database.
+
+We also have an update for another business requirement. The requirement _was_:
+
+* It responds with a text message containing a heart symbol ("`<3`") on requests to `/`.
+
+And _now_ it's going to be:
+
+* It responds with a text message containing a heart symbol ("`<3`") on requests to `/`, preceded by the count of messages, stored in the database, enclosed in the parentheses. Example output: `Hello, Docker! (7) <3`
+
+This is the full text of the `main.go` file:
 
 {% raw %}
 ```go
 package main
 
 import (
+	"context"
+	"database/sql"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
-	"context"
-	"database/sql"
-	"log"
-
-	"github.com/cockroachdb/cockroach-go/crdb"
-	_ "github.com/lib/pq"
-
+	"github.com/cockroachdb/cockroach-go/v2/crdb"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-// Entry is a single key-value pair
-type Entry struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
-}
-
 func main() {
 
-	// Read the connection parameters from environment variables,
-	// following the Twelve-Factor App philosophy: https://12factor.net/
-	username := os.Getenv("PGUSER")
-	password := os.Getenv("PGPASSWORD")
-	hostname := os.Getenv("PGHOST")
-	port := os.Getenv("PGPORT")
-	database := os.Getenv("PGDATABASE")
-
-	// Build the connection string
-	connString := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
-		username, password, hostname, port, database)
-
-	// Initialise the store
-	db, err := sql.Open("postgres", connString)
-	if err != nil {
-		log.Fatal("error connecting to the database: ", err)
-	}
-	defer db.Close()
-
-	// Create the table to store key-value pairs
-	if _, err := db.Exec(
-		"CREATE TABLE IF NOT EXISTS store (key STRING PRIMARY KEY, value STRING)"); err != nil {
-		log.Fatal(err)
-	}
-
-	// Initialise the router
 	e := echo.New()
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	// Configure the routes
+	db, err := initStore()
+	if err != nil {
+		log.Fatalf("failed to initialise the store: %s", err)
+	}
+	defer db.Close()
+
 	e.GET("/", func(c echo.Context) error {
+		return rootHandler(db, c)
+	})
+
+	e.GET("/ping", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
 	})
-	e.GET("/list", func(c echo.Context) error {
-		return listEntries(db, c)
-	})
-	e.POST("/add", func(c echo.Context) error {
-		return addEntry(db, c)
+
+	e.POST("/send", func(c echo.Context) error {
+		return sendHandler(db, c)
 	})
 
-	// Blast off!
-	port = os.Getenv("GODOCKER_PORT")
-	if port == "" {
-		port = "8000"
+	httpPort := os.Getenv("HTTP_PORT")
+	if httpPort == "" {
+		httpPort = "8080"
 	}
-	e.Logger.Fatal(e.Start(":" + port))
+
+	e.Logger.Fatal(e.Start(":" + httpPort))
 }
 
-// listEntries returns a full copy of the store in JSON format to the client.
-func listEntries(db *sql.DB, c echo.Context) error {
+type Message struct {
+	Value string `json:"value"`
+}
 
-	rows, err := db.Query("SELECT key, value FROM store")
+func initStore() (*sql.DB, error) {
+
+	pgConnString := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=disable",
+		os.Getenv("PGHOST"),
+		os.Getenv("PGPORT"),
+		os.Getenv("PGDATABASE"),
+		os.Getenv("PGUSER"),
+		os.Getenv("PGPASSWORD"),
+	)
+
+	db, err := sql.Open("postgres", pgConnString)
 	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-
-	// Temporary storage for the values read from the DB
-	store := map[string]string{}
-
-	for rows.Next() {
-		var key, value string
-		if err := rows.Scan(&key, &value); err != nil {
-			log.Fatal(err)
-		}
-		store[key] = value
+		return nil, err
 	}
 
-	return c.JSON(http.StatusOK, store)
+	if _, err := db.Exec(
+		"CREATE TABLE IF NOT EXISTS message (value STRING PRIMARY KEY)"); err != nil {
+		return nil, err
+	}
+
+	return db, nil
 }
 
-// addEntry adds a new entry to the key-value store
-// and returns the value in JSON format to the client.
-func addEntry(db *sql.DB, c echo.Context) error {
+func rootHandler(db *sql.DB, c echo.Context) error {
+	r, err := countRecords(db)
+	if err != nil {
+		return c.HTML(http.StatusInternalServerError, err.Error())
+	}
+	return c.HTML(http.StatusOK, fmt.Sprintf("Hello, Docker! (%d) <3", r))
+}
 
-	e := new(Entry)
-	if err := c.Bind(e); err != nil {
-		return err
+func sendHandler(db *sql.DB, c echo.Context) error {
+
+	m := &Message{}
+
+	if err := c.Bind(m); err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	err := crdb.ExecuteTx(context.Background(), db, nil, func(tx *sql.Tx) error {
-		if _, err := tx.Exec(
-			"INSERT INTO store (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = excluded.value",
-			e.Key, e.Value); err != nil {
-			return err
-		}
-		return nil
-	})
+	err := crdb.ExecuteTx(context.Background(), db, nil,
+		func(tx *sql.Tx) error {
+			_, err := tx.Exec(
+				"INSERT INTO message (value) VALUES ($1) ON CONFLICT (value) DO UPDATE SET value = excluded.value",
+				m.Value,
+			)
+			if err != nil {
+				return c.JSON(http.StatusInternalServerError, err)
+			}
+			return nil
+		})
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
 
-	return c.JSON(http.StatusOK, e)
+	return c.JSON(http.StatusOK, m)
+}
+
+func countRecords(db *sql.DB) (int, error) {
+
+	rows, err := db.Query("SELECT COUNT(*) FROM message")
+	if err != nil {
+		return 0, err
+	}
+	defer rows.Close()
+
+	count := 0
+	for rows.Next() {
+		if err := rows.Scan(&count); err != nil {
+			return 0, err
+		}
+		rows.Close()
+	}
+
+	return count, nil
 }
 ```
 {% endraw %}
 
-Depending on the IDE you use, you might need to `go get` the modules imported in `main.go`:
+The repository also includes the `Dockerfile`, which is almost exactly the same as the multi-stage `Dockerfile` introduced in the previous modules.
 
-```shell
-$ go get github.com/cockroachdb/cockroach-go/crdb
-$ go get github.com/lib/pq
-```
-
-Since our application source code has been updated, we now need to rebuild our Docker image to reflect these changes.
+Regardless of whether we had updated the old example application, or checked out the new one, a new Docker image has to be built to reflect the changes to the application's source code.
 
 ### Build the application
 
-We can build an updated image with the following command.
+We can build the image with the familiar `build` command:
 
 ```shell
-$ docker build --tag go-docker .
+$ docker build --tag docker-gs-ping-roach .
 ```
 
 ### Run the application
 
-Now, let’s run our container. But this time we’ll need to set quite a few environment variables so that our application could make the connection string necessary to access the database. We’ll do this right in the `docker run` command.
+Now, let’s run our container. This time we’ll need to set some environment variables so that our application would know how to access the database. For now, we’ll do this right in the `docker run` command. Later we will see a more convenient method with Docker Compose.
 
-Note, that in the following command the value of `PGUSER` must be set to the same value that you had picked before for the _Configure the database engine_ section. In our example, we use the value of `wumpus`.
+> **Note**
+>
+> Since we are running our CockroachDB cluster in "insecure" mode, the value for the password can be anything. 
+> 
+> **Don't run in insecure mode in production, though!**
 
 ```shell
 $ docker run \
   -it --rm -d \
-  --network godockernet \
+  --network mynet \
   --name rest-server \
-  -p 8000:8000 \
-  -e PGUSER=wumpus -e PGPASSWORD=passwd9 \
-  -e PGHOST=roach1 -e PGPORT=26257 -e PGDATABASE=godocker \
-  go-docker
+  -p 80:8080 \
+  -e PGUSER=totoro \
+  -e PGPASSWORD=myfriend \
+  -e PGHOST=roach1 \
+  -e PGPORT=26257 \
+  -e PGDATABASE=mydb \
+  docker-gs-ping-roach
 ```
 
-### Testing the application
+### Test the application
 
 Let’s test that our application is connected to the database and is able to save key-value pairs. We'll reuse the test input from the [Build your Go image](build-images.md) section:
 
@@ -314,6 +364,18 @@ You should receive the following json back from our service.
 ```json
 {"name":"Docker"}
 ```
+
+## Wind down everything
+
+Remember, that we are running CockroachDB in "insecure" mode. Now that we had built and tested our application, it's time to wind everything down before moving on. You can list the containers that you are running with the `list` command:
+
+```shell
+$ docker container list
+```
+
+Now that you know the container IDs, you can use `docker container stop` and `docker container rm`, as demonstrated in the previous modules.
+
+Please make sure that you stop the CockroachDB and `docker-gs-ping-roach` containers before moving on.
 
 ## Use Compose to develop locally
 
