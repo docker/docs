@@ -184,8 +184,8 @@ services:
   # ...
 networks:
   default:
-    external:
-      name: my-pre-existing-network
+    external: true
+    name: my-pre-existing-network
 ```
 
 Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connect your app's containers to it.
