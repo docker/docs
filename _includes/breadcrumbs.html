@@ -1,0 +1,107 @@
+{%- comment -%}
+Yet-another hacky way to do things with Liquid
+
+This include constructs breadcrumbs for the page; breadcrumbs are based on the
+page's location in the TOC (_data/toc.yaml). To get the "parent" TOC entries
+for the current page, we:
+
+    - iterate through each of the main sections / categories in the TOC (home, guides,
+      product manuals, reference, samples)
+    - in each section, we iterate throught pages and sections. "sections" do not
+      have URLs ("path") of their own, but can contain pages and sub-sections.
+      Liquid doesn't allow us to "recursively" iterate through these, so we added
+      code for each nested level (currently accounting for pages to be nested up to
+      4 levels deep)
+    - If the item we're checking is a page (i.e., has a "path" property), and the
+      "path" matches the current page, then we found our "breadcrumb path"; in this
+      case we store the parent elements into variables (levelX_title, levelX_url).
+      Liquid doesn't seem to like storing the whole struct into a variable (we can
+      *store* it in a variable, but the "path" property ends up empty). We also have
+      to "assign" inside the level-block; likely because variables assigned in the
+      previous block gets out of scope.
+    - Because (as mentioned) "sections" themselves currently do not have their own
+      URL, we don't have a real "parent" URL, so we're using the _first_ page at
+      each level as the "closest match". In some cases, a section does not contain
+      pages (only subsections); in those cases, our breadcrumbs will contain "titles"
+      for parent locations, but no link. (This is something we need to fix: make
+      sure that each section has a landing-page, and possibly add a "path" field
+      to sections (containing the landing page of the section).
+{%- endcomment -%}
+{%- for section in site.data.toc.horizontalnav -%}
+    {%- for level1 in site.data.toc[section.node] -%}
+        {%- if level1.path == page.url -%}
+            {%- assign found = "true" -%}
+            {%- assign section_title = section.title -%}
+            {%- assign section_url   = section.path -%}
+            {%- assign level1_title  = level1.title -%}
+            {%- assign level1_url    = level1.path -%}
+            {%- break -%}
+        {%- endif -%}
+        {%- for level2 in level1.section -%}
+            {%- if level2.path == page.url -%}
+                {%- assign found = "true" -%}
+                {%- assign section_title = section.title -%}
+                {%- assign section_url   = section.path -%}
+                {%- assign level1_title  = level1.sectiontitle -%}
+                {%- assign level1_url    = level1.section[0].path -%}
+                {%- assign level2_title  = level2.title -%}
+                {%- assign level2_url    = level2.path -%}
+                {%- break -%}
+            {%- endif -%}
+            {%- for level3 in level2.section -%}
+                {%- if level3.path == page.url -%}
+                    {%- assign found = "true" -%}
+                    {%- assign section_title = section.title -%}
+                    {%- assign section_url   = section.path -%}
+                    {%- assign level1_title  = level1.sectiontitle -%}
+                    {%- assign level1_url    = level1.section[0].path -%}
+                    {%- assign level2_title  = level2.sectiontitle -%}
+                    {%- assign level2_url    = level2.section[0].path -%}
+                    {%- assign level3_title  = level3.title -%}
+                    {%- assign level3_url    = level3.path -%}
+                    {%- break -%}
+                {%- endif -%}
+                {%- for level4 in level3.section -%}
+                    {%- if level4.path == page.url -%}
+                        {%- assign found = "true" -%}
+                        {%- assign section_title = section.title -%}
+                        {%- assign section_url   = section.path -%}
+                        {%- assign level1_title  = level1.sectiontitle -%}
+                        {%- assign level1_url    = level1.section[0].path -%}
+                        {%- assign level2_title  = level2.sectiontitle -%}
+                        {%- assign level2_url    = level2.section[0].path -%}
+                        {%- assign level3_title  = level3.sectiontitle -%}
+                        {%- assign level3_url    = level3.section[0].path -%}
+                        {%- assign level4_title  = level4.title -%}
+                        {%- assign level4_url    = level4.path -%}
+                        {%- break -%}
+                    {%- endif -%}
+                {%- endfor -%}
+            {%- endfor -%}
+        {%- endfor -%}
+    {%- endfor -%}
+    {%- comment -%}
+    Some section's overview page are not in the TOC. If we didn't find a matching
+    page in the TOC so far, use the section itself for the breadcrumb.
+    {%- endcomment -%}
+    {%- if section.path == page.url -%}
+        {%- assign found = "true" -%}
+        {%- assign section_title = section.title -%}
+        {%- assign section_url   = section.path -%}
+        {%- break -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- if found == "true" -%}
+<div class="row hidden-sm hidden-xs">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/" title="Docker docs homepage"><i class="fa fa-home"></i></a></li>
+            <li><a href="{{ section_url }}">{{ section_title }}</a></li>
+            {%- if level1_title -%}<li><a {%- if level1_url %} href="{{ level1_url }}"{%- endif -%}>{{ level1_title }}</a></li>{%- endif -%}
+            {%- if level2_title -%}<li><a {%- if level2_url %} href="{{ level2_url }}"{%- endif -%}>{{ level2_title }}</a></li>{%- endif -%}
+            {%- if level3_title -%}<li><a {%- if level3_url %} href="{{ level3_url }}"{%- endif -%}>{{ level3_title }}</a></li>{%- endif -%}
+            {%- if level4_title -%}<li><a {%- if level4_url %} href="{{ level4_url }}"{%- endif -%}>{{ level4_title }}</a></li>{%- endif -%}
+        </ol>
+    </nav>
+</div>
+{%- endif -%}

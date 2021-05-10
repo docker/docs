@@ -46,6 +46,10 @@ body.night {
           }
         }
     }
+    .breadcrumb {
+        background-color: $bg-sidebar-night-active;
+        border-bottom:    0.1px solid $primary-links;
+    }
     .sidebar,
     .col-nav {
         background-color: $bg-sidebar-night;
@@ -54,7 +58,7 @@ body.night {
     .nav-sidebar ul li a.active,
     .nav-sidebar.nav>li>a:focus,
     .toc-nav li a.active {
-        background: #0a151a;
+        background:  $bg-sidebar-night-active;
         border-left: 4px solid $primary-links;
     }
     .tabs li.active a {
