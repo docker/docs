@@ -103,7 +103,7 @@ Or, you can change context using `docker context use` to select the ACI context 
 
 ```console
 docker context use myacicontext
-docker run -p 80:80 Nginx
+docker run -p 80:80 nginx
 ```
 
 After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
