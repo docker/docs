@@ -87,6 +87,8 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 
 For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
 
+{% include eula.md %}
+
 ## Start the tutorial
 
 If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
