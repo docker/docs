@@ -11,6 +11,8 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+{% include eula.md %}
+
 ## Docker Desktop 3.3.3
 2021-05-06
 

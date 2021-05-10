@@ -424,16 +424,12 @@ reference:
           title: docker app install
         - path: /engine/reference/commandline/app_list/
           title: docker app list
-        - path: /engine/reference/commandline/app_merge/
-          title: docker app merge
         - path: /engine/reference/commandline/app_pull/
           title: docker app pull
         - path: /engine/reference/commandline/app_push/
           title: docker app push
         - path: /engine/reference/commandline/app_render/
           title: docker app render
-        - path: /engine/reference/commandline/app_split/
-          title: docker app split
         - path: /engine/reference/commandline/app_status/
           title: docker app status
         - path: /engine/reference/commandline/app_uninstall/
@@ -1290,8 +1286,6 @@ manuals:
       title: Install Docker Desktop for Mac
     - path: /docker-for-mac/
       title: User manual
-    - path: /docker-for-mac/multi-arch/
-      title: Leveraging Multi-CPU architecture support
     - path: /docker-for-mac/networking/
       title: Networking
     - path: /docker-for-mac/space/
@@ -1318,6 +1312,8 @@ manuals:
       title: Docker Desktop WSL 2 backend
   - path: /desktop/dashboard/
     title: Dashboard
+  - path: /desktop/multi-arch/
+    title: Multi-arch support
   - path: /desktop/kubernetes/
     title: Deploy on Kubernetes
   - path: /desktop/faqs/

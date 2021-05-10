@@ -11,7 +11,7 @@ Welcome to Docker Desktop for Windows. This page contains information about Dock
 [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
 .button .primary-btn}
 
-By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
+{% include eula.md %}
 
 ## System requirements
 
@@ -131,13 +131,9 @@ Congratulations! You are now successfully running Docker Desktop on Windows.
 
 If you would like to rerun the tutorial, go to the Docker Desktop menu and select **Learn**.
 
-## Automatic updates
+## Updates
 
-Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
-
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. Whenever convenient, you can start the download of the update in the background.
-
-When the download finishes, all you need to do is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+{% include desktop-update.md %}
 
 ## Uninstall Docker Desktop
 

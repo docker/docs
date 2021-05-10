@@ -16,7 +16,7 @@ Docker Compose **1.27.0+** implements the format defined by the [Compose Specifi
 
 ## Compose and Docker compatibility matrix
 
-There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. The
+There are several versions of the Compose file format – 2, 2.x, and 3.x. The
 table below provides a snapshot of various versions. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
