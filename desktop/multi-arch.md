@@ -2,6 +2,7 @@
 description: Multi-CPU Architecture Support
 keywords: mac, Multi-CPU architecture support
 redirect_from:
+- /docker-for-mac/multi-arch/
 - /mackit/multi-arch/
 title: Leverage multi-CPU architecture support
 notoc: true
@@ -43,7 +44,7 @@ For more information about the Buildx CLI command, see [Buildx](/buildx/working-
 
 1. Click **About Docker Desktop** from the Docker menu and ensure you have installed Docker Desktop version 2.0.4.0 (33772) or higher.
 
-![about-docker-desktop-buildx](./images/desktop-buildx-version.png)
+![about-docker-desktop-buildx](../docker-for-mac/images/desktop-buildx-version.png)
 
 ### Build and run multi-architecture images
 
