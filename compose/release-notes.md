@@ -7,6 +7,15 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.29.2
+(2021-05-10)
+
+### Miscellaneous
+
+- Remove prompt to use `docker compose` in the `up` command
+
+- Bump `py` to `1.10.0` in `requirements-indirect.txt`
+
 ## 1.29.1
 (2021-04-13)
 
