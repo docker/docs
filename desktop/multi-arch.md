@@ -36,16 +36,6 @@ Docker introduces a new CLI command called `buildx`. You can use the `buildx` co
 
 For more information about the Buildx CLI command, see [Buildx](/buildx/working-with-buildx/).
 
-### Install
-
-1. Download the latest version of [Docker Desktop](https://hub.docker.com/editions/community/docker-ce-desktop-mac/).
-
-1. Follow the on-screen instructions to complete the installation process. After you have successfully installed Docker Desktop, you will see the Docker icon in your task tray.
-
-1. Click **About Docker Desktop** from the Docker menu and ensure you have installed Docker Desktop version 2.0.4.0 (33772) or higher.
-
-![about-docker-desktop-buildx](../docker-for-mac/images/desktop-buildx-version.png)
-
 ### Build and run multi-architecture images
 
 Run the command `docker buildx ls` to list the existing builders. This displays the default builder, which is our old builder.
