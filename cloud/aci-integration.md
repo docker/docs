@@ -102,7 +102,7 @@ docker --context myacicontext run -p 80:80 nginx
 Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an Nginx container:
 
 ```console
-docker context use myacicontext
+$ docker context use myacicontext
 docker run -p 80:80 nginx
 ```
 
