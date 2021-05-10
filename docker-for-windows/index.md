@@ -265,7 +265,7 @@ Server: Docker Engine - Community
 >
 > The Kubernetes tab is not available in Windows container mode.
 
-Docker Desktop includes a standalone Kubernetes server that runs on your Windows machince, so
+Docker Desktop includes a standalone Kubernetes server that runs on your Windows machine, so
 that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
 For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
