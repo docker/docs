@@ -19,7 +19,7 @@ optionally communicate using SSH or a TLS (HTTPS) socket.
 > remote machine. Refer to [manage Docker as a non-root user](../../install/linux-postinstall/#manage-docker-as-a-non-root-user)
 > to learn how to give a non-root user access to the docker socket.
 
-The following example creates a [`docker context`](../../context/working-with-contexts.md)
+The following example creates a [`docker context`](../../context/working-with-contexts/)
 to connect with a remote `dockerd` daemon on `host1.example.com` using SSH, and
 as the `docker-user` user on the remote machine:
 
