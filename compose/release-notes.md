@@ -12,7 +12,7 @@ redirect_from:
 
 ### Miscellaneous
 
-- Removed the prompt to use `docker compose` in the `up` command
+- Removed the prompt to use `docker compose` in the `up` command.
 
 - Bumped `py` to `1.10.0` in `requirements-indirect.txt`.
 
