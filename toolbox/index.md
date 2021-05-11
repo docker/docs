@@ -4,82 +4,34 @@ keywords: windows, alpha, beta, toolbox, docker-machine, tutorial
 sitemap: false
 title: Docker Toolbox
 redirect_from:
-- /toolbox/
+- /docker-for-mac/docker-toolbox/
+- /docker-for-windows/docker-toolbox/
+- /mackit/docker-toolbox/
+- /toolbox/faqs/
+- /toolbox/faqs/troubleshoot/
 - /toolbox/overview/
 - /toolbox/toolbox_install_mac/
 - /toolbox/toolbox_install_windows/
-- /toolbox/faqs/
-- /toolbox/faqs/troubleshoot/
-- /docker-for-mac/docker-toolbox/
 toc_min: 1
 toc_max: 2
 ---
 
 >**Deprecated**
 >
-> Docker Toolbox has been deprecated and is no longer in active development. Please use Docker Desktop instead. See [Docker Desktop for Mac](../docker-for-mac/index.md) and [Docker Desktop for Windows](../docker-for-windows/index.md).
+> Docker Toolbox has been deprecated and is no longer in active development. Please
+> use Docker Desktop instead. See [Docker Desktop for Mac](../docker-for-mac/index.md)
+> and [Docker Desktop for Windows](../docker-for-windows/index.md).
 {: .warning }
 
-This page explains how to migrate your Docker Toolbox disk images to Docker Desktop. It also contains instructions on how to uninstall Docker Toolbox from Mac and Windows machines.
+This page explains how to migrate your Docker Toolbox installation to Docker Desktop.
+It also contains instructions on how to uninstall Docker Toolbox from Mac and Windows machines.
 
-## Migrate from Docker Toolbox to Docker Desktop on Mac
+## Migrate from Docker Toolbox to Docker Desktop
 
-You can migrate existing Docker Toolbox images with the steps described below.
-
-In a terminal, while running Toolbox, use `docker commit` to create an image snapshot
-from a container, for each container you wish to preserve:
-
-```
-$ docker commit nginx
-sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
-```
-
-Next, export each of these images (and any other images you wish to keep):
-
-```
-$ docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
-```
-
-Next, when running Docker Desktop on Mac, reload all these images:
-
-```
-$ docker load -i nginx.tar
-Loaded image ID: sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
-```
-
-Note these steps will not migrate any `docker volume` contents: these must
-be copied across manually.
-
-Finally (optional), if you are done with Docker Toolbox, you can fully
-[uninstall](#uninstall-docker-toolbox-on-windows) Docker Toolbox using the instructions described in the following section.
-
-## Migrate from Docker Toolbox to Docker Desktop on Windows
-
-You can migrate existing Docker Toolbox images with the steps described below.
-
-In a terminal, while running Toolbox, use `docker commit` to create an image snapshot
-from a container, for each container you wish to preserve:
-
-```
-> docker commit nginx
-sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
-```
-
-Next, export each of these images (and any other images you wish to keep):
-
-```
-> docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
-```
-
-Next, when running Docker Desktop on Windows, reload all these images:
-
-```
-> docker load -i nginx.tar
-Loaded image ID: sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
-```
-
-Note these steps will not migrate any `docker volume` contents: these must
-be copied across manually.
+Uninstalling Docker Toolbox will remove your local image cache, volumes, containers,
+and other data stored in Docker. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
+documentation before uninstalling Docker Toolbox, to learn how to back up your
+data.
 
 ## Uninstall Docker Toolbox
 
@@ -87,7 +39,10 @@ Removing Toolbox involves removing all the Docker components it includes.
 
 A full uninstall also includes removing the local and remote machines
 you created with Docker Machine. In some cases, you might want to keep
-machines created with Docker Machine. For example, if you plan to re-install Docker Machine as a part of Docker Desktop, you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove
+machines created with Docker Machine. For example, if you plan to re-install
+Docker Machine as a part of Docker Desktop, you can continue to manage those
+machines through Docker. Or, if you have remote machines on a cloud provider and
+you plan to manage them using the provider, you wouldn't want to remove
 them. So, the step to remove machines is described here as optional.
 
 ### Uninstall Docker Toolbox on Mac
@@ -96,7 +51,7 @@ To uninstall Docker Toolbox on Mac:
 
 1.  List your machines.
 
-    ```
+    ```console
     $ docker-machine ls
     NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
     dev                 *        virtualbox   Running   tcp://192.168.99.100:2376
@@ -106,7 +61,7 @@ To uninstall Docker Toolbox on Mac:
 
 2.  Optionally, remove each machine. For example:
 
-    ```
+    ```console
     $ docker-machine rm my-docker-machine
     Successfully removed my-docker-machine
     ```
@@ -121,7 +76,7 @@ To uninstall Docker Toolbox on Mac:
 
 4.  Run the following in a command shell to fully remove Kitematic:
 
-    ```
+    ```console
     $ rm -fr ~/Library/Application\ Support/Kitematic
     ```
 
@@ -130,7 +85,7 @@ To uninstall Docker Toolbox on Mac:
     installed them; in case of doubt leave them, or reinstall them via Brew, or
     rerun Docker Desktop for Mac (no need to reinstall it).
 
-    ```
+    ```console
     $ rm -f /usr/local/bin/docker
     $ rm -f /usr/local/bin/docker-compose
     $ rm -f /usr/local/bin/docker-machine
@@ -150,7 +105,7 @@ To uninstall Toolbox on Windows:
 
 1.  List your machines.
 
-    ```
+    ```console
     $ docker-machine ls
     NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
     dev                 *        virtualbox   Running   tcp://192.168.99.100:2376
@@ -160,7 +115,7 @@ To uninstall Toolbox on Windows:
 
 2.  Optionally, remove each machine. For example:
 
-    ```
+    ```console
     $ docker-machine rm my-docker-machine
     Successfully removed my-docker-machine
     ```

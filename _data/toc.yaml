@@ -1576,7 +1576,7 @@ manuals:
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
         title: Migrate from Boot2Docker to Machine
-  - path: /docker-for-windows/docker-toolbox/
+  - path: /toolbox/
     title: Docker Toolbox (deprecated)
   - sectiontitle: Kitematic
     section:
@@ -1592,6 +1592,3 @@ manuals:
       title: Frequently asked questions
     - path: /kitematic/known-issues/
       title: Known issues
-    - path: /toolbox/faqs/troubleshoot/
-      title: Troubleshooting
-      nosync: true
