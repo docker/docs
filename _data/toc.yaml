@@ -1390,24 +1390,8 @@ manuals:
       title: Remove seats
     - path: /docker-hub/billing/faq/
       title: Pricing FAQs
-  - sectiontitle: Publisher & certified content
-    section:
-    - path: /docker-hub/publish/
-      title: Overview
-    - path: /docker-hub/publish/publish/
-      title: Submit a product for Docker Hub
-    - path: /docker-hub/publish/customer_faq/
-      title: User FAQs
-    - path: /docker-hub/publish/publisher_faq/
-      title: Publisher FAQs
-    - path: /docker-hub/publish/certify-images/
-      title: Certify images & plugins
-    - path: /docker-hub/publish/certify-plugins-logging/
-      title: Certify logging plugins
-    - path: /docker-hub/publish/trustchain/
-      title: Trust chain
-    - path: /docker-hub/publish/byol/
-      title: Bring Your Own License (BYOL)
+  - path: /docker-hub/publish/
+    title: Publisher & certified content
   - path: /docker-hub/release-notes/
     title: Release notes
 - sectiontitle: Open-source projects
