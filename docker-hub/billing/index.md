@@ -34,7 +34,7 @@ For frequently asked questions about pricing, see [Docker pricing FAQ](https://w
 
 ### Purchase a Pro plan
 
-The following section contains information on how to purchase a Pro plan for new customers. If you are already subscribed to a legacy plan and would like to upgrade to Pro, see [Upgrade to Pro from a legacy plan](upgrade.md#upgrade-to-a-pro-plan).
+The following section contains information on how to purchase a Pro plan for new customers.
 
 To purchase a Pro plan:
 
@@ -56,7 +56,7 @@ To purchase a Pro plan:
 
 ### Purchase a Team plan
 
-The following section contains information on how to purchase a Team plan for new organizations. If you are already subscribed to a legacy plan and would like to upgrade to the Team plan, see [Upgrade to Team from a legacy plan](upgrade.md#upgrade-to-a-team-plan).
+The following section contains information on how to purchase a Team plan for new organizations.
 
 To purchase a Team plan:
 
