@@ -10,7 +10,7 @@ You can upgrade to a Pro or a Team plan from a Free plan, or from your current l
 
 >**Note:**
 >
-If you were previously on a legacy per-repository plan, your plan has been converted to a new Pro or Team monthly plan. For details, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"}.
+If you were previously on a legacy per-repository plan, your plan has been converted to a new Pro or Team monthly plan. For details, see [Pricing FAQ](faq.md).
 
 The following sections contain instructions on how to upgrade to Pro and Team plans.
 
