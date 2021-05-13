@@ -142,7 +142,7 @@ Before we can run `npm install`, we need to get our `package.json` and `package-
 ```dockerfile
 COPY ["package.json", "package-lock.json", "./"]
 ```
-
+Note that, rather than copying the entire working directory, we are only copying the package.json file. This allows us to take advantage of cached Docker layers. bitJudo has a good explanation of this [here](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/).
 Once we have our files inside the image, we can use the `RUN` command to execute the command npm install. This works exactly the same as if we were running npm install locally on our machine, but this time these Node modules will be installed into the `node_modules` directory inside our image.
 
 ```dockerfile
