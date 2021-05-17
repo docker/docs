@@ -10,10 +10,7 @@ You can upgrade to a Pro or a Team plan from a Free plan, or from your current l
 
 >**Note:**
 >
-> - If you are on a legacy per-repository plan, you cannot upgrade to another legacy plan. You can only upgrade your legacy plan to the new Pro or Team monthly plan.
-> - It is not possible to upgrade from an existing legacy plan to an annual plan.
->
-> - Once you’ve upgraded your current legacy plan to a monthly Pro or a Team plan, it is not possible to switch back to the legacy per-repository plan.
+If you were previously on a legacy per-repository plan, your plan has been converted to a new Pro or Team monthly plan. For details, see [Pricing FAQ](faq.md).
 
 The following sections contain instructions on how to upgrade to Pro and Team plans.
 
