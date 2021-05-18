@@ -9,6 +9,14 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2021-05-05
+
+### Enhancement
+
+The Advanced Image Management dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. For more information, see  [Advanced Management Dashboard](/image-management.md).
+
+For Docker Hub API documentation, see [Docker Hub API Reference](../api/latest/#operation/GetNamespacesRepositoriesImages).
+
 # 2021-04-13
 
 ### Enhancement
