@@ -13,7 +13,8 @@ known issues for each Docker Hub release.
 
 ### Enhancement
 
-The Advanced Image Management dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. For more information, see  [Advanced Management Dashboard](/image-management.md).
+When managing the content of your repositories, you can now filter the results based on the currentness of the tags and more easily identify your untagged images.
+For more information, see  [Advanced Management Dashboard](/image-management.md).
 
 For Docker Hub API documentation, see [Docker Hub API Reference](../api/latest/#operation/GetNamespacesRepositoriesImages).
 
