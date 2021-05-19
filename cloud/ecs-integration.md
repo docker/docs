@@ -183,13 +183,13 @@ By default you can see logs of your compose application the same way you check l
 
 ```console
 # fetch logs for application in current working directory
-docker compose logs
+$ docker compose logs
 
 # specify compose project name
-docker compose --project-name PROJECT logs
+$ docker compose --project-name PROJECT logs
 
 # specify compose file
-docker compose --file /path/to/docker-compose.yaml logs
+$ docker compose --file /path/to/docker-compose.yaml logs
 ```
 
 A log group is created for the application as `docker-compose/<application_name>`,
@@ -224,7 +224,7 @@ For instructions on how to generate access tokens, see [Managing access tokens](
 You can then create a secret from this file using `docker secret`:
 
 ```console
-docker secret create dockerhubAccessToken token.json
+$ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
@@ -603,7 +603,7 @@ The Docker Compose CLI adds support for running and managing containers on ECS.
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 ## FAQ

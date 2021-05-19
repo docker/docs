@@ -45,7 +45,7 @@ Also see the [full list of container features supported by ACI](aci-container-fe
 Run the following commands to log into Azure:
 
 ```console
-docker login azure
+$ docker login azure
 ```
 
 This opens your web browser and prompts you to enter your Azure login credentials.
@@ -73,7 +73,7 @@ Creating an ACI context requires an Azure subscription, a [resource group](https
 For example, let us create a new context called `myacicontext`:
 
 ```console
-docker context create aci myacicontext
+$ docker context create aci myacicontext
 ```
 
 This command automatically uses your Azure login credentials to identify your subscription IDs and resource groups. You can then interactively select the subscription and group that you would like to use. If you prefer, you can specify these options in the CLI using the following flags: `--subscription-id`,
@@ -96,7 +96,7 @@ Now that you've logged in and created an ACI context, you can start using Docker
 There are two ways to use your new ACI context. You can use the `--context` flag with the Docker command to specify that you would like to run the command using your newly created ACI context.
 
 ```console
-docker --context myacicontext run -p 80:80 nginx
+$ docker --context myacicontext run -p 80:80 nginx
 ```
 
 Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an Nginx container:
@@ -113,20 +113,20 @@ In the case of the demonstration Nginx container started above, the result of th
 To view logs from your container, run:
 
 ```console
-docker logs <CONTAINER_ID>
+$ docker logs <CONTAINER_ID>
 ```
 
 To execute a command in a running container, run:
 
 ```console
-docker exec -t <CONTAINER_ID> COMMAND
+$ docker exec -t <CONTAINER_ID> COMMAND
 ```
 
 To stop and remove a container from ACI, run:
 
 ```console
-docker stop <CONTAINER_ID>
-docker rm <CONTAINER_ID>
+$ docker stop <CONTAINER_ID>
+$ docker rm <CONTAINER_ID>
 ```
 
 You can remove containers using `docker rm`. To remove a running container, you must use the `--force` flag, or stop the container using `docker stop` before removing it.
@@ -222,7 +222,6 @@ services:
       - "80:80"
 ```
 
-
 > **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
@@ -241,7 +240,7 @@ and file share name `myfileshare`, you can specify a volume in your deployment `
 command as follows:
 
 ```console
-docker run -v mystorageaccount/myfileshare:/target/path myimage
+$ docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 
 The runtime container will see the file share content in `/target/path`.
@@ -344,7 +343,7 @@ Health checks must be used in addition to restart policies to ensure the contain
 Example using `docker run`:
 
 ```console
-docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+$ docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
 ```
 
 Example using Compose files:
@@ -385,7 +384,7 @@ The Docker Compose CLI adds support for running and managing containers on Azure
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 ### Manual install
@@ -396,7 +395,7 @@ You can download the Docker ACI Integration CLI from the
 You will then need to make it executable:
 
 ```console
-chmod +x docker-aci
+$ chmod +x docker-aci
 ```
 
 To enable using the local Docker Engine and to use existing Docker contexts, you
@@ -405,7 +404,7 @@ must have the existing Docker CLI as `com.docker.cli` somewhere in your
 CLI:
 
 ```console
-ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
+$ ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
 ```
 
 > **Note**
@@ -464,7 +463,7 @@ After you have installed the Docker ACI Integration CLI, run `--help` to see the
 To remove the Docker Azure Integration CLI, you need to remove the binary you downloaded and `com.docker.cli` from your `PATH`. If you installed using the script, this can be done as follows:
 
 ```console
-sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
+$ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 ```
 
 ## Feedback
