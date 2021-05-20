@@ -546,12 +546,16 @@ reference:
           title: docker compose ls
         - path: /engine/reference/commandline/compose_pause/
           title: docker compose pause
+        - path: /engine/reference/commandline/compose_port/
+          title: docker compose port
         - path: /engine/reference/commandline/compose_ps/
           title: docker compose ps
         - path: /engine/reference/commandline/compose_pull/
           title: docker compose pull
         - path: /engine/reference/commandline/compose_push/
           title: docker compose push
+        - path: /engine/reference/commandline/compose_restart/
+          title: docker compose restart
         - path: /engine/reference/commandline/compose_rm/
           title: docker compose rm
         - path: /engine/reference/commandline/compose_run/

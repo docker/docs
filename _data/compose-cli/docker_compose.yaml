@@ -14,9 +14,11 @@ cname:
   - docker compose logs
   - docker compose ls
   - docker compose pause
+  - docker compose port
   - docker compose ps
   - docker compose pull
   - docker compose push
+  - docker compose restart
   - docker compose rm
   - docker compose run
   - docker compose start
@@ -35,9 +37,11 @@ clink:
   - docker_compose_logs.yaml
   - docker_compose_ls.yaml
   - docker_compose_pause.yaml
+  - docker_compose_port.yaml
   - docker_compose_ps.yaml
   - docker_compose_pull.yaml
   - docker_compose_push.yaml
+  - docker_compose_restart.yaml
   - docker_compose_rm.yaml
   - docker_compose_run.yaml
   - docker_compose_start.yaml
@@ -118,4 +122,3 @@ experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
-
