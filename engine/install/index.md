@@ -3,17 +3,35 @@ title: Install Docker Engine
 description: Lists the installation methods
 keywords: docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge
 redirect_from:
-- /engine/installation/linux/
-- /engine/installation/linux/frugalware/
+- /cs-engine/
+- /cs-engine/1.12/
+- /cs-engine/1.12/upgrade/
+- /cs-engine/1.13/
+- /cs-engine/1.13/upgrade/
+- /ee/docker-ee/oracle/
+- /ee/docker-ee/suse/
+- /ee/supported-platforms/
+- /en/latest/installation/
+- /engine/installation/
 - /engine/installation/frugalware/
-- /engine/installation/linux/other/
+- /engine/installation/linux/
 - /engine/installation/linux/archlinux/
 - /engine/installation/linux/cruxlinux/
-- /engine/installation/linux/gentoolinux/
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
-- /engine/installation/
-- /en/latest/installation/
+- /engine/installation/linux/docker-ee/oracle/
+- /engine/installation/linux/docker-ee/suse/
+- /engine/installation/linux/frugalware/
+- /engine/installation/linux/gentoolinux/
+- /engine/installation/linux/oracle/
+- /engine/installation/linux/other/
+- /engine/installation/linux/SUSE/
+- /engine/installation/linux/suse/
+- /engine/installation/oracle/
+- /engine/installation/SUSE/
+- /enterprise/supported-platforms/
+- /install/linux/docker-ee/oracle/
+- /install/linux/docker-ee/suse/
 ---
 
 

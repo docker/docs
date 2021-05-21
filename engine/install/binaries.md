@@ -136,7 +136,25 @@ The macOS binary includes the Docker client only. It does not include the
     $ tar xzvf /path/to/<FILE>.tar.gz
     ```
 
-3.  **Optional**: Move the binary to a directory on your executable path, such
+3.  Clear the extended attributes to allow it run.
+    
+    In case executing `docker/docker` you get the error message: *'docker' is*
+    *damaged and cannot be opened. You should move it to the bin.*
+    
+    Apple takes care about our security. Hence, we need to remove the security 
+    mechanism preventing us running the executable.
+    
+    ```console
+    $ sudo xattr -rc docker
+    ```
+    
+    Now, when you run the following command, you can see the Docker CLI usage instructions:
+    
+    ```console
+    $ docker/docker
+    ```
+
+4.  **Optional**: Move the binary to a directory on your executable path, such
     as `/usr/local/bin/`. If you skip this step, you must provide the path to the
     executable when you invoke `docker` or `dockerd` commands.
 
@@ -144,7 +162,7 @@ The macOS binary includes the Docker client only. It does not include the
     $ sudo cp docker/docker /usr/local/bin/
     ```
 
-4.  Verify that Docker is installed correctly by running the `hello-world`
+5.  Verify that Docker is installed correctly by running the `hello-world`
     image. The value of `<hostname>` is a hostname or IP address running the
     Docker daemon and accessible to the client.
 
