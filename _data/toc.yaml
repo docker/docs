@@ -7,7 +7,7 @@ horizontalnav:
   path: /get-started/overview/
   node: guides
 - title: Product manuals
-  path: /engine/
+  path: /desktop/
   node: manuals
 - title: Reference
   path: /reference/
@@ -398,6 +398,8 @@ guides:
 - path: /docsarchive/
   title: Documentation archive
 reference:
+- path: /reference/
+  title: Reference documentation
 - sectiontitle: Command-line reference
   section:
   - sectiontitle: Docker CLI (docker)
@@ -1142,12 +1144,12 @@ reference:
 
 
 samples:
+- path: /samples/
+  title: Samples overview
 - path: /samples/#tutorial-labs
   title: Tutorial labs
 - sectiontitle: Sample applications
   section:
-  - path: /samples/
-    title: Samples home
   - path: /samples/apt-cacher-ng/
     title: apt-cacher-ng
   - path: /samples/dotnetcore/
@@ -1170,6 +1172,53 @@ samples:
   title: Library references
 
 manuals:
+- sectiontitle: Docker Desktop
+  section:
+    - path: /desktop/
+      title: Overview
+    - sectiontitle: Mac
+      section:
+        - path: /docker-for-mac/install/
+          title: Install Docker Desktop for Mac
+        - path: /docker-for-mac/
+          title: User manual
+        - path: /docker-for-mac/networking/
+          title: Networking
+        - path: /docker-for-mac/space/
+          title: Disk utilization
+        - path: /docker-for-mac/troubleshoot/
+          title: Logs and troubleshooting
+        - path: /docker-for-mac/release-notes/
+          title: Release notes
+        - path: /docker-for-mac/apple-silicon/
+          title: Apple silicon
+    - sectiontitle: Windows
+      section:
+        - path: /docker-for-windows/install/
+          title: Install Docker Desktop for Windows
+        - path: /docker-for-windows/
+          title: User manual
+        - path: /docker-for-windows/networking/
+          title: Networking
+        - path: /docker-for-windows/troubleshoot/
+          title: Logs and troubleshooting
+        - path: /docker-for-windows/release-notes/
+          title: Release notes
+        - path: /docker-for-windows/wsl/
+          title: Docker Desktop WSL 2 backend
+    - path: /desktop/dashboard/
+      title: Dashboard
+    - path: /desktop/multi-arch/
+      title: Multi-arch support
+    - path: /desktop/kubernetes/
+      title: Deploy on Kubernetes
+    - path: /desktop/faqs/
+      title: FAQs
+    - path: /desktop/backup-and-restore/
+      title: Back up and restore data
+    - path: /desktop/opensource/
+      title: Open source licensing
+
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -1276,52 +1325,7 @@ manuals:
     title: Sample apps with Compose
   - path: /compose/release-notes/
     title: Release notes
-- sectiontitle: Docker Desktop
-  section:
-  - path: /desktop/
-    title: Overview
-  - sectiontitle: Mac
-    section:
-    - path: /docker-for-mac/install/
-      title: Install Docker Desktop for Mac
-    - path: /docker-for-mac/
-      title: User manual
-    - path: /docker-for-mac/networking/
-      title: Networking
-    - path: /docker-for-mac/space/
-      title: Disk utilization
-    - path: /docker-for-mac/troubleshoot/
-      title: Logs and troubleshooting
-    - path: /docker-for-mac/release-notes/
-      title: Release notes
-    - path: /docker-for-mac/apple-silicon/
-      title: Apple silicon
-  - sectiontitle: Windows
-    section:
-    - path: /docker-for-windows/install/
-      title: Install Docker Desktop for Windows
-    - path: /docker-for-windows/
-      title: User manual
-    - path: /docker-for-windows/networking/
-      title: Networking
-    - path: /docker-for-windows/troubleshoot/
-      title: Logs and troubleshooting
-    - path: /docker-for-windows/release-notes/
-      title: Release notes
-    - path: /docker-for-windows/wsl/
-      title: Docker Desktop WSL 2 backend
-  - path: /desktop/dashboard/
-    title: Dashboard
-  - path: /desktop/multi-arch/
-    title: Multi-arch support
-  - path: /desktop/kubernetes/
-    title: Deploy on Kubernetes
-  - path: /desktop/faqs/
-    title: FAQs
-  - path: /desktop/backup-and-restore/
-    title: Back up and restore data
-  - path: /desktop/opensource/
-    title: Open source licensing
+
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
