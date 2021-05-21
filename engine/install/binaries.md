@@ -136,7 +136,7 @@ The macOS binary includes the Docker client only. It does not include the
     $ tar xzvf /path/to/<FILE>.tar.gz
     ```
 
-3.  Clear the extended attributes to allow it to be run.
+3.  Clear the extended attributes to allow it run.
     
     In case executing `docker/docker` you get the error message: *'docker' is*
     *damaged and cannot be opened. You should move it to the bin.*
@@ -145,13 +145,14 @@ The macOS binary includes the Docker client only. It does not include the
     mechanism preventing us running the executable.
     
     ```console
-    # Recursively clear all entended attributes
-    sudo xattr -rc docker
+    $ sudo xattr -rc docker
     ```
     
-    Test again: `docker/docker`
+    Now, when you run the following command, you can see the Docker CLI usage instructions:
     
-    Now you should get the well know help text.
+    ```console
+    $ docker/docker
+    ```
 
 4.  **Optional**: Move the binary to a directory on your executable path, such
     as `/usr/local/bin/`. If you skip this step, you must provide the path to the
