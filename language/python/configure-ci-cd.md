@@ -185,7 +185,7 @@ on:
 ```
 {% endraw %}
 
-This ensures that the main CI will only trigger if we tag our commits with `V.n.n.n.` Let’s test this. For example, run the following command:
+This ensures that the main CI will only trigger if we tag our commits with `Vn.n.n.` Let’s test this. For example, run the following command:
 
 ```bash
 git tag -a v1.0.2
