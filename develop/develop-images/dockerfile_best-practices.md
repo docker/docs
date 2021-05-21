@@ -219,7 +219,7 @@ md Example
 cd Example
 
 # create an example file
-"" | Out-File SomeFile.txt
+$Null | Out-File SomeFile.txt
 
 # build an image using the current directory as context, and a Dockerfile passed through stdin
 @"
