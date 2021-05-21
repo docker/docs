@@ -1,7 +1,11 @@
 ---
 description: Using volumes on Microsoft Windows
+keywords: storage, persistence, data persistence, volumes, bind-mounts, windows
 title: Using volumes on Microsoft Windows
-keywords: storage, persistence, data persistence, volumes, windows
+toc_min: 1
+toc_max: 2
+redirect_from:
+- /engine/admin/volumes/mounts-on-windows/
 ---
 
 A Docker container's runtime data is either held in RAM or on the container's file system. By default all files created inside a container are stored in the writable layer of the container. This means that the data doesn’t persist when the container no longer exists, and it can be difficult to get the data out of the container if another process needs it.
@@ -59,9 +63,9 @@ The `--volume` syntax is more concise. It determines the mount type automaticall
 
 In Docker for Windows, containers may store runtime data in up to four different locations:
 
-1. [The container's runtime storage space itself](#store-runtime-data-in-the-container-s-file-system-storage-area)
-2. [The Microsoft Windows host file system](#bind-mount--store-runtime-data-in-the-windows-host-file-system)
-3. [A special *Managed Volume* storage area](#volume--store-runtime-data-in-a-special--managed-volume--storage-area)
+1. [The container's runtime storage space itself](#store-runtime-data-in-the-containers-file-system-storage-area)
+2. [The Microsoft Windows host file system](#bind-mount-store-runtime-data-in-the-windows-host-file-system)
+3. [A special *Managed Volume* storage area](#volume-store-runtime-data-in-a-special-managed-volume-storage-area)
 4. If the Docker client is running on WSL 2: [Another WSL 2 Linux distribution's file system](#bind-mount-and-volumes-handling-in-wsl-2)
 
 ![Windows Docker container mount types](images/types-of-windows-mounts.png)
@@ -348,7 +352,7 @@ Remoting data this way from the Windows host file system to the Linux container 
 
 ### Bind-mounting to another WSL 2 Linux instance
 
-Before utilizing Bind-mounting to files or directories of a WSL 2 Linux instance, make sure [Docker integration is enabled](wsl.md) in the corresponding WSL 2 instance.
+Before using Bind-mounting to files or directories of a WSL 2 Linux instance, make sure [Docker integration is enabled](wsl.md) in the corresponding WSL 2 instance.
 
 To gain the best experience and benefit from maximum performance when Bind-mounting another WSL 2 Linux distro, create the Linux container from within the other WSL 2 Linux distro.
 
@@ -404,4 +408,4 @@ Using Linux containers in Docker for Windows, local container Volumes will be st
 
 NB: There is a way to inspect the contents of that WSL instance. See [this answer on SuperUser.com](https://superuser.com/a/1613591/1210833) for details.
 
-For further details on Volumes in Docker for Windows to above section ["Volume: Store runtime data in a special *Managed Volume* storage area"](#Volume--Store-runtime-data-in-a-special--Managed-Volume--storage-area).
+For further details on Volumes in Docker for Windows to above section ["Volume: Store runtime data in a special *Managed Volume* storage area"](#volume-store-runtime-data-in-a-special-managed-volume-storage-area).
