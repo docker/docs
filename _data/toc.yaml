@@ -115,6 +115,8 @@ guides:
       title: Manage images
     - path: /develop/develop-images/baseimages/
       title: Create your own base image (advanced)
+  - path: /develop/scan-images/
+    title: Scan images
 - sectiontitle: Set up CI/CD
   section:
   - path: /ci-cd/best-practices/
