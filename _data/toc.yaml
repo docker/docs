@@ -1395,7 +1395,7 @@ manuals:
     - path: /docker-hub/billing/faq/
       title: Pricing FAQs
   - path: /docker-hub/publish/
-    title: Publisher & certified content
+    title: Verified Publisher Program
   - path: /docker-hub/release-notes/
     title: Release notes
 - sectiontitle: Open-source projects

@@ -1,6 +1,6 @@
 ---
-description: Docker Hub programs and policies for publishers
-title: Publisher & Certified Content Overview
+description: Docker Verified Publisher Program
+title: Docker Verified Publisher Program
 redirect_from:
 - /docker-hub/publish/publish/
 - /docker-hub/publish/customer_faq/
@@ -11,6 +11,8 @@ redirect_from:
 - /docker-hub/publish/byol/
 ---
 
-> **Work in progress**
->
-> Thanks for your interest. We are working on updating the docs to reflect the latest changes in the Verified Publishers program. We will share the updates as soon as they are available.
+The Docker Verified and Publisher Program enables Independent Software Vendors (ISVs), development tools vendors, and platform providers to distribute  Dockerized content through Docker Hub.
+
+Development teams rely on Docker Hub for application components to build new applications. The Docker differentiated content programs like the [Official Images](../official_images.md) and the Verified Publishers provide developers with validation that these images come from trusted sources, reducing the risk of pulling malicious images from the impostor repositories. The Verified Publisher badge included on the Docker Hub repositories indicates that these repositories are published by Docker partners that are part of the Verified Publisher program, and are qualified to be included in the developer secure supply chain.
+
+To find out more about the Docker Verified and Publisher Program and to sign up for a partnership with Docker, visit the [Verified Publisher Program](https://www.docker.com/partners/programs){:target="_blank" rel="noopener" class="_"} page.
