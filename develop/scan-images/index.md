@@ -4,16 +4,16 @@ description: Scan images best practices guide
 keywords: docker scan, scan, images, snyk, vulnerability
 ---
 
-This page contains recommendation and best practices for scanning and building secure images.
+This page contains recommendations and best practices for scanning and building secure images.
 
-Docker and Snyk have partnered together to bring security natively into the development  workflow by providing a simple and streamlined approach for developers to build and deploy secure containers. Container security spans multiple teams - developers, security, and operations. Additionally, there are multiple layers of security that apply to containers:
+Docker and Snyk have partnered together to bring security natively into the development workflow by providing a simple and streamlined approach for developers to build and deploy secure containers. Container security spans multiple teams - developers, security, and operations. Additionally, there are multiple layers of security that apply to containers:
 
 - The container image and the software running inside
 - The interaction between a container, the host operating system, and other containers on the same host
 - The host operating system
 - Container networking and storage
 
-Including the vulnerability scanning options into the Docker platform  extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. This process of simple and continuous checks leads to fewer vulnerabilities checked into Docker Hub, a shorter CI cycle, and faster and more reliable deployment into production.
+Including the vulnerability scanning options into the Docker platform extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. This process of simple and continuous checks leads to fewer vulnerabilities checked into Docker Hub, a shorter CI cycle, and faster and more reliable deployment into production.
 
 ![Developer's security journey](/images/dev-security-journey.png){:width="700px"}
 
