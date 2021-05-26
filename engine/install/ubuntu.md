@@ -41,10 +41,10 @@ Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```console
-$ sudo apt-get remove docker docker-engine docker.io containerd runc
+$ sudo apt remove docker docker-engine docker.io containerd runc
 ```
 
-It's OK if `apt-get` reports that none of these packages are installed.
+It's OK if `apt` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. If you do not need to save your existing data, and want to
@@ -90,9 +90,9 @@ from the repository.
     repository over HTTPS:
 
     ```console
-    $ sudo apt-get update
+    $ sudo apt update
 
-    $ sudo apt-get install \
+    $ sudo apt install \
         apt-transport-https \
         ca-certificates \
         curl \
@@ -158,15 +158,15 @@ from the repository.
    Engine and containerd, or go to the next step to install a specific version:
 
     ```console
-    $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+    $ sudo apt update
+    $ sudo apt install docker-ce docker-ce-cli containerd.io
     ```
 
     > Got multiple Docker repositories?
     >
     > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command always installs the highest possible version,
+    > or updating without specifying a version in the `apt install` or
+    > `apt update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
@@ -187,7 +187,7 @@ from the repository.
        for example, `5:18.09.1~3-0~ubuntu-xenial`.
 
     ```console
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+    $ sudo apt install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
@@ -207,7 +207,7 @@ users to run Docker commands and for other optional configuration steps.
 
 #### Upgrade Docker Engine
 
-To upgrade Docker Engine, first run `sudo apt-get update`, then follow the
+To upgrade Docker Engine, first run `sudo apt update`, then follow the
 [installation instructions](#install-using-the-repository), choosing the new
 version you want to install.
 
@@ -263,7 +263,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
+    $ sudo apt purge docker-ce docker-ce-cli containerd.io
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
