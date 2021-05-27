@@ -138,9 +138,9 @@ Now that you have a Redis image on your disk, let’s run this image as a contai
     The Volumes setting will allow you to bind-mount one or more directories from the host to the running container. See the
     [bind-mount](../storage/bind-mounts.md){: target="_blank" rel="noopener" class="_"} documentation for more details.  To use a volume, add a path to the directory from your
     host filesystem and specify the path to mount this directory inside the container. To expose a port, the image must expose a port in the Dockerfile with the
-    [EXPOSE](/engine/reference/builder/#expose){: target="_blank" rel="noopener" class="_"} instruction.
+    [EXPOSE](../engine/reference/commandline/builder.md){: target="_blank" rel="noopener" class="_" id="expose"} instruction.
 
-![New Container Optional Settings Dialog](images/new-container-optional-settings-dialog.png){:width="500px"}
+![Optional Container Settings](images/optional-container-settings.png){:width="500px"}
 
 ### Pull the latest image from Docker Hub
 
