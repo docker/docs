@@ -137,7 +137,7 @@ Now that you have a Redis image on your disk, let’s run this image as a contai
     To use the defaults, click **Run** without specifying any optional settings. This creates a new container from the Redis image and opens it on the **Container/Apps** view.
     The Volumes setting will allow you to bind-mount one or more directories from the host to the running container. See the [bind-mount](../storage/bind-mounts.md)
     documentation for more details.  To use a volume, add a path to the directory from your host filesystem and specify the path to mount this directory inside the container.
-    To expose a port, the image must expose a port in the Dockerfile with the [EXPOSE](../engine/reference/builder.md#expose) instruction.
+    To expose a port, the image must expose a port in the Dockerfile with the [EXPOSE](../engine/reference/builder.md){: target="_blank" rel="noopener" class="_"} instruction.
 
 ### Pull the latest image from Docker Hub
 
