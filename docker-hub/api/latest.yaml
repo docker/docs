@@ -58,7 +58,7 @@ definitions:
       token:
         description: |
           Created authentication token.
-          This token can be used in the HTTP Authentication header as a JWT to authenticate with the Docker Hub APIs.
+          This token can be used in the HTTP Authorization header as a JWT to authenticate with the Docker Hub APIs.
         type: string
         x-nullable: false
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
@@ -484,7 +484,7 @@ paths:
       description: |
         Creates an authentication token that can be used to authenticate with the Docker Hub APIs.
 
-        The returned token is used in the HTTP Authentication header like `Authentication: JWT {TOKEN}`.
+        The returned token is used in the HTTP Authorization header like `Authorization: JWT {TOKEN}`.
 
         Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
       parameters:
