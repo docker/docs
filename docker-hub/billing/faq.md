@@ -23,7 +23,7 @@ Your organization's number of paid seats must equal the number of organization m
 
 ### What are the rate limits for free subscriptions?
 
-Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](https://docs.docker.com/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests%20target=) page.
+Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](.../download-rate-limit.md#how-do-i-authenticate-pull-requests) page.
 
 ### We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?
 
@@ -31,11 +31,11 @@ We offer IP exclusions to allow for large organizations to use Docker platform s
 
 ### What is a Docker ID? How do I get one?
 
-A Docker ID is the core of a Docker subscription. You can get one for free at (https://hub.docker.com/).
+A Docker ID is the core of a Docker subscription. You can get one for free from [Docker Hub](https://hub.docker.com){:target="blank" rel="noopener" class=""}.
 
 ### I want to buy a large number of Docker Team Subscription seats. How do I do this?
 
-Contact the Docker Large Account Team [here](https://goto.docker.com/pricing-question.html).
+Contact the [Docker Large Account Team](https://goto.docker.com/pricing-question.html) to buy a larger number of Docker Team Subscription seats.
 
 ### How do I access support? Do I have any extra benefits?
 
@@ -43,11 +43,11 @@ Docker Pro and Team subscribers have access to dedicated priority email support.
 
 ### Do collaborator limits differ between the Free and Pro plans?
 
-The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account. For details on the differences between plans, see (https://www.docker.com/pricing).
+The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account. For details on the differences between plans, see the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
 
-### Where can I renew my Docker Enterprise subscription??
+### Where can I renew my Docker Enterprise subscription?
 
-The former Docker Enterprise product is now Mirantis Enterprise Platform. You can contact Mirantis for more information by visiting their [website](https://www.mirantis.com/%20target=).
+The former Docker Enterprise product is now Mirantis Enterprise Platform. You can contact Mirantis for more information by visiting their [website](https://www.mirantis.com/){:target="blank" rel="noopener" class=""}.
 
 ### Does Docker offer academic pricing?
 
@@ -156,12 +156,12 @@ Team starts at $25 per month for the first 5 users and $7 per month for each use
         "text": "The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account. For details on the differences between plans, see https://www.docker.com/pricing."
       }
     },
-    {
+     {
       "@type": "Question",
       "name": "Where can I renew my Docker Enterprise subscription?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The former Docker Enterprise product is now Mirantis Enterprise Platform. You can contact Mirantis for more information by visiting their website."
+        "text": "The former Docker Enterprise product is now Mirantis Enterprise Platform. You can contact Mirantis for more information by visiting their website www.mirantis.com"
       }
     },
     {
