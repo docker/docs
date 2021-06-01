@@ -11,7 +11,7 @@ title: Subscription & Billing FAQs
 [Docker Subscriptions](https://www.docker.com/pricing/resource-consumption-updates) come in three levels:
 * Free plans for both individuals and development teams that include unlimited public repos.
 * Docker Pro Subscriptions for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5/month with an annual subscription.
-* Docker Team Subscriptions for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
+* Docker Team Subscriptions for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first five users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
 
 ### What are the differences between Free, Pro and Team Subscriptions?
 
@@ -31,7 +31,7 @@ We offer IP exclusions to allow for large organizations to use Docker platform s
 
 ### What is a Docker ID? How do I get one?
 
-A Docker ID is the core of a Docker subscription. You can get one for free from [Docker Hub](https://hub.docker.com){:target="blank" rel="noopener" class=""}.
+A Docker ID is the core of a Docker subscription. You can get one for free at [Docker Hub](https://hub.docker.com){:target="blank" rel="noopener" class=""}.
 
 ### I want to buy a large number of Docker Team Subscription seats. How do I do this?
 
@@ -43,7 +43,7 @@ Docker Pro and Team subscribers have access to dedicated priority email support.
 
 ### Do collaborator limits differ between the Free and Pro plans?
 
-The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account. For details on the differences between plans, see the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
+The Free plan includes unlimited collaborators for public repositories and zero collaborators for private repositories. Pro includes unlimited collaborators for public repositories and one unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account. For details on the differences between plans, see the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
 
 ### Where can I renew my Docker Enterprise subscription?
 
@@ -77,7 +77,7 @@ If you have any questions that are not covered in the FAQ, please reach out and 
 
 ### How does Docker Team Subscription pricing work?
 
-Team starts at $25 per month for the first 5 users and $7 per month for each user thereafter with an annual subscription discount.
+Team starts at $25 per month for the first five users and $7 per month for each user thereafter with an annual subscription discount.
 
 <script type="application/ld+json">
 {
