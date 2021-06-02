@@ -8,11 +8,11 @@ title: Download rate limit
 
 Docker Hub limits the number of Docker image downloads ("pulls")
 based on the account type of the user pulling the image. 
-See the [pricing page](https://www.docker.com/pricing) for current options.
+See the [pricing page](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for current options.
 
-Some images are unlimited via our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Publisher](https://www.docker.com/partners/programs) programs.
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
 
-Unlimited pulls by IP is also available via our [Large Organization](https://www.docker.com/pricing) plan.
+Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
 
 ## Definition of limits
 
@@ -85,13 +85,13 @@ This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls rema
 
 ### I don't see any RateLimit headers
 
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
 
 ## I'm being limited even though I have a Pro/Team account
 
-In order to take advantage of the higher limits included in these plans, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
+To take advantage of the higher limits included in these plans, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
 
-A Pro/Team plan does not increase limits on your images for other users - please see our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/), [Publisher](https://www.docker.com/partners/programs), or [Large Organization](https://www.docker.com/pricing) offerings.
+A Pro/Team plan does not increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
 
 ## How do I authenticate pull requests
 
