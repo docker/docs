@@ -55,7 +55,7 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact).
 
 ### Can Docker Hub be used for free for open source projects?
 
-Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories unlimited consumption of OSS project container images and unlimited collaborators at no cost. For questions about open source projects and pricing please visit the [Open Source Community Application](https://www.docker.com/community/open-source/application).
+Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories, unlimited consumption of OSS project container images, and unlimited collaborators at no cost. For questions about open source projects and pricing, visit the [Open Source Community Application](https://www.docker.com/community/open-source/application).
 
 ## Billing Questions
 
@@ -223,4 +223,3 @@ Team starts at $25 per month for the first five users and $7 per month for each 
   ]
 }
 </script>
-
