@@ -30,10 +30,10 @@ To add seats to a monthly plan:
 
 > **Note:**
 >
-> - You can only add monthly seats after purchasing your annual plan.
+> - You can only add annual seats after purchasing your annual plan.
 > - When you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
 
-To add monthly seats to an annual plan:
+To add annual seats to an annual plan:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
