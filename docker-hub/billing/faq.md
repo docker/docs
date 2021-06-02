@@ -8,7 +8,7 @@ title: Subscription & Billing FAQs
 
 ### What subscriptions levels are available for Docker?
 
-[Docker Subscriptions](https://www.docker.com/pricing/resource-consumption-updates) come in three levels:
+[Docker Subscriptions](https://www.docker.com/pricing/resource-consumption-updates){:target="blank" rel="noopener" class=""} come in three levels:
 * Free plans for both individuals and development teams that include unlimited public repos.
 * Docker Pro Subscriptions for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5/month with an annual subscription.
 * Docker Team Subscriptions for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first five users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
@@ -23,7 +23,7 @@ Your organization's number of paid seats must equal the number of organization m
 
 ### What are the rate limits for free subscriptions?
 
-Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](.../download-rate-limit.md#how-do-i-authenticate-pull-requests) page.
+Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](https://docs.docker.com/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
 
 ### We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?
 
