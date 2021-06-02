@@ -33,8 +33,8 @@ clink:
 - docker_app_upgrade.yaml
 - docker_app_validate.yaml
 - docker_app_version.yaml
-deprecated: false
+deprecated: true
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
