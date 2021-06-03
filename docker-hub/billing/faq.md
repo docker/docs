@@ -23,7 +23,7 @@ Your organization's number of paid seats must equal the number of organization m
 
 ### What are the rate limits for free subscriptions?
 
-Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](https://docs.docker.com/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
+Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](../download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
 
 ### We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?
 
