@@ -4,6 +4,15 @@ keywords: content, trust, security, docker, documentation
 title: Content trust in Docker
 redirect_from:
 - /engine/security/trust/content_trust/
+- /notary/getting_started/
+- /notary/advanced_usage/
+- /notary/service_architecture/
+- /notary/running_a_service/
+- /notary/changelog/
+- /notary/reference/server-config/
+- /notary/reference/signer-config/
+- /notary/reference/client-config/
+- /notary/reference/common-configs/
 ---
 
 When transferring data among networked systems, *trust* is a central concern. In
