@@ -6,7 +6,7 @@ title: Download rate limit
 
 Docker has enabled download rate limits for pull requests on 
 Docker Hub. Limits are determined based on the account type. 
-For more information, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} and [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+For more information, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} and [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and [Service Accounts](https://docs.docker.com/docker-hub/service-accounts/){: target="_blank" rel="noopener" class="_"}.
 
 A user's limit will be equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
