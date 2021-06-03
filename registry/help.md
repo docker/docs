@@ -6,7 +6,7 @@ title: Get help
 
 {% include registry.md %}
 
-If you need help, or just want to chat, you can reach us we have a #distribution channel in the CNCF Slack that everyone is welcome to join and chat about development.
+If you need help, or just want to chat about development, you can reach us on the #distribution channel in the CNCF Slack.
 
 If you want to report a bug:
 
