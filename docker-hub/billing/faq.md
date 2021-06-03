@@ -10,7 +10,7 @@ title: Subscription & Billing FAQs
 
 [Docker Subscriptions](https://www.docker.com/pricing/resource-consumption-updates){:target="blank" rel="noopener" class=""} come in three levels:
 * Free plans for both individuals and development teams that include unlimited public repos.
-* Docker Pro Subscriptions for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5/month with an annual subscription.
+* Docker Pro Subscriptions for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5 per month with an annual subscription.
 * Docker Team Subscriptions for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first five users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
 
 ### What are the differences between Free, Pro and Team Subscriptions?
@@ -55,7 +55,7 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact).
 
 ### Can Docker Hub be used for free for open source projects?
 
-Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories unlimited consumption of OSS project container images and unlimited collaborators at no cost. For questions about open source projects and pricing please visit the [Open Source Community Application](https://www.docker.com/community/open-source/application).
+Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories, unlimited consumption of OSS project container images, and unlimited collaborators at no cost. For questions about open source projects and pricing, visit the [Open Source Community Application](https://www.docker.com/community/open-source/application).
 
 ## Billing Questions
 
@@ -223,5 +223,3 @@ Team starts at $25 per month for the first five users and $7 per month for each 
   ]
 }
 </script>
-
-
