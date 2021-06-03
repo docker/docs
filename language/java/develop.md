@@ -25,7 +25,7 @@ Before we run MySQL in a container, we'll create a couple of volumes that Docker
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
 
 ```console
-$ docker volume create mysql
+$ docker volume create mysql_data
 $ docker volume create mysql_config
 ```
 
