@@ -78,7 +78,7 @@ but this property does not hold true for a registry cache cluster.
 
 **Note**
 >
-> Service accounts included in the Team plan are limited to 15,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts) for more details.
+> Service accounts included in the Team plan are limited to 15,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 
 ### Configure the cache
 
