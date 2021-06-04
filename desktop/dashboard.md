@@ -5,13 +5,17 @@ title: Docker Dashboard
 redirect_from:
 - /docker-for-mac/dashboard/
 - /docker-for-windows/dashboard/
+toc_min: 2
+toc_max: 3
 ---
 
 The Docker Dashboard provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.
 
-The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications.
+The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](explore-running-containers-and-applications).
 
-The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub.
+The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub. For more information, see [Explore your images](#explore-your-images)
+
+The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](#explore-volumes).
 
 In addition, the Docker Dashboard allows you to:
 
@@ -86,7 +90,7 @@ Now that you can see the list of running containers and applications on the Dash
 
 Use the **Search** option to search for a specific object. You can also sort your containers and applications using various options. Click the **Sort by** drop-down to see a list of available options.
 
-## Interact with containers and applications
+### Interact with containers and applications
 
 From the Docker Dashboard, select the example voting application we started earlier.
 
@@ -96,7 +100,7 @@ Click **Open in Visual Studio Code** to open the application in VS Code. Hover o
 
 ![Application view](images/mac-application-view.png){:width="700px"}
 
-## Container view
+### Container view
 
 Click on a specific container for detailed information about the container. The **container view** displays **Logs**, **Inspect**, and **Stats** tabs and provides quick action buttons to perform various actions.
 
@@ -220,3 +224,23 @@ To interact with remote repositories:
     The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 
     If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
+
+## Explore volumes
+
+The **Volumes** view in Docker Dashboard enables you to easily create and delete [volumes](../storage/volumes/index.md) and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+
+> [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing account to a Pro or a Team plan to start exploring the details in your volume.
+
+### Manage volumes
+
+By default, the **Volumes** view displays a list of all the volumes.
+
+![List volumes](images/volumes-list.png){:width="700px"}
+
+To explore the details of a specific volume, select a volume from the list. This opens the detailed view. The **Data** tab displays the files and folders in the volume and their file size.
+
+To view the details of the volume such as the name of the container that’s using the volume, the image name, and the port number the container is using, click the **In Use** tab.
+
+### Remove a volume
+
+Removing a volume deletes the volume and all its data. To remove a volume, hover over the volume and then click the **Delete** button.  Alternatively, select the volume from the list and then click the **Delete** button.
