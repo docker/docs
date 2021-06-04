@@ -798,24 +798,6 @@ reference:
       title: docker pull
     - path: /engine/reference/commandline/push/
       title: docker push
-    - sectiontitle: docker registry
-      section:
-        - path: /engine/reference/commandline/registry/
-          title: docker registry
-        - path: /engine/reference/commandline/registry_events/
-          title: docker registry events
-        - path: /engine/reference/commandline/registry_history/
-          title: docker registry history
-        - path: /engine/reference/commandline/registry_info/
-          title: docker registry info
-        - path: /engine/reference/commandline/registry_inspect/
-          title: docker registry inspect
-        - path: /engine/reference/commandline/registry_joblogs/
-          title: docker registry joblogs
-        - path: /engine/reference/commandline/registry_ls/
-          title: docker registry ls
-        - path: /engine/reference/commandline/registry_rmi/
-          title: docker registry rmi
     - path: /engine/reference/commandline/rename/
       title: docker rename
     - path: /engine/reference/commandline/restart/
@@ -1336,6 +1318,8 @@ manuals:
     title: Docker ID accounts
   - path: /docker-hub/repos/
     title: Repositories
+  - path: /docker-hub/service-accounts/
+    title: Service accounts
   - path: /docker-hub/official_images/
     title: Official images
   - sectiontitle: Automated builds

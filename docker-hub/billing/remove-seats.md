@@ -13,7 +13,7 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 > **Note:**
 >
 > - You must be a member of the ‘Owners’ team to remove seats from your organization.
-> - If you are on an annual plan, you can only remove the additional monthly seats you've added to your annual plan. It is not possible to remove seats from your annual subscription.
+> - It is not possible to remove seats from your annual subscription.
 
 To remove seats from a monthly plan:
 
