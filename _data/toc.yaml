@@ -1266,8 +1266,6 @@ manuals:
   - path: /engine/deprecated/
     title: Deprecated features
 
-  - path: /app/working-with-app/
-    title: Docker App
   - path: /buildx/working-with-buildx/
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
