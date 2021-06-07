@@ -48,6 +48,12 @@ See [Proxies](index.md#proxies).
 Following is a summary of current limitations on the Docker Desktop for {{Arch}}
 networking stack, along with some ideas for workarounds.
 
+### Changing internal IP addresses
+
+The internal IP addresses used by Docker can be changed via the Settings (Windows)
+or Preferences (Mac). After changing IPs, it is necessary to reset the Kubernetes
+cluster and to leave any active Swarm.
+
 ### There is no docker0 bridge on macOS
 
 Because of the way networking is implemented in Docker Desktop for Mac, you cannot see a
