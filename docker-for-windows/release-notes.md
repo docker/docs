@@ -18,12 +18,12 @@ This page contains information about the new features, improvements, known issue
 
 > [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 
-## Upgrades
+### Upgrades
 
 - [Snyk v1.563.0](https://github.com/snyk/snyk/releases/tag/v1.563.0)
 - [Docker Scan v0.8.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.8.0)
 
-## Bug fixes and minor changes
+### Bug fixes and minor changes
 
 - Fixed the diagnostics failing to upload from the Troubleshoot screen.
 
@@ -32,14 +32,14 @@ This page contains information about the new features, improvements, known issue
 
 > [Download](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
 
-## Upgrades
+### Upgrades
 
 - [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
 - [Go 1.16.3](https://golang.org/doc/go1.16)
 - [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
 - [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
 
-## Bug fixes and minor changes
+### Bug fixes and minor changes
 
 - Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
 - Fixed a leak of ephemeral ports. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
