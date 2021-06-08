@@ -1384,28 +1384,6 @@ manuals:
     title: Release notes
 - sectiontitle: Open-source projects
   section:
-  - sectiontitle: Notary
-    section:
-    - path: /notary/getting_started/
-      title: Get started with Notary
-    - path: /notary/advanced_usage/
-      title: Use the Notary client
-    - path: /notary/service_architecture/
-      title: Understand the service architecture
-    - path: /notary/running_a_service/
-      title: Run a Notary service
-    - path: /notary/changelog/
-      title: Notary changelog
-    - sectiontitle: Configuration files
-      section:
-      - path: /notary/reference/server-config/
-        title: Server configuration
-      - path: /notary/reference/signer-config/
-        title: Signer configuration
-      - path: /notary/reference/client-config/
-        title: Client configuration
-      - path: /notary/reference/common-configs/
-        title: Common Server and signer configurations
   - sectiontitle: Docker Registry
     section:
     - path: /registry/
