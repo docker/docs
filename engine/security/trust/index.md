@@ -113,7 +113,7 @@ read how to [manage keys for DCT](trust_key_mng.md).
 
 Within the Docker CLI we can sign and push a container image with the
 `$ docker trust` command syntax. This is built on top of the Notary feature
-set. For more information, see the [Notary](https://github.com/theupdateframework/notary){:target="_blank" rel="noopener" class="_"} GitHub repository.
+set. For more information, see the [Notary GitHub repository](https://github.com/theupdateframework/notary){:target="_blank" rel="noopener" class="_"}.
 
 A prerequisite for signing an image is a Docker Registry with a Notary server
 attached (Such as the Docker Hub ). Instructions for
