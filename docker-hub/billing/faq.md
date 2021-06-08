@@ -2,6 +2,8 @@
 description: Subscription & Billing FAQs
 keywords: Docker, Docker Hub, billing FAQs, pull rate limiting FAQs, subscription, platform
 title: Subscription & Billing FAQs
+toc_min: 1
+toc_min: 2
 ---
 
 ## Subscription Tiers
@@ -15,7 +17,7 @@ title: Subscription & Billing FAQs
 
 ### What are the differences between Free, Pro and Team Subscriptions?
 
-Pro and Team subscriptions feature additional features, support, consumption levels and more. You can compare programs at the [Docker Pricing Page](https://www.docker.com/pricing/faq).
+Pro and Team subscriptions feature additional features, support, consumption levels and more. You can compare programs at the [Docker Pricing Page](https://www.docker.com/pricing/faq){:target="blank" rel="noopener" class=""}.
 
 ### How many seats do I need for my organization if I select a Team plan?
 
@@ -35,7 +37,7 @@ A Docker ID is the core of a Docker subscription. You can get one for free at [D
 
 ### I want to buy a large number of Docker Team Subscription seats. How do I do this?
 
-Contact the [Docker Large Account Team](https://goto.docker.com/pricing-question.html) to buy a larger number of Docker Team Subscription seats.
+Contact the [Docker Large Account Team](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
 
 ### How do I access support? Do I have any extra benefits?
 
@@ -51,11 +53,11 @@ The former Docker Enterprise product is now Mirantis Enterprise Platform. You ca
 
 ### Does Docker offer academic pricing?
 
-Contact the [Docker Sales Team](https://www.docker.com/company/contact).
+Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""}.
 
 ### Can Docker Hub be used for free for open source projects?
 
-Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories, unlimited consumption of OSS project container images, and unlimited collaborators at no cost. For questions about open source projects and pricing, visit the [Open Source Community Application](https://www.docker.com/community/open-source/application).
+Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories, unlimited consumption of OSS project container images, and unlimited collaborators at no cost. For questions about open source projects and pricing, visit the [Open Source Community Application](https://www.docker.com/community/open-source/application){:target="blank" rel="noopener" class=""}.
 
 ## Billing Questions
 
@@ -65,7 +67,7 @@ Accounts with more than 500 seats can contact the Docker Large Account team for 
 
 ### How do I get a receipt for my subscription?
 
-Customers receive a subscription confirmation with a link to their [billing plan](https://hub.docker.com/billing/plan) page. From here you can navigate to the [billing history](https://hub.docker.com/billing/billing-history) page to download invoices.
+Customers receive a subscription confirmation with a link to their [billing plan](https://hub.docker.com/billing/plan) page. From here you can navigate to the [billing history](https://hub.docker.com/billing/billing-history){:target="blank" rel="noopener" class=""} page to download invoices.
 
 ### Can I subscribe with a purchase order?
 
@@ -79,7 +81,7 @@ If you have any questions that are not covered in the FAQ, please reach out and 
 
 Team starts at $25 per month for the first five users and $7 per month for each user thereafter with an annual subscription discount.
 
-## Renewals, Expansion and Account Changes
+## Renewals, expansion, and account changes
 
 ### Do I need to do anything at the end of my subscription term?
 
@@ -91,26 +93,26 @@ When you add seats to your plan in the middle of your billing cycle, a prorated 
 
 ### How do I upgrade to a Pro plan from a legacy individual plan?
 
-Upgrading your legacy plan to a Pro plan offers you unlimited public and private repos and 1 collaborator or service account. For information on how to upgrade to a Pro plan from a legacy plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/y) page.
+Upgrading your legacy plan to a Pro plan offers you unlimited public and private repos and 1 collaborator or service account. For information on how to upgrade to a Pro plan from a legacy plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/y){:target="blank" rel="noopener" class=""} page.
 
 ### How do I upgrade to a Team plan from a legacy organization plan?
 
-Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/) page.
+Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/){:target="blank" rel="noopener" class=""} page.
 
 ### How do downgrades from a Pro or Team plan work?
 When you downgrade your Pro or Team plan, changes are applied at the end of your billing cycle. For example, if you are currently on a Team plan which is billed on the 8th of every month and you choose to downgrade to a Free Team plan on the 15th, your Team plan will be active until 7th of the following month. You will be transferred to a Free Team plan on the 8th of the following month. Please refer to the next two questions below for instructions on how to downgrade your account.
 
 ### How do I downgrade from a Team plan to a Free Team plan?
 
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, [see the billing](https://docs.docker.com/docker-hub/billing/) page.
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, [see the billing](https://docs.docker.com/docker-hub/billing/){:target="blank" rel="noopener" class=""} page.
 
 ### How do I downgrade from Pro to a Free plan?
 
-Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](https://docs.docker.com/docker-hub/billing/) page.
+Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](https://docs.docker.com/docker-hub/billing/){:target="blank" rel="noopener" class=""} page.
 
 ### How do I add a member to a team in my organization?
 
-For information on how to add a member to a team, see [Add a member to a team](https://docs.docker.com/docker-hub/orgs/#add-a-member-to-a-team).
+For information on how to add a member to a team, see [Add a member to a team](https://docs.docker.com/docker-hub/orgs/#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
 
 ### What happens to my collaborators when I move to a free individual plan?
 
@@ -132,17 +134,17 @@ Docker will not charge you for any monthly seats that were converted to annual s
 
 That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021.
 
-## Legacy Repository Account Questions
+## Legacy repository account questions
 
 ### How will the new pricing plan impact existing Docker Hub customers?
 
 Legacy individual and organizational repository customers have until their January 2021 billing cycle to switch to the new pricing plans.
-To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update) page.
-To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs) page.
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""} page.
 
 ### What is the difference between the legacy repository plans and the newly announced plans?
 
-The legacy plans were based on a private repository/parallel autobuild pricing model. The new Pro and Team plans are now based on a per-seat pricing model and include new features and consumption levels. Both Pro and Team offer unlimited private repos. The Free plan offers unlimited public repositories at no cost per month. You can see and compare the features in Free, Pro and Team subscriptions at the [Docker Pricing](https://www.docker.com/pricing) page.
+The legacy plans were based on a private repository/parallel autobuild pricing model. The new Pro and Team plans are now based on a per-seat pricing model and include new features and consumption levels. Both Pro and Team offer unlimited private repos. The Free plan offers unlimited public repositories at no cost per month. You can see and compare the features in Free, Pro and Team subscriptions at the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
 
 ### If I am an existing paid Docker Hub customer, when do I need to change my plan?
 
@@ -150,16 +152,16 @@ If you are an existing Docker subscriber you have until your January 2021 billin
 
 ### How do I view my paid plans that need to be converted to new plans in January?
 
-To view the status of your individual repository plan, see [Billing Plan Update](https://hub.docker.com/billing/plan/update).
-To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs).
+To view the status of your individual repository plan, see [Billing Plan Update](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""}.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
 ### Will my price per month increase or decrease?
 
 Depending on your configuration you may find it more economical to move to one of the new pricing plans available. For Teams, the key factor affecting a price increase or decrease is the total number of seats you need to support your organization. To optimize your subscription, review our discounted annual plan options, and remove any inactive org members listed in your organization.
 Again, you can review your plans here:
 
-To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update) page.
-To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs).
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
 ### If I am an existing subscriber but I don’t do anything by my January billing date, what will happen?
 
@@ -171,22 +173,22 @@ If you have an organizational repository plan, you will be converted to a new pe
 
 When your legacy individual or organizational repository plan comes up for renewal in January 2021, your plan will be converted to the closest equivalent plan on the date of renewal. So if your plan renews on January 15th, your plan will convert on that date. All plans will be converted by January 31st, 2021.
 
-To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update) page.
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
 
-To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs).
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
 ### What new features will I get in my seat-based subscription once I move from a legacy repository-based Docker subscription?
 
 When your legacy individual or organizational repository plan comes up for renewal in January 2021, your plan will be converted to the closest equivalent plan on the date of renewal. So if your plan renews on January 15th, your plan will convert on that date. All plans will be converted by January 31st, 2021.
 
-To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update) page.
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
 
-To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs).
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
 ### What new features will I get in my seat-based subscription once I move from a legacy repository-based Docker subscription?
 
 Docker Pro and Docker Team subscriptions have a number of new features not available to repository-based accounts. Key new Docker platform features you will receive once your subscription migrates include:
-More details are available at the [Docker Pricing](https://www.docker.com/pricing) page.
+More details are available at the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
 
 * Unlimited private and public repositories
 * Unlimited authenticated image pulls
@@ -201,9 +203,9 @@ More details are available at the [Docker Pricing](https://www.docker.com/pricin
 
 ### How do I know what new features are in planning for my Docker Pro or Docker Team subscription?
 
-Docker maintains a [public roadmap](https://github.com/docker/roadmap) so subscribers can see what new features are in development, as well as request new capabilities. New premium features will be available to you automatically as part of your migrated Docker subscription.
+Docker maintains a [public roadmap](https://github.com/docker/roadmap){:target="blank" rel="noopener" class=""} so subscribers can see what new features are in development, as well as request new capabilities. New premium features will be available to you automatically as part of your migrated Docker subscription.
 
-## Users and Agents
+## Users and agents
 
 ### I want to run an automated agent that makes container requests on behalf of my organization. Which license do I need?
 
@@ -213,23 +215,23 @@ Automated agents or service accounts that make container image requests of Docke
 
 Concurrent builds refer to the number of builds executing in parallel when using the Docker Hub Autobuild service, where you configure Hub to watch a github repo and rebuild images when changes are made.
 
-## ISV Programs and Software Distribution
+## ISV programs and software distribution
 
 ### How can I ensure my customers can pull my software images without hitting rate limits?
 
-Docker offers a number of programs for ISVs so their images can be pulled by developers without encountering rate limits. Contact [Docker Large Account sales](https://goto.docker.com/pricing-question.html) for more information.
+Docker offers a number of programs for ISVs so their images can be pulled by developers without encountering rate limits. Contact [Docker Large Account sales](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} for more information.
 
 ### How can I use Docker Hub as a private repository to distribute software to my customers?
 
-ISVs can use Docker Hub to deliver images to their customers through a private repository as well. Accounts are seat-based, and allow a software vendor to restrict access to customers or other verified developers, while ensuring they can consume images without encountering rate limits. Contact [Docker Large Account sales](https://goto.docker.com/pricing-question.html) for more information.
+ISVs can use Docker Hub to deliver images to their customers through a private repository as well. Accounts are seat-based, and allow a software vendor to restrict access to customers or other verified developers, while ensuring they can consume images without encountering rate limits. Contact [Docker Large Account sales](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} for more information.
 
 ### How do I become a verified publisher?
 
-Fill out the [Partner Application Form](https://www.docker.com/partners) for more information and to start the process.
+Fill out the [Partner Application Form](https://www.docker.com/partners){:target="blank" rel="noopener" class=""} for more information and to start the process.
 
 ### I have more questions regarding the new pricing, who can I reach out to?
 
-If you have any questions that are not covered in the FAQ, [please reach out](https://www.docker.com/company/contact) and a member of the Docker team will get back to you.
+If you have any questions that are not covered in the FAQ, [please reach out](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""} and a member of the Docker team will get back to you.
 
 <script type="application/ld+json">
 {
