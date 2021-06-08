@@ -3,10 +3,10 @@ description: Subscription & Billing FAQs
 keywords: Docker, Docker Hub, billing FAQs, pull rate limiting FAQs, subscription, platform
 title: Subscription & Billing FAQs
 toc_min: 1
-toc_min: 2
+toc_max: 2
 ---
 
-## Subscription Tiers
+## Subscription tiers
 
 ### What subscriptions levels are available for Docker?
 
@@ -59,7 +59,7 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target=
 
 Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories, unlimited consumption of OSS project container images, and unlimited collaborators at no cost. For questions about open source projects and pricing, visit the [Open Source Community Application](https://www.docker.com/community/open-source/application){:target="blank" rel="noopener" class=""}.
 
-## Billing Questions
+## Billing questions
 
 ### How can I get an invoice to purchase a Docker Team subscription?
 
