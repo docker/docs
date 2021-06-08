@@ -1,223 +1,237 @@
 ---
-description: Pricing & Pull Rate Limiting FAQs
-keywords: Docker, Docker Hub, pricing FAQs, pull rate limiting FAQs, subscription, platform
-title: Pricing & Pull Rate Limiting FAQs
+description: Subscription & Billing FAQs
+keywords: Docker, Docker Hub, billing FAQs, pull rate limiting FAQs, subscription, platform
+title: Subscription & Billing FAQs
+toc_min: 1
+toc_max: 2
 ---
 
-## Pricing FAQs
+## Subscription tiers
 
-As of May 14, 2020, Docker announced [new pricing changes](/docker-hub/billing/) for Docker Hub subscriptions.
+### What subscriptions levels are available for Docker?
 
-### What plans and pricing changes did Docker announce on May 14?
+[Docker Subscriptions](https://www.docker.com/pricing/resource-consumption-updates){:target="blank" rel="noopener" class=""} come in three levels:
+* Free plans for both individuals and development teams that include unlimited public repos.
+* Docker Pro Subscriptions for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5 per month with an annual subscription.
+* Docker Team Subscriptions for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
 
-Docker announced the following plans and pricing changes.
+### What are the differences between Free, Pro and Team Subscriptions?
 
-Immediately available for Individuals and Teams:
-* Free plans will continue to be available for both individuals and development teams that include unlimited public repos.
-* NEW Pro plan for individuals with unlimited private repos, unlimited public repos, and unlimited collaborators starting at $5/month with an Annual subscription.
-* NEW Team plan for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
-
-### Are prices listed in US dollars?
-
-All prices reflect US dollars.
-
-### How does Team pricing work?
-
-Team starts at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription.
-
-### How will the new pricing plan impact existing Docker Hub customers?
-
-Legacy customers have until January 31, 2021 to switch to the new pricing plans. For more information on how to move to the new pricing plans, view the [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates).
-
-### How can I compare which features are in each plan?
-
-You can see pricing and a full list of features for each product at [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
-
-### What is the difference between the legacy plans and the newly announced plans?
-
-The legacy plans were based on a private repository/parallel autobuild pricing model. The new Pro and Team plans are now based on a per-seat pricing model. Both Pro and Team offer unlimited private repos. The Free plan offers unlimited public repositories at no cost per month.
-
-### If I am an existing paid Docker Hub customer, when do I need to change my plan?
-
-If you are an existing Docker subscriber you have until January 31st 2021 to move to the new pricing plans mentioned above. You can convert to either a Monthly plan or an Annual plan.
-
-### If I am an existing subscriber but I don’t do anything by the due date, what will happen?
-
-If no action is taken by the date, Docker will automatically upgrade you to an equivalent plan.
-
-### Will my price per month increase or decrease?
-
-Depending on your configuration you may find it more economical to move to one of the new pricing plans available. For Teams, the key factor affecting a price increase or decrease is the total number of seats you need to support your organization.
-
-### What are the differences between the Team and Free Team plans?
-
-For details on the differences for each plan option, please see [Docker Billing](index.md).
-
-### Do collaborator limits differ between the Free and Pro plans?
-
-The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account.
-
-For details on the differences between plans, see [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
-
-For more information on, see [Service accounts](/docker-hub/repos/#service-accounts) page.
-
-### How can I create a new Docker Hub account?
-
-You can create a new account at [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""} where you can choose a plan for Individuals or a plan for Teams.
-
-### How do I upgrade to a Pro plan from a legacy individual plan?
-
-Upgrading your legacy plan to a Pro plan offers you unlimited public repos, unlimited private repos, and unlimited collaborators. For information on how to upgrade to a Pro plan from a legacy plan, see [Upgrade to a Pro plan](/docker-hub/billing/upgrade/#upgrade-to-a-pro-plan).
-
-### How do I upgrade to a Team plan from a legacy organization plan?
-
-Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see [Upgrade to a Team plan](/docker-hub/billing/upgrade/#upgrade-to-a-team-plan).
-
-### How do downgrades from a Pro or Team plan work?
-
-When you downgrade your Pro or Team plan, changes are applied at the end of your billing cycle. For example, if you are currently on a Team plan which is billed on the 8th of every month and you choose to downgrade to a Free Team plan on the 15th, your Team plan will be active until 7th of the following month. You will be transferred to a Free Team plan on the 8th of the following month. Please refer to the next two questions below for instructions on how to downgrade your account.
-
-### How do I downgrade from a Team plan to a Free Team plan?
-
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Billing](/docker-hub/billing/).
-
-For information on how to downgrade from a Team plan to a Free plan, see [Downgrade from Team to a Free plan](/docker-hub/billing/downgrade/#downgrade-from-team-to-a-free-plan).
-
-### How do I downgrade from Pro to a Free plan?
-
-Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [Docker Billing](/docker-hub/billing/).
-
-For information on how to downgrade from Pro to a Free plan, see [Downgrade from Pro to a Free plan](/docker-hub/billing/downgrade/#downgrade-from-pro-to-a-free-plan).
+Pro and Team subscriptions feature additional features, support, consumption levels and more. You can compare programs at the [Docker Pricing Page](https://www.docker.com/pricing/faq){:target="blank" rel="noopener" class=""}.
 
 ### How many seats do I need for my organization if I select a Team plan?
 
 Your organization's number of paid seats must equal the number of organization members. If you're not using all of your organization's paid seats, you can downgrade to pay for fewer seats. Organization owners and members each fill a seat. If you've sent a pending invitation to a prospective organization member, the invitation will fill a seat.
 
-### How do I add or remove paid seats for my team members?
+### What are the rate limits for free subscriptions?
 
-For information on how to add paid seats to a monthly plan for your organization, see [Add seats to a monthly plan](/docker-hub/billing/add-seats/).
+Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](../download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
 
-For information on how to remove paid seats from a monthly plan for your organization, see [Remove seats from a monthly plan](/docker-hub/billing/remove-seats/).
+### We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?
 
-### I want to run an automated agent that makes container requests on behalf of my organization. Which license do I need?
+We offer IP exclusions to allow for large organizations to use Docker platform services in diverse environments (developer laptops, CI systems, production systems, etc). Contact Docker Large Account sales for details and a price quote.
 
-Automated agents or service accounts that make container image requests of Docker Hub must be licensed under a Docker Team subscription.
+### What is a Docker ID? How do I get one?
 
-### How do I add a member to a team in my organization?
+A Docker ID is the core of a Docker subscription. You can get one for free at [Docker Hub](https://hub.docker.com){:target="blank" rel="noopener" class=""}.
 
-For information on how to add a member to a team, see [Add a member to a team](/docker-hub/orgs/#add-a-member-to-a-team).
+### I want to buy a large number of Docker Team Subscription seats. How do I do this?
 
-### Do you offer annual subscriptions?
+Contact the [Docker Large Account Team](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
 
-Yes! Both the Pro and Team plans are available via annual subscriptions and include a discount from the monthly subscription price.
+### How do I access support? Do I have any extra benefits?
 
-You can view the annual subscription pricing for each product at [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
+Docker Pro and Team subscribers have access to dedicated priority email support. All Docker subscribers (free and paid) have access to the Docker forums and Slack channels for community support.
 
-### Are legacy plans eligible for annual pricing?
+### Do collaborator limits differ between the Free and Pro plans?
 
-No, you must move to the new Pro or Team plans to take advantage of the Annual pricing.
+The Free plan includes unlimited collaborators for public repositories and zero collaborators for private repositories. Pro includes unlimited collaborators for public repositories and one unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account. For details on the differences between plans, see the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
 
-### Can Docker Hub continue to be used for open source projects?
+### Where can I renew my Docker Enterprise subscription?
 
-Yes, Docker will continue to offer a Free plan with unlimited public repositories and unlimited collaborators for public repositories at no cost per month. Docker is committed to supporting the broader open source communities.
+The former Docker Enterprise product is now Mirantis Enterprise Platform. You can contact Mirantis for more information by visiting their [website](https://www.mirantis.com/){:target="blank" rel="noopener" class=""}.
 
-For questions about open source projects and pricing please visit the [Open Source Community Application](https://www.docker.com/community/open-source/application){: target="blank" rel="noopener" class=""}.
+### Does Docker offer academic pricing?
+
+Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""}.
+
+### Can Docker Hub be used for free for open source projects?
+
+Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories, unlimited consumption of OSS project container images, and unlimited collaborators at no cost. For questions about open source projects and pricing, visit the [Open Source Community Application](https://www.docker.com/community/open-source/application){:target="blank" rel="noopener" class=""}.
+
+## Billing questions
+
+### How can I get an invoice to purchase a Docker Team subscription?
+
+Accounts with more than 500 seats can contact the Docker Large Account team for a proposal and invoice. For less than 500 seats, purchasing via credit card is the only option.
+
+### How do I get a receipt for my subscription?
+
+Customers receive a subscription confirmation with a link to their [billing plan](https://hub.docker.com/billing/plan) page. From here you can navigate to the [billing history](https://hub.docker.com/billing/billing-history){:target="blank" rel="noopener" class=""} page to download invoices.
+
+### Can I subscribe with a purchase order?
+
+Accounts with more than 500 seats can contact the Docker Large Account team to subscribe with a purchase order. Subscriptions with fewer than 500 seats are purchased with a credit card.
 
 ### I have more questions regarding the new pricing, who can I reach out to?
 
-If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you.
+If you have any questions that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you.
+
+### How does Docker Team Subscription pricing work?
+
+Team starts at $25 per month for the first five users and $7 per month for each user thereafter with an annual subscription discount.
+
+## Renewals, expansion, and account changes
+
+### Do I need to do anything at the end of my subscription term?
+
+No. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
+
+### What happens if I pay for an annual subscription and add more users later?
+
+When you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+
+### How do I upgrade to a Pro plan from a legacy individual plan?
+
+Upgrading your legacy plan to a Pro plan offers you unlimited public and private repos and 1 collaborator or service account. For information on how to upgrade to a Pro plan from a legacy plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/y){:target="blank" rel="noopener" class=""} page.
+
+### How do I upgrade to a Team plan from a legacy organization plan?
+
+Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/){:target="blank" rel="noopener" class=""} page.
+
+### How do downgrades from a Pro or Team plan work?
+When you downgrade your Pro or Team plan, changes are applied at the end of your billing cycle. For example, if you are currently on a Team plan which is billed on the 8th of every month and you choose to downgrade to a Free Team plan on the 15th, your Team plan will be active until 7th of the following month. You will be transferred to a Free Team plan on the 8th of the following month. Please refer to the next two questions below for instructions on how to downgrade your account.
+
+### How do I downgrade from a Team plan to a Free Team plan?
+
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, [see the billing](https://docs.docker.com/docker-hub/billing/){:target="blank" rel="noopener" class=""} page.
+
+### How do I downgrade from Pro to a Free plan?
+
+Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](https://docs.docker.com/docker-hub/billing/){:target="blank" rel="noopener" class=""} page.
+
+### How do I add a member to a team in my organization?
+
+For information on how to add a member to a team, see [Add a member to a team](https://docs.docker.com/docker-hub/orgs/#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
+
+### What happens to my collaborators when I move to a free individual plan?
+
+Free individual plans do not include collaborators for private repositories. If you have collaborators when you move to a free individual plan either from a paid plan or another free plan then you are required to remove all collaborators. If collaborators have not been removed within 30 days of moving to a free plan, all collaborators will automatically be removed from your account.
+
+### What happens to my team members when I move to a free team plan?
+
+Free team plans are allowed up to 3 members. If your team has more than three members when you move to a free team plan either from a paid plan or another free plan you are required to reduce your members to three. If your team size has not not been reduced to three within 30 days of moving to a free plan, all members will automatically be removed from your account. You will be able to add up to three members afterwards.
 
 ### I’m on an annual plan. Where did my monthly seats go?
 
-Docker no longer supports hybrid accounts with both monthly and annual seats. As of June 1, 2021, all monthly seats that were part of an existing annual plan have been converted to annual seats.
+Docker no longer supports hybrid accounts with both monthly and annual seats. As of July 1, 2021, all monthly seats that were part of an existing annual plan have been converted to annual seats.
 
 ### How is Docker charging me for the monthly seats that were converted into annual seats?
 
-Docker will not charge you for any monthly seats that were converted to annual seats for the remainder of your current annual subscription.  We will charge you for the total number of seats included in your account at the time of the renewal of your annual subscription.
+Docker will not charge you for any monthly seats that were converted to annual seats for the remainder of your current annual subscription. We will charge you for the total number of seats included in your account at the time of the renewal of your annual subscription.
 
 ### Wait, so you’re saying I won’t be charged for my monthly seats for the remainder of my annual subscription?
 
 That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021.
 
-## Pull Rate Limiting FAQs
+## Legacy repository account questions
 
-### What are the Docker Terms of Service?
+### How will the new pricing plan impact existing Docker Hub customers?
 
-The Docker Terms of Service is an agreement between you and Docker that governs your use of Docker products and services. Click on the link to view the full [Docker Terms of Service](https://www.docker.com/legal){: target="blank" rel="noopener" class=""}.
+Legacy individual and organizational repository customers have until their January 2021 billing cycle to switch to the new pricing plans.
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""} page.
 
-### When do the Docker Terms of Service take effect?
+### What is the difference between the legacy repository plans and the newly announced plans?
 
-The updates to the [Docker Terms of Service](https://www.docker.com/legal) are effective immediately.
+The legacy plans were based on a private repository/parallel autobuild pricing model. The new Pro and Team plans are now based on a per-seat pricing model and include new features and consumption levels. Both Pro and Team offer unlimited private repos. The Free plan offers unlimited public repositories at no cost per month. You can see and compare the features in Free, Pro and Team subscriptions at the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
 
-### What changes is Docker making to the Terms of Service?
+### If I am an existing paid Docker Hub customer, when do I need to change my plan?
 
-The most notable changes are in Section 2.5. To see all of the changes, we recommend you read the full [Docker Terms of Service](https://www.docker.com/legal).
+If you are an existing Docker subscriber you have until your January 2021 billing date to move to the new pricing plans mentioned above. You can convert to either a Monthly plan or an Annual plan.
 
-### I read that images are going to expire on November 1? What is going on here?
+### How do I view my paid plans that need to be converted to new plans in January?
 
-A planned policy for image expiration enforcement for inactive images for free accounts was announced to take effect November 1, 2020. After hearing feedback from customers, this policy has been placed on hold until mid 2021. More information is available in [this blog post](https://www.docker.com/blog/docker-hub-image-retention-policy-delayed-and-subscription-updates/){: target="blank" rel="noopener" class=""}.
+To view the status of your individual repository plan, see [Billing Plan Update](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""}.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
-### What are the rate limits for pulling Docker images from the Docker Hub Registry?
+### Will my price per month increase or decrease?
 
-Rate limits for Docker image pulls are based on the account type of the user requesting the image - not the account type of the image’s owner. These are defined on the [pricing](https://www.docker.com/pricing) page.
+Depending on your configuration you may find it more economical to move to one of the new pricing plans available. For Teams, the key factor affecting a price increase or decrease is the total number of seats you need to support your organization. To optimize your subscription, review our discounted annual plan options, and remove any inactive org members listed in your organization.
+Again, you can review your plans here:
 
-The highest entitlement a user has, based on their personal account and any orgs they belong to, will be used. Unauthenticated pull requests are “anonymous” and will be rate limited based on IP address rather than user ID. For more information on authenticating image pulls, please see [How do I authenticate pull requests](/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests).
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
-### Are there rate limits on Docker Hub container image requests?
+### If I am an existing subscriber but I don’t do anything by my January billing date, what will happen?
 
-Rate limits for unauthenticated and free Docker Hub usage went into effect on November 1, 2020. More information about this is available in [this blog post](https://www.docker.com/blog/docker-hub-image-retention-policy-delayed-and-subscription-updates/){: target="blank" rel="noopener" class=""}.
+If no action is taken by the date, Docker will automatically upgrade you to an equivalent plan at the time of your monthly renewal date in the month of January 2021.
+If you have an individual repository plan, with no contributors you will be converted to a monthly Pro plan.
+If you have an organizational repository plan, you will be converted to a new per-seat monthly Team plan, with the current number of members in the organization.
 
-### How is a pull request defined for purposes of rate limiting?
+### When will my legacy Docker plan convert to a new Docker Pro or Team Subscription?
 
-A pull request is up to two GET requests to the registry URL path `/v2/*/manifests/*`.
+When your legacy individual or organizational repository plan comes up for renewal in January 2021, your plan will be converted to the closest equivalent plan on the date of renewal. So if your plan renews on January 15th, your plan will convert on that date. All plans will be converted by January 31st, 2021.
 
-This accounts for the fact that container pull requests for multi-arch images require a manifest list to be downloaded followed by the actual image manifest for the required architecture. HEAD requests are not counted.
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
 
-Note that all pull requests, including ones for images you already have, are counted by this method. This is the trade-off for not counting individual layers.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
-### Can I use a Docker Pro subscription to run a service account that makes unlimited container pull requests to Docker Hub on behalf of an organization?
+### What new features will I get in my seat-based subscription once I move from a legacy repository-based Docker subscription?
 
-Docker Pro subscriptions are designed for use by a single individual. Daily pulls are limited to 50,000 image pulls from Docker Hub per 24 hours.
+When your legacy individual or organizational repository plan comes up for renewal in January 2021, your plan will be converted to the closest equivalent plan on the date of renewal. So if your plan renews on January 15th, your plan will convert on that date. All plans will be converted by January 31st, 2021.
 
-### Can I run a local mirror of Docker Hub?
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
 
-Please see [https://docs.docker.com/registry/recipes/mirror/](https://docs.docker.com/registry/recipes/mirror/) to run [docker/distribution](https://github.com/docker/distribution){: target="blank" rel="noopener" class=""} as a mirror. Because distribution uses HEAD manifest requests to check if cached content has changed, it will not count towards the rate limit. Note that initial requests for Hub images that are not yet in cache will be counted.
+To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""}.
 
-### Are image layers counted?
+### What new features will I get in my seat-based subscription once I move from a legacy repository-based Docker subscription?
 
-No. Because we are limiting on manifest requests, the number of layers (blob requests) related to a pull is unlimited at this time. This is a change from our previous policy based on community feedback in order to be more user-friendly, so users do not need to count layers on each image they may be using.
+Docker Pro and Docker Team subscriptions have a number of new features not available to repository-based accounts. Key new Docker platform features you will receive once your subscription migrates include:
+More details are available at the [Docker Pricing](https://www.docker.com/pricing){:target="blank" rel="noopener" class=""} page.
 
-### Are anonymous (unauthenticated) pulls rate-limited based on IP address?
+* Unlimited private and public repositories
+* Unlimited authenticated image pulls
+* 3 Parallel auto-builds
+* Role-based access controls
+* Support for an unlimited number of teams
+* Unlimited Hub image vulnerability scans
+* Higher scan limits in Docker Desktop
+* Audit Logs
+* Slack notifications
+* Premium customer support for Docker Desktop
 
-Yes. Pull rates are limited based on individual IP address (e.g., for anonymous users: 100 pulls per 6 hours per IP address). See [pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""} for more details.
+### How do I know what new features are in planning for my Docker Pro or Docker Team subscription?
 
-### Are pulls from logged-in accounts rate-limited based on IP address?
+Docker maintains a [public roadmap](https://github.com/docker/roadmap){:target="blank" rel="noopener" class=""} so subscribers can see what new features are in development, as well as request new capabilities. New premium features will be available to you automatically as part of your migrated Docker subscription.
 
-No, limits on pull requests that are [authenticated with an account](/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests) are based on that account and not on the IP. Free accounts are limited to 200 pulls per 6 hour period. Paid accounts are subject to fair usage as outlined in [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}.
+## Users and agents
 
-### Will I be rate-limited if I’m logged in but someone else on my IP hits the anonymous limit?
+### I want to run an automated agent that makes container requests on behalf of my organization. Which license do I need?
 
-No, users who are logged in and [authenticating their pull requests](/docker-hub/download-rate-limit/#how-do-i-authenticate-pull-requests) will be limited based on their user account only. If an anonymous user on your IP is limited, you will not be affected as long as your requests are authenticated and you have not hit your own limit.
+Automated agents or service accounts that make container image requests of Docker Hub must be licensed under a Docker Team subscription.
 
-### Does it matter what image I am pulling?
+### What is a concurrent build?
 
-No, all images are treated equally. The limits are entirely based on the account level of the user doing the pull, not the account level of the repository owner.
+Concurrent builds refer to the number of builds executing in parallel when using the Docker Hub Autobuild service, where you configure Hub to watch a github repo and rebuild images when changes are made.
 
-### How will these limits be adjusted?
+## ISV programs and software distribution
 
-We will be monitoring these limits closely and making sure they are appropriate for common use cases within their tier. In particular, free and anonymous limits should always support normal single-developer workflows. Adjustments will be made as needed in that spirit. You may also [submit input](https://github.com/docker/roadmap/projects/1){: target="blank" rel="noopener" class=""} on the limits.
+### How can I ensure my customers can pull my software images without hitting rate limits?
 
-### What about CI systems where pulls will be anonymous?
+Docker offers a number of programs for ISVs so their images can be pulled by developers without encountering rate limits. Contact [Docker Large Account sales](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} for more information.
 
-We recognize there are some circumstances where many pulls will be made that can not be authenticated. For example, cloud CI providers may host builds based on PRs to open source projects. The project owners may be unable to securely use their project’s Docker Hub credentials to authenticate pulls in this scenario, and the scale of these providers would likely trigger the anonymous rate limits. We will unblock these scenarios as necessary and continue iterating on our rate limiting mechanisms to improve the experience, in cooperation with these providers. Please reach out to [support@docker.com](mailto:support@docker.com) if you are encountering issues.
+### How can I use Docker Hub as a private repository to distribute software to my customers?
 
-### Will Docker offer dedicated plans for open source projects?
+ISVs can use Docker Hub to deliver images to their customers through a private repository as well. Accounts are seat-based, and allow a software vendor to restrict access to customers or other verified developers, while ensuring they can consume images without encountering rate limits. Contact [Docker Large Account sales](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} for more information.
 
-Yes, as part of Docker’s commitment to the open source community, we have created a new program to support free use of Docker in open source projects. [See this blog post](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="blank" rel="noopener" class=""} for more information.
+### How do I become a verified publisher?
 
-To apply for an open source plan, complete our application at [https://www.docker.com/community/open-source/application](https://www.docker.com/community/open-source/application){: target="blank" rel="noopener" class=""}.
+Fill out the [Partner Application Form](https://www.docker.com/partners){:target="blank" rel="noopener" class=""} for more information and to start the process.
 
-For more information, view our blogs on [inactive image retention](https://www.docker.com/blog/scaling-dockers-business-to-serve-millions-more-developers-storage){: target="blank" rel="noopener" class=""} and [pull rate limits](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress){: target="blank" rel="noopener" class=""}. Alternatively, check out [Docker Pricing](https://www.docker.com/pricing){: target="blank" rel="noopener" class=""}
+### I have more questions regarding the new pricing, who can I reach out to?
+
+If you have any questions that are not covered in the FAQ, [please reach out](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""} and a member of the Docker team will get back to you.
 
 <script type="application/ld+json">
 {
@@ -226,138 +240,18 @@ For more information, view our blogs on [inactive image retention](https://www.d
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What plans and pricing changes did Docker announce on May 14?",
+      "name": "What subscriptions levels are available for Docker?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Docker announced the following plans and pricing changes.\n\nImmediately available for Individuals and Teams:\n\nFree plans will continue to be available for both individuals and development teams that include unlimited public repos.\nNEW Pro plan for individuals with unlimited private repos, unlimited public repos, and unlimited collaborators starting at $5/month with an Annual subscription.\nNEW Team plan for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls."
+        "text": "Docker Subscriptions come in three levels:\nFree plans for both individuals and development teams that include unlimited public repos.\nDocker Pro Subscriptions for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5/month with an annual subscription.\nDocker Team Subscriptions for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.\n\n"
       }
     },
     {
       "@type": "Question",
-      "name": "Are prices listed in US dollars?",
+      "name": "What are the differences between Free, Pro and Team Subscriptions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "All prices reflect US dollars."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does Team pricing work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Team starts at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How will the new pricing plan impact existing Docker Hub customers?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Legacy customers have until January 31, 2021 to switch to the new pricing plans. For more information on how to move to the new pricing plans, view the Resource Consumption Updates FAQ."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I compare which features are in each plan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can see pricing and a full list of features for each product at https://www.docker.com/pricing."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between the legacy plans and the newly announced plans?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The legacy plans were based on a private repository/parallel autobuild pricing model. The new Pro and Team plans are now based on a per-seat pricing model. Both Pro and Team offer unlimited private repos. The Free plan offers unlimited public repositories at no cost per month."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "If I am an existing paid Docker Hub customer, when do I need to change my plan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you are an existing Docker subscriber you have until January 31st 2021 to move to the new pricing plans mentioned above. You can convert to either a Monthly plan or an Annual plan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "If I am an existing subscriber but I don’t do anything by the due date, what will happen?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If no action is taken by the date, Docker will automatically upgrade you to an equivalent plan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will my price per month increase or decrease?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Depending on your configuration you may find it more economical to move to one of the new pricing plans available. For Teams, the key factor affecting a price increase or decrease is the total number of seats you need to support your organization."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are the differences between the Team and Free Team plans?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For details on the differences for each plan option, please see https://docs.docker.com/docker-hub/billing/."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do collaborator limits differ between the Free and Pro plans?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account.\n\nFor details on the differences between plans, see https://www.docker.com/pricing. \\ For more information on service accounts visit our docs page."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I create a new Docker Hub account?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can create a new account at https://hub.docker.com/pricing where you can choose a plan for Individuals or a plan for Teams."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I upgrade to a Pro plan from a legacy individual plan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Upgrading your legacy plan to a Pro plan offers you unlimited public repos, unlimited private repos, and unlimited collaborators. For information on how to upgrade to a Pro plan from a legacy plan, see Upgrade to a Pro plan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I upgrade to a Team plan from a legacy organization plan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see Upgrade to a Team plan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do downgrades from a Pro or Team plan work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "When you downgrade your Pro or Team plan, changes are applied at the end of your billing cycle. For example, if you are currently on a Team plan which is billed on the 8th of every month and you choose to downgrade to a Free Team plan on the 15th, your Team plan will be active until 7th of the following month. You will be transferred to a Free Team plan on the 8th of the following month. Please refer to the next two questions below for instructions on how to downgrade your account."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I downgrade from a Team plan to a Free Team plan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see https://docs.docker.com/docker-hub/billing/.\n\nFor information on how to downgrade from a Team plan to a Free plan, see Downgrade from Team to a Free plan."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I downgrade from Pro to a Free plan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see https://docs.docker.com/docker-hub/billing/.\n\nFor information on how to downgrade from Pro to a Free plan, see Downgrade from Pro to a Free plan."
+        "text": "Pro and Team subscriptions feature additional features, support, consumption levels and more. You can compare programs at the Docker Pricing Page."
       }
     },
     {
@@ -365,55 +259,103 @@ For more information, view our blogs on [inactive image retention](https://www.d
       "name": "How many seats do I need for my organization if I select a Team plan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Your organization’s number of paid seats must equal the number of organization members. If you’re not using all of your organization’s paid seats, you can downgrade to pay for fewer seats. Organization owners and members each fill a seat. If you’ve sent a pending invitation to a prospective organization member, the invitation will fill a seat."
+        "text": "Your organization's number of paid seats must equal the number of organization members. If you're not using all of your organization's paid seats, you can downgrade to pay for fewer seats. Organization owners and members each fill a seat. If you've sent a pending invitation to a prospective organization member, the invitation will fill a seat."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I add or remove paid seats for my team members?",
+      "name": "What are the rate limits for free subscriptions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For information on how to add paid seats to a monthly plan for your organization, see Add seats to a monthly plan.\n\nFor information on how to remove paid seats from a monthly plan for your organization, see Remove seats from a monthly plan."
+        "text": "Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the Rate Limiting information page."
       }
     },
     {
       "@type": "Question",
-      "name": "I want to run an automated agent that makes container requests on behalf of my organization. Which license do I need?",
+      "name": "We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Automated agents or service accounts that make container image requests of Docker Hub must be licensed under a Docker Team subscription."
+        "text": "We offer IP exclusions to allow for large organizations to use Docker platform services in diverse environments (developer laptops, CI systems, production systems, etc). Contact Docker Large Account sales for details and a price quote."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I add a member to a team in my organization?",
+      "name": "What is a Docker ID? How do I get one?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For information on how to add a member to a team, see Add a member to a team."
+        "text": "A Docker ID is the core of a Docker subscription. You can get one for free at hub.docker.com."
       }
     },
     {
       "@type": "Question",
-      "name": "Do you offer annual subscriptions?",
+      "name": "I want to buy a large number of Docker Team Subscription seats. How do I do this?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! Both the Pro and Team plans are available via annual subscriptions and include a discount from the monthly subscription price.\n\nYou can view the annual subscription pricing for each product at https://www.docker.com/pricing."
+        "text": "Contact the Docker Large Account Team here."
       }
     },
     {
       "@type": "Question",
-      "name": "Are legacy plans eligible for annual pricing?",
+      "name": "How do I access support? Do I have any extra benefits?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, you must move to the new Pro or Team plans to take advantage of the Annual pricing."
+        "text": "Docker Pro and Team subscribers have access to dedicated priority email support. All Docker subscribers (free and paid) have access to the Docker forums and Slack channels for community support."
       }
     },
     {
       "@type": "Question",
-      "name": "Can Docker Hub continue to be used for open source projects?",
+      "name": "Do collaborator limits differ between the Free and Pro plans?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, Docker will continue to offer a Free plan with unlimited public repositories and unlimited collaborators for public repositories at no cost per month. Docker is committed to supporting the broader open source communities.\n\nFor questions about open source projects and pricing please visit the Open Source Community Application."
+        "text": "The Free plan includes unlimited collaborators for public repositories and 0 collaborators for private repositories. Pro includes unlimited collaborators for public repositories and 1 unique collaborator for private repositories. Note that a collaborator on a private repository within a Pro plan can only be used with a service account. For details on the differences between plans, see https://www.docker.com/pricing."
+      }
+    },
+     {
+      "@type": "Question",
+      "name": "Where can I renew my Docker Enterprise subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The former Docker Enterprise product is now Mirantis Enterprise Platform. You can contact Mirantis for more information by visiting their website www.mirantis.com"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Docker offer academic pricing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contact the Docker Sales Team."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Docker Hub be used for free for open source projects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories unlimited consumption of OSS project container images and unlimited collaborators at no cost. For questions about open source projects and pricing please visit the Open Source Community Application."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I get an invoice to purchase a Docker Team subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Accounts with more than 500 seats can contact the Docker Large Account team for a proposal and invoice. For less than 500 seats, purchasing via credit card is the only option."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get a receipt for my subscription?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Customers receive a subscription confirmation with a link to their billing plan page (https://hub.docker.com/billing/plan). From here you can navigate to the billing history page (https://hub.docker.com/billing/billing-history) to download invoices."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I subscribe with a purchase order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Accounts with more than 500 seats can contact the Docker Large Account team to subscribe with a purchase order. Subscriptions with fewer than 500 seats are purchased with a credit card."
       }
     },
     {
@@ -421,171 +363,17 @@ For more information, view our blogs on [inactive image retention](https://www.d
       "name": "I have more questions regarding the new pricing, who can I reach out to?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you have any questions about how the new seat-based pricing impacts you that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you."
-      }
-    },
-       {
-      "@type": "Question",
-      "name": "I’m on an annual plan. Where did my monthly seats go? ",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Docker no longer supports hybrid accounts with both monthly and annual seats. As of June 1, 2021, all monthly seats that were part of an existing annual plan have been converted to annual seats. "
-      }
-    },
-      {
-      "@type": "Question",
-      "name": "How is Docker charging me for the monthly seats that were converted into annual seats?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Docker will not charge you for any monthly seats that were converted to annual seats for the remainder of your current annual subscription.  We will charge you for the total number of seats included in your account at the time of the renewal of your annual subscription. "
-      }
-    },
-      {
-      "@type": "Question",
-      "name": "Wait, so you’re saying I won’t be charged for my monthly seats for the remainder of my annual subscription?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021. "
-          }
-      },
-    {
-      "@type": "Question",
-      "name": "What are the Docker Terms of Service?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The Docker Terms of Service is an agreement between you and Docker that governs your use of Docker products and services. Click on the link to view the full Docker Terms of Service."
+        "text": "If you have any questions that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you."
       }
     },
     {
       "@type": "Question",
-      "name": "When do the Docker Terms of Service take effect?",
+      "name": "How does Docker Team Subscription pricing work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The updates to the Docker Terms of Service are effective immediately."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What changes is Docker making to the Terms of Service?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The most notable changes are in Section 2.5. To see all of the changes, we recommend you read the full Docker Terms of Service."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "I read that images are going to expire on November 1? What is going on here?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A planned policy for image expiration enforcement for inactive images for free accounts was announced to take effect November 1, 2020. After hearing feedback from customers, this policy has been placed on hold until mid 2021. More information is available in this blog post."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are the rate limits for pulling Docker images from the Docker Hub Registry?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Rate limits for Docker image pulls are based on the account type of the user requesting the image - not the account type of the image’s owner. These are defined on the pricing page.\n\nThe highest entitlement a user has, based on their personal account and any orgs they belong to, will be used. Unauthenticated pull requests are “anonymous” and will be rate limited based on IP address rather than user ID. For more information on authenticating image pulls, please see this docs page."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are there rate limits on Docker Hub container image requests?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Rate limits for unauthenticated and free Docker Hub usage went into effect on November 1, 2020. More information about this is available in this blog post."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How is a pull request defined for purposes of rate limiting?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A pull request is up to two GET requests to the registry URL path /v2/*/manifests/*.\n\nThis accounts for the fact that container pull requests for multi-arch images require a manifest list to be downloaded followed by the actual image manifest for the required architecture. HEAD requests are not counted.\n\nNote that all pull requests, including ones for images you already have, are counted by this method. This is the trade-off for not counting individual layers."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use a Docker Pro subscription to run a service account that makes unlimited container pull requests to Docker Hub on behalf of an organization?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Docker Pro subscriptions are designed for use by a single individual. An automated service account (such as an account used for a teams CI) needs to must be licensed as part of a Docker Team subscription."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I run a local mirror of Docker Hub?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Please see https://docs.docker.com/registry/recipes/mirror/ to run docker/distribution as a mirror. Because distribution uses HEAD manifest requests to check if cached content has changed, it will not count towards the rate limit. Note that initial requests for Hub images that are not yet in cache will be counted."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are image layers counted?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Because we are limiting on manifest requests, the number of layers (blob requests) related to a pull is unlimited at this time. This is a change from our previous policy based on community feedback in order to be more user-friendly, so users do not need to count layers on each image they may be using."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are anonymous (unauthenticated) pulls rate-limited based on IP address?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Pull rates are limited based on individual IP address (e.g., for anonymous users: 100 pulls per 6 hours per IP address). See pricing for more details."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are pulls from logged-in accounts rate-limited based on IP address?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, limits on pull requests that are authenticated with an account are based on that account and not on the IP. Free accounts are limited to 200 pulls per 6 hour period. Paid accounts are subject to fair usage as outlined in Docker pricing."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will I be rate-limited if I’m logged in but someone else on my IP hits the anonymous limit?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, users who are logged in and authenticating their pull requests will be limited based on their user account only. If an anonymous user on your IP is limited, you will not be affected as long as your requests are authenticated and you have not hit your own limit."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does it matter what image I am pulling?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, all images are treated equally. The limits are entirely based on the account level of the user doing the pull, not the account level of the repository owner."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How will these limits be adjusted?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We will be monitoring these limits closely and making sure they are appropriate for common use cases within their tier. In particular, free and anonymous limits should always support normal single-developer workflows. Adjustments will be made as needed in that spirit. You may also submit input on the limits."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What about CI systems where pulls will be anonymous?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We recognize there are some circumstances where many pulls will be made that can not be authenticated. For example, cloud CI providers may host builds based on PRs to open source projects. The project owners may be unable to securely use their project’s Docker Hub credentials to authenticate pulls in this scenario, and the scale of these providers would likely trigger the anonymous rate limits. We will unblock these scenarios as necessary and continue iterating on our rate limiting mechanisms to improve the experience, in cooperation with these providers. Please reach out to support@docker.com if you are encountering issues."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will Docker offer dedicated plans for open source projects?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, as part of Docker’s commitment to the open source community, we have created a new program to support free use of Docker in open source projects. See this blog post for more information.\n\nTo apply for an open source plan, complete our application at:\n\nhttps://www.docker.com/community/open-source/application.\n\nFor more information view our blogs on inactive image retention and pull rate limits.\n\nOr check out: https://www.docker.com/pricing"
+        "text": "Team starts at $25 per month for the first 5 users and $7 per month for each user thereafter with an annual subscription discount."
       }
     }
   ]
 }
 </script>
-
-
