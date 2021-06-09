@@ -13,35 +13,83 @@ This page contains information about the new features, improvements, known issue
 
 {% include eula.md %}
 
-## Docker Desktop 3.3.3
-2021-05-06
+## Docker Desktop 3.4.0
+2021-06-09
 
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 
-## Upgrades
+### New
+
+**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+
+**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+
+### Deprecation
+
+- Docker Desktop no longer installs Notary. You can now use [Docker Content Trust](../engine/security/trust.md) for image signing.
+
+### Upgrades
+
+- [Docker Engine 20.10.7](https://docs.docker.com/engine/release-notes/#20107)
+- [Docker Compose 1.29.2](https://github.com/docker/compose/releases/tag/1.29.2)
+- [Docker Hub Tool v0.4.1](https://github.com/docker/hub-tool/releases/tag/v0.4.1)
+- [Compose CLI v1.0.16](https://github.com/docker/compose-cli/releases/tag/v1.0.16)
+- [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1)
+- [containerd v1.4.6](https://github.com/containerd/containerd/releases/tag/v1.4.6)
+- [runc v1.0.0-rc95](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc95)
+- [Go 1.16.5](https://github.com/golang/go/releases/tag/go1.16.5)
+
+### Bug fixes and minor changes
+
+- Prevent `docker run` from hanging if inotify event injection fails. Fixes [docker/for-mac#5590](https://github.com/docker/for-mac/issues/5590).
+- Fixed error showing stderr log in the UI. Fixes [docker/for-mac#5688](https://github.com/docker/for-mac/issues/5688).
+- Fixed an issue which caused `riscv64` emulation to fail on Docker Desktop. Fixes [docker/for-mac#5699](https://github.com/docker/for-mac/issues/5699).
+- Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
+- Docker Desktop now allows a blank HTTP proxy to be configured for the Docker engine, which will completely disable the internal HTTP proxy. See [docker/for-mac#2467](https://github.com/docker/for-mac/issues/2467).
+- Docker Compose applications with file names other than `docker-compose.yml` can now be removed from Docker Desktop. Fixes [docker/for-win#11046](https://github.com/docker/for-win/issues/11046)
+- Docker Desktop now exposes the host CPU on Apple silicon. Fixes [docker/for-mac#5681](https://github.com/docker/for-mac/issues/5681).
+- Avoid leaking open ports bound to privileged ports and specific IPs over engine Restart. Fixes [docker/for-mac#5649](https://github.com/docker/for-mac/issues/5649).
+- Use `vpnkit` with `virtualization.framework` to fix connectivity issues with VPN clients such as Cisco AnyConnect.
+- Fixed version number missing in update dialog window.
+- Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
+- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
+
+### Known issues
+
+- On Apple Silicon in native `arm64` containers, older versions of `libssl` in `debian:buster`, `ubuntu:20.04` and `centos:8` will segfault when connected to some TLS servers, for example `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04` and `fedora:35`.
+
+## Docker Desktop 3.3.3
+2021-05-06
+
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
+
+### Upgrades
 
 - [Snyk v1.563.0](https://github.com/snyk/snyk/releases/tag/v1.563.0)
 - [Docker Scan v0.8.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.8.0)
 
-## Bug fixes and minor changes
+### Bug fixes and minor changes
 
 - Fixed the diagnostics failing to upload from the Troubleshoot screen.
 
-## Docker Desktop 3.3.2
+### Docker Desktop 3.3.2
 2021-05-03
 
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
 
-## Upgrades
+### Upgrades
 
 - [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
 - [Go 1.16.3](https://golang.org/doc/go1.16)
 - [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
 - [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
 
-## Bug fixes and minor changes
+### Bug fixes and minor changes
 
 - Fixed a bug with an Apple chip where the last byte in a network transfer was occasionally lost.
 - Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
@@ -56,8 +104,8 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
 
 ### New
 
