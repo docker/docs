@@ -1,8 +1,7 @@
-command: docker compose stop
-short: Stop services
-long: Stops running containers without removing them. They can be started again with
-    `docker compose start`.
-usage: docker compose stop [SERVICE...]
+command: docker compose restart
+short: Restart containers
+long: Restart containers
+usage: docker compose restart
 pname: docker compose
 plink: docker_compose.yaml
 options:
