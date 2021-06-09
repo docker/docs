@@ -4,6 +4,15 @@ keywords: content, trust, security, docker, documentation
 title: Content trust in Docker
 redirect_from:
 - /engine/security/trust/content_trust/
+- /notary/getting_started/
+- /notary/advanced_usage/
+- /notary/service_architecture/
+- /notary/running_a_service/
+- /notary/changelog/
+- /notary/reference/server-config/
+- /notary/reference/signer-config/
+- /notary/reference/client-config/
+- /notary/reference/common-configs/
 ---
 
 When transferring data among networked systems, *trust* is a central concern. In
@@ -104,7 +113,7 @@ read how to [manage keys for DCT](trust_key_mng.md).
 
 Within the Docker CLI we can sign and push a container image with the
 `$ docker trust` command syntax. This is built on top of the Notary feature
-set, more information on Notary can be found [here](/notary/getting_started/).
+set. For more information, see the [Notary GitHub repository](https://github.com/theupdateframework/notary){:target="_blank" rel="noopener" class="_"}.
 
 A prerequisite for signing an image is a Docker Registry with a Notary server
 attached (Such as the Docker Hub ). Instructions for
