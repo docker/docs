@@ -29,6 +29,9 @@ svn co "https://github.com/docker/compose-cli/${compose_cli_svn_branch}/docs"   
 svn co "https://github.com/docker/distribution/${distribution_svn_branch}/docs/spec" ./registry/spec || (echo "Failed registry/spec download" && exit 1)
 svn co "https://github.com/mirantis/compliance/trunk/docs/compliance"                ./compliance    || (echo "Failed docker/compliance download" && exit 1)
 
+# Fix up URls in swagger files
+find ./engine/api -type f -name '*.yaml' | while read i; do sed -i 's#https://docs.docker.com/#/#g' "$i"; done;
+
 # Cleanup svn directories
 find . -name ".svn" -print0 | xargs -0 /bin/rm -rf
 
