@@ -11,9 +11,9 @@ toc_max: 2
 ### What subscriptions levels are available for Docker?
 
 [Docker Subscriptions](https://www.docker.com/pricing/resource-consumption-updates){:target="blank" rel="noopener" class=""} come in three levels:
-* Free plans for both individuals and development teams that include unlimited public repos.
-* Docker Pro Subscriptions for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5 per month with an annual subscription.
-* Docker Team Subscriptions for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
+* **Free plans** for both individuals and development teams that include unlimited public repos.
+* **Docker Pro Subscriptions** for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5 per month with an annual subscription.
+* **Docker Team Subscriptions** for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
 
 ### What are the differences between Free, Pro and Team Subscriptions?
 
@@ -59,68 +59,7 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target=
 
 Docker is a proud open source software company, and provides qualifying OSS software projects with access to Docker Hub with unlimited public repositories, unlimited consumption of OSS project container images, and unlimited collaborators at no cost. For questions about open source projects and pricing, visit the [Open Source Community Application](https://www.docker.com/community/open-source/application){:target="blank" rel="noopener" class=""}.
 
-## Billing questions
-
-### How can I get an invoice to purchase a Docker Team subscription?
-
-Accounts with more than 500 seats can contact the Docker Large Account team for a proposal and invoice. For less than 500 seats, purchasing via credit card is the only option.
-
-### How do I get a receipt for my subscription?
-
-Customers receive a subscription confirmation with a link to their [billing plan](https://hub.docker.com/billing/plan) page. From here you can navigate to the [billing history](https://hub.docker.com/billing/billing-history){:target="blank" rel="noopener" class=""} page to download invoices.
-
-### Can I subscribe with a purchase order?
-
-Accounts with more than 500 seats can contact the Docker Large Account team to subscribe with a purchase order. Subscriptions with fewer than 500 seats are purchased with a credit card.
-
-### I have more questions regarding the new pricing, who can I reach out to?
-
-If you have any questions that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you.
-
-### How does Docker Team Subscription pricing work?
-
-Team starts at $25 per month for the first five users and $7 per month for each user thereafter with an annual subscription discount.
-
 ## Renewals, expansion, and account changes
-
-### Do I need to do anything at the end of my subscription term?
-
-No. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
-
-### What happens if I pay for an annual subscription and add more users later?
-
-When you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
-
-### How do I upgrade to a Pro plan from a legacy individual plan?
-
-Upgrading your legacy plan to a Pro plan offers you unlimited public and private repos and 1 collaborator or service account. For information on how to upgrade to a Pro plan from a legacy plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/y){:target="blank" rel="noopener" class=""} page.
-
-### How do I upgrade to a Team plan from a legacy organization plan?
-
-Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](https://docs.docker.com/docker-hub/billing/upgrade/){:target="blank" rel="noopener" class=""} page.
-
-### How do downgrades from a Pro or Team plan work?
-When you downgrade your Pro or Team plan, changes are applied at the end of your billing cycle. For example, if you are currently on a Team plan which is billed on the 8th of every month and you choose to downgrade to a Free Team plan on the 15th, your Team plan will be active until 7th of the following month. You will be transferred to a Free Team plan on the 8th of the following month. Please refer to the next two questions below for instructions on how to downgrade your account.
-
-### How do I downgrade from a Team plan to a Free Team plan?
-
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, [see the billing](https://docs.docker.com/docker-hub/billing/){:target="blank" rel="noopener" class=""} page.
-
-### How do I downgrade from Pro to a Free plan?
-
-Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](https://docs.docker.com/docker-hub/billing/){:target="blank" rel="noopener" class=""} page.
-
-### How do I add a member to a team in my organization?
-
-For information on how to add a member to a team, see [Add a member to a team](https://docs.docker.com/docker-hub/orgs/#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
-
-### What happens to my collaborators when I move to a free individual plan?
-
-Free individual plans do not include collaborators for private repositories. If you have collaborators when you move to a free individual plan either from a paid plan or another free plan then you are required to remove all collaborators. If collaborators have not been removed within 30 days of moving to a free plan, all collaborators will automatically be removed from your account.
-
-### What happens to my team members when I move to a free team plan?
-
-Free team plans are allowed up to 3 members. If your team has more than three members when you move to a free team plan either from a paid plan or another free plan you are required to reduce your members to three. If your team size has not not been reduced to three within 30 days of moving to a free plan, all members will automatically be removed from your account. You will be able to add up to three members afterwards.
 
 ### I’m on an annual plan. Where did my monthly seats go?
 
@@ -134,12 +73,74 @@ Docker will not charge you for any monthly seats that were converted to annual s
 
 That’s right! If you had monthly seats on your annual subscription, you won’t be charged for those seats until your annual renewal. For example, if you had five monthly seats on your annual subscription, and your annual subscription is renewing on December 1, 2021, you will not be charged for the five converted monthly seats until December 1, 2021.
 
+### Do I need to do anything at the end of my subscription term?
+
+No. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
+
+### What happens if I pay for an annual subscription and add more users later?
+
+When you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+
+### How do I upgrade to a Pro plan from a legacy individual plan?
+
+Upgrading your legacy plan to a Pro plan offers you unlimited public and private repos and 1 collaborator or service account. For information on how to upgrade to a Pro plan from a legacy plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
+
+### How do I upgrade to a Team plan from a legacy organization plan?
+
+Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
+
+### How do downgrades from a Pro or Team plan work?
+When you downgrade your Pro or Team plan, changes are applied at the end of your billing cycle. For example, if you are currently on a Team plan which is billed on the 8th of every month and you choose to downgrade to a Free Team plan on the 15th, your Team plan will be active until 7th of the following month. You will be transferred to a Free Team plan on the 8th of the following month. Please refer to the next two questions below for instructions on how to downgrade your account.
+
+### How do I downgrade from a Team plan to a Free Team plan?
+
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](downgrade.md){:target="blank" rel="noopener" class=""} page.
+
+### How do I downgrade from Pro to a Free plan?
+
+Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](downgrade.md){:target="blank" rel="noopener" class=""} page.
+
+### How do I add a member to a team in my organization?
+
+For information on how to add a member to a team, see [Add a member to a team](upgrade.md){:target="blank" rel="noopener" class=""}.
+
+### What happens to my collaborators when I move to a free individual plan?
+
+Free individual plans do not include collaborators for private repositories. If you have collaborators when you move to a free individual plan either from a paid plan or another free plan then you are required to remove all collaborators. If collaborators have not been removed within 30 days of moving to a free plan, all collaborators will automatically be removed from your account.
+
+### What happens to my team members when I move to a free team plan?
+
+Free team plans are allowed up to 3 members. If your team has more than three members when you move to a free team plan either from a paid plan or another free plan you are required to reduce your members to three. If your team size has not not been reduced to three within 30 days of moving to a free plan, all members will automatically be removed from your account. You will be able to add up to three members afterwards.
+
+## Billing questions
+
+### How can I get an invoice to purchase a Docker Team subscription?
+
+Accounts with more than 500 seats can contact the Docker Large Account team for a proposal and invoice. For less than 500 seats, purchasing via credit card is the only option.
+
+### How do I get a receipt for my subscription?
+
+Customers receive a subscription confirmation with a link to their [billing plan](https://hub.docker.com/billing/plan){:target="blank" rel="noopener" class=""} page. From here you can navigate to the [billing history](https://hub.docker.com/billing/billing-history){:target="blank" rel="noopener" class=""} page to download invoices.
+
+### Can I subscribe with a purchase order?
+
+Accounts with more than 500 seats can contact the Docker Large Account team to subscribe with a purchase order. Subscriptions with fewer than 500 seats are purchased with a credit card.
+
+### I have more questions regarding the new pricing, who can I reach out to?
+
+If you have any questions that are not covered in the FAQ, please reach out and a member of the Docker team will get back to you.
+
+### How does Docker Team Subscription pricing work?
+
+Team starts at $25 per month for the first five users and $7 per month for each user thereafter with an annual subscription discount.
+
 ## Legacy repository account questions
 
 ### How will the new pricing plan impact existing Docker Hub customers?
 
 Legacy individual and organizational repository customers have until their January 2021 billing cycle to switch to the new pricing plans.
-To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
+To view the status of your individual repository plan, see [the billing](https://
+hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
 To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""} page.
 
 ### What is the difference between the legacy repository plans and the newly announced plans?
