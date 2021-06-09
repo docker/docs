@@ -64,8 +64,11 @@ Compose to set up and run WordPress. Before starting, make sure you have
           WORDPRESS_DB_USER: wordpress
           WORDPRESS_DB_PASSWORD: wordpress
           WORDPRESS_DB_NAME: wordpress
+        volumes:
+          - wordpress_data:/var/www/html
     volumes:
       db_data: {}
+      wordpress_data: {}
     ```
 
    > **Notes**:
