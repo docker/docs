@@ -94,11 +94,11 @@ When you downgrade your Pro or Team plan, changes are applied at the end of your
 
 ### How do I downgrade from a Team plan to a Free Team plan?
 
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](downgrade.md){:target="blank" rel="noopener" class=""} page.
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](downgrade.md){:target="blank" rel="noopener" class=""} page.
 
 ### How do I downgrade from Pro to a Free plan?
 
-Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see [the billing](downgrade.md){:target="blank" rel="noopener" class=""} page.
+Before you downgrade to a Free plan, ensure that your account organization details are updated to reflect features available in the Free plan. For example, you may need to convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [ billing](../billing.md){:target="blank" rel="noopener" class=""} page.
 
 ### How do I add a member to a team in my organization?
 
