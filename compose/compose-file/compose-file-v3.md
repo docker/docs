@@ -1632,6 +1632,12 @@ container and the host operating system the PID address space.  Containers
 launched with this flag can access and manipulate other
 containers in the bare-metal machine's namespace and vice versa.
 
+> Note when using docker stack deploy
+>
+> The `pid` option is ignored when
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
+{: .important }
+
 ### ports
 
 Expose ports.
