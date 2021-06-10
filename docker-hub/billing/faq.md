@@ -102,7 +102,7 @@ Before you downgrade to a Free plan, ensure that your account organization detai
 
 ### How do I add a member to a team in my organization?
 
-For information on how to add a member to a team, see [Add a member to a team](upgrade.md){:target="blank" rel="noopener" class=""}.
+For information on how to add a member to a team, see [Add a member to a team](../orgs/#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
 
 ### What happens to my collaborators when I move to a free individual plan?
 
