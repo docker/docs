@@ -49,7 +49,7 @@ WSL 2 on Windows 10:
 
 ### Hyper-V backend and Windows containers
 
-- Windows 10 64-bit: Pro, Enterprise, or Education (Build 17134 or higher).
+- Windows 10 64-bit: Pro (Build 19041 or higher), or Enterprise or Education (Build 18363 or higher).
 
   For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
 - Hyper-V and Containers Windows features must be enabled.
@@ -67,7 +67,7 @@ Hyper-V on Windows 10:
 
 > **Note**
 >
-> Docker supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
+> Docker only supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
 
 ### What's included in the installer
 
