@@ -18,3 +18,4 @@ Development teams rely on Docker Hub for application components to build new app
 The Verified Publisher badge included on the Docker Hub repositories indicates that these repositories are published by Docker partners that are part of the Verified Publisher program, and are qualified to be included in the developer secure supply chain. You can limit your repository search, when you use the Verified Publisher filter.
 
 To find out more about the Docker Verified and Publisher Program and to sign up for a partnership with Docker, visit the [Verified Publisher Program](https://www.docker.com/partners/programs){:target="_blank" rel="noopener" class="_"} page.
+![Verification Badge](images/VerifiedPublisherBadge.png)
