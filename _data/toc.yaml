@@ -852,6 +852,8 @@ reference:
         title: docker stack
       - path: /engine/reference/commandline/stack_deploy/
         title: docker stack deploy
+      - path: /engine/reference/commandline/stack_ls/
+        title: docker stack ls
       - path: /engine/reference/commandline/stack_ps/
         title: docker stack ps
       - path: /engine/reference/commandline/stack_rm/

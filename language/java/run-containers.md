@@ -22,7 +22,7 @@ To run an image inside a container, we use the `docker run` command. The `docker
 $ docker run java-docker
 ```
 
-After running this command, you’ll notice that we did not to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
+After running this command, you’ll notice that we did not return to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
 Let’s open a new terminal then make a `GET` request to the server using the `curl` command.
 

@@ -25,7 +25,7 @@ Before we run MySQL in a container, we'll create a couple of volumes that Docker
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
 
 ```console
-$ docker volume create mysql
+$ docker volume create mysql_data
 $ docker volume create mysql_config
 ```
 
@@ -49,7 +49,7 @@ $ docker run -it --rm -d -v mysql_data:/var/lib/mysql \
 
 Okay, now that we have a running MySQL, let’s update our Dockerfile to activate the MySQL Spring profile defined in the application and switch from an in-memory H2 database to the MySQL server we just created.
 
-We only need to add the MySQL profil as an argument to the `CMD` definition.
+We only need to add the MySQL profile as an argument to the `CMD` definition.
 
 ```dockerfile
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]
