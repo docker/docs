@@ -12,12 +12,12 @@ toc_max: 2
 
 [Docker Subscriptions](https://www.docker.com/pricing/resource-consumption-updates){:target="blank" rel="noopener" class=""} come in three levels:
 * **Free plans** for both individuals and development teams that include unlimited public repos.
-* **Docker Pro Subscriptions** for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5 per month with an annual subscription.
-* **Docker Team Subscriptions** for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
+* **Docker Pro subscriptions** for individuals with unlimited private repos, unlimited public repos, no rate limiting on pull requests and premium support starting at $5 per month with an annual subscription.
+* **Docker Team subscriptions** for development teams with unlimited private repos and unlimited public repos starting at $25 per month for the first 5 users and $7 per month for each user thereafter with an Annual subscription. The Team plan offers advanced collaboration and management tools, including organization and team management with role-based access controls.
 
 ### What are the differences between Free, Pro and Team Subscriptions?
 
-Pro and Team subscriptions feature additional features, support, consumption levels and more. You can compare programs at the [Docker Pricing Page](https://www.docker.com/pricing/faq){:target="blank" rel="noopener" class=""}.
+Pro and Team subscriptions feature additional features, support, consumption levels and more. You can compare programs at the [Docker Pricing](https://www.docker.com/pricing/faq){:target="blank" rel="noopener" class=""} page.
 
 ### How many seats do I need for my organization if I select a Team plan?
 
@@ -25,11 +25,11 @@ Your organization's number of paid seats must equal the number of organization m
 
 ### What are the rate limits for free subscriptions?
 
-Anonymous and Free subscriptions are subject to rate limits on container image pull requests. You can get more information at the [Rate Limiting Information](../download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
+Anonymous and Free subscriptions are subject to rate limits on image pull requests. You can get more information at the [Rate Limiting Information](../download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
 
 ### We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?
 
-We offer IP exclusions to allow for large organizations to use Docker platform services in diverse environments (developer laptops, CI systems, production systems, etc). Contact [Docker sales](https://www.docker.com/pricing/questions){:target="blank" rel="noopener" class=""} for details and a price quote.
+We offer IP exclusions to allow for large organizations to use Docker platform services in diverse environments (developer laptops, CI systems, production systems, etc). Contact [Docker Sales](https://www.docker.com/pricing/questions){:target="blank" rel="noopener" class=""} for details and a price quote.
 
 ### What is a Docker ID? How do I get one?
 
@@ -37,7 +37,7 @@ A Docker ID is the core of a Docker subscription. You can get one for free at [D
 
 ### I want to buy a large number of Docker Team Subscription seats. How do I do this?
 
-Contact the [Docker Large Account Team](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
+Contact the [Docker Sales Team ](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
 
 ### How do I access support? Do I have any extra benefits?
 
