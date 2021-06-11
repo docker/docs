@@ -16,10 +16,11 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 
 | Tier | Pull Rates Per Day* | Annual Fee |
 | ------ | ------ | ------ |
-| 1 | 15-50k | $9,950/yr |
-| 2 | 50-150k | $17,950/yr |
-| 3 | 150k-500k | $60,000/yr |
-| 4 | 500k+ | Tier 4+ $60k/yr/500k Pull increment |
+| 1 | 5-10k | $9,950/yr |
+| 2 | 10-25k | $17,950/yr |
+| 3 | 25k-50k | $32,950/yr |
+| 4 | 50-100k+ | $58,950/yr |
+| 5 | 100k+ | Contact Sales |
 
 <sub>*Once the initial Tier is established, that is the minimum fee for the year.  Annual commitment required.  The service account may exceed Pulls by up to 25% for up to 20 days during the year without incurring additional fees.  Reports on consumption will be provided upon request.  At the end of the initial 1-year term, the appropriate Tier will be established for the following year.<sub>
 
