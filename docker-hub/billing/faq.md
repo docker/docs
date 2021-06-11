@@ -29,7 +29,7 @@ Anonymous and Free subscriptions are subject to rate limits on container image p
 
 ### We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?
 
-We offer IP exclusions to allow for large organizations to use Docker platform services in diverse environments (developer laptops, CI systems, production systems, etc). Contact Docker Large Account sales for details and a price quote.
+We offer IP exclusions to allow for large organizations to use Docker platform services in diverse environments (developer laptops, CI systems, production systems, etc). Contact [Docker sales](https://www.docker.com/pricing/questions){:target="blank" rel="noopener" class=""} for details and a price quote.
 
 ### What is a Docker ID? How do I get one?
 
