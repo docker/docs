@@ -18,7 +18,7 @@ In this guide, you’ll learn how to:
 * Run the newly built image as a container;
 * Set up a local development environment to connect a database to the container;
 * Use Docker Compose to run your Go application and other services it requires;
-* Configure a CI/CD pipeline for your application using GitHub Actions.
+* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions){:target="_blank" rel="noopener" class="_"}.
 
 After completing the Go getting started modules, you should be able to containerize your own Go application based on the examples and instructions provided in this guide and the resources that it refers to.
 
