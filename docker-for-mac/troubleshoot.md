@@ -152,10 +152,6 @@ ways, and create reports.
 <a name="troubleshoot"></a>
 ## Troubleshooting
 
-### Support for Apple silicon processors
-
-At the moment, Docker Desktop is compatible with Intel processors only. You can follow the status of Apple Silicon support in our [roadmap](https://github.com/docker/roadmap/issues/142){:target="_blank" rel="noopener" class="_"}.
-
 ### Make sure certificates are set up correctly
 
 Docker Desktop ignores certificates listed under insecure registries, and does
@@ -175,12 +171,6 @@ As well as on the registry. For example:
 
 For more about using client and server side certificates, see
 [Adding TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
-
-### Docker Desktop does not start if Mac user account and home folder are renamed after installing the app
-
-See
-[Do I need to reinstall Docker Desktop if I change the name of my macOS account?](faqs.md#do-i-need-to-reinstall-docker-for-mac-if-i-change-the-name-of-my-macos-account)
-in the FAQs.
 
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 
@@ -253,6 +243,28 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
     your docker app.
 
 ## Known issues
+
+* The following issues are seen when using the `virtualization.framework` experimental feature:
+
+  * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
+
+    This is an interaction between `vmnet.framework` (as used by `virtualization.framework` in Big Sur) and the VPN clients.
+
+  * Docker Desktop is incompatible with macOS Internet Sharing. See [docker/for-mac#5348](https://github.com/docker/for-mac/issues/5348).
+
+    This is an interaction between `vmnet.framework` (as used by `virtualization.framework` in Big Sur) and macOS Internet Sharing. At the moment it is not possible to use Docker Desktop and macOS Internet Sharing at the same time.
+
+  * Some container disk I/O is much slower than expected. See [docker/for-mac#5389](https://github.com/docker/for-mac/issues/5389). Disk flushes are particularly slow due to the need to guarantee data is written to stable storage on the host.
+
+    This is an artifact of the new `virtualization.framework` in Big Sur.
+
+  * TCP and UDP port 53 (DNS) are bound on the host when Docker Desktop starts. Therefore you cannot bind to port 53 on all interfaces with a command like `docker run -p 53:53`. See [docker/for-mac#5335](https://github.com/docker/for-mac/issues/5335).
+
+    This is an artifact of the new `virtualization.framework` in Big Sur. A workaround is to bind to a specific IP address e.g. `docker run -p 127.0.0.1:53:53`.
+
+  * The Linux Kernel may occasionally crash. Docker now detects this problem and pops up an error dialog offering the user the ability to quickly restart Linux.
+
+    We are still gathering data and testing alternate kernel versions.
 
 * IPv6 is not (yet) supported on Docker Desktop.
 
@@ -343,6 +355,7 @@ Docker Desktop excludes support for the following types of issues:
 
 * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 * Running on unsupported operating systems, including beta/preview versions of operating systems
+* Running containers of a different architecture using emulation
 * Support for the Docker engine, Docker CLI, or other bundled Linux components
 * Support for Kubernetes
 * Features labeled as experimental

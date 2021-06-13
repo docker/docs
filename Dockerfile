@@ -14,8 +14,7 @@
 ARG JEKYLL_ENV=development
 
 # Engine
-# TODO change to 20.10 branch, once created
-ARG ENGINE_BRANCH="master"
+ARG ENGINE_BRANCH="20.10"
 
 # Distribution
 ARG DISTRIBUTION_BRANCH="release/2.7"

@@ -44,7 +44,8 @@ Python package manager or installing Compose as a container.
 <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
 <li><a data-toggle="tab" data-target="#windows-server">Windows Server</a></li>
 <li><a data-toggle="tab" data-target="#linux">Linux</a></li>
-<li><a data-toggle="tab" data-target="#alternatives">Alternative Install Options</a></li>
+<li><a data-toggle="tab" data-target="#alternatives">Alternative install options</a></li>
+<li><a data-toggle="tab" data-target="#pre-release">Pre-release builds</a></li>
 </ul>
 <div class="tab-content">
 <div id="macOS" class="tab-pane fade in active" markdown="1">
@@ -68,7 +69,7 @@ If you are running the Docker daemon and client directly on Microsoft
 Windows Server, follow the instructions in the Windows Server tab.
 
 </div>
-<div id="windows-server" class="tab-pane fade in active" markdown="1">
+<div id="windows-server" class="tab-pane fade" markdown="1">
 
 ### Install Compose on Windows Server
 
@@ -119,7 +120,7 @@ in your terminal to download the binaries. These step-by-step instructions are
 also included below.
 
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
+> `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
 {: .important}
 
 1.  Run this command to download the current stable release of Docker Compose:
@@ -169,7 +170,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 #### Install using pip
 
 > For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, and `make`.
+> `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo`, and `make`.
 {: .important}
 
 Compose can be installed from
@@ -203,11 +204,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 </div>
-</div>
 
-----
+<div id="pre-release" class="tab-pane fade" markdown="1">
 
-## Install pre-release builds
+### Install pre-release builds
 
 If you're interested in trying out a pre-release build, you can download release
 candidates from the [Compose repository release page on GitHub](https://github.com/docker/compose/releases){: target="_blank" rel="noopener" class="_"}.
@@ -221,6 +221,10 @@ Pre-releases built from the "master" branch are also available for download at
 > but may be less stable.
 {: .important}
 
+</div>
+</div>
+
+----
 
 ## Upgrading
 

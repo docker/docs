@@ -8,7 +8,7 @@ on:
 jobs:
   remove-site-from-netlify:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: github.event.pull_request.head.repo.fork == false
     steps:
       - uses: actions/checkout@v2

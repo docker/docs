@@ -11,16 +11,231 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-> **Important**
->
-> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
-{: .important }
+{% include eula.md %}
 
+## Docker Desktop 3.4.0
+2021-06-09
 
-## Docker Desktop Community 3.1.0
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+### New
+
+**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+
+**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+
+### Deprecation
+
+- Docker Desktop no longer installs Notary. You can now use [Docker Content Trust](../engine/security/trust.md) for image signing.
+
+### Upgrades
+
+- [Docker Engine 20.10.7](https://docs.docker.com/engine/release-notes/#20107)
+- [Docker Compose 1.29.2](https://github.com/docker/compose/releases/tag/1.29.2)
+- [Docker Hub Tool v0.4.1](https://github.com/docker/hub-tool/releases/tag/v0.4.1)
+- [Compose CLI v1.0.16](https://github.com/docker/compose-cli/releases/tag/v1.0.16)
+- [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1)
+- [containerd v1.4.6](https://github.com/containerd/containerd/releases/tag/v1.4.6)
+- [runc v1.0.0-rc95](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc95)
+- [Go 1.16.5](https://github.com/golang/go/releases/tag/go1.16.5)
+
+### Bug fixes and minor changes
+
+- Prevent `docker run` from hanging if inotify event injection fails. Fixes [docker/for-mac#5590](https://github.com/docker/for-mac/issues/5590).
+- Fixed error showing stderr log in the UI. Fixes [docker/for-mac#5688](https://github.com/docker/for-mac/issues/5688).
+- Fixed an issue which caused `riscv64` emulation to fail on Docker Desktop. Fixes [docker/for-mac#5699](https://github.com/docker/for-mac/issues/5699).
+- Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
+- Docker Desktop now allows a blank HTTP proxy to be configured for the Docker engine, which will completely disable the internal HTTP proxy. See [docker/for-mac#2467](https://github.com/docker/for-mac/issues/2467).
+- Docker Compose applications with file names other than `docker-compose.yml` can now be removed from Docker Desktop. Fixes [docker/for-win#11046](https://github.com/docker/for-win/issues/11046)
+- Docker Desktop now exposes the host CPU on Apple silicon. Fixes [docker/for-mac#5681](https://github.com/docker/for-mac/issues/5681).
+- Avoid leaking open ports bound to privileged ports and specific IPs over engine Restart. Fixes [docker/for-mac#5649](https://github.com/docker/for-mac/issues/5649).
+- Use `vpnkit` with `virtualization.framework` to fix connectivity issues with VPN clients such as Cisco AnyConnect.
+- Fixed version number missing in update dialog window.
+- Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
+- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
+
+### Known issues
+
+- On Apple Silicon in native `arm64` containers, older versions of `libssl` in `debian:buster`, `ubuntu:20.04` and `centos:8` will segfault when connected to some TLS servers, for example `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04` and `fedora:35`.
+
+## Docker Desktop 3.3.3
+2021-05-06
+
+[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg)
+[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg)
+
+### Upgrades
+
+- [Snyk v1.563.0](https://github.com/snyk/snyk/releases/tag/v1.563.0)
+- [Docker Scan v0.8.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.8.0)
+
+### Bug fixes and minor changes
+
+- Fixed the diagnostics failing to upload from the Troubleshoot screen.
+
+### Docker Desktop 3.3.2
+2021-05-03
+
+[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg)
+[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg)
+
+### Upgrades
+
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+
+### Bug fixes and minor changes
+
+- Fixed a bug with an Apple chip where the last byte in a network transfer was occasionally lost.
+- Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
+- Fixed a leak of ephemeral ports. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
+- Emulate a more modern Intel CPU with `qemu` on an Apple chip, for better image compatibility. See [docker/for-mac#5561](https://github.com/docker/for-mac/issues/5561).
+- Enable buildkit garbage collection by default.
+- Fixed a bug which blocked binding to port 123. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
+- Disable the HTTP and HTTPS transparent proxies when there is no upstream proxy set. Fixes [docker/for-mac#5572](https://github.com/docker/for-mac/issues/5572).
+- Revert to the HTTP and HTTPS proxy implementation used in 3.2.2.
+- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. The component was removed in 2.4.0.0 but we forgot to remove the setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
+
+## Docker Desktop 3.3.1
+2021-04-15
+
+[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg)
+[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg)
+
+### New
+
+Docker Desktop is now available for Apple silicon as well as Intel chips. This enables developers with their choice of local development environments, and extends development pipelines for ARM-based applications. For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+
+### Bug fixes and minor changes
+
+- Docker Desktop now ensures the permissions of `/dev/null` and other devices are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527)
+- Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
+
+- **Mac with Apple silicon**: Docker Desktop now reduces the idle CPU consumption.
+
+### Known issues
+
+**Apple silicon**
+
+- `ping` from inside a container to the Internet does not work as expected. To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+- Users may occasionally experience data drop when a TCP stream is half-closed.
+
+## Docker Desktop 3.3.0
+2021-04-08
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
+
+### New
+
+You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
+
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+
+For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
+
+### Upgrades
+
+- [Docker Compose 1.29.0](https://github.com/docker/compose/releases/tag/1.29.0)
+- [Compose CLI v1.0.12](https://github.com/docker/compose-cli/tree/v1.0.12)
+- [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.25-6594e668feec68f102a58011bb42bd5dc07a7a9b/images/sha256-80e22cd9c9e6a188a785d0e23b4cefae76595abe1e4a535449627c2794b10871?context=repo)
+- [Snyk v1.461.0](https://github.com/snyk/snyk/releases/tag/v1.461.0)
+- [Docker Hub Tool v0.3.1](https://github.com/docker/hub-tool/releases/tag/v0.3.1)
+- [containerd v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4)
+- [runc v1.0.0-rc93](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc93)
+
+### Bug fixes and minor changes
+
+- Fixed an issue when viewing compose applications that have been started with an explicit project name. Fixes [docker/for-win#10564](https://github.com/docker/for-win/issues/10564).
+- Fixed a bug that `--add-host host.docker.internal:host-gateway` caused `host.docker.internal` to resolve to the wrong IP address. See [docker/for-linux#264](https://github.com/docker/for-linux/issues/264#issuecomment-785137844).
+- Fixed a bug that caused inter-container HTTP traffic to be misrouted to the external HTTP proxy. Fixes [docker/for-mac#5476](https://github.com/docker/for-mac/issues/5476).
+- Fixed a bug that could cause other files in the same folder as the VM disk to be deleted when the disk was resized. Fixes [docker/for-mac#5486](https://github.com/docker/for-mac/issues/5486).
+- Fixed an issue where delta downloads caused an `Illegal instruction exception`. Fixes [docker/for-mac#5459](https://github.com/docker/for-mac/issues/5459).
+- Apply domain-based HTTPS proxy `no_proxy` rules for encrypted connections. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
+- Fixed missing text in reset to factory defaults dialog. Fixes [docker/for-mac#5457](https://github.com/docker/for-mac/issues/5457).
+- Fixed an issue where running a container with a random port on the host caused Docker Desktop dashboard to incorrectly open a browser with port 0, instead of using the allocated port.
+- Fixed an issue where pulling an image from Docker Hub using the Docker Desktop dashboard was failing silently.
+- Removed unused DNS name `docker.for.mac.http.internal`.
+- Perform a filesystem check when starting the Linux VM.
+- Detect Linux kernel crashes and escalate them to the user.
+
+## Docker Desktop 3.2.2
+2021-03-15
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that stopped containers binding to port 53. Fixes [docker/for-mac#5416](https://github.com/docker/for-mac/issues/5416).
+- Fixed an issue that 32-bit Intel binaries were emulated on Intel CPUs. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
+- Fixed an issue related to high CPU consumption and frozen UI when the network connection is lost. Fixes [for-win/#10563](https://github.com/docker/for-win/issues/10563).
+- Fixed an issue opening a terminal in iTerm2 when it has no other windows open. Fixes [docker/roadmap#98](https://github.com/docker/roadmap/issues/98#issuecomment-791927788).
+
+## Docker Desktop 3.2.1
+2021-03-05
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
+
+### Upgrades
+
+- [Docker Engine 20.10.5](https://docs.docker.com/engine/release-notes/#20105)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that sometimes caused Docker Desktop to fail to start after updating to version 3.2.0. Fixes [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406). If you are still experiencing this issue when trying to update from 3.2.0 to 3.2.1, we recommend that you uninstall 3.2.0 and manually install Docker Desktop 3.2.1.
+
+## Docker Desktop 3.2.0
+2021-03-01
+
+> [Download](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg)
+
+### New
+
+- The Docker Dashboard opens automatically when you start Docker Desktop.
+- The Docker Dashboard displays a tip once a week.
+- Docker Desktop uses iTerm2 to launch the terminal on the container if it is installed. Otherwise, it launches the default Terminal.App. [docker/roadmap#98](https://github.com/docker/roadmap/issues/98)
+- Add experimental support to use the new Apple Virtualization framework (requires macOS Big Sur 11.1 or later)
+- BuildKit is now the default builder for all users, not just for new installations. To turn this setting off, go to **Preferences** > **Docker Engine** and add the following block to the Docker daemon configuration file:
+```json
+"features": {
+    "buildkit": false
+}
+```
+
+### Upgrades
+
+- [Docker Engine 20.10.3](https://docs.docker.com/engine/release-notes/#20103)
+- [Docker Compose 1.28.5](https://github.com/docker/compose/releases/tag/1.28.5)
+- [Compose CLI v1.0.9](https://github.com/docker/compose-cli/tree/v1.0.9)
+- [Docker Hub Tool v0.3.0](https://github.com/docker/hub-tool/releases/tag/v0.3.0)
+- [QEMU 5.0.1](https://wiki.qemu.org/ChangeLog/5.0)
+- [Amazon ECR Credential Helper v0.5.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.5.0)
+- [Alpine 3.13](https://alpinelinux.org/posts/Alpine-3.13.0-released.html)
+- [Kubernetes 1.19.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.7)
+- [Go 1.16](https://golang.org/doc/go1.16)
+
+### Bug fixes and minor changes
+
+- Fixed an issue on the container detail screen where the buttons would disappear when scrolling the logs. Fixes [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290)
+- Fixed an issue when port forwarding multiple ports with an IPv6 container network. Fixes [docker/for-mac#5247](https://github.com/docker/for-mac/issues/5247)
+- Fixed a regression where `docker load` could not use an xz archive anymore. Fixes [docker/for-mac#5271](https://github.com/docker/for-mac/issues/5271)
+- Fixed a navigation issue in the **Containers / Apps** view. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160#issuecomment-764660660)
+- Fixed container instance view with long container/image name. Fixes [docker/for-mac#5290](https://github.com/docker/for-mac/issues/5290)
+- Fixed an issue when binding ports on specific IPs. Note: It may now take a bit of time before the `docker inspect` command shows the open ports. Fixes [docker/for-mac#4541](https://github.com/docker/for-mac/issues/4541)
+- Fixed an issue where an image deleted from the Docker dashboard was still displayed on the **Images** view.
+
+### Known issue
+
+Docker Desktop can sometimes fail to start after updating to version 3.2.0. If you are experiencing this issue, we recommend that you uninstall 3.2.0 and manually install [Docker Desktop 3.2.1](#docker-desktop-321). See [docker/for-mac#5406](https://github.com/docker/for-mac/issues/5406).
+
+## Docker Desktop 3.1.0
 2021-01-14
 
-> [Download](https://desktop.docker.com/mac/stable/Docker.dmg)
+> [Download](https://desktop.docker.com/mac/stable/51484/Docker.dmg)
 
 ### New
 
@@ -36,7 +251,7 @@ This page contains information about the new features, improvements, known issue
   - Fixed an issue with DNS address resolution in Alpine containers. Fixes [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
   - Redesigned the **Support** UI to improve usability.
 
-## Docker Desktop Community 3.0.4
+## Docker Desktop 3.0.4
 2021-01-06
 
 > [Download](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
@@ -54,7 +269,7 @@ This page contains information about the new features, improvements, known issue
 
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 
-## Docker Desktop Community 3.0.3
+## Docker Desktop 3.0.3
 2020-12-21
 
 > [Download](https://desktop.docker.com/mac/stable/51017/Docker.dmg)
@@ -68,7 +283,7 @@ This page contains information about the new features, improvements, known issue
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 - There can be timeouts during docker-compose up if there are several services being started. See [docker/for-mac#4957](https://github.com/docker/for-mac/issues/4957) and [docker/for-mac#5124](https://github.com/docker/for-mac/issues/5124).
 
-## Docker Desktop Community 3.0.2
+## Docker Desktop 3.0.2
 2020-12-18
 
 > [Download](https://desktop.docker.com/mac/stable/50996/Docker.dmg)
@@ -84,7 +299,7 @@ This page contains information about the new features, improvements, known issue
 
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 
-## Docker Desktop Community 3.0.1
+## Docker Desktop 3.0.1
 2020-12-11
 
 > [Download](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
@@ -99,7 +314,7 @@ This page contains information about the new features, improvements, known issue
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13. See [docker/for-mac#5020](https://github.com/docker/for-mac/issues/5020).
 
-## Docker Desktop Community 3.0.0
+## Docker Desktop 3.0.0
 2020-12-10
 
 > [Download](https://desktop.docker.com/mac/stable/50684/Docker.dmg)

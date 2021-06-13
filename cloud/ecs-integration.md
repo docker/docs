@@ -23,10 +23,10 @@ Also see the [ECS integration architecture](ecs-architecture.md), [full list of 
 
 To deploy Docker containers on ECS, you must meet the following requirements:
 
-1. Download and install Docker Desktop Stable version 2.3.0.5 or later, or Edge version 2.3.2.0 or later.
+1. Download and install the latest version of Docker Desktop.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+    - [Download for Mac](../docker-for-mac/install.md)
+    - [Download for Windows](../docker-for-windows/install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
@@ -45,31 +45,45 @@ AWS uses a fine-grained permission model, with specific role for each resource t
 
 To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you have to ensure your AWS credentials [grant access to following AWS IAM permissions](https://aws.amazon.com/iam/features/manage-permissions/):
 
+* application-autoscaling:*
 * cloudformation:*
-* ecs:ListAccountSettings
+* ec2:AuthorizeSecurityGroupIngress
+* ec2:CreateSecurityGroup
+* ec2:CreateTags
+* ec2:DeleteSecurityGroup
+* ec2:DescribeRouteTables
+* ec2:DescribeSecurityGroups
+* ec2:DescribeSubnets
+* ec2:DescribeVpcs
+* ec2:RevokeSecurityGroupIngress
 * ecs:CreateCluster
 * ecs:CreateService
-* ec2:DescribeVpcs
-* ec2:DescribeSubnets
-* ec2:CreateSecurityGroup
-* ec2:DescribeSecurityGroups
-* ec2:DeleteSecurityGroup
-* iam:CreateRole
-* iam:AttachRolePolicy
-* iam:DetachRolePolicy
-* iam:DeleteRole
+* ecs:DeleteCluster
+* ecs:DeleteService
+* ecs:DeregisterTaskDefinition
+* ecs:DescribeClusters
+* ecs:DescribeServices
+* ecs:DescribeTasks
+* ecs:ListAccountSettings
+* ecs:ListTasks
+* ecs:RegisterTaskDefinition
+* ecs:UpdateService
 * elasticloadbalancing:*
-* application-autoscaling:*
-* servicediscovery:*
+* iam:AttachRolePolicy
+* iam:CreateRole
+* iam:DeleteRole
+* iam:DetachRolePolicy
+* iam:PassRole
 * logs:CreateLogGroup
+* logs:DeleteLogGroup
 * logs:DescribeLogGroups
 * logs:FilterLogEvents
-* logs:DeleteLogGroup
 * route53:CreateHostedZone
 * route53:DeleteHostedZone
 * route53:GetHealthCheck
 * route53:GetHostedZone
 * route53:ListHostedZonesByName
+* servicediscovery:*
 
 GPU support, which relies on EC2 instances to run containers with attached GPU devices,
 require a few additional permissions:
@@ -119,8 +133,8 @@ current context using the command `docker context use myecscontext`.
 stop a full Compose application.
 
   By default, `docker compose up` uses the `compose.yaml` or `docker-compose.yaml` file in
-  the current folder. You can specify the Compose file directly using the
-  `--file` flag.
+  the current folder. You can specify the working directory using the --workdir flag or
+  specify the Compose file directly using `docker compose --file mycomposefile.yaml up`.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
@@ -169,13 +183,13 @@ By default you can see logs of your compose application the same way you check l
 
 ```console
 # fetch logs for application in current working directory
-docker compose logs
+$ docker compose logs
 
 # specify compose project name
-docker compose logs --project-name PROJECT
+$ docker compose --project-name PROJECT logs
 
 # specify compose file
-docker compose logs --file /path/to/docker-compose.yaml
+$ docker compose --file /path/to/docker-compose.yaml logs
 ```
 
 A log group is created for the application as `docker-compose/<application_name>`,
@@ -186,7 +200,7 @@ You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retentio
 in your Compose file to set the number of retention days for log events. The
 default behavior is to keep logs forever.
 
-You can also pass `awslogs` 
+You can also pass `awslogs`
 parameters to your container as standard
 Compose file `logging.driver_opts` elements. See [AWS documentation](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html){:target="_blank" rel="noopener" class="_"} for details on available log driver options.
 
@@ -210,7 +224,7 @@ For instructions on how to generate access tokens, see [Managing access tokens](
 You can then create a secret from this file using `docker secret`:
 
 ```console
-docker secret create dockerhubAccessToken token.json
+$ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
@@ -427,13 +441,13 @@ services:
 The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 
 Once you have identified the changes required to your CloudFormation template, you can include _overlays_ in your
-Compose file that will be automatically applied on `compose up`. An _overlay_ is a yaml object that uses the same CloudFormation template data structure as the one generated by ECS integration, but only contains attributes to 
+Compose file that will be automatically applied on `compose up`. An _overlay_ is a yaml object that uses the same CloudFormation template data structure as the one generated by ECS integration, but only contains attributes to
 be updated or added. It will be merged with the generated template before being applied on the AWS infrastructure.
 
 ### Adjusting Load Balancer http HealthCheck configuration
 
 While ECS cluster uses the `HealthCheck` command on container to get service health, Application Load Balancers define
-their own URL-based HealthCheck mechanism so traffic gets routed. As the Compose model does not offer such an 
+their own URL-based HealthCheck mechanism so traffic gets routed. As the Compose model does not offer such an
 abstraction (yet), the default one is applied, which queries your service under `/` expecting HTTP status code
 `200`.
 
@@ -452,7 +466,7 @@ x-aws-cloudformation:
     WebappTCP80TargetGroup:
       Properties:
         HealthCheckPath: /health
-        Matcher: 
+        Matcher:
           HttpCode: 200-499
 ```
 
@@ -472,7 +486,7 @@ x-aws-cloudformation:
   Resources:
     WebappTCP80Listener:
       Properties:
-        Certificates: 
+        Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
         Protocol: HTTPS
 ```
@@ -589,7 +603,7 @@ The Docker Compose CLI adds support for running and managing containers on ECS.
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 ## FAQ

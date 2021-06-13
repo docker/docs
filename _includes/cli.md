@@ -20,7 +20,7 @@ your client and daemon API versions.
 
 > This command is [deprecated](/engine/deprecated/){: target="_blank" rel="noopener" class="_"}.
 >
-> It may be removed in a future Docker version.
+> It may be removed in a future Docker version. For more information, see the [Docker Roadmap](https://github.com/docker/roadmap/issues/209){: target="_blank" rel="noopener" class="_"}.
 {: .warning }
 
 {% endif %}
@@ -81,7 +81,7 @@ your client and daemon API versions.
 ## Usage
 
 ```console
-{{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
+$ {{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
 ```
 
 {% endif %}
@@ -124,7 +124,11 @@ For example uses of this command, refer to the [examples section](#examples) bel
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
-    <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
+    {% if option.details_url and option.details_url != '' -%}
+    <td markdown="span">[`--{{ option.option }}`]({{ option.details_url }}){% if option.shorthand %} , [`-{{ option.shorthand }}`]({{ option.details_url }}){% endif %}</td>
+    {%- else -%}
+    <td markdown="span">`--{{ option.option }}`{% if option.shorthand %} , `-{{ option.shorthand }}`{% endif %}</td>
+    {%- endif %}
     <td markdown="span">{{ option-default }}</td>
     <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip | escape }}</td>
   </tr>

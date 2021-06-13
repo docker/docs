@@ -9,18 +9,59 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+# 2021-05-05
+
+### Enhancement
+
+When managing the content of your repositories, you can now filter the results based on the currentness of the tags and more easily identify your untagged images.
+For more information, see  [Advanced Management Dashboard](/image-management.md).
+
+For Docker Hub API documentation, see [Docker Hub API Reference](../api/latest/#operation/GetNamespacesRepositoriesImages).
+
+# 2021-04-13
+
+### Enhancement
+
+The **Billing Details** page now shows any organizations you own, in addition to your personal account. This allows you to clearly identify the billing details of your chosen namespace, and enables you to switch between your personal and your organization accounts to view or update the details.
+
+# 2021-04-09
+
+### Enhancement
+
+You can now specify any email address to receive billing-related emails for your organization. The email address doesn't have to be associated with an organization owner account. You must be an owner of the organization to update any billing details.
+
+To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Contact Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
+
+For details on how to update your billing information, see [Update billing information](/billing/index.md#update-billing-information).
+
+# 2021-03-22
+
+### New feature
+
+**Advanced Image Management dashboard**
+
+Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](/image-management.md).
+
+# 2021-01-25
+
+### New feature
+
+Docker introduces Audit log, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
+
+For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
+
 # 2020-11-10
 
-### New features
+### New feature
 
-* The **Repositories** view now shows which images have gone stale because they haven't been 
+The **Repositories** view now shows which images have gone stale because they haven't been 
 pulled or pushed recently. For more information, see [repository tags](repos.md/#viewing-repository-tags).
 
 # 2020-10-07
 
-### New features
+### New feature
 
-* Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
+Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
 
 # 2020-05-14
 

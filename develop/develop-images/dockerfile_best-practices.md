@@ -23,6 +23,7 @@ Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -39,7 +40,7 @@ Each instruction creates one layer:
 When you run an image and generate a container, you add a new _writable layer_
 (the "container layer") on top of the underlying layers. All changes made to
 the running container, such as writing new files, modifying existing files, and
-deleting files, are written to this thin writable container layer.
+deleting files, are written to this writable container layer.
 
 For more on image layers (and how Docker builds and stores images), see
 [About storage drivers](../../storage/storagedriver/index.md).
@@ -271,7 +272,8 @@ frequently changed:
 A Dockerfile for a Go application could look like:
 
 ```dockerfile
-FROM golang:1.11-alpine AS build
+# syntax=docker/dockerfile:1
+FROM golang:1.16-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -404,7 +406,7 @@ maintainable `Dockerfile`.
 
 Whenever possible, use current official images as the basis for your
 images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
-is tightly controlled and small in size (currently under 5 MB), while still
+is tightly controlled and small in size (currently under 6 MB), while still
 being a full Linux distribution.
 
 ### LABEL
@@ -469,13 +471,6 @@ Probably the most common use-case for `RUN` is an application of `apt-get`.
 Because it installs packages, the `RUN apt-get` command has several gotchas to
 look out for.
 
-Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
-packages from the parent images cannot upgrade inside an
-[unprivileged container](../../engine/reference/run.md#security-configuration). If a package
-contained in the parent image is out-of-date, contact its maintainers. If you
-know there is a particular package, `foo`, that needs to be updated, use
-`apt-get install -y foo` to update automatically.
-
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
@@ -492,6 +487,7 @@ subsequent `apt-get install` instructions fail. For example, say you have a
 Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
@@ -501,6 +497,7 @@ After building the image, all layers are in the Docker cache. Suppose you later
 modify `apt-get install` by adding extra package:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
@@ -646,7 +643,7 @@ version bumps are easier to maintain, as seen in the following example:
 ```dockerfile
 ENV PG_MAJOR=9.3
 ENV PG_VERSION=9.3.4
-RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgres && …
 ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 
@@ -656,10 +653,11 @@ auto-magically bump the version of the software in your container.
 
 Each `ENV` line creates a new intermediate layer, just like `RUN` commands. This
 means that even if you unset the environment variable in a future layer, it
-still persists in this layer and its value can't be dumped. You can test this by
+still persists in this layer and its value can be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
@@ -681,6 +679,7 @@ improves readability. You could also put all of the commands into a shell script
 and have the `RUN` command just run that shell script.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \

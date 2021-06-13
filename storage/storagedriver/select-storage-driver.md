@@ -55,7 +55,7 @@ Docker supports the following storage drivers:
    driver is poor, and is not generally recommended for production use.
 
 Docker's source code defines the selection order. You can see the order at
-[the source code for Docker Engine - Community {{ site.docker_ce_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
+[the source code for Docker Engine {{ site.docker_ce_version }}](https://github.com/moby/moby/blob/{{ site.docker_ce_version }}/daemon/graphdriver/driver_linux.go#L52-L53)
 
 If you run a different version of Docker, you can use the branch selector at the top of the file viewer to choose a different branch.
 {: id="storage-driver-order" }
@@ -228,7 +228,7 @@ Containers: 0
 Images: 0
 Storage Driver: overlay2
  Backing Filesystem: xfs
-<output truncated>
+<...>
 ```
 
 To change the storage driver, see the specific instructions for the new storage

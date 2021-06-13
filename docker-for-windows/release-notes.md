@@ -11,15 +11,193 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-> **Important**
->
-> Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single release stream for all users. Updates to Docker Desktop will now be available automatically as delta updates from the previous version. This means, when there is a newer version of Docker Desktop, it will be automatically downloaded to your machine. All you need to do is to click **Update and restart** from the Docker menu to install the latest update.
-{: .important }
+{% include eula.md %}
 
-## Docker Desktop Community 3.1.0
+## Docker Desktop 3.4.0
+2021-06-09
+
+[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+
+### New
+
+**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+
+**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+
+### Deprecation
+
+- Docker Desktop no longer installs Notary, `docker trust` should be used for image signing.
+
+### Upgrades
+
+- [Docker Engine 20.10.7](https://docs.docker.com/engine/release-notes/#20107)
+- [Docker Compose 1.29.2](https://github.com/docker/compose/releases/tag/1.29.2)
+- [Docker Hub Tool v0.4.1](https://github.com/docker/hub-tool/releases/tag/v0.4.1)
+- [Compose CLI v1.0.16](https://github.com/docker/compose-cli/releases/tag/v1.0.16)
+- [Kubernetes 1.21.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1)
+- [containerd v1.4.6](https://github.com/containerd/containerd/releases/tag/v1.4.6)
+- [runc v1.0.0-rc95](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc95)
+- [Go 1.16.5](https://github.com/golang/go/releases/tag/go1.16.5)
+
+### Bug fixes and minor changes
+
+- Fixed error showing stderr log in the UI. Fixes [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
+- Automatically reclaim space after deleting containers by deleting volumes and removing build cache.
+- Docker Compose applications with file names other than `docker-compose.yml` can now be removed from Docker Desktop. Fixes [docker/for-win#11046](https://github.com/docker/for-win/issues/11046)
+- Fixed version number missing in update dialog window.
+- Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
+- Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
+- Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
+
+## Docker Desktop 3.3.3
+2021-05-06
+
+> [Download](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64)
+
+### Upgrades
+
+- [Snyk v1.563.0](https://github.com/snyk/snyk/releases/tag/v1.563.0)
+- [Docker Scan v0.8.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.8.0)
+
+### Bug fixes and minor changes
+
+- Fixed the diagnostics failing to upload from the Troubleshoot screen.
+
+## Docker Desktop 3.3.2
+2021-05-03
+
+> [Download](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Compose CLI v1.0.14](https://github.com/docker/compose-cli/tree/v1.0.14)
+- [Go 1.16.3](https://golang.org/doc/go1.16)
+- [Docker Compose 1.29.1](https://github.com/docker/compose/releases/tag/1.29.1)
+- [Docker Engine 20.10.6](https://docs.docker.com/engine/release-notes/#20106)
+
+### Bug fixes and minor changes
+
+- Fixed a bug where a `metrics-port` defined in the engine's `daemon.json` blocks application restart.
+- Fixed a leak of ephemeral ports. Fixes [docker/for-mac#5611](https://github.com/docker/for-mac/issues/5611).
+- Enable buildkit garbage collection by default.
+- Fixed a bug which blocked binding to port 123. Fixes [docker/for-mac#5589](https://github.com/docker/for-mac/issues/5589).
+- Removed the "Deploy Docker Stacks to Kubernetes by default" Kubernetes setting. The component was removed in 2.4.0.0 but we forgot to remove the setting. Fixes [docker/for-mac#4966](https://github.com/docker/for-mac/issues/4966).
+
+## Docker Desktop 3.3.1
+2021-04-15
+
+> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Docker Desktop now ensures the permissions of `/dev/null` and other devices are correctly set to `0666` (`rw-rw-rw-`) inside `--privileged` containers. Fixes [docker/for-mac#5527](https://github.com/docker/for-mac/issues/5527).
+- Fixed an issue that caused `docker run` to fail when using `\\wsl.localhost` path to a directory. Fixes [docker/for-win#10786](https://github.com/docker/for-win/issues/10786)
+- Fixed an issue that caused Docker Desktop to fail during startup when it is unable to establish a connection with Docker Hub in the backend. Fixes [docker/for-win#10896](https://github.com/docker/for-win/issues/10896)
+- Fixed file permission when creating a file from a delta update. Fixes [docker/for-win#10881](https://github.com/docker/for-win/issues/10881)
+
+## Docker Desktop 3.3.0
+2021-04-08
+
+> [Download](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe)
+
+### New
+
+You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
+
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+
+For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
+
+### Upgrades
+
+- [Docker Compose 1.29.0](https://github.com/docker/compose/releases/tag/1.29.0)
+- [Compose CLI v1.0.12](https://github.com/docker/compose-cli/tree/v1.0.12)
+- [Linux kernel 5.10.25](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
+- [Snyk v1.461.0](https://github.com/snyk/snyk/releases/tag/v1.461.0)
+- [Docker Hub Tool v0.3.1](https://github.com/docker/hub-tool/releases/tag/v0.3.1)
+- [containerd v1.4.4](https://github.com/containerd/containerd/releases/tag/v1.4.4)
+- [runc v1.0.0-rc93](https://github.com/opencontainers/runc/releases/tag/v1.0.0-rc93)
+
+### Bug fixes and minor changes
+
+- Fixed an issue when viewing compose applications that have been started with an explicit project name. Fixes [docker/for-win#10564](https://github.com/docker/for-win/issues/10564).
+- Ensure `--add-host host.docker.internal:host-gateway` causes `host.docker.internal` resolves to the host IP, rather than the IP of the IP router. See [docker/for-linux#264](https://github.com/docker/for-linux/issues/264).
+- Fixed port allocation for Windows containers. Fixes [docker/for-win#10552](https://github.com/docker/for-win/issues/10552).
+- Fixed an issue where running a container with a random port on the host caused Docker Desktop dashboard to incorrectly open a browser with port 0, instead of using the allocated port.
+- Fixed an issue where pulling an image from Docker Hub using the Docker Desktop dashboard was failing silently.
+- Perform a filesystem check when starting the Linux VM.
+
+## Docker Desktop 3.2.2
+2021-03-15
+
+> [Download](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe)
+
+### Bug fixes and minor changes
+
+- Fixed an issue that stopped containers binding to port 53. Fixes [docker/for-win#10601](https://github.com/docker/for-win/issues/10601).
+- Fixed an issue that 32-bit Intel binaries were emulated on Intel CPUs. Fixes [docker/for-win#10594](https://github.com/docker/for-win/issues/10594).
+- Fixed an issue related to high CPU consumption and frozen UI when the network connection is lost. Fixes [for-win/#10563](https://github.com/docker/for-win/issues/10563).
+
+## Docker Desktop 3.2.1
+2021-03-05
+
+> [Download](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe)
+
+### Upgrades
+
+- [Docker Engine 20.10.5](https://docs.docker.com/engine/release-notes/#20105)
+
+## Docker Desktop 3.2.0
+2021-03-01
+
+> [Download](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- The Docker Dashboard opens automatically when you start Docker Desktop.
+- The Docker Dashboard displays a tip once a week.
+- BuildKit is now the default builder for all users, not just for new installations. To turn this setting off, go to **Settings** > **Docker Engine** and add the following block to the Docker daemon configuration file:
+```json
+"features": {
+    "buildkit": false
+}
+```
+
+### Upgrades
+
+- [Docker Engine 20.10.3](https://docs.docker.com/engine/release-notes/#20103)
+- [Docker Compose 1.28.5](https://github.com/docker/compose/releases/tag/1.28.5)
+- [Compose CLI v1.0.9](https://github.com/docker/compose-cli/tree/v1.0.9)
+- [Docker Hub Tool v0.3.0](https://github.com/docker/hub-tool/releases/tag/v0.3.0)
+- [QEMU 5.0.1](https://wiki.qemu.org/ChangeLog/5.0)
+- [Amazon ECR Credential Helper v0.5.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.5.0)
+- [Alpine 3.13](https://alpinelinux.org/posts/Alpine-3.13.0-released.html)
+- [Kubernetes 1.19.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.7)
+- [Go 1.16](https://golang.org/doc/go1.16)
+
+### Deprecation
+
+- Docker Desktop cannot be installed on Windows 1709 (build 16299) anymore.
+- Removed the deprecated DNS name `docker.for.win.localhost`. Use DNS name `host.docker.internal` in a container to access services that are running on the host. [docker/for-win#10619](https://github.com/docker/for-win/issues/10619)
+
+### Bug fixes and minor changes
+
+- Fixed an issue on the container detail screen where the buttons would disappear when scrolling the logs. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160)
+- Fixed an issue when port forwarding multiple ports with an IPv6 container network. Fixes [docker/for-mac#5247](https://github.com/docker/for-mac/issues/5247)
+- Fixed a regression where `docker load` could not use an xz archive anymore. Fixes [docker/for-win#10364](https://github.com/docker/for-win/issues/10364)
+- Fixed an issue that caused the WSL 2 backend shutdown process to interfere with Windows shutdown. Fixes [docker/for-win#5825](https://github.com/docker/for-win/issues/5825) [docker/for-win#6933](https://github.com/docker/for-win/issues/6933) [docker/for-win#6446](https://github.com/docker/for-win/issues/6446)
+- Fixed creds store using `desktop.exe` from WSL 2. Fixes [docker/compose-cli#1181](https://github.com/docker/compose-cli/issues/1181)
+- Fixed a navigation issue in the **Containers / Apps** view. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160#issuecomment-764660660)
+- Fixed container instance view with long container/image name. Fixes [docker/for-win#10160](https://github.com/docker/for-win/issues/10160)
+- Fixed an issue when binding ports on specific IPs. Note: It may now take a bit of time before the `docker inspect` command shows the open ports. Fixes [docker/for-win#10008](https://github.com/docker/for-win/issues/10008)
+- Fixed an issue where an image deleted from the Docker dashboard was still displayed on the **Images** view.
+
+## Docker Desktop 3.1.0
 2021-01-14
 
-> [Download](https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe)
+> [Download](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -36,7 +214,7 @@ This page contains information about the new features, improvements, known issue
 - Fixed UI reliability issues when users create or delete a lot of objects in batches.
 - Redesigned the **Support** UI to improve usability.
 
-## Docker Desktop Community 3.0.4
+## Docker Desktop 3.0.4
 2021-01-06
 
 > [Download](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe)
@@ -49,7 +227,7 @@ This page contains information about the new features, improvements, known issue
 
 - Fixed an issue that could cause Docker Desktop to fail to start after upgrading to 3.0.0. Fixes [docker/for-win#9755](https://github.com/docker/for-win/issues/9755).
 
-## Docker Desktop Community 3.0.0
+## Docker Desktop 3.0.0
 2020-12-10
 
 > [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
@@ -142,7 +320,7 @@ Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 
 - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli), enabling use of volumes with Compose and the Cloud through ECS and ACI.
 - Docker introduces the new Images view in the Docker Dashboard. The images view allows users to view the Hub images, pull them and manage their local images on disk including cleaning up unwanted and unused images. To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
-- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Preferences** > **Docker Engine** and then disable the BuildKit feature.
+- Docker Desktop now enables BuildKit by default after a reset to factory defaults. To revert to the old `docker build` experience, go to **Settings** > **Docker Engine** and then disable the BuildKit feature.
 - [Amazon ECR Credential Helper](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.4.0)
 
 ### Upgrades
@@ -276,7 +454,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-- Windows 10 Home users can now use Docker Desktop through WSL 2. This requires Windows 10, version 2004 or higher. For more information, see [Install Docker Desktop on Windows Home](install-windows-home.md).
+- Windows 10 Home users can now use Docker Desktop through WSL 2. This requires Windows 10, version 2004 or higher. For more information, see [Install Docker Desktop on Windows](install.md).
 - Docker Desktop introduces a new onboarding tutorial upon first startup. The Quick Start tutorial guides users to get started with Docker in a few easy steps. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 - Docker Desktop now allows sharing individual folders, rather than whole drives, giving more control to users over what is being shared.
 
@@ -780,7 +958,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
   - Fix Linuxkit start on Windows RS4 Insider. Fixes [docker/for-win#1458](https://github.com/docker/for-win/issues/1458), [docker/for-win#1514](https://github.com/docker/for-win/issues/1514), [docker/for-win#1640](https://github.com/docker/for-win/issues/1640)
   - Fix risk of privilege escalation. (https://www.tenable.com/sc-report-templates/microsoft-windows-unquoted-service-path-vulnerability)
   - All users present in the docker-users group are now able to use Docker. Fixes [docker/for-win#1732](https://github.com/docker/for-win/issues/1732)
-  - Migration of Docker Toolbox images is not proposed in Docker For Windows installer (still possible to [migrate Toolbox images manually](https://docs.docker.com/docker-for-windows/docker-toolbox/) ).
+  - Migration of Docker Toolbox images is not proposed in Docker For Windows installer (still possible to [migrate Toolbox images manually](https://docs.docker.com/toolbox/) ).
   - Better cleanup for Windows containers and images on reset/uninstall. Fixes [docker/for-win#1580](https://github.com/docker/for-win/issues/1580), [docker/for-win#1544](https://github.com/docker/for-win/issues/1544), [docker/for-win#191](https://github.com/docker/for-win/issues/191)
   - Desktop icon creation is optional in installer; do not recreate Desktop icon on upgrade (effective on next upgrade). Fixes [docker/for-win#246](https://github.com/docker/for-win/issues/246), [docker/for-win#925](https://github.com/docker/for-win/issues/925), [docker/for-win#1551](https://github.com/docker/for-win/issues/1551)
 

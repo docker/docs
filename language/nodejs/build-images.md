@@ -10,7 +10,7 @@ redirect_from:
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](/get-started/) to understand Docker concepts.
+Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
 
 ## Overview
 
@@ -19,12 +19,12 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 To complete this tutorial, you need the following:
 
 - Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
-- Docker running locally: Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
+- Docker running locally: Follow the instructions to [download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 
 ## Sample application
 
-Let’s create a simple Node.js application that we can use as our example. Create a directory on your local machine named `node-docker` and follow the steps below to create a simple REST API.
+Let’s create a simple Node.js application that we can use as our example. Create a directory in your local machine named `node-docker` and follow the steps below to create a simple REST API.
 
 ```shell
 $ cd [path to your node-docker directory]
@@ -37,7 +37,7 @@ Now, let’s add some code to handle our REST requests. We’ll use a mock serve
 
 Open this working directory in your IDE and add the following code into the `server.js` file.
 
-```node
+```js
 const ronin     = require( 'ronin-server' )
 const mocks     = require( 'ronin-mocks' )
 
@@ -49,7 +49,7 @@ server.start()
 
 The mocking server is called `Ronin.js` and will listen on port 8000 by default. You can make POST requests to the root (/) endpoint and any JSON structure you send to the server will be saved in memory. You can also send GET requests to the same endpoint and receive an array of JSON objects that you have previously POSTed.
 
-## Test application
+## Test the application
 
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to your working directory you created.
 
@@ -72,7 +72,7 @@ $ curl http://localhost:8000/test
 
 Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
 
-```node
+```
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
@@ -87,9 +87,27 @@ Let’s walk through the process of creating a Dockerfile for our application. I
 >
 > The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
 
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
+While _optional_, this directive instructs the Docker builder what syntax to use
+when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
+to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
+must appear before any other comment, whitespace, or Dockerfile instruction in
+your Dockerfile, should be the first line in Dockerfiles.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+```
+
+We recommend using `docker/dockerfile:1`, which always points to the latest release
+of the version 1 syntax. BuildKit automatically checks for updates of the syntax
+before building, making sure you are using the most current version.
+
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ```
 
@@ -103,7 +121,7 @@ In the same way, when we use the `FROM` command, we tell Docker to include in ou
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> If you want to learn more about creating your own base images, see [Creating base images](../../develop/develop-images/baseimages.md).
 
 The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set `NODE_ENV` to `production`.
 
@@ -117,7 +135,7 @@ To make things easier when running the rest of our commands, let’s create a wo
 WORKDIR /app
 ```
 
-Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This will ensure that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
+Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This ensures that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
 
 Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The  `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
 
@@ -146,6 +164,8 @@ CMD [ "node", "server.js" ]
 Here's the complete Dockerfile.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM node:12.18.1
 ENV NODE_ENV=production
 
@@ -158,6 +178,14 @@ RUN npm install --production
 COPY . .
 
 CMD [ "node", "server.js" ]
+```
+
+## Create a .dockerignore file
+
+To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase the build’s performance, exclude files and directories by adding a .dockerignore file to the context directory. To improve the context load time create a `.dockerignore` file and add `node_modules` directory in it.
+
+```.dockerignore
+node_modules
 ```
 
 ## Build image
@@ -182,7 +210,7 @@ Successfully built e03018e56163
 Successfully tagged node-docker:latest
 ```
 
-## Viewing local images
+## View local images
 
 To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use Docker Desktop. Since we are currently working in the terminal let’s take a look at listing images with the CLI.
 
@@ -245,10 +273,10 @@ Our image that was tagged with `:v1.0.0` has been removed but we still have the 
 
 In this module, we took a look at setting up our example Node application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module, we’ll take a look at how to:
 
-[Run your image as a container](run-containers.md){: .button .outline-btn}
+[Run your image as a container](run-containers.md){: .button .primary-btn}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 
 <br />

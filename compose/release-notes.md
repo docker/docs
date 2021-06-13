@@ -7,6 +7,124 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.29.2
+(2021-05-10)
+
+### Miscellaneous
+
+- Removed the prompt to use `docker compose` in the `up` command.
+
+- Bumped `py` to `1.10.0` in `requirements-indirect.txt`.
+
+## 1.29.1
+(2021-04-13)
+
+### Bugs
+
+- Fixed invalid handler warning on Windows builds.
+
+- Fixed config hash to trigger container re-creation on IPC mode updates.
+
+- Fixed conversion map for `placement.max_replicas_per_node`.
+
+- Removed extra scan suggestion on build.
+
+## 1.29.0
+(2021-04-06)
+
+### Features
+
+- Added profile filter to `docker-compose config`.
+
+- Added a `depends_on` condition to wait for successful service completion.
+
+### Miscellaneous
+
+- Added an image scan message on build.
+
+- Updated warning message for `--no-ansi` to mention `--ansi never` as alternative.
+
+- Bumped docker-py to 5.0.0.
+
+- Bumped PyYAML to 5.4.1.
+
+- Bumped python-dotenv to 0.17.0.
+
+## 1.28.6
+(2021-03-23)
+
+### Bug fixes
+
+- Made `--env-file` relative to the current working directory. Environment file paths set with `--env-file` are now relative to the current working directory and override the default `.env` file located in the project directory.
+
+- Fixed missing service property `storage_opt` by updating the Compose schema.
+
+- Fixed build `extra_hosts` list format.
+
+- Removed additional error message on `exec`.
+
+### Miscellaneous
+
+- Added `compose.yml` and `compose.yaml` to the default filename list.
+
+## 1.28.5 
+(2021-02-26)
+
+### Bugs
+
+- Fixed the OpenSSL version mismatch error when shelling out to the SSH client (via bump to docker-py 4.4.4 which contains the fix).
+
+- Added missing build flags to the native builder: `platform`, `isolation` and `extra_hosts`.
+
+- Removed info message on native build.
+
+- Fixed the log fetching bug when service logging driver is set to 'none'.
+
+## 1.28.4
+(2021-02-18)
+
+### Bug fixes
+
+- Fixed SSH port parsing by bumping docker-py to 4.4.3.
+
+### Miscellaneous
+
+- Bumped Python to 3.7.10.
+
+## 1.28.3
+(2021-02-17)
+
+### Bug fixes
+
+- Fixed SSH hostname parsing when it contains a leading 's'/'h', and removed the quiet option that was hiding the error (via docker-py bump to 4.4.2).
+
+- Fixed key error for `--no-log-prefix` option.
+
+- Fixed incorrect CLI environment variable name for service profiles: `COMPOSE_PROFILES` instead of `COMPOSE_PROFILE`.
+
+- Fixed the fish completion.
+
+### Miscellaneous
+
+- Bumped cryptography to 3.3.2.
+
+- Removed the log driver filter.
+
+For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https://github.com/docker/compose/milestone/53?closed=1){:target="_blank" rel="noopener" class="_"}.
+
+## 1.28.2
+(2021-01-26)
+
+### Bug fixes
+
+- Revert to Python 3.7 bump for Linux static builds
+
+- Add bash completion for `docker-compose logs|up --no-log-prefix`
+
+### Miscellaneous
+
+- CI setup update
+
 ## 1.28.0 
 (2021-01-20)
 
@@ -24,7 +142,7 @@ redirect_from:
 
 - Docker Compose now uses the native Docker CLI's `build` command when building images. Set the `COMPOSE_DOCKER_CLI_BUILD=0` environment variable to disable this feature.
 
-### Bugs
+### Bug fixes
 
 - Made `parallel_pull=True` by default.
 
@@ -73,7 +191,7 @@ redirect_from:
 ## 1.27.4 
 (2020-09-24)
 
-### Bugs
+### Bug fixes
 
 - Removed path checks for bind mounts.
 
@@ -84,7 +202,7 @@ redirect_from:
 ## 1.27.3 
 (2020-09-16)
 
-### Bugs
+### Bug fixes
 
 - Merged `max_replicas_per_node` on `docker-compose config`.
 
@@ -99,14 +217,14 @@ redirect_from:
 ## 1.27.2
 (2020-09-10)
 
-### Bugs
+### Bug fixes
 
 - Fixed bug on `docker-compose run` container attach.
 
 ## 1.27.1
 (2020-09-10)
 
-### Bugs
+### Bug fixes
 
 - Fixed `docker-compose run` when `service.scale` is specified.
 
@@ -135,7 +253,7 @@ redirect_from:
 
 - Parsed `network_mode` on build.
 
-### Bugs
+### Bug fixes
 
 - Ignored build context path validation when building is not required.
 

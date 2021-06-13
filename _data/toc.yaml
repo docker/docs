@@ -7,7 +7,7 @@ horizontalnav:
   path: /get-started/overview/
   node: guides
 - title: Product manuals
-  path: /engine/
+  path: /desktop/
   node: manuals
 - title: Reference
   path: /reference/
@@ -29,21 +29,21 @@ guides:
   section:
     - title: "Part 1: Getting started"
       path: /get-started/
-    - title: "Part 2: Our Application"
+    - title: "Part 2: Sample application"
       path: /get-started/02_our_app/
-    - title: "Part 3: Updating our Application"
+    - title: "Part 3: Update the application"
       path: /get-started/03_updating_app/
-    - title: "Part 4: Sharing Our Application"
+    - title: "Part 4: Share the application"
       path: /get-started/04_sharing_app/
-    - title: "Part 5: Persisting our DB"
+    - title: "Part 5: Persist the DB"
       path: /get-started/05_persisting_data/
-    - title: "Part 6: Using Bind Mounts"
+    - title: "Part 6: Use bind mounts"
       path: /get-started/06_bind_mounts/
-    - title: "Part 7: Multi-Container Applications"
+    - title: "Part 7: Multi-container apps"
       path: /get-started/07_multi_container/
-    - title: "Part 8: Using Docker Compose"
+    - title: "Part 8: Use Docker Compose"
       path: /get-started/08_using_compose/
-    - title: "Part 9: Image building tips"
+    - title: "Part 9: Image-building best practices"
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
@@ -79,10 +79,24 @@ guides:
       path: /language/python/develop/
     - title: "Configure CI/CD"
       path: /language/python/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/python/deploy/
   - sectiontitle: Java
     section:
     - title: "Overview"
       path: /language/java/
+    - title: "Build images"
+      path: /language/java/build-images/
+    - title: "Run containers"
+      path: /language/java/run-containers/
+    - title: "Develop your app"
+      path: /language/java/develop/
+    - title: "Run your tests"
+      path: /language/java/run-tests/
+    - title: "Configure CI/CD"
+      path: /language/java/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/java/deploy/
   - sectiontitle: Go
     section:
     - title: "Overview"
@@ -117,6 +131,8 @@ guides:
       title: Manage images
     - path: /develop/develop-images/baseimages/
       title: Create your own base image (advanced)
+  - path: /develop/scan-images/
+    title: Scan images
 - sectiontitle: Set up CI/CD
   section:
   - path: /ci-cd/best-practices/
@@ -219,7 +235,7 @@ guides:
         title: Docker security
       - path: /engine/security/non-events/
         title: Docker security non-events
-      - path: /engine/security/https/
+      - path: /engine/security/protect-access/
         title: Protect the Docker daemon socket
       - path: /engine/security/certificates/
         title: Using certificates for repository client verification
@@ -329,6 +345,8 @@ guides:
       title: Use overlay networks
     - path: /network/host/
       title: Use host networking
+    - path: /network/ipvlan/
+      title: Use IPvlan networks
     - path: /network/macvlan/
       title: Use Macvlan networks
     - path: /network/none/
@@ -398,6 +416,8 @@ guides:
 - path: /docsarchive/
   title: Documentation archive
 reference:
+- path: /reference/
+  title: Reference documentation
 - sectiontitle: Command-line reference
   section:
   - sectiontitle: Docker CLI (docker)
@@ -424,16 +444,12 @@ reference:
           title: docker app install
         - path: /engine/reference/commandline/app_list/
           title: docker app list
-        - path: /engine/reference/commandline/app_merge/
-          title: docker app merge
         - path: /engine/reference/commandline/app_pull/
           title: docker app pull
         - path: /engine/reference/commandline/app_push/
           title: docker app push
         - path: /engine/reference/commandline/app_render/
           title: docker app render
-        - path: /engine/reference/commandline/app_split/
-          title: docker app split
         - path: /engine/reference/commandline/app_status/
           title: docker app status
         - path: /engine/reference/commandline/app_uninstall/
@@ -476,6 +492,8 @@ reference:
           title: docker buildx imagetools inspect
         - path: /engine/reference/commandline/buildx_inspect/
           title: docker buildx inspect
+        - path: /engine/reference/commandline/buildx_install/
+          title: docker buildx install
         - path: /engine/reference/commandline/buildx_ls/
           title: docker buildx ls
         - path: /engine/reference/commandline/buildx_prune/
@@ -484,6 +502,8 @@ reference:
           title: docker buildx rm
         - path: /engine/reference/commandline/buildx_stop/
           title: docker buildx stop
+        - path: /engine/reference/commandline/buildx_uninstall/
+          title: docker buildx uninstall
         - path: /engine/reference/commandline/buildx_use/
           title: docker buildx use
         - path: /engine/reference/commandline/buildx_version/
@@ -520,6 +540,52 @@ reference:
           title: docker cluster version
     - path: /engine/reference/commandline/commit/
       title: docker commit
+    - sectiontitle: docker compose
+      section:
+        - path: /engine/reference/commandline/compose/
+          title: docker compose
+        - path: /engine/reference/commandline/compose_build/
+          title: docker compose build
+        - path: /engine/reference/commandline/compose_convert/
+          title: docker compose convert
+        - path: /engine/reference/commandline/compose_create/
+          title: docker compose create
+        - path: /engine/reference/commandline/compose_down/
+          title: docker compose down
+        - path: /engine/reference/commandline/compose_events/
+          title: docker compose events
+        - path: /engine/reference/commandline/compose_exec/
+          title: docker compose exec
+        - path: /engine/reference/commandline/compose_images/
+          title: docker compose images
+        - path: /engine/reference/commandline/compose_kill/
+          title: docker compose kill
+        - path: /engine/reference/commandline/compose_logs/
+          title: docker compose logs
+        - path: /engine/reference/commandline/compose_ls/
+          title: docker compose ls
+        - path: /engine/reference/commandline/compose_pause/
+          title: docker compose pause
+        - path: /engine/reference/commandline/compose_ps/
+          title: docker compose ps
+        - path: /engine/reference/commandline/compose_pull/
+          title: docker compose pull
+        - path: /engine/reference/commandline/compose_push/
+          title: docker compose push
+        - path: /engine/reference/commandline/compose_rm/
+          title: docker compose rm
+        - path: /engine/reference/commandline/compose_run/
+          title: docker compose run
+        - path: /engine/reference/commandline/compose_start/
+          title: docker compose start
+        - path: /engine/reference/commandline/compose_stop/
+          title: docker compose stop
+        - path: /engine/reference/commandline/compose_top/
+          title: docker compose top
+        - path: /engine/reference/commandline/compose_unpause/
+          title: docker compose unpause
+        - path: /engine/reference/commandline/compose_up/
+          title: docker compose up
     - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
@@ -748,24 +814,6 @@ reference:
       title: docker pull
     - path: /engine/reference/commandline/push/
       title: docker push
-    - sectiontitle: docker registry
-      section:
-        - path: /engine/reference/commandline/registry/
-          title: docker registry
-        - path: /engine/reference/commandline/registry_events/
-          title: docker registry events
-        - path: /engine/reference/commandline/registry_history/
-          title: docker registry history
-        - path: /engine/reference/commandline/registry_info/
-          title: docker registry info
-        - path: /engine/reference/commandline/registry_inspect/
-          title: docker registry inspect
-        - path: /engine/reference/commandline/registry_joblogs/
-          title: docker registry joblogs
-        - path: /engine/reference/commandline/registry_ls/
-          title: docker registry ls
-        - path: /engine/reference/commandline/registry_rmi/
-          title: docker registry rmi
     - path: /engine/reference/commandline/rename/
       title: docker rename
     - path: /engine/reference/commandline/restart/
@@ -820,6 +868,8 @@ reference:
         title: docker stack
       - path: /engine/reference/commandline/stack_deploy/
         title: docker stack deploy
+      - path: /engine/reference/commandline/stack_ls/
+        title: docker stack ls
       - path: /engine/reference/commandline/stack_ps/
         title: docker stack ps
       - path: /engine/reference/commandline/stack_rm/
@@ -912,7 +962,7 @@ reference:
       title: docker wait
   - sectiontitle: Docker Compose CLI reference
     section:
-    - path: /compose/reference/overview/
+    - path: /compose/reference/
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
@@ -932,6 +982,8 @@ reference:
       title: docker-compose exec
     - path: /compose/reference/help/
       title: docker-compose help
+    - path: /compose/reference/images/
+      title: docker-compose images
     - path: /compose/reference/kill/
       title: docker-compose kill
     - path: /compose/reference/logs/
@@ -1030,6 +1082,8 @@ reference:
         title: v1.19 reference
       - path: /engine/api/v1.18/
         title: v1.18 reference
+  - title: Docker Hub API
+    path: /docker-hub/api/latest/
   - title: Registry API
     path: /registry/spec/api/
 - title: Dockerfile reference
@@ -1042,8 +1096,6 @@ reference:
       title: Version 3
     - path: /compose/compose-file/compose-file-v2/
       title: Version 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
     - path: /compose/compose-file/compose-versioning/
       title: About versions and upgrading
     - path: /compose/faq/
@@ -1094,36 +1146,81 @@ reference:
 
 
 samples:
+- path: /samples/
+  title: Samples overview
 - path: /samples/#tutorial-labs
   title: Tutorial labs
 - sectiontitle: Sample applications
   section:
-  - path: /samples/
-    title: Samples home
-  - path: /engine/examples/apt-cacher-ng/
+  - path: /samples/apt-cacher-ng/
     title: apt-cacher-ng
-  - path: /engine/examples/dotnetcore/
+  - path: /samples/dotnetcore/
     title: ASP.NET Core application
-  - path: /compose/aspnet-mssql-compose/
+  - path: /samples/aspnet-mssql-compose/
     title: ASP.NET Core + SQL Server on Linux
-  - path: /engine/examples/couchdb_data_volumes/
+  - path: /samples/couchdb_data_volumes/
     title: CouchDB
-  - path: /compose/django/
+  - path: /samples/django/
     title: Django and PostgreSQL
-  - path: /compose/wordpress/
+  - path: /samples/wordpress/
     title: WordPress
-  - path: /engine/examples/postgresql_service/
+  - path: /samples/postgresql_service/
     title: PostgreSQL
-  - path: /compose/rails/
+  - path: /samples/rails/
     title: Rails and PostgreSQL
-  - path: /engine/examples/running_riak_service/
+  - path: /samples/running_riak_service/
     title: Riak
-  - path: /engine/examples/running_ssh_service/
-    title: SSHd
 - path: /samples/#library-references
   title: Library references
 
 manuals:
+- sectiontitle: Docker Desktop
+  section:
+    - path: /desktop/
+      title: Overview
+    - sectiontitle: Mac
+      section:
+        - path: /docker-for-mac/install/
+          title: Install Docker Desktop for Mac
+        - path: /docker-for-mac/
+          title: User manual
+        - path: /docker-for-mac/networking/
+          title: Networking
+        - path: /docker-for-mac/space/
+          title: Disk utilization
+        - path: /docker-for-mac/troubleshoot/
+          title: Logs and troubleshooting
+        - path: /docker-for-mac/release-notes/
+          title: Release notes
+        - path: /docker-for-mac/apple-silicon/
+          title: Apple silicon
+    - sectiontitle: Windows
+      section:
+        - path: /docker-for-windows/install/
+          title: Install Docker Desktop for Windows
+        - path: /docker-for-windows/
+          title: User manual
+        - path: /docker-for-windows/networking/
+          title: Networking
+        - path: /docker-for-windows/troubleshoot/
+          title: Logs and troubleshooting
+        - path: /docker-for-windows/release-notes/
+          title: Release notes
+        - path: /docker-for-windows/wsl/
+          title: Docker Desktop WSL 2 backend
+    - path: /desktop/dashboard/
+      title: Dashboard
+    - path: /desktop/multi-arch/
+      title: Multi-arch support
+    - path: /desktop/kubernetes/
+      title: Deploy on Kubernetes
+    - path: /desktop/faqs/
+      title: FAQs
+    - path: /desktop/backup-and-restore/
+      title: Back up and restore data
+    - path: /desktop/opensource/
+      title: Open source licensing
+
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -1142,8 +1239,8 @@ manuals:
       title: Install on Ubuntu
     - path: /engine/install/binaries/
       title: Install binaries
-    - path: /engine/install/linux-postinstall/
-      title: Optional post-installation steps
+  - path: /engine/install/linux-postinstall/
+    title: Optional post-installation steps
   - path: /engine/release-notes/
     title: Release notes
   - sectiontitle: Previous versions
@@ -1187,8 +1284,6 @@ manuals:
   - path: /engine/deprecated/
     title: Deprecated features
 
-  - path: /app/working-with-app/
-    title: Docker App
   - path: /buildx/working-with-buildx/
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
@@ -1200,16 +1295,24 @@ manuals:
   section:
   - path: /compose/
     title: Overview of Docker Compose
+  - sectiontitle: Compose V2
+    section:
+    - path: /compose/cli-command/
+      title: Overview
+    - path: /compose/cli-command-compatibility/
+      title: Compose v2 compatibility
   - path: /compose/install/
     title: Install Compose
-  - path: /compose/release-notes/
-    title: Release notes
   - path: /compose/gettingstarted/
     title: Getting started
   - path: /compose/environment-variables/
     title: Environment variables in Compose
   - path: /compose/env-file/
     title: Environment file
+  - path: /compose/profiles/
+    title: Using service profiles
+  - path: /compose/gpu-support/
+    title: GPU support in Compose
   - path: /compose/extends/
     title: Extend services in Compose
   - path: /compose/networking/
@@ -1220,84 +1323,19 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /release-notes/docker-compose/
-    title: Docker Compose release notes
-- sectiontitle: Docker Desktop
-  section:
-  - path: /desktop/
-    title: Overview
-  - sectiontitle: Mac
-    section:
-    - path: /docker-for-mac/install/
-      title: Install Docker Desktop for Mac
-    - path: /docker-for-mac/
-      title: User manual
-    - path: /docker-for-mac/kubernetes/
-      title: Deploy on Kubernetes
-    - path: /docker-for-mac/multi-arch/
-      title: Leveraging Multi-CPU architecture support
-    - path: /docker-for-mac/networking/
-      title: Networking
-    - path: /docker-for-mac/space/
-      title: Disk utilization
-    - path: /docker-for-mac/troubleshoot/
-      title: Logs and troubleshooting
-    - path: /docker-for-mac/faqs/
-      title: FAQs
-    - path: /docker-for-mac/release-notes/
-      title: Release notes
-    - path: /docker-for-mac/apple-m1/
-      title: Apple M1 Tech Preview
-  - sectiontitle: Windows
-    section:
-    - path: /docker-for-windows/install/
-      title: Install Docker Desktop for Windows
-    - path: /docker-for-windows/install-windows-home/
-      title: Install Docker Desktop on Windows Home
-    - path: /docker-for-windows/
-      title: User manual
-    - path: /docker-for-windows/kubernetes/
-      title: Deploy on Kubernetes
-    - path: /docker-for-windows/networking/
-      title: Networking
-    - path: /docker-for-windows/troubleshoot/
-      title: Logs and troubleshooting
-    - path: /docker-for-windows/faqs/
-      title: FAQs
-    - path: /docker-for-windows/release-notes/
-      title: Release notes
-    - path: /docker-for-windows/wsl/
-      title: Docker Desktop WSL 2 backend
-  - path: /desktop/dashboard/
-    title: Dashboard
-  - path: /desktop/opensource/
-    title: Open source licensing
+  - path: /compose/release-notes/
+    title: Release notes
+
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
-  - path: /docker-hub/orgs/
-    title: Teams and organizations
   - path: /docker-hub/repos/
     title: Repositories
-  - path: /docker-hub/vulnerability-scanning/
-    title: Vulnerability scanning
+  - path: /docker-hub/service-accounts/
+    title: Service accounts
   - path: /docker-hub/official_images/
     title: Official images
   - sectiontitle: Automated builds
@@ -1314,10 +1352,32 @@ manuals:
     title: Webhooks
   - path: /docker-hub/slack_integration/
     title: Slack integration
+  - path: /docker-hub/orgs/
+    title: Teams and organizations
+  - path: /docker-hub/vulnerability-scanning/
+    title: Vulnerability scanning
+  - path: /docker-hub/audit-log/
+    title: Audit log
+  - sectiontitle: Security and authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Manage access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - sectiontitle: Administration
     section:
+     - path: /docker-hub/image-management/
+       title: Advanced Image Management dashboard
      - path: /docker-hub/convert-account/
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
@@ -1336,50 +1396,12 @@ manuals:
       title: Remove seats
     - path: /docker-hub/billing/faq/
       title: Pricing FAQs
-  - sectiontitle: Publisher & certified content
-    section:
-    - path: /docker-hub/publish/
-      title: Overview
-    - path: /docker-hub/publish/publish/
-      title: Submit a product for Docker Hub
-    - path: /docker-hub/publish/customer_faq/
-      title: User FAQs
-    - path: /docker-hub/publish/publisher_faq/
-      title: Publisher FAQs
-    - path: /docker-hub/publish/certify-images/
-      title: Certify images & plugins
-    - path: /docker-hub/publish/certify-plugins-logging/
-      title: Certify logging plugins
-    - path: /docker-hub/publish/trustchain/
-      title: Trust chain
-    - path: /docker-hub/publish/byol/
-      title: Bring Your Own License (BYOL)
+  - path: /docker-hub/publish/
+    title: Verified Publisher Program
   - path: /docker-hub/release-notes/
     title: Release notes
 - sectiontitle: Open-source projects
   section:
-  - sectiontitle: Notary
-    section:
-    - path: /notary/getting_started/
-      title: Get started with Notary
-    - path: /notary/advanced_usage/
-      title: Use the Notary client
-    - path: /notary/service_architecture/
-      title: Understand the service architecture
-    - path: /notary/running_a_service/
-      title: Run a Notary service
-    - path: /notary/changelog/
-      title: Notary changelog
-    - sectiontitle: Configuration files
-      section:
-      - path: /notary/reference/server-config/
-        title: Server configuration
-      - path: /notary/reference/signer-config/
-        title: Signer configuration
-      - path: /notary/reference/client-config/
-        title: Client configuration
-      - path: /notary/reference/common-configs/
-        title: Common Server and signer configurations
   - sectiontitle: Docker Registry
     section:
     - path: /registry/
@@ -1522,7 +1544,7 @@ manuals:
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
         title: Migrate from Boot2Docker to Machine
-  - path: /docker-for-windows/docker-toolbox/
+  - path: /toolbox/
     title: Docker Toolbox (deprecated)
   - sectiontitle: Kitematic
     section:
@@ -1538,6 +1560,3 @@ manuals:
       title: Frequently asked questions
     - path: /kitematic/known-issues/
       title: Known issues
-    - path: /toolbox/faqs/troubleshoot/
-      title: Troubleshooting
-      nosync: true

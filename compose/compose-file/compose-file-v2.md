@@ -182,6 +182,8 @@ build process.
 First, specify the arguments in your Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG buildno
 ARG gitcommithash
 
@@ -997,8 +999,6 @@ options:
 ### network_mode
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `network_mode` option replaces the version 1 [net](compose-file-v1.md#net) option.
 
 Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
@@ -1022,8 +1022,6 @@ network_mode: "container:[container name/id]"
 ### networks
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `networks` option replaces the version 1 [net](compose-file-v1.md#net) option.
 
 Networks to join, referencing entries under the
 [top-level `networks` key](#network-configuration-reference).
@@ -1534,15 +1532,6 @@ volumes_from:
 ```
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `container:...` formats are only supported in the [version 2](compose-versioning.md#version-2)
-> file format. In [version 1](compose-versioning.md#version-1), you can use container
-> names without marking them as such:
->
->     - `service_name`
->     - `service_name:ro`
->     - `container_name`
->     - `container_name:rw`
 
 ### restart
 
@@ -1817,7 +1806,7 @@ driver: overlay
 
 > Changed in [version 2.1](compose-versioning.md#version-21) file format.
 >
-> Starting in Compose file format 2.1, overlay networks are always created as
+> Starting with Compose file format 2.1, overlay networks are always created as
 > `attachable`, and this is not configurable. This means that standalone
 > containers can connect to overlay networks.
 

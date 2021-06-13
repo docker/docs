@@ -18,27 +18,27 @@ on GitHub.
     If you are running **macOS**:
 
     ```console
-    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
-      curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine &&
-      chmod +x /usr/local/bin/docker-machine
+    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} \
+      && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/usr/local/bin/docker-machine \
+      && chmod +x /usr/local/bin/docker-machine
     ```
 
     If you are running **Linux**:
 
     ```console
-    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
-      curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
-      sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
-      chmod +x /usr/local/bin/docker-machine
+    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} \
+      && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine \
+      && sudo mv /tmp/docker-machine /usr/local/bin/docker-machine \
+      && chmod +x /usr/local/bin/docker-machine
     ```
 
     If you are running **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" rel="noopener" class="_"}:
 
     ```console
-    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
-      mkdir -p "$HOME/bin" &&
-      curl -L $base/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" &&
-      chmod +x "$HOME/bin/docker-machine.exe"
+    $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} \
+      && mkdir -p "$HOME/bin" \
+      && curl -L $base/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" \
+      && chmod +x "$HOME/bin/docker-machine.exe"
     ```
 
     > The above command works on Windows only if you use a
@@ -50,8 +50,10 @@ on GitHub.
 
 3.  Check the installation by displaying the Machine version:
 
-        $ docker-machine version
-        docker-machine version {{site.machine_version}}, build 9371605
+    ```console
+    $ docker-machine version
+    docker-machine version {{site.machine_version}}, build 9371605
+    ```
 
 ## Install bash completion scripts
 
@@ -82,7 +84,7 @@ terminal to tell your setup where it can find the file
 To enable the `docker-machine` shell prompt, add
 `$(__docker_machine_ps1)` to your `PS1` setting in `~/.bashrc`.
 
-```
+```bash
 PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 ```
 
@@ -111,13 +113,15 @@ To uninstall Docker Machine:
 *  Remove the executable: `rm $(which docker-machine)`
 
 
->**Note**: As a point of information, the `config.json`, certificates,
-and other data related to each virtual machine created by `docker-machine`
-is stored in `~/.docker/machine/machines/` on Mac and Linux and in
-`~\.docker\machine\machines\` on Windows. We recommend that you do not edit or
-remove those files directly as this only affects information for the Docker
-CLI, not the actual VMs, regardless of whether they are local or on remote
-servers.
+> **Note**
+>
+> As a point of information, the `config.json`, certificates,
+> and other data related to each virtual machine created by `docker-machine`
+> is stored in `~/.docker/machine/machines/` on Mac and Linux and in
+> `~\.docker\machine\machines\` on Windows. We recommend that you do not edit or
+> remove those files directly as this only affects information for the Docker
+> CLI, not the actual VMs, regardless of whether they are local or on remote
+> servers.
 
 ## Where to go next
 

@@ -30,6 +30,7 @@ instruction in the image's Dockerfile. Each layer except the very last one is
 read-only. Consider the following Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -164,6 +165,7 @@ Now imagine that you have two different Dockerfiles. You use the first one to
 create an image called `acme/my-base-image:1.0`.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 ```
@@ -172,6 +174,7 @@ The second one is based on `acme/my-base-image:1.0`, but has some additional
 layers:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM acme/my-base-image:1.0
 CMD /app/hello.sh
 ```
@@ -210,7 +213,7 @@ layers are the same.
     include the final `.` in the command. That sets the `PATH`, which tells
     Docker where to look for any files that need to be added to the image.
 
-    ```bash
+    ```console
     $ docker build -t acme/my-base-image:1.0 -f Dockerfile.base .
     Sending build context to Docker daemon  812.4MB
     Step 1/2 : FROM ubuntu:18.04
@@ -224,7 +227,7 @@ layers are the same.
 
 6.  Build the second image.
 
-    ```bash
+    ```console
     $ docker build -t acme/my-final-image:1.0 -f Dockerfile .
 
     Sending build context to Docker daemon  4.096kB
@@ -240,7 +243,7 @@ layers are the same.
 
 7.  Check out the sizes of the images:
 
-    ```bash
+    ```console
     $ docker image ls
 
     REPOSITORY                         TAG                     IMAGE ID            CREATED             SIZE
@@ -250,7 +253,7 @@ layers are the same.
 
 8.  Check out the layers that comprise each image:
 
-    ```bash
+    ```console
     $ docker history bd09118bcef6
     IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
     bd09118bcef6        4 minutes ago       /bin/sh -c #(nop) COPY dir:35a7eb158c1504e...   100B                
@@ -262,7 +265,7 @@ layers are the same.
     <missing>           3 months ago        /bin/sh -c #(nop) ADD file:eef57983bd66e3a...   103MB      
     ```
 
-    ```bash
+    ```console
     $ docker history dbf995fc07ff
 
     IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT

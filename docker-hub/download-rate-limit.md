@@ -4,13 +4,21 @@ keywords: Docker, pull requests, download, limit,
 title: Download rate limit
 ---
 
-Docker has enabled download rate limits for pull requests on 
-Docker Hub. Limits are determined based on the account type. 
-For more information, see [Resource Consumption FAQs](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} and [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+## What is the download rate limit on Docker Hub
 
-A user's limit will be equal to the highest entitlement of their
+Docker Hub limits the number of Docker image downloads ("pulls")
+based on the account type of the user pulling the image. 
+See the [pricing page](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for current options.
+
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
+
+Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
+
+## Definition of limits
+
+A user's limit is equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
-advantage of this, you must log into 
+advantage of this, you must log in to 
 [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
@@ -23,10 +31,7 @@ single manifest request.
 - A pull request for a multi-arch image makes two 
 manifest requests. 
 - `HEAD` requests are not counted. 
-- Limits are applied based on the user doing the pull, and 
-not based on the image being pulled or its owner.
 
-Docker will gradually introduce these rate limits starting November 2nd, 2020.
 
 ## How do I know my pull requests are being limited
 
@@ -43,35 +48,35 @@ You will see this error message in the Docker CLI or in the Docker Engine logs.
 Valid manifest API requests to Hub will usually include the following rate limit headers in the response:
 
 ```
-RateLimit-Limit    
-RateLimit-Remaining
+ratelimit-limit    
+ratelimit-remaining
 ```
 
 These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
 
 To get a token anonymously (if you are pulling anonymously):
 
-```
+```console
 $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
 To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
 
-```
+```console
 $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
 Then to get the headers showing your limits, run the following:
 
-```
+```console
 $ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 ```
 
 Which should return headers including these:
 
-```
-RateLimit-Limit: 100;w=21600
-RateLimit-Remaining: 76;w=21600
+```http
+ratelimit-limit: 100;w=21600
+ratelimit-remaining: 76;w=21600
 ```
 
 This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
@@ -80,7 +85,13 @@ This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls rema
 
 ### I don't see any RateLimit headers
 
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Legacy/Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or open source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
+
+## I'm being limited even though I have a Pro/Team account
+
+To take advantage of the higher limits included in these plans, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
+
+A Pro/Team plan does not increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
 
 ## How do I authenticate pull requests
 

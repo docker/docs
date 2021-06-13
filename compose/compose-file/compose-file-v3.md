@@ -247,6 +247,8 @@ build process.
 First, specify the arguments in your Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG buildno
 ARG gitcommithash
 
@@ -501,7 +503,7 @@ configs:
 The long syntax provides more granularity in how the config is created within
 the service's task containers.
 
-- `source`: The name of the config as it exists in Docker.
+- `source`: The identifier of the config as it is defined in this configuration.
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the mounted config file
@@ -652,7 +654,6 @@ services:
 >   starting `web` - only until they have been started. If you need to wait
 >   for a service to be ready, see [Controlling startup order](../startup-order.md)
 >   for more on this problem and strategies for solving it.
-> - Version 3 no longer supports the `condition` form of `depends_on`.
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
@@ -1639,10 +1640,16 @@ Expose ports.
 >
 > Port mapping is incompatible with `network_mode: host`
 
+> **Note**
+>
+> `docker-compose run` ignores `ports` unless you include `--service-ports`.
+
 #### Short syntax
 
-Either specify both ports (`HOST:CONTAINER`), or just the container
-port (an ephemeral host port is chosen).
+There are three options: 
+* Specify both ports (`HOST:CONTAINER`)
+* Specify just the container port (an ephemeral host port is chosen for the host port).
+* Specify the host IP address to bind to AND both ports (the default is 0.0.0.0, meaning all interfaces): (`IPADDR:HOSTPORT:CONTAINERPORT`). If HOSTPORT is empty (for example `127.0.0.1::80`), an ephemeral port is chosen to bind to on the host.
 
 > **Note**
 >
@@ -1660,6 +1667,7 @@ ports:
   - "49100:22"
   - "127.0.0.1:8001:8001"
   - "127.0.0.1:5000-5010:5000-5010"
+  - "127.0.0.1::5000"
   - "6060:6060/udp"
   - "12400-12500:1240"
 ```
@@ -1686,6 +1694,24 @@ ports:
 > Added in [version 3.2](compose-versioning.md#version-32) file format.
 >
 > The long syntax is new in the v3.2 file format.
+
+### profiles
+
+```yaml
+profiles: ["frontend", "debug"]
+profiles:
+  - frontend
+  - debug
+```
+
+`profiles` defines a list of named profiles for the service to be enabled under.
+When not set, the service is _always_ enabled. For the services that make up
+your core application you should omit `profiles` so they will always be started.
+
+Valid profile names follow the regex format `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
+
+See also [_Using profiles with Compose_](../profiles.md) to learn more about
+profiles.
 
 ### restart
 
@@ -1757,7 +1783,7 @@ secrets:
 The long syntax provides more granularity in how the secret is created within
 the service's task containers.
 
-- `source`: The name of the secret as it exists in Docker.
+- `source`: The identifier of the secret as it is defined in this configuration.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task containers. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the file within

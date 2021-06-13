@@ -15,7 +15,7 @@ This guide contains instructions on how to:
 
 ## Set up a Docker project
 
-Let’s get started. This guide uses a simple Docker project as an example. The [SimpleWhaleDemo](https://github.com/usha-mandya/SimpleWhaleDemo){:target="_blank" rel="noopener" class="_"} repository contains an Ngnix alpine image. You can either clone this repository, or use your own Docker project.
+Let’s get started. This guide uses a simple Docker project as an example. The [SimpleWhaleDemo](https://github.com/usha-mandya/SimpleWhaleDemo){:target="_blank" rel="noopener" class="_"} repository contains an Nginx alpine image. You can either clone this repository, or use your own Docker project.
 
 ![SimpleWhaleDemo](images/simplewhaledemo.png){:width="500px"}
 
@@ -98,7 +98,7 @@ Now, we can add the steps required. The first one checks-out our repository unde
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -151,7 +151,7 @@ Using the cache we set up earlier for it to store to and to retrieve
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ushamandya/simplewhale:latest
+          tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
@@ -207,7 +207,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
-        registry: ghcr.io
+          registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
 ```

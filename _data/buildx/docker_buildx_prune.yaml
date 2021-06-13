@@ -1,6 +1,6 @@
 command: docker buildx prune
-short: 'Remove build cache '
-long: 'Remove build cache '
+short: Remove build cache
+long: Remove build cache
 usage: docker buildx prune
 pname: docker buildx
 plink: docker_buildx.yaml
@@ -62,7 +62,7 @@ inherited_options:
   swarm: false
 deprecated: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

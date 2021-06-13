@@ -21,7 +21,7 @@ includes two services `db` and `web`, then Compose starts containers named
 
 Setting this is optional. If you do not set this, the `COMPOSE_PROJECT_NAME`
 defaults to the `basename` of the project directory. See also the `-p`
-[command-line option](overview.md).
+[command-line option](index.md).
 
 ## COMPOSE\_FILE
 
@@ -34,7 +34,20 @@ Linux and macOS the path separator is `:`, on Windows it is `;`). For example:
 `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`. The path separator
 can also be customized using `COMPOSE_PATH_SEPARATOR`.
 
-See also the `-f` [command-line option](overview.md).
+See also the `-f` [command-line option](index.md).
+
+## COMPOSE\_PROFILES
+
+Specify one or multiple active profiles to enable. Calling `docker-compose up`
+with `COMPOSE_PROFILES=frontend` will start the services with the profile
+`frontend` and services without specified profiles.
+
+You can specify a list of profiles separated with a comma:
+`COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
+`debug`.
+
+See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
+[command-line option](index.md#use---profile-to-specify-one-or-more-active-profiles).
 
 ## COMPOSE\_API\_VERSION
 

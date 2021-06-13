@@ -114,7 +114,7 @@ For production systems, see
       Data loop file: /var/lib/docker/devicemapper/data
       Metadata loop file: /var/lib/docker/devicemapper/metadata
       Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 
   This host is running in `loop-lvm` mode, which is **not** supported on
@@ -398,7 +398,7 @@ assumes that the Docker daemon is in the `stopped` state.
      Deferred Deletion Enabled: true
      Deferred Deleted Device Count: 0
      Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 
     If Docker is configured correctly, the `Data file` and `Metadata file` is
@@ -627,7 +627,7 @@ block device and other parameters to suit your situation.
      Metadata Space Used: 286.7 kB
      Metadata Space Total: 1.07 GB
      Metadata Space Available: 1.069 GB
-    <output truncated>
+    <...>
     ```
 
 ### Activate the `devicemapper` after reboot

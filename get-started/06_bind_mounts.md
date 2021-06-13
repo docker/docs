@@ -1,5 +1,5 @@
 ---
-title: "Using bind mounts"
+title: "Use bind mounts"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Using bind mounts in our application
 ---
@@ -8,18 +8,18 @@ In the previous chapter, we talked about and used a **named volume** to persist 
 Named volumes are great if we simply want to store data, as we don't have to worry about _where_ the data
 is stored.
 
-With **bind mounts**, we control the exact mountpoint on the host. We can use this to persist data, but is often
+With **bind mounts**, we control the exact mountpoint on the host. We can use this to persist data, but it's often
 used to provide additional data into containers. When working on an application, we can use a bind mount to
 mount our source code into the container to let it see code changes, respond, and let us see the changes right
 away.
 
-For Node-based applications, [nodemon](https://npmjs.com/package/nodemon) is a great tool to watch for file
+For Node-based applications, [nodemon](https://npmjs.com/package/nodemon){:target="_blank" rel="noopener" class="_"} is a great tool to watch for file
 changes and then restart the application. There are equivalent tools in most other languages and frameworks.
 
-## Quick Volume Type Comparisons
+## Quick volume type comparisons
 
 Bind mounts and named volumes are the two main types of volumes that come with the Docker engine. However, additional
-volume drivers are available to support other uses cases ([SFTP](https://github.com/vieux/docker-volume-sshfs), [Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/), [NetApp](https://netappdvp.readthedocs.io/en/stable/), [S3](https://github.com/elementar/docker-s3-volume), and more).
+volume drivers are available to support other uses cases ([SFTP](https://github.com/vieux/docker-volume-sshfs){:target="_blank" rel="noopener" class="_"}, [Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/){:target="_blank" rel="noopener" class="_"}, [NetApp](https://netappdvp.readthedocs.io/en/stable/){:target="_blank" rel="noopener" class="_"}, [S3](https://github.com/elementar/docker-s3-volume){:target="_blank" rel="noopener" class="_"}, and more).
 
 |   | Named Volumes | Bind Mounts |
 | - | ------------- | ----------- |
@@ -28,8 +28,7 @@ volume drivers are available to support other uses cases ([SFTP](https://github.
 | Populates new volume with container contents | Yes | No |
 | Supports Volume Drivers | Yes | No |
 
-
-## Starting a Dev-Mode Container
+## Start a dev-mode container
 
 To run our container to support a development workflow, we will do the following:
 
@@ -41,7 +40,7 @@ So, let's do it!
 
 1. Make sure you don't have any previous `getting-started` containers running.
 
-1. Run the following command. We'll explain what's going on afterwards:
+2. Run the following command. We'll explain what's going on afterwards:
 
     ```bash
     docker run -dp 3000:3000 \
@@ -50,7 +49,7 @@ So, let's do it!
         sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using PowerShell then use this command.
+    If you are using PowerShell then use this command:
 
     ```powershell
     docker run -dp 3000:3000 `
@@ -67,7 +66,7 @@ So, let's do it!
       running `yarn install` to install _all_ dependencies and then running `yarn run dev`. If we look in the `package.json`,
       we'll see that the `dev` script is starting `nodemon`.
 
-1. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this...
+3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this:
 
     ```bash
     docker logs -f <container-id>
@@ -82,23 +81,22 @@ So, let's do it!
 
     When you're done watching the logs, exit out by hitting `Ctrl`+`C`.
 
-1. Now, let's make a change to the app. In the `src/static/js/app.js` file, let's change the "Add Item" button to simply say
-   "Add". This change will be on line 109.
+4. Now, let's make a change to the app. In the `src/static/js/app.js` file, let's change the "Add Item" button to simply say
+   "Add". This change will be on line 109:
 
     ```diff
     -                         {submitting ? 'Adding...' : 'Add Item'}
     +                         {submitting ? 'Adding...' : 'Add'}
     ```
 
-1. Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might
+5. Simply refresh the page (or open it) and you should see the change reflected in the browser almost immediately. It might
    take a few seconds for the Node server to restart, so if you get an error, just try refreshing after a few seconds.
 
     ![Screenshot of updated label for Add button](images/updated-add-button.png){: style="width:75%;"}
     {: .text-center }
 
-1. Feel free to make any other changes you'd like to make. When you're done, stop the container and build your new image
+6. Feel free to make any other changes you'd like to make. When you're done, stop the container and build your new image
    using `docker build -t getting-started .`.
-
 
 Using bind mounts is _very_ common for local development setups. The advantage is that the dev machine doesn't need to have
 all of the build tools and environments installed. With a single `docker run` command, the dev environment is pulled and ready

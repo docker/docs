@@ -4,38 +4,61 @@ keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 ---
 
-Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
-You can download Docker Desktop for Mac from Docker Hub.
+Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, installation instructions, and automatic updates.
 
-[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/){: .button .outline-btn}
+Download Docker Desktop for Mac:
 
-By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" rel="noopener" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
+[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
+[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+{% include eula.md %}
 
 ## System requirements
 
-Your Mac must meet the following requirements to successfully install Docker Desktop:
+Your Mac must meet the following requirements to successfully install Docker Desktop.
 
-- **Mac hardware must be a 2010 or a newer model with an Intel processor**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#mac-intel">Mac with Intel chip</a></li>
+<li><a data-toggle="tab" data-target="#mac-apple-silicon">Mac with Apple silicon</a></li>
+</ul>
+<div class="tab-content">
+<div id="mac-intel" class="tab-pane fade in active" markdown="1">
 
-  If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
+### Mac with Intel chip
 
 - **macOS must be version 10.14 or newer**. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.
 
   If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
-
-    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS.
+  > **Note**
+  >
+  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Mojave, macOS Catalina, and macOS Big Sur.
 
 - At least 4 GB of RAM.
 
 - VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.
 
+</div>
+<div id="mac-apple-silicon" class="tab-pane fade" markdown="1">
+
+### Mac with Apple silicon
+
+- You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
+
+  ```bash
+    softwareupdate --install-rosetta
+  ```
+
+ For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+
+</div>
+</div>
+
 ## What's included in the installer
 
 The Docker Desktop installation includes
   [Docker Engine](../engine/index.md), Docker CLI client,
-  [Docker Compose](../compose/index.md), [Notary](../notary/getting_started.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+  [Docker Compose](../compose/index.md), [Docker Content Trust](../engine/security/trust.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 ## Install and run Docker Desktop on Mac
 
@@ -66,49 +89,32 @@ Congratulations! You are now successfully running Docker Desktop.
 If you would like to rerun the tutorial, go to the Docker Desktop menu 
 and select **Learn**.
 
-## Automatic updates
+## Updates
 
-Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available automatically as delta updates from the previous version.
-
-When an update is available, Docker Desktop automatically downloads it to your machine and displays an icon to indicate the availability of a newer version. All you need to do now is to click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.
+{% include desktop-update.md %}
 
 ## Uninstall Docker Desktop
 
-To unistall Docker Desktop from your Mac:
+To uninstall Docker Desktop from your Mac:
 
 1. From the Docker menu, select **Troubleshoot** and then select **Uninstall**.
 2. Click **Uninstall** to confirm your selection.
 
-> **Note:** Uninstalling Docker Desktop will destroy Docker containers and images local to the machine and remove the files generated by the application.
-
-### Save and restore data
-
-You can use the following procedure to save and restore images and container data. For example to reset your VM disk:
-
-1. Use `docker save -o images.tar image1 [image2 ...]` to save any images you
-    want to keep. See [save](/engine/reference/commandline/save) in the Docker
-    Engine command line reference.
-
-2. Use `docker export -o myContainner1.tar container1` to export containers you
-    want to keep. See [export](/engine/reference/commandline/export) in the
-    Docker Engine command line reference.
-
-3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
-
-4. Use `docker load -i images.tar` to reload previously saved images. See
-    [load](/engine/reference/commandline/load) in the Docker Engine.
-
-5. Use `docker import -i myContainer1.tar` to create a filesystem image
-    corresponding to the previously exported containers. See
-    [import](/engine/reference/commandline/import) in the Docker Engine.
-
-For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](/storage/volumes/#backup-restore-or-migrate-data-volumes).
+> **Important**
+>
+> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
+> other Docker related data local to the machine, and removes the files generated
+> by the application. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
+> section to learn how to preserve important data before uninstalling.
 
 ## Where to go next
 
 - [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
+- [Docker Desktop for Apple silicon](apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
-- [FAQs](faqs.md) provide answers to frequently asked questions.
+- [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
 - [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Get started with Docker](/get-started/) provides a general Docker tutorial.
+- [Get started with Docker](../get-started/index.md) provides a general Docker tutorial.
+* [Back up and restore data](../desktop/backup-and-restore.md) provides instructions
+  on backing up and restoring data related to Docker.

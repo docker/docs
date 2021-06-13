@@ -46,6 +46,10 @@ body.night {
           }
         }
     }
+    .breadcrumb {
+        background-color: $bg-sidebar-night-active;
+        border-bottom:    0.1px solid $primary-links;
+    }
     .sidebar,
     .col-nav {
         background-color: $bg-sidebar-night;
@@ -54,7 +58,7 @@ body.night {
     .nav-sidebar ul li a.active,
     .nav-sidebar.nav>li>a:focus,
     .toc-nav li a.active {
-        background: #0a151a;
+        background:  $bg-sidebar-night-active;
         border-left: 4px solid $primary-links;
     }
     .tabs li.active a {
@@ -100,11 +104,12 @@ body.night {
         color: #d0e8ff;
     }
     .outline-btn {
-        background: #101c29;
-        border: 1px solid #37404a;
+        background: $bg-sidebar-night;
+        border: 1px solid $body-text;
+
     }
     a.button.outline-btn {
-        color: #a7e2ff;
+        color: $primary-links-night;
     }
     a.glossary,
     .toc-nav i.fa {
@@ -197,7 +202,7 @@ body.night {
         border-color: #374656;
         >.panel-heading {
             color: #c0c3c4;
-            background-color: #101c29;
+            background-color: $bg-sidebar-night;
             border-color: #2f4050;
         }
     }

@@ -24,21 +24,23 @@ To downgrade from a Pro plan to a Free plan:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
+2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The **Billing Details** page displays billing information about your existing user account.
 
-3. Click **Change plan** to downgrade your existing plan.
+3. Ensure you have selected your personal account on the left side of the **Billing Details** page.
 
-4. On the **Change Plan** page, review the information displayed in the **Free** section and click **Downgrade**.
+4. Click **Change plan** to downgrade your existing plan.
 
-5. When prompted, review the warning displayed about downgrading your account and click **Continue with Downgrade**.
+5. On the **Change Plan** page, review the information displayed in the **Free** section and click **Downgrade**.
 
-6. If your account meets the requirements of a Free plan, the **Downgrade confirmation** screen will be displayed. Click **continue**.
+6. When prompted, review the warning displayed about downgrading your account and click **Continue with Downgrade**.
 
-7. We’d like to understand the reason for your downgrade. Select a reason for your downgrade from the list. Optionally, add a comment and select the checkbox to discuss your feedback with a member of the Docker team. Click **Send**.
+7. If your account meets the requirements of a Free plan, the **Downgrade confirmation** screen will be displayed. Click **continue**.
 
-8. The **Billing** page displays a confirmation of the downgrade with details on when the downgrade changes will take effect.
+8. We’d like to understand the reason for your downgrade. Select a reason for your downgrade from the list. Optionally, add a comment and select the checkbox to discuss your feedback with a member of the Docker team. Click **Send**.
 
-9. To cancel the downgrade, click **Cancel the downgrade**.
+9. The **Billing** page displays a confirmation of the downgrade with details on when the downgrade changes will take effect.
+
+10. To cancel the downgrade, click **Cancel the downgrade**.
 
 ## Downgrade from Team to a Free plan
 

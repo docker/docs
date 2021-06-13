@@ -118,7 +118,7 @@ volumes or find a way to make the applications work with the default file
 permissions.
 
 See also,
-[Can I change permissions on shared volumes for container-specific deployment requirements?](faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+[Can I change permissions on shared volumes for container-specific deployment requirements?](../desktop/faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
 #### Volume mounting requires shared folders for Linux containers
@@ -134,7 +134,7 @@ Dockerfile and volume.
 
 #### Support for symlinks
 
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../desktop/faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -357,6 +357,7 @@ Docker Desktop excludes support for the following types of issues:
 
 * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 * Running on unsupported operating systems, including beta/preview versions of operating systems
+* Running containers of a different architecture using emulation
 * Support for the Docker engine, Docker CLI, or other bundled Linux components
 * Support for Kubernetes
 * Features labeled as experimental

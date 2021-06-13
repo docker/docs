@@ -20,7 +20,7 @@ various APIs, CLIs, and file formats.
 | CLI                                                            | Description                                                                                |
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
 | [Docker CLI](/engine/reference/commandline/cli/)               | The main CLI for Docker, includes all `docker` commands                                    |
-| [Compose CLI](/compose/reference/overview/)                    | The CLI for Docker Compose, which allows you to build and run multi-container applications |
+| [Compose CLI](/compose/reference/)                             | The CLI for Docker Compose, which allows you to build and run multi-container applications |
 | [Daemon CLI (dockerd)](/engine/reference/commandline/dockerd/) | Persistent process that manages containers                                                 |
 
 
@@ -30,6 +30,7 @@ various APIs, CLIs, and file formats.
 |:------------------------------------------------------|:---------------------------------------------------------------------------------------|
 | [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a daemon                      |
 | [Registry API](/registry/spec/api/)                   | Facilitates distribution of images to the engine                                       |
+| [Docker Hub API](/docker-hub/api/latest/)             | API to interact with Docker Hub                                                        | 
 
 ## Drivers and specifications
 

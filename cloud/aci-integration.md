@@ -24,10 +24,10 @@ Also see the [full list of container features supported by ACI](aci-container-fe
 
 To deploy Docker containers on Azure, you must meet the following requirements:
 
-1. Download and install Docker Desktop Stable version 2.3.0.5 or later, or Edge version 2.3.2.0 or later.
+1. Download and install the latest version of Docker Desktop.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+    - [Download for Mac](../docker-for-mac/install.md)
+    - [Download for Windows](../docker-for-windows/install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
@@ -45,7 +45,7 @@ Also see the [full list of container features supported by ACI](aci-container-fe
 Run the following commands to log into Azure:
 
 ```console
-docker login azure
+$ docker login azure
 ```
 
 This opens your web browser and prompts you to enter your Azure login credentials.
@@ -73,7 +73,7 @@ Creating an ACI context requires an Azure subscription, a [resource group](https
 For example, let us create a new context called `myacicontext`:
 
 ```console
-docker context create aci myacicontext
+$ docker context create aci myacicontext
 ```
 
 This command automatically uses your Azure login credentials to identify your subscription IDs and resource groups. You can then interactively select the subscription and group that you would like to use. If you prefer, you can specify these options in the CLI using the following flags: `--subscription-id`,
@@ -96,37 +96,37 @@ Now that you've logged in and created an ACI context, you can start using Docker
 There are two ways to use your new ACI context. You can use the `--context` flag with the Docker command to specify that you would like to run the command using your newly created ACI context.
 
 ```console
-docker --context myacicontext run -p 80:80 nginx
+$ docker --context myacicontext run -p 80:80 nginx
 ```
 
-Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an ngnix container:
+Or, you can change context using `docker context use` to select the ACI context to be your focus for running Docker commands. For example, we can use the `docker context use` command to deploy an Nginx container:
 
 ```console
-docker context use myacicontext
-docker run -p 80:80 nginx
+$ docker context use myacicontext
+$ docker run -p 80:80 nginx
 ```
 
 After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
 
-In the case of the demonstration nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the nginx welcome page by browsing `http://52.154.202.35`.
+In the case of the demonstration Nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the Nginx welcome page by browsing `http://52.154.202.35`.
 
 To view logs from your container, run:
 
 ```console
-docker logs <CONTAINER_ID>
+$ docker logs <CONTAINER_ID>
 ```
 
 To execute a command in a running container, run:
 
 ```console
-docker exec -t <CONTAINER_ID> COMMAND
+$ docker exec -t <CONTAINER_ID> COMMAND
 ```
 
 To stop and remove a container from ACI, run:
 
 ```console
-docker stop <CONTAINER_ID>
-docker rm <CONTAINER_ID>
+$ docker stop <CONTAINER_ID>
+$ docker rm <CONTAINER_ID>
 ```
 
 You can remove containers using `docker rm`. To remove a running container, you must use the `--force` flag, or stop the container using `docker stop` before removing it.
@@ -147,7 +147,7 @@ Also see the [full list of compose features supported by ACI](aci-compose-featur
 
 2. Run `docker compose up` and `docker compose down` to start and then stop a full Compose application.
 
-  By default, `docker compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the working directory using the  --workdir  flag or specify the Compose file directly using the `--file` flag.
+  By default, `docker compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the working directory using the --workdir flag or specify the Compose file directly using `docker compose --file mycomposefile.yaml up`.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
@@ -161,7 +161,7 @@ Also see the [full list of compose features supported by ACI](aci-compose-featur
 
 ## Updating applications
 
-From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose up --project-name PROJECT`.
+From a deployed Compose application, you can update the application by re-deploying it with the same project name: `docker compose --project-name PROJECT up`.
 
 Updating an application means the ACI node will be reused, and the application will keep the same IP address that was previously allocated to expose ports, if any. ACI has some limitations on what can be updated in an existing application (you will not be able to change CPU/memory reservation for example), in these cases, you need to deploy a new application from scratch.
 
@@ -222,7 +222,6 @@ services:
       - "80:80"
 ```
 
-
 > **Note**
 >
 > The domain of a Compose application can only be set once, if you specify the
@@ -241,7 +240,7 @@ and file share name `myfileshare`, you can specify a volume in your deployment `
 command as follows:
 
 ```console
-docker run -v mystorageaccount/myfileshare:/target/path myimage
+$ docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 
 The runtime container will see the file share content in `/target/path`.
@@ -344,7 +343,7 @@ Health checks must be used in addition to restart policies to ensure the contain
 Example using `docker run`:
 
 ```console
-docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
+$ docker --context acicontext run -p 80:80 --restart always --health-cmd "curl http://localhost:80" --health-interval 3s  nginx
 ```
 
 Example using Compose files:
@@ -385,7 +384,7 @@ The Docker Compose CLI adds support for running and managing containers on Azure
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 ### Manual install
@@ -396,7 +395,7 @@ You can download the Docker ACI Integration CLI from the
 You will then need to make it executable:
 
 ```console
-chmod +x docker-aci
+$ chmod +x docker-aci
 ```
 
 To enable using the local Docker Engine and to use existing Docker contexts, you
@@ -405,7 +404,7 @@ must have the existing Docker CLI as `com.docker.cli` somewhere in your
 CLI:
 
 ```console
-ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
+$ ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
 ```
 
 > **Note**
@@ -464,7 +463,7 @@ After you have installed the Docker ACI Integration CLI, run `--help` to see the
 To remove the Docker Azure Integration CLI, you need to remove the binary you downloaded and `com.docker.cli` from your `PATH`. If you installed using the script, this can be done as follows:
 
 ```console
-sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
+$ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 ```
 
 ## Feedback

@@ -31,8 +31,7 @@ workflow.  They need to be
 
 **Note**: Prior to Docker Engine 1.11, the snapshot key was also generated and stored
 locally client-side.
-Use the Notary CLI to [manage your snapshot key locally again](../../../notary/advanced_usage.md#rotate-keys)
-for repositories created with newer versions of Docker.
+Use the Notary CLI to [manage your snapshot key locally again](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys){:target="_blank" rel="noopener" class="_"} for repositories created with newer versions of Docker.
 
 ## Choose a passphrase
 
@@ -64,7 +63,7 @@ Docker Content Trust can store and sign with root keys from a Yubikey 4. The
 Yubikey is prioritized over keys stored in the filesystem. When you initialize a
 new repository with content trust, Docker Engine looks for a root key locally. If a
 key is not found and the Yubikey 4 exists, Docker Engine creates a root key in the
-Yubikey 4. Consult the [Notary documentation](../../../notary/advanced_usage.md#use-a-yubikey)
+Yubikey 4. Consult the [Notary documentation](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#use-a-yubikey){:target="_blank" rel="noopener" class="_"}
 for more details.
 
 Prior to Docker Engine 1.11, this feature was only in the experimental branch.
