@@ -90,7 +90,7 @@ current directory.
 >
 > container# apt-get update && apt-get install build-essential
 > container# cd /build
-> container# gcc -o hello -static -nostartfiles hello.c
+> container# gcc -o hello -static hello.c
 > ```
 
 To run your new image, use the `docker run` command:
