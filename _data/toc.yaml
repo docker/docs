@@ -97,6 +97,22 @@ guides:
       path: /language/java/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/java/deploy/
+  - sectiontitle: Go
+    section:
+    - title: "Overview"
+      path: /language/golang/
+    - title: "Build images"
+      path: /language/golang/build-images/
+    - title: "Run containers"
+      path: /language/golang/run-containers/
+    - title: "Develop your app"
+      path: /language/golang/develop/
+    - title: "Run your tests"
+      path: /language/golang/run-tests/
+    - title: "Configure CI/CD"
+      path: /language/golang/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/golang/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
