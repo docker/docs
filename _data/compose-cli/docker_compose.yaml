@@ -8,7 +8,7 @@ long: "You can use compose subcommand, `docker compose [-f <arg>...] [options] [
     multiple files, Compose combines them into a single \nconfiguration. Compose builds
     the configuration in the order you supply the files. Subsequent files override
     and add \nto their predecessors.\n\nFor example, consider this command line:\n\n```\n$
-    docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db\n```\nThe
+    docker compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db\n```\nThe
     `docker-compose.yml` file might specify a `webapp` service.\n\n```yaml\nservices:\n
     \ webapp:\n    image: examples/web\n    ports:\n      - \"8000:8000\"\n    volumes:\n
     \     - \"/data\"\n```\nIf the `docker-compose.admin.yml` also specifies this
@@ -45,7 +45,7 @@ long: "You can use compose subcommand, `docker compose [-f <arg>...] [options] [
     profiles. \nYou can also enable multiple profiles, e.g. with `docker compose --profile
     frontend --profile debug up` the profiles `frontend` and `debug` will be enabled.\n\nProfiles
     can also be set by `COMPOSE_PROFILES` environment variable.\n\n### Set up environment
-    variables\n\nYou can set environment variables for various docker-compose options,
+    variables\n\nYou can set environment variables for various docker compose options,
     including the `-f`, `-p` and `--profiles` flags.\n\nSetting the `COMPOSE_FILE`
     environment variable is equivalent to passing the `-f` flag,\n`COMPOSE_PROJECT_NAME`
     environment variable does the same for to the `-p` flag,\nand so does `COMPOSE_PROFILES`
