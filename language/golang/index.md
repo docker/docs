@@ -12,6 +12,10 @@ Why Go? According to its authors, [Go is an open source programming language tha
 
 [golang]: https://golang.org/
 
+> **Acknowledgment**
+>
+> We'd like to thank [Oliver Frolovs](https://twitter.com/nocturnalgopher){:target="_blank" rel="noopener" class="_"} for his contribution to the Golang get started guide.
+
 In this guide, you’ll learn how to:
 
 * Create a new `Dockerfile` which contains instructions required to build a Docker image for a simple Go program;
