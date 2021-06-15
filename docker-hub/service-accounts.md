@@ -8,7 +8,7 @@ A service account is a Docker ID used for automated management of container imag
 
 > **Note**
 >
-> Service accounts included with the Team plan are limited to 15,000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
+> Service accounts included with the Team plan are limited to 5,000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
 
 ## Enhanced Service Account add-on pricing
 

@@ -50,6 +50,7 @@ This page contains information about the new features, improvements, known issue
 - Fixed an issue where the diagnostics were sometimes not uploaded correctly from the **Support** dialog.
 - Fixed DNS entries for `*.docker.internal` and Kubernetes cluster reset after the VM IP changes.
 - Fixed a corrupted internal cache which was preventing Docker Desktop from starting. Fixes [docker/for-win#8748](https://github.com/docker/for-win/issues/8748).
+- Fixed an issue where `docker info` sometimes took longer to respond. Fixes [docker/for-win#10675](https://github.com/docker/for-win/issues/10675)
 
 ## Docker Desktop 3.3.3
 2021-05-06
