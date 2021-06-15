@@ -17,6 +17,10 @@ Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker
 repositories.
 
+> **Note**
+>
+> The Autobuilds feature is available for [Pro](https://hub.docker.com/billing/plan/update){: target="_blank" rel="noopener" class="_"} or [Team](https://hub.docker.com/subscription?plan=team&paid=true){: target="_blank" rel="noopener" class="_"} plan only.
+
 When you set up automated builds (also called autobuilds), you create a list of
 branches and tags that you want to build into Docker images. When you push code
 to a source code branch (for example in GitHub) for one of those listed image
@@ -40,7 +44,7 @@ queued to be run later.
 
 > **Note**
 >
-> The total number of pending builds in the queue is limited to 30 and further requests will be discarded.
+> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of parallel builds has increased to 5 for Pro and 15 for Team.
 
 ![An automated build dashboard](images/index-dashboard.png)
 
@@ -298,6 +302,10 @@ You can enable the BuildKit builder by setting the `DOCKER_BUILDKIT=1`
 [Configure automated build settings](#configure-automated-build-settings) section.
 Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
 page for more information on BuildKit.
+
+>**Note**
+>
+>Autobuilds use the default build-system. If you want to use the old Docker build-system, use DOCKER_BUILDKIT=0.
 
 ## Build repositories with linked private submodules
 
