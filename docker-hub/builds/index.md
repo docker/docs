@@ -19,7 +19,7 @@ repositories.
 
 > **Note**
 >
-> The Autobuilds feature is available for [Pro](https://hub.docker.com/billing/plan/update){: target="_blank" rel="noopener" class="_"} or [Team](https://hub.docker.com/subscription?plan=team&paid=true){: target="_blank" rel="noopener" class="_"} plan only.
+> The Autobuilds feature is available for [Pro](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} or [Team](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan only.
 
 When you set up automated builds (also called autobuilds), you create a list of
 branches and tags that you want to build into Docker images. When you push code
@@ -44,7 +44,7 @@ queued to be run later.
 
 > **Note**
 >
-> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of parallel builds has increased to 5 for Pro and 15 for Team.
+> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of parallel builds for Pro is 5 and for Team is 15.
 
 ![An automated build dashboard](images/index-dashboard.png)
 
@@ -305,7 +305,7 @@ page for more information on BuildKit.
 
 >**Note**
 >
->Autobuilds use the default build-system. If you want to use the old Docker build-system, use DOCKER_BUILDKIT=0.
+>Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variables](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} Docker_BUILDKIT=0.
 
 ## Build repositories with linked private submodules
 
