@@ -7,7 +7,7 @@ redirect_from:
 - /docker-cloud/builds/automated-build/
 - /docker-cloud/builds/
 - /docker-hub/builds/classic/
-title: Set up automated builds
+title: Set up Automated Builds
 ---
 
 
@@ -19,7 +19,8 @@ repositories.
 
 > **Note**
 >
-> The Autobuilds feature is available for [Pro](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} or [Team](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan only.
+> The Automated Builds feature is available for Pro or Team plans only. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} 
+> your existing account to a Pro or a Team plan to start using Automated Builds.
 
 When you set up automated builds (also called autobuilds), you create a list of
 branches and tags that you want to build into Docker images. When you push code
@@ -303,9 +304,9 @@ You can enable the BuildKit builder by setting the `DOCKER_BUILDKIT=1`
 Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
 page for more information on BuildKit.
 
->**Note**
+> **Note**
 >
->Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} Docker_BUILDKIT=0.
+> Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} Docker_BUILDKIT=0.
 
 ## Build repositories with linked private submodules
 
