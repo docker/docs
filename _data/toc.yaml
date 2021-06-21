@@ -1210,6 +1210,8 @@ manuals:
           title: Docker Desktop WSL 2 backend
     - path: /desktop/dashboard/
       title: Dashboard
+    - path: /desktop/dev-environments/
+      title: Dev Environments (Preview)
     - path: /desktop/multi-arch/
       title: Multi-arch support
     - path: /desktop/kubernetes/
