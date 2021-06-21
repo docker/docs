@@ -47,6 +47,9 @@ configure it in different ways:
 
  2. When you create or start new containers, the environment variables are
     set automatically within the container.
+ 
+ 3. If the intention was to use host's 127.0.0.1:3001 - don't forget to
+    specify `--network host` when creating container.
 
 
 ## Use environment variables
