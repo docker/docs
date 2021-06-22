@@ -15,7 +15,7 @@ Docker offers pricing plans that are tailored for individual developers and deve
 
 **For individuals:**
 
-The **Pro** plan includes unlimited public repositories, unlimited private repositories, unlimited [collaborators](../repos.md#collaborators-and-their-role) for public repositories, one [service account](../repos.md#service-accounts) for private repositories, and 2 parallel builds, starting at $5 per month with the annual subscription.
+The **Pro** plan includes unlimited public repositories, unlimited private repositories, unlimited [collaborators](../repos.md#collaborators-and-their-role) for public repositories, one [service account](../repos.md#service-accounts) for private repositories, and 5 parallel builds, starting at $5 per month with the annual subscription.
 
 > **Note**
 >
@@ -25,7 +25,7 @@ The **Free** plan includes unlimited public repositories and unlimited collabora
 
 **For development teams:**
 
-The **Team** plan includes unlimited public and unlimited private repositories starting at $25 per month for the first 5 users and $7 per month for each user thereafter with the annual subscription. In addition, the Team plan offers 3 parallel builds, advanced collaboration and management tools, including organization and team management with role-based access controls for the whole team.
+The **Team** plan includes unlimited public and unlimited private repositories starting at $25 per month for the first 5 users and $7 per month for each user thereafter with the annual subscription. In addition, the Team plan offers 15 parallel builds, advanced collaboration and management tools, including organization and team management with role-based access controls for the whole team.
 
 The **Free Team** plan includes unlimited public repositories at no cost per month. This plan also offers advanced collaboration and management tools, including organization and team management with role-based access controls which are limited to 1 team and 3 team members.
 
