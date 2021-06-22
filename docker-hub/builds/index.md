@@ -307,7 +307,7 @@ page for more information on BuildKit.
 
 > **Note**
 >
-> Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} Docker_BUILDKIT=0.
+> Autobuilds use the buildKit build-system by default. If you want to use the legacy Docker build-system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"} DOCKER_BUILDKIT=0.
 
 ## Build repositories with linked private submodules
 
