@@ -12,7 +12,7 @@ Work through the steps to build a Python image in [Build your Python image](buil
 
 ## Overview
 
-In the previous module, we created our sample application and then we created a Dockerfile that we used to produce an image. We created our image using the docker command docker build. Now that we have an image, we can run that image and see if our application is running correctly.
+In the previous module, we created our sample application and then we created a Dockerfile that we used to produce an image. We created our image using the docker command `docker build`. Now that we have an image, we can run that image and see if our application is running correctly.
 
 A container is a normal operating system process except that this process is isolated in that it has its own file system, its own networking, and its own isolated process tree separate from the host.
 
