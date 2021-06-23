@@ -62,7 +62,7 @@ Switch back to the terminal where our server is running and you should see the f
 
 Now that our application is running properly, let’s take a look at creating a Dockerfile.
 
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and execute them consecutively and create a Docker image as a result.
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions, executes them consecutively, and creates a Docker image as a result.
 
 Let’s walk through creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
 
