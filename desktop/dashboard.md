@@ -237,10 +237,14 @@ By default, the **Volumes** view displays a list of all the volumes.
 
 ![List volumes](images/volumes-list.png){:width="700px"}
 
-To explore the details of a specific volume, select a volume from the list. This opens the detailed view. The **Data** tab displays the files and folders in the volume and their file size.
+To explore the details of a specific volume, select a volume from the list. This opens the detailed view.
 
-To view the details of the volume such as the name of the container that’s using the volume, the image name, and the port number the container is using, click the **In Use** tab.
+The **In Use** tab displays the name of the container that’s using the volume, the image name, the port number used by the container, CPU, memory, disk read/write, and network I/O consumed by the container.
+
+The **Data** tab displays the files and folders in the volume and their file size. To save a file or a folder, hover over the file or folder and click on the more options menu. Select **Save As** and then specify a location to download the file.
+
+To delete a file or a folder from the volume, select **Remove** from the more options menu.
 
 ### Remove a volume
 
-Removing a volume deletes the volume and all its data. To remove a volume, hover over the volume and then click the **Delete** button.  Alternatively, select the volume from the list and then click the **Delete** button.
+Removing a volume deletes the volume and all its data. To remove a volume, hover over the volume and then click the **Delete** button. Alternatively, select the volume from the list and then click the **Delete** button.
