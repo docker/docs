@@ -50,7 +50,7 @@ $ curl localhost:8000
 Hello, Docker!
 ```
 
-Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the GET request logged to the console.
+Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the `GET` request logged to the console.
 
 ```shell
 [31/Jan/2021 23:39:31] "GET / HTTP/1.1" 200 -
