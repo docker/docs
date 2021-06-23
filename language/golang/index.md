@@ -8,7 +8,7 @@ toc_max: 2
 
 In this guide, you will learn how to create a containerized Go application using Docker.
 
-Why [Go](https://golang.org/){:target="_blank" rel="noopener" class="_"}? Go is an open-source programming language that lets you build simple reliable and efficient software. Go is undeniably a major player in the modern Cloud ecosystem; both Docker and Kubernetes are written in Go. 
+Why [Go](https://golang.org/){:target="_blank" rel="noopener" class="_"}? Go is an open-source programming language that lets you build simple, reliable, and efficient software. Go is undeniably a major player in the modern Cloud ecosystem; both Docker and Kubernetes are written in Go. 
 
 [golang]: https://golang.org/
 
