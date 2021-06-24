@@ -23,6 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 **Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
 
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the 'compose' command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+
 ### Upgrades
 
 - [Compose V2 beta](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.4)
