@@ -145,10 +145,10 @@ Now that all of our containers are stopped, let’s remove them. When you remove
 
 ```shell
 $ docker ps --all
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:5000->5000/tcp   wonderful_kalam
-ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
-fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Exited (0) 5 seconds ago                        wonderful_kalam
+ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                       agitated_moser
+fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                       goofy_khayyam
 ```
 
 To remove a container, simple run the `docker rm` command passing the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.
