@@ -13,8 +13,8 @@ This page contains information about the new features, improvements, known issue
 
 {% include eula.md %}
 
-## Docker Desktop 3.5.0
-2021-06-23
+## Docker Desktop 3.5.1
+2021-06-25
 
 [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
 
@@ -22,7 +22,23 @@ This page contains information about the new features, improvements, known issue
 
 **Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
 
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md).
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility/) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
+
+### Bug fixes and minor changes
+
+- Fixed a bug where users could not install Docker Desktop when the path to the temp folder contained dots. Fixes [docker/for-win#11514](https://github.com/docker/for-win/issues/11514)
+- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
+
+## Docker Desktop 3.5.0
+2021-06-23
+
+> [Download](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe)
+
+### New
+
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility/) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
 
 ### Upgrades
 
@@ -44,7 +60,6 @@ This page contains information about the new features, improvements, known issue
 - Docker Desktop now allows the WSL 2 integration agent to start even when `/etc/wsl.conf` is malformed.
 - Fixed an issue with the Docker Compose app not being stopped or removed when started by multiple configuration files. [docker/for-win#11445](https://github.com/docker/for-win/issues/11445)
 - Fixed a bug where Docker Desktop fails to restart after a power failure because the Hyper-V VM restarted prematurely.
-- Fixed a link to the policy that provides details on how Docker handles the uploaded diagnostics data. Fixes [docker/for-mac#5741](https://github.com/docker/for-mac/issues/5741)
 - The default `docker` CLI `context` is now `desktop-linux` in Linux containers mode and `desktop-windows` when in Windows containers mode.
 - Show the Docker Desktop Feedback popup only when clicking Docker menu.
 
