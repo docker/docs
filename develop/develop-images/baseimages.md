@@ -34,17 +34,17 @@ use to build Ubuntu images.
 
 It can be as simple as this to create an Ubuntu parent image:
 
-    $ sudo debootstrap xenial xenial > /dev/null
-    $ sudo tar -C xenial -c . | docker import - xenial
+    $ sudo debootstrap focal focal > /dev/null
+    $ sudo tar -C focal -c . | docker import - focal
 
-    a29c15f1bf7a
+    sha256:81ec9a55a92a5618161f68ae691d092bf14d700129093158297b3d01593f4ee3
 
-    $ docker run xenial cat /etc/lsb-release
+    $ docker run focal cat /etc/lsb-release
 
     DISTRIB_ID=Ubuntu
-    DISTRIB_RELEASE=16.04
-    DISTRIB_CODENAME=xenial
-    DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
+    DISTRIB_RELEASE=20.04
+    DISTRIB_CODENAME=focal
+    DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
 
 There are more example scripts for creating parent images in [the Docker
 GitHub repository](https://github.com/docker/docker/blob/master/contrib).
@@ -86,11 +86,11 @@ current directory.
 > You can use a Docker container to build it:
 >
 > ```bash
-> $ docker run --rm -it -v $PWD:/build ubuntu:16.04
+> $ docker run --rm -it -v $PWD:/build ubuntu:20.04
 >
 > container# apt-get update && apt-get install build-essential
 > container# cd /build
-> container# gcc -o hello -static -nostartfiles hello.c
+> container# gcc -o hello -static hello.c
 > ```
 
 To run your new image, use the `docker run` command:
