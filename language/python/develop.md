@@ -225,7 +225,7 @@ Now, to start our application and to confirm that it is running properly, run th
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 
-We pass the `--build` flag so Docker will compile our image and then starts the containers.
+We pass the `--build` flag so Docker will compile our image and then start the containers.
 
 Now let’s test our API endpoint. Run the following curl commands:
 
