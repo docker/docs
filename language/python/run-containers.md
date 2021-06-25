@@ -86,7 +86,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ce02b3179f0f        python-docker         "python3 -m flask ru…"   6 minutes ago       Up 6 minutes        0.0.0.0:5000->5000/tcp   wonderful_kalam
 ```
 
-The `docker ps` command provides a bunch of information about our running containers. We can see the container ID, The image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
+The `docker ps` command provides a bunch of information about our running containers. We can see the container ID, the image running inside the container, the command that was used to start the container, when it was created, the status, ports that were exposed, and the name of the container.
 
 You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute, but first we need to stop the container. To stop the container, run the `docker stop` command which does just that, stops the container. You need to pass the name of the container or you can use the container ID.
 
