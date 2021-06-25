@@ -151,7 +151,7 @@ ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes 
 fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                       goofy_khayyam
 ```
 
-To remove a container, simple run the `docker rm` command passing the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.
+To remove a container, simply run the `docker rm` command passing the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.
 
 ```shell
 $ docker rm wonderful_kalam agitated_moser goofy_khayyam
