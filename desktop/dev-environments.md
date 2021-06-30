@@ -35,10 +35,14 @@ Click **Install** to download and install any missing tools.
 
 ## Start a single container Dev Environment
 
-The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `singe-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
+The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
+
+> **Note**
+>
+> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
 
 1. First, let's copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
-3. Now, click **Create**.
+2. Now, click **Create**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
 
@@ -77,6 +81,10 @@ Using this shared Dev Environment, your team members can access the code, any de
 ## Start a sample Compose Dev Environment
 
 You can also use Dev Environments to collaborate on any Docker Compose-based projects. For example, let's use the `compose-dev-env` project from the [Docker Samples](https://github.com/dockersamples/compose-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
+
+  > **Note**
+  >
+  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
 
 1. Copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
