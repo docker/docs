@@ -14,7 +14,7 @@ Access tokens are also useful in building integrations, since you can issue
 multiple tokens &ndash; one for each integration &ndash; and revoke them at
 any time.
 
-> Note: If you have [two-factor authentication (2FA)](/docker-hub/2fa) enabled on your account, you must create at least one personal access token. Otherwise, you will be unable to log in to your account from the Docker CLI.
+**Note**: If you have [two-factor authentication (2FA)](/docker-hub/2fa) enabled on your account, you must create at least one personal access token. Otherwise, you will be unable to log in to your account from the Docker CLI.
 {: .important }
 
 ## Create an access token
@@ -31,21 +31,21 @@ Settings**.
 4. Add a description for your token. Use something that indicates where
 the token is going to be used, or set a purpose for the token.
 
-      ![](images/PAT-Menu.png)
+      ![PAT Menu](images/hub-create-token.png)
 
 5. You can view the following permissions from the drop-down:
- - Read, Write, Delete: lets you to manage team members. This is an admin privilege.
- - Read & Write: let you to push images to any repository managed by your account.
- - Read Only: lets you to view, search, and pull images from any public repositories and any private repositories that you have access to.
- - Public Repo Read-only: lets you view, search, and pull images from any public repositories.
+ * Read, Write, Delete: lets you to manage team members. This is an admin privilege.
+ * Read & Write: lets you to push images to any repository managed by your account.
+ * Read Only: lets you to view, search, and pull images from any public repositories and any private repositories that you have access to.
+ * Public Repo Read-only: lets you view, search, and pull images from any public repositories.
 
- >Note:
- All users have acccess to Read, Write, and Delete. Only paid users have access to Read & Write, Read-only, and Public Repo Read-only.
+ **Note**:
+ All users have access to Read, Write, and Delete. Only paid users have access to Read & Write, Read-only, and Public Repo Read-only.
 
 6. Copy the token that appears on the screen. Make sure you do this now:
 once you close this prompt, Docker will never show the token again.
 
-      ![](images/hub-copy-token.png)
+      ![Copy Token](images/hub-copy-token.png)
 
       Treat access tokens like your password and keep them secret. Store your tokens securely (for example, in a credential manager).
 
@@ -60,7 +60,7 @@ You can rename, deactivate, or delete a token as needed.
 the far right of a token row to bring up the edit screen. You can also
 select multiple tokens to delete them all once.
 
-      ![](images/Generate-PAT.png)
+      ![Modify Token](images/hub-edit-token.png)
 
 
 ## Use an access token
