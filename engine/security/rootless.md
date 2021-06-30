@@ -79,15 +79,12 @@ testuser:231072:65536
   
 - Rootless docker requires version of `slirp4netns` greater than `v0.4.0`.
   Check you have this with 
-  ```
+  
+  ```console
   $ slirp4netns --version
   ```
-  If you do not have this run 
-  ```
-  $ echo "deb http://http.us.debian.org/debian/ testing non-free contrib main" | sudo tee -a /etc/apt/sources.list
-  $ sudo apt update
-  $ sudo apt upgrade slirp4netns
-  ```
+  If you do not have this download and install the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
+
 </div>
 <div id="hint-arch" class="tab-pane fade in" markdown="1">
 - Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
