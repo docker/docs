@@ -58,15 +58,15 @@ You can launch the application by running the command `make run` in your VS Code
 
 ### Create a Dev Environment from a specific branch or tag
 
-You can create a dev environment from a specific branch (for example corresponding to a Pull Request) or tag by adding `@mybranch` (or `@tag`) as a suffix to your git url :
+You can create a dev environment from a specific branch (for example, a branch corresponding to a Pull Request) or a tag by adding `@mybranch` or `@tag` as a suffix to your Git URL:
 
  `https://github.com/dockersamples/single-dev-env@mybranch`
 
  or
 
- `git@github.com:dockersamples/single-dev-env.git@mybranch`.
+ `git@github.com:dockersamples/single-dev-env.git@mybranch`
 
-Docker will then clone the repository with your specified branch or tag.
+Docker then clones the repository with your specified branch or tag.
 
 ### Recap
 
