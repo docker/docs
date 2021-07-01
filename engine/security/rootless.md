@@ -77,7 +77,7 @@ testuser:231072:65536
    ([Debian-specific kernel patch, introduced in Debian 10](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)).
    Add the configuration to `/etc/modprobe.d` for persistence.
   
-- Rootless docker requires version of `slirp4netns` greater than `v0.4.0`.
+- Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
   Check you have this with 
   
   ```console
