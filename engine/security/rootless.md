@@ -76,6 +76,15 @@ testuser:231072:65536
   `sudo modprobe overlay permit_mounts_in_userns=1`
    ([Debian-specific kernel patch, introduced in Debian 10](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)).
    Add the configuration to `/etc/modprobe.d` for persistence.
+  
+- Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
+  Check you have this with 
+  
+  ```console
+  $ slirp4netns --version
+  ```
+  If you do not have this download and install the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
+
 </div>
 <div id="hint-arch" class="tab-pane fade in" markdown="1">
 - Installing `fuse-overlayfs` is recommended. Run `sudo pacman -S fuse-overlayfs`.
