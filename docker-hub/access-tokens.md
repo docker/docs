@@ -10,7 +10,7 @@ Using personal access tokens provides some advantages over a password:
 * You can investigate when an access token was used last, and disable or delete it if you find any suspicious activity.
 * When logged in with an access token, you can't perform any admin activity on the account, including changing the password.
 
-**Depracated**
+>**Warning**
 >
 > Treat access tokens like your password and keep them secret. Store your
 > tokens securely (for example, in a credential manager).
