@@ -49,10 +49,10 @@ the token is going to be used, or set a purpose for the token.
      * Read Only: lets you to view, search, and pull images from any public repositories and any private repositories that you have access to.
      * Public Repo Read-only: lets you view, search, and pull images from any public repositories.
 
- >**Note**
- >
- > All users have access to Read, Write, and Delete. Only paid users have
- > access to Read & Write, Read-only, and Public Repo Read-only.
+      > **Note**
+      >
+      > All users have access to Read, Write, and Delete. Only paid users have
+      > access to Read & Write, Read-only, and Public Repo Read-only.
 
 6. Copy the token that appears on the screen. Make sure you do this now:
 once you close this prompt, Docker will never show the token again.

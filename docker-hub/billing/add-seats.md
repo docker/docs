@@ -4,7 +4,7 @@ keywords: Docker, Docker Hub, subscription, update, add, seats
 title: Add seats to your plan
 ---
 
-You can manage your Docker Hub subscription anytime by adding seats to your plan. If you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+You can manage your Docker Hub subscription anytime by adding seats to your plan.
 
 ## Add seats to a monthly plan
 
