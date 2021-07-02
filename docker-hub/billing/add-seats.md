@@ -11,7 +11,7 @@ You can manage your Docker Hub subscription anytime by adding seats to your plan
 > **Note:**
 >
 >- A monthly subscription includes monthly seats only.
->- You must be a member of the ‘Owners’ team to add seats to your organization.
+>- You must be a member of the ‘owners’ team to add seats to your organization.
 >- When you add seats to your monthly plan in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 
 To add seats to a monthly plan:
