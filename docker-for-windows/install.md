@@ -31,7 +31,7 @@ Your Windows machine must meet the following requirements to successfully instal
 
 ### WSL 2 backend
 
-- Windows 10 64-bit: Home, Pro, Enterprise, or Education, version 1903 (Build 18362 or higher).
+- Windows 10 64-bit: Home or Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
     [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
 - The following hardware prerequisites are required to successfully run
@@ -49,7 +49,7 @@ WSL 2 on Windows 10:
 
 ### Hyper-V backend and Windows containers
 
-- Windows 10 64-bit: Pro (Build 19041 or higher), or Enterprise or Education (Build 18363 or higher).
+- Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 
   For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
 - Hyper-V and Containers Windows features must be enabled.
