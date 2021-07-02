@@ -45,6 +45,6 @@ To add annual seats to an annual plan:
 
 4. Specify the number of seats you’d want to add and click **Purchase**.
 
-5. The **Billing** tab gives you the number of seats currently in use.
+5. The **Billing** tab displays the number of seats currently in use.
 
 6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../orgs.md#add-a-member-to-a-team).

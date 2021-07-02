@@ -14,7 +14,7 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 >
 > - You must be a member of the ‘Owners’ team to remove seats from your organization.
 >
-To remove seats from a monthly or annual plan:
+To remove seats from a monthly or an annual plan:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
