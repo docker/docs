@@ -33,7 +33,7 @@ options:
 - option: namespace
   value_type: string
   description: Kubernetes namespace to use
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -52,7 +52,7 @@ inherited_options:
 - option: kubeconfig
   value_type: string
   description: Kubernetes config file
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -60,7 +60,7 @@ inherited_options:
 - option: orchestrator
   value_type: string
   description: Orchestrator to use (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
