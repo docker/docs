@@ -8,7 +8,7 @@ You can manage your Docker Hub subscription anytime by removing seats from your 
 
 For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats are removed immediately. Your payment for 8 seats begins in the next billing cycle. However, if you are on the annual plan, the 2 seats are removed at the end of the current year. Therefore, your payment for the 8 seats begins in next year's billing cycle.
 
-## Remove seats from a monthly or annual plan
+## Remove seats from a monthly or an annual plan
 
 > **Note:**
 >
