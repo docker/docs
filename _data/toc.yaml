@@ -1190,10 +1190,12 @@ manuals:
           title: Disk utilization
         - path: /docker-for-mac/troubleshoot/
           title: Logs and troubleshooting
-        - path: /docker-for-mac/release-notes/
-          title: Release notes
         - path: /docker-for-mac/apple-silicon/
           title: Apple silicon
+        - path: /docker-for-mac/release-notes/
+          title: Release notes
+        - path: /docker-for-mac/previous-versions/
+          title: Previous versions
     - sectiontitle: Windows
       section:
         - path: /docker-for-windows/install/
@@ -1204,12 +1206,16 @@ manuals:
           title: Networking
         - path: /docker-for-windows/troubleshoot/
           title: Logs and troubleshooting
-        - path: /docker-for-windows/release-notes/
-          title: Release notes
         - path: /docker-for-windows/wsl/
           title: Docker Desktop WSL 2 backend
+        - path: /docker-for-windows/release-notes/
+          title: Release notes
+        - path: /docker-for-windows/previous-versions/
+          title: Previous versions
     - path: /desktop/dashboard/
       title: Dashboard
+    - path: /desktop/dev-environments/
+      title: Dev Environments (Preview)
     - path: /desktop/multi-arch/
       title: Multi-arch support
     - path: /desktop/kubernetes/
