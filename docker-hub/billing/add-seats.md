@@ -4,23 +4,25 @@ keywords: Docker, Docker Hub, subscription, update, add, seats
 title: Add seats to your plan
 ---
 
-You can manage your Docker Hub subscription anytime by adding seats to your plan. If you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+You can manage your Docker Hub subscription anytime by adding seats to your plan.
 
 ## Add seats to a monthly plan
 
 > **Note:**
 >
-> You must be a member of the ‘Owners’ team to add seats to your organization.
+>- A monthly subscription includes monthly seats only.
+>- You must be a member of the ‘owners’ team to add seats to your organization.
+>- When you add seats to your monthly plan in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 
 To add seats to a monthly plan:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-2. Navigate to **Organizations** from the menu at the top of the page and then choose your organization.
+2. Navigate to **Organizations** from the menu at the top of the page and select your organization.
 
 3. Select the **Billing** tab and click **Add seats**.
 
-4. Specify the number of seats you’d like to add and click **Purchase**.
+4. Specify the number of seats you want to add and click **Purchase**.
 
 5. The **Billing** tab displays the number of seats currently in use.
 
@@ -30,18 +32,18 @@ To add seats to a monthly plan:
 
 > **Note:**
 >
-> - You can only add annual seats after purchasing your annual plan.
-> - When you add seats to your plan in the middle of your billing cycle, a prorated amount will be charged for the additional seats.
+> - An annual subscription includes annual seats only.
+> - When you add seats to your plan in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 
 To add annual seats to an annual plan:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-2. Navigate to **Organizations** from the menu at the top of the page and then choose your organization.
+2. Navigate to **Organizations** from the menu at the top of the page and select your organization.
 
 3. Select the **Billing** tab and click **Add seats**.
 
-4. Specify the number of seats you’d like to add and click **Purchase**.
+4. Specify the number of seats you’d want to add and click **Purchase**.
 
 5. The **Billing** tab displays the number of seats currently in use.
 
