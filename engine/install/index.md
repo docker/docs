@@ -46,23 +46,23 @@ your preferred operating system below.
 
 {% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                          | x86_64 / amd64                                   |
-|:------------------------------------------------------------------|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     |
-| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |
+| Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
+|:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
+| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     | [{{ yes }}](../../docker-for-mac/install.md)     |
+| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |                                                  |
 
 ### Server
 
 Docker provides `.deb` and `.rpm` packages from the following Linux distributions
 and architectures:
 
-| Platform              | x86_64 / amd64         | ARM                      | ARM64 / AARCH64        |
-|:----------------------|:-----------------------|:-------------------------|:-----------------------|
-| [CentOS](centos.md)   | [{{ yes }}](centos.md) |                          | [{{ yes }}](centos.md) |
-| [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
-| [Fedora](fedora.md)   | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |
-| [Raspbian](debian.md) |                        | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
-| [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) |
+| Platform              | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)             |
+|:----------------------|:-----------------------|:-----------------------|:-------------------------|
+| [CentOS](centos.md)   | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                          |
+| [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   |
+| [Fedora](fedora.md)   | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                          |
+| [Raspbian](debian.md) |                        |                        | [{{ yes }}](debian.md)   |
+| [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   |
 
 ### Other Linux distributions
 
@@ -106,10 +106,10 @@ and **nightly**:
 
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
-`19.03`. The year-month name indicates the earliest possible calendar
+`20.10`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v19.03.0` is
-released, all subsequent patch releases are built from the `19.03` branch.
+releases are performed from that branch. For example, once `v20.10.0` is
+released, all subsequent patch releases are built from the `20.10` branch.
 
 ### Test
 
