@@ -28,8 +28,15 @@ Let’s create a simple Python application using the Flask framework that we’l
 $ cd /path/to/python-docker
 $ pip3 install Flask
 $ pip3 freeze > requirements.txt
+```
+
+On Linux and macOS: Use the following command to create a Python file `app.py`.
+
+```
 $ touch app.py
 ```
+
+On Windows: Create an `app.py` file using the IDE or the text editor.
 
 Now, let’s add some code to handle simple web requests. Open this working directory in your favorite IDE and enter the following code into the `app.py` file.
 
