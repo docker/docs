@@ -194,13 +194,18 @@ Now, go to GitHub and check your Actions
 
 ![Push tagged version](images/push-tagged-version.png){:width="500px"}
 
-Now, let’s set up a second GitHub action file to store our latest commit as an image in the GitHub registry. You may want to do this to:
+Now, let’s set up a second GitHub action file to store our latest commit as an image in the GitHub Container Registry. You may want to do this to:
 
 1. Run your nightly tests or recurring tests, or
 2. To share work in progress images with colleagues.
 
 Let’s clone our previous GitHub action and add back in our previous logic for all pushes. This will mean we have two workflow files, our previous one and our new one we will now work on.
-Next, change your Docker Hub login to a GitHub container registry login:
+
+To authenticate against the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry){:target="_blank" rel="noopener" class="_"},
+use the [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow){:target="_blank" rel="noopener" class="_"} for the best
+security and experience.
+
+Now let’s change the Docker Hub login with the GitHub Container Registry one:
 
 {% raw %}
 ```yaml
@@ -209,7 +214,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 
