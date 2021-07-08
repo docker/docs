@@ -100,7 +100,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
 
   > **Note**
   >
-  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
+  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
 1. Copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
