@@ -13,11 +13,43 @@ This page contains information about the new features, improvements, known issue
 
 {% include eula.md %}
 
-## Docker Desktop 3.5.1
-2021-06-25
+## Docker Desktop 3.5.2
+2021-07-08
 
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+### New
+
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+
+
+### Upgrades
+
+- [Compose V2 beta 6](https://github.com/docker/compose-cli/releases/tag/v2.0.0-beta.6)
+  - `compose run` and `compose exec` commands use separate streams for stdout and stderr. See [docker/compose-cli#1873](https://github.com/docker/compose-cli/issues/1873).
+  - `compose run` and `compose exec` commands support detach keys. Fixes [docker/compose-cli#1709](https://github.com/docker/compose-cli/issues/1709).
+  - Fixed `--force` and `--volumes` flags on `compose rm` command. See [docker/compose-cli#1844](https://github.com/docker/compose-cli/issues/1844).
+  - Fixed network's IPAM configuration. Service can define a fixed IP. Fixes for [docker/compose-cli#1678](https://github.com/docker/compose-cli/issues/1678) and [docker/compose-cli#1816](https://github.com/docker/compose-cli/issues/1816)
+
+- Dev Environments
+  - Support VS Code Insiders. See [dev-environments#3](https://github.com/docker/dev-environments/issues/3)
+  - Allow users to specify a branch when cloning a project. See [dev-environments#11](https://github.com/docker/dev-environments/issues/11)
+
+### Bug fixes and minor changes
+
+- Dev Environments: Fixed a blank screen in some create and remove scenarios. Fixes [dev-environments#4](https://github.com/docker/dev-environments/issues/4)
+- Dev Environments: Fixed error handling when removing an environment. Fixes [dev-environments#8](https://github.com/docker/dev-environments/issues/8)
+- Dev Environments: The **Start**, **Stop**, and **Share** buttons are disabled while an environment is being created or removed.
+- Fixed a connection leak when using `virtualization.framework` and not using `vpnkit`.
+- Fixed spurious traces on iptables updates.
+- Fixed a delay when adding a multiple port forwarding option.
+
+## Docker Desktop 3.5.1
+2021-06-25
+
+[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
+[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
 
 ### New
 

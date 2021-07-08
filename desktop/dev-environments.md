@@ -56,6 +56,22 @@ You can launch the application by running the command `make run` in your VS Code
 
 ![Single container Dev environment](/images/dev-env-localhost.png){:width="700px"}
 
+### Create a Dev Environment from a specific branch or tag
+
+You can create a dev environment from a specific branch (for example, a branch corresponding to a Pull Request) or a tag by adding `@mybranch` or `@tag` as a suffix to your Git URL:
+
+ `https://github.com/dockersamples/single-dev-env@mybranch`
+
+ or
+
+ `git@github.com:dockersamples/single-dev-env.git@mybranch`
+
+Docker then clones the repository with your specified branch or tag.
+
+> **Note**
+>
+> Known issue: when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
+
 ### Recap
 
 Let's summarize the tasks we performed so far to start a single container Dev Environment.
@@ -84,7 +100,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
 
   > **Note**
   >
-  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
+  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
 1. Copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
