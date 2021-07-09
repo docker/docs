@@ -42,7 +42,7 @@ the token is going to be used, or set a purpose for the token.
 
       ![PAT Menu](images/hub-create-token.png){: style="max-width: 60%"}
 
-5.
+5. You can view the following permissions from the drop-down:
 
 | Features   | Free | Pro | Team |
 | --------------------- | ---- | ----- | ----- |
