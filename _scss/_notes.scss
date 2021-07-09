@@ -55,7 +55,7 @@ blockquote {
     &:not(.important):not(.warning):not(.restricted) {
       @include notification(
         $bg-color: change-color($marine-10, $alpha: 0.2),
-        $left-border-color: #367AC2,
+        $left-border-color: $blue-80,
         $header-color: $marine-10,
         $body-text-color: $marine-10,
         $icon: "\f058"
@@ -65,7 +65,7 @@ blockquote {
     &.important {
       @include notification(
         $bg-color: change-color($orange-60, $alpha: 0.4),
-        $left-border-color: #A16925,
+        $left-border-color: $orange-90,
         $header-color: $orange-20,
         $body-text-color: $orange-20,
         $icon: "\f06a"
@@ -75,7 +75,7 @@ blockquote {
     &.warning {
       @include notification(
         $bg-color: change-color($red-60, $alpha: 0.3),
-        $left-border-color: #C0534B,
+        $left-border-color: $red-40,
         $header-color: $red-10,
         $body-text-color: $red-10,
         $icon: "\f057"
@@ -99,8 +99,8 @@ blockquote {
     &:not(.important):not(.warning):not(.restricted) {
       @include notification(
         $bg-color: change-color($marine-10, $alpha: 0.2),
-        $left-border-color: #367ac2,
-        $header-color: #367ac2,
+        $left-border-color: $blue-80,
+        $header-color: $blue-80,
         $body-text-color: inherit,
         $icon: "\f058"
       );
@@ -109,8 +109,8 @@ blockquote {
     &.important {
       @include notification(
         $bg-color: change-color($orange-10, $alpha: 0.4),
-        $left-border-color: #A16925,
-        $header-color: #A16925,
+        $left-border-color: $orange-90,
+        $header-color: $orange-90,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -119,8 +119,8 @@ blockquote {
     &.warning {
       @include notification(
         $bg-color: change-color($red-10, $alpha: 0.2),
-        $left-border-color: #c0534b,
-        $header-color: #c0534b,
+        $left-border-color: $red-40,
+        $header-color: $red-40,
         $body-text-color: inherit,
         $icon: "\f057"
       );
