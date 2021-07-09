@@ -1,16 +1,18 @@
+@use "sass:color";
+
 //noinspection CssNoGenericFontName
 
 
-@mixin notification($bg-color, $primary-color, $icon) {
+@mixin notification($bg-color, $header-color, $body-text-color, $left-border-color, $icon) {
   background-color:  $bg-color;
-  border-left-color: $primary-color;
+  border-left-color: $left-border-color;
   font-size:         unset; // override bootstrap font-size for blockquotes
 
   // The first child will generally be a header (e.g. "Note" or "This is an experimental feature"),
   // but we have some notes that don't have headers; if there's only one child of the note,
   // assume it's not a header
   > p:first-child:not(:only-child) {
-    color:       $primary-color;
+    color:       $header-color;
     font-weight: 700;
     margin-top:  0;
 
@@ -19,19 +21,81 @@
       content:     "#{$icon} \00a0";
     }
   }
+
+  > p:only-child, > p:not(:first-child) {
+    color: $body-text-color;
+  }
 }
 
+
+
 blockquote {
-  :not(.important):not(.warning) {
-    @include notification($note-bg-color, $note-color, "\f058");
+  body.night & {
+    // DARK THEME
+
+    &:not(.important):not(.warning) {
+      @include notification(
+        $bg-color: change-color($marine-10, $alpha: 0.2),
+        $left-border-color: #367AC2,
+        $header-color: $marine-10,
+        $body-text-color: $marine-10,
+        $icon: "\f058"
+      );
+    }
+
+    &.important {
+      @include notification(
+        $bg-color: change-color($orange-60, $alpha: 0.4),
+        $left-border-color: #A16925,
+        $header-color: $orange-20,
+        $body-text-color: $orange-20,
+        $icon: "\f06a"
+      );
+    }
+
+    &.warning {
+      @include notification(
+        $bg-color: change-color($red-60, $alpha: 0.3),
+        $left-border-color: #C0534B,
+        $header-color: $red-10,
+        $body-text-color: $red-10,
+        $icon: "\f057"
+      );
+    }
   }
 
-  &.important {
-    @include notification($note-bg-color, $important-color, "\f06a");
-  }
+  body:not(.night) & {
+    // LIGHT THEME
 
-  &.warning {
-    @include notification($note-bg-color, $warning-color, "\f057");
+    &:not(.important):not(.warning) {
+      @include notification(
+        $bg-color: change-color($marine-10, $alpha: 0.2),
+        $left-border-color: #367ac2,
+        $header-color: #367ac2,
+        $body-text-color: inherit,
+        $icon: "\f058"
+      );
+    }
+
+    &.important {
+      @include notification(
+        $bg-color: change-color($orange-10, $alpha: 0.4),
+        $left-border-color: #A16925,
+        $header-color: #A16925,
+        $body-text-color: inherit,
+        $icon: "\f06a"
+      );
+    }
+
+    &.warning {
+      @include notification(
+        $bg-color: change-color($red-10, $alpha: 0.2),
+        $left-border-color: #c0534b,
+        $header-color: #c0534b,
+        $body-text-color: inherit,
+        $icon: "\f057"
+      );
+    }
   }
 }
 
