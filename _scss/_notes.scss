@@ -1,45 +1,37 @@
 //noinspection CssNoGenericFontName
-blockquote {
-  background-color:  $note-bg-color;
-  border-left-color: $note-color;
+
+
+@mixin notification($bg-color, $primary-color, $icon) {
+  background-color:  $bg-color;
+  border-left-color: $primary-color;
   font-size:         unset; // override bootstrap font-size for blockquotes
 
   // The first child will generally be a header (e.g. "Note" or "This is an experimental feature"),
   // but we have some notes that don't have headers; if there's only one child of the note,
   // assume it's not a header
   > p:first-child:not(:only-child) {
-    color:       $note-color;
+    color:       $primary-color;
     font-weight: 700;
     margin-top:  0;
 
     &::before {
       font-family: FontAwesome;
-      content:     "\f058 \00a0";
+      content:     "#{$icon} \00a0";
     }
+  }
+}
+
+blockquote {
+  :not(.important):not(.warning) {
+    @include notification($note-bg-color, $note-color, "\f058");
   }
 
   &.important {
-    border-left-color: $important-color;
-
-    > p:first-child {
-      color: $important-color;
-
-      &::before {
-        content: "\f06a  \00a0";
-      }
-    }
+    @include notification($note-bg-color, $important-color, "\f06a");
   }
 
   &.warning {
-    border-left-color: $warning-color;
-
-    > p:first-child {
-      color: $warning-color;
-
-      &::before {
-        content: "\f057  \00a0";
-      }
-    }
+    @include notification($note-bg-color, $warning-color, "\f057");
   }
 }
 
