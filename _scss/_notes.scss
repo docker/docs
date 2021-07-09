@@ -4,7 +4,10 @@ blockquote {
   border-left-color: $note-color;
   font-size:         unset; // override bootstrap font-size for blockquotes
 
-  > p:first-child {
+  // The first child will generally be a header (e.g. "Note" or "This is an experimental feature"),
+  // but we have some notes that don't have headers; if there's only one child of the note,
+  // assume it's not a header
+  > p:first-child:not(:only-child) {
     color:       $note-color;
     font-weight: 700;
     margin-top:  0;
@@ -12,16 +15,6 @@ blockquote {
     &::before {
       font-family: FontAwesome;
       content:     "\f058 \00a0";
-    }
-  }
-
-  // Maintain backwards compatibility with old note style
-  > p:only-child {
-    color:       inherit;
-    font-weight: inherit;
-
-    &::before {
-      content: none;
     }
   }
 
