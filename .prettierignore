@@ -1,0 +1,8 @@
+# It's pretty common for devs to have prettier configured to format on save,
+# so let's include some config to prevent it messing up files in this repo
+
+# Prettier struggles with the kramdown extensions
+*.md
+
+# Our stylesheets use a particular in-house(?) style
+*.scss
