@@ -2,6 +2,25 @@
 
 //noinspection CssNoGenericFontName
 
+/*
+
+These rules control the display of notes/notifications/alerts. They can be used like so:
+
+> **This is a paid feature**
+>
+> Docker Hub Vulnerability Scanning is available for developers subscribed to a Pro or a Team plan. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade)
+{: .restricted }
+
+(The first line is always treated as a header, unless it's the only line)
+
+The available classes are:
+
+.important: Yellow
+.warning: Red/orange
+.restricted: Purple, used to indicate features that require paid plans
+[no class]: Blue, the default
+
+*/
 
 @mixin notification($bg-color, $header-color, $body-text-color, $left-border-color, $icon) {
   background-color:  $bg-color;
@@ -33,7 +52,7 @@ blockquote {
   body.night & {
     // DARK THEME
 
-    &:not(.important):not(.warning) {
+    &:not(.important):not(.warning):not(.restricted) {
       @include notification(
         $bg-color: change-color($marine-10, $alpha: 0.2),
         $left-border-color: #367AC2,
@@ -62,12 +81,22 @@ blockquote {
         $icon: "\f057"
       );
     }
+
+    &.restricted {
+      @include notification(
+        $bg-color: change-color($purple-60, $alpha: 0.44),
+        $left-border-color: $purple-70,
+        $header-color: $purple-10,
+        $body-text-color: $purple-10,
+        $icon: "\f135"
+      );
+    }
   }
 
   body:not(.night) & {
     // LIGHT THEME
 
-    &:not(.important):not(.warning) {
+    &:not(.important):not(.warning):not(.restricted) {
       @include notification(
         $bg-color: change-color($marine-10, $alpha: 0.2),
         $left-border-color: #367ac2,
@@ -94,6 +123,16 @@ blockquote {
         $header-color: #c0534b,
         $body-text-color: inherit,
         $icon: "\f057"
+      );
+    }
+
+    &.restricted {
+      @include notification(
+        $bg-color: change-color($purple-20, $alpha: 0.2),
+        $left-border-color: $purple-70,
+        $header-color: $purple-50,
+        $body-text-color: inherit,
+        $icon: "\f135"
       );
     }
   }
