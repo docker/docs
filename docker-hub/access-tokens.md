@@ -33,47 +33,29 @@ You can create as many tokens as you need.
 
 1. Log in to [hub.docker.com](https://hub.docker.com).
 
-2. Click on your username in the top right corner and select **Account
-Settings**.
+2. Click on your username in the top right corner and select **[Account Settings](https://hub-stage.docker.com/settings/general)**.
 
-3. Select **Security > New Access Token**.
+3. Select **[Security](https://hub-stage.docker.com/settings/security)> New Access Token**.
 
 4. Add a description for your token. Use something that indicates where
 the token is going to be used, or set a purpose for the token.
 
       ![PAT Menu](images/hub-create-token.png){: style="max-width: 60%"}
 
-5. You can view the following permissions from the drop-down:
-     * Read, Write, Delete: lets you to manage team members. This is an admin privilege.
-     * Read & Write: lets you to push images to any repository managed by your account.
-     * Read Only: lets you to view, search, and pull images from any public repositories and any private repositories that you have access to.
-     * Public Repo Read-only: lets you view, search, and pull images from any public repositories.
+5.
 
-      > **Note**
-      >
-      > All users have access to Read, Write, and Delete. Only paid users have
-      > access to Read & Write, Read-only, and Public Repo Read-only.
+| Features   | Free | Pro | Team |
+| --------------------- | ---- | ----- | ----- |
+| Personal Access Tokens (read,write,delete scope only )*    |  x   |   x   |   x   |
+| Scoped Personal Access Tokens**  |      | x   |   x   |
+| Unlimited personal access tokens   |      |       |   x   |
+
+      > If you would like more information about a Pro or a Team pricing plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
 6. Copy the token that appears on the screen. Make sure you do this now:
 once you close this prompt, Docker will never show the token again.
 
       ![Copy Token](images/hub-copy-token.png){: style="max-width: 60%"}
-
-      Treat access tokens like your password and keep them secret. Store your tokens securely (for example, in a credential manager).
-
-
-## Modify existing tokens
-
-You can rename, deactivate, or delete a token as needed.
-
-1. Access your tokens under **Account Settings > Security**.
-
-2. Select a token and click **Delete** or **Edit**, or use the menu on
-the far right of a token row to bring up the edit screen. You can also
-select multiple tokens to delete them all once.
-
-      ![Modify Token](images/hub-edit-token.png){: style="max-width: 60%"}
-
 
 ## Use an access token
 
@@ -87,3 +69,22 @@ a password, enter your token instead.
 If you have 2FA enabled, you must use a personal access token when logging in
 from the Docker CLI. If you don't have it enabled, this is an optional (but
 more secure) method of authentication.
+
+## Modify existing tokens
+
+You can rename, activate, deactivate, or delete a token as needed.
+
+1. Access your tokens under **[Account Settings](https://hub-stage.docker.com/settings/general) > [Security](https://hub-stage.docker.com/settings/security)**.
+
+2. Select a token and click **Delete** or **Edit**, or use the menu on
+the far right of a token row to bring up the edit screen. You can also
+select multiple tokens to delete them all once.
+
+      ![Delete or Edit](images/hub-delete-edit-token.png){: {:width="700px"}}
+
+      > **Note**
+      >
+      > You can select multiple tokens and delete at onnce.
+      > You can also view the number of tokens that are activated and deactivated in the toolbar.
+
+      ![Modify Token](images/hub-edit-token.png){: style="max-width: 60%"}
