@@ -659,6 +659,17 @@ It will render like this  with a colored sidebar and icon:
 
 ![warning admonition example](/images/warning-admonition-example.png)
 
+## Upgrade CTA
+
+Use the `upgrade-cta.html` include to render a CTA asking the user to upgrade their plan. There are two parameters:
+
+- `target-url`: This will typically be something like https://www.docker.com/pricing, possibly with a utm code.
+- `body`: This forms the body of the CTA. It accepts Markdown. To use multi-line bodies, use named captures as explained in [the Jekyll docs](https://jekyllrb.com/docs/includes/#passing-parameter-variables-to-includes).
+
+```
+{% include upgrade-cta.html body="Upgrade to gain access to this feature" target-url="https://www.example.com/" %}
+```
+
 ## Code blocks
 
 Rouge provides lots of different code block "hints". If you leave off the hint,
