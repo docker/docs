@@ -20,11 +20,11 @@ Access tokens are also useful in building integrations, since you can issue
 multiple tokens &ndash; one for each integration &ndash; and revoke them at
 any time.
 
->**Note**
->
-> If you have [two-factor authentication (2FA)](/docker-hub/2fa) enabled on
-> your account, you must create at least one personal access token. Otherwise,
-> you will be unable to log in to your account from the Docker CLI.
+   >**Note**
+   >
+   > If you have [two-factor authentication (2FA)](/docker-hub/2fa) enabled on
+   > your account, you must create at least one personal access token. Otherwise,
+   > you will be unable to log in to your account from the Docker CLI.
 
 
 ## Create an access token
@@ -35,7 +35,7 @@ You can create as many tokens as you need.
 
 2. Click on your username in the top right corner and select **[Account Settings](https://hub-stage.docker.com/settings/general)**.
 
-3. Select **[Security](https://hub-stage.docker.com/settings/security)> New Access Token**.
+3. Select **[Security](https://hub-stage.docker.com/settings/security) > New Access Token**.
 
 4. Add a description for your token. Use something that indicates where
 the token is going to be used, or set a purpose for the token.
@@ -50,7 +50,7 @@ the token is going to be used, or set a purpose for the token.
 | Scoped Personal Access Tokens**  |      | x   |   x   |
 | Unlimited personal access tokens   |      |       |   x   |
 
-      > If you would like more information about a Pro or a Team pricing plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
+>If you would like more information about a Pro or a Team pricing plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
 6. Copy the token that appears on the screen. Make sure you do this now:
 once you close this prompt, Docker will never show the token again.
@@ -82,9 +82,9 @@ select multiple tokens to delete them all once.
 
       ![Delete or Edit](images/hub-delete-edit-token.png){: {:width="700px"}}
 
-      > **Note**
-      >
-      > You can select multiple tokens and delete at onnce.
-      > You can also view the number of tokens that are activated and deactivated in the toolbar.
+   > **Note**
+   >
+   > You can select multiple tokens and delete at onnce.
+   > You can also view the number of tokens that are activated and deactivated in the toolbar.
 
       ![Modify Token](images/hub-edit-token.png){: style="max-width: 60%"}
