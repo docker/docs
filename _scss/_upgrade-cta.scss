@@ -1,5 +1,6 @@
 .docker-upgrade-cta {
   background-color: $orange-10;
+  color: $body-text; // we want this irrespective of light/dark mode
 
   padding: 16px 25px;
   margin: 0 0 20px;
