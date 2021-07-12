@@ -1,0 +1,18 @@
+.docker-upgrade-cta {
+  background-color: $orange-10;
+
+  padding: 16px 25px;
+  margin: 0 0 20px;
+
+  border-radius: 4px;
+  border: 1px solid $orange-20;
+
+  .docker-upgrade-cta__heading {
+    font-weight: bold;
+    font-size: 16px;
+
+    font-family: $headings;
+
+    margin-top: 0;
+  }
+}
