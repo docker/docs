@@ -23,12 +23,11 @@ For information about Docker Desktop download, system requirements, and installa
 
 ## Settings
 
-The **Docker Desktop** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
-and more.
+The **Docker Desktop** menu allows you to open the Docker Dashboard, run the Quick Start Guide, configure your Docker settings such as installation, updates, version channels, Docker Hub login, and more.
 
 This section explains the configuration options accessible from the **Settings** dialog.
 
-1. Open the Docker Desktop menu by clicking the Docker icon in the Notifications area (or System tray):
+1. To open the Docker Desktop menu, right-click the Docker icon in the Notifications area (or System tray):
 
     ![Showing hidden apps in the taskbar](images/whale-icon-systray-hidden.png){:width="250px"}
 
