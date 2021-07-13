@@ -58,6 +58,14 @@ tags:
       in the [Create an authentication token](#operation/PostUsersLogin) route
       to obtain a bearer token.
 
+      ### Scopes
+
+      For each scope grouping (in this case "repo"), you only need to define 1
+      scope as any lower scopes are assumed. For example: If you define
+      `repo:write`, the API assumes the scope of both `repo:read` *and*
+      `repo:public_read` as well. If you were to define both `repo:write` *and*
+      `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
+
       ***Reminder: Personal access tokens should be kept secret like a password
       and cannot be retreived after generation.***
   - name: images
@@ -589,7 +597,7 @@ definitions:
         example: My read only token
       scopes:
         type: array
-        description: 'Valid scopes: "repo:write", "repo:read", "repo:public_read"'
+        description: 'Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read"'
         example: ['repo:read']
         items:
           type: string
