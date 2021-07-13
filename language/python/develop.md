@@ -227,7 +227,7 @@ $ docker-compose -f docker-compose.dev.yml up --build
 
 We pass the `--build` flag so Docker will compile our image and then starts the containers.
 
-Now let’s test our API endpoint. Run the following curl commands:
+Now let’s test our API endpoint. Open a new terminal then make a GET request to the server using the curl commands:
 
 ```shell
 $ curl http://localhost:5000/initdb
