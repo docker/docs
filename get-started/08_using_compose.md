@@ -295,7 +295,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
     into a single stream. This is incredibly useful when you want to watch for timing-related issues. The `-f` flag "follows" the
     log, so will give you live output as it's generated.
 
-    If you have done already, you'll see output that looks like this...
+    If you have run the command already, you'll see output that looks like this:
 
     ```plaintext
     mysql_1  | 2019-10-03T03:07:16.083639Z 0 [Note] mysqld: ready for connections.
