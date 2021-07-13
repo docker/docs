@@ -153,7 +153,7 @@ $ pip3 freeze > requirements.txt
 Now we can build our image.
 
 ```shell
-$ docker build --tag python-docker .
+$ docker build --tag python-docker-dev .
 ```
 
 Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
@@ -164,7 +164,7 @@ $ docker run \
   --network mysqlnet \
   --name rest-server \
   -p 5000:5000 \
-  python-docker
+  python-docker-dev
 ```
 
 Let’s test that our application is connected to the database and is able to add a note.
@@ -182,9 +182,9 @@ You should receive the following JSON back from our service.
 
 ## Use Compose to develop locally
 
-In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker` application in debug mode so that we can connect a debugger to the running process.
+In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker-dev` application in debug mode so that we can connect a debugger to the running process.
 
-Open the `python-docker` code in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
+Open the `python-docker` directory in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 
 ```yaml
 version: '3.8'
@@ -227,7 +227,7 @@ $ docker-compose -f docker-compose.dev.yml up --build
 
 We pass the `--build` flag so Docker will compile our image and then starts the containers.
 
-Now let’s test our API endpoint. Run the following curl commands:
+Now let’s test our API endpoint. Open a new terminal then make a GET request to the server using the curl commands:
 
 ```shell
 $ curl http://localhost:5000/initdb

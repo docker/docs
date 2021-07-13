@@ -68,9 +68,8 @@ ADD hello /
 CMD ["/hello"]
 ```
 
-Assuming you built the "hello" executable example by following the instructions
-at
-[https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/),
+Assuming you built the "hello" executable example by using the source code at
+[https://github.com/docker-library/hello-world](https://github.com/docker-library/hello-world),
 and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
 
