@@ -39,6 +39,10 @@ tags:
 
       The `X-Retry-After` header is a unix timestamp of when you can call the
       API again.
+
+      *Note: These rate limits are separate from anti-abuse and Docker Hub
+      download, or pull rate limiting. To learn more about Docker Hub pull rate
+      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).*
   - name: authentication
     x-displayName: Authentication
     description: |
