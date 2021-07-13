@@ -672,7 +672,7 @@ Use the `upgrade-cta.html` include to render a CTA asking the user to upgrade th
 {% include upgrade-cta.html
   body="Upgrade to gain access to this feature"
   header-text="This feature is restricted to X and Y plans"
-  target-url="https://www.example.com/
+  target-url="https://www.example.com/"
 %}
 ```
 {% endraw %}

@@ -25,7 +25,7 @@ body.night {
     div#side-toc-title {
         color: $white;
     }
-    a:not(.btn) {
+    a:not(.btn):not(.button) {
         color: $primary-links-night;
     }
     .header {
