@@ -672,7 +672,7 @@ paths:
             $ref: '#/definitions/PostUsersLoginErrorResponse'
   /v2/access-tokens:
     post:
-      summary: Create a personal access token.
+      summary: Create a personal access token
       description: Creates and returns a personal access token.
       tags: [access-tokens]
       parameters:
@@ -691,7 +691,7 @@ paths:
         '401':
           $ref: '#/responses/Unauthorized'
     get:
-      summary: Get a list of personal access tokens.
+      summary: Get a list of personal access tokens
       description: Returns a paginated list of personal access tokens.
       tags: [access-tokens]
       parameters:
@@ -714,7 +714,7 @@ paths:
           $ref: '#/responses/Unauthorized'
   /v2/access-tokens/{uuid}:
     patch:
-      summary: Update a personal access token.
+      summary: Update a personal access token
       description: |
         Updates a personal access token partially. You can either update the
         token's label or enable/disable it.
@@ -739,7 +739,7 @@ paths:
         '401':
           $ref: '#/responses/Unauthorized'
     get:
-      summary: Get a personal access token.
+      summary: Get a personal access token
       description: Returns a personal access token by UUID.
       tags: [access-tokens]
       responses:
@@ -758,7 +758,7 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
     delete:
-      summary: Delete a personal access token.
+      summary: Delete a personal access token
       description: |
         Deletes a personal access token permanently. This cannot be undone.
       tags: [access-tokens]
