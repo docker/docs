@@ -46,18 +46,18 @@ tags:
   - name: authentication
     x-displayName: Authentication
     description: |
-      Most Docker Hub API endpoints require you to authenticate using your Docker credentials prior to using them.
+      Most Docker Hub API endpoints require you to authenticate using your Docker credentials before using them.
 
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Free, Pro, or Team) and your account's permissions.
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
   - name: access-tokens
     x-displayName: Personal Access Tokens
     description: |
-      The Personal Access Token endpoints allow you to manage personal access
+      The Personal Access Token endpoints lets you manage personal access
       tokens. For more information, see
       [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
 
-      A personal access token can be used in place of a password in the
+      You can use a personal access token in place of a password in the
       [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or
       in the [Create an authentication token](#operation/PostUsersLogin) route
       to obtain a bearer token.
@@ -71,7 +71,7 @@ tags:
       `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
 
       ***Reminder: Personal access tokens should be kept secret like a password
-      and cannot be retreived after generation.***
+      and cannot be retrieved after generation.***
   - name: images
     x-displayName: Advanced Image Management
     description: |
@@ -653,7 +653,7 @@ paths:
       summary: Create an authentication token
       operationId: PostUsersLogin
       description: |
-        Creates and returns a bearer token in JWT format that can be used to authenticate with Docker Hub APIs.
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
 
         The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
 
