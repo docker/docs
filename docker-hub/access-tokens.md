@@ -16,7 +16,7 @@ Using personal access tokens provides some advantages over a password:
 > tokens securely (for example, in a credential manager).
 {: .important}
 
-Access tokens are valuable for building integrations, since you can issue
+Access tokens are valuable for building integrations, as you can issue
 multiple tokens &ndash; one for each integration &ndash; and revoke them at
 any time.
 
@@ -33,9 +33,9 @@ You can create as many tokens as you need.
 
 1. Log in to [hub.docker.com](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 
-2. Click on your username in the top right corner and select **[Account Settings](https://hub-stage.docker.com/settings/general)**.
+2. Click on your username in the top right corner and select **[Account Settings](https://hub.docker.com/settings/general)**.
 
-3. Select **[Security](https://hub-stage.docker.com/settings/security) > New Access Token**.
+3. Select **[Security](https://hub.docker.com/settings/security) > New Access Token**.
 
 4. Add a description for your token. Use something that indicates where
 the token will be used, or set a purpose for the token.
@@ -47,13 +47,12 @@ the token will be used, or set a purpose for the token.
     | Features   | Free | Pro | Team |
     | --------------------- | ---- | ----- | ----- |
     | Personal Access Tokens (read, write, delete scope only)*    |  x   |   x   |   x   |
-    | Scoped Personal Access Tokens**  |      | x   |   x   |
+    | Scoped Personal Access Tokens  |      | x   |   x   |
     | Unlimited Personal Access Tokens   |      |       |   x   |
 
-      >If you would like more information about a Pro or a Team plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
+      >The following are the available access tokens for each plan: Free (1), Pro (5) and Team (Unlimited). For more information about a Pro or a Team plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
-6. Copy the token that appears on the screen. Do this now:
-once you close this prompt, Docker will never show the token again.
+6. Copy the token that appears on the screen. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
 
       ![Copy Token](images/hub-copy-token.png){:width="700px"}
 
@@ -67,7 +66,7 @@ omit the password in the login command. Instead, enter your token when asked for
 
    > **Note**
    >
-   >If you have 2FA enabled, you must use a personal access token when logging in from the Docker CLI. If you don't have it enabled, this is an optional (but more secure) method of authentication.
+   >If you have 2FA enabled, you must use a personal access token when logging in from the Docker CLI. 2FA is an optional, but more secure method of authentication.
 
 ## Modify existing tokens
 
