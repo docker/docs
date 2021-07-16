@@ -52,7 +52,7 @@ the token will be used, or set a purpose for the token.
 
       >The following are the available access tokens for each plan: Free (1), Pro (5) and Team (Unlimited). For more information about a Pro or a Team plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
-6. Copy the token that appears on the screen. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
+6. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
 
       ![Copy Token](images/hub-copy-token.png){:width="700px"}
 
