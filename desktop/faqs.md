@@ -81,6 +81,12 @@ nested virtualization scenarios**. It might work in some cases, and not in other
 
 For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
+### I have the problem with displaying some views in Docker Desktop, what should I do?
+
+Docker Desktop is built on top of Electron which enables hardware accelerated graphics by default, but some graphics cards have issues with hardware acceleration which means Docker Desktop will launch successfully but it will have broken dashboard view.
+
+If you want to work around this default option, you will need set the `DOCKER_DESKTOP_DISABLE_HARDWARE_ACCELERATION` environment variable to any value (example `DOCKER_DESKTOP_DISABLE_HARDWARE_ACCELERATION=1`) and relaunch Docker Desktop again it will disable hardware acceleration on launch.
+
 ## Releases
 
 ### When will Docker Desktop move to a cumulative release stream?
