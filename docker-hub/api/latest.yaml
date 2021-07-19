@@ -70,8 +70,8 @@ tags:
       `repo:public_read` as well. If you were to define both `repo:write` *and*
       `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
 
-      ***Reminder: Personal access tokens should be kept secret like a password
-      and cannot be retrieved after generation.***
+      ***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after
+      it is generated.***
   - name: images
     x-displayName: Advanced Image Management
     description: |
