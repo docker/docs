@@ -62,8 +62,7 @@ the token will be used, or set a purpose for the token.
 You can use an access token anywhere that requires your Docker Hub
 password.
 
-When logging in from your Docker CLI client (`docker login --username <username>`),
-omit the password in the login command. Instead, enter your token when asked for a password.
+When logging in from your Docker CLI client (`docker login --username <username>`), omit the password in the login command. Instead, enter your token when asked for a password.
 
    > **Note**
    >
