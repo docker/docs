@@ -57,7 +57,7 @@ tags:
       tokens. For more information, see
       [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
 
-      You can use a personal access token in place of a password in the
+      You can use a personal access token instead of a password in the
       [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or
       in the [Create an authentication token](#operation/PostUsersLogin) route
       to obtain a bearer token.
