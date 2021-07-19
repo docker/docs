@@ -46,11 +46,12 @@ the token will be used, or set a purpose for the token.
 
     | Features   | Free | Pro | Team |
     | --------------------- | ---- | ----- | ----- |
-    | Personal Access Tokens (read, write, delete scope only)*    |  x   |   x   |   x   |
+    | Personal Access Tokens (read, write, delete scope only)*    |  x |   x  |   x  |
     | Scoped Personal Access Tokens  |      | x   |   x   |
     | Unlimited Personal Access Tokens   |      |       |   x   |
 
-      >The following are the available access tokens for each plan: Free (1), Pro (5) and Team (Unlimited). For more information about a Pro or a Team plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
+      >*You can create 1 access token as part of the Free plan, 5 tokens per the Pro plan, and Unlimited tokens for the Team plan.
+      For more information about a Pro or a Team plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
 6. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
 
@@ -85,3 +86,5 @@ select multiple tokens to delete at once.
    > You can also view the number of tokens that are activated and deactivated in the toolbar.
 
       ![Modify Token](images/hub-edit-token.png){:width="700px"}
+
+Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
