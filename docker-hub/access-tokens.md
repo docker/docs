@@ -78,7 +78,7 @@ You can rename, activate, deactivate, or delete a token as needed.
 the far right of a token row to bring up the edit screen. You can also
 select multiple tokens to delete at once.
 
-      ![Delete or Edit](images/hub-delete-edit-token.png){: {:width="700px"}
+      ![Delete or Edit](images/hub-delete-edit-token.png){:width="700px"}
 
    > **Note**
    >
