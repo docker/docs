@@ -33,6 +33,14 @@ To get started with Dev Environments, you must have the following tools and exte
 
 Click **Install** to download and install any missing tools.
 
+> **Add Git to your path on Windows**
+> 
+> If you already installed Git, first check if you can use it within the command line or Powershell by checking the version:   
+> `$ git --version`  
+> 
+> If Git isn't detected as a valid command you need to install or re-install it and be sure to choose option `Git from command line...` or `Use Git and optional Unix tools...` during the **Adjusting your PATH environment** step.  
+> ![Windows add Git to path](/images/dev-env-gitbash.png){:width="300px"}
+
 ## Start a single container Dev Environment
 
 The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
