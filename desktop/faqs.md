@@ -83,8 +83,7 @@ For more information, see [Running Docker Desktop in nested virtualization scena
 
 ### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
 
-Docker Desktop is built on Electron which enables hardware-accelerated graphics by default. 
-However, some graphics cards may not support hardware acceleration. In such cases, 
+Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases, 
 Docker Desktop will launch successfully, but some screens may appear green, distorted, 
 or have some visual artifacts.
 
