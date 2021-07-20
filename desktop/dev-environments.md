@@ -38,7 +38,7 @@ Click **Install** to download and install any missing tools.
 > If you already installed Git, first check if you can use it within the command line or Powershell by checking the version:   
 > `$ git --version`  
 > 
-> If Git isn't detected as a valid command you need to install or re-install it and be sure to choose option `Git from command line...` or `Use Git and optional Unix tools...` during the **Adjusting your PATH environment** step.  
+> If Git isn't detected as a valid command you will need to install or re-install it and be sure to choose the option `Git from command line...` or `Use Git and optional Unix tools...` during the **Adjusting your PATH environment** step.  
 > ![Windows add Git to path](/images/dev-env-gitbash.png){:width="300px"}
 
 ## Start a single container Dev Environment
