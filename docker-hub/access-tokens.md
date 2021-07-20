@@ -22,7 +22,7 @@ any time.
 
    >**Note**
    >
-   > If you have [two-factor authentication (2FA)](/docker-hub/2fa) enabled on
+   > If you have [two-factor authentication (2FA)](2fa/index.md) enabled on
    > your account, you must create at least one personal access token. Otherwise,
    > you will be unable to log in to your account from the Docker CLI.
 
