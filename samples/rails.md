@@ -99,7 +99,7 @@ services:
 ### Build the project
 
 With those files in place, you can now generate the Rails skeleton app
-using [docker-compose run](reference/run.md):
+using [docker-compose run](../compose/reference/run.md):
 
 ```console
 $ docker-compose run --no-deps web rails new . --force --database=postgresql
@@ -184,7 +184,7 @@ test:
   database: myapp_test
 ```
 
-You can now boot the app with [docker-compose up](reference/up.md):
+You can now boot the app with [docker-compose up](../compose/reference/up.md):
 
 ```console
 $ docker-compose up
