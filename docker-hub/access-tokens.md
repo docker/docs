@@ -64,9 +64,11 @@ password.
 
 When logging in from your Docker CLI client (`docker login --username <username>`), omit the password in the login command. Instead, enter your token when asked for a password.
 
-   > **Note**
-   >
-   >If you have 2FA enabled, you must use a personal access token when logging in from the Docker CLI. 2FA is an optional, but more secure method of authentication.
+> **Note**
+>
+> If you have [two-factor authentication (2FA)](2fa/index.md) enabled, you must
+> use a personal access token when logging in from the Docker CLI. 2FA is an
+> optional, but more secure method of authentication.
 
 ## Modify existing tokens
 
