@@ -11,7 +11,7 @@ title: Set up Automated Builds
 ---
 
 {% include upgrade-cta.html
-  body="The Automated Builds feature is available for Pro or Team plans only. Upgrade your existing account to a Pro or a Team plan to start using Automated Builds."
+  body="The Automated Builds feature is available on Pro and Team plans. Upgrade your existing plan to start automatically building and pushing your images today."
   header-text="This feature requires a Pro or a Team plan"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
 %}

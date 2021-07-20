@@ -5,7 +5,7 @@ title: Audit log
 ---
 
 {% include upgrade-cta.html
-  body="The Audit log feature is available for users subscribed to a Team plan. Upgrade your existing account to start using the Audit log feature."
+  body="The Audit log feature is available for organizations subscribed to a Team plan. Upgrade your existing plan to start tracking events across your organization."
   header-text="This feature requires a Team plan"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
 %}
