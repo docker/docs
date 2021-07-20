@@ -72,7 +72,7 @@ When logging in from your Docker CLI client (`docker login --username <username>
 
 You can rename, activate, deactivate, or delete a token as needed.
 
-1. Access your tokens under **[Account Settings](https://hub-stage.docker.com/settings/general) > [Security](https://hub-stage.docker.com/settings/security)**.
+1. Access your tokens under **[Account Settings](https://hub.docker.com/settings/general) > [Security](https://hub.docker.com/settings/security)**.
 
 2. Select a token and click **Delete** or **Edit**, or use the menu on
 the far right of a token row to bring up the edit screen. You can also
