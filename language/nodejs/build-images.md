@@ -220,7 +220,6 @@ To list images, simply run the `images` command.
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
-node                12.18.1             f5be1883c8e0        2 months ago         918MB
 ```
 
 You should see at least two images listed. One for the base image `node:12.18.1` and the other for our image we just build `node-docker:latest`.
@@ -246,7 +245,6 @@ $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 
 You can see that we have two images that start with `node-docker`. We know they are the same image because if you look at the IMAGE ID column, you can see that the values are the same for the two images.
@@ -264,7 +262,6 @@ Notice that the response from Docker tells us that the image has not been remove
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 
 Our image that was tagged with `:v1.0.0` has been removed but we still have the `node-docker:latest` tag available on our machine.
