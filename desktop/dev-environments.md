@@ -35,7 +35,7 @@ Click **Install** to download and install any missing tools.
 
 ### Add Git to your PATH on Windows
 
-If you already installed Git, and it's not detected properly, run the following command to check whether you can use Git with the CLI or PowerShell:
+If you have already installed Git, and it's not detected properly, run the following command to check whether you can use Git with the CLI or PowerShell:
 
 `$ git --version`
 
