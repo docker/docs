@@ -170,13 +170,13 @@ context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
 > 
 > docker build -t myimage:latest -<<EOF
 > FROM busybox
-> COPY somefile.txt .
+> COPY somefile.txt ./
 > RUN cat /somefile.txt
 > EOF
 > 
 > # observe that the build fails
 > ...
-> Step 2/3 : COPY somefile.txt .
+> Step 2/3 : COPY somefile.txt ./
 > COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
 > ```
 
@@ -206,7 +206,7 @@ touch somefile.txt
 # build an image using the current directory as context, and a Dockerfile passed through stdin
 docker build -t myimage:latest -f- . <<EOF
 FROM busybox
-COPY somefile.txt .
+COPY somefile.txt ./
 RUN cat /somefile.txt
 EOF
 ```
@@ -232,7 +232,7 @@ the `hello.c` file from the ["hello-world" Git repository on GitHub](https://git
 ```bash
 docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY hello.c .
+COPY hello.c ./
 EOF
 ```
 
