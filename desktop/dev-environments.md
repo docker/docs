@@ -33,7 +33,16 @@ To get started with Dev Environments, you must have the following tools and exte
 
 Click **Install** to download and install any missing tools.
 
-> **Add Git to your path on Windows**
+### Add Git to your PATH on Windows
+
+If you have already installed Git on your Windows machine, run the following command to check whether you can use Git with the CLI or PowerShell:
+
+`$ git --version`
+
+If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the ** Adjusting your PATH environment**  step.
+
+> ![Windows add Git to path](/images/dev-env-gitbash.png){:width="300px"}
+
 > 
 > If you already installed Git, first check if you can use it within the command line or Powershell by checking the version:   
 > `$ git --version`  
