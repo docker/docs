@@ -152,8 +152,8 @@ In its simplest form, the `COPY` command takes two parameters. The first paramet
 We’ll copy the `go.mod` and `go.sum` file into our working directory `/app` which, owing to our use of `WORKDIR`, is the current directory (`.`) inside the image.
 
 ```dockerfile
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 ```
 
 Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the a directory inside our image.
@@ -167,7 +167,7 @@ At this point, we have an image that is based on Go environment version 1.16 (or
 The next thing we need to do is to copy our source code into the image. We’ll use the `COPY` command just like we did with our module files before.
 
 ```dockerfile
-COPY *.go .
+COPY *.go ./
 ```
 
 This `COPY` command uses a wildcard to copy all files with `.go` extension located in the current directory on the host (the directory where the `Dockerfile` is located) into the current directory inside the image. 
@@ -195,11 +195,11 @@ FROM golang:1.16-alpine
 
 WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
-COPY *.go .
+COPY *.go ./
 
 RUN go build -o /docker-gs-ping
 
@@ -218,8 +218,8 @@ FROM golang:1.16-alpine
 WORKDIR /app
 
 # Download necessary Go modules
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
 # ... the rest of the Dockerfile is ...
@@ -351,11 +351,11 @@ FROM golang:1.16-buster AS build
 
 WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
-COPY *.go .
+COPY *.go ./
 
 RUN go build -o /docker-gs-ping
 

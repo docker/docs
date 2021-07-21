@@ -33,13 +33,23 @@ To get started with Dev Environments, you must have the following tools and exte
 
 Click **Install** to download and install any missing tools.
 
+### Add Git to your PATH on Windows
+
+If you have already installed Git, and it's not detected properly, run the following command to check whether you can use Git with the CLI or PowerShell:
+
+`$ git --version`
+
+If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the **Adjusting your PATH environment**  step.
+
+![Windows add Git to path](/images/dev-env-gitbash.png){:width="300px"}
+
 ## Start a single container Dev Environment
 
 The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
 
 > **Note**
 >
-> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your public ssh key>`.
+> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
 1. First, let's copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
 2. Now, click **Create**.
