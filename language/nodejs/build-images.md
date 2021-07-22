@@ -12,6 +12,8 @@ redirect_from:
 
 Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
 
+{% include enable-buildkit.md %}
+
 ## Overview
 
 Now that we have a good overview of containers and the Docker platform, let’s take a look at building our first image. An image includes everything you need to run an application - the code or binary, runtime, dependencies, and any other file system objects required.
@@ -201,13 +203,15 @@ $ docker build --tag node-docker .
 ```
 
 ```shell
-Sending build context to Docker daemon  82.94kB
-Step 1/7 : FROM node:12.18.1
----> f5be1883c8e0
-Step 2/7 : WORKDIR /code
-...
-Successfully built e03018e56163
-Successfully tagged node-docker:latest
+[+] Building 93.8s (11/11) FINISHED
+ => [internal] load build definition from dockerfile                                          0.1s
+ => => transferring dockerfile: 617B                                                          0.0s
+ => [internal] load .dockerignore                                                             0.0s
+ ...
+ => [2/5] WORKDIR /app                                                                        0.4s
+ => [3/5] COPY [package.json, package-lock.json*, ./]                                         0.2s
+ => [4/5] RUN npm install --production                                                        9.8s
+ => [5/5] COPY . .
 ```
 
 ## View local images
@@ -220,10 +224,9 @@ To list images, simply run the `images` command.
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
-node                12.18.1             f5be1883c8e0        2 months ago         918MB
 ```
 
-You should see at least two images listed. One for the base image `node:12.18.1` and the other for our image we just build `node-docker:latest`.
+Your exact output may vary, but you should see the image we just built `node-docker:latest` with the `latest` tag.
 
 ## Tag images
 
@@ -246,7 +249,6 @@ $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 
 You can see that we have two images that start with `node-docker`. We know they are the same image because if you look at the IMAGE ID column, you can see that the values are the same for the two images.
@@ -264,7 +266,6 @@ Notice that the response from Docker tells us that the image has not been remove
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 
 Our image that was tagged with `:v1.0.0` has been removed but we still have the `node-docker:latest` tag available on our machine.
