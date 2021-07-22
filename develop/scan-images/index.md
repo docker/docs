@@ -4,7 +4,11 @@ description: Scan images best practices guide
 keywords: docker scan, scan, images, snyk, vulnerability
 ---
 
-> Did you know that Docker subscribers receive 200 Snyk vulnerability scans as part of their subscription? Click [here](https://snyk.co/udvnv){:target="_blank" rel="noopener" class="_"} to activate your free monthly scans. Not a Docker subscriber? Learn more about scanning on the [Docker pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan){:target="_blank" rel="noopener" class="_"} page.
+{% include upgrade-cta.html
+  body="Did you know that Docker subscribers receive 200 Snyk vulnerability scans as part of their subscription? Click [here](https://snyk.co/udvnv) to activate your free monthly scans. Upgrade your existing plan to start scanning your images for vulnerabilities."
+  header-text="This feature requires a Pro or a Team plan"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
+%}
 
 This page contains recommendations and best practices for scanning and building secure images.
 
