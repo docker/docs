@@ -87,12 +87,12 @@ Docker Desktop uses hardware-accelerated graphics by default, which may cause pr
 Docker Desktop will launch successfully, but some screens may appear green, distorted, 
 or have some visual artifacts.
 
-To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's settings file. This file can be found at:
+To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
 
 - **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
 - **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
  
-Completely close and restart Docker Desktop to apply the changes.
+After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
 
 ## Releases
 
