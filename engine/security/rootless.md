@@ -55,8 +55,8 @@ testuser:231072:65536
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
-  <li><a data-toggle="tab" data-target="#hint-centos8-and-fedora">CentOS 8 and Fedora</a></li>
-  <li><a data-toggle="tab" data-target="#hint-centos7">CentOS 7</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 8, RHEL 8 and Fedora</a></li>
+  <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7 and RHEL 7</a></li>
 </ul>
 <div class="tab-content">
 
@@ -100,7 +100,7 @@ testuser:231072:65536
 
 - Known to work on openSUSE 15.
 </div>
-<div id="hint-centos8-and-fedora" class="tab-pane fade in" markdown="1">
+<div id="hint-centos8-rhel8-fedora" class="tab-pane fade in" markdown="1">
 - Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
 
 - You might need `sudo dnf install -y iptables`.
@@ -111,7 +111,7 @@ testuser:231072:65536
 
 - Known to work on CentOS 8 and Fedora 33.
 </div>
-<div id="hint-centos7" class="tab-pane fade in" markdown="1">
+<div id="hint-centos7-rhel7" class="tab-pane fade in" markdown="1">
 - Add `user.max_user_namespaces=28633` to `/etc/sysctl.conf` (or 
   `/etc/sysctl.d`) and run `sudo sysctl --system`.
 
@@ -123,7 +123,7 @@ testuser:231072:65536
 ## Known limitations
 
 - Only the following storage drivers are supported:
-  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel)
+  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel, doesn't work on SLES 15)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
   - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
@@ -179,6 +179,7 @@ $ sudo apt-get install -y docker-ce-rootless-extras
 <div id="install-without-packages" class="tab-pane fade in" markdown="1">
 If you do not have permission to run package managers like `apt-get` and `dnf`,
 consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
+Since static packages are not available for `s390x`, hence it is not supported for `s390x`.
 
 ```console
 $ curl -fsSL https://get.docker.com/rootless | sh
