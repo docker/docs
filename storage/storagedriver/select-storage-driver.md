@@ -95,6 +95,8 @@ configurations work on recent versions of the Linux distribution:
 | Docker Engine - Community on Debian | `overlay2` (Debian Stretch), `aufs` or `devicemapper` (older versions) | `overlay`¹, `vfs`                                 |
 | Docker Engine - Community on CentOS | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
 | Docker Engine - Community on Fedora | `overlay2`                                                             | `overlay`¹, `devicemapper`², `zfs`, `vfs`         |
+| Docker Engine - Community on SLES 15 | `overlay2`                                                             | `overlay`¹, `devicemapper`², `vfs`                |
+| Docker Engine - Community on RHEL | `overlay2`                                                             | `overlay`¹, `devicemapper`², `vfs`                |
 
 ¹) The `overlay` storage driver is deprecated, and will be removed in a future
 release. It is recommended that users of the `overlay` storage driver migrate to `overlay2`.
