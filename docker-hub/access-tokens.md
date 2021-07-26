@@ -8,7 +8,7 @@ Docker Hub lets you create personal access tokens as alternatives to your passwo
 
 Using personal access tokens provides some advantages over a password:
 * You can investigate the last usage of the access token and disable or delete it if you find any suspicious activity.
-* When logged in with an access token, you can't perform any admin activity on the account, including changing the password.
+* When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
 
 >**Important**
 >
