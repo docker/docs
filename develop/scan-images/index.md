@@ -19,7 +19,7 @@ Docker and Snyk have partnered together to bring security natively into the deve
 - The host operating system
 - Container networking and storage
 
-Including the vulnerability scanning options into the Docker platform extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. The process of simple and continuous checks, for example, by checking images in the background using [Synk Advisor](https://snyk.io/advisor/docker){:target="_blank" rel="noopener" class="_"}, can lead to fewer vulnerabilities checked into Docker Hub. This can result in a shorter CI cycle and a more reliable deployment into production.
+Including the vulnerability scanning options into the Docker platform extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. The process of simple and continuous checks, for example, by checking images in the background using [Snyk Advisor](https://snyk.io/advisor/docker){:target="_blank" rel="noopener" class="_"}, can lead to fewer vulnerabilities checked into Docker Hub. This can result in a shorter CI cycle and a more reliable deployment into production.
 
 ![Developer's security journey](/images/dev-security-journey.png){:width="700px"}
 
