@@ -77,6 +77,8 @@ Switch back to the terminal where our server is running. You should now see the 
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
 
+At this stage, you're done with testing this server script locally, so stop it running by going back to the first terminal session where you started it up, and press ctrl-c.
+
 ## Create a Dockerfile for Node.js
 
 A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
