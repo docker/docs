@@ -152,6 +152,11 @@ To read the Docker app log messages, type `docker` in the Console window search 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.
 
+#### View the Docker Daemon logs
+
+Refer to the [read the logs](../config/daemon/index.md#read-the-logs) section
+to learn how to view the Docker Daemon logs.
+
 <a name="troubleshoot"></a>
 ## Troubleshooting
 
