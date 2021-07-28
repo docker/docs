@@ -199,9 +199,9 @@ Now to run our tests, we just need to run the docker build command as above.
 ```console
 $ docker build -t node-docker --target test .
 [+] Building 8.9s (13/13) FINISHED
- => [internal] load build definition from Dockerfile                                                                                                                                                 0.0s
- => => transferring dockerfile: 650B                                                                                                                                                                 0.0s
- => [internal] load .dockerignore                                                                                                                                                                    0.0s
+ => [internal] load build definition from Dockerfile      0.0s
+ => => transferring dockerfile: 650B                      0.0s
+ => [internal] load .dockerignore                         0.0s
  => => transferring context: 2B
 
 > node-docker@1.0.0 test /code
