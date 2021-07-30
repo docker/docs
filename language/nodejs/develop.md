@@ -198,7 +198,7 @@ Click the **Open dedicated DevTools for Node** link. This opens the DevTools tha
 
 Let’s change the source code and then set a breakpoint.
 
-Add the following code above the existing `server.use()` statement, and save the file.
+Add the following code above the existing `server.use()` statement, and save the file. Make sure that the `return` statement is on a line of its own, as shown here, so you can set the breakpoint appropriately.
 
 ```js
  server.use( '/foo', (req, res) => {
