@@ -135,8 +135,8 @@ Let us set up a Builder with a build cache. First, we need to set up cache for t
 
 And lastly, after adding the builder and build cache snippets to the top of the Actions file, we need to add some extra attributes to the build and push step. This involves:
 
-Setting up the builder to use the output of the buildx step, and then
-Using the cache we set up earlier for it to store to and to retrieve
+ - Setting up the builder to use the output of the buildx step, and then
+ - Using the cache we set up earlier for it to store to and to retrieve
 
 {% raw %}
 ```yaml
