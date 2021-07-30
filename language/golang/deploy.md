@@ -12,7 +12,7 @@ Now, that we have configured a CI/CD pipleline, let's look at how we can deploy 
 
 The Docker Azure Integration enables developers to use native Docker commands to run applications in Azure Container Instances (ACI) when building cloud-native applications. The new experience provides a tight integration between Docker Desktop and Microsoft Azure allowing developers to quickly run applications using the Docker CLI or VS Code extension, to switch seamlessly from local development to cloud deployment.
 
-For detailed instructions, see [Deploying Docker containers on Azure](/cloud/aci-integration/).
+For detailed instructions, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md).
 
 ## Docker and AWS ECS
 
