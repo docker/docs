@@ -2,13 +2,17 @@
 
 ### Enable BuildKit
 
-Before we start building images, ensure you have enabled BuildKit on your machine. BuildKit allows you to build Docker images efficiently. For more information, see [Building images with BuildKit](../develop/develop-images/build_enhancements.md).
+Before we start building images, ensure you have enabled BuildKit on your machine.
+BuildKit allows you to build Docker images efficiently. For more information,
+see [Building images with BuildKit](/develop/develop-images/build_enhancements/).
 
-BuildKit is enabled by default for all users on Docker Desktop. If you have installed Docker Desktop, you don't have to manually enable BuildKit. If you are running Docker on Linux, you can enable BuildKit either by using an environment variable or by making BuildKit the default setting.
+BuildKit is enabled by default for all users on Docker Desktop. If you have
+installed Docker Desktop, you don't have to manually enable BuildKit. If you are
+running Docker on Linux, you can enable BuildKit either by using an environment
+variable or by making BuildKit the default setting.
 
-> You must be running Docker 18.09 or higher to use BuildKit.
-
-To set the BuildKit environment variable when running the `docker build` command, run:
+To set the BuildKit environment variable when running the `docker build` command,
+run:
 
 ```
 $ DOCKER_BUILDKIT=1 docker build .
