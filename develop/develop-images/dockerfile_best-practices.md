@@ -644,7 +644,7 @@ version bumps are easier to maintain, as seen in the following example:
 ENV PG_MAJOR=9.3
 ENV PG_VERSION=9.3.4
 RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgres && …
-ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
+ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PG_VERSION
 ```
 
 Similar to having constant variables in a program (as opposed to hard-coding
