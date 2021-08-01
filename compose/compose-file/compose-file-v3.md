@@ -450,6 +450,14 @@ The command can also be a list, in a manner similar to
 command: ["bundle", "exec", "thin", "-p", "3000"]
 ```
 
+> Note when using pipes (`|`) or `&&` in your command
+>
+> If you want to bind multiple commands, instead of placing them in an external `.sh` file, use the below syntax. Otherwise, your command gets quietly chopped at the `|` or `&&`. `-o pipefail` makes sure that a failing command fails the whole pipe (and thereafter, the composed Docker stack).
+>
+>```yaml
+>command: bash -o pipefail -c 'echo a | grep -v a'
+>``` 
+
 ### configs
 
 Grant access to configs on a per-service basis using the per-service `configs`
