@@ -9,16 +9,31 @@ keywords: Docker, buildx, multi-arch
 Docker Buildx is a CLI plugin that extends the docker command with the full
 support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit)
 builder toolkit. It provides the same user experience as docker build with many
-new features like creating scoped builder instances and building against multiple
-nodes concurrently.
+new features like creating scoped builder instances and building against
+multiple nodes concurrently.
 
 ## Install
 
-Docker Buildx is included in Docker Desktop and Docker Linux packages when installed
-using the [DEB or RPM packages](../engine/install/index.md).
+Docker Buildx is included in Docker Desktop and Docker Linux packages when
+installed using the [DEB or RPM packages](../engine/install/index.md).
 
 You can also download the latest `buildx` binary from the
-[Docker buildx](https://github.com/docker/buildx/) repository on GitHub.
+[Docker buildx](https://github.com/docker/buildx/releases/latest) releases page
+on GitHub, copy it to `~/.docker/cli-plugins` folder with name
+`docker-buildx` and change the permission to execute:
+
+```console
+$ chmod a+x ~/.docker/cli-plugins/docker-buildx
+```
+
+Here is how to use buildx inside a Dockerfile through the
+[`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) image:
+
+```dockerfile
+FROM docker
+COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
+RUN docker buildx version
+```
 
 ## Set buildx as the default builder
 
@@ -63,9 +78,9 @@ with `--output`.
 
 ## Work with builder instances
 
-By default, Buildx uses the "docker" driver if it is supported, providing a user
-experience very similar to the native docker build. Note that you must use a local
-shared daemon to build your applications.
+By default, Buildx uses the `docker` driver if it is supported, providing a user
+experience very similar to the native `docker build`. Note that you must use a
+local shared daemon to build your applications.
 
 Buildx allows you to create new instances of isolated builders. You can use this
 to get a scoped environment for your CI builds that does not change the state of
@@ -91,9 +106,9 @@ builder.
 
 Docker also features a [`docker context`](../engine/reference/commandline/context.md)
 command that you can use to provide names for remote Docker API endpoints. Buildx
-integrates with docker context to ensure all the contexts automatically get a
+integrates with `docker context` to ensure all the contexts automatically get a
 default builder instance. You can also set the context name as the target when
-you  create a new builder instance or when you add a node to it.
+you create a new builder instance or when you add a node to it.
 
 ## Build multi-platform images
 
@@ -105,7 +120,7 @@ When you invoke a build, you can set the `--platform` flag to specify the target
 platform for the build output, (for example, `linux/amd64`, `linux/arm64`, or
 `darwin/amd64`).
 
-When the current builder instance is backed by the "docker-container" driver,
+When the current builder instance is backed by the `docker-container` driver,
 you can specify multiple platforms together. In this case, it builds a manifest
 list which contains images for all specified architectures. When you use this
 image in [`docker run`](../engine/reference/commandline/run.md) or
@@ -126,11 +141,24 @@ are available. When BuildKit needs to run a binary for a different architecture,
 it automatically loads it through a binary registered in the `binfmt_misc`
 handler.
 
+For QEMU binaries registered with `binfmt_misc` on the host OS to work
+transparently inside containers they must be registered with the `fix_binary`
+flag. This requires a kernel >= 4.8 and binfmt-support >= 2.1.7. You can check
+for proper registration by checking if `F` is among the flags in
+`/proc/sys/fs/binfmt_misc/qemu-*`. While Docker Desktop comes preconfigured
+with `binfmt_misc` support for additional platforms, for other installations
+it likely needs to be installed using [`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt)
+image.
+
+```console
+$ docker run --privileged --rm tonistiigi/binfmt --install all
+```
+
 Using multiple native nodes provide better support for more complicated cases
 that are not handled by QEMU and generally have better performance. You can
 add additional nodes to the builder instance using the `--append` flag.
 
-Assuming contexts node-amd64 and node-arm64 exist in `docker context ls`;
+Assuming contexts `node-amd64` and `node-arm64` exist in `docker context ls`;
 
 ```console
 $ docker buildx create --use --name mybuild node-amd64
@@ -172,3 +200,8 @@ command called [`docker buildx bake`](../engine/reference/commandline/buildx_bak
 The `bake` command supports building images from compose files, similar to 
 [`docker-compose build`](../compose/reference/build.md), but allowing all the
 services to be built concurrently as part of a single request.
+
+There is also support for custom build rules from HCL/JSON files allowing
+better code reuse and different target groups. The design of bake is in very
+early stages and we are [looking for feedback](https://github.com/docker/buildx/issues)
+from users.
