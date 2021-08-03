@@ -18,12 +18,12 @@ For detailed instructions, see [Deploying Docker containers on ECS](/cloud/ecs-i
 
 ## Kubernetes
 
-Docker Desktop includes a standalone Kubernetes server and client, as well as Docker CLI integration that runs on your machine. Enabling Kubernetes allows you to test your workloads on Kubernetes.
+Docker Desktop includes a standalone Kubernetes server and client, as well as Docker CLI integration that runs on your machine. When you enable Kubernetes, you can test your workloads on Kubernetes.
 
 To enable Kubernetes:
 
 1. From the Docker menu, select **Preferences** (**Settings** on Windows).
-2. Select **Kubernetes** and then click **Enable Kubernetes**.
+2. Select **Kubernetes** and click **Enable Kubernetes**.
 
     This starts a Kubernetes single-node cluster when Docker Desktop starts.
 
