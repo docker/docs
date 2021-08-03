@@ -7,7 +7,7 @@ keywords: Docker, buildx, multi-arch
 ## Overview
 
 Docker Buildx is a CLI plugin that extends the docker command with the full
-support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit)
+support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit){:target="_blank" rel="noopener" class="_"}
 builder toolkit. It provides the same user experience as docker build with many
 new features like creating scoped builder instances and building against
 multiple nodes concurrently.
@@ -18,7 +18,7 @@ Docker Buildx is included in Docker Desktop and Docker Linux packages when
 installed using the [DEB or RPM packages](../engine/install/index.md).
 
 You can also download the latest `buildx` binary from the
-[Docker buildx](https://github.com/docker/buildx/releases/latest) releases page
+[Docker buildx](https://github.com/docker/buildx/releases/latest){:target="_blank" rel="noopener" class="_"} releases page
 on GitHub, copy it to `~/.docker/cli-plugins` folder with name
 `docker-buildx` and change the permission to execute:
 
@@ -147,7 +147,7 @@ flag. This requires a kernel >= 4.8 and binfmt-support >= 2.1.7. You can check
 for proper registration by checking if `F` is among the flags in
 `/proc/sys/fs/binfmt_misc/qemu-*`. While Docker Desktop comes preconfigured
 with `binfmt_misc` support for additional platforms, for other installations
-it likely needs to be installed using [`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt)
+it likely needs to be installed using [`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt){:target="_blank" rel="noopener" class="_"}
 image.
 
 ```console
@@ -203,5 +203,7 @@ services to be built concurrently as part of a single request.
 
 There is also support for custom build rules from HCL/JSON files allowing
 better code reuse and different target groups. The design of bake is in very
-early stages and we are [looking for feedback](https://github.com/docker/buildx/issues)
-from users.
+early stages and we are looking for feedback from users. Let us know your 
+feedback by creating an issue in the 
+[Docker buildx](https://github.com/docker/buildx/issues){:target="_blank" rel="noopener" class="_"} 
+GitHub repository.
