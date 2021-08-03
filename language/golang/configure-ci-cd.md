@@ -175,7 +175,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          
+
       - name: Install Go
         uses: actions/setup-go@v2
         with:
@@ -195,7 +195,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ github.repository }}:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -336,13 +336,13 @@ GitHub Actions are an immensely powerful way to automate your CI and CD pipeline
 
 ## Next steps
 
-In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. 
+In this module, you have learnt how to set up GitHub Actions workflow to an existing dockerized Go project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub.
 
-You can also consider deploying your application to a public Cloud provider, such as Azure and AWS.
+You can also consider deploying your application to a public Cloud provider, such as Azure and AWS or to an orchestration platform such as Kubernetes.
 
 In the next module, we’ll look into some options for doing so:
 
-[Deploy to the Cloud](deploy.md){: .button .outline-btn}
+[Deploy your app](deploy.md){: .button .outline-btn}
 
 ## Feedback
 
