@@ -138,6 +138,7 @@ testuser:231072:65536
 - `IPAddress` shown in `docker inspect` and is namespaced inside RootlessKit's network namespace.
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
+- NFS mounts as the docker "data-root" is not supported
 
 ## Install
 > **Note**
