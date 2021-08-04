@@ -22,6 +22,61 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.8
+2021-08-03
+
+### Deprecation
+
+- Deprecate support for encrypted TLS private keys. Legacy PEM encryption as
+  specified in RFC 1423 is insecure by design. Because it does not authenticate
+  the ciphertext, it is vulnerable to padding oracle attacks that can let an
+  attacker recover the plaintext. Support for encrypted TLS private keys is now
+  marked as deprecated, and will be removed in an upcoming release. [docker/cli#3219](https://github.com/docker/cli/pull/3219)
+- Deprecate Kubernetes stack support. Following the deprecation of [Compose on Kubernetes](https://github.com/docker/compose-on-kubernetes),
+  support for Kubernetes in the `stack` and `context` commands in the Docker CLI
+  is now marked as deprecated, and will be removed in an upcoming release [docker/cli#3174](https://github.com/docker/cli/pull/3174).
+
+### Client
+
+- Fix `Invalid standard handle identifier` errors on Windows [docker/cli#3132](https://github.com/docker/cli/pull/3132).
+
+### Rootless
+
+- Avoid `can't open lock file /run/xtables.lock: Permission denied` error on
+  SELinux hosts [moby/moby#42462](https://github.com/moby/moby/pull/42462).
+- Disable overlay2 when running with SELinux to prevent permission denied errors [moby/moby#42462](https://github.com/moby/moby/pull/42462).
+- Fix `x509: certificate signed by unknown authority` error on openSUSE Tumbleweed [moby/moby#42462](https://github.com/moby/moby/pull/42462).
+
+### Runtime
+
+- Print a warning when using the `--platform` option to pull a single-arch image
+  that does not match the specified architecture [moby/moby#42633](https://github.com/moby/moby/pull/42633).
+- Fix incorrect `Your kernel does not support swap memory limit` warning when
+  running with cgroups v2 [moby/moby#42479](https://github.com/moby/moby/pull/42479).
+- Windows: Fix a situation where containers were not stopped if `HcsShutdownComputeSystem`
+  returned an `ERROR_PROC_NOT_FOUND` error moby/moby#42613](https://github.com/moby/moby/pull/42613) 
+
+## Swarm
+
+- Fix a possibility where overlapping IP addresses could exist as a result of the
+  node failing to clean up its old loadbalancer IPs [moby/moby#42538](https://github.com/moby/moby/pull/42538)
+- Fix a deadlock in log broker ("dispatcher is stopped") [moby/moby#42537](https://github.com/moby/moby/pull/42537)
+
+### Packaging
+
+> **Known issue**
+>
+> The `ctr` binary shipping with the static packages of this release is not
+> statically linked, and will not run in Docker images using alpine as a base
+> image. Users can install the `libc6-compat` package, or download a previous
+> version of the `ctr` binary as a workaround. Refer to the containerd ticket
+> related to this issue for more details: [containerd/containerd#5824](https://github.com/containerd/containerd/issues/5824).
+
+- Remove packaging for Ubuntu 16.04 "Xenial" and Fedora 32, as they reached EOL [docker/docker-ce-packaging#560](https://github.com/docker/docker-ce-packaging/pull/560)
+- Update Golang runtime to Go 1.16.6
+- Update the bundled buildx version to v0.6.1 for rpm and deb packages [docker/docker-ce-packaging#562](https://github.com/docker/docker-ce-packaging/pull/562)
+- Update static binaries and containerd.io rpm and deb packages to containerd v1.4.9 and runc v1.0.1: [docker/containerd-packaging#241](https://github.com/docker/containerd-packaging/pull/241), [docker/containerd-packaging#245](https://github.com/docker/containerd-packaging/pull/245), [docker/containerd-packaging#247](https://github.com/docker/containerd-packaging/pull/247).
+
 ## 20.10.7
 2021-06-02
 
