@@ -25,6 +25,10 @@ for Docker Engine.
 ## 20.10.8
 2021-08-03
 
+**IMPORTANT**: Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+setting an `$HTTP_PROXY` environment variable alone is not enough any more to properly configure an HTTP proxy.
+Make sure you also set an `$HTTPS_PROXY` environment variable, for handling requests to `https://` URLs.
+
 ### Deprecation
 
 - Deprecate support for encrypted TLS private keys. Legacy PEM encryption as
