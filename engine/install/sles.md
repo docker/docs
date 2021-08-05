@@ -149,7 +149,8 @@ $ sudo zypper \
     > `zypper update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
@@ -173,7 +174,8 @@ $ sudo zypper \
     $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 
 3.  Start Docker.
 
@@ -189,9 +191,9 @@ $ sudo zypper \
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
-Docker Engine is installed and running. You need to use `sudo` to run Docker
+This installs and runs Docker Engine. Use `sudo` to run Docker
 commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -211,7 +213,9 @@ a new file each time you want to upgrade Docker Engine.
     and choose your version of SLES. Then browse to `15/s390x/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 
@@ -239,9 +243,9 @@ a new file each time you want to upgrade Docker Engine.
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
-Docker Engine is installed and running. You need to use `sudo` to run Docker commands.
+This installs and runs Docker Engine. Use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -250,7 +254,7 @@ steps.
 
 To upgrade Docker Engine, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `zypper -y upgrade`
-instead of `zypper -y install`, and pointing to the new file.
+instead of `zypper -y install`, and point to the new file.
 
 {% include install-script.md %}
 
