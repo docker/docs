@@ -237,7 +237,7 @@ a new file each time you want to upgrade Docker.
 
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
-    `armhf`, `arm64`,or `s390x`, and download the `.deb` file for the Docker Engine
+    `armhf`, `arm64`, or `s390x`, and download the `.deb` file for the Docker Engine
     version you want to install.
 
     > **Note**: To install a **nightly** or **test** (pre-release) package,

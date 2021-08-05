@@ -1,21 +1,13 @@
 ---
 description: Instructions for installing Docker Engine on RHEL
-keywords: requirements, apt, installation, rhel, rpm, install, uninstall, upgrade, update
+keywords: requirements, apt, installation, rhel, rpm, install, uninstall, upgrade, update, s390x, ibm-z
 redirect_from:
-- /ee/docker-ee/centos/
 - /ee/docker-ee/rhel/
-- /engine/installation/centos/
-- /engine/installation/rhel/
-- /engine/installation/linux/centos/
-- /engine/installation/linux/docker-ce/centos/
 - /engine/installation/linux/docker-ce/rhel/
-- /engine/installation/linux/docker-ee/centos/
 - /engine/installation/linux/docker-ee/rhel/
 - /engine/installation/linux/rhel/
 - /engine/installation/rhel/
-- /install/linux/centos/
-- /install/linux/docker-ce/centos/
-- /install/linux/docker-ee/centos/
+- /engine/installation/rhel/
 - /install/linux/docker-ee/rhel/
 - /installation/rhel/
 title: Install Docker Engine on RHEL
@@ -27,6 +19,12 @@ To get started with Docker Engine on RHEL, make sure you
 [install Docker](#installation-methods).
 
 ## Prerequisites
+
+> **Note**
+>
+> We currently only provide packages for RHEL on s390x (IBM Z). Other architectures
+> are not yet supported for RHEL, but you may be able to install the CentOS packages
+> on RHEL. Refer to the [Install Docker Engine on CentOS](centos.md) page for details.
 
 ### OS requirements
 

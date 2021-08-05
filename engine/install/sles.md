@@ -1,18 +1,21 @@
 ---
 description: Instructions for installing Docker Engine on SLES
-keywords: requirements, apt, installation, centos, rpm, sles, install, uninstall, upgrade, update
+keywords: requirements, apt, installation, centos, rpm, sles, install, uninstall, upgrade, update, s390x, ibm-z
 redirect_from:
 - /ee/docker-ee/sles/
-- /engine/installation/sles/
-- /engine/installation/linux/sles/
+- /ee/docker-ee/suse/
 - /engine/installation/linux/docker-ce/sles/
 - /engine/installation/linux/docker-ee/sles/
-- /engine/installation/linux/docker-ee/sles/
+- /engine/installation/linux/docker-ee/suse/
 - /engine/installation/linux/sles/
+- /engine/installation/linux/SUSE/
+- /engine/installation/linux/suse/
 - /engine/installation/sles/
-- /install/linux/sles/
+- /engine/installation/SUSE/
 - /install/linux/docker-ce/sles/
 - /install/linux/docker-ee/sles/
+- /install/linux/docker-ee/suse/
+- /install/linux/sles/
 - /installation/sles/
 title: Install Docker Engine on SLES
 toc_max: 4
@@ -24,19 +27,27 @@ To get started with Docker Engine on SLES, make sure you
 
 ## Prerequisites
 
+> **Note**
+>
+> We currently only provide packages for SLES on s390x (IBM Z). Other architectures
+> are not yet supported for SLES.
+
 ### OS requirements
 
 To install Docker Engine, you need a maintained version of SLES 15-SP2 on s390x (IBM Z).
 Archived versions aren't supported or tested.
 
-The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.2&arch=s390x) repositories must be enabled. 
+The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.2&arch=s390x)
+repositories must be enabled. 
 
 The `SELinux (SLE_15_SP2)`repository must be enabled. This repository is not added by
 default, you need to
 [add it](https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo).
+
 ```console
 $ zypper addrepo https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo
 ```
+
 The `overlay2` storage driver is recommended.
 
 ### Uninstall old versions
@@ -53,7 +64,6 @@ $ sudo zypper remove docker \
                   docker-latest-logrotate \
                   docker-logrotate \
                   docker-engine \
-                  docker-ce-cli \
                   runc
 ```
 
