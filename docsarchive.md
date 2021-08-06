@@ -21,6 +21,6 @@ you can still access that documentation in the following ways:
 - By running a container of the specific [tag for your documentation version](https://hub.docker.com/r/docs/docker.github.io)
   in Docker Hub. For example, run the following to access `v1.9`:
 
-  ```bash
-  docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
+  ```console
+  $ docker run  -it -p 4000:4000 docs/docker.github.io:v1.9
   ```
