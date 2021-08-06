@@ -78,10 +78,6 @@ You can create a dev environment from a specific branch (for example, a branch c
 
 Docker then clones the repository with your specified branch or tag.
 
-> **Note**
->
-> Known issue: With versions prior Desktop 3.6.0, when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
-
 ### Recap
 
 Let's summarize the tasks we performed so far to start a single container Dev Environment.
