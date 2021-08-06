@@ -51,7 +51,7 @@ The simplest way to get started with Dev Environments is to create a new environ
 >
 > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. First, let's copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
+1. First, let's click **Create New Environment** to open the create dialog box. Then copy `git@github.com:dockersamples/single-dev-env.git` and add it to the Repository URL field.
 2. Now, click **Create**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
@@ -80,7 +80,7 @@ Docker then clones the repository with your specified branch or tag.
 
 > **Note**
 >
-> Known issue: when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
+> Known issue: With versions prior Desktop 3.6.0, when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
 
 ### Recap
 
@@ -100,7 +100,7 @@ This creates a Docker image of your dev environment, uploads it to the Docker Hu
 
 ![Dev environment shared](/images/dev-env-shared.png){:width="700px"}
 
-Your team members just need to add this URL in the **Create** field and then click **Create**. Your Dev Environment now starts in the exact same state as you shared it!
+Your team members just need to open the **Create** Dialog, go to **Existing Dev Environment** tab, and paste this URL. Your Dev Environment now starts in the exact same state as you shared it!
 
 Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback even before you create a pull request!
 
@@ -112,7 +112,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
   >
   > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. Copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
+1. Click **Create** to open the create dialog box. Then copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the Repository URL field.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
 
     - Builds local images for services that are defined in the Compose file
@@ -227,8 +227,7 @@ The following section lists known issues and workarounds in the Dev Environments
 
 1. It is currently not possible to share Compose-based applications using Dev Environments because registries do not support Compose applications. Refer to the [Feedback](#feedback) section to let us know your requirements for sharing Compose-based applications.
 2. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-3. You must wait until Dev Environment is successfully created (indicated by a green icon) before closing the Docker Dashboard. Dev Environments may not be created successfully if you attempt to close the Docker Dashboard while the Dev Environment creation process is in progress.
-4. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
+3. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
 
 ## Feedback
 
