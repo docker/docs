@@ -125,8 +125,8 @@ also included below.
 
 1.  Run this command to download the current stable release of Docker Compose:
 
-    ```bash
-    sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```console
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
@@ -137,8 +137,8 @@ also included below.
 
 2.  Apply executable permissions to the binary:
 
-    ```bash
-    sudo chmod +x /usr/local/bin/docker-compose
+    ```console
+    $ sudo chmod +x /usr/local/bin/docker-compose
     ```
     
 > **Note**: If the command `docker-compose` fails after installation, check your path.
@@ -146,8 +146,8 @@ also included below.
 
 For example:
 
-```bash
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+```console
+$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
 3.  Optionally, install [command completion](completion.md) for the
@@ -155,7 +155,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 4.  Test the installation.
 
-    ```bash
+    ```console
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
@@ -182,13 +182,13 @@ dependencies. See the [virtualenv
 tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 
-```bash
-pip install docker-compose
+```console
+$ pip install docker-compose
 ```
 If you are not using virtualenv,
 
-```bash
-sudo pip install docker-compose
+```console
+$ sudo pip install docker-compose
 ```
 
 > pip version 6.0 or greater is required.
@@ -198,9 +198,9 @@ sudo pip install docker-compose
 Compose can also be run inside a container, from a small bash script wrapper. To
 install compose as a container run this command:
 
-```bash
-sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+```console
+$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 </div>
@@ -239,29 +239,29 @@ your existing containers (for example, because they have data volumes you want
 to preserve), you can use Compose 1.5.x to migrate them with the following
 command:
 
-```bash
-docker-compose migrate-to-labels
+```console
+$ docker-compose migrate-to-labels
 ```
 
 Alternatively, if you're not worried about keeping them, you can remove them.
 Compose just creates new ones.
 
-```bash
-docker container rm -f -v myapp_web_1 myapp_db_1 ...
+```console
+$ docker container rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 
 ## Uninstallation
 
 To uninstall Docker Compose if you installed using `curl`:
 
-```bash
-sudo rm /usr/local/bin/docker-compose
+```console
+$ sudo rm /usr/local/bin/docker-compose
 ```
 
 To uninstall Docker Compose if you installed using `pip`:
 
-```bash
-pip uninstall docker-compose
+```console
+$ pip uninstall docker-compose
 ```
 
 > Got a "Permission denied" error?

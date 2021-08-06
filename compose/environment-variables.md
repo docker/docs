@@ -42,7 +42,7 @@ named `.env`. The `.env` file path is as follows:
   in `+v1.28` by limiting the filepath to the project directory.
 
 
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -58,7 +58,7 @@ image `webapp:v1.5`. You can verify this with the
 [config command](reference/config.md), which prints your resolved application
 config to the terminal:
 
-```shell
+```console
 $ docker-compose config
 
 version: '3'
@@ -72,7 +72,7 @@ Values in the shell take precedence over those specified in the `.env` file.
 If you set `TAG` to a different value in your shell, the substitution in `image`
 uses that instead:
 
-```shell
+```console
 $ export TAG=v2.0
 $ docker-compose config
 
@@ -90,13 +90,13 @@ By passing the file as an argument, you can store it anywhere and name it
 appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
 done using the `--env-file` option:
 
-```shell
-docker-compose --env-file ./config/.env.dev up 
+```console
+$ docker-compose --env-file ./config/.env.dev up 
 ```
 This file path is relative to the current working directory where the Docker Compose
 command is executed.
 
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -113,7 +113,7 @@ services:
 
 The `.env` file is loaded by default:
 
-```shell
+```console
 $ docker-compose config 
 version: '3'
 services:
@@ -122,7 +122,7 @@ services:
 ```
 Passing the `--env-file ` argument overrides the default file path:
 
-```shell
+```console
 $ docker-compose --env-file ./config/.env.dev config 
 version: '3'
 services:
@@ -186,14 +186,14 @@ web:
 Similar to `docker run -e`, you can set environment variables on a one-off
 container with `docker-compose run -e`:
 
-```shell
-docker-compose run -e DEBUG=1 web python console.py
+```console
+$ docker-compose run -e DEBUG=1 web python console.py
 ```
 
 You can also pass a variable from the shell by not giving it a value:
 
-```shell
-docker-compose run -e DEBUG web python console.py
+```console
+$ docker-compose run -e DEBUG web python console.py
 ```
 
 The value of the `DEBUG` variable in the container is taken from the value for
@@ -211,7 +211,7 @@ priority used by Compose to choose which value to use:
 In the example below, we set the same environment variable on an Environment
 file, and the Compose file:
 
-```shell
+```console
 $ cat ./Docker/api/api.env
 NODE_ENV=test
 
@@ -229,7 +229,7 @@ services:
 When you run the container, the environment variable defined in the Compose
 file takes precedence.
 
-```shell
+```console
 $ docker-compose exec api node
 
 > process.env.NODE_ENV
