@@ -48,7 +48,7 @@ configuration.
 When you start Docker this way, it runs in the foreground and sends its logs
 directly to your terminal.
 
-```bash
+```console
 $ dockerd
 
 INFO[0000] +job init_networkdriver()
@@ -98,8 +98,8 @@ This can be useful for troubleshooting problems.
 Here's an example of how to manually start the Docker daemon, using the same
 configurations as above:
 
-```bash
-dockerd --debug \
+```console
+$ dockerd --debug \
   --tls=true \
   --tlscert=/var/docker/server.pem \
   --tlskey=/var/docker/serverkey.pem \
@@ -274,7 +274,7 @@ Docker platform.
 3.  Send a `HUP` signal to the daemon to cause it to reload its configuration.
     On Linux hosts, use the following command.
 
-    ```bash
+    ```console
     $ sudo kill -SIGHUP $(pidof dockerd)
     ```
 
@@ -292,7 +292,7 @@ by sending a `SIGUSR1` signal to the daemon.
 
 - **Linux**:
 
-  ```bash
+  ```console
   $ sudo kill -SIGUSR1 $(pidof dockerd)
   ```
 

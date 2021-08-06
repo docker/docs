@@ -20,8 +20,8 @@ include examples of customizing the output format.
 > In a Posix shell, you can run the following with a single quote:
 >
 > {% raw %}
-> ```bash
-> docker inspect --format '{{join .Args " , "}}'
+> ```console
+> $ docker inspect --format '{{join .Args " , "}}'
 > ```
 > {% endraw %}
 >
@@ -29,8 +29,8 @@ include examples of customizing the output format.
 > escape the double quotes inside the params as follows:
 >
 > {% raw %}
-> ```bash
-> docker inspect --format '{{join .Args \" , \"}}'
+> ```console
+> $ docker inspect --format '{{join .Args \" , \"}}'
 > ```
 > {% endraw %}
 >
