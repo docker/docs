@@ -51,7 +51,7 @@ The simplest way to get started with Dev Environments is to create a new environ
 >
 > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. First, let's click **Create New Environment** to open the create dialog box. Then copy `git@github.com:dockersamples/single-dev-env.git` and add it to the Repository URL field.
+1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
@@ -78,10 +78,6 @@ You can create a dev environment from a specific branch (for example, a branch c
 
 Docker then clones the repository with your specified branch or tag.
 
-> **Note**
->
-> Known issue: With versions prior Desktop 3.6.0, when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
-
 ### Recap
 
 Let's summarize the tasks we performed so far to start a single container Dev Environment.
@@ -100,7 +96,7 @@ This creates a Docker image of your dev environment, uploads it to the Docker Hu
 
 ![Dev environment shared](/images/dev-env-shared.png){:width="700px"}
 
-Your team members need to open the **Create** Dialog, go to **Existing Dev Environment** tab, and paste this URL. Your Dev Environment now starts in the exact same state as you shared it!
+Your team members need to open the **Create** dialog, select the **Existing Dev Environment** tab, and then paste the URL. Your Dev Environment now starts in the exact same state as you shared it.
 
 Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback even before you create a pull request!
 
@@ -112,7 +108,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
   >
   > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. Click **Create** to open the create dialog box. Then copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the Repository URL field.
+1. Click **Create** to open the **Create a Dev Environment** dialog. Then, copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Docker image** field on the **Remote** tab.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
 
     - Builds local images for services that are defined in the Compose file
@@ -223,16 +219,16 @@ In this preview, Dev Environments support a simple YAML file which allows you to
 
 ## Start a Dev Environment from a local folder
 
-You can also start a Dev Environments from local code you have on your machine.
+You can also start a Dev Environment from local code on your machine.
 
-1. Click **Create** to open the create dialog box. Then move to **Local folder** tab, and click **Select directory** to select the root of the code you want ot work on.
+1. Click **Create** to open the **Create a Dev Environment** dialog. Select the **Local Folder** tab, and click **Select directory** to open the root of the code that you would like to work on.
 2. Now, click **Create**.
 
     This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. Finally, it opens VS Code inside the Dev Environment container.
 
 > **Note**
 >
-> When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect performances inside the container, depending on the number of files in your local folder and operations performed in the container.
+> When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
 
 ## Known issues
 
