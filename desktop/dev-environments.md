@@ -100,7 +100,7 @@ This creates a Docker image of your dev environment, uploads it to the Docker Hu
 
 ![Dev environment shared](/images/dev-env-shared.png){:width="700px"}
 
-Your team members just need to open the **Create** Dialog, go to **Existing Dev Environment** tab, and paste this URL. Your Dev Environment now starts in the exact same state as you shared it!
+Your team members need to open the **Create** Dialog, go to **Existing Dev Environment** tab, and paste this URL. Your Dev Environment now starts in the exact same state as you shared it!
 
 Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback even before you create a pull request!
 
@@ -220,6 +220,19 @@ In this preview, Dev Environments support a simple YAML file which allows you to
 > This configuration is to unblock users for the Preview release only. We may move this configuration for single and multi-container applications to a Compose-based implementation in future releases.
 >
 > To get involved with the discussion on how we are going to implement this as part of Compose, join the **#docker-dev-environments** channel in the [Docker Community Slack](https://dockercommunity.slack.com/messages){:target="_blank" rel="noopener" class="_"}, or let us know your feedback by creating an issue in the [Dev Environments](https://github.com/docker/dev-environments/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
+
+## Start a Dev Environment from a local folder
+
+You can also start a Dev Environments from local code you have on your machine.
+
+1. Click **Create** to open the create dialog box. Then move to **Local folder** tab, and click **Select directory** to select the root of the code you want ot work on.
+2. Now, click **Create**.
+
+    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. Finally, it opens VS Code inside the Dev Environment container.
+
+> **Note**
+>
+> When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect performances inside the container, depending on the number of files in your local folder and operations performed in the container.
 
 ## Known issues
 
