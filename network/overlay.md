@@ -61,7 +61,7 @@ apply to overlay networks used by standalone containers.
 To create an overlay network for use with swarm services, use a command like
 the following:
 
-```bash
+```console
 $ docker network create -d overlay my-overlay
 ```
 
@@ -69,7 +69,7 @@ To create an overlay network which can be used by swarm services **or**
 standalone containers to communicate with other standalone containers running on
 other Docker daemons, add the `--attachable` flag:
 
-```bash
+```console
 $ docker network create -d overlay --attachable my-attachable-overlay
 ```
 
@@ -105,7 +105,7 @@ automatically rotate the keys every 12 hours.
 You can use the overlay network feature with both `--opt encrypted --attachable`
  and attach unmanaged containers to that network:
 
-```bash
+```console
 $ docker network create --opt encrypted --driver overlay --attachable my-attachable-multi-host-network
 ```
 
@@ -133,7 +133,7 @@ services which publish ports, such as a WordPress service which publishes port
 
 2.  Remove the existing `ingress` network:
 
-    ```bash
+    ```console
     $ docker network rm ingress
 
     WARNING! Before removing the routing-mesh network, make sure all the nodes
@@ -147,7 +147,7 @@ services which publish ports, such as a WordPress service which publishes port
     custom options you want to set. This example sets the MTU to 1200, sets
     the subnet to `10.11.0.0/16`, and sets the gateway to `10.11.0.2`.
 
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -177,7 +177,7 @@ from the swarm.
 
 2.  Delete the existing `docker_gwbridge` interface.
 
-    ```bash
+    ```console
     $ sudo ip link set docker_gwbridge down
 
     $ sudo ip link del dev docker_gwbridge
@@ -190,7 +190,7 @@ from the swarm.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
     options, see [Bridge driver options](../engine/reference/commandline/network_create.md#bridge-driver-options).
 
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \

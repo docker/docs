@@ -46,7 +46,7 @@ interface, use `--driver macvlan` with the `docker network create` command. You
 also need to specify the `parent`, which is the interface the traffic will
 physically go through on the Docker host.
 
-```bash
+```console
 $ docker network create -d macvlan \
   --subnet=172.16.86.0/24 \
   --gateway=172.16.86.1 \
@@ -56,7 +56,7 @@ $ docker network create -d macvlan \
 If you need to exclude IP addresses from being used in the `macvlan` network, such
 as when a given IP address is already in use, use `--aux-addresses`:
 
-```bash
+```console
 $ docker network create -d macvlan \
   --subnet=192.168.32.0/24 \
   --ip-range=192.168.32.128/25 \
@@ -71,7 +71,7 @@ If you specify a `parent` interface name with a dot included, such as `eth0.50`,
 Docker interprets that as a sub-interface of `eth0` and creates the sub-interface
 automatically.
 
-```bash
+```console
 $ docker network create -d macvlan \
     --subnet=192.168.50.0/24 \
     --gateway=192.168.50.1 \
@@ -83,7 +83,7 @@ $ docker network create -d macvlan \
 In the above example, you are still using a L3 bridge. You can use `ipvlan`
 instead, and get an L2 bridge. Specify `-o ipvlan_mode=l2`.
 
-```bash
+```console
 $ docker network create -d ipvlan \
     --subnet=192.168.210.0/24 \
     --subnet=192.168.212.0/24 \
@@ -97,7 +97,7 @@ $ docker network create -d ipvlan \
 If you have [configured the Docker daemon to allow IPv6](../config/daemon/ipv6.md),
 you can use dual-stack IPv4/IPv6 `macvlan` networks.
 
-```bash
+```console
 $ docker network create -d macvlan \
     --subnet=192.168.216.0/24 --subnet=192.168.218.0/24 \
     --gateway=192.168.216.1 --gateway=192.168.218.1 \
