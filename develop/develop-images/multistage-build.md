@@ -116,7 +116,7 @@ CMD ["./app"]
 You only need the single Dockerfile. You don't need a separate build script,
 either. Just run `docker build`.
 
-```bash
+```console
 $ docker build -t alexellis2/href-counter:latest .
 ```
 
@@ -160,7 +160,7 @@ Dockerfile including every stage. You can specify a target build stage. The
 following command assumes you are using the previous `Dockerfile` but stops at
 the stage named `builder`:
 
-```bash
+```console
 $ docker build --target builder -t alexellis2/href-counter:latest .
 ```
 

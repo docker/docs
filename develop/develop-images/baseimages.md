@@ -73,8 +73,8 @@ Assuming you built the "hello" executable example by using the source code at
 and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
 
-```bash
-docker build --tag hello .
+```console
+$ docker build --tag hello .
 ```
 
 Don't forget the `.` character at the end, which sets the build context to the
@@ -84,7 +84,7 @@ current directory.
 > you need a Linux binary, rather than a Mac or Windows binary.
 > You can use a Docker container to build it:
 >
-> ```bash
+> ```console
 > $ docker run --rm -it -v $PWD:/build ubuntu:20.04
 >
 > container# apt-get update && apt-get install build-essential
@@ -94,8 +94,8 @@ current directory.
 
 To run your new image, use the `docker run` command:
 
-```bash
-docker run --rm hello
+```console
+$ docker run --rm hello
 ```
 
 This example creates the hello-world image used in the tutorials.
