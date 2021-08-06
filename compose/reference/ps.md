@@ -17,7 +17,7 @@ Options:
 
 Lists containers.
 
-```bash
+```console
 $ docker-compose ps
          Name                        Command                 State             Ports
 ---------------------------------------------------------------------------------------------
