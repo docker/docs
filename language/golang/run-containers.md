@@ -20,7 +20,7 @@ A container is a normal operating system process except that this process is iso
 
 To run an image inside of a container, we use the `docker run` command. It requires one parameter and that is the image name. Let’s start our image and make sure it is running correctly. Execute the following command in your terminal.
 
-```shell
+```console
 $ docker run docker-gs-ping
 ```
 
@@ -40,7 +40,7 @@ When you run this command, you’ll notice that you were not returned to the com
 
 Let’s make a GET request to the server using the curl command.
 
-```shell
+```console
 $ curl http://localhost:8080/
 curl: (7) Failed to connect to localhost port 8080: Connection refused
 ```
@@ -53,13 +53,13 @@ To publish a port for our container, we’ll use the `--publish` flag (`-p` for 
 
 Start the container and expose port `8080` to port `8080` on the host.
 
-```shell
+```console
 $ docker run --publish 8080:8080 docker-gs-ping
 ```
 
 Now let’s rerun the curl command from above.
 
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
@@ -72,7 +72,7 @@ Press **ctrl-c** to stop the container.
 
 This is great so far, but our sample application is a web server and we should not have to have our terminal connected to the container. Docker can run your container in detached mode, that is in the background. To do this, we can use the `--detach` or `-d` for short. Docker will start your container the same as before but this time will “detach” from the container and return you to the terminal prompt.
 
-```shell
+```console
 $ docker run -d -p 8080:8080 docker-gs-ping
 d75e61fcad1e0c0eca69a3f767be6ba28a66625ce4dc42201a8a323e8313c14e
 ```
@@ -81,7 +81,7 @@ Docker started our container in the background and printed the container ID on t
 
 Again, let’s make sure that our container is running properly. Run the same `curl` command:
 
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
@@ -90,7 +90,7 @@ Hello, Docker! <3
 
 Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, we can run the `docker ps` command. Just like on Linux, to see a list of processes on your machine we would run the `ps` command. In the same spirit, we can run the `docker ps` command which will show us a list of containers running on our machine.
 
-```shell
+```console
 $ docker ps
 ```
 
@@ -103,14 +103,14 @@ The `ps` command tells a bunch of stuff about our running containers. We can see
 
 You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute but first we need to stop the container. To stop the container, run the `docker stop` command which does just that, stops the container. You will need to pass the name of the container or you can use the container ID.
 
-```shell
+```console
 $ docker stop inspiring_ishizaka
 inspiring_ishizaka
 ```
 
 Now rerun the `docker ps` command to see a list of running containers.
 
-```shell
+```console
 $ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
@@ -119,7 +119,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 Docker containers can be started, stopped and restarted. When we stop a container, it is not removed but the status is changed to stopped and the process inside of the container is stopped. When we ran the `docker ps` command, the default output is to only show running containers. If we pass the `--all` or `-a` for short, we will see all containers on our system, that is stopped containers and running containers.
 
-```shell
+```console
 $ docker ps -a
 ```
 
@@ -135,13 +135,13 @@ If you’ve been following along, you should see several containers listed. Thes
 
 Let’s restart the container that we have just stopped. Locate the name of the container and replace the name of the container below in the restart command:
 
-```shell
+```console
 $ docker restart inspiring_ishizaka
 ```
 
 Now, list all the containers again using the `ps` command:
 
-```shell
+```console
 $ docker ps --all
 ```
 
@@ -159,7 +159,7 @@ Let’s stop and remove all of our containers and take a look at fixing the rand
 
 Stop the container we just started. Find the name of your running container and replace the name in the command below with the name of the container on your system:
 
-```shell
+```console
 $ docker stop inspiring_ishizaka
 inspiring_ishizaka
 ```
@@ -170,7 +170,7 @@ To remove a container, run the `docker rm` command passing the container name. Y
 
 Again, make sure you replace the containers names in the below command with the container names from your system:
 
-```shell
+```console
 $ docker rm inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
 ```
 
@@ -187,12 +187,12 @@ Now let’s address the pesky random name issue. Standard practice is to name yo
 
 To name a container, we must pass the `--name` flag to the `run` command:
 
-```shell
+```console
 $ docker run -d -p 8080:8080 --name rest-server docker-gs-ping
 3bbc6a3102ea368c8b966e1878a5ea9b1fc61187afaac1276c41db22e4b7f48f
 ```
 
-```shell
+```console
 $ docker ps
 ```
 
