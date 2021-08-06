@@ -7,7 +7,7 @@ title: docker-machine active
 See which machine is "active" (a machine is considered active if the
 `DOCKER_HOST` environment variable points to it).
 
-```bash
+```console
 $ docker-machine ls
 
 NAME      ACTIVE   DRIVER         STATE     URL

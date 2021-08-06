@@ -14,7 +14,7 @@ Usage: docker-machine help _subcommand_
 
 For example:
 
-```bash
+```console
 $ docker-machine help config
 
 Usage: docker-machine config [OPTIONS] [arg...]

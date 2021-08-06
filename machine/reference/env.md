@@ -7,7 +7,7 @@ title: docker-machine env
 Set environment variables to dictate that `docker` should run a command against
 a particular machine.
 
-```bash
+```console
 $ docker-machine env --help
 
 Usage: docker-machine env [OPTIONS] [arg...]
@@ -29,7 +29,7 @@ Options:
 run in a subshell. Running `docker-machine env -u` prints `unset` commands
 which reverse this effect.
 
-```bash
+```console
 $ env | grep DOCKER
 $ eval "$(docker-machine env dev)"
 $ env | grep DOCKER
@@ -69,7 +69,7 @@ If you are on Windows and using either PowerShell or `cmd.exe`, `docker-machine 
 
 For PowerShell:
 
-```bash
+```console
 $ docker-machine.exe env --shell powershell dev
 
 $Env:DOCKER_TLS_VERIFY = "1"
@@ -82,7 +82,7 @@ $Env:DOCKER_MACHINE_NAME = "dev"
 
 For `cmd.exe`:
 
-```bash
+```console
 $ docker-machine.exe env --shell cmd dev
 
 set DOCKER_TLS_VERIFY=1
@@ -104,7 +104,7 @@ This is useful when using `docker-machine` with a local VM provider, such as
 `virtualbox` or `vmwarefusion`, in network environments where an HTTP proxy is
 required for internet access.
 
-```bash
+```console
 $ docker-machine env --no-proxy default
 
 export DOCKER_TLS_VERIFY="1"
