@@ -67,7 +67,7 @@ daed20bbecce   host          host      local
 6aee44f40a39   none          null      local
 ```
 
-Our bridge network `mynet` has been created successfully. The other three networks, named `bridge`, `host`, and `none` are the _default_ networks and they had been created by the Docker itself. While it is not relevant to our current discussion, you can learn more about Docker networking in the [networking overview](../../network/) section.
+Our bridge network `mynet` has been created successfully. The other three networks, named `bridge`, `host`, and `none` are the _default_ networks and they had been created by the Docker itself. While it is not relevant to our current discussion, you can learn more about Docker networking in the [networking overview](../../network/index.md) section.
 
 ### Choose good names for volumes and networks
 
@@ -717,7 +717,7 @@ There are some tangential, yet interesting points that were purposefully not cov
 
 ### Persistent storage
 
-A _managed volume_ isn't the only way to provide your container with persistent storage. It is highly recommended to get acquainted with available storage options and their use cases, covered in the following part of Docker documentation: [Manage data in Docker](../storage/index.md).
+A _managed volume_ isn't the only way to provide your container with persistent storage. It is highly recommended to get acquainted with available storage options and their use cases, covered in the following part of Docker documentation: [Manage data in Docker](../../storage/index.md).
 
 ### CockroachDB clusters
 
@@ -728,7 +728,7 @@ Such distributed set-up offers interesting possibilities, such as applying _Chao
 If you are interested in experimenting with CockroachDB clusters, check out:
 
 * [Start a CockroachDB Cluster in Docker](https://www.cockroachlabs.com/docs/v20.2/start-a-local-cluster-in-docker-mac.html) article; and
-* Documentation for Docker Compose keywords [`deploy`](../../compose/compose-file/compose-file-v3/#deploy) and [`replicas`](../../compose/compose-file/compose-file-v3/#replicas).
+* Documentation for Docker Compose keywords [`deploy`](../../compose/compose-file/compose-file-v3.md#deploy) and [`replicas`](../../compose/compose-file/compose-file-v3.md#replicas).
 
 ### Other databases
 
@@ -744,6 +744,6 @@ In the next module, we’ll take a look at one possible approach to running func
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
 
 <br />
