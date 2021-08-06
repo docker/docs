@@ -63,11 +63,8 @@ The second test in `main_test.go` has almost identical structure but it tests _a
 
 In order to run the tests, we must make sure that our application Docker image is up-to-date.
 
-```shell
-docker build -t docker-gs-ping:latest .
-```
-
-```
+```console
+$ docker build -t docker-gs-ping:latest .
 [+] Building 3.0s (13/13) FINISHED
 ...
 ```
@@ -78,15 +75,15 @@ Note, that the image is tagged with `latest` which is the same label we've chose
 
 Now that the Docker image for our application had been built, we can run the tests that depend on it:
 
-```shell
-go test ./...
+```console
+$ go test ./...
 ok      github.com/olliefr/docker-gs-ping       2.564s
 ```
 
 That was a bit... underwhelming? Let's ask it to print a bit more detail, just to be sure:
 
-```shell
-go test -v ./...
+```console
+$ go test -v ./...
 ```
 
 ```

@@ -38,7 +38,7 @@ services:
 
 If you run `docker-compose pull ServiceName` in the same directory as the `docker-compose.yml` file that defines the service, Docker pulls the associated image. For example, to call the `postgres` image configured as the `db` service in our example, you would run `docker-compose pull db`.
 
-```bash
+```console
 $ docker-compose pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres

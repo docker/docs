@@ -17,7 +17,7 @@ and network IO metrics.
 
 The following is a sample output from the `docker stats` command
 
-```bash
+```console
 $ docker stats redis1 redis2
 
 CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O
@@ -50,7 +50,7 @@ corresponding to existing containers.
 
 To figure out where your control groups are mounted, you can run:
 
-```bash
+```console
 $ grep cgroup /proc/mounts
 ```
 
@@ -279,7 +279,7 @@ an interface) can do some serious accounting.
 For instance, you can setup a rule to account for the outbound HTTP
 traffic on a web server:
 
-```bash
+```console
 $ iptables -I OUTPUT -p tcp --sport 80
 ```
 
@@ -289,7 +289,7 @@ rule.
 
 Later, you can check the values of the counters, with:
 
-```bash
+```console
 $ iptables -nxvL OUTPUT
 ```
 
@@ -331,13 +331,13 @@ Containers can interact with their sub-containers, though.
 
 The exact format of the command is:
 
-```bash
+```console
 $ ip netns exec <nsname> <command...>
 ```
 
 For example:
 
-```bash
+```console
 $ ip netns exec mycontainer netstat -i
 ```
 
@@ -369,7 +369,7 @@ cgroup (and thus, in the container). Pick any one of the PIDs.
 Putting everything together, if the "short ID" of a container is held in
 the environment variable `$CID`, then you can do this:
 
-```bash
+```console
 $ TASKS=/sys/fs/cgroup/devices/docker/$CID*/tasks
 $ PID=$(head -n 1 $TASKS)
 $ mkdir -p /var/run/netns

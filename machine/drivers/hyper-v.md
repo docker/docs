@@ -95,13 +95,13 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 
 *   Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
 
-    ```shell
-    docker-machine create -d hyperv --hyperv-virtual-switch <NameOfVirtualSwitch> <nameOfNode>
+    ```console
+    $ docker-machine create -d hyperv --hyperv-virtual-switch <NameOfVirtualSwitch> <nameOfNode>
     ```
 
     Here is an example of creating a `manager1` node:
 
-    ```shell
+    ```console
     PS C:\WINDOWS\system32>  docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" manager1
     Running pre-create checks...
     Creating machine...
@@ -131,9 +131,9 @@ Reboot your desktop system to clear out any routing table problems. Without a re
 
     For our example, the commands are:
 
-    ```shell
-    docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1
-    docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker2
+    ```console
+    $ docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker1
+    $ docker-machine create -d hyperv --hyperv-virtual-switch "Primary Virtual Switch" worker2
     ```
 
 ## Where to go next

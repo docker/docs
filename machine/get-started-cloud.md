@@ -24,7 +24,7 @@ examples below for DigitalOcean and AWS.
 For DigitalOcean, this command creates a Droplet (cloud host) called
 "docker-sandbox".
 
-```shell
+```console
 $ docker-machine create --driver digitalocean --digitalocean-access-token xxxxx docker-sandbox
 ```
 
@@ -35,7 +35,7 @@ Ocean, see the [DigitalOcean Example](examples/ocean.md).
 
 For AWS EC2, this command creates an instance called "aws-sandbox":
 
-```shell
+```console
 $ docker-machine create --driver amazonec2 --amazonec2-access-key AKI******* --amazonec2-secret-key 8T93C*******  aws-sandbox
 ```
 

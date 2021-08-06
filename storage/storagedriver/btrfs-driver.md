@@ -41,7 +41,7 @@ Btrfs Filesystem as Btrfs.
 - `btrfs` support must exist in your kernel. To check this, run the following
   command:
 
-  ```bash
+  ```console
   $ grep btrfs /proc/filesystems
 
   btrfs
@@ -60,7 +60,7 @@ This procedure is essentially identical on SLES and Ubuntu.
 2.  Copy the contents of `/var/lib/docker/` to a backup location, then empty
     the contents of `/var/lib/docker/`:
 
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
     $ sudo rm -rf /var/lib/docker/*
     ```
@@ -70,7 +70,7 @@ This procedure is essentially identical on SLES and Ubuntu.
     `/dev/xvdg`. Double-check the block device names because this is a
     destructive operation.
 
-    ```bash
+    ```console
     $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
     ```
 
@@ -80,7 +80,7 @@ This procedure is essentially identical on SLES and Ubuntu.
 4.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
     can specify any of the block devices used to create the Btrfs filesystem.
 
-    ```bash
+    ```console
     $ sudo mount -t btrfs /dev/xvdf /var/lib/docker
     ```
 
@@ -89,7 +89,7 @@ This procedure is essentially identical on SLES and Ubuntu.
 
 5.  Copy the contents of `/var/lib/docker.bk` to `/var/lib/docker/`.
 
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker.bk/* /var/lib/docker/
     ```
 
@@ -112,7 +112,7 @@ This procedure is essentially identical on SLES and Ubuntu.
 7.  Start Docker. After it is running, verify that `btrfs` is being used as the
     storage driver.
 
-    ```bash
+    ```console
     $ docker info
 
     Containers: 0
@@ -140,7 +140,7 @@ roughly 1 GB.
 To add a block device to a Btrfs volume, use the `btrfs device add` and
 `btrfs filesystem balance` commands.
 
-```bash
+```console
 $ sudo btrfs device add /dev/svdh /var/lib/docker
 
 $ sudo btrfs filesystem balance /var/lib/docker

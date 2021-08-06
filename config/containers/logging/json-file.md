@@ -58,7 +58,7 @@ Existing containers do not use the new logging configuration.
 You can set the logging driver for a specific container by using the
 `--log-driver` flag to `docker container create` or `docker run`:
 
-```bash
+```console
 $ docker run \
       --log-driver json-file --log-opt max-size=10m \
       alpine echo hello world
@@ -84,6 +84,6 @@ The `json-file` logging driver supports the following logging options:
 This example starts an `alpine` container which can have a maximum of 3 log
 files no larger than 10 megabytes each.
 
-```bash
+```console
 $ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```

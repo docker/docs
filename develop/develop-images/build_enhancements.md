@@ -37,7 +37,7 @@ the [Dockerfile reference](/engine/reference/builder/) page.
 Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1`
 environment variable when invoking the `docker build` command, such as:
 
-```bash
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 
@@ -226,7 +226,7 @@ RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
 Once the `Dockerfile` is created, use the `--ssh` option for connectivity with
 the SSH agent.
 
-```bash
+```console
 $ docker build --ssh default .
 ```
 

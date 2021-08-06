@@ -45,7 +45,7 @@ Restart Docker for the changes to take effect.
 To configure the logging driver for a specific container, use the `--log-driver`
 flag on the `docker run` command.
 
-```bash
+```console
 $ docker run --log-driver=journald ...
 ```
 
@@ -68,7 +68,7 @@ message.
 
 Below is an example of the logging options required to log to journald.
 
-```bash
+```console
 $ docker run \
     --log-driver=journald \
     --log-opt labels=location \
@@ -96,21 +96,21 @@ Use the `journalctl` command to retrieve log messages. You can apply filter
 expressions to limit the retrieved messages to those associated with a specific
 container:
 
-```bash
+```console
 $ sudo journalctl CONTAINER_NAME=webserver
 ```
 
 You can use additional filters to further limit the messages retrieved. The `-b`
 flag only retrieves messages generated since the last system boot:
 
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver
 ```
 
 The `-o` flag specifies the format for the retried log messages. Use `-o json`
 to return the log messages in JSON format.
 
-```bash
+```console
 $ sudo journalctl -o json CONTAINER_NAME=webserver
 ```
 
@@ -121,7 +121,7 @@ when retrieving log messages.
 The reason for that is that `\r` is appended to the end of the line and
 `journalctl` doesn't strip it automatically unless `--all` is set:
 
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver --all
 ```
 

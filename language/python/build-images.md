@@ -26,7 +26,7 @@ To complete this tutorial, you need the following:
 
 Let’s create a simple Python application using the Flask framework that we’ll use as our example. Create a directory in your local machine named `python-docker` and follow the steps below to create a simple web server.
 
-```shell
+```console
 $ cd /path/to/python-docker
 $ pip3 install Flask
 $ pip3 freeze > requirements.txt
@@ -35,7 +35,7 @@ $ touch app.py
 
 Now, let’s add some code to handle simple web requests. Open this working directory in your favorite IDE and enter the following code into the `app.py` file.
 
-```shell
+```python
 from flask import Flask
 app = Flask(__name__)
 
@@ -48,7 +48,7 @@ def hello_world():
 
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created.
 
-```shell
+```console
 $ python3 -m flask run
 ```
 
@@ -170,7 +170,7 @@ The build command optionally takes a `--tag` flag. The tag is used to set the na
 
 Let’s build our first Docker image.
 
-```shell
+```console
 $ docker build --tag python-docker .
 [+] Building 2.7s (10/10) FINISHED
  => [internal] load build definition from Dockerfile
@@ -198,7 +198,7 @@ To see a list of images we have on our local machine, we have two options. One i
 
 To list images, simply run the `docker images` command.
 
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
@@ -215,7 +215,7 @@ An image is made up of a manifest and a list of layers. Do not worry too much ab
 
 To create a new tag for the image we’ve built above, run the following command.
 
-```shell
+```console
 $ docker tag python-docker:latest python-docker:v1.0.0
 ```
 
@@ -223,7 +223,7 @@ The `docker tag` command creates a new tag for an image. It does not create a ne
 
 Now, run the `docker images` command to see a list of our local images.
 
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   4 minutes ago   123MB
@@ -235,14 +235,14 @@ You can see that we have two images that start with `python-docker`. We know the
 
 Let’s remove the tag that we just created. To do this, we’ll use the `rmi` command. The `rmi` command stands for remove image.
 
-```shell
+```console
 $ docker rmi python-docker:v1.0.0
 Untagged: python-docker:v1.0.0
 ```
 
 Note that the response from Docker tells us that the image has not been removed but only “untagged”. You can check this by running the `docker images` command.
 
-```shell
+```console
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   6 minutes ago   123MB

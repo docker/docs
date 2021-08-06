@@ -18,7 +18,7 @@ Testing is an essential part of modern software development. Testing can mean a 
 
 The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You just need to update the JaCoCo version in your `pom.xml` to ensure your tests work with JDK v15 or higher with `<jacoco.version>0.8.6</jacoco.version>`, so we can use the following Docker command to start the container and run tests:
 
-```shell
+```console
 $ docker run -it --rm --name springboot-test java-docker ./mvnw test
 ...
 [INFO] Results:
@@ -68,7 +68,7 @@ We first add a label to the `FROM openjdk:16-alpine3.13` statement. This allows 
 
 Now let’s rebuild our image and run our tests. We will run the `docker build` command as above, but this time we will add the `--target test` flag so that we specifically run the test build stage.
 
-```shell
+```console
 $ docker build -t java-docker --target test .
 [+] Building 0.7s (6/6) FINISHED
 ...
@@ -78,7 +78,7 @@ $ docker build -t java-docker --target test .
 
 Now that our test image is built, we can run it as a container and see if our tests pass.
 
-```shell
+```console
 $ docker run -it --rm --name springboot-test java-docker
 [INFO] Scanning for projects...
 [INFO]
@@ -133,7 +133,7 @@ CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclin
 
 Now, to run our tests, we just need to run the `docker build` command as above.
 
-```shell
+```console
 $ docker build -t java-docker --target test .
 [+] Building 27.6s (11/12)
  => CACHED [base 3/6] COPY .mvn/ .mvn
@@ -160,7 +160,7 @@ Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTes
 
 Now, run the `docker build` command from above and observe that the build fails and the failing testing information is printed to the console.
 
-```shell
+```console
 $ docker build -t java-docker --target test .
  => [base 6/6] COPY src ./src
  => ERROR [test 1/1] RUN ["./mvnw", "test"]
@@ -198,7 +198,7 @@ services:
 
 Now, let's run the Compose application. You should now see that application behaves as previously and you can still debug it.
 
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 

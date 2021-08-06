@@ -68,13 +68,13 @@ CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main
 
 Build an image from the Dockerfile and assign it a name.
 
-```bash
+```console
 $ docker build -t eg_postgresql .
 ```
 
 Run the PostgreSQL server container (in the foreground):
 
-```bash
+```console
 $ docker run --rm -P --name pg_test eg_postgresql
 ```
 
@@ -92,7 +92,7 @@ Containers can be linked to another container's ports directly using
 `docker run`. This sets a number of environment
 variables that can then be used to connect:
 
-```bash
+```console
 $ docker run --rm -t -i --link pg_test:pg eg_postgresql bash
 
 postgres@7ef98b1b7243:/$ psql -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_PORT -d docker -U docker --password
@@ -105,7 +105,7 @@ host-mapped port to test as well. You need to use `docker ps`
 to find out what local host port the container is mapped to
 first:
 
-```bash
+```console
 $ docker ps
 
 CONTAINER ID        IMAGE                  COMMAND                CREATED             STATUS              PORTS                                      NAMES
@@ -142,7 +142,7 @@ $ docker=# select * from cities;
 You can use the defined volumes to inspect the PostgreSQL log files and
 to backup your configuration and data:
 
-```bash
+```console
 $ docker run --rm --volumes-from pg_test -t -i busybox sh
 
 / # ls

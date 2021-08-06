@@ -158,7 +158,7 @@ is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
 and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
 
-```bash
+```console
 $ docker-compose up -d
 $ ./run_tests
 $ docker-compose down

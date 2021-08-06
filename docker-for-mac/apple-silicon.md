@@ -24,8 +24,8 @@ Download Docker Desktop for Mac on Apple silicon:
 
 You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
 
-```shell
-softwareupdate --install-rosetta
+```console
+$ softwareupdate --install-rosetta
 ```
 
 We expect to fix this in a future release.

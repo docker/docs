@@ -58,16 +58,16 @@ an example command that you will need to run to push to this repo.
 3. Use the `docker tag` command to give the `getting-started` image a new name. Be sure to swap out
    `YOUR-USER-NAME` with your Docker ID.
 
-    ```bash
-    docker tag getting-started YOUR-USER-NAME/getting-started
+    ```console
+    $ docker tag getting-started YOUR-USER-NAME/getting-started
     ```
 
 4. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
    `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
    will use a tag called `latest`.
 
-    ```bash
-    docker push YOUR-USER-NAME/getting-started
+    ```console
+    $ docker push YOUR-USER-NAME/getting-started
     ```
 
 ## Run the image on a new instance
@@ -87,8 +87,8 @@ new instance that has never seen this container image! To do this, we will use P
 
 5. In the terminal, start your freshly pushed app.
 
-    ```bash
-    docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
+    ```console
+    $ docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
     ```
 
     You should see the image get pulled down and eventually start up!

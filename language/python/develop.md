@@ -24,21 +24,21 @@ Before we run MySQL in a container, we'll create a couple of volumes that Docker
 
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
 
-```shell
+```console
 $ docker volume create mysql
 $ docker volume create mysql_config
 ```
 
 Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
 
-```shell
+```console
 $ docker network create mysqlnet
 ```
 
 Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
 In the following command, option `-v` is for starting the container with volumes. For more information, see [Docker volumes](../../storage/volumes.md).
 
-```shell
+```console
 $ docker run --rm -d -v mysql:/var/lib/mysql \
   -v mysql_config:/etc/mysql -p 3306:3306 \
   --network mysqlnet \
@@ -49,7 +49,7 @@ $ docker run --rm -d -v mysql:/var/lib/mysql \
 
 Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command and enter "p@ssw0rd1" when prompted for the password:
 
-```shell
+```console
 $ docker exec -ti mysqldb mysql -u root -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -75,7 +75,7 @@ Next, we'll update the sample application we created in the [Build images](build
 
 Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
 
-```shell
+```python
 import mysql.connector
 import json
 from flask import Flask
@@ -145,20 +145,20 @@ We’ve added the MySQL module and updated the code to connect to the database s
 
 First, let’s add the `mysql-connector-python` module to our application using pip.
 
-```shell
+```console
 $ pip3 install mysql-connector-python
 $ pip3 freeze > requirements.txt
 ```
 
 Now we can build our image.
 
-```shell
+```console
 $ docker build --tag python-docker-dev .
 ```
 
 Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
 
-```shell
+```console
 $ docker run \
   --rm -d \
   --network mysqlnet \
@@ -169,14 +169,14 @@ $ docker run \
 
 Let’s test that our application is connected to the database and is able to add a note.
 
-```shell
+```console
 $ curl http://localhost:5000/initdb
 $ curl http://localhost:5000/widgets
 ```
 
 You should receive the following JSON back from our service.
 
-```shell
+```json
 []
 ```
 
@@ -221,7 +221,7 @@ Another really cool feature of using a Compose file is that we have service reso
 
 Now, to start our application and to confirm that it is running properly, run the following command:
 
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 
@@ -229,14 +229,14 @@ We pass the `--build` flag so Docker will compile our image and then starts the 
 
 Now let’s test our API endpoint. Open a new terminal then make a GET request to the server using the curl commands:
 
-```shell
+```console
 $ curl http://localhost:5000/initdb
 $ curl http://localhost:5000/widgets
 ```
 
 You should receive the following response:
 
-```shell
+```json
 []
 ```
 

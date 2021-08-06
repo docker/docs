@@ -15,7 +15,7 @@ As part of the swarm management lifecycle, you may need to view or update a node
 
 To view a list of nodes in the swarm run `docker node ls` from a manager node:
 
-```bash
+```console
 $ docker node ls
 
 ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
@@ -58,7 +58,7 @@ You can run `docker node inspect <NODE-ID>` on a manager node to view the
 details for an individual node. The output defaults to JSON format, but you can
 pass the `--pretty` flag to print the results in human-readable format. For example:
 
-```bash
+```console
 $ docker node inspect self --pretty
 
 ID:                     ehkv3bcimagdese79dn78otj5
@@ -103,7 +103,7 @@ Changing node availability lets you:
 
 For example, to change a manager node to `Drain` availability:
 
-```bash
+```console
 $ docker node update --availability drain node-1
 
 node-1
@@ -124,7 +124,7 @@ pair.
 
 Pass the `--label-add` flag once for each node label you want to add:
 
-```bash
+```console
 $ docker node update --label-add foo --label-add bar=baz node-1
 
 node-1
@@ -164,7 +164,7 @@ maintenance. Similarly, you can demote a manager node to the worker role.
 To promote a node or set of nodes, run `docker node promote` from a manager
 node:
 
-```bash
+```console
 $ docker node promote node-3 node-2
 
 Node node-3 promoted to a manager in the swarm.
@@ -173,7 +173,7 @@ Node node-2 promoted to a manager in the swarm.
 
 To demote a node or set of nodes, run `docker node demote` from a manager node:
 
-```bash
+```console
 $ docker node demote node-3 node-2
 
 Manager node-3 demoted in the swarm.
@@ -210,7 +210,7 @@ Run the `docker swarm leave` command on a node to remove it from the swarm.
 
 For example to leave the swarm on a worker node:
 
-```bash
+```console
 $ docker swarm leave
 
 Node left the swarm.
@@ -232,7 +232,7 @@ manager node to remove the node from the node list.
 
 For instance:
 
-```bash
+```console
 $ docker node rm node-2
 ```
 

@@ -133,8 +133,8 @@ operations like swarm heartbeat or leader elections.
 To avoid interference with manager node operation, you can drain manager nodes
 to make them unavailable as worker nodes:
 
-```bash
-docker node update --availability drain <NODE>
+```console
+$ docker node update --availability drain <NODE>
 ```
 
 When you drain a node, the scheduler reassigns any tasks running on the node to
@@ -161,8 +161,8 @@ From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
 {% raw %}
-```bash
-docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
+```console
+$ docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
 ```
 {% endraw %}
@@ -170,8 +170,8 @@ reachable
 To query the status of the node as a worker that accept tasks:
 
 {% raw %}
-```bash
-docker node inspect manager1 --format "{{ .Status.State }}"
+```console
+$ docker node inspect manager1 --format "{{ .Status.State }}"
 ready
 ```
 {% endraw %}
@@ -190,9 +190,8 @@ manager:
 Alternatively you can also get an overview of the swarm health from a manager
 node with `docker node ls`:
 
-```bash
-
-docker node ls
+```console
+$ docker node ls
 ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
 1mhtdwhvsgr3c26xxbnzdc3yp    node05    Accepted    Ready   Active
 516pacagkqp2xc3fk9t1dhjor    node02    Accepted    Ready   Active        Reachable
@@ -301,7 +300,7 @@ restore the data to a new swarm.
     to connect to nodes that were part of the old swarm, and presumably no
     longer exist.
 
-    ```bash
+    ```console
     $ docker swarm init --force-new-cluster
     ```
 
@@ -350,9 +349,10 @@ except the manager the command was run from. The quorum is achieved because
 there is now only one manager. Promote nodes to be managers until you have the
 desired number of managers.
 
-```bash
-# From the node to recover
-docker swarm init --force-new-cluster --advertise-addr node01:2377
+From the node to recover, run:
+
+```console
+$ docker swarm init --force-new-cluster --advertise-addr node01:2377
 ```
 
 When you run the `docker swarm init` command with the `--force-new-cluster`

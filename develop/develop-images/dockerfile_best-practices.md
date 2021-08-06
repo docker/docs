@@ -73,21 +73,21 @@ context.
 > a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
 > the image from within the build context (`.`):
 >
-> ```shell
-> mkdir myproject && cd myproject
-> echo "hello" > hello
-> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> docker build -t helloapp:v1 .
+> ```console
+> $ mkdir myproject && cd myproject
+> $ echo "hello" > hello
+> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> $ docker build -t helloapp:v1 .
 > ```
 >
 > Move `Dockerfile` and `hello` into separate directories and build a second
 > version of the image (without relying on cache from the last build). Use `-f`
 > to point to the Dockerfile and specify the directory of the build context:
 >
-> ```shell
-> mkdir -p dockerfiles context
-> mv Dockerfile dockerfiles && mv hello context
-> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```console
+> $ mkdir -p dockerfiles context
+> $ mv Dockerfile dockerfiles && mv hello context
+> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
 
 Inadvertently including files that are not necessary for building an image
@@ -664,7 +664,7 @@ RUN echo $ADMIN_USER > ./mark
 RUN unset ADMIN_USER
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 mark
@@ -687,7 +687,7 @@ RUN export ADMIN_USER="mark" \
 CMD sh
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
@@ -762,13 +762,13 @@ CMD ["--help"]
 
 Now the image can be run like this to show the command's help:
 
-```bash
+```console
 $ docker run s3cmd
 ```
 
 Or using the right parameters to execute a command:
 
-```bash
+```console
 $ docker run s3cmd ls s3://mybucket
 ```
 
@@ -819,19 +819,19 @@ This script allows the user to interact with Postgres in several ways.
 
 It can simply start Postgres:
 
-```bash
+```console
 $ docker run postgres
 ```
 
 Or, it can be used to run Postgres and pass parameters to the server:
 
-```bash
+```console
 $ docker run postgres postgres --help
 ```
 
 Lastly, it could also be used to start a totally different tool, such as Bash:
 
-```bash
+```console
 $ docker run --rm -it postgres bash
 ```
 

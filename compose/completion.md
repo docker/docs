@@ -44,7 +44,7 @@ available.
 
 3. Add the following to your `~/.bash_profile`:
 
-   ```shell
+   ```bash
    if [ -f $(brew --prefix)/etc/bash_completion ]; then
        . $(brew --prefix)/etc/bash_completion
    fi
@@ -59,7 +59,7 @@ completion.
 
 2. Add the following lines to `~/.bash_profile`:
 
-   ```shell
+   ```bash
    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
        . /opt/local/etc/profile.d/bash_completion.sh
    fi

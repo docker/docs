@@ -45,8 +45,8 @@ Your Mac must meet the following requirements to successfully install Docker Des
 
 - You must install **Rosetta 2** as some binaries are still Darwin/AMD64. To install Rosetta 2 manually from the command line, run the following command:
 
-  ```bash
-    softwareupdate --install-rosetta
+  ```console
+  $ softwareupdate --install-rosetta
   ```
 
  For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).

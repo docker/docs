@@ -24,19 +24,19 @@ Pretty simple, right? Let's make the change.
 
 2. Let's build our updated version of the image, using the same command we used before.
 
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 
 3. Let's start a new container using the updated code.
 
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 
 **Uh oh!** You probably saw an error like this (the IDs will be different):
 
-```bash
+```console
 docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_burnell 
 (bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd): Bind for 0.0.0.0:3000 failed: port is already allocated.
 ```
@@ -55,21 +55,21 @@ ways that we can remove the old container. Feel free to choose the path that you
 
 1. Get the ID of the container by using the `docker ps` command.
 
-    ```bash
-    docker ps
+    ```console
+    $ docker ps
     ```
 
 2. Use the `docker stop` command to stop the container.
 
-    ```bash
+    ```console
     # Swap out <the-container-id> with the ID from docker ps
-    docker stop <the-container-id>
+    $ docker stop <the-container-id>
     ```
 
 3. Once the container has stopped, you can remove it by using the `docker rm` command.
 
-    ```bash
-    docker rm <the-container-id>
+    ```console
+    $ docker rm <the-container-id>
     ```
 
 >**Note**
@@ -96,8 +96,8 @@ much easier than having to look up the container ID and remove it.
 
 1. Now, start your updated app.
 
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 
 2. Refresh your browser on [http://localhost:3000](http://localhost:3000) and you should see your updated help text!

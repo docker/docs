@@ -175,8 +175,8 @@ You can see whether you are running experimental mode at the command line. If
 `Experimental` is `true`, then Docker is running in experimental mode, as shown
 here. (If `false`, Experimental mode is off.)
 
-```bash
-> docker version
+```console
+$ docker version
 
 Client: Docker Engine - Community
  Version:           19.03.1
@@ -243,7 +243,7 @@ To manually add a custom, self-signed certificate, start by adding the
 certificate to the macOS keychain, which is picked up by Docker Desktop. Here is
 an example:
 
-```bash
+```console
 $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
 ```
 
@@ -347,13 +347,13 @@ ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d
 
 Add the following to your `~/.bash_profile`:
 
-```shell
+```bash
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 ```
 
 OR
 
-```shell
+```bash
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
 . $(brew --prefix)/etc/bash_completion
 fi
@@ -383,15 +383,15 @@ directory.
 
 Create the `completions` directory:
 
-```bash
-mkdir -p ~/.config/fish/completions
+```console
+$ mkdir -p ~/.config/fish/completions
 ```
 
 Now add fish completions from docker.
 
-```bash
-ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
-ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
+```console
+$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
+$ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
 
 ## Give feedback and get help

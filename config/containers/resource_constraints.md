@@ -188,12 +188,12 @@ the container's cgroup on the host machine.
 If you have 1 CPU, each of the following commands guarantees the container at
 most 50% of the CPU every second.
 
-```bash
-docker run -it --cpus=".5" ubuntu /bin/bash
+```console
+$ docker run -it --cpus=".5" ubuntu /bin/bash
 ```
 Which is the equivalent to manually specifying `--cpu-period` and `--cpu-quota`;
 
-```bash
+```console
 $ docker run -it --cpu-period=100000 --cpu-quota=50000 ubuntu /bin/bash
 ```
 
@@ -246,7 +246,7 @@ documentation or the `ulimit` command for information on appropriate values.
 The following example command sets each of these three flags on a `debian:jessie`
 container.
 
-```bash
+```console
 $ docker run -it \
     --cpu-rt-runtime=950000 \
     --ulimit rtprio=99 \
@@ -273,13 +273,13 @@ Verify that your GPU is running and accessible.
 Follow the instructions at (https://nvidia.github.io/nvidia-container-runtime/)
 and then run this command:
 
-```bash
+```console
 $ apt-get install nvidia-container-runtime
 ```
 
 Ensure the `nvidia-container-runtime-hook` is accessible from `$PATH`.
 
-```bash
+```console
 $ which nvidia-container-runtime-hook
 ```
 
@@ -290,7 +290,7 @@ Restart the Docker daemon.
 Include the `--gpus` flag when you start a container to access GPU resources.
 Specify how many GPUs to use. For example:
 
-```bash
+```console
 $ docker run -it --rm --gpus all ubuntu nvidia-smi
 ```
 
@@ -316,13 +316,13 @@ Exposes all available GPUs and returns a result akin to the following:
 
 Use the `device` option to specify GPUs. For example:
 
-```bash
+```console
 $ docker run -it --rm --gpus device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
 ```
 
 Exposes that specific GPU.
 
-```bash
+```console
 $ docker run -it --rm --gpus '"device=0,2"' ubuntu nvidia-smi
 ```
 
@@ -337,7 +337,7 @@ Exposes the first and third GPUs.
 You can set capabilities manually. For example, on Ubuntu you can run the
 following:
 
-```bash
+```console
 $ docker run --gpus 'all,capabilities=utility' --rm ubuntu nvidia-smi
 ```
 

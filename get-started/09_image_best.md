@@ -11,8 +11,8 @@ Docker has partnered with [Snyk](http://snyk.io){:target="_blank" rel="noopener"
 
 For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type
 
-```bash
-docker scan getting-started
+```console
+$ docker scan getting-started
 ```
 
 The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new
@@ -56,8 +56,8 @@ command, you can see the command that was used to create each layer within an im
 1. Use the `docker image history` command to see the layers in the `getting-started` image you
    created earlier in the tutorial.
 
-    ```bash
-    docker image history getting-started
+    ```console
+    $ docker image history getting-started
     ```
 
     You should get output that looks something like this (dates/IDs may be different).
@@ -86,8 +86,8 @@ command, you can see the command that was used to create each layer within an im
 2. You'll notice that several of the lines are truncated. If you add the `--no-trunc` flag, you'll get the
    full output (yes... funny how you use a truncated flag to get untruncated output, huh?)
 
-    ```bash
-    docker image history --no-trunc getting-started
+    ```console
+    $ docker image history --no-trunc getting-started
     ```
 
 ## Layer caching
@@ -146,8 +146,8 @@ a change to the `package.json`. Make sense?
 
 3. Build a new image using `docker build`.
 
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 
     You should see output like this...

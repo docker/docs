@@ -383,7 +383,7 @@ pushing an official Docker image as part of your app, you may find your app
 bundle becomes large with all image architectures embedded. To just push the
 architecture required, you can add the `--platform` flag.
 
-```bash
+```console
 $ docker login 
 
 $ docker app push my-app --platform="linux/amd64" --tag <hub-id>/<repo>:0.1.0

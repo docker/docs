@@ -38,7 +38,7 @@ Restart Docker for the changes to take effect.
 You can set the logging driver for a specific container by using the
 `--log-driver` option to `docker run`:
 
-```bash
+```console
 $ docker run --log-driver=awslogs ...
 ```
 
@@ -65,7 +65,7 @@ the `awslogs-region` log option or the `AWS_REGION` environment variable to set
 the region. By default, if your Docker daemon is running on an EC2 instance
 and no region is set, the driver uses the instance's region.
 
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
 ```
 
@@ -89,7 +89,7 @@ You must specify a
 for the `awslogs` logging driver. You can specify the log group with the
 `awslogs-group` log option:
 
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
 ```
 
@@ -112,7 +112,7 @@ Log driver returns an error by default if the log group does not exist. However,
 `awslogs-create-group` to `true` to automatically create the log group as needed.
 The `awslogs-create-group` option defaults to `false`.
 
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -162,7 +162,7 @@ The format can be expressed as a `strftime` expression of
 `[%b %d, %Y %H:%M:%S]`, and the `awslogs-datetime-format` value can be set to
 that expression:
 
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -237,7 +237,7 @@ INFO Another message was logged
 
 You can use the regular expression of `^INFO`:
 
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \

@@ -110,13 +110,13 @@ container.
 
 **Create a volume**:
 
-```bash
+```console
 $ docker volume create my-vol
 ```
 
 **List volumes**:
 
-```bash
+```console
 $ docker volume ls
 
 local               my-vol
@@ -124,7 +124,7 @@ local               my-vol
 
 **Inspect a volume**:
 
-```bash
+```console
 $ docker volume inspect my-vol
 [
     {
@@ -140,7 +140,7 @@ $ docker volume inspect my-vol
 
 **Remove a volume**:
 
-```bash
+```console
 $ docker volume rm my-vol
 ```
 
@@ -161,7 +161,7 @@ after running the first one.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name devtest \
   --mount source=myvol2,target=/app \
@@ -171,7 +171,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name devtest \
   -v myvol2:/app \
@@ -205,7 +205,7 @@ destination, and that the mount is read-write.
 Stop the container and remove the volume. Note volume removal is a separate
 step.
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -259,7 +259,7 @@ Docker for Azure both support persistent storage using the Cloudstor plugin.
 The following example starts a `nginx` service with four replicas, each of which
 uses a local volume called `myvol2`.
 
-```bash
+```console
 $ docker service create -d \
   --replicas=4 \
   --name devtest-service \
@@ -269,7 +269,7 @@ $ docker service create -d \
 
 Use `docker service ps devtest-service` to verify that the service is running:
 
-```bash
+```console
 $ docker service ps devtest-service
 
 ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
@@ -278,7 +278,7 @@ ID                  NAME                IMAGE               NODE                
 
 Remove the service, which stops all its tasks:
 
-```bash
+```console
 $ docker service rm devtest-service
 ```
 
@@ -313,7 +313,7 @@ The `--mount` and `-v` examples have the same end result.
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html \
@@ -323,7 +323,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-empty-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html \
@@ -337,7 +337,7 @@ After running either of these examples, run the following commands to clean up
 the containers and volumes.  Note volume removal is a separate step.
 
 
-```bash
+```console
 $ docker container stop nginxtest
 
 $ docker container rm nginxtest
@@ -367,7 +367,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
@@ -377,7 +377,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-readonly" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html:ro \
@@ -408,7 +408,7 @@ correctly. Look for the `Mounts` section:
 Stop and remove the container, and remove the volume. Volume removal is a
 separate step.
 
-```bash
+```console
 $ docker container stop nginxtest
 
 $ docker container rm nginxtest
@@ -448,7 +448,7 @@ host and can connect to the second using SSH.
 
 On the Docker host, install the `vieux/sshfs` plugin:
 
-```bash
+```console
 $ docker plugin install --grant-all-permissions vieux/sshfs
 ```
 
@@ -458,7 +458,7 @@ This example specifies a SSH password, but if the two hosts have shared keys
 configured, you can omit the password. Each volume driver may have zero or more
 configurable options, each of which is specified using an `-o` flag.
 
-```bash
+```console
 $ docker volume create --driver vieux/sshfs \
   -o sshcmd=test@node2:/home/test \
   -o password=testpassword \
@@ -472,7 +472,7 @@ configured, you can omit the password. Each volume driver may have zero or more
 configurable options. **If the volume driver requires you to pass options, you
 must use the `--mount` flag to mount the volume, rather than `-v`.**
 
-```bash
+```console
 $ docker run -d \
   --name sshfs-container \
   --volume-driver vieux/sshfs \
@@ -485,7 +485,7 @@ $ docker run -d \
 This example shows how you can create an NFS volume when creating a service. This example uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
 
 #### NFSv3
-```bash
+```console
 $ docker service create -d \
   --name nfs-service \
   --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10' \
@@ -493,7 +493,7 @@ $ docker service create -d \
 ```
 
 #### NFSv4
-```bash
+```console
 docker service create -d \
     --name nfs-service \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=addr=10.0.0.10,rw,nfsvers=4,async"' \
@@ -503,8 +503,8 @@ docker service create -d \
 ### Create CIFS/Samba volumes
 
 You can mount a Samba share directly in docker without configuring a mount point on your host.
-```bash
-docker volume create \
+```console
+$ docker volume create \
 	--driver local \
 	--opt type=cifs \
 	--opt device=//uxxxxx.your-server.de/backup \

@@ -21,8 +21,8 @@ What you'll see is that the files created in one container aren't available in a
 1. Start an `ubuntu` container that will create a file named `/data.txt` with a random number
    between 1 and 10000.
 
-    ```bash
-    docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+    ```console
+    $ docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
     ```
 
     In case you're curious about the command, we're starting a bash shell and invoking two
@@ -35,15 +35,15 @@ What you'll see is that the files created in one container aren't available in a
 
     You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
 
-    ```bash
-    cat /data.txt
+    ```console
+    $ cat /data.txt
     ```
 
     If you prefer the command line you can use the `docker exec` command to do the same. You need to get the
    container's ID (use `docker ps` to get it) and get the content with the following command.
 
-    ```bash
-    docker exec <container-id> cat /data.txt
+    ```console
+    $ docker exec <container-id> cat /data.txt
     ```
 
     You should see a random number!
@@ -51,8 +51,8 @@ What you'll see is that the files created in one container aren't available in a
 3. Now, let's start another `ubuntu` container (the same image) and we'll see we don't have the same
    file.
 
-    ```bash
-    docker run -it ubuntu ls /
+    ```console
+    $ docker run -it ubuntu ls /
     ```
 
     And look! There's no `data.txt` file there! That's because it was written to the scratch space for
@@ -91,8 +91,8 @@ Every time you use the volume, Docker will make sure the correct data is provide
 
 1. Create a volume by using the `docker volume create` command.
 
-    ```bash
-    docker volume create todo-db
+    ```console
+    $ docker volume create todo-db
     ```
 
 2. Stop and remove the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
@@ -100,8 +100,8 @@ Every time you use the volume, Docker will make sure the correct data is provide
 3. Start the todo app container, but add the `-v` flag to specify a volume mount. We will use the named volume and mount
    it to `/etc/todos`, which will capture all files created at the path.
 
-    ```bash
-    docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+    ```console
+    $ docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
     ```
 
 4. Once the container starts up, open the app and add a few items to your todo list.
@@ -132,8 +132,8 @@ Hooray! You've now learned how to persist data!
 A lot of people frequently ask "Where is Docker _actually_ storing my data when I use a named volume?" If you want to know, 
 you can use the `docker volume inspect` command.
 
-```bash
-docker volume inspect todo-db
+```console
+$ docker volume inspect todo-db
 [
     {
         "CreatedAt": "2019-09-26T02:18:36Z",

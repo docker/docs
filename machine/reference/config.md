@@ -19,7 +19,7 @@ Options:
 
 For example:
 
-```bash
+```console
 $ docker-machine config dev \
     --tlsverify \
     --tlscacert="/Users/ehazlett/.docker/machines/dev/ca.pem" \

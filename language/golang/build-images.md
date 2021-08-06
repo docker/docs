@@ -37,7 +37,7 @@ The source code for the application is in the [olliefr/docker-gs-ping](https://g
 
 For our present study, we clone it to our local machine:
 
-```shell
+```console
 $ git clone https://github.com/olliefr/docker-gs-ping
 ```
 
@@ -84,7 +84,7 @@ func main() {
 
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the directory into which you cloned the project's repo. From now on, we'll refer to this directory as the **working directory**.
 
-```shell
+```console
 $ go run main.go
 ```
 
@@ -104,7 +104,7 @@ ____________________________________O/_______
 
 Let's run a quick _smoke test_ on the application. **In a new terminal**, run a request using `curl`. Alternatively, you can use your favourite web browser as well.
 
-```shell
+```console
 $ curl http://localhost:8080/
 Hello, Docker! <3
 ```
@@ -234,7 +234,7 @@ The build command optionally takes a `--tag` flag. This flag is used to label th
 
 Let's build our first Docker image!
 
-```shell
+```console
 $ docker build --tag docker-gs-ping .
 ```
 
@@ -271,7 +271,7 @@ To see the list of images we have on our local machine, we have two options. One
 
 To list images, simply run the `images` command:
 
-```shell
+```console
 $ docker images
 ```
 
@@ -291,7 +291,7 @@ An image is made up of a manifest and a list of layers. In simple terms, a “ta
 
 To create a new tag for our image, run the following command.
 
-```shell
+```console
 $ docker tag docker-gs-ping:latest docker-gs-ping:v1.0
 ```
 
@@ -299,7 +299,7 @@ The Docker `tag` command creates a new tag for the image. It does not create a n
 
 Now run the `docker images` command to see the updated list of local images:
 
-```shell
+```console
 $ docker images
 ```
 
@@ -314,14 +314,14 @@ You can see that we have two images that start with `docker-gs-ping`. We know th
 
 Let’s remove the tag that we had just created. To do this, we’ll use the `rmi` command, which stands for "remove image":
 
-```shell
+```console
 $ docker rmi docker-gs-ping:v1.0
 Untagged: docker-gs-ping:v1.0
 ```
 
 Notice that the response from Docker tells us that the image has not been removed but only "untagged". Verify this by running the images command:
 
-```shell
+```console
 $ docker images
 ```
 
@@ -379,8 +379,8 @@ ENTRYPOINT ["/docker-gs-ping"]
 
 Since we have two dockerfiles now, we have to tell Docker that we want to build using our new Dockerfile. We also tag the new image with `multistage` but this word has no special meaning, we only do so that we could compare this new image to the one we've built previously, that is the one we tagged with `latest`:
 
-```shell
-docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
+```console
+$ docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
 ```
 
 Comparing the sizes of `docker-gs-ping:multistage` and `docker-gs-ping:latest` we see an order-of-magnitude difference!
