@@ -187,9 +187,9 @@ on:
 
 This ensures that the main CI will only trigger if we tag our commits with `Vn.n.n.` Let’s test this. For example, run the following command:
 
-```bash
-git tag -a v1.0.2
-git push origin v1.0.2
+```console
+$ git tag -a v1.0.2
+$ git push origin v1.0.2
 ```
 
 Now, go to GitHub and check your Actions
