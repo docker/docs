@@ -1,27 +1,54 @@
 ---
-description: Instructions for installing Docker Engine on Fedora
-keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
+description: Instructions for installing Docker Engine on SLES
+keywords: requirements, apt, installation, centos, rpm, sles, install, uninstall, upgrade, update, s390x, ibm-z
 redirect_from:
-- /engine/installation/fedora/
-- /engine/installation/linux/fedora/
-- /engine/installation/linux/docker-ce/fedora/
-- /install/linux/docker-ce/fedora/
-title: Install Docker Engine on Fedora
+- /ee/docker-ee/sles/
+- /ee/docker-ee/suse/
+- /engine/installation/linux/docker-ce/sles/
+- /engine/installation/linux/docker-ee/sles/
+- /engine/installation/linux/docker-ee/suse/
+- /engine/installation/linux/sles/
+- /engine/installation/linux/SUSE/
+- /engine/installation/linux/suse/
+- /engine/installation/sles/
+- /engine/installation/SUSE/
+- /install/linux/docker-ce/sles/
+- /install/linux/docker-ee/sles/
+- /install/linux/docker-ee/suse/
+- /install/linux/sles/
+- /installation/sles/
+title: Install Docker Engine on SLES
 toc_max: 4
 ---
 
-To get started with Docker Engine on Fedora, make sure you
+To get started with Docker Engine on SLES, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#installation-methods).
 
 ## Prerequisites
 
+> **Note**
+>
+> We currently only provide packages for SLES on s390x (IBM Z). Other architectures
+> are not yet supported for SLES.
+
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version of one of these Fedora versions:
+To install Docker Engine, you need a maintained version of SLES 15-SP2 on s390x (IBM Z).
+Archived versions aren't supported or tested.
 
-- Fedora 33
-- Fedora 34
+The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.2&arch=s390x)
+repositories must be enabled. 
+
+The `SELinux (SLE_15_SP2)`repository must be enabled. This repository is not added by
+default, you need to
+[add it](https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo).
+
+```console
+$ zypper addrepo https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo
+```
+
+The `overlay2` storage driver is recommended.
 
 ### Uninstall old versions
 
@@ -29,19 +56,18 @@ Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them, along with associated dependencies.
 
 ```console
-$ sudo dnf remove docker \
+$ sudo zypper remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
                   docker-latest \
                   docker-latest-logrotate \
                   docker-logrotate \
-                  docker-selinux \
-                  docker-engine-selinux \
-                  docker-engine
+                  docker-engine \
+                  runc
 ```
 
-It's OK if `dnf` reports that none of these packages are installed.
+It's OK if `zypper` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker Engine package is now called `docker-ce`.
@@ -71,16 +97,13 @@ from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/fedora" %}
+{% assign download-url-base = "https://download.docker.com/linux/sles" %}
 
-Install the `dnf-plugins-core` package (which provides the commands to manage
-your DNF repositories) and set up the **stable** repository.
+Set up the **stable** repository.
 
 ```console
-$ sudo dnf -y install dnf-plugins-core
-
-$ sudo dnf config-manager \
-    --add-repo \
+$ sudo zypper \
+    addrepo \
     {{ download-url-base }}/docker-ce.repo
 ```
 
@@ -91,22 +114,19 @@ $ sudo dnf config-manager \
 > command enables the **nightly** repository.
 >
 > ```console
-> $ sudo dnf config-manager --set-enabled docker-ce-nightly
+> $ sudo zypper mr -e docker-ce-nightly
 > ```
 >
 > To enable the **test** channel, run the following command:
 >
 > ```console
-> $ sudo dnf config-manager --set-enabled docker-ce-test
+> $ sudo zypper mr -e docker-ce-test
 > ```
 >
 > You can disable the **nightly** or **test** repository by running the
-> `dnf config-manager` command with the `--set-disabled` flag. To re-enable it,
-> use the `--set-enabled` flag. The following command disables the **nightly**
-> repository.
->
 > ```console
-> $ sudo dnf config-manager --set-disabled docker-ce-nightly
+> $ sudo zypper mr -d docker-ce-nightly
+> $ sudo zypper mr -d docker-ce-test
 > ```
 >
 > [Learn about **nightly** and **test** channels](index.md).
@@ -116,7 +136,7 @@ $ sudo dnf config-manager \
 1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
 
     ```console
-    $ sudo dnf install docker-ce docker-ce-cli containerd.io
+    $ sudo zypper install docker-ce docker-ce-cli containerd.io
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -125,8 +145,8 @@ $ sudo dnf config-manager \
     > Got multiple Docker repositories?
     >
     > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `dnf install` or
-    > `dnf update` command always installs the highest possible version,
+    > or updating without specifying a version in the `zypper install` or
+    > `zypper update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -139,24 +159,19 @@ $ sudo dnf config-manager \
        results by version number, highest to lowest, and is truncated:
 
     ```console
-    $ dnf list docker-ce  --showduplicates | sort -r
-
-    docker-ce.x86_64  3:18.09.1-3.fc28                 docker-ce-stable
-    docker-ce.x86_64  3:18.09.0-3.fc28                 docker-ce-stable
-    docker-ce.x86_64  18.06.1.ce-3.fc28                docker-ce-stable
-    docker-ce.x86_64  18.06.0.ce-3.fc28                docker-ce-stable
+    $ sudo zypper se docker-ce --match-exact  | sort -r
     ```
 
     The list returned depends on which repositories are enabled, and is specific
-    to your version of Fedora (indicated by the `.fc28` suffix in this example).
+    to your version of SLES.
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a hyphen (`-`), for example,
-       `docker-ce-3:18.09.1`.
+       the package name (`docker-ce`) plus the version string (2nd column)
+       starting at the first colon (`:`), up to the first hyphen, separated by
+       a hyphen (`-`). For example, `docker-ce-18.09.1`.
 
     ```console
-    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -195,7 +210,7 @@ If you cannot use Docker's repository to install Docker, you can download the
 a new file each time you want to upgrade Docker Engine.
 
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
-    and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
+    and choose your version of SLES. Then browse to `15/s390x/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
     > **Note**
@@ -208,7 +223,7 @@ a new file each time you want to upgrade Docker Engine.
     the Docker package.
 
     ```console
-    $ sudo dnf -y install /path/to/package.rpm
+    $ sudo zypper install /path/to/package.rpm
     ```
 
     Docker is installed but not started. The `docker` group is created, but no
@@ -238,8 +253,8 @@ steps.
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package file and repeat the
-[installation procedure](#install-from-a-package), using `dnf -y upgrade`
-instead of `dnf -y install`, and point to the new file.
+[installation procedure](#install-from-a-package), using `zypper -y upgrade`
+instead of `zypper -y install`, and point to the new file.
 
 {% include install-script.md %}
 
@@ -248,7 +263,7 @@ instead of `dnf -y install`, and point to the new file.
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io
+    $ sudo zypper remove docker-ce docker-ce-cli containerd.io
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

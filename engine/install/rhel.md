@@ -1,47 +1,58 @@
 ---
-description: Instructions for installing Docker Engine on Fedora
-keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
+description: Instructions for installing Docker Engine on RHEL
+keywords: requirements, apt, installation, rhel, rpm, install, uninstall, upgrade, update, s390x, ibm-z
 redirect_from:
-- /engine/installation/fedora/
-- /engine/installation/linux/fedora/
-- /engine/installation/linux/docker-ce/fedora/
-- /install/linux/docker-ce/fedora/
-title: Install Docker Engine on Fedora
+- /ee/docker-ee/rhel/
+- /engine/installation/linux/docker-ce/rhel/
+- /engine/installation/linux/docker-ee/rhel/
+- /engine/installation/linux/rhel/
+- /engine/installation/rhel/
+- /engine/installation/rhel/
+- /install/linux/docker-ee/rhel/
+- /installation/rhel/
+title: Install Docker Engine on RHEL
 toc_max: 4
 ---
 
-To get started with Docker Engine on Fedora, make sure you
+To get started with Docker Engine on RHEL, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#installation-methods).
 
 ## Prerequisites
 
+> **Note**
+>
+> We currently only provide packages for RHEL on s390x (IBM Z). Other architectures
+> are not yet supported for RHEL, but you may be able to install the CentOS packages
+> on RHEL. Refer to the [Install Docker Engine on CentOS](centos.md) page for details.
+
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version of one of these Fedora versions:
+To install Docker Engine, you need a maintained version of RHEL 7 or 8 on s390x (IBM Z).
+Archived versions aren't supported or tested.
 
-- Fedora 33
-- Fedora 34
+The `overlay2` storage driver is recommended.
 
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them, along with associated dependencies.
+installed, uninstall them, along with associated dependencies. Also uninstall 
+`Podman` and the associated dependencies if installed already. 
 
 ```console
-$ sudo dnf remove docker \
+$ sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
                   docker-latest \
                   docker-latest-logrotate \
                   docker-logrotate \
-                  docker-selinux \
-                  docker-engine-selinux \
-                  docker-engine
+                  docker-engine \
+                  podman \
+                  runc
 ```
 
-It's OK if `dnf` reports that none of these packages are installed.
+It's OK if `yum` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker Engine package is now called `docker-ce`.
@@ -71,15 +82,15 @@ from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/fedora" %}
+{% assign download-url-base = "https://download.docker.com/linux/rhel" %}
 
-Install the `dnf-plugins-core` package (which provides the commands to manage
-your DNF repositories) and set up the **stable** repository.
+Install the `yum-utils` package (which provides the `yum-config-manager`
+utility) and set up the **stable** repository.
 
 ```console
-$ sudo dnf -y install dnf-plugins-core
+$ sudo yum install -y yum-utils
 
-$ sudo dnf config-manager \
+$ sudo yum-config-manager \
     --add-repo \
     {{ download-url-base }}/docker-ce.repo
 ```
@@ -91,22 +102,21 @@ $ sudo dnf config-manager \
 > command enables the **nightly** repository.
 >
 > ```console
-> $ sudo dnf config-manager --set-enabled docker-ce-nightly
+> $ sudo yum-config-manager --enable docker-ce-nightly
 > ```
 >
 > To enable the **test** channel, run the following command:
 >
 > ```console
-> $ sudo dnf config-manager --set-enabled docker-ce-test
+> $ sudo yum-config-manager --enable docker-ce-test
 > ```
 >
 > You can disable the **nightly** or **test** repository by running the
-> `dnf config-manager` command with the `--set-disabled` flag. To re-enable it,
-> use the `--set-enabled` flag. The following command disables the **nightly**
-> repository.
+> `yum-config-manager` command with the `--disable` flag. To re-enable it, use
+> the `--enable` flag. The following command disables the **nightly** repository.
 >
 > ```console
-> $ sudo dnf config-manager --set-disabled docker-ce-nightly
+> $ sudo yum-config-manager --disable docker-ce-nightly
 > ```
 >
 > [Learn about **nightly** and **test** channels](index.md).
@@ -116,7 +126,7 @@ $ sudo dnf config-manager \
 1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
 
     ```console
-    $ sudo dnf install docker-ce docker-ce-cli containerd.io
+    $ sudo yum install docker-ce docker-ce-cli containerd.io
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -125,8 +135,8 @@ $ sudo dnf config-manager \
     > Got multiple Docker repositories?
     >
     > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `dnf install` or
-    > `dnf update` command always installs the highest possible version,
+    > or updating without specifying a version in the `yum install` or
+    > `yum update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -139,24 +149,21 @@ $ sudo dnf config-manager \
        results by version number, highest to lowest, and is truncated:
 
     ```console
-    $ dnf list docker-ce  --showduplicates | sort -r
+    $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64  3:18.09.1-3.fc28                 docker-ce-stable
-    docker-ce.x86_64  3:18.09.0-3.fc28                 docker-ce-stable
-    docker-ce.x86_64  18.06.1.ce-3.fc28                docker-ce-stable
-    docker-ce.x86_64  18.06.0.ce-3.fc28                docker-ce-stable
+    docker-ce.s390x                3:20.10.7-3.el8                 docker-ce-stable
     ```
 
     The list returned depends on which repositories are enabled, and is specific
-    to your version of Fedora (indicated by the `.fc28` suffix in this example).
+    to your version of RHEL (indicated by the `.el8` suffix in this example).
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a hyphen (`-`), for example,
-       `docker-ce-3:18.09.1`.
+       the package name (`docker-ce`) plus the version string (2nd column)
+       starting at the first colon (`:`), up to the first hyphen, separated by
+       a hyphen (`-`). For example, `docker-ce-20.10.7`.
 
     ```console
-    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -195,7 +202,7 @@ If you cannot use Docker's repository to install Docker, you can download the
 a new file each time you want to upgrade Docker Engine.
 
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
-    and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
+    and choose your version of RHEL. Then browse to `s390x/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
     > **Note**
@@ -208,7 +215,7 @@ a new file each time you want to upgrade Docker Engine.
     the Docker package.
 
     ```console
-    $ sudo dnf -y install /path/to/package.rpm
+    $ sudo yum install /path/to/package.rpm
     ```
 
     Docker is installed but not started. The `docker` group is created, but no
@@ -238,8 +245,8 @@ steps.
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package file and repeat the
-[installation procedure](#install-from-a-package), using `dnf -y upgrade`
-instead of `dnf -y install`, and point to the new file.
+[installation procedure](#install-from-a-package), using `yum -y upgrade`
+instead of `yum -y install`, and point to the new file.
 
 {% include install-script.md %}
 
@@ -248,7 +255,7 @@ instead of `dnf -y install`, and point to the new file.
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io
+    $ sudo yum remove docker-ce docker-ce-cli containerd.io
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

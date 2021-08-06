@@ -25,6 +25,16 @@ for Docker Engine.
 ## 20.10.8
 2021-08-03
 
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
 ### Deprecation
 
 - Deprecate support for encrypted TLS private keys. Legacy PEM encryption as

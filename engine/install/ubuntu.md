@@ -32,7 +32,7 @@ versions:
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
 
-Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
+Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, and `s390x` architectures.
 
 > Ubuntu 16.04 LTS "Xenial Xerus" end-of-life
 > 
@@ -129,6 +129,7 @@ from the repository.
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
       <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
+      <li><a data-toggle="tab" data-target="#s390x_repo">s390x</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -154,6 +155,15 @@ from the repository.
     ```console
     $ echo \
       "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    ```
+
+    </div>
+    <div id="s390x_repo" class="tab-pane fade" markdown="1">
+
+    ```console
+    $ echo \
+      "deb [arch=s390x signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
@@ -206,7 +216,7 @@ from the repository.
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
@@ -227,10 +237,12 @@ a new file each time you want to upgrade Docker.
 
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64`, and download the `.deb` file for the Docker Engine
+    `armhf`, `arm64`, or `s390x`, and download the `.deb` file for the Docker Engine
     version you want to install.
 
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 
@@ -251,7 +263,7 @@ a new file each time you want to upgrade Docker.
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.

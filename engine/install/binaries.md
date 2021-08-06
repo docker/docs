@@ -116,7 +116,7 @@ instructions for enabling and configuring AppArmor or SELinux.
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 ## Install client binaries on macOS
 
@@ -171,7 +171,7 @@ The macOS binary includes the Docker client only. It does not include the
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 ## Upgrade static binaries
 

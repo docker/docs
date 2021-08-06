@@ -1247,6 +1247,10 @@ manuals:
       title: Install on Debian
     - path: /engine/install/fedora/
       title: Install on Fedora
+    - path: /engine/install/rhel/
+      title: Install on RHEL
+    - path: /engine/install/sles/
+      title: Install on SLES
     - path: /engine/install/ubuntu/
       title: Install on Ubuntu
     - path: /engine/install/binaries/

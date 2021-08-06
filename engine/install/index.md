@@ -9,7 +9,6 @@ redirect_from:
 - /cs-engine/1.13/
 - /cs-engine/1.13/upgrade/
 - /ee/docker-ee/oracle/
-- /ee/docker-ee/suse/
 - /ee/supported-platforms/
 - /en/latest/installation/
 - /engine/installation/
@@ -20,18 +19,13 @@ redirect_from:
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
 - /engine/installation/linux/docker-ee/oracle/
-- /engine/installation/linux/docker-ee/suse/
 - /engine/installation/linux/frugalware/
 - /engine/installation/linux/gentoolinux/
 - /engine/installation/linux/oracle/
 - /engine/installation/linux/other/
-- /engine/installation/linux/SUSE/
-- /engine/installation/linux/suse/
 - /engine/installation/oracle/
-- /engine/installation/SUSE/
 - /enterprise/supported-platforms/
 - /install/linux/docker-ee/oracle/
-- /install/linux/docker-ee/suse/
 ---
 
 
@@ -56,13 +50,16 @@ your preferred operating system below.
 Docker provides `.deb` and `.rpm` packages from the following Linux distributions
 and architectures:
 
-| Platform              | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)             |
-|:----------------------|:-----------------------|:-----------------------|:-------------------------|
-| [CentOS](centos.md)   | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                          |
-| [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   |
-| [Fedora](fedora.md)   | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                          |
-| [Raspbian](debian.md) |                        |                        | [{{ yes }}](debian.md)   |
-| [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   |
+| Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)           | s390x                  |
+|:------------------------|:-----------------------|:-----------------------|:-----------------------|:-----------------------|
+| [CentOS](centos.md)     | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                        |                        |
+| [Debian](debian.md)     | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) |                        |
+| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                        |                        |
+| [Raspbian](debian.md)   |                        |                        | [{{ yes }}](debian.md) |                        |
+| [RHEL](rhel.md)         |                        |                        |                        | [{{ yes }}](rhel.md)   |
+| [SLES](sles.md)         |                        |                        |                        | [{{ yes }}](sles.md)   |
+| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
+| [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) |                        |
 
 ### Other Linux distributions
 
