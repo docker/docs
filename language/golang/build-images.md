@@ -11,7 +11,7 @@ redirect_from:
 ## Prerequisites
 
 * Some understanding of Go and its toolchain. This is not a tutorial on Go. If you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"} is a good starting point, so go (pun intended) check it out.
-* Some awareness of basic Docker concepts. If unsure, work through the orientation and setup in Get started [Part 1](/get-started/).
+* Some awareness of basic Docker concepts. If unsure, work through the orientation and setup in Get started [Part 1](../../get-started/index.md).
 
 ## Overview
 
@@ -267,7 +267,7 @@ Your exact output will vary, but provided there aren't any errors, you should se
 
 ## View local images
 
-To see the list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](/products/docker-desktop). Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
+To see the list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/index.md). Since we are currently working in the terminal, let’s take a look at listing images with the CLI.
 
 To list images, simply run the `images` command:
 
@@ -393,7 +393,7 @@ docker-gs-ping   latest       336a3f164d0f   About an hour ago    540MB
 
 This is due to the fact that the ["distroless" base image](https://github.com/GoogleContainerTools/distroless) that we have used to deploy our Go application is very barebones and is meant for lean deployments of static binaries.
 
-For more information on multi-stage builds, please feel free to check out [other parts](/develop/develop-images/multistage-build/) of Docker documentation. This is, however, not essential for our progress here, so we'll leave it at that.
+For more information on multi-stage builds, please feel free to check out [other parts](../../develop/develop-images/multistage-build.md) of Docker documentation. This is, however, not essential for our progress here, so we'll leave it at that.
 
 ## Next steps
 
