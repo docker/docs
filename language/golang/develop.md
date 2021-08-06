@@ -599,12 +599,12 @@ We are not going to cover any of these advanced use cases here.
 
 ### Variable substitution in Docker Compose
 
-One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3/#variable-substitution). You can see some example in our Compose file, `environment` section. By means of example:
+One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some example in our Compose file, `environment` section. By means of example:
 
 * `PGUSER=${PGUSER:-totoro}` means that inside the container, the environment variable `PGUSER` shall be set to the same value as it has on the host machine where Docker Compose is run. If there is no environment variable with this name on the host machine, the variable inside the container gets the default value of `totoro`.
 * `PGPASSWORD=${PGPASSWORD:?database password not set}` means that if the environment variable `PGPASSWORD` is not set on the host, Docker Compose will display an error. This is OK, because we don't want to hard-code default values for the password. We set the password value in the `.env` file, which is local to our machine. It is always a good idea to add `.env` to `.gitignore` to prevent the secrets being checked into the version control.
 
-Other ways of dealing with undefined or empty values exist, as documented in the [variable substitution](../../compose/compose-file/compose-file-v3/#variable-substitution) section of the Docker documentation.
+Other ways of dealing with undefined or empty values exist, as documented in the [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution) section of the Docker documentation.
 
 ### Validating Docker Compose configuration
 
