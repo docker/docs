@@ -136,12 +136,11 @@ Docker Hub.
 
 1. Start by creating a [Dockerfile](../engine/reference/builder/) to specify your application as shown below:
 
-    ```shell
-    cat > Dockerfile <<EOF
-    FROM busybox
-    CMD echo "Hello world! This is my first Docker image."
-    EOF
-    ```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM busybox
+   CMD echo "Hello world! This is my first Docker image."
+   ```
 
 2. Run `docker build -t <your_username>/my-private-repo .` to build your Docker
    image.
