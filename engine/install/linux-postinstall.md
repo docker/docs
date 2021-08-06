@@ -66,7 +66,7 @@ To create the `docker` group and add your user:
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
     If you initially ran Docker CLI commands using `sudo` before adding
     your user to the `docker` group, you may see the following error,

@@ -24,7 +24,7 @@ a filesystem at the operating system (OS) level.
 ## Prerequisites
 
 - `devicemapper` is supported on Docker Engine - Community running on CentOS, Fedora,
-  Ubuntu, or Debian.
+  SLES 15, Ubuntu, Debian, or RHEL.
 - `devicemapper` requires the `lvm2` and `device-mapper-persistent-data` packages
   to be installed.
 - Changing the storage driver makes any containers you have already
@@ -213,7 +213,7 @@ assumes that the Docker daemon is in the `stopped` state.
     - **RHEL / CentOS**: `device-mapper-persistent-data`, `lvm2`, and all
       dependencies
 
-    - **Ubuntu / Debian**: `thin-provisioning-tools`, `lvm2`, and all
+    - **Ubuntu / Debian / SLES 15**: `thin-provisioning-tools`, `lvm2`, and all
       dependencies
 
 4.  Create a physical volume on your block device from step 1, using the
