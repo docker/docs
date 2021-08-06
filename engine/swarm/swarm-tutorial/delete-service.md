@@ -14,7 +14,7 @@ you can delete the service from the swarm.
 
 2.  Run `docker service rm helloworld` to remove the `helloworld` service.
 
-    ```bash
+    ```console
     $ docker service rm helloworld
 
     helloworld
@@ -24,7 +24,7 @@ you can delete the service from the swarm.
     removed the service. The CLI returns a message that the service is not
     found:
 
-    ```bash
+    ```console
     $ docker service inspect helloworld
     []
     Error: no such service: helloworld
@@ -34,7 +34,7 @@ you can delete the service from the swarm.
     seconds to clean up. You can use `docker ps` on the nodes to verify when the
     tasks have been removed.
 
-    ```bash
+    ```console
     $ docker ps
 
         CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
