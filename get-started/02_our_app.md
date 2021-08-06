@@ -56,8 +56,8 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
 
 2. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
 
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 
     This command used the Dockerfile to build a new container image. You might
@@ -83,8 +83,8 @@ command (remember that from earlier?).
 1. Start your container using the `docker run` command and specify the name of the image we 
     just created:
 
-    ```bash
-    docker run -dp 3000:3000 getting-started
+    ```console
+    $ docker run -dp 3000:3000 getting-started
     ```
 
     Remember the `-d` and `-p` flags? We're running the new container in "detached" mode (in the 

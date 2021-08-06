@@ -152,7 +152,7 @@ its state that are not stored in persistent storage disappear.
 The following command runs an `ubuntu` container, attaches interactively to your
 local command-line session, and runs `/bin/bash`.
 
-```bash
+```console
 $ docker run -i -t ubuntu /bin/bash
 ```
 

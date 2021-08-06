@@ -23,8 +23,8 @@ a Linux machine, you will need to [install Docker Compose](../compose/install.md
 
 After installation, you should be able to run the following and see version information.
 
-```bash
-docker-compose version
+```console
+$ docker-compose version
 ```
 
 ## Create the Compose file
@@ -53,8 +53,8 @@ And now, we'll start migrating a service at a time into the compose file.
 
 To remember, this was the command we were using to define our app container.
 
-```bash
-docker run -dp 3000:3000 \
+```console
+$ docker run -dp 3000:3000 \
   -w /app -v "$(pwd):/app" \
   --network todo-app \
   -e MYSQL_HOST=mysql \
@@ -161,8 +161,8 @@ docker run -dp 3000:3000 `
 
 Now, it's time to define the MySQL service. The command that we used for that container was the following:
 
-```bash
-docker run -d \
+```console
+$ docker run -d \
   --network todo-app --network-alias mysql \
   -v todo-mysql-data:/var/lib/mysql \
   -e MYSQL_ROOT_PASSWORD=secret \
@@ -276,8 +276,8 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 2. Start up the application stack using the `docker-compose up` command. We'll add the `-d` flag to run everything in the
    background.
 
-    ```bash
-    docker-compose up -d
+    ```console
+    $ docker-compose up -d
     ```
 
     When we run this, we should see output like this:

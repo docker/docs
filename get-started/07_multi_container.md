@@ -38,15 +38,15 @@ For now, we will create the network first and attach the MySQL container at star
 
 1. Create the network.
 
-    ```bash
-    docker network create todo-app
+    ```console
+    $ docker network create todo-app
     ```
 
 2. Start a MySQL container and attach it to the network. We're also going to define a few environment variables that the
   database will use to initialize the database (see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/)).
 
-    ```bash
-    docker run -d \
+    ```console
+    $ docker run -d \
         --network todo-app --network-alias mysql \
         -v todo-mysql-data:/var/lib/mysql \
         -e MYSQL_ROOT_PASSWORD=secret \
@@ -73,8 +73,8 @@ For now, we will create the network first and attach the MySQL container at star
 
 3. To confirm we have the database up and running, connect to the database and verify it connects.
 
-    ```bash
-    docker exec -it <mysql-container-id> mysql -u root -p
+    ```console
+    $ docker exec -it <mysql-container-id> mysql -u root -p
     ```
 
     When the password prompt comes up, type in **secret**. In the MySQL shell, list the databases and verify
@@ -112,15 +112,15 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
 
 1. Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.
 
-    ```bash
-    docker run -it --network todo-app nicolaka/netshoot
+    ```console
+    $ docker run -it --network todo-app nicolaka/netshoot
     ```
 
 2. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
    the IP address for the hostname `mysql`.
 
-    ```bash
-    dig mysql
+    ```console
+    $ dig mysql
     ```
 
     And you'll get an output like this...
@@ -180,8 +180,8 @@ With all of that explained, let's start our dev-ready container!
 
 1. We'll specify each of the environment variables above, as well as connect the container to our app network.
 
-    ```bash
-    docker run -dp 3000:3000 \
+    ```console
+    $ docker run -dp 3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \
       -e MYSQL_HOST=mysql \
@@ -225,8 +225,8 @@ With all of that explained, let's start our dev-ready container!
 4. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
    is **secret**.
 
-    ```bash
-    docker exec -it <mysql-container-id> mysql -p todos
+    ```console
+    $ docker exec -it <mysql-container-id> mysql -p todos
     ```
 
     And in the mysql shell, run the following:
