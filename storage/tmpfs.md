@@ -72,7 +72,7 @@ second uses the `--tmpfs` flag.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name tmptest \
@@ -83,7 +83,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="tmpfs-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name tmptest \
@@ -105,7 +105,7 @@ tmptest` and looking for the `Mounts` section:
 
 Remove the container:
 
-```bash
+```console
 $ docker container stop tmptest
 
 $ docker container rm tmptest
@@ -125,7 +125,7 @@ as the `--tmpfs` flag does not support them.
 The following example sets the `tmpfs-mode` to `1770`, so that it is not
 world-readable within the container.
 
-```bash
+```console
 docker run -d \
   -it \
   --name tmptest \
