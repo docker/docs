@@ -21,20 +21,20 @@ This page contains information about the `docker scan` CLI command. For informat
 
 The `docker scan` command allows you to scan existing Docker images using the image name or ID.  For example, run the following command to scan the hello-world image:
 
-```shell
-$  docker scan hello-world
+```console
+$ docker scan hello-world
 
-  Testing hello-world...
+Testing hello-world...
 
-  Organization:      docker-desktop-test
-  Package manager:   linux
-  Project name:      docker-image|hello-world
-  Docker image:      hello-world
-  Licenses:          enabled
+Organization:      docker-desktop-test
+Package manager:   linux
+Project name:      docker-image|hello-world
+Docker image:      hello-world
+Licenses:          enabled
 
-  ✓ Tested 0 dependencies for known issues, no vulnerable paths found.
+✓ Tested 0 dependencies for known issues, no vulnerable paths found.
 
-  Note that we do not currently have vulnerability data for your image.
+Note that we do not currently have vulnerability data for your image.
 ```
 
 ### Get a detailed scan report
@@ -43,7 +43,7 @@ You can get a detailed scan report about a Docker image by providing the Dockerf
 
 For example, if you apply the option to the `docker-scan` test image, it displays the following result:
 
-```shell
+```console
 $ docker scan --file Dockerfile docker-scan:e2e
 Testing docker-scan:e2e
 ...
@@ -74,7 +74,7 @@ According to our scan, you are currently using the most secure version of the se
 
 When using docker scan with the `--file` flag, you can also add the `--exclude-base` tag. This excludes the base image (specified in the Dockerfile using the `FROM` directive) vulnerabilities from your report. For example:
 
-```shell
+```console
 $ docker scan --file Dockerfile --exclude-base docker-scan:e2e
 Testing docker-scan:e2e
 ...
@@ -105,7 +105,7 @@ Tested 200 dependencies for known issues, found 16 issues.
 
 You can also display the scan result as a JSON output by adding the `--json` flag to the command. For example:
 
-```shell
+```console
 $ docker scan --json hello-world
 {
   "vulnerabilities": [],
@@ -158,7 +158,7 @@ $ docker scan --json hello-world
 
 In addition to the `--json` flag, you can also use the `--group-issues` flag to display a vulnerability only once in the scan report:
 
-```shell
+```console
 $ docker scan --json --group-issues docker-scan:e2e
 {
     {
@@ -211,7 +211,7 @@ You can find all the sources of the vulnerability in the `from` section.
 
 To view the dependency tree of your image, use the --dependency-tree flag. This displays all the dependencies before the scan result. For example:
 
-```shell
+```console
 $ docker scan --dependency-tree debian:buster
 
 $ docker-image|99138c65ebc7 @ latest
@@ -322,7 +322,7 @@ Tested 200 dependencies for known issues, found 37 issues.
 
 If you have an existing Snyk account, you can directly use your Snyk [API token](https://app.snyk.io/account){: target="_blank" rel="noopener" class="_"}:
 
-```shell
+```console
 $ docker scan --login --token SNYK_AUTH_TOKEN
 
 Your account has been authenticated. Snyk is now ready to be used.
@@ -347,7 +347,7 @@ To run vulnerability scanning on your Docker images, you must meet the following
 
 Check your installation by running `docker scan --version`, it should print the current version of docker scan and the Snyk engine version. For example:
 
-```shell
+```console
 $ docker scan --version
 Version:    v0.5.0
 Git commit: 5a09266
