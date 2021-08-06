@@ -51,14 +51,14 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 4.  In a terminal, navigate to where you created `pod.yaml` and create your pod:
 
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 
 5.  Check that your pod is up and running:
 
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 
     You should see something like:
@@ -70,8 +70,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 6.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -86,8 +86,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 7.  Finally, tear down your test pod:
 
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 
 {% endcapture %}
@@ -121,14 +121,14 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 4.  In PowerShell, navigate to where you created `pod.yaml` and create your pod:
 
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 
 5.  Check that your pod is up and running:
 
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 
     You should see something like:
@@ -140,8 +140,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 6.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -156,8 +156,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 7.  Finally, tear down your test pod:
 
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 
 {% endcapture %}
@@ -182,8 +182,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 1.  Open a terminal, and initialize Docker Swarm mode:
 
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 
     If all goes well, you should see a message similar to the following:
@@ -200,14 +200,14 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
 3.  Check that your service created one running container:
 
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 
     You should see something like:
@@ -219,8 +219,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 4.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -235,8 +235,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 5.  Finally, tear down your test service:
 
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 
 {% endcapture %}
@@ -250,8 +250,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 1.  Open a powershell, and initialize Docker Swarm mode:
 
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 
     If all goes well, you should see a message similar to the following:
@@ -268,14 +268,14 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
 3.  Check that your service created one running container:
 
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 
     You should see something like:
@@ -287,8 +287,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 4.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -303,8 +303,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 5.  Finally, tear down your test service:
 
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 
 {% endcapture %}

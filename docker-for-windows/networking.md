@@ -105,13 +105,13 @@ overlay network, not a bridge network, as these are not routed.
 The command to run the `nginx` webserver shown in [Getting Started](index.md#explore-the-application)
 is an example of this.
 
-```bash
+```console
 $ docker run -d -p 80:80 --name webserver nginx
 ```
 
 To clarify the syntax, the following two commands both publish container's port `80` to host's port `8000`:
 
-```bash
+```console
 $ docker run --publish 8000:80 --name webserver nginx
 
 $ docker run -p 8000:80 --name webserver nginx
@@ -121,7 +121,7 @@ To publish all ports, use the `-P` flag. For example, the following command
 starts a container (in detached mode) and the `-P` flag publishes all exposed ports of the
 container to random ports on the host.
 
-```bash
+```console
 $ docker run -d -P --name webserver nginx
 ```
 

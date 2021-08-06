@@ -51,7 +51,7 @@ external to the swarm.
 The output for `docker swarm init` provides the connection command to use when
 you join new worker nodes to the swarm:
 
-```bash
+```console
 $ docker swarm init
 Swarm initialized: current node (dxn1zf6l61qsb1josjja83ngz) is now a manager.
 
@@ -83,20 +83,20 @@ The subnet range comes from the `--default-addr-pool`, (such as `10.10.0.0/16`).
 
 The format of the command is:
 
-```bash
+```console
 $ docker swarm init --default-addr-pool <IP range in CIDR> [--default-addr-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
 ```
 
 To create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
 
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16
 ```
 
 To create a default IP address pool with a `/16` (class B) for the `10.20.0.0` and `10.30.0.0` networks, and to 
 create a subnet mask of `/26` for each network looks like this:
 
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool 10.30.0.0/16 --default-addr-pool-mask-length 26
 ```
 
@@ -120,7 +120,7 @@ single IP address. If so, Docker uses the IP address with the listening port
 correct `--advertise-addr` to enable inter-manager communication and overlay
 networking:
 
-```bash
+```console
 $ docker swarm init --advertise-addr <MANAGER-IP>
 ```
 
@@ -146,7 +146,7 @@ swarm.
 
 To retrieve the join command including the join token for worker nodes, run:
 
-```bash
+```console
 $ docker swarm join-token worker
 
 To add a worker to this swarm, run the following command:
@@ -160,7 +160,7 @@ This node joined a swarm as a worker.
 
 To view the join command and token for manager nodes, run:
 
-```bash
+```console
 $ docker swarm join-token manager
 
 To add a worker to this swarm, run the following command:
@@ -172,7 +172,7 @@ To add a worker to this swarm, run the following command:
 
 Pass the `--quiet` flag to print only the token:
 
-```bash
+```console
 $ docker swarm join-token --quiet worker
 
 SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c
@@ -200,7 +200,7 @@ Run `swarm join-token --rotate` to invalidate the old token and generate a new
 token. Specify whether you want to rotate the token for `worker` or `manager`
 nodes:
 
-```bash
+```console
 $ docker swarm join-token  --rotate worker
 
 To add a worker to this swarm, run the following command:

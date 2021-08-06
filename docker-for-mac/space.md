@@ -45,19 +45,19 @@ docker system df -v
 
 Alternatively, to list images, run:
 
-```bash
+```console
 $ docker image ls
 ```
 
 and then, to list containers, run:
 
-```bash
+```console
 $ docker container ls -a
 ```
 
 If there are lots of redundant objects, run the command:
 
-```bash
+```console
 $ docker system prune
 ```
 
@@ -77,7 +77,7 @@ $ docker run --privileged --pid=host docker/desktop-reclaim-space
 Note that many tools report the maximum file size, not the actual file size.
 To query the actual size of the file on the host from a terminal, run:
 
-```bash
+```console
 $ cd ~/Library/Containers/com.docker.docker/Data
 $ cd vms/0/data
 $ ls -klsh Docker.raw

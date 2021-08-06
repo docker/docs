@@ -226,7 +226,7 @@ Run `docker version` to verify whether you have enabled experimental features. E
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
 running in experimental mode, as shown here:
 
-```shell
+```console
 > docker version
 
 Client: Docker Engine - Community

@@ -21,7 +21,7 @@ The Kubernetes client command `kubectl` is included and configured to connect
 to the local Kubernetes server. If you have already installed `kubectl` and
 pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
 
-```bash
+```console
 $ kubectl config get-contexts
 $ kubectl config use-context docker-desktop
 ```
@@ -62,8 +62,8 @@ the `PATH`.
 
 You can test the command by listing the available nodes:
 
-```bash
-kubectl get nodes
+```console
+$ kubectl get nodes
 
 NAME                 STATUS    ROLES     AGE       VERSION
 docker-desktop       Ready     master    3h        v1.19.7

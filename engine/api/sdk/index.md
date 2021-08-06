@@ -22,8 +22,8 @@ installed and coexist together.
 
 ### Go SDK
 
-```bash
-go get github.com/docker/docker/client
+```console
+$ go get github.com/docker/docker/client
 ```
 
 The client requires a recent version of Go. Run `go version` and ensure that you 
@@ -149,7 +149,7 @@ print client.containers.run("alpine", ["echo", "hello", "world"])
   </div>
   <div id="curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create

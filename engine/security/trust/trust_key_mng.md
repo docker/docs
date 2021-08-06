@@ -53,7 +53,7 @@ of the repository key is recoverable; loss of the root key is not.
 The Docker client stores the keys in the `~/.docker/trust/private` directory.
 Before backing them up, you should `tar` them into an archive:
 
-```bash
+```console
 $ umask 077; tar -zcvf private_keys_backup.tar.gz ~/.docker/trust/private; umask 022
 ```
 

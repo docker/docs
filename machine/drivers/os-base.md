@@ -16,7 +16,7 @@ forth.  For example, to create an Azure machine:
 Grab your subscription ID from the portal, then run `docker-machine create` with
 these details:
 
-```bash
+```console
 $ docker-machine create -d azure --azure-subscription-id="SUB_ID" --azure-subscription-cert="mycert.pem" A-VERY-UNIQUE-NAME
 ```
 

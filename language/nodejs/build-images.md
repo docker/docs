@@ -28,7 +28,7 @@ To complete this tutorial, you need the following:
 
 Let’s create a simple Node.js application that we can use as our example. Create a directory in your local machine named `node-docker` and follow the steps below to create a simple REST API.
 
-```shell
+```console
 $ cd [path to your node-docker directory]
 $ npm init -y
 $ npm install ronin-server ronin-mocks
@@ -55,13 +55,13 @@ The mocking server is called `Ronin.js` and will listen on port 8000 by default.
 
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to your working directory you created.
 
-```shell
+```console
 $ node server.js
 ```
 
 To test that the application is working properly, we’ll first POST some JSON to the API and then make a GET request to see that the data has been saved. Open a new terminal and run the following curl commands:
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -199,11 +199,9 @@ The build command optionally takes a `--tag` flag. The tag is used to set the na
 
 Let’s build our first Docker image.
 
-```shell
+```console
 $ docker build --tag node-docker .
-```
 
-```shell
 [+] Building 93.8s (11/11) FINISHED
  => [internal] load build definition from dockerfile                                          0.1s
  => => transferring dockerfile: 617B                                                          0.0s
@@ -221,7 +219,7 @@ To see a list of images we have on our local machine, we have two options. One i
 
 To list images, simply run the `images` command.
 
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
@@ -237,7 +235,7 @@ An image is made up of a manifest and a list of layers. In simple terms, a “ta
 
 To create a new tag for the image we built above, run the following command.
 
-```shell
+```console
 $ docker tag node-docker:latest node-docker:v1.0.0
 ```
 
@@ -256,14 +254,14 @@ You can see that we have two images that start with `node-docker`. We know they 
 
 Let’s remove the tag that we just created. To do this, we’ll use the rmi command. The rmi command stands for “remove image”.
 
-```shell
+```console
 $ docker rmi node-docker:v1.0.0
 Untagged: node-docker:v1.0.0
 ```
 
 Notice that the response from Docker tells us that the image has not been removed but only “untagged”. Verify this by running the images command.
 
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB

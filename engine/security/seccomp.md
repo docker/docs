@@ -13,7 +13,7 @@ This feature is available only if Docker has been built with `seccomp` and the
 kernel is configured with `CONFIG_SECCOMP` enabled. To check if your kernel
 supports `seccomp`:
 
-```bash
+```console
 $ grep CONFIG_SECCOMP= /boot/config-$(uname -r)
 CONFIG_SECCOMP=y
 ```
@@ -47,7 +47,7 @@ When you run a container, it uses the default profile unless you override it
 with the `--security-opt` option. For example, the following explicitly
 specifies a policy:
 
-```bash
+```console
 $ docker run --rm \
              -it \
              --security-opt seccomp=/path/to/seccomp/profile.json \

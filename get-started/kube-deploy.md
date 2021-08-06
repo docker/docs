@@ -75,8 +75,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
 1.  In a terminal, navigate to where you created `bb.yaml` and deploy your application to Kubernetes:
 
-    ```shell
-    kubectl apply -f bb.yaml
+    ```console
+    $ kubectl apply -f bb.yaml
     ```
 
     you should see output that looks like the following, indicating your Kubernetes objects were created successfully:
@@ -88,8 +88,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
 2.  Make sure everything worked by listing your deployments:
 
-    ```shell
-    kubectl get deployments
+    ```console
+    $ kubectl get deployments
     ```
 
     if all is well, your deployment should be listed as follows:
@@ -101,8 +101,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
     This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services:
 
-    ```shell
-    kubectl get services
+    ```console
+    $ kubectl get services
 
     NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
     bb-entrypoint   NodePort    10.106.145.116   <none>        8080:30001/TCP   53s
@@ -115,8 +115,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
 4.  Once satisfied, tear down your application:
 
-    ```shell
-    kubectl delete -f bb.yaml
+    ```console
+    $ kubectl delete -f bb.yaml
     ```
 
 ## Conclusion

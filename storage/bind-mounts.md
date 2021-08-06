@@ -103,7 +103,7 @@ first one.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -114,7 +114,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -147,7 +147,7 @@ set to `rprivate`.
 
 Stop the container:
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -174,7 +174,7 @@ The `--mount` and `-v` examples have the same end result.
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name broken-container \
@@ -188,7 +188,7 @@ starting container process caused "exec: \"nginx\": executable file not found in
 </div><!--mount-->
 <div id="v-empty-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name broken-container \
@@ -204,7 +204,7 @@ starting container process caused "exec: \"nginx\": executable file not found in
 
 The container is created but does not start. Remove it:
 
-```bash
+```console
 $ docker container rm broken-container
 ```
 
@@ -228,7 +228,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -239,7 +239,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-readonly" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -268,7 +268,7 @@ correctly. Look for the `Mounts` section:
 
 Stop the container:
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -316,7 +316,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-propagation" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -328,7 +328,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-propagation" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -367,7 +367,7 @@ the bind mount's contents:
 
 It is not possible to modify the selinux label using the `--mount` flag.
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \

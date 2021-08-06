@@ -38,8 +38,8 @@ variables, specify these to connect to Docker instances through Unix sockets.
 
 For example:
 
-```bash
-export DOCKER_HOST=unix:///var/run/docker.sock
+```console
+$ export DOCKER_HOST=unix:///var/run/docker.sock
 ```
 
 Docker Desktop Windows users can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:

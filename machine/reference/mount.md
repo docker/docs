@@ -12,7 +12,7 @@ The notation is `machinename:/path/to/dir` for the argument; you can also supply
 
 Consider the following example:
 
-```bash
+```console
 $ mkdir foo
 $ docker-machine ssh dev mkdir foo
 $ docker-machine mount dev:/home/docker/foo foo
@@ -25,7 +25,7 @@ bar
 Now you can use the directory on the machine, for mounting into containers.
 Any changes done in the local directory, is reflected in the machine too.
 
-```bash
+```console
 $ eval $(docker-machine env dev)
 $ docker run -v /home/docker/foo:/tmp/foo busybox ls /tmp/foo
 bar
@@ -42,7 +42,7 @@ so this program ("sftp") needs to be present on the machine - but it usually is.
 To unmount the directory again, you can use the same options but the  `-u` flag.
 You can also call `fuserunmount` (or `fusermount -u`) commands directly.
 
-```bash
+```console
 $ docker-machine mount -u dev:/home/docker/foo foo
 $ rmdir foo
 ```

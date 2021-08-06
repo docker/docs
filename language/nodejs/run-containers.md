@@ -20,7 +20,7 @@ A container is a normal operating system process except that this process is iso
 
 To run an image inside of a container, we use the `docker run` command. The `docker run` command requires one parameter and that is the image name. Let’s start our image and make sure it is running correctly. Execute the following command in your terminal.
 
-```shell
+```console
 $ docker run node-docker
 ```
 
@@ -28,7 +28,7 @@ When you run this command, you’ll notice that you were not returned to the com
 
 Let’s open a new terminal then make a GET request to the server using the curl command.
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -46,13 +46,13 @@ To publish a port for our container, we’ll use the `--publish` flag (`-p` for 
 
 Start the container and expose port 8000 to port 8000 on the host.
 
-```shell
+```console
 $ docker run --publish 8000:8000 node-docker
 ```
 
 Now let’s rerun the curl command from above. Remember to open a new terminal.
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -70,7 +70,7 @@ Press ctrl-c to stop the container.
 
 This is great so far, but our sample application is a web server and we should not have to have our terminal connected to the container. Docker can run your container in detached mode or in the background. To do this, we can use the `--detach` or `-d` for short. Docker will start your container the same as before but this time will “detach” from the container and return you to the terminal prompt.
 
-```shell
+```console
 $ docker run -d -p 8000:8000 node-docker
 ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 ```
@@ -79,7 +79,7 @@ Docker started our container in the background and printed the Container ID on t
 
 Again, let’s make sure that our container is running properly. Run the same curl command from above.
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -103,14 +103,14 @@ The `ps` command tells a bunch of stuff about our running containers. We can see
 
 You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute but first we need to stop the container. To stop the container, run the `docker stop` command which does just that, stops the container. You will need to pass the name of the container or you can use the container id.
 
-```shell
+```console
 $ docker stop wonderful_kalam
 wonderful_kalam
 ```
 
 Now rerun the `docker ps` command to see a list of running containers.
 
-```shell
+```console
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
@@ -119,7 +119,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 Docker containers can be started, stopped and restarted. When we stop a container, it is not removed but the status is changed to stopped and the process inside of the container is stopped. When we ran the `docker ps` command, the default output is to only show running containers. If we pass the `--all` or `-a` for short, we will see all containers on our system whether they are stopped or started.
 
-```shell
+```console
 $ docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   16 minutes ago      Exited (0) 5 minutes ago                        wonderful_kalam
@@ -131,13 +131,13 @@ If you’ve been following along, you should see several containers listed. Thes
 
 Let’s restart the container that we just stopped. Locate the name of the container we just stopped and replace the name of the container below in the restart command.
 
-```shell
+```console
 $ docker restart wonderful_kalam
 ```
 
 Now, list all the containers again using the ps command.
 
-```shell
+```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
@@ -151,14 +151,14 @@ Let’s stop and remove all of our containers and take a look at fixing the rand
 
 Stop the container we just started. Find the name of your running container and replace the name in the command below with the name of the container on your system.
 
-```shell
+```console
 $ docker stop wonderful_kalam
 wonderful_kalam
 ```
 
 Now that all of our containers are stopped, let’s remove them. When a container is removed, it is no longer running nor is it in the stopped status. However, the process inside the container has been stopped and the metadata for the container has been removed.
 
-```shell
+```console
 $ docker ps --all
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
 ce02b3179f0f        node-docker         "docker-entrypoint.s…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->8000/tcp   wonderful_kalam
@@ -170,7 +170,7 @@ To remove a container, simple run the `docker rm` command passing the container 
 
 Again, make sure you replace the containers names in the below command with the container names from your system.
 
-```shell
+```console
 $ docker rm wonderful_kalam agitated_moser goofy_khayyam
 wonderful_kalam
 agitated_moser
@@ -183,7 +183,7 @@ Now let’s address the pesky random name issue. Standard practice is to name yo
 
 To name a container, we just need to pass the `--name` flag to the run command.
 
-```shell
+```console
 $ docker run -d -p 8000:8000 --name rest-server node-docker
 1aa5d46418a68705c81782a58456a4ccdb56a309cb5e6bd399478d01eaa5cdda
 $ docker ps

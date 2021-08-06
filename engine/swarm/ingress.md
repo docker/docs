@@ -31,7 +31,7 @@ specify the port to bind on the routing mesh. If you leave off the `published`
 port, a random high-numbered port is bound for each service task. You
 need to inspect the task to determine the port.
 
-```bash
+```console
 $ docker service create \
   --name <SERVICE-NAME> \
   --publish published=<PUBLISHED-PORT>,target=<CONTAINER-PORT> \
@@ -51,7 +51,7 @@ is required.
 For example, the following command publishes port 80 in the nginx container to
 port 8080 for any node in the swarm:
 
-```bash
+```console
 $ docker service create \
   --name my-web \
   --publish published=8080,target=80 \
@@ -73,7 +73,7 @@ within the host.
 
 You can publish a port for an existing service using the following command:
 
-```bash
+```console
 $ docker service update \
   --publish-add published=<PUBLISHED-PORT>,target=<CONTAINER-PORT> \
   <SERVICE>
@@ -83,7 +83,7 @@ You can use `docker service inspect` to view the service's published port. For
 instance:
 
 {% raw %}
-```bash
+```console
 $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 
 [{"Protocol":"tcp","TargetPort":80,"PublishedPort":8080}]
@@ -105,7 +105,7 @@ set the `protocol` key to either `tcp` or `udp`.
 
 **Long syntax:**
 
-```bash
+```console
 $ docker service create --name dns-cache \
   --publish published=53,target=53 \
   dns-cache
@@ -113,7 +113,7 @@ $ docker service create --name dns-cache \
 
 **Short syntax:**
 
-```bash
+```console
 $ docker service create --name dns-cache \
   -p 53:53 \
   dns-cache
@@ -123,7 +123,7 @@ $ docker service create --name dns-cache \
 
 **Long syntax:**
 
-```bash
+```console
 $ docker service create --name dns-cache \
   --publish published=53,target=53 \
   --publish published=53,target=53,protocol=udp \
@@ -132,7 +132,7 @@ $ docker service create --name dns-cache \
 
 **Short syntax:**
 
-```bash
+```console
 $ docker service create --name dns-cache \
   -p 53:53 \
   -p 53:53/udp \
@@ -143,7 +143,7 @@ $ docker service create --name dns-cache \
 
 **Long syntax:**
 
-```bash
+```console
 $ docker service create --name dns-cache \
   --publish published=53,target=53,protocol=udp \
   dns-cache
@@ -151,7 +151,7 @@ $ docker service create --name dns-cache \
 
 **Short syntax:**
 
-```bash
+```console
 $ docker service create --name dns-cache \
   -p 53:53/udp \
   dns-cache
@@ -180,7 +180,7 @@ set `mode` to `host`. If you omit the `mode` key or set it to `ingress`, the
 routing mesh is used. The following command creates a global service using
 `host` mode and bypassing the routing mesh.
 
-```bash
+```console
 $ docker service create --name dns-cache \
   --publish published=53,target=53,protocol=udp,mode=host \
   --mode global \

@@ -64,8 +64,8 @@ Restart Docker for the changes to take effect.
 You can set the logging driver for a specific container by using the
 `--log-driver` flag to `docker container create` or `docker run`:
 
-```bash
-docker run \
+```console
+$ docker run \
       --log-driver syslog --log-opt syslog-address=udp://1.2.3.4:1111 \
       alpine echo hello world
 ```

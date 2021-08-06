@@ -40,17 +40,18 @@ system.
 
 > Uninstall Docker Desktop from the command line
 >
->To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
->--uninstall`. If your instance is installed in the default location, this
->command provides a clean uninstall:
+> To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
+> --uninstall`. If your instance is installed in the default location, this
+> command provides a clean uninstall:
 >
->```shell
->$ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
->Docker is running, exiting...
->Docker uninstalled successfully. You can move the Docker application to the trash.
->```
->You might want to use the command-line uninstall if, for example, you find that
->the app is non-functional, and you cannot uninstall it from the menu.
+> ```console
+> $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
+> Docker is running, exiting...
+> Docker uninstalled successfully. You can move the Docker application to the trash.
+> ```
+>
+> You might want to use the command-line uninstall if, for example, you find that
+> the app is non-functional, and you cannot uninstall it from the menu.
 
 ## Diagnose and feedback
 
@@ -61,7 +62,7 @@ documentation, on [Docker Desktop issues on
 GitHub](https://github.com/docker/for-mac/issues), or the [Docker Desktop forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot
 the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
 
->**Note**
+> **Note**
 >
 > Docker Desktop offers support for users subscribed to a Pro or a Team plan. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
 
@@ -90,7 +91,7 @@ First, locate the `com.docker.diagnose` tool.  If you have installed Docker Desk
 
 To create *and upload* diagnostics, run:
 
-```sh
+```console
 $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather -upload
 ```
 
@@ -110,7 +111,7 @@ composed of your user ID (BE9AFAAF-F68B-41D0-9D12-84760E6B8740) and a timestamp
 
 To view the contents of the diagnostic file, run:
 
-```sh
+```console
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
 
@@ -125,7 +126,7 @@ browse the logs yourself.
 
 To watch the live flow of Docker Desktop logs in the command line, run the following script from your favorite shell.
 
-```bash
+```console
 $ pred='process matches ".*(ocker|vpnkit).*"
   || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
 $ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
@@ -133,7 +134,7 @@ $ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$
 
 Alternatively, to collect the last day of logs (`1d`) in a file, run:
 
-```
+```console
 $ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 
@@ -203,8 +204,8 @@ Tables (EPT) and Unrestricted Mode are supported.*
 
 To check if your Mac supports the Hypervisor framework, run the following command in a terminal window.
 
-```bash
-sysctl kern.hv_support
+```console
+$ sysctl kern.hv_support
 ```
 
 If your Mac supports the Hypervisor Framework, the command prints
@@ -305,8 +306,8 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   `DOCKER_CERT_PATH` environment variables, specify these to connect to Docker
   instances through Unix sockets. For example:
 
-  ```bash
-  export DOCKER_HOST=unix:///var/run/docker.sock
+  ```console
+  $ export DOCKER_HOST=unix:///var/run/docker.sock
   ```
 
 * There are a number of issues with the performance of directories bind-mounted

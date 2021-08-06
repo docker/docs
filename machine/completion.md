@@ -20,14 +20,14 @@ Place the completion script in `/etc/bash_completion.d/` as follows:
 
 *   On a Mac:
 
-    ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o `brew --prefix`/etc/bash_completion.d/docker-machine
+    ```console
+    $ sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o `brew --prefix`/etc/bash_completion.d/docker-machine
     ```
 
 *   On a standard Linux installation:
 
-    ```shell
-    sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o /etc/bash_completion.d/docker-machine
+    ```console
+    $ sudo curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/bash/docker-machine.bash -o /etc/bash_completion.d/docker-machine
     ```
 
 Completion is available upon next login.
@@ -38,9 +38,9 @@ Completion is available upon next login.
 Place the completion script in a `completion` directory within the ZSH
 configuration directory, such as `~/.zsh/completion/`.
 
-```shell
-mkdir -p ~/.zsh/completion
-curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
+```console
+$ mkdir -p ~/.zsh/completion
+$ curl -L https://raw.githubusercontent.com/docker/machine/v{{site.machine_version}}/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
 ```
 
 Include the directory in your `$fpath`, by adding a line like the following to the

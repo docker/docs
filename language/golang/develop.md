@@ -32,14 +32,14 @@ The point of a database is to have a persistent store of data. [Volumes](../../s
 
 To create a managed volume, run :
 
-```shell
+```console
 $ docker volume create roach
 roach
 ```
 
 We can view the list of all managed volumes in our Docker instance with the following command:
 
-```shell
+```console
 $ docker volume list
 DRIVER    VOLUME NAME
 local     roach
@@ -51,14 +51,14 @@ The example application and the database engine are going to talk to one another
 
 The following command creates a new bridge network named `mynet`:
 
-```shell
+```console
 $ docker network create -d bridge mynet
 51344edd6430b5acd121822cacc99f8bc39be63dd125a3b3cd517b6485ab7709
 ```
 
 As it was the case with the managed volumes, there is a command to list all networks set up in your Docker instance:
 
-```shell
+```console
 $ docker network list
 NETWORK ID     NAME          DRIVER    SCOPE
 0ac2b1819fa4   bridge        bridge    local
@@ -79,7 +79,7 @@ When choosing a name for a network or a managed volume, it's best to choose a na
 
 Now that the housekeeping chores are done, we can run CockroachDB in a container and attach it to the volume and network we had just created. When you run the folllowing command, Docker will pull the image from Docker Hub and run it for you locally:
 
-```shell
+```console
 $ docker run -d \
   --name roach \
   --hostname db \
@@ -105,7 +105,7 @@ Now that the database engine is live, there is some configuration to do before o
 
 We can do that with the help of CockroachDB built-in SQL shell. To start the SQL shell in the _same_ container where the database engine is running, type:
 
-```shell
+```console
 $ docker exec -it roach ./cockroach sql --insecure
 ```
 
@@ -175,7 +175,7 @@ The example application for this module is an extended version of `docker-gs-pin
 
 To checkout the example application, run:
 
-```shell
+```console
 $ git clone https://github.com/olliefr/docker-gs-ping-roach.git
 # ... output omitted ...
 ```
@@ -347,7 +347,7 @@ Regardless of whether we had updated the old example application, or checked out
 
 We can build the image with the familiar `build` command:
 
-```shell
+```console
 $ docker build --tag docker-gs-ping-roach .
 ```
 
@@ -361,7 +361,7 @@ Now, let’s run our container. This time we’ll need to set some environment v
 > 
 > **Don't run in insecure mode in production, though!**
 
-```shell
+```console
 $ docker run -it --rm -d \
   --network mynet \
   --name rest-server \
@@ -378,14 +378,14 @@ There are a few points to note about this command.
 
 * We map container port `8080` to host port `80` this time. Thus, for `GET` requests we can get away with _literally_ `curl localhost`:
 
-  ```shell
+  ```console
   $ curl localhost
   Hello, Docker! (0)
   ```
 
   Or, if you prefer, a proper URL would work just as well:
 
-  ```shell
+  ```console
   $ curl http://localhost/
   Hello, Docker! (0)
   ```
@@ -396,7 +396,7 @@ There are a few points to note about this command.
 * The actual password does not matter, but it must be set to something to avoid confusing the example application.
 * The container we've just run is named `rest-server`. These names are useful for managing the container lifecycle:
 
-  ```shell
+  ```console
   # Don't do this just yet, it's only an example:
   $ docker container rm --force rest-server
   ```
@@ -405,7 +405,7 @@ There are a few points to note about this command.
 
 In the previous section, we have already tested querying our application with `GET` and it returned zero for the stored message counter. Now, let's post some messages to it:
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost/send \
   --header 'content-type: application/json' \
@@ -420,7 +420,7 @@ The application responds with the contents of the message, which means it had be
 
 Let's send another message:
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost/send \
   --header 'content-type: application/json' \
@@ -429,13 +429,13 @@ $ curl --request POST \
 
 And again, we get the value of the message back:
 
-```shell
+```json
 {"value":"Hello, Oliver!"}
 ```
 
 Let's see what the message counter says:
 
-```shell
+```console
 $ curl localhost
 Hello, Docker! (2)
 ```
@@ -444,7 +444,7 @@ Hey, that's exactly right! We sent two messages and the database kept them. Or h
 
 First, let's stop the containers:
 
-```shell
+```console
 $ docker container stop rest-server roach
 rest-server
 roach
@@ -452,7 +452,7 @@ roach
 
 Then, let's remove them:
 
-```shell
+```console
 $ docker container rm rest-server roach
 rest-server
 roach
@@ -460,15 +460,15 @@ roach
 
 Verify that they are gone:
 
-```shell
+```console
 $ docker container list --all
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
 And start them again, database first:
 
-```shell
-docker run -d \
+```console
+$ docker run -d \
   --name roach \
   --hostname db \
   --network mynet \
@@ -481,8 +481,8 @@ docker run -d \
 
 And the service next:
 
-```shell
-docker run -it --rm -d \
+```console
+$ docker run -it --rm -d \
   --network mynet \
   --name rest-server \
   -p 80:8080 \
@@ -496,7 +496,7 @@ docker run -it --rm -d \
 
 Lastly, let's query our service:
 
-```shell
+```console
 $ curl localhost
 Hello, Docker! (2)
 ```
@@ -509,7 +509,7 @@ Such is the power of managed volumes. Use it wisely.
 
 Remember, that we are running CockroachDB in "insecure" mode. Now that we had built and tested our application, it's time to wind everything down before moving on. You can list the containers that you are running with the `list` command:
 
-```shell
+```console
 $ docker container list
 ```
 
@@ -610,7 +610,7 @@ Other ways of dealing with undefined or empty values exist, as documented in the
 
 Before you apply changes made to a Compose configuration file, there is an opportunity to validate the content of the configuration file with the following command:
 
-```shell
+```console
 $ docker-compose config
 ```
 
@@ -620,7 +620,7 @@ When this command is run, Docker Compose would read the file `docker-compose.yml
 
 Let’s start our application and confirm that it is running properly.
 
-```shell
+```console
 $ docker-compose up --build
 ```
 
@@ -669,7 +669,7 @@ This is not a big deal. All we have to do is to connect to CockroachDB instance 
 
 So we login into the database engine from another terminal:
 
-```shell
+```console
 $ docker exec -it roach ./cockroach sql --insecure
 ```
 
@@ -681,7 +681,7 @@ It would have been possible to connect the volume that we had previously used, b
 
 Now let’s test our API endpoint. In the new terminal, run the following command:
 
-```shell
+```console
 $ curl http://localhost/
 ```
 
@@ -701,7 +701,7 @@ You can run containers started by the `docker-compose` command in detached mode,
 
 To start the stack, defined by the Compose file in detached mode, run:
 
-```shell
+```console
 $ docker-compose up --build -d
 ```
 

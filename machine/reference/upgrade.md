@@ -14,7 +14,7 @@ example, if the machine uses boot2docker for its OS, this command downloads
 the latest boot2docker ISO and replace the machine's existing ISO with the
 latest.
 
-```bash
+```console
 $ docker-machine upgrade default
 
 Stopping machine to do the upgrade...

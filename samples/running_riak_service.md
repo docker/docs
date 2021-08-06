@@ -13,7 +13,7 @@ Riak pre-installed.
 
 Create an empty file called `Dockerfile`:
 
-```bash
+```console
 $ touch Dockerfile
 ```
 
@@ -84,8 +84,8 @@ CMD ["/usr/bin/supervisord"]
 Create an empty file called `supervisord.conf`. Make
 sure it's at the same directory level as your `Dockerfile`:
 
-```bash
-touch supervisord.conf
+```console
+$ touch supervisord.conf
 ```
 
 Populate it with the following program definitions:
@@ -109,7 +109,7 @@ stderr_logfile=/var/log/supervisor/%(program_name)s.log
 
 Now you can build a Docker image for Riak:
 
-```bash
+```console
 $ docker build -t "<yourname>/riak" .
 ```
 

@@ -7,7 +7,7 @@ title: docker-machine rm
 Remove a machine. This removes the local reference and deletes it
 on the cloud provider or virtualization management platform.
 
-```bash
+```console
 $ docker-machine rm --help
 
 Usage: docker-machine rm [OPTIONS] [arg...]
@@ -25,7 +25,7 @@ Options:
 
 ## Examples
 
-```bash
+```console
 $ docker-machine ls
 
 NAME   ACTIVE   URL          STATE     URL                         SWARM   DOCKER   ERRORS

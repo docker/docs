@@ -60,7 +60,7 @@ each other over the following ports:
 To create an overlay network, specify the `overlay` driver when using the
 `docker network create` command:
 
-```bash
+```console
 $ docker network create \
   --driver overlay \
   my-network
@@ -73,7 +73,7 @@ subnet and uses default options. You can see information about the network using
 When no containers are connected to the overlay network, its configuration is
 not very exciting:
 
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -110,7 +110,7 @@ connects to the network for the first time. The following example shows
 the same network as above, but with three containers of a `redis` service
 connected to it.
 
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -184,7 +184,7 @@ the first service is connected to the network. You can configure these when
 creating a network using the `--subnet` and `--gateway` flags. The following
 example extends the previous one by configuring the subnet and gateway.
 
-```bash
+```console
 $ docker network create \
   --driver overlay \
   --subnet 10.0.9.0/24 \
@@ -198,7 +198,7 @@ To customize subnet allocation for your Swarm networks, you can [optionally conf
 
 For example, the following command is used when initializing Swarm:
 
-```bash
+```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
 ```
 
@@ -237,7 +237,7 @@ option before using it in production.
 To attach a service to an existing overlay network, pass the `--network` flag to
 `docker service create`, or the `--network-add` flag to `docker service update`.
 
-```bash
+```console
 $ docker service create \
   --replicas 3 \
   --name my-web \
@@ -310,7 +310,7 @@ services which publish ports, such as a WordPress service which publishes port
 
 2.  Remove the existing `ingress` network:
 
-    ```bash
+    ```console
     $ docker network rm ingress
 
     WARNING! Before removing the routing-mesh network, make sure all the nodes
@@ -324,7 +324,7 @@ services which publish ports, such as a WordPress service which publishes port
     custom options you want to set. This example sets the MTU to 1200, sets
     the subnet to `10.11.0.0/16`, and sets the gateway to `10.11.0.2`.
 
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -365,7 +365,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
     options, see [Bridge driver options](../reference/commandline/network_create.md#bridge-driver-options).
 
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \
@@ -396,14 +396,14 @@ that your Docker host has two different network interfaces: 10.0.0.1 should be
 used for control and management traffic and 192.168.0.1 should be used for
 traffic relating to services.
 
-```bash
+```console
 $ docker swarm init --advertise-addr 10.0.0.1 --data-path-addr 192.168.0.1
 ```
 
 This example joins the swarm managed by host `192.168.99.100:2377` and sets the
 `--advertise-addr` flag to `eth0` and the `--data-path-addr` flag to `eth1`.
 
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c \
   --advertise-addr eth0 \

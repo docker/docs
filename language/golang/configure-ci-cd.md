@@ -211,7 +211,7 @@ This workflow is similar to the CI workflow, with the following changes:
 
 Let's save this workflow and check the _Actions_ page for the repository on GitHub. Unlike the CI workflow, this new workflow cannot be triggered manually - this is how we set it up. So, in order to test it, we have to tag some commit. Let's tag the `HEAD` of the `main` branch:
 
-```shell
+```console
 $ git tag -a 0.0.1 -m "Test release workflow"
 
 $ git push --tags
@@ -235,7 +235,7 @@ That's easy to fix. We follow our own guide and add the secrets to the repositor
 
 To remove the tag on the `remote`:
 
-```shell
+```console
 $ git push origin :refs/tags/0.0.1
 To https://github.com/olliefr/docker-gs-ping.git
  - [deleted]         0.0.1
@@ -243,7 +243,7 @@ To https://github.com/olliefr/docker-gs-ping.git
 
 And to re-apply it locally and push:
 
-```shell
+```console
 $ git tag -fa 0.0.1 -m "Test release workflow"
 Updated tag '0.0.1' (was d7d3edc)
 $ git push origin --tags
@@ -261,7 +261,7 @@ And the workflow is triggered again. This time it completes without issues:
 
 Since the image we've just pushed to Docker Hub is public, now it can be pulled by anyone, from anywhere:
 
-```shell
+```console
 $ docker pull olliefr/docker-gs-ping
 Using default tag: latest
 latest: Pulling from olliefr/docker-gs-ping

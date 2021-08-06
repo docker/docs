@@ -22,7 +22,7 @@ Regenerate TLS certificates and update the machine with new certs.
 
 For example:
 
-```bash
+```console
 $ docker-machine regenerate-certs dev
 
 Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
@@ -32,7 +32,7 @@ Regenerating TLS certificates
 If your certificates have expired, you'll need to regenerate the client certs
 as well using the `--client-certs` option:
 
-```bash
+```console
 $ docker-machine regenerate-certs --client-certs dev
 
 Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y

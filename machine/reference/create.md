@@ -18,7 +18,7 @@ information on how to use them, see [Machine drivers](../drivers/index.md).
 
 Here is an example of using the `--virtualbox` driver to create a machine called `dev`.
 
-```bash
+```console
 $ docker-machine create --driver virtualbox dev
 
 Creating CA: /home/username/.docker/machine/certs/ca.pem
@@ -40,7 +40,7 @@ drivers.  These largely control aspects of Machine's provisioning process
 (including the creation of Docker Swarm containers) that the user may wish to
 customize.
 
-```bash
+```console
 $ docker-machine create
 
 Docker Machine Version: 0.5.0 (45e3688)
@@ -79,7 +79,7 @@ geographical region (`--amazonec2-region us-west-1`), and so on.
 To see the provider-specific flags, simply pass a value for `--driver` when
 invoking the `create` help text.
 
-```bash
+```console
 $ docker-machine create --driver virtualbox --help
 Usage: docker-machine create [OPTIONS] [arg...]
 
@@ -147,7 +147,7 @@ filesystem has been created, and so on.
 
 The following is an example usage:
 
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-label foo=bar \
     --engine-label spam=eggs \
@@ -162,7 +162,7 @@ labels on the engine, and allows pushing / pulling from the insecure registry
 located at `registry.myco.com`. You can verify much of this by inspecting the
 output of `docker info`:
 
-```bash
+```console
 $ eval $(docker-machine env foobarmachine)
 $ docker info
 
@@ -195,7 +195,7 @@ For example, to specify that the daemon should use `8.8.8.8` as the DNS server
 for all containers, and always use the `syslog` [log driver](../../config/containers/logging/configure.md)
 you could run the following create command:
 
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-opt dns=8.8.8.8 \
     --engine-opt log-driver=syslog \
@@ -205,7 +205,7 @@ $ docker-machine create -d virtualbox \
 Additionally, Docker Machine supports a flag, `--engine-env`, which can be used to
 specify arbitrary environment variables to be set within the engine with the syntax `--engine-env name=value`. For example, to specify that the engine should use `example.com` as the proxy server, you could run the following create command:
 
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --engine-env HTTP_PROXY=http://example.com:8080 \
     --engine-env HTTPS_PROXY=https://example.com:8080 \
@@ -234,7 +234,7 @@ you don't need to worry about it.
 
 Example create:
 
-```bash
+```console
 $ docker-machine create -d virtualbox \
     --swarm \
     --swarm-master \
