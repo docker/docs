@@ -35,7 +35,7 @@ configure this app to use our SQL Server database, and then create a
     sample web application within the container under the `/app` directory and
     into your host machine in the working directory:
 
-    ```bash
+    ```console
     $ docker run -v ${PWD}:/app --workdir /app microsoft/dotnet:2.1-sdk dotnet new mvc --auth Individual
     ```
 
@@ -170,7 +170,7 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Ready! You can now run the `docker-compose build` command.
 
-    ```bash
+    ```console
     $ docker-compose build
     ```
 
@@ -185,7 +185,7 @@ configure this app to use our SQL Server database, and then create a
     sample website. The application is listening on port 80 by default, but we
     mapped it to port 8000 in the `docker-compose.yml`.
 
-    ```bash
+    ```console
     $ docker-compose up
     ```
 
