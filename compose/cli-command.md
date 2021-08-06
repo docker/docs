@@ -60,7 +60,8 @@ $ docker-compose disable-v2
 
 ### Install on Linux
 
-You can install Compose V2 by downloading the adequate binary for your system from the [project release page](https://github.com/docker/compose-cli/releases) and copy it into ̀`$HOME/.docker/cli-plugins` as `docker-compose`
+You can install Compose V2 by downloading the adequate binary for your system 
+from the [project release page](https://github.com/docker/compose-cli/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
 
 ```console
 $ mkdir -p ~/.docker/cli-plugins/
