@@ -84,7 +84,7 @@ The `FROM` tag is pulling a signed image. You cannot build an image that has a
 `FROM` that is not either present locally or signed. Given that content trust
 data exists for the tag `latest`, the following build should succeed:
 
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 Using default tag: latest
 latest: Pulling from docker/trusttest
@@ -97,7 +97,7 @@ Digest: sha256:d149ab53f871
 If content trust is enabled, building from a Dockerfile that relies on tag 
 without trust data, causes the build command to fail:
 
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 unable to process Dockerfile: No trust data for notrust
 ```
