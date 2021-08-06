@@ -26,20 +26,20 @@ Before we run MongoDB in a container, we want to create a couple of volumes that
 
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
 
-```shell
+```console
 $ docker volume create mongodb
 $ docker volume create mongodb_config
 ```
 
 Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
 
-```shell
+```console
 $ docker network create mongodb
 ```
 
 Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
 
-```shell
+```console
 $ docker run -it --rm -d -v mongodb:/data/db \
   -v mongodb_config:/data/configdb -p 27017:27017 \
   --network mongodb \
@@ -64,19 +64,19 @@ We’ve add the `ronin-database` module and we updated the code to connect to th
 
 First let’s add the `ronin-database` module to our application using npm.
 
-```shell
+```console
 $ npm install ronin-database
 ```
 
 Now we can build our image.
 
-```shell
+```console
 $ docker build --tag node-docker .
 ```
 
 Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
 
-```shell
+```console
 $ docker run \
   -it --rm -d \
   --network mongodb \
@@ -88,7 +88,7 @@ $ docker run \
 
 Let’s test that our application is connected to the database and is able to add a note.
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/notes \
   --header 'content-type: application/json' \
@@ -162,7 +162,7 @@ $ npm install nodemon
 
 Let’s start our application and confirm that it is running properly.
 
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 
@@ -174,7 +174,7 @@ If all goes will you should see something similar:
 
 Now let’s test our API endpoint. Run the following curl command:
 
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/notes
 ```
 
@@ -212,7 +212,7 @@ If you take a look at the terminal where our Compose application is running, you
 
 Navigate back to the Chrome DevTools and set a breakpoint on the line containing the `return res.json({ "foo": "bar" })` statement, and then run the following curl command to trigger the breakpoint.
 
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/foo
 ```
 

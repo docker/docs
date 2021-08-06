@@ -18,7 +18,7 @@ Testing is an essential part of modern software development. Testing can mean a 
 
 Let's define a Mocha test in a `./test` directory within our application.
 
-```shell
+```console
 $ mkdir -p test
 ```
 
@@ -39,13 +39,13 @@ describe('Array', function() {
 
 Let’s build our Docker image and confirm everything is running properly. Run the following command to build and run your Docker image in a container.
 
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 
 Now let’s test our application by POSTing a JSON payload and then make an HTTP GET request to make sure our JSON was saved correctly.
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -56,7 +56,7 @@ $ curl --request POST \
 
 Now, perform a GET request to the same endpoint to make sure our JSON payload was saved and retrieved correctly. The “id” and “createDate” will be different for you.
 
-```shell
+```console
 $ curl http://localhost:8000/test
 
 {"code":"success","payload":[{"msg":"testing","id":"e88acedb-203d-4a7d-8269-1df6c1377512","createDate":"2020-10-11T23:21:16.378Z"}]}
@@ -66,7 +66,7 @@ $ curl http://localhost:8000/test
 
 Run the following command to install Mocha and add it to the developer dependencies:
 
-```shell
+```console
 $ npm install --save-dev mocha
 ```
 
@@ -87,7 +87,7 @@ Okay, now that we know our application is running properly, let’s try and run 
 
 Below is the Docker command to start the container and run tests:
 
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml run notes npm run test
 Creating node-docker_notes_run ... 
 
@@ -133,7 +133,7 @@ We first add a label `as base` to the `FROM node:14.15.4` statement. This allows
 
 Now let’s rebuild our image and run our tests. We will run the same docker build command as above but this time we will add the `--target test` flag so that we specifically run the test build stage.
 
-```shell
+```console
 $ docker build -t node-docker --target test .
 [+] Building 66.5s (12/12) FINISHED
  => [internal] load build definition from Dockerfile                                                                                                                 0.0s
@@ -151,8 +151,8 @@ $ docker build -t node-docker --target test .
 
 Now that our test image is built, we can run it in a container and see if our tests pass.
 
-```shell
-docker run -it --rm -p 8000:8000 node-docker
+```console
+$ docker run -it --rm -p 8000:8000 node-docker
 
 > node-docker@1.0.0 test /code
 > mocha ./**/*.js
