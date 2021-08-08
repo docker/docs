@@ -131,6 +131,12 @@ also included below.
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
+  
+    If you have [jq](https://stedolan.github.io/jq/) installed, you can use this command to install the latest stable release of Docker Compose.
+  
+    ```console
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s 'https://api.github.com/repos/docker/compose/releases' | jq '[.[] | select(.prerelease==false)][0] | .tag_name' -r)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options) tab above.
