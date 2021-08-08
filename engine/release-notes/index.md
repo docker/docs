@@ -66,7 +66,7 @@ for Docker Engine.
 - Windows: Fix a situation where containers were not stopped if `HcsShutdownComputeSystem`
   returned an `ERROR_PROC_NOT_FOUND` error moby/moby#42613](https://github.com/moby/moby/pull/42613) 
 
-## Swarm
+### Swarm
 
 - Fix a possibility where overlapping IP addresses could exist as a result of the
   node failing to clean up its old loadbalancer IPs [moby/moby#42538](https://github.com/moby/moby/pull/42538)
