@@ -73,7 +73,7 @@ Hyper-V on Windows 10:
 
 The Docker Desktop installation includes [Docker Engine](../engine/index.md),
 Docker CLI client, [Docker Compose](../compose/index.md),
-[Docker Content Trust](../engine/security/trust.md),
+[Docker Content Trust](/engine/security/trust),
 [Kubernetes](https://github.com/kubernetes/kubernetes/),
 and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
