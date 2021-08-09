@@ -52,6 +52,5 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 * [Arun Gupta](https://www.lynda.com/Docker-tutorials/Docker-Java-developers/576584-2.html){:target="_blank" rel="noopener" class="_"}: Docker for Java Developers
 * [Ajeet Singh Raina](https://collabnix.com/){:target="_blank" rel="noopener" class="_"}: Docker and Kubernetes Labs
 * [French] [Luc Juggery](https://www.udemy.com/user/lucjuggery/){:target="_blank" rel="noopener" class="_"}: Introduction to Kubernetes, The Docker Platform
-* [Spanish] [Manuel Morejón](https://www.udemy.com/course/integrando-docker-a-su-infraestrucutra-y-servicios/learn/lecture/6624848#overview){:target="_blank" rel="noopener" class="_"}: Integrating Docker to its Infrastructure and Services
 
 \* Many of the courses are fee-based
