@@ -64,7 +64,7 @@ for Docker Engine.
 - Fix incorrect `Your kernel does not support swap memory limit` warning when
   running with cgroups v2 [moby/moby#42479](https://github.com/moby/moby/pull/42479).
 - Windows: Fix a situation where containers were not stopped if `HcsShutdownComputeSystem`
-  returned an `ERROR_PROC_NOT_FOUND` error moby/moby#42613](https://github.com/moby/moby/pull/42613) 
+  returned an `ERROR_PROC_NOT_FOUND` error [moby/moby#42613](https://github.com/moby/moby/pull/42613) 
 
 ## Swarm
 
