@@ -1562,17 +1562,5 @@ manuals:
         title: Migrate from Boot2Docker to Machine
   - path: /toolbox/
     title: Docker Toolbox (deprecated)
-  - sectiontitle: Kitematic
-    section:
-    - path: /kitematic/userguide/
-      title: "Kitematic user guide: intro &amp; overview"
-    - path: /kitematic/nginx-web-server/
-      title: Set up an Nginx web server
-    - path: /kitematic/minecraft-server/
-      title: Set up a Minecraft Server
-    - path: /kitematic/rethinkdb-dev-database/
-      title: Creating a local RethinkDB database for development
-    - path: /kitematic/faq/
-      title: Frequently asked questions
-    - path: /kitematic/known-issues/
-      title: Known issues
+  - path: /kitematic/
+    title: Kitematic (deprecated)
