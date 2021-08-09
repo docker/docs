@@ -227,7 +227,9 @@ To interact with remote repositories:
 
 ## Explore volumes
 
-The **Volumes** view in Docker Dashboard enables you to easily create and delete [volumes](../storage/volumes.md) and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+You can use [volumes](../storage/volumes.md) to store files and share them among containers. Volumes are created and are directly managed by Docker. They are also the preferred mechanism to persist data in Docker containers and services.
+
+The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
 
 {% include upgrade-cta.html
   body="To start exploring the details in your volumes, upgrade to a Pro or a Team plan."
@@ -235,15 +237,30 @@ The **Volumes** view in Docker Dashboard enables you to easily create and delete
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
 %}
 
+The following table lists the Volumes UI features available in each plan:
+
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+
+| Feature                                       | Free      | Pro       | Team      |
+|:----------------------------------------------|:---------:|:---------:|:--------:|
+|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |
+| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |
+| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |
+| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |
+
 ### Manage volumes
 
-By default, the **Volumes** view displays a list of all the volumes.
+By default, the **Volumes** view displays a list of all the volumes. Volumes that are currently used by a container display the **In Use** badge.
 
 ![List volumes](images/volumes-list.png){:width="700px"}
 
+Use the **Search** field to search for any specific volumes. You can also sort volumes by the name, the date created, and the size of the volume.
+
 To explore the details of a specific volume, select a volume from the list. This opens the detailed view.
 
-The **In Use** tab displays the name of the container that’s using the volume, the image name, the port number used by the container, CPU, memory, disk read/write, and network I/O consumed by the container.
+The **In Use** tab displays the name of the container using the volume, the image name, the port number used by the container, and the target. A target is a path inside a container that gives access to the files in the volume.
 
 The **Data** tab displays the files and folders in the volume and their file size. To save a file or a folder, hover over the file or folder and click on the more options menu. Select **Save As** and then specify a location to download the file.
 
