@@ -288,6 +288,21 @@ If not specified, the container ID is used as the log stream.
 > {% endraw %}
 > the output is something like: `alpine_latest-bf0072049c76`
 
+### awslogs-force-flush-interval-seconds
+
+The `awslogs` driver periodically flushs logs to CloudWatch.
+
+The `awslogs-force-flush-interval-seconds` option changes log flush interval seconds.
+
+Default is 5 seconds.
+
+### awslogs-max-buffered-events
+
+The `awslogs` driver buffers logs.
+
+The `awslogs-max-buffered-events` option changes log buffer size.
+
+Default is 4K.
 
 ## Credentials
 

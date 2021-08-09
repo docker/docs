@@ -74,10 +74,22 @@ $ curl http://localhost:8000/test
 
 Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
 
-```
+```console
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
+
+Great! We verified that the application works. At this stage, you've completed testing the server script locally.
+
+Press `CTRL-c` from within the terminal session where the server is running to stop it.
+
+```console
+2021-08-06T12:11:33:8930  INFO: POST /test
+2021-08-06T12:11:41:5860  INFO: GET /test
+^Cshutting down...
+```
+
+We will now continue to build and run the application in Docker.
 
 ## Create a Dockerfile for Node.js
 

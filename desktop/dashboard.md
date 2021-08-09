@@ -1,6 +1,6 @@
 ---
 description: Docker Dashboard
-keywords: Docker Dashboard, manage, containers, images
+keywords: Docker Dashboard, manage, containers, gui, dashboard, images, kitematic
 title: Docker Dashboard
 redirect_from:
 - /docker-for-mac/dashboard/

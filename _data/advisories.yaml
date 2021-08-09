@@ -9,7 +9,6 @@
 
 texts:
   experimental: "The functionality described on this page is marked as Experimental, and as such, may change before it becomes generally available."
-  kitematic: "**Legacy desktop solution.** Kitematic is a legacy solution, bundled with [Docker Toolbox](/toolbox/overview/). We recommend updating to [Docker Desktop for Mac](/docker-for-mac/) or [Docker Desktop for Windows](/docker-for-windows/) if your system meets the requirements for one of those applications."
 
 
 # URL based advisories
