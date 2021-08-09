@@ -77,7 +77,7 @@ Switch back to the terminal where our server is running. You should now see the 
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
 
-Great! We verified the application works. At this stage, you're done with testing the server script locally.
+Great! We verified that the application works. At this stage, you've completed testing the server script locally.
 
 Press `CTRL-c` from within the terminal session where the server is running to stop it.
 
