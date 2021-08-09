@@ -72,8 +72,11 @@ To ensure that Docker ECS integration is allowed to manage resources for your Co
 * iam:AttachRolePolicy
 * iam:CreateRole
 * iam:DeleteRole
+* iam:DeleteRolePolicy
 * iam:DetachRolePolicy
+* iam:GetRolePolicy
 * iam:PassRole
+* iam:PutRolePolicy
 * logs:CreateLogGroup
 * logs:DeleteLogGroup
 * logs:DescribeLogGroups
@@ -84,6 +87,8 @@ To ensure that Docker ECS integration is allowed to manage resources for your Co
 * route53:GetHostedZone
 * route53:ListHostedZonesByName
 * servicediscovery:*
+
+Provided is an [ECS Integration Example IAM Policy Document](./ecs-integration-example-iam-policy.json).
 
 GPU support, which relies on EC2 instances to run containers with attached GPU devices,
 require a few additional permissions:
