@@ -1,7 +1,7 @@
 ---
-description: Docker Billing overview
+description: Docker subscription overview
 keywords: Docker, pricing, billing, Pro, Team, subscription, plans,
-title: Docker Billing overview
+title: Docker subscription overview
 ---
 
 On May 14, 2020, Docker announced a new, per-seat pricing model that aligns with Docker’s [product strategy](https://www.docker.com/blog/docker-strategy-helping-devs-build-and-ship-faster/){: target="_blank" rel="noopener" class="_"} to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** subscriptions that include unlimited private repositories and up to 50,000 container pulls in a 24-hour period.

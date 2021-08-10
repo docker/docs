@@ -1398,24 +1398,24 @@ manuals:
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
-  - sectiontitle: Billing
-    section:
-    - path: /docker-hub/billing/
-      title: Overview
-    - path: /docker-hub/billing/upgrade/
-      title: Upgrade your plan
-    - path: /docker-hub/billing/downgrade/
-      title: Downgrade your plan
-    - path: /docker-hub/billing/add-seats/
-      title: Add seats
-    - path: /docker-hub/billing/remove-seats/
-      title: Remove seats
-    - path: /docker-hub/billing/faq/
-      title: Pricing FAQs
   - path: /docker-hub/publish/
     title: Verified Publisher Program
   - path: /docker-hub/release-notes/
     title: Release notes
+- sectiontitle: Docker subscription
+  section:
+  - path: /docker-hub/billing/
+    title: Overview
+  - path: /docker-hub/billing/upgrade/
+    title: Upgrade your plan
+  - path: /docker-hub/billing/downgrade/
+    title: Downgrade your plan
+  - path: /docker-hub/billing/add-seats/
+    title: Add seats
+  - path: /docker-hub/billing/remove-seats/
+    title: Remove seats
+  - path: /docker-hub/billing/faq/
+    title: Pricing FAQs
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Registry
