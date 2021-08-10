@@ -51,7 +51,7 @@ The simplest way to get started with Dev Environments is to create a new environ
 >
 > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
+1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
@@ -108,7 +108,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
   >
   > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. Click **Create** to open the **Create a Dev Environment** dialog. Then, copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Docker image** field on the **Remote** tab.
+1. Click **Create** to open the **Create a Dev Environment** dialog. Then, copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Docker image** field on the **Remote** tab.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
 
     - Builds local images for services that are defined in the Compose file
