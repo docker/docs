@@ -93,7 +93,7 @@ To run the self-diagnose tool in Powershell:
   PS C:\> & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
 ```
 
-The tool will run a suite of checks and display "PASS" or "FAIL" next to each one. If there are failures
+The tool runs a suite of checks and displays **PASS** or **FAIL** next to each one. If there are any failures, it highlights the most relevant at the end.
 it will try to highlight the most relevant at the end.
 
 Note the tool is still experimental.
