@@ -131,7 +131,9 @@ $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose check
 The tool runs a suite of checks and displays **PASS** or **FAIL** next to each one. If there are any failures, it highlights the most relevant at the end.
 it will try to highlight the most relevant at the end.
 
-Note the tool is still experimental.
+#### Note
+
+The Self-diagnose tool is still experimental. Let us know your feedback by creating an issue in the [for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
 
 <a name="logs"></a>
 
