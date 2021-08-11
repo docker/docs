@@ -8,14 +8,14 @@ The `compose` command in the Docker CLI supports most of the `docker-compose` co
 
 You can follow progress on the implementation of the remaining commands and flags in the  [Compose-CLI](https://github.com/docker/compose-cli/issues/1283){:target="_blank" rel="noopener" class="_"} GitHub repository.
 
-If you see some Compose functionality that is not available in the `compose` command, create an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository so we can prioritize it.
+If you see any Compose functionality that is not available in the `compose` command, create an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository so we can prioritize it.
 
 ## Commands or flags not yet implemented
 
 The following commands have not been implemented yet, and maybe implemented at a later time.
-Let us know if these commands are a higher priority for your usecases.
+Let us know if these commands are a higher priority for your use cases.
 
-`compose build --memory`. This option is not yet supported by buildkit. The flag is currently supported but is hidden to avoid breaking existing Compose usage. It does not have any effect.
+`compose build --memory`: This option is not yet supported by buildkit. The flag is currently supported, but is hidden to avoid breaking existing Compose usage. It does not have any effect.
 
 ## Flags that will not be implemented
 
