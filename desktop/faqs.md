@@ -81,6 +81,19 @@ nested virtualization scenarios**. It might work in some cases, and not in other
 
 For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
+### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
+
+Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases, 
+Docker Desktop will launch successfully, but some screens may appear green, distorted, 
+or have some visual artifacts.
+
+To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
+
+- **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
+- **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+ 
+After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
+
 ## Releases
 
 ### When will Docker Desktop move to a cumulative release stream?
