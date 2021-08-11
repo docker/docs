@@ -90,7 +90,7 @@ Files\Docker\Docker\resources\com.docker.diagnose.exe`.
 To run the self-diagnose tool in Powershell:
 
 ```powershell
-  PS C:\> & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
+PS C:\> & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
 ```
 
 The tool runs a suite of checks and displays **PASS** or **FAIL** next to each one. If there are any failures, it highlights the most relevant at the end.

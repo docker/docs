@@ -20,9 +20,8 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-- Dev Environments: You can now create a Dev Environment from your local git repository
-- Volume Management: Add sorting to volume list
-- Volume Management: Add name search to volumes list
+- **Dev Environments**: You can now create a Dev Environment from your local Git repository. For more information, see [Start a Dev Environment from a local folder](../desktop/dev-environments.md#start-a-dev-environment-from-a-local-folder).
+- **Volume Management**: You can now sort volumes by the name, the date created, and the size of the volume. You can also search for specific volumes using the **Search** field. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
 
 ### Upgrades
 
