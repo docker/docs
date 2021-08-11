@@ -179,6 +179,76 @@ For an example of this issue and the resolution, see this issue on GitHub:
 [Docker RUN fails to execute shell
 script](https://github.com/moby/moby/issues/24388).
 
+#### Path conversions on Windows
+
+On linux, the system takes care of mounting a path to another path. The command on Linux is :
+```
+$ docker run --rm -ti -v /home/user/work:/work alpine
+```
+The target container will be added a /work directory mirroring the content of the specified path.
+
+On Windows, the source path must be adapted. In the legacy windows shell (`cmd.exe`) the following works  :
+```
+$ docker run --rm -ti -v C:\Users\user\work:/work alpine
+```
+The container starts and the volume is usable. This is possible because Docker Desktop detects
+the Windows-style path, and provides the appropriate conversions to mount the directory.
+
+Docker Desktop also makes it possible to use Unix-style path to the appropriate format:
+```
+docker run --rm -ti -v /c/Users/user/work:/work alpine ls /work
+```
+
+#### Consideration for Git Bash users
+
+Git Bash (or MSYS) provides unix like environments on Windows. These tools apply their own
+preprocessing on the command lines. For example in git-bash, the following command cannot be used:
+```
+$ docker run --rm -ti -v C:\Users\user\work:/work alpine
+docker: Error response from daemon: mkdir C:UsersUserwork: Access is denied.
+```
+This is because the `\` character has a special meaning in Git-Bash. Users of Git-Bash must neutralize it using `\\`:
+```
+$ docker run --rm -ti -v C:\\Users\\user\\work:/work alpine
+```
+
+In scripts, the `pwd` command is used to avoid hardcoding file system locations. Its output is a unix style path.
+```
+$ pwd
+/c/Users/user/work
+```
+Combined with the `$()` syntax, the command below works on Linux but fails on Git Bash.
+```
+$ docker run --rm -ti -v $(pwd):/work alpine
+docker: Error response from daemon: OCI runtime create failed: invalid mount {Destination:\Program Files\Git\work Type:bind Source:/run/desktop/mnt/host/c/Users/user/work;C Options:[rbind rprivate]}: mount destination \Program Files\Git\work not absolute: unknown.
+```
+This can be workarounded using an extra `/`
+```
+$ docker run --rm -ti -v /$(pwd):/work alpine
+```
+Portability of the scripts is not affected as Linux will treat multiple `/` as a single one.
+
+Each occurence of paths on a single line must be neutralized. 
+```
+$ docker run --rm -ti -v /$(pwd):/work alpine ls /work
+ls: C:/Program Files/Git/work: No such file or directory
+```
+In this example, The `$(pwd)` is not converted because of the preceding '/'. However the second '/work' is transformed by the
+posix layer before being passed to Docker Desktop. Once again, this can be workarounded using an extra `/`
+```
+$ docker run --rm -ti -v /$(pwd):/work alpine ls //work
+```
+
+To identify whether the errors comes from your script, or something else, an environment variable can be used :
+```
+$ MSYS_NO_PATHCONV=1 docker run --rm -ti -v $(pwd):/work alpine ls /work
+```
+It is enough to define the variable for it to apply. The value does not matter.
+
+MSYS also sometimes transforms colons to semicolon.
+
+Similar conversions occurs when using `~` because the posix layer will translate it to a DOS path. MSYS_NO_PATHCONV works in this case too.
+
 ### Virtualization
 
 Your machine must have the following features for Docker Desktop to function correctly.
