@@ -81,6 +81,23 @@ Diagnostics Bundle: C:\Users\User\AppData\Local\Temp\CD6CF862-9CBD-4007-9C2F-5FB
 Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 (uploaded)
 ```
 
+### Experimental self-diagnose tool
+
+Docker Desktop 3.6.0 contains an experimental "self-diagnose" tool which helps identify some common
+problems. To run it: first locate `com.docker.diagnose.exe`, usually installed in `C:\Program
+Files\Docker\Docker\resources\com.docker.diagnose.exe`.
+
+To run the self-diagnose tool in Powershell:
+
+```powershell
+  PS C:\> & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
+```
+
+The tool will run a suite of checks and display "PASS" or "FAIL" next to each one. If there are failures
+it will try to highlight the most relevant at the end.
+
+Note the tool is still experimental.
+
 ## Troubleshooting topics
 
 ### Make sure certificates are set up correctly
