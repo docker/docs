@@ -51,7 +51,7 @@ The simplest way to get started with Dev Environments is to create a new environ
 >
 > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. First, let's copy `git@github.com:dockersamples/single-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
+1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
@@ -78,10 +78,6 @@ You can create a dev environment from a specific branch (for example, a branch c
 
 Docker then clones the repository with your specified branch or tag.
 
-> **Note**
->
-> Known issue: when cloning a Git branch using `https://`, you must remove the `.git` suffix at the end of the URL.
-
 ### Recap
 
 Let's summarize the tasks we performed so far to start a single container Dev Environment.
@@ -100,7 +96,7 @@ This creates a Docker image of your dev environment, uploads it to the Docker Hu
 
 ![Dev environment shared](/images/dev-env-shared.png){:width="700px"}
 
-Your team members just need to add this URL in the **Create** field and then click **Create**. Your Dev Environment now starts in the exact same state as you shared it!
+Your team members need to open the **Create** dialog, select the **Existing Dev Environment** tab, and then paste the URL. Your Dev Environment now starts in the exact same state as you shared it.
 
 Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback even before you create a pull request!
 
@@ -112,7 +108,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
   >
   > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-1. Copy `git@github.com:dockersamples/compose-dev-env.git` and add it to the **Create** field on the **Create a Development Environment** page.
+1. Click **Create** to open the **Create a Dev Environment** dialog. Then, copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Docker image** field on the **Remote** tab.
 2. Click **Create**. This initializes the project and clones the Git code and builds the Compose application. This:
 
     - Builds local images for services that are defined in the Compose file
@@ -221,14 +217,26 @@ In this preview, Dev Environments support a simple YAML file which allows you to
 >
 > To get involved with the discussion on how we are going to implement this as part of Compose, join the **#docker-dev-environments** channel in the [Docker Community Slack](https://dockercommunity.slack.com/messages){:target="_blank" rel="noopener" class="_"}, or let us know your feedback by creating an issue in the [Dev Environments](https://github.com/docker/dev-environments/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
 
+## Start a Dev Environment from a local folder
+
+You can also start a Dev Environment from local code on your machine.
+
+1. Click **Create** to open the **Create a Dev Environment** dialog. Select the **Local Folder** tab, and click **Select directory** to open the root of the code that you would like to work on.
+2. Now, click **Create**.
+
+    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. Finally, it opens VS Code inside the Dev Environment container.
+
+> **Note**
+>
+> When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
+
 ## Known issues
 
 The following section lists known issues and workarounds in the Dev Environments Preview:
 
 1. It is currently not possible to share Compose-based applications using Dev Environments because registries do not support Compose applications. Refer to the [Feedback](#feedback) section to let us know your requirements for sharing Compose-based applications.
 2. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-3. You must wait until Dev Environment is successfully created (indicated by a green icon) before closing the Docker Dashboard. Dev Environments may not be created successfully if you attempt to close the Docker Dashboard while the Dev Environment creation process is in progress.
-4. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
+3. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
 
 ## Feedback
 

@@ -115,6 +115,28 @@ To view the contents of the diagnostic file, run:
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
 
+### Experimental self-diagnose tool
+
+Docker Desktop 3.6.0 contains an experimental "self-diagnose" tool which helps identify some common
+problems. To run it: first locate `com.docker.diagnose`. If you have installed Docker Desktop
+in the Applications directory, then it is located at
+`/Applications/Docker.app/Contents/MacOS/com.docker.diagnose`.
+
+To run the self-diagnose tool:
+
+```console
+$ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose check
+```
+
+The tool runs a suite of checks and displays **PASS** or **FAIL** next to each one. If there are any failures, it highlights the most relevant at the end.
+it will try to highlight the most relevant at the end.
+
+> **Note**
+>
+> The Self-diagnose tool is still experimental. Let us know your feedback by creating an issue in the [for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+
+The Self-diagnose tool is still experimental. Let us know your feedback by creating an issue in the [for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+
 <a name="logs"></a>
 
 ## Check the logs

@@ -13,11 +13,41 @@ This page contains information about the new features, improvements, known issue
 
 {% include eula.md %}
 
-## Docker Desktop 3.5.2
-2021-07-08
+## Docker Desktop 3.6.0
+2021-08-11
 
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+
+### New
+
+- **Dev Environments**: You can now create a Dev Environment from your local Git repository. For more information, see [Start a Dev Environment from a local folder](../desktop/dev-environments.md#start-a-dev-environment-from-a-local-folder).
+- **Volume Management**: You can now sort volumes by the name, the date created, and the size of the volume. You can also search for specific volumes using the **Search** field. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+- Volume Management: Add name search to volumes list
+
+### Upgrades
+
+- [Compose V2 RC1](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.1)
+  - Docker compose command line completion.
+  - Allow setting 0 scale/replicas.
+  - Detect new container on logs —follow.
+- [Go 1.16.7](https://github.com/golang/go/releases/tag/go1.16.7)
+- [Docker Engine 20.10.8](https://docs.docker.com/engine/release-notes/#20108)
+- [containerd v1.4.9](https://github.com/containerd/containerd/releases/tag/v1.4.9)
+- [runc v1.0.1](https://github.com/opencontainers/runc/releases/tag/v1.0.1)
+- [Kubernetes 1.21.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3)
+
+### Bug fixes and minor changes
+
+- Fixed a bug where the DNS server would fail after receiving an unexpectedly large datagram.
+- Fixed an issue related to hardware acceleration [docker/for-mac#5121](https://github.com/docker/for-mac/issues/5121)
+- Fixed an issue related to Skip This Update for mac [docker/for-mac#5842](https://github.com/docker/for-mac/issues/5842)
+
+## Docker Desktop 3.5.2
+2021-07-08
+
+[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg)
+[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg)
 
 ### New
 

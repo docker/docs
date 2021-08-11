@@ -13,10 +13,46 @@ This page contains information about the new features, improvements, known issue
 
 {% include eula.md %}
 
+## Docker Desktop 3.6.0
+2021-08-11
+
+[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+
+### New
+
+- Dev Environments: You can now create a Dev Environment from your local git repository
+- Volume Management: Add sorting to volume list
+- Volume Management: Add name search to volumes list
+
+### Upgrades
+
+- [Compose V2 RC1](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.1)
+  - Docker compose command line completion.
+  - Allow setting 0 scale/replicas.
+  - Detect new container on logs —follow.
+- [Go 1.16.7](https://github.com/golang/go/releases/tag/go1.16.7)
+- [Docker Engine 20.10.8](https://docs.docker.com/engine/release-notes/#20108)
+- [containerd v1.4.9](https://github.com/containerd/containerd/releases/tag/v1.4.9)
+- [runc v1.0.1](https://github.com/opencontainers/runc/releases/tag/v1.0.1)
+- [Kubernetes 1.21.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3)
+
+### Bug fixes and minor changes
+
+- Fixed a bug where the DNS server would fail after receiving an unexpectedly large datagram.
+- Fixed spurious traces on iptables updates.
+- Fixed slowness when adding multiple ports forwarding option.
+- Fixed bug where the WSL 2 synchonization code creates dangling symlinks if the WSL 2 home directory if it is the same as the Windows home directory. Fixes [docker/for-win#11668](https://github.com/docker/for-win/issues/11668).
+- Fixed `docker context ls` after upgrade from 3.5.x when the Linux WSL 2 home directory is the same as the Windows home directory.
+- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841
+- Fixed bug where the Linux home directory under WSL 2 was set to the Windows home directory e.g. `/mnt/c/Users/...`.
+- Fixed bug where Desktop would fail to start if it could not parse CLI contexts. Fixes [docker/for-win#11601](https://github.com/docker/for-win/issues/11601).
+- Fixed an issue related to log display inside a container [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
+- Fixed failures of the Windows Background Intelligent Transfer Service preventing Docker Desktop to start. [docker/for-win#11273](https://github.com/docker/for-win/issues/11273)
+
 ## Docker Desktop 3.5.2
 2021-07-08
 
-[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+> [Download](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe)
 
 ### New
 
