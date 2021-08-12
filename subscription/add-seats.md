@@ -2,6 +2,8 @@
 description: Add seats to your plan
 keywords: Docker, Docker Hub, subscription, update, add, seats
 title: Add seats to your plan
+redirect_from:
+- /docker-hub/billing/add-seats/
 ---
 
 You can manage your Docker Hub subscription anytime by adding seats to your plan.

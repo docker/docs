@@ -1404,17 +1404,17 @@ manuals:
     title: Release notes
 - sectiontitle: Docker subscription
   section:
-  - path: /docker-hub/billing/
+  - path: /subscription/
     title: Overview
-  - path: /docker-hub/billing/upgrade/
+  - path: /subscription/upgrade/
     title: Upgrade your plan
-  - path: /docker-hub/billing/downgrade/
+  - path: /subscription/downgrade/
     title: Downgrade your plan
-  - path: /docker-hub/billing/add-seats/
+  - path: /subscription/add-seats/
     title: Add seats
-  - path: /docker-hub/billing/remove-seats/
+  - path: /subscription/remove-seats/
     title: Remove seats
-  - path: /docker-hub/billing/faq/
+  - path: /subscription/faq/
     title: Pricing FAQs
 - sectiontitle: Open-source projects
   section:
