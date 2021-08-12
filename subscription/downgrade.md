@@ -4,6 +4,7 @@ keywords: Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,
 title: Downgrade your plan
 redirect_from:
 - /docker-hub/cancel-downgrade/
+- /docker-hub/billing/downgrade/
 ---
 
 You can downgrade your Pro or Team plan anytime. When you downgrade your plan, changes will be applied at the end of your billing cycle.
