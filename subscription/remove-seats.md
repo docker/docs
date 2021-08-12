@@ -2,6 +2,8 @@
 description: Remove seats from your plan
 keywords: Docker, Docker Hub, subscription, update, remove, seats
 title: Remove seats from your plan
+redirect_from:
+- /docker-hub/billing/remove-seats/
 ---
 
 You can manage your Docker Hub subscription anytime by removing seats from your plan. If you remove seats in the middle of the billing cycle, changes are applied immediately and reflect in the next billing cycle.

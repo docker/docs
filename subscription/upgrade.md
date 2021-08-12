@@ -4,6 +4,7 @@ keywords: Docker Hub, upgrade, subscription, Pro, Team, pricing plan,
 title: Upgrade your plan
 redirect_from:
 - /docker-hub/upgrade/
+- /docker-hub/billing/upgrade/
 ---
 
 You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
