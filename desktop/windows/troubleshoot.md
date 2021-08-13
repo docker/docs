@@ -54,9 +54,10 @@ from the menu.
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
 5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
 6. If you have subscribed to a Pro or a Team plan, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+
    > **Note**
-    >
-    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
+   >
+   > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of           Docker Desktop support, see [Support](#support).
 7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade to benefit from Docker Support** to upgrade your existing account.
     Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 
@@ -179,75 +180,93 @@ For an example of this issue and the resolution, see this issue on GitHub:
 [Docker RUN fails to execute shell
 script](https://github.com/moby/moby/issues/24388).
 
-#### Path conversions on Windows
+#### Path conversion on Windows
 
-On linux, the system takes care of mounting a path to another path. The command on Linux is :
-```
+On Linux, the system takes care of mounting a path to another path. For example, when you run the following command on Linux:
+
+```console
 $ docker run --rm -ti -v /home/user/work:/work alpine
 ```
-The target container will be added a /work directory mirroring the content of the specified path.
 
-On Windows, the source path must be adapted. In the legacy windows shell (`cmd.exe`) the following works  :
-```
+It adds a `/work` directory to the target container to mirror the specified path.
+
+However, on Windows, you must update the source path. For example, if you are using 
+the legacy Windows shell (`cmd.exe`), you can use the following command:
+
+```console
 $ docker run --rm -ti -v C:\Users\user\work:/work alpine
 ```
-The container starts and the volume is usable. This is possible because Docker Desktop detects
-the Windows-style path, and provides the appropriate conversions to mount the directory.
 
-Docker Desktop also makes it possible to use Unix-style path to the appropriate format:
-```
-docker run --rm -ti -v /c/Users/user/work:/work alpine ls /work
+This starts the container and ensures the volume becomes usable. This is possible because Docker Desktop detects
+the Windows-style path and provides the appropriate conversion to mount the directory.
+
+Docker Desktop also allows you to use Unix-style path to the appropriate format. For example:
+
+```console
+$ docker run --rm -ti -v /c/Users/user/work:/work alpine ls /work
 ```
 
-#### Consideration for Git Bash users
+#### Working with Git Bash
 
-Git Bash (or MSYS) provides unix like environments on Windows. These tools apply their own
-preprocessing on the command lines. For example in git-bash, the following command cannot be used:
-```
+Git Bash (or MSYS) provides Unix-like environment on Windows. These tools apply their own
+preprocessing on the command line. For example, if you run the following command in Git Bash, it gives an error:
+
+```console
 $ docker run --rm -ti -v C:\Users\user\work:/work alpine
 docker: Error response from daemon: mkdir C:UsersUserwork: Access is denied.
 ```
-This is because the `\` character has a special meaning in Git-Bash. Users of Git-Bash must neutralize it using `\\`:
-```
+
+This is because the `\` character has a special meaning in Git Bash. If you are using Git Bash, you must neutralize it using `\\`:
+
+```console
 $ docker run --rm -ti -v C:\\Users\\user\\work:/work alpine
 ```
 
-In scripts, the `pwd` command is used to avoid hardcoding file system locations. Its output is a unix style path.
-```
+Also, in scripts, the `pwd` command is used to avoid hardcoding file system locations. Its output is a Unix-style path.
+
+```console
 $ pwd
 /c/Users/user/work
 ```
-Combined with the `$()` syntax, the command below works on Linux but fails on Git Bash.
-```
+
+Combined with the `$()` syntax, the command below works on Linux, however, it fails on Git Bash.
+
+```console
 $ docker run --rm -ti -v $(pwd):/work alpine
 docker: Error response from daemon: OCI runtime create failed: invalid mount {Destination:\Program Files\Git\work Type:bind Source:/run/desktop/mnt/host/c/Users/user/work;C Options:[rbind rprivate]}: mount destination \Program Files\Git\work not absolute: unknown.
 ```
-This can be workarounded using an extra `/`
-```
+
+You can work around this issue by using an extra `/`
+
+```console
 $ docker run --rm -ti -v /$(pwd):/work alpine
 ```
-Portability of the scripts is not affected as Linux will treat multiple `/` as a single one.
 
-Each occurence of paths on a single line must be neutralized. 
-```
+Portability of the scripts is not affected as Linux treats multiple `/` as a single entry.
+Each occurence of paths on a single line must be neutralized.
+
+```console
 $ docker run --rm -ti -v /$(pwd):/work alpine ls /work
 ls: C:/Program Files/Git/work: No such file or directory
 ```
-In this example, The `$(pwd)` is not converted because of the preceding '/'. However the second '/work' is transformed by the
-posix layer before being passed to Docker Desktop. Once again, this can be workarounded using an extra `/`
-```
+
+In this example, The `$(pwd)` is not converted because of the preceding '/'. However, the second '/work' is transformed by the
+POSIX layer before passing it to Docker Desktop. You can also work around this issue by using an extra `/`.
+
+```console
 $ docker run --rm -ti -v /$(pwd):/work alpine ls //work
 ```
 
-To identify whether the errors comes from your script, or something else, an environment variable can be used :
+To verify whether the errors are generated from your script, or from another source, you can use an environment variable. For example:
+
 ```
 $ MSYS_NO_PATHCONV=1 docker run --rm -ti -v $(pwd):/work alpine ls /work
 ```
-It is enough to define the variable for it to apply. The value does not matter.
 
-MSYS also sometimes transforms colons to semicolon.
+It only expects the environment variable here. The vale doesn't matter.
 
-Similar conversions occurs when using `~` because the posix layer will translate it to a DOS path. MSYS_NO_PATHCONV works in this case too.
+In some cases, MSYS also transforms colons to semicolon. Similar conversions can also occur
+when using `~` because the POSIX layer translates it to a DOS path. `MSYS_NO_PATHCONV` also works in this case.
 
 ### Virtualization
 
