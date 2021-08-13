@@ -85,3 +85,93 @@ To upgrade from a monthly Pro plan to an annual Pro plan:
 5. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
 
     The Billing page now displays a confirmation of the upgrade with an invoice containing details about your new plan, entitlements, and the total cost.
+
+### Purchase a Pro plan
+
+The following section contains information on how to purchase a Pro plan for new customers.
+
+To purchase a Pro plan:
+
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+
+2. Open the drop-down menu next to your username in the top-right corner and select **Billing** to go to the **Billing Details** page. This page displays billing information about your existing user account.
+
+    The Docker Hub **Pricing** page displays information about the new pricing plans.
+
+3. Ensure you have selected your personal account on the left side of the **Billing Details** page.
+
+4. Click **Change plan**.
+
+5.  Review the plan details in the **Pro** section and click **Upgrade Now**.
+
+5. The **Payment Method** page displays the cost for the annual plan by default. If you prefer to opt for the monthly plan, choose **pay monthly**.
+
+6. Enter the card details and click **Purchase**.
+
+7. Verify your email address.
+
+8. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
+
+    The **Billing** page displays information about your new Pro plan and the total cost.
+### Purchase a Team plan
+
+The following section contains information on how to purchase a Team plan for new organizations. If you do not have a team plan, click here to learn more on how to create a team.
+
+To purchase a Team plan:
+
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+
+2. Click **Organizations** in the toolbar and select your organization.
+
+3. Click the **Billing** tab and click **Change plan**.
+     The Docker Hub **Pricing** page displays information about the new pricing plans.
+
+4. Review the plan details in the **Team** section and click **Buy Now**.
+
+5. Enter a name for your new organization and add a company name.
+
+6. The **Organization size** page displays the cost for the annual plan by default. If you prefer to change this, select **Pay Monthly**.
+
+7. Specify the number of users you’d like to add to your organization and click **Continue to Payment**.
+
+8. On the **Payment Method** page, enter the card details and click **Purchase**.
+
+9. Verify your email address.
+
+10. Navigate to Organizations from the menu at the top of the page, choose your organization, and select **Billing**. The Billing tab displays information about your new Team plan and the total cost.
+
+## Update billing information
+
+> **Note**
+>
+> You must be on owner of the organization to make changes to the billing information.
+
+To update the billing information for your organization:
+
+1. Log into an owner account for the organization in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+
+2. Select **Organizations** from the menu at the top of the page. This displays a list of organizations.
+
+3. Choose the organization from the list and select the **Billing** tab.
+
+4. Select **Payment Methods**.
+
+5. The **Payment Information** page displays your existing billing information and allows you to edit the details.
+
+    > **Note**
+    >
+    > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section.
+
+6. Change the details as required and then click **Update** to save your changes.
+
+To update the billing information for your user account:
+
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+
+2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The Billing page displays billing information about your existing user account.
+
+3. Select **Payment Methods**.
+
+4. The **Payment Information** page displays your existing billing information and allows you to edit the details.
+
+5. Click **Update** to save your changes.
