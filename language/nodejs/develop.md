@@ -168,7 +168,7 @@ $ docker-compose -f docker-compose.dev.yml up --build
 
 We pass the `--build` flag so Docker will compile our image and then starts it.
 
-If all goes will you should see something similar:
+If all goes well you should see something similar:
 
   ![node-compile](images/node-compile.png){:width="800px"}
 
