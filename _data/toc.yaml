@@ -1204,19 +1204,19 @@ manuals:
           title: Previous versions
     - sectiontitle: Windows
       section:
-        - path: /docker-for-windows/install/
+        - path: /desktop/windows/install/
           title: Install Docker Desktop for Windows
-        - path: /docker-for-windows/
+        - path: /desktop/windows/
           title: User manual
-        - path: /docker-for-windows/networking/
+        - path: /desktop/windows/networking/
           title: Networking
-        - path: /docker-for-windows/troubleshoot/
+        - path: /desktop/windows/troubleshoot/
           title: Logs and troubleshooting
-        - path: /docker-for-windows/wsl/
+        - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend
-        - path: /docker-for-windows/release-notes/
+        - path: /desktop/windows/release-notes/
           title: Release notes
-        - path: /docker-for-windows/previous-versions/
+        - path: /desktop/windows/previous-versions/
           title: Previous versions
     - path: /desktop/dashboard/
       title: Dashboard

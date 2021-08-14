@@ -63,7 +63,7 @@ For installation instructions, see [Install Docker Desktop on Mac](../desktop/ma
 
 **Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../desktop/windows/install.md).
 
 If you are running the Docker daemon and client directly on Microsoft
 Windows Server, follow the instructions in the Windows Server tab.

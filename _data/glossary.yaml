@@ -78,7 +78,7 @@ Docker Desktop for Mac: |
   to build, debug, test, package, and ship Dockerized applications on a
   Mac.
 Docker Desktop for Windows: |
-  [Docker Desktop for Windows](/docker-for-windows/) is an
+  [Docker Desktop for Windows](/desktop/windows/) is an
   easy-to-install, lightweight Docker development environment designed
   specifically for Windows 10 systems that support Microsoft Hyper-V
   (Professional, Enterprise and Education). Docker Desktop for Windows uses Hyper-V for

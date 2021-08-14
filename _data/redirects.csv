@@ -1,7 +1,7 @@
 source,destination
 /engine/quickstart/,/get-started/
 /engine/containers/,/engine/tutorials/
-/win/,/docker-for-windows/
+/win/,/desktop/windows/
 /mac/,/desktop/mac/
 /linux/,/engine/
 /article-img/,/engine/article-img/

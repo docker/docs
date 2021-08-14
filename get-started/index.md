@@ -85,7 +85,7 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 [Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
 [Linux](../engine/install/index.md){: .button .primary-btn}
 
-For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
 
 {% include eula.md %}
 

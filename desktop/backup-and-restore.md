@@ -52,12 +52,12 @@ computer.
    page in the storage section.
 
 After backing up your data, you can uninstall the current version of Docker Desktop
-and install a different version ([Windows](../docker-for-windows/install.md)
+and install a different version ([Windows](windows/install.md)
 [macOS](mac/install.md), or reset Docker Desktop to factory defaults.
 
 ## Restore your data
 
-1. Use [`docker pull`]((../engine/reference/commandline/load.md)) to restore images
+1. Use [`docker pull`](../engine/reference/commandline/load.md) to restore images
    you pushed to Docker Hub in "step 2." in the [save your data section](#save-your-data)
 
    If you backed up your images to a local tar file, use [`docker image load -i images.tar`](../engine/reference/commandline/load.md)

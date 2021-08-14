@@ -47,7 +47,7 @@ We will progressively turn Docker Compose V2 on automatically for Docker Desktop
 For Docker Desktop installation instructions, see:
 
 - [Install Docker Desktop on Mac](../desktop/mac/install.md)
-- [Install Docker Desktop on Windows](../docker-for-windows/install.md)
+- [Install Docker Desktop on Windows](../desktop/windows/install.md)
 
 To disable Docker Compose V2 using Docker Desktop:
 

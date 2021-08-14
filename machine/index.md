@@ -31,7 +31,7 @@ point to a host called `default`, follow on-screen instructions to complete
 Machine _was_ the _only_ way to run Docker on Mac or Windows previous to Docker
 v1.12. Starting with the beta program and Docker v1.12,
 [Docker Desktop for Mac](../desktop/mac/index.md) and
-[Docker Desktop for Windows](../docker-for-windows/index.md) are available as native apps and the
+[Docker Desktop for Windows](../desktop/windows/index.md) are available as native apps and the
 better choice for this use case on newer desktops and laptops. We encourage you
 to try out these new apps.
 
@@ -52,7 +52,7 @@ Docker Machine has these two broad use cases.
 
   ![Docker Machine on Mac and Windows](img/machine-mac-win.png){: .white-bg}
 
-  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker Desktop for Mac](../desktop/mac/index.md) and [Docker Desktop for Windows](../docker-for-windows/index.md) apps, then you need Docker Machine to run Docker Engine locally.
+  If you work primarily on an older Mac or Windows laptop or desktop that doesn't meet the requirements for the new [Docker Desktop for Mac](../desktop/mac/index.md) and [Docker Desktop for Windows](../desktop/windows/index.md) apps, then you need Docker Machine to run Docker Engine locally.
 
 *  **I want to provision Docker hosts on remote systems**
 
