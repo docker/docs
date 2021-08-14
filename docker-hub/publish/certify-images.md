@@ -227,7 +227,7 @@ Some "testing/helper" scripts are available for testing Linux and Windows Docker
 cat ./run_my_application.sh
 ```
 
-```
+```bash
 #!/usr/bin/env bash
 docker container run -d \
 -p 80:8080 --name tomcat-wildbook \
@@ -237,7 +237,7 @@ $1
 
 #### To inspect the Docker image, `gforghetti/tomcat-wildbook:latest`, with a custom startup script and upload the result to Docker Hub (leave out the `-product-id` parameter if you are just testing):
 
-```
+```console
 root:[~/] # ./inspectDockerImage --start-script ./run_my_application.sh -product-id=<store-product-id> gforghetti/tomcat-wildbook:latest
 ```
 
@@ -462,7 +462,7 @@ root:[~/] #
 
 #### To inspect the Docker image, `gforghetti/apache:latest`, with JSON output:
 
-```
+```console
 root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 ```
 
@@ -589,7 +589,7 @@ root:[~/] # ./inspectDockerImage --json gforghetti/apache:latest | jq
 
 #### To inspect the Docker image, `gforghetti/apache:latest`, with HTML output:
 
-```
+```console
 root:[~/] # ./inspectDockerImage --html gforghetti/apache:latest
 ```
 
@@ -622,7 +622,7 @@ root:[~/] #
 
 #### To inspect the Docker image, `microsoft/nanoserver:latest`:
 
-```
+```console
 PS D:\InspectDockerimage> .\inspectDockerImage microsoft/nanoserver:latest
 ```
 

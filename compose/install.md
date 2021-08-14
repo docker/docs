@@ -159,6 +159,7 @@ $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
+
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
 
@@ -185,6 +186,7 @@ started.
 ```console
 $ pip install docker-compose
 ```
+
 If you are not using virtualenv,
 
 ```console

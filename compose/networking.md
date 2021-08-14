@@ -175,6 +175,7 @@ networks:
     # Use a custom driver
     driver: custom-driver-1
 ```
+
 ## Use a pre-existing network
 
 If you want your containers to join a pre-existing network, use the [`external` option](compose-file/compose-file-v2.md#network-configuration-reference):

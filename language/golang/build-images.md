@@ -236,9 +236,7 @@ Let's build our first Docker image!
 
 ```console
 $ docker build --tag docker-gs-ping .
-```
 
-```
 [+] Building 3.6s (12/12) FINISHED
  => [internal] load build definition from Dockerfile                                      0.1s
  => => transferring dockerfile: 38B                                                       0.0s
@@ -273,9 +271,7 @@ To list images, simply run the `images` command:
 
 ```console
 $ docker images
-```
 
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   39 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
@@ -301,9 +297,7 @@ Now run the `docker images` command to see the updated list of local images:
 
 ```console
 $ docker images
-```
 
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   43 minutes ago   540MB
 docker-gs-ping   v1.0      336a3f164d0f   43 minutes ago   540MB
@@ -323,9 +317,7 @@ Notice that the response from Docker tells us that the image has not been remove
 
 ```console
 $ docker images
-```
 
-```
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 docker-gs-ping   latest    336a3f164d0f   45 minutes ago   540MB
 postgres         13.2      c5ec7353d87d   7 weeks ago      314MB
@@ -385,7 +377,9 @@ $ docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
 
 Comparing the sizes of `docker-gs-ping:multistage` and `docker-gs-ping:latest` we see an order-of-magnitude difference!
 
-```
+```console
+$ docker images
+
 REPOSITORY       TAG          IMAGE ID       CREATED              SIZE
 docker-gs-ping   multistage   e3fdde09f172   About a minute ago   27.1MB
 docker-gs-ping   latest       336a3f164d0f   About an hour ago    540MB

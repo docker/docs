@@ -63,6 +63,7 @@ To add a worker to this swarm, run the following command:
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
+
 ### Configuring default address pools
 
 By default Docker Swarm uses a default address pool `10.0.0.0/8` for global scope (overlay) networks. Every 

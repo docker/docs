@@ -109,8 +109,8 @@ $ dockerd --debug \
 You can learn what configuration options are available in the
 [dockerd reference docs](../../engine/reference/commandline/dockerd.md), or by running:
 
-```
-dockerd --help
+```console
+$ dockerd --help
 ```
 
 Many specific configuration options are discussed throughout the Docker

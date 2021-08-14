@@ -90,13 +90,13 @@ add to their predecessors.
 
 For example, consider this command line:
 
-```
+```console
 $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
 ```
 
 The `docker-compose.yml` file might specify a `webapp` service.
 
-```
+```yaml
 webapp:
   image: examples/web
   ports:
@@ -109,7 +109,7 @@ If the `docker-compose.admin.yml` also specifies this same service, any matching
 fields override the previous file. New values, add to the `webapp` service
 configuration.
 
-```
+```yaml
 webapp:
   build: .
   environment:
@@ -149,7 +149,7 @@ follows: `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
 
 Here's the full example:
 
-```
+```console
 $ docker-compose -f ~/sandbox/rails/docker-compose.yml pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres

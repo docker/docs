@@ -511,6 +511,7 @@ $ docker volume create \
 	--opt o=addr=uxxxxx.your-server.de,username=uxxxxxxx,password=*****,file_mode=0777,dir_mode=0777 \
 	--name cif-volume
 ```
+
 Notice the `addr` option is required if using a hostname instead of an IP so docker can perform the hostname lookup.
 
 ## Backup, restore, or migrate data volumes
@@ -522,7 +523,7 @@ Volumes are useful for backups, restores, and migrations. Use the
 
 For example, create a new container named `dbstore`:
 
-```
+```console
 $ docker run -v /dbdata --name dbstore ubuntu /bin/bash
 ```
 
@@ -532,7 +533,7 @@ Then in the next command, we:
 - Mount a local host directory as `/backup`
 - Pass a command that tars the contents of the `dbdata` volume to a `backup.tar` file inside our `/backup` directory.
 
-```
+```console
 $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
 ```
 
@@ -546,13 +547,13 @@ another that you made elsewhere.
 
 For example, create a new container named `dbstore2`:
 
-```
+```console
 $ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 
 Then un-tar the backup file in the new container`s data volume:
 
-```
+```console
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 
@@ -573,7 +574,7 @@ To automatically remove anonymous volumes, use the `--rm` option. For example,
 this command creates an anonymous `/foo` volume. When the container is removed,
 the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 
-```
+```console
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 
@@ -581,7 +582,7 @@ $ docker run --rm -v /foo -v awesome:/bar busybox top
 
 To remove all unused volumes and free up space:
 
-```
+```console
 $ docker volume prune
 ```
 

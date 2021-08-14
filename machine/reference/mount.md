@@ -46,5 +46,6 @@ You can also call `fuserunmount` (or `fusermount -u`) commands directly.
 $ docker-machine mount -u dev:/home/docker/foo foo
 $ rmdir foo
 ```
+
 **Files are actually being stored on the machine, *not* on the host.**
 So make sure to make a copy of any files you want to keep, before removing it!

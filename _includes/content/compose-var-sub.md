@@ -61,6 +61,6 @@ web:
 If you forget and use a single dollar sign (`$`), Compose interprets the value
 as an environment variable and warns you:
 
-```
+```console
 The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
 ```
