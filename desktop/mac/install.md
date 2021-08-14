@@ -2,6 +2,8 @@
 description: How to install Docker Desktop on Mac
 keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
+redirect_from:
+- /docker-for-mac/install/
 ---
 
 Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, installation instructions, and automatic updates.
@@ -57,8 +59,8 @@ Your Mac must meet the following requirements to successfully install Docker Des
 ## What's included in the installer
 
 The Docker Desktop installation includes
-  [Docker Engine](../engine/index.md), Docker CLI client,
-  [Docker Compose](../compose/index.md), [Docker Content Trust](../engine/security/trust/index.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+  [Docker Engine](../../engine/index.md), Docker CLI client,
+  [Docker Compose](../../compose/index.md), [Docker Content Trust](../../engine/security/trust/index.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 ## Install and run Docker Desktop on Mac
 
@@ -104,7 +106,7 @@ To uninstall Docker Desktop from your Mac:
 >
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker related data local to the machine, and removes the files generated
-> by the application. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
+> by the application. Refer to the [back up and restore data](../backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
 
 ## Where to go next
@@ -113,8 +115,8 @@ To uninstall Docker Desktop from your Mac:
 - [Docker Desktop for Apple silicon](apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
-- [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
+- [FAQs](../faqs.md) provide answers to frequently asked questions.
 - [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Get started with Docker](../get-started/index.md) provides a general Docker tutorial.
-* [Back up and restore data](../desktop/backup-and-restore.md) provides instructions
+- [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
+* [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.

@@ -53,7 +53,7 @@ computer.
 
 After backing up your data, you can uninstall the current version of Docker Desktop
 and install a different version ([Windows](../docker-for-windows/install.md)
-[macOS](../docker-for-mac/install.md), or reset Docker Desktop to factory defaults.
+[macOS](mac/install.md), or reset Docker Desktop to factory defaults.
 
 ## Restore your data
 

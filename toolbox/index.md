@@ -19,7 +19,7 @@ toc_max: 2
 >**Deprecated**
 >
 > Docker Toolbox has been deprecated and is no longer in active development. Please
-> use Docker Desktop instead. See [Docker Desktop for Mac](../docker-for-mac/index.md)
+> use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/mac/index.md)
 > and [Docker Desktop for Windows](../docker-for-windows/index.md).
 {: .warning }
 
@@ -68,7 +68,7 @@ To uninstall Docker Toolbox on Mac:
 
     This step is optional because if you plan
     to re-install Docker Machine as a part
-    of [Docker Desktop for Mac](../docker-for-mac/index.md), you can import and
+    of [Docker Desktop for Mac](../desktop/mac/index.md), you can import and
     continue to manage those machines through Docker.
 
 3.  In your "Applications" folder, remove the "Docker" directory,

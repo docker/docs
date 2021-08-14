@@ -25,9 +25,9 @@ section and choose the best installation path for you.
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="/docker-for-mac/install/"><img src="/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
+                    <a href="/desktop/mac/install/"><img src="/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
                 </div>
-                <h2 id="docker-for-mac"><a href="/docker-for-mac/install/">Docker Desktop for Mac</a></h2>
+                <h2 id="docker-for-mac"><a href="/desktop/mac/install/">Docker Desktop for Mac</a></h2>
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>

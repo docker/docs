@@ -54,7 +54,7 @@ Python package manager or installing Compose as a container.
 
 **Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
+For installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md).
 
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">

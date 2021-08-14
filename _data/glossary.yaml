@@ -71,7 +71,7 @@ Docker: |
   - The docker daemon process running on the host which manages images and containers
   (also called Docker Engine)
 Docker Desktop for Mac: |
-  [Docker Desktop for Mac](/docker-for-mac/) is an easy-to-install, lightweight
+  [Docker Desktop for Mac](/desktop/mac/) is an easy-to-install, lightweight
   Docker development environment designed specifically for the Mac. A native
   Mac application, Docker Desktop for Mac uses the macOS Hypervisor
   framework, networking, and filesystem. It's the best solution if you want

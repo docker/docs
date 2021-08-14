@@ -414,7 +414,7 @@ As a Team, you can get support for Docker Desktop for the number of machines equ
 Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
 
 * [Windows system requirements](../docker-for-windows/install.md#system-requirements)
-* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+* [Mac system requirements](../desktop/mac/install.md#system-requirements)
 
 ### Can I run Docker Desktop on Virtualized hardware?
 

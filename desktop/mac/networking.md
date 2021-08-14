@@ -2,6 +2,7 @@
 description: Networking
 keywords: mac, networking
 redirect_from:
+- /docker-for-mac/networking/
 - /mackit/networking/
 title: Networking features in Docker Desktop for Mac
 ---
@@ -130,5 +131,5 @@ container to random ports on the host.
 $ docker run -d -P --name webserver nginx
 ```
 
-See the [run command](../engine/reference/commandline/run.md) for more details on
+See the [run command](../../engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.

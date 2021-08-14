@@ -2,6 +2,7 @@
 description: Troubleshooting, logs, and known issues
 keywords: mac, troubleshooting, logs, issues
 redirect_from:
+- /docker-for-mac/troubleshoot/
 - /mackit/troubleshoot/
 title: Logs and troubleshooting
 toc_max: 2
@@ -27,7 +28,7 @@ The Troubleshoot page contains the following options:
 
 * **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 
-* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](/docker-for-mac/index/#kubernetes).
+* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](index.md#kubernetes).
 
 * **Clean / Purge data**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
@@ -177,7 +178,7 @@ ways, and create reports.
 
 #### View the Docker Daemon logs
 
-Refer to the [read the logs](../config/daemon/index.md#read-the-logs) section
+Refer to the [read the logs](../../config/daemon/index.md#read-the-logs) section
 to learn how to view the Docker Daemon logs.
 
 <a name="troubleshoot"></a>
@@ -207,7 +208,7 @@ For more about using client and server side certificates, see
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
-cannot start, such as when using [Docker Compose](../compose/gettingstarted.md),
+cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
 you might need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
@@ -418,8 +419,8 @@ As a Team, you can get support for Docker Desktop for the number of machines equ
 
 Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
 
-* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
-* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
+* [Mac system requirements](install.md#system-requirements)
+* [Windows system requirements](../../docker-for-windows/install.md#system-requirements)
 
 ### Can I run Docker Desktop on Virtualized hardware?
 

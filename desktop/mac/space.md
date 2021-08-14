@@ -2,6 +2,8 @@
 description: Disk utilization
 keywords: mac, disk
 title: Disk utilization in Docker for Mac
+redirect_from:
+- /docker-for-mac/space/
 ---
 
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Mac filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory.

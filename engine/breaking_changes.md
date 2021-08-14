@@ -10,15 +10,15 @@ Every Engine release strives to be backward compatible with its predecessors,
 and interface stability is always a priority at Docker.
 
 In all cases, feature removal is communicated three releases
-in advance and documented as part of the [deprecated features](deprecated.md)
+in advance and documented as part of the [deprecated features](/engine/deprecated/)
 page.
   
 The following list compiles any updates to Docker Engine that created
 backwards-incompatibility for old versions of Docker tools.
 
 > **Note**: In the case of your local environment, you should be updating your
-  Docker Engine using [Docker Desktop for Mac](/docker-for-mac),
-  [Docker Desktop for Windows](/docker-for-windows). That way all your tools stay
+  Docker Engine using [Docker Desktop for Mac](../desktop/mac/index.md),
+  [Docker Desktop for Windows](../docker-for-windows/index.md). That way all your tools stay
   in sync with Docker Engine.
 
 ## Engine 1.10

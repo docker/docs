@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 Docker Desktop is built using open source software. For information about the
-licensing, choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
+licensing, choose ![whale menu](mac/images/whale-x.png){: .inline}
 → &nbsp;**About Docker Desktop** and then **Acknowledgements**.
 
 Docker Desktop distributes some components that are licensed under the

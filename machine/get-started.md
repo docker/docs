@@ -14,7 +14,7 @@ page on GitHub.
 
 ## Prerequisite information
 
-With the advent of [Docker Desktop for Mac](../docker-for-mac/index.md) and
+With the advent of [Docker Desktop for Mac](../desktop/mac/index.md) and
 [Docker Desktop for Windows](../docker-for-windows/index.md), we recommend that you use these for your
 primary Docker workflows. You can use these applications to run Docker natively
 on your local system without using Docker Machine at all.

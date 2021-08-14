@@ -32,7 +32,7 @@ redirect_from:
 ## Supported platforms
 
 Docker Engine is available on a variety of [Linux platforms](#server),
-[macOS](../../docker-for-mac/install.md) and [Windows 10](../../docker-for-windows/install.md)
+[macOS](../../desktop/mac/install.md) and [Windows 10](../../docker-for-windows/install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
@@ -42,7 +42,7 @@ your preferred operating system below.
 
 | Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
 |:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     | [{{ yes }}](../../docker-for-mac/install.md)     |
+| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)     |
 | [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |                                                  |
 
 ### Server
