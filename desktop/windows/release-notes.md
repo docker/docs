@@ -35,9 +35,14 @@ This page contains information about the new features, improvements, known issue
 - [containerd v1.4.9](https://github.com/containerd/containerd/releases/tag/v1.4.9)
 - [runc v1.0.1](https://github.com/opencontainers/runc/releases/tag/v1.0.1)
 - [Kubernetes 1.21.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.3)
+- [Linux kernel 5.10.47](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.47-0b705d955f5e283f62583c4e227d64a7924c138f/images/sha256-a4c79bc185ec9eba48dcc802a8881b9d97e532b3f803d23e5b8d4951588f4d51?context=repo)
 
 ### Bug fixes and minor changes
 
+- Update kernel configuration to fix a performance regression in [Docker Desktop 3.0.0](#docker-desktop-300)
+  that caused publishing container ports to take 10 times longer than on older
+  versions. For more information, see [linuxkit/linuxkit#3701](https://github.com/linuxkit/linuxkit/pull/3701)
+  and [docker/for-mac#5668](https://github.com/docker/for-mac/issues/5668).
 - Fixed a bug where the DNS server would fail after receiving an unexpectedly large datagram.
 - Fixed spurious traces on iptables updates.
 - Fixed slowness when adding multiple ports forwarding option.
