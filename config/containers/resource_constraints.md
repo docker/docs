@@ -191,6 +191,7 @@ most 50% of the CPU every second.
 ```console
 $ docker run -it --cpus=".5" ubuntu /bin/bash
 ```
+
 Which is the equivalent to manually specifying `--cpu-period` and `--cpu-quota`;
 
 ```console

@@ -130,7 +130,7 @@ is automatically added to the local trust store. If you are importing a separate
 key, you will need to use the
 `$ docker trust key load` command.
 
-```
+```console
 $ docker trust key generate jeff
 Generating key for jeff...
 Enter passphrase for new jeff key with ID 9deed25:
@@ -140,7 +140,7 @@ Successfully generated and loaded private key. Corresponding public key availabl
 
 Or if you have an existing key:
 
-```
+```console
 $ docker trust key load key.pem --name jeff
 Loading key from "key.pem"...
 Enter passphrase for new jeff key with ID 8ae710e:
@@ -156,7 +156,7 @@ canonical root key. To understand more about initiating a repository, and the
 role of delegations, head to
 [delegations for content trust](trust_delegation.md).
 
-```
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for new repository key with ID 10b5e94:
@@ -165,7 +165,7 @@ Enter passphrase for new repository key with ID 10b5e94:
 Finally, we will use the delegation private key to sign a particular tag and
 push it up to the registry.
 
-```
+```console
 $ docker trust sign registry.example.com/admin/demo:1
 Signing and pushing trust data for local image registry.example.com/admin/demo:1, may overwrite remote trust data
 The push refers to repository [registry.example.com/admin/demo]
@@ -179,7 +179,7 @@ Successfully signed registry.example.com/admin/demo:1
 Alternatively, once the keys have been imported an image can be pushed with the
 `$ docker push` command, by exporting the DCT environmental variable.
 
-```
+```console
 $ export DOCKER_CONTENT_TRUST=1
 
 $ docker push registry.example.com/admin/demo:1
@@ -194,7 +194,7 @@ Successfully signed registry.example.com/admin/demo:1
 Remote trust data for a tag or a repository can be viewed by the
 `$ docker trust inspect` command:
 
-```
+```console
 $ docker trust inspect --pretty registry.example.com/admin/demo:1
 
 Signatures for registry.example.com/admin/demo:1
@@ -215,7 +215,7 @@ Administrative keys for registry.example.com/admin/demo:1
 
 Remote Trust data for a tag can be removed by the `$ docker trust revoke` command:
 
-```
+```console
 $ docker trust revoke registry.example.com/admin/demo:1
 Enter passphrase for signer key with ID 8ae710e:
 Successfully deleted signature for registry.example.com/admin/demo:1
@@ -241,7 +241,7 @@ For example, with DCT enabled a `docker pull someimage:latest` only
 succeeds if `someimage:latest` is signed. However, an operation with an explicit
 content hash always succeeds as long as the hash exists:
 
-```
+```console
 $ docker pull registry.example.com/user/image:1
 Error: remote trust data does not exist for registry.example.com/user/image: registry.example.com does not have trust data for registry.example.com/user/image
 

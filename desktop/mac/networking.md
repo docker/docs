@@ -2,6 +2,7 @@
 description: Networking
 keywords: mac, networking
 redirect_from:
+- /docker-for-mac/networking/
 - /mackit/networking/
 title: Networking features in Docker Desktop for Mac
 ---
@@ -22,7 +23,7 @@ Docker Desktop for {{Arch}} intercepts traffic from the containers and injects i
 
 When you run a container with the `-p` argument, for example:
 
-```
+```console
 $ docker run -p 80:80 -d nginx
 ```
 
@@ -32,7 +33,7 @@ host and container ports are the same. What if you need to specify a different
 host port? If, for example, you already have something running on port 80 of
 your host machine, you can connect the container to a different port:
 
-```
+```console
 $ docker run -p 8000:80 -d nginx
 ```
 
@@ -130,5 +131,5 @@ container to random ports on the host.
 $ docker run -d -P --name webserver nginx
 ```
 
-See the [run command](../engine/reference/commandline/run.md) for more details on
+See the [run command](../../engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.

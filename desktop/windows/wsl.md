@@ -2,6 +2,7 @@
 description: Docker Desktop WSL 2 backend
 keywords: WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker
 redirect_from:
+- /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
 title: Docker Desktop WSL 2 backend
 toc_min: 2
@@ -113,8 +114,8 @@ Starting with Docker Desktop 3.1.0, Docker Desktop supports WSL 2 GPU Paravirtua
 
 To validate that everything works as expected, run the following command to run a short benchmark on your GPU:
 
-```
-❯ docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
+```console
+$ docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
 Run "nbody -benchmark [-numbodies=<numBodies>]" to measure performance.
         -fullscreen       (run n-body simulation in fullscreen mode)
         -fp64             (use double precision floating point values for simulation)

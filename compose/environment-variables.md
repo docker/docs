@@ -93,6 +93,7 @@ done using the `--env-file` option:
 ```console
 $ docker-compose --env-file ./config/.env.dev up 
 ```
+
 This file path is relative to the current working directory where the Docker Compose
 command is executed.
 
@@ -120,6 +121,7 @@ services:
   web:
     image: 'webapp:v1.5'
 ```
+
 Passing the `--env-file ` argument overrides the default file path:
 
 ```console
@@ -132,7 +134,7 @@ services:
 
 When an invalid file path is being passed as `--env-file` argument, Compose returns an error:
 
-```
+```console
 $ docker-compose --env-file ./doesnotexist/.env.dev  config
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```

@@ -93,7 +93,7 @@ Reboot your desktop system to clear out any routing table problems. Without a re
     which asks you to create [three networked host machines](../../engine/swarm/swarm-tutorial/index.md#three-networked-host-machines),
     you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
 
-*   Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
+* Use the Microsoft Hyper-V driver and reference the new virtual switch you created.
 
     ```console
     $ docker-machine create -d hyperv --hyperv-virtual-switch <NameOfVirtualSwitch> <nameOfNode>
@@ -127,7 +127,8 @@ Reboot your desktop system to clear out any routing table problems. Without a re
     ker\Docker\Resources\bin\docker-machine.exe env manager1
     PS C:\WINDOWS\system32>
     ```
-*   Use the same process, driver, and network switch to create the other nodes.
+  
+* Use the same process, driver, and network switch to create the other nodes.
 
     For our example, the commands are:
 

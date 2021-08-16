@@ -636,7 +636,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
   To access the Dashboard UI, select the Docker menu from the system tray and then click **Dashboard**.
 
-- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](https://docs.docker.com/docker-for-windows/wsl/).
+- **WSL 2 backend:** The new Docker Desktop WSL 2 backend replaces the Docker Desktop WSL 2 Tech Preview. The WSL 2 backend architecture introduces support for Kubernetes, provides an updated Docker daemon, offers VPN-friendly networking, and additional features. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
 
 - **New file sharing implementation:** Docker Desktop introduces a new file sharing implementation which uses gRPC, FUSE, and Hypervisor sockets instead of Samba, CIFS, and Hyper-V networking. The new implementation  offers improved I/O performance. Additionally, when using the new file system:
 
@@ -711,7 +711,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 #### New
 
-- [Docker Desktop WSL 2 Tech Preview](https://docs.docker.com/docker-for-windows/wsl/)
+- [Docker Desktop WSL 2 Tech Preview](wsl.md)
 
 #### Bug fixes and minor changes
 
@@ -1140,7 +1140,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 18.02.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc1)
 
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See https://docs.docker.com/docker-for-windows/kubernetes/
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md).
   - LCOW containers can now be run next to Windows containers (on Windows RS3 build 16299 and later). Use `--platform=linux` in Windows container mode to run Linux Containers On Windows. Note that LCOW is still experimental, and requires daemon `experimental` option.
 
 * Bug fixes and minor changes
@@ -2114,7 +2114,7 @@ Unreleased. See Beta 23 for changes.
 
 **New**
 
-* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](index.md#download-docker-for-windows).
+* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](install.md).
 
 * Removed the docker host name. Containers with exported ports are reachable via localhost.
 

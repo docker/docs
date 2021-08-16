@@ -4,6 +4,7 @@ keywords: windows, troubleshooting, logs, issues
 redirect_from:
 - /windows/troubleshoot/
 - /docker-for-win/troubleshoot/
+- /docker-for-windows/troubleshoot/
 title: Logs and troubleshooting
 toc_max: 2
 ---
@@ -111,13 +112,13 @@ does not send client certificates to them. Commands like `docker run` that
 attempt to pull from the registry produces error messages on the command line,
 like this:
 
-```
+```console
 Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
 ```
 
 As well as on the registry. For example:
 
-```
+```console
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```
@@ -142,14 +143,14 @@ volumes or find a way to make the applications work with the default file
 permissions.
 
 See also,
-[Can I change permissions on shared volumes for container-specific deployment requirements?](../desktop/faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+[Can I change permissions on shared volumes for container-specific deployment requirements?](../faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
 #### Volume mounting requires shared folders for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access is denied to a volume mount, or a service
-cannot start, such as when using [Docker Compose](../compose/gettingstarted.md),
+cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
 you might need to enable [shared folders](index.md#file-sharing).
 
 With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. Click ![whale menu](images/whale-x.png){: .inline}
@@ -158,7 +159,7 @@ Dockerfile and volume.
 
 #### Support for symlinks
 
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../desktop/faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -413,8 +414,8 @@ As a Team, you can get support for Docker Desktop for the number of machines equ
 
 Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
 
-* [Windows system requirements](../docker-for-windows/install.md#system-requirements)
-* [Mac system requirements](../docker-for-mac/install.md#system-requirements)
+* [Windows system requirements](install.md#system-requirements)
+* [Mac system requirements](../mac/install.md#system-requirements)
 
 ### Can I run Docker Desktop on Virtualized hardware?
 

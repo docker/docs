@@ -13,7 +13,7 @@ toc_max: 2
 
 ### What are the system requirements for Docker Desktop?
 
-For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](../docker-for-mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](../docker-for-windows/install.md#system-requirements).
+For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](windows/install.md#system-requirements).
 
 ### What is an experimental feature?
 
@@ -21,7 +21,7 @@ For information about Docker Desktop system requirements, see [Docker Desktop fo
 
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 
-You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](../docker-for-mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](../docker-for-windows/troubleshoot.md).
+You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](windows/troubleshoot.md).
 
 If you do not find a solution in Troubleshooting, browse issues on
 [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} or [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"} GitHub repository, or create a new one.
@@ -52,19 +52,19 @@ For details, see [Docker Engine API](../engine/api/index.md).
 Both Mac and Windows have a changing IP address (or none if you have no network access). On both Mac and Windows, we recommend that you connect to the special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host. This is for development purposes and does not work in a production environment outside of Docker Desktop.
 
 For more information and examples, see how to connect from a container to a service on the host
-[on Mac](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+[on Mac](mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
 ### How do I connect to a container from Mac or Windows?
 
 We recommend that you publish a port, or connect from another container. Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 
 For more information and examples, see
-[I want to connect to a container from Mac](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](../docker-for-windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
+[I want to connect to a container from Mac](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
 
 ### How do I add custom CA certificates?
 
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates on Mac](../docker-for-mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](../docker-for-windows/index.md#adding-tls-certificates).
+[Add TLS certificates on Mac](mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](windows/index.md#adding-tls-certificates).
 
 ### Can I pass through a USB device to a container?
 
@@ -79,7 +79,7 @@ problems and intermittent failures may still occur due to the way these apps
 virtualize the hardware. For these reasons, **Docker Desktop is not supported in
 nested virtualization scenarios**. It might work in some cases, and not in others.
 
-For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
+For more information, see [Running Docker Desktop in nested virtualization scenarios](windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
 ### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
 
@@ -98,7 +98,7 @@ After updating the `settings.json` file, close and restart Docker Desktop to app
 
 ### When will Docker Desktop move to a cumulative release stream?
 
-Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](../docker-for-mac/install.md#automatic-updates).
+Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](mac/install.md#automatic-updates).
 
 ### How do new users install Docker Desktop?
 
@@ -124,7 +124,7 @@ Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a
 
 ### Does Docker Desktop offer support?
 
-Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](../docker-for-mac/troubleshoot.md#support).
+Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](mac/troubleshoot.md#support).
 
 For information about the pricing plans and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
@@ -151,7 +151,7 @@ For more information, see [Docker Data Processing Agreement](https://www.docker.
 
 ### Is Docker Desktop compatible with Apple silicon processors?
 
-Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](../docker-for-mac/apple-silicon.md).
+Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](mac/apple-silicon.md).
 
 ### What is HyperKit?
 
@@ -182,7 +182,7 @@ Docker Desktop uses the Windows Hyper-V features. While older Windows versions h
 
 ### Can I install Docker Desktop on Windows 10 Home?
 
-If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](../docker-for-windows/wsl.md).
+If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](windows/wsl.md).
 
 ### Can I run Docker Desktop on Windows Server?
 
@@ -205,19 +205,19 @@ Right-click to add the user to the group. Log out and log back in for the change
 ### Why does Docker Desktop fail to start when anti-virus software is installed?
 
 Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
-Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../docker-for-windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
+Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
 
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 
 Docker Desktop does not enable you to control (`chmod`)
-the Unix-style permissions on [shared volumes](../docker-for-windows/index.md#file-sharing) for
+the Unix-style permissions on [shared volumes](windows/index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
 [0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for
 `group`) which is not configurable.
 
 For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+[Permissions errors on data directories for shared volumes](windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 
 ### How do symlinks work on Windows?
 

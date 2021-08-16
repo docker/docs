@@ -579,10 +579,7 @@ format `file://<filename>` or `registry://<value-name>`.
 When using `file:`, the referenced file must be present in the `CredentialSpecs`
 subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
 on Windows. The following example loads the credential spec from a file named
-
-```
-C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json
-```
+`C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`.
 
 ```yaml
 credential_spec:

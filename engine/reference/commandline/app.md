@@ -68,7 +68,7 @@ it initializes a new project based on the Compose file.
 
 Use the following command to initialize a new empty project called "hello-world".
 
-```
+```console
 $ docker app init hello-world
 Created "hello-world.dockerapp"
 ```
@@ -82,7 +82,7 @@ project with `.dockerapp` appended, and the three YAML files are:
 
 Inspect the YAML files with the following commands.
 
-```
+```console
 $ cd hello-world.dockerapp/
 
 $ cat docker-compose.yml
@@ -116,19 +116,19 @@ This section describes editing the project YAML files so that it runs a simple w
 Use your preferred editor to edit the `docker-compose.yml` YAML file and update it with 
 the following information:
 
-```
+```yaml
 version: "3.6"
 services:
   hello:
     image: hashicorp/http-echo
     command: ["-text", "${hello.text}"]
     ports:
-      - ${hello.port}:5678
+      - "${hello.port}:5678"
 ```
 
 Update the `parameters.yml` file to the following:
 
-```
+```yaml
 hello:
   port: 8080
   text: Hello world!
@@ -147,7 +147,7 @@ It is a quick way to check how to configure the application before deployment, w
 the `Compose file`. It's important to note that the application is not running at this point, and that 
 the `inspect` operation inspects the configuration file(s).
 
-```
+```console
 $ docker app inspect hello-world.dockerapp
 hello-world 0.1.0
 
@@ -171,7 +171,7 @@ The application is ready to be validated and rendered.
 Docker App provides the `validate` subcommand to check syntax and other aspects of the configuration. 
 If the app passes validation, the command returns no arguments.
 
-```
+```console
 $ docker app validate hello-world.dockerapp
 Validated "hello-world.dockerapp"
 ```
@@ -199,7 +199,7 @@ Use `docker app install` to deploy the application.
 
 Use the following command to deploy (install) the application.
 
-```
+```console
 $ docker app install hello-world.dockerapp --name my-app
 Creating network my-app_default
 Creating service my-app_hello
@@ -211,7 +211,7 @@ installation container and as a target context to deploy the application. You ca
 using the flag `--target-context` or by using the environment variable `DOCKER_TARGET_CONTEXT`. This flag is also 
 available for the commands `status`, `upgrade`, and `uninstall`.
 
-```
+```console
 $ docker app install hello-world.dockerapp --name my-app --target-context=my-big-production-cluster
 Creating network my-app_default
 Creating service my-app_hello
@@ -223,7 +223,7 @@ valid if they are deployed on different target contexts.
 
 You can check the status of the app with the `docker app status <app-name>` command.
 
-```
+```console
 $ docker app status my-app
 INSTALLATION
 ------------
@@ -254,7 +254,7 @@ miqdk1v7j3zk    my-app_hello    replicated    1/1         hashicorp/http-echo:la
 
 The app is deployed using the stack orchestrator. This means you can also inspect it using the regular `docker stack` commands.
 
-```
+```console
 $ docker stack ls
 NAME                SERVICES            ORCHESTRATOR
 my-app              1                   Swarm
@@ -265,7 +265,8 @@ port 8080 and see the app. You must ensure traffic to port 8080 is allowed on
 the connection from your browser to your Docker host.
 
 Now change the port of the application using `docker app upgrade <app-name>` command.
-```
+
+```console
 $ docker app upgrade my-app --set hello.port=8181
 Upgrading service my-app_hello
 Application "my-app" upgraded on context "default"
@@ -286,13 +287,13 @@ Rendering is the process of reading the entire application configuration and out
 
 Use the following command to render the app to a Compose file called `docker-compose.yml` in the current directory.
 
-```
+```console
 $ docker app render --output docker-compose.yml hello-world.dockerapp
 ```
 
 Check the contents of the resulting `docker-compose.yml` file.
 
-```
+```console
 $ cat docker-compose.yml
 version: "3.6"
 services:
@@ -315,7 +316,7 @@ section of the project's YAML file. For example, `${hello.text}` has been expand
 
 Try to render the application with a different text:
 
-```
+```console
 $ docker app render hello-world.dockerapp --set hello.text="Hello whales!" 
 version: "3.6"
 services:
@@ -333,7 +334,7 @@ services:
 
 Use `docker-compose up` to deploy the app.
 
-```
+```console
 $ docker-compose up --detach
 WARNING: The Docker Engine you're using is running in swarm mode.
 <Snip>
@@ -354,7 +355,7 @@ Deploying the app as a Docker stack is a two-step process very similar to deploy
 Complete the steps in the previous section to render the Docker app project as a Compose file and make sure 
 you're ready to deploy it as a Docker Stack. Your Docker host must be in Swarm mode.
 
-```
+```console
 $ docker stack deploy hello-world-app -c docker-compose.yml
 Creating network hello-world-app_default
 Creating service hello-world-app_hello
@@ -394,7 +395,7 @@ $ docker app push my-app --platform="linux/amd64" --tag <hub-id>/<repo>:0.1.0
 Now that the app is pushed to the registry, try an `inspect` and `install` command against it. 
 The location of your app is different from the one provided in the examples.
 
-```
+```console
 $ docker app inspect myuser/hello-world:0.1.0
 hello-world 0.1.0
 
@@ -412,7 +413,7 @@ This action was performed directly against the app in the registry.
 
 Now install it as a native Docker App by referencing the app in the registry, with a different port.
 
-```
+```console
 $ docker app install myuser/hello-world:0.1.0 --set hello.port=8181
 Creating network hello-world_default
 Creating service hello-world_hello
@@ -424,14 +425,14 @@ Test that the app is working.
 The app used in these examples is a simple web server that displays the text "Hello world!" on port 8181, 
 your app might be different.
 
-```
+```console
 $ curl http://localhost:8181
 Hello world!
 ```
 
 Uninstall the app.
 
-```
+```console
 $ docker app uninstall hello-world
 Removing service hello-world_hello
 Removing network hello-world_default

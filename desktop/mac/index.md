@@ -2,6 +2,7 @@
 description: Getting Started
 keywords: mac, tutorial, run, docker, local, machine
 redirect_from:
+- /docker-for-mac/
 - /docker-for-mac/index/
 - /docker-for-mac/mutagen/
 - /docker-for-mac/mutagen-caching/
@@ -107,8 +108,8 @@ File share settings are:
  * Shared folders are designed to allow application code to be edited 
  on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much 
- better if they are stored in the Linux VM, using a [data volume](../storage/volumes.md)
- (named volume) or [data container](../storage/volumes.md).
+ better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
+ (named volume) or [data container](../../storage/volumes.md).
 >
  * If you share the whole of your home directory into a container, MacOS may
  prompt you to give Docker access to personal areas of your home directory such as
@@ -137,7 +138,7 @@ Your proxy settings, however, will not be propagated into the containers you sta
 If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
 
-```
+```console
 $ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -212,7 +213,7 @@ Server: Docker Engine - Community
 Docker Desktop includes a standalone Kubernetes server that runs on your Mac, so
 that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
-For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ### Reset
 
@@ -224,7 +225,7 @@ For information about the reset options, see [Logs and Troubleshooting](troubles
 
 ## Dashboard
 
-The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Desktop Dashboard](../desktop/dashboard.md).
+The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
 
 ## Add TLS certificates
 
@@ -250,7 +251,7 @@ $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.ke
 Or, if you prefer to add the certificate to your own local keychain only (rather
 than for all users), run this command instead:
 
-```
+```console
 $ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt
 ```
 
@@ -322,7 +323,7 @@ also in your keychain.
 
 To learn more about how to install a CA root certificate for the registry and
 how to set the client TLS certificate for verification, see
-[Verify repository client with certificates](../engine/security/certificates.md)
+[Verify repository client with certificates](../../engine/security/certificates.md)
 in the Docker Engine topics.
 
 ## Install shell completion
@@ -411,11 +412,11 @@ For information about providing feedback on the documentation or update it yours
 
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 
-For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){:target="_blank"
+For more information, refer to the following [Docker Hub topics](../../docker-hub/index.md){:target="_blank"
 class="_"}:
 
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
-* [Builds](../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
+* [Organizations and Teams in Docker Hub](../../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
+* [Builds](../../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
 
 ### Two-factor authentication
 
@@ -444,7 +445,7 @@ After you have successfully authenticated, you can access your organizations and
   walkthroughs and source code.
 
 * For a summary of Docker command line interface (CLI) commands, see
-  [Docker CLI Reference Guide](../engine/api/index.md){: target="_blank" rel="noopener" class="_"}.
+  [Docker CLI Reference Guide](../../engine/api/index.md){: target="_blank" rel="noopener" class="_"}.
 
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
   (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){: target="_blank" rel="noopener" class="_"}.

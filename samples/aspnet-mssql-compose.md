@@ -27,8 +27,8 @@ configure this app to use our SQL Server database, and then create a
 1.  Create a new directory for your application.
 
     This directory is the context of your docker-compose project. For
-    [Docker Desktop for Windows](../docker-for-windows/index.md#file-sharing) and
-    [Docker Desktop for Mac](../docker-for-mac/index.md#file-sharing), you
+    [Docker Desktop for Windows](../desktop/windows/index.md#file-sharing) and
+    [Docker Desktop for Mac](../desktop/mac/index.md#file-sharing), you
     need to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a
@@ -127,7 +127,7 @@ configure this app to use our SQL Server database, and then create a
     > variable below to the one you defined in the `docker-compose.yml` file.
 
     ```csharp
-    [...]
+    <...>
     public void ConfigureServices(IServiceCollection services)
     {
         // Database connection string.
@@ -149,7 +149,7 @@ configure this app to use our SQL Server database, and then create a
         services.AddTransient<IEmailSender, AuthMessageSender>();
         services.AddTransient<ISmsSender, AuthMessageSender>();
     }
-    [...]
+    <...>
     ```
 
 1.  Go to `app.csproj`. You see a line like:
@@ -176,8 +176,8 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker Desktop for Mac](../docker-for-mac/index.md#advanced) and
-    [Docker Desktop for Windows](../docker-for-windows/index.md#advanced).
+    [Docker Desktop for Mac](../desktop/mac/index.md#advanced) and
+    [Docker Desktop for Windows](../desktop/windows/index.md#advanced).
     This is necessary to run the SQL Server on Linux container.
 
 1.  Run the `docker-compose up` command. After a few seconds, you should be able

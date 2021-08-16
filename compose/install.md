@@ -54,7 +54,7 @@ Python package manager or installing Compose as a container.
 
 **Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
+For installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md).
 
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
@@ -63,7 +63,7 @@ For installation instructions, see [Install Docker Desktop on Mac](../docker-for
 
 **Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../desktop/windows/install.md).
 
 If you are running the Docker daemon and client directly on Microsoft
 Windows Server, follow the instructions in the Windows Server tab.
@@ -159,6 +159,7 @@ $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
+
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
 
@@ -185,6 +186,7 @@ started.
 ```console
 $ pip install docker-compose
 ```
+
 If you are not using virtualenv,
 
 ```console

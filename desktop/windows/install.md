@@ -3,6 +3,7 @@ description: How to install Docker Desktop for Windows
 keywords: windows, install, download, run, docker, local
 title: Install Docker Desktop on Windows
 redirect_from:
+- /docker-for-windows/install/
 - /docker-ee-for-windows/install/
 - /docker-for-windows/install-windows-home/
 - /ee/docker-ee/windows/docker-ee/
@@ -71,9 +72,9 @@ Hyper-V on Windows 10:
 
 ### What's included in the installer
 
-The Docker Desktop installation includes [Docker Engine](../engine/index.md),
-Docker CLI client, [Docker Compose](../compose/index.md),
-[Docker Content Trust](../engine/security/trust/index.md),
+The Docker Desktop installation includes [Docker Engine](../../engine/index.md),
+Docker CLI client, [Docker Compose](../../compose/index.md),
+[Docker Content Trust](../../engine/security/trust/index.md),
 [Kubernetes](https://github.com/kubernetes/kubernetes/),
 and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
@@ -83,7 +84,7 @@ accounts use the same VM to build and run containers. Note that it is not possib
 
 Nested virtualization scenarios, such as running Docker Desktop on a
 VMWare or Parallels instance might work, but there are no guarantees. For
-more information, see [Running Docker Desktop in nested virtualization scenarios](troubleshoot.md#running-docker-desktop-for-windows-in-nested-virtualization-scenarios).
+more information, see [Running Docker Desktop in nested virtualization scenarios](troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
 ### About Windows containers
 
@@ -126,7 +127,7 @@ When the whale icon in the status bar stays steady, Docker Desktop is up-and-run
 ![whale on taskbar](images/whale-icon-systray.png)
 
 If the whale icon is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see [Docker Settings](index.md#docker-settings-dialog).
+taskbar to show it. To learn more, see [Docker Settings](index.md#settings).
 
 ## Quick Start Guide
 
@@ -154,7 +155,7 @@ To uninstall Docker Desktop from your Windows machine:
 >
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker related data local to the machine, and removes the files generated
-> by the application. Refer to the [back up and restore data](../desktop/backup-and-restore.md)
+> by the application. Refer to the [back up and restore data](../backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
 
 ## Where to go next
@@ -164,6 +165,6 @@ To uninstall Docker Desktop from your Windows machine:
   deploy a multi-service stack.
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
-* [FAQs](../desktop/faqs.md) provide answers to frequently asked questions.
+* [FAQs](../faqs.md) provide answers to frequently asked questions.
 * [Release notes](release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-* [Back up and restore data](../desktop/backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.
+* [Back up and restore data](../backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.

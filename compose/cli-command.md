@@ -28,7 +28,7 @@ Introduction of the [Compose specification](https://github.com/compose-spec/comp
 
 While docker-compose is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. This allows us to include community proposals, experimental implementations by the Docker CLI and/or Engine, and deliver features faster to users. Compose V2 also  supports some of the newer additions to the Compose specification, such as [profiles](profiles.md) and [GPU](gpu-support.md) devices.
 
-Additionally, Compose V2 also supports [Apple silicon](../docker-for-mac/apple-silicon.md).
+Additionally, Compose V2 also supports [Apple silicon](../desktop/mac/apple-silicon.md).
 
 For more information about the flags that are supported in the new compose command, see the [docker-compose compatibility list](cli-command-compatibility.md).
 
@@ -46,8 +46,8 @@ We will progressively turn Docker Compose V2 on automatically for Docker Desktop
 
 For Docker Desktop installation instructions, see:
 
-- [Install Docker Desktop on Mac](../docker-for-mac/install.md)
-- [Install Docker Desktop on Windows](../docker-for-windows/install.md)
+- [Install Docker Desktop on Mac](../desktop/mac/install.md)
+- [Install Docker Desktop on Windows](../desktop/windows/install.md)
 
 To disable Docker Compose V2 using Docker Desktop:
 

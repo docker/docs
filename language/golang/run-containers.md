@@ -92,9 +92,7 @@ Since we ran our container in the background, how do we know if our container is
 
 ```console
 $ docker ps
-```
 
-```
 CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"   41 seconds ago   Up 40 seconds   0.0.0.0:8080->8080/tcp   inspiring_ishizaka
 ```
@@ -112,6 +110,7 @@ Now rerun the `docker ps` command to see a list of running containers.
 
 ```console
 $ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
@@ -120,10 +119,8 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 Docker containers can be started, stopped and restarted. When we stop a container, it is not removed but the status is changed to stopped and the process inside of the container is stopped. When we ran the `docker ps` command, the default output is to only show running containers. If we pass the `--all` or `-a` for short, we will see all containers on our system, that is stopped containers and running containers.
 
 ```console
-$ docker ps -a
-```
+$ docker ps -all
 
-```
 CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS                      PORTS     NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"        About a minute ago   Exited (2) 23 seconds ago             inspiring_ishizaka
 f65dbbb9a548   docker-gs-ping   "/docker-gs-ping"        3 minutes ago        Exited (2) 2 minutes ago              wizardly_joliot
@@ -142,10 +139,8 @@ $ docker restart inspiring_ishizaka
 Now, list all the containers again using the `ps` command:
 
 ```console
-$ docker ps --all
-```
+$ docker ps -a
 
-```
 CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS                     PORTS                    NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"        2 minutes ago    Up 5 seconds               0.0.0.0:8080->8080/tcp   inspiring_ishizaka
 f65dbbb9a548   docker-gs-ping   "/docker-gs-ping"        4 minutes ago    Exited (2) 2 minutes ago                            wizardly_joliot
@@ -172,9 +167,7 @@ Again, make sure you replace the containers names in the below command with the 
 
 ```console
 $ docker rm inspiring_ishizaka wizardly_joliot magical_carson gifted_mestorf
-```
 
-```
 inspiring_ishizaka
 wizardly_joliot
 magical_carson
@@ -194,9 +187,7 @@ $ docker run -d -p 8080:8080 --name rest-server docker-gs-ping
 
 ```console
 $ docker ps
-```
 
-```
 CONTAINER ID   IMAGE            COMMAND             CREATED          STATUS          PORTS                    NAMES
 3bbc6a3102ea   docker-gs-ping   "/docker-gs-ping"   25 seconds ago   Up 24 seconds   0.0.0.0:8080->8080/tcp   rest-server
 ```

@@ -4,6 +4,6 @@ Starting with Docker Desktop 3.0.0, updates to Docker Desktop will be available 
 
 > To encourage developers to stay up to date, Docker Desktop displays a reminder two weeks after an update becomes available. You can dismiss this daily reminder by clicking **Snooze**. You can skip an update when a reminder appears by clicking the **Skip this update** option.
 
-![Snooze update](../../docker-for-mac/images/snooze-update.png){:width="500px"}
+![Snooze update](/desktop/mac/images/snooze-update.png){:width="500px"}
 
 Click **Download update** When you are ready to download the update. This downloads the update in the background. After downloading the update, click **Update and restart** from the Docker menu. This installs the latest update and restarts Docker Desktop for the changes to take effect.

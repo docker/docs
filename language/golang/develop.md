@@ -132,8 +132,8 @@ $ docker exec -it roach ./cockroach sql --insecure
 An example of interaction with the SQL shell is presented below.
 
 {% raw %}
-```
-oliver@hki:~$ sudo docker exec -it roach ./cockroach sql --insecure
+```console
+$ sudo docker exec -it roach ./cockroach sql --insecure
 #
 # Welcome to the CockroachDB SQL shell.
 # All statements must be terminated by a semicolon.
@@ -580,7 +580,7 @@ This Docker Compose configuration is super convenient as we do not have to type 
 
 Docker Compose will automatically read environment variables from a `.env` file if it is available. Since our Compose file requires `PGPASSWORD` to be set, we add the following content to the `.env` file:
 
-```
+```bash
 PGPASSWORD=whatever
 ```
 

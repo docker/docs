@@ -14,8 +14,8 @@ page on GitHub.
 
 ## Prerequisite information
 
-With the advent of [Docker Desktop for Mac](../docker-for-mac/index.md) and
-[Docker Desktop for Windows](../docker-for-windows/index.md), we recommend that you use these for your
+With the advent of [Docker Desktop for Mac](../desktop/mac/index.md) and
+[Docker Desktop for Windows](../desktop/windows/index.md), we recommend that you use these for your
 primary Docker workflows. You can use these applications to run Docker natively
 on your local system without using Docker Machine at all.
 
@@ -42,7 +42,7 @@ driver.
 
 The prerequisites are:
 
-* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../docker-for-windows/install.md#what-to-know-before-you-install)).
+* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../desktop/windows/install.md#what-to-know-before-you-install)).
 
 * Set up the Hyper-V driver to use an external virtual network switch See
 the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,

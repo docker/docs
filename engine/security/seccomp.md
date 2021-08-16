@@ -120,7 +120,7 @@ the reason each syscall is blocked rather than white-listed.
 You can pass `unconfined` to run a container without the default seccomp
 profile.
 
-```
+```console
 $ docker run --rm -it --security-opt seccomp=unconfined debian:jessie \
     unshare --map-root-user --user sh -c whoami
 ```
