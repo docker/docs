@@ -79,7 +79,7 @@ This loss also requires **manual intervention** from every consumer that pulled
 the tagged image prior to the loss. Image consumers would get an error for
 content that they already downloaded:
 
-```
+```console
 Warning: potential malicious behavior - trust data has insufficient signatures for remote repository docker.io/my/image: valid signatures did not meet threshold
 ```
 

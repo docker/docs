@@ -14,7 +14,7 @@ variable or by making BuildKit the default setting.
 To set the BuildKit environment variable when running the `docker build` command,
 run:
 
-```
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 

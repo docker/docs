@@ -205,6 +205,7 @@ $ docker scan --json --group-issues docker-scan:e2e
       "path": "docker-scan:e2e"
 }
 ```
+
 You can find all the sources of the vulnerability in the `from` section.
 
 ### Checking the dependency tree

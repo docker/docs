@@ -127,7 +127,7 @@ configure this app to use our SQL Server database, and then create a
     > variable below to the one you defined in the `docker-compose.yml` file.
 
     ```csharp
-    [...]
+    <...>
     public void ConfigureServices(IServiceCollection services)
     {
         // Database connection string.
@@ -149,7 +149,7 @@ configure this app to use our SQL Server database, and then create a
         services.AddTransient<IEmailSender, AuthMessageSender>();
         services.AddTransient<ISmsSender, AuthMessageSender>();
     }
-    [...]
+    <...>
     ```
 
 1.  Go to `app.csproj`. You see a line like:

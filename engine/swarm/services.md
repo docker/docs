@@ -132,22 +132,25 @@ The credential spec contained in the specified `config` is used.
 
  The following simple example retrieves the gMSA name and JSON contents from your Active Directory (AD) instance:
 
- ```
-name="mygmsa"
-contents="{...}"
-echo $contents > contents.json
+ ```console
+$ name="mygmsa"
+$ contents="{...}"
+$ echo $contents > contents.json
 ```
+
 Make sure that the nodes to which you are deploying are correctly configured for the gMSA.
 
  To use a Config as a credential spec, create a Docker Config in a credential spec file named `credpspec.json`. 
  You can specify any name for the name of the `config`. 
 
+```console
+$ docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
 ```
-docker config create --label com.docker.gmsa.name=mygmsa credspec credspec.json
-```
+
 Now you can create a service using this credential spec. Specify the `--credential-spec` flag with the config name:
-```
-docker service create --credential-spec="config://credspec" <your image>
+
+```console
+$ docker service create --credential-spec="config://credspec" <your image>
 ```
 
  Your service uses the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec is not mounted into the container.

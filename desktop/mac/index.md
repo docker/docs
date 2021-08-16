@@ -138,7 +138,7 @@ Your proxy settings, however, will not be propagated into the containers you sta
 If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
 
-```
+```console
 $ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -251,7 +251,7 @@ $ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.ke
 Or, if you prefer to add the certificate to your own local keychain only (rather
 than for all users), run this command instead:
 
-```
+```console
 $ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ca.crt
 ```
 

@@ -20,7 +20,7 @@ To automate importing a delegation private key to the local Docker trust store, 
 need to pass a passphrase for the new key. This passphrase will be required 
 everytime that delegation signs a tag. 
 
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust key load delegation.key --name jeff
@@ -35,7 +35,7 @@ public key, then you will need to use the local Notary Canonical Root Key's
 passphrase to create the repositories trust data. If the repository has already 
 been initiated then you only need the repositories passphrase. 
 
-```
+```console
 # Export the Local Root Key Passphrase if required.
 $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 
@@ -56,7 +56,7 @@ Finally when signing an image, we will need to export the passphrase of the
 signing key. This was created when the key was loaded into the local Docker 
 trust store with `$ docker trust key load`.
 
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust sign registry.example.com/admin/demo:1

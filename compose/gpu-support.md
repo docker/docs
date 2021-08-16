@@ -56,9 +56,10 @@ services:
             count: 1
             capabilities: [gpu, utility]
 ```
+
 Run with Docker Compose:
 
-```sh
+```console
 $ docker-compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
@@ -99,7 +100,8 @@ services:
           devices:
           - capabilities: [gpu]
 ```
-```sh
+
+```console
 $ docker-compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
@@ -114,7 +116,7 @@ gpu_test_1 exited with code 0
 
 On machines hosting multiple GPUs, `device_ids` field can be set to target specific GPU devices and `count` can be used to limit the number of GPU devices assigned to a service container. If `count` exceeds the number of available GPUs on the host, the deployment will error out.
 
-```
+```console
 $ nvidia-smi   
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 450.80.02    Driver Version: 450.80.02    CUDA Version: 11.0     |
@@ -140,6 +142,7 @@ $ nvidia-smi
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
 ```
+
 To enable access only to GPU-0 and GPU-3 devices:
 
 ```yaml

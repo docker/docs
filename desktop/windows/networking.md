@@ -23,7 +23,7 @@ Docker Desktop intercepts traffic from the containers and injects it into
 
 When you run a container with the `-p` argument, for example:
 
-```
+```console
 $ docker run -p 80:80 -d nginx
 ```
 
@@ -33,7 +33,7 @@ host and container ports are the same. What if you need to specify a different
 host port? If, for example, you already have something running on port 80 of
 your host machine, you can connect the container to a different port:
 
-```
+```console
 $ docker run -p 8000:80 -d nginx
 ```
 

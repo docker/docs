@@ -176,6 +176,7 @@ If `dockerd-rootless-setuptool.sh` is not present, you may need to install the `
 ```console
 $ sudo apt-get install -y docker-ce-rootless-extras
 ```
+
 </div>
 <div id="install-without-packages" class="tab-pane fade in" markdown="1">
 If you do not have permission to run package managers like `apt-get` and `dnf`,

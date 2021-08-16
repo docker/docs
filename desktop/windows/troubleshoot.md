@@ -112,13 +112,13 @@ does not send client certificates to them. Commands like `docker run` that
 attempt to pull from the registry produces error messages on the command line,
 like this:
 
-```
+```console
 Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
 ```
 
 As well as on the registry. For example:
 
-```
+```console
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```

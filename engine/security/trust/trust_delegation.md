@@ -28,28 +28,28 @@ server URL is the same as the registry URL. However, for self-hosted
 environments or 3rd party registries, you will need to specify an alternative
 URL for the notary server. This is done with:
 
-```
-export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
+```console
+$ export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
 ```
 
 If you do not export this variable in self-hosted environments, you may see 
 errors such as: 
 
-```
+```console
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
 Adding signer "jeff" to registry.example.com/admin/demo...
-[...]
+<...>
 Error: trust data missing for remote repository registry.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
 
 $ docker trust inspect registry.example.com/admin/demo --pretty
 WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
-[...]
+<...>
 ```
 
 If you have enabled authentication for your notary server, or are using DTR, you will need to log in 
 before you can push data to the notary server. 
 
-```
+```console
 $ docker login registry.example.com/user/repo
 Username: admin
 Password:

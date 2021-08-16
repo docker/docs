@@ -255,7 +255,7 @@ The Docker tag command creates a new tag for an image. It does not create a new 
 
 Now run the `docker images` command to see a list of our local images.
 
-```
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
