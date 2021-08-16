@@ -26,8 +26,8 @@ To deploy Docker containers on Azure, you must meet the following requirements:
 
 1. Download and install the latest version of Docker Desktop.
 
-    - [Download for Mac](../docker-for-mac/install.md)
-    - [Download for Windows](../docker-for-windows/install.md)
+    - [Download for Mac](../desktop/mac/install.md)
+    - [Download for Windows](../desktop/windows/install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 

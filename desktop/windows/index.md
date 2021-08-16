@@ -2,6 +2,7 @@
 description: Getting Started
 keywords: windows, edge, tutorial, run, docker, local, machine
 redirect_from:
+- /docker-for-windows/
 - /docker-for-windows/index/
 - /docker-for-windows/started/
 - /engine/installation/windows/
@@ -121,8 +122,8 @@ File share settings are:
 >
  * Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
  such as cache directories or databases, the performance will be much better if they are stored in
- the Linux VM, using a [data volume](../storage/volumes.md)
- (named volume) or [data container](../storage/volumes.md).
+ the Linux VM, using a [data volume](../../storage/volumes.md)
+ (named volume) or [data container](../../storage/volumes.md).
 >
  * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
@@ -267,7 +268,7 @@ Server: Docker Engine - Community
 Docker Desktop includes a standalone Kubernetes server that runs on your Windows machine, so
 that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
-For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../desktop/kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ### Reset
 
@@ -323,16 +324,16 @@ again when you switch back.
 
 ## Dashboard
 
-The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../desktop/dashboard.md).
+The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
 
 ## Docker Hub
 
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
 
-For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" rel="noopener" class="_" }:
+For more information, refer to the following [Docker Hub topics](../../docker-hub/index.md){: target="_blank" rel="noopener" class="_" }:
 
-* [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
-* [Builds and Images](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
+* [Organizations and Teams in Docker Hub](../../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
+* [Builds and Images](../../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
 
 ### Two-factor authentication
 
@@ -366,7 +367,7 @@ Docker Desktop creates a certificate bundle of all user-trusted CAs based on
 the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.
 
 To learn more about how to install a CA root certificate for the registry, see
-[Verify repository client with certificates](../engine/security/certificates.md)
+[Verify repository client with certificates](../../engine/security/certificates.md)
 in the Docker Engine topics.
 
 ### How do I add client certificates?
@@ -389,12 +390,12 @@ certificates. Commands like `docker run` that attempt to pull from the registry
 produce error messages on the command line, as well as on the registry.
 
 To learn more about how to set the client TLS certificate for verification, see
-[Verify repository client with certificates](../engine/security/certificates.md)
+[Verify repository client with certificates](../../engine/security/certificates.md)
 in the Docker Engine topics.
 
 ## Where to go next
 
-* Try out the walkthrough at [Get Started](../get-started/index.md){: target="_blank" rel="noopener" class="_"}.
+* Try out the walkthrough at [Get Started](../../get-started/index.md){: target="_blank" rel="noopener" class="_"}.
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 

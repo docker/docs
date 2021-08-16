@@ -19,8 +19,8 @@ toc_max: 2
 >**Deprecated**
 >
 > Docker Toolbox has been deprecated and is no longer in active development. Please
-> use Docker Desktop instead. See [Docker Desktop for Mac](../docker-for-mac/index.md)
-> and [Docker Desktop for Windows](../docker-for-windows/index.md).
+> use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/mac/index.md)
+> and [Docker Desktop for Windows](../desktop/windows/index.md).
 {: .warning }
 
 This page explains how to migrate your Docker Toolbox installation to Docker Desktop.
@@ -68,7 +68,7 @@ To uninstall Docker Toolbox on Mac:
 
     This step is optional because if you plan
     to re-install Docker Machine as a part
-    of [Docker Desktop for Mac](../docker-for-mac/index.md), you can import and
+    of [Docker Desktop for Mac](../desktop/mac/index.md), you can import and
     continue to manage those machines through Docker.
 
 3.  In your "Applications" folder, remove the "Docker" directory,
@@ -121,7 +121,7 @@ To uninstall Toolbox on Windows:
     ```
 
     This step is optional because if you plan to re-install Docker Machine as a
-    part of [Docker Desktop for Windows](../docker-for-windows/index.md), you can
+    part of [Docker Desktop for Windows](../desktop/windows/index.md), you can
     import and continue to manage those machines through Docker.
 
 3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel (programs and features).

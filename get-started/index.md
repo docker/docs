@@ -85,7 +85,7 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 [Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
 [Linux](../engine/install/index.md){: .button .primary-btn}
 
-For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
 
 {% include eula.md %}
 
@@ -118,9 +118,8 @@ you a quick view of the containers running on your machine. The Docker Dashboard
 It gives you quick access to container logs, lets you get a shell inside the container, and lets you
 easily manage container lifecycle (stop, remove, etc.).
 
-To access the dashboard, follow the instructions for either 
-[Mac](../../docker-for-mac/dashboard/) or 
-[Windows](../../docker-for-windows/dashboard/). If you open the dashboard
+To access the dashboard, follow the instructions in the
+[Docker Desktop product manual](../desktop/dashboard.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 

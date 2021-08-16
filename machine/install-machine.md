@@ -106,8 +106,8 @@ To uninstall Docker Machine:
 
    Removing machines is an optional step because there are cases where
    you might want to save and migrate existing machines to a
-   [Docker for Mac](../docker-for-mac/index.md) or
-   [Docker Desktop for Windows](../docker-for-windows/index.md) environment,
+   [Docker for Mac](../desktop/mac/index.md) or
+   [Docker Desktop for Windows](../desktop/windows/index.md) environment,
    for example.
 
 *  Remove the executable: `rm $(which docker-machine)`

@@ -4,6 +4,7 @@ keywords: windows, networking
 title: Networking features in Docker Desktop for Windows
 redirect_from:
 - /docker-for-win/networking/
+- /docker-for-windows/networking/
 ---
 {% assign Arch = 'Windows' %}
 
@@ -125,5 +126,5 @@ container to random ports on the host.
 $ docker run -d -P --name webserver nginx
 ```
 
-See the [run command](../engine/reference/commandline/run.md) for more details on
+See the [run command](../../engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.

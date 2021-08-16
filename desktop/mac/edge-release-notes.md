@@ -9,7 +9,7 @@ toc_max: 2
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+[What to know before you install](install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
@@ -989,7 +989,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
 
 * New
-  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [https://docs.docker.com/docker-for-mac/kubernetes/](kubernetes.md)
+  - Experimental Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md)
   - DNS name `docker.for.mac.host.internal` should be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost (See https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06).
 
 * Bug fixes and minor changes
@@ -1196,7 +1196,7 @@ TCP connection is idle for more than five minutes (related to
 
 - Add daemon options validation
 - Diagnose can be cancelled & Improved help information. Fixes [docker/for-mac#1134](https://github.com/docker/for-mac/issues/1134), [docker/for-mac#1474](https://github.com/docker/for-mac/issues/1474)
-- Support paging of Docker Cloud [repositories](../docker-hub/repos.md) and [organizations](../docker-hub/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
+- Support paging of Docker Cloud [repositories](../../docker-hub/repos.md) and [organizations](../../docker-hub/orgs.md). Fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538)
 
 ### Docker Community Edition 17.06.1-ce-mac20, 2017-07-18
 
@@ -2049,7 +2049,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [https://docs.docker.com/docker-for-mac/](index.md)
+* Documentation moved to [https://docs.docker.com/desktop/mac/](index.md)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links

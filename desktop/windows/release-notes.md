@@ -4,6 +4,7 @@ keywords: Docker Desktop for Windows, release notes
 redirect_from:
 - /winkit/release-notes/
 - /docker-for-windows/edge-release-notes/
+- /docker-for-windows/release-notes/
 title: Docker for Windows release notes
 toc_min: 1
 toc_max: 2
@@ -20,8 +21,8 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-- **Dev Environments**: You can now create a Dev Environment from your local Git repository. For more information, see [Start a Dev Environment from a local folder](../desktop/dev-environments.md#start-a-dev-environment-from-a-local-folder).
-- **Volume Management**: You can now sort volumes by the name, the date created, and the size of the volume. You can also search for specific volumes using the **Search** field. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+- **Dev Environments**: You can now create a Dev Environment from your local Git repository. For more information, see [Start a Dev Environment from a local folder](../dev-environments.md#start-a-dev-environment-from-a-local-folder).
+- **Volume Management**: You can now sort volumes by the name, the date created, and the size of the volume. You can also search for specific volumes using the **Search** field. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
 
 ### Upgrades
 
@@ -55,7 +56,7 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../dev-environments.md).
 
 
 ### Upgrades
@@ -86,9 +87,9 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../dev-environments.md).
 
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
 
 ### Bug fixes and minor changes
 
@@ -102,9 +103,9 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../desktop/dev-environments.md).
+**Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../dev-environments.md).
 
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
 
 ### Upgrades
 
@@ -136,11 +137,11 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../desktop/dashboard.md#explore-volumes).
+**Volume Management**: Docker Desktop users can now create and delete volumes using the Docker Dashboard and also see which volumes are being used. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
 
-**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
+**Compose V2 beta**: Docker Desktop now includes the beta version of Compose V2, which supports the `docker compose` command as part of the Docker CLI. For more information, see [Compose V2 beta](../../compose/cli-command.md). While `docker-compose` is still supported and maintained, Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. The compose command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. There are a few remaining flags that have yet to be implemented, see the [docker-compose compatibility list](../../compose/cli-command-compatibility.md) for more information about the flags that are supported in the new compose command. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`. Let us know your feedback on the new ‘compose’ command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues) GitHub repository.
 
-**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](../docker-for-windows/install.md#updates).
+**Skip Docker Desktop updates**: All users can now skip an update when they are prompted to install individual Docker Desktop releases. For more information, see [Docker Desktop updates](install.md#updates).
 
 ### Deprecation
 
