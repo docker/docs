@@ -7,13 +7,66 @@ redirect_from:
 - /docker-hub/billing/upgrade/
 ---
 
-You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you will be able to immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+This page contains information on how to purchase a Pro or a Team plan. It also contains information on how to upgrade your existing plan and update your billing information. You can upgrade to a Pro or a Team plan from a Free plan, or from your current legacy plan. When you upgrade to a Pro or a Team plan, you can immediately use all the features and entitlements offered in your new plan. For detailed information on features available in each plan, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
->**Note:**
+> **Note:**
 >
-If you were previously on a legacy per-repository plan, your plan has been converted to a new Pro or Team monthly plan. For details, see [Pricing FAQ](faq.md).
+> If you were previously on a legacy per-repository plan, your plan has been converted to a new Pro or Team monthly plan. For details, see [Pricing FAQ](faq.md).
 
-The following sections contain instructions on how to upgrade to Pro and Team plans.
+## Purchase a Pro plan
+
+The following section contains information on how to purchase a Pro plan for new customers.
+
+To purchase a Pro plan:
+
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+
+2. Open the drop-down menu next to your username in the top-right corner and select **Billing** to go to the **Billing Details** page. This page displays billing information about your existing user account.
+
+    The Docker Hub **Pricing** page displays information about the new pricing plans.
+
+3. Ensure you have selected your personal account on the left side of the **Billing Details** page.
+
+4. Click **Change plan**.
+
+5.  Review the plan details in the **Pro** section and click **Upgrade Now**.
+
+5. The **Payment Method** page displays the cost for the annual plan by default. If you prefer to opt for the monthly plan, choose **pay monthly**.
+
+6. Enter the card details and click **Purchase**.
+
+7. Verify your email address.
+
+8. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
+
+    The **Billing** page displays information about your new Pro plan and the total cost.
+    
+## Purchase a Team plan
+
+The following section contains information on how to purchase a Team plan for new organizations. If you do not have a team plan, click here to learn more on how to create a team.
+
+To purchase a Team plan:
+
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+
+2. Click **Organizations** in the toolbar and select your organization.
+
+3. Click the **Billing** tab and click **Change plan**.
+     The Docker Hub **Pricing** page displays information about the new pricing plans.
+
+4. Review the plan details in the **Team** section and click **Buy Now**.
+
+5. Enter a name for your new organization and add a company name.
+
+6. The **Organization size** page displays the cost for the annual plan by default. If you prefer to change this, select **Pay Monthly**.
+
+7. Specify the number of users you’d like to add to your organization and click **Continue to Payment**.
+
+8. On the **Payment Method** page, enter the card details and click **Purchase**.
+
+9. Verify your email address.
+
+10. Navigate to Organizations from the menu at the top of the page, choose your organization, and select **Billing**. The Billing tab displays information about your new Team plan and the total cost.
 
 ## Upgrade to a Pro plan
 
@@ -85,60 +138,6 @@ To upgrade from a monthly Pro plan to an annual Pro plan:
 5. Review the information displayed on the **Change to an Annual Plan** page and click **Accept Terms and Purchase** to confirm.
 
     The Billing page now displays a confirmation of the upgrade with an invoice containing details about your new plan, entitlements, and the total cost.
-
-### Purchase a Pro plan
-
-The following section contains information on how to purchase a Pro plan for new customers.
-
-To purchase a Pro plan:
-
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
-
-2. Open the drop-down menu next to your username in the top-right corner and select **Billing** to go to the **Billing Details** page. This page displays billing information about your existing user account.
-
-    The Docker Hub **Pricing** page displays information about the new pricing plans.
-
-3. Ensure you have selected your personal account on the left side of the **Billing Details** page.
-
-4. Click **Change plan**.
-
-5.  Review the plan details in the **Pro** section and click **Upgrade Now**.
-
-5. The **Payment Method** page displays the cost for the annual plan by default. If you prefer to opt for the monthly plan, choose **pay monthly**.
-
-6. Enter the card details and click **Purchase**.
-
-7. Verify your email address.
-
-8. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
-
-    The **Billing** page displays information about your new Pro plan and the total cost.
-### Purchase a Team plan
-
-The following section contains information on how to purchase a Team plan for new organizations. If you do not have a team plan, click here to learn more on how to create a team.
-
-To purchase a Team plan:
-
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
-
-2. Click **Organizations** in the toolbar and select your organization.
-
-3. Click the **Billing** tab and click **Change plan**.
-     The Docker Hub **Pricing** page displays information about the new pricing plans.
-
-4. Review the plan details in the **Team** section and click **Buy Now**.
-
-5. Enter a name for your new organization and add a company name.
-
-6. The **Organization size** page displays the cost for the annual plan by default. If you prefer to change this, select **Pay Monthly**.
-
-7. Specify the number of users you’d like to add to your organization and click **Continue to Payment**.
-
-8. On the **Payment Method** page, enter the card details and click **Purchase**.
-
-9. Verify your email address.
-
-10. Navigate to Organizations from the menu at the top of the page, choose your organization, and select **Billing**. The Billing tab displays information about your new Team plan and the total cost.
 
 ## Update billing information
 
