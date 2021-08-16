@@ -12,13 +12,15 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-{% include eula.md %}
-
 ## Docker Desktop 3.6.0
 2021-08-11
 
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn .accept-eula }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
 
 ### New
 
@@ -51,9 +53,12 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.2
 2021-07-08
 
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg){: .accept-eula } |
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -83,9 +88,12 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.1
 2021-06-25
 
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg){: .accept-eula } |
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -100,9 +108,12 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.0
 2021-06-23
 
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg){: .accept-eula } |
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -136,9 +147,12 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.4.0
 2021-06-09
 
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg){: .accept-eula } |
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -186,9 +200,12 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.3
 2021-05-06
 
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg){: .accept-eula } |
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -202,9 +219,12 @@ This page contains information about the new features, improvements, known issue
 ### Docker Desktop 3.3.2
 2021-05-03
 
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg){: .accept-eula } |
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -228,9 +248,12 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg)
-
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg){: .accept-eula } |
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -253,7 +276,11 @@ Docker Desktop is now available for Apple silicon as well as Intel chips. This e
 ## Docker Desktop 3.3.0
 2021-04-08
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -291,7 +318,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.2.2
 2021-03-15
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -303,7 +334,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.2.1
 2021-03-05
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -316,7 +351,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.2.0
 2021-03-01
 
-> [Download](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -360,7 +399,11 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 ## Docker Desktop 3.1.0
 2021-01-14
 
-> [Download](https://desktop.docker.com/mac/stable/51484/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/51484/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -379,7 +422,11 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 ## Docker Desktop 3.0.4
 2021-01-06
 
-> [Download](https://desktop.docker.com/mac/stable/51218/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/51218/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -397,7 +444,11 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 ## Docker Desktop 3.0.3
 2020-12-21
 
-> [Download](https://desktop.docker.com/mac/stable/51017/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/51017/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -411,7 +462,11 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 ## Docker Desktop 3.0.2
 2020-12-18
 
-> [Download](https://desktop.docker.com/mac/stable/50996/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/50996/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -427,7 +482,11 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 ## Docker Desktop 3.0.1
 2020-12-11
 
-> [Download](https://desktop.docker.com/mac/stable/50773/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/50773/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -442,7 +501,11 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 ## Docker Desktop 3.0.0
 2020-12-10
 
-> [Download](https://desktop.docker.com/mac/stable/50684/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/50684/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -477,3 +540,5 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
+
+{% include eula-modal.html %}

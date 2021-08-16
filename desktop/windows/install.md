@@ -14,10 +14,11 @@ redirect_from:
 
 Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 
-{% include eula.md %}
-
-[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
-.button .primary-btn}
+> Download Docker Desktop for Windows
+>
+> {%- include eula.md -%}
+>
+> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn .accept-eula }
 
 ## System requirements
 

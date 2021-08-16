@@ -188,6 +188,25 @@ input[type=text] {
     }
 }
 
+.modal-dialog {
+  .modal-header, .modal-footer {
+    border: none;
+  }
+  .modal-header .close {
+    display: none;
+  }
+  .btn-primary {
+    background-color: $primary-links;
+  }
+  .btn-secondary {
+    background:   transparent;
+    border-color: $primary-links;
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
 @media print {
     .col-nav,
     .col-toc,

@@ -1,6 +1,8 @@
 <!-- This text will be included in topics containing Docker Desktop download URLs -->
-
-> **Important**
->
-> By downloading Docker Desktop, you agree to the [Docker Subscription Service Terms](https://www.docker.com/legal/docker-terms-service){: target="_blank" rel="noopener" class="_"}, [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}, and the [Docker Privacy Policy](https://www.docker.com/legal/docker-privacy-policy){: target="_blank" rel="noopener" class="_"}.
-{: .important}
+<span class="no-js">We've updated the [Docker Subscription Service Terms]({{ site.dsst_url }}){: target="_blank" rel="noopener" class="_"}.
+Please [read the announcement]({{ site.dsst_announcement_url }}){: target="_blank" rel="noopener" class="_"}
+and [FAQs]({{ site.dsst_faqs_url }}){: target="_blank" rel="noopener" class="_"}
+to learn how companies using Docker Desktop may be affected.
+By downloading Docker Desktop, you agree to these updated [terms of service]({{ site.tos_url }}){: target="_blank" rel="noopener" class="_"},
+the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"},
+and the [Data Privacy Policy](https://www.docker.com/legal/docker-privacy-policy){: target="_blank" rel="noopener" class="_"}.</span>

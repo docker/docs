@@ -10,12 +10,12 @@ redirect_from:
 
 This page contains release notes for older versions of Docker Desktop for Mac.
 
-{% include eula.md %}
-
 ## Docker Desktop Community 2.5.0.1
 2020-11-10
 
-> [Download](https://desktop.docker.com/mac/stable/49550/Docker.dmg)
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/49550/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -28,7 +28,11 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 ## Docker Desktop Community 2.5.0.0
 2020-11-02
 
-> [Download](https://desktop.docker.com/mac/stable/49427/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/49427/Docker.dmg){: .accept-eula }
 
 Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
@@ -68,7 +72,11 @@ Docker Desktop 2.5.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 ## Docker Desktop Community 2.4.0.0
 2020-09-30
 
-> [Download](https://desktop.docker.com/mac/stable/48506/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/48506/Docker.dmg){: .accept-eula }
 
 Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
@@ -115,7 +123,11 @@ Docker Desktop 2.4.0.0 contains a Kubernetes upgrade. Your local Kubernetes clus
 ## Docker Desktop Community 2.3.0.5
 2020-09-15
 
-> [Download](https://desktop.docker.com/mac/stable/48029/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/48029/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -139,7 +151,11 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.0.4
 2020-07-27
 
-> [Download](https://desktop.docker.com/mac/stable/46911/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/46911/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -157,7 +173,11 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.0.3
 2020-05-27
 
-> [Download](https://desktop.docker.com/mac/stable/45519/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/45519/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -171,7 +191,11 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.0.2
 2020-05-11
 
-> [Download](https://download.docker.com/mac/stable/45183/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/45183/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -203,7 +227,11 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 ## Docker Desktop Community 2.2.0.5
 2020-04-02
 
-> [Download](https://download.docker.com/mac/stable/43884/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/43884/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -212,7 +240,11 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 ## Docker Desktop Community 2.2.0.4
 2020-03-13
 
-> [Download](https://download.docker.com/mac/stable/43472/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/43472/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -226,7 +258,11 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 ## Docker Desktop Community 2.2.0.3
 2020-02-11
 
-> [Download](https://download.docker.com/mac/stable/42716/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/42716/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -236,7 +272,11 @@ Docker Desktop introduces a new onboarding tutorial upon first startup. The Quic
 ## Docker Desktop Community 2.2.0.0
 2020-01-21
 
-> [Download](https://download.docker.com/mac/stable/42247/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/42247/Docker.dmg){: .accept-eula }
 
 Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
@@ -285,7 +325,11 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 ## Docker Desktop Community 2.1.0.5
 2019-11-18
 
-[Download](https://download.docker.com/mac/stable/40693/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/40693/Docker.dmg){: .accept-eula }
 
 Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
@@ -298,7 +342,11 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 ## Docker Desktop Community 2.1.0.4
 2019-10-21
 
-[Download](https://download.docker.com/mac/stable/39773/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/39773/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -315,7 +363,11 @@ For more information, see [Two-factor authentication](index.md#docker-hub).
 ## Docker Desktop Community 2.1.0.3
 2019-09-16
 
-[Download](https://download.docker.com/mac/stable/38240/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/38240/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -328,7 +380,11 @@ For more information, see [Two-factor authentication](index.md#docker-hub).
 ## Docker Desktop Community 2.1.0.2
 2019-09-04
 
-[Download](https://download.docker.com/mac/stable/37877/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/37877/Docker.dmg){: .accept-eula }
 
 Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
@@ -342,7 +398,11 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Note that your local Kuber
 ## Docker Desktop Community 2.1.0.1
 2019-08-08
 
-[Download](https://download.docker.com/mac/stable/37199/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/37199/Docker.dmg){: .accept-eula }
 
 Note that you must sign in and create a Docker ID in order to download Docker Desktop.
 
@@ -403,14 +463,22 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 2.0.0.3 2019-02-15
 
-[Download](https://download.docker.com/mac/stable/31259/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/31259/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 
 ### Docker Community Edition 2.0.0.2 2019-01-16
 
-[Download](https://download.docker.com/mac/stable/30215/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/30215/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.09.1](https://github.com/docker/docker-ce/releases/tag/v18.09.1)
@@ -426,14 +494,22 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 2.0.0.0-mac81 2018-12-07
 
-[Download](https://download.docker.com/mac/stable/29211/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/29211/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
 
 ### Docker Community Edition 2.0.0.0-mac78 2018-11-19
 
-[Download](https://download.docker.com/mac/stable/28905/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/28905/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.09.0](https://github.com/docker/docker-ce-packaging/releases/tag/v18.09.0)
@@ -458,7 +534,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 18.06.1-ce-mac73 2018-08-29
 
-[Download](https://download.docker.com/mac/stable/26764/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/26764/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.06.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce)
@@ -468,7 +548,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 18.06.0-ce-mac70 2018-07-25
 
-[Download](https://download.docker.com/mac/stable/26399/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/26399/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce)
@@ -499,7 +583,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 18.03.1-ce-mac65 2018-04-30
 
-[Download](https://download.docker.com/mac/stable/24312/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/24312/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.03.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.1-ce)
@@ -511,7 +599,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 18.03.1-ce-mac64 2018-04-26
 
-[Download](https://download.docker.com/mac/stable/24245/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/24245/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.03.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.1-ce)
@@ -523,14 +615,22 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 18.03.0-ce-mac60 2018-03-30
 
-[Download](https://download.docker.com/mac/stable/23751/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/23751/Docker.dmg){: .accept-eula }
 
 * Bug fixes and minor changes
   - Fix Upgrade straight from 17.09 versions where Docker for Mac cannot restart once the upgrade has been performed. Fixes [docker/for-mac#2739](https://github.com/docker/for-mac/issues/2739)
 
 ### Docker Community Edition 18.03.0-ce-mac59 2018-03-26
 
-[Download](https://download.docker.com/mac/stable/23608/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/23608/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
@@ -558,7 +658,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
 
-[Download](https://download.docker.com/mac/stable/23011/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/23011/Docker.dmg){: .accept-eula }
 
 * Bug fixes and minor changes
   - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. Note this change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
@@ -566,7 +670,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.12.0-ce-mac49 2018-01-19
 
-[Download](https://download.docker.com/mac/stable/21805/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/21805/Docker.dmg){: .accept-eula }
 
 * Bug fixes and minor changes
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
@@ -579,7 +687,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.12.0-ce-mac47 2018-01-12
 
-[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg){: .accept-eula }
 
 * Bug fixes and minor changes
   - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
@@ -587,7 +699,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.12.0-ce-mac46 2018-01-09
 
-[Download](https://download.docker.com/mac/stable/21698/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -614,7 +730,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 ## Stable Releases of 2017
 ### Docker Community Edition 17.09.1-ce-mac42 2017-12-11
 
-[Download](https://download.docker.com/mac/stable/21090/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/21090/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
@@ -626,21 +746,33 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.09.0-ce-mac35 2017-10-06
 
-[Download](https://download.docker.com/mac/stable/19611/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download for Mac with Intel chip](https://download.docker.com/mac/stable/19611/Docker.dmg){: .accept-eula }
 
 * Bug fix
   - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
 
 ### Docker Community Edition 17.09.0-ce-mac33 2017-10-03
 
-[Download](https://download.docker.com/mac/stable/19543/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19543/Docker.dmg){: .accept-eula }
 
 * Bug fix
   - Do not show Toolbox migration assistant when there are existing Docker For Mac data.
 
 ### Docker Community Edition 17.09.0-ce-mac32 2017-10-02
 
-[Download](https://download.docker.com/mac/stable/19506/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19506/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
@@ -675,7 +807,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.06.2-ce-mac27 2017-09-06
 
-[Download](https://download.docker.com/mac/stable/19124/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/19124/Docker.dmg){: .accept-eula }
 
 * Upgrades
   - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
@@ -683,7 +819,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.06.1-ce-mac24, 2017-08-21
 
-[Download](https://download.docker.com/mac/stable/18950/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/18950/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 - [Docker 17.06.1-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce-rc1)
@@ -698,7 +838,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.06.0-ce-mac18, 2017-06-28
 
-[Download](https://download.docker.com/mac/stable/18433/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/18433/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 
@@ -743,7 +887,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12
 
-[Download](https://download.docker.com/mac/stable/17661/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/17661/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 
@@ -751,7 +899,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29
 
-[Download](https://download.docker.com/mac/stable/16048/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/16048/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 
@@ -760,7 +912,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02
 
-[Download](https://download.docker.com/mac/stable/15583/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15583/Docker.dmg){: .accept-eula }
 
 **New**
 
@@ -804,7 +960,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker for Mac 1.13.1, 2017-02-09
 
-[Download](https://download.docker.com/mac/stable/15353/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15353/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 
@@ -821,7 +981,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
 
 ### Docker for Mac 1.13.0, 2017-01-19
 
-[Download](https://download.docker.com/mac/stable/15072/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/15072/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 
@@ -874,7 +1038,11 @@ underestimate the number of active connections
 ## Stable Releases of 2016
 ### Docker for Mac 1.12.5, 2016-12-20
 
-[Download](https://download.docker.com/mac/stable/14777/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/14777/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 
@@ -887,7 +1055,11 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker for Mac 1.12.3, 2016-11-09
 
-[Download](https://download.docker.com/mac/stable/13776/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/13776/Docker.dmg){: .accept-eula }
 
 **Upgrades**
 
@@ -954,7 +1126,11 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker for Mac 1.12.1, 2016-09-16
 
-[Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg){: .accept-eula }
 
 **New**
 
@@ -1034,7 +1210,11 @@ We did not distribute a 1.12.4 stable release
 
 ### Docker for Mac 2016-08-11 1.12.0-a
 
-[Download](https://download.docker.com/mac/stable/11213/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/11213/Docker.dmg){: .accept-eula }
 
 This bug fix release contains osxfs improvements. The fixed issues may have
 been seen as failures with apt-get and npm in containers, missed inotify
@@ -1053,7 +1233,11 @@ events or unexpected unmounts.
 
 ### Docker for Mac 1.12.0, 2016-07-28
 
-[Download](https://download.docker.com/mac/stable/10871/Docker.dmg)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [Download](https://download.docker.com/mac/stable/10871/Docker.dmg){: .accept-eula }
 
 * First stable release
 
@@ -1062,3 +1246,5 @@ events or unexpected unmounts.
 * Docker 1.12.0
 * Docker Machine 0.8.0
 * Docker Compose 1.8.0
+
+{% include eula-modal.html %}

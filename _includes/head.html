@@ -48,6 +48,10 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- hide elements that are only shown without JavaScript enabled -->
+  <script>document.documentElement.classList.add('js')</script>
+  <style>html.js .no-js { display: none !important; }</style>
+
   {%- comment -%}
   We put these scripts in the head section, but use "defer" loading to allow the
   browser to start loading them as soon as possible. Actual execution of deferred
