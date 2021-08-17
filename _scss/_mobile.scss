@@ -54,6 +54,7 @@
     and (max-width : 900px) {
     .sidebar {
         position: fixed;
+        top:   55px; // top-navigation bar (without breadcrumbs)
         width: 100%;
         z-index: 100;
         background-color: $bg-sidebar;
@@ -197,7 +198,7 @@
     }
     .sidebar {
         background-color: $bg-sidebar;
-        top: 51px;
+        top: 55px; // top-navigation bar (without breadcrumbs)
         left: 0;
         display: block;
         padding: 0;
@@ -253,9 +254,6 @@
   and (min-device-width: 768px)
   and (max-device-width: 1024px)
   and (orientation: landscape) {
-    .search-form {
-        float: left;
-    }
     .ctrl-right {
         display: block;
     }
