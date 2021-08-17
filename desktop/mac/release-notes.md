@@ -51,13 +51,13 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.2
 2021-07-08
 
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg)
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg)
 
 ### New
 
 **Dev Environments Preview**: Dev Environments enable you to seamlessly collaborate with your team members without moving between Git branches to get your code onto your team members' machines. When using Dev Environments, you can share your in-progress work with your team members in just one click, and without having to deal with any merge conflicts. For more information and for instructions on how to use Dev Environments, see [Development Environments Preview](../dev-environments.md).
-
 
 ### Upgrades
 
@@ -83,8 +83,9 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.1
 2021-06-25
 
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg)
 
 ### New
 
@@ -99,8 +100,9 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.0
 2021-06-23
 
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg)
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg)
 
 ### New
 
@@ -134,8 +136,9 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.4.0
 2021-06-09
 
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg)
 
 ### New
 
@@ -183,8 +186,9 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.3
 2021-05-06
 
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg)
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg)
 
 ### Upgrades
 
@@ -198,8 +202,9 @@ This page contains information about the new features, improvements, known issue
 ### Docker Desktop 3.3.2
 2021-05-03
 
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg)
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg)
 
 ### Upgrades
 
@@ -223,8 +228,9 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-[Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg)
-[Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg)
+> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg)
+
+> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg)
 
 ### New
 
