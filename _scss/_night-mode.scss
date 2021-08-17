@@ -61,8 +61,8 @@ body.night {
         background:  $bg-sidebar-night-active;
         border-left: 4px solid $primary-links;
     }
-    .tabs li.active a {
-        border-bottom: 4px solid $primary-links;
+    .navbar-nav > li.active > a {
+      border-color: $primary-links;
     }
     .slider {
         background-color: #344658;
