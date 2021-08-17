@@ -34,18 +34,21 @@ To get started with Docker Engine on SLES, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of SLES 15-SP2 on s390x (IBM Z).
+To install Docker Engine, you need a maintained version of SLES 15-SP2 or SLES 15-SP3 on s390x (IBM Z).
 Archived versions aren't supported or tested.
 
 The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.2&arch=s390x)
 repositories must be enabled. 
 
-The `SELinux (SLE_15_SP2)`repository must be enabled. This repository is not added by
+The `SELinux` repository must be enabled. This repository is not added by
 default, you need to
-[add it](https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo).
+[add it](https://download.opensuse.org/repositories/security).
 
 ```console
-$ zypper addrepo https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP2/security:SELinux.repo
+$ sudo zypper install -y lsb-release
+$ sles_version=$(lsb_release -r | rev | cut -c1)
+$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP$sles_version/security:SELinux.repo"
+$ sudo zypper addrepo $opensuse_repo 
 ```
 
 The `overlay2` storage driver is recommended.
@@ -159,16 +162,16 @@ $ sudo zypper \
        results by version number, highest to lowest, and is truncated:
 
     ```console
-    $ sudo zypper se docker-ce --match-exact  | sort -r
+    $ sudo zypper search -s --match-exact docker-ce | sort -r
+    
+      v  | docker-ce | package | 3:20.10.7-3 | s390x | Docker CE Stable - s390x
+      v  | docker-ce | package | 3:20.10.8-3 | s390x | Docker CE Stable - s390x
     ```
 
     The list returned depends on which repositories are enabled, and is specific
     to your version of SLES.
 
-    b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column)
-       starting at the first colon (`:`), up to the first hyphen, separated by
-       a hyphen (`-`). For example, `docker-ce-18.09.1`.
+    b. Install a specific version using the version string from the fourth column, For example, `docker-ce-3:20.10.7`.
 
     ```console
     $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io

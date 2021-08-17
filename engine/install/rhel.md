@@ -152,6 +152,7 @@ $ sudo yum-config-manager \
     $ yum list docker-ce --showduplicates | sort -r
 
     docker-ce.s390x                3:20.10.7-3.el8                 docker-ce-stable
+    docker-ce.s390x                3:20.10.8-3.el8                 docker-ce-stable
     ```
 
     The list returned depends on which repositories are enabled, and is specific

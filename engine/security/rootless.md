@@ -54,7 +54,7 @@ testuser:231072:65536
   <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
-  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse-sles">openSUSE and SLES</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 8, RHEL 8 and Fedora</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7 and RHEL 7</a></li>
 </ul>
@@ -66,7 +66,7 @@ testuser:231072:65536
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
 
-- Known to work on Ubuntu 16.04, 18.04, and 20.04.
+- Known to work on Ubuntu 18.04, 20.04, 20.10 and 21.04.
 </div>
 <div id="hint-debian" class="tab-pane fade in" markdown="1">
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
@@ -92,13 +92,13 @@ testuser:231072:65536
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 </div>
-<div id="hint-opensuse" class="tab-pane fade in" markdown="1">
+<div id="hint-opensuse-sles" class="tab-pane fade in" markdown="1">
 - Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
 
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
   This might be required on other distros as well depending on the configuration.
 
-- Known to work on openSUSE 15.
+- Known to work on openSUSE 15 and SLES 15.
 </div>
 <div id="hint-centos8-rhel8-fedora" class="tab-pane fade in" markdown="1">
 - Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
@@ -109,7 +109,7 @@ testuser:231072:65536
   A workaround for this is to `sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t`.
   This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
 
-- Known to work on CentOS 8 and Fedora 33.
+- Known to work on CentOS 8, RHEL 8, and Fedora 33.
 </div>
 <div id="hint-centos7-rhel7" class="tab-pane fade in" markdown="1">
 - Add `user.max_user_namespaces=28633` to `/etc/sysctl.conf` (or 
