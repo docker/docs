@@ -259,11 +259,11 @@ $ docker run --rm -ti -v /$(pwd):/work alpine ls //work
 
 To verify whether the errors are generated from your script, or from another source, you can use an environment variable. For example:
 
-```
+```console
 $ MSYS_NO_PATHCONV=1 docker run --rm -ti -v $(pwd):/work alpine ls /work
 ```
 
-It only expects the environment variable here. The vale doesn't matter.
+It only expects the environment variable here. The value doesn't matter.
 
 In some cases, MSYS also transforms colons to semicolon. Similar conversions can also occur
 when using `~` because the POSIX layer translates it to a DOS path. `MSYS_NO_PATHCONV` also works in this case.
