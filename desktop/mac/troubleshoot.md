@@ -150,8 +150,7 @@ browse the logs yourself.
 To watch the live flow of Docker Desktop logs in the command line, run the following script from your favorite shell.
 
 ```console
-$ pred='process matches ".*(ocker|vpnkit).*"
-  || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
+$ pred='process matches ".*(ocker|vpnkit).*" || (process in {"taskgated-helper", "launchservicesd", "kernel"} && eventMessage contains[c] "docker")'
 $ /usr/bin/log stream --style syslog --level=debug --color=always --predicate "$pred"
 ```
 
