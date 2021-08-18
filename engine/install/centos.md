@@ -44,7 +44,9 @@ $ sudo yum remove docker \
                   docker-latest \
                   docker-latest-logrotate \
                   docker-logrotate \
-                  docker-engine
+                  docker-engine \
+                  docker-ce \
+                  docker-ce-cli                  
 ```
 
 It's OK if `yum` reports that none of these packages are installed.
