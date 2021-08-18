@@ -93,8 +93,8 @@ For Docker Desktop installation instructions, see [Install Docker Desktop on Mac
 
 If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
 
-```cli
-docker run -d -p 80:80 docker/getting-started
+```console
+$ docker run -d -p 80:80 docker/getting-started
 ```
 
 You'll notice a few flags being used. Here's some more info on them:

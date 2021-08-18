@@ -56,8 +56,8 @@ For now, we will create the network first and attach the MySQL container at star
 
     If you are using PowerShell then use this command.
 
-    ```powershell
-    docker run -d `
+    ```console
+    PS> docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
         -e MYSQL_ROOT_PASSWORD=secret `
@@ -80,7 +80,7 @@ For now, we will create the network first and attach the MySQL container at star
     When the password prompt comes up, type in **secret**. In the MySQL shell, list the databases and verify
     you see the `todos` database.
 
-    ```cli
+    ```console
     mysql> SHOW DATABASES;
     ```
 
@@ -194,8 +194,8 @@ With all of that explained, let's start our dev-ready container!
 
     If you are using PowerShell then use this command.
 
-    ```powershell
-    docker run -dp 3000:3000 `
+    ```console
+    PS> docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
       -e MYSQL_HOST=mysql `
@@ -209,8 +209,7 @@ With all of that explained, let's start our dev-ready container!
 2. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
    using the mysql database.
 
-    ```
-    # Previous log messages omitted
+    ```console
     $ nodemon src/index.js
     [nodemon] 1.19.2
     [nodemon] to restart at any time, enter `rs`
@@ -231,7 +230,7 @@ With all of that explained, let's start our dev-ready container!
 
     And in the mysql shell, run the following:
 
-    ```plaintext
+    ```console
     mysql> select * from todo_items;
     +--------------------------------------+--------------------+-----------+
     | id                                   | name               | completed |
