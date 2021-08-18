@@ -25,8 +25,10 @@ ARG COMPOSE_CLI_BRANCH="main"
 ###
 # Set up base stages for building and deploying
 ###
-FROM starefossen/github-pages:198 AS builderbase
+FROM jekyll/jekyll:4 AS builderbase
 ENV TARGET=/usr/share/nginx/html
+RUN mkdir -p "${TARGET}" "/usr/src/app/md_source/" \
+ && chown -R jekyll:jekyll "${TARGET}" "/usr/src/app/md_source/"
 WORKDIR /usr/src/app/md_source/
 
 # Set vars used by fetch-upstream-resources.sh script as an environment variable,
@@ -57,14 +59,25 @@ RUN ./_scripts/fetch-upstream-resources.sh .
 # Build the static HTML for the current docs.
 # After building with jekyll, fix up some links
 FROM builderbase AS current
-COPY . .
+COPY --chown=jekyll:jekyll Gemfile ./
+RUN gem install bundler && bundle install
+COPY --chown=jekyll:jekyll . .
 COPY --from=upstream-resources /usr/src/app/md_source/. ./
 # substitute the "{site.latest_engine_api_version}" in the title for the latest
 # API docs, based on the latest_engine_api_version parameter in _config.yml
 RUN ./_scripts/update-api-toc.sh
 ARG JEKYLL_ENV
 RUN echo "Building docs for ${JEKYLL_ENV} environment"
-RUN set -eu; \
+# Use a cache-mount for Jekyll's cache. Unfortunately, the .jekyll-metadata file
+# is not inside the cache-directory. We like to keep it though, so that on re-
+# peated builds, Jekyll will be able to catch-up on what to re-generate. As a
+# dirty trick, we also use an output-cache, in which we copy the HTML, which
+# we restore as well.
+RUN --mount=type=cache,target=/usr/src/app/md_source/.jekyll-cache \
+    --mount=type=cache,target=/output-cache \
+ set -eu; \
+ cp ./.jekyll-cache/.jekyll-metadata ./ && chown jekyll:jekyll .jekyll-metadata || true; \
+ cp -r /output-cache /usr/share/nginx/html; \
  if [ "${JEKYLL_ENV}" = "production" ]; then \
     jekyll build --profile -d ${TARGET} --config _config.yml,_config_production.yml; \
     sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml"; \
@@ -72,7 +85,9 @@ RUN set -eu; \
     jekyll build --profile -d ${TARGET}; \
     echo '[]' > ${TARGET}/js/metadata.json; \
  fi; \
- find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done;
+ find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done; \
+ cp ./.jekyll-metadata ./.jekyll-cache/ || true; \
+ cp -r /usr/share/nginx/html /output-cache;
 
 
 # This stage only contains the generated files. It can be used to host the

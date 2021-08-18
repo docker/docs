@@ -13,7 +13,6 @@ CONTRIBUTING.md
 Dockerfile
 Dockerfile.archive
 docker-compose.yml
-Gemfile
 Gemfile.lock
 _website*.json
 

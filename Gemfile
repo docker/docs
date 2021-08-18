@@ -39,5 +39,7 @@ source "https://rubygems.org"
 # live site deploy, which uses the Dockerfiles found in the publish-tools
 # branch.
 
-gem "github-pages", "198"
+gem "github-pages", "218"
 gem 'wdm' if Gem.win_platform?
+gem "jekyll-relative-links"
+gem "rouge", "3.26.0"
