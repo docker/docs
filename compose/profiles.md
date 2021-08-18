@@ -50,6 +50,8 @@ case running `docker-compose up` would only start `backend` and `db`.
 
 Valid profile names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
+It is possible to use profile `donotstart` that will prevent service from starting.
+
 > **Note**
 >
 > The core services of your application should not be assigned `profiles` so
