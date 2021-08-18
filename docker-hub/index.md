@@ -87,9 +87,9 @@ Docker Hub provides the following major features:
 * [Repositories](repos.md): Push and pull container images.
 * [Teams & Organizations](orgs.md): Manage access to private
 repositories of container images.
-* [Official Images](official_images.md): Pull and use high-quality
+* [Docker Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
-* [Publisher Images](publish/customer_faq.md): Pull and use high-
+* [Docker Verified Publisher Images](publish/index.md): Pull and use high-
 quality container images provided by external vendors.
 * [Builds](builds/index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
