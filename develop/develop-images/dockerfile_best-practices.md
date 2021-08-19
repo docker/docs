@@ -908,7 +908,7 @@ fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
 
-## Examples for Official Images
+## Examples of Docker Official Images
 
 These Official Images have exemplary `Dockerfile`s:
 
@@ -922,6 +922,6 @@ These Official Images have exemplary `Dockerfile`s:
 * [Dockerfile Reference](../../engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
-* [Guidelines for Creating Official Images](../../docker-hub/official_images.md)
+* [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 

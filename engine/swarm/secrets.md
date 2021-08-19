@@ -947,7 +947,7 @@ adapting your image to take advantage of Docker secrets. One way to do this is
 to ensure that each parameter you pass to the image when creating the container
 can also be read from a file.
 
-Many of the official images in the
+Many of the Docker Official Images in the
 [Docker library](https://github.com/docker-library/), such as the
 [wordpress](https://github.com/docker-library/wordpress/)
 image used in the above examples, have been updated in this way.
@@ -1028,4 +1028,3 @@ for that secret data.
 
 More information on short and long syntax for secrets can be found at
 [Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).
-

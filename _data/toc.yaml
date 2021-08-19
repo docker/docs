@@ -1353,7 +1353,7 @@ manuals:
   - path: /docker-hub/service-accounts/
     title: Service accounts
   - path: /docker-hub/official_images/
-    title: Official images
+    title: Docker Official images
   - sectiontitle: Automated builds
     section:
       - path: /docker-hub/builds/
@@ -1399,7 +1399,7 @@ manuals:
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
   - path: /docker-hub/publish/
-    title: Verified Publisher Program
+    title: Docker Verified Publisher Program
   - path: /docker-hub/release-notes/
     title: Release notes
 - sectiontitle: Docker subscription
