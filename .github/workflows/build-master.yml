@@ -25,7 +25,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         if: github.repository == 'docker/docker.github.io' && github.event_name == 'push'
       - name: update S3 website config
-        uses: ./.github/actions/update-website-config
+        uses: ./.github/actions/update-website-config 
         with:
           bucketName: docs.docker.com-stage-us-east-1
           regionName: us-east-1
