@@ -215,4 +215,14 @@ ready(() => {
         const group = $(this).attr("data-group");
         $(`.nav-tabs > li > a[data-group='${ group }']`).tab("show");
     });
+
+    $('.language-dockerfile span.k').tooltip({
+        title: function() {
+            let c = this.textContent;
+            this.style.cursor = 'help';
+            $(this).on('click', () => { window.location.href = "/engine/reference/builder/#"+c.toLowerCase()});
+            return 'Learn more about the "'+ c + '" Dockerfile command.'
+        },
+        placement: "auto"
+    });
 });
