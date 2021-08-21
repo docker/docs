@@ -16,7 +16,7 @@ plink: docker_service.yaml
 examples: |-
   Remove the `redis` service:
 
-  ```bash
+  ```console
   $ docker service rm redis
 
   redis

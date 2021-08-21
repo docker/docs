@@ -36,7 +36,7 @@ options:
 examples: |-
   ### Create a config
 
-  ```bash
+  ```console
   $ printf <config> | docker config create my_config -
 
   onakdyv307se2tl7nl20anokv
@@ -49,7 +49,7 @@ examples: |-
 
   ### Create a config with a file
 
-  ```bash
+  ```console
   $ docker config create my_config ./config.json
 
   dg426haahpi5ezmkkj5kyl3sn
@@ -62,7 +62,7 @@ examples: |-
 
   ### Create a config with labels
 
-  ```bash
+  ```console
   $ docker config create \
       --label env=dev \
       --label rev=20170324 \
@@ -71,7 +71,7 @@ examples: |-
   eo7jnzguqgtpdah3cm5srfb97
   ```
 
-  ```bash
+  ```console
   $ docker config inspect my_config
 
   [
