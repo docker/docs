@@ -64,7 +64,11 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     expose. See the [`docker-compose.yml` reference](../compose/compose-file/index.md) for more
     information on how this file works.
 
-9. Add the following configuration to the file.
+9. Add a volume to be used by the Postgres database.
+
+   `docker volume create postgresdata`
+
+10. Add the following configuration to the file.
 
    ```yaml
    version: "{{ site.compose_file_v3 }}"
@@ -73,7 +77,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
      db:
        image: postgres
        volumes:
-         - ./data/db:/var/lib/postgresql/data
+         - postgresdata:/var/lib/postgresql/data
        environment:
          - POSTGRES_DB=postgres
          - POSTGRES_USER=postgres
@@ -87,6 +91,12 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
          - "8000:8000"
        depends_on:
          - db
+  networks:
+    djangonetwork:
+      driver: bridge
+  volumes:
+    postgresdata:
+       external: true
    ```
 
    This file defines two services: The `db` service and the `web` service.
@@ -97,7 +107,10 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    > on port 8000. Do not use this in a production environment. For more
    > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" rel="noopener" class="_”}.
 
-10. Save and close the `docker-compose.yml` file.
+11. Save and close the `docker-compose.yml` file.
+
+12. Check for any issues with your compose file.
+    `docker compose config`
 
 ### Create a Django project
 
