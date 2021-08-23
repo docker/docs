@@ -47,7 +47,7 @@ local     roach
 
 ### Networking
 
-The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined _bridge network_. It is going to provide us with a DNS lookup service so that we can refer to our database enginer container by its host name.
+The example application and the database engine are going to talk to one another over the network. There are different kinds of network configuration possible, and we are going to use what is called a user-defined _bridge network_. It is going to provide us with a DNS lookup service so that we can refer to our database engine container by its hostname.
 
 The following command creates a new bridge network named `mynet`:
 
@@ -73,11 +73,11 @@ Our bridge network `mynet` has been created successfully. The other three networ
 
 As the saying goes, there are only two hard things in Computer Science: cache invalidation and naming things. And off-by-one errors.
 
-When choosing a name for a network or a managed volume, it's best to choose a name which is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.
+When choosing a name for a network or a managed volume, it's best to choose a name that is indicative of the intended purpose. In this module, though, we aimed for brevity, so we settled for short, generic names.
 
 ### Start the database engine
 
-Now that the housekeeping chores are done, we can run CockroachDB in a container and attach it to the volume and network we had just created. When you run the following command, Docker will pull the image from Docker Hub and run it for you locally:
+Now that the housekeeping chores are done, we can run CockroachDB in a container and attach it to the volume and network we had just created. When you run the folllowing command, Docker will pull the image from Docker Hub and run it for you locally:
 
 ```console
 $ docker run -d \
@@ -180,7 +180,7 @@ $ git clone https://github.com/olliefr/docker-gs-ping-roach.git
 # ... output omitted ...
 ```
 
-The application's `main.go` now includes database initialisation code, as well as the code to implement a new business requirement:
+The application's `main.go` now includes database initialization code, as well as the code to implement a new business requirement:
 
 * An HTTP `POST` request to `/send` containing a `{ "value" : string }` JSON must save the value to the database.
 
@@ -339,7 +339,7 @@ func countRecords(db *sql.DB) (int, error) {
 ```
 {% endraw %}
 
-The repository also includes the `Dockerfile`, which is almost exactly the same as the multi-stage `Dockerfile` introduced in the previous modules. It uses official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, "distroless" image.
+The repository also includes the `Dockerfile`, which is almost exactly the same as the multi-stage `Dockerfile` introduced in the previous modules. It uses the official Docker Go image to build the application and then builds the final image by placing the compiled binary into the much slimmer, "distroless" image.
 
 Regardless of whether we had updated the old example application, or checked out the new one, this new Docker image has to be built to reflect the changes to the application source code.
 
@@ -519,7 +519,7 @@ Please make sure that you stop the CockroachDB and `docker-gs-ping-roach` contai
 
 ## Better productivity with Docker Compose
 
-At this point you might be wondering if there is a way to avoid having to deal with long lists of argument to the `docker` command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, _many_ more. Then there is also a question of dependencies &ndash; ideally, we would like to make sure that the database is started _before_ our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.
+At this point, you might be wondering if there is a way to avoid having to deal with long lists of arguments to the `docker` command. The toy example we used in this series requires five environment variables to define the connection to the database. A real application might need many, _many_ more. Then there is also a question of dependencies &ndash; ideally, we would like to make sure that the database is started _before_ our application is run. And spinning up the database instance may require another Docker command with many options. But there is a better way to orchestrate these deployments for local development purposes.
 
 In this section, we’ll create a Docker Compose file to start our `docker-gs-ping-roach` application and CockroachDB database engine with a single command.
 
@@ -588,7 +588,7 @@ The exact value does not really matter for our example, because we run Cockroach
 
 ### Merging Compose files
 
-The file name `docker-compose.yml` is the default file name which `docker-compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of configuration together. The following list is just a few examples of scenarios where such feature would be very useful:
+The file name `docker-compose.yml` is the default file name which `docker-compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
 
 * Using a bind mount for the source code for local development but not when running the CI tests;
 * Switching between using a pre-built image for the frontend for some API application vs creating a bind mount for source code;
@@ -599,7 +599,7 @@ We are not going to cover any of these advanced use cases here.
 
 ### Variable substitution in Docker Compose
 
-One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some example in our Compose file, `environment` section. By means of example:
+One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some examples in our Compose file, `environment` section. By means of an example:
 
 * `PGUSER=${PGUSER:-totoro}` means that inside the container, the environment variable `PGUSER` shall be set to the same value as it has on the host machine where Docker Compose is run. If there is no environment variable with this name on the host machine, the variable inside the container gets the default value of `totoro`.
 * `PGPASSWORD=${PGPASSWORD:?database password not set}` means that if the environment variable `PGPASSWORD` is not set on the host, Docker Compose will display an error. This is OK, because we don't want to hard-code default values for the password. We set the password value in the `.env` file, which is local to our machine. It is always a good idea to add `.env` to `.gitignore` to prevent the secrets being checked into the version control.
@@ -628,7 +628,7 @@ We pass the `--build` flag so Docker will compile our image and then starts it.
 
 > **Note**
 >
-> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker-compose up`.
+> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on the update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker-compose up`.
 
 Since our set-up is now run by Docker Compose, it has assigned it a "project name", so we got a new volume for our CockroachDB instance. This means that our application would fail to connect to the database, because the database does not exist in this new volume. The terminal would display an authentication error for the database:
 
