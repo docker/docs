@@ -1,7 +1,7 @@
 ---
-description: Upgrading your Docker Hub Plan
+description: Upgrading your Docker subscription
 keywords: Docker Hub, upgrade, subscription, Pro, Team, pricing plan,
-title: Upgrade your plan
+title: Upgrade your subscription
 redirect_from:
 - /docker-hub/upgrade/
 - /docker-hub/billing/upgrade/

@@ -5,8 +5,8 @@ title: Advanced Image Management dashboard
 ---
 
 {% include upgrade-cta.html
-  body="Docker Pro and Team users can now use Docker Hub's new **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. Upgrade your existing plan to start using the Advanced Image Management dashboard."
-  header-text="This feature requires a Pro or a Team plan"
+  body="Docker Pro, Team, and Business users can now use Docker Hub's **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. Upgrade now to start using the Advanced Image Management dashboard."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_image-mgmt"
 %}
 

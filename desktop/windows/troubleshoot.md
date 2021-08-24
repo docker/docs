@@ -10,7 +10,7 @@ toc_max: 2
 ---
 
 {% include upgrade-cta.html
-  body="Did you know that Docker Desktop now offers support for developers subscribed to a Pro or a Team plan? Upgrade your existing plan to benefit from Docker Support. Click [here](#support) to learn more."
+  body="Did you know that Docker Desktop offers support for developers on a paid Docker subscription (Pro, Team, or Business)? Upgrade now to benefit from Docker Support. Click [here](#support) to learn more."
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 
@@ -442,8 +442,8 @@ explore other workarounds suggested on Docker Desktop forums.
 This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 
 {% include upgrade-cta.html
-  body="Docker Desktop offers support for developers subscribed to a Pro or a Team plan. Upgrade your existing plan to benefit from Docker Support."
-  header-text="This feature requires a Pro or a Team plan"
+  body="Docker Desktop offers support for developers subscribed to a Pro, Team, or a Business tier. Upgrade now to benefit from Docker Support."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 

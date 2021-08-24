@@ -12,12 +12,12 @@ redirect_from:
 - /install/windows/ee-preview/
 ---
 
-Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, installation instructions, and automatic updates.
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
+
+{% include eula.md %}
 
 [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
 .button .primary-btn}
-
-{% include eula.md %}
 
 ## System requirements
 
@@ -122,14 +122,36 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 ![search for Docker app](images/docker-app-search.png){:width="300px"}
 
-When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
 
-![whale on taskbar](images/whale-icon-systray.png)
+The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Subscription Service Terms window. It includes a change to the terms of use for Docker Desktop. 
 
-If the whale icon is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see [Docker Settings](index.md#settings).
+  > **Docker Subscription Service Terms**
+  >
+  > Beginning on August 31, 2021, you must agree to the [Docker Subscription Service Terms](https://www.docker.com/legal/docker-terms-service){: target="_blank" rel="noopener" class="_"} to continue using Docker Desktop. Read the information presented on the screen to understand how the changes impact you. 
 
-## Quick Start Guide
+  ![Subscription service terms](../mac/images/subscription-terms.png){:width="700px"}
+
+   **Here’s a summary of the key changes:**
+
+  - Docker Subscription Service Terms include a change to the terms of use for Docker Desktop
+  - It remains free for small businesses (fewer than 250 employees AND less than $1 million in revenue), personal use, education, and non-commercial open source projects.  
+  - It requires a paid subscription for professional use in larger enterprises.
+  - The effective date of these terms is 31 August 2021. There is a grace period until 31 January 2022 for those that will require a paid subscription to use Docker Desktop. 
+  - The existing Docker Free subscription has been renamed Docker Personal and we have introduced a Docker Business subscription .
+    The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
+
+  The [blog post](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_"} and the [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}also give you detailed information about the changes.
+
+  Click the checkbox to indicate that you accept the terms of service and then click **Accept** to continue. Docker Desktop starts after you accept the terms of service.
+
+  > **Important**
+  >
+  > If you do not agree to the terms of service, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+  {: .important}
+
+ For more information, see [Docker Desktop license terms](/subscription/#docker-desktop-license-terms).
+
+### Quick Start Guide
 
 When the initialization is complete, Docker Desktop launches the **Quick Start Guide**. This tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 

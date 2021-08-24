@@ -208,7 +208,7 @@ The Images view also allows you to manage and interact with images in remote rep
 
 > **Note**
 >
-> If you have subscribed to a Pro or a Team plan and enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will appear on the Remote repositories tab.
+> If you have a paid Docker subscription and enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results will appear on the Remote repositories tab.
 
 The **Pull** option allows you to pull the latest version of the image from Docker Hub. The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 
@@ -232,8 +232,8 @@ You can use [volumes](../storage/volumes.md) to store files and share them among
 The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
 
 {% include upgrade-cta.html
-  body="To start exploring the details in your volumes, upgrade to a Pro or a Team plan."
-  header-text="This feature requires a Pro or a Team plan"
+  body="To start exploring the details in your volumes, upgrade to a Docker Pro, Team, or a Business subscription."
+  header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
 %}
 

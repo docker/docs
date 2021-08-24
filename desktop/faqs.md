@@ -15,6 +15,16 @@ toc_max: 2
 
 For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](windows/install.md#system-requirements).
 
+### Do I need to pay to use Docker Desktop?
+
+Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $1 million in revenue), personal use, education, and non-commercial open source projects. It requires a paid subscription for professional use in larger enterprises.
+The effective date of these terms is 31 August 2021. There is a grace period until 31 January 2022 for those that will require a paid subscription to use Docker Desktop.
+
+When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Terms](https://www.docker.com/legal/docker-terms-service){: target="_blank" rel="noopener" class="_"}.
+
+[Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
+
+
 ### What is an experimental feature?
 
 {% include experimental.md %}

@@ -1,7 +1,7 @@
 ---
-description: Downgrade your Docker Hub Plan
+description: Downgrade your Docker subscription
 keywords: Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,
-title: Downgrade your plan
+title: Downgrade your subscription
 redirect_from:
 - /docker-hub/cancel-downgrade/
 - /docker-hub/billing/downgrade/

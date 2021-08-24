@@ -6,14 +6,15 @@ redirect_from:
 - /docker-for-mac/install/
 ---
 
-Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, installation instructions, and automatic updates.
+Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, instructions to install and update Docker Desktop for Mac.
+
+{% include eula.md %}
 
 Download Docker Desktop for Mac:
 
 [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
 [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
 
-{% include eula.md %}
 
 ## System requirements
 
@@ -69,27 +70,46 @@ The Docker Desktop installation includes
 
       ![Install Docker app](images/docker-app-drag.png)
 
-2. Double-click `Docker.app` in the Applications folder to start Docker. (In the example below, the Applications folder is in "grid" view mode.)
+2. Double-click `Docker.app` in the Applications folder to start Docker.In the example below, the Applications folder is in "grid" view mode.
 
     ![Docker app in Hockeyapp](images/docker-app-in-apps.png)
 
-    The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
+3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Subscription Service Terms window. It includes a change to the terms of use for Docker Desktop. 
 
-      ![Whale in menu bar](images/whale-in-menu-bar.png)
+    > **Docker Subscription Service Terms**
+    >
+    > Beginning on August 31, 2021, you must agree to the [Docker Subscription Service Terms](https://www.docker.com/legal/docker-terms-service){: target="_blank" rel="noopener" class="_"} to continue using Docker Desktop. Read the information presented on the screen to understand how the changes impact you. 
 
-    If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+    ![Subscription service terms](images/subscription-terms.png){:width="700px"}
 
-    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
+   **Here’s a summary of the key changes:**
 
-3. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
-**Preferences** and other options.
+    - Docker Subscription Service Terms include a change to the terms of use for Docker Desktop
+    - It remains free for small businesses (fewer than 250 employees AND less than $1 million in revenue), personal use, education, and non-commercial open source projects.  
+    - It requires a paid subscription for professional use in larger enterprises.
+    - The effective date of these terms is 31 August 2021. There is a grace period until 31 January 2022 for those that will require a paid subscription to use Docker Desktop. 
+    - The existing Docker Free subscription has been renamed Docker Personal and we have introduced a Docker Business subscription .
+    The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 
-4. Select **About Docker** to verify that you have the latest version.
+    The [blog post](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_"} and the [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"} also give you detailed information about the changes.
 
-Congratulations! You are now successfully running Docker Desktop.
+4. Click the checkbox to indicate that you accept the terms of service and then click **Accept** to continue. Docker Desktop starts after you accept the terms of service.
 
-If you would like to rerun the tutorial, go to the Docker Desktop menu 
-and select **Learn**.
+    > **Important**
+    >
+    > If you do not agree to the terms of service, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+    {: .important}
+
+  For more information, see [Docker Desktop license terms](/subscription/#docker-desktop-license-terms).
+
+### Quick start guide  
+  
+  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it is a container, push and save the image to Docker Hub.
+
+   ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
+
+Congratulations! You are now successfully running Docker Desktop. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
+**Preferences** and other options. To run the Quick Start Guide on demand, select the Docker menu and then choose **Quick Start Guide**.
 
 ## Updates
 
@@ -102,7 +122,7 @@ To uninstall Docker Desktop from your Mac:
 1. From the Docker menu, select **Troubleshoot** and then select **Uninstall**.
 2. Click **Uninstall** to confirm your selection.
 
-> **Important**
+> **Note**
 >
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker related data local to the machine, and removes the files generated
