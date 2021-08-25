@@ -66,7 +66,7 @@ testuser:231072:65536
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
 
-- Known to work on Ubuntu 18.04, 20.04, 20.10 and 21.04.
+- Known to work on Ubuntu 18.04, 20.04, and 21.04.
 </div>
 <div id="hint-debian" class="tab-pane fade in" markdown="1">
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or

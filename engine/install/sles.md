@@ -38,15 +38,14 @@ To install Docker Engine, you need a maintained version of SLES 15-SP2 or SLES 1
 Archived versions aren't supported or tested.
 
 The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.2&arch=s390x)
-repositories must be enabled. 
+repositories must be enabled.
 
-The `SELinux` repository must be enabled. This repository is not added by
-default, you need to
-[add it](https://download.opensuse.org/repositories/security).
+The [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security)
+must be enabled. This repository is not added by default, and you need to enable
+it for the version of SLES you are running. Run the following commands to add it:
 
 ```console
-$ sudo zypper install -y lsb-release
-$ sles_version=$(lsb_release -r | rev | cut -c1)
+$ sles_version="$(. /etc/os-release && echo "${VERSION_ID##*.}")"
 $ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP$sles_version/security:SELinux.repo"
 $ sudo zypper addrepo $opensuse_repo 
 ```
@@ -105,9 +104,7 @@ from the repository.
 Set up the **stable** repository.
 
 ```console
-$ sudo zypper \
-    addrepo \
-    {{ download-url-base }}/docker-ce.repo
+$ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 ```
 
 > **Optional**: Enable the **nightly** or **test** repositories.
@@ -164,14 +161,16 @@ $ sudo zypper \
     ```console
     $ sudo zypper search -s --match-exact docker-ce | sort -r
     
-      v  | docker-ce | package | 3:20.10.7-3 | s390x | Docker CE Stable - s390x
       v  | docker-ce | package | 3:20.10.8-3 | s390x | Docker CE Stable - s390x
+      v  | docker-ce | package | 3:20.10.7-3 | s390x | Docker CE Stable - s390x
     ```
 
     The list returned depends on which repositories are enabled, and is specific
     to your version of SLES.
 
-    b. Install a specific version using the version string from the fourth column, For example, `docker-ce-3:20.10.7`.
+    b. Install a specific version by its fully qualified package name, which is
+       the package name (`docker-ce`) plus the version string (fourth column),
+       separated by a hyphen (`-`). For example, `docker-ce-3:20.10.8`.
 
     ```console
     $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
