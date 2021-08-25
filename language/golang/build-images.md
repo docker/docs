@@ -115,17 +115,14 @@ Having established that the server is running and is accessible, let's proceed t
 
 ## Create a Dockerfile for the application
 
-A `Dockerfile` is a text document that contains the instructions for building a Docker image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
+{% include guides/create-dockerfile.md %}
 
-Let’s walk through the process of creating a `Dockerfile` for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
-
-> **Note**
->
-> The name of the file is not _that_ important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
-
-The first thing we need to do is to add a line in our Dockerfile that tells Docker what base image we would like to use for our application.
+Next, we need to add a line in our Dockerfile that tells Docker what base image
+we would like to use for our application.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM golang:1.16-alpine
 ```
 
@@ -191,6 +188,8 @@ CMD [ "/docker-gs-ping" ]
 Here's the complete `Dockerfile`:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM golang:1.16-alpine
 
 WORKDIR /app
@@ -211,6 +210,8 @@ CMD [ "/docker-gs-ping" ]
 The `Dockerfile` may also contain _comments_. They always begin with a `#` symbol and make no difference to Docker. The comments are there for the convenience of humans tasked to maintain the `Dockerfile`:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 # Alpine is chosen for its small footprint
 # compared to Ubuntu
 FROM golang:1.16-alpine
@@ -335,10 +336,11 @@ The `Dockerfile.multistage` in the sample application's repo has the following c
 
 {% raw %}
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ##
 ## Build
 ##
-
 FROM golang:1.16-buster AS build
 
 WORKDIR /app
@@ -354,7 +356,6 @@ RUN go build -o /docker-gs-ping
 ##
 ## Deploy
 ##
-
 FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
