@@ -48,7 +48,7 @@ This page contains information about the new features, improvements, known issue
 - Fixed slowness when adding multiple ports forwarding option.
 - Fixed bug where the WSL 2 synchonization code creates dangling symlinks if the WSL 2 home directory if it is the same as the Windows home directory. Fixes [docker/for-win#11668](https://github.com/docker/for-win/issues/11668).
 - Fixed `docker context ls` after upgrade from 3.5.x when the Linux WSL 2 home directory is the same as the Windows home directory.
-- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See [CVE-2021-37841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841){:target="_blank" rel="noopener" class="_"}. Thanks to [Alessio Dalla Piazza](http://it.linkedin.com/in/alessiodallapiazza) for discovering the issue.
+- Fixed the permissions on `%PROGRAMDATA%\Docker` to avoid a potential Windows containers compromise. See [CVE-2021-37841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-37841){:target="_blank" rel="noopener" class="_"}. Thanks to [Alessio Dalla Piazza](http://it.linkedin.com/in/alessiodallapiazza) for discovering the issue and to @kevpar for helpful discussion.
 - Fixed bug where the Linux home directory under WSL 2 was set to the Windows home directory e.g. `/mnt/c/Users/...`.
 - Fixed bug where Desktop would fail to start if it could not parse CLI contexts. Fixes [docker/for-win#11601](https://github.com/docker/for-win/issues/11601).
 - Fixed an issue related to log display inside a container [docker/for-win#11251](https://github.com/docker/for-win/issues/11251).
