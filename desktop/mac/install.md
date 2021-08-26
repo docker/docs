@@ -10,10 +10,8 @@ Welcome to Docker Desktop for Mac. This page contains information about Docker D
 
 > Download Docker Desktop for Mac
 >
-> {%- include eula.md -%}
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn .accept-eula }
-> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
 ## System requirements
 
@@ -73,33 +71,18 @@ The Docker Desktop installation includes
 
     ![Docker app in Hockeyapp](images/docker-app-in-apps.png)
 
-3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Subscription Service Terms window. It includes a change to the terms of use for Docker Desktop. 
+3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 
-    > **Docker Subscription Service Terms**
-    >
-    > Beginning on August 31, 2021, you must agree to the [Docker Subscription Service Terms](https://www.docker.com/legal/docker-terms-service){: target="_blank" rel="noopener" class="_"} to continue using Docker Desktop. Read the information presented on the screen to understand how the changes impact you. 
+    {% include desktop-license-update.md %}
 
-    ![Subscription service terms](images/subscription-terms.png){:width="700px"}
+Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-   **Here’s a summary of the key changes:**
+  > **Important**
+  >
+  > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+  {: .important}
 
-    - Docker Subscription Service Terms include a change to the terms of use for Docker Desktop
-    - It remains free for small businesses (fewer than 250 employees AND less than $1 million in revenue), personal use, education, and non-commercial open source projects.  
-    - It requires a paid subscription for professional use in larger enterprises.
-    - The effective date of these terms is 31 August 2021. There is a grace period until 31 January 2022 for those that will require a paid subscription to use Docker Desktop. 
-    - The existing Docker Free subscription has been renamed Docker Personal and we have introduced a Docker Business subscription .
-    The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
-
-    The [blog post](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_"} and the [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"} also give you detailed information about the changes.
-
-4. Click the checkbox to indicate that you accept the terms of service and then click **Accept** to continue. Docker Desktop starts after you accept the terms of service.
-
-    > **Important**
-    >
-    > If you do not agree to the terms of service, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-    {: .important}
-
-  For more information, see [Docker Desktop license terms](/subscription/#docker-desktop-license-terms).
+  For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
 
 ### Quick start guide  
   

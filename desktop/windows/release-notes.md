@@ -17,9 +17,7 @@ This page contains information about the new features, improvements, known issue
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
->
-> [Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
 
 ### New
 
@@ -63,7 +61,7 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -98,7 +96,7 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -118,7 +116,7 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -156,7 +154,7 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -199,7 +197,7 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -217,7 +215,7 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -241,7 +239,7 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -257,13 +255,13 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
 You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
 
-Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, users with a paid Docker subscription can skip notifications for a particular update when a reminder appears.
 
 For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
 
@@ -293,7 +291,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -308,7 +306,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -321,7 +319,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -370,7 +368,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -394,7 +392,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -411,7 +409,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [For Windows](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 

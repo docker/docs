@@ -17,10 +17,8 @@ This page contains information about the new features, improvements, known issue
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn .accept-eula }
-> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
 ### New
 
@@ -57,8 +55,8 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg){: .accept-eula } |
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66501/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66501/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -92,8 +90,8 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg){: .accept-eula } |
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66090/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66090/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -112,8 +110,8 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg){: .accept-eula } |
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/66024/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/66024/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -151,8 +149,8 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg){: .accept-eula } |
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/65384/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/65384/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -204,8 +202,8 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg){: .accept-eula } |
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/64133/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/64133/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -223,8 +221,8 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg){: .accept-eula } |
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63878/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63878/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -252,8 +250,8 @@ This page contains information about the new features, improvements, known issue
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg){: .accept-eula } |
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/63152/Docker.dmg){: .accept-eula } |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/63152/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -280,13 +278,13 @@ Docker Desktop is now available for Apple silicon as well as Intel chips. This e
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/62916/Docker.dmg){: .accept-eula }
 
 ### New
 
 You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
 
-Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, users with a paid Docker subscription can skip notifications for a particular update when a reminder appears.
 
 For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
 
@@ -322,7 +320,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61853/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -338,7 +336,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61626/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -355,7 +353,7 @@ For developers in IT managed environments, who don’t have administrative acces
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/61504/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -403,7 +401,7 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/51484/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/51484/Docker.dmg){: .accept-eula }
 
 ### New
 
@@ -426,7 +424,7 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/51218/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/51218/Docker.dmg){: .accept-eula }
 
 ### Upgrades
 
@@ -448,7 +446,7 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/51017/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/51017/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -466,7 +464,7 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/50996/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/50996/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -486,7 +484,7 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/50773/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/50773/Docker.dmg){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -505,7 +503,7 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/stable/50684/Docker.dmg){: .accept-eula }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/50684/Docker.dmg){: .accept-eula }
 
 ### New
 

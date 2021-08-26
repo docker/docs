@@ -223,13 +223,13 @@ To interact with remote repositories:
 
     The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 
-    If you have subscribed to a Pro or a Team plan and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
+    If you have a paid Docker subscription and have enabled [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
 
 ## Explore volumes
 
 You can use [volumes](../storage/volumes.md) to store files and share them among containers. Volumes are created and are directly managed by Docker. They are also the preferred mechanism to persist data in Docker containers and services.
 
-The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are a developer subscribed to a Pro or a Team plan, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are user with a paid Docker subscription, you can also see which container is using a specific volume and explore the files and folders in your volumes.
 
 {% include upgrade-cta.html
   body="To start exploring the details in your volumes, upgrade to a Docker Pro, Team, or a Business subscription."
@@ -241,14 +241,14 @@ The following table lists the Volumes UI features available in each plan:
 
 {% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
-| Feature                                       | Free      | Pro       | Team      |
-|:----------------------------------------------|:---------:|:---------:|:--------:|
-|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |
-| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |
-| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |
-| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |
+| Feature                                       | Personal      | Pro       | Team      | Business      | 
+|:----------------------------------------------|:---------:|:---------:|:--------:|:--------:|
+|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
 
 ### Manage volumes
 

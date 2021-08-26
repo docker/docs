@@ -19,7 +19,7 @@ Download Docker Desktop for Mac on Apple silicon:
 >
 > {%- include eula.md -%}
 >
-> [Download for Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
 
 <br>
 

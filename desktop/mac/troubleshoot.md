@@ -13,7 +13,7 @@ toc_max: 2
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 
-This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support (Pro and Team plan users only), send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
+This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
 
 ## Troubleshoot
 
@@ -26,7 +26,7 @@ The Troubleshoot page contains the following options:
 
 * **Restart Docker Desktop**: Select to restart Docker Desktop.
 
-* **Support**:  Developers on Pro and Team plans can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
+* **Support**: Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
 
 * **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](index.md#kubernetes).
 
@@ -65,7 +65,7 @@ the log data. Before reporting an issue, we recommend that you read the informat
 
 > **Note**
 >
-> Docker Desktop offers support for users subscribed to a Pro or a Team plan. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
+> Docker Desktop offers support for users with a paid Docker subscription. If you are experiencing any issues with Docker Desktop, follow the instructions in this section to send a support request to Docker Support.
 
 Before you get started, we recommend that you sign into your Docker Desktop application and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 
@@ -75,11 +75,11 @@ Before you get started, we recommend that you sign into your Docker Desktop appl
     ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
 5. When the diagnostics have been uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
-6. If you have subscribed to a Pro or a Team plan, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
+6. If you have a paid Docker subscription, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
    > **Note**
     >
-    > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
-7. If you are not subscribed to a Pro or a team plan, you can click **Upgrade to benefit from Docker Support** to upgrade your existing account.
+    > You must be signed in to Docker Desktop using your Pro, Team, or Business tier credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](#support).
+7. If you don't have a paid Docker subscription, you can click **Upgrade to benefit from Docker Support** to upgrade your existing account.
     Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Mac](https://github.com/docker/for-mac/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
 
 ### Diagnosing from the terminal
@@ -366,13 +366,13 @@ This section contains instructions on how to get support, and covers the scope o
 
 ### How do I get Docker Desktop support?
 
-If you have subscribed to a Pro and Team account, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+If you have a paid Docker subscription, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
 
 Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
 
 ### What support can I get?
 
-If you are a Pro or a Team user, you can request for support on the following types of issues:
+If you have a paid Docker subscription, you can request for support on the following types of issues:
 
 * Desktop upgrade issues
 * Desktop installation issues

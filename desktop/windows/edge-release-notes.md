@@ -957,7 +957,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
     - Full BuildKit capabilities with container driver
     - Multiple builder instance support
     - Multi-node builds for cross-platform images (out-of-the-box support for linux/arm/v7 and linux/arm64)
-    - Parallel building of compose files
+    - Concurrent building of compose files
     - High-level build constructs with `bake`
 
 * Bug fixes and minor changes

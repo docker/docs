@@ -17,10 +17,10 @@ For information about Docker Desktop system requirements, see [Docker Desktop fo
 
 ### Do I need to pay to use Docker Desktop?
 
-Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $1 million in revenue), personal use, education, and non-commercial open source projects. It requires a paid subscription for professional use in larger enterprises.
+Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open source projects. It requires a paid subscription for professional use in larger enterprises.
 The effective date of these terms is 31 August 2021. There is a grace period until 31 January 2022 for those that will require a paid subscription to use Docker Desktop.
 
-When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Terms](https://www.docker.com/legal/docker-terms-service){: target="_blank" rel="noopener" class="_"}.
+When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
 
 [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 
@@ -134,9 +134,9 @@ Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a
 
 ### Does Docker Desktop offer support?
 
-Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](mac/troubleshoot.md#support).
+Yes, Docker Desktop offers support for users with a paid Docker subscription. For more information, see [Docker Desktop Support](mac/troubleshoot.md#support).
 
-For information about the pricing plans and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+For information about Docker subscriptions and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
 ### What kind of feedback are you looking for?
 

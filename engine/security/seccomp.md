@@ -31,8 +31,8 @@ protective while providing wide application compatibility. The default Docker
 profile can be found
 [here](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json).
 
-In effect, the profile is a whitelist which denies access to system calls by
-default, then whitelists specific system calls. The profile works by defining a
+In effect, the profile is a allowlist which denies access to system calls by
+default, then allowlists specific system calls. The profile works by defining a
 `defaultAction` of `SCMP_ACT_ERRNO` and overriding that action only for specific
 system calls. The effect of `SCMP_ACT_ERRNO` is to cause a `Permission Denied`
 error. Next, the profile defines a specific list of system calls which are fully
@@ -56,9 +56,9 @@ $ docker run --rm \
 
 ### Significant syscalls blocked by the default profile
 
-Docker's default seccomp profile is a whitelist which specifies the calls that
+Docker's default seccomp profile is an allowlist which specifies the calls that
 are allowed. The table below lists the significant (but not all) syscalls that
-are effectively blocked because they are not on the whitelist. The table includes
+are effectively blocked because they are not on the Allowlist. The table includes
 the reason each syscall is blocked rather than white-listed.
 
 | Syscall             | Description                                                                                                                           |

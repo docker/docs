@@ -19,8 +19,6 @@ significantly reduce the delay between writing code and running it in production
 You can download and install Docker on multiple platforms. Refer to the following
 section and choose the best installation path for you.
 
-{% include eula.md %}
-
 <div class="component-container">
     <!--start row-->
     <div class="row">

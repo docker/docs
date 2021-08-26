@@ -170,5 +170,5 @@ Congratulations! You've successfully:
 - Create an [organization](orgs.md) to use Docker Hub with your team.
 - Automatically build container images from code through [builds](builds/index.md).
 - [Explore](https://hub.docker.com/explore) official & publisher images.
-- [Upgrade your plan](https://www.docker.com/pricing) to push additional private Docker images to
+- [Upgrade your subscription](https://www.docker.com/pricing) to push additional private Docker images to
 Docker Hub.

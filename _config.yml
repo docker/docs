@@ -31,18 +31,15 @@ distribution_version: "2.7"
 # URLs for license and conditions
 # TODO move these inline once these are stable / final
 # TODO add final link to DSST
-dsst_url: "https://www.docker.com/sites/default/files/d8/2021-01/Docker%2520Data%2520Processing%2520Agreement%25202021.pdf" # Docker Subscription Service Terms
+dsst_url: "https://www.docker.com/legal/docker-subscription-service-agreement" # Docker Subscription Service Agreement
 
-# Link to Docker Subscription Service Terms announcement blog-post
-# TODO add final link to Docker Subscription Service Terms announcement blog-post
-dsst_announcement_url: "XXXXXXX ADD BLOG LINK"
+# Link to Docker Subscription Service Agreement announcement blog-post
+dsst_announcement_url: "https://www.docker.com/blog/updating-product-subscriptions/"
 
-# Link to Docker Subscription Service Terms FAQst
-# TODO add link to Docker Subscription Service Terms FAQs
-dsst_faqs_url: "XXXXXXX ADD FAQs LINK"
+# Link to Docker Subscription Service Agreement FAQs
+dsst_faqs_url: "https://www.docker.com/pricing/faq"
 
 # Link to Docker Terms of Service
-# TODO add link to Docker Terms of Service
 tos_url: "https://www.docker.com/legal/docker-terms-service"
 
 # List of plugins to enable for local development builds. Mostly the same as

@@ -1,22 +1,22 @@
 ---
-description: Add seats to your plan
+description: Add seats to your subscription
 keywords: Docker, Docker Hub, subscription, update, add, seats
-title: Add seats to your plan
+title: Add seats to your subscription
 redirect_from:
 - /docker-hub/billing/add-seats/
 ---
 
-You can manage your Docker Hub subscription anytime by adding seats to your plan.
+You add seats anytime to your existing subscription.
 
-## Add seats to a monthly plan
+## Add seats to a monthly subscription
 
 > **Note:**
 >
 >- A monthly subscription includes monthly seats only.
 >- You must be a member of the ‘owners’ team to add seats to your organization.
->- When you add seats to your monthly plan in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
+>- When you add seats to your monthly subscription in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 
-To add seats to a monthly plan:
+To add seats to a monthly subscription:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
@@ -30,14 +30,14 @@ To add seats to a monthly plan:
 
 6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../orgs.md#add-a-member-to-a-team).
 
-## Add seats to an annual plan
+## Add seats to an annual subscription
 
 > **Note:**
 >
 > - An annual subscription includes annual seats only.
-> - When you add seats to your plan in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
+> - When you add seats to your subscription in the middle of your billing cycle, you are charged a prorated amount for the additional seats.
 
-To add annual seats to an annual plan:
+To add annual seats to an annual subscription:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
