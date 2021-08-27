@@ -61,7 +61,7 @@ testuser:231072:65536
 <div class="tab-content">
 
 <div id="hint-ubuntu" class="tab-pane fade in active" markdown="1">
-- No preparation is needed.
+- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
 
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
@@ -69,6 +69,8 @@ testuser:231072:65536
 - Known to work on Ubuntu 18.04, 20.04, and 21.04.
 </div>
 <div id="hint-debian" class="tab-pane fade in" markdown="1">
+- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
+
 - For Debian 10, add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`. This step is not required on Debian 11.
 
@@ -504,6 +506,25 @@ A workaround is to specify non-NFS `data-root` directory in `~/.config/docker/da
 ```
 
 ### `docker run` errors
+
+**docker: Error response from daemon: OCI runtime create failed: ...: read unix @-&gt;/run/systemd/private: read: connection reset by peer: unknown.**
+
+This error occurs on cgroup v2 hosts mostly when the dbus daemon is not running for the user.
+
+```console
+$ systemctl --user is-active dbus
+inactive
+
+$ docker run hello-world
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: process_linux.go:385: applying cgroup configuration for process caused: error while starting unit "docker
+-931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e.scope" with properties [{Name:Description Value:"libcontainer container 931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e"} {Name:Slice Value:"use
+r.slice"} {Name:PIDs Value:@au [4529]} {Name:Delegate Value:true} {Name:MemoryAccounting Value:true} {Name:CPUAccounting Value:true} {Name:IOAccounting Value:true} {Name:TasksAccounting Value:true} {Name:DefaultDependencies Val
+ue:false}]: read unix @->/run/systemd/private: read: connection reset by peer: unknown.
+```
+
+To fix the issue, run `sudo apt-get install -y dbus-user-session` or `sudo dnf install -y dbus-daemon`, and then relogin.
+
+If the error still occurs, try running `systemctl --user enable --now dbus` (without sudo).
 
 **`--cpus`, `--memory`, and `--pids-limit` are ignored**
 
