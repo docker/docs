@@ -576,15 +576,35 @@ Installing slirp4netns may improve the network throughput.
 See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#network-drivers) for the benchmark result.
 
 Also, changing MTU value may improve the throughput.
-The MTU value can be specified by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The MTU value can be specified by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"
+```
+
+And then restart the daemon:
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
 
 **`docker run -p` does not propagate source IP addresses**
 
 This is because Docker with rootless mode uses RootlessKit's builtin port driver by default.
 
-The source IP addresses can be propagated by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The source IP addresses can be propagated by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"
+```
+
+And then restart the daemon:
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
 
 Note that this configuration decreases throughput.
 See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#port-drivers) for the benchmark result.
