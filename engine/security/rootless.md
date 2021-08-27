@@ -218,6 +218,8 @@ Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
 [INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
 ```
 
+Unset environment variables PATH and DOCKER_HOST if you have added them to `~/.bashrc`.
+
 To remove the data directory, run `rootlesskit rm -rf ~/.local/share/docker`.
 
 To remove the binaries, remove `docker-ce-rootless-extras` package if you installed Docker with package managers.
