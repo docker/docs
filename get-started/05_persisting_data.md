@@ -29,7 +29,7 @@ What you'll see is that the files created in one container aren't available in a
     commands (why we have the `&&`). The first portion picks a single random number and writes
     it to `/data.txt`. The second command is simply watching a file to keep the container running.
 
-2. Validate we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
+2. Validate that we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
 
     ![Dashboard open CLI into ubuntu container](images/dashboard-open-cli-ubuntu.png){: style=width:75% }
 
