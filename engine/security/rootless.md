@@ -69,21 +69,20 @@ testuser:231072:65536
 - Known to work on Ubuntu 18.04, 20.04, and 21.04.
 </div>
 <div id="hint-debian" class="tab-pane fade in" markdown="1">
-- Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
-  `/etc/sysctl.d`) and run `sudo sysctl --system`.
+- For Debian 10, add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
+  `/etc/sysctl.d`) and run `sudo sysctl --system`. This step is not required on Debian 11.
 
-- To use the `overlay2` storage driver (recommended), run
-  `sudo modprobe overlay permit_mounts_in_userns=1`
-   ([Debian-specific kernel patch, introduced in Debian 10](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)).
-   Add the configuration to `/etc/modprobe.d` for persistence.
-  
+- Installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
+  Using `overlay2` storage driver with Debian-specific modprobe option `sudo modprobe overlay permit_mounts_in_userns=1` is also possible,
+  however, highly discouraged due to [instability](https://github.com/moby/moby/issues/42302).
+
 - Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
   Check you have this with 
   
   ```console
   $ slirp4netns --version
   ```
-  If you do not have this download and install the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
+  If you do not have this download and install with `sudo apt-get install -y slirp4netns` or download the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
 
 </div>
 <div id="hint-arch" class="tab-pane fade in" markdown="1">
@@ -123,7 +122,7 @@ testuser:231072:65536
 ## Known limitations
 
 - Only the following storage drivers are supported:
-  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel)
+  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
   - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
