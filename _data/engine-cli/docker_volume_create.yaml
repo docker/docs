@@ -46,7 +46,7 @@ options:
 examples: |-
   Create a volume and then configure the container to use it:
 
-  ```bash
+  ```console
   $ docker volume create hello
 
   hello
@@ -77,7 +77,7 @@ examples: |-
   Some volume drivers may take options to customize the volume creation. Use the
   `-o` or `--opt` flags to pass driver options:
 
-  ```bash
+  ```console
   $ docker volume create --driver fake \
       --opt tardis=blue \
       --opt timey=wimey \
@@ -98,7 +98,7 @@ examples: |-
   For example, the following creates a `tmpfs` volume called `foo` with a size of
   100 megabyte and `uid` of 1000.
 
-  ```bash
+  ```console
   $ docker volume create --driver local \
       --opt type=tmpfs \
       --opt device=tmpfs \
@@ -108,7 +108,7 @@ examples: |-
 
   Another example that uses `btrfs`:
 
-  ```bash
+  ```console
   $ docker volume create --driver local \
       --opt type=btrfs \
       --opt device=/dev/sda2 \
@@ -118,7 +118,7 @@ examples: |-
   Another example that uses `nfs` to mount the `/path/to/dir` in `rw` mode from
   `192.168.1.1`:
 
-  ```bash
+  ```console
   $ docker volume create --driver local \
       --opt type=nfs \
       --opt o=addr=192.168.1.1,rw \

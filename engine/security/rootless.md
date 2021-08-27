@@ -54,36 +54,37 @@ testuser:231072:65536
   <li class="active"><a data-toggle="tab" data-target="#hint-ubuntu">Ubuntu</a></li>
   <li><a data-toggle="tab" data-target="#hint-debian">Debian GNU/Linux</a></li>
   <li><a data-toggle="tab" data-target="#hint-arch">Arch Linux</a></li>
-  <li><a data-toggle="tab" data-target="#hint-opensuse">openSUSE</a></li>
+  <li><a data-toggle="tab" data-target="#hint-opensuse-sles">openSUSE and SLES</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos8-rhel8-fedora">CentOS 8, RHEL 8 and Fedora</a></li>
   <li><a data-toggle="tab" data-target="#hint-centos7-rhel7">CentOS 7 and RHEL 7</a></li>
 </ul>
 <div class="tab-content">
 
 <div id="hint-ubuntu" class="tab-pane fade in active" markdown="1">
-- No preparation is needed.
+- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
 
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
 
-- Known to work on Ubuntu 16.04, 18.04, and 20.04.
+- Known to work on Ubuntu 18.04, 20.04, and 21.04.
 </div>
 <div id="hint-debian" class="tab-pane fade in" markdown="1">
-- Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
-  `/etc/sysctl.d`) and run `sudo sysctl --system`.
+- Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
 
-- To use the `overlay2` storage driver (recommended), run
-  `sudo modprobe overlay permit_mounts_in_userns=1`
-   ([Debian-specific kernel patch, introduced in Debian 10](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)).
-   Add the configuration to `/etc/modprobe.d` for persistence.
-  
+- For Debian 10, add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
+  `/etc/sysctl.d`) and run `sudo sysctl --system`. This step is not required on Debian 11.
+
+- Installing `fuse-overlayfs` is recommended. Run `sudo apt-get install -y fuse-overlayfs`.
+  Using `overlay2` storage driver with Debian-specific modprobe option `sudo modprobe overlay permit_mounts_in_userns=1` is also possible,
+  however, highly discouraged due to [instability](https://github.com/moby/moby/issues/42302).
+
 - Rootless docker requires version of `slirp4netns` greater than `v0.4.0` (when `vpnkit` is not installed).
   Check you have this with 
   
   ```console
   $ slirp4netns --version
   ```
-  If you do not have this download and install the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
+  If you do not have this download and install with `sudo apt-get install -y slirp4netns` or download the latest [release](https://github.com/rootless-containers/slirp4netns/releases).
 
 </div>
 <div id="hint-arch" class="tab-pane fade in" markdown="1">
@@ -92,24 +93,20 @@ testuser:231072:65536
 - Add `kernel.unprivileged_userns_clone=1` to `/etc/sysctl.conf` (or
   `/etc/sysctl.d`) and run `sudo sysctl --system`
 </div>
-<div id="hint-opensuse" class="tab-pane fade in" markdown="1">
+<div id="hint-opensuse-sles" class="tab-pane fade in" markdown="1">
 - Installing `fuse-overlayfs` is recommended. Run `sudo zypper install -y fuse-overlayfs`.
 
 - `sudo modprobe ip_tables iptable_mangle iptable_nat iptable_filter` is required.
   This might be required on other distros as well depending on the configuration.
 
-- Known to work on openSUSE 15.
+- Known to work on openSUSE 15 and SLES 15.
 </div>
 <div id="hint-centos8-rhel8-fedora" class="tab-pane fade in" markdown="1">
 - Installing `fuse-overlayfs` is recommended. Run `sudo dnf install -y fuse-overlayfs`.
 
 - You might need `sudo dnf install -y iptables`.
 
-- When SELinux is enabled, you may face `can't open lock file /run/xtables.lock: Permission denied` error.
-  A workaround for this is to `sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t`.
-  This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
-
-- Known to work on CentOS 8 and Fedora 33.
+- Known to work on CentOS 8, RHEL 8, and Fedora 34.
 </div>
 <div id="hint-centos7-rhel7" class="tab-pane fade in" markdown="1">
 - Add `user.max_user_namespaces=28633` to `/etc/sysctl.conf` (or 
@@ -123,7 +120,7 @@ testuser:231072:65536
 ## Known limitations
 
 - Only the following storage drivers are supported:
-  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel, or Debian-flavored kernel)
+  - `overlay2` (only if running with kernel 5.11 or later, or Ubuntu-flavored kernel)
   - `fuse-overlayfs` (only if running with kernel 4.18 or later, and `fuse-overlayfs` is installed)
   - `btrfs` (only if running with kernel 4.18 or later, or `~/.local/share/docker` is mounted with `user_subvol_rm_allowed` mount option)
   - `vfs`
@@ -217,6 +214,8 @@ Removed /home/testuser/.config/systemd/user/default.target.wants/docker.service.
 [INFO] This uninstallation tool does NOT remove Docker binaries and data.
 [INFO] To remove data, run: `/usr/bin/rootlesskit rm -rf /home/testuser/.local/share/docker`
 ```
+
+Unset environment variables PATH and DOCKER_HOST if you have added them to `~/.bashrc`.
 
 To remove the data directory, run `rootlesskit rm -rf ~/.local/share/docker`.
 
@@ -477,14 +476,13 @@ up automatically. See [Usage](#usage).
 
 **iptables failed: iptables -t nat -N DOCKER: Fatal: can't open lock file /run/xtables.lock: Permission denied**
 
-This error may happen when SELinux is enabled on the host.
+This error may happen with an older version of Docker when SELinux is enabled on the host.
 
-A known workaround is to run the following commands to disable SELinux for `iptables`:
+The issue has been fixed in Docker 20.10.8.
+A known workaround for older version of Docker is to run the following commands to disable SELinux for `iptables`:
 ```console
 $ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t
 ```
-
-This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
 
 ### `docker pull` errors
 
@@ -505,6 +503,25 @@ A workaround is to specify non-NFS `data-root` directory in `~/.config/docker/da
 ```
 
 ### `docker run` errors
+
+**docker: Error response from daemon: OCI runtime create failed: ...: read unix @-&gt;/run/systemd/private: read: connection reset by peer: unknown.**
+
+This error occurs on cgroup v2 hosts mostly when the dbus daemon is not running for the user.
+
+```console
+$ systemctl --user is-active dbus
+inactive
+
+$ docker run hello-world
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: process_linux.go:385: applying cgroup configuration for process caused: error while starting unit "docker
+-931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e.scope" with properties [{Name:Description Value:"libcontainer container 931c15729b5a968ce803784d04c7421f791d87e5ca1891f34387bb9f694c488e"} {Name:Slice Value:"use
+r.slice"} {Name:PIDs Value:@au [4529]} {Name:Delegate Value:true} {Name:MemoryAccounting Value:true} {Name:CPUAccounting Value:true} {Name:IOAccounting Value:true} {Name:TasksAccounting Value:true} {Name:DefaultDependencies Val
+ue:false}]: read unix @->/run/systemd/private: read: connection reset by peer: unknown.
+```
+
+To fix the issue, run `sudo apt-get install -y dbus-user-session` or `sudo dnf install -y dbus-daemon`, and then relogin.
+
+If the error still occurs, try running `systemctl --user enable --now dbus` (without sudo).
 
 **`--cpus`, `--memory`, and `--pids-limit` are ignored**
 
@@ -561,15 +578,35 @@ Installing slirp4netns may improve the network throughput.
 See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#network-drivers) for the benchmark result.
 
 Also, changing MTU value may improve the throughput.
-The MTU value can be specified by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The MTU value can be specified by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_MTU=<INTEGER>"
+```
+
+And then restart the daemon:
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
 
 **`docker run -p` does not propagate source IP addresses**
 
 This is because Docker with rootless mode uses RootlessKit's builtin port driver by default.
 
-The source IP addresses can be propagated by adding `Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"`
-to `~/.config/systemd/user/docker.service` and then running `systemctl --user daemon-reload`.
+The source IP addresses can be propagated by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+
+```systemd
+[Service]
+Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"
+```
+
+And then restart the daemon:
+```console
+$ systemctl --user daemon-reload
+$ systemctl --user restart docker
+```
 
 Note that this configuration decreases throughput.
 See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#port-drivers) for the benchmark result.

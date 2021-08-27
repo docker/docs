@@ -28,7 +28,7 @@ options:
 examples: |-
   By default the command will just show a summary of the data used:
 
-  ```bash
+  ```console
   $ docker system df
 
   TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
@@ -39,7 +39,7 @@ examples: |-
 
   A more detailed view can be requested using the `-v, --verbose` flag:
 
-  ```bash
+  ```console
   $ docker system df -v
 
   Images space usage:

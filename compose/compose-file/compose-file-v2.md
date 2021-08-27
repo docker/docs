@@ -1538,16 +1538,16 @@ volumes_from:
 `no` is the default restart policy, and it doesn't restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
 ```yaml
-restart: no
+restart: "no"
 ```
 ```yaml
-restart: always
+restart: "always"
 ```
 ```yaml
-restart: on-failure
+restart: "on-failure"
 ```
 ```yaml
-restart: unless-stopped
+restart: "unless-stopped"
 ```
 
 {: id="cpu-and-other-resources"}

@@ -24,11 +24,11 @@ options:
 examples: |-
   Each of these commands has the same result.
 
-  ```bash
+  ```console
   $ docker export red_panda > latest.tar
   ```
 
-  ```bash
+  ```console
   $ docker export --output="latest.tar" red_panda
   ```
 deprecated: false

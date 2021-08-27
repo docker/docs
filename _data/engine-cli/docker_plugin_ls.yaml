@@ -47,7 +47,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker plugin ls
 
   ID            NAME                                    DESCRIPTION                ENABLED
@@ -74,7 +74,7 @@ examples: |-
   might have multiple capabilities. Currently `volumedriver`, `networkdriver`,
   `ipamdriver`, `logdriver`, `metricscollector`, and `authz` are supported capabilities.
 
-  ```bash
+  ```console
   $ docker plugin install --disable vieux/sshfs
 
   Installed plugin vieux/sshfs
@@ -106,7 +106,7 @@ examples: |-
   The following example uses a template without headers and outputs the
   `ID` and `Name` entries separated by a colon (`:`) for all plugins:
 
-  ```bash
+  ```console
   $ docker plugin ls --format "{{.ID}}: {{.Name}}"
 
   4be01827a72e: vieux/sshfs:latest

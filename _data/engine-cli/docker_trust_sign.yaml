@@ -19,7 +19,7 @@ examples: |-
 
   Given an image:
 
-  ```bash
+  ```console
   $ docker trust inspect --pretty example/trust-demo
 
   SIGNED TAG          DIGEST                                                             SIGNERS
@@ -32,7 +32,7 @@ examples: |-
 
   Sign a new tag with `docker trust sign`:
 
-  ```bash
+  ```console
   $ docker trust sign example/trust-demo:v2
 
   Signing and pushing trust metadata for example/trust-demo:v2
@@ -52,7 +52,7 @@ examples: |-
 
   Use `docker trust inspect --pretty` to list the new signature:
 
-  ```bash
+  ```console
   $ docker trust inspect --pretty example/trust-demo
 
   SIGNED TAG          DIGEST                                                             SIGNERS
@@ -68,7 +68,7 @@ examples: |-
 
   Given an image:
 
-  ```bash
+  ```console
   $ docker trust inspect --pretty example/trust-demo
 
   No signatures for example/trust-demo
@@ -87,7 +87,7 @@ examples: |-
 
   Sign a new tag with `docker trust sign`:
 
-  ```bash
+  ```console
   $ docker trust sign example/trust-demo:v1
 
   Signing and pushing trust metadata for example/trust-demo:v1
@@ -105,7 +105,7 @@ examples: |-
 
   `docker trust inspect --pretty` lists the new signature:
 
-  ```bash
+  ```console
   $ docker trust inspect --pretty example/trust-demo
 
   SIGNED TAG          DIGEST                                                             SIGNERS

@@ -27,7 +27,7 @@ Your organization's number of paid seats must equal the number of organization m
 
 ### What are the rate limits for free subscriptions?
 
-Anonymous and Free subscriptions are subject to rate limits on image pull requests. You can get more information at the [Rate Limiting Information](../download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
+Anonymous and Free subscriptions are subject to rate limits on image pull requests. You can get more information at the [Rate Limiting Information](../docker-hub/download-rate-limit.md#how-do-i-authenticate-pull-requests){:target="blank" rel="noopener" class=""} page.
 
 ### We have a number of agents, users, and seats and it's difficult to track and manage the accounts. Can we get our organization IP addresses enabled for access instead?
 
@@ -96,7 +96,7 @@ When you downgrade your Pro or Team plan, changes are applied at the end of your
 
 ### How do I downgrade from a Team plan to a Free Team plan?
 
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](../#pricing-plans){:target="blank" rel="noopener" class=""} page.
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](index.md#pricing-plans){:target="blank" rel="noopener" class=""} page.
 
 ### How do I downgrade from Pro to a Free plan?
 
@@ -104,7 +104,7 @@ Before you downgrade to a Free plan, ensure that your account organization detai
 
 ### How do I add a member to a team in my organization?
 
-For information on how to add a member to a team, see [Add a member to a team](../orgs/#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
+For information on how to add a member to a team, see [Add a member to a team](../docker-hub/orgs.md#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
 
 ### What happens to my collaborators when I move to a free individual plan?
 
