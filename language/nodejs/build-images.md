@@ -12,7 +12,7 @@ redirect_from:
 
 Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
 
-{% include enable-buildkit.md %}
+{% include guides/enable-buildkit.md %}
 
 ## Overview
 
@@ -93,28 +93,7 @@ We will now continue to build and run the application in Docker.
 
 ## Create a Dockerfile for Node.js
 
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
-
-Let’s walk through the process of creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
-
-> **Note**
->
-> The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
-
-The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
-While _optional_, this directive instructs the Docker builder what syntax to use
-when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
-to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
-must appear before any other comment, whitespace, or Dockerfile instruction in
-your Dockerfile, should be the first line in Dockerfiles.
-
-```dockerfile
-# syntax=docker/dockerfile:1
-```
-
-We recommend using `docker/dockerfile:1`, which always points to the latest release
-of the version 1 syntax. BuildKit automatically checks for updates of the syntax
-before building, making sure you are using the most current version.
+{% include guides/create-dockerfile.md %}
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
