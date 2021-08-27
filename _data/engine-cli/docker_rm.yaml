@@ -40,7 +40,7 @@ examples: |-
 
   This removes the container referenced under the link `/redis`.
 
-  ```bash
+  ```console
   $ docker rm /redis
 
   /redis
@@ -53,7 +53,7 @@ examples: |-
   between the two containers. This does not apply when `--link` is used with
   user-specified networks.
 
-  ```bash
+  ```console
   $ docker rm --link /webapp/redis
 
   /webapp/redis
@@ -63,7 +63,7 @@ examples: |-
 
   This command force-removes a running container.
 
-  ```bash
+  ```console
   $ docker rm --force redis
 
   redis
@@ -104,7 +104,7 @@ examples: |-
 
   ### Remove a container and its volumes
 
-  ```bash
+  ```console
   $ docker rm -v redis
   redis
   ```
@@ -114,7 +114,7 @@ examples: |-
 
   ### Remove a container and selectively remove volumes
 
-  ```bash
+  ```console
   $ docker create -v awesome:/foo -v /bar --name hello redis
   hello
 

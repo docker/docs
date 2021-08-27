@@ -50,7 +50,7 @@ examples: |-
   Hub and prompt the user to accept the list of privileges that the plugin needs,
   set the plugin's parameters and enable the plugin.
 
-  ```bash
+  ```console
   $ docker plugin install vieux/sshfs DEBUG=1
 
   Plugin "vieux/sshfs" is requesting the following privileges:
@@ -63,7 +63,7 @@ examples: |-
 
   After the plugin is installed, it appears in the list of plugins:
 
-  ```bash
+  ```console
   $ docker plugin ls
 
   ID             NAME                  DESCRIPTION                ENABLED

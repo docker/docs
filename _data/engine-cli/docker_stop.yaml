@@ -20,7 +20,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker stop my_container
   ```
 deprecated: false

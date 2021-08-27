@@ -18,7 +18,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker volume rm hello
 
   hello

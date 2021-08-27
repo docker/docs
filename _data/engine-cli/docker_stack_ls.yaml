@@ -60,7 +60,7 @@ inherited_options:
 examples: |-
   The following command shows all stacks and some additional information:
 
-  ```bash
+  ```console
   $ docker stack ls
 
   ID                 SERVICES            ORCHESTRATOR
@@ -88,7 +88,7 @@ examples: |-
   The following example uses a template without headers and outputs the
   `Name` and `Services` entries separated by a colon (`:`) for all stacks:
 
-  ```bash
+  ```console
   $ docker stack ls --format "{{.Name}}: {{.Services}}"
   web-server: 1
   web-cache: 4

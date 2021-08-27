@@ -78,7 +78,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker swarm update --cert-expiry 720h
   ```
 deprecated: false

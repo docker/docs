@@ -62,7 +62,7 @@ examples: |-
   and then committing it to a new image name.  Note that only `a-z0-9-_.` are
   allowed when naming images:
 
-  ```bash
+  ```console
   $ docker container commit c16378f943fe rhel-httpd:latest
   ```
 
@@ -71,7 +71,7 @@ examples: |-
   this, tag the image with the host name or IP address, and the port of the
   registry:
 
-  ```bash
+  ```console
   $ docker image tag rhel-httpd:latest registry-host:5000/myadmin/rhel-httpd:latest
 
   $ docker image push registry-host:5000/myadmin/rhel-httpd:latest
@@ -79,7 +79,7 @@ examples: |-
 
   Check that this worked by running:
 
-  ```bash
+  ```console
   $ docker image ls
   ```
 
@@ -94,7 +94,7 @@ examples: |-
   tags to Docker Hub.
 
 
-  ```bash
+  ```console
   $ docker image tag myimage registry-host:5000/myname/myimage:latest
   $ docker image tag myimage registry-host:5000/myname/myimage:v1.0.1
   $ docker image tag myimage registry-host:5000/myname/myimage:v1.0
@@ -103,7 +103,7 @@ examples: |-
 
   The image is now tagged under multiple names:
 
-  ```bash
+  ```console
   $ docker image ls
 
   REPOSITORY                          TAG        IMAGE ID       CREATED      SIZE
@@ -118,7 +118,7 @@ examples: |-
   image are pushed:
 
 
-  ```bash
+  ```console
   $ docker image push --all-tags registry-host:5000/myname/myimage
 
   The push refers to repository [registry-host:5000/myname/myimage]
