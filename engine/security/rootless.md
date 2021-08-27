@@ -106,11 +106,7 @@ testuser:231072:65536
 
 - You might need `sudo dnf install -y iptables`.
 
-- When SELinux is enabled, you may face `can't open lock file /run/xtables.lock: Permission denied` error.
-  A workaround for this is to `sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t`.
-  This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
-
-- Known to work on CentOS 8, RHEL 8, and Fedora 33.
+- Known to work on CentOS 8, RHEL 8, and Fedora 34.
 </div>
 <div id="hint-centos7-rhel7" class="tab-pane fade in" markdown="1">
 - Add `user.max_user_namespaces=28633` to `/etc/sysctl.conf` (or 
@@ -478,14 +474,13 @@ up automatically. See [Usage](#usage).
 
 **iptables failed: iptables -t nat -N DOCKER: Fatal: can't open lock file /run/xtables.lock: Permission denied**
 
-This error may happen when SELinux is enabled on the host.
+This error may happen with an older version of Docker when SELinux is enabled on the host.
 
-A known workaround is to run the following commands to disable SELinux for `iptables`:
+The issue has been fixed in Docker 20.10.8.
+A known workaround for older version of Docker is to run the following commands to disable SELinux for `iptables`:
 ```console
 $ sudo dnf install -y policycoreutils-python-utils && sudo semanage permissive -a iptables_t
 ```
-
-This issue is tracked in [moby/moby#41230](https://github.com/moby/moby/issues/41230).
 
 ### `docker pull` errors
 
