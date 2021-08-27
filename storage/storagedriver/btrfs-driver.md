@@ -18,7 +18,7 @@ easily combine multiple physical block devices into a single Btrfs filesystem.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
 Btrfs Filesystem as Btrfs.
 
-> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu or Debian.
+> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on SLES, Ubuntu or Debian.
 
 ## Prerequisites
 
