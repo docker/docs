@@ -156,7 +156,7 @@ COPY go.mod ./
 COPY go.sum ./
 ```
 
-Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the a directory inside our image.
+Now that we have the module files inside the Docker image that we are building, we can use the `RUN` command to execute the command `go mod download` there as well. This works exactly the same as if we were running `go` locally on our machine, but this time these Go modules will be installed into the app directory inside our image.
 
 ```dockerfile
 RUN go mod download
