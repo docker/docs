@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\automation",
+    "\\buildx",
+    "\\css",
+    "\\_deploy",
+    "\\_deploy\\nginx",
+    "\\_plugins",
+    "\\_samples",
+    "\\_scripts",
+    "\\_scss"
+  ],
+  "SelectedNode": "\\_data",
+  "PreviewInSolutionExplorer": false
+}

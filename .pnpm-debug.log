@@ -1,0 +1,14 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_NO_IMPORTER_MANIFEST",
+    "err": {
+      "name": "Error",
+      "message": "No package.json found",
+      "code": "ERR_PNPM_NO_IMPORTER_MANIFEST",
+      "stack": "Error: No package.json found\n    at Object.handler [as default] (C:\\Users\\PC-Ph\\AppData\\Local\\npm-cache\\_npx\\e6e0ed1aca658cae\\node_modules\\pnpm\\dist\\pnpm.cjs:123582:17)\n    at async C:\\Users\\PC-Ph\\AppData\\Local\\npm-cache\\_npx\\e6e0ed1aca658cae\\node_modules\\pnpm\\dist\\pnpm.cjs:133228:20\n    at async run (C:\\Users\\PC-Ph\\AppData\\Local\\npm-cache\\_npx\\e6e0ed1aca658cae\\node_modules\\pnpm\\dist\\pnpm.cjs:133203:34)\n    at async runPnpm (C:\\Users\\PC-Ph\\AppData\\Local\\npm-cache\\_npx\\e6e0ed1aca658cae\\node_modules\\pnpm\\dist\\pnpm.cjs:133413:5)\n    at async C:\\Users\\PC-Ph\\AppData\\Local\\npm-cache\\_npx\\e6e0ed1aca658cae\\node_modules\\pnpm\\dist\\pnpm.cjs:133405:7"
+    }
+  }
+}
