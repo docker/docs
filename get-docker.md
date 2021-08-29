@@ -19,7 +19,7 @@ significantly reduce the delay between writing code and running it in production
 You can download and install Docker on multiple platforms. Refer to the following
 section and choose the best installation path for you.
 
-<div class="component-container">
+<div class="component-container" style="margin-bottom: 30px;">
     <!--start row-->
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-4 block">
