@@ -76,7 +76,33 @@ There are two main types of volumes. We will eventually use both, but we will st
 ## Persist the todo data
 
 By default, the todo app stores its data in a [SQLite Database](https://www.sqlite.org/index.html){:target="_blank" rel="noopener" class="_"} at
-`/etc/todos/todo.db`. If you're not familiar with SQLite, no worries! It's simply a relational database in 
+`/etc/todos/todo.db`. To access file contents in `/etc/todos/`:
+
+1. Run the container.
+    ```
+    $ docker run -dp 3000:3000 getting-started
+    ```
+2. Find the container's name under **NAMES** with `docker ps` command.
+    ```
+    $ docker ps
+    ```
+    ```
+    CONTAINER ID   IMAGE             COMMAND                  CREATED              STATUS              PORTS                                       NAMES
+    707f4d42cfe4   getting-started   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   gracious_williams
+    ```
+3. Access the container's shell environment.
+    ```
+    $ docker exec -it gracious_williams sh
+    ```
+    ```
+    /app # ls /
+    app    bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
+    /app # ls /etc/todos/
+    todo.db
+    /app #
+    ```
+
+If you're not familiar with SQLite, no worries! It's simply a relational database in 
 which all of the data is stored in a single file. While this isn't the best for large-scale applications,
 it works for small demos. We'll talk about switching this to a different database engine later.
 
