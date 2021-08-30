@@ -36,7 +36,7 @@ configure this app to use our SQL Server database, and then create a
     into your host machine in the working directory:
 
     ```console
-    $ docker run -v ${PWD}:/app --workdir /app microsoft/dotnet:2.1-sdk dotnet new mvc --auth Individual
+    $ docker run -v ${PWD}:/app --workdir /app mcr.microsoft.com/dotnet/sdk dotnet new mvc --auth Individual
     ```
 
     > **Note**: If running in Docker Desktop for Windows, make sure to use Powershell
