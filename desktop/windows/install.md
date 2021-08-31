@@ -12,12 +12,11 @@ redirect_from:
 - /install/windows/ee-preview/
 ---
 
-Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, installation instructions, and automatic updates.
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 
-[Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){:
-.button .primary-btn}
-
-{% include eula.md %}
+> Download Docker Desktop for Windows
+>
+> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 
 ## System requirements
 
@@ -118,18 +117,26 @@ Log out and log back in for the changes to take effect.
 
 ## Start Docker Desktop
 
-Docker Desktop does not start automatically after installation. To start Docker Desktop, search for Docker, and select **Docker Desktop** in the search results.
+Docker Desktop does not start automatically after installation. To start Docker Desktop:
 
-![search for Docker app](images/docker-app-search.png){:width="300px"}
+1. Search for Docker, and select **Docker Desktop** in the search results.
 
-When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
+      ![search for Docker app](images/docker-app-search.png){:width="300px"}
 
-![whale on taskbar](images/whale-icon-systray.png)
+2. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 
-If the whale icon is hidden in the Notifications area, click the up arrow on the
-taskbar to show it. To learn more, see [Docker Settings](index.md#settings).
+    {% include desktop-license-update.md %}
 
-## Quick Start Guide
+3. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
+
+    > **Important**
+    >
+    > If you do not agree to the updated terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+    {: .important}
+
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+
+### Quick Start Guide
 
 When the initialization is complete, Docker Desktop launches the **Quick Start Guide**. This tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 

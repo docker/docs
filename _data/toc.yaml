@@ -1230,8 +1230,6 @@ manuals:
       title: FAQs
     - path: /desktop/backup-and-restore/
       title: Back up and restore data
-    - path: /desktop/opensource/
-      title: Open source licensing
 
 - sectiontitle: Docker Engine
   section:
@@ -1370,6 +1368,8 @@ manuals:
     title: Slack integration
   - path: /docker-hub/orgs/
     title: Teams and organizations
+  - path: /docker-hub/image-access-management/
+    title: Image Access Management
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
   - path: /docker-hub/audit-log/
@@ -1402,20 +1402,20 @@ manuals:
     title: Docker Verified Publisher Program
   - path: /docker-hub/release-notes/
     title: Release notes
+
 - sectiontitle: Docker subscription
   section:
   - path: /subscription/
     title: Overview
   - path: /subscription/upgrade/
-    title: Upgrade your plan
+    title: Upgrade
   - path: /subscription/downgrade/
-    title: Downgrade your plan
+    title: Downgrade
   - path: /subscription/add-seats/
     title: Add seats
   - path: /subscription/remove-seats/
     title: Remove seats
-  - path: /subscription/faq/
-    title: Pricing FAQs
+
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Registry

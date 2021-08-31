@@ -44,14 +44,14 @@ the token will be used, or set a purpose for the token.
 
 5. You can view the following permissions from the drop-down:
 
-    | Features   | Free | Pro | Team |
-    | --------------------- | ---- | ----- | ----- |
-    | Personal Access Tokens (read, write, delete scope only)*    |  x |   x  |   x  |
-    | Scoped Personal Access Tokens  |      | x   |   x   |
-    | Unlimited Personal Access Tokens   |      |       |   x   |
+    | Feature   | Personal | Pro | Team | Business |
+    | --------------------- | ---- | ----- | ----- |----- |
+    | Personal Access Tokens (read, write, delete scope only)*    |  x |   x  |   x  |   x  |
+    | Scoped Personal Access Tokens  |      | x   |   x   |   x  |
+    | Unlimited Personal Access Tokens   |      |       |   x   |   x  |
 
-      >*You can create 1 access token as part of the Free plan, 5 tokens per the Pro plan, and Unlimited tokens for the Team plan.
-      For more information about a Pro or a Team plan, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
+      >*You can create 1 access token as part of the Docker Personal tier, 5 tokens as part of Docker Pro, and Unlimited tokens as part of Docker Team and Business tier.
+      For more information, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
 6. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
 

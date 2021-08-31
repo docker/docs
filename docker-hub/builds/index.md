@@ -11,8 +11,8 @@ title: Set up Automated Builds
 ---
 
 {% include upgrade-cta.html
-  body="The Automated Builds feature is available on Pro and Team plans. Upgrade your existing plan to start automatically building and pushing your images today."
-  header-text="This feature requires a Pro or a Team plan"
+  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images."
+  header-text="This feature requires a Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
 %}
 
@@ -42,14 +42,14 @@ pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests does not push the built
 image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
 
-Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get parallel builds, which means that `N`
+Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get concurrent builds, which means that `N`
 autobuilds can be run at the same time. `N` is configured by the plan that you
 subscribe to. Once `N+1` builds are running, any additional builds are
 queued to be run later.
 
 > **Note**
 >
-> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of parallel builds for Pro is 5 and for Team is 15.
+> The total number of pending builds in the queue is limited to 30 and further requests will be discarded. The number of concurrent builds for Pro is 5 and for Team is 15.
 
 ![An automated build dashboard](images/index-dashboard.png)
 
