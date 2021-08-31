@@ -66,7 +66,7 @@ To purchase Docker Team:
 
 ## Purchase Docker Business
 
-The Docker Business subscription is currently available to purchase through the Docker Sales team. To purchase a Docker Business subscription, [Contact Sales](https://www.docker.com/pricing/contact-sales){: target="_blank" rel="noopener" class="_"}.
+The Docker Business subscription is currently available to purchase through the Docker Sales team. To purchase a Docker Business subscription, [Contact Sales](https://www.docker.com/pricing/contact-sales){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
 ## Upgrade to Docker Pro
 
@@ -118,7 +118,7 @@ To upgrade to Docker Team subscription:
 
 ## Upgrade to Docker Business
 
-To upgrade to a Docker Business subscription, [Contact Sales](https://www.docker.com/pricing/contact-sales){: target="_blank" rel="noopener" class="_"}.
+To upgrade to a Docker Business subscription, [Contact Sales](https://www.docker.com/pricing/contact-sales){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
 ## Upgrade from a monthly Team to an annual subscription
 

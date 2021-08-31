@@ -12,12 +12,49 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 4.0.0
+2021-08-31
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+
+### New
+
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
+
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
+
+### Upgrades
+
+- [Compose V2 RC2](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.2)
+  - Fixed project name to be case-insensitive for `compose down`. See [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023)
+  - Fixed non-normalized project name.
+  - Fixed port merging on partial reference.
+- [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
+
+### Bug fixes and minor changes
+
+- Fixed a bug where the CLI tools would not be available in WSL 2 distros.
+- Fixed a bug when switching from Linux to Windows containers due to access rights on `panic.log`. [for-win#11899](https://github.com/docker/for-win/issues/11899)
+
 ## Docker Desktop 3.6.0
 2021-08-11
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/67351/Docker Desktop Installer.exe){: .accept-eula }
 
 ### New
 

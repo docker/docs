@@ -50,7 +50,7 @@ troubleshoot the log data. Before reporting an issue, we recommend that you read
 from the menu.
 2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
 3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
-    ![Diagnose & Support](images/diagnose-support.png){:width="600px"}
+    ![Diagnose & Support](../mac/images/diagnose-support.png){:width="600px"}
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
 5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
 6. If you have a paid Docker subscription, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.

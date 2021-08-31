@@ -299,6 +299,8 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
 
 * IPv6 is not (yet) supported on Docker Desktop.
 
+* On Apple silicon in native `arm64` containers, older versions of `libssl` such as `debian:buster`, `ubuntu:20.04`, and `centos:8` will segfault when connected to some TLS servers, for example, `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04`, and `fedora:35`.
+
 * You might encounter errors when using `docker-compose up` with Docker Desktop
   (`ValueError: Extra Data`). We've identified this is likely related to data
   and/or events being passed all at once rather than one by one, so sometimes

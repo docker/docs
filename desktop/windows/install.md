@@ -117,22 +117,24 @@ Log out and log back in for the changes to take effect.
 
 ## Start Docker Desktop
 
-Docker Desktop does not start automatically after installation. To start Docker Desktop, search for Docker, and select **Docker Desktop** in the search results.
+Docker Desktop does not start automatically after installation. To start Docker Desktop:
 
-![search for Docker app](images/docker-app-search.png){:width="300px"}
+1. Search for Docker, and select **Docker Desktop** in the search results.
 
-The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
+      ![search for Docker app](images/docker-app-search.png){:width="300px"}
 
-  {% include desktop-license-update.md %}
+2. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 
-Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
+    {% include desktop-license-update.md %}
 
-  > **Important**
-  >
-  > If you do not agree to the updated terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-  {: .important}
+3. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 
- For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+    > **Important**
+    >
+    > If you do not agree to the updated terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+    {: .important}
+
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
 
 ### Quick Start Guide
 

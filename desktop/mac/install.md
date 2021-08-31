@@ -15,7 +15,7 @@ Welcome to Docker Desktop for Mac. This page contains information about Docker D
 
 ## System requirements
 
-Your Mac must meet the following requirements to successfully install Docker Desktop.
+Your Mac must meet the following requirements to install Docker Desktop successfully.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#mac-intel">Mac with Intel chip</a></li>
@@ -67,7 +67,7 @@ The Docker Desktop installation includes
 
       ![Install Docker app](images/docker-app-drag.png)
 
-2. Double-click `Docker.app` in the Applications folder to start Docker.In the example below, the Applications folder is in "grid" view mode.
+2. Double-click `Docker.app` in the Applications folder to start Docker. In the example below, the Applications folder is in "grid" view mode.
 
     ![Docker app in Hockeyapp](images/docker-app-in-apps.png)
 
@@ -75,14 +75,14 @@ The Docker Desktop installation includes
 
     {% include desktop-license-update.md %}
 
-Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
+4. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-  > **Important**
-  >
-  > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-  {: .important}
+    > **Important**
+    >
+    > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+    {: .important}
 
-  For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
 
 ### Quick start guide  
   
