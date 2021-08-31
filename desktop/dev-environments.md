@@ -88,7 +88,13 @@ Let's summarize the tasks we performed so far to start a single container Dev En
 
 ## Share your Dev Environment
 
-If you are a member of the Docker [Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}, you can now share you Dev Environment with your team. When you are ready to share your environment, just click the **Share** button and specify the Docker Hub namespace where you'd like to push your Dev Environment to.
+{% include upgrade-cta.html
+  body="Docker Pro, Team, and Business users can now share Dev Environments with their team members."
+  header-text="This feature requires a paid Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade"
+%}
+
+When you are ready to share your environment, just click the **Share** button and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
 
 ![Share a Dev environment](images/dev-env-share.png){:width="700px"}
 

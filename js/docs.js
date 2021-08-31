@@ -190,6 +190,14 @@ $(document).ready(function () {
     });
 });
 
+function initAcceptEULAModal() {
+    $("main").on("click", "a.accept-eula", function (e) {
+        e.preventDefault();
+        _("#accept-eula .btn-primary").href = e.target.href;
+        $('#accept-eula').modal('show')
+    });
+}
+
 function initNavToggle() {
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
@@ -208,6 +216,7 @@ function initNavToggle() {
 ready(() => {
     renderNav()
     initNavToggle()
+    initAcceptEULAModal()
     $('[data-toggle="tooltip"]').tooltip()
 
     // sync tabs with the same data-group
@@ -224,5 +233,5 @@ ready(() => {
             return 'Learn more about the "'+ c + '" Dockerfile command.'
         },
         placement: "auto"
-    });
+    })
 });

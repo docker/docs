@@ -33,10 +33,13 @@
   font-weight: bold;
 }
 
+.btn-primary, .btn-secondary {
+  padding: 10px 15px 6px;
+  font-family: $buttons;
+}
 .btn-primary {
   background-color: $marine-50;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 10px 15px 6px;
 
   &:hover {
     opacity: 0.8;
@@ -45,8 +48,6 @@
     background-color: $marine-50;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
-
-  font-family: $buttons;
 }
 
 .btn-default:hover {

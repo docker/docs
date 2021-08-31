@@ -9,7 +9,24 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-# 2021-05-05
+## 2021-08-31
+
+### New
+
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. Docker subscription tiers now include Personal, Pro, Team, and Business.
+
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../subscription/index.md).
+
+## 2021-05-05
 
 ### Enhancement
 
@@ -18,13 +35,13 @@ For more information, see  [Advanced Management Dashboard](/image-management.md)
 
 For Docker Hub API documentation, see [Docker Hub API Reference](../api/latest/#operation/GetNamespacesRepositoriesImages).
 
-# 2021-04-13
+## 2021-04-13
 
 ### Enhancement
 
 The **Billing Details** page now shows any organizations you own, in addition to your personal account. This allows you to clearly identify the billing details of your chosen namespace, and enables you to switch between your personal and your organization accounts to view or update the details.
 
-# 2021-04-09
+## 2021-04-09
 
 ### Enhancement
 
@@ -34,7 +51,7 @@ To change the email address receiving billing-related emails, log into Docker Hu
 
 For details on how to update your billing information, see [Update billing information](../subscription/index.md#update-billing-information).
 
-# 2021-03-22
+## 2021-03-22
 
 ### New feature
 
@@ -42,7 +59,7 @@ For details on how to update your billing information, see [Update billing infor
 
 Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](/image-management.md).
 
-# 2021-01-25
+## 2021-01-25
 
 ### New feature
 
@@ -50,7 +67,7 @@ Docker introduces Audit log, a new feature that allows team owners to view a lis
 
 For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
 
-# 2020-11-10
+## 2020-11-10
 
 ### New feature
 
@@ -63,15 +80,15 @@ pulled or pushed recently. For more information, see [repository tags](repos.md/
 
 Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
 
-# 2020-05-14
+## 2020-05-14
 
 ### New features
 
-* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/parallel autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/index.md).
+* Docker has announced a new, per-seat pricing model to accelerate developer workflows for cloud-native development. The previous private repository/concurrent autobuild-based plans have been replaced with new **Pro** and **Team** plans that include unlimited private repositories. For more information, see [Docker subscription](../subscription/index.md).
 
 * Docker has enabled download rate limits for downloads and pull requests on Docker Hub. This caps the number of objects that users can download within a specified timeframe. For more information, see [Download rate limit](download-rate-limit.md).
 
-# 2019-11-04
+## 2019-11-04
 
 ### Enhancements
 
@@ -83,7 +100,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 
 * Scan results don't appear for some official images.
 
-# 2019-10-21
+## 2019-10-21
 
 ### New features
 * **Beta:** Docker Hub now supports [two-factor authentication (2FA)](/docker-hub/2fa). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
@@ -100,7 +117,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 * Scan results don't appear for some official images.
 
 
-# 2019-10-02
+## 2019-10-02
 
 ### Enhancements
 * You can now manage teams and members straight from your [organization page](https://hub.docker.com/orgs).
@@ -124,7 +141,7 @@ Each organization page now breaks down into these tabs:
 * Scan results don't appear for some official images.
 
 
-# 2019-09-19
+## 2019-09-19
 
 ### New features
 
@@ -135,7 +152,7 @@ Each organization page now breaks down into these tabs:
 * Scan results don't appear for some official images.
 
 
-# 2019-09-16
+## 2019-09-16
 
 ### Enhancements
 
@@ -146,7 +163,7 @@ Each organization page now breaks down into these tabs:
 * Scan results don't appear for some official images.
 
 
-# 2019-09-05
+## 2019-09-05
 
 ### Enhancements
 

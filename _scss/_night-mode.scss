@@ -198,6 +198,12 @@ body.night {
         color: #bcbfc3;
     }
 
+    /* modals */
+    .modal-content {
+        background-color: $bg-sidebar-night;
+        border-left:      4px solid $primary-links;
+    }
+
     /* tabs */
     .nav-tabs {
         border-bottom: 1px solid #4f6071;

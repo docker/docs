@@ -6,18 +6,16 @@ redirect_from:
 - /docker-for-mac/install/
 ---
 
-Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, installation instructions, and automatic updates.
+Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, instructions to install and update Docker Desktop for Mac.
 
-Download Docker Desktop for Mac:
-
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
-
-{% include eula.md %}
+> Download Docker Desktop for Mac
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
 ## System requirements
 
-Your Mac must meet the following requirements to successfully install Docker Desktop.
+Your Mac must meet the following requirements to install Docker Desktop successfully.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#mac-intel">Mac with Intel chip</a></li>
@@ -69,27 +67,31 @@ The Docker Desktop installation includes
 
       ![Install Docker app](images/docker-app-drag.png)
 
-2. Double-click `Docker.app` in the Applications folder to start Docker. (In the example below, the Applications folder is in "grid" view mode.)
+2. Double-click `Docker.app` in the Applications folder to start Docker. In the example below, the Applications folder is in "grid" view mode.
 
     ![Docker app in Hockeyapp](images/docker-app-in-apps.png)
 
-    The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
+3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 
-      ![Whale in menu bar](images/whale-in-menu-bar.png)
+    {% include desktop-license-update.md %}
 
-    If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+4. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
+    > **Important**
+    >
+    > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+    {: .important}
 
-3. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
-**Preferences** and other options.
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
 
-4. Select **About Docker** to verify that you have the latest version.
+### Quick start guide  
+  
+  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it is a container, push and save the image to Docker Hub.
 
-Congratulations! You are now successfully running Docker Desktop.
+   ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
 
-If you would like to rerun the tutorial, go to the Docker Desktop menu 
-and select **Learn**.
+Congratulations! You are now successfully running Docker Desktop. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
+**Preferences** and other options. To run the Quick Start Guide on demand, select the Docker menu and then choose **Quick Start Guide**.
 
 ## Updates
 
@@ -102,7 +104,7 @@ To uninstall Docker Desktop from your Mac:
 1. From the Docker menu, select **Troubleshoot** and then select **Uninstall**.
 2. Click **Uninstall** to confirm your selection.
 
-> **Important**
+> **Note**
 >
 > Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
 > other Docker related data local to the machine, and removes the files generated

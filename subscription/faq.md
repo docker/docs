@@ -89,7 +89,7 @@ Upgrading your legacy plan to a Pro plan offers you unlimited public and private
 
 ### How do I upgrade to a Team plan from a legacy organization plan?
 
-Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 parallel builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
+Upgrading your legacy plan to a Team plan offers you unlimited private repos, unlimited teams, and 3 concurrent builds. For information on how to upgrade to a Team plan from a legacy (per-repository) plan, see the [How To Upgrade](upgrade.md){:target="blank" rel="noopener" class=""} page.
 
 ### How do downgrades from a Pro or Team plan work?
 When you downgrade your Pro or Team plan, changes are applied at the end of your billing cycle. For example, if you are currently on a Team plan which is billed on the 8th of every month and you choose to downgrade to a Free Team plan on the 15th, your Team plan will be active until 7th of the following month. You will be transferred to a Free Team plan on the 8th of the following month. Please refer to the next two questions below for instructions on how to downgrade your account.

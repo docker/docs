@@ -12,12 +12,49 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-{% include eula.md %}
+## Docker Desktop 4.0.0
+2021-08-31
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+
+### New
+
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. 
+
+The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
+
+- Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+- It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
+- The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
+- The existing Docker Free subscription has been renamed **Docker Personal**.
+- **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
+
+    To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../../subscription/index.md).
+
+### Upgrades
+
+- [Compose V2 RC2](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.2)
+  - Fixed project name to be case-insensitive for `compose down`. See [docker/compose-cli#2023](https://github.com/docker/compose-cli/issues/2023)
+  - Fixed non-normalized project name.
+  - Fixed port merging on partial reference.
+- [Kubernetes 1.21.4](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.4)
+
+### Bug fixes and minor changes
+
+- Fixed a bug where the CLI tools would not be available in WSL 2 distros.
+- Fixed a bug when switching from Linux to Windows containers due to access rights on `panic.log`. [for-win#11899](https://github.com/docker/for-win/issues/11899)
 
 ## Docker Desktop 3.6.0
 2021-08-11
 
-[Download](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/67351/Docker Desktop Installer.exe){: .accept-eula }
 
 ### New
 
@@ -57,7 +94,11 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.2
 2021-07-08
 
-> [Download](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66501/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -88,7 +129,11 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.1
 2021-06-25
 
-> [Download](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -104,7 +149,11 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.5.0
 2021-06-23
 
-> [Download](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/66024/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -138,7 +187,11 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.4.0
 2021-06-09
 
-> [Download](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/65384/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -177,7 +230,11 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.3
 2021-05-06
 
-> [Download](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/64133/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -191,7 +248,11 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.2
 2021-05-03
 
-> [Download](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/63878/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -211,7 +272,11 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.1
 2021-04-15
 
-> [Download](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/63152/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -223,13 +288,17 @@ This page contains information about the new features, improvements, known issue
 ## Docker Desktop 3.3.0
 2021-04-08
 
-> [Download](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/62916/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
 You can now specify when to download and install a Docker Desktop update. When an update becomes available, Docker Desktop displays an icon to indicate the availability of a newer version. You can download the update in the background whenever convenient. When the download is complete, all you need to do is to click Update and restart to install the latest update.
 
-Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, Pro or Team subscription developers can skip notifications for a particular update when a reminder appears.
+Developers who use Docker Desktop for professional development purposes may at times need to skip a specific update. For this reason, users with a paid Docker subscription can skip notifications for a particular update when a reminder appears.
 
 For developers in IT managed environments, who don’t have administrative access to install updates to Docker Desktop, there is now an option in the Settings menu to opt out of notifications altogether for Docker Desktop updates if your Docker ID is part of a Team subscription.
 
@@ -255,7 +324,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.2.2
 2021-03-15
 
-> [Download](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61853/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Bug fixes and minor changes
 
@@ -266,7 +339,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.2.1
 2021-03-05
 
-> [Download](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61626/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -275,7 +352,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.2.0
 2021-03-01
 
-> [Download](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/amd64/61504/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -320,7 +401,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.1.0
 2021-01-14
 
-> [Download](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/51484/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -340,7 +425,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.0.4
 2021-01-06
 
-> [Download](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/51218/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### Upgrades
 
@@ -353,7 +442,11 @@ For developers in IT managed environments, who don’t have administrative acces
 ## Docker Desktop 3.0.0
 2020-12-10
 
-> [Download](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe)
+> Download Docker Desktop
+>
+> {%- include eula.md -%}
+>
+> [For Windows](https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe){: .accept-eula }
 
 ### New
 
@@ -383,3 +476,5 @@ For developers in IT managed environments, who don’t have administrative acces
 
 - Building an image with BuildKit from a git URL fails when using the form `github.com/org/repo`. To work around this issue, use the form `git://github.com/org/repo`.
 - Some DNS addresses fail to resolve within containers based on Alpine Linux 3.13.
+
+{% include eula-modal.html %}

@@ -51,5 +51,3 @@ section and choose the best installation path for you.
         </div>
     </div>
 </div>
-
-{% include eula.md %}

@@ -87,11 +87,11 @@ This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls rema
 
 If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a user associated with a Pro/Team Docker Hub account, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
 
-## I'm being limited even though I have a Pro/Team account
+## I'm being limited even though I have a paid Docker subscription
 
-To take advantage of the higher limits included in these plans, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
+To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account. 
 
-A Pro/Team plan does not increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
+A Pro, Team, or a Business tier does not increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
 
 ## How do I authenticate pull requests
 
