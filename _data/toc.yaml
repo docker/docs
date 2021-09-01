@@ -1185,9 +1185,9 @@ manuals:
         - sectiontitle: Previous versions
           section:
           - path: /desktop/mac/release-notes/3.x/
-            title: Docker Desktop for Mac 3.x
+            title: Desktop for Mac 3.x
           - path: /desktop/mac/release-notes/2.x/
-            title: Docker Desktop for Mac 2.x
+            title: Desktop for Mac 2.x
           - path: /desktop/mac/release-notes/edge-releases/
             title: Edge releases
           - path: /desktop/mac/release-notes/archive/
@@ -1209,9 +1209,9 @@ manuals:
         - sectiontitle: Previous versions
           section:
             - path: /desktop/windows/release-notes/3.x/
-              title: Docker Desktop for Windows 3.x
+              title: Desktop for Windows 3.x
             - path: /desktop/windows/release-notes/2.x/
-              title: Docker Desktop for Windows 2.x
+              title: Desktop for Windows 2.x
             - path: /desktop/windows/release-notes/edge-releases/
               title: Edge releases
             - path: /desktop/windows/release-notes/archive/
