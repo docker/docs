@@ -43,6 +43,8 @@ h1,h2,h3,h4,h5,h6 {
     font-family: $headings;
     clear: both;
     line-height: 26px;
+    margin-top:  30px;
+    margin-bottom: 0;
 }
 
 h1 {
@@ -74,4 +76,8 @@ h6 {
 
 dd, dt {
     line-height: 25px;
+}
+
+ol, ul {
+  padding-left: 25px;
 }
