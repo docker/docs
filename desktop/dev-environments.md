@@ -23,7 +23,7 @@ To access Dev Environments, from the Docker menu, select **Dashboard** > **Dev E
 Dev Environments are available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
 
 - [Mac](mac/release-notes/index.md)
-- [Windows](windows/release-notes.md)
+- [Windows](windows/release-notes/index.md)
 
 To get started with Dev Environments, you must have the following tools and extension installed on your machine:
 

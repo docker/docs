@@ -1206,8 +1206,16 @@ manuals:
           title: Docker Desktop WSL 2 backend
         - path: /desktop/windows/release-notes/
           title: Release notes
-        - path: /desktop/windows/previous-versions/
-          title: Previous versions
+        - sectiontitle: Previous versions
+          section:
+            - path: /desktop/windows/release-notes/3.x/
+              title: Docker Desktop for Windows 3.x
+            - path: /desktop/windows/release-notes/2.x/
+              title: Docker Desktop for Windows 2.x
+            - path: /desktop/windows/release-notes/edge-releases/
+              title: Edge releases
+            - path: /desktop/windows/release-notes/archive/
+              title: Older versions
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
