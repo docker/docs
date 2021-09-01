@@ -59,17 +59,28 @@ code {
  */
 
 .component-container {
-    padding: 0;
-    margin: 0 0 50px;
-    width: 100%;
-}
+  padding:  0;
+  margin:   0 0 50px;
+  width:    100%;
 
-.component {
-    padding: 15px 25px 5px 15px;
+  .block {
+    padding: 0 15px 10px 15px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .component {
+    padding: 15px 25px 15px 15px;
     text-align: center;
-    margin: 0 8px 15px;
     float: left;
-    height: 250px;
+    height: 100%;
     width: 100%;
     background: $bg-component;
     img {
@@ -80,11 +91,12 @@ code {
       justify-content: center;
     }
     h2 {
-      font-size: 22px;
+      font-size: 18px;
     }
     h2, h3, p {
       margin: 0;
     }
+  }
 }
 
 a.anchorLink {
