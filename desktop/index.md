@@ -60,5 +60,5 @@ To learn about the various UI options and their usage, see:
 
 For information about new features, improvements, and bug fixes in Docker Desktop releases, see:
 
-* [Docker Desktop for Mac Release notes](mac/release-notes.md)
+* [Docker Desktop for Mac Release notes](mac/release-notes/index.md)
 * [Docker Desktop for Windows Release notes](windows/release-notes.md)

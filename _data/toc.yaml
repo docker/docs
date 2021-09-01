@@ -1182,8 +1182,16 @@ manuals:
           title: Apple silicon
         - path: /desktop/mac/release-notes/
           title: Release notes
-        - path: /desktop/mac/previous-versions/
-          title: Previous versions
+        - sectiontitle: Previous versions
+          section:
+          - path: /desktop/mac/release-notes/3.x/
+            title: Docker Desktop for Mac 3.x
+          - path: /desktop/mac/release-notes/2.x/
+            title: Docker Desktop for Mac 2.x
+          - path: /desktop/mac/release-notes/edge-releases/
+            title: Edge releases
+          - path: /desktop/mac/release-notes/archive/
+            title: Older versions
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/install/
