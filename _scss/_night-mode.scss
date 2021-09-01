@@ -56,7 +56,7 @@ body.night {
         border: none;
     }
     .nav-sidebar ul li a.active,
-    .nav-sidebar.nav>li>a:focus,
+    .nav-sidebar.nav > li > a:focus,
     .toc-nav li a.active {
         background:  $bg-sidebar-night-active;
         border-left: 4px solid $primary-links;
