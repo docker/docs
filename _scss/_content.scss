@@ -63,23 +63,21 @@ code {
   margin:   0 0 50px;
   width:    100%;
 
-  .block {
-    padding: 0 15px 10px 15px;
-  }
-
   .row {
     display: flex;
     flex-wrap: wrap;
   }
-  .row > [class*='col-'] {
+
+  // "get-docker" tiles
+  .row > .block {
     display: flex;
     flex-direction: column;
+    padding: 10px;
   }
 
   .component {
     padding: 15px 25px 15px 15px;
     text-align: center;
-    float: left;
     height: 100%;
     width: 100%;
     background: $bg-component;
