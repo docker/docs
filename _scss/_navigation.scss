@@ -76,14 +76,16 @@
 }
 
 .nav-sidebar ul li a,
-.nav-sidebar ul li a:focus,
-.nav-sidebar ul li a:hover {
+.nav-sidebar ul li a:focus {
     border-bottom: none;
-    border-left:   4px solid rgba($primary-links, 0);
+    border-left:   1px solid $primary-links;
 }
 
 .nav-sidebar .nav > li > a {
   padding-left: 22px; // left-padding to align with logo
+  &.active {
+    padding-left: 19px; // compensate for 1px -> 4px border-width
+  }
   @include before-md-width {
     padding-right: 32px; // right-align with hamburger menu
   }
@@ -96,10 +98,9 @@
     font-weight: 600;
 }
 
-.nav-sidebar ul li li a {
-    border-left: 1px solid $primary-links;
-    font-size: 12px;
-    margin-left: 15px;
+.nav-sidebar ul li ul li a {
+  font-size:   12px;
+  margin-left:  8px;
 }
 
 .nav-sidebar .caret {
@@ -141,8 +142,8 @@
 }
 
 .toc-nav li a.active {
-    color: #2089C4;
-    border-left: 4px solid #2089C4;
+    color: $primary-links;
+    border-left: 4px solid $primary-links;
     font-weight: bold;
 }
 
@@ -218,7 +219,7 @@ div#side-toc-title {
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px $slider-btn;
 }
 
 input:checked+.slider:before {
@@ -275,7 +276,7 @@ input:checked+.slider:before {
  */
 
 .feedback-links {
-    margin: 0 0 10px 0;
+    margin: 15px 0 10px 0;
 }
 
 /* polldaddy */
