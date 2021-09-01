@@ -6,6 +6,8 @@ toc_min: 1
 toc_max: 2
 redirect_from:
 - /desktop/opensource/
+- /docker-for-mac/opensource/
+- /docker-for-windows/opensource/
 ---
 
 Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes [Docker Engine](../engine/), Docker CLI client, [Docker Compose](../compose/), [Docker Content Trust](../engine/security/trust.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
@@ -30,6 +32,8 @@ Docker Desktop is available for Mac and Windows. For download information, syste
 
 * [Install Docker Desktop on Mac](mac/install.md)
 * [Install Docker Desktop on Windows](windows/install.md)
+
+For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
 ## Configure Docker Desktop
 
