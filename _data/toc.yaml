@@ -1348,8 +1348,6 @@ manuals:
     title: Docker ID accounts
   - path: /docker-hub/repos/
     title: Repositories
-  - path: /docker-hub/service-accounts/
-    title: Service accounts
   - path: /docker-hub/official_images/
     title: Docker Official images
   - sectiontitle: Automated builds
