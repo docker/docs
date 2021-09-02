@@ -2,8 +2,6 @@
 title: Managing access tokens
 description: Learn how to create and manage your personal Docker Hub access tokens to securely push and pull images programmatically.
 keywords: docker hub, hub, security, PAT, personal access token
-redirect_from:
-- /docker-hub/service-accounts/
 ---
 
 Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to access Hub images from the Docker CLI.
