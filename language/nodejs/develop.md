@@ -92,11 +92,7 @@ Let’s test that our application is connected to the database and is able to ad
 $ curl --request POST \
   --url http://localhost:8000/notes \
   --header 'content-type: application/json' \
-  --data '{
-"name": "this is a note",
-"text": "this is a note that I wanted to take while I was working on writing a blog post.",
-"owner": "peter"
-}'
+  --data '{"name": "this is a note", "text": "this is a note that I wanted to take while I was working on writing a blog post.", "owner": "peter"}'
 ```
 
 You should receive the following json back from our service.
