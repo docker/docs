@@ -22,7 +22,7 @@ section and choose the best installation path for you.
 <div class="component-container">
     <!--start row-->
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="/desktop/mac/install/"><img src="/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
@@ -31,7 +31,7 @@ section and choose the best installation path for you.
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="/desktop/windows/install/"><img src="/images/windows_48.svg" alt="Docker Desktop for Windows" width="70" height="70"></a>
@@ -40,7 +40,7 @@ section and choose the best installation path for you.
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="/engine/install/"><img src="/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
