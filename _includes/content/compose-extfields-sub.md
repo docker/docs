@@ -9,7 +9,6 @@ your Compose file and their name start with the `x-` character sequence.
 > of service, volume, network, config and secret definitions.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 x-custom:
   items:
     - a
@@ -35,7 +34,6 @@ logging:
 You may write your Compose file as follows:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 x-logging:
   &default-logging
   options:
@@ -56,7 +54,6 @@ It is also possible to partially override values in extension fields using
 the [YAML merge type](https://yaml.org/type/merge.html). For example:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 x-volumes:
   &default-volume
   driver: foobar-storage

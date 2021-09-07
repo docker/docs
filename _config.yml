@@ -22,7 +22,7 @@ exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html", 
 # You can't have - characters in these for non-YAML reasons
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
-compose_version: "1.29.2"
+compose_version: "2.0.0"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"

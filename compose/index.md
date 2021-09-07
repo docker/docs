@@ -8,7 +8,16 @@ redirect_from:
  - /compose/swarm/
 ---
 
->**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
+> Important
+>
+> The new Compose V2, which supports the `compose` command as part of the Docker CLI, is available with the Docker Desktop 4.1 release.
+>
+> Compose V2 integrates compose functions into the Docker platform, continuing to support most of the previous `docker-compose` features and flags. You can test the Compose V2 by simply replacing the dash (`-`) with a space, and by running `docker compose`, instead of `docker-compose`.
+>
+> Compose V1 will receive minimal maintenance for security issues, and will be deprecated as of December 28th, 2021.
+{: .important}
+
+>**Looking for Compose file reference?** [Find the Compose specification here](https://compose-spec.io).
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a YAML file to configure your application's services.
@@ -28,12 +37,11 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Run `docker compose up` and the [Docker compose command](cli-command.md) starts and runs your entire app. You can alternatively run `docker-compose up` using the docker-compose binary.
+3. Run `docker compose up` and the [Docker compose command](cli-command.md) starts and runs your entire app.
 
 A `docker-compose.yml` looks like this:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"  # optional since v1.27.0
 services:
   web:
     build: .
@@ -51,7 +59,7 @@ volumes:
 ```
 
 For more information about the Compose file, see the
-[Compose file reference](compose-file/index.md).
+[Compose specification](https://compose-spec.io).
 
 Compose has commands for managing the whole lifecycle of your application:
 
@@ -101,12 +109,12 @@ for it can be defined with the `--project-directory` command line option.
 
 ### Preserve volume data when containers are created
 
-Compose preserves all volumes used by your services. When `docker-compose up`
+Compose preserves all volumes used by your services. When `docker compose up`
 runs, if it finds any containers from previous runs, it copies the volumes from
 the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 
-If you use `docker-compose` on a Windows machine, see
+If you use `docker compose` on a Windows machine, see
 [Environment variables](reference/envvars.md) and adjust the necessary environment
 variables for your specific needs.
 
@@ -145,7 +153,7 @@ The [Compose file](compose-file/index.md) provides a way to document and configu
 all of the application's service dependencies (databases, queues, caches,
 web service APIs, etc). Using the Compose command line tool you can create
 and start one or more containers for each dependency with a single command
-(`docker-compose up`).
+(`docker compose up`).
 
 Together, these features provide a convenient way for developers to get
 started on a project. Compose can reduce a multi-page "developer getting
@@ -159,9 +167,9 @@ environment in which to run tests. Compose provides a convenient way to create
 and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
 
 ```console
-$ docker-compose up -d
+$ docker compose up -d
 $ ./run_tests
-$ docker-compose down
+$ docker compose down
 ```
 
 ### Single host deployments

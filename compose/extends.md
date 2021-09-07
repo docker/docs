@@ -31,7 +31,7 @@ the rules described in
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
 the order they're specified on the command line. See the
-[`docker-compose` command reference](reference/index.md) for more information
+[`docker compose` command reference](reference/index.md) for more information
 about using `-f`.
 
 When you use multiple configuration files, you must make sure all paths in the
@@ -99,7 +99,7 @@ cache:
     - 6379:6379
 ```
 
-When you run `docker-compose up` it reads the overrides automatically.
+When you run `docker compose up` it reads the overrides automatically.
 
 Now, it would be nice to use this Compose app in a production environment. So,
 create another override file (which might be stored in a different git
@@ -122,7 +122,7 @@ cache:
 To deploy with this production Compose file you can run
 
 ```console
-$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+$ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 This deploys all three services using the configuration in
@@ -161,11 +161,11 @@ export or backup.
         - db
 ```
 
-To start a normal environment run `docker-compose up -d`. To run a database
+To start a normal environment run `docker compose up -d`. To run a database
 backup, include the `docker-compose.admin.yml` as well.
 
 ```console
-$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
+$ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
   run dbadmin db-backup
 ```
 

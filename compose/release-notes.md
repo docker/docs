@@ -7,6 +7,10 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 2.0.0
+
+ TODO
+
 ## 1.29.2
 (2021-05-10)
 

@@ -22,7 +22,6 @@ identical to the container name.
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -34,7 +33,7 @@ services:
       - "8001:5432"
 ```
 
-When you run `docker-compose up`, the following happens:
+When you run `docker compose up`, the following happens:
 
 1.  A network called `myapp_default` is created.
 2.  A container is created using `web`'s configuration. It joins the network
@@ -68,7 +67,7 @@ look like `postgres://{DOCKER_IP}:8001`.
 
 ## Update containers
 
-If you make a configuration change to a service and run `docker-compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
+If you make a configuration change to a service and run `docker compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
 
 If any containers have connections open to the old container, they are closed. It is a container's responsibility to detect this condition, look up the name again and reconnect.
 
@@ -77,7 +76,6 @@ If any containers have connections open to the old container, they are closed. I
 Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
 
   web:
@@ -108,8 +106,6 @@ Each service can specify what networks to connect to with the *service-level* `n
 Here's an example Compose file defining two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common - only `app` can talk to both.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   proxy:
     build: ./proxy
@@ -142,7 +138,6 @@ Networks can be configured with static IP addresses by setting the [ipv4_address
 Networks can also be given a [custom name](compose-file/compose-file-v3.md#network-configuration-reference) (since version 3.5):
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   # ...
 networks:
@@ -161,7 +156,6 @@ For full details of the network configuration options available, see the followi
 Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .

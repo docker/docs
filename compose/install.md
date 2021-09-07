@@ -26,8 +26,7 @@ Linux systems.
 ## Install Compose
 
 Follow the instructions below to install Compose on Mac, Windows, Windows Server
-2016, or Linux systems, or find out about alternatives like using the `pip`
-Python package manager or installing Compose as a container.
+2016, or Linux systems.
 
 > Install a different version
 > 
@@ -44,7 +43,6 @@ Python package manager or installing Compose as a container.
 <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
 <li><a data-toggle="tab" data-target="#windows-server">Windows Server</a></li>
 <li><a data-toggle="tab" data-target="#linux">Linux</a></li>
-<li><a data-toggle="tab" data-target="#alternatives">Alternative install options</a></li>
 <li><a data-toggle="tab" data-target="#pre-release">Pre-release builds</a></li>
 </ul>
 <div class="tab-content">
@@ -95,7 +93,7 @@ on Microsoft Windows Server and want to install Docker Compose.
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
-**Note**: On Windows Server 2019, you can add the Compose executable to `$Env:ProgramFiles\Docker`. Because this directory is  registered in the system `PATH`, you can run the `docker-compose --version` command on the subsequent step with no additional configuration.
+**Note**: On Windows Server 2019, you can add the Compose executable to `$Env:ProgramFiles\Docker`. Because this directory is  registered in the system `PATH`, you can run the `docker compose --version` command on the subsequent step with no additional configuration.
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
@@ -103,9 +101,9 @@ on Microsoft Windows Server and want to install Docker Compose.
 3.  Test the installation.
 
     ```powershell
-    docker-compose --version
+    docker compose --version
 
-    docker-compose version {{site.compose_version}}, build 01110ad01
+    docker compose version {{site.compose_version}}, build 01110ad01
     ```
 
 </div>
@@ -113,96 +111,44 @@ on Microsoft Windows Server and want to install Docker Compose.
 
 ### Install Compose on Linux systems
 
-On Linux, you can download the Docker Compose binary from the
+On supported Linux distributions, you can install Docker Compose using
+the `docker-compose-plugin` system package. See [Engine installation instruction](/engine/install/)
+
+Alternatively, you can download the Docker Compose binary from the
 [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 Follow the instructions from the link, which involve running the `curl` command
 in your terminal to download the binaries. These step-by-step instructions are
 also included below.
 
-> For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
-{: .important}
-
 1.  Run this command to download the current stable release of Docker Compose:
 
     ```console
-    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    $ mkdir -p ~/.docker/cli-plugins
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o ~/.docker/cli-plugins/docker-compose
     ```
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
 
-    If you have problems installing with `curl`, see
-    [Alternative Install Options](install.md#alternative-install-options) tab above.
-
 2.  Apply executable permissions to the binary:
 
     ```console
-    $ sudo chmod +x /usr/local/bin/docker-compose
+    $ sudo chmod +x ~/.docker/cli-plugins/docker-compose
     ```
     
-> **Note**: If the command `docker-compose` fails after installation, check your path.
-> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
-
-For example:
-
-```console
-$ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-```
-
-3.  Optionally, install [command completion](completion.md) for the
-    `bash` and `zsh` shell.
-
-4.  Test the installation.
+3.  Test the installation.
 
     ```console
-    $ docker-compose --version
-    docker-compose version {{site.compose_version}}, build 1110ad01
+    $ docker compose --version
+    Docker Compose version {{site.compose_version}}
     ```
 
-</div>
-<div id="alternatives" class="tab-pane fade" markdown="1">
+## Uninstallation
 
-### Alternative install options
-
-- [Install using pip](#install-using-pip)
-- [Install as a container](#install-as-a-container)
-
-#### Install using pip
-
-> For `alpine`, the following dependency packages are needed:
-> `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo`, and `make`.
-{: .important}
-
-Compose can be installed from
-[pypi](https://pypi.python.org/pypi/docker-compose) using `pip`. If you install
-using `pip`, we recommend that you use a
-[virtualenv](https://virtualenv.pypa.io/en/latest/) because many operating
-systems have python system packages that conflict with docker-compose
-dependencies. See the [virtualenv
-tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
-started.
+To uninstall Docker Compose if you installed using `curl`:
 
 ```console
-$ pip install docker-compose
-```
-
-If you are not using virtualenv,
-
-```console
-$ sudo pip install docker-compose
-```
-
-> pip version 6.0 or greater is required.
-
-#### Install as a container
-
-Compose can also be run inside a container, from a small bash script wrapper. To
-install compose as a container run this command:
-
-```console
-$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
-$ sudo chmod +x /usr/local/bin/docker-compose
+$ sudo rm ~/.docker/cli-plugins/docker-compose
 ```
 
 </div>
@@ -216,9 +162,6 @@ candidates from the [Compose repository release page on GitHub](https://github.c
 Follow the instructions from the link, which involves running the `curl` command
 in your terminal to download the binaries.
 
-Pre-releases built from the "master" branch are also available for download at
-[https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/){: target="_blank" rel="noopener" class="_"}.
-
 > Pre-release builds allow you to try out new features before they are released,
 > but may be less stable.
 {: .important}
@@ -228,43 +171,6 @@ Pre-releases built from the "master" branch are also available for download at
 
 ----
 
-## Upgrading
-
-If you're upgrading from Compose 1.2 or earlier, remove or
-migrate your existing containers after upgrading Compose. This is because, as of
-version 1.3, Compose uses Docker labels to keep track of containers, and your
-containers need to be recreated to add the labels.
-
-If Compose detects containers that were created without labels, it refuses
-to run, so that you don't end up with two sets of them. If you want to keep using
-your existing containers (for example, because they have data volumes you want
-to preserve), you can use Compose 1.5.x to migrate them with the following
-command:
-
-```console
-$ docker-compose migrate-to-labels
-```
-
-Alternatively, if you're not worried about keeping them, you can remove them.
-Compose just creates new ones.
-
-```console
-$ docker container rm -f -v myapp_web_1 myapp_db_1 ...
-```
-
-## Uninstallation
-
-To uninstall Docker Compose if you installed using `curl`:
-
-```console
-$ sudo rm /usr/local/bin/docker-compose
-```
-
-To uninstall Docker Compose if you installed using `pip`:
-
-```console
-$ pip uninstall docker-compose
-```
 
 > Got a "Permission denied" error?
 >

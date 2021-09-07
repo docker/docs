@@ -48,19 +48,18 @@ $ cat .env
 TAG=v1.5
 
 $ cat docker-compose.yml
-version: '3'
 services:
   web:
     image: "webapp:${TAG}"
 ```
 
-When you run `docker-compose up`, the `web` service defined above uses the
+When you run `docker compose up`, the `web` service defined above uses the
 image `webapp:v1.5`. You can verify this with the
 [config command](reference/config.md), which prints your resolved application
 config to the terminal:
 
 ```console
-$ docker-compose config
+$ docker compose config
 
 version: '3'
 services:
@@ -75,7 +74,7 @@ uses that instead:
 
 ```console
 $ export TAG=v2.0
-$ docker-compose config
+$ docker compose config
 
 version: '3'
 services:
@@ -92,7 +91,7 @@ appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file
 done using the `--env-file` option:
 
 ```console
-$ docker-compose --env-file ./config/.env.dev up 
+$ docker compose --env-file ./config/.env.dev up 
 ```
 
 This file path is relative to the current working directory where the Docker Compose
@@ -107,7 +106,6 @@ TAG=v1.6
 
 
 $ cat docker-compose.yml
-version: '3'
 services:
   web:
     image: "webapp:${TAG}"
@@ -116,8 +114,7 @@ services:
 The `.env` file is loaded by default:
 
 ```console
-$ docker-compose config 
-version: '3'
+$ docker compose config 
 services:
   web:
     image: 'webapp:v1.5'
@@ -126,8 +123,7 @@ services:
 Passing the `--env-file ` argument overrides the default file path:
 
 ```console
-$ docker-compose --env-file ./config/.env.dev config 
-version: '3'
+$ docker compose --env-file ./config/.env.dev config 
 services:
   web:
     image: 'webapp:v1.6'
@@ -136,7 +132,7 @@ services:
 When an invalid file path is being passed as `--env-file` argument, Compose returns an error:
 
 ```console
-$ docker-compose --env-file ./doesnotexist/.env.dev  config
+$ docker compose --env-file ./doesnotexist/.env.dev  config
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```
 
@@ -184,19 +180,19 @@ web:
     - web-variables.env
 ```
 
-## Set environment variables with 'docker-compose run'
+## Set environment variables with 'docker compose run'
 
 Similar to `docker run -e`, you can set environment variables on a one-off
-container with `docker-compose run -e`:
+container with `docker compose run -e`:
 
 ```console
-$ docker-compose run -e DEBUG=1 web python console.py
+$ docker compose run -e DEBUG=1 web python console.py
 ```
 
 You can also pass a variable from the shell by not giving it a value:
 
 ```console
-$ docker-compose run -e DEBUG web python console.py
+$ docker compose run -e DEBUG web python console.py
 ```
 
 The value of the `DEBUG` variable in the container is taken from the value for
@@ -219,7 +215,6 @@ $ cat ./Docker/api/api.env
 NODE_ENV=test
 
 $ cat docker-compose.yml
-version: '3'
 services:
   api:
     image: 'node:6-alpine'
@@ -233,7 +228,7 @@ When you run the container, the environment variable defined in the Compose
 file takes precedence.
 
 ```console
-$ docker-compose exec api node
+$ docker compose exec api node
 
 > process.env.NODE_ENV
 'production'
