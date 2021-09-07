@@ -19,7 +19,7 @@ Starting with Docker Desktop 3.4.0, you can run Compose V2 commands without modi
 
 We will gradually turn this option on automatically for Docker Desktop users, so that users can seamlessly move to Docker Compose V2 without the need to upgrade any of their scripts. If you run into any problems with Compose V2, you can easily switch back to Compose v1 by either by making changes in Docker Desktop **Experimental** Settings, or by running the command `docker-compose disable-v2`.
 
-Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose-CLI](https://github.com/docker/compose-cli/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
+Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
 {: .important}
 
 ## Context of Docker Compose evolution
@@ -63,10 +63,10 @@ $ docker-compose disable-v2
 ### Install on Linux
 
 You can install Compose V2 by downloading the adequate binary for your system 
-from the [project release page](https://github.com/docker/compose-cli/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
+from the [project release page](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
 
 ```console
 $ mkdir -p ~/.docker/cli-plugins/
-$ curl -SL https://github.com/docker/compose-cli/releases/download/v2.0.0-rc.1/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
+$ curl -SL https://github.com/docker/compose/releases/download/v2.0.0-rc.3/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
 $ chmod +x ~/.docker/cli-plugins/docker-compose
 ```

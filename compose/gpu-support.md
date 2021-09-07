@@ -52,9 +52,9 @@ services:
       resources:
         reservations:
           devices:
-          - driver: nvidia
-            count: 1
-            capabilities: [gpu, utility]
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu, utility]
 ```
 
 Run with Docker Compose:
@@ -98,7 +98,7 @@ services:
       resources:
         reservations:
           devices:
-          - capabilities: [gpu]
+            - capabilities: [gpu]
 ```
 
 ```console
