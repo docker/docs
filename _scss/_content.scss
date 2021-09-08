@@ -121,3 +121,15 @@ a.glossary {
 a.accept-eula {
   font-weight: bold;
 }
+
+
+.highlighter-rouge {
+  &.language-dockerfile {
+    span.k {
+      text-decoration:       underline;
+      text-decoration-line:  underline;
+      text-decoration-style: dotted;
+      cursor: help;
+    }
+  }
+}

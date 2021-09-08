@@ -225,13 +225,27 @@ ready(() => {
         $(`.nav-tabs > li > a[data-group='${ group }']`).tab("show");
     });
 
-    $('.language-dockerfile span.k').tooltip({
+    $('.language-dockerfile span.k').popover({
+        html : true,
+        trigger: 'hover',
+        content: function() {
+            resp = $.ajax({
+                type: "GET",
+                url: '/engine/reference/builder/',
+                success: function(res) {
+                    $(res).find('section.section').each(function () {
+                        $('#here').append($(this).html());
+                    });
+                },
+                async: false
+            }).responseText;
+            return $(resp).find('section.section').html();
+        },
         title: function() {
             let c = this.textContent;
-            this.style.cursor = 'help';
-            $(this).on('click', () => { window.location.href = "/engine/reference/builder/#"+c.toLowerCase()});
             return 'Learn more about the "'+ c + '" Dockerfile command.'
         },
-        placement: "auto"
-    })
+        container: 'body',
+    });
+
 });
