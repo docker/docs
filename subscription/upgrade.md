@@ -15,7 +15,7 @@ You can upgrade to a Docker Pro, Team, or a Business subscription from a Persona
 
 The following section contains information on how to purchase a Docker  subscription for new customers.
 
-To purchase Docker subscription:
+To purchase a Docker subscription:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
