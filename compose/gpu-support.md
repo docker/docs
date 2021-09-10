@@ -54,7 +54,7 @@ services:
           devices:
             - driver: nvidia
               count: 1
-              capabilities: [gpu, utility]
+              capabilities: [gpu]
 ```
 
 Run with Docker Compose:
