@@ -13,7 +13,7 @@ You can upgrade to a Docker Pro, Team, or a Business subscription from a Persona
 
 ## Purchase a subscription
 
-The following section contains information on how to purchase a Docker Pro subscription for new customers.
+The following section contains information on how to purchase a Docker  subscription for new customers.
 
 To purchase Docker subscription:
 
@@ -21,11 +21,19 @@ To purchase Docker subscription:
 
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing** to go to the **Billing Details** page. This page displays billing information about your existing user account.
 
-    Ensure you have selected your personal account on the left side of the **Billing Details** page. For example, if you want to purchase a Docker Pro account, you must select your personal account.
+   > **Note**
+
+   > Ensure you have selected your personal account on the left side of the
+   > **Billing Details** page. For example, if you want to purchase a Docker
+   >  Pro account, you must select your personal account.
 
 3. Click **Change plan** and navigate to the pricing page to purchase a subscription and follow the on-screen instructions to purchase.
 
-    Note: you can select from the following options: Pro, Team, or Business subscription. The annual subscription is set by default. Select Pay Monthly to change to a monthly subscription.
+    > **Note**
+
+    > You can select from the following options: Pro, Team, or Business
+    > subscription. The annual subscription is set by default. Select **Pay
+    >  Monthly**  to change to a monthly subscription.
 
 4. If you are purchasing a Team plan, provide the organization details and click **Continue to Org Size**. Review your Team plan and click **Continue to Payment**.
     You can also specify the number of users you’d like to add to your organization. On the **Organization size** page, annual subscription by default. If you prefer to change this, select **Pay Monthly**.
@@ -34,7 +42,10 @@ To purchase Docker subscription:
 
 8. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
 
-    You can view the information about your new subscription on the **Billing** page.
+    >**Note**
+
+    > You can view the information about your new subscription on the
+    > **Billing** page.
 
 ## Purchase Docker Business
 
@@ -48,7 +59,10 @@ To upgrade to a Pro or Team:
 
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The **Billing Details** page displays billing information about your existing user account.
 
-    Ensure you have selected your personal account or organization on the left side of the **Billing Details** page.
+    >**Note**
+
+    > Ensure you have selected your personal account or organization on the
+    > left side of the **Billing Details** page.
 
     ![Billing details personal account](images/billing-personal-account.png){:width="750px"}
 
@@ -64,7 +78,10 @@ To upgrade to a Pro or Team:
 
 6. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
 
-   You can view the information about your new subscription and the total cost on the **Billing** page.
+  >**Note**
+
+  > You can view the information about your new subscription and the total cost
+  > on the **Billing** page.
 
 ## Upgrade to Docker Business
 
@@ -84,9 +101,7 @@ You can view the confirmation of the upgrade with an invoice containing details 
 
 ## Update billing information
 
-> **Note**
->
-> You must be on owner of the organization to make changes to the billing information.
+You must be on owner of the organization to make changes to the billing information.
 
 To update the billing information for your organization or personal account:
 
