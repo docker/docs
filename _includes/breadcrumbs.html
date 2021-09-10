@@ -5,8 +5,7 @@ This include constructs breadcrumbs for the page; breadcrumbs are based on the
 page's location in the TOC (_data/toc.yaml). To get the "parent" TOC entries
 for the current page, we:
 
-    - iterate through each of the main sections / categories in the TOC (home, guides,
-      product manuals, reference, samples)
+    - iterate through each of the main sections / categories in the TOC (home, guides, manuals, reference, samples)
     - in each section, we iterate throught pages and sections. "sections" do not
       have URLs ("path") of their own, but can contain pages and sub-sections.
       Liquid doesn't allow us to "recursively" iterate through these, so we added

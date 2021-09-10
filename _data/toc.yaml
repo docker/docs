@@ -6,7 +6,7 @@ horizontalnav:
 - title: Guides
   path: /get-started/overview/
   node: guides
-- title: Product manuals
+- title: Manuals
   path: /desktop/
   node: manuals
 - title: Reference
