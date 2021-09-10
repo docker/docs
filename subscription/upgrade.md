@@ -23,7 +23,7 @@ To purchase a Docker subscription:
 
    > **Note**
    >
-   > Ensure you have selected your personal account on the left side of the
+   > Ensure you have selected the correct account on the left side of the
    **Billing Details** page. For example, if you want to purchase a Docker
    Pro subscription, you must select your personal account.
 
