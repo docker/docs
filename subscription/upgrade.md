@@ -11,7 +11,7 @@ This page contains information on how to purchase a Docker paid subscription. It
 
 You can upgrade to a Docker Pro, Team, or a Business subscription from a Personal subscription. When you upgrade to a paid subscription, you can immediately use all the features and entitlements offered in your new subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
-## Purchase a subscription
+## Purchase a Docker subscription
 
 The following section contains information on how to purchase a Docker  subscription for new customers.
 
@@ -25,7 +25,7 @@ To purchase Docker subscription:
    >
    > Ensure you have selected your personal account on the left side of the
    **Billing Details** page. For example, if you want to purchase a Docker
-   Pro account, you must select your personal account.
+   Pro subscription, you must select your personal account.
 
 3. Click **Change plan** and navigate to the pricing page to purchase a subscription and follow the on-screen instructions to purchase.
 
@@ -35,11 +35,11 @@ To purchase Docker subscription:
     subscription. The annual subscription is set by default. Select **Pay
     Monthly**  to change to a monthly subscription.
 
-4. If you are purchasing a Team plan, provide the organization details and click **Continue to Org Size**. Review your Team plan and click **Continue to Payment**.
+4. If you are purchasing a Team subscription, provide the organization details and click **Continue to Org Size**. Review your Team plan and click **Continue to Payment**.
     > **Note**
     >
     > You can also specify the number of users you’d like to add to your
-    organization. On the **Organization size** page, annual subscription is set by default. If you prefer to change this, select **Pay Monthly**.
+    organization.
 
 5. You will receive an email confirming your subscription.
 
@@ -65,29 +65,25 @@ To upgrade to a Pro or Team:
     >**Note**
     >
     > Ensure you have selected your personal account or organization on the
-    left side of the **Billing Details** page.
+    left side of the **Billing Details** page. For example, if you want to upgrade to a Docker Pro subscription, you must select your personal account.
 
     ![Billing details personal account](images/billing-personal-account.png){:width="750px"}
 
 3. Click **Change plan** and navigate the pricing page to upgrade your subscription and continue with the on-screen instructions.
 
-    > **Note**
-    >
-    > You can select from the following options: Pro, Team, or Business subscription. The annual subscription is set by default. Select **Pay Monthly** to change to a monthly subscription.
+    You can select from the following options: Pro, Team, or Business subscription.
 
-4. When upgrading to a Team plan, provide the organization details and click **Continue to Org Size**. Review your Team plan and click **Continue to Payment**.
+4. When upgrading to a Team subscription, provide the organization details and click **Continue to Org Size**. Review your Team subscription and click **Continue to Payment**.
 
      > **Note**
      >
      > You can also specify the number of users you’d like to add to your organization. On the **Organization size** page, the cost for the annual subscription is set by default. If you prefer to change this, select **Pay Monthly**.
 
-5. You’ll also receive an email confirming the cancellation of your legacy subscription.
+5. You’ll also receive an email confirming your new subscription.
 
 6. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
 
-  >**Note**
-  >
-  > You can view the information about your new subscription and the total cost
+    You can view the information about your new subscription and the total cost
   on the **Billing** page.
 
 ## Upgrade to Docker Business
@@ -122,4 +118,4 @@ To update the billing information for your organization or personal account:
     >
     > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section.
 
-6. Click **Update** to save your changes.
+4. Click **Update** to save your changes.
