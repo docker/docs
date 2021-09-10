@@ -50,6 +50,7 @@ Valid manifest API requests to Hub will usually include the following rate limit
 ```
 ratelimit-limit    
 ratelimit-remaining
+docker-RateLimit-Source
 ```
 
 These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
@@ -77,11 +78,18 @@ Which should return headers including these:
 ```http
 ratelimit-limit: 100;w=21600
 ratelimit-remaining: 76;w=21600
+docker-RateLimit-Source: 0.0.0.0
 ```
 
-This means my limit is 100 per 21600 seconds (6 hours), and I have 76 pulls remaining.
+This means my limit is 100 per 21600 seconds (6 hours), I have 76 pulls remaining and I am limited on the ip 0.0.0.0 (not a valid ip address, used as an example).
 
 > Remember that these headers are best-effort and there will be small variations.
+
+### docker-RateLimit-Source
+
+This header will show what it used to limit you. It can help diagnose any issue.
+If you are not authenticated, it will show your ip address.
+If you are authenticated, it will show your account name.
 
 ### I don't see any RateLimit headers
 
