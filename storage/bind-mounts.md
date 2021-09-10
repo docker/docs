@@ -91,7 +91,7 @@ on your development host. Use the following command to bind-mount the `target/`
 directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
-If you're on Windows, see also Path conversions on Windows in [Volumes](../desktop/windows/troubleshoot.md#volumes)
+If you're on Windows, see also [Path conversions on Windows](../desktop/windows/troubleshoot.md#path-conversion-on-windows).
 
 The `--mount` and `-v` examples below produce the same result. You
 can't run them both unless you remove the `devtest` container after running the
