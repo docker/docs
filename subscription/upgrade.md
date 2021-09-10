@@ -36,18 +36,15 @@ To purchase Docker subscription:
     Monthly**  to change to a monthly subscription.
 
 4. If you are purchasing a Team subscription, provide the organization details and click **Continue to Org Size**. Review your Team subscription and click **Continue to Payment**.
-    > **Note**
-    >
-    > You can also specify the number of users you’d like to add to your
+
+    You can also specify the number of users you’d like to add to your
     organization.
 
 5. You will receive an email confirming your subscription.
 
-8. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
+6. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
 
-    >**Note**
-    >
-    > You can view the information about your new subscription on the
+    You can view the information about your new subscription on the
     **Billing** page.
 
 ## Purchase Docker Business
