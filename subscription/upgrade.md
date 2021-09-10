@@ -35,7 +35,7 @@ To purchase Docker subscription:
     subscription. The annual subscription is set by default. Select **Pay
     Monthly**  to change to a monthly subscription.
 
-4. If you are purchasing a Team subscription, provide the organization details and click **Continue to Org Size**. Review your Team plan and click **Continue to Payment**.
+4. If you are purchasing a Team subscription, provide the organization details and click **Continue to Org Size**. Review your Team subscription and click **Continue to Payment**.
     > **Note**
     >
     > You can also specify the number of users you’d like to add to your
