@@ -93,7 +93,7 @@ To upgrade from a monthly subscription to an annual subscription:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner or with your personal account.
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
-3. Select your personal account or organization from the left-hand menu and select the **Payment Methods** tab
+3. Select your personal account or organization from the left-hand menu and select the **Payment Methods** tab.
 4. Click **switch to annual billing**.
 5. Review the information displayed on the **Change to an Annual subscription** page and click **Accept Terms and Purchase** to confirm.
 
