@@ -592,6 +592,8 @@ reference:
           title: docker compose unpause
         - path: /engine/reference/commandline/compose_up/
           title: docker compose up
+        - path: /engine/reference/commandline/compose_version/
+          title: docker compose version
     - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
