@@ -129,7 +129,7 @@ Docker Machine uses them for the default value of the flag.
 As part of the process of creation, Docker Machine installs Docker and
 configures it with some sensible defaults. For instance, it allows connection
 from the outside world over TCP with TLS-based encryption and defaults to AUFS
-as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver-option)
+as the [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver)
 when available.
 
 There are several cases where the user might want to set options for the created
@@ -180,10 +180,10 @@ Labels:
 
 The supported flags are as follows:
 
--   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/cli/#insecure-registries) to allow with the created engine
+-   `--engine-insecure-registry`: Specify [insecure registries](/engine/reference/commandline/dockerd/#insecure-registries) to allow with the created engine
 -   `--engine-registry-mirror`: Specify [registry mirrors](../../registry/recipes/mirror.md) to use
 -   `--engine-label`: Specify [labels](../../config/labels-custom-metadata.md) for the created engine
--   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/cli/#daemon-storage-driver-option) to use with the engine
+-   `--engine-storage-driver`: Specify a [storage driver](/engine/reference/commandline/dockerd/#daemon-storage-driver) to use with the engine
 
 If the engine supports specifying the flag multiple times (such as with
 `--label`), then so does Docker Machine.
@@ -218,7 +218,7 @@ $ docker-machine create -d virtualbox \
 In addition to configuring Docker Engine options as listed above,
 you can use Machine to specify how the created swarm manager is
 configured. There is a `--swarm-strategy` flag, which you can use to specify
-the [scheduling strategy](../../swarm/scheduler/strategy.md)
+the scheduling strategy
 which Docker Swarm should use (Machine defaults to the `spread` strategy).
 There is also a general purpose `--swarm-opt` option which works similar to the aforementioned `--engine-opt` option, except that it specifies options
 for the `swarm manage` command (used to boot a master node) instead of the base

@@ -34,8 +34,8 @@ Compose: |
   *Also known as : docker-compose, fig*
 copy-on-write: |
   Docker uses a
-  [copy-on-write](/engine/userguide/storagedriver/imagesandcontainers/#/the-copy-on-write-strategy)
-  technique and a [union file system](#union_file_system) for both images and
+  [copy-on-write](/storage/storagedriver/#the-copy-on-write-cow-strategy)
+  technique and a [union file system](#union-file-system) for both images and
   containers to optimize resources and speed performance. Multiple copies of an
   entity share the same instance and each one makes only specific changes to its
   unique layer.
@@ -51,7 +51,7 @@ copy-on-write: |
 
   For more about copy-on-write in the context of Docker, see [Understand images,
   containers, and storage
-  drivers](/engine/userguide/storagedriver/imagesandcontainers/).
+  drivers](/storage/storagedriver/).
 container: |
   A container is a runtime instance of a [docker image](#image).
 
@@ -178,7 +178,7 @@ namespace: |
   and `user` (UID mapping). For more information about namespaces, see [Docker run reference](/engine/reference/run/) and [Isolate containers with a user namespace](/engine/security/userns-remap/).
 node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
-  machine running an instance of the Docker Engine in [swarm mode](#swarm_mode).
+  machine running an instance of the Docker Engine in [swarm mode](#swarm-mode).
 
   **Manager nodes** perform swarm management and orchestration duties. By default
   manager nodes are also worker nodes.
@@ -206,7 +206,7 @@ registry: |
   A Registry is a hosted service containing [repositories](#repository) of [images](#image)
   which responds to the Registry API.
 
-  The default registry can be accessed using a browser at [Docker Hub](#docker hub)
+  The default registry can be accessed using a browser at [Docker Hub](#docker-hub)
   or using the `docker search` command.
 repository: |
   A repository is a set of Docker images. A repository can be shared by pushing it
@@ -232,7 +232,7 @@ service: |
   any other type of executable program that you wish to run in a distributed
   environment.
 service discovery: |
-  Swarm mode [service discovery](/engine/swarm/networking/#use-swarm-mode-service-discovery) is a DNS component
+  Swarm mode [container discovery](/network/overlay/#container-discovery) is a DNS component
   internal to the swarm that automatically assigns each service on an overlay
   network in the swarm a VIP and DNS entry. Containers on the network share DNS
   mappings for the service via gossip so any container on the network can access
@@ -242,9 +242,9 @@ service discovery: |
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
 swarm: |
-  A [swarm](/engine/swarm/) is a cluster of one or more Docker Engines running in [swarm mode](#swarm_mode).
+  A [swarm](/engine/swarm/) is a cluster of one or more Docker Engines running in [swarm mode](#swarm-mode).
 Docker Swarm: |
-  Do not confuse [Docker Swarm](https://github.com/docker/swarm) with the [swarm mode](#swarm_mode) features in Docker Engine.
+  Do not confuse [Docker Swarm](https://github.com/docker/swarm) with the [swarm mode](#swarm-mode) features in Docker Engine.
 
   Docker Swarm is the name of a standalone native clustering tool for Docker.
   Docker Swarm pools together several Docker hosts and exposes them as a single
@@ -262,7 +262,7 @@ tag: |
 
   *Note : This label is not related to the key=value labels set for docker daemon.*
 task: |
-  A [task](/engine/swarm/how-swarm-mode-works/services/#/tasks-and-scheduling) is the
+  A [task](/engine/swarm/how-swarm-mode-works/services/#tasks-and-scheduling) is the
   atomic unit of scheduling within a swarm. A task carries a Docker container and
   the commands to run inside the container. Manager nodes assign tasks to worker
   nodes according to the number of replicas set in the service scale.

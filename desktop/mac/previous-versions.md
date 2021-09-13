@@ -656,7 +656,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features.
   - Clearer error message when incompatible hardware is detected.
   - Fix some cases where selecting "Reset" after an error did not reset properly.
   - Fix incorrect NTP config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
-  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to [migrate Toolbox images manually](docker-toolbox.md#migrating-from-docker-toolbox-to-docker-desktop-on-mac) ).
+  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to [migrate Toolbox images manually](../../toolbox/index.md) ).
 
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
 

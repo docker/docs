@@ -12,14 +12,32 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 4.0.1
+2021-09-13
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+
+### Upgrades
+
+- [Compose V2 RC3](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.3)
+  - Compose v2 is now hosted on github.com/docker/compose.
+  - Fixed go panic on downscale using `compose up --scale`.
+  - Fixed  a race condition in `compose run --rm` while capturing exit code.
+
+### Bug fixes and minor changes
+
+- Fixed a bug where copy-paste was not available in the Docker Dashboard.
 
 ## Docker Desktop 4.0.0
 2021-08-31
 
 > Download Docker Desktop
 >
-> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/67817/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/67817/Docker.dmg)
 
 ### New
 
@@ -546,7 +564,7 @@ Docker Desktop can sometimes fail to start after updating to version 3.2.0. If y
 ### New
 
 - Use of three-digit version number for Docker Desktop releases.
-- Starting with Docker Desktop 3.0.0, updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
+- Starting with Docker Desktop 3.0.0, updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#updates).
 - First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
 
   - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`

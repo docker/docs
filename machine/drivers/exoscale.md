@@ -85,11 +85,11 @@ user. If left empty, it picks a suitable one following those rules:
 
 If a custom security group is provided, you need to ensure that you allow TCP ports 22 and 2376 in an ingress rule.
 
-Moreover, if you want to use [Docker Swarm](/engine/swarm/swarm-tutorial/), also add TCP port 2377, UDP/TCP on 7946, and UDP on 4789.
+Moreover, if you want to use [Docker Swarm](../../engine/swarm/swarm-tutorial/index.md), also add TCP port 2377, UDP/TCP on 7946, and UDP on 4789.
 
 ### Debian 9
 
-The [default storage driver][storagedriver] may fail on Debian, specifying `overlay2` should resolve this issue.
+The [default storage driver](../../storage/storagedriver/select-storage-driver.md) may fail on Debian, specifying `overlay2` should resolve this issue.
 
     $ docker-machine create --engine-storage-driver overlay2 ...`
 
@@ -97,7 +97,6 @@ The [default storage driver][storagedriver] may fail on Debian, specifying `over
 
 There is a limit to the number of machines that an anti-affinity group can have.  This can be worked around by specifying an additional anti-affinity group using `--exoscale-affinity-group=docker-machineX`
 
-[storagedriver]: https://docs.docker.com/storage/storagedriver/select-storage-driver/#docker-ce
 [templates]: https://www.exoscale.com/templates/
 [datacenters]: https://www.exoscale.com/datacenters/
 [anti-affinity]: https://community.exoscale.com/documentation/compute/anti-affinity-groups/

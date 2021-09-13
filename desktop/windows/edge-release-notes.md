@@ -9,7 +9,7 @@ toc_max: 2
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
-[What to know before you install](install.md#what-to-know-before-you-install).
+[What to know before you install](install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
@@ -2007,8 +2007,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 **New**
 
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](index.md#switch-between-windows-and-linux-containers). (See
-[About the Docker Windows containers specific dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
+[Windows containers mode](index.md#switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified
@@ -2258,7 +2257,7 @@ work. Some insider builds may not work.
 
 * Only UTF-8 passwords are supported for host filesystem sharing
 
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 
 ### Beta 24 Release (2016-08-23 1.12.1-beta24)
 
@@ -2285,7 +2284,7 @@ work. Some insider builds may not work.
 
 * Only UTF-8 passwords are supported for host filesystem sharing.
 
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Remove stale network adapters](troubleshoot.md#4-remove-stale-network-adapters) under [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 
 ### Beta 23 Release (2016-08-16 1.12.1-rc1-beta23)
 
@@ -2410,7 +2409,7 @@ Unreleased. See Beta 23 for changes.
 
 ### Beta 18.1 Release (2016-07-07 1.12.0-rc3-beta18.1)
 
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by [recreating or updating your containers](troubleshoot.md#recreate-or-update-your-containers-after-beta-18-upgrade) as described in Troubleshooting.
+>**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 
 **Hotfix**
 
@@ -2555,7 +2554,7 @@ Unreleased. See Beta 23 for changes.
 
 **Known issues**
 
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 
 ### Beta 13 Release (2016-05-25 1.11.1-beta13)
 
@@ -2583,7 +2582,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 
 ### Beta 12 Release (2016-17-10 1.11.1-beta12)
 
@@ -2599,7 +2598,7 @@ This Beta release includes some significant changes:
 
 **Known issues**
 
-* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed. See [NAT Configuration](troubleshoot.md#nat-configuration) in [Troubleshooting](troubleshoot.md) for more details.
+* Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed.
 
 
 ### Beta 11b Release (2016-05-11 1.11.1-beta11b)

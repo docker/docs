@@ -34,7 +34,7 @@ Once configured, choose a notification level:
 * **Off** Do not receive any notifications.
 * **Only failures** Only receive notifications about failed builds.
 * **Everything** Receive notifications for both failed and successful builds.
-  ![](images/slack-notification-updates.png)
+  ![slack notifications](images/slack-notification-updates.png)
 
 Enjoy your new Slack channel integration!
 

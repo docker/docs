@@ -88,11 +88,11 @@ In the following example, we define a build hook that uses `docker build` argume
 docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 
-> **Caution**: A `hooks/build` file overrides the basic [docker build](/engine/reference/commandline/build/) command
+> **Caution**: A `hooks/build` file overrides the basic [docker build](../../engine/reference/commandline/build.md) command
 used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
 
-To learn more about Docker build-time variables, see the [docker build documentation](/engine/reference/commandline/build/#set-build-time-variables-build-arg).
+To learn more about Docker build-time variables, see the [docker build documentation](../../engine/reference/commandline/build.md#set-build-time-variables---build-arg).
 
 #### Push to multiple repos
 
