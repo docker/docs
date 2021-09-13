@@ -20,13 +20,49 @@ The project directory is specified by the order of precedence:
 
 ## Syntax rules
 
-The following syntax rules apply to the `.env` file:
+The "dotEnv" file format is a _de facto_ convention, not a standard with no clear specification, 
+and as such syntax might differ between tools using this file format.
+
+The following syntax rules apply to the `.env` file as supported by Docker Compose:
+
+### Compose 1.x
 
 - Compose expects each line in an `env` file to be in `VAR=VAL` format.
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
 - There is no special handling of quotation marks. This means that
   **they are part of the VAL**.
+
+### Compose 2.x
+
+Compose V2 adopt the [Ruby-style dotEnv file syntax](https://github.com/bkeepers/dotenv#usage), 
+which means:
+
+- Compose expects each line in an `env` file to be in `VAR=VAL` format. Can be preceeded by `export ` which will be ignored
+- Lines beginning with `#` are processed as comments and ignored.
+- Blank lines are ignored.
+- Multi-line values can be wrapped using double quotes. 
+- Values can be wrapped by single or double quotes, which will be remived from actual value
+- Variables defined by dolar sign `$` inside value are substitued, unless   value is wrapped by single quotes
+
+```
+# Some comment, ignored
+USER=docker
+
+# $word won't be considered a variable thanks to single quotes
+PASSWORD='pas$word'   
+
+# ${USER} will be substitued by value from USER variable
+DATABASE_URL="postgres://${USER}@localhost/my_database"
+
+# export is ignored by Docker Compose, but usefull to use the same file for shell scripts
+export S3_BUCKET=YOURS3BUCKET
+
+# A multi-line value, wrapped by double quotes
+PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
+...
+-----END DSA PRIVATE KEY-----"
+```
 
 ## Compose file and CLI variables
 
