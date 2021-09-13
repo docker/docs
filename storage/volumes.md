@@ -71,7 +71,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - The `destination` takes as its value the path where the file or directory
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
-  - The `readonly` option, if present, causes the bind mount to be [mounted into
+  - The `readonly` (sorthand `ro`) option, if present, causes the bind mount to be [mounted into
     the container as read-only](#use-a-read-only-volume).
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
