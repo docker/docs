@@ -23,7 +23,7 @@ jobs:
           # for available options, refer to:
           # - https://github.com/gjtorikian/html-proofer
           # - https://github.com/gjtorikian/html-proofer/blob/main/bin/htmlproofer
-          arguments: --disable-external --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" --file-ignore="/^./_site/engine/api/.*$/" --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/"
+          arguments: --disable-external --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/"
 
       # Disabled netlify-deploy due to flakey 502 http errors
       # - name: copy static files
