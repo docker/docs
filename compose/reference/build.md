@@ -40,5 +40,5 @@ supported by Compose itself. BuildKit is enabled by default on Docker Desktop,
 but requires the `DOCKER_BUILDKIT=1` environment variable to be set on other
 platforms.
 
-Refer to the [Compose CLI environment variables](envvars.md#COMPOSE_DOCKER_CLI_BUILD)
+Refer to the [Compose CLI environment variables](envvars.md#compose_docker_cli_build)
 section to learn how to switch between "native build" and "compose build".

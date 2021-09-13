@@ -1207,7 +1207,7 @@ external_links:
 > **Note**
 >
 > The externally-created  containers must be connected to at least one of the same
-> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> networks as the service that is linking to them. [Links](compose-file-v2.md#links)
 > are a legacy option. We recommend using [networks](#networks) instead.
 
 > Note when using docker stack deploy
@@ -1947,7 +1947,7 @@ userns_mode: "host"
 ```
 
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
+See [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) for
 more information.
 
 > Note when using docker stack deploy

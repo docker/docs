@@ -42,7 +42,7 @@ driver.
 
 The prerequisites are:
 
-* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../desktop/windows/install.md#what-to-know-before-you-install)).
+* Have Docker Desktop for Windows installed, and running (which requires that virtualization and Hyper-V are enabled, as described in [What to know before you install Docker Desktop for Windows](../desktop/windows/install.md#system-requirements)).
 
 * Set up the Hyper-V driver to use an external virtual network switch See
 the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,

@@ -304,7 +304,7 @@ For more information on Windows containers, refer to the following documentation
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see
-  [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
+  [I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows)
 
 > Settings dialog changes with Windows containers
 >
@@ -313,7 +313,7 @@ For more information on Windows containers, refer to the following documentation
 
   * [General](#general)
   * [Proxies](#proxies)
-  * [Daemon](#docker-daemon)
+  * [Daemon](#docker-engine)
   * [Reset](#reset)
 
 If you set proxies or daemon configuration in Windows containers mode, these
