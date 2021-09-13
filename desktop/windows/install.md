@@ -51,7 +51,7 @@ WSL 2 on Windows 10:
 
 - Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 
-  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
+  For Windows 10 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
 - Hyper-V and Containers Windows features must be enabled.
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:

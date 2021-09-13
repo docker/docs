@@ -103,8 +103,7 @@ Our current recommendation is to publish a port, or to connect from another
 container. This is what you need to do even on Linux if the container is on an
 overlay network, not a bridge network, as these are not routed.
 
-The command to run the `nginx` webserver shown in [Getting Started](index.md#explore-the-application)
-is an example of this.
+For example, to run an `nginx` webserver:
 
 ```console
 $ docker run -d -p 80:80 --name webserver nginx

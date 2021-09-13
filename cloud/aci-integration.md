@@ -377,7 +377,7 @@ The Docker Compose CLI adds support for running and managing containers on Azure
 
 ### Install Prerequisites
 
-- [Docker 19.03 or later](https://docs.docker.com/get-docker/)
+- [Docker 19.03 or later](../get-docker.md)
 
 ### Install script
 
@@ -415,7 +415,7 @@ $ ln -s /path/to/existing/docker /directory/in/PATH/com.docker.cli
 > `which docker`. You may need root permissions to make this link.
 
 On a fresh install of Ubuntu 20.04 with Docker Engine
-[already installed](https://docs.docker.com/engine/install/ubuntu/):
+[already installed](../engine/install/ubuntu.md):
 
 ```console
 $ echo $PATH

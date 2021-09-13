@@ -3,7 +3,6 @@ title: Use overlay networks
 description: All about using overlay networks
 keywords: network, overlay, user-defined, swarm, service
 redirect_from:
-- /engine/swarm/networking/
 - /engine/userguide/networking/overlay-security-model/
 - /config/containers/overlay/
 ---

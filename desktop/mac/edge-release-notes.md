@@ -374,7 +374,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance. For more information, see [Mutagen-based caching](mutagen.md).
+Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/){: target="_blank" rel="noopener" class="_"} to sync files between the host and the containers and benefits from native disk performance.
 
 We appreciate you trying out an early version of the Mutagen file sync feature. Please let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} repository with the `Mutagen` label.
 
@@ -1681,7 +1681,7 @@ TCP connection is idle for more than five minutes (related to
 
 **New**
 
-- More options when moving disk image (see [Storage location](index.md#storage-location) under Advanced preference settings)
+- More options when moving disk image (see [Storage location](space.md) under Advanced preference settings)
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order
@@ -1866,9 +1866,9 @@ TCP connection is idle for more than five minutes (related to
 
 **New**
 
-- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](index.md#daemon-advanced-json-configuration-file).
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [Daemon Advanced (JSON configuration file)](index.md#docker-engine).
 
-- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#daemon-basic-experimental-mode-and-registries).
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#docker-engine).
 
 **Upgrades**
 
@@ -2161,7 +2161,7 @@ events or unexpected unmounts.
 
 **New**
 
-* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [Getting Started](index.md#download-docker-for-mac).
+* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](install.md).
 
 **Upgrades**
 
@@ -2232,7 +2232,7 @@ events or unexpected unmounts.
 
 ### Beta 18.1 Release Notes (2016-07-07 1.12.0-rc3-beta18.1)
 
->**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by [recreating or updating your containers](troubleshoot.md#recreate-or-update-your-containers-after-beta-18-upgrade) as described in Troubleshooting.
+>**Note**: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2. You can fix this by recreating or updating your containers.
 
 **Hotfix**
 

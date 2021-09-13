@@ -451,7 +451,7 @@ For developers in IT managed environments, who don’t have administrative acces
 ### New
 
 - Use of three-digit version number for Docker Desktop releases.
-- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#automatic-updates).
+- Docker Desktop updates are now much smaller as they will be applied using delta patches. For more information, see [Automatic updates](install.md#updates).
 - First version of `docker compose` (as an alternative to the existing `docker-compose`). Supports some basic commands but not the complete functionality of `docker-compose` yet.
 
   - Supports the following subcommands: `up`, `down`, `logs`, `build`, `pull`, `push`, `ls`, `ps`

@@ -159,7 +159,7 @@ Your ECS services are created with rolling update configuration. As you run
 `docker compose up` with a modified Compose file, the stack will be
 updated to reflect changes, and if required, some services will be replaced.
 This replacement process will follow the rolling-update configuration set by
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+your services [`deploy.update_config`](../compose/compose-file/compose-file-v3.md#update_config)
 configuration.
 
 AWS ECS uses a percent-based model to define the number of containers to be
@@ -212,7 +212,7 @@ For your convenience, the Docker Compose CLI offers the `docker secret` command,
 
 First, create a `token.json` file to define your DockerHub username and access token.
 
-For instructions on how to generate access tokens, see [Managing access tokens](https://docs.docker.com/docker-hub/access-tokens/).
+For instructions on how to generate access tokens, see [Managing access tokens](../docker-hub/access-tokens.md).
 
 ```json
 {
@@ -253,7 +253,7 @@ Services can retrieve their dependencies using Compose service names (as they do
 
 ### Dependent service startup time and DNS resolution
 
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](../compose/startup-order.md).
 Note this need to wait for dependent services in your Compose application also exists when deploying locally with docker-compose, but the delay is typically shorter. Issues might become more visible when deploying to ECS if services do not wait for their dependencies to be available.
 
 Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
@@ -598,7 +598,7 @@ The Docker Compose CLI adds support for running and managing containers on ECS.
 
 ### Install Prerequisites
 
-[Docker 19.03 or later](https://docs.docker.com/get-docker/)
+[Docker 19.03 or later](../get-docker.md)
 
 ### Install script
 

@@ -10,9 +10,18 @@ redirect_from:
 - /docker-for-windows/opensource/
 ---
 
-Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes [Docker Engine](../engine/), Docker CLI client, [Docker Compose](../compose/), [Docker Content Trust](../engine/security/trust.md), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+Docker Desktop is an easy-to-install application for your Mac or Windows environment
+that enables you to build and share containerized applications and microservices.
+Docker Desktop includes [Docker Engine](../engine/index.md), Docker CLI client,
+[Docker Compose](../compose/index.md), [Docker Content Trust](../engine/security/trust/index.md),
+[Kubernetes](https://github.com/kubernetes/kubernetes/), and 
+Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
-Docker Desktop works with your choice of development tools and languages and gives you access to a vast library of certified images and templates in [Docker Hub](https://hub.docker.com/). This enables development teams to extend their environment to rapidly auto-build, continuously integrate, and collaborate using a secure repository.
+Docker Desktop works with your choice of development tools and languages and
+gives you access to a vast library of certified images and templates in
+[Docker Hub](https://hub.docker.com/). This enables development teams to extend
+their environment to rapidly auto-build, continuously integrate, and collaborate
+using a secure repository.
 
 Some of the key features of Docker Desktop include:
 

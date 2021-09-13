@@ -334,7 +334,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   $ export DOCKER_HOST=unix:///var/run/docker.sock
   ```
 
-* There are a number of issues with the performance of directories bind-mounted
+* <a name="bind-mounted-dirs"></a> There are a number of issues with the performance of directories bind-mounted
   into containers. In particular, writes of small blocks, and traversals of large
   directories are currently slow. Additionally, containers that perform large
   numbers of directory operations, such as repeated scans of large directory

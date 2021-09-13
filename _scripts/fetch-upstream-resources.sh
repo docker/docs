@@ -46,5 +46,5 @@ wget --quiet --directory-prefix=./registry/                     "https://raw.git
 rm -f ./engine/extend/cli_plugins.md # the cli plugins api is not a stable API, and not included in the TOC for that reason.
 rm -f ./registry/spec/api.md.tmpl
 rm -f ./cloud/README.md # readme to make things nice in the compose-cli repo, but meaningless here
-rm -f ./cloud/architecure.md # Compose-CLI architecture, unrelated to cloud integration
+rm -f ./cloud/architecture.md # Compose-CLI architecture, unrelated to cloud integration
 rm -rf ./cloud/images
