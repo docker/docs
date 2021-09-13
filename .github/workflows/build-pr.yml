@@ -15,15 +15,16 @@ jobs:
       - name: build image
         run: docker build --target=current -t documentation:latest .
       - name: copy files to host
-        # https://forums.docker.com/t/is-there-a-way-to-copy-a-file-from-an-image-to-the-local-filesystem-without-running-a-container/2841
-        run: |
-          docker run --name docs documentation:latest /bin/true
-          docker cp docs:/usr/share/nginx/html _site
+        run: docker build --target=deploy-source --output=./_site .
       - name: check for broken links
         uses: chabad360/htmlproofer@master
         with:
           directory: ./_site
-          arguments: --disable-external
+          # for available options, refer to:
+          # - https://github.com/gjtorikian/html-proofer
+          # - https://github.com/gjtorikian/html-proofer/blob/main/bin/htmlproofer
+          arguments: --disable-external --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" --file-ignore="/^./_site/engine/api/.*$/" --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/"
+
       # Disabled netlify-deploy due to flakey 502 http errors
       # - name: copy static files
       #   if: github.event.pull_request.head.repo.fork == false
