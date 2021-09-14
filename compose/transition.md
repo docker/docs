@@ -1,17 +1,8 @@
 ---
-description: Compose V2
-keywords: compose, V2
-title: Compose V2
+description: Compose V1 to V2
+keywords: compose
+title: Compose V1 to V2
 ---
-
-## Compose V2 and the new `docker compose` command
-
-Starting with Docker Desktop 3.4.0, you can run Compose V2 commands without modifying your invocations, by enabling the drop-in replacement of the previous `docker-compose` with the new command.  See the section [Installing Compose v2](#installing-compose-v2) for detailed instructions how to enable the drop-in replacement.
-
-We turn this option on automatically for Docker Desktop users, so that users can seamlessly move to Docker Compose V2 without the need to upgrade any of their scripts. If you run into any problems with Compose V2, you can easily switch back to Compose V1 by either by making changes in Docker Desktop Settings, or by running the command `docker-compose disable-v2`.
-
-Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
-{: .important}
 
 ## Context of Docker Compose evolution
 
@@ -22,3 +13,12 @@ While docker-compose is still supported and maintained, Compose V2 implementatio
 Additionally, Compose V2 also supports [Apple silicon](../desktop/mac/apple-silicon.md).
 
 For more information about the flags that are supported in the new compose command, see the [docker-compose compatibility list](cli-command-compatibility.md).
+
+## Compose V2 and the new `docker compose` command
+
+Starting with Docker Desktop 3.4.0, you can run Compose V2 commands without modifying your invocations, by enabling the drop-in replacement of the previous `docker-compose` with the new command.  See the section [Installing Compose v2](#installing-compose-v2) for detailed instructions how to enable the drop-in replacement.
+
+We turn this option on automatically for Docker Desktop users, so that users can seamlessly move to Docker Compose V2 without the need to upgrade any of their scripts. If you run into any problems with Compose V2, you can easily switch back to Compose V1 by either by making changes in Docker Desktop Settings, or by running the command `docker-compose disable-v2`.
+
+Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
+{: .important}
