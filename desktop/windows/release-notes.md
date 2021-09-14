@@ -36,7 +36,7 @@ This page contains information about the new features, improvements, known issue
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/stable/amd64/67817/Docker Desktop Installer.exe)
+> [For Windows](https://desktop.docker.com/win/main/amd64/67817/Docker Desktop Installer.exe)
 
 ### New
 

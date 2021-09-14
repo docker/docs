@@ -36,8 +36,8 @@ This page contains information about the new features, improvements, known issue
 
 > Download Docker Desktop
 >
-> [Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/67817/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/67817/Docker.dmg)
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/67817/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/67817/Docker.dmg)
 
 ### New
 
