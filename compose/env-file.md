@@ -42,7 +42,7 @@ which means:
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
 - Multi-line values can be wrapped using double quotes. 
-- Values can be wrapped by single or double quotes, which will be remived from actual value
+- Values can be wrapped by single or double quotes, which will be removed from actual value
 - Variables defined by dolar sign `$` inside value are substitued, unless   value is wrapped by single quotes
 
 ```
