@@ -22,3 +22,20 @@ We turn this option on automatically for Docker Desktop users, so that users can
 
 Your feedback is important to us. Let us know your feedback on the new 'compose' command by creating an issue in the [Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
 {: .important}
+
+## Compose V1 end of life
+
+### September 28th, 2021 
+New features and bug fixes will only be considered in the V2 codebase (we may make some exceptions).
+Users on Mac/Windows will be defaulted into Docker Compose V2, but can still opt out through the UI and the cli. 
+
+Docker Compose V1 will only be maintained regarding security issues
+V2 branch on docker/compose repo becomes the default one
+
+### Dec 28th, 2021: 
+V1 is marked as deprecated
+No other impacts to users than a strong signal to users
+
+### March 28th, 2022: 
+End of security fixes
+No new contribution will be accepted to the V1 branch, even for security fixes.
