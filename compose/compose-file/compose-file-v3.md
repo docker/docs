@@ -11,13 +11,9 @@ toc_min: 1
 These topics describe version 3 of the Compose file format. This is the newest
 version.
 
-## Compose and Docker compatibility matrix
+Compose file version 2 is obsolete, better refere to the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). See [Compose file versions and upgrading](compose-versioning.md)
+{: .important}
 
-There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. The
-table below is a quick look. For full details on what each version includes and
-how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
-
-{% include content/compose-matrix.md %}
 
 ## Compose file structure and examples
 

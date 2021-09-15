@@ -1099,11 +1099,7 @@ reference:
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/
-      title: Compose Specification
-    - path: /compose/compose-file/compose-file-v3/
-      title: Version 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
+      title: Compose file reference
     - path: /compose/compose-file/compose-versioning/
       title: About versions and upgrading
     - path: /compose/faq/
