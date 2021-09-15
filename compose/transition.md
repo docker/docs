@@ -26,16 +26,16 @@ Your feedback is important to us. Let us know your feedback on the new 'compose'
 ## Compose V1 end of life
 
 ### September 28th, 2021 
-New features and bug fixes will only be considered in the V2 codebase (we may make some exceptions).
+Compose V2 is the default development branch on GitHub.
+New features and bug fixes will be considered in the V2 codebase. Legacy V1 codebase will only be considered
+for security issues and critical bug fixes.
 Users on Mac/Windows will be defaulted into Docker Compose V2, but can still opt out through the UI and the cli. 
 
-Docker Compose V1 will only be maintained regarding security issues
-V2 branch on docker/compose repo becomes the default one
-
-### Dec 28th, 2021: 
-V1 is marked as deprecated
+### March 28th, 2022: 
+After a 6 months transition period, V1 is marked as deprecated
 No other impacts to users than a strong signal to users
 
-### March 28th, 2022: 
+### End of Life
+Actual date to be defined based on community feedback and Compose V2 adoption 
 End of security fixes
 No new contribution will be accepted to the V1 branch, even for security fixes.
