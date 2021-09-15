@@ -127,8 +127,8 @@ also included below.
     $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o ~/.docker/cli-plugins/docker-compose
     ```
 
-    > To install a different version of Compose, substitute `{{site.compose_version}}`
-    > with the version of Compose you want to use.
+    > This command installs Compose V2 for the active user under $HOME directory. To install for all 
+    > users on your system, replace `~/.docker/cli-plugins` by `/usr/local/lib/docker/cli-plugins`. 
 
 2.  Apply executable permissions to the binary:
 
