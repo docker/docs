@@ -9,6 +9,9 @@ description: Tips for building the images for our application
 When you have built an image, it is good practice to scan it for security vulnerabilities using the `docker scan` command.
 Docker has partnered with [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
 
+> **Note**: You need to be logged in to Docker Hub to use the Snyk scan feature. Use `docker login` command, then procede with
+> `docker scan <image-name>`.
+
 For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type
 
 ```console
