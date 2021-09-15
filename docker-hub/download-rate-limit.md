@@ -89,7 +89,13 @@ This means my limit is 100 per 21600 seconds (6 hours), I have 76 pulls remainin
 
 This header will show what it used to limit you. It can help diagnose any issue.
 If you are not authenticated, it will show your ip address.
-If you are authenticated, it will show your account name.
+If you are authenticated, it will show your `accountID`.
+
+You can compare this `accountID` with the one associated with your account by requesting the docker Hub API:
+```http
+https://hub.docker.com/v2/users/<namespace>/
+```
+(replace `<namespace>` with the account name)
 
 ### I don't see any RateLimit headers
 
