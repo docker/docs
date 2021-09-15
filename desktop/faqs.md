@@ -15,6 +15,13 @@ toc_max: 2
 
 For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](windows/install.md#system-requirements).
 
+### Where does Docker Desktop get installed on my machine?
+
+By default, Docker Desktop is installed at the following location:
+
+- On Mac: `/Applications/Docker.app`
+- On Windows: `C:\Program Files\Docker\Docker`
+
 ### Do I need to pay to use Docker Desktop?
 
 Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
