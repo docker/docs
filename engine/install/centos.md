@@ -83,7 +83,7 @@ Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the **stable** repository.
 
 ```console
-$ sudo yum install -y yum-utils
+$ sudo yum -y upgrade
 
 $ sudo yum-config-manager \
     --add-repo \
