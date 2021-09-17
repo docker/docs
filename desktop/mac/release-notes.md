@@ -22,7 +22,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Upgrades
 
-- [Compose V2 RC3](https://github.com/docker/compose-cli/releases/tag/v2.0.0-rc.3)
+- [Compose V2 RC3](https://github.com/docker/compose/releases/tag/v2.0.0-rc.3)
   - Compose v2 is now hosted on github.com/docker/compose.
   - Fixed go panic on downscale using `compose up --scale`.
   - Fixed  a race condition in `compose run --rm` while capturing exit code.
