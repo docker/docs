@@ -68,7 +68,7 @@ $ docker run -dp 3000:3000 \
 If you are using PowerShell then use this command.
 
 ```powershell
-docker run -dp 3000:3000 `
+PS> docker run -dp 3000:3000 `
   -w /app -v "$(pwd):/app" `
   --network todo-app `
   -e MYSQL_HOST=mysql `
@@ -174,7 +174,7 @@ $ docker run -d \
 If you are using PowerShell then use this command.
 
 ```powershell
-docker run -d `
+PS> docker run -d `
   --network todo-app --network-alias mysql `
   -v todo-mysql-data:/var/lib/mysql `
   -e MYSQL_ROOT_PASSWORD=secret `

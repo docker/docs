@@ -52,7 +52,7 @@ So, let's do it!
     If you are using PowerShell then use this command:
 
     ```powershell
-    docker run -dp 3000:3000 `
+    PS> docker run -dp 3000:3000 `
         -w /app -v "$(pwd):/app" `
         node:12-alpine `
         sh -c "yarn install && yarn run dev"
