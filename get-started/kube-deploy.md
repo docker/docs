@@ -44,7 +44,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
         spec:
           containers:
           - name: bb-site
-            image: bulletinboard:1.0
+            image: getting-started
     ---
     apiVersion: v1
     kind: Service
@@ -56,8 +56,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
       selector:
         bb: web
       ports:
-      - port: 8080
-        targetPort: 8080
+      - port: 3000
+        targetPort: 3000
         nodePort: 30001
     ```
 

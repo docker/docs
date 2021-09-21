@@ -58,7 +58,7 @@ The simplest way to get started with Dev Environments is to create a new environ
 
 ![Single container Dev environment](images/dev-env-container.png){:width="700px"}
 
-In the above example, the names `amazing_mclaren` and `stoic_carver` are randomly generated. You'll most likely see different names when you create your Dev Environment.
+In the above example, the names `wizardly_ellis` and `relaxed_maclaren` are randomly generated. You'll most likely see different names when you create your Dev Environment.
 
 Hover over the container and click **Open in VS Code** to start working in VS Code as usual. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
 
