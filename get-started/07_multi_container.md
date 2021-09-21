@@ -56,7 +56,7 @@ For now, we will create the network first and attach the MySQL container at star
 
     If you are using PowerShell then use this command.
 
-    ```console
+    ```powershell
     PS> docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
@@ -194,7 +194,7 @@ With all of that explained, let's start our dev-ready container!
 
     If you are using PowerShell then use this command.
 
-    ```console
+    ```powershell
     PS> docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
