@@ -18,7 +18,7 @@ The following sections contain instructions on how to downgrade your existing Do
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual subscription that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual subscription if it hasn’t expired.
-> - Before you downgrade to a Personal or Free subscription, you must convert all private repositories to public repositories and update the organization details to reflect features available in Docker Personal. For example, if you have a Team subscription, you may need to reduce the number of team members. For information on what’s included in the subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+> - Before you downgrade to a Personal or a Free Team subscription, you must convert all private repositories to public repositories and update the organization details to reflect features available in Docker Personal or Free Team. For example, if you have a Docker Team subscription, you may need to reduce the number of team members. For information on what’s included in the subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 
 To downgrade your subscription:
