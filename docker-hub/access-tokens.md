@@ -39,10 +39,11 @@ You can create as many tokens as you need.
 
 4. Add a description for your token. Use something that indicates where
 the token will be used, or set a purpose for the token.
+You can view the following access permissions from the drop-down:
 
       ![PAT Menu](images/hub-create-token.png){:width="700px"}
 
-5. You can view the following permissions from the drop-down:
+5. The table below lists the tokens available in each subscription:
 
     | Feature   | Personal | Pro | Team | Business |
     | --------------------- | ---- | ----- | ----- |----- |
@@ -53,7 +54,7 @@ the token will be used, or set a purpose for the token.
       >*You can create 1 access token as part of the Docker Personal tier, 5 tokens as part of Docker Pro, and Unlimited tokens as part of Docker Team and Business tier.
       For more information, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
-6. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
+5. Copy the token that appears on the screen and save it. You will not be able to retrieve the token once you close this prompt.
 
       ![Copy Token](images/hub-copy-token.png){:width="700px"}
 
