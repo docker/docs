@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   docs:
     # By default, docker-compose up --build builds docs for a development
