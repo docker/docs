@@ -11,14 +11,14 @@ You can downgrade your Docker subscription anytime. When you downgrade your subs
 
 For example, if you are currently on a **Docker Team** subscription which is billed on the 8th of every month and you choose to downgrade to **Docker Personal** on the 15th, your plan will be active until 7th of the following month. You will be transferred to Docker Personal on the 8th of the following month.
 
-The following sections contain instructions on how to downgrade from a paid subscription to a Docker Personal subscription.
+The following sections contain instructions on how to downgrade your existing Docker subscription.
 
 ## Downgrade your Docker subscription
 
 >**Note:**
 >
 > - It is not possible to offer prorated refunds when you downgrade an annual subscription that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual subscription if it hasn’t expired.
-> - Before you downgrade to a Personal subscription, you must convert all private repositories to public repositories and update the organization details to reflect features available in Docker Personal. For example, if you have a Team subscription, you may need to reduce the number of team members. For information on what’s included in the Personal subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+> - Before you downgrade to a Personal or Free subscription, you must convert all private repositories to public repositories and update the organization details to reflect features available in Docker Personal. For example, if you have a Team subscription, you may need to reduce the number of team members. For information on what’s included in the subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 
 To downgrade your subscription:
@@ -28,7 +28,7 @@ To downgrade your subscription:
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The **Billing Details** page displays billing information about your existing user account.
 >**Note:**
 >
->Ensure you have selected your personal account on the left side of the **Billing Details** page.
+>Ensure you have selected your Personal or Free team account on the left side of the **Billing Details** page.
 
 3. On the **Change Plan** page, review the information displayed in the **Free** section and click **Downgrade**.
 >**Note:**
