@@ -82,7 +82,7 @@ The Docker Desktop installation includes
     > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
     {: .important}
 
-    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 
 ### Quick start guide  
   

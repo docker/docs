@@ -10,6 +10,11 @@ redirect_from:
 - /docker-for-windows/opensource/
 ---
 
+> **Update to the Docker Desktop terms**
+>
+> Professional use of Docker Desktop in large organizations (more than 250 employees or more than $10 million in revenue) requires users to have a paid Docker subscription. While the effective date of these terms is August 31, 2021, there is a grace period until January 31, 2022 for those that require a paid subscription. For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+{: .important}
+
 Docker Desktop is an easy-to-install application for your Mac or Windows environment
 that enables you to build and share containerized applications and microservices.
 Docker Desktop includes [Docker Engine](../engine/index.md), Docker CLI client,
