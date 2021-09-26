@@ -32,7 +32,7 @@ like the `arm32v7` or `ppc64le` variants of the busybox image.
 
 ## Build multi-arch images with Buildx
 
-Docker is now making it easier than ever to develop containers on, and for Arm
+Docker is now making it easier than ever to develop containers on, and for ARM
 servers and devices. Using the standard Docker tooling and processes, you can
 start to build, push, pull, and run images seamlessly on different compute
 architectures. In most cases, you don't have to make any changes to Dockerfiles
@@ -125,7 +125,7 @@ Where, `username` is a valid Docker username.
 > **Notes:**
 >
 > - The `--platform` flag informs buildx to generate Linux images for AMD 64-bit,
->   Arm 64-bit, and Armv7 architectures.
+>   ARM 64-bit, and ARMv7 architectures.
 > - The `--push` flag generates a multi-arch manifest and pushes all the images
 >   to Docker Hub.
 
@@ -155,8 +155,8 @@ Manifests:
 The image is now available on Docker Hub with the tag `username/demo:latest`. You
 can use this image to run a container on Intel laptops, Amazon EC2 A1 instances,
 Raspberry Pis, and on other architectures. Docker pulls the correct image for the
-current architecture, so Raspberry Pis run the 32-bit Arm version and EC2 A1
-instances run 64-bit Arm. The SHA tags identify a fully qualified image variant.
+current architecture, so Raspberry Pis run the 32-bit ARM version and EC2 A1
+instances run 64-bit ARM. The SHA tags identify a fully qualified image variant.
 You can also run images targeted for a different architecture on Docker Desktop.
 
 You can run the images using the SHA tag, and verify the architecture. For
