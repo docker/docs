@@ -69,14 +69,6 @@ Hyper-V on Windows 10:
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
 
-### What's included in the installer
-
-The Docker Desktop installation includes [Docker Engine](../../engine/index.md),
-Docker CLI client, [Docker Compose](../../compose/index.md),
-[Docker Content Trust](../../engine/security/trust/index.md),
-[Kubernetes](https://github.com/kubernetes/kubernetes/),
-and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
-
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
 accounts use the same VM to build and run containers. Note that it is not possible to share containers and images between user accounts when using the Docker Desktop WSL 2 backend.
