@@ -253,8 +253,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](install
   * Run the uninstall commands from the menu.
 
 * If `docker` commands aren't working properly or as expected, you may need to
-  unset some environment variables, to make sure you are not using the legacy
-  Docker Machine environment in your shell or command window. Unset the
+  unset some environment variables, to make sure you are not using the deprecated Docker Machine environment in your shell or command window. Unset the
   `DOCKER_HOST` environment variable and related variables. If you use bash, use the following command: `unset ${!DOCKER_*}`
 
 * For the `hello-world-nginx` example, Docker Desktop must be running to get to
