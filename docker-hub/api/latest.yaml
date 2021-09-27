@@ -1221,12 +1221,16 @@ responses:
   BadRequest:
     description: Bad Request
     schema:
-      $ref: '#/definitions/ValueError'
+      $ref: "#/definitions/ValueError"
   Unauthorized:
     description: Unauthorized
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"
+  Forbidden:
+    description: Forbidden
+    schema:
+      $ref: "#/definitions/Error"
   NotFound:
     description: Not Found
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"
