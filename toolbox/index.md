@@ -16,11 +16,12 @@ toc_min: 1
 toc_max: 2
 ---
 
->**Deprecated**
+> **Deprecated**
 >
 > Docker Toolbox has been deprecated and is no longer in active development. Please
 > use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/mac/index.md)
 > and [Docker Desktop for Windows](../desktop/windows/index.md).
 {: .warning }
 
-The source code for Toolbox has been archived, but [can be found on GitHub](https://github.com/docker-archive/toolbox){:target="_blank" rel="noopener" class="_"}.
+The source code for Toolbox has been archived, You can find the source code 
+on [GitHub](https://github.com/docker-archive/toolbox){:target="_blank" rel="noopener" class="_"}.
