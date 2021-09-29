@@ -30,11 +30,12 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 Python package manager or installing Compose as a container.
 
 > Install a different version
-> 
+>
 > The instructions below outline installation of the current stable release
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
-> Compose, replace the given release number with the one that you want. Compose
-> releases are also listed and available for direct download on the
+> Compose, replace the given release number with the one that you want. For instructions to install Compose 2.0.0 on Linux, see [Install Compose 2.0.0 on Linux](cli-command.md#install-on-linux).
+>
+> Compose releases are also listed and available for direct download on the
 > [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
 > section.
