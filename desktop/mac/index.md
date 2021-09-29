@@ -55,6 +55,8 @@ On the **General** tab, you can configure when to start and update Docker:
 
 - **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
+- **Use Docker Compose V2**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/cli-command.md).
+
 ### Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
@@ -222,6 +224,12 @@ For more information about using the Kubernetes integration with Docker Desktop,
 > On Docker Desktop Mac, the **Restart Docker Desktop**, **Reset to factory defaults**, and other reset options are available from the **Troubleshoot** menu.
 
 For information about the reset options, see [Logs and Troubleshooting](troubleshoot.md).
+
+### Software Updates
+
+The Software Updates section notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+
+If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
 
 ## Dashboard
 
