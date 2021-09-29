@@ -8,7 +8,7 @@ title: Compose V2
 
 > Important
 >
-> The new Compose V2, which supports the `compose` command as part of the Docker CLI, is available with the Docker Desktop 4.1.0 release.
+> The new Compose V2, which supports the `compose` command as part of the Docker CLI, is now available.
 >
 > Compose V2 integrates compose functions into the Docker platform, continuing to support most of the previous `docker-compose` features and flags. You can test the Compose V2 by simply replacing the dash (`-`) with a space, and by running `docker compose`, instead of `docker-compose`.
 {: .important}
