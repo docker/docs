@@ -229,26 +229,12 @@ To interact with remote repositories:
 
 You can use [volumes](../storage/volumes.md) to store files and share them among containers. Volumes are created and are directly managed by Docker. They are also the preferred mechanism to persist data in Docker containers and services.
 
-The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. If you are user with a paid Docker subscription, you can also see which container is using a specific volume and explore the files and folders in your volumes.
+> **Volume Management is now available for all subscriptions**
+>
+> Starting with Docker Desktop 4.1.0 release, Volume management is available for users on any subscription, including Docker Personal. Update Docker Desktop to 4.1.0 to start managing your volumes for free.
+{: .important}
 
-{% include upgrade-cta.html
-  body="To start exploring the details in your volumes, upgrade to a Docker Pro, Team, or a Business subscription."
-  header-text="This feature requires a paid Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_volumes"
-%}
-
-The following table lists the Volumes UI features available in each plan:
-
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
-
-| Feature                                       | Personal      | Pro       | Team      | Business      | 
-|:----------------------------------------------|:---------:|:---------:|:--------:|:--------:|
-|  View, create, and delete volumes             | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See which volumes are in use                  | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See the size of the volume                    | {{ yes }} | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See volume data details (modified date, size) | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| See which container is using a volume         | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
-| Save or delete files from a volume            | X         | {{ yes }} |  {{ yes }}  |  {{ yes }}  |
+The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. You can also see which container is using a specific volume and explore the files and folders in your volumes.
 
 ### Manage volumes
 
