@@ -81,7 +81,7 @@ ratelimit-remaining: 76;w=21600
 docker-rateLimit-source: 0.0.0.0
 ```
 
-This means my limit is 100 per 21600 seconds (6 hours), I have 76 pulls remaining and I am limited on the ip 0.0.0.0 (not a valid ip address, used as an example).
+This means my limit is 100 pulls per 21600 seconds (6 hours), I have 76 pulls remaining and I am limited on the ip 82.92.134.25.
 
 > Remember that these headers are best-effort and there will be small variations.
 
