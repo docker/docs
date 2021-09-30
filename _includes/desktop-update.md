@@ -1,6 +1,8 @@
 <!-- This text will be included in the Mac and Windows Install topic -->
 
-When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version. You can choose when to start the download and installation process.
+When an update is available, Docker Desktop displays an icon to indicate the availability of a newer version.
+
+Starting with Docker Desktop 4.1.0, the **Software Updates** section in the [General](../#general) tab also notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version. If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](../#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
 
 To encourage developers to stay up to date, Docker Desktop displays a reminder two weeks after an update becomes available. You can dismiss this daily reminder by clicking **Snooze**. You can skip an update when a reminder appears by clicking the **Skip this update** option.
 
