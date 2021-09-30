@@ -17,13 +17,37 @@ toc_max: 2
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-## Docker Desktop 4.0.1
-2021-09-13
+## Docker Desktop 4.1.0
+2021-09-30
 
 > Download Docker Desktop
 >
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+
+### New
+
+- **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../#software-updates).
+- **Compose V2** You can now specify whether to use [Docker Compose V2](../../compose/cli-command.md) in the General settings.
+- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
+
+### Upgrades
+
+- [Compose V2](https://github.com/docker/compose/releases/tag/v2.0.0)
+- [Buildx 0.6.3](https://github.com/docker/buildx/releases/tag/v0.6.3)
+- [Kubernetes 1.21.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.5)
+- [Go 1.17.1](https://github.com/golang/go/releases/tag/go1.17.1)
+- [Alpine 3.14](https://alpinelinux.org/posts/Alpine-3.14.0-released.html)
+- [Qemu 6.1.0](https://wiki.qemu.org/ChangeLog/6.1)
+- Base distro to debian:bullseye
+
+## Docker Desktop 4.0.1
+2021-09-13
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/68347/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/68347/Docker.dmg)
 
 ### Upgrades
 
