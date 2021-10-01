@@ -165,4 +165,3 @@ Refer to the following topics for further documentation on all CLI commands used
 - [docker image](../engine/reference/commandline/image.md)
 - [docker container](../engine/reference/commandline/container.md)
 
-{% include eula-modal.html %}
