@@ -126,48 +126,60 @@ checks for updates of the syntax before building, making sure you are using the
 most current version. Learn more about the `syntax` directive in the
 [Dockerfile reference](/engine/reference/builder/#syntax).
 
-## New Docker Build secret information
+## Securely managing secrets during Docker Build
 
-The new `--secret` flag for docker build allows the user to pass secret
-information to be used in the Dockerfile for building docker images in a safe
-way that will not end up stored in the final image.
+`docker build` understands the `--secret` flag to allow the user to pass secret
+information that can be referenced in the Dockerfile.  The secret values are
+only used for building docker images and will not end up stored in the final
+image.
 
-`id` is the identifier to pass into the `docker build --secret`. This identifier
-is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker
-does not use the filename of where the secret is kept outside of the Dockerfile,
-since this may be sensitive information.
+A build operation may have multiple secrets associated with it, each identified
+with an `id` which is shared between the `docker build` command line flag and
+the Dockerfile.
 
-`dst` renames the secret file to a specific file in the Dockerfile `RUN` command
-to use.
+### Accessing Secrets during the build
 
-For example, with a secret piece of information stored in a text file:
-
-```console
-$ echo 'WARMACHINEROX' > mysecret.txt
-```
-
-And with a Dockerfile that specifies use of a BuildKit frontend
-`docker/dockerfile:1.2`, the secret can be accessed when performing a `RUN`:
+Secrets are accessed in Dockerfiles with a `RUN --mount=type=secret,id=<id>`
+command.  The value of the secret with the given `id` will be mounted as a file
+in the file-system for the duration of that `RUN` command and will otherwise be
+invisible to the rest of the build and to uses of the image.
 
 ```dockerfile
 # syntax=docker/dockerfile:1.2
 
 FROM alpine
 
-# shows secret from default secret location:
+# Fetch secret from default secret location:
 RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret
-
-# shows secret from custom secret location:
-RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 ```
 
-The secret needs to be passed to the build using the `--secret` flag.
-This Dockerfile is only to demonstrate that the secret can be accessed. As you
+_This Dockerfile is only to demonstrate that the secret can be accessed. As you
 can see the secret printed in the build output. The final image built will not
-have the secret file:
+have the secret file._
+
+The `type=secret` and `id` parameters are mandatory but the following optional
+parameters are also available if desired:
+
+* `dst=<path>` - By default the secret file is created at `/run/secret/<id>` by
+  passing the `dst` parameter you can specify a different path.
+* `required` - By default, if no secret with the given `id` was specified for
+  the build then the secret file will still be created, but will be empty.  If
+  the mount is specified as `required` then this will instead cause the build
+  to fail.
+
+Multiple secrets may be mounted into the `RUN` command by providing multiple
+`--mount=type=secret` flags.
+
+### Providing the secret value to the build
+
+The secret value itself needs to be passed to the build using the `--secret`
+flag on `docker build`.  The secret can be retrieved from a file on disk or an
+environment variable and is associated with the `id` that the Dockerfile can
+use to access the secret during the build.
 
 ```console
-$ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt .
+$ echo "WARMACHINEROX" > mysecret.txt
+$ docker build --progress=plain --secret id=mysecret,src=mysecret.txt .
 ...
 #8 [2/3] RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret
 #8       digest: sha256:5d8cbaeb66183993700828632bfbde246cae8feded11aad40e524f54ce7438d6
@@ -176,17 +188,25 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 #8 1.081 WARMACHINEROX
 #8    completed: 2018-08-31 21:03:32.051053831 +0000 UTC
 #8     duration: 1.347502967s
-
-
-#9 [3/3] RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
-#9       digest: sha256:6c7ebda4599ec6acb40358017e51ccb4c5471dc434573b9b7188143757459efa
-#9         name: "[3/3] RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar"
-#9      started: 2018-08-31 21:03:32.052880985 +0000 UTC
-#9 1.216 WARMACHINEROX
-#9    completed: 2018-08-31 21:03:33.523282118 +0000 UTC
-#9     duration: 1.470401133s
 ...
 ```
+
+The `--secret` flag requires the `id` parameter and accepts the following
+optional parameters:
+
+* `src=<path>` - The file to read the secret value from.  This must be a path within
+  the build context and the user running `docker build` must have permission to
+  read the file.
+* `env=<name>` - The name of the environment variable to read the secret value from.
+
+If neither `src` nor `env` are passed then the builder will first check for
+an environment variable with the same name as the secret's `id`.  If that does
+not exist then it looks for a file in the current directory with the same name
+as the secret's `id`.  If neither of these checks succeeds to find a value the
+build will fail.
+
+Multiple secrets may be passed to the build by passing the `--secret` flag
+once per secret, specifying a different `id` for each one.
 
 ## Using SSH to access private data in builds
 
