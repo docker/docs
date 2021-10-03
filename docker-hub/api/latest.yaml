@@ -1192,6 +1192,9 @@ paths:
         Updates an organization's settings. Some settings are only used when the organization is on a business plan.
 
         ***Only users in the "owners" group of the organization can use this endpoint.***
+
+        The following settings are only used on a business plan:
+        - `restricted_images`
       tags: [org-settings]
       parameters:
         - in: body
