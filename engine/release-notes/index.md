@@ -22,6 +22,54 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.9
+2021-10-04
+
+This release is a security release with security fixes in the CLI, runtime, as
+well as updated versions of the containerd.io package.
+
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+
+## Client
+
+- [CVE-2021-41092](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41092)
+  Ensure default auth config has address field set, to prevent credentials being
+  sent to the default registry.
+
+## Runtime
+
+- [CVE-2021-41089](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089)
+  Create parent directories inside a chroot during `docker cp` to prevent a specially
+  crafted container from changing permissions of existing files in the host’s filesystem.
+- [CVE-2021-41091](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41091)
+  Lock down file permissions to prevent unprivileged users from discovering and
+  executing programs in `/var/lib/docker`.
+
+## Packaging
+
+> **Known issue**
+>
+> The `ctr` binary shipping with the static packages of this release is not
+> statically linked, and will not run in Docker images using alpine as a base
+> image. Users can install the `libc6-compat` package, or download a previous
+> version of the `ctr` binary as a workaround. Refer to the containerd ticket
+> related to this issue for more details: [containerd/containerd#5824](https://github.com/containerd/containerd/issues/5824).
+
+- Update Golang runtime to Go 1.16.8, which contains fixes for [CVE-2021-36221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-36221)
+  and [CVE-2021-39293](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-39293)
+- Update static binaries and containerd.io rpm and deb packages to containerd
+  v1.4.11 and runc v1.0.2 to address [CVE-2021-41103](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41103).
+- Update the bundled buildx version to v0.6.3 for rpm and deb packages.
+
 ## 20.10.8
 2021-08-03
 
@@ -35,6 +83,7 @@ for Docker Engine.
 > Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
 > to learn how to configure the Docker Daemon to use a proxy server.
 {: .important }
+
 ### Deprecation
 
 - Deprecate support for encrypted TLS private keys. Legacy PEM encryption as
