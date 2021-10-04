@@ -93,7 +93,7 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 3. Test your installation
 
     ```console
-    $ docker compose --version
+    $ docker compose version
     Docker Compose version 2.0.0
     ```
 
