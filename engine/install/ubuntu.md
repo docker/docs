@@ -16,6 +16,11 @@ title: Install Docker Engine on Ubuntu
 toc_max: 4
 ---
 
+> **Scan your images for vulnerabilities**
+>
+> Using open source components in your container images can introduce vulnerabilities. Run `docker scan` to start securing your images using Snyk. If you have a Docker Pro, Team, or a Business subscription, you can automatically scan images when you push an image to Docker Hub. See [Hub Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) for more information.
+{: .important}
+
 To get started with Docker Engine on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#installation-methods).
