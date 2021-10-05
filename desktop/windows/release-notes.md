@@ -55,7 +55,7 @@ This page contains information about the new features, improvements, known issue
 
 ### Known Issue
 
-Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distributions such as ArchWSL. See [docker/for-win#12229](https://github.com/docker/for-win/issues/12229.)
+Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distributions such as ArchWSL. See [docker/for-win#12229](https://github.com/docker/for-win/issues/12229)
 
 ## Docker Desktop 4.0.1
 2021-09-13

@@ -12,6 +12,11 @@ redirect_from:
 - /install/windows/ee-preview/
 ---
 
+> **Update to the Docker Desktop terms**
+>
+> Professional use of Docker Desktop in large organizations (more than 250 employees or more than $10 million in revenue) requires users to have a paid Docker subscription. While the effective date of these terms is August 31, 2021, there is a grace period until January 31, 2022, for those that require a paid subscription. For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement).
+{: .important}
+
 Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 
 > Download Docker Desktop for Windows
