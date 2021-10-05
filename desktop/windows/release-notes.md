@@ -26,9 +26,11 @@ This page contains information about the new features, improvements, known issue
 
 ### New
 
-- **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../#software-updates).
-- **Compose V2** You can now specify whether to use [Docker Compose V2](../../compose/cli-command.md) in the General settings.
-- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
+**Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../#software-updates).
+
+**Compose V2** You can now specify whether to use [Docker Compose V2](../../compose/cli-command.md) in the General settings.
+
+**Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../dashboard.md#explore-volumes).
 
 ### Upgrades
 
@@ -50,7 +52,11 @@ This page contains information about the new features, improvements, known issue
 - Fixed a crash on exit. See [docker/for-win#12128](https://github.com/docker/for-win/issues/12128).
 - Fixed a bug where the CLI tools would not be available in WSL 2 distros.
 - Fixed switching from Linux to Windows containers that was stuck because access rights on panic.log. See [for-win#11899](https://github.com/docker/for-win/issues/11899).
- 
+
+### Known Issue
+
+Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distributions such as ArchWSL. See [docker/for-win#12229](https://github.com/docker/for-win/issues/12229.)
+
 ## Docker Desktop 4.0.1
 2021-09-13
 
