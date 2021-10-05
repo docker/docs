@@ -42,47 +42,51 @@ To ensure that each org member uses images in a safe and secure environment, you
 
 2. Create a registry.json file on Windows or Mac.
 
-For **Windows**:
+    For **Windows**:
 
-Create a file `C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key.
+    Create a file `C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key.
 
-To create your registry.json file:
+    To create your registry.json file:
 
-- Open Windows Powershell and select Run as Administrator.
-- Type the following command: `cd /ProgramData/DockerDesktop/`
-- In notepad, type `registry.json` and enter one or more organization names in the `allowedOrgs` key and click Save.
+    1. Open Windows Powershell and select Run as Administrator.
+    2. Type the following command: `cd /ProgramData/DockerDesktop/`
+    3. In Notepad, type `registry.json` and enter one or more organization names in the `allowedOrgs` key and click Save.
 
-Example:
+        Example:
 
         ```json
-     {
-       "allowedOrgs": ["mycompany"]
-     }
-     ```
-- Navigate to Powershell and type ```start .```
+        {
+         "allowedOrgs": ["mycompany"]
+         }
+        ```
+    4. Navigate to Powershell and type ```start .```
 
-> You have just created the registry.json file.
+        Congratulations, you have just created the registry.json file.
 
-For **macOS**:
+    For **macOS**:
 
-Create a file `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop.
+    Create a file `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop.
 
-To create your registry.json file:
-- Navigate to VS Code or any text editor of your choice.
-- Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
+    To create your registry.json file:
+    1. Navigate to VS Code or any text editor of your choice.
+    2. Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
 
-Example:
+        Example:
 
        ```json
-    {
-      "allowedOrgs": ["mycompany"]
-    }
-    ```
+        {
+          "allowedOrgs": ["mycompany"]
+        }
+        ```
 
-- Open a new terminal and type the following command: `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
+    3. Open a new terminal and type the following command:
 
-> If prompted, type your password associated with your local computer.
+         `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
 
-- Type the following command:`Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
+        Note: if prompted, type your password associated with your local computer.
 
->You have just created the registry.json file.
+    4. Type the following command:
+
+        `Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
+
+        Congratulations, you have just created the registry.json file.
