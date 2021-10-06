@@ -489,6 +489,7 @@ x-aws-cloudformation:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
         Protocol: HTTPS
+        Port: 443
 ```
 
 ## Using existing AWS network resources
