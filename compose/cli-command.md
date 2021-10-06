@@ -79,7 +79,7 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 
     ```console
     $ mkdir -p ~/.docker/cli-plugins/
-    $ curl -SL https://github.com/docker/compose/releases/download/v2.0.0/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+    $ curl -SL https://github.com/docker/compose/releases/download/v2.0.0/docker-compose-linux-amd64 -o ~/.docker/cli-plugins/docker-compose
     ```
 
     This command installs Compose V2 for the active user under `$HOME` directory. To install Docker Compose for all users on your system, replace `~/.docker/cli-plugins` with `/usr/local/lib/docker/cli-plugins`.
