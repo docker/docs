@@ -981,7 +981,7 @@ The following examples show bind mount syntax:
 ### Create services using templates
 
 You can use templates for some flags of `service create`, using the syntax
-provided by the Go's [text/template](http://golang.org/pkg/text/template/)
+provided by the Go's [text/template](https://golang.org/pkg/text/template/)
 package.
 
 The following flags are supported:
