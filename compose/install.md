@@ -5,7 +5,12 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
-You can run Compose on macOS, Windows, and 64-bit Linux.
+> **Accelerating new features in Docker Desktop**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
+This page contains information on how to install Docker Compose. You can run Compose on macOS, Windows, and 64-bit Linux.
 
 ## Prerequisites
 
