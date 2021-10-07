@@ -90,3 +90,5 @@ To ensure that each org member uses images in a safe and secure environment, you
         `Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
 
         Congratulations, you have just created the registry.json file.
+
+    5. Members of your organization are now required to log into Docker Desktop using their org credentials. To confirm that the restrictions are successful, verify with each org member on their local machine.
