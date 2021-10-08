@@ -84,10 +84,6 @@ defaults:
       path: registry/spec
     values:
       edit_url: "https://github.com/docker/distribution/tree/master/docs/spec"
-  - scope:
-      path: compliance
-    values:
-      edit_url: "https://github.com/mirantis/compliance/tree/master/docs/compliance"
 
   # Hide Enterprise content from sitemap. These directories still contains stubs
   # that are needed to redirect old URLs

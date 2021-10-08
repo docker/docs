@@ -44,7 +44,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
         spec:
           containers:
           - name: bb-site
-            image: bulletinboard:1.0
+            image: getting-started
     ---
     apiVersion: v1
     kind: Service
@@ -56,8 +56,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
       selector:
         bb: web
       ports:
-      - port: 8080
-        targetPort: 8080
+      - port: 3000
+        targetPort: 3000
         nodePort: 30001
     ```
 
@@ -95,8 +95,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
     if all is well, your deployment should be listed as follows:
 
     ```shell
-    NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    bb-demo   1         1         1            1           48s
+    NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+    bb-demo   1/1     1            1           40s
     ```
 
     This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services:

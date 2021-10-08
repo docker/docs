@@ -15,6 +15,13 @@ toc_max: 2
 
 For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](windows/install.md#system-requirements).
 
+### Where does Docker Desktop get installed on my machine?
+
+By default, Docker Desktop is installed at the following location:
+
+- On Mac: `/Applications/Docker.app`
+- On Windows: `C:\Program Files\Docker\Docker`
+
 ### Do I need to pay to use Docker Desktop?
 
 Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
@@ -67,7 +74,7 @@ For more information and examples, see how to connect from a container to a serv
 We recommend that you publish a port, or connect from another container. Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 
 For more information and examples, see
-[I want to connect to a container from Mac](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
+[I want to connect to a container from Mac](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](windows/networking.md#i-want-to-connect-to-a-container-from-windows).
 
 ### How do I add custom CA certificates?
 
@@ -106,7 +113,7 @@ After updating the `settings.json` file, close and restart Docker Desktop to app
 
 ### When will Docker Desktop move to a cumulative release stream?
 
-Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](mac/install.md#automatic-updates).
+Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](mac/install.md#updates).
 
 ### How do new users install Docker Desktop?
 
@@ -232,3 +239,8 @@ For workarounds and to learn more, see
 Docker Desktop supports two types of symlinks: Windows native symlinks and symlinks created inside a container.
 
 The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){:target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
+
+### File sharing with Kubernetes and WSL 2
+
+Docker Desktop mounts the Windows host filesystem under `/run/desktop` inside the container running Kubernetes.
+See the [Stack Overflow post](https://stackoverflow.com/questions/67746843/clear-persistent-volume-from-a-kubernetes-cluster-running-on-docker-desktop/69273405#69273){:target="_blank" rel="noopener" class="_"} for an example of how to configure a Kubernetes Persistent Volume to represent directories on the host.

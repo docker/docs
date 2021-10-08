@@ -43,6 +43,10 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 
 ![Windows add Git to path](images/dev-env-gitbash.png){:width="300px"}
 
+> **Note**
+>
+> After you have installed Git, you must quit and then start Docker Desktop. From the Docker menu, select **Quit Docker Desktop**, and then start it again.
+
 ## Start a single container Dev Environment
 
 The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
@@ -58,7 +62,7 @@ The simplest way to get started with Dev Environments is to create a new environ
 
 ![Single container Dev environment](images/dev-env-container.png){:width="700px"}
 
-In the above example, the names `amazing_mclaren` and `stoic_carver` are randomly generated. You'll most likely see different names when you create your Dev Environment.
+In the above example, the names `wizardly_ellis` and `relaxed_maclaren` are randomly generated. You'll most likely see different names when you create your Dev Environment.
 
 Hover over the container and click **Open in VS Code** to start working in VS Code as usual. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
 

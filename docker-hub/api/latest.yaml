@@ -13,6 +13,7 @@ info:
   version: 'beta'
   x-logo:
     url: https://docs.docker.com/images/logo-docker-main.png
+    href: /reference
   description: |
     Docker Hub is a service provided by Docker for finding and sharing container images with your team.
     It is the world's largest library and community for container images.
@@ -82,6 +83,10 @@ tags:
     description: |
       The Audit Logs API endpoints allow you to query audit log events across a namespace.
       For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/)
+  - name: org-settings
+    x-displayName: Org Settings
+    description: |
+      The Org Settings API endpoints allow you to manage your organization's settings.
 
 x-tagGroups:
   - name: General
@@ -93,6 +98,7 @@ x-tagGroups:
       - access-tokens
       - images
       - audit-logs
+      - org-settings
 
 definitions:
   UsersLoginRequest:
@@ -646,6 +652,28 @@ definitions:
     type: object
     $ref: '#/definitions/accessToken'
 
+  orgSettings:
+    type: object
+    properties:
+      restricted_images:
+        $ref: "#/definitions/restricted_images"
+
+  restricted_images:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+        description: Whether or not to restrict image usage for users in the organization.
+        example: true
+      allow_official_images:
+        type: boolean
+        description: Allow usage of official images if "enabled" is `true`.
+        example: true
+      allow_verified_publishers:
+        type: boolean
+        description: Allow usage of verified publisher images if "enabled" is `true`.
+        example: true
+
 paths:
   /v2/users/login:
     post:
@@ -1135,16 +1163,77 @@ paths:
           type: string
       tags: [audit-logs]
 
+  /v2/orgs/{name}/settings:
+    parameters:
+      - in: path
+        name: name
+        description: Name of the organization.
+        required: true
+        type: string
+    get:
+      summary: Get organization settings
+      description: |
+        Returns organization settings by name.
+      tags: [org-settings]
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/orgSettings"
+        401:
+          $ref: "#/responses/Unauthorized"
+        403:
+          $ref: "#/responses/Forbidden"
+        404:
+          $ref: "#/responses/NotFound"
+    put:
+      summary: Update organization settings
+      description: |
+        Updates an organization's settings. Some settings are only used when the organization is on a business plan.
+
+        ***Only users in the "owners" group of the organization can use this endpoint.***
+
+        The following settings are only used on a business plan:
+        - `restricted_images`
+      tags: [org-settings]
+      parameters:
+        - in: body
+          name: request body
+          required: true
+          schema:
+            required: [restricted_images]
+            properties:
+              restricted_images:
+                allOf:
+                  - $ref: "#/definitions/restricted_images"
+                  - type: object
+                    required: [enabled, allow_official_images, allow_verified_publishers]
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/orgSettings"
+        401:
+          $ref: "#/responses/Unauthorized"
+        403:
+          $ref: "#/responses/Forbidden"
+        404:
+          $ref: "#/responses/NotFound"
+
 responses:
   BadRequest:
     description: Bad Request
     schema:
-      $ref: '#/definitions/ValueError'
+      $ref: "#/definitions/ValueError"
   Unauthorized:
     description: Unauthorized
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"
+  Forbidden:
+    description: Forbidden
+    schema:
+      $ref: "#/definitions/Error"
   NotFound:
     description: Not Found
     schema:
-      $ref: '#/definitions/Error'
+      $ref: "#/definitions/Error"

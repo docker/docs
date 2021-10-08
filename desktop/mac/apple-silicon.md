@@ -17,9 +17,8 @@ Download Docker Desktop for Mac on Apple silicon:
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
 >
-> [Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
 <br>
 
@@ -75,5 +74,3 @@ We expect to fix this in a future release.
 Your feedback is important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
 
 We also recommend that you join the [Docker Community Slack](https://www.docker.com/docker-community) and ask questions in **#docker-desktop-mac** channel.
-
-{% include eula-modal.html %}

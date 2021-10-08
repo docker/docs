@@ -80,9 +80,9 @@ We also recommend the video walkthrough from DockerCon 2020.
 This tutorial assumes you have a current version of Docker installed on your
 machine. If you do not have Docker installed, choose your preferred operating system below to download Docker:
 
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn .accept-eula }
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn .accept-eula }
-[Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn .accept-eula }
+[Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+[Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+[Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
 [Linux](../engine/install/index.md){: .button .primary-btn}
 
 For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
@@ -118,7 +118,7 @@ It gives you quick access to container logs, lets you get a shell inside the con
 easily manage container lifecycle (stop, remove, etc.).
 
 To access the dashboard, follow the instructions in the
-[Docker Desktop product manual](../desktop/dashboard.md). If you open the dashboard
+[Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 
@@ -165,4 +165,3 @@ Refer to the following topics for further documentation on all CLI commands used
 - [docker image](../engine/reference/commandline/image.md)
 - [docker container](../engine/reference/commandline/container.md)
 
-{% include eula-modal.html %}

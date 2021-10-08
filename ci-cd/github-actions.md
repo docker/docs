@@ -183,7 +183,7 @@ on:
 ```
 {% endraw %}
 
-This ensures that the main CI will only trigger if we tag our commits with `V.n.n.n.` Let’s test this. For example, run the following command:
+This ensures that the main CI will only trigger if we tag our commits with something like `v1.0.2` Let’s test this. For example, run the following command:
 
 ```console
 $ git tag -a v1.0.2
@@ -228,7 +228,7 @@ Remember to change how the image is tagged. The following example keeps ‘lates
 
 ![Update tagged images](images/ghcr-logic.png){:width="500px"}
 
-Now, we will have two different flows: one for our changes to master, and one for our pull requests. Next, we need to modify what we had before to ensure we are pushing our PRs to the GitHub registry rather than to Docker Hub.
+Now, we will have two different flows: one for our changes to master, and one for our pushed tags. Next, we need to modify what we had before to ensure we are pushing our PRs to the GitHub registry rather than to Docker Hub.
 
 ## Conclusion
 

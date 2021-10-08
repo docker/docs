@@ -91,10 +91,10 @@ To create the `docker` group and add your user:
 ## Configure Docker to start on boot
 
 Most current Linux distributions (RHEL, CentOS, Fedora, Debian, Ubuntu 16.04 and
-higher) use [`systemd`](#systemd) to manage which services start when the system
-boots. On Debian and Ubuntu, the Docker service is configured to start on boot
-by default. To automatically start Docker and Containerd on boot for other
-distros, use the commands below:
+higher) use [`systemd`](../../config/daemon/systemd.md) to manage which services
+start when the system boots. On Debian and Ubuntu, the Docker service is configured
+to start on boot by default. To automatically start Docker and Containerd on boot
+for other distros, use the commands below:
 
 ```console
 $ sudo systemctl enable docker.service

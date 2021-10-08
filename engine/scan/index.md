@@ -6,8 +6,13 @@ toc_min: 1
 toc_max: 2
 ---
 
+{% include sign-up-cta.html
+  body="You can now get 10 free scans per month as part of your Docker subscription. Sign in to Docker to start scanning your images for vulnerabilities."
+  header-text="This feature requires a Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
+%}
 
-> Looking to speed up your development cycles? Quickly detect and learn how to remediate CVEs in your images by running `docker scan IMAGE_NAME`. Check out [How to scan images](#how-to-scan-images) for details.
+Looking to speed up your development cycles? Quickly detect and learn how to remediate CVEs in your images by running `docker scan IMAGE_NAME`. Check out [How to scan images](#how-to-scan-images) for details.
 
 Vulnerability scanning for Docker local images  allows developers and development teams to review the security state of the container images and take actions to fix issues identified during the scan, resulting in more secure deployments. Docker Scan runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images.
 
@@ -335,10 +340,11 @@ If you use the `--login` flag without any token, you will be redirected to the S
 
 To run vulnerability scanning on your Docker images, you must meet the following requirements:
 
-1. Download and install Docker Desktop Edge version 2.3.6.0 or later.
+1. Download and install Docker Desktop.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+    - [Download for Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
+    - [Download for Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
+    - [Download for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)
 
 2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 

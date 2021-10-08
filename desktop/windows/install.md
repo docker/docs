@@ -12,11 +12,16 @@ redirect_from:
 - /install/windows/ee-preview/
 ---
 
+> **Update to the Docker Desktop terms**
+>
+> Professional use of Docker Desktop in large organizations (more than 250 employees or more than $10 million in revenue) requires users to have a paid Docker subscription. While the effective date of these terms is August 31, 2021, there is a grace period until January 31, 2022, for those that require a paid subscription. For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement).
+{: .important}
+
 Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 
 > Download Docker Desktop for Windows
 >
-> [Docker Desktop for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
+> [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 
 ## System requirements
 
@@ -51,7 +56,7 @@ WSL 2 on Windows 10:
 
 - Windows 10 64-bit: Pro 2004 (build 19041) or higher, or Enterprise or Education 1909 (build 18363) or higher.
 
-  For Windows 10 Home, see [System requirements for WSL 2 backend](#system-requirements-for-wsl-2-backend).
+  For Windows 10 Home, see [System requirements for WSL 2 backend](#wsl-2-backend).
 - Hyper-V and Containers Windows features must be enabled.
 - The following hardware prerequisites are required to successfully run Client
 Hyper-V on Windows 10:
@@ -68,14 +73,6 @@ Hyper-V on Windows 10:
 > **Note**
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
-
-### What's included in the installer
-
-The Docker Desktop installation includes [Docker Engine](../../engine/index.md),
-Docker CLI client, [Docker Compose](../../compose/index.md),
-[Docker Content Trust](../../engine/security/trust/index.md),
-[Kubernetes](https://github.com/kubernetes/kubernetes/),
-and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
@@ -134,7 +131,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
     > If you do not agree to the updated terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
     {: .important}
 
-    For more information, see [Docker Desktop License Agreement](/subscription/#docker-desktop-license-agreement).
+    For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 
 ### Quick Start Guide
 

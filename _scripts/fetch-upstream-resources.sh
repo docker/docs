@@ -27,7 +27,6 @@ svn co "https://github.com/docker/cli/${engine_svn_branch}/docs/extend"         
 svn co "https://github.com/docker/docker/${engine_svn_branch}/docs/api"              ./engine/api    || (echo "Failed engine/api download" && exit 1)
 svn co "https://github.com/docker/compose-cli/${compose_cli_svn_branch}/docs"        ./cloud         || (echo "Failed compose-cli/docs download" && exit 1)
 svn co "https://github.com/distribution/distribution/${distribution_svn_branch}/docs/spec" ./registry/spec || (echo "Failed registry/spec download" && exit 1)
-svn co "https://github.com/mirantis/compliance/trunk/docs/compliance"                ./compliance    || (echo "Failed docker/compliance download" && exit 1)
 
 # Fix up URls in swagger files
 find ./engine/api -type f -name '*.yaml' | while read i; do sed -i 's#https://docs.docker.com/#/#g' "$i"; done;
@@ -47,5 +46,5 @@ wget --quiet --directory-prefix=./registry/                     "https://raw.git
 rm -f ./engine/extend/cli_plugins.md # the cli plugins api is not a stable API, and not included in the TOC for that reason.
 rm -f ./registry/spec/api.md.tmpl
 rm -f ./cloud/README.md # readme to make things nice in the compose-cli repo, but meaningless here
-rm -f ./cloud/architecure.md # Compose-CLI architecture, unrelated to cloud integration
+rm -f ./cloud/architecture.md # Compose-CLI architecture, unrelated to cloud integration
 rm -rf ./cloud/images

@@ -16,6 +16,11 @@ title: Install Docker Engine on Ubuntu
 toc_max: 4
 ---
 
+> **Scan your images for vulnerabilities**
+>
+> Using open source components in your container images can introduce vulnerabilities. Run `docker scan` to start securing your images using Snyk. If you have a Docker Pro, Team, or a Business subscription, you can automatically scan images when you push an image to Docker Hub. See [Hub Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) for more information.
+{: .important}
+
 To get started with Docker Engine on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#installation-methods).
@@ -28,7 +33,6 @@ To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
 - Ubuntu Hirsute 21.04
-- Ubuntu Groovy 20.10
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
 
@@ -125,50 +129,11 @@ from the repository.
     >  `Linux Mint Tessa`, you could use `bionic`. Docker does not offer any guarantees on untested
     > and unsupported Ubuntu distributions.
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
-      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">s390x</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
     ```console
     $ echo \
-      "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
-
-    </div>
-    <div id="armhf_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    <div id="arm64_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    <div id="s390x_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=s390x signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    </div> <!-- tab-content -->
 
 #### Install Docker Engine
 

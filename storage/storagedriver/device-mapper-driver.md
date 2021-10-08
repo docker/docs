@@ -71,7 +71,7 @@ For production systems, see
     ```
 
     See all storage options for each storage driver in the
-    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 
     Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
@@ -178,7 +178,7 @@ options in the table above.
 ```
 
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 
 Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
@@ -431,7 +431,7 @@ If you run into repeated problems with thin pool, you can set the storage option
 `/etc/docker/daemon.json`. For instance, setting it to `10` ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
-[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#storage-driver-options){: target="_blank" rel="noopener" class="_"}.
+[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#daemon-storage-driver){: target="_blank" rel="noopener" class="_"}.
 
 ### Increase capacity on a running device
 

@@ -40,7 +40,7 @@ This section explains the configuration options accessible from the **Settings**
 
 On the **General** tab of the Settings dialog, you can configure when to start and update Docker.
 
-![Settings](../mac/images/menu/prefs-general.png){:width="750px"}
+![Settings](images/settings-general.png){:width="750px"}
 
 - **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
 
@@ -58,14 +58,14 @@ troubleshoot the application. Clear the check box to opt out. Docker may periodi
 
 - **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
+- **Use Docker Compose V2**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/cli-command.md).
+
 ### Resources
 
-The **Resources** tab allows you to configure CPU, memory, disk, proxies, 
-network, and other resources. Different settings are available for 
-configuration depending on whether you are using Linux containers in WSL 2 
+The **Resources** tab allows you to configure CPU, memory, disk, proxies,
+network, and other resources. Different settings are available for
+configuration depending on whether you are using Linux containers in WSL 2
 mode, Linux containers in Hyper-V mode, or Windows containers.
-
-![Resources](images/settings-resources.png){:width="750px"}
 
 #### Advanced
 
@@ -74,7 +74,8 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 > The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
 > Windows container mode these resources are managed by Windows. In WSL 2 
 > mode, you can configure limits on the memory, CPU, and swap size allocated
-> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank"
+class="_"}.
 
 Use the **Advanced** tab to limit resources available to Docker.
 
@@ -270,6 +271,12 @@ that you can test deploying your Docker workloads on Kubernetes. To enable Kuber
 
 For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
+### Software Updates
+
+The Software Updates section notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+
+If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+
 ### Reset
 
 The **Restart Docker Desktop** and **Reset to factory defaults** options are now available on the **Troubleshoot** menu. For information, see [Logs and Troubleshooting](troubleshoot.md).
@@ -304,7 +311,7 @@ For more information on Windows containers, refer to the following documentation
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see
-  [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
+  [I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows)
 
 > Settings dialog changes with Windows containers
 >
@@ -313,7 +320,7 @@ For more information on Windows containers, refer to the following documentation
 
   * [General](#general)
   * [Proxies](#proxies)
-  * [Daemon](#docker-daemon)
+  * [Daemon](#docker-engine)
   * [Reset](#reset)
 
 If you set proxies or daemon configuration in Windows containers mode, these

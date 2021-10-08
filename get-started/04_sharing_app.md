@@ -17,9 +17,7 @@ registry. The default registry is Docker Hub and is where all of the images we'v
 
 To push an image, we first need to create a repository on Docker Hub.
 
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} and share images using Docker Hub.
-
-2. Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
+1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} or Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
 
 2. Click the **Create Repository** button.
 
