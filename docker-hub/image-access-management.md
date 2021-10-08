@@ -2,14 +2,24 @@
 description: Image Access Management
 keywords: image, access, management
 title: Image Access Management
+toc_max: 2
 ---
 
 Image Access Management is a new feature that is a part of the Docker Business subscription. This feature allows Organization owners to control which types of images (Docker Official Images, Docker Verified Publisher Images, Community images) their developers can pull from Docker Hub.
 
 For example, a developer, who is part of an organization, building a new containerized application could accidentally use an untrusted, community image as a component of their application. This image could be malicious and pose a security risk to the company. Using Image Access Management, the Organization owner could ensure that the developer can only access trusted content like Docker Official Images, Docker Verified Publisher Images, or the Organization’s own images, preventing such a risk.
 
-
 ## Configure Image Access Management permissions
+
+The following video walks you through the process of configuring Image Access Management permissions.
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+
+### Detailed instructions
+
+To configure Image Access Management permissions, perform the following steps:
 
 1. Log into your [Docker Hub](https://hub.docker.com) account as an organization administrator.
 2. Select an organization, and navigate to the **Settings** tab on the **Organizations** page and click Org Permissions.

@@ -16,9 +16,9 @@ title: Install Docker Engine on Ubuntu
 toc_max: 4
 ---
 
-> **Scan your images for vulnerabilities**
+> **Docker Desktop for Linux**
 >
-> Using open source components in your container images can introduce vulnerabilities. Run `docker scan` to start securing your images using Snyk. If you have a Docker Pro, Team, or a Business subscription, you can automatically scan images when you push an image to Docker Hub. See [Hub Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) for more information.
+> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 {: .important}
 
 To get started with Docker Engine on Ubuntu, make sure you

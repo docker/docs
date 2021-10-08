@@ -578,6 +578,12 @@ the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 
+> **Note**:
+>
+> If another container binds the volumes with
+> `--volumes-from`, the volume definitions are _copied_ and the 
+> anonymous volume also stays after the first container is removed.
+  
 ### Remove all volumes
 
 To remove all unused volumes and free up space:
