@@ -23,8 +23,8 @@ if [ "${compose_cli_svn_branch}" = "branches/main" ]; then
 fi
 
 # Directories to get via SVN. We use this because you can't use git to clone just a portion of a repository
-svn co "https://github.com/docker/cli/${engine_svn_branch}/docs/extend"              	   ./engine/extend || (echo "Failed engine/extend download" && exit 1)
-svn co "https://github.com/docker/docker/${engine_svn_branch}/docs/api"              	   ./engine/api    || (echo "Failed engine/api download" && exit 1)
+svn co "https://github.com/docker/cli/${engine_svn_branch}/docs/extend"                    ./engine/extend || (echo "Failed engine/extend download" && exit 1)
+svn co "https://github.com/docker/docker/${engine_svn_branch}/docs/api"                    ./engine/api    || (echo "Failed engine/api download" && exit 1)
 svn co "https://github.com/docker/compose-cli/${compose_cli_svn_branch}/docs"              ./cloud         || (echo "Failed compose-cli/docs download" && exit 1)
 svn co "https://github.com/distribution/distribution/${distribution_svn_branch}/docs/spec" ./registry/spec || (echo "Failed registry/spec download" && exit 1)
 
