@@ -518,26 +518,6 @@ reference:
         title: docker checkpoint ls
       - path: /engine/reference/commandline/checkpoint_rm/
         title: docker checkpoint rm
-    - sectiontitle: docker cluster
-      section:
-        - path: /engine/reference/commandline/cluster/
-          title: docker cluster
-        - path: /engine/reference/commandline/cluster_backup/
-          title: docker cluster backup
-        - path: /engine/reference/commandline/cluster_create/
-          title: docker cluster create
-        - path: /engine/reference/commandline/cluster_inspect/
-          title: docker cluster inspect
-        - path: /engine/reference/commandline/cluster_ls/
-          title: docker cluster ls
-        - path: /engine/reference/commandline/cluster_restore/
-          title: docker cluster restore
-        - path: /engine/reference/commandline/cluster_rm/
-          title: docker cluster rm
-        - path: /engine/reference/commandline/cluster_update/
-          title: docker cluster update
-        - path: /engine/reference/commandline/cluster_version/
-          title: docker cluster version
     - path: /engine/reference/commandline/commit/
       title: docker commit
     - sectiontitle: docker compose
