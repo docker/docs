@@ -17,13 +17,27 @@ redirect_from:
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-## Docker Desktop 4.1.0
-2021-09-30
+## Docker Desktop 4.1.1
+2021-10-12
 
 > Download Docker Desktop
 >
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+
+### Bug fixes and minor changes
+
+- Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. If a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
+- Fixed update notification overlay sometimes getting out of sync between the Settings button and the Software update button in the Dashboard.
+- Fixed menu entry to install a downloaded new Desktop update. When an update is ready to install `Restart` should change to `Update and restart`.
+
+## Docker Desktop 4.1.0
+2021-09-30
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/69386/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/69386/Docker.dmg)
 
 ### New
 
