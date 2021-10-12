@@ -30,11 +30,12 @@ If you are using these build environment variables in a
 service's environment as shown below.
 
 ```none
-sut:
-  build: .
-  command: run_tests.sh
-  environment:
-    - SOURCE_BRANCH
+services:
+  sut:
+    build: .
+    command: run_tests.sh
+    environment:
+      - SOURCE_BRANCH
 ```
 
 
