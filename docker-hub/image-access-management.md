@@ -91,4 +91,11 @@ To ensure that each org member uses images in a safe and secure environment, you
 
         Congratulations, you have just created the registry.json file.
 
-    5. Members of your organization are now required to log into Docker Desktop using their org credentials. To confirm that the restrictions are successful, verify with each org member on their local machine.
+    5. Members of your organization are now required to log into Docker Desktop using their org credentials. To confirm that the restrictions are successful, enable the Image Access Management feature and verify with each org member on their local machine.
+
+    > **Note**:
+    >
+    > Each member can test the restrictions by pulling an image from Hub
+    onto their local machine. If you have enabled the restrictions in Hub, your
+    member can pull the image. If you disable the restrictions in Hub,
+    an error message will display, and your member is denied the pull access.
