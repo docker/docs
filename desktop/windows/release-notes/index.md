@@ -17,12 +17,25 @@ redirect_from:
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 4.1.1
+2021-10-12
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+
+### Bug fixes and minor changes
+
+- Fixed a regression in WSL 2 integrations for some distros (e.g. Arch or Alpine). Fixes [docker/for-win#12229](https://github.com/docker/for-win/issues/12229)
+- Fixed update notification overlay sometimes getting out of sync between the Settings button and the Software update button in the Dashboard.
+
+
 ## Docker Desktop 4.1.0
 2021-09-30
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> [For Windows](https://desktop.docker.com/win/main/amd64/69386/Docker%20Desktop%20Installer.exe)
 
 ### New
 
