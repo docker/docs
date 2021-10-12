@@ -191,7 +191,7 @@ Docker.app connects to it, so it's safe to ignore.
 
 Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 
-### Why is Windows 10 required?
+### Why is Windows 10 or Windows 11 required?
 
 Docker Desktop uses the Windows Hyper-V features. While older Windows versions have Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop to work.
 
