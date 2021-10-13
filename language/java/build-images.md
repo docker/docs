@@ -18,7 +18,6 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Java OpenJDK version 15 or later. [Download and install Java](https://jdk.java.net/){: target="_blank" rel="noopener" class="_"}
 - Docker running locally. Follow the instructions to [download and install Docker](../../get-docker.md)
 - A Git client
 - An IDE or a text editor to edit files. We recommend using [IntelliJ Community Edition](https://www.jetbrains.com/idea/download/){: target="_blank" rel="noopener" class="_"}.
@@ -33,7 +32,17 @@ $ git clone https://github.com/spring-projects/spring-petclinic.git
 $ cd spring-petclinic
 ```
 
-## Test the application
+## Test the application without Docker (optional)
+
+In this step, we will test the application locally without Docker, before we
+continue with building and running the application with Docker. This section
+requires you to have Java OpenJDK version 15 or later installed on your machine.
+[Download and install Java](https://jdk.java.net/){: target="_blank" rel="noopener" class="_"}
+
+If you prefer to not install Java on your machine, you can skip this step, and
+continue straight to the next section, in which we explain how to build and run
+the application in Docker, which does not require you to have Java installed on
+your machine.
 
 Let’s start our application and make sure it is running properly. Maven will manage all the project processes (compiling, tests, packaging, etc). The **Spring Pets Clinic** project we cloned earlier contains an embedded version of Maven. Therefore, we don't need to install Maven separately on your local machine.
 
@@ -54,9 +63,15 @@ o.s.s.petclinic.PetClinicApplication     : Started
 PetClinicApplication in 11.743 seconds (JVM running for 12.364)
 ```
 
-## Create a Dockerfile for Java
+Great! We verified that the application works. At this stage, you've completed
+testing the server script locally.
 
-Now that our application is running properly, let’s take a look at creating a Dockerfile.
+Press `CTRL-c` from within the terminal session where the server is running to stop it.
+
+
+We will now continue to build and run the application in Docker.
+
+## Create a Dockerfile for Java
 
 {% include guides/create-dockerfile.md %}
 
@@ -69,28 +84,38 @@ we would like to use for our application.
 FROM openjdk:16-alpine3.13
 ```
 
-Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Maven image with Java JDK that already has all the tools and packages that we need to run a Java application.
+Docker images can be inherited from other images. For this guide, we use the
+official `openjdk` image from Docker Hub with Java JDK that already has all the
+tools and packages that we need to run a Java application.
 
-> **Note**
->
-> To learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
-
-To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.
+To make things easier when running the rest of our commands, let’s set the image's
+working directory. This instructs Docker to use this path as the default location
+for all subsequent commands. By doing this, we do not have to type out full file
+paths but can use relative paths based on the working directory.
 
 ```dockerfile
 WORKDIR /app
 ```
 
-Usually, the very first thing you do once you’ve downloaded a project written in Java which is using Maven for project management is to install dependencies.
+Usually, the very first thing you do once you’ve downloaded a project written in
+Java which is using Maven for project management is to install dependencies.
 
-Before we can run `mvnw dependency`, we need to get the Maven wrapper and our `pom.xml` file into our image. We’ll use the `COPY` command to do this. The `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy all those files and directories into our working directory - `/app`.
+Before we can run `mvnw dependency`, we need to get the Maven wrapper and our
+`pom.xml` file into our image. We’ll use the `COPY` command to do this. The
+`COPY` command takes two parameters. The first parameter tells Docker what
+file(s) you would like to copy into the image. The second parameter tells Docker
+where you want that file(s) to be copied to. We’ll copy all those files and
+directories into our working directory - `/app`.
 
 ```dockerfile
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 ```
 
-Once we have our `pom.xml` file inside the image, we can use the `RUN` command to execute the command `mvnw dependency:go-offline`. This works exactly the same way as if we were running `mvnw` (or mvn) dependency locally on our machine, but this time the dependencies will be installed into the image.
+Once we have our `pom.xml` file inside the image, we can use the `RUN` command
+to execute the command `mvnw dependency:go-offline`. This works exactly the same
+way as if we were running `mvnw` (or `mvn`) dependency locally on our machine,
+but this time the dependencies will be installed into the image.
 
 ```dockerfile
 RUN ./mvnw dependency:go-offline
