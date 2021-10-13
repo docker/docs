@@ -475,7 +475,7 @@ examines how much room they take up.
     > consumed by a container's writable layer, it does not include information
     > about metadata and log-files stored for each container.
     >
-    > More details can be obtained my exploring the Docker Daemon's storage location
+    > More details can be obtained by exploring the Docker Daemon's storage location
     > (`/var/lib/docker` by default).
     >
     > ```console
