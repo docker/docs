@@ -172,5 +172,5 @@ To uninstall Docker Desktop from your Windows machine:
 * [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](../faqs.md) provide answers to frequently asked questions.
-* [Release notes]( release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+* [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 * [Back up and restore data](../backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.

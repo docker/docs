@@ -322,7 +322,7 @@ You can nest captures within each other to represent more complex logic with Liq
 
 This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline with a class defined in _scss/_night-mode.css (and incorporated into style.css): `img.white-bg { background-color: white; }`.
 
-![alt_text](machine/img/provision-use-case.png){: .white-bg}
+![alt_text](https://github.com/docker/docker.github.io/blob/423f6d58b2f301d01163241099f0346f2ecf1019/machine/img/provision-use-case.png){: .white-bg}
 
 ## Bootstrap and CSS tricks
 

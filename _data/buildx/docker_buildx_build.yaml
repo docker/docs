@@ -580,7 +580,7 @@ examples: |-
   [related Dockerfile extensions](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/experimental.md#run---securityinsecuresandbox).
 
   For entitlements to be enabled, the `buildkitd` daemon also needs to allow them
-  with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](buildx_create.md#--buildkitd-flags-flags))
+  with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](buildx_create.md#buildkitd-flags))
 
   **Examples**
 
