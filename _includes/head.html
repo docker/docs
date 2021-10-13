@@ -107,6 +107,6 @@
   <meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
   <meta property="og:site_name" content="Docker Documentation" />
   <meta property="article:published_time" itemprop="datePublished" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":{{ page.title | default: page_title | jsonify }},"description":{{ page.description | default: page_description | jsonify }},"url":"https://docs.docker.com{{ page.url }}"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":{{ page.title | default: page_title | jsonify }},"description":{{ page.description | default: page_description | jsonify }},"url":"https://docs.docker.com{{ page.url }}"}</script>
   <!-- END SEO STUFF -->
 </head>

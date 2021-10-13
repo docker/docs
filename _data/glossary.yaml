@@ -4,13 +4,13 @@
 aufs: |
   aufs (advanced multi layered unification filesystem) is a Linux [filesystem](#filesystem) that
   Docker supports as a storage backend. It implements the
-  [union mount](http://en.wikipedia.org/wiki/Union_mount) for Linux file systems.
+  [union mount](https://en.wikipedia.org/wiki/Union_mount) for Linux file systems.
 base image: |
   A **base image** has no parent image specified in its Dockerfile. It is created
   using a Dockerfile with the `FROM scratch` directive.
 btrfs: |
   btrfs (B-tree file system) is a Linux [filesystem](#filesystem) that Docker
-  supports as a storage backend. It is a [copy-on-write](http://en.wikipedia.org/wiki/Copy-on-write)
+  supports as a storage backend. It is a [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write)
   filesystem.
 build: |
   build is the process of building Docker images using a [Dockerfile](#dockerfile).
@@ -170,7 +170,7 @@ Machine: |
 
   *Also known as : docker-machine*
 namespace: |
-  A [Linux namespace](http://man7.org/linux/man-pages/man7/namespaces.7.html)
+  A [Linux namespace](https://man7.org/linux/man-pages/man7/namespaces.7.html)
   is a Linux kernel feature that isolates and virtualizes system resources. Processes which are restricted to
   a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
   are an important part of Docker's isolation model. Namespaces exist for each type of
@@ -189,7 +189,7 @@ overlay network driver: |
   for docker containers in a cluster.
 overlay storage driver: |
   OverlayFS is a [filesystem](#filesystem) service for Linux which implements a
-  [union mount](http://en.wikipedia.org/wiki/Union_mount) for other file systems.
+  [union mount](https://en.wikipedia.org/wiki/Union_mount) for other file systems.
   It is supported by the Docker daemon as a storage driver.
 parent image: |
   An image's **parent image** is the image designated in the `FROM` directive

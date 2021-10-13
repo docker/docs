@@ -7,7 +7,7 @@ description: Tips for building the images for our application
 ## Security scanning
 
 When you have built an image, it is a good practice to scan it for security vulnerabilities using the `docker scan` command.
-Docker has partnered with [Snyk](http://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
+Docker has partnered with [Snyk](https://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
 
 > **Note**
 > 
