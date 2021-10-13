@@ -19,7 +19,7 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 
 Before you install the Docker Desktop WSL 2 backend, you must complete the following steps:
 
-1. Install Windows 10, version 1903 or higher.
+1. Install Windows 10, version 1903 or higher or Windows 11.
 2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 
