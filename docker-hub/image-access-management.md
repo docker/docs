@@ -91,7 +91,7 @@ To ensure that each org member uses images in a safe and secure environment, you
 
         Congratulations, you have just created the registry.json file.
 
-3. To confirm that the restrictions are successful, have each org member pull an image onto their local computer after signing into Docker Desktop. If they are unable to sign-in they will recieve an error message.
+3. To confirm that the restrictions are successful, have each org member pull an image onto their local computer after signing into Docker Desktop. If they are unable to sign in, they will receive an error message.
 
     For example, if you enable Image Access Management, your members can pull an Organization Image, Docker Official Image, or Verified Publisher Image onto their local machine. If you disable the restrictions, your members can pull any image, including Community Images.
 
