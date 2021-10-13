@@ -4,7 +4,8 @@ description: Learn how to create and manage your personal Docker Hub access toke
 keywords: docker hub, hub, security, PAT, personal access token
 ---
 
-Docker Hub lets you create personal access tokens as alternatives to your password. The  [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} lets you interact with the [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) where you can use your personal access tokens to access Hub images.
+Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to 
+access Hub images from the Docker CLI.
 
 Using personal access tokens provides some advantages over a password:
 
@@ -12,8 +13,12 @@ Using personal access tokens provides some advantages over a password:
   it if you find any suspicious activity.
 * When using an access token, you can't perform any admin activity on the account,
   including changing the password. It protects your account if your computer is compromised.
+  
+Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"}
+tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse 
+through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
 
->**Important**
+> **Important**
 >
 > Treat access tokens like your password and keep them secret. Store your
 > tokens securely (for example, in a credential manager).
@@ -23,7 +28,7 @@ Access tokens are valuable for building integrations, as you can issue
 multiple tokens &ndash; one for each integration &ndash; and revoke them at
 any time.
 
-   >**Note**
+   > **Note**
    >
    > If you have [two-factor authentication (2FA)](2fa/index.md) enabled on
    > your account, you must create at least one personal access token. Otherwise,
@@ -60,7 +65,7 @@ can not delete the repository.
     | Scoped Personal Access Tokens  | |![yes](/images/green-check.svg)|   ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
     | Unlimited Personal Access Tokens   |      |       |  ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
 
-      You can create 1 access token as part of the Docker Personal subscription, 5 tokens as part of Docker Pro, and Unlimited tokens as part of Docker Team and Business subscriptions.
+      *You can create 1 access token as part of the Docker Personal subscription, 5 tokens as part of Docker Pro, and Unlimited tokens as part of Docker Team and Business subscriptions.
       For more information, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
 
 6. Copy the token that appears on the screen and save it. You will not be able
