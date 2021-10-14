@@ -27,6 +27,8 @@ This page contains information about the new features, improvements, known issue
 
 ### Bug fixes and minor changes
 
+When upgrading from 4.1.0, **the menu does not change to "Update and restart"** so you can just wait for the download to complete (icon changes) and then select "restart". This bug is fixed (below) in 4.1.1, for future upgrades.
+
 - Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. If a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
 - Fixed update notification overlay sometimes getting out of sync between the Settings button and the Software update button in the Dashboard.
 - Fixed menu entry to install a downloaded new Desktop update. When an update is ready to install `Restart` should change to `Update and restart`.
