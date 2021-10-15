@@ -62,10 +62,10 @@ If `/sys/fs/cgroup/cgroup.controllers` is present on your system, you are using 
 otherwise you are using v1.
 Refer to the subsection that corresponds to your cgroup version.
 
-> **Note**
->
-> As of 2020, Fedora is the only well-known Linux distributon that uses cgroup v2 by default.
-> Fedora uses cgroup v2 by default since Fedora 31.
+cgroup v2 is used by default on the following distributions:
+- Fedora (since 31)
+- Debian GNU/Linux (since 11)
+- Ubuntu (since 21.10)
 
 #### cgroup v1
 You can look into `/proc/cgroups` to see the different control group subsystems
