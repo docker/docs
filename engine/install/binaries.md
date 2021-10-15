@@ -12,18 +12,24 @@ redirect_from:
 > **Important**
 >
 > This page contains information on how to install Docker using binaries. These
-instructions are mostly suitable for testing purposes. We do not recommend
-installing Docker using binaries in production environments as they will not be
-updated automatically with security updates. The Linux binaries described on this
-page are statically linked, which means that vulnerabilities in build-time
-dependencies are not automatically patched by security updates of your Linux
-distribution.
+> instructions are mostly suitable for testing purposes. We do not recommend
+> installing Docker using binaries in production environments as they will not be
+> updated automatically with security updates. The Linux binaries described on this
+> page are statically linked, which means that vulnerabilities in build-time
+> dependencies are not automatically patched by security updates of your Linux
+> distribution.
 >
-> Updating binaries is also slightly more involved when compared to Docker packages installed using a package manager or through Docker Desktop, as it requires (manually) updating the installed version whenever there is a new release of Docker.
+> Updating binaries is also slightly more involved when compared to Docker packages
+> installed using a package manager or through Docker Desktop, as it requires
+> (manually) updating the installed version whenever there is a new release of
+> Docker.
 >
-> Also, static binaries may not include all functionalities provided by the dynamic packages.
+> Also, static binaries may not include all functionalities provided by the dynamic
+> packages.
 >
-> On Windows and Mac, we recommend that you install [Docker Desktop](../../desktop/index.md) instead. For Linux, we recommend that you follow the instructions specific for your distribution.
+> On Windows and Mac, we recommend that you install [Docker Desktop](../../desktop/index.md)
+> instead. For Linux, we recommend that you follow the instructions specific for
+> your distribution.
 {: .important}
 
 If you want to try Docker or use it in a testing environment, but you're not on
@@ -135,18 +141,20 @@ instructions for enabling and configuring AppArmor or SELinux.
 
 > **Note**
 >
-> The following instructions are mostly suitable for testing purposes. The macOS binary includes the Docker client only. It does not include the
-`dockerd` daemon which is required to run containers. Therefore, we recommend that you install [Docker Desktop](../../desktop/index.md) instead.
+> The following instructions are mostly suitable for testing purposes. The macOS
+> binary includes the Docker client only. It does not include the `dockerd` daemon
+> which is required to run containers. Therefore, we recommend that you install
+> [Docker Desktop](../../desktop/index.md) instead.
 
 The binaries for Mac also do not contain:
 
--  A runtime environment. You must set up a functional engine either in a VM, or on a remote Linux machine.
+- A runtime environment. You must set up a functional engine either in a Virtual Machine, or on a remote Linux machine.
 - Docker components such as `buildx`, `docker scan`, and `docker compose`.
 
 To install client binaries, perform the following steps:
 
 1.  Download the static binary archive. Go to
-    [https://download.docker.com/mac/static/stable/](https://download.docker.com/mac/static/stable/) and select x86_64 (for Mac on Intel chip) or aarch64 (for Mac on Apple silicon),
+    [https://download.docker.com/mac/static/stable/](https://download.docker.com/mac/static/stable/) and select `x86_64` (for Mac on Intel chip) or `aarch64` (for Mac on Apple silicon),
     and then download the `.tgz` file relating to the version of Docker Engine you want
     to install.
 
@@ -192,9 +200,15 @@ To install client binaries, perform the following steps:
 
 > **Note**
 >
-> The following section describes how to install the Docker daemon on Windows Server which allows you to run Windows containers only. The binaries for Windows do not contain Docker components such as `buildx`, `docker scan`, and `docker compose`. If you are running Windows 10 or 11, we recommend that you install [Docker Desktop](../../desktop/index.md).
+> The following section describes how to install the Docker daemon on Windows
+> Server which allows you to run Windows containers only. The binaries for
+> Windows do not contain Docker components such as `buildx`, `docker scan`, and
+> `docker compose`. If you are running Windows 10 or 11, we recommend that you
+> install [Docker Desktop](../../desktop/index.md) instead.
 
-Binary packages on Windows include both `dockerd.exe` and `docker.exe`. On Windows, these binaries only provide the ability to run native Windows containers (not Linux containers).
+Binary packages on Windows include both `dockerd.exe` and `docker.exe`. On Windows,
+these binaries only provide the ability to run native Windows containers (not
+Linux containers).
 
 To install server and client binaries, perform the following steps:
 
