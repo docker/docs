@@ -379,12 +379,13 @@ image. The basic rules that Docker follows are outlined below:
   of the child images is sufficient. However, certain instructions require more
   examination and explanation.
 
-- For the `ADD` and `COPY` instructions, the contents of the file(s)
-  in the image are examined and a checksum is calculated for each file.
-  The last-modified and last-accessed times of the file(s) are not considered in
-  these checksums. During the cache lookup, the checksum is compared against the
-  checksum in the existing images. If anything has changed in the file(s), such
-  as the contents and metadata, then the cache is invalidated.
+- For the `ADD` and `COPY` instructions, the last-modified time of the file(s)
+  in the image is considered first. If the last-modified time has changed, 
+  the contents of the file(s) in the image are examined. A checksum is calculated
+  for each file. The last-modified and last-accessed times of the file(s) are not
+  considered in these checksums. During the cache lookup, the checksum is compared
+  against the checksum in the existing images. If anything has changed in the file(s),
+  such as the contents and metadata, then the cache is invalidated.
 
 - Aside from the `ADD` and `COPY` commands, cache checking does not look at the
   files in the container to determine a cache match. For example, when processing
