@@ -226,7 +226,7 @@ The image could be built as follows:
 $ docker build --ssh default .
 ```
 
-As with `--mount=type=secret`, you can specify an `id` to differentiate sockets.
+As with `--mount=type=secret`, you can specify an `id` if you want to use multiple sockets per build and want to differentiate them.
 For example, you could run `docker build --ssh main=$SSH_AUTH_SOCK --ssh other=$OTHER_SSH_AUTH_SOCK`.
 In your `Dockerfile`, you could then have a `RUN --mount=type=ssh,id=main` and a `RUN --mount=type=ssh,id=other` to use those two sockets.
 If a `--mount=type=ssh` doesn't specify an `id`, `default` is assumed.
