@@ -25,9 +25,10 @@ contains the Dockerfile used to build the image.
 For example:
 
 ```none
-sut:
-  build: .
-  command: run_tests.sh
+services:
+  sut:
+    build: .
+    command: run_tests.sh
 ```
 
 The example above builds the repository, and runs the `run_tests.sh` file inside
@@ -37,10 +38,8 @@ You can define any number of linked services in this file. The only requirement
 is that `sut` is defined. Its return code determines if tests passed or not.
 Tests **pass** if the `sut` service returns `0`, and **fail** otherwise.
 
-> **Note**: Only the `sut` service and all other services listed in `depends_on`
-are started. For instance, if you have services that poll for changes in other
-services, be sure to include the polling services in the `depends_on` list to
-make sure all of your services start.
+> **Note**: Only the `sut` service and all other services listed in [`depends_on`](https://docs.docker.com/compose/compose-file/compose-file-v2/#depends_on) are started. For instance, if you have services that poll for changes in other services, be sure to include the polling services in the [`depends_on`](https://docs.docker.com/compose/compose-file/compose-file-v2/#depends_on) list to make sure all of your services start.
+Also make sure to include a compose file version from 2.0 upward as `depends_on` was added in [version 2.0](https://docs.docker.com/compose/compose-file/compose-versioning/#version-2) file format.
 
 You can define more than one `docker-compose.test.yml` file if needed. Any file
 that ends in `.test.yml` is used for testing, and the tests run sequentially.
