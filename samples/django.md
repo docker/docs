@@ -75,12 +75,6 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        image: postgres
        volumes:
          - ./data/db:/var/lib/postgresql/data
-       environment:
-         - POSTGRES_NAME=postgres
-         - POSTGRES_USER=postgres
-         - POSTGRES_PASSWORD=postgres
-         - POSTGRES_HOST=db
-         - POSTGRES_PORT=5432
      web:
        build: .
        command: python manage.py runserver 0.0.0.0:8000
@@ -88,6 +82,10 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
          - .:/code
        ports:
          - "8000:8000"
+       environment:
+         - POSTGRES_NAME=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
        depends_on:
          - db
    ```
@@ -182,8 +180,8 @@ In this section, you set up the database connection for Django.
            'NAME': os.environ.get('POSTGRES_NAME'),
            'USER': os.environ.get('POSTGRES_USER'),
            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-           'HOST': os.environ.get('POSTGRES_HOST'),
-           'PORT': os.environ.get('POSTGRES_PORT'),
+           'HOST': 'db',
+           'PORT': 5432,
        }
    }
    ```
