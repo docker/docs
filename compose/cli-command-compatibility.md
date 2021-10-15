@@ -20,7 +20,7 @@ Let us know if these commands are a higher priority for your use cases.
 The list below includes the flags that we are not planning to support in Compose in the Docker CLI,
 either because they are already deprecated in `docker-compose`, or because they are not relevant for Compose in the Docker CLI.
 
-* The usage of `compose ps --filter KEY=VALUE` is strongly discouraged in v2. Although `--filter` option remains available, the functionality behind this option is only partly ported. In v2 the only supported filter `KEY` is `status`. However, you are strongly encouraged to migrate to a new option `--status`, which mirrors `--filter status=xx` functionality in v2. Support for `KEY` `source` (`--filter source=[image|build]`) has been dropped, due to its complicated usage with the `service` command and also because it is not documented properly in `docker-compose`. There is no alternative in `compose ps` v2 for filtering by `source`.
+* The usage of `compose ps --filter KEY=VALUE` is discouraged in v2. Although `--filter` option remains available, the functionality behind this option is only partly ported. In v2, the only supported filter `KEY` is `status`. However, we recommend that you migrate to a new option `--status`, which mirrors `--filter status=xx` functionality in v2. Support for `KEY` `source` (`--filter source=[image|build]`) has been dropped, due to its complicated usage with the `service` command and also because it is not documented properly in `docker-compose`. There is no alternative in `compose ps` v2 for filtering by `source`.
 * `compose rm --all` Deprecated in docker-compose.
 * `compose scale` Deprecated in docker-compose (use `compose up --scale` instead)
 
