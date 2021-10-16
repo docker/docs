@@ -211,7 +211,7 @@ Next, change your Docker Hub login to a GitHub container registry login:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 
