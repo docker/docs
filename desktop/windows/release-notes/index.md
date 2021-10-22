@@ -29,7 +29,6 @@ This page contains information about the new features, improvements, known issue
 - Fixed a regression in WSL 2 integrations for some distros (e.g. Arch or Alpine). Fixes [docker/for-win#12229](https://github.com/docker/for-win/issues/12229)
 - Fixed update notification overlay sometimes getting out of sync between the Settings button and the Software update button in the Dashboard.
 
-
 ## Docker Desktop 4.1.0
 2021-09-30
 
