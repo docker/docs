@@ -65,7 +65,7 @@ $ docker run -dp 3000:3000 \
   sh -c "yarn install && yarn run dev"
 ```
 
-If you are using PowerShell then use this command:
+If you were using PowerShell, then you were using this command:
 
 ```powershell
 PS> docker run -dp 3000:3000 `
@@ -171,7 +171,7 @@ $ docker run -d \
   mysql:5.7
 ```
 
-If you are using PowerShell then use this command:
+If you were using PowerShell, then you used this command:
 
 ```powershell
 PS> docker run -d `
