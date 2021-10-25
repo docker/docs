@@ -22,6 +22,44 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.10
+2021-10-25
+
+> **IMPORTANT**
+>
+> Due to [net/http changes](https://github.com/golang/go/issues/40909) in [Go 1.16](https://golang.org/doc/go1.16#net/http),
+> HTTP proxies configured through the `$HTTP_PROXY` environment variable are no
+> longer used for TLS (`https://`) connections. Make sure you also set an `$HTTPS_PROXY`
+> environment variable for handling requests to `https://` URLs.
+>
+> Refer to the [HTTP/HTTPS proxy section](../../config/daemon/systemd.md#httphttps-proxy)
+> to learn how to configure the Docker Daemon to use a proxy server.
+{: .important }
+
+
+### Builder
+
+- Fix platform-matching logic to fix `docker build` using not finding images in
+  the local image cache on Arm machines when using BuildKit [moby/moby#42954](https://github.com/moby/moby/pull/42954)
+
+## Runtime
+
+- Add support for `clone3` syscall in the default seccomp policy to support running
+  containers based on recent versions of Fedora and Ubuntu. [moby/moby/#42836](https://github.com/moby/moby/pull/42836).
+- Windows: update hcsshim library to fix a bug in sparse file handling in container
+  layers, which was exposed by recent changes in Windows [moby/moby#42944](https://github.com/moby/moby/pull/42944).
+- Fix some situations where `docker stop` could hang forever [moby/moby#42956](https://github.com/moby/moby/pull/42956).
+
+### Swarm
+
+- Fix an issue where updating a service did not roll back on failure [moby/moby#42875](https://github.com/moby/moby/pull/42875).
+
+## Packaging
+
+- Add packages for Ubuntu 21.10 "Impish Indri" and Fedora 35.
+- Update `docker scan` to v0.9.0
+- Update Golang runtime to Go 1.16.9.
+
 ## 20.10.9
 2021-10-04
 
