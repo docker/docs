@@ -27,9 +27,11 @@ Options:
   -p, --project-name NAME     Specify an alternate project name
                               (default: directory name)
   --profile NAME              Specify a profile to enable
+  -c, --context NAME          Specify a context name
   --verbose                   Show more output
   --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-  --no-ansi                   Do not print ANSI control characters
+  --ansi (never|always|auto)  Control when to print ANSI control characters
+  --no-ansi                   Do not print ANSI control characters (DEPRECATED)
   -v, --version               Print version and exit
   -H, --host HOST             Daemon socket to connect to
 
@@ -43,7 +45,8 @@ Options:
   --project-directory PATH    Specify an alternate working directory
                               (default: the path of the Compose file)
   --compatibility             If set, Compose will attempt to convert deploy
-                              keys in v3 files to their non-Swarm equivalent
+                              keys in v3 files to their non-Swarm equivalent (DEPRECATED)
+  --env-file PATH             Specify an alternate environment file
 
 Commands:
   build              Build or rebuild services
