@@ -26,4 +26,4 @@ either because they are already deprecated in `docker-compose`, or because they 
 
 Global flags:
 
-* `compose --compatibility` Deprecated in docker-compose.
+* `compose --compatibility` Supported in Compose V2 (`docker compose`) but deprecated in Compose V1 (`docker-compose`).
