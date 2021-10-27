@@ -101,7 +101,7 @@ You can view the confirmation of the upgrade with an invoice containing details 
 
 ## Update billing information
 
-You must be on owner of the organization to make changes to the billing information.
+You must be an owner of the organization to make changes to the billing information.
 
 To update the billing information for your organization or personal account:
 
