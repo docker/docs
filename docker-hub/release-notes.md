@@ -9,6 +9,12 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+## 2021-10-27
+
+### New
+
+* **Beta:** Try [Beta](https://www.docker.com/blog/beta-ipv6-support-on-docker-hub-registry/) IPv6 support for Docker Hub Registry and provide your [feedback](https://github.com/docker/hub-feedback/issues/2165).
+
 ## 2021-08-31
 
 ### New
@@ -71,8 +77,7 @@ For more information about this feature and for instructions on how to use it, s
 
 ### New feature
 
-The **Repositories** view now shows which images have gone stale because they haven't been 
-pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
+The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
 
 # 2020-10-07
 
