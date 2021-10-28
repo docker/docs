@@ -13,7 +13,7 @@ known issues for each Docker Hub release.
 
 ### New
 
-* **Beta:** Try [Beta](https://www.docker.com/blog/beta-ipv6-support-on-docker-hub-registry/) IPv6 support for Docker Hub Registry and provide your [feedback](https://github.com/docker/hub-feedback/issues/2165).
+* **Beta:** Try [Beta IPv6 support for Docker Hub Registry](https://www.docker.com/blog/beta-ipv6-support-on-docker-hub-registry/) and [provide your feedback](https://github.com/docker/hub-feedback/issues/2165).
 
 ## 2021-08-31
 
