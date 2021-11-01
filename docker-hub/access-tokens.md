@@ -37,6 +37,12 @@ any time.
 
 ## Create an access token
 
+The following video walks you through the process of Managing Access Tokens.
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=Qs5xGj85Aek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br>
+
 You can create as many tokens as you need.
 
 1. Log in to [hub.docker.com](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
