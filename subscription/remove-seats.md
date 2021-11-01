@@ -14,7 +14,7 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 
 > **Note:**
 >
-> - You must be a member of the ‘Owners’ team to remove seats from your organization.
+> You must be a member of the ‘Owners’ team to remove seats from your organization.
 
 To remove seats from a monthly or an annual subscription:
 
