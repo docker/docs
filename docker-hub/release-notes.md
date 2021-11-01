@@ -9,12 +9,6 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
-## 2021-10-27
-
-### New
-
-* **Beta:** Try [Beta IPv6 support for Docker Hub Registry](https://www.docker.com/blog/beta-ipv6-support-on-docker-hub-registry/) and [provide your feedback](https://github.com/docker/hub-feedback/issues/2165).
-
 ## 2021-08-31
 
 ### New
