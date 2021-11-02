@@ -17,6 +17,38 @@ redirect_from:
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
+## Docker Desktop 4.2.0
+2021-11-xx
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](??: .button .primary-btn }
+> [Mac with Apple chip](??: .button .primary-btn }
+
+### New
+- **Pause/Resume**: Docker Desktop can be paused/resumed. For more information, see [Docker Pause](https://docs.docker.com/go/desktop-pause/).
+
+### Upgrades
+
+- [Docker Engine v20.10.9](https://docs.docker.com/engine/release-notes/#20109)
+- [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
+- [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
+- [Go 1.17.2](https://golang.org/doc/go1.17)
+- [Compose CLI v2.0.1](https://github.com/docker/compose-cli/tree/v2)
+- docker-scan 0.9.0
+
+### Bug fixes and minor changes
+
+- Improved UI: All update related settings are moved to update section and now also available for free tier users.
+- Improved UI: Dashboard window size/position is persited/restored on closing/opening [for-mac#5847](https://github.com/docker/for-mac/issues/5847).
+- Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
+- Removed: Interruptive update popup to inform users about a new Docker Desktop version.
+- Fixed position of update available indicator in dashboard window header.
+- Fixed Docker Desktop sometimes hanging when clicking Exit in the fatal error dialog.
+- Fixed rare startup failure when a `docker volume` is bind-mounted on top of a directory mounted from the host. We now unconditionally remove any `DENY DELETE` ACL entries found on the host directory corresponding to the `docker volume` mountpoint in the VM.
+- Fixed bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. Note that if a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
+
+
 ## Docker Desktop 4.1.1
 2021-10-12
 
