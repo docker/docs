@@ -37,7 +37,7 @@ any time.
 
 ## Create an access token
 
-The following video walks you through the process of Managing Access Tokens.
+The following video walks you through the process of managing access tokens.
 
 <iframe width="560" height="315" src="https://www.youtube.com/watch?v=Qs5xGj85Aek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
