@@ -33,8 +33,6 @@ and more.
 Choose the Docker menu ![whale menu](images/whale-x.png){: .inline} > **Preferences** from the
 menu bar and configure the runtime options described below.
 
-![Docker context menu](images/menu/prefs.png){:width="250px"}
-
 ### General
 
 ![Preferences](images/menu/prefs-general.png){:width="750px"}
@@ -227,13 +225,20 @@ For information about the reset options, see [Logs and Troubleshooting](troubles
 
 ### Software Updates
 
-The Software Updates section notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
+The **Software Updates** section notifies you of any updates available to Docker Desktop. When there's a new update, you can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
 
-If you are on a Docker Team or a Business subscription, you can turn off the check for updates by clearing the **Automatically Check for Updates** checkbox in the [General](#general) settings. This will also disable the notification badge that appears on the Docker Dashboard.
+> **Disable automatic check for updates**
+>
+> Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. Update to [Docker Desktop 4.2.0](../mac/release-notes/index.md) to start using this feature.
+{: .important}
+
+Turn off the check for updates by clearing the **Automatically Check for Updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+
+To allow Docker Desktop to automatically download new updates in the background, select **Always download updates**. This downloads newer versions of Docker Desktop when an update becomes available. After downloading the update, click **Apply and Restart** to install the update. You can do this either through the Docker menu or in the **Updates** section in the Docker Dashboard.
 
 ## Dashboard
 
-The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
+The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Dashboard](../dashboard.md).
 
 ## Add TLS certificates
 
@@ -403,19 +408,6 @@ $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion
 $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
 
-## Give feedback and get help
-
-To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker Desktop for Mac
-forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}.
-
-To report bugs or problems, log on to Docker Desktop [for Mac issues on
-GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"},
-where you can review community reported issues, and file new ones.  See
-[Logs and Troubleshooting](troubleshoot.md) for more details.
-
-For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
-
 ## Docker Hub
 
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
@@ -443,6 +435,35 @@ After you have enabled two-factor authentication:
 ![Docker Desktop 2FA](images/desktop-mac-2fa.png){:width="500px"}
 
 After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
+
+## Pause/Resume
+
+Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
+
+From the Docker menu, select ![whale menu](images/whale-x.png){: .inline} > **Pause** to pause Docker Desktop.
+
+![Docker context menu](images/menu/prefs.png){:width="250px"}
+
+Docker Desktop now displays the paused status on the Docker menu and on the  **Containers / Apps**, **Images**, **Volumes**, and **Dev Environment** screens on the Docker Dashboard. You can still access the **Preferences** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
+
+Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
+
+> **Note**
+>
+> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
+
+## Give feedback and get help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker Desktop for Mac
+forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}.
+
+To report bugs or problems, log on to Docker Desktop [for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"},
+where you can review community reported issues, and file new ones.  See
+[Logs and Troubleshooting](troubleshoot.md) for more details.
+
+For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
 
 ## Where to go next
 
