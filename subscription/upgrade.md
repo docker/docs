@@ -23,13 +23,13 @@ To purchase a Docker subscription:
 
    > **Note**
    >
-   > If you do not have a subscription, navigate to Organizations and click **Create  Organization**. Proceed with the on screen instructions and click **Continue to Payment**.
+   > If you do not have an organization, navigate to Organizations and click **Create  Organization**. Proceed with the on screen instructions and click **Continue to Payment**.
 
 3. Complete the on-screen instructions.
 
     > **Note**
     >
-    >If you have a Business subscription, 5  is the maximum number of users you can add using a credit card and 40 users for purchase orders. If you want to create a purchase order, update the field for the users and click Contact Sales to complete the contact sales form.
+    >If you have a Business subscription, 5 is the maximum number of users you can add using a credit card and 40 users for purchase orders. If you want to create a purchase order, update the field for the users and click Contact Sales to complete the contact sales form.
 
 4. To complete your subscription, click **Purchase**.
 
