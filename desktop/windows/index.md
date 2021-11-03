@@ -381,7 +381,11 @@ After you have successfully authenticated, you can access your organizations and
 
 Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
 
-To pause Docker Desktop, right-click the Docker icon in the notifications area (or System tray) and then click **Pause** .
+> **Note**
+>
+> The Pause/Resume feature is currently not available in the Windows containers mode.
+
+To pause Docker Desktop, right-click the Docker icon in the notifications area (or System tray) and then click **Pause**.
 
 ![Docker Desktop popup menu](images/docker-menu-settings.png){:width="300px"}
 
