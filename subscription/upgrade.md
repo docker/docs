@@ -17,28 +17,21 @@ The following section contains information on how to purchase a Docker  subscrip
 
 To purchase a Docker subscription:
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account and click **Upgrade**.
 
-2. Open the drop-down menu next to your username in the top-right corner and select **Billing** to go to the **Billing Details** page. This page displays billing information about your existing user account.
+2. Select your subscription and click **Buy Now**.
 
    > **Note**
    >
-   > Ensure you have selected the correct account on the left side of the
-   **Billing Details** page. For example, if you want to purchase a Docker
-   Pro subscription, you must select your personal account.
+   > If you do not have a subscription, navigate to Organizations and click **Create  Organization**. Proceed with the on screen instructions and click **Continue to Payment**.
 
-3. Click **Change plan** and navigate to the pricing page to purchase a subscription and follow the on-screen instructions to purchase.
+3. Complete the on-screen instructions.
 
     > **Note**
     >
-    > You can select from the following options: Pro, Team, or Business
-    subscription. The annual subscription is set by default. Select **Pay
-    Monthly**  to change to a monthly subscription.
+    >If you have a Business subscription, 5  is the maximum number of users you can add using a credit card and 40 users for purchase orders. If you want to create a purchase order, update the field for the users and click Contact Sales to complete the contact sales form.
 
-4. If you are purchasing a Team subscription, provide the organization details and click **Continue to Org Size**. Review your Team subscription and click **Continue to Payment**.
-
-    You can also specify the number of users you’d like to add to your
-    organization.
+4. To complete your subscription, click **Purchase**.
 
 5. You will receive an email confirming your subscription.
 
@@ -47,13 +40,11 @@ To purchase a Docker subscription:
     You can view the information about your new subscription on the
     **Billing** page.
 
-## Purchase Docker Business
-
-The Docker Business subscription is currently available to purchase through the Docker Sales team. To purchase a Docker Business subscription, [Contact Sales](https://www.docker.com/pricing/contact-sales){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
-
 ## Upgrade your subscription
 
-To upgrade to a Pro or Team:
+To upgrade from a Personal or Pro subscription to a Team or Business subscription you must first convert your personal namespace to an organization namespace. To learn more, see [convert an account into an organization](../docker-hub/convert-account.md).
+
+To upgrade to a Pro or Team or Business subscription:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
@@ -94,7 +85,10 @@ To upgrade from a monthly subscription to an annual subscription:
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner or with your personal account.
 2. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
 3. Select your personal account or organization from the left-hand menu and select the **Payment Methods** tab.
-4. Click **switch to annual billing**.
+4. Click **switch to annual billing**
+
+    If you have a business subscription, it is available for annual billing only.
+
 5. Review the information displayed on the **Change to an Annual subscription** page and click **Accept Terms and Purchase** to confirm.
 
 You can view the confirmation of the upgrade with an invoice containing details about your new subscription, entitlements, and the total cost on the **Billing** page.
