@@ -109,7 +109,7 @@ blockquote {
 
     &.warning {
       @include notification(
-        $bg-color: $red-10,
+        $bg-color: #FEEFEF, // Hardcoding this variable temporary till we migrate to the new color pallette
         $header-color: $red-50,
         $body-text-color: inherit,
         $icon: "\f06a"
