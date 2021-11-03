@@ -22,26 +22,25 @@ This page contains information about the new features, improvements, known issue
 
 > Download Docker Desktop
 >
-> [For Windows](?: .button .primary-btn }
+> [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
 
 ### New
-- **Pause/Resume**: Docker Desktop can be paused/resumed. For more information, see [Docker Pause](https://docs.docker.com/go/desktop-pause/).
+- **Pause/Resume**: Save your battery with Docker Pause / Resume! For more information, see [Docker Pause](https://docs.docker.com/go/desktop-pause/).
+- **Software Updates**: More clear settings section as all update related settings are moved to update section and now also available for free tier users. The update popup to prompt for a new version has been removed.
+- **Window Management**: Dashboard window size/position is persisted/restored on closing/opening.
 
 ### Upgrades
 
-- [Docker Engine v20.10.9](https://docs.docker.com/engine/release-notes/#20109)
+- [Docker Engine v20.10.10](https://docs.docker.com/engine/release-notes/#201010)
 - [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)
-- [Compose CLI v2.0.1](https://github.com/docker/compose-cli/tree/v2)
+- [Compose CLI v2.1.0](https://github.com/docker/compose-cli/tree/v1.0.18)
 - docker-scan 0.9.0
 
 ### Bug fixes and minor changes
 
-- Improved UI: All update related settings are moved to update section and now also available for free tier users.
-- Improved UI: Dashboard window size/position is persited/restored on closing/opening.
 - Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
-- Removed: Interruptive update popup to inform users about a new Docker Desktop version.
 - Fixed position of update available indicator in dashboard window header.
 - Fixed Docker Desktop sometimes hanging when clicking Exit in the fatal error dialog.
 - Fixed download update popup coming back every day when an update has been downloaded but not applied yet [docker/for-win#12188](https://github.com/docker/for-win/issues/12188).
@@ -54,7 +53,7 @@ This page contains information about the new features, improvements, known issue
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> [For Windows](https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
