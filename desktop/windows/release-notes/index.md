@@ -25,9 +25,10 @@ This page contains information about the new features, improvements, known issue
 > [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
 
 ### New
-- **Pause/Resume**: Save your battery with Docker Pause / Resume! For more information, see [Docker Pause](https://docs.docker.com/go/desktop-pause/).
-- **Software Updates**: More clear settings section as all update related settings are moved to update section and now also available for free tier users. The update popup to prompt for a new version has been removed.
-- **Window Management**: Dashboard window size/position is persisted/restored on closing/opening.
+
+- **Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. For more information, see [Pause/Resume](../index.md#pauseresume).
+- **Software Updates**: The option to turn off automatic check for updates is now available for users on all Docker subscriptions, including Docker Personal and Docker Pro. All update-related settings have been moved to the **Software Updates** section. For more information, see [Software updates](../index.md#software-updates).
+- **Window management**: The Docker Dashboard window size and position persists when you close and reopen Docker Desktop.
 
 ### Upgrades
 
@@ -36,14 +37,14 @@ This page contains information about the new features, improvements, known issue
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)
 - [Compose CLI v2.1.0](https://github.com/docker/compose-cli/tree/v1.0.18)
-- docker-scan 0.9.0
+- [docker-scan 0.9.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.9.0)
 
 ### Bug fixes and minor changes
 
 - Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
-- Fixed position of update available indicator in dashboard window header.
+- Fixed the position of the indicator that displays the availability of an update on the Docker Dashboard.
 - Fixed Docker Desktop sometimes hanging when clicking Exit in the fatal error dialog.
-- Fixed download update popup coming back every day when an update has been downloaded but not applied yet [docker/for-win#12188](https://github.com/docker/for-win/issues/12188).
+- Fixed an issue that frequently displayed the **Download update** popup when an update has been downloaded but hasn't been applied yet [docker/for-win#12188](https://github.com/docker/for-win/issues/12188).
 - Fixed installing a new update killing the application before it has time to shut down.
 - Fixed: Installation of Docker Desktop now works even with group policies preventing users to start prerequisite services (e.g. LanmanServer) [docker/for-win#12291](https://github.com/docker/for-win/issues/12291).
 

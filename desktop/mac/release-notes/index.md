@@ -26,9 +26,10 @@ This page contains information about the new features, improvements, known issue
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
 ### New
-- **Pause/Resume**: Save your battery with Docker Pause / Resume! For more information, see [Docker Pause](https://docs.docker.com/go/desktop-pause/).
-- **Software Updates**: More clear settings section as all update related settings are moved to update section and now also available for free tier users. The update popup to prompt for a new version has been removed.
-- **Window Management**: Dashboard window size/position is persisted/restored on closing/opening.
+
+- **Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. For more information, see [Pause/Resume](../index.md#pauseresume).
+- **Software Updates**: The option to turn off automatic check for updates is now available for users on all Docker subscriptions, including Docker Personal and Docker Pro. All update-related settings have been moved to the **Software Updates** section. For more information, see [Software updates](../index.md#software-updates).
+- **Window management**: The Docker Dashboard window size and position persists when you close and reopen Docker Desktop.
 
 ### Upgrades
 
@@ -37,13 +38,13 @@ This page contains information about the new features, improvements, known issue
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)
 - [Compose CLI v2.1.0](https://github.com/docker/compose-cli/tree/v1.0.18)
-- docker-scan 0.9.0
+- [docker-scan 0.9.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.9.0)
 
 ### Bug fixes and minor changes
 
 - Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
-- Fixed position of update available indicator in dashboard window header.
-- Fixed Docker Desktop sometimes hanging when clicking Exit in the fatal error dialog.
+- Fixed the position of the indicator that displays the availability of an update on the Docker Dashboard.
+- Fixed an issue that caused Docker Desktop to stop responding upon clicking **Exit** on the fatal error dialog.
 - Fixed rare startup failure when a `docker volume` is bind-mounted on top of a directory mounted from the host. We now unconditionally remove any `DENY DELETE` ACL entries found on the host directory corresponding to the `docker volume` mountpoint in the VM.
 - Fixed bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. Note that if a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
 
