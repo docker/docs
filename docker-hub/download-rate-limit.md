@@ -78,7 +78,7 @@ Which should return headers including these:
 ```http
 ratelimit-limit: 100;w=21600
 ratelimit-remaining: 76;w=21600
-docker-rateLimit-source: 82.92.134.25
+docker-rateLimit-source: 192.0.2.1
 ```
 
 This means my limit is 100 pulls per 21600 seconds (6 hours), I have 76 pulls remaining and I am limited on the ip 82.92.134.25.
