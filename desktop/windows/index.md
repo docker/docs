@@ -38,11 +38,9 @@ This section explains the configuration options accessible from the **Settings**
 
 ### General
 
-On the **General** tab of the Settings dialog, you can configure when to start and update Docker.
+On the **General** tab, you can configure when to start Docker and specify other settings.
 
-![Settings](../mac/images/menu/prefs-general.png){:width="750px"}
-
-- **Automatically check for updates**: By default, Docker Desktop is configured to check for newer versions automatically. If you have installed Docker Desktop as part of an organization, you may not be able to update Docker Desktop yourself. In that case, [upgrade your existing organization to a Team plan](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) and clear this checkbox to disable the automatic check for updates.
+![Settings](/images/settings-general.png){:width="750px"}
 
 - **Start Docker when you log in**: Select this option to automatically start Docker Desktop when you log into your Windows machine.
 
