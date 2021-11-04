@@ -94,6 +94,7 @@ If you are authenticated, it will show your `accountID`.
 You can compare this `accountID` with the one associated with your account by requesting the docker Hub API:
 ```http
 https://hub.docker.com/v2/users/<namespace>/
+```
 
 ### I don't see any RateLimit headers
 
