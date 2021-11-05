@@ -37,7 +37,7 @@ This page contains information about the new features, improvements, known issue
 - [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)
-- [Compose CLI v2.1.0](https://github.com/docker/compose-cli/tree/v1.0.18)
+- [Compose CLI v2.1.0](https://github.com/docker/compose-cli/tree/v1.0.20)
 - [docker-scan 0.9.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.9.0)
 
 ### Bug fixes and minor changes
@@ -45,8 +45,9 @@ This page contains information about the new features, improvements, known issue
 - Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
 - Fixed the position of the indicator that displays the availability of an update on the Docker Dashboard.
 - Fixed an issue that caused Docker Desktop to stop responding upon clicking **Exit** on the fatal error dialog.
-- Fixed rare startup failure when a `docker volume` is bind-mounted on top of a directory mounted from the host. We now unconditionally remove any `DENY DELETE` ACL entries found on the host directory corresponding to the `docker volume` mountpoint in the VM.
-- Fixed bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. Note that if a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
+- Fixed a rare startup failure affecting users having a `docker volume` bind-mounted on top of a directory from the host. If existing, this fix will also remove manually user added `DENY DELETE` ACL entries on the corresponding host directory.
+- Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. Note that if a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
+- Fixed a bug where subprocesses could fail unexpectedly during shutdown, triggering an unexpected fatal error popup.
 
 
 ## Docker Desktop 4.1.1
