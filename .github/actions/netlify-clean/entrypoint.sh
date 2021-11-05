@@ -28,6 +28,10 @@ echo "searching site ${site_name}"
 clean_site_name=$(slug $site_name)
 site_id=$(get_site_id $clean_site_name)
 
-echo "deleting site"
+if [ -z "$site_id" ]; then
+  echo "site already deleted"
+else
+  echo "deleting site"
 
-netlify sites:delete --force "${site_id}"
+  netlify sites:delete --force "${site_id}"
+fi
