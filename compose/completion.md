@@ -38,8 +38,8 @@ available.
    For example, place the completion script in `/usr/local/etc/bash_completion.d/`.
 
    ```console
-   $ sudo curl \
-       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose \
+   $ sudo curl -s \
+       -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose \
        -o /usr/local/etc/bash_completion.d/docker-compose
    ```
 
@@ -90,8 +90,8 @@ plugins=(... docker docker-compose)
 
    ```console
    $ mkdir -p ~/.zsh/completion
-   $ curl \
-       -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/zsh/_docker-compose \
+   $ curl -s \
+       -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/zsh/_docker-compose \
        -o ~/.zsh/completion/_docker-compose
    ```
 
