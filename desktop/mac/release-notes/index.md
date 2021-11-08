@@ -18,7 +18,7 @@ redirect_from:
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
 ## Docker Desktop 4.2.0
-2021-11-xx
+2021-11-08
 
 > Download Docker Desktop
 >
