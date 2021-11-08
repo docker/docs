@@ -36,7 +36,7 @@ This page contains information about the new features, improvements, known issue
 - [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)
-- [Compose CLI v2.1.0](https://github.com/docker/compose-cli/tree/v1.0.20)
+- [Compose CLI v2.1.1](https://github.com/docker/compose-cli/tree/v1.0.21)
 - [docker-scan 0.9.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.9.0)
 
 ### Bug fixes and minor changes
