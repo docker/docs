@@ -91,7 +91,8 @@ This header will show what source was used to limit you. It can help answer ques
 If you are not authenticated, it will show your IP address.
 If you are authenticated, it will show your `accountID`.
 
-You can compare this `accountID` with the one associated with your account by requesting the docker Hub API:
+You can compare this `accountID` with the ID associated with your account by requesting the Docker Hub API:
+
 ```http
 https://hub.docker.com/v2/users/<namespace>/
 ```
