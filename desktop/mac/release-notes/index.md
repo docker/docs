@@ -47,7 +47,7 @@ This page contains information about the new features, improvements, known issue
 - Fixed an issue that caused Docker Desktop to stop responding upon clicking **Exit** on the fatal error dialog.
 - Fixed a rare startup failure affecting users having a `docker volume` bind-mounted on top of a directory from the host. If existing, this fix will also remove manually user added `DENY DELETE` ACL entries on the corresponding host directory.
 - Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. Note that if a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
-- Fixed a bug where subprocesses could fail unexpectedly during shutdown, triggering an unexpected fatal error popup.
+- Fixed a bug where subprocesses could fail unexpectedly during shutdown, triggering an unexpected fatal error popup. Fixes [docker/for-mac#5834](https://github.com/docker/for-mac/issues/5834).
 
 
 ## Docker Desktop 4.1.1
