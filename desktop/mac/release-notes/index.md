@@ -17,13 +17,46 @@ redirect_from:
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
 
-## Docker Desktop 4.1.1
-2021-10-12
+## Docker Desktop 4.2.0
+2021-11-09
 
 > Download Docker Desktop
 >
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+
+### New
+
+- **Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. For more information, see [Pause/Resume](../index.md#pauseresume).
+- **Software Updates**: The option to turn off automatic check for updates is now available for users on all Docker subscriptions, including Docker Personal and Docker Pro. All update-related settings have been moved to the **Software Updates** section. For more information, see [Software updates](../index.md#software-updates).
+- **Window management**: The Docker Dashboard window size and position persists when you close and reopen Docker Desktop.
+
+### Upgrades
+
+- [Docker Engine v20.10.10](https://docs.docker.com/engine/release-notes/#201010)
+- [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
+- [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
+- [Go 1.17.2](https://golang.org/doc/go1.17)
+- [Compose CLI v2.1.1](https://github.com/docker/compose/releases/tag/v2.1.1)
+- [docker-scan 0.9.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.9.0)
+
+### Bug fixes and minor changes
+
+- Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
+- Fixed the position of the indicator that displays the availability of an update on the Docker Dashboard.
+- Fixed an issue that caused Docker Desktop to stop responding upon clicking **Exit** on the fatal error dialog.
+- Fixed a rare startup failure affecting users having a `docker volume` bind-mounted on top of a directory from the host. If existing, this fix will also remove manually user added `DENY DELETE` ACL entries on the corresponding host directory.
+- Fixed a bug where a `Docker.qcow2` file would be ignored on upgrade and a fresh `Docker.raw` used instead, resulting in containers and images disappearing. Note that if a system has both files (due to the previous bug) then the most recently modified file will be used, to avoid recent containers and images disappearing again. To force the use of the old `Docker.qcow2`, delete the newer `Docker.raw` file. Fixes [docker/for-mac#5998](https://github.com/docker/for-mac/issues/5998).
+- Fixed a bug where subprocesses could fail unexpectedly during shutdown, triggering an unexpected fatal error popup. Fixes [docker/for-mac#5834](https://github.com/docker/for-mac/issues/5834).
+
+
+## Docker Desktop 4.1.1
+2021-10-12
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/69879/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/69879/Docker.dmg)
 
 ### Bug fixes and minor changes
 
