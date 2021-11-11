@@ -24,7 +24,7 @@ To run an image inside of a container, we use the `docker run` command. The `doc
 $ docker run node-docker
 ```
 
-When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without return control back to the OS until we stop the container.
+When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
 Let’s open a new terminal then make a GET request to the server using the curl command.
 
