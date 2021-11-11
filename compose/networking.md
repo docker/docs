@@ -167,8 +167,8 @@ services:
     build: .
     ports:
       - "8000:8000"
- db:
-   image: postgres
+  db:
+    image: postgres
 
 networks:
   default:
