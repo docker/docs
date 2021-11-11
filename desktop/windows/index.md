@@ -69,8 +69,8 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 
 > **Note**
 >
-> The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and 
-> Windows container mode these resources are managed by Windows. In WSL 2 
+> The Advanced tab is only available in Hyper-V mode, because Windows manages
+> the resources in WSL 2 mode and Windows container mode. In WSL 2
 > mode, you can configure limits on the memory, CPU, and swap size allocated
 > to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank"
 class="_"}.
@@ -78,11 +78,11 @@ class="_"}.
 Use the **Advanced** tab to limit resources available to Docker.
 
 - **CPUs**: By default, Docker Desktop is set to use half the number of processors
-available on the host machine. To increase processing power, set this to a
-higher number; to decrease, lower the number.
+available on the host machine. To increase the processing power, set this to a
+higher number. To decrease the processing power, set this to a lower number.
 
 - **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
-allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
+allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease the RAM, lower the number.
 
 - **Swap**: Configure swap file size as needed. The default is 1 GB.
 
@@ -96,8 +96,8 @@ You can also move the disk image to a different location. If you attempt to move
 
 > **Note**
 >
-> The File sharing tab is only available in Hyper-V mode, because in WSL 2 mode 
-> and Windows container mode all files are automatically shared by Windows.
+> The File sharing tab is only available in Hyper-V mode because the files
+> are automatically shared in WSL 2 mode and Windows container mode.
 
 Use File sharing to allow local directories on Windows to be shared with Linux containers.
 This is especially useful for
@@ -127,7 +127,7 @@ File share settings are:
  * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
    This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 >
- * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
+ * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux, it is possible to create two separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
 
 #### Shared folders on demand
 
@@ -137,7 +137,7 @@ If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified folder.
 
-You can select to **Share it**, in which case it is added your Docker Desktop Shared Folders list and available to
+You can select to **Share it**, in which case it is added to your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 ![Shared folder on demand](images/shared-folder-on-demand.png){:width="600px"}
@@ -169,8 +169,8 @@ see [Set environment variables](/engine/reference/commandline/run/#set-environme
 
 > **Note**
 >
-> The Network tab is not available in Windows container mode because networking is 
-> managed by Windows.
+> The Network tab is not available in the Windows container mode because
+> Windows manages networking.
 
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
@@ -377,7 +377,7 @@ After you have successfully authenticated, you can access your organizations and
 
 ## Pause/Resume
 
-Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
+Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine will be paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
 
 > **Note**
 >

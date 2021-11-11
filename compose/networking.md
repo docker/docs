@@ -92,7 +92,7 @@ See the [links reference](compose-file/compose-file-v2.md#links) for more inform
 
 ## Multi-host networking
 
-When deploying a Compose application on an Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
 you can make use of the built-in `overlay` driver to enable multi-host communication.
 
 Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
@@ -167,8 +167,8 @@ services:
     build: .
     ports:
       - "8000:8000"
- db:
-   image: postgres
+  db:
+    image: postgres
 
 networks:
   default:

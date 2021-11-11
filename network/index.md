@@ -52,6 +52,11 @@ exist by default, and provide core networking functionality:
   This strategy removes the need to do OS-level routing between these
   containers. See [overlay networks](overlay.md).
 
+- `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6
+  addressing. The VLAN driver builds on top of that in giving operators complete
+  control of layer 2 VLAN tagging and even IPvlan L3 routing for users
+  interested in underlay network integration. See [IPvlan networks](ipvlan.md).
+
 - `macvlan`: Macvlan networks allow you to assign a MAC address to a container,
   making it appear as a physical device on your network. The Docker daemon
   routes traffic to containers by their MAC addresses. Using the `macvlan`

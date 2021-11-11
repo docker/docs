@@ -190,7 +190,7 @@ tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 
 ```console
-$ pip install docker-compose
+$ pip3 install docker-compose
 ```
 
 If you are not using virtualenv,

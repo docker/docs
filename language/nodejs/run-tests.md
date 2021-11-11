@@ -49,9 +49,7 @@ Now let’s test our application by POSTing a JSON payload and then make an HTTP
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
-  --data '{
-	"msg": "testing"
-}'
+  --data '{"msg": "testing"}'
 ```
 
 Now, perform a GET request to the same endpoint to make sure our JSON payload was saved and retrieved correctly. The “id” and “createDate” will be different for you.
