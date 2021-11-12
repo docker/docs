@@ -9,6 +9,7 @@ redirect_from:
 - /machine/RELEASE/
 - /machine/completion/
 - /machine/concepts/
+- /machine/drivers/
 - /machine/drivers/aws/
 - /machine/drivers/azure/
 - /machine/drivers/digital-ocean/
