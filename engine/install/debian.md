@@ -99,13 +99,6 @@ from the repository.
     **nightly** or **test** repository, add the word `nightly` or `test` (or both)
     after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
 
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Debian distribution, such as `helium`. Sometimes, in a distribution
-    > like BunsenLabs Linux, you might need to change `$(lsb_release -cs)`
-    > to your parent Debian distribution. For example, if you are using
-    >  `BunsenLabs Linux Helium`, you could use `stretch`. Docker does not offer any guarantees on untested
-    > and unsupported Debian distributions.
-
     ```console
     $ echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
