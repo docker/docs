@@ -57,12 +57,14 @@ To upgrade your subscription:
      >
      > Click **Create Organization** if you want to add another organization to your subscription. Click Buy Now to proceed with the on-screen instructions.
 
-     ![Billing personal account](images/Billing-personal-account.png)
+     ![Billing personal account](images/billing-personal-account.png)
+
 
 5. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. For a Business subscription, the only option available is annually.
 
-> **Note**
-> To upgrade to a Business subscription, 5 is the maximum number of users you can add using a credit card and 40 users for purchase orders. If you want to create a purchase order, update the field for the users and click **Contact Sales** to complete the contact sales form.  Then, continue the on-screen instructions for the billing details and click **Purchase**.
+    > **Note**
+    >
+    > To upgrade to a Business subscription, 5 is the maximum number of users you can add using a credit card and 40 users for purchase orders. If you want to create a purchase order, update the field for the users and click **Contact Sales** to complete the contact sales form.  Then, continue the on-screen instructions for the billing details and click **Purchase**.
 
 6. Click **Continue to Payment** and continue to on-screen instructions and click Purchase to complete your subscription.
 
