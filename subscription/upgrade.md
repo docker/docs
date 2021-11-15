@@ -57,7 +57,7 @@ To upgrade your subscription:
      >
      > Click **Create Organization** if you want to add another organization to your subscription. Click Buy Now to proceed with the on-screen instructions.
 
-     ![Billing personal account](images/Billing-personal-account.png){:width="750px"}
+     ![Billing personal account](images/Billing-personal-account.png)
 
 5. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. For a Business subscription, the only option available is annually.
 
