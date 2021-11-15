@@ -11,7 +11,7 @@ This page contains information on how to purchase a Docker paid subscription. It
 
 You can upgrade from Docker Personal to a Pro, Team, or a Business subscription from a Personal subscription. When you upgrade to a paid subscription, you can immediately use all the features and entitlements offered in your new subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
-## Upgrade from a Personal to a Pro, Team, or Business Subscription
+## Upgrade from a Personal to a Pro, Team, or Business subscription
 
 The following section contains information on how to purchase a Docker  subscription for new customers. To upgrade from a Personal subscription to a Team or Business subscription, you must first convert your personal namespace to an organization namespace. To learn more, see [convert an account into an organization](../docker-hub/convert-account.md).
 
@@ -23,14 +23,14 @@ To purchase a Pro, Team, or Business subscription:
 
    > **Note**
    >
-   >If you have not created an organization for a Team or Business subscription, select **Create Organization** from the drop-down menu and select your plan. Click **Buy Now** and continue with the on-screen instructions.
+   > If you have not created an organization for a Team or Business subscription, select **Create Organization** from the drop-down menu and select your plan. Click **Buy Now** and continue with the on-screen instructions.
 
 3. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. For a Business subscription, the only option available is annually.
 
 
     > **Note**
     >
-    >To upgrade to a Business subscription, you must have at least 5 users and at least 40 users through purchase orders. To create a purchase order,  specify the number of users and then click the **Contact Sales form**. Then, continue the on-screen instructions for the billing details and click **Purchase**.
+    > To upgrade to a Business subscription, you must have at least 5 users and at least 40 users through purchase orders. To create a purchase order,  specify the number of users and then click the **Contact Sales form**. Then, continue the on-screen instructions for the billing details and click **Purchase**.
 
 4. Click **Continue to Purchase** and update the fields to complete your purchase.
 
@@ -55,7 +55,7 @@ To upgrade your subscription:
 
      >**Note**
      >
-     > Click **Create Organization** if you want to add another organization to your subscription. Click Buy Now to proceed with the on-screen instructions.
+     > Click **Create Organization** if you want to add another organization to your subscription. Click **Buy Now** to proceed with the on-screen instructions.
 
      ![Billing personal account](images/billing-personal-account.png)
 
@@ -64,7 +64,7 @@ To upgrade your subscription:
 
     > **Note**
     >
-    > To upgrade to a Business subscription, 5 is the maximum number of users you can add using a credit card and 40 users for purchase orders. If you want to create a purchase order, update the field for the users and click **Contact Sales** to complete the contact sales form.  Then, continue the on-screen instructions for the billing details and click **Purchase**.
+    > To upgrade to a Business subscription, you must have at least 5 users and at least 40 users through purchase orders. To create a purchase order,  specify the number of users and then click the **Contact Sales form**. Then, continue the on-screen instructions for the billing details and click **Purchase**.
 
 6. Click **Continue to Payment** and continue to on-screen instructions and click Purchase to complete your subscription.
 
