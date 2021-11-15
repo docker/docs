@@ -85,7 +85,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Quick start guide  
   
-  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it is a container, push and save the image to Docker Hub.
 
    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
 
