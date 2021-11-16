@@ -251,7 +251,9 @@ Services are registered automatically by the Docker Compose CLI on [AWS Cloud Ma
 
 Services can retrieve their dependencies using Compose service names (as they do when deploying locally with docker-compose), or optionally use the fully qualified names.
 
-**Note:** Service names, nor the fully qualified service names, will resolve unless you enable public dns names in your VPC.
+> **Note**
+> 
+> Short service names, nor the fully qualified service names, will resolve unless you enable public dns names in your VPC.
 
 ### Dependent service startup time and DNS resolution
 
