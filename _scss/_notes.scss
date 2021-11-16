@@ -20,9 +20,8 @@ The available classes are:
 
 */
 
-@mixin notification($bg-color, $header-color, $body-text-color, $left-border-color, $icon) {
+@mixin notification($bg-color, $header-color, $body-text-color, $icon) {
   background-color:  $bg-color;
-  border-left-color: $left-border-color;
   font-size:         unset; // override bootstrap font-size for blockquotes
 
   // The first child will generally be a header (e.g. "Note" or "This is an experimental feature"),
@@ -53,17 +52,15 @@ blockquote {
     &:not(.important):not(.warning):not(.restricted) {
       @include notification(
         $bg-color: change-color($marine-10, $alpha: 0.2),
-        $left-border-color: $blue-80,
         $header-color: $marine-10,
         $body-text-color: $marine-10,
-        $icon: "\f058"
+        $icon: "\f06a"
       );
     }
 
     &.important {
       @include notification(
         $bg-color: change-color($orange-60, $alpha: 0.4),
-        $left-border-color: $orange-90,
         $header-color: $orange-20,
         $body-text-color: $orange-20,
         $icon: "\f06a"
@@ -73,17 +70,15 @@ blockquote {
     &.warning {
       @include notification(
         $bg-color: change-color($red-60, $alpha: 0.3),
-        $left-border-color: $red-40,
         $header-color: $red-10,
         $body-text-color: $red-10,
-        $icon: "\f057"
+        $icon: "\f06a"
       );
     }
 
     &.restricted {
       @include notification(
         $bg-color: change-color($purple-60, $alpha: 0.44),
-        $left-border-color: $purple-70,
         $header-color: $purple-10,
         $body-text-color: $purple-10,
         $icon: "\f135"
@@ -96,19 +91,17 @@ blockquote {
 
     &:not(.important):not(.warning):not(.restricted) {
       @include notification(
-        $bg-color: change-color($marine-10, $alpha: 0.2),
-        $left-border-color: $blue-80,
+        $bg-color: #E8F4FD, // Hardcoding this variable temporary till we migrate to the new color pallette
         $header-color: $blue-80,
         $body-text-color: inherit,
-        $icon: "\f058"
+        $icon: "\f05a"
       );
     }
 
     &.important {
       @include notification(
-        $bg-color: change-color($orange-10, $alpha: 0.4),
-        $left-border-color: $orange-90,
-        $header-color: $orange-90,
+        $bg-color: $orange-10,
+        $header-color: $orange-100,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -116,18 +109,16 @@ blockquote {
 
     &.warning {
       @include notification(
-        $bg-color: change-color($red-10, $alpha: 0.2),
-        $left-border-color: $red-40,
-        $header-color: $red-40,
+        $bg-color: #FEEFEF, // Hardcoding this variable temporary till we migrate to the new color pallette
+        $header-color: $red-50,
         $body-text-color: inherit,
-        $icon: "\f057"
+        $icon: "\f06a"
       );
     }
 
     &.restricted {
       @include notification(
-        $bg-color: change-color($purple-20, $alpha: 0.2),
-        $left-border-color: $purple-70,
+        $bg-color: $purple-10,
         $header-color: $purple-50,
         $body-text-color: inherit,
         $icon: "\f135"
