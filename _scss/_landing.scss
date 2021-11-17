@@ -210,11 +210,11 @@ body.landing {
   }
 
   .cardlet {
-    background-color: #F2F3F5;
+    background-color: $white-25;
     padding: 24px 36px;
 
     .title {
-      font-family: 'Geomanist Book', sans-serif;
+      font-family: "Open Sans", sans-serif;
       line-height: 22px;
       font-size: 22px;
     }
@@ -270,12 +270,12 @@ body.landing {
 
   .help-by-product {
     .title {
-      font-family: 'Geomanist Book', sans-serif;
+      font-family: "Open Sans", sans-serif;
       font-size: 22px;
     }
 
     ul.nav.nav-tabs li a, h5, h6 {
-      font-family: 'Geomanist Regular', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-size: 18px;
     }
 

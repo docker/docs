@@ -153,7 +153,14 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ### Create a `.dockerignore` file
 
-To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a `COPY` instruction. To increase the performance of the build, and to exclude files and directories, we recommend that you create a `.dockerignore` file to the context directory. To improve the context load time, add a `target` directory within the `.dockerignore` file.
+To increase the performance of the build, and as a general best practice, we recommend that you create a `.dockerignore` file in the same directory as the Dockerfile. For this tutorial, your `.dockerignore` file should contain just one line:
+
+```
+target
+```
+
+This line excludes the `target` directory, which contains output from Maven, from the Docker build context.
+There are many good reasons to carefully structure a `.dockerignore` file, but this one-line file is good enough for now.
 
 ## Build an image
 

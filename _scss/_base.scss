@@ -25,3 +25,7 @@ a {
         text-decoration: none;
     }
 }
+blockquote {
+    /* Override Bootstrap's style */
+    border-left: none;
+}
