@@ -159,7 +159,8 @@ To increase the performance of the build, and as a general best practice, we rec
 target
 ```
 
-This line excludes the `target` directory, which contains output from Maven, from the Docker build context. The build context is what Docker commands like `RUN` refer to and it has to be created for every build, by packaging up any files not excluded by `.dockerignore`. There are many good reasons to carefully structure a `.dockerignore` file, but this one-line file is good enough for now.
+This line excludes the `target` directory, which contains output from Maven, from the Docker build context.
+There are many good reasons to carefully structure a `.dockerignore` file, but this one-line file is good enough for now.
 
 ## Build an image
 
