@@ -153,7 +153,7 @@ If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
 
 ```ps
-> docker run -e HTTP_PROXY=https://proxy.example.com:3128 alpine env
+> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
