@@ -519,7 +519,7 @@ Notice the `addr` option is required if using a hostname instead of an IP so doc
 Volumes are useful for backups, restores, and migrations. Use the
 `--volumes-from` flag to create a new container that mounts that volume.
 
-### Backup a container
+### Backup a volume
 
 For example, create a new container named `dbstore`:
 
@@ -540,7 +540,7 @@ $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backu
 When the command completes and the container stops, we are left with a backup of
 our `dbdata` volume.
 
-### Restore container from backup
+### Restore volume from backup
 
 With the backup just created, you can restore it to the same container, or
 another that you made elsewhere.
