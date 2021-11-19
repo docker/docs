@@ -134,14 +134,12 @@ Now that you've run a container, what _is_ a container? Simply put, a container 
 a sandboxed process on your machine that is isolated from all other processes
 on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
 features that have been in Linux for a long time. Docker has worked to make these
-capabilities approachable and easy to use. So container
+capabilities approachable and easy to use. To summarize, a container:
 
 - is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
-- can be run on local machines, virtual machine or on cloud provider.
-- is portable. (can be run on any OS)
-- Containers are isolated from each other & runs its own softwares, binaries & configurations.
-
-
+- can be run on local machines, virtual machines or deployed to the cloud.
+- is portable (can be run on any OS)
+- Containers are isolated from each other and run their own software, binaries, and configurations.
 
 > **Creating containers from scratch**
 >
