@@ -519,7 +519,7 @@ Notice the `addr` option is required if using a hostname instead of an IP so doc
 Volumes are useful for backups, restores, and migrations. Use the
 `--volumes-from` flag to create a new container that mounts that volume.
 
-### Backup a volume
+### Back up a volume
 
 For example, create a new container named `dbstore`:
 
