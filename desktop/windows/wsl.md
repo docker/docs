@@ -45,7 +45,7 @@ Before you install the Docker Desktop WSL 2 backend, you must complete the follo
 
 ## Download
 
-Download [Docker Desktop Stable 2.3.0.2](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) or a later release.
+Download [Docker Desktop 2.3.0.2](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) or a later release.
 
 ## Install
 
