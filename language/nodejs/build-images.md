@@ -130,10 +130,14 @@ WORKDIR /app
 
 Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This ensures that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
 
-Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The `COPY` command takes two parameters: `src` and `dest`. The first parameter `src` tells Docker what file(s) you would like to copy into the image. The second parameter `dest` tells Docker where you want that file(s) to be copied to.
-For example: `COPY ["<src>", "<dest>"]`.
-Multiple `src` resources may be specified but seperated by a comma: `COPY ["<src1>", "<src2>",..., "<dest>"]`.
-We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
+Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The `COPY` command takes two parameters: `src` and `dest`. The first parameter `src` tells Docker what file(s) you would like to copy into the image. The second parameter `dest` tells Docker where you want that file(s) to be copied to. For example:
+
+ ```dockerfile
+ COPY ["<src>", "<dest>"]
+ ```
+
+You can specify multiple `src` resources seperated by a comma. For example, `COPY ["<src1>", "<src2>",..., "<dest>"]`.
+We’ll copy the `package.json` and the `package-lock.json` file into our working directory `/app`.
 
 ```dockerfile
 COPY ["package.json", "package-lock.json*", "./"]
