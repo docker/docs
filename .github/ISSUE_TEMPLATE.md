@@ -11,12 +11,13 @@ You can ask general questions and get community support through the Docker Commu
 
 ### Problem description
 
-<!--Briefly describe the problem that you found. A clear title and description helps us understand and address the issue quickly.
+<!--
+Briefly describe the problem that you found. A clear title and description helps us understand and address the issue quickly.
 
 Report only documentation issues here. Report any product issues in the corresponding product repository.
 
 If you are reporting a broken link issue, let us know how you arrived at the broken link; was it through a page on docs.docker.com, or from an external website?
-    -->
+-->
 
 ### Problem location
 
