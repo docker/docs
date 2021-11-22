@@ -253,8 +253,8 @@ Docker 18.09 :
 failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manifests/experimental: x509: certificate signed by unknown authority
 ```
 
-Solution : secure your registry properly. You can get SSL certificates from
-Let's Encrypt for free. See /registry/deploying/
+Solution: secure your registry properly. You can get SSL certificates from
+Let's Encrypt for free. See [Deploy a registry server](../../registry/deploying.md).
 
 
 #### image not found when the private registry is running on Sonatype Nexus version < 3.15
