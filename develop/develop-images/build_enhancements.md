@@ -254,7 +254,7 @@ failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manif
 ```
 
 Solution: secure your registry properly. You can get SSL certificates from
-Let's Encrypt for free. See [Deploy a registry server](/registry/deploying/).
+Let's Encrypt for free. See [Deploy a registry server](../../registry/deploying.md).
 
 
 #### image not found when the private registry is running on Sonatype Nexus version < 3.15
