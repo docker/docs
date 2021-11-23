@@ -36,6 +36,8 @@ Compose to set up and run WordPress. Before starting, make sure you have
 3.  Create a `docker-compose.yml` file that starts your
     `WordPress` blog and a separate `MySQL` instance with volume
     mounts for data persistence:
+    
+    >**Tip**: If you are using an M1 Mac. You will need to add ```platform: linux/amd64``` underneath the image of mysql:5.7
 
     ```yaml
     version: "{{ site.compose_file_v3 }}"
