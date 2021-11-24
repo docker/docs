@@ -49,6 +49,19 @@ Docker Desktop is available for Mac and Windows. For download information, syste
 
 For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
+## Sign in to Docker Desktop
+
+After you’ve successfully installed and started Docker Desktop, we recommend that you authenticate using the **Sign in/Create ID** option from the Docker menu.
+
+Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
+
+Authenticating through Docker Desktop also allows administrators to configure Docker Desktop and set up guardrails using the [Image Access Management](../docker-hub/image-access-management.md) feature to allow team members to:
+
+* Only have access to Trusted Content on Docker Hub
+* Pull only from the specified categories of images
+
+To authenticate using Docker Desktop, click the **Sign in/Create ID** option on the Docker menu and follow the on-screen instructions.
+
 ## Configure Docker Desktop
 
 To learn about the various UI options and their usage, see:
