@@ -178,7 +178,12 @@ The todo app supports the setting of a few environment variables to specify MySQ
 
 With all of that explained, let's start our dev-ready container!
 
-1. We'll specify each of the environment variables above, as well as connect the container to our app network.
+1. **Note**: for MySQL versions 8.0 and higher, make sure to include the following commands in `mysql`.
+    ```console
+    mysql> ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'secret';
+    mysql> flush privileges;
+    ```
+2. We'll specify each of the environment variables above, as well as connect the container to our app network.
 
     ```console
     $ docker run -dp 3000:3000 \
@@ -205,8 +210,7 @@ With all of that explained, let's start our dev-ready container!
       node:12-alpine `
       sh -c "yarn install && yarn run dev"
     ```
-
-2. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
+3. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
    using the mysql database.
 
     ```console
@@ -219,9 +223,9 @@ With all of that explained, let's start our dev-ready container!
     Listening on port 3000
     ```
 
-3. Open the app in your browser and add a few items to your todo list.
+4. Open the app in your browser and add a few items to your todo list.
 
-4. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+5. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
    is **secret**.
 
     ```console

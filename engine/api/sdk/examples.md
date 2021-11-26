@@ -62,6 +62,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	defer reader.Close()
 	io.Copy(os.Stdout, reader)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
@@ -182,6 +184,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer out.Close()
 	io.Copy(os.Stdout, out)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{

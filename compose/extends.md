@@ -179,7 +179,8 @@ $ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
 > of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
 > See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
 > discussion thread on the possibility of adding support for `extends` in some form in
-> future versions.
+> future versions. The `extends` keyword has been included in docker-compose versions 1.27
+> and higher.
 
 Docker Compose's `extends` keyword enables the sharing of common configurations
 among different files, or even different projects entirely. Extending services
