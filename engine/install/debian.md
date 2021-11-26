@@ -126,9 +126,9 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
 
     > Receiving a GPG error when running `apt-get update`?
     >  
-    > You're default umask may not be set correctly, causing the public key file
+    > Your default umask may not be set correctly, causing the public key file
     > for the repo to not be detected. Run the following command and then try to
-    > update your repo again: `sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg`
+    > update your repo again: `sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg`.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
