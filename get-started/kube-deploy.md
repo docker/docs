@@ -63,7 +63,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
     In this Kubernetes YAML file, we have two objects, separated by the `---`:
     - A `Deployment`, describing a scalable group of identical pods. In this case, you'll get just one `replica`, or copy of your pod, and that pod (which is described under the `template:` key) has just one container in it, based off of your `bulletinboard:1.0` image from the previous step in this tutorial.
-    - A `NodePort` service, which will route traffic from port 30001 on your host to port 8080 inside the pods it routes to, allowing you to reach your bulletin board from the network.
+    - A `NodePort` service, which will route traffic from port 30001 on your host to port 3000 inside the pods it routes to, allowing you to reach your bulletin board from the network.
 
     Also, notice that while Kubernetes YAML can appear long and complicated at first, it almost always follows the same pattern:
     - The `apiVersion`, which indicates the Kubernetes API that parses this object
@@ -105,7 +105,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
     $ kubectl get services
 
     NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-    bb-entrypoint   NodePort    10.106.145.116   <none>        8080:30001/TCP   53s
+    bb-entrypoint   NodePort    10.106.145.116   <none>        3000:30001/TCP   53s
     kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP          138d
     ```
 
