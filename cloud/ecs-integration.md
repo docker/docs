@@ -251,6 +251,10 @@ Services are registered automatically by the Docker Compose CLI on [AWS Cloud Ma
 
 Services can retrieve their dependencies using Compose service names (as they do when deploying locally with docker-compose), or optionally use the fully qualified names.
 
+> **Note**
+> 
+> Short service names, nor the fully qualified service names, will resolve unless you enable public dns names in your VPC.
+
 ### Dependent service startup time and DNS resolution
 
 Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](../compose/startup-order.md).
