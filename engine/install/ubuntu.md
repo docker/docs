@@ -170,6 +170,7 @@ from the repository.
     image.
 
     ```console
+    $ sudo docker pull hello-world
     $ sudo docker run hello-world
     ```
 
