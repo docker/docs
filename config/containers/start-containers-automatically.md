@@ -27,7 +27,7 @@ any of the following:
 | Flag             | Description                                                                                     |
 |:-----------------|:------------------------------------------------------------------------------------------------|
 | `no`             | Do not automatically restart the container. (the default)                                       |
-| `on-failure`(optional:`max-retries`)     | Restart the container if it exits due to an error, which manifests as a non-zero exit code.  Optionally, limit the number of retries the Docker daemon attempts.   |
+| `on-failure[:max-retries]`     | Restart the container if it exits due to an error, which manifests as a non-zero exit code.  Optionally, limit the number of times the Docker daemon attempts to restart the container using the `:max-retries` option.   |
 | `always`         | Always restart the container if it stops. If it is manually stopped, it is restarted only when Docker daemon restarts or the container itself is manually restarted. (See the second bullet listed in [restart policy details](#restart-policy-details)) |
 | `unless-stopped` | Similar to `always`, except that when the container is stopped (manually or otherwise), it is not restarted even after Docker daemon restarts. |
 
