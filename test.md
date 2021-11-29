@@ -37,7 +37,7 @@ topics).
 By default, this is the highest heading included in the right navigation bar. To
 include more heading levels, set `toc_min: 1` in the page's front-matter (as is
 done on this `test.md` page). You can go all the way to 6, but if `toc_min` is
-geater than `toc_max` then no headings are shown.
+greater than `toc_max` then no headings are shown.
 
 ### Heading 3
 
@@ -113,7 +113,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
   - If you can't find a reference page in the `docker.github.io`
   GitHub repository, but see it out on `docs.docker.com`, you can
   surmise that it's probably auto-generated from the codebase.
-  (FYI, to view the markdown source for the file, just click
+  (FYI, to view the Markdown source for the file, just click
   **Edit this page** on `docs.docker.com`. But don't use that URL in your docs.)
 
   - Go to the file in a web browser, grab everything after the domain name
@@ -125,6 +125,7 @@ https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 {: id="custom-target-id"}
 
 #### Using a custom target ID
+
 This topic has a custom target ID above its heading that can be used to link to
 it, in addition to, or instead of, the default concatenated heading style. The
 format of this ID is `{: id="custom-target-id"}`.
@@ -135,7 +136,7 @@ target.
 
 An example of a custom target ID in the documentation is the topic on
 [Compose file version 2 topic on CPU and other resources](compose/compose-file/compose-file-v2.md#cpu-and-other-resources).
-It has a long heading that breaks the normal markdown linking mechanism,
+It has a long heading that breaks the normal Markdown linking mechanism,
 so we added a custom ID above the target heading.
 
 ### Images
@@ -151,7 +152,7 @@ so we added a custom ID above the target heading.
 
 - The same as above but using HTML: <img src="/images/banner_image_24512.png" alt="a pretty wide image using HTML"/>
 
-[Some Bootstrap image classes](https://v4-alpha.getbootstrap.com/content/images/)
+[Some Bootstrap image classes](https://v4-alpha.getbootstrap.com/content/images/){: target="_blank" rel="noopener" class="_" }
 might be interesting. You can use them with Markdown or HTML images.
 
 - An image using the Bootstrap "thumbnail" class: ![an image as a thumbnail](/images/footer_moby_icon.png){: class="img-thumbnail" }
@@ -160,7 +161,15 @@ might be interesting. You can use them with Markdown or HTML images.
 
 ## Videos
 
-You can add a link to a YouTube video like this:
+To embed a YouTube video on a docs page, open the video on YouTube, click **Share** > **Embed** and then copy the code displayed.
+
+For example, the video embedded on the Get Started page has the following code:
+
+```
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```
+
+You can also add a link to a YouTube video like this:
 
 [Docker 101: Introduction to Docker](https://www.youtube.com/watch?v=V9IJj4MzZBc "Docker 101: Introduction to Docker"){:target="_blank" rel="noopener" class="_"}
 
@@ -205,7 +214,6 @@ For the overlay, you can use the play button at
           | Thing 1 | Thing 2  |
           | Thing 3 | Thing 4  |
 
-
 ## Tables
 
 Some tables in markdown and html.
@@ -216,7 +224,7 @@ Some tables in markdown and html.
 |                                                                          | Previous cell is empty. A `--flag` in mono text.             |
 | Read                                                                     | Pull                                                         |
 | Read/Write                                                               | Pull, push                                                   |
-| Admin                                                                    | All of the above, plus update description, create and delete |
+| Admin                                                                    | All of the above, plus update description, create, and delete |
 
 The alignment of the cells in the source doesn't really matter. The ending pipe
 character is optional (unless the last cell is supposed to be empty). The header
@@ -586,7 +594,7 @@ Current styles for admonitions in
 [`_scss/_notes.scss`](https://github.com/docker/docker.github.io/blob/master/_scss/_notes.scss)
 support these broad categories of admonitions:
 
-- Notes (no Liquid tag required) (deprecated)
+- Notes (no Liquid tag required)
 - Important, which use the `{: .important}` tag
 - Warning , which use the `{: .warning}` tag
 
@@ -597,13 +605,11 @@ notes in your published documents are not adversely affected.
 
 Examples are shown in the following sections.
 
-### Note (Deprecated)
-
-Notes are deprecated and should not longer be used. Use important or warning instead.
+### Note
 
 A standard note is formatted like this:
 
-```
+```markdown
 > Handling transient errors
 >
 > Note the way the `get_hit_count` function is written. This basic retry
@@ -615,32 +621,44 @@ A standard note is formatted like this:
 > nodes.
 ```
 
-It renders like this with a colored sidebar and icon:
+A note renders as follows:
 
-![note admonition example](/images/note-admonition-example.png)
+  > Handling transient errors
+  >
+  > Note the way the `get_hit_count` function is written. This basic retry
+  > loop lets us attempt our request multiple times if the redis service is
+  > not available. This is useful at startup while the application comes
+  > online, but also makes our application more resilient if the Redis
+  > service needs to be restarted anytime during the app's lifetime. In a
+  > cluster, this also helps handling momentary connection drops between
+  > nodes.
 
-Notes were previously formatted like this:
+Notes are also formatted like this:
 
+```markdown
+> **Note**
+>
+> This is another way to format a note.
 ```
-> **Note**: This is a note using the old note style.
-```
-
-These will still render as a note with a colored sidebar to the left but no icon will be added.
 
 ### Important
 
 Add the `important` class to your blockquotes if you want to tell users to be careful about something:
 
-```
+```markdown
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
 {: .important}
 ```
 
-It renders like this  with a colored sidebar and icon:
+The 'important' class renders as follows:
 
-![important admonition example](/images/important-admonition-example.png)
+> **Important**
+>
+> Treat access tokens like your password and keep them secret. Store your
+> tokens securely (for example, in a credential manager).
+{: .important}
 
 ### Warning
 
@@ -655,9 +673,17 @@ Use the `warning` class to let people know this is dangerous or they should pay 
 {: .warning}
 ```
 
-It will render like this  with a colored sidebar and icon:
+The 'warning' class renders as follows:
 
-![warning admonition example](/images/warning-admonition-example.png)
+>**Warning**
+>
+>Removing Volumes
+>
+>By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
+>remove the volumes, you will need to add the `--volumes` flag.
+>
+>The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+{: .warning}
 
 ## Upgrade CTA
 
