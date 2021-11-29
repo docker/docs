@@ -66,7 +66,7 @@ The following script will start a new SSH agent in case there is not one already
 
 Append the following content at the bottom of your `~/.profile` and open a new WSL2 terminal afterwards:
 
-```console
+~~~ console
 SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
     echo "Initialising new SSH agent..."
@@ -84,7 +84,7 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
-```
+~~~
 
 </details>  
 
