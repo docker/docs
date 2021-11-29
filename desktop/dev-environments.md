@@ -57,16 +57,18 @@ The simplest way to get started with Dev Environments is to create a new environ
 
 > **Note**
 >
-> If you have the enabled the WSL2 integration in Docker Desktop for Windows, ensure you have an SSH agent running in your WSL2 distribution. Otherwise, click on the expansible section below:
-
-<details>
-<summary>How to start an SSH agent in WSL2</summary>
+> If you have the enabled the WSL2 integration in Docker Desktop for Windows, ensure you have an SSH agent running in your WSL2 distribution. Otherwise, click on the expansible section below.
 
 The following script will start a new SSH agent in case there is not one already running in your WSL2 distribution.
 
 Append the following content at the bottom of your `~/.profile` and open a new WSL2 terminal afterwards:
 
-~~~ console
+<div class="panel panel-default">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
+    How to start an SSH agent in WSL2
+    <i class="chevron fa fa-fw"></i></div>
+    <div class="collapse block" id="collapse-wsl2-ssh">
+<pre><code>
 SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
     echo "Initialising new SSH agent..."
@@ -84,9 +86,7 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
-~~~
-
-</details>  
+</code></pre>
 
 1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
