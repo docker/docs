@@ -53,7 +53,18 @@ The simplest way to get started with Dev Environments is to create a new environ
 
 > **Note**
 >
-> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`. On Windows, if you have the WSL2 integration enabled in Docker Desktop, ensure you have an SSH agent running in your WSL2 distribution. In case you haven't, you could append the following content to your `~/.profile`:
+> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
+
+> **Note**
+>
+> If you have the enabled the WSL2 integration in Docker Desktop for Windows, ensure you have an SSH agent running in your WSL2 distribution. Otherwise, click on the expansible section below:
+
+<details>
+<summary>How to start an SSH agent in WSL2</summary>
+
+The following script will start a new SSH agent in case there is not one already running in your WSL2 distribution.
+
+Append the following content at the bottom of your `~/.profile` and open a new WSL2 terminal afterwards:
 
 ```console
 SSH_ENV="$HOME/.ssh/agent-environment"
@@ -74,6 +85,8 @@ else
     start_agent;
 fi
 ```
+
+</details>  
 
 1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
