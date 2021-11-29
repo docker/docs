@@ -87,6 +87,8 @@ else
     start_agent;
 fi
 </code></pre>
+    </div>
+</div>
 
 1. Click **Create New Environment**. This opens the **Create a Dev Environment** dialog. Copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Repository URL** field on the **Remote Git Repository** tab.
 2. Now, click **Create**.
