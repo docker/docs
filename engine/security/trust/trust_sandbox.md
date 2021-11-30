@@ -33,9 +33,10 @@ production trust environment, and sets up these additional components.
 
 | Container       | Description                                                                                                                                 |
 |-----------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| trustsandbox    | A container with the latest version of Docker Engine and with some preconfigured certificates. This is your sandbox where you can use the `docker` client to test trust operations. |
-| Registry server | A local registry service.                                                                                                                 |
-| Notary server   | The service that does all the heavy-lifting of managing trust                                                                               |
+| server          | The container that will host the Notary Server, which manages the TUF database                                                              |
+| signer          | The container that will host the Notary Signer, which manages the _timestamp_ and _snapshot_ private keys, and signing operations           |
+| trustsandbox    | The container that will host the Notary Server                                                                                              |
+| Registry server | A local registry service.                                                                                                                   |
 
 This means you run your own content trust (Notary) server and registry.
 If you work exclusively with the Docker Hub, you would not need these components.
@@ -67,46 +68,76 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         $ mkdir trustsandbox
         $ cd trustsandbox
 
-2. Create a file called `docker-compose.yml` with your favorite editor.  For example, using vim:
+2. Clone the official `notary` repository:
+
+        $ git clone git@github.com:notaryproject/notary.git
+
+3. Create a file called `docker-compose.yml` with your favorite editor.  For example, using vim:
 
         $ touch docker-compose.yml
         $ vim docker-compose.yml
 
-3. Add the following to the new file.
+4. Add the following to the new file.
 
         version: "2"
         services:
-          notaryserver:
-            image: dockersecurity/notary_autobuilds:server-v0.5.1
+          server:
+            image: notary:server-0.6.1-2
+            container_name: notaryserver
+            networks:
+              sandbox:
+                aliases:
+                  - notaryserver
+            ports:
+              - "4443:4443"
+            depends_on:
+              - signer
             volumes:
-              - notarycerts:/var/lib/notary/fixtures
+              - ./notary:/notarydir
+            command: |-
+              sh -c "/notarydir/migrations/migrate.sh &&
+              cd /notarydir/fixtures &&
+              notary-server -config=/notarydir/fixtures/server-config-local.json"
+
+          signer:
+            image: notary:signer-0.6.1-2
+            container_name: notarysigner
             networks:
-              - sandbox
-            environment:
-              - NOTARY_SERVER_STORAGE_TYPE=memory
-              - NOTARY_SERVER_TRUST_SERVICE_TYPE=local
-          sandboxregistry:
-            image: registry:2.4.1
-            networks:
-              - sandbox
-            container_name: sandboxregistry
+              sandbox:
+                aliases:
+                  - notarysigner
+            volumes:
+              - ./notary:/notarydir
+            command: |-
+              sh -c "/notarydir/migrations/migrate.sh &&
+              cd /notarydir/fixtures &&
+              notary-signer -config=/notarydir/fixtures/signer-config-local.json"
+
           trustsandbox:
             image: docker:dind
             networks:
               - sandbox
             volumes:
-              - notarycerts:/notarycerts
+              - ./notary:/notary
             privileged: true
             container_name: trustsandbox
             entrypoint: ""
             command: |-
                 sh -c '
-                    cp /notarycerts/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
+                    cp /notary/fixtures/root-ca.crt /usr/local/share/ca-certificates/root-ca.crt &&
                     update-ca-certificates &&
                     dockerd-entrypoint.sh --insecure-registry sandboxregistry:5000'
-        volumes:
-          notarycerts:
-            external: false
+
+          sandboxregistry:
+            image: registry:2.7
+            ports:
+              - "5000:5000"
+            networks:
+              sandbox:
+                aliases:
+                  - sandboxregistry
+            container_name: sandboxregistry
+
         networks:
           sandbox:
             external: false
