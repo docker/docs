@@ -57,14 +57,14 @@ The simplest way to get started with Dev Environments is to create a new environ
 
 > **Note**
 >
-> If you have enabled the WSL2 integration in Docker Desktop for Windows, make sure you have an SSH agent running in your WSL2 distribution. Otherwise, click on the expansible section below to learn how to start a new SSH agent in case there is not one running already.
-The expansible section will contain a piece of script that you shall append to the bottom of your `~/.profile`. Then, re-open a new WSL2 terminal afterwards.
+> If you have enabled the WSL2 integration in Docker Desktop for Windows, make sure you have an SSH agent running in your WSL2 distribution.
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
     How to start an SSH agent in WSL2
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapse-wsl2-ssh">
+    If your WSL2 distribution doesn't have an `ssh-agent` running you can append this script to the bottom of your `~/.profile` file.
 <pre><code>
 SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
