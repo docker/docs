@@ -14,7 +14,7 @@ We’d love to hear your feedback. Please file documentation issues only in the 
 
 Before submitting a new issue, check whether the issue has already been reported. You can join the discussion using an emoji, or by adding a comment to an existing issue. If possible, we recommend that you suggest a fix to the issue by creating a pull request.
 
-You can ask general questions and get community support through the [Docker Community Slack](http://dockr.ly/slack). Personalized support is available through the Docker Pro, Team, and Business subscriptions. See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for details.
+You can ask general questions and get community support through the [Docker Community Slack](http://dockr.ly/slack). Personalized support is available through the Docker Pro, Team, and Business subscriptions. See [Docker Pricing](https://www.docker.com/pricing) for details.
 
 If you have an idea for a new feature or behavior change in a specific aspect of Docker, or have found a product bug, file that issue in the project's code repository.
 
