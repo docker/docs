@@ -1,6 +1,6 @@
 ---
-description: Overview of contributing
-keywords: open, source, contributing, overview
+description: Contribute to Docker documentation
+keywords: Docker documentation, contributing, overview
 title: Contribute to documentation
 redirect_from:
 - /contributing/
@@ -34,75 +34,28 @@ redirect_from:
 
 Contributing to the Docker documentation can be a rewarding experience. When you
 offer feedback, questions, edits, or new content, you help us, the projects you
-work on, and the larger Docker community.
+work on, and the larger Docker community. Feel free to create pull requests and file issues. Our docs are completely open source and we deeply appreciate contributions from the Docker community!
 
-We welcome your participation to help make the documentation better!
+## Provide feedback
 
-> Looking for the open source Moby project?
->
-> See [Looking for Moby?](#looking-for-moby) below.
+We’d love to hear your feedback. Please file documentation issues only in the docs GitHub repository. You can file a new issue to suggest improvements or if you see any errors in the existing documentation.
 
-## How to contribute to the docs
+Before submitting a new issue, check whether the issue has already been reported. You can join the discussion using an emoji, or by adding a comment to an existing issue. If possible, we recommend that you suggest a fix to the issue by creating a pull request.
 
-The documentation for Docker is published at
-[docs.docker.com](https://docs.docker.com/).
+You can ask general questions and get community support through the [Docker Community Slack](http://dockr.ly/slack). Personalized support is available through the Docker Pro, Team, and Business subscriptions. See [Docker Pricing](https://www.docker.com/pricing) for details.
 
-There are many ways to contribute:
+If you have an idea for a new feature or behavior change in a specific aspect of Docker, or have found a product bug, file that issue in the project's code repository.
 
-- Edit, rate, or file an issue or question directly on the site by
-using the links available on the right-side menu on every page
-at [docs.docker.com](/).
+We've made it really easy for you to file new issues.
 
-  ![Docs feedback links](images/docs-site-feedback.png)
+- Click **New issue** on the docs repository and fill in the details, or
+- Click **Request docs changes** in the right column of every page on docs.docker.com and add the details.
 
-- File a documentation issue on GitHub at
-[https://github.com/docker/docker.github.io/issues](https://github.com/docker/docker.github.io/issues).
+![Docs feedback on each page](/opensource/images/docs-site-feedback.png)
 
-  This is similar to clicking **Request doc changes** on a published docs
-  page, but if you manually file an issue you need to fill in links to
-  the related pages.
+## Contribute to Docker docs
 
-- Fork the documentation, make changes or add new content on your local
-branch, and submit a pull request (PR) to the master branch for the docs.
+We value your contribution. We'd like to make it as easy
+as possible to submit your contributions to the Docker docs repository. Changes to the docs are handled through pull requests against the `master` branch. To learn how to contribute, see [CONTRIBUTING.md](https://github.com/docker/docker.github.io/blob/master/CONTRIBUTING.md).
 
-  This is the manual, more advanced version of clicking **Edit this page**
-  on a published docs page. Initiating a docs changes in a PR from your
-  own branch gives you more flexibility, as you can submit changes to
-  multiple pages or files under a single pull request, and even create
-  new topics.
-
-## Resources and guidance
-
-We are here to help. If you are interested in contributing, but don't feel ready
-to dive in on more complex updates, we can help get you up and running.
-
-You might start by using the right-side menus on published pages:
-
-* Click **Request doc changes** on a page to automatically log an issue.
-
-* Click **Edit this page** to make a change to content, which automatically creates a PR.
-
-The issue and PR pages on GitHub give us a community space to discuss
-things, and answer any questions you might have about the problem or topic you
-are reporting on.
-
-To learn more about working on the documentation, see these topics:
-
-- [README on docker/docker.github.io](https://github.com/docker/docker.github.io/blob/master/README.md)
-
-- [Docs Test page](../test.md) - This is on the
-published site. It explains how to use Docs components, resources, and
-formats, and gives us a way to test and demo them.
-
-## Looking for meetups and Docker Community?
-
-Go to the [Docker Community GitHub repository](https://github.com/docker/community/blob/master/README.md){:target="_blank" rel="noopener" class="_"}
-for resources and information on the community.
-
-The topics in this guide on [Other ways to contribute](/opensource/ways/)
-provide some additional information,  but the community
-information you are looking for is probably available on the GitHub repository.
-
-## Looking for Moby?
-
-{% include content/moby.md %}
+For a demo of the components, tags, Markdown syntax, styles, used in Docker documentation, see [test.md](https://github.com/docker/docker.github.io/blob/master/test.md).
