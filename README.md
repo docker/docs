@@ -1,6 +1,6 @@
 # Docs @ Docker
 
-![Welcome to Docker Documentation](/images/docker-docs.png){:width="500px"}
+<img src="images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
 
 Welcome to the Docker Documentation repository. This is the source for
 [https://docs.docker.com/](https://docs.docker.com/).
@@ -14,7 +14,7 @@ We’d love to hear your feedback. Please file documentation issues only in the 
 
 Before submitting a new issue, check whether the issue has already been reported. You can join the discussion using an emoji, or by adding a comment to an existing issue. If possible, we recommend that you suggest a fix to the issue by creating a pull request.
 
-You can ask general questions and get community support through the [Docker Community Slack](http://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}. Personalized support is available through the Docker Pro, Team, and Business subscriptions. See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for details.
+You can ask general questions and get community support through the [Docker Community Slack](http://dockr.ly/slack). Personalized support is available through the Docker Pro, Team, and Business subscriptions. See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for details.
 
 If you have an idea for a new feature or behavior change in a specific aspect of Docker, or have found a product bug, file that issue in the project's code repository.
 
