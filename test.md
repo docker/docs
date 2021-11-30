@@ -326,12 +326,6 @@ You can nest captures within each other to represent more complex logic with Liq
 - In-line variables set via `assign` or `capture` are available for the remainder of the page after they are set.
 - If you include a file, you can pass key-value pairs at the same time. These are available as include variables, like `{{ include.toc_min }}`.
 
-### Image formatting
-
-This image was originally created on a white background and converted to a transparent background (or so it seems). In night-mode, the text still shows traces of the white and looks garbled. To fix this, we apply a white background inline with a class defined in _scss/_night-mode.css (and incorporated into style.css): `img.white-bg { background-color: white; }`.
-
-![alt_text](https://github.com/docker/docker.github.io/blob/423f6d58b2f301d01163241099f0346f2ecf1019/machine/img/provision-use-case.png){: .white-bg}
-
 ## Bootstrap and CSS tricks
 
 Here are cool components you can include on Docs pages using
@@ -364,6 +358,7 @@ as an attribute in the HTML for the `<div>` so that Kramdown renders it.
 </ul>
 <div class="tab-content">
 <div id="tab3" class="tab-pane fade in active" markdown="1">
+
 #### A Markdown header
 
 - list item 1
@@ -371,6 +366,7 @@ as an attribute in the HTML for the `<div>` so that Kramdown renders it.
 <hr>
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
+
 #### Another Markdown header
 
 - list item 3
@@ -409,7 +405,6 @@ And some content between the two sets, just for fun...
   <div id="go-2" class="tab-pane fade in active">Go content here<hr></div>
   <div id="python-2" class="tab-pane fade in">Python content here<hr></div>
 </div>
-
 
 ### Cards
 
@@ -468,30 +463,31 @@ to see another example.
 $ docker run hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-b04784fba78d: Pull complete
-Digest: sha256:f3b3b28a45160805bb16542c9531888519430e9e6d6ffc09d72261b0d26ff74f
+2db29710123e: Pull complete
+Digest: sha256:cc15c5b292d8525effc0f89cb299f1804f3a725c8d05e158653a563f15e4f685
 Status: Downloaded newer image for hello-world:latest
 
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
 To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
+
+1. The Docker client contacted the Docker daemon.
+2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+3. The Docker daemon created a new container from that image which runs the
+4. The Docker daemon streamed that output to the Docker client, which sent it
     to your terminal.
 
 To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
+
+$ docker run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
  https://hub.docker.com/
 
 For more examples and ideas, visit:
- https://docs.docker.com/engine/userguide/
-
+ https://docs.docker.com/get-started/
 </code></pre>
     </div>
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Another Sample <i class="chevron fa fa-fw"></i></div>
@@ -586,8 +582,6 @@ or Bootstrap, make sure the `<script>` tags are at the very end of the page,
 after all the content. Otherwise the script may try to run before JQuery and
 Bootstrap JS are loaded.
 
-> **Note**: In general, this is a bad idea.
-
 ## Admonitions (notes)
 
 Current styles for admonitions in
@@ -609,7 +603,7 @@ Examples are shown in the following sections.
 
 A standard note is formatted like this:
 
-```markdown
+```md
 > Handling transient errors
 >
 > Note the way the `get_hit_count` function is written. This basic retry
@@ -635,7 +629,7 @@ A note renders as follows:
 
 Notes are also formatted like this:
 
-```markdown
+```md
 > **Note**
 >
 > This is another way to format a note.
@@ -645,7 +639,7 @@ Notes are also formatted like this:
 
 Add the `important` class to your blockquotes if you want to tell users to be careful about something:
 
-```markdown
+```md
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
@@ -664,7 +658,7 @@ The 'important' class renders as follows:
 
 Use the `warning` class to let people know this is dangerous or they should pay close attention to this part of the road before moving on:
 
-```
+```md
 > Ouch, don't do that!
 >
 > Sticking your finger in an electrical outlet can result in an electric shock.
@@ -675,11 +669,11 @@ Use the `warning` class to let people know this is dangerous or they should pay 
 
 The 'warning' class renders as follows:
 
->**Warning**
+> **Warning**
 >
->Removing Volumes
+> Removing Volumes
 >
->By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
+> By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
 >remove the volumes, you will need to add the `--volumes` flag.
 >
 >The Docker Dashboard does _not_ remove volumes when you delete the app stack.
