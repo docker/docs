@@ -64,7 +64,7 @@ The simplest way to get started with Dev Environments is to create a new environ
     How to start an SSH agent in WSL2
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapse-wsl2-ssh">
-    If your WSL2 distribution doesn't have an `ssh-agent` running you can append this script to the bottom of your `~/.profile` file.
+    If your WSL2 distribution doesn't have an `ssh-agent` running you can append this script to the bottom of your profile file (ie : ~/.profile, ~/zshrc, ...).
 <pre><code>
 SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
