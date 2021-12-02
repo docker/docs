@@ -10,6 +10,7 @@ Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
+
 ## 2021-11-15
 
 ### New
