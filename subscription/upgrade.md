@@ -11,7 +11,7 @@ This page contains information on how to purchase a Docker paid subscription. It
 
 You can upgrade from Docker Personal to a Pro, Team, or a Business subscription from a Personal subscription. When you upgrade to a paid subscription, you can immediately use all the features and entitlements offered in your new subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
-## Upgrade from a Personal to a Pro, Team, or Business subscription
+## Upgrade to a Pro, Team, or Business subscription
 
 The following section contains information on how to purchase a Docker  subscription for new customers. To upgrade from a Personal subscription to a Team or Business subscription, you must first convert your personal namespace to an organization namespace. To learn more, see [convert an account into an organization](../docker-hub/convert-account.md).
 
@@ -19,54 +19,20 @@ To purchase a Pro, Team, or Business subscription:
 
 1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-2. Click **Upgrade** and select your Pro, Team, or Business subscription.
+2. To upgrade your Personal subscription, click **Upgrade**. To upgrade your Pro or Team subscription, open the drop-down menu next to your username in the top-right corner and select **Billing**. On the **Billing Details** page, click **Change plan** to navigate to the pricing page.
 
    > **Note**
    >
-   > If you have not created an organization for a Team or Business subscription, select **Create Organization** from the drop-down menu and select your plan. Click **Buy Now** and continue with the on-screen instructions.
+   > If you have not created an organization for a Team or Business subscription, select **Create Organization** from the drop-down menu and select your plan. If you already have a subscription, you can also add another organization. Click **Buy Now** and continue with the on-screen instructions.
 
-3. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. For a Business subscription, the only option available is annually.
+3. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. If you are upgrading to a Business subscription, you must choose an annual subscription.
 
 
     > **Note**
     >
     > To upgrade to a Business subscription, you must have at least 5 users and at least 40 users through purchase orders. To create a purchase order,  specify the number of users and then click the **Contact Sales form**. Then, continue the on-screen instructions for the billing details and click **Purchase**.
 
-4. Click **Continue to Purchase** and update the fields to complete your purchase.
-
-## Upgrade to a Team or Business subscription
-
-The following section is for upgrading your current subscription to a Team or Business subscription. You can now use the self-service option to purchase Docker Business seats through a credit card. To upgrade to a Team or Business subscription you must first convert your personal namespace to an organization namespace. To learn more, see [convert an account into an organization](../docker-hub/convert-account.md).
-
-To upgrade your subscription:
-
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
-
-2. Open the drop-down menu next to your username in the top-right corner and select **Billing**. The **Billing Details** page displays billing information about your existing user account.
-
-    >**Note**
-    >
-    > Ensure you have selected the correct account on the
-    left side of the **Billing Details** page. For example, if you want to upgrade to a Docker Pro subscription, you must select your personal account.
-
-3. Click **Change plan** and navigate the pricing page to upgrade your subscription.
-
-4. Select your subscription and continue with the on-screen instructions.
-
-     >**Note**
-     >
-     > Click **Create Organization** if you want to add another organization to your subscription. Click **Buy Now** to proceed with the on-screen instructions.
-
-     ![Billing personal account](images/billing-personal-account.png)
-
-
-5. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. For a Business subscription, the only option available is annually.
-
-    > **Note**
-    >
-    > To upgrade to a Business subscription, you must have at least 5 users and at least 40 users through purchase orders. To create a purchase order,  specify the number of users and then click the **Contact Sales form**. Then, continue the on-screen instructions for the billing details and click **Purchase**.
-
-6. Click **Continue to Payment** and continue to on-screen instructions and click Purchase to complete your subscription.
+4. Click **Continue to Payment** and update the fields to complete your purchase.
 
 ## Switch from a monthly subscription to an annual subscription
 
