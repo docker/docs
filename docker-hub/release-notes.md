@@ -9,6 +9,7 @@ toc_max: 2
 Here you can learn about the latest changes, new features, bug fixes, and
 known issues for each Docker Hub release.
 
+Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 ## 2021-11-15
 
 We're proud to announce that you can now purchase or upgrade to a Docker Business subscription via a credit card. You must have a minimum of 5 users; however you can still purchase via a purchase order with a minimum of 40 users. To learn more see [Upgrade your subscription](../subscription/upgrade.md).
