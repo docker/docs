@@ -62,7 +62,7 @@ Compose to set up and run WordPress. Before starting, make sure you have
           - "8000:80"
         restart: always
         environment:
-          WORDPRESS_DB_HOST: db:3306
+          WORDPRESS_DB_HOST: db
           WORDPRESS_DB_USER: wordpress
           WORDPRESS_DB_PASSWORD: wordpress
           WORDPRESS_DB_NAME: wordpress
