@@ -10,7 +10,9 @@ open source and we deeply appreciate contributions from the Docker community!
 
 ## Provide feedback
 
-We’d love to hear your feedback. Please file documentation issues only in the docs GitHub repository. You can file a new issue to suggest improvements or if you see any errors in the existing documentation.
+We’d love to hear your feedback. Please file documentation issues only in the
+docs GitHub repository. You can file a new issue to suggest improvements or if
+you see any errors in the existing documentation.
 
 Before submitting a new issue, check whether the issue has already been reported. You can join the discussion using an emoji, or by adding a comment to an existing issue. If possible, we recommend that you suggest a fix to the issue by creating a pull request.
 

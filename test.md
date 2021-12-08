@@ -152,7 +152,7 @@ so we added a custom ID above the target heading.
 
 - The same as above but using HTML: <img src="/images/banner_image_24512.png" alt="a pretty wide image using HTML"/>
 
-[Some Bootstrap image classes](https://v4-alpha.getbootstrap.com/content/images/){: target="_blank" rel="noopener" class="_" }
+[Some Bootstrap image classes](https://getbootstrap.com/docs/3.4/css/#images){: target="_blank" rel="noopener" class="_" }
 might be interesting. You can use them with Markdown or HTML images.
 
 - An image using the Bootstrap "thumbnail" class: ![an image as a thumbnail](/images/footer_moby_icon.png){: class="img-thumbnail" }
@@ -165,7 +165,7 @@ To embed a YouTube video on a docs page, open the video on YouTube, click **Shar
 
 For example, the video embedded on the Get Started page has the following code:
 
-```
+```html
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 ```
 
@@ -603,7 +603,7 @@ Examples are shown in the following sections.
 
 A standard note is formatted like this:
 
-```md
+```markdown
 > Handling transient errors
 >
 > Note the way the `get_hit_count` function is written. This basic retry
@@ -629,7 +629,7 @@ A note renders as follows:
 
 Notes are also formatted like this:
 
-```md
+```markdown
 > **Note**
 >
 > This is another way to format a note.
@@ -639,7 +639,7 @@ Notes are also formatted like this:
 
 Add the `important` class to your blockquotes if you want to tell users to be careful about something:
 
-```md
+```markdown
 > Pssst, wanna know something?
 >
 > You include a small description here telling users to be on the lookout
@@ -658,7 +658,7 @@ The 'important' class renders as follows:
 
 Use the `warning` class to let people know this is dangerous or they should pay close attention to this part of the road before moving on:
 
-```md
+```markdown
 > Ouch, don't do that!
 >
 > Sticking your finger in an electrical outlet can result in an electric shock.
@@ -673,10 +673,11 @@ The 'warning' class renders as follows:
 >
 > Removing Volumes
 >
-> By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
->remove the volumes, you will need to add the `--volumes` flag.
+> By default, named volumes in your compose file are NOT removed when running
+> `docker-compose down`. If you want to remove the volumes, you will need to add
+> the `--volumes` flag.
 >
->The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+> The Docker Dashboard does _not_ remove volumes when you delete the app stack.
 {: .warning}
 
 ## Upgrade CTA
@@ -798,7 +799,7 @@ syntax for comments in JSON!
 
 ### Markdown
 
-```md
+```markdown
 # Hello
 ```
 
