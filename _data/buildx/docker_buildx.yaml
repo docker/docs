@@ -1,6 +1,6 @@
 command: docker buildx
-short: Build with BuildKit
-long: Build with BuildKit
+short: Docker Buildx
+long: Extended build capabilities with BuildKit
 pname: docker
 plink: docker.yaml
 cname:
@@ -33,11 +33,16 @@ options:
 - option: builder
   value_type: string
   description: Override the configured builder instance
+  details_url: '#builder'
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
+examples: |-
+  ### Override the configured builder instance (--builder) {#builder}
+
+  You can also use the `BUILDX_BUILDER` environment variable.
 deprecated: false
 experimental: false
 experimentalcli: false

@@ -24,6 +24,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: bootstrap
+  value_type: bool
+  default_value: "false"
+  description: Boot builder after creation
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: buildkitd-flags
   value_type: string
   description: Flags for buildkitd daemon
@@ -44,7 +53,8 @@ options:
   swarm: false
 - option: driver
   value_type: string
-  description: 'Driver to use (available: [])'
+  description: |
+    Driver to use (available: `docker`, `docker-container`, `kubernetes`)
   details_url: '#driver'
   deprecated: false
   experimental: false
@@ -161,6 +171,11 @@ examples: |-
   can be overridden by [`--buildkitd-flags`](#buildkitd-flags).
   See an [example buildkitd configuration file](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md).
 
+  Note that if you create a `docker-container` builder and have specified
+  certificates for registries in the `buildkitd.toml` configuration, the files
+  will be copied into the container under `/etc/buildkit/certs` and configuration
+  will be updated to reflect that.
+
   ### Set the builder driver to use (--driver) {#driver}
 
   ```
@@ -170,17 +185,30 @@ examples: |-
   Sets the builder driver to be used. There are two available drivers, each have
   their own specificities.
 
-  - `docker` - Uses the builder that is built into the docker daemon. With this
-    driver, the [`--load`](buildx_build.md#load) flag is implied by default on
-    `buildx build`. However, building multi-platform images or exporting cache is
-    not currently supported.
-  - `docker-container` - Uses a buildkit container that will be spawned via docker.
-    With this driver, both building multi-platform images and exporting cache are
-    supported. However, images built will not automatically appear in `docker images`
-    (see [`build --load`](buildx_build.md#load)).
-  - `kubernetes` - Uses a kubernetes pods. With this driver, you can spin up pods
-    with defined buildkit container image to build your images.
+  #### `docker` driver
 
+  Uses the builder that is built into the docker daemon. With this driver,
+  the [`--load`](buildx_build.md#load) flag is implied by default on
+  `buildx build`. However, building multi-platform images or exporting cache is
+  not currently supported.
+
+  #### `docker-container` driver
+
+  Uses a BuildKit container that will be spawned via docker. With this driver,
+  both building multi-platform images and exporting cache are supported.
+
+  Unlike `docker` driver, built images will not automatically appear in
+  `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+  to achieve that.
+
+  #### `kubernetes` driver
+
+  Uses a kubernetes pods. With this driver, you can spin up pods with defined
+  BuildKit container image to build your images.
+
+  Unlike `docker` driver, built images will not automatically appear in
+  `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+  to achieve that.
 
   ### Set additional driver-specific options (--driver-opt) {#driver-opt}
 
@@ -194,18 +222,44 @@ examples: |-
   - `docker-container`
       - `image=IMAGE` - Sets the container image to be used for running buildkit.
       - `network=NETMODE` - Sets the network mode for running the buildkit container.
-      - Example:
-
-        ```console
-        --driver docker-container --driver-opt image=moby/buildkit:master,network=host
-        ```
+      - `cgroup-parent=CGROUP` - Sets the cgroup parent of the buildkit container if docker is using the "cgroupfs" driver. Defaults to `/docker/buildx`.
   - `kubernetes`
       - `image=IMAGE` - Sets the container image to be used for running buildkit.
       - `namespace=NS` - Sets the Kubernetes namespace. Defaults to the current namespace.
       - `replicas=N` - Sets the number of `Pod` replicas. Defaults to 1.
+      - `requests.cpu` - Sets the request CPU value specified in units of Kubernetes CPU. Example `requests.cpu=100m`, `requests.cpu=2`
+      - `requests.memory` - Sets the request memory value specified in bytes or with a valid suffix. Example `requests.memory=500Mi`, `requests.memory=4G`
+      - `limits.cpu` - Sets the limit CPU value specified in units of Kubernetes CPU. Example `limits.cpu=100m`, `limits.cpu=2`
+      - `limits.memory` - Sets the limit memory value specified in bytes or with a valid suffix. Example `limits.memory=500Mi`, `limits.memory=4G`
       - `nodeselector="label1=value1,label2=value2"` - Sets the kv of `Pod` nodeSelector. No Defaults. Example `nodeselector=kubernetes.io/arch=arm64`
       - `rootless=(true|false)` - Run the container as a non-root user without `securityContext.privileged`. [Using Ubuntu host kernel is recommended](https://github.com/moby/buildkit/blob/master/docs/rootless.md). Defaults to false.
       - `loadbalance=(sticky|random)` - Load-balancing strategy. If set to "sticky", the pod is chosen using the hash of the context path. Defaults to "sticky"
+      - `qemu.install=(true|false)` - Install QEMU emulation for multi platforms support.
+      - `qemu.image=IMAGE` - Sets the QEMU emulation image. Defaults to `tonistiigi/binfmt:latest`
+
+  **Examples**
+
+  #### Use a custom network
+
+  ```console
+  $ docker network create foonet
+  $ docker buildx create --name builder --driver docker-container --driver-opt network=foonet --use
+  $ docker buildx inspect --bootstrap
+  $ docker inspect buildx_buildkit_builder0 --format={{.NetworkSettings.Networks}}
+  map[foonet:0xc00018c0c0]
+  ```
+
+  #### OpenTelemetry support
+
+  To capture the trace to [Jaeger](https://github.com/jaegertracing/jaeger), set
+  `JAEGER_TRACE` environment variable to the collection address using the `driver-opt`:
+
+  ```console
+  $ docker run -d --name jaeger -p 6831:6831/udp -p 16686:16686 jaegertracing/all-in-one
+  $ docker buildx create --name builder --driver docker-container --driver-opt network=host --driver-opt env.JAEGER_TRACE=localhost:6831 --use
+  $ docker buildx inspect --bootstrap
+  # buildx command should be traced at http://127.0.0.1:16686/
+  ```
 
   ### Remove a node from a builder (--leave) {#leave}
 
