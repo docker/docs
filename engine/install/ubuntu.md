@@ -238,7 +238,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, and Contained packages:
 
     ```console
     $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
