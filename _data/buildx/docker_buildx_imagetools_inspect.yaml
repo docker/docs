@@ -22,11 +22,6 @@ long: |-
     Platform:  linux/arm/v6
    ...
   ```
-
-  ### Show original, unformatted JSON manifest (--raw) {#raw}
-
-  Use the `--raw` option to print the original JSON bytes instead of the formatted
-  output.
 usage: docker buildx imagetools inspect [OPTIONS] NAME
 pname: docker buildx imagetools
 plink: docker_buildx_imagetools.yaml
@@ -45,11 +40,21 @@ inherited_options:
 - option: builder
   value_type: string
   description: Override the configured builder instance
+  details_url: '#builder'
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
+examples: |-
+  ### Override the configured builder instance (--builder) {#builder}
+
+  Same as [`buildx --builder`](buildx.md#builder).
+
+  ### Show original, unformatted JSON manifest (--raw) {#raw}
+
+  Use the `--raw` option to print the original JSON bytes instead of the formatted
+  output.
 deprecated: false
 experimental: false
 experimentalcli: false

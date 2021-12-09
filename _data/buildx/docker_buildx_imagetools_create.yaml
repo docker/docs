@@ -58,6 +58,7 @@ inherited_options:
 - option: builder
   value_type: string
   description: Override the configured builder instance
+  details_url: '#builder'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -68,6 +69,10 @@ examples: |-
 
   Use the `--append` flag to append the new sources to an existing manifest list
   in the destination.
+
+  ### Override the configured builder instance (--builder) {#builder}
+
+  Same as [`buildx --builder`](buildx.md#builder).
 
   ### Show final image instead of pushing (--dry-run) {#dry-run}
 
@@ -81,6 +86,19 @@ examples: |-
 
   Reads source from files. A source can be a manifest digest, manifest reference,
   or a JSON of OCI descriptor object.
+
+  In order to define annotations or additional platform properties like `os.version` and
+  `os.features` you need to add them in the OCI descriptor object encoded in JSON.
+
+  ```
+  docker buildx imagetools inspect --raw alpine | jq '.manifests[0] | .platform."os.version"="10.1"' > descr.json
+  docker buildx imagetools create -f descr.json myuser/image
+  ```
+
+  The descriptor in the file is merged with existing descriptor in the registry if it exists.
+
+  The supported fields for the descriptor are defined in [OCI spec](https://github.com/opencontainers/image-spec/blob/master/descriptor.md#properties) .
+
 
   ### Set reference for new image  (-t, --tag) {#tag}
 
