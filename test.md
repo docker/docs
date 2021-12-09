@@ -91,7 +91,6 @@ culpa qui officia deserunt mollit anim id est laborum.
 ### Links
 
 - [a markdown link](https://docker.com/)
-https://github.com/docker/docker.github.io/tree/master/docker-cloud/images
 - [a markdown link that opens in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
   (the `class="_"` trick prevents Atom from italicizing the whole rest of the file until it encounters another underscore.)
 
@@ -161,7 +160,8 @@ might be interesting. You can use them with Markdown or HTML images.
 
 ## Videos
 
-To embed a YouTube video on a docs page, open the video on YouTube, click **Share** > **Embed** and then copy the code displayed.
+To embed a YouTube video on a docs page, open the video on YouTube, click
+**Share** > **Embed** and then copy the code displayed.
 
 For example, the video embedded on the Get Started page has the following code:
 
