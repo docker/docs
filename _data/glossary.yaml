@@ -1,10 +1,9 @@
 ﻿amd64: |
   AMD64 is AMD's 64-bit extension of Intel's x86 architecture, and is also
   referred to as x86_64 (or x86-64).
-aufs: |
-  aufs (advanced multi layered unification filesystem) is a Linux [filesystem](#filesystem) that
-  Docker supports as a storage backend. It implements the
-  [union mount](https://en.wikipedia.org/wiki/Union_mount) for Linux file systems.
+arm64: |
+  ARM64 is the 64-bit extension of the ARM CPU architecture. arm64 architecture
+  is used in Apple silicon machines.
 base image: |
   A **base image** has no parent image specified in its Dockerfile. It is created
   using a Dockerfile with the `FROM scratch` directive.
@@ -31,7 +30,7 @@ Compose: |
   application up in a single command which does everything that needs to
   be done to get it running.
 
-  *Also known as : docker-compose, fig*
+  *Also known as : docker-compose
 copy-on-write: |
   Docker uses a
   [copy-on-write](/storage/storagedriver/#the-copy-on-write-cow-strategy)
@@ -61,7 +60,7 @@ container: |
   - An execution environment
   - A standard set of instructions
 
-  The concept is borrowed from Shipping Containers, which define a standard to ship
+  The concept is borrowed from shipping containers, which define a standard to ship
   goods globally. Docker defines a standard to ship software.
 Docker: |
   The term Docker can refer to
@@ -80,21 +79,20 @@ Docker Desktop for Mac: |
 Docker Desktop for Windows: |
   [Docker Desktop for Windows](/desktop/windows/) is an
   easy-to-install, lightweight Docker development environment designed
-  specifically for Windows 10 systems that support Microsoft Hyper-V
-  (Professional, Enterprise and Education). Docker Desktop for Windows uses Hyper-V for
-  virtualization, and runs as a native Windows app. It works with Windows Server
-  2016, and gives you the ability to set up and run Windows containers as well as
-  the standard Linux containers, with an option to switch between the two. Docker
+  specifically for Windows systems that support WSL 2 and Microsoft Hyper-V.
+  Docker Desktop for Windows uses WSL 2 or Hyper-V for
+  virtualization. Docker Desktop
   for Windows is the best solution if you want to build, debug, test, package, and
   ship Dockerized applications from Windows machines.
 Docker Hub: |
   The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with
   Docker and its components. It provides the following services:
 
-  - Docker image hosting
+  - A registry to host Docker images
   - User authentication
-  - Automated image builds and work-flow tools such as build triggers and web hooks
+  - Automated image builds and workflow tools such as build triggers and web hooks
   - Integration with GitHub and Bitbucket
+  - Security vulnerability scanning
 Dockerfile: |
   A Dockerfile is a text document that contains all the commands you would
   normally execute manually in order to build a Docker image. Docker can
@@ -134,9 +132,9 @@ filesystem: |
 
   Examples :
 
-  - Linux : ext4, aufs, btrfs, zfs
+  - Linux : overlay2, extfs, btrfs, zfs
   - Windows : NTFS
-  - macOS : HFS+
+  - macOS : APFS
 image: |
   Docker images are the basis of [containers](#container). An Image is an
   ordered collection of root filesystem changes and the corresponding
@@ -158,17 +156,6 @@ libnetwork: |
   libnetwork provides a native Go implementation for creating and managing container
   network namespaces and other network resources. It manages the networking lifecycle
   of the container performing additional operations after the container is created.
-link: |
-  links provide a legacy interface to connect Docker containers running on the
-  same host to each other without exposing the hosts' network ports. Use the
-  Docker networks feature instead.
-Machine: |
-  [Machine](https://github.com/docker/machine) is a Docker tool which
-  makes it really easy to create Docker hosts on  your computer, on
-  cloud providers and inside your own data center. It creates servers,
-  installs Docker on them, then configures the Docker client to talk to them.
-
-  *Also known as : docker-machine*
 namespace: |
   A [Linux namespace](https://man7.org/linux/man-pages/man7/namespaces.7.html)
   is a Linux kernel feature that isolates and virtualizes system resources. Processes which are restricted to
@@ -186,7 +173,7 @@ node: |
   **Worker nodes** execute tasks.
 overlay network driver: |
   Overlay network driver provides out of the box multi-host network connectivity
-  for docker containers in a cluster.
+  for Docker containers in a cluster.
 overlay storage driver: |
   OverlayFS is a [filesystem](#filesystem) service for Linux which implements a
   [union mount](https://en.wikipedia.org/wiki/Union_mount) for other file systems.
@@ -221,7 +208,7 @@ SSH: |
   as the Internet. SSH uses public/private key pairs to authenticate logins.
 service: |
   A [service](/engine/swarm/how-swarm-mode-works/services/) is the definition of how
-  you want to run your application containers in a swarm. At the most basic level
+  you want to run your application containers in a swarm. At the most basic level,
   a service  defines which container image to run in the swarm and which commands
   to run in the container. For orchestration purposes, the service defines the
   "desired state", meaning how many containers to run as tasks and constraints for
@@ -235,23 +222,14 @@ service discovery: |
   Swarm mode [container discovery](/network/overlay/#container-discovery) is a DNS component
   internal to the swarm that automatically assigns each service on an overlay
   network in the swarm a VIP and DNS entry. Containers on the network share DNS
-  mappings for the service via gossip so any container on the network can access
-  the service via its service name.
+  mappings for the service through gossip so any container on the network can access
+  the service through its service name.
 
   You don’t need to expose service-specific ports to make the service available to
   other services on the same overlay network. The swarm’s internal load balancer
   automatically distributes requests to the service VIP among the active tasks.
 swarm: |
   A [swarm](/engine/swarm/) is a cluster of one or more Docker Engines running in [swarm mode](#swarm-mode).
-Docker Swarm: |
-  Do not confuse [Docker Swarm](https://github.com/docker/swarm) with the [swarm mode](#swarm-mode) features in Docker Engine.
-
-  Docker Swarm is the name of a standalone native clustering tool for Docker.
-  Docker Swarm pools together several Docker hosts and exposes them as a single
-  virtual Docker host. It serves the standard Docker API, so any tool that already
-  works with Docker can now transparently scale up to multiple hosts.
-
-  *Also known as : docker-swarm*
 swarm mode: |
   [Swarm mode](/engine/swarm/) refers to cluster management and orchestration
   features embedded in Docker Engine. When you initialize a new swarm (cluster) or
@@ -259,18 +237,11 @@ swarm mode: |
 tag: |
   A tag is a label applied to a Docker image in a [repository](#repository).
   Tags are how various images in a repository are distinguished from each other.
-
-  *Note : This label is not related to the key=value labels set for docker daemon.*
 task: |
   A [task](/engine/swarm/how-swarm-mode-works/services/#tasks-and-scheduling) is the
   atomic unit of scheduling within a swarm. A task carries a Docker container and
   the commands to run inside the container. Manager nodes assign tasks to worker
   nodes according to the number of replicas set in the service scale.
-
-  The diagram below illustrates the relationship of services to tasks and
-  containers.
-
-  ![services diagram](/engine/swarm/images/services-diagram.png)
 Union file system: |
   Union file systems implement a [union
   mount](https://en.wikipedia.org/wiki/Union_mount) and operate by creating
@@ -278,17 +249,12 @@ Union file system: |
   [copy-on-write](#copy-on-write) techniques to provide the building blocks for
   containers, making them very lightweight and fast.
 
-  For more on Docker and union file systems, see [Docker and AUFS in
-  practice](/engine/userguide/storagedriver/aufs-driver/),
-  [Docker and Btrfs in
-  practice](/engine/userguide/storagedriver/btrfs-driver/),
-  and [Docker and OverlayFS in
+  For more on Docker and union file systems, see [Docker and OverlayFS in
   practice](/engine/userguide/storagedriver/overlayfs-driver/).
 
   Example implementations of union file systems are
-  [UnionFS](https://en.wikipedia.org/wiki/UnionFS),
-  [AUFS](https://en.wikipedia.org/wiki/Aufs), and
-  [Btrfs](https://btrfs.wiki.kernel.org/index.php/Main_Page).
+  [UnionFS](https://en.wikipedia.org/wiki/UnionFS) and
+  [OverlayFS](https://en.wikipedia.org/wiki/OverlayFS).
 virtual machine: |
   A virtual machine is a program that emulates a complete computer and imitates dedicated hardware.
   It shares physical hardware resources with other users but isolates the operating system. The
@@ -313,8 +279,8 @@ volume: |
   - A **named volume** is a volume which Docker manages where on disk the volume is created,
     but it is given a name.
 
-  - An **anonymous volume** is similar to a named volume, however, it can be difficult, to refer to
-    the same volume over time when it is an anonymous volumes. Docker handle where the files are stored.
+  - An **anonymous volume** is similar to a named volume, however, it can be difficult to refer to
+    the same volume over time when it is an anonymous volume. Docker handles where the files are stored.
 x86_64: |
   x86_64 (or x86-64) refers to a 64-bit instruction set invented by AMD as an
   extension of Intel's x86 architecture. AMD calls its x86_64 architecture,
