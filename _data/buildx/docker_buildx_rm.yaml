@@ -6,15 +6,36 @@ long: |-
 usage: docker buildx rm [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml
-inherited_options:
-- option: builder
-  value_type: string
-  description: Override the configured builder instance
+options:
+- option: keep-state
+  value_type: bool
+  default_value: "false"
+  description: Keep BuildKit state
+  details_url: '#keep-state'
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
+inherited_options:
+- option: builder
+  value_type: string
+  description: Override the configured builder instance
+  details_url: '#builder'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  ### Override the configured builder instance (--builder) {#builder}
+
+  Same as [`buildx --builder`](buildx.md#builder).
+
+  ### Keep BuildKit state (--keep-state) {#keep-state}
+
+  Keep BuildKit state, so it can be reused by a new builder with the same name.
+  Currently, only supported by the [`docker-container` driver](buildx_create.md#driver).
 deprecated: false
 experimental: false
 experimentalcli: false

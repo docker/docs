@@ -199,7 +199,7 @@ To customize subnet allocation for your Swarm networks, you can [optionally conf
 For example, the following command is used when initializing Swarm:
 
 ```console
-$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
+$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26
 ```
 
 Whenever a user creates a network, but does not use the `--subnet` command line option, the subnet for this network will be allocated sequentially from the next available subnet from the pool. If the specified network is already allocated, that network will not be used for Swarm. 
