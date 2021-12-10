@@ -43,7 +43,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and minor changes
 
-- Docker Desktop on Apple silicon no longer requires Rosetta 2.
+- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](../apple-silicon/#known-issues).
 - Fixed an issue which prevented users from saving files from a volume using the Save As option in the Volumes UI. Fixes [docker/for-win#12407](https://github.com/docker/for-win/issues/12407).
 - Fixed an issue that sometimes launched the existing version of Docker Desktop even after updating to a newer version.
 - Added a self-diagnose warning if the host lacks Internet connectivity.
