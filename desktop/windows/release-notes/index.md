@@ -19,12 +19,34 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## Docker Desktop 4.3.1
+2021-12-11
+
+> Download Docker Desktop
+>
+> [For
+> Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
+> .button .primary-btn }
+
+### Upgrades
+
+[docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){: target="_blank" rel="noopener" class="_"}
+
+### Security
+
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin for you.
+Older versions of `docker scan` in Docker Desktop 4.3.0 and earlier versions are
+not able to detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"}.
+
+
 ## Docker Desktop 4.3.0
 2021-12-02
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> [For Windows](https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe)
 
 ### Deprecation
 - The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
