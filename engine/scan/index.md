@@ -7,8 +7,8 @@ toc_max: 2
 ---
 
 {% include sign-up-cta.html
-  body="You can now get 10 free scans per month as part of your Docker subscription. Sign in to Docker to start scanning your images for vulnerabilities."
-  header-text="This feature requires a Docker subscription"
+  body="Did you know that you can now get 10 free scans per month? Sign in to Docker to start scanning your images for vulnerabilities."
+  header-text="Scan your images for free"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 
