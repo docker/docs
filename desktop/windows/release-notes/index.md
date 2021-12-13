@@ -40,6 +40,9 @@ not able to detect [Log4j 2
 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
 target="_blank" rel="noopener" class="_"}.
 
+For more information, read the
+blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
 
 ## Docker Desktop 4.3.0
 2021-12-02
@@ -48,9 +51,6 @@ target="_blank" rel="noopener" class="_"}.
 >
 > [For Windows](https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe)
 
-### Deprecation
-- The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
-- Removed: Custom RBAC rules have been removed from Docker Desktop as it gives `cluster-admin` privileges to all Service Accounts. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774).
 
 ### Upgrades
 
@@ -69,7 +69,14 @@ target="_blank" rel="noopener" class="_"}.
 - Added a self-diagnose warning if the host lacks Internet connectivity.
 - Docker Desktop now uses cgroupv2. If you need to run `systemd` in a container then:
   - Ensure your version of `systemd` supports cgroupv2. [It must be at least `systemd` 247](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075). Consider upgrading any `centos:7` images to `centos:8`.
-  - Containers running `systemd` need the following options: [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
+  - Containers running `systemd` need the following options: [`--privileged
+    --cgroupns=host -v
+    /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
+
+### Deprecation
+
+- The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
+- Removed: Custom RBAC rules have been removed from Docker Desktop as it gives `cluster-admin` privileges to all Service Accounts. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/4774).
 
 ## Docker Desktop 4.2.0
 2021-11-09
