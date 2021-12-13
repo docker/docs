@@ -5,12 +5,13 @@ keywords: docker scan, scan, images, snyk, vulnerability
 ---
 
 {% include sign-up-cta.html
-  body="You can now get 10 free scans per month as part of your Docker subscription. Sign in to Docker to start scanning your images for vulnerabilities."
-  header-text="This feature requires a Docker subscription"
+  body="Did you know that you can now get 10 free scans per month? Sign in to Docker to start scanning your images for vulnerabilities."
+  header-text="Scan your images for free"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_scan"
 %}
 
-This page contains recommendations and best practices for scanning and building secure images.
+This page contains recommendations and best practices for scanning and building
+secure images.
 
 Docker and Snyk have partnered together to bring security natively into the development workflow by providing a simple and streamlined approach for developers to build and deploy secure containers. Container security spans multiple teams - developers, security, and operations. Additionally, there are multiple layers of security that apply to containers:
 
@@ -24,6 +25,15 @@ Including the vulnerability scanning options into the Docker platform extends th
 ![Developer's security journey](/images/dev-security-journey.png){:width="700px"}
 
 ## Scanning images
+
+> **Log4j 2 CVE-2021-44228**
+>
+> Versions of `docker scan` earlier than `v0.11.0` are not able to detect [Log4j 2
+> CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+> target="_blank" rel="noopener" class="_"}. You must update your Docker Desktop
+> installation to version 4.3.1 or higher to fix this issue. For more information,
+> see [Scan images for Log4j 2 CVE](../../engine/scan#scan-images-for-log4j-2-cve). 
+{: .important}
 
 You can trigger scans automatically by pushing an image to Docker Hub. You can achieve this either through the `docker scan` command in the CLI, or through Docker Hub.
 
