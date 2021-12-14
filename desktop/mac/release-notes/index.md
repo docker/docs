@@ -64,13 +64,21 @@ blog post [Apache Log4j 2 CVE-2021-44228](https://www.docker.com/blog/apache-log
 
 ### Bug fixes and minor changes
 
-- Docker Desktop on Apple silicon no longer requires Rosetta 2.
+- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](../apple-silicon/#known-issues).
 - Fixed an issue which prevented users from saving files from a volume using the Save As option in the Volumes UI. Fixes [docker/for-win#12407](https://github.com/docker/for-win/issues/12407).
 - Fixed an issue that sometimes launched the existing version of Docker Desktop even after updating to a newer version.
 - Added a self-diagnose warning if the host lacks Internet connectivity.
 - Docker Desktop now uses cgroupv2. If you need to run `systemd` in a container then:
   - Ensure your version of `systemd` supports cgroupv2. [It must be at least `systemd` 247](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075). Consider upgrading any `centos:7` images to `centos:8`.
   - Containers running `systemd` need the following options: [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
+
+### Known issue
+
+Docker Dashboard incorrectly displays the container memory usage as zero.
+You can use the [`docker stats`](../../../engine/reference/commandline/stats.md)
+command on the command line as a workaround to view the
+actual memory usage. See
+[docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).
 
 ### Deprecation
 

@@ -243,9 +243,19 @@ The `development`target uses a `golang:1.16-alpine` image with all dependencies 
 
 In our example, the Docker Compose files are the same. However, they could be different and the services defined in the main Compose file may use other targets to build or directly reference other images.
 
+## Specify a Dockerfile 
+
+In this preview, Dev Environments support a JSON file which allows you to specify a Dockerfile to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example:
+
+```jsx
+{
+    "dockerfile": "Dockerfile.devenv"
+}
+```
+
 ## Specify a base image
 
-In this preview, Dev Environments support a simple YAML file which allows you to specify the base image that you would like to use as part of your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
+If you already have an image built, you can specify it as a base image to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
 
 ```jsx
 {
