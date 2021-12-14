@@ -1386,6 +1386,12 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
+      - sectiontitle: Single Sign-on
+        section:
+          -  path: /single-sign-on/
+             title: Single-Sign-on
+          -  path: /single-sign-on/faqs
+             title: SSO FAQs
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - sectiontitle: Administration
