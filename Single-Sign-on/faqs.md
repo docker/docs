@@ -25,7 +25,7 @@ Docker SSO is available with a Docker Business subscription. To enable SSO, you 
 
 ### Q: Where can I find detailed instructions on how to configure Docker SSO?
 
-For step by step instructions on how to configure Docker SSO, see [Single Sign-on docs](/single-sign-on).
+For step by step instructions on how to configure Docker SSO, see [Single Sign-on docs](/single-sign-on/#index.md).
 
 ### Q: Is it possible to use more than one IdP with Docker SSO?
 
@@ -33,7 +33,7 @@ No. You can only configure Docker SSO to work with a single IdP. A domain can on
 
 ### Q: Is it possible to change my identity provider after configuring SSO?
 
-Yes. You must delete your existing IdP configuration in Docker Hub and follow the instructions in the [Single Sign-on docs](/single-sign-on) to configure SSO using your IdP.
+Yes. You must delete your existing IdP configuration in Docker Hub and follow the instructions in the [Single Sign-on docs](/single-sign-on/#index.md) to configure SSO using your IdP.
 
 ###  Q: Is Docker SSO available for all paid subscriptions?
 
@@ -63,7 +63,7 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 ### Q: Does Docker SSO support authenticating through the command line?
 
-Yes. When SSO is enabled, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Managing access tokens](/docker-hub/access-tokens/).
+Yes. When SSO is enabled, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Managing access tokens](/docker-hub/access-tokens/). Before we transition to PATs, CLI can continue logging in using their personal credentials until early next year to mitigate the risk of interrupting CI/CD pipelines.
 
 ###  Q:  How does SSO affect our automation systems and CI/CD pipelines?
 
@@ -97,7 +97,7 @@ When a user signs into Docker for the first time using their domain email addres
 
 ### Q: Can users in my organization use different email addresses to authenticate via SSO?
 
-During the SSO setup, you’ll have to specify the company email domains that are allowed to authenticate. All users in your organization must authenticate using the email domain specified during SSO setup.
+During the SSO setup, you’ll have to specify the company email domains that are allowed to authenticate. All users in your organization must authenticate using the email domain specified during SSO setup. Some of your users may want to maintain a different account for their personal projects.
 
 Users with a public domain email address will be added as guests.
 
@@ -128,7 +128,7 @@ Yes, you can convert existing users to an SSO account. To convert users from a n
 * Each user has created a PAT to replace their passwords to allow them to log in through Docker CLI
 * Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 
-For detailed prerequisites and for instruction on how to enable SSO, see [Single Sign-on](/single-sign-on).
+For detailed prerequisites and for instruction on how to enable SSO, see [Single Sign-on](/single-sign-on/#index.md).
 
 ### Q: What impact can users expect once we start onboarding them to SSO accounts?
 
