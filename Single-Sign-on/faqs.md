@@ -1,7 +1,8 @@
 ---
 description: Single Sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
-title: SSO FAQs
+title: Single Sign-on FAQs
+toc_max: 2
 ---
 
 ## General
@@ -32,7 +33,7 @@ No. You can only configure Docker SSO to work with a single IdP. A domain can on
 
 ### Q: Is it possible to change my identity provider after configuring SSO?
 
-Yes. You must delete your existing IdP configuration in Docker Hub and follow the instructions in the [SSO docs](/single-sign-on) to configure SSO using your IdP.
+Yes. You must delete your existing IdP configuration in Docker Hub and follow the instructions in the [SSO docs](/single-sign-on.md) to configure SSO using your IdP.
 
 ###  Q: Is Docker SSO available for all paid subscriptions?
 
@@ -77,10 +78,6 @@ Yes, all users in your organization must upgrade to Docker Desktop version 4.4.0
 ### Q: Does SAML authentication require additional attributes?
 
 You must provide an email address as an attribute to authenticate via SAML. The ‘Name’ attribute is currently optional.
-
-### Q: Does the application recognize the NameID/Unique Identifier in the SAMLResponse Subject? If so please provide the format you require.
-
-TBD
 
 ### Q: When SAML SSO is enforced, at what stage is the login required to be tracked through SAML? At runtime or install time?
 
@@ -131,7 +128,7 @@ Yes, you can convert existing users to an SSO account. To convert users from a n
 * Each user has created a PAT to replace their passwords to allow them to log in through Docker CLI
 * Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 
-For detailed prerequisites and for instruction on how to enable SSO, see [Single-Sign-on](/single-sign-on).
+For detailed prerequisites and for instruction on how to enable SSO, see [Single-Sign-on](/single-sign-on.md).
 
 ### Q: What impact can users expect once we start onboarding them to SSO accounts?
 

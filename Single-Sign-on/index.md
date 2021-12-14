@@ -1,7 +1,7 @@
 ---
 description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
-title: Docker Single Sign-on
+title: Configure Single Sign-on
 ---
 
 Docker Single Sign-on (SSO) allows users to authenticate using their identity providers (IdPs) to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
