@@ -245,7 +245,7 @@ In our example, the Docker Compose files are the same. However, they could be di
 
 ## Specify a Dockerfile 
 
-In this preview, Dev Environments support a simple YAML file which allows you to specify a Dockerfile to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example:
+In this preview, Dev Environments support a simple JSON file which allows you to specify a Dockerfile to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example:
 
 ```jsx
 {
