@@ -255,7 +255,7 @@ In this preview, Dev Environments support a JSON file which allows you to specif
 
 ## Specify a base image
 
-In the case that you already have a image built, you can specify it as a base image to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
+If you already have an image built, you can specify it as a base image to define your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example, to use the Jekyll base image, add:
 
 ```jsx
 {
