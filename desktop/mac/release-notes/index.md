@@ -72,6 +72,14 @@ blog post [Apache Log4j 2 CVE-2021-44228](https://www.docker.com/blog/apache-log
   - Ensure your version of `systemd` supports cgroupv2. [It must be at least `systemd` 247](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075). Consider upgrading any `centos:7` images to `centos:8`.
   - Containers running `systemd` need the following options: [`--privileged --cgroupns=host -v /sys/fs/cgroup:/sys/fs/cgroup:rw`](https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva).
 
+### Known issue
+
+Docker Dashboard incorrectly displays the container memory usage as zero.
+You can use the [`docker stats`](../../../engine/reference/commandline/stats.md)
+command on the command line as a workaround to view the
+actual memory usage. See
+[docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).
+
 ### Deprecation
 
 - The following internal DNS names are deprecated and will be removed from a future release: `docker-for-desktop`, `docker-desktop`, `docker.for.mac.host.internal`, `docker.for.mac.localhost`, `docker.for.mac.gateway.internal`. You must now use `host.docker.internal`, `vm.docker.internal`, and `gateway.docker.internal`.
