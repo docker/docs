@@ -229,40 +229,6 @@ guides:
           title: Journald logging driver
         - path: /config/containers/logging/splunk/
           title: Splunk logging driver
-    - sectiontitle: Security
-      section:
-      - path: /engine/security/
-        title: Docker security
-      - path: /engine/security/non-events/
-        title: Docker security non-events
-      - path: /engine/security/protect-access/
-        title: Protect the Docker daemon socket
-      - path: /engine/security/certificates/
-        title: Using certificates for repository client verification
-      - sectiontitle: Use trusted images
-        section:
-        - path: /engine/security/trust/
-          title: Overview
-        - path: /engine/security/trust/trust_automation/
-          title: Automation
-        - path: /engine/security/trust/trust_delegation/
-          title: Delegations
-        - path: /engine/security/trust/deploying_notary/
-          title: Deploy Notary
-        - path: /engine/security/trust/trust_key_mng/
-          title: Manage content trust keys
-        - path: /engine/security/trust/trust_sandbox/
-          title: Play in a content trust sandbox
-      - path: /engine/security/antivirus/
-        title: Antivirus software
-      - path: /engine/security/apparmor/
-        title: AppArmor security profiles
-      - path: /engine/security/seccomp/
-        title: Seccomp security profiles
-      - path: /engine/security/userns-remap/
-        title: Isolate containers with a user namespace
-      - path: /engine/security/rootless/
-        title: Rootless mode
     - sectiontitle: Scale your app
       section:
       - path: /engine/swarm/
@@ -1413,6 +1379,45 @@ manuals:
     title: Add seats
   - path: /subscription/remove-seats/
     title: Remove seats
+
+- sectiontitle: Security
+  section:
+  - path: /security/
+    title: Announcements
+  - sectiontitle: Docker Engine security
+    section:
+      - path: /engine/security/
+        title: Overview
+      - path: /engine/security/non-events/
+        title: Docker security non-events
+      - path: /engine/security/protect-access/
+        title: Protect the Docker daemon socket
+      - path: /engine/security/certificates/
+        title: Using certificates for repository client verification
+      - sectiontitle: Use trusted images
+        section:
+        - path: /engine/security/trust/
+          title: Overview
+        - path: /engine/security/trust/trust_automation/
+          title: Automation
+        - path: /engine/security/trust/trust_delegation/
+          title: Delegations
+        - path: /engine/security/trust/deploying_notary/
+          title: Deploy Notary
+        - path: /engine/security/trust/trust_key_mng/
+          title: Manage content trust keys
+        - path: /engine/security/trust/trust_sandbox/
+          title: Play in a content trust sandbox
+      - path: /engine/security/antivirus/
+        title: Antivirus software
+      - path: /engine/security/apparmor/
+        title: AppArmor security profiles
+      - path: /engine/security/seccomp/
+        title: Seccomp security profiles
+      - path: /engine/security/userns-remap/
+        title: Isolate containers with a user namespace
+      - path: /engine/security/rootless/
+        title: Rootless mode
 
 - sectiontitle: Open-source projects
   section:
