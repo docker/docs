@@ -75,74 +75,9 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 | [sonarqube](https://hub.docker.com/_/sonarqube)    | 9.2.2 | [SonarQube announcement](https://community.sonarsource.com/t/sonarqube-sonarcloud-and-the-log4j-vulnerability/54721) |
 | [storm](https://hub.docker.com/_/storm)    | Awaiting info | Awaiting info |
 
-### More information
-
-#### Couchbase
-
-The following command removes the `JndiLookup` class from any version of the `log4j` jar
-files and protects against this exploit:
-
-```console
-$ find /opt/couchbase/lib/cbas/repo -name ‘log4j-core*.jar’ -type f  | xargs -I{} sh -c ‘echo patching {}; zip -q -d {} org/apache/logging/log4j/core/lookup/JndiLookup.class’
-```
-
-The Couchbase Server Community Edition is not impacted by this vulnerability, as
-this product does not contain the Couchbase Analytics service. Only Couchbase
-Server Enterprise Edition, when running the Couchbase Analytics service,
-versions 6.0.0 through 6.6.3 and versions 7.0.0 through 7.0.2 are impacted.
-
-For more information, refer to the [Couchbase
-blog](https://blog.couchbase.com/what-to-know-about-the-log4j-vulnerability-cve-2021-44228/){:
-target="_blank" rel="noopener" class="_"}.
-
-#### Elasticsearch
-
-Set the JVM option `-Dlog4j2.formatMsgNoLookups=true`. For more information,
-refer to the [ElasticSearch
-blog](https://discuss.elastic.co/t/apache-log4j2-remote-code-execution-rce-vulnerability-cve-2021-44228-esa-2021-31/291476){:
-target="_blank" rel="noopener" class="_"}
-
-#### Flink
-
-Set the environment variable `env.java.opts: -Dlog4j2.formatMsgNoLookups=true`
-
-Flink versions `1.11.5`, `1.12.6`, `1.15.0`, `1.14.1`, `1.13.4` have been
-updated to use Apache 2.15.0. Flink `1.14.1` is expected to be released in the
-next week or two. For more information, refer to the [Flink advice on Log4j CVE](https://flink.apache.org/2021/12/10/log4j-cve.html).
-
-#### neo4J
-
-Use the following configuration setting in your `$PATH_TO_NEO4J/conf/neo4j.conf`
-or `/etc/neo4j/neo4j.conf`
-
-```console
-dbms.jvm.additional=-Dlog4j2.formatMsgNoLookups=truedbms.jvm.additional=-Dlog4j2.disable.jmx=true
-```
-
-For more information, refer to the [Neo4j announcement](https://community.neo4j.com/t/log4j-cve-mitigation-for-neo4j/48856){:
-target="_blank" rel="noopener" class="_"}.
-
-#### Solr
-
-Manually update the version of log4j2 on your runtime classpath and restart your
-Solr application.
-
-On Linux and macOS, edit your `solr.in.sh` file to include
-`SOLR_OPTS="$SOLR_OPTS -Dlog4j2.formatMsgNoLookups=true"`
-
-On Windows, edit your `solr.in.cmd` file to include `set SOLR_OPTS=%SOLR_OPTS%
--Dlog4j2.formatMsgNoLookups=true`
-
-For more information, refer to the [Solr security news](https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228){:
-target="_blank" rel="noopener" class="_"}.
-
-#### SonarQube
-
-Set the environment variable
-`sonar.search.javaAdditionalOpts=-Dlog4j2.formatMsgNoLookups=true`.
-
-SonarQube application itself does not rely on Log4J directly and SonarQube LTS
-8.9.x and SonarQube 9.2.1 are not directly susceptible to this vulnerability.
-The only supported versions of SonarQube are  8.9.3, the current LTS, and 9.2.1,
-the latest version. If you are on an older version, we strongly recommend you
-upgrade to the latest version.
+> **Note**
+>
+> Although [xwiki](https://hub.docker.com/_/xwiki){:
+target="_blank" rel="noopener" class="_"} images may be detected as vulnerable
+by some scanners, the authors believe the images are not vulnerable by Log4j 2
+CVE as the API jars do not contain the vulnerability.
