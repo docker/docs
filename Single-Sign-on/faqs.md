@@ -25,7 +25,7 @@ Docker SSO is available with a Docker Business subscription. To enable SSO, you 
 
 ### Q: Where can I find detailed instructions on how to configure Docker SSO?
 
-For step by step instructions on how to configure Docker SSO, see [Single Sign-on docs](/single-sign-on/#index.md).
+For step by step instructions, see [Configure Single Sign-on](index.md).
 
 ### Q: Is it possible to use more than one IdP with Docker SSO?
 
@@ -33,7 +33,7 @@ No. You can only configure Docker SSO to work with a single IdP. A domain can on
 
 ### Q: Is it possible to change my identity provider after configuring SSO?
 
-Yes. You must delete your existing IdP configuration in Docker Hub and follow the instructions in the [Single Sign-on docs](/single-sign-on/#index.md) to configure SSO using your IdP.
+Yes. You must delete your existing IdP configuration in Docker Hub and follow the instructions to [configure SSO](index.md) using your IdP.
 
 ###  Q: Is Docker SSO available for all paid subscriptions?
 
@@ -128,7 +128,7 @@ Yes, you can convert existing users to an SSO account. To convert users from a n
 * Each user has created a PAT to replace their passwords to allow them to log in through Docker CLI
 * Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 
-For detailed prerequisites and for instruction on how to enable SSO, see [Single Sign-on](/single-sign-on/#index.md).
+For detailed prerequisites and for instructions on how to enable SSO, see [Configure Single Sign-on](#index.md).
 
 ### Q: What impact can users expect once we start onboarding them to SSO accounts?
 
