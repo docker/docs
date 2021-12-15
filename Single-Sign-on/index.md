@@ -21,11 +21,11 @@ We currently support enabling SSO on a single organization. If you have any user
 
 ## SSO prerequisites
 
-* You must first notify your company about the new SSO login procedures
-* Verify that your org members have Docker Desktop version 4.4.0 installed on their machines
-* Each org member must [create a Personal Access Token] (PAT)  to replace their passwords
-* Confirm that all CI/CD pipelines have replaced their passwords with PATs
-* Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
+* You must first notify your company about the new SSO login procedures. Some of your users may want to maintain a different account for their personal projects.
+* Verify that your org members have Docker Desktop version 4.4.0 installed on their machines.
+* Each org member must [create a Personal Access Token] (PAT)  to replace their passwords.
+* Confirm that all CI/CD pipelines have replaced their passwords with PATs.
+* Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub.
 
 ## Configure SSO
 
@@ -95,8 +95,3 @@ Select the organization from the list. The organization page displays a list of 
 
 ## FAQs
 To learn more see our [FAQs](faqs.md).
-
-
-
-
-
