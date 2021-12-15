@@ -29,7 +29,9 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 
 6. Verify your email address to complete the registration process.
 
-> **Note**: You have limited actions available to you until until you verify your email address.
+> **Note**
+>
+> You have limited actions available until you verify your email address.
 
 ## Log in
 
