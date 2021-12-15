@@ -54,4 +54,5 @@ The most frequently asked questions regarding Docker ID accounts can be found on
 
 You can use the [Docker forums](https://forums.docker.com/) to ask questions amongst other Docker community members, while our [hub-feedback GitHub repository](https://github.com/docker/hub-feedback) allows you to provide feedback on how we can better improve the experience with Docker Hub.
 
-If all else fails and you still need help, we are eager to help you! [Create a support ticket](https://hub.docker.com/support/contact/)!
+If you still need any help, [create a support ticket](https://hub.docker.com/support/contact/) and let us know how we can help you.
+
