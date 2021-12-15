@@ -16,11 +16,85 @@ Looking to speed up your development cycles? Quickly detect and learn how to rem
 
 Vulnerability scanning for Docker local images  allows developers and development teams to review the security state of the container images and take actions to fix issues identified during the scan, resulting in more secure deployments. Docker Scan runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images.
 
-Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. The scan results contain a list of Common Vulnerabilities and Exposures (CVEs), the sources, such as OS packages and libraries, versions in which they were introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.
+Users trigger vulnerability scans through the CLI, and use the CLI to view the
+scan results. The scan results contain a list of Common Vulnerabilities and
+Exposures (CVEs), the sources, such as OS packages and libraries, versions in
+which they were introduced, and a recommended fixed version (if available) to
+remediate the CVEs discovered.
+
+> **Log4j 2 CVE-2021-44228**
+>
+> Versions of `docker Scan` earlier than `v0.11.0` are not able to detect [Log4j 2
+> CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+> target="_blank" rel="noopener" class="_"}. You must update your Docker
+> Desktop installation to 4.3.1 or higher to fix this issue. For more
+> information, see [Scan images for Log4j 2 CVE](#scan-images-for-log4j-2-cve).
+{: .important}
 
 For information about the system requirements to run vulnerability scanning, see [Prerequisites](#prerequisites).
 
-This page contains information about the `docker scan` CLI command. For information about automatically scanning Docker images through Docker Hub, see [Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+This page contains information about the `docker scan` CLI command. For
+information about automatically scanning Docker images through Docker Hub, see
+[Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+
+## Scan images for Log4j 2 CVE
+
+Docker Scan versions earlier than `v0.11.0` do not detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} when you scan your
+images for vulnerabilities. You must update your Docker installation to the
+latest version to fix this issue.
+
+If you are using the `docker scan` plugin shipped
+with Docker Desktop, update Docker Desktop to version 4.3.1 or
+higher. See the release notes for [Mac](../../desktop/mac/release-notes/index.md) and
+[Windows](../../desktop/windows/release-notes/index.md) for download information.
+
+If you are using Linux, run the following command to manually install the latest
+version of `docker scan`:
+
+On `.deb` based distros, such as Ubuntu and Debian:
+
+```console
+$ apt-get update && apt-get install docker-scan-plugin
+```
+
+On rpm-based distros, such as CentOS or Fedora:
+
+```console
+$ yum install docker-scan-plugin
+```
+
+Alternatively, you can manually download the `docker scan` binaries from the [Docker Scan](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){:
+target="_blank" rel="noopener" class="_"} GitHub repository and
+[install](https://github.com/docker/scan-cli-plugin){:
+target="_blank" rel="noopener" class="_"}  in the plugins directory.
+
+### Verify the `docker scan` version
+
+After upgrading `docker scan`, verify you are running the latest version by
+running the following command:
+
+```console
+$ docker scan --accept-license --version
+Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+```
+
+If your code output contains `ORGAPACHELOGGINGLOG4J`, it is
+likely that your code is affected by the Log4j 2 CVE-2021-44228 vulnerability. When you run the updated version of `docker scan`, you should also see a message
+in the output log similar to:
+
+```console
+Upgrade org.apache.logging.log4j:log4j-core@2.14.0 to org.apache.logging.log4j:log4j-core@2.15.0 to fix
+✗ Arbitrary Code Execution (new) [Critical Severity][https://snyk.io/vuln/SNYK-JAVA-ORGAPACHELOGGINGLOG4J-2314720] in org.apache.logging.log4j:log4j-core@2.14.0
+introduced by org.apache.logging.log4j:log4j-core@2.14.0
+```
+
+For more information, read our blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){:
+target="_blank" rel="noopener" class="_"}.
 
 ## How to scan images
 
@@ -340,7 +414,7 @@ If you use the `--login` flag without any token, you will be redirected to the S
 
 To run vulnerability scanning on your Docker images, you must meet the following requirements:
 
-1. Download and install Docker Desktop.
+1. Download and install the latest version of Docker Desktop.
 
     - [Download for Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
     - [Download for Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
