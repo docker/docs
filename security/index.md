@@ -65,14 +65,14 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 |:------------------------|:-----------------------|:-----------------------|
 | [couchbase](https://hub.docker.com/_/couchbase)    | 7.0.3 | [Couchbase blog](https://blog.couchbase.com/what-to-know-about-the-log4j-vulnerability-cve-2021-44228/) |
 | [Elasticsearch](https://hub.docker.com/_/elasticsearch)    | 7.16.1, 6.8.21 | [Elasticsearch security announcement](https://discuss.elastic.co/t/apache-log4j2-remote-code-execution-rce-vulnerability-cve-2021-44228-esa-2021-31/291476) |
-| [Flink](https://hub.docker.com/_/flink)    | Awaiting info  | [Flink advice on Log4j CVE](https://flink.apache.org/2021/12/10/log4j-cve.html) |
+| [Flink](https://hub.docker.com/_/flink)    | 1.11.6, 1.12.7, 1.13.5, 1.14.2  | [Flink advice on Log4j CVE](https://flink.apache.org/2021/12/10/log4j-cve.html) |
 | [Geonetwork](https://hub.docker.com/_/geonetwork)    | 3.10.10 | [Geonetwork GitHub discussion](https://github.com/geonetwork/core-geonetwork/issues/6076) |
 | [lightstreamer](https://hub.docker.com/_/lightstreamer)     | Awaiting info | Awaiting info  |
 | [logstash](https://hub.docker.com/_/logstash)    | 7.16.1 | Awaiting info |
 | [neo4j](https://hub.docker.com/_/neo4j)     | 4.4.1 | [Neo4j announcement](https://community.neo4j.com/t/log4j-cve-mitigation-for-neo4j/48856) |
 | [nuxeo](https://hub.docker.com/_/nuxeo)     | Awaiting info | [nuxeo blog](https://www.nuxeo.com/blog/apache-log4j/) |
 | [solr](https://hub.docker.com/_/solr)    | Awaiting info | [Solr security news](https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228) |
-| [sonarqube](https://hub.docker.com/_/sonarqube)    | 9.2.2 | [SonarQube announcement](https://community.sonarsource.com/t/sonarqube-sonarcloud-and-the-log4j-vulnerability/54721) |
+| [sonarqube](https://hub.docker.com/_/sonarqube)    | 8.9.5, 9.2.2 | [SonarQube announcement](https://community.sonarsource.com/t/sonarqube-sonarcloud-and-the-log4j-vulnerability/54721) |
 | [storm](https://hub.docker.com/_/storm)    | Awaiting info | Awaiting info |
 
 > **Note**
