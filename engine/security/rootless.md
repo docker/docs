@@ -348,7 +348,7 @@ Add `net.ipv4.ping_group_range = 0   2147483647` to `/etc/sysctl.conf` (or
 To expose privileged ports (< 1024), set `CAP_NET_BIND_SERVICE` on `rootlesskit` binary and restart the daemon.
 
 ```console
-$ sudo setcap cap_net_bind_service=ep /usr/bin/rootlesskit
+$ sudo setcap cap_net_bind_service=ep $(which rootlesskit)
 $ systemctl --user restart docker
 ```
 
