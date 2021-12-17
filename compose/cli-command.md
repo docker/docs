@@ -79,7 +79,7 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 
     ```console
     $ mkdir -p ~/.docker/cli-plugins/
-    $ curl -SL https://github.com/docker/compose/releases/download/v2.0.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+    $ curl -SL https://github.com/docker/compose/releases/download/v{{site.compose_v2_version}}/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
     ```
 
     This command installs Compose V2 for the active user under `$HOME` directory. To install Docker Compose for all users on your system, replace `~/.docker/cli-plugins` with `/usr/local/lib/docker/cli-plugins`.
@@ -94,7 +94,7 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 
     ```console
     $ docker compose version
-    Docker Compose version 2.0.1
+    Docker Compose version {{site.compose_v2_version}}
     ```
 
 ### Compose Switch
@@ -112,7 +112,7 @@ To install Compose Switch manually:
 1. Download the `compose-switch` binary for your architecture
 
     ```console
-    $ curl -fL https://github.com/docker/compose-switch/releases/download/v1.0.1/docker-compose-linux-amd64 -o /usr/local/bin/compose-switch
+    $ curl -fL https://github.com/docker/compose-switch/releases/download/v{{site.compose_switch_version}}/docker-compose-linux-amd64 -o /usr/local/bin/compose-switch
     ```
 
 2. Run the following command to make it an executable:

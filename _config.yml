@@ -23,10 +23,12 @@ exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html", 
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
 compose_version: "1.29.2"
+compose_v2_version: "2.2.2"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
+compose_switch_version:  "1.0.4"
 
 # List of plugins to enable for local development builds. Mostly the same as
 # for production, but without the "jekyll-sitemap" plugin, which is not needed
