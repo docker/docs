@@ -17,7 +17,7 @@ selects the image variant that matches your OS and architecture.
 Most of the Docker Official Images on Docker Hub provide a [variety of architectures](https://github.com/docker-library/official-images#architectures-other-than-amd64){: target="_blank" rel="noopener" class="_" }.
 For example, the `busybox` image supports `amd64`, `arm32v5`, `arm32v6`,
 `arm32v7`, `arm64v8`, `i386`, `ppc64le`, and `s390x`. When running this image
-on an `x86_64` / `amd64` machine, the `x86_64` variant is pulled and run.
+on an `x86_64` / `amd64` machine, the `amd64` variant is pulled and run.
 
 ## Multi-arch support on Docker Desktop
 
