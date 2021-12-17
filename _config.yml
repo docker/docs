@@ -27,7 +27,7 @@ compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
-compose_switch_version:  "1.03"
+compose_switch_version:  "1.0.4"
 
 # List of plugins to enable for local development builds. Mostly the same as
 # for production, but without the "jekyll-sitemap" plugin, which is not needed
