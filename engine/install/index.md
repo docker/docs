@@ -94,10 +94,11 @@ These binaries are statically linked and can be used on any Linux distribution.
 
 ## Release channels
 
-Docker Engine has three types of update channels, **stable**, **test**,
+Docker Engine has (4) types of update channels, **stable**, **test**,
 and **nightly**:
 
 * The **Stable** channel gives you latest releases for general availability.
+* The **Edge** channel is updated monthly with latest features & bugfixes.
 * The **Test** channel gives pre-releases that are ready for testing before
   general availability (GA).
 * The **Nightly** channel gives you latest builds of work in progress for the
@@ -111,6 +112,14 @@ branch. The branch is created with format `<year>.<month>`, for example
 month to expect the release to be generally available. All further patch
 releases are performed from that branch. For example, once `v20.10.0` is
 released, all subsequent patch releases are built from the `20.10` branch.
+
+### Edge
+
+Edge releases are supported only for (1) month and will receive no maintenance
+releases after a new **Edge** release has been made.Since **Edge** will contain
+new features and bugfixes, there will not be exact parity between features in 
+**Edge** and those in **Stable**. In respect to suitability for production use, 
+this channel is between **Test** and **Stable** update channels.
 
 ### Test
 
