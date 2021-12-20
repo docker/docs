@@ -29,6 +29,30 @@ The effective date of these terms is August 31, 2021. There is a grace period un
 
 Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected. For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
+### Can I use Docker Desktop offline?
+
+Yes, you can use Docker Desktop offline. However, you
+will not be able to access features that require an active internet
+connection. Additionally, any functionality that requires you to sign in will
+also not work while using Docker Desktop offline or in air-gapped environments.
+This includes:
+
+- The in-app [Quick Start Guide](/mac/install.md#quick-start-guide)
+- Pull or push an image to Docker Hub
+- [Image Access Management](../docker-hub/image-access-management.md)
+- [Vulnerability scanning](../docker-hub/vulnerability-scanning.md)
+- View remote images in the [Docker Dashboard](dashboard.md)
+- Set up [Dev Environments](dev-environments.md)
+- Docker build when using [Buildkit](../develop/develop-images/build_enhancements.md). You can work around this by disabling
+  BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
+- Deploying an app to the cloud through Compose
+  [ACI](../cloud/aci-integration.md) and [ECS](../cloud/ecs-integration.md)
+  integrations
+- [Kubernetes](kubernetes.md) (Images are download when you enable Kubernetes for the first time)
+- [Check for updates](/mac/install.md#updates) (manual and automatic)
+- [In-app diagnostics](/mac/troubleshoot.md#diagnose-and-feedback) (including the [Self-diagnose tool](/mac/troubleshoot.md#self-diagnose-tool))
+- Tip of the week
+- Sending usage statistics
 
 ### What is an experimental feature?
 

@@ -2,6 +2,7 @@
 description: How to create base images
 keywords: images, base image, examples
 redirect_from:
+- /articles/baseimages/
 - /engine/articles/baseimages/
 - /engine/userguide/eng-image/baseimages/
 title: Create a base image

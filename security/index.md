@@ -25,10 +25,10 @@ vulnerable versions.
 > As an update to
 > [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
 target="_blank" rel="noopener" class="_"}, the fix made in version 2.15.0 was
-> incomplete in certain non-default configurations. An additional issue has
-> been identified and is tracked with
-> [CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046){: target="_blank" rel="noopener" class="_"}. For a more complete fix to this
-> vulnerability, we recommended that you update to 2.16.0 where possible.
+> incomplete. Additional issues have been identified and are tracked with
+> [CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046){: target="_blank" rel="noopener" class="_"} and
+> [CVE-2021-45105](https://nvd.nist.gov/vuln/detail/CVE-2021-45105){: target="_blank" rel="noopener" class="_"}.
+> For a more complete fix to this vulnerability, we recommended that you update to 2.17.0 where possible.
 {: .important}
 
 ## Scan images using the `docker scan` command
@@ -69,9 +69,8 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 | [Geonetwork](https://hub.docker.com/_/geonetwork)    | 3.10.10 | [Geonetwork GitHub discussion](https://github.com/geonetwork/core-geonetwork/issues/6076) |
 | [lightstreamer](https://hub.docker.com/_/lightstreamer)     | Awaiting info | Awaiting info  |
 | [logstash](https://hub.docker.com/_/logstash)    | 7.16.1 | Awaiting info |
-| [neo4j](https://hub.docker.com/_/neo4j)     | 4.4.1 | [Neo4j announcement](https://community.neo4j.com/t/log4j-cve-mitigation-for-neo4j/48856) |
-| [nuxeo](https://hub.docker.com/_/nuxeo)     | Awaiting info | [nuxeo blog](https://www.nuxeo.com/blog/apache-log4j/) |
-| [solr](https://hub.docker.com/_/solr)    | Awaiting info | [Solr security news](https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228) |
+| [neo4j](https://hub.docker.com/_/neo4j)     | 4.4.2 | [Neo4j announcement](https://community.neo4j.com/t/log4j-cve-mitigation-for-neo4j/48856) |
+| [solr](https://hub.docker.com/_/solr)    | 8.11.1 | [Solr security news](https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228) |
 | [sonarqube](https://hub.docker.com/_/sonarqube)    | 8.9.5, 9.2.2 | [SonarQube announcement](https://community.sonarsource.com/t/sonarqube-sonarcloud-and-the-log4j-vulnerability/54721) |
 | [storm](https://hub.docker.com/_/storm)    | Awaiting info | Awaiting info |
 
@@ -81,3 +80,5 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 target="_blank" rel="noopener" class="_"} images may be detected as vulnerable
 by some scanners, the authors believe the images are not vulnerable by Log4j 2
 CVE as the API jars do not contain the vulnerability.
+> The [Nuxeo](https://hub.docker.com/_/nuxeo){: target="_blank" rel="noopener" class="_"}
+> image is deprecated and will not be updated.
