@@ -19,8 +19,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.3.1
-2021-12-11
+## Docker Desktop 4.3.2
+2021-12-21
 
 > Download Docker Desktop
 >
@@ -28,6 +28,29 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### Upgrades
+
+[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0){: target="_blank" rel="noopener" class="_"}
+
+### Security
+
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin.
+This new version of `docker scan` is able to detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} and [Log4j 2
+CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046).
+
+For more information, read the blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+
+## Docker Desktop 4.3.1
+2021-12-11
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72247/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72247/Docker.dmg)
 
 ### Upgrades
 
