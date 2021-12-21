@@ -19,14 +19,38 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.3.1
-2021-12-11
+## Docker Desktop 4.3.2
+2021-12-21
 
 > Download Docker Desktop
 >
 > [For
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+
+### Upgrades
+
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin for you.
+Older versions of `docker scan` in Docker Desktop 4.3.0 and earlier versions are
+not able to detect [Log4j 2
+
+### Security
+
+**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin.
+This new version of `docker scan` is able to detect [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
+target="_blank" rel="noopener" class="_"} and [Log4j 2
+CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046)
+
+For more information, read the blog post [Apache Log4j 2
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+
+## Docker Desktop 4.3.1
+2021-12-11
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/72247/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
