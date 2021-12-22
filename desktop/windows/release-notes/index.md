@@ -30,9 +30,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Upgrades
 
-**Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin for you.
-Older versions of `docker scan` in Docker Desktop 4.3.0 and earlier versions are
-not able to detect [Log4j 2
+[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0){: target="_blank" rel="noopener" class="_"}
 
 ### Security
 
