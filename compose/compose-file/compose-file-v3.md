@@ -1911,6 +1911,14 @@ tmpfs:
   - /tmp
 ```
 
+Basic parameters can also be passed in the short form:
+
+```yaml
+tmpfs:
+  - /workspace/tmp:exec,mode=0755
+  - /tmp
+```
+
 > Note when using docker stack deploy
 >
 > This option is ignored when
