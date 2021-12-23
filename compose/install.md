@@ -134,6 +134,14 @@ also included below.
     ```console
     $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
+  
+    Note: currently (23rd December 2021), the above has changed and you may want to use:
+  
+    ```console
+    sudo curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```
+  
+    Note the difference in old-style URL versus new-style (prefix `v` added before version number)
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
