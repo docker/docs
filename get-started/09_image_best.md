@@ -11,7 +11,7 @@ Docker has partnered with [Snyk](https://snyk.io){:target="_blank" rel="noopener
 
 > **Note**
 > 
-> You must be logged in to Docker Hub to scan your images. Run the command `docker login`, and then scan your images using
+> You must be logged in to Docker Hub to scan your images. Run the command `docker scan --login`, and then scan your images using
 > `docker scan <image-name>`.
 
 For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type
