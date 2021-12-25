@@ -166,7 +166,7 @@ oliver@hki:~$
 
 ### Meet the example application
 
-Now that we have started and configured the database engine, we can swith our attention to the application. 
+Now that we have started and configured the database engine, we can switch our attention to the application. 
 
 The example application for this module is an extended version of `docker-gs-ping` application we've used in the previous modules. You have two options:
 
