@@ -219,11 +219,11 @@ the settings you need to customize.
 
 ```json
 {
-  "bip": "192.168.1.5/24",
-  "fixed-cidr": "192.168.1.5/25",
+  "bip": "192.168.1.1/24",
+  "fixed-cidr": "192.168.1.0/25",
   "fixed-cidr-v6": "2001:db8::/64",
   "mtu": 1500,
-  "default-gateway": "10.20.1.1",
+  "default-gateway": "192.168.1.254",
   "default-gateway-v6": "2001:db8:abcd::89",
   "dns": ["10.20.1.2","10.20.1.3"]
 }
