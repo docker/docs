@@ -61,6 +61,10 @@
     max-width: 1024px;
     min-width:  300px;
     min-height: 500px;
+
+    *[id] {
+        scroll-margin-top: $top-navigation-height + $body-text-size;
+    }
 }
 
 .col-nav,
