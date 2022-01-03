@@ -75,6 +75,10 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        image: postgres
        volumes:
          - ./data/db:/var/lib/postgresql/data
+       environment:
+         - POSTGRES_NAME=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
      web:
        build: .
        command: python manage.py runserver 0.0.0.0:8000
