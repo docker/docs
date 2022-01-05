@@ -33,7 +33,7 @@ We currently support enabling SSO on a single organization. If you have any user
 
 ## Creating a Personal Access Token (PAT)
 
-Before you configure SSO for your organization, each member of your organization must [create an access token](../docker-hub/access-tokens). There is currently a grace period, which will expire in the near future. Before enforcing the usage of PATs, your users will be able to log in from Docker Desktop CLI using their previous credentials during this transition period.
+Before you configure SSO for your organization, each member of your organization must [create an access token](../docker-hub/access-tokens.md). There is currently a grace period, which will expire in the near future. Before enforcing the usage of PATs, your users will be able to log in from Docker Desktop CLI using their previous credentials during this transition period.
 In addition, all email addresses should be added to your IdP.
 
 ## Configure SSO
