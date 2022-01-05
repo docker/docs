@@ -1,11 +1,11 @@
 ---
 description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
-title: Configure Single Sign-on
+title: Configure Single Sign-on for Administrators
 ---
 > **Update to Single Sign-on**
 >
->Single Sign-on will be available for General Availability (GA) starting mid-January 2022.
+>Single Sign-on (SSO) will be available for General Availability (GA) starting mid-January 2022.
 {: .important}
 
 Docker Single Sign-on (SSO) allows users to authenticate using their identity providers (IdPs) to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
@@ -31,6 +31,11 @@ We currently support enabling SSO on a single organization. If you have any user
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs.
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub.
 
+## Creating a Personal Access Token (PAT)
+
+Before you configure SSO for your organization, each member of your organization must [create an access token](../docker-hub/access-tokens). There is currently a grace period, which will expire in the near future. Before enforcing the usage of PATs, your users will be able to log in from Docker Desktop CLI using their previous credentials during this transition period.
+In addition, all email addresses should be added to your IdP.
+
 ## Configure SSO
 
 To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
@@ -53,7 +58,7 @@ Click Add Domain and specify the corporate domain you’d like to manage with SS
 
 > **Note**
    >
-   > This should include all email domains users will use to access Docker.
+   > This should include all email domains and sub-domains users will use to access Docker.
    > Public domains are not permitted, such as gmail.com, outlook.com, etc.
    > Also, the email domain should be set as the primary email.
 
