@@ -89,7 +89,7 @@ After you’ve completed the SSO configuration process in Docker Hub, you can te
 ## Enforce SSO in Docker Hub
 
 Before you enforce SSO in Docker Hub, you must complete the following:
-Test SSO by logging in and out successfully, confirm that all members in your org have upgraded to Docker Desktop version 4.4.0, PATs are created for each member,  CI/CD passwords are converted to PAT.
+Test SSO by logging in and out successfully, confirm that all members in your org have upgraded to Docker Desktop version 4.4.0, PATs are created for each member, CI/CD passwords are converted to PAT.
 
 Admins can force users to authenticate with Docker Desktop by provisioning a registry.json configuration file. The registry.json file will force users to authenticate as a user that is configured in the allowedOrgs list in the registry.json file. For info on how to configure a registry.json file see Configure registry.json.
 
