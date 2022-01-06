@@ -22,6 +22,57 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.12
+2021-12-13
+
+This release of Docker Engine contains changes in packaging only, and provides
+updates to the `docker scan` and `docker buildx` commands. Versions of `docker scan`
+before v0.11.0 are not able to detect the [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
+We are shipping an updated version of `docker scan` in this release to help you
+scan your images for this vulnerability.
+
+> **Note**
+>
+> The `docker scan` command on Linux is currently only supported on x86 platforms.
+> We do not yet provide a package for other hardware architectures on Linux.
+
+The `docker scan` feature is provided as a separate package and, depending on your
+upgrade or installation method, 'docker scan' may not be updated automatically to
+the latest version. Use the instructions below to update `docker scan` to the latest
+version. You can also use these instructions to install, or upgrade the `docker scan`
+package without upgrading the Docker Engine:
+
+On `.deb` based distros, such as Ubuntu and Debian:
+
+```console
+$ apt-get update && apt-get install docker-scan-plugin
+```
+
+On rpm-based distros, such as CentOS or Fedora:
+
+```console
+$ yum install docker-scan-plugin
+```
+
+After upgrading, verify you have the latest version of `docker scan` installed:
+
+```console
+$ docker scan --accept-license --version
+Version:    v0.12.0
+Git commit: 1074dd0
+Provider:   Snyk (1.790.0 (standalone))
+```
+
+[Read our blog post on CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/)
+to learn how to use the `docker scan` command to check if images are vulnerable.
+
+## Packaging
+
+- Update `docker scan` to [v0.12.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0).
+- Update `docker buildx` to [v0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1).
+- Update Golang runtime to Go 1.16.12.
+
+
 ## 20.10.11
 2021-11-17
 
