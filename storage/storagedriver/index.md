@@ -339,7 +339,7 @@ layers are the same.
 
     {% raw %}
     ```console
-    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-final-image:1.0
+    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-base-image:1.0
     [
       "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
       "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a"
@@ -349,7 +349,7 @@ layers are the same.
 
     {% raw %}
     ```console
-    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-base-image:1.0
+    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-final-image:1.0
     [
       "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
       "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a",
