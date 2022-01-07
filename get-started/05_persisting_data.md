@@ -11,7 +11,7 @@ we launch the container. Why is this? Let's dive into how the container is worki
 
 When a container runs, it uses the various layers from an image for its filesystem.
 Each container also gets its own "scratch space" to create/update/remove files. Any
-changes won't be seen in another container, _even if_ they are using the same image.
+changes won't be seen in another container, even if they are using the same image.
 
 ### See this in practice
 
