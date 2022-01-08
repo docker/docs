@@ -259,7 +259,7 @@ services:
   mysql:
     image: mysql:5.7
     volumes:
-      - todo-mysql-data:/var/lib/mysql
+      - todo-mysql-data:/etc/todos
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: todos
