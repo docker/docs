@@ -104,7 +104,7 @@ from the [project release page](https://github.com/docker/compose/releases){:tar
 To install Compose Switch automatically, run:
 
 ```console
-$ curl -fL https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -fL https://raw.githubusercontent.com/docker/compose-switch/master/install_on_linux.sh | sh
 ```
 
 To install Compose Switch manually:
