@@ -1,8 +1,12 @@
 ---
 description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
-title: Configure Single Sign-on
+title: Configure Single Sign-on for Administrators
 ---
+> **Update to Single Sign-on**
+>
+>Single Sign-on (SSO) will be available for General Availability (GA) starting mid-January 2022.
+{: .important}
 
 Docker Single Sign-on (SSO) allows users to authenticate using their identity providers (IdPs) to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
 
@@ -27,6 +31,11 @@ We currently support enabling SSO on a single organization. If you have any user
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs.
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub.
 
+## Creating a Personal Access Token (PAT)
+
+Before you configure SSO for your organization, each member of your organization must [create an access token](../docker-hub/access-tokens.md). There is currently a grace period, which will expire in the near future. Before enforcing the usage of PATs, your users will be able to log in from Docker Desktop CLI using their previous credentials during this transition period.
+In addition, all email addresses should be added to your IdP.
+
 ## Configure SSO
 
 To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
@@ -35,20 +44,40 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 
 1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to Organizations and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the Security tab.
-3. Select an authentication method based on your identity provider.
-    Note: Docker currently supports **SAML 2.0** and **Azure AD**.
+3. Select an authentication method based on your identity provider. Docker currently supports **SAML 2.0** and **Azure AD**.
 4. Copy the ID and/or URL in the **Identity Provider Set Up**.
-    Note: for SAML 2.0, copy the Entity ID and ACS URL. For Azure AD, copy your Redirect URL/Reply URL.
+    For SAML 2.0, copy the **Entity ID** and **ACS URL**. For Azure AD, copy your **Redirect URL/Reply URL**.
 5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
-6. Complete the fields in the **Configuration Settings** section and click **Save**.
+6. Complete the fields in the **Configuration Settings** section and click **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
 ![SSO SAML](images/sso-saml.png){:width="500px"}
 
-### Domain
+### Domain control
 
-1. Click **Add Domain** and specify the email domains that are allowed to authenticate via your server.
-    Note: This should include all email domains users will use to access Docker. Public domains are not permitted, such as gmail.com, outlook.com, etc. Also, the email domain should be set as the primary email.
-2. Click **Send Verification** to receive an email for the domains you have specified and verify your domain.
+Click Add Domain and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com.
+
+> **Note**
+   >
+   > This should include all email domains and sub-domains users will use to access Docker.
+   > Public domains are not permitted, such as gmail.com, outlook.com, etc.
+   > Also, the email domain should be set as the primary email.
+
+## Domain verfication
+
+To verify ownership of a domain, add a TXT record to your Domain Name System (DNS) settings.
+
+1. Copy the provided TXT record value and navigate to your DNS host and locate the **Settings** page to add a new record.
+2. Select the option to add a new record and paste the TXT record value into the applicable field. For example, the **Value**, **Answer** or **Description** field.
+
+    Your DNS record may have the following fields:
+    * Record type: enter your 'TXT' record value
+    * Name/Host/Alias: leave the default (@ or blank)
+    * Time to live (TTL): enter **86400**
+
+3. After you have updated the fields, click **Save**.
+
+    Note: It can take up to 72 hours for DNS changes to take effect,  depending on your DNS host. The Domains table will have an Unverified status during this time.
+4. In the Security section of your Docker organization, click **Verify** next to the domain you want to verify after 72 hours.
 
 ### Test your SSO configuration
 
@@ -60,7 +89,7 @@ After you’ve completed the SSO configuration process in Docker Hub, you can te
 ## Enforce SSO in Docker Hub
 
 Before you enforce SSO in Docker Hub, you must complete the following:
-Test SSO by logging in and out successfully, confirm that all members in your org have upgraded to Docker Desktop version 4.4.0, PATs are created for each member,  CI/CD passwords are converted to PAT.
+Test SSO by logging in and out successfully, confirm that all members in your org have upgraded to Docker Desktop version 4.4.0, PATs are created for each member, CI/CD passwords are converted to PAT.
 
 Admins can force users to authenticate with Docker Desktop by provisioning a registry.json configuration file. The registry.json file will force users to authenticate as a user that is configured in the allowedOrgs list in the registry.json file. For info on how to configure a registry.json file see Configure registry.json.
 
