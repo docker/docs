@@ -7,7 +7,7 @@ description: Making changes to our example learning application
 
 As a small feature request, we've been asked by the product team to
 change the "empty text" when we don't have any todo list items. They
-would like to transition it to the following:
+would like to change it to the following:
 
 > You have no todo items yet! Add one above!
 
@@ -42,7 +42,7 @@ docker: Error response from daemon: driver failed programming external connectiv
 ```
 
 So, what happened? We aren't able to start the new container because our old container is still
-running. The reason this is a problem is because that container is using the host's port 3000 and
+running. The reason of this problem is that the container is using the host's port 3000 and
 only one process on the machine (containers included) can listen to a specific port. To fix this, 
 we need to remove the old container.
 
