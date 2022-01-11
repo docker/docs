@@ -42,7 +42,7 @@ docker: Error response from daemon: driver failed programming external connectiv
 ```
 
 So, what happened? We aren't able to start the new container because our old container is still
-running. The reason of this problem is that the container is using the host's port 3000 and
+running. It is because the container is using the host's port 3000 and
 only one process on the machine (containers included) can listen to a specific port. To fix this, 
 we need to remove the old container.
 
