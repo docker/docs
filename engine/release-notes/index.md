@@ -66,7 +66,7 @@ Provider:   Snyk (1.790.0 (standalone))
 [Read our blog post on CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/)
 to learn how to use the `docker scan` command to check if images are vulnerable.
 
-## Packaging
+### Packaging
 
 - Update `docker scan` to [v0.12.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.12.0).
 - Update `docker buildx` to [v0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1).
@@ -97,7 +97,7 @@ to learn how to use the `docker scan` command to check if images are vulnerable.
 
 - Fix panic.log file having read-only attribute set [moby/moby#42987](https://github.com/moby/moby/pull/42987).
 
-## Packaging
+### Packaging
 
 - Update containerd to [v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12) to mitigate [CVE-2021-41190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41190).
 - Update Golang runtime to Go 1.16.10.
@@ -123,7 +123,7 @@ to learn how to use the `docker scan` command to check if images are vulnerable.
 - Fix platform-matching logic to fix `docker build` using not finding images in
   the local image cache on Arm machines when using BuildKit [moby/moby#42954](https://github.com/moby/moby/pull/42954)
 
-## Runtime
+### Runtime
 
 - Add support for `clone3` syscall in the default seccomp policy to support running
   containers based on recent versions of Fedora and Ubuntu. [moby/moby/#42836](https://github.com/moby/moby/pull/42836).
@@ -135,7 +135,7 @@ to learn how to use the `docker scan` command to check if images are vulnerable.
 
 - Fix an issue where updating a service did not roll back on failure [moby/moby#42875](https://github.com/moby/moby/pull/42875).
 
-## Packaging
+### Packaging
 
 - Add packages for Ubuntu 21.10 "Impish Indri" and Fedora 35.
 - Update `docker scan` to v0.9.0
@@ -158,13 +158,13 @@ well as updated versions of the containerd.io package.
 > to learn how to configure the Docker Daemon to use a proxy server.
 {: .important }
 
-## Client
+### Client
 
 - [CVE-2021-41092](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41092)
   Ensure default auth config has address field set, to prevent credentials being
   sent to the default registry.
 
-## Runtime
+### Runtime
 
 - [CVE-2021-41089](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41089)
   Create parent directories inside a chroot during `docker cp` to prevent a specially
@@ -173,7 +173,7 @@ well as updated versions of the containerd.io package.
   Lock down file permissions to prevent unprivileged users from discovering and
   executing programs in `/var/lib/docker`.
 
-## Packaging
+### Packaging
 
 > **Known issue**
 >
