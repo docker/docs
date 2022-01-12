@@ -41,7 +41,7 @@ Official Image.
 
 > **Note**
 >
-> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+> Docker Official Images are an intellectual property of Docker.
 
 ## When to use Docker Official Images
 
