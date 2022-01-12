@@ -6,6 +6,18 @@ toc_min: 1
 toc_max: 2
 ---
 
+## CVE-2021-45449
+
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login. This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files. This vulnerability has been fixed in version 4.3.2 or higher. Users should update to this version and may want to update their password. Users should not send local log files to anyone. Users can manually delete their log files, they can be located in the following folder: ~/Library/Containers/com.docker.docker/Data/log/host/ on Mac, and in C:\Users\<username>\AppData\Roaming\Docker\log\host\ on Windows. When a user installs 4.3.2 or higher, we will delete their local log files, so there is no risk of leakage after an update.
+
+Additionally, these logs may be included when users upload diagnostics,, meaning access tokens and passwords might have been shared with Docker. This only affects users if they are on Docker Desktop 4.3.0, 4.3.1, and the user has logged in while on 4.3.0, 4.3.1 and have gone through the process of submitting diagnostics to Docker. Only Docker support Engineers working on an active support case could have access to the diagnostic files, minimizing leakage risk from these files. We have deleted all potentially sensitive diagnostic files from our data storage and will continue to delete diagnostics reported from the affected versions on an ongoing basis.
+
+### Assigning CNA
+MITRE Corporation
+
+### References
+* [Release Notes (Windows)](https://docs.docker.com/desktop/windows/release-notes/)
+* [Release Notes (Mac)](https://docs.docker.com/desktop/mac/release-notes/)
 ## Log4j 2 CVE-2021-44228
 
 The [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
@@ -31,14 +43,14 @@ target="_blank" rel="noopener" class="_"}, the fix made in version 2.15.0 was
 > For a more complete fix to this vulnerability, we recommended that you update to 2.17.0 where possible.
 {: .important}
 
-## Scan images using the `docker scan` command
+### Scan images using the `docker scan` command
 
 The configuration for the `docker scan` command previously shipped in Docker
 Desktop versions 4.3.0 and earlier unfortunately do not detect this
 vulnerability on scans. You must update your Docker Desktop installation to
 4.3.1 or higher to fix this issue. For detailed instructions, see [Scan images for Log4j2 CVE](../engine/scan/index.md#scan-images-for-log4j-2-cve).
 
-## Scan images on Docker Hub
+### Scan images on Docker Hub
 
 Docker Hub security scans triggered **after 1700 UTC 13 December 2021** are now
 correctly identifying the Log4j2 CVE. Scans before this date **do not**
