@@ -24,6 +24,7 @@ We currently support enabling SSO on a single organization. If you have any user
 * Verify that your org members have Docker Desktop version 4.4.0 installed on their machines
 * Each org member must create a Personal Access Token (PAT) to replace their passwords
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
+* For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
 
 ## Create a Personal Access Token (PAT)
@@ -49,9 +50,9 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 
 5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 
-> **Note:**
-> the NameID is your email address and is set as the default.
-> For example, <Subject><NameID>yourname@mycompany.com</NameID>.
+    > **Note:**
+    > the NameID is your email address and is set as the default.
+    > For example, <Subject><NameID>yourname@mycompany.com</NameID>.
 
 6. Complete the fields in the **Configuration Settings** section and click **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
@@ -71,9 +72,9 @@ To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank
 
 5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 
-> **Note:**
-> the NameID is your email address and is set as the default.
-> For example: <Subject><NameID>yourname@mycompany.com</NameID>.
+    > **Note:**
+    > the NameID is your email address and is set as the default.
+    > For example: <Subject><NameID>yourname@mycompany.com</NameID>.
 
 6. Complete the fields in the **Configuration Settings** section and click **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
@@ -89,6 +90,8 @@ Click **Add Domain** and specify the corporate domain you’d like to manage wit
 > Public domains such as gmail.com, outlook.com, etc are not permitted.
 > Also, the email domain should be set as the primary email.
 
+![SSO Domain](images/sso-domain.png){:width="500px"}
+
 ### Domain verification
 
 To verify ownership of a domain, add a TXT record to your Domain Name System (DNS) settings.
@@ -103,11 +106,11 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 
 3. After you have updated the fields, click **Save**.
 
-> **Note:**
->
-> It can take up to 72 hours for DNS changes to take effect, depending on
-> your DNS host. The Domains table will have an Unverified status during
-> this time.
+    > **Note:**
+    >
+    > It can take up to 72 hours for DNS changes to take effect, depending on
+    > your DNS host. The Domains table will have an Unverified status during
+    > this time.
 
 4. In the Security section of your Docker organization, click **Verify** next to the domain you want to verify after 72 hours.
 
@@ -121,7 +124,7 @@ After you’ve completed the SSO configuration process in Docker Hub, you can te
 ## Enforce SSO in Docker Hub
 
 Before you enforce SSO in Docker Hub, you must complete the following:
-Test SSO by logging in and out successfully, confirm that all members in your org have upgraded to Docker Desktop version 4.4.0, PATs are created for each member, CI/CD passwords are converted to PAT. Also, when using Docker partner products (for example, VS Code), you must use a PAT when you enforce SSO.
+Test SSO by logging in and out successfully, confirm that all members in your org have upgraded to Docker Desktop version 4.4.2, PATs are created for each member, CI/CD passwords are converted to PAT. Also, when using Docker partner products (for example, VS Code), you must use a PAT when you enforce SSO. For your service accounts add your additional domains in **Add Domains** or enable the accounts in your IdP.
 
 Admins can force users to authenticate with Docker Desktop by provisioning a registry.json configuration file. The registry.json file will force users to authenticate as a user that is configured in the allowedOrgs list in the registry.json file. For info on how to configure a registry.json file see Configure registry.json.
 
@@ -135,7 +138,7 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 > forced to authenticate through your IdP and can log into Docker using
 > their personal credentials.
 
-    ![SSO Enforced](images/sso-enforce.png){:width="500px"}
+![SSO Enforced](images/sso-enforce.png){:width="500px"}
 
 ## Manage users when SSO is enabled
 
