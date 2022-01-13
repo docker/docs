@@ -130,8 +130,6 @@ the `trustsandbox` container, the Notary server, and the Registry server.
 
           sandboxregistry:
             image: registry:2.7
-            ports:
-              - "5000:5000"
             networks:
               sandbox:
                 aliases:
