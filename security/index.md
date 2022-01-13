@@ -15,8 +15,10 @@ View the [cve](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45449) fo
 
 
 ### References
-* [Release Notes (Windows)](https://docs.docker.com/desktop/windows/release-notes/)
-* [Release Notes (Mac)](https://docs.docker.com/desktop/mac/release-notes/)
+
+* [Release Notes (Windows)](../desktop/windows/release-notes/index.md)
+* [Release Notes (Mac)](../desktop/mac/release-notes/index.md)
+
 ## Log4j 2 CVE-2021-44228
 
 The [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
