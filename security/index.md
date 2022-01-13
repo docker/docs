@@ -13,8 +13,6 @@ Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive informat
 Additionally, these logs may be included when users upload diagnostics, meaning access tokens and passwords might have been shared with Docker. This only affects users if they are on Docker Desktop 4.3.0, 4.3.1, and the user has logged in while on 4.3.0, 4.3.1 and have gone through the process of submitting diagnostics to Docker. Only Docker support Engineers working on an active support case could have access to the diagnostic files, minimizing leakage risk from these files. We have deleted all potentially sensitive diagnostic files from our data storage and will continue to delete diagnostics reported from the affected versions on an ongoing basis.
 View the [cve](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45449) for continued updates and information.
 
-### Assigning CNA
-MITRE Corporation
 
 ### References
 * [Release Notes (Windows)](https://docs.docker.com/desktop/windows/release-notes/)
