@@ -21,7 +21,7 @@ We currently support enabling SSO on a single organization. If you have any user
 ## Prerequisites
 
 * You must first notify your company about the new SSO login procedures
-* Verify that your org members have Docker Desktop version 4.4.0 installed on their machines
+* Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
 * Each org member must create a Personal Access Token (PAT) to replace their passwords
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
