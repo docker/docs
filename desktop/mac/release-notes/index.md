@@ -19,8 +19,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.3.2
-2021-12-21
+## Docker Desktop 4.4.2
+2022-01-13
 
 > Download Docker Desktop
 >
@@ -28,6 +28,52 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### Security
+
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+
+### New
+
+- Easy, Secure sign in with Auth0 and Single Sign-on
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
+  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
+
+### Upgrades
+
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+
+### Bug fixes and minor changes
+
+- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
+- Fixed the memory statistics for containers in the Dashboard. Fixes [docker/for-mac/#4774](https://github.com/docker/for-mac/issues/6076).
+- Added a deprecated option to `settings.json`: `"deprecatedCgroupsv1": true`, which switches the Linux environment back to cgroups v1. This option will be removed in future releases. If your software requires cgroups v1, you must update it to be compatible with cgroups v2.
+- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
+- Fixed an issue where putting the machine to Sleep mode after pausing Docker Desktop results in Docker Desktop not being able to resume from pause after the machine comes out of Sleep mode. Fixes [for-mac#6058](https://github.com/docker/for-mac/issues/6058).
+
+### Known issues
+
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+
+## Docker Desktop 4.3.2
+2021-12-21
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72729/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72729/Docker.dmg)
+
+### Security
+
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
 
 ### Upgrades
 
