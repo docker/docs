@@ -1355,9 +1355,9 @@ manuals:
       - sectiontitle: Single-Sign-on
         section:
           -  path: /single-sign-on/
-             title: Configure Single Sign-on
+             title: Configure
           -  path: /single-sign-on/faqs/
-             title: Single Sign-on Faqs
+             title: FAQs
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - sectiontitle: Administration
