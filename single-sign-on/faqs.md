@@ -73,7 +73,7 @@ When SSO is enforced, password-based authentication no longer works on your auto
 
 ### Q: Do I need a specific version of Docker Desktop for SSO?
 
-Yes, all users in your organization must upgrade to Docker Desktop version 4.4.0 or higher. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO.
+Yes, all users in your organization must upgrade to Docker Desktop version 4.4.2 or higher. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO.
 
 ### Q: Does SAML authentication require additional attributes?
 
