@@ -19,14 +19,53 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.4.2
-2022-01-13
+## Docker Desktop 4.4.3
+2022-01-14
 
 > Download Docker Desktop
 >
 > [For
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+
+### Security
+
+- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+
+Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
+This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
+
+### New
+
+- Easy, Secure sign in with Auth0 and Single Sign-on
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
+  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
+
+### Upgrades
+
+- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
+- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
+
+### Bug fixes and minor changes
+
+- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
+- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
+- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
+- Disabled Dashboard shortcuts to prevent capturing them even when minimized or un-focussed. Fixes [docker/for-win#12495](https://github.com/docker/for-win/issues/12495).
+
+### Known issues
+
+- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
+- After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
+- The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
+
+## Docker Desktop 4.4.2
+2022-01-13
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe)
 
 ### Security
 
