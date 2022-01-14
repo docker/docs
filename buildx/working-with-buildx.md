@@ -45,7 +45,7 @@ Rename the relevant binary and copy it to the destination matching your OS:
 | -------- | -------------------- | -----------------------------------------|
 | Linux    | `docker-buildx`      | `$HOME/.docker/cli-plugins`              |
 | macOS    | `docker-buildx`      | `$HOME/.docker/cli-plugins`              |
-| Windows  | `docker-buildx.exe`  | `%USERPROFILE%\.docker\cli-plugin`       |
+| Windows  | `docker-buildx.exe`  | `%USERPROFILE%\.docker\cli-plugins`      |
 
 Or copy it into one of these folders for installing it system-wide.
 

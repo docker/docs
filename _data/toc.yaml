@@ -373,14 +373,8 @@ guides:
         title: Use the VFS storage driver
 - path: /get-started/resources/
   title: "Educational resources"
-- sectiontitle: Open source at Docker
-  section:
-  - path: /opensource/
-    title: Contribute to documentation
-  - path: /opensource/ways/
-    title: Other ways to contribute
-- path: /docsarchive/
-  title: Documentation archive
+- path: /opensource/
+  title: "Contribute to documentation"
 reference:
 - path: /reference/
   title: Reference documentation

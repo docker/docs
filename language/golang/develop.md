@@ -548,7 +548,7 @@ services:
       - PGPASSWORD=${PGPASSWORD:?database password not set}
       - PGHOST=${PGHOST:-db}
       - PGPORT=${PGPORT:-26257}
-      - PGDATABASE=${PGDATABASE-mydb}
+      - PGDATABASE=${PGDATABASE:-mydb}
     deploy:
       restart_policy:
         condition: on-failure
