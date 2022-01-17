@@ -37,7 +37,7 @@ Python package manager or installing Compose as a container.
 > Install a different version
 >
 > The instructions below outline installation of the current stable release
-> (**v{{site.compose_version}}**) of Compose. To install a different version of
+> (**{{site.compose_version}}**) of Compose. To install a different version of
 > Compose, replace the given release number with the one that you want. For instructions to install Compose 2.0.0 on Linux, see [Install Compose 2.0.0 on Linux](cli-command.md#install-on-linux).
 >
 > Compose releases are also listed and available for direct download on the
@@ -95,10 +95,10 @@ on Microsoft Windows Server and want to install Docker Compose.
     ```
 
     Then run the following command to download the current stable release of
-    Compose (v{{site.compose_version}}):
+    Compose ({{site.compose_version}}):
 
     ```powershell
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/v{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
 **Note**: On Windows Server 2019, you can add the Compose executable to `$Env:ProgramFiles\Docker`. Because this directory is  registered in the system `PATH`, you can run the `docker-compose --version` command on the subsequent step with no additional configuration.
@@ -132,7 +132,7 @@ also included below.
 1.  Run this command to download the current stable release of Docker Compose:
 
     ```console
-    $ sudo curl -L "https://github.com/docker/compose/releases/download/v{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
