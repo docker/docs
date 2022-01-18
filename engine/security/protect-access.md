@@ -18,6 +18,8 @@ optionally communicate using SSH or a TLS (HTTPS) socket.
 > The given `USERNAME` must have permissions to access the docker socket on the
 > remote machine. Refer to [manage Docker as a non-root user](../install/linux-postinstall.md#manage-docker-as-a-non-root-user)
 > to learn how to give a non-root user access to the docker socket.
+> 
+> The remote host requires Docker 18.09 or higher to be installed.
 
 The following example creates a [`docker context`](../context/working-with-contexts.md)
 to connect with a remote `dockerd` daemon on `host1.example.com` using SSH, and
