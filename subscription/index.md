@@ -16,8 +16,10 @@ On August 31, 2021, we [announced](https://www.docker.com/blog/updating-product-
 
 - Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms for **Docker Desktop**.
     - Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects.
-    - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for professional use in larger enterprises.
-    - The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+    - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for commercial use in larger enterprises.
+    - The grace period for those that will require a paid subscription ends on
+      January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 - The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open-source** Docker or Moby project.
@@ -54,7 +56,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
 
-In addition to all the features available in Docker Pro and Docker Team, Docker Business includes centralized management, [Image Access Management](../docker-hub/image-access-management.md) with the ability to control what registries and content developers can access, ensuring teams are building secure from the start by only pulling trusted base images, SAML SSO (_Coming soon_), Remote Management (_Coming soon_).
+In addition to all the features available in Docker Pro and Docker Team, Docker Business includes centralized management, [Image Access Management](../docker-hub/image-access-management.md) with the ability to control what registries and content developers can access, ensuring teams are building secure from the start by only pulling trusted base images, [SSO](../single-sign-on/index.md), Remote Management (_Coming soon_).
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
@@ -66,7 +68,8 @@ Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-
 
 - It **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
 - It requires a paid subscription for professional use in larger enterprises.
-- The effective date of these terms is August 31, 2021. There is a **grace period** until January 31, 2022 for those that will require a paid subscription to use Docker Desktop.
+- The grace period for those that will require a paid subscription ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}
 - The existing Docker Free subscription has been renamed **Docker Personal** and we have introduced a Docker Business subscription .
 - The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 
