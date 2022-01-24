@@ -42,7 +42,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Known issues
 
-- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
+- Clicking **Proceed to Desktop** after signing in through the browser, sometimes does not bring the Dashboard to the front.
 - After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
 - The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
 
@@ -59,7 +59,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Known issues
 
-- Clicking «Proceed to Desktop» after logging in in the browser, sometimes does not bring the Dashboard to the front.
+- Clicking **Proceed to Desktop** after signing in through the browser, sometimes does not bring the Dashboard to the front.
 - After logging in, when the Dashboard receives focus, it sometimes stays in the foreground even when clicking a background window. As a workaround you need to click the Dashboard before clicking another application window.
 - The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
 
