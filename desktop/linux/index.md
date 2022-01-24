@@ -143,6 +143,7 @@ $ sudo apt remove docker-desktop
 
 
 ## Known issues
+
  - `Reset to factory defaults` currently does not work
  - At the end of installation, apt produces an error due to installing a downloaded package. This should be ignored.
   ```
