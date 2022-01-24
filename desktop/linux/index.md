@@ -144,7 +144,7 @@ $ sudo apt remove docker-desktop
 
 ## Known issues
 
- - `Reset to factory defaults` currently does not work
+ - The **Reset to factory defaults** option on the **Troubleshoot** page currently does not work.
  - At the end of installation, apt produces an error due to installing a downloaded package. This should be ignored.
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
