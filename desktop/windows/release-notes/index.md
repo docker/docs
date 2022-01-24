@@ -35,29 +35,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 ### Security
 
 - Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) where arbitrary files could be moved on the system.
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
-
-Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
-This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
-
-### New
-
-- Easy, Secure sign in with Auth0 and Single Sign-on
-  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
-  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
-
-### Upgrades
-
-- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
-- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
-- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
 
 ### Bug fixes and minor changes
 
-- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
-- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
-- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
-- Disabled Dashboard shortcuts to prevent capturing them even when minimized or un-focussed. Fixes [docker/for-win#12495](https://github.com/docker/for-win/issues/12495).
 - Fixed logging in from WSL 2. Fixes [docker/for-win#12500](https://github.com/docker/for-win/issues/12500).
 
 ### Known issues
@@ -73,30 +53,8 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 >
 > [For Windows](https://desktop.docker.com/win/main/amd64/73365/Docker%20Desktop%20Installer.exe)
 
-### Security
-
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
-
-Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
-This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
-
-### New
-
-- Easy, Secure sign in with Auth0 and Single Sign-on
-  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../../../single-sign-on/index.md).
-  - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
-
-### Upgrades
-
-- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
-- [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
-- [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
-
 ### Bug fixes and minor changes
 
-- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
-- Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
-- Doing a `Reset to factory defaults` no longer shuts down Docker Desktop.
 - Disabled Dashboard shortcuts to prevent capturing them even when minimized or un-focussed. Fixes [docker/for-win#12495](https://github.com/docker/for-win/issues/12495).
 
 ### Known issues
