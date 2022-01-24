@@ -23,15 +23,16 @@ To install Docker Desktop for Linux:
 
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
 2. Download and install the Tech Preview Debian package:
-
-  ```console
-  $ curl https://desktop-stage.docker.com/linux/main/amd64/73701/docker-desktop.deb --output docker-desktop.deb
-  $ sudo apt install ./docker-desktop.deb
-  ```
+    ```console
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/73772/docker-desktop.deb --output docker-desktop.deb
+    $ sudo apt install ./docker-desktop.deb
+    ```
+3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration.
 
 ## Check the shared memory
 
-Before you run Docker Desktop for Linux, verify whether the shared memory available on the host is higher than the memory allocated to the VM. By default, Docker Desktop allocates half of the memory and CPU from the host.
+Before you run Docker Desktop for Linux, verify whether the shared memory available on the host is **higher** than the memory allocated to the VM. By default, Docker Desktop allocates half of the memory and CPU from the host. The **available shared memory** should be higher than this.
+
 
 ```console
 $ df -h /dev/shm
@@ -58,6 +59,10 @@ none    /dev/shm    tmpfs   defaults,size=8G    0   0
 ```
 
 ## Launch Docker Desktop
+
+> **Note:** 
+> 
+> You may need to restart the host to load the group configuration.
 
 To start Docker Desktop for Linux, search **Docker Desktop** on the
 **Applications** menu and open it. This launches the whale menu icon and opens
@@ -136,7 +141,13 @@ To remove Docker Desktop for Linux, run:
 $ sudo apt remove docker-desktop
 ```
 
-## Feedback
 
-Your feedback is important to us. Let us know what you think by adding a comment
-on our [Docker for Linux public roadmap](https://github.com/docker/roadmap/issues/39){: target="_blank" rel="noopener" class="_"} issue.
+## Known issues
+
+ - The **Reset to factory defaults** option on the **Troubleshoot** page currently does not work.
+ - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
+  ```
+  N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+  ```
+  
+
