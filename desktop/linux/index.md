@@ -60,7 +60,9 @@ none    /dev/shm    tmpfs   defaults,size=8G    0   0
 
 ## Launch Docker Desktop
 
-> **Note:** The host might need to be restarted for the group configuration to be loaded.
+> **Note:** 
+> 
+> You may need to restart the host to load the group configuration.
 
 To start Docker Desktop for Linux, search **Docker Desktop** on the
 **Applications** menu and open it. This launches the whale menu icon and opens
