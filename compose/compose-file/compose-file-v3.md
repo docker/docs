@@ -1592,8 +1592,17 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet configurations covering each static address.
 
-> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
-> option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
+IPv6 addressing can be accessed in a version 3.x Compose file by editing the `/etc/docker/daemon.json` to contain:
+`{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
+
+Then, reload the docker daemon and edit docker-compose.yml to contain the following under the service:
+```
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+```
+
+> The [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
+> option is only available in a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
 > _IPv6 options do not currently work in swarm mode_.
 
 An example:
