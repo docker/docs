@@ -27,7 +27,7 @@ To install Docker Desktop for Linux:
     $ curl https://desktop-stage.docker.com/linux/main/amd64/73772/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
-3. Check the user belongs to the `docker` and `kvm` groups. The host might need to be restarted for the group configuration to be loaded.
+3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration.
 
 ## Check the shared memory
 
