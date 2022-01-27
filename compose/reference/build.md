@@ -7,7 +7,7 @@ notoc: true
 ---
 
 ```none
-Usage: build [options] [--build-arg key=val...] [SERVICE...]
+Usage: docker-compose build [options] [--build-arg key=val...] [SERVICE...]
 
 Options:
     --build-arg key=val     Set build-time variables for services.
