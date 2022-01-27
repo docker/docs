@@ -258,10 +258,13 @@ Next, you have to define the dependencies you want to include in your `Dockerfil
 While any images or Dockerfiles will include a non-root user with a UID/GID of `1000`, many base images and Dockerfiles do not. Fortunately, you can add a non-root user named `vscode`. If you were to include the Docker tooling (e.g. `docker` cli, `docker compose`, etc.) in the `Dockerfile.devenv`, you would need the `vscode` user to be included in the `docker` group. Finally, remember to set `sleep infinity` in the entrypoint to keep the dev container running indefinitely.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 FROM <your base image>
 
-RUN useradd -s /bin/bash -m vscode
-RUN groupadd docker && usermod -aG docker vscode
+RUN useradd -s /bin/bash -m vscode \
+ && groupadd docker \
+ && usermod -aG docker vscode
 
 USER vscode
 
