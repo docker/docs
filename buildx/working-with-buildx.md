@@ -184,8 +184,8 @@ it automatically loads it through a binary registered in the `binfmt_misc`
 handler.
 
 For QEMU binaries registered with `binfmt_misc` on the host OS to work
-transparently inside containers they must be registered with the `fix_binary`
-flag and QEMU must be staticaly compiled. This requires a kernel >= 4.8 and binfmt-support >= 2.1.7. You can check
+transparently inside containers they must be statically compiled and registered with the the `fix_binary`. 
+This requires a kernel >= 4.8 and binfmt-support >= 2.1.7. You can check
 for proper registration by checking if `F` is among the flags in
 `/proc/sys/fs/binfmt_misc/qemu-*`. While Docker Desktop comes preconfigured
 with `binfmt_misc` support for additional platforms, for other installations
