@@ -12,7 +12,7 @@ notoc: true
   {: .warning }
 
 ```none
-Usage: scale [options] [SERVICE=NUM...]
+Usage: docker-compose scale [options] [SERVICE=NUM...]
 
 Options:
   -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.

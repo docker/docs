@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: start [SERVICE...]
+Usage: docker-compose start [SERVICE...]
 ```
 
 Starts existing containers for a service.

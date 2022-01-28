@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: kill [options] [SERVICE...]
+Usage: docker-compose kill [options] [SERVICE...]
 
 Options:
     -s SIGNAL         SIGNAL to send to the container.

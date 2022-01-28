@@ -7,7 +7,7 @@ notoc: true
 
 ```none
 Usage:
-    run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
+    docker-compose run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...]
         SERVICE [COMMAND] [ARGS...]
 
 Options:

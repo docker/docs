@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: push [options] [SERVICE...]
+Usage: docker-compose push [options] [SERVICE...]
 
 Options:
     --ignore-push-failures  Push what it can and ignores images with push failures.
