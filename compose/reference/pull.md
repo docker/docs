@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: pull [options] [SERVICE...]
+Usage: docker-compose pull [options] [SERVICE...]
 
 Options:
     --ignore-pull-failures  Pull what it can and ignores images with pull failures.

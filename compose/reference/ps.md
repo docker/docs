@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: ps [options] [SERVICE...]
+Usage: docker-compose ps [options] [SERVICE...]
 
 Options:
     -q, --quiet          Only display IDs

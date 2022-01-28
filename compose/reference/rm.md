@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: rm [options] [SERVICE...]
+Usage: docker-compose rm [options] [SERVICE...]
 
 Options:
     -f, --force   Don't ask to confirm removal

@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: images [options] [SERVICE...]
+Usage: docker-compose images [options] [SERVICE...]
 
 Options:
     -q, --quiet  Only display IDs
