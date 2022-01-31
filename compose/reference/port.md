@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: port [options] SERVICE PRIVATE_PORT
+Usage: docker-compose port [options] SERVICE PRIVATE_PORT
 
 Options:
     --protocol=proto  tcp or udp [default: tcp]

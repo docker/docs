@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: help [COMMAND]
+Usage: docker-compose help [COMMAND]
 ```
 
 Displays help and usage instructions for a command.

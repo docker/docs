@@ -82,7 +82,7 @@ $ docker run \
   --network mongodb \
   --name rest-server \
   -p 8000:8000 \
-  -e CONNECTIONSTRING=mongodb://mongodb:27017/yoda_notes \
+  -e CONNECTIONSTRING=mongodb://mongodb:27017/notes \
   node-docker
 ```
 

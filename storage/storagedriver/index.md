@@ -21,7 +21,7 @@ writable layer of a container. The container's writable layer does not persist
 after the container is deleted, but is suitable for storing ephemeral data that
 is generated at runtime. Storage drivers are optimized for space efficiency, but
 (depending on the storage driver) write speeds are lower than native file system
-performance, especially for storage drivers that a use copy-on-write filesystem.
+performance, especially for storage drivers that use a copy-on-write filesystem.
 Write-intensive applications, such as database storage, are impacted by a
 performance overhead, particularly if pre-existing data exists in the read-only
 layer.

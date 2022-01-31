@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: top [SERVICE...]
+Usage: docker-compose top [SERVICE...]
 ```
 
 Displays the running processes.

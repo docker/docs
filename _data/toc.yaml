@@ -1356,6 +1356,8 @@ manuals:
     title: Download rate limit
   - sectiontitle: Administration
     section:
+     - path: /docker-hub/configure-sign-in/
+       title: Configure sign in
      - path: /docker-hub/image-management/
        title: Advanced Image Management dashboard
      - path: /docker-hub/convert-account/

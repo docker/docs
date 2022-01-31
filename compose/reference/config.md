@@ -8,7 +8,7 @@ redirect_from:
 ---
 
 ```none
-Usage: config [options]
+Usage: docker-compose config [options]
 
 Options:
     --resolve-image-digests  Pin image tags to digests.
