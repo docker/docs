@@ -24,10 +24,23 @@ To install Docker Desktop for Linux:
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
 2. Download and install the Tech Preview Debian package:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/73772/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/74134/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
-3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration.
+3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration (automated in post-install script). 
+
+There are a few post-install configuration steps done through the maintainers' scripts (post-install script contained in the deb package):
+- For each user, the post-install script:
+    - installs systemd units
+    - configures `desktop-linux` as the default Docker CLI context
+    - installs Compose and the `docker scan` plugins to `~/.docker/cli-plugins`
+    - enables Compose V2 as the default `docker-compose`
+    - adds user to `docker` and `kvm` groups
+
+- sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
+- adds a DNS name for Kubernetes to `/etc/hosts`
+- creates the Docker Desktop file for the application launcher
+
 
 ## Check the shared memory
 
@@ -124,7 +137,14 @@ $ systemctl --user stop docker-desktop
 
 ## Logs
 
-If you experience any issues, you can access Docker Desktop logs by running the following command:
+To create and upload a diagnostics bundle:
+
+1. From the Docker menu, select **Troubleshoot** > **Get support**.
+2. When the diagnostics are available, click **Upload to get a Diagnostic ID**.
+3. Make a note of the Diagnostic ID displayed on the Support page. You can send this ID with your bug report to investigate any issues.
+**Troubleshoot** > **Get support**. Wait for a bundle to be generated, once uploaded, it displays a diagnostics ID that can be sent to us for investigation. 
+
+Or, if you prefer to investigate the issue, you can access Docker Desktop logs by running the following command:
 
 ```console
 $ journalctl --user --unit=docker-desktop
@@ -144,7 +164,14 @@ $ sudo apt remove docker-desktop
 
 ## Known issues
 
- - The **Reset to factory defaults** option on the **Troubleshoot** page currently does not work.
+ - The Docker CLI login flow has some inconsistencies that we are currently investigation. If you experience any issues when trying to log in, remove the `credsStore` property from `~/.docker/config.json` and restart Docker Desktop (run either 
+ `systemctl --user restart docker-desktop` or quit Docker Desktop and relaunch).
+  - Docker Desktop stores the passwords in base-64 encoded plaintext. Integration with `pass` is a work in progress.
+
+ - `~/.docker/scan/config.json` must be removed after launching Docker Desktop for `docker scan` to work.
+
+ - DevEnvironments are not yet available.
+
  - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
