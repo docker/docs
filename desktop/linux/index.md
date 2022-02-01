@@ -183,5 +183,30 @@ $ sudo apt remove docker-desktop
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   ```
-  
+  ## Why Docker Desktop for Linux runs a VM
+
+Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
+
+1. **To ensure  that Docker Desktop provides a consistent experience across platforms**.
+
+    During research, the most frequently cited reason for users wanting Docker
+    Desktop for Linux (DD4L) was to ensure a consistent Docker Desktop
+    experience with feature parity across all major operating systems. Utilizing
+    a VM ensures that the Docker Desktop experience for Linux users will closely
+    match that of Windows and macOS.
+
+    This need to deliver a consistent experience across all major OSs will become increasingly important as we look towards adding exciting new features, such as Docker Extensions, to Docker Desktop that will benefit users across all tiers.  We’ll provide more details on these at [DockerCon22](https://www.docker.com/dockercon/){: target="_blank" rel="noopener" class="_"}. Watch this space.
+
+2. **To enhance security**
+
+    Container image vulnerabilities pose a security risk for the host environment. There is a large number of unofficial images that are not guaranteed to be verified for known vulnerabilities. Malicious users can push images to public registries and use different methods to trick users into pulling and running them. The VM approach mitigates this threat as any malware that gains root privileges is restricted to the VM environment without access to the host.
+
+    Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in vulnerabilities like [this](https://www.openwall.com/lists/oss-security/2022/01/18/7){: target="_blank" rel="noopener" class="_"}.
+
+3. **To provide the benefits of feature parity and enhanced security, with minimal impact on performance**
+
+    The VM utilized by DD4L uses `virtiofs`, a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
+
+    As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
+
 
