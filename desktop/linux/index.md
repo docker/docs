@@ -183,7 +183,8 @@ $ sudo apt remove docker-desktop
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   ```
-  ## Why Docker Desktop for Linux runs a VM
+  
+ ## Why Docker Desktop for Linux runs a VM
 
 Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
