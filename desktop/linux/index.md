@@ -29,17 +29,22 @@ To install Docker Desktop for Linux:
     ```
 3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration (automated in post-install script). 
 
-There are a few post-install configuration steps done through the maintainers' scripts (post-install script contained in the deb package):
-- For each user, the post-install script:
-    - installs systemd units
-    - configures `desktop-linux` as the default Docker CLI context
-    - installs Compose and the `docker scan` plugins to `~/.docker/cli-plugins`
-    - enables Compose V2 as the default `docker-compose`
-    - adds user to `docker` and `kvm` groups
+  There are a few post-install configuration steps done through the maintainers' scripts (post-install script contained 
+  in the deb package. 
+  
+  For each user, the post-install script:
+  
+   - installs systemd units
+   - configures `desktop-linux` as the default Docker CLI context
+   - installs Compose and the `docker scan` plugins to `~/.docker/cli-plugins`
+   - enables Compose V2 as the default `docker-compose`
+   - adds user to `docker` and `kvm` groups
 
-- sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
-- adds a DNS name for Kubernetes to `/etc/hosts`
-- creates the Docker Desktop file for the application launcher
+  In addition, the post-install script:
+  
+  - sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
+  - adds a DNS name for Kubernetes to `/etc/hosts`
+  - creates the Docker Desktop file for the application launcher
 
 
 ## Check the shared memory
@@ -164,15 +169,17 @@ $ sudo apt remove docker-desktop
 
 ## Known issues
 
- - The Docker CLI login flow has some inconsistencies that we are currently investigation. If you experience any issues when trying to log in, remove the `credsStore` property from `~/.docker/config.json` and restart Docker Desktop (run either 
+ - The Docker CLI login flow has some inconsistencies that we are currently investigating. If you experience any issues when trying to log in, remove the `credsStore` property from `~/.docker/config.json` and restart Docker Desktop (run either 
  `systemctl --user restart docker-desktop` or quit Docker Desktop and relaunch).
-  - Docker Desktop stores the passwords in base-64 encoded plaintext. Integration with `pass` is a work in progress.
+ 
+ - Docker Desktop stores the passwords in base-64 encoded plaintext. Integration with `pass` is currently a work in progress.
 
- - `~/.docker/scan/config.json` must be removed after launching Docker Desktop for `docker scan` to work.
+ - After launching Docker Desktop, you must remove `~/.docker/scan/config.json` for `docker scan` to work.
 
- - DevEnvironments are not yet available.
+ - Dev Environments are not yet available.
 
  - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
+ 
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   ```
