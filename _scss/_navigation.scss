@@ -290,6 +290,12 @@ input:checked+.slider:before {
     color: inherit !important;
 }
 
+/* remove polldaddy ratings */
+
+.rating-nero-value {
+    display: none;
+}
+
 /*
  * Controls ********************************************************************
  */
