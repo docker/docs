@@ -1596,7 +1596,8 @@ IPv6 addressing can be accessed in a version 3.x Compose file by editing the `/e
 `{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
 
 Then, reload the docker daemon and edit docker-compose.yml to contain the following under the service:
-```
+
+```yaml
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=0
 ```
