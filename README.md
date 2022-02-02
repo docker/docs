@@ -45,4 +45,4 @@ contribute, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Copyright and license
 
-Copyright 2013-2021 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2022 Docker, inc, released under the Apache 2.0 license.
