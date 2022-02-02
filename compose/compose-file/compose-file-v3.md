@@ -1592,7 +1592,7 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet configurations covering each static address.
 
-IPv6 addressing can be accessed in a version 3.x Compose file by editing the `/etc/docker/daemon.json` to contain:
+If you'd like to use IPv6, you must first ensure that the Docker daemon is configured to support IPv6.  See [Enable IPv6](../../config/daemon/ipv6.md) for detailed instructions. You can then access IPv6 addressing in a version 3.x Compose file by editing the `/etc/docker/daemon.json` to contain:
 `{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
 
 Then, reload the docker daemon and edit docker-compose.yml to contain the following under the service:
