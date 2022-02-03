@@ -210,7 +210,7 @@ For example, `--ssh default=$SSH_AUTH_SOCK`, or the shorter equivalent, `--ssh d
 Third, to make use of that SSH access in a `RUN` command in the `Dockerfile`, define a mount with type `ssh`.
 This will set the `SSH_AUTH_SOCK` environment variable for that command to the value provided by the host to `docker build`, which will cause any programs in the `RUN` command which rely on SSH to automatically use that socket.
 Only the commands in the `Dockerfile` that have explicitly requested SSH access by defining `type=ssh` mount will have access to SSH agent connections.
-The other commands have will no knowledge of any SSH agent being available.
+The other commands will have no knowledge of any SSH agent being available.
 
 Here is an example `Dockerfile` using SSH in the container:
 

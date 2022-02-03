@@ -26,7 +26,7 @@ stores the following metadata in the journal with each message:
 ## Usage
 
 To use the `journald` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+and `log-opts` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
 `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
 configuring Docker using `daemon.json`, see

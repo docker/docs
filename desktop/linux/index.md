@@ -24,7 +24,7 @@ To install Docker Desktop for Linux:
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
 2. Download and install the Tech Preview Debian package:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/74134/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/74258/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
 3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration (automated in post-install script).
