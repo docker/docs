@@ -17,8 +17,6 @@ This example demonstrates how to dockerize an ASP.NET Core application.
   Linux
 - Great for modern cloud-based apps, such as web apps, IoT apps, and mobile
   backends
-- ASP.NET Core apps can run on [.NET Core](https://www.microsoft.com/net/core/platform)
-  or on the full [.NET Framework](https://www.microsoft.com/net/framework)
 - Designed to provide an optimized development framework for apps that are
   deployed to the cloud or run on-premises
 - Modular components with minimal overhead retain flexibility while
