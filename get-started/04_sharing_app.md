@@ -29,8 +29,7 @@ To push an image, we first need to create a repository on Docker Hub.
 
 4. Click the **Create** button!
 
-If you look on the right-side of the page, you'll see a section named **Docker commands**. This gives
-an example command that you will need to run to push to this repo.
+If you look at the image below an example **Docker command** can be seen. This command will push to this repo.
 
 ![Docker command with push example](images/push-command.png){: style=width:75% }
 {: .text-center }
