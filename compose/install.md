@@ -149,15 +149,15 @@ also included below.
     $ sudo chmod +x /usr/local/bin/docker-compose
     ```
 
-> **Note**:
->
-> If the command `docker-compose` fails after installation, check your path.
-> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
->
-> For example:
-> ```console
-> $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-> ```
+    > **Note**:
+    >
+    > If the command `docker-compose` fails after installation, check your path.
+    > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+    >
+    > For example:
+    > ```console
+    > $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    > ```
 
 3.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
