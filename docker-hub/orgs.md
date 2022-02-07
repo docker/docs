@@ -95,7 +95,7 @@ configure your organization.
   organization. See [Repositories](repos.md) for detailed information about
   working with repositories.
 
-- **Activity** - Displays the audit log, a chronological list of activities that
+- **Activity** Displays the audit log, a chronological list of activities that
   occur at organization and repository levels. It provides the org owners a
   report of all their team member activities. See [Audit log](audit-log.md) for
   details.
@@ -107,8 +107,19 @@ configure your organization.
   also [deactivate](deactivate-account.md#deactivating-an-organization) your
   organization on this tab.
 
-- **Billing**: Displays information about your existing 
-[Docker subscription (plan)](../subscription/index.md) and your billing history. You can also access your invoices from this tab.
+- **Billing**: Displays information about your existing
+[Docker subscription (plan)](../subscription/index.md) and your billing history.
+You can also access your invoices from this tab.
+
+- **Invitees**: Displays a list of users invited to the organization through
+  their email address. This list only includes email addresses that **do not** have a Docker ID or an account associated with it. Only Org owners can view and manage the Invitees list.
+
+> **Important**
+>
+> If you are on a Team or a Business subscription, every user listed on the
+> **Invitees** tab counts towards a seat, even if they do not have a Docker
+> ID or an account yet.
+{: .important }
 
 ## Create a team
 
@@ -149,7 +160,10 @@ The org owner can also add additional org owners to help them manage users, team
 ## Add team members
 
 Org owners can invite new members to the team using their Docker ID or email
-address.
+address. When you invite team members using their email address, we recommend
+that users create a Docker account before accepting the invite to join the
+team. If you are using a Docker Team or a Business subscription, inviting team
+members using their email address counts towards a seat. You can
 
 If the user isn't in your organization:
 
