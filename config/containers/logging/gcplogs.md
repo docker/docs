@@ -101,7 +101,7 @@ configured with GOOGLE_APPLICATION_CREDENTIALS):
 ```console
 $ docker run \
     --log-driver=gcplogs \
-    --log-opt gcp-project=test-project
+    --log-opt gcp-project=test-project \
     --log-opt gcp-meta-zone=west1 \
     --log-opt gcp-meta-name=`hostname` \
     your/application
