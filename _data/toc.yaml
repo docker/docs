@@ -1304,6 +1304,8 @@ manuals:
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
+  - path: /docker-hub/orgs/
+    title: Teams and organizations
   - path: /docker-hub/repos/
     title: Repositories
   - path: /docker-hub/service-accounts/
@@ -1324,8 +1326,6 @@ manuals:
     title: Webhooks
   - path: /docker-hub/slack_integration/
     title: Slack integration
-  - path: /docker-hub/orgs/
-    title: Teams and organizations
   - path: /docker-hub/image-access-management/
     title: Image Access Management
   - path: /docker-hub/vulnerability-scanning/
