@@ -125,7 +125,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
   redis:
     image: "redis:alpine"
 ```
@@ -135,7 +135,7 @@ This Compose file defines two services: `web` and `redis`.
 ### Web service
 
 The `web` service uses an image that's built from the `Dockerfile` in the current directory.
-It then binds the container and the host machine to the exposed port, `5000`. This example service uses the default port for 
+It then binds the container and the host machine to the exposed port, `8000`. This example service uses the default port for 
 the Flask web server, `5000`.
 
 ### Redis service
@@ -173,17 +173,13 @@ image pulled from the Docker Hub registry.
    Compose pulls a Redis image, builds an image for your code, and starts the
    services you defined. In this case, the code is statically copied into the image at build time.
 
-2. Enter http://localhost:5000/ in a browser to see the application running.
+2. Enter http://localhost:8000/ in a browser to see the application running.
 
    If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
-   Windows, then the web app should now be listening on port 5000 on your
-   Docker daemon host. Point your web browser to http://localhost:5000 to
+   Windows, then the web app should now be listening on port 8000 on your
+   Docker daemon host. Point your web browser to http://localhost:8000 to
    find the `Hello World` message. If this doesn't resolve, you can also try
-   http://127.0.0.1:5000.
-
-   If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
-   MACHINE_VM` to get the IP address of your Docker host. Then, open
-   `http://MACHINE_VM_IP:5000` in a browser.
+   http://127.0.0.1:8000.
 
    You should see a message in your browser saying:
 
@@ -233,7 +229,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
     volumes:
       - .:/code
     environment:
@@ -322,7 +318,7 @@ $ docker-compose ps
        Name                      Command               State           Ports         
 -------------------------------------------------------------------------------------
 composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
-composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
+composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
 ```
 
 The `docker-compose run` command allows you to run one-off commands for your
