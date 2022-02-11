@@ -21,15 +21,15 @@ Docker currently supports Service Provider Initiated (SP-initiated) SSO flow. Th
 
 ### Q: Where can I find detailed instructions on how to configure Docker SSO?
 
-You first need to establish a SSO connection with your identity provider, and the company email domain needs to be verified prior to SSO enforcement for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](index.md).
+You first need to establish an SSO connection with your identity provider, and the company email domain needs to be verified prior to SSO enforcement for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](index.md).
 
 ### Q: Does Docker SSO support multi-factor authentication (MFA)?
 
-When an organization uses SSO, MFA is determined at the IdP level, not by the Docker system.
+When an organization uses SSO, MFA is determined on the IdP level, not on the Docker platform.
 
 ### Q: Do I need a specific version of Docker Desktop for SSO?
 
-Yes, all users in your organization must upgrade to Docker Desktop version 4.4.0 or higher. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO if the company domain email is used to log in or as the primary email associated with an existing Docker account Your users with existing accounts can not sign in with their username and password.
+Yes, all users in your organization must upgrade to Docker Desktop version 4.4.0 or higher. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO if the company domain email is used to log in or as the primary email associated with an existing Docker account Your users with existing accounts cannot sign in with their username and password.
 
 ### Q: Is there a way to test this functionality in a test tenant with Okta before going to production?
 
@@ -61,7 +61,7 @@ Verify that your users have downloaded the latest version of Docker Desktop. We 
 
 ### Q: What’s a Docker ID? Can I retain my Docker ID when using SSO?
 
-For a personal Docker ID, a user is the account owner, it’s associated with access to the user's repositories, images, assets. An end user can choose to have a company domain email on the Docker account, when SSO is enforced, the account will be tied to the company’s organization account. Alternatively, when SSO is enforced for a company organization, any user logging in without an existing account using verified company domain email will automatically have an account provisioned, and a new Docker ID created.
+For a personal Docker ID, a user is the account owner, it’s associated with access to the user's repositories, images, assets. An end user can choose to have a company domain email on the Docker account, when SSO is enforced, the account will be tied to the organization account. Alternatively, when SSO is enforced for a company organization, any user logging in without an existing account using verified company domain email will automatically have an account provisioned, and a new Docker ID created.
 
 ### Q: What if the Docker ID I want for my org  is taken?
 
@@ -79,7 +79,7 @@ We are currently limited in supporting such a setup, and would recommend setting
 
 ### Q: Is it possible to use more than one IdP with Docker SSO?
 
-No. You can only configure Docker SSO to work with a single IdP. A domain can only be associated with a single IdP. Docker currently supports Azure AD and identity providers that support SAML 2.0
+No. You can only configure Docker SSO to work with a single IdP. A domain can only be associated with a single IdP. Docker currently supports Azure AD and identity providers that support SAML 2.0.
 
 ### Q Is it possible to change my identity provider after configuring SSO?
 
@@ -89,13 +89,13 @@ Yes. You must delete your existing IdP configuration in Docker Hub and follow th
 
 To enable SSO in Docker, you need the following from your IdP:
 
-* **SAML**: Entity ID, ACS URL, Single Logout URL and Certificate Download URL
+* **SAML**: Entity ID, ACS URL, Single Logout URL and the public X.509 certificate
 
 * **Azure AD**: Client ID, Client Secret, AD Domain.
 
 ### Q: What happens if my existing certificate expires?
 
-If your existing certificate has expired, you need to contact your identity provider to generate a new x509 certificate. The new certificate must be added to the SSO configuration settings page on Docker Hub.
+If your existing certificate has expired, you may need to contact your identity provider to retrieve a new x509 certificate. The new certificate must be updated in the SSO configuration settings page on Docker Hub.
 
 ### Q: What happens if my IdP goes down when SSO is enabled?
 
@@ -123,7 +123,7 @@ Yes, generally bot accounts need to be a seat, similar to a regular end user, ha
 
 ### Q: Is it possible to connect Docker Hub directly with a Microsoft Azure Active Directory Group?
 
-Yes, Azure AD is supported with SSO for DB, both via a direct integration and via SAML.
+Yes, Azure AD is supported with SSO for Docker Business, both via a direct integration and via SAML.
 
 ## Adding domain and domain verification
 
@@ -140,16 +140,9 @@ They can do it one time to add it to a connection. If they ever change idPs and 
 
 Adding and verifying Domain is required to enable and enforce SSO. Click Add Domain and specify the email domains that are allowed to authenticate via your server. This should include all email domains users will use to access Docker. Public domains are not permitted, such as gmail.com, outlook.com, etc. Also, the email domain should be set as the primary email.
 
-### Q: How can we send a verification e-mail to just the domain reference? Wouldn’t we need a full e-mail address?
-
-
-### Q: What would the full content of the registry.json need to be? Can an example be provided?
-
-### Q: Does the registry.json go on the user’s workstation?
-
 ### Q: If users are using their personal email, do they have to convert to using the Org’s domain before they can be invited to join an Org? Is this just a quick change in their Hub account?
 
-No, they do not. Though they can add multiple emails to a dockerid if they choose to. However, that email can only be used once across docker. The other thing to note is that (as of January 2022) SSO will not work for multi domains as a MVP and it will not work for personal emails either.
+No, they do not. Though they can add multiple emails to a Docker ID if they choose to. However, that email can only be used once across Docker. The other thing to note is that (as of January 2022) SSO will not work for multi domains as an MVP and it will not work for personal emails either.
 
 ### Q: Since Docker ID is tracked from SAML, at what point is the login required to be tracked from SAML? Runtime or install time?
 
@@ -167,10 +160,10 @@ You can enable SSO on organizations that are part of the Docker Business subscri
 
 ### Q: We currently have a Docker Team subscription. How do we enable SSO?
 
-Docker SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see Upgrade your subscription.
+Docker SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see [Upgrade your subscription](https://www.docker.com/pricing).
 
 
-### Q: How does service accounts work with SSO?
+### Q: How do service accounts work with SSO?
 
 Service accounts work like any other user when SSO is turned on. If the service account is using an email for a domain with SSO turned on, it needs a PAT for CLI and API usage.
 
@@ -180,37 +173,37 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 ### Q: Does Docker SSO support authenticating through the command line?
 
-Yes. When SSO is enabled, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see Manage access tokens. Before we transition to PATs, CLI users can continue logging in using their personal credentials until early next year to mitigate the risk of interrupting CI/CD pipelines.
+Yes. When SSO is enabled, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](../docker-hub/access-tokens.md). Before we transition to PATs, CLI users can continue logging in using their personal credentials until early next year to mitigate the risk of interrupting CI/CD pipelines.
 
 ### Q: How does SSO affect our automation systems and CI/CD pipelines?
 
-Before enforcing SSO, you must create PATs for automation systems and CI/CD pipelines and use the tokens instead of a password. When SSO is enforced, password-based authentication no longer works on your automation systems and CI/CD pipelines.
+Before enforcing SSO, you must create PATs for automation systems and CI/CD pipelines and use the tokens instead of a password.
 
-### Q: I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they purchase DB licenses, they will implement and enforce SSO via Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
+### Q: I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they purchase Docker Business licenses, they will implement and enforce SSO via Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
 
-If they already have their splunk email on their account, then it will be migrated to SSO.
+If they already have their organization email on their account, then it will be migrated to SSO.
 
-
-### Q: If an organization enables SSO, the owners can control DockerIDs associated with their work email domain. Some of these DockerIDs will not be users of Docker Desktop and therefore don't require a Business subscription. Can the owners choose which DockerIDs they add to their DockerOrg and get access to business features? Is there a way to flag which of these DockerIDs are Docker Desktop users?
+### Q: If an organization enables SSO, the owners can control Docker IDs associated with their work email domain. Some of these Docker IDs will not be users of Docker Desktop and therefore don't require a Business subscription. Can the owners choose which Docker IDs they add to their Docker org and get access to Business features? Is there a way to flag which of these Docker IDs are Docker Desktop users?
 
 SSO enforcement will apply to any domain email user, and automatically add that user to the Docker Hub org that enables enforcement. The admin could remove users from the org manually, but those users wouldn't be able to authenticate if SSO is enforced.
 
 ### Q: Can I enable SSO and hold off on the domain verification and enforcement options?
 
-Yes, they can choose to not enforce, and people have the option to use either Docker ID (standard email/password) or email address (SSO) at the sign-in screen.Though hold off on the domain verification -- to be clear (maybe it's just the wrong language used in the question?), they'd still need to verify the domain (showing that they "own" the domain)
+Yes, they can choose to not enforce, and users have the option to use either Docker ID (standard email/password) or email address (SSO) at the sign-in screen.
 
 ### Q: We have enforced SSO, but one of our users is connected to several organizations (and several email-addresses) and is able to bypass SSO and login via userid and password. Why is this happening?
 
-They can only have 1 email and this is because that email domain doesn’t match the enforced SSO. (if it’s not enforced, they can use un/pass)
+They can bypass SSO if the email they are using to log in doesn't match the organization email being used when SSO is enforced.
 
 ### Q: Is there a way to test this functionality in a test tenant with Okta before going to production?
 
-A test organization can be created. Companies can set up a new 5 seat Business Plan on a new organization to test with (making sure to only enable SSO, not enforce it or all domain email users will be forced to sign in to that test tenant).
+Yes, you can create a test organization. Companies can set up a new 5 seat Business plan on a new organization to test with (making sure to only enable SSO, not enforce it or all domain email users will be forced to sign in to that test tenant).
 
 ### Q: Once we enable SSO for Docker Desktop, what is the impact to the flow for Build systems that use service accounts?
 
 If SSO is enabled, there is no impact for now. We'll continue to support either username/password or personal access token sign-in.
 However, if you **enforce** SSO:
+
 * Service Account domain email addresses must be unaliased and enabled in their IdP
 * Username/password and personal access token will still work (but only if they exist, which they won't for new accounts)
 * Those who know the IdP credentials can sign in as that Service Account via SSO on Hub and create or change the personal access token for that service account.
@@ -245,9 +238,9 @@ If users attempt to log in through the CLI, they must authenticate using a perso
 
 ### Q: Is it possible to force users of Docker Desktop to authenticate, and/or authenticate using their company’s domain?
 
-Yes. Admins can force users to authenticate with Docker Desktop by provisioning a registry.json configuration file. The registry.json file will force users to authenticate as a user that is configured in the allowedOrgs list in the registry.json file.
+Yes. Admins can force users to authenticate with Docker Desktop by provisioning a [`registry.json`](../docker-hub/configure-sign-in.md) configuration file. The `registry.json` file will force users to authenticate as a user that is configured in the `allowedOrgs` list in the `registry.json` file.
 
-Once SSO enforcement is set up on their DB org on Hub, when the user is forced to auth with Docker Desktop, the SSO enforcement will also force users to authenticate through SSO with their IdP (instead of authenticating using their username and password).
+Once SSO enforcement is set up on their Docker Business org on Hub, when the user is forced to authenticate with Docker Desktop, the SSO enforcement will also force users to authenticate through SSO with their IdP (instead of authenticating using their username and password).
 
 Users may still be able to authenticate as a "guest" account to the organization using a non-domain email address. However, they can only authenticate as guests if that non-domain email was invited to the organization by the organization owner.
 
@@ -260,7 +253,7 @@ Yes, you can convert existing users to an SSO account. To convert users from a n
 * Each user has created a PAT to replace their passwords to allow them to log in through Docker CLI
 * Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 
-For detailed prerequisites and for instruction on how to enable SSO, see [Configure Single Sign-on](index.md).
+For detailed prerequisites and instructions on how to enable SSO, see [Configure Single Sign-on](index.md).
 
 ### Q: What impact can users expect once we start onboarding them to SSO accounts?
 
@@ -268,35 +261,35 @@ When SSO is enabled and enforced, your users just have to sign in using the emai
 
 ### Q: Is Docker SSO fully synced with Active Directory (AD)?
 
-Docker doesn’t currently support a full sync with AD. That is, if a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](/orgs#remove-team-mebers) from the organization.
+Docker doesn’t currently support a full sync with AD. That is, if a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](../docker-hub/orgs.md#remove-team-members) from the organization.
 
 Additionally, you can use our APIs to complete this process.
 
 ### Q: What is the best way to provision the Docker Subscription without SSO?
-Admins in the Owners group in the orgs can invite users via Hub UI, by email address (for any user) or by docker id (assuming the user has created a user account on Hub already).
 
+Admins in the Owners group in the orgs can invite users through Docker Hub UI, by email address (for any user) or by Docker ID (assuming the user has created a user account on Hub already).
 
-### Q: If we do this manually the first time, Is it possible to register for example max.mustermann@zeiss.com in the Dashboard and he will get an invitation link per email?
+### Q: If we add a user manually for the first time, can I register in the dashboard and will the user get an invitation link via email? For example,   max.mustermann@zeiss.com.
 
-Yes, if the user is added via email address to an org, they will receive an email invite.If invited via docker ID as an existing user instead, they'll be added to the organization automatically. We'll be adding a new invite flow in the near future that will require an email invite in this situation as well (so the user can choose to opt out). If the org later sets up SSO for [zeiss.com](www.zeiss.com) domain, the user will automatically be added to the domain SSO org next sign in which requires SSO auth with the identity provider (Hub login will automatically redirect to the identity provider).
+Yes, if the user is added via email address to an org, they will receive an email invite. If invited via docker ID as an existing user instead, they'll be added to the organization automatically. We'll be adding a new invite flow in the near future that will require an email invite in this situation as well (so the user can choose to opt out). If the org later sets up SSO for [zeiss.com](https://www.zeiss.com/) domain, the user will automatically be added to the domain SSO org next sign in which requires SSO auth with the identity provider (Hub login will automatically redirect to the identity provider).
 
-### Q: Can someone Join the Organization without an invitation? Is it possible to put specific users to our organization with existing email@zeiss.com accounts?
+### Q: Can someone join the organization without an invitation? Is it possible to put specific users to an organization with existing email accounts?
 
-Not without SSO. Joining requires an invite from an Owners group member in the org.With SSO, then yes, whatever domains are claimed and verified will allow users to automatically join the organization the next time they sign in as a user that has a domain email assigned.
+Not without SSO. Joining requires an invite from a member of the Owners group. When SSO is enforced, then the domains verified through SSO will allow users to automatically join the organization the next time they sign in as a user that has a domain email assigned.
 
-### Q: When we send an invitation to the user, will the existing max.mustermann@zeiss.com account be consolidated and retained?
+### Q: When we send an invitation to the user, will the existing account be consolidated and retained?
 
-Yes, the existing user account will join the organization. The user will be affected in certain ways (e.g. image access management policy settings, or the fact that SSO users can't change their email address), but otherwise with all assets retained.
+Yes, the existing user account will join the organization with all assets retained.
 
 ### Q: How can I view, update, and remove multiple email addresses for my users?
 
-We only support one email in our system. The management of user info will come with SCIM.
+We only support one email per user on the Docker platform.
 
 ### Q: How can I remove invitees to the org who have not signed in?
 
-They can go to the invitee list in the org view and remove them
+They can go to the invitee list in the org view and remove them.
 
-### Q: How is the flow for Service account authentication different from a UI user account?
+### Q: How is the flow for service account authentication different from a UI user account?
 
 It isn't; we don't differentiate the two in product.
 
