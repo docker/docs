@@ -163,15 +163,15 @@ $ docker run \
   --rm -d \
   --network mysqlnet \
   --name rest-server \
-  -p 5000:5000 \
+  -p 8000:5000 \
   python-docker-dev
 ```
 
 Let’s test that our application is connected to the database and is able to add a note.
 
 ```console
-$ curl http://localhost:5000/initdb
-$ curl http://localhost:5000/widgets
+$ curl http://localhost:8000/initdb
+$ curl http://localhost:8000/widgets
 ```
 
 You should receive the following JSON back from our service.
@@ -194,7 +194,7 @@ services:
   build:
    context: .
   ports:
-  - 5000:5000
+  - 8000:5000
   volumes:
   - ./:/app
 
@@ -215,7 +215,7 @@ volumes:
 
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that using a Compose file.
 
-We expose port 5000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
+We expose port 8000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
 
 Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we've named our MySQL service as in the Compose file.
 
@@ -230,8 +230,8 @@ We pass the `--build` flag so Docker will compile our image and then start the c
 Now let’s test our API endpoint. Open a new terminal then make a GET request to the server using the curl commands:
 
 ```console
-$ curl http://localhost:5000/initdb
-$ curl http://localhost:5000/widgets
+$ curl http://localhost:8000/initdb
+$ curl http://localhost:8000/widgets
 ```
 
 You should receive the following response:

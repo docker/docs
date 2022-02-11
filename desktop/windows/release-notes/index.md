@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.4.4
-2022-01-24
+## Docker Desktop 4.5.0
+2022-02-10
 
 > Download Docker Desktop
 >
@@ -32,9 +32,27 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
 
-### Security
+### New
 
-- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) where arbitrary files could be moved on the system.
+- Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"}
+- The 'docker version' output now displays the version of Docker Desktop installed on the machine.
+
+### Upgrades
+
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+
+### Bug fixes and minor changes
+
+- Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
+- Fixed an issue related to compose app started with version 2, but the dashboard only deals with version 1
+- Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
+
+## Docker Desktop 4.4.4
+2022-01-24
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/73704/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 

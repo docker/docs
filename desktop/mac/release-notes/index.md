@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.4.2
-2022-01-13
+## Docker Desktop 4.5.0
+2022-02-10
 
 > Download Docker Desktop
 >
@@ -32,6 +32,33 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### New
+
+- Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"}
+- The 'docker version' output now displays the version of Docker Desktop installed on the machine.
+
+### Upgrades
+
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+
+### Bug fixes and minor changes
+
+- Fixed an issue that caused the VM to become unresponsive during startup when using `osxfs` and when no host directories are shared with the VM.
+- Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
+- Fixed an issue that didn't allow users to stop a Docker Compose application using Docker Dashboard if the application was started in a different version of Docker Compose. For example, if the user started a Docker Compose application in V1 and then switched to Docker Compose V2, attempts to stop the Docker Compose application would fail.
+- Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
+- Fixed an issue where the **About Docker Desktop** window wasn't working anymore.
+- Limit the number of CPUs to 8 on Mac M1 to fix the startup problem. Fixes [docker/for-mac#6063](https://github.com/docker/for-mac/issues/6063).
+
+## Docker Desktop 4.4.2
+2022-01-13
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/73305/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/73305/Docker.dmg)
+
 
 ### Security
 
