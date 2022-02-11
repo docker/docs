@@ -255,7 +255,7 @@ In this preview, Dev Environments support a JSON file which allows you to specif
 
 Next, you have to define the dependencies you want to include in your `Dockerfile.devenv`, alongside the following requisites:
 
-While some images or Dockerfiles will include a non-root user, many base images and Dockerfiles do not. Fortunately, you can add a non-root user named `vscode`. If you were to include the Docker tooling (e.g. `docker` cli, `docker compose`, etc.) in the `Dockerfile.devenv`, you would need the `vscode` user to be included in the `docker` group. Finally, remember to set `sleep infinity` in the entrypoint to keep the dev container running indefinitely.
+While some images or Dockerfiles will include a non-root user, many base images and Dockerfiles do not. Fortunately, you can add a non-root user named `vscode`. If you were to include the Docker tooling (e.g. `docker` cli, `docker compose`, etc.) in the `Dockerfile.devenv`, you would need the `vscode` user to be included in the `docker` group.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
