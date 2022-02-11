@@ -267,8 +267,6 @@ RUN useradd -s /bin/bash -m vscode \
  && usermod -aG docker vscode
 
 USER vscode
-
-ENTRYPOINT ["sleep", "infinity"]
 ```
 
 ## Specify a base image
