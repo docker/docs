@@ -23,14 +23,28 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.5.0
-2022-02-10
+## Docker Desktop 4.5.1
+2022-02-14
 
 > Download Docker Desktop
 >
 > [For
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+
+### Bug fixes and minor changes
+
+- Fixed an issue that caused new installations to default to the Hyper-V backend instead of WSL 2.
+- Fixed a crash in the Docker Dashboard which would make the systray menu disappear.
+
+If you are running Docker Desktop on Windows Home, installing 4.5.1 will switch it back to WSL 2 automatically. If you are running another version of Windows, and you want Docker Desktop to use the WSL 2 backend, you must manually switch by enabling the **Use the WSL 2 based engine** option in the **Settings > General** section.
+
+## Docker Desktop 4.5.0
+2022-02-10
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/74594/Docker%20Desktop%20Installer.exe)
 
 ### New
 
