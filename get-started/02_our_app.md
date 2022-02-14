@@ -49,6 +49,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    WORKDIR /app
    COPY . .
    RUN yarn install --production
+   EXPOSE 3000
    CMD ["node", "src/index.js"]
    ```
 
