@@ -50,6 +50,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    COPY . .
    RUN yarn install --production
    CMD ["node", "src/index.js"]
+   EXPOSE 3000
    ```
 
    Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
