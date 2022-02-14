@@ -47,6 +47,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed an issue related to compose app started with version 2, but the dashboard only deals with version 1
 - Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
 
+### Known issues
+- Docker does not work after installation [ docker/for-win#12545](https://github.com/docker/for-win/issues/12545), meanwhile you can follow [this fix](https://github.com/docker/for-win/issues/12545#issuecomment-1037225140)
+
 ## Docker Desktop 4.4.4
 2022-01-24
 
