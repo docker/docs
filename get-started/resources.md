@@ -46,7 +46,7 @@ If books are your preferred learning style, check out these written by the [Dock
 A number of Docker Captains have also created video courses on Docker and Kubernetes.
 
 * [Bret Fisher](https://www.bretfisher.com/courses/){:target="_blank" rel="noopener" class="_"}: Docker Mastery, Docker Swarm Mastery, Docker Mastery for Node.js Projects
-* [Elton Stoneman](https://docker4.net/udemy){:target="_blank" rel="noopener" class="_"}: Docker for .NET Apps - on Linux and Windows. Includes the discount code `644ABCBC33F474541885`.
+* [Elton Stoneman](https://docker4.net/udemy){:target="_blank" rel="noopener" class="_"}: Docker for .NET Apps - on Linux and Windows. Includes the discount code ` `.
 * [Nick Janetakis](https://nickjanetakis.com/courses/){:target="_blank" rel="noopener" class="_"} Dive into Docker, Docker for DevOps
 * [Nigel Poulton](https://nigelpoulton.com/video-courses){:target="_blank" rel="noopener" class="_"}: Kubernetes 101, Getting Started with Kubernetes, Docker and Kubernetes: The Big Picture, Kubernetes Deep Dive, Docker Deep Dive
 * [Arun Gupta](https://www.lynda.com/Docker-tutorials/Docker-Java-developers/576584-2.html){:target="_blank" rel="noopener" class="_"}: Docker for Java Developers
