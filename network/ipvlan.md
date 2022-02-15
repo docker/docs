@@ -388,7 +388,7 @@ unless the upstream network is explicitly routing it on VLAN `139`.
 ```console
 # Create a v6 network
 $ docker network create -d ipvlan \
-    --subnet=2001:db8:abc2::/64 --gateway=2001:db8:abc2::22 \
+    --ipv6 --subnet=2001:db8:abc2::/64 --gateway=2001:db8:abc2::22 \
     -o parent=eth0.139 v6ipvlan139
     
 # Start a container on the network
