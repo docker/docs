@@ -43,10 +43,6 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 ## Docker Desktop 4.5.0
 2022-02-10
 
-> Download Docker Desktop
->
-> [For Windows](https://desktop.docker.com/win/main/amd64/74594/Docker%20Desktop%20Installer.exe)
-
 ### New
 
 - Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"}
