@@ -23,14 +23,25 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.5.0
-2022-02-10
+## Docker Desktop 4.5.1
+2022-02-15
 
 > Download Docker Desktop
 >
 > [For
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+
+### Bug fixes and minor changes
+
+- Fixed an issue that caused new installations to default to the Hyper-V backend instead of WSL 2.
+- Fixed a crash in the Docker Dashboard which would make the systray menu disappear.
+
+If you are running Docker Desktop on Windows Home, installing 4.5.1 will switch it back to WSL 2 automatically. If you are running another version of Windows, and you want Docker Desktop to use the WSL 2 backend, you must manually switch by enabling the **Use the WSL 2 based engine** option in the **Settings > General** section.
+Alternatively, you can edit the Docker Desktop settings file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
+
+## Docker Desktop 4.5.0
+2022-02-10
 
 ### New
 
@@ -46,6 +57,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
 - Fixed an issue related to compose app started with version 2, but the dashboard only deals with version 1
 - Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
+
+### Known issues
+
+Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Desktop to use the Hyper-V backend instead of WSL 2. This means, Windows Home users will not be able to start Docker Desktop as WSL 2 is the only supported backend. To work around this issue, you must uninstall 4.5.0 from your machine and then download and install Docker Desktop 4.5.1 or a higher version. Alternatively, you can edit the Docker Desktop settings.json file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
 
 ## Docker Desktop 4.4.4
 2022-01-24
