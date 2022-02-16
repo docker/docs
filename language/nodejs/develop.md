@@ -22,7 +22,7 @@ First, we’ll take a look at running a database in a container and how we use v
 
 Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
 
-Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
+Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in [our documentation](../../storage/volumes.md).
 
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
 
