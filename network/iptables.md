@@ -64,6 +64,29 @@ the source and destination. For instance, if the Docker daemon listens on both
 `192.168.1.99` and `10.1.2.3`, you can make rules specific to `10.1.2.3` and leave
 `192.168.1.99` open.
 
+### Restrict incomming packets by destination port
+
+The DOCKER-USER chain sees packets after they have been redirected to the destination port, so you can't just set a rule here to filter incoming traffic to an exposed port.
+
+It has to be done in 2 steps:
+
+1. tag packets in PREROUTING chain
+2. filter in DOCKER-USER
+
+Here is an example:
+
+```console
+# Mark 1 = packets to allow
+iptables -t mangle -A PREROUTING -p tcp --dport 443 -j MARK --set-mark 1
+iptables -t mangle -A PREROUTING -p tcp --dport 80 -j MARK --set-mark 1
+
+# In DOCKER-USER, drop selected packets
+iptables -I DOCKER-USER -i -j DROP
+iptables -I DOCKER-USER -m mark --mark 1 -j RETURN
+```
+
+### Note about iptables
+
 `iptables` is complicated and more complicated rules are out of scope for this
 topic. See the [Netfilter.org HOWTO](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html)
 for a lot more information.
