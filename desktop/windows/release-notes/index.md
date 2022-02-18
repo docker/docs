@@ -32,6 +32,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
 
+### Security
+
+- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774){: target="_blank" rel="noopener" class="_"} where Docker Desktop allows attackers to move arbitrary files.
+
 ### Bug fixes and minor changes
 
 - Fixed an issue that caused new installations to default to the Hyper-V backend instead of WSL 2.
