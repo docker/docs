@@ -36,7 +36,8 @@ The other change you may want to make is only have your release images go to Doc
 
 ## Next steps
 
-We know there are a lot more tips and tricks for using Docker in CI, however, we think these are some of the important things, considering the recent Docker Hub rate limit updates.
+We know there are a lot more tips and tricks for using Docker in CI.
+However, we think these are some of the important things, considering [the Docker Hub rate limits](https://docs.docker.com/docker-hub/download-rate-limit/).
 
   > **Note**
   >
