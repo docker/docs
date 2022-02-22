@@ -5,24 +5,24 @@ title: Configure Single Sign-on
 ---
 This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
 
-When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password).
+When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign into Docker Hub or Docker Desktop to initiate the SSO authentication process.
 
 Before enabling SSO in Docker Hub, administrators must work with their identity provider to configure their IdP to work with Docker Hub. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
 
 After establishing the connection between the IdP server and Docker Hub, administrators log into the organization in Docker Hub and complete the SSO enablement process. See the section **Enable SSO in Docker Hub** for detailed instructions.
 
-To enable SSO in Docker Hub, you need the following:
+To enable SSO in Docker Hub, you need the following information from your identity provider:
 
-* **SAML 2.0**: Entity ID, ACS URL, Single Logout URL and Certificate Download URL
+* **SAML 2.0**: Single Sign-On URL and the X.509 signing certificate
 * **Azure AD**: Client ID (a unique identifier for your registered AD application), Client Secret (a string used to gain access to your registered Azure AD application), and AD Domain details
 
-We currently support enabling SSO on a single organization. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
+We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
 
 ## Prerequisites
 
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have Docker Desktop version 4.4.2 installed on their machines
-* New members must create a Personal Access Token (PAT) to log into the CLI; however, existing users can use their username and password as specified below
+* New org members must create a PAT to log into the CLI, however existing users can currently use their username and password during the grace period as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully log in and log out of Docker Hub
@@ -35,6 +35,10 @@ In addition, all email addresses should be added to your IdP.
 ## Configure
 
 To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
+
+> **Note:**
+>
+> IdP initiated connections are not supported at this time
 
 The following video walks you through the process of configuring SSO.
 
@@ -55,12 +59,17 @@ The following video walks you through the process of configuring SSO.
 5. Log into your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 
     > **Note:**
+    >
     > the NameID is your email address and is set as the default.
-    > For example, <Subject><NameID>yourname@mycompany.com</NameID>.
+    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
+
+    ![SSO Attribute](images/sso-attribute.png){:width="500px"}
 
 6. Complete the fields in the **Configuration Settings** section and click **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
     ![SSO SAML3](images/sso-saml3.png){:width="500px"}
+
+7. Proceed to **add your domain** before you test and enforce SSO.
 
 ### Azure AD IdP configuration
 
@@ -84,9 +93,11 @@ The following video walks you through the process of configuring SSO.
 
     ![SSO Azure3](images/sso-azure3.png){:width="500px"}
 
+7. Proceed to **add your domain** before you test and enforce SSO.
+
 ### Domain control
 
-Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com.
+Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports one email domain for each organization.
 
 > **Note**
 >
