@@ -1302,6 +1302,8 @@ manuals:
   section:
   - path: /docker-hub/
     title: Quickstart
+  - path: /docker-hub/onboarding-faqs/
+    title: Onboarding FAQs
   - path: /docker-id/
     title: Docker ID accounts
   - path: /docker-hub/orgs/
