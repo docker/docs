@@ -11,7 +11,7 @@ Before enabling SSO in Docker Hub, administrators must work with their identity 
 
 After establishing the connection between the IdP server and Docker Hub, administrators log into the organization in Docker Hub and complete the SSO enablement process. See the section **Enable SSO in Docker Hub** for detailed instructions.
 
-To enable SSO in Docker Hub, you need the following:
+To enable SSO in Docker Hub, you need the following information from your identity provider:
 
 * **SAML 2.0**: Single Sign-On URL and the X.509 signing certificate
 * **Azure AD**: Client ID (a unique identifier for your registered AD application), Client Secret (a string used to gain access to your registered Azure AD application), and AD Domain details
