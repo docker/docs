@@ -59,7 +59,7 @@ The following video walks you through the process of configuring SSO.
 
     > **Note:**
     > the NameID is your email address and is set as the default.
-    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional name attribute key; you must use lower-case text only.
+    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
 
     ![SSO Attribute](images/sso-attribute.png){:width="500px"}
 
