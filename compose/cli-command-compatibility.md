@@ -11,7 +11,7 @@ class="_"} GitHub repository, so we can prioritize it.
 
 ## Commands or flags not yet implemented
 
-The following commands have not been implemented yet, and maybe implemented at a later time.
+The following commands have not been implemented yet, and may be implemented at a later time.
 Let us know if these commands are a higher priority for your use cases.
 
 `compose build --memory`: This option is not yet supported by buildkit. The flag is currently supported, but is hidden to avoid breaking existing Compose usage. It does not have any effect.
@@ -33,7 +33,7 @@ Global flags:
 
 ## Config command
 
-The config command is intented to show the configuration used by Docker Commpose to run the actual project.
+The config command is intended to show the configuration used by Docker Compose to run the actual project.
 As we know, at some parts of the Compose file have a short and a long format. For example, the `ports` entry.
 In the example below we can see the config command expanding the `ports` section:
 
@@ -62,4 +62,4 @@ networks:
     name: workspace_default
 ```
 
-The result above is a full size configuration of what will be used in by Docker Compose to run the project.
+The result above is a full size configuration of what will be used by Docker Compose to run the project.
