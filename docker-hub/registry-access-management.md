@@ -6,6 +6,11 @@ title: Registry Access Management
 
 Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.
 
+> **Note**
+>
+> Registry Access Management is currently offered as a Tech Preview to a closed group of Docker Business customers.
+{: .important}
+
 ## Configure Registry Access Management permissions
 
 To configure Registry Access Management permissions, perform the following steps:
@@ -49,7 +54,7 @@ On Windows, you must create a file `C:\ProgramData\DockerDesktop\registry.json` 
 
 To create your `registry.json` file on Windows:
 
-1. Open Windows Powershell and select Run as Administrator.
+1. Open Windows PowerShell and select **Run as Administrator**.
 2. Type the following command: `cd /ProgramData/DockerDesktop/`
 3. Type `notepad registry.json` and enter the Docker Hub organization that the developer belongs to in `allowedOrgs` key and click **Save**.
 
