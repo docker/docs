@@ -19,16 +19,16 @@ To configure Registry Access Management permissions, perform the following steps
 2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Org Permissions**.
 3. Enable Registry Access Management to set the permissions for your registry.
 
-    > **Note**
-    >
-    > When enabled, the Docker Hub registry is set by default, however you can also restrict this registry for your developers.
+     > **Note**
+     >
+     > When enabled, the Docker Hub registry is set by default, however you can also restrict this registry for your developers.
 
 4. Click **Add** and enter your registry details in the applicable fields, and click **Create** to add the registry to your list.
 5. Verify that the registry appears in your list and click **Save & Apply**.  You can verify that your changes are saved in the Activity tab.
 
-    > **Note**
-    >
-    > Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop.  Also, there is no limit on the number of registries you can add. See the [Caveats](#caveats) section to learn more about limitations when using this feature.
+      > **Note**
+      >
+      > Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop.  Also, there is no limit on the number of registries you can add. See the [Caveats](#caveats) section to learn more about limitations when using this feature.
 
 ![Registry Access Management](images/registry-access-management.png){:width="700px"}
 
@@ -97,7 +97,7 @@ To create your `registry.json` file on macOS:
 
    After you’ve created the registry.json file and deployed it onto the developers’ machines, you can verify whether the changes have taken effect by asking the developers to start Docker Desktop.
 
-   If the configuration is successful, Docker Desktop prompts the developer to authenticate using the organization credentials on start. If the developer fails to authenticate, or authenticaes as a developer in the wrong organization they will see an error message, and they will be denied access to Docker Desktop.
+   If the configuration is successful, Docker Desktop prompts the developer to authenticate using the organization credentials on start. If the developer fails to authenticate, or authenticates as a developer in the wrong organization they will see an error message, and they will be denied access to Docker Desktop.
 
 ### Caveats
 
