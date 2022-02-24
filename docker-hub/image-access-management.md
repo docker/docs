@@ -20,7 +20,7 @@ The following video walks you through the process of configuring Image Access Ma
 
 To configure Image Access Management permissions, perform the following steps:
 
-1. Log into your [Docker Hub](https://hub.docker.com) account as an organization administrator.
+1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization administrator.
 2. Select an organization, and navigate to the **Settings** tab on the **Organizations** page and click Org Permissions.
 
     ![Image Access Management](images/image-access-management.png){:width="700px"}
