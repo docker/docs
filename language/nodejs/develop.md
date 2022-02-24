@@ -86,6 +86,8 @@ $ docker run \
   node-docker
 ```
 
+The `yoda_notes` at the end of the connection string is the desired name for our database.
+
 Let’s test that our application is connected to the database and is able to add a note.
 
 ```console
