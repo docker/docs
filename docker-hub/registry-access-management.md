@@ -4,13 +4,13 @@ keywords: registry, access, managment
 title: Registry Access Management
 ---
 
-Registry Access Management is a new feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their users can access while using Docker Desktop.  When using this feature, organization owners can ensure that their users can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when users interact with public registries.
+Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.
 
 ## Configure Registry Access Management permissions
 
 To configure Registry Access Management permissions, perform the following steps:
 
-1. Sign into your [Docker Hub](https://hub.docker.com) account as an organization owner.
+1. Sign into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner.
 2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Org Permissions**.
 3. Enable Registry Access Management to set the permissions for your registry.
 
@@ -23,11 +23,11 @@ To configure Registry Access Management permissions, perform the following steps
 
   > **Note**
   >
-  > Once you add a registry, it can take a maximum of 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developer re-authenticate for Docker Desktop.  Also, there is no limit on the number of registries you can add. See the Caveats sections to learn more about limitations  when using this feature.
+  > Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop.  Also, there is no limit on the number of registries you can add. See the [Caveats](#caveats) section to learn more about limitations when using this feature.
 
 ### Enforce authentication
 
-To ensure that each org member uses Registry Access Management on their local machine, you can perform the following steps below to enforce sign-in under your organization. To do this:
+To ensure that each org member uses Registry Access Management on their local machine, you can perform the steps below to enforce sign-in under your organization. To do this:
 
 1. Download the latest version of Docker Desktop, and then
 2. Create a `registry.json` file.
@@ -49,7 +49,7 @@ To create your `registry.json` file on Windows:
 
 1. Open Windows Powershell and select Run as Administrator.
 2. Type the following command: `cd /ProgramData/DockerDesktop/`
-3. In Notepad, type `registry.json` and enter the Docker Hub organization that the user belongs to in `allowedOrgs` key and click Save.
+3. Type `notepad registry.json` and enter the Docker Hub organization that the developer belongs to in `allowedOrgs` key and click **Save**.
 
     For example:
 
@@ -59,17 +59,13 @@ To create your `registry.json` file on Windows:
     }
     ```
 
-4. Navigate to Powershell and type ```start .```
-
-Congratulations! You have just created the registry.json file.
-
 **On macOS**:
 
-On macOS, you must create a file at `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (that is, only the system administrator can write to the file). The file must be of type JSON and contain the name of the Docker Hub organization names in the allowedOrgs key.
+On macOS, you must create a file at `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (that is, only the system administrator can write to the file). The file must be of type JSON and contain the name of the Docker Hub organization in the `allowedOrgs` key (using one organization name instead of multiple organizations).
 
 To create your `registry.json` file on macOS:
 
-1. Navigate to VS Code or any text editor of your choice.
+1. Navigate to Visual Studio Code or any text editor of your choice.
 2. Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
 
     For example:
@@ -90,13 +86,11 @@ To create your `registry.json` file on macOS:
 
     `sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
 
-Congratulations! You have just created the `registry.json` file.
-
 ### Verify the restrictions
 
-   After you’ve created the registry.json file and deployed it onto the users’ machines, you can verify whether the changes have taken effect by asking users to start Docker Desktop.
+   After you’ve created the registry.json file and deployed it onto the developers’ machines, you can verify whether the changes have taken effect by asking the developers to start Docker Desktop.
 
-   If the configuration is successful, Docker Desktop prompts the user to authenticate using the organization credentials on start. If the user fails to authenticate, they will see an error message, and they will be denied access to Docker Desktop.
+   If the configuration is successful, Docker Desktop prompts the developer to authenticate using the organization credentials on start. If the developer fails to authenticate, our authenticaes as a developer in the wrong organization they will see an error message, and they will be denied access to Docker Desktop.
 
 ### Caveats
 
@@ -110,5 +104,5 @@ Congratulations! You have just created the `registry.json` file.
   * WSL 2 requires at least a 5.4 series Linux kernel  (this does not apply to earlier Linux kernel series)
  * Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
 
-  Also, Registry Access Management operates on the level of hosts, not IP addresses, that can be bypassed if a user manipulates their domain resolution, such as by running Docker against a local proxy or modifying their operating system's `sts` file. Blocking these forms of manipulation is outside the remit of Docker Desktop.
+  Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Blocking these forms of manipulation is outside the remit of Docker Desktop.
 
