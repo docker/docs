@@ -32,7 +32,7 @@ To configure Registry Access Management permissions, perform the following steps
 
 ![Registry Access Management](images/registry-access-management.png){:width="700px"}
 
-### Enforce authentication
+## Enforce authentication
 
 To ensure that each org member uses Registry Access Management on their local machine, you can perform the steps below to enforce sign-in under your organization. To do this:
 
@@ -44,56 +44,9 @@ Download Docker Desktop 4.5 or a later release.
 - [Download and install for Windows](/desktop/windows/install/)
 - [Download and install for Mac](/desktop/mac/install/)
 
-#### Create a registry json file
+{% include configure-registry-json.md %}
 
-Before you create a `registry.json` file, ensure that the developer is a member of at least one organization in Docker Hub. If the registry.json file matches at least one organization the developer is a member of, they can sign into Docker Desktop and access all of their organizations.
-
-**On Windows**
-
-On Windows, you must create a file `C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (that is, only the system administrator can write to the file). The file must be `JSON` and contain one or more organization names in the `allowedOrgs` key.
-
-To create your `registry.json` file on Windows:
-
-1. Open Windows PowerShell and select **Run as Administrator**.
-2. Type the following command: `cd /ProgramData/DockerDesktop/`
-3. Type `notepad registry.json` and enter the Docker Hub organization that the developer belongs to in `allowedOrgs` key and click **Save**.
-
-    For example:
-
-    ```json
-    {
-    "allowedOrgs": ["myorg"]
-    }
-    ```
-
-**On macOS**:
-
-On macOS, you must create a file at `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (that is, only the system administrator can write to the file). The file must be of type JSON and contain the name of the Docker Hub organization in the `allowedOrgs` key (using one organization name instead of multiple organizations).
-
-To create your `registry.json` file on macOS:
-
-1. Navigate to Visual Studio Code or any text editor of your choice.
-2. Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
-
-    For example:
-
-    ```json
-    {
-     "allowedOrgs": ["myorg"]
-    }
-    ```
-
- 3. Open a new terminal and type the following command:
-
-    `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
-
-    Note: if prompted, type your password associated with your local computer.
-
-4. Type the following command:
-
-    `sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
-
-### Verify the restrictions
+## Verify the restrictions
 
    After you’ve created the registry.json file and deployed it onto the developers’ machines, you can verify whether the changes have taken effect by asking the developers to start Docker Desktop.
 

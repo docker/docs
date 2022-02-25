@@ -55,16 +55,20 @@ For information about Docker Desktop licensing, see [Docker Desktop License Agre
 
 ## Sign in to Docker Desktop
 
-After you’ve successfully installed and started Docker Desktop, we recommend that you authenticate using the **Sign in/Create ID** option from the Docker menu.
+After you’ve successfully installed and started Docker Desktop, we recommend
+that you authenticate using the **Sign in/Create ID** option from the Docker
+menu.
 
 Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
 
-Authenticating through Docker Desktop also allows administrators to configure Docker Desktop and set up guardrails using the [Image Access Management](../docker-hub/image-access-management.md) feature to allow team members to:
-
-* Only have access to Trusted Content on Docker Hub
-* Pull only from the specified categories of images
-
-To authenticate using Docker Desktop, click the **Sign in/Create ID** option on the Docker menu and follow the on-screen instructions.
+In large enterprises where admin access is restricted, administrators can create
+a `registry.json` file and deploy it to the developers' machines using a device
+management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows
+administrators to set up guardrails using features such as 
+[Image Access Management](../docker-hub/image-access-management.md) which allows team
+members to only have access to Trusted Content on Docker Hub, and pull only from
+the specified categories of images. For more information, see
+[Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md).
 
 ## Configure Docker Desktop
 
