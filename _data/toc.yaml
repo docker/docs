@@ -1326,8 +1326,6 @@ manuals:
         title: Link to GitHub and BitBucket
   - path: /docker-hub/webhooks/
     title: Webhooks
-  - path: /docker-hub/slack_integration/
-    title: Slack integration
   - path: /docker-hub/image-access-management/
     title: Image Access Management
   - path: /docker-hub/vulnerability-scanning/
