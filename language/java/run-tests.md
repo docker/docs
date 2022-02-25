@@ -98,7 +98,7 @@ $ docker run -it --rm --name springboot-test java-docker
 
 The build output is truncated, but you can see that the Maven test runner was successful and all our tests passed.
 
-This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when the building the image, and stop the build when they fail.
+This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when building the image, and stop the build when they fail.
 
 Update your Dockerfile with the highlighted line below.
 
@@ -178,7 +178,7 @@ FROM base as development
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"]
 ```
 
-We can now update of our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
+We can now update our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
 
 ```dockerfile
 services:

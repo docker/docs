@@ -28,7 +28,7 @@ Options:
                               (default: directory name)
   --profile NAME              Specify a profile to enable
   --verbose                   Show more output
-  --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  --log-level LEVEL           DEPRECATED and not working from 2.0 - Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
   --no-ansi                   Do not print ANSI control characters
   -v, --version               Print version and exit
   -H, --host HOST             Daemon socket to connect to

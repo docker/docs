@@ -38,7 +38,7 @@ To configure Image Access Management permissions, perform the following steps:
 4. Select the category restrictions for your images by clicking **Allowed**.
 5. Once the restrictions are applied, your members can view the Org permissions page in a read-only format.
 
-### Enforce authentication
+## Enforce authentication
 
 To ensure that each org member uses images in a safe and secure environment, you
 can perform the following steps below to enforce sign-in under your
@@ -58,62 +58,9 @@ Download Docker Desktop 4.0 or a later release.
 > restrictions as Mac and Windows users while logged in. However, there is
 > currently no way to enforce Linux users to log in.
 
-#### Create a registry json file
+{% include configure-registry-json.md %}
 
-After you've successfully installed Docker Desktop, create a `registry.json` file on Windows or Mac.
-
-**On Windows**
-
-Create a file `C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key.
-
-To create your `registry.json` file on Windows:
-
-1. Open Windows Powershell and select Run as Administrator.
-2. Type the following command: `cd /ProgramData/DockerDesktop/`
-3. In Notepad, type `registry.json` and enter one or more organization names in the `allowedOrgs` key and click Save.
-
-    For example:
-
-    ```json
-    {
-    "allowedOrgs": ["mycompany"]
-    }
-    ```
-
-4. Navigate to Powershell and type ```start .```
-
-Congratulations! You have just created the registry.json file.
-
-**On macOS**:
-
-Create a file `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that the developer using Docker Desktop cannot remove or edit the file (i.e., only the system administrator can write to the file). The file must be JSON and contain one or more organization names in the `allowedOrgs` key. The user must sign in and be a member of at least one of the organizations before using Docker Desktop.
-
-To create your `registry.json` file on macOS:
-
-1. Navigate to VS Code or any text editor of your choice.
-2. Enter one or more organization names in the `allowedOrgs` key and save it in your Documents.
-
-    For example:
-
-    ```json
-    {
-     "allowedOrgs": ["mycompany"]
-    }
-    ```
-
- 3. Open a new terminal and type the following command:
-
-    `sudo mkdir -p /Library/Application\ Support/com.docker.docker`
-
-    Note: if prompted, type your password associated with your local computer.
-
-4. Type the following command:
-
-    `sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json`
-
-Congratulations! You have just created the `registry.json` file.
-
-### Verify the restrictions
+## Verify the restrictions
 
    To confirm that the restrictions are successful, have each org member pull an image onto their local computer after signing into Docker Desktop. If they are unable to sign in, they will receive an error message.
 
