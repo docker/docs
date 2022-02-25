@@ -393,7 +393,7 @@ services:
   myapp:
 ```
 
-For more information about using volumes of the `bind` type with compose see
+For more information about using volumes of the `bind` type with Compose, see
 [Compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
 and
 [Compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
