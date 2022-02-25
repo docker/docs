@@ -379,7 +379,7 @@ $ docker run -d \
 
 ## Use a bind mount with compose
 
-A single docker compose service with a bind mount looks like this:
+A single Docker Compose service with a bind mount looks like this:
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -394,9 +394,9 @@ services:
 ```
 
 For more information about using volumes of the `bind` type with compose see
-[the compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
+[Compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
 and
-[the compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
+[Compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
 
 ## Next steps
 
