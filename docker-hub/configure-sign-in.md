@@ -21,65 +21,7 @@ Deploying a `registry.json` file and forcing users to authenticate offers the fo
 2. Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](download-rate-limit.md).
 3. Blocks users from accessing Docker Desktop until they are added to a specific organization.
 
-## Create a registry.json file
-
-Before you create a `registry.json` file, ensure that the user is a member of at least one organization in Docker Hub. If the `registry.json` file matches at least one organization the user is a member of, they can sign into Docker Desktop, and then access all their organizations.
-
-### Windows
-
-On Windows, you must create a file at
-`C:\ProgramData\DockerDesktop\registry.json` with file permissions that ensure
-that the developer using Docker Desktop cannot remove or edit the file (that is,
-only the system administrator can write to the file). The file must be of type
-`JSON` and contain the name of the organization in the `allowedOrgs` key.
-
-To create your `registry.json` file on Windows:
-
-1. Open Windows Powershell and select Run as Administrator.
-2. Type the following command `cd /ProgramData/DockerDesktop/`
-3. Type `notepad registry.json` and enter the name of the Docker Hub
-   organization that the user belongs to in the `allowedOrgs` key and click
-   **Save**. For example:
-
-    ```json
-    {
-        "allowedOrgs": ["myorg"]
-    }
-    ```
-
-### Mac
-
-On macOS, you must create a file at `/Library/Application Support/com.docker.docker/registry.json` with file permissions that ensure that
-the developer using Docker Desktop cannot remove or edit the file (that is, only
-the system administrator can write to the file). The file must be of type `JSON`
-and contain the name of the Docker Hub organization names in the `allowedOrgs`
-key.
-
-To create your `registry.json` file on macOS:
-
-1. Navigate to VS Code or any text editor of your choice.
-2. Enter the name of the Docker Hub organization that the user belongs to in the
-   `allowedOrgs` key and save it in your Documents. For example:
-
-    ```json
-    {
-        "allowedOrgs": ["myorg"]
-    }
-    ```
-
-3. Open a new terminal and type the following command:
-
-    ```console
-    sudo mkdir -p /Library/Application\ Support/com.docker.docker
-    ```
-
-    If prompted, type your password associated with your local computer.
-
-4. Type the following command:
-
-     ```console
-    sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json
-    ```
+{% include configure-registry-json.md %}
 
 ## Verify the changes
 
