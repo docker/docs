@@ -107,7 +107,7 @@ from the repository.
 
 #### Install Docker Engine
 
-This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Raspbian.
+This procedure works for Debian on `x86_64` / `amd64`, `armhf`, and `arm64`.
 
 1. Update the `apt` package index, and install the _latest version_ of Docker
    Engine and containerd, or go to the next step to install a specific version:
