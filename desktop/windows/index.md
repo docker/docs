@@ -415,8 +415,8 @@ in the Docker Engine topics.
 ### How do I add client certificates?
 
 You can add your client certificates
-in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
-`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
+in `~/.docker/certs.d/<MyRegistry><Port>/client.cert` and
+`~/.docker/certs.d/<MyRegistry><Port>/client.key`. You do not need to push your certificates with `git` commands.
 
 When the Docker Desktop application starts, it copies the
 `~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`
