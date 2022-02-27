@@ -134,8 +134,18 @@ Review the [requirements](index.md#requirements), then follow these steps.
           }
 
           # To add basic authentication to v2 use auth_basic setting.
-          auth_basic "Registry realm";
-          auth_basic_user_file /etc/nginx/conf.d/nginx.htpasswd;
+          set $auth_basic "Registry realm rw";
+          set $auth_basic_user_file /etc/nginx/conf.d/nginx-rw.htpasswd;
+
+          # Use separate users for read-only requests
+          # This allows you to create users with read-only access 
+          if ($request_method ~ "GET|HEAD") {
+            set $auth_basic "Registry realm ro";
+            set $auth_basic_user_file /etc/nginx/conf.d/nginx-ro.htpasswd;
+          }
+
+          auth_basic $auth_basic;
+          auth_basic_user_file $auth_basic_user_file;
 
           ## If $docker_distribution_api_version is empty, the header is not added.
           ## See the map directive above where this variable is defined.
@@ -152,10 +162,12 @@ Review the [requirements](index.md#requirements), then follow these steps.
     }
     ```
 
-3.  Create a password file `auth/nginx.htpasswd` for "testuser" and "testpassword".
+3.  Create password file `auth/nginx-ro.htpasswd` for read-only users and `auth/nginx-rw.htpasswd` for read-write users.
+
+    The following command creates both for "testuser" with password "testpassword".
 
     ```console
-    $ docker run --rm --entrypoint htpasswd registry:2 -Bbn testuser testpassword > auth/nginx.htpasswd
+    $ docker run --rm --entrypoint htpasswd registry:2 -Bbn testuser testpassword | tee -a auth/nginx-ro.htpasswd auth/nginx-rw.htpasswd > /dev/null
     ```
 
     > **Note**: If you do not want to use `bcrypt`, you can omit the `-B` parameter.
