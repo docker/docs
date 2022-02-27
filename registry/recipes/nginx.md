@@ -115,8 +115,8 @@ Review the [requirements](index.md#requirements), then follow these steps.
         ssl_certificate_key /etc/nginx/conf.d/domain.key;
 
         # Recommendations from https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
-        ssl_protocols TLSv1.1 TLSv1.2;
-        ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+        ssl_protocols TLSv1.2 TLSv1.3; # Requires nginx >= 1.13.0 else use TLSv1.2
+        ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
         ssl_prefer_server_ciphers on;
         ssl_session_cache shared:SSL:10m;
 

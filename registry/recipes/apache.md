@@ -111,8 +111,11 @@ Listen 5043
   # Anti CRIME
   SSLCompression off
 
-  # POODLE and other stuff
-  SSLProtocol all -SSLv2 -SSLv3 -TLSv1
+  # Requires Apache 2.4.36 & OpenSSL 1.1.1
+  SSLProtocol -all +TLSv1.3 +TLSv1.2
+  SSLOpenSSLConfCmd Curves X25519:secp521r1:secp384r1:prime256v1
+  # Older versions
+  # SSLProtocol All -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
 
   # Secure cypher suites
   SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
