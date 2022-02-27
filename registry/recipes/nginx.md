@@ -141,7 +141,7 @@ Review the [requirements](index.md#requirements), then follow these steps.
           ## See the map directive above where this variable is defined.
           add_header 'Docker-Distribution-Api-Version' $docker_distribution_api_version always;
 
-          proxy_pass                          http://docker-registry;
+          proxy_pass                          http://docker-registry/v2/;
           proxy_set_header  Host              $http_host;   # required for docker client's sake
           proxy_set_header  X-Real-IP         $remote_addr; # pass on real client's IP
           proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
