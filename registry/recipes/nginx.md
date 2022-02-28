@@ -167,7 +167,7 @@ Review the [requirements](index.md#requirements), then follow these steps.
     The following command creates both for "testuser" with password "testpassword".
 
     ```console
-    $ docker run --rm --entrypoint htpasswd registry:2 -Bbn testuser testpassword | tee -a auth/nginx-ro.htpasswd auth/nginx-rw.htpasswd > /dev/null
+    $ docker run --rm --entrypoint htpasswd httpd:2.4-alpine -Bbn testuser testpassword | tee -a auth/nginx-ro.htpasswd auth/nginx-rw.htpasswd > /dev/null
     ```
 
     > **Note**: If you do not want to use `bcrypt`, you can omit the `-B` parameter.
