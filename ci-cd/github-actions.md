@@ -5,8 +5,7 @@ title: Configure GitHub Actions
 ---
 
 This page guides you through the process of setting up a GitHub Action CI/CD
-pipeline with Docker. Before setting up a new pipeline, we recommend that you
-take that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"}
+pipeline with Docker. Before setting up a new pipeline, we recommend that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"}
 on CI/CD best practices.
 
 This guide contains instructions on how to:
