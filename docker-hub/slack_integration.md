@@ -5,6 +5,7 @@ redirect_from:
 - /docker-cloud/tutorials/slack-integration/
 - /docker-cloud/slack-integration/
 title: Set up Docker Hub notifications in Slack
+sitemap: false
 ---
 
 Docker Hub can integrate with your **Slack** team to provide notifications about builds.
