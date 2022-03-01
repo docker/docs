@@ -17,11 +17,11 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 
 2. Enter a username that will become your Docker ID.
 
-    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters.
+    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. Once you create your Docker ID you cannot reuse it in the future if you deactivate this account.
 
 3. Enter a unique, valid email address.
 
-4. Enter a password. Note that the password must be at least 9 characters.
+4. Enter a password that is at least 9 characters.
 
 5. Complete the Captcha verification and then then click **Sign up**.
 
@@ -48,9 +48,9 @@ stored in your home directory in `.docker/config.json`. The password is base64-e
 
 ## Troubleshooting
 
-If you run into trouble with your Docker ID account, know that we are here to help!
+If you run into trouble with your Docker ID account, know that we are here to help! If you want to retrieve or reset your password, [enter your email address](https://id.docker.com/reset-password/){: target="_blank" rel="noopener" class="_"} for additional instructions.
 
-The most frequently asked questions regarding Docker ID accounts can be found on our [support troubleshooting FAQ](https://hub.docker.com/support/).
+ The most frequently asked questions regarding Docker ID accounts can be found on our [support troubleshooting FAQ](https://hub.docker.com/support/).
 
 You can use the [Docker forums](https://forums.docker.com/) to ask questions amongst other Docker community members, while our [hub-feedback GitHub repository](https://github.com/docker/hub-feedback) allows you to provide feedback on how we can better improve the experience with Docker Hub.
 
