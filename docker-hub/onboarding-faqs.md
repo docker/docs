@@ -13,7 +13,7 @@ For more information, see [Docker ID](../docker-id/index.md). If your admin enfo
 
 ### What if my Docker ID is taken?
 
-If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/){: target="_blank" rel="noopener"
+All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/){: target="_blank" rel="noopener"
 class="_"} can retrieve the Docker ID for you.
 
 ### What’s an organization?

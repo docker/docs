@@ -1,7 +1,7 @@
 ---
-description: Configure registry.json to require sign in
+description: Configure registry.json to enforce users to sign into Docker Desktop
 keywords: authentication, registry.json, configure,
-title: Configure registry.json to require sign in
+title: Configure registry.json to enforce sign in
 ---
 
 The `registry.json` file is a configuration file that allows administrators to
