@@ -32,6 +32,10 @@ organizations.
 
     ![Linking source providers](images/linked-accounts.png)
 
+    > **Note**:  If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely logout of [GitHub] (https://github.com/){: target="_blank" rel="noopener"
+    class="_"}  before linking via Docker Hub.
+
+
 4. Review the settings for the **Docker Hub Builder** OAuth application.
 
     ![Granting access to GitHub account](images/authorize-builder.png)
