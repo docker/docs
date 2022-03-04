@@ -114,8 +114,7 @@ $ docker container rm tmptest
 ### Specify tmpfs options
 
 `tmpfs` mounts allow for two configuration options, neither of which is
-required. If you need to specify these options, you must use the `--mount` flag,
-as the `--tmpfs` flag does not support them.
+required. 
 
 | Option       | Description                                                                                           |
 |:-------------|:------------------------------------------------------------------------------------------------------|
@@ -125,13 +124,37 @@ as the `--tmpfs` flag does not support them.
 The following example sets the `tmpfs-mode` to `1770`, so that it is not
 world-readable within the container.
 
+The --tmpfs flag mounts the tmpfs with the mode rw, noexec, exec, nosuid, and size=65536k options.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
+  <li><a data-toggle="tab" data-group="volume" data-target="#tmpfs-run"><code>--tmpfs</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="mount-run" class="tab-pane fade in active" markdown="1">
+
 ```console
-docker run -d \
+$ docker run -d \
   -it \
   --name tmptest \
   --mount type=tmpfs,destination=/app,tmpfs-mode=1770 \
   nginx:latest
 ```
+
+</div><!--mount-->
+<div id="tmpfs-run" class="tab-pane fade" markdown="1">
+
+```console
+$ docker run -d \
+  -it \
+  --name tmptest \
+  --tmpfs /app:rw,size=65536k \
+  nginx:latest
+```
+
+</div><!--volume-->
+</div><!--tab-content-->
+
 
 ## Next steps
 
