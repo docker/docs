@@ -289,6 +289,9 @@ propagation setting has a recursive counterpoint. In the case of recursion,
 consider that `/tmp/a` is also mounted as `/foo`. The propagation settings
 control whether `/mnt/a` and/or `/tmp/a` would exist.
 
+Warning : mount propagation will not work with the docker desktop app, this is a Docker limitation. See
+> [kubernetes-sigs/kind #2576](https://github.com/kubernetes-sigs/kind/issues/2576) for details.
+
 | Propagation setting | Description                                                                                                                                                                                                         |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `shared`            | Sub-mounts of the original mount are exposed to replica mounts, and sub-mounts of replica mounts are also propagated to the original mount.                                                                         |
