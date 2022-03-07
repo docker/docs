@@ -94,10 +94,10 @@ tags:
     x-displayName: Org Settings
     description: |
       The Org Settings API endpoints allow you to manage your organization's settings.
-  - name: repository
-    x-displayName: Repository
+  - name: repositories
+    x-displayName: Repositories
     description: |
-        The repository endpoint allows you to manage your repository's configuration like description.
+        The repository endpoints allow you to manage your repository's configuration like description.
 
 x-tagGroups:
   - name: General
@@ -111,7 +111,7 @@ x-tagGroups:
       - images
       - audit-logs
       - org-settings
-      - repository
+      - repositories
 
 definitions:
   UsersLoginRequest:
@@ -1359,7 +1359,7 @@ paths:
         description: Name of the repository.
         type: string
     patch:
-      tags: [ repository ]
+      tags: [ repositories ]
       summary: Update repository configuration
       description: |
         Update the configuration of a repository:
