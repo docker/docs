@@ -745,6 +745,7 @@ definitions:
 
             Hello from Docker!
             This message shows that your installation appears to be working correctly.
+            ```
       is_private:
         type: boolean
         description: Allow to change visibility of the repository.
@@ -756,20 +757,26 @@ definitions:
       name:
         type: string
         description: name of the repository
+        example: hello-world
       namespace:
         type: string
         description: namespace of the repository
+        example: docker
       description:
         type: string
         description: short description of the repository
+        example: "Hello World! (an example of minimal Dockerization)"
       is_private:
         type: boolean
         description: visibility of the repository
+        example: true
       last_updated:
         type: string
+        example: "2020-04-22T09:47:28.119596Z"
       full_description:
         type: string
         description: Description (readme) of the repository, in Markdown
+        example: "# Quick reference \n\n* Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)\n\n# Example output\n\n```\n$ docker run hello-world\n\n\nHello from Docker!\nThis message shows that your installation appears to be working correctly.\n```"
 
 paths:
   /v2/users/login:
@@ -1384,6 +1391,16 @@ paths:
           description: Forbidden - access to the resource is forbidden, you don't have needed permission to perform this action.
           schema:
             $ref: '#/definitions/ErrorDetail'
+          examples:
+            application/json:
+              detail: You do not have permission to perform this action.
+        404:
+          description: Repository not found or unable to access the ressource
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+          examples:
+            application/json:
+              detail: Object not found
 
 responses:
   BadRequest:
