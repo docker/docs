@@ -57,13 +57,13 @@ For now, we will create the network first and attach the MySQL container at star
     If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
     
     ```console
-    docker run -d \
-     --network todo-app --network-alias mysql \
-     --platform "linux/x86_64" \
-     -v todo-mysql-data:/var/lib/mysql \
-     -e MYSQL_ROOT_PASSWORD=secret \
-     -e MYSQL_DATABASE=todos \
-     mysql:5.7
+    $ docker run -d \
+        --network todo-app --network-alias mysql \
+        --platform "linux/amd64" \
+        -v todo-mysql-data:/var/lib/mysql \
+        -e MYSQL_ROOT_PASSWORD=secret \
+        -e MYSQL_DATABASE=todos \
+        mysql:5.7
     ```
 
     If you are using PowerShell then use this command.
