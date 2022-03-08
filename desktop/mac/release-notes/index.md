@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.5.0
-2022-02-10
+## Docker Desktop 4.6.0
+2022-03-10
 
 > Download Docker Desktop
 >
@@ -32,6 +32,39 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### New
+
+- Virtiofs released as an experimental feature
+- Added volumes UI bulk removal
+
+### Upgrades
+
+- [Compose v2.3.2](https://github.com/docker/compose/releases/tag/v2.3.2)
+- [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
+- [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
+- [Go 1.17.8](https://golang.org/doc/go1.17)
+- [Linux kernel 5.10.92](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.92-850089fd41a54a4b84338aa3a118f2197a10ffd9/images/sha256-032232c6e91271035422dc89834fc01339597b0568b4868b1cfeef411a63d17d?context=explore)
+
+### Bug fixes and minor changes
+
+- Improved the error message from `docker build` when using Registry Access Management.
+- Fixed uploading diagnostics when an HTTPS proxy is set.
+- Fixed the systray menu not displaying all menu items after starting Docker Desktop. Fixes [docker/for-mac#6192](https://github.com/docker/for-mac/issues/6192).
+- Fixed a regression about Docker Desktop not starting in background anymore. Fixes [docker/for-mac#6167](https://github.com/docker/for-mac/issues/6167).
+- Fixed Docker Desktop Dock icon missing. Fixes [docker/for-mac#6173](https://github.com/docker/for-mac/issues/6173).
+- Made checking for updates from the systray menu open the Software updates settings section.
+- Used speed up block device access when using the experimental `virtualization.framework`. See [benchmarks](https://github.com/docker/roadmap/issues/7#issuecomment-1050626886).
+- Increased default VM memory allocation to half of physical memory (min 2 GB, max 8 GB) for better out-of-the-box performances.
+- Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+
+## Docker Desktop 4.5.0
+2022-02-10
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/74594/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/74594/Docker.dmg)
 
 ### Security
 
@@ -62,7 +95,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 >
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/73305/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/73305/Docker.dmg)
-
 
 ### Security
 

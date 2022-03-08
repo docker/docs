@@ -23,14 +23,43 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.5.1
-2022-02-15
+## Docker Desktop 4.6.0
+2022-03-10
 
 > Download Docker Desktop
 >
 > [For
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+
+### New
+
+- Added volumes UI bulk removal
+
+### Upgrades
+
+- [Compose v2.3.2](https://github.com/docker/compose/releases/tag/v2.3.2)
+- [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
+- [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
+- [Go 1.17.8](https://golang.org/doc/go1.17)
+- [Linux kernel 5.10.92](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.92-850089fd41a54a4b84338aa3a118f2197a10ffd9/images/sha256-032232c6e91271035422dc89834fc01339597b0568b4868b1cfeef411a63d17d?context=explore)
+
+### Bug fixes and minor changes
+
+- Improved the error message from `docker build` when using Registry Access Management.
+- Fixed uploading diagnostics when an HTTPS proxy is set.
+- Fixed the UI stuck in `starting` state forever although Docker Desktop is working fine from the command line.
+- Made checking for updates from the systray menu open the Software updates settings section.
+- Fixed Registry Access Management under WSL 2 with latest 5.10.60.1 kernel.
+- Fixed a UI crash when selecting the containers of a Compose application started from a WSL 2 environment. Fixes [docker/for-win#12567](https://github.com/docker/for-win/issues/12567).
+- Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+
+## Docker Desktop 4.5.1
+2022-02-15
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/74721/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
