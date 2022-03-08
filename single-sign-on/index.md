@@ -36,9 +36,15 @@ In addition, all email addresses should be added to your IdP.
 
 To configure SSO, log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
 
-> **Note:**
+> **Important**
 >
-> IdP initiated connections are not supported at this time
+> If your IdP setup requires an Entity ID and the ACS URL, you must select the
+> **SAML** tab in the **Authentication Method** section. For example, if your
+> Azure AD setup uses SAML configuration within Azure AD, you must select
+> **SAML**. If you are [configuring Open ID Connect with Azure AD](https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings){: target="_blank" rel="noopener" class="_"} select **Azure AD** as the
+> authentication method. Also, IdP initiated connections are not supported at
+> this time.
+{: .important}
 
 The following video walks you through the process of configuring SSO.
 
@@ -71,7 +77,13 @@ The following video walks you through the process of configuring SSO.
 
 7. Proceed to **add your domain** before you test and enforce SSO.
 
-### Azure AD IdP configuration
+### Azure AD IdP configuration with Open ID Connect
+
+>**Note:**
+>
+> This section is for users who only want to configure Open ID Connect with
+> Azure AD. This connection is a basic OIDC connection, and there are no
+> special customizations available when using it.
 
 1. Log into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the **Security** tab.
