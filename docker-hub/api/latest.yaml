@@ -94,6 +94,10 @@ tags:
     x-displayName: Org Settings
     description: |
       The Org Settings API endpoints allow you to manage your organization's settings.
+  - name: repositories
+    x-displayName: Repositories
+    description: |
+        The repository endpoints allow you to manage your repository's configuration like description.
 
 x-tagGroups:
   - name: General
@@ -107,6 +111,7 @@ x-tagGroups:
       - images
       - audit-logs
       - org-settings
+      - repositories
 
 definitions:
   UsersLoginRequest:
@@ -134,10 +139,39 @@ definitions:
         x-nullable: false
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
   PostUsersLoginErrorResponse:
-    description: failed user login response.
+    description: failed user login response or second factor required
+    type: object
+    required:
+      - detail
+    properties:
+      detail:
+        description: Description of the error.
+        type: string
+        x-nullable: false
+        example: Incorrect authentication credentials
+      login_2fa_token:
+        description: Short time lived token to be used on `/v2/users/2fa-login` to complete the authentication. This field is present only if 2FA is enabled.
+        type: string
+        x-nullable: true
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  Users2FALoginRequest:
+    description: Second factor user login details
+    type: object
+    required: [ login_2fa_token, code ]
+    properties:
+      login_2fa_token:
+        description: The intermediate 2FA token returned from `/v2/users/login` API.
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+      code:
+        description: The Time-based One-Time Password of the Docker Hub account to authenticate with.
+        type: string
+        example: 123456
+  PostUsers2FALoginErrorResponse:
+    description: failed second factor login response.
     type: object
     properties:
-      details:
+      detail:
         description: Description of the error.
         type: string
         x-nullable: false
@@ -170,6 +204,13 @@ definitions:
         type: string
       errinfo:
         $ref: '#/definitions/ErrorInfo'
+  ErrorDetail:
+    description: Error with a detail field.
+    type: object
+    properties:
+      detail:
+        description: The error message.
+        type: string
   GetNamespaceRepositoryImagesSummaryResponse:
     description: Summary information for images in a repository.
     type: object
@@ -682,6 +723,61 @@ definitions:
         description: Allow usage of verified publisher images if "enabled" is `true`.
         example: true
 
+  update_repository:
+    type: object
+    properties:
+      description:
+        type: string
+        description: The description of a repository, as displayed below the repository name.
+        example: Hello World! (an example of minimal Dockerization)
+      full_description:
+        type: string
+        description: The full description displayed on the repository page. Markdown accepted.
+        example: |
+            # Quick reference
+
+            * Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)
+
+            # Example output
+
+            ```
+            $ docker run hello-world
+
+            Hello from Docker!
+            This message shows that your installation appears to be working correctly.
+            ```
+      is_private:
+        type: boolean
+        description: Allow to change visibility of the repository.
+        example: true
+
+  repository:
+    type: object
+    properties:
+      name:
+        type: string
+        description: name of the repository
+        example: hello-world
+      namespace:
+        type: string
+        description: namespace of the repository
+        example: docker
+      description:
+        type: string
+        description: short description of the repository
+        example: "Hello World! (an example of minimal Dockerization)"
+      is_private:
+        type: boolean
+        description: visibility of the repository
+        example: true
+      last_updated:
+        type: string
+        example: "2020-04-22T09:47:28.119596Z"
+      full_description:
+        type: string
+        description: Description (readme) of the repository, in Markdown
+        example: "# Quick reference \n\n* Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)\n\n# Example output\n\n```\n$ docker run hello-world\n\n\nHello from Docker!\nThis message shows that your installation appears to be working correctly.\n```"
+
 paths:
   /v2/users/login:
     post:
@@ -707,9 +803,38 @@ paths:
           schema:
             $ref: '#/definitions/PostUsersLoginSuccessResponse'
         401:
-          description: Authentication failed
+          description: Authentication failed or second factor required
           schema:
             $ref: '#/definitions/PostUsersLoginErrorResponse'
+  /v2/users/2fa-login:
+    post:
+      tags: [ authentication ]
+      summary: Second factor authentication.
+      operationId: PostUsers2FALogin
+      description: |
+        When user has 2FA enabled, this is the second call to perform after `/v2/users/login` call.
+
+        Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
+
+        The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
+
+        Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
+      parameters:
+        - name: body
+          in: body
+          description: Login details.
+          required: true
+          schema:
+            $ref: '#/definitions/Users2FALoginRequest'
+      responses:
+        200:
+          description: Authentication successful
+          schema:
+            $ref: '#/definitions/PostUsersLoginSuccessResponse'
+        401:
+          description: Authentication failed or second factor required
+          schema:
+            $ref: '#/definitions/PostUsers2FALoginErrorResponse'
   /v2/access-tokens:
     post:
       summary: Create a personal access token
@@ -1227,6 +1352,55 @@ paths:
           $ref: "#/responses/Forbidden"
         404:
           $ref: "#/responses/NotFound"
+
+  /v2/repositories/{namespace}/{repository}/:
+    parameters:
+      - name: namespace
+        in: path
+        required: true
+        description: Namespace of the repository.
+        type: string
+      - name: repository
+        in: path
+        required: true
+        description: Name of the repository.
+        type: string
+    patch:
+      tags: [ repositories ]
+      summary: Update repository configuration
+      description: |
+        Update the configuration of a repository:
+        
+        - description: the summary of a repository
+        - full description: the readme displayed on repository's page, markdown accepted
+        - visibility: is the repository public or private
+        
+        Authentication is required.
+      operationId: PatchRepositoryDescription
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/update_repository"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/repository'
+        403:
+          description: Forbidden - access to the resource is forbidden, you don't have needed permission to perform this action.
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+          examples:
+            application/json:
+              detail: You do not have permission to perform this action.
+        404:
+          description: Repository not found or unable to access the ressource
+          schema:
+            $ref: '#/definitions/ErrorDetail'
+          examples:
+            application/json:
+              detail: Object not found
 
 responses:
   BadRequest:
