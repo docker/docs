@@ -139,6 +139,15 @@ also included below.
     > with the version of Compose you want to use. For instructions on how to
     > install Compose `{{site.compose_v2_version}}` on Linux, see [Install
     > Compose 2.0.0 on Linux](../cli-command#install-on-linux)
+  
+    > Note: If you are using an operating system based on an arm architecture in 
+    > [MCU](https://en.wikipedia.org/wiki/Microcontroller), such as Raspberry Pi. 
+    > You should execute this command: 
+
+    ```console
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/v{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```
+
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options) tab above.
