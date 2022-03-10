@@ -24,7 +24,7 @@ This page contains information about the new features, improvements, known issue
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
 ## Docker Desktop 4.6.0
-2022-03-10
+2022-03-14
 
 > Download Docker Desktop
 >
@@ -33,6 +33,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
 
+### Security
+
+- CVE-2022-0847
+
 ### New
 
 - Virtiofs released as an experimental feature
@@ -40,11 +44,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Upgrades
 
-- [Compose v2.3.2](https://github.com/docker/compose/releases/tag/v2.3.2)
+- [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
 - [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
 - [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
 - [Go 1.17.8](https://golang.org/doc/go1.17)
-- [Linux kernel 5.10.92](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.92-850089fd41a54a4b84338aa3a118f2197a10ffd9/images/sha256-032232c6e91271035422dc89834fc01339597b0568b4868b1cfeef411a63d17d?context=explore)
+- [Linux kernel 5.10.104](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.104-379cadd2e08e8b25f932380e9fdaab97755357b3/images/sha256-7753b60f4544e5c5eed629d12151a49c8a4b48d98b4fb30e4e65cecc20da484d?context=explore)
 
 ### Bug fixes and minor changes
 
