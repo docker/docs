@@ -162,49 +162,31 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-### Command Line
+### Experimental Features
 
-On the Command Line page, you can specify whether or not to enable experimental features.
+On the **Experimental Features** page, you can specify whether or not to enable experimental features.
 
-{% include experimental.md %}
+Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
 
-You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+#### Enable the new Apple Virtualization framework
 
-You can see whether you are running experimental mode at the command line. If
-`Experimental` is `true`, then Docker is running in experimental mode, as shown
-here. (If `false`, Experimental mode is off.)
+Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
 
-```console
-$ docker version
+#### Enable VirtioFS
 
-Client: Docker Engine - Community
- Version:           19.03.1
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        74b1e89
- Built:             Thu Jul 25 21:18:17 2019
- OS/Arch:           darwin/amd64
- Experimental:      true
+Select the **Enable VirtioFS accelerated directory** sharing option to enable VirtioFS. You must install Docker Desktop 4.6 or higher and macOS 12.2 to use VirtioFS.
 
-Server: Docker Engine - Community
- Engine:
-  Version:          19.03.1
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       74b1e89
-  Built:            Thu Jul 25 21:17:52 2019
-  OS/Arch:          linux/amd64
-  Experimental:     true
- containerd:
-  Version:          v1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
- runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
-```
+VirtioFS is a file system that shares information quicker by utilizing a virtual machine and host kernel located on the same machine. For example, the VirtioFS daemon ‘virtualization.framework’ runs as a separate process on macOS and allows the Linux VM to directly access files on the macOS host. VirtioFS can also take a file and map it into the Linux VM’s memory space,  removing the need to copy the entire contents into the VM’s memory and making the file contents quickly accessible from the host.
+
+VirtioFS helps developers share the source code volumes located on their host with the container. Meaning that changes made on the host automatically propagate to the container without rebuilding the image.
+When developers make changes to a file and save it on their host machine, the changes do not sync automatically with those in the container. Due to this, developers use the `docker run -v` command to share the source code volumes located on their host with the container. This causes slower performance for users and also decreases productivity.
+
+When using VirtioFS, changes made to the developers' files located on their host system will quickly sync to the container file system. They can then view their changes instantly in a browser or a page reload.
+
+> **Note**
+>
+> Currently, Apple’s VirtioFS implementation on macOS Monterey does not
+> include this mapping functionality.
 
 ### Kubernetes
 
