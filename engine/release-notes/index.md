@@ -68,7 +68,7 @@ package.
   for `docker-compose` (Docker Compose V1) [docker/docker-ce-packaging#638](https://github.com/docker/docker-ce-packaging/pull/638).
   The `compose-cli-plugin` package can also be used on older version of the Docker
   CLI with support for CLI plugins (Docker CLI 18.09 and up).
-- Provide packages for the upcoming Ubuntu 22.04 "" LTS release [docker/docker-ce-packaging#645](https://github.com/docker/docker-ce-packaging/pull/645), [docker/containerd-packaging#271](https://github.com/docker/containerd-packaging/pull/271).
+- Provide packages for the upcoming Ubuntu 22.04 "Jammy Jellyfish" LTS release [docker/docker-ce-packaging#645](https://github.com/docker/docker-ce-packaging/pull/645), [docker/containerd-packaging#271](https://github.com/docker/containerd-packaging/pull/271).
 - Update `docker buildx` to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
 - Update `docker scan` (`docker-scan-plugin`) to [v0.17.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.17.0).
 - Update containerd (`containerd.io` package) to [v1.5.10](https://github.com/containerd/containerd/releases/tag/v1.5.10).
