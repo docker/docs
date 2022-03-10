@@ -34,11 +34,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Security
 
-- CVE-2022-0847
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847), aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
 
 ### New
 
-- Added volumes UI bulk removal
+- The Docker Desktop 'Volumes' UI now offers the ability to efficiently clean up volumes via multi-select checkboxes.
 
 ### Upgrades
 
