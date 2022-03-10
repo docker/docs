@@ -13,6 +13,7 @@ options:
   default_value: "false"
   description: Set builder as default for current context
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -22,6 +23,7 @@ options:
   default_value: "false"
   description: Builder persists context changes
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -32,6 +34,7 @@ inherited_options:
   description: Override the configured builder instance
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
