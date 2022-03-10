@@ -7,9 +7,9 @@ redirect_from:
 - /docker-hub/billing/downgrade/
 ---
 
-You can downgrade your Docker subscription anytime. When you downgrade your subscription, changes are applied at the end of your billing cycle.
+You can downgrade your Docker subscription anytime. When you downgrade your subscription, changes are applied immediately, and you will no longer have access to the prior services.
 
-For example, if you are currently on a **Docker Team** subscription which is billed on the 8th of every month and you choose to downgrade to **Docker Personal** on the 15th, your plan will be active until 7th of the following month. You will be transferred to Docker Personal on the 8th of the following month.
+For example, if you are currently on a **Docker Business** subscription and want to downgrade to a **Docker Team**, your plan will change immediately. You will no longer have access to your previous service, such as Single Sign-on.
 
 The following sections contain instructions on how to downgrade your existing Docker subscription.
 
@@ -17,7 +17,7 @@ The following sections contain instructions on how to downgrade your existing Do
 
 >**Note:**
 >
-> - It is not possible to offer prorated refunds when you downgrade an annual subscription that’s already paid for and is still active. After you have downgraded, you can choose to reinstate your annual subscription if it hasn’t expired.
+> - It is not possible to offer refunds when you downgrade an annual or monthly subscription that’s already paid for and is still active. After you have downgraded to a free plan, you can choose to reinstate your subscription if it hasn’t expired.
 > - Before you downgrade to a Personal or a Free Team subscription, you must convert all private repositories to public repositories and update the organization details to reflect features available in Docker Personal or Free Team. For example, if you have a Docker Team subscription, you may need to reduce the number of team members. For information on what’s included in the subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 
