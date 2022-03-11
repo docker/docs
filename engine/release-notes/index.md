@@ -22,6 +22,60 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.13
+2022-03-10
+
+This release of Docker Engine contains some bug-fixes and packaging changes,
+updates to the `docker scan` and `docker buildx` commands, an updated version of
+the Go runtime, and new versions of the `containerd.io` runtime.
+Together with this release, we now also provide `.deb` and `.rpm` packages of
+Docker Compose V2, which can be installed using the (optional) `docker-compose-plugin`
+package.
+
+### Builder
+
+- Updated the bundled version of buildx to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
+
+### Daemon
+
+- Fix a race condition when updating the container's state [moby/moby#43166](https://github.com/moby/moby/pull/43166).
+- Update the etcd dependency to prevent the daemon from incorrectly holding file locks [moby/moby#43259](https://github.com/moby/moby/pull/43259)
+- Fix detection of user-namespaces when configuring the default `net.ipv4.ping_group_range` sysctl [moby/moby#43084](https://github.com/moby/moby/pull/43084).
+
+### Distribution
+
+- Retry downloading image-manifests if a connection failure happens during image
+  pull [moby/moby#43333](https://github.com/moby/moby/pull/43333).
+
+### Documentation
+
+- Various fixes in command-line reference and API documentation.
+
+### Logging
+
+- Prevent an OOM when using the "local" logging driver with containers that produce
+  a large amount of log messages [moby/moby#43165](https://github.com/moby/moby/pull/43165).
+- Updates the fluentd log driver to prevent a potential daemon crash, and prevent
+  containers from hanging when using the `fluentd-async-connect=true` and the
+  remote server is unreachable [moby/moby#43147](https://github.com/moby/moby/pull/43147).
+
+### Packaging
+
+- Provide `.deb` and `.rpm` packages for Docker Compose V2. [Docker Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+  can now be installed on Linux using the `docker-compose-plugin` packages, which
+  provides the `docker compose` subcommand on the Docker CLI. The Docker Compose
+  plugin can also be installed and run standalone to be used as a drop-in replacement
+  for `docker-compose` (Docker Compose V1) [docker/docker-ce-packaging#638](https://github.com/docker/docker-ce-packaging/pull/638).
+  The `compose-cli-plugin` package can also be used on older version of the Docker
+  CLI with support for CLI plugins (Docker CLI 18.09 and up).
+- Provide packages for the upcoming Ubuntu 22.04 "Jammy Jellyfish" LTS release [docker/docker-ce-packaging#645](https://github.com/docker/docker-ce-packaging/pull/645), [docker/containerd-packaging#271](https://github.com/docker/containerd-packaging/pull/271).
+- Update `docker buildx` to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
+- Update `docker scan` (`docker-scan-plugin`) to [v0.17.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.17.0).
+- Update containerd (`containerd.io` package) to [v1.5.10](https://github.com/containerd/containerd/releases/tag/v1.5.10).
+- Update the bundled runc version to [v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3).
+- Update Golang runtime to Go 1.16.15.
+
+
 ## 20.10.12
 2021-12-13
 
