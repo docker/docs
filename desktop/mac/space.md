@@ -97,4 +97,4 @@ To reduce the maximum size of the disk image file:
 
 3. Click **Apply & Restart**.
 
-When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers, images, and volumes will be lost.
+When you reduce the maximum size, the current disk image file is deleted, therefore all images, containers, and volumes will be lost.
