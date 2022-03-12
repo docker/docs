@@ -70,7 +70,7 @@ It might take a few minutes to reclaim space on the host depending on the format
 - If the file is named `Docker.raw`: space on the host should be reclaimed within a few seconds.
 - If the file is named `Docker.qcow2`: space will be freed by a background process after a few minutes.
 
-Space is only freed when images are deleted. Space is not freed automatically when files are deleted inside running containers. To trigger a space reclamation at any point, run the command:
+Space is only freed when images are deleted. Space is not freed automatically when files are deleted inside running containers. For AMD architecture Macs, to trigger a space reclamation at any point, run the command:
 
 ```console
 $ docker run --privileged --pid=host docker/desktop-reclaim-space
@@ -97,4 +97,4 @@ To reduce the maximum size of the disk image file:
 
 3. Click **Apply & Restart**.
 
-When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images will be lost.
+When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers, images, and volumes will be lost.
