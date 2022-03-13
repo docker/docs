@@ -174,9 +174,27 @@ also included below.
 
 ### Alternative install options
 
+- [Install using pipx](#install-using-pipx)
 - [Install using pip](#install-using-pip)
 - [Install as a container](#install-as-a-container)
 
+#### Install using pipx
+
+> For `alpine`, the following dependency packages are needed:
+> `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo`, and `make`.
+{: .important}
+
+Compose can be installed as an isolated python application from
+[pypi](https://pypi.python.org/pypi/docker-compose) using [pipx](https://pypa.github.io/pipx/). Isolation is recommended because many operating
+systems have python system packages that conflict with docker-compose dependencies.
+This option is recommended over the [pip](#install-using-pip) option below if you do not plan to install another python application in the same python virtual environment.
+
+```console
+$ pipx install docker-compose
+```
+  
+> python 3.7+ is required to [install pipx](https://pypa.github.io/pipx/installation/).
+  
 #### Install using pip
 
 > For `alpine`, the following dependency packages are needed:
