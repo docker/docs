@@ -132,7 +132,7 @@ also included below.
 1.  Run this command to download the current stable release of Docker Compose:
 
     ```console
-    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
