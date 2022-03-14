@@ -42,7 +42,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Upgrades
 
+- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
 - [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+- [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
 - [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
 - [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
 - [Go 1.17.8](https://golang.org/doc/go1.17)

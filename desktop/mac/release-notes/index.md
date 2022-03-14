@@ -44,11 +44,14 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Upgrades
 
+- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
 - [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+- [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
 - [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
 - [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
 - [Go 1.17.8](https://golang.org/doc/go1.17)
 - [Linux kernel 5.10.104](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.104-379cadd2e08e8b25f932380e9fdaab97755357b3/images/sha256-7753b60f4544e5c5eed629d12151a49c8a4b48d98b4fb30e4e65cecc20da484d?context=explore)
+- [Qemu 6.2.0](https://wiki.qemu.org/ChangeLog/6.2)
 
 ### Bug fixes and minor changes
 
