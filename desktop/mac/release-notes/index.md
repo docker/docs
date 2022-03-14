@@ -39,7 +39,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called virtiofs. During testing virtiofs has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements.
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](../index.md#experimental-features).
 - The Docker Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
 
 ### Upgrades
@@ -63,6 +63,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Used speed up block device access when using the experimental `virtualization.framework`. See [benchmarks](https://github.com/docker/roadmap/issues/7#issuecomment-1050626886).
 - Increased default VM memory allocation to half of physical memory (min 2 GB, max 8 GB) for better out-of-the-box performances.
 - Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+
+### Known issues
+
+- After enabling VirtioFS, containers with processes running with different Unix user IDs may experience caching issues. For example if a process running as `root` queries a file and another process running as user `nginx` tries to access the same file immediately, the `nginx` process will get a "Permission Denied" error.
 
 ## Docker Desktop 4.5.0
 2022-02-10
