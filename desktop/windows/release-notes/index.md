@@ -34,11 +34,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Security
 
-- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847), aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847), aka “Dirty Pipe”, an issue that could enable attackers to modify files on the VM or other containers, from inside a container.
 
 ### New
 
-- The Docker Desktop 'Volumes' UI now offers the ability to efficiently clean up volumes via multi-select checkboxes.
+- The Docker Dashboard Volumes Management feature now offers the ability to efficiently clean up volumes via multi-select checkboxes.
 
 ### Upgrades
 
@@ -50,13 +50,14 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and minor changes
 
-- Improved the error message from `docker build` when using Registry Access Management.
 - Fixed uploading diagnostics when an HTTPS proxy is set.
 - Fixed the UI stuck in `starting` state forever although Docker Desktop is working fine from the command line.
+- Fixed missing Docker Desktop systray icon [docker/for-win#12573](https://github.com/docker/for-win/issues/12573)
 - Made checking for updates from the systray menu open the Software updates settings section.
 - Fixed Registry Access Management under WSL 2 with latest 5.10.60.1 kernel.
 - Fixed a UI crash when selecting the containers of a Compose application started from a WSL 2 environment. Fixes [docker/for-win#12567](https://github.com/docker/for-win/issues/12567).
 - Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+- When Registry Access Management is enabled and a Dockerfile references a blocked registry, the error from docker build explains the problem and tells the developer how to resolve it.
 
 ## Docker Desktop 4.5.1
 2022-02-15

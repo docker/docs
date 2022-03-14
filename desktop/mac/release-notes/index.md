@@ -40,7 +40,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 ### New
 
 - Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called virtiofs. During testing virtiofs has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements for macOS users. As an example, enabling virtiofs has been shown to reduce the time taken to run DB imports by up to 98%.
-- The Docker Desktop 'Volumes' UI now offers the ability to efficiently clean up volumes via multi-select checkboxes.
+- The Docker Dashboard Volumes Management feature now offers the ability to efficiently clean up volumes via multi-select checkboxes.
 
 ### Upgrades
 
@@ -52,15 +52,15 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and minor changes
 
-- Improved the error message from `docker build` when using Registry Access Management.
 - Fixed uploading diagnostics when an HTTPS proxy is set.
 - Fixed the systray menu not displaying all menu items after starting Docker Desktop. Fixes [docker/for-mac#6192](https://github.com/docker/for-mac/issues/6192).
 - Fixed a regression about Docker Desktop not starting in background anymore. Fixes [docker/for-mac#6167](https://github.com/docker/for-mac/issues/6167).
-- Fixed Docker Desktop Dock icon missing. Fixes [docker/for-mac#6173](https://github.com/docker/for-mac/issues/6173).
+- Fixed missing Docker Desktop Dock icon. Fixes [docker/for-mac#6173](https://github.com/docker/for-mac/issues/6173).
 - Made checking for updates from the systray menu open the Software updates settings section.
 - Used speed up block device access when using the experimental `virtualization.framework`. See [benchmarks](https://github.com/docker/roadmap/issues/7#issuecomment-1050626886).
 - Increased default VM memory allocation to half of physical memory (min 2 GB, max 8 GB) for better out-of-the-box performances.
 - Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+- When Registry Access Management is enabled and a Dockerfile references a blocked registry, the error from docker build explains the problem and tells the developer how to resolve it.
 
 ## Docker Desktop 4.5.0
 2022-02-10
