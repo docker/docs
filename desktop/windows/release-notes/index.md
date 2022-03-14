@@ -59,7 +59,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Fixed Registry Access Management under WSL 2 with latest 5.10.60.1 kernel.
 - Fixed a UI crash when selecting the containers of a Compose application started from a WSL 2 environment. Fixes [docker/for-win#12567](https://github.com/docker/for-win/issues/12567).
 - Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
-- When Registry Access Management is enabled and a Dockerfile references a blocked registry, the error from docker build explains the problem and tells the developer how to resolve it.
 
 ## Docker Desktop 4.5.1
 2022-02-15
