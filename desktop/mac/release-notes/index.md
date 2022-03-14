@@ -35,12 +35,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Security
 
-- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847), aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847){: target="_blank" rel="noopener" class="_"}, aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
 
 ### New
 
-- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called virtiofs. During testing virtiofs has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements for macOS users. As an example, enabling virtiofs has been shown to reduce the time taken to run DB imports by up to 98%.
-- The Docker Dashboard Volumes Management feature now offers the ability to efficiently clean up volumes via multi-select checkboxes.
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called virtiofs. During testing virtiofs has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements.
+- The Docker Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
 
 ### Upgrades
 
