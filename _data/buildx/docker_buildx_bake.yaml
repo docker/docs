@@ -22,6 +22,7 @@ options:
   description: Build definition file
   details_url: '#file'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -31,6 +32,7 @@ options:
   default_value: "false"
   description: Shorthand for `--set=*.output=type=docker`
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -39,6 +41,7 @@ options:
   value_type: string
   description: Write build result metadata to the file
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -49,6 +52,7 @@ options:
   description: Do not use cache when building the image
   details_url: '#no-cache'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -59,6 +63,7 @@ options:
   description: Print the options without building
   details_url: '#print'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -70,6 +75,7 @@ options:
     Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
   details_url: '#progress'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -77,9 +83,10 @@ options:
 - option: pull
   value_type: bool
   default_value: "false"
-  description: Always attempt to pull a newer version of the image
+  description: Always attempt to pull all referenced images
   details_url: '#pull'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -89,6 +96,7 @@ options:
   default_value: "false"
   description: Shorthand for `--set=*.output=type=registry`
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -99,6 +107,7 @@ options:
   description: Override target value (e.g., `targetpattern.key=value`)
   details_url: '#set'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -109,6 +118,7 @@ inherited_options:
   description: Override the configured builder instance
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -170,10 +180,10 @@ examples: |-
   You can also use a remote `git` bake definition:
 
   ```console
-  $ docker buildx bake "git://github.com/docker/cli#v20.10.11" --print
-  #1 [internal] load git source git://github.com/docker/cli#v20.10.11
+  $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
+  #1 [internal] load git source https://github.com/docker/cli.git#v20.10.11
   #1 0.745 e8f1871b077b64bcb4a13334b7146492773769f7       refs/tags/v20.10.11
-  #1 2.022 From git://github.com/docker/cli
+  #1 2.022 From https://github.com/docker/cli
   #1 2.022  * [new tag]         v20.10.11  -> v20.10.11
   #1 DONE 2.9s
   {
@@ -186,7 +196,7 @@ examples: |-
     },
     "target": {
       "binary": {
-        "context": "git://github.com/docker/cli#v20.10.11",
+        "context": "https://github.com/docker/cli.git#v20.10.11",
         "dockerfile": "Dockerfile",
         "args": {
           "BASE_VARIANT": "alpine",
@@ -205,7 +215,7 @@ examples: |-
   }
   ```
 
-  As you can see the context is fixed to `git://github.com/docker/cli` even if
+  As you can see the context is fixed to `https://github.com/docker/cli.git` even if
   [no context is actually defined](https://github.com/docker/cli/blob/2776a6d694f988c0c1df61cad4bfac0f54e481c8/docker-bake.hcl#L17-L26)
   in the definition.
 
@@ -226,7 +236,7 @@ examples: |-
   ```
 
   ```console
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" --print
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" --print
   {
     "target": {
       "default": {
@@ -240,7 +250,7 @@ examples: |-
 
   ```console
   $ touch foo bar
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test"
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test"
   ...
    > [4/4] RUN ls -l && stop:
   #8 0.101 total 0
@@ -250,14 +260,14 @@ examples: |-
   ```
 
   ```console
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" "git://github.com/docker/cli#v20.10.11" --print
-  #1 [internal] load git source git://github.com/tonistiigi/buildx#remote-test
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11" --print
+  #1 [internal] load git source https://github.com/tonistiigi/buildx.git#remote-test
   #1 0.429 577303add004dd7efeb13434d69ea030d35f7888       refs/heads/remote-test
   #1 CACHED
   {
     "target": {
       "default": {
-        "context": "git://github.com/docker/cli#v20.10.11",
+        "context": "https://github.com/docker/cli.git#v20.10.11",
         "dockerfile": "Dockerfile",
         "dockerfile-inline": "FROM alpine\nWORKDIR /src\nCOPY . .\nRUN ls -l \u0026\u0026 stop\n"
       }
@@ -266,7 +276,7 @@ examples: |-
   ```
 
   ```console
-  $ docker buildx bake "git://github.com/tonistiigi/buildx#remote-test" "git://github.com/docker/cli#v20.10.11"
+  $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11"
   ...
    > [4/4] RUN ls -l && stop:
   #8 0.136 drwxrwxrwx    5 root     root          4096 Jul 27 18:31 kubernetes
@@ -335,7 +345,6 @@ examples: |-
   ...
   ```
 
-
   ### Always attempt to pull a newer version of the image (--pull) {#pull}
 
   Same as `build --pull`.
@@ -348,9 +357,6 @@ examples: |-
 
   Override target configurations from command line. The pattern matching syntax
   is defined in https://golang.org/pkg/path/#Match.
-
-
-  **Examples**
 
   ```console
   $ docker buildx bake --set target.args.mybuildarg=value
@@ -384,8 +390,7 @@ examples: |-
   Note: Design of bake command is work in progress, the user experience may change
   based on feedback.
 
-
-  **Example HCL definition**
+  HCL definition example:
 
   ```hcl
   group "default" {
@@ -410,8 +415,8 @@ examples: |-
 
   Complete list of valid target fields:
 
-  `args`, `cache-from`, `cache-to`, `context`, `dockerfile`, `inherits`, `labels`,
-  `no-cache`, `output`, `platform`, `pull`, `secrets`, `ssh`, `tags`, `target`
+  `args`, `cache-from`, `cache-to`, `context`, `contexts`, `dockerfile`, `inherits`, `labels`,
+  `no-cache`, `no-cache-filter`, `output`, `platform`, `pull`, `secrets`, `ssh`, `tags`, `target`
 
   ### Global scope attributes
 
@@ -518,6 +523,28 @@ examples: |-
 
   target "webapp" {
       tags = ["docker.io/username/webapp:${TAG}"]
+  }
+  ```
+
+  alternatively, in json format:
+
+  ```json
+  {
+    "variable": {
+      "TAG": {
+        "default": "latest"
+      }
+    }
+    "group": {
+      "default": {
+        "targets": ["webapp"]
+      }
+    },
+    "target": {
+      "webapp": {
+        "tags": ["docker.io/username/webapp:${TAG}"]
+      }
+    }
   }
   ```
 
@@ -848,6 +875,77 @@ examples: |-
   }
   ```
 
+  ### Defining additional build contexts and linking targets
+
+  In addition to the main `context` key that defines the build context each target can also define additional named contexts with a map defined with key `contexts`. These values map to the `--build-context` flag in the [build command](buildx_build.md#build-context).
+
+  Inside the Dockerfile these contexts can be used with the `FROM` instruction or `--from` flag.
+
+  The value can be a local source directory, container image (with docker-image:// prefix), Git URL, HTTP URL or a name of another target in the Bake file (with target: prefix).
+
+  #### Pinning alpine image
+
+  ```Dockerfile
+  # Dockerfile
+  FROM alpine
+  RUN echo "Hello world"
+  ```
+
+  ```hcl
+  # docker-bake.hcl
+  target "app" {
+      contexts = {
+          alpine = "docker-image://alpine:3.13"
+      }
+  }
+  ```
+
+  #### Using a secondary source directory
+
+  ```Dockerfile
+  # Dockerfile
+
+  FROM scratch AS src
+
+  FROM golang
+  COPY --from=src . .
+  ```
+
+  ```hcl
+  # docker-bake.hcl
+  target "app" {
+      contexts = {
+          src = "../path/to/source"
+      }
+  }
+  ```
+
+  #### Using a result of one target as a base image in another target
+
+  To use a result of one target as a build context of another, specity the target name with `target:` prefix.
+
+  ```Dockerfile
+  # Dockerfile
+  FROM baseapp
+  RUN echo "Hello world"
+  ```
+
+  ```hcl
+  # docker-bake.hcl
+
+  target "base" {
+      dockerfile = "baseapp.Dockerfile"
+  }
+
+  target "app" {
+      contexts = {
+          baseapp = "target:base"
+      }
+  }
+  ```
+
+  Please note that in most cases you should just use a single multi-stage Dockerfile with multiple targets for similar behavior. This case is recommended when you have multiple Dockerfiles that can't be easily merged into one.
+
   ### Extension field with Compose
 
   [Special extension](https://github.com/compose-spec/compose-spec/blob/master/spec.md#extension)
@@ -959,7 +1057,7 @@ examples: |-
   Complete list of valid fields for `x-bake`:
 
   `tags`, `cache-from`, `cache-to`, `secret`, `ssh`, `platforms`, `output`,
-  `pull`, `no-cache`
+  `pull`, `no-cache`, `no-cache-filter`
 
   ### Built-in variables
 

@@ -11,6 +11,7 @@ options:
   default_value: "false"
   description: Remove all unused images, not just dangling ones
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -19,6 +20,7 @@ options:
   value_type: filter
   description: Provide filter values (e.g., `until=24h`)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -29,6 +31,7 @@ options:
   default_value: "false"
   description: Do not prompt for confirmation
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -38,6 +41,7 @@ options:
   default_value: "0"
   description: Amount of disk space to keep for cache
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -47,6 +51,7 @@ options:
   default_value: "false"
   description: Provide a more verbose output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -57,6 +62,7 @@ inherited_options:
   description: Override the configured builder instance
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
