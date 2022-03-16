@@ -9,6 +9,7 @@ inherited_options:
   value_type: string
   description: Override the configured builder instance
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
