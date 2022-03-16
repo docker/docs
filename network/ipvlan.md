@@ -22,7 +22,7 @@ are, the positive performance implications of bypassing the Linux bridge and the
 simplicity of having fewer moving parts. Removing the bridge that traditionally
 resides in between the Docker host NIC and container interface leaves a simple
 setup consisting of container interfaces, attached directly to the Docker host
-interface. This result is easy to access for external facing services as there
+interface. This results in easy access for external facing services as there
 is no need for port mappings in these scenarios.
 
 ## Prerequisites
