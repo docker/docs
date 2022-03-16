@@ -174,7 +174,7 @@ Select **Use the new Virtualization framework** to allow Docker Desktop to use t
 
 #### Enable VirtioFS
 
-The 4.6 release of Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtioFS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. During testing, virtioFS has reduced the time taken to sync changes between the host and VM up to 90%. For more details, see our < need link for 4.6 blog post>.
+ Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
 
 To enable virtioFS:
 
