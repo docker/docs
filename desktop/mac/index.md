@@ -174,19 +174,17 @@ Select **Use the new Virtualization framework** to allow Docker Desktop to use t
 
 #### Enable VirtioFS
 
-Select the **Enable VirtioFS accelerated directory** sharing option to enable VirtioFS. You must install Docker Desktop 4.6 or higher and macOS 12.2 to use VirtioFS.
+ Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
 
-VirtioFS is a file system that shares information quicker by utilizing a virtual machine and host kernel located on the same machine. For example, the VirtioFS daemon `virtualization.framework` runs as a separate process on macOS and allows the Linux VM to directly access files on the macOS host. VirtioFS can also take a file and map it into the Linux VM’s memory space,  removing the need to copy the entire contents into the VM’s memory and making the file contents quickly accessible from the host.
+To enable virtioFS:
 
-VirtioFS helps developers share the source code volumes located on their host with the container. Meaning that changes made on the host automatically propagate to the container without rebuilding the image.
-When developers make changes to a file and save it on their host machine, the changes do not sync automatically with those in the container. Due to this, developers use the `docker run -v` command to share the source code volumes located on their host with the container. This causes slower performance for users and also decreases productivity.
+1. Verify that you are on the following macOS version:
+   - macOS 12.2 or later (for Apple Silicon)
+   - macOS 12.3 or later (for Intel)
 
-When using VirtioFS, changes made to the developers' files located on their host system will quickly sync to the container file system. They can then view their changes instantly in a browser or a page reload.
+2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
 
-> **Note**
->
-> Currently, Apple’s VirtioFS implementation on macOS Monterey does not
-> include this mapping functionality.
+3. Click **Apply & Restart**.
 
 ### Kubernetes
 
