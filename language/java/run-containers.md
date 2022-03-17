@@ -143,7 +143,7 @@ $ docker stop trusting_beaver
 trusting_beaver
 ```
 
-Now that our container is stopped, let’s remove it. When you remove a container, the process inside the container will be stopped and the metadata for the container will been removed.
+Now that our container is stopped, let’s remove it. When you remove a container, the process inside the container will be stopped and the metadata for the container will be removed.
 
 To remove a container, simple run the `docker rm` command passing the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.
 
