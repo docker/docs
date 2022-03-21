@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.6.0
-2022-03-14
+## Docker Desktop 4.6.1
+2022-03-22
 
 > Download Docker Desktop
 >
@@ -32,6 +32,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### Upgrades
+
+- [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
+
+### Bug fixes and minor changes
+
+- Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
+- Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
+- Prevented spinning in vpnkit-forwarder filling the logs with error messages.
+
+## Docker Desktop 4.6.0
+2022-03-14
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/75818/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/75818/Docker.dmg)
 
 ### Security
 
