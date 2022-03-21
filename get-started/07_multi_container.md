@@ -110,13 +110,20 @@ address)?
 To figure it out, we're going to make use of the [nicolaka/netshoot](https://github.com/nicolaka/netshoot) container,
 which ships with a _lot_ of tools that are useful for troubleshooting or debugging networking issues.
 
-1. Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.
+
+1. Exit MySQL if you haven't already (if you have typed any thing before press `;` and hit enter).
+
+    ```console
+    mysql> exit
+    ```
+
+2. Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.
 
     ```console
     $ docker run -it --network todo-app nicolaka/netshoot
     ```
 
-2. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
+3. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
    the IP address for the hostname `mysql`.
 
     ```console
