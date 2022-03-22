@@ -23,14 +23,31 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.6.0
-2022-03-14
+## Docker Desktop 4.6.1
+2022-03-22
 
 > Download Docker Desktop
 >
 > [For
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+
+### Upgrades
+
+- [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
+
+### Bug fixes and minor changes
+
+- Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
+- Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
+- Prevented spinning in vpnkit-forwarder filling the logs with error messages.
+
+## Docker Desktop 4.6.0
+2022-03-14
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/75818/Docker%20Desktop%20Installer.exe)
 
 ### Security
 
