@@ -992,15 +992,20 @@ The following flags are supported:
 
 Valid placeholders for the Go template are:
 
-| Placeholder       | Description    |
-|:------------------|:---------------|
-| `.Service.ID`     | Service ID     |
-| `.Service.Name`   | Service name   |
-| `.Service.Labels` | Service labels |
-| `.Node.ID`        | Node ID        |
-| `.Node.Hostname`  | Node hostname  |
-| `.Task.Name`      | Task name      |
-| `.Task.Slot`      | Task slot      |
+| Placeholder           | Description               |
+|:----------------------|:--------------------------|
+| `.Service.ID`         | Service ID                |
+| `.Service.Name`       | Service name              |
+| `.Service.Labels`     | Service labels            |
+| `.Node.ID`            | Node ID                   |
+| `.Node.Hostname`      | Node hostname             |
+| `.Node.IP`            |	Node IP                   |
+| `.Node.Role`          | Node role: manager/worker |
+| `.Node.Labels`        | Node labels               |
+| `.Node.Platform.OS`   |	Node OS                   |
+| `.Node.Platform.Arch` |	Node architecture         |
+| `.Task.Name`          | Task name                 |
+| `.Task.Slot`          | Task slot                 |
 
 #### Template example
 
