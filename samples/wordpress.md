@@ -34,8 +34,8 @@ Compose to set up and run WordPress. Before starting, make sure you have
     ```
 
 3.  Create a `docker-compose.yml` file that starts your
-    `WordPress` blog and a separate `MySQL` instance with a volume
-    mount for data persistence:
+    `WordPress` blog and a separate `MySQL` instance with volume
+    mounts for data persistence:
 
     ```yaml
     version: "{{ site.compose_file_v3 }}"
@@ -56,22 +56,25 @@ Compose to set up and run WordPress. Before starting, make sure you have
         depends_on:
           - db
         image: wordpress:latest
+        volumes:
+          - wordpress_data:/var/www/html
         ports:
           - "8000:80"
         restart: always
         environment:
-          WORDPRESS_DB_HOST: db:3306
+          WORDPRESS_DB_HOST: db
           WORDPRESS_DB_USER: wordpress
           WORDPRESS_DB_PASSWORD: wordpress
           WORDPRESS_DB_NAME: wordpress
     volumes:
       db_data: {}
+      wordpress_data: {}
     ```
 
    > **Notes**:
    >
-   * The docker volume `db_data` persists any updates made by WordPress
-   to the database. [Learn more about docker volumes](../storage/volumes.md)
+   * The docker volumes `db_data` and `wordpress_data` persists updates made by WordPress
+   to the database, as well as the installed themes and plugins. [Learn more about docker volumes](../storage/volumes.md)
    >
    * WordPress Multisite works only on ports `80` and `443`.
    {: .note-vanilla}
@@ -121,10 +124,6 @@ administrator.
 > **Note**: The WordPress site is not immediately available on port `8000`
 because the containers are still being initialized and may take a couple of
 minutes before the first load.
-
-If you are using [Docker Machine](../machine/index.md), you can run the command
-`docker-machine ip MACHINE_VM` to get the machine address, and then open
-`http://MACHINE_VM_IP:8000` in a web browser.
 
 If you are using Docker Desktop for Mac or Docker Desktop for Windows, you can use
 `http://localhost` as the IP address, and open `http://localhost:8000` in a web

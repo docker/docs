@@ -190,6 +190,14 @@ $(document).ready(function () {
     });
 });
 
+function initAcceptEULAModal() {
+    $("main").on("click", "a.accept-eula", function (e) {
+        e.preventDefault();
+        _("#accept-eula .btn-primary").href = e.target.href;
+        $('#accept-eula').modal('show')
+    });
+}
+
 function initNavToggle() {
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
@@ -208,6 +216,7 @@ function initNavToggle() {
 ready(() => {
     renderNav()
     initNavToggle()
+    initAcceptEULAModal()
     $('[data-toggle="tooltip"]').tooltip()
 
     // sync tabs with the same data-group
@@ -215,4 +224,14 @@ ready(() => {
         const group = $(this).attr("data-group");
         $(`.nav-tabs > li > a[data-group='${ group }']`).tab("show");
     });
+
+    $('.language-dockerfile span.k').tooltip({
+        title: function() {
+            let c = this.textContent;
+            this.style.cursor = 'help';
+            $(this).on('click', () => { window.location.href = "/engine/reference/builder/#"+c.toLowerCase()});
+            return 'Learn more about the "'+ c + '" Dockerfile command.'
+        },
+        placement: "auto"
+    })
 });

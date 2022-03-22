@@ -23,8 +23,8 @@ a Linux machine, you will need to [install Docker Compose](../compose/install.md
 
 After installation, you should be able to run the following and see version information.
 
-```bash
-docker-compose version
+```console
+$ docker-compose version
 ```
 
 ## Create the Compose file
@@ -53,8 +53,8 @@ And now, we'll start migrating a service at a time into the compose file.
 
 To remember, this was the command we were using to define our app container.
 
-```bash
-docker run -dp 3000:3000 \
+```console
+$ docker run -dp 3000:3000 \
   -w /app -v "$(pwd):/app" \
   --network todo-app \
   -e MYSQL_HOST=mysql \
@@ -65,10 +65,10 @@ docker run -dp 3000:3000 \
   sh -c "yarn install && yarn run dev"
 ```
 
-If you are using PowerShell then use this command.
+If you are using PowerShell then use this command:
 
 ```powershell
-docker run -dp 3000:3000 `
+PS> docker run -dp 3000:3000 `
   -w /app -v "$(pwd):/app" `
   --network todo-app `
   -e MYSQL_HOST=mysql `
@@ -117,7 +117,8 @@ docker run -dp 3000:3000 `
         ports:
           - 3000:3000
     ```
-4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
+ 
+5. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
    the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/compose-file-v3.md#short-syntax-3) and [long](../compose/compose-file/compose-file-v3.md#long-syntax-3) syntax.
 
     One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.
@@ -136,7 +137,7 @@ docker run -dp 3000:3000 `
           - ./:/app
     ```
 
-5. Finally, we need to migrate the environment variable definitions using the `environment` key.
+6. Finally, we need to migrate the environment variable definitions using the `environment` key.
 
     ```yaml
     version: "3.7"
@@ -161,8 +162,8 @@ docker run -dp 3000:3000 `
 
 Now, it's time to define the MySQL service. The command that we used for that container was the following:
 
-```bash
-docker run -d \
+```console
+$ docker run -d \
   --network todo-app --network-alias mysql \
   -v todo-mysql-data:/var/lib/mysql \
   -e MYSQL_ROOT_PASSWORD=secret \
@@ -170,10 +171,10 @@ docker run -d \
   mysql:5.7
 ```
 
-If you are using PowerShell then use this command.
+If you are using PowerShell then use this command:
 
 ```powershell
-docker run -d `
+PS> docker run -d `
   --network todo-app --network-alias mysql `
   -v todo-mysql-data:/var/lib/mysql `
   -e MYSQL_ROOT_PASSWORD=secret `
@@ -276,8 +277,8 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 2. Start up the application stack using the `docker-compose up` command. We'll add the `-d` flag to run everything in the
    background.
 
-    ```bash
-    docker-compose up -d
+    ```console
+    $ docker-compose up -d
     ```
 
     When we run this, we should see output like this:
@@ -295,7 +296,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
     into a single stream. This is incredibly useful when you want to watch for timing-related issues. The `-f` flag "follows" the
     log, so will give you live output as it's generated.
 
-    If you don't already, you'll see output that looks like this...
+    If you have run the command already, you'll see output that looks like this:
 
     ```plaintext
     mysql_1  | 2019-10-03T03:07:16.083639Z 0 [Note] mysqld: ready for connections.

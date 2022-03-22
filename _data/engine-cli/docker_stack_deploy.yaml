@@ -28,7 +28,7 @@ options:
 - option: namespace
   value_type: string
   description: Kubernetes namespace to use
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -67,7 +67,7 @@ inherited_options:
 - option: kubeconfig
   value_type: string
   description: Kubernetes config file
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -75,7 +75,7 @@ inherited_options:
 - option: orchestrator
   value_type: string
   description: Orchestrator to use (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -85,7 +85,7 @@ examples: |-
 
   The `deploy` command supports compose file version `3.0` and above.
 
-  ```bash
+  ```console
   $ docker stack deploy --compose-file docker-compose.yml vossibility
 
   Ignoring unsupported options: links
@@ -102,7 +102,7 @@ examples: |-
 
   The Compose file can also be provided as standard input with `--compose-file -`:
 
-  ```bash
+  ```console
   $ cat docker-compose.yml | docker stack deploy --compose-file - vossibility
 
   Ignoring unsupported options: links
@@ -121,7 +121,7 @@ examples: |-
   configuration and environment-specific overrides, you can provide multiple
   `--compose-file` flags.
 
-  ```bash
+  ```console
   $ docker stack deploy --compose-file docker-compose.yml -c docker-compose.prod.yml vossibility
 
   Ignoring unsupported options: links
@@ -138,7 +138,7 @@ examples: |-
 
   You can verify that the services were correctly created:
 
-  ```bash
+  ```console
   $ docker service ls
 
   ID            NAME                               MODE        REPLICAS  IMAGE

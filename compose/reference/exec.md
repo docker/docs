@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
+Usage: docker-compose exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
 
 Options:
     -d, --detach      Detached mode: Run command in the background.

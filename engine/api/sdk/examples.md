@@ -62,6 +62,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	defer reader.Close()
 	io.Copy(os.Stdout, reader)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
@@ -109,7 +111,7 @@ print(client.containers.run("alpine", ["echo", "hello", "world"]))
 
 <div id="tab-run-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
@@ -182,6 +184,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer out.Close()
 	io.Copy(os.Stdout, out)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
@@ -214,7 +217,7 @@ print(container.id)
 
 <div id="tab-rundetach-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "bfirsh/reticulate-splines"}' \
   -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
@@ -285,7 +288,7 @@ for container in client.containers.list():
 
 <div id="tab-listcontainers-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
@@ -365,7 +368,7 @@ for container in client.containers.list():
 
 <div id="tab-stopcontainers-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/containers/json
 [{
   "Id":"ae63e8b89a26f01f6b4b2c9a7817c31a1b6196acf560f66586fbc8809ffcd772",
@@ -442,7 +445,7 @@ print(container.logs())
 
 <div id="tab-containerlogs-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock "http://localhost/v{{ site.latest_engine_api_version}}/containers/ca5f55cdb/logs?stdout=1"
 Reticulating spline 1...
 Reticulating spline 2...
@@ -450,6 +453,7 @@ Reticulating spline 3...
 Reticulating spline 4...
 Reticulating spline 5...
 ```
+
 </div>
 </div><!-- end tab-content -->
 
@@ -511,7 +515,7 @@ for image in client.images.list():
 
 <div id="tab-listimages-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock http://localhost/v{{ site.latest_engine_api_version}}/images/json
 [{
   "Id":"sha256:31d9a31e1dd803470c5a151b8919ef1988ac3efd44281ac59d43ad623f275dcd",
@@ -581,7 +585,7 @@ print(image.id)
 </div>
 <div id="tab-pullimages-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock \
   -X POST "http://localhost/v{{ site.latest_engine_api_version}}/images/create?fromImage=alpine"
 {"status":"Pulling from library/alpine","id":"3.1"}
@@ -679,7 +683,7 @@ This example leaves the credentials in your shell's history, so consider
 this a naive implementation. The credentials are passed as a Base-64-encoded
 JSON structure.
 
-```bash
+```console
 $ JSON=$(echo '{"username": "string", "password": "string", "serveraddress": "string"}' | base64)
 
 $ curl --unix-socket /var/run/docker.sock \
@@ -775,7 +779,7 @@ print(image.id)
 </div>
 <div id="tab-commit-curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d alpine touch /helloworld
 0888269a9d584f0fa8fc96b3c0d8d57969ceea3a64acf47cd34eebb4744dbc52
 $ curl --unix-socket /var/run/docker.sock\

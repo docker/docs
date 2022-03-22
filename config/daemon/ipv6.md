@@ -27,7 +27,7 @@ either IPv4 or IPv6 (or both) with any container, service, or network.
 
 2.  Reload the Docker configuration file.
 
-    ```bash
+    ```console
     $ systemctl reload docker
     ```
 

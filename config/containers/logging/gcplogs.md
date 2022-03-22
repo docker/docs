@@ -80,7 +80,7 @@ logging message.
 Below is an example of the logging options required to log to the default
 logging destination which is discovered by querying the GCE metadata server.
 
-```bash
+```console
 $ docker run \
     --log-driver=gcplogs \
     --log-opt labels=location \
@@ -98,10 +98,10 @@ container.
 An example of the logging options for running outside of GCE (the daemon must be
 configured with GOOGLE_APPLICATION_CREDENTIALS):
 
-```bash
+```console
 $ docker run \
     --log-driver=gcplogs \
-    --log-opt gcp-project=test-project
+    --log-opt gcp-project=test-project \
     --log-opt gcp-meta-zone=west1 \
     --log-opt gcp-meta-name=`hostname` \
     your/application

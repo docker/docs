@@ -10,7 +10,7 @@ instead.
 {: .warning }
 
 ```none
-Usage: create [options] [SERVICE...]
+Usage: docker-compose create [options] [SERVICE...]
 
 Options:
     --force-recreate       Recreate containers even if their configuration and

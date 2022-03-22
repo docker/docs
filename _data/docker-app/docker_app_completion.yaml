@@ -16,9 +16,9 @@ usage: docker app completion SHELL
 pname: docker app
 plink: docker_app.yaml
 examples: $ . <(docker app completion bash)
-deprecated: false
+deprecated: true
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

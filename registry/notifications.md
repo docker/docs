@@ -35,7 +35,7 @@ notifications:
     - name: alistener
       url: https://mylistener.example.com/event
       headers:
-      Authorization: [Bearer <your token, if needed>]
+        Authorization: [Bearer <your token, if needed>]
       timeout: 500ms
       threshold: 5
       backoff: 1s
@@ -159,7 +159,7 @@ request coming to an endpoint.
 
 An example of a full event may look as follows:
 
-```
+```http
 GET /callback HTTP/1.1
 Host: application/vnd.docker.distribution.events.v1+json
 Authorization: Bearer <your token, if needed>
@@ -346,5 +346,5 @@ which can be wired up to achieve interesting behavior. If this system doesn't
 provide acceptable guarantees, adding a transactional `Sink` to the registry
 is a possibility, although it may have an effect on request service time.
 See the
-[godoc](http://godoc.org/github.com/docker/distribution/notifications#Sink)
+[godoc](https://godoc.org/github.com/docker/distribution/notifications#Sink)
 for more information.

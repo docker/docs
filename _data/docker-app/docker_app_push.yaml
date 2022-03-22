@@ -36,9 +36,9 @@ options:
   kubernetes: false
   swarm: false
 examples: $ docker app push myapp --tag myrepo/myapp:mytag
-deprecated: false
+deprecated: true
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

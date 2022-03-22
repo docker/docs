@@ -2,6 +2,7 @@
 description: How to set up and use certificates with a registry to verify access
 keywords: Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials
 redirect_from:
+- /articles/certificates/
 - /engine/articles/certificates/
 title: Verify repository client with certificates
 ---
@@ -60,8 +61,10 @@ creating an os-provided bundled certificate chain.
 Use OpenSSL's `genrsa` and `req` commands to first generate an RSA
 key and then use the key to create the certificate.   
 
-    $ openssl genrsa -out client.key 4096
-    $ openssl req -new -x509 -text -key client.key -out client.cert
+```console
+$ openssl genrsa -out client.key 4096
+$ openssl req -new -x509 -text -key client.key -out client.cert
+```
 
 > **Note**:
 > These TLS commands only generate a working set of certificates on Linux.

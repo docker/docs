@@ -20,7 +20,7 @@ significantly reduce the delay between writing code and running it in production
 ## The Docker platform
 
 Docker provides the ability to package and run an application in a loosely isolated
-environment called a container. The isolation and security allow you to run many
+environment called a container. The isolation and security allows you to run many
 containers simultaneously on a given host. Containers are lightweight and contain
 everything needed to run the application, so you do not need to rely on what is
 currently installed on the host. You can easily share containers while you work,
@@ -99,6 +99,10 @@ with Docker. When you use commands such as `docker run`, the client sends these
 commands to `dockerd`, which carries them out. The `docker` command uses the
 Docker API. The Docker client can communicate with more than one daemon.
 
+### Docker Desktop
+
+Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](../desktop/index.md).
+
 ### Docker registries
 
 A Docker _registry_ stores Docker images. Docker Hub is a public
@@ -152,7 +156,7 @@ its state that are not stored in persistent storage disappear.
 The following command runs an `ubuntu` container, attaches interactively to your
 local command-line session, and runs `/bin/bash`.
 
-```bash
+```console
 $ docker run -i -t ubuntu /bin/bash
 ```
 

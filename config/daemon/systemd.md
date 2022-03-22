@@ -2,9 +2,10 @@
 description: Controlling and configuring Docker using systemd
 keywords: docker, daemon, systemd, configuration
 redirect_from:
-- /engine/articles/systemd/
+- /articles/host_integration/
 - /articles/systemd/
 - /engine/admin/systemd/
+- /engine/articles/systemd/
 title: Control Docker with systemd
 ---
 
@@ -36,7 +37,7 @@ for your Docker daemon. The recommended way is to use the platform-independent
 
 You can configure nearly all daemon configuration options using `daemon.json`. The following
 example configures two options. One thing you cannot configure using `daemon.json` mechanism is
-a [HTTP proxy](#http-proxy).
+a [HTTP proxy](#httphttps-proxy).
 
 ### Runtime directory and storage driver
 
@@ -236,7 +237,7 @@ you need to add this configuration in the Docker systemd service file.
 ## Configure where the Docker daemon listens for connections
 
 See
-[Configure where the Docker daemon listens for connections](../../engine/install/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
+[Configure where the Docker daemon listens for connections](../../engine/install/linux-postinstall.md#configure-where-the-docker-daemon-listens-for-connections).
 
 ## Manually create the systemd unit files
 

@@ -20,7 +20,7 @@ your client and daemon API versions.
 
 > This command is [deprecated](/engine/deprecated/){: target="_blank" rel="noopener" class="_"}.
 >
-> It may be removed in a future Docker version.
+> It may be removed in a future Docker version. For more information, see the [Docker Roadmap](https://github.com/docker/roadmap/issues/209){: target="_blank" rel="noopener" class="_"}.
 {: .warning }
 
 {% endif %}

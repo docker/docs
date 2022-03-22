@@ -10,7 +10,7 @@ only the loopback device is created. The following example illustrates this.
 
 1.  Create the container.
 
-    ```bash
+    ```console
     $ docker run --rm -dit \
       --network none \
       --name no-net-alpine \
@@ -21,7 +21,7 @@ only the loopback device is created. The following example illustrates this.
 2.  Check the container's network stack, by executing some common networking
     commands within the container. Notice that no `eth0` was created.
 
-    ```bash
+    ```console
     $ docker exec no-net-alpine ip link show
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
@@ -32,7 +32,7 @@ only the loopback device is created. The following example illustrates this.
         link/tunnel6 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00 brd 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
     ```
 
-    ```bash
+    ```console
     $ docker exec no-net-alpine ip route
     ```
 
@@ -41,7 +41,7 @@ only the loopback device is created. The following example illustrates this.
 3.  Stop the container. It is removed automatically because it was created with
     the `--rm` flag.
 
-    ```bash
+    ```console
     $ docker stop no-net-alpine
     ```
 

@@ -25,8 +25,8 @@ To deploy Docker containers on ECS, you must meet the following requirements:
 
 1. Download and install the latest version of Docker Desktop.
 
-    - [Download for Mac](../docker-for-mac/install.md)
-    - [Download for Windows](../docker-for-windows/install.md)
+    - [Download for Mac](../desktop/mac/install.md)
+    - [Download for Windows](../desktop/windows/install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
@@ -159,7 +159,7 @@ Your ECS services are created with rolling update configuration. As you run
 `docker compose up` with a modified Compose file, the stack will be
 updated to reflect changes, and if required, some services will be replaced.
 This replacement process will follow the rolling-update configuration set by
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+your services [`deploy.update_config`](../compose/compose-file/compose-file-v3.md#update_config)
 configuration.
 
 AWS ECS uses a percent-based model to define the number of containers to be
@@ -212,7 +212,7 @@ For your convenience, the Docker Compose CLI offers the `docker secret` command,
 
 First, create a `token.json` file to define your DockerHub username and access token.
 
-For instructions on how to generate access tokens, see [Managing access tokens](https://docs.docker.com/docker-hub/access-tokens/).
+For instructions on how to generate access tokens, see [Managing access tokens](../docker-hub/access-tokens.md).
 
 ```json
 {
@@ -251,9 +251,13 @@ Services are registered automatically by the Docker Compose CLI on [AWS Cloud Ma
 
 Services can retrieve their dependencies using Compose service names (as they do when deploying locally with docker-compose), or optionally use the fully qualified names.
 
+> **Note**
+> 
+> Short service names, nor the fully qualified service names, will resolve unless you enable public dns names in your VPC.
+
 ### Dependent service startup time and DNS resolution
 
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](../compose/startup-order.md).
 Note this need to wait for dependent services in your Compose application also exists when deploying locally with docker-compose, but the delay is typically shorter. Issues might become more visible when deploying to ECS if services do not wait for their dependencies to be available.
 
 Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
@@ -366,7 +370,7 @@ services:
 secrets:
   foo:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
-    keys:
+    x-aws-keys:
       - "bar"
 ```
 
@@ -489,6 +493,7 @@ x-aws-cloudformation:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
         Protocol: HTTPS
+        Port: 443
 ```
 
 ## Using existing AWS network resources
@@ -522,35 +527,37 @@ use an existing domain name for your application:
 
 1. Use the AWS web console or CLI to get your VPC and Subnets IDs. You can retrieve the default VPC ID and attached subnets using this AWS CLI commands:
 
-```console
-$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
+        ```console
+        $ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
+        
+        "vpc-123456"
+        $ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
+        
+        [
+            "subnet-1234abcd",
+            "subnet-6789ef00",
+        ]
+        ```
+ 
+2. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
 
-"vpc-123456"
-$ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
-
-[
-    "subnet-1234abcd",
-    "subnet-6789ef00",
-]
-```
-1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
-
-```console
-$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
-
-{
-    "LoadBalancers": [
+        ```console
+        $ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+        
         {
-            "IpAddressType": "ipv4",
-            "VpcId": "vpc-123456",
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
-            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
-...
-```
-1. To assign your application an existing domain name, you can configure your DNS with a
-CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
+            "LoadBalancers": [
+                {
+                    "IpAddressType": "ipv4",
+                    "VpcId": "vpc-123456",
+                    "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
+                    "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
+        <...>
+        ```
+ 
+3. To assign your application an existing domain name, you can configure your DNS with a
+   CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
 
-1. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
+4. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
 
 Please note Docker ECS integration won't be aware of this domain name, so `docker compose ps` command will report URLs with loadbalancer DNSName, not your own domain.
 
@@ -596,7 +603,7 @@ The Docker Compose CLI adds support for running and managing containers on ECS.
 
 ### Install Prerequisites
 
-[Docker 19.03 or later](https://docs.docker.com/get-docker/)
+[Docker 19.03 or later](../get-docker.md)
 
 ### Install script
 

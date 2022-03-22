@@ -40,20 +40,20 @@ CMD    chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && 
 
 To build the image using:
 
-```bash
+```console
 $ docker build -t eg_apt_cacher_ng .
 ```
 
 Then run it, mapping the exposed port to one on the host
 
-```bash
+```console
 $ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
 ```
 
 To see the logfiles that are `tailed` in the default command, you can
 use:
 
-```bash
+```console
 $ docker logs -f test_apt_cacher_ng
 ```
 
@@ -86,7 +86,7 @@ RUN apt-get update && apt-get install -y vim git
 **Option 2** is good for testing, but breaks other HTTP clients
 which obey `http_proxy`, such as `curl`, `wget` and others:
 
-```bash
+```console
 $ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
 ```
 
@@ -95,13 +95,13 @@ from your `Dockerfile` too.
 
 **Option 4** links Debian-containers to the proxy server using following command:
 
-```bash
+```console
 $ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
 ```
 
 **Option 5** creates a custom network of APT proxy server and Debian-based containers:
 
-```bash
+```console
 $ docker network create mynetwork
 $ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
 $ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
@@ -111,7 +111,7 @@ Apt-cacher-ng has some tools that allow you to manage the repository,
 and they can be used by leveraging the `VOLUME`
 instruction, and the image we built to run the service:
 
-```bash
+```console
 $ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
 
 root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
@@ -137,7 +137,7 @@ WARNING: The removal action may wipe out whole directories containing
 Finally, clean up after your test by stopping and removing the
 container, and then removing the image.
 
-```bash
+```console
 $ docker container stop test_apt_cacher_ng
 $ docker container rm test_apt_cacher_ng
 $ docker image rm eg_apt_cacher_ng

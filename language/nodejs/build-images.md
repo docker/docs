@@ -3,7 +3,7 @@ title: "Build your Node image"
 keywords: containers, images, node.js, node, dockerfiles, node, coding, build, push, run
 description: Learn how to build your first Docker image by writing a Dockerfile
 redirect_from:
-- /get-started/nodejs/build-images/
+  - /get-started/nodejs/build-images/
 ---
 
 {% include_relative nav.html selected="1" %}
@@ -11,6 +11,8 @@ redirect_from:
 ## Prerequisites
 
 Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
+
+{% include guides/enable-buildkit.md %}
 
 ## Overview
 
@@ -26,7 +28,7 @@ To complete this tutorial, you need the following:
 
 Let’s create a simple Node.js application that we can use as our example. Create a directory in your local machine named `node-docker` and follow the steps below to create a simple REST API.
 
-```shell
+```console
 $ cd [path to your node-docker directory]
 $ npm init -y
 $ npm install ronin-server ronin-mocks
@@ -38,12 +40,12 @@ Now, let’s add some code to handle our REST requests. We’ll use a mock serve
 Open this working directory in your IDE and add the following code into the `server.js` file.
 
 ```js
-const ronin     = require( 'ronin-server' )
-const mocks     = require( 'ronin-mocks' )
+const ronin = require('ronin-server')
+const mocks = require('ronin-mocks')
 
 const server = ronin.server()
 
-server.use( '/', mocks.server( server.Router(), false, true ) )
+server.use('/', mocks.server(server.Router(), false, true))
 server.start()
 ```
 
@@ -53,13 +55,13 @@ The mocking server is called `Ronin.js` and will listen on port 8000 by default.
 
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to your working directory you created.
 
-```shell
+```console
 $ node server.js
 ```
 
 To test that the application is working properly, we’ll first POST some JSON to the API and then make a GET request to see that the data has been saved. Open a new terminal and run the following curl commands:
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
@@ -72,35 +74,26 @@ $ curl http://localhost:8000/test
 
 Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
 
-```
+```console
 2020-XX-31T16:35:08:4260  INFO: POST /test
 2020-XX-31T16:35:21:3560  INFO: GET /test
 ```
 
-## Create a Dockerfile for Node.js
+Great! We verified that the application works. At this stage, you've completed testing the server script locally.
 
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
+Press `CTRL-c` from within the terminal session where the server is running to stop it.
 
-Let’s walk through the process of creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.
-
-> **Note**
->
-> The name of the Dockerfile is not important but the default filename for many commands is simply `Dockerfile`. So, we’ll use that as our filename throughout this series.
-
-The first line to add to the Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
-While _optional_, this directive instructs the Docker builder what syntax to use
-when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
-to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
-must appear before any other comment, whitespace, or Dockerfile instruction in
-your Dockerfile, should be the first line in Dockerfiles.
-
-```dockerfile
-# syntax=docker/dockerfile:1
+```console
+2021-08-06T12:11:33:8930  INFO: POST /test
+2021-08-06T12:11:41:5860  INFO: GET /test
+^Cshutting down...
 ```
 
-We recommend using `docker/dockerfile:1`, which always points to the latest release
-of the version 1 syntax. BuildKit automatically checks for updates of the syntax
-before building, making sure you are using the most current version.
+We will now continue to build and run the application in Docker.
+
+## Create a Dockerfile for Node.js
+
+{% include guides/create-dockerfile.md %}
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
@@ -137,13 +130,21 @@ WORKDIR /app
 
 Usually the very first thing you do once you’ve downloaded a project written in Node.js is to install npm packages. This ensures that your application has all its dependencies installed into the `node_modules` directory where the Node runtime will be able to find them.
 
-Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The  `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `package.json` and `package-lock.json` file into our working directory `/app`.
+Before we can run `npm install`, we need to get our `package.json` and `package-lock.json` files into our images. We use the `COPY` command to do this. The `COPY` command takes two parameters: `src` and `dest`. The first parameter `src` tells Docker what file(s) you would like to copy into the image. The second parameter `dest` tells Docker where you want that file(s) to be copied to. For example:
+
+ ```dockerfile
+ COPY ["<src>", "<dest>"]
+ ```
+
+You can specify multiple `src` resources seperated by a comma. For example, `COPY ["<src1>", "<src2>",..., "<dest>"]`.
+We’ll copy the `package.json` and the `package-lock.json` file into our working directory `/app`.
 
 ```dockerfile
 COPY ["package.json", "package-lock.json*", "./"]
 ```
 
-Once we have our `package.json` files inside the image, we can use the `RUN` command to execute the command npm install. This works exactly the same as if we were running npm install locally on our machine, but this time these Node modules will be installed into the `node_modules` directory inside our image.
+Note that, rather than copying the entire working directory, we are only copying the package.json file. This allows us to take advantage of cached Docker layers.
+Once we have our files inside the image, we can use the `RUN` command to execute the command npm install. This works exactly the same as if we were running npm install locally on our machine, but this time these Node modules will be installed into the `node_modules` directory inside our image.
 
 ```dockerfile
 RUN npm install --production
@@ -196,18 +197,18 @@ The build command optionally takes a `--tag` flag. The tag is used to set the na
 
 Let’s build our first Docker image.
 
-```shell
+```console
 $ docker build --tag node-docker .
-```
 
-```shell
-Sending build context to Docker daemon  82.94kB
-Step 1/7 : FROM node:12.18.1
----> f5be1883c8e0
-Step 2/7 : WORKDIR /code
-...
-Successfully built e03018e56163
-Successfully tagged node-docker:latest
+[+] Building 93.8s (11/11) FINISHED
+ => [internal] load build definition from dockerfile                                          0.1s
+ => => transferring dockerfile: 617B                                                          0.0s
+ => [internal] load .dockerignore                                                             0.0s
+ ...
+ => [2/5] WORKDIR /app                                                                        0.4s
+ => [3/5] COPY [package.json, package-lock.json*, ./]                                         0.2s
+ => [4/5] RUN npm install --production                                                        9.8s
+ => [5/5] COPY . .
 ```
 
 ## View local images
@@ -216,14 +217,13 @@ To see a list of images we have on our local machine, we have two options. One i
 
 To list images, simply run the `images` command.
 
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
-node                12.18.1             f5be1883c8e0        2 months ago         918MB
 ```
 
-You should see at least two images listed. One for the base image `node:12.18.1` and the other for our image we just build `node-docker:latest`.
+Your exact output may vary, but you should see the image we just built `node-docker:latest` with the `latest` tag.
 
 ## Tag images
 
@@ -233,7 +233,7 @@ An image is made up of a manifest and a list of layers. In simple terms, a “ta
 
 To create a new tag for the image we built above, run the following command.
 
-```shell
+```console
 $ docker tag node-docker:latest node-docker:v1.0.0
 ```
 
@@ -241,30 +241,28 @@ The Docker tag command creates a new tag for an image. It does not create a new 
 
 Now run the `docker images` command to see a list of our local images.
 
-```
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 
 You can see that we have two images that start with `node-docker`. We know they are the same image because if you look at the IMAGE ID column, you can see that the values are the same for the two images.
 
 Let’s remove the tag that we just created. To do this, we’ll use the rmi command. The rmi command stands for “remove image”.
 
-```shell
+```console
 $ docker rmi node-docker:v1.0.0
 Untagged: node-docker:v1.0.0
 ```
 
 Notice that the response from Docker tells us that the image has not been removed but only “untagged”. Verify this by running the images command.
 
-```shell
+```console
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
-node                12.18.1             f5be1883c8e0        2 months ago        918MB
 ```
 
 Our image that was tagged with `:v1.0.0` has been removed but we still have the `node-docker:latest` tag available on our machine.

@@ -57,6 +57,14 @@ redirect_from:
 - /windows/step_two/
 ---
 
+> **Update to the Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
 
 Welcome! We are excited that you want to learn Docker.
 
@@ -80,21 +88,19 @@ We also recommend the video walkthrough from DockerCon 2020.
 This tutorial assumes you have a current version of Docker installed on your
 machine. If you do not have Docker installed, choose your preferred operating system below to download Docker:
 
-[Mac with Intel chip](https://desktop.docker.com/mac/stable/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn}
-[Mac with Apple chip](https://desktop.docker.com/mac/stable/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn}
-[Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn}
+[Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+[Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+[Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
 [Linux](../engine/install/index.md){: .button .primary-btn}
 
-For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md) and [Install Docker Desktop on Windows](../docker-for-windows/install.md).
-
-{% include eula.md %}
+For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
 
 ## Start the tutorial
 
 If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
 
-```cli
-docker run -d -p 80:80 docker/getting-started
+```console
+$ docker run -d -p 80:80 docker/getting-started
 ```
 
 You'll notice a few flags being used. Here's some more info on them:
@@ -107,8 +113,9 @@ You'll notice a few flags being used. Here's some more info on them:
 >
 > You can combine single character flags to shorten the full command.
 > As an example, the command above could be written as:
-> ```
-> docker run -dp 80:80 docker/getting-started
+>
+> ```console
+> $ docker run -dp 80:80 docker/getting-started
 > ```
 
 ## The Docker Dashboard
@@ -118,9 +125,8 @@ you a quick view of the containers running on your machine. The Docker Dashboard
 It gives you quick access to container logs, lets you get a shell inside the container, and lets you
 easily manage container lifecycle (stop, remove, etc.).
 
-To access the dashboard, follow the instructions for either 
-[Mac](../../docker-for-mac/dashboard/) or 
-[Windows](../../docker-for-windows/dashboard/). If you open the dashboard
+To access the dashboard, follow the instructions in the
+[Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 
@@ -129,16 +135,22 @@ randomly created name. So, you'll most likely have a different name.
 ## What is a container?
 
 Now that you've run a container, what _is_ a container? Simply put, a container is
-simply another process on your machine that has been isolated from all other processes
-on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504), features that have been 
-in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use.
+a sandboxed process on your machine that is isolated from all other processes
+on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
+features that have been in Linux for a long time. Docker has worked to make these
+capabilities approachable and easy to use. To summarize, a container:
+
+- is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
+- can be run on local machines, virtual machines or deployed to the cloud.
+- is portable (can be run on any OS)
+- Containers are isolated from each other and run their own software, binaries, and configurations.
 
 > **Creating containers from scratch**
 >
 > If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
-> has a fantastic talk in which she creates a container from scratch in Go. While she makes
-> a simple container, this talk doesn't go into networking, using images for the filesystem, 
-> and more. But, it gives a _fantastic_ deep dive into how things are working.
+> has a fantastic talk in which she creates a container from scratch in Go. While the talk
+> does not go into networking, using images for the filesystem, and other advanced topics, 
+> it gives a _fantastic_ deep dive into how things are working.
 > 
 > <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -166,3 +178,4 @@ Refer to the following topics for further documentation on all CLI commands used
 - [docker run](../engine/reference/commandline/run.md)
 - [docker image](../engine/reference/commandline/image.md)
 - [docker container](../engine/reference/commandline/container.md)
+

@@ -25,8 +25,12 @@ When creating a new repository:
 * You can choose to put it in your Docker ID namespace, or in any
   [organization](orgs.md) where you are an [_owner_](orgs.md#the-owners-team).
 * The repository name needs to be unique in that namespace, can be two
-  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`),
-  and underscores (`_`).
+  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`), and underscores (`_`).
+
+  > **Note:**
+  >
+  > You cannot rename a Docker Hub repository once it has been created.
+
 * The description can be up to 100 characters and is used in the search result.
 * You can link a GitHub or Bitbucket account now, or choose to do it later in
   the repository settings.
@@ -35,6 +39,19 @@ When creating a new repository:
 
 After you hit the **Create** button, you can start using `docker push` to push
 images to this repository.
+
+
+## Deleting a repository
+
+1. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and click **Repositories**.
+
+2. Select a repository from the list, click **Settings** and then Delete Repository.
+
+  > **Note:**
+  >
+  > Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.
+
+3. Enter the name of the repository to confirm the deletion and click **Delete**.
 
 ## Pushing a Docker container image to Docker Hub
 
@@ -78,7 +95,7 @@ You can also make an existing repository private by going to its **Settings** ta
 You get one private repository for free with your Docker Hub user account (not
 usable for organizations you're a member of). If you need more private
 repositories for your user account, upgrade your Docker Hub plan from your
-[Billing Information](https://hub.docker.com/billing/plan) page.
+[Billing Information](https://hub.docker.com/billing/plan){: target="_blank" rel="noopener" class="_"} page.
 
 Once the private repository is created, you can `push` and `pull` images to and
 from it using Docker.
@@ -93,7 +110,7 @@ You can designate collaborators and manage their access to a private
 repository from that repository's **Settings** page. You can also toggle the
 repository's status between public and private, if you have an available
 repository slot open. Otherwise, you can upgrade your
-[Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
+[Docker Hub](https://hub.docker.com/account/billing-plans/){: target="_blank" rel="noopener" class="_"} plan.
 
 ## Collaborators and their role
 
@@ -171,7 +188,7 @@ There you can see two example results: `centos` and `ansible/centos7-ansible`.
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the top-level namespace for
-[official images](official_images.md). The `/` character separates
+[Docker Official Images](official_images.md). The `/` character separates
 a user's repository from the image name.
 
 Once you've found the image you want, you can download it with `docker pull <imagename>`:

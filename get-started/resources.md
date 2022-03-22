@@ -8,12 +8,11 @@ Docker and the broader community of Docker experts have put together many differ
 
 ## Hosted labs
 
-These self-paced and hands-on workshops use free, hosted environments ([Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"} and [Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}) that do not require anything to be installed. Follow along and learn more about Docker and Kubernetes.
+These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}) that does not require any installation. Follow along and learn more about Kubernetes.
 
 * [Kubernetes Workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/){:target="_blank" rel="noopener" class="_"}
-* [Microservice containerization and orchestration](https://training.play-with-docker.com/microservice-orchestration/){:target="_blank" rel="noopener" class="_"}
 
-\* Labs are free but require registration with a Docker ID.
+* Labs are free but require registration with a Docker ID.
 
 ## Self-guided tutorials
 
@@ -53,6 +52,5 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 * [Arun Gupta](https://www.lynda.com/Docker-tutorials/Docker-Java-developers/576584-2.html){:target="_blank" rel="noopener" class="_"}: Docker for Java Developers
 * [Ajeet Singh Raina](https://collabnix.com/){:target="_blank" rel="noopener" class="_"}: Docker and Kubernetes Labs
 * [French] [Luc Juggery](https://www.udemy.com/user/lucjuggery/){:target="_blank" rel="noopener" class="_"}: Introduction to Kubernetes, The Docker Platform
-* [Spanish] [Manuel Morejón](https://www.udemy.com/course/integrando-docker-a-su-infraestrucutra-y-servicios/learn/lecture/6624848#overview){:target="_blank" rel="noopener" class="_"}: Integrating Docker to its Infrastructure and Services
 
 \* Many of the courses are fee-based

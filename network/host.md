@@ -16,7 +16,7 @@ address.
 > take effect, and the `-p`, `--publish`, `-P`, and `--publish-all` option are
 > ignored, producing a warning instead:
 >
-> ```
+> ```console
 > WARNING: Published ports are discarded when using host network mode
 > ```
 

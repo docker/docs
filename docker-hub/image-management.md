@@ -4,9 +4,13 @@ keywords: dashboard, images, image management, inactive
 title: Advanced Image Management dashboard
 ---
 
-> Docker Pro and Team users can now use Docker Hub's new **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing subscription to start using the Advanced Image Management dashboard.
+{% include upgrade-cta.html
+  body="Docker Pro, Team, and Business users can now use Docker Hub's **Advanced Image Management** dashboard. The dashboard enables a new level of access to your content, allowing fine-grained pruning of old data and exploration of old versions of pushed images. Upgrade now to start using the Advanced Image Management dashboard."
+  header-text="This feature requires a paid Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_image-mgmt"
+%}
 
-The **Advanced Image Management** dashboard allows you to manage Docker images across all repositories. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing account to a Pro or a Team account to start using the Advanced Image Management dashboard.
+The **Advanced Image Management** dashboard allows you to manage Docker images across all repositories. [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} your existing subscription to start using the Advanced Image Management dashboard.
 
 The Advanced Image Management dashboard provides a snapshot of your existing images and allows you to view, sort, and filter images by tags, activity status, and date, and contains options to clean up your workspace by deleting images that are no longer required.
 
@@ -24,7 +28,7 @@ To access the  Advanced Image Management dashboard:
 2. Click **Repositories** from the main menu and select a repository from the list. This displays a banner indicating the number of inactive images in the repository.
 3. Click **View inactive images**. This displays the Advanced Image Management dashboard. It lists images in your repository and allows you to sort and filter images by tags, activity status, and the last activity date.
 
-    > You must be logged in as a Pro or a Team user to use the Advanced Image Management dashboard. Click [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} to upgrade your existing subscription.
+    > You must be logged in as a Docker Pro, Team, or a Business user to use the Advanced Image Management dashboard. Click [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} to upgrade your existing subscription.
 
 ## View images
 
@@ -34,7 +38,7 @@ The Advanced Image Management dashboard provides a snapshot of your existing ima
 
 ## Delete images
 
-> You must be logged in as a Pro or a Team user and have admin access to the repository to delete images.
+> You must be logged in as a Docker Pro, Team, or a Business user and have admin access to the repository to delete images.
 
 By default, the Advanced Image Management dashboard displays inactive images in the repository. To delete an inactive image:
 

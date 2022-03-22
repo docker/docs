@@ -22,10 +22,10 @@ To get started with Docker Engine on Debian, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
-- Debian Bullseye 11 (testing)
-- Debian Buster 10 (stable)
-- Raspbian Bullseye 11 (testing)
-- Raspbian Buster 10 (stable)
+- Debian Bullseye 11 (stable)
+- Debian Buster 10 (oldstable)
+- Raspbian Bullseye 11 (stable)
+- Raspbian Buster 10 (oldstable)
 
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 
@@ -83,7 +83,6 @@ from the repository.
     $ sudo apt-get update
 
     $ sudo apt-get install \
-        apt-transport-https \
         ca-certificates \
         curl \
         gnupg \
@@ -100,47 +99,11 @@ from the repository.
     **nightly** or **test** repository, add the word `nightly` or `test` (or both)
     after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
 
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Debian distribution, such as `helium`. Sometimes, in a distribution
-    > like BunsenLabs Linux, you might need to change `$(lsb_release -cs)`
-    > to your parent Debian distribution. For example, if you are using
-    >  `BunsenLabs Linux Helium`, you could use `stretch`. Docker does not offer any guarantees on untested
-    > and unsupported Debian distributions.
-
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
-      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
     ```console
     $ echo \
-      "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
-
-    </div>
-    <div id="armhf_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=armhf signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    <div id="arm64_repo" class="tab-pane fade" markdown="1">
-
-    ```console
-    $ echo \
-      "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    </div>
-    </div> <!-- tab-content -->
 
 #### Install Docker Engine
 
@@ -160,6 +123,12 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
     > or updating without specifying a version in the `apt-get install` or
     > `apt-get update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
+
+    > Receiving a GPG error when running `apt-get update`?
+    >  
+    > Your default umask may not be set correctly, causing the public key file
+    > for the repo to not be detected. Run the following command and then try to
+    > update your repo again: `sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg`.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
@@ -190,7 +159,7 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
@@ -214,7 +183,9 @@ a new file each time you want to upgrade Docker.
     `armhf`, or `arm64`, and download the `.deb` file for the Docker Engine
     version you want to install.
 
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 
@@ -235,7 +206,7 @@ a new file each time you want to upgrade Docker.
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.

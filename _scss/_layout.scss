@@ -113,7 +113,6 @@ section.section {
     top:            $top-navigation-height;
     overflow:       auto;
     max-height:     calc(100vh - #{$top-navigation-height});
-    padding-top:    15px;
     padding-bottom: 20px;
 }
 

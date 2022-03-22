@@ -1,6 +1,6 @@
 ---
 description: :Language-specific getting started guides overview
-keywords: guides, docker, language, node, java, python
+keywords: guides, docker, language, node, java, python, go, golang
 title: Overview
 toc_min: 1
 toc_max: 2
@@ -23,23 +23,18 @@ Learn how to set up your Docker environment and start containerizing your applic
 
 <div class="component-container">
     <!--start row-->
-    <div class="row" style="display: flex; align-items: center">
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
-                <div class="component-icon">
-                    <a href="/language/nodejs/"><img src="/language/images/nodejs.png" alt="Develop with Node"></a>
-                </div>
+    <div class="row" style="display: flex; align-items: center; flex-wrap: nowrap;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/nodejs/"><img src="/language/images/nodejs.png" alt="Develop with Node"></a>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
-        <a href="/language/python/">
-                <div class="component-icon">
-                    <img src="/language/images/python.png" alt="Develop with Python">
-                </div>
-            </a>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/python/"><img src="/language/images/python.png" alt="Develop with Python"></a>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
-                <div class="component-icon">
-                    <a href="/language/java/"><img src="/language/images/java.png" alt="Develop with Java"></a>
-                </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/java/"><img src="/language/images/java.png" alt="Develop with Java"></a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/golang/"><img src="/language/images/golang.png" alt="Develop with Go"></a>
         </div>
     </div>
 </div>

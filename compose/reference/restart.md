@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: restart [options] [SERVICE...]
+Usage: docker-compose restart [options] [SERVICE...]
 
 Options:
   -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.

@@ -30,6 +30,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    ```dockerfile
    # syntax=docker/dockerfile:1
    FROM python:3
+   ENV PYTHONDONTWRITEBYTECODE=1
    ENV PYTHONUNBUFFERED=1
    WORKDIR /code
    COPY requirements.txt /code/
@@ -50,7 +51,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 6. Add the required software in the file.
 
        Django>=3.0,<4.0
-       psycopg2-binary>=2.8
+       psycopg2>=2.8
 
 7. Save and close the `requirements.txt` file.
 
@@ -75,7 +76,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        volumes:
          - ./data/db:/var/lib/postgresql/data
        environment:
-         - POSTGRES_DB=postgres
+         - POSTGRES_NAME=postgres
          - POSTGRES_USER=postgres
          - POSTGRES_PASSWORD=postgres
      web:
@@ -85,6 +86,10 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
          - .:/code
        ports:
          - "8000:8000"
+       environment:
+         - POSTGRES_NAME=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
        depends_on:
          - db
    ```
@@ -169,12 +174,16 @@ In this section, you set up the database connection for Django.
    ```python
    # settings.py
    
+   import os
+   
+   [...]
+   
    DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'postgres',
-           'USER': 'postgres',
-           'PASSWORD': 'postgres',
+           'NAME': os.environ.get('POSTGRES_NAME'),
+           'USER': os.environ.get('POSTGRES_USER'),
+           'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
            'HOST': 'db',
            'PORT': 5432,
        }

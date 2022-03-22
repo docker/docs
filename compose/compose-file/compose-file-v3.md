@@ -579,10 +579,7 @@ format `file://<filename>` or `registry://<value-name>`.
 When using `file:`, the referenced file must be present in the `CredentialSpecs`
 subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
 on Windows. The following example loads the credential spec from a file named
-
-```
-C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json
-```
+`C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`.
 
 ```yaml
 credential_spec:
@@ -662,10 +659,10 @@ services:
 
 > Added in [version 3](compose-versioning.md#version-3) file format.
 
-Specify configuration related to the deployment and running of services. This
-only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
+Specify configuration related to the deployment and running of services. The following  
+sub-options only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
 [docker stack deploy](../../engine/reference/commandline/stack_deploy.md), and is
-ignored by `docker-compose up` and `docker-compose run`.
+ignored by `docker-compose up` and `docker-compose run`, except for `resources`.
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -1210,7 +1207,7 @@ external_links:
 > **Note**
 >
 > The externally-created  containers must be connected to at least one of the same
-> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> networks as the service that is linking to them. [Links](compose-file-v2.md#links)
 > are a legacy option. We recommend using [networks](#networks) instead.
 
 > Note when using docker stack deploy
@@ -1595,8 +1592,18 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet configurations covering each static address.
 
-> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
-> option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
+If you'd like to use IPv6, you must first ensure that the Docker daemon is configured to support IPv6.  See [Enable IPv6](../../config/daemon/ipv6.md) for detailed instructions. You can then access IPv6 addressing in a version 3.x Compose file by editing the `/etc/docker/daemon.json` to contain:
+`{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
+
+Then, reload the docker daemon and edit docker-compose.yml to contain the following under the service:
+
+```yaml
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+```
+
+> The [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
+> option is only available in a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
 > _IPv6 options do not currently work in swarm mode_.
 
 An example:
@@ -1667,7 +1674,7 @@ ports:
   - "49100:22"
   - "127.0.0.1:8001:8001"
   - "127.0.0.1:5000-5010:5000-5010"
-  - "127.0.0.1::5000
+  - "127.0.0.1::5000"
   - "6060:6060/udp"
   - "12400-12500:1240"
 ```
@@ -1950,7 +1957,7 @@ userns_mode: "host"
 ```
 
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
+See [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) for
 more information.
 
 > Note when using docker stack deploy

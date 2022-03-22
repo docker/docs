@@ -14,9 +14,9 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
-deprecated: false
+deprecated: true
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

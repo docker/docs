@@ -44,8 +44,8 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 
 1.  Deploy your application to Swarm:
 
-    ```shell
-    docker stack deploy -c bb-stack.yaml demo
+    ```console
+    $ docker stack deploy -c bb-stack.yaml demo
     ```
 
     If all goes well, Swarm will report creating all your stack objects with no complaints:
@@ -59,8 +59,8 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 
 2.  Make sure everything worked by listing your service:
 
-    ```shell
-    docker service ls
+    ```console
+    $ docker service ls
     ```
 
     If all has gone well, your service will report with 1/1 of its replicas created:
@@ -76,8 +76,8 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 
 4.  Once satisfied, tear down your application:
 
-    ```shell
-    docker stack rm demo
+    ```console
+    $ docker stack rm demo
     ```
 
 ## Conclusion

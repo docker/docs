@@ -56,7 +56,7 @@ use unless you have substantial experience with ZFS on Linux.
 2.  Copy the contents of `/var/lib/docker/` to `/var/lib/docker.bk` and remove
     the contents of `/var/lib/docker/`.
 
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
 
     $ sudo rm -rf /var/lib/docker/*
@@ -67,7 +67,7 @@ use unless you have substantial experience with ZFS on Linux.
     have specified the correct devices, because this is a destructive operation.
     This example adds two devices to the pool.
 
-    ```bash
+    ```console
     $ sudo zpool create -f zpool-docker -m /var/lib/docker /dev/xvdf /dev/xvdg
     ```
 
@@ -75,7 +75,7 @@ use unless you have substantial experience with ZFS on Linux.
     display purposes only, and you can use a different name. Check that the pool
     was created and mounted correctly using `zfs list`.
 
-    ```bash
+    ```console
     $ sudo zfs list
 
     NAME           USED  AVAIL  REFER  MOUNTPOINT
@@ -96,7 +96,7 @@ use unless you have substantial experience with ZFS on Linux.
 
 4.  Start Docker. Use `docker info` to verify that the storage driver is `zfs`.
 
-    ```bash
+    ```console
     $ sudo docker info
       Containers: 0
        Running: 0
@@ -122,7 +122,7 @@ use unless you have substantial experience with ZFS on Linux.
 To increase the size of the `zpool`, you need to add a dedicated block device to
 the Docker host, and then add it to the `zpool` using the `zpool add` command:
 
-```bash
+```console
 $ sudo zpool add zpool-docker /dev/xvdh
 ```
 
@@ -142,7 +142,7 @@ Edit `/etc/docker/daemon.json` and add the following:
 ```
 
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#daemon-storage-driver)
 
 Save and close the file, and restart Docker.
 

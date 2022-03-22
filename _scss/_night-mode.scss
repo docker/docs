@@ -25,7 +25,7 @@ body.night {
     div#side-toc-title {
         color: $white;
     }
-    a {
+    a:not(.btn):not(.button) {
         color: $primary-links-night;
     }
     .header {
@@ -56,30 +56,17 @@ body.night {
         border: none;
     }
     .nav-sidebar ul li a.active,
-    .nav-sidebar.nav>li>a:focus,
+    .nav-sidebar.nav > li > a:focus,
     .toc-nav li a.active {
         background:  $bg-sidebar-night-active;
         border-left: 4px solid $primary-links;
     }
-    .tabs li.active a {
-        border-bottom: 4px solid $primary-links;
+    .navbar-nav > li.active > a {
+      border-color: $primary-links;
     }
     .slider {
         background-color: #344658;
         border: 1px solid #192837;
-    }
-    blockquote {
-        color: $note-color-night;
-        background: $note-bg-color-night;
-        &.warning, &.warning p:first-child {
-            color: $warning-color-night !important;
-        }
-        &.important {
-            border-left-color: #f5ac45 !important;
-        }
-        &.important, &.important p:first-child {
-            color: $important-color-night !important;
-        }
     }
     table {
         border: 1px solid #1b1a1a;
@@ -209,6 +196,12 @@ body.night {
     .panel-body {
         background: rgb(35, 54, 72);
         color: #bcbfc3;
+    }
+
+    /* modals */
+    .modal-content {
+        background-color: $bg-sidebar-night;
+        border-left:      4px solid $primary-links;
     }
 
     /* tabs */

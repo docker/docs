@@ -22,7 +22,7 @@ To run an image inside a container, we use the `docker run` command. The `docker
 $ docker run java-docker
 ```
 
-After running this command, you’ll notice that we did not to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
+After running this command, you’ll notice that we did not return to the command prompt. This is because our application is a REST server and runs in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
 Let’s open a new terminal then make a `GET` request to the server using the `curl` command.
 
@@ -33,7 +33,7 @@ $ curl --request GET \
 curl: (7) Failed to connect to localhost port 8080: Connection refused
 ```
 
-As you can see, our `curl` command failed because the connection to our server was refused. This means, we were not able to connect to the localhost on port 8080. This is expected because our container is run in isolation which includes networking. Let’s stop the container and restart with port 8080 published on our local network.
+As you can see, our `curl` command failed because the connection to our server was refused. It means that we were not able to connect to the localhost on port 8080. This is expected because our container is running in isolation which includes networking. Let’s stop the container and restart with port 8080 published on our local network.
 
 To stop the container, press `ctrl-c`. This will return you to the terminal prompt.
 

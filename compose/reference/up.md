@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
+Usage: docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
     -d, --detach               Detached mode: Run containers in the background,

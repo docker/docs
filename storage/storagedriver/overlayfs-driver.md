@@ -70,13 +70,13 @@ need to use the legacy `overlay` driver, specify it instead.
 
 1. Stop Docker.
 
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 
 2.  Copy the contents of `/var/lib/docker` to a temporary location.
 
-    ```bash
+    ```console
     $ cp -au /var/lib/docker /var/lib/docker.bk
     ```
 
@@ -97,7 +97,7 @@ need to use the legacy `overlay` driver, specify it instead.
 
 5.  Start Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
@@ -105,7 +105,7 @@ need to use the legacy `overlay` driver, specify it instead.
     Use the `docker info` command and look for `Storage Driver` and
     `Backing filesystem`.
 
-    ```bash
+    ```console
     $ docker info
 
     Containers: 0
@@ -149,7 +149,7 @@ six directories under `/var/lib/docker/overlay2`.
 > **Warning**: Do not directly manipulate any files or directories within
 > `/var/lib/docker/`. These files and directories are managed by Docker.
 
-```bash
+```console
 $ ls -l /var/lib/docker/overlay2
 
 total 24
@@ -165,7 +165,7 @@ The new `l` (lowercase `L`) directory contains shortened layer identifiers as
 symbolic links. These identifiers are used to avoid hitting the page size
 limitation on arguments to the `mount` command.
 
-```bash
+```console
 $ ls -l /var/lib/docker/overlay2/l
 
 total 20
@@ -180,7 +180,7 @@ The lowest layer contains a file called `link`, which contains the name of the
 shortened identifier, and a directory called `diff` which contains the
 layer's contents.
 
-```bash
+```console
 $ ls /var/lib/docker/overlay2/3a36935c9df35472229c57f4a27105a136f5e4dbef0f87905b2e506e494e348b/
 
 diff  link
@@ -200,7 +200,7 @@ contents. It also contains a `merged` directory, which contains the unified
 contents of its parent layer and itself, and a `work` directory which is used
 internally by OverlayFS.
 
-```bash
+```console
 $ ls /var/lib/docker/overlay2/223c2864175491657d238e2664251df13b63adb8d050924fd1bfcdb278b866f7
 
 diff  link  lower  merged  work
@@ -217,7 +217,7 @@ etc  sbin  usr  var
 To view the mounts which exist when you use the `overlay` storage driver with
 Docker, use the `mount` command. The output below is truncated for readability.
 
-```bash
+```console
 $ mount | grep overlay
 
 overlay on /var/lib/docker/overlay2/9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/merged
@@ -273,7 +273,7 @@ the container is the `upperdir` and is writable.
 The following `docker pull` command shows a Docker host downloading a Docker
 image comprising five layers.
 
-```bash
+```console
 $ docker pull ubuntu
 
 Using default tag: latest
@@ -297,7 +297,7 @@ the directory IDs.
 > **Warning**: Do not directly manipulate any files or directories within
 > `/var/lib/docker/`. These files and directories are managed by Docker.
 
-```bash
+```console
 $ ls -l /var/lib/docker/overlay/
 
 total 20
@@ -312,7 +312,7 @@ The image layer directories contain the files unique to that layer as well as
 hard links to the data that is shared with lower layers. This allows for
 efficient use of disk space.
 
-```bash
+```console
 $ ls -i /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
 
 19793696 /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
@@ -328,7 +328,7 @@ Containers also exist on-disk in the Docker host's filesystem under
 `/var/lib/docker/overlay/`. If you list a running container's subdirectory
 using the `ls -l` command, three directories and one file exist:
 
-```bash
+```console
 $ ls -l /var/lib/docker/overlay/<directory-of-running-container>
 
 total 16
@@ -341,7 +341,7 @@ drwx------ 3 root root 4096 Jun 20 16:39 work
 The `lower-id` file contains the ID of the top layer of the image the container
 is based on, which is the OverlayFS `lowerdir`.
 
-```bash
+```console
 $ cat /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
 
 55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358
@@ -358,7 +358,7 @@ The `work` directory is internal to OverlayFS.
 To view the mounts which exist when you use the `overlay` storage driver with
 Docker, use the `mount` command. The output below is truncated for readability.
 
-```bash
+```console
 $ mount | grep overlay
 
 overlay on /var/lib/docker/overlay/ec444863a55a.../merged

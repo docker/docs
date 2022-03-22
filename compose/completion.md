@@ -25,6 +25,7 @@ available.
        -L https://raw.githubusercontent.com/docker/compose/{{site.compose_version}}/contrib/completion/bash/docker-compose \
        -o /etc/bash_completion.d/docker-compose
    ```
+
 3. Reload your terminal. You can close and then open a new terminal, or reload your setting with `source ~/.bashrc` command in your current terminal.
 
 #### Mac
@@ -44,7 +45,7 @@ available.
 
 3. Add the following to your `~/.bash_profile`:
 
-   ```shell
+   ```bash
    if [ -f $(brew --prefix)/etc/bash_completion ]; then
        . $(brew --prefix)/etc/bash_completion
    fi
@@ -59,7 +60,7 @@ completion.
 
 2. Add the following lines to `~/.bash_profile`:
 
-   ```shell
+   ```bash
    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
        . /opt/local/etc/profile.d/bash_completion.sh
    fi
@@ -76,7 +77,8 @@ Make sure you have [installed `oh-my-zsh`](https://ohmyz.sh/) on your computer.
 
 Add `docker` and `docker-compose` to the plugins list in `~/.zshrc` to run
 autocompletion within the oh-my-zsh shell. In the following example, `...`
-represent other Zsh plugins you may have installed.
+represent other Zsh plugins you may have installed. After that, type `source ~/.zshrc` to bring the changes. 
+To test whether it is successful, type `docker ps` and then press the **Tab** key.
 
 ```shell
 plugins=(... docker docker-compose)

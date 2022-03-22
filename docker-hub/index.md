@@ -87,14 +87,16 @@ Docker Hub provides the following major features:
 * [Repositories](repos.md): Push and pull container images.
 * [Teams & Organizations](orgs.md): Manage access to private
 repositories of container images.
-* [Official Images](official_images.md): Pull and use high-quality
+* [Docker Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
-* [Publisher Images](publish/customer_faq.md): Pull and use high-
+* [Docker Verified Publisher Images](publish/index.md): Pull and use high-
 quality container images provided by external vendors.
 * [Builds](builds/index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
+
+Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
 
 The following section contains step-by-step instructions on how to easily get started with Docker Hub.
 
@@ -134,12 +136,11 @@ Docker Hub.
 
 1. Start by creating a [Dockerfile](../engine/reference/builder/) to specify your application as shown below:
 
-    ```shell
-    cat > Dockerfile <<EOF
-    FROM busybox
-    CMD echo "Hello world! This is my first Docker image."
-    EOF
-    ```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM busybox
+   CMD echo "Hello world! This is my first Docker image."
+   ```
 
 2. Run `docker build -t <your_username>/my-private-repo .` to build your Docker
    image.
@@ -169,5 +170,5 @@ Congratulations! You've successfully:
 - Create an [organization](orgs.md) to use Docker Hub with your team.
 - Automatically build container images from code through [builds](builds/index.md).
 - [Explore](https://hub.docker.com/explore) official & publisher images.
-- [Upgrade your plan](https://www.docker.com/pricing) to push additional private Docker images to
+- [Upgrade your subscription](https://www.docker.com/pricing) to push additional private Docker images to
 Docker Hub.

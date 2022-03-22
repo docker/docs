@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: events [options] [SERVICE...]
+Usage: docker-compose events [options] [SERVICE...]
 
 Options:
     --json      Output events as a stream of json objects

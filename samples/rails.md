@@ -24,7 +24,6 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-COPY ../compose /myapp
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
@@ -51,6 +50,7 @@ Create an empty `Gemfile.lock` file to build our `Dockerfile`.
 ```console
 $ touch Gemfile.lock
 ```
+
 Next, provide an entrypoint script to fix a Rails-specific issue that
 prevents the server from restarting when a certain `server.pid` file pre-exists.
 This script will be executed every time the container gets started.
@@ -100,7 +100,7 @@ services:
 ### Build the project
 
 With those files in place, you can now generate the Rails skeleton app
-using [docker-compose run](reference/run.md):
+using [docker-compose run](../compose/reference/run.md):
 
 ```console
 $ docker-compose run --no-deps web rails new . --force --database=postgresql
@@ -185,14 +185,12 @@ test:
   database: myapp_test
 ```
 
-You can now boot the app with [docker-compose up](reference/up.md):
+You can now boot the app with [docker-compose up](../compose/reference/up.md).
+If all is well, you should see some PostgreSQL output:
 
 ```console
 $ docker-compose up
-```
-If all's well, you should see some PostgreSQL output.
 
-```bash
 rails_db_1 is up-to-date
 Creating rails_web_1 ... done
 Attaching to rails_db_1, rails_web_1
@@ -209,12 +207,6 @@ Finally, you need to create the database. In another terminal, run:
 
 ```console
 $ docker-compose run web rake db:create
-```
-Here is an example of the output from that command:
-
-```console
-$ docker-compose run web rake db:create
-
 Starting rails_db_1 ... done
 Created database 'myapp_development'
 Created database 'myapp_test'

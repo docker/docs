@@ -20,8 +20,8 @@ include examples of customizing the output format.
 > In a Posix shell, you can run the following with a single quote:
 >
 > {% raw %}
-> ```bash
-> docker inspect --format '{{join .Args " , "}}'
+> ```console
+> $ docker inspect --format '{{join .Args " , "}}'
 > ```
 > {% endraw %}
 >
@@ -29,8 +29,8 @@ include examples of customizing the output format.
 > escape the double quotes inside the params as follows:
 >
 > {% raw %}
-> ```bash
-> docker inspect --format '{{join .Args \" , \"}}'
+> ```console
+> $ docker inspect --format '{{join .Args \" , \"}}'
 > ```
 > {% endraw %}
 >
@@ -42,8 +42,8 @@ include examples of customizing the output format.
 It puts a separator between each element in the list.
 
 {% raw %}
-```
-docker inspect --format '{{join .Args " , "}}' container
+```console
+$ docker inspect --format '{{join .Args " , "}}' container
 ```
 {% endraw %}
 
@@ -52,8 +52,8 @@ docker inspect --format '{{join .Args " , "}}' container
 `table` specifies which fields you want to see its output.
 
 {% raw %}
-```
-docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
+```console
+$ docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
 ```
 {% endraw %}
 
@@ -63,8 +63,8 @@ docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
 
 
 {% raw %}
-```
-docker inspect --format '{{json .Mounts}}' container
+```console
+$ docker inspect --format '{{json .Mounts}}' container
 ```
 {% endraw %}
 
@@ -73,8 +73,8 @@ docker inspect --format '{{json .Mounts}}' container
 `lower` transforms a string into its lowercase representation.
 
 {% raw %}
-```
-docker inspect --format "{{lower .Name}}" container
+```console
+$ docker inspect --format "{{lower .Name}}" container
 ```
 {% endraw %}
 
@@ -83,8 +83,8 @@ docker inspect --format "{{lower .Name}}" container
 `split` slices a string into a list of strings separated by a separator.
 
 {% raw %}
-```
-docker inspect --format '{{split .Image ":"}}'
+```console
+$ docker inspect --format '{{split .Image ":"}}'
 ```
 {% endraw %}
 
@@ -93,8 +93,8 @@ docker inspect --format '{{split .Image ":"}}'
 `title` capitalizes the first character of a string.
 
 {% raw %}
-```
-docker inspect --format "{{title .Name}}" container
+```console
+$ docker inspect --format "{{title .Name}}" container
 ```
 {% endraw %}
 
@@ -103,8 +103,8 @@ docker inspect --format "{{title .Name}}" container
 `upper` transforms a string into its uppercase representation.
 
 {% raw %}
-```
-docker inspect --format "{{upper .Name}}" container
+```console
+$ docker inspect --format "{{upper .Name}}" container
 ```
 {% endraw %}
 
@@ -114,8 +114,8 @@ docker inspect --format "{{upper .Name}}" container
 `println` prints each value on a new line.
 
 {% raw %}
-```
-docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container
+```console
+$ docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress}}{{end}}' container
 ```
 {% endraw %}
 
@@ -124,7 +124,7 @@ docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress
 To find out what data can be printed, show all content as json:
 
 {% raw %} 
-```
-docker container ls --format='{{json .}}'
+```console
+$ docker container ls --format='{{json .}}'
 ```
 {% endraw %} 

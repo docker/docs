@@ -1103,7 +1103,7 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet and gateway configurations covering each static address.
 
-> If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+> If IPv6 addressing is desired, the [`enable_ipv6`](#enable_ipv6) option must be set.
 
 An example:
 
@@ -1405,7 +1405,7 @@ userns_mode: "host"
 ```
 
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
+See [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) for
 more information.
 
 ### volumes
@@ -1538,16 +1538,16 @@ volumes_from:
 `no` is the default restart policy, and it doesn't restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
 ```yaml
-restart: no
+restart: "no"
 ```
 ```yaml
-restart: always
+restart: "always"
 ```
 ```yaml
-restart: on-failure
+restart: "on-failure"
 ```
 ```yaml
-restart: unless-stopped
+restart: "unless-stopped"
 ```
 
 {: id="cpu-and-other-resources"}
@@ -1596,7 +1596,7 @@ stdin_open: true
 tty: true
 ```
 
-{: id="orig-resources" }
+<a name="orig-resources"></a>
 
 ## Specifying durations
 
@@ -1615,7 +1615,7 @@ The supported units are `us`, `ms`, `s`, `m` and `h`.
 ## Specifying byte values
 
 Some configuration options, such as the `device_read_bps` sub-option for
-[`blkio_config`](#blkioconfig), accept a byte value as a string in a format
+[`blkio_config`](#blkio_config), accept a byte value as a string in a format
 that looks like this:
 
     2b

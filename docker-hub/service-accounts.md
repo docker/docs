@@ -8,7 +8,7 @@ A service account is a Docker ID used for automated management of container imag
 
 > **Note**
 >
-> Service accounts included with the Team plan are limited to 15,000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
+> Service accounts included with the Team plan are limited to 5,000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
 
 ## Enhanced Service Account add-on pricing
 
@@ -16,10 +16,11 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 
 | Tier | Pull Rates Per Day* | Annual Fee |
 | ------ | ------ | ------ |
-| 1 | 15-50k | $9,950/yr |
-| 2 | 50-150k | $17,950/yr |
-| 3 | 150k-500k | $60,000/yr |
-| 4 | 500k+ | Tier 4+ $60k/yr/500k Pull increment |
+| 1 | 5,000-10,000 | $9,950/yr |
+| 2 | 10,000-25,000 | $17,950/yr |
+| 3 | 25,000-50,000 | $32,950/yr |
+| 4 | 50,000-100,000 | $58,950/yr |
+| 5 | 100,000+ | [Contact Sales](https://www.docker.com/pricing/questions){:target="_blank" rel="noopener" class="_"} |
 
 <sub>*Once the initial Tier is established, that is the minimum fee for the year.  Annual commitment required.  The service account may exceed Pulls by up to 25% for up to 20 days during the year without incurring additional fees.  Reports on consumption will be provided upon request.  At the end of the initial 1-year term, the appropriate Tier will be established for the following year.<sub>
 
@@ -37,8 +38,8 @@ To create a new service account for your Team account:
 
 1. Create a new Docker ID.
 2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
-3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
-4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
+3. Add the new Docker ID to your [organization](orgs.md).
+4. Add the new Docker ID  to the [team](orgs.md#create-a-team) you created earlier.
 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 
 > **Note**

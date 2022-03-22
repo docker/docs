@@ -42,8 +42,8 @@ So, let's do it!
 
 2. Run the following command. We'll explain what's going on afterwards:
 
-    ```bash
-    docker run -dp 3000:3000 \
+    ```console
+    $ docker run -dp 3000:3000 \
         -w /app -v "$(pwd):/app" \
         node:12-alpine \
         sh -c "yarn install && yarn run dev"
@@ -52,7 +52,7 @@ So, let's do it!
     If you are using PowerShell then use this command:
 
     ```powershell
-    docker run -dp 3000:3000 `
+    PS> docker run -dp 3000:3000 `
         -w /app -v "$(pwd):/app" `
         node:12-alpine `
         sh -c "yarn install && yarn run dev"
@@ -68,9 +68,9 @@ So, let's do it!
 
 3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this:
 
-    ```bash
-    docker logs -f <container-id>
-    $ nodemon src/index.js
+    ```console
+    $ docker logs -f <container-id>
+    nodemon src/index.js
     [nodemon] 1.19.2
     [nodemon] to restart at any time, enter `rs`
     [nodemon] watching dir(s): *.*

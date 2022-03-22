@@ -188,9 +188,9 @@ on:
 
 This ensures that the main CI will only trigger if we tag our commits with `V.n.n.n.` Let’s test this. For example, run the following command:
 
-```bash
-git tag -a v1.0.2
-git push origin v1.0.2
+```console
+$ git tag -a v1.0.2
+$ git push origin v1.0.2
 ```
 
 Now, go to GitHub and check your Actions
@@ -211,11 +211,16 @@ Next, change your Docker Hub login to a GitHub container registry login:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 
+To authenticate against the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry), use the [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow) for the best security and experience.
+
+You may need to [manage write and read access of GitHub Actions](https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio) for repositories in the container settings.
+
+You can also use a [personal access token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with the [appropriate scopes](https://docs.github.com/en/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry).
 Remember to change how the image is tagged. The following example keeps ‘latest’ as the only tag. However, you can add any logic to this if you prefer:
 
 {% raw %}
@@ -289,9 +294,9 @@ java-docker      jdk        4c15436d8ab7     5 hours ago    567MB
 
 In this module, you have learnt how to set up GitHub Actions workflow to an existing Docker project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. You can also set up nightly tests against the latest tag, test each PR, or do something more elegant with the tags we are using and make use of the Git tag for the same tag in our image.
 
-You can also consider deploying your application to the cloud. For detailed instructions, see:
+You can also consider deploying your application. For detailed instructions, see:
 
-[Deploy your application to the cloud](deploy.md){: .button .primary-btn}
+[Deploy your application](deploy.md){: .button .primary-btn}
 
 ## Feedback
 

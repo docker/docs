@@ -13,13 +13,13 @@ machines.
     node. This tutorial uses a machine named `manager1`. If you use Docker Machine,
     you can connect to it via SSH using the following command:
 
-    ```bash
+    ```console
     $ docker-machine ssh manager1
     ```
 
 2.  Run the following command to create a new swarm:
 
-    ```bash
+    ```console
     $ docker swarm init --advertise-addr <MANAGER-IP>
     ```
 
@@ -33,7 +33,7 @@ machines.
     In the tutorial, the following command creates a swarm on the `manager1`
     machine:
 
-    ```bash
+    ```console
     $ docker swarm init --advertise-addr 192.168.99.100
     Swarm initialized: current node (dxn1zf6l61qsb1josjja83ngz) is now a manager.
 
@@ -56,7 +56,7 @@ machines.
 
 2.  Run `docker info` to view the current state of the swarm:
 
-    ```bash
+    ```console
     $ docker info
 
     Containers: 2
@@ -74,7 +74,7 @@ machines.
 
 3.  Run the `docker node ls` command to view information about nodes:
 
-    ```bash
+    ```console
     $ docker node ls
 
     ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS

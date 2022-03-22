@@ -5,7 +5,12 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
-You can run Compose on macOS, Windows, and 64-bit Linux.
+> **Accelerating new features in Docker Desktop**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
+This page contains information on how to install Docker Compose. You can run Compose on macOS, Windows, and 64-bit Linux.
 
 ## Prerequisites
 
@@ -30,11 +35,12 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 Python package manager or installing Compose as a container.
 
 > Install a different version
-> 
+>
 > The instructions below outline installation of the current stable release
 > (**v{{site.compose_version}}**) of Compose. To install a different version of
-> Compose, replace the given release number with the one that you want. Compose
-> releases are also listed and available for direct download on the
+> Compose, replace the given release number with the one that you want. For instructions to install Compose 2.0.0 on Linux, see [Install Compose 2.0.0 on Linux](cli-command.md#install-on-linux).
+>
+> Compose releases are also listed and available for direct download on the
 > [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 > To install a **pre-release** of Compose, refer to the [install pre-release builds](#install-pre-release-builds)
 > section.
@@ -54,7 +60,7 @@ Python package manager or installing Compose as a container.
 
 **Docker Desktop for Mac** includes Compose along
 with other Docker apps, so Mac users do not need to install Compose separately.
-For installation instructions, see [Install Docker Desktop on Mac](../docker-for-mac/install.md).
+For installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md).
 
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
@@ -63,7 +69,7 @@ For installation instructions, see [Install Docker Desktop on Mac](../docker-for
 
 **Docker Desktop for Windows** includes Compose
 along with other Docker apps, so most Windows users do not need to
-install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../docker-for-windows/install.md).
+install Compose separately. For install instructions, see [Install Docker Desktop on Windows](../desktop/windows/install.md).
 
 If you are running the Docker daemon and client directly on Microsoft
 Windows Server, follow the instructions in the Windows Server tab.
@@ -125,40 +131,44 @@ also included below.
 
 1.  Run this command to download the current stable release of Docker Compose:
 
-    ```bash
-    sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ```console
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
-    > with the version of Compose you want to use.
+    > with the version of Compose you want to use. For instructions on how to
+    > install Compose `{{site.compose_v2_version}}` on Linux, see [Install
+    > Compose 2.0.0 on Linux](../cli-command#install-on-linux)
 
     If you have problems installing with `curl`, see
     [Alternative Install Options](install.md#alternative-install-options) tab above.
 
 2.  Apply executable permissions to the binary:
 
-    ```bash
-    sudo chmod +x /usr/local/bin/docker-compose
+    ```console
+    $ sudo chmod +x /usr/local/bin/docker-compose
     ```
-    
-> **Note**: If the command `docker-compose` fails after installation, check your path.
-> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
 
-For example:
-
-```bash
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-```
+    > **Note**:
+    >
+    > If the command `docker-compose` fails after installation, check your path.
+    > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+    >
+    > For example:
+    > ```console
+    > $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    > ```
 
 3.  Optionally, install [command completion](completion.md) for the
     `bash` and `zsh` shell.
 
 4.  Test the installation.
 
-    ```bash
+    ```console
     $ docker-compose --version
     docker-compose version {{site.compose_version}}, build 1110ad01
     ```
+
 </div>
 <div id="alternatives" class="tab-pane fade" markdown="1">
 
@@ -182,13 +192,14 @@ dependencies. See the [virtualenv
 tutorial](https://docs.python-guide.org/dev/virtualenvs/) to get
 started.
 
-```bash
-pip install docker-compose
+```console
+$ pip3 install docker-compose
 ```
+
 If you are not using virtualenv,
 
-```bash
-sudo pip install docker-compose
+```console
+$ sudo pip install docker-compose
 ```
 
 > pip version 6.0 or greater is required.
@@ -198,9 +209,9 @@ sudo pip install docker-compose
 Compose can also be run inside a container, from a small bash script wrapper. To
 install compose as a container run this command:
 
-```bash
-sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+```console
+$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 </div>
@@ -239,29 +250,29 @@ your existing containers (for example, because they have data volumes you want
 to preserve), you can use Compose 1.5.x to migrate them with the following
 command:
 
-```bash
-docker-compose migrate-to-labels
+```console
+$ docker-compose migrate-to-labels
 ```
 
 Alternatively, if you're not worried about keeping them, you can remove them.
 Compose just creates new ones.
 
-```bash
-docker container rm -f -v myapp_web_1 myapp_db_1 ...
+```console
+$ docker container rm -f -v myapp_web_1 myapp_db_1 ...
 ```
 
 ## Uninstallation
 
 To uninstall Docker Compose if you installed using `curl`:
 
-```bash
-sudo rm /usr/local/bin/docker-compose
+```console
+$ sudo rm /usr/local/bin/docker-compose
 ```
 
 To uninstall Docker Compose if you installed using `pip`:
 
-```bash
-pip uninstall docker-compose
+```console
+$ pip uninstall docker-compose
 ```
 
 > Got a "Permission denied" error?

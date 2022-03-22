@@ -72,7 +72,7 @@ If you need to specify volume driver options, you must use `--mount`.
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `readonly` option, if present, causes the bind mount to be [mounted into
-    the container as read-only](#use-a-read-only-volume).
+    the container as read-only](#use-a-read-only-volume). May be specified as `readonly` or `ro`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
@@ -110,13 +110,13 @@ container.
 
 **Create a volume**:
 
-```bash
+```console
 $ docker volume create my-vol
 ```
 
 **List volumes**:
 
-```bash
+```console
 $ docker volume ls
 
 local               my-vol
@@ -124,7 +124,7 @@ local               my-vol
 
 **Inspect a volume**:
 
-```bash
+```console
 $ docker volume inspect my-vol
 [
     {
@@ -140,7 +140,7 @@ $ docker volume inspect my-vol
 
 **Remove a volume**:
 
-```bash
+```console
 $ docker volume rm my-vol
 ```
 
@@ -161,7 +161,7 @@ after running the first one.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name devtest \
   --mount source=myvol2,target=/app \
@@ -171,7 +171,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name devtest \
   -v myvol2:/app \
@@ -205,7 +205,7 @@ destination, and that the mount is read-write.
 Stop the container and remove the volume. Note volume removal is a separate
 step.
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -259,7 +259,7 @@ Docker for Azure both support persistent storage using the Cloudstor plugin.
 The following example starts a `nginx` service with four replicas, each of which
 uses a local volume called `myvol2`.
 
-```bash
+```console
 $ docker service create -d \
   --replicas=4 \
   --name devtest-service \
@@ -269,7 +269,7 @@ $ docker service create -d \
 
 Use `docker service ps devtest-service` to verify that the service is running:
 
-```bash
+```console
 $ docker service ps devtest-service
 
 ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
@@ -278,7 +278,7 @@ ID                  NAME                IMAGE               NODE                
 
 Remove the service, which stops all its tasks:
 
-```bash
+```console
 $ docker service rm devtest-service
 ```
 
@@ -313,7 +313,7 @@ The `--mount` and `-v` examples have the same end result.
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html \
@@ -323,7 +323,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-empty-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html \
@@ -337,7 +337,7 @@ After running either of these examples, run the following commands to clean up
 the containers and volumes.  Note volume removal is a separate step.
 
 
-```bash
+```console
 $ docker container stop nginxtest
 
 $ docker container rm nginxtest
@@ -367,7 +367,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
@@ -377,7 +377,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-readonly" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html:ro \
@@ -408,7 +408,7 @@ correctly. Look for the `Mounts` section:
 Stop and remove the container, and remove the volume. Volume removal is a
 separate step.
 
-```bash
+```console
 $ docker container stop nginxtest
 
 $ docker container rm nginxtest
@@ -448,7 +448,7 @@ host and can connect to the second using SSH.
 
 On the Docker host, install the `vieux/sshfs` plugin:
 
-```bash
+```console
 $ docker plugin install --grant-all-permissions vieux/sshfs
 ```
 
@@ -458,7 +458,7 @@ This example specifies a SSH password, but if the two hosts have shared keys
 configured, you can omit the password. Each volume driver may have zero or more
 configurable options, each of which is specified using an `-o` flag.
 
-```bash
+```console
 $ docker volume create --driver vieux/sshfs \
   -o sshcmd=test@node2:/home/test \
   -o password=testpassword \
@@ -472,7 +472,7 @@ configured, you can omit the password. Each volume driver may have zero or more
 configurable options. **If the volume driver requires you to pass options, you
 must use the `--mount` flag to mount the volume, rather than `-v`.**
 
-```bash
+```console
 $ docker run -d \
   --name sshfs-container \
   --volume-driver vieux/sshfs \
@@ -485,7 +485,7 @@ $ docker run -d \
 This example shows how you can create an NFS volume when creating a service. This example uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
 
 #### NFSv3
-```bash
+```console
 $ docker service create -d \
   --name nfs-service \
   --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10' \
@@ -493,8 +493,8 @@ $ docker service create -d \
 ```
 
 #### NFSv4
-```bash
-docker service create -d \
+```console
+$ docker service create -d \
     --name nfs-service \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=addr=10.0.0.10,rw,nfsvers=4,async"' \
     nginx:latest
@@ -503,14 +503,15 @@ docker service create -d \
 ### Create CIFS/Samba volumes
 
 You can mount a Samba share directly in docker without configuring a mount point on your host.
-```bash
-docker volume create \
+```console
+$ docker volume create \
 	--driver local \
 	--opt type=cifs \
 	--opt device=//uxxxxx.your-server.de/backup \
 	--opt o=addr=uxxxxx.your-server.de,username=uxxxxxxx,password=*****,file_mode=0777,dir_mode=0777 \
 	--name cif-volume
 ```
+
 Notice the `addr` option is required if using a hostname instead of an IP so docker can perform the hostname lookup.
 
 ## Backup, restore, or migrate data volumes
@@ -518,11 +519,11 @@ Notice the `addr` option is required if using a hostname instead of an IP so doc
 Volumes are useful for backups, restores, and migrations. Use the
 `--volumes-from` flag to create a new container that mounts that volume.
 
-### Backup a container
+### Back up a volume
 
 For example, create a new container named `dbstore`:
 
-```
+```console
 $ docker run -v /dbdata --name dbstore ubuntu /bin/bash
 ```
 
@@ -532,27 +533,27 @@ Then in the next command, we:
 - Mount a local host directory as `/backup`
 - Pass a command that tars the contents of the `dbdata` volume to a `backup.tar` file inside our `/backup` directory.
 
-```
+```console
 $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
 ```
 
 When the command completes and the container stops, we are left with a backup of
 our `dbdata` volume.
 
-### Restore container from backup
+### Restore volume from backup
 
 With the backup just created, you can restore it to the same container, or
 another that you made elsewhere.
 
 For example, create a new container named `dbstore2`:
 
-```
+```console
 $ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 
 Then un-tar the backup file in the new container`s data volume:
 
-```
+```console
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 
@@ -573,15 +574,21 @@ To automatically remove anonymous volumes, use the `--rm` option. For example,
 this command creates an anonymous `/foo` volume. When the container is removed,
 the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 
-```
+```console
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 
+> **Note**:
+>
+> If another container binds the volumes with
+> `--volumes-from`, the volume definitions are _copied_ and the 
+> anonymous volume also stays after the first container is removed.
+  
 ### Remove all volumes
 
 To remove all unused volumes and free up space:
 
-```
+```console
 $ docker volume prune
 ```
 

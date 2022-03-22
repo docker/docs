@@ -17,9 +17,7 @@ registry. The default registry is Docker Hub and is where all of the images we'v
 
 To push an image, we first need to create a repository on Docker Hub.
 
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} and share images using Docker Hub.
-
-2. Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
+1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} or Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
 
 2. Click the **Create Repository** button.
 
@@ -31,8 +29,7 @@ To push an image, we first need to create a repository on Docker Hub.
 
 4. Click the **Create** button!
 
-If you look on the right-side of the page, you'll see a section named **Docker commands**. This gives
-an example command that you will need to run to push to this repo.
+If you look at the image below an example **Docker command** can be seen. This command will push to this repo.
 
 ![Docker command with push example](images/push-command.png){: style=width:75% }
 {: .text-center }
@@ -58,16 +55,16 @@ an example command that you will need to run to push to this repo.
 3. Use the `docker tag` command to give the `getting-started` image a new name. Be sure to swap out
    `YOUR-USER-NAME` with your Docker ID.
 
-    ```bash
-    docker tag getting-started YOUR-USER-NAME/getting-started
+    ```console
+    $ docker tag getting-started YOUR-USER-NAME/getting-started
     ```
 
 4. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
    `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
    will use a tag called `latest`.
 
-    ```bash
-    docker push YOUR-USER-NAME/getting-started
+    ```console
+    $ docker push YOUR-USER-NAME/getting-started
     ```
 
 ## Run the image on a new instance
@@ -87,8 +84,8 @@ new instance that has never seen this container image! To do this, we will use P
 
 5. In the terminal, start your freshly pushed app.
 
-    ```bash
-    docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
+    ```console
+    $ docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
     ```
 
     You should see the image get pulled down and eventually start up!

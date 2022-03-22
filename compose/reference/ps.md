@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: ps [options] [SERVICE...]
+Usage: docker-compose ps [options] [SERVICE...]
 
 Options:
     -q, --quiet          Only display IDs
@@ -17,7 +17,7 @@ Options:
 
 Lists containers.
 
-```bash
+```console
 $ docker-compose ps
          Name                        Command                 State             Ports
 ---------------------------------------------------------------------------------------------

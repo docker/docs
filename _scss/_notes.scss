@@ -1,51 +1,128 @@
 //noinspection CssNoGenericFontName
-blockquote {
-  background-color:  $note-bg-color;
-  border-left-color: $note-color;
+
+/*
+
+These rules control the display of notes/notifications/alerts. They can be used like so:
+
+> **This is a paid feature**
+>
+> Docker Hub Vulnerability Scanning is available for developers subscribed to a Pro or a Team plan. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade)
+{: .restricted }
+
+(The first line is always treated as a header, unless it's the only line)
+
+The available classes are:
+
+.important: Yellow
+.warning: Red/orange
+.restricted: Purple, used to indicate features that require paid plans
+[no class]: Blue, the default
+
+*/
+
+@mixin notification($bg-color, $header-color, $body-text-color, $icon) {
+  background-color:  $bg-color;
   font-size:         unset; // override bootstrap font-size for blockquotes
 
-  > p:first-child {
-    color:       $note-color;
+  // The first child will generally be a header (e.g. "Note" or "This is an experimental feature"),
+  // but we have some notes that don't have headers; if there's only one child of the note,
+  // assume it's not a header
+  > p:first-child:not(:only-child) {
+    color:       $header-color;
     font-weight: 700;
     margin-top:  0;
 
     &::before {
       font-family: FontAwesome;
-      content:     "\f058 \00a0";
+      content:     "#{$icon} \00a0";
     }
   }
 
-  // Maintain backwards compatibility with old note style
-  > p:only-child {
-    color:       inherit;
-    font-weight: inherit;
+  > p:only-child, > p:not(:first-child) {
+    color: $body-text-color;
+  }
+}
 
-    &::before {
-      content: none;
+
+
+blockquote {
+  body.night & {
+    // DARK THEME
+
+    &:not(.important):not(.warning):not(.restricted) {
+      @include notification(
+        $bg-color: change-color($marine-10, $alpha: 0.2),
+        $header-color: $marine-10,
+        $body-text-color: $marine-10,
+        $icon: "\f06a"
+      );
+    }
+
+    &.important {
+      @include notification(
+        $bg-color: change-color($orange-60, $alpha: 0.4),
+        $header-color: $orange-20,
+        $body-text-color: $orange-20,
+        $icon: "\f06a"
+      );
+    }
+
+    &.warning {
+      @include notification(
+        $bg-color: change-color($red-60, $alpha: 0.3),
+        $header-color: $red-10,
+        $body-text-color: $red-10,
+        $icon: "\f06a"
+      );
+    }
+
+    &.restricted {
+      @include notification(
+        $bg-color: change-color($purple-60, $alpha: 0.44),
+        $header-color: $purple-10,
+        $body-text-color: $purple-10,
+        $icon: "\f135"
+      );
     }
   }
 
-  &.important {
-    border-left-color: $important-color;
+  body:not(.night) & {
+    // LIGHT THEME
 
-    > p:first-child {
-      color: $important-color;
-
-      &::before {
-        content: "\f06a  \00a0";
-      }
+    &:not(.important):not(.warning):not(.restricted) {
+      @include notification(
+        $bg-color: #E8F4FD, // Hardcoding this variable temporary till we migrate to the new color pallette
+        $header-color: $blue-80,
+        $body-text-color: inherit,
+        $icon: "\f05a"
+      );
     }
-  }
 
-  &.warning {
-    border-left-color: $warning-color;
+    &.important {
+      @include notification(
+        $bg-color: $orange-10,
+        $header-color: $orange-100,
+        $body-text-color: inherit,
+        $icon: "\f06a"
+      );
+    }
 
-    > p:first-child {
-      color: $warning-color;
+    &.warning {
+      @include notification(
+        $bg-color: #FEEFEF, // Hardcoding this variable temporary till we migrate to the new color pallette
+        $header-color: $red-50,
+        $body-text-color: inherit,
+        $icon: "\f06a"
+      );
+    }
 
-      &::before {
-        content: "\f057  \00a0";
-      }
+    &.restricted {
+      @include notification(
+        $bg-color: $purple-10,
+        $header-color: $purple-50,
+        $body-text-color: inherit,
+        $icon: "\f135"
+      );
     }
   }
 }

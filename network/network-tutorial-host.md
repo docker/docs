@@ -30,8 +30,8 @@ host.
 
 1.  Create and start the container as a detached process. The `--rm` option means to remove the container once it exits/stops. The `-d` flag means to start the container detached (in the background). 
 
-    ```bash
-    docker run --rm -d --network host --name my_nginx nginx
+    ```console
+    $ docker run --rm -d --network host --name my_nginx nginx
     ```
 
 2.  Access Nginx by browsing to
@@ -41,16 +41,16 @@ host.
 
     - Examine all network interfaces and verify that a new one was not created.
 
-      ```bash
-      ip addr show
+      ```console
+      $ ip addr show
       ```
 
     - Verify which process is bound to port 80, using the `netstat` command. You
       need to use `sudo` because the process is owned by the Docker daemon user
       and you otherwise won't be able to see its name or PID.
 
-      ```bash
-      sudo netstat -tulpn | grep :80
+      ```console
+      $ sudo netstat -tulpn | grep :80
       ```
 
 4.  Stop the container. It will be removed automatically as it was started using the `--rm` option.

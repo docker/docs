@@ -25,6 +25,7 @@ If you have multiple environment variables, you can substitute them by adding
 them to a default environment variable file named `.env` or by providing a
 path to your environment variables file using the `--env-file` command line option.
 
+{% include content/compose-var-sub.md %}
 
 ### The “.env” file
 
@@ -33,13 +34,16 @@ Compose file, or used to configure Compose, in an [environment file](env-file.md
 named `.env`. The `.env` file path is as follows:
 
   - Starting with `+v1.28`, `.env` file is placed at the base of the project directory 
-  - For previous versions, it is placed in the current working directory where the
-  Docker Compose command is executed unless a `--project-directory` is defined which
-  overrides the path for the `.env` file. This inconsistency is addressed
+  - Project directory can be explicitly defined with the `--file` option or `COMPOSE_FILE`
+  environment variable. Otherwise, it is the current working directory where the 
+  `docker compose` command is executed (`+1.28`).
+  - For previous versions, it might have trouble resolving `.env` file with 
+  `--file` or `COMPOSE_FILE`. To work around it, it is recommended to use `--project-directory`,
+  which overrides the path for the `.env` file. This inconsistency is addressed
   in `+v1.28` by limiting the filepath to the project directory.
 
 
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -55,7 +59,7 @@ image `webapp:v1.5`. You can verify this with the
 [config command](reference/config.md), which prints your resolved application
 config to the terminal:
 
-```shell
+```console
 $ docker-compose config
 
 version: '3'
@@ -69,7 +73,7 @@ Values in the shell take precedence over those specified in the `.env` file.
 If you set `TAG` to a different value in your shell, the substitution in `image`
 uses that instead:
 
-```shell
+```console
 $ export TAG=v2.0
 $ docker-compose config
 
@@ -87,13 +91,14 @@ By passing the file as an argument, you can store it anywhere and name it
 appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
 done using the `--env-file` option:
 
-```shell
-docker-compose --env-file ./config/.env.dev up 
+```console
+$ docker-compose --env-file ./config/.env.dev up 
 ```
+
 This file path is relative to the current working directory where the Docker Compose
 command is executed.
 
-```shell
+```console
 $ cat .env
 TAG=v1.5
 
@@ -110,16 +115,17 @@ services:
 
 The `.env` file is loaded by default:
 
-```shell
+```console
 $ docker-compose config 
 version: '3'
 services:
   web:
     image: 'webapp:v1.5'
 ```
+
 Passing the `--env-file ` argument overrides the default file path:
 
-```shell
+```console
 $ docker-compose --env-file ./config/.env.dev config 
 version: '3'
 services:
@@ -129,7 +135,7 @@ services:
 
 When an invalid file path is being passed as `--env-file` argument, Compose returns an error:
 
-```
+```console
 $ docker-compose --env-file ./doesnotexist/.env.dev  config
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```
@@ -183,14 +189,14 @@ web:
 Similar to `docker run -e`, you can set environment variables on a one-off
 container with `docker-compose run -e`:
 
-```shell
-docker-compose run -e DEBUG=1 web python console.py
+```console
+$ docker-compose run -e DEBUG=1 web python console.py
 ```
 
 You can also pass a variable from the shell by not giving it a value:
 
-```shell
-docker-compose run -e DEBUG web python console.py
+```console
+$ docker-compose run -e DEBUG web python console.py
 ```
 
 The value of the `DEBUG` variable in the container is taken from the value for
@@ -208,7 +214,7 @@ priority used by Compose to choose which value to use:
 In the example below, we set the same environment variable on an Environment
 file, and the Compose file:
 
-```shell
+```console
 $ cat ./Docker/api/api.env
 NODE_ENV=test
 
@@ -226,7 +232,7 @@ services:
 When you run the container, the environment variable defined in the Compose
 file takes precedence.
 
-```shell
+```console
 $ docker-compose exec api node
 
 > process.env.NODE_ENV

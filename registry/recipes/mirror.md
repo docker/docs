@@ -18,7 +18,7 @@ there, to avoid this extra internet traffic.
 
 > **Note**
 >
-> Docker Official Images are an intellectual property of Docker. Distributing Docker Official Images to third parties without a prior agreement can constitute a violation of [Docker Terms of Service](https://www.docker.com/legal/docker-terms-service){: target="blank" rel="noopener" class=“”}.
+> Docker Official Images are an intellectual property of Docker.
 
 ### Alternatives
 
@@ -35,7 +35,7 @@ Hub can be mirrored.
 
 > **Note**
 >
-> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}. 
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
 
 ### Solution
 
@@ -75,6 +75,10 @@ as described in the following subsection.
 Multiple registry caches can be deployed over the same back-end. A single
 registry cache ensures that concurrent requests do not pull duplicate data,
 but this property does not hold true for a registry cache cluster.
+
+> **Note**
+>
+> Service accounts included in the Team plan are limited to 5,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 
 ### Configure the cache
 

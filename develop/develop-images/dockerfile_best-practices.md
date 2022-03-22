@@ -73,21 +73,21 @@ context.
 > a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
 > the image from within the build context (`.`):
 >
-> ```shell
-> mkdir myproject && cd myproject
-> echo "hello" > hello
-> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> docker build -t helloapp:v1 .
+> ```console
+> $ mkdir myproject && cd myproject
+> $ echo "hello" > hello
+> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> $ docker build -t helloapp:v1 .
 > ```
 >
 > Move `Dockerfile` and `hello` into separate directories and build a second
 > version of the image (without relying on cache from the last build). Use `-f`
 > to point to the Dockerfile and specify the directory of the build context:
 >
-> ```shell
-> mkdir -p dockerfiles context
-> mv Dockerfile dockerfiles && mv hello context
-> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```console
+> $ mkdir -p dockerfiles context
+> $ mv Dockerfile dockerfiles && mv hello context
+> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
 
 Inadvertently including files that are not necessary for building an image
@@ -170,13 +170,13 @@ context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
 > 
 > docker build -t myimage:latest -<<EOF
 > FROM busybox
-> COPY somefile.txt .
+> COPY somefile.txt ./
 > RUN cat /somefile.txt
 > EOF
 > 
 > # observe that the build fails
 > ...
-> Step 2/3 : COPY somefile.txt .
+> Step 2/3 : COPY somefile.txt ./
 > COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
 > ```
 
@@ -206,7 +206,7 @@ touch somefile.txt
 # build an image using the current directory as context, and a Dockerfile passed through stdin
 docker build -t myimage:latest -f- . <<EOF
 FROM busybox
-COPY somefile.txt .
+COPY somefile.txt ./
 RUN cat /somefile.txt
 EOF
 ```
@@ -232,7 +232,7 @@ the `hello.c` file from the ["hello-world" Git repository on GitHub](https://git
 ```bash
 docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY hello.c .
+COPY hello.c ./
 EOF
 ```
 
@@ -406,7 +406,7 @@ maintainable `Dockerfile`.
 
 Whenever possible, use current official images as the basis for your
 images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
-is tightly controlled and small in size (currently under 5 MB), while still
+is tightly controlled and small in size (currently under 6 MB), while still
 being a full Linux distribution.
 
 ### LABEL
@@ -579,6 +579,7 @@ build from inadvertently succeeding. For example:
 ```dockerfile
 RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
+
 > Not all shells support the `-o pipefail` option.
 >
 > In cases such as the `dash` shell on
@@ -664,7 +665,7 @@ RUN echo $ADMIN_USER > ./mark
 RUN unset ADMIN_USER
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 mark
@@ -687,7 +688,7 @@ RUN export ADMIN_USER="mark" \
 CMD sh
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
@@ -762,13 +763,13 @@ CMD ["--help"]
 
 Now the image can be run like this to show the command's help:
 
-```bash
+```console
 $ docker run s3cmd
 ```
 
 Or using the right parameters to execute a command:
 
-```bash
+```console
 $ docker run s3cmd ls s3://mybucket
 ```
 
@@ -819,19 +820,19 @@ This script allows the user to interact with Postgres in several ways.
 
 It can simply start Postgres:
 
-```bash
+```console
 $ docker run postgres
 ```
 
 Or, it can be used to run Postgres and pass parameters to the server:
 
-```bash
+```console
 $ docker run postgres postgres --help
 ```
 
 Lastly, it could also be used to start a totally different tool, such as Bash:
 
-```bash
+```console
 $ docker run --rm -it postgres bash
 ```
 
@@ -907,7 +908,7 @@ fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
 
-## Examples for Official Images
+## Examples of Docker Official Images
 
 These Official Images have exemplary `Dockerfile`s:
 
@@ -921,5 +922,6 @@ These Official Images have exemplary `Dockerfile`s:
 * [Dockerfile Reference](../../engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
-* [Guidelines for Creating Official Images](../../docker-hub/official_images.md)
+* [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
+* [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 

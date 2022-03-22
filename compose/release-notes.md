@@ -2327,7 +2327,7 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `cpuset`, like `docker run --cpuset-cpus`, lets you specify which CPUs to allow execution in.
 - `read_only`, like `docker run --read-only`, lets you mount a container's filesystem as read-only.
 - `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/run/#security-configuration).
-- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers-log-driver).
+- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers---log-driver).
 
 ### Bug Fixes
 
@@ -2412,7 +2412,7 @@ The highlights:
 
    This means the GitHub repository has moved to [https://github.com/docker/fig](https://github.com/docker/fig) and our IRC channel is now #docker-fig on Freenode.
 
- - Fig can be used with the [official Docker OS X installer](../docker-for-mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](../desktop/mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 
  - Fig supports Docker 1.3.
 

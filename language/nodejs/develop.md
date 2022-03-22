@@ -22,24 +22,24 @@ First, we’ll take a look at running a database in a container and how we use v
 
 Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
 
-Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. You can read all about volumes in our documentation.
+Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. For more information, see [Use volumes](../../storage/volumes.md).
 
 Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
 
-```shell
+```console
 $ docker volume create mongodb
 $ docker volume create mongodb_config
 ```
 
 Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
 
-```shell
+```console
 $ docker network create mongodb
 ```
 
 Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
 
-```shell
+```console
 $ docker run -it --rm -d -v mongodb:/data/db \
   -v mongodb_config:/data/configdb -p 27017:27017 \
   --network mongodb \
@@ -60,43 +60,41 @@ server.use( '/', mocks.server( server.Router(), false, false ) )
 server.start()
 ```
 
-We’ve add the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
+We’ve added the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
 
 First let’s add the `ronin-database` module to our application using npm.
 
-```shell
+```console
 $ npm install ronin-database
 ```
 
 Now we can build our image.
 
-```shell
+```console
 $ docker build --tag node-docker .
 ```
 
 Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
 
-```shell
+```console
 $ docker run \
   -it --rm -d \
   --network mongodb \
   --name rest-server \
   -p 8000:8000 \
-  -e CONNECTIONSTRING=mongodb://mongodb:27017/yoda_notes \
+  -e CONNECTIONSTRING=mongodb://mongodb:27017/notes \
   node-docker
 ```
 
+The `yoda_notes` at the end of the connection string is the desired name for our database.
+
 Let’s test that our application is connected to the database and is able to add a note.
 
-```shell
+```console
 $ curl --request POST \
   --url http://localhost:8000/notes \
   --header 'content-type: application/json' \
-  --data '{
-"name": "this is a note",
-"text": "this is a note that I wanted to take while I was working on writing a blog post.",
-"owner": "peter"
-}'
+  --data '{"name": "this is a note", "text": "this is a note that I wanted to take while I was working on writing a blog post.", "owner": "peter"}'
 ```
 
 You should receive the following json back from our service.
@@ -162,19 +160,19 @@ $ npm install nodemon
 
 Let’s start our application and confirm that it is running properly.
 
-```shell
+```console
 $ docker-compose -f docker-compose.dev.yml up --build
 ```
 
-We pass the `--build` flag so Docker will compile our image and then starts it.
+We pass the `--build` flag so Docker compiles our image and then starts it.
 
-If all goes will you should see something similar:
+If all goes well, you should see something similar:
 
   ![node-compile](images/node-compile.png){:width="800px"}
 
 Now let’s test our API endpoint. Run the following curl command:
 
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/notes
 ```
 
@@ -198,7 +196,7 @@ Click the **Open dedicated DevTools for Node** link. This opens the DevTools tha
 
 Let’s change the source code and then set a breakpoint.
 
-Add the following code above the existing `server.use()` statement, and save the file.
+Add the following code above the existing `server.use()` statement, and save the file. Make sure that the `return` statement is on a line of its own, as shown here, so you can set the breakpoint appropriately.
 
 ```js
  server.use( '/foo', (req, res) => {
@@ -212,7 +210,7 @@ If you take a look at the terminal where our Compose application is running, you
 
 Navigate back to the Chrome DevTools and set a breakpoint on the line containing the `return res.json({ "foo": "bar" })` statement, and then run the following curl command to trigger the breakpoint.
 
-```shell
+```console
 $ curl --request GET --url http://localhost:8000/foo
 ```
 

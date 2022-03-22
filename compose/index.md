@@ -8,6 +8,12 @@ redirect_from:
  - /compose/swarm/
 ---
 
+
+> **Accelerating new features in Docker Desktop**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
+
 >**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
 
 Compose is a tool for defining and running multi-container Docker applications.
@@ -38,7 +44,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8000:5000"
     volumes:
       - .:/code
       - logvolume01:/var/log
@@ -158,7 +164,7 @@ is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
 and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
 
-```bash
+```console
 $ docker-compose up -d
 $ ./run_tests
 $ docker-compose down

@@ -19,12 +19,15 @@ container layer. This means that:
   kernel. This extra abstraction reduces performance as compared to using
   _data volumes_, which write directly to the host filesystem.
 
-Docker has two options for containers to store files in the host machine, so
+Docker has two options for containers to store files on the host machine, so
 that the files are persisted even after the container stops: _volumes_, and
-_bind mounts_. If you're running Docker on Linux you can also use a _tmpfs mount_.
-If you're running Docker on Windows you can also use a _named pipe_.
+_bind mounts_. 
 
-Keep reading for more information about these two ways of persisting data.
+Docker also supports containers storing files in-memory on the the host machine. Such files are not persisted.
+If you're running Docker on Linux, _tmpfs mount_ is used to store files in the host's system memory.
+If you're running Docker on Windows, _named pipe_ is used to store files in the host's system memory.
+
+Keep reading for more information about persisting data or taking advantage of in-memory files.
 
 ## Choose the right type of mount
 

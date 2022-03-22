@@ -13,7 +13,46 @@ toc_max: 2
 
 ### What are the system requirements for Docker Desktop?
 
-For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](../docker-for-mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](../docker-for-windows/install.md#system-requirements).
+For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](windows/install.md#system-requirements).
+
+### Where does Docker Desktop get installed on my machine?
+
+By default, Docker Desktop is installed at the following location:
+
+- On Mac: `/Applications/Docker.app`
+- On Windows: `C:\Program Files\Docker\Docker`
+
+### Do I need to pay to use Docker Desktop?
+
+Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
+The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022, for those that will require a paid subscription to use Docker Desktop. When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
+
+Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected. For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
+
+### Can I use Docker Desktop offline?
+
+Yes, you can use Docker Desktop offline. However, you
+will not be able to access features that require an active internet
+connection. Additionally, any functionality that requires you to sign in will
+also not work while using Docker Desktop offline or in air-gapped environments.
+This includes:
+
+- The in-app [Quick Start Guide](/mac/install.md#quick-start-guide)
+- Pull or push an image to Docker Hub
+- [Image Access Management](../docker-hub/image-access-management.md)
+- [Vulnerability scanning](../docker-hub/vulnerability-scanning.md)
+- View remote images in the [Docker Dashboard](dashboard.md)
+- Set up [Dev Environments](dev-environments.md)
+- Docker build when using [Buildkit](../develop/develop-images/build_enhancements.md). You can work around this by disabling
+  BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
+- Deploying an app to the cloud through Compose
+  [ACI](../cloud/aci-integration.md) and [ECS](../cloud/ecs-integration.md)
+  integrations
+- [Kubernetes](kubernetes.md) (Images are download when you enable Kubernetes for the first time)
+- [Check for updates](/mac/install.md#updates) (manual and automatic)
+- [In-app diagnostics](/mac/troubleshoot.md#diagnose-and-feedback) (including the [Self-diagnose tool](/mac/troubleshoot.md#self-diagnose-tool))
+- Tip of the week
+- Sending usage statistics
 
 ### What is an experimental feature?
 
@@ -21,7 +60,7 @@ For information about Docker Desktop system requirements, see [Docker Desktop fo
 
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 
-You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](../docker-for-mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](../docker-for-windows/troubleshoot.md).
+You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See [Mac Logs and Troubleshooting](mac/troubleshoot.md) topic and Windows Logs and [Windows Logs and Troubleshooting](windows/troubleshoot.md).
 
 If you do not find a solution in Troubleshooting, browse issues on
 [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} or [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"} GitHub repository, or create a new one.
@@ -38,8 +77,8 @@ variables, specify these to connect to Docker instances through Unix sockets.
 
 For example:
 
-```bash
-export DOCKER_HOST=unix:///var/run/docker.sock
+```console
+$ export DOCKER_HOST=unix:///var/run/docker.sock
 ```
 
 Docker Desktop Windows users can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:
@@ -52,19 +91,19 @@ For details, see [Docker Engine API](../engine/api/index.md).
 Both Mac and Windows have a changing IP address (or none if you have no network access). On both Mac and Windows, we recommend that you connect to the special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host. This is for development purposes and does not work in a production environment outside of Docker Desktop.
 
 For more information and examples, see how to connect from a container to a service on the host
-[on Mac](../docker-for-mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](../docker-for-windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+[on Mac](mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
 ### How do I connect to a container from Mac or Windows?
 
 We recommend that you publish a port, or connect from another container. Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
 
 For more information and examples, see
-[I want to connect to a container from Mac](../docker-for-mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](../docker-for-windows/networking.md#i-want-to-connect-to-a-container-from-the-mac).
+[I want to connect to a container from Mac](mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) and [I want to connect to a container from Windows](windows/networking.md#i-want-to-connect-to-a-container-from-windows).
 
 ### How do I add custom CA certificates?
 
-Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates on Mac](../docker-for-mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](../docker-for-windows/index.md#adding-tls-certificates).
+Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client-side certs, see
+[Add TLS certificates on Mac](mac/index.md#add-tls-certificates) and [Add TLS certificates on Windows](windows/index.md#adding-tls-certificates).
 
 ### Can I pass through a USB device to a container?
 
@@ -77,15 +116,28 @@ Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or
 VMware Fusion on a Mac provided that the VM is properly configured. However,
 problems and intermittent failures may still occur due to the way these apps
 virtualize the hardware. For these reasons, **Docker Desktop is not supported in
-nested virtualization scenarios**. It might work in some cases, and not in others.
+nested virtualization scenarios**. It might work in some cases and not in others.
 
-For more information, see [Running Docker Desktop in nested virtualization scenarios](../docker-for-windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
+For more information, see [Running Docker Desktop in nested virtualization scenarios](windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
+
+### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
+
+Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases, 
+Docker Desktop will launch successfully, but some screens may appear green, distorted, 
+or have some visual artifacts.
+
+To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
+
+- **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
+- **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+ 
+After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
 
 ## Releases
 
 ### When will Docker Desktop move to a cumulative release stream?
 
-Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](../docker-for-mac/install.md#automatic-updates).
+Starting with version 3.0.0, Docker Desktop will be available as a single, cumulative release stream. This is the same version for both Stable and Edge users. The next release after Docker Desktop 3.0.0 will be the first to be applied as a delta update. For more information, see [Automatic updates](mac/install.md#updates).
 
 ### How do new users install Docker Desktop?
 
@@ -93,7 +145,7 @@ Each Docker Desktop release is also delivered as a full installer for new users.
 
 ### How frequent will new releases be?
 
-New releases will be available roughly monthly, similar to Edge today, unless there are critical fixes that need to be released sooner.
+New releases will be available roughly monthly, similar to Edge today unless there are critical fixes that need to be released sooner.
 
 ### How do I ensure that all users on my team are using the same version?
 
@@ -111,9 +163,9 @@ Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a
 
 ### Does Docker Desktop offer support?
 
-Yes, Docker Desktop offers support for Pro and Team users. For more information, see [Docker Desktop Support](../docker-for-mac/troubleshoot.md#support).
+Yes, Docker Desktop offers support for users with a paid Docker subscription. For more information, see [Docker Desktop Support](mac/troubleshoot.md#support).
 
-For information about the pricing plans and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+For information about Docker subscriptions and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
 ### What kind of feedback are you looking for?
 
@@ -126,7 +178,9 @@ command line integration, and so on. Tell us about the issues you are experienci
 When uploading diagnostics to help Docker with investigating issues, the uploaded diagnostics bundle may contain personal data such as usernames and IP addresses. The diagnostics bundles are only accessible to Docker, Inc.
 employees who are directly involved in diagnosing Docker Desktop issues.
 
-By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues, but may derive high-level (non personal) metrics such as the rate of issues from it.
+By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues but may derive high-level (non personal) metrics such as the rate of issues from it.
+
+For more information, see [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
 
 ## Mac FAQs
 
@@ -136,7 +190,7 @@ By default Docker, Inc. will delete uploaded diagnostics bundles after 30 days. 
 
 ### Is Docker Desktop compatible with Apple silicon processors?
 
-Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](../docker-for-mac/apple-silicon.md).
+Yes, you can now install Docker Desktop for Mac on Apple silicon. For more information, see [Docker Desktop for Apple silicon](mac/apple-silicon.md).
 
 ### What is HyperKit?
 
@@ -147,7 +201,7 @@ VirtualBox or VMWare Fusion.
 
 ### What is the benefit of HyperKit?
 
-HyperKit is thinner than VirtualBox and VMWare fusion, and the version we include is customized for Docker workloads on Mac.
+HyperKit is thinner than VirtualBox and VMWare fusion, and the version included is customized for Docker workloads on Mac.
 
 ### Why is com.docker.vmnetd still running after I quit the app?
 
@@ -161,13 +215,13 @@ Docker.app connects to it, so it's safe to ignore.
 
 Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.
 
-### Why is Windows 10 required?
+### Why is Windows 10 or Windows 11 required?
 
 Docker Desktop uses the Windows Hyper-V features. While older Windows versions have Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop to work.
 
 ### Can I install Docker Desktop on Windows 10 Home?
 
-If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](../docker-for-windows/wsl.md).
+If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){: target="_blank" rel="noopener" class="_"} with the [WSL 2 backend](windows/wsl.md).
 
 ### Can I run Docker Desktop on Windows Server?
 
@@ -190,22 +244,27 @@ Right-click to add the user to the group. Log out and log back in for the change
 ### Why does Docker Desktop fail to start when anti-virus software is installed?
 
 Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
-Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../docker-for-windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
+Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
 
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 
 Docker Desktop does not enable you to control (`chmod`)
-the Unix-style permissions on [shared volumes](../docker-for-windows/index.md#file-sharing) for
+the Unix-style permissions on [shared volumes](windows/index.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
 [0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for
 `group`) which is not configurable.
 
 For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](../docker-for-windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+[Permissions errors on data directories for shared volumes](windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
 
 ### How do symlinks work on Windows?
 
 Docker Desktop supports two types of symlinks: Windows native symlinks and symlinks created inside a container.
 
-The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks): target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
+The Windows native symlinks are visible within the containers as symlinks, whereas symlinks created inside a container are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks){:target="_blank" rel="noopener" class="_"}. These are regular Windows files with a special metadata. Therefore the symlinks created inside a container appear as symlinks inside the container, but not on the host.
+
+### File sharing with Kubernetes and WSL 2
+
+Docker Desktop mounts the Windows host filesystem under `/run/desktop` inside the container running Kubernetes.
+See the [Stack Overflow post](https://stackoverflow.com/questions/67746843/clear-persistent-volume-from-a-kubernetes-cluster-running-on-docker-desktop/69273405#69273){:target="_blank" rel="noopener" class="_"} for an example of how to configure a Kubernetes Persistent Volume to represent directories on the host.

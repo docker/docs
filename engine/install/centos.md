@@ -3,20 +3,13 @@ description: Instructions for installing Docker Engine on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /ee/docker-ee/centos/
-- /ee/docker-ee/rhel/
-- /engine/installation/centos/
 - /engine/installation/centos/
 - /engine/installation/linux/centos/
 - /engine/installation/linux/docker-ce/centos/
 - /engine/installation/linux/docker-ee/centos/
-- /engine/installation/linux/docker-ee/rhel/
-- /engine/installation/linux/rhel/
-- /engine/installation/rhel/
 - /install/linux/centos/
 - /install/linux/docker-ce/centos/
 - /install/linux/docker-ee/centos/
-- /install/linux/docker-ee/rhel/
-- /installation/rhel/
 title: Install Docker Engine on CentOS
 toc_max: 4
 ---
@@ -141,7 +134,8 @@ $ sudo yum-config-manager \
     > `yum update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
@@ -170,7 +164,8 @@ $ sudo yum-config-manager \
     $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 
 3.  Start Docker.
 
@@ -186,9 +181,9 @@ $ sudo yum-config-manager \
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
-Docker Engine is installed and running. You need to use `sudo` to run Docker
+This installs and runs Docker Engine. Use `sudo` to run Docker
 commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -208,7 +203,9 @@ a new file each time you want to upgrade Docker Engine.
     and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 
@@ -236,9 +233,9 @@ a new file each time you want to upgrade Docker Engine.
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
-Docker Engine is installed and running. You need to use `sudo` to run Docker commands.
+This installs and runs Docker Engine. Use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -247,7 +244,7 @@ steps.
 
 To upgrade Docker Engine, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `yum -y upgrade`
-instead of `yum -y install`, and pointing to the new file.
+instead of `yum -y install`, and point to the new file.
 
 {% include install-script.md %}
 

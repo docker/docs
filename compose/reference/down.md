@@ -6,7 +6,7 @@ notoc: true
 ---
 
 ```none
-Usage: down [options]
+Usage: docker-compose down [options]
 
 Options:
     --rmi type              Remove images. Type must be one of:

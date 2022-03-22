@@ -112,14 +112,14 @@ the mount point of the secret within a given container.
 ## Read more about `docker secret` commands
 
 Use these links to read about specific commands, or continue to the
-[example about using secrets with a service](secrets.md#example-use-secrets-with-a-service).
+[example about using secrets with a service](secrets.md#simple-example-get-started-with-secrets).
 
 - [`docker secret create`](../reference/commandline/secret_create.md)
 - [`docker secret inspect`](../reference/commandline/secret_inspect.md)
 - [`docker secret ls`](../reference/commandline/secret_ls.md)
 - [`docker secret rm`](../reference/commandline/secret_rm.md)
 - [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
+- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#add-or-remove-secrets) flags for `docker service update`
 
 ## Examples
 
@@ -149,7 +149,7 @@ real-world example, continue to
     input because the last argument, which represents the file to read the
     secret from, is set to `-`.
 
-    ```bash
+    ```console
     $ printf "This is a secret" | docker secret create my_secret_data -
     ```
 
@@ -157,14 +157,14 @@ real-world example, continue to
     the container can access the secret at `/run/secrets/<secret_name>`, but
     you can customize the file name on the container using the `target` option.
 
-    ```bash
+    ```console
     $ docker service  create --name redis --secret my_secret_data redis:alpine
     ```
 
 3.  Verify that the task is running without issues using `docker service ps`. If
     everything is working, the output looks similar to this:
 
-    ```bash
+    ```console
     $ docker service ps redis
 
     ID            NAME     IMAGE         NODE              DESIRED STATE  CURRENT STATE          ERROR  PORTS
@@ -174,7 +174,7 @@ real-world example, continue to
     If there were an error, and the task were failing and repeatedly restarting,
     you would see something like this:
 
-    ```bash
+    ```console
     $ docker service ps redis
 
     NAME                      IMAGE         NODE  DESIRED STATE  CURRENT STATE          ERROR                      PORTS
@@ -192,7 +192,7 @@ real-world example, continue to
     how to find the container ID, and the second and third commands use shell
     completion to do this automatically.
 
-    ```bash
+    ```console
     $ docker ps --filter name=redis -q
 
     5cb1c2348a59
@@ -220,8 +220,7 @@ real-world example, continue to
 6.  Try removing the secret. The removal fails because the `redis` service is
     running and has access to the secret.
 
-    ```bash
-
+    ```console
     $ docker secret ls
 
     ID                          NAME                CREATED             UPDATED
@@ -237,7 +236,7 @@ real-world example, continue to
 7.  Remove access to the secret from the running `redis` service by updating the
     service.
 
-    ```bash
+    ```console
     $ docker service update --secret-rm my_secret_data redis
     ```
 
@@ -253,7 +252,7 @@ real-world example, continue to
 
 7.  Stop and remove the service, and remove the secret from Docker.
 
-    ```bash
+    ```console
     $ docker service rm redis
 
     $ docker secret rm my_secret_data
@@ -277,6 +276,7 @@ This example assumes that you have PowerShell installed.
       </body>
     </html>
     ```
+
 2.  If you have not already done so, initialize or join the swarm.
 
     ```powershell
@@ -336,13 +336,13 @@ generate the site key and certificate, name the files `site.key` and
 
 1.  Generate a root key.
 
-    ```bash
+    ```console
     $ openssl genrsa -out "root-ca.key" 4096
     ```
 
 2.  Generate a CSR using the root key.
 
-    ```bash
+    ```console
     $ openssl req \
               -new -key "root-ca.key" \
               -out "root-ca.csr" -sha256 \
@@ -362,7 +362,7 @@ generate the site key and certificate, name the files `site.key` and
 
 4.  Sign the certificate.
 
-    ```bash
+    ```console
     $ openssl x509 -req  -days 3650  -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
@@ -371,13 +371,13 @@ generate the site key and certificate, name the files `site.key` and
 
 5.  Generate the site key.
 
-    ```bash
+    ```console
     $ openssl genrsa -out "site.key" 4096
     ```
 
 6.  Generate the site certificate and sign it with the site key.
 
-    ```bash
+    ```console
     $ openssl req -new -key "site.key" -out "site.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
@@ -399,7 +399,7 @@ generate the site key and certificate, name the files `site.key` and
 
 8.  Sign the site certificate.
 
-    ```bash
+    ```console
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
         -CA "root-ca.crt" -CAkey "root-ca.key"  -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
@@ -440,7 +440,7 @@ generate the site key and certificate, name the files `site.key` and
     secret from on the host machine's filesystem. In these examples, the secret
     name and the file name are the same.
 
-    ```bash
+    ```console
     $ docker secret create site.key site.key
 
     $ docker secret create site.crt site.crt
@@ -448,7 +448,7 @@ generate the site key and certificate, name the files `site.key` and
     $ docker secret create site.conf site.conf
     ```
 
-    ```bash
+    ```console
     $ docker secret ls
 
     ID                          NAME                  CREATED             UPDATED
@@ -474,7 +474,7 @@ generate the site key and certificate, name the files `site.key` and
     secret available in a different path. The example below creates a symbolic
     link to the true location of the `site.conf` file so that Nginx can read it:
 
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -490,7 +490,7 @@ generate the site key and certificate, name the files `site.key` and
     secret is made available at `/etc/nginx/conf.d/site.conf` inside the container
     without the use of symbolic links:
 
-    ```bash
+    ```console
     $ docker service create \
          --name nginx \
          --secret site.key \
@@ -512,7 +512,7 @@ generate the site key and certificate, name the files `site.key` and
 
 5.  Verify that the Nginx service is running.
 
-    ```bash
+    ```console
     $ docker service ls
 
     ID            NAME   MODE        REPLICAS  IMAGE
@@ -527,7 +527,7 @@ generate the site key and certificate, name the files `site.key` and
 6.  Verify that the service is operational: you can reach the Nginx
     server, and that the correct TLS certificate is being used.
 
-    ```bash
+    ```console
     $ curl --cacert root-ca.crt https://localhost:3000
 
     <!DOCTYPE html>
@@ -557,7 +557,7 @@ generate the site key and certificate, name the files `site.key` and
     </html>
     ```
 
-    ```bash
+    ```console
     $ openssl s_client -connect localhost:3000 -CAfile root-ca.crt
 
     CONNECTED(00000003)
@@ -601,7 +601,7 @@ generate the site key and certificate, name the files `site.key` and
 7.  To clean up after running this example, remove the `nginx` service and the
     stored secrets.
 
-    ```bash
+    ```console
     $ docker service rm nginx
 
     $ docker secret rm site.crt site.key site.conf
@@ -647,7 +647,7 @@ line.
     The last argument is set to `-`, which indicates that the input is read from
     standard input.
 
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password -
 
     l1vinzevzhj4goakjap5ya409
@@ -660,13 +660,13 @@ line.
     shared with the WordPress service created later. It's only needed to
     bootstrap the `mysql` service.
 
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_root_password -
     ```
 
     List the secrets managed by Docker using `docker secret ls`:
 
-    ```bash
+    ```console
     $ docker secret ls
 
     ID                          NAME                  CREATED             UPDATED
@@ -680,7 +680,7 @@ line.
     between the MySQL and WordPress services. There is no need to expose the
     MySQL service to any external host or container.
 
-    ```bash
+    ```console
     $ docker network create -d overlay mysql_private
     ```
 
@@ -711,7 +711,7 @@ line.
       user cannot create or drop databases or change the MySQL
       configuration.
 
-      ```bash
+      ```console
       $ docker service create \
            --name mysql \
            --replicas 1 \
@@ -728,7 +728,7 @@ line.
 
 4.  Verify that the `mysql` container is running using the `docker service ls` command.
 
-    ```bash
+    ```console
     $ docker service ls
 
     ID            NAME   MODE        REPLICAS  IMAGE
@@ -768,7 +768,7 @@ line.
     - Stores its data, such as themes and plugins, in a volume called `wpdata`
       so these files  persist when the service restarts.
 
-    ```bash
+    ```console
     $ docker service create \
          --name wordpress \
          --replicas 1 \
@@ -786,7 +786,7 @@ line.
 6.  Verify the service is running using `docker service ls` and
     `docker service ps` commands.
 
-    ```bash
+    ```console
     $ docker service ls
 
     ID            NAME       MODE        REPLICAS  IMAGE
@@ -794,7 +794,7 @@ line.
     nzt5xzae4n62  wordpress  replicated  1/1       wordpress:latest
     ```
 
-    ```bash
+    ```console
     $ docker service ps wordpress
 
     ID            NAME         IMAGE             NODE  DESIRED STATE  CURRENT STATE           ERROR  PORTS
@@ -836,7 +836,7 @@ use it, then remove the old secret.
 
 1.  Create the new password and store it as a secret named `mysql_password_v2`.
 
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password_v2 -
     ```
 
@@ -844,7 +844,7 @@ use it, then remove the old secret.
     Remember that you cannot update or rename a secret, but you can revoke a
     secret and grant access to it using a new target filename.
 
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password mysql
 
@@ -874,7 +874,7 @@ use it, then remove the old secret.
 
     First, find the ID of the `mysql` container task.
 
-    ```bash
+    ```console
     $ docker ps --filter name=mysql -q
 
     c7705cf6176f
@@ -883,24 +883,24 @@ use it, then remove the old secret.
     Substitute the ID in the command below, or use the second variant which
     uses shell expansion to do it all in a single step.
 
-    ```bash
+    ```console
     $ docker container exec <CONTAINER_ID> \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
     **or**:
 
-    ```bash
+    ```console
     $ docker container exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
 4.  Update the `wordpress` service to use the new password, keeping the target
-    path at `/run/secrets/wp_db_secret` and keeping the file permissions at
+    path at `/run/secrets/wp_db_password` and keeping the file permissions at
     `0400`.  This triggers a rolling restart of the WordPress service and
     the new secret is used.
 
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          --secret-add source=mysql_password_v2,target=wp_db_password,mode=0400 \
@@ -917,8 +917,7 @@ use it, then remove the old secret.
 6.  Revoke access to the old secret from the MySQL service and
     remove the old secret from Docker.
 
-    ```bash
-
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          mysql
@@ -932,7 +931,7 @@ use it, then remove the old secret.
     WordPress service, the MySQL container, the `mydata` and `wpdata` volumes,
     and the Docker secrets.
 
-    ```bash
+    ```console
     $ docker service rm wordpress mysql
 
     $ docker volume rm mydata wpdata
@@ -948,7 +947,7 @@ adapting your image to take advantage of Docker secrets. One way to do this is
 to ensure that each parameter you pass to the image when creating the container
 can also be read from a file.
 
-Many of the official images in the
+Many of the Docker Official Images in the
 [Docker library](https://github.com/docker-library/), such as the
 [wordpress](https://github.com/docker-library/wordpress/)
 image used in the above examples, have been updated in this way.
@@ -1029,4 +1028,3 @@ for that secret data.
 
 More information on short and long syntax for secrets can be found at
 [Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).
-
