@@ -3,11 +3,11 @@ description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
 title: Configure Single Sign-on
 ---
-This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD IdPs through Auth0. You can enable SSO on organization's that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
+This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD authentication methods. You can enable SSO on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
 
-When SSO is enabled, users are redirected to your provider’s authentication page to authenticate using SSO. They cannot authenticate using their personal login credentials (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign into Docker Hub or Docker Desktop to initiate the SSO authentication process.
+When SSO is enabled, users are redirected to your provider’s authentication page to log in. They cannot authenticate using their Docker login credentials  (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign into Docker Hub or Docker Desktop to initiate the SSO authentication process.
 
-Before enabling SSO in Docker Hub, administrators must work with their identity provider to configure their IdP to work with Docker Hub. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
+Before enabling SSO in Docker Hub, administrators must configure their identity provider to configure their IdP to work with Docker Hub. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
 
 After establishing the connection between the IdP server and Docker Hub, administrators log into the organization in Docker Hub and complete the SSO enablement process. See the section **Enable SSO in Docker Hub** for detailed instructions.
 
@@ -16,7 +16,7 @@ To enable SSO in Docker Hub, you need the following information from your identi
 * **SAML 2.0**: Single Sign-On URL and the X.509 signing certificate
 * **Azure AD**: Client ID (a unique identifier for your registered AD application), Client Secret (a string used to gain access to your registered Azure AD application), and AD Domain details
 
-We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests.
+We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests. Guests will continue to authenticate through Docker with their Docker login credentials (Docker ID and password).
 
 ## Prerequisites
 
@@ -145,8 +145,8 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 
 After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log into Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.
 
-1. Authenticate via email instead of using your Docker ID, and test the login process.
-2. To authenticate via CLI, your users must have a PAT before you enforce SSO for CLI users.
+1. Authenticate through email instead of using your Docker ID, and test the login process.
+2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 
 ## Enforce SSO in Docker Hub
 
@@ -169,9 +169,7 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 
 ## Manage users when SSO is enabled
 
-To add a member to your organization:
-1. Create an account for your members in your IdP.
-2. Add and invite your members to your organization.
+You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
 
  > **Note:**
  >
