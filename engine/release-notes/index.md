@@ -22,6 +22,27 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.14
+2022-03-23
+
+This release of Docker Engine updates the default inheritable capabilities for
+containers to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769),
+a new version of the `containerd.io` runtime is also included to address the same
+issue.
+
+### Daemon
+
+- Update the default inheritable capabilities.
+
+### Builder
+
+- Update the default inheritable capabilities for containers used during build.
+
+### Packaging
+
+- Update containerd (`containerd.io` package) to [v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11).
+- Update `docker buildx` to [v0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1).
+
 ## 20.10.13
 2022-03-10
 
