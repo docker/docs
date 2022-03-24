@@ -93,6 +93,8 @@ File share settings are:
 
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
 
+- **Remove a Directory**: Click `-` next to the directory you want to remove
+
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
@@ -131,6 +133,8 @@ Docker Desktop detects HTTP/HTTPS Proxy Settings from macOS and automatically
 propagates these to Docker. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
 pulling containers.
+
+If you want to configure proxies manually, turn on the **Manual proxy configuration** setting.
 
 Your proxy settings, however, will not be propagated into the containers you start.
 If you wish to set the proxy settings for your containers, you need to define
@@ -191,7 +195,11 @@ To enable virtioFS:
 Docker Desktop includes a standalone Kubernetes server that runs on your Mac, so
 that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
-For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+- Select **Show system containers (advanced)** to view internal containers when using Docker commands.
+
+- Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+
+- Click **Apply & Restart** for your changes to take effect.
 
 ### Reset
 
@@ -210,7 +218,7 @@ The **Software Updates** section notifies you of any updates available to Docker
 > Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. Update to [Docker Desktop 4.2.0](../mac/release-notes/index.md) to start using this feature.
 {: .important}
 
-Turn off the check for updates by clearing the **Automatically Check for Updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+Turn off the check for updates by clearing the **Automatically check for updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
 
 To allow Docker Desktop to automatically download new updates in the background, select **Always download updates**. This downloads newer versions of Docker Desktop when an update becomes available. After downloading the update, click **Apply and Restart** to install the update. You can do this either through the Docker menu or in the **Updates** section in the Docker Dashboard.
 
