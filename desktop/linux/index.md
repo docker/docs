@@ -24,61 +24,21 @@ To install Docker Desktop for Linux:
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
 2. Download and install the Tech Preview Debian package:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/74258/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/76643/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
-3. Check whether the user belongs to `docker` and `kvm` groups. You may need to restart the host to load the group configuration (automated in post-install script).
 
   There are a few post-install configuration steps done through the maintainers' scripts (post-install script contained
   in the deb package.
 
-  For each user, the post-install script:
-
-   - installs systemd units
-   - configures `desktop-linux` as the default Docker CLI context
-   - installs Compose and the `docker scan` plugins to `~/.docker/cli-plugins`
-   - enables Compose V2 as the default `docker-compose`
-   - adds user to `docker` and `kvm` groups
-
-  In addition, the post-install script:
+  The post-install script:
 
   - sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
   - adds a DNS name for Kubernetes to `/etc/hosts`
-  - creates the Docker Desktop file for the application launcher
-
-## Check the shared memory
-
-Before you run Docker Desktop for Linux, verify whether the shared memory available on the host is **higher** than the memory allocated to the VM. By default, Docker Desktop allocates half of the memory and CPU from the host. The **available shared memory** should be higher than this.
-
-```console
-$ df -h /dev/shm
-Filesystem      Size  Used Avail Use% Mounted on
-tmpfs            16G  200M   16G   2% /dev/shm
-```
-
-To set the shared memory size, run:
-
-```console
-$ sudo mount -o remount,size=<the-size-you-want-in-GB> /dev/shm
-```
-
-To ensure this setting persists after a reboot, add the following entry to the `/etc/fstab`:
-
-```console
-none    /dev/shm    tmpfs   defaults,size=<the-size-you-want-in-GB>   0   0
-```
-
-For example:
-
-```console
-none    /dev/shm    tmpfs   defaults,size=8G    0   0
-```
+  - creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`
+  - installs systemd units for each user
 
 ## Launch Docker Desktop
-
-> **Note:**
->
-> You may need to restart the host to load the group configuration.
 
 To start Docker Desktop for Linux, search **Docker Desktop** on the
 **Applications** menu and open it. This launches the whale menu icon and opens
@@ -90,24 +50,23 @@ Alternatively, open a terminal and run:
 $ systemctl --user start docker-desktop
 ```
 
-When Docker Desktop starts, it creates a dedicated context that the Docker CLI can use as a target. This is to avoid a clash with a local Docker Engine that may be running on the Linux host and using the default context.
-
-Run the following command to switch to the desktop-linux context.
-
-```console
- $ docker context use desktop-linux
-```
+When Docker Desktop starts, it creates a dedicated context that the Docker CLI
+can use as a target and sets it as the current context in use. This is to avoid
+a clash with a local Docker Engine that may be running on the Linux host and
+using the default context. On shutdown, Docker Desktop resets the current
+context to the previous one.
 
 The Docker Desktop installer updates Docker Compose and the Docker CLI binaries
-on the host. It installs Docker Compose V2 as the default Docker Compose. It
-also replaces the default Docker CLI with a new Docker CLI binary that includes
-cloud-integration capabilities.
+on the host. It installs Docker Compose V2 and gives users the choice to
+link it as docker-compose from the Settings panel. Docker Desktop installs
+the new Docker CLI binary that includes cloud-integration capabilities in `/usr/local/bin`
+and creates a symlink to the classic Docker CLi at `/usr/local/bin/com.docker.cli`.
 
 After you’ve successfully installed Docker Desktop, you can check the versions
 of these binaries by running the following command:
 
 ```console
-$ docker-compose version
+$ docker compose version
 Docker Compose version v2.2.3
 
 $ docker --version
@@ -120,6 +79,12 @@ Version:           20.10.12
 API version:       1.41
 ...
 ```
+
+> **Note:**
+>
+> Docker Desktop relies on `pass` to store credentials. Before signing in to Docker Hub
+> from the Docker Dashboard or the Docker menu, you must initialize `pass`. Docker Desktop
+> displays a warning message if `pass` is not initialized.
 
 To enable Docker Desktop to start on login, from the Docker menu, select
 **Settings** > **General** > **Start Docker Desktop when you log in**.
@@ -164,16 +129,16 @@ To remove Docker Desktop for Linux, run:
 $ sudo apt remove docker-desktop
 ```
 
+For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
+the remaining systemd service files.
+
+```console
+$ rm -r $HOME/.docker/desktop
+$ sudo rm /usr/local/bin/com.docker.cli
+$ sudo apt purge docker-desktop
+```
+
 ## Known issues
-
- - The Docker CLI login flow has some inconsistencies that we are currently investigating. If you experience any issues when trying to log in, remove the `credsStore` property from `~/.docker/config.json` and restart Docker Desktop (run either
- `systemctl --user restart docker-desktop` or quit Docker Desktop and relaunch).
-
- - Docker Desktop stores the passwords in base-64 encoded plaintext. Integration with `pass` is currently a work in progress.
-
- - After launching Docker Desktop, you must remove `~/.docker/scan/config.json` for `docker scan` to work.
-
- - Dev Environments are not yet available.
 
  - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
 
@@ -185,7 +150,7 @@ $ sudo apt remove docker-desktop
 
 Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
-1. **To ensure  that Docker Desktop provides a consistent experience across platforms**.
+1. **To ensure that Docker Desktop provides a consistent experience across platforms**.
 
     During research, the most frequently cited reason for users wanting Docker
     Desktop for Linux (DD4L) was to ensure a consistent Docker Desktop
