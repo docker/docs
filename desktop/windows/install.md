@@ -102,6 +102,8 @@ Looking for information on using Windows containers?
 
 ## Install Docker Desktop on Windows
 
+### Install interactively
+
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
     If you haven't already downloaded the installer (`Docker Desktop Installer.exe`), you can get it from
@@ -109,14 +111,33 @@ Looking for information on using Windows containers?
     It typically downloads to your `Downloads` folder, or you can run it from
     the recent downloads bar at the bottom of your web browser.
 
-2. When prompted, ensure the **Enable Hyper-V Windows Features** or the **Install required Windows components for WSL 2** option is selected on the Configuration page.
+2. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
-3. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+    If your system only supports one of the two options, you will not be able to select which backend to use.
+
+3Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
 4. When the installation is successful, click **Close** to complete the installation process.
 
 5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an **administrator** and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
 Log out and log back in for the changes to take effect.
+
+### Install from the command line
+
+After downloading **Docker Desktop Installer.exe**, to install Docker Desktop, run for instance the following command in a terminal:
+```
+"Docker Desktop Installer.exe" --quiet --accept-license --backend=wsl-2
+```
+
+The installer accepts the following flags:
+- `--quiet`: suppresses information output when running the installer
+- `--accept-license`: disables prompting for license acceptance on Docker Desktop first run
+- `--backend`: selects the backend to use for Docker Desktop, `hyper-v` or `wsl-2` (default)
+
+If your admin account is different to your user account, you must add the user to the **docker-users** group:
+```
+net localgroup docker-users <user> /add
+```
 
 ## Start Docker Desktop
 
