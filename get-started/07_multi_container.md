@@ -98,8 +98,13 @@ For now, we will create the network first and attach the MySQL container at star
     +--------------------+
     5 rows in set (0.00 sec)
     ```
+Exit the MySQL shell to return to the shell on our machine.
 
-    Hooray! We have our `todos` database and it's ready for us to use!
+   ```console
+   mysql> exit
+   ```
+
+   Hooray! We have our `todos` database and it's ready for us to use!
 
 ## Connect to MySQL
 
@@ -110,20 +115,13 @@ address)?
 To figure it out, we're going to make use of the [nicolaka/netshoot](https://github.com/nicolaka/netshoot) container,
 which ships with a _lot_ of tools that are useful for troubleshooting or debugging networking issues.
 
-
-1. Exit MySQL if you haven't already (if you have typed any thing before press `;` and hit enter).
-
-    ```console
-    mysql> exit
-    ```
-
-2. Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.
+1. Start a new container using the nicolaka/netshoot image. Make sure to connect it to the same network.
 
     ```console
     $ docker run -it --network todo-app nicolaka/netshoot
     ```
 
-3. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
+2. Inside the container, we're going to use the `dig` command, which is a useful DNS tool. We're going to look up
    the IP address for the hostname `mysql`.
 
     ```console
