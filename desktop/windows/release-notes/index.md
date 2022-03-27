@@ -23,14 +23,67 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.5.1
-2022-02-15
+## Docker Desktop 4.6.1
+2022-03-22
 
 > Download Docker Desktop
 >
 > [For
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
+
+### Upgrades
+
+- [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
+
+### Bug fixes and minor changes
+
+- Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
+- Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
+- Prevented spinning in vpnkit-forwarder filling the logs with error messages.
+
+## Docker Desktop 4.6.0
+2022-03-14
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/75818/Docker%20Desktop%20Installer.exe)
+
+### Security
+
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847){: target="_blank" rel="noopener" class="_"}, aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
+- Fixed [CVE-2022-26659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26659){: target="_blank" rel="noopener" class="_"}, which could allow an attacker to overwrite any administrator writable file on the system during the installation or the update of Docker Desktop.
+
+### New
+
+- The Docker Dashboard Volume Management feature now offers the ability to efficiently clean up volumes using multi-select checkboxes.
+
+### Upgrades
+
+- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
+- [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
+- [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
+- [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
+- [runc v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3)
+- [Go 1.17.8](https://golang.org/doc/go1.17)
+- [Linux kernel 5.10.104](https://hub.docker.com/layers/docker/for-desktop-kernel/5.10.104-379cadd2e08e8b25f932380e9fdaab97755357b3/images/sha256-7753b60f4544e5c5eed629d12151a49c8a4b48d98b4fb30e4e65cecc20da484d?context=explore)
+
+### Bug fixes and minor changes
+
+- Fixed uploading diagnostics when an HTTPS proxy is set.
+- Fixed the UI stuck in `starting` state forever although Docker Desktop is working fine from the command line.
+- Fixed missing Docker Desktop systray icon [docker/for-win#12573](https://github.com/docker/for-win/issues/12573)
+- Made checking for updates from the systray menu open the Software updates settings section.
+- Fixed Registry Access Management under WSL 2 with latest 5.10.60.1 kernel.
+- Fixed a UI crash when selecting the containers of a Compose application started from a WSL 2 environment. Fixes [docker/for-win#12567](https://github.com/docker/for-win/issues/12567).
+- Fixed copying text from terminal in Quick Start Guide. Fixes [docker/for-win#12444](https://github.com/docker/for-win/issues/12444).
+
+## Docker Desktop 4.5.1
+2022-02-15
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/74721/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 

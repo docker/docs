@@ -93,6 +93,8 @@ File share settings are:
 
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
 
+- **Remove a Directory**: Click `-` next to the directory you want to remove
+
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
@@ -132,6 +134,8 @@ propagates these to Docker. For example, if you set your
 proxy settings to `http://proxy.example.com`, Docker uses this proxy when
 pulling containers.
 
+If you want to configure proxies manually, turn on the **Manual proxy configuration** setting.
+
 Your proxy settings, however, will not be propagated into the containers you start.
 If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
@@ -162,56 +166,40 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-### Command Line
+### Experimental Features
 
-On the Command Line page, you can specify whether or not to enable experimental features.
+On the **Experimental Features** page, you can specify whether or not to enable experimental features.
 
-{% include experimental.md %}
+Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
 
-You can toggle the experimental features on and off in Docker Desktop. If you toggle the experimental features off, Docker Desktop uses the current generally available release of Docker Engine.
+#### Enable the new Apple Virtualization framework
 
-You can see whether you are running experimental mode at the command line. If
-`Experimental` is `true`, then Docker is running in experimental mode, as shown
-here. (If `false`, Experimental mode is off.)
+Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
 
-```console
-$ docker version
+#### Enable VirtioFS
 
-Client: Docker Engine - Community
- Version:           19.03.1
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        74b1e89
- Built:             Thu Jul 25 21:18:17 2019
- OS/Arch:           darwin/amd64
- Experimental:      true
+ Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
 
-Server: Docker Engine - Community
- Engine:
-  Version:          19.03.1
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       74b1e89
-  Built:            Thu Jul 25 21:17:52 2019
-  OS/Arch:          linux/amd64
-  Experimental:     true
- containerd:
-  Version:          v1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
- runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
-```
+To enable virtioFS:
+
+1. Verify that you are on the following macOS version:
+   - macOS 12.2 or later (for Apple Silicon)
+   - macOS 12.3 or later (for Intel)
+
+2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
+
+3. Click **Apply & Restart**.
 
 ### Kubernetes
 
 Docker Desktop includes a standalone Kubernetes server that runs on your Mac, so
 that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
 
-For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+- Select **Show system containers (advanced)** to view internal containers when using Docker commands.
+
+- Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+
+- Click **Apply & Restart** for your changes to take effect.
 
 ### Reset
 
@@ -230,7 +218,7 @@ The **Software Updates** section notifies you of any updates available to Docker
 > Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. Update to [Docker Desktop 4.2.0](../mac/release-notes/index.md) to start using this feature.
 {: .important}
 
-Turn off the check for updates by clearing the **Automatically Check for Updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+Turn off the check for updates by clearing the **Automatically check for updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
 
 To allow Docker Desktop to automatically download new updates in the background, select **Always download updates**. This downloads newer versions of Docker Desktop when an update becomes available. After downloading the update, click **Apply and Restart** to install the update. You can do this either through the Docker menu or in the **Updates** section in the Docker Dashboard.
 

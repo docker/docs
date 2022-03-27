@@ -35,6 +35,7 @@ options:
   description: Override the configured builder instance
   details_url: '#builder'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

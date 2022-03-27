@@ -192,12 +192,11 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker 
 WSL integration.
 
-By default, the integration will be enabled on your default WSL distribution. 
+By default, the integration will be enabled on your default WSL distribution.
 To change your default WSL distro, run `wsl --set-default <distro name>`. (For example, 
 to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 
-You can also select any additional distributions you would like to enable the WSL 2 
-integration on.
+You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
 For more details on configuring Docker Desktop to use WSL 2, see 
 [Docker Desktop WSL 2 backend](wsl.md).
