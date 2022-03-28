@@ -1,12 +1,12 @@
 ---
-description: Docker Desktop for Linux Tech Preview
-keywords: docker, linux, tech preview
-title: Docker Desktop for Linux (Tech Preview)
+description: Docker Desktop for Linux (Beta)
+keywords: docker, Desktop for linux, beta, tech preview
+title: Docker Desktop for Linux (Beta)
 toc_min: 1
 toc_max: 2
 ---
 
-Welcome to the Docker Desktop for Linux Tech Preview. This Tech Preview is aimed at early adopters who would like to try an experimental build of Docker Desktop for Linux and provide feedback.
+Welcome to the Docker Desktop for Linux (Beta). The Beta program is aimed at early adopters who would like to try Docker Desktop for Linux and provide feedback.
 
 Docker Desktop is an easy-to-install application that enables you to build and
 share containerized applications and microservices. Docker Desktop for Linux
@@ -16,15 +16,15 @@ rel="noopener" class="_"}.
 
 ## Download and install
 
-Docker Desktop for Linux is currently available on Ubuntu 21.04, 21.10 and
-Debian distributions.
+Docker Desktop for Linux (Beta) is currently available on Ubuntu 21.04, 21.10
+and Debian distributions.
 
 To install Docker Desktop for Linux:
 
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
-2. Download and install the Tech Preview Debian package:
+2. Download and install the Debian package:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/76643/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/76677/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
 
@@ -82,9 +82,9 @@ API version:       1.41
 
 > **Note:**
 >
-> Docker Desktop relies on `pass` to store credentials. Before signing in to Docker Hub
-> from the Docker Dashboard or the Docker menu, you must initialize `pass`. Docker Desktop
-> displays a warning message if `pass` is not initialized.
+> Docker Desktop relies on `pass` to store credentials. Before signing in to
+> Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
+> Docker Desktop displays a warning if you've not initialized `pass`.
 
 To enable Docker Desktop to start on login, from the Docker menu, select
 **Settings** > **General** > **Start Docker Desktop when you log in**.
@@ -109,8 +109,10 @@ To create and upload a diagnostics bundle:
 
 1. From the Docker menu, select **Troubleshoot** > **Get support**.
 2. When the diagnostics are available, click **Upload to get a Diagnostic ID**.
-3. Make a note of the Diagnostic ID displayed on the Support page. You can send this ID with your bug report to investigate any issues.
-**Troubleshoot** > **Get support**. Wait for a bundle to be generated, once uploaded, it displays a diagnostics ID that can be sent to us for investigation.
+3. Make a note of the Diagnostic ID displayed on the Support page. You can send
+   this ID with your bug report to investigate any issues. Wait for a bundle to
+   be generated, once uploaded, it displays a diagnostics ID that can be sent to
+   us for investigation.
 
 Or, if you prefer to investigate the issue, you can access Docker Desktop logs by running the following command:
 
@@ -138,9 +140,9 @@ $ sudo rm /usr/local/bin/com.docker.cli
 $ sudo apt purge docker-desktop
 ```
 
-## Known issues
+## Known issue
 
- - At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
+At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
 
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
