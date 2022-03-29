@@ -1176,6 +1176,8 @@ manuals:
               title: Edge releases
             - path: /desktop/windows/release-notes/archive/
               title: Older versions
+    - path: /desktop/linux/
+      title: Linux (Beta)
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
