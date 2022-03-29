@@ -9,25 +9,27 @@ toc_max: 4
 toc_min: 1
 ---
 
-## Reference and guidelines
-
-These topics describe the Docker Compose implementation of the Compose format.
-Docker Compose **1.27.0+** implements the format defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). Previous Docker Compose versions have support for several Compose file formats – 2, 2.x, and 3.x. The Compose specification is a unified 2.x and 3.x file format, aggregating properties across these formats.
+The Compose file is a [YAML](https://yaml.org){: target="_blank" rel="noopener" class="_"} file defining services,
+networks, and volumes for a Docker application. The latest and recommended
+version of the Compose file format is defined by the [Compose
+Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:
+target="_blank" rel="noopener" class="_"}. The Compose spec merges the legacy
+2.x and 3.x versions, aggregating properties across these formats and is implemented by **Compose 1.27.0+**.
 
 ## Status of this document
 
 This document specifies the Compose file format used to define multi-containers applications. Distribution of this document is unlimited.
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119){: target="_blank" rel="noopener" class="_"}.
 
 ### Requirements and optional attributes
 
-The Compose specification includes properties designed to target a local [OCI](https://opencontainers.org/) container runtime,
+The Compose specification includes properties designed to target a local [OCI](https://opencontainers.org/){: target="_blank" rel="noopener" class="_"} container runtime,
 exposing Linux kernel specific configuration options, but also some Windows container specific properties, as well as cloud platform features related to resource placement on a cluster, replicated application distribution and scalability.
 
 We acknowledge that no Compose implementation is expected to support **all** attributes, and that support for some properties
 is Platform dependent and can only be confirmed at runtime. The definition of a versioned schema to control the supported
-properties in a Compose file, established by the [docker-compose](https://github.com/docker/compose) tool where the Compose
+properties in a Compose file, established by the [docker-compose](https://github.com/docker/compose){: target="_blank" rel="noopener" class="_"} tool where the Compose
 file format was designed, doesn't offer any guarantee to the end-user attributes will be actually implemented.
 
 The specification defines the expected configuration syntax and behavior, but - until noted - supporting any of those is OPTIONAL.
@@ -662,7 +664,7 @@ Compose implementations MUST guarantee dependency services marked with
 
 `device_cgroup_rules` defines a list of device cgroup rules for this container.
 The format is the same format the Linux kernel specifies in the [Control Groups
-Device Whitelist Controller](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v1/devices.html).
+Device Whitelist Controller](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v1/devices.html){: target="_blank" rel="noopener" class="_"}.
 
 ```yml
 device_cgroup_rules:
@@ -1505,7 +1507,7 @@ Either specify both ports (`HOST:CONTAINER`), or just the container port. In the
 Compose implementation SHOULD automatically allocate any unassigned host port.
 
 `HOST:CONTAINER` SHOULD always be specified as a (quoted) string, to avoid conflicts
-with [yaml base-60 float](https://yaml.org/type/float.html).
+with [yaml base-60 float](https://yaml.org/type/float.html){: target="_blank" rel="noopener" class="_"}.
 
 Samples:
 
@@ -1600,7 +1602,7 @@ If `pull_policy` and `build` both presents, Compose implementations SHOULD build
 `runtime` specifies which runtime to use for the service’s containers.
 
 The value of `runtime` is specific to implementation.
-For example, `runtime` can be the name of [an implementation of OCI Runtime Spec](https://github.com/opencontainers/runtime-spec/blob/master/implementations.md), such as "runc".
+For example, `runtime` can be the name of [an implementation of OCI Runtime Spec](https://github.com/opencontainers/runtime-spec/blob/master/implementations.md){: target="_blank" rel="noopener" class="_"}, such as "runc".
 
 ```yml
 web:
@@ -1617,7 +1619,7 @@ web:
 
 ### secrets
 
-`secrets` grants access to sensitive data defined by [secrets](secrets) on a per-service basis. Two
+`secrets` grants access to sensitive data defined by [secrets](#secrets) on a per-service basis. Two
 different syntax variants are supported: the short syntax and the long syntax.
 
 Compose implementations MUST report an error if the secret doesn't exist on the platform or isn't defined in the
@@ -2383,7 +2385,7 @@ services:
 The contents of such fields are unspecified by Compose specification, and can be used to enable custom features. Compose implementation to encounter an unknown extension field MUST NOT fail, but COULD warn about unknown field.
 
 For platform extensions, it is highly recommended to prefix extension by platform/vendor name, the same way browsers add
-support for [custom CSS features](https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#vendor-keywords)
+support for [custom CSS features](https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#vendor-keywords){: target="_blank" rel="noopener" class="_"}.
 
 ```yml
 service:

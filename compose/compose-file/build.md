@@ -227,7 +227,7 @@ Unsupported cache target MUST be ignored and not prevent user from building imag
 
 ### extra_hosts
 
-`extra_hosts` adds hostname mappings at build-time. Use the same syntax as [extra_hosts](spec.md#extra_hosts).
+`extra_hosts` adds hostname mappings at build-time. Use the same syntax as [extra_hosts](index.md#extra_hosts).
 
 ```yml
 extra_hosts:
@@ -245,7 +245,7 @@ configuration, which means for Linux `/etc/hosts` will get extra lines:
 
 ### isolation
 
-`isolation` specifies a build’s container isolation technology. Like [isolation](spec.md#isolation) supported values
+`isolation` specifies a build’s container isolation technology. Like [isolation](index.md#isolation) supported values
 are platform-specific.
 
 ### labels
@@ -275,7 +275,7 @@ build:
 ### shm_size
 
 `shm_size` set the size of the shared memory (`/dev/shm` partition on Linux) allocated for building Docker image. Specify
-as an integer value representing the number of bytes or as a string expressing a [byte value](spec.md#specifying-byte-values).
+as an integer value representing the number of bytes or as a string expressing a [byte value](index.md#specifying-byte-values).
 
 ```yml
 build:
