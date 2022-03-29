@@ -4,7 +4,7 @@ keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yaml
 - /compose/compose-file/compose-file-v1/
-title: Compose file
+title: Compose specification
 toc_max: 4
 toc_min: 1
 ---
@@ -13,14 +13,6 @@ toc_min: 1
 
 These topics describe the Docker Compose implementation of the Compose format.
 Docker Compose **1.27.0+** implements the format defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). Previous Docker Compose versions have support for several Compose file formats – 2, 2.x, and 3.x. The Compose specification is a unified 2.x and 3.x file format, aggregating properties across these formats.
-
-## Compose and Docker compatibility matrix
-
-There are several versions of the Compose file format – 2, 2.x, and 3.x. The
-table below provides a snapshot of various versions. For full details on what each version includes and
-how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
-
-{% include content/compose-matrix.md %}
 
 ## Status of this document
 
@@ -38,7 +30,7 @@ is Platform dependent and can only be confirmed at runtime. The definition of a 
 properties in a Compose file, established by the [docker-compose](https://github.com/docker/compose) tool where the Compose
 file format was designed, doesn't offer any guarantee to the end-user attributes will be actually implemented.
 
-The specification defines the expected configuration syntax and behaviour, but - until noted - supporting any of those is OPTIONAL.
+The specification defines the expected configuration syntax and behavior, but - until noted - supporting any of those is OPTIONAL.
 
 A Compose implementation to parse a Compose file using unsupported attributes SHOULD warn user. We recommend implementors
 to support those running modes:
@@ -51,15 +43,15 @@ to support those running modes:
 
 The Compose specification allows one to define a platform-agnostic container based application. Such an application is designed as a set of containers which have to both run together with adequate shared resources and communication channels.
 
-Computing components of an application are defined as [Services](#Services-top-level-element). A Service is an abstract concept implemented on platforms by running the same container image (and configuration) one or more times.
+Computing components of an application are defined as [Services](#services-top-level-element). A Service is an abstract concept implemented on platforms by running the same container image (and configuration) one or more times.
 
-Services communicate with each other through [Networks](#Networks-top-level-element). In this specification, a Network is a platform capability abstraction to establish an IP route between containers within services connected together. Low-level, platform-specific networking options are grouped into the Network definition and MAY be partially implemented on some platforms.
+Services communicate with each other through [Networks](#networks-top-level-element). In this specification, a Network is a platform capability abstraction to establish an IP route between containers within services connected together. Low-level, platform-specific networking options are grouped into the Network definition and MAY be partially implemented on some platforms.
 
-Services store and share persistent data into [Volumes](#Volumes-top-level-element). The specification describes such a persistent data as a high-level filesystem mount with global options. Actual platform-specific implementation details are grouped into the Volumes definition and MAY be partially implemented on some platforms.
+Services store and share persistent data into [Volumes](#volumes-top-level-element). The specification describes such a persistent data as a high-level filesystem mount with global options. Actual platform-specific implementation details are grouped into the Volumes definition and MAY be partially implemented on some platforms.
 
-Some services require configuration data that is dependent on the runtime or platform. For this, the specification defines a dedicated concept: [Configs](#Configs-top-level-element). From a Service container point of view, Configs are comparable to Volumes, in that they are files mounted into the container. But the actual definition involves distinct platform resources and services, which are abstracted by this type.
+Some services require configuration data that is dependent on the runtime or platform. For this, the specification defines a dedicated concept: [Configs](#configs-top-level-element). From a Service container point of view, Configs are comparable to Volumes, in that they are files mounted into the container. But the actual definition involves distinct platform resources and services, which are abstracted by this type.
 
-A [Secret](#Secrets-top-level-element) is a specific flavour of configuration data for sensitive data that SHOULD NOT be exposed without security considerations. Secrets are made available to services as files mounted into their containers, but the platform-specific resources to provide sensitive data are specific enough to deserve a distinct concept and definition within the Compose specification.
+A [Secret](#secrets-top-level-element) is a specific flavor of configuration data for sensitive data that SHOULD NOT be exposed without security considerations. Secrets are made available to services as files mounted into their containers, but the platform-specific resources to provide sensitive data are specific enough to deserve a distinct concept and definition within the Compose specification.
 
 Distinction within Volumes, Configs and Secret allows implementations to offer a comparable abstraction at service level, but cover the specific configuration of adequate platform resources for well identified data usages.
 
@@ -105,7 +97,7 @@ The example application is composed of the following parts:
 - 1 persistent volume, attached to the backend
 - 2 networks
 
-```yaml
+```yml
 services:
   frontend:
     image: awesome/webapp
@@ -241,7 +233,7 @@ prefer the most recent schema at the time it has been designed.
 
 Compose implementations SHOULD validate whether they can fully parse the Compose file. If some fields are unknown, typically
 because the Compose file was written with fields defined by a newer version of the specification, Compose implementations
-SHOULD warn the user. Compose implementations MAY offer options to ignore unknown fields (as defined by ["loose"](#Requirements-and-optional-attributes) mode).
+SHOULD warn the user. Compose implementations MAY offer options to ignore unknown fields (as defined by ["loose"](#requirements-and-optional-attributes) mode).
 
 ## Name top-level element
 
@@ -250,9 +242,9 @@ Compose implementations MUST offer a way for user to override this name, and SHO
 default project name, to be used if the top-level `name` element is not set.
 
 Whenever project name is defined by top-level `name` or by some custom mechanism, it MUST be exposed for 
-[interpolation](#Interpolation) and environment variable resolution as `COMPOSE_PROJECT_NAME`
+[interpolation](#interpolation) and environment variable resolution as `COMPOSE_PROJECT_NAME`
 
-```yaml
+```yml
 services:
   foo:
     image: busybox
@@ -277,26 +269,27 @@ Each service MAY also include a Build section, which defines how to create the D
 Compose implementations MAY support building docker images using this service definition. If not implemented
 the Build section SHOULD be ignored and the Compose file MUST still be considered valid.
 
-Build support is an OPTIONAL aspect of the Compose specification, and is described in detail [here](build.md)
+Build support is an OPTIONAL aspect of the Compose specification, and is
+described in detail in the [Build support](build.md) documentation.
 
 Each Service defines runtime constraints and requirements to run its containers. The `deploy` section groups
 these constraints and allows the platform to adjust the deployment strategy to best match containers' needs with
 available resources.
 
-Deploy support is an OPTIONAL aspect of the Compose specification, and is described in detail [here](deploy.md). If
+Deploy support is an OPTIONAL aspect of the Compose specification, and is
+described in detail in the [Deployment support](deploy.md) documentation.
 not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
-
 
 ### build
 
-`build` specifies the build configuration for creating container image from source, as defined [here](build.md).
+`build` specifies the build configuration for creating container image from source, as defined in the [Build support](build.md) documentation.
 
 
 ### blkio_config
 
 `blkio_config` defines a set of configuration options to set block IO limits for this service.
 
-```yaml
+```yml
 services:
   foo:
     image: busybox
@@ -374,7 +367,7 @@ on Linux kernel.
 `cpu_rt_runtime` configures CPU allocation parameters for platform with support for realtime scheduler. Can be either
 an integer value using microseconds as unit or a [duration](#specifying-durations).
 
-```yaml
+```yml
  cpu_rt_runtime: '400ms'
  cpu_rt_runtime: 95000`
 ```
@@ -384,7 +377,7 @@ an integer value using microseconds as unit or a [duration](#specifying-duration
 `cpu_rt_period` configures CPU allocation parameters for platform with support for realtime scheduler. Can be either
 an integer value using microseconds as unit or a [duration](#specifying-durations).
 
-```yaml
+```yml
  cpu_rt_period: '1400us'
  cpu_rt_period: 11000`
 ```
@@ -469,7 +462,7 @@ access to the `my_config` and `my_other_config` configs. The value of
 already been defined in the platform. If the external config does not exist,
 the deployment MUST fail.
 
-```yaml
+```yml
 services:
   redis:
     image: redis:latest
@@ -500,7 +493,7 @@ container, sets the mode to `0440` (group-readable) and sets the user and group
 to `103`. The `redis` service does not have access to the `my_other_config`
 config.
 
-```yaml
+```yml
 services:
   redis:
     image: redis:latest
@@ -523,7 +516,7 @@ You can grant a service access to multiple configs, and you can mix long and sho
 
 `container_name` is a string that specifies a custom container name, rather than a generated default name.
 
-```yaml
+```yml
 container_name: my-web-container
 ```
 
@@ -542,7 +535,7 @@ protocols for custom use-cases.
 
 The `credential_spec` must be in the format `file://<filename>` or `registry://<value-name>`.
 
-```yaml
+```yml
 credential_spec:
   file: my-credential-spec.json
 ```
@@ -555,7 +548,7 @@ the daemon's host. A registry value with the given name must be located in:
 The following example loads the credential spec from a value named `my-credential-spec`
 in the registry:
 
-```yaml
+```yml
 credential_spec:
   registry: my-credential-spec
 ```
@@ -565,7 +558,7 @@ credential_spec:
 When configuring a gMSA credential spec for a service, you only need
 to specify a credential spec with `config`, as shown in the following example:
 
-```yaml
+```yml
 services:
   myservice:
     image: myimage:latest
@@ -594,7 +587,7 @@ Service dependencies cause the following behaviors:
 
 Simple example:
 
-```yaml
+```yml
 services:
   web:
     build: .
@@ -639,7 +632,7 @@ Service dependencies cause the following behaviors:
 
 Simple example:
 
-```yaml
+```yml
 services:
   web:
     build: .
@@ -671,7 +664,7 @@ Compose implementations MUST guarantee dependency services marked with
 The format is the same format the Linux kernel specifies in the [Control Groups
 Device Whitelist Controller](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v1/devices.html).
 
-```yaml
+```yml
 device_cgroup_rules:
   - 'c 1:3 mr'
   - 'a 7:* rmw'
@@ -682,7 +675,7 @@ device_cgroup_rules:
 `devices` defines a list of device mappings for created containers in the form of
 `HOST_PATH:CONTAINER_PATH[:CGROUP_PERMISSIONS]`.
 
-```yaml
+```yml
 devices:
   - "/dev/ttyUSB0:/dev/ttyUSB0"
   - "/dev/sda:/dev/xvda:rwm"
@@ -692,11 +685,11 @@ devices:
 
 `dns` defines custom DNS servers to set on the container network interface configuration. Can be a single value or a list.
 
-```yaml
+```yml
 dns: 8.8.8.8
 ```
 
-```yaml
+```yml
 dns:
   - 8.8.8.8
   - 9.9.9.9
@@ -706,7 +699,7 @@ dns:
 
 `dns_opt` list custom DNS options to be passed to the container’s DNS resolver (`/etc/resolv.conf` file on Linux).
 
-```yaml
+```yml
 dns_opt:
   - use-vc
   - no-tld-query
@@ -716,11 +709,11 @@ dns_opt:
 
 `dns` defines custom DNS search domains to set on container network interface configuration. Can be a single value or a list.
 
-```yaml
+```yml
 dns_search: example.com
 ```
 
-```yaml
+```yml
 dns_search:
   - dc1.example.com
   - dc2.example.com
@@ -737,14 +730,14 @@ Compose implementations MUST clear out any default command on the Docker image -
 in the Dockerfile - when `entrypoint` is configured by a Compose file. If [`command`](#command) is also set,
 it is used as parameter to `entrypoint` as a replacement for Docker image's `CMD`
 
-```yaml
+```yml
 entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
 [Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
 
-```yaml
+```yml
 entrypoint:
   - php
   - -d
@@ -758,14 +751,14 @@ entrypoint:
 
 `env_file` adds environment variables to the container based on file content.
 
-```yaml
+```yml
 env_file: .env
 ```
 
 `env_file` can also be a list. The files in the list MUST be processed from the top down. For the same variable
 specified in two env files, the value from the last file in the list MUST stand.
 
-```yaml
+```yml
 env_file:
   - ./a.env
   - ./b.env
@@ -808,7 +801,7 @@ is unset and will be removed from the service container environment.
 
 Map syntax:
 
-```yaml
+```yml
 environment:
   RACK_ENV: development
   SHOW: "true"
@@ -817,7 +810,7 @@ environment:
 
 Array syntax:
 
-```yaml
+```yml
 environment:
   - RACK_ENV=development
   - SHOW=true
@@ -832,7 +825,7 @@ When both `env_file` and `environment` are set for a service, values set by `env
 accessible to linked services and SHOULD NOT be published to the host machine. Only the internal container
 ports can be specified.
 
-```yaml
+```yml
 expose:
   - "3000"
   - "8000"
@@ -846,7 +839,7 @@ defined with a required `service` and an optional `file` key.
 
 ```yaml
 extends:
-  file: common.yaml
+  file: common.yml
   service: webapp
 ```
 
@@ -1038,7 +1031,7 @@ Any other allowed keys in the service definition should be treated as scalars.
 `external_links` define the name of an existing service to retrieve using the platform lookup mechanism.
 An alias of the form `SERVICE:ALIAS` can be specified.
 
-```yaml
+```yml
 external_links:
   - redis
   - database:mysql
@@ -1050,7 +1043,7 @@ external_links:
 `extra_hosts` adds hostname mappings to the container network interface configuration (`/etc/hosts` for Linux).
 Values MUST set hostname and IP address for additional hosts in the form of `HOSTNAME:IP`.
 
-```yaml
+```yml
 extra_hosts:
   - "somehost:162.242.195.82"
   - "otherhost:50.31.209.229"
@@ -1072,7 +1065,7 @@ An example of where this is useful is when multiple containers (running as diffe
 the same file on a shared volume. That file can be owned by a group shared by all the containers, and specified in
 `group_add`.
 
-```yaml
+```yml
 services:
   myservice:
     image: alpine
@@ -1090,7 +1083,7 @@ service are "healthy". This overrides
 [HEALTHCHECK Dockerfile instruction](https://docs.docker.com/engine/reference/builder/#healthcheck)
 set by the service's Docker image.
 
-```yaml
+```yml
 healthcheck:
   test: ["CMD", "curl", "-f", "http://localhost"]
   interval: 1m30s
@@ -1105,7 +1098,7 @@ healthcheck:
 either a string or a list. If it's a list, the first item must be either `NONE`, `CMD` or `CMD-SHELL`.
 If it's a string, it's equivalent to specifying `CMD-SHELL` followed by that string.
 
-```yaml
+```yml
 # Hit the local web app
 test: ["CMD", "curl", "-f", "http://localhost"]
 ```
@@ -1113,18 +1106,18 @@ test: ["CMD", "curl", "-f", "http://localhost"]
 Using `CMD-SHELL` will run the command configured as a string using the container's default shell
 (`/bin/sh` for Linux). Both forms below are equivalent:
 
-```yaml
+```yml
 test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
 ```
 
-```yaml
+```yml
 test: curl -f https://localhost || exit 1
 ```
 
 `NONE` disable the healthcheck, and is mostly useful to disable Healthcheck set by image. Alternatively
 the healthcheck set by the image can be disabled by setting `disable: true`:
 
-```yaml
+```yml
 healthcheck:
   disable: true
 ```
@@ -1139,7 +1132,7 @@ healthcheck:
 [addressable image format](https://github.com/opencontainers/org/blob/master/docs/docs/introduction/digests.md),
 as `[<registry>/][<project>/]<image>[:<tag>|@<digest>]`.
 
-```yaml
+```yml
     image: redis
     image: redis:5
     image: redis@sha256:0ed5d5928d4737458944eb604cc8509e245c3e19d02ad83935398bc4b991aac7
@@ -1160,7 +1153,7 @@ without build support MUST fail when `image` is missing from the Compose file.
 `init` run an init process (PID 1) inside the container that forwards signals and reaps processes.
 Set this option to `true` to enable this feature for the service.
 
-```yaml
+```yml
 services:
   web:
     image: alpine:latest
@@ -1180,7 +1173,7 @@ which MUST be implemented as described if supported:
 - `service:{name}` which makes the container join another (`shareable`)
    container's IPC namespace.
 
-```yaml
+```yml
     ipc: "shareable"
     ipc: "service:[service name]"
 ```
@@ -1196,14 +1189,14 @@ which MUST be implemented as described if supported:
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with
 those used by other software.
 
-```yaml
+```yml
 labels:
   com.example.description: "Accounting webapp"
   com.example.department: "Finance"
   com.example.label-with-empty-value: ""
 ```
 
-```yaml
+```yml
 labels:
   - "com.example.description=Accounting webapp"
   - "com.example.department=Finance"
@@ -1223,7 +1216,7 @@ result in a runtime error.
 `links` defines a network link to containers in another service. Either specify both the service name and
 a link alias (`SERVICE:ALIAS`), or just the service name.
 
-```yaml
+```yml
 web:
   links:
     - db
@@ -1247,7 +1240,7 @@ Links also express implicit dependency between services in the same way as
 
 `logging` defines the logging configuration for the service.
 
-```yaml
+```yml
 logging:
   driver: syslog
   options:
@@ -1266,7 +1259,7 @@ specification define specific values which MUST be implemented as described if s
 - `host` which gives the container raw access to host's network interface
 - `service:{name}` which gives the containers access to the specified service only
 
-```yaml
+```yml
     network_mode: "host"
     network_mode: "none"
     network_mode: "service:[service name]"
@@ -1277,7 +1270,7 @@ specification define specific values which MUST be implemented as described if s
 `networks` defines the networks that service containers are attached to, referencing entries under the
 [top-level `networks` key](#networks-top-level-element).
 
-```yaml
+```yml
 services:
   some-service:
     networks:
@@ -1297,7 +1290,7 @@ Since `aliases` are network-scoped, the same service can have different aliases 
 
 The general format is shown here:
 
-```yaml
+```yml
 services:
   some-service:
     networks:
@@ -1314,7 +1307,7 @@ In the example below, service `frontend` will be able to reach the `backend` ser
 the hostname `backend` or `database` on the `back-tier` network, and service `monitoring`
 will be able to reach same `backend` service at `db` or `mysql` on the `admin` network.
 
-```yaml
+```yml
 services:
   frontend:
     image: awesome/webapp
@@ -1350,7 +1343,7 @@ Specify a static IP address for containers for this service when joining the net
 The corresponding network configuration in the [top-level networks section](#networks) MUST have an
 `ipam` block with subnet configurations covering each static address.
 
-```yaml
+```yml
 services:
   frontend:
     image: awesome/webapp
@@ -1472,7 +1465,7 @@ _DEPRECATED: use [deploy.reservations.pids](deploy.md#pids)_
 
 `pids_limit` tunes a container’s PIDs limit. Set to -1 for unlimited PIDs.
 
-```yaml
+```yml
 pids_limit: 10
 ```
 
@@ -1482,7 +1475,7 @@ pids_limit: 10
 Compose implementation MUST use this attribute when declared to determine which version of the image will be pulled
 and/or on which platform the service’s build will be performed.
 
-```yaml
+```yml
 platform: osx
 platform: windows/amd64
 platform: linux/arm64/v8
@@ -1516,7 +1509,7 @@ with [yaml base-60 float](https://yaml.org/type/float.html).
 
 Samples:
 
-```yaml
+```yml
 ports:
   - "3000"
   - "3000-3005"
@@ -1542,7 +1535,7 @@ expressed in the short form.
 - `protocol`: the port protocol (`tcp` or `udp`), unspecified means any protocol
 - `mode`: `host` for publishing a host port on each node, or `ingress` for a port to be load balanced.
 
-```yaml
+```yml
 ports:
   - target: 80
     host_ip: 127.0.0.1
@@ -1595,7 +1588,7 @@ If `pull_policy` and `build` both presents, Compose implementations SHOULD build
 - `unless-stopped`: The policy restarts a container irrespective of the exit code but will stop
   restarting when the service is stopped or removed.
 
-```yaml
+```yml
     restart: "no"
     restart: always
     restart: on-failure
@@ -1609,7 +1602,7 @@ If `pull_policy` and `build` both presents, Compose implementations SHOULD build
 The value of `runtime` is specific to implementation.
 For example, `runtime` can be the name of [an implementation of OCI Runtime Spec](https://github.com/opencontainers/runtime-spec/blob/master/implementations.md), such as "runc".
 
-```yaml
+```yml
 web:
   image: busybox:latest
   command: true
@@ -1641,7 +1634,7 @@ The following example uses the short syntax to grant the `frontend` service
 access to the `server-certificate` secret. The value of `server-certificate` is set
 to the contents of the file `./server.cert`.
 
-```yaml
+```yml
 services:
   frontend:
     image: awesome/webapp
@@ -1672,7 +1665,7 @@ within the container, sets the mode to `0440` (group-readable) and sets the user
 to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
 the secret lifecycle not directly managed by the Compose implementation.
 
-```yaml
+```yml
 services:
   frontend:
     image: awesome/webapp
@@ -1695,7 +1688,7 @@ Such grant must be explicit within service specification as [secrets](#secrets) 
 
 `security_opt` overrides the default labeling scheme for each container.
 
-```yaml
+```yml
 security_opt:
   - label:user:USER
   - label:role:ROLE
@@ -1717,7 +1710,7 @@ handle SIGTERM (or whichever stop signal has been specified with
 [`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
 
-```yaml
+```yml
     stop_grace_period: 1s
     stop_grace_period: 1m30s
 ```
@@ -1729,7 +1722,7 @@ Default value is 10 seconds for the container to exit before sending SIGKILL.
 `stop_signal` defines the signal that the Compose implementation MUST use to stop the service containers.
 If unset containers are stopped by the Compose Implementation by sending `SIGTERM`.
 
-```yaml
+```yml
 stop_signal: SIGUSR1
 ```
 
@@ -1737,7 +1730,7 @@ stop_signal: SIGUSR1
 
 `storage_opt` defines storage driver options for a service.
 
-```yaml
+```yml
 storage_opt:
   size: '1G'
 ```
@@ -1746,13 +1739,13 @@ storage_opt:
 
 `sysctls` defines kernel parameters to set in the container. `sysctls` can use either an array or a map.
 
-```yaml
+```yml
 sysctls:
   net.core.somaxconn: 1024
   net.ipv4.tcp_syncookies: 0
 ```
 
-```yaml
+```yml
 sysctls:
   - net.core.somaxconn=1024
   - net.ipv4.tcp_syncookies=0
@@ -1767,11 +1760,11 @@ parameters (sysctls) at runtime](https://docs.docker.com/engine/reference/comman
 
 `tmpfs` mounts a temporary file system inside the container. Can be a single value or a list.
 
-```yaml
+```yml
 tmpfs: /run
 ```
 
-```yaml
+```yml
 tmpfs:
   - /run
   - /tmp
@@ -1786,7 +1779,7 @@ tmpfs:
 `ulimits` overrides the default ulimits for a container. Either specifies as a single limit as an integer or
 soft/hard limits as a mapping.
 
-```yaml
+```yml
 ulimits:
   nproc: 65535
   nofile:
@@ -1804,7 +1797,7 @@ if not set, `root`.
 `userns_mode` sets the user namespace for the service. Supported values are platform specific and MAY depend
 on platform configuration
 
-```yaml
+```yml
 userns_mode: "host"
 ```
 
@@ -1821,7 +1814,7 @@ volume MUST be declared in the [top-level `volumes` key](#volumes-top-level-elem
 This example shows a named volume (`db-data`) being used by the `backend` service,
 and a bind mount defined for a single service
 
-```yaml
+```yml
 services:
   backend:
     image: awesome/backend
@@ -1916,7 +1909,7 @@ Services can connect to networks by specifying the network name under the servic
 In the following example, at runtime, networks `front-tier` and `back-tier` will be created and the `frontend` service
 connected to the `front-tier` network and the `back-tier` network.
 
-```yaml
+```yml
 services:
   frontend:
     image: awesome/webapp
@@ -1934,7 +1927,7 @@ networks:
 `driver` specifies which driver should be used for this network. Compose implementations MUST return an error if the
 driver is not available on the platform.
 
-```yaml
+```yml
 driver: overlay
 ```
 
@@ -1951,7 +1944,7 @@ the scope of the Compose implementation. To use them one MUST define an external
 an alias that the Compose implementation can use (`hostnet` or `nonet` in the following examples), then grant the service
 access to that network using its alias.
 
-```yaml
+```yml
 services:
   web:
     networks:
@@ -1963,7 +1956,7 @@ networks:
     name: host
 ```
 
-```yaml
+```yml
 services:
   web:
     ...
@@ -1981,7 +1974,7 @@ networks:
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver for this network. These options are
 driver-dependent - consult the driver's documentation for more information. Optional.
 
-```yaml
+```yml
 driver_opts:
   foo: "bar"
   baz: 1
@@ -1993,7 +1986,7 @@ If `attachable` is set to `true`, then standalone containers SHOULD be able atta
 If a standalone container attaches to the network, it can communicate with services and other standalone containers
 that are also attached to the network.
 
-```yaml
+```yml
 networks:
   mynet1:
     driver: overlay
@@ -2018,7 +2011,7 @@ networks:
 
 A full example:
 
-```yaml
+```yml
 ipam:
   driver: default
   config:
@@ -2045,14 +2038,14 @@ Add metadata to containers using Labels. Can use either an array or a dictionary
 
 Users SHOULD use reverse-DNS notation to prevent labels from conflicting with those used by other software.
 
-```yaml
+```yml
 labels:
   com.example.description: "Financial transaction network"
   com.example.department: "Finance"
   com.example.label-with-empty-value: ""
 ```
 
-```yaml
+```yml
 labels:
   - "com.example.description=Financial transaction network"
   - "com.example.department=Finance"
@@ -2070,7 +2063,7 @@ In the example below, `proxy` is the gateway to the outside world. Instead of at
 implementations SHOULD interrogate the platform for an existing network simply called `outside` and connect the
 `proxy` service's containers to it.
 
-```yaml
+```yml
 
 services:
   proxy:
@@ -2093,7 +2086,7 @@ networks:
 `name` sets a custom name for this network. The name field can be used to reference networks which contain special characters.
 The name is used as is and will **not** be scoped with the project name.
 
-```yaml
+```yml
 networks:
   network1:
     name: my-app-net
@@ -2102,7 +2095,7 @@ networks:
 It can also be used in conjunction with the `external` property to define the platform network that the Compose implementation
 should retrieve, typically by using a parameter so the Compose file doesn't need to hard-code runtime specific values:
 
-```yaml
+```yml
 networks:
   network1:
     external: true
@@ -2118,7 +2111,7 @@ The `volumes` section allows the configuration of named volumes that can be reus
 an example of a two-service setup where a database's data directory is shared with another service as a volume named
 `db-data` so that it can be periodically backed up:
 
-```yaml
+```yml
 services:
   backend:
     image: awesome/database
@@ -2141,7 +2134,7 @@ creating a volume. Optionally, you can configure it with the following keys:
 
 Specify which volume driver should be used for this volume. Default and available values are platform specific. If the driver is not available, the Compose implementation MUST return an error and stop application deployment.
 
-```yaml
+```yml
 driver: foobar
 ```
 
@@ -2149,7 +2142,7 @@ driver: foobar
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver for this volume. Those options are driver-dependent.
 
-```yaml
+```yml
 volumes:
   example:
     driver_opts:
@@ -2168,7 +2161,7 @@ In the example below, instead of attempting to create a volume called
 `{project_name}_db-data`, Compose looks for an existing volume simply
 called `db-data` and mounts it into the `backend` service's containers.
 
-```yaml
+```yml
 services:
   backend:
     image: awesome/database
@@ -2187,14 +2180,14 @@ volumes:
 It's recommended that you use reverse-DNS notation to prevent your labels from
 conflicting with those used by other software.
 
-```yaml
+```yml
 labels:
   com.example.description: "Database volume"
   com.example.department: "IT/Ops"
   com.example.label-with-empty-value: ""
 ```
 
-```yaml
+```yml
 labels:
   - "com.example.description=Database volume"
   - "com.example.department=IT/Ops"
@@ -2208,7 +2201,7 @@ Compose implementation MUST set `com.docker.compose.project` and `com.docker.com
 `name` set a custom name for this volume. The name field can be used to reference volumes that contain special
 characters. The name is used as is and will **not** be scoped with the stack name.
 
-```yaml
+```yml
 volumes:
   data:
     name: "my-app-data"
@@ -2217,7 +2210,7 @@ volumes:
 It can also be used in conjunction with the `external` property. Doing so the name of the volume used to lookup for
 actual volume on platform is set separately from the name used to refer to it within the Compose file:
 
-```yaml
+```yml
 volumes:
   db-data:
     external:
@@ -2227,7 +2220,7 @@ volumes:
 This make it possible to make this lookup name a parameter of a Compose file, so that the model ID for volume is
 hard-coded but the actual volume ID on platform is set at runtime during deployment:
 
-```yaml
+```yml
 volumes:
   db-data:
     external:
@@ -2262,7 +2255,7 @@ and `my_second_config` MUST already exist on Platform and value will be obtained
 In this example, `server-http_config` is created as `<project_name>_http_config` when the application is deployed,
 by registering content of the `httpd.conf` as configuration data.
 
-```yaml
+```yml
 configs:
   http_config:
     file: ./httpd.conf
@@ -2270,7 +2263,7 @@ configs:
 
 Alternatively, `http_config` can be declared as external, doing so Compose implementation will lookup `http_config` to expose configuration data to relevant services.
 
-```yaml
+```yml
 configs:
   http_config:
     external: true
@@ -2281,7 +2274,7 @@ example modifies the previous one to lookup for config using a parameter `HTTP_C
 so the actual lookup key will be set at deployment time by [interpolation](#interpolation) of
 variables, but exposed to containers as hard-coded ID `http_config`.
 
-```yaml
+```yml
 configs:
   http_config:
     external: true
@@ -2307,7 +2300,7 @@ application. The source of the secret is either `file` or `external`.
 In this example, `server-certificate` is created as `<project_name>_server-certificate` when the application is deployed,
 by registering content of the `server.cert` as a platform secret.
 
-```yaml
+```yml
 secrets:
   server-certificate:
     file: ./server.cert
@@ -2315,7 +2308,7 @@ secrets:
 
 Alternatively, `server-certificate` can be declared as external, doing so Compose implementation will lookup `server-certificate` to expose secret to relevant services.
 
-```yaml
+```yml
 secrets:
   server-certificate:
     external: true
@@ -2326,7 +2319,7 @@ example modifies the previous one to look up for secret using a parameter `CERTI
 so the actual lookup key will be set at deployment time by [interpolation](#interpolation) of
 variables, but exposed to containers as hard-coded ID `server-certificate`.
 
-```yaml
+```yml
 secrets:
   server-certificate:
     external: true
@@ -2339,7 +2332,7 @@ Compose file need to explicitly grant access to the secrets to relevant services
 
 It is possible to re-use configuration fragments using [YAML anchors](http://www.yaml.org/spec/1.2/spec.html#id2765878).
 
-```yaml
+```yml
 volumes:
   db-data: &default-volume
     driver: default
@@ -2353,7 +2346,7 @@ It is also possible to partially override values set by anchor reference using t
 [YAML merge type](http://yaml.org/type/merge.html). In following example, `metrics` volume specification uses alias
 to avoid repetition but override `name` attribute:
 
-```yaml
+```yml
 
 services:
   backend:
@@ -2375,7 +2368,7 @@ volumes:
 Special extension fields can be of any format as long as their name starts with the `x-` character sequence. They can be used
 within any structure in a Compose file. This is the sole exception for Compose implementations to silently ignore unrecognized field.
 
-```yaml
+```yml
 x-custom:
   foo:
     - bar
@@ -2392,7 +2385,7 @@ The contents of such fields are unspecified by Compose specification, and can be
 For platform extensions, it is highly recommended to prefix extension by platform/vendor name, the same way browsers add
 support for [custom CSS features](https://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html#vendor-keywords)
 
-```yaml
+```yml
 service:
   backend:
     deploy:
@@ -2415,7 +2408,7 @@ This section is informative. At the time of writing, the following prefixes are 
 
 With the support for extension fields, Compose file can be written as follows to improve readability of reused fragments:
 
-```yaml
+```yml
 x-logging: &default-logging
   options:
     max-size: "12m"
@@ -2491,7 +2484,7 @@ dollar sign. This also prevents Compose from interpolating a value, so a `$$`
 allows you to refer to environment variables that you don't want processed by
 Compose.
 
-```yaml
+```yml
 web:
   build: .
   command: "$$VAR_NOT_INTERPOLATED_BY_COMPOSE"

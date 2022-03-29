@@ -1040,12 +1040,16 @@ reference:
   section:
     - path: /compose/compose-file/
       title: Compose Specification
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
+    - path: /compose/compose-file/build/
+      title: Compose file build
+    - path: /compose/compose-file/deploy/
+      title: Compose file deploy
     - path: /compose/faq/
       title: Frequently asked questions
     - sectiontitle: Legacy versions
       section:
+        - path: /compose/compose-file/compose-versioning/
+          title: About versions and upgrading
         - path: /compose/compose-file/compose-file-v3/
           title: Version 3
         - path: /compose/compose-file/compose-file-v2/
