@@ -19,6 +19,10 @@ rel="noopener" class="_"}.
 Docker Desktop for Linux (Beta) is currently available on Ubuntu 21.04, 21.10
 and Debian distributions.
 
+> **Note:**
+>
+> Docker Desktop is not supported in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on Ubuntu or Debian distributions.
+
 To install Docker Desktop for Linux:
 
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
