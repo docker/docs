@@ -29,7 +29,7 @@ manage users, teams, and repositories in the organization. [Learn more](orgs.md)
 
 ### How many organizations can I create?
 
-You can create multiple organizations. However, if you’re enabling SSO and have multiple organizations, each organization must have a domain associated with it.
+To begin, you should set up your first organization and contact the Customer Success team at customer-success@docker.com to add the additional organizations. Also, if you are enabling SSO, it is configured based on your domain, not your organization.
 
 ### What’s a team?
 
