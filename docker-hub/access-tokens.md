@@ -4,15 +4,13 @@ description: Learn how to create and manage your personal Docker Hub access toke
 keywords: docker hub, hub, security, PAT, personal access token
 ---
 
-Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to 
-access Hub images from the Docker CLI.
+Docker Hub lets you create personal access tokens as alternatives to your password. You can use tokens to access Hub images from the Docker CLI.
 
 Using personal access tokens provides some advantages over a password:
 
 * You can investigate the last usage of the access token and disable or delete
   it if you find any suspicious activity.
-* When using an access token, you can't perform any admin activity on the account,
-  including changing the password. It protects your account if your computer is compromised.
+* When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
   
 Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"}
 tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse 
@@ -57,24 +55,12 @@ To create your access token:
 
       ![PAT Menu](images/hub-create-token.png){:width="700px"}
 
-The access permissions are scopes that set restrictions in your
-repositories. For example, for Read & Write permissions, an automation
-pipeline can build an image and then push it to a repository. However, it
-can not delete the repository.
+   The access permissions are scopes that set restrictions in your
+   repositories. For example, for Read & Write permissions, an automation
+   pipeline can build an image and then push it to a repository. However, it
+   can not delete the repository.
 
-5. The table below lists the tokens available in each subscription:
-
-
-    | Feature   | Personal | Pro | Team | Business |
-    | --------------------- | ---- | ----- | ----- |----- |
-    | Personal Access Tokens (read, write, delete scope only)*    |![yes](/images/green-check.svg)| ![yes](/images/green-check.svg) |![yes](/images/green-check.svg) |![yes](/images/green-check.svg)|
-    | Scoped Personal Access Tokens  | |![yes](/images/green-check.svg)|   ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
-    | Unlimited Personal Access Tokens   |      |       |  ![yes](/images/green-check.svg)|![yes](/images/green-check.svg)|
-
-      *You can create 1 access token as part of the Docker Personal subscription, 5 tokens as part of Docker Pro, and Unlimited tokens as part of Docker Team and Business subscriptions.
-      For more information, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"}.
-
-6. Copy the token that appears on the screen and save it. You will not be able
+5. Copy the token that appears on the screen and save it. You will not be able
    to retrieve the token once you close this prompt.
 
       ![Copy Token](images/hub-copy-token.png){:width="700px"}

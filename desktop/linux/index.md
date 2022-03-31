@@ -26,9 +26,9 @@ and Debian distributions.
 To install Docker Desktop for Linux:
 
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
-2. Download and install the Debian package:
+2. Download and install the Debian package. If you have previously installed one of the preview releases, we recommend that you run `sudo apt remove docker-desktop`:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/76677/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/76787/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
 
@@ -84,12 +84,6 @@ API version:       1.41
 ...
 ```
 
-> **Note:**
->
-> Docker Desktop relies on `pass` to store credentials. Before signing in to
-> Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
-> Docker Desktop displays a warning if you've not initialized `pass`.
-
 To enable Docker Desktop to start on login, from the Docker menu, select
 **Settings** > **General** > **Start Docker Desktop when you log in**.
 
@@ -106,6 +100,54 @@ Alternatively, open a terminal and run:
 ```console
 $ systemctl --user stop docker-desktop
 ```
+
+## Credentials management
+
+Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_blank" rel="noopener" class="_"} to store credentials in gpg2-encrypted files.
+Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
+Docker Desktop displays a warning if you've not initialized `pass`.
+
+You can intialize pass by using a gpg key. To generate a gpg key, run:
+
+``` console
+$ gpg --generate-key
+...
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Molly
+Email address: molly@example.com
+You selected this USER-ID:
+    "Molly <molly@example.com>"
+
+Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
+...
+pub   rsa3072 2022-03-31 [SC] [expires: 2024-03-30]
+      7865BA9185AFA2C26C5B505669FC4F36530097C2
+uid                      Molly <molly@example.com>
+sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
+```
+
+To initialize `pass`, run:
+
+```console
+molly@ubuntu:~$ pass init 7865BA9185AFA2C26C5B505669FC4F36530097C2
+mkdir: created directory '/home/molly/.password-store/'
+Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
+```
+
+Once `pass` is initialized, we can sign in on the Docker Dashboard and pull our private images.
+When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
+
+```console
+$ docker pull molly/privateimage
+Using default tag: latest
+latest: Pulling from molly/privateimage
+3b9cc81c3203: Pull complete 
+Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
+Status: Downloaded newer image for molly/privateimage:latest
+docker.io/molly/privateimage:latest
+```
+
 
 ## Logs
 
@@ -151,6 +193,8 @@ At the end of the installation process, `apt` displays an error due to installin
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   ```
+
+If you have installed one of the previous releases and reinstall the new package over it (as opposed to removing the old package explicitly), you need to make sure that `~/.config/systemd/user/docker-desktop.service` and `~/.local/share/systemd/user/docker-desktop.service` are removed.
 
 ## Why Docker Desktop for Linux runs a VM
 
