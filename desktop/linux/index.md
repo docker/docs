@@ -103,7 +103,7 @@ $ systemctl --user stop docker-desktop
 
 ## Credentials management
 
-Docker Desktop relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
+Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_blank" rel="noopener" class="_"} to store credentials in gpg2-encrypted files.
 Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
 Docker Desktop displays a warning if you've not initialized `pass`.
 
