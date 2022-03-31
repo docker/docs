@@ -137,7 +137,7 @@ Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
 
 After signing in on the Docker Dashboard, you can check whether the login credentials are stored in the password store.
 
-```
+```console
 molly@ubuntu:~$ docker-credential-desktop list
 {"https://index.docker.io/v1/":"molly","https://index.docker.io/v1//refresh-token":"v1.Mb66i2rHIBOjNVkKpKpv8zYQU-gwtNam_5RbYZmsUCQ_smw2WiliFrJlUw5rszR947C2iZ4QGAJ1g5opK1URwaY","https://index.docker.io/v1//user":"molly"}
 ```
