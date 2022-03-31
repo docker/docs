@@ -142,7 +142,7 @@ molly@ubuntu:~$ docker-credential-desktop list
 {"https://index.docker.io/v1/":"molly","https://index.docker.io/v1//refresh-token":"v1.Mb66i2rHIBOjNVkKpKpv8zYQU-gwtNam_5RbYZmsUCQ_smw2WiliFrJlUw5rszR947C2iZ4QGAJ1g5opK1URwaY","https://index.docker.io/v1//user":"molly"}
 ```
 
-When credentials are used by the Docler Cli or Docker Desktop, an user prompt may pop up for the password you set during the gpg key generation.
+When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
 
 ```
 $ docker pull molly/privateimage
