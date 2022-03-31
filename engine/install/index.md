@@ -30,7 +30,10 @@ redirect_from:
 
 > **Docker Desktop for Linux**
 >
-> Docker Desktop helps you build, share, and run containers easily on Mac and Windows as you do on Linux. Docker handles the complex setup and allows you to focus on writing the code. Thanks to the positive support we received on the [subscription updates](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}, we've started working on [Docker Desktop for Linux](https://www.docker.com/blog/accelerating-new-features-in-docker-desktop/){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"} which is the second-most popular feature request in our public roadmap. If you are interested in early access, sign up for our [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview){: target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+> Docker Desktop helps you build, share, and run containers easily on Mac and
+> Windows as you do on Linux. We are excited to share that Docker Desktop for
+> Linux (Beta) is now available for you to test. For more information, see
+[Docker Desktop for Linux](../../desktop/linux/index.md).
 {: .important}
 
 ## Supported platforms
