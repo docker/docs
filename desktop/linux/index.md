@@ -144,7 +144,7 @@ molly@ubuntu:~$ docker-credential-desktop list
 
 When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
 
-```
+```console
 $ docker pull molly/privateimage
 Using default tag: latest
 latest: Pulling from molly/privateimage
