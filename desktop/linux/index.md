@@ -22,7 +22,7 @@ and Debian distributions.
 To install Docker Desktop for Linux:
 
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
-2. Download and install the Debian package, if you have previously installed one of the preview releases it is a good idea to run `sudo apt remove docker-desktop`:
+2. Download and install the Debian package. If you have previously installed one of the preview releases, we recommend that you run `sudo apt remove docker-desktop`:
     ```console
     $ curl https://desktop-stage.docker.com/linux/main/amd64/76677/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
