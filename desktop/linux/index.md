@@ -115,15 +115,15 @@ $ gpg --generate-key
 GnuPG needs to construct a user ID to identify your key.
 
 Real name: Molly
-Email address: molly@docker.com
+Email address: molly@example.com
 You selected this USER-ID:
-    "Molly <molly@docker.com>"
+    "Molly <molly@example.com>"
 
 Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
 ...
 pub   rsa3072 2022-03-31 [SC] [expires: 2024-03-30]
       7865BA9185AFA2C26C5B505669FC4F36530097C2
-uid                      Molly <molly@docker.com>
+uid                      Molly <molly@example.com>
 sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
 ```
 
@@ -135,13 +135,7 @@ mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
 ```
 
-After signing in on the Docker Dashboard, you can check whether the login credentials are stored in the password store.
-
-```console
-molly@ubuntu:~$ docker-credential-desktop list
-{"https://index.docker.io/v1/":"molly","https://index.docker.io/v1//refresh-token":"v1.Mb66i2rHIBOjNVkKpKpv8zYQU-gwtNam_5RbYZmsUCQ_smw2WiliFrJlUw5rszR947C2iZ4QGAJ1g5opK1URwaY","https://index.docker.io/v1//user":"molly"}
-```
-
+Once `pass` is initialized, we can sign in on the Docker Dashboard and pull our private images.
 When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
 
 ```console
