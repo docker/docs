@@ -148,7 +148,7 @@ At the end of the installation process, `apt` displays an error due to installin
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   ```
 
-If you have installed one of the previous releases and install the new package over it (as opposed to removing the old package explicitly), you will have to make sure that `~/.config/systemd/user/docker-desktop.service` and `~/.local/share/systemd/user/docker-desktop.service` are removed.
+If you have installed one of the previous releases and reinstall the new package over it (as opposed to removing the old package explicitly), you need to make sure that `~/.config/systemd/user/docker-desktop.service` and `~/.local/share/systemd/user/docker-desktop.service` are removed.
 
 ## Why Docker Desktop for Linux runs a VM
 
