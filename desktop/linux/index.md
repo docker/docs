@@ -135,7 +135,7 @@ mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
 ```
 
-After signing in on the Docker Dashboard, you can check that login credentials were stored in the password store.
+After signing in on the Docker Dashboard, you can check whether the login credentials are stored in the password store.
 
 ```
 molly@ubuntu:~$ docker-credential-desktop list
