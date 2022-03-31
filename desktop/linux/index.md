@@ -129,7 +129,7 @@ sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
 
 To initialize `pass`, run:
 
-```
+```console
 molly@ubuntu:~$ pass init 7865BA9185AFA2C26C5B505669FC4F36530097C2
 mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
