@@ -107,7 +107,7 @@ Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_bla
 Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
 Docker Desktop displays a warning if you've not initialized `pass`.
 
-One way to intialise pass is using a gpg key. To generate a gpg key run:
+You can intialize pass by using a gpg key. To generate a gpg key, run:
 
 ``` 
 $ gpg --generate-key
