@@ -52,13 +52,13 @@ To create your `registry.json` file on macOS:
 3. Open a new terminal and type the following command:
 
     ```console
-    sudo mkdir -p /Library/Application\ Support/com.docker.docker
+    $ sudo mkdir -p /Library/Application\ Support/com.docker.docker
     ```
 
     If prompted, type your password associated with your local computer.
 
 4. Type the following command:
 
-     ```console
-    sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json
+    ```console
+    $ sudo cp Documents/registry.json /Library/Application\ Support/com.docker.docker/registry.json
     ```
