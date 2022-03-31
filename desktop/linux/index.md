@@ -109,7 +109,7 @@ Docker Desktop displays a warning if you've not initialized `pass`.
 
 You can intialize pass by using a gpg key. To generate a gpg key, run:
 
-``` 
+``` console
 $ gpg --generate-key
 ...
 GnuPG needs to construct a user ID to identify your key.
