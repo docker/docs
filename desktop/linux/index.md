@@ -28,7 +28,7 @@ To install Docker Desktop for Linux:
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
 2. Download and install the Debian package:
     ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/76677/docker-desktop.deb --output docker-desktop.deb
+    $ curl https://desktop-stage.docker.com/linux/main/amd64/76787/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
     ```
 
@@ -84,12 +84,6 @@ API version:       1.41
 ...
 ```
 
-> **Note:**
->
-> Docker Desktop relies on `pass` to store credentials. Before signing in to
-> Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
-> Docker Desktop displays a warning if you've not initialized `pass`.
-
 To enable Docker Desktop to start on login, from the Docker menu, select
 **Settings** > **General** > **Start Docker Desktop when you log in**.
 
@@ -106,6 +100,60 @@ Alternatively, open a terminal and run:
 ```console
 $ systemctl --user stop docker-desktop
 ```
+
+## Credentials management
+
+Docker Desktop relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
+Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
+Docker Desktop displays a warning if you've not initialized `pass`.
+
+One way to intialise pass is using a gpg key. To generate a gpg key run:
+
+``` 
+$ gpg --generate-key
+...
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Molly
+Email address: molly@docker.com
+You selected this USER-ID:
+    "Molly <molly@docker.com>"
+
+Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
+...
+pub   rsa3072 2022-03-31 [SC] [expires: 2024-03-30]
+      7865BA9185AFA2C26C5B505669FC4F36530097C2
+uid                      Molly <molly@docker.com>
+sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
+```
+
+To initialise `pass` run:
+
+```
+molly@ubuntu:~$ pass init 7865BA9185AFA2C26C5B505669FC4F36530097C2
+mkdir: created directory '/home/molly/.password-store/'
+Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
+```
+
+After signing in on the Docker Dashboard, you can check that login credentials were stored in the password store.
+
+```
+molly@ubuntu:~$ docker-credential-desktop list
+{"https://index.docker.io/v1/":"molly","https://index.docker.io/v1//refresh-token":"v1.Mb66i2rHIBOjNVkKpKpv8zYQU-gwtNam_5RbYZmsUCQ_smw2WiliFrJlUw5rszR947C2iZ4QGAJ1g5opK1URwaY","https://index.docker.io/v1//user":"molly"}
+```
+
+When credentials are used by the Docler Cli or Docker Desktop, an user prompt may pop up for the password you set during the gpg key generation.
+
+```
+$ docker pull molly/privateimage
+Using default tag: latest
+latest: Pulling from molly/privateimage
+3b9cc81c3203: Pull complete 
+Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
+Status: Downloaded newer image for molly/privateimage:latest
+docker.io/molly/privateimage:latest
+```
+
 
 ## Logs
 
