@@ -8,33 +8,17 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker stack rm [OPTIONS] STACK [STACK...]
 pname: docker stack
 plink: docker_stack.yaml
-options:
-- option: namespace
-  value_type: string
-  description: Kubernetes namespace to use
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 inherited_options:
-- option: kubeconfig
-  value_type: string
-  description: Kubernetes config file
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: Orchestrator to use (swarm|all)
   deprecated: true
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -42,7 +26,8 @@ inherited_options:
 examples: |-
   ### Remove a stack
 
-  This will remove the stack with the name `myapp`. Services, networks, and secrets associated with the stack will be removed.
+  This will remove the stack with the name `myapp`. Services, networks, and secrets
+  associated with the stack will be removed.
 
   ```console
   $ docker stack rm myapp
@@ -56,7 +41,8 @@ examples: |-
 
   ### Remove multiple stacks
 
-  This will remove all the specified stacks, `myapp` and `vossibility`. Services, networks, and secrets associated with all the specified stacks will be removed.
+  This will remove all the specified stacks, `myapp` and `vossibility`. Services,
+  networks, and secrets associated with all the specified stacks will be removed.
 
   ```console
   $ docker stack rm myapp vossibility

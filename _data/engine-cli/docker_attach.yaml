@@ -1,5 +1,6 @@
 command: docker attach
-short: Attach local standard input, output, and error streams to a running container
+short: |
+  Attach local standard input, output, and error streams to a running container
 long: |-
   Use `docker attach` to attach your terminal's standard input, output, and error
   (or any combination of the three) to a running container using the container's
@@ -68,6 +69,7 @@ options:
   value_type: string
   description: Override the key sequence for detaching a container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -77,6 +79,7 @@ options:
   default_value: "false"
   description: Do not attach STDIN
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -86,6 +89,7 @@ options:
   default_value: "true"
   description: Proxy all received signals to the process
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

@@ -11,7 +11,9 @@ options:
   shorthand: i
   value_type: string
   description: Read from tar archive file, instead of STDIN
+  details_url: '#input'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -22,6 +24,7 @@ options:
   default_value: "false"
   description: Suppress the load output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -31,18 +34,25 @@ examples: |-
   $ docker image ls
 
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+  ```
 
+  ### Load images from STDIN
+
+  ```console
   $ docker load < busybox.tar.gz
 
   Loaded image: busybox:latest
   $ docker images
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
   busybox             latest              769b9341d937        7 weeks ago         2.489 MB
+  ```
 
+  ### Load images from a file (--input) {#input}
+
+  ```console
   $ docker load --input fedora.tar
 
   Loaded image: fedora:rawhide
-
   Loaded image: fedora:20
 
   $ docker images

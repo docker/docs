@@ -12,6 +12,7 @@ options:
   value_type: string
   description: 'Advertised address (format: <ip|interface>[:port])'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -21,6 +22,7 @@ options:
   default_value: active
   description: Availability of the node ("active"|"pause"|"drain")
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -30,6 +32,7 @@ options:
   description: |
     Address or interface to use for data path traffic (format: <ip|interface>)
   deprecated: false
+  hidden: false
   min_api_version: "1.31"
   experimental: false
   experimentalcli: false
@@ -40,6 +43,7 @@ options:
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -48,6 +52,7 @@ options:
   value_type: string
   description: Token for entry into the swarm
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

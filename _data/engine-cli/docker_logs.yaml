@@ -9,7 +9,7 @@ long: |-
   > `json-file` or `journald` logging driver.
 
   For more information about selecting and configuring logging drivers, refer to
-  [Configure logging drivers](https://docs.docker.com/config/containers/logging/configure/).
+  [Configure logging drivers](/config/containers/logging/configure/).
 
   The `docker logs --follow` command will continue streaming the new output from
   the container's `STDOUT` and `STDERR`.
@@ -47,6 +47,7 @@ options:
   default_value: "false"
   description: Show extra details provided to logs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -57,6 +58,7 @@ options:
   default_value: "false"
   description: Follow log output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -66,6 +68,7 @@ options:
   description: |
     Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -76,6 +79,7 @@ options:
   default_value: all
   description: Number of lines to show from the end of the logs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -86,6 +90,7 @@ options:
   default_value: "false"
   description: Show timestamps
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -94,14 +99,16 @@ options:
   value_type: string
   description: |
     Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
+  details_url: '#until'
   deprecated: false
+  hidden: false
   min_api_version: "1.35"
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### Retrieve logs until a specific point in time
+  ### Retrieve logs until a specific point in time (--until) {#until}
 
   In order to retrieve logs before a specific point in time, run:
 

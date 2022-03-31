@@ -16,7 +16,7 @@ long: |-
   before open a connect to registry, you may need to configure the Docker
   daemon's proxy settings, using the `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`
   environment variables. To set these environment variables on a host using
-  `systemd`, refer to the [control and configure Docker with systemd](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
+  `systemd`, refer to the [control and configure Docker with systemd](/config/daemon/systemd/#httphttps-proxy)
   for variables configuration.
 
   ### Concurrent downloads
@@ -34,7 +34,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Download all tagged images in the repository
+  details_url: '#all-tags'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -44,6 +46,7 @@ options:
   default_value: "true"
   description: Skip image verification
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -52,6 +55,7 @@ options:
   value_type: string
   description: Set platform if server is multi-platform capable
   deprecated: false
+  hidden: false
   min_api_version: "1.32"
   experimental: false
   experimentalcli: false
@@ -63,6 +67,7 @@ options:
   default_value: "false"
   description: Suppress verbose output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -122,7 +127,7 @@ examples: |-
   space.
 
   For more information about images, layers, and the content-addressable store,
-  refer to [understand images, containers, and storage drivers](https://docs.docker.com/storage/storagedriver/).
+  refer to [understand images, containers, and storage drivers](/storage/storagedriver/).
 
 
   ### Pull an image by digest (immutable identifier)
@@ -130,8 +135,8 @@ examples: |-
   So far, you've pulled images by their name (and "tag"). Using names and tags is
   a convenient way to work with images. When using tags, you can `docker pull` an
   image again to make sure you have the most up-to-date version of that image.
-  For example, `docker pull ubuntu:14.04` pulls the latest version of the Ubuntu
-  14.04 image.
+  For example, `docker pull ubuntu:20.04` pulls the latest version of the Ubuntu
+  20.04 image.
 
   In some cases you don't want images to be updated to newer versions, but prefer
   to use a fixed version of an image. Docker enables you to pull an image by its
@@ -140,7 +145,7 @@ examples: |-
   and guarantee that the image you're using is always the same.
 
   To know the digest of an image, pull the image first. Let's pull the latest
-  `ubuntu:14.04` image from Docker Hub:
+  `ubuntu:20.04` image from Docker Hub:
 
   ```console
   $ docker pull ubuntu:20.04
@@ -210,7 +215,7 @@ examples: |-
   [insecure registries](dockerd.md#insecure-registries) section for more information.
 
 
-  ### Pull a repository with multiple images
+  ### Pull a repository with multiple images (-a, --all-tags) {#all-tags}
 
   By default, `docker pull` pulls a *single* image from the registry. A repository
   can contain multiple images. To pull all images from a repository, provide the

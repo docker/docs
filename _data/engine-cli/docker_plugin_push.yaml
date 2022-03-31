@@ -15,6 +15,7 @@ options:
   default_value: "true"
   description: Skip image signing
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

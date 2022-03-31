@@ -11,6 +11,7 @@ options:
   default_value: "false"
   description: 'Detached mode: run command in the background'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -19,6 +20,7 @@ options:
   value_type: string
   description: Override the key sequence for detaching a container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -28,6 +30,7 @@ options:
   value_type: list
   description: Set environment variables
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -37,6 +40,7 @@ options:
   value_type: list
   description: Read in a file of environment variables
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -48,6 +52,7 @@ options:
   default_value: "false"
   description: Keep STDIN open even if not attached
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -57,6 +62,7 @@ options:
   default_value: "false"
   description: Give extended privileges to the command
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -67,6 +73,7 @@ options:
   default_value: "false"
   description: Allocate a pseudo-TTY
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -76,6 +83,7 @@ options:
   value_type: string
   description: 'Username or UID (format: <name|uid>[:<group|gid>])'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -85,6 +93,7 @@ options:
   value_type: string
   description: Working directory inside the container
   deprecated: false
+  hidden: false
   min_api_version: "1.35"
   experimental: false
   experimentalcli: false

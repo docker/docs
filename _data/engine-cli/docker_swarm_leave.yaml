@@ -19,6 +19,7 @@ options:
   default_value: "false"
   description: Force this node to leave the swarm, ignoring warnings
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

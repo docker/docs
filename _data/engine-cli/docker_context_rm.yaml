@@ -12,6 +12,7 @@ options:
   default_value: "false"
   description: Force the removal of a context in use
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

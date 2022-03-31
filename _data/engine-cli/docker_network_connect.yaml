@@ -12,7 +12,9 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: Add network-scoped alias for the container
+  details_url: '#alias'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -22,6 +24,7 @@ options:
   default_value: '[]'
   description: driver options for the network
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -29,7 +32,9 @@ options:
 - option: ip
   value_type: string
   description: IPv4 address (e.g., 172.30.100.104)
+  details_url: '#ip'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -38,6 +43,7 @@ options:
   value_type: string
   description: IPv6 address (e.g., 2001:db8::33)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -45,7 +51,9 @@ options:
 - option: link
   value_type: list
   description: Add link to another container
+  details_url: '#link'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -55,6 +63,7 @@ options:
   default_value: '[]'
   description: Add a link-local address for the container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -68,13 +77,14 @@ examples: |-
 
   ### Connect a container to a network when it starts
 
-  You can also use the `docker run --network=<network-name>` option to start a container and immediately connect it to a network.
+  You can also use the `docker run --network=<network-name>` option to start a
+  container and immediately connect it to a network.
 
   ```console
   $ docker run -itd --network=multi-host-network busybox
   ```
 
-  ### Specify the IP address a container will use on a given network
+  ### Specify the IP address a container will use on a given network (--ip) {#ip}
 
   You can specify the IP address you want to be assigned to the container's interface.
 
@@ -82,7 +92,7 @@ examples: |-
   $ docker network connect --ip 10.10.36.122 multi-host-network container2
   ```
 
-  ### Use the legacy `--link` option
+  ### Use the legacy `--link` option (--link) {#link}
 
   You can use `--link` option to link another container with a preferred alias
 
@@ -90,7 +100,7 @@ examples: |-
   $ docker network connect --link container1:c1 multi-host-network container2
   ```
 
-  ### Create a network alias for a container
+  ### Create a network alias for a container (--alias) {#alias}
 
   `--alias` option can be used to resolve the container by another name in the network
   being connected to.
@@ -119,14 +129,17 @@ examples: |-
   $ docker network connect --ip 172.20.128.2 multi-host-network container2
   ```
 
-  To verify the container is connected, use the `docker network inspect` command. Use `docker network disconnect` to remove a container from the network.
+  To verify the container is connected, use the `docker network inspect` command.
+  Use `docker network disconnect` to remove a container from the network.
 
   Once connected in network, containers can communicate using only another
   container's IP address or name. For `overlay` networks or custom plugins that
   support multi-host connectivity, containers connected to the same multi-host
   network but launched from different Engines can also communicate in this way.
 
-  You can connect a container to one or more networks. The networks need not be the same type. For example, you can connect a single container bridge and overlay networks.
+  You can connect a container to one or more networks. The networks need not be
+  the same type. For example, you can connect a single container bridge and overlay
+  networks.
 deprecated: false
 min_api_version: "1.21"
 experimental: false

@@ -10,6 +10,7 @@ options:
   default_value: "false"
   description: Sign a locally tagged image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

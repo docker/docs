@@ -30,8 +30,10 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Push all tagged images in the repository
+  description: Push all tags of an image to the repository
+  details_url: '#all-tags'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -41,6 +43,7 @@ options:
   default_value: "true"
   description: Skip image signing
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -51,6 +54,7 @@ options:
   default_value: "false"
   description: Suppress verbose output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -86,7 +90,7 @@ examples: |-
   You should see both `rhel-httpd` and `registry-host:5000/myadmin/rhel-httpd`
   listed.
 
-  ### Push all tags of an image
+  ### Push all tags of an image (-a, --all-tags) {#all-tags}
 
   Use the `-a` (or `--all-tags`) option to push all tags of a local image.
 

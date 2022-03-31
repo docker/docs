@@ -11,6 +11,7 @@ options:
   default_value: "10"
   description: Seconds to wait for stop before killing the container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

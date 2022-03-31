@@ -13,6 +13,7 @@ options:
   default_value: "false"
   description: Print the information in a human friendly format
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

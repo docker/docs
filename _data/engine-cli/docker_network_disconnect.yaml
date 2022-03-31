@@ -13,6 +13,7 @@ options:
   default_value: "false"
   description: Force the container to disconnect from a network
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

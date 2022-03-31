@@ -8,51 +8,34 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker stack ls [OPTIONS]
 pname: docker stack
 plink: docker_stack.yaml
 options:
-- option: all-namespaces
-  value_type: bool
-  default_value: "false"
-  description: List stacks from all Kubernetes namespaces
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 - option: format
   value_type: string
-  description: Pretty-print stacks using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
-- option: namespace
-  value_type: stringSlice
-  default_value: '[]'
-  description: Kubernetes namespaces to use
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 inherited_options:
-- option: kubeconfig
-  value_type: string
-  description: Kubernetes config file
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: Orchestrator to use (swarm|all)
   deprecated: true
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -68,14 +51,14 @@ examples: |-
   vossibility-stack  6                   Swarm
   ```
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting option (`--format`) pretty-prints stacks using a Go template.
 
   Valid placeholders for the Go template are listed below:
 
   | Placeholder     | Description        |
-  | --------------- | ------------------ |
+  |-----------------|--------------------|
   | `.Name`         | Stack name         |
   | `.Services`     | Number of services |
   | `.Orchestrator` | Orchestrator name  |
@@ -92,6 +75,13 @@ examples: |-
   $ docker stack ls --format "{{.Name}}: {{.Services}}"
   web-server: 1
   web-cache: 4
+  ```
+
+  To list all stacks in JSON format, use the `json` directive:
+
+  ```console
+  $ docker stack ls --format json
+  {"Name":"myapp","Namespace":"","Orchestrator":"Swarm","Services":"3"}
   ```
 deprecated: false
 min_api_version: "1.25"

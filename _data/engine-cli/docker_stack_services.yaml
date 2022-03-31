@@ -7,7 +7,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker stack services [OPTIONS] STACK
 pname: docker stack
@@ -17,26 +17,28 @@ options:
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print services using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
-  swarm: false
-- option: namespace
-  value_type: string
-  description: Kubernetes namespace to use
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
   swarm: false
 - option: quiet
   shorthand: q
@@ -44,23 +46,17 @@ options:
   default_value: "false"
   description: Only display IDs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 inherited_options:
-- option: kubeconfig
-  value_type: string
-  description: Kubernetes config file
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: Orchestrator to use (swarm|all)
   deprecated: true
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -76,7 +72,7 @@ examples: |-
   dn7m7nhhfb9y  myapp_db        1/1       mysql@sha256:a9a5b559f8821fe73d58c3606c812d1c044868d42c63817fa5125fd9d8b7b539
   ```
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
   is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).
@@ -95,38 +91,29 @@ examples: |-
   The currently supported filters are:
 
   * id / ID (`--filter id=7be5ei6sqeye`, or `--filter ID=7be5ei6sqeye`)
-    * Swarm: supported
-    * Kubernetes: not supported
   * label (`--filter label=key=value`)
-    * Swarm: supported
-    * Kubernetes: supported
   * mode (`--filter mode=replicated`, or `--filter mode=global`)
     * Swarm: not supported
-    * Kubernetes: supported
   * name (`--filter name=myapp_web`)
-    * Swarm: supported
-    * Kubernetes: supported
   * node (`--filter node=mynode`)
     * Swarm: not supported
-    * Kubernetes: supported
   * service (`--filter service=web`)
     * Swarm: not supported
-    * Kubernetes: supported
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting options (`--format`) pretty-prints services output
   using a Go template.
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder | Description
-  ------------|-------------------------------------------------------------------
-  `.ID`       | Service ID
-  `.Name`     | Service name
-  `.Mode`     | Service mode (replicated, global)
-  `.Replicas` | Service replicas
-  `.Image`    | Service image
+  | Placeholder | Description                       |
+  |-------------|-----------------------------------|
+  | `.ID`       | Service ID                        |
+  | `.Name`     | Service name                      |
+  | `.Mode`     | Service mode (replicated, global) |
+  | `.Replicas` | Service replicas                  |
+  | `.Image`    | Service image                     |
 
   When using the `--format` option, the `stack services` command will either
   output the data exactly as the template declares or, when using the
@@ -140,6 +127,15 @@ examples: |-
 
   0zmvwuiu3vue: replicated 10/10
   fm6uf97exkul: global 5/5
+  ```
+
+  To list all services in JSON format, use the `json` directive:
+
+  ```console
+  $ docker stack services ls --format json
+  {"ID":"0axqbl293vwm","Image":"localstack/localstack:latest","Mode":"replicated","Name":"myapp_localstack","Ports":"*:4566-\u003e4566/tcp, *:8080-\u003e8080/tcp","Replicas":"0/1"}
+  {"ID":"384xvtzigz3p","Image":"redis:6.0.9-alpine3.12","Mode":"replicated","Name":"myapp_redis","Ports":"*:6379-\u003e6379/tcp","Replicas":"1/1"}
+  {"ID":"hyujct8cnjkk","Image":"postgres:13.2-alpine","Mode":"replicated","Name":"myapp_repos-db","Ports":"*:5432-\u003e5432/tcp","Replicas":"0/1"}
   ```
 deprecated: false
 min_api_version: "1.25"

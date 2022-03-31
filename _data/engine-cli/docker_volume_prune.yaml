@@ -1,7 +1,7 @@
 command: docker volume prune
 short: Remove all unused local volumes
-long: Remove all unused local volumes. Unused local volumes are those which are not
-  referenced by any containers
+long: |
+  Remove all unused local volumes. Unused local volumes are those which are not referenced by any containers
 usage: docker volume prune [OPTIONS]
 pname: docker volume
 plink: docker_volume.yaml
@@ -9,7 +9,9 @@ options:
 - option: filter
   value_type: filter
   description: Provide filter values (e.g. 'label=<label>')
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +22,7 @@ options:
   default_value: "false"
   description: Do not prompt for confirmation
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -36,6 +39,20 @@ examples: |-
 
   Total reclaimed space: 36 B
   ```
+
+  ### Filtering (--filter) {#filter}
+
+  The filtering flag (`--filter`) format is of "key=value". If there is more
+  than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+
+  The currently supported filters are:
+
+  * label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) - only remove volumes with (or without, in case `label!=...` is used) the specified labels.
+
+  The `label` filter accepts two formats. One is the `label=...` (`label=<key>` or `label=<key>=<value>`),
+  which removes volumes with the specified labels. The other
+  format is the `label!=...` (`label!=<key>` or `label!=<key>=<value>`), which removes
+  volumes without the specified labels.
 deprecated: false
 min_api_version: "1.25"
 experimental: false

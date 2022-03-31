@@ -10,6 +10,7 @@ options:
   value_type: string
   description: Read from tar archive file, instead of STDIN
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   default_value: "false"
   description: Suppress the load output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

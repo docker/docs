@@ -9,6 +9,7 @@ options:
   value_type: list
   description: Add a custom host-to-IP mapping (host:ip)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -17,6 +18,7 @@ options:
   value_type: list
   description: Set build-time variables
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -26,6 +28,7 @@ options:
   default_value: '[]'
   description: Images to consider as cache sources
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -34,6 +37,7 @@ options:
   value_type: string
   description: Optional parent cgroup for the container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -43,6 +47,7 @@ options:
   default_value: "false"
   description: Compress the build context using gzip
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -52,6 +57,7 @@ options:
   default_value: "0"
   description: Limit the CPU CFS (Completely Fair Scheduler) period
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -61,6 +67,7 @@ options:
   default_value: "0"
   description: Limit the CPU CFS (Completely Fair Scheduler) quota
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -71,6 +78,7 @@ options:
   default_value: "0"
   description: CPU shares (relative weight)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -79,6 +87,7 @@ options:
   value_type: string
   description: CPUs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -87,6 +96,7 @@ options:
   value_type: string
   description: MEMs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -96,6 +106,7 @@ options:
   default_value: "true"
   description: Skip image verification
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -105,6 +116,7 @@ options:
   value_type: string
   description: Name of the Dockerfile (Default is 'PATH/Dockerfile')
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -114,6 +126,7 @@ options:
   default_value: "false"
   description: Always remove intermediate containers
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -122,6 +135,7 @@ options:
   value_type: string
   description: Write the image ID to the file
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -130,6 +144,7 @@ options:
   value_type: string
   description: Container isolation technology
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -138,6 +153,7 @@ options:
   value_type: list
   description: Set metadata for an image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -148,6 +164,7 @@ options:
   default_value: "0"
   description: Memory limit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -158,6 +175,7 @@ options:
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -165,9 +183,9 @@ options:
 - option: network
   value_type: string
   default_value: default
-  description: |
-    Set the networking mode for the RUN instructions during build
+  description: Set the networking mode for the RUN instructions during build
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -178,17 +196,7 @@ options:
   default_value: "false"
   description: Do not use cache when building the image
   deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: output
-  shorthand: o
-  value_type: stringArray
-  default_value: '[]'
-  description: 'Output destination (format: type=local,dest=path)'
-  deprecated: false
-  min_api_version: "1.40"
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -197,17 +205,8 @@ options:
   value_type: string
   description: Set platform if server is multi-platform capable
   deprecated: false
+  hidden: false
   min_api_version: "1.38"
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: progress
-  value_type: string
-  default_value: auto
-  description: |
-    Set type of progress output (auto, plain, tty). Use plain to show container output
-  deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -217,6 +216,7 @@ options:
   default_value: "false"
   description: Always attempt to pull a newer version of the image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -227,6 +227,7 @@ options:
   default_value: "false"
   description: Suppress the build output and print image ID on success
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -236,17 +237,7 @@ options:
   default_value: "true"
   description: Remove intermediate containers after a successful build
   deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: secret
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret
-  deprecated: false
-  min_api_version: "1.39"
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -256,6 +247,7 @@ options:
   default_value: '[]'
   description: Security options
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -265,6 +257,7 @@ options:
   default_value: "0"
   description: Size of /dev/shm
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -274,19 +267,9 @@ options:
   default_value: "false"
   description: Squash newly built layers into a single new layer
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: true
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: ssh
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format: default|<id>[=<socket>|<key>[,<key>]])
-  deprecated: false
-  min_api_version: "1.39"
-  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
@@ -295,6 +278,7 @@ options:
   default_value: "false"
   description: Stream attaches to server to negotiate build context
   deprecated: false
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -304,6 +288,7 @@ options:
   value_type: list
   description: Name and optionally a tag in the 'name:tag' format
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -312,6 +297,7 @@ options:
   value_type: string
   description: Set the target build stage to build.
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -321,6 +307,7 @@ options:
   default_value: '[]'
   description: Ulimit options
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

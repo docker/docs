@@ -15,17 +15,10 @@ options:
   value_type: string
   description: Format the output using the given Go template
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
-  swarm: false
-- option: kubeconfig
-  value_type: string
-  description: Kubernetes config file
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
   swarm: false
 examples: |-
   ### Default output

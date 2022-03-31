@@ -64,6 +64,65 @@ long: |-
   you must be explicit with a relative or absolute path, for example:
 
       `/path/to/file:name.txt` or `./file:name.txt`
+usage: "docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp [OPTIONS]
+  SRC_PATH|- CONTAINER:DEST_PATH"
+pname: docker
+plink: docker.yaml
+options:
+- option: archive
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Archive mode (copy all uid/gid information)
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: follow-link
+  shorthand: L
+  value_type: bool
+  default_value: "false"
+  description: Always follow symbol link in SRC_PATH
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: |
+    Suppress progress output during copy. Progress output is automatically suppressed if no terminal is attached
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  Copy a local file into container
+
+  ```console
+  $ docker cp ./some_file CONTAINER:/work
+  ```
+
+  Copy files from container to local path
+
+  ```console
+  $ docker cp CONTAINER:/var/logs/ /tmp/app_logs
+  ```
+
+  Copy a file from container to stdout. Please note `cp` command produces a tar stream
+
+  ```console
+  $ docker cp CONTAINER:/var/logs/app.log - | tar x -O | grep "ERROR"
+  ```
+
+  ### Corner cases
 
   It is not possible to copy certain system files such as resources under
   `/proc`, `/sys`, `/dev`, [tmpfs](run.md#mount-tmpfs---tmpfs), and mounts created by
@@ -83,31 +142,6 @@ long: |-
   The command extracts the content of the tar to the `DEST_PATH` in container's
   filesystem. In this case, `DEST_PATH` must specify a directory. Using `-` as
   the `DEST_PATH` streams the contents of the resource as a tar archive to `STDOUT`.
-usage: "docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp [OPTIONS]
-  SRC_PATH|- CONTAINER:DEST_PATH"
-pname: docker
-plink: docker.yaml
-options:
-- option: archive
-  shorthand: a
-  value_type: bool
-  default_value: "false"
-  description: Archive mode (copy all uid/gid information)
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: follow-link
-  shorthand: L
-  value_type: bool
-  default_value: "false"
-  description: Always follow symbol link in SRC_PATH
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false

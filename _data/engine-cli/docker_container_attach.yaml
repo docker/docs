@@ -1,6 +1,8 @@
 command: docker container attach
-short: Attach local standard input, output, and error streams to a running container
-long: Attach local standard input, output, and error streams to a running container
+short: |
+  Attach local standard input, output, and error streams to a running container
+long: |
+  Attach local standard input, output, and error streams to a running container
 usage: docker container attach [OPTIONS] CONTAINER
 pname: docker container
 plink: docker_container.yaml
@@ -9,6 +11,7 @@ options:
   value_type: string
   description: Override the key sequence for detaching a container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -18,6 +21,7 @@ options:
   default_value: "false"
   description: Do not attach STDIN
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -27,6 +31,7 @@ options:
   default_value: "true"
   description: Proxy all received signals to the process
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

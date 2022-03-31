@@ -26,6 +26,7 @@ options:
   default_value: "false"
   description: Show all images (default hides intermediate images)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -34,7 +35,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Show digests
+  details_url: '#digests'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -43,15 +46,24 @@ options:
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print images using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -60,7 +72,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Don't truncate output
+  details_url: '#no-trunc'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -71,6 +85,7 @@ options:
   default_value: "false"
   description: Only show image IDs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -133,7 +148,7 @@ examples: |-
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
   ```
 
-  ### List the full length image IDs
+  ### List the full length image IDs (--no-trunc) {#no-trunc}
 
   ```console
   $ docker images --no-trunc
@@ -150,7 +165,7 @@ examples: |-
   <none>                        <none>              sha256:5ed6274db6ceb2397844896966ea239290555e74ef307030ebb01ff91b1914df   24 hours ago        1.089 GB
   ```
 
-  ### List image digests
+  ### List image digests (--digests) {#digests}
 
   Images that use the v2 or later format have a content-addressable identifier
   called a `digest`. As long as the input used to generate the image is
@@ -168,7 +183,7 @@ examples: |-
   also reference by digest in `create`, `run`, and `rmi` commands, as well as the
   `FROM` image reference in a Dockerfile.
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
@@ -323,15 +338,15 @@ examples: |-
 
   Valid placeholders for the Go template are listed below:
 
-  | Placeholder | Description|
-  | ---- | ---- |
-  | `.ID` | Image ID |
-  | `.Repository` | Image repository |
-  | `.Tag` | Image tag |
-  | `.Digest` | Image digest |
+  | Placeholder     | Description                              |
+  |-----------------|------------------------------------------|
+  | `.ID`           | Image ID                                 |
+  | `.Repository`   | Image repository                         |
+  | `.Tag`          | Image tag                                |
+  | `.Digest`       | Image digest                             |
   | `.CreatedSince` | Elapsed time since the image was created |
-  | `.CreatedAt` | Time when the image was created |
-  | `.Size` | Image disk size |
+  | `.CreatedAt`    | Time when the image was created          |
+  | `.Size`         | Image disk size                          |
 
   When using the `--format` option, the `image` command will either
   output the data exactly as the template declares or, when using the
@@ -370,6 +385,14 @@ examples: |-
   746b819f315e        postgres                  9.3
   746b819f315e        postgres                  9.3.5
   746b819f315e        postgres                  latest
+  ```
+
+  To list all images in JSON format, use the `json` directive:
+
+  ```console
+  $ docker images --format json
+  {"Containers":"N/A","CreatedAt":"2021-03-04 03:24:42 +0100 CET","CreatedSince":"5 days ago","Digest":"\u003cnone\u003e","ID":"4dd97cefde62","Repository":"ubuntu","SharedSize":"N/A","Size":"72.9MB","Tag":"latest","UniqueSize":"N/A","VirtualSize":"72.9MB"}
+  {"Containers":"N/A","CreatedAt":"2021-02-17 22:19:54 +0100 CET","CreatedSince":"2 weeks ago","Digest":"\u003cnone\u003e","ID":"28f6e2705743","Repository":"alpine","SharedSize":"N/A","Size":"5.61MB","Tag":"latest","UniqueSize":"N/A","VirtualSize":"5.613MB"}
   ```
 deprecated: false
 experimental: false

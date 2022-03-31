@@ -38,14 +38,23 @@ options:
   default_value: "false"
   description: Show all containers (default shows just running)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print images using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -55,6 +64,7 @@ options:
   default_value: "false"
   description: Disable streaming stats and only pull the first result
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -64,6 +74,7 @@ options:
   default_value: "false"
   description: Do not truncate output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -89,8 +100,8 @@ examples: |-
   | `CONTAINER ID` and `Name` | the ID and name of the container                                                              |
   | `CPU %` and `MEM %`       | the percentage of the host's CPU and memory the container is using                            |
   | `MEM USAGE / LIMIT`       | the total memory the container is using, and the total amount of memory it is allowed to use  |
-  | `NET I/O`                 | The amount of data the container has sent and received over its network interface             |
-  | `BLOCK I/O`               | The amount of data the container has read to and written from block devices on the host       |
+  | `NET I/O`                 | The amount of data the container has received and sent over its network interface             |
+  | `BLOCK I/O`               | The amount of data the container has written to and read from block devices on the host       |
   | `PIDs`                    | the number of processes or threads the container has created                                  |
 
   Running `docker stats` on multiple containers by name and id against a Linux daemon.
@@ -101,6 +112,13 @@ examples: |-
   CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
   b95a83497c91        awesome_brattain    0.28%               5.629MiB / 1.952GiB   0.28%               916B / 0B           147kB / 0B          9
   67b2525d8ad1        foobar              0.00%               1.727MiB / 1.952GiB   0.09%               2.48kB / 0B         4.11MB / 0B         2
+  ```
+
+  Running `docker stats` on container with name nginx and getting output in `json` format.
+
+  ```console
+  $ docker stats nginx --no-stream --format "{{ json . }}"
+  {"BlockIO":"0B / 13.3kB","CPUPerc":"0.03%","Container":"nginx","ID":"ed37317fbf42","MemPerc":"0.24%","MemUsage":"2.352MiB / 982.5MiB","Name":"nginx","NetIO":"539kB / 606kB","PIDs":"2"}
   ```
 
   Running `docker stats` with customized format on all (Running and Stopped) containers.
@@ -142,25 +160,24 @@ examples: |-
   9db7aa4d986d        mad_wilson          9.59%               40.09 MiB           27.6 kB / 8.81 kB   17 MB / 20.1 MB
   ```
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting option (`--format`) pretty prints container output
   using a Go template.
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder  | Description
-  ------------ | --------------------------------------------
-  `.Container` | Container name or ID (user input)
-  `.Name`      | Container name
-  `.ID`        | Container ID
-  `.CPUPerc`   | CPU percentage
-  `.MemUsage`  | Memory usage
-  `.NetIO`     | Network IO
-  `.BlockIO`   | Block IO
-  `.MemPerc`   | Memory percentage (Not available on Windows)
-  `.PIDs`      | Number of PIDs (Not available on Windows)
-
+  | Placeholder  | Description                                  |
+  |--------------|----------------------------------------------|
+  | `.Container` | Container name or ID (user input)            |
+  | `.Name`      | Container name                               |
+  | `.ID`        | Container ID                                 |
+  | `.CPUPerc`   | CPU percentage                               |
+  | `.MemUsage`  | Memory usage                                 |
+  | `.NetIO`     | Network IO                                   |
+  | `.BlockIO`   | Block IO                                     |
+  | `.MemPerc`   | Memory percentage (Not available on Windows) |
+  | `.PIDs`      | Number of PIDs (Not available on Windows)    |
 
   When using the `--format` option, the `stats` command either
   outputs the data exactly as the template declares or, when using the

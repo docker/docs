@@ -11,6 +11,7 @@ options:
   value_type: string
   description: 'Advertised address (format: <ip|interface>[:port])'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -21,6 +22,7 @@ options:
   description: |
     Enable manager autolocking (requiring an unlock key to start a stopped manager)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -30,6 +32,7 @@ options:
   default_value: active
   description: Availability of the node ("active"|"pause"|"drain")
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -39,6 +42,7 @@ options:
   default_value: 2160h0m0s
   description: Validity period for node certificates (ns|us|ms|s|m|h)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -48,6 +52,7 @@ options:
   description: |
     Address or interface to use for data path traffic (format: <ip|interface>)
   deprecated: false
+  hidden: false
   min_api_version: "1.31"
   experimental: false
   experimentalcli: false
@@ -59,6 +64,7 @@ options:
   description: |
     Port number to use for data path traffic (1024 - 49151). If no value is set or is set to 0, the default port (4789) is used.
   deprecated: false
+  hidden: false
   min_api_version: "1.40"
   experimental: false
   experimentalcli: false
@@ -69,6 +75,7 @@ options:
   default_value: '[]'
   description: default address pool in CIDR format
   deprecated: false
+  hidden: false
   min_api_version: "1.39"
   experimental: false
   experimentalcli: false
@@ -79,6 +86,7 @@ options:
   default_value: "24"
   description: default address pool subnet mask length
   deprecated: false
+  hidden: false
   min_api_version: "1.39"
   experimental: false
   experimentalcli: false
@@ -89,6 +97,7 @@ options:
   default_value: 5s
   description: Dispatcher heartbeat period (ns|us|ms|s|m|h)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -97,6 +106,7 @@ options:
   value_type: external-ca
   description: Specifications of one or more certificate signing endpoints
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -106,6 +116,7 @@ options:
   default_value: "false"
   description: Force create a new cluster from current state
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -115,6 +126,7 @@ options:
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -124,6 +136,7 @@ options:
   default_value: "0"
   description: Number of additional Raft snapshots to retain
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -134,6 +147,7 @@ options:
   default_value: "10000"
   description: Number of log entries between Raft snapshots
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -144,6 +158,7 @@ options:
   default_value: "5"
   description: Task history retention limit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

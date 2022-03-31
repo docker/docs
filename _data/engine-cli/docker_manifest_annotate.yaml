@@ -9,6 +9,7 @@ options:
   value_type: string
   description: Set architecture
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -17,6 +18,7 @@ options:
   value_type: string
   description: Set operating system
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -26,6 +28,7 @@ options:
   default_value: '[]'
   description: Set operating system feature
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -34,6 +37,7 @@ options:
   value_type: string
   description: Set operating system version
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -42,6 +46,7 @@ options:
   value_type: string
   description: Set architecture variant
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

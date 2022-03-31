@@ -8,7 +8,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker node rm [OPTIONS] NODE [NODE...]
 pname: docker node
@@ -19,7 +19,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Force remove a node from the swarm
+  details_url: '#force'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -45,7 +47,7 @@ examples: |-
   down and can't be removed
   ```
 
-  ### Forcibly remove an inaccessible node from a swarm
+  ### Forcibly remove an inaccessible node from a swarm (--force) {#force}
 
   If you lose access to a worker node or need to shut it down because it has been
   compromised or is not behaving as expected, you can use the `--force` option.

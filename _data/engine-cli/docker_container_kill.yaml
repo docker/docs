@@ -11,6 +11,7 @@ options:
   default_value: KILL
   description: Signal to send to the container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

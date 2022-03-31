@@ -10,7 +10,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Force the removal of a running container (uses SIGKILL)
+  details_url: '#force'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,7 +22,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Remove the specified link
+  details_url: '#link'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -30,7 +34,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Remove anonymous volumes associated with the container
+  details_url: '#volumes'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -46,7 +52,7 @@ examples: |-
   /redis
   ```
 
-  ### Remove a link specified with `--link` on the default bridge network
+  ### Remove a link specified with `--link` on the default bridge network (--link) {#link}
 
   This removes the underlying link between `/webapp` and the `/redis`
   containers on the default bridge network, removing all network communication
@@ -59,7 +65,7 @@ examples: |-
   /webapp/redis
   ```
 
-  ### Force-remove a running container
+  ### Force-remove a running container (--force) {#force}
 
   This command force-removes a running container.
 
@@ -102,10 +108,10 @@ examples: |-
   $ docker ps --filter status=exited -q | xargs docker rm
   ```
 
-  ### Remove a container and its volumes
+  ### Remove a container and its volumes (-v, --volumes) {#volumes}
 
   ```console
-  $ docker rm -v redis
+  $ docker rm --volumes redis
   redis
   ```
 

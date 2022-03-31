@@ -10,6 +10,7 @@ options:
   default_value: "false"
   description: Show extra details provided to logs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   default_value: "false"
   description: Follow log output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -29,6 +31,7 @@ options:
   description: |
     Show logs since timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -39,6 +42,7 @@ options:
   default_value: all
   description: Number of lines to show from the end of the logs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -49,6 +53,7 @@ options:
   default_value: "false"
   description: Show timestamps
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -58,6 +63,7 @@ options:
   description: |
     Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
   deprecated: false
+  hidden: false
   min_api_version: "1.35"
   experimental: false
   experimentalcli: false

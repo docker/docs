@@ -15,6 +15,7 @@ options:
   default_value: "10"
   description: Seconds to wait for stop before killing it
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

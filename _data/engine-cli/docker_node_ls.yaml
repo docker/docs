@@ -10,7 +10,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker node ls [OPTIONS]
 pname: docker node
@@ -20,15 +20,25 @@ options:
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print nodes using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -39,6 +49,7 @@ options:
   default_value: "false"
   description: Only display IDs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -60,7 +71,7 @@ examples: |-
   > `e216jshn25ckzbvmwlnh5jr3g *`) means this node is the current docker daemon.
 
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
@@ -178,23 +189,23 @@ examples: |-
   e216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready   Active        Leader
   ```
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting options (`--format`) pretty-prints nodes output
   using a Go template.
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder      | Description
-  -----------------|------------------------------------------------------------------------------------------
-  `.ID`            | Node ID
-  `.Self`          | Node of the daemon (`true/false`, `true`indicates that the node is the same as current docker daemon)
-  `.Hostname`      | Node hostname
-  `.Status`        | Node status
-  `.Availability`  | Node availability ("active", "pause", or "drain")
-  `.ManagerStatus` | Manager status of the node
-  `.TLSStatus`     | TLS status of the node ("Ready", or "Needs Rotation" has TLS certificate signed by an old CA)
-  `.EngineVersion` | Engine version
+  | Placeholder      | Description                                                                                           |
+  |------------------|-------------------------------------------------------------------------------------------------------|
+  | `.ID`            | Node ID                                                                                               |
+  | `.Self`          | Node of the daemon (`true/false`, `true`indicates that the node is the same as current docker daemon) |
+  | `.Hostname`      | Node hostname                                                                                         |
+  | `.Status`        | Node status                                                                                           |
+  | `.Availability`  | Node availability ("active", "pause", or "drain")                                                     |
+  | `.ManagerStatus` | Manager status of the node                                                                            |
+  | `.TLSStatus`     | TLS status of the node ("Ready", or "Needs Rotation" has TLS certificate signed by an old CA)         |
+  | `.EngineVersion` | Engine version                                                                                        |
 
   When using the `--format` option, the `node ls` command will either
   output the data exactly as the template declares or, when using the
@@ -209,6 +220,12 @@ examples: |-
 
   e216jshn25ckzbvmwlnh5jr3g: swarm-manager1 Ready
   35o6tiywb700jesrt3dmllaza: swarm-worker1 Needs Rotation
+  ```
+
+  To list all nodes in JSON format, use the `json` directive:
+  ```console
+  $ docker node ls --format json
+  {"Availability":"Active","EngineVersion":"20.10.5","Hostname":"docker-desktop","ID":"k8f4w7qtzpj5sqzclcqafw35g","ManagerStatus":"Leader","Self":true,"Status":"Ready","TLSStatus":"Ready"}
   ```
 deprecated: false
 min_api_version: "1.24"

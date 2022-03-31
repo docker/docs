@@ -4,13 +4,13 @@ short: Remove one or more configs
 long: |-
   Removes the specified configs from the swarm.
 
-  For detailed information about using configs, refer to [store configuration data using Docker Configs](https://docs.docker.com/engine/swarm/configs/).
+  For detailed information about using configs, refer to [store configuration data using Docker Configs](/engine/swarm/configs/).
 
   > **Note**
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker config rm CONFIG [CONFIG...]
 pname: docker config

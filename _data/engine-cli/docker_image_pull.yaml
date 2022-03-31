@@ -11,6 +11,7 @@ options:
   default_value: "false"
   description: Download all tagged images in the repository
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   default_value: "true"
   description: Skip image verification
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -28,6 +30,7 @@ options:
   value_type: string
   description: Set platform if server is multi-platform capable
   deprecated: false
+  hidden: false
   min_api_version: "1.32"
   experimental: false
   experimentalcli: false
@@ -39,6 +42,7 @@ options:
   default_value: "false"
   description: Suppress verbose output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

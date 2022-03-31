@@ -12,6 +12,7 @@ options:
   default_value: "30"
   description: HTTP client timeout (in seconds)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

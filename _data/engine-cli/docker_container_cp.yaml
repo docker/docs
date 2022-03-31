@@ -18,6 +18,7 @@ options:
   default_value: "false"
   description: Archive mode (copy all uid/gid information)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -28,6 +29,19 @@ options:
   default_value: "false"
   description: Always follow symbol link in SRC_PATH
   deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: |
+    Suppress progress output during copy. Progress output is automatically suppressed if no terminal is attached
+  deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

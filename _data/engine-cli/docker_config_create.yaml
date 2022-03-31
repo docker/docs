@@ -3,13 +3,13 @@ short: Create a config from a file or STDIN
 long: |-
   Creates a config using standard input or from a file for the config content.
 
-  For detailed information about using configs, refer to [store configuration data using Docker Configs](https://docs.docker.com/engine/swarm/configs/).
+  For detailed information about using configs, refer to [store configuration data using Docker Configs](/engine/swarm/configs/).
 
   > **Note**
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker config create [OPTIONS] CONFIG file|-
 pname: docker config
@@ -19,7 +19,9 @@ options:
   shorthand: l
   value_type: list
   description: Config labels
+  details_url: '#label'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -28,6 +30,7 @@ options:
   value_type: string
   description: Template driver
   deprecated: false
+  hidden: false
   min_api_version: "1.37"
   experimental: false
   experimentalcli: false
@@ -60,7 +63,7 @@ examples: |-
   dg426haahpi5ezmkkj5kyl3sn   my_config           7 seconds ago       7 seconds ago
   ```
 
-  ### Create a config with labels
+  ### Create a config with labels (-l, --label) {#label}
 
   ```console
   $ docker config create \

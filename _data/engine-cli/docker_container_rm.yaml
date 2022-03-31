@@ -11,6 +11,7 @@ options:
   default_value: "false"
   description: Force the removal of a running container (uses SIGKILL)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -21,6 +22,7 @@ options:
   default_value: "false"
   description: Remove the specified link
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -31,6 +33,7 @@ options:
   default_value: "false"
   description: Remove anonymous volumes associated with the container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

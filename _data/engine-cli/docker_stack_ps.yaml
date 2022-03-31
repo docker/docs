@@ -7,7 +7,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker stack ps [OPTIONS] STACK
 pname: docker stack
@@ -17,32 +17,36 @@ options:
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print tasks using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
-  swarm: false
-- option: namespace
-  value_type: string
-  description: Kubernetes namespace to use
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
   swarm: false
 - option: no-resolve
   value_type: bool
   default_value: "false"
   description: Do not map IDs to Names
+  details_url: '#no-resolve'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -51,7 +55,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Do not truncate output
+  details_url: '#no-trunc'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -61,24 +67,19 @@ options:
   value_type: bool
   default_value: "false"
   description: Only display task IDs
+  details_url: '#quiet'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 inherited_options:
-- option: kubeconfig
-  value_type: string
-  description: Kubernetes config file
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: Orchestrator to use (swarm|all)
   deprecated: true
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -102,7 +103,7 @@ examples: |-
   t72q3z038jeh        voting_redis.2        redis:alpine                                   node3  Running        Running 3 minutes ago
   ```
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
   is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).
@@ -171,22 +172,22 @@ examples: |-
   t72q3z038jeh        voting_redis.2        redis:alpine                                   node3  Running        Running 21 minutes ago
   ```
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting options (`--format`) pretty-prints tasks output using a Go template.
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder     | Description
-  ----------------|------------------------------------------------------------------------------------------
-  `.ID`           | Task ID
-  `.Name`         | Task name
-  `.Image`        | Task image
-  `.Node`         | Node ID
-  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
-  `.CurrentState` | Current state of the task
-  `.Error`        | Error
-  `.Ports`        | Task published ports
+  | Placeholder     | Description                                                      |
+  |-----------------|------------------------------------------------------------------|
+  | `.ID`           | Task ID                                                          |
+  | `.Name`         | Task name                                                        |
+  | `.Image`        | Task image                                                       |
+  | `.Node`         | Node ID                                                          |
+  | `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`) |
+  | `.CurrentState` | Current state of the task                                        |
+  | `.Error`        | Error                                                            |
+  | `.Ports`        | Task published ports                                             |
 
   When using the `--format` option, the `stack ps` command will either
   output the data exactly as the template declares or, when using the
@@ -208,7 +209,15 @@ examples: |-
   voting_redis.2: redis:alpine
   ```
 
-  ### Do not map IDs to Names
+  To list all tasks in JSON format, use the `json` directive:
+  ```console
+  $ docker stack ps --format json myapp
+  {"CurrentState":"Preparing 23 seconds ago","DesiredState":"Running","Error":"","ID":"2ufjubh79tn0","Image":"localstack/localstack:latest","Name":"myapp_localstack.1","Node":"docker-desktop","Ports":""}
+  {"CurrentState":"Running 20 seconds ago","DesiredState":"Running","Error":"","ID":"roee387ngf5r","Image":"redis:6.0.9-alpine3.12","Name":"myapp_redis.1","Node":"docker-desktop","Ports":""}
+  {"CurrentState":"Preparing 13 seconds ago","DesiredState":"Running","Error":"","ID":"yte68ouq7glh","Image":"postgres:13.2-alpine","Name":"myapp_repos-db.1","Node":"docker-desktop","Ports":""}
+  ```
+
+  ### Do not map IDs to Names (--no-resolve) {#no-resolve}
 
   The `--no-resolve` option shows IDs for task name, without mapping IDs to Names.
 
@@ -226,7 +235,7 @@ examples: |-
   t72q3z038jeh        tg61x8myx563ueo3urmn1ic6m.2   redis:alpine                                   kanqcxfajd1r16wlnqcblobmm   Running        Running 31 minutes ago
   ```
 
-  ### Do not truncate output
+  ### Do not truncate output (--no-trunc) {#no-trunc}
 
   When deploying a service, docker resolves the digest for the service's
   image, and pins the service to that digest. The digest is not shown by
@@ -247,7 +256,7 @@ examples: |-
   t72q3z038jehe1wbh9gdum076   voting_redis.2        redis:alpine@sha256:9cd405cd1ec1410eaab064a1383d0d8854d1ef74a54e1e4a92fb4ec7bdc3ee7                                   node3  Running        Runnin 32 minutes ago
   ```
 
-  ### Only display task IDs
+  ### Only display task IDs (-q, --quiet) {#quiet}
 
   The `-q ` or `--quiet` option only shows IDs of the tasks in the stack.
   This example outputs all task IDs of the "voting" stack;

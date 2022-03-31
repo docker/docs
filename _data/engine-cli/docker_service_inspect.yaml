@@ -13,7 +13,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker service inspect [OPTIONS] SERVICE [SERVICE...]
 pname: docker service
@@ -22,8 +22,13 @@ options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: |-
+    Format output using a custom template:
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -32,7 +37,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Print the information in a human friendly format
+  details_url: '#pretty'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -115,7 +122,7 @@ examples: |-
   ]
   ```
 
-  ### Formatting
+  ### Formatting (--pretty) {#pretty}
 
   You can print the inspect output in a human-readable format instead of the default
   JSON output, by using the `--pretty` option:

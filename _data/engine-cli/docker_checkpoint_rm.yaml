@@ -10,6 +10,7 @@ options:
   value_type: string
   description: Use a custom checkpoint storage directory
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

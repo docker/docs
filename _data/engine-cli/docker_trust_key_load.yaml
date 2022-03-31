@@ -13,6 +13,7 @@ options:
   default_value: signer
   description: Name for the loaded key
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

@@ -10,8 +10,13 @@ options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: |-
+    Format output using a custom template:
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -22,6 +27,7 @@ options:
   default_value: "false"
   description: Verbose output for diagnostics
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

@@ -11,6 +11,7 @@ options:
   default_value: "false"
   description: Attach STDOUT/STDERR and forward signals
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -19,6 +20,7 @@ options:
   value_type: string
   description: Restore from this checkpoint
   deprecated: false
+  hidden: false
   experimental: true
   experimentalcli: false
   kubernetes: false
@@ -28,6 +30,7 @@ options:
   value_type: string
   description: Use a custom checkpoint storage directory
   deprecated: false
+  hidden: false
   experimental: true
   experimentalcli: false
   kubernetes: false
@@ -37,6 +40,7 @@ options:
   value_type: string
   description: Override the key sequence for detaching a container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -47,6 +51,7 @@ options:
   default_value: "false"
   description: Attach container's STDIN
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

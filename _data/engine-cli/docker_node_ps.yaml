@@ -9,7 +9,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker node ps [OPTIONS] [NODE...]
 pname: docker node
@@ -19,7 +19,9 @@ options:
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -27,7 +29,9 @@ options:
 - option: format
   value_type: string
   description: Pretty-print tasks using a Go template
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -37,6 +41,7 @@ options:
   default_value: "false"
   description: Do not map IDs to Names
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -46,6 +51,7 @@ options:
   default_value: "false"
   description: Do not truncate output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -56,6 +62,7 @@ options:
   default_value: "false"
   description: Only display task IDs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -72,7 +79,7 @@ examples: |-
   redis.10.0tgctg8h8cech4w0k0gwrmr23  redis:3.0.6  swarm-manager1  Running        Running 5 seconds
   ```
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
@@ -133,23 +140,23 @@ examples: |-
   The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
 
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting options (`--format`) pretty-prints tasks output
   using a Go template.
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder     | Description
-  ----------------|------------------------------------------------------------------------------------------
-  `.ID`           | Task ID
-  `.Name`         | Task name
-  `.Image`        | Task image
-  `.Node`         | Node ID
-  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
-  `.CurrentState` | Current state of the task
-  `.Error`        | Error
-  `.Ports`        | Task published ports
+  | Placeholder     | Description                                                      |
+  |-----------------|------------------------------------------------------------------|
+  | `.ID`           | Task ID                                                          |
+  | `.Name`         | Task name                                                        |
+  | `.Image`        | Task image                                                       |
+  | `.Node`         | Node ID                                                          |
+  | `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`) |
+  | `.CurrentState` | Current state of the task                                        |
+  | `.Error`        | Error                                                            |
+  | `.Ports`        | Task published ports                                             |
 
   When using the `--format` option, the `node ps` command will either
   output the data exactly as the template declares or, when using the

@@ -9,6 +9,7 @@ options:
   value_type: string
   description: Use a custom checkpoint storage directory
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -18,6 +19,7 @@ options:
   default_value: "false"
   description: Leave the container running after checkpoint
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

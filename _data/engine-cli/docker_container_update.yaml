@@ -11,6 +11,7 @@ options:
   description: |
     Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   default_value: "0"
   description: Limit CPU CFS (Completely Fair Scheduler) period
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -29,6 +31,7 @@ options:
   default_value: "0"
   description: Limit CPU CFS (Completely Fair Scheduler) quota
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -38,6 +41,7 @@ options:
   default_value: "0"
   description: Limit the CPU real-time period in microseconds
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -48,6 +52,7 @@ options:
   default_value: "0"
   description: Limit the CPU real-time runtime in microseconds
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -59,6 +64,7 @@ options:
   default_value: "0"
   description: CPU shares (relative weight)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -67,6 +73,7 @@ options:
   value_type: decimal
   description: Number of CPUs
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -76,6 +83,7 @@ options:
   value_type: string
   description: CPUs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -84,6 +92,7 @@ options:
   value_type: string
   description: MEMs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -93,6 +102,7 @@ options:
   default_value: "0"
   description: Kernel memory limit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -103,6 +113,7 @@ options:
   default_value: "0"
   description: Memory limit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -112,6 +123,7 @@ options:
   default_value: "0"
   description: Memory soft limit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -122,6 +134,7 @@ options:
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -131,6 +144,7 @@ options:
   default_value: "0"
   description: Tune container pids limit (set -1 for unlimited)
   deprecated: false
+  hidden: false
   min_api_version: "1.40"
   experimental: false
   experimentalcli: false
@@ -140,6 +154,7 @@ options:
   value_type: string
   description: Restart policy to apply when a container exits
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

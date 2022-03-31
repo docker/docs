@@ -10,7 +10,9 @@ options:
 - option: filter
   value_type: filter
   description: Provide filter values (e.g. 'until=<timestamp>')
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -21,6 +23,7 @@ options:
   default_value: "false"
   description: Do not prompt for confirmation
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -36,7 +39,7 @@ examples: |-
   n2
   ```
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)

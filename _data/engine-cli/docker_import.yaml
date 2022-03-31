@@ -9,9 +9,8 @@ long: |-
   the host. To import from a remote location, specify a `URI` that begins with the
   `http://` or `https://` protocol.
 
-  The `--change` option will apply `Dockerfile` instructions to the image
-  that is created.
-  Supported `Dockerfile` instructions:
+  The `--change` option applies `Dockerfile` instructions to the image that is
+  created. Supported `Dockerfile` instructions:
   `CMD`|`ENTRYPOINT`|`ENV`|`EXPOSE`|`ONBUILD`|`USER`|`VOLUME`|`WORKDIR`
 usage: docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]
 pname: docker
@@ -22,6 +21,7 @@ options:
   value_type: list
   description: Apply Dockerfile instruction to the created image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -31,6 +31,7 @@ options:
   value_type: string
   description: Set commit message for imported image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -39,6 +40,7 @@ options:
   value_type: string
   description: Set platform if server is multi-platform capable
   deprecated: false
+  hidden: false
   min_api_version: "1.32"
   experimental: false
   experimentalcli: false
@@ -47,7 +49,7 @@ options:
 examples: |-
   ### Import from a remote location
 
-  This will create a new untagged image.
+  This creates a new untagged image.
 
   ```console
   $ docker import https://example.com/exampleimage.tgz

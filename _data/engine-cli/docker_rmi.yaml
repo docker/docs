@@ -19,6 +19,7 @@ options:
   default_value: "false"
   description: Force removal of the image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -28,6 +29,7 @@ options:
   default_value: "false"
   description: Do not delete untagged parents
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

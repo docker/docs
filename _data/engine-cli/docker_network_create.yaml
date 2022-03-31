@@ -32,7 +32,7 @@ long: |-
   * `--cluster-advertise`
 
   To read more about these options and how to configure them, see ["*Get started
-  with multi-host network*"](https://docs.docker.com/engine/userguide/networking/get-started-overlay).
+  with multi-host network*"](/engine/userguide/networking/get-started-overlay).
 
   While not required, it is a good idea to install Docker Swarm to
   manage the cluster that makes up your network. Swarm provides sophisticated
@@ -58,7 +58,7 @@ long: |-
   need more than 256 IP addresses, do not increase the IP block size. You can
   either use `dnsrr` endpoint mode with an external load balancer, or use multiple
   smaller overlay networks. See
-  [Configure service discovery](https://docs.docker.com/engine/swarm/networking/#configure-service-discovery)
+  [Configure service discovery](/engine/swarm/networking/#configure-service-discovery)
   for more information about different endpoint modes.
 usage: docker network create [OPTIONS] NETWORK
 pname: docker network
@@ -69,6 +69,7 @@ options:
   default_value: "false"
   description: Enable manual container attachment
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -79,6 +80,7 @@ options:
   default_value: map[]
   description: Auxiliary IPv4 or IPv6 addresses used by Network driver
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -87,6 +89,7 @@ options:
   value_type: string
   description: The network from which to copy the configuration
   deprecated: false
+  hidden: false
   min_api_version: "1.30"
   experimental: false
   experimentalcli: false
@@ -97,6 +100,7 @@ options:
   default_value: "false"
   description: Create a configuration only network
   deprecated: false
+  hidden: false
   min_api_version: "1.30"
   experimental: false
   experimentalcli: false
@@ -108,6 +112,7 @@ options:
   default_value: bridge
   description: Driver to manage the Network
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -117,6 +122,7 @@ options:
   default_value: '[]'
   description: IPv4 or IPv6 Gateway for the master subnet
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -125,7 +131,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Create swarm routing-mesh network
+  details_url: '#ingress'
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -135,7 +143,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Restrict external access to the network
+  details_url: '#internal'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -145,6 +155,7 @@ options:
   default_value: '[]'
   description: Allocate container ip from a sub-range
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -154,6 +165,7 @@ options:
   default_value: default
   description: IP Address Management Driver
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -163,6 +175,7 @@ options:
   default_value: map[]
   description: Set IPAM driver specific options
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -172,6 +185,7 @@ options:
   default_value: "false"
   description: Enable IPv6 networking
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -180,6 +194,7 @@ options:
   value_type: list
   description: Set metadata on a network
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -190,6 +205,7 @@ options:
   default_value: map[]
   description: Set driver specific options
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -198,6 +214,7 @@ options:
   value_type: string
   description: Control the network's scope
   deprecated: false
+  hidden: false
   min_api_version: "1.30"
   experimental: false
   experimentalcli: false
@@ -208,6 +225,7 @@ options:
   default_value: '[]'
   description: Subnet in CIDR format that represents a network segment
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -300,7 +318,7 @@ examples: |-
   |--------------|----------------|--------------------------------------------|
   | `--gateway`  | -              | IPv4 or IPv6 Gateway for the master subnet |
   | `--ip-range` | `--fixed-cidr` | Allocate IPs from a range                  |
-  | `--internal` | -              | Restrict external access to the network   |
+  | `--internal` | -              | Restrict external access to the network    |
   | `--ipv6`     | `--ipv6`       | Enable IPv6 networking                     |
   | `--subnet`   | `--bip`        | Subnet for network                         |
 
@@ -313,14 +331,14 @@ examples: |-
       simple-network
   ```
 
-  ### Network internal mode
+  ### Network internal mode (--internal) {#internal}
 
   By default, when you connect a container to an `overlay` network, Docker also
   connects a bridge network to it to provide external connectivity. If you want
   to create an externally isolated `overlay` network, you can specify the
   `--internal` option.
 
-  ### Network ingress mode
+  ### Network ingress mode (--ingress) {#ingress}
 
   You can create the network which will be used to provide the routing-mesh in the
   swarm cluster. You do so by specifying `--ingress` when creating the network. Only

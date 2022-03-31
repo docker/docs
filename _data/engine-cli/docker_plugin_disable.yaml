@@ -14,6 +14,7 @@ options:
   default_value: "false"
   description: Force the disable of an active plugin
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

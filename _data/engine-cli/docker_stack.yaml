@@ -17,18 +17,11 @@ clink:
 - docker_stack_rm.yaml
 - docker_stack_services.yaml
 options:
-- option: kubeconfig
-  value_type: string
-  description: Kubernetes config file
-  deprecated: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: true
-  swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: Orchestrator to use (swarm|all)
   deprecated: true
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false

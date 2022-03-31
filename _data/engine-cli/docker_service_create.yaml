@@ -7,7 +7,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker service
@@ -17,6 +17,7 @@ options:
   value_type: list
   description: Add Linux capabilities
   deprecated: false
+  hidden: false
   min_api_version: "1.41"
   experimental: false
   experimentalcli: false
@@ -26,6 +27,7 @@ options:
   value_type: list
   description: Drop Linux capabilities
   deprecated: false
+  hidden: false
   min_api_version: "1.41"
   experimental: false
   experimentalcli: false
@@ -34,7 +36,9 @@ options:
 - option: config
   value_type: config
   description: Specify configurations to expose to the service
+  details_url: '#config'
   deprecated: false
+  hidden: false
   min_api_version: "1.30"
   experimental: false
   experimentalcli: false
@@ -43,7 +47,9 @@ options:
 - option: constraint
   value_type: list
   description: Placement constraints
+  details_url: '#constraint'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -52,6 +58,7 @@ options:
   value_type: list
   description: Container labels
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -60,6 +67,7 @@ options:
   value_type: credential-spec
   description: Credential spec for managed service account (Windows only)
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -69,9 +77,9 @@ options:
   shorthand: d
   value_type: bool
   default_value: "false"
-  description: |
-    Exit immediately instead of waiting for the service to converge
+  description: Exit immediately instead of waiting for the service to converge
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -81,6 +89,7 @@ options:
   value_type: list
   description: Set custom DNS servers
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -90,6 +99,7 @@ options:
   value_type: list
   description: Set DNS options
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -99,6 +109,7 @@ options:
   value_type: list
   description: Set custom DNS search domains
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -109,6 +120,7 @@ options:
   default_value: vip
   description: Endpoint mode (vip or dnsrr)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -117,6 +129,7 @@ options:
   value_type: command
   description: Overwrite the default ENTRYPOINT of the image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -125,7 +138,9 @@ options:
   shorthand: e
   value_type: list
   description: Set environment variables
+  details_url: '#env'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -134,6 +149,7 @@ options:
   value_type: list
   description: Read in a file of environment variables
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -142,6 +158,7 @@ options:
   value_type: list
   description: User defined resources
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -150,6 +167,7 @@ options:
   value_type: list
   description: Set one or more supplementary user groups for the container
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -159,6 +177,7 @@ options:
   value_type: string
   description: Command to run to check health
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -168,6 +187,7 @@ options:
   value_type: duration
   description: Time between running the check (ms|s|m|h)
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -178,6 +198,7 @@ options:
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -188,6 +209,7 @@ options:
   description: |
     Start period for the container to initialize before counting retries towards unstable (ms|s|m|h)
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -197,6 +219,7 @@ options:
   value_type: duration
   description: Maximum time to allow one check to run (ms|s|m|h)
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -206,6 +229,7 @@ options:
   value_type: list
   description: Set one or more custom host-to-IP mappings (host:ip)
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -214,7 +238,9 @@ options:
 - option: hostname
   value_type: string
   description: Container hostname
+  details_url: '#hostname'
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -226,6 +252,7 @@ options:
   description: |
     Use an init inside each service container to forward signals and reap processes
   deprecated: false
+  hidden: false
   min_api_version: "1.37"
   experimental: false
   experimentalcli: false
@@ -234,7 +261,9 @@ options:
 - option: isolation
   value_type: string
   description: Service container isolation mode
+  details_url: '#isolation'
   deprecated: false
+  hidden: false
   min_api_version: "1.35"
   experimental: false
   experimentalcli: false
@@ -244,7 +273,9 @@ options:
   shorthand: l
   value_type: list
   description: Service labels
+  details_url: '#label'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -253,6 +284,7 @@ options:
   value_type: decimal
   description: Limit CPUs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -262,6 +294,7 @@ options:
   default_value: "0"
   description: Limit Memory
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -271,6 +304,7 @@ options:
   default_value: "0"
   description: Limit maximum number of processes (default 0 = unlimited)
   deprecated: false
+  hidden: false
   min_api_version: "1.41"
   experimental: false
   experimentalcli: false
@@ -280,6 +314,7 @@ options:
   value_type: string
   description: Logging driver for service
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -288,6 +323,7 @@ options:
   value_type: list
   description: Logging driver options
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -297,6 +333,7 @@ options:
   description: |
     Number of job tasks to run concurrently (default equal to --replicas)
   deprecated: false
+  hidden: false
   min_api_version: "1.41"
   experimental: false
   experimentalcli: false
@@ -305,9 +342,9 @@ options:
 - option: mode
   value_type: string
   default_value: replicated
-  description: |
-    Service mode (replicated, global, replicated-job, or global-job)
+  description: Service mode (replicated, global, replicated-job, or global-job)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -316,6 +353,7 @@ options:
   value_type: mount
   description: Attach a filesystem mount to the service
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -324,6 +362,7 @@ options:
   value_type: string
   description: Service name
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -331,7 +370,9 @@ options:
 - option: network
   value_type: network
   description: Network attachments
+  details_url: '#network'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -341,6 +382,7 @@ options:
   default_value: "false"
   description: Disable any container-specified HEALTHCHECK
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -352,6 +394,7 @@ options:
   description: |
     Do not query the registry to resolve image digest and supported platforms
   deprecated: false
+  hidden: false
   min_api_version: "1.30"
   experimental: false
   experimentalcli: false
@@ -360,7 +403,9 @@ options:
 - option: placement-pref
   value_type: pref
   description: Add a placement preference
+  details_url: '#placement-pref'
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -370,7 +415,9 @@ options:
   shorthand: p
   value_type: port
   description: Publish a port as a node port
+  details_url: '#publish'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -381,6 +428,7 @@ options:
   default_value: "false"
   description: Suppress progress output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -390,6 +438,7 @@ options:
   default_value: "false"
   description: Mount the container's root filesystem as read only
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -398,7 +447,9 @@ options:
 - option: replicas
   value_type: uint
   description: Number of tasks
+  details_url: '#replicas'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -407,7 +458,9 @@ options:
   value_type: uint64
   default_value: "0"
   description: Maximum number of tasks per node (default 0 = unlimited)
+  details_url: '#replicas-max-per-node'
   deprecated: false
+  hidden: false
   min_api_version: "1.40"
   experimental: false
   experimentalcli: false
@@ -417,6 +470,7 @@ options:
   value_type: decimal
   description: Reserve CPUs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -425,7 +479,9 @@ options:
   value_type: bytes
   default_value: "0"
   description: Reserve Memory
+  details_url: '#reserve-memory'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -435,6 +491,7 @@ options:
   description: |
     Restart when condition is met ("none"|"on-failure"|"any") (default "any")
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -443,6 +500,7 @@ options:
   value_type: duration
   description: Delay between restart attempts (ns|us|ms|s|m|h) (default 5s)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -451,6 +509,7 @@ options:
   value_type: uint
   description: Maximum number of restarts before giving up
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -459,6 +518,7 @@ options:
   value_type: duration
   description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -468,6 +528,7 @@ options:
   default_value: 0s
   description: Delay between task rollbacks (ns|us|ms|s|m|h) (default 0s)
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -475,9 +536,9 @@ options:
   swarm: false
 - option: rollback-failure-action
   value_type: string
-  description: |
-    Action on rollback failure ("pause"|"continue") (default "pause")
+  description: Action on rollback failure ("pause"|"continue") (default "pause")
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -488,6 +549,7 @@ options:
   default_value: "0"
   description: Failure rate to tolerate during a rollback (default 0)
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -499,6 +561,7 @@ options:
   description: |
     Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h) (default 5s)
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -506,9 +569,9 @@ options:
   swarm: false
 - option: rollback-order
   value_type: string
-  description: |
-    Rollback order ("start-first"|"stop-first") (default "stop-first")
+  description: Rollback order ("start-first"|"stop-first") (default "stop-first")
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -520,6 +583,7 @@ options:
   description: |
     Maximum number of tasks rolled back simultaneously (0 to roll back all at once)
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -528,7 +592,9 @@ options:
 - option: secret
   value_type: secret
   description: Specify secrets to expose to the service
+  details_url: '#secret'
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -539,6 +605,7 @@ options:
   description: |
     Time to wait before force killing a container (ns|us|ms|s|m|h) (default 10s)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -547,6 +614,7 @@ options:
   value_type: string
   description: Signal to stop the container
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -556,6 +624,7 @@ options:
   value_type: list
   description: Sysctl options
   deprecated: false
+  hidden: false
   min_api_version: "1.40"
   experimental: false
   experimentalcli: false
@@ -567,6 +636,7 @@ options:
   default_value: "false"
   description: Allocate a pseudo-TTY
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -577,6 +647,7 @@ options:
   default_value: '[]'
   description: Ulimit options
   deprecated: false
+  hidden: false
   min_api_version: "1.41"
   experimental: false
   experimentalcli: false
@@ -586,7 +657,9 @@ options:
   value_type: duration
   default_value: 0s
   description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
+  details_url: '#update-delay'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -596,6 +669,7 @@ options:
   description: |
     Action on update failure ("pause"|"continue"|"rollback") (default "pause")
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -605,6 +679,7 @@ options:
   default_value: "0"
   description: Failure rate to tolerate during an update (default 0)
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -616,6 +691,7 @@ options:
   description: |
     Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 5s)
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -623,9 +699,9 @@ options:
   swarm: false
 - option: update-order
   value_type: string
-  description: |
-    Update order ("start-first"|"stop-first") (default "stop-first")
+  description: Update order ("start-first"|"stop-first") (default "stop-first")
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -637,6 +713,7 @@ options:
   description: |
     Maximum number of tasks updated simultaneously (0 to update all at once)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -646,6 +723,7 @@ options:
   value_type: string
   description: 'Username or UID (format: <name|uid>[:<group|gid>])'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -654,7 +732,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Send registry authentication details to swarm agents
+  details_url: '#with-registry-auth'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -664,6 +744,7 @@ options:
   value_type: string
   description: Working directory inside the container
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -687,7 +768,7 @@ examples: |-
   a8q9dasaafud  redis2  global      1/1       redis:3.0.6
   ```
 
-  #### Create a service using an image on a private registry
+  #### Create a service using an image on a private registry (--with-registry-auth) {#with-registry-auth}
 
   If your image is available on a private registry which requires login, use the
   `--with-registry-auth` flag with `docker service create`, after logging in. If
@@ -707,7 +788,7 @@ examples: |-
   service is deployed, using the encrypted WAL logs. With this information, the
   nodes are able to log into the registry and pull the image.
 
-  ### Create a service with 5 replica tasks (--replicas)
+  ### Create a service with 5 replica tasks (--replicas) {#replicas}
 
   Use the `--replicas` flag to set the number of replica tasks for a replicated
   service. The following command creates a `redis` service with `5` replica tasks:
@@ -743,7 +824,7 @@ examples: |-
   4cdgfyky7ozw  redis  replicated  5/5       redis:3.0.7
   ```
 
-  ### Create a service with secrets
+  ### Create a service with secrets (--secret) {#secret}
 
   Use the `--secret` flag to give a container access to a
   [secret](secret_create.md).
@@ -775,7 +856,7 @@ examples: |-
   example above, two files are created: `/run/secrets/ssh` and
   `/run/secrets/app` for each of the secret targets specified.
 
-  ### Create a service with configs
+  ### Create a service with configs (--config) {#config}
 
   Use the `--config` flag to give a container access to a
   [config](config_create.md).
@@ -804,7 +885,7 @@ examples: |-
   target is specified, the name of the config is used as the name of the file in
   the container. If a target is specified, that is used as the filename.
 
-  ### Create a service with a rolling update policy
+  ### Create a service with a rolling update policy {#update-delay}
 
   ```console
   $ docker service create \
@@ -818,9 +899,9 @@ examples: |-
   When you run a [service update](service_update.md), the scheduler updates a
   maximum of 2 tasks at a time, with `10s` between updates. For more information,
   refer to the [rolling updates
-  tutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/).
+  tutorial](/engine/swarm/swarm-tutorial/rolling-update/).
 
-  ### Set environment variables (-e, --env)
+  ### Set environment variables (-e, --env) {#env}
 
   This sets an environment variable for all tasks in a service. For example:
 
@@ -844,7 +925,7 @@ examples: |-
     redis:3.0.6
   ```
 
-  ### Create a service with specific hostname (--hostname)
+  ### Create a service with specific hostname (--hostname) {#hostname}
 
   This option sets the docker service containers hostname to a specific string.
   For example:
@@ -853,7 +934,7 @@ examples: |-
   $ docker service create --name redis --hostname myredis redis:3.0.6
   ```
 
-  ### Set metadata on a service (-l, --label)
+  ### Set metadata on a service (-l, --label) {#label}
 
   A label is a `key=value` pair that applies metadata to a service. To label a
   service with two labels:
@@ -867,7 +948,7 @@ examples: |-
   ```
 
   For more information about labels, refer to [apply custom
-  metadata](https://docs.docker.com/config/labels-custom-metadata/).
+  metadata](/config/labels-custom-metadata/).
 
   ### Add bind mounts, volumes or memory filesystems
 
@@ -905,7 +986,7 @@ examples: |-
   update the named volume.
 
   For more information about named volumes, see
-  [Data Volumes](https://docs.docker.com/storage/volumes/).
+  [Data Volumes](/storage/volumes/).
 
   The following table describes options which apply to both bind mounts and named
   volumes in a service:
@@ -922,7 +1003,7 @@ examples: |-
       <td>
         <p>The type of mount, can be either <tt>volume</tt>, <tt>bind</tt>, <tt>tmpfs</tt>, or <tt>npipe</tt>. Defaults to <tt>volume</tt> if no type is specified.</p>
         <ul>
-          <li><tt>volume</tt>: mounts a <a href="https://docs.docker.com/engine/reference/commandline/volume_create/">managed volume</a>
+          <li><tt>volume</tt>: mounts a <a href="/engine/reference/commandline/volume_create/">managed volume</a>
           into the container.</li> <li><tt>bind</tt>:
           bind-mounts a directory or file from the host into the container.</li>
           <li><tt>tmpfs</tt>: mount a tmpfs in the container</li>
@@ -1083,7 +1164,7 @@ examples: |-
         creation. For example,
         <tt>volume-label=mylabel=hello-world,my-other-label=hello-mars</tt>. For more
         information about labels, refer to
-        <a href="https://docs.docker.com/config/labels-custom-metadata/">apply custom metadata</a>.
+        <a href="/config/labels-custom-metadata/">apply custom metadata</a>.
       </td>
     </tr>
     <tr>
@@ -1232,7 +1313,7 @@ examples: |-
    redis:3.0.6
   ```
 
-  ### Specify service constraints (--constraint)
+  ### Specify service constraints (--constraint) {#constraint}
 
   You can limit the set of nodes where a task can be scheduled by defining
   constraint expressions. Constraint expressions can either use a _match_ (`==`)
@@ -1240,16 +1321,15 @@ examples: |-
   expression (AND match). Constraints can match node or Docker Engine labels as
   follows:
 
-  node attribute       | matches                        | example
-  ---------------------|--------------------------------|-----------------------------------------------
-  `node.id`            | Node ID                        | `node.id==2ivku8v2gvtg4`
-  `node.hostname`      | Node hostname                  | `node.hostname!=node-2`
-  `node.role`          | Node role (`manager`/`worker`) | `node.role==manager`
-  `node.platform.os`   | Node operating system          | `node.platform.os==windows`
-  `node.platform.arch` | Node architecture              | `node.platform.arch==x86_64`
-  `node.labels`        | User-defined node labels       | `node.labels.security==high`
-  `engine.labels`      | Docker Engine's labels         | `engine.labels.operatingsystem==ubuntu-14.04`
-
+  | node attribute       | matches                        | example                                       |
+  |----------------------|--------------------------------|-----------------------------------------------|
+  | `node.id`            | Node ID                        | `node.id==2ivku8v2gvtg4`                      |
+  | `node.hostname`      | Node hostname                  | `node.hostname!=node-2`                       |
+  | `node.role`          | Node role (`manager`/`worker`) | `node.role==manager`                          |
+  | `node.platform.os`   | Node operating system          | `node.platform.os==windows`                   |
+  | `node.platform.arch` | Node architecture              | `node.platform.arch==x86_64`                  |
+  | `node.labels`        | User-defined node labels       | `node.labels.security==high`                  |
+  | `engine.labels`      | Docker Engine's labels         | `engine.labels.operatingsystem==ubuntu-14.04` |
 
   `engine.labels` apply to Docker Engine labels like operating system, drivers,
   etc. Swarm administrators add `node.labels` for operational purposes by using
@@ -1300,7 +1380,7 @@ examples: |-
   b6lww17hrr4e        web      replicated   1/1        nginx:alpine
   ```
 
-  ### Specify service placement preferences (--placement-pref)
+  ### Specify service placement preferences (--placement-pref) {#placement-pref}
 
   You can set up the service to divide tasks evenly over different categories of
   nodes. One example of where this can be useful is to balance tasks over a set
@@ -1371,7 +1451,7 @@ examples: |-
   `--placement-pref-rm` removes an existing placement preference that matches the
   argument.
 
-  ### Specify memory requirements and constraints for a service (--reserve-memory and --limit-memory)
+  ### Specify memory requirements and constraints for a service (--reserve-memory and --limit-memory) {#reserve-memory}
 
   If your service needs a minimum amount of memory in order to run correctly,
   you can use `--reserve-memory` to specify that the service should only be
@@ -1439,7 +1519,7 @@ examples: |-
   host at the level of the host operating system, using `cgroups` or other
   relevant operating system tools.
 
-  ### Specify maximum replicas per node (--replicas-max-per-node)
+  ### Specify maximum replicas per node (--replicas-max-per-node) {#replicas-max-per-node}
 
   Use the `--replicas-max-per-node` flag to set the maximum number of replica tasks that can run on a node.
   The following command creates a nginx service with 2 replica tasks but only one replica task per node.
@@ -1459,7 +1539,7 @@ examples: |-
     nginx
   ```
 
-  ### Attach a service to an existing network (--network)
+  ### Attach a service to an existing network (--network) {#network}
 
   You can use overlay networks to connect one or more services within the swarm.
 
@@ -1491,12 +1571,12 @@ examples: |-
   The swarm extends my-network to each node running the service.
 
   Containers on the same network can access each other using
-  [service discovery](https://docs.docker.com/network/overlay/#container-discovery).
+  [service discovery](/network/overlay/#container-discovery).
 
   Long form syntax of `--network` allows to specify list of aliases and driver options:
   `--network name=my-network,alias=web1,driver-opt=field1=value1`
 
-  ### Publish service ports externally to the swarm (-p, --publish)
+  ### Publish service ports externally to the swarm (-p, --publish) {#publish}
 
   You can publish service ports to make them available externally to the swarm
   using the `--publish` flag. The `--publish` flag can take two different styles
@@ -1565,9 +1645,9 @@ examples: |-
   the port is only bound on nodes where the service is running, and a given port
   on a node can only be bound once. You can only set the publication mode using
   the long syntax. For more information refer to
-  [Use swarm mode routing mesh](https://docs.docker.com/engine/swarm/ingress/).
+  [Use swarm mode routing mesh](/engine/swarm/ingress/).
 
-  ### Provide credential specs for managed service accounts (Windows only)
+  ### Provide credential specs for managed service accounts (--credentials-spec) {#credentials-spec}
 
   This option is only used for services using Windows containers. The
   `--credential-spec` must be in the format `file://<filename>` or
@@ -1662,7 +1742,7 @@ examples: |-
   x3ti0erg11rjpg64m75kej2mz-hosttempl
   ```
 
-  ### Specify isolation mode (Windows)
+  ### Specify isolation mode on Windows (--isolation) {#isolation}
 
   By default, tasks scheduled on Windows nodes are run using the default isolation mode
   configured for this particular node. To force a specific isolation mode, you can use
@@ -1677,7 +1757,7 @@ examples: |-
   - `process`: use process isolation (Windows server only)
   - `hyperv`: use Hyper-V isolation
 
-  ### Create services requesting Generic Resources
+  ### Create services requesting Generic Resources (--generic-resources) {#generic-resources}
 
   You can narrow the kind of nodes your task can land on through the using the
   `--generic-resource` flag (if the nodes advertise these resources):

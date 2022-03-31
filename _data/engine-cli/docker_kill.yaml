@@ -6,10 +6,10 @@ long: |-
   specified with the `--signal` option. You can reference a container by its
   ID, ID-prefix, or name.
 
-  The `--signal` (or `-s` shorthand) flag sets the system call signal that is sent
-  to the container. This signal can be a signal name in the format `SIG<NAME>`, for
-  instance `SIGINT`, or an unsigned number that matches a position in the kernel's
-  syscall table, for instance `2`.
+  The `--signal` flag sets the system call signal that is sent to the container.
+  This signal can be a signal name in the format `SIG<NAME>`, for instance `SIGINT`,
+  or an unsigned number that matches a position in the kernel's syscall table,
+  for instance `2`.
 
   While the default (`SIGKILL`) signal will terminate the container, the signal
   set through `--signal` may be non-terminal, depending on the container's main
@@ -30,7 +30,9 @@ options:
   value_type: string
   default_value: KILL
   description: Signal to send to the container
+  details_url: '#signal'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -45,7 +47,7 @@ examples: |-
   $ docker kill my_container
   ```
 
-  ### Send a custom signal to a container
+  ### Send a custom signal to a container (--signal) {#signal}
 
   The following example sends a `SIGHUP` signal to the container named
   `my_container`:

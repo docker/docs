@@ -10,6 +10,7 @@ options:
   value_type: string
   description: Write to a file, instead of STDOUT
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

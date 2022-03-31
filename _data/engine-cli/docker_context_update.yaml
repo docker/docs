@@ -12,6 +12,7 @@ options:
   description: |
     Default orchestrator for stack operations to use with this context (swarm|kubernetes|all)
   deprecated: true
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   value_type: string
   description: Description of the context
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -29,6 +31,7 @@ options:
   default_value: '[]'
   description: set the docker endpoint
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -38,6 +41,7 @@ options:
   default_value: '[]'
   description: set the kubernetes endpoint
   deprecated: true
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: true

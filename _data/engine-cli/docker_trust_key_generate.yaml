@@ -11,6 +11,7 @@ options:
   value_type: string
   description: Directory to generate key in, defaults to current directory
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

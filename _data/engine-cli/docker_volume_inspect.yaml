@@ -13,8 +13,14 @@ options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: |-
+    Format output using a custom template:
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -47,6 +53,8 @@ examples: |-
     }
   ]
   ```
+
+  ### Format the output (--format) {#format}
 
   Use the `--format` flag to format the output using a Go template, for example,
   to print the `Mountpoint` property:

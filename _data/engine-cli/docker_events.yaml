@@ -121,7 +121,7 @@ long: |-
 
   ### Limiting, filtering, and formatting the output
 
-  #### Limit events by time
+  #### Limit events by time (--since, --until) {#since}
 
   The `--since` and `--until` parameters can be Unix timestamps, date formatted
   timestamps, or Go duration strings (e.g. `10m`, `1h30m`) computed
@@ -139,7 +139,7 @@ long: |-
   Only the last 1000 log events are returned. You can use filters to further limit
   the number of events returned.
 
-  #### Filtering
+  #### Filtering (--filter) {#filter}
 
   The filtering flag (`-f` or `--filter`) format is of "key=value". If you would
   like to use multiple filters, pass multiple flags (e.g.,
@@ -170,7 +170,7 @@ long: |-
   * type (`type=<container or image or volume or network or daemon or plugin or service or node or secret or config>`)
   * volume (`volume=<name>`)
 
-  #### Format
+  #### Format the output (--format) {#format}
 
   If a format (`--format`) is specified, the given template will be executed
   instead of the default
@@ -188,6 +188,7 @@ options:
   value_type: filter
   description: Filter output based on conditions provided
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -196,6 +197,7 @@ options:
   value_type: string
   description: Format the output using the given Go template
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -204,6 +206,7 @@ options:
   value_type: string
   description: Show all events created since timestamp
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -212,6 +215,7 @@ options:
   value_type: string
   description: Stream events until this timestamp
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

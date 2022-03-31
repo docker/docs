@@ -12,6 +12,7 @@ options:
   description: |
     Do not prompt for confirmation before removing the most recent signer
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

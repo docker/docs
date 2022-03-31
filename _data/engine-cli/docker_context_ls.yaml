@@ -8,8 +8,15 @@ plink: docker_context.yaml
 options:
 - option: format
   value_type: string
-  description: Pretty-print contexts using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +27,7 @@ options:
   default_value: "false"
   description: Only show context names
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -31,8 +39,8 @@ examples: |-
   ```console
   $ docker context ls
 
-  NAME                DESCRIPTION                               DOCKER ENDPOINT                      KUBERNETES ENDPOINT   ORCHESTRATOR
-  default *           Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                                swarm
+  NAME                DESCRIPTION                               DOCKER ENDPOINT                      ORCHESTRATOR
+  default *           Current DOCKER_HOST based configuration   unix:///var/run/docker.sock          swarm
   production                                                    tcp:///prod.corp.example.com:2376
   staging                                                       tcp:///stage.corp.example.com:2376
   ```

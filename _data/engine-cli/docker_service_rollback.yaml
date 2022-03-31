@@ -7,7 +7,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker service rollback [OPTIONS] SERVICE
 pname: docker service
@@ -17,9 +17,9 @@ options:
   shorthand: d
   value_type: bool
   default_value: "false"
-  description: |
-    Exit immediately instead of waiting for the service to converge
+  description: Exit immediately instead of waiting for the service to converge
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -31,6 +31,7 @@ options:
   default_value: "false"
   description: Suppress progress output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

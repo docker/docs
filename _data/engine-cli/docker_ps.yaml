@@ -10,7 +10,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Show all containers (default shows just running)
+  details_url: '#all'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -19,15 +21,25 @@ options:
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print containers using a Go template
+  description: |-
+    Format output using a custom template:
+    'table':            Print output in table format with column headers (default)
+    'table TEMPLATE':   Print output in table format using the given Go template
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -38,6 +50,7 @@ options:
   default_value: "-1"
   description: Show n last created containers (includes all states)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -48,6 +61,7 @@ options:
   default_value: "false"
   description: Show the latest created container (includes all states)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -56,7 +70,9 @@ options:
   value_type: bool
   default_value: "false"
   description: Don't truncate output
+  details_url: '#no-trunc'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -67,6 +83,7 @@ options:
   default_value: "false"
   description: Only display container IDs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -76,13 +93,15 @@ options:
   value_type: bool
   default_value: "false"
   description: Display total file sizes
+  details_url: '#size'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### Prevent truncating output
+  ### Do not truncate output (--no-trunc) {#no-trunc}
 
   Running `docker ps --no-trunc` showing 2 linked containers.
 
@@ -94,10 +113,10 @@ examples: |-
   d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db
   ```
 
-  ### Show both running and stopped containers
+  ### Show both running and stopped containers (-a, --all) {#all}
 
   The `docker ps` command only shows running containers by default. To see all
-  containers, use the `-a` (or `--all`) flag:
+  containers, use the `--all` (or `-a`) flag:
 
   ```console
   $ docker ps -a
@@ -107,12 +126,12 @@ examples: |-
   container that exposes TCP ports `100, 101, 102` displays `100-102/tcp` in
   the `PORTS` column.
 
-  ### Show disk usage by container
+  ### Show disk usage by container (--size) {#size}
 
-  The `docker ps -s` command displays two different on-disk-sizes for each container:
+  The `docker ps --size` (or `-s`) command displays two different on-disk-sizes for each container:
 
   ```console
-  $ docker ps -s
+  $ docker ps --size
 
   CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS   NAMES        SIZE                                                                                      SIZE
   e90b8831a4b8   nginx          "/bin/bash -c 'mkdir "   11 weeks ago   Up 4 hours           my_nginx     35.58 kB (virtual 109.2 MB)
@@ -121,12 +140,12 @@ examples: |-
     * The "size" information shows the amount of data (on disk) that is used for the _writable_ layer of each container
     * The "virtual size" is the total amount of disk-space used for the read-only _image_ data used by the container and the writable layer.
 
-  For more information, refer to the [container size on disk](https://docs.docker.com/storage/storagedriver/#container-size-on-disk) section.
+  For more information, refer to the [container size on disk](/storage/storagedriver/#container-size-on-disk) section.
 
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
-  The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there is more
+  The `--filter` (or `-f`) flag format is a `key=value` pair. If there is more
   than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`)
 
   The currently supported filters are:
@@ -435,7 +454,7 @@ examples: |-
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   ```
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting option (`--format`) pretty-prints container output using a Go
   template.
@@ -485,6 +504,13 @@ examples: |-
   01946d9d34d8
   c1d3b0166030        com.docker.swarm.node=debian,com.docker.swarm.cpu=6
   41d50ecd2f57        com.docker.swarm.node=fedora,com.docker.swarm.cpu=3,com.docker.swarm.storage=ssd
+  ```
+
+  To list all running containers in JSON format, use the `json` directive:
+
+  ```console
+  $ docker ps --format json
+  {"Command":"\"/docker-entrypoint.…\"","CreatedAt":"2021-03-10 00:15:05 +0100 CET","ID":"a762a2b37a1d","Image":"nginx","Labels":"maintainer=NGINX Docker Maintainers \u003cdocker-maint@nginx.com\u003e","LocalVolumes":"0","Mounts":"","Names":"boring_keldysh","Networks":"bridge","Ports":"80/tcp","RunningFor":"4 seconds ago","Size":"0B","State":"running","Status":"Up 3 seconds"}
   ```
 deprecated: false
 experimental: false

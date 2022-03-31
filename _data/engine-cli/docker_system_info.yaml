@@ -10,6 +10,7 @@ options:
   value_type: string
   description: Format the output using the given Go template
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

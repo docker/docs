@@ -14,6 +14,7 @@ options:
   default_value: "true"
   description: Skip image verification
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -23,6 +24,7 @@ options:
   default_value: "false"
   description: Grant all permissions necessary to run the plugin
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -33,6 +35,7 @@ options:
   description: |
     Do not check if specified remote plugin matches existing plugin image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

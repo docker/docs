@@ -27,6 +27,7 @@ options:
   value_type: string
   description: Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -35,7 +36,9 @@ options:
   shorthand: c
   value_type: list
   description: Apply Dockerfile instruction to the created image
+  details_url: '#change'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -45,6 +48,7 @@ options:
   value_type: string
   description: Commit message
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -55,6 +59,7 @@ options:
   default_value: "true"
   description: Pause container during commit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -79,7 +84,7 @@ examples: |-
   svendowideit/testimage            version3            f5283438590d        16 seconds ago      335.7 MB
   ```
 
-  ### Commit a container with new configurations
+  ### Commit a container with new configurations (--change) {#change}
 
   ```console
   $ docker ps

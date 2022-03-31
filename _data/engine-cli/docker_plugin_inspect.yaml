@@ -10,8 +10,14 @@ options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: |-
+    Format output using a custom template:
+    'json':             Print in JSON format
+    'TEMPLATE':         Print output using the given Go template.
+    Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -66,7 +72,7 @@ examples: |-
     "Manifest": {
       "ManifestVersion": "v0",
       "Description": "A test plugin for Docker",
-      "Documentation": "https://docs.docker.com/engine/extend/plugins/",
+      "Documentation": "/engine/extend/plugins/",
       "Interface": {
         "Types": [
           "docker.volumedriver/1.0"
@@ -136,7 +142,7 @@ examples: |-
   ```
 
 
-  ### Formatting the output
+  ### Format the output (--format) {#format}
 
   ```console
   $ docker plugin inspect -f '{{.Id}}' tiborvass/sample-volume-plugin:latest

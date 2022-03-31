@@ -41,22 +41,16 @@ long: |-
   The following table represents all the valid suffixes with their build
   contexts:
 
-  Build Syntax Suffix             | Commit Used           | Build Context Used
-  --------------------------------|-----------------------|-------------------
-  `myrepo.git`                    | `refs/heads/master`   | `/`
-  `myrepo.git#mytag`              | `refs/tags/mytag`     | `/`
-  `myrepo.git#mybranch`           | `refs/heads/mybranch` | `/`
-  `myrepo.git#pull/42/head`       | `refs/pull/42/head`   | `/`
-  `myrepo.git#:myfolder`          | `refs/heads/master`   | `/myfolder`
-  `myrepo.git#master:myfolder`    | `refs/heads/master`   | `/myfolder`
-  `myrepo.git#mytag:myfolder`     | `refs/tags/mytag`     | `/myfolder`
-  `myrepo.git#mybranch:myfolder`  | `refs/heads/mybranch` | `/myfolder`
-
-  > **Note**
-  >
-  > You cannot specify the build-context directory (`myfolder` in the examples above)
-  > when using BuildKit as builder (`DOCKER_BUILDKIT=1`). Support for this feature
-  > is tracked in [buildkit#1684](https://github.com/moby/buildkit/issues/1684).
+  | Build Syntax Suffix            | Commit Used           | Build Context Used |
+  |--------------------------------|-----------------------|--------------------|
+  | `myrepo.git`                   | `refs/heads/master`   | `/`                |
+  | `myrepo.git#mytag`             | `refs/tags/mytag`     | `/`                |
+  | `myrepo.git#mybranch`          | `refs/heads/mybranch` | `/`                |
+  | `myrepo.git#pull/42/head`      | `refs/pull/42/head`   | `/`                |
+  | `myrepo.git#:myfolder`         | `refs/heads/master`   | `/myfolder`        |
+  | `myrepo.git#master:myfolder`   | `refs/heads/master`   | `/myfolder`        |
+  | `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`     | `/myfolder`        |
+  | `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch` | `/myfolder`        |
 
   ### Tarball contexts
 
@@ -116,7 +110,9 @@ options:
 - option: add-host
   value_type: list
   description: Add a custom host-to-IP mapping (host:ip)
+  details_url: '#add-host'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -124,7 +120,9 @@ options:
 - option: build-arg
   value_type: list
   description: Set build-time variables
+  details_url: '#build-arg'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -133,7 +131,9 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: Images to consider as cache sources
+  details_url: '#cache-from'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -141,7 +141,9 @@ options:
 - option: cgroup-parent
   value_type: string
   description: Optional parent cgroup for the container
+  details_url: '#cgroup-parent'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -151,6 +153,7 @@ options:
   default_value: "false"
   description: Compress the build context using gzip
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -160,6 +163,7 @@ options:
   default_value: "0"
   description: Limit the CPU CFS (Completely Fair Scheduler) period
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -169,6 +173,7 @@ options:
   default_value: "0"
   description: Limit the CPU CFS (Completely Fair Scheduler) quota
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -179,6 +184,7 @@ options:
   default_value: "0"
   description: CPU shares (relative weight)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -187,6 +193,7 @@ options:
   value_type: string
   description: CPUs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -195,6 +202,7 @@ options:
   value_type: string
   description: MEMs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -204,6 +212,7 @@ options:
   default_value: "true"
   description: Skip image verification
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -212,7 +221,9 @@ options:
   shorthand: f
   value_type: string
   description: Name of the Dockerfile (Default is 'PATH/Dockerfile')
+  details_url: '#file'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -222,6 +233,7 @@ options:
   default_value: "false"
   description: Always remove intermediate containers
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -230,6 +242,7 @@ options:
   value_type: string
   description: Write the image ID to the file
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -237,7 +250,9 @@ options:
 - option: isolation
   value_type: string
   description: Container isolation technology
+  details_url: '#isolation'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -246,6 +261,7 @@ options:
   value_type: list
   description: Set metadata for an image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -256,6 +272,7 @@ options:
   default_value: "0"
   description: Memory limit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -266,6 +283,7 @@ options:
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -273,9 +291,9 @@ options:
 - option: network
   value_type: string
   default_value: default
-  description: |
-    Set the networking mode for the RUN instructions during build
+  description: Set the networking mode for the RUN instructions during build
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -286,17 +304,7 @@ options:
   default_value: "false"
   description: Do not use cache when building the image
   deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: output
-  shorthand: o
-  value_type: stringArray
-  default_value: '[]'
-  description: 'Output destination (format: type=local,dest=path)'
-  deprecated: false
-  min_api_version: "1.40"
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -305,17 +313,8 @@ options:
   value_type: string
   description: Set platform if server is multi-platform capable
   deprecated: false
+  hidden: false
   min_api_version: "1.38"
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: progress
-  value_type: string
-  default_value: auto
-  description: |
-    Set type of progress output (auto, plain, tty). Use plain to show container output
-  deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -325,6 +324,7 @@ options:
   default_value: "false"
   description: Always attempt to pull a newer version of the image
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -335,6 +335,7 @@ options:
   default_value: "false"
   description: Suppress the build output and print image ID on success
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -344,17 +345,7 @@ options:
   default_value: "true"
   description: Remove intermediate containers after a successful build
   deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: secret
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    Secret file to expose to the build (only if BuildKit enabled): id=mysecret,src=/local/secret
-  deprecated: false
-  min_api_version: "1.39"
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -363,7 +354,9 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: Security options
+  details_url: '#security-opt'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -373,6 +366,7 @@ options:
   default_value: "0"
   description: Size of /dev/shm
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -381,20 +375,11 @@ options:
   value_type: bool
   default_value: "false"
   description: Squash newly built layers into a single new layer
+  details_url: '#squash'
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: true
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: ssh
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    SSH agent socket or keys to expose to the build (only if BuildKit enabled) (format: default|<id>[=<socket>|<key>[,<key>]])
-  deprecated: false
-  min_api_version: "1.39"
-  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
@@ -403,6 +388,7 @@ options:
   default_value: "false"
   description: Stream attaches to server to negotiate build context
   deprecated: false
+  hidden: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -411,7 +397,9 @@ options:
   shorthand: t
   value_type: list
   description: Name and optionally a tag in the 'name:tag' format
+  details_url: '#tag'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -419,7 +407,9 @@ options:
 - option: target
   value_type: string
   description: Set the target build stage to build.
+  details_url: '#target'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -428,7 +418,9 @@ options:
   value_type: ulimit
   default_value: '[]'
   description: Ulimit options
+  details_url: '#ulimit'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -570,7 +562,7 @@ examples: |-
   files.
 
 
-  ### Tag an image (-t)
+  ### Tag an image (-t, --tag) {#tag}
 
   ```console
   $ docker build -t vieux/apache:2.0 .
@@ -590,7 +582,7 @@ examples: |-
   $ docker build -t whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1 .
   ```
 
-  ### Specify a Dockerfile (-f)
+  ### Specify a Dockerfile (-f, --file) {#file}
 
   ```console
   $ docker build -f Dockerfile.debug .
@@ -637,17 +629,17 @@ examples: |-
   > repeatable builds on remote Docker hosts. This is also the reason why
   > `ADD ../file` does not work.
 
-  ### Use a custom parent cgroup (--cgroup-parent)
+  ### Use a custom parent cgroup (--cgroup-parent) {#cgroup-parent}
 
   When `docker build` is run with the `--cgroup-parent` option the containers
   used in the build will be run with the [corresponding `docker run` flag](../run.md#specify-custom-cgroups).
 
-  ### Set ulimits in container (--ulimit)
+  ### Set ulimits in container (--ulimit) {#ulimit}
 
   Using the `--ulimit` option with `docker build` will cause each build step's
   container to be started using those [`--ulimit` flag values](run.md#set-ulimits-in-container---ulimit).
 
-  ### Set build-time variables (--build-arg)
+  ### Set build-time variables (--build-arg) {#build-arg}
 
   You can use `ENV` instructions in a Dockerfile to define variable
   values. These values persist in the built image. However, often
@@ -682,16 +674,16 @@ examples: |-
   $ docker build --build-arg HTTP_PROXY .
   ```
 
-  This is similar to how `docker run -e` works. Refer to the [`docker run` documentation](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)
+  This is similar to how `docker run -e` works. Refer to the [`docker run` documentation](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)
   for more information.
 
-  ### Optional security options (--security-opt)
+  ### Optional security options (--security-opt) {#security-opt}
 
   This flag is only supported on a daemon running on Windows, and only supports
   the `credentialspec` option. The `credentialspec` must be in the format
   `file://spec.txt` or `registry://keyname`.
 
-  ### Specify isolation technology for container (--isolation)
+  ### Specify isolation technology for container (--isolation) {#isolation}
 
   This option is useful in situations where you are running Docker containers on
   Windows. The `--isolation=<value>` option sets a container's isolation
@@ -699,15 +691,15 @@ examples: |-
   Linux namespaces. On Microsoft Windows, you can specify these values:
 
 
-  | Value     | Description                                                                                                                                                   |
-  |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value.  |
-  | `process` | Namespace isolation only.                                                                                                                                     |
-  | `hyperv`  | Hyper-V hypervisor partition-based isolation.                                                                                                                 |
+  | Value     | Description                                                                                                                                                                    |
+  |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value. |
+  | `process` | Namespace isolation only.                                                                                                                                                      |
+  | `hyperv`  | Hyper-V hypervisor partition-based isolation.                                                                                                                                  |
 
   Specifying the `--isolation` flag without a value is the same as setting `--isolation="default"`.
 
-  ### Add entries to container hosts file (--add-host)
+  ### Add entries to container hosts file (--add-host) {#add-host}
 
   You can add other hosts into a container's `/etc/hosts` file by using one or
   more `--add-host` flags. This example adds a static address for a host named
@@ -715,7 +707,7 @@ examples: |-
 
       $ docker build --add-host=docker:10.180.0.1 .
 
-  ### Specifying target build stage (--target)
+  ### Specifying target build stage (--target) {#target}
 
   When building a Dockerfile with multiple build stages, `--target` can be used to
   specify an intermediate build stage by name as a final stage for the resulting
@@ -723,17 +715,17 @@ examples: |-
 
   ```dockerfile
   FROM debian AS build-env
-  ...
+  # ...
 
   FROM alpine AS production-env
-  ...
+  # ...
   ```
 
   ```console
   $ docker build -t mybuildimage --target build-env .
   ```
 
-  ### Custom build outputs
+  ### Custom build outputs (--output) {#output}
 
   By default, a local container image is created from the build result. The
   `--output` (or `-o`) flag allows you to override this behavior, and a specify a
@@ -826,7 +818,7 @@ examples: |-
   > [enable BuildKit](../builder.md#buildkit) or use the [buildx](https://github.com/docker/buildx)
   > plugin which provides more output type options.
 
-  ### Specifying external cache sources
+  ### Specifying external cache sources (--cache-from) {#cache-from}
 
   In addition to local build cache, the builder can reuse the cache generated from
   previous builds with the `--cache-from` flag pointing to an image in the registry.
@@ -869,7 +861,7 @@ examples: |-
   > plugin. The previous builder has limited support for reusing cache from
   > pre-pulled images.
 
-  ### Squash an image's layers (--squash) (experimental)
+  ### Squash an image's layers (--squash) (experimental) {#squash}
 
   #### Overview
 
@@ -892,7 +884,7 @@ examples: |-
 
   For most use cases, multi-stage builds are a better alternative, as they give more
   fine-grained control over your build, and can take advantage of future
-  optimizations in the builder. Refer to the [use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)
+  optimizations in the builder. Refer to the [use multi-stage builds](/develop/develop-images/multistage-build/)
   section in the userguide for more information.
 
 

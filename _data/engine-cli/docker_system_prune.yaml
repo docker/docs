@@ -13,6 +13,7 @@ options:
   default_value: "false"
   description: Remove all unused images not just dangling ones
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,7 +21,9 @@ options:
 - option: filter
   value_type: filter
   description: Provide filter values (e.g. 'label=<key>=<value>')
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   min_api_version: "1.28"
   experimental: false
   experimentalcli: false
@@ -32,6 +35,7 @@ options:
   default_value: "false"
   description: Do not prompt for confirmation
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -41,6 +45,7 @@ options:
   default_value: "false"
   description: Prune volumes
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -117,7 +122,7 @@ examples: |-
   Total reclaimed space: 13.5 MB
   ```
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`--filter`) format is of "key=value". If there is more
   than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)

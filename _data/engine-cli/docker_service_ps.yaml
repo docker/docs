@@ -7,7 +7,7 @@ long: |-
   >
   > This is a cluster management command, and must be executed on a swarm
   > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > [Swarm mode section](/engine/swarm/) in the
   > documentation.
 usage: docker service ps [OPTIONS] SERVICE [SERVICE...]
 pname: docker service
@@ -17,7 +17,9 @@ options:
   shorthand: f
   value_type: filter
   description: Filter output based on conditions provided
+  details_url: '#filter'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -25,7 +27,9 @@ options:
 - option: format
   value_type: string
   description: Pretty-print tasks using a Go template
+  details_url: '#format'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -35,6 +39,7 @@ options:
   default_value: "false"
   description: Do not map IDs to Names
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -44,6 +49,7 @@ options:
   default_value: "false"
   description: Do not truncate output
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -54,6 +60,7 @@ options:
   default_value: "false"
   description: Only display task IDs
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -118,7 +125,7 @@ examples: |-
   nvjljf7rmor4htv7l8rwcx7i7   \_ redis.2   redis:3.0.6@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842  worker2   Shutdown       Rejected 5 minutes ago   "No such image: redis@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842"
   ```
 
-  ### Filtering
+  ### Filtering (--filter) {#filter}
 
   The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
   is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).
@@ -175,23 +182,23 @@ examples: |-
 
   The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
 
-  ### Formatting
+  ### Format the output (--format) {#format}
 
   The formatting options (`--format`) pretty-prints tasks output
   using a Go template.
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder     | Description
-  ----------------|------------------------------------------------------------------------------------------
-  `.ID`           | Task ID
-  `.Name`         | Task name
-  `.Image`        | Task image
-  `.Node`         | Node ID
-  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
-  `.CurrentState` | Current state of the task
-  `.Error`        | Error
-  `.Ports`        | Task published ports
+  | Placeholder     | Description                                                      |
+  |-----------------|------------------------------------------------------------------|
+  | `.ID`           | Task ID                                                          |
+  | `.Name`         | Task name                                                        |
+  | `.Image`        | Task image                                                       |
+  | `.Node`         | Node ID                                                          |
+  | `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`) |
+  | `.CurrentState` | Current state of the task                                        |
+  | `.Error`        | Error                                                            |
+  | `.Ports`        | Task published ports                                             |
 
   When using the `--format` option, the `service ps` command will either
   output the data exactly as the template declares or, when using the

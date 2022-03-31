@@ -27,6 +27,7 @@ options:
   description: |
     Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -36,6 +37,7 @@ options:
   default_value: "0"
   description: Limit CPU CFS (Completely Fair Scheduler) period
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -45,6 +47,7 @@ options:
   default_value: "0"
   description: Limit CPU CFS (Completely Fair Scheduler) quota
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -54,6 +57,7 @@ options:
   default_value: "0"
   description: Limit the CPU real-time period in microseconds
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -64,6 +68,7 @@ options:
   default_value: "0"
   description: Limit the CPU real-time runtime in microseconds
   deprecated: false
+  hidden: false
   min_api_version: "1.25"
   experimental: false
   experimentalcli: false
@@ -74,7 +79,9 @@ options:
   value_type: int64
   default_value: "0"
   description: CPU shares (relative weight)
+  details_url: '#cpu-shares'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -83,6 +90,7 @@ options:
   value_type: decimal
   description: Number of CPUs
   deprecated: false
+  hidden: false
   min_api_version: "1.29"
   experimental: false
   experimentalcli: false
@@ -92,6 +100,7 @@ options:
   value_type: string
   description: CPUs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -100,6 +109,7 @@ options:
   value_type: string
   description: MEMs in which to allow execution (0-3, 0,1)
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -108,7 +118,9 @@ options:
   value_type: bytes
   default_value: "0"
   description: Kernel memory limit
+  details_url: '#kernel-memory'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -118,7 +130,9 @@ options:
   value_type: bytes
   default_value: "0"
   description: Memory limit
+  details_url: '#memory'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -128,6 +142,7 @@ options:
   default_value: "0"
   description: Memory soft limit
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -138,6 +153,7 @@ options:
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -147,6 +163,7 @@ options:
   default_value: "0"
   description: Tune container pids limit (set -1 for unlimited)
   deprecated: false
+  hidden: false
   min_api_version: "1.40"
   experimental: false
   experimentalcli: false
@@ -155,7 +172,9 @@ options:
 - option: restart
   value_type: string
   description: Restart policy to apply when a container exits
+  details_url: '#restart'
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -163,7 +182,7 @@ options:
 examples: |-
   The following sections illustrate ways to use this command.
 
-  ### Update a container's cpu-shares
+  ### Update a container's cpu-shares (--cpu-shares) {#cpu-shares}
 
   To limit a container's cpu-shares to 512, first identify the container
   name or ID. You can use `docker ps` to find these values. You can also
@@ -173,7 +192,7 @@ examples: |-
   $ docker update --cpu-shares 512 abebf7571666
   ```
 
-  ### Update a container with cpu-shares and memory
+  ### Update a container with cpu-shares and memory (-m, --memory) {#memory}
 
   To update multiple resource configurations for multiple containers:
 
@@ -181,7 +200,7 @@ examples: |-
   $ docker update --cpu-shares 512 -m 300M abebf7571666 hopeful_morse
   ```
 
-  ### Update a container's kernel memory constraints
+  ### Update a container's kernel memory constraints (--kernel-memory) {#kernel-memory}
 
   You can update a container's kernel memory limit using the `--kernel-memory`
   option. On kernel version older than 4.6, this option can be updated on a
@@ -218,7 +237,7 @@ examples: |-
   Kernel version newer than (include) 4.6 does not have this limitation, you
   can use `--kernel-memory` the same way as other options.
 
-  ### Update a container's restart policy
+  ### Update a container's restart policy (--restart) {#restart}
 
   You can change a container's restart policy on a running container. The new
   restart policy takes effect instantly after you run `docker update` on a

@@ -9,6 +9,7 @@ options:
   value_type: list
   description: Path to the signer's public key file
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

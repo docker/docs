@@ -10,6 +10,7 @@ options:
   default_value: "false"
   description: Allow communication with an insecure registry
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   default_value: "false"
   description: Output additional info including layers and platform
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

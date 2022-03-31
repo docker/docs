@@ -11,6 +11,7 @@ options:
   default_value: "false"
   description: Amend an existing manifest list
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   default_value: "false"
   description: Allow communication with an insecure registry
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false

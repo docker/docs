@@ -10,6 +10,7 @@ options:
   default_value: "false"
   description: Allow push to an insecure registry
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -20,6 +21,7 @@ options:
   default_value: "false"
   description: Remove the local manifest list after push
   deprecated: false
+  hidden: false
   experimental: false
   experimentalcli: false
   kubernetes: false
