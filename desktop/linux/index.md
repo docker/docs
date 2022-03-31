@@ -26,7 +26,7 @@ and Debian distributions.
 To install Docker Desktop for Linux:
 
 1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
-2. Download and install the Debian package:
+2. Download and install the Debian package. If you have previously installed one of the preview releases, we recommend that you run `sudo apt remove docker-desktop`:
     ```console
     $ curl https://desktop-stage.docker.com/linux/main/amd64/76677/docker-desktop.deb --output docker-desktop.deb
     $ sudo apt install ./docker-desktop.deb
@@ -151,6 +151,8 @@ At the end of the installation process, `apt` displays an error due to installin
   ```
   N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   ```
+
+If you have installed one of the previous releases and reinstall the new package over it (as opposed to removing the old package explicitly), you need to make sure that `~/.config/systemd/user/docker-desktop.service` and `~/.local/share/systemd/user/docker-desktop.service` are removed.
 
 ## Why Docker Desktop for Linux runs a VM
 
