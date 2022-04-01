@@ -150,7 +150,7 @@ docker.io/molly/privateimage:latest
 
 ## Report a bug
 
-Please report any bugs via the Issues tracker within the [docker/desktop-linux repo](https://github.com/docker/desktop-linux/issues).
+Thanks for trying out the Docker Desktop Linux (beta) release. We'd love to hear from you. You can provide feedback and report any bugs through the **Issues** tracker within the [docker/desktop-linux](https://github.com/docker/desktop-linux/issues){: target="_blank" rel="noopener" class="_"} repository.
 
 To create and upload a diagnostics bundle with your bug report:
 
