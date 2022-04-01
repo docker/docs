@@ -98,8 +98,13 @@ For now, we will create the network first and attach the MySQL container at star
     +--------------------+
     5 rows in set (0.00 sec)
     ```
+Exit the MySQL shell to return to the shell on our machine.
 
-    Hooray! We have our `todos` database and it's ready for us to use!
+   ```console
+   mysql> exit
+   ```
+
+   Hooray! We have our `todos` database and it's ready for us to use!
 
 ## Connect to MySQL
 
