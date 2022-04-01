@@ -388,38 +388,6 @@ reference:
       title: Use the Docker command line
     - path: /engine/reference/commandline/docker/
       title: docker (base command)
-    - sectiontitle: docker app
-      section:
-        - path: /engine/reference/commandline/app/
-          title: docker app
-        - path: /engine/reference/commandline/app_bundle/
-          title: docker app bundle
-        - path: /engine/reference/commandline/app_completion/
-          title: docker app completion
-        - path: /engine/reference/commandline/app_init/
-          title: docker app init
-        - path: /engine/reference/commandline/app_inspect/
-          title: docker app inspect
-        - path: /engine/reference/commandline/app_install/
-          title: docker app install
-        - path: /engine/reference/commandline/app_list/
-          title: docker app list
-        - path: /engine/reference/commandline/app_pull/
-          title: docker app pull
-        - path: /engine/reference/commandline/app_push/
-          title: docker app push
-        - path: /engine/reference/commandline/app_render/
-          title: docker app render
-        - path: /engine/reference/commandline/app_status/
-          title: docker app status
-        - path: /engine/reference/commandline/app_uninstall/
-          title: docker app uninstall
-        - path: /engine/reference/commandline/app_upgrade/
-          title: docker app upgrade
-        - path: /engine/reference/commandline/app_validate/
-          title: docker app validate
-        - path: /engine/reference/commandline/app_version/
-          title: docker app version
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/

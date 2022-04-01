@@ -13,6 +13,21 @@ redirect_from:
   - /engine/reference/commandline/registry_joblogs/
   - /engine/reference/commandline/registry_ls/
   - /engine/reference/commandline/registry_rmi/
+  - /engine/reference/commandline/app/
+  - /engine/reference/commandline/app_bundle/
+  - /engine/reference/commandline/app_completion/
+  - /engine/reference/commandline/app_init/
+  - /engine/reference/commandline/app_inspect/
+  - /engine/reference/commandline/app_install/
+  - /engine/reference/commandline/app_list/
+  - /engine/reference/commandline/app_pull/
+  - /engine/reference/commandline/app_push/
+  - /engine/reference/commandline/app_render/
+  - /engine/reference/commandline/app_status/
+  - /engine/reference/commandline/app_uninstall/
+  - /engine/reference/commandline/app_upgrade/
+  - /engine/reference/commandline/app_validate/
+  - /engine/reference/commandline/app_version/
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to
