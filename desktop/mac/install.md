@@ -101,6 +101,7 @@ sudo hdiutil detach /Volumes/Docker
 
 The `install` command accepts the following flag:
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
+- `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 
 ### Quick start guide  
   
