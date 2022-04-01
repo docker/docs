@@ -95,12 +95,12 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 After downloading `Docker.dmg`, to install Docker Desktop to the Applications folder, run for instance the following commands in a terminal:
 ```
 sudo hdiutil attach Docker.dmg
-sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --accept-license
+sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
 sudo hdiutil detach /Volumes/Docker
 ```
 
-The installer accepts the following flag:
-- `--accept-license`: disables prompting for license acceptance on Docker Desktop first run
+The `install` command accepts the following flag:
+- `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
 
 ### Quick start guide  
   

@@ -115,7 +115,7 @@ Looking for information on using Windows containers?
 
     If your system only supports one of the two options, you will not be able to select which backend to use.
 
-3Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+3. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
 4. When the installation is successful, click **Close** to complete the installation process.
 
@@ -124,14 +124,14 @@ Log out and log back in for the changes to take effect.
 
 ### Install from the command line
 
-After downloading **Docker Desktop Installer.exe**, to install Docker Desktop, run for instance the following command in a terminal:
+After downloading **Docker Desktop Installer.exe**, to install Docker Desktop, run the following command in a terminal:
 ```
-"Docker Desktop Installer.exe" --quiet --accept-license --backend=wsl-2
+"Docker Desktop Installer.exe"
 ```
 
 The installer accepts the following flags:
 - `--quiet`: suppresses information output when running the installer
-- `--accept-license`: disables prompting for license acceptance on Docker Desktop first run
+- `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
 - `--backend`: selects the backend to use for Docker Desktop, `hyper-v` or `wsl-2` (default)
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
