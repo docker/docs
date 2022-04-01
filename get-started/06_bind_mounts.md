@@ -40,7 +40,7 @@ So, let's do it!
 
 1. Make sure you don't have any previous `getting-started` containers running.
 
-2. Run the following command. We'll explain what's going on afterwards:
+2. Run the following command from the app directory. We'll explain what's going on afterwards:
 
     ```console
     $ docker run -dp 3000:3000 \
@@ -66,7 +66,7 @@ So, let's do it!
       running `yarn install` to install _all_ dependencies and then running `yarn run dev`. If we look in the `package.json`,
       we'll see that the `dev` script is starting `nodemon`.
 
-3. You can watch the logs using `docker logs -f <container-id>`. You'll know you're ready to go when you see this:
+3. You can watch the logs using `docker logs`. You'll know you're ready to go when you see this:
 
     ```console
     $ docker logs -f <container-id>
@@ -96,7 +96,11 @@ So, let's do it!
     {: .text-center }
 
 6. Feel free to make any other changes you'd like to make. When you're done, stop the container and build your new image
-   using `docker build -t getting-started .`.
+   using:
+
+    ```console
+    $ docker build -t getting-started .
+    ```
 
 Using bind mounts is _very_ common for local development setups. The advantage is that the dev machine doesn't need to have
 all of the build tools and environments installed. With a single `docker run` command, the dev environment is pulled and ready

@@ -148,10 +148,11 @@ Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
 
+## Feedback
 
-## Logs
+Thanks for trying out the Docker Desktop Linux (beta) release. We'd love to hear from you. You can provide feedback and report any bugs through the **Issues** tracker within the [docker/desktop-linux](https://github.com/docker/desktop-linux/issues){: target="_blank" rel="noopener" class="_"} repository.
 
-To create and upload a diagnostics bundle:
+To create and upload a diagnostics bundle with your bug report:
 
 1. From the Docker menu, select **Troubleshoot** > **Get support**.
 2. When the diagnostics are available, click **Upload to get a Diagnostic ID**.
@@ -160,7 +161,9 @@ To create and upload a diagnostics bundle:
    be generated, once uploaded, it displays a diagnostics ID that can be sent to
    us for investigation.
 
-Or, if you prefer to investigate the issue, you can access Docker Desktop logs by running the following command:
+## Logs
+
+If you prefer to investigate issues yourself, you can access Docker Desktop logs by running the following command:
 
 ```console
 $ journalctl --user --unit=docker-desktop
