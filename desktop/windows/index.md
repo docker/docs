@@ -174,19 +174,6 @@ see [Set environment variables](/engine/reference/commandline/run/#set-environme
 
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
-**DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
-
-> **Note**
->
-> Some users reported problems connecting to Docker Hub on Docker Desktop. This would manifest as an error when trying to run
-`docker` commands that pull images from Docker Hub that are not already
-downloaded, such as a first time run of `docker run hello-world`. If you
-encounter this, reset the DNS server to use the Google DNS fixed address:
-`8.8.8.8`. For more information, see
-[Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
-
-Updating these settings requires a reconfiguration and reboot of the Linux VM.
-
 #### WSL Integration
 
 In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker 
