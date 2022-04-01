@@ -40,7 +40,7 @@ So, let's do it!
 
 1. Make sure you don't have any previous `getting-started` containers running.
 
-2. Run the following command. We'll explain what's going on afterwards:
+2. Run the following command from the app directory. We'll explain what's going on afterwards:
 
     ```console
     $ docker run -dp 3000:3000 \
