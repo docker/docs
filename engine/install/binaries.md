@@ -224,7 +224,7 @@ To install server and client binaries, perform the following steps:
 3. Register the service and start the Docker Engine:
 
     ```powershell
-    PS C:\> $Env:ProgramFiles\Docker\dockerd --register-service
+    PS C:\> &$Env:ProgramFiles\Docker\dockerd --register-service
     PS C:\> Start-Service docker
     ```
 
@@ -232,7 +232,7 @@ To install server and client binaries, perform the following steps:
     image.
 
     ```powershell
-    PS C:\> $Env:ProgramFiles\Docker\docker run hello-world:nanoserver
+    PS C:\> &$Env:ProgramFiles\Docker\docker run hello-world:nanoserver
     ```
 
     This command downloads a test image and runs it in a container. When the
