@@ -148,7 +148,7 @@ Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
 
-## Report a bug
+## Feedback
 
 Thanks for trying out the Docker Desktop Linux (beta) release. We'd love to hear from you. You can provide feedback and report any bugs through the **Issues** tracker within the [docker/desktop-linux](https://github.com/docker/desktop-linux/issues){: target="_blank" rel="noopener" class="_"} repository.
 
