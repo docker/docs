@@ -33,6 +33,9 @@
   {%- if page.sitemap == false or site.GH_ENV == "gh_pages" %}
   <meta name="robots" content="noindex"/>
   {%- endif %}
+  {%- if jekyll.environment != 'production' -%}<!-- TrustArc CMP -->
+  <script async="async" src="//consent.trustarc.com/notice?domain=docker.com&c=teconsent&js=nj&noticeType=bb&gtm=1"></script>
+  {%- endif -%}
   {%- if jekyll.environment == 'production' and site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}
   <title>{{ page.title | default: page_title }} | Docker Documentation</title>
   <meta name="description" content="{{ page.description | default: page_description | escape}}" />
