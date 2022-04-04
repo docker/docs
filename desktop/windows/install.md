@@ -124,14 +124,15 @@ Log out and log back in for the changes to take effect.
 
 ### Install from the command line
 
-After downloading **Docker Desktop Installer.exe**, to install Docker Desktop, run the following command in a terminal:
-```
-"Docker Desktop Installer.exe"
+After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
+
+```console
+"Docker Desktop Installer.exe" install
 ```
 
 The installer accepts the following flags:
 - `--quiet`: suppresses information output when running the installer
-- `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) now, rather than requiring it to be accepted when the application is first run
+- `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 - `--backend=<backend name>`: selects the backend to use for Docker Desktop, `hyper-v` or `wsl-2` (default)
 
