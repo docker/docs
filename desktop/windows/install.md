@@ -130,7 +130,19 @@ After downloading **Docker Desktop Installer.exe**, run the following command in
 "Docker Desktop Installer.exe" install
 ```
 
-The installer accepts the following flags:
+If you’re using PowerShell you should run it as:
+
+```console
+Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+```
+
+If using the Windows Command Prompt:
+
+```console
+start /w "" "Docker Desktop Installer.exe" install
+```
+
+The install command accepts the following flags:
 - `--quiet`: suppresses information output when running the installer
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
