@@ -118,10 +118,10 @@ $ sudo yum-config-manager \
 
 #### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose or go to the next step to install a specific version:
 
     ```console
-    $ sudo yum install docker-ce docker-ce-cli containerd.io
+    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -161,7 +161,7 @@ $ sudo yum-config-manager \
        a hyphen (`-`). For example, `docker-ce-18.09.1`.
 
     ```console
-    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -250,10 +250,10 @@ instead of `yum -y install`, and point to the new file.
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo yum remove docker-ce docker-ce-cli containerd.io
+    $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

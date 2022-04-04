@@ -66,7 +66,8 @@ $ sudo zypper remove docker \
                   docker-latest-logrotate \
                   docker-logrotate \
                   docker-engine \
-                  runc
+                  docker-compose-plugin
+                  runc \
 ```
 
 It's OK if `zypper` reports that none of these packages are installed.
@@ -133,10 +134,10 @@ $ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 
 #### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
     ```console
-    $ sudo zypper install docker-ce docker-ce-cli containerd.io
+    $ sudo zypper install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -173,7 +174,7 @@ $ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
        separated by a hyphen (`-`). For example, `docker-ce-3:20.10.8`.
 
     ```console
-    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -262,10 +263,10 @@ instead of `zypper -y install`, and point to the new file.
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo zypper remove docker-ce docker-ce-cli containerd.io
+    $ sudo zypper remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
