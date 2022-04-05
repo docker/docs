@@ -253,7 +253,7 @@ deploy:
 - `max_attempts`: How many times to attempt to restart a container before giving up (default: never give up). If the restart does not
   succeed within the configured `window`, this attempt doesn't count toward the configured `max_attempts` value.
   For example, if `max_attempts` is set to '2', and the restart fails on the first attempt, more than two restarts MUST be attempted.
-- `window`: How long to wait before deciding if a restart has succeeded, specified as a [duration](#specifying-durations) (default:
+- `window`: How long to wait before deciding if a restart has succeeded, specified as a [duration](index.md#specifying-durations) (default:
   decide immediately).
 
 ```yml
