@@ -111,7 +111,7 @@ A Docker ID grants you access to Docker Hub repositories and allows you to explo
 To create a repository:
 
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-2. Click **Create a Repository** on the Docker Hub welcome page:
+2. Click **Create a Repository** on the Docker Hub welcome page.
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
 
