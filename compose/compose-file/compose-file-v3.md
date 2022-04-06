@@ -1112,7 +1112,7 @@ Compose also recognizes inline comments, like in:
 MY_VAR = value # this is a comment
 ```
 
-To avoid interpreting "#" as an inline comment, please use the quoted notation:
+To avoid interpreting "#" as an inline comment, use the quotation marks:
 ```
 MY_VAR = "All the # inside are taken as part of the value"
 ```
