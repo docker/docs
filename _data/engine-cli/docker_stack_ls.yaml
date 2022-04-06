@@ -75,7 +75,7 @@ examples: |-
   Valid placeholders for the Go template are listed below:
 
   | Placeholder     | Description        |
-  | --------------- | ------------------ |
+  |-----------------|--------------------|
   | `.Name`         | Stack name         |
   | `.Services`     | Number of services |
   | `.Orchestrator` | Orchestrator name  |
