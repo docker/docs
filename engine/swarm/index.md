@@ -3,34 +3,46 @@ description: Docker Engine swarm mode overview
 keywords: docker, container, cluster, swarm
 title: Swarm mode overview
 redirect_from:
-- /swarm/overview/
+- /api/swarm-api/
+- /engine/userguide/networking/overlay-standalone-swarm/
+- /network/overlay-standalone.swarm/
+- /release-notes/docker-swarm/
+- /swarm/
+- /swarm/api/
+- /swarm/configure-tls/
+- /swarm/discovery/
 - /swarm/get-swarm/
-- /swarm/release-notes/
-- /swarm/install-w-machine/
-- /swarm/plan-for-production/
 - /swarm/install-manual/
-- /swarm/swarm_at_scale/about/
-- /swarm/swarm_at_scale/deploy-infra/
-- /swarm/swarm_at_scale/deploy-app/
-- /swarm/swarm_at_scale/troubleshoot/
+- /swarm/install-w-machine/
+- /swarm/multi-host-networking/
 - /swarm/multi-manager-setup/
 - /swarm/networking/
-- /swarm/multi-host-networking/
-- /swarm/discovery/
+- /swarm/overview/
+- /swarm/plan-for-production/
 - /swarm/provision-with-machine/
-- /swarm/scheduler/filter/
-- /swarm/scheduler/rescheduling/
-- /swarm/scheduler/strategy/
-- /swarm/secure-swarm-tls/
-- /swarm/configure-tls/
+- /swarm/reference/
 - /swarm/reference/create/
 - /swarm/reference/help/
 - /swarm/reference/join/
 - /swarm/reference/list/
 - /swarm/reference/manage/
 - /swarm/reference/swarm/
+- /swarm/release-notes/
+- /swarm/scheduler/
+- /swarm/scheduler/filter/
+- /swarm/scheduler/rescheduling/
+- /swarm/scheduler/strategy/
+- /swarm/secure-swarm-tls/
 - /swarm/status-code-comparison-to-docker/
--  /swarm/swarm-api/
+- /swarm/swarm-api/
+- /swarm/swarm_at_scale/
+- /swarm/swarm_at_scale/02-deploy-infra/
+- /swarm/swarm_at_scale/03-create-cluster/
+- /swarm/swarm_at_scale/04-deploy-app/
+- /swarm/swarm_at_scale/about/
+- /swarm/swarm_at_scale/deploy-app/
+- /swarm/swarm_at_scale/deploy-infra/
+- /swarm/swarm_at_scale/troubleshoot/
 ---
 
 To use Docker in swarm mode, install Docker. See
@@ -39,6 +51,10 @@ To use Docker in swarm mode, install Docker. See
 Current versions of Docker include *swarm mode* for natively managing a cluster
 of Docker Engines called a *swarm*. Use the Docker CLI to create a swarm, deploy
 application services to a swarm, and manage swarm behavior.
+
+Docker Swarm mode is built into the Docker Engine. Do not confuse Docker Swarm mode
+with [Docker Classic Swarm](https://github.com/docker/classicswarm){:target="_blank" rel="noopener" class="_"}
+which is no longer actively developed.
 
 ## Feature highlights
 

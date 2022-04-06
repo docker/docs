@@ -5,8 +5,8 @@ title: docker-compose push
 notoc: true
 ---
 
-```
-Usage: push [options] [SERVICE...]
+```none
+Usage: docker-compose push [options] [SERVICE...]
 
 Options:
     --ignore-push-failures  Push what it can and ignores images with push failures.

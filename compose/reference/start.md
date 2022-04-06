@@ -5,8 +5,8 @@ title: docker-compose start
 notoc: true
 ---
 
-```
-Usage: start [SERVICE...]
+```none
+Usage: docker-compose start [SERVICE...]
 ```
 
 Starts existing containers for a service.

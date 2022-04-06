@@ -9,10 +9,8 @@ notoc: true
 instead.
 {: .warning }
 
-```
-Creates containers for a service.
-
-Usage: create [options] [SERVICE...]
+```none
+Usage: docker-compose create [options] [SERVICE...]
 
 Options:
     --force-recreate       Recreate containers even if their configuration and

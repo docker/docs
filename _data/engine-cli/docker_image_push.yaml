@@ -5,10 +5,30 @@ usage: docker image push [OPTIONS] NAME[:TAG]
 pname: docker image
 plink: docker_image.yaml
 options:
+- option: all-tags
+  shorthand: a
+  value_type: bool
+  default_value: "false"
+  description: Push all tagged images in the repository
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: disable-content-trust
   value_type: bool
   default_value: "true"
   description: Skip image signing
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Suppress verbose output
   deprecated: false
   experimental: false
   experimentalcli: false

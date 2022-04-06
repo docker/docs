@@ -4,7 +4,6 @@ datafile: docker_trust_sign
 title: docker trust sign
 redirect_from:
   - /edge/engine/reference/commandline/trust_sign/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

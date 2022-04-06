@@ -104,7 +104,7 @@ Labels on swarm nodes and services can be updated dynamically.
   - [Filtering swarm nodes by label](../engine/reference/commandline/node_ls.md#filtering)
 
 - Swarm services
-  - [Adding labels when creating a swarm service](../engine/reference/commandline/service_create.md#set-metadata-on-a-service-l-label)
+  - [Adding labels when creating a swarm service](../engine/reference/commandline/service_create.md#set-metadata-on-a-service--l---label)
   - [Updating a swarm service's labels](../engine/reference/commandline/service_update.md)
   - [Inspecting a swarm service's labels](../engine/reference/commandline/service_inspect.md)
   - [Filtering swarm services by label](../engine/reference/commandline/service_ls.md#filtering)

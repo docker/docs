@@ -4,7 +4,6 @@ datafile: docker_restart
 title: docker restart
 redirect_from:
   - /edge/engine/reference/commandline/restart/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

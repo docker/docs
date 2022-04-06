@@ -2,10 +2,10 @@
 description: Engine
 keywords: Engine
 redirect_from:
-- /engine/misc/
-- /engine/ce-ee-node-activate/
-- /linux/
 - /edge/
+- /engine/ce-ee-node-activate/
+- /engine/misc/
+- /linux/
 - /manuals/ # TODO remove this redirect after we've created a landing page for the product manuals section
 title: Docker Engine overview
 ---

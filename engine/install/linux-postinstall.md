@@ -25,27 +25,25 @@ creates a Unix socket accessible by members of the `docker` group.
 >
 > The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
-> [*Docker Daemon Attack Surface*](../security/security.md#docker-daemon-attack-surface).
+> [*Docker Daemon Attack Surface*](../security/index.md#docker-daemon-attack-surface).
 {: .warning}
 
 > **Note**:
 >
 > To run Docker without root privileges, see
 > [Run the Docker daemon as a non-root user (Rootless mode)](../security/rootless.md).
->
-> Rootless mode is currently available as an experimental feature.
 
 To create the `docker` group and add your user:
 
 1.  Create the `docker` group.
 
-    ```bash
+    ```console
     $ sudo groupadd docker
     ```
 
 2.  Add your user to the `docker` group.
 
-    ```bash
+    ```console
     $ sudo usermod -aG docker $USER
     ```
 
@@ -57,18 +55,18 @@ To create the `docker` group and add your user:
     
     On Linux, you can also run the following command to activate the changes to groups:
     
-    ```bash 
+    ```console 
     $ newgrp docker 
     ```
 
 4.  Verify that you can run `docker` commands without `sudo`.
 
-    ```bash
+    ```console
     $ docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
     If you initially ran Docker CLI commands using `sudo` before adding
     your user to the `docker` group, you may see the following error,
@@ -85,47 +83,34 @@ To create the `docker` group and add your user:
     are lost), or change its ownership and permissions using the
     following commands:
 
-    ```bash
+    ```console
     $ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
     $ sudo chmod g+rwx "$HOME/.docker" -R
     ```
 
 ## Configure Docker to start on boot
 
-Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)
-use [`systemd`](#systemd) to manage which services start when the system boots.
-Ubuntu 14.10 and below use [`upstart`](#upstart).
+Most current Linux distributions (RHEL, CentOS, Fedora, Debian, Ubuntu 16.04 and
+higher) use [`systemd`](../../config/daemon/systemd.md) to manage which services
+start when the system boots. On Debian and Ubuntu, the Docker service is configured
+to start on boot by default. To automatically start Docker and Containerd on boot
+for other distros, use the commands below:
 
-### `systemd`
-
-```bash
-$ sudo systemctl enable docker
+```console
+$ sudo systemctl enable docker.service
+$ sudo systemctl enable containerd.service
 ```
 
 To disable this behavior, use `disable` instead.
 
-```bash
-$ sudo systemctl disable docker
+```console
+$ sudo systemctl disable docker.service
+$ sudo systemctl disable containerd.service
 ```
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
 Docker runtime files, or make other customizations, see
 [customize your systemd Docker daemon options](../../config/daemon/systemd.md).
-
-### `upstart`
-
-Docker is automatically configured to start on boot using
-`upstart`. To disable this behavior, use the following command:
-
-```bash
-$ echo manual | sudo tee /etc/init/docker.override
-```
-
-### `chkconfig`
-
-```bash
-$ sudo chkconfig docker on
-```
 
 ## Use a different storage engine
 
@@ -136,11 +121,27 @@ your host's Linux distribution and available kernel drivers.
 
 ## Configure default logging driver
 
-Docker provides the [capability](../../config/containers/logging/index.md) to collect and view log data from all containers running on a host via a series of logging drivers. The default logging driver, `json-file`, writes log data to JSON-formatted files on the host filesystem. Over time, these log files expand in size, leading to potential exhaustion of disk resources. To alleviate such issues, either configure an alternative logging driver such as Splunk or Syslog, or [set up log rotation](/config/containers/logging/configure/#configure-the-default-logging-driver) for the default driver. If you configure an alternative logging driver, see [Use `docker logs` to read container logs for remote logging drivers](/config/containers/logging/dual-logging/).
+Docker provides the [capability](../../config/containers/logging/index.md) to
+collect and view log data from all containers running on a host via a series of
+logging drivers. The default logging driver, `json-file`, writes log data to
+JSON-formatted files on the host filesystem. Over time, these log files expand
+in size, leading to potential exhaustion of disk resources.
+
+To alleviate such issues, either configure the `json-file` logging driver to
+enable [log rotation](../../config/containers/logging/json-file.md), use an
+[alternative logging driver](../../config/containers/logging/configure.md#configure-the-default-logging-driver)
+such as the ["local" logging driver](../../config/containers/logging/local.md)
+that performs log rotation by default, or use a logging driver that sends
+logs to a remote logging aggregator.
 
 ## Configure where the Docker daemon listens for connections
 
-By default, the Docker daemon listens for connections on a UNIX socket to accept requests from local clients. It is possible to allow Docker to accept requests from remote hosts by configuring it to listen on an IP address and port as well as the UNIX socket. For more detailed information on this configuration option take a look at "Bind Docker to another host/port or a unix socket" section of the [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/dockerd/) article. 
+By default, the Docker daemon listens for connections on a UNIX socket to accept
+requests from local clients. It is possible to allow Docker to accept requests
+from remote hosts by configuring it to listen on an IP address and port as well
+as the UNIX socket. For more detailed information on this configuration option
+take a look at "Bind Docker to another host/port or a unix socket" section of
+the [Docker CLI Reference](/engine/reference/commandline/dockerd/) article. 
 
 > Secure your connection
 > 
@@ -148,10 +149,13 @@ By default, the Docker daemon listens for connections on a UNIX socket to accept
 > understand the security implications of opening docker to the network. If steps are not taken to secure the connection, 
 > it is possible for remote non-root users to gain root access on the host. For more information on how to use TLS 
 > certificates to secure this connection, check this article on 
-> [how to protect the Docker daemon socket](https://docs.docker.com/engine/security/https/).
+> [how to protect the Docker daemon socket](../security/protect-access.md).
 {: .warning}
 
-Configuring Docker to accept remote connections can be done with the `docker.service` systemd unit file for Linux distributions using systemd, such as recent versions of RedHat, CentOS, Ubuntu and SLES, or with the `daemon.json` file which is recommended for Linux distributions that do not use systemd.
+Configuring Docker to accept remote connections can be done with the `docker.service`
+systemd unit file for Linux distributions using systemd, such as recent versions
+of RedHat, CentOS, Ubuntu and SLES, or with the `daemon.json` file which is
+recommended for Linux distributions that do not use systemd.
 
 > systemd vs daemon.json
 > 
@@ -164,7 +168,7 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 
 2.  Add or modify the following lines, substituting your own values.
 
-    ```none
+    ```systemd
     [Service]
     ExecStart=
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
@@ -174,19 +178,19 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 
 4. Reload the `systemctl` configuration.
 
-   ```bash
+   ```console
     $ sudo systemctl daemon-reload
     ```
 
 5.  Restart Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl restart docker.service
     ```
 
 6.  Check to see whether the change was honored by reviewing the output of `netstat` to confirm `dockerd` is listening on the configured port.
 
-    ```bash
+    ```console
     $ sudo netstat -lntp | grep dockerd
     tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
     ``` 
@@ -197,7 +201,7 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 
     ```json
     {
-    "hosts": ["unix:///var/run/docker.sock", "tcp://127.0.0.1:2375"]
+      "hosts": ["unix:///var/run/docker.sock", "tcp://127.0.0.1:2375"]
     }
     ```
 
@@ -205,7 +209,7 @@ Configuring Docker to accept remote connections can be done with the `docker.ser
 
 3.  Check to see whether the change was honored by reviewing the output of `netstat` to confirm `dockerd` is listening on the configured port.
 
-    ```bash
+    ```console
     $ sudo netstat -lntp | grep dockerd
     tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
     ``` 
@@ -224,7 +228,7 @@ is missing some modules. To check kernel compatibility, you can download and
 run the [`check-config.sh`](https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh)
 script.
 
-```bash
+```console
 $ curl https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh > check-config.sh
 
 $ bash ./check-config.sh
@@ -245,7 +249,7 @@ Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
 To see which host your client is configured to connect to, check the value of
 the `DOCKER_HOST` variable in your environment.
 
-```bash
+```console
 $ env | grep DOCKER_HOST
 ```
 
@@ -254,7 +258,7 @@ Docker daemon running on that host. If it is unset, the Docker client is set to
 connect to the Docker daemon running on the local host. If it is set in error,
 use the following command to unset it:
 
-```bash
+```console
 $ unset DOCKER_HOST
 ```
 
@@ -280,13 +284,12 @@ file in `/usr/lib/systemd/network/` on your Docker host
 (ex: `/usr/lib/systemd/network/80-container-host0.network`) and add the
 following block within the `[Network]` section.
 
-```
+```systemd
 [Network]
 ...
 IPForward=kernel
 # OR
 IPForward=true
-...
 ```
 
 This configuration allows IP forwarding from the container as expected.
@@ -315,7 +318,7 @@ can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
 
 If you see this warning, first check to see if you use `dnsmasq`:
 
-```bash
+```console
 $ ps aux |grep dnsmasq
 ```
 
@@ -340,7 +343,7 @@ at `/etc/docker/daemon.json`.
     `/etc/docker/daemon.json` file, which controls the Docker daemon
     configuration.
 
-    ```bash
+    ```console
     $ sudo nano /etc/docker/daemon.json
     ```
 
@@ -349,7 +352,7 @@ at `/etc/docker/daemon.json`.
 
     ```json
     {
-    	"dns": ["8.8.8.8", "8.8.4.4"]
+      "dns": ["8.8.8.8", "8.8.4.4"]
     }
     ```
 
@@ -361,21 +364,21 @@ at `/etc/docker/daemon.json`.
 
 3.  Restart the Docker daemon.
 
-    ```bash
+    ```console
     $ sudo service docker restart
     ```
 
 4.  Verify that Docker can resolve external IP addresses by trying to pull an
     image:
 
-    ```bash
+    ```console
     $ docker pull hello-world
     ```
 
 5.  If necessary, verify that Docker containers can resolve an internal hostname
     by pinging it.
 
-    ```bash
+    ```console
     $ docker run --rm -it alpine ping -c4 <my_internal_host>
 
     PING google.com (192.168.1.2): 56 data bytes
@@ -406,9 +409,9 @@ IP address, follow these instructions to disable `dnsmasq` in NetworkManager.
 4.  Restart both NetworkManager and Docker. As an alternative, you can reboot
     your system.
 
-    ```bash
-    $ sudo restart network-manager
-    $ sudo restart docker
+    ```console
+    $ sudo systemctl restart network-manager
+    $ sudo systemctl restart docker
     ```
 
 ##### RHEL, CentOS, or Fedora
@@ -417,14 +420,13 @@ To disable `dnsmasq` on RHEL, CentOS, or Fedora:
 
 1.  Disable the `dnsmasq` service:
 
-    ```bash
-    $ sudo service dnsmasq stop
-
+    ```console
+    $ sudo systemctl stop dnsmasq
     $ sudo systemctl disable dnsmasq
     ```
 
 2.  Configure the DNS servers manually using the
-    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" class="_"}.
+    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" rel="noopener" class="_"}.
 
 ### Allow access to the remote API through a firewall
 
@@ -436,7 +438,7 @@ otherwise.
 
 Two common firewall daemons are
 [UFW (Uncomplicated Firewall)](https://help.ubuntu.com/community/UFW) (often
-used for Ubuntu systems) and [firewalld](http://www.firewalld.org/) (often used
+used for Ubuntu systems) and [firewalld](https://firewalld.org) (often used
 for RPM-based systems). Consult the documentation for your OS and firewall, but
 the following information might help you get started. These options are fairly
 permissive and you may want to use a different configuration that locks your
@@ -485,7 +487,7 @@ and a 10% overall performance degradation, even if Docker is not running.
 
 3.  Update GRUB.
 
-    ```bash
+    ```console
     $ sudo update-grub
     ```
 

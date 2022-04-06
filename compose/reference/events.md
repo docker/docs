@@ -5,8 +5,8 @@ title: docker-compose events
 notoc: true
 ---
 
-```
-Usage: events [options] [SERVICE...]
+```none
+Usage: docker-compose events [options] [SERVICE...]
 
 Options:
     --json      Output events as a stream of json objects

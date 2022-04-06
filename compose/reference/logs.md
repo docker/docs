@@ -5,8 +5,8 @@ title: docker-compose logs
 notoc: true
 ---
 
-```
-Usage: logs [options] [SERVICE...]
+```none
+Usage: docker-compose logs [options] [SERVICE...]
 
 Options:
     --no-color          Produce monochrome output.

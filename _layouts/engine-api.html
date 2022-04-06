@@ -4,7 +4,7 @@
     <title>Docker Engine API {{ page.name | replace: '.md' }} Reference</title>
     <!-- needed for adaptive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Reference for the API served by Docker Engine." />
+    <meta name="description" content="Reference documentation and Swagger (OpenAPI) specification for the v{{ page.name | replace: '.md' }} version of the API served by Docker Engine." />
     <meta charset="utf-8" />
     <!-- favicon -->
     <meta name="msapplication-TileImage" content="/favicons/docs@2x.ico" />
@@ -12,6 +12,8 @@
     <link rel="apple-touch-icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128" />
     <link rel="icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128" />
     <link rel="stylesheet" type="text/css" href="/css/api-reference.css" />
+    <!-- make the latest API version the canonical page as that's what we want users to be using mostly -->
+    <link rel="canonical" href="https://docs.docker.com/engine/api/v{{ site.latest_engine_api_version }}/" />
 </head>
 <body>
 <redoc spec-url="/engine/api/{{ page.name | replace: '.md'}}.yaml" hide-hostname="true" suppress-warnings="true" lazy-rendering></redoc>

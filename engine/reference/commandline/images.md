@@ -4,7 +4,6 @@ datafile: docker_images
 title: docker images
 redirect_from:
   - /edge/engine/reference/commandline/images/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

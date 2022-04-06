@@ -2,16 +2,27 @@
 description: Instructions for installing Docker Engine on Ubuntu
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 redirect_from:
-- /engine/installation/ubuntulinux/
-- /installation/ubuntulinux/
+- /ee/docker-ee/ubuntu/
+- /engine/installation/linux/docker-ce/ubuntu/
+- /engine/installation/linux/docker-ee/ubuntu/
 - /engine/installation/linux/ubuntu/
 - /engine/installation/linux/ubuntulinux/
-- /engine/installation/linux/docker-ce/ubuntu/
-- /install/linux/ubuntu/
+- /engine/installation/ubuntulinux/
 - /install/linux/docker-ce/ubuntu/
+- /install/linux/docker-ee/ubuntu/
+- /install/linux/ubuntu/
+- /installation/ubuntulinux/
 title: Install Docker Engine on Ubuntu
 toc_max: 4
 ---
+
+> **Docker Desktop for Linux**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and
+> Windows as you do on Linux. We are excited to share that Docker Desktop for
+> Linux (Beta) is now available for you to test. For more information, see
+[Docker Desktop for Linux](../../desktop/linux/index.md).
+{: .important}
 
 To get started with Docker Engine on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
@@ -24,26 +35,37 @@ To get started with Docker Engine on Ubuntu, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Ubuntu Impish 21.10
+- Ubuntu Hirsute 21.04
 - Ubuntu Focal 20.04 (LTS)
-- Ubuntu Eoan 19.10
 - Ubuntu Bionic 18.04 (LTS)
-- Ubuntu Xenial 16.04 (LTS)
 
-Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
+Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, and `s390x` architectures.
+
+> Ubuntu 16.04 LTS "Xenial Xerus" end-of-life
+> 
+> Ubuntu Linux 16.04 LTS reached the end of its five-year LTS window on April
+> 30th 2021 and is no longer supported. Docker no longer releases packages for
+> this distribution (including patch- and security releases). Users running
+> Docker on Ubuntu 16.04 are recommended to update their system to a currently
+> supported LTS version of Ubuntu.
+{: .important }
 
 ### Uninstall old versions
 
 Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
-```bash
+```console
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine package is now called `docker-ce`.
+networks, are preserved. If you do not need to save your existing data, and want to
+start with a clean installation, refer to the [uninstall Docker Engine](#uninstall-docker-engine)
+section at the bottom of this page.
 
 ### Supported storage drivers
 
@@ -83,91 +105,38 @@ from the repository.
 1.  Update the `apt` package index and install packages to allow `apt` to use a
     repository over HTTPS:
 
-    ```bash
+    ```console
     $ sudo apt-get update
 
     $ sudo apt-get install \
-        apt-transport-https \
         ca-certificates \
         curl \
-        gnupg-agent \
-        software-properties-common
+        gnupg \
+        lsb-release
     ```
 
 2.  Add Docker's official GPG key:
 
-    ```bash
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo apt-key add -
-    ```
-
-    Verify that you now have the key with the fingerprint
-    <span><code>9DC8 5822 9FC7 DD38 854A&nbsp;&nbsp;E2D8 8D81 803C 0EBF CD88</code></span>, by searching for the
-    last 8 characters of the fingerprint.
-
-    ```bash
-    $ sudo apt-key fingerprint 0EBFCD88
-
-    pub   rsa4096 2017-02-22 [SCEA]
-          9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-    uid           [ unknown] Docker Release (CE deb) <docker@docker.com>
-    sub   rsa4096 2017-02-22 [S]
+    ```console
+    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     ```
 
 3.  Use the following command to set up the **stable** repository. To add the
     **nightly** or **test** repository, add the word `nightly` or `test` (or both)
     after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
 
-    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Ubuntu distribution, such as `xenial`. Sometimes, in a distribution
-    > like Linux Mint, you might need to change `$(lsb_release -cs)`
-    > to your parent Ubuntu distribution. For example, if you are using
-    >  `Linux Mint Tessa`, you could use `bionic`. Docker does not offer any guarantees on untested
-    > and unsupported Ubuntu distributions.
-
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
-      <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
-      <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=amd64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
+    ```console
+    $ echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
-
-    </div>
-    <div id="armhf_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=armhf] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
-    ```
-
-    </div>
-    <div id="arm64_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=arm64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
-    ```
-
-    </div>
-    </div> <!-- tab-content -->
 
 #### Install Docker Engine
 
 1. Update the `apt` package index, and install the _latest version_ of Docker
    Engine and containerd, or go to the next step to install a specific version:
 
-    ```bash
+    ```console
     $ sudo apt-get update
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
     ```
@@ -184,32 +153,31 @@ from the repository.
 
     a. List the versions available in your repo:
 
-    ```bash
+    ```console
     $ apt-cache madison docker-ce
 
       docker-ce | 5:18.09.1~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
       docker-ce | 5:18.09.0~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
       docker-ce | 18.06.1~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
       docker-ce | 18.06.0~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
-      ...
     ```
 
     b. Install a specific version using the version string from the second column,
        for example, `5:18.09.1~3-0~ubuntu-xenial`.
 
-    ```bash
+    ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
     ```
 
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
@@ -228,19 +196,21 @@ If you cannot use Docker's repository to install Docker Engine, you can download
 `.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
+1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" },
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64`, and download the `.deb` file for the
-    Docker Engine version you want to install.
+    `armhf`, `arm64`, or `s390x`, and download the `.deb` file for the Docker Engine
+    version you want to install.
 
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
 
-    ```bash
+    ```console
     $ sudo dpkg -i /path/to/package.deb
     ```
 
@@ -249,12 +219,12 @@ a new file each time you want to upgrade Docker.
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
 Docker Engine is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
@@ -273,7 +243,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
-    ```bash
+    ```console
     $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
     ```
 
@@ -281,8 +251,9 @@ To upgrade Docker Engine, download the newer package file and repeat the
     are not automatically removed. To delete all images, containers, and
     volumes:
 
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/containerd
     ```
 
 You must delete any edited configuration files manually.

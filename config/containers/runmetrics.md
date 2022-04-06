@@ -2,6 +2,7 @@
 description: Measure the behavior of running containers
 keywords: docker, metrics, CPU, memory, disk, IO, run, runtime, stats
 redirect_from:
+- /articles/runmetrics/
 - /engine/articles/run_metrics
 - /engine/articles/runmetrics
 - /engine/admin/runmetrics/
@@ -16,7 +17,7 @@ and network IO metrics.
 
 The following is a sample output from the `docker stats` command
 
-```bash
+```console
 $ docker stats redis1 redis2
 
 CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O
@@ -49,12 +50,24 @@ corresponding to existing containers.
 
 To figure out where your control groups are mounted, you can run:
 
-```bash
+```console
 $ grep cgroup /proc/mounts
 ```
 
 ### Enumerate cgroups
 
+The file layout of cgroups is significantly different between v1 and v2.
+
+If `/sys/fs/cgroup/cgroup.controllers` is present on your system, you are using v2,
+otherwise you are using v1.
+Refer to the subsection that corresponds to your cgroup version.
+
+cgroup v2 is used by default on the following distributions:
+- Fedora (since 31)
+- Debian GNU/Linux (since 11)
+- Ubuntu (since 21.10)
+
+#### cgroup v1
 You can look into `/proc/cgroups` to see the different control group subsystems
 known to the system, the hierarchy they belong to, and how many groups they contain.
 
@@ -63,6 +76,41 @@ belongs to. The control group is shown as a path relative to the root of
 the hierarchy mountpoint. `/` means the process has not been assigned to a
 group, while `/lxc/pumpkin` indicates that the process is a member of a
 container named `pumpkin`.
+
+#### cgroup v2
+
+On cgroup v2 hosts, the content of `/proc/cgroups` isn't meaningful.
+See `/sys/fs/cgroup/cgroup.controllers` to the available controllers.
+
+### Changing cgroup version
+
+Changing cgroup version requires rebooting the entire system.
+
+On systemd-based systems, cgroup v2 can be enabled by adding `systemd.unified_cgroup_hierarchy=1`
+to the kernel cmdline.
+To revert the cgroup version to v1, you need to set `systemd.unified_cgroup_hierarchy=0` instead.
+
+If `grubby` command is available on your system (e.g. on Fedora), the cmdline can be modified as follows:
+
+```console
+$ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=1"
+```
+
+If `grubby` command is not available, edit the `GRUB_CMDLINE_LINUX` line in `/etc/default/grub`
+and run `sudo update-grub`.
+
+### Running Docker on cgroup v2
+
+Docker supports cgroup v2 since Docker 20.10.
+Running Docker on cgroup v2 also requires the following conditions to be satisfied:
+* containerd: v1.4 or later
+* runc: v1.0.0-rc91 or later
+* Kernel: v4.15 or later (v5.2 or later is recommended)
+
+Note that the cgroup v2 mode behaves slightly different from the cgroup v1 mode:
+* The default cgroup driver (`dockerd --exec-opt native.cgroupdriver`) is "systemd" on v2, "cgroupfs" on v1.
+* The default cgroup namespace mode (`docker run --cgroupns`) is "private" on v2, "host" on v1.
+* The `docker run` flags `--oom-kill-disable` and `--kernel-memory` are discarded on v2.
 
 ### Find the cgroup for a given container
 
@@ -78,9 +126,18 @@ in `docker ps`, its long ID might be something like
 look it up with `docker inspect` or `docker ps --no-trunc`.
 
 Putting everything together to look at the memory metrics for a Docker
-container, take a look at `/sys/fs/cgroup/memory/docker/<longid>/`.
+container, take a look at the following paths:
+- `/sys/fs/cgroup/memory/docker/<longid>/` on cgroup v1, `cgroupfs` driver
+- `/sys/fs/cgroup/memory/system.slice/docker-<longid>.scope/` on cgroup v1, `systemd` driver
+- `/sys/fs/cgroup/docker/<longid/>` on cgroup v2, `cgroupfs` driver
+- `/sys/fs/cgroup/system.slice/docker-<longid>.scope/` on cgroup v2, `systemd` driver
 
 ### Metrics from cgroups: memory, CPU, block I/O
+
+> **Note**
+>
+> This section is not yet updated for cgroup v2.
+> For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
 
 For each subsystem (memory, CPU, and block I/O), one or
 more pseudo-files exist and contain statistics.
@@ -177,7 +234,7 @@ Those times are expressed in ticks of 1/100th of a second, also called "user
 jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 `USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
 "ticks" per second, but higher frequency scheduling and
-[tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
+[tickless kernels](https://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
 
 #### Block I/O metrics
@@ -222,7 +279,7 @@ an interface) can do some serious accounting.
 For instance, you can setup a rule to account for the outbound HTTP
 traffic on a web server:
 
-```bash
+```console
 $ iptables -I OUTPUT -p tcp --sport 80
 ```
 
@@ -232,7 +289,7 @@ rule.
 
 Later, you can check the values of the counters, with:
 
-```bash
+```console
 $ iptables -nxvL OUTPUT
 ```
 
@@ -274,13 +331,13 @@ Containers can interact with their sub-containers, though.
 
 The exact format of the command is:
 
-```bash
+```console
 $ ip netns exec <nsname> <command...>
 ```
 
 For example:
 
-```bash
+```console
 $ ip netns exec mycontainer netstat -i
 ```
 
@@ -312,7 +369,7 @@ cgroup (and thus, in the container). Pick any one of the PIDs.
 Putting everything together, if the "short ID" of a container is held in
 the environment variable `$CID`, then you can do this:
 
-```bash
+```console
 $ TASKS=/sys/fs/cgroup/devices/docker/$CID*/tasks
 $ PID=$(head -n 1 $TASKS)
 $ mkdir -p /var/run/netns

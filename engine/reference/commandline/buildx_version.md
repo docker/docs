@@ -2,7 +2,6 @@
 datafolder: buildx
 datafile: docker_buildx_version
 title: docker buildx version
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

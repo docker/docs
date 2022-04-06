@@ -10,10 +10,8 @@ administrator associates an AppArmor security profile with each program. Docker
 expects to find an AppArmor policy loaded and enforced.
 
 Docker automatically generates and loads a default profile for containers named
-`docker-default`. On Docker versions `1.13.0` and later, the Docker binary generates
-this profile in `tmpfs` and then loads it into the kernel. On Docker versions
-earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
-instead.
+`docker-default`. The Docker binary generates this profile in `tmpfs` and then
+loads it into the kernel.
 
 > **Note**: This profile is used on containers, _not_ on the Docker Daemon.
 
@@ -34,7 +32,7 @@ When you run a container, it uses the `docker-default` policy unless you
 override it with the `security-opt` option. For example, the following
 explicitly specifies the default policy:
 
-```bash
+```console
 $ docker run --rm -it --security-opt apparmor=docker-default hello-world
 ```
 
@@ -42,19 +40,19 @@ $ docker run --rm -it --security-opt apparmor=docker-default hello-world
 
 To load a new profile into AppArmor for use with containers:
 
-```bash
+```console
 $ apparmor_parser -r -W /path/to/your_profile
 ```
 
 Then, run the custom profile with `--security-opt` like so:
 
-```bash
+```console
 $ docker run --rm -it --security-opt apparmor=your_profile hello-world
 ```
 
 To unload a profile from AppArmor:
 
-```bash
+```console
 # unload the profile
 $ apparmor_parser -R /path/to/profile
 ```
@@ -156,7 +154,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 
 2. Load the profile.
 
-   ```bash
+   ```console
    $ sudo apparmor_parser -r -W /etc/apparmor.d/containers/docker-nginx
    ```
 
@@ -164,20 +162,20 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 
    To run nginx in detached mode:
 
-   ```bash
+   ```console
    $ docker run --security-opt "apparmor=docker-nginx" \
         -p 80:80 -d --name apparmor-nginx nginx
    ```
 
 4. Exec into the running container.
 
-   ```bash
+   ```console
    $ docker container exec -it apparmor-nginx bash
    ```
 
 5. Try some operations to test the profile.
 
-   ```bash
+   ```console
    root@6da5a2a930b9:~# ping 8.8.8.8
    ping: Lacking privilege for raw socket.
 
@@ -235,7 +233,7 @@ default unless in `privileged` mode. This line shows that apparmor has denied
 If you need to check which profiles are loaded,  you can use `aa-status`. The
 output looks like:
 
-```bash
+```console
 $ sudo aa-status
 apparmor module is loaded.
 14 profiles are loaded.

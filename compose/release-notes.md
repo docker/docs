@@ -7,6 +7,276 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.29.2
+(2021-05-10)
+
+### Miscellaneous
+
+- Removed the prompt to use `docker compose` in the `up` command.
+
+- Bumped `py` to `1.10.0` in `requirements-indirect.txt`.
+
+## 1.29.1
+(2021-04-13)
+
+### Bugs
+
+- Fixed invalid handler warning on Windows builds.
+
+- Fixed config hash to trigger container re-creation on IPC mode updates.
+
+- Fixed conversion map for `placement.max_replicas_per_node`.
+
+- Removed extra scan suggestion on build.
+
+## 1.29.0
+(2021-04-06)
+
+### Features
+
+- Added profile filter to `docker-compose config`.
+
+- Added a `depends_on` condition to wait for successful service completion.
+
+### Miscellaneous
+
+- Added an image scan message on build.
+
+- Updated warning message for `--no-ansi` to mention `--ansi never` as alternative.
+
+- Bumped docker-py to 5.0.0.
+
+- Bumped PyYAML to 5.4.1.
+
+- Bumped python-dotenv to 0.17.0.
+
+## 1.28.6
+(2021-03-23)
+
+### Bug fixes
+
+- Made `--env-file` relative to the current working directory. Environment file paths set with `--env-file` are now relative to the current working directory and override the default `.env` file located in the project directory.
+
+- Fixed missing service property `storage_opt` by updating the Compose schema.
+
+- Fixed build `extra_hosts` list format.
+
+- Removed additional error message on `exec`.
+
+### Miscellaneous
+
+- Added `compose.yml` and `compose.yaml` to the default filename list.
+
+## 1.28.5 
+(2021-02-26)
+
+### Bugs
+
+- Fixed the OpenSSL version mismatch error when shelling out to the SSH client (via bump to docker-py 4.4.4 which contains the fix).
+
+- Added missing build flags to the native builder: `platform`, `isolation` and `extra_hosts`.
+
+- Removed info message on native build.
+
+- Fixed the log fetching bug when service logging driver is set to 'none'.
+
+## 1.28.4
+(2021-02-18)
+
+### Bug fixes
+
+- Fixed SSH port parsing by bumping docker-py to 4.4.3.
+
+### Miscellaneous
+
+- Bumped Python to 3.7.10.
+
+## 1.28.3
+(2021-02-17)
+
+### Bug fixes
+
+- Fixed SSH hostname parsing when it contains a leading 's'/'h', and removed the quiet option that was hiding the error (via docker-py bump to 4.4.2).
+
+- Fixed key error for `--no-log-prefix` option.
+
+- Fixed incorrect CLI environment variable name for service profiles: `COMPOSE_PROFILES` instead of `COMPOSE_PROFILE`.
+
+- Fixed the fish completion.
+
+### Miscellaneous
+
+- Bumped cryptography to 3.3.2.
+
+- Removed the log driver filter.
+
+For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https://github.com/docker/compose/milestone/53?closed=1){:target="_blank" rel="noopener" class="_"}.
+
+## 1.28.2
+(2021-01-26)
+
+### Bug fixes
+
+- Revert to Python 3.7 bump for Linux static builds
+
+- Add bash completion for `docker-compose logs|up --no-log-prefix`
+
+### Miscellaneous
+
+- CI setup update
+
+## 1.28.0 
+(2021-01-20)
+
+### Features
+
+- Added support for NVIDIA GPUs through device requests.
+
+- Added support for service profiles.
+
+- Changed the SSH connection approach to the Docker CLI by shelling out to the local SSH client. Set the `COMPOSE_PARAMIKO_SSH=1` environment variable to enable the old behavior.
+
+- Added a flag to disable log prefix.
+
+- Added a flag for ANSI output control.
+
+- Docker Compose now uses the native Docker CLI's `build` command when building images. Set the `COMPOSE_DOCKER_CLI_BUILD=0` environment variable to disable this feature.
+
+### Bug fixes
+
+- Made `parallel_pull=True` by default.
+
+- Restored the warning for configs in non-swarm mode.
+
+- Took `--file` into account when defining `project_dir`.
+
+- Fixed a service attach bug on `compose up`.
+
+### Miscellaneous
+
+- Added usage metrics.
+
+- Synced schema with COMPOSE specification.
+
+- Improved failure report for missing mandatory environment variables.
+
+- Bumped `attrs` to 20.3.0.
+
+- Bumped `more_itertools` to 8.6.0.
+
+- Bumped `cryptograhy` to 3.2.1.
+
+- Bumped `cffi` to 1.14.4.
+
+- Bumped `virtualenv` to 20.2.2.
+
+- Bumped `bcrypt` to 3.2.0.
+
+- Bumped GitPython to 3.1.11.
+
+- Bumped `docker-py` to 4.4.1.
+
+- Bumped Python to 3.9.
+
+- Linux: bumped Debian base image from stretch to buster (required for Python 3.9).
+
+- macOS: Bumped OpenSSL 1.1.1g to 1.1.1h, and Python 3.7.7 to 3.9.0.
+
+- Bumped PyInstaller to 4.1.
+
+- Relaxed the restriction on base images to latest minor.
+
+- Updated READMEs.
+
+## 1.27.4 
+(2020-09-24)
+
+### Bug fixes
+
+- Removed path checks for bind mounts.
+
+- Fixed port rendering to output long form syntax for non-v1.
+
+- Added protocol to the Docker socket address.
+
+## 1.27.3 
+(2020-09-16)
+
+### Bug fixes
+
+- Merged `max_replicas_per_node` on `docker-compose config`.
+
+- Fixed `depends_on` serialization on `docker-compose config`.
+
+- Fixed scaling when some containers are not running on `docker-compose up`.
+
+- Enabled relative paths for `driver_opts.device` for `local` driver.
+
+- Allowed strings for `cpus` fields.
+
+## 1.27.2
+(2020-09-10)
+
+### Bug fixes
+
+- Fixed bug on `docker-compose run` container attach.
+
+## 1.27.1
+(2020-09-10)
+
+### Bug fixes
+
+- Fixed `docker-compose run` when `service.scale` is specified.
+
+- Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
+
+- Pinned the new internal schema version to `3.9` as the default.
+
+- Preserved the version number configured in the Compose file.
+
+## 1.27.0 
+(2020-09-07)
+
+### Features
+
+- Merged 2.x and 3.x Compose formats and aligned with `COMPOSE_SPEC` schema.
+
+- Implemented service mode for `ipc`.
+
+- Passed `COMPOSE_PROJECT_NAME` environment variable in container mode.
+
+- Made `run` behave in the same way as `up`.
+
+- Used `docker build` on `docker-compose run` when `COMPOSE_DOCKER_CLI_BUILD` environment variable is set.
+
+- Used the docker-py default API version for engine queries (`auto`).
+
+- Parsed `network_mode` on build.
+
+### Bug fixes
+
+- Ignored build context path validation when building is not required.
+
+- Fixed float to bytes conversion via docker-py bump to 4.3.1.
+
+- Fixed the scale bug when the deploy section is set.
+
+- Fixed `docker-py` bump in `setup.py`.
+
+- Fixed experimental build failure detection.
+
+- Fixed context propagation to the Docker CLI.
+
+### Miscellaneous
+
+- Bumped `docker-py` to 4.3.1.
+
+- Bumped `tox` to 3.19.0.
+
+- Bumped `virtualenv` to 20.0.30.
+
+- Added script for Docs synchronization.
+
 ## 1.26.2
 (2020-07-02)
 
@@ -40,7 +310,7 @@ redirect_from:
 
 - Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
 
-- Bumped `Pytest` to 5.3.4 and add refactor compatibility with new version.
+- Bumped `Pytest` to 5.3.4 and add refactor compatibility with the new version.
 
 - Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
 
@@ -727,7 +997,7 @@ naming scheme accordingly before upgrading.
 
 - Added support for `extra_hosts` in build configuration
 
-- Added support for the [long syntax](compose-file/index.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
+- Added support for the [long syntax](compose-file/compose-file-v3.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
   Using this syntax will create [mounts](../storage/bind-mounts.md) instead of volumes.
 
 #### Compose file version 2.1 and up
@@ -1128,7 +1398,7 @@ naming scheme accordingly before upgrading.
   to separate the `COMPOSE_FILE` environment value using the
   `COMPOSE_PATH_SEPARATOR` environment variable
 
-- Added support for port range to single port in port mappings, such as
+- Added support for port range to a single port in port mappings, such as
   `8000-8010:80`.
 
 ### Bug Fixes
@@ -1221,7 +1491,7 @@ naming scheme accordingly before upgrading.
 
 ### Bug Fixes
 
-- Fixed an issue where presence of older versions of the docker-py
+- Fixed an issue where the presence of older versions of the docker-py
   package would cause unexpected crashes while running Compose
 
 - Fixed an issue where healthcheck dependencies would be lost when
@@ -1496,8 +1766,8 @@ naming scheme accordingly before upgrading.
 ### Breaking Changes
 
 -   `docker-compose logs` no longer follows log output by default. It now
-    matches the behaviour of `docker logs` and exits after the current logs
-    are printed. Use `-f` to get the old default behaviour.
+    matches the behavior of `docker logs` and exits after the current logs
+    are printed. Use `-f` to get the old default behavior.
 
 -   Booleans are no longer allows as values for mappings in the Compose file
     (for keys `environment`, `labels` and `extra_hosts`). Previously this
@@ -1738,7 +2008,7 @@ naming scheme accordingly before upgrading.
 -   Fixed an incorrect warning when a container volume was defined in
     the Compose file.
 
--   Fixed a bug that prevented the force shutdown behaviour of `up` and
+-   Fixed a bug that prevented the force shutdown behavior of `up` and
     `logs`.
 
 -   Fixed a bug that caused `None` to be printed as the network driver name
@@ -2042,7 +2312,7 @@ Thanks @dano, @josephpage, @kevinsimper, @lieryan, @phemmer, @soulrebel and @ssc
 
 ### New features
 
-- `docker-compose up` has an **experimental** new behaviour: it will only recreate containers for services whose configuration has changed in `docker-compose.yml`. This will eventually become the default, but for now you can take it for a spin:
+- `docker-compose up` has an **experimental** new behavior: it will only recreate containers for services whose configuration has changed in `docker-compose.yml`. This will eventually become the default, but for now you can take it for a spin:
 
         $ docker-compose up --x-smart-recreate
 
@@ -2057,7 +2327,7 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `cpuset`, like `docker run --cpuset-cpus`, lets you specify which CPUs to allow execution in.
 - `read_only`, like `docker run --read-only`, lets you mount a container's filesystem as read-only.
 - `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/run/#security-configuration).
-- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers-log-driver).
+- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers---log-driver).
 
 ### Bug Fixes
 
@@ -2142,7 +2412,7 @@ The highlights:
 
    This means the GitHub repository has moved to [https://github.com/docker/fig](https://github.com/docker/fig) and our IRC channel is now #docker-fig on Freenode.
 
- - Fig can be used with the [official Docker OS X installer](../docker-for-mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
+ - Fig can be used with the [official Docker OS X installer](../desktop/mac/install.md). Boot2Docker will mount the home directory from your host machine so volumes work as expected.
 
  - Fig supports Docker 1.3.
 
@@ -2231,7 +2501,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - The `net` and `workdir` options are now supported in `fig.yml`.
  - The `hostname` option now works in the same way as the Docker CLI, splitting out into a `domainname` option.
- - TTY behaviour is far more robust, and resizes are supported correctly.
+ - TTY behavior is far more robust, and resizes are supported correctly.
  - Load YAML files safely.
 
 Thanks to @d11wtq, @ryanbrainard, @rail44, @j0hnsmith, @binarin, @Elemecca, @mozz100 and @marksteve for their help with this release!
@@ -2355,7 +2625,7 @@ Big thanks to @tomstuart, @EnTeQuAk, @schickling, @aronasorman and @GeoffreyPlit
 
  - Improve documentation
  - Try to connect to Docker on `tcp://localdocker:4243` and a UNIX socket in addition to `localhost`.
- - Improve `fig up` behaviour
+ - Improve `fig up` behavior
  - Add confirmation prompt to `fig rm`
  - Add `fig build` command
 

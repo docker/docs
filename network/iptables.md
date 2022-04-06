@@ -40,7 +40,7 @@ To allow only a specific IP or network to access the containers, insert a
 negated rule at the top of the `DOCKER-USER` filter chain. For example, the
 following rule restricts external access from all IP addresses except `192.168.1.1`:
 
-```bash
+```console
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.1 -j DROP
 ```
 
@@ -48,14 +48,14 @@ Please note that you will need to change `ext_if` to correspond with your
 host's actual external interface. You could instead allow connections from a
 source subnet. The following rule only allows access from the subnet `192.168.1.0/24`:
 
-```bash
+```console
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.0/24 -j DROP
 ```
 
 Finally, you can specify a range of IP addresses to accept using `--src-range`
 (Remember to also add `-m iprange` when using `--src-range` or `--dst-range`):
 
-```bash
+```console
 $ iptables -I DOCKER-USER -m iprange -i ext_if ! --src-range 192.168.1.1-192.168.1.3 -j DROP
 ```
 
@@ -76,7 +76,7 @@ any traffic anymore. If you want your system to continue functioning as a
 router, you can add explicit `ACCEPT` rules to the `DOCKER-USER` chain to
 allow it:
 
-```bash
+```console
 $ iptables -I DOCKER-USER -i src_if -o dst_if -j ACCEPT
 ```
 
@@ -94,6 +94,16 @@ expose ports on an internal IP address, you can use the `--ip` option to
 specify a different IP address. However, setting `--ip` only changes the
 _default_, it does not _restrict_ services to that IP.
 
-## Next steps
+## Integration with Firewalld
 
-- Read [Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks)
+If you are running Docker version 20.10.0 or higher with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} on your system with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (for example, `docker0`) into the `docker` zone to allow seamless networking.
+
+Consider running the following `firewalld` command to remove the docker interface from the zone.
+
+```console
+# Please substitute the appropriate zone and docker interface
+$ firewall-cmd --zone=trusted --remove-interface=docker0 --permanent
+$ firewall-cmd --reload
+```
+
+Restarting `dockerd` daemon inserts the interface into the `docker` zone.

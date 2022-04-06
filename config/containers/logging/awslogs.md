@@ -11,7 +11,7 @@ The `awslogs` logging driver sends container logs to
 [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
 Log entries can be retrieved through the [AWS Management
 Console](https://console.aws.amazon.com/cloudwatch/home#logs:) or the [AWS SDKs
-and Command Line Tools](http://docs.aws.amazon.com/cli/latest/reference/logs/index.html).
+and Command Line Tools](https://docs.aws.amazon.com/cli/latest/reference/logs/index.html).
 
 ## Usage
 
@@ -38,7 +38,7 @@ Restart Docker for the changes to take effect.
 You can set the logging driver for a specific container by using the
 `--log-driver` option to `docker run`:
 
-```bash
+```console
 $ docker run --log-driver=awslogs ...
 ```
 
@@ -65,7 +65,7 @@ the `awslogs-region` log option or the `AWS_REGION` environment variable to set
 the region. By default, if your Docker daemon is running on an EC2 instance
 and no region is set, the driver uses the instance's region.
 
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
 ```
 
@@ -85,18 +85,18 @@ with the provided endpoint.
 ### awslogs-group
 
 You must specify a
-[log group](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
+[log group](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 for the `awslogs` logging driver. You can specify the log group with the
 `awslogs-group` log option:
 
-```bash
+```console
 $ docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
 ```
 
 ### awslogs-stream
 
 To configure which
-[log stream](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)
+[log stream](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
 should be used, you can specify the `awslogs-stream` log option. If not
 specified, the container ID is used as the log stream.
 
@@ -112,7 +112,7 @@ Log driver returns an error by default if the log group does not exist. However,
 `awslogs-create-group` to `true` to automatically create the log group as needed.
 The `awslogs-create-group` option defaults to `false`.
 
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -129,7 +129,7 @@ $ docker run \
 ### awslogs-datetime-format
 
 The `awslogs-datetime-format` option defines a multiline start pattern in [Python
-`strftime` format](http://strftime.org). A log message consists of a line that
+`strftime` format](https://strftime.org). A log message consists of a line that
 matches the pattern and any following lines that don't match the pattern. Thus
 the matched line is the delimiter between log messages.
 
@@ -162,7 +162,7 @@ The format can be expressed as a `strftime` expression of
 `[%b %d, %Y %H:%M:%S]`, and the `awslogs-datetime-format` value can be set to
 that expression:
 
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -237,7 +237,7 @@ INFO Another message was logged
 
 You can use the regular expression of `^INFO`:
 
-```bash
+```console
 $ docker run \
     --log-driver=awslogs \
     --log-opt awslogs-region=us-east-1 \
@@ -288,6 +288,21 @@ If not specified, the container ID is used as the log stream.
 > {% endraw %}
 > the output is something like: `alpine_latest-bf0072049c76`
 
+### awslogs-force-flush-interval-seconds
+
+The `awslogs` driver periodically flushs logs to CloudWatch.
+
+The `awslogs-force-flush-interval-seconds` option changes log flush interval seconds.
+
+Default is 5 seconds.
+
+### awslogs-max-buffered-events
+
+The `awslogs` driver buffers logs.
+
+The `awslogs-max-buffered-events` option changes log buffer size.
+
+Default is 4K.
 
 ## Credentials
 

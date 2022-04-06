@@ -8,7 +8,7 @@ title: Journald logging driver
 ---
 
 The `journald` logging driver sends container logs to the
-[`systemd` journal](http://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
+[`systemd` journal](https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html).
 Log entries can be retrieved using the `journalctl` command, through use of the
 `journal` API, or using the `docker logs` command.
 
@@ -26,7 +26,7 @@ stores the following metadata in the journal with each message:
 ## Usage
 
 To use the `journald` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+and `log-opts` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
 `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
 configuring Docker using `daemon.json`, see
@@ -45,7 +45,7 @@ Restart Docker for the changes to take effect.
 To configure the logging driver for a specific container, use the `--log-driver`
 flag on the `docker run` command.
 
-```bash
+```console
 $ docker run --log-driver=journald ...
 ```
 
@@ -58,6 +58,7 @@ driver options.
 |:---------------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `tag`          | optional | Specify template to set `CONTAINER_TAG` and `SYSLOG_IDENTIFIER` value in journald logs. Refer to [log tag option documentation](log_tags.md) to customize the log tag format. |
 | `labels`       | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container.                                                 |
+| `labels-regex` | optional | Similar to and compatible with labels. A regular expression to match logging-related labels. Used for advanced [log tag options](log_tags.md).                                |
 | `env`          | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for the container.                               |
 | `env-regex`    | optional | Similar to and compatible with env. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                    |
 
@@ -67,7 +68,7 @@ message.
 
 Below is an example of the logging options required to log to journald.
 
-```bash
+```console
 $ docker run \
     --log-driver=journald \
     --log-opt labels=location \
@@ -95,21 +96,21 @@ Use the `journalctl` command to retrieve log messages. You can apply filter
 expressions to limit the retrieved messages to those associated with a specific
 container:
 
-```bash
+```console
 $ sudo journalctl CONTAINER_NAME=webserver
 ```
 
 You can use additional filters to further limit the messages retrieved. The `-b`
 flag only retrieves messages generated since the last system boot:
 
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver
 ```
 
 The `-o` flag specifies the format for the retried log messages. Use `-o json`
 to return the log messages in JSON format.
 
-```bash
+```console
 $ sudo journalctl -o json CONTAINER_NAME=webserver
 ```
 
@@ -120,7 +121,7 @@ when retrieving log messages.
 The reason for that is that `\r` is appended to the end of the line and
 `journalctl` doesn't strip it automatically unless `--all` is set:
 
-```bash
+```console
 $ sudo journalctl -b CONTAINER_NAME=webserver --all
 ```
 

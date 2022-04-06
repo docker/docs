@@ -20,12 +20,12 @@ significantly reduce the delay between writing code and running it in production
 ## The Docker platform
 
 Docker provides the ability to package and run an application in a loosely isolated
-environment called a container. The isolation and security allow you to run many
-containers simultaneously on a given host. Containers are lightweight because
-they don't need the extra load of a hypervisor, but run directly within the host
-machine's kernel. This means you can run more containers on a given hardware
-combination than if you were using virtual machines. You can even run Docker
-containers within host machines that are actually virtual machines!
+environment called a container. The isolation and security allows you to run many
+containers simultaneously on a given host. Containers are lightweight and contain
+everything needed to run the application, so you do not need to rely on what is
+currently installed on the host. You can easily share containers while you work,
+and be sure that everyone you share with gets the same container that works in the
+same way.
 
 Docker provides tooling and a platform to manage the lifecycle of your containers:
 
@@ -35,31 +35,6 @@ Docker provides tooling and a platform to manage the lifecycle of your container
   as a container or an orchestrated service. This works the same whether your
   production environment is a local data center, a cloud provider, or a hybrid
   of the two.
-
-## Docker Engine
-
-_Docker Engine_ is a client-server application with these major components:
-
-* A server which is a type of long-running program called a daemon process (the
-  `dockerd` command).
-
-* A REST API which specifies interfaces that programs can use to talk to the
-  daemon and instruct it what to do.
-
-* A command line interface (CLI) client (the `docker` command).
-
-![Docker Engine Components Flow](/engine/images/engine-components-flow.png)
-
-The CLI uses the Docker REST API to control or interact with the Docker daemon
-through scripting or direct CLI commands. Many other Docker applications use the
-underlying API and CLI.
-
-The daemon creates and manages Docker _objects_, such as images, containers,
-networks, and volumes.
-
-> **Note**: Docker is licensed under the open source Apache 2.0 license.
-
-For more details, see [Docker Architecture](#docker-architecture) below.
 
 ## What can I use Docker for?
 
@@ -106,7 +81,8 @@ Docker *daemon*, which does the heavy lifting of building, running, and
 distributing your Docker containers. The Docker client and daemon *can*
 run on the same system, or you can connect a Docker client to a remote Docker
 daemon. The Docker client and daemon communicate using a REST API, over UNIX
-sockets or a network interface.
+sockets or a network interface. Another Docker client is Docker Compose,
+that lets you work with applications consisting of a set of containers.
 
 ![Docker Architecture Diagram](/engine/images/architecture.svg)
 
@@ -122,6 +98,10 @@ The Docker client (`docker`) is the primary way that many Docker users interact
 with Docker. When you use commands such as `docker run`, the client sends these
 commands to `dockerd`, which carries them out. The `docker` command uses the
 Docker API. The Docker client can communicate with more than one daemon.
+
+### Docker Desktop
+
+Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](../desktop/index.md).
 
 ### Docker registries
 
@@ -176,7 +156,7 @@ its state that are not stored in persistent storage disappear.
 The following command runs an `ubuntu` container, attaches interactively to your
 local command-line session, and runs `/bin/bash`.
 
-```bash
+```console
 $ docker run -i -t ubuntu /bin/bash
 ```
 
@@ -206,58 +186,15 @@ the default registry configuration):
 6.  When you type `exit` to terminate the `/bin/bash` command, the container
     stops but is not removed. You can start it again or remove it.
 
-#### Services
-
-Services allow you to scale containers across multiple Docker daemons, which
-all work together as a _swarm_ with multiple _managers_ and _workers_. Each
-member of a swarm is a Docker daemon, and all the daemons communicate using
-the Docker API. A service allows you to define the desired state, such as the
-number of replicas of the service that must be available at any given time.
-By default, the service is load-balanced across all worker nodes. To
-the consumer, the Docker service appears to be a single application. Docker
-Engine supports swarm mode in Docker 1.12 and higher.
-
 ## The underlying technology
-Docker is written in [Go](https://golang.org/) and takes advantage of several
-features of the Linux kernel to deliver its functionality.
-
-### Namespaces
+Docker is written in the [Go programming language](https://golang.org/) and takes
+advantage of several features of the Linux kernel to deliver its functionality.
 Docker uses a technology called `namespaces` to provide the isolated workspace
 called the *container*. When you run a container, Docker creates a set of
 *namespaces* for that container.
 
 These namespaces provide a layer of isolation. Each aspect of a container runs
 in a separate namespace and its access is limited to that namespace.
-
-Docker Engine uses namespaces such as the following on Linux:
-
- - **The `pid` namespace:** Process isolation (PID: Process ID).
- - **The `net` namespace:** Managing network interfaces (NET:
- Networking).
- - **The `ipc` namespace:** Managing access to IPC
- resources (IPC: InterProcess Communication).
- - **The `mnt` namespace:** Managing filesystem mount points (MNT: Mount).
- - **The `uts` namespace:** Isolating kernel and version identifiers. (UTS: Unix
-Timesharing System).
-
-### Control groups
-Docker Engine on Linux also relies on another technology called _control groups_
-(`cgroups`). A cgroup limits an application to a specific set of resources.
-Control groups allow Docker Engine to share available hardware resources to
-containers and optionally enforce limits and constraints. For example,
-you can limit the memory available to a specific container.
-
-### Union file systems
-Union file systems, or UnionFS, are file systems that operate by creating layers,
-making them very lightweight and fast. Docker Engine uses UnionFS to provide
-the building blocks for containers. Docker Engine can use multiple UnionFS variants,
-including AUFS, btrfs, vfs, and DeviceMapper.
-
-### Container format
-Docker Engine combines the namespaces, control groups, and UnionFS into a wrapper
-called a container format. The default container format is `libcontainer`. In
-the future, Docker may support other container formats by integrating with
-technologies such as BSD Jails or Solaris Zones.
 
 ## Next steps
 - Read about [installing Docker](../get-docker.md).

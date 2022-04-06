@@ -8,7 +8,7 @@ on:
 jobs:
   build-static-page:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     timeout-minutes: 10
     env:
       DOCKER_BUILDKIT: '1'
@@ -17,7 +17,7 @@ jobs:
         run: docker version && docker info
       - uses: actions/checkout@v2
       - name: build current docs
-        run: docker build --target=deploy-source --output=./_site .
+        run: docker build --build-arg JEKYLL_ENV=production --target=deploy-source --output=./_site .
       - name: upload files to S3 bucket
         run: aws s3 sync --acl public-read _site s3://docs.docker.com-us-east-1/ --delete
         env:

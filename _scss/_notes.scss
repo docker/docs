@@ -1,106 +1,156 @@
+//noinspection CssNoGenericFontName
+
 /*
-* note, important, and important admonition styles
+
+These rules control the display of notes/notifications/alerts. They can be used like so:
+
+> **This is a paid feature**
+>
+> Docker Hub Vulnerability Scanning is available for developers subscribed to a Pro or a Team plan. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade)
+{: .restricted }
+
+(The first line is always treated as a header, unless it's the only line)
+
+The available classes are:
+
+.important: Yellow
+.warning: Red/orange
+.restricted: Purple, used to indicate features that require paid plans
+[no class]: Blue, the default
+
 */
 
-$note-color: #1488C6;
-$important-color: #aa6708;
-$warning-color: #ce4844;
+@mixin notification($bg-color, $header-color, $body-text-color, $icon) {
+  background-color:  $bg-color;
+  font-size:         unset; // override bootstrap font-size for blockquotes
+
+  // The first child will generally be a header (e.g. "Note" or "This is an experimental feature"),
+  // but we have some notes that don't have headers; if there's only one child of the note,
+  // assume it's not a header
+  > p:first-child:not(:only-child) {
+    color:       $header-color;
+    font-weight: 700;
+    margin-top:  0;
+
+    &::before {
+      font-family: FontAwesome;
+      content:     "#{$icon} \00a0";
+    }
+  }
+
+  > p:only-child, > p:not(:first-child) {
+    color: $body-text-color;
+  }
+}
 
 
-/*** Blocquotes with no Liquid tag get $note-color sidebar
-***/
+
 blockquote {
-  border-left-color: $note-color;
-}
+  body.night & {
+    // DARK THEME
 
-/*** First paragraph of a multi-paragraph blockquote is bold and defaults to $note-color if not tagged differently
-***/
-blockquote > p:first-child {
-  margin-top: 0;
-  font-weight: 700;
-  color: $note-color;
-}
+    &:not(.important):not(.warning):not(.restricted) {
+      @include notification(
+        $bg-color: change-color($marine-10, $alpha: 0.2),
+        $header-color: $marine-10,
+        $body-text-color: $marine-10,
+        $icon: "\f06a"
+      );
+    }
 
-/*** This used to prepend "Note" to title of any multi-paragraph blockquote, now it adds the note icon instead
-***/
-blockquote > p:first-child::before {
-  content: '\f058 \00a0';
-  font-family: FontAwesome;
-}
+    &.important {
+      @include notification(
+        $bg-color: change-color($orange-60, $alpha: 0.4),
+        $header-color: $orange-20,
+        $body-text-color: $orange-20,
+        $icon: "\f06a"
+      );
+    }
 
-/*** Blockquotes with important tag get $important-color sidebar
-***/
-blockquote.important {
-  border-left-color: $important-color;
-}
+    &.warning {
+      @include notification(
+        $bg-color: change-color($red-60, $alpha: 0.3),
+        $header-color: $red-10,
+        $body-text-color: $red-10,
+        $icon: "\f06a"
+      );
+    }
 
-/*** First paragraph of a multi-paragraph .important blockquote inherits bold, and is $important-color
-***/
-blockquote.important > p:first-child {
-  color: $important-color;
-}
+    &.restricted {
+      @include notification(
+        $bg-color: change-color($purple-60, $alpha: 0.44),
+        $header-color: $purple-10,
+        $body-text-color: $purple-10,
+        $icon: "\f135"
+      );
+    }
+  }
 
-/*** This used to prepend "Important" to important admonitions, now it adds the important icon instead
-***/
-blockquote.important > p:first-child::before {
-  content: '\f06a  \00a0';
-  font-family: FontAwesome;
-}
+  body:not(.night) & {
+    // LIGHT THEME
 
-/*** Blockquotes with warning tag get $warning-color sidebar
-***/
-blockquote.warning {
-  border-left-color: $warning-color;
-}
+    &:not(.important):not(.warning):not(.restricted) {
+      @include notification(
+        $bg-color: #E8F4FD, // Hardcoding this variable temporary till we migrate to the new color pallette
+        $header-color: $blue-80,
+        $body-text-color: inherit,
+        $icon: "\f05a"
+      );
+    }
 
+    &.important {
+      @include notification(
+        $bg-color: $orange-10,
+        $header-color: $orange-100,
+        $body-text-color: inherit,
+        $icon: "\f06a"
+      );
+    }
 
-/*** First paragraph of a multi-paragraph .warning blockquote inherits bold, and is $warning-color
-***/
-blockquote.warning > p:first-child {
-  color: $warning-color;
-}
+    &.warning {
+      @include notification(
+        $bg-color: #FEEFEF, // Hardcoding this variable temporary till we migrate to the new color pallette
+        $header-color: $red-50,
+        $body-text-color: inherit,
+        $icon: "\f06a"
+      );
+    }
 
-/*** This used to prepend the "Warning" text as content, now it adds the warning icon instead
-***/
-blockquote.warning > p:first-child::before {
-  content: '\f057  \00a0';
-  font-family: FontAwesome;
-}
-
-/* Maintain backwards compatibility with old
-*  note style
-*/
-blockquote > p:only-child {
-  font-weight: inherit;
-  color: inherit;
-}
-blockquote > p:only-child::before {
-  content: none;
+    &.restricted {
+      @include notification(
+        $bg-color: $purple-10,
+        $header-color: $purple-50,
+        $body-text-color: inherit,
+        $icon: "\f135"
+      );
+    }
+  }
 }
 
 /* For Bootstrap badges */
+span {
+  &.badge {
+    border-radius:  .25rem;
+    color:          #fff;
+    display:        inline-block;
+    font-size:      75%;
+    font-weight:    bold;
+    line-height:    1;
+    padding:        .25em .4em;
+    text-align:     center;
+    vertical-align: baseline;
+    white-space:    nowrap;
 
-span.badge {
-  display: inline-block;
-  padding: .25em .4em;
-  font-size: 75%;
-  font-weight: bold;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: .25rem;
-}
+    &.badge-info {
+      background-color: $note-color;
+    }
 
-span.badge.badge-info {
-  background-color: $note-color;
-}
+    &.badge-danger {
+      background-color: $warning-color;
+    }
 
-span.badge.badge-danger {
-  background-color: $warning-color;
-}
-
-span.badge.badge-warning {
-  background-color: $important-color;
+    &.badge-warning {
+      background-color: $important-color;
+    }
+  }
 }

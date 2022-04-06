@@ -7,15 +7,19 @@ redirect_from:
 - /docker-cloud/builds/automated-build/
 - /docker-cloud/builds/
 - /docker-hub/builds/classic/
-title: Set up automated builds
+title: Set up Automated Builds
 ---
 
+{% include upgrade-cta.html
+  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images. If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target='_blank' rel='noopener' class='_'} program to learn how Docker can support your project on Docker Hub."
+  header-text="This feature requires a Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
+%}
 
 ## How Automated Builds work
 
 Docker Hub can automatically build images from source code in an external
-repository and automatically push the built image to your Docker
-repositories.
+repository and automatically push the built image to your Docker repositories.
 
 When you set up automated builds (also called autobuilds), you create a list of
 branches and tags that you want to build into Docker images. When you push code
@@ -23,7 +27,9 @@ to a source code branch (for example in GitHub) for one of those listed image
 tags, the push uses a webhook to trigger a new build, which produces a Docker
 image. The built image is then pushed to the Docker Hub registry.
 
-> **Note**: You can still use `docker push` to push pre-built images to
+> **Note**
+>
+> You can still use `docker push` to push pre-built images to
 repositories with Automated Builds configured.
 
 If you have automated tests configured, these run after building but before
@@ -31,6 +37,14 @@ pushing to the registry. You can use these tests to create a continuous
 integration workflow where a build that fails its tests does not push the built
 image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
 
+Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"},
+you may get concurrent builds, which means that `N` autobuilds can be run at the
+same time. `N` is configured by the plan that you subscribe to. Once `N+1` builds
+are running, any additional builds are queued to be run later.
+
+The total number of pending builds in the queue is limited to 30 and further
+requests will be discarded. The number of concurrent builds for Pro is 5 and
+for Team and Business is 15.
 
 ![An automated build dashboard](images/index-dashboard.png)
 
@@ -47,9 +61,10 @@ Builds can be added to existing repositories, or added when you create a reposit
 
 2. Click the **Builds** tab.
 
-3. If you are setting up automated builds for the first time, select
-the code repository service (GitHub or Bitbucket) where the image's source code is stored.
-You might redirected to the settings page to [link](link-source.md) the code repository service.
+3. If you are setting up automated builds for the first time, select the code
+   repository service (GitHub or Bitbucket) where the image's source code is stored.
+   You may be redirected to the settings page to [link](link-source.md) the code
+   repository service.
 
     Otherwise, if you are editing the build settings for an existing automated
     build, click **Configure automated builds**.
@@ -60,10 +75,10 @@ You might redirected to the settings page to [link](link-source.md) the code rep
     source code provider. Once you select a namespace, its source code
     repositories appear in the **Select repository** dropdown list.
 
-5.  Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
+5. Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 
-6.  Review the default **Build Rules**, and optionally click the
-**plus sign** to add and configure more build rules.
+6. Review the default **Build Rules**, and optionally click the
+   **plus sign** to add and configure more build rules.
 
     _Build rules_ control what Docker Hub builds into images from the contents
     of the source code repository, and how the resulting images are tagged
@@ -73,7 +88,7 @@ You might redirected to the settings page to [link](link-source.md) the code rep
     default set builds from the `Branch` in your source code repository called
     `master`, and creates a Docker image tagged with `latest`.
 
-7.  For each branch or tag, enable or disable the **Autobuild** toggle.
+7. For each branch or tag, enable or disable the **Autobuild** toggle.
 
     Only branches or tags with autobuild enabled are built, tested, *and* have
     the resulting image pushed to the repository. Branches with autobuild
@@ -82,13 +97,14 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 
 8. For each branch or tag, enable or disable the **Build Caching** toggle.
 
-    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache) can save time if you are building a large image frequently or have
+    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache)
+    can save time if you are building a large image frequently or have
     many dependencies. You might want to leave build caching disabled to
     make sure all of your dependencies are resolved at build time, or if
     you have a large layer that is quicker to build locally.
 
 9. Click **Save** to save the settings, or click **Save and build** to save and
-run an initial test.
+   run an initial test.
 
     A webhook is automatically added to your source code repository to notify
     Docker Hub on every push. Only pushes to branches that are listed as the
@@ -105,9 +121,8 @@ In the **Build Rules** section, enter one or more sources to build.
 
 For each source:
 
-* Select the **Source type** to build either a **tag** or a
-    **branch**. This tells the build system what to look for in the source code
-    repository.
+* Select the **Source type** to build either a **tag** or a **branch**. This
+  tells the build system what to look for in the source code repository.
 
 * Enter the name of the **Source** branch or tag you want to build.
 
@@ -125,10 +140,15 @@ For each source:
   capture groups and use its result as part of the tag. To learn more, see
   [regexes](index.md#regexes-and-automated-builds).
 
-* Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
+* Specify the **Dockerfile location** as a path relative to the root of the source
+  code repository. If the Dockerfile is at the repository root, leave this path
+  set to `/`.
 
-> **Note**: When Docker Hub pulls a branch from a source code repository, it performs
-> a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md)
+> **Note**
+>
+> When Docker Hub pulls a branch from a source code repository, it performs a
+> shallow clone (only the tip of the specified branch). Refer to
+> [Advanced options for Autobuild and Autotest](advanced.md#source-repository--branch-clones)
 > for more information.
 
 ### Environment variables for builds
@@ -180,8 +200,11 @@ display a **Retry** button.
 
 ![Timeline view showing the retry build button](images/retry-build.png)
 
-> **Note**: If you are viewing the build details for a repository that belongs
-to an Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
+> **Note**
+>
+> If you are viewing the build details for a repository that belongs to an
+> Organization, the Cancel and Retry buttons only appear if you have `Read & Write`
+> access to the repository.
 
 
 ## Disable an automated build
@@ -251,9 +274,15 @@ Depending on how the files are arranged in your source code repository, the
 files required to build your images may not be at the repository root. If that's
 the case, you can specify a path where the build looks for the files.
 
-The _build context_ is the path to the files needed for the build, relative to the root of the repository. Enter the path to these files in the **Build context** field. Enter `/` to set the build context as the root of the source code repository.
+The _build context_ is the path to the files needed for the build, relative to
+the root of the repository. Enter the path to these files in the **Build context**
+field. Enter `/` to set the build context as the root of the source code repository.
 
-> **Note**: If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
+> **Note**
+>
+> If you delete the default path `/` from the **Build context** field and leave
+> it blank, the build system uses the path to the Dockerfile as the build context.
+> However, to avoid confusion we recommend that you specify the complete path.
 
 You can specify the **Dockerfile location** as a path relative to the build
 context. If the Dockerfile is at the root of the build context path, leave the
@@ -273,16 +302,16 @@ these in the **Docker Tag** field using `{\1}` through `{\9}`.
 <!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
 
-You could also use capture groups to build and label images that come from various sources. For example, you might have
+You could also use capture groups to build and label images that come from various
+sources. For example, you might have
 
 `/(alice|bob)-v([0-9.]+)/` -->
 
 ### Build images with BuildKit
 
-You can enable the BuildKit builder by setting the `DOCKER_BUILDKIT=1`
-[environment variable](#environment-variables-for-builds) in the
-[Configure automated build settings](#configure-automated-build-settings) section.
-Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+Autobuilds use the BuildKit build system by default. If you want to use the legacy
+Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"}
+`DOCKER_BUILDKIT=0`. Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
 page for more information on BuildKit.
 
 ## Build repositories with linked private submodules
@@ -294,9 +323,16 @@ submodules (or requires that you clone other private repositories to build),
 Docker Hub cannot access these additional repos, your build cannot complete,
 and an error is logged in your build timeline.
 
-To work around this, you can set up your automated build using the `SSH_PRIVATE` environment variable to override the deployment key and grant Docker Hub's build system access to the repositories.
+To work around this, you can set up your automated build using the `SSH_PRIVATE`
+environment variable to override the deployment key and grant Docker Hub's build
+system access to the repositories.
 
-> **Note**: If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
+> **Note**
+>
+> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds)
+> instead, and configure a service user for your source code provider. You can
+> also do this for an individual account to limit Docker Hub's access to your
+> source repositories.
 
 1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
@@ -309,11 +345,15 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 6. Paste the private half of the keypair into the **Value** field.
 7. Click **Save**, or **Save and Build** to validate that the build now completes.
 
-> **Note**: You must configure your private git submodules using git clone over SSH (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
+> **Note**
+>
+> You must configure your private git submodules using git clone over SSH
+> (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
 
 ## Autobuild for Teams
 
-When you create an automated build repository in your own account namespace, you can start, cancel, and retry builds, and edit and delete your own repositories.
+When you create an automated build repository in your own account namespace, you
+can start, cancel, and retry builds, and edit and delete your own repositories.
 
 These same actions are also available for team repositories from Docker Hub if
 you are a member of the Organization's `Owners` team. If you are a member of a
@@ -357,7 +397,9 @@ variable to automated builds associated with the account.
 2. Create a "build" team in your organization.
 3. Ensure that the new "build" team has access to each repository and submodule you need to build.
 
-    Go to the repository's **Settings** page. On GitHub, add the new "build" team to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team to the list of approved users on the **Access management** screen.
+    Go to the repository's **Settings** page. On GitHub, add the new "build" team
+    to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team
+    to the list of approved users on the **Access management** screen.
 
 4. Add the service user to the "build" team on the source provider.
 
@@ -381,5 +423,7 @@ To test your code before the image is pushed, you can use
 Docker Hub's [Autotest](automated-testing.md) feature which
 integrates seamlessly with autobuild and autoredeploy.
 
-> **Note**: While the Autotest feature builds an image for testing purposes, it
-does not push the resulting image to Docker Hub.
+> **Note**
+>
+> While the Autotest feature builds an image for testing purposes, it
+> does not push the resulting image to Docker Hub.

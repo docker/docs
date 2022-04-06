@@ -79,18 +79,9 @@ happen in sequence:
     new node certificates. This ensures that nodes that still trust the old root
     CA can still validate a certificate signed by the new CA.
 
-2.  In Docker 17.06 and higher, Docker also tells all nodes to immediately
-    renew their TLS certificates. This process may take several minutes,
-    depending on the number of nodes in the swarm.
-
-    > **Note**: If your swarm has nodes with different Docker versions, the
-    > following two things are true:
-    > - Only a manager that is running as the leader **and** running Docker 17.06
-    >   or higher tells nodes to renew their TLS certificates.
-    > - Only nodes running Docker 17.06 or higher obey this directive.
-    >
-    > For the most predictable behavior, ensure that all swarm nodes are running
-    > Docker 17.06 or higher.
+2.  Docker also tells all nodes to immediately renew their TLS certificates.
+    This process may take several minutes, depending on the number of nodes in
+    the swarm.
 
 3.  After every node in the swarm has a new TLS certificate signed by the new CA,
     Docker forgets about the old CA certificate and key material, and tells

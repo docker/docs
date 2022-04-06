@@ -19,12 +19,15 @@ container layer. This means that:
   kernel. This extra abstraction reduces performance as compared to using
   _data volumes_, which write directly to the host filesystem.
 
-Docker has two options for containers to store files in the host machine, so
+Docker has two options for containers to store files on the host machine, so
 that the files are persisted even after the container stops: _volumes_, and
-_bind mounts_. If you're running Docker on Linux you can also use a _tmpfs mount_.
-If you're running Docker on Windows you can also use a _named pipe_.
+_bind mounts_. 
 
-Keep reading for more information about these two ways of persisting data.
+Docker also supports containers storing files in-memory on the the host machine. Such files are not persisted.
+If you're running Docker on Linux, _tmpfs mount_ is used to store files in the host's system memory.
+If you're running Docker on Windows, _named pipe_ is used to store files in the host's system memory.
+
+Keep reading for more information about persisting data or taking advantage of in-memory files.
 
 ## Choose the right type of mount
 
@@ -107,9 +110,9 @@ mounts is to think about where the data lives on the Docker host.
 
 Bind mounts and volumes can both be mounted into containers using the `-v` or
 `--volume` flag, but the syntax for each is slightly different. For `tmpfs`
-mounts, you can use the `--tmpfs` flag. However, in Docker 17.06 and higher,
-we recommend using the `--mount` flag for both containers and services, for
-bind mounts, volumes, or `tmpfs` mounts, as the syntax is more clear.
+mounts, you can use the `--tmpfs` flag. We recommend using the `--mount` flag
+for both containers and services, for bind mounts, volumes, or `tmpfs` mounts,
+as the syntax is more clear.
 
 ## Good use cases for volumes
 
@@ -133,6 +136,16 @@ Some use cases for volumes include:
   host to another, volumes are a better choice. You can stop containers using
   the volume, then back up the volume's directory
   (such as `/var/lib/docker/volumes/<volume-name>`).
+
+- When your application requires high-performance I/O on Docker Desktop. Volumes
+  are stored in the Linux VM rather than the host, which means that the reads and writes
+  have much lower latency and higher throughput.
+
+- When your application requires fully native file system behavior on Docker
+  Desktop. For example, a database engine requires precise control over disk
+  flushing to guarantee transaction durability. Volumes are stored in the Linux
+  VM and can make these guarantees, whereas bind mounts are remoted to macOS or
+  Windows, where the file systems behave slightly differently.
 
 ## Good use cases for bind mounts
 

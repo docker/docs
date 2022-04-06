@@ -4,7 +4,6 @@ datafile: docker_login
 title: docker login
 redirect_from:
   - /edge/engine/reference/commandline/login/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

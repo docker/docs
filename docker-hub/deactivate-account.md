@@ -13,7 +13,7 @@ Before deactivating your Docker Hub account, please complete the following:
 1. Download any images and tags you want to keep:
    `docker pull -a <image>:<tag>`.
 
-3. If you have an active subscription, downgrade it to the **free** plan.
+3. If you have an active subscription, downgrade it to the **Docker Personal** subscription.
 
       In Docker Hub, navigate to **_Your Account_** > **Account Settings** > **Billing**.
 
@@ -40,11 +40,13 @@ Before deactivating an organization, please complete the following:
 1. Download any images and tags you want to keep:
   `docker pull -a <image>:<tag>`.
 
-2. If you have an active subscription, downgrade it to the **free** plan:
+2. If you have an active subscription, downgrade it to the **Docker Personal** subscription:
 
       In Docker Hub, navigate to **Organizations** > **_Your Organization_** > **Billing**.
 
-3. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+3. Remove all other members, including those in the **Owners** team, within the organization.
+
+4. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
 
 Once you have completed all the steps above, you may deactivate your organization. On Docker Hub, go to **Organizations** > **_Your Organization_** > **Settings** > **Deactivate Org**.
 

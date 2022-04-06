@@ -4,7 +4,6 @@ datafile: docker_port
 title: docker port
 redirect_from:
   - /edge/engine/reference/commandline/port/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

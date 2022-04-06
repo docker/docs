@@ -39,7 +39,7 @@ on your network, your container appears to be physically attached to the network
 1.  Create a `macvlan` network called `my-macvlan-net`. Modify the `subnet`, `gateway`,
     and `parent` values to values that make sense in your environment.
 
-    ```bash
+    ```console
     $ docker network create -d macvlan \
       --subnet=172.16.86.0/24 \
       --gateway=172.16.86.1 \
@@ -54,7 +54,7 @@ on your network, your container appears to be physically attached to the network
     `-dit` flags start the container in the background but allow you to attach
     to it. The `--rm` flag means the container is removed when it is stopped.
 
-    ```bash
+    ```console
     $ docker run --rm -dit \
       --network my-macvlan-net \
       --name my-macvlan-alpine \
@@ -94,7 +94,7 @@ on your network, your container appears to be physically attached to the network
 4.  Check out how the container sees its own network interfaces by running a
     couple of `docker exec` commands.
 
-    ```bash
+    ```console
     $ docker exec my-macvlan-alpine ip addr show eth0
 
     9: eth0@tunl0: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP
@@ -103,7 +103,7 @@ on your network, your container appears to be physically attached to the network
        valid_lft forever preferred_lft forever
     ```
 
-    ```bash
+    ```console
     $ docker exec my-macvlan-alpine ip route
 
     default via 172.16.86.1 dev eth0
@@ -113,7 +113,7 @@ on your network, your container appears to be physically attached to the network
 5.  Stop the container (Docker removes it because of the `--rm` flag), and remove
     the network.
 
-    ```bash
+    ```console
     $ docker container stop my-macvlan-alpine
 
     $ docker network rm my-macvlan-net
@@ -130,7 +130,7 @@ be physically attached to the network.
     `subnet`, `gateway`, and `parent` values to values that make sense in your
     environment.
 
-    ```bash
+    ```console
     $ docker network create -d macvlan \
       --subnet=172.16.86.0/24 \
       --gateway=172.16.86.1 \
@@ -148,7 +148,7 @@ be physically attached to the network.
     you to attach to it. The `--rm` flag means the container is removed when it
     is stopped.
 
-    ```bash
+    ```console
     $ docker run --rm -itd \
       --network my-8021q-macvlan-net \
       --name my-second-macvlan-alpine \
@@ -188,7 +188,7 @@ be physically attached to the network.
 4.  Check out how the container sees its own network interfaces by running a
     couple of `docker exec` commands.
 
-    ```bash
+    ```console
     $ docker exec my-second-macvlan-alpine ip addr show eth0
 
     11: eth0@if10: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP
@@ -197,7 +197,7 @@ be physically attached to the network.
        valid_lft forever preferred_lft forever
     ```
 
-    ```bash
+    ```console
     $ docker exec my-second-macvlan-alpine ip route
 
     default via 172.16.86.1 dev eth0
@@ -207,7 +207,7 @@ be physically attached to the network.
 5.  Stop the container (Docker removes it because of the `--rm` flag), and remove
     the network.
 
-    ```bash
+    ```console
     $ docker container stop my-second-macvlan-alpine
 
     $ docker network rm my-8021q-macvlan-net

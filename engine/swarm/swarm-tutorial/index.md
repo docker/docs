@@ -26,7 +26,6 @@ If you are brand new to Docker, see [About Docker Engine](../../index.md).
 To run this tutorial, you need the following:
 
 * [three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
-* [Docker Engine 1.12 or later installed](#docker-engine-112-or-newer)
 * [the IP address of the manager machine](#the-ip-address-of-the-manager-machine)
 * [open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
 
@@ -34,8 +33,7 @@ To run this tutorial, you need the following:
 
 This tutorial requires three Linux hosts which have Docker installed and can
 communicate over a network. These can be physical machines, virtual machines,
-Amazon EC2 instances, or hosted in some other way. You can even use Docker Machine
-from a Linux, Mac, or Windows host. Check out
+Amazon EC2 instances, or hosted in some other way. Check out
 [Getting started - Swarms](../../../get-started/swarm-deploy.md#prerequisites)
 for one possible set-up for the hosts.
 
@@ -47,16 +45,6 @@ workers (`worker1` and `worker2`).
 as well, in which case you need only one host. Multi-node commands do not
 work, but you can initialize a swarm, create services, and scale them.
 
-###  Docker Engine 1.12 or newer
-
-This tutorial requires Docker Engine 1.12 or newer on each of the host machines.
-Install Docker Engine and verify that the Docker Engine daemon is running on
-each of the machines. You can get the latest version of Docker Engine as
-follows:
-
-* [install Docker Engine on Linux machines](#install-docker-engine-on-linux-machines)
-
-* [use Docker Desktop for Mac or Docker Desktop for Windows](#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
 
 #### Install Docker Engine on Linux machines
 
@@ -67,27 +55,16 @@ single-node and multi-node swarm scenarios on Linux machines.
 
 #### Use Docker Desktop for Mac or Docker Desktop for Windows
 
-Alternatively, install the latest [Docker Desktop for Mac](../../../docker-for-mac/index.md) or
-[Docker Desktop for Windows](../../../docker-for-windows/index.md) application on one
-computer. You can test both single-node and multi-node swarm from this computer,
-but you need to use Docker Machine to test the multi-node scenarios.
+Alternatively, install the latest [Docker Desktop for Mac](../../../desktop/mac/index.md) or
+[Docker Desktop for Windows](../../../desktop/windows/index.md) application on one
+computer. You can test both single-node and multi-node swarm from this computer.
 
-* You can use Docker Desktop for Mac or Windows to test _single-node_ features of swarm
-mode, including initializing a swarm with a single node, creating services,
-and scaling services. Docker "Moby" on Hyperkit (Mac) or Hyper-V (Windows)
-serve as the single swarm node.
-
-<p />
-
-* Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows alone to test a
-_multi-node_ swarm. However, you can use the included version of
-[Docker Machine](../../../machine/overview.md) to create the swarm nodes (see
-[Get started with Docker Machine and a local VM](../../../machine/get-started.md)), then
-follow the tutorial for all multi-node features. For this scenario, you run
-commands from a Docker Desktop for Mac or Docker Desktop for Windows host, but that Docker host itself is
-_not_ participating in the swarm. After you create the nodes, you can run all
-swarm commands as shown from the Mac terminal or Windows PowerShell with
-Docker Desktop for Mac or Docker Desktop for Windows running.
+* You can use Docker Desktop for Mac or Windows to test _single-node_ features
+  of swarm mode, including initializing a swarm with a single node, creating
+  services, and scaling services.
+* Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows
+  alone to test a _multi-node_ swarm, but many examples are applicable to a
+  single-node Swarm setup.
 
 ### The IP address of the manager machine
 
@@ -100,10 +77,6 @@ fixed IP address.
 
 You can run `ifconfig` on Linux or macOS to see a list of the
 available network interfaces.
-
-If you are using Docker Machine, you can get the manager IP with either
-`docker-machine ls` or `docker-machine ip <MACHINE-NAME>` &#8212; for example,
-`docker-machine ip manager1`.
 
 The tutorial uses `manager1` : `192.168.99.100`.
 

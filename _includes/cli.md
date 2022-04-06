@@ -8,9 +8,9 @@
 
 {% if controller_data.min_api_version %}
 
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
 The client and daemon API must both be at least
-<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" class="_">{{ controller_data.min_api_version }}</a>
+<a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_">{{ controller_data.min_api_version }}</a>
 to use this command. Use the `docker version` command on the client to check
 your client and daemon API versions.
 
@@ -18,9 +18,9 @@ your client and daemon API versions.
 
 {% if controller_data.deprecated %}
 
-> This command is [deprecated](/engine/deprecated/){: target="_blank" class="_"}.
+> This command is [deprecated](/engine/deprecated/){: target="_blank" rel="noopener" class="_"}.
 >
-> It may be removed in a future Docker version.
+> It may be removed in a future Docker version. For more information, see the [Docker Roadmap](https://github.com/docker/roadmap/issues/209){: target="_blank" rel="noopener" class="_"}.
 {: .warning }
 
 {% endif %}
@@ -29,7 +29,7 @@ your client and daemon API versions.
 
 > This command is only available on Docker Enterprise Edition.
 >
-> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" class="_"}.
+> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"}.
 {: .important }
 
 {% endif %}
@@ -81,7 +81,7 @@ your client and daemon API versions.
 ## Usage
 
 ```console
-{{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
+$ {{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_data.cname %} COMMAND{% endif %}
 ```
 
 {% endif %}
@@ -115,18 +115,22 @@ For example uses of this command, refer to the [examples section](#examples) bel
 </thead>
 <tbody>
 {% for option in alloptions %}
-  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
-  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
+  {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" rel="noopener" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" rel="noopener" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" rel="noopener" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
+  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
   {% capture all-badges %}{{ deprecated-badge }}{{ experimental-daemon-badge }}{{ experimental-cli-badge }}{{ min-api }}{{ flag-orchestrator }}{% endcapture %}
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
-    <td markdown="span">`--{{ option.option }}{% if option.shorthand %} , -{{ option.shorthand }}{% endif %}`</td>
+    {% if option.details_url and option.details_url != '' -%}
+    <td markdown="span">[`--{{ option.option }}`]({{ option.details_url }}){% if option.shorthand %} , [`-{{ option.shorthand }}`]({{ option.details_url }}){% endif %}</td>
+    {%- else -%}
+    <td markdown="span">`--{{ option.option }}`{% if option.shorthand %} , `-{{ option.shorthand }}`{% endif %}</td>
+    {%- endif %}
     <td markdown="span">{{ option-default }}</td>
-    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip }}</td>
+    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip | escape }}</td>
   </tr>
 {% endfor %} <!-- end for option -->
 </tbody>

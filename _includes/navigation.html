@@ -1,14 +1,13 @@
 <div class="logo-mobile">
     <a href="/">
-        <img src="/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs">
+        <img src="/images/docker-icon.svg" alt="Docker Docs" title="Docker Docs" width="30" height="30" />
     </a>
 </div>
 <div class="search-form" id="search-div">
-    <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
-        <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
-        <div id="autocompleteContainer">
-            <div id="autocompleteResults"></div>
-        </div>
+    <form class="search-form form-inline" id="searchForm" action="/search/" method="get">
+        <label for="st-search-input" class="sr-only">Search</label>
+        <input class="search-field form-control ds-input" id="st-search-input" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+        <div id="autocompleteResults"></div>
         <!-- <button type="submit" class="search-submit btn btn-default">Search</button> -->
     </form>
 </div>
@@ -21,12 +20,14 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div id="tabs">
-        <ul class="tabs jsTOCHorizontal">
-
+    <div>
+        <ul class="nav navbar-nav">
+        {%- for entry in site.data.toc.horizontalnav -%}
+          <li><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
+        {%- endfor -%}
         </ul>
     </div>
     <div class="ctrl-right">
-        <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
+        <a href="javascript:void(0)" id="menu-toggle" aria-label="Current page's menu toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
     </div>
 </div>

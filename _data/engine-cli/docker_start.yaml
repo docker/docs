@@ -52,7 +52,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker start my_container
   ```
 deprecated: false

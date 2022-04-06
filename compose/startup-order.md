@@ -6,7 +6,7 @@ notoc: true
 ---
 
 You can control the order of service startup and shutdown with the
-[depends_on](compose-file/index.md#depends_on) option. Compose always starts and stops
+[depends_on](compose-file/compose-file-v3.md#depends_on) option. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
@@ -29,8 +29,8 @@ need this level of resilience, you can work around the problem with a wrapper
 script:
 
 - Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-  [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
-  [wait-for](https://github.com/Eficode/wait-for). These are small
+  [dockerize](https://github.com/powerman/dockerize), sh-compatible
+  [wait-for](https://github.com/Eficode/wait-for), or [RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) template. These are small
   wrapper scripts which you can include in your application's image to
   poll a given host and port until it's accepting TCP connections.
 
@@ -69,7 +69,6 @@ script:
   
   host="$1"
   shift
-  cmd="$@"
   
   until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
     >&2 echo "Postgres is unavailable - sleeping"
@@ -77,7 +76,7 @@ script:
   done
   
   >&2 echo "Postgres is up - executing command"
-  exec $cmd
+  exec "$@"
   ```
 
   You can use this as a wrapper script as in the previous example, by setting:
@@ -89,9 +88,9 @@ script:
 
 ## Compose documentation
 
+- [User guide](index.md)
 - [Installing Compose](install.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
+- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)

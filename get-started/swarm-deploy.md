@@ -9,7 +9,7 @@ redirect_from:
 ## Prerequisites
 
 - Download and install Docker Desktop as described in [Orientation and setup](index.md).
-- Work through containerizing an application in [Part 2](part2.md).
+- Work through containerizing an application in [Part 2](02_our_app.md).
 - Make sure that Swarm is enabled on your Docker Desktop by typing `docker system info`, and looking for a message `Swarm: active` (you might have to scroll up a little).
 
   If Swarm isn't running, simply type `docker swarm init` in a shell prompt to set it up.
@@ -36,7 +36,7 @@ services:
       - "8000:8080"
 ```
 
-In this Swarm YAML file, we have just one object: a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based on your `bulletinboard:1.0` image created in [Part 2](part2.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 8080 inside our bulletin board container.
+In this Swarm YAML file, we have just one object: a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based on your `bulletinboard:1.0` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 8080 inside our bulletin board container.
 
 > **Kubernetes Services and Swarm Services are very different!** Despite the similar name, the two orchestrators mean very different things by the term 'service'. In Swarm, a service provides both scheduling _and_ networking facilities, creating containers and providing tools for routing traffic to them. In Kubernetes, scheduling and networking are handled separately: _deployments_ (or other controllers) handle the scheduling of containers as pods, while _services_ are responsible only for adding networking features to those pods.
 
@@ -44,8 +44,8 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 
 1.  Deploy your application to Swarm:
 
-    ```shell
-    docker stack deploy -c bb-stack.yaml demo
+    ```console
+    $ docker stack deploy -c bb-stack.yaml demo
     ```
 
     If all goes well, Swarm will report creating all your stack objects with no complaints:
@@ -59,8 +59,8 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 
 2.  Make sure everything worked by listing your service:
 
-    ```shell
-    docker service ls
+    ```console
+    $ docker service ls
     ```
 
     If all has gone well, your service will report with 1/1 of its replicas created:
@@ -76,8 +76,8 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 
 4.  Once satisfied, tear down your application:
 
-    ```shell
-    docker stack rm demo
+    ```console
+    $ docker stack rm demo
     ```
 
 ## Conclusion
@@ -90,7 +90,8 @@ In addition to deploying to Swarm, we have also described our application as a s
 
 Further documentation for all new Swarm objects and CLI commands used in this article are available here:
 
- - [Swarm Services](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/)
+ - [Swarm Mode](https://docs.docker.com/engine/swarm/)
+ - [Swarm Mode Services](https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/)
  - [Swarm Stacks](https://docs.docker.com/engine/swarm/stack-deploy/)
  - [`docker stack *`](https://docs.docker.com/engine/reference/commandline/stack/)
  - [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)

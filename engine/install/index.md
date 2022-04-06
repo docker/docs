@@ -3,51 +3,72 @@ title: Install Docker Engine
 description: Lists the installation methods
 keywords: docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge
 redirect_from:
-- /engine/installation/linux/
-- /engine/installation/linux/frugalware/
+- /cs-engine/
+- /cs-engine/1.12/
+- /cs-engine/1.12/upgrade/
+- /cs-engine/1.13/
+- /cs-engine/1.13/upgrade/
+- /ee/docker-ee/oracle/
+- /ee/supported-platforms/
+- /en/latest/installation/
+- /engine/installation/
 - /engine/installation/frugalware/
-- /engine/installation/linux/other/
+- /engine/installation/linux/
 - /engine/installation/linux/archlinux/
 - /engine/installation/linux/cruxlinux/
-- /engine/installation/linux/gentoolinux/
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
-- /engine/installation/
-- /en/latest/installation/
-toc_max: 2
+- /engine/installation/linux/docker-ee/oracle/
+- /engine/installation/linux/frugalware/
+- /engine/installation/linux/gentoolinux/
+- /engine/installation/linux/oracle/
+- /engine/installation/linux/other/
+- /engine/installation/oracle/
+- /enterprise/supported-platforms/
+- /install/linux/docker-ee/oracle/
 ---
 
+> **Docker Desktop for Linux**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and
+> Windows as you do on Linux. We are excited to share that Docker Desktop for
+> Linux (Beta) is now available for you to test. For more information, see
+[Docker Desktop for Linux](../../desktop/linux/index.md).
+{: .important}
 
 ## Supported platforms
 
 Docker Engine is available on a variety of [Linux platforms](#server),
-[macOS](../../docker-for-mac/install.md) and [Windows 10](../../docker-for-windows/install.md)
+[macOS](../../desktop/mac/install.md) and [Windows 10](../../desktop/windows/install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
-#### Desktop
+### Desktop
 
-{% assign yes = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                          | x86_64 / amd64                                   |
-|:------------------------------------------------------------------|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     |
-| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |
+| Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
+|:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
+| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)     |
+| [Docker Desktop for Windows](../../desktop/windows/install.md) | [{{ yes }}](../../desktop/windows/install.md) |                                                  |
 
-#### Server
+### Server
 
 Docker provides `.deb` and `.rpm` packages from the following Linux distributions
 and architectures:
 
-| Platform              | x86_64 / amd64         | ARM                      | ARM64 / AARCH64        |
-|:----------------------|:-----------------------|:-------------------------|:-----------------------|
-| [CentOS](centos.md)   | [{{ yes }}](centos.md) |                          | [{{ yes }}](centos.md) |
-| [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
-| [Fedora](fedora.md)   | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |
-| [Raspbian](debian.md) |                        | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
-| [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) |
+| Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)           | s390x                  |
+|:------------------------|:-----------------------|:-----------------------|:-----------------------|:-----------------------|
+| [CentOS](centos.md)     | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                        |                        |
+| [Debian](debian.md)     | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) |                        |
+| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                        |                        |
+| [Raspbian](debian.md)   |                        |                        | [{{ yes }}](debian.md) |                        |
+| [RHEL](rhel.md)         |                        |                        |                        | [{{ yes }}](rhel.md)   |
+| [SLES](sles.md)         |                        |                        |                        | [{{ yes }}](sles.md)   |
+| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
+| [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) |                        |
 
-##### Other Linux distributions
+### Other Linux distributions
 
 > **Note**
 >
@@ -89,10 +110,10 @@ and **nightly**:
 
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
-`18.09`. The year-month name indicates the earliest possible calendar
+`20.10`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v18.09.0` is
-released, all subsequent patch releases are built from the `18.09` branch.
+releases are performed from that branch. For example, once `v20.10.0` is
+released, all subsequent patch releases are built from the `20.10` branch.
 
 ### Test
 
@@ -114,10 +135,8 @@ format:
 where the time is the commit time in UTC and the final suffix is the prefix
 of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
 
-These builds allow for testing from the latest code on the master branch.
-
-> **Note:**
-> No qualifications or guarantees are made for the nightly builds.
+These builds allow for testing from the latest code on the master branch. No
+qualifications or guarantees are made for the nightly builds.
 
 ## Support
 

@@ -15,7 +15,7 @@ A Docker swarm generates two different kinds of traffic:
 
 This topic discusses how to manage the application data for your swarm services.
 For more details about swarm networking in general, see the
-[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }.
+[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" rel="noopener" class="_" }.
 
 The following three network concepts are important to swarm services:
 
@@ -34,8 +34,8 @@ The following three network concepts are important to swarm services:
   `ingress` network.
 
   The `ingress` network is created automatically when you initialize or join a
-  swarm. Most users do not need to customize its configuration, but Docker 17.05
-  and higher allows you to do so.
+  swarm. Most users do not need to customize its configuration, but Docker allows
+  you to do so.
 
 - The **docker_gwbridge** is a bridge network that connects the overlay
   networks (including the `ingress` network) to an individual Docker daemon's
@@ -60,7 +60,7 @@ each other over the following ports:
 To create an overlay network, specify the `overlay` driver when using the
 `docker network create` command:
 
-```bash
+```console
 $ docker network create \
   --driver overlay \
   my-network
@@ -73,7 +73,7 @@ subnet and uses default options. You can see information about the network using
 When no containers are connected to the overlay network, its configuration is
 not very exciting:
 
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -110,7 +110,7 @@ connects to the network for the first time. The following example shows
 the same network as above, but with three containers of a `redis` service
 connected to it.
 
-```bash
+```console
 $ docker network inspect my-network
 [
     {
@@ -184,7 +184,7 @@ the first service is connected to the network. You can configure these when
 creating a network using the `--subnet` and `--gateway` flags. The following
 example extends the previous one by configuring the subnet and gateway.
 
-```bash
+```console
 $ docker network create \
   --driver overlay \
   --subnet 10.0.9.0/24 \
@@ -198,8 +198,8 @@ To customize subnet allocation for your Swarm networks, you can [optionally conf
 
 For example, the following command is used when initializing Swarm:
 
-```bash
-$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26`
+```console
+$ docker swarm init --default-addr-pool 10.20.0.0/16 --default-addr-pool-mask-length 26
 ```
 
 Whenever a user creates a network, but does not use the `--subnet` command line option, the subnet for this network will be allocated sequentially from the next available subnet from the pool. If the specified network is already allocated, that network will not be used for Swarm. 
@@ -237,7 +237,7 @@ option before using it in production.
 To attach a service to an existing overlay network, pass the `--network` flag to
 `docker service create`, or the `--network-add` flag to `docker service update`.
 
-```bash
+```console
 $ docker service create \
   --replicas 3 \
   --name my-web \
@@ -261,7 +261,7 @@ service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
 services on the same network. For instance, if you have a
-[WordPress service that stores its data in a MySQL service](http://training.play-with-docker.com/swarm-service-discovery/),
+[WordPress service that stores its data in a MySQL service](https://training.play-with-docker.com/swarm-service-discovery/),
 and they are connected to the same overlay network, you do not need to publish
 the MySQL port to the client, only the WordPress HTTP port.
 
@@ -288,8 +288,8 @@ round robin (DNSRR). You can configure this per service.
 
 ## Customize the ingress network
 
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
 other low-level network settings such as the MTU.
 
@@ -310,7 +310,7 @@ services which publish ports, such as a WordPress service which publishes port
 
 2.  Remove the existing `ingress` network:
 
-    ```bash
+    ```console
     $ docker network rm ingress
 
     WARNING! Before removing the routing-mesh network, make sure all the nodes
@@ -324,7 +324,7 @@ services which publish ports, such as a WordPress service which publishes port
     custom options you want to set. This example sets the MTU to 1200, sets
     the subnet to `10.11.0.0/16`, and sets the gateway to `10.11.0.2`.
 
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -365,7 +365,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
     options, see [Bridge driver options](../reference/commandline/network_create.md#bridge-driver-options).
 
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \
@@ -382,7 +382,7 @@ By default, all swarm traffic is sent over the same interface, including control
 and management traffic for maintaining the swarm itself and data traffic to and
 from the service containers.
 
-In Docker 17.06 and higher, it is possible to separate this traffic by passing
+You can separate this traffic by passing
 the `--data-path-addr` flag when initializing or joining the swarm. If there are
 multiple interfaces, `--advertise-addr` must be specified explicitly, and
 `--data-path-addr` defaults to `--advertise-addr` if not specified. Traffic about
@@ -396,14 +396,14 @@ that your Docker host has two different network interfaces: 10.0.0.1 should be
 used for control and management traffic and 192.168.0.1 should be used for
 traffic relating to services.
 
-```bash
+```console
 $ docker swarm init --advertise-addr 10.0.0.1 --data-path-addr 192.168.0.1
 ```
 
 This example joins the swarm managed by host `192.168.99.100:2377` and sets the
 `--advertise-addr` flag to `eth0` and the `--data-path-addr` flag to `eth1`.
 
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2d7c \
   --advertise-addr eth0 \
@@ -417,4 +417,4 @@ $ docker swarm join \
 * [Swarm administration guide](admin_guide.md)
 * [Docker CLI reference](../reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
-* [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" class="_" }
+* [Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" rel="noopener" class="_" }

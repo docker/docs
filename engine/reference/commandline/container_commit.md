@@ -4,7 +4,6 @@ datafile: docker_container_commit
 title: docker container commit
 redirect_from:
   - /edge/engine/reference/commandline/container_commit/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

@@ -6,14 +6,13 @@ redirect_from:
 - /engine/userguide/eng-image/multistage-build/
 ---
 
-Multi-stage builds are a new feature requiring Docker 17.05 or higher on the
-daemon and client. Multistage builds are useful to anyone who has struggled to
-optimize Dockerfiles while keeping them easy to read and maintain.
+Multistage builds are useful to anyone who has struggled to optimize Dockerfiles
+while keeping them easy to read and maintain.
 
 > **Acknowledgment**:
 > Special thanks to [Alex Ellis](https://twitter.com/alexellisuk) for granting
 > permission to use his blog post
-> [Builder pattern vs. Multi-stage builds in Docker](http://blog.alexellis.io/mutli-stage-docker-builds/)
+> [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/)
 > as the basis of the examples below.
 
 ## Before multi-stage builds
@@ -38,9 +37,10 @@ builder pattern above:
 **`Dockerfile.build`**:
 
 ```dockerfile
-FROM golang:1.7.3
+# syntax=docker/dockerfile:1
+FROM golang:1.16
 WORKDIR /go/src/github.com/alexellis/href-counter/
-COPY app.go .
+COPY app.go ./
 RUN go get -d -v golang.org/x/net/html \
   && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 ```
@@ -53,10 +53,11 @@ and forget to continue the line using the `\` character, for example.
 **`Dockerfile`**:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
-COPY app .
+COPY app ./
 CMD ["./app"]  
 ```
 
@@ -98,23 +99,24 @@ multi-stage builds.
 **`Dockerfile`**:
 
 ```dockerfile
-FROM golang:1.7.3
+# syntax=docker/dockerfile:1
+FROM golang:1.16
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
-COPY app.go .
+COPY app.go ./
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
-COPY --from=0 /go/src/github.com/alexellis/href-counter/app .
+COPY --from=0 /go/src/github.com/alexellis/href-counter/app ./
 CMD ["./app"]  
 ```
 
 You only need the single Dockerfile. You don't need a separate build script,
 either. Just run `docker build`.
 
-```bash
+```console
 $ docker build -t alexellis2/href-counter:latest .
 ```
 
@@ -137,16 +139,17 @@ the `COPY` instruction. This means that even if the instructions in your
 Dockerfile are re-ordered later, the `COPY` doesn't break.
 
 ```dockerfile
-FROM golang:1.7.3 AS builder
+# syntax=docker/dockerfile:1
+FROM golang:1.16 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
-COPY app.go    .
+COPY app.go    ./
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
-COPY --from=builder /go/src/github.com/alexellis/href-counter/app .
+COPY --from=builder /go/src/github.com/alexellis/href-counter/app ./
 CMD ["./app"]  
 ```
 
@@ -157,7 +160,7 @@ Dockerfile including every stage. You can specify a target build stage. The
 following command assumes you are using the previous `Dockerfile` but stops at
 the stage named `builder`:
 
-```bash
+```console
 $ docker build --target builder -t alexellis2/href-counter:latest .
 ```
 
@@ -186,14 +189,19 @@ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
 
 ```dockerfile
-FROM alpine:latest as builder
+# syntax=docker/dockerfile:1
+FROM alpine:latest AS builder
 RUN apk --no-cache add build-base
 
-FROM builder as build1
+FROM builder AS build1
 COPY source1.cpp source.cpp
 RUN g++ -o /binary source.cpp
 
-FROM builder as build2
+FROM builder AS build2
 COPY source2.cpp source.cpp
 RUN g++ -o /binary source.cpp
 ```
+
+## Version compatibility
+
+Multistage build syntax was introduced in Docker Engine 17.05.

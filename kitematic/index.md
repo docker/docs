@@ -1,10 +1,21 @@
 ---
-advisory: kitematic
-description: Documentation that provides an overview of Kitematic and installation instructions
-keywords: docker, documentation, about, technology, kitematic, gui
-title: Kitematic
+description: Kitematic userguide (deprecated)
+keywords: kitematic, deprecated
+title: Kitematic (deprecated)
+redirect_from:
+- /kitematic/faq/
+- /kitematic/known-issues/
+- /kitematic/minecraft-server/
+- /kitematic/nginx-web-server/
+- /kitematic/rethinkdb-dev-database/
+- /kitematic/userguide/
+notoc: true
 ---
 
-Kitematic, the Docker GUI, runs on Mac and Windows operating systems. Beginning with the 1.8 Docker release, you use the [Docker Toolbox](/toolbox/overview/) to install Kitematic.
+> **Deprecated**
+>
+> Kitematic has been deprecated. Please use the Dashboard included with Docker
+> Desktop instead. See [Docker Desktop](../desktop/dashboard.md).
+{: .warning }
 
-For information about using Kitematic, take a look at the [User Guide](userguide.md).
+The source code for Kitematic has been archived, but [can be found on GitHub](https://github.com/docker/kitematic){:target="_blank" rel="noopener" class="_"}.

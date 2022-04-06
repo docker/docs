@@ -5,8 +5,8 @@ title: docker-compose pull
 notoc: true
 ---
 
-```
-Usage: pull [options] [SERVICE...]
+```none
+Usage: docker-compose pull [options] [SERVICE...]
 
 Options:
     --ignore-pull-failures  Pull what it can and ignores images with pull failures.
@@ -18,7 +18,7 @@ Options:
 
 Pulls an image associated with a service defined in a `docker-compose.yml` or `docker-stack.yml` file, but does not start containers based on those images.
 
-For example, suppose you have this `docker-compose.yml` file from the [Quickstart: Compose and Rails](../rails.md) sample.
+For example, suppose you have this `docker-compose.yml` file from the [Quickstart: Compose and Rails](../../samples/rails.md) sample.
 
 ```yaml
 version: '2'
@@ -38,7 +38,7 @@ services:
 
 If you run `docker-compose pull ServiceName` in the same directory as the `docker-compose.yml` file that defines the service, Docker pulls the associated image. For example, to call the `postgres` image configured as the `db` service in our example, you would run `docker-compose pull db`.
 
-```bash
+```console
 $ docker-compose pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres

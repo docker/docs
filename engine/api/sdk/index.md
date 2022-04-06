@@ -22,8 +22,8 @@ installed and coexist together.
 
 ### Go SDK
 
-```bash
-go get github.com/docker/docker/client
+```console
+$ go get github.com/docker/docker/client
 ```
 
 The client requires a recent version of Go. Run `go version` and ensure that you 
@@ -110,7 +110,7 @@ func main() {
     resp, err := cli.ContainerCreate(ctx, &container.Config{
         Image: "alpine",
         Cmd:   []string{"echo", "hello world"},
-    }, nil, nil, "")
+    }, nil, nil, nil, "")
     if err != nil {
         panic(err)
     }
@@ -149,20 +149,33 @@ print client.containers.run("alpine", ["echo", "hello", "world"])
   </div>
   <div id="curl" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
-  -X POST http:/v1.24/containers/create
+  -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
 {"Id":"1c6594faf5","Warnings":null}
 
-$ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594faf5/start
+$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/start
 
-$ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594faf5/wait
+$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/wait
 {"StatusCode":0}
 
-$ curl --unix-socket /var/run/docker.sock "http:/v1.24/containers/1c6594faf5/logs?stdout=1"
+$ curl --unix-socket /var/run/docker.sock "http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/logs?stdout=1"
 hello world
 ```
+
+When using cURL to connect over a unix socket, the hostname is not important. The
+examples above use `localhost`, but any hostname would work.
+
+> **Using cURL 7.47.0 or below?**
+>
+> The examples above assume you are using cURL 7.50.0 or above. Older versions of
+> cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960){:target="_blank" rel="noopener" class="_"}
+> when using a socket connection.
+> 
+> If you are using an older version of cURL, use `http:/<API version>/` instead,
+> for example, `http:/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/start`
+{: .important}
 
   </div>
 </div>
@@ -180,6 +193,8 @@ file them with the library maintainers.
 | C                     | [libdocker](https://github.com/danielsuo/libdocker)                         |
 | C#                    | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet)            |
 | C++                   | [lasote/docker_client](https://github.com/lasote/docker_client)             |
+| Clojure               | [clj-docker-client](https://github.com/into-docker/clj-docker-client)       |
+| Clojure               | [contajners](https://github.com/lispyclouds/contajners)                     |
 | Dart                  | [bwu_docker](https://github.com/bwu-dart/bwu_docker)                        |
 | Erlang                | [erldocker](https://github.com/proger/erldocker)                            |
 | Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin)    |
@@ -189,6 +204,7 @@ file them with the library maintainers.
 | Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
 | Java                  | [docker-java-api](https://github.com/amihaiemil/docker-java-api)            |
+| Java                  | [jocker](https://github.com/ndeloof/jocker)                                 |
 | NodeJS                | [dockerode](https://github.com/apocas/dockerode)                            |
 | NodeJS                | [harbor-master](https://github.com/arhea/harbor-master)                     |
 | Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |

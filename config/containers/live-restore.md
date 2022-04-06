@@ -7,10 +7,10 @@ redirect_from:
 ---
 
 By default, when the Docker daemon terminates, it shuts down running containers.
-Starting with Docker Engine 1.12, you can configure the daemon so that
-containers remain running if the daemon becomes unavailable. This functionality
-is called _live restore_. The live restore option helps reduce container
-downtime due to daemon crashes, planned outages, or upgrades.
+You can configure the daemon so that containers remain running if the daemon
+becomes unavailable. This functionality is called _live restore_. The live restore
+option helps reduce container downtime due to daemon crashes, planned outages,
+or upgrades.
 
 > **Note**
 >

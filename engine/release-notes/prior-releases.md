@@ -3,6 +3,13 @@ title: Docker Engine release notes
 description: Release notes for Docker CE
 keywords: release notes, community
 toc_max: 2
+redirect_from:
+  - /cs-engine/1.12/release-notes/
+  - /cs-engine/1.12/release-notes/release-notes/
+  - /cs-engine/1.12/release-notes/prior-release-notes/
+  - /cs-engine/1.13/release-notes/
+  - /ee/engine/release-notes/
+  - /ee/docker-ee/release-notes/
 ---
 
 ## 1.13.1 (2017-02-08)

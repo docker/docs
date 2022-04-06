@@ -4,7 +4,6 @@ datafile: docker_volume_ls
 title: docker volume ls
 redirect_from:
   - /edge/engine/reference/commandline/volume_ls/
-skip_read_time: true
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

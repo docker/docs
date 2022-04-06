@@ -1,26 +1,8 @@
 /*
-*
-* Primary navigation - top header **********************************************************
-*
-*/
+ * Primary navigation - top header *********************************************
+ */
 .nav-container {
     height: 55px;
-}
-
-.primary {
-    padding: 5px 0 0 20px;
-}
-
-.nav-primary {
-    background: transparent;
-    max-width: 1024px;
-    margin: 0 auto;
-    a {
-        color: #fff;
-    }
-    li:nth-child(5n) {
-        padding-right: 50px;
-    }
 }
 
 .sidebar-toggle {
@@ -30,69 +12,32 @@
 }
 
 /*
-*
-* user-nav ***********************************************************************
-*
-*/
-
-.user-nav {
-    padding: 20px 0 0;
-    float: right;
-    ul {
-        li {
-            list-style-type: none;
-            display: inline;
-            padding-right: 10px;
-            a {
-                display: inline;
-            }
-        }
-    }
-}
-
-/*
-*
-* Secondary Navigation  **********************************************************
-*
-*/
+ * Secondary Navigation  *******************************************************
+ */
 
 .nav-secondary {
-    background: $bg-secondary;
+    background-color: $bg-secondary;
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-    height: 55px;
-}
-
-
-/*
-*
-* nav-secondary-tabs  ***********************************************************************
-*
-*/
-
-.nav-secondary-tabs {
-    background-color: $bg-secondary-tabs;
-    bottom: 0;
-    height: 55px;
-    position: absolute;
-    width: 100%;
-    &.affix {
-        background: $bg-secondary;
-        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-        top: 0;
-        position: fixed;
-        z-index: 100;
-    }
-    .search-form {
-        margin: 5px 27px 0 -10px;
-        width: 240px;
-    }
 }
 
 /*
-*
-* NAV SIDEBAR ***********************************************************************
-*
-*/
+ * Breadcrumbs  ****************************************************************
+ */
+.breadcrumb {
+  background-color: $bg-sidebar-active;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding-left:  22px; // left-align with logo
+  border-bottom: 0.1px solid rgba($primary-links, .5);
+
+  a:not([href]) {
+    cursor: default;
+  }
+}
+
+/*
+ * NAV SIDEBAR *****************************************************************
+ */
 
 // Some links don't have 'href' attr, hence no mouse pointer
 .nav-sidebar li a {
@@ -113,15 +58,11 @@
 
 .nav-sidebar ul {
     list-style: none;
-    padding: 0px 15px;
+    padding: 0;
     text-align: left;
 
     li {
         display: block;
-    }
-
-    @include lg-width {
-        padding: 0;
     }
 }
 
@@ -135,34 +76,36 @@
 }
 
 .nav-sidebar ul li a,
-.nav-sidebar ul li a:focus,
-.nav-sidebar ul li a:hover {
+.nav-sidebar ul li a:focus {
     border-bottom: none;
-    text-decoration: none;
+    border-left:   1px solid $primary-links;
+}
+
+.nav-sidebar .nav > li > a {
+  padding-left: 22px; // left-padding to align with logo
+  &.active {
+    padding-left: 19px; // compensate for 1px -> 4px border-width
+  }
+  @include before-md-width {
+    padding-right: 32px; // right-align with hamburger menu
+  }
 }
 
 .nav-sidebar ul li a.active,
-.nav-sidebar.nav>li>a:focus {
-    cursor: default;
-    background: #F3F4F4;
-    color: #2089C4;
-    border-left: 4px solid #077CBC;
+.nav-sidebar.nav > li > a:focus {
+    background:  $bg-sidebar-active;
+    border-left: 4px solid $primary-links;
     font-weight: 600;
 }
 
-.nav-sidebar ul li li a {
-    border-left: 1px solid #077CBC;
-    font-size: 12px;
-    margin-left: 15px;
+.nav-sidebar ul li ul li a {
+  font-size:   12px;
+  margin-left:  8px;
 }
 
 .nav-sidebar .caret {
     float: right;
     margin-top: 10px;
-}
-
-.leftnav {
-    padding: 0 20px 20px 0;
 }
 
 /* pointer for collapsed sidebar list items */
@@ -173,10 +116,8 @@
 }
 
 /*
-*
-* Table of contents menu  ***********************************************************************
-*
-*/
+ * Table of contents menu  *****************************************************
+ */
 
 .toc-toggle {
     width: 25px;
@@ -196,26 +137,20 @@
             display: inline-block;
             font-size: 12px;
             padding: 5px 10px 5px 10px;
-            text-decoration: none;
         }
     }
 }
 
 .toc-nav li a.active {
-    color: #2089C4;
-    border-left: 4px solid #2089C4;
+    color: $primary-links;
+    border-left: 4px solid $primary-links;
     font-weight: bold;
 }
 
 .toc-nav i.fa {
     font-size: 14px;
     margin: 0 8px 0 0;
-    color: #4fa1d0;
-}
-
-i.fa.fa-question {
-    font-size: 21px;
-    margin: 0 11px 0 0;
+    color: $primary-links;
 }
 
 div#side-toc-title {
@@ -229,10 +164,8 @@ div#side-toc-title {
 }
 
 /*
-*
-* Toggle Switches **************************************************************
-*
-*/
+ * Toggle Switches *************************************************************
+ */
 
 .toggle-mode {
     float: left;
@@ -273,7 +206,6 @@ div#side-toc-title {
     bottom: 0;
     background-color: $slider-bg;
     border: 1px solid #c3e4f7;
-    // transition: 0.4s;
 }
 
 .slider:before {
@@ -284,11 +216,10 @@ div#side-toc-title {
     width: 15px;
     left: 2px;
     bottom: 1px;
-    // transition: 0.4s;
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px $slider-btn;
 }
 
 input:checked+.slider:before {
@@ -306,54 +237,46 @@ input:checked+.slider:before {
 
 
 /*
-*
-* Tabs ***********************************************************************
-*
-*/
-#tabs {
-    float: left;
-    margin: 0;
-    padding-left: 8px;
-    ul {
-        padding: 0;
-    }
+ * Tabs ************************************************************************
+ */
+
+.navbar-nav > li > a {
+  border-left:   4px solid rgba($white, 0.0);
+}
+.navbar-nav > li.active > a {
+  border-left:   4px solid rgba($white, 0.75);
 }
 
+@include md-width {
+  .landing .navbar-nav > li > a {
+    padding-top:    17px;
+    padding-bottom:  9px;
+  }
+  .navbar-nav > li > a {
+    color:          $white;
+    line-height:    25px;
+    padding-top:    14px;
+    padding-bottom: 12px;
+    font-weight:    600;
 
-
-.tabs {
-
-    li {
-        float: left;
-        list-style: none;
-        a {
-            color: $white;
-            padding: 17px 19px 14px 15px;
-            float: left;
-            font-weight: 600;
-            &:hover {
-                background: rgba(0, 0, 0, 0.17) !important;
-                border-bottom: 4px solid #fff;
-            }
-        }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.17);
+      border-bottom:    4px solid rgba($white, 0.75);
     }
-}
-
-.tabs li.active a {
-    background: transparent !important;
-    color: #fff;
-    cursor: default;
-    border-bottom: 4px solid #fff;
+  }
+  .navbar-nav > li.active > a {
+    cursor:        default;
+    border-left:   none;
+    border-bottom: 4px solid rgba($white, 0.5);
+  }
 }
 
 /*
-*
-* feedback links ***********************************************************************
-*
-*/
+ * feedback links **************************************************************
+ */
 
-#sidebar-right.affix .feedback-links {
-    margin: 50px 0 10px 0;
+.feedback-links {
+    margin: 15px 0 10px 0;
 }
 
 /* polldaddy */
@@ -367,11 +290,15 @@ input:checked+.slider:before {
     color: inherit !important;
 }
 
+/* remove polldaddy ratings */
+
+.rating-nero-value {
+    visibility: hidden
+}
+
 /*
-*
-* Controls ***********************************************************************
-*
-*/
+ * Controls ********************************************************************
+ */
 
 .ctrl-left {
     float: left;
@@ -387,11 +314,4 @@ input:checked+.slider:before {
 .ctrl-right .btn-group {
     float: left;
     margin: 2px 0 0;
-}
-
-.divider {
-    height: 1px;
-    margin: 9px 29px;
-    overflow: hidden;
-    background-color: #077CBC;
 }

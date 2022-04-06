@@ -25,7 +25,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker volume prune
 
   WARNING! This will remove all local volumes not used by at least one container.

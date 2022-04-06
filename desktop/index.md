@@ -4,11 +4,33 @@ keywords: Desktop, Docker, GUI, run, docker, local, machine
 title: Docker Desktop overview
 toc_min: 1
 toc_max: 2
+redirect_from:
+- /desktop/opensource/
+- /docker-for-mac/opensource/
+- /docker-for-windows/opensource/
 ---
 
-Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes [Docker Engine](../engine/), Docker CLI client, [Docker Compose](../compose/), [Notary](../notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+> **Update to the Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) now requires a paid
+> subscription. The grace period for those that will require a paid subscription
+> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+ target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+{: .important}
 
-Docker Desktop works with your choice of development tools and languages and gives you access to a vast library of certified images and templates in [Docker Hub](https://hub.docker.com/). This enables development teams to extend their environment to rapidly auto-build, continuously integrate and collaborate using a secure repository.
+Docker Desktop is an easy-to-install application for your Mac or Windows environment
+that enables you to build and share containerized applications and microservices.
+Docker Desktop includes [Docker Engine](../engine/index.md), Docker CLI client,
+[Docker Compose](../compose/index.md), [Docker Content Trust](../engine/security/trust/index.md),
+[Kubernetes](https://github.com/kubernetes/kubernetes/), and 
+[Credential Helper](https://github.com/docker/docker-credential-helpers/).
+
+Docker Desktop works with your choice of development tools and languages and
+gives you access to a vast library of certified images and templates in
+[Docker Hub](https://hub.docker.com/). This enables development teams to extend
+their environment to rapidly auto-build, continuously integrate, and collaborate
+using a secure repository.
 
 Some of the key features of Docker Desktop include:
 
@@ -26,32 +48,38 @@ Some of the key features of Docker Desktop include:
 
 Docker Desktop is available for Mac and Windows. For download information, system requirements, and installation instructions, see:
 
-* [Install Docker Desktop on Mac](../docker-for-mac/install.md)
-* [Install Docker Desktop on Windows](../docker-for-windows/install.md)
+* [Install Docker Desktop on Mac](mac/install.md)
+* [Install Docker Desktop on Windows](windows/install.md)
 
-## Get started
+For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
-For information on how to get to get started with Docker Desktop and to learn about various UI options and their usage, see:
+## Sign in to Docker Desktop
 
-* [Get started with Docker Desktop on Mac](../docker-for-mac/index.md)
-* [Get started with Docker Desktop on Windows](../docker-for-windows/index.md)
+After you’ve successfully installed and started Docker Desktop, we recommend
+that you authenticate using the **Sign in/Create ID** option from the Docker
+menu.
 
-## Stable and Edge versions
+Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
 
-Docker Desktop offers Stable and Edge download channels.
+In large enterprises where admin access is restricted, administrators can create
+a `registry.json` file and deploy it to the developers' machines using a device
+management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows
+administrators to set up guardrails using features such as 
+[Image Access Management](../docker-hub/image-access-management.md) which allows team
+members to only have access to Trusted Content on Docker Hub, and pull only from
+the specified categories of images. For more information, see
+[Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md).
 
-The Stable release provides a general availability release-ready installer for a fully baked and tested, more reliable app. The Stable version of Docker Desktop includes the latest released version of Docker Engine. The release schedule is synced every three months for major releases, with patch releases to fix minor issues, and to stay up to date with Docker Engine as required. You can choose to opt out of the usage statistics and telemetry data on the Stable channel.
+## Configure Docker Desktop
 
-Docker Desktop Edge release is our preview version. It offers an installer with the latest features and comes with the experimental features turned on. When using the Edge release, bugs, crashes, and issues can occur as the new features may not be fully tested. However, you get a chance to preview new functionality, experiment, and provide feedback as Docker Desktop evolves. Edge releases are typically more frequent than Stable releases. Telemetry data and usage statistics are sent by default on the Edge version.
+To learn about the various UI options and their usage, see:
+
+* [Docker Desktop for Mac user manual](mac/index.md)
+* [Docker Desktop for Windows user manual](windows/index.md)
 
 ## Release notes
 
-For information about new features, improvements, and bug fixes in Docker Desktop Stable releases, see:
+For information about new features, improvements, and bug fixes in Docker Desktop releases, see:
 
-* [Docker Desktop for Mac Stable Release notes](../docker-for-mac/release-notes.md)
-* [Docker Desktop for Windows Stable Release notes](../docker-for-windows/release-notes.md)
-
-For information about new features, improvements, and bug fixes in Docker Desktop Edge releases, see:
-
-* [Docker Desktop for Mac Edge Release notes](../docker-for-mac/edge-release-notes.md)
-* [Docker Desktop for Windows Edge Release notes](../docker-for-windows/edge-release-notes.md)
+* [Docker Desktop for Mac Release notes](mac/release-notes/index.md)
+* [Docker Desktop for Windows Release notes](windows/release-notes/index.md)

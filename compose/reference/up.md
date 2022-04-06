@@ -5,8 +5,8 @@ title: docker-compose up
 notoc: true
 ---
 
-```
-Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
+```none
+Usage: docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
     -d, --detach               Detached mode: Run containers in the background,
@@ -20,12 +20,14 @@ Options:
     --always-recreate-deps     Recreate dependent containers.
                                Incompatible with --no-recreate.
     --no-recreate              If containers already exist, don't recreate
-                               them. Incompatible with --force-recreate and -V.
+                               them. Incompatible with --force-recreate and 
+                               --renew-anon-volumes.
     --no-build                 Don't build an image, even if it's missing.
     --no-start                 Don't start the services after creating them.
     --build                    Build images before starting containers.
     --abort-on-container-exit  Stops all containers if any container was
-                               stopped. Incompatible with -d.
+                               stopped. Incompatible with --detach.
+    --attach-dependencies      Attach to dependent containers.
     -t, --timeout TIMEOUT      Use this timeout in seconds for container
                                shutdown when attached or when containers are
                                already running. (default: 10)
@@ -43,8 +45,8 @@ Builds, (re)creates, starts, and attaches to containers for a service.
 
 Unless they are already running, this command also starts any linked services.
 
-The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs -f`). When
-the command exits, all containers are stopped. Running `docker-compose up -d`
+The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs --follow`). When
+the command exits, all containers are stopped. Running `docker-compose up --detach`
 starts the containers in the background and leaves them running.
 
 If there are existing containers for a service, and the service's configuration

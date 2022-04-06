@@ -6,13 +6,12 @@ notoc: true
 ---
 
 ```none
-Usage: top [SERVICE...]
-
+Usage: docker-compose top [SERVICE...]
 ```
 
 Displays the running processes.
 
-```bash
+```console
 $ docker-compose top
 compose_service_a_1
 PID    USER   TIME   COMMAND

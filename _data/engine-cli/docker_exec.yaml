@@ -46,6 +46,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: env-file
+  value_type: list
+  description: Read in a file of environment variables
+  deprecated: false
+  min_api_version: "1.25"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: interactive
   shorthand: i
   value_type: bool
@@ -99,7 +108,7 @@ examples: |-
 
   First, start a container.
 
-  ```bash
+  ```console
   $ docker run --name ubuntu_bash --rm -i -t ubuntu bash
   ```
 
@@ -107,7 +116,7 @@ examples: |-
 
   Next, execute a command on the container.
 
-  ```bash
+  ```console
   $ docker exec -d ubuntu_bash touch /tmp/execWorks
   ```
 
@@ -116,7 +125,7 @@ examples: |-
 
   Next, execute an interactive `bash` shell on the container.
 
-  ```bash
+  ```console
   $ docker exec -it ubuntu_bash bash
   ```
 
@@ -124,7 +133,7 @@ examples: |-
 
   Next, set an environment variable in the current bash session.
 
-  ```bash
+  ```console
   $ docker exec -it -e VAR=1 ubuntu_bash bash
   ```
 
@@ -134,14 +143,14 @@ examples: |-
 
   By default `docker exec` command runs in the same working directory set when container was created.
 
-  ```bash
+  ```console
   $ docker exec -it ubuntu_bash pwd
   /
   ```
 
   You can select working directory for the command to execute into
 
-  ```bash
+  ```console
   $ docker exec -it -w /root ubuntu_bash pwd
   /root
   ```
@@ -151,7 +160,7 @@ examples: |-
 
   If the container is paused, then the `docker exec` command will fail with an error:
 
-  ```bash
+  ```console
   $ docker pause test
 
   test

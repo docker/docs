@@ -14,9 +14,9 @@ The output files are composed from two sources:
   the CLI source code in that repository.
 
 - The **Extended Description** and **Examples** sections are pulled into the
-  YAML from the files in [https://github.com/docker/cli/tree/master/docs/reference/commandline](https://github.com/docker/cli/tree/master/docs/reference/commandline)
+  YAML from the files in [https://github.com/docker/cli/tree/master/docs/reference/commandline](https://github.com/docker/cli/tree/master/docs/reference/commandline) for Docker CLI commands and [https://github.com/docker/compose/tree/v2/docs/reference](https://github.com/docker/compose/tree/v2/docs/reference) for Docker Compose commands.
   Specifically, the Markdown inside the `## Description` and `## Examples`
-  headings are parsed. Submit corrections to the text in that repository.
+  headings are parsed. Submit corrections to the text in those repositories.
 
 # Updating the YAML files
 

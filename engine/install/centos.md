@@ -2,11 +2,14 @@
 description: Instructions for installing Docker Engine on CentOS
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
+- /ee/docker-ee/centos/
 - /engine/installation/centos/
+- /engine/installation/linux/centos/
 - /engine/installation/linux/docker-ce/centos/
+- /engine/installation/linux/docker-ee/centos/
 - /install/linux/centos/
 - /install/linux/docker-ce/centos/
-- /engine/installation/linux/centos/
+- /install/linux/docker-ee/centos/
 title: Install Docker Engine on CentOS
 toc_max: 4
 ---
@@ -19,12 +22,12 @@ To get started with Docker Engine on CentOS, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of CentOS 7. Archived
-versions aren't supported or tested.
+To install Docker Engine, you need a maintained version of CentOS 7 or 8.
+Archived versions aren't supported or tested.
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
-[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" class="_" }.
+[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" rel="noopener" class="_" }.
 
 The `overlay2` storage driver is recommended.
 
@@ -33,7 +36,7 @@ The `overlay2` storage driver is recommended.
 Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them, along with associated dependencies.
 
-```bash
+```console
 $ sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
@@ -79,7 +82,7 @@ from the repository.
 Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the **stable** repository.
 
-```bash
+```console
 $ sudo yum install -y yum-utils
 
 $ sudo yum-config-manager \
@@ -93,13 +96,13 @@ $ sudo yum-config-manager \
 > by default. You can enable them alongside the stable repository.  The following
 > command enables the **nightly** repository.
 >
-> ```bash
+> ```console
 > $ sudo yum-config-manager --enable docker-ce-nightly
 > ```
 >
 > To enable the **test** channel, run the following command:
 >
-> ```bash
+> ```console
 > $ sudo yum-config-manager --enable docker-ce-test
 > ```
 >
@@ -107,7 +110,7 @@ $ sudo yum-config-manager \
 > `yum-config-manager` command with the `--disable` flag. To re-enable it, use
 > the `--enable` flag. The following command disables the **nightly** repository.
 >
-> ```bash
+> ```console
 > $ sudo yum-config-manager --disable docker-ce-nightly
 > ```
 >
@@ -117,7 +120,7 @@ $ sudo yum-config-manager \
 
 1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
 
-    ```bash
+    ```console
     $ sudo yum install docker-ce docker-ce-cli containerd.io
     ```
 
@@ -131,7 +134,8 @@ $ sudo yum-config-manager \
     > `yum update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
 
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
@@ -139,7 +143,7 @@ $ sudo yum-config-manager \
     a. List and sort the versions available in your repo. This example sorts
        results by version number, highest to lowest, and is truncated:
 
-    ```bash
+    ```console
     $ yum list docker-ce --showduplicates | sort -r
 
     docker-ce.x86_64  3:18.09.1-3.el7                     docker-ce-stable
@@ -156,29 +160,30 @@ $ sudo yum-config-manager \
        starting at the first colon (`:`), up to the first hyphen, separated by
        a hyphen (`-`). For example, `docker-ce-18.09.1`.
 
-    ```bash
+    ```console
     $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
-    Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    This command installs Docker, but it doesn't start Docker. It also creates a
+    `docker` group, however, it doesn't add any users to the group by default.
 
 3.  Start Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
 4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
-Docker Engine is installed and running. You need to use `sudo` to run Docker
+This installs and runs Docker Engine. Use `sudo` to run Docker
 commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -194,18 +199,20 @@ If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker Engine.
 
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" class="_" }
+1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
-    > **Note**: To install a **nightly** or **test** (pre-release) package,
+    > **Note**
+    >
+    > To install a **nightly** or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](index.md).
 
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
 
-    ```bash
+    ```console
     $ sudo yum install /path/to/package.rpm
     ```
 
@@ -214,21 +221,21 @@ a new file each time you want to upgrade Docker Engine.
 
 3.  Start Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
 4.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
-    ```bash
+    ```console
     $ sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
-Docker Engine is installed and running. You need to use `sudo` to run Docker commands.
+This installs and runs Docker Engine. Use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -237,7 +244,7 @@ steps.
 
 To upgrade Docker Engine, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `yum -y upgrade`
-instead of `yum -y install`, and pointing to the new file.
+instead of `yum -y install`, and point to the new file.
 
 {% include install-script.md %}
 
@@ -245,7 +252,7 @@ instead of `yum -y install`, and pointing to the new file.
 
 1.  Uninstall the Docker Engine, CLI, and Containerd packages:
 
-    ```bash
+    ```console
     $ sudo yum remove docker-ce docker-ce-cli containerd.io
     ```
 
@@ -253,8 +260,9 @@ instead of `yum -y install`, and pointing to the new file.
     are not automatically removed. To delete all images, containers, and
     volumes:
 
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/containerd
     ```
 
 You must delete any edited configuration files manually.

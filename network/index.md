@@ -19,20 +19,13 @@ This topic defines some basic Docker networking concepts and prepares you to
 design and deploy your applications to take full advantage of these
 capabilities.
 
-Most of this content applies to all Docker installations. However,
-[a few advanced features](#docker-ee-networking-features) are only available to
-Docker EE customers.
-
 ## Scope of this topic
 
 This topic does **not** go into OS-specific details about how Docker networks
 work, so you will not find information about how Docker manipulates `iptables`
 rules on Linux or how it manipulates routing rules on Windows servers, and you
 will not find detailed information about how Docker forms and encapsulates
-packets or handles encryption. See [Docker and iptables](iptables.md)
-and
-[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](http://success.docker.com/article/networking)
-for a much greater depth of technical detail.
+packets or handles encryption. See [Docker and iptables](iptables.md).
 
 In addition, this topic does not provide any tutorials for how to create,
 manage, and use Docker networks. Each section includes links to relevant
@@ -49,8 +42,7 @@ exist by default, and provide core networking functionality:
   [bridge networks](bridge.md).
 
 - `host`: For standalone containers, remove network isolation between the
-  container and the Docker host, and use the host's networking directly. `host`
-  is only available for swarm services on Docker 17.06 and higher. See
+  container and the Docker host, and use the host's networking directly. See
   [use the host network](host.md).
 
 - `overlay`: Overlay networks connect multiple Docker daemons together and
@@ -59,6 +51,11 @@ exist by default, and provide core networking functionality:
   container, or between two standalone containers on different Docker daemons.
   This strategy removes the need to do OS-level routing between these
   containers. See [overlay networks](overlay.md).
+
+- `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6
+  addressing. The VLAN driver builds on top of that in giving operators complete
+  control of layer 2 VLAN tagging and even IPvlan L3 routing for users
+  interested in underlay network integration. See [IPvlan networks](ipvlan.md).
 
 - `macvlan`: Macvlan networks allow you to assign a MAC address to a container,
   making it appear as a physical device on your network. The Docker daemon

@@ -1,8 +1,9 @@
 command: docker context export
 short: Export a context to a tar or kubeconfig file
 long: |-
-  Exports a context in a file that can then be used with `docker context import` (or with `kubectl` if `--kubeconfig` is set).
-  Default output filename is `<CONTEXT>.dockercontext`, or `<CONTEXT>.kubeconfig` if `--kubeconfig` is set.
+  Exports a context in a file that can then be used with `docker context import`
+  (or with `kubectl` if `--kubeconfig` is set). Default output filename is
+  `<CONTEXT>.dockercontext`, or `<CONTEXT>.kubeconfig` if `--kubeconfig` is set.
   To export to `STDOUT`, you can run `docker context export my-context -`.
 usage: docker context export [OPTIONS] CONTEXT [FILE|-]
 pname: docker context
@@ -12,10 +13,10 @@ options:
   value_type: bool
   default_value: "false"
   description: Export as a kubeconfig file
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
-  kubernetes: false
+  kubernetes: true
   swarm: false
 deprecated: false
 experimental: false

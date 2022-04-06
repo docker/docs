@@ -13,6 +13,8 @@ A single Docker CLI can have multiple contexts. Each context contains all of the
 
 As an example, a single Docker client on your company laptop might be configured with two contexts; **dev-k8s** and **prod-swarm**. **dev-k8s** contains the endpoint data and security credentials to configure and manage a Kubernetes cluster in a development environment. **prod-swarm** contains everything required to manage a Swarm cluster in a production environment. Once these contexts are configured, you can use the top-level `docker context use <context-name>` to easily switch between them.
 
+For information on using Docker Context to deploy your apps to the cloud, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md) and [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
+
 ## Prerequisites
 
 To follow the examples in this guide, you'll need:
@@ -38,7 +40,7 @@ A context is a combination of several properties. These include:
 
 The easiest way to see what a context looks like is to view the **default** context.
 
-```
+```console
 $ docker context ls
 NAME          DESCRIPTION     DOCKER ENDPOINT                KUBERNETES ENDPOINT      ORCHESTRATOR
 default *     Current...      unix:///var/run/docker.sock                             swarm
@@ -50,7 +52,7 @@ The asterisk in the `NAME` column indicates that this is the active context. Thi
 
 Dig a bit deeper with `docker context inspect`. In this example, we're inspecting the context called `default`.
 
-```
+```console
 $ docker context inspect default
 [
     {
@@ -84,7 +86,7 @@ The following example creates a new context called "docker-test" and specifies t
 - Default orchestrator = Swarm
 - Issue commands to the local Unix socket `/var/run/docker.sock`
 
-```
+```console
 $ docker context create docker-test \
   --default-stack-orchestrator=swarm \
   --docker host=unix:///var/run/docker.sock
@@ -100,7 +102,7 @@ You can view the new context with `docker context ls` and `docker context inspec
 
 The following can be used to create a config with Kubernetes as the default orchestrator using the existing kubeconfig stored in `/home/ubuntu/.kube/config`. For this to work, you will need a valid kubeconfig file in `/home/ubuntu/.kube/config`. If your kubeconfig has more than one context, the current context (`kubectl config current-context`) will be used.
 
-```
+```console
 $ docker context create k8s-test \
   --default-stack-orchestrator=kubernetes \
   --kubernetes config-file=/home/ubuntu/.kube/config \
@@ -111,7 +113,7 @@ Successfully created context "k8s-test"
 
 You can view all contexts on the system with `docker context ls`.
 
-```
+```console
 $ docker context ls
 NAME           DESCRIPTION   DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default *      Current       unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
@@ -127,7 +129,7 @@ You can use `docker context use` to quickly switch between contexts.
 
 The following command will switch the `docker` CLI to use the "k8s-test" context.
 
-```
+```console
 $ docker context use k8s-test
 
 k8s-test
@@ -136,7 +138,7 @@ Current context is now "k8s-test"
 
 Verify the operation by listing all contexts and ensuring the asterisk ("\*") is against the "k8s-test" context.
 
-```
+```console
 $ docker context ls
 NAME            DESCRIPTION                               DOCKER ENDPOINT               KUBERNETES ENDPOINT               ORCHESTRATOR
 default         Current DOCKER_HOST based configuration   unix:///var/run/docker.sock   https://35.226.99.100 (default)   swarm
@@ -152,13 +154,13 @@ Use the appropriate command below to set the context to `docker-test` using an e
 
 Windows PowerShell:
 
-```
+```console
 > $Env:DOCKER_CONTEXT=docker-test
 ```
 
 Linux:
 
-```
+```console
 $ export DOCKER_CONTEXT=docker-test
 ```
 
@@ -166,7 +168,7 @@ Run a `docker context ls` to verify that the "docker-test" context is now the ac
 
 You can also use the global `--context` flag to override the context specified by the `DOCKER_CONTEXT` environment variable. For example, the following will send the command to a context called "production".
 
-```
+```console
 $ docker --context production container ls
 ```
 
@@ -186,21 +188,21 @@ Let's look at exporting and importing a native Docker context.
 
 The following example exports an existing context called "docker-test". It will be written to a file called `docker-test.dockercontext`.
 
-```
+```console
 $ docker context export docker-test
 Written file "docker-test.dockercontext"
 ```
 
 Check the contents of the export file.
 
-```
+```console
 $ cat docker-test.dockercontext
 meta.json0000644000000000000000000000022300000000000011023 0ustar0000000000000000{"Name":"docker-test","Metadata":{"StackOrchestrator":"swarm"},"Endpoints":{"docker":{"Host":"unix:///var/run/docker.sock","SkipTLSVerify":false}}}tls0000700000000000000000000000000000000000000007716 5ustar0000000000000000
 ```
 
 This file can be imported on another host using `docker context import`. The target host must have the Docker client installed.
 
-```
+```console
 $ docker context import docker-test docker-test.dockercontext
 docker-test
 Successfully imported context "docker-test"
@@ -218,14 +220,14 @@ You can export a Kubernetes context only if the context you are exporting has a 
 
 These steps will use the `--kubeconfig` flag to export **only** the Kubernetes elements of the existing `k8s-test` context to a file called "k8s-test.kubeconfig". The `cat` command will then show that it's exported as a valid kubeconfig file.
 
-```
+```console
 $ docker context export k8s-test --kubeconfig
 Written file "k8s-test.kubeconfig"
 ```
 
 Verify that the exported file contains a valid kubectl config.
 
-```
+```console
 $ cat k8s-test.kubeconfig
 apiVersion: v1
 clusters:
@@ -263,7 +265,7 @@ You can use `docker context update` to update fields in an existing context.
 
 The following example updates the "Description" field in the existing `k8s-test` context.
 
-```
+```console
 $ docker context update k8s-test --description "Test Kubernetes cluster"
 k8s-test
 Successfully updated context "k8s-test"

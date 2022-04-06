@@ -1,15 +1,27 @@
 ---
-advisory: toolbox
-description: Documentation that provides an overview of Docker Toolbox and installation instructions
-keywords: docker, documentation, about, technology, docker toolbox, gui
+description: Docker Desktop for Windows and Docker Toolbox
+keywords: windows, alpha, beta, toolbox, docker-machine, tutorial
+sitemap: false
 title: Docker Toolbox
+redirect_from:
+- /docker-for-mac/docker-toolbox/
+- /docker-for-windows/docker-toolbox/
+- /mackit/docker-toolbox/
+- /toolbox/faqs/
+- /toolbox/faqs/troubleshoot/
+- /toolbox/overview/
+- /toolbox/toolbox_install_mac/
+- /toolbox/toolbox_install_windows/
+toc_min: 1
+toc_max: 2
 ---
 
-**Note** while Docker Toolbox is now considered Legacy, Kitematic is still supported and available as a separate download from [https://github.com/docker/kitematic](https://github.com/docker/kitematic)
+> **Deprecated**
+>
+> Docker Toolbox has been deprecated and is no longer in active development. Please
+> use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/mac/index.md)
+> and [Docker Desktop for Windows](../desktop/windows/index.md).
+{: .warning }
 
-Available for both Windows and Mac, Docker Toolbox installs the Docker Client, Machine, Compose, and Kitematic.
-
-**Learn about Docker Toolbox**. See [Docker Toolbox Overview](overview.md) for a quick tour of Toolbox, and
-how to get started with Docker Machine, Kitematic, and Docker Compose.
-
-**Ready to download Toolbox?**  See [Install Docker Toolbox on macOS](toolbox_install_mac.md) or [Install Docker Toolbox on Windows](toolbox_install_windows.md) for download and install instructions.
+The source code for Toolbox has been archived, You can find the source code 
+on [GitHub](https://github.com/docker-archive/toolbox){:target="_blank" rel="noopener" class="_"}.

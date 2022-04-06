@@ -7,9 +7,16 @@ redirect_from:
 title: Automated repository tests
 ---
 
+{% include upgrade-cta.html
+  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images. If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target='_blank' rel='noopener' class='_'} program to learn how Docker can support your project on Docker Hub."
+  header-text="This feature requires a Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
+%}
+
 Docker Hub can automatically test changes to your source code repositories
-using containers. You can enable `Autotest` on [any Docker Hub repository](/docker-hub/repos) to run tests on each pull request to the source code
-repository to create a continuous integration testing service.
+using containers. You can enable `Autotest` on [any Docker Hub repository](../repos.md)
+to run tests on each pull request to the source code repository to create a
+continuous integration testing service.
 
 Enabling `Autotest` builds an image for testing purposes, but does **not**
 automatically push the built image to the Docker repository. If you want to push
@@ -24,10 +31,11 @@ contains the Dockerfile used to build the image.
 
 For example:
 
-```none
-sut:
-  build: .
-  command: run_tests.sh
+```yaml
+services:
+  sut:
+    build: .
+    command: run_tests.sh
 ```
 
 The example above builds the repository, and runs the `run_tests.sh` file inside
@@ -37,10 +45,16 @@ You can define any number of linked services in this file. The only requirement
 is that `sut` is defined. Its return code determines if tests passed or not.
 Tests **pass** if the `sut` service returns `0`, and **fail** otherwise.
 
-> **Note**: Only the `sut` service and all other services listed in `depends_on`
-are started. For instance, if you have services that poll for changes in other
-services, be sure to include the polling services in the `depends_on` list to
-make sure all of your services start.
+> **Note**
+> 
+> Only the `sut` service and all other services listed in
+> [`depends_on`](../../compose/compose-file/compose-file-v2.md#depends_on) are
+> started. If you have services that poll for changes in other services, be sure
+> to include the polling services in the [`depends_on`](../../compose/compose-file/compose-file-v2.md#depends_on)
+> list to make sure all of your services start.
+> Also make sure to include a compose file version from 2.0 upward as `depends_on`
+> was added in [version 2.0](../../compose/compose-file/compose-versioning.md#version-2)
+> file format.
 
 You can define more than one `docker-compose.test.yml` file if needed. Any file
 that ends in `.test.yml` is used for testing, and the tests run sequentially.

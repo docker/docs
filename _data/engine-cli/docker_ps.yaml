@@ -65,7 +65,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only display numeric IDs
+  description: Only display container IDs
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -86,7 +86,7 @@ examples: |-
 
   Running `docker ps --no-trunc` showing 2 linked containers.
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES
@@ -99,7 +99,7 @@ examples: |-
   The `docker ps` command only shows running containers by default. To see all
   containers, use the `-a` (or `--all`) flag:
 
-  ```bash
+  ```console
   $ docker ps -a
   ```
 
@@ -111,7 +111,7 @@ examples: |-
 
   The `docker ps -s` command displays two different on-disk-sizes for each container:
 
-  ```bash
+  ```console
   $ docker ps -s
 
   CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS   NAMES        SIZE                                                                                      SIZE
@@ -155,7 +155,7 @@ examples: |-
 
   The following filter matches containers with the `color` label regardless of its value.
 
-  ```bash
+  ```console
   $ docker ps --filter "label=color"
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -165,7 +165,7 @@ examples: |-
 
   The following filter matches containers with the `color` label with the `blue` value.
 
-  ```bash
+  ```console
   $ docker ps --filter "label=color=blue"
 
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
@@ -178,7 +178,7 @@ examples: |-
 
   The following filter matches all containers with a name containing the `nostalgic_stallman` string.
 
-  ```bash
+  ```console
   $ docker ps --filter "name=nostalgic_stallman"
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -187,7 +187,7 @@ examples: |-
 
   You can also filter for a substring in a name as this shows:
 
-  ```bash
+  ```console
   $ docker ps --filter "name=nostalgic"
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -201,7 +201,7 @@ examples: |-
   The `exited` filter matches containers by exist status code. For example, to
   filter for containers that have exited successfully:
 
-  ```bash
+  ```console
   $ docker ps -a --filter 'exited=0'
 
   CONTAINER ID        IMAGE             COMMAND                CREATED             STATUS                   PORTS                      NAMES
@@ -215,7 +215,7 @@ examples: |-
   You can use a filter to locate containers that exited with status of `137`
   meaning a `SIGKILL(9)` killed them.
 
-  ```none
+  ```console
   $ docker ps -a --filter 'exited=137'
 
   CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                       PORTS               NAMES
@@ -235,7 +235,7 @@ examples: |-
   `created`, `restarting`, `running`, `removing`, `paused`, `exited` and `dead`. For example,
   to filter for `running` containers:
 
-  ```bash
+  ```console
   $ docker ps --filter status=running
 
   CONTAINER ID        IMAGE                  COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -246,7 +246,7 @@ examples: |-
 
   To filter for `paused` containers:
 
-  ```bash
+  ```console
   $ docker ps --filter status=paused
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
@@ -267,7 +267,7 @@ examples: |-
   If you don't specify a `tag`, the `latest` tag is used. For example, to filter
   for containers that use the latest `ubuntu` image:
 
-  ```bash
+  ```console
   $ docker ps --filter ancestor=ubuntu
 
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
@@ -280,7 +280,7 @@ examples: |-
   Match containers based on the `ubuntu-c1` image which, in this case, is a child
   of `ubuntu`:
 
-  ```bash
+  ```console
   $ docker ps --filter ancestor=ubuntu-c1
 
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
@@ -289,7 +289,7 @@ examples: |-
 
   Match containers based on the `ubuntu` version `12.04.5` image:
 
-  ```bash
+  ```console
   $ docker ps --filter ancestor=ubuntu:12.04.5
 
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
@@ -299,7 +299,7 @@ examples: |-
   The following matches containers based on the layer `d0e008c6cf02` or an image
   that have this layer in its layer stack.
 
-  ```bash
+  ```console
   $ docker ps --filter ancestor=d0e008c6cf02
 
   CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
@@ -313,7 +313,7 @@ examples: |-
   The `before` filter shows only containers created before the container with
   given id or name. For example, having these containers created:
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
@@ -324,7 +324,7 @@ examples: |-
 
   Filtering with `before` would give:
 
-  ```bash
+  ```console
   $ docker ps -f before=9c3527ed70ce
 
   CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
@@ -337,7 +337,7 @@ examples: |-
   The `since` filter shows only containers created since the container with given
   id or name. For example, with the same containers as in `before` filter:
 
-  ```bash
+  ```console
   $ docker ps -f since=6e63f6ff38b0
 
   CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
@@ -350,7 +350,7 @@ examples: |-
   The `volume` filter shows only containers that mount a specific volume or have
   a volume mounted in a specific path:
 
-  ```bash
+  ```console
   $ docker ps --filter volume=remote-volume --format "table {{.ID}}\t{{.Mounts}}"
 
   CONTAINER ID        MOUNTS
@@ -370,7 +370,7 @@ examples: |-
   The following filter matches all containers that are connected to a network
   with a name containing `net1`.
 
-  ```bash
+  ```console
   $ docker run -d --net=net1 --name=test1 ubuntu top
   $ docker run -d --net=net2 --name=test2 ubuntu top
 
@@ -384,7 +384,7 @@ examples: |-
   example shows all containers that are attached to the `net1` network, using
   the network id as a filter;
 
-  ```bash
+  ```console
   $ docker network inspect --format "{{.ID}}" net1
 
   8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
@@ -402,7 +402,7 @@ examples: |-
 
   The following filter matches all containers that have published port of 80:
 
-  ```bash
+  ```console
   $ docker run -d --publish=80 busybox top
   $ docker run -d --expose=8080 busybox top
 
@@ -419,7 +419,8 @@ examples: |-
   ```
 
   The following filter matches all containers that have exposed TCP port in the range of `8000-8080`:
-  ```bash
+
+  ```console
   $ docker ps --filter expose=8000-8080/tcp
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -427,7 +428,8 @@ examples: |-
   ```
 
   The following filter matches all containers that have exposed UDP port `80`:
-  ```bash
+
+  ```console
   $ docker ps --filter publish=80/udp
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -448,7 +450,8 @@ examples: |-
   | `.CreatedAt`  | Time when the container was created.                                                            |
   | `.RunningFor` | Elapsed time since the container was started.                                                   |
   | `.Ports`      | Exposed ports.                                                                                  |
-  | `.Status`     | Container status.                                                                               |
+  | `.State`      | Container status (for example; "created", "running", "exited").                                 |
+  | `.Status`     | Container status with details about duration and health-status.                                 |
   | `.Size`       | Container disk size.                                                                            |
   | `.Names`      | Container names.                                                                                |
   | `.Labels`     | All labels assigned to the container.                                                           |
@@ -463,7 +466,7 @@ examples: |-
   The following example uses a template without headers and outputs the `ID` and
   `Command` entries separated by a colon (`:`) for all running containers:
 
-  ```bash
+  ```console
   $ docker ps --format "{{.ID}}: {{.Command}}"
 
   a87ecb4f327c: /bin/sh -c #(nop) MA
@@ -474,7 +477,7 @@ examples: |-
 
   To list all running containers with their labels in a table format you can use:
 
-  ```bash
+  ```console
   $ docker ps --format "table {{.ID}}\t{{.Labels}}"
 
   CONTAINER ID        LABELS

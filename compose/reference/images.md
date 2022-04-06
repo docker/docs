@@ -5,8 +5,8 @@ title: docker-compose images
 notoc: true
 ---
 
-```
-Usage: images [options] [SERVICE...]
+```none
+Usage: docker-compose images [options] [SERVICE...]
 
 Options:
     -q, --quiet  Only display IDs

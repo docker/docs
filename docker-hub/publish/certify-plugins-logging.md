@@ -256,9 +256,10 @@ By default, `inspectDockerLoggingPlugin` displays output locally to `stdout` (th
 
 #### To inspect the Docker logging plugin "gforghetti/docker-log-driver-test:latest", and upload the result to Docker Hub (leave out the `-product-id` parameter if you are just testing):
 
+```console
+$ ./inspectDockerLoggingPlugin -product-id=<store-product-id> gforghetti/docker-log-driver-test:latest
 ```
-gforghetti:~:$ ./inspectDockerLoggingPlugin -product-id=<store-product-id> gforghetti/docker-log-driver-test:latest
-```
+
 #### Output:
 
 ```
@@ -360,8 +361,8 @@ gforghetti:~/$
 
 #### To inspect the  Docker logging plugin `gforghetti/docker-log-driver-test:latest` with JSON Output:
 
-```
-gforghetti:~:$ ./inspectDockerLoggingPlugin --json gforghetti/docker-log-driver-test:latest | jq
+```console
+$ ./inspectDockerLoggingPlugin --json gforghetti/docker-log-driver-test:latest | jq
 ```
 
 > **Note**: The output was piped to the `jq` command to display it "nicely".
@@ -431,8 +432,8 @@ gforghetti:~:$ ./inspectDockerLoggingPlugin --json gforghetti/docker-log-driver-
 
 #### To inspect the  Docker logging plugin `gforghetti/docker-log-driver-test:latest` with HTML output:
 
-```
-gforghetti:~:$ ./inspectDockerLoggingPlugin --html gforghetti/docker-log-driver-test:latest
+```console
+$ ./inspectDockerLoggingPlugin --html gforghetti/docker-log-driver-test:latest
 ```
 
 #### Output:
@@ -442,7 +443,6 @@ Note: The majority of the stdout message output has been intentionally omitted b
 ```
 The inspection of the Docker logging plugin cpuguy83/docker-logdriver-test:latest has completed.
 An HTML report has been generated in the file cpuguy83-docker-logdriver-test-latest_inspection_report.html
-gforghetti:~/$
 ```
 
 ![HTML Output Image](images/gforghetti-log-driver-latest_inspection_report.html.png)
@@ -520,10 +520,11 @@ The **curl** command can be used to test and use the **http_api_endpoint** HTTP 
 
 ##### Script to run a container to test the Logging Plugin
 
+```console
+$ cat test_new_plugin.sh
 ```
-# cat test_new_plugin.sh
-```
-```
+
+```bash
 #!/usr/bin/env bash
 
 #######################################################################################################################################
@@ -571,10 +572,11 @@ exit $?
 
 ##### Script to retrieve the logging data from the http_api_endpoint HTTP Server
 
+```console
+$ cat get_plugin_logs.sh
 ```
-# cat get_plugin_logs.sh
-```
-```
+
+```bash
 #!/usr/bin/env sh
 
 #######################################################################################################################################
@@ -589,6 +591,6 @@ curl -s -X GET http://127.0.0.1:80
 
 ##### To test the Docker logging plugin
 
-```
-./inspectDockerLoggingPlugin --verbose --html --test-script ./test_plugin.sh --get-logs-script ./get_plugin_logs.sh myNamespace/docker-logging-driver:1.0.2
+```console
+$ ./inspectDockerLoggingPlugin --verbose --html --test-script ./test_plugin.sh --get-logs-script ./get_plugin_logs.sh myNamespace/docker-logging-driver:1.0.2
 ```

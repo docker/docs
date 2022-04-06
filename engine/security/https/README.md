@@ -2,7 +2,7 @@
 published: false
 ---
 
-This is an initial attempt to make it easier to test the examples in the https.md
+This is an initial attempt to make it easier to test the TLS (HTTPS) examples in the protect-access.md
 doc.
 
 At this point, it is a manual thing, and I've been running it in boot2docker.

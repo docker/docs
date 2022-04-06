@@ -11,7 +11,7 @@ The sandbox allows you to configure and try trust operations locally without
 impacting your production images.
 
 Before working through this sandbox, you should have read through the
-[trust overview](content_trust.md).
+[trust overview](index.md).
 
 ### Prerequisites
 
@@ -222,7 +222,7 @@ data. Then, you try and pull it.
 
 3.  List the layers for the `test/trusttest` image you pushed:
 
-    ```bash
+    ```console
     root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
     total 12
     drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4

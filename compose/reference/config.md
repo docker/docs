@@ -7,13 +7,14 @@ redirect_from:
 - /compose/reference/bundle/
 ---
 
-```
-Usage: config [options]
+```none
+Usage: docker-compose config [options]
 
 Options:
     --resolve-image-digests  Pin image tags to digests.
     --no-interpolate         Don't interpolate environment variables.
-    -q, --quiet              Only validate the configuration, don't print anything.
+    -q, --quiet              Only validate the configuration, don't print
+                             anything.
     --services               Print the service names, one per line.
     --volumes                Print the volume names, one per line.
     --hash="*"               Print the service config hash, one per line.

@@ -24,7 +24,7 @@ a filesystem at the operating system (OS) level.
 ## Prerequisites
 
 - `devicemapper` is supported on Docker Engine - Community running on CentOS, Fedora,
-  Ubuntu, or Debian.
+  SLES 15, Ubuntu, Debian, or RHEL.
 - `devicemapper` requires the `lvm2` and `device-mapper-persistent-data` packages
   to be installed.
 - Changing the storage driver makes any containers you have already
@@ -57,7 +57,7 @@ For production systems, see
 
 1. Stop Docker.
 
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 
@@ -71,20 +71,20 @@ For production systems, see
     ```
 
     See all storage options for each storage driver in the
-    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 
     Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
 3.  Start Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
 4.  Verify that the daemon is using the `devicemapper` storage driver. Use the
     `docker info` command and look for `Storage Driver`.
 
-    ```bash
+    ```console
     $ docker info
 
       Containers: 0
@@ -114,7 +114,7 @@ For production systems, see
       Data loop file: /var/lib/docker/devicemapper/data
       Metadata loop file: /var/lib/docker/devicemapper/metadata
       Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 
   This host is running in `loop-lvm` mode, which is **not** supported on
@@ -144,12 +144,11 @@ below to configure Docker to use the `devicemapper` storage driver in
 
 #### Allow Docker to configure direct-lvm mode
 
-With Docker `17.06` and higher, Docker can manage the block device for you,
-simplifying configuration of `direct-lvm` mode. **This is appropriate for fresh 
-Docker setups only.** You can only use a single block device. If you need to
-use multiple block devices, [configure direct-lvm mode
-manually](#configure-direct-lvm-mode-manually) instead. The following new
-configuration options have been added:
+Docker can manage the block device for you, simplifying configuration of `direct-lvm`
+mode. **This is appropriate for fresh Docker setups only.** You can only use a
+single block device. If you need to use multiple block devices,
+[configure direct-lvm mode manually](#configure-direct-lvm-mode-manually) instead.
+The following new configuration options are available:
 
 | Option                          | Description                                                                                                                                                                        | Required? | Default | Example                            |
 |:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:--------|:-----------------------------------|
@@ -179,7 +178,7 @@ options in the table above.
 ```
 
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 
 Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
@@ -205,7 +204,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 2.  Stop Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl stop docker
     ```
 
@@ -214,7 +213,7 @@ assumes that the Docker daemon is in the `stopped` state.
     - **RHEL / CentOS**: `device-mapper-persistent-data`, `lvm2`, and all
       dependencies
 
-    - **Ubuntu / Debian**: `thin-provisioning-tools`, `lvm2`, and all
+    - **Ubuntu / Debian / SLES 15**: `thin-provisioning-tools`, `lvm2`, and all
       dependencies
 
 4.  Create a physical volume on your block device from step 1, using the
@@ -223,7 +222,7 @@ assumes that the Docker daemon is in the `stopped` state.
     > **Warning**: The next few steps are destructive, so be sure that you have
     > specified the correct device!
 
-    ```bash
+    ```console
     $ sudo pvcreate /dev/xvdf
 
     Physical volume "/dev/xvdf" successfully created.
@@ -232,7 +231,7 @@ assumes that the Docker daemon is in the `stopped` state.
 5.  Create a `docker` volume group on the same device, using the `vgcreate`
     command.
 
-    ```bash
+    ```console
     $ sudo vgcreate docker /dev/xvdf
 
     Volume group "docker" successfully created
@@ -243,7 +242,7 @@ assumes that the Docker daemon is in the `stopped` state.
     to allow for automatic expanding of the data or metadata if space runs low,
     as a temporary stop-gap. These are the recommended values.
 
-    ```bash
+    ```console
     $ sudo lvcreate --wipesignatures y -n thinpool docker -l 95%VG
 
     Logical volume "thinpool" created.
@@ -256,7 +255,7 @@ assumes that the Docker daemon is in the `stopped` state.
 7.  Convert the volumes to a thin pool and a storage location for metadata for
     the thin pool, using the `lvconvert` command.
 
-    ```bash
+    ```console
     $ sudo lvconvert -y \
     --zero n \
     -c 512K \
@@ -271,7 +270,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 8.  Configure autoextension of thin pools via an `lvm` profile.
 
-    ```bash
+    ```console
     $ sudo vi /etc/lvm/profile/docker-thinpool.profile
     ```
 
@@ -298,7 +297,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 10. Apply the LVM profile, using the `lvchange` command.
 
-    ```bash
+    ```console
     $ sudo lvchange --metadataprofile docker-thinpool docker/thinpool
 
     Logical volume docker/thinpool changed.
@@ -306,7 +305,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 11. Ensure monitoring of the logical volume is enabled.
 
-    ```bash
+    ```console
     $ sudo lvs -o+seg_monitor
 
     LV       VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Monitor
@@ -318,7 +317,7 @@ assumes that the Docker daemon is in the `stopped` state.
     this step, automatic extension of the logical volume will not occur,
     regardless of any settings in the applied profile.
 
-    ```bash
+    ```console
     $ sudo lvchange --monitor y docker/thinpool
     ```
 
@@ -330,7 +329,7 @@ assumes that the Docker daemon is in the `stopped` state.
     exists, move it out of the way so that Docker can use the new LVM pool to
     store the contents of image and containers.
 
-    ```bash
+    ```console
     $ sudo su -
     # mkdir /var/lib/docker.bk
     # mv /var/lib/docker/* /var/lib/docker.bk
@@ -359,19 +358,19 @@ assumes that the Docker daemon is in the `stopped` state.
 
     **systemd**:
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
     **service**:
 
-    ```bash
+    ```console
     $ sudo service docker start
     ```
 
 15. Verify that Docker is using the new configuration using `docker info`.
 
-    ```bash
+    ```console
     $ docker info
 
     Containers: 0
@@ -399,7 +398,7 @@ assumes that the Docker daemon is in the `stopped` state.
      Deferred Deletion Enabled: true
      Deferred Deleted Device Count: 0
      Library Version: 1.02.135-RHEL7 (2016-11-16)
-    <output truncated>
+    <...>
     ```
 
     If Docker is configured correctly, the `Data file` and `Metadata file` is
@@ -408,7 +407,7 @@ assumes that the Docker daemon is in the `stopped` state.
 16. After you have verified that the configuration is correct, you can remove the
     `/var/lib/docker.bk` directory which contains the previous configuration.
 
-    ```bash
+    ```console
     $ sudo rm -rf /var/lib/docker.bk
     ```
 
@@ -423,7 +422,7 @@ tool at the OS level, such as Nagios.
 
 To view the LVM logs, you can use `journalctl`:
 
-```bash
+```console
 $ sudo journalctl -fu dm-event.service
 ```
 
@@ -432,7 +431,7 @@ If you run into repeated problems with thin pool, you can set the storage option
 `/etc/docker/daemon.json`. For instance, setting it to `10` ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
-[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#storage-driver-options){: target="_blank" class="_"}.
+[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#daemon-storage-driver){: target="_blank" rel="noopener" class="_"}.
 
 ### Increase capacity on a running device
 
@@ -465,7 +464,7 @@ If you do not want to use `device_tool`, you can [resize the thin pool manually]
 
 2.  Use the tool. The following example resizes the thin pool to 200GB.
 
-    ```bash
+    ```console
     $ ./device_tool resize 200GB
     ```
 
@@ -481,7 +480,7 @@ it has significant performance and stability drawbacks.
 If you are using `loop-lvm` mode, the output of `docker info` shows file
 paths for `Data loop file` and `Metadata loop file`:
 
-```bash
+```console
 $ docker info |grep 'loop file'
 
  Data loop file: /var/lib/docker/devicemapper/data
@@ -493,7 +492,7 @@ thin pool is 100 GB, and is increased to 200 GB.
 
 1.  List the sizes of the devices.
 
-    ```bash
+    ```console
     $ sudo ls -lh /var/lib/docker/devicemapper/
 
     total 1175492
@@ -505,13 +504,13 @@ thin pool is 100 GB, and is increased to 200 GB.
     which is used to increase **or** decrease the size of a file. Note that
     decreasing the size is a destructive operation.
 
-    ```bash
+    ```console
     $ sudo truncate -s 200G /var/lib/docker/devicemapper/data
     ```
 
 3.  Verify the file size changed.
 
-    ```bash
+    ```console
     $ sudo ls -lh /var/lib/docker/devicemapper/
 
     total 1.2G
@@ -523,7 +522,7 @@ thin pool is 100 GB, and is increased to 200 GB.
     the loopback device in memory, in GB. Reload it, then list the size again.
     After the reload, the size is 200 GB.
 
-    ```bash
+    ```console
     $ echo $[ $(sudo blockdev --getsize64 /dev/loop0) / 1024 / 1024 / 1024 ]
 
     100
@@ -579,7 +578,7 @@ block device and other parameters to suit your situation.
     Use the `pvdisplay` command to find the physical block devices currently in
     use by your thin pool, and the volume group's name.
 
-    ```bash
+    ```console
     $ sudo pvdisplay |grep 'VG Name'
 
     PV Name               /dev/xvdf
@@ -592,7 +591,7 @@ block device and other parameters to suit your situation.
 2.  Extend the volume group, using the `vgextend` command with the `VG Name`
     from the previous step, and the name of your **new** block device.
 
-    ```bash
+    ```console
     $ sudo vgextend docker /dev/xvdg
 
     Physical volume "/dev/xvdg" successfully created.
@@ -603,7 +602,7 @@ block device and other parameters to suit your situation.
     volume right away, without auto-extend. To extend the metadata thinpool
     instead, use `docker/thinpool_tmeta`.
 
-    ```bash
+    ```console
     $ sudo lvextend -l+100%FREE -n docker/thinpool
 
     Size of logical volume docker/thinpool_tdata changed from 95.00 GiB (24319 extents) to 198.00 GiB (50688 extents).
@@ -628,7 +627,7 @@ block device and other parameters to suit your situation.
      Metadata Space Used: 286.7 kB
      Metadata Space Total: 1.07 GB
      Metadata Space Available: 1.069 GB
-    <output truncated>
+    <...>
     ```
 
 ### Activate the `devicemapper` after reboot
@@ -637,8 +636,8 @@ If you reboot the host and find that the `docker` service failed to start,
 look for the error, "Non existing device". You need to re-activate the
 logical volumes with this command:
 
-```bash
-sudo lvchange -ay docker/thinpool
+```console
+$ sudo lvchange -ay docker/thinpool
 ```
 
 ## How the `devicemapper` storage driver works
@@ -649,7 +648,7 @@ sudo lvchange -ay docker/thinpool
 Use the `lsblk` command to see the devices and their pools, from the operating
 system's point of view:
 
-```bash
+```console
 $ sudo lsblk
 
 NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
@@ -664,7 +663,7 @@ xvdf                    202:80   0  100G  0 disk
 
 Use the `mount` command to see the mount-point Docker is using:
 
-```bash
+```console
 $ mount |grep devicemapper
 /dev/xvda1 on /var/lib/docker/devicemapper type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
 ```

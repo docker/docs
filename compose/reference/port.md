@@ -5,8 +5,8 @@ title: docker-compose port
 notoc: true
 ---
 
-```
-Usage: port [options] SERVICE PRIVATE_PORT
+```none
+Usage: docker-compose port [options] SERVICE PRIVATE_PORT
 
 Options:
     --protocol=proto  tcp or udp [default: tcp]

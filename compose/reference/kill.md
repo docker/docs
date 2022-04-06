@@ -5,8 +5,8 @@ title: docker-compose kill
 notoc: true
 ---
 
-```
-Usage: kill [options] [SERVICE...]
+```none
+Usage: docker-compose kill [options] [SERVICE...]
 
 Options:
     -s SIGNAL         SIGNAL to send to the container.

@@ -5,8 +5,8 @@ title: docker-compose pause
 notoc: true
 ---
 
-```
-Usage: pause [SERVICE...]
+```none
+Usage: docker-compose pause [SERVICE...]
 ```
 
 Pauses running containers of a service. They can be unpaused with `docker-compose unpause`.

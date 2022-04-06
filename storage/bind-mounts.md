@@ -9,7 +9,7 @@ redirect_from:
 Bind mounts have been around since the early days of Docker. Bind mounts have
 limited functionality compared to [volumes](volumes.md). When you use a bind
 mount, a file or directory on the _host machine_ is mounted into a container.
-The file or directory is referenced by its full or relative path on the host
+The file or directory is referenced by its absolute path on the host
 machine. By contrast, when you use a volume, a new directory is created within
 Docker's storage directory on the host machine, and Docker manages that
 directory's contents.
@@ -25,11 +25,8 @@ manage bind mounts.
 
 ## Choose the -v or --mount flag
 
-Originally, the `-v` or `--volume` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
+In general, `--mount` is more explicit and verbose. The biggest difference is that
+the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
 > **Tip**: New users should use the `--mount` syntax. Experienced users may
@@ -44,7 +41,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   - The second field is the path where the file or directory is mounted in
     the container.
   - The third field is optional, and is a comma-separated list of options, such
-    as `ro`, `consistent`, `delegated`, `cached`, `z`, and `Z`. These options
+    as `ro`, `z`, and `Z`. These options
     are discussed below.
 
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
@@ -64,9 +61,6 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   - The `bind-propagation` option, if present, changes the
     [bind propagation](#configure-bind-propagation). May be one of `rprivate`,
     `private`, `rshared`, `shared`, `rslave`, `slave`.
-  - The [`consistency`](#configure-mount-consistency-for-macos) option, if
-    present, may be one of `consistent`, `delegated`, or `cached`. This setting
-    only applies to Docker Desktop for Mac, and is ignored on all other platforms.
   - The `--mount` flag does not support `z` or `Z` options for modifying
     selinux labels.
 
@@ -97,6 +91,7 @@ on your development host. Use the following command to bind-mount the `target/`
 directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
+If you're on Windows, see also [Path conversions on Windows](../desktop/windows/troubleshoot.md#path-conversion-on-windows).
 
 The `--mount` and `-v` examples below produce the same result. You
 can't run them both unless you remove the `devtest` container after running the
@@ -109,7 +104,7 @@ first one.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -120,7 +115,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -153,7 +148,7 @@ set to `rprivate`.
 
 Stop the container:
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -180,7 +175,7 @@ The `--mount` and `-v` examples have the same end result.
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name broken-container \
@@ -194,7 +189,7 @@ starting container process caused "exec: \"nginx\": executable file not found in
 </div><!--mount-->
 <div id="v-empty-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name broken-container \
@@ -210,7 +205,7 @@ starting container process caused "exec: \"nginx\": executable file not found in
 
 The container is created but does not start. Remove it:
 
-```bash
+```console
 $ docker container rm broken-container
 ```
 
@@ -234,7 +229,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -245,7 +240,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-readonly" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -274,7 +269,7 @@ correctly. Look for the `Mounts` section:
 
 Stop the container:
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -307,7 +302,7 @@ Before you can set bind propagation on a mount point, the host filesystem needs
 to already support bind propagation.
 
 For more information about bind propagation, see the
-[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" class="_"}.
+[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" rel="noopener" class="_"}.
 
 The following example mounts the `target/` directory into the container twice,
 and the second mount sets both the `ro` option and the `rslave` bind propagation
@@ -322,7 +317,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-propagation" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -334,7 +329,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-propagation" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -373,7 +368,7 @@ the bind mount's contents:
 
 It is not possible to modify the selinux label using the `--mount` flag.
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -381,60 +376,27 @@ $ docker run -d \
   nginx:latest
 ```
 
-## Configure mount consistency for macOS
 
-Docker Desktop for Mac uses `osxfs` to propagate directories and files shared from macOS
-to the Linux VM. This propagation makes these directories and files available to
-Docker containers running on Docker Desktop for Mac.
+## Use a bind mount with compose
 
-By default, these shares are fully-consistent, meaning that every time a write
-happens on the macOS host or through a mount in a container, the changes are
-flushed to disk so that all participants in the share have a fully-consistent
-view. Full consistency can severely impact performance in some cases. Docker
-17.05 and higher introduce options to tune the consistency setting on a
-per-mount, per-container basis. The following options are available:
+A single Docker Compose service with a bind mount looks like this:
 
-- `consistent` or `default`: The default setting with full consistency, as
-  described above.
-
-- `delegated`: The container runtime's view of the mount is authoritative. There
-  may be delays before updates made in a container are visible on the host.
-
-- `cached`: The macOS host's view of the mount is authoritative. There may be
-  delays before updates made on the host are visible within a container.
-
-These options are completely ignored on all host operating systems except macOS.
-
-The `--mount` and `-v` examples have the same result.
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-consistency"><code>--mount</code></a></li>
-  <li><a data-toggle="tab" data-group="volume" data-target="#v-consistency"><code>-v</code></a></li>
-</ul>
-<div class="tab-content">
-<div id="mount-consistency" class="tab-pane fade in active" markdown="1">
-
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  --mount type=bind,source="$(pwd)"/target,destination=/app,consistency=cached \
-  nginx:latest
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  frontend:
+    image: node:lts
+    volumes:
+      - type: bind
+        source: ./static
+        target: /opt/app/staticvolumes:
+  myapp:
 ```
 
-</div><!--mount-->
-<div id="v-consistency" class="tab-pane fade" markdown="1">
-
-```bash
-$ docker run -d \
-  -it \
-  --name devtest \
-  -v "$(pwd)"/target:/app:cached \
-  nginx:latest
-```
-
-</div><!--volume-->
-</div><!--tab-content-->
+For more information about using volumes of the `bind` type with Compose, see
+[Compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
+and
+[Compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
 
 ## Next steps
 

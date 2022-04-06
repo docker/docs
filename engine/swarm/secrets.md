@@ -9,12 +9,11 @@ keywords: swarm, secrets, credentials, sensitive strings, sensitive data, securi
 In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
 password, SSH private key, SSL certificate, or another piece of data that should
 not be transmitted over a network or stored unencrypted in a Dockerfile or in
-your application's source code. In Docker 1.13 and higher, you can use Docker
-_secrets_ to centrally manage this data and securely transmit it to only those
-containers that need access to it. Secrets are encrypted during transit and at
-rest in a Docker swarm. A given secret is only accessible to those services
-which have been granted explicit access to it, and only while those service
-tasks are running.
+your application's source code. You can use Docker _secrets_ to centrally manage
+this data and securely transmit it to only those containers that need access to
+it. Secrets are encrypted during transit and at rest in a Docker swarm. A given
+secret is only accessible to those services which have been granted explicit
+access to it, and only while those service tasks are running.
 
 You can use secrets to manage any sensitive data which a container needs at
 runtime but you don't want to store in the image or in source control, such as:
@@ -39,14 +38,14 @@ containers only need to know the name of the secret to function in all
 three environments.
 
 You can also use secrets to manage non-sensitive data, such as configuration
-files. However, Docker 17.06 and higher support the use of [configs](configs.md)
+files. However, Docker supports the use of [configs](configs.md)
 for storing non-sensitive data. Configs are mounted into the container's
 filesystem directly, without the use of a RAM disk.
 
 ### Windows support
 
-Docker 17.06 and higher include support for secrets on Windows containers.
-Where there are differences in the implementations, they are called out in the
+Docker includes support for secrets on Windows containers. Where there are
+differences in the implementations, they are called out in the
 examples below. Keep the following notable differences in mind:
 
 - Microsoft Windows has no built-in driver for managing RAM disks, so within
@@ -81,20 +80,12 @@ encrypted. The entire Raft log is replicated across the other managers, ensuring
 the same high availability guarantees for secrets as for the rest of the swarm
 management data.
 
-> **Warning**: Raft data is encrypted in Docker 1.13 and higher. If any of your
-> Swarm managers run an earlier version, and one of those managers becomes the
-> manager of the swarm, the secrets are stored unencrypted in that node's
-> Raft logs. Before adding any secrets, update all of your manager nodes to
-> Docker 1.13 or higher to prevent secrets from being written to plain-text Raft
-> logs.
-{:.warning}
-
 When you grant a newly-created or running service access to a secret, the
 decrypted secret is mounted into the container in an in-memory filesystem. The
 location of the mount point within the container defaults to
 `/run/secrets/<secret_name>` in Linux containers, or
-`C:\ProgramData\Docker\secrets` in Windows containers. You can specify a custom
-location in Docker 17.06 and higher.
+`C:\ProgramData\Docker\secrets` in Windows containers. You can also specify a
+custom location.
 
 You can update a service to grant it access to additional secrets or revoke its
 access to a given secret at any time.
@@ -121,14 +112,14 @@ the mount point of the secret within a given container.
 ## Read more about `docker secret` commands
 
 Use these links to read about specific commands, or continue to the
-[example about using secrets with a service](secrets.md#example-use-secrets-with-a-service).
+[example about using secrets with a service](secrets.md#simple-example-get-started-with-secrets).
 
 - [`docker secret create`](../reference/commandline/secret_create.md)
 - [`docker secret inspect`](../reference/commandline/secret_inspect.md)
 - [`docker secret ls`](../reference/commandline/secret_ls.md)
 - [`docker secret rm`](../reference/commandline/secret_rm.md)
 - [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
+- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#add-or-remove-secrets) flags for `docker service update`
 
 ## Examples
 
@@ -140,14 +131,13 @@ a similar way, see
 
 > **Note**: These examples use a single-Engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
-> support secrets in Docker 17.06 and higher.
-> See [Windows support](#windows-support).
+> support secrets. See [Windows support](#windows-support).
 
 ### Defining and using secrets in compose files
 
 Both the `docker-compose` and `docker stack` commands support defining secrets
 in a compose file. See
-[the Compose file reference](../../compose/compose-file/index.md#secrets) for details.
+[the Compose file reference](../../compose/compose-file/compose-file-v3.md#secrets) for details.
 
 ### Simple example: Get started with secrets
 
@@ -159,7 +149,7 @@ real-world example, continue to
     input because the last argument, which represents the file to read the
     secret from, is set to `-`.
 
-    ```bash
+    ```console
     $ printf "This is a secret" | docker secret create my_secret_data -
     ```
 
@@ -167,14 +157,14 @@ real-world example, continue to
     the container can access the secret at `/run/secrets/<secret_name>`, but
     you can customize the file name on the container using the `target` option.
 
-    ```bash
+    ```console
     $ docker service  create --name redis --secret my_secret_data redis:alpine
     ```
 
 3.  Verify that the task is running without issues using `docker service ps`. If
     everything is working, the output looks similar to this:
 
-    ```bash
+    ```console
     $ docker service ps redis
 
     ID            NAME     IMAGE         NODE              DESIRED STATE  CURRENT STATE          ERROR  PORTS
@@ -184,7 +174,7 @@ real-world example, continue to
     If there were an error, and the task were failing and repeatedly restarting,
     you would see something like this:
 
-    ```bash
+    ```console
     $ docker service ps redis
 
     NAME                      IMAGE         NODE  DESIRED STATE  CURRENT STATE          ERROR                      PORTS
@@ -202,7 +192,7 @@ real-world example, continue to
     how to find the container ID, and the second and third commands use shell
     completion to do this automatically.
 
-    ```bash
+    ```console
     $ docker ps --filter name=redis -q
 
     5cb1c2348a59
@@ -230,8 +220,7 @@ real-world example, continue to
 6.  Try removing the secret. The removal fails because the `redis` service is
     running and has access to the secret.
 
-    ```bash
-
+    ```console
     $ docker secret ls
 
     ID                          NAME                CREATED             UPDATED
@@ -247,7 +236,7 @@ real-world example, continue to
 7.  Remove access to the secret from the running `redis` service by updating the
     service.
 
-    ```bash
+    ```console
     $ docker service update --secret-rm my_secret_data redis
     ```
 
@@ -263,7 +252,7 @@ real-world example, continue to
 
 7.  Stop and remove the service, and remove the secret from Docker.
 
-    ```bash
+    ```console
     $ docker service rm redis
 
     $ docker secret rm my_secret_data
@@ -272,22 +261,22 @@ real-world example, continue to
 ### Simple example: Use secrets in a Windows service
 
 This is a very simple example which shows how to use secrets with a Microsoft
-IIS service running on Docker 17.06 EE on Microsoft Windows Server 2016 or Docker
-Desktop for Mac 17.06 on Microsoft Windows 10. It is a naive example that stores the
-webpage in a secret.
+IIS service running on Docker for Windows running Windows containers on
+Microsoft Windows 10. It is a naive example that stores the webpage in a secret.
 
 This example assumes that you have PowerShell installed.
 
 1.  Save the following into a new file `index.html`.
 
     ```html
-    <html>
+    <html lang="en">
       <head><title>Hello Docker</title></head>
       <body>
         <p>Hello Docker! You have deployed a HTML page.</p>
       </body>
     </html>
     ```
+
 2.  If you have not already done so, initialize or join the swarm.
 
     ```powershell
@@ -311,8 +300,8 @@ This example assumes that you have PowerShell installed.
     ```
 
     > **Note**: There is technically no reason to use secrets for this
-    > example. With Docker 17.06 and higher, [configs](configs.md) are
-    > a better fit. This example is for illustration only.
+    > example; [configs](configs.md) are a better fit. This example is
+    > for illustration only.
 
 5.  Access the IIS service at `http://localhost:8000/`. It should serve
     the HTML content from the first step.
@@ -347,13 +336,13 @@ generate the site key and certificate, name the files `site.key` and
 
 1.  Generate a root key.
 
-    ```bash
+    ```console
     $ openssl genrsa -out "root-ca.key" 4096
     ```
 
 2.  Generate a CSR using the root key.
 
-    ```bash
+    ```console
     $ openssl req \
               -new -key "root-ca.key" \
               -out "root-ca.csr" -sha256 \
@@ -373,7 +362,7 @@ generate the site key and certificate, name the files `site.key` and
 
 4.  Sign the certificate.
 
-    ```bash
+    ```console
     $ openssl x509 -req  -days 3650  -in "root-ca.csr" \
                    -signkey "root-ca.key" -sha256 -out "root-ca.crt" \
                    -extfile "root-ca.cnf" -extensions \
@@ -382,13 +371,13 @@ generate the site key and certificate, name the files `site.key` and
 
 5.  Generate the site key.
 
-    ```bash
+    ```console
     $ openssl genrsa -out "site.key" 4096
     ```
 
 6.  Generate the site certificate and sign it with the site key.
 
-    ```bash
+    ```console
     $ openssl req -new -key "site.key" -out "site.csr" -sha256 \
               -subj '/C=US/ST=CA/L=San Francisco/O=Docker/CN=localhost'
     ```
@@ -410,7 +399,7 @@ generate the site key and certificate, name the files `site.key` and
 
 8.  Sign the site certificate.
 
-    ```bash
+    ```console
     $ openssl x509 -req -days 750 -in "site.csr" -sha256 \
         -CA "root-ca.crt" -CAkey "root-ca.key"  -CAcreateserial \
         -out "site.crt" -extfile "site.cnf" -extensions server
@@ -451,7 +440,7 @@ generate the site key and certificate, name the files `site.key` and
     secret from on the host machine's filesystem. In these examples, the secret
     name and the file name are the same.
 
-    ```bash
+    ```console
     $ docker secret create site.key site.key
 
     $ docker secret create site.crt site.crt
@@ -459,7 +448,7 @@ generate the site key and certificate, name the files `site.key` and
     $ docker secret create site.conf site.conf
     ```
 
-    ```bash
+    ```console
     $ docker secret ls
 
     ID                          NAME                  CREATED             UPDATED
@@ -480,52 +469,50 @@ generate the site key and certificate, name the files `site.key` and
     > This example does not require a custom image. It puts the `site.conf`
     > into place and runs the container all in one step.
 
-    In Docker 17.05 and earlier, secrets are always located within the
-    `/run/secrets/` directory. Docker 17.06 and higher allow you to specify a
-    custom location for a secret within the container. The two examples below
-    illustrate the difference. The older version of this command requires you to
-    create a symbolic link to the true location of the `site.conf` file so that
-    Nginx can read it, but the newer version does not require this. The older
-    example is preserved so that you can see the difference.
+    Secrets are located within the `/run/secrets/` directory in the container
+    by default, which may require extra steps in the container to make the
+    secret available in a different path. The example below creates a symbolic
+    link to the true location of the `site.conf` file so that Nginx can read it:
 
-    - **Docker 17.06 and higher**:
+    ```console
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
+    ```
 
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "exec nginx -g 'daemon off;'"
-      ```
+    Instead of creating symlinks, secrets allow you to specify a custom location
+    using the `target` option. The example below illustrates how the `site.conf`
+    secret is made available at `/etc/nginx/conf.d/site.conf` inside the container
+    without the use of symbolic links:
 
-    - **Docker 17.05 and earlier**:
+    ```console
+    $ docker service create \
+         --name nginx \
+         --secret site.key \
+         --secret site.crt \
+         --secret source=site.conf,target=/etc/nginx/conf.d/site.conf \
+         --publish published=3000,target=443 \
+         nginx:latest \
+         sh -c "exec nginx -g 'daemon off;'"
+    ```
 
-      ```bash
-      $ docker service create \
-           --name nginx \
-           --secret site.key \
-           --secret site.crt \
-           --secret site.conf \
-           --publish published=3000,target=443 \
-           nginx:latest \
-           sh -c "ln -s /run/secrets/site.conf /etc/nginx/conf.d/site.conf && exec nginx -g 'daemon off;'"
-      ```
-
-    The first example shows both the short and long syntax for secrets, and the
-    second example shows only the short syntax. The short syntax creates files in
-    `/run/secrets/` with the same name as the secret. Within the running
-    containers, the following three files now exist:
+    The `site.key` and `site.crt` secrets use the short-hand syntax, without a 
+    custom `target` location set. The short syntax mounts the secrets in `/run/secrets/
+    with the same name as the secret. Within the running containers, the following
+    three files now exist:
 
     - `/run/secrets/site.key`
     - `/run/secrets/site.crt`
-    - `/etc/nginx/conf.d/site.conf` (or `/run/secrets/site.conf` if you used the second example)
+    - `/etc/nginx/conf.d/site.conf`
 
 5.  Verify that the Nginx service is running.
 
-    ```bash
+    ```console
     $ docker service ls
 
     ID            NAME   MODE        REPLICAS  IMAGE
@@ -540,7 +527,7 @@ generate the site key and certificate, name the files `site.key` and
 6.  Verify that the service is operational: you can reach the Nginx
     server, and that the correct TLS certificate is being used.
 
-    ```bash
+    ```console
     $ curl --cacert root-ca.crt https://localhost:3000
 
     <!DOCTYPE html>
@@ -561,16 +548,16 @@ generate the site key and certificate, name the files `site.key` and
     working. Further configuration is required.</p>
 
     <p>For online documentation and support. refer to
-    <a href="http://nginx.org/">nginx.org</a>.<br/>
+    <a href="https://nginx.org">nginx.org</a>.<br/>
     Commercial support is available at
-    <a href="http://nginx.com/">nginx.com</a>.</p>
+    <a href="https://www.nginx.com">nginx.com</a>.</p>
 
     <p><em>Thank you for using nginx.</em></p>
     </body>
     </html>
     ```
 
-    ```bash
+    ```console
     $ openssl s_client -connect localhost:3000 -CAfile root-ca.crt
 
     CONNECTED(00000003)
@@ -614,7 +601,7 @@ generate the site key and certificate, name the files `site.key` and
 7.  To clean up after running this example, remove the `nginx` service and the
     stored secrets.
 
-    ```bash
+    ```console
     $ docker service rm nginx
 
     $ docker secret rm site.crt site.key site.conf
@@ -660,7 +647,7 @@ line.
     The last argument is set to `-`, which indicates that the input is read from
     standard input.
 
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password -
 
     l1vinzevzhj4goakjap5ya409
@@ -673,13 +660,13 @@ line.
     shared with the WordPress service created later. It's only needed to
     bootstrap the `mysql` service.
 
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_root_password -
     ```
 
     List the secrets managed by Docker using `docker secret ls`:
 
-    ```bash
+    ```console
     $ docker secret ls
 
     ID                          NAME                  CREATED             UPDATED
@@ -693,7 +680,7 @@ line.
     between the MySQL and WordPress services. There is no need to expose the
     MySQL service to any external host or container.
 
-    ```bash
+    ```console
     $ docker network create -d overlay mysql_private
     ```
 
@@ -724,7 +711,7 @@ line.
       user cannot create or drop databases or change the MySQL
       configuration.
 
-      ```bash
+      ```console
       $ docker service create \
            --name mysql \
            --replicas 1 \
@@ -741,7 +728,7 @@ line.
 
 4.  Verify that the `mysql` container is running using the `docker service ls` command.
 
-    ```bash
+    ```console
     $ docker service ls
 
     ID            NAME   MODE        REPLICAS  IMAGE
@@ -781,7 +768,7 @@ line.
     - Stores its data, such as themes and plugins, in a volume called `wpdata`
       so these files  persist when the service restarts.
 
-    ```bash
+    ```console
     $ docker service create \
          --name wordpress \
          --replicas 1 \
@@ -799,7 +786,7 @@ line.
 6.  Verify the service is running using `docker service ls` and
     `docker service ps` commands.
 
-    ```bash
+    ```console
     $ docker service ls
 
     ID            NAME       MODE        REPLICAS  IMAGE
@@ -807,7 +794,7 @@ line.
     nzt5xzae4n62  wordpress  replicated  1/1       wordpress:latest
     ```
 
-    ```bash
+    ```console
     $ docker service ps wordpress
 
     ID            NAME         IMAGE             NODE  DESIRED STATE  CURRENT STATE           ERROR  PORTS
@@ -849,7 +836,7 @@ use it, then remove the old secret.
 
 1.  Create the new password and store it as a secret named `mysql_password_v2`.
 
-    ```bash
+    ```console
     $ openssl rand -base64 20 | docker secret create mysql_password_v2 -
     ```
 
@@ -857,7 +844,7 @@ use it, then remove the old secret.
     Remember that you cannot update or rename a secret, but you can revoke a
     secret and grant access to it using a new target filename.
 
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password mysql
 
@@ -887,7 +874,7 @@ use it, then remove the old secret.
 
     First, find the ID of the `mysql` container task.
 
-    ```bash
+    ```console
     $ docker ps --filter name=mysql -q
 
     c7705cf6176f
@@ -896,24 +883,24 @@ use it, then remove the old secret.
     Substitute the ID in the command below, or use the second variant which
     uses shell expansion to do it all in a single step.
 
-    ```bash
+    ```console
     $ docker container exec <CONTAINER_ID> \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
     **or**:
 
-    ```bash
+    ```console
     $ docker container exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
 4.  Update the `wordpress` service to use the new password, keeping the target
-    path at `/run/secrets/wp_db_secret` and keeping the file permissions at
+    path at `/run/secrets/wp_db_password` and keeping the file permissions at
     `0400`.  This triggers a rolling restart of the WordPress service and
     the new secret is used.
 
-    ```bash
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          --secret-add source=mysql_password_v2,target=wp_db_password,mode=0400 \
@@ -930,8 +917,7 @@ use it, then remove the old secret.
 6.  Revoke access to the old secret from the MySQL service and
     remove the old secret from Docker.
 
-    ```bash
-
+    ```console
     $ docker service update \
          --secret-rm mysql_password \
          mysql
@@ -945,7 +931,7 @@ use it, then remove the old secret.
     WordPress service, the MySQL container, the `mydata` and `wpdata` volumes,
     and the Docker secrets.
 
-    ```bash
+    ```console
     $ docker service rm wordpress mysql
 
     $ docker volume rm mydata wpdata
@@ -961,7 +947,7 @@ adapting your image to take advantage of Docker secrets. One way to do this is
 to ensure that each parameter you pass to the image when creating the container
 can also be read from a file.
 
-Many of the official images in the
+Many of the Docker Official Images in the
 [Docker library](https://github.com/docker-library/), such as the
 [wordpress](https://github.com/docker-library/wordpress/)
 image used in the above examples, have been updated in this way.
@@ -974,14 +960,16 @@ their values from a file (`WORDPRESS_DB_PASSWORD_FILE`). This strategy ensures
 that backward compatibility is preserved, while allowing your container to read
 the information from a Docker-managed secret instead of being passed directly.
 
->**Note**: Docker secrets do not set environment variables directly. This was a
-conscious decision, because environment variables can unintentionally be leaked
-between containers (for instance, if you use `--link`).
+> **Note**
+>
+> Docker secrets do not set environment variables directly. This was a
+> conscious decision, because environment variables can unintentionally be leaked
+> between containers (for instance, if you use `--link`).
 
 ## Use Secrets in Compose
 
 ```yaml
-version: '3.1'
+version: "{{ site.compose_file_v3 }}"
 
 services:
    db:
@@ -1039,5 +1027,4 @@ Each service uses environment variables to specify where the service should look
 for that secret data.
 
 More information on short and long syntax for secrets can be found at
-[Compose file version 3 reference](../../compose/compose-file/index.md#secrets).
-
+[Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).

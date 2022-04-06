@@ -18,7 +18,7 @@ options:
   value_type: bool
   default_value: "false"
   description: List stacks from all Kubernetes namespaces
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -35,7 +35,7 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: Kubernetes namespaces to use
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -44,7 +44,7 @@ inherited_options:
 - option: kubeconfig
   value_type: string
   description: Kubernetes config file
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -52,7 +52,7 @@ inherited_options:
 - option: orchestrator
   value_type: string
   description: Orchestrator to use (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -60,7 +60,7 @@ inherited_options:
 examples: |-
   The following command shows all stacks and some additional information:
 
-  ```bash
+  ```console
   $ docker stack ls
 
   ID                 SERVICES            ORCHESTRATOR
@@ -75,7 +75,7 @@ examples: |-
   Valid placeholders for the Go template are listed below:
 
   | Placeholder     | Description        |
-  | --------------- | ------------------ |
+  |-----------------|--------------------|
   | `.Name`         | Stack name         |
   | `.Services`     | Number of services |
   | `.Orchestrator` | Orchestrator name  |
@@ -88,7 +88,7 @@ examples: |-
   The following example uses a template without headers and outputs the
   `Name` and `Services` entries separated by a colon (`:`) for all stacks:
 
-  ```bash
+  ```console
   $ docker stack ls --format "{{.Name}}: {{.Services}}"
   web-server: 1
   web-cache: 4

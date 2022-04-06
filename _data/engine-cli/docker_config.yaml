@@ -1,6 +1,6 @@
 command: docker config
 short: Manage Docker configs
-long: Manage Docker configs
+long: Manage configs.
 usage: docker config
 pname: docker
 plink: docker.yaml

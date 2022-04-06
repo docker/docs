@@ -11,8 +11,8 @@ notoc: true
   the `scale` command, as it incorporates the behaviour of the `up` command.
   {: .warning }
 
-```
-Usage: scale [options] [SERVICE=NUM...]
+```none
+Usage: docker-compose scale [options] [SERVICE=NUM...]
 
 Options:
   -t, --timeout TIMEOUT      Specify a shutdown timeout in seconds.
@@ -26,7 +26,7 @@ Numbers are specified as arguments in the form `service=num`. For example:
     docker-compose scale web=2 worker=3
 
 >**Tip**: Alternatively, in
-[Compose file version 3.x](../compose-file/index.md), you can specify
-[replicas](../compose-file/index.md#replicas)
-under the [deploy](../compose-file/index.md#deploy) key as part of a
+[Compose file version 3.x](../compose-file/compose-file-v3.md), you can specify
+[replicas](../compose-file/compose-file-v3.md#replicas)
+under the [deploy](../compose-file/compose-file-v3.md#deploy) key as part of a
 service configuration for [Swarm mode](/engine/swarm/). The `deploy` key and its sub-options (including `replicas`) only works with the `docker stack deploy` command, not `docker-compose up` or `docker-compose run`.
