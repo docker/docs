@@ -12,7 +12,7 @@ Docker Extensions enable you to use third-party tools within Docker Desktop to e
 >
 >The Docker Extensions feature is currently offered as a Preview. We recommend that you do not use this in production environments.
 
-SCREENSHOT
+![extenstions](images/extensions-image.PNG){:width="750px"}
 
 ## Prerequisites
 
@@ -30,26 +30,26 @@ To add Docker Extensions:
 2. From the Dashboard, select **Add extensions** in the menu bar. 
 The Extensions Marketplace opens. 
 2. Browse the available extensions.
-3. Click **Install**.
+3. Click **Install**.<br>
 From here, you can click **Open** to access the extension or install additional extensions. The extension also appears in the menu bar.
 
 ## Enable or disable extensions not available in the Marketplace
 
  Docker Extensions are switched on by default. To change your settings:
 
-1. From the  Docker menu select  **Preferences**.
-2. Navigate to the **Extensions** tab.
-3. Next to **Enable Docker Extensions**, select the checkbox to to set your desired state.
-4. Click **Apply & Restart**.
+1. Navigate to  **Settings**.
+2. Select the **Extensions** tab.
+3. Next to **Enable Docker Extensions**, select or deselect the checkbox to to set your desired state.
+4. In the bottom-right corner, click **Apply & Restart**.
 
 ## Enable or Disable extensions not available in the Marketplace
 
 You can install Docker Extensions through the Marketplace or through the Extensions SDK tools. You can choose to only allow published extensions (that have been published in the Extensions Marketplace).
 
-1. From the Docker menu select **Preferences**.
-2. Navigate to the Extensions tab.
-3. Next to **Allow only extensions distributed through the Docker Marketplace**, select the checkbox to set your desired state.
-4. Click **Apply & Restart**.
+1. Navigate to **Settings**.
+2. Select the Extensions tab.
+3. Next to **Allow only extensions distributed through the Docker Marketplace**, select or deselect the checkbox to set your desired state.
+4. In the bottom-right corner, click **Apply & Restart**.
 
 ## Update a Docker Extension
 You can update Docker Extensions outside of Docker Desktop releases. To update an extension to the latest version:
