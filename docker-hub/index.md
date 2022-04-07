@@ -130,7 +130,7 @@ Docker Hub.
 
 1. Download and install [Docker Desktop](../desktop/#download-and-install). If on Linux, download [Docker Engine](../engine/install/).
 
-2. Sign into the Docker Desktop application using the Docker ID you created in Step 1.
+2. Sign in to the Docker Desktop application using the Docker ID you created in Step 1.
 
 ### Step 4: Build and push a container image to Docker Hub from your computer
 
