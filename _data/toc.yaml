@@ -1188,6 +1188,8 @@ manuals:
       title: Dashboard
     - path: /desktop/dev-environments/
       title: Dev Environments (Preview)
+    - path: /desktop/extensions/
+      title: Extensions (Preview)
     - path: /desktop/multi-arch/
       title: Multi-arch support
     - path: /desktop/kubernetes/
