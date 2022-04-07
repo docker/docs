@@ -1271,7 +1271,7 @@ manuals:
   - path: /engine/scan/
     title: Docker Scan
   - path: /engine/sbom/
-    title: Docker SBOM
+    title: Docker SBOM (Experimental)
 
 - sectiontitle: Docker Compose
   section:

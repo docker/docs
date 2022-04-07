@@ -1,22 +1,25 @@
 ---
-title: Viewing the SBOM for Docker images
+title: Generate the SBOM for Docker images
 description: Viewing the Software Bill of Materials (SBOM) for Docker images
-keywords: Docker, sbon, Anchore, images, Syft, security
+keywords: Docker, sbom, Anchore, images, Syft, security
 toc_min: 1
 toc_max: 2
 ---
 
-A Software Bill Of Materials (SBOM) is analogous to a packing list for a shipment; it’s all the components that make up the software, or were used to build it. For container images this includes the operating system packages that are installed (e.g.: ca-certificates) along with language specific packages that the software depends on (e.g.: log4j). The SBOM could include only some of this information or even more details, like the versions of components and where they came from.
+A Software Bill Of Materials (SBOM) is analogous to a packing list for a shipment; it’s all the components that make up the software, or were used to build it. For container images this includes the operating system packages that are installed (e.g., ca-certificates) along with language-specific packages that the software depends on (e.g., log4j). An SBOM can include only some of this information or even more details, like the versions of components and where they came from.
 
-> :warning: *Note:* This command is considered _experimental_ and may change or be removed in the future.
+> **Warning**
+>
+> The `docker sbom` command is currently experimental. This may change or be removed from future releases.
+{: .warning }
 > Please leave feedback and report issues on [its repository](https://github.com/docker/sbom-cli-plugin).
 
-The experimental `docker sbom` command allows you to view the SBOM of a container image. Today, it does this today by scanning the layers of the image using the [Syft project](https://github.com/anchore/syft) but in future it may read the SBOM from the image itself or elsewhere.
+The experimental `docker sbom` command allows you to generate the SBOM of a container image. Today, it does this by scanning the layers of the image using the [Syft project](https://github.com/anchore/syft) but in future it may read the SBOM from the image itself or elsewhere.
 
 
 ## Simple use
 
-To output a tabulated SBOM for an image simply run `docker sbom <image>:<tag>`:
+To output a tabulated SBOM for an image,  use `docker sbom <image>:<tag>`:
 
 ```console
 $ docker sbom neo4j:4.4.5
@@ -35,11 +38,11 @@ log4j-core                2.17.1                         java-archive
 ...
 ```
 
-Note that the output includes not only system packages but also software libraries used by applications in the container image.
+The output includes both system packages and software libraries used by applications in the container image.
 
 ## Output formatting and saving outputs
 
-You can output the SBOM in standard formats like [SPDX](https://spdx.dev) and [CycloneDX](https://cyclonedx.org) along with the Syft and GitHub formats using the `--format` option.
+You can view the SBOM output in standard formats like [SPDX](https://spdx.dev){: target="_blank" rel="noopener" class="_"} and [CycloneDX](https://cyclonedx.org){: target="_blank" rel="noopener" class="_"} along with the Syft and GitHub formats using the `--format` option.
 
 ```console
 $ docker sbom --format spdx-json alpine:3.15
@@ -70,7 +73,7 @@ $ docker sbom --format spdx-json alpine:3.15
 }
 ```
 
-You will notice that these outputs are more verbose and contain more information than the default tabulated output.
+These outputs are more verbose and contain more information than the default tabulated output.
 
 By default, the command outputs the SBOM to stdout. You can save the output to a file by specifying one with the `--output` flag.
 
