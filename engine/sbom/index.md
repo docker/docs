@@ -90,3 +90,8 @@ $ cat sbom.json
  "spdxVersion": "SPDX-2.2",
 ...
 }
+
+## Feedback
+
+Thanks for trying the Docker SBOM CLI plugin. We’d love to hear from you. You can provide feedback and report any bugs through the Issues tracker in the [docker/[sbom-cli-plugin](https://github.com/docker/sbom-cli-plugin){: target="_blank" rel="noopener" class="_"} GitHub repository.
+
