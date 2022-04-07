@@ -90,6 +90,7 @@ $ cat sbom.json
  "spdxVersion": "SPDX-2.2",
 ...
 }
+```
 
 ## Feedback
 
