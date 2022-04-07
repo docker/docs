@@ -24,7 +24,7 @@ Docker Extensions are available as part of Docker Desktop <insert release number
 
 ## Add a Docker Extension
 
-To Docker Extensions:
+To add Docker Extensions:
 
 1. Open Docker Desktop.
 2. From the Dashboard, select **Add extensions** in the menu bar. 
@@ -62,7 +62,8 @@ If an extension has a new version available, an **Update** button is visible.
 ## Uninstall a Docker Extension
  You can uninstall an extension at any time. 
  
- > **Note**  Any data used by the extension that is stored in a volume must be manually deleted. 
+ > **Note**  
+ >Any data used by the extension that is stored in a volume must be manually deleted. 
 
 1. From the menu bar, select the ellipsis to the right of **Extensions**.
 2. Click **Manage Extensions**.
