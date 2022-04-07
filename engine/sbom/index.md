@@ -6,13 +6,12 @@ toc_min: 1
 toc_max: 2
 ---
 
-A Software Bill Of Materials (SBOM) is analogous to a packing list for a shipment; it’s all the components that make up the software, or were used to build it. For container images this includes the operating system packages that are installed (e.g., ca-certificates) along with language-specific packages that the software depends on (e.g., log4j). An SBOM can include only some of this information or even more details, like the versions of components and where they came from.
+A Software Bill Of Materials (SBOM) is analogous to a packing list for a shipment. It lists all the components that make up the software, or were used to build it. For container images, this includes the operating system packages that are installed (for example, ca-certificates) along with language-specific packages that the software depends on (for example, Log4j). The SBOM could include a subset of this information or even more details, like the versions of components and their source.
 
 > **Warning**
 >
 > The `docker sbom` command is currently experimental. This may change or be removed from future releases.
 {: .warning }
-> Please leave feedback and report issues on [its repository](https://github.com/docker/sbom-cli-plugin).
 
 The experimental `docker sbom` command allows you to generate the SBOM of a container image. Today, it does this by scanning the layers of the image using the [Syft project](https://github.com/anchore/syft) but in future it may read the SBOM from the image itself or elsewhere.
 
@@ -91,4 +90,3 @@ $ cat sbom.json
  "spdxVersion": "SPDX-2.2",
 ...
 }
-```
