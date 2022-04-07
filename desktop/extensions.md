@@ -63,6 +63,7 @@ If an extension has a new version available, an **Update** button is visible.
  You can uninstall an extension at any time. 
  
  > **Note**  
+ >
  >Any data used by the extension that is stored in a volume must be manually deleted. 
 
 1. From the menu bar, select the ellipsis to the right of **Extensions**.
