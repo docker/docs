@@ -16,7 +16,7 @@ Registry Access Management is a feature available to organizations with a Docker
 To configure Registry Access Management permissions, perform the following steps:
 
 1. Sign into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner.
-2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Org Permissions**.
+2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Registry Access**.
 3. Enable Registry Access Management to set the permissions for your registry.
 
      > **Note**

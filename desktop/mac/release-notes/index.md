@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.6.1
-2022-03-22
+## Docker Desktop 4.7.0
+2022-04-07
 
 > Download Docker Desktop
 >
@@ -32,6 +32,45 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### Security
+
+- Update Docker Engine to v20.10.14 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769){: target="_blank" rel="noopener" class="_"}
+- Update containerd to v1.5.11 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
+
+### New
+
+- IT Administrators can now install Docker Desktop remotely using the command line. For more information, see [Install Docker Desktop using the command line](../install.md#install-from-the-command-line).
+- Add  the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../../../engine/sbom/index.md).
+- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"}  for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
+
+### Upgrades
+
+- [Docker Engine v20.10.14](https://docs.docker.com/engine/release-notes/#201014)
+- [Compose v2.4.1](https://github.com/docker/compose/releases/tag/v2.4.1)
+- [Buildx 0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2)
+- [containerd v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11)
+- [Go 1.18](https://golang.org/doc/go1.18)
+
+### Bug fixes and minor changes
+ - Fixed an issue that sometimes caused Docker Desktop to display a blank white screen. Fixes [docker/for-mac#6134](https://github.com/docker/for-mac/issues/6134).
+ - Fixed a bug where the Registry Access Management policy was never refreshed after a failure.
+ - Fixed an issue that caused Docker Desktop to become unresponsive during startup when osxfs is used for file sharing.
+ - Fixed a problem where gettimeofday() performance drops after waking from sleep when using Hyperkit. Fixes [docker/for-mac#3455](https://github.com/docker/for-mac/issues/3455).
+ - Logs and terminals in the UI now respect your OS theme in light and dark mode.
+ - Easily clean up many volumes at once via multi-select checkboxes.
+ - Improved login feedback.
+
+### Deprecation
+- Deprecate macOS 10.14. For macOS system requirements, see [Docker Desktop for Mac system requirements](../install.md#system-requirements).
+
+## Docker Desktop 4.6.1
+2022-03-22
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/76265/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/76265/Docker.dmg)
 
 ### Upgrades
 
