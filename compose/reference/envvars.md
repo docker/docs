@@ -17,7 +17,7 @@ Docker command-line client. If you're using `docker-machine`, then the `eval "$(
 Sets the project name. This value is prepended along with the service name to
 the container on start up. For example, if your project name is `myapp` and it
 includes two services `db` and `web`, then Compose starts containers named
-`myapp_db_1` and `myapp_web_1` respectively.
+`myapp-db-1` and `myapp-web-1` respectively.
 
 Setting this is optional. If you do not set this, the `COMPOSE_PROJECT_NAME`
 defaults to the `basename` of the project directory. See also the `-p`
