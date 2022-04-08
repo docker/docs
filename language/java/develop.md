@@ -163,7 +163,7 @@ We’ll use the debugger that comes with the IntelliJ IDEA. You can use the comm
 
 Let's set a breakpoint
 
-Open the following file `src/main/java/org/springframework/samples/petclinic/vet/VetController.java` and add a breakpoint inside the `showResourcesVetList` function, line 54 for example.
+Open the following file `src/main/java/org/springframework/samples/petclinic/vet/VetController.java` and add a breakpoint inside the `showResourcesVetList` function.
 
 Start your debug session, **Run** menu and then **Debug _NameOfYourConfiguration_**
 
@@ -179,7 +179,7 @@ We can now call the server endpoint.
 $ curl --request GET --url http://localhost:8080/vets
 ```
 
-You should have seen the code break on line 54 and now you are able to use the debugger just like you would normally. You can also inspect and watch variables, set conditional breakpoints, view stack traces and a do bunch of other stuff.
+You should have seen the code break on the marked line and now you are able to use the debugger just like you would normally. You can also inspect and watch variables, set conditional breakpoints, view stack traces and a do bunch of other stuff.
 
 ![Debugger code breakpoint](images/debugger-breakpoint.png)
 
