@@ -348,7 +348,7 @@ ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d
 Add the following to your `~/.bash_profile`:
 
 ```bash
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 ```
 
 OR
@@ -368,10 +368,9 @@ these files need to be copied or symlinked to your Zsh `site-functions/`
 directory. For example, if you installed Zsh via [Homebrew](https://brew.sh){:target="_blank" rel="nooopener" class="_"}:
 
 ```bash
-eval "$(brew shellenv)"
 etc=/Applications/Docker.app/Contents/Resources/etc
-ln -s $etc/docker.zsh-completion "$HOMEBREW_PREFIX/share/zsh/site-functions/_docker"
-ln -s $etc/docker-compose.zsh-completion "$HOMEBREW_PREFIX/share/zsh/site-functions/_docker-compose"
+ln -s $etc/docker.zsh-completion "$(brew --prefix)/share/zsh/site-functions/_docker"
+ln -s $etc/docker-compose.zsh-completion "$(brew --prefix)/share/zsh/site-functions/_docker-compose"
 ```
 
 ### Fish-Shell
