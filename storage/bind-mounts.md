@@ -291,7 +291,7 @@ control whether `/mnt/a` and/or `/tmp/a` would exist.
 
 > **Warning:** 
 > 
-> Mount propagation doesn't work with the Docker Desktop.
+> Mount propagation doesn't work with Docker Desktop.
 {: .warning
 
 | Propagation setting | Description                                                                                                                                                                                                         |
