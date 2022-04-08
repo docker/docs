@@ -16,7 +16,7 @@ Testing is an essential part of modern software development. Testing can mean a 
 
 ## Refactor Dockerfile to run tests
 
-The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You just need to update the JaCoCo version in your `pom.xml` to ensure your tests work with JDK v15 or higher with `<jacoco.version>0.8.6</jacoco.version>`, so we can use the following Docker command to start the container and run tests:
+The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. We can use the following Docker command to start the container and run tests:
 
 ```console
 $ docker run -it --rm --name springboot-test java-docker ./mvnw test
@@ -149,13 +149,16 @@ $ docker build -t java-docker --target test .
 
 The build output is truncated for simplicity, but you can see that our tests ran succesfully and passed. Let’s break one of the tests and observe the output when our tests fail.
 
-Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change **line 57** to the following.
+Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the assertion 
 
 ```shell
-55   ConstraintViolation<Person> violation = constraintViolations.iterator().next();
-56   assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
-57   assertThat(violation.getMessage()).isEqualTo("must be empty");
-58 }
+     assertThat(violation.getMessage()).isEqualTo("must not be empty");
+```
+
+with the following.
+
+```shell
+     assertThat(violation.getMessage()).isEqualTo("must be empty");
 ```
 
 Now, run the `docker build` command from above and observe that the build fails and the failing testing information is printed to the console.
