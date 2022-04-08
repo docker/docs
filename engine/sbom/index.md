@@ -15,7 +15,6 @@ A Software Bill Of Materials (SBOM) is analogous to a packing list for a shipmen
 
 The experimental `docker sbom` command allows you to generate the SBOM of a container image. Today, it does this by scanning the layers of the image using the [Syft project](https://github.com/anchore/syft) but in future it may read the SBOM from the image itself or elsewhere.
 
-
 ## Simple use
 
 To output a tabulated SBOM for an image,  use `docker sbom <image>:<tag>`:
@@ -23,8 +22,8 @@ To output a tabulated SBOM for an image,  use `docker sbom <image>:<tag>`:
 ```console
 $ docker sbom neo4j:4.4.5
 Syft v0.43.0
- ✔ Loaded image            
- ✔ Parsed image            
+ ✔ Loaded image
+ ✔ Parsed image
  ✔ Cataloged packages      [385 packages]
 
 NAME                      VERSION                        TYPE
@@ -79,8 +78,8 @@ By default, the command outputs the SBOM to stdout. You can save the output to a
 ```console
 $ docker sbom --format spdx-json --output sbom.json alpine:3.15
 Syft v0.43.0
- ✔ Loaded image            
- ✔ Parsed image            
+ ✔ Loaded image
+ ✔ Parsed image
  ✔ Cataloged packages      [14 packages]
 
 $ cat sbom.json
@@ -94,5 +93,5 @@ $ cat sbom.json
 
 ## Feedback
 
-Thanks for trying the Docker SBOM CLI plugin. We’d love to hear from you. You can provide feedback and report any bugs through the Issues tracker in the [docker/[sbom-cli-plugin](https://github.com/docker/sbom-cli-plugin){: target="_blank" rel="noopener" class="_"} GitHub repository.
-
+Thanks for trying the Docker SBOM CLI plugin. We’d love to hear from you. You can provide feedback and report any bugs through the Issues tracker in the
+[docker/sbom-cli-plugin](https://github.com/docker/sbom-cli-plugin){: target="_blank" rel="noopener" class="_"} GitHub repository.
