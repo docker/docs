@@ -134,8 +134,9 @@ services:
    - mongodb:/data/db
    - mongodb_config:/data/configdb
 volumes:
- mongodb:
  mongodb_config:
+networks:
+ mongodb:
 ```
 
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Compose file.
