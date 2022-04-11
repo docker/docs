@@ -66,7 +66,7 @@ defaults:
       layout: docs
       sitemap: false
       toc_min: 2
-      toc_max: 3
+      toc_max: 4
 
   - scope:
       path: engine/reference/commandline

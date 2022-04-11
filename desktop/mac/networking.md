@@ -5,6 +5,7 @@ redirect_from:
 - /docker-for-mac/networking/
 - /mackit/networking/
 title: Networking features in Docker Desktop for Mac
+
 ---
 {% assign Arch = 'Mac' %}
 
