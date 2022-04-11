@@ -17,8 +17,6 @@ redirect_from:
 - /docker-for-mac/osxfs/
 - /docker-for-mac/osxfs-caching/
 title: Docker Desktop for Mac user manual
-toc_min: 1
-toc_max: 2
 ---
 
 Welcome to Docker Desktop! The Docker Desktop for Mac user manual provides information on how to configure and manage your Docker Desktop settings.
