@@ -1662,6 +1662,9 @@ the service's containers.
   Default value is world-readable permissions (mode `0444`).
   The writable bit MUST be ignored if set. The executable bit MAY be set.
 
+> **Note** The `uid`, `gid` and `mode` options do not work in non-Swarm mode, i.e.
+> when using Docker Compose in a standalone manner.
+
 The following example sets the name of the `server-certificate` secret file to `server.crt`
 within the container, sets the mode to `0440` (group-readable) and sets the user and group
 to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
