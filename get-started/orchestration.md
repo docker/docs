@@ -43,7 +43,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 
@@ -113,7 +113,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 
@@ -201,7 +201,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
     ```console
-    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 
 3.  Check that your service created one running container:
@@ -214,7 +214,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 
 4.  Check that you get the logs you'd expect for a ping process:
@@ -269,7 +269,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
     ```console
-    $ docker service create --name demo alpine:3.5 ping 8.8.8.8
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 
 3.  Check that your service created one running container:
@@ -282,7 +282,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 
 4.  Check that you get the logs you'd expect for a ping process:
