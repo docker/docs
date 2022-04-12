@@ -126,19 +126,19 @@ Log out and log back in for the changes to take effect.
 
 After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
 
-```console
+```
 "Docker Desktop Installer.exe" install
 ```
 
 If you’re using PowerShell you should run it as:
 
-```console
+```
 Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
 ```
 
 If using the Windows Command Prompt:
 
-```console
+```
 start /w "" "Docker Desktop Installer.exe" install
 ```
 
