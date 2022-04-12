@@ -151,14 +151,14 @@ The build output is truncated for simplicity, but you can see that our tests ran
 
 Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the assertion 
 
-```shell
-     assertThat(violation.getMessage()).isEqualTo("must not be empty");
+```java
+assertThat(violation.getMessage()).isEqualTo("must not be empty");
 ```
 
 with the following.
 
-```shell
-     assertThat(violation.getMessage()).isEqualTo("must be empty");
+```java
+assertThat(violation.getMessage()).isEqualTo("must be empty");
 ```
 
 Now, run the `docker build` command from above and observe that the build fails and the failing testing information is printed to the console.
