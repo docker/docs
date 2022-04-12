@@ -214,7 +214,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:latest          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 
 4.  Check that you get the logs you'd expect for a ping process:
@@ -282,7 +282,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:latest          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 
 4.  Check that you get the logs you'd expect for a ping process:
