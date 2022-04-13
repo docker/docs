@@ -5,8 +5,6 @@ title: Docker Dashboard
 redirect_from:
 - /docker-for-mac/dashboard/
 - /docker-for-windows/dashboard/
-toc_min: 2
-toc_max: 3
 ---
 
 The Docker Dashboard provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.

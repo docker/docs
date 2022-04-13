@@ -6,7 +6,6 @@ redirect_from:
 - /docker-for-win/troubleshoot/
 - /docker-for-windows/troubleshoot/
 title: Logs and troubleshooting
-toc_max: 2
 ---
 
 {% include upgrade-cta.html

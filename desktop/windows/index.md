@@ -14,8 +14,6 @@ redirect_from:
 - /winkit/getting-started/
 
 title: Docker Desktop for Windows user manual
-toc_min: 1
-toc_max: 2
 ---
 
 Welcome to Docker Desktop! The Docker Desktop for Windows user manual provides information on how to configure and manage your Docker Desktop settings.

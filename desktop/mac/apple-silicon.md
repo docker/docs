@@ -2,8 +2,6 @@
 description: Docker Desktop for Apple silicon
 keywords: Docker Desktop, M1, Silicon, Apple,
 title: Docker Desktop for Apple silicon
-toc_min: 2
-toc_max: 3
 redirect_from:
 - /docker-for-mac/apple-m1/
 - /docker-for-mac/apple-silicon/

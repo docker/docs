@@ -5,8 +5,6 @@ redirect_from:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
 title: Docker Desktop WSL 2 backend
-toc_min: 2
-toc_max: 3
 ---
 
 > **Update to the Docker Desktop terms**

@@ -2,8 +2,6 @@
 description: Docker Desktop for Linux (Beta)
 keywords: docker, Desktop for linux, beta, tech preview
 title: Docker Desktop for Linux (Beta)
-toc_min: 1
-toc_max: 2
 ---
 
 Welcome to the Docker Desktop for Linux (Beta). The Beta program is aimed at early adopters who would like to try Docker Desktop for Linux and provide feedback.
