@@ -70,7 +70,7 @@ the log data. Before reporting an issue, we recommend that you read the informat
 Before you get started, we recommend that you sign into your Docker Desktop application and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 
 1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**.
-2. Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
+2. Optional: Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
 3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](images/diagnose-support.png){:width="600px"}
 4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
