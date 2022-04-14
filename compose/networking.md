@@ -57,7 +57,7 @@ application code could connect to the URL `postgres://db:5432` and start
 using the Postgres database.
 
 It is important to note the distinction between `HOST_PORT` and `CONTAINER_PORT`.
-In the above example, for `db`, the `HOST_PORT` is `8001` and the container port is
+In the above example, for `db`, the `HOST_PORT` is `8001` and the `CONTAINER_PORT` is
 `5432` (postgres default). Networked service-to-service
 communication uses the `CONTAINER_PORT`. When `HOST_PORT` is defined,
 the service is accessible outside the swarm as well.
