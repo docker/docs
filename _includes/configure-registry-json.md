@@ -10,7 +10,7 @@ On Windows, run the following command in a terminal to install Docker Desktop:
 
 `"Docker Desktop Installer.exe" install`
 
-If you’re using PowerShell you should run it as:
+If you’re using PowerShell, you should run it as:
 
 `Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install`
 
@@ -24,7 +24,9 @@ The `install` command accepts the following flag:
 
 This requires the user to sign in and be part of the specified Docker Hub organization when running the application. For example:
 
- `--allowed-org=<docs>`
+ `Docker Desktop Installer.exe" install --allowed-org=acmeinc`
+
+ This creates the registry.json file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the individual developer, only by the administrator.
 
 ### Mac
 
@@ -44,4 +46,6 @@ The `install` command accepts the following flags:
 
 This requires the user to sign in and be part of the specified Docker Hub organization when running the application. For example:
 
- `--allowed-org=<docs>` 
+ `sudo hdiutil attach Docker.dmg --allowed-org=acmeinc`
+
+This creates the registry.json file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the individual developer, only by the administrator.
