@@ -5,7 +5,6 @@ redirect_from:
 - /docker-for-mac/troubleshoot/
 - /mackit/troubleshoot/
 title: Logs and troubleshooting
-toc_max: 2
 ---
 
 {% include upgrade-cta.html
