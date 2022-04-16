@@ -21,8 +21,8 @@ a file called `Dockerfile`. To begin with, the  Dockerfile consists of:
 FROM ruby:2.5
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+COPY ./myapp/Gemfile Gemfile
+COPY ./myapp/Gemfile.lock Gemfile.lock
 RUN bundle install
 
 # Add a script to be executed every time the container starts.
