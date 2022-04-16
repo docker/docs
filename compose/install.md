@@ -129,7 +129,7 @@ also included below.
 > `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
 {: .important}
   
-> For `arm`, the following changes must be made to the above download:
+> For `arm`, the following changes must be made to the below command:
 > Run `uname -m` on your own, then replace `$(uname -m)` with either `armv6` or `armv7`, dropping the last numbers on the arm version.
 {: .important}
 
