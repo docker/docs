@@ -55,7 +55,7 @@ So, let's do it!
     PS> docker run -dp 3000:3000 `
         -w /app -v "$(pwd):/app" `
         node:12-alpine `
-        sh -c "yarn install && yarn run dev"
+        sh -c "apk --no-cache --virtual build-dependencies add python make g++ && yarn install && yarn run dev"
     ```
 
     - `-dp 3000:3000` - same as before. Run in detached (background) mode and create a port mapping
