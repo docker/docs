@@ -10,7 +10,7 @@ toc_min: 1
 ---
 
 The Compose file is a [YAML](https://yaml.org){: target="_blank" rel="noopener" class="_"} file defining services,
-networks, and volumes for a Docker application. The latest and recommended
+networks, and volumes of a Docker application. The latest and recommended
 version of the Compose file format is defined by the [Compose
 Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:
 target="_blank" rel="noopener" class="_"}. The Compose spec merges the legacy
@@ -27,15 +27,15 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 The Compose specification includes properties designed to target a local [OCI](https://opencontainers.org/){: target="_blank" rel="noopener" class="_"} container runtime,
 exposing Linux kernel specific configuration options, but also some Windows container specific properties, as well as cloud platform features related to resource placement on a cluster, replicated application distribution and scalability.
 
-We acknowledge that no Compose implementation is expected to support **all** attributes, and that support for some properties
+We acknowledge that no Compose implementation is expected to support **all** attributes, and that support for some attributes
 is Platform dependent and can only be confirmed at runtime. The definition of a versioned schema to control the supported
-properties in a Compose file, established by the [docker-compose](https://github.com/docker/compose){: target="_blank" rel="noopener" class="_"} tool where the Compose
-file format was designed, doesn't offer any guarantee to the end-user attributes will be actually implemented.
+attributes in a Compose file, established by the [docker-compose](https://github.com/docker/compose){: target="_blank" rel="noopener" class="_"} tool where the Compose
+file format was designed, doesn't offer any guarantee to the end-user that those attributes will be actually implemented.
 
-The specification defines the expected configuration syntax and behavior, but - until noted - supporting any of those is OPTIONAL.
+The specification defines the expected configuration syntax and behavior, but - unless noted - supporting any of these is OPTIONAL.
 
 A Compose implementation to parse a Compose file using unsupported attributes SHOULD warn user. We recommend implementors
-to support those running modes:
+to support the following running modes:
 
 * default: warn user about unsupported attributes, but ignore them
 * strict: warn user about unsupported attributes and reject the compose file
@@ -43,9 +43,9 @@ to support those running modes:
 
 ## The Compose application model
 
-The Compose specification allows one to define a platform-agnostic container based application. Such an application is designed as a set of containers which have to both run together with adequate shared resources and communication channels.
+The Compose specification allows one to define a platform-agnostic container based application. Such an application is designed as a set of containers which have to run together with adequate shared resources and communication channels.
 
-Computing components of an application are defined as [Services](#services-top-level-element). A Service is an abstract concept implemented on platforms by running the same container image (and configuration) one or more times.
+Components of an application are defined as [Services](#services-top-level-element). A Service is an abstract concept implemented on platforms by running the same container image (and configuration) one or more times.
 
 Services communicate with each other through [Networks](#networks-top-level-element). In this specification, a Network is a platform capability abstraction to establish an IP route between containers within services connected together. Low-level, platform-specific networking options are grouped into the Network definition and MAY be partially implemented on some platforms.
 
@@ -55,7 +55,7 @@ Some services require configuration data that is dependent on the runtime or pla
 
 A [Secret](#secrets-top-level-element) is a specific flavor of configuration data for sensitive data that SHOULD NOT be exposed without security considerations. Secrets are made available to services as files mounted into their containers, but the platform-specific resources to provide sensitive data are specific enough to deserve a distinct concept and definition within the Compose specification.
 
-Distinction within Volumes, Configs and Secret allows implementations to offer a comparable abstraction at service level, but cover the specific configuration of adequate platform resources for well identified data usages.
+Distinction between Volumes, Configs and Secrets allows implementations to offer a comparable abstraction at service level, but cover the specific configuration of adequate platform resources for well identified data usages.
 
 A **Project** is an individual deployment of an application specification on a platform. A project's name is used to group
 resources together and isolate them from other applications or other installation of the same Compose specified application with distinct parameters. A Compose implementation creating resources on a platform MUST prefix resource names by project and
@@ -69,7 +69,7 @@ The following example illustrates Compose specification concepts with a concrete
 
 Consider an application split into a frontend web application and a backend service.
 
-The frontend is configured at runtime with an HTTP configuration file managed by infrastructure, providing an external domain name, and an HTTPS server certificate injected by the platform's secured secret store.
+The frontend is configured at runtime with an HTTP configuration file managed by infrastructure, providing an external domain name and an HTTPS server certificate injected by the platform's secure secret store.
 
 The backend stores data in a persistent volume.
 
@@ -140,7 +140,7 @@ networks:
   back-tier: {}
 ```
 
-This example illustrates the distinction between volumes, configs and secrets. While all of them are all exposed
+This example illustrates the distinction between volumes, configs and secrets. While all of them are exposed
 to service containers as mounted files or directories, only a volume can be configured for read+write access.
 Secrets and configs are read-only. The volume configuration allows you to select a volume driver and pass driver options
 to tweak volume management according to the actual infrastructure. Configs and Secrets rely on platform services,
@@ -163,7 +163,7 @@ If both files exist, Compose implementations MUST prefer canonical `compose.yaml
 Multiple Compose files can be combined together to define the application model. The combination of YAML files
 MUST be implemented by appending/overriding YAML elements based on Compose file order set by the user. Simple
 attributes and maps get overridden by the highest order Compose file, lists get merged by appending. Relative
-paths MUST be resolved based on the **first** Compose file's parent folder, whenever complimentary files being
+paths MUST be resolved based on the **first** Compose file's parent folder, whenever complementary files being
 merged are hosted in other folders.
 
 As some Compose file elements can both be expressed as single strings or complex objects, merges MUST apply to
@@ -215,14 +215,14 @@ services:
 - If profile `debug` is enabled, model contains both `foo` and `zot` services, but not `bar` and `baz`
   and as such the model is invalid regarding the `depends_on` constraint of `zot`.
 - If profiles `debug` and `test` are enabled, model contains all services: `foo`, `bar`, `baz` and `zot`.
-- If Compose implementation is executed with `bar` as explicit service to run, it and the `test` profile
+- If Compose implementation is executed with `bar` as explicit service to run, the service `bar` and the `test` profile
   will be active even if `test` profile is not enabled _by the user_.
 - If Compose implementation is executed with `baz` as explicit service to run, the service `baz` and the
   profile `test` will be active and `bar` will be pulled in by the `depends_on` constraint.
 - If Compose implementation is executed with `zot` as explicit service to run, again the model will be
-  invalid regarding the `depends_on` constraint of `zot` since `zot` and `bar` have no common `profiles`
+  invalid regarding the `depends_on` constraint of `zot`, since `zot` and `bar` have no common `profiles`
   listed.
-- If Compose implementation is executed with `zot` as explicit service to run and profile `test` enabled,
+- If Compose implementation is executed with `zot` as explicit service to run and profile `test` is enabled,
   profile `debug` is automatically enabled and service `bar` is pulled in as a dependency starting both
   services `zot` and `bar`.
 
@@ -280,7 +280,7 @@ available resources.
 
 Deploy support is an OPTIONAL aspect of the Compose specification, and is
 described in detail in the [Deployment support](deploy.md) documentation.
-not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
+When not implemented, the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
 
 ### build
 
