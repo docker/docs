@@ -9,7 +9,9 @@ Desktop and access all their organizations.
 
 ### Windows
 
-On Windows, run the following command in a terminal to install Docker Desktop:
+After downloading **Docker Desktop Installer.exe**, open a terminal, and change
+to the directory in which you downloaded the installer, then run the following
+command to install Docker Desktop:
 
 ```console
 C:\Users\Admin> "Docker Desktop Installer.exe" install
@@ -18,7 +20,7 @@ C:\Users\Admin> "Docker Desktop Installer.exe" install
 If you’re using PowerShell, you should run it as:
 
 ```console
-PS> Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+PS> Start-Process '.\Docker Desktop Installer.exe' -Wait install
 ```
 
 If using the Windows Command Prompt:

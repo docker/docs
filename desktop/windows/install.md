@@ -124,22 +124,24 @@ Log out and log back in for the changes to take effect.
 
 ### Install from the command line
 
-After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
+After downloading **Docker Desktop Installer.exe**, open a terminal, and change
+to the directory in which you downloaded the installer, then run the following
+command to install Docker Desktop:
 
-```
-"Docker Desktop Installer.exe" install
+```console
+C:\> "Docker Desktop Installer.exe" install
 ```
 
 If you’re using PowerShell you should run it as:
 
-```
-Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+```console
+PS> Start-Process '.\Docker Desktop Installer.exe' -Wait install
 ```
 
 If using the Windows Command Prompt:
 
-```
-start /w "" "Docker Desktop Installer.exe" install
+```console
+C:\> start /w "" "Docker Desktop Installer.exe" install
 ```
 
 The install command accepts the following flags:
@@ -149,8 +151,9 @@ The install command accepts the following flags:
 - `--backend=<backend name>`: selects the backend to use for Docker Desktop, `hyper-v` or `wsl-2` (default)
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
-```
-net localgroup docker-users <user> /add
+
+```console
+C:\> net localgroup docker-users <user> /add
 ```
 
 ## Start Docker Desktop
