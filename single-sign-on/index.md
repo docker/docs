@@ -34,7 +34,7 @@ In addition, all email addresses should be added to your IdP.
 
 ## Configure
 
-To configure SSO, log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to obtain the **ACS URL** and **Entity IDs** to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
+To configure SSO, log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} to complete the IdP server configuration process. You can only configure SSO with a single IdP.  When this is complete, log back in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and complete the SSO enablement process.
 
 > **Important**
 >
