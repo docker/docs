@@ -4,7 +4,11 @@ keywords: authentication, registry.json, configure,
 title: Configure registry.json to enforce sign in
 ---
 
-The `registry.json` file is a configuration file that allows administrators to specify the Docker organization the user must belong to and ensure that the organization’s settings apply to the user’s session. The Docker Desktop installer can create this file and deploy it to the users’ machines as part of the installation process.
+The `registry.json` file is a configuration file that allows administrators to
+specify the Docker organization the user must belong to and ensure that the
+organization’s settings apply to the user’s session. The Docker Desktop installer
+can create this file and deploy it to the users’ machines as part of the installation
+process.
 
 After you deploy a `registry.json` file to a user’s machine, it prompts the user to sign into Docker Desktop. If a user doesn’t sign in, or tries to sign in using a different organization, other than the organization listed in the `registry.json` file, they will be denied access to Docker Desktop.
 Deploying a `registry.json` file and forcing users to authenticate offers the following benefits:
