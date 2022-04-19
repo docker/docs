@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.7.0
-2022-04-07
+## Docker Desktop 4.7.1
+2022-04-19
 
 > Download Docker Desktop
 >
@@ -32,6 +32,17 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### Bug fixes and minor changes
+ - Fixed a crash on the Quick Start Guide final screen.
+
+## Docker Desktop 4.7.0
+2022-04-07
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/77141/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/77141/Docker.dmg)
 
 ### Security
 
