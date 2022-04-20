@@ -176,7 +176,7 @@ that are not currently running. To remove running depoyments, you can specify
 removal, but it doesn't actually remove them.
 
 ```console
-$ ./bin/docker --context acicontext prune --dry-run --force
+$ ./bin/docker --context myacicontext prune --dry-run --force
 Resources that would be deleted:
 my-application
 Total CPUs reclaimed: 2.01, total memory reclaimed: 2.30 GB
