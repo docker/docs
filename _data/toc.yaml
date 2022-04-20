@@ -1360,8 +1360,12 @@ manuals:
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
-  - path: /docker-hub/publish/
-    title: Docker Verified Publisher Program
+  - sectiontitle: Docker Verified Publisher Program
+    section:
+      - path: /docker-hub/publish/
+        title: Overview
+      - path: /docker-hub/publish/publisher-center-migration/
+        title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
     title: Release notes
 
