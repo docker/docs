@@ -15,20 +15,6 @@ is only for local testing. Enabling Kubernetes allows you to deploy
 your workloads in parallel, on Kubernetes, Swarm, and as standalone containers. Enabling or disabling the Kubernetes server does not affect your other
 workloads.
 
-## Prerequisites
-
-The Kubernetes client command `kubectl` is included and configured to connect
-to the local Kubernetes server. If you have already installed `kubectl` and
-pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
-
-```console
-$ kubectl config get-contexts
-$ kubectl config use-context docker-desktop
-```
-
-If you installed `kubectl` using Homebrew, or by some other method, and
-experience conflicts, remove `/usr/local/bin/kubectl`.
-
 ## Enable Kubernetes
 
 To enable Kubernetes in Docker Desktop, go to **Preferences** > **Kubernetes** and then click **Enable Kubernetes**.
@@ -52,6 +38,18 @@ The status of Kubernetes shows in the Docker menu and the context points to
 > Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
 
 ## Use the kubectl command
+
+The Kubernetes client command `kubectl` is included and configured to connect
+to the local Kubernetes server. If you have already installed `kubectl` and
+pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
+
+```console
+$ kubectl config get-contexts
+$ kubectl config use-context docker-desktop
+```
+
+If you installed `kubectl` using Homebrew, or by some other method, and
+experience conflicts, remove `/usr/local/bin/kubectl`.
 
 Kubernetes integration provides the Kubernetes CLI command
 at `/usr/local/bin/kubectl` on Mac and at `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
