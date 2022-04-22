@@ -24,3 +24,24 @@ $ docker-compose ps
 mywordpress_db_1          docker-entrypoint.sh mysqld      Up (healthy)  3306/tcp
 mywordpress_wordpress_1   /entrypoint.sh apache2-for ...   Restarting    0.0.0.0:8000->80/tcp
 ```
+
+List containers with filter option.
+
+Supported filter: status. Values supported for status: [paused | restarting | removing | running | dead | created | exited]
+
+```console
+$ docker-compose ps --filter status=running
+       Name                      Command               State           Ports
+-------------------------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
+composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
+```
+
+List container with services and filter option
+
+```console
+$ docker-compose ps --filter status=running redis
+       Name                      Command               State    Ports
+-----------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
+```
