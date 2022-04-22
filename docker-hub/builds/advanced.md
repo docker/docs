@@ -51,7 +51,7 @@ command in the hook or your automated process does not complete.
 
 To override these phases, create a folder called `hooks` in your source code
 repository at the same directory level as your Dockerfile. Create a script called
-`hooks/build`, `hooks/test`, or `hooks/push` and give it execution privileges. This can be a shell, Perl or Python script, or anything that can be executed by the Linux based runner.
+`hooks/build`, `hooks/test`, or `hooks/push` and give it execution privileges. This can be a shell, Perl or Python script, or anything that can be executed by the Linux-based runner.
 
 ## Custom build phase hooks
 
@@ -73,7 +73,7 @@ The following hooks will be run if present:
 * `hooks/pre_push` (only used when executing a build rule or [automated build](index.md) )
 * `hooks/post_push` (only used when executing a build rule or [automated build](index.md) )
 
-A hook will need to return a 0 exit code to let the next ones be executed; a different exit code will stop the build and will be marked as failed by the system.
+A hook will need to return a 0 exit code to let the next ones be executed. A different exit code will stop the build and it will be marked as failed by the system.
 
 ### Build hook examples
 
