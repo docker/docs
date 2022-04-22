@@ -39,8 +39,12 @@ The status of Kubernetes shows in the Docker menu and the context points to
 
 ## Use the kubectl command
 
-The Kubernetes client command `kubectl` is included and configured to connect
-to the local Kubernetes server. If you have already installed `kubectl` and
+Kubernetes integration provides the Kubernetes CLI command
+at `/usr/local/bin/kubectl` on Mac and at `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
+variable, so you may need to type the full path of the command or add it to
+the `PATH`.
+
+If you have already installed `kubectl` and
 pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
 
 ```console
@@ -50,11 +54,6 @@ $ kubectl config use-context docker-desktop
 
 If you installed `kubectl` using Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
-
-Kubernetes integration provides the Kubernetes CLI command
-at `/usr/local/bin/kubectl` on Mac and at `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
-variable, so you may need to type the full path of the command or add it to
-the `PATH`.
 
 You can test the command by listing the available nodes:
 
