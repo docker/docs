@@ -24,7 +24,7 @@ configure it in different ways:
 
     You can optionally exclude hosts or ranges from going through the proxy
     server by setting a `noProxy` key to one or more comma-separated IP
-    addresses or hosts. Prefixing domain with a dot `.` character, will act as a wildcard for hosts and using CIDR notation for IP addresses is supported as
+    addresses or hosts. Prefixing domain with a dot `.` acts as a wildcard for hosts and using CIDR notation for IP addresses is supported as
     shown in this example.
 
     ```json
