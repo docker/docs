@@ -33,8 +33,7 @@ experience conflicts, remove `/usr/local/bin/kubectl`.
 
 To enable Kubernetes in Docker Desktop, go to **Preferences** > **Kubernetes** and then click **Enable Kubernetes**.
 
-By default, Kubernetes containers are hidden from commands like `docker
-service ls`, because managing them manually is not supported. To see these internal containers, select **Show system containers (advanced)**. Most users do not need this option.
+By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. To see these internal containers, select **Show system containers (advanced)**. Most users do not need this option.
 
 Click **Apply & Restart** to save the settings and then click **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
 
