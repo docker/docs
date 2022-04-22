@@ -128,13 +128,17 @@ also included below.
 > For `alpine`, the following dependency packages are needed:
 > `py-pip`, `python3-dev`, `libffi-dev`, `openssl-dev`, `gcc`, `libc-dev`, `rust`, `cargo` and `make`.
 {: .important}
+  
+> For `arm`, the following changes must be made to the below command:
+> Run `uname -m` on your own, then replace `$(uname -m)` with either `armv6` or `armv7`, dropping the last numbers on the arm version.
+{: .important}
 
 1.  Run this command to download the current stable release of Docker Compose:
 
     ```console
-    $ sudo curl -L "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     ```
-
+  
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use. For instructions on how to
     > install Compose `{{site.compose_v2_version}}` on Linux, see [Install
