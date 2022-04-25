@@ -29,7 +29,9 @@ In general, `--mount` is more explicit and verbose. The biggest difference is th
 the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
-> **Tip**: New users should use the `--mount` syntax. Experienced users may
+> Tip
+>
+> New users should use the `--mount` syntax. Experienced users may
 > be more familiar with the `-v` or `--volume` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
 
@@ -289,10 +291,10 @@ propagation setting has a recursive counterpoint. In the case of recursion,
 consider that `/tmp/a` is also mounted as `/foo`. The propagation settings
 control whether `/mnt/a` and/or `/tmp/a` would exist.
 
-> **Warning:** 
-> 
+> Warning
+>
 > Mount propagation doesn't work with Docker Desktop.
-{: .warning
+{: .warning }
 
 | Propagation setting | Description                                                                                                                                                                                                         |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
