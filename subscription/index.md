@@ -48,7 +48,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 
-Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [Audit Logs](../docker-hub/audit-log.md), and more.
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, an [audit log](../docker-hub/audit-log.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
