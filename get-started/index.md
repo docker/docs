@@ -100,13 +100,13 @@ For Docker Desktop installation instructions, see [Install Docker Desktop on Mac
 If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
 
 ```console
-$ docker run -d -p 80:80 docker/getting-started
+$ docker run -d -p 81:82 docker/getting-started
 ```
 
 You'll notice a few flags being used. Here's some more info on them:
 
 - `-d` - run the container in detached mode (in the background)
-- `-p 80:80` - map port 80 of the host to port 80 in the container
+- `-p 81:82` - map port 81 of the host to port 82 in the container
 - `docker/getting-started` - the image to use
 
 > **Tip**
@@ -115,7 +115,7 @@ You'll notice a few flags being used. Here's some more info on them:
 > As an example, the command above could be written as:
 >
 > ```console
-> $ docker run -dp 80:80 docker/getting-started
+> $ docker run -dp 81:82 docker/getting-started
 > ```
 
 ## The Docker Dashboard
