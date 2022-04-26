@@ -134,11 +134,11 @@ from the repository.
 #### Install Docker Engine
 
 1. Update the `apt` package index, and install the _latest version_ of Docker
-   Engine and containerd, or go to the next step to install a specific version:
+   Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
     ```console
     $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
     > Got multiple Docker repositories?
@@ -166,7 +166,7 @@ from the repository.
        for example, `5:18.09.1~3-0~ubuntu-xenial`.
 
     ```console
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io
+    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
@@ -241,10 +241,10 @@ To upgrade Docker Engine, download the newer package file and repeat the
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io
+    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

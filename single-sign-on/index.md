@@ -64,10 +64,10 @@ The following video walks you through the process of configuring SSO.
 
 5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 
-    > **Note:**
+    > **Note**
     >
-    > the NameID is your email address and is set as the default.
-    > For example, <Subject><NameID>yourname@mycompany.com</NameID>. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
+    > The NameID is your email address and is set as the default.
+    > For example, yourname@mycompany.com. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
 
     ![SSO Attribute](images/sso-attribute.png){:width="500px"}
 
@@ -79,7 +79,7 @@ The following video walks you through the process of configuring SSO.
 
 ### Azure AD IdP configuration with Open ID Connect
 
->**Note:**
+>**Note**
 >
 > This section is for users who only want to configure Open ID Connect with
 > Azure AD. This connection is a basic OIDC connection, and there are no
@@ -97,9 +97,10 @@ The following video walks you through the process of configuring SSO.
 
 5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 
-    > **Note:**
-    > the NameID is your email address and is set as the default.
-    > For example: <Subject><NameID>yourname@mycompany.com</NameID>.
+    > **Note**
+    >
+    > The NameID is your email address and is set as the default.
+    > For example: yourname@mycompany.com.
 
 6. Complete the fields in the **Configuration Settings** section and click **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
@@ -133,7 +134,7 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 
 3. After you have updated the fields, click **Save**.
 
-    > **Note:**
+    > **Note**
     >
     > It can take up to 72 hours for DNS changes to take effect, depending on
     > your DNS host. The Domains table will have an Unverified status during
@@ -158,7 +159,7 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 1. On the Single Sign-On page in Docker Hub, click **Turn ON Enforcement** to enable your SSO.
 2. When SSO is enforced, your members are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
 
-> **Note:**
+> **Note**
 >
 > If you want to turn off SSO and revert back to Docker’s built-in
 > authentication, click **Turn OFF Enforcement**. Your members aren’t
@@ -171,9 +172,9 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 
 You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
 
- > **Note:**
+ > **Note**
  >
- > when the first-time user logs in to Docker using their domain email
+ > When the first-time user logs in to Docker using their domain email
  > address, they are then added to your organization.
 
 To add a guest to your organization in Docker Hub if they aren’t verified through your IdP:
@@ -191,9 +192,9 @@ To remove a member from an organization:
 2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
 3. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
 
-> **Note:**
+> **Note**
 >
-> when you remove a member from an SSO organization, they are unable to log
+> When you remove a member from an SSO organization, they are unable to log
 > in using their email address.
 
 ## FAQs
