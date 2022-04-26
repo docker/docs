@@ -49,8 +49,7 @@ $ sudo yum remove docker \
                   docker-logrotate \
                   docker-engine \
                   podman \
-                  docker-compose-plugin
-                  runc \
+                  runc
 ```
 
 It's OK if `yum` reports that none of these packages are installed.

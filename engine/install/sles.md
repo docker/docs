@@ -66,8 +66,7 @@ $ sudo zypper remove docker \
                   docker-latest-logrotate \
                   docker-logrotate \
                   docker-engine \
-                  docker-compose-plugin
-                  runc \
+                  runc
 ```
 
 It's OK if `zypper` reports that none of these packages are installed.

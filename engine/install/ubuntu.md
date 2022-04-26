@@ -57,7 +57,7 @@ Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```console
-$ sudo apt-get remove docker docker-engine docker.io containerd runc docker-compose-plugin
+$ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.

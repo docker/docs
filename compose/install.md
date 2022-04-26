@@ -31,8 +31,7 @@ Linux systems.
 
 ## Install Compose
 
-Follow the instructions below to install Compose on Mac, Windows, Windows Server
-2016, or Linux systems.
+Follow the instructions below to install Compose on Mac, Windows, Windows Server, or Linux systems.
 
 > Install a different version
 >
@@ -42,6 +41,8 @@ Follow the instructions below to install Compose on Mac, Windows, Windows Server
 >
 > Compose releases are also listed and available for direct download on the
 > [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
+> 
+> To install the Python version of Compose, follow instructions in the [Compose v1 GitHub branch](https://github.com/docker/compose/blob/master/INSTALL.md){: target="_blank" rel="noopener" class="_"}.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#macOS">Mac</a></li>
@@ -98,15 +99,16 @@ on Microsoft Windows Server and want to install Docker Compose.
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
-    >**Note**:  
+    > **Note**
+    >
     > On Windows Server 2019, you can add the Compose executable to `$Env:ProgramFiles\Docker`. Because this directory is  registered in the system `PATH`, you can run the `docker-compose --version` command on the subsequent step with no additional configuration.
 
-    > To install a different version of Compose, substitute `{{site.compose_version}}` 
+    > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
 
 3.  Test the installation.
 
-    ```powershell
+    ```console
     $ docker compose version
     Docker Compose version {{site.compose_version}}
     ```
@@ -198,15 +200,15 @@ You can use Compose as a standalone binary without installing the Docker CLI.
 
 To uninstall Docker Compose if you installed using `curl`:
 
-  ```console
-  $ rm $DOCKER_CONFIG/cli-plugins/docker-compose
-  ```
+```console
+$ rm $DOCKER_CONFIG/cli-plugins/docker-compose
+```
     
-  or if you choose to install Compose for all users  
+or if you choose to install Compose for all users  
 
-  ```console
-  $ sudo rm /usr/local/lib/docker/cli-plugins/docker-compose
-  ```
+```console
+$ sudo rm /usr/local/lib/docker/cli-plugins/docker-compose
+```
 
 > Got a "Permission denied" error?
 >

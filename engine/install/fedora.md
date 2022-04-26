@@ -38,8 +38,7 @@ $ sudo dnf remove docker \
                   docker-logrotate \
                   docker-selinux \
                   docker-engine-selinux \
-                  docker-engine \
-                  docker-compose-plugin
+                  docker-engine
 ```
 
 It's OK if `dnf` reports that none of these packages are installed.
