@@ -57,6 +57,15 @@ So, let's do it!
         node:12-alpine `
         sh -c "yarn install && yarn run dev"
     ```
+    
+    For Chinese developers, you may need to modify the resource repository to download yarn dependencies, the command needs to be like this:
+
+    ```powershell
+    PS> docker run -dp 3000:3000 `
+        -w /app -v "$(pwd):/app" `
+        node:12-alpine `
+        sh -c "npm config set registry https://registry.npm.taobao.org && npm config set disturl https://npm.taobao.org/dist && yarn install && yarn run dev"
+    ```
 
     - `-dp 3000:3000` - same as before. Run in detached (background) mode and create a port mapping
     - `-w /app` - sets the "working directory" or the current directory that the command will run from
