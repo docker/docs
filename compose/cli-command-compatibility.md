@@ -63,3 +63,33 @@ networks:
 ```
 
 The result above is a full size configuration of what will be used by Docker Compose to run the project.
+
+## New commands introduced in Compose v2
+
+### Cp command
+
+The cp command is intended to copy files or folders between service containers and the local filesystem.  
+This command is a bidirectional command, we can copy `from` or `to` the service containers.
+
+Copy a file from a service container to the local filesystem:
+
+```console
+$ docker compose cp my-service:~/path/to/myfile ~/local/path/to/copied/file
+```
+
+We can also copy from the local filesystem to all the running containers of a service:
+
+```console
+$ docker compose cp --all ~/local/path/to/source/file my-service:~/path/to/copied/file
+```
+
+
+### Ls command
+
+The ls command is intended to list the Compose projects. By default, the command only lists the running projects, 
+we can use flags to display the stopped projects, to filter by conditions and change the output to `json` format for example.
+
+```console
+$ docker compose ls --all --format json
+[{"Name":"dockergithubio","Status":"exited(1)","ConfigFiles":"/path/to/docker.github.io/docker-compose.yml"}]
+```
