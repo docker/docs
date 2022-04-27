@@ -109,7 +109,7 @@ on Microsoft Windows Server and want to install Docker Compose.
 3.  Test the installation.
 
     ```console
-    $ docker compose version
+    $ docker-compose --version
     Docker Compose version {{site.compose_version}}
     ```
 </div>
@@ -150,7 +150,7 @@ also included below.
 3. Test the installation.
 
     ```console
-    $ docker compose version
+    $ docker-compose --version
     Docker Compose version {{site.compose_version}}
     ```
 </div>
