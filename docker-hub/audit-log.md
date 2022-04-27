@@ -5,33 +5,33 @@ title: Audit log
 ---
 
 {% include upgrade-cta.html
-  body="The Audit log feature is available for users subscribed to a Docker Team or a Business subscription. Upgrade now to start tracking events across your organization."
+  body="Audit log is available for users subscribed to a Docker Team or a Business subscription. Upgrade now to start tracking events across your organization."
   header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_audit_log"
 %}
 
-Audit log displays a chronological list of activities that occur at organization and repository levels. It provides owners of Docker Team accounts a report of all their team member activities. This allows the team owners to view and track what changes were made, the date when a change was made, and who initiated the change. For example, the Audit log displays activities such as the date when a repository was created or deleted, the team member who created the repository, the name of the repository, and when there was a change to the privacy settings.
+Audit log displays a chronological list of activities that occur at organization and repository levels. It provides owners of Docker Team accounts a report of all their team member activities. This allows the team owners to view and track what changes were made, the date when a change was made, and who initiated the change. For example, the audit log displays activities such as the date when a repository was created or deleted, the team member who created the repository, the name of the repository, and when there was a change to the privacy settings.
 
-Team owners can also see the Audit log for their repository if the repository is part of the organization subscribed to a Docker Team plan.
+Team owners can also see the audit log for their repository if the repository is part of the organization subscribed to a Docker Team plan.
 
-## View the Audit log
+## View the audit log
 
-To view the Audit log:
+To view the audit log:
 
 1. Sign into an owner account for the organization in Docker Hub.
 2. Select your organization from the list and then click on the **Activity** tab.
 
     ![Organization activity tab](images/org-activity-tab.png){:width="700px"}
 
-The Audit log begins tracking activities from the date the feature is live, that is from **25 January 2021**. Activities that took place before this date are not captured.
+The audit log begins tracking activities from the date the feature is live, that is from **25 January 2021**. Activities that took place before this date are not captured.
 
 > **Note**
 >
-> Docker will retain the Audit log activity data for a period of three months.
+> Docker will retain the audit log activity data for a period of three months.
 
-## Customize the Audit log
+## Customize the audit log
 
-By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the **Activity** tab displays the Audit log of all the activities that occurred during that period.
+By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the **Activity** tab displays the audit log of all the activities that occurred during that period.
 
 ![Activities list](images/activity-list.png){:width="600px"}
 
@@ -39,7 +39,7 @@ By default, all activities that occur at organization and repository levels are 
 
 > **Note**
 >
-> Activities created by the Docker Support team as part of resolving customer issues appear in the Audit log as **dockersupport**.
+> Activities created by the Docker Support team as part of resolving customer issues appear in the audit log as **dockersupport**.
 
 <br />
 
