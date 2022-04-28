@@ -1279,8 +1279,6 @@ manuals:
   section:
   - path: /compose/
     title: Overview of Docker Compose
-  - path: /compose/cli-command-compatibility/
-    title: Compose v2 compatibility
   - path: /compose/install/
     title: Install Compose
   - path: /compose/gettingstarted/
@@ -1305,6 +1303,8 @@ manuals:
     title: Sample apps with Compose
   - path: /compose/release-notes/
     title: Release notes
+  - path: /compose/cli-command-compatibility/
+    title: Compose v2 compatibility
 
 - sectiontitle: Docker Hub
   section:

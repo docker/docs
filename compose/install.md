@@ -117,6 +117,78 @@ on Microsoft Windows Server and want to install Docker Compose.
 
 ### Install Compose on Linux systems
 
+You can install Docker Compose in different ways, depending on your needs:
+
+- In testing and development environments, some users choose to use automated
+  [convenience scripts](#install-using-the-convenience-script) to install Docker.
+
+- Most users
+  [set up Docker's repositories](#install-using-the-repository) and install
+  from them, for ease of installation and upgrade tasks. This is the
+  recommended approach.
+
+- Some users download the binary and
+  [install it manually](#install-binary-manually) and manage
+  upgrades completely manually.
+
+
+#### Install using the convenience script
+
+As Docker Compose is now part of the Docker CLI it can be installed via a convenience script with Docker Engine and the CLI.  
+[Choose your Linux distribution](../engine/install/index.md#server) and follow the instructions.
+</div>
+<div id="linux-standalone" class="tab-pane fade" markdown="1">
+
+
+#### Install using the repository
+
+If you already follow the instructions to install Docker Engine, Docker Compose should already be installed.   
+Otherwise, you can set up the Docker repository as mentioned in the Docker Engine installation, [choose your Linux distribution](../engine/install/index.md#server) and go to the `Set up the repository` section.
+
+When finished
+
+1. Update the `apt` package index, and install the _latest version_ of Docker Compose, or go to the next step to install a specific version:
+
+    ```console
+    $ sudo apt-get update
+    $ sudo apt-get install docker-compose-plugin
+    ```
+
+   > Got multiple Docker repositories?
+   >
+   > If you have multiple Docker repositories enabled, installing
+   > or updating without specifying a version in the `apt-get install` or
+   > `apt-get update` command always installs the highest possible version,
+   > which may not be appropriate for your stability needs.
+
+2.  To install a _specific version_ of Docker Engine, list the available versions
+    in the repo, then select and install:
+
+    a. List the versions available in your repo:
+
+    ```console
+    $ apt-cache madison docker-compose-plugin
+
+      docker-compose-plugin | 2.3.3~ubuntu-focal | https://download.docker.com/linux/ubuntu focal/stable arm64 Packages
+    ```
+
+    b. Install a specific version using the version string from the second column,
+    for example, `2.3.3~ubuntu-focal`.
+
+    ```console
+    $ sudo apt-get install docker-compose-plugin=<VERSION_STRING>
+    ```
+
+3.  Verify that Docker Compose is installed correctly by checking the version.
+
+    ```console
+    $ docker compose version
+    Docker Compose version v2.3.3
+    ```
+
+
+#### Install Binary Manually
+
 On Linux, you can download the Docker Compose binary from the
 [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
 Follow the instructions from the link, which involve running the `curl` command
@@ -153,8 +225,7 @@ also included below.
     $ docker compose version
     Docker Compose version {{site.compose_version}}
     ```
-</div>
-<div id="linux-standalone" class="tab-pane fade" markdown="1">
+
 
 ### Install Compose as standalone binary on Linux systems
 
