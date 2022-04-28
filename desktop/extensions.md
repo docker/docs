@@ -10,11 +10,11 @@ Docker Extensions lets you use third-party tools within Docker Desktop to extend
 
 Docker Community members and partners can use our [SDK](https://docker-desktop-extensions.netlify.app/){:target="_blank" rel="noopener" class="_"}  to create new extensions. 
 
-> **Preview**
+> **Beta**
 >
-> The Docker Extensions feature is currently offered as a Preview. We recommend that you do not use Extensions in production environments.
+> The Docker Extensions feature is currently in Beta. We recommend that you do not use Extensions in production environments.
 
-![extenstions](images/extensions-image.PNG){:width="750px"}
+![extenstions](images/extensions-marketplace.PNG){:width="750px"}
 
 ## Prerequisites
 

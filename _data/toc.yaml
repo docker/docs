@@ -1189,7 +1189,7 @@ manuals:
     - path: /desktop/dev-environments/
       title: Dev Environments (Preview)
     - path: /desktop/extensions/
-      title: Extensions (Preview)
+      title: Extensions (Beta)
     - path: /desktop/multi-arch/
       title: Multi-arch support
     - path: /desktop/kubernetes/
