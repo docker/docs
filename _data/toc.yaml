@@ -47,7 +47,7 @@ guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
-- sectiontitle: Language-specific guides (New)
+- sectiontitle: Language-specific guides
   section:
   - path: /language/
     title: Overview
