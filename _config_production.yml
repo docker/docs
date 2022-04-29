@@ -52,6 +52,26 @@ defaults:
   # Set the correct edit-URL for upstream resources. We usually don't create a direct
   # edit link for these, and instead point to the directory that contains the file.
   - scope:
+      path: cloud/aci-compose-features.md
+    values:
+      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
+  - scope:
+      path: cloud/aci-container-features.md
+    values:
+      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
+  - scope:
+      path: cloud/ecs-architecture.md
+    values:
+      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
+  - scope:
+      path: cloud/ecs-compose-features.md
+    values:
+      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
+  - scope:
+      path: cloud/ecs-compose-examples.md
+    values:
+      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
+  - scope:
       path: engine/deprecated.md
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/"
