@@ -7,6 +7,17 @@
 {{ controller_data.short | replace_relative_links: page.path }}
 
 {% if controller_data.min_api_version %}
+{% comment %}
+  To reduce unnecessary clutter on the page, we only show the minimum required
+  API version if it requires a relatively recent version of the Engine, which
+  is configured through the "min_api_threshold" option in _config.yml
+
+  Below, we first convert the min_api_version from a string to a number, so that
+  we can compare versions (see https://stackoverflow.com/a/27200972/1811501),
+  then compare it, to decide whether to show the "minimum required API version".
+{% endcomment %}
+{% assign min_api_version = controller_data.min_api_version | plus: 0 %}
+{% if min_api_version >= site.min_api_threshold %}
 
 <a href="/engine/api/v{{ controller_data.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ controller_data.min_api_version }}+</span></a>&nbsp;
 The client and daemon API must both be at least
@@ -14,6 +25,7 @@ The client and daemon API must both be at least
 to use this command. Use the `docker version` command on the client to check
 your client and daemon API versions.
 
+{% endif %}
 {% endif %}
 
 {% if controller_data.deprecated %}
@@ -114,7 +126,14 @@ For example uses of this command, refer to the [examples section](#examples) bel
   {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" rel="noopener" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
   {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" rel="noopener" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
   {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" rel="noopener" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
-  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
+  {%- if option.min_api_version -%}
+    {% assign min_api_version = option.min_api_version | plus: 0 %}
+    {% if min_api_version >= site.min_api_threshold %}
+      {% capture min-api %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" title="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{%endcapture%}
+    {%- endif -%}
+  {%- else -%}
+    {% capture min-api %}{%endcapture%}
+  {%- endif -%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
   {% capture all-badges %}{{ deprecated-badge }}{{ experimental-daemon-badge }}{{ experimental-cli-badge }}{{ min-api }}{{ flag-orchestrator }}{% endcapture %}
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
