@@ -53,14 +53,11 @@ your client and daemon API versions.
 
 {% if controller_data.experimentalcli %}
 
-> This command is experimental on the Docker client.
+> This command is experimental.
 >
-> **It should not be used in production environments.**
->
-> To enable experimental features in the Docker CLI, edit the
-> [config.json](/engine/reference/commandline/cli/#configuration-files)
-> and set `experimental` to `enabled`. You can go [here](https://docs.docker.com/engine/reference/commandline/cli/#experimental-features)
-> for more information.
+> [Experimental features](https://docs.docker.com/engine/reference/commandline/cli/#experimental-features)
+> are intended for testing and feedback as their functionality or UX may change
+> between releases without warning or can be removed entirely in a future release.
 {: .important }
 
 {% endif %}
