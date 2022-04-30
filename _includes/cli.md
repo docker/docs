@@ -25,15 +25,6 @@ your client and daemon API versions.
 
 {% endif %}
 
-{% if page.enterprise_only == true %}
-
-> This command is only available on Docker Enterprise Edition.
->
-> Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" rel="noopener" class="_"}.
-{: .important }
-
-{% endif %}
-
 {% if controller_data.experimental %}
 
 > This command is experimental.
