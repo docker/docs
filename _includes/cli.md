@@ -2,7 +2,7 @@
 {% assign controller_data = site.data[include.datafolder][include.datafile] %}
 {% assign parentPath = page.path | prepend: "/" | remove: page.name %}
 
-## Description
+<br />
 
 {{ controller_data.short | replace_relative_links: page.path }}
 
@@ -77,8 +77,13 @@ $ {{ controller_data.usage | replace: tabChar, "" | strip }}{% if controller_dat
 
 {% endif %}
 {% unless controller_data.long == controller_data.short %}
+{% if controller_data.options %}
+Refer to the [options section](#options) for an overview of available [`OPTIONS`](#options) for this command.
+{% endif %}
 
-## Extended description
+## Description
+
+{: name="extended-description"}
 
 {{ controller_data.long | replace_relative_links: page.path }}
 
