@@ -142,7 +142,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
 {% endif %}
 
 {% if controller_data.pname %}
-{% unless controller_data.pname == include.datafile %}
+{% unless controller_data.pname == include.datafile or controller_data.pname == "docker" %}
 
 ## Parent command
 
