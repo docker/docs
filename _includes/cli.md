@@ -150,9 +150,9 @@ For example uses of this command, refer to the [examples section](#examples) bel
 {% capture parentdatafile %}{{ controller_data.plink | remove_first: ".yaml" }}{% endcapture %}
 {% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
 
-| Command | Description |
-| ------- | ----------- |
-| [{{ controller_data.pname }}]({{parentPath}}{{ parentfile }}/) | {{ parentDesc }}|
+| Command                                                        | Description      |
+|:---------------------------------------------------------------|:-----------------|
+| [{{ controller_data.pname }}]({{parentPath}}{{ parentfile }}/) | {{ parentDesc }} |
 
 {% endunless %}
 {% endif %}
