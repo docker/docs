@@ -274,7 +274,7 @@ Your machine must have the following features for Docker Desktop to function cor
 
 1. Virtual Machine Platform
 2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}
-3. Virtualization enabled in the BIOS
+3. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 4. Hypervisor enabled at Windows startup
 
 ![WSL 2 enabled](images/wsl2-enabled.png){:width="600px"}
@@ -285,7 +285,7 @@ On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following fea
 
 1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview){:target="_blank" rel="noopener" class="_"}
    installed and working
-2. Virtualization enabled in the BIOS
+2. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 3. Hypervisor enabled at Windows startup
 
 ![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
