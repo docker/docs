@@ -188,6 +188,18 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 ...
 ```
 
+Starting from Docker 20.10, you can now provide secrets with `env` as an alternative for storing a secret value to a file. For example, if you have an environment variable MY_ENV, you can build the image with:
+```console
+docker build --secret id=foo,env=MY_ENV
+```
+
+or you can use the shorthand:
+```console
+docker build --secret id=MY_ENV
+```
+
+Note that the secret will still be exposed inside the build as a file in `/run/secrets`.
+
 ## Using SSH to access private data in builds
 
 > **Acknowledgment**
