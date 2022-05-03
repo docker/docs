@@ -96,7 +96,7 @@ $ docker compose ls --all --format json
 
 ## Use `--project-name` with Compose commands
 
-With the GA version of Compose we can run some commands:
+With the GA version of Compose, you can run some commands:
 - outside of directory containing the project compose file
 - or without specifying the path of the Compose with the `--file` flag
 - or without specifying the project directory with the `--project-directory` flag
