@@ -124,7 +124,7 @@ You can install Docker Compose in different ways, depending on your needs:
 - Most users [set up Docker's repositories](#install-using-the-repository) and
   install from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
-- Some users [download and install the binary](#install-binary-manually),
+- Some users [download and install the binary](#install-the-binary-manually),
   and manage upgrades manually.
 
 
