@@ -247,18 +247,18 @@ Now let's change the Docker Hub login with the GitHub Container Registry one:
 ```
 {% endraw %}
 
-Remember to change how the image is tagged. The following example keeps ‘latest'
-as the only tag. However, you can add any logic to this if you prefer:
+Remember to change how the image is tagged and where it's cached. The following example is a
+functional equivalent for the aforementioned logic against the GitHub Container Registry:
 
 {% raw %}
 ```yaml
-  tags: ghcr.io/<username>/simplewhale:latest
+  tags: ghcr.io/${{ secrets.GITHUB_USERNAME }}/simplewhale:latest
+  cache-from: type=registry,ref=ghcr.io/${{ secrets.GITHUB_USERNAME }}/simplewhale:buildcache
+  cache-to: type=registry,ref=ghcr.io/${{ secrets.GITHUB_USERNAME }}/simplewhale:buildcache,mode=max
 ```
 {% endraw %}
 
-> **Note**: Replace `<username>` with the repository owner. We could use
-> {% raw %}`${{ github.repository_owner }}`{% endraw %} but this value can be mixed-case, so it could
-> fail as [repository name must be lowercase](https://github.com/docker/build-push-action/blob/master/TROUBLESHOOTING.md#repository-name-must-be-lowercase){:target="_blank" rel="noopener" class="_"}.
+> **Note**: The repository owner's username needs to be lowercase.
 
 ![Update tagged images](images/ghcr-logic.png){:width="500px"}
 
