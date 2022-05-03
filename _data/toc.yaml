@@ -1097,8 +1097,6 @@ reference:
 - path: /glossary/
   title: Glossary
 
-
-
 samples:
 - path: /samples/
   title: Samples overview
@@ -1182,8 +1180,20 @@ manuals:
               title: Edge releases
             - path: /desktop/windows/release-notes/archive/
               title: Older versions
-    - path: /desktop/linux/
-      title: Linux (Beta)
+    - sectiontitle: Linux
+      section:
+        - path: /desktop/linux/install/
+          title: Install Docker Desktop for Linux
+        - path: /desktop/linux/
+          title: User manual
+        - path: /desktop/linux/networking/
+          title: Networking
+        - path: /desktop/linux/space/
+          title: Disk utilization
+        - path: /desktop/linux/troubleshoot/
+          title: Logs and troubleshooting
+        - path: /desktop/linux/release-notes/
+          title: Release notes    
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
