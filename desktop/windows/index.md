@@ -142,7 +142,7 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 #### Proxies
 
-Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
+Docker Desktop detects the HTTP/HTTPS proxy settings and
 automatically propagates these to Docker. For example, if you set your proxy
 settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 
