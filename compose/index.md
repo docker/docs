@@ -71,23 +71,39 @@ Compose has commands for managing the whole lifecycle of your application:
 
 > Important
 >
-> The new Compose V2, which supports the `compose` command as part of the Docker CLI, is now available.
+> The new Compose V2, which supports the `compose` command as part of the Docker
+> CLI, is now available.
 >
-> Compose V2 integrates compose functions into the Docker platform, continuing to support most of the previous `docker-compose` features and flags. You can run Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose`, instead of `docker-compose`.
+> Compose V2 integrates compose functions into the Docker platform, continuing
+> to support most of the previous `docker-compose` features and flags. You can
+> run Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose`,
+> instead of `docker-compose`.
 {: .important}
 
-If you rely on using Docker Compose as `docker-compose` (with a hyphen), you can set up Compose V2 to act as a drop-in replacement of the previous `docker-compose`.  Refer to the [Installing Compose](install.md) section for detailed instructions.
+If you rely on using Docker Compose as `docker-compose` (with a hyphen), you can
+set up Compose V2 to act as a drop-in replacement of the previous `docker-compose`.
+Refer to the [Installing Compose](install.md) section for detailed instructions.
 
 ## Context of Docker Compose evolution
 
-Introduction of the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"} makes a clean distinction between the Compose YAML file model and the `docker-compose` implementation. Making this change has enabled a number of enhancements, including adding the `compose` command directly into the Docker CLI,  being able to “up” a Compose application on cloud platforms by simply switching the Docker context, and launching of [Amazon ECS](/cloud/ecs-integration) and [Microsoft ACI](/cloud/aci-integration). As the Compose specification evolves, new features land faster in the Docker CLI.
+Introduction of the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}
+makes a clean distinction between the Compose YAML file model and the `docker-compose`
+implementation. Making this change has enabled a number of enhancements, including
+adding the `compose` command directly into the Docker CLI,  being able to "up" a
+Compose application on cloud platforms by simply switching the Docker context,
+and launching of [Amazon ECS](../cloud/ecs-integration.md) and [Microsoft ACI](../cloud/aci-integration.md).
+As the Compose specification evolves, new features land faster in the Docker CLI.
 
-Compose V2 implementation relies directly on the compose-go bindings which are maintained as part of the specification. This allows us to include community proposals, experimental implementations by the Docker CLI and/or Engine, and deliver features faster to users. Compose V2 also  supports some of the newer additions to the Compose specification, such as [profiles](profiles.md) and [GPU](gpu-support.md) devices.
+Compose V2 relies directly on the compose-go bindings which are maintained as part
+of the specification. This allows us to include community proposals, experimental
+implementations by the Docker CLI and/or Engine, and deliver features faster to
+users. Compose V2 also supports some of the newer additions to the specification,
+such as [profiles](profiles.md) and [GPU](gpu-support.md) devices.
 
-Compose V2 as been re-written in [Go](https://go.dev), which improves integration
+Compose V2 has been re-written in [Go](https://go.dev), which improves integration
 with other Docker command-line features, and allows it to run natively on 
 [macOS on Apple silicon](../desktop/mac/apple-silicon.md), Windows, and Linux,
-without the need of dependencies such as Python. 
+without dependencies such as Python. 
 
 For more information about compatibility with the compose v1 command-line, see the [docker-compose compatibility list](cli-command-compatibility.md).
 
@@ -199,19 +215,6 @@ For details on using production-oriented features, see
 To see a detailed list of changes for past and current releases of Docker
 Compose, refer to the
 [CHANGELOG](https://github.com/docker/compose/blob/master/CHANGELOG.md).
-
-
-## Compose documentation
-
-- [Installing Compose](install.md)
-- [Getting started with Compose](gettingstarted.md)
-- [Get started with Django](../samples/django.md)
-- [Get started with Rails](../samples/rails.md)
-- [Get started with WordPress](../samples/wordpress.md)
-- [Frequently asked questions](faq.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-
 
 ## Getting help
 

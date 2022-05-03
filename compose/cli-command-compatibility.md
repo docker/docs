@@ -68,8 +68,8 @@ The result above is a full size configuration of what will be used by Docker Com
 
 ### Copy
 
-The cp command is intended to copy files or folders between service containers and the local filesystem.  
-This command is a bidirectional command, we can copy `from` or `to` the service containers.
+The `cp` command is intended to copy files or folders between service containers and the local filesystem.  
+This command is a bidirectional command, we can copy **from** or **to** the service containers.
 
 Copy a file from a service container to the local filesystem:
 
@@ -102,8 +102,9 @@ With the GA version of Compose we can run some commands:
 - or without specifying the project directory with the `--project-directory` flag
 
 When a compose project has been loaded once, we can just use the `-p` or `--project-name` to reference it:
+
 ```console
 $ docker compose -p my-loaded-project restart my-service
 ```
 
-This option works with `start`, `stop`, `restart` and `down`
+This option works with the `start`, `stop`, `restart` and `down` commands.

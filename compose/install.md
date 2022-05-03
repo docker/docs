@@ -121,15 +121,11 @@ You can install Docker Compose in different ways, depending on your needs:
 
 - In testing and development environments, some users choose to use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
-
-- Most users
-  [set up Docker's repositories](#install-using-the-repository) and install
-  from them, for ease of installation and upgrade tasks. This is the
+- Most users [set up Docker's repositories](#install-using-the-repository) and
+  install from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
-
-- Some users download the binary and
-  [install it manually](#install-binary-manually) and manage
-  upgrades completely manually.
+- Some users [download and install the binary](#install-binary-manually),
+  and manage upgrades manually.
 
 
 #### Install using the convenience script
@@ -154,12 +150,6 @@ When finished
     $ sudo apt-get install docker-compose-plugin
     ```
 
-   > Got multiple Docker repositories?
-   >
-   > If you have multiple Docker repositories enabled, installing
-   > or updating without specifying a version in the `apt-get install` or
-   > `apt-get update` command always installs the highest possible version,
-   > which may not be appropriate for your stability needs.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
@@ -187,7 +177,7 @@ When finished
     ```
 
 
-#### Install Binary Manually
+#### Install the binary manually
 
 On Linux, you can download the Docker Compose binary from the
 [Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"} and copying it into `$HOME/.docker/cli-plugins` as `docker-compose`.
