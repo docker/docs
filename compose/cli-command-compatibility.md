@@ -63,3 +63,48 @@ networks:
 ```
 
 The result above is a full size configuration of what will be used by Docker Compose to run the project.
+
+## New commands introduced in Compose v2
+
+### Copy
+
+The `cp` command is intended to copy files or folders between service containers and the local filesystem.  
+This command is a bidirectional command, we can copy **from** or **to** the service containers.
+
+Copy a file from a service container to the local filesystem:
+
+```console
+$ docker compose cp my-service:~/path/to/myfile ~/local/path/to/copied/file
+```
+
+We can also copy from the local filesystem to all the running containers of a service:
+
+```console
+$ docker compose cp --all ~/local/path/to/source/file my-service:~/path/to/copied/file
+```
+
+
+### List
+
+The ls command is intended to list the Compose projects. By default, the command only lists the running projects, 
+we can use flags to display the stopped projects, to filter by conditions and change the output to `json` format for example.
+
+```console
+$ docker compose ls --all --format json
+[{"Name":"dockergithubio","Status":"exited(1)","ConfigFiles":"/path/to/docker.github.io/docker-compose.yml"}]
+```
+
+## Use `--project-name` with Compose commands
+
+With the GA version of Compose, you can run some commands:
+- outside of directory containing the project compose file
+- or without specifying the path of the Compose with the `--file` flag
+- or without specifying the project directory with the `--project-directory` flag
+
+When a compose project has been loaded once, we can just use the `-p` or `--project-name` to reference it:
+
+```console
+$ docker compose -p my-loaded-project restart my-service
+```
+
+This option works with the `start`, `stop`, `restart` and `down` commands.

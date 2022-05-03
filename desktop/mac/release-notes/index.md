@@ -366,7 +366,7 @@ actual memory usage. See
 ### New
 
 - **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../index.md#software-updates).
-- **Compose V2** You can now specify whether to use [Docker Compose V2](../../../compose/cli-command.md) in the General settings.
+- **Compose V2** You can now specify whether to use [Docker Compose V2](../../../compose/index.md#compose-v2-and-the-new-docker-compose-command) in the General settings.
 - **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../../dashboard.md#explore-volumes). Ships [Docker Public Roadmap#215](https://github.com/docker/roadmap/issues/215){: target="_blank" rel="noopener" class="_"}
 
 ### Upgrades
