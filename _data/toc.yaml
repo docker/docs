@@ -1034,7 +1034,7 @@ reference:
     path: /docker-hub/api/latest/
   - title: Registry API
     path: /registry/spec/api/
-  - sectiontitle: Docker Extension SDK API
+  - sectiontitle: Docker Extension SDK API (Beta)
     section:
       - path:
         title:
@@ -1239,8 +1239,8 @@ manuals:
     - path: /desktop/dev-environments/
       title: Dev Environments (Preview)
     - path: /desktop/extensions/
-      title: Extensions (Preview)
-    - sectiontitle: Extensions SDK (Preview)
+      title: Extensions (Beta)
+    - sectiontitle: Extensions SDK (Beta)
       section:
         - path: /desktop/extensions-sdk/
           title: Introduction
