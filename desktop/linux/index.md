@@ -1,32 +1,26 @@
 ---
 description: Getting Started
 keywords: linux, tutorial, run, docker, local, machine
-redirect_from:
-- /docker-for-linux/
-- /docker-for-linux/index/
-- /docker-for-linux/started/
-- /engine/installation/linux/
-- /installation/linux/
-- /linux/
-- /linux/started/
 title: Docker Desktop for Linux user manual
 ---
 
 Welcome to Docker Desktop! The Docker Desktop for Linux user manual provides information on how to configure and manage your Docker Desktop settings.
 
+Docker Desktop is an easy-to-install application that enables you to build and share containerized applications and microservices. 
+
 For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
 
-## Preferences
+## Settings
 
-The Docker **Preferences** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
+The Docker **Settings** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
 and more.
 
-Choose the Docker menu ![whale menu](images/whale-x.png){: .inline} > **Preferences** from the
+Choose the Docker menu ![whale menu](images/whale-x.png){: .inline} > **Settings** from the
 menu bar and configure the runtime options described below.
 
 ### General
 
-![Preferences](images/menu/prefs-general.png){:width="750px"}
+![Settings](images/menu/prefs-general.png){:width="750px"}
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
@@ -38,7 +32,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
 
-- **Enable Docker Compose V1/V2 compatibility mode**: Select this option to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/cli-command.md).
+- **Enable Docker Compose V1/V2 compatibility mode**: Select this option to enable the `docker-compose` command to use Docker Compose V2.
 
 ### Resources
 
@@ -57,7 +51,7 @@ Advanced settings are:
 available on the host machine. To increase processing power, set this to a
 higher number; to decrease, lower the number.
 
-- **Memory**: By default, Docker Desktop is set to use 50% of your host's memory. To increase the RAM, set this to a higher number. To decrease it, lower the number.
+- **Memory**: By default, Docker Desktop is set to use 25% of your host's memory. To increase the RAM, set this to a higher number. To decrease it, lower the number.
 
 - **Swap**: Configure swap file size as needed. The default is 1 GB.
 
@@ -99,12 +93,7 @@ File share settings are:
 
 #### Proxies
 
-Docker Desktop detects HTTP/HTTPS Proxy Settings and automatically
-propagates these to Docker. For example, if you set your
-proxy settings to `http://proxy.example.com`, Docker uses this proxy when
-pulling containers.
-
-If you want to configure proxies manually, turn on the **Manual proxy configuration** setting.
+To configure HTTP proxies, switch on the **Manual proxy configuration** setting.
 
 Your proxy settings, however, will not be propagated into the containers you start.
 If you wish to set the proxy settings for your containers, you need to define
@@ -120,12 +109,12 @@ HOME=/root
 HTTP_PROXY=http://proxy.example.com:3128
 ```
 
-For more information on setting environment variables for running containers,
-see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
+For more information on configuring the Docker CLI to automatically set proxy variables for both `docker run` and `docker build`
+see [Configure the Docker client](/network/proxy#configure-the-docker-client).
 
 #### Network
 
-You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
+Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case the choice of subnet clashes with something in your environment, specify a custom subnet using the **Network** setting.
 
 ### Docker Engine
 
@@ -172,19 +161,6 @@ The **Software Updates** section notifies you of any updates available to Docker
 ## Dashboard
 
 The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Dashboard](../dashboard.md).
-
-## Add TLS certificates
-
-You can add trusted Certificate Authorities (CAs) (used to verify registry
-server certificates) and client certificates (used to authenticate to
-registries) to your Docker daemon.
-
-### TODO: Add custom CA certificates (server side)
-
-
-### TODO: Add client certificates
-
-
 
 ## Credentials management
 
@@ -235,7 +211,7 @@ docker.io/molly/privateimage:latest
 
 ## Docker Hub
 
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
+Select **Sign in / Create Docker ID** from the Docker Desktop menu to access your [Docker](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 
 For more information, refer to the following [Docker Hub topics](../../docker-hub/index.md){:target="_blank"
 class="_"}:
@@ -243,29 +219,15 @@ class="_"}:
 * [Organizations and Teams in Docker Hub](../../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
 * [Builds](../../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
 
-### Two-factor authentication
-
-Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
-
-You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
-
-After you have enabled two-factor authentication:
-
-1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**
-
-2. Enter your Docker ID and password and click **Sign in**.
-
-3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then click **Verify**.
-
 ## Pause/Resume
 
-Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
+You can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
 
 From the Docker menu, select ![whale menu](images/whale-x.png){: .inline} > **Pause** to pause Docker Desktop.
 
 ![Docker context menu](images/menu/prefs.png){:width="250px"}
 
-Docker Desktop now displays the paused status on the Docker menu and on the  **Containers / Apps**, **Images**, **Volumes**, and **Dev Environment** screens on the Docker Dashboard. You can still access the **Preferences** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
+Docker Desktop now displays the paused status on the Docker menu and on the  **Containers**, **Images**, **Volumes**, and **Dev Environment** screens on the Docker Dashboard. You can still access the **Settings** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
 
 Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
 

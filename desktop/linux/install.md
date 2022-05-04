@@ -2,8 +2,6 @@
 description: How to install Docker Desktop on Linux
 keywords: linux, install, download, run, docker, local
 title: Install Docker Desktop on Linux
-redirect_from:
-- /docker-for-linux/install/
 ---
 
 > **Update to the Docker Desktop terms**
@@ -18,44 +16,120 @@ redirect_from:
 
 Welcome to Docker Desktop for Linux. This page contains information about Docker Desktop for Linux system requirements, download URLs, instructions to install and update Docker Desktop for Linux.
 
-> Download Docker Desktop for Linux
+> Download Docker Desktop for Linux packages
 >
-> [DEB](https://desktop-stage.docker.com/linux/main/amd64/78459/docker-desktop-4.8.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [RPM](https://desktop-stage.docker.com/linux/main/amd64/78459/docker-desktop-4.8.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [Arch](https://desktop-stage.docker.com/linux/main/amd64/78459/docker-desktop-4.8.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [DEB](https://desktop-stage.docker.com/linux/main/amd64/78858/docker-desktop-4.8.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [RPM](https://desktop-stage.docker.com/linux/main/amd64/78858/docker-desktop-4.8.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
 
 ## System requirements
 
-Your Linux host must meet the following requirements to install Docker Desktop successfully.
+Your Linux host must meet the following requirements to install Docker Desktop successfully:
 
-- **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version.
+- 64-bit kernel and CPU support for virtualization 
 
-  > **Note**
-  >
-  > Docker supports Docker Desktop on the most recent versions of Ubuntu. That is, the current and the previous release of Ubuntu. As new major versions of are made generally available, Docker stops supporting the oldest version and supports the newest version of Ubuntu (in addition to the previous two releases). Docker Desktop currently supports .
+- KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the kvm device.
+
+- **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version. 
+
+- systemd init system
+
+- Gnome or KDE Desktop environment
 
 - At least 4 GB of RAM.
 
+Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [here](overview.md#why-docker-desktop-for-linux-runs-a-vm).
 
-## Install and run Docker Desktop on ...
-TODO: installation guides for several linux distros
+> **Note:**
+>
+> Docker does not provide support for running Docker Desktop in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on the supported distributions.
 
-### Install interactively
 
-1. Download the package coresponding to your Linux distro and install it using the distro's package manager.
+## Supported platforms
 
-      ![Install Docker app](images/docker-app-drag.png)
+Docker provides `.deb` and `.rpm` packages from the following Linux distributions
+and architectures:
 
-2. Open Applications Menu and double-click `Docker Desktop` to start Docker.
+
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+
+
+| Platform                | x86_64 / amd64         | 
+|:------------------------|:-----------------------|
+| [Ubuntu](install/ubuntu.md)     | [{{ yes }}](install/ubuntu.md) |
+| [Debian](install/debian.md)     | [{{ yes }}](install/debian.md) |
+| [Fedora](install/fedora.md)     | [{{ yes }}](install/fedora.md) |
+
+
+>  **Note:**
+>
+> An experimental package is available for [Arch](install/archlinux.md)-based distributions. Docker has not tested or verified the installation.
+
+Docker supports Docker Desktop on the current LTS release of the aforementioned distributions and the most recent version. As new versions are made generally available, Docker stops supporting the oldest version and supports the newest version.
+
+
+### KVM virtualization support
+
+
+Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org). 
+
+The `kvm` module should load automatically if the host has virtualization support. To load the module manually run:
+
+```console
+$ modprobe kvm
+```
+
+Depending on the processor of the host machine, the coresponding module must be loaded:
+
+```console
+$ modprobe kvm_intel  # Intel processors
+
+$ modprobe kvm_amd    # AMD processors
+```
+
+To check the KVM modules have been enabled:
+
+```console
+$ lsmod | grep kvm
+kvm_amd               167936  0
+ccp                   126976  1 kvm_amd
+kvm                  1089536  1 kvm_amd
+irqbypass              16384  1 kvm
+```
+
+#### Set up KVM device user permissions
+
+
+Check ownership of `/dev/kvm`, run :
+
+```console
+$ ls -al /dev/kvm
+```
+
+Add your user to the kvm group in order to access the kvm device.
+
+```console
+$ sudo usermod -aG kvm $USER
+```
+
+Log out and log back in so that your group membership is re-evaluated.
+
+
+### Generic installation steps
+
+1. Download the correct package for your Linux distribution and install it with the corresponding package manager.
+
+2. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
 
     ![Docker app in Applications](images/docker-app-in-apps.png)
 
-3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
+3. Double-click **Docker Desktop** to start Docker.
+
+4. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 
     {% include desktop-license-update.md %}
 
-4. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
+5. Click the checkbox to accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 
     > **Important**
     >
@@ -71,17 +145,21 @@ TODO: installation guides for several linux distros
    ![Docker Quick Start tutorial](images/docker-tutorial-linux.png)
 
 Congratulations! You are now successfully running Docker Desktop. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
-**Preferences** and other options. To run the Quick Start Guide on demand, select the Docker menu and then choose **Quick Start Guide**.
+**Settings** and other options. To run the Quick Start Guide on demand, select the Docker menu and then choose **Quick Start Guide**.
 
 ## Updates
 
-{% include desktop-update.md %}
+Once a new version for Docker Desktop is released, the Docker UI shows a notification. 
+ You need to download the new package each time you want to upgrade manually.
+To upgrade your installation of Docker Desktop, first stop any instance of Docker Desktop running locally,
+then follow the regular installation steps to install the new version on top of the existing
+version.
 
 ## Uninstall Docker Desktop
 
-To uninstall Docker Desktop from your Linux host:
+Docker Desktop can be removed from a Linux host using the package manager.
 
-TODO: exemplify for several distros and app managers
+Once Docker Desktop has been removed, users must remove the `credsStore` and `currentContext` properties from the `~/.docker/config.json`.
 
 > **Note**
 >

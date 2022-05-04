@@ -1,8 +1,6 @@
 ---
 description: Troubleshooting, logs, and known issues
 keywords: linux, troubleshooting, logs, issues
-redirect_from:
-- /linux/troubleshoot/
 title: Logs and troubleshooting
 ---
 
@@ -34,29 +32,6 @@ reset to factory defaults. Selecting this option results in the loss of existing
 * **Reset to factory defaults**: Choose this option to reset all options on
 Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
 
-* **Uninstall**: Choose this option to remove Docker Desktop from your
-system.
-
-> Uninstall Docker Desktop from the command line
->
-
-### Ubuntu
-To remove Docker Desktop for Linux, run:
-
-```console
-$ sudo apt remove docker-desktop
-```
-
-For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
-the remaining systemd service files.
-
-```console
-$ rm -r $HOME/.docker/desktop
-$ sudo rm /usr/local/bin/com.docker.cli
-$ sudo apt purge docker-desktop
-```
-
-TODO: instructions for other distros
 
 ## Diagnose and feedback
 
@@ -117,7 +92,7 @@ composed of your user ID (BE9AFAAF-F68B-41D0-9D12-84760E6B8740) and a timestamp
 To view the contents of the diagnostic file, run:
 
 ```console
-$ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
+$ unzip –l /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
 ```
 
 If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
@@ -138,7 +113,7 @@ The tool runs a suite of checks and displays **PASS** or **FAIL** next to each c
 
 > **Feedback**
 >
-> Let us know your feedback on the self-diagnose tool by creating an issue in the [for-linux](https://github.com/docker/desktop-linux/issues) GitHub repository.
+> Let us know your feedback on the self-diagnose tool by creating an issue in the [desktop-linux](https://github.com/docker/desktop-linux/issues) GitHub repository.
 
 <a name="logs"></a>
 
@@ -155,7 +130,7 @@ If you prefer to investigate issues yourself, you can access Docker Desktop logs
 $ journalctl --user --unit=docker-desktop
 ```
 
-You can also find additional logs for the internal components included in Docker
+You can also find the logs for the internal components included in Docker
 Desktop at `$HOME/.docker/desktop/log/`.
 
 #### View the Docker Daemon logs
@@ -166,26 +141,6 @@ to learn how to view the Docker Daemon logs.
 <a name="troubleshoot"></a>
 ## Troubleshooting
 
-### Make sure certificates are set up correctly
-
-Docker Desktop ignores certificates listed under insecure registries, and does
-not send client certificates to them. Commands like `docker run` that attempt to
-pull from the registry produces error messages on the command line, for example:
-
-```
-Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
-```
-
-As well as on the registry. For example:
-
-```
-2019/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
-2019/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
-```
-
-For more about using client and server side certificates, see
-[Adding TLS certificates](index.md#add-tls-certificates) in the Getting Started topic.
-
 ### Volume mounting requires file sharing for any project directories outside of `$HOME`
 
 If you are using mounted volumes and get runtime errors indicating an
@@ -194,14 +149,10 @@ cannot start, such as when using [Docker Compose](../../compose/gettingstarted.m
 you might need to enable [file sharing](index.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} >
-**Preferences** > **Resources** > **File sharing** and share the drive that contains the Dockerfile and volume.
+`/home/<user>` directory. Go to ![whale menu](images/whale-x.png){: .inline} >
+**Settings** > **Resources** > **File sharing** and share the drive that contains the Dockerfile and volume.
 
 ### Workarounds for common problems
-
-* If Docker Desktop fails to install or start properly on Linux:
-
-  TODO: - document possible startup blockers
 
 * If `docker` commands aren't working properly or as expected, you may need to
   unset some environment variables, to make sure you are not using the deprecated Docker Machine environment in your shell or command window. Unset the
@@ -221,10 +172,7 @@ Volume mounting requires shared drives for projects that live outside of the
     decide whether to shut the other process down, or to use a different port in
     your docker app.
 
-## Known issues
-TODO: document them
-
-
+## Support
 
 This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
 

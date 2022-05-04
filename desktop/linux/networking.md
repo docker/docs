@@ -1,8 +1,6 @@
 ---
 description: Networking
 keywords: linux, networking
-redirect_from:
-- /linux/networking/
 title: Networking features in Docker Desktop for Linux
 ---
 {% assign Arch = 'Linux' %}
@@ -71,13 +69,13 @@ services:
 
 ## Known limitations, use cases, and workarounds
 
-Following is a summary of current limitations on the Docker Desktop for {{Arch}}
+Below is a summary of the current limitations on the Docker Desktop for {{Arch}}
 networking stack, along with some ideas for workarounds.
 
 ### Changing internal IP addresses
 
-The internal IP addresses used by Docker can be changed via the Settings Panel. After changing IPs, it is necessary to reset the Kubernetes
-cluster and to leave any active Swarm.
+The internal IP addresses used by Docker can be changed from the **Settings** panel.
+After changing IPs, you need to reset the Kubernetes cluster and leave any active Swarm.
 
 ### I cannot ping my containers
 
@@ -95,7 +93,7 @@ There are two scenarios that the above limitations affect:
 
 The host has a changing IP address (or none if you have no network access). We recommend that you connect to the special DNS name
 `host.docker.internal` which resolves to the internal IP address used by the
-host. This is for development purpose and will not work in a production environment outside of Docker Desktop for Linux.
+host. This is for development purposes and will not work in a production environment outside of Docker Desktop for Linux.
 
 You can also reach the gateway using `gateway.docker.internal`.
 
