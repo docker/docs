@@ -1034,6 +1034,56 @@ reference:
     path: /docker-hub/api/latest/
   - title: Registry API
     path: /registry/spec/api/
+  - sectiontitle: Docker Extension SDK API (Beta)
+    section:
+      - path:
+        title:
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
+        title: DesktopUI
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Dialog/
+        title: Dialog
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Docker/
+        title: Docker
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DockerCommand/
+        title: DockerCommand
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DockerDesktopClient/
+        title: DockerDesktopClient
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Exec/
+        title: Exec
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecProcess/
+        title: ExecProcess
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResult/
+        title: ExecResult
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecStreamOptions/
+        title: ExecStreamOptions
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Extension/
+        title: Extension
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionCli/
+        title: ExtensionCli
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionHost/
+        title: ExtensionHost
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionVM/
+        title: ExtensionVM
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Host/
+        title: Host
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/HttpService/
+        title: HttpService
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/NavigationIntents/
+        title: NavigationIntents
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/OpenDialogResult/
+        title: OpenDialogResult
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RawExecResult/
+        title: RawExecResult
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfig/
+        title: RequestConfig
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfigV0/
+        title: RequestConfigV0
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Toast/
+        title: Toast
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
+        title: ExecResultV0
+      - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
+        title: BackendV0  
 - title: Dockerfile reference
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
@@ -1189,7 +1239,59 @@ manuals:
     - path: /desktop/dev-environments/
       title: Dev Environments (Preview)
     - path: /desktop/extensions/
-      title: Extensions (Preview)
+      title: Extensions (Beta)
+    - sectiontitle: Extensions SDK (Beta)
+      section:
+        - path: /desktop/extensions-sdk/
+          title: Introduction
+        - sectiontitle: Tutorials
+          section:
+            - title: Create your first extension
+              path: /desktop/extensions-sdk/tutorials/initialize/
+            - title: Create a minimal frontend extension
+              path: /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
+            - title: Create a ReactJS-based extension
+              path: /desktop/extensions-sdk/tutorials/react-extension/
+            - title: Create a minimal extension invoking docker commands
+              path: /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
+            - title: Create a minimal backend extension
+              path: /desktop/extensions-sdk/tutorials/minimal-backend-extension/
+        - title: Design Guidelines
+          path: /desktop/extensions-sdk/design/design-overview/
+        - sectiontitle: Extensions
+          section:
+            - title: Metadata
+              path: /desktop/extensions-sdk/extensions/METADATA/
+            - title: Labels
+              path: /desktop/extensions-sdk/extensions/labels/
+            - title: Validation
+              path: /desktop/extensions-sdk/extensions/validation/
+            - title: Distribution
+              path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+            - title: Building multi-arch extensions
+              path: /desktop/extensions-sdk/extensions/multi-arch/
+        - sectiontitle: Developer guide
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/dev/overview/
+            - title: CLI overview
+              path: /desktop/extensions-sdk/dev/cli/usage/
+            - title: Build, test and install an extension
+              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
+        - sectiontitle: UI API
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/dev/api/overview/
+            - title: Extension Backend
+              path: /desktop/extensions-sdk/dev/api/backend/
+            - title: Docker
+              path: /desktop/extensions-sdk/dev/api/docker/
+            - title: Dashboard
+              path: /desktop/extensions-sdk/dev/api/dashboard/
+            - title: Navigation
+              path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
+            - title: API Reference
+              path: /desktop/extensions-sdk/dev/api/reference/README/
     - path: /desktop/multi-arch/
       title: Multi-arch support
     - path: /desktop/kubernetes/

@@ -22,6 +22,9 @@ ARG DISTRIBUTION_BRANCH="release/2.7"
 # Compose CLI
 ARG COMPOSE_CLI_BRANCH="main"
 
+# extensions SDK
+ARG EXTENSIONS_SDK_BRANCH="main"
+
 ###
 # Set up base stages for building and deploying
 ###
@@ -40,6 +43,9 @@ ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
 ARG COMPOSE_CLI_BRANCH
 ENV COMPOSE_CLI_BRANCH=${COMPOSE_CLI_BRANCH}
 
+ARG EXTENSIONS_SDK_BRANCH
+ENV EXTENSIONS_SDK_BRANCH=${EXTENSIONS_SDK_BRANCH}
+
 # Fetch upstream resources (reference documentation)
 # Only add the files that are needed to build these reference docs, so that these
 # docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
@@ -51,6 +57,7 @@ COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
 ARG ENGINE_BRANCH
 ARG DISTRIBUTION_BRANCH
 ARG COMPOSE_CLI_BRANCH
+ARG EXTENSIONS_SDK_BRANCH
 RUN ./_scripts/fetch-upstream-resources.sh .
 
 
@@ -65,14 +72,14 @@ RUN ./_scripts/update-api-toc.sh
 ARG JEKYLL_ENV
 RUN echo "Building docs for ${JEKYLL_ENV} environment"
 RUN set -eu; \
- if [ "${JEKYLL_ENV}" = "production" ]; then \
-    jekyll build --profile -d ${TARGET} --config _config.yml,_config_production.yml; \
-    sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml"; \
- else \
-    jekyll build --profile -d ${TARGET}; \
-    echo '[]' > ${TARGET}/js/metadata.json; \
- fi; \
- find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done;
+   if [ "${JEKYLL_ENV}" = "production" ]; then \
+   jekyll build --profile -d ${TARGET} --config _config.yml,_config_production.yml; \
+   sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml"; \
+   else \
+   jekyll build --profile -d ${TARGET}; \
+   echo '[]' > ${TARGET}/js/metadata.json; \
+   fi; \
+   find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done;
 
 
 # This stage only contains the generated files. It can be used to host the

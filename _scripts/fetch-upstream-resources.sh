@@ -7,6 +7,7 @@
 : "${ENGINE_BRANCH?No release branch set for docker/docker and docker/cli}"
 : "${DISTRIBUTION_BRANCH?No release branch set for distribution/distribution}"
 : "${COMPOSE_CLI_BRANCH?No release branch set for docker/compose-cli}"
+: "${EXTENSIONS_SDK_BRANCH?No release branch set for docker/extensions-sdk}"
 
 # Translate branches for use by svn
 engine_svn_branch="branches/${ENGINE_BRANCH}"
@@ -21,11 +22,16 @@ compose_cli_svn_branch="branches/${COMPOSE_CLI_BRANCH}"
 if [ "${compose_cli_svn_branch}" = "branches/main" ]; then
 	compose_cli_svn_branch=trunk
 fi
+extensions_sdk_svn_branch="branches/${EXTENSIONS_SDK_BRANCH}"
+if [ "${extensions_sdk_svn_branch}" = "branches/main" ]; then
+	extensions_sdk_svn_branch=trunk
+fi
 
 # Directories to get via SVN. We use this because you can't use git to clone just a portion of a repository
 svn co "https://github.com/docker/cli/${engine_svn_branch}/docs/extend"                    ./engine/extend || (echo "Failed engine/extend download" && exit 1)
 svn co "https://github.com/docker/docker/${engine_svn_branch}/docs/api"                    ./engine/api    || (echo "Failed engine/api download" && exit 1)
 svn co "https://github.com/docker/compose-cli/${compose_cli_svn_branch}/docs"              ./cloud         || (echo "Failed compose-cli/docs download" && exit 1)
+svn co "https://github.com/docker/extensions-sdk/${extensions_sdk_svn_branch}/docs"              		   ./desktop/extensions-sdk         || (echo "Failed extensions-sdk/docs download" && exit 1)
 svn co "https://github.com/distribution/distribution/${distribution_svn_branch}/docs/spec" ./registry/spec || (echo "Failed registry/spec download" && exit 1)
 
 # Fix up URls in swagger files
