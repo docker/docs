@@ -8,7 +8,7 @@ toc_max: 2
 
 Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality. There is no limit to the number of extensions you can install.
 
-Docker Community members and partners can use our [SDK](../extensions-sdk.md) to create new extensions. 
+Docker Community members and partners can use our [SDK](extensions-sdk/index.md) to create new extensions. 
 
 > **Beta**
 >
