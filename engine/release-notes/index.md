@@ -14,6 +14,7 @@ This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine.
 
 > **Note:**
+>
 > The client and container runtime are now in separate packages from the daemon
 > in Docker Engine 18.09. Users should install and update all three packages at
 > the same time to get the latest patch releases. For example, on Ubuntu:
@@ -21,6 +22,27 @@ for Docker Engine.
 > instructions for the corresponding linux distro for details.
 
 # Version 20.10
+
+## 20.10.15
+2022-05-05
+
+This release of Docker Engine comes with updated versions of the `compose`,
+`buildx`, `containerd`, and `runc` components, as well as some minor bugfixes.
+
+### Daemon
+
+- Use a RWMutex for stateCounter to prevent potential locking congestion [moby/moby#43426](https://github.com/moby/moby/pull/43426).
+- Prevent an issue where the daemon was unable to find an available IP-range in
+  some conditions [moby/moby#43360](https://github.com/moby/moby/pull/43360) 
+
+### Packaging
+
+- Update Docker Compose to [v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0).
+- Update Docker Buildx to [v0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2).
+- Update Go runtime to [1.17.9](https://go.dev/doc/devel/release#go1.17.minor).
+- Update containerd (`containerd.io` package) to [v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.3).
+- Update runc version to [v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1).
+- Add packages for CentOS 9 stream and Fedora 36.
 
 ## 20.10.14
 2022-03-23

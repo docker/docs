@@ -35,8 +35,8 @@ To get started with Docker Engine on Ubuntu, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Ubuntu Jammy 22.04 (LTS)
 - Ubuntu Impish 21.10
-- Ubuntu Hirsute 21.04
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
 
