@@ -80,6 +80,10 @@ defaults:
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/extend"
   - scope:
+      path: engine/extend
+    values:
+      edit_url: "https://github.com/docker/cli/tree/master/docs/extend"
+  - scope:
       path: engine/reference
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/reference"
