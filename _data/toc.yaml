@@ -1232,8 +1232,32 @@ manuals:
               title: Edge releases
             - path: /desktop/windows/release-notes/archive/
               title: Older versions
-    - path: /desktop/linux/
-      title: Linux (Beta)
+    - sectiontitle: Linux
+      section:
+        - path: /desktop/linux/
+          title: User manual
+        - path: /desktop/linux/overview/
+          title: Overview
+        - path: /desktop/linux/install/
+          title: Install Docker Desktop for Linux
+        - sectiontitle: Installation per distro
+          section:
+            - path: /desktop/linux/install/debian/
+              title: Install on Debian
+            - path: /desktop/linux/install/fedora/
+              title: Install on Fedora
+            - path: /desktop/linux/install/ubuntu/
+              title: Install on Ubuntu
+            - path: /desktop/linux/install/archlinux/
+              title: Install on Arch
+        - path: /desktop/linux/networking/
+          title: Networking
+        - path: /desktop/linux/space/
+          title: Disk utilization
+        - path: /desktop/linux/troubleshoot/
+          title: Logs and troubleshooting
+        - path: /desktop/linux/release-notes/
+          title: Release notes    
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/

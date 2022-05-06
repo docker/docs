@@ -32,7 +32,7 @@ redirect_from:
 >
 > Docker Desktop helps you build, share, and run containers easily on Mac and
 > Windows as you do on Linux. We are excited to share that Docker Desktop for
-> Linux (Beta) is now available for you to test. For more information, see
+> Linux is now available for you to test. For more information, see
 [Docker Desktop for Linux](../../desktop/linux/index.md).
 {: .important}
 
@@ -49,8 +49,9 @@ your preferred operating system below.
 
 | Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
 |:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)     |
-| [Docker Desktop for Windows](../../desktop/windows/install.md) | [{{ yes }}](../../desktop/windows/install.md) |                                                  |
+| [Docker Desktop for Linux](../../desktop/linux/install.md)        | [{{ yes }}](../../desktop/linux/install.md)      |                                                  |
+| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)        |
+| [Docker Desktop for Windows](../../desktop/windows/install.md)    | [{{ yes }}](../../desktop/windows/install.md)    |                                                  |
 
 ### Server
 

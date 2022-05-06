@@ -46,6 +46,8 @@ Some of the key features of Docker Desktop include:
 
 Docker Desktop is available for Mac and Windows. For download information, system requirements, and installation instructions, see:
 
+
+* [Install Docker Desktop on Linux](linux/install.md)
 * [Install Docker Desktop on Mac](mac/install.md)
 * [Install Docker Desktop on Windows](windows/install.md)
 
@@ -72,6 +74,7 @@ the specified categories of images. For more information, see
 
 To learn about the various UI options and their usage, see:
 
+* [Docker Desktop for Linux user manual](linux/index.md)
 * [Docker Desktop for Mac user manual](mac/index.md)
 * [Docker Desktop for Windows user manual](windows/index.md)
 
@@ -79,5 +82,6 @@ To learn about the various UI options and their usage, see:
 
 For information about new features, improvements, and bug fixes in Docker Desktop releases, see:
 
+* [Docker Desktop for Linux Release notes](linux/release-notes/index.md)
 * [Docker Desktop for Mac Release notes](mac/release-notes/index.md)
 * [Docker Desktop for Windows Release notes](windows/release-notes/index.md)
