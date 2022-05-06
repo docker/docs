@@ -21,4 +21,4 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## Known issues
 
-* Currently altering ownership rights for files in bind mounts will fail. This is a limitation of how we have implemented file sharing between the host and VM within which the Docker Engine runs. We expect to resolve this issue in the next release.
+- Changing ownership rights for files in bind mounts fails. This is due to the way we have implemented file sharing between the host and VM within which the Docker Engine runs. We aim to resolve this issue in the next release.
