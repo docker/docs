@@ -6,25 +6,29 @@ on:
       - published
 
 jobs:
-  build-static-page:
-    name: build
-    runs-on: ubuntu-18.04
-    timeout-minutes: 10
-    env:
-      DOCKER_BUILDKIT: '1'
+  build:
+    runs-on: ubuntu-20.04
+    if: github.repository == 'docker/docker.github.io'
     steps:
-      - name: print docker info
-        run: docker version && docker info
-      - uses: actions/checkout@v2
-      - name: build current docs
-        run: docker build --build-arg JEKYLL_ENV=production --target=deploy-source --output=./_site .
-      - name: upload files to S3 bucket
-        run: aws s3 sync --acl public-read _site s3://docs.docker.com-us-east-1/ --delete
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build
+        uses: docker/bake-action@v2
+        with:
+          targets: release
+        env:
+          JEKYLL_ENV: production
+      -
+        name: Upload files to S3 bucket
+        run: |
+          aws s3 sync --acl public-read _site s3://docs.docker.com-us-east-1/ --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        if: github.repository == 'docker/docker.github.io' && github.event_name == 'push'
-      - name: update S3 website config
+      -
+        name: Update S3 website config
         uses: ./.github/actions/update-website-config
         with:
           bucketName: docs.docker.com-us-east-1
@@ -32,17 +36,17 @@ jobs:
           websiteConfig: _website-config-docs.json
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
-        if: github.repository == 'docker/docker.github.io' && github.event_name == 'push'
-      - name: invalidate docs website cache
-        run: aws --region us-east-1 lambda invoke --function-name arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator response.json
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      -
+        name: Invalidate docs website cache
+        run: |
+          aws --region us-east-1 lambda invoke --function-name arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator response.json
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        if: github.repository == 'docker/docker.github.io' && github.event_name == 'push'
-      - name: send slack notification
+      -
+        name: Send Slack notification
         run: |
           curl -X POST -H 'Content-type: application/json' --data '{"text":"Successfully published docs. https://docs.docker.com/"}' $SLACK
         env:
           SLACK: ${{ secrets.SLACK_WEBHOOK }}
-        if: github.repository == 'docker/docker.github.io' && github.event_name == 'push'

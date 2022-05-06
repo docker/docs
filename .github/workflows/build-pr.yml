@@ -3,29 +3,31 @@ name: build docker image when PR is opened
 on: pull_request
 
 jobs:
-  build-static-page:
-    name: build
-    runs-on: ubuntu-18.04
-    env:
-      DOCKER_BUILDKIT: '1'
+  build:
+    runs-on: ubuntu-20.04
     steps:
-      - name: print docker info
-        run: docker version && docker info
-      - uses: actions/checkout@v2
-      - name: build image
-        run: docker build --target=current -t documentation:latest .
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build
+        uses: docker/bake-action@v2
+        with:
+          targets: release
+
   validate:
-    name: validate links
-    runs-on: ubuntu-18.04
-    env:
-      DOCKER_BUILDKIT: '1'
+    runs-on: ubuntu-20.04
     steps:
-      - name: print docker info
-        run: docker version && docker info
-      - uses: actions/checkout@v2
-      - name: copy files to host
-        run: docker build --target=deploy-source --output=./_site .
-      - name: check for broken links
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Build
+        uses: docker/bake-action@v2
+        with:
+          targets: release
+      -
+        name: Check for broken links
         uses: chabad360/htmlproofer@master
         with:
           directory: ./_site
