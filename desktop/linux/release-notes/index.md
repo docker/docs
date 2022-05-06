@@ -11,10 +11,10 @@ This page contains information about the new features, improvements, known issue
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
 ## Docker Desktop 4.8.0
-2022-05-05   
+2022-05-06
 
 > Download Docker Desktop
 >
-> [DEB](https://desktop-stage.docker.com/linux/main/amd64/78858/docker-desktop-4.8.0-amd64.deb) |
-> [RPM](https://desktop-stage.docker.com/linux/main/amd64/78858/docker-desktop-4.8.0-x86_64.rpm) |
-> [Arch package](https://desktop-stage.docker.com/linux/main/amd64/78858/docker-desktop-4.8.0-x86_64.pkg.tar.zst)
+> [DEB](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-amd64.deb) |
+> [RPM](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-x86_64.rpm) |
+> [Arch package](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-x86_64.pkg.tar.zst)
