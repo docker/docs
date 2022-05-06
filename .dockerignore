@@ -3,6 +3,7 @@
 .github
 .gitignore
 .idea
+.jekyll-cache
 .jekyll-metadata
 .sass-cache
 tests
