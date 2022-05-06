@@ -16,7 +16,19 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html", "js/metadata.json"]
+
+exclude:
+  - _samples
+  - _scripts
+  - 404.html
+  - datacenter
+  - docker-bake.hcl
+  - ee
+  - index.html
+  - js/metadata.json
+  - LICENSE
+  - Makefile
+  - README.md
 
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons
