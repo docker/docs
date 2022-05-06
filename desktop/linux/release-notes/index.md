@@ -18,3 +18,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [DEB](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-amd64.deb) |
 > [RPM](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-x86_64.rpm) |
 > [Arch package](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-x86_64.pkg.tar.zst)
+
+## Known issues
+
+* Currently altering ownership rights for files in bind mounts will fail. This is a limitation of how we have implemented file sharing between the host and VM within which the Docker Engine runs. We expect to resolve this issue in the next release.
