@@ -15,9 +15,9 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [DEB](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-amd64.deb) |
-> [RPM](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-x86_64.rpm) |
-> [Arch package](https://desktop-stage.docker.com/linux/main/amd64/78933/docker-desktop-4.8.0-x86_64.pkg.tar.zst)
+> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64)
 
 ## Known issues
 
