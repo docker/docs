@@ -53,7 +53,7 @@ The post-install script:
 ## Upgrade Docker Desktop
 
 Once a new version for Docker Desktop is released, the Docker UI shows a notification. 
-You need to download the new package each time you want to upgrade Docker Desktop and run
+You need to first remove the previous version and then download the new package each time you want to upgrade Docker Desktop. Run:
 
 ```console
 $ sudo dnf remove docker-desktop
