@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.7.1
-2022-04-19
+## Docker Desktop 4.8.0
+2022-05-06
 
 > Download Docker Desktop
 >
@@ -33,6 +33,48 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
 
+### New
+
+- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Created a Docker Homepage where you can run popular images and discover how to use them.
+- [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
+
+### Upgrades
+
+- [Compose v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0)
+- [Go 1.18.1](https://golang.org/doc/go1.18)
+- [Kubernetes 1.24](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.0)
+
+### Bug fixes and minor changes
+
+- Introduced reading system proxy. You no longer need to manually configure proxies unless it differs from your OS level proxy.
+- Fixed a bug that showed Remote Repositories in the Dashboard when running behind a proxy.
+- Fixed vpnkit establishing and blocking the client connection even if the server is gone. See [docker/for-mac#6235](https://github.com/docker/for-mac/issues/6235).
+- Made improvements on the Volume tab in Docker Desktop:
+  - Volume size is displayed.
+  - Columns can be resized, hidden and reordered.
+  - A columns sort order and hidden state is persisted, even after Docker Desktop restarts.
+  - Row selection is persisted when switching between tabs, even after Docker Desktop restarts.
+- Fixed a bug in the Dev Environments tab that did not add a scroll when more items were added to the screen.
+- Standardised the header title and action in the Dashboard.
+- Added support for downloading Registry Access Management policies through HTTP proxies.
+- Fixed an issue related to empty remote repositories when the machine is in sleep mode for an extended period of time.
+- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "<none>" but their tag is.
+- Docker Desktop's icon now matches Big Sur Style guide. See [docker/for-mac#5536](https://github.com/docker/for-mac/issues/5536).
+- Fixed a problem with duplicate Dock icons and Dock icon not working as expected. Fixes [docker/for-mac#6189](https://github.com/docker/for-mac/issues/6189).
+- Improved the error message when `docker pull` fails because an HTTP proxy is required.
+- Added the ability to clear the search bar easily in Docker Desktop. 
+- Renamed the "Containers / Apps" tab to "Containers".
+- Improved support for the `Cmd+Q` shortcut.
+
+## Docker Desktop 4.7.1
+2022-04-19
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/77678/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/77678/Docker.dmg)
 ### Bug fixes and minor changes
  - Fixed a crash on the Quick Start Guide final screen.
 
