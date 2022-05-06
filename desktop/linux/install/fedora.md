@@ -56,6 +56,7 @@ Once a new version for Docker Desktop is released, the Docker UI shows a notific
 You need to download the new package each time you want to upgrade Docker Desktop and run
 
 ```console
+$ sudo dnf remove docker-desktop
 $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
 ```
 
