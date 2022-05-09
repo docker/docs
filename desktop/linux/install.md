@@ -34,7 +34,7 @@ Your Linux host must meet the following requirements to install Docker Desktop s
 
 - systemd init system
 
-- Gnome or KDE Desktop environment
+- GNOME, KDE or MATE Desktop environment
 
 - At least 4 GB of RAM.
 
