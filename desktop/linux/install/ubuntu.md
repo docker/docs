@@ -38,7 +38,7 @@ $ sudo apt purge docker-desktop
 
 Recommended approach to install Docker Desktop on Ubuntu:
 
-1. Set up [Docker's DEB repository](../../../engine/install/ubuntu.md#set-up-the-repository). 
+1. Set up [Docker's package repository](../../../engine/install/ubuntu.md#set-up-the-repository). 
 
 2. Download latest DEB package from the [release](../release-notes/index.md) page.
 

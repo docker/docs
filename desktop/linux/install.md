@@ -176,7 +176,7 @@ Use the `docker context ls` command to view what contexts are available on your
 machine. The current context is indicated with an asterisk (`*`);
 
 ```console
- $ docker context ls
+$ docker context ls
 NAME            DESCRIPTION                               DOCKER ENDPOINT                                  ...
 default *       Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                      ...
 desktop-linux                                             unix:///home/<user>/.docker/desktop/docker.sock  ...        
@@ -201,7 +201,7 @@ docker-desktop
 Current context is now "docker-desktop"
 ```
 
-Refer to the [Docker Context documentation](/engine/context/working-with-contexts) for more details.
+Refer to the [Docker Context documentation](../../engine/context/working-with-contexts) for more details.
 
 
 ## Quick Start Guide  

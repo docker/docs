@@ -38,7 +38,7 @@ For a Gnome Desktop environment, you must also install AppIndicator and KStatusN
 
 Recommended approach to install Docker Desktop on Debian:
 
-1. Set up [Docker's DEB repository](../../../engine/install/debian.md#set-up-the-repository). 
+1. Set up [Docker's package repository](../../../engine/install/debian.md#set-up-the-repository). 
 
 2. Download latest DEB package from the [release](../release-notes/index.md) page.
 

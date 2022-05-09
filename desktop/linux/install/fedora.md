@@ -19,7 +19,7 @@ For a Gnome Desktop environment you must also install AppIndicator and KStatusNo
 
 To install Docker Desktop on Fedora:
 
-1. Set up [Docker's RPM repository](../../../engine/install/fedora.md#set-up-the-repository). 
+1. Set up [Docker's package repository](../../../engine/install/fedora.md#set-up-the-repository). 
 
 2. Download latest RPM package from the [release](../release-notes/index.md) page.
 
