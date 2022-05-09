@@ -1,20 +1,12 @@
 ---
 description: How to install Docker Desktop on Linux
-keywords: linux, install, download, run, docker, local
+keywords: linux, desktop, docker desktop, docker desktop for linux, dd4l, install, system requirements
 title: Install Docker Desktop on Linux
 ---
 
-> **Update to the Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn
-> more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
-{: .important}
-
-Welcome to Docker Desktop for Linux. This page contains information about Docker Desktop for Linux system requirements, download URLs, instructions to install and update Docker Desktop for Linux.
+Welcome to Docker Desktop for Linux. This page contains information about Docker
+Desktop for Linux system requirements, download URLs, instructions to install and
+update Docker Desktop for Linux.
 
 > Download Docker Desktop for Linux packages
 >
