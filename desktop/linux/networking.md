@@ -107,13 +107,13 @@ If you have installed Python on your machine, use the following instructions as 
 
    ```console
     $ python -m http.server 8000
-    ```
+   ```
 
-If you have installed Python 2.x, run:
+   If you have installed Python 2.x, run:
 
    ```console
     $ python -m SimpleHTTPServer 8000
-    ```
+   ```
 
 2. Now, run a container, install `curl`, and try to connect to the host using the following commands:
 

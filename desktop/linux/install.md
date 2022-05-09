@@ -77,7 +77,7 @@ $ modprobe kvm_intel  # Intel processors
 $ modprobe kvm_amd    # AMD processors
 ```
 
-To check the KVM modules are enabled, run:
+To check if the KVM modules are enabled, run:
 
 ```console
 $ lsmod | grep kvm
@@ -97,6 +97,7 @@ $ ls -al /dev/kvm
 ```
 
 Add your user to the kvm group in order to access the kvm device:
+
 ```console
 $ sudo usermod -aG kvm $USER
 ```
@@ -201,7 +202,7 @@ docker-desktop
 Current context is now "docker-desktop"
 ```
 
-Refer to the [Docker Context documentation](../../engine/context/working-with-contexts) for more details.
+Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
 
 
 ## Quick Start Guide  
