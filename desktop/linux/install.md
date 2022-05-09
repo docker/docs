@@ -28,7 +28,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 
 - At least 4 GB of RAM.
 
-Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [here](install.md#why-docker-desktop-for-linux-runs-a-vm).
+Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](install.md#why-docker-desktop-for-linux-runs-a-vm).
 
 > **Note:**
 >
@@ -152,6 +152,7 @@ Use the following command to stop the Docker Engine service:
 ```console
 $ sudo systemctl stop docker docker.socket containerd
 ```
+
 Depending on your installation, the Docker Engine may be configured to automatically
 start as a system service when your machine starts. Use the following command to
 disable the Docker Engine service, and to prevent it from starting automatically:
@@ -159,6 +160,7 @@ disable the Docker Engine service, and to prevent it from starting automatically
 ```console
 $ sudo systemctl disable docker docker.socket containerd
 ```
+
 ### Switch between Docker Desktop and Docker Engine
 {: id="context" }
 
