@@ -47,14 +47,14 @@ Docker Desktop for Linux allows you to use the host’s SSH agent inside a conta
 
 1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
 
-  ```ssh
-  --mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock
-  ```
+    ```ssh
+    --mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock
+   ```
 
 
 2. Add the `SSH_AUTH_SOCK` environment variable in your container:
 
-  `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+   `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
 
 
 To enable the SSH agent in Docker Compose, add the following flags to your service:
