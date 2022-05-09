@@ -16,6 +16,12 @@ Your Debian distribution must meet the [system requirements](../install.md#syste
 
 Additionally, for a Gnome Desktop environment you must install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
+For non-Gnome Desktop environments, `gnome-terminal` must be installed:
+
+```console
+$ sudo apt install gnome-terminal
+```
+
 ### OS requirements
 
 To install Docker Desktop, you need the 64-bit version of one of these Debian

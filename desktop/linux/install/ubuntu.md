@@ -14,6 +14,12 @@ To get started with Docker Desktop on Ubuntu, make sure you
 
 Your Ubuntu distribution must meet the [system requirements](../install.md#system-requirements) to install and launch Docker Desktop successfully.
 
+Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be installed:
+
+```console
+$ sudo apt install gnome-terminal
+```
+
 ### OS requirements
 
 To install Docker Desktop, you need the 64-bit version of one of these Ubuntu

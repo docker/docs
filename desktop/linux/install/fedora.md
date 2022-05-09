@@ -15,6 +15,11 @@ Your Fedora distribution must meet the [system requirements](../install.md#syste
 
 Additionally, for a Gnome Desktop environment you must install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
+For non-Gnome Desktop environments, `gnome-terminal` must be installed:
+
+```console
+$ sudo dnf install gnome-terminal
+```
 
 ### OS requirements
 
