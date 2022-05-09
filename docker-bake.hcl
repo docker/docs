@@ -19,3 +19,11 @@ target "vendor" {
   target = "vendor"
   output = ["."]
 }
+
+target "htmlproofer" {
+  target = "htmlproofer"
+  args = {
+    JEKYLL_ENV = JEKYLL_ENV
+  }
+  output = ["type=cacheonly"]
+}

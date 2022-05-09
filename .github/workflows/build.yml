@@ -84,19 +84,10 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
-        name: Build
+        name: Check for broken links
         uses: docker/bake-action@v2
         with:
-          targets: release
-      -
-        name: Check for broken links
-        uses: chabad360/htmlproofer@master
-        with:
-          directory: ./_site
-          # for available options, refer to:
-          # - https://github.com/gjtorikian/html-proofer
-          # - https://github.com/gjtorikian/html-proofer/blob/main/bin/htmlproofer
-          arguments: --disable-external --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/"
+          targets: htmlproofer
 
       # Disabled netlify-deploy due to flakey 502 http errors
       # - name: copy static files

@@ -29,9 +29,13 @@ release:
 vendor:
 	$(BUILDX_CMD) bake vendor
 
+# Check for broken links
+htmlproofer:
+	$(BUILDX_CMD) bake htmlproofer
+
 # Deploy website and run it through Docker compose
 # Available in your browser at http://localhost:4000
 deploy:
 	docker compose up --build
 
-.PHONY: buildx-yaml release vendor deploy
+.PHONY: buildx-yaml release vendor htmlproofer deploy

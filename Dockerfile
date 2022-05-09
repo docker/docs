@@ -92,6 +92,15 @@ find ${TARGET} -type f -name '*.html' | while read i; do
 done
 EOT
 
+# htmlproofer checks for broken links
+FROM gem AS htmlproofer
+RUN --mount=type=bind,from=generate,source=/out,target=_site \
+  htmlproofer ./_site \
+    --disable-external \
+    --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" \
+    --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" \
+    --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/"
+
 # Release the generated files in a scratch image
 # Can be output to your host with:
 # > make release
