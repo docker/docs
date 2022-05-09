@@ -205,9 +205,11 @@ access. Note that org owners have full administrative access to all repositories
 To give a team access to a repository
 
 1. Navigate to **Organizations** in Docker Hub, and select your organization.
-2. In the **Members** tab, click **Invite Member**.
-3. Enter the Docker ID or email, and select a team from the drop-down list.
-4. Click **Invite** to confirm.
+2. Click on the **Teams** tab and select the team that you'd like to configure  repository access to.
+3. Click on the **Permissions** tab and select a repository from the
+   **Repository** drop-down.
+4. Choose a permission from the **Permissions** drop-down list and click
+   **Add**.
 
     ![Team Repo Permissions](images/team-repo-permission.png){:width="700px"}
 
