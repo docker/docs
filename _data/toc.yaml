@@ -1280,8 +1280,14 @@ manuals:
               path: /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
             - title: Create a minimal backend extension
               path: /desktop/extensions-sdk/tutorials/minimal-backend-extension/
-        - title: Design Guidelines
-          path: /desktop/extensions-sdk/design/design-overview/
+         - sectiontitle: Design
+          section:
+             - title: UI kit
+               path: /desktop/extensions-sdk/design/ui-kit/
+             - title: UI Guidelines
+               path: /desktop/extensions-sdk/design/design-guidelines/
+             - title: Docker's Design Principles
+               path: /desktop/extensions-sdk/design/design-principles.md/
         - sectiontitle: Extensions
           section:
             - title: Metadata
