@@ -46,12 +46,15 @@ See [Proxies](index.md#proxies).
 Docker Desktop for Linux allows you to use the host’s SSH agent inside a container. To do this:
 
 1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
-
-    `--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock`
+```console
+$ --mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock
+```
 
 1. Add the `SSH_AUTH_SOCK` environment variable in your container:
 
-    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+```console
+$ -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"
+```
 
 To enable the SSH agent in Docker Compose, add the following flags to your service:
 
@@ -101,9 +104,15 @@ If you have installed Python on your machine, use the following instructions as 
 
 1. Run the following command to start a simple HTTP server on port 8000.
 
-    `python -m http.server 8000`
+```console
+$ python -m http.server 8000
+```
 
-    If you have installed Python 2.x, run `python -m SimpleHTTPServer 8000`.
+If you have installed Python 2.x, run:
+
+```console
+$ python -m SimpleHTTPServer 8000
+```
 
 2. Now, run a container, install `curl`, and try to connect to the host using the following commands:
 

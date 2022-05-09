@@ -1,32 +1,20 @@
 ---
 description: Instructions for installing Docker Desktop on Ubuntu
-keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
+keywords: ubuntu, install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Ubuntu
 toc_max: 4
 ---
 
 
-To get started with Docker Desktop on Ubuntu, make sure you
-[meet the prerequisites](#prerequisites), then
-[install Docker Desktop](#install-docker-desktop).
+This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution. 
 
 ## Prerequisites
 
-Your Ubuntu distribution must meet the [system requirements](../install.md#system-requirements) to install and launch Docker Desktop successfully.
-
-### OS requirements
-
-To install Docker Desktop, you need the 64-bit version of one of these Ubuntu
-versions:
-
-- Ubuntu Jammy Jellyfish 22.04 (LTS)
-- Ubuntu Impish Indri 21.10
-
-Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
-
-### Uninstall old versions
-
-To remove Docker Desktop for Linux, run:
+To install Docker Desktop successfully, you must:
+ - Meet the [system requirements](../install.md#system-requirements) 
+ - Have a 64-bit version of either Ubuntu Jammy Jellyfish 22.04 (LTS) or Ubuntu Impish Indri 21.10.
+ Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
+ - Uninstall the tech preview or beta version of Docker Desktop for Linux. Run:
 
 ```console
 $ sudo apt remove docker-desktop
@@ -50,7 +38,7 @@ $ sudo apt purge docker-desktop
 
 Recommended approach to install Docker Desktop on Ubuntu:
 
-1. [Set up Docker's DEB repository](../../../engine/install/ubuntu.md#set-up-the-repository) 
+1. Set up [Docker's DEB repository](../../../engine/install/ubuntu.md#set-up-the-repository). 
 
 2. Download latest DEB package from the [release](../release-notes/index.md) page.
 
@@ -70,13 +58,13 @@ $ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
 >  N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
 >  ```
 
-There are a few post-install configuration steps done through the maintainers' scripts (post-install script contained  in the deb package.
+There are a few post-install configuration steps done through the post-install script contained in the deb package.
 
 The post-install script:
 
-- sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
-- adds a DNS name for Kubernetes to `/etc/hosts`
-- creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`
+- Sets the capability on the Docker Desktop binary to map privileged ports and set resource limits.
+- Adds a DNS name for Kubernetes to `/etc/hosts`.
+- Creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`.
 
 ## Launch Docker Desktop
 
@@ -86,7 +74,7 @@ The post-install script:
 ## Upgrade Docker Desktop
 
 Once a new version for Docker Desktop is released, the Docker UI shows a notification. 
-You need to download the new package each time you want to upgrade Docker Desktop and run
+You need to download the new package each time you want to upgrade Docker Desktop and run:
 
 ```console
 $ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
