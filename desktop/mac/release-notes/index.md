@@ -23,8 +23,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.8.0
-2022-05-06
+## Docker Desktop 4.8.1
+2022-05-09
 
 > Download Docker Desktop
 >
@@ -32,6 +32,25 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
+
+### New
+
+- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Created a Docker Homepage where you can run popular images and discover how to use them.
+- [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
+
+### Bug fixes and minor changes
+
+- Fixed a bug that caused the Kubernetes cluster to be deleted when updating Docker Desktop.
+
+## Docker Desktop 4.8.0
+2022-05-06
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/78933/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/78933/Docker.dmg)
 
 ### New
 
@@ -67,6 +86,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Added the ability to clear the search bar easily in Docker Desktop. 
 - Renamed the "Containers / Apps" tab to "Containers".
 - Improved support for the `Cmd+Q` shortcut.
+
+### Known issues
+
+- Currently, if you are running a Kubernetes cluster, it will be deleted when you upgrade to Docker Desktop 4.8.0. We aim to fix this in the next release.
 
 ## Docker Desktop 4.7.1
 2022-04-19

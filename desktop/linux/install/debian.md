@@ -34,6 +34,13 @@ $ sudo apt purge docker-desktop
 
 For a Gnome Desktop environment, you must also install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
+For non-Gnome Desktop environments, `gnome-terminal` must be installed:
+
+```console
+$ sudo apt install gnome-terminal
+```
+
+
 ## Install Docker Desktop
 
 Recommended approach to install Docker Desktop on Debian:

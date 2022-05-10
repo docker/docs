@@ -11,6 +11,13 @@ This topic discusses installation of Docker Desktop from an [Arch package](https
 
 To install Docker Desktop successfully, you must meet the [system requirements](../install.md#system-requirements).
 
+Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be installed:
+
+```console
+$ sudo pacman -S gnome-terminal
+```
+
+
 ## Install Docker Desktop 
 
 1. Install client binaries. Docker does not have an Arch package repository. Binaries not included in the package must be installed manually before installing Docker Desktop. 
