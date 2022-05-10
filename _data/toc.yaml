@@ -1284,7 +1284,7 @@ manuals:
           section:
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
-             - title: Docker's Design Principles
+             - title: Docker's design principles
                path: /desktop/extensions-sdk/design/design-principles/
         - sectiontitle: UI Styling
           section:
