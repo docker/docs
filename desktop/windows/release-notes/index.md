@@ -39,6 +39,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
+### Bug fixes and minor changes
+
+- Fixed a bug that caused the Kubernetes cluster to be deleted when updating Docker Desktop.
+
+## Docker Desktop 4.8.0
+2022-05-06
+
+> Download Docker Desktop
+>
+> [For Windows](https://desktop.docker.com/win/main/amd64/78933/Docker%20Desktop%20Installer.exe)
+
+### New
+
+- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Created a Docker Homepage where you can run popular images and discover how to use them.
+- [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
+
 ### Upgrades
 
 - [Compose v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0)

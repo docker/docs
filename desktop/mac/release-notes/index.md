@@ -40,6 +40,25 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
+### Bug fixes and minor changes
+
+- Fixed a bug that caused the Kubernetes cluster to be deleted when updating Docker Desktop.
+
+## Docker Desktop 4.8.0
+2022-05-06
+
+> Download Docker Desktop
+>
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/78933/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/78933/Docker.dmg)
+
+### New
+
+- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Created a Docker Homepage where you can run popular images and discover how to use them.
+- [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
+
 ### Upgrades
 
 - [Compose v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0)
@@ -111,6 +130,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Added the ability to clear the search bar easily in Docker Desktop. 
 - Renamed the "Containers / Apps" tab to "Containers".
 - Improved support for the `Cmd+Q` shortcut.
+
+### Known issues
+
+- Currently, if you are running a Kubernetes cluster, it will be deleted when you upgrade to Docker Desktop 4.8.0. We aim to fix this in the next release.
 
 ### Known issues
 
