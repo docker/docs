@@ -27,7 +27,16 @@ for Docker Engine.
 2022-05-05
 
 This release of Docker Engine comes with updated versions of the `compose`,
-`buildx`, `containerd`, and `runc` components, as well as some minor bugfixes.
+`buildx`, `containerd`, and `runc` components, as well as some minor bug fixes.
+
+> **Known issues**
+> 
+> We've identified an issue with the [macOS CLI binaries](https://download.docker.com/mac/static/stable/){:target="_blank" rel="noopener" class="_"}
+> in the 20.10.15 release. A [fix for this issue](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener" class="_"}
+> has been merged and will be included in the next patch release (20.10.16). In
+> the meantime, we recommend using the 20.10.14 binaries for macOS instead. Other
+> platforms are not affected.
+{:.important}
 
 ### Daemon
 
