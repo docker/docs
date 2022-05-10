@@ -23,6 +23,34 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.16
+2022-05-12
+
+This release of Docker Engine fixes a regression in the Docker CLI builds for
+macOS, fixes an issue with `docker stats` when using containerd 1.5 and up,
+and updates the Go runtime to include a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Client
+
+- Fixed a regression in binaries for macOS introduced in [20.10.15](#201015), which
+  resulted in a panic [docker/cli#43426](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener"}.
+- Update golang.org/x/sys dependency which contains a fix for
+  [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Daemon
+
+- Fixed an issue where `docker stats` was showing empty stats when running with
+  containerd 1.5.0 or up [moby/moby#43567](https://github.com/moby/moby/pull/43567){:target="_blank" rel="noopener"}.
+- Updated the `golang.org/x/sys` build-time dependency which contains a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Packaging
+
+- Updated Go runtime to [1.17.10](https://go.dev/doc/devel/release#go1.17.minor){:target="_blank" rel="noopener"},
+  which contains a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+- Used "weak" dependencies for the `docker scan` CLI plugin, to prevent a
+  "conflicting requests" error when users performed an off-line installation from
+  downloaded RPM packages [docker/docker-ce-packaging#659](https://github.com/docker/docker-ce-packaging/pull/659){:target="_blank" rel="noopener"}.
+
 ## 20.10.15
 2022-05-05
 
@@ -32,10 +60,7 @@ This release of Docker Engine comes with updated versions of the `compose`,
 > **Known issues**
 > 
 > We've identified an issue with the [macOS CLI binaries](https://download.docker.com/mac/static/stable/){:target="_blank" rel="noopener" class="_"}
-> in the 20.10.15 release. A [fix for this issue](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener" class="_"}
-> has been merged and will be included in the next patch release (20.10.16). In
-> the meantime, we recommend using the 20.10.14 binaries for macOS instead. Other
-> platforms are not affected.
+> in the 20.10.15 release. This issue has been resolved in the [20.10.16](#201016) release.
 {:.important}
 
 ### Daemon
