@@ -1,17 +1,17 @@
 ---
 description: Instructions for installing Docker Desktop on Fedora
-keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
+keywords: fedora, rpm, update install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Fedora
 toc_max: 4
 ---
 
-To get started with Docker Desktop on Fedora, make sure you
-[meet the prerequisites](#prerequisites), then
-[install Docker Desktop](#install-docker-desktop).
+This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
 
 ## Prerequisites
 
-Your Fedora distribution must meet the [system requirements](../install.md#system-requirements) to install and launch Docker Desktop successfully.
+To install Docker Desktop successfully, you must:
+- Meet the [system requirements](../install.md#system-requirements).
+- Have a 64-bit version of either Fedora 35 or Fedora 36.
 
 Additionally, for a Gnome Desktop environment you must install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
@@ -21,18 +21,11 @@ For non-Gnome Desktop environments, `gnome-terminal` must be installed:
 $ sudo dnf install gnome-terminal
 ```
 
-### OS requirements
-
-To install Docker Desktop for Linux, you need the 64-bit version of one of these Fedora versions:
-
-- Fedora 35
-- Fedora 36
-
 ## Install Docker Desktop
 
-Recommended approach to install Docker Desktop on Ubuntu:
+To install Docker Desktop on Fedora:
 
-1. [Set up Docker's RPM repository](../../../engine/install/fedora.md#set-up-the-repository) 
+1. Set up [Docker's package repository](../../../engine/install/fedora.md#set-up-the-repository). 
 
 2. Download latest RPM package from the [release](../release-notes/index.md) page.
 
@@ -42,12 +35,13 @@ Recommended approach to install Docker Desktop on Ubuntu:
 $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
 ```
 
-There are a few post-install configuration steps done through the maintainers' scripts (post-install script contained in the RPM package.
+There are a few post-install configuration steps done through the post-install script contained in the RPM package.
+
 The post-install script:
 
-- sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
-- adds a DNS name for Kubernetes to `/etc/hosts`
-- creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`
+- Sets the capability on the Docker Desktop binary to map privileged ports and set resource limits.
+- Adds a DNS name for Kubernetes to `/etc/hosts`.
+- Creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`.
 
 ## Launch Docker Desktop
 

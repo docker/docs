@@ -1234,10 +1234,6 @@ manuals:
               title: Older versions
     - sectiontitle: Linux
       section:
-        - path: /desktop/linux/
-          title: User manual
-        - path: /desktop/linux/overview/
-          title: Overview
         - path: /desktop/linux/install/
           title: Install Docker Desktop for Linux
         - sectiontitle: Installation per distro
@@ -1250,6 +1246,8 @@ manuals:
               title: Install on Ubuntu
             - path: /desktop/linux/install/archlinux/
               title: Install on Arch
+        - path: /desktop/linux/
+          title: User manual
         - path: /desktop/linux/networking/
           title: Networking
         - path: /desktop/linux/space/
