@@ -10,8 +10,8 @@ redirect_from:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn
+> subscription. The grace period for those that require a paid subscription
+> ended on January 31, 2022. [Learn
 > more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
  target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 {: .important}
@@ -104,8 +104,8 @@ The `install` command accepts the following flags:
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 
-### Quick start guide  
-  
+### Quick start guide
+
   If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 
    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)

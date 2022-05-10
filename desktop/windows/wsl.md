@@ -11,8 +11,8 @@ title: Docker Desktop WSL 2 backend
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+> subscription. The grace period for those that require a paid subscription
+> ended on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
  target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 {: .important}
 
@@ -134,7 +134,7 @@ Run "nbody -benchmark [-numbodies=<numBodies>]" to measure performance.
         -compare          (compares simulation results running once on the default GPU and once on the CPU)
         -cpu              (run n-body simulation on the CPU)
         -tipsy=<file.bin> (load a tipsy model file for simulation)
-        
+
 > NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
 
 > Windowed mode

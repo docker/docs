@@ -14,8 +14,8 @@ redirect_from:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
+> subscription. The grace period for those that require a paid subscription
+> ended on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
  target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 {: .important}
 
@@ -83,7 +83,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Docker Desktop's icon now matches Big Sur Style guide. See [docker/for-mac#5536](https://github.com/docker/for-mac/issues/5536).
 - Fixed a problem with duplicate Dock icons and Dock icon not working as expected. Fixes [docker/for-mac#6189](https://github.com/docker/for-mac/issues/6189).
 - Improved the error message when `docker pull` fails because an HTTP proxy is required.
-- Added the ability to clear the search bar easily in Docker Desktop. 
+- Added the ability to clear the search bar easily in Docker Desktop.
 - Renamed the "Containers / Apps" tab to "Containers".
 - Improved support for the `Cmd+Q` shortcut.
 - Fixed a bug that caused the Kubernetes cluster to be deleted when updating Docker Desktop.
@@ -127,7 +127,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Docker Desktop's icon now matches Big Sur Style guide. See [docker/for-mac#5536](https://github.com/docker/for-mac/issues/5536).
 - Fixed a problem with duplicate Dock icons and Dock icon not working as expected. Fixes [docker/for-mac#6189](https://github.com/docker/for-mac/issues/6189).
 - Improved the error message when `docker pull` fails because an HTTP proxy is required.
-- Added the ability to clear the search bar easily in Docker Desktop. 
+- Added the ability to clear the search bar easily in Docker Desktop.
 - Renamed the "Containers / Apps" tab to "Containers".
 - Improved support for the `Cmd+Q` shortcut.
 

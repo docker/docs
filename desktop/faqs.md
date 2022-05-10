@@ -24,7 +24,7 @@ By default, Docker Desktop is installed at the following location:
 ### Do I need to pay to use Docker Desktop?
 
 Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
-The effective date of these terms is August 31, 2021. There is a grace period until January 31, 2022, for those that will require a paid subscription to use Docker Desktop. When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
+The effective date of these terms is August 31, 2021. A grace period ran until January 31, 2022, for those that require a paid subscription to use Docker Desktop. When downloading and installing Docker Desktop, you will be asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
 
 Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected. For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
@@ -121,15 +121,15 @@ For more information, see [Running Docker Desktop in nested virtualization scena
 
 ### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
 
-Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases, 
-Docker Desktop will launch successfully, but some screens may appear green, distorted, 
+Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases,
+Docker Desktop will launch successfully, but some screens may appear green, distorted,
 or have some visual artifacts.
 
 To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
 
 - **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
 - **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
- 
+
 After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
 
 ## Releases
