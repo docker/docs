@@ -49,7 +49,7 @@ So, let's do it!
         sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using PowerShell then use this command:
+    If you are using Windows then use this command in PowerShell:
 
     ```powershell
     PS> docker run -dp 3000:3000 `
