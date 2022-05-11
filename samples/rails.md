@@ -22,7 +22,6 @@ FROM ruby:2.5
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
 
 # Add a script to be executed every time the container starts.
@@ -44,12 +43,6 @@ Next, open an editor and create a bootstrap `Gemfile` which just loads Rails. Th
 
     source 'https://rubygems.org'
     gem 'rails', '~>5'
-
-Create an empty `Gemfile.lock` file to build our `Dockerfile`.
-
-```console
-$ touch Gemfile.lock
-```
 
 Next, provide an entrypoint script to fix a Rails-specific issue that
 prevents the server from restarting when a certain `server.pid` file pre-exists.
