@@ -2,12 +2,28 @@
 description: Overview of docker-compose CLI
 keywords: fig, composition, compose, docker, orchestration, cli, reference, docker-compose
 redirect_from:
-- /compose/reference/docker-compose/
 - /compose/reference/overview/
-title: Overview of docker-compose CLI
+title: Overview of docker compose CLI
 ---
 
-This page provides the usage information for the `docker-compose` Command.
+This page provides the usage information for the `docker compose` Command.
+
+> Important
+>
+> The new Compose V2, which supports the `compose` command as part of the Docker
+> CLI, is now available.
+>
+> Compose V2 integrates compose functions into the Docker platform, continuing
+> to support most of the previous `docker-compose` features and flags. You can
+> run Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose`,
+> instead of `docker-compose`.
+{: .important}
+
+If you rely on using Docker Compose as `docker-compose` (with a hyphen), you can
+set up Compose V2 to act as a drop-in replacement of the previous `docker-compose`.
+Refer to the [Docker Compose installation](install.md) page for detailed instructions.
+
+For more information about Docker Compose V2 GA, see the blog post [Announcing Compose V2 General Availability](https://www.docker.com/blog/announcing-compose-v2-general-availability/).
 
 ## Command options overview and help
 

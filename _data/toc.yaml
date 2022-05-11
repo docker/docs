@@ -911,59 +911,59 @@ reference:
   - sectiontitle: Docker Compose CLI reference
     section:
     - path: /compose/reference/
-      title: Overview of docker-compose CLI
+      title: Overview of docker compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
     - path: /compose/completion/
       title: Command-line completion
     - path: /compose/reference/build/
-      title: docker-compose build
+      title: docker compose build
     - path: /compose/reference/config/
-      title: docker-compose config
+      title: docker compose config
     - path: /compose/reference/create/
-      title: docker-compose create
+      title: docker compose create
     - path: /compose/reference/down/
-      title: docker-compose down
+      title: docker compose down
     - path: /compose/reference/events/
-      title: docker-compose events
+      title: docker compose events
     - path: /compose/reference/exec/
-      title: docker-compose exec
+      title: docker compose exec
     - path: /compose/reference/help/
-      title: docker-compose help
+      title: docker compose help
     - path: /compose/reference/images/
-      title: docker-compose images
+      title: docker compose images
     - path: /compose/reference/kill/
-      title: docker-compose kill
+      title: docker compose kill
     - path: /compose/reference/logs/
-      title: docker-compose logs
+      title: docker compose logs
     - path: /compose/reference/pause/
-      title: docker-compose pause
+      title: docker compose pause
     - path: /compose/reference/port/
-      title: docker-compose port
+      title: docker compose port
     - path: /compose/reference/ps/
-      title: docker-compose ps
+      title: docker compose ps
     - path: /compose/reference/pull/
-      title: docker-compose pull
+      title: docker compose pull
     - path: /compose/reference/push/
-      title: docker-compose push
+      title: docker compose push
     - path: /compose/reference/restart/
-      title: docker-compose restart
+      title: docker compose restart
     - path: /compose/reference/rm/
-      title: docker-compose rm
+      title: docker compose rm
     - path: /compose/reference/run/
-      title: docker-compose run
+      title: docker compose run
     - path: /compose/reference/scale/
-      title: docker-compose scale
+      title: docker compose scale
     - path: /compose/reference/start/
-      title: docker-compose start
+      title: docker compose start
     - path: /compose/reference/stop/
-      title: docker-compose stop
+      title: docker compose stop
     - path: /compose/reference/top/
-      title: docker-compose top
+      title: docker compose top
     - path: /compose/reference/unpause/
-      title: docker-compose unpause
+      title: docker compose unpause
     - path: /compose/reference/up/
-      title: docker-compose up
+      title: docker compose up
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
 - sectiontitle: API reference
