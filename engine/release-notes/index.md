@@ -27,7 +27,16 @@ for Docker Engine.
 2022-05-05
 
 This release of Docker Engine comes with updated versions of the `compose`,
-`buildx`, `containerd`, and `runc` components, as well as some minor bugfixes.
+`buildx`, `containerd`, and `runc` components, as well as some minor bug fixes.
+
+> **Known issues**
+> 
+> We've identified an issue with the [macOS CLI binaries](https://download.docker.com/mac/static/stable/){:target="_blank" rel="noopener" class="_"}
+> in the 20.10.15 release. A [fix for this issue](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener" class="_"}
+> has been merged and will be included in the next patch release (20.10.16). In
+> the meantime, we recommend using the 20.10.14 binaries for macOS instead. Other
+> platforms are not affected.
+{:.important}
 
 ### Daemon
 
@@ -40,7 +49,7 @@ This release of Docker Engine comes with updated versions of the `compose`,
 - Update Docker Compose to [v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0).
 - Update Docker Buildx to [v0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2).
 - Update Go runtime to [1.17.9](https://go.dev/doc/devel/release#go1.17.minor).
-- Update containerd (`containerd.io` package) to [v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.3).
+- Update containerd (`containerd.io` package) to [v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4).
 - Update runc version to [v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1).
 - Add packages for CentOS 9 stream and Fedora 36.
 
