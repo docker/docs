@@ -91,9 +91,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Currently, if you are running a Kubernetes cluster, it will be deleted when you upgrade to Docker Desktop 4.8.0. We aim to fix this in the next release.
 
-### Known issues
-
-- Currently, if you are running a Kubernetes cluster, it will be deleted when you upgrade to Docker Desktop 4.8.0. We aim to fix this in the next release.
 
 ## Docker Desktop 4.7.1
 2022-04-19
