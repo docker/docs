@@ -1709,7 +1709,7 @@ Specified as a [byte value](#specifying-byte-values).
 
 `stop_grace_period` specifies how long the Compose implementation MUST wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whichever stop signal has been specified with
-[`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
+[`stop_signal`](#stop_signal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
 
 ```yml
