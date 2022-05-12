@@ -496,6 +496,28 @@ x-aws-cloudformation:
         Port: 443
 ```
 
+#### Setting SSL termination by Load Balancer (non-privileged ports)
+
+Non privileged ports create a network load balancer, but you can use the `x-aws-protocol` flag to instead create an application load balancer, and an overlay can then direct HTTPS traffic to your container. This example forwards port 443 traffic to port 8080.
+
+```yaml
+services:
+  webapp:
+    image: acme/webapp
+    ports:
+      - target: 8080
+        x-aws-protocol: http # enable an application load balancer
+
+x-aws-cloudformation:
+  Resources:
+    WebappTCP8080Listener:
+      Properties:
+        Certificates:
+          - CertificateArn: "arn:aws:acm:certificate/123abc"
+        Protocol: HTTPS
+        Port: 443
+```
+
 ## Using existing AWS network resources
 
 By default, the Docker Compose CLI creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services.
