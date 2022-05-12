@@ -43,48 +43,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Fixed a bug that caused the Kubernetes cluster to be deleted when updating Docker Desktop.
 
-## Docker Desktop 4.8.0
-2022-05-06
-
-> Download Docker Desktop
->
-> [For Windows](https://desktop.docker.com/win/main/amd64/78933/Docker%20Desktop%20Installer.exe)
-
-### New
-
-- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
-- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
-- Created a Docker Homepage where you can run popular images and discover how to use them.
-- [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
-
-### Upgrades
-
-- [Compose v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0)
-- [Go 1.18.1](https://golang.org/doc/go1.18)
-- [Kubernetes 1.24](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.0)
-
-### Bug fixes and minor changes
-
-- Introduced reading system proxy. You no longer need to manually configure proxies unless it differs from your OS level proxy.
-- Fixed a bug that showed Remote Repositories in the Dashboard when running behind a proxy.
-- Fixed vpnkit establishing and blocking the client connection even if the server is gone. See [docker/for-mac#6235](https://github.com/docker/for-mac/issues/6235)
-- Made improvements on the Volume tab in Docker Desktop:
-  - Volume size is displayed.
-  - Columns can be resized, hidden and reordered.
-  - A columns sort order and hidden state is persisted, even after Docker Desktop restarts.
-  - Row selection is persisted when switching between tabs, even after Docker Desktop restarts.
-- Fixed a bug in the Dev Environments tab that did not add a scroll when more items were added to the screen.
-- Standardised the header title and action in the Dashboard.
-- Added support for downloading Registry Access Management policies through HTTP proxies.
-- Fixed an issue related to empty remote repositories when the machine is in sleep mode for an extended period of time.
-- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "<none>" but their tag is.
-- Improved the error message when `docker pull` fails because an HTTP proxy is required.
-- Added the ability to clear the search bar easily in Docker Desktop.
-- Renamed the "Containers / Apps" tab to "Containers".
-- Fixed a silent crash in the Docker Desktop installer when `C:\ProgramData\DockerDesktop` is a file or a symlink.
-- Improved support for the `Ctrl+W` shortcut.
-- Fixed a bug where an image with no namespace, for example `docker pull <private registry>/image`, would be erroneously blocked by Registry Access Management unless access to Docker Hub was enabled in settings.
-- Fixed a bug that caused the Kubernetes cluster to be deleted when updating Docker Desktop.
 
 ## Docker Desktop 4.8.0
 2022-05-06
