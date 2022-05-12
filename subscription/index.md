@@ -17,9 +17,6 @@ On August 31, 2021, we [announced](https://www.docker.com/blog/updating-product-
 - Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms for **Docker Desktop**.
     - Docker Desktop **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects.
     - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for commercial use in larger enterprises.
-    - The grace period for those that will require a paid subscription ends on
-      January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
 - The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open-source** Docker or Moby project.
@@ -68,8 +65,6 @@ Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-
 
 - It **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
 - It requires a paid subscription for professional use in larger enterprises.
-- The grace period for those that will require a paid subscription ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}
 - The existing Docker Free subscription has been renamed **Docker Personal** and we have introduced a Docker Business subscription .
 - The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 

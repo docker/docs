@@ -61,9 +61,7 @@ redirect_from:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+> subscription.
 {: .important}
 
 Welcome! We are excited that you want to learn Docker.
@@ -121,7 +119,7 @@ You'll notice a few flags being used. Here's some more info on them:
 ## The Docker Dashboard
 
 Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows. 
+you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows.
 It gives you quick access to container logs, lets you get a shell inside the container, and lets you
 easily manage container lifecycle (stop, remove, etc.).
 
@@ -149,16 +147,16 @@ capabilities approachable and easy to use. To summarize, a container:
 >
 > If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
 > has a fantastic talk in which she creates a container from scratch in Go. While the talk
-> does not go into networking, using images for the filesystem, and other advanced topics, 
+> does not go into networking, using images for the filesystem, and other advanced topics,
 > it gives a _fantastic_ deep dive into how things are working.
-> 
+>
 > <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is a container image?
 
-When running a container, it uses an isolated filesystem. This custom filesystem is provided 
-by a **container image**. Since the image contains the container's filesystem, it must contain everything 
-needed to run an application - all dependencies, configuration, scripts, binaries, etc. The 
+When running a container, it uses an isolated filesystem. This custom filesystem is provided
+by a **container image**. Since the image contains the container's filesystem, it must contain everything
+needed to run an application - all dependencies, configuration, scripts, binaries, etc. The
 image also contains other configuration for the container, such as environment variables,
 a default command to run, and other metadata.
 
