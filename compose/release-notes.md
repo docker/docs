@@ -35,7 +35,7 @@ For the full change log or additional information, check the [Compose repository
 ### Bug Fixes
 - Passing the `--rm flag` value as is to the Docker CLI when running a container with this flag. Closes [#9314](https://github.com/docker/compose/issues/9314){:target="_blank" rel="noopener" class="_"}.
 - Adding ssh config to the build options when building an image from a `docker compose up` command. Closes [#9338](https://github.com/docker/compose/issues/9338){:target="_blank" rel="noopener" class="_"}.
-- Inspecting container to check if a TTY is required. Running services with `tty:true` specified now show console output. Closes [#9288](https://github.com/docker/compose/issues/9288){:target="_blank" rel="noopener" class="_".
+- Inspecting container to check if a TTY is required. Running services with `tty:true` specified now show console output. Closes [#9288](https://github.com/docker/compose/issues/9288){:target="_blank" rel="noopener" class="_"}.
 
 For the full change log or additional information, check the [Compose repository 2.4.1 release page](https://github.com/docker/compose/releases/tag/v2.4.1){:target="_blank" rel="noopener" class="_"}.  
 
