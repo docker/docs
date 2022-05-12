@@ -1278,9 +1278,27 @@ manuals:
               path: /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
             - title: Create a minimal backend extension
               path: /desktop/extensions-sdk/tutorials/minimal-backend-extension/
-        - title: Design Guidelines
-          path: /desktop/extensions-sdk/design/design-overview/
-        - sectiontitle: Extensions
+        - sectiontitle: Design
+          section:
+             - title: Guidelines
+               path: /desktop/extensions-sdk/design/design-guidelines/
+             - title: Docker's design principles
+               path: /desktop/extensions-sdk/design/design-principles/
+        - sectiontitle: UI Styling
+          section:
+             - title: Overview
+               path: /desktop/extensions-sdk/design/overview/
+             - title: MUI best practices
+               path: /desktop/extensions-sdk/design/mui-best-practices/
+        - sectiontitle: Developer SDK tools
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/dev/overview/
+            - title: CLI overview
+              path: /desktop/extensions-sdk/dev/cli/usage/
+            - title: Build, test and install an extension
+              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
+        - sectiontitle: Publishing extensions
           section:
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
@@ -1292,15 +1310,7 @@ manuals:
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Building multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
-        - sectiontitle: Developer guide
-          section:
-            - title: Overview
-              path: /desktop/extensions-sdk/dev/overview/
-            - title: CLI overview
-              path: /desktop/extensions-sdk/dev/cli/usage/
-            - title: Build, test and install an extension
-              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
-        - sectiontitle: UI API
+        - sectiontitle: Extension APIs
           section:
             - title: Overview
               path: /desktop/extensions-sdk/dev/api/overview/
