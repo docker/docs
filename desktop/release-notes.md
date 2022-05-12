@@ -1,6 +1,7 @@
 ---
 description: Release notes for Docker Desktop for Mac, Linux, Windows
-Keywords: Docker desktop, release notes, linux, mac, windows
+keywords: Docker desktop, release notes, linux, mac, windows
+title: Docker Desktop release notes
 toc_max: 2
 ---
 
@@ -79,6 +80,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Introduced reading system proxy. You no longer need to manually configure proxies unless it differs from your OS level proxy.
 - Fixed a bug that showed Remote Repositories in the Dashboard when running behind a proxy.
+- Fixed vpnkit establishing and blocking the client connection even if the server is gone. See [docker/for-mac#6235](https://github.com/docker/for-mac/issues/6235)
 - Made improvements on the Volume tab in Docker Desktop:
   - Volume size is displayed.
   - Columns can be resized, hidden and reordered.
@@ -101,7 +103,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Docker Desktop's icon now matches Big Sur Style guide. See [docker/for-mac#5536](https://github.com/docker/for-mac/issues/5536)
 - Fixed a problem with duplicate Dock icons and Dock icon not working as expected. Fixes [docker/for-mac#6189](https://github.com/docker/for-mac/issues/6189).
 - Improved support for the `Cmd+Q` shortcut.
-- Fixed vpnkit establishing and blocking the client connection even if the server is gone. See [docker/for-mac#6235](https://github.com/docker/for-mac/issues/6235)
+
 
 #### For Windows
 
@@ -201,12 +203,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and minor changes
 
-#### For all platforms
-
 - Prevented spinning in vpnkit-forwarder filling the logs with error messages.
-
-#### For Mac
-
 - Fixed diagnostics upload when there is no HTTP proxy set. Fixes [docker/for-mac#6234](https://github.com/docker/for-mac/issues/6234).
 - Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
 
@@ -332,11 +329,11 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 #### For all platforms 
 
 - Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
+- Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
 
 #### For Mac
 
 - Fixed an issue that caused the VM to become unresponsive during startup when using `osxfs` and when no host directories are shared with the VM.
-- Increased the filesystem watch (inotify) limits by setting `fs.inotify.max_user_watches=1048576` and `fs.inotify.max_user_instances=8192` in Linux. Fixes [docker/for-mac#6071](https://github.com/docker/for-mac/issues/6071).
 - Fixed an issue that didn't allow users to stop a Docker Compose application using Docker Dashboard if the application was started in a different version of Docker Compose. For example, if the user started a Docker Compose application in V1 and then switched to Docker Compose V2, attempts to stop the Docker Compose application would fail.
 - Fixed an issue where Docker Desktop incorrectly prompted users to sign in after they quit Docker Desktop and start the application.
 - Fixed an issue where the **About Docker Desktop** window wasn't working anymore.
@@ -532,6 +529,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 #### For all platforms
 
 - Added a self-diagnose warning if the host lacks Internet connectivity.
+- Fixed an issue which prevented users from saving files from a volume using the Save As option in the Volumes UI. Fixes [docker/for-win#12407](https://github.com/docker/for-win/issues/12407).
 - Docker Desktop now uses cgroupv2. If you need to run `systemd` in a container then:
   - Ensure your version of `systemd` supports cgroupv2. [It must be at least `systemd` 247](https://github.com/systemd/systemd/issues/19760#issuecomment-851565075). Consider upgrading any `centos:7` images to `centos:8`.
   - Containers running `systemd` need the following options: [`--privileged
@@ -544,7 +542,6 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 #### For Windows
 
-- Fixed an issue which prevented users from saving files from a volume using the Save As option in the Volumes UI. Fixes [docker/for-win#12407](https://github.com/docker/for-win/issues/12407).
 - Fixed an issue that caused Docker Desktop to fail during startup if the home directory path contains a character used in regular expressions. Fixes [docker/for-win#12374](https://github.com/docker/for-win/issues/12374).
 
 ### Known issue
@@ -675,7 +672,7 @@ actual memory usage. See
 - Fixed a bug where the CLI tools would not be available in WSL 2 distros.
 - Fixed switching from Linux to Windows containers that was stuck because access rights on panic.log. See [for-win#11899](https://github.com/docker/for-win/issues/11899).
 
-### Known Issue
+### Known Issues
 
 #### For Windows
 
