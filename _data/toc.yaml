@@ -914,8 +914,6 @@ reference:
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
     - path: /compose/reference/build/
       title: docker-compose build
     - path: /compose/reference/config/
