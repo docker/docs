@@ -33,7 +33,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
-> [DEB](https://desktop-stage.docker.com/linux/main/amd64/78998/docker-desktop-4.8.1-amd64.deb){:
+> [Debian](https://desktop-stage.docker.com/linux/main/amd64/78998/docker-desktop-4.8.1-amd64.deb){:
 > .button .primary-btn } 
 > [RPM](https://desktop-stage.docker.com/linux/main/amd64/78998/docker-desktop-4.8.1-x86_64.rpm){:
 > .button .primary-btn }
@@ -65,7 +65,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [For Windows](https://desktop.docker.com/win/main/amd64/78933/Docker%20Desktop%20Installer.exe)|
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/78933/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/78933/Docker.dmg) |
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
 > [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64)
 
@@ -164,7 +164,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- IT Administrators can now install Docker Desktop remotely using the command line. For more information, see [Install Docker Desktop using the command line](../install.md#install-from-the-command-line).
+- IT Administrators can now install Docker Desktop remotely using the command line.
 - Add  the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../../../engine/sbom/index.md).
 - Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"}  for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
 
@@ -242,7 +242,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For Mac
 
-- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](../index.md#experimental-features).
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](../mac/#experimental-features).
 
 ### Upgrades
 
@@ -546,7 +546,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 #### For Mac
 
-- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](../apple-silicon/#known-issues).
+- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](../mac/apple-silicon/#known-issues).
 
 #### For Windows
 
@@ -577,11 +577,11 @@ actual memory usage. See
 
 ### New
 
-**Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. For more information, see [Pause/Resume](../index.md#pauseresume).
+**Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine.
 
 - Ships [Docker Public Roadmap#226](https://github.com/docker/roadmap/issues/226){: target="_blank" rel="noopener" class="_"}
 
-**Software Updates**: The option to turn off automatic check for updates is now available for users on all Docker subscriptions, including Docker Personal and Docker Pro. All update-related settings have been moved to the **Software Updates** section. For more information, see [Software updates](../index.md#software-updates).
+**Software Updates**: The option to turn off automatic check for updates is now available for users on all Docker subscriptions, including Docker Personal and Docker Pro. All update-related settings have been moved to the **Software Updates** section. 
 
 - Ships [Docker Public Roadmap#228](https://github.com/docker/roadmap/issues/228){: target="_blank" rel="noopener" class="_"}
 
@@ -653,9 +653,9 @@ actual memory usage. See
 
 ### New
 
-- **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. For more information, see [Software Updates](../index.md#software-updates).
-- **Compose V2** You can now specify whether to use [Docker Compose V2](../../../compose/index.md#compose-v2-and-the-new-docker-compose-command) in the General settings.
-- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. For more information, see [Explore volumes](../../dashboard.md#explore-volumes). Ships [Docker Public Roadmap#215](https://github.com/docker/roadmap/issues/215){: target="_blank" rel="noopener" class="_"}
+- **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version. 
+- **Compose V2** You can now specify whether to use [Docker Compose V2](../../../compose/) in the General settings.
+- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. Ships [Docker Public Roadmap#215](https://github.com/docker/roadmap/issues/215){: target="_blank" rel="noopener" class="_"}
 
 ### Upgrades
 
