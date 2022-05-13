@@ -52,7 +52,7 @@ section and choose the best installation path for you.
                     <a href="/desktop/linux/install/"><img src="/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
                 </div>
                 <h2 id="docker-for-linux"><a href="/desktop/linux/install/">Docker Desktop for Linux</a></h2>
-                <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
+                <p>A native Linux application which delivers all Docker tools to your Linux computer.</p>
             </div>
         </div>
     </div>
