@@ -196,7 +196,7 @@ environment in which to run tests. Compose provides a convenient way to create
 and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
 
 ```console
-$ docker-compose up -d
+$ docker-compose up -d # Detached mode: Run containers in the background
 $ ./run_tests
 $ docker-compose down
 ```
