@@ -49,9 +49,9 @@ section and choose the best installation path for you.
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="/engine/install/"><img src="/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
+                    <a href="/desktop/linux/install/"><img src="/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
                 </div>
-                <h2 id="docker-for-linux"><a href="/engine/install/">Docker for Linux</a></h2>
+                <h2 id="docker-for-linux"><a href="/desktop/linux/install/">Docker for Linux</a></h2>
                 <p>Install Docker on a computer which already has a Linux distribution installed.</p>
             </div>
         </div>
