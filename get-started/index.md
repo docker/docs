@@ -89,9 +89,12 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 [Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
-[Linux](../engine/install/index.md){: .button .primary-btn}
+[Linux](../desktop/linux/install.md){: .button .primary-btn}
 
-For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
+For Docker Desktop installation instructions, see:
+ - [Install Docker Desktop on Mac](../desktop/mac/install.md)
+ - [Install Docker Desktop on Windows](../desktop/windows/install.md)
+ - [Install Docker Desktop on Linux](../desktop/linux/install.md)
 
 ## Start the tutorial
 
