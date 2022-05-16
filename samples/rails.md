@@ -1,4 +1,4 @@
----
+--- 
 description: Getting started with Docker Compose and Rails
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: "Quickstart: Compose and Rails"
