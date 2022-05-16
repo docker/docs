@@ -41,6 +41,8 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
    This `Dockerfile` starts with a [Python 3 parent image](https://hub.docker.com/r/library/python/tags/3/).
    The parent image is modified by adding a new `code` directory. The parent image is further modified
    by installing the Python requirements defined in the `requirements.txt` file.
+   The requirements are copied and installed before copying the entire current
+   directory simply to fail fast if the installation fails.
 
 4. Save and close the `Dockerfile`.
 
