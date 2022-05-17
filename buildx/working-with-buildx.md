@@ -14,9 +14,13 @@ multiple nodes concurrently.
 
 ## Install
 
-### Windows and macOS
+### Docker Desktop
 
 Docker Buildx is included in [Docker Desktop](../desktop/index.md) for Windows, macOS, and Linux.
+
+### Static binaries
+
+Docker Linux packages also include Docker Buildx when installed using the [DEB or RPM packages](../engine/install/index.md).
 
 ### Manual download
 
