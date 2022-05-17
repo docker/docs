@@ -171,7 +171,7 @@ When finished
 
     ```console
     $ docker compose version
-    Docker Compose version v2.3.3
+    Docker Compose version v2.5.0
     ```
 
 
