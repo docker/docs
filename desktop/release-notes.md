@@ -135,8 +135,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Docker Desktop's icon now matches Big Sur Style guide. See [docker/for-mac#5536](https://github.com/docker/for-mac/issues/5536)
 - Fixed a problem with duplicate Dock icons and Dock icon not working as expected. Fixes [docker/for-mac#6189](https://github.com/docker/for-mac/issues/6189).
 - Improved support for the `Cmd+Q` shortcut.
-
-
 #### For Windows
 
 - Improved support for the `Ctrl+W` shortcut.
