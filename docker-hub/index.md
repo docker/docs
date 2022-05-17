@@ -128,7 +128,7 @@ To create a repository:
 We'll need to download Docker Desktop to build and push a container image to
 Docker Hub.
 
-1. Download and install [Docker Desktop](../desktop/#download-and-install). If on Linux, download [Docker Engine](../engine/install/).
+1. Download and install [Docker Desktop](../desktop/#download-and-install).
 
 2. Sign in to the Docker Desktop application using the Docker ID you created in Step 1.
 
