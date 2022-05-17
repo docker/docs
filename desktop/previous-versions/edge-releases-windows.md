@@ -10,7 +10,7 @@ redirect_from:
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
-For information about Stable releases, see the [Stable release notes](../release-notes.md). For Docker Desktop system requirements, see
+For information about Stable releases, see the [Stable release notes](../windows/release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](../windows/install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
@@ -210,7 +210,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-- In partnership with Snyk, Docker Desktop launches [vulnerability scanning](../../engine/scan.md) for Docker local images.
+- In partnership with Snyk, Docker Desktop launches [vulnerability scanning](../../engine/scan/index.md) for Docker local images.
 - Docker ECS plugin has been replaced by [ECS cloud integration](https://docs.docker.com/engine/context/ecs-integration/)
 - Docker UI:
   - The Images view now has search and filter options.
