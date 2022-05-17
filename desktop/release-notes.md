@@ -26,7 +26,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop 
 >
-> [For
+> [
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
 > .button .primary-btn }
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
