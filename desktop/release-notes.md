@@ -127,7 +127,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Added the ability to clear the search bar easily in Docker Desktop.
 - Renamed the "Containers / Apps" tab to "Containers".
 - Fixed a silent crash in the Docker Desktop installer when `C:\ProgramData\DockerDesktop` is a file or a symlink.
-
 - Fixed a bug where an image with no namespace, for example `docker pull <private registry>/image`, would be erroneously blocked by Registry Access Management unless access to Docker Hub was enabled in settings.
 
 #### For Mac 
