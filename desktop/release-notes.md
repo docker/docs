@@ -44,7 +44,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 - Fixed an issue with manual proxy settings which caused problems when pulling images. Fixes [docker/for-win#12714](https://github.com/docker/for-win/issues/12714) and [docker/for-mac#6315](https://github.com/docker/for-mac/issues/6315).
 - Fixed high CPU usage when extensions are disabled. Fixes [docker/for-mac#6310](https://github.com/docker/for-mac/issues/6310).
-- Redact HTTP proxy passwords in log files and diagnostics.
+- Docker Desktop now redacts HTTP proxy passwords in log files and diagnostics.
 
 ### Known issues
 
