@@ -914,8 +914,6 @@ reference:
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
     - path: /compose/reference/build/
       title: docker-compose build
     - path: /compose/reference/config/
@@ -1196,8 +1194,6 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
           title: Apple silicon
-        - path: /desktop/mac/release-notes/
-          title: Release notes
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/install/
@@ -1210,8 +1206,6 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend
-        - path: /desktop/windows/release-notes/
-          title: Release notes
     - sectiontitle: Linux
       section:
         - path: /desktop/linux/install/
@@ -1233,9 +1227,7 @@ manuals:
         - path: /desktop/linux/space/
           title: Disk utilization
         - path: /desktop/linux/troubleshoot/
-          title: Logs and troubleshooting
-        - path: /desktop/linux/release-notes/
-          title: Release notes    
+          title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
@@ -1330,7 +1322,8 @@ manuals:
         title: Older versions for Windows
       - path: /desktop/previous-versions/archive-mac/
         title: Older versions for Mac
-
+    - path: /desktop/release-notes/
+      title: Release notes
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
