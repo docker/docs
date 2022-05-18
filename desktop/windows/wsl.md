@@ -46,7 +46,16 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 
     If you have installed Docker Desktop on a system that supports WSL 2, this option will be enabled by default.
 5. Click **Apply & Restart**.
-6. Ensure the distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
+
+That's it! Now `docker` commands will work from Windows using the new WSL 2 engine.
+
+## Enabling Docker support in WSL 2 distros
+
+WSL 2 adds support for "Linux distros" to Windows, where each distro behaves like a VM except they all run on top of a single shared Linux kernel.
+
+Docker Desktop does not require any particular Linux distros to be installed. The `docker` CLI and UI all work fine from Windows without any additinoal Linux distros. However for the best developer experience, we recommend installing at least one additional distro and enabling Docker support by:
+
+1. Ensure the distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
 
     To check the WSL mode, run:
 
@@ -60,7 +69,7 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 
     `wsl.exe --set-default-version 2`
 
-7. When Docker Desktop restarts, go to **Settings** > **Resources** > **WSL Integration**.
+2. When Docker Desktop starts, go to **Settings** > **Resources** > **WSL Integration**.
 
     The Docker-WSL integration will be enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`.
 
@@ -74,7 +83,11 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 
     ![WSL 2 Choose Linux distro](images/wsl2-choose-distro.png)
 
-8. Click **Apply & Restart**.
+3. Click **Apply & Restart**.
+
+> **Note**
+>
+> Docker Desktop installs 2 special-purpose internal Linux distros `docker-desktop` and `docker-desktop-data`. The first (`docker-desktop`) is used to run the Docker engine (`dockerd`) while the second (`docker-desktop-data`) stores containers and images. Neither can be used for general development.
 
 ## Best practices
 
