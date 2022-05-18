@@ -7,15 +7,17 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
-# 2.5.0
+## 2.5.0
+
 (2022-04-29)
 
 ### Bug Fixes
-- Fixed panic with `compose down` command when -p flag specified. Fixes [#9353](https://github.com/docker/compose/issues/9353){:target="_blank" rel="noopener" class="_"}.
+
+- Fixed panic with `compose down` command when `-p` flag specified. Fixes [#9353](https://github.com/docker/compose/issues/9353){:target="_blank" rel="noopener" class="_"}.
 - Passed newly created project as input to start services (`docker compose up`). Fixes [#9356](https://github.com/docker/compose/issues/9356){:target="_blank" rel="noopener" class="_"}.
 - Included services declared under links in docker-compose file as implicit dependencies. Fixes [#9301](https://github.com/docker/compose/issues/9301){:target="_blank" rel="noopener" class="_"}.
 - Added changes `docker-compose pull` command to respect defined policy: 1) skip services configured as `pull_policy: never` and 2) ignore those with an existing image and `pull_policy: missing`. Fixes [#3660](https://github.com/docker/compose/issues/3660){:target="_blank" rel="noopener" class="_"}.
-- Error building project from resources is no longer ignored in order to prevent `down`panic. Fixes [#9383](https://github.com/docker/compose/issues/9383){:target="_blank" rel="noopener" class="_"}.
+- Error building project from resources is no longer ignored in order to prevent `down` panic. Fixes [#9383](https://github.com/docker/compose/issues/9383){:target="_blank" rel="noopener" class="_"}.
 - Enforced project name to be lowercase. Fixes [#9378](https://github.com/docker/compose/issues/9378){:target="_blank" rel="noopener" class="_"}.
 - Added support to build-time secrets. Fixes [#6358](https://github.com/docker/compose/issues/6358){:target="_blank" rel="noopener" class="_"}.
 - Changed `compose-go` to allow (re)building volume string to be used by engine `bind` API when mount can't be used. Fixes [#9380](https://github.com/docker/compose/issues/9380){:target="_blank" rel="noopener" class="_"}.
@@ -24,15 +26,18 @@ redirect_from:
 - Fixed issue regarding IPAM gateway setup. Fixes [#9330](https://github.com/docker/compose/issues/9330){:target="_blank" rel="noopener" class="_"}.
 
 ### Changes
+
 - Added support for ppc64le archictecture for docker compose binary.
 - Fixed search/replace typo in `--no-TTY` documentation.
 
 For the full change log or additional information, check the [Compose repository 2.5.0 release page](https://github.com/docker/compose/releases/tag/v2.5.0){:target="_blank" rel="noopener" class="_"}.
 
 ## 2.4.1
+
 (2022-04-04)
 
 ### Bug Fixes
+
 - Passed the `--rm flag` value as is to the Docker CLI when running a container with this flag. Fixes [#9314](https://github.com/docker/compose/issues/9314){:target="_blank" rel="noopener" class="_"}.
 - Added ssh config to the build options when building an image from a `docker compose up` command. Fixes [#9338](https://github.com/docker/compose/issues/9338){:target="_blank" rel="noopener" class="_"}.
 - Added inspection to container checking if a TTY is required. Running services with `tty:true` specified now show console output. Fixes [#9288](https://github.com/docker/compose/issues/9288){:target="_blank" rel="noopener" class="_"}.
@@ -41,21 +46,23 @@ For the full change log or additional information, check the [Compose repository
 
 
 ## 2.4.0 
+
 (2022-04-1)
 
 ### Bug Fixes
-- Passed the interactive flag from the Compose CLI to the Docker one to run exec command. Fixes [#9315](https://github.com/docker/compose/issues/9315){:target="_blank" rel="noopener" class="_"}.
 
+- Passed the interactive flag '-i' from the Compose CLI to the Docker one to run exec command. Fixes [#9315](https://github.com/docker/compose/issues/9315){:target="_blank" rel="noopener" class="_"}.
 - Compose commands now take the value of `COMPOSE_PROJECT_NAME` environmental variable into consideration. Fixes [#9316](https://github.com/docker/compose/issues/9316){:target="_blank" rel="noopener" class="_"}.
 - Fixed issue of `compose down` command that when executed in contexts without any services started or resources to be deleted was returning an error. Error was due to command trying to delete an inexistent default network. Fixes [#9333](https://github.com/docker/compose/issues/9333){:target="_blank" rel="noopener" class="_"}.
 
 
 ### Changes
+
 - Introduced support for `cache_from`, `cache_to`, `no_cache` and `pull` attributes in the build section. These attributes allow forcing a complete rebuild from sources and checking with registry for images used. These changes provide the basis for offering `--no-cache` and `--pull` options for compose build (or equivalent) command down the line.
-- Introduced support of an `--ssh `flag for the `build` command from CLI and Compose file. Fixes [#7025](https://github.com/docker/compose/issues/7025){:target="_blank" rel="noopener" class="_"}.
-- Fixed typo in ssh flag description. Related to [#7025](https://github.com/docker/compose/issues/7025){:target="_blank" rel="noopener" class="_"}.
-- Pinned Kubernetes dependencies to the same version as in Buildx.
-- Dependencies update: Bumped Buildx to v0.8.1. to fix possible panic on handling build context scanning errors.
+- Introduced support of an `--ssh ` flag for the `build` command from CLI and Compose file. Fixes [#7025](https://github.com/docker/compose/issues/7025){:target="_blank" rel="noopener" class="_"}.
+- Fixed typo in `--ssh` flag description. Related to [#7025](https://github.com/docker/compose/issues/7025){:target="_blank" rel="noopener" class="_"}.
+- Pinned Kubernetes dependencies to the same version as in buildx.
+- Dependencies update: Bumped buildx to v0.8.1. to fix possible panic on handling build context scanning errors.
 - Passed the interactive flag from the Compose CLI to the Docker one to run exec command.
 - Fixed race condition on start-stop end-to-end tests running in parrallel.
 - Removed code regarding an obsolete warning.
@@ -65,6 +72,7 @@ For the full change log or additional information, check the [Compose repository
 
 
 ## 2.3.4 
+
 (2022-03-25)
 
 ### Bug Fixes
@@ -78,7 +86,7 @@ For the full change log or additional information, check the [Compose repository
 - Removed the "Deprecated" mention from the --filter flag, to keep consistency with other commands. 
 - Docker compose --status, --filter and --format flags documentation updates.
 - Dependencies update: Bumped github.com/spf13/cobra from 1.3.0 to 1.4.0. Cobra library no longer requires Viper and all of its indirect dependencies [See cobra's release page](https://github.com/spf13/cobra/releases){:target="_blank" rel="noopener" class="_"}.
-- Dependencies update: Bumped Buildx from v0.7.1 to v0.8.0.
+- Dependencies update: Bumped buildx from v0.7.1 to v0.8.0.
 - Removed the need to get the original compose.yaml file to run 'docker compose kill'.
 - `docker-compose down -v` now does not remove external volumes and networks as per the option's expected and documented behavior. Whenever project is specified it is also now used to enforce down to only remove resources listed in compose.yaml file.
 Fixes [#9172](https://github.com/docker/compose/issues/9172){:target="_blank" rel="noopener" class="_"}, [#9145](https://github.com/docker/compose/issues/9145){:target="_blank" rel="noopener" class="_"}.
@@ -88,7 +96,9 @@ Fixes [#9172](https://github.com/docker/compose/issues/9172){:target="_blank" re
 For the full change log or additional information, check the [Compose repository 2.3.4 release page](https://github.com/docker/compose/releases/tag/v2.3.4){:target="_blank" rel="noopener" class="_"}.  
 
 ## Other Releases 
+
 (2022-03-8 to 2022-04-14)
+
 For the releases later than 1.29.2 and earlier than 2.3.4, please check the [Compose repository release pages](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.  
 
 ## 1.29.2
@@ -135,6 +145,7 @@ For the releases later than 1.29.2 and earlier than 2.3.4, please check the [Com
 - Bumped python-dotenv to 0.17.0.
 
 ## 1.28.6
+
 (2021-03-23)
 
 ### Bug fixes
