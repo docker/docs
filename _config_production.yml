@@ -5,7 +5,14 @@
 # Override the exclusion list to include files that are excluded in "development",
 # such as the "enterprise" stubs, which are in place to facilitate redirects
 # to Mirantis.
-exclude: ["_scripts", "404.html", "index.html"]
+exclude:
+  - _scripts
+  - 404.html
+  - docker-bake.hcl
+  - index.html
+  - LICENSE
+  - Makefile
+  - README.md
 
 # Google Analytics, etc.
 google_analytics: GTM-WL2QLG5
