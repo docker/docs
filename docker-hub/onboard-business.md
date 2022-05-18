@@ -26,8 +26,6 @@ All members in your organization need to be in at least one team. Teams are used
 
 Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md#the-owners-team).
 
-To view your organization's teams, sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, click **Organizations**, select your organization, and then click **Teams**.
-
 Besides the default **owners** team, you should create at least one additional team. This additional team will contain members that can not modify organization settings.
 
 > **Note**
@@ -42,7 +40,7 @@ To create a team:
 
 ## Step 2: Create Docker Hub repositories and configure access control
 
-If member's of your organization will access images on Docker Hub, then you should create at least one image repository. After you have created teams, you can also configure the level of access that each team will have for your organization's repositories.
+If member's of your organization will access images on Docker Hub, then you should create at least one image repository.
 
 To create a repository:
 
@@ -52,7 +50,7 @@ To create a repository:
 4. Link a GitHub or Bitbucket account now, or choose to do it later in the repository settings.
 5. Click **Create**.
 
-If you have created teams and created private repositories, then you must configure each team's access to your repositories:
+If you have created teams, then you must configure access to your private repositories:
 
 1. Click **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and then select your organization.
 2. Click **Repositories** and then select the repository that you’d like to configure access to.
@@ -89,7 +87,7 @@ Now that you have all your access control settings configured, it's time to star
 
 ### Configure Single Sign-on
 
-The following steps will help you quickly set up SSO. See [Configure Single Sign-on](../single-sign-on/index.md) and [Single Sign-on FAQs](../single-sign-on/faqs.md) for more details.
+The following steps will help you quickly set up SSO. For more details, see [Configure Single Sign-on](../single-sign-on/index.md) and [Single Sign-on FAQs](../single-sign-on/faqs.md).
 
 1. Ensure that all members have at least Docker Desktop 4.4.2 installed on their machines.
 2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
@@ -180,7 +178,7 @@ To invite a member to your organization:
 
    > **Note**
    >
-   > Remember, you shouldn't add all your members to the **owners** team. Members of the **owners** have access to change all of your organization's settings.
+   > Remember, you shouldn't add all your members to the **owners** team. Members of the **owners** team have access to change all of your organization's settings.
 
 4. Click **Invite** to confirm.
 
@@ -189,7 +187,7 @@ To invite a member to your organization:
 
 ## Step 5: Enforce Sign in for Docker Desktop
 
-In order to enforce all the access controls settings that you configured, you need to enforce members to sign in to Docker Desktop using a Docker account that is a member of your organization.
+In order to enforce access controls settings from Docker Business, you need to enforce members to sign in to Docker Desktop using a Docker account that is a member of your organization.
 
 To enforce sign in, you need to create a `registry.json` file on each user's computer with the following contents, where `myorg` is replaced with your organization's name.
 
