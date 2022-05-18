@@ -38,7 +38,7 @@ redirect_from:
 
 ## Supported platforms
 
-Docker Engine is available on a variety of [Linux platforms](#server),
+Docker Engine is available on a variety of [Linux platforms](../../desktop/linux/install.md),
 [macOS](../../desktop/mac/install.md) and [Windows 10](../../desktop/windows/install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
