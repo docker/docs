@@ -40,6 +40,10 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
 > .button .primary-btn }
 
+### New
+
+- [Compose v2.5.1](https://github.com/docker/compose/releases/tag/v2.5.1)
+
 ### Bug fixes and minor changes
 
 - Fixed an issue with manual proxy settings which caused problems when pulling images. Fixes [docker/for-win#12714](https://github.com/docker/for-win/issues/12714) and [docker/for-mac#6315](https://github.com/docker/for-mac/issues/6315).
