@@ -49,11 +49,6 @@ ENV TARGET=/out
 RUN --mount=type=bind,target=.,rw \
   --mount=type=cache,target=/src/.jekyll-cache <<EOT
 set -eu
-
-# substitute the "{site.latest_engine_api_version}" in the title for the latest
-# API docs, based on the latest_engine_api_version parameter in _config.yml
-(set -x ; ./_scripts/update-api-toc.sh)
-
 if [ "${JEKYLL_ENV}" = "production" ]; then
   (
     set -x
@@ -68,7 +63,6 @@ else
     echo '[]' > ${TARGET}/js/metadata.json
   )
 fi
-
 find ${TARGET} -type f -name '*.html' | while read i; do
   sed -i 's#\(<a[^>]* href="\)https://${DOMAIN}/#\1/#g' "$i"
 done
