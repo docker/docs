@@ -28,21 +28,6 @@ Before you install the Docker Desktop WSL 2 backend, you must complete the follo
 2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
 3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.
 
-## Best practices
-
-- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux file system, rather than the Windows file system. You can also refer to the [recommendation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions){:target="_blank" rel="noopener" class="_"} from Microsoft.
-
-  - Linux containers only receive file change events ("inotify events") if the
-      original files are stored in the Linux filesystem. For example, some web development workflows rely on inotify events for automatic reloading when files have changed.
-  - Performance is much higher when files are bind-mounted from the Linux
-      filesystem, rather than remoted from the Windows host. Therefore avoid
-      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
-  - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
-      where `~` is expanded by the Linux shell to `$HOME`.
-- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/vhd-size){:target="_blank" rel="noopener" class="_"}.
-- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#global-configuration-options-with-wslconfig){:target="_blank" rel="noopener" class="_"}.
-- To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](../../engine/install/ubuntu.md#uninstall-docker-engine) and CLI installed directly through Linux distributions before installing Docker Desktop.
-
 ## Download
 
 Download [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
@@ -90,6 +75,21 @@ Ensure you have completed the steps described in the Prerequisites section **bef
     ![WSL 2 Choose Linux distro](images/wsl2-choose-distro.png)
 
 8. Click **Apply & Restart**.
+
+## Best practices
+
+- To get the best out of the file system performance when bind-mounting files, we recommend storing source code and other data that is bind-mounted into Linux containers (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux file system, rather than the Windows file system. You can also refer to the [recommendation](https://docs.microsoft.com/en-us/windows/wsl/compare-versions){:target="_blank" rel="noopener" class="_"} from Microsoft.
+
+  - Linux containers only receive file change events ("inotify events") if the
+      original files are stored in the Linux filesystem. For example, some web development workflows rely on inotify events for automatic reloading when files have changed.
+  - Performance is much higher when files are bind-mounted from the Linux
+      filesystem, rather than remoted from the Windows host. Therefore avoid
+      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
+  - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
+      where `~` is expanded by the Linux shell to `$HOME`.
+- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/vhd-size){:target="_blank" rel="noopener" class="_"}.
+- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#global-configuration-options-with-wslconfig){:target="_blank" rel="noopener" class="_"}.
+- To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](../../engine/install/ubuntu.md#uninstall-docker-engine) and CLI installed directly through Linux distributions before installing Docker Desktop.
 
 ## Develop with Docker and WSL 2
 
