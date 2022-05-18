@@ -45,11 +45,11 @@ Before you install the Docker Desktop WSL 2 backend, you must complete the follo
 
 ## Download
 
-Download [Docker Desktop 2.3.0.2](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) or a later release.
+Download [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
 
 ## Install
 
-Ensure you have completed the steps described in the Prerequisites section **before** installing the Docker Desktop Stable 2.3.0.2 release.
+Ensure you have completed the steps described in the Prerequisites section **before** installing the Docker Desktop release.
 
 1. Follow the usual installation instructions to install Docker Desktop. If you are running a supported system, Docker Desktop prompts you to enable WSL 2 during installation. Read the information displayed on the screen and enable WSL 2 to continue.
 2. Start Docker Desktop from the Windows Start menu.
