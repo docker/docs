@@ -13,28 +13,26 @@ The following section contains instructions on how to get started onboarding  yo
 Before you continue to on board your organization, ensure that you've completed the following:
 
  - Subscribed to Docker Business
- 
+
     If you haven't subscribed to Docker Business yet, [get in touch with us](https://www.docker.com/pricing/contact-sales/).
 
  - Created your organization and applied your Docker Business subscription to your organization
 
-   If you haven't created an organization or applied your Docker Business subscription to your organization, Docker will email your organization's primary contact after you subscribe. The email will guide you through creating a new organization or using a current organization for Docker Business.
-
-   To verify that your organization has been created and your Docker Business subscription has been applied to your organization, go to [Billing Details](https://hub.docker.com/billing) and then click on your organization's name.
+   On the day that your subscription becomes active, your organization's primary contact will receive a welcome email from Docker to guide you through creating an organization or using an existing organization for your Docker Business subscription.
 
 ## Step 1: Create teams
 
-When you view your organization, you'll have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md#the-owners-team).
+All members in your organization need to be in at least one team. Teams are used to apply access control permissions to image repositories and organization settings.
 
-To view your organization and its teams, sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, click **Organizations**, select your organization, and then click **Teams**.
+Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md#the-owners-team).
 
-All members in your organization will need to be a member of at least one team. By assigning members to different teams, you can apply access control for image repositories on a per-team basis.
+To view your organization's teams, sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, click **Organizations**, select your organization, and then click **Teams**.
 
-Besides the default **owners** team, you should create at least one additional team. This new team will contain members that should not have owner access to your organization.
+Besides the default **owners** team, you should create at least one additional team. This additional team will contain members that can not modify organization settings.
 
 > **Note**
 >
-> When Docker Single Sign-on (SSO) is enabled, a default team named **company** is automatically created. All members added through SSO are initially added to this team and are granted read-only access to the organization's repositories. If you will use SSO and you don't want to create teams yet, you can skip to [Step 2: Create Docker Hub repositories and configure access control](#step-2-create-docker-hub-repositories-and-configure-access-control). You can revisit this step at any time if you want to create teams.
+> When Docker Single Sign-on (SSO) is enabled, a default team named **company** is automatically created. All members added through SSO are initially added to this team and are granted read-only access to the organization's repositories. If you are going to use SSO and you don't want to create teams yet, you can skip to [Step 2: Create Docker Hub repositories and configure access control](#step-2-create-docker-hub-repositories-and-configure-access-control). You can revisit this step at any time if you want to create teams.
 
 To create a team:
 
@@ -44,22 +42,22 @@ To create a team:
 
 ## Step 2: Create Docker Hub repositories and configure access control
 
-If member's of your organization will access images on Docker Hub, then you should create at least one image repository. If you have already created teams, you can also configure the level of access that each team will have for your organization's repositories.
+If member's of your organization will access images on Docker Hub, then you should create at least one image repository. After you have created teams, you can also configure the level of access that each team will have for your organization's repositories.
 
 To create a repository:
 
 1. Click **Repositories** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and then click **Create Repository**.
 2. Click the drop-down and select your organization to put the repository in your organization's namespace.
-3. Select **Private** for the **Visibility** setting to make the repository only visible to your organization.
+3. Select **Private** for the **Visibility** setting to make the repository only accessible to your organization or select **Public** to make the repository accessible by the public.
 4. Link a GitHub or Bitbucket account now, or choose to do it later in the repository settings.
 5. Click **Create**.
 
-If you have created teams, then you configure each team's access to your repository:
+If you have created teams and created private repositories, then you must configure each team's access to your repositories:
 
 1. Click **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and then select your organization.
-2. Click **Teams** and then select the team that you’d like to configure repository access to.
-3. Click **Permissions** and then select a repository from the **Repository** drop-down.
-4. Select a permission from the **Permissions** drop-down list and click **Add**.
+2. Click **Repositories** and then select the repository that you’d like to configure access to.
+3. Click **Permissions**.
+4. Select a team and a permission from the drop-down lists and click **Add**.
 
 ## Step 3: Configure Image Access Management
 
@@ -94,7 +92,7 @@ Now that you have all your access control settings configured, it's time to star
 The following steps will help you quickly set up SSO. See [Configure Single Sign-on](../single-sign-on/index.md) and [Single Sign-on FAQs](../single-sign-on/faqs.md) for more details.
 
 1. Ensure that all members have at least Docker Desktop 4.4.2 installed on their machines.
-2. Ensure that all existing CI/CD pipelines have replaced their passwords with Personal Access Tokens.
+2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
 See [Create a Personal Access (PAT)](../single-sign-on/index.md#create-a-personal-access-token-pat) for more details.
 3. Configure either your SAML 2.0 IdP or your Azure AD IdP with Open ID Connect.
 
@@ -165,6 +163,9 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md#create-a-persona
    2. Navigate to [Docker Hub](https://hub.docker.com).
    3. Authenticate through email instead of using your Docker ID. If you are able to authenticate, then SSO has been configured successfully.
 7. To access Docker Hub through the CLI, each member of your organization must create a Personal Access Token. See [Create an access token](../docker-hub/access-tokens.md#create-an-access-token) for details.
+8. Perform the following to enforce users to sign in to Docker Hub using SSO.
+   1. In [Docker Hub](https://hub.docker.com), click **Organizations** select your organization, click **Settings**, and then select the **Security** tab.
+   2. Click **Turn ON Enforcement**.
 
 </div>
 <div id="invite-member" class="tab-pane fade" markdown="1">
@@ -186,13 +187,13 @@ To invite a member to your organization:
 </div>
 </div>
 
-## Step 5: Enforce Sign in
+## Step 5: Enforce Sign in for Docker Desktop
 
-In order to enforce all the access controls settings that you configured, you need to ensure that members sign in to Docker Desktop using only a Docker account that is a member of your organization.
+In order to enforce all the access controls settings that you configured, you need to enforce members to sign in to Docker Desktop using a Docker account that is a member of your organization.
 
-To enforce sign in and apply your organization's access control settings, you need to create a `registry.json` file on each user's computer with the following contents, where `myorg` is replaced with your organization's name.
+To enforce sign in, you need to create a `registry.json` file on each user's computer with the following contents, where `myorg` is replaced with your organization's name.
 
-   ```console 
+   ```console
    {
       "allowedOrgs":["myorg"]
    }
@@ -204,15 +205,15 @@ Based on your users' operating systems, you must create the registry.json file a
 
 > **Note**
 >
-> Ensure that only administrators have permission to modify the registry.json file. Users should not be able to edit the file. 
+> Ensure that only administrators have permission to modify the registry.json file. Users should not be able to edit the file.
 
-How you create the registry.json file on all your members computers depends on your unique infrastructure. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md#create-a-registryjson-file)
+The Docker Desktop installer can create this file and deploy it to the users' machines as part of the installation process. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md#create-a-registryjson-file)
 
 ## What's next
 
- Congratulations! You've now set up access control and added members to your organization. As your organization grows, you can continue adding [teams](#step-1-create-teams), [members](#step-4-add-members), [repositories](#step-2-create-docker-hub-repositories-and-configure-access-control), and [access control](#step-2-create-docker-hub-repositories-and-configure-access-control).
+  As your organization grows, you can continue managing [teams](./docker-hub/orgs/#create-a-team), [members](./docker-hub/orgs/#invite-members), [repositories](./docker-hub/repos/), and [access control](./docker-hub/orgs/#configure-repository-permissions).
 
- Don't stop here. Get the most out of your Docker Business subscription by leveraging these additional features:
+ Don't stop here. Get the most out of your Docker Business subscription by leveraging these popular features:
 
 - Set up [Automated Builds](../docker-hub/builds/index.md) triggered by code pushes to help streamline your CI process.
 - Add [service accounts](../docker-hub/service-accounts.md) to automate management of your container images or containerized applications.
