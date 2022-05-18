@@ -26,7 +26,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - systemd init system.
 
 - Gnome or KDE Desktop environment.
-  - On many distros the Gnome environment does not support tray icons. In such cases you will need to install a Gnome extension to add support for tray icons (e.g. [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/)).
+  -For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/)).
 
 - At least 4 GB of RAM.
 
