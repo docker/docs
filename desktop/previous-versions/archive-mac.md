@@ -4,6 +4,8 @@ keywords: Docker Desktop for Mac, release notes
 title: Release notes for previous versions
 toc_min: 1
 toc_max: 2
+redirect_from:
+  - /desktop/mac/release-notes/archive/
 ---
 
 This page contains release notes for older versions of Docker Desktop for Mac.
@@ -40,7 +42,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
   - Linux Kernel 4.9.93 with CEPH, DRBD, RBD, MPLS_ROUTING and MPLS_IPTUNNEL enabled
 
 * New
-  - Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../../kubernetes.md)
+  - Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker For Mac Preferences and use kubectl commands as well as docker commands. See [the Kubernetes section](../kubernetes.md)
   - Add an experimental SOCKS server to allow access to container networks, see [docker/for-mac#2670](https://github.com/docker/for-mac/issues/2670#issuecomment-372365274). Also see [docker/for-mac#2721](https://github.com/docker/for-mac/issues/2721)
   - Re-enable raw as the default disk format for users running macOS 10.13.4 and higher. Note this change only takes effect after a "reset to factory defaults" or "remove all data" (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
 
@@ -132,7 +134,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
   - Clearer error message when incompatible hardware is detected.
   - Fix some cases where selecting "Reset" after an error did not reset properly.
   - Fix incorrect NTP config. Fixes [docker/for-mac#2529](https://github.com/docker/for-mac/issues/2529)
-  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to [migrate Toolbox images manually](../../../toolbox/index.md)).
+  - Migration of Docker Toolbox images is not proposed anymore in Docker For Mac installer (still possible to migrate Toolbox images manually).
 
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
 
@@ -193,7 +195,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
   - VM entirely built with Linuxkit
   - VM disk size can be changed in disk preferences. (See [docker/for-mac#1037](https://github.com/docker/for-mac/issues/1037))
   - For systems running APFS on SSD on High Sierra, use `raw` format VM disks by default. This improves disk throughput (from 320MiB/sec to 600MiB/sec in `dd` on a 2015 MacBook Pro) and disk space handling.
-    Existing disks are kept in qcow format, if you want to switch to raw format you need to "Remove all data" or "Reset to factory defaults". See [Disk utilization](../space.md)
+    Existing disks are kept in qcow format, if you want to switch to raw format you need to "Remove all data" or "Reset to factory defaults". See [Disk utilization](../mac/space.md)
   - DNS name `docker.for.mac.host.internal` should be used instead of `docker.for.mac.localhost` (still valid) for host resolution from containers, since since there is an RFC banning the use of subdomains of localhost. See  https://tools.ietf.org/html/draft-west-let-localhost-be-localhost-06.
 
 * Bug fixes and minor changes

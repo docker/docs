@@ -1194,16 +1194,6 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
           title: Apple silicon
-        - sectiontitle: Previous versions
-          section:
-          - path: /desktop/mac/release-notes/3.x/
-            title: Desktop for Mac 3.x
-          - path: /desktop/mac/release-notes/2.x/
-            title: Desktop for Mac 2.x
-          - path: /desktop/mac/release-notes/edge-releases/
-            title: Edge releases
-          - path: /desktop/mac/release-notes/archive/
-            title: Older versions
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/install/
@@ -1216,16 +1206,6 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend
-        - sectiontitle: Previous versions
-          section:
-            - path: /desktop/windows/release-notes/3.x/
-              title: Desktop for Windows 3.x
-            - path: /desktop/windows/release-notes/2.x/
-              title: Desktop for Windows 2.x
-            - path: /desktop/windows/release-notes/edge-releases/
-              title: Edge releases
-            - path: /desktop/windows/release-notes/archive/
-              title: Older versions
     - sectiontitle: Linux
       section:
         - path: /desktop/linux/install/
@@ -1324,9 +1304,26 @@ manuals:
       title: FAQs
     - path: /desktop/backup-and-restore/
       title: Back up and restore data
+    - sectiontitle: Previous versions
+      section:
+      - path: /desktop/previous-versions/3.x-windows/
+        title: Desktop for Windows 3.x
+      - path: /desktop/previous-versions/3.x-mac/
+        title: Desktop for Mac 3.x
+      - path: /desktop/previous-versions/2.x-windows/
+        title: Desktop for Windows 2.x
+      - path: /desktop/previous-versions/2.x-mac/
+        title: Desktop for Mac 2.x
+      - path: /desktop/previous-versions/edge-releases-windows/
+        title: Windows edge releases
+      - path: /desktop/previous-versions/edge-releases-mac/
+        title: Mac edge releases
+      - path: /desktop/previous-versions/archive-windows/
+        title: Older versions for Windows
+      - path: /desktop/previous-versions/archive-mac/
+        title: Older versions for Mac
     - path: /desktop/release-notes/
       title: Release notes
-
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
