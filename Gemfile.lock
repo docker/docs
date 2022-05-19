@@ -3,6 +3,8 @@ GEM
   specs:
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    archive-zip (0.12.0)
+      io-like (~> 0.3.0)
     colorator (1.1.0)
     concurrent-ruby (1.1.10)
     em-websocket (0.5.3)
@@ -24,6 +26,7 @@ GEM
     http_parser.rb (0.8.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    io-like (0.3.1)
     jekyll (4.2.2)
       addressable (~> 2.4)
       colorator (~> 1.0)
@@ -58,14 +61,17 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
-    nokogiri (1.13.5-x86_64-linux)
+    nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
+    octopress-hooks (2.6.2)
+      jekyll (>= 2.0)
     parallel (1.22.1)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (4.0.7)
     racc (1.6.0)
     rainbow (3.1.1)
+    rake (13.0.6)
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -87,11 +93,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  archive-zip
   html-proofer
   jekyll
   jekyll-redirect-from
   jekyll-relative-links
   jekyll-sitemap
+  octopress-hooks
+  rake
   tzinfo-data
 
 BUNDLED WITH

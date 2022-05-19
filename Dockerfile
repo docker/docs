@@ -12,15 +12,10 @@ ARG BUNDLER_VERSION=2.3.13
 ARG JEKYLL_ENV=development
 ARG DOMAIN=docs.docker.com
 
-ARG ENGINE_BRANCH="20.10"
-ARG DISTRIBUTION_BRANCH="release/2.7"
-ARG COMPOSE_CLI_BRANCH="main"
-ARG EXTENSIONS_SDK_BRANCH="main"
-
 # Base stage for building
 FROM ruby:${RUBY_VERSION}-alpine AS base
 WORKDIR /src
-RUN apk add --no-cache bash build-base git subversion wget
+RUN apk add --no-cache bash build-base git
 
 # Gem stage will install bundler used as dependency manager
 # for our dependencies in Gemfile for Jekyll
@@ -45,33 +40,15 @@ RUN bundle update \
 FROM scratch AS vendor
 COPY --from=vendored /out /
 
-# Fetch upstream resources (reference documentation)
-# Only add the files that are needed to build these reference docs, so that these
-# docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
-FROM base AS upstream-resources
-WORKDIR /out
-COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
-ARG ENGINE_BRANCH
-ARG DISTRIBUTION_BRANCH
-ARG COMPOSE_CLI_BRANCH
-ARG EXTENSIONS_SDK_BRANCH
-RUN ./_scripts/fetch-upstream-resources.sh .
-
 # Build the static HTML for the current docs.
 # After building with jekyll, fix up some links
 FROM gem AS generate
 ARG JEKYLL_ENV
 ARG DOMAIN
 ENV TARGET=/out
-COPY . .
-COPY --from=upstream-resources /out .
-RUN --mount=type=cache,target=/src/.jekyll-cache <<EOT
+RUN --mount=type=bind,target=.,rw \
+  --mount=type=cache,target=/src/.jekyll-cache <<EOT
 set -eu
-
-# substitute the "{site.latest_engine_api_version}" in the title for the latest
-# API docs, based on the latest_engine_api_version parameter in _config.yml
-(set -x ; ./_scripts/update-api-toc.sh)
-
 if [ "${JEKYLL_ENV}" = "production" ]; then
   (
     set -x
@@ -86,7 +63,6 @@ else
     echo '[]' > ${TARGET}/js/metadata.json
   )
 fi
-
 find ${TARGET} -type f -name '*.html' | while read i; do
   sed -i 's#\(<a[^>]* href="\)https://${DOMAIN}/#\1/#g' "$i"
 done

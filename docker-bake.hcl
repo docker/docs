@@ -11,7 +11,7 @@ target "release" {
   args = {
     JEKYLL_ENV = JEKYLL_ENV
   }
-  no-cache-filter = ["upstream-resources"]
+  no-cache-filter = ["generate"]
   output = ["./_site"]
 }
 
