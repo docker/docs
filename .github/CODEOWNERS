@@ -3,6 +3,8 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
+/build @dockertopia @docker/build
+
 /compose/ @dockertopia @usha-mandya
 
 /desktop/ @aevesdocker @usha-mandya
