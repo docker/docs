@@ -1406,6 +1406,20 @@ manuals:
       title: Working with Buildx
     - path: /build/buildx/install/
       title: Install Buildx
+  - path: /build/cni-networking/
+    title: CNI networking
+  - path: /build/custom-network/
+    title: Using a custom network
+  - path: /build/custom-registry-config/
+    title: Using a custom registry config
+  - path: /build/opentelemetry/
+    title: OpenTelemetry support
+  - path: /build/registry-mirror/
+    title: Define a registry mirror
+  - path: /build/remote-builder/
+    title: Remote builder
+  - path: /build/resource-limiting/
+    title: Resource limiting
 
 - sectiontitle: Docker Compose
   section:

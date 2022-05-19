@@ -150,6 +150,14 @@ fetch-remote:
           - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
 
+  - repo: "https://github.com/docker/buildx"
+    ref: "master"
+    paths:
+      - dest: "build"
+        src:
+          - "docs/guides/*.md"
+          - "!docs/guides/cicd.md" # CI/CD documentation is already handled in ci-cd/github-actions
+
   - repo: "https://github.com/docker/extensions-sdk"
     ref: "main"
     paths:
