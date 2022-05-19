@@ -1304,6 +1304,8 @@ manuals:
       title: FAQs
     - path: /desktop/backup-and-restore/
       title: Back up and restore data
+    - path: /desktop/release-notes/
+      title: Release notes
     - sectiontitle: Previous versions
       section:
       - path: /desktop/previous-versions/3.x-windows/
@@ -1322,8 +1324,6 @@ manuals:
         title: Older versions for Windows
       - path: /desktop/previous-versions/archive-mac/
         title: Older versions for Mac
-    - path: /desktop/release-notes/
-      title: Release notes
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
