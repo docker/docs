@@ -10,11 +10,11 @@ The following section contains instructions on how to get started onboarding  yo
 
 ## Prerequisite
 
-Before you start to on board your organization, you must have an active Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet, and wait until your Docker Business subscription is active before beginning.
+Before you start to on board your organization, you must have an active Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet.
 
 ## Step 1: Create your organization
 
-The first thing to do is create an organization. An organization is a collection of teams and repositories that can be managed together. [Learn more](./docker-hub/orgs/).
+To start, you'll need an organization. An organization is a collection of teams and repositories that can be managed together. [Learn more](./docker-hub/orgs/).
 
 On the day that your Docker Business subscription begins, your organization's primary contact will receive a welcome email from Docker to guide you through creating a new organization or to let you choose an existing organization for your Docker Business subscription.
 
