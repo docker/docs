@@ -355,11 +355,18 @@ For best results, we recommend you run Docker Desktop natively on a Windows syst
 
 #### If you still want to use nested virtualization
 
-* Make sure nested virtualization support is enabled in VMWare or Parallels.
+* If using Hyper-V, make sure nested virtualization support is enabled for the
+  Windows VM by running the following powershell as Administrator:
+
+```none
+Set-VMProcessor -VMName <Windows VM Name> -ExposeVirtualizationExtensions $true
+```
+
+* If using VMware or Parallels, make sure nested virtualization support is enabled.
   Check the settings in **Hardware > CPU & Memory > Advanced Options > Enable
   nested virtualization** (the exact menu sequence might vary slightly).
 
-* Configure your VM with at least 2 CPUs and sufficient memory to run your
+* Configure your Windows VM with at least 2 CPUs and sufficient memory to run your
   workloads.
 
 * Make sure your system is more or less idle.
@@ -369,7 +376,9 @@ For best results, we recommend you run Docker Desktop natively on a Windows syst
 
 * The processor you have may also be relevant. For example, Westmere based Mac
   Pros have some additional hardware virtualization features over Nehalem based
-  Mac Pros and so do newer generations of Intel processors.
+  Mac Pros and so do newer generations of Intel processors. For Hyper-V, check
+  [Microsoft's nested virtualization user guide](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization)
+  to verify the host OS version is supported on your hardware.
 
 #### Typical failures we see with nested virtualization
 
