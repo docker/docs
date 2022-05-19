@@ -382,15 +382,6 @@ Set-VMProcessor -VMName <Windows VM Name> -ExposeVirtualizationExtensions $true
 
 #### Typical failures we see with nested virtualization
 
-* Slow boot time of the Linux VM. If you look in the logs and find some entries
-  prefixed with `Moby`. On real hardware, it takes 5-10 seconds to boot the
-  Linux VM; roughly the time between the `Connected` log entry and the `*
-  Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a
-  Windows VM, this may take considerably longer. We have a timeout of 60s or so.
-  If the VM hasn't started by that time, we retry. If the retry fails we print
-  an error. You can sometimes work around this by providing more resources to
-  the Windows VM.
-
 * Sometimes the VM fails to boot when Linux tries to calibrate the time stamp
   counter (TSC). This process is quite timing sensitive and may fail when
   executed inside a VM which itself runs inside a VM. CPU utilization is also
