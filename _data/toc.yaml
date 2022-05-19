@@ -1391,14 +1391,21 @@ manuals:
   - path: /engine/deprecated/
     title: Deprecated features
 
-  - path: /buildx/working-with-buildx/
-    title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
   - path: /engine/scan/
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
+
+- sectiontitle: Docker Build
+  section:
+  - sectiontitle: Buildx component
+    section:
+    - path: /build/buildx/
+      title: Working with Buildx
+    - path: /build/buildx/install/
+      title: Install Buildx
 
 - sectiontitle: Docker Compose
   section:
