@@ -10,17 +10,17 @@ The following section contains instructions on how to get started onboarding  yo
 
 ## Prerequisites
 
-Before you continue to on board your organization, ensure that you've completed the following:
+Before you continue to on board your organization, you must have an active Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet, and wait until your Docker Business subscription is active before beginning.
 
- - Subscribed to Docker Business
+## Step 1: Create your organization
 
-    If you haven't subscribed to Docker Business yet, [get in touch with us](https://www.docker.com/pricing/contact-sales/).
+The first thing to do is create an organization. An organization is a collection of teams and repositories that can be managed together.
 
- - Created your organization and applied your Docker Business subscription to your organization
+On the day that your Docker Business subscription begins, your organization's primary contact will receive a welcome email from Docker to guide you through creating a new organization or let you choose an existing organization for your Docker Business subscription.
 
-   On the day that your subscription becomes active, your organization's primary contact will receive a welcome email from Docker to guide you through creating an organization or using an existing organization for your Docker Business subscription.
+After completing the steps from the welcome email, you can verify that your organization has been created and that your Docker Business subscription is active by going to [Billing Details](https://hub.docker.com/billing) and then clicking on your organization's name. Under **Plan** you should see **Docker Business**.
 
-## Step 1: Create teams
+## Step 2: Create teams
 
 All members in your organization need to be in at least one team. Teams are used to apply access control permissions to image repositories and organization settings.
 
@@ -30,7 +30,7 @@ Besides the default **owners** team, you should create at least one additional t
 
 > **Note**
 >
-> When Docker Single Sign-on (SSO) is enabled, a default team named **company** is automatically created. All members added through SSO are initially added to this team and are granted read-only access to the organization's repositories. If you are going to use SSO and you don't want to create teams yet, you can skip to [Step 2: Create Docker Hub repositories and configure access control](#step-2-create-docker-hub-repositories-and-configure-access-control). You can revisit this step at any time if you want to create teams.
+> When Docker Single Sign-on (SSO) is enabled, a default team named **company** is automatically created. All members added through SSO are initially added to this team and are granted read-only access to the organization's repositories. If you are going to use SSO and you don't want to create teams yet, you can skip to [Step 3: Create Docker Hub repositories and configure access control](#step-3-create-docker-hub-repositories-and-configure-access-control). You can revisit this step at any time if you want to create teams.
 
 To create a team:
 
@@ -38,7 +38,7 @@ To create a team:
 2. Click **Teams** and then click **Create Team**.
 3. Fill out your team's information and then click **Create**.
 
-## Step 2: Create Docker Hub repositories and configure access control
+## Step 3: Create Docker Hub repositories and configure access control
 
 If member's of your organization will access images on Docker Hub, then you should create at least one image repository.
 
@@ -57,7 +57,7 @@ If you have created teams, then you must configure access to your private reposi
 3. Click **Permissions**.
 4. Select a team and a permission from the drop-down lists and click **Add**.
 
-## Step 3: Configure Image Access Management
+## Step 4: Configure Image Access Management
 
 You may want to protect your organization from malicious content by restricting what images your members can pull from Docker Hub. By default, members can pull all images from Docker Hub.
 
@@ -68,7 +68,7 @@ To configure Image Access Management permissions:
 3. Toggle Image Access Management to **Enabled**.
 4. Toggle the permissions for each image type to **Allowed** or **Restricted**.
 
-## Step 4: Add members
+## Step 5: Add members
 
 Now that you have all your access control settings configured, it's time to start adding members. You can automatically add members to your organization by configuring Docker Single Sign-on (SSO), or invite members based their email address or Docker ID.
 
@@ -185,9 +185,9 @@ To invite a member to your organization:
 </div>
 </div>
 
-## Step 5: Enforce Sign in for Docker Desktop
+## Step 6: Enforce sign in for Docker Desktop
 
-In order to enforce access controls settings from Docker Business, you need to enforce members to sign in to Docker Desktop using a Docker account that is a member of your organization.
+In order to enforce your access control settings from Docker Business, you need to enforce members to sign in to Docker Desktop using a Docker account that is a member of your organization.
 
 To enforce sign in, you need to create a `registry.json` file on each user's computer with the following contents, where `myorg` is replaced with your organization's name.
 
@@ -205,7 +205,7 @@ Based on your users' operating systems, you must create the registry.json file a
 >
 > Ensure that only administrators have permission to modify the registry.json file. Users should not be able to edit the file.
 
-The Docker Desktop installer can create this file and deploy it to the users' machines as part of the installation process. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md#create-a-registryjson-file)
+The Docker Desktop installer can create this file as part of the installation process or you can use other methods to deploy this file. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md#create-a-registryjson-file)
 
 ## What's next
 
