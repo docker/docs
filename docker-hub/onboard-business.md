@@ -8,17 +8,17 @@ toc_max: 2
 
 The following section contains instructions on how to get started onboarding  your organization with Docker Business.
 
-## Prerequisites
+## Prerequisite
 
-Before you continue to on board your organization, you must have an active Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet, and wait until your Docker Business subscription is active before beginning.
+Before you start to on board your organization, you must have an active Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet, and wait until your Docker Business subscription is active before beginning.
 
 ## Step 1: Create your organization
 
-The first thing to do is create an organization. An organization is a collection of teams and repositories that can be managed together.
+The first thing to do is create an organization. An organization is a collection of teams and repositories that can be managed together. [Learn more](./docker-hub/orgs/).
 
-On the day that your Docker Business subscription begins, your organization's primary contact will receive a welcome email from Docker to guide you through creating a new organization or let you choose an existing organization for your Docker Business subscription.
+On the day that your Docker Business subscription begins, your organization's primary contact will receive a welcome email from Docker to guide you through creating a new organization or to let you choose an existing organization for your Docker Business subscription.
 
-After completing the steps from the welcome email, you can verify that your organization has been created and that your Docker Business subscription is active by going to [Billing Details](https://hub.docker.com/billing) and then clicking on your organization's name. Under **Plan** you should see **Docker Business**.
+After completing the steps from the welcome email, you can verify that your organization exists and that your Docker Business subscription is active by going to [Billing Details](https://hub.docker.com/billing) and then clicking on your organization's name. Under **Plan** you should see **Docker Business**.
 
 ## Step 2: Create teams
 
