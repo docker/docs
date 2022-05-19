@@ -345,7 +345,7 @@ C:\Program Files\Docker\docker.exe:
 ### Running Docker Desktop in nested virtualization scenarios
 
 Docker Desktop can run inside a Hyper-V VM, see
-[Microsoft's nested virtualization user guide](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization).
+[Microsoft's nested virtualization user guide](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization) for more information.
 Docker Desktop can also run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured.
 
 However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, _**Docker Desktop is not supported in nested virtualization scenarios**_. It might work
