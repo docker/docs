@@ -347,7 +347,7 @@ C:\Program Files\Docker\docker.exe:
 Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured. However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, _**Docker Desktop is not supported in nested virtualization scenarios**_. It might work
 in some cases, and not in others.
 
-For best results, we recommend you run Docker Desktop natively on a Windows system (to work with Windows or Linux containers), or on Mac to work with Linux containers.
+For best results, we recommend you run Docker Desktop natively on a Windows system (to work with Windows or Linux containers), or on Mac or Linux to work with Linux containers.
 
 #### If you still want to use nested virtualization
 
