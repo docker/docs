@@ -46,7 +46,7 @@ than just native images.  Buildx accomplishes this by adding new builder
 instances based on BuildKit, and leveraging Docker Desktop's technology stack
 to run non-native binaries.
 
-For more information about the Buildx CLI command, see [Buildx](../buildx/working-with-buildx.md)
+For more information about the Buildx CLI command, see [Buildx](../build/buildx/index.md).
 and the [`docker buildx` command line reference](../engine/reference/commandline/buildx.md).
 
 ### Build and run multi-architecture images
