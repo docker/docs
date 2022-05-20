@@ -16,7 +16,7 @@ Before you start to on board your organization, you must have a Docker Business 
 
 To begin, you should identify which users you will need to add to your Docker Business organization.
 
-Identifying your users is important because later on, in [Step 7: Enforce sign in for Docker Desktop](#step-7-enforce-sign-in-for-docker-desktop), you can enforce sign in and prevent unidentified users, who were not added to your Docker organization, from signing in to Docker Desktop on your organization's computers.
+Identifying your users is important because later on, in [Step 8: Enforce sign in for Docker Desktop](#step-8-enforce-sign-in-for-docker-desktop), you can enforce sign in and prevent unidentified users, who were not added to your Docker organization, from signing in to Docker Desktop on your organization's computers.
 
 > **Note**
 >
@@ -30,7 +30,34 @@ Identifying your users is important because later on, in [Step 7: Enforce sign i
    * To create a new account, instruct your users to go [sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"} using their email address in your organization's domain.
 3. Ask your Docker sales representative to provide a list of Docker accounts that use an email address in your organization's domain.
 
-## Step 2: Create your organization
+## Step 2: Get a Docker ID
+
+You'll need a Docker ID to manage your Docker Business organization. If you already have a Docker ID and you want to use that account to manage your organization, skip ahead to [Step 3: Create your organization](#step-3-create-your-organization).
+
+To sign up for a Docker ID:
+
+1. Go to the [Docker Hub signup page](https://hub.docker.com/signup/){: target="_blank" rel="noopener" class="_"}.
+2. Enter a username that will become your Docker ID.
+   Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. Once you create your Docker ID you cannot reuse it in the future if you deactivate this account.
+3. Enter a unique, valid email address.
+4. Enter a password that is at least 9 characters.
+5. Complete the Captcha verification and then then click Sign up.
+6. Sign in to Docker Hub.
+7. At the **Choose a Plan** screen, select **Personal**.
+
+  > **Note**
+  >
+  > Although you're creating this account for your Docker Business subscription, you must first create the account with a Personal subscription plan.
+
+6. Docker sends a verification email to the address you provided.
+7. Verify your email address to complete the registration process.
+
+   > **Note**
+   >
+   > You have limited actions available until you verify your email address.
+
+
+## Step 3: Create your organization
 
 Next, you'll need an organization in Docker Hub. An organization is a collection of teams and repositories that can be managed together. [Learn more](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_"}.
 
@@ -48,7 +75,7 @@ After completing the steps from the welcome email, verify that your organization
 1. Go to [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"} and then click on your organization's name. 
 2. Under **Plan**, view your subscription. You subscription should be **Docker Business**.
 
-## Step 3: Create teams
+## Step 4: Create teams
 
 All members in your organization need to be in at least one team. Teams are used to apply access control permissions to image repositories and organization settings.
 
@@ -58,7 +85,7 @@ Besides the default **owners** team, you should create at least one additional t
 
 > **Note**
 >
-> If you will use Docker Single Sign-on (SSO), a default team named **company** is automatically created. All members added through SSO are initially added to this team and are granted read-only access to your organization's repositories. If you are going to use SSO and you don't want to create teams yet, you can skip to [Step 4: Create Docker Hub repositories and configure access control](#step-4-create-docker-hub-repositories-and-configure-access-control). You can revisit this step at any time if you want to create teams.
+> If you will use Docker Single Sign-on (SSO), a default team named **company** is automatically created. All members added through SSO are initially added to this team and are granted read-only access to your organization's repositories. If you are going to use SSO and you don't want to create teams yet, you can skip to [Step 5: Create Docker Hub repositories and configure access control](#step-5-create-docker-hub-repositories-and-configure-repository-access). You can revisit this step at any time if you want to create teams.
 
 To create a team:
 
@@ -66,7 +93,7 @@ To create a team:
 2. Click **Teams** and then click **Create Team**.
 3. Fill out your team's information and then click **Create**.
 
-## Step 4: Create Docker Hub repositories and configure repository access
+## Step 5: Create Docker Hub repositories and configure repository access
 
 If member's of your organization will share container images on Docker Hub, then you should create at least one image repository. [Learn more](../docker-hub/repos.md){: target="_blank" rel="noopener" class="_"}.
 
@@ -91,7 +118,7 @@ To configure access to private repositories for teams other than **owners** and 
 3. Click **Permissions**.
 4. Select a team and a permission from the drop-down lists and click **Add**.
 
-## Step 5: Configure Image Access Management
+## Step 6: Configure Image Access Management
 
 You may want to protect your organization from malicious content by restricting what images your members can pull from Docker Hub. By default, members can pull all images from Docker Hub.
 
@@ -102,7 +129,7 @@ To configure Image Access Management permissions:
 3. Toggle Image Access Management to **Enabled**.
 4. Toggle the permissions for each image type to **Allowed** or **Restricted**.
 
-## Step 6: Add members
+## Step 7: Add members
 
 Now that you have all your access control settings configured, it's time to start adding members. You can automatically add members to your organization by configuring Docker Single Sign-on (SSO), or invite members based their email address or Docker ID.
 
@@ -219,7 +246,7 @@ To invite a member to your organization:
 </div>
 </div>
 
-## Step 7: Enforce sign in for Docker Desktop
+## Step 8: Enforce sign in for Docker Desktop
 
 At this point, your users can sign in to Docker Desktop on their computers using any Docker account, including accounts that are not a member of your Docker organization.
 
