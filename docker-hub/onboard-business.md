@@ -44,14 +44,11 @@ To sign up for a Docker ID:
 5. Complete the Captcha verification and then then click Sign up.
 6. Sign in to Docker Hub.
 7. At the **Choose a Plan** screen, select **Personal**.
-
-  > **Note**
-  >
-  > Although you're creating this account for your Docker Business subscription, you must first create the account with a Personal subscription plan.
-
+     > **Note**
+     >
+     > Although you're creating this account for your Docker Business subscription, you must first create the account with a Personal subscription plan.
 6. Docker sends a verification email to the address you provided.
 7. Verify your email address to complete the registration process.
-
    > **Note**
    >
    > You have limited actions available until you verify your email address.
