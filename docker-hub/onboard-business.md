@@ -12,24 +12,23 @@ The following section contains steps on how to get started onboarding your organ
 
 Before you start to on board your organization, you must have a Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet.
 
-## Step 1: Identify your Docker users
+## Step 1: Identify your Docker users and their Docker accounts
 
 To begin, you should identify which users you will need to add to your Docker Business organization.
 
-Later on, in [Step 7: Enforce sign in for Docker Desktop](#step-7-enforce-sign-in-for-docker-desktop), you can enforce sign in and prevent unidentified users, who were not added to your Docker organization, from signing in to Docker Desktop on your organization's computers.
+Identifying your users is important because later on, in [Step 7: Enforce sign in for Docker Desktop](#step-7-enforce-sign-in-for-docker-desktop), you can enforce sign in and prevent unidentified users, who were not added to your Docker organization, from signing in to Docker Desktop on your organization's computers.
 
 > **Note**
 >
 > If you will use Docker Single Sign-on (SSO), users from your IdP are automatically provisioned in your organization when they sign in. You can identify which users have signed in to Docker Hub by viewing your organization's members in Docker Hub. You can also perform the steps below to identify users before you configure SSO.
 
-If your organization uses device management software, like MDM or JAMF, then you may use the device management software to help identify users that already have Docker Desktop installed. See your device management software's documentation for details.
-
-To identify users without using device management software:
-
-1. Instruct all your Docker users in your organization to update their existing Docker account's email address to an address that's in your organization's domain, or to create a new account using an email address in your organization's domain.
+1. Identify the Docker users in your organization.
+   * If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify users that already have Docker Desktop installed. See your device management software's documentation for details.
+   * If your organization does not use device management software, you may survey your users.
+2. Instruct all your Docker users in your organization to update their existing Docker account's email address to an address that's in your organization's domain, or to create a new account using an email address in your organization's domain.
    * To update an account's email address, instruct your users to sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, go to [Account Settings](https://hub.docker.com/settings/general){: target="_blank" rel="noopener" class="_"}, and update the email address to their email address in your organization's domain.
-   * To create a new account, instruct your users to go to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and register account using their email address in your organization's domain.
-2. Ask your Docker sales representative to provide a list of Docker accounts that use an email address in your organization's domain.
+   * To create a new account, instruct your users to go [sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"} using their email address in your organization's domain.
+3. Ask your Docker sales representative to provide a list of Docker accounts that use an email address in your organization's domain.
 
 ## Step 2: Create your organization
 
@@ -53,7 +52,7 @@ After completing the steps from the welcome email, verify that your organization
 
 All members in your organization need to be in at least one team. Teams are used to apply access control permissions to image repositories and organization settings.
 
-Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md#the-owners-team){: target="_blank" rel="noopener" class="_"}.
+Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md/#the-owners-team){: target="_blank" rel="noopener" class="_"}.
 
 Besides the default **owners** team, you should create at least one additional team. This additional team will contain members that can not modify organization settings.
 
@@ -126,7 +125,7 @@ The following steps will help you quickly set up SSO. For more details, see [Con
 
 1. Ensure that all members have at least Docker Desktop 4.4.2 installed on their machines.
 2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
-See [Create a Personal Access (PAT)](../single-sign-on/index.md#create-a-personal-access-token-pat){: target="_blank" rel="noopener" class="_"} for more details.
+See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-personal-access-token-pat){: target="_blank" rel="noopener" class="_"} for more details.
 3. Configure either your SAML 2.0 IdP or your Azure AD IdP with Open ID Connect.
 
    <ul class="nav nav-tabs">
@@ -195,7 +194,7 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md#create-a-persona
    1. Open an incognito browser.
    2. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
    3. Authenticate through email instead of using your Docker ID. If you are able to authenticate, then SSO has been configured successfully.
-7. To access Docker Hub through the CLI, each member of your organization must create a Personal Access Token. See [Create an access token](../docker-hub/access-tokens.md#create-an-access-token){: target="_blank" rel="noopener" class="_"} for details.
+7. To access Docker Hub through the CLI, each member of your organization must create a Personal Access Token. See [Create an access token](../docker-hub/access-tokens.md/#create-an-access-token){: target="_blank" rel="noopener" class="_"} for details.
 8. Perform the following to force users to sign in to Docker Hub using SSO.
    1. In [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, click **Organizations** select your organization, click **Settings**, and then select the **Security** tab.
    2. Click **Turn ON Enforcement**.
@@ -244,7 +243,7 @@ Based on your users' operating systems, you must create the registry.json file a
 >
 > Ensure that only administrators have permission to modify the registry.json file. Users should not be able to edit the file.
 
-The Docker Desktop installer can create this file as part of the installation process or you can use other methods to deploy this file. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md#create-a-registryjson-file){: target="_blank" rel="noopener" class="_"}
+The Docker Desktop installer can create this file as part of the installation process or you can use other methods to deploy this file. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md/#create-a-registryjson-file){: target="_blank" rel="noopener" class="_"}
 
 ## What's next
 
