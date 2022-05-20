@@ -63,11 +63,11 @@ compose_switch_version:  "1.0.4"
 min_api_threshold: 1.40
 
 # List of plugins to enable for local development builds. Mostly the same as
-# for production, but without the "jekyll-sitemap" plugin, which is not needed
-# for previewing, and excluding saves some time to build
+# for production.
 plugins:
   - jekyll-redirect-from
   - jekyll-relative-links
+  - jekyll-sitemap
 
 # Assets
 #
@@ -96,7 +96,6 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      sitemap: false
       toc_min: 2
       toc_max: 4
 
