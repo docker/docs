@@ -19,3 +19,23 @@ buildx-yaml:
 	rm -rf ./_data/buildx/*
 	cp -R "$($@_TMP_OUT)"/out/reference/*.yaml ./_data/buildx/
 	rm -rf $($@_TMP_OUT)/*
+
+# Build website and output to _site folder
+release:
+	rm -rf _site
+	$(BUILDX_CMD) bake release
+
+# Vendor Gemfile.lock
+vendor:
+	$(BUILDX_CMD) bake vendor
+
+# Check for broken links
+htmlproofer:
+	$(BUILDX_CMD) bake htmlproofer
+
+# Deploy website and run it through Docker compose
+# Available in your browser at http://localhost:4000
+deploy:
+	docker compose up --build
+
+.PHONY: buildx-yaml release vendor htmlproofer deploy

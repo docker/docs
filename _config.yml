@@ -16,7 +16,19 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html", "js/metadata.json"]
+
+exclude:
+  - _samples
+  - _scripts
+  - 404.html
+  - datacenter
+  - docker-bake.hcl
+  - ee
+  - index.html
+  - js/metadata.json
+  - LICENSE
+  - Makefile
+  - README.md
 
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons.
@@ -92,3 +104,62 @@ defaults:
       path: engine/reference/commandline
     values:
       skip_read_time: true
+
+# Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
+# - repo is the GitHub repository to fetch from
+# - ref the Git reference
+# - paths is a list to the resources within the remote repository
+#   - dest is the destination path within the working tree
+#   - src is a list of glob source paths within the remote repository
+fetch-remote:
+  - repo: "https://github.com/docker/cli"
+    ref: "20.10"
+    paths:
+      - dest: "engine/extend"
+        src:
+          - "docs/extend/**"
+      - dest: "engine"
+        src:
+          - "docs/deprecated.md"
+      - dest: "engine/reference"
+        src:
+          - "docs/reference/builder.md"
+          - "docs/reference/run.md"
+      - dest: "engine/reference/commandline"
+        src:
+          - "docs/reference/commandline/cli.md"
+          - "docs/reference/commandline/dockerd.md"
+
+  - repo: "https://github.com/docker/docker"
+    ref: "20.10"
+    paths:
+      - dest: "engine/api"
+        src:
+          - "docs/api/**"
+
+  - repo: "https://github.com/docker/compose-cli"
+    ref: "main"
+    paths:
+      - dest: "cloud"
+        src:
+          - "docs/*.md"
+          - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
+          - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
+
+  - repo: "https://github.com/docker/extensions-sdk"
+    ref: "main"
+    paths:
+      - dest: "desktop/extensions-sdk"
+        src:
+          - "docs/**"
+
+  - repo: "https://github.com/distribution/distribution"
+    ref: "release/2.7"
+    paths:
+      - dest: "registry/spec"
+        src:
+          - "docs/spec/**"
+          - "!docs/spec/api.md.tmpl"
+      - dest: "registry"
+        src:
+          - "docs/configuration.md"

@@ -1,0 +1,58 @@
+name: build
+
+on:
+  push:
+    # needs push event on default branch otherwise cache is evicted when pull request is merged
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build
+        uses: docker/bake-action@v2
+        with:
+          targets: release
+          set: |
+            *.cache-from=type=gha,scope=build
+            *.cache-to=type=gha,scope=build,mode=max
+
+  validate:
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Check for broken links
+        uses: docker/bake-action@v2
+        with:
+          targets: htmlproofer
+          set: |
+            *.cache-from=type=gha,scope=build
+            *.cache-from=type=gha,scope=validate
+            *.cache-to=type=gha,scope=validate,mode=max
+
+      # Disabled netlify-deploy due to flakey 502 http errors
+      # - name: copy static files
+      #   if: github.event.pull_request.head.repo.fork == false
+      #   run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site
+      # - uses: ./.github/actions/netlify-deploy
+      #   if: github.event.pull_request.head.repo.fork == false
+      #   with:
+      #     directory: _site
+      #     netlify_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     netlify_account_slug: ${{ secrets.NETLIFY_ACCOUNT_SLUG }}
+      #     site_name: "${{ github.repository }}/${{ github.head_ref }}"
