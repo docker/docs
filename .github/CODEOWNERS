@@ -3,6 +3,8 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
+/build @dockertopia @crazy-max
+
 /compose/ @dockertopia @usha-mandya
 
 /compose/install.md @aevesdocker
