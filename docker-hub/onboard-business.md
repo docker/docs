@@ -33,7 +33,7 @@ To identify users without using device management software:
 
 ## Step 2: Create your organization
 
-Next, you'll need an organization in Docker Hub. An organization is a collection of teams and repositories that can be managed together. [Learn more](/docker-hub/orgs/){: target="_blank" rel="noopener" class="_"}.
+Next, you'll need an organization in Docker Hub. An organization is a collection of teams and repositories that can be managed together. [Learn more](../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_"}.
 
 On the day that your Docker Business subscription begins, your organization's primary contact will receive a welcome email from Docker to guide you through creating a new organization or to let you choose an existing organization for your Docker Business subscription.
 
@@ -53,7 +53,7 @@ After completing the steps from the welcome email, verify that your organization
 
 All members in your organization need to be in at least one team. Teams are used to apply access control permissions to image repositories and organization settings.
 
-Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](/docker-hub/orgs.md#the-owners-team){: target="_blank" rel="noopener" class="_"}.
+Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md#the-owners-team){: target="_blank" rel="noopener" class="_"}.
 
 Besides the default **owners** team, you should create at least one additional team. This additional team will contain members that can not modify organization settings.
 
@@ -69,7 +69,7 @@ To create a team:
 
 ## Step 4: Create Docker Hub repositories and configure repository access
 
-If member's of your organization will share container images on Docker Hub, then you should create at least one image repository. [Learn more](/docker-hub/repos/){: target="_blank" rel="noopener" class="_"}.
+If member's of your organization will share container images on Docker Hub, then you should create at least one image repository. [Learn more](../docker-hub/repos.md){: target="_blank" rel="noopener" class="_"}.
 
 To create a repository:
 
@@ -122,11 +122,11 @@ Now that you have all your access control settings configured, it's time to star
 
 ### Configure Single Sign-on
 
-The following steps will help you quickly set up SSO. For more details, see [Configure Single Sign-on](/single-sign-on/index.md){: target="_blank" rel="noopener" class="_"} and [Single Sign-on FAQs](/single-sign-on/faqs.md){: target="_blank" rel="noopener" class="_"}.
+The following steps will help you quickly set up SSO. For more details, see [Configure Single Sign-on](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"} and [Single Sign-on FAQs](../single-sign-on/faqs.md){: target="_blank" rel="noopener" class="_"}.
 
 1. Ensure that all members have at least Docker Desktop 4.4.2 installed on their machines.
 2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
-See [Create a Personal Access (PAT)](/single-sign-on/index.md#create-a-personal-access-token-pat){: target="_blank" rel="noopener" class="_"} for more details.
+See [Create a Personal Access (PAT)](../single-sign-on/index.md#create-a-personal-access-token-pat){: target="_blank" rel="noopener" class="_"} for more details.
 3. Configure either your SAML 2.0 IdP or your Azure AD IdP with Open ID Connect.
 
    <ul class="nav nav-tabs">
@@ -244,15 +244,15 @@ Based on your users' operating systems, you must create the registry.json file a
 >
 > Ensure that only administrators have permission to modify the registry.json file. Users should not be able to edit the file.
 
-The Docker Desktop installer can create this file as part of the installation process or you can use other methods to deploy this file. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](/docker-hub/configure-sign-in.md#create-a-registryjson-file){: target="_blank" rel="noopener" class="_"}
+The Docker Desktop installer can create this file as part of the installation process or you can use other methods to deploy this file. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md#create-a-registryjson-file){: target="_blank" rel="noopener" class="_"}
 
 ## What's next
 
-  As your organization grows, you can continue managing [teams](/docker-hub/orgs/#create-a-team){: target="_blank" rel="noopener" class="_"}, [members](/docker-hub/orgs/#invite-members){: target="_blank" rel="noopener" class="_"}, [repositories](/docker-hub/repos/){: target="_blank" rel="noopener" class="_"}, and [access control](/docker-hub/orgs/#configure-repository-permissions){: target="_blank" rel="noopener" class="_"}.
+  As your organization grows, you can continue managing [teams](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}, [members](../docker-hub/orgs.md/#invite-members){: target="_blank" rel="noopener" class="_"}, [repositories](../docker-hub/repos.md){: target="_blank" rel="noopener" class="_"}, and [access control](../docker-hub/orgs.md/#configure-repository-permissions){: target="_blank" rel="noopener" class="_"}.
 
  Don't stop here. Get the most out of your Docker Business subscription by leveraging these popular features:
 
-- Set up [Automated Builds](/docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_"} triggered by code pushes to help streamline your CI process.
-- Add [service accounts](/docker-hub/service-accounts.md){: target="_blank" rel="noopener" class="_"} to automate management of your container images or containerized applications.
-- Configure [Vulnerability Scanning](/docker-hub/vulnerability-scanning.md){: target="_blank" rel="noopener" class="_"} to improve security awareness.
-- Integrate your image pushes into your workflow with [Webhooks](/docker-hub/webhooks.md){: target="_blank" rel="noopener" class="_"}.
+- Set up [Automated Builds](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_"} triggered by code pushes to help streamline your CI process.
+- Add [service accounts](../docker-hub/service-accounts.md){: target="_blank" rel="noopener" class="_"} to automate management of your container images or containerized applications.
+- Configure [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md){: target="_blank" rel="noopener" class="_"} to improve security awareness.
+- Integrate your image pushes into your workflow with [Webhooks](../docker-hub/webhooks.md){: target="_blank" rel="noopener" class="_"}.
