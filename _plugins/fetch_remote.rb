@@ -49,14 +49,6 @@ module Jekyll
         end
       end
 
-      Jekyll.logger.info "  Fixing up URLs in swagger files"
-      Dir.glob("./engine/api/*.yaml") do |file_name|
-        Jekyll.logger.info "    #{file_name}"
-        text = File.read(file_name)
-        replace = text.gsub!("https://docs.docker.com/", "")
-        File.open(file_name, "w") { |file| file.puts replace }
-      end
-
       end_time = Time.now
       Jekyll.logger.info "done in #{(end_time - beginning_time)} seconds"
     end
