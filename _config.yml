@@ -150,8 +150,8 @@ fetch-remote:
           - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
 
-  - repo: "https://github.com/docker/buildx"
-    ref: "master"
+  - repo: "https://github.com/crazy-max/buildx"
+    ref: "bake-docs"
     paths:
       - dest: "build"
         src:
