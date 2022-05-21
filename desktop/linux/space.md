@@ -1,7 +1,7 @@
 ---
 description: Disk utilization
 keywords: linux, disk
-title: Disk utilization in Docker for Linux
+title: Disk utilization in Docker Desktop for Linux
 ---
 
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Linux filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory on the host's filesystem.
