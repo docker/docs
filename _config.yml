@@ -20,11 +20,9 @@ lsi: false
 exclude:
   - _samples
   - _scripts
-  - 404.html
   - datacenter
   - docker-bake.hcl
   - ee
-  - index.html
   - js/metadata.json
   - LICENSE
   - Makefile
