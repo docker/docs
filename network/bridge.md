@@ -58,13 +58,6 @@ network.**
 
   Using a user-defined network provides a scoped network in which only containers attached to that network are able to communicate.
 
-- **Containers can be attached and detached from user-defined networks on the fly**.
-
-  During a container's lifetime, you can connect or disconnect it from
-  user-defined networks on the fly. To remove a container from the default
-  bridge network, you need to stop the container and recreate it with different
-  network options.
-
 - **Each user-defined network creates a configurable bridge**.
 
   If your containers use the default bridge network, you can configure it, but
