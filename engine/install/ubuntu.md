@@ -118,7 +118,8 @@ from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    $ sudo mkdir -p /etc/apt/keyrings
+    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the **stable** repository. To add the
@@ -127,7 +128,7 @@ from the repository.
 
     ```console
     $ echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
