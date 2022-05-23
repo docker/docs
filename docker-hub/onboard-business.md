@@ -70,7 +70,7 @@ On the day that your Docker Business subscription begins, your organization's pr
 After completing the steps from the welcome email, verify that your organization exists and that your Docker Business subscription is active:
 
 1. Go to [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"} and then click on your organization's name. 
-2. Under **Plan**, view your subscription. You subscription should be **Docker Business**.
+2. Under **Plan**, view your subscription. If your Docker subscription is active, you will see **Docker Business**.
 
 ## Step 4: Create teams
 
