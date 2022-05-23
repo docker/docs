@@ -1613,7 +1613,7 @@ web:
 
 ### scale
 
--DEPRECATED: use [deploy/replicas](deploy.md#replicas)_
+_DEPRECATED: use [deploy/replicas](deploy.md#replicas)_
 
 `scale` specifies the default number of containers to deploy for this service.
 
