@@ -84,6 +84,11 @@ Docker Desktop for Windows: |
   virtualization. Docker Desktop
   for Windows is the best solution if you want to build, debug, test, package, and
   ship Dockerized applications from Windows machines.
+Docker Desktop for Linux: |
+  [Docker Desktop for Linux](/desktop/linux/) is an an easy-to-install, lightweight
+  Docker development environment designed specifically for the Linux.It's the best solution if you want
+  to build, debug, test, package, and ship Dockerized applications on a
+  Linux machine.
 Docker Hub: |
   The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with
   Docker and its components. It provides the following services:
