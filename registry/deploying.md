@@ -31,6 +31,7 @@ The registry is now ready to use.
 > TLS and should ideally use an access-control mechanism. Keep reading and then
 > continue to the [configuration guide](configuration.md) to deploy a
 > production-ready registry.
+{: .important}
 
 ## Copy an image from Docker Hub to your registry
 
