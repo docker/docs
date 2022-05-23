@@ -6,10 +6,6 @@ title: Registry Access Management
 
 Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.
 
-> **Note**
->
-> Registry Access Management is currently offered as a closed beta to a closed group of Docker Business customers.
-{: .important}
 
 ## Configure Registry Access Management permissions
 
@@ -39,7 +35,7 @@ To ensure that each org member uses Registry Access Management on their local ma
 1. Download the latest version of Docker Desktop, and then
 2. Create a `registry.json` file.
 
-Download Docker Desktop 4.5 or a later release.
+Download Docker Desktop 4.8 or a later release.
 
 - [Download and install for Windows](/desktop/windows/install/)
 - [Download and install for Mac](/desktop/mac/install/)
