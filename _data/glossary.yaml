@@ -86,7 +86,7 @@ Docker Desktop for Windows: |
   ship Dockerized applications from Windows machines.
 Docker Desktop for Linux: |
   [Docker Desktop for Linux](/desktop/linux/) is an an easy-to-install, lightweight
-  Docker development environment designed specifically for the Linux.It's the best solution if you want
+  Docker development environment designed specifically for Linux machines.It's the best solution if you want
   to build, debug, test, package, and ship Dockerized applications on a
   Linux machine.
 Docker Hub: |
