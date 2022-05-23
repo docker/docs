@@ -71,7 +71,7 @@ module Jekyll
 
                     next unless File.file?(ent.path) && File.extname(ent.path) == ".md"
                     # set edit url for markdown files in site config defaults
-                    edit_url = "#{entry['repo']}/edit/#{entry['ref']}/#{file_clean}"
+                    edit_url = "#{entry['repo']}/edit/#{entry['default_branch']}/#{file_clean}"
                     puts "        edit_url: #{edit_url}"
                     site.config['defaults'] << {
                       "scope" => { "path" => destent.path },

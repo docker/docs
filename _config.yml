@@ -127,6 +127,7 @@ defaults:
 #   - src is a list of glob source paths within the remote repository
 fetch-remote:
   - repo: "https://github.com/docker/cli"
+    default_branch: "master"
     ref: "20.10"
     paths:
       - dest: "engine/extend"
@@ -145,6 +146,7 @@ fetch-remote:
           - "docs/reference/commandline/dockerd.md"
 
   - repo: "https://github.com/docker/docker"
+    default_branch: "master"
     ref: "20.10"
     paths:
       - dest: "engine/api"
@@ -152,6 +154,7 @@ fetch-remote:
           - "docs/api/**"
 
   - repo: "https://github.com/docker/compose-cli"
+    default_branch: "main"
     ref: "main"
     paths:
       - dest: "cloud"
@@ -161,6 +164,7 @@ fetch-remote:
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
 
   - repo: "https://github.com/distribution/distribution"
+    default_branch: "main"
     ref: "release/2.7"
     paths:
       - dest: "registry/spec"
