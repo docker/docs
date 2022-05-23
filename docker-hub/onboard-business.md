@@ -14,9 +14,7 @@ Before you start to on board your organization, you must have a Docker Business 
 
 ## Step 1: Identify your Docker users and their Docker accounts
 
-To begin, you should identify which users you will need to add to your Docker Business organization.
-
-Identifying your users is important because later on, in [Step 8: Enforce sign in for Docker Desktop](#step-8-enforce-sign-in-for-docker-desktop), you can enforce sign in and prevent unidentified users, who were not added to your Docker organization, from signing in to Docker Desktop on your organization's computers.
+To begin, you should identify which users you will need to add to your Docker Business organization. Identifying your users will help you efficiently allocate your subscription's seats and manage access.
 
 > **Note**
 >
@@ -271,11 +269,11 @@ The Docker Desktop installer can create this file as part of the installation pr
 
 ## What's next
 
-  As your organization grows, you can continue managing [teams](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}, [members](../docker-hub/orgs.md/#invite-members){: target="_blank" rel="noopener" class="_"}, [repositories](../docker-hub/repos.md){: target="_blank" rel="noopener" class="_"}, and [access control](../docker-hub/orgs.md/#configure-repository-permissions){: target="_blank" rel="noopener" class="_"}.
+  As your organization grows, you can continue managing [teams](../docker-hub/orgs.md/#create-a-team), [members](../docker-hub/orgs.md/#invite-members), [repositories](../docker-hub/repos.md), and [access control](../docker-hub/orgs.md/#configure-repository-permissions).
 
  Don't stop here. Get the most out of your Docker Business subscription by leveraging these popular features:
 
-- Set up [Automated Builds](../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_"} triggered by code pushes to help streamline your CI process.
-- Add [service accounts](../docker-hub/service-accounts.md){: target="_blank" rel="noopener" class="_"} to automate management of your container images or containerized applications.
-- Configure [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md){: target="_blank" rel="noopener" class="_"} to improve security awareness.
-- Integrate your image pushes into your workflow with [Webhooks](../docker-hub/webhooks.md){: target="_blank" rel="noopener" class="_"}.
+- Set up [Automated Builds](../docker-hub/builds/index.md) triggered by code pushes to help streamline your CI process.
+- Add [service accounts](../docker-hub/service-accounts.md) to automate management of your container images or containerized applications.
+- Configure [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md) to improve security awareness.
+- Integrate your image pushes into your workflow with [Webhooks](../docker-hub/webhooks.md).
