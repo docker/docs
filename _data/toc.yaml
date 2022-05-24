@@ -1489,7 +1489,7 @@ manuals:
     - path: /docker-hub/onboard-business/
       title: On board with Docker Business
     - path: /docker-hub/onboarding-faqs/
-      title: Onboarding FAQs
+      title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
   - path: /docker-hub/image-access-management/
