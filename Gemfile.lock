@@ -82,7 +82,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rexml (3.2.5)
-    rouge (3.28.0)
+    rouge (3.27.0)
     safe_yaml (1.0.5)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -107,6 +107,7 @@ DEPENDENCIES
   jekyll-sitemap
   octopress-hooks (= 2.6.2)
   rake (= 13.0.6)
+  rouge (= 3.27.0)
   tzinfo-data
 
 BUNDLED WITH

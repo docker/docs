@@ -10,6 +10,11 @@ group :jekyll_plugins do
   gem 'jekyll-sitemap'
 end
 
+# FIXME: This is a workaround for a bug in rouge console lexer
+#  introduced by https://github.com/rouge-ruby/rouge/pull/1779
+#  more info: https://github.com/docker/docker.github.io/issues/14788
+gem 'rouge', '3.27.0'
+
 gem 'archive-zip', '0.12.0'
 gem 'html-proofer', '3.19.4'
 gem 'octopress-hooks', '2.6.2'

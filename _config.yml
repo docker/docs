@@ -7,6 +7,7 @@
 name: Docker Documentation
 
 markdown: kramdown
+highlighter: rouge
 incremental: true
 permalink: pretty
 safe: false
