@@ -40,13 +40,13 @@ Download Docker Desktop 4.8 or a later release.
 - [Download and install for Windows](/desktop/windows/install/)
 - [Download and install for Mac](/desktop/mac/install/)
 
-{% include configure-registry-json.md %}
+## Creating a registry.json file
 
-## Verify the restrictions
+When creating a registry.json file, ensure that the developer is a member of at least one organization in Docker Hub. If the registry.json file matches at least one organization the developer is a member of, they can sign in to Docker Desktop and access all their organizations. Learn more on how to create a registry.json file on [Windows](/docker-hub/configure-sign-in/#windows) or [Mac](docker-hub/configure-sign-in/#mac).
 
-   After you’ve created the registry.json file and deployed it onto the developers’ machines, you can verify whether the changes have taken effect by asking the developers to start Docker Desktop.
+{## Verify the restrictions
 
-   If the configuration is successful, Docker Desktop prompts the developer to authenticate using the organization credentials on start. If the developer fails to authenticate, or authenticates as a developer in the wrong organization they will see an error message, and they will be denied access to Docker Desktop.
+   The new Registry Access Management policy should be in place after the developer successfully authenticates to Docker Desktop using their organization credentials. The developer can attempt to pull an image from a disallowed registry via the Docker CLI. They will then receive an error message that your organization disallows this container registry.
 
 ### Caveats
 
