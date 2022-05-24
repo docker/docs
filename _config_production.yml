@@ -7,9 +7,7 @@
 # to Mirantis.
 exclude:
   - _scripts
-  - 404.html
   - docker-bake.hcl
-  - index.html
   - LICENSE
   - Makefile
   - README.md

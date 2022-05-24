@@ -1519,6 +1519,8 @@ manuals:
          title: FAQs
   - path: /docker-hub/image-access-management/
     title: Image Access Management
+  - path: /docker-hub/registry-access-management/
+    title: Registry Access Management
   - path: /docker-hub/onboarding-faqs/
     title: Onboarding FAQs
 
