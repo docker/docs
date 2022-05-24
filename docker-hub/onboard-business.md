@@ -6,7 +6,7 @@ toc_min: 1
 toc_max: 2
 ---
 
-The following section contains step-by-step instructions on how to easily on board your organization after you get a Docker Business subscription.
+The following section contains step-by-step instructions on how to easily on board your organization after you obtain a Docker Business subscription.
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ The following steps will help you quickly set up SSO. For more details, see [Con
 1. Ensure that all members have at least Docker Desktop 4.4.2 installed on their machines.
 2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
 See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-personal-access-token-pat){: target="_blank" rel="noopener" class="_"} for more details.
-3. Configure either your SAML 2.0 IdP or your Azure AD IdP with Open ID Connect.
+3. Configure either your SAML 2.0 identity Provider (IdP) or your Azure AD IdP with Open ID Connect.
 
    <ul class="nav nav-tabs">
    <li class="active"><a data-toggle="tab" data-target="#saml">SAML 2.0 IdP configuration</a></li>
@@ -154,10 +154,6 @@ All members in your organization need to be in at least one team. Teams are used
 Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md/#the-owners-team){: target="_blank" rel="noopener" class="_"}.
 
 Besides the default **owners** team, you should create at least one additional team. This additional team will contain members that can not modify organization settings.
-
-   >  **Note**
-   >
-   > If you will use Docker Single Sign-on (SSO), a default team named **company** is automatically created and all members added through SSO are initially added to this team.
 
 To create a team:
 
