@@ -211,6 +211,6 @@ Get the most out of your Docker Business subscription by leveraging these popula
 - If you haven't configured [Docker Single Sign-on](../single-sign-on/index.md) yet, configure it now for centralized account management.
 - Create [repositories](../docker-hub/repos.md) to share container images.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
-- Control which images your members can access with [Image Access Management](../docker-hub/image-access-management/).
+- Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
 
 Your Docker Business subscription provides many more additional features. [Learn more](../subscription/).
