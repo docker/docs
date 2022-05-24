@@ -11,7 +11,9 @@ For instance, if you run a container which binds to port 80 and you use `host`
 networking, the container's application is available on port 80 on the host's IP
 address.
 
-> **Note**: Given that the container does not have its own IP-address when using
+> **Note**
+>
+> Given that the container does not have its own IP-address when using
 > `host` mode networking, [port-mapping](overlay.md#publish-ports) does not
 > take effect, and the `-p`, `--publish`, `-P`, and `--publish-all` option are
 > ignored, producing a warning instead:
