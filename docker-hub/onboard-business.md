@@ -21,7 +21,7 @@ To begin, you should identify which users you will need to add to your Docker Bu
 
 > **Note**
 >
-> If you will use Docker Single Sign-on (SSO), users from your IdP are automatically provisioned in your organization when they sign in. You can identify which users have signed in to Docker Hub by viewing your organization's members in Docker Hub. You can also perform the steps below to identify users before you configure SSO.
+> If you will use Docker Single Sign-on (SSO), users from your identity provider (IdP) are automatically provisioned in your organization when they sign in. You can identify which users have signed in to Docker Hub by viewing your organization's members in Docker Hub. You can also perform the steps below to identify users before you configure SSO.
 
 1. Identify the Docker users in your organization.
    * If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify users that already have Docker Desktop installed. See your device management software's documentation for details.
@@ -44,7 +44,7 @@ On the day that your Docker Business subscription starts, your organization's pr
 
 After completing the steps from the welcome email, verify that your organization exists and your organization has a Docker Business subscription:
 
-1. Go to [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"} and then click on your organization's name. 
+1. Go to [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"} and then select on your organization's name. 
 2. Under **Plan**, view your subscription. If you organization has a Docker Business subscription, you will see **Docker Business**.
 
 ## Step 3: Add members
@@ -55,7 +55,7 @@ Now that you have a Docker Business organization, it's time to start adding memb
 >
 > If you are not ready to configure SSO, you can invite members using their email address or Docker ID and then configure SSO at a later time. Any members you invite by email address or Docker ID can continue to have access after configuring SSO.
 >
-> In addition, when SSO is configured, you can still invite members not in your IdP by using their email address or Docker ID.
+> In addition, when SSO is configured, you can still invite members not in your identity provider (IdP) by using their email address or Docker ID.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#sso-configure">Configure Single Sign-on</a></li>
@@ -71,7 +71,7 @@ The following steps will help you quickly set up SSO. For more details, see [Con
 1. Ensure that all members have at least Docker Desktop 4.4.2 installed on their machines.
 2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
 See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-personal-access-token-pat){: target="_blank" rel="noopener" class="_"} for more details.
-3. Configure either your SAML 2.0 identity Provider (IdP) or your Azure AD IdP with Open ID Connect.
+3. Configure either your SAML 2.0 identity provider (IdP) or your Azure AD IdP with Open ID Connect.
 
    <ul class="nav nav-tabs">
    <li class="active"><a data-toggle="tab" data-target="#saml">SAML 2.0 IdP configuration</a></li>
@@ -81,7 +81,7 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
    <div id="saml" class="tab-pane fade in active" markdown="1">
 
    1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
-   2. Click **Settings** and select the **Security** tab.
+   2. Select **Settings** and select the **Security** tab.
    3. Select an authentication method for SAML 2.0.
    4. In the Identity Provider Set Up, copy the **Entity ID**, **ACS URL** and **Certificate Download URL**.
    5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
@@ -90,7 +90,7 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
       >
       > The NameID is your email address and is set as the default. For example, yourname@mycompany.com. We also support the optional name attribute. This attribute name must be lower-cased. The following is an example of this attribute in Okta.
 
-   6. Complete the fields in the **Configuration Settings** section and click **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
+   6. Complete the fields in the **Configuration Settings** section and select **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
    </div>
    <div id="azure-ad" class="tab-pane fade" markdown="1">
@@ -100,7 +100,7 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
    > This section is for users who only want to configure Open ID Connect with Azure AD. This connection is a basic OIDC connection, and there are no special customizations available when using it.
 
    1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
-   2. Click **Settings** and select the **Security** tab.
+   2. Select **Settings** and select the **Security** tab.
    3. Select an authentication method for Azure AD.
    4. In the Identity Provider Set Up, copy the **Redirect URL / Reply URL**.
    5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
@@ -109,12 +109,12 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
       >
       > The NameID is your email address and is set as the default. For example: yourname@mycompany.com.
 
-   6. Complete the fields in the Configuration Settings section and click **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
+   6. Complete the fields in the Configuration Settings section and select **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
    </div>
    </div>
 
-4. Click **Add Domain** and specify the corporate domain you'd like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
+4. Select **Add Domain** and specify the corporate domain you'd like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
 
    > **Note**
    >
@@ -129,20 +129,20 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
       * Record type: enter your 'TXT' record value
       * Name/Host/Alias: leave the default (@ or blank)
       * Time to live (TTL): enter **86400**
-   3. After you have updated the fields, click **Save**.
+   3. After you have updated the fields, select **Save**.
 
       > **Note**
       >
       > It can take up to 72 hours for DNS changes to take effect, depending on your DNS host. The Domains table will have an Unverified status during this time.
-   4. In the Security section of your Docker organization, click **Verify** next to the domain you want to verify after 72 hours.
+   4. In the Security section of your Docker organization, select **Verify** next to the domain you want to verify after 72 hours.
 6. Perform the following to verify that SSO has been configured successfully.
    1. Open an incognito browser.
    2. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
    3. Authenticate through email instead of using your Docker ID. If you are able to authenticate, then SSO has been configured successfully.
 7. To access Docker Hub through the CLI, each member of your organization must create a Personal Access Token. See [Create an access token](../docker-hub/access-tokens.md/#create-an-access-token){: target="_blank" rel="noopener" class="_"} for details.
 8. Perform the following to force users to sign in to Docker Hub using SSO.
-   1. In [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, click **Organizations** select your organization, click **Settings**, and then select the **Security** tab.
-   2. Click **Turn ON Enforcement**.
+   1. In [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, select **Organizations**, select your organization, select **Settings**, and then select the **Security** tab.
+   2. Select **Turn ON Enforcement**.
 
 </div>
 <div id="invite-member" class="tab-pane fade" markdown="1">
@@ -157,7 +157,7 @@ Besides the default **owners** team, you should create at least one additional t
 
 To create a team:
 
-1. Click **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and then select your organization.
+1. Select **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and then select your organization.
 2. Click **Teams** and then click **Create Team**.
 3. Fill out your team's information and then click **Create**.
 
