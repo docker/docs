@@ -1,0 +1,22 @@
+# Each line is a file pattern followed by one or more owners.
+# Owners will be requested for review when someone opens a pull request.
+
+# For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+/compose/ @dockertopia @usha-mandya
+
+/compose/install.md @aevesdocker
+
+/desktop/ @aevesdocker @usha-mandya
+
+/docker-hub/ @jerae-duffin @craig-osterhout
+
+/engine/ @dockertopia @usha-mandya
+
+/registry/ @usha-mandya
+
+/single-sign-on/ @jerae-duffin 
+
+/single-sign-on/index.md @craig-osterhout
+
+/subscription/ @jerae-duffin

@@ -14,6 +14,7 @@ This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine.
 
 > **Note:**
+>
 > The client and container runtime are now in separate packages from the daemon
 > in Docker Engine 18.09. Users should install and update all three packages at
 > the same time to get the latest patch releases. For example, on Ubuntu:
@@ -21,6 +22,61 @@ for Docker Engine.
 > instructions for the corresponding linux distro for details.
 
 # Version 20.10
+
+## 20.10.16
+2022-05-12
+
+This release of Docker Engine fixes a regression in the Docker CLI builds for
+macOS, fixes an issue with `docker stats` when using containerd 1.5 and up,
+and updates the Go runtime to include a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Client
+
+- Fixed a regression in binaries for macOS introduced in [20.10.15](#201015), which
+  resulted in a panic [docker/cli#43426](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener"}.
+- Update golang.org/x/sys dependency which contains a fix for
+  [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Daemon
+
+- Fixed an issue where `docker stats` was showing empty stats when running with
+  containerd 1.5.0 or up [moby/moby#43567](https://github.com/moby/moby/pull/43567){:target="_blank" rel="noopener"}.
+- Updated the `golang.org/x/sys` build-time dependency which contains a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Packaging
+
+- Updated Go runtime to [1.17.10](https://go.dev/doc/devel/release#go1.17.minor){:target="_blank" rel="noopener"},
+  which contains a fix for [CVE-2022-29526](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+- Used "weak" dependencies for the `docker scan` CLI plugin, to prevent a
+  "conflicting requests" error when users performed an off-line installation from
+  downloaded RPM packages [docker/docker-ce-packaging#659](https://github.com/docker/docker-ce-packaging/pull/659){:target="_blank" rel="noopener"}.
+
+## 20.10.15
+2022-05-05
+
+This release of Docker Engine comes with updated versions of the `compose`,
+`buildx`, `containerd`, and `runc` components, as well as some minor bug fixes.
+
+> **Known issues**
+> 
+> We've identified an issue with the [macOS CLI binaries](https://download.docker.com/mac/static/stable/){:target="_blank" rel="noopener" class="_"}
+> in the 20.10.15 release. This issue has been resolved in the [20.10.16](#201016) release.
+{:.important}
+
+### Daemon
+
+- Use a RWMutex for stateCounter to prevent potential locking congestion [moby/moby#43426](https://github.com/moby/moby/pull/43426).
+- Prevent an issue where the daemon was unable to find an available IP-range in
+  some conditions [moby/moby#43360](https://github.com/moby/moby/pull/43360) 
+
+### Packaging
+
+- Update Docker Compose to [v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0).
+- Update Docker Buildx to [v0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2).
+- Update Go runtime to [1.17.9](https://go.dev/doc/devel/release#go1.17.minor).
+- Update containerd (`containerd.io` package) to [v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4).
+- Update runc version to [v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1).
+- Add packages for CentOS 9 stream and Fedora 36.
 
 ## 20.10.14
 2022-03-23

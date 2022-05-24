@@ -12,10 +12,7 @@ redirect_from:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn
-> more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+> subscription.
 {: .important}
 
 Docker is an open platform for developing, shipping, and running applications.
@@ -52,10 +49,10 @@ section and choose the best installation path for you.
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="/engine/install/"><img src="/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
+                    <a href="/desktop/linux/install/"><img src="/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
                 </div>
-                <h2 id="docker-for-linux"><a href="/engine/install/">Docker for Linux</a></h2>
-                <p>Install Docker on a computer which already has a Linux distribution installed.</p>
+                <h2 id="docker-for-linux"><a href="/desktop/linux/install/">Docker Desktop for Linux</a></h2>
+                <p>A native Linux application which delivers all Docker tools to your Linux computer.</p>
             </div>
         </div>
     </div>

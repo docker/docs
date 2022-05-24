@@ -66,7 +66,7 @@ For now, we will create the network first and attach the MySQL container at star
         mysql:5.7
     ```
 
-    If you are using PowerShell then use this command.
+    If you are using Windows then use this command in PowerShell.
 
     ```powershell
     PS> docker run -d `
@@ -214,7 +214,7 @@ With all of that explained, let's start our dev-ready container!
       sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using PowerShell then use this command.
+    If you are using Windows then use this command in PowerShell.
 
     ```powershell
     PS> docker run -dp 3000:3000 `

@@ -16,10 +16,21 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude: ["_samples", "_scripts", "404.html", "datacenter", "ee", "index.html", "js/metadata.json"]
+
+exclude:
+  - _samples
+  - _scripts
+  - datacenter
+  - docker-bake.hcl
+  - ee
+  - js/metadata.json
+  - LICENSE
+  - Makefile
+  - README.md
 
 # Component versions -- address like site.docker_ce_version
-# You can't have - characters in these for non-YAML reasons
+# You can't have - characters in these for non-YAML reasons.
+# When updating 'latest_engine_api_version', also update 'min_api_threshold' below.
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
 compose_v1_version: "1.29.2"
@@ -29,6 +40,25 @@ compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
 compose_switch_version:  "1.0.4"
+
+# Options for displaying minimum API version requirements in the reference pages.
+#
+# The reference pages show badges for commands and options (flags) that require
+# a minimum API version. While this information can be useful if an option was
+# added in a recent version of the Docker Engine (and API), these badges are no
+# longer relevant to most users if the minimum required version is quite "old".
+#
+# We assume users reading these pages to be on the current version, or at most
+# on the version before that (which is already "unsupported"). Users running
+# older versions have bigger problems on their hand, so we're not accounting for
+# those.
+#
+# So, to reduce unnecessary clutter on the page, we only show the minimum required
+# API version if it requires a relatively recent version of the Engine.
+#
+# The "min_api_threshold" option specifies the minimum required API version for
+# which we show a badge (currently: API v1.40, or "Docker 19.03").
+min_api_threshold: 1.40
 
 # List of plugins to enable for local development builds. Mostly the same as
 # for production, but without the "jekyll-sitemap" plugin, which is not needed
@@ -72,3 +102,62 @@ defaults:
       path: engine/reference/commandline
     values:
       skip_read_time: true
+
+# Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
+# - repo is the GitHub repository to fetch from
+# - ref the Git reference
+# - paths is a list to the resources within the remote repository
+#   - dest is the destination path within the working tree
+#   - src is a list of glob source paths within the remote repository
+fetch-remote:
+  - repo: "https://github.com/docker/cli"
+    ref: "20.10"
+    paths:
+      - dest: "engine/extend"
+        src:
+          - "docs/extend/**"
+      - dest: "engine"
+        src:
+          - "docs/deprecated.md"
+      - dest: "engine/reference"
+        src:
+          - "docs/reference/builder.md"
+          - "docs/reference/run.md"
+      - dest: "engine/reference/commandline"
+        src:
+          - "docs/reference/commandline/cli.md"
+          - "docs/reference/commandline/dockerd.md"
+
+  - repo: "https://github.com/docker/docker"
+    ref: "20.10"
+    paths:
+      - dest: "engine/api"
+        src:
+          - "docs/api/**"
+
+  - repo: "https://github.com/docker/compose-cli"
+    ref: "main"
+    paths:
+      - dest: "cloud"
+        src:
+          - "docs/*.md"
+          - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
+          - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
+
+  - repo: "https://github.com/docker/extensions-sdk"
+    ref: "main"
+    paths:
+      - dest: "desktop/extensions-sdk"
+        src:
+          - "docs/**"
+
+  - repo: "https://github.com/distribution/distribution"
+    ref: "release/2.7"
+    paths:
+      - dest: "registry/spec"
+        src:
+          - "docs/spec/**"
+          - "!docs/spec/api.md.tmpl"
+      - dest: "registry"
+        src:
+          - "docs/configuration.md"

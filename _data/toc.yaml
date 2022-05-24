@@ -914,8 +914,6 @@ reference:
       title: Overview of docker-compose CLI
     - path: /compose/reference/envvars/
       title: CLI environment variables
-    - path: /compose/completion/
-      title: Command-line completion
     - path: /compose/reference/build/
       title: docker-compose build
     - path: /compose/reference/config/
@@ -1196,18 +1194,6 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
           title: Apple silicon
-        - path: /desktop/mac/release-notes/
-          title: Release notes
-        - sectiontitle: Previous versions
-          section:
-          - path: /desktop/mac/release-notes/3.x/
-            title: Desktop for Mac 3.x
-          - path: /desktop/mac/release-notes/2.x/
-            title: Desktop for Mac 2.x
-          - path: /desktop/mac/release-notes/edge-releases/
-            title: Edge releases
-          - path: /desktop/mac/release-notes/archive/
-            title: Older versions
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/install/
@@ -1220,20 +1206,28 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend
-        - path: /desktop/windows/release-notes/
-          title: Release notes
-        - sectiontitle: Previous versions
+    - sectiontitle: Linux
+      section:
+        - path: /desktop/linux/install/
+          title: Install Docker Desktop for Linux
+        - sectiontitle: Installation per distro
           section:
-            - path: /desktop/windows/release-notes/3.x/
-              title: Desktop for Windows 3.x
-            - path: /desktop/windows/release-notes/2.x/
-              title: Desktop for Windows 2.x
-            - path: /desktop/windows/release-notes/edge-releases/
-              title: Edge releases
-            - path: /desktop/windows/release-notes/archive/
-              title: Older versions
-    - path: /desktop/linux/
-      title: Linux (Beta)
+            - path: /desktop/linux/install/debian/
+              title: Install on Debian
+            - path: /desktop/linux/install/fedora/
+              title: Install on Fedora
+            - path: /desktop/linux/install/ubuntu/
+              title: Install on Ubuntu
+            - path: /desktop/linux/install/archlinux/
+              title: Install on Arch
+        - path: /desktop/linux/
+          title: User manual
+        - path: /desktop/linux/networking/
+          title: Networking
+        - path: /desktop/linux/space/
+          title: Disk utilization
+        - path: /desktop/linux/troubleshoot/
+          title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
@@ -1256,9 +1250,27 @@ manuals:
               path: /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
             - title: Create a minimal backend extension
               path: /desktop/extensions-sdk/tutorials/minimal-backend-extension/
-        - title: Design Guidelines
-          path: /desktop/extensions-sdk/design/design-overview/
-        - sectiontitle: Extensions
+        - sectiontitle: Design
+          section:
+             - title: Guidelines
+               path: /desktop/extensions-sdk/design/design-guidelines/
+             - title: Docker's design principles
+               path: /desktop/extensions-sdk/design/design-principles/
+        - sectiontitle: UI Styling
+          section:
+             - title: Overview
+               path: /desktop/extensions-sdk/design/overview/
+             - title: MUI best practices
+               path: /desktop/extensions-sdk/design/mui-best-practices/
+        - sectiontitle: Developer SDK tools
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/dev/overview/
+            - title: CLI overview
+              path: /desktop/extensions-sdk/dev/cli/usage/
+            - title: Build, test and install an extension
+              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
+        - sectiontitle: Publishing extensions
           section:
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
@@ -1270,15 +1282,7 @@ manuals:
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Building multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
-        - sectiontitle: Developer guide
-          section:
-            - title: Overview
-              path: /desktop/extensions-sdk/dev/overview/
-            - title: CLI overview
-              path: /desktop/extensions-sdk/dev/cli/usage/
-            - title: Build, test and install an extension
-              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
-        - sectiontitle: UI API
+        - sectiontitle: Extension APIs
           section:
             - title: Overview
               path: /desktop/extensions-sdk/dev/api/overview/
@@ -1300,7 +1304,26 @@ manuals:
       title: FAQs
     - path: /desktop/backup-and-restore/
       title: Back up and restore data
-
+    - path: /desktop/release-notes/
+      title: Release notes
+    - sectiontitle: Previous versions
+      section:
+      - path: /desktop/previous-versions/3.x-windows/
+        title: Desktop for Windows 3.x
+      - path: /desktop/previous-versions/3.x-mac/
+        title: Desktop for Mac 3.x
+      - path: /desktop/previous-versions/2.x-windows/
+        title: Desktop for Windows 2.x
+      - path: /desktop/previous-versions/2.x-mac/
+        title: Desktop for Mac 2.x
+      - path: /desktop/previous-versions/edge-releases-windows/
+        title: Windows edge releases
+      - path: /desktop/previous-versions/edge-releases-mac/
+        title: Mac edge releases
+      - path: /desktop/previous-versions/archive-windows/
+        title: Older versions for Windows
+      - path: /desktop/previous-versions/archive-mac/
+        title: Older versions for Mac
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -1492,8 +1515,6 @@ manuals:
       title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
-  - path: /docker-hub/image-access-management/
-    title: Image Access Management
   - sectiontitle: Single-Sign-on
     section:
       -  path: /single-sign-on/
@@ -1502,6 +1523,10 @@ manuals:
          title: FAQs
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign in
+  - path: /docker-hub/image-access-management/
+    title: Image Access Management
+  - path: /docker-hub/registry-access-management/
+    title: Registry Access Management
 
 - sectiontitle: Security
   section:

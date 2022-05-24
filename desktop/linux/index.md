@@ -1,103 +1,166 @@
 ---
-description: Docker Desktop for Linux (Beta)
-keywords: docker, Desktop for linux, beta, tech preview
-title: Docker Desktop for Linux (Beta)
+description: Getting Started
+keywords: linux, tutorial, run, docker, local, machine
+title: Docker Desktop for Linux user manual
 ---
 
-Welcome to the Docker Desktop for Linux (Beta). The Beta program is aimed at early adopters who would like to try Docker Desktop for Linux and provide feedback.
+Welcome to Docker Desktop! The Docker Desktop for Linux user manual provides information on how to configure and manage your Docker Desktop settings.
 
-Docker Desktop is an easy-to-install application that enables you to build and
-share containerized applications and microservices. Docker Desktop for Linux
-(DD4L) is the second-most popular feature request in our [public
-roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank"
-rel="noopener" class="_"}.
+Docker Desktop is an easy-to-install application that enables you to build and share containerized applications and microservices. 
 
-## Download and install
+For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
 
-Docker Desktop for Linux (Beta) is currently available on Ubuntu 21.04, 21.10
-and Debian distributions.
+## Settings
 
-> **Note:**
+The Docker **Settings** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
+and more.
+
+Choose the Docker menu ![whale menu](images/whale-x.png){: .inline} > **Settings** from the
+menu bar and configure the runtime options described below.
+
+### General
+
+![Settings](images/menu/prefs-general.png){:width="750px"}
+
+On the **General** tab, you can configure when to start Docker and specify other settings:
+
+- **Start Docker Desktop when you log in**: Automatically starts Docker Desktop when you open your session.
+
+- **Send usage statistics**: Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
+
+- **Show weekly tips**: Displays useful advice and suggestions about using Docker.
+
+- **Open Docker Desktop dashboard at startup**: Automatically opens the dashboard when starting Docker Desktop.
+
+- **Enable Docker Compose V1/V2 compatibility mode**: Select this option to enable the `docker-compose` command to use Docker Compose V2.
+
+### Resources
+
+The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
+
+#### Advanced
+
+On the Advanced tab, you can limit resources available to Docker.
+
+![Advanced Preference
+settings-advanced](images/menu/prefs-advanced.png){:width="750px"}
+
+Advanced settings are:
+
+- **CPUs**: By default, Docker Desktop is set to use half the number of processors
+available on the host machine. To increase processing power, set this to a
+higher number; to decrease, lower the number.
+
+- **Memory**: By default, Docker Desktop is set to use 25% of your host's memory. To increase the RAM, set this to a higher number. To decrease it, lower the number.
+
+- **Swap**: Configure swap file size as needed. The default is 1 GB.
+
+- **Disk image size**: Specify the size of the disk image.
+
+- **Disk image location**: Specify the location of the Linux volume where containers and images are stored.
+
+You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you get a prompt asking if you want to use the existing image or replace it.
+
+#### File sharing
+
+Use File sharing to allow local directories on the Linux host to be shared with Linux containers.
+This is especially useful for
+editing source code in an IDE on the host while running and testing the code in a container.
+By default the `/home/<user>` directory is shared. If your project is outside this directory then it must be added
+to the list. Otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
+
+File share settings are:
+
+- **Add a Directory**: Click `+` and navigate to the directory you want to add.
+
+- **Remove a Directory**: Click `-` next to the directory you want to remove
+
+- **Apply & Restart** makes the directory available to containers using Docker's
+  bind mount (`-v`) feature.
+
+> Tips on shared folders, permissions, and volume mounts
 >
-> Docker Desktop is not supported in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on Ubuntu or Debian distributions.
+ * Share only the directories that you need with the container. File sharing
+ introduces overhead as any changes to the files on the host need to be notified
+ to the Linux VM. Sharing too many files can lead to high CPU load and slow
+ filesystem performance.
+>
+ * Shared folders are designed to allow application code to be edited 
+ on the host while being executed in containers. For non-code items
+ such as cache directories or databases, the performance will be much 
+ better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
+ (named volume) or [data container](../../storage/volumes.md).
 
-To install Docker Desktop for Linux:
+#### Proxies
 
-1. Set up the [Docker repository](../../engine/install/ubuntu.md#install-using-the-repository).
-2. Download and install the Debian package. If you have previously installed one of the preview releases, we recommend that you run `sudo apt remove docker-desktop`:
-    ```console
-    $ curl https://desktop-stage.docker.com/linux/main/amd64/77103/docker-desktop.deb --output docker-desktop.deb
-    $ sudo apt install ./docker-desktop.deb
-    ```
+To configure HTTP proxies, switch on the **Manual proxy configuration** setting.
 
-  There are a few post-install configuration steps done through the maintainers' scripts (post-install script contained
-  in the deb package.
-
-  The post-install script:
-
-  - sets the capability on the Docker Desktop binary to map privileged ports and set resource limits
-  - adds a DNS name for Kubernetes to `/etc/hosts`
-  - creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`
-  - installs systemd units for each user
-
-## Launch Docker Desktop
-
-To start Docker Desktop for Linux, search **Docker Desktop** on the
-**Applications** menu and open it. This launches the whale menu icon and opens
-the Docker Dashboard, reporting the status of Docker Desktop.
-
-Alternatively, open a terminal and run:
+Your proxy settings, however, will not be propagated into the containers you start.
+If you wish to set the proxy settings for your containers, you need to define
+environment variables for them, just like you would do on Linux, for example:
 
 ```console
-$ systemctl --user start docker-desktop
+$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=b7edf988b2b5
+TERM=xterm
+HOME=/root
+HTTP_PROXY=http://proxy.example.com:3128
 ```
 
-When Docker Desktop starts, it creates a dedicated context that the Docker CLI
-can use as a target and sets it as the current context in use. This is to avoid
-a clash with a local Docker Engine that may be running on the Linux host and
-using the default context. On shutdown, Docker Desktop resets the current
-context to the previous one.
+For more information on configuring the Docker CLI to automatically set proxy variables for both `docker run` and `docker build`
+see [Configure the Docker client](/network/proxy#configure-the-docker-client).
 
-The Docker Desktop installer updates Docker Compose and the Docker CLI binaries
-on the host. It installs Docker Compose V2 and gives users the choice to
-link it as docker-compose from the Settings panel. Docker Desktop installs
-the new Docker CLI binary that includes cloud-integration capabilities in `/usr/local/bin`
-and creates a symlink to the classic Docker CLi at `/usr/local/bin/com.docker.cli`.
+#### Network
 
-After you’ve successfully installed Docker Desktop, you can check the versions
-of these binaries by running the following command:
+Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case the choice of subnet clashes with something in your environment, specify a custom subnet using the **Network** setting.
 
-```console
-$ docker compose version
-Docker Compose version v2.2.3
+### Docker Engine
 
-$ docker --version
-Docker version 20.10.12, build e91ed57
+The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
-$ docker version
-Client: Docker Engine - Community
-Cloud integration: 1.0.17
-Version:           20.10.12
-API version:       1.41
-...
-```
+Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
 
-To enable Docker Desktop to start on login, from the Docker menu, select
-**Settings** > **General** > **Start Docker Desktop when you log in**.
+Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-Alternatively, open a terminal and run:
+### Experimental Features
 
-```console
-$ systemctl --user enable docker-desktop
-```
+On the **Experimental Features** page, you can specify whether or not to enable experimental features.
 
-To stop Docker Desktop, click on the whale menu tray icon to open the Docker menu and select **Quit Docker Desktop**.
+Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
 
-Alternatively, open a terminal and run:
+### Kubernetes
 
-```console
-$ systemctl --user stop docker-desktop
-```
+Docker Desktop includes a standalone Kubernetes server, so
+that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
+
+- Select **Show system containers (advanced)** to view internal containers when using Docker commands.
+
+- Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+
+- Click **Apply & Restart** for your changes to take effect.
+
+### Reset
+
+> Reset and Restart options
+>
+> On Docker Desktop Linux, the **Restart Docker Desktop**, **Reset to factory defaults**, and other reset options are available from the **Troubleshoot** menu.
+
+For information about the reset options, see [Logs and Troubleshooting](troubleshoot.md).
+
+### Software Updates
+
+The **Software Updates** section notifies you of any updates available to Docker Desktop. When there's a new update, click the **Release Notes** option to learn what's included in the updated version.
+
+> **Disable automatic check for updates**
+>
+> Turn off the check for updates by clearing the **Automatically check for updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+
+## Dashboard
+
+The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and existing Docker Compose applications. For more information, see [Docker Dashboard](../dashboard.md).
 
 ## Credentials management
 
@@ -146,83 +209,48 @@ Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
 
-## Feedback
+## Docker Hub
 
-Thanks for trying out the Docker Desktop Linux (beta) release. We'd love to hear from you. You can provide feedback and report any bugs through the **Issues** tracker within the [docker/desktop-linux](https://github.com/docker/desktop-linux/issues){: target="_blank" rel="noopener" class="_"} repository.
+Select **Sign in / Create Docker ID** from the Docker Desktop menu to access your [Docker](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
 
-To create and upload a diagnostics bundle with your bug report:
+For more information, refer to the following [Docker Hub topics](../../docker-hub/index.md){:target="_blank"
+class="_"}:
 
-1. From the Docker menu, select **Troubleshoot** > **Get support**.
-2. When the diagnostics are available, click **Upload to get a Diagnostic ID**.
-3. Make a note of the Diagnostic ID displayed on the Support page. You can send
-   this ID with your bug report to investigate any issues. Wait for a bundle to
-   be generated, once uploaded, it displays a diagnostics ID that can be sent to
-   us for investigation.
+* [Organizations and Teams in Docker Hub](../../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
+* [Builds](../../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
 
-## Logs
+## Pause/Resume
 
-If you prefer to investigate issues yourself, you can access Docker Desktop logs by running the following command:
+You can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
 
-```console
-$ journalctl --user --unit=docker-desktop
-```
+From the Docker menu, select ![whale menu](images/whale-x.png){: .inline} > **Pause** to pause Docker Desktop.
 
-You can also find additional logs for the internal components included in Docker
-Desktop at `$HOME/.docker/desktop/log/`.
+![Docker context menu](images/menu/prefs.png){:width="250px"}
 
-## Uninstall
+Docker Desktop now displays the paused status on the Docker menu and on the  **Containers**, **Images**, **Volumes**, and **Dev Environment** screens on the Docker Dashboard. You can still access the **Settings** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
 
-To remove Docker Desktop for Linux, run:
+Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
 
-```console
-$ sudo apt remove docker-desktop
-```
+> **Note**
+>
+> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
 
-For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
-the remaining systemd service files.
+## Give feedback and get help
 
-```console
-$ rm -r $HOME/.docker/desktop
-$ sudo rm /usr/local/bin/com.docker.cli
-$ sudo apt purge docker-desktop
-```
+To report bugs or problems, log on to Docker Desktop [for Linux issues on
+GitHub](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"},
+where you can review community reported issues, and file new ones.  See
+[Logs and Troubleshooting](troubleshoot.md) for more details.
 
-## Known issue
+For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
 
-At the end of the installation process, `apt` displays an error due to installing a downloaded package. You can ignore this error message.
+## Where to go next
 
-  ```
-  N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
-  ```
+* Try out the walkthrough at [Get Started](/get-started/){: target="_blank"
+  class="_"}.
 
-If you have installed one of the previous releases and reinstall the new package over it (as opposed to removing the old package explicitly), you need to make sure that `~/.config/systemd/user/docker-desktop.service` and `~/.local/share/systemd/user/docker-desktop.service` are removed.
+* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example
+  walkthroughs and source code.
 
-## Why Docker Desktop for Linux runs a VM
-
-Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
-
-1. **To ensure that Docker Desktop provides a consistent experience across platforms**.
-
-    During research, the most frequently cited reason for users wanting Docker
-    Desktop for Linux (DD4L) was to ensure a consistent Docker Desktop
-    experience with feature parity across all major operating systems. Utilizing
-    a VM ensures that the Docker Desktop experience for Linux users will closely
-    match that of Windows and macOS.
-
-    This need to deliver a consistent experience across all major OSs will become increasingly important as we look towards adding exciting new features, such as Docker Extensions, to Docker Desktop that will benefit users across all tiers.  We’ll provide more details on these at [DockerCon22](https://www.docker.com/dockercon/){: target="_blank" rel="noopener" class="_"}. Watch this space.
-
-2. **To make use of new kernel features**
-
-    Sometimes we want to make use of new operating system features. Because we control the kernel and the OS inside the VM, we can roll these out to all users immediately, even to users who are intentionally sticking on an LTS version of their machine OS.
-
-3. **To enhance security**
-
-    Container image vulnerabilities pose a security risk for the host environment. There is a large number of unofficial images that are not guaranteed to be verified for known vulnerabilities. Malicious users can push images to public registries and use different methods to trick users into pulling and running them. The VM approach mitigates this threat as any malware that gains root privileges is restricted to the VM environment without access to the host.
-
-    Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in vulnerabilities like [this](https://www.openwall.com/lists/oss-security/2022/01/18/7){: target="_blank" rel="noopener" class="_"}.
-
-4. **To provide the benefits of feature parity and enhanced security, with minimal impact on performance**
-
-    The VM utilized by DD4L uses `virtiofs`, a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
-
-    As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
+* For a summary of Docker command line interface (CLI) commands, see
+  [Docker CLI Reference Guide](../../engine/api/index.md){: target="_blank" rel="noopener" class="_"}.

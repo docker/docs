@@ -170,12 +170,11 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 
 ## Manage users when SSO is enabled
 
-You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
+You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP.
 
  > **Note**
  >
- > When the first-time user logs in to Docker using their domain email
- > address, they are then added to your organization.
+ > When you enable SSO for your organization, a first-time user can log in to Docker Hub using their company's domain email address. They are then added to your organization and assigned to your company's team.
 
 To add a guest to your organization in Docker Hub if they aren’t verified through your IdP:
 

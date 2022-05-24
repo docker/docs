@@ -101,7 +101,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 * The [repositories page](repos.md) and all
 related settings and tabs have been updated and moved from `cloud.docker.com`
-to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories). 
+to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories).
 
 ### Known Issues
 

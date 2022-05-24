@@ -5,7 +5,12 @@
 # Override the exclusion list to include files that are excluded in "development",
 # such as the "enterprise" stubs, which are in place to facilitate redirects
 # to Mirantis.
-exclude: ["_scripts", "404.html", "index.html"]
+exclude:
+  - _scripts
+  - docker-bake.hcl
+  - LICENSE
+  - Makefile
+  - README.md
 
 # Google Analytics, etc.
 google_analytics: GTM-WL2QLG5
@@ -77,6 +82,10 @@ defaults:
       edit_url: "https://github.com/docker/cli/tree/master/docs/"
   - scope:
       path: engine/extend.md
+    values:
+      edit_url: "https://github.com/docker/cli/tree/master/docs/extend"
+  - scope:
+      path: engine/extend
     values:
       edit_url: "https://github.com/docker/cli/tree/master/docs/extend"
   - scope:
