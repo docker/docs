@@ -32,8 +32,8 @@ redirect_from:
 >
 > Docker Desktop helps you build, share, and run containers easily on Mac and
 > Windows as you do on Linux. We are excited to share that Docker Desktop for
-> Linux is now available for you to test. For more information, see
-[Docker Desktop for Linux](../../desktop/linux/index.md).
+> Linux is now GA. For more information, see
+[Docker Desktop for Linux](../../desktop/linux/install.md).
 {: .important}
 
 ## Supported platforms
