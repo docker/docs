@@ -39,11 +39,7 @@ To configure Registry Access Management permissions, perform the following steps
 To ensure that each org member uses Registry Access Management on their local machine, you can perform the steps below to enforce sign-in under your organization. To do this:
 
 1. Download the latest version of Docker Desktop, and then
-2. Create a `registry.json` file.
-
-## Creating a registry.json file
-
-Create a `registry.json` file, by following the instructions for [Windows and Mac](/docker-hub/configure-sign-in/).
+2. Create a `registry.json` file by following the instructions for [Windows and Mac](/docker-hub/configure-sign-in/).
 
 ## Verify the restrictions
 
