@@ -132,8 +132,6 @@ You can install Docker Compose in different ways, depending on your needs:
 
 As Docker Compose is now part of the Docker CLI it can be installed via a convenience script with Docker Engine and the CLI.  
 [Choose your Linux distribution](../engine/install/index.md#server) and follow the instructions.
-</div>
-<div id="linux-standalone" class="tab-pane fade" markdown="1">
 
 
 #### Install using the repository
@@ -215,6 +213,8 @@ also included below.
     $ docker compose version
     Docker Compose version {{site.compose_version}}
     ```
+</div>
+<div id="linux-standalone" class="tab-pane fade" markdown="1">
 
 
 ### Install Compose as standalone binary on Linux systems

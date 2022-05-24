@@ -22,8 +22,8 @@ To get started with Docker Engine on CentOS, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of CentOS 7 or 8.
-Archived versions aren't supported or tested.
+To install Docker Engine, you need a maintained version of CentOS 7, CentOS 8 (stream),
+or CentOS 9 (stream). Archived versions aren't supported or tested.
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to

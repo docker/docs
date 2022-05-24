@@ -22,6 +22,7 @@ To install Docker Engine, you need the 64-bit version of one of these Fedora ver
 
 - Fedora 34
 - Fedora 35
+- Fedora 36
 
 ### Uninstall old versions
 
