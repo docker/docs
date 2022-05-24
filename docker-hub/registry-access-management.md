@@ -4,7 +4,7 @@ keywords: registry, access, managment
 title: Registry Access Management
 ---
 
-Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.
+Registry Access Management is a feature available to organizations with a Docker Business subscription. With Registry Access Management, organization owners can ensure that their developers using Docker Desktop can only access registries that have been allow-listed via the Registry Access Management dashboard on Docker Hub (for example, a private Artifactory registry).
 
 
 ## Configure Registry Access Management permissions
