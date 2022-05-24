@@ -68,7 +68,7 @@ Now that you have a Docker Business organization, it's time to start adding memb
 
 The following steps will help you quickly set up SSO. For more details, see [Configure Single Sign-on](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"} and [Single Sign-on FAQs](../single-sign-on/faqs.md){: target="_blank" rel="noopener" class="_"}.
 
-1. Ensure that all members have at least Docker Desktop 4.4.2 installed on their machines.
+1. Ensure that all members have at least [Docker Desktop](../desktop/index.md/#download-and-install){: target="_blank" rel="noopener" class="_"} 4.4.2 installed on their machines.
 2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
 See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-personal-access-token-pat){: target="_blank" rel="noopener" class="_"} for more details.
 3. Configure either your SAML 2.0 identity provider (IdP) or your Azure AD IdP with Open ID Connect.
@@ -178,9 +178,12 @@ To invite a member to your organization:
 
 ## Step 4: Enforce sign in for Docker Desktop
 
-At this point, your users can sign in to Docker Desktop on their computers using any Docker account, including accounts that are not a member of your Docker organization.
+At this point, your users can sign in to Docker Desktop on their machines using any Docker account, including accounts that are not a member of your Docker organization. You can force your users to sign in to a Docker account that is a member of your organization.
 
-Enforcing sign in is not required. You should enforce sign in when you want to enforce [Image Access Management](../docker-hub/image-access-management.md), [Registry Access Management](../docker-hub/registry-access-management.md), or you want to ensure that only your identified organization members sign in to Docker Desktop on your organization's computers.
+Enforcing sign in is not required, but it does offer the following benefits:
+   - Allows you to configure features such as [Image Access Management](../docker-hub/image-access-management.md) and [Registry Access Management](../docker-hub/registry-access-management.md).
+   - Authenticated users get a higher pull rate limit compared to anonymous users.
+   - Blocks users from accessing Docker Desktop until they are added to your organization.
 
 To enforce sign in, first inform your users that they must sign in to Docker Desktop using only their Docker account that is a member of your organization, and then you need to create a `registry.json` file on each user's computer with the following contents, where `myorg` is replaced with your organization's name.
 
