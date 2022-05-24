@@ -47,7 +47,7 @@ Create a `registry.json` file, by following the instructions for [Windows and Ma
 
 ## Verify the restrictions
 
-   The new Registry Access Management policy should be in place after the developer successfully authenticates to Docker Desktop using their organization credentials. The developer can attempt to pull an image from a disallowed registry via the Docker CLI. They will then receive an error message that your organization disallows this container registry.
+   The new Registry Access Management policy should be in place after the developer successfully authenticates to Docker Desktop using their organization credentials. The developer can attempt to pull an image from a disallowed registry via the Docker CLI. They will then receive an error message that your organization has disallowed this registry.
 
 ### Caveats
 
