@@ -209,4 +209,4 @@ Get the most out of your Docker Business subscription by leveraging these popula
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
 
-Your Docker Business subscription provides many more additional features. [Learn more](../subscription.md/).
+Your Docker Business subscription provides many more additional features. [Learn more](../subscription/index.md).
