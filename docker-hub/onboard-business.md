@@ -180,7 +180,7 @@ To invite a member to your organization:
 
 At this point, your users can sign in to Docker Desktop on their computers using any Docker account, including accounts that are not a member of your Docker organization.
 
-Enforcing sign in is not required. You should enforce sign in when you want to enforce [Image Access Management](../docker-hub/image-access-management/) settings or you want to ensure that only your identified organization members sign in to Docker Desktop on your organization's computers.
+Enforcing sign in is not required. You should enforce sign in when you want to enforce [Image Access Management](../docker-hub/image-access-management.md), [Registry Access Management](../docker-hub/registry-access-management.md), or you want to ensure that only your identified organization members sign in to Docker Desktop on your organization's computers.
 
 To enforce sign in, first inform your users that they must sign in to Docker Desktop using only their Docker account that is a member of your organization, and then you need to create a `registry.json` file on each user's computer with the following contents, where `myorg` is replaced with your organization's name.
 
@@ -208,5 +208,6 @@ Get the most out of your Docker Business subscription by leveraging these popula
 - Create [repositories](../docker-hub/repos.md) to share container images.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
+- Control which registries your members can access with [Registry Access Management](../docker-hub/registry-access-management.md/).
 
 Your Docker Business subscription provides many more additional features. [Learn more](../subscription/index.md).
