@@ -126,7 +126,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Standardised the header title and action in the Dashboard.
 - Added support for downloading Registry Access Management policies through HTTP proxies.
 - Fixed an issue related to empty remote repositories when the machine is in sleep mode for an extended period of time.
-- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "<none>" but their tag is.
+- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "&lt;none>" but their tag is.
 - Improved the error message when `docker pull` fails because an HTTP proxy is required.
 - Added the ability to clear the search bar easily in Docker Desktop.
 - Renamed the "Containers / Apps" tab to "Containers".
