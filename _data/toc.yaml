@@ -1510,19 +1510,19 @@ manuals:
   - sectiontitle: Onboarding
     section:
     - path: /docker-hub/onboard-business/
-      title: On board with Docker Business
+      title: Get started
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
+  - path: /docker-hub/configure-sign-in/
+    title: Enforce sign in
   - sectiontitle: Single-Sign-on
     section:
       -  path: /single-sign-on/
          title: Configure
       -  path: /single-sign-on/faqs/
          title: FAQs
-  - path: /docker-hub/configure-sign-in/
-    title: Enforce sign in
   - path: /docker-hub/image-access-management/
     title: Image Access Management
   - path: /docker-hub/registry-access-management/

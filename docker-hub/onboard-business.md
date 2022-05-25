@@ -1,12 +1,12 @@
 ---
-description: On board with Docker Business
+description: Get started onboarding with Docker Business
 keywords: business, organizations, get started, onboarding
-title: On board with Docker Business
+title: Get started onboarding with Docker Business
 toc_min: 1
 toc_max: 2
 ---
 
-The following section contains step-by-step instructions on how to easily on board your organization after you obtain a Docker Business subscription.
+The following section contains step-by-step instructions on how to get started onboarding your organization after you obtain a Docker Business subscription.
 
 ## Prerequisites
 
@@ -44,7 +44,7 @@ On the day that your Docker Business subscription starts, your organization's pr
 
 After completing the steps from the welcome email, verify that your organization exists and your organization has a Docker Business subscription:
 
-1. Go to [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"} and then select on your organization's name. 
+1. Go to [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"} and then select on your organization's name.
 2. Under **Plan**, view your subscription. If you organization has a Docker Business subscription, you will see **Docker Business**.
 
 ## Step 3: Add members
@@ -153,24 +153,19 @@ All members in your organization need to be in at least one team. Teams are used
 
 Your organization will have at least one default team, the **owners** team, with at least a single member (you). Members of the **owners** team can help manage users, teams, and repositories in the organization. [Learn more](../docker-hub/orgs.md/#the-owners-team){: target="_blank" rel="noopener" class="_"}.
 
-Besides the default **owners** team, you should create at least one additional team. This additional team will contain members that can not modify organization settings.
+In the steps below, you will create a **members** team. Members that you invite to the **members** team will not be able to modify your organization settings.
 
-To create a team:
+To create the **members** team:
 
 1. Select **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and then select your organization.
 2. Click **Teams** and then click **Create Team**.
-3. Fill out your team's information and then click **Create**.
+3. Specify `members` for **Team name** and then click **Create**.
 
-To invite a member to your organization:
+To invite a member to the **members** team in your organization:
 
 1. Navigate to **Organizations** in Docker Hub, and select your organization.
 2. In the **Members** tab, click **Invite Member**.
-3. Enter the invitee's Docker ID or email, and select a team from the drop-down list.
-
-   > **Note**
-   >
-   > Remember, you shouldn't add all your members to the **owners** team. Members of the **owners** team have access to change all of your organization's settings.
-
+3. Enter the invitee's Docker ID or email, and select the **members** team from the drop-down list.
 4. Click **Invite** to confirm.
 
 </div>
