@@ -51,12 +51,7 @@ Download Docker Desktop 4.0 or a later release.
 
 - [Download and install for Windows](/desktop/windows/install/)
 - [Download and install for Mac](/desktop/mac/install/)
-
-> **Note**
->
-> There is currently no Docker Desktop for Linux. Linux users will have the same
-> restrictions as Mac and Windows users while logged in. However, there is
-> currently no way to enforce Linux users to log in.
+- [Download and install for Linux](/desktop/linux/iinstall)
 
 {% include configure-registry-json.md %}
 
