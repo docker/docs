@@ -42,15 +42,6 @@ versions:
 
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, and `s390x` architectures.
 
-> Ubuntu 16.04 LTS "Xenial Xerus" end-of-life
-> 
-> Ubuntu Linux 16.04 LTS reached the end of its five-year LTS window on April
-> 30th 2021 and is no longer supported. Docker no longer releases packages for
-> this distribution (including patch- and security releases). Users running
-> Docker on Ubuntu 16.04 are recommended to update their system to a currently
-> supported LTS version of Ubuntu.
-{: .important }
-
 ### Uninstall old versions
 
 Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
@@ -146,14 +137,14 @@ from the repository.
     ```console
     $ apt-cache madison docker-ce
 
-      docker-ce | 5:18.09.1~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 5:18.09.0~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 18.06.1~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 18.06.0~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
+    docker-ce | 5:20.10.16~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+    docker-ce | 5:20.10.15~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+    docker-ce | 5:20.10.14~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+    docker-ce | 5:20.10.13~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
     ```
 
     b. Install a specific version using the version string from the second column,
-       for example, `5:18.09.1~3-0~ubuntu-xenial`.
+       for example, `5:20.10.16~3-0~ubuntu-jammy`.
 
     ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
