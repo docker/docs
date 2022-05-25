@@ -58,7 +58,7 @@ So, let's do it!
         sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using an Apple Silicon Mac or another ARM64 device then use this command.
+    If you are using an Apple silicon Mac or another ARM64 device, then use the following command.
 
     ```bash
     $ docker run -dp 3000:3000 \
