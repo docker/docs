@@ -3,19 +3,25 @@
 #
 # This file overrides options set in _config.yml for production / deploy
 ##
+
 name: Docker Documentation
+
 markdown: kramdown
-kramdown:
-  input: GFM
-  gfm_quirks: [paragraph_end, no_auto_typographic]
-  html_to_native: true
-  hard_wrap: false
-  syntax_highlighter: rouge
-  toc_levels: 2..3
+highlighter: rouge
 incremental: true
 permalink: pretty
 safe: false
 lsi: false
+
+# https://kramdown.gettalong.org/options.html
+# https://github.com/kramdown/parser-gfm/blob/master/lib/kramdown/parser/gfm/options.rb
+kramdown:
+  input: GFM
+  gfm_quirks: [paragraph_end, no_auto_typographic]
+  hard_wrap: false
+  html_to_native: true
+  syntax_highlighter: rouge
+  toc_levels: 2..3
 
 exclude:
   - _samples
