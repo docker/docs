@@ -41,7 +41,9 @@ $ sudo apt-get remove docker docker-engine docker.io containerd runc
 It's OK if `apt-get` reports that none of these packages are installed.
 
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine package is now called `docker-ce`.
+networks, are preserved. If you do not need to save your existing data, and want to
+start with a clean installation, refer to the [uninstall Docker Engine](#uninstall-docker-engine)
+section at the bottom of this page.
 
 ## Installation methods
 
@@ -96,9 +98,7 @@ from the repository.
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
 
-3.  Use the following command to set up the **stable** repository. To add the
-    **nightly** or **test** repository, add the word `nightly` or `test` (or both)
-    after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
+3.  Use the following command to set up the repository:
 
     ```console
     $ echo \
@@ -117,13 +117,6 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
     $ sudo apt-get update
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
-
-    > Got multiple Docker repositories?
-    >
-    > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command always installs the highest possible version,
-    > which may not be appropriate for your stability needs.
 
     > Receiving a GPG error when running `apt-get update`?
     >  
@@ -183,12 +176,6 @@ a new file each time you want to upgrade Docker.
     choose your Debian version, then browse to `pool/stable/`, choose `amd64`,
     `armhf`, or `arm64`, and download the `.deb` file for the Docker Engine
     version you want to install.
-
-    > **Note**
-    >
-    > To install a **nightly** or **test** (pre-release) package,
-    > change the word `stable` in the above URL to `nightly` or `test`.
-    > [Learn about **nightly** and **test** channels](index.md).
 
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
