@@ -28,6 +28,12 @@ jobs:
 
   validate:
     runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - htmlproofer
+          - mdl
     steps:
       -
         name: Checkout
@@ -36,14 +42,12 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
-        name: Check for broken links
+        name: Validate
         uses: docker/bake-action@v2
         with:
-          targets: htmlproofer
+          targets: ${{ matrix.target }}
           set: |
             *.cache-from=type=gha,scope=build
-            *.cache-from=type=gha,scope=validate
-            *.cache-to=type=gha,scope=validate,mode=max
 
       # Disabled netlify-deploy due to flakey 502 http errors
       # - name: copy static files

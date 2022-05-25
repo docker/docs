@@ -33,9 +33,13 @@ vendor:
 htmlproofer:
 	$(BUILDX_CMD) bake htmlproofer
 
+# Lint tool for markdown files
+mdl:
+	$(BUILDX_CMD) bake mdl
+
 # Deploy website and run it through Docker compose
 # Available in your browser at http://localhost:4000
 deploy:
 	docker compose up --build
 
-.PHONY: buildx-yaml release vendor htmlproofer deploy
+.PHONY: buildx-yaml release vendor htmlproofer mdl deploy
