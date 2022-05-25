@@ -67,14 +67,6 @@ networks, are preserved. If you do not need to save your existing data, and want
 start with a clean installation, refer to the [uninstall Docker Engine](#uninstall-docker-engine)
 section at the bottom of this page.
 
-### Supported storage drivers
-
-Docker Engine on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
-
-Docker Engine uses the `overlay2` storage driver by default. If you need to use
-`aufs` instead, you need to configure it manually.
-See [use the AUFS storage driver](../../storage/storagedriver/aufs-driver.md)
-
 ## Installation methods
 
 You can install Docker Engine in different ways, depending on your needs:
@@ -122,9 +114,7 @@ from the repository.
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
 
-3.  Use the following command to set up the **stable** repository. To add the
-    **nightly** or **test** repository, add the word `nightly` or `test` (or both)
-    after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
+3.  Use the following command to set up the repository:
 
     ```console
     $ echo \
@@ -142,12 +132,11 @@ from the repository.
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
-    > Got multiple Docker repositories?
-    >
-    > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command always installs the highest possible version,
-    > which may not be appropriate for your stability needs.
+    > Receiving a GPG error when running `apt-get update`?
+    >  
+    > Your default umask may not be set correctly, causing the public key file
+    > for the repo to not be detected. Run the following command and then try to
+    > update your repo again: `sudo chmod a+r /etc/apt/keyrings/docker.gpg`.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
@@ -201,12 +190,6 @@ a new file each time you want to upgrade Docker.
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
     `armhf`, `arm64`, or `s390x`, and download the `.deb` file for the Docker Engine
     version you want to install.
-
-    > **Note**
-    >
-    > To install a **nightly** or **test** (pre-release) package,
-    > change the word `stable` in the above URL to `nightly` or `test`.
-    > [Learn about **nightly** and **test** channels](index.md).
 
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.

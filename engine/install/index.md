@@ -98,14 +98,11 @@ These binaries are statically linked and can be used on any Linux distribution.
 
 ## Release channels
 
-Docker Engine has three types of update channels, **stable**, **test**,
-and **nightly**:
+Docker Engine has two types of update channels, **stable** and **test**:
 
 * The **Stable** channel gives you latest releases for general availability.
 * The **Test** channel gives pre-releases that are ready for testing before
   general availability (GA).
-* The **Nightly** channel gives you latest builds of work in progress for the
-  next major release.
 
 ### Stable
 
@@ -124,20 +121,6 @@ Docker for the release have achieved feature-complete. Pre-releases
 such as betas and release candidates are conducted from their respective release
 branches. Patch releases and the corresponding pre-releases are performed
 from within the corresponding release branch.
-
-### Nightly
-
-Nightly builds give you the latest builds of work in progress for the next major
-release. They are created once per day from the master branch with the version
-format:
-
-    0.0.0-YYYYmmddHHMMSS-abcdefabcdef
-
-where the time is the commit time in UTC and the final suffix is the prefix
-of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
-
-These builds allow for testing from the latest code on the master branch. No
-qualifications or guarantees are made for the nightly builds.
 
 ## Support
 
