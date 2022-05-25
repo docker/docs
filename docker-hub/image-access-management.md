@@ -51,7 +51,7 @@ Download Docker Desktop 4.0 or a later release.
 
 - [Download and install for Windows](/desktop/windows/install/)
 - [Download and install for Mac](/desktop/mac/install/)
-- [Download and install for Linux](/desktop/linux/iinstall)
+- [Download and install for Linux](/desktop/linux/install)
 
 {% include configure-registry-json.md %}
 
