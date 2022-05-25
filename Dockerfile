@@ -5,7 +5,7 @@
 
 # Use same ruby version as the one in .ruby-version
 # that is used by Netlify
-ARG RUBY_VERSION=2.6.10
+ARG RUBY_VERSION=2.7.6
 # Same as the one in Gemfile.lock
 ARG BUNDLER_VERSION=2.3.13
 

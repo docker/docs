@@ -58,6 +58,15 @@ So, let's do it!
         sh -c "yarn install && yarn run dev"
     ```
 
+    If you are using an Apple silicon Mac or another ARM64 device, then use the following command.
+
+    ```bash
+    $ docker run -dp 3000:3000 \
+        -w /app -v "$(pwd):/app" \
+        node:12-alpine \
+        sh -c "apk add --no-cache python2 g++ make && yarn install && yarn run dev"
+    ```
+
     - `-dp 3000:3000` - same as before. Run in detached (background) mode and create a port mapping
     - `-w /app` - sets the "working directory" or the current directory that the command will run from
     - `-v "$(pwd):/app"` - bind mount the current directory from the host in the container into the `/app` directory

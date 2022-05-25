@@ -3,15 +3,19 @@ source 'https://rubygems.org'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
-gem 'jekyll', '3.8.6'
-gem 'jekyll-redirect-from'
-gem 'jekyll-relative-links'
-gem 'jekyll-sitemap'
+gem 'jekyll', '4.2.2'
+group :jekyll_plugins do
+  gem 'jekyll-redirect-from'
+  gem 'jekyll-relative-links'
+  gem 'jekyll-sitemap'
+end
 
-# FIXME: enforce rouge to old version for now: https://github.com/docker/docker.github.io/issues/14788
-gem 'rouge', "2.2.1"
+# FIXME: This is a workaround for a bug in rouge console lexer
+#  introduced by https://github.com/rouge-ruby/rouge/pull/1779
+#  more info: https://github.com/docker/docker.github.io/issues/14788
+gem 'rouge', '3.27.0'
 
-gem 'archive-zip'
-gem 'html-proofer'
-gem 'octopress-hooks'
-gem 'rake'
+gem 'archive-zip', '0.12.0'
+gem 'html-proofer', '3.19.4'
+gem 'octopress-hooks', '2.6.2'
+gem 'rake', '13.0.6'
