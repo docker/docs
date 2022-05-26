@@ -215,9 +215,6 @@ looks like the following:
 In the above example, you can see `profile=/usr/bin/docker`. This means the
 user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 
-> **Note**: On version of Ubuntu > 14.04 this is all fine and well, but Trusty
-> users might run into some issues when trying to `docker container exec`.
-
 Look at another log line:
 
 ```

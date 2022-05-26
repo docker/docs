@@ -85,7 +85,7 @@ from the repository.
 {% assign download-url-base = "https://download.docker.com/linux/rhel" %}
 
 Install the `yum-utils` package (which provides the `yum-config-manager`
-utility) and set up the **stable** repository.
+utility) and set up the repository.
 
 ```console
 $ sudo yum install -y yum-utils
@@ -95,35 +95,10 @@ $ sudo yum-config-manager \
     {{ download-url-base }}/docker-ce.repo
 ```
 
-> **Optional**: Enable the **nightly** or **test** repositories.
->
-> These repositories are included in the `docker.repo` file above but are disabled
-> by default. You can enable them alongside the stable repository.  The following
-> command enables the **nightly** repository.
->
-> ```console
-> $ sudo yum-config-manager --enable docker-ce-nightly
-> ```
->
-> To enable the **test** channel, run the following command:
->
-> ```console
-> $ sudo yum-config-manager --enable docker-ce-test
-> ```
->
-> You can disable the **nightly** or **test** repository by running the
-> `yum-config-manager` command with the `--disable` flag. To re-enable it, use
-> the `--enable` flag. The following command disables the **nightly** repository.
->
-> ```console
-> $ sudo yum-config-manager --disable docker-ce-nightly
-> ```
->
-> [Learn about **nightly** and **test** channels](index.md).
-
 #### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose
+    or go to the next step to install a specific version:
 
     ```console
     $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
@@ -131,13 +106,6 @@ $ sudo yum-config-manager \
 
     If prompted to accept the GPG key, verify that the fingerprint matches
     `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
-
-    > Got multiple Docker repositories?
-    >
-    > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `yum install` or
-    > `yum update` command always installs the highest possible version,
-    > which may not be appropriate for your stability needs.
 
     This command installs Docker, but it doesn't start Docker. It also creates a
     `docker` group, however, it doesn't add any users to the group by default.
@@ -206,12 +174,6 @@ a new file each time you want to upgrade Docker Engine.
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of RHEL. Then browse to `s390x/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
-
-    > **Note**
-    >
-    > To install a **nightly** or **test** (pre-release) package,
-    > change the word `stable` in the above URL to `nightly` or `test`.
-    > [Learn about **nightly** and **test** channels](index.md).
 
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
