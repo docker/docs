@@ -1231,7 +1231,7 @@ manuals:
     - path: /desktop/dashboard/
       title: Dashboard
     - path: /desktop/dev-environments/
-      title: Dev Environments (Preview)
+      title: Dev Environments (Beta)
     - path: /desktop/extensions/
       title: Extensions (Beta)
     - sectiontitle: Extensions SDK (Beta)
