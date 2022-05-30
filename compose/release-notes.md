@@ -7,6 +7,30 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+
+## 2.5.1
+
+(2022-05-17)
+
+
+### Bug Fixes
+
+- Fix resolution of project's working directive absolute path when a relative path is declared using '--env-file'. Fixes [docker/for-mac#6229](https://github.com/docker/for-mac/issues/6229){:target="_blank" rel="noopener" class="_"}.
+- Fix: `compose down`now rejects all arguments in order to clarify usage. Fixes [#9151](https://github.com/docker/compose/issues/9151){:target="_blank" rel="noopener" class="_"}.
+- Fix: `compose down` now exits with status=0 if there is nothing to remove. Fixes [#9426](https://github.com/docker/compose/issues/9426){:target="_blank" rel="noopener" class="_"}.
+- Fix removing extra space printed in logs output lines with --no-log-prefix option. Fixes [#9464](https://github.com/docker/compose/issues/9464){:target="_blank" rel="noopener" class="_"}.
+
+
+### Changes
+- Clarify what the default work dir is when multiple compose files are passed.
+- cp command: copy to all containers of a service as default behaviour.
+- Dependencies updates: bumping compose-go to 1.2.5.
+
+
+For the full change log or additional information, check the [Compose repository 2.5.1 release page](https://github.com/docker/compose/releases/tag/v2.5.1){:target="_blank" rel="noopener" class="_"}.
+
+
+
 ## 2.5.0
 
 (2022-04-29)
