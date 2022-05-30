@@ -65,6 +65,19 @@ You can update Docker Extensions outside of Docker Desktop releases. To update a
 If an extension has a new version available, it displays an **Update** button.
 3. Click **Update**.
 
+## Submit feedback
+Feedback can be given to an extension author through a dedicated Slack channel or Github. To submit feedback about a particular extension:
+
+1. Navigate to Docker Dashboard, and from the menu bar select the ellipsis to the right of **Extensions**.
+2. Click **Manage Extensions**.
+3. Select the extension you want to provide feedback on. 
+4. Scroll down to the bottom of the extension's description and, depending on the 
+extension select:
+    - Support
+    - Slack
+    - Issues
+
+If an extension does not provide a way for you to give feedback, 
 ## Uninstall an extension
  You can uninstall an extension at any time. 
  
