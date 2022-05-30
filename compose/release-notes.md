@@ -8,6 +8,31 @@ redirect_from:
 ---
 
 
+
+## 2.6.0
+
+(2022-05-30)
+
+
+### Bug Fixes
+- Fixed `compose up` to attach only to services declared in project with enabled profiles. Fixes [#9286](https://github.com/docker/compose/issues/9286){:target="_blank" rel="noopener" class="_"}.
+- Fixed flickering prompt when pulling same image from multiple services. Fixes [#9469](https://github.com/docker/compose/issues/9469){:target="_blank" rel="noopener" class="_"}.
+- Fixed compose go to import .env file to OS environment to allow setting variables (such as DOCKER_BUILDKIT) through this file. Fixes [#9345](https://github.com/docker/compose/issues/9345){:target="_blank" rel="noopener" class="_"}.
+- Fixed TestLocalComposeUp that failed locally.
+- Fixed local run of make e2e-compose-standalone.
+
+
+### Changes
+- Added the tags property to the build section. In this property tags can be defined to be applied to the final image, in addition to the one defined in the image property.
+- Added end-to-end tests to ensure there is no regression on environment variables precedence.
+- Added ddev's end-to-end test.
+- Dependencies update: bumping [compose-go to 1.2.6](https://github.com/compose-spec/compose-go/releases/tag/v1.2.6){:target="_blank" rel="noopener" class="_"}.
+- Dependencies update: bumping [compose-go to 1.2.7](https://github.com/compose-spec/compose-go/releases/tag/v1.2.7){:target="_blank" rel="noopener" class="_"}.
+- Dependencies update: bumping [golang to 1.18](https://go.dev/doc/devel/release#go1.18){:target="_blank" rel="noopener" class="_"}. 
+
+For the full change log or additional information, check the [Compose repository 2.6.0 release page](https://github.com/docker/compose/releases/tag/v2.6.0){:target="_blank" rel="noopener" class="_"}.
+
+
 ## 2.5.1
 
 (2022-05-17)
@@ -15,15 +40,15 @@ redirect_from:
 
 ### Bug Fixes
 
-- Fix resolution of project's working directive absolute path when a relative path is declared using '--env-file'. Fixes [docker/for-mac#6229](https://github.com/docker/for-mac/issues/6229){:target="_blank" rel="noopener" class="_"}.
-- Fix: `compose down`now rejects all arguments in order to clarify usage. Fixes [#9151](https://github.com/docker/compose/issues/9151){:target="_blank" rel="noopener" class="_"}.
-- Fix: `compose down` now exits with status=0 if there is nothing to remove. Fixes [#9426](https://github.com/docker/compose/issues/9426){:target="_blank" rel="noopener" class="_"}.
-- Fix removing extra space printed in logs output lines with --no-log-prefix option. Fixes [#9464](https://github.com/docker/compose/issues/9464){:target="_blank" rel="noopener" class="_"}.
+- Fixed resolution of project's working directive absolute path when a relative path is declared using '--env-file'. Fixes [docker/for-mac#6229](https://github.com/docker/for-mac/issues/6229){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose down`: now rejects all arguments in order to clarify usage. Fixes [#9151](https://github.com/docker/compose/issues/9151){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose down`: now exits with status=0 if there is nothing to remove. Fixes [#9426](https://github.com/docker/compose/issues/9426){:target="_blank" rel="noopener" class="_"}.
+- Fixed extra space printed in logs output lines with --no-log-prefix option. Fixes [#9464](https://github.com/docker/compose/issues/9464){:target="_blank" rel="noopener" class="_"}.
 
 
 ### Changes
-- Clarify what the default work dir is when multiple compose files are passed.
-- cp command: copy to all containers of a service as default behaviour.
+- Clarified what the default work dir is when multiple compose files are passed.
+- cp command: copy to all containers of a service as default behavior.
 - Dependencies updates: bumping compose-go to 1.2.5.
 
 
