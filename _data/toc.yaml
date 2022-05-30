@@ -1220,6 +1220,8 @@ manuals:
               title: Install on Ubuntu
             - path: /desktop/linux/install/archlinux/
               title: Install on Arch
+            - path: /desktop/linux/install/pi/
+              title: Install on Raspberry Pi
         - path: /desktop/linux/
           title: User manual
         - path: /desktop/linux/networking/
