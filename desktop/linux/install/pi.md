@@ -27,7 +27,7 @@ To install Docker Desktop successfully, you must:
 To install Docker Desktop for Linux on  your Raspberry Pi:
 
 
-1. Set up [Docker's package repository](../../engine/install/debian.md#set-up-the-repository).
+1. Set up [Docker's package repository](../../../engine/install/debian.md#set-up-the-repository).
 
 2. Download the latest DEB package from the [release](../../release-notes.md).
 
@@ -140,5 +140,5 @@ Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/conf
 
 ## What next?
 
-- Explore [Docker Dashboard](../dashboard.md)
-- Start a [sample application](../dashboard.md/#start-a-sample-application) 
+- Explore [Docker Dashboard](../../dashboard.md)
+- Start a [sample application](../../dashboard.md/#start-a-sample-application) 
