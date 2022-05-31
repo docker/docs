@@ -3,10 +3,7 @@ description: DD for Linux on Raspoberry Pi
 keywords: docker, Docker Desktop for linux,  raspberry pi
 title: Install Docker Desktop on Raspberry Pi
 ---
-
-With the release of Docker Desktop 4.9.0(?), you can now run Docker Desktop for Linux on a Raspberry Pi.
-
-This page contains information on how to install, launch, and upgrade Docker Desktop. 
+This page contains information on how to install, launch, and upgrade Docker Desktop on a Raspberyy Pi. 
 
 > **Note**
 >
@@ -17,19 +14,19 @@ To install Docker Desktop successfully, you must:
 
 - Meet the [system requirements](../../install/#system-requirements)
 - Have a 64-bit version of Raspberyy Pi OS
-- Fast SD card
-- Stable power supply
-- A minimum of 4GB RAM 
+- Have a fast SD card
+- Have a stable power supply
+- Have a minimum of 4GB RAM 
 
 
 ## Install Docker Desktop
 
-To install Docker Desktop for Linux on  your Raspberry Pi:
+To install Docker Desktop for Linux on your Raspberry Pi:
 
 
 1. Set up [Docker's package repository](../../../engine/install/debian.md#set-up-the-repository).
 
-2. Download the latest DEB package from the [release](../../release-notes.md).
+2. Download the latest DEB package from the [release](../../release-notes.md) page.
 
 3. Install the package with apt as follows:
 
@@ -39,7 +36,7 @@ $ sudo apt-get install ./docker-desktop-<version>-arm64.deb
 ```
 
 
-There are a few post-install configuration steps done through the maintainers' scripts in the deb package.
+There are a few post-install configuration steps done through the maintainers' scripts in the DEB package.
 
 The post-install script:
 
