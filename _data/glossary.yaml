@@ -108,7 +108,7 @@ Docker subscription: |
 Docker Team: |
   Docker Team is a [Docker subscription](#docker-subscription). Docker Team offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 Docker Trusted Content Program: |
-  The Docker Trusted Content Program verifies content through four programs, [Docker Official Images](#docker-official-images), [Docker Verfied Publisher Images](#docker-verfied-publisher-images), Docker Open Source Images, and Custom Official Images.
+  The Docker Trusted Content Program verifies content through four programs, [Docker Official Images](#docker-official-images), [Docker Verified Publisher Images](#docker-verified-publisher-images), Docker Open Source Images, and Custom Official Images.
 Docker Verified Publisher Images: |
   Docker Verified Publisher Images are confirmed by Docker to be from a trusted software publishers that are partners in the Verified Publisher program. Docker Verified Publisher Images are identified by the Verified Publisher badge included on the Docker Hub repositories.
 Dockerfile: |
