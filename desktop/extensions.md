@@ -77,7 +77,8 @@ extension select:
     - Slack
     - Issues
 
-If an extension does not provide a way for you to give feedback, 
+If an extension does not provide a way for you to give feedback, contact us and we'll pass on the feedback for you. 
+
 ## Uninstall an extension
  You can uninstall an extension at any time. 
  
