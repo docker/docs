@@ -5,6 +5,8 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
+    chef-utils (17.10.0)
+      concurrent-ruby
     colorator (1.1.0)
     concurrent-ruby (1.1.10)
     em-websocket (0.5.3)
@@ -60,8 +62,19 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    mdl (0.11.0)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      mixlib-cli (~> 2.1, >= 2.1.1)
+      mixlib-config (>= 2.2.1, < 4)
+      mixlib-shellout
     mercenary (0.4.0)
     mini_portile2 (2.8.0)
+    mixlib-cli (2.1.8)
+    mixlib-config (3.0.9)
+      tomlrb
+    mixlib-shellout (3.2.7)
+      chef-utils
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
@@ -88,6 +101,7 @@ GEM
       ffi (~> 1.9)
     terminal-table (2.0.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+    tomlrb (2.0.1)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
     unicode-display_width (1.8.0)
@@ -105,6 +119,7 @@ DEPENDENCIES
   jekyll-redirect-from
   jekyll-relative-links
   jekyll-sitemap
+  mdl (= 0.11.0)
   octopress-hooks (= 2.6.2)
   rake (= 13.0.6)
   rouge (= 3.27.0)
