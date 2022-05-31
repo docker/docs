@@ -228,7 +228,7 @@ $ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
-Once created, you can use this ARN in you Compose file using using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
+Once created, you can use this ARN in your Compose file using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
 
 ```yaml
 services:
