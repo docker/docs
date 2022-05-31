@@ -1507,6 +1507,12 @@ manuals:
 
 - sectiontitle: Administration
   section:
+  - sectiontitle: Onboarding
+    section:
+    - path: /docker-hub/onboard-business/
+      title: Get started
+    - path: /docker-hub/onboarding-faqs/
+      title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
   - path: /docker-hub/configure-sign-in/
@@ -1521,8 +1527,6 @@ manuals:
     title: Image Access Management
   - path: /docker-hub/registry-access-management/
     title: Registry Access Management
-  - path: /docker-hub/onboarding-faqs/
-    title: Onboarding FAQs
 
 - sectiontitle: Security
   section:
