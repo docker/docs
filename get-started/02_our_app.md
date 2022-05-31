@@ -74,7 +74,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    for the final image. Since we named the image `getting-started`, we can refer to that
    image when we run a container.
 
-   The `.` at the end of the `docker build` command tells that Docker should look for the `Dockerfile` in the current directory.
+   The `.` at the end of the `docker build` command tells Docker that it should look for the `Dockerfile` in the current directory.
 
 ## Start an app container
 
