@@ -42,6 +42,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
+- Added additional guides on the homepage for: Elasticsearch, MariaDB, Memcached, MySQL, RabbitMQ and Ubuntu.
 - Added a footer to the Docker Dashboard with general information about the Docker Desktop update status and Docker Engine statistics
 - Re-designed the containers table, adding:
   - A button to copy a container ID to the clipboard
