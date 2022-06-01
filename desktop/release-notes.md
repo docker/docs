@@ -21,10 +21,10 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## Docker Desktop 4.8.2
-2022-05-18
+## Docker Desktop 4.9.0
+2022-06-02
 
-> Download Docker Desktop 
+> Download Docker Desktop
 >
 > [
 > Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
@@ -33,14 +33,69 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 > [Mac with Apple
 > chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
 > .button .primary-btn }
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
+> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
 > .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
+> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
 > .button .primary-btn }
-> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
+> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
 > .button .primary-btn }
 
 ### New
+
+- Added a footer to the Docker Dashboard with general information about the Docker Desktop update status and Docker Engine statistics
+- Re-designed the containers table, adding:
+  - A button to copy a container ID to the clipboard
+  - A pause button for each container
+  - Column resizing for the containers table
+  - Persistence of sorting and resizing for the containers table
+  - Bulk deletion for the containers table
+
+### Upgrades
+
+- [Compose v2.6.0](https://github.com/docker/compose/releases/tag/v2.6.0)
+- [Docker Engine v20.10.16](https://docs.docker.com/engine/release-notes/#201016)
+- [containerd v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4)
+- [runc v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1)
+- [Go 1.18.2](https://github.com/golang/go/releases/tag/go1.18.2)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed an issue which caused Docker Desktop to hang if you quit the app whilst Docker Desktop was paused.
+- Fixed the Kubernetes cluster not resetting properly after the PKI expires.
+- Fixed an issue where the Extensions Marketplace was not using the defined http proxies.
+- Improved the logs search functionality in Docker Dashboard to allow spaces.
+- Middle-button mouse clicks on buttons in the Dashboard now behave as a left-button click instead of opening a blank window.
+
+#### For Mac
+
+- Fixed an issue to avoid creating `/opt/containerd/bin` and `/opt/containerd/lib` on the host if `/opt` has been added to the file sharing directories list.
+
+#### For Windows
+
+- Fixed a bug in the WSL 2 integration where if a file or directory is bind-mounted to a container, and the container exits, then the file or directory is replaced with the other type of object with the same name. For example, if a file is replaced with a directory or a directory with a file, any attempts to bind-mount the new object fails.
+- Fixed a bug where the Tray icon and Dashboard UI didn't show up and Docker Desktop didn't fully start. Fixes [docker/for-win#12622](https://github.com/docker/for-win/issues/12622).
+
+### Known issues
+
+#### For Linux
+
+- Changing ownership rights for files in bind mounts fails. This is due to the way we have implemented file sharing between the host and VM within which the Docker Engine runs. We aim to resolve this issue in the next release.
+
+## Docker Desktop 4.8.2
+2022-05-18
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/79419/Docker%20Desktop%20Installer.exe)|
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/79419/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/79419/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-x86_64.pkg.tar.zst)
+
+### Upgrades
 
 - [Compose v2.5.1](https://github.com/docker/compose/releases/tag/v2.5.1)
 
