@@ -38,8 +38,8 @@ When asked if you want to allow this app to make changes to your device, click *
 
     > **Note**
     >
-    > On Windows Server 2019 you can add the Compose executable to `$Env:ProgramFiles\Docker`.
-     Because this directory is registered in the system `PATH`, you can run the `docker-compose --version` 
+    > On Windows Server 2019 you can add the Compose CLI plugin to `$Env:ProgramFiles\Docker\cli-plugins`.
+     Because this directory is used for Docker CLI plugin, you can run the `docker compose version` 
      command on the subsequent step with no additional configuration.
 
     > To install a different version of Compose, substitute `{{site.compose_version}}`
