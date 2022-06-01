@@ -30,4 +30,4 @@ Docker.app connects to it, so it's safe to ignore.
 ### How do I add custom CA certificates?
 
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client-side certs, see
-[Add TLS certificates on Mac](mac/index.md#add-tls-certificates)
+[Add TLS certificates on Mac](../mac/index.md#add-tls-certificates)

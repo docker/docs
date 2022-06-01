@@ -142,7 +142,7 @@ volumes or find a way to make the applications work with the default file
 permissions.
 
 See also,
-[Can I change permissions on shared volumes for container-specific deployment requirements?](../faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+[Can I change permissions on shared volumes for container-specific deployment requirements?](../faqs/general.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
 #### Volume mounting requires shared folders for Linux containers
@@ -158,7 +158,7 @@ Dockerfile and volume.
 
 #### Support for symlinks
 
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs/general.md#how-do-symlinks-work-on-windows) in the FAQs.
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
