@@ -11,6 +11,8 @@ services. All you need is an email address to create a Docker ID. Your Docker ID
 numbers and lowercase letters. You cannot use any special characters or spaces.
 For more information, see [Docker ID](../docker-id/index.md). If your admin enforces [Single sign-on (SSO)](../single-sign-on/index.md), a Docker ID is provisioned for new users.
 
+Developers may have multiple Docker IDs in order to separate their Docker IDs  that are associated with an organization in Docker Business, and their personal use Docker IDs. 
+
 ### What if my Docker ID is taken?
 
 All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/){: target="_blank" rel="noopener"
