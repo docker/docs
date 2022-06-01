@@ -1,12 +1,16 @@
 ---
-description: How to install Docker Compose plugin
+description: How to install Docker Compose CLI plugin
 keywords: compose, orchestration, install, installation, docker, documentation
 toc_max: 3
 
-title: Install Docker Compose Plugin
+title: Install Docker Compose CLI plugin
 ---
 
-## Prerequisites
+In this page you can find instructions on how to install Compose Plugin for Docker CLI in: 
+* Windows Server
+* Linux
+
+## Compose Prerequisites
 
 * Docker Compose requires Docker Engine.
 * Docker Compose plugin requires Docker CLI.
@@ -14,20 +18,19 @@ title: Install Docker Compose Plugin
 
 ## Install Compose on Windows Server
 
-
 Follow these instructions if you are running the Docker daemon and client directly
 on Microsoft Windows Server and want to install Docker Compose.
 
 
 1.  Run a PowerShell as an administrator. 
-Be sure to, when asked if you want to allow this app to make changes to your device, to click **Yes**.
+When asked if you want to allow this app to make changes to your device, click **Yes** in order to proceed with the installation.
     
 2.  GitHub now requires TLS1.2. In PowerShell, run the following:
     
     ```powershell  
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     ```
-3. Run the following command to download the current release of Compose ({{site.compose_version}}):
+3. Run the following command to download the latest release of Compose ({{site.compose_version}}):
 
     ```powershell
     Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
@@ -51,22 +54,24 @@ Be sure to, when asked if you want to allow this app to make changes to your dev
 
 ## Installing Compose on Linux systems
 
-> For Docker Desktop for Linux installation, see [Docker Desktop for Linux](../../desktop/linux/install.md/){:target="_blank" rel="noopener" class="_"}.
+In this section you can find various routes for installing Compose in Linux.
 
-__Other methods__
+### Installation Methods
 
-The following methods are possible:
+* [Installing Docker Desktop for Linux](../../desktop/linux/install.md/){:target="_blank" rel="noopener" class="_"} is the easiest and recommended installation route. 
+Check the Desktop for Linux [supported platforms](../../desktop/linux/install.md/#supported-platforms){:target="_blank" rel="noopener" class="_"} page to verify the supported Linux distributions and architectures.
 
-* Installing Docker Desktop for Linux. It's the easiest and recommended installation route. Check the Desktop for Linux [supported platforms](../../desktop/linux/install.md/#supported-platforms){:target="_blank" rel="noopener" class="_"} page to verify the supported Linux distributions and architectures.
+
+The following other methods are possible:
 
 * __Using the automated convenience scripts__ (for testing and development environments). 
-These scripts will get you Docker Engine and Docker CLI with the Compose plugin. 
-Choose your Linux distribution from the [Docker Engine install](../../../engine/install/){:target="_blank" rel="noopener" class="_"} and follow the instructions available there.
+These scripts install Docker Engine and Docker CLI with the Compose plugin. 
+For this route, go to the [Docker Engine install](../../../engine/install/){:target="_blank" rel="noopener" class="_"} 
+page and follow the provided instructions. _After Desktop for Linux this is the recommended route._
 
-* __Setting up Docker's repository__ and using it to install Compose. See the [Install using the repository](#install-using-the-repository) section in this page.
+* __Setting up Docker's repository__ and using it to install Compose. See the [Install using the repository](#install-using-the-repository) section in this page. _This is the second best route._
 
-
-* Downloading and __installing the Compose plugin binary manually__. Note that this option requires you to manage upgrades manually as well. See the [Install the Plugin manually](#install-the-plugin-manually) section in this page.
+* __Installing the Compose CLI plugin binary manually__. See the [Install the Plugin manually](#install-the-plugin-manually) section in this page. _Note that this option requires you to manage upgrades manually as well._ 
 
 
 ### Install using the repository
@@ -74,7 +79,7 @@ Choose your Linux distribution from the [Docker Engine install](../../../engine/
 > **Note**
 >
 >These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin. 
-For other scenarios check [this summary](../install/index.md#install-compose).
+For other Linux installation methods see [this summary](#installation-methods).
 
 >To run Compose as a non-root user, see [Manage Docker as a non-root user](../../engine/install/linux-postinstall.md){:target="_blank" rel="noopener" class="_"}.
 
@@ -83,8 +88,6 @@ If you have already set up the Docker repository jump to step 2.
 
 1. Set up the repository. Go to the "Set up the repository" section of the chosen [Linux distribution](../../engine/install/index.md#server){:target="_blank" rel="noopener" class="_"}. found in the Docker Engine installation pages to check the instructions.
 
-  Once that is done:
-
 2. Update the `apt` package index, and install the _latest version_ of Docker Compose:
 
     ```console
@@ -92,7 +95,7 @@ If you have already set up the Docker repository jump to step 2.
     $ sudo apt-get install docker-compose-plugin
     ```
     
-    Alternatively, to install a specific version of Docker Engine:
+    Alternatively, to install a specific version of Compose CLI plugin:
       
     a. List the versions available in your repo:
 
@@ -125,12 +128,12 @@ If you have already set up the Docker repository jump to step 2.
 > **Note**
 >
 >These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin. 
-For other scenarios check [this summary](../install/index.md#install-compose).
+For other Linux installation methods see [this summary](#installation-methods).
 
 >To run Compose as a non-root user, see [Manage Docker as a non-root user](../../engine/install/linux-postinstall.md).
 
 
-1.  To download and install the Compose plugin, run:
+1.  To download and install the Compose CLI plugin, run:
 
     ```console
     $ DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
@@ -138,7 +141,7 @@ For other scenarios check [this summary](../install/index.md#install-compose).
     $ curl -SL https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
     ```
 
-    This command downloads the current stable release of Docker Compose (from the Compose releases repository) and installs Compose for _the active user_ under `$HOME` directory. 
+    This command downloads the latest release of Docker Compose (from the Compose releases repository) and installs Compose for _the active user_ under `$HOME` directory. 
     
     > To install:
     >* Docker Compose for _all users_ on your system, replace `~/.docker/ cli-plugins` with `/usr/local/lib/docker/cli-plugins`.
@@ -164,10 +167,10 @@ For other scenarios check [this summary](../install/index.md#install-compose).
 
 > **Note**
 >
->__Compose standalone__: If you need to use Compose without installing the Docker CLI, the instructions for installing the standalone binary are similar. 
+>__Compose standalone__: If you need to use Compose without installing the Docker CLI, the instructions for the standalone scenario are similar. 
 > Note the target folder for the binary's installation is different as well as the compose syntax used with the plugin (_space compose_) or the standalone version (_dash compose_).
 
-1. To download and install Compose Standalone, run:
+1. To download and install Compose standalone, run:
   ```console
   $ curl -SL https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
   ```
