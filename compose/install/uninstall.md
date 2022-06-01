@@ -17,9 +17,18 @@ See Uninstall Docker Desktop for:
 * [Linux](../../desktop/linux/install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
 
 
-#### Other scenarios
+### Uninstalling Compose CLI plugin
 
-If you used `curl` to install Compose, to uninstall it run:
+To remove the Compose CLI plugin, run:
+
+```console
+$ sudo apt-get remove docker-compose-plugin
+```
+Or, if using a different distro, use the equivalent package manager to remove `docker-compose-plugin`. 
+
+__Manually installed__
+
+If you used `curl` to install Compose CLI plugin, to uninstall it run:
 
 ```console
 $ rm $DOCKER_CONFIG/cli-plugins/docker-compose
@@ -30,6 +39,17 @@ or, if you have installed Compose for all users, run:
 ```console
 $ rm /usr/local/lib/docker/cli-plugins/docker-compose
 ```
+
+You can also use:
+
+{% raw %}	
+```console
+docker info --format '{{range .ClientInfo.Plugins}}{{if eq .Name "compose"}}{{.Path}}{{end}}{{end}}'
+```
+{% endraw %}
+
+to inspect the location of the Compose CLI plugin.
+
 
 > Got a "Permission denied" error?
 >
