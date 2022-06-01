@@ -1510,7 +1510,7 @@ manuals:
   - sectiontitle: Onboarding
     section:
     - path: /docker-hub/onboard-business/
-      title: Get started
+      title: Get started with Business
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
   - path: /docker-hub/orgs/
