@@ -70,12 +70,17 @@ module Jekyll
                     ent.copy destent.path
 
                     next unless File.file?(ent.path) && File.extname(ent.path) == ".md"
-                    # set edit url for markdown files in site config defaults
+                    # set edit and issue url and remote info for markdown files in site config defaults
                     edit_url = "#{entry['repo']}/edit/#{entry['default_branch']}/#{file_clean}"
-                    puts "        edit_url: #{edit_url}"
+                    issue_url = "#{entry['repo']}/issues/new?body=File: [#{file_clean}](https://docs.docker.com/#{destent.path.sub(/#{File.extname(destent.path)}$/, '')}/)"
+                    puts "        edit_url:  #{edit_url}"
+                    puts "        issue_url: #{issue_url}"
                     site.config['defaults'] << {
                       "scope" => { "path" => destent.path },
-                      "values" => { "edit_url" => edit_url },
+                      "values" => {
+                        "edit_url" => edit_url,
+                        "issue_url" => issue_url
+                      },
                     }
                   end, proc do |_| end)
                 end
