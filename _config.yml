@@ -90,11 +90,9 @@ sass:
 # limitations in Jekyll cause those to introduce a _severe_ impact on build-time,
 # affecting generation of (e.g.) sitemap.xml and metadata.json, resulting in the
 # total build to take 60 seconds longer to build (!).
-#
-# The list below is for "development" (local builds, and PR previews) builds only,
-# and should be kept minimal to allow for fast builds. Other options should go
-# into _config_production.yml, which is used for production deploys.
 defaults:
+  # Default one for development builds (local and PR previews)
+  # sitemap is disabled here but not for production in _config_production.yml
   - scope:
       path: ""
       type: "pages"
@@ -104,10 +102,22 @@ defaults:
       toc_min: 2
       toc_max: 4
 
+  # Set the correct edit-URL for some local and remote resources. We usually don't create a direct
+  # edit link for these, and instead point to the directory that contains the file.
+  - scope:
+      path: engine/reference
+    values:
+      # FIXME: This edit url is as "best-effort" and doesn't match anything in docker/cli repo for plugins for example. It should be generated autmatically.
+      edit_url: "https://github.com/docker/cli/tree/master/docs/reference"
   - scope:
       path: engine/reference/commandline
     values:
+      edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
       skip_read_time: true
+  - scope:
+      path: glossary.md
+    values:
+      edit_url: "https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml"
 
 # Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
 # - repo is the GitHub repository to fetch from
