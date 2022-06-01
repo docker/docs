@@ -103,7 +103,7 @@ We recommend that you publish a port, or connect from another container. Port fo
 For more information and examples, see:
 - [I want to connect to a container from Mac](../mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) 
 - [I want to connect to a container from Windows](../windows/networking.md#i-want-to-connect-to-a-container-from-windows)
-- [I want to connect to a container from Linux](../linux/networking.md#i-want-to-connect-to-a-container-from-windows)]
+- [I want to connect to a container from Linux](../linux/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host)]
 
 ### Can I pass through a USB device to a container?
 
