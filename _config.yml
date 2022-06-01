@@ -155,7 +155,7 @@ fetch-remote:
     paths:
       - dest: "build"
         src:
-          - "docs/guides/*.md"
+          - "docs/guides/**"
           - "!docs/guides/cicd.md" # CI/CD documentation is already handled in ci-cd/github-actions
 
   - repo: "https://github.com/docker/extensions-sdk"

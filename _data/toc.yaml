@@ -1406,6 +1406,20 @@ manuals:
       title: Working with Buildx
     - path: /build/buildx/install/
       title: Install Buildx
+  - sectiontitle: Bake
+    section:
+    - path: /build/bake/
+      title: Overview
+    - path: /build/bake/file-definition/
+      title: File definition
+    - path: /build/bake/configuring-build/
+      title: Configuring builds
+    - path: /build/bake/hcl-vars-funcs/
+      title: HCL variables and functions
+    - path: /build/bake/build-contexts/
+      title: Build contexts and linking targets
+    - path: /build/bake/compose-xbake/
+      title: Extension field with Compose
   - path: /build/cni-networking/
     title: CNI networking
   - path: /build/custom-network/
