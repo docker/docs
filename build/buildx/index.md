@@ -1,7 +1,7 @@
 ---
 title: Buildx component
 description: Working with Docker Buildx
-keywords: Docker, Buildx, BuildKit
+keywords: build, buildx, buildkit
 redirect_from:
 - /buildx/working-with-buildx/
 ---

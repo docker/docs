@@ -1400,6 +1400,8 @@ manuals:
 
 - sectiontitle: Docker Build
   section:
+  - path: /build/
+    title: Overview
   - sectiontitle: Buildx component
     section:
     - path: /build/buildx/
