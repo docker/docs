@@ -24,7 +24,7 @@ To remove the Compose CLI plugin, run:
 ```console
 $ sudo apt-get remove docker-compose-plugin
 ```
-Or, if using a different distro, use the equivalent package manager to remove `docker-compose-plugin`. 
+Or, if using a different distro, use the equivalent package manager instruction to remove `docker-compose-plugin`. 
 
 __Manually installed__
 

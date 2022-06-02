@@ -7,50 +7,15 @@ title: Install Docker Compose CLI plugin
 ---
 
 In this page you can find instructions on how to install Compose Plugin for Docker CLI in: 
-* Windows Server
 * Linux
+* Windows Server
+
 
 ## Compose Prerequisites
 
 * Docker Compose requires Docker Engine.
 * Docker Compose plugin requires Docker CLI.
 
-
-## Install Compose on Windows Server
-
-Follow these instructions if you are running the Docker daemon and client directly
-on Microsoft Windows Server and want to install Docker Compose.
-
-
-1.  Run a PowerShell as an administrator. 
-When asked if you want to allow this app to make changes to your device, click **Yes** in order to proceed with the installation.
-    
-2.  GitHub now requires TLS1.2. In PowerShell, run the following:
-    
-    ```powershell  
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    ```
-3. Run the following command to download the latest release of Compose ({{site.compose_version}}):
-
-    ```powershell
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\cli-plugins\docker-compose.exe
-    ```
-
-    > **Note**
-    >
-    > On Windows Server 2019 you can add the Compose CLI plugin to `$Env:ProgramFiles\Docker\cli-plugins`.
-     Because this directory is used for Docker CLI plugin, you can run the `docker compose version` 
-     command on the subsequent step with no additional configuration.
-
-    > To install a different version of Compose, substitute `{{site.compose_version}}`
-    > with the version of Compose you want to use.
-
-3.  Test the installation.
-
-    ```console
-    $ docker compose version
-    Docker Compose version {{site.compose_version}}
-    ```
 
 ## Installing Compose on Linux systems
 
@@ -69,9 +34,9 @@ These scripts install Docker Engine and Docker CLI with the Compose plugin.
 For this route, go to the [Docker Engine install](../../../engine/install/){:target="_blank" rel="noopener" class="_"} 
 page and follow the provided instructions. _After Desktop for Linux this is the recommended route._
 
-* __Setting up Docker's repository__ and using it to install Compose. See the [Install using the repository](#install-using-the-repository) section in this page. _This is the second best route._
+* __Setting up Docker's repository__ and using it to install Docker CLI Compose plugin. See the [Install using the repository](#install-using-the-repository) section in this page. _This is the second best route._
 
-* __Installing the Compose CLI plugin binary manually__. See the [Install the Plugin manually](#install-the-plugin-manually) section in this page. _Note that this option requires you to manage upgrades manually as well._ 
+* __Installing the Docker CLI Compose plugin binary manually__. See the [Install the plugin manually](#install-the-plugin-manually) section in this page. _Note that this option requires you to manage upgrades manually as well._ 
 
 
 ### Install using the repository
@@ -89,6 +54,9 @@ If you have already set up the Docker repository jump to step 2.
 1. Set up the repository. Go to the "Set up the repository" section of the chosen [Linux distribution](../../engine/install/index.md#server){:target="_blank" rel="noopener" class="_"}. found in the Docker Engine installation pages to check the instructions.
 
 2. Update the `apt` package index, and install the _latest version_ of Docker Compose:
+
+> Or, if using a different distro, use the equivalent package manager instructions. 
+
 
     ```console
     $ sudo apt-get update
@@ -127,8 +95,9 @@ If you have already set up the Docker repository jump to step 2.
 
 > **Note**
 >
->These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin. 
-For other Linux installation methods see [this summary](#installation-methods).
+> These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin. 
+>
+> Note as well this option requires you to manage upgrades manually. Whenever possible we recommend any of the other installation methods listed. For other Linux installation methods see [this summary](#installation-methods).
 
 >To run Compose as a non-root user, see [Manage Docker as a non-root user](../../engine/install/linux-postinstall.md).
 
@@ -185,4 +154,41 @@ For other Linux installation methods see [this summary](#installation-methods).
 > ```console
 > $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 > ```
+
+
+## Install Compose on Windows Server
+
+Follow these instructions if you are running the Docker daemon and client directly
+on Microsoft Windows Server and want to install Docker Compose.
+
+
+1.  Run a PowerShell as an administrator. 
+When asked if you want to allow this app to make changes to your device, click **Yes** in order to proceed with the installation.
+    
+2.  GitHub now requires TLS1.2. In PowerShell, run the following:
+    
+    ```powershell  
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    ```
+3. Run the following command to download the latest release of Compose ({{site.compose_version}}):
+
+    ```powershell
+    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
+    ```
+
+    > **Note**
+    >
+    > On Windows Server 2019 you can add the Compose executable to `$Env:ProgramFiles\Docker`.
+     Because this directory is registered in the system `PATH`, you can run the `docker-compose --version` 
+     command on the subsequent step with no additional configuration.
+
+    > To install a different version of Compose, substitute `{{site.compose_version}}`
+    > with the version of Compose you want to use.
+
+3.  Test the installation.
+
+    ```console
+    $ docker compose version
+    Docker Compose version {{site.compose_version}}
+    ```
 
