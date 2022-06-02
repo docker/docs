@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 This Quickstart guide shows you how to use Docker Compose to set up and run
-a Rails/PostgreSQL app. Before starting, [install Compose](../compose/install.md).
+a Rails/PostgreSQL app. Before starting, [install Compose](../compose/install/index.md).
 
 ### Define the project
 
@@ -272,7 +272,7 @@ host.
 ## More Compose documentation
 
 - [Docker Compose overview](../compose/index.md)
-- [Install Docker Compose](../compose/install.md)
+- [Install Docker Compose](../compose/install/index.md)
 - [Getting Started with Docker Compose](../compose/gettingstarted.md)
 - [Docker Compose Command line reference](../compose/reference/index.md)
 - [Compose file reference](../compose/compose-file/index.md)

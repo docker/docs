@@ -2760,7 +2760,7 @@ stack.
 ## Compose documentation
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 - [Command line reference](../reference/index.md)

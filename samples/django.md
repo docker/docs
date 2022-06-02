@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting,
-[install Compose](../compose/install.md).
+[install Compose](../compose/install/index.md).
 
 ### Define the project components
 
@@ -286,7 +286,7 @@ In this section, you set up the database connection for Django.
 ## More Compose documentation
 
 - [Docker Compose overview](../compose/index.md)
-- [Install Docker Compose](../compose/install.md)
+- [Install Docker Compose](../compose/install/index.md)
 - [Getting Started with Docker Compose](../compose/gettingstarted.md)
 - [Docker Compose Command line reference](../compose/reference/index.md)
 - [Compose file reference](../compose/compose-file/index.md)
