@@ -19,7 +19,7 @@ So, how do we get started?
 
 If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose!
 Play-with-Docker instances already have Docker Compose installed as well. If you are on
-a Linux machine, you will need to [install Docker Compose](../compose/install.md).
+a Linux machine, you will need to [install Docker Compose](../compose/install/index.md).
 
 After installation, you should be able to run the following and see version information.
 

@@ -76,7 +76,7 @@ Compose has commands for managing the whole lifecycle of your application:
 
 If you rely on using Docker Compose as `docker-compose` (with a hyphen), you can
 set up Compose V2 to act as a drop-in replacement of the previous `docker-compose`.
-Refer to the [Installing Compose](install.md) section for detailed instructions.
+Refer to the [Installing Compose](install/index.md) section for detailed instructions.
 
 ## Context of Docker Compose evolution
 

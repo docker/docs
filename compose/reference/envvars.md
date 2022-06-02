@@ -141,6 +141,6 @@ python client.
 ## Related information
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file reference](../compose-file/index.md)
 - [Environment file](../env-file.md)
