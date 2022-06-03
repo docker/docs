@@ -1390,7 +1390,6 @@ manuals:
       title: Engine 1.13 and earlier
   - path: /engine/deprecated/
     title: Deprecated features
-
   - path: /buildx/working-with-buildx/
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
@@ -1399,13 +1398,20 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
-
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
     title: Overview of Docker Compose
-  - path: /compose/install/
-    title: Install Compose
+  - sectiontitle: Install Compose
+    section:
+      - path: /compose/install/
+        title: Install Docker Compose 
+      - path: /compose/install/compose-desktop/
+        title: Install Compose plugin through Desktop 
+      - path: /compose/install/compose-plugin/
+        title: Install Docker Compose Plugin 
+      - path: /compose/install/uninstall/ 
+        title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
     title: Getting started
   - path: /compose/environment-variables/
