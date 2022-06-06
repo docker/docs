@@ -15,6 +15,34 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.17
+2022-06-06
+
+This release of Docker Engine comes with updated versions of the `compose`,
+`containerd`, and `runc` components, as well as some minor bug fixes.
+
+### Client
+
+- Remove asterisk from docker commands in zsh completion script [docker/cli#3648](https://github.com/docker/cli/pull/3648){:target="_blank" rel="noopener"}.
+
+### Networking
+
+- Fix Windows port conflict with published ports in host mode for overlay [moby/moby#43644](https://github.com/moby/moby/pull/43644){:target="_blank" rel="noopener"}.
+- Ensure performance tuning is always applied to libnetwork sandboxes [moby/moby#43683](https://github.com/moby/moby/pull/43683){:target="_blank" rel="noopener"}.
+
+### Packaging
+
+- Update Docker Compose to [v2.6.0](https://github.com/docker/compose/releases/tag/v2.6.0){:target="_blank" rel="noopener"}.
+- Update containerd (`containerd.io` package) to [v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6),
+  which contains a fix for [CVE-2022-31030](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31030){:target="_blank" rel="noopener"}
+- Update runc version to [v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2), which contains a fix for
+  [CVE-2022-29162](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29162){:target="_blank" rel="noopener"}.
+- Updated Go runtime to [1.17.11](https://go.dev/doc/devel/release#go1.17.minor){:target="_blank" rel="noopener"},
+  which contains fixes for [CVE-2022-30634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30634){:target="_blank" rel="noopener"},
+  [CVE-2022-30629](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30629){:target="_blank" rel="noopener"},
+  [CVE-2022-30580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30580){:target="_blank" rel="noopener"} and
+  [CVE-2022-29804](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29804){:target="_blank" rel="noopener"}
+
 ## 20.10.16
 2022-05-12
 
