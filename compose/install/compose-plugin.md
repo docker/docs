@@ -11,7 +11,7 @@ In this page you can find instructions on how to install Compose Plugin for Dock
 * Windows Server
 
 
-## Compose Prerequisites
+## Compose prerequisites
 
 * Docker Compose requires Docker Engine.
 * Docker Compose plugin requires Docker CLI.
@@ -21,7 +21,7 @@ In this page you can find instructions on how to install Compose Plugin for Dock
 
 In this section you can find various routes for installing Compose in Linux.
 
-### Installation Methods
+### Installation methods
 
 * [Installing Docker Desktop for Linux](../../desktop/linux/install.md/){:target="_blank" rel="noopener" class="_"} is the easiest and recommended installation route. 
 Check the Desktop for Linux [supported platforms](../../desktop/linux/install.md/#supported-platforms){:target="_blank" rel="noopener" class="_"} page to verify the supported Linux distributions and architectures.
@@ -55,7 +55,7 @@ If you have already set up the Docker repository jump to step 2.
 
 2. Update the `apt` package index, and install the _latest version_ of Docker Compose:
 
-> Or, if using a different distro, use the equivalent package manager instructions. 
+    > Or, if using a different distro, use the equivalent package manager instructions. 
 
 
     ```console
@@ -91,7 +91,7 @@ If you have already set up the Docker repository jump to step 2.
     Docker Compose version v2.3.3
     ```
 
-### Install the Plugin manually
+### Install the plugin manually
 
 > **Note**
 >

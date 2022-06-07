@@ -7,12 +7,12 @@ toc_max: 2
 
 In this page you can find a summary of the available options for installing Compose. 
 
-## Compose Prerequisites
+## Compose prerequisites
 
 * Docker Compose requires Docker Engine.
 * Docker Compose plugin requires Docker CLI.
 
-## Compose Installation Scenarios
+## Compose installation scenarios
 You can run Compose on macOS, Windows, and 64-bit Linux. Check what installation scenario fits your needs. 
 
 Are you looking to:
@@ -20,9 +20,9 @@ Are you looking to:
 * __Get latest Compose and its prerequisites right of the bat__:
 [Install Docker Desktop for your platform](./compose-desktop.md). This is the fastest route and you get Docker Engine and Docker CLI with the Compose plugin. Docker Desktop is available for Mac, Windows and Linux.
 
-* __Install Compose plug in:__
+* __Install Compose plugin:__
   + __(Mac, Win, Linux) Docker Desktop__: If you have Desktop installed then you already have the Compose plugin installed.
-  + __Linux systems__: To install the Docker CLI's Compose plugin,s use one of these methods of installation: 
+  + __Linux systems__: To install the Docker CLI's Compose plugins use one of these methods of installation: 
      + Using the [convenience scripts](../../../engine/install/#server){: target="_blank" rel="noopener" class="_"} offered per Linux distro from the Engine install section.
      + [Setting up Docker's repository](compose-plugin#install-using-the-repository) and using it to install the compose plugin package.     
      + Other scenarios, check the [Linux install](compose-plugin#installing-compose-on-linux-systems).
