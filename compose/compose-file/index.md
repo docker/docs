@@ -427,7 +427,7 @@ cgroup_parent: m-executor-abcd
 
 ### command
 
-`command` overrides the the default command declared by the container image (i.e. by Dockerfile's `CMD`).
+`command` overrides the default command declared by the container image (i.e. by Dockerfile's `CMD`).
 
 ```
 command: bundle exec thin -p 3000
