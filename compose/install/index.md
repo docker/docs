@@ -17,12 +17,12 @@ You can run Compose on macOS, Windows, and 64-bit Linux. Check what installation
 
 Are you looking to:
 
-* __Get latest Compose and its prerequisites right of the bat__:
+* __Get latest Compose and its prerequisites right off the bat__:
 [Install Docker Desktop for your platform](compose-desktop.md). This is the fastest route and you get Docker Engine and Docker CLI with the Compose plugin. Docker Desktop is available for Mac, Windows and Linux.
 
 * __Install Compose plug in:__
   + __(Mac, Win, Linux) Docker Desktop__: If you have Desktop installed then you already have the Compose plugin installed.
-  + __Linux systems__: To install the Docker CLI's Compose plugin,s use one of these methods of installation: 
+  + __Linux systems__: To install the Docker CLI's Compose plugin, use one of these methods of installation: 
      + Using the [convenience scripts](../../engine/install/index.md#server){: target="_blank" rel="noopener" class="_"} offered per Linux distro from the Engine install section.
      + [Setting up Docker's repository](compose-plugin#install-using-the-repository) and using it to install the compose plugin package.     
      + Other scenarios, check the [Linux install](compose-plugin#installing-compose-on-linux-systems).
