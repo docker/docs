@@ -173,30 +173,109 @@ To invite a member to the **members** team in your organization:
 
 ## Step 4: Enforce sign in for Docker Desktop
 
-At this point, your users can sign in to Docker Desktop on their machines using any Docker account, including accounts that are not a member of your Docker organization. You can force your users to sign in to a Docker account that is a member of your organization.
+By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the
+organization’s settings apply to the user’s session, you can use a `registry.json` file.
 
-Enforcing sign in is not required, but it does offer the following benefits:
-   - Allows you to configure features such as [Image Access Management](../docker-hub/image-access-management.md) and [Registry Access Management](../docker-hub/registry-access-management.md).
-   - Authenticated users get a higher pull rate limit compared to anonymous users.
-   - Blocks users from accessing Docker Desktop until they are added to your organization.
+The `registry.json` file is a configuration file that allows administrators to specify the Docker organization the user must belong to and ensure that the organization’s settings apply to the user’s session. The Docker Desktop installer can create this file on the users’ machines as part of the installation process.
 
-To enforce sign in, first inform your users that they must sign in to Docker Desktop using only their Docker account that is a member of your organization, and then you need to create a `registry.json` file on each user's computer with the following contents, where `myorg` is replaced with your organization's name.
+After a `registry.json` file is configured on a user’s machine, Docker Desktop prompts the user to sign in. If a user doesn’t sign in, or tries to sign in using a different organization, other than the organization listed in the `registry.json` file, they will be denied access to Docker Desktop.
 
-   ```console
-   {
-      "allowedOrgs":["myorg"]
-   }
-   ```
+Deploying a `registry.json` file and forcing users to authenticate is not required, but offers the following benefits:
 
-Based on your users' operating systems, you must create the registry.json file at:
-- Mac: `/Library/Application Support/com.docker.docker/registry.json`
-- Windows: `/ProgramData/DockerDesktop/registry.json`
+ - Allows administrators to configure features such as [Image Access Management](image-access-management.md) which allows team members to:
+    - Only have access to Trusted Content on Docker Hub
+    - Pull only from the specified categories of images
+- Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](download-rate-limit.md).
+- Blocks users from accessing Docker Desktop until they are added to a specific organization.
 
-> **Note**
->
-> Ensure that only administrators have permission to modify the registry.json file. Users should not be able to edit the file.
+### Create a registry.json file
 
-The Docker Desktop installer can create this file as part of the installation process or you can use other methods to deploy this file. For more details and examples of different ways to create the registry.json file, see [Create a registry.json file](../docker-hub/configure-sign-in.md/#create-a-registryjson-file){: target="_blank" rel="noopener" class="_"}
+Before creating a `registry.json` file, ensure that the user is a member of
+your organization in Docker Hub.
+
+Based on the user's operating system, you must create a `registry.json` file at the following location and ensure that the file can't be edited by the user:
+   - Windows: `/ProgramData/DockerDesktop/registry.json`
+   - Mac: `/Library/Application Support/com.docker.docker/registry.json`
+
+The `registry.json` file must contain the following contents, where `myorg` is replaced with your organization's name.
+
+```json
+{
+   "allowedOrgs":["myorg"]
+}
+```
+
+You can use the following methods to create a `registry.json` file based on the user's operating system.
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#windows">Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac">Mac</a></li>
+</ul>
+<div class="tab-content">
+<div id="windows" class="tab-pane fade in active" markdown="1">
+
+
+#### Windows
+
+On Windows, you can use the following methods to create a `registry.json` file.
+
+
+##### Create registry.json when installing Docker Desktop on Windows
+
+To automatically create a `registry.json` file when installing Docker Desktop, download `Docker Desktop Installer.exe` and run one of the following commands from the directory containing `Docker Desktop Installer.exe`. Replace `myorg` with your organization's name.
+
+If you're using PowerShell:
+
+```powershell
+PS> Start-Process '.\Docker Desktop Installer.exe' -Wait install --allowed-org=myorg
+```
+
+If you're using the Windows Command Prompt:
+
+```console
+C:\Users\Admin> "Docker Desktop Installer.exe" install --allowed-org=myorg
+```
+
+##### Create registry.json manually on Windows
+
+To manually create a `registry.json` file, run the following PowerShell command as an Admin and replace `myorg` with your organization's name:
+
+```powershell
+PS>  Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myorg"]}'
+```
+
+This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
+
+</div>
+<div id="mac" class="tab-pane fade" markdown="1">
+
+#### Mac
+
+On Mac, you can use the following methods to create a `registry.json` file.
+
+
+#####  Create registry.json when installing Docker Desktop on Mac
+
+To automatically create a registry.json file when installing Docker Desktop, download `Docker.dmg` and run the following commands in a terminal from the directory containing `Docker.dmg`. Replace `myorg` with your organization's name.
+
+```bash
+$ sudo hdiutil attach Docker.dmg 
+$ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg
+$ sudo hdiutil detach /Volumes/Docker
+```
+
+#####  Create registry.json manually on Mac
+
+To manually create a `registry.json` file, run the following commands in a terminal and replace `myorg` with your organization's name.
+
+```bash
+$ sudo touch /Library/Application Support/com.docker.docker/registry.json
+$ sudo echo '{"allowedOrgs":["myorg"]}' >> /Library/Application Support/com.docker.docker/registry.json
+```
+
+This creates the `registry.json` file at `/Library/Application Support/com.docker.docker/registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
+
+</div></div>
 
 ## What's next
 

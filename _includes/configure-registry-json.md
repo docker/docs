@@ -2,12 +2,12 @@
 
 ## Create a registry.json file
 
-When creating a `registry.json` file, ensure that the developer is a member of
+Before creating a `registry.json` file, ensure that the user is a member of
 at least one organization in Docker Hub. If the `registry.json` file matches at
-least one organization the developer is a member of, they can sign in to Docker
+least one organization the user is a member of, they can sign in to Docker
 Desktop and access all their organizations.
 
-Based on the developer's operating system, you must create a `registry.json` file at the following location and make sure the file can't be edited by the developer:
+Based on the user's operating system, you must create a `registry.json` file at the following location and make sure the file can't be edited by the user:
    - Windows: `/ProgramData/DockerDesktop/registry.json`
    - Mac: `/Library/Application Support/com.docker.docker/registry.json`
 
@@ -19,7 +19,7 @@ The `registry.json` file must contain the following contents, where `myorg` is r
 }
 ```
 
-You can use the following methods to create a `registry.json` file based on the developer's operating system.
+You can use the following methods to create a `registry.json` file based on the user's operating system.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows">Windows</a></li>
@@ -58,7 +58,7 @@ To manually create a `registry.json` file, run the following PowerShell command 
 PS>  Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myorg"]}'
 ```
 
-This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the individual developer, only by the administrator.
+This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
 
 </div>
 <div id="mac" class="tab-pane fade" markdown="1">
@@ -87,6 +87,6 @@ $ sudo touch /Library/Application Support/com.docker.docker/registry.json
 $ sudo echo '{"allowedOrgs":["myorg"]}' >> /Library/Application Support/com.docker.docker/registry.json
 ```
 
-This creates the `registry.json` file at `/Library/Application Support/com.docker.docker/registry.json` and includes the organization information the developer belongs to. Make sure this file can't be edited by the individual developer, only by the administrator.
+This creates the `registry.json` file at `/Library/Application Support/com.docker.docker/registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
 
 </div></div>
