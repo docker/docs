@@ -4,20 +4,20 @@ keywords: authentication, registry.json, configure,
 title: Configure registry.json to enforce sign in
 ---
 
-The `registry.json` file is a configuration file that allows administrators to
-specify the Docker organization the user must belong to and ensure that the
-organization’s settings apply to the user’s session. The Docker Desktop installer
-can create this file and deploy it to the users’ machines as part of the installation
-process.
+By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the
+organization’s settings apply to the user’s session, you can use a `registry.json` file.
 
-After you deploy a `registry.json` file to a user’s machine, it prompts the user to sign into Docker Desktop. If a user doesn’t sign in, or tries to sign in using a different organization, other than the organization listed in the `registry.json` file, they will be denied access to Docker Desktop.
-Deploying a `registry.json` file and forcing users to authenticate offers the following benefits:
+The `registry.json` file is a configuration file that allows administrators to specify the Docker organization the user must belong to and ensure that the organization’s settings apply to the user’s session. The Docker Desktop installer can create this file on the users’ machines as part of the installation process.
 
-1. Allows administrators to configure features such as [Image Access Management](image-access-management.md) which allows team members to:
+After a `registry.json` file is configured on a user’s machine, Docker Desktop prompts the user to sign in. If a user doesn’t sign in, or tries to sign in using a different organization, other than the organization listed in the `registry.json` file, they will be denied access to Docker Desktop.
+
+Deploying a `registry.json` file and forcing users to authenticate is not required, but offers the following benefits:
+
+ - Allows administrators to configure features such as [Image Access Management](image-access-management.md) which allows team members to:
     - Only have access to Trusted Content on Docker Hub
     - Pull only from the specified categories of images
-2. Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](download-rate-limit.md).
-3. Blocks users from accessing Docker Desktop until they are added to a specific organization.
+- Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](download-rate-limit.md).
+- Blocks users from accessing Docker Desktop until they are added to a specific organization.
 
 {% include configure-registry-json.md %}
 
