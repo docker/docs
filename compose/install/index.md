@@ -5,7 +5,7 @@ title: Install Docker Compose
 toc_max: 2
 ---
 
-In this page you can find a summary of the available options for installing Compose. 
+On this page you can find a summary of the available options for installing Docker Compose. 
 
 ## Compose prerequisites
 
@@ -17,7 +17,7 @@ You can run Compose on macOS, Windows, and 64-bit Linux. Check what installation
 
 Are you looking to:
 
-* __Get latest Compose and its prerequisites right of the bat__:
+* __Get latest Docker Compose and its prerequisites__:
 [Install Docker Desktop for your platform](./compose-desktop.md). This is the fastest route and you get Docker Engine and Docker CLI with the Compose plugin. Docker Desktop is available for Mac, Windows and Linux.
 
 * __Install Compose plugin:__
