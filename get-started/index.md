@@ -101,13 +101,15 @@ For Docker Desktop installation instructions, see:
 If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
 
 ```console
-$ docker run -d -p 80:80 docker/getting-started
+$ docker run -d -p 8080:80 docker/getting-started
 ```
+
+You're now be able to go to `localhost:8080` on your browser and view the tutorial there.
 
 You'll notice a few flags being used. Here's some more info on them:
 
 - `-d` - run the container in detached mode (in the background)
-- `-p 80:80` - map port 80 of the host to port 80 in the container
+- `-p 8080:80` - map port 8080 of the host to port 80 in the container
 - `docker/getting-started` - the image to use
 
 > **Tip**
@@ -116,7 +118,7 @@ You'll notice a few flags being used. Here's some more info on them:
 > As an example, the command above could be written as:
 >
 > ```console
-> $ docker run -dp 80:80 docker/getting-started
+> $ docker run -dp 8080:80 docker/getting-started
 > ```
 
 ## The Docker Dashboard
