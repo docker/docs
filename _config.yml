@@ -127,7 +127,6 @@ fetch-remote:
           - "docs/deprecated.md"
       - dest: "engine/reference"
         src:
-          - "docs/reference/builder.md"
           - "docs/reference/run.md"
       - dest: "engine/reference/commandline"
         src:
@@ -167,3 +166,10 @@ fetch-remote:
       - dest: "registry"
         src:
           - "docs/configuration.md"
+
+  - repo: "https://github.com/crazy-max/buildkit" # FIXME: Use https://github.com/moby/buildkit
+    ref: "dockerfile-ref" # FIXME: Use master
+    paths:
+      - dest: "dockerfile"
+        src:
+          - "frontend/dockerfile/docs/**"
