@@ -23,16 +23,14 @@ Are you looking to:
 * __Install Compose plugin:__
   + __(Mac, Win, Linux) Docker Desktop__: If you have Desktop installed then you already have the Compose plugin installed.
   + __Linux systems__: To install the Docker CLI's Compose plugins use one of these methods of installation: 
-     + Using the [convenience scripts](../../../engine/install/#server){: target="_blank" rel="noopener" class="_"} offered per Linux distro from the Engine install section.
+     + Using the [convenience scripts](../../engine/install/#server){: target="_blank" rel="noopener" class="_"} offered per Linux distro from the Engine install section.
      + [Setting up Docker's repository](compose-plugin#install-using-the-repository) and using it to install the compose plugin package.     
      + Other scenarios, check the [Linux install](compose-plugin#installing-compose-on-linux-systems).
   + __Windows Server__: If you want to run the Docker daemon and client directly on Microsoft Windows Server, follow the [Windows Server install instructions](compose-plugin#install-compose-on-windows-server).
 
-
 ## Where to go next
 
-- [User guide](index.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [Getting Started](../gettingstarted.md)
+- [Command line reference](../../reference/index.md)
+- [Compose file reference](../compose-file/index.md)
+- [Sample apps with Compose](../samples-for-compose.md)
