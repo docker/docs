@@ -1082,8 +1082,26 @@ reference:
         title: ExecResultV0
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
         title: BackendV0  
-- title: Dockerfile reference
-  path: /engine/reference/builder/
+
+- sectiontitle: Dockerfile reference
+  section:
+    - path: /dockerfile/reference/
+      title: Dockerfile specification
+    - sectiontitle: BuildKit Dockerfile syntax
+      section:
+        - path: /dockerfile/buildkit-syntax/
+          title: Overview
+        - path: /dockerfile/buildkit-syntax/copy-link/
+          title: Linked copies
+        - path: /dockerfile/buildkit-syntax/run-mount/
+          title: Build mounts
+        - path: /dockerfile/buildkit-syntax/run-network/
+          title: Network modes
+        - path: /dockerfile/buildkit-syntax/heredocs/
+          title: Here-Documents
+        - path: /dockerfile/buildkit-syntax/run-security/
+          title: Security context
+
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/
