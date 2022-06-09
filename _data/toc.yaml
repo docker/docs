@@ -1400,6 +1400,12 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
+
+- sectiontitle: Docker Build
+  section:
+    - path: /build/
+      title: Overview
+
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
