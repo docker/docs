@@ -6,22 +6,14 @@ toc_max: 3
 title: Install Docker Compose CLI plugin
 ---
 
-In this page you can find instructions on how to install Compose Plugin for Docker CLI in: 
-* Linux
-* Windows Server
-
-
-## Compose Prerequisites
-
-* Docker Compose requires Docker Engine.
-* Docker Compose plugin requires Docker CLI.
-
+On this page you can find instructions on how to install the Compose plugin for Docker CLI on Linux and Windows Server operating systems.
+>Note that installing Docker Compose as a plugin requires Docker CLI.
 
 ## Installing Compose on Linux systems
 
-In this section you can find various routes for installing Compose in Linux.
+In this section, you can find various methods for installing Compose on Linux.
 
-### Installation Methods
+### Installation methods
 
 * [Installing Docker Desktop for Linux](../../desktop/linux/install.md/){:target="_blank" rel="noopener" class="_"} is the easiest and recommended installation route. 
 Check the Desktop for Linux [supported platforms](../../desktop/linux/install.md/#supported-platforms){:target="_blank" rel="noopener" class="_"} page to verify the supported Linux distributions and architectures.
@@ -31,12 +23,11 @@ The following other methods are possible:
 
 * __Using the automated convenience scripts__ (for testing and development environments). 
 These scripts install Docker Engine and Docker CLI with the Compose plugin. 
-For this route, go to the [Docker Engine install](../../../engine/install/){:target="_blank" rel="noopener" class="_"} 
-page and follow the provided instructions. _After Desktop for Linux this is the recommended route._
+For this route, go to the [Docker Engine install](../../../engine/install/){:target="_blank" rel="noopener" class="_"} page and follow the provided instructions. _After installing Desktop for Linux, this is the recommended route._
 
-* __Setting up Docker's repository__ and using it to install Docker CLI Compose plugin. See the [Install using the repository](#install-using-the-repository) section in this page. _This is the second best route._
+* __Setting up Docker's repository__ and using it to install Docker CLI Compose plugin. See the [Install using the repository](#install-using-the-repository) section on this page. _This is the second best route._
 
-* __Installing the Docker CLI Compose plugin binary manually__. See the [Install the plugin manually](#install-the-plugin-manually) section in this page. _Note that this option requires you to manage upgrades manually as well._ 
+* __Installing the Docker CLI Compose plugin manually__. See the [Install the plugin manually](#install-the-plugin-manually) section on this page. _Note that this option requires you to manage upgrades manually as well._ 
 
 
 ### Install using the repository
@@ -51,11 +42,11 @@ For other Linux installation methods see [this summary](#installation-methods).
 
 If you have already set up the Docker repository jump to step 2.
 
-1. Set up the repository. Go to the "Set up the repository" section of the chosen [Linux distribution](../../engine/install/index.md#server){:target="_blank" rel="noopener" class="_"}. found in the Docker Engine installation pages to check the instructions.
+1. Set up the repository. Go to the "Set up the repository" section of the chosen [Linux distribution](../../engine/install/index.md#server){:target="_blank" rel="noopener" class="_"}. found on the Docker Engine installation pages to check the instructions.
 
 2. Update the `apt` package index, and install the _latest version_ of Docker Compose:
 
-> Or, if using a different distro, use the equivalent package manager instructions. 
+    > Or, if using a different distro, use the equivalent package manager instructions. 
 
 
     ```console
@@ -91,7 +82,7 @@ If you have already set up the Docker repository jump to step 2.
     Docker Compose version v2.3.3
     ```
 
-### Install the Plugin manually
+### Install the plugin manually
 
 > **Note**
 >
@@ -110,10 +101,10 @@ If you have already set up the Docker repository jump to step 2.
     $ curl -SL https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
     ```
 
-    This command downloads the latest release of Docker Compose (from the Compose releases repository) and installs Compose for _the active user_ under `$HOME` directory. 
+    This command downloads the latest release of Docker Compose (from the Compose releases repository) and installs Compose for the active user under `$HOME` directory.
     
     > To install:
-    >* Docker Compose for _all users_ on your system, replace `~/.docker/ cli-plugins` with `/usr/local/lib/docker/cli-plugins`.
+    >* Docker Compose for _all users_ on your system, replace `~/.docker/cli-plugins` with `/usr/local/lib/docker/cli-plugins`.
     >* A different version of Compose, substitute `{{site.compose_version}}` with the version of Compose you want to use.
 
 2. Apply executable permissions to the binary:
