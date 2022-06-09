@@ -13,14 +13,6 @@ redirect_from:
 This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine.
 
-> **Note:**
->
-> The client and container runtime are now in separate packages from the daemon
-> in Docker Engine 18.09. Users should install and update all three packages at
-> the same time to get the latest patch releases. For example, on Ubuntu:
-> `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install
-> instructions for the corresponding linux distro for details.
-
 # Version 20.10
 
 ## 20.10.16

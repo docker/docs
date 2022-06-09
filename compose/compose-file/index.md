@@ -1613,7 +1613,7 @@ web:
 
 ### scale
 
--DEPRECATED: use [deploy/replicas](deploy.md#replicas)_
+_DEPRECATED: use [deploy/replicas](deploy.md#replicas)_
 
 `scale` specifies the default number of containers to deploy for this service.
 
@@ -2501,7 +2501,7 @@ for complex elements, interpolation MUST be applied _before_ merge on a per-file
 ## Compose documentation
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 - [Enabling GPU access with Compose](../gpu-support.md)

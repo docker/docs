@@ -1270,6 +1270,8 @@ manuals:
               path: /desktop/extensions-sdk/dev/cli/usage/
             - title: Build, test and install an extension
               path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
+            - title: OAuth 2.0 flow
+              path: /desktop/extensions-sdk/dev/oauth2-flow/
         - sectiontitle: Publishing extensions
           section:
             - title: Metadata
@@ -1513,6 +1515,12 @@ manuals:
 
 - sectiontitle: Administration
   section:
+  - sectiontitle: Onboarding
+    section:
+    - path: /docker-hub/onboard-business/
+      title: Get started with Business
+    - path: /docker-hub/onboarding-faqs/
+      title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
   - path: /docker-hub/configure-sign-in/
@@ -1525,8 +1533,8 @@ manuals:
          title: FAQs
   - path: /docker-hub/image-access-management/
     title: Image Access Management
-  - path: /docker-hub/onboarding-faqs/
-    title: Onboarding FAQs
+  - path: /docker-hub/registry-access-management/
+    title: Registry Access Management
 
 - sectiontitle: Security
   section:

@@ -5,7 +5,7 @@ title: Sample apps with Compose
 ---
 
 The following samples show the various aspects of how to work with Docker
-Compose. As a prerequisite, be sure to [install Docker Compose](install.md)
+Compose. As a prerequisite, be sure to [install Docker Compose](install/index.md)
 if you have not already done so.
 
 ## Key concepts these samples cover

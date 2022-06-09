@@ -5,7 +5,7 @@
 
 # Use same ruby version as the one in .ruby-version
 # that is used by Netlify
-ARG RUBY_VERSION=2.6.10
+ARG RUBY_VERSION=2.7.6
 # Same as the one in Gemfile.lock
 ARG BUNDLER_VERSION=2.3.13
 
@@ -76,6 +76,11 @@ RUN --mount=type=bind,from=generate,source=/out,target=_site \
     --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" \
     --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" \
     --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/"
+
+# mdl is a lint tool for markdown files
+FROM gem AS mdl
+RUN --mount=type=bind,target=. \
+  mdl --rules .mdlrc.style.rb .
 
 # Release the generated files in a scratch image
 # Can be output to your host with:

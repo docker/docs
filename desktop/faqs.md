@@ -20,6 +20,7 @@ By default, Docker Desktop is installed at the following location:
 
 - On Mac: `/Applications/Docker.app`
 - On Windows: `C:\Program Files\Docker\Docker`
+- On Linux: `/opt/docker-desktop`
 
 ### Do I need to pay to use Docker Desktop?
 

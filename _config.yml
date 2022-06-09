@@ -3,28 +3,32 @@
 #
 # This file overrides options set in _config.yml for production / deploy
 ##
+
 name: Docker Documentation
+
 markdown: kramdown
-kramdown:
-  input: GFM
-  gfm_quirks: [paragraph_end, no_auto_typographic]
-  html_to_native: true
-  hard_wrap: false
-  syntax_highlighter: rouge
-  toc_levels: 2..3
+highlighter: rouge
 incremental: true
 permalink: pretty
 safe: false
 lsi: false
 
+# https://kramdown.gettalong.org/options.html
+# https://github.com/kramdown/parser-gfm/blob/master/lib/kramdown/parser/gfm/options.rb
+kramdown:
+  input: GFM
+  gfm_quirks: [paragraph_end, no_auto_typographic]
+  hard_wrap: false
+  html_to_native: true
+  syntax_highlighter: rouge
+  toc_levels: 2..3
+
 exclude:
   - _samples
   - _scripts
-  - 404.html
   - datacenter
   - docker-bake.hcl
   - ee
-  - index.html
   - js/metadata.json
   - LICENSE
   - Makefile
@@ -41,7 +45,7 @@ compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
-compose_switch_version:  "1.0.4"
+compose_switch_version: "1.0.4"
 
 # Options for displaying minimum API version requirements in the reference pages.
 #
@@ -145,13 +149,6 @@ fetch-remote:
           - "docs/*.md"
           - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
-
-  - repo: "https://github.com/docker/extensions-sdk"
-    ref: "main"
-    paths:
-      - dest: "desktop/extensions-sdk"
-        src:
-          - "docs/**"
 
   - repo: "https://github.com/distribution/distribution"
     ref: "release/2.7"

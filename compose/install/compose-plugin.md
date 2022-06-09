@@ -23,8 +23,7 @@ The following other methods are possible:
 
 * __Using the automated convenience scripts__ (for testing and development environments). 
 These scripts install Docker Engine and Docker CLI with the Compose plugin. 
-For this route, go to the [Docker Engine install](../../../engine/install/){:target="_blank" rel="noopener" class="_"} 
-page and follow the provided instructions. _After installing Desktop for Linux, this is the recommended route._
+For this route, go to the [Docker Engine install](../../../engine/install/){:target="_blank" rel="noopener" class="_"} page and follow the provided instructions. _After installing Desktop for Linux, this is the recommended route._
 
 * __Setting up Docker's repository__ and using it to install Docker CLI Compose plugin. See the [Install using the repository](#install-using-the-repository) section on this page. _This is the second best route._
 
