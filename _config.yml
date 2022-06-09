@@ -150,6 +150,17 @@ fetch-remote:
           - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
 
+  - repo: "https://github.com/crazy-max/buildx" # FIXME: Use https://github.com/docker/buildx
+    ref: "bake-docs" # FIXME: Use master
+    paths:
+      - dest: "build/guides"
+        src:
+          - "docs/guides/*.md"
+          - "!docs/guides/cicd.md" # CI/CD documentation is already handled in ci-cd/github-actions
+      - dest: "build/bake"
+        src:
+          - "docs/guides/bake/**"
+
   - repo: "https://github.com/docker/extensions-sdk"
     ref: "main"
     paths:
