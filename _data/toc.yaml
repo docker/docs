@@ -1271,7 +1271,7 @@ manuals:
             - title: Build, test and install an extension
               path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
             - title: OAuth 2.0 flow
-              path: /desktop/extensions-sdk/dev/oauth2-flow              
+              path: /desktop/extensions-sdk/dev/oauth2-flow/
         - sectiontitle: Publishing extensions
           section:
             - title: Metadata
