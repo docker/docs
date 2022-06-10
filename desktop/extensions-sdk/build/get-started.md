@@ -1,5 +1,7 @@
 ---
-title: Step one: Get started
+title: Step one - Get started
+description: test
+keywords: tesdt
 redirect_from: 
 - desktop/extensions-sdk/tutorials/initialize/
 ---

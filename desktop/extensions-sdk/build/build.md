@@ -1,5 +1,7 @@
 ---
-title: Step three: build
+title: Step three - build
+description: test
+keywords: test
 redirect_from:
 - /desktop/extensions-sdk/extensions/multi-arch/
 - /desktop/extensions-sdk/dev/cli/build-test-install-extension/
@@ -143,3 +145,4 @@ Although Docker Extensions is supported on Docker Desktop for Windows, Mac, and 
 
 ## What's next?
  Learn how to [validate and install](validate-install.md) your extension.
+ 

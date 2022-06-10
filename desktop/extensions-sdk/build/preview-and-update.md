@@ -1,5 +1,7 @@
 ---
-title: Step five: preview and update
+title: Step five - preview and update
+description: test
+keywords: test
 ---
 
 Once your extension has been validated and installed, you can preview your extension in Docker Desktop. 

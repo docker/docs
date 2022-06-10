@@ -1,5 +1,7 @@
 ---
 title: publish
+description: test
+keywords: test
 --- 
 
 ## Publish your extension

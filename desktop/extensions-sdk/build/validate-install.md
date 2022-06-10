@@ -1,5 +1,7 @@
 ---
-title: Step four: validate and install
+title: Step four - validate and install
+description: test
+keywords: test
 redirect_from: 
 - /desktop/extensions-sdk/extensions/validation/
 - /desktop/extensions-sdk/dev/cli/build-test-install-extension/
