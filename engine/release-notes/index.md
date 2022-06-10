@@ -18,7 +18,7 @@ for Docker Engine.
 ## 20.10.17
 2022-06-06
 
-This release of Docker Engine comes with updated versions of the Docker Compose and the
+This release of Docker Engine comes with updated versions of Docker Compose and the
 `containerd`, and `runc` components, as well as some minor bug fixes.
 
 ### Client
