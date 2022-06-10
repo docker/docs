@@ -1,23 +1,17 @@
 ---
-title: Minimal backend extension tutorial
+title: Set up a minimal backend extension 
 description: Minimal backend extension tutorial
-keywords: Docker, extensions, sdk, tutorial
+keywords: Docker, extensions, sdk, build
 redirect_from:
 - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
 ---
 
-Learn how to create a simple Docker Extension that runs CLI commands in the backend.
+Set up a simple Docker Extension that runs CLI commands in the backend.
 
 For extensions with a backend service running REST services over sockets or named pipes, see the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples).
 
-## Prerequisites
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Docker Extensions CLI](https://github.com/docker/extensions-sdk/releases/)
 
 ## Extension folder structure
-
-A Docker extension is made of several files which range from the extension's source code to the required extension-specific files.
 
 In the `minimal-backend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples), you can find a ready-to-go example that represents a UI extension built on HTML that runs a backend service. We will go through this code example in this tutorial.
 
@@ -33,16 +27,21 @@ Although you can start from an empty directory, it is highly recommended that yo
 │       └── ... React aplication
 ├── hello.sh # (3)
 └── metadata.json # (4)
+└── ui # (5)
+    └── index.html
 ```
 
 1. Contains everything required to build the extension and run it in Docker Desktop.
 2. The source folder that contains the UI application. In this example we use a React frontend, the main part of th extension is an App.tsx.
 3. The script that runs inside the container.
 4. A file that provides information about the extension such as the name, description, and version.
+5. The source folder that contains all your HTML, CSS and JS files. There can also be other static assets such as logos and icons. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
+
+If you want to set up user authentication for the extension, see [Authentication](../../dev/oauth2-flow.md).
 
 ## Invoke the extension backend from your javascript code
 
-Let's reuse the React extension from the [React extension tutorial](./react-extension.md), and see how we can invoke our extension backend from the App.tsx file.
+Using the [React extension example](./react-extension.md), we can invoke our extension backend from the App.tsx file.
 
 Use the Docker Desktop Client object and then invoke a binary provided in our backend container (that lives inside the Docker Desktop VM) with `ddClient.docker.extension.vm.cli.exec()`.
 In our example, our hello.sh script returns a string as result, we obtain it with `result?.stdout`.
@@ -60,8 +59,6 @@ async function runExtensionBackend(inputText: string) {
 ```
 
 ## Create a Dockerfile
-
-An extension requires a `Dockerfile` to build, publish, and run the extension in Docker Desktop.
 
 At minimum, your Dockerfile needs:
 
@@ -107,121 +104,16 @@ A `metadata.json` file is required at the root of the image filesystem.
 }
 ```
 
-> Do not replace the `${DESKTOP_PLUGIN_IMAGE}` placeholder in the `metadata.json` file. The placeholder is replaced automatically with the correct image name when the extension is installed.
+For more information on the `metadata.json`, see [Metadata](../../extensions/METADATA.md).
 
-## Build the extension
-
-To build the extension, run:
-
-```bash
-docker build -t desktop-backend-minimal-extension:0.0.1 .
-```
-
-### Build the extension for multiple platforms
-
-To build the extension for multiple platforms, run:
-
-```bash
-docker buildx build --platform=linux/amd64,linux/arm64 -t desktop-backend-minimal-extension:0.0.1 .
-```
-
-## Validate the extension
-
-Verify the extension image is compliant.
-
-The validation checks if the extension's `Dockerfile` specifies all the required labels and if the metadata file is valid against the JSON schema file.
-
-```bash
-docker extension validate desktop-backend-minimal-extension:0.0.1
-```
-
-If your extension is valid, the message below displays:
-
-`The extension image "desktop-backend-minimal-extension:0.0.1" is valid`.
-
-## Install the extension
-
-To install the extension in Docker Desktop, run:
-
-```bash
-docker extension install desktop-backend-minimal-extension:0.0.1
-```
-
-If the installation is successful, the output below displays:
-
-```bash
-Installing new extension "hello-backend" with desktop-backend-minimal-extension:0.0.1 ...
-Installing service in Desktop VM...
-Setting additional compose attributes
-VM service started
-Installing Desktop extension UI for tab "Hello Backend Extension"...
-Extension UI tab "Hello Backend Extension" added.
-Extension "hello-backend" installed successfully
-```
-
-## Preview the extension
-
-You can also enter the command below to verify the extension installed successfully:
-
-```bash
-docker extension ls
-```
-
-It outputs all the extensions installed:
-
-```bash
-PLUGIN              PROVIDER            IMAGE                           UI                      VM      HOST
-hello-backend       Docker Inc.         desktop-backend-minimal-extension:0.0.1   1 tab(Hello Backend Extension)   Running(1)          -
-```
-
-To preview the extension in Docker Desktop, close and open the Docker Desktop dashboard once the installation has completed.
-
-The left-hand menu displays a new tab with name `Hello Backend Extension`. When you select the new tab, the result below is rendered.
-
-![Backend Hello Extension](images/backend-minimal-extension.png)
-
-## Publish the extension
-
-To publish the extension, upload the Docker image to [DockerHub](https://hub.docker.com).
-
-Tag the previous image to prepend the account owner at the beginning of the image name:
-
-```bash
-docker tag desktop-backend-minimal-extension:0.0.1 owner/desktop-backend-minimal-extension:0.0.1
-```
-
-Push the image to DockerHub:
-
-```bash
-docker push owner/desktop-backend-minimal-extension:0.0.1
-```
-
-> Publishing extensions in the marketplace
+> **Warning**
 >
-> For Docker Extensions images to be listed in Docker Desktop, they must be approved by Docker and be tagged following semantic versioning, e.g: `0.0.1`.
->
-> See [distribution and new releases](../extensions/DISTRIBUTION.md#distribution-and-new-releases) for more information.
->
-> See <a href="https://semver.org/" target="__blank">semver.org</a> to learn more about semantic versioning.
+>Do not replace the `${DESKTOP_PLUGIN_IMAGE}` placeholder in the `metadata.json` file. The placeholder is replaced automatically with the correct image name when the extension is installed.
+{: .warning}
 
-> Having trouble to push the image?
->
-> Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
 
-## Clean up
+## What's next?
 
-To remove the extension, run:
+Learn how to [build and install your extension](../build-install.md).
 
-```bash
-docker extension rm hello-backend
-```
 
-The following output displays:
-
-```bash
-Removing extension hello-backend...
-Removing extension VM service...
-Extension removed from Desktop VM
-Extension UI tab Hello Backend Extension removed
-Extension "hello-backend" removed
-```
