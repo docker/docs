@@ -2,6 +2,8 @@
 title: OAuth 2.0 flow
 description: Docker extension OAuth 2.0 flow
 keywords: Docker, extensions, sdk, OAuth 2.0
+redirect_from: 
+- /desktop/extensions-sdk/dev/oauth2-flow/
 ---
 
 > Note
@@ -18,7 +20,7 @@ The Authorization Code grant type is used by confidential and public clients to 
 
 After the user returns to the client via the redirect URL, the application gets the authorization code from the URL and uses it to request an access token.
 
-![oauth2-flow](./images/oauth2-flow.png){: style=width:80% }
+![oauth2-flow](images/oauth2-flow.png){: style=width:80% }
 
 The image above shows that:
 - The Docker Extension asks the user to authorize access to their data.
@@ -107,3 +109,6 @@ It is highly recommended that you use an external source of storage to store the
 >
 > Storing the access token in a client's localStorage is a security risk as that storage is currently shared amongst all extensions.
 {: .warning}
+
+## What's next 
+Learn how to [publish and distribute your extension](../extensions/Overview.md)

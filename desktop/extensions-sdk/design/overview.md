@@ -8,11 +8,11 @@ Our Design System is a constantly evolving set of specifications that aim to ens
 
 We require extensions to match the wider Docker Desktop UI to a certain degree, and reserve the right to make this stricter in the future.
 
-To get started on your UI, follow the below steps.
+To get started on your UI, follow the steps below.
 
 ## 1. Choose your framework
 
-### Preferred: React+MUI, using our theme
+### Recommended: React+MUI, using our theme
 
 Docker Desktop's UI is written in React and [MUI](https://mui.com/) (using Material UI to specific). This is the only officially supported framework for building extensions, and the one that our `init` command automatically configures for you. Using it brings significant benefits to authors:
 
@@ -21,7 +21,7 @@ Docker Desktop's UI is written in React and [MUI](https://mui.com/) (using Mater
 
 Read our [MUI best practices](mui-best-practices.md) guide to learn future-proof ways to use MUI with Docker Desktop.
 
-### Dispreferred: Some other framework
+### Not recommended: Some other framework
 
 You may prefer to use another framework, perhaps because you or your team are more familiar with it or because you have existing assets you want to reuse. This is possible, but highly discouraged. It means that:
 
@@ -42,3 +42,8 @@ With minor exceptions, displaying your logo for example, you should only use col
 ### Use counterpart colors in light/dark mode
 
 Our colors have been chosen so that the counterpart colors in each variant of the palette should have the same essential characteristics. Anywhere you use `red-300` in light mode, you should use `red-300` in dark mode too.
+
+## What's next?
+
+- Take a look at our [MUI best practices](mui-best-practices.md).
+- Learn how to [publish your extension](../extensions/Overview.md).

@@ -20,81 +20,42 @@ An extension can contain a UI part and backend parts that run either on the host
 Extensions are distributed through the Docker Hub.
 Development of extensions can be done locally without the need to push the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
 
-## Prerequisites
+## How to use the resources in this section
 
-Before you create your own extension, you need a specific Docker Desktop build that comes with extension capabilities.
+The documentation is structured  so that it matches the steps you need to take when creating your extension. 
 
-From the [releases page](https://github.com/docker/extensions-sdk/releases/latest), install both the Docker Desktop build and the Extensions CLI which is used to manage extensions later on.
+### 1. Build the foundations
 
-> Using the CLI to install unpublished extensions
->
-> Extensions can install binaries, invoke commands and access files on your machine. Make sure you trust extensions before installing them on your machine.
-> {: .warning}
+This section provides sample folders with ready-to-go examples that walk you through building:
 
-Once you've downloaded the Extensions CLI, extract the binary in to `~/.docker/cli-plugins`.
+- A frontend extension based on plain HTML
+- A simple Docker extension that contains only a UI part and is based on ReactJS. This is useful if you want to develop an extension which consists exclusively of a visual part with no services running in the VM.
+- An extension that invokes Docker CLI commands
+- A simple backend extension
 
-In your terminal, run:
+If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service) example.
 
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#prereq-macos-intel">MacOS (intel)</a></li>
-  <li><a data-toggle="tab" data-target="#prereq-macos-m1">MacOS (M1)</a></li>
-  <li><a data-toggle="tab" data-target="#prereq-windows">Windows</a></li>
-  <li><a data-toggle="tab" data-target="#prereq-wsl2">WSL2</a></li>
-  <li><a data-toggle="tab" data-target="#prereq-linux">Linux</a></li>
-</ul>
-<div class="tab-content">
-  <div id="prereq-macos-intel" class="tab-pane fade in active" markdown="1">
-    
-```console
-$ tar -xvzf desktop-extension-cli-darwin-amd64.tar.gz
-$ mkdir -p ~/.docker/cli-plugins
-$ mv docker-extension ~/.docker/cli-plugins
-```
+For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples)
 
-  <hr></div>
-  <div id="prereq-macos-m1" class="tab-pane fade" markdown="1">
-    
-```console
-$ tar -xvzf desktop-extension-cli-darwin-arm64.tar.gz
-$ mkdir -p ~/.docker/cli-plugins
-$ mv docker-extension ~/.docker/cli-plugins
-```
+The build process consists of:
 
-  <hr></div>
-  <div id="prereq-windows" class="tab-pane fade" markdown="1">
-    
-```console
-PS> tar -xvzf desktop-extension-cli-windows-amd64.tar.gz
-PS> mkdir -p ~/.docker/cli-plugins
-PS> mv docker-extension.exe ~/.docker/cli-plugins
-```
+- Installing the prerequisites.
+- Setting up the directory with files which range from the extension’s source code to the required extension-specific files.
+- Creating the Dockerfile to build, publish, and run your extension in Docker Desktop.
+- Configuring the metadata file which is required at the root of the image filesystem.
+- Building and validating the extension.
+- Installing, previewing, and updating the extension.
 
-  <hr></div>
-  <div id="prereq-wsl2" class="tab-pane fade" markdown="1">
-    
-```console
-$ tar -xvzf desktop-extension-cli-linux-amd64.tar.gz
-$ mkdir -p ~/.docker/cli-plugins
-$ mv docker-extension ~/.docker/cli-plugins
-```
+There are also optional instructions on [how to set authentication](build/oauth2-flow.md) for your extension.
 
-  <hr></div>
-  <div id="prereq-linux" class="tab-pane fade" markdown="1">
+### 2. Align your design and UI styling
 
-```console
-$ tar -xvzf desktop-extension-cli-linux-amd64.tar.gz
-$ mkdir -p ~/.docker/cli-plugins
-$ mv docker-extension ~/.docker/cli-plugins
-```
+Once you’ve built the foundations of your extension, you can follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
 
-  <hr></div>
-</div>
+### 3. Publish and distribute your extension
 
-You can now list installed extensions (the list should be empty if you have not installed extensions already):
+Docker Desktop displays published extensions in the Extensions Marketplace. If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
 
-```console
-$ docker extension ls
-ID                  PROVIDER            VERSION             UI                  VM                  HOST
-```
+## What’s next?
 
-![Extensions enabled](images/extensions-enabled.png)
+Start [building your extension](/build/get-started.md).

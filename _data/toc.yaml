@@ -1238,52 +1238,50 @@ manuals:
       section:
         - path: /desktop/extensions-sdk/
           title: Introduction
-        - sectiontitle: Tutorials
+        - sectiontitle: Part One: Build
           section:
-            - title: Create your first extension
-              path: /desktop/extensions-sdk/tutorials/initialize/
-            - title: Create a minimal frontend extension
-              path: /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
-            - title: Create a ReactJS-based extension
-              path: /desktop/extensions-sdk/tutorials/react-extension/
-            - title: Create a minimal extension invoking docker commands
-              path: /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
-            - title: Create a minimal backend extension
-              path: /desktop/extensions-sdk/tutorials/minimal-backend-extension/
-        - sectiontitle: Design
+            - title: Step one: Get started
+              path: /desktop/extensions-sdk/build/get-started/
+            - sectiontitle: Step two: Set up...
+              section:
+                - title: ...a minimal frontend extension
+                  path: /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
+                - title: ... a ReactJS-based extension
+                  path: /desktop/extensions-sdk/build/set-up/react-extension/
+                - title: ... a minimal extension invoking docker commands
+                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
+                - title: ... a minimal backend extension
+                  path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
+            - title: Step three: Build
+              path: /desktop/extensions-sdk/build/build/
+            - title: Step four: Validate and install
+              path: /desktop/extensions-sdk/build/validate-install/
+            - title: Step five: Preview and update
+              path: /desktop/extensions-sdk/build/preview-and-update/
+            - title: CLI reference
+              path: /desktop/extensions-sdk/build/overview/
+            - title: Optional step: Authentication
+              path: /desktop/extensions-sdk/build/oauth2-flow/
+        - sectiontitle: Part two: Design and UI styling
           section:
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
              - title: Docker's design principles
                path: /desktop/extensions-sdk/design/design-principles/
-        - sectiontitle: UI Styling
-          section:
-             - title: Overview
+             - title: UI styling guidelines
                path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
-        - sectiontitle: Developer SDK tools
+        - sectiontitle: Part three: Publish
           section:
             - title: Overview
-              path: /desktop/extensions-sdk/dev/overview/
-            - title: CLI overview
-              path: /desktop/extensions-sdk/dev/cli/usage/
-            - title: Build, test and install an extension
-              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
-            - title: OAuth 2.0 flow
-              path: /desktop/extensions-sdk/dev/oauth2-flow/
-        - sectiontitle: Publishing extensions
-          section:
+              path: /desktop/extensions-sdk/extensions/overview/
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
-            - title: Validation
-              path: /desktop/extensions-sdk/extensions/validation/
             - title: Distribution
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
-            - title: Building multi-arch extensions
-              path: /desktop/extensions-sdk/extensions/multi-arch/
         - sectiontitle: Extension APIs
           section:
             - title: Overview
