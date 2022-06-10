@@ -77,7 +77,7 @@ $ modprobe kvm_intel  # Intel processors
 $ modprobe kvm_amd    # AMD processors
 ```
 
-If the above commands fail, diagnostic info can be surfaced by running:
+If the above commands fail, you can view the diagnostics by running:
 
 ```console
 $ kvm-ok
