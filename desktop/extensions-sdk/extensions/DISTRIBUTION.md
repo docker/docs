@@ -18,7 +18,7 @@ The image must have [several labels](labels.md):
 Packaging and releasing an extension is done by running `docker build` to create the image, and `docker push` to make the image available on Docker Hub with a specific tag that allows you to manage versions of the extension.
 
 Take advantage of multi-arch images to build images that include ARM/AMD binaries. The right image will be used for Mac users depending on their architecture.
-For extensions on Docker Desktop for Windows, Windows binaries that are to be installed on the host must be included in the same extension image. We will revisit this with some tag conventions to allow some images specific to Windows, and other images specific to Mac, based on a tag prefix. See [how to build extensions for multiple architectures](./multi-arch.md).
+For extensions on Docker Desktop for Windows, Windows binaries that are to be installed on the host must be included in the same extension image. We will revisit this with some tag conventions to allow some images specific to Windows, and other images specific to Mac, based on a tag prefix. See [how to build extensions for multiple architectures](../build/build.md).
 
 You can implement extensions without any constraints on the code repository. Docker does not need access to the code repository in order to use the extension. Release of new versions of the extension is managed you.
 
