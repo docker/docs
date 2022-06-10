@@ -1,11 +1,11 @@
 ---
-title: Step four - validate and install
-description: test
-keywords: test
-redirect_from: 
+title: Validate and install
+description: Step six in the extension creation process
+keywords: Docker, Extensions, sdk, validate, install
+redirect_from:
 - /desktop/extensions-sdk/extensions/validation/
 - /desktop/extensions-sdk/dev/cli/build-test-install-extension/
---- 
+---
 
 After you have [built your extension](build.md), you can verify the extension image is compliant and install your extension in Docker Desktop.
 

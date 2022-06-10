@@ -1,12 +1,12 @@
 ---
-title: Step one - Get started
-description: test
-keywords: tesdt
-redirect_from: 
+title: Get started
+description: The first step to building an extension.
+keywords: Docker, Extensions, sdk, prerequisites
+redirect_from:
 - desktop/extensions-sdk/tutorials/initialize/
 ---
 
-To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. You can either automatically generate a set of boilerplate files, or start with an empty directory. 
+To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. You can either automatically generate a set of boilerplate files, or start with an empty directory.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ In your terminal, run:
 </ul>
 <div class="tab-content">
   <div id="prereq-macos-intel" class="tab-pane fade in active" markdown="1">
-    
+
 ```console
 $ tar -xvzf desktop-extension-cli-darwin-amd64.tar.gz
 $ mkdir -p ~/.docker/cli-plugins
@@ -41,7 +41,7 @@ $ mv docker-extension ~/.docker/cli-plugins
 
   <hr></div>
   <div id="prereq-macos-m1" class="tab-pane fade" markdown="1">
-    
+
 ```console
 $ tar -xvzf desktop-extension-cli-darwin-arm64.tar.gz
 $ mkdir -p ~/.docker/cli-plugins
@@ -50,7 +50,7 @@ $ mv docker-extension ~/.docker/cli-plugins
 
   <hr></div>
   <div id="prereq-windows" class="tab-pane fade" markdown="1">
-    
+
 ```console
 PS> tar -xvzf desktop-extension-cli-windows-amd64.tar.gz
 PS> mkdir -p ~/.docker/cli-plugins
@@ -59,7 +59,7 @@ PS> mv docker-extension.exe ~/.docker/cli-plugins
 
   <hr></div>
   <div id="prereq-wsl2" class="tab-pane fade" markdown="1">
-    
+
 ```console
 $ tar -xvzf desktop-extension-cli-linux-amd64.tar.gz
 $ mkdir -p ~/.docker/cli-plugins
@@ -94,7 +94,7 @@ You may also need to install:
 
 >**Note**
 >
->NodeJS and Go are only required if an extension is created using the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
+>NodeJS and Go are only required if an extension is created using the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
 
 ## Prepare your directory
 

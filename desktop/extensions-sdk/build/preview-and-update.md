@@ -1,7 +1,7 @@
 ---
-title: Step five - preview and update
-description: test
-keywords: test
+title: Preview and update
+description: Step five in the extension creation process
+keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
 ---
 
 Once your extension has been validated and installed, you can preview your extension in Docker Desktop. 

@@ -1238,11 +1238,11 @@ manuals:
       section:
         - path: /desktop/extensions-sdk/
           title: Introduction
-        - sectiontitle: Part One: Build
+        - sectiontitle: "Part One: Build"
           section:
-            - title: Step one: Get started
+            - title: "Step one: Get started"
               path: /desktop/extensions-sdk/build/get-started/
-            - sectiontitle: Step two: Set up...
+            - sectiontitle: "Step two: Set up..."
               section:
                 - title: ...a minimal frontend extension
                   path: /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
@@ -1252,17 +1252,17 @@ manuals:
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
                 - title: ... a minimal backend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
-            - title: Step three: Build
+            - title: "Step three: Build"
               path: /desktop/extensions-sdk/build/build/
-            - title: Step four: Validate and install
+            - title: "Step four: Validate and install"
               path: /desktop/extensions-sdk/build/validate-install/
-            - title: Step five: Preview and update
+            - title: "Step five: Preview and update"
               path: /desktop/extensions-sdk/build/preview-and-update/
             - title: CLI reference
               path: /desktop/extensions-sdk/build/overview/
-            - title: Optional step: Authentication
+            - title: "Optional step: Authentication"
               path: /desktop/extensions-sdk/build/oauth2-flow/
-        - sectiontitle: Part two: Design and UI styling
+        - sectiontitle: "Part two: Design and UI styling"
           section:
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
@@ -1272,10 +1272,10 @@ manuals:
                path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
-        - sectiontitle: Part three: Publish
+        - sectiontitle: "Part three: Publish"
           section:
             - title: Overview
-              path: /desktop/extensions-sdk/extensions/overview/
+              path: /desktop/extensions-sdk/extensions/Overview/
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels

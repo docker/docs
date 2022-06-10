@@ -1,7 +1,7 @@
 ---
-title: Step three - build
-description: test
-keywords: test
+title: Build
+description: Step three in creating an extension.
+keywords: Docker, Extensions, sdk, build
 redirect_from:
 - /desktop/extensions-sdk/extensions/multi-arch/
 - /desktop/extensions-sdk/dev/cli/build-test-install-extension/

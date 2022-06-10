@@ -1,7 +1,7 @@
 ---
 title: Minimal docker CLI extension tutorial
 description: Minimal docker CLI extension tutorial
-keywords: Docker, extensions, sdk, tutorial
+keywords: Docker, extensions, sdk, build
 redirect_from:
 - /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
 ---

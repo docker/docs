@@ -1,7 +1,7 @@
 ---
 title: Minimal react extension tutorial
 description: Minimal react extension tutorial
-keywords: Docker, extensions, sdk, tutorial
+keywords: Docker, extensions, sdk, build
 redirect_from:
 - /desktop/extensions-sdk/tutorials/react-extension/
 ---

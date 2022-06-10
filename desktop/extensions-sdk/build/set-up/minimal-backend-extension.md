@@ -1,8 +1,8 @@
 ---
 title: Minimal backend extension tutorial
 description: Minimal backend extension tutorial
-keywords: Docker, extensions, sdk, tutorial
-redirect_from: 
+keywords: Docker, extensions, sdk, build
+redirect_from:
 - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
 ---
 

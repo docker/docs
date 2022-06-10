@@ -1,8 +1,8 @@
 ---
-title: publish
-description: test
-keywords: test
---- 
+title: Publish
+description: General steps in how to publish an extension
+keywords: Docker, Extensions, sdk, publish
+---
 
 ## Publish your extension
 
