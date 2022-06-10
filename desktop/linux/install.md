@@ -77,6 +77,12 @@ $ modprobe kvm_intel  # Intel processors
 $ modprobe kvm_amd    # AMD processors
 ```
 
+If the above commands fail, you can view the diagnostics by running:
+
+```console
+$ kvm-ok
+```
+
 To check if the KVM modules are enabled, run:
 
 ```console
