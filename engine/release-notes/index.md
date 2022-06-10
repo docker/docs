@@ -18,7 +18,7 @@ for Docker Engine.
 ## 20.10.17
 2022-06-06
 
-This release of Docker Engine comes with updated versions of the `compose`,
+This release of Docker Engine comes with updated versions of the Docker Compose and the
 `containerd`, and `runc` components, as well as some minor bug fixes.
 
 ### Client
@@ -37,7 +37,7 @@ This release of Docker Engine comes with updated versions of the `compose`,
   which contains a fix for [CVE-2022-31030](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31030){:target="_blank" rel="noopener"}
 - Update runc version to [v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2), which contains a fix for
   [CVE-2022-29162](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29162){:target="_blank" rel="noopener"}.
-- Updated Go runtime to [1.17.11](https://go.dev/doc/devel/release#go1.17.minor){:target="_blank" rel="noopener"},
+- Update Go runtime to [1.17.11](https://go.dev/doc/devel/release#go1.17.minor){:target="_blank" rel="noopener"},
   which contains fixes for [CVE-2022-30634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30634){:target="_blank" rel="noopener"},
   [CVE-2022-30629](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30629){:target="_blank" rel="noopener"},
   [CVE-2022-30580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30580){:target="_blank" rel="noopener"} and
