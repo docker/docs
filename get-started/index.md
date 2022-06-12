@@ -79,7 +79,7 @@ If you are looking for information on how to containerize an application using y
 
 We also recommend the video walkthrough from DockerCon 2020.
 
-<iframe src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" style="aspect-ratio: 16 / 9;" width="100%" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Download and install Docker
 
@@ -153,7 +153,7 @@ capabilities approachable and easy to use. To summarize, a container:
 > does not go into networking, using images for the filesystem, and other advanced topics,
 > it gives a _fantastic_ deep dive into how things are working.
 >
-> <iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="aspect-ratio: 16 / 9;" width="100%" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+> <iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is a container image?
 
