@@ -10,7 +10,7 @@ For extensions with a backend service running REST services over sockets or name
 
 ## Prerequisites
 
-- [Docker Desktop build with Extensions capabilities](https://github.com/docker/extensions-sdk/releases/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Docker Extensions CLI](https://github.com/docker/extensions-sdk/releases/)
 
 ## Extension folder structure

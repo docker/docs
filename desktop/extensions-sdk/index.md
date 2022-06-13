@@ -24,7 +24,7 @@ Development of extensions can be done locally without the need to push the exten
 
 Before you create your own extension, you need a specific Docker Desktop build that comes with extension capabilities.
 
-From the [releases page](https://github.com/docker/extensions-sdk/releases/latest), install both the Docker Desktop build and the Extensions CLI which is used to manage extensions later on.
+From the [releases page](https://github.com/docker/extensions-sdk/releases/latest), install the Extensions CLI which is used to manage extensions later on.
 
 > Using the CLI to install unpublished extensions
 >
