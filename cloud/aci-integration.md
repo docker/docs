@@ -106,6 +106,13 @@ $ docker context use myacicontext
 $ docker run -p 80:80 nginx
 ```
 
+> **Note**
+>
+> Unlike the Azure portal - which [does not require](https://stackoverflow.com/a/57454806) the full URI of DockerHub images - the Docker Azure Integration seems to default to Azure Container Registry in order to determine the source registry from where to pull the specified image(s). Therefore you may need to add the full URI of the image(s) if you are pulling from anywhere other than azurecr.io. In case of images hosted on DockerHub, you may therefore specify:
+> ```console
+> $ docker run -p 80:80 registry.hub.docker.com/library/nginx
+> ```
+
 After you've switched to the `myacicontext` context, you can use `docker ps` to list your containers running on ACI.
 
 In the case of the demonstration Nginx container started above, the result of the ps command will display in column "PORTS" the IP address and port on which the container is running. For example, it may show `52.154.202.35:80->80/tcp`, and you can view the Nginx welcome page by browsing `http://52.154.202.35`.
