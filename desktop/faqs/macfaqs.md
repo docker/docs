@@ -26,8 +26,3 @@ HyperKit is thinner than VirtualBox and VMWare fusion, and the version included 
 The privileged helper process `com.docker.vmnetd` is started by `launchd` and
 runs in the background. The process does not consume any resources unless
 Docker.app connects to it, so it's safe to ignore.
-
-### How do I add custom CA certificates?
-
-Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client-side certs, see
-[Add TLS certificates on Mac](../mac/index.md#add-tls-certificates)

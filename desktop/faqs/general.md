@@ -13,7 +13,10 @@ title: Frequently asked questions
 
 ### What are the system requirements for Docker Desktop?
 
-For information about Docker Desktop system requirements, see [Docker Desktop for Mac system requirements](../mac/install.md#system-requirements) and [Docker Desktop for Windows system requirements](../windows/install.md#system-requirements).
+For information about Docker Desktop system requirements, see:
+-  [Mac system requirements](../mac/install.md#system-requirements) 
+- [Windows system requirements](../windows/install.md#system-requirements)
+- [Linux system requirements](../linux/install.md#system-requirements)
 
 ### Where does Docker Desktop get installed on my machine?
 
@@ -61,12 +64,14 @@ This includes:
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 
 You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See:
-- [Mac Logs and Troubleshooting](../mac/troubleshoot.md)
-- [Windows Logs and Troubleshooting](../windows/troubleshoot.md)
-- [Linux logs and Troubleshooting](../linux/troubleshoot.md)
+- [Mac logs and troubleshooting](../mac/troubleshoot.md)
+- [Windows logs and troubleshooting](../windows/troubleshoot.md)
+- [Linux logs and troubleshooting](../linux/troubleshoot.md)
 
-If you do not find a solution in Troubleshooting, browse issues on
-[docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} or [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"} GitHub repository, or create a new one.
+If you do not find a solution in troubleshooting, browse the Github repositories or create a new issue:
+
+-[docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} - -[docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
+- [docker/for-linux](https://github.com/docker/for-linux/issues){: target="_blank" rel="noopener" class="_"}
 
 ### How do I connect to the remote Docker Engine API?
 
@@ -96,15 +101,6 @@ Mac, Linux, and Windows have a changing IP address (or none if you have no netwo
 For more information and examples, see how to connect from a container to a service on the host
 [on Mac](../mac/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) and [on Windows](../windows/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) or [on Linux](../linux/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
-### How do I connect to a container from Mac or Windows?
-
-We recommend that you publish a port, or connect from another container. Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
-
-For more information and examples, see:
-- [I want to connect to a container from Mac](../mac/networking.md#i-want-to-connect-to-a-container-from-the-mac) 
-- [I want to connect to a container from Windows](../windows/networking.md#i-want-to-connect-to-a-container-from-windows)
-- [I want to connect to a container from Linux](../linux/networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host)]
-
 ### Can I pass through a USB device to a container?
 
 Unfortunately, it is not possible to pass through a USB device (or a
@@ -118,8 +114,6 @@ problems and intermittent failures may still occur due to the way these apps
 virtualize the hardware. For these reasons, **Docker Desktop is not supported in
 nested virtualization scenarios**. It might work in some cases and not in others.
 
-For more information, see [Running Docker Desktop in nested virtualization scenarios](../windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
-
 ### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
 
 Docker Desktop uses hardware-accelerated graphics by default, which may cause problems for some GPUs. In such cases,
@@ -132,6 +126,10 @@ To work around this issue, disable hardware acceleration by creating a `"disable
 - **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
 
 After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
+
+### Can I run Docker Desktop on Virtualized hardware?
+
+No, currently this is unsupported and against terms of use. 
 
 ## Releases
 
@@ -154,30 +152,3 @@ Sometimes we may roll out a new version gradually over a few days. Therefore, if
 ### Where can I find information about Stable and Edge releases?
 
 Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single, cumulative release stream for all users. 
-
-## Support
-
-### Does Docker Desktop offer support?
-
-Yes, Docker Desktop offers support for users with a paid Docker subscription.
-
-For information about Docker subscriptions and to upgrade your existing account, see [Docker pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
-
-### What kind of feedback are you looking for?
-
-Everything is fair game. We'd like your impressions on the download-install
-process, startup, functionality available, the GUI, usefulness of the app,
-command line integration, and so on. Tell us about the issues you are experiencing, what you like, or request a new feature through our public [Docker Roadmap](https://github.com/docker/roadmap){: target="_blank" rel="noopener" class="_"}.
-
-### How is personal data handled in Docker Desktop?
-
-When uploading diagnostics to help Docker with investigating issues, the uploaded diagnostics bundle may contain personal data such as usernames and IP addresses. The diagnostics bundles are only accessible to Docker, Inc.
-employees who are directly involved in diagnosing Docker Desktop issues.
-
-By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues but may derive high-level (non personal) metrics such as the rate of issues from it.
-
-For more information, see [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
-
-
-
-

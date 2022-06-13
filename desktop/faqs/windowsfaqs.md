@@ -64,8 +64,3 @@ The Windows native symlinks are visible within the containers as symlinks, where
 
 Docker Desktop mounts the Windows host filesystem under `/run/desktop` inside the container running Kubernetes.
 See the [Stack Overflow post](https://stackoverflow.com/questions/67746843/clear-persistent-volume-from-a-kubernetes-cluster-running-on-docker-desktop/69273405#69273){:target="_blank" rel="noopener" class="_"} for an example of how to configure a Kubernetes Persistent Volume to represent directories on the host.
-
-### How do I add custom CA certificates?
-
-Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client-side certs, see
-[Add TLS certificates on Windows](../windows/index.md#adding-tls-certificates)
