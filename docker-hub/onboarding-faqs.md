@@ -11,7 +11,7 @@ services. All you need is an email address to create a Docker ID. Your Docker ID
 numbers and lowercase letters. You cannot use any special characters or spaces.
 For more information, see [Docker ID](../docker-id/index.md). If your admin enforces [Single sign-on (SSO)](../single-sign-on/index.md), a Docker ID is provisioned for new users.
 
-Developers may have multiple Docker IDs in order to separate their Docker IDs  that are associated with an organization in Docker Business, and their personal use Docker IDs. 
+Developers may have multiple Docker IDs in order to separate their Docker IDs  that are associated with an organization in Docker Business or Team, and their personal use Docker IDs.
 
 ### What if my Docker ID is taken?
 
@@ -32,6 +32,10 @@ manage users, teams, and repositories in the organization. [Learn more](orgs.md)
 ### How many organizations can I create?
 
 To begin, you should set up your first organization and contact the Customer Success team at customer-success@docker.com to add the additional organizations. Also, if you are enabling SSO, it is configured based on your domain, not your organization.
+
+### What's an organization name or namespace?
+
+The organization name, sometimes referred to as the organization namespace or the org ID, is the unique identifier of a Docker organization. The organization name cannot be the same as an existing Docker ID.
 
 ### What’s a team?
 
@@ -64,6 +68,14 @@ select the **Owners** team from the drop-down menu. [Learn more](orgs.md#the-own
 
 No. Organization owners can invite users through email and also choose a team for them to join within the invite.
 
+### Can I force my organization's members to authenticate before using Docker Desktop and are there any benefits?
+
+Yes. You can [enforce sign in](../docker-hub/configure-sign-in.md) and there are benefits.
+
+Some benefits of enforcing sign in are:
+- Administrators can enforce features like [Image Access Management](../docker-hub/image-access-management.md) and [Registry Access Management](../docker-hub/registry-access-management.md).
+ - Administrators can ensure compliance by blocking Docker Desktop usage for users who do not sign in as members of the organization.
+
 ### If a user has their personal email associated with a user account in Docker Hub, do they have to convert to using the org’s domain before they can be invited to join an organization?
 
 Yes. When SSO is enabled for your organization, each user must sign in with the company’s domain. However, the user can retain their personal credentials and create a new Docker ID associated with their organization's domain.
@@ -95,6 +107,17 @@ owners can manage the list of invitees through the **Invitees** tab on the organ
 
 Yes. Organization owners will take up a seat.
 
+### What is the difference between user, invitee, seat, and member?
+
+User may refer to a Docker user with a Docker ID.
+
+An invitee is a user who has been invited to join an organization, but has not yet accepted their invitation.
+
+Seats is the number of planned members within an organization.
+
+Member may refer to a user that has received and accepted an invitation to join an organization. Member can also refer to a member of a team within an organization.
+
+
 ### If there are two organizations and a user belongs to both orgs, do they take up two seats?
 
 Yes. In a scenario where a user belongs to two orgs, they take up one seat in each organization.
@@ -111,3 +134,15 @@ organization. [Learn more](orgs.md#configure-repository-permissions).
 
 Docker SSO allows only one IdP configuration per organization. For more
 information, see [Configure SSO](../single-sign-on/index.md) and [SSO FAQs](../single-sign-on/faqs.md).
+
+### What is a service account?
+
+A [service account](../docker-hub/service-accounts.md) is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and do not share Docker IDs with the members in the Team or Business plan. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
+
+### Does my organization need to use Docker's registry?
+
+A registry is a hosted service containing repositories of images which responds to the Registry API. Docker Hub is Docker's primary registry, but Docker can easily be used with other container image registries. The default registry can be accessed by browsing to [Docker Hub](https://hub.docker.com) or using the `docker search` command.
+
+### What is included in my Docker Business or Team plan?
+
+For a list of features available in each tier, see [Docker subscription overview](../subscription/index.md).
