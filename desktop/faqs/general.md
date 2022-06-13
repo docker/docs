@@ -70,7 +70,7 @@ You can find information about diagnosing and troubleshooting common issues in t
 
 If you do not find a solution in troubleshooting, browse the Github repositories or create a new issue:
 
--[docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} - -[docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
+- [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} - - [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
 - [docker/for-linux](https://github.com/docker/for-linux/issues){: target="_blank" rel="noopener" class="_"}
 
 ### How do I connect to the remote Docker Engine API?
