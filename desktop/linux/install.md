@@ -202,12 +202,12 @@ default
 Current context is now "default"
 ```
 
-And use the `docker-desktop` context to interact with Docker Desktop:
+And use the `desktop-linux` context to interact with Docker Desktop:
 
 ```console
-$ docker context use docker-desktop
-docker-desktop
-Current context is now "docker-desktop"
+$ docker context use desktop-linux
+desktop-linux
+Current context is now "desktop-linux"
 ```
 
 Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
