@@ -1034,8 +1034,6 @@ reference:
     path: /registry/spec/api/
   - sectiontitle: Docker Extension SDK API (Beta)
     section:
-      - path:
-        title:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
         title: DesktopUI
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/Dialog/
