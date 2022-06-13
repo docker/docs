@@ -1,5 +1,5 @@
 ---
-title: Minimal frontend extension tutorial
+title: Set up a minimal frontend extension 
 description: Minimal frontend extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:

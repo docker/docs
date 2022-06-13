@@ -1258,10 +1258,10 @@ manuals:
               path: /desktop/extensions-sdk/build/validate-install/
             - title: "Step five: Preview and update"
               path: /desktop/extensions-sdk/build/preview-and-update/
-            - title: CLI reference
-              path: /desktop/extensions-sdk/build/overview/
             - title: "Optional step: Authentication"
               path: /desktop/extensions-sdk/build/oauth2-flow/
+            - title: CLI reference
+              path: /desktop/extensions-sdk/build/usage/
         - sectiontitle: "Part two: Design and UI styling"
           section:
              - title: Guidelines

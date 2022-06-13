@@ -1,10 +1,8 @@
 ---
-title: Publish
+title: Publish your extension
 description: General steps in how to publish an extension
 keywords: Docker, Extensions, sdk, publish
 ---
-
-## Publish your extension
 
 To publish the extension, upload the Docker image to [DockerHub](https://hub.docker.com/).
 

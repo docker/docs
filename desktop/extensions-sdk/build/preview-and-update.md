@@ -4,7 +4,7 @@ description: Step five in the extension creation process
 keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
 ---
 
-Once your extension has been validated and installed, you can preview your extension in Docker Desktop. 
+Once your extension has been [validated and installed](validate-install.md), you can preview your extension in Docker Desktop. 
 
 ## Preview the extension
 
@@ -15,7 +15,7 @@ The example below shows the [`Min FrontEnd Extension`](set-up/minimal-frontend-e
 
 ![minimal-frontend-extension](images/ui-minimal-extension.png)
 
-### Open Chome DevTools**
+### Open Chome DevTools
 
 In order to open the Chrome DevTools for your extension when you click on the extension tab, run:
 

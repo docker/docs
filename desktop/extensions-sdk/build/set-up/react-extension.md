@@ -1,5 +1,5 @@
 ---
-title: Minimal react extension tutorial
+title: Set up a minimal react extension
 description: Minimal react extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:

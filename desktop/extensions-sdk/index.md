@@ -22,20 +22,9 @@ Development of extensions can be done locally without the need to push the exten
 
 ## How to use the resources in this section
 
-The documentation is structured  so that it matches the steps you need to take when creating your extension. 
+The documentation is structured  so that it matches the steps you need to take when creating your extension. There are three parts to creating a Docker Extension: Build the foundations, align the design to fit with Docker, and then publish your extension. 
 
-### 1. Build the foundations
-
-This section provides sample folders with ready-to-go examples that walk you through building:
-
-- A frontend extension based on plain HTML
-- A simple Docker extension that contains only a UI part and is based on ReactJS. This is useful if you want to develop an extension which consists exclusively of a visual part with no services running in the VM.
-- An extension that invokes Docker CLI commands
-- A simple backend extension
-
-If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service) example.
-
-For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples)
+### Part one: Build the foundations
 
 The build process consists of:
 
@@ -47,6 +36,17 @@ The build process consists of:
 - Installing, previewing, and updating the extension.
 
 There are also optional instructions on [how to set authentication](build/oauth2-flow.md) for your extension.
+
+This section also provides sample folders with ready-to-go examples that walk you through building:
+
+- A frontend extension based on plain HTML
+- A simple Docker extension that contains only a UI part and is based on ReactJS. This is useful if you want to develop an extension which consists exclusively of a visual part with no services running in the VM.
+- An extension that invokes Docker CLI commands
+- A simple backend extension
+
+If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service) example.
+
+For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples)
 
 ### 2. Align your design and UI styling
 

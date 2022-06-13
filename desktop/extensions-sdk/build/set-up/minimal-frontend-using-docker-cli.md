@@ -1,5 +1,5 @@
 ---
-title: Minimal docker CLI extension tutorial
+title: Set up a minimal extension invoking Docker commands
 description: Minimal docker CLI extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:

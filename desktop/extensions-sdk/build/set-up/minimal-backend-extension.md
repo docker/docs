@@ -1,5 +1,5 @@
 ---
-title: Minimal backend extension tutorial
+title: Set up a minimal backend extension 
 description: Minimal backend extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:

@@ -1,5 +1,5 @@
 ---
-title: Get started
+title: "Step one: Get started"
 description: The first step to building an extension.
 keywords: Docker, Extensions, sdk, prerequisites
 redirect_from:
@@ -10,9 +10,9 @@ To start creating your extension, you first need a directory with files which ra
 
 ## Prerequisites
 
-Before you create your own extension, you need a specific Docker Desktop build that comes with extension capabilities.
+Before you create your own extension, you need to install [Docker Desktop](../../release-notes.md).
 
-From the [releases page](https://github.com/docker/extensions-sdk/releases/latest), install both the Docker Desktop build and the Extensions CLI which is used to manage extensions later on.
+You also need the latest [Extensions CLI](https://github.com/docker/extensions-sdk/releases/latest), which is used to manage extensions later on.
 
 > Using the CLI to install unpublished extensions
 >
@@ -92,7 +92,7 @@ You may also need to install:
 - [NodeJS](https://nodejs.org/)
 - [Go](https://go.dev/dl/)
 
->**Note**
+>Note
 >
 >NodeJS and Go are only required if an extension is created using the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
 

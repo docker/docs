@@ -9,7 +9,7 @@ redirect_from:
 
 Once you have set up your directory correctly, you can build your extension for single or multiple architectures. 
 
-## Build the extension
+## Build the extension for a single architecture
 
 To build the extension, run:
 

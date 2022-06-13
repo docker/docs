@@ -50,4 +50,4 @@ docker/hub-explorer-extension   Docker Inc.         0.0.2               1 tab(Ex
 
 ## What's next?
 
-- Learn how to [preview and update](preview-and-update.md) your extension.
+Learn how to [preview and update](preview-and-update.md) your extension.
