@@ -8,7 +8,7 @@ Learn how to create a new Docker extension.
 
 ## Prerequisites
 
-- [Docker Desktop build with Extensions capabilities](https://github.com/docker/extensions-sdk/releases/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Docker Extensions CLI](https://github.com/docker/extensions-sdk/releases/)
 - [NodeJS](https://nodejs.org)
 - [Go](https://go.dev/dl/)

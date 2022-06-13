@@ -8,7 +8,7 @@ Learn how to create a simple Docker extension that contains only a UI part and i
 
 ## Prerequisites
 
-- [Docker Desktop build with Extensions capabilities](https://github.com/docker/extensions-sdk/releases/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Docker Extensions CLI](https://github.com/docker/extensions-sdk/releases/)
 
 ## Extension folder structure
