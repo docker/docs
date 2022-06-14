@@ -1,0 +1,49 @@
+name: dispatch-compose
+
+on:
+  repository_dispatch:
+    types: [compose-docs]
+
+jobs:
+  api-reference:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Prepare
+        run: |
+          rm -rf ./_data/compose-cli/*
+      -
+        name: Fetch reference API
+        uses: docker/build-push-action@v3
+        with:
+          context: ${{ github.event.client_payload.context }}
+          target: ${{ github.event.client_payload.target }}
+          outputs: ./_data/compose-cli
+      -
+        name: Update compose_version in _config.yml
+        run: |
+          sed -i "s|^compose_version\:.*|compose_version\: \"${{ github.event.client_payload.release }}\"|g" _config.yml
+          cat _config.yml | yq .compose_version
+      -
+        name: Commit changes
+        run: |
+          git add -A .
+      -
+        name: Create PR
+        uses: peter-evans/create-pull-request@923ad837f191474af6b1721408744feb989a4c27 # v4.0.4
+        with:
+          commit-message: Update Compose reference API to ${{ github.event.client_payload.release }}
+          signoff: true
+          branch: dispatch/compose-api-reference-${{ github.event.client_payload.release }}
+          delete-branch: true
+          title: Update Compose reference API to ${{ github.event.client_payload.release }}
+          body: |
+            Update the Compose reference API documentation to keep in sync with the latest release `${{ github.event.client_payload.release }}`
+          labels: area/Compose
+          draft: false
