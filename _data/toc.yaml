@@ -1237,7 +1237,7 @@ manuals:
     - sectiontitle: Extensions SDK (Beta)
       section:
         - path: /desktop/extensions-sdk/
-          title: Introduction
+          title: Overview
         - sectiontitle: "Part one: Build"
           section:
             - title: "Step one: Get started"

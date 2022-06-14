@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Overview
 description: Overall index for Docker Extensions SDK documentation
 keywords: Docker, Extensions, sdk
 ---
@@ -10,8 +10,6 @@ Use the resources in this section to create your own Docker Extension.
 >
 > The Docker Extensions SDK is currently in Beta.
 > Features and APIs detailed below are subject to change.
-
-## Overview
 
 Extensions are packaged as specially formatted Docker images, which our CLI tool helps to build. At the root of the image filesystem is a `metadata.json` file which describes the content of the extension. It is a fundamental element of a Docker extension.
 
