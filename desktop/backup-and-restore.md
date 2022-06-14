@@ -20,8 +20,9 @@ computer, for example.
    when pushing the resulting image to a registry.
 
    Also note that filesystem changes in volume that are attached to the
-   container are not included in the image, and must be backed up separately
-   (see step 3 below).
+   container are not included in the image, and must be backed up separately.
+
+   If you used a [named volume](../storage/index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [backup, restore, or migrate data volumes](../storage/volumes.md#backup-restore-or-migrate-data-volumes) page in the storage section.
 
 2. Use [`docker push`](../engine/reference/commandline/push.md) to push any
    images you have built locally and want to keep to the [Docker Hub registry](../docker-hub/index.md).
@@ -31,8 +32,6 @@ computer, for example.
 
    Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](../engine/reference/commandline/save.md)
    to save any images you want to keep to a local tar file. 
-
-If you used a [named volume](../storage/index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [backup, restore, or migrate data volumes](../storage/volumes.md#backup-restore-or-migrate-data-volumes) page in the storage section.
 
 After backing up your data, you can uninstall the current version of Docker Desktop
 and [install a different version](release-notes.md) or reset Docker Desktop to factory defaults.
