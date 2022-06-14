@@ -1245,7 +1245,7 @@ manuals:
             - sectiontitle: "Step two: Set up..."
               section:
                 - title: ...a minimal frontend extension
-                  path: /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
+                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
                 - title: ... a ReactJS-based extension
                   path: /desktop/extensions-sdk/build/set-up/react-extension/
                 - title: ... a minimal extension invoking docker commands
