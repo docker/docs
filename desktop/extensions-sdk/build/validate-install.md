@@ -1,5 +1,5 @@
 ---
-title: Validate and install
+title: "Step six: Validate and install"
 description: Step six in the extension creation process
 keywords: Docker, Extensions, sdk, validate, install
 redirect_from:

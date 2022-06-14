@@ -1,5 +1,5 @@
 ---
-title: Preview and update
+title: "Step five: Preview and update"
 description: Step five in the extension creation process
 keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
 ---

@@ -1238,7 +1238,7 @@ manuals:
       section:
         - path: /desktop/extensions-sdk/
           title: Introduction
-        - sectiontitle: "Part One: Build"
+        - sectiontitle: "Part one: Build"
           section:
             - title: "Step one: Get started"
               path: /desktop/extensions-sdk/build/get-started/
@@ -1248,7 +1248,7 @@ manuals:
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
                 - title: ... a ReactJS-based extension
                   path: /desktop/extensions-sdk/build/set-up/react-extension/
-                - title: ... a minimal extension invoking docker commands
+                - title: ... a minimal extension invoking Docker commands
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
                 - title: ... a minimal backend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
@@ -1266,7 +1266,7 @@ manuals:
           section:
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
-             - title: Docker's design principles
+             - title: Docker design principles
                path: /desktop/extensions-sdk/design/design-principles/
              - title: UI styling guidelines
                path: /desktop/extensions-sdk/design/overview/

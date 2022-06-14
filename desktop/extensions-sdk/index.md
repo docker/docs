@@ -48,11 +48,11 @@ If your extension requires additional services running in the Docker Desktop VM,
 
 For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples)
 
-### 2. Align your design and UI styling
+### Part two: Align your design and UI styling
 
 Once you’ve built the foundations of your extension, you can follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
 
-### 3. Publish and distribute your extension
+### Part three: Publish and distribute your extension
 
 Docker Desktop displays published extensions in the Extensions Marketplace. If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
 

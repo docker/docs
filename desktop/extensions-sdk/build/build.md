@@ -1,5 +1,5 @@
 ---
-title: Build
+title: "Step three: Build"
 description: Step three in creating an extension.
 keywords: Docker, Extensions, sdk, build
 redirect_from:
