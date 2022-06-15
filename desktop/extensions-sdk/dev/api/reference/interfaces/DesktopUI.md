@@ -1,18 +1,8 @@
 ---
-title: Docker extension API reference
+title: DesktopUI
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: DesktopUI
-
-## Table of contents
-
-### Properties
-
-- [toast](DesktopUI.md#toast)
-- [dialog](DesktopUI.md#dialog)
-- [navigate](DesktopUI.md#navigate)
 
 ## Properties
 

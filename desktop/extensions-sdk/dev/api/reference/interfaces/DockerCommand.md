@@ -1,16 +1,8 @@
 ---
-title: Docker extension API reference
+title: DockerCommand
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: DockerCommand
-
-## Table of contents
-
-### Properties
-
-- [exec](DockerCommand.md#exec)
 
 ## Properties
 

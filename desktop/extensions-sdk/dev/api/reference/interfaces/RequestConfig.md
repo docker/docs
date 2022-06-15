@@ -1,19 +1,8 @@
 ---
-title: Docker extension API reference
+title: RequestCongif
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: RequestConfig
-
-## Table of contents
-
-### Properties
-
-- [url](RequestConfig.md#url)
-- [method](RequestConfig.md#method)
-- [headers](RequestConfig.md#headers)
-- [data](RequestConfig.md#data)
 
 ## Properties
 

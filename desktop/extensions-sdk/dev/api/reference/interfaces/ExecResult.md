@@ -1,33 +1,14 @@
 ---
-title: Docker extension API reference
+title: ExecResult
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: ExecResult
 
 ## Hierarchy
 
 - [`RawExecResult`](RawExecResult.md)
 
   ↳ **`ExecResult`**
-
-## Table of contents
-
-### Methods
-
-- [lines](ExecResult.md#lines)
-- [parseJsonLines](ExecResult.md#parsejsonlines)
-- [parseJsonObject](ExecResult.md#parsejsonobject)
-
-### Properties
-
-- [cmd](ExecResult.md#cmd)
-- [killed](ExecResult.md#killed)
-- [signal](ExecResult.md#signal)
-- [code](ExecResult.md#code)
-- [stdout](ExecResult.md#stdout)
-- [stderr](ExecResult.md#stderr)
 
 ## Methods
 
