@@ -29,15 +29,22 @@ After an extension is deployed, it is also possible to open Chrome DevTools from
 
 ### Preview whilst developing the UI
 
-If your extension has a UI, you can see it directly inside Docker Desktop whilst you develop it directly. For this you need to first install the extension. If you then run a development server locally, with `yarn start` for example, enter the following command:
+During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. To do this, you can configure Docker Desktop to load your UI from a development server, such as the one Create React App starts when invoked with yarn start.
 
-`$ docker extension dev ui-source my-extension http://localhost:8080`
+Assuming your app runs on the default port, start your UI app and then run:
 
-This changes the source of the extension UI to your local development server. Auto and hot-reload now work.
+```
+cd ui
+npm start
+```
 
-> Note
-> 
-> Make sure to reopen the Dashboard when you set a new source for the extension’s UI.
+This starts a development server that listens on port 3000.
+
+You can now tell Docker Desktop to use this as the frontend source. In another terminal run:
+
+`$ docker extension dev ui-source my-extension http://localhost:3000`
+
+Close and reopen the Docker Desktop dashboard and go to your extension. All the changes to the frontend code are immediately visible.
 
 Once finished, you can reset the extension configuration to the original settings. This will also reset opening Chrome dev tools if you used `docker extension dev debug my-extension`:
 
