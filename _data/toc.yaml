@@ -1619,3 +1619,5 @@ manuals:
     title: Docker Toolbox (deprecated)
   - path: /kitematic/
     title: Kitematic (deprecated)
+- path: /release-lifecycle/
+  title: Production release lifecycle
