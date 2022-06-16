@@ -15,16 +15,6 @@ To build the extension, run:
 
 `docker build -t <name-of-your-extension> .`
 
-If you automatically generated your extension, run:
-
-`make build-extension`
-
-`make build-extension` builds your extension and also generates an image which is named after your chosen hub repository. For instance, if you typed `john/my-extension` as the answer to the following question:
-
-`? Hub repository (eg. namespace/repository on hub): john/my-extension`
-
-The `make build-extension` generates an image with name `john/my-extension`.
-
 ## Build the extensions for multiple architectures
 
 It is highly recommended that, at a minimum, your extension is supported for the following architectures:

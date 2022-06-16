@@ -35,9 +35,11 @@ Although you can start from an empty directory, it is highly recommended that yo
 1. Contains everything required to build the extension and run it in Docker Desktop.
 2. High-level folder containing your front-end app source code.
 3. Assets that aren’t compiled or dynamically generated are stored here. These can be static assets like logos or the robots.txt file.
-4. The src, or source folder contains all the React components, external CSS files, and dynamic assets that are brough into the component files.
+4. The src, or source folder contains all the React components, external CSS files, and dynamic assets that are brought into the component files.
 5. The icon that is displayed in the left-menu of the Docker Desktop Dashboard.
 6. A file that provides information about the extension such as the name, description, and version.
+
+For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
 ## Create a Dockerfile
 

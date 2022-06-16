@@ -27,12 +27,15 @@ Although you can start from an empty directory, it is highly recommended that yo
 │       └── ... React aplication
 ├── hello.sh # (3)
 └── metadata.json # (4)
+└── ui # (5)
+    └── index.html
 ```
 
 1. Contains everything required to build the extension and run it in Docker Desktop.
 2. The source folder that contains the UI application. In this example we use a React frontend, the main part of th extension is an App.tsx.
 3. The script that runs inside the container.
 4. A file that provides information about the extension such as the name, description, and version.
+5. The source folder that contains all your HTML, CSS and JS files. There can also be other static assets such as logos and icons. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
 ## Invoke the extension backend from your javascript code
 

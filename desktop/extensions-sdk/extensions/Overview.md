@@ -28,6 +28,11 @@ Push the image to DockerHub:
 > Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
 > 
 
+## Publish your extension in the Marketplace
+
+Docker Desktop displays published extensions in the Extensions Marketplace.
+If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We'll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
+
 ## Clean up
 
 To remove the extension, run:

@@ -6,7 +6,7 @@ redirect_from:
 - desktop/extensions-sdk/tutorials/initialize/
 ---
 
-To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. You can either automatically generate a set of boilerplate files, or start with an empty directory.
+To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files.
 
 ## Prerequisites
 
@@ -87,31 +87,7 @@ ID                  PROVIDER            VERSION             UI                  
 
 ![Extensions enabled](images/extensions-enabled.png)
 
-You may also need to install:
-
-- [NodeJS](https://nodejs.org/)
-- [Go](https://go.dev/dl/)
-
->Note
->
->NodeJS and Go are only required if an extension is created using the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
-
-## Prepare your directory
-
-If you are starting from an empty directory, continue to step two. 
-
-If you want to automatically generate the necessary files, use the `init` subcommand and provide a name for your extension.
-
-`docker extension init my-extension`
-
-You’ll be asked a series of questions about your extension, such as its name, a description, and the name of your Hub repository. This helps the CLI to generate a set of boilerplate files for you to get started. The boilerplate files are stored in the directory `my-extension`.
-
-The automatically generated extension contains:
-
-- A backend service that listens on a socket. It has one endpoint `/hello` that returns a JSON payload.
-- A React frontend that can call the backend and output the backend’s response.
-
-As part of the extension boilerplate files, a `Makefile` is generated at the root of the extension directory with targets to build and push the extension.
+You can now continue to step two and prepare your directory. 
 
 ## What’s next?
 

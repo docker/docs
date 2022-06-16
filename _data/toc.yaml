@@ -1238,6 +1238,8 @@ manuals:
       section:
         - path: /desktop/extensions-sdk/
           title: Overview
+        - path: /desktop/extensions-sdk/quickstart/
+          title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
             - title: "Step one: Get started"
@@ -1262,17 +1264,7 @@ manuals:
               path: /desktop/extensions-sdk/build/oauth2-flow/
             - title: CLI reference
               path: /desktop/extensions-sdk/build/usage/
-        - sectiontitle: "Part two: Design and UI styling"
-          section:
-             - title: Guidelines
-               path: /desktop/extensions-sdk/design/design-guidelines/
-             - title: Docker design principles
-               path: /desktop/extensions-sdk/design/design-principles/
-             - title: UI styling guidelines
-               path: /desktop/extensions-sdk/design/overview/
-             - title: MUI best practices
-               path: /desktop/extensions-sdk/design/mui-best-practices/
-        - sectiontitle: "Part three: Publish"
+        - sectiontitle: "Part two: Publish"
           section:
             - title: Overview
               path: /desktop/extensions-sdk/extensions/Overview/
@@ -1282,6 +1274,16 @@ manuals:
               path: /desktop/extensions-sdk/extensions/labels/
             - title: Distribution
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+        - sectiontitle: "Design and UI styling"
+          section:
+             - title: Guidelines
+               path: /desktop/extensions-sdk/design/design-guidelines/
+             - title: Docker design principles
+               path: /desktop/extensions-sdk/design/design-principles/
+             - title: UI styling guidelines
+               path: /desktop/extensions-sdk/design/overview/
+             - title: MUI best practices
+               path: /desktop/extensions-sdk/design/mui-best-practices/
         - sectiontitle: Extension APIs
           section:
             - title: Overview

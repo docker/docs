@@ -38,11 +38,6 @@ Docker Desktop scans the list of published extensions for new versions regularly
 
 Users can download and install the newer version of an extension without updating Docker Desktop itself.
 
-## Publish your extension in the Marketplace
-
-Docker Desktop displays published extensions in the Extensions Marketplace.
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We'll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
-
 ## API dependencies
 
 Extensions must specify the Extension API version they rely on. Currently there is no technical validation of this version, as the extension framework is still experimental.

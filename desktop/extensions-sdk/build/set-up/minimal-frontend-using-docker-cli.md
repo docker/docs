@@ -26,7 +26,7 @@ Although you can start from an empty directory, it is highly recommended that yo
 
 1. Contains everything required to build the extension and run it in Docker Desktop.
 2. A file that provides information about the extension such as the name, description, and version.
-3. The source folder that contains all your HTML, CSS and JS files. In this example we use a React frontend, the main part of th extension is an App.tsx.
+3. The source folder that contains all your HTML, CSS and JS files. In this example we use a React frontend, the main part of th extension is an App.tsx. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
 ## Invoke docker CLI in your javascript code
 
