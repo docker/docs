@@ -87,7 +87,7 @@ ID                  PROVIDER            VERSION             UI                  
 
 ![Extensions enabled](images/extensions-enabled.png)
 
-You can now continue to step two and prepare your directory. 
+You can now continue to step two and set up your directory. 
 
 ## What’s next?
 

@@ -19,11 +19,11 @@ The example below shows the [`Min FrontEnd Extension`](set-up/minimal-frontend-e
 
 In order to open the Chrome DevTools for your extension when you click on the extension tab, run:
 
-`$ docker extension dev debug john/my-extension`
+`$ docker extension dev debug <name-of-your-extensions>`
 
 Each subsequent click on the extension tab will also open Chrome Dev Tools. To stop this behaviour, run:
 
-`$ docker extension dev reset john/my-extension`
+`$ docker extension dev reset <name-of-your-extensions>`
 
 After an extension is deployed, it is also possible to open Chrome DevTools from the UI extension part using a variation of the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code). Click on the extension tab, and then hit the key sequence `up, up, down, down, left, right, left, right, p, d, t`.
 
@@ -42,13 +42,13 @@ This starts a development server that listens on port 3000.
 
 You can now tell Docker Desktop to use this as the frontend source. In another terminal run:
 
-`$ docker extension dev ui-source my-extension http://localhost:3000`
+`$ docker extension dev ui-source <name-of-your-extensions> http://localhost:3000`
 
 Close and reopen the Docker Desktop dashboard and go to your extension. All the changes to the frontend code are immediately visible.
 
-Once finished, you can reset the extension configuration to the original settings. This will also reset opening Chrome dev tools if you used `docker extension dev debug my-extension`:
+Once finished, you can reset the extension configuration to the original settings. This will also reset opening Chrome dev tools if you used `docker extension dev debug <name-of-your-extensions>`:
 
-`$ docker extension dev reset my-extension`
+`$ docker extension dev reset <name-of-your-extensions>`
 
 ## Show the extension containers
 

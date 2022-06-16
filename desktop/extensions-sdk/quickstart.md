@@ -4,7 +4,7 @@ description: Guide on how to build an extension quickly
 keywords: quickstart, extensions
 ---
 
-Follow the guide below to build a basic Docker Extension quickly. The quickstart guide automatically generates boilerplate files for you. 
+Follow the guide below to build a basic Docker Extension quickly. The Quickstart guide automatically generates boilerplate files for you. 
 
 >Note
 >
@@ -15,8 +15,7 @@ Follow the guide below to build a basic Docker Extension quickly. The quickstart
 - [Docker Desktop](../../release-notes.md)
 - [NodeJS](https://nodejs.org/)
 - [Go](https://go.dev/dl/)
-
-- Install the latest [Extensions CLI](https://github.com/docker/extensions-sdk/releases/latest), which is used to manage extensions later on.
+- [Extensions CLI](https://github.com/docker/extensions-sdk/releases/latest)
 
 Once you've downloaded the Extensions CLI, extract the binary in to `~/.docker/cli-plugins`.
 
@@ -77,13 +76,13 @@ $ mv docker-extension ~/.docker/cli-plugins
   <hr></div>
 </div>
 
-## Step one: Prepare your directory 
+## Step one: Set up your directory 
 
-To prepare your directory, use the `init` subcommand and provide a name for your extension.
+To set up your directory, use the `init` subcommand and provide a name for your extension.
 
 `docker extension init my-extension`
 
-You’ll be asked a series of questions about your extension, such as its name, a description, and the name of your Hub repository. This helps the CLI to generate a set of boilerplate files for you to get started. The boilerplate files are stored in the directory `my-extension`.
+You’ll be asked a series of questions about your extension, such as its name, a description, and the name of your Hub repository. This helps the CLI generate a set of boilerplate files for you to get started. The boilerplate files are stored in the directory `my-extension`.
 
 The automatically generated extension contains:
 
@@ -112,7 +111,9 @@ To install the extension in Docker Desktop, run:
 
 To preview the extension in Docker Desktop, close and open Docker Dashboard once the installation is complete.
 
-## Step four: Submit and publish your extension to the marketplace
+During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. See [Preview whilst developing the UI](build/preview-and-update.md#preview-whilst-developing-the-ui)
+
+## Step four: Submit and publish your extension to the Marketplace
 
 If you want to make your extension available to all Docker Desktop users, you can submit it for publication in the Marketplace. For more information, see [Publish](extensions/Overview.md).
 
@@ -122,3 +123,11 @@ To remove the extension, run:
 
 `docker extension rm <name-of-your-extension>`
 
+## What's next 
+
+Learn more about:
+- [Building an extension](build/build.md)
+- [Validating and installing](build/validate-install.md)
+- [Previewing and updating](build/preview-and-update.md)
+- [Setting up authentication](build/oauth2-flow.md)
+- [Designing the UI](design/design-guidelines.md)

@@ -21,7 +21,7 @@ To validate, run:
 
 If your extension is valid, the message below displays:
 
-`The extension image "desktop-frontend-minimal-extension:0.0.1" is valid`.
+`The extension image "name-of-your-extension" is valid`.
 
 Before the image is built, it is also possible to validate only the metadata.json file:
 

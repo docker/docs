@@ -22,8 +22,6 @@ Development of extensions can be done locally without the need to push the exten
 
 The documentation is structured  so that it matches the steps you need to take when creating your extension. There are two main parts to creating a Docker Extension; Build the foundations and then publish your extension. 
 
-
-
 ### Part one: Build the foundations
 
 The build process consists of:
@@ -37,14 +35,16 @@ The build process consists of:
 
 There are also optional instructions on [how to set authentication](build/oauth2-flow.md) for your extension.
 
-This section also provides sample folders with ready-to-go examples that walk you through building:
+This build section provides sample folders with ready-to-go examples that walk you through building:
 
 - A frontend extension based on plain HTML
 - A simple Docker extension that contains only a UI part and is based on ReactJS. This is useful if you want to develop an extension which consists exclusively of a visual part with no services running in the VM.
 - An extension that invokes Docker CLI commands
 - A simple backend extension
 
-Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
+>Note
+>
+>Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
 
 If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service) example.
 
@@ -53,7 +53,6 @@ For further inspiration, see the other examples in the [samples folder](https:/
 ### Part two: Publish and distribute your extension
 
 Docker Desktop displays published extensions in the Extensions Marketplace. If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
-
 
 ## What’s next?
 If you want to get up and running quickly with a Docker extension, see the [Quickstart guide](quickstart.md). 
