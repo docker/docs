@@ -41,7 +41,7 @@ negated rule at the top of the `DOCKER-USER` filter chain. For example, the
 following rule restricts external access from all IP addresses except `192.168.1.1`:
 
 ```console
-$ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.1 -j DROP
+$ iptables -I DOCKER-USER -i "$ext_if" ! -s 192.168.1.1 -j DROP
 ```
 
 Please note that you will need to change `ext_if` to correspond with your
@@ -49,14 +49,14 @@ host's actual external interface. You could instead allow connections from a
 source subnet. The following rule only allows access from the subnet `192.168.1.0/24`:
 
 ```console
-$ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.0/24 -j DROP
+$ iptables -I DOCKER-USER -i "$ext_if" ! -s 192.168.1.0/24 -j DROP
 ```
 
 Finally, you can specify a range of IP addresses to accept using `--src-range`
 (Remember to also add `-m iprange` when using `--src-range` or `--dst-range`):
 
 ```console
-$ iptables -I DOCKER-USER -m iprange -i ext_if ! --src-range 192.168.1.1-192.168.1.3 -j DROP
+$ iptables -I DOCKER-USER -m iprange -i "$ext_if" ! --src-range 192.168.1.1-192.168.1.3 -j DROP
 ```
 
 You can combine `-s` or `--src-range` with `-d` or `--dst-range` to control both
@@ -77,7 +77,7 @@ router, you can add explicit `ACCEPT` rules to the `DOCKER-USER` chain to
 allow it:
 
 ```console
-$ iptables -I DOCKER-USER -i src_if -o dst_if -j ACCEPT
+$ iptables -I DOCKER-USER -i "$src_if" -o "$dst_if" -j ACCEPT
 ```
 
 ## Prevent Docker from manipulating iptables
