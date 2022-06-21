@@ -111,7 +111,7 @@ To install the extension in Docker Desktop, run:
 
 To preview the extension in Docker Desktop, close and open Docker Dashboard once the installation is complete.
 
-During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. See [Preview whilst developing the UI](build/preview-and-update.md#preview-whilst-developing-the-ui)
+During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. See [Preview whilst developing the UI](build/preview-and-update.md#preview-whilst-developing-the-ui) for more information. 
 
 ## Step four: Submit and publish your extension to the Marketplace
 

@@ -20,7 +20,7 @@ Development of extensions can be done locally without the need to push the exten
 
 ## How to use the resources in this section
 
-The documentation is structured  so that it matches the steps you need to take when creating your extension. There are two main parts to creating a Docker Extension; Build the foundations and then publish your extension. 
+The documentation is structured so that it matches the steps you need to take when creating your extension. There are two main parts to creating a Docker Extension; Build the foundations and then publish your extension. 
 
 ### Part one: Build the foundations
 
@@ -55,6 +55,6 @@ For further inspiration, see the other examples in the [samples folder](https:/
 Docker Desktop displays published extensions in the Extensions Marketplace. If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
 
 ## What’s next?
-If you want to get up and running quickly with a Docker extension, see the [Quickstart guide](quickstart.md). 
+If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md). 
 
-For more indepth information about each step of the Extension creation process, see [Get started](/build/get-started.md).
+For more indepth information about each step of the extension creation process, see [Get started](/build/get-started.md).
