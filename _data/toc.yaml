@@ -1254,16 +1254,10 @@ manuals:
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
                 - title: ... a minimal backend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
-            - title: "Step three: Build"
-              path: /desktop/extensions-sdk/build/build/
-            - title: "Step four: Validate and install"
-              path: /desktop/extensions-sdk/build/validate-install/
-            - title: "Step five: Preview and update"
-              path: /desktop/extensions-sdk/build/preview-and-update/
-            - title: "Optional step: Authentication"
-              path: /desktop/extensions-sdk/build/oauth2-flow/
-            - title: CLI reference
-              path: /desktop/extensions-sdk/build/usage/
+            - title: "Step three: Build and install"
+              path: /desktop/extensions-sdk/build/build-install/
+            - title: "Step four: Test and debug"
+              path: /desktop/extensions-sdk/build/test-debug/
         - sectiontitle: "Part two: Publish"
           section:
             - title: Overview
@@ -1274,6 +1268,8 @@ manuals:
               path: /desktop/extensions-sdk/extensions/labels/
             - title: Distribution
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+            - title: Build multi-arch extensions
+              path: /desktop/extensions-sdk/extensions/multiarch/
         - sectiontitle: "Design and UI styling"
           section:
              - title: Guidelines
@@ -1284,20 +1280,26 @@ manuals:
                path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
-        - sectiontitle: Extension APIs
+        - sectiontitle: Developer SDK tools
           section:
-            - title: Overview
-              path: /desktop/extensions-sdk/dev/api/overview/
-            - title: Extension Backend
-              path: /desktop/extensions-sdk/dev/api/backend/
-            - title: Docker
-              path: /desktop/extensions-sdk/dev/api/docker/
-            - title: Dashboard
-              path: /desktop/extensions-sdk/dev/api/dashboard/
-            - title: Navigation
-              path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
-            - title: API Reference
-              path: /desktop/extensions-sdk/dev/api/reference/README/
+            - title: Authentication
+              path: /desktop/extensions-sdk/dev-tools/oauth2-flow/
+            - title: CLI reference
+              path: /desktop/extensions-sdk/dev-tools/usage/
+            - sectiontitle: Extension APIs
+              section:
+                - title: Overview
+                  path: /desktop/extensions-sdk/dev-tools/api/overview/
+                - title: Extension Backend
+                  path: /desktop/extensions-sdk/dev-tools/api/backend/
+                - title: Docker
+                  path: /desktop/extensions-sdk/dev-tools/api/docker/
+                - title: Dashboard
+                  path: /desktop/extensions-sdk/dev-tools/api/dashboard/
+                - title: Navigation
+                  path: /desktop/extensions-sdk/dev-tools/api/dashboard-routes-navigation/
+                - title: API Reference
+                  path: /desktop/extensions-sdk/dev-tools/api/reference/README/
     - path: /desktop/multi-arch/
       title: Multi-arch support
     - path: /desktop/kubernetes/

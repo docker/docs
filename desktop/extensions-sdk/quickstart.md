@@ -111,7 +111,7 @@ To install the extension in Docker Desktop, run:
 
 To preview the extension in Docker Desktop, close and open Docker Dashboard once the installation is complete.
 
-During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. See [Preview whilst developing the UI](build/preview-and-update.md#preview-whilst-developing-the-ui) for more information. 
+During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. See [Preview whilst developing the UI](build/test-debug.md#hot-reloading-whilst-developing-the-ui) for more information. 
 
 ## Step four: Submit and publish your extension to the Marketplace
 
@@ -126,8 +126,7 @@ To remove the extension, run:
 ## What's next 
 
 Learn more about:
-- [Building an extension](build/build.md)
-- [Validating and installing](build/validate-install.md)
-- [Previewing and updating](build/preview-and-update.md)
-- [Setting up authentication](build/oauth2-flow.md)
+- [Building and installing an extension](build/build-install.md)
+- [Testing and debugging](build/test-debug.md)
+- [Setting up authentication](dev-tools/oauth2-flow.md)
 - [Designing the UI](design/design-guidelines.md)

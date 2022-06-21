@@ -37,6 +37,8 @@ Although you can start from an empty directory, it is highly recommended that yo
 4. A file that provides information about the extension such as the name, description, and version.
 5. The source folder that contains all your HTML, CSS and JS files. There can also be other static assets such as logos and icons. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
+If you want to set up user authentication for the extension, see [Authentication](../../dev-tools/oauth2-flow.md).
+
 ## Invoke the extension backend from your javascript code
 
 Using the [React extension example](./react-extension.md), we can invoke our extension backend from the App.tsx file.
@@ -112,6 +114,6 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 
 ## What's next?
 
-Learn how to [build your extension](../build.md) for single or multiple architectures.
+Learn how to [build and install your extension](../build-install.md).
 
 

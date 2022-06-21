@@ -30,10 +30,10 @@ The build process consists of:
 - Setting up the directory with files which range from the extension’s source code to the required extension-specific files.
 - Creating the Dockerfile to build, publish, and run your extension in Docker Desktop.
 - Configuring the metadata file which is required at the root of the image filesystem.
-- Building and validating the extension.
-- Installing, previewing, and updating the extension.
+- Building and installing the extension.
+- Testing and debugging the extension.
 
-There are also optional instructions on [how to set authentication](build/oauth2-flow.md) for your extension.
+There are also instructions on [how to set authentication](dev-tools/oauth2-flow.md) for your extension.
 
 This build section provides sample folders with ready-to-go examples that walk you through building:
 
@@ -46,7 +46,7 @@ This build section provides sample folders with ready-to-go examples that walk y
 >
 >Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
 
-If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service) example.
+If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service) example.
 
 For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples)
 
@@ -57,4 +57,4 @@ Docker Desktop displays published extensions in the Extensions Marketplace. If y
 ## What’s next?
 If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md). 
 
-For more indepth information about each step of the extension creation process, see [Get started](/build/get-started.md).
+For more in-depth information about each step of the extension creation process, see [Get started](/build/get-started.md).

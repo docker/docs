@@ -1,21 +1,8 @@
 ---
-title: "Step three: Build"
+title: Build the extensions for multiple architectures
 description: Step three in creating an extension.
-keywords: Docker, Extensions, sdk, build
-redirect_from:
-- /desktop/extensions-sdk/extensions/multi-arch/
-- /desktop/extensions-sdk/dev/cli/build-test-install-extension/
+keywords: Docker, Extensions, sdk, build, multiarch
 ---
-
-Once you have set up your directory correctly, you can build your extension for single or multiple architectures. 
-
-## Build the extension for a single architecture
-
-To build the extension, run:
-
-`docker build -t <name-of-your-extension> .`
-
-## Build the extensions for multiple architectures
 
 It is highly recommended that, at a minimum, your extension is supported for the following architectures:
 
@@ -24,7 +11,7 @@ It is highly recommended that, at a minimum, your extension is supported for the
 
 Docker Desktop retrieves the extension image according to the user’s system architecture. If the extension does not provide an image that matches the user’s system architecture, Docker Desktop is not able to install the extension. As a result, users can’t run the extension in Docker Desktop.
 
-### **Building and pushing for multiple architectures**
+### Build and push for multiple architectures
 
 If you created an extension from the `docker extension init` command, the  `Makefile` at the root of the directory includes a target with name `push-extension`.
 
@@ -132,7 +119,4 @@ When the extension is installed, the extension framework copies the binaries fro
 ### Can I develop extensions that run Windows containers?
 
 Although Docker Extensions is supported on Docker Desktop for Windows, Mac, and Linux, the extension framework only supports linux containers. Therefore, you must target `linux` as the OS when you build your extension image.
-
-## What's next?
- Learn how to [validate and install](validate-install.md) your extension.
  

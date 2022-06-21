@@ -1,13 +1,19 @@
 ---
-title: "Step six: Validate and install"
-description: Step six in the extension creation process
+title: "Step three: Build and install"
+description: Step three in the extension creation process
 keywords: Docker, Extensions, sdk, validate, install
 redirect_from:
 - /desktop/extensions-sdk/extensions/validation/
 - /desktop/extensions-sdk/dev/cli/build-test-install-extension/
 ---
 
-After you have [built your extension](build.md), you can verify the extension image is compliant and install your extension in Docker Desktop.
+Once you have set up your directory correctly, you can build your extension for single or multiple architectures. 
+
+## Build the extension for a single architecture
+
+To build the extension, run:
+
+`docker build -t <name-of-your-extension> .`
 
 ## Validate your extension
 
@@ -29,7 +35,7 @@ Before the image is built, it is also possible to validate only the metadata.jso
 
 The JSON schema used to validate the `metadata.json` file against can be found under the [releases page](https://github.com/docker/extensions-sdk/releases/latest).
 
-## **Install the extension**
+## Install the extension
 
 To install the extension in Docker Desktop, run:
 
@@ -50,4 +56,4 @@ docker/hub-explorer-extension   Docker Inc.         0.0.2               1 tab(Ex
 
 ## What's next?
 
-Learn how to [preview and update](preview-and-update.md) your extension.
+Learn how to [test and debug](test-debug.md) your extension.

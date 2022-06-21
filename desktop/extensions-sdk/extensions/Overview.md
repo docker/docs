@@ -18,7 +18,7 @@ Push the image to DockerHub:
 > 
 > For Docker Extensions images to be listed in Docker Desktop, they must be approved by Docker and the tags must follow semantic versioning, e.g: `0.0.1`.
 > 
-> See [distribution and new releases](https://docs.docker.com/desktop/extensions-sdk/extensions/DISTRIBUTION/#distribution-and-new-releases) for more information.
+> See [distribution and new releases](DISTRIBUTION.md#distribution-and-new-releases) for more information.
 > 
 > See [semver.org](https://semver.org/) to learn more about semantic versioning.
 > 
@@ -44,3 +44,4 @@ Find more information about:
 - [The `metadata.json` file](METADATA.md)
 - [Labels in your `Dockerfile`](labels.md)
 - [Distributing your extension](DISTRIBUTION.md)
+- [Building extensions for multiple architectures](multiarch.md)

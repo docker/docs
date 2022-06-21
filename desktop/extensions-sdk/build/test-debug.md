@@ -1,10 +1,10 @@
 ---
-title: "Step five: Preview and update"
-description: Step five in the extension creation process
+title: "Step four: Test and debug"
+description: Step four in the extension creation process
 keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
 ---
 
-Once your extension has been [validated and installed](validate-install.md), you can preview your extension in Docker Desktop. 
+Once your extension has been [built and installed](build-install.md), you can preview your extension in Docker Desktop. 
 
 ## Preview the extension
 
@@ -27,7 +27,7 @@ Each subsequent click on the extension tab will also open Chrome Dev Tools. To s
 
 After an extension is deployed, it is also possible to open Chrome DevTools from the UI extension part using a variation of the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code). Click on the extension tab, and then hit the key sequence `up, up, down, down, left, right, left, right, p, d, t`.
 
-### Preview whilst developing the UI
+### Hot reloading whilst developing the UI
 
 During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. To do this, you can configure Docker Desktop to load your UI from a development server, such as the one Create React App starts when invoked with yarn start.
 
@@ -60,7 +60,7 @@ If your extension is composed of one or more services running as containers in t
 
 ## Update the extension
 
-To update the extension, you must first [rebuild](build.md) and [revalidate](validate-install.md) your extension. You can then use the update command.
+To update the extension, you must first [rebuild and reinstall](build-install.md) your extension. You can then use the update command.
 
 `docker extension update <name-of-your-extensions>`
 
@@ -68,5 +68,5 @@ To update the extension, you must first [rebuild](build.md) and [revalidate](val
 
 - Explore our [design principles](../design/design-principles.md).
 - Take a look at our [UI styling guidelines](../design/overview.md).
-- Set up [authentication for your extension](oauth2-flow.md)
+- Set up [authentication for your extension](../dev-tools/oauth2-flow.md)
 - Learn how to [publish your extension](../extensions/Overview.md).

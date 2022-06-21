@@ -28,6 +28,8 @@ Although you can start from an empty directory, it is highly recommended that yo
 2. A file that provides information about the extension such as the name, description, and version.
 3. The source folder that contains all your HTML, CSS and JS files. In this example we use a React frontend, the main part of th extension is an App.tsx. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
+If you want to set up user authentication for the extension, see [Authentication](../../dev-tools/oauth2-flow.md).
+
 ## Invoke docker CLI in your javascript code
 
 Using the [React extension example](./react-extension.md), we can invoke docker commands from the App.tsx file.
@@ -102,4 +104,4 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 
 ## What's next?
 
-Learn how to [build your extension](../build.md) for single or multiple architectures.
+Learn how to [build and install your extension](../build-install.md).

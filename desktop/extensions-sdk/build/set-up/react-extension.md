@@ -41,6 +41,8 @@ Although you can start from an empty directory, it is highly recommended that yo
 
 For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
+If you want to set up user authentication for the extension, see [Authentication](../../dev-tools/oauth2-flow.md).
+
 ## Create a Dockerfile
 
 Use the Dockerfile below as a template and change it accodingly to suit your needs. 
@@ -112,4 +114,4 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 
 ## What's next?
 
-Learn how to [build your extension](../build.md) for single or multiple architectures.
+Learn how to [build and install your extension](../build-install.md).
