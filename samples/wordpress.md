@@ -81,14 +81,14 @@ Compose to set up and run WordPress. Before starting, make sure you have
 
 ### Build the project
 
-Now, run `docker-compose up -d` from your project directory.
+Now, run `docker compose up -d` from your project directory.
 
-This runs [`docker-compose up`](../compose/reference/up.md) in detached mode, pulls
+This runs [`docker compose up`](../engine/reference/commandline/compose_up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 
 ```console
-$ docker-compose up -d
+$ docker compose up -d
 
 Creating network "my_wordpress_default" with the default driver
 Pulling db (mysql:5.7)...
@@ -135,10 +135,10 @@ browser.
 
 ### Shutdown and cleanup
 
-The command [`docker-compose down`](../compose/reference/down.md) removes the
+The command [`docker compose down`](../engine/reference/commandline/compose_down.md) removes the
 containers and default network, but preserves your WordPress database.
 
-The command `docker-compose down --volumes` removes the containers, default
+The command `docker compose down --volumes` removes the containers, default
 network, and the WordPress database.
 
 ## More Compose documentation

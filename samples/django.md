@@ -110,7 +110,7 @@ In this step, you create a Django starter project by building the image from the
 
 1. Change to the root of your project directory.
 
-2. Create the Django project by running the [docker-compose run](../compose/reference/run.md)
+2. Create the Django project by running the [docker compose run](../engine/reference/commandline/compose_run.md)
    command as follows.
 
    ```console
@@ -199,7 +199,7 @@ In this section, you set up the database connection for Django.
 
 3. Save and close the file.
 
-4. Run the [docker-compose up](../compose/reference/up.md) command from the top level directory for your project.
+4. Run the [docker-compose up](../engine/reference/commandline/compose_up.md) command from the top level directory for your project.
 
    ```console
    $ docker-compose up
@@ -267,7 +267,7 @@ In this section, you set up the database connection for Django.
       ```
 
     * Or, for a more elegant shutdown, switch to a different shell, and run
-      [docker-compose down](../compose/reference/down.md) from the top level of your
+      [docker compose down](../engine/reference/commandline/compose_down.md) from the top level of your
       Django sample project directory.
 
       ```console

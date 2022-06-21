@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_rm
 title: docker compose rm
+redirect_from:
+- /compose/reference/rm/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

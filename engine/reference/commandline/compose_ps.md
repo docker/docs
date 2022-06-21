@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_ps
 title: docker compose ps
+redirect_from:
+- /compose/reference/ps/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -280,7 +280,7 @@ available resources.
 
 Deploy support is an OPTIONAL aspect of the Compose specification, and is
 described in detail in the [Deployment support](deploy.md) documentation.
-not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
+If not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
 
 ### build
 
