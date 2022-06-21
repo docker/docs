@@ -14,6 +14,7 @@ Before you start to on board your organization, ensure that you've completed the
 - You have a Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet.
 - Your Docker Business subscription is new. If you upgraded your Docker Team subscription or renewed your Docker Business subscription, see [what's next](#whats-next).
 - Your Docker Business subscription has started. You cannot complete all the steps until after your subscription start date.
+-  You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
 
 ## Step 1: Identify your Docker users and their Docker accounts
 
