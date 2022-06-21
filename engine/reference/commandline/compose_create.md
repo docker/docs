@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_create
 title: docker compose create
+redirect_from:
+- /compose/reference/create/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

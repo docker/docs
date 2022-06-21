@@ -1,25 +1,37 @@
 ---
-description: Overview of docker-compose CLI
+description: Overview of the Docker Compose CLI
 keywords: fig, composition, compose, docker, orchestration, cli, reference, docker-compose
 redirect_from:
-- /compose/reference/docker-compose/
 - /compose/reference/overview/
-title: Overview of docker-compose CLI
+title: Overview of docker compose CLI
 ---
 
-This page provides the usage information for the `docker-compose` Command.
+This page provides the usage information for the `docker compose` Command.
+
+> Important
+>
+> The new Compose V2, which supports the `compose` command as part of the Docker
+> CLI, is now available.
+>
+> Compose V2 integrates compose functions into the Docker platform, continuing
+> to support most of the previous `docker-compose` features and flags. You can
+> run Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose`,
+> instead of `docker-compose`.
+{: .important}
+
+For more information about Docker Compose V2 GA, see the blog post [Announcing Compose V2 General Availability](https://www.docker.com/blog/announcing-compose-v2-general-availability/){: target="_blank" rel="noopener" class="_"}.
 
 ## Command options overview and help
 
-You can also see this information by running `docker-compose --help` from the
+You can also see this information by running `docker compose --help` from the
 command line.
 
 ```none
 Define and run multi-container applications with Docker.
 
 Usage:
-  docker-compose [-f <arg>...] [--profile <name>...] [options] [COMMAND] [ARGS...]
-  docker-compose -h|--help
+  docker compose [-f <arg>...] [--profile <name>...] [options] [COMMAND] [ARGS...]
+  docker compose -h|--help
 
 Options:
   -f, --file FILE             Specify an alternate compose file
@@ -71,10 +83,10 @@ Commands:
   top                Display the running processes
   unpause            Unpause services
   up                 Create and start containers
-  version            Show the Docker-Compose version information
+  version            Show the Docker Compose version information
 ```
 
-You can use Docker Compose binary, `docker-compose [-f <arg>...] [options]
+You can use Docker Compose binary, `docker compose [-f <arg>...] [options]
 [COMMAND] [ARGS...]`, to build and manage multiple services in Docker containers.
 
 ## Use `-f` to specify name and path of one or more Compose files
@@ -91,7 +103,7 @@ add to their predecessors.
 For example, consider this command line:
 
 ```console
-$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
+$ docker compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
 ```
 
 The `docker-compose.yml` file might specify a `webapp` service.
@@ -143,14 +155,14 @@ in an environment file.
 For an example of using the `-f` option at the command line, suppose you are
 running the [Compose Rails sample](../../samples/rails.md), and
 have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
-use a command like [docker-compose pull](pull.md) to get the
+use a command like [docker compose pull](../../engine/reference/commandline/compose_pull.md) to get the
 postgres image for the `db` service from anywhere by using the `-f` flag as
-follows: `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
+follows: `docker compose -f ~/sandbox/rails/docker-compose.yml pull db`
 
 Here's the full example:
 
 ```console
-$ docker-compose -f ~/sandbox/rails/docker-compose.yml pull db
+$ docker compose -f ~/sandbox/rails/docker-compose.yml pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres
 ef0380f84d05: Pull complete
@@ -178,9 +190,9 @@ directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars
 
 ## Use `--profile` to specify one or more active profiles
 
-Calling `docker-compose --profile frontend up` will start the services with the
+Calling `docker compose --profile frontend up` will start the services with the
 profile `frontend` and services without specified profiles. You can also enable
-multiple profiles, e.g. with `docker-compose --profile frontend --profile debug up`
+multiple profiles, e.g. with `docker compose --profile frontend --profile debug up`
 the profiles `frontend` and `debug` will be enabled.
 
 See also [_Using profiles with Compose_](../profiles.md) and the
@@ -189,7 +201,7 @@ See also [_Using profiles with Compose_](../profiles.md) and the
 ## Set up environment variables
 
 You can set [environment variables](envvars.md) for various
-`docker-compose` options, including the `-f` and `-p` flags.
+`docker compose` options, including the `-f` and `-p` flags.
 
 For example, the [COMPOSE_FILE environment variable](envvars.md#compose_file)
 relates to the `-f` flag, and `COMPOSE_PROJECT_NAME`
