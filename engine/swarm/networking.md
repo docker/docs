@@ -15,7 +15,7 @@ A Docker swarm generates two different kinds of traffic:
 
 This topic discusses how to manage the application data for your swarm services.
 For more details about swarm networking in general, see the
-[Docker networking reference architecture](https://docs.docker.com/network/){: target="_blank" rel="noopener" class="_" }.
+[Docker networking reference architecture](https://docs.docker.com/network/).
 
 The following three network concepts are important to swarm services:
 
