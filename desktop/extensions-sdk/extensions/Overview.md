@@ -10,7 +10,7 @@ Tag the previous image to prepend the account owner at the beginning of the imag
 
 `docker tag <name-of-your-extension> owner/<name-of-your-extension>`
 
-Push the image to DockerHub:
+Push the image to Docker Hub:
 
 `docker push owner/<name-of-your-extension>`
 
