@@ -240,7 +240,7 @@ or combine BuildKit’s output for the user. For this use case, we have added a
 command called [`docker buildx bake`](../engine/reference/commandline/buildx_bake.md).
 
 The `bake` command supports building images from compose files, similar to 
-[`docker-compose build`](../compose/reference/build.md), but allowing all the
+[`docker-compose build`](../engine/reference/commandline/compose_build.md), but allowing all the
 services to be built concurrently as part of a single request.
 
 There is also support for custom build rules from HCL/JSON files allowing
