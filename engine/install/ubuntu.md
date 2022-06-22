@@ -149,9 +149,14 @@ from the repository.
     ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
     ```
+3.  You don't need to enable or start before run command. Docker automatically starts on Ubuntu. You can use the command below to check if it is enabled or disabled.
 
-3.  Verify that Docker Engine is installed correctly by running the `hello-world`
-    image.
+    ```console
+    $ sudo systemctl is-enabled docker
+    ``
+
+4.  Verify that Docker Engine is installed correctly by running the `hello-world`
+    image. 
 
     ```console
     $ sudo docker run hello-world
