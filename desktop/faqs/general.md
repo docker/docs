@@ -12,7 +12,7 @@ title: Frequently asked questions
 ### What are the system requirements for Docker Desktop?
 
 For information about Docker Desktop system requirements, see:
--  [Mac system requirements](../mac/install.md#system-requirements) 
+- [Mac system requirements](../mac/install.md#system-requirements) 
 - [Windows system requirements](../windows/install.md#system-requirements)
 - [Linux system requirements](../linux/install.md#system-requirements)
 
