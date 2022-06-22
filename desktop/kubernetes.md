@@ -8,32 +8,28 @@ redirect_from:
 ---
 
 Docker Desktop includes a standalone Kubernetes server and client,
-as well as Docker CLI integration that runs on your machine. The Kubernetes server runs locally within your Docker instance, is not configurable, and is a single-node cluster.
+as well as Docker CLI integration that runs on your machine. 
 
-The Kubernetes server runs within a Docker container on your local system, and
-is only for local testing. Enabling Kubernetes allows you to deploy
+The Kubernetes server runs locally within your Docker instance, is not configurable, and is a single-node cluster. It runs within a Docker container on your local system, and
+is only for local testing. 
+
+Enabling Kubernetes allows you to deploy
 your workloads in parallel, on Kubernetes, Swarm, and as standalone containers. Enabling or disabling the Kubernetes server does not affect your other
 workloads.
 
 ## Enable Kubernetes
 
-To enable Kubernetes in Docker Desktop, go to **Preferences** > **Kubernetes** and then click **Enable Kubernetes**.
+To enable Kubernetes in Docker Desktop:
+1. From the Docker Dashboard, select the **Setting** icon, or **Preferences** icon if you use a macOS.
+2. Select **Kubernetes** from the left sidebar. 
+3. Next to **Enable Kubernetes**, select the checkbox.
+4. Select **Apply & Restart** to save the settings and then click **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
 
-Click **Apply & Restart** to save the settings and then click **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
+By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. Most users do not need this option. To see these internal containers, select **Show system containers (advanced)**. 
 
-![Enable Kubernetes](images/kube-enable.png){:width="750px"}
+When Kubernetes is enabled and running, an additional status bar in the Dashboard footer and Docker menu displays. 
 
-By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. To see these internal containers, select **Show system containers (advanced)**. Most users do not need this option.
-
-When Kubernetes is enabled and running, an additional status bar item displays
-  at the bottom right of the Docker Desktop Settings dialog.
-
-The status of Kubernetes shows in the Docker menu and the context points to
-  `docker-desktop`.
-
-![Docker Menu with Kubernetes](images/kube-context.png){: width="400px"}
-
-> Upgrade Kubernetes
+> Note
 >
 > Docker Desktop does not upgrade your Kubernetes cluster automatically after a new update. To upgrade your Kubernetes cluster to the latest version, select **Reset Kubernetes Cluster**.
 
@@ -44,13 +40,21 @@ at `/usr/local/bin/kubectl` on Mac and at `C:\>Program Files\Docker\Docker\Resou
 variable, so you may need to type the full path of the command or add it to
 the `PATH`.
 
-If you have already installed `kubectl` and
+The kubectl binary is not automatically packaged with Docker Desktop for Linux. To install the kubectl command for Linux, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/){:target="_blank" rel="noopener" class="_"}. It should be installed at `/usr/local/bin/kubectl`.
+
+If you have already installed `kubectl` and it is
 pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
 
 ```console
 $ kubectl config get-contexts
 $ kubectl config use-context docker-desktop
 ```
+
+>Note
+>
+> Run the `kubectl` command in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
+>
+>If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
 
 If you installed `kubectl` using Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
@@ -69,4 +73,8 @@ For more information about `kubectl`, see the
 
 ## Disable Kubernetes
 
-To disable Kubernetes support at any time, clear the **Enable Kubernetes** check box. This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.
+To disable Kubernetes in Docker Desktop:
+1. From the Docker Dashboard, select the **Setting** icon, or **Preferences** icon if you use a macOS.
+2. Select **Kubernetes** from the left sidebar. 
+3. Next to **Enable Kubernetes**, clear the checkbox
+4. Select **Apply & Restart** to save the settings.This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.
