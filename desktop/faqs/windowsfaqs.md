@@ -4,9 +4,6 @@ keywords: desktop, windows, faqs
 title: Frequently asked questions for Windows
 ---
 
-
-## Windows FAQs
-
 ### Can I use VirtualBox alongside Docker Desktop?
 
 Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [Windows Hypervisor Platform](https://docs.microsoft.com/en-us/virtualization/api/){: target="_blank" rel="noopener" class="_"} feature on your machine.

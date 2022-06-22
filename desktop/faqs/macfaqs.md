@@ -4,8 +4,6 @@ keywords: desktop, mac, faqs
 title: Frequently asked questions for Mac
 ---
 
-## Mac FAQs
-
 ### What is Docker.app?
 
 `Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers.

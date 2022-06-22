@@ -1,5 +1,5 @@
 ---
-description: Frequently asked questions
+description: General Frequently asked questions
 keywords: desktop, mac, windows, faqs
 redirect_from:
 - /mackit/faqs/
@@ -8,8 +8,6 @@ redirect_from:
 - /desktop/faqs/
 title: Frequently asked questions
 ---
-
-## General
 
 ### What are the system requirements for Docker Desktop?
 
