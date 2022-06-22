@@ -22,7 +22,7 @@ workloads.
 To enable Kubernetes in Docker Desktop:
 1. From the Docker Dashboard, select the **Setting** icon, or **Preferences** icon if you use a macOS.
 2. Select **Kubernetes** from the left sidebar. 
-3. Next to **Enable Kubernetes**, select the checkbox
+3. Next to **Enable Kubernetes**, select the checkbox.
 4. Select **Apply & Restart** to save the settings and then click **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
 
 By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. Most users do not need this option. To see these internal containers, select **Show system containers (advanced)**. 
@@ -52,7 +52,7 @@ $ kubectl config use-context docker-desktop
 
 >Note
 >
-> The `kubectl` command should be run in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
+> Run the `kubectl` command in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
 >
 >If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
 
