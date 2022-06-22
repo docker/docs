@@ -2,6 +2,9 @@
 title: Build, test, and install an extension
 description: Docker extension CLI
 keywords: Docker, extensions, sdk, cli
+redirect_from:
+- /desktop/extensions-sdk/extensions/validation/
+- /desktop/extensions-sdk/dev/cli/build-test-install-extension/
 ---
 
 The [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples) contains multiple extensions.

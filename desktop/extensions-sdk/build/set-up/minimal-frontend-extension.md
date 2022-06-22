@@ -2,6 +2,8 @@
 title: Minimal frontend extension tutorial
 description: Minimal frontend extension tutorial
 keywords: Docker, extensions, sdk, tutorial
+redirect_from:
+- /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
 ---
 
 Learn how to create a minimal frontend extension based on plain HTML.

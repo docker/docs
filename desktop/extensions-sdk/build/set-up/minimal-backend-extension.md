@@ -2,6 +2,8 @@
 title: Minimal backend extension tutorial
 description: Minimal backend extension tutorial
 keywords: Docker, extensions, sdk, tutorial
+redirect_from:
+- /desktop/extensions-sdk/tutorials/minimal-backend-extension/
 ---
 
 Learn how to create a simple Docker Extension that runs CLI commands in the backend.

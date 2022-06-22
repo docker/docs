@@ -2,6 +2,8 @@
 title: Minimal react extension tutorial
 description: Minimal react extension tutorial
 keywords: Docker, extensions, sdk, tutorial
+redirect_from:
+- /desktop/extensions-sdk/tutorials/react-extension/
 ---
 
 Learn how to create a simple Docker extension that contains only a UI part and is based on ReactJS.
