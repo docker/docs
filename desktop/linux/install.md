@@ -8,10 +8,8 @@ Welcome to Docker Desktop for Linux. This page contains information about system
 
 > Download Docker Desktop for Linux packages
 >
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-
-
+> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
 ## System requirements
 
@@ -77,6 +75,12 @@ Depending on the processor of the host machine, the corresponding module must be
 $ modprobe kvm_intel  # Intel processors
 
 $ modprobe kvm_amd    # AMD processors
+```
+
+If the above commands fail, you can view the diagnostics by running:
+
+```console
+$ kvm-ok
 ```
 
 To check if the KVM modules are enabled, run:

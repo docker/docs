@@ -2,6 +2,9 @@
 datafolder: compose-cli
 datafile: docker_compose
 title: docker compose
+redirect_from:
+- /compose/reference/docker-compose/
+- /compose/reference/help/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

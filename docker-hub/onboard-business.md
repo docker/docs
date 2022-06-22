@@ -14,6 +14,7 @@ Before you start to on board your organization, ensure that you've completed the
 - You have a Docker Business subscription. [Get in touch with us](https://www.docker.com/pricing/contact-sales/) if you haven't subscribed to Docker Business yet.
 - Your Docker Business subscription is new. If you upgraded your Docker Team subscription or renewed your Docker Business subscription, see [what's next](#whats-next).
 - Your Docker Business subscription has started. You cannot complete all the steps until after your subscription start date.
+-  You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
 
 ## Step 1: Identify your Docker users and their Docker accounts
 
@@ -24,11 +25,13 @@ To begin, you should identify which users you will need to add to your Docker Bu
 > If you will use Docker Single Sign-on (SSO), users from your identity provider (IdP) are automatically provisioned in your organization when they sign in. You can identify which users have signed in to Docker Hub by viewing your organization's members in Docker Hub. You can also perform the steps below to identify users before you configure SSO.
 
 1. Identify the Docker users in your organization.
-   * If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify users that already have Docker Desktop installed. See your device management software's documentation for details.
-   * If your organization does not use device management software, you may survey your users.
+   - If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify Docker users. See your device management software's documentation for details. You can identify Docker users by checking if Docker Desktop is installed at the following location on each user's machine:
+      - Mac: `/Applications/Docker.app`
+      - Windows: `C:\Program Files\Docker\Docker`
+   - If your organization does not use device management software, you may survey your users.
 2. Instruct all your Docker users in your organization to update their existing Docker account's email address to an address that's in your organization's domain, or to create a new account using an email address in your organization's domain.
-   * To update an account's email address, instruct your users to sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, go to [Account Settings](https://hub.docker.com/settings/general){: target="_blank" rel="noopener" class="_"}, and update the email address to their email address in your organization's domain.
-   * To create a new account, instruct your users to go [sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"} using their email address in your organization's domain.
+   - To update an account's email address, instruct your users to sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, go to [Account Settings](https://hub.docker.com/settings/general){: target="_blank" rel="noopener" class="_"}, and update the email address to their email address in your organization's domain.
+   - To create a new account, instruct your users to go [sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"} using their email address in your organization's domain.
 3. Ask your Docker sales representative to provide a list of Docker accounts that use an email address in your organization's domain.
 
 ## Step 2: Add your Docker Business subscription to an organization

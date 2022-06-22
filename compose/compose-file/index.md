@@ -280,7 +280,7 @@ available resources.
 
 Deploy support is an OPTIONAL aspect of the Compose specification, and is
 described in detail in the [Deployment support](deploy.md) documentation.
-not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
+If not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
 
 ### build
 
@@ -427,7 +427,7 @@ cgroup_parent: m-executor-abcd
 
 ### command
 
-`command` overrides the the default command declared by the container image (i.e. by Dockerfile's `CMD`).
+`command` overrides the default command declared by the container image (i.e. by Dockerfile's `CMD`).
 
 ```
 command: bundle exec thin -p 3000
@@ -2501,7 +2501,7 @@ for complex elements, interpolation MUST be applied _before_ merge on a per-file
 ## Compose documentation
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 - [Enabling GPU access with Compose](../gpu-support.md)

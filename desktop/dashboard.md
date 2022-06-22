@@ -78,8 +78,6 @@ Attaching to db, redis, example-voting-app-master_result_1, example-voting-app-m
 
 When the application starts successfully, from the Docker menu, select **Dashboard** to see the Example voting application. Expand the application to see the containers running inside the application.
 
-![Spring Boot application view](images/app-dashboard-view.png){:width="700px"}
-
 Now that you can see the list of running containers and applications on the Dashboard, let us explore some of the actions you can perform:
 
 - Click **Port** to open the port exposed by the container in a browser.
@@ -92,7 +90,9 @@ Use the **Search** option to search for a specific object. You can also sort you
 
 From the Docker Dashboard, select the example voting application we started earlier.
 
-The **Containers/Apps** view lists all the containers running on the application and contains a detailed logs view. It also allows you to start, stop, or delete the application. Use the **Search** option at the bottom of the logs view to search application logs for specific events, or select the **Copy** icon to copy the logs to your clipboard.
+The **Containers** view lists all the containers running on the application and contains a detailed logs view. It also allows you to start, stop, or delete the application. Use the **Search** option at the bottom of the logs view to search application logs for specific events, or select the **Copy** icon to copy the logs to your clipboard.
+
+From the **Containers** view you can also select and bulk delete multiple containers at once.
 
 Click **Open in Visual Studio Code** to open the application in VS Code. Hover over the list of containers to see some of the core actions you can perform.
 
