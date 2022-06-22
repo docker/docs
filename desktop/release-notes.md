@@ -21,6 +21,8 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
+
 ## Docker Desktop 4.9.1
 2022-06-16
 
