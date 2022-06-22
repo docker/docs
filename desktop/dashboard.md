@@ -92,7 +92,12 @@ From the Docker Dashboard, select the example voting application we started earl
 
 The **Containers** view lists all the containers running on the application and contains a detailed logs view. It also allows you to start, stop, or delete the application. Use the **Search** option at the bottom of the logs view to search application logs for specific events, or select the **Copy** icon to copy the logs to your clipboard.
 
-From the **Containers** view you can also select and bulk delete multiple containers at once.
+From the **Containers** view you can also perform the following actions on multiple containers at once:
+- Pause
+- Resume
+- Stop
+- Start
+- Delete
 
 Click **Open in Visual Studio Code** to open the application in VS Code. Hover over the list of containers to see some of the core actions you can perform.
 
