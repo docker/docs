@@ -7,9 +7,9 @@ title: Download rate limit
 ## What is the download rate limit on Docker Hub
 
 Docker Hub limits the number of Docker image downloads ("pulls")
-based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For [authenticated](#how-do-i-authenticate-pull-requests) users, it is  200 pulls per 6 hour period. There are no limits for users with a paid Docker subscription.
+based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For [authenticated](#how-do-i-authenticate-pull-requests) users, it is  200 pulls per 6 hour period. Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} get up to 5000 pulls per day. If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](https://docs.docker.com/docker-hub/service-accounts/#enhanced-service-account-add-on-pricing).
 
-Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs. Unlimited pulls by IP is also available through our [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} plan.
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
 
 See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} for details.
 

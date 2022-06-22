@@ -238,7 +238,7 @@ guides:
       - sectiontitle: Get started with swarm mode
         section:
         - path: /engine/swarm/swarm-tutorial/
-          title: Set up for the tutorial
+          title: Swarm mode tutorial overview
         - path: /engine/swarm/swarm-tutorial/create-swarm/
           title: Create a swarm
         - path: /engine/swarm/swarm-tutorial/add-nodes/
@@ -281,6 +281,8 @@ guides:
         title: Manage sensitive data with Docker secrets
       - path: /engine/swarm/swarm_manager_locking/
         title: Lock your swarm
+      - path: /engine/swarm/networking/
+        title: Manage swarm service networks
       - path: /engine/swarm/admin_guide/
         title: Swarm administration guide
       - path: /engine/swarm/raft/
@@ -1300,10 +1302,16 @@ manuals:
       title: Multi-arch support
     - path: /desktop/kubernetes/
       title: Deploy on Kubernetes
-    - path: /desktop/faqs/
-      title: FAQs
     - path: /desktop/backup-and-restore/
       title: Back up and restore data
+    - sectiontitle: FAQs
+      section:
+      - path: /desktop/faqs/general/
+        title: General FAQs
+      - path: /desktop/faqs/macfaqs/
+        title: Mac FAQs
+      - path: /desktop/faqs/windowsfaqs/
+        title: Windows FAQs
     - path: /desktop/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
