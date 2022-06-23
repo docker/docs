@@ -1,8 +1,10 @@
 ---
-title: RequestConfigV0
+skip_read_time: true
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
+
+# Interface: RequestConfigV0
 
 ## Properties
 

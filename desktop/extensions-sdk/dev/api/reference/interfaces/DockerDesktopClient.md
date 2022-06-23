@@ -1,8 +1,10 @@
 ---
-title: DockerDesktopClient
+skip_read_time: true
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
+
+# Interface: DockerDesktopClient
 
 When we moved from the v0 to v1 schema, we made sure
 window.ddClient satisfied both interfaces. This combined type

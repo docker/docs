@@ -1,8 +1,10 @@
 ---
-title: Toast
+skip_read_time: true
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
+
+# Interface: Toast
 
 Toasts provide a brief notification to the user.
 They appear temporarily and shouldn't interrupt the user experience.
