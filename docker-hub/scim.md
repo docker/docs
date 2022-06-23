@@ -10,7 +10,7 @@ title: System for Cross-domain Identity Management
 > coming soon.
 {: .important}
 
-This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. SCIM is a provisioning system that lets you manage users within your identity provider (IdP). You can enable SCIM on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see Upgrade your subscription.
+This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. SCIM is a provisioning system that lets you manage users within your identity provider (IdP). You can enable SCIM on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md){:target="blank" rel="noopener" class=""}.
 
 SCIM provides automated user provisioning and de-provisioning for your Docker organization through your Identity Provider (IdP). The SCIM-synced changes apply to newly assigned users. The status of those already under your subscription will be supplemented but might not be overwritten in that the changes are applied. For instance, other members are unaffected if your IDP sends an update containing changes to User1.
 
