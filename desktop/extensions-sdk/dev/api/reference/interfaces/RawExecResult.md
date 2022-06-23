@@ -1,27 +1,14 @@
 ---
-title: Docker extension API reference
+title: RawExecResult
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: RawExecResult
 
 ## Hierarchy
 
 - **`RawExecResult`**
 
   ↳ [`ExecResult`](ExecResult.md)
-
-## Table of contents
-
-### Properties
-
-- [cmd](RawExecResult.md#cmd)
-- [killed](RawExecResult.md#killed)
-- [signal](RawExecResult.md#signal)
-- [code](RawExecResult.md#code)
-- [stdout](RawExecResult.md#stdout)
-- [stderr](RawExecResult.md#stderr)
 
 ## Properties
 

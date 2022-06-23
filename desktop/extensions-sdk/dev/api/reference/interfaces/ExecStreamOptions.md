@@ -1,22 +1,8 @@
 ---
-title: Docker extension API reference
+title: ExecStreamOptions
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: ExecStreamOptions
-
-## Table of contents
-
-### Methods
-
-- [onOutput](ExecStreamOptions.md#onoutput)
-- [onError](ExecStreamOptions.md#onerror)
-- [onClose](ExecStreamOptions.md#onclose)
-
-### Properties
-
-- [splitOutputLines](ExecStreamOptions.md#splitoutputlines)
 
 ## Methods
 

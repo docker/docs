@@ -1,34 +1,8 @@
 ---
-title: Docker extension API reference
+title: NavigationIntents
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: NavigationIntents
-
-## Table of contents
-
-### Container Methods
-
-- [viewContainers](NavigationIntents.md#viewcontainers)
-- [viewContainer](NavigationIntents.md#viewcontainer)
-- [viewContainerLogs](NavigationIntents.md#viewcontainerlogs)
-- [viewContainerInspect](NavigationIntents.md#viewcontainerinspect)
-- [viewContainerStats](NavigationIntents.md#viewcontainerstats)
-
-### Images Methods
-
-- [viewImages](NavigationIntents.md#viewimages)
-- [viewImage](NavigationIntents.md#viewimage)
-
-### Other Methods
-
-- [viewDevEnvironments](NavigationIntents.md#viewdevenvironments)
-
-### Volume Methods
-
-- [viewVolumes](NavigationIntents.md#viewvolumes)
-- [viewVolume](NavigationIntents.md#viewvolume)
 
 ## Container Methods
 

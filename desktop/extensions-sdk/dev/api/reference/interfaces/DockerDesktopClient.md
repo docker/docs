@@ -1,60 +1,13 @@
 ---
-title: Docker extension API reference
+title: DockerDesktopClient
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: DockerDesktopClient
 
 When we moved from the v0 to v1 schema, we made sure
 window.ddClient satisfied both interfaces. This combined type
 describes the resulting API. We should delete it when we stop providing
 the v0 API.
-
-## Table of contents
-
-### Properties
-
-- [backend](DockerDesktopClient.md#backend)
-- [extension](DockerDesktopClient.md#extension)
-- [desktopUI](DockerDesktopClient.md#desktopui)
-- [host](DockerDesktopClient.md#host)
-- [docker](DockerDesktopClient.md#docker)
-
-### Container Methods
-
-- [listContainers](DockerDesktopClient.md#listcontainers)
-
-### Image Methods
-
-- [listImages](DockerDesktopClient.md#listimages)
-
-### Navigation Methods
-
-- [navigateToContainers](DockerDesktopClient.md#navigatetocontainers)
-- [navigateToContainer](DockerDesktopClient.md#navigatetocontainer)
-- [navigateToContainerLogs](DockerDesktopClient.md#navigatetocontainerlogs)
-- [navigateToContainerInspect](DockerDesktopClient.md#navigatetocontainerinspect)
-- [navigateToContainerStats](DockerDesktopClient.md#navigatetocontainerstats)
-- [navigateToImages](DockerDesktopClient.md#navigatetoimages)
-- [navigateToImage](DockerDesktopClient.md#navigatetoimage)
-- [navigateToVolumes](DockerDesktopClient.md#navigatetovolumes)
-- [navigateToVolume](DockerDesktopClient.md#navigatetovolume)
-- [navigateToDevEnvironments](DockerDesktopClient.md#navigatetodevenvironments)
-
-### Other Methods
-
-- [execHostCmd](DockerDesktopClient.md#exechostcmd)
-- [spawnHostCmd](DockerDesktopClient.md#spawnhostcmd)
-- [execDockerCmd](DockerDesktopClient.md#execdockercmd)
-- [spawnDockerCmd](DockerDesktopClient.md#spawndockercmd)
-- [openExternal](DockerDesktopClient.md#openexternal)
-
-### Toast Methods
-
-- [toastSuccess](DockerDesktopClient.md#toastsuccess)
-- [toastWarning](DockerDesktopClient.md#toastwarning)
-- [toastError](DockerDesktopClient.md#toasterror)
 
 ## Properties
 

@@ -1,10 +1,8 @@
 ---
-title: Docker extension API reference
+title: Exec
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: Exec
 
 ## Callable
 

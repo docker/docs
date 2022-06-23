@@ -1,21 +1,8 @@
 ---
-title: Docker extension API reference
+title: Docker 
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: Docker
-
-## Table of contents
-
-### Properties
-
-- [cli](Docker.md#cli)
-
-### Methods
-
-- [listContainers](Docker.md#listcontainers)
-- [listImages](Docker.md#listimages)
 
 ## Properties
 

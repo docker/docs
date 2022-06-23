@@ -1,31 +1,8 @@
 ---
-title: Docker extension API reference
+title: BackendV0
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: BackendV0
-
-## Table of contents
-
-### Container Methods
-
-- [execInContainer](BackendV0.md#execincontainer)
-
-### HTTP Methods
-
-- [get](BackendV0.md#get)
-- [post](BackendV0.md#post)
-- [put](BackendV0.md#put)
-- [patch](BackendV0.md#patch)
-- [delete](BackendV0.md#delete)
-- [head](BackendV0.md#head)
-- [request](BackendV0.md#request)
-
-### VM Methods
-
-- [execInVMExtension](BackendV0.md#execinvmextension)
-- [spawnInVMExtension](BackendV0.md#spawninvmextension)
 
 ## Container Methods
 

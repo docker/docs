@@ -1,16 +1,8 @@
 ---
-title: Docker extension API reference
+title: ExtensionHost
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: ExtensionHost
-
-## Table of contents
-
-### Properties
-
-- [cli](ExtensionHost.md#cli)
 
 ## Properties
 

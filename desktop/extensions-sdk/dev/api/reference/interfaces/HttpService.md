@@ -1,22 +1,8 @@
 ---
-title: Docker extension API reference
+title: HttpService
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
 ---
-
-# Interface: HttpService
-
-## Table of contents
-
-### Methods
-
-- [get](HttpService.md#get)
-- [post](HttpService.md#post)
-- [put](HttpService.md#put)
-- [patch](HttpService.md#patch)
-- [delete](HttpService.md#delete)
-- [head](HttpService.md#head)
-- [request](HttpService.md#request)
 
 ## Methods
 
