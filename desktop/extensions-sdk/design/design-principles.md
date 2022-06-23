@@ -1,5 +1,5 @@
 ---
-title: Docker's design principles
+title: Docker design principles
 description: Docker extension design
 keywords: Docker, extensions, design
 ---
@@ -23,3 +23,8 @@ We always provide clarity on what is happening and why. No amount of detail is w
 ## Scale with intention
 Our products focus on inclusive growth and are continuously useful and adapt to match changing individual needs. We support all levels of expertise by meeting users where they are with conscious personalization.
 <br>
+
+## What's next?
+
+- Take a look at our [UI styling guidelines](overview.md).
+- Learn how to [publish your extension](../extensions/index.md).

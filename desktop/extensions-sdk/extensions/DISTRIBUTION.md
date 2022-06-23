@@ -18,7 +18,7 @@ The image must have [several labels](labels.md):
 Packaging and releasing an extension is done by running `docker build` to create the image, and `docker push` to make the image available on Docker Hub with a specific tag that allows you to manage versions of the extension.
 
 Take advantage of multi-arch images to build images that include ARM/AMD binaries. The right image will be used for Mac users depending on their architecture.
-For extensions on Docker Desktop for Windows, Windows binaries that are to be installed on the host must be included in the same extension image. We will revisit this with some tag conventions to allow some images specific to Windows, and other images specific to Mac, based on a tag prefix. See [how to build extensions for multiple architectures](./multi-arch.md).
+For extensions on Docker Desktop for Windows, Windows binaries that are to be installed on the host must be included in the same extension image. We will revisit this with some tag conventions to allow some images specific to Windows, and other images specific to Mac, based on a tag prefix. See [how to build extensions for multiple architectures](multi-arch.md).
 
 You can implement extensions without any constraints on the code repository. Docker does not need access to the code repository in order to use the extension. Release of new versions of the extension is managed you.
 
@@ -37,11 +37,6 @@ With a given release of Docker Desktop (including some extensions), users should
 Docker Desktop scans the list of published extensions for new versions regularly, and provides notifications to users when they can upgrade a specific extension.
 
 Users can download and install the newer version of an extension without updating Docker Desktop itself.
-
-## Publish your extension in the Marketplace
-
-Docker Desktop displays published extensions in the Extensions Marketplace.
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We'll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
 
 ## API dependencies
 
