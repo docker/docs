@@ -18,6 +18,7 @@ keywords: Docker, extensions, sdk, labels
 | `com.docker.extension.publisher-url` | No | The publisher website URL to be displayed in the details dialog. | `https://foo.bar` |
 | `com.docker.extension.additional-urls` | No | A JSON array of titles and additional URLs displayed to users (in the order they appear in your metadata) in your extension's details page. We recommend you display the following links if they apply: documentation, support, terms of service, and privacy policy links. | `[{"title":"Documentation","url":"https://foo.bar/docs"},` `{"title":"Support","url":"https://foo.bar/support"},` `{"title":"Terms of Service","url":"https://foo.bar/tos"},` `{"title":"Privacy policy","url":"https://foo.bar/privacy-policy"}]` |
 | `com.docker.extension.changelog` | No | Changelog in plain text or HTML containing the change for the current version only. | `Extension changelog` or `<p>Extension changelog<ul>` `<li>New feature A</li>` `<li>Bug fix on feature B</li></ul></p>` |
+| `com.docker.extension.account-info` | No | Whether the user needs to sign up or log in to a SaaS platform to use some features of the extension. | `required` in case it does, leave it empty otherwise. |
 
 > Missing required labels
 >
