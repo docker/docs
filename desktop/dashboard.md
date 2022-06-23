@@ -144,11 +144,11 @@ Select **Dashboard** > **Images** to see the Redis image.
 
 Now that you have a Redis image on your disk, let’s run this image as a container:
 
-1. From the Docker menu, select **Dashboard** > **Images**. This displays a list of images on your local disk.
+1. From Docker Dashboard, select **Images**. A list of images on your local disk displays.
 2. Select the Redis image from the list and click **Run**.
-3. When prompted, click the **Optional settings** drop-down to specify a name, port, volumes, and click **Run**.
+3. Optional step: When prompted, click the **Optional settings** drop-down to specify a name, port, volumes, environment variables and click **Run**.
 
-    To use the defaults, click **Run** without specifying any optional settings. This creates a new container from the Redis image and opens it on the **Container/Apps** view.
+    To use the defaults, click **Run** without specifying any optional settings. This creates a new container from the Redis image and opens it on the **Containers** view.
 
 ### Pull the latest image from Docker Hub
 
