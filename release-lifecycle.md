@@ -21,9 +21,9 @@ The decision to retire or deprecate features follows a rigorous process includin
 
 Docker is committed to being clear, transparent, and proactive when interacting with our customers, especially about changes to our platform. To that end, we will make best efforts to follow these guidelines when retiring functionality:
 
-Advance notice For minor changes resulting in retirement or deprecation of functionality, we will attempt to proactively notify customers at least 1 month in advance. For retirement of major features or products, we will attempt to notify customers at least 6 months in advance.
-Viable alternatives Docker will strive to provide viable alternatives to our customers when retiring functionality. These may be alternative offerings from Docker or recommended alternatives from 3rd party providers. Where possible and appropriate, Docker will automatically migrate customers to alternatives for retired functionality.
-Continued support Docker commits to providing continued support for functionality until its retirement date.
+- Advance notice For minor changes resulting in retirement or deprecation of functionality, we will attempt to proactively notify customers at least 1 month in advance. For retirement of major features or products, we will attempt to notify customers at least 6 months in advance.
+- Viable alternatives Docker will strive to provide viable alternatives to our customers when retiring functionality. These may be alternative offerings from Docker or recommended alternatives from 3rd party providers. Where possible and appropriate, Docker will automatically migrate customers to alternatives for retired functionality.
+- Continued support Docker commits to providing continued support for functionality until its retirement date.
 
 We may need to accelerate the timeline for retirement of functionality in extenuating circumstances, such as essential changes necessary to protect the integrity of our platform or the security of our customers and others. In these cases, it is important that those changes occur as quickly as possible.
 
