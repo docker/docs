@@ -1537,8 +1537,10 @@ manuals:
   section:
   - sectiontitle: Onboarding
     section:
+    - path: /docker-hub/onboard-team/
+      title: Docker Team onboarding
     - path: /docker-hub/onboard-business/
-      title: Get started with Business
+      title: Docker Business onboarding
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
   - path: /docker-hub/orgs/

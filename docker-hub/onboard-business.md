@@ -1,7 +1,7 @@
 ---
-description: Get started onboarding with Docker Business
+description: Docker Business onboarding
 keywords: business, organizations, get started, onboarding
-title: Get started onboarding with Docker Business
+title: Docker Business onboarding
 toc_min: 1
 toc_max: 2
 ---
