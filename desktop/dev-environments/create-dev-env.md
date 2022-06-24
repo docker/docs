@@ -4,17 +4,28 @@ keywords: Dev Environments, share, collaborate, local
 title: Create a Dev Environment
 ---
 
-## Start a single container Dev Environment
+You can create a Dev Environment from a:
+- Git repository
+- Branch or tag of a Git repository
+- Subfolder of a Git repository
+- Local folder
 
-The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. For example, let us create a new Dev Environment using a simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
+This did not conflict with any of the local files or local tooling set up on your host 
+
+## Create a Dev Environment from a Git repository
+
+The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. 
+
+For example, create a new Dev Environment using the simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
 
 > **Note**
 >
 > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
 
-> **Note**
+> **Important**
 >
 > If you have enabled the WSL 2 integration in Docker Desktop for Windows, make sure you have an SSH agent running in your WSL 2 distribution.
+{: .important}
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
@@ -44,24 +55,20 @@ fi
     </div>
 </div>
 
-1. Under Dev Environments, click **Create**. This opens the **Create a Dev Environment** dialog. Click **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** source.
-2. Now, click **Continue**.
+To create a Dev Environment:
 
-    This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
+1. From **Under Dev Environments** in Docker Dashboard, click **Create**. Th **Create a Dev Environment** dialog displays.
+2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** tab on the **Existing Git repo** source.
+3. Select **Continue**.
 
-![Single container Dev environment](../images/dev-env-container.png){:width="700px"}
+    This clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
 
-In the above example, the names `wizardly_ellis` and `relaxed_maclaren` are randomly generated. You'll most likely see different names when you create your Dev Environment.
+4. Hover over the container and select **Open in VS Code** to start working. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
 
-Hover over the container and click **Open in VS Code** to start working in VS Code as usual. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
-
-You can launch the application by running the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
-
-![Single container Dev environment](../images/dev-env-localhost.png){:width="700px"}
+5. To launch the application, run the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
 
-
-### Create a Dev Environment from a specific branch or tag
+## Create a Dev Environment from a specific branch or tag
 
 You can create a dev environment from a specific branch (for example, a branch corresponding to a Pull Request) or a tag by adding `@mybranch` or `@tag` as a suffix to your Git URL:
 
@@ -73,23 +80,15 @@ You can create a dev environment from a specific branch (for example, a branch c
 
 Docker then clones the repository with your specified branch or tag.
 
-### Recap
-
-Let's summarize the tasks we performed so far to start a single container Dev Environment.
-
-1. First, we cloned a Git repository in a container using Git credentials. Note that this did not conflict with any of the local files on your host.
-2. The Go tools required for our sample project was set up automatically for us. Also, this did not cause any friction with our local tooling setup.
-3. Finally, we were able to run the application server inside a container using the VS Code terminal and access it automatically from the host.
-
+## Create a Dev Environment from a subfolder of a Git repository
 
 ## Start a Dev Environment from a local folder
 
-You can also start a Dev Environment from local code on your machine.
+1. From **Under Dev Environments** in Docker Dashboard, click **Create**. Th **Create a Dev Environment** dialog displays.
+2. Select the **Local Folder** tab, and click **Select directory** to open the root of the code that you would like to work on.
+2. Select **Create**.
 
-1. Click **Create** to open the **Create a Dev Environment** dialog. Select the **Local Folder** tab, and click **Select directory** to open the root of the code that you would like to work on.
-2. Now, click **Create**.
-
-    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. Finally, it opens VS Code inside the Dev Environment container.
+    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. It then opens VS Code inside the Dev Environment container.
 
 > **Note**
 >

@@ -12,23 +12,19 @@ Dev Environments also allow you to switch between your developer environments or
 >
 > The Dev Environments feature is currently offered in Beta. We recommend that you do not use this in production environments.
 
-To access Dev Environments, from the Docker menu, select **Dashboard** > **Dev Environments**.
-
 ![Dev environment intro](../images/dev-env-create.png){:width="700px"}
 
 ## Prerequisites
 
-Dev Environments are available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
+Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
 
 - [Docker Desktop](../release-notes.md)
 
-To get started with Dev Environments, you must have the following tools and extension installed on your machine:
+To get started with Dev Environments, you must also have the following tools and extension installed on your machine:
 
 - [Git](https://git-scm.com){:target="_blank" rel="noopener" class="_"}
 - [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
 - [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers){:target="_blank" rel="noopener" class="_"}
-
-Click **Install** to download and install any missing tools.
 
 ### Add Git to your PATH on Windows
 
@@ -48,6 +44,5 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 
 The following section lists known issues and workarounds in the Dev Environments Preview:
 
-1. It is currently not possible to share Compose-based applications using Dev Environments because registries do not support Compose applications. Refer to the [Feedback](#feedback) section to let us know your requirements for sharing Compose-based applications.
-2. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-3. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
+1. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
+2. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
