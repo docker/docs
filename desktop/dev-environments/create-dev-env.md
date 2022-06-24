@@ -93,3 +93,7 @@ Docker then clones the repository with your specified branch or tag.
 > **Note**
 >
 > When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
+
+## What's next?
+
+Learn how to [share your Dev Environment](share.md)
