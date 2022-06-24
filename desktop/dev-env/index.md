@@ -8,9 +8,9 @@ Dev Environments enable you to collaborate easily by allowing you to share work-
 
 Dev Environments also allow you to switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch.
 
-> **Preview**
+> **Beta**
 >
-> The Dev Environments feature is currently offered as a Preview. We recommend that you do not use this in production environments.
+> The Dev Environments feature is currently offered in Beta. We recommend that you do not use this in production environments.
 
 To access Dev Environments, from the Docker menu, select **Dashboard** > **Dev Environments**.
 
