@@ -1230,8 +1230,18 @@ manuals:
           title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
-    - path: /desktop/dev-environments/
-      title: Dev Environments (Preview)
+    - sectiontitle: Dev Environments (Beta)
+      section:
+        - path: /desktop/dev-environments/
+          title: Overview
+        - path: /desktop/dev-environments/create-dev-env/
+          title: Create a Dev Environment
+        - path: /desktop/dev-environments/create-compose-dev-env/
+          title: Create a Compose Dev Environment
+        - path: /desktop/dev-environments/share/
+          title: Share your Dev Environment
+        - path: /desktop/dev-environments/specify/
+          title: Specify a Dockerfile or base image
     - path: /desktop/extensions/
       title: Extensions (Beta)
     - sectiontitle: Extensions SDK (Beta)
