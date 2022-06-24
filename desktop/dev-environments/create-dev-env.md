@@ -57,8 +57,8 @@ fi
 
 To create a Dev Environment:
 
-1. From **Under Dev Environments** in Docker Dashboard, click **Create**. Th **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** tab on the **Existing Git repo** source.
+1. From **Under Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
+2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** text box on the **Existing Git repo** tab.
 3. Select **Continue**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
@@ -82,11 +82,18 @@ Docker then clones the repository with your specified branch or tag.
 
 ## Create a Dev Environment from a subfolder of a Git repository
 
+1. From **Under Dev Environments** in Docker Dashboard, click **Create**. Th **Create a Dev Environment** dialog displays.
+2. Select **Get Started** and then copy your Git subfolder link into the **Enter the Git Repository** field on the **Existing Git repo** tab.
+3. Select **Continue**.
+
+    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. It then opens VS Code inside the Dev Environment container.
+
 ## Start a Dev Environment from a local folder
 
-1. From **Under Dev Environments** in Docker Dashboard, click **Create**. Th **Create a Dev Environment** dialog displays.
-2. Select the **Local Folder** tab, and click **Select directory** to open the root of the code that you would like to work on.
-2. Select **Create**.
+1. From **Under Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
+2. Select **Get Started** and then the **Local Folder** tab.
+3. Select **Select directory** to open the root of the code that you would like to work on.
+3. Select **Continue**.
 
     This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. It then opens VS Code inside the Dev Environment container.
 
