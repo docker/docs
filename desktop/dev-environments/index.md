@@ -2,6 +2,8 @@
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
 title: Development Environments (Beta)
+redirect_from:
+- /desktop/dev-environments/
 ---
 
 Dev Environments enable you to collaborate easily by allowing you to share work-in-progress code with your team members. When using Dev Environments, you can easily set up repeatable development environments, keeping the environment details versioned along with your code. You can also share your work-in-progress code with your team members in just one click and without having to deal with any merge conflicts while moving between Git branches to get your code on to their machine.

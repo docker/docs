@@ -1230,8 +1230,10 @@ manuals:
           title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
-    - path: /desktop/dev-environments/
-      title: Dev Environments (Beta)
+    - sectiontitle: Dev Environments (Beta)
+      section:
+        - path: /desktop/dev-environments/
+          title: Overview 
     - path: /desktop/extensions/
       title: Extensions (Beta)
     - sectiontitle: Extensions SDK (Beta)
