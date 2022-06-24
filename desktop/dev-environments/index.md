@@ -16,14 +16,13 @@ Dev Environments also allow you to switch between your developer environments or
 
 To access Dev Environments, from the Docker menu, select **Dashboard** > **Dev Environments**.
 
-![Dev environment intro](images/dev-env-create.png){:width="700px"}
+![Dev environment intro](../images/dev-env-create.png){:width="700px"}
 
 ## Prerequisites
 
 Dev Environments are available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
 
-- [Mac](mac/release-notes/index.md)
-- [Windows](windows/release-notes/index.md)
+- [Docker Desktop](../release-notes.md)
 
 To get started with Dev Environments, you must have the following tools and extension installed on your machine:
 
@@ -41,7 +40,7 @@ If you have already installed Git, and it's not detected properly, run the follo
 
 If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the **Adjusting your PATH environment**  step.
 
-![Windows add Git to path](images/dev-env-gitbash.png){:width="300px"}
+![Windows add Git to path](../images/dev-env-gitbash.png){:width="300px"}
 
 > **Note**
 >
@@ -92,7 +91,7 @@ fi
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
 
-![Single container Dev environment](images/dev-env-container.png){:width="700px"}
+![Single container Dev environment](../images/dev-env-container.png){:width="700px"}
 
 In the above example, the names `wizardly_ellis` and `relaxed_maclaren` are randomly generated. You'll most likely see different names when you create your Dev Environment.
 
@@ -100,7 +99,7 @@ Hover over the container and click **Open in VS Code** to start working in VS Co
 
 You can launch the application by running the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
-![Single container Dev environment](images/dev-env-localhost.png){:width="700px"}
+![Single container Dev environment](../images/dev-env-localhost.png){:width="700px"}
 
 ### Create a Dev Environment from a specific branch or tag
 
@@ -132,11 +131,11 @@ Let's summarize the tasks we performed so far to start a single container Dev En
 
 When you are ready to share your environment, just click the **Share** button and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
 
-![Share a Dev environment](images/dev-env-share.png){:width="700px"}
+![Share a Dev environment](../images/dev-env-share.png){:width="700px"}
 
 This creates a Docker image of your dev environment, uploads it to the Docker Hub namespace you have specified in the previous step, and provides a tiny URL which you can use to share your work with your team members.
 
-![Dev environment shared](images/dev-env-shared.png){:width="700px"}
+![Dev environment shared](../images/dev-env-shared.png){:width="700px"}
 
 Your team members need to open the **Create** dialog, select the **Existing Dev Environment** tab, and then paste the URL. Your Dev Environment now starts in the exact same state as you shared it.
 
@@ -158,7 +157,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
     - Creates volumes and networks
     - Starts the Compose stack
 
-![Compose Dev environment](images/dev-env-compose.png){:width="700px"}
+![Compose Dev environment](../images/dev-env-compose.png){:width="700px"}
 
 Now your application is up and running, you can check by opening [http://localhost:8080](http://localhost:8080) in your browser.
 
