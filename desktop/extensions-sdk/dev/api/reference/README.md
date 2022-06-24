@@ -1,18 +1,18 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
-## Table of contents
+# Extensions API Reference
 
-### Dashboard Interfaces
+## Dashboard Interfaces
 
 - [Host](interfaces/Host.md)
 - [NavigationIntents](interfaces/NavigationIntents.md)
 - [Toast](interfaces/Toast.md)
 
-### Other Interfaces
+## Other Interfaces
 
 - [ExecResultV0](interfaces/ExecResultV0.md)
 - [RequestConfigV0](interfaces/RequestConfigV0.md)
@@ -33,4 +33,5 @@ keywords: Docker, extensions, sdk, API, reference
 - [ExtensionCli](interfaces/ExtensionCli.md)
 - [HttpService](interfaces/HttpService.md)
 - [RequestConfig](interfaces/RequestConfig.md)
+- [ServiceError](interfaces/ServiceError.md)
 - [DockerDesktopClient](interfaces/DockerDesktopClient.md)
