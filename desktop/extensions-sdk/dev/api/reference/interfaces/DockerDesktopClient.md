@@ -1,60 +1,14 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: DockerDesktopClient
 
-When we moved from the v0 to v1 schema, we made sure
-window.ddClient satisfied both interfaces. This combined type
-describes the resulting API. We should delete it when we stop providing
-the v0 API.
-
-## Table of contents
-
-### Properties
-
-- [backend](DockerDesktopClient.md#backend)
-- [extension](DockerDesktopClient.md#extension)
-- [desktopUI](DockerDesktopClient.md#desktopui)
-- [host](DockerDesktopClient.md#host)
-- [docker](DockerDesktopClient.md#docker)
-
-### Container Methods
-
-- [listContainers](DockerDesktopClient.md#listcontainers)
-
-### Image Methods
-
-- [listImages](DockerDesktopClient.md#listimages)
-
-### Navigation Methods
-
-- [navigateToContainers](DockerDesktopClient.md#navigatetocontainers)
-- [navigateToContainer](DockerDesktopClient.md#navigatetocontainer)
-- [navigateToContainerLogs](DockerDesktopClient.md#navigatetocontainerlogs)
-- [navigateToContainerInspect](DockerDesktopClient.md#navigatetocontainerinspect)
-- [navigateToContainerStats](DockerDesktopClient.md#navigatetocontainerstats)
-- [navigateToImages](DockerDesktopClient.md#navigatetoimages)
-- [navigateToImage](DockerDesktopClient.md#navigatetoimage)
-- [navigateToVolumes](DockerDesktopClient.md#navigatetovolumes)
-- [navigateToVolume](DockerDesktopClient.md#navigatetovolume)
-- [navigateToDevEnvironments](DockerDesktopClient.md#navigatetodevenvironments)
-
-### Other Methods
-
-- [execHostCmd](DockerDesktopClient.md#exechostcmd)
-- [spawnHostCmd](DockerDesktopClient.md#spawnhostcmd)
-- [execDockerCmd](DockerDesktopClient.md#execdockercmd)
-- [spawnDockerCmd](DockerDesktopClient.md#spawndockercmd)
-- [openExternal](DockerDesktopClient.md#openexternal)
-
-### Toast Methods
-
-- [toastSuccess](DockerDesktopClient.md#toastsuccess)
-- [toastWarning](DockerDesktopClient.md#toastwarning)
-- [toastError](DockerDesktopClient.md#toasterror)
+An amalgam of the v0 and v1 interfaces of the Docker Desktop API client,
+provided for backwards compatibility reasons. Unless you're working with
+a legacy extension, use the v1 type instead.
 
 ## Properties
 
@@ -72,7 +26,7 @@ The client is already connected to the backend.
 
 DockerDesktopClientV0.backend
 
----
+___
 
 ### extension
 
@@ -86,7 +40,7 @@ The client is already connected to the backend.
 
 DockerDesktopClientV1.extension
 
----
+___
 
 ### desktopUI
 
@@ -96,7 +50,7 @@ DockerDesktopClientV1.extension
 
 DockerDesktopClientV1.desktopUI
 
----
+___
 
 ### host
 
@@ -106,7 +60,7 @@ DockerDesktopClientV1.desktopUI
 
 DockerDesktopClientV1.host
 
----
+___
 
 ### docker
 
@@ -135,9 +89,9 @@ const containers = await window.ddClient.listContainers();
 
 #### Parameters
 
-| Name      | Type    | Description                                                                                                                                                                                                                                                                                  |
-| :-------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `options` | `never` | (Optional). A JSON like `{ "all": true, "limit": 10, "size": true, "filters": JSON.stringify({ status: ["exited"] }), }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.37/#operation/ContainerList). |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options` | `never` | (Optional). A JSON like `{   "all": true,   "limit": 10,   "size": true,   "filters": JSON.stringify({ status: ["exited"] }), }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.37/#operation/ContainerList). |
 
 #### Returns
 
@@ -147,7 +101,7 @@ const containers = await window.ddClient.listContainers();
 
 DockerDesktopClientV0.listContainers
 
----
+___
 
 ## Image Methods
 
@@ -165,9 +119,9 @@ const images = await window.ddClient.listImages();
 
 #### Parameters
 
-| Name      | Type    | Description                                                                                                                                                                                                                                                         |
-| :-------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options` | `never` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.37/#tag/Image). |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options` | `never` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true }`  For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.37/#tag/Image). |
 
 #### Returns
 
@@ -177,7 +131,7 @@ const images = await window.ddClient.listImages();
 
 DockerDesktopClientV0.listImages
 
----
+___
 
 ## Navigation Methods
 
@@ -186,7 +140,6 @@ DockerDesktopClientV0.listImages
 ▸ **navigateToContainers**(): `void`
 
 Navigate to the containers window in Docker Desktop.
-
 ```typescript
 window.ddClient.navigateToContainers();
 ```
@@ -201,14 +154,13 @@ window.ddClient.navigateToContainers();
 
 DockerDesktopClientV0.navigateToContainers
 
----
+___
 
 ### navigateToContainer
 
 ▸ **navigateToContainer**(`id`): `Promise`<`any`\>
 
 Navigate to the container window in Docker Desktop.
-
 ```typescript
 await window.ddClient.navigateToContainer(id);
 ```
@@ -217,8 +169,8 @@ await window.ddClient.navigateToContainer(id);
 
 #### Parameters
 
-| Name | Type     | Description                                                                                                                                                                                            |
-| :--- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `id` | `string` | The full container id, e.g. `46b57e400d801762e9e115734bf902a2450d89669d85881058a46136520aca28`. You can use the `--no-trunc` flag as part of the `docker ps` command to display the full container id. |
 
 #### Returns
@@ -231,14 +183,13 @@ A promise that fails if the container doesn't exist.
 
 DockerDesktopClientV0.navigateToContainer
 
----
+___
 
 ### navigateToContainerLogs
 
 ▸ **navigateToContainerLogs**(`id`): `Promise`<`any`\>
 
 Navigate to the container logs window in Docker Desktop.
-
 ```typescript
 await window.ddClient.navigateToContainerLogs(id);
 ```
@@ -247,8 +198,8 @@ await window.ddClient.navigateToContainerLogs(id);
 
 #### Parameters
 
-| Name | Type     | Description                                                                                                                                                                                            |
-| :--- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `id` | `string` | The full container id, e.g. `46b57e400d801762e9e115734bf902a2450d89669d85881058a46136520aca28`. You can use the `--no-trunc` flag as part of the `docker ps` command to display the full container id. |
 
 #### Returns
@@ -261,14 +212,13 @@ A promise that fails if the container doesn't exist.
 
 DockerDesktopClientV0.navigateToContainerLogs
 
----
+___
 
 ### navigateToContainerInspect
 
 ▸ **navigateToContainerInspect**(`id`): `Promise`<`any`\>
 
 Navigate to the container inspect window in Docker Desktop.
-
 ```typescript
 await window.ddClient.navigateToContainerInspect(id);
 ```
@@ -277,8 +227,8 @@ await window.ddClient.navigateToContainerInspect(id);
 
 #### Parameters
 
-| Name | Type     | Description                                                                                                                                                                                            |
-| :--- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `id` | `string` | The full container id, e.g. `46b57e400d801762e9e115734bf902a2450d89669d85881058a46136520aca28`. You can use the `--no-trunc` flag as part of the `docker ps` command to display the full container id. |
 
 #### Returns
@@ -291,7 +241,7 @@ A promise that fails if the container doesn't exist.
 
 DockerDesktopClientV0.navigateToContainerInspect
 
----
+___
 
 ### navigateToContainerStats
 
@@ -307,8 +257,8 @@ await window.ddClient.navigateToContainerStats(id);
 
 #### Parameters
 
-| Name | Type     | Description                                                                                                                                                                                            |
-| :--- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `id` | `string` | The full container id, e.g. `46b57e400d801762e9e115734bf902a2450d89669d85881058a46136520aca28`. You can use the `--no-trunc` flag as part of the `docker ps` command to display the full container id. |
 
 #### Returns
@@ -321,14 +271,13 @@ A promise that fails if the container doesn't exist.
 
 DockerDesktopClientV0.navigateToContainerStats
 
----
+___
 
 ### navigateToImages
 
 ▸ **navigateToImages**(): `void`
 
 Navigate to the images window in Docker Desktop.
-
 ```typescript
 await window.ddClient.navigateToImages(id);
 ```
@@ -343,7 +292,7 @@ await window.ddClient.navigateToImages(id);
 
 DockerDesktopClientV0.navigateToImages
 
----
+___
 
 ### navigateToImage
 
@@ -360,10 +309,10 @@ await window.ddClient.navigateToImage(id, tag);
 
 #### Parameters
 
-| Name  | Type     | Description                                                                                                        |
-| :---- | :------- | :----------------------------------------------------------------------------------------------------------------- |
-| `id`  | `string` | The full image id (including sha), e.g. `sha256:34ab3ae068572f4e85c448b4035e6be5e19cc41f69606535cd4d768a63432673`. |
-| `tag` | `string` | The tag of the image, e.g. `latest`, `0.0.1`, etc.                                                                 |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | `string` | The full image id (including sha), e.g. `sha256:34ab3ae068572f4e85c448b4035e6be5e19cc41f69606535cd4d768a63432673`. |
+| `tag` | `string` | The tag of the image, e.g. `latest`, `0.0.1`, etc. |
 
 #### Returns
 
@@ -375,7 +324,7 @@ A promise that fails if the container doesn't exist.
 
 DockerDesktopClientV0.navigateToImage
 
----
+___
 
 ### navigateToVolumes
 
@@ -397,7 +346,7 @@ await window.ddClient.navigateToVolumes();
 
 DockerDesktopClientV0.navigateToVolumes
 
----
+___
 
 ### navigateToVolume
 
@@ -413,8 +362,8 @@ window.ddClient.navigateToVolume(volume);
 
 #### Parameters
 
-| Name     | Type     | Description                               |
-| :------- | :------- | :---------------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `volume` | `string` | The name of the volume, e.g. `my-volume`. |
 
 #### Returns
@@ -425,7 +374,7 @@ window.ddClient.navigateToVolume(volume);
 
 DockerDesktopClientV0.navigateToVolume
 
----
+___
 
 ### navigateToDevEnvironments
 
@@ -447,7 +396,7 @@ window.ddClient.navigateToDevEnvironments();
 
 DockerDesktopClientV0.navigateToDevEnvironments
 
----
+___
 
 ## Other Methods
 
@@ -459,7 +408,7 @@ You can run binaries defined in the host section in the extension metadata.
 
 ```typescript
 window.ddClient.execHostCmd(`cliShippedOnHost xxx`).then((cmdResult: any) => {
-  console.log(cmdResult);
+ console.log(cmdResult);
 });
 ```
 
@@ -467,8 +416,8 @@ window.ddClient.execHostCmd(`cliShippedOnHost xxx`).then((cmdResult: any) => {
 
 #### Parameters
 
-| Name  | Type     | Description                 |
-| :---- | :------- | :-------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `cmd` | `string` | The command to be executed. |
 
 #### Returns
@@ -479,7 +428,7 @@ window.ddClient.execHostCmd(`cliShippedOnHost xxx`).then((cmdResult: any) => {
 
 DockerDesktopClientV0.execHostCmd
 
----
+___
 
 ### spawnHostCmd
 
@@ -505,10 +454,10 @@ window.ddClient.spawnHostCmd(
 
 #### Parameters
 
-| Name       | Type                                      | Description                                                                    |
-| :--------- | :---------------------------------------- | :----------------------------------------------------------------------------- |
-| `cmd`      | `string`                                  | The command to be executed.                                                    |
-| `args`     | `string`[]                                | The arguments of the command to execute.                                       |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmd` | `string` | The command to be executed. |
+| `args` | `string`[] | The arguments of the command to execute. |
 | `callback` | (`data`: `any`, `error`: `any`) => `void` | The callback function where to listen from the command output data and errors. |
 
 #### Returns
@@ -519,7 +468,7 @@ window.ddClient.spawnHostCmd(
 
 DockerDesktopClientV0.spawnHostCmd
 
----
+___
 
 ### execDockerCmd
 
@@ -528,20 +477,16 @@ DockerDesktopClientV0.spawnHostCmd
 You can also directly execute the docker binary.
 
 ```typescript
-const output = await window.ddClient.execDockerCmd(
-  "info",
-  "--format",
-  {% raw %}'"{{ json . }}"'{% endraw %}
-);
+const output = await window.ddClient.execDockerCmd("info");
 ```
 
 **`deprecated`** :warning: It will be removed in a future version. Use [DockerCommand.exec](DockerCommand.md#exec) instead.
 
 #### Parameters
 
-| Name      | Type       | Description                              |
-| :-------- | :--------- | :--------------------------------------- |
-| `cmd`     | `string`   | The command to execute.                  |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `cmd` | `string` | The command to execute. |
 | `...args` | `string`[] | The arguments of the command to execute. |
 
 #### Returns
@@ -549,17 +494,13 @@ const output = await window.ddClient.execDockerCmd(
 `Promise`<[`ExecResultV0`](ExecResultV0.md)\>
 
 The result will contain both the standard output and the standard error of the executed command:
-
-```
+```json
 {
   "stderr": "...",
   "stdout": "..."
 }
 ```
-
-In this example the docker command output is a json output.
-
-For convenience, the command result object also has methods to easily parse it:
+For convenience, the command result object also has methods to easily parse it depending on the output format:
 
 - `output.lines(): string[]` splits output lines.
 - `output.parseJsonObject(): any` parses a well-formed json output.
@@ -578,7 +519,7 @@ window.ddClient.spawnDockerCmd("logs", ["-f", "..."], (data, error) => {
 
 DockerDesktopClientV0.execDockerCmd
 
----
+___
 
 ### spawnDockerCmd
 
@@ -588,10 +529,10 @@ DockerDesktopClientV0.execDockerCmd
 
 #### Parameters
 
-| Name       | Type                                      |
-| :--------- | :---------------------------------------- |
-| `cmd`      | `string`                                  |
-| `args`     | `string`[]                                |
+| Name | Type |
+| :------ | :------ |
+| `cmd` | `string` |
+| `args` | `string`[] |
 | `callback` | (`data`: `any`, `error`: `any`) => `void` |
 
 #### Returns
@@ -602,7 +543,7 @@ DockerDesktopClientV0.execDockerCmd
 
 DockerDesktopClientV0.spawnDockerCmd
 
----
+___
 
 ### openExternal
 
@@ -618,8 +559,8 @@ window.ddClient.openExternal("https://docker.com");
 
 #### Parameters
 
-| Name  | Type     | Description                                                               |
-| :---- | :------- | :------------------------------------------------------------------------ |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `url` | `string` | The URL the browser will open (must have the protocol `http` or `https`). |
 
 #### Returns
@@ -630,7 +571,7 @@ window.ddClient.openExternal("https://docker.com");
 
 DockerDesktopClientV0.openExternal
 
----
+___
 
 ## Toast Methods
 
@@ -648,8 +589,8 @@ window.ddClient.toastSuccess("message");
 
 #### Parameters
 
-| Name  | Type     | Description                          |
-| :---- | :------- | :----------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `msg` | `string` | The message to display in the toast. |
 
 #### Returns
@@ -660,7 +601,7 @@ window.ddClient.toastSuccess("message");
 
 DockerDesktopClientV0.toastSuccess
 
----
+___
 
 ### toastWarning
 
@@ -676,8 +617,8 @@ window.ddClient.toastWarning("message");
 
 #### Parameters
 
-| Name  | Type     | Description                          |
-| :---- | :------- | :----------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `msg` | `string` | The message to display in the toast. |
 
 #### Returns
@@ -688,7 +629,7 @@ window.ddClient.toastWarning("message");
 
 DockerDesktopClientV0.toastWarning
 
----
+___
 
 ### toastError
 
@@ -704,8 +645,8 @@ window.ddClient.toastError("message");
 
 #### Parameters
 
-| Name  | Type     | Description                          |
-| :---- | :------- | :----------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `msg` | `string` | The message to display in the toast. |
 
 #### Returns

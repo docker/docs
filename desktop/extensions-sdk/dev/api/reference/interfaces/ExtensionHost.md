@@ -1,16 +1,10 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: ExtensionHost
-
-## Table of contents
-
-### Properties
-
-- [cli](ExtensionHost.md#cli)
 
 ## Properties
 
@@ -34,24 +28,24 @@ Provided the `kubectl` binary is shipped as part of your extension, you can spaw
 
 ```typescript
 await ddClient.extension.host.cli.exec("kubectl", ["-h"], {
-  stream: {
-    onOutput(data): void {
-      // As we can receive both `stdout` and `stderr`, we wrap them in a JSON object
-      JSON.stringify(
-        {
-          stdout: data.stdout,
-          stderr: data.stderr,
-        },
-        null,
-        "  "
-      );
-    },
-    onError(error: any): void {
-      console.error(error);
-    },
-    onClose(exitCode: number): void {
-      console.log("onClose with exit code " + exitCode);
-    },
-  },
-});
+           stream: {
+             onOutput(data): void {
+                 // As we can receive both `stdout` and `stderr`, we wrap them in a JSON object
+                 JSON.stringify(
+                   {
+                     stdout: data.stdout,
+                     stderr: data.stderr,
+                   },
+                   null,
+                   "  "
+                 );
+             },
+             onError(error: any): void {
+               console.error(error);
+             },
+             onClose(exitCode: number): void {
+               console.log("onClose with exit code " + exitCode);
+             },
+           },
+         });
 ```

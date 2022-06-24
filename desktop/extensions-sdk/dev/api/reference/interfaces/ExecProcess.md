@@ -1,16 +1,10 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: ExecProcess
-
-## Table of contents
-
-### Methods
-
-- [close](ExecProcess.md#close)
 
 ## Methods
 
