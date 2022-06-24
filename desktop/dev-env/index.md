@@ -1,7 +1,7 @@
 ---
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
-title: Development Environments Preview
+title: Overview
 ---
 
 Dev Environments enable you to collaborate easily by allowing you to share work-in-progress code with your team members. When using Dev Environments, you can easily set up repeatable development environments, keeping the environment details versioned along with your code. You can also share your work-in-progress code with your team members in just one click and without having to deal with any merge conflicts while moving between Git branches to get your code on to their machine.
@@ -14,14 +14,13 @@ Dev Environments also allow you to switch between your developer environments or
 
 To access Dev Environments, from the Docker menu, select **Dashboard** > **Dev Environments**.
 
-![Dev environment intro](images/dev-env-create.png){:width="700px"}
+![Dev environment intro](../images/dev-env-create.png){:width="700px"}
 
 ## Prerequisites
 
 Dev Environments are available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
 
-- [Mac](mac/release-notes/index.md)
-- [Windows](windows/release-notes/index.md)
+- [Docker Desktop](../release-notes.md)
 
 To get started with Dev Environments, you must have the following tools and extension installed on your machine:
 
@@ -39,16 +38,11 @@ If you have already installed Git, and it's not detected properly, run the follo
 
 If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the **Adjusting your PATH environment**  step.
 
-![Windows add Git to path](images/dev-env-gitbash.png){:width="300px"}
+![Windows add Git to path](../images/dev-env-gitbash.png){:width="300px"}
 
 > **Note**
 >
 > After you have installed Git, you must quit and then start Docker Desktop. From the Docker menu, select **Quit Docker Desktop**, and then start it again.
-
-
-
-
-
 
 ## Known issues
 

@@ -1,9 +1,8 @@
-
-
-
-
-
-
+---
+description: Dev Environments
+keywords: Dev Environments, share, collaborate, local
+title: Share your Dev Environment
+---
 
 ## Share your Dev Environment
 
@@ -15,11 +14,11 @@
 
 When you are ready to share your environment, just click the **Share** button and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
 
-![Share a Dev environment](images/dev-env-share.png){:width="700px"}
+![Share a Dev environment](../images/dev-env-share.png){:width="700px"}
 
 This creates a Docker image of your dev environment, uploads it to the Docker Hub namespace you have specified in the previous step, and provides a tiny URL which you can use to share your work with your team members.
 
-![Dev environment shared](images/dev-env-shared.png){:width="700px"}
+![Dev environment shared](../images/dev-env-shared.png){:width="700px"}
 
 Your team members need to open the **Create** dialog, select the **Existing Dev Environment** tab, and then paste the URL. Your Dev Environment now starts in the exact same state as you shared it.
 

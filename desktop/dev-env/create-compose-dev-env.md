@@ -1,6 +1,8 @@
-
-
-
+---
+description: Dev Environments
+keywords: Dev Environments, share, collaborate, local
+title: Create a Compose Dev Environment
+---
 
 ## Start a sample Compose Dev Environment
 
@@ -18,7 +20,7 @@ You can also use Dev Environments to collaborate on any Docker Compose-based pro
     - Creates volumes and networks
     - Starts the Compose stack
 
-![Compose Dev environment](images/dev-env-compose.png){:width="700px"}
+![Compose Dev environment](../images/dev-env-compose.png){:width="700px"}
 
 Now your application is up and running, you can check by opening [http://localhost:8080](http://localhost:8080) in your browser.
 
@@ -102,6 +104,3 @@ CMD ["/server"]
 The `development`target uses a `golang:1.16-alpine` image with all dependencies you need for development. You can start your project directly from VS Code and interact with the others applications or services such as the database or the frontend.
 
 In our example, the Docker Compose files are the same. However, they could be different and the services defined in the main Compose file may use other targets to build or directly reference other images.
-
-
-

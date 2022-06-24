@@ -1,8 +1,8 @@
-
-
-
-
-
+---
+description: Dev Environments
+keywords: Dev Environments, share, collaborate, local
+title: Create a Dev Environment
+---
 
 ## Start a single container Dev Environment
 
@@ -49,7 +49,7 @@ fi
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and finally, opens VS Code inside the Dev Environment container.
 
-![Single container Dev environment](images/dev-env-container.png){:width="700px"}
+![Single container Dev environment](../images/dev-env-container.png){:width="700px"}
 
 In the above example, the names `wizardly_ellis` and `relaxed_maclaren` are randomly generated. You'll most likely see different names when you create your Dev Environment.
 
@@ -57,7 +57,7 @@ Hover over the container and click **Open in VS Code** to start working in VS Co
 
 You can launch the application by running the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
-![Single container Dev environment](images/dev-env-localhost.png){:width="700px"}
+![Single container Dev environment](../images/dev-env-localhost.png){:width="700px"}
 
 
 

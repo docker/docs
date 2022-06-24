@@ -1,7 +1,8 @@
-
-
-
-
+---
+description: Dev Environments
+keywords: Dev Environments, share, collaborate, local
+title: Specify a Dockerfile or base image
+---
 
 ## Specify a Dockerfile 
 
@@ -44,4 +45,3 @@ If you already have an image built, you can specify it as a base image to define
 > This configuration is to unblock users for the Preview release only. We may move this configuration for single and multi-container applications to a Compose-based implementation in future releases.
 >
 > To get involved with the discussion on how we are going to implement this as part of Compose, join the **#docker-dev-environments** channel in the [Docker Community Slack](https://dockercommunity.slack.com/messages){:target="_blank" rel="noopener" class="_"}, or let us know your feedback by creating an issue in the [Dev Environments](https://github.com/docker/dev-environments/issues){:target="_blank" rel="noopener" class="_"} GitHub repository.
-
