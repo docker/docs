@@ -115,7 +115,7 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
 
     ```console
     $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo apt-get install docker-ce
     ```
 
     > Receiving a GPG error when running `apt-get update`?
@@ -142,7 +142,7 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
        for example, `5:18.09.1~3-0~debian-stretch `.
 
     ```console
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
+    $ sudo apt-get install docker-ce=<VERSION_STRING>
     ```
 
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
