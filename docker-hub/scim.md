@@ -12,9 +12,9 @@ title: System for Cross-domain Identity Management
 
 This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. SCIM is a provisioning system that lets you manage users within your identity provider (IdP). You can enable SCIM on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md){:target="blank" rel="noopener" class=""}.
 
-SCIM provides automated user provisioning and de-provisioning for your Docker organization through your Identity Provider (IdP). The SCIM-synced changes apply to newly assigned users. The status of those already under your subscription will be supplemented but might not be overwritten in that the changes are applied. For instance, other members are unaffected if your IDP sends an update containing changes to User1.
+SCIM provides automated user provisioning and de-provisioning for your Docker organization through your IdP. Once SCIM is enabled in your IdP, any user assigned to the Docker application in the IdP is automatically provisioned in Docker Hub and added to the organization. Also, if a user gets unassigned from the Docker application in the IdP, the user is removed from the organization in Docker Hub. SCIM also synchronizes changes made to users’ attributes in the IdP, for instance, the user’s first and last names. Group management is currently not supported.
 
-We currently support the following provisioning features: creating new users, pushing user profile updates, removing users, deactivating users, reactivating users, and updating emails.
+We currently support the following provisioning features: creating new users, pushing user profile updates, removing users, deactivating users and reactivating users.
 
 ## Configure
 
@@ -38,7 +38,11 @@ Before making SCIM configuration changes in your IdP, navigate to [Docker Hub](h
 4. Click **Test Connection Configuration** to complete the configuration and **Save**.
 5. Navigate to **Provisioning** > **To App** > **Edit** and enable **Create Users**, **Update User Attributes** and **Deactivates Users**, and click **Save**.
 
-![scim-app-provisioning](images/scim-app-provisioning.png){:width="700px"}
+    ![scim-app-provisioning](images/scim-app-provisioning.png){:width="700px"}
+
+6. Remove all fields that are not supported from your **Docker Hub Attributes Mappings**.
+
+![scim-attributes](images/scim-attributes.png){:width="700px"}
 
 The synchronization of user data is now automated, and the members in your Docker organization will now be automatically provisioned, updated, and de-provisioned based on the access control managed through your identity provider, Okta.
 
@@ -54,7 +58,7 @@ You must run full-sync after enabling SCIM, if you already have users assigned t
     >
     > Any user that was not previously provisioned is now provisioned in Docker Hub.
 
-![scim-full-sync](images/scim-full-sync.png){:width="700px"}
+![scim-okta-button](images/scim-okta-button.png){:width="700px"}
 
 ## Disabling SCIM
 
