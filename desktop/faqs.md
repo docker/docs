@@ -42,7 +42,7 @@ This includes:
 - [Image Access Management](../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../docker-hub/vulnerability-scanning.md)
 - View remote images in the [Docker Dashboard](dashboard.md)
-- Set up [Dev Environments](dev-environments.md)
+- Set up [Dev Environments](dev-environments/index.md.md)
 - Docker build when using [Buildkit](../develop/develop-images/build_enhancements.md). You can work around this by disabling
   BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
 - Deploying an app to the cloud through Compose
