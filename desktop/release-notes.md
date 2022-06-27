@@ -38,7 +38,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### Upgrades
 - [Docker Engine to v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
-- [Kubernetes v1.41.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.41.1)
+- [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
 - [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
 - [CNI plugins to v1.1.1](https://github.com/containernetworking/releases/tag/v1.1.1)
 - [containerd to v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6)
@@ -67,6 +67,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where license agreement is not showing up, thus silently blocking Docker Desktop startup.
 - Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
 - Fixed the duplicate footer on the Support screen.
+- Dev Environments can be created from a subdirectory in a GitHub repository.
 
 #### For Mac
 
