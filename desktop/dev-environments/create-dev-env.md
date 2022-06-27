@@ -92,7 +92,7 @@ Docker then clones the repository with your specified branch or tag.
 
 5. To launch the application, run the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
-## Start a Dev Environment from a local folder
+## Create a Dev Environment from a local folder
 
 1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started** and then the **Local Folder** tab.
