@@ -47,7 +47,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- TODO: Waiting for highlights.
+- User can now add environment variables when running an image right from the Docker Dashboard.
+- Added features to make it easier to work with containers logs such as regex search and the ability to clear container logs while the container is still running.
+- Addressed feedback on new containers tables, added ports and separated container and image names.
+- Two new extensions (Ddosify and Lacework) added to the Extensions Marketplace.
 
 ### Bug fixes and minor changes
 
