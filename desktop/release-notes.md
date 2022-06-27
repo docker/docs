@@ -23,17 +23,84 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
-## Docker Desktop 4.9.1
-2022-06-16
+## Docker Desktop 4.10.0
+2022-06-30
 
 > Download Docker Desktop
 >
 > [Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+
+### Security
+
+Update Go runtime to 1.18.3 to address:
+
+- [CVE-2022-30634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30634)
+- [CVE-2022-30629](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30629)
+- [CVE-2022-30580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30580)
+- [CVE-2022-29804](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29804)
+
+### Upgrades
+- [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
+- [Kubernetes v1.41.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.41.1)
+- [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
+- [CNI plugins to v1.1.1](https://github.com/containernetworking/releases/tag/v1.1.1)
+- [Docker Engine to v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
+- [containerd to v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6)
+- [runc to v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2)
+- [Go 1.18.3](https://github.com/golang/go/releases/tag/go1.18.3)
+
+### New
+
+- Expanded / collapsed state of the Compose apps is now persisted.
+- External URLs can refer to extension details in Docker Desktop Marketplace using links like `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
+- Containers overview: added bulk actions for start/pause/stop selected containers.
+- Containers overview: pause/restart actions for compose.
+- Implemented changes on the logs search functionality and added the possibility of clearing the terminal.
+- `docker extension` CLI commands are available with Docker Desktop by default.
+- Disabled Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed a bug where a Docker extension fails to load if its backend container(s) are stopped. Fixes [docker/extensions-sdk#16](https://github.com/docker/extensions-sdk/issues/162).
+- Fixed a bug where license agreement is not showing up, thus silently blocking Docker Desktop startup.
+- Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
+- Fixed the duplicate footer on the Support screen.
+- Extensions: make screenshots displayed in the marketplace bigger.
+
+#### For Mac
+
+- Fixed a bug with location of bash completion files on macOS. Fixes [docker/for-mac#6343](https://github.com/docker/for-mac/issues/6343).
+- Fixed a bug where Docker would not start if the username was longer than 25 characters.
+- Fixed a bug when Docker Desktop was not starting due to invalid system proxy configuration. Fixes some issues reported in [docker/for-mac#6289](https://github.com/docker/for-mac/issues/6289).
+
+#### For Windows
+
+- Fixed [docker/for-win#12738](https://github.com/docker/for-win/issues/12738).
+- Fixed a bug where the dashboard was empty. Fixes [docker/for-win#12759](https://github.com/docker/for-win/issues/12759).
+
+#### For Linux
+
+- Fixed a bug when settings cannot be applied more than once.
+- Fixed Compose version displayed in the `About` screen.
+
+## Docker Desktop 4.9.1
+2022-06-16
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/81317/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/81317/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/81317/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.pkg.tar.zst)
 
 ### Bug fixes and minor changes
 
