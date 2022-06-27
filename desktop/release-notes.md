@@ -47,23 +47,23 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Expanded / collapsed state of the Compose apps is now persisted.
-- External URLs can refer to extension details in Docker Desktop Marketplace using links like `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
-- Containers overview: added bulk actions for start/pause/stop selected containers.
-- Containers overview: pause/restart actions for compose.
-- Implemented changes on the logs search functionality and added the possibility of clearing the terminal.
-- `docker extension` CLI commands are available with Docker Desktop by default.
-- Disabled Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
+- TODO: Waiting for highlights.
 
 ### Bug fixes and minor changes
 
 #### For all platforms
 
+- Containers tab: Bulk actions for start/pause/stop selected containers.
+- Containers tab: Pause/restart actions for compose projects.
+- External URLs can refer to extension details in Docker Desktop Marketplace using links like `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
+- Implemented changes on the logs search functionality and added the possibility of clearing the terminal.
+- Expanded / collapsed state of the Compose apps is now persisted.
+- `docker extension` CLI commands are available with Docker Desktop by default.
+- Extensions: make screenshots displayed in the marketplace bigger.
 - Fixed a bug where a Docker extension fails to load if its backend container(s) are stopped. Fixes [docker/extensions-sdk#16](https://github.com/docker/extensions-sdk/issues/162).
 - Fixed a bug where license agreement is not showing up, thus silently blocking Docker Desktop startup.
 - Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
 - Fixed the duplicate footer on the Support screen.
-- Extensions: make screenshots displayed in the marketplace bigger.
 
 #### For Mac
 
@@ -80,6 +80,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Fixed a bug when settings cannot be applied more than once.
 - Fixed Compose version displayed in the `About` screen.
+
+### Removal
+
+- Removed Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
 
 ## Docker Desktop 4.9.1
 2022-06-16
