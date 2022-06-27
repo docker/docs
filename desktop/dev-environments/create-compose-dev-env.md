@@ -35,7 +35,7 @@ To set up a Dev Environment for your own Compose-based project, there are additi
 
 Dev Environments use an additional `docker-compose.yaml` file located in the `.docker` directory at the root of your project. This file allows you to define the image required for a dedicated service, the ports you'd like to expose, along with additional configuration options dedicated to Dev Environments coming in the future.
 
-Take a detailed look at the `docker-compose.yaml` fileused in the [compose-dev-env](https://github.com/dockersamples/compose-dev-env/blob/main/.docker/docker-compose.yaml){:target="_blank" rel="noopener" class="_"} sample project.
+Take a detailed look at the `docker-compose.yaml` file used in the [compose-dev-env](https://github.com/dockersamples/compose-dev-env/blob/main/.docker/docker-compose.yaml){:target="_blank" rel="noopener" class="_"} sample project.
 
 ```yaml
 version: "3.7"
@@ -102,7 +102,7 @@ CMD ["/server"]
 
 The `development`target uses a `golang:1.16-alpine` image with all dependencies you need for development. You can start your project directly from VS Code and interact with the others applications or services such as the database or the frontend.
 
-In our example, the Docker Compose files are the same. However, they could be different and the services defined in the main Compose file may use other targets to build or directly reference other images.
+In the example, the Docker Compose files are the same. However, they could be different and the services defined in the main Compose file may use other targets to build or directly reference other images.
 
 ## What's next?
 

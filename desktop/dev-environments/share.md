@@ -12,11 +12,15 @@ title: Share your Dev Environment
 
 Sharing a Dev Environment lets your team members access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback before you create a pull request.
 
+## Share your Dev Environment
+
 When you are ready to share your environment, hover over your Dev Environment, select the **Share** icon, and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
 
 This creates an image of your Dev Environment, uploads it to the Docker Hub namespace you have specified, and provides a tiny URL to share with your team members.
 
-![Dev environment shared](../images/dev-env-shared.png){:width="700px"}
+![Dev environment shared](../images/dev-share.PNG){:width="700px"}
+
+## Open a Dev Environment that has been shared with you
 
 To open a Dev Environment that has been shared with you, select the **Create** button in the top right-hand corner, select the **Existing Dev Environment** tab, and then paste the URL.
 

@@ -10,7 +10,7 @@ You can create a Dev Environment from a:
 - Subfolder of a Git repository
 - Local folder
 
-This did not conflict with any of the local files or local tooling set up on your host 
+This did not conflict with any of the local files or local tooling set up on your host. 
 
 ## Create a Dev Environment from a Git repository
 
@@ -58,7 +58,7 @@ fi
 To create a Dev Environment:
 
 1. From **Under Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** text box on the **Existing Git repo** tab.
+2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** tab.
 3. Select **Continue**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
@@ -82,15 +82,19 @@ Docker then clones the repository with your specified branch or tag.
 
 ## Create a Dev Environment from a subfolder of a Git repository
 
-1. From **Under Dev Environments** in Docker Dashboard, click **Create**. Th **Create a Dev Environment** dialog displays.
+1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started** and then copy your Git subfolder link into the **Enter the Git Repository** field on the **Existing Git repo** tab.
 3. Select **Continue**.
 
-    This creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. It then opens VS Code inside the Dev Environment container.
+    This clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
+
+4. Hover over the container and select **Open in VS Code** to start working. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
+
+5. To launch the application, run the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
 ## Start a Dev Environment from a local folder
 
-1. From **Under Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
+1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started** and then the **Local Folder** tab.
 3. Select **Select directory** to open the root of the code that you would like to work on.
 3. Select **Continue**.

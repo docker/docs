@@ -4,15 +4,17 @@ keywords: Dev Environments, share, collaborate, local
 title: Overview
 ---
 
-Dev Environments enable you to collaborate easily by allowing you to share work-in-progress code with your team members. When using Dev Environments, you can easily set up repeatable development environments, keeping the environment details versioned along with your code. You can also share your work-in-progress code with your team members in just one click and without having to deal with any merge conflicts while moving between Git branches to get your code on to their machine.
+Dev Environments boosts collaboration by allowing you to share work-in-progress code with your team members. This removes any potential merge conflicts while moving between Git branches to get your code on to their machine.
 
-Dev Environments also allow you to switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch.
+Dev Environments uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
+
+You can also switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch. This makes reviewing PRs as simple as opening a new environment.
 
 > **Beta**
 >
 > The Dev Environments feature is currently offered in Beta. We recommend that you do not use this in production environments.
 
-![Dev environment intro](../images/dev-env-create.png){:width="700px"}
+![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 
 ## Prerequisites
 
@@ -20,7 +22,7 @@ Dev Environments is available as part of Docker Desktop 3.5.0 release. Download 
 
 - [Docker Desktop](../release-notes.md)
 
-To get started with Dev Environments, you must also have the following tools and extension installed on your machine:
+To get started with Dev Environments, you must also install the following tools and extension on your machine:
 
 - [Git](https://git-scm.com){:target="_blank" rel="noopener" class="_"}
 - [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
@@ -38,14 +40,14 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 
 > **Note**
 >
-> After you have installed Git, you must quit and then start Docker Desktop. From the Docker menu, select **Quit Docker Desktop**, and then start it again.
+> After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
 
 ## Known issues
 
-The following section lists known issues and workarounds in the Dev Environments Preview:
+The following section lists known issues and workarounds:
 
 1. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-2. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment will be emulated.
+2. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment is emulated.
 
 ## What's next?
 
