@@ -35,21 +35,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 > [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
-### Security
-
-Update Go runtime to 1.18.3 to address:
-
-- [CVE-2022-30634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30634)
-- [CVE-2022-30629](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30629)
-- [CVE-2022-30580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30580)
-- [CVE-2022-29804](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29804)
-
 ### Upgrades
+- [Docker Engine to v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
 - [Kubernetes v1.41.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.41.1)
 - [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
 - [CNI plugins to v1.1.1](https://github.com/containernetworking/releases/tag/v1.1.1)
-- [Docker Engine to v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
 - [containerd to v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6)
 - [runc to v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2)
 - [Go 1.18.3](https://github.com/golang/go/releases/tag/go1.18.3)
