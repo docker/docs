@@ -70,9 +70,8 @@ No. Organization owners can invite users through email and also choose a team fo
 
 ### Can I force my organization's members to authenticate before using Docker Desktop and are there any benefits?
 
-Yes. You can [enforce sign in](../docker-hub/configure-sign-in.md) and there are benefits.
+Yes. You can [enforce sign in](../docker-hub/configure-sign-in.md) and some benefits are:
 
-Some benefits of enforcing sign in are:
 - Administrators can enforce features like [Image Access Management](../docker-hub/image-access-management.md) and [Registry Access Management](../docker-hub/registry-access-management.md).
  - Administrators can ensure compliance by blocking Docker Desktop usage for users who do not sign in as members of the organization.
 
@@ -141,7 +140,7 @@ A [service account](../docker-hub/service-accounts.md) is a Docker ID used for a
 
 ### Does my organization need to use Docker's registry?
 
-A registry is a hosted service containing repositories of images which responds to the Registry API. Docker Hub is Docker's primary registry, but Docker can easily be used with other container image registries. The default registry can be accessed by browsing to [Docker Hub](https://hub.docker.com) or using the `docker search` command.
+A registry is a hosted service containing repositories of images that responds to the Registry API. Docker Hub is Docker's primary registry, but you can use Docker with other container image registries. You can access the default registry by browsing to [Docker Hub](https://hub.docker.com) or using the `docker search` command.
 
 ### What is included in my Docker Business or Team plan?
 
