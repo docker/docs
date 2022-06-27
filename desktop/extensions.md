@@ -41,7 +41,7 @@ From here, you can click **Open** to access the extension or install additional 
 
 ## See containers created by extensions
 
-By default, containers created by extensions are hidden from the list of containers in the dashboard and the Docker CLI. To make them visible 
+By default, containers created by extensions are hidden from the list of containers in Docker Dashboard and the Docker CLI. To make them visible 
 update your settings:
 
 1. Navigate to  **Settings**, or **Preferences** if you're a Mac user.
