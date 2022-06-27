@@ -78,7 +78,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 #### For Windows
 
 - Fixed [docker/for-win#12738](https://github.com/docker/for-win/issues/12738).
-- Fixed a bug where the dashboard was empty. Fixes [docker/for-win#12759](https://github.com/docker/for-win/issues/12759).
 
 #### For Linux
 
