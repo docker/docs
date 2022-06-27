@@ -68,7 +68,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 #### For Mac
 
 - Fixed a bug with location of bash completion files on macOS. Fixes [docker/for-mac#6343](https://github.com/docker/for-mac/issues/6343).
-- Fixed a bug where Docker would not start if the username was longer than 25 characters.
+- Fixed a bug where Docker would not start if the username was longer than 25 characters. Fixes [docker/for-mac#6122](https://github.com/docker/for-mac/issues/6122).
 - Fixed a bug when Docker Desktop was not starting due to invalid system proxy configuration. Fixes some issues reported in [docker/for-mac#6289](https://github.com/docker/for-mac/issues/6289).
 
 #### For Windows
