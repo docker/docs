@@ -163,7 +163,7 @@ Organization owners can invite a new member to the organization via Docker ID or
 
 ### Invite a member via Docker ID or email address
 
-To invite a few members, below is the recommended method. If you want to invite more than a few members, [inviting multiple members via CSV file](#invite-multiple-members-via-csv-file) is the recommended method.
+Use the following steps to invite one member at a time to your organization. If you want to invite a large amount of members to your organization, the recommended method is to [invite multiple members via CSV file](#invite-multiple-members-via-csv-file).
 
 1. Go to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select **Invite Member**.
@@ -179,6 +179,8 @@ To invite a few members, below is the recommended method. If you want to invite 
    > You can view the pending invitation in the **Members** tab. The invitee receives an email with a link to the organization in Docker Hub where they can  accept or decline the invitation.
 
 ### Invite multiple members via CSV file
+
+To invite multiple members to your organization via CSV file:
 
 1. Go to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select **Invite Member**.
