@@ -38,37 +38,36 @@ Compose to set up and run WordPress. Before starting, make sure you have
     mounts for data persistence:
 
     ```yaml
-    version: "{{ site.compose_file_v3 }}"
-    
     services:
       db:
-        image: mysql:5.7
+        # We use a mariadb image which supports both amd64 & arm64 architecture
+        image: mariadb:10.6.4-focal
+        # If you really want to use MySQL, uncomment the following line
+        #image: mysql:8.0.27
+        command: '--default-authentication-plugin=mysql_native_password'
         volumes:
           - db_data:/var/lib/mysql
         restart: always
         environment:
-          MYSQL_ROOT_PASSWORD: somewordpress
-          MYSQL_DATABASE: wordpress
-          MYSQL_USER: wordpress
-          MYSQL_PASSWORD: wordpress
-    
+          - MYSQL_ROOT_PASSWORD=somewordpress
+          - MYSQL_DATABASE=wordpress
+          - MYSQL_USER=wordpress
+          - MYSQL_PASSWORD=wordpress
+        expose:
+          - 3306
+          - 33060
       wordpress:
-        depends_on:
-          - db
         image: wordpress:latest
-        volumes:
-          - wordpress_data:/var/www/html
         ports:
-          - "8000:80"
+          - 80:80
         restart: always
         environment:
-          WORDPRESS_DB_HOST: db
-          WORDPRESS_DB_USER: wordpress
-          WORDPRESS_DB_PASSWORD: wordpress
-          WORDPRESS_DB_NAME: wordpress
+          - WORDPRESS_DB_HOST=db
+          - WORDPRESS_DB_USER=wordpress
+          - WORDPRESS_DB_PASSWORD=wordpress
+          - WORDPRESS_DB_NAME=wordpress
     volumes:
-      db_data: {}
-      wordpress_data: {}
+      db_data:
     ```
 
    > **Notes**:
