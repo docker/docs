@@ -60,7 +60,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added pause and restart actions for compose projects in the **Containers** tab.
 - Added icons and exposed ports or exit code information in the **Containers** tab.
 - External URLs can now refer to extension details in the Extension Marketplace using links such as `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
-- Implemented changes on the logs search functionality and added the possibility of clearing the terminal.
 - The expanded or collapsed state of the Compose apps is now persisted.
 - `docker extension` CLI commands are available with Docker Desktop by default.
 - Increased the size of the screenshots displayed in the Extension marketplace.
