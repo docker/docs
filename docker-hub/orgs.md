@@ -159,11 +159,11 @@ The org owner can also add additional org owners to help them manage users, team
 
 ## Invite members
 
-Organization owners can invite a new member to the organization via Docker ID or email address, or invite multiple members via a CSV file containing the email addresses. If an invitee does not have a Docker account, they must create an account and verify their email address before they can accept the invitation to join the organization. When inviting members, their pending invitation occupies a seat.
+Organization owners can invite a new member to an organization via Docker ID or email address or invite multiple new members via a CSV file containing email addresses. If an invitee does not have a Docker account, they must create an account and verify their email address before they can accept the invitation to join the organization. When inviting members, their pending invitation occupies a seat.
 
 ### Invite a member via Docker ID or email address
 
-Use the following steps to invite one member at a time to your organization. If you want to invite a large amount of members to your organization, the recommended method is to [invite multiple members via CSV file](#invite-multiple-members-via-csv-file).
+Use the following steps to invite a member to your organization via Docker ID or email address. To invite a large amount of members to your organization, the recommended method is to [invite multiple members via CSV file](#invite-multiple-members-via-csv-file).
 
 1. Go to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select **Invite Member**.
@@ -171,16 +171,17 @@ Use the following steps to invite one member at a time to your organization. If 
 4. Enter the invitee's Docker ID or email, and select a team from the drop-down list.
   > **Note**
   >
-  >  It is recommended that you add non-administrative users to a team other than the owners team. Members added to the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](#create-a-team).
-5. Click **Invite** to confirm.
-
+  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](#create-a-team).
+5.  Click Invite to confirm.
    > **Note**
    >
    > You can view the pending invitation in the **Members** tab. The invitee receives an email with a link to the organization in Docker Hub where they can  accept or decline the invitation.
 
+
+
 ### Invite multiple members via CSV file
 
-To invite multiple members to your organization via CSV file:
+To invite multiple members to your organization via a CSV file containing email addresses:
 
 1. Go to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select **Invite Member**.
@@ -188,7 +189,7 @@ To invite multiple members to your organization via CSV file:
 4. Select a team from the drop-down list to add all invited users to that team.
   > **Note**
   >
-  >  It is recommended that you add non-administrative users to a team other than the owners team. Members added to the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](#create-a-team).
+  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](#create-a-team).
 5. Select **Download the template CSV file** to optionally download an example CSV file. The following is an example of the contents of a valid CSV file.
     ```
     email
@@ -206,12 +207,12 @@ To invite multiple members to your organization via CSV file:
   Valid email addresses and any email addresses that have issues appear.
   Email address may have the follow issues:
 	  - **Invalid email**: The email address is not a valid address. The email address will be ignored if you send invites. You can correct the email address in the CSV file and re-import the file.
-	  - **Already invited**: The user has already been sent an invite email and another invite email will not be sent. The user will not be added to the team.
-	  - **Member**: The user is already a member of your organization and an invite email will not be sent. The user will not be added to the team.
+	  - **Already invited**: The user has already been sent an invite email and another invite email will not be sent.
+	  - **Member**: The user is already a member of your organization and an invite email will not be sent.
 	  - **Duplicate**: The CSV file has multiple occurrences of the same email address. The user will be sent only one invite email.
   > **Note**
   >
-  > If inviting all users in the CSV file will exceed the number of available seats in your organization, you must purchase more seats, or remove email addresses from the CSV file and re-import the file. To purchase more seats, see [Add seats to your subscription](../subscription/add-seats.md) or [Contact sales](https://www.docker.com/pricing/contact-sales/).
+  > If the amount of users in your CSV file exceeds the number of available seats in your organization, you can purchase more seats, or remove email addresses from the CSV file and re-import the file. To purchase more seats, see [Add seats to your subscription](../subscription/add-seats.md) or [Contact sales](https://www.docker.com/pricing/contact-sales/).
 4. Click **Send invites**.
    > **Note**
    >
