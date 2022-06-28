@@ -59,7 +59,7 @@ For now, we will create the network first and attach the MySQL container at star
     ```console
     $ docker run -d \
         --network todo-app --network-alias mysql \
-        --platform "linux/amd64" \
+        --platform "linux/arm64" \
         -v todo-mysql-data:/var/lib/mysql \
         -e MYSQL_ROOT_PASSWORD=secret \
         -e MYSQL_DATABASE=todos \
