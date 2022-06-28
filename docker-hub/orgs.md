@@ -202,6 +202,9 @@ To invite multiple members to your organization via a CSV file containing email 
   - To export a CSV file from another application, see the application’s documentation.
   - To create a new CSV file, open a new file in a text editor, type `email` on the first line, type the user email addresses one per line on the following lines, and then save the file with a .csv extension.
 7. Select **Browse files** and then select your CSV file.
+  > **Note**
+  >
+  > If the amount of users in your CSV file exceeds the number of available seats in your organization, you cannot continue to invite members. To invite members, you can purchase more seats, or remove email addresses from the CSV file and re-select the new file. To purchase more seats, see [Add seats to your subscription](../subscription/add-seats.md) or [Contact sales](https://www.docker.com/pricing/contact-sales/).
 8. After the CSV file has been uploaded, select **Review**.
   Valid email addresses and any email addresses that have issues appear.
   Email address may have the follow issues:
@@ -209,9 +212,6 @@ To invite multiple members to your organization via a CSV file containing email 
 	  - **Already invited**: The user has already been sent an invite email and another invite email will not be sent.
 	  - **Member**: The user is already a member of your organization and an invite email will not be sent.
 	  - **Duplicate**: The CSV file has multiple occurrences of the same email address. The user will be sent only one invite email.
-  > **Note**
-  >
-  > If the amount of users in your CSV file exceeds the number of available seats in your organization, you can purchase more seats, or remove email addresses from the CSV file and re-import the file. To purchase more seats, see [Add seats to your subscription](../subscription/add-seats.md) or [Contact sales](https://www.docker.com/pricing/contact-sales/).
 4. Click **Send invites**.
    > **Note**
    >
