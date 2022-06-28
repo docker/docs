@@ -8,6 +8,51 @@ redirect_from:
 ---
 
 
+## 2.6.1
+
+(2022-06-23)
+
+
+### Bug Fixes
+
+- Added support for setting secrets from environment variable. Fixes [#251](https://github.com/compose-spec/compose-spec/issues/251){:target="_blank" rel="noopener" class="_"}.
+- Added links to container create request. Fixes [#9513](https://github.com/docker/compose/issues/9513){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose run` to start only direct dependencies. Fixes [#9459](https://github.com/docker/compose/issues/9459){:target="_blank" rel="noopener" class="_"}.
+- Fixed `docker compose up` service not found errors when using `--no-deps` option. Fixes [#9427](https://github.com/docker/compose/issues/9427){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose down` to respect `COMPOSE_REMOVE_ORPHANS` environment variable. Fixes [#9562](https://github.com/docker/compose/issues/9562){:target="_blank" rel="noopener" class="_"}.
+- Fixed project-level bind mount volumes. Fixes [docker/for-mac#6317](https://github.com/docker/for-mac/issues/6317){:target="_blank" rel="noopener" class="_"}.
+- Fixed parsing of properties `deploy.limits.cpus` and `deploy.limits.pids` to respect floating-point values. Fixes [#9542](https://github.com/docker/compose/issues/9542){:target="_blank" rel="noopener" class="_"} and [#9501](https://github.com/docker/compose/issues/9501){:target="_blank" rel="noopener" class="_"}. 
+- Fixed `compose ps` ports to list all exposed ports. Fixes [#9257](https://github.com/docker/compose/issues/9527){:target="_blank" rel="noopener" class="_"}.
+- Fixed spelling mistakes in `compose ps` code.
+- Fixed `docker-compose`to honour `--no-ansi` even when deprecated option is requested.
+- Fixed network name and network ID possible ambiguity.
+
+
+## Changes
+
+- Upgrade: compose-go v1.2.8.
+- Upgrade: buildx v0.8.2.
+- Upgrade: containerd v1.6.6.
+- Dependencies upgrade: bumping runc to 1.1.2.
+- Dependencies upgrade: bumping golang to 1.18.3.
+- Dependencies upgrade: bumping compose-go to v1.2.8.
+- Dependencies upgrade: bumping github.com/theupdateframework/notary from 0.6.1 to 0.7.0.
+- Dependencies upgrade: bumping github.com/cnabio/cnab-to-oci from 0.3.1-beta1 to 0.3.3.
+- Dependencies upgrade: bumping github.com/hashicorp/go-version from 1.3.0 to 1.5.0.
+- Dependencies upgrade: bumping github.com/stretchr/testify from 1.7.0 to 1.7.2.
+- Dependencies upgrade: bumping github.com/docker/buildx from 0.8.1 to 0.8.2.
+- Dependencies upgrade: bumping github.com/AlecAivazis/survey/v2 from 2.3.2 to 2.3.5.
+- Dependencies upgrade: bumping github.com/containerd/containerd from 1.6.2 to 1.6.6.
+- e2e: add test for `ps`.
+- e2e: unmarshal json into container summaries.
+- e2e: fix subtests and block parallel unsafe tests.
+- e2e: isolate test command env from system env.
+- e2e: fix spurious `ps` failures.
+- e2e: ensure all compose commands standalone compatible.
+- e2e: improve test output on failures.
+
+
+For the full change log or additional information, check the [Compose repository 2.6.1 release page](https://github.com/docker/compose/releases/tag/v2.6.1){:target="_blank" rel="noopener" class="_"}.
 
 ## 2.6.0
 
@@ -18,8 +63,8 @@ redirect_from:
 - Fixed `compose up` to attach only to services declared in project with enabled profiles. Fixes [#9286](https://github.com/docker/compose/issues/9286){:target="_blank" rel="noopener" class="_"}.
 - Fixed flickering prompt when pulling same image from multiple services. Fixes [#9469](https://github.com/docker/compose/issues/9469){:target="_blank" rel="noopener" class="_"}.
 - Fixed compose go to import .env file to OS environment to allow setting variables (such as DOCKER_BUILDKIT) through this file. Fixes [#9345](https://github.com/docker/compose/issues/9345){:target="_blank" rel="noopener" class="_"}.
-- Fixed TestLocalComposeUp that failed locally.
-- Fixed local run of make e2e-compose-standalone.
+- Fixed `TestLocalComposeUp` that failed locally.
+- Fixed local run of make `e2e-compose-standalone`.
 
 
 ### Changes
