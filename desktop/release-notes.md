@@ -35,6 +35,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 > [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
+### New
+
+- You can now add environment variables before running an image in Docker Desktop.
+- Added features to make it easier to work with a container's logs, such as regex search and the ability to clear container logs while the container is still running.
+- Implemented feedback on the containers table. Added ports and separated container and image names.
+- Added two new extensions, Ddosify and Lacework, to the Extensions Marketplace.
+
 ### Upgrades
 - [Docker Engine to v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
@@ -45,39 +52,30 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - [runc to v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2)
 - [Go 1.18.3](https://github.com/golang/go/releases/tag/go1.18.3)
 
-### New
-
-- User can now add environment variables when running an image right from the Docker Dashboard.
-- Added features to make it easier to work with containers logs such as regex search and the ability to clear container logs while the container is still running.
-- Addressed feedback on new containers tables, added ports and separated container and image names.
-- Two new extensions (Ddosify and Lacework) added to the Extensions Marketplace.
-
 ### Bug fixes and minor changes
 
 #### For all platforms
 
-- Containers tab: Bulk actions for start/pause/stop selected containers.
-- Containers tab: Pause/restart actions for compose projects.
-- Containers tab: Adds icons as well as the exposed port(s) / exit code.
-- External URLs can refer to extension details in Docker Desktop Marketplace using links like `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
+- Added additional bulk actions for starting/pausing/stopping select containers in the **Containers** tab.
+- Added pause and restart actions for compose projects in the **Containers** tab.
+- Added icons and exposed ports or exit code information in the **Containers** tab.
+- External URLs can now refer to extension details in the Extension Marketplace using links such as `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
 - Implemented changes on the logs search functionality and added the possibility of clearing the terminal.
-- Expanded / collapsed state of the Compose apps is now persisted.
+- The expanded or collapsed state of the Compose apps is now persisted.
 - `docker extension` CLI commands are available with Docker Desktop by default.
-- Extensions: make screenshots displayed in the marketplace bigger.
+- Increased the size of the screenshots displayed in the Extension marketplace.
 - Fixed a bug where a Docker extension fails to load if its backend container(s) are stopped. Fixes [docker/extensions-sdk#16](https://github.com/docker/extensions-sdk/issues/162).
-- Fixed a bug where image search field was cleared without reason. Fixes [docker/for-win#12738](https://github.com/docker/for-win/issues/12738).
-- Fixed a bug where license agreement is not showing up, thus silently blocking Docker Desktop startup.
+- Fixed a bug where the image search field is cleared without a reason. Fixes [docker/for-win#12738](https://github.com/docker/for-win/issues/12738).
+- Fixed a bug where the license agreement does not display and silently blocks Docker Desktop startup.
 - Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
 - Fixed the duplicate footer on the Support screen.
 - Dev Environments can be created from a subdirectory in a GitHub repository.
-- Occasionally the Docker engine will restart during a `docker system prune`. This is a [known issue](https://github.com/moby/buildkit/pull/2177) in the version of buildkit used in the current engine and will be fixed in future releases.
-- Removed the error message if the tips of the day cannot be loaded when using Docker Desktop offline. Fixes [docker/for-mac#6366](https://github.com/docker/for-mac/issues/6366).
 
 #### For Mac
 
 - Fixed a bug with location of bash completion files on macOS. Fixes [docker/for-mac#6343](https://github.com/docker/for-mac/issues/6343).
-- Fixed a bug where Docker would not start if the username was longer than 25 characters. Fixes [docker/for-mac#6122](https://github.com/docker/for-mac/issues/6122).
-- Fixed a bug when Docker Desktop was not starting due to invalid system proxy configuration. Fixes some issues reported in [docker/for-mac#6289](https://github.com/docker/for-mac/issues/6289).
+- Fixed a bug where Docker Desktop does not start if the username is longer than 25 characters. Fixes [docker/for-mac#6122](https://github.com/docker/for-mac/issues/6122).
+- Fixed a bug where Docker Desktop was not starting due to invalid system proxy configuration. Fixes some issues reported in [docker/for-mac#6289](https://github.com/docker/for-mac/issues/6289).
 
 #### For Windows
 
@@ -88,9 +86,18 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug when settings cannot be applied more than once.
 - Fixed Compose version displayed in the `About` screen.
 
-### Removal
+### Removed
 
+#### For all platforms
+
+- Removed the error message if the tips of the day cannot be loaded when using Docker Desktop offline. Fixes [docker/for-mac#6366](https://github.com/docker/for-mac/issues/6366).
 - Removed Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
+
+### Known Issues
+
+#### For all platforms
+
+- Occasionally the Docker engine will restart during a `docker system prune`. This is a [known issue](https://github.com/moby/buildkit/pull/2177) in the version of buildkit used in the current engine and will be fixed in future releases.
 
 ## Docker Desktop 4.9.1
 2022-06-16
