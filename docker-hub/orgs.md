@@ -172,7 +172,7 @@ Use the following steps to invite a member to your organization via Docker ID or
   > **Note**
   >
   >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](#create-a-team).
-5.  Click Invite to confirm.
+5.  Click **Invite** to confirm.
    > **Note**
    >
    > You can view the pending invitation in the **Members** tab. The invitee receives an email with a link to the organization in Docker Hub where they can  accept or decline the invitation.
