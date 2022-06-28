@@ -58,6 +58,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Containers tab: Bulk actions for start/pause/stop selected containers.
 - Containers tab: Pause/restart actions for compose projects.
+- Containers tab: Adds icons as well as the exposed port(s) / exit code.
 - External URLs can refer to extension details in Docker Desktop Marketplace using links like `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
 - Implemented changes on the logs search functionality and added the possibility of clearing the terminal.
 - Expanded / collapsed state of the Compose apps is now persisted.
