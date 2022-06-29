@@ -851,7 +851,11 @@ parts of your image.
 
 If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
-like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`.
+like:
+
+```dockerfile
+RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
+```
 
 > Consider an explicit UID/GID
 >
