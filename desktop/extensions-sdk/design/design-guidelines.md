@@ -61,7 +61,7 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 When building your extension, ensure that first time users of the extension and your product can understand its value-add and adopt it easily. Ensure you include contextual help within the extension.
 
 - Ensure that all necessary information is added to the extensions Marketplace as well as the extensions detail page. This should include:
-  - Screenshots of the extension.
+  - Screenshots of the extension. Note that the recommended size for screenshots is 2400x1600 pixels. 
   - A detailed description that covers what the purpose of the extension is, who would find it useful and how it works.
   - Link to necessary resources such as documentation.
 - If your extension has particularly complex functionality, add a demo or video to the start page. This helps onboard a first time user quickly.
