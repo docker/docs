@@ -1314,6 +1314,8 @@ manuals:
         title: Mac FAQs
       - path: /desktop/faqs/windowsfaqs/
         title: Windows FAQs
+    - path: /desktop/feedback/
+      title: Give feedback
     - path: /desktop/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
