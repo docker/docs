@@ -235,15 +235,6 @@ Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docke
 >
 > When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
 
-## Give feedback and get help
-
-To report bugs or problems, log on to Docker Desktop [for Linux issues on
-GitHub](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"},
-where you can review community reported issues, and file new ones.  See
-[Logs and Troubleshooting](troubleshoot.md) for more details.
-
-For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
-
 ## Where to go next
 
 * Try out the walkthrough at [Get Started](/get-started/){: target="_blank"
