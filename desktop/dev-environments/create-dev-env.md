@@ -65,7 +65,7 @@ To create a Dev Environment:
 
 4. Hover over the container and select **Open in VS Code** to start working. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
 
-5. To launch the application, run the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
+5. To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
 
 ## Create a Dev Environment from a specific branch or tag
@@ -80,7 +80,7 @@ You can create a dev environment from a specific branch (for example, a branch c
 
 Docker then clones the repository with your specified branch or tag.
 
-## Create a Dev Environment from a subfolder of a Git repository
+## Create a Dev Environment from a subdirectory of a Git repository
 
 1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started** and then copy your Git subfolder link into the **Enter the Git Repository** field on the **Existing Git repo** tab.
@@ -90,7 +90,11 @@ Docker then clones the repository with your specified branch or tag.
 
 4. Hover over the container and select **Open in VS Code** to start working. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
 
-5. To launch the application, run the command `make run` in your VS Code terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
+5. To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
+
+>Note
+>
+>Currently, Dev Environments is not able to detect the main language of the subdirectory. You may need to define your own base image or compose file in a .docker folder located in your subdirectory. For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql).
 
 ## Create a Dev Environment from a local folder
 
