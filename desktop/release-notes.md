@@ -75,8 +75,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug with location of bash completion files on macOS. Fixes [docker/for-mac#6343](https://github.com/docker/for-mac/issues/6343).
 - Fixed a bug where Docker Desktop does not start if the username is longer than 25 characters. Fixes [docker/for-mac#6122](https://github.com/docker/for-mac/issues/6122).
 - Fixed a bug where Docker Desktop was not starting due to invalid system proxy configuration. Fixes some issues reported in [docker/for-mac#6289](https://github.com/docker/for-mac/issues/6289).
-- Fixed a bug where startup race could occurred when the experimental virtualization framework is enabled.
-- Fixed a bug where tray icon was still displayed after uninstalling Docker Desktop.
+- Fixed a bug where a startup race occurred when the experimental virtualization framework is enabled.
+- Fixed a bug where the tray icon still displayed after uninstalling Docker Desktop.
 
 #### For Windows
 
