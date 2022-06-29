@@ -80,7 +80,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Windows
 
-- Fixed a bug with high CPU usage on Hyper-V. Fixes [docker/for-win#12780](https://github.com/docker/for-win/issues/12780).
+- Fixed a bug which caused high CPU usage on Hyper-V. Fixes [docker/for-win#12780](https://github.com/docker/for-win/issues/12780).
 - Fixed a bug where Docker Desktop for Windows would fail to start. Fixes [docker/for-win#12784](https://github.com/docker/for-win/issues/12784).
 
 #### For Linux
