@@ -2,7 +2,6 @@ require 'jekyll'
 require 'octopress-hooks'
 
 module Jekyll
-
   class UpdateApiToc < Octopress::Hooks::Site
     def pre_read(site)
       beginning_time = Time.now
@@ -22,5 +21,4 @@ module Jekyll
       Jekyll.logger.info "done in #{(end_time - beginning_time)} seconds"
     end
   end
-
 end
