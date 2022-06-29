@@ -376,7 +376,7 @@ guides:
 - path: /opensource/
   title: "Contribute to documentation"
 - path: /release-lifecycle/
-  title: Production release lifecycle
+  title: Product release lifecycle
 reference:
 - path: /reference/
   title: Reference documentation

@@ -1,10 +1,10 @@
 ---
-title: Production release lifecycle
+title: Product release lifecycle
 description: describes to users the various stages of feature lifecycle from beta to GA.
 keywords: beta, GA, Early Access, 
 ---
 
-This page details Docker's production release lifecycle and how Docker defines each stage. It also provides information on the product retirement process. 
+This page details Docker's product release lifecycle and how Docker defines each stage. It also provides information on the product retirement process. 
 
 >Note
 >
@@ -14,7 +14,6 @@ This page details Docker's production release lifecycle and how Docker defines e
 
 | Lifecycle stage  | Customer availability | Support availability | Limitations | Retirement |
 | --- | --- | ---- | ---| ---|
-| Customer zero | Internal Docker | Internal Docker | Potentially significant limitations | Can be discontinued without notice|
 |Beta | All or select customers | Community support | Potentially significant limitations | Can be discontinued without notice |
 | Early Access (EA) | All or select customers | Full | Potentially significant documented limitations | Follows retirement process |
 | General Availability (GA) | All | Full | Few or no limitations for supported use cases | Follow retirement process |
