@@ -18,13 +18,13 @@ redirect_from:
 - Added support for setting secrets from environment variable. Fixes [#251](https://github.com/compose-spec/compose-spec/issues/251){:target="_blank" rel="noopener" class="_"}.
 - Added links to container create request. Fixes [#9513](https://github.com/docker/compose/issues/9513){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose run` to start only direct dependencies. Fixes [#9459](https://github.com/docker/compose/issues/9459){:target="_blank" rel="noopener" class="_"}.
-- Fixed `docker compose up` service not found errors when using `--no-deps` option. Fixes [#9427](https://github.com/docker/compose/issues/9427){:target="_blank" rel="noopener" class="_"}.
+- Fixed `docker compose up` 'service not found' errors when using `--no-deps` option. Fixes [#9427](https://github.com/docker/compose/issues/9427){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose down` to respect `COMPOSE_REMOVE_ORPHANS` environment variable. Fixes [#9562](https://github.com/docker/compose/issues/9562){:target="_blank" rel="noopener" class="_"}.
 - Fixed project-level bind mount volumes. Fixes [docker/for-mac#6317](https://github.com/docker/for-mac/issues/6317){:target="_blank" rel="noopener" class="_"}.
 - Fixed parsing of properties `deploy.limits.cpus` and `deploy.limits.pids` to respect floating-point values. Fixes [#9542](https://github.com/docker/compose/issues/9542){:target="_blank" rel="noopener" class="_"} and [#9501](https://github.com/docker/compose/issues/9501){:target="_blank" rel="noopener" class="_"}. 
-- Fixed `compose ps` ports to list all exposed ports. Fixes [#9257](https://github.com/docker/compose/issues/9527){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose ps` output to list all exposed ports. Fixes [#9257](https://github.com/docker/compose/issues/9527){:target="_blank" rel="noopener" class="_"}.
 - Fixed spelling mistakes in `compose ps` code.
-- Fixed `docker-compose`to honour `--no-ansi` even when deprecated option is requested.
+- Fixed `docker-compose`to honor `--no-ansi` even when deprecated option is requested.
 - Fixed network name and network ID possible ambiguity.
 
 
