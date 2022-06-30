@@ -304,7 +304,7 @@ For more information on Windows containers, refer to the following documentation
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see
-  [I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows)
+  [I want to connect to a container from Windows](../etworking.md#i-want-to-connect-to-a-container-from-the-host)
 
 > Settings dialog changes with Windows containers
 >
