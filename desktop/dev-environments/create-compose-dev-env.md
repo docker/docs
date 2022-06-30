@@ -6,11 +6,25 @@ title: Create a Compose Dev Environment
 
 Use Dev Environments to collaborate on any Docker Compose-based projects. 
 
-The `compose-dev-env` project from the [Docker Samples](https://github.com/dockersamples/compose-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository, shows how you can set up a Compose Dev Environment.
+As with a simple Dev Environment, you can create a Compose Dev Environment from a:
+- Git repository
+- Branch or tag of a Git repository
+- Subfolder of a Git repository
+- Local folder
 
-  > **Note**
-  >
-  > When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
+> **Note**
+>
+> When cloning a Git repository using SSH, ensure you've added your SSH key to the ssh-agent. To do this, open a terminal and run `ssh-add <path to your private ssh key>`.
+
+## Create a Compose Dev Environment
+
+The example below, taken from the `compose-dev-env` project from the [Docker Samples](https://github.com/dockersamples/compose-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository, demonstrates how to create a Compose Dev Environment from a Git repository. 
+
+>Note
+>
+>If you want to create a Compose Dev Environment from a subdirectory of a Git repo, you need to define your own compose file in a .docker folder located in your subdirectory as currently, Dev Environments is not able to detect the main language of the subdirectory. 
+>
+>For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql) or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres). 
 
 1. From **Dev Environments**, select **Create**. The **Create a Dev Environment** dialog displays. 
 2. Click **Get Started** and then copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** tab.
