@@ -158,6 +158,6 @@ container to random ports on the host.
 $ docker run -d -P --name webserver nginx
 ```
 
-See the [run command](../../engine/reference/commandline/run.md) for more details on
+See the [run command](../engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.
 
