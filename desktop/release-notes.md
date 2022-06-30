@@ -38,12 +38,16 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - You can now add environment variables before running an image in Docker Desktop.
-- Added features to make it easier to work with a container's logs, such as regex search and the ability to clear container logs while the container is still running.
+- Added features to make it easier to work with a container's logs, such as regular expression search and the ability to clear container logs while the container is still running.
 - Implemented feedback on the containers table. Added ports and separated container and image names.
 - Added two new extensions, Ddosify and Lacework, to the Extensions Marketplace.
 
+### Removed
+
+- Removed Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
+
 ### Upgrades
-- [Docker Engine to v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
+- [Docker Engine v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
 - [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
 - [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
@@ -56,7 +60,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
-- Added additional bulk actions for starting/pausing/stopping select containers in the **Containers** tab.
+- Added additional bulk actions for starting/pausing/stopping selected containers in the **Containers** tab.
 - Added pause and restart actions for compose projects in the **Containers** tab.
 - Added icons and exposed ports or exit code information in the **Containers** tab.
 - External URLs can now refer to extension details in the Extension Marketplace using links such as `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
@@ -69,6 +73,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
 - Fixed the duplicate footer on the Support screen.
 - Dev Environments can be created from a subdirectory in a GitHub repository.
+- Removed the error message if the tips of the day cannot be loaded when using Docker Desktop offline. Fixes [docker/for-mac#6366](https://github.com/docker/for-mac/issues/6366).
 
 #### For Mac
 
@@ -88,16 +93,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug when settings cannot be applied more than once.
 - Fixed Compose version displayed in the `About` screen.
 
-### Removed
-
-#### For all platforms
-
-- Removed the error message if the tips of the day cannot be loaded when using Docker Desktop offline. Fixes [docker/for-mac#6366](https://github.com/docker/for-mac/issues/6366).
-- Removed Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
-
 ### Known Issues
-
-#### For all platforms
 
 - Occasionally the Docker engine will restart during a `docker system prune`. This is a [known issue](https://github.com/moby/buildkit/pull/2177) in the version of buildkit used in the current engine and will be fixed in future releases.
 
