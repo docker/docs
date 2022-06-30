@@ -1186,8 +1186,6 @@ manuals:
           title: Install Docker Desktop for Mac
         - path: /desktop/mac/
           title: User manual
-        - path: /desktop/mac/networking/
-          title: Networking
         - path: /desktop/mac/space/
           title: Disk utilization
         - path: /desktop/mac/troubleshoot/
@@ -1200,8 +1198,6 @@ manuals:
           title: Install Docker Desktop for Windows
         - path: /desktop/windows/
           title: User manual
-        - path: /desktop/windows/networking/
-          title: Networking
         - path: /desktop/windows/troubleshoot/
           title: Logs and troubleshooting
         - path: /desktop/windows/wsl/
@@ -1222,8 +1218,6 @@ manuals:
               title: Install on Arch
         - path: /desktop/linux/
           title: User manual
-        - path: /desktop/linux/networking/
-          title: Networking
         - path: /desktop/linux/space/
           title: Disk utilization
         - path: /desktop/linux/troubleshoot/
@@ -1232,6 +1226,8 @@ manuals:
       title: Dashboard
     - path: /desktop/dev-environments/
       title: Dev Environments (Preview)
+    - path: /desktop/networking/
+      title: Explore networking features
     - path: /desktop/extensions/
       title: Extensions (Beta)
     - sectiontitle: Extensions SDK (Beta)
