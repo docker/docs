@@ -203,7 +203,7 @@ To invite multiple members to your organization via a CSV file containing email 
   > If the amount of email addresses in your CSV file exceeds the number of available seats in your organization, you cannot continue to invite members. To invite members, you can purchase more seats, or remove some email addresses from the CSV file and re-select the new file. To purchase more seats, see [Add seats to your subscription](../subscription/add-seats.md) or [Contact sales](https://www.docker.com/pricing/contact-sales/).
 8. After the CSV file has been uploaded, select **Review**.
   Valid email addresses and any email addresses that have issues appear.
-  Email address may have the follow issues:
+  Email address may have the following issues:
 	  - **Invalid email**: The email address is not a valid address. The email address will be ignored if you send invites. You can correct the email address in the CSV file and re-import the file.
 	  - **Already invited**: The user has already been sent an invite email and another invite email will not be sent.
 	  - **Member**: The user is already a member of your organization and an invite email will not be sent.
