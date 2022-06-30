@@ -47,6 +47,8 @@ in the Team and Business plan.
 your organization in Docker Hub. Note that it is not possible to change the name
 of the organization after you've created it.
 
+      > **Note**
+      >
       > The organization name cannot be the same as your Docker ID.
 
 5. Enter the name of your company. This is the full name of your company.
@@ -68,14 +70,17 @@ To view an organization:
    organization. You must be part of the **owners** team to access the
    organization's **Settings** page.
 
-      > **Note:**
+      > **Note**
       >
-      > You can't _directly_ log into an organization. This is especially
+      > You can't _directly_ log in to an organization. This is especially
       > important to note if you create an organization by
       [converting a user account](convert-account.md), as conversion means you lose the ability to log into that
-      > "account", since it no longer exists. If you don't see the organization,
+      > "account", since it no longer exists. To view the organization you 
+      > need to log in with the new owner account assigned during the
+      > conversion or another account that was added as a member. If you 
+      > don't see the organization after logging in,
       > then you are neither a member or an owner of it. An organization
-      > administrator will need to add you as a member of the organization team.
+      > administrator will need to add you as a member of the organization.
 
 2. Click **Organizations** in the top navigation bar, then choose your
    organization from the list.
@@ -86,7 +91,7 @@ The Organization landing page displays various options that allow you to
 configure your organization.
 
 - **Members**: Displays a list of team members. You
-  can invite new members using the **Add Member** option. See [Invite members](#invite-members) for details.
+  can invite new members using the **Invite Member** button. See [Invite members](#invite-members) for details.
 
 - **Teams**: Displays a list of existing teams and the number of
   members in each team. See [Create a team](#create-a-team) for details.
@@ -103,23 +108,14 @@ configure your organization.
 - **Settings**: Displays information about your
   organization, and allows you to view and change your repository privacy
   settings, configure org permissions such as
-  [Image Access Management](image-access-management.md) and notification settings. You can
-  also [deactivate](deactivate-account.md#deactivating-an-organization) your
-  organization on this tab.
+  [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivating-an-organization) your
+  organization. You can also update your organization name and company name that appear on your organization landing page.
+
 
 - **Billing**: Displays information about your existing
 [Docker subscription (plan)](../subscription/index.md) and your billing history.
 You can also access your invoices from this tab.
 
-- **Invitees**: Displays a list of users invited to the organization through
-  their email address. This list only includes email addresses that **do not** have a Docker ID or an account associated with it. Only Org owners can view and manage the Invitees list.
-
-> **Important**
->
-> If you are on a Team or a Business subscription, every user listed on the
-> **Invitees** tab counts towards a seat, even if they do not have a Docker
-> ID or an account yet.
-{: .important }
 
 ## Create a team
 
@@ -192,8 +188,8 @@ To invite multiple members to your organization via a CSV file containing email 
 5. Select **Download the template CSV file** to optionally download an example CSV file. The following is an example of the contents of a valid CSV file.
     ```
     email
-    user-01@example.com
-    user-02@example.com
+    docker.user-00@example.com
+    docker.user-01@example.com
     ```
   CSV file requirements:
    -  The file must contain a header row with at least one heading named `email`. Additional columns are allowed and are ignored in the import.
@@ -201,7 +197,7 @@ To invite multiple members to your organization via a CSV file containing email 
 6. Create a new CSV file or export a CSV file from another application.
   - To export a CSV file from another application, see the application’s documentation.
   - To create a new CSV file, open a new file in a text editor, type `email` on the first line, type the user email addresses one per line on the following lines, and then save the file with a .csv extension.
-7. Select **Browse files** and then select your CSV file.
+7. Select **Browse files** and then select your CSV file, or drag and drop the CSV file into the **Select a CSV file to upload** box. You can only select one CSV file at a time.
   > **Note**
   >
   > If the amount of email addresses in your CSV file exceeds the number of available seats in your organization, you cannot continue to invite members. To invite members, you can purchase more seats, or remove some email addresses from the CSV file and re-select the new file. To purchase more seats, see [Add seats to your subscription](../subscription/add-seats.md) or [Contact sales](https://www.docker.com/pricing/contact-sales/).
