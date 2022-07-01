@@ -132,7 +132,7 @@ testuser:231072:65536
   - Exposing SCTP ports
 - To use the `ping` command, see [Routing ping packets](#routing-ping-packets).
 - To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](#exposing-privileged-ports).
-- `IPAddress` shown in `docker inspect` and is namespaced inside RootlessKit's network namespace.
+- `IPAddress` shown in `docker inspect` is namespaced inside RootlessKit's network namespace.
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
 - NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
