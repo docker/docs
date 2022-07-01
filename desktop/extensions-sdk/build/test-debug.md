@@ -1,5 +1,5 @@
 ---
-title: "Step four: Test and debug"
+title: "Step three: Test and debug"
 description: Step four in the extension creation process
 keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
 ---

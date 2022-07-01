@@ -6,7 +6,11 @@ redirect_from:
 - /desktop/extensions-sdk/tutorials/react-extension/
 ---
 
-Set up a simple Docker extension that contains only a UI part and is based on ReactJS.
+To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker extension that contains only a UI part and is based on ReactJS.
+
+>Note
+>
+>Before you start, make sure you have installed the latest version of [Docker Desktop](../../release-notes.md).
 
 ## Extension folder structure
 

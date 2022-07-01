@@ -1252,9 +1252,7 @@ manuals:
           title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
-            - title: "Step one: Get started"
-              path: /desktop/extensions-sdk/build/get-started/
-            - sectiontitle: "Step two: Set up..."
+            - sectiontitle: "Step one: Set up..."
               section:
                 - title: ...a minimal frontend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
@@ -1264,9 +1262,9 @@ manuals:
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
                 - title: ... a minimal backend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
-            - title: "Step three: Build and install"
+            - title: "Step two: Build and install"
               path: /desktop/extensions-sdk/build/build-install/
-            - title: "Step four: Test and debug"
+            - title: "Step three: Test and debug"
               path: /desktop/extensions-sdk/build/test-debug/
         - sectiontitle: "Part two: Publish"
           section:
