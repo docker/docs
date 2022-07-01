@@ -10,7 +10,7 @@ To start creating your extension, you first need a directory with files which ra
 
 >Note
 >
->Before you start, make sure you have installed the latest version of [Docker Desktop](../../release-notes.md).
+>Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
 
 ## Extension folder structure
 

@@ -12,7 +12,7 @@ For extensions with a backend service running REST services over sockets or name
 
 >Note
 >
->Before you start, make sure you have installed the latest version of [Docker Desktop](../../release-notes.md).
+>Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
 
 ## Extension folder structure
 
