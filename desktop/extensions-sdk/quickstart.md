@@ -2,6 +2,8 @@
 title: Quickstart
 description: Guide on how to build an extension quickly
 keywords: quickstart, extensions
+redirect_from:
+  - desktop/extensions-sdk/tutorials/initialize/
 ---
 
 Follow the guide below to build a basic Docker Extension quickly. The Quickstart guide automatically generates boilerplate files for you.
