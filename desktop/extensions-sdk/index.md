@@ -22,7 +22,7 @@ Development of extensions can be done locally without the need to push the exten
 
 ## How to use the resources in this section
 
-The documentation is structured so that it matches the steps you need to take when creating your extension. There are two main parts to creating a Docker Extension; build the foundations and then publish your extension. 
+The documentation is structured so that it matches the steps you need to take when creating your extension. There are two main parts to creating a Docker Extension; build the foundations and then publish your extension.
 
 ### Part one: Build the foundations
 
