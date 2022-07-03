@@ -127,29 +127,28 @@ File share settings are:
 
 #### Proxies
 
-Docker Desktop detects HTTP/HTTPS Proxy Settings from macOS and automatically
-propagates these to Docker. For example, if you set your
-proxy settings to `http://proxy.example.com`, Docker uses this proxy when
-pulling containers.
+HTTP/HTTPS proxies can be used when
 
-If you want to configure proxies manually, turn on the **Manual proxy configuration** setting.
+- logging in to Docker
+- pulling or pushing images
+- fetching artifacts during image builds
+- containers interact with the external network
+- scanning images.
 
-Your proxy settings, however, will not be propagated into the containers you start.
-If you wish to set the proxy settings for your containers, you need to define
-environment variables for them, just like you would do on Linux, for example:
+These are configured slightly differently.
 
-```console
-$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+If the host uses a static HTTP/HTTPS proxy configuration then Docker Desktop reads this configuration
+and automatically uses these settings for logging into Docker and for pulling and pushing images.
+If the host uses a more sophisticated HTTP/HTTPS configuration then enable "Manual proxy configuration"
+in the Settings / Resources / Proxies in the Docker Desktop UI and enter a single upstream proxy URL
+of the form `http://username:password@proxy:port`.
 
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=b7edf988b2b5
-TERM=xterm
-HOME=/root
-HTTP_PROXY=http://proxy.example.com:3128
-```
+HTTP/HTTPS traffic from image builds and running containers is forwarded transparently to the same
+upstream proxy used for logging in and image pulls.
+If you wish to override this behaviour and use different HTTP/HTTPS proxies for image builds and
+running containers then see [Configure the Docker client](/network/proxy#configure-the-docker-client).
 
-For more information on setting environment variables for running containers,
-see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
+The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
 #### Network
 
