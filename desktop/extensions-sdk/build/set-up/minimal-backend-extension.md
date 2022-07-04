@@ -6,10 +6,13 @@ redirect_from:
 - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
 ---
 
-Set up a simple Docker Extension that runs CLI commands in the backend.
+To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker Extension that runs CLI commands in the backend.
 
 For extensions with a backend service running REST services over sockets or named pipes, see the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples).
 
+>Note
+>
+>Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
 
 ## Extension folder structure
 

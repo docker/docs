@@ -1,5 +1,5 @@
 ---
-title: "Step three: Build and install"
+title: "Step two: Build and install"
 description: Step three in the extension creation process
 keywords: Docker, Extensions, sdk, validate, install
 redirect_from:
