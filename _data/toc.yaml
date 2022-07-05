@@ -1322,6 +1322,8 @@ manuals:
         title: Mac FAQs
       - path: /desktop/faqs/windowsfaqs/
         title: Windows FAQs
+    - path: /desktop/support/
+      title: Get support
     - path: /desktop/feedback/
       title: Give feedback
     - path: /desktop/release-notes/
