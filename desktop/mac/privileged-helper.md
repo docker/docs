@@ -8,11 +8,11 @@ redirect_from:
 
 ## Permission requirements
 
-While Docker Desktop does not generally require the user running or installing it to have `root` privileges, in the default use case it needs root access to be granted on the first run. The first time Docker Desktop is launched the user gets an admin prompt to grant permissions for a privileged helper service to be installed. For subsequent runs no `root` privileges are required. 
+While Docker Desktop does not generally require the user running or installing it to have `root` privileges, in the default use case it needs root access to be granted on the first run. The first time Docker Desktop is launched the user gets an admin prompt to grant permissions for a privileged helper service to be installed. For subsequent runs, no `root` privileges are required. 
 
-The reason for this is that Docker Desktop needs to perform a limited set of privileged operations which is done by the privileged helper process `com.docker.vmnetd`. This approach allows, following the principle of least privilege, `root` access to be used only for the operations for which it is absolutely necessary while still being able to use Docker Desktop as an unprivileged user.
+The reason for this is that Docker Desktop needs to perform a limited set of privileged operations using the privileged helper process `com.docker.vmnetd`. This approach allows, following the principle of least privilege, `root` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
 
-From version 4.11 it will be possible to avoid running a privileged service in the background by using `com.docker.vmnetd` for setup during installation and disabling it at runtime. In this case the user will not be prompted on the first run. Administrators would be able to do that by using the `–user` flag on the [install command](install.md#install-from-the-command-line) which would:
+From version 4.11, it will be possible to avoid running a privileged service in the background by using `com.docker.vmnetd` for setup during installation and disabling it at runtime. In this case the user will not be prompted on the first run. Administrators would be able to do that by using the `–user` flag on the [install command](install.md#install-from-the-command-line) which would:
 - Uninstall the previous `com.docker.vmnetd` if present
 - Setup symlinks for the user
 - Ensure that localhost and kubernetes.docker.internal are present in `/etc/hosts`
@@ -34,6 +34,6 @@ The privileged helper is started by `launchd` and runs in the background unless 
 
 ## Containers running as root within the Linux VM
 
-The Docker daemon and containers run in a lightweight Linux VM managed by Docker. This means that although containers run by default as `root` this does not grant `root` access to the Mac host machine. The Linux VM serves as a security boundary and limits what resources from the host can be accessed. Any directories from the host bind mounted into Docker containers still retain their original permissions.
+The Docker daemon and containers run in a lightweight Linux VM managed by Docker. This means that although containers run by default as `root`, this does not grant `root` access to the Mac host machine. The Linux VM serves as a security boundary and limits what resources from the host can be accessed. Any directories from the host bind mounted into Docker containers still retain their original permissions.
 
 
