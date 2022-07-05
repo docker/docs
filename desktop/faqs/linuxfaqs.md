@@ -1,46 +1,24 @@
 ---
 description: Frequently asked questions
-keywords: desktop, mac, faqs
-title: Frequently asked questions for Mac
+keywords: desktop, linux, faqs
+title: Frequently asked questions for Linux
 redirect_from:
-- desktop/mac/space
+- desktop/linux/space
 ---
-
-### What is Docker.app?
-
-`Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers.
-
-### What is HyperKit?
-
-HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other dependencies.
-
-We use HyperKit to eliminate the need for other VM products, such as Oracle
-VirtualBox or VMWare Fusion.
-
-### What is the benefit of HyperKit?
-
-HyperKit is thinner than VirtualBox and VMWare fusion, and the version included is customized for Docker workloads on Mac.
-
-### Why is com.docker.vmnetd still running after I quit the app?
-
-The privileged helper process `com.docker.vmnetd` is started by `launchd` and
-runs in the background. The process does not consume any resources unless
-Docker.app connects to it, so it's safe to ignore.
-
-Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Mac filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory.
+Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Linux filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory on the host's filesystem.
 
 ## Where is the disk image file?
 
 To locate the disk image file, select the Docker icon and then
-**Preferences** > **Resources** > **Advanced**.
+**Settings** > **Resources** > **Advanced**.
 
 ![Disk preferences](images/menu/prefs-advanced.png){:width="750px"}
 
 The **Advanced** tab displays the location of the disk image. It also displays the maximum size of the disk image and the actual space the disk image is consuming. Note that other tools might display space usage of the file in terms of the maximum file size, and not the actual file size.
 
-## If the file is too big
+## If the file is too large
 
-If the disk image file is too big, you can:
+If the disk image file is too large, you can:
 
 - move it to a bigger drive,
 - delete unnecessary containers and images, or
@@ -50,7 +28,7 @@ If the disk image file is too big, you can:
 
 To move the disk image file to a different location:
 
-1. Select **Preferences** > **Resources** > **Advanced**.
+1. Select **Settings** > **Resources** > **Advanced**.
 
 2. In the **Disk image location** section, click **Browse** and choose a new location for the disk image.
 
@@ -101,7 +79,7 @@ Note that many tools report the maximum file size, not the actual file size.
 To query the actual size of the file on the host from a terminal, run:
 
 ```console
-$ cd ~/Library/Containers/com.docker.docker/Data/vms/0/data
+$ cd ~/.docker/desktop/vms/0/data
 $ ls -klsh Docker.raw
 2333548 -rw-r--r--@ 1 username  staff    64G Dec 13 17:42 Docker.raw
 ```
@@ -112,11 +90,10 @@ In this example, the actual size of the disk is `2333548` KB, whereas the maximu
 
 To reduce the maximum size of the disk image file:
 
-1. Select the Docker icon and then select **Preferences** > **Resources** > **Advanced**.
+1. Select the Docker icon and then select **Settings** > **Resources** > **Advanced**.
 
 2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
 3. Click **Apply & Restart**.
 
 When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images will be lost.
-
