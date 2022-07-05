@@ -15,7 +15,7 @@ The reason for this is that Docker Desktop needs to perform a limited set of pri
 From version 4.11, it will be possible to avoid running a privileged service in the background by using `com.docker.vmnetd` for setup during installation and disabling it at runtime. In this case the user will not be prompted on the first run. Administrators would be able to do that by using the `–user` flag on the [install command](install.md#install-from-the-command-line) which would:
 - Uninstall the previous `com.docker.vmnetd` if present
 - Setup symlinks for the user
-- Ensure that localhost and kubernetes.docker.internal are present in `/etc/hosts`
+- Ensure that `localhost` and `kubernetes.docker.internal` are present in `/etc/hosts`
 
 This approach currently still has certain limitations:
 - Docker Desktop would only be able to be run by one user account per machine, namely the one specified in the `–user` flag.
