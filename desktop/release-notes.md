@@ -43,7 +43,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where actions in the UI failed with Compose apps that were created from WSL. Fixes [docker/for-win#12806](https://github.com/docker/for-win/issues/12806).
 
 #### For Mac
-- Fixed a bug where install command failed because paths are not initialized. Fixes [docker/for-mac#6384](https://github.com/docker/for-mac/issues/6384).
+- Fixed a bug where the install command failed because paths were not initialized. Fixes [docker/for-mac#6384](https://github.com/docker/for-mac/issues/6384).
 
 
 ## Docker Desktop 4.10.0
