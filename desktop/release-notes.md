@@ -40,7 +40,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Windows
 
-- Fixed a bug where doing actions in the UI with Compose apps that were created from a WSL distro. Fixes [docker/for-win#12806](https://github.com/docker/for-win/issues/12806).
+- Fixed a bug where actions in the UI failed with Compose apps that were created from WSL. Fixes [docker/for-win#12806](https://github.com/docker/for-win/issues/12806).
 
 #### For Mac
 - Fixed a bug where install command failed because paths are not initialized. Fixes [docker/for-mac#6384](https://github.com/docker/for-mac/issues/6384).
