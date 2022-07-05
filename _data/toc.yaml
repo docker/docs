@@ -1515,6 +1515,8 @@ manuals:
         title: Overview
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
+  - path: /docker-hub/support-hub/
+    title: Support
   - path: /docker-hub/release-notes/
     title: Release notes
 
