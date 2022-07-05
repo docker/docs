@@ -1,6 +1,6 @@
 ---
 description: Networking on Docker Desktop
-keywords: netowrking, docker desktop
+keywords: networking, docker desktop
 title: Explore networking features
 redirect_from:
 - /desktop/linux/networking/
