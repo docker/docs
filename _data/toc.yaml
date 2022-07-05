@@ -1224,10 +1224,20 @@ manuals:
           title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
-    - path: /desktop/dev-environments/
-      title: Dev Environments (Preview)
     - path: /desktop/networking/
       title: Explore networking features
+    - sectiontitle: Dev Environments (Beta)
+      section:
+        - path: /desktop/dev-environments/
+          title: Overview
+        - path: /desktop/dev-environments/create-dev-env/
+          title: Create a Dev Environment
+        - path: /desktop/dev-environments/create-compose-dev-env/
+          title: Create a Compose Dev Environment
+        - path: /desktop/dev-environments/share/
+          title: Share your Dev Environment
+        - path: /desktop/dev-environments/specify/
+          title: Specify a Dockerfile or base image
     - path: /desktop/extensions/
       title: Extensions (Beta)
     - sectiontitle: Extensions SDK (Beta)
@@ -1238,9 +1248,7 @@ manuals:
           title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
-            - title: "Step one: Get started"
-              path: /desktop/extensions-sdk/build/get-started/
-            - sectiontitle: "Step two: Set up..."
+            - sectiontitle: "Step one: Set up..."
               section:
                 - title: ...a minimal frontend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
@@ -1250,9 +1258,9 @@ manuals:
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
                 - title: ... a minimal backend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
-            - title: "Step three: Build and install"
+            - title: "Step two: Build and install"
               path: /desktop/extensions-sdk/build/build-install/
-            - title: "Step four: Test and debug"
+            - title: "Step three: Test and debug"
               path: /desktop/extensions-sdk/build/test-debug/
         - sectiontitle: "Part two: Publish"
           section:
@@ -1310,6 +1318,8 @@ manuals:
         title: Mac FAQs
       - path: /desktop/faqs/windowsfaqs/
         title: Windows FAQs
+    - path: /desktop/support/
+      title: Get support
     - path: /desktop/feedback/
       title: Give feedback
     - path: /desktop/release-notes/

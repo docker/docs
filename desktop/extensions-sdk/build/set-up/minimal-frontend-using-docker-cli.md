@@ -6,7 +6,11 @@ redirect_from:
 - /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
 ---
 
-Set up a simple Docker extension that invokes Docker CLI commands.
+To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker extension that invokes Docker CLI commands.
+
+>Note
+>
+>Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
 
 ## Extension folder structure
 

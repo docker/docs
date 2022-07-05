@@ -9,7 +9,7 @@ redirect_from:
 
 The Docker Dashboard provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.
 
-The **Containers/Apps** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](#explore-running-containers-and-applications).
+The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](#explore-running-containers-and-applications).
 
 The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub. For more information, see [Explore your images](#explore-your-images)
 
@@ -92,7 +92,12 @@ From the Docker Dashboard, select the example voting application we started earl
 
 The **Containers** view lists all the containers running on the application and contains a detailed logs view. It also allows you to start, stop, or delete the application. Use the **Search** option at the bottom of the logs view to search application logs for specific events, or select the **Copy** icon to copy the logs to your clipboard.
 
-From the **Containers** view you can also select and bulk delete multiple containers at once.
+From the **Containers** view you can also perform the following actions on multiple containers at once:
+- Pause
+- Resume
+- Stop
+- Start
+- Delete
 
 Click **Open in Visual Studio Code** to open the application in VS Code. Hover over the list of containers to see some of the core actions you can perform.
 
@@ -102,7 +107,14 @@ Click **Open in Visual Studio Code** to open the application in VS Code. Hover o
 
 Click on a specific container for detailed information about the container. The **container view** displays **Logs**, **Inspect**, and **Stats** tabs and provides quick action buttons to perform various actions.
 
-- Select **Logs** to see logs from the container. You can also search the logs for specific events and copy the logs to your clipboard.
+- Select **Logs** to see logs from the container. You can also:
+    - Use `Cmd + f`/`Ctrl + f` to open the search bar and find specific entries. Search matches are highlighted in yellow.
+    - Press `Enter` or `Shit + Enter` to jump to the next or previous search match respectively. 
+    - Use the **Copy** icon in the top right-hand corner to copy all the logs to your clipboard.
+    - Automatically copy any logs content by highlighting a few lines or a section of the logs.
+    - Use the **Clear terminal** icon in the top right-hand corner to clear the logs terminal. 
+    - Select and view external links that may be in your logs. 
+
 
 - Select **Inspect** to view low-level information about the container. You can see the local path, version number of the image, SHA-256, port mapping, and other details.
 
@@ -132,11 +144,11 @@ Select **Dashboard** > **Images** to see the Redis image.
 
 Now that you have a Redis image on your disk, let’s run this image as a container:
 
-1. From the Docker menu, select **Dashboard** > **Images**. This displays a list of images on your local disk.
+1. From Docker Dashboard, select **Images**. A list of images on your local disk displays.
 2. Select the Redis image from the list and click **Run**.
-3. When prompted, click the **Optional settings** drop-down to specify a name, port, volumes, and click **Run**.
+3. Optional step: When prompted, click the **Optional settings** drop-down to specify a name, port, volumes, environment variables and click **Run**.
 
-    To use the defaults, click **Run** without specifying any optional settings. This creates a new container from the Redis image and opens it on the **Container/Apps** view.
+    To use the defaults, click **Run** without specifying any optional settings. This creates a new container from the Redis image and opens it on the **Containers** view.
 
 ### Pull the latest image from Docker Hub
 

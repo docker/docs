@@ -9,7 +9,15 @@ keywords: Docker, extensions, sdk, API
 For example, navigate to a given container logs:
 
 ```typescript
-await ddClient.desktopUI.navigate.viewContainerLogs(id);
+const id = '8c7881e6a107';
+try {
+  await ddClient.desktopUI.navigate.viewContainerLogs(id);
+} catch (e) {
+  console.error(e);
+  ddClient.desktopUI.toast.error(`Failed to navigate to logs for container "${id}".`);
+}
+```
+
 ```
 
 #### Parameters
