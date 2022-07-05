@@ -4,139 +4,165 @@ keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Compose CLI environment variables
 ---
 
-Several environment variables are available for you to configure the Docker Compose command-line behaviour.
+In this section you can find the list of pre-defined environment variables you can use to configure the Docker Compose command-line behavior.
 
-Variables starting with `DOCKER_` are the same as those used to configure the
-Docker command-line client. If you're using `docker-machine`, then the `eval "$(docker-machine env my-docker-vm)"` command should set them to their correct values. (In this example, `my-docker-vm` is the name of a machine you created.)
-
-> **Note**: Some of these variables can also be provided using an
-> [environment file](../env-file.md).
+**See also** [Declare default environment variables in file](../env-file.md) to check how to declare default environment variables in an environment file named `.env` placed in the project directory.
 
 ## COMPOSE\_PROJECT\_NAME
 
-Sets the project name. This value is prepended along with the service name to
-the container on start up. For example, if your project name is `myapp` and it
-includes two services `db` and `web`, then Compose starts containers named
-`myapp-db-1` and `myapp-web-1` respectively.
+(Optional) Sets the project name. This value is prepended along with the service name to
+the container on start up. 
 
-Setting this is optional. If you do not set this, the `COMPOSE_PROJECT_NAME`
-defaults to the `basename` of the project directory. See also the `-p`
-[command-line option](index.md).
+For example, if your project name is `myapp` and it includes two services `db` and `web`, 
+then Compose starts containers named `myapp-db-1` and `myapp-web-1` respectively.
+
+* **Defaults to:** the `basename` of the project directory. 
+
+**See also** the [`-p` command-line option](index.md#command-options-overview-and-help).
 
 ## COMPOSE\_FILE
 
-Specify the path to a Compose file. If not provided, Compose looks for a file named
-`docker-compose.yml` in the current directory and then each parent directory in
-succession until a file by that name is found.
+Specifies the path to a Compose file. Specifying multiple Compose files is supported. 
 
-This variable supports multiple Compose files separated by a path separator (on
-Linux and macOS the path separator is `:`, on Windows it is `;`). For example:
-`COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`. The path separator
-can also be customized using `COMPOSE_PATH_SEPARATOR`.
+* **Default behavior:** If not provided, Compose looks for a file named `docker-compose.yml` in the current directory and, if not found there, Compose then searches each parent directory recursively until a file by that name is found. 
 
-See also the `-f` [command-line option](index.md).
+* **Default separator:**  path separators are by default on:
+    * Linux and macOS: `:` (colon), 
+    * Windows: `;` (semicolon). 
+The path separator can also be customized using `COMPOSE_PATH_SEPARATOR`.
+
+Example: `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`. 
+
+**See also** the [`-f` command-line option](index.md#command-options-overview-and-help).
 
 ## COMPOSE\_PROFILES
 
-Specify one or multiple active profiles to enable. Calling `docker-compose up`
-with `COMPOSE_PROFILES=frontend` will start the services with the profile
-`frontend` and services without specified profiles.
+Specifies one or more profiles to be enabled on `compose-up` execution. 
+Services with matching profiles are started *as well as any services for which no profile has been defined*.
 
-You can specify a list of profiles separated with a comma:
-`COMPOSE_PROFILES=frontend,debug` will enable the profiles `frontend` and
-`debug`.
+For example, calling `docker-compose up`with `COMPOSE_PROFILES=frontend` selects services with the 
+`frontend` profile as well as any services without a profile specified.
 
-See also [_Using profiles with Compose_](../profiles.md) and the `--profile`
-[command-line option](index.md#use---profile-to-specify-one-or-more-active-profiles).
+
+* **Default separator:**  specify a list of profiles using a comma as separator.
+Example: `COMPOSE_PROFILES=frontend,debug`
+This example would enable all services matching both the `frontend` and `debug` profiles *and* services without a profile.
+
+**See also** [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](index.md#use---profile-to-specify-one-or-more-active-profiles).
 
 ## COMPOSE\_API\_VERSION
 
-The Docker API only supports requests from clients which report a specific
-version. If you receive a `client and server don't have same version` error using
-`docker-compose`, you can workaround this error by setting this environment
-variable. Set the version value to match the server version.
+Specifies the API version of current environment. 
+The Docker API only supports requests from clients reporting a specific version. 
 
-Setting this variable is intended as a workaround for situations where you need
-to run temporarily with a mismatch between the client and server version. For
-example, if you can upgrade the client but need to wait to upgrade the server.
+If you receive a **client and server don't have same version** error while using `docker-compose`, 
+you can work around this error by setting this environment variable. 
+Set this version value in order to match the server version.
 
-Running with this variable set and a known mismatch does prevent some Docker
-features from working properly. The exact features that fail would depend on the
-Docker client and server versions. For this reason, running with this variable
-set is only intended as a workaround and it is not officially supported.
 
-If you run into problems running with this set, resolve the mismatch through
-upgrade and remove this setting to see if your problems resolve before notifying
-support.
+
+**Important**
+
+> **This setting is only intended as a workaround and it is not officially supported.**
+>
+> Set and use this variable only as a last resort workaround when you need
+> to *temporarily* run Docker with a mismatch between the client and server version. 
+> For example, when you can upgrade the client but need to wait to upgrade the server.
+>
+> This mismatch between server and client prevents some features from working properly. 
+> What features fail when using this configuration depends on the
+> Docker client and server versions in question. 
+>
+> It is highly recommended that you upgrade client and server and remove this setting as 
+> as soon as possible. Also, perform these actions to check if any problems you might 
+> be having are resolved before notifying support.
 
 ## DOCKER\_HOST
 
-Sets the URL of the `docker` daemon. As with the Docker client, defaults to `unix:///var/run/docker.sock`.
+Sets the URL of the Docker daemon. 
+* **Defaults to:** `unix:///var/run/docker.sock`(same as with the Docker client).
 
 ## DOCKER\_TLS\_VERIFY
 
 When set to anything other than an empty string, enables TLS communication with
-the `docker` daemon.
+the Docker daemon.
 
 ## DOCKER\_CERT\_PATH
 
-Configures the path to the `ca.pem`, `cert.pem`, and `key.pem` files used for TLS verification. Defaults to `~/.docker`.
+Configures the path to the `ca.pem`, `cert.pem`, and `key.pem` files used for TLS verification.
+
+* **Defaults to:** `~/.docker`.
 
 ## COMPOSE\_HTTP\_TIMEOUT
 
-Configures the time (in seconds) a request to the Docker daemon is allowed to hang before Compose considers
-it failed. Defaults to 60 seconds.
+Defines the timeout period (in seconds) for requests to the Docker daemon after which Compose considers the requests have failed.
+
+* **Defaults to:** 60 seconds.
 
 ## COMPOSE\_TLS\_VERSION
 
-Configure which TLS version is used for TLS communication with the `docker`
-daemon. Defaults to `TLSv1`.
-Supported values are: `TLSv1`, `TLSv1_1`, `TLSv1_2`.
+Defines which TLS version is used for TLS communication with the Docker daemon. 
+
+* **Supported values:** `TLSv1`, `TLSv1_1`, `TLSv1_2`.
+* **Defaults to:** `TLSv1`.
 
 ## COMPOSE\_CONVERT\_WINDOWS\_PATHS
 
-Enable path conversion from Windows-style to Unix-style in volume definitions.
-Users of Docker Machine on Windows should always set this. Defaults to `0`.
-Supported values: `true` or `1` to enable, `false` or `0` to disable.
+When enabled, Compose performs path conversion from Windows-style to Unix-style in volume definitions.
+
+* **Supported values:** 
+    * `true` or `1`, to enable, 
+    * `false` or `0`, to disable.
+
+* **Defaults to:** `0`
 
 ## COMPOSE\_PATH\_SEPARATOR
 
-If set, the value of the `COMPOSE_FILE` environment variable is separated
-using this character as path separator.
+Specifies a different path separator for items listed in `COMPOSE_FILE`. 
+
+Default path separator in Linux and macOS the path separator is `:`, on Windows it is `;`.
 
 ## COMPOSE\_FORCE\_WINDOWS\_HOST
 
-If set, volume declarations using the [short syntax](../compose-file/compose-file-v3.md#short-syntax-3)
-are parsed assuming the host path is a Windows path, even if Compose is
+When enabled, volume declarations using the [short syntax](../compose-file/compose-file-v3.md#short-syntax-3) are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
-Supported values: `true` or `1` to enable, `false` or `0` to disable.
+
+* **Supported values:** 
+    * `true` or `1`, to enable, 
+    * `false` or `0`, to disable.
 
 ## COMPOSE\_IGNORE\_ORPHANS
 
-If set, Compose doesn't try to detect orphaned containers for the project.
-Supported values: `true` or `1` to enable, `false` or `0` to disable.
+When enabled Compose doesn't try to detect orphaned containers for the project.
+
+* **Supported values:** 
+    * `true` or `1`, to enable, 
+    * `false` or `0`, to disable.
 
 ## COMPOSE\_PARALLEL\_LIMIT
 
-Sets a limit for the number of operations Compose can execute in parallel. The
-default value is `64`, and may not be set lower than `2`.
+Sets a limit for the number of operations Compose can execute in parallel.
+
+* **Supported values:** minimum value is `2`.
+* **Defaults to:** `64`.
 
 ## COMPOSE\_INTERACTIVE\_NO\_CLI
 
-If set, Compose doesn't attempt to use the Docker CLI for interactive `run`
-and `exec` operations. This option is not available on Windows where the CLI
-is required for the aforementioned operations.
-Supported: `true` or `1` to enable, `false` or `0` to disable.
+When enabled Compose doesn't attempt to use the Docker CLI for interactive `run` and `exec` operations.
+
+**Note:** on Windows the CLI is required for `run`and `exec` operations, so this option doesn't change the behavior of Compose on Windows.
+
+* **Supported values:** 
+    * `true` or `1`, to enable,
+    * `false` or `0`, to disable.
 
 ## COMPOSE\_DOCKER\_CLI\_BUILD
 
-Configure whether to use the Compose python client for building images or the
-native docker cli. By default, Compose uses the `docker` CLI to perform builds,
-which allows you to use [BuildKit](../../develop/develop-images/build_enhancements.md#to-enable-buildkit-builds)
-to perform builds.
+Configure whether to use the Compose python client for building images or the native docker cli. 
+By default, Compose uses the Docker CLI to perform builds,
+which allows you to use [BuildKit](../../develop/develop-images/build_enhancements.md#to-enable-buildkit-builds) to perform builds.
 
-Set `COMPOSE_DOCKER_CLI_BUILD=0` to disable native builds, and to use the built-in
-python client.
+Set `COMPOSE_DOCKER_CLI_BUILD=0` to disable native builds, and to use the built-in python client.
 
 ## Related information
 
