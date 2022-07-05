@@ -188,8 +188,8 @@ To invite multiple members to your organization via a CSV file containing email 
 5. Select **Download the template CSV file** to optionally download an example CSV file. The following is an example of the contents of a valid CSV file.
     ```
     email
-    docker.user-00@example.com
-    docker.user-01@example.com
+    docker.user-0@example.com
+    docker.user-1@example.com
     ```
   CSV file requirements:
    -  The file must contain a header row with at least one heading named `email`. Additional columns are allowed and are ignored in the import.
