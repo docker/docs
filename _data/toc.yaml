@@ -1190,8 +1190,6 @@ manuals:
           title: Install Docker Desktop for Mac
         - path: /desktop/mac/
           title: User manual
-        - path: /desktop/mac/space/
-          title: Disk utilization
         - path: /desktop/mac/troubleshoot/
           title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
@@ -1222,8 +1220,6 @@ manuals:
               title: Install on Arch
         - path: /desktop/linux/
           title: User manual
-        - path: /desktop/linux/space/
-          title: Disk utilization
         - path: /desktop/linux/troubleshoot/
           title: Logs and troubleshooting    
     - path: /desktop/dashboard/
@@ -1322,6 +1318,8 @@ manuals:
         title: Mac FAQs
       - path: /desktop/faqs/windowsfaqs/
         title: Windows FAQs
+      - path: /desktop/faqs/linuxfaqs/
+        title: Linux FAQs
     - path: /desktop/support/
       title: Get support
     - path: /desktop/feedback/
