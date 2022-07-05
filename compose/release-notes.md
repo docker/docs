@@ -12,13 +12,15 @@ redirect_from:
 
 (2022-06-23)
 
+### Enhancements
 
-### Bug Fixes
+- Added support for setting secrets from environment variable. Fixes [compose-spec/compose-spec#251](https://github.com/compose-spec/compose-spec/issues/251){:target="_blank" rel="noopener" class="_"}.
 
-- Added support for setting secrets from environment variable. Fixes [#251](https://github.com/compose-spec/compose-spec/issues/251){:target="_blank" rel="noopener" class="_"}.
+### Bug fixes
+
 - Added links to container create request. Fixes [#9513](https://github.com/docker/compose/issues/9513){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose run` to start only direct dependencies. Fixes [#9459](https://github.com/docker/compose/issues/9459){:target="_blank" rel="noopener" class="_"}.
-- Fixed `docker compose up` 'service not found' errors when using `--no-deps` option. Fixes [#9427](https://github.com/docker/compose/issues/9427){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose up` 'service not found' errors when using `--no-deps` option. Fixes [#9427](https://github.com/docker/compose/issues/9427){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose down` to respect `COMPOSE_REMOVE_ORPHANS` environment variable. Fixes [#9562](https://github.com/docker/compose/issues/9562){:target="_blank" rel="noopener" class="_"}.
 - Fixed project-level bind mount volumes. Fixes [docker/for-mac#6317](https://github.com/docker/for-mac/issues/6317){:target="_blank" rel="noopener" class="_"}.
 - Fixed parsing of properties `deploy.limits.cpus` and `deploy.limits.pids` to respect floating-point values. Fixes [#9542](https://github.com/docker/compose/issues/9542){:target="_blank" rel="noopener" class="_"} and [#9501](https://github.com/docker/compose/issues/9501){:target="_blank" rel="noopener" class="_"}. 
@@ -28,38 +30,39 @@ redirect_from:
 - Fixed network name and network ID possible ambiguity.
 
 
-## Changes
+### Changes 
 
-- Upgrade: compose-go v1.2.8.
-- Upgrade: buildx v0.8.2.
-- Upgrade: containerd v1.6.6.
-- Dependencies upgrade: bumping runc to 1.1.2.
-- Dependencies upgrade: bumping golang to 1.18.3.
-- Dependencies upgrade: bumping compose-go to v1.2.8.
-- Dependencies upgrade: bumping github.com/theupdateframework/notary from 0.6.1 to 0.7.0.
-- Dependencies upgrade: bumping github.com/cnabio/cnab-to-oci from 0.3.1-beta1 to 0.3.3.
-- Dependencies upgrade: bumping github.com/hashicorp/go-version from 1.3.0 to 1.5.0.
-- Dependencies upgrade: bumping github.com/stretchr/testify from 1.7.0 to 1.7.2.
-- Dependencies upgrade: bumping github.com/docker/buildx from 0.8.1 to 0.8.2.
-- Dependencies upgrade: bumping github.com/AlecAivazis/survey/v2 from 2.3.2 to 2.3.5.
-- Dependencies upgrade: bumping github.com/containerd/containerd from 1.6.2 to 1.6.6.
-- e2e: add test for `ps`.
-- e2e: unmarshal json into container summaries.
-- e2e: fix subtests and block parallel unsafe tests.
-- e2e: isolate test command env from system env.
-- e2e: fix spurious `ps` failures.
-- e2e: ensure all compose commands standalone compatible.
-- e2e: improve test output on failures.
+- Upgrade: compose-go [v1.2.8](https://github.com/compose-spec/compose-go/releases/tag/v1.2.8){:target="_blank" rel="noopener" class="_"}.
+- Upgrade: buildx [v0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2){:target="_blank" rel="noopener" class="_"}.
+- Upgrade: containerd [v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6){:target="_blank" rel="noopener" class="_"}.
+- Dependencies upgrade: bumped runc [to 1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2){:target="_blank" rel="noopener" class="_"}.
+- Dependencies upgrade: bumped golang to [1.18.3](https://go.dev/doc/devel/release#go1.18.minor){:target="_blank" rel="noopener" class="_"}.
+- Dependencies upgrade: bumped compose-go to [v1.2.8](https://github.com/compose-spec/compose-go/releases/tag/v1.2.8){:target="_blank" rel="noopener" class="_"}.
+- Dependencies upgrade: bumped github.com/theupdateframework/notary from 0.6.1 to 0.7.0.
+- Dependencies upgrade: bumped github.com/cnabio/cnab-to-oci from 0.3.1-beta1 to 0.3.3.
+- Dependencies upgrade: bumped github.com/hashicorp/go-version from 1.3.0 to 1.5.0.
+- Dependencies upgrade: bumped github.com/stretchr/testify from 1.7.0 to 1.7.2.
+- Dependencies upgrade: bumped github.com/docker/buildx from 0.8.1 to 0.8.2.
+- Dependencies upgrade: bumped github.com/AlecAivazis/survey/v2 from 2.3.2 to 2.3.5.
+- Dependencies upgrade: bumped github.com/containerd/containerd from 1.6.2 to 1.6.6.
+- e2e: added test for `ps`.
+- e2e: unmarshalled json into container summaries.
+- e2e: fixed subtests and block parallel unsafe tests.
+- e2e: isolated test command env from system env.
+- e2e: fixed spurious `ps` failures.
+- e2e: ensured all compose commands standalone compatible.
+- e2e: improved test output on failures.
 
 
 For the full change log or additional information, check the [Compose repository 2.6.1 release page](https://github.com/docker/compose/releases/tag/v2.6.1){:target="_blank" rel="noopener" class="_"}.
+
 
 ## 2.6.0
 
 (2022-05-30)
 
 
-### Bug Fixes
+### Bug fixes
 - Fixed `compose up` to attach only to services declared in project with enabled profiles. Fixes [#9286](https://github.com/docker/compose/issues/9286){:target="_blank" rel="noopener" class="_"}.
 - Fixed flickering prompt when pulling same image from multiple services. Fixes [#9469](https://github.com/docker/compose/issues/9469){:target="_blank" rel="noopener" class="_"}.
 - Fixed compose go to import .env file to OS environment to allow setting variables (such as DOCKER_BUILDKIT) through this file. Fixes [#9345](https://github.com/docker/compose/issues/9345){:target="_blank" rel="noopener" class="_"}.
@@ -83,7 +86,7 @@ For the full change log or additional information, check the [Compose repository
 (2022-05-17)
 
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed resolution of project's working directive absolute path when a relative path is declared using '--env-file'. Fixes [docker/for-mac#6229](https://github.com/docker/for-mac/issues/6229){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose down`: now rejects all arguments in order to clarify usage. Fixes [#9151](https://github.com/docker/compose/issues/9151){:target="_blank" rel="noopener" class="_"}.
@@ -105,7 +108,7 @@ For the full change log or additional information, check the [Compose repository
 
 (2022-04-29)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed panic with `compose down` command when `-p` flag specified. Fixes [#9353](https://github.com/docker/compose/issues/9353){:target="_blank" rel="noopener" class="_"}.
 - Passed newly created project as input to start services (`docker compose up`). Fixes [#9356](https://github.com/docker/compose/issues/9356){:target="_blank" rel="noopener" class="_"}.
@@ -130,7 +133,7 @@ For the full change log or additional information, check the [Compose repository
 
 (2022-04-04)
 
-### Bug Fixes
+### Bug fixes
 
 - Passed the `--rm flag` value as is to the Docker CLI when running a container with this flag. Fixes [#9314](https://github.com/docker/compose/issues/9314){:target="_blank" rel="noopener" class="_"}.
 - Added ssh config to the build options when building an image from a `docker compose up` command. Fixes [#9338](https://github.com/docker/compose/issues/9338){:target="_blank" rel="noopener" class="_"}.
@@ -143,7 +146,7 @@ For the full change log or additional information, check the [Compose repository
 
 (2022-04-1)
 
-### Bug Fixes
+### Bug fixes
 
 - Passed the interactive flag '-i' from the Compose CLI to the Docker one to run exec command. Fixes [#9315](https://github.com/docker/compose/issues/9315){:target="_blank" rel="noopener" class="_"}.
 - Compose commands now take the value of `COMPOSE_PROJECT_NAME` environmental variable into consideration. Fixes [#9316](https://github.com/docker/compose/issues/9316){:target="_blank" rel="noopener" class="_"}.
@@ -169,7 +172,7 @@ For the full change log or additional information, check the [Compose repository
 
 (2022-03-25)
 
-### Bug Fixes
+### Bug fixes
 
 - Removed a container with no candidate now produces a warning instead of an error. Fixes [#9255](https://github.com/docker/compose/issues/9255){:target="_blank" rel="noopener" class="_"}.
 - Recovered behavior for 'compose up -d' of recreating containers of compose file images with refreshed content. Fixes [#9259](https://github.com/docker/compose/issues/9259){:target="_blank" rel="noopener" class="_"}.
@@ -688,7 +691,7 @@ This release contains minor improvements and bug fixes.
 
 - Added `--parallel` to `docker build`'s options in `bash` and `zsh` completion.
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where some valid credential helpers weren't properly handled by Compose
   when attempting to pull images from private registries.
@@ -727,7 +730,7 @@ This release contains minor improvements and bug fixes.
 ## 1.23.2
 (2018-11-28)
 
-### Bug Fixes
+### Bug fixes
 
 - Reverted a 1.23.0 change that appended random strings to container names
   created by `docker-compose up`, causing addressability issues.
@@ -751,7 +754,7 @@ This release contains minor improvements and bug fixes.
 ## 1.23.1
 (2018-11-01)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where working with containers created with a version of Compose earlier than `1.23.0`
   would cause unexpected crashes.
@@ -788,7 +791,7 @@ naming scheme accordingly before upgrading.
 - For images with multiple names, Compose will now attempt to match the one
   present in the service configuration in the output of the `images` command.
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where parallel `run` commands for the same service would fail due to name
   collisions.
@@ -856,7 +859,7 @@ naming scheme accordingly before upgrading.
 - Added support for extension fields in service, network,
   and volume configurations
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug that prevented deployment with some Compose files when
   `DOCKER_DEFAULT_PLATFORM` was set
@@ -891,7 +894,7 @@ naming scheme accordingly before upgrading.
 ## 1.21.2
 (2018-05-03)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where the ip_range attribute in IPAM configs was prevented
   from passing validation
@@ -899,7 +902,7 @@ naming scheme accordingly before upgrading.
 ## 1.21.1
 (2018-04-27)
 
-### Bug Fixes
+### Bug fixes
 
 - In 1.21.0, we introduced a change to how project names are sanitized for
   internal use in resource names. This caused issues when manipulating an
@@ -965,7 +968,7 @@ naming scheme accordingly before upgrading.
 - `docker-compose build` now supports the use of Dockerfile from outside
   the build context.
 
-### Bug Fixes
+### Bug fixes
 
 - Compose now checks that the volume's configuration matches the remote
   volume, and errors out if a mismatch is detected.
@@ -1037,7 +1040,7 @@ naming scheme accordingly before upgrading.
 - Added the long-form `--detach` option to the `exec`, `run` and `up`
   commands
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed `.dockerignore` handling, notably with regard to absolute paths
   and last-line precedence rules
@@ -1127,7 +1130,7 @@ naming scheme accordingly before upgrading.
 - Bash completion should now be able to better differentiate between running,
   stopped and paused services
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug that would cause the `build` command to report a connection
   error when the build context contained unreadable files or FIFO objects.
@@ -1211,7 +1214,7 @@ naming scheme accordingly before upgrading.
 - Setting `stop_grace_period` in service definitions now also sets the
   container's `stop_timeout`
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where Compose was still handling service hostname according
   to legacy engine behavior, causing hostnames containing dots to be cut up
@@ -1281,7 +1284,7 @@ naming scheme accordingly before upgrading.
   resources (networks, volumes, containers) without starting services.
   The `create` command is deprecated in favor of this new option
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where `extra_hosts` values would be overridden by extension
   files instead of merging together
@@ -1334,7 +1337,7 @@ naming scheme accordingly before upgrading.
 - Added new CLI flag `--no-ansi` to suppress ANSI control characters in
   output
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where nested `extends` instructions weren't resolved
   properly, causing "file not found" errors
@@ -1390,7 +1393,7 @@ naming scheme accordingly before upgrading.
 
 - Some improvements to CLI output
 
-### Bug Fixes
+### Bug fixes
 
 - Volumes specified through the `--volume` flag of `docker-compose run` now
   complement volumes declared in the service's definition instead of replacing
@@ -1443,7 +1446,7 @@ naming scheme accordingly before upgrading.
 - Differences in labels between the Compose file and remote network
   will now print a warning instead of preventing redeployment.
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where service's dependencies were being rescaled to their
   default scale when running a `docker-compose run` command
@@ -1495,7 +1498,7 @@ naming scheme accordingly before upgrading.
 
 - Added support for `options` in the `ipam` section of network definitions
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where paths provided to compose via the `-f` option were not
   being resolved properly
@@ -1590,7 +1593,7 @@ naming scheme accordingly before upgrading.
 - Added support for port range to a single port in port mappings, such as
   `8000-8010:80`.
 
-### Bug Fixes
+### Bug fixes
 
 - `docker-compose run --rm` now removes anonymous volumes after execution,
   matching the behavior of `docker run --rm`.
@@ -1625,7 +1628,7 @@ naming scheme accordingly before upgrading.
 ## 1.11.2
 (2017-02-17)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug that was preventing secrets configuration from being
   loaded properly
@@ -1646,7 +1649,7 @@ naming scheme accordingly before upgrading.
 ## 1.11.1
 (2017-02-09)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where the 3.1 file format was not being recognized as valid
   by the Compose parser
@@ -1667,7 +1670,7 @@ naming scheme accordingly before upgrading.
 - Introduced the `docker-compose top` command that displays processes running
   for the different services managed by Compose.
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where extending a service defining a healthcheck dictionary
   would cause `docker-compose` to error out.
@@ -1678,7 +1681,7 @@ naming scheme accordingly before upgrading.
 ## 1.10.1
 (2017-02-01)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where the presence of older versions of the docker-py
   package would cause unexpected crashes while running Compose
@@ -1729,7 +1732,7 @@ naming scheme accordingly before upgrading.
 
 - Added support for the `stop_grace_period` option in service definitions.
 
-### Bug Fixes
+### Bug fixes
 
 - Colored output now works properly on Windows.
 
@@ -1784,7 +1787,7 @@ naming scheme accordingly before upgrading.
 - Overriding a `logging` configuration will now properly merge the `options`
   mappings if the `driver` values do not conflict.
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed several bugs related to `npipe` protocol support on Windows.
 
@@ -1807,7 +1810,7 @@ naming scheme accordingly before upgrading.
 ## 1.8.1
 (2016-09-22)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where users using a credentials store were not able
   to access their private images.
@@ -1871,7 +1874,7 @@ naming scheme accordingly before upgrading.
   interaction with the Docker Engine using the `COMPOSE_TLS_VERSION`
   environment variable.
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where Compose would erroneously try to read `.env`
   at the project's root when it is a directory.
@@ -1911,7 +1914,7 @@ naming scheme accordingly before upgrading.
 ## 1.7.1
 (2016-05-04)
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed a bug where the output of `docker-compose config` for v1 files
   would be an invalid configuration file.
@@ -2012,7 +2015,7 @@ naming scheme accordingly before upgrading.
     container.
 
 
-### Bug Fixes
+### Bug fixes
 
 -   `docker-compose down` now removes containers created by
     `docker-compose run`.
@@ -2046,7 +2049,7 @@ naming scheme accordingly before upgrading.
 ## 1.6.1
 (2016-02-23)
 
-### Bug Fixes
+### Bug fixes
 
 -   Fixed a bug where recreating a container multiple times would cause the
     new container to be started without the previous volumes.
@@ -2179,7 +2182,7 @@ naming scheme accordingly before upgrading.
 -   Removed the `--allow-insecure-ssl` flag.
 
 
-### Bug Fixes:
+### Bug fixes
 
 -   Fixed a validation bug that prevented the use of a range of ports in
     the `expose` field.
@@ -2518,7 +2521,7 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/run/#security-configuration).
 - `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers---log-driver).
 
-### Bug Fixes
+### Bug fixes
 
 - The output of `docker-compose run` was sometimes truncated, especially when running under Jenkins.
 - A service's volumes would sometimes not update after volume configuration was changed in `docker-compose.yml`.
