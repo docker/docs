@@ -23,17 +23,40 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
-## Docker Desktop 4.10.0
-2022-06-30
+
+## Docker Desktop 4.10.1
+2022-07-05
 
 > Download Docker Desktop
 >
 > [Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+
+### Bug fixes and minor changes
+
+#### For Windows
+
+- Fixed a bug where doing actions in the UI with Compose apps that were created from a WSL distro. Fixes [docker/for-win#12806](https://github.com/docker/for-win/issues/12806).
+
+#### For Mac
+- Fixed a bug where install command failed because paths are not initialized. Fixes [docker/for-mac#6384](https://github.com/docker/for-mac/issues/6384).
+
+
+## Docker Desktop 4.10.0
+2022-06-30
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/82025/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/82025/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/82025/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.pkg.tar.zst)
 
 ### New
 
