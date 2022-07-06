@@ -18,7 +18,7 @@ If you have a paid Docker subscription, raise a ticket through [Docker Hub suppo
 
 Docker Personal users can get Docker Desktop support through GitHub repos [for-win](https://github.com/docker/for-win){:target="_blank" rel="noopener" class="_"}, [for-mac](https://github.com/docker/for-mac){:target="_blank" rel="noopener" class="_"}, [for-linux](https://github.com/docker/for-linux){:target="_blank" rel="noopener" class="_"}, where we respond on a best effort basis.
 
-All Docker users can get community support through the [Docker Community Forums](https://forums.docker.com/){:target="_blank" rel="noopener" class="_"} and [Docker Community Slack](https://dockercommunity.slack.com/){:target="_blank" rel="noopener" class="_"}, where community users respond on a best effort basis.
+In addition, Docker users can get community support through the [Docker Community Forums](https://forums.docker.com/){:target="_blank" rel="noopener" class="_"} and [Docker Community Slack](https://dockercommunity.slack.com/){:target="_blank" rel="noopener" class="_"}, where community users respond on a best effort basis.
 
 ## What support can I get?
 
@@ -49,7 +49,7 @@ If you have a paid Docker subscription, you can raise a ticket through [Docker D
 
 ## What is not supported?
 
-Docker Hub excludes support for the following types of issues:
+Docker excludes support for the following types of issues:
    * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
    * Third-party applications not provided by Docker
    * Docker Support excludes training, customization, and integration
