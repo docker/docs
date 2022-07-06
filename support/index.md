@@ -1,6 +1,6 @@
 ---
 description: Get support
-keywords: docker hub, hub, support
+keywords: Support, Docker Desktop, Docker Hub, Hub, Linux, Mac, Windows
 title: Get support
 ---
 
