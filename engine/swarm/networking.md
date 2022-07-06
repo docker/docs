@@ -2,10 +2,13 @@
 description: Use swarm mode overlay networking features
 keywords: swarm, networking, ingress, overlay, service discovery
 title: Manage swarm service networks
+toc_max: 3
 ---
 
 This topic discusses how to manage the application data for your swarm services.
 
+
+## Swarm and types of traffic
 A Docker swarm generates two different kinds of traffic:
 
 - **Control and management plane traffic**: This includes swarm management
@@ -14,6 +17,8 @@ A Docker swarm generates two different kinds of traffic:
 
 - **Application data plane traffic**: This includes container traffic and
   traffic to and from external clients.
+
+## Key network concepts
 
 The following three network concepts are important to swarm services:
 
@@ -44,6 +49,7 @@ The following three network concepts are important to swarm services:
   join a swarm. Most users do not need to customize its configuration, but
   Docker allows you to do so.
 
+> **See also** [Networking overview](../../network/index.md) for more details about swarm networking in general.
 
 ## Firewall considerations
 
