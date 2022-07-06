@@ -1643,3 +1643,6 @@ manuals:
     title: Docker Toolbox (deprecated)
   - path: /kitematic/
     title: Kitematic (deprecated)
+
+- path: /support/
+  title: Get Support
