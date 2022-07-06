@@ -4,6 +4,8 @@ keywords: swarm, networking, ingress, overlay, service discovery
 title: Manage swarm service networks
 ---
 
+This topic discusses how to manage the application data for your swarm services.
+
 A Docker swarm generates two different kinds of traffic:
 
 - **Control and management plane traffic**: This includes swarm management
@@ -12,10 +14,6 @@ A Docker swarm generates two different kinds of traffic:
 
 - **Application data plane traffic**: This includes container traffic and
   traffic to and from external clients.
-
-This topic discusses how to manage the application data for your swarm services.
-For more details about swarm networking in general, see the
-[Docker networking reference architecture](https://success.docker.com/Architecture/Docker_Reference_Architecture%3A_Designing_Scalable%2C_Portable_Docker_Container_Networks){: target="_blank" rel="noopener" class="_" }.
 
 The following three network concepts are important to swarm services:
 
