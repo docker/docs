@@ -52,24 +52,26 @@ After completing the steps from the welcome email, verify that your organization
 
 ## Step 3: Add members
 
-Now that you have a Docker Business organization, it's time to start adding members. You can automatically add members to your organization by configuring Docker Single Sign-on (SSO), or invite members based their email address or Docker ID.
+Now that you have a Docker Business organization, it's time to start adding members. Use one of the following methods to add members to your organization:
+ - Configure an identity provider (IdP) to automatically add members using System for Cross-domain Identity Management (SCIM) or just-in-time provisioning with single sign-on (SSO).
+ - Invite members via Docker ID, email address, or a CSV file containing email addresses.
 
 > **Note**
 >
-> If you are not ready to configure SSO, you can invite members using their email address or Docker ID and then configure SSO at a later time. Any members you invite by email address or Docker ID can continue to have access after configuring SSO.
+> If you are not ready to configure an IdP with SSO or SCIM, you can invite members using their email address or Docker ID, and then configure an IdP at a later time. Any members you invite by email address or Docker ID can continue to have access after you configure an IdP.
 >
-> In addition, when SSO is configured, you can still invite members not in your identity provider (IdP) by using their email address or Docker ID.
+> In addition, when you configure an IdP, you can still invite members not in your IdP  by using their email address or Docker ID.
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#sso-configure">Configure Single Sign-on</a></li>
+<li class="active"><a data-toggle="tab" data-target="#idp-configure">Add members via an IdP</a></li>
 <li><a data-toggle="tab" data-target="#invite-member">Invite members</a></li>
 </ul>
 <div class="tab-content">
-<div id="sso-configure" class="tab-pane fade in active" markdown="1">
+<div id="idp-configure" class="tab-pane fade in active" markdown="1">
 
-### Configure Single Sign-on
+### Add members via an IdP
 
-The following steps will help you quickly set up SSO. For more details, see [Configure Single Sign-on](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"} and [Single Sign-on FAQs](../single-sign-on/faqs.md){: target="_blank" rel="noopener" class="_"}.
+The following steps will help you quickly set up an IdP. For more details, see [Configure Single Sign-on](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"}, [Single Sign-on FAQs](../single-sign-on/faqs.md){: target="_blank" rel="noopener" class="_"}, or [System for Cross-domain Identity Management](../docker-hub/scim.md){: target="_blank" rel="noopener" class="_"}.
 
 1. Ensure that all members have at least [Docker Desktop](../desktop/index.md/#download-and-install){: target="_blank" rel="noopener" class="_"} 4.4.2 installed on their machines.
 2. If you have existing Docker CI/CD pipelines in your organization, replace their passwords with Personal Access Tokens.
@@ -92,7 +94,6 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
       > **Note**
       >
       > The NameID is your email address and is set as the default. For example, yourname@mycompany.com. We also support the optional name attribute. This attribute name must be lower-cased. The following is an example of this attribute in Okta.
-
    6. Complete the fields in the **Configuration Settings** section and select **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
    </div>
@@ -111,7 +112,6 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
       > **Note**
       >
       > The NameID is your email address and is set as the default. For example: yourname@mycompany.com.
-
    6. Complete the fields in the Configuration Settings section and select **Save**. If you want to change your IdP, you must delete your existing provider and configure SSO with your new IdP.
 
    </div>
@@ -143,9 +143,49 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
    2. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
    3. Authenticate through email instead of using your Docker ID. If you are able to authenticate, then SSO has been configured successfully.
 7. To access Docker Hub through the CLI, each member of your organization must create a Personal Access Token. See [Create an access token](../docker-hub/access-tokens.md/#create-an-access-token){: target="_blank" rel="noopener" class="_"} for details.
-8. Perform the following to force users to sign in to Docker Hub using SSO.
+8. Optionally, perform the following to force users to sign in to Docker Hub using SSO.
    1. In [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, select **Organizations**, select your organization, select **Settings**, and then select the **Security** tab.
    2. Select **Turn ON Enforcement**.
+9. Optionally, perform the following to configure SCIM. For more details, see [System for Cross-domain Identity Management](../docker-hub/scim.md).
+   > Note
+   >
+   > For SCIM, only SAML 2.0 identity providers are supported.
+   1. Navigate to[Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Organizations** > **Settings** > **Security**. SCIM is locked until you complete the SSO configuration and verify your company domain.
+   2. Enable **SCIM Provisioning** and access your **SCIM Base URL** and **API Token**.
+   3. Configure SCIM in either Okta or Azure AD.
+
+      <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#scim-okta">Okta</a></li>
+      <li><a data-toggle="tab" data-target="#scim-azure-ad">Azure AD</a></li>
+      </ul>
+      <div class="tab-content">
+      <div id="scim-okta" class="tab-pane fade in active" markdown="1">
+      1. In Okta, navigate to **Applications** > **Create App Integration**, **SAML 2.0**, and click **Next**.
+      2. In the **General** tab, select **Edit App Settings** to enable SCIM provisioning and click **Save**.
+      3. In the Provisioning tab, edit the SCIM Connection and complete the following:
+
+          * **SCIM connector base URL**: SCIM Base URL from Docker Hub
+          * **Unique identifier field for users**: enter **email**
+          * **Supported Provisioning actions**: select **Push New Users**, **Push Profile Updates**
+          * **Authorization/Bearer**: SCIM API Token from Docker Hub
+
+      4. Click **Test Connection Configuration** to complete the configuration and **Save**.
+      5. Navigate to **Provisioning** > **To App** > **Edit** and enable **Create Users**, **Update User Attributes** and **Deactivates Users**, and click **Save**.
+
+         ![scim-app-provisioning](images/scim-app-provisioning.png){:width="700px"}
+
+      6. Remove all fields that are not supported from your **Docker Hub Attributes Mappings**.
+
+         ![scim-attributes](images/scim-attributes.png){:width="700px"}
+
+         The synchronization of user data is now automated, and the members in your Docker organization will now be automatically provisioned, updated, and de-provisioned based on the access control managed through your identity provider, Okta.
+
+      </div>
+      <div id="scim-azure-ad" class="tab-pane fade" markdown="1">
+
+
+      </div></div>
+
 
 </div>
 <div id="invite-member" class="tab-pane fade" markdown="1">
