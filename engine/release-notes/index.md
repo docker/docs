@@ -735,7 +735,6 @@ For an overview of all deprecated features, refer to the [Deprecated Engine Feat
 - The `--device` flag in `docker run` will now be honored when the container is started in privileged mode [moby/moby#40291](https://github.com/moby/moby/pull/40291)
 - Enforce reserved internal labels [moby/moby#40394](https://github.com/moby/moby/pull/40394)
 - Raise minimum memory limit to 6M, to account for higher memory use by runtimes during container startup [moby/moby#41168](https://github.com/moby/moby/pull/41168)
-- Add support for `CAP_PERFMON`, `CAP_BPF`, and `CAP_CHECKPOINT_RESTORE` on supported kernels [moby/moby#41460](https://github.com/moby/moby/pull/41460)
 - vendor runc v1.0.0-rc92 [moby/moby#41344](https://github.com/moby/moby/pull/41344) [moby/moby#41317](https://github.com/moby/moby/pull/41317)
 - info: add warnings about missing blkio cgroup support [moby/moby#41083](https://github.com/moby/moby/pull/41083)
 - Accept platform spec on container create [moby/moby#40725](https://github.com/moby/moby/pull/40725)
