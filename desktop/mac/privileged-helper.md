@@ -6,9 +6,11 @@ redirect_from:
 - /docker-for-mac/privileged-helper/
 ---
 
+This page contains information about the permission requirements for running and installing Docker Desktop on Mac, the functionality of the privileged helper process `com.docker.vmnetd` and the resasoning behind this approach, as well as clarification about running containers as `root` as opposed to having `root` access on the host.
+
 ## Permission requirements
 
-While Docker Desktop does not generally require the user running or installing it to have `root` privileges, in the default use case it needs root access to be granted on the first run. The first time Docker Desktop is launched the user gets an admin prompt to grant permissions for a privileged helper service to be installed. For subsequent runs, no `root` privileges are required. 
+While Docker Desktop does not generally require the user running or installing it to have `root` privileges, in the default use case it needs `root` access to be granted on the first run. The first time Docker Desktop is launched the user gets an admin prompt to grant permissions for a privileged helper service to be installed. For subsequent runs, no `root` privileges are required. 
 
 The reason for this is that Docker Desktop needs to perform a limited set of privileged operations using the privileged helper process `com.docker.vmnetd`. This approach allows, following the principle of least privilege, `root` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
 
