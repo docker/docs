@@ -1194,6 +1194,8 @@ manuals:
           title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
           title: Apple silicon
+        - path: /desktop/mac/privileged-helper/
+          title: Privileged Helper
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/install/
