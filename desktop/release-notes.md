@@ -21,26 +21,192 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
+
+
+## Docker Desktop 4.10.1
+2022-07-05
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+
+### Bug fixes and minor changes
+
+#### For Windows
+
+- Fixed a bug where actions in the UI failed with Compose apps that were created from WSL. Fixes [docker/for-win#12806](https://github.com/docker/for-win/issues/12806).
+
+#### For Mac
+- Fixed a bug where the install command failed because paths were not initialized. Fixes [docker/for-mac#6384](https://github.com/docker/for-mac/issues/6384).
+
+
+## Docker Desktop 4.10.0
+2022-06-30
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/82025/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/82025/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/82025/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.pkg.tar.zst)
+
+### New
+
+- You can now add environment variables before running an image in Docker Desktop.
+- Added features to make it easier to work with a container's logs, such as regular expression search and the ability to clear container logs while the container is still running.
+- Implemented feedback on the containers table. Added ports and separated container and image names.
+- Added two new extensions, Ddosify and Lacework, to the Extensions Marketplace.
+
+### Removed
+
+- Removed Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
+
+### Upgrades
+- [Docker Engine v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
+- [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
+- [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
+- [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
+- [CNI plugins to v1.1.1](https://github.com/containernetworking/releases/tag/v1.1.1)
+- [containerd to v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6)
+- [runc to v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2)
+- [Go 1.18.3](https://github.com/golang/go/releases/tag/go1.18.3)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Added additional bulk actions for starting/pausing/stopping selected containers in the **Containers** tab.
+- Added pause and restart actions for compose projects in the **Containers** tab.
+- Added icons and exposed ports or exit code information in the **Containers** tab.
+- External URLs can now refer to extension details in the Extension Marketplace using links such as `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
+- The expanded or collapsed state of the Compose apps is now persisted.
+- `docker extension` CLI commands are available with Docker Desktop by default.
+- Increased the size of the screenshots displayed in the Extension marketplace.
+- Fixed a bug where a Docker extension fails to load if its backend container(s) are stopped. Fixes [docker/extensions-sdk#16](https://github.com/docker/extensions-sdk/issues/162).
+- Fixed a bug where the image search field is cleared without a reason. Fixes [docker/for-win#12738](https://github.com/docker/for-win/issues/12738).
+- Fixed a bug where the license agreement does not display and silently blocks Docker Desktop startup.
+- Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
+- Fixed the duplicate footer on the Support screen.
+- Dev Environments can be created from a subdirectory in a GitHub repository.
+- Removed the error message if the tips of the day cannot be loaded when using Docker Desktop offline. Fixes [docker/for-mac#6366](https://github.com/docker/for-mac/issues/6366).
+
+#### For Mac
+
+- Fixed a bug with location of bash completion files on macOS. Fixes [docker/for-mac#6343](https://github.com/docker/for-mac/issues/6343).
+- Fixed a bug where Docker Desktop does not start if the username is longer than 25 characters. Fixes [docker/for-mac#6122](https://github.com/docker/for-mac/issues/6122).
+- Fixed a bug where Docker Desktop was not starting due to invalid system proxy configuration. Fixes some issues reported in [docker/for-mac#6289](https://github.com/docker/for-mac/issues/6289).
+- Fixed a bug where Docker Desktop failed to start when the experimental virtualization framework is enabled.
+- Fixed a bug where the tray icon still displayed after uninstalling Docker Desktop.
+
+#### For Windows
+
+- Fixed a bug which caused high CPU usage on Hyper-V. Fixes [docker/for-win#12780](https://github.com/docker/for-win/issues/12780).
+- Fixed a bug where Docker Desktop for Windows would fail to start. Fixes [docker/for-win#12784](https://github.com/docker/for-win/issues/12784).
+
+#### For Linux
+
+- Fixed a bug when settings cannot be applied more than once.
+- Fixed Compose version displayed in the `About` screen.
+
+### Known Issues
+
+- Occasionally the Docker engine will restart during a `docker system prune`. This is a [known issue](https://github.com/moby/buildkit/pull/2177) in the version of buildkit used in the current engine and will be fixed in future releases.
+
+## Docker Desktop 4.9.1
+2022-06-16
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/81317/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/81317/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/81317/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.pkg.tar.zst)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed blank dashboard screen. Fixes [docker/for-win#12759](https://github.com/docker/for-win/issues/12759).
+
+## Docker Desktop 4.9.0
+2022-06-02
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/80466/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/80466/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/80466/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-x86_64.pkg.tar.zst)
+
+### New
+
+- Added additional guides on the homepage for: Elasticsearch, MariaDB, Memcached, MySQL, RabbitMQ and Ubuntu.
+- Added a footer to the Docker Dashboard with general information about the Docker Desktop update status and Docker Engine statistics
+- Re-designed the containers table, adding:
+  - A button to copy a container ID to the clipboard
+  - A pause button for each container
+  - Column resizing for the containers table
+  - Persistence of sorting and resizing for the containers table
+  - Bulk deletion for the containers table
+
+### Upgrades
+
+- [Compose v2.6.0](https://github.com/docker/compose/releases/tag/v2.6.0)
+- [Docker Engine v20.10.16](https://docs.docker.com/engine/release-notes/#201016)
+- [containerd v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4)
+- [runc v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1)
+- [Go 1.18.2](https://github.com/golang/go/releases/tag/go1.18.2)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed an issue which caused Docker Desktop to hang if you quit the app whilst Docker Desktop was paused.
+- Fixed the Kubernetes cluster not resetting properly after the PKI expires.
+- Fixed an issue where the Extensions Marketplace was not using the defined http proxies.
+- Improved the logs search functionality in Docker Dashboard to allow spaces.
+- Middle-button mouse clicks on buttons in the Dashboard now behave as a left-button click instead of opening a blank window.
+
+#### For Mac
+
+- Fixed an issue to avoid creating `/opt/containerd/bin` and `/opt/containerd/lib` on the host if `/opt` has been added to the file sharing directories list.
+
+#### For Windows
+
+- Fixed a bug in the WSL 2 integration where if a file or directory is bind-mounted to a container, and the container exits, then the file or directory is replaced with the other type of object with the same name. For example, if a file is replaced with a directory or a directory with a file, any attempts to bind-mount the new object fails.
+- Fixed a bug where the Tray icon and Dashboard UI didn't show up and Docker Desktop didn't fully start. Fixes [docker/for-win#12622](https://github.com/docker/for-win/issues/12622).
+
+### Known issues
+
+#### For Linux
+
+- Changing ownership rights for files in bind mounts fails. This is due to the way we have implemented file sharing between the host and VM within which the Docker Engine runs. We aim to resolve this issue in the next release.
+
 ## Docker Desktop 4.8.2
 2022-05-18
 
-> Download Docker Desktop 
+> Download Docker Desktop
 >
-> [
-> Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
-> .button .primary-btn }
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple
-> chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
-> .button .primary-btn }
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
-> .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
-> .button .primary-btn }
-> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.2-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
-> .button .primary-btn }
+> [Windows](https://desktop.docker.com/win/main/amd64/79419/Docker%20Desktop%20Installer.exe)|
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/79419/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/79419/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-x86_64.pkg.tar.zst)
 
-### New
+### Upgrades
 
 - [Compose v2.5.1](https://github.com/docker/compose/releases/tag/v2.5.1)
 
@@ -61,7 +227,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/78998/Docker%20Desktop%20Installer.exe)|
+> [Windows](https://desktop.docker.com/win/main/amd64/78998/Docker%20Desktop%20Installer.exe)|
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/78998/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/78998/Docker.dmg) |
 > [Debian](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
@@ -90,7 +256,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/78933/Docker%20Desktop%20Installer.exe)|
+> [Windows](https://desktop.docker.com/win/main/amd64/78933/Docker%20Desktop%20Installer.exe)|
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/78933/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/78933/Docker.dmg) |
 > [Debian](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
@@ -107,12 +273,12 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 ### Upgrades
 
 - [Compose v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0)
-- [Go 1.18.1](https://golang.org/doc/go1.18)
+- [Go 1.18.1](https://github.com/golang/go/releases/tag/go1.18.1)
 - [Kubernetes 1.24](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.0)
 
 ### Bug fixes and minor changes
 
-#### For all platforms 
+#### For all platforms
 
 - Introduced reading system proxy. You no longer need to manually configure proxies unless it differs from your OS level proxy.
 - Fixed a bug that showed Remote Repositories in the Dashboard when running behind a proxy.
@@ -126,18 +292,19 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - Standardised the header title and action in the Dashboard.
 - Added support for downloading Registry Access Management policies through HTTP proxies.
 - Fixed an issue related to empty remote repositories when the machine is in sleep mode for an extended period of time.
-- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "<none>" but their tag is.
+- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "&lt;none>" but their tag is.
 - Improved the error message when `docker pull` fails because an HTTP proxy is required.
 - Added the ability to clear the search bar easily in Docker Desktop.
 - Renamed the "Containers / Apps" tab to "Containers".
 - Fixed a silent crash in the Docker Desktop installer when `C:\ProgramData\DockerDesktop` is a file or a symlink.
 - Fixed a bug where an image with no namespace, for example `docker pull <private registry>/image`, would be erroneously blocked by Registry Access Management unless access to Docker Hub was enabled in settings.
 
-#### For Mac 
+#### For Mac
 
 - Docker Desktop's icon now matches Big Sur Style guide. See [docker/for-mac#5536](https://github.com/docker/for-mac/issues/5536)
 - Fixed a problem with duplicate Dock icons and Dock icon not working as expected. Fixes [docker/for-mac#6189](https://github.com/docker/for-mac/issues/6189).
 - Improved support for the `Cmd+Q` shortcut.
+
 #### For Windows
 
 - Improved support for the `Ctrl+W` shortcut.
@@ -157,7 +324,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/77678/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/77678/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/77678/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/77678/Docker.dmg)
 
@@ -178,7 +345,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/77141/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/77141/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/77141/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/77141/Docker.dmg)
 
@@ -225,7 +392,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/76265/Docker%20Desktop%20Installer.exe)|
+> [Windows](https://desktop.docker.com/win/main/amd64/76265/Docker%20Desktop%20Installer.exe)|
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/76265/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/76265/Docker.dmg)
 
@@ -245,7 +412,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/75818/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/75818/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/75818/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/75818/Docker.dmg)
 
@@ -319,7 +486,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/74721/Docker%20Desktop%20Installer.exe)
+> [Windows](https://desktop.docker.com/win/main/amd64/74721/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -386,7 +553,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/73704/Docker%20Desktop%20Installer.exe)
+> [Windows](https://desktop.docker.com/win/main/amd64/73704/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -407,7 +574,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/73365/Docker%20Desktop%20Installer.exe)
+> [Windows](https://desktop.docker.com/win/main/amd64/73365/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -428,7 +595,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/73305/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/73305/Docker.dmg)
 
@@ -486,7 +653,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/72729/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/72729/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72729/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72729/Docker.dmg)
 
@@ -517,7 +684,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/72247/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/72247/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72247/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72247/Docker.dmg)
 
@@ -542,7 +709,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/71786/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/71786/Docker.dmg)
 
@@ -596,7 +763,7 @@ actual memory usage. See
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/70708/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/70708/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/70708/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/70708/Docker.dmg)
 
@@ -648,7 +815,7 @@ actual memory usage. See
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/69879/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/69879/Docker.dmg)
 
@@ -672,7 +839,7 @@ actual memory usage. See
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/69386/Docker%20Desktop%20Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/69386/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/69386/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/69386/Docker.dmg)
 
@@ -716,7 +883,7 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/68347/Docker Desktop Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/68347/Docker Desktop Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/68347/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/68347/Docker.dmg)
 
@@ -742,7 +909,7 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 > Download Docker Desktop
 >
-> [For Windows](https://desktop.docker.com/win/main/amd64/67817/Docker Desktop Installer.exe) |
+> [Windows](https://desktop.docker.com/win/main/amd64/67817/Docker Desktop Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/67817/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/67817/Docker.dmg)
 

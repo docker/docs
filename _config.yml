@@ -3,28 +3,32 @@
 #
 # This file overrides options set in _config.yml for production / deploy
 ##
+
 name: Docker Documentation
+
 markdown: kramdown
-kramdown:
-  input: GFM
-  gfm_quirks: [paragraph_end, no_auto_typographic]
-  html_to_native: true
-  hard_wrap: false
-  syntax_highlighter: rouge
-  toc_levels: 2..3
+highlighter: rouge
 incremental: true
 permalink: pretty
 safe: false
 lsi: false
 
+# https://kramdown.gettalong.org/options.html
+# https://github.com/kramdown/parser-gfm/blob/master/lib/kramdown/parser/gfm/options.rb
+kramdown:
+  input: GFM
+  gfm_quirks: [paragraph_end, no_auto_typographic]
+  hard_wrap: false
+  html_to_native: true
+  syntax_highlighter: rouge
+  toc_levels: 2..3
+
 exclude:
   - _samples
   - _scripts
-  - 404.html
   - datacenter
   - docker-bake.hcl
   - ee
-  - index.html
   - js/metadata.json
   - LICENSE
   - Makefile
@@ -36,12 +40,12 @@ exclude:
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
 compose_v1_version: "1.29.2"
-compose_version: "v2.5.0"
+compose_version: "v2.6.1"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
-compose_switch_version:  "1.0.4"
+compose_switch_version: "1.0.4"
 
 # Options for displaying minimum API version requirements in the reference pages.
 #
@@ -86,11 +90,9 @@ sass:
 # limitations in Jekyll cause those to introduce a _severe_ impact on build-time,
 # affecting generation of (e.g.) sitemap.xml and metadata.json, resulting in the
 # total build to take 60 seconds longer to build (!).
-#
-# The list below is for "development" (local builds, and PR previews) builds only,
-# and should be kept minimal to allow for fast builds. Other options should go
-# into _config_production.yml, which is used for production deploys.
 defaults:
+  # Default one for development builds (local and PR previews)
+  # sitemap is disabled here but not for production in _config_production.yml
   - scope:
       path: ""
       type: "pages"
@@ -100,10 +102,22 @@ defaults:
       toc_min: 2
       toc_max: 4
 
+  # Set the correct edit-URL for some local and remote resources. We usually don't create a direct
+  # edit link for these, and instead point to the directory that contains the file.
+  - scope:
+      path: engine/reference
+    values:
+      # FIXME: This edit url is as "best-effort" and doesn't match anything in docker/cli repo for plugins for example. It should be generated autmatically.
+      edit_url: "https://github.com/docker/cli/tree/master/docs/reference"
   - scope:
       path: engine/reference/commandline
     values:
+      edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
       skip_read_time: true
+  - scope:
+      path: glossary.md
+    values:
+      edit_url: "https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml"
 
 # Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
 # - repo is the GitHub repository to fetch from
@@ -113,6 +127,7 @@ defaults:
 #   - src is a list of glob source paths within the remote repository
 fetch-remote:
   - repo: "https://github.com/docker/cli"
+    default_branch: "master"
     ref: "20.10"
     paths:
       - dest: "engine/extend"
@@ -131,6 +146,7 @@ fetch-remote:
           - "docs/reference/commandline/dockerd.md"
 
   - repo: "https://github.com/docker/docker"
+    default_branch: "master"
     ref: "20.10"
     paths:
       - dest: "engine/api"
@@ -138,6 +154,7 @@ fetch-remote:
           - "docs/api/**"
 
   - repo: "https://github.com/docker/compose-cli"
+    default_branch: "main"
     ref: "main"
     paths:
       - dest: "cloud"
@@ -146,14 +163,8 @@ fetch-remote:
           - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
 
-  - repo: "https://github.com/docker/extensions-sdk"
-    ref: "main"
-    paths:
-      - dest: "desktop/extensions-sdk"
-        src:
-          - "docs/**"
-
   - repo: "https://github.com/distribution/distribution"
+    default_branch: "main"
     ref: "release/2.7"
     paths:
       - dest: "registry/spec"

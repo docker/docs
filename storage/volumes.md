@@ -551,7 +551,7 @@ For example, create a new container named `dbstore2`:
 $ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 
-Then un-tar the backup file in the new container`s data volume:
+Then un-tar the backup file in the new container’s data volume:
 
 ```console
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"

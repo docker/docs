@@ -4,12 +4,14 @@ keywords: registry, access, managment
 title: Registry Access Management
 ---
 
-Registry Access Management is a feature available to organizations with a Docker Business subscription. This feature lets organization owners manage the registries that their developers can access while using Docker Desktop.  When using this feature, organization owners can ensure that their developers can only access their trusted registries, such as a secure private registry on Artifactory, thereby reducing the security risks that can occur when developers interact with public registries.
+Registry Access Management is a feature available to organizations with a Docker Business subscription. With Registry Access Management, organization owners can ensure that their developers using Docker Desktop can only access registries that have been allow-listed via the Registry Access Management dashboard on Docker Hub to reflect support for other registries: AWS ECR, GitHub Container Registry, Google Container Registry, Quay, and others.
 
-> **Note**
->
-> Registry Access Management is currently offered as a closed beta to a closed group of Docker Business customers.
-{: .important}
+## Requirements:
+
+Download Docker Desktop v4.8 or a later release.
+
+- [Download and install for Windows](/desktop/windows/install/)
+- [Download and install for Mac](/desktop/mac/install/)
 
 ## Configure Registry Access Management permissions
 
@@ -37,20 +39,11 @@ To configure Registry Access Management permissions, perform the following steps
 To ensure that each org member uses Registry Access Management on their local machine, you can perform the steps below to enforce sign-in under your organization. To do this:
 
 1. Download the latest version of Docker Desktop, and then
-2. Create a `registry.json` file.
-
-Download Docker Desktop 4.5 or a later release.
-
-- [Download and install for Windows](/desktop/windows/install/)
-- [Download and install for Mac](/desktop/mac/install/)
-
-{% include configure-registry-json.md %}
+2. Create a `registry.json` file by following the instructions for [Windows and Mac](/docker-hub/configure-sign-in/).
 
 ## Verify the restrictions
 
-   After you’ve created the registry.json file and deployed it onto the developers’ machines, you can verify whether the changes have taken effect by asking the developers to start Docker Desktop.
-
-   If the configuration is successful, Docker Desktop prompts the developer to authenticate using the organization credentials on start. If the developer fails to authenticate, or authenticates as a developer in the wrong organization they will see an error message, and they will be denied access to Docker Desktop.
+   The new Registry Access Management policy should be in place after the developer successfully authenticates to Docker Desktop using their organization credentials. The developer can attempt to pull an image from a disallowed registry via the Docker CLI. They will then receive an error message that your organization has disallowed this registry.
 
 ### Caveats
 

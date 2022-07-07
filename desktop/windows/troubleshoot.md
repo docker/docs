@@ -142,7 +142,7 @@ volumes or find a way to make the applications work with the default file
 permissions.
 
 See also,
-[Can I change permissions on shared volumes for container-specific deployment requirements?](../faqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
+[Can I change permissions on shared volumes for container-specific deployment requirements?](../faqs/windowsfaqs.md#can-i-change-permissions-on-shared-volumes-for-container-specific-deployment-requirements)
 in the FAQs.
 
 #### Volume mounting requires shared folders for Linux containers
@@ -158,7 +158,7 @@ Dockerfile and volume.
 
 #### Support for symlinks
 
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs.md#how-do-symlinks-work-on-windows) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs/windowsfaqs.md#how-do-symlinks-work-on-windows) in the FAQs.
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -274,7 +274,7 @@ Your machine must have the following features for Docker Desktop to function cor
 
 1. Virtual Machine Platform
 2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}
-3. Virtualization enabled in the BIOS
+3. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 4. Hypervisor enabled at Windows startup
 
 ![WSL 2 enabled](images/wsl2-enabled.png){:width="600px"}
@@ -285,7 +285,7 @@ On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following fea
 
 1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview){:target="_blank" rel="noopener" class="_"}
    installed and working
-2. Virtualization enabled in the BIOS
+2. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 3. Hypervisor enabled at Windows startup
 
 ![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
@@ -439,75 +439,3 @@ manifests as an error response from the Docker daemon and a Docker Desktop start
 For a temporary workaround, uninstall the anti-virus software, or
 explore other workarounds suggested on Docker Desktop forums.
 
-## Support
-
-This section contains instructions on how to get support, and covers the scope of Docker Desktop support.
-
-{% include upgrade-cta.html
-  body="Docker Desktop offers support for developers subscribed to a Pro, Team, or a Business tier. Upgrade now to benefit from Docker Support."
-  header-text="This feature requires a paid Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
-%}
-
-### How do I get Docker Desktop support?
-
-If you have a paid Docker subscription, please raise a ticket through [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
-
-Docker Community users can get support through our Github repos for-win and for-mac, where we respond on a best-effort basis.
-
-### What support can I get?
-
-If you have a paid Docker subscription, you can request for support on the following types of issues:
-
-* Desktop upgrade issues
-* Desktop installation issues
-  * Enabling virtualization in BIOS
-  * Enabling Windows features
-  * Installation crashes
-  * Failure to launch Docker Desktop on first run
-* Usage issues
-  * Crash closing software
-  * Docker Desktop not behaving as expected
-* Configuration issues
-* Basic product ‘how to’ questions such as ‘how to work efficiently on WSL 2’
-
-### What is not supported?
-
-Docker Desktop excludes support for the following types of issues:
-
-* Use on or in conjunction with hardware or software other than that specified in the applicable documentation
-* Running on unsupported operating systems, including beta/preview versions of operating systems
-* Running containers of a different architecture using emulation
-* Support for the Docker engine, Docker CLI, or other bundled Linux components
-* Support for Kubernetes
-* Features labeled as experimental
-* System/Server administration activities
-* Supporting Desktop as a production runtime
-* Scale deployment/multi-machine installation of Desktop
-* Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
-* Third-party applications not provided by Docker
-* Altered or modified Docker software
-* Defects in the Docker software due to hardware malfunction, abuse, or improper use
-* Any version of the Docker software other than the latest version
-* Reimbursing and expenses spent for third-party services not provided by Docker
-* Docker Support excludes training, customization, and integration
-
-### What versions are supported?
-
-We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
-
-### How many machines can I get support for Docker Desktop on?
-
-As a Pro user you can get support for Docker Desktop on a single machine.
-As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
-
-### What OS’s are supported?
-
-Docker Desktop is available for Mac and Windows. The supported version information can be found on the following pages:
-
-* [Windows system requirements](install.md#system-requirements)
-* [Mac system requirements](../mac/install.md#system-requirements)
-
-### Can I run Docker Desktop on Virtualized hardware?
-
-No, currently this is unsupported and against the terms of use.

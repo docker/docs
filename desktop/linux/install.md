@@ -8,10 +8,8 @@ Welcome to Docker Desktop for Linux. This page contains information about system
 
 > Download Docker Desktop for Linux packages
 >
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-
-
+> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
 ## System requirements
 
@@ -77,6 +75,12 @@ Depending on the processor of the host machine, the corresponding module must be
 $ modprobe kvm_intel  # Intel processors
 
 $ modprobe kvm_amd    # AMD processors
+```
+
+If the above commands fail, you can view the diagnostics by running:
+
+```console
+$ kvm-ok
 ```
 
 To check if the KVM modules are enabled, run:
@@ -275,7 +279,7 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 - [Getting started](index.md) provides an overview of Docker Desktop on Linux, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Linux.
 - [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
-- [FAQs](../faqs.md) provide answers to frequently asked questions.
+- [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
 * [Back up and restore data](../backup-and-restore.md) provides instructions

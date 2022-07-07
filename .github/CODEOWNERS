@@ -3,9 +3,9 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/compose/ @dockertopia @usha-mandya
+/build @dockertopia @crazy-max
 
-/compose/install.md @aevesdocker
+/compose/ @dockertopia @usha-mandya
 
 /desktop/ @aevesdocker @usha-mandya
 

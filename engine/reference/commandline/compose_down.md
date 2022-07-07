@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_down
 title: docker compose down
+redirect_from:
+- /compose/reference/down/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

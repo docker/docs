@@ -580,7 +580,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ### Bug fixes and minor changes
 
 - Added a prerequisite check in the installer for the `LanmanServer` service. Fixes [docker/for-win#5150](https://github.com/docker/for-win/issues/5150).
-- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../windows/networking.md#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md).
 - Ceph support has been removed from Docker Desktop to save disk space.
 - Fixed an issue that caused the Windows log file archive to grow indefinitely. Fixes [docker/for-win#5113](https://github.com/docker/for-win/issues/5113).
 
@@ -620,7 +620,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Known issues
 
-- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../windows/networking.md#use-cases-and-workarounds).
+- DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](../networking.md).
 
   However, if your current setup relies on IP addresses for communication, you can use a temporary workaround to reinstate DockerNAT. To do this, open
 `C:\Program Files\Docker\Docker\resources\MobyLinux.ps1` and add `$SwitchName = "DockerNAT"` between line 175 and 176. Note that the temporary workaround to reinstate DockerNAT may be removed from future releases.

@@ -284,12 +284,6 @@ The **Restart Docker Desktop** and **Reset to factory defaults** options are now
 
 Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
 
-Log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
-
-Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues.
-
-For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
-
 ## Switch between Windows and Linux containers
 
 From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
@@ -310,7 +304,7 @@ For more information on Windows containers, refer to the following documentation
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see
-  [I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows)
+  [I want to connect to a container from Windows](../networking.md#i-want-to-connect-to-a-container-from-the-host)
 
 > Settings dialog changes with Windows containers
 >

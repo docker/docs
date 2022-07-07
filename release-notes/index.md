@@ -10,8 +10,6 @@ find release notes for each component in the Manuals section. We suggest
 that you regularly visit the release notes to learn about updates.
 
 - [Docker Engine](../engine/release-notes/index.md)
-- [Docker Desktop for Mac](../desktop/mac/release-notes/index.md)
-- [Docker Desktop for Windows](../desktop/windows/release-notes/index.md)
-- [Docker Desktop for Linux](../desktop/linux/release-notes/index.md)
+- [Docker Desktop](../desktop/release-notes.md)
 - [Docker Hub](../docker-hub/release-notes.md)
 - [Docker Compose](../compose/release-notes.md)

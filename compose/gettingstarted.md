@@ -12,7 +12,7 @@ understandable even if you're not familiar with it.
 ## Prerequisites
 
 Make sure you have already installed both [Docker Engine](../get-docker.md)
-and [Docker Compose](install.md). You don't need to install Python or Redis, as
+and [Docker Compose](install/index.md). You don't need to install Python or Redis, as
 both are provided by Docker images.
 
 ## Step 1: Setup
@@ -145,10 +145,10 @@ image pulled from the Docker Hub registry.
 
 ## Step 4: Build and run your app with Compose
 
-1. From your project directory, start up your application by running `docker-compose up`.
+1. From your project directory, start up your application by running `docker compose up`.
 
    ```console
-   $ docker-compose up
+   $ docker compose up
 
    Creating network "composetest_default" with the default driver
    Creating composetest_web_1 ...
@@ -214,7 +214,7 @@ image pulled from the Docker Hub registry.
 
    You can inspect images with `docker inspect <tag or id>`.
 
-5. Stop the application, either by running `docker-compose down`
+5. Stop the application, either by running `docker compose down`
    from within your project directory in the second terminal, or by
    hitting CTRL+C in the original terminal where you started the app.
 
@@ -246,10 +246,10 @@ mode and reload the code on change. This mode should only be used in development
 
 ## Step 6: Re-build and run the app with Compose
 
-From your project directory, type `docker-compose up` to build the app with the updated Compose file, and run it.
+From your project directory, type `docker compose up` to build the app with the updated Compose file, and run it.
 
 ```console
-$ docker-compose up
+$ docker compose up
 
 Creating network "composetest_default" with the default driver
 Creating composetest_web_1 ...
@@ -304,16 +304,16 @@ counter should still be incrementing.
 ## Step 8: Experiment with some other commands
 
 If you want to run your services in the background, you can pass the `-d` flag
-(for "detached" mode) to `docker-compose up` and use `docker-compose ps` to
+(for "detached" mode) to `docker compose up` and use `docker compose ps` to
 see what is currently running:
 
 ```console
-$ docker-compose up -d
+$ docker compose up -d
 
 Starting composetest_redis_1...
 Starting composetest_web_1...
 
-$ docker-compose ps
+$ docker compose ps
 
        Name                      Command               State           Ports         
 -------------------------------------------------------------------------------------
@@ -321,21 +321,21 @@ composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
 composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
 ```
 
-The `docker-compose run` command allows you to run one-off commands for your
+The `docker compose run` command allows you to run one-off commands for your
 services. For example, to see what environment variables are available to the
 `web` service:
 
 ```console
-$ docker-compose run web env
+$ docker compose run web env
 ```
 
-See `docker-compose --help` to see other available commands.
+See `docker compose --help` to see other available commands.
 
-If you started Compose with `docker-compose up -d`, stop
+If you started Compose with `docker compose up -d`, stop
 your services once you've finished with them:
 
 ```console
-$ docker-compose stop
+$ docker compose stop
 ```
 
 You can bring everything down, removing the containers entirely, with the `down`
@@ -343,7 +343,7 @@ command. Pass `--volumes` to also remove the data volume used by the Redis
 container:
 
 ```console
-$ docker-compose down --volumes
+$ docker compose down --volumes
 ```
 
 At this point, you have seen the basics of how Compose works.

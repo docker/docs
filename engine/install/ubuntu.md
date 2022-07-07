@@ -20,8 +20,8 @@ toc_max: 4
 >
 > Docker Desktop helps you build, share, and run containers easily on Mac and
 > Windows as you do on Linux. We are excited to share that Docker Desktop for
-> Linux (Beta) is now available for you to test. For more information, see
-[Docker Desktop for Linux](../../desktop/linux/index.md).
+> Linux is now GA. For more information, see
+[Docker Desktop for Linux](../../desktop/linux/install.md).
 {: .important}
 
 To get started with Docker Engine on Ubuntu, make sure you
@@ -42,15 +42,6 @@ versions:
 
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, and `s390x` architectures.
 
-> Ubuntu 16.04 LTS "Xenial Xerus" end-of-life
-> 
-> Ubuntu Linux 16.04 LTS reached the end of its five-year LTS window on April
-> 30th 2021 and is no longer supported. Docker no longer releases packages for
-> this distribution (including patch- and security releases). Users running
-> Docker on Ubuntu 16.04 are recommended to update their system to a currently
-> supported LTS version of Ubuntu.
-{: .important }
-
 ### Uninstall old versions
 
 Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
@@ -66,14 +57,6 @@ The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. If you do not need to save your existing data, and want to
 start with a clean installation, refer to the [uninstall Docker Engine](#uninstall-docker-engine)
 section at the bottom of this page.
-
-### Supported storage drivers
-
-Docker Engine on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
-
-Docker Engine uses the `overlay2` storage driver by default. If you need to use
-`aufs` instead, you need to configure it manually.
-See [use the AUFS storage driver](../../storage/storagedriver/aufs-driver.md)
 
 ## Installation methods
 
@@ -118,16 +101,15 @@ from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    $ sudo mkdir -p /etc/apt/keyrings
+    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
 
-3.  Use the following command to set up the **stable** repository. To add the
-    **nightly** or **test** repository, add the word `nightly` or `test` (or both)
-    after the word `stable` in the commands below. [Learn about **nightly** and **test** channels](index.md).
+3.  Use the following command to set up the repository:
 
     ```console
     $ echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] {{ download-url-base }} \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
@@ -141,12 +123,11 @@ from the repository.
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
-    > Got multiple Docker repositories?
-    >
-    > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `apt-get install` or
-    > `apt-get update` command always installs the highest possible version,
-    > which may not be appropriate for your stability needs.
+    > Receiving a GPG error when running `apt-get update`?
+    >  
+    > Your default umask may not be set correctly, causing the public key file
+    > for the repo to not be detected. Run the following command and then try to
+    > update your repo again: `sudo chmod a+r /etc/apt/keyrings/docker.gpg`.
 
 2.  To install a _specific version_ of Docker Engine, list the available versions
     in the repo, then select and install:
@@ -156,14 +137,14 @@ from the repository.
     ```console
     $ apt-cache madison docker-ce
 
-      docker-ce | 5:18.09.1~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 5:18.09.0~3-0~ubuntu-xenial | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 18.06.1~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
-      docker-ce | 18.06.0~ce~3-0~ubuntu       | {{ download-url-base }}  xenial/stable amd64 Packages
+    docker-ce | 5:20.10.16~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+    docker-ce | 5:20.10.15~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+    docker-ce | 5:20.10.14~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+    docker-ce | 5:20.10.13~3-0~ubuntu-jammy | https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
     ```
 
     b. Install a specific version using the version string from the second column,
-       for example, `5:18.09.1~3-0~ubuntu-xenial`.
+       for example, `5:20.10.16~3-0~ubuntu-jammy`.
 
     ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
@@ -200,12 +181,6 @@ a new file each time you want to upgrade Docker.
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
     `armhf`, `arm64`, or `s390x`, and download the `.deb` file for the Docker Engine
     version you want to install.
-
-    > **Note**
-    >
-    > To install a **nightly** or **test** (pre-release) package,
-    > change the word `stable` in the above URL to `nightly` or `test`.
-    > [Learn about **nightly** and **test** channels](index.md).
 
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.

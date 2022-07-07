@@ -17,7 +17,7 @@ Yes - see [Controlling startup order](startup-order.md).
 ## Why do my services take 10 seconds to recreate or stop?
 
 Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
-for a [default timeout of 10 seconds](reference/stop.md).  After the timeout,
+for a [default timeout of 10 seconds](../engine/reference/commandline/compose_stop.md). After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it.  If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
@@ -116,7 +116,7 @@ GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml
 ## Compose documentation
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
+- [Installing Compose](install/index.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
