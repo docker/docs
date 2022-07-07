@@ -92,7 +92,7 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment=HTTP_PROXY=http://proxy.example.com:80
     ```
 
     If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
@@ -100,7 +100,7 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment=HTTPS_PROXY=https://proxy.example.com:443
     ```
     
     Multiple environment variables can be set; to set both a non-HTTPS and
@@ -108,8 +108,8 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80"
-    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment=HTTP_PROXY=http://proxy.example.com:80
+    Environment=HTTPS_PROXY=https://proxy.example.com:443
     ```
      
 3.  If you have internal Docker registries that you need to contact without
@@ -133,9 +133,9 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80"
-    Environment="HTTPS_PROXY=https://proxy.example.com:443"
-    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+    Environment=HTTP_PROXY=http://proxy.example.com:80
+    Environment=HTTPS_PROXY=https://proxy.example.com:443
+    Environment=NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
     ```
 
 4.  Flush changes and restart Docker
@@ -168,7 +168,7 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment=HTTP_PROXY=http://proxy.example.com:80
     ```
 
     If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
@@ -176,7 +176,7 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment=HTTPS_PROXY=https://proxy.example.com:443
     ```
     
     Multiple environment variables can be set; to set both a non-HTTPS and
@@ -184,8 +184,8 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80"
-    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment=HTTP_PROXY=http://proxy.example.com:80
+    Environment=HTTPS_PROXY=https://proxy.example.com:443
     ```
      
 3.  If you have internal Docker registries that you need to contact without
@@ -209,9 +209,9 @@ you need to add this configuration in the Docker systemd service file.
 
     ```systemd
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80"
-    Environment="HTTPS_PROXY=https://proxy.example.com:443"
-    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+    Environment=HTTP_PROXY=http://proxy.example.com:80
+    Environment=HTTPS_PROXY=https://proxy.example.com:443
+    Environment=NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
     ```
 
 4.  Flush changes and restart Docker
