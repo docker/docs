@@ -27,15 +27,59 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ## Docker Desktop 4.10.1
 2022-07-05
 
-> Download Docker Desktop
->
-> <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button" data-toggle="tooltip" data-placement="bottom" title="Checksum = 9cb2eef326940fa2508a3e4c096eff40450caf68f0d21fc9ed3b00c09376f155">Windows</a> 
-><a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button" data-toggle="tooltip" data-placement="bottom" title="Checksum = 9cb2eef326940fa2508a3e4c096eff40450caf68f0d21fc9ed3b00c09376f155">Mac with Intel chip</a> 
-><a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button" data-toggle="tooltip" data-placement="bottom" title="Checksum = 9cb2eef326940fa2508a3e4c096eff40450caf68f0d21fc9ed3b00c09376f155">Mac with Apple chip</a> 
-><a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button" >DEB</a> 
-><a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button" >RPM</a> 
-><a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button" >Arch (experimental)</a> 
-
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Windows
+        </a>
+      </h5>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Windows installer</a> 
+        <br>
+        <br>
+        <b>Checksum:</b> 9cb2eef326940fa2508a3e4c096eff40450caf68f0d21fc9ed3b00c09376f155
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h5 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Mac with Intel chip
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Mac with Intel chip installer</a> 
+        <br>
+        <br>
+        <b>Checksum:</b> 9cb2eef326940fa2508a3e4c096eff40450caf68f0d21fc9ed3b00c09376f155
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h5 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Mac with Apple chip
+        </a>
+      </h5>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Mac with Apple chip installer</a> 
+        <br>
+        <br>
+        <b>Checksum:</b> 9cb2eef326940fa2508a3e4c096eff40450caf68f0d21fc9ed3b00c09376f155
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Bug fixes and minor changes
 
