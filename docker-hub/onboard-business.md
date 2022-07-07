@@ -157,6 +157,7 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
       <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" data-target="#scim-okta">Okta</a></li>
       <li><a data-toggle="tab" data-target="#scim-azure-ad">Azure AD</a></li>
+      <li><a data-toggle="tab" data-target="#scim-onelogin">OneLogin</a></li>
       </ul>
       <div class="tab-content">
       <div id="scim-okta" class="tab-pane fade in active" markdown="1">
@@ -182,7 +183,13 @@ See [Create a Personal Access (PAT)](../single-sign-on/index.md/#create-a-person
 
       </div>
       <div id="scim-azure-ad" class="tab-pane fade" markdown="1">
-
+      1.
+      2.
+      3.
+      </div>
+      <div id="scim-onelogin" class="tab-pane fade" markdown="1">
+      1.
+      2.
 
       </div></div>
 
