@@ -6,7 +6,7 @@ redirect_from:
 - /docker-for-mac/privileged-helper/
 ---
 
-This page contains information about the permission requirements for running and installing Docker Desktop on Mac, the functionality of the privileged helper process `com.docker.vmnetd` and the resasoning behind this approach, as well as clarification about running containers as `root` as opposed to having `root` access on the host.
+This page contains information about the permission requirements for running and installing Docker Desktop on Mac, the functionality of the privileged helper process `com.docker.vmnetd` and the reasoning behind this approach, as well as clarification about running containers as `root` as opposed to having `root` access on the host.
 
 ## Permission requirements
 
