@@ -129,11 +129,11 @@ File share settings are:
 
 HTTP/HTTPS proxies can be used when:
 
-- logging in to Docker
-- pulling or pushing images
-- fetching artifacts during image builds
-- containers interact with the external network
-- scanning images
+- Logging in to Docker
+- Pulling or pushing images
+- Fetching artifacts during image builds
+- Containers interact with the external network
+- Scanning images
 
 Each use case above is configured slightly differently.
 
