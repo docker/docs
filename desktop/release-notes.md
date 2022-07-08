@@ -59,12 +59,18 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
         <h5 class="panel-title">
           <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
             Checksums
+            <i class="fa fa-chevron-down"></i>
           </a>
         </h5>
       </div>
       <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
         <div class="panel-body">
-        <li>Windows: SHA-256 ....</li>
+        <li><b>Windows:</b> SHA-256 10615f4425e59eef7a22ce79ec13e41057df278547aa81c9fe4d623a848e80d8</li>
+        <li><b>Mac Intel:</b> SHA-256 07bfe00296b724e4e772e268217bc8169a8b23ad98e6da419b13ebfe31b54643</li>
+        <li><b>Mac Arm:</b> SHA-256 c9d2e72e5438726ab5a94c227d9130a65719f8fd09b877860ca2dcd86cfc188e</li>
+        <li><b>Linux DEB:</b> SHA-256 c5f10b3d902b4ea10c8f75c17ba174e8838fc75889f76bc27abcab6afaf1969c</li>
+        <li><b>Linux RPM:</b> SHA-256 a8ad3f8d4e93dfb6f28559f7dc84b7652e651fd6a49506e18958f1e69b51d9be</li>
+        <li><b>Linux Arch:</b> SHA-256 37131c48df6436c1066c41ec0beda039e726e33bee689f751648c473f4abd96e</li>
         </div>
       </div>
     </div>
