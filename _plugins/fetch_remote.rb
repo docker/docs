@@ -6,38 +6,40 @@ require 'open-uri'
 require 'rake'
 
 module Jekyll
-  def self.download(url, dest)
-    uri = URI.parse(url)
-    result = File.join(dest, File.basename(uri.path))
-    puts "    Downloading #{url}"
-    IO.copy_stream(URI.open(url), result)
-    return result
-  end
+  class FetchRemote < Octopress::Hooks::Site
+    priority :highest
 
-  def self.copy(src, dest)
-    if (tmp = Array.try_convert(src))
-      tmp.each do |s|
-        s = File.path(s)
-        yield s, File.join(dest, File.basename(s))
-      end
-    else
-      src = File.path(src)
-      if File.directory?(dest)
-        yield src, File.join(dest, File.basename(src))
+    def self.download(url, dest)
+      uri = URI.parse(url)
+      result = File.join(dest, File.basename(uri.path))
+      puts "    Downloading #{url}"
+      IO.copy_stream(URI.open(url), result)
+      return result
+    end
+
+    def self.copy(src, dest)
+      if (tmp = Array.try_convert(src))
+        tmp.each do |s|
+          s = File.path(s)
+          yield s, File.join(dest, File.basename(s))
+        end
       else
-        yield src, File.path(dest)
+        src = File.path(src)
+        if File.directory?(dest)
+          yield src, File.join(dest, File.basename(src))
+        else
+          yield src, File.path(dest)
+        end
       end
     end
-  end
 
-  class FetchRemote < Octopress::Hooks::Site
     def pre_read(site)
       beginning_time = Time.now
       puts "Starting plugin fetch_remote.rb..."
       site.config['fetch-remote'].each do |entry|
         puts "  Repo #{entry['repo']} (#{entry['ref']})"
         Dir.mktmpdir do |tmpdir|
-          tmpfile = Jekyll.download("#{entry['repo']}/archive/#{entry['ref']}.zip", tmpdir)
+          tmpfile = FetchRemote.download("#{entry['repo']}/archive/#{entry['ref']}.zip", tmpdir)
           Dir.mktmpdir do |ztmpdir|
             puts "    Extracting #{tmpfile}"
             Archive::Zip.extract(
@@ -46,7 +48,15 @@ module Jekyll
               :create => true
             )
             entry['paths'].each do |path|
-              FileUtils.mkdir_p path['dest']
+              if File.extname(path['dest']) != ""
+                if path['src'].size > 1
+                  raise "Cannot use file destination #{path['dest']} with multiple sources"
+                end
+                FileUtils.mkdir_p File.dirname(path['dest'])
+              else
+                FileUtils.mkdir_p path['dest']
+              end
+
               puts "    Copying files"
 
               # prepare file list to be copied
@@ -60,7 +70,7 @@ module Jekyll
               end
 
               files.each do |file|
-                Jekyll.copy(file, path['dest']) do |s, d|
+                FetchRemote.copy(file, path['dest']) do |s, d|
                   s = File.realpath(s)
                   # traverse source directory
                   FileUtils::Entry_.new(s, nil, false).wrap_traverse(proc do |ent|
