@@ -2,7 +2,6 @@ require 'jekyll'
 require 'octopress-hooks'
 
 module Jekyll
-
   class FetchRemote < Octopress::Hooks::Site
     def post_read(site)
       beginning_time = Time.now
@@ -20,5 +19,4 @@ module Jekyll
       Jekyll.logger.info "done in #{(end_time - beginning_time)} seconds"
     end
   end
-
 end

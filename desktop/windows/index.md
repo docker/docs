@@ -142,26 +142,27 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 #### Proxies
 
-Docker Desktop detects the HTTP/HTTPS proxy settings and
-automatically propagates these to Docker. For example, if you set your proxy
-settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 
-Your proxy settings, however, will not be propagated into the containers you start.
-If you wish to set the proxy settings for your containers, you need to define
-environment variables for them, just like you would do on Linux, for example:
+HTTP/HTTPS proxies can be used when
 
-```ps
-> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+- Logging in to Docker
+- Pulling or pushing images
+- Fetching artifacts during image builds
+- Containers interact with the external network
+- Scanning images.
 
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=b7edf988b2b5
-TERM=xterm
-HOME=/root
-HTTP_PROXY=http://proxy.example.com:3128
-```
+These are configured slightly differently.
 
-For more information on setting environment variables for running containers,
-see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
+If the host uses a static HTTP/HTTPS proxy configuration, Docker Desktop reads this configuration
+and automatically uses these settings for logging into Docker and for pulling and pushing images.
+If the host uses a more sophisticated HTTP/HTTPS configuration, enable **Manual proxy configuration**
+in the **Settings** > **Resources** **Proxies** in the Docker Dashboard and enter a single upstream proxy URL
+of the form `http://username:password@proxy:port`.
+
+The HTTP/HTTPS proxy settings used for fetching artifacts during builds and for running containers
+are set via the `.docker/config.json` file, see [Configure the Docker client](/network/proxy#configure-the-docker-client).
+
+The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
 #### Network
 

@@ -138,7 +138,6 @@ fetch-remote:
           - "docs/deprecated.md"
       - dest: "engine/reference"
         src:
-          - "docs/reference/builder.md"
           - "docs/reference/run.md"
       - dest: "engine/reference/commandline"
         src:
@@ -174,3 +173,11 @@ fetch-remote:
       - dest: "registry"
         src:
           - "docs/configuration.md"
+
+  - repo: "https://github.com/moby/buildkit"
+    default_branch: "master"
+    ref: "master"
+    paths:
+      - dest: "engine/reference/builder.md"
+        src:
+          - "frontend/dockerfile/docs/reference.md"
