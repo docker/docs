@@ -100,6 +100,11 @@ Looking for information on using Windows containers?
 * Docker Container Platform for Windows [articles and blog
   posts](https://www.docker.com/microsoft/) on the Docker website.
 
+> **Note**
+>
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition. 
+Windows Home or Education editions will only allow you to run Linux containers.
+
 ## Install Docker Desktop on Windows
 
 ### Install interactively
