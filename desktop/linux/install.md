@@ -26,7 +26,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - systemd init system.
 
 - Gnome or KDE Desktop environment.
-  -For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/)).
+  For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/)).
 
 - At least 4 GB of RAM.
 
@@ -46,10 +46,10 @@ and architectures:
 {% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
 
-| Platform                | x86_64 / amd64         | 
-|:------------------------|:-----------------------|
+| Platform                | x86_64 / amd64         | arm64  |
+|:------------------------|:-----------------------|:-----------------------|
 | [Ubuntu](install/ubuntu.md)     | [{{ yes }}](install/ubuntu.md) |
-| [Debian](install/debian.md)     | [{{ yes }}](install/debian.md) |
+| [Debian](install/debian.md)     | [{{ yes }}](install/debian.md) | [{{ yes }}](install/pi.md)
 | [Fedora](install/fedora.md)     | [{{ yes }}](install/fedora.md) |
 
 
@@ -120,6 +120,7 @@ Log out and log back in so that your group membership is re-evaluated.
  - [Install on Fedora](install/fedora.md)
  - [Install on Ubuntu](install/ubuntu.md)
  - [Install on Arch](install/archlinux.md) 
+ - [Install on Raspberry Pi](install/pi.md)
 
 2. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
 
