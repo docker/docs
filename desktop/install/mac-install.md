@@ -4,6 +4,7 @@ keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 redirect_from:
 - /docker-for-mac/install/
+- /desktop/mac/install/
 ---
 
 > **Update to the Docker Desktop terms**
@@ -52,13 +53,13 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Apple silicon
 
-- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](apple-silicon.md#known-issues). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
+- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](../mac/apple-silicon.md#known-issues). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 
   ```console
   $ softwareupdate --install-rosetta
   ```
 
- For more information, see [Docker Desktop for Apple silicon](apple-silicon.md).
+ For more information, see [Docker Desktop for Apple silicon](../mac/apple-silicon.md).
 
 </div>
 </div>
@@ -132,12 +133,12 @@ To uninstall Docker Desktop from your Mac:
 
 ## Where to go next
 
-- [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
-- [Docker Desktop for Apple silicon](apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
-- [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
+- [Getting started](../mac/index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
+- [Docker Desktop for Apple silicon](../mac/apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
+- [Troubleshooting](../mac/troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
-- [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
 * [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.
