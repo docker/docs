@@ -100,8 +100,8 @@ Looking for information on using Windows containers?
 
 > **Note**
 >
-> For you to be able to run Windows containers, you will need to be running Windows 10 Professional or Enterprise, with Windows update 1809, or
-Windows Server 2019. Windows editions Home or Education will only allow you to run Linux containers.
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition. 
+Windows Home or Education editions will only allow you to run Linux containers.
 
 ## Install Docker Desktop on Windows
 
