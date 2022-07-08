@@ -20,7 +20,7 @@ redirect_from:
 > subscription.
 {: .important}
 
-Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
+This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 
 > Download Docker Desktop for Windows
 >
