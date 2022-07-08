@@ -11,6 +11,8 @@ Welcome to Docker Desktop for Linux. This page contains information about system
 > [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 > [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
+*For checksums, see [Release notes](../release-notes.md)*
+
 ## System requirements
 
 To install Docker Desktop successfully, your Linux host must meet the following requirements:

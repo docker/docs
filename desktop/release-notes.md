@@ -29,12 +29,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 > Download Docker Desktop
 >
-> [Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.10.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> {% include desktop-install.html %}
 
 ### Bug fixes and minor changes
 
@@ -57,6 +52,29 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [Debian](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-amd64.deb) |
 > [RPM](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Checksums
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+        <li><b>Windows:</b> SHA-256 10615f4425e59eef7a22ce79ec13e41057df278547aa81c9fe4d623a848e80d8</li>
+        <li><b>Mac Intel:</b> SHA-256 07bfe00296b724e4e772e268217bc8169a8b23ad98e6da419b13ebfe31b54643</li>
+        <li><b>Mac Arm:</b> SHA-256 c9d2e72e5438726ab5a94c227d9130a65719f8fd09b877860ca2dcd86cfc188e</li>
+        <li><b>Linux DEB:</b> SHA-256 c5f10b3d902b4ea10c8f75c17ba174e8838fc75889f76bc27abcab6afaf1969c</li>
+        <li><b>Linux RPM:</b> SHA-256 a8ad3f8d4e93dfb6f28559f7dc84b7652e651fd6a49506e18958f1e69b51d9be</li>
+        <li><b>Linux Arch:</b> SHA-256 37131c48df6436c1066c41ec0beda039e726e33bee689f751648c473f4abd96e</li>
+        </div>
+      </div>
+    </div>
+  </div>
 
 ### New
 
