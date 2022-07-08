@@ -145,18 +145,18 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 HTTP/HTTPS proxies can be used when
 
-- logging in to Docker
-- pulling or pushing images
-- fetching artifacts during image builds
-- containers interact with the external network
-- scanning images.
+- Logging in to Docker
+- Pulling or pushing images
+- Fetching artifacts during image builds
+- Containers interact with the external network
+- Scanning images.
 
 These are configured slightly differently.
 
-If the host uses a static HTTP/HTTPS proxy configuration then Docker Desktop reads this configuration
+If the host uses a static HTTP/HTTPS proxy configuration, Docker Desktop reads this configuration
 and automatically uses these settings for logging into Docker and for pulling and pushing images.
-If the host uses a more sophisticated HTTP/HTTPS configuration then enable "Manual proxy configuration"
-in the Settings / Resources / Proxies in the Docker Desktop UI and enter a single upstream proxy URL
+If the host uses a more sophisticated HTTP/HTTPS configuration, enable **Manual proxy configuration**
+in the **Settings** > **Resources** **Proxies** in the Docker Dashboard and enter a single upstream proxy URL
 of the form `http://username:password@proxy:port`.
 
 The HTTP/HTTPS proxy settings used for fetching artifacts during builds and for running containers
