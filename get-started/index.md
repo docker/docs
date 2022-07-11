@@ -71,7 +71,7 @@ This page contains step-by-step instructions on how to get started with Docker. 
 - Build and run an image as a container
 - Share images using Docker Hub
 - Deploy Docker applications using multiple containers with a database
-- Running applications using Docker Compose
+- Run applications using Docker Compose
 
 In addition, you'll also learn about the best practices for building images, including instructions on how to scan your images for security vulnerabilities.
 
@@ -124,7 +124,7 @@ You'll notice a few flags being used. Here's some more info on them:
 Before going too far, we want to highlight the Docker Dashboard, which gives
 you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows.
 It gives you quick access to container logs, lets you get a shell inside the container, and lets you
-easily manage container lifecycle (stop, remove, etc.).
+easily manage container lifecycles (stop, remove, etc.).
 
 To access the dashboard, follow the instructions in the
 [Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
