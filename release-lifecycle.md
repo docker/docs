@@ -26,9 +26,9 @@ Beta offerings are initial releases of potential future products or features. Cu
 
 **Support:** Beta releases support is best effort via Community support channels and forums.
 
-**Limitations:** Beta releases may have potentially significant limitations.
+**Limitations:** Beta releases may have potentially significant limitations such as functional limitations, performance limitations, and API limitations. Features and programmatic interfaces may change at any time without notice.
 
-**Retirement:** At the end of a beta release, Docker will determine whether to continue an offering through its lifecycle. We reserve the right to change the scope of or discontinue a Beta product or feature at any point in time without notice, as outlined in our subscription service agreement.
+**Retirement:** During the beta period, Docker will determine whether to continue an offering through its lifecycle. We reserve the right to change the scope of or discontinue a Beta product or feature at any point in time without notice, as outlined in our Subscription Service Agreement.
 
 ### Early Access (EA)
 
@@ -38,9 +38,9 @@ Early Access offerings are products or features that may have potential feature 
 
 **Support:** Early Access offerings are provided with the same level of support as General Availability features and products.
 
-**Limitations:** Early Access releases may have potentially significant limitations.
+**Limitations:** Early Access releases may have potentially significant limitations such as functional limitations, performance limitations, and API limitations, though these limitations will be documented. Breaking changes to features and programmatic interfaces will follow the Retirement procedures outlined below.
 
-**Retirement:** In the event we retire an Early Access product before General Availability, we will strive to follow the Retirement procedures outlined below.
+**Retirement:** In the event we retire an Early Access product before General Availability, we will strive to follow the [retirement process](#retirement-process) outlined below.
 
 ### General Availability (GA)
 
