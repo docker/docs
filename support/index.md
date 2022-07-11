@@ -67,16 +67,16 @@ Docker excludes support for the following types of issues:
    * Any version of the Docker software other than the latest version
    * Reimbursing and expenses spent for third-party services not provided by Docker
 
-### What Docker Desktop versions are supported?
+## What Docker Desktop versions are supported?
 
 We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
 
-### How many machines can I get support for Docker Desktop on?
+## How many machines can I get support for Docker Desktop on?
 
 As a Pro user you can get support for Docker Desktop on a single machine.
 As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
 
-### What OS’s are supported?
+## What OS’s are supported?
 
 Docker Desktop is available for Mac, Linux, and Windows. The supported version information can be found on the following pages:
 
@@ -84,7 +84,7 @@ Docker Desktop is available for Mac, Linux, and Windows. The supported version i
 * [Windows system requirements](../desktop/windows/install.md#system-requirements)
 * [Linux system requirements](../desktop/linux/install.md#system-requirements)
 
-### How is personal diagnostic data handled in Docker Desktop?
+## How is personal diagnostic data handled in Docker Desktop?
 
 When uploading diagnostics to help Docker with investigating issues, the uploaded diagnostics bundle may contain personal data such as usernames and IP addresses. The diagnostics bundles are only accessible to Docker, Inc.
 employees who are directly involved in diagnosing Docker Desktop issues.
