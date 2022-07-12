@@ -30,7 +30,7 @@ You must enable nested virtualization before you install Docker Desktop in a vir
 
 Nested virtualization of other hypervisors like Hyper-V inside a vSphere VM [is not a supported scenario](https://kb.vmware.com/s/article/2009916). However, running Hyper-V VM in a VMware ESXi VM is technically possible, and, depending on the version, ESXi includes hardware-assisted virtualization as a supported feature. 
 
-For steps on how to expose Hardware-Assisted Virtualization to the Guest OS, [see VMware's documentation](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-2A98801C-68E8-47AF-99ED-00C63E4857F6.html). 
+For steps on how to expose hardware-assisted virtualization to the guest OS, [see VMware's documentation](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-2A98801C-68E8-47AF-99ED-00C63E4857F6.html). 
 
 You may also need to [configure some network settings](https://www.vembu.com/blog/nested-hyper-v-vms-on-a-vmware-esxi-server).
 
@@ -38,7 +38,7 @@ You may also need to [configure some network settings](https://www.vembu.com/blo
 
 Nested virtualization is supported by Microsoft for running Hyper-V inside a VM running on a Hyper-V host, in Azure or on-prem (Hyper-V on Hyper-V).
 
-Check the constraints on the host VM operating system/processor and [follow the steps documented by Microsoft](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization).
+Check the constraints on the host VM operating system and [follow the steps documented by Microsoft](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization).
 
 ### Enable nested virtualization on Citrix Hypervisor
 
