@@ -2,6 +2,8 @@
 description: Get support
 keywords: Support, Docker Desktop, Docker Hub, Hub, Linux, Mac, Windows
 title: Get support
+redirect_from:
+- /desktop/support/
 ---
 
 Find information on how to get support, and the scope of Docker support.
@@ -14,33 +16,34 @@ Find information on how to get support, and the scope of Docker support.
 
 ## How do I get support?
 
-If you have a paid Docker subscription, raise a ticket through [Docker Hub support](https://hub.docker.com/support/contact/){:target="_blank" rel="noopener" class="_"} or [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"}.
+If you have a paid Docker subscription, raise a ticket through [Docker support](https://hub.docker.com/support/contact/){:target="_blank" rel="noopener" class="_"}.
 
-Docker Personal users can get Docker Desktop support through GitHub repos [for-win](https://github.com/docker/for-win){:target="_blank" rel="noopener" class="_"}, [for-mac](https://github.com/docker/for-mac){:target="_blank" rel="noopener" class="_"}, [for-linux](https://github.com/docker/for-linux){:target="_blank" rel="noopener" class="_"}, where we respond on a best effort basis.
+All Docker users can seek support through the following resources, where we or the community respond on a best effort basis.
+   - [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win){:target="_blank" rel="noopener" class="_"} 
+   - [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac){:target="_blank" rel="noopener" class="_"}
+   - [Docker Desktop for Linux GitHub repo](https://github.com/docker/for-linux){:target="_blank" rel="noopener" class="_"}
+   - [Docker Community Forums](https://forums.docker.com/){:target="_blank" rel="noopener" class="_"}
+   - [Docker Community Slack](https://dockercommunity.slack.com/){:target="_blank" rel="noopener" class="_"}
 
-In addition, Docker users can get community support through the [Docker Community Forums](https://forums.docker.com/){:target="_blank" rel="noopener" class="_"} and [Docker Community Slack](https://dockercommunity.slack.com/){:target="_blank" rel="noopener" class="_"}, where community users respond on a best effort basis.
 
 ## What support can I get?
 
-If you have a paid Docker subscription, you can raise a ticket through [Docker Hub support](https://hub.docker.com/support/contact/){:target="_blank" rel="noopener" class="_"} for the following types of Docker Hub issues:
+If you have a paid Docker subscription, you can get support for the following types of issues:
 
    * Account management related issues
-   * Billing or subscription issues
-   * Login issues in both the command line interface and Docker Hub user interface
    * Automated builds
-   * Push or pull issues, including rate limiting
-
-If you have a paid Docker subscription, you can raise a ticket through [Docker Desktop support](https://hub.docker.com/support/deskop/){:target="_blank" rel="noopener" class="_"} for the following types of Docker Desktop issues:
-
-   * Desktop upgrade issues
+   * Basic product 'how to' questions
+   * Billing or subscription issues
+   * Configuration issues
    * Desktop installation issues
       * Installation crashes
       * Failure to launch Docker Desktop on first run
+   * Desktop upgrade issues
+   * Login issues in both the command line interface and Docker Hub user interface
+   * Push or pull issues, including rate limiting
    * Usage issues
       * Crash closing software
       * Docker Desktop not behaving as expected
-   * Configuration issues
-   * Basic product 'how to' questions
 
    For Windows users, you can also request support on:
    * Enabling virtualization in BIOS
@@ -50,22 +53,22 @@ If you have a paid Docker subscription, you can raise a ticket through [Docker D
 ## What is not supported?
 
 Docker excludes support for the following types of issues:
-   * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
-   * Third-party applications not provided by Docker
-   * Docker Support excludes training, customization, and integration
-   * Support for the Docker Engine, Docker CLI, or other bundled Linux components
-   * Support for Kubernetes
    * Altered or modified Docker software
-   * Running on unsupported operating systems, including beta or preview versions of operating systems
-   * Running containers of a different architecture using emulation
-   * Features labeled as experimental
-   * System/Server administration activities
-   * Supporting Desktop as a production runtime
-   * Scale deployment/multi-machine installation of Desktop
-   * Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
-   * Defects in the Docker software due to hardware malfunction, abuse, or improper use
    * Any version of the Docker software other than the latest version
+   * Defects in the Docker software due to hardware malfunction, abuse, or improper use
+   * Docker Support excludes training, customization, and integration
+   * Features labeled as experimental
    * Reimbursing and expenses spent for third-party services not provided by Docker
+   * Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
+   * Running containers of a different architecture using emulation
+   * Running on unsupported operating systems, including beta or preview versions of operating systems
+   * Scale deployment/multi-machine installation of Desktop
+   * Support for Kubernetes
+   * Support for the Docker Engine, Docker CLI, or other bundled Linux components
+   * Supporting Desktop as a production runtime
+   * System/Server administration activities
+   * Third-party applications not provided by Docker
+   * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
 
 ## What Docker Desktop versions are supported?
 
@@ -92,3 +95,18 @@ employees who are directly involved in diagnosing Docker Desktop issues.
 By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues but may derive high-level (non personal) metrics such as the rate of issues from it.
 
 For more information, see [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
+
+## What can I do before seeking support?
+
+Before seeking support, you can perform basic troubleshooting using the following troubleshooting topics:
+- [Docker Desktop for Linux](../desktop/linux/troubleshoot.md)
+- [Docker Desktop for Mac](../desktop/mac/troubleshoot.md)
+- [Docker Desktop for Windows](../desktop/windows/troubleshoot.md)
+
+You can also see if an answer already exists in the following FAQs:
+- [Docker Business or Team onboarding](../docker-hub/onboarding-faqs.md)
+- [Docker Desktop](../desktop/faqs/general.md)
+- [Docker Desktop for Linux](../desktop/faqs/linuxfaqs.md)
+- [Docker Desktop for Mac](../desktop/faqs/macfaqs.md)
+- [Docker Desktop for Windows](../desktop/faqs/windowsfaqs.md)
+- [Single Sign-on](..//single-sign-on/faqs.md)
