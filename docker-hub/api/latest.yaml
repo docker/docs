@@ -25,7 +25,7 @@ tags:
 
       - <a href="https://github.com/docker/hub-tool#readme" target="_blank">Docker Hub CLI tool</a> (currently experimental)
 
-      - <a href="https://www.postman.com/dockerdev/workspace/docker-hub/collection/17990590-9574e087-2a50-4ecf-88b3-55f12a29d99e" target="_blank">Postman Collection</a> (built by the Postman team)
+      - <a href="https://www.postman.com/dockerdev/workspace/docker-hub/collection/17990590-9574e087-2a50-4ecf-88b3-55f12a29d99e" target="_blank">Postman Collection</a>
   - name: rate-limiting
     x-displayName: Rate Limiting
     description: >
