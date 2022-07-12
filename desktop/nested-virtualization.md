@@ -6,12 +6,12 @@ title: Enable nested virtualization
 >Note: 
 >
 >This is work in progress. The steps haven’t been validated yet in our test environment.
-{ .important}
+{: .important}
 
 
-In general, Docker recommends running Docker Desktop natively on either a Windows system, to work with Windows or Linux containers, or on Mac or Linux, to work with Linux containers.However, Docker Desktop can run inside a virtual machine provided the virtual machine is properly configured. 
+In general, Docker recommends running Docker Desktop natively on either a Windows system, to work with Windows or Linux containers, or on Mac or Linux, to work with Linux containers. However, Docker Desktop can run inside a virtual machine provided the virtual machine is properly configured. 
 
-To run Docker Desktop inside a virtual machine, it is essential to enable nested virtualization on the virtual machine (host VM). This is because, under the hood, Docker Desktop is using a Linux VM in which it runs Docker engine and the containers.
+To run Docker Desktop inside a virtual machine, it is essential nested virtualization is enabled on the virtual machine (host VM). This is because, under the hood, Docker Desktop is using a Linux VM in which it runs Docker engine and the containers.
 
 ## Nested virtualization support
 
@@ -19,12 +19,12 @@ The level of support available for nested virtualization inside a host VM is dep
 
 For example, Microsoft supports running nested Hyper-V both on-prem and on Azure, with some version constraints. This may not not be the case for VMWare ESXi or Citrix Hypervisor.
 
-The support available from Docker is limited to installing and running Docker Desktop inside the VM. once the nested virtualization is set up correctly. Troubleshooting problems and intermittent failures that may still occur due to the way these apps virtualize the hardware, is outside the scope of support from Docker. For more information on Docker Desktop support, see [Get support](support.md).
+The support available from Docker is limited to installing and running Docker Desktop inside the VM, once the nested virtualization is set up correctly. Troubleshooting problems and intermittent failures that may still occur due to the way these apps virtualize the hardware, is outside the scope of support from Docker. For more information on Docker Desktop support, see [Get support](support.md).
 
 
 ## Enable nested virtualization
 
-You must enable nested virtualization for you install Docker Desktop in a virtual machine.
+You must enable nested virtualization before you install Docker Desktop in a virtual machine.
 
 ### Enable nested virtualization on VMware ESXi 
 
@@ -44,7 +44,7 @@ Check the constraints on the host VM operating system/processor and [follow the 
 
 Nested virtualization on Citrix Hypervisor is unsupported in production scenarios. However, running a VM inside a Citrix Hypervisor VM is possible.
 
-Steps on enabling nested virtualization can be found in [Citrix's documentation](https://docs.citrix.com/en-us/citrix-hypervisor/vms/bromium.html#configuration). It contains instructions for the only scenario where nested virtualization is supported by Citrix (to support Bromium’s Secure Platform solution).
+Steps on enabling nested virtualization can be found in [Citrix's documentation](https://docs.citrix.com/en-us/citrix-hypervisor/vms/bromium.html#configuration). It contains instructions for the only scenario where nested virtualization is supported by Citrix which is to support Bromium’s Secure Platform solution.
 
 >Note
 >
