@@ -1405,8 +1405,8 @@ manuals:
   section:
     - path: /build/
       title: Overview
-    - path: /build/builders/
-      title: Using Docker Build
+    - path: /build/hellobuild/
+      title: Hello Build
 
 - sectiontitle: Docker Compose
   section:
