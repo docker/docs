@@ -107,7 +107,7 @@ culpa qui officia deserunt mollit anim id est laborum.
   - You can specify `org=foo` to use a Github organization other than Docker
 
 - A link to an auto-generated reference page that we pull in during docs builds:
-[/engine/reference/builder/#env](/engine/reference/builder/#env).
+[/reference/dockerfile/#env](/reference/dockerfile/#env).
 
   - If you can't find a reference page in the `docker.github.io`
   GitHub repository, but see it out on `docs.docker.com`, you can

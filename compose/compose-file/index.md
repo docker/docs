@@ -433,7 +433,7 @@ cgroup_parent: m-executor-abcd
 command: bundle exec thin -p 3000
 ```
 
-The command can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The command can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
@@ -737,7 +737,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+[Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```yml
 entrypoint:
@@ -1082,7 +1082,7 @@ been the case if `group_add` were not declared.
 
 `healthcheck` declares a check that's run to determine whether or not containers for this
 service are "healthy". This overrides
-[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/engine/reference/builder/#healthcheck)
+[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/reference/dockerfile/#healthcheck)
 set by the service's Docker image.
 
 ```yml

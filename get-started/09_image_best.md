@@ -142,7 +142,7 @@ a change to the `package.json`. Make sense?
 
     `.dockerignore` files are an easy way to selectively copy only image relevant files.
     You can read more about this
-    [here](../engine/reference/builder.md#dockerignore-file).
+    [here](../reference/dockerfile/index.md#dockerignore-file).
     In this case, the `node_modules` folder should be omitted in the second `COPY` step because otherwise,
     it would possibly overwrite files which were created by the command in the `RUN` step.
     For further details on why this is recommended for Node.js applications and other best practices,

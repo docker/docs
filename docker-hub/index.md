@@ -134,7 +134,7 @@ Docker Hub.
 
 ### Step 4: Build and push a container image to Docker Hub from your computer
 
-1. Start by creating a [Dockerfile](../engine/reference/builder/) to specify your application as shown below:
+1. Start by creating a [Dockerfile](../reference/dockerfile/) to specify your application as shown below:
 
    ```dockerfile
    # syntax=docker/dockerfile:1

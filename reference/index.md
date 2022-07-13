@@ -11,7 +11,7 @@ various APIs, CLIs, and file formats.
 
 | File format                                                         | Description                                                     |
 |:--------------------------------------------------------------------|:----------------------------------------------------------------|
-| [Dockerfile](/engine/reference/builder/)                            | Defines the contents and startup behavior of a single container |
+| [Dockerfile](/reference/dockerfile/)                                | Defines the contents and startup behavior of a single container |
 | [Compose file](/compose/compose-file/)                              | Defines a multi-container application                           |
 
 

@@ -38,7 +38,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 That'll put your application code inside an image that builds a container
 with Ruby, Bundler and all your dependencies inside it. For more information on
 how to write Dockerfiles, see the [Docker user guide](../get-started/index.md)
-and the [Dockerfile reference](/engine/reference/builder/).
+and the [Dockerfile reference](/reference/dockerfile/).
 
 Next, open an editor and create a bootstrap `Gemfile` which just loads Rails. This will be overwritten in a moment by `rails new`.
 

@@ -20,7 +20,7 @@ on performance, storage management, feature functionality, and security.
 
 For more information on build options, see the reference guide on the
 [command line build options](../../engine/reference/commandline/build.md) and
-the [Dockerfile reference](/engine/reference/builder/) page.
+the [Dockerfile reference](/reference/dockerfile/) page.
 
 
 ## Requirements
@@ -124,7 +124,7 @@ version 1.2.0 and up. We recommend using `docker/dockerfile:1`, which always
 points to the latest release of the version 1 syntax. BuildKit automatically
 checks for updates of the syntax before building, making sure you are using the
 most current version. Learn more about the `syntax` directive in the
-[Dockerfile reference](/engine/reference/builder/#syntax).
+[Dockerfile reference](/reference/dockerfile/#syntax).
 
 ## New Docker Build secret information
 

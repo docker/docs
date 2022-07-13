@@ -4,7 +4,7 @@ description: Docker extension labels
 keywords: Docker, extensions, sdk, labels
 ---
 
-[Labels](https://docs.docker.com/engine/reference/builder/#label) are specified in the extension's `Dockerfile` and used to provide information about the extension.
+[Labels](https://docs.docker.com/reference/dockerfile/#label) are specified in the extension's `Dockerfile` and used to provide information about the extension.
 
 | Label | Required | Description | Example |
 | --- | --- | --- | ---|

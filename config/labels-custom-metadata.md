@@ -78,7 +78,7 @@ the lifetime of the object. To change these labels you must recreate the object.
 Labels on swarm nodes and services can be updated dynamically.
 
 - Images and containers
-  - [Adding labels to images](../engine/reference/builder.md#label)
+  - [Adding labels to images](../reference/dockerfile/index.md#label)
   - [Overriding a container's labels at runtime](../engine/reference/commandline/run.md#set-metadata-on-container--l---label---label-file)
   - [Inspecting labels on images or containers](../engine/reference/commandline/inspect.md)
   - [Filtering images by label](../engine/reference/commandline/images.md#filtering)

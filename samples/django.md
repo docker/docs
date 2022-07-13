@@ -23,7 +23,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     The Dockerfile defines an application's image content via one or more build
     commands that configure that image. Once built, you can run the image in a
     container.  For more information on `Dockerfile`, see the [Docker user guide](../get-started/index.md)
-    and the [Dockerfile reference](/engine/reference/builder/).
+    and the [Dockerfile reference](/reference/dockerfile/).
 
 3. Add the following content to the `Dockerfile`.
 

@@ -1040,7 +1040,7 @@ reference:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
         title: BackendV0  
 - title: Dockerfile reference
-  path: /engine/reference/builder/
+  path: /reference/dockerfile/
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/

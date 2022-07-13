@@ -23,10 +23,10 @@ your text editor.
 > We recommend using the default (`Dockerfile`) for your project's primary
 > Dockerfile, which is what we'll use for most examples in this guide.
 
-The first line to add to a Dockerfile is a [`# syntax` parser directive](/engine/reference/builder/#syntax).
+The first line to add to a Dockerfile is a [`# syntax` parser directive](/reference/dockerfile/index.md#syntax).
 While _optional_, this directive instructs the Docker builder what syntax to use
 when parsing the Dockerfile, and allows older Docker versions with BuildKit enabled
-to upgrade the parser before starting the build. [Parser directives](/engine/reference/builder/#parser-directives)
+to upgrade the parser before starting the build. [Parser directives](/reference/dockerfile/index.md#parser-directives)
 must appear before any other comment, whitespace, or Dockerfile instruction in
 your Dockerfile, and should be the first line in Dockerfiles.
 

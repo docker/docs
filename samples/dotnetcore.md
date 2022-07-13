@@ -64,7 +64,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
 4.  To make your build context as small as possible add a [`.dockerignore`
-   file](/engine/reference/builder/#dockerignore-file)
+   file](/reference/dockerfile/#dockerignore-file)
    to your project folder and copy the following into it.
 
 ```dockerignore
@@ -96,7 +96,7 @@ obj/
       ```
   
 4.  To make your build context as small as possible add a [`.dockerignore`
-   file](/engine/reference/builder/#dockerignore-file)
+   file](/reference/dockerfile/#dockerignore-file)
    to your project folder.
    
 ## Build and run the Docker image

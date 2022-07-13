@@ -107,7 +107,7 @@ If you want to test it out, you can clone
 
 There are lots of resources available to help you write your `Dockerfile`.
 
-* There's a [complete guide to all the instructions](../../engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
+* There's a [complete guide to all the instructions](../../reference/dockerfile/index.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
 written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
 * If your goal is to create a new Docker Official Image, read [Docker Official Images](../../docker-hub/official_images.md).

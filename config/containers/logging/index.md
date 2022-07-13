@@ -50,4 +50,4 @@ its errors to `/proc/self/fd/2` (which is `STDERR`). See the
 ## Next steps
 
 - Configure [logging drivers](configure.md).
-- Write a [Dockerfile](../../../engine/reference/builder.md).
+- Write a [Dockerfile](../../../reference/dockerfile/index.md).

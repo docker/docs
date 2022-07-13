@@ -280,7 +280,7 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../engine/reference/builder.md#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../reference/dockerfile/index.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
@@ -444,7 +444,7 @@ command: bundle exec thin -p 3000
 ```
 
 The command can also be a list, in a manner similar to
-[dockerfile](../../engine/reference/builder.md#cmd):
+[dockerfile](../../reference/dockerfile/index.md#cmd):
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -1063,7 +1063,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](../../engine/reference/builder.md#entrypoint):
+[dockerfile](../../reference/dockerfile/index.md#entrypoint):
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -1247,7 +1247,7 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
-[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../reference/dockerfile/index.md#healthcheck)
 for details on how healthchecks work.
 
 ```yaml

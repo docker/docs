@@ -16,7 +16,7 @@ efficient images.
 Docker builds images automatically by reading the instructions from a
 `Dockerfile` -- a text file that contains all commands, in order, needed to
 build a given image. A `Dockerfile` adheres to a specific format and set of
-instructions which you can find at [Dockerfile reference](../../engine/reference/builder.md).
+instructions which you can find at [Dockerfile reference](../../reference/dockerfile/index.md).
 
 A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
@@ -248,7 +248,7 @@ EOF
 To exclude files not relevant to the build (without restructuring your source
 repository) use a `.dockerignore` file. This file supports exclusion patterns
 similar to `.gitignore` files. For information on creating one, see the
-[.dockerignore file](../../engine/reference/builder.md#dockerignore-file).
+[.dockerignore file](../../reference/dockerfile/index.md#dockerignore-file).
 
 ### Use multi-stage builds
 
@@ -402,7 +402,7 @@ maintainable `Dockerfile`.
 
 ### FROM
 
-[Dockerfile reference for the FROM instruction](../../engine/reference/builder.md#from)
+[Dockerfile reference for the FROM instruction](../../reference/dockerfile/index.md#from)
 
 Whenever possible, use current official images as the basis for your
 images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
@@ -455,11 +455,11 @@ See [Understanding object labels](../../config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
 querying labels, refer to the items related to filtering in
 [Managing labels on objects](../../config/labels-custom-metadata.md#manage-labels-on-objects).
-See also [LABEL](../../engine/reference/builder.md#label) in the Dockerfile reference.
+See also [LABEL](../../reference/dockerfile/index.md#label) in the Dockerfile reference.
 
 ### RUN
 
-[Dockerfile reference for the RUN instruction](../../engine/reference/builder.md#run)
+[Dockerfile reference for the RUN instruction](../../reference/dockerfile/index.md#run)
 
 Split long or complex `RUN` statements on multiple lines separated with
 backslashes to make your `Dockerfile` more readable, understandable, and
@@ -592,7 +592,7 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 
 ### CMD
 
-[Dockerfile reference for the CMD instruction](../../engine/reference/builder.md#cmd)
+[Dockerfile reference for the CMD instruction](../../reference/dockerfile/index.md#cmd)
 
 The `CMD` instruction should be used to run the software contained in your
 image, along with any arguments. `CMD` should almost always be used in the form
@@ -606,13 +606,13 @@ python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
 ["php", "-a"]`. Using this form means that when you execute something like
 `docker run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
-conjunction with [`ENTRYPOINT`](../../engine/reference/builder.md#entrypoint), unless
+conjunction with [`ENTRYPOINT`](../../reference/dockerfile/index.md#entrypoint), unless
 you and your expected users are already quite familiar with how `ENTRYPOINT`
 works.
 
 ### EXPOSE
 
-[Dockerfile reference for the EXPOSE instruction](../../engine/reference/builder.md#expose)
+[Dockerfile reference for the EXPOSE instruction](../../reference/dockerfile/index.md#expose)
 
 The `EXPOSE` instruction indicates the ports on which a container listens
 for connections. Consequently, you should use the common, traditional port for
@@ -627,7 +627,7 @@ the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
 
 ### ENV
 
-[Dockerfile reference for the ENV instruction](../../engine/reference/builder.md#env)
+[Dockerfile reference for the ENV instruction](../../reference/dockerfile/index.md#env)
 
 To make new software easier to run, you can use `ENV` to update the
 `PATH` environment variable for the software your container installs. For
@@ -696,8 +696,8 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ### ADD or COPY
 
-- [Dockerfile reference for the ADD instruction](../../engine/reference/builder.md#add)
-- [Dockerfile reference for the COPY instruction](../../engine/reference/builder.md#copy)
+- [Dockerfile reference for the ADD instruction](../../reference/dockerfile/index.md#add)
+- [Dockerfile reference for the COPY instruction](../../reference/dockerfile/index.md#copy)
 
 Although `ADD` and `COPY` are functionally similar, generally speaking, `COPY`
 is preferred. That’s because it’s more transparent than `ADD`. `COPY` only
@@ -748,7 +748,7 @@ auto-extraction capability, you should always use `COPY`.
 
 ### ENTRYPOINT
 
-[Dockerfile reference for the ENTRYPOINT instruction](../../engine/reference/builder.md#entrypoint)
+[Dockerfile reference for the ENTRYPOINT instruction](../../reference/dockerfile/index.md#entrypoint)
 
 The best use for `ENTRYPOINT` is to set the image's main command, allowing that
 image to be run as though it was that command (and then use `CMD` as the
@@ -805,7 +805,7 @@ exec "$@"
 > This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec)
 > so that the final running application becomes the container's PID 1. This
 > allows the application to receive any Unix signals sent to the container.
-> For more, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
+> For more, see the [`ENTRYPOINT` reference](../../reference/dockerfile/index.md#entrypoint).
 
 The helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
@@ -838,7 +838,7 @@ $ docker run --rm -it postgres bash
 
 ### VOLUME
 
-[Dockerfile reference for the VOLUME instruction](../../engine/reference/builder.md#volume)
+[Dockerfile reference for the VOLUME instruction](../../reference/dockerfile/index.md#volume)
 
 The `VOLUME` instruction should be used to expose any database storage area,
 configuration storage, or files/folders created by your docker container. You
@@ -847,7 +847,7 @@ parts of your image.
 
 ### USER
 
-[Dockerfile reference for the USER instruction](../../engine/reference/builder.md#user)
+[Dockerfile reference for the USER instruction](../../reference/dockerfile/index.md#user)
 
 If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
@@ -880,7 +880,7 @@ frequently.
 
 ### WORKDIR
 
-[Dockerfile reference for the WORKDIR instruction](../../engine/reference/builder.md#workdir)
+[Dockerfile reference for the WORKDIR instruction](../../reference/dockerfile/index.md#workdir)
 
 For clarity and reliability, you should always use absolute paths for your
 `WORKDIR`. Also, you should use `WORKDIR` instead of  proliferating instructions
@@ -889,7 +889,7 @@ maintain.
 
 ### ONBUILD
 
-[Dockerfile reference for the ONBUILD instruction](../../engine/reference/builder.md#onbuild)
+[Dockerfile reference for the ONBUILD instruction](../../reference/dockerfile/index.md#onbuild)
 
 An `ONBUILD` command executes after the current `Dockerfile` build completes.
 `ONBUILD` executes in any child image derived `FROM` the current image.  Think
@@ -923,7 +923,7 @@ These Official Images have exemplary `Dockerfile`s:
 
 ## Additional resources:
 
-* [Dockerfile Reference](../../engine/reference/builder.md)
+* [Dockerfile Reference](../../reference/dockerfile/index.md)
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
 * [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
