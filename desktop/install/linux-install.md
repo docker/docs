@@ -32,7 +32,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 
 - At least 4 GB of RAM.
 
-Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](install.md#why-docker-desktop-for-linux-runs-a-vm).
+Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](linux-install.md#why-docker-desktop-for-linux-runs-a-vm).
 
 > **Note:**
 >
@@ -142,7 +142,7 @@ Log out and log back in so that your group membership is re-evaluated.
 
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
-storage location [within a VM](#why-docker-desktop-for-linux-runs-a-vm) and offers
+storage location [within a VM](linux-install.md#why-docker-desktop-for-linux-runs-a-vm) and offers
 controls to restrict [its resources](../linux/index.md#resources). Using a dedicated storage
 location for Docker Desktop prevents it from interfering with a Docker Engine
 installation on the same machine.
