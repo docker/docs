@@ -484,6 +484,10 @@ reference:
       title: docker commit
     - sectiontitle: docker compose
       section:
+        - path: /compose/reference/
+          title: overview
+        - path: /compose/reference/envvars/
+          title: environment variables
         - path: /engine/reference/commandline/compose/
           title: docker compose
         - path: /engine/reference/commandline/compose_build/
@@ -910,60 +914,9 @@ reference:
         title: docker volume rm
     - path: /engine/reference/commandline/wait/
       title: docker wait
-  - sectiontitle: Docker Compose CLI reference
-    section:
-    - path: /compose/reference/
-      title: Overview of docker compose CLI
-    - path: /compose/reference/envvars/
-      title: CLI environment variables
-    - path: /compose/reference/build/
-      title: docker compose build
-    - path: /compose/reference/config/
-      title: docker compose config
-    - path: /compose/reference/create/
-      title: docker compose create
-    - path: /compose/reference/down/
-      title: docker compose down
-    - path: /compose/reference/events/
-      title: docker compose events
-    - path: /compose/reference/exec/
-      title: docker compose exec
-    - path: /compose/reference/help/
-      title: docker compose help
-    - path: /compose/reference/images/
-      title: docker compose images
-    - path: /compose/reference/kill/
-      title: docker compose kill
-    - path: /compose/reference/logs/
-      title: docker compose logs
-    - path: /compose/reference/pause/
-      title: docker compose pause
-    - path: /compose/reference/port/
-      title: docker compose port
-    - path: /compose/reference/ps/
-      title: docker compose ps
-    - path: /compose/reference/pull/
-      title: docker compose pull
-    - path: /compose/reference/push/
-      title: docker compose push
-    - path: /compose/reference/restart/
-      title: docker compose restart
-    - path: /compose/reference/rm/
-      title: docker compose rm
-    - path: /compose/reference/run/
-      title: docker compose run
-    - path: /compose/reference/scale/
-      title: docker compose scale
-    - path: /compose/reference/start/
-      title: docker compose start
-    - path: /compose/reference/stop/
-      title: docker compose stop
-    - path: /compose/reference/top/
-      title: docker compose top
-    - path: /compose/reference/unpause/
-      title: docker compose unpause
-    - path: /compose/reference/up/
-      title: docker compose up
+  - title: Docker Compose CLI reference
+    # using old URL that redirects to the new location
+    path: /compose/reference/overview/
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
 - sectiontitle: API reference
@@ -1184,10 +1137,26 @@ manuals:
   section:
     - path: /desktop/
       title: Overview
+    - sectiontitle: Install Docker Desktop
+      section:
+       - path: /desktop/install/mac-install/
+         title: Install on Mac
+       - path: /desktop/install/windows-install/
+         title: Install on Windows
+       - path: /desktop/install/linux-install/
+         title: Insall on Linux
+       - sectiontitle: Installation per Linux distro
+         section:
+            - path: /desktop/install/debian/
+              title: Install on Debian
+            - path: /desktop/install/fedora/
+              title: Install on Fedora
+            - path: /desktop/install/ubuntu/
+              title: Install on Ubuntu
+            - path: /desktop/install/archlinux/
+              title: Install on Arch
     - sectiontitle: Mac
       section:
-        - path: /desktop/mac/install/
-          title: Install Docker Desktop for Mac
         - path: /desktop/mac/
           title: User manual
         - path: /desktop/mac/troubleshoot/
@@ -1198,8 +1167,6 @@ manuals:
           title: Privileged Helper
     - sectiontitle: Windows
       section:
-        - path: /desktop/windows/install/
-          title: Install Docker Desktop for Windows
         - path: /desktop/windows/
           title: User manual
         - path: /desktop/windows/troubleshoot/
@@ -1208,18 +1175,6 @@ manuals:
           title: Docker Desktop WSL 2 backend
     - sectiontitle: Linux
       section:
-        - path: /desktop/linux/install/
-          title: Install Docker Desktop for Linux
-        - sectiontitle: Installation per distro
-          section:
-            - path: /desktop/linux/install/debian/
-              title: Install on Debian
-            - path: /desktop/linux/install/fedora/
-              title: Install on Fedora
-            - path: /desktop/linux/install/ubuntu/
-              title: Install on Ubuntu
-            - path: /desktop/linux/install/archlinux/
-              title: Install on Arch
         - path: /desktop/linux/
           title: User manual
         - path: /desktop/linux/troubleshoot/
@@ -1633,14 +1588,6 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
-- sectiontitle: Superseded products and tools
-  section:
-  - path: /machine/
-    title: Docker Machine (deprecated)
-  - path: /toolbox/
-    title: Docker Toolbox (deprecated)
-  - path: /kitematic/
-    title: Kitematic (deprecated)
 
 - path: /support/
-  title: Get support
+  title: Get Support
