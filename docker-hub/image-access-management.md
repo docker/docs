@@ -49,9 +49,9 @@ organization. To do this:
 
 Download Docker Desktop 4.0 or a later release.
 
-- [Download and install for Windows](/desktop/windows/install/)
-- [Download and install for Mac](/desktop/mac/install/)
-- [Download and install for Linux](/desktop/linux/install)
+- [Download and install for Windows](/desktop/install/windows-install)
+- [Download and install for Mac](/desktop/install/mac-install/)
+- [Download and install for Linux](/desktop/install/linux-install)
 
 {% include configure-registry-json.md %}
 

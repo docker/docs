@@ -50,9 +50,9 @@ using a secure repository.
 Docker Desktop is available for Mac, Linux, and Windows. For download information, system requirements, and installation instructions, see:
 
 
-* [Install Docker Desktop on Linux](linux/install.md)
-* [Install Docker Desktop on Mac](mac/install.md)
-* [Install Docker Desktop on Windows](windows/install.md)
+* [Install Docker Desktop on Linux](install/linux-install.md)
+* [Install Docker Desktop on Mac](install/mac-install.md)
+* [Install Docker Desktop on Windows](install/windows-install.md)
 
 For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
