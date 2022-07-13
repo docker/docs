@@ -2,7 +2,9 @@
 description: Kitematic userguide (deprecated)
 keywords: kitematic, deprecated
 title: Kitematic (deprecated)
+redirect_to: /desktop/
 redirect_from:
+- /kitematic/
 - /kitematic/faq/
 - /kitematic/known-issues/
 - /kitematic/minecraft-server/

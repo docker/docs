@@ -1590,11 +1590,3 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
-- sectiontitle: Superseded products and tools
-  section:
-  - path: /machine/
-    title: Docker Machine (deprecated)
-  - path: /toolbox/
-    title: Docker Toolbox (deprecated)
-  - path: /kitematic/
-    title: Kitematic (deprecated)
