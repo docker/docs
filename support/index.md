@@ -83,9 +83,9 @@ As a Team, you can get support for Docker Desktop for the number of machines equ
 
 Docker Desktop is available for Mac, Linux, and Windows. The supported version information can be found on the following pages:
 
-* [Mac system requirements](../desktop/mac//install.md#system-requirements)
-* [Windows system requirements](../desktop/windows/install.md#system-requirements)
-* [Linux system requirements](../desktop/linux/install.md#system-requirements)
+* [Mac system requirements](../desktop/install/mac-install.md/#system-requirements)
+* [Windows system requirements](../desktop/install/windows-install.md/#system-requirements)
+* [Linux system requirements](../desktop/install/linux-install.md/#system-requirements)
 
 ## How is personal diagnostic data handled in Docker Desktop?
 
