@@ -50,14 +50,14 @@ and architectures:
 
 | Platform                | x86_64 / amd64         | 
 |:------------------------|:-----------------------|
-| [Ubuntu](install/ubuntu.md)     | [{{ yes }}](install/ubuntu.md) |
-| [Debian](install/debian.md)     | [{{ yes }}](install/debian.md) |
-| [Fedora](install/fedora.md)     | [{{ yes }}](install/fedora.md) |
+| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) |
+| [Debian](debian.md)     | [{{ yes }}](debian.md) |
+| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) |
 
 
 >  **Note:**
 >
-> An experimental package is available for [Arch](install/archlinux.md)-based distributions. Docker has not tested or verified the installation.
+> An experimental package is available for [Arch](archlinux.md)-based distributions. Docker has not tested or verified the installation.
 
 Docker supports Docker Desktop on the current LTS release of the aforementioned distributions and the most recent version. As new versions are made available, Docker stops supporting the oldest version and supports the newest version.
 
@@ -118,10 +118,10 @@ Log out and log back in so that your group membership is re-evaluated.
 ## Generic installation steps
 
 1. Download the correct package for your Linux distribution and install it with the corresponding package manager. 
- - [Install on Debian](install/debian.md)
- - [Install on Fedora](install/fedora.md)
- - [Install on Ubuntu](install/ubuntu.md)
- - [Install on Arch](install/archlinux.md) 
+ - [Install on Debian](debian.md)
+ - [Install on Fedora](fedora.md)
+ - [Install on Ubuntu](ubuntu.md)
+ - [Install on Arch](archlinux.md) 
 
 2. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
 
@@ -143,7 +143,7 @@ Log out and log back in so that your group membership is re-evaluated.
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
 storage location [within a VM](#why-docker-desktop-for-linux-runs-a-vm) and offers
-controls to restrict [its resources](index.md#resources). Using a dedicated storage
+controls to restrict [its resources](../linux/index.md#resources). Using a dedicated storage
 location for Docker Desktop prevents it from interfering with a Docker Engine
 installation on the same machine.
 
@@ -280,11 +280,11 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
 ## Where to go next
 
-- [Getting started](index.md) provides an overview of Docker Desktop on Linux, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Linux.
-- [Troubleshooting](troubleshoot.md) describes common problems, workarounds, how
+- [Getting started](../linux/index.md) provides an overview of Docker Desktop on Linux, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Linux.
+- [Troubleshooting](../linux/troubleshoot.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
-- [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+- [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
 * [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.

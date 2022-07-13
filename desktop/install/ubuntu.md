@@ -14,7 +14,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 
 
 To install Docker Desktop successfully, you must:
- - Meet the [system requirements](../install.md#system-requirements) 
+ - Meet the [system requirements](linux-install.md#system-requirements) 
  - Have a 64-bit version of either Ubuntu Jammy Jellyfish 22.04 (LTS) or Ubuntu Impish Indri 21.10.
  Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
  - Uninstall the tech preview or beta version of Docker Desktop for Linux. Run:
@@ -46,9 +46,9 @@ $ sudo apt install gnome-terminal
 
 Recommended approach to install Docker Desktop on Ubuntu:
 
-1. Set up [Docker's package repository](../../../engine/install/ubuntu.md#set-up-the-repository). 
+1. Set up [Docker's package repository](../../engine/install/ubuntu.md#set-up-the-repository). 
 
-2. Download latest DEB package from the [release](../release-notes/index.md) page.
+2. Download latest DEB package from the [release](../release-notes.md) page.
 
 3. Install the package with apt as follows:
     
@@ -110,5 +110,5 @@ Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/conf
 
 ## Next steps
 
-- Take a look at the [Get started](../../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](../../../develop/index.md) to learn how to build new applications using Docker.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

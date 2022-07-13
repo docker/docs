@@ -52,7 +52,7 @@ WSL 2 on Windows 10 or Windows 11:
   - 4GB system RAM
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
-    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+    [Virtualization](../windows/troubleshoot.md#virtualization-must-be-enabled).
 - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
 
 </div>
@@ -72,7 +72,7 @@ Hyper-V on Windows 10:
   - 4GB system RAM
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
-    [Virtualization](troubleshoot.md#virtualization-must-be-enabled).
+    [Virtualization](../windows/troubleshoot.md#virtualization-must-be-enabled).
 
 </div>
 </div>
@@ -87,13 +87,13 @@ accounts use the same VM to build and run containers. Note that it is not possib
 
 Nested virtualization scenarios, such as running Docker Desktop on a
 VMWare or Parallels instance might work, but there are no guarantees. For
-more information, see [Running Docker Desktop in nested virtualization scenarios](troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
+more information, see [Running Docker Desktop in nested virtualization scenarios](../windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
 ### About Windows containers
 
 Looking for information on using Windows containers?
 
-* [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers)
+* [Switch between Windows and Linux containers](../windows/index.md#switch-between-windows-and-linux-containers)
   describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
 * [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
   provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
@@ -211,11 +211,11 @@ To uninstall Docker Desktop from your Windows machine:
 
 ## Where to go next
 
-* [Getting started](index.md) introduces Docker Desktop for Windows.
+* [Getting started](../windows/index.md) introduces Docker Desktop for Windows.
 * [Get started with Docker](/get-started/) is a tutorial that teaches you how to
   deploy a multi-service stack.
-* [Troubleshooting](troubleshoot.md) describes common problems, workarounds, and
+* [Troubleshooting](../windows/troubleshoot.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](../faqs/general.md) provide answers to frequently asked questions.
-* [Release notes](release-notes/index.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
+* [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 * [Back up and restore data](../backup-and-restore.md) provides instructions on backing up and restoring data related to Docker.

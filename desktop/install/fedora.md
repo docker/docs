@@ -12,7 +12,7 @@ This page contains information on how to install, launch and upgrade Docker Desk
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
-- Meet the [system requirements](../install.md#system-requirements).
+- Meet the [system requirements](linux-install.md#system-requirements).
 - Have a 64-bit version of either Fedora 35 or Fedora 36.
 
 Additionally, for a Gnome Desktop environment you must install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
@@ -27,9 +27,9 @@ $ sudo dnf install gnome-terminal
 
 To install Docker Desktop on Fedora:
 
-1. Set up [Docker's package repository](../../../engine/install/fedora.md#set-up-the-repository). 
+1. Set up [Docker's package repository](../../engine/install/fedora.md#set-up-the-repository). 
 
-2. Download latest RPM package from the [release](../release-notes/index.md) page.
+2. Download latest RPM package from the [release](../release-notes.md) page.
 
 3. Install the package with dnf as follows:
     
@@ -82,5 +82,5 @@ Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/conf
 
 ## Next steps
 
-- Take a look at the [Get started](../../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](../../../develop/index.md) to learn how to build new applications using Docker.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.
