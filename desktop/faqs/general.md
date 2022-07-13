@@ -12,9 +12,9 @@ title: Frequently asked questions
 ### What are the system requirements for Docker Desktop?
 
 For information about Docker Desktop system requirements, see:
-- [Mac system requirements](../mac/install.md#system-requirements) 
-- [Windows system requirements](../windows/install.md#system-requirements)
-- [Linux system requirements](../linux/install.md#system-requirements)
+- [Mac system requirements](../install/mac-install.md#system-requirements) 
+- [Windows system requirements](../install/windows-install.md#system-requirements)
+- [Linux system requirements](../install/linux-install.md#system-requirements)
 
 ### Where does Docker Desktop get installed on my machine?
 
@@ -42,7 +42,7 @@ cannot access features that require an active internet
 connection. Additionally, any functionality that requires you to sign won't work while using Docker Desktop offline or in air-gapped environments.
 This includes:
 
-- The in-app [Quick Start Guide](../mac/install.md#quick-start-guide)
+- The in-app [Quick Start Guide](../install/mac-install.md#quick-start-guide)
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
@@ -54,7 +54,7 @@ This includes:
   [ACI](../../cloud/aci-integration.md) and [ECS](../../cloud/ecs-integration.md)
   integrations
 - [Kubernetes](../kubernetes.md) (Images are download when you enable Kubernetes for the first time)
-- [Check for updates](../mac/install.md#updates) (manual and automatic)
+- [Check for updates](../install/mac-install.md#updates) (manual and automatic)
 - [In-app diagnostics](../mac/troubleshoot.md#diagnose-and-feedback) (including the [Self-diagnose tool](../mac/troubleshoot.md#self-diagnose-tool))
 - Tip of the week
 - Sending usage statistics

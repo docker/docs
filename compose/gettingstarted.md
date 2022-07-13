@@ -279,7 +279,7 @@ for Mac, and the general examples on how to
 >
 > * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
 ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
-requirements for [Docker Desktop for Windows](../desktop/windows/install.md) and do not
+requirements for [Docker Desktop for Windows](../desktop/install/windows-install.md) and do not
 need VirtualBox.
 {: .important}
 

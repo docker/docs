@@ -15,9 +15,9 @@ If you want to uninstall Compose and you have installed Docker Desktop, follow t
 > Note that, unless you have other Docker instances installed on that specific environment, you would be removing Docker altogether by uninstalling the Desktop.
 
 See Uninstall Docker Desktop for:
-* [Mac](../../desktop/mac/install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
-* [Windows](../../desktop/windows/install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
-* [Linux](../../desktop/linux/install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
+* [Mac](../../desktop/install/mac-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
+* [Windows](../../desktop/install/windows-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
+* [Linux](../../desktop/install/linux-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
 
 
 ### Uninstalling the Docker Compose CLI plugin
