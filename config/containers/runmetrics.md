@@ -3,8 +3,8 @@ description: Measure the behavior of running containers
 keywords: docker, metrics, CPU, memory, disk, IO, run, runtime, stats
 redirect_from:
 - /articles/runmetrics/
-- /engine/articles/run_metrics/
-- /engine/articles/runmetrics/
+- /engine/articles/run_metrics
+- /engine/articles/runmetrics
 - /engine/admin/runmetrics/
 title: Runtime metrics
 ---

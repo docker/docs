@@ -3,7 +3,7 @@ datafolder: compose-cli
 datafile: docker_compose_events
 title: docker compose events
 redirect_from:
-- /compose/reference/events/
+- /compose/reference/events
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from
