@@ -4,6 +4,7 @@ keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 redirect_from:
 - /docker-for-mac/install/
+- /desktop/mac/install/
 ---
 
 > **Update to the Docker Desktop terms**

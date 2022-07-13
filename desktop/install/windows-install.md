@@ -10,6 +10,7 @@ redirect_from:
 - /engine/installation/windows/docker-ee/
 - /install/windows/docker-ee/
 - /install/windows/ee-preview/
+- /desktop/windows/install/
 ---
 
 > **Update to the Docker Desktop terms**

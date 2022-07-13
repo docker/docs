@@ -3,6 +3,8 @@ description: Instructions for installing Docker Desktop on Ubuntu
 keywords: ubuntu, install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Ubuntu
 toc_max: 4
+redirect_from:
+- /desktop/linux/install/ubuntu/
 ---
 
 
