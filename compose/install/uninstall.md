@@ -5,19 +5,22 @@ keywords: compose, orchestration, uninstall, uninstallation, docker, documentati
 title: Uninstall Docker Compose
 ---
 
+Uninstalling Docker Compose depends on the method you have used to install Docker Compose. 
+On this page you can find specific instructions to uninstall Docker Compose.
+
 
 ### Uninstalling Docker Desktop
 
-If you want to uninstall Compose and you have installed Docker Desktop, follow the corresponding link bellow to get instructions on how to remove Docker Desktop. 
-> Please note that, unless you have other Docker instances installed in that specific environment, you would be removing Docker altogether by uninstalling the Desktop.
+If you want to uninstall Compose and you have installed Docker Desktop, follow the corresponding link bellow to get instructions on how to remove Docker Desktop.
+> Note that, unless you have other Docker instances installed on that specific environment, you would be removing Docker altogether by uninstalling the Desktop.
 
 See Uninstall Docker Desktop for:
-* [Mac](../../desktop/mac/install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
-* [Windows](../../desktop/windows/install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
-* [Linux](../../desktop/linux/install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
+* [Mac](../../desktop/install/mac-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
+* [Windows](../../desktop/install/windows-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
+* [Linux](../../desktop/install/linux-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}
 
 
-### Uninstalling Compose CLI plugin
+### Uninstalling the Docker Compose CLI plugin
 
 To remove the Compose CLI plugin, run:
 
@@ -44,15 +47,15 @@ You can also use:
 
 {% raw %}	
 ```console
-docker info --format '{{range .ClientInfo.Plugins}}{{if eq .Name "compose"}}{{.Path}}{{end}}{{end}}'
+$ docker info --format '{{range .ClientInfo.Plugins}}{{if eq .Name "compose"}}{{.Path}}{{end}}{{end}}'
 ```
 {% endraw %}
 
 to inspect the location of the Compose CLI plugin.
 
 
-> Got a "Permission denied" error?
+> Got a **Permission denied** error?
 >
-> If you get a "Permission denied" error using either of the above
+> If you get a **Permission denied** error using either of the above
 > methods, you do not have the permissions allowing you to remove
 > `docker-compose`. To force the removal, prepend `sudo` to either of the above instructions and run it again.

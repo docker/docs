@@ -99,6 +99,8 @@ Docker ID: |
   Your free Docker ID grants you access to Docker Hub repositories and some beta programs. All you need is an email address.
 Docker Official Images: |
   The Docker Official Images are a curated set of Docker repositories hosted on [Docker Hub](#docker-hub). Docker, Inc. sponsors a dedicated team that is responsible for reviewing and publishing all content in the Docker Official Images. This team works in collaboration with upstream software maintainers, security experts, and the broader Docker community.
+Docker Open Source Images: |
+  Docker Open Source Images are published and maintained by organizations that are a member of the Docker Open Source Program.
 Docker Personal: |
   Docker Personal is a [Docker subscription](#docker-subscription). With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components - including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, Docker Scan, and more.
 Docker Pro: |
@@ -108,7 +110,7 @@ Docker subscription: |
 Docker Team: |
   Docker Team is a [Docker subscription](#docker-subscription). Docker Team offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 Docker Trusted Content Program: |
-  The Docker Trusted Content Program verifies content through four programs, [Docker Official Images](#docker-official-images), [Docker Verified Publisher Images](#docker-verified-publisher-images), Docker Open Source Images, and Custom Official Images.
+  The Docker Trusted Content Program verifies content through four programs, [Docker Official Images](#docker-official-images), [Docker Verified Publisher Images](#docker-verified-publisher-images), [Docker Open Source Images](#docker-open-source-images), and Custom Official Images.
 Docker Verified Publisher Images: |
   Docker Verified Publisher Images are confirmed by Docker to be from a trusted software publishers that are partners in the Verified Publisher program. Docker Verified Publisher Images are identified by the Verified Publisher badge included on the Docker Hub repositories.
 Dockerfile: |
@@ -172,7 +174,7 @@ libcontainer: |
 libnetwork: |
   libnetwork provides a native Go implementation for creating and managing container network namespaces and other network resources. It manages the networking lifecycle of the container performing additional operations after the container is created.
 member: |
-  The people who have recieved and accepted invitations to join an [organization](#organization).
+  The people who have received and accepted invitations to join an [organization](#organization). Member can also refer to members of a [team](#team) within an organization.
 namespace: |
   A [Linux namespace](https://man7.org/linux/man-pages/man7/namespaces.7.html)
   is a Linux kernel feature that isolates and virtualizes system resources. Processes which are restricted to a namespace can only interact with resources or processes that are part of the same namespace. Namespaces
@@ -187,7 +189,7 @@ node: |
 organization: |
   An organization is a collection of teams and repositories that can be managed together. Docker users become members of an organization when they are assigned to at least one team in the organization.
 organization name: |
-  The organization name, sometimes referred to as the Organization Namespace or the Org ID, is the unique identifier of a Docker organization.
+  The organization name, sometimes referred to as the organization namespace or the org ID, is the unique identifier of a Docker organization.
 overlay network driver: |
   Overlay network driver provides out of the box multi-host network connectivity
   for Docker containers in a cluster.
@@ -220,7 +222,7 @@ SSH: |
   SSH (secure shell) is a secure protocol for accessing remote machines and applications.
   It provides authentication and encrypts data communication over insecure networks such as the Internet. SSH uses public/private key pairs to authenticate logins.
 seats: |
-  The number of seats refers to the number of planned users within an [organization](#organization).
+  The number of seats refers to the number of planned members within an [organization](#organization).
 service: |
   A [service](/engine/swarm/how-swarm-mode-works/services/) is the definition of how you want to run your application containers in a swarm. At the most basic level, a service  defines which container image to run in the swarm and which commands to run in the container. For orchestration purposes, the service defines the "desired state", meaning how many containers to run as tasks and constraints for deploying the containers.
 

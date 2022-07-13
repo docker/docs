@@ -1,17 +1,10 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: Extension
-
-## Table of contents
-
-### Properties
-
-- [vm](Extension.md#vm)
-- [host](Extension.md#host)
 
 ## Properties
 

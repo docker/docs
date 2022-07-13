@@ -16,14 +16,33 @@ body {
     padding: 0;
 }
 
-api-logo {
-  background-color: $bg-header;
-  height: 60px;
-  text-align: left !important;
+.menu-content {
+  > div:first-child {
+    background-color: $bg-header;
+    height: 60px;
+    text-align: left !important;
 
-  img {
-    width: 160px !important;
-    margin: 15px 20px;
+    img {
+      width: 160px !important;
+      margin: 15px 20px;
+    }
+  }
+
+  label.-depth0 span, label.-depth1 span {
+    font-family: $font !important;
+  }
+
+  label.-depth0 {
+    text-transform: none;
+    color: $body-text !important;
+  }
+
+  label.-depth1 span {
+    color: $primary-links !important;
+  }
+
+  ul + div {
+    display: none;
   }
 }
 
@@ -37,16 +56,12 @@ redoc {
     color: inherit !important;
   }
 
-  p, a, .menu-item-title {
+  p, a {
     font-family: $font !important;
   }
 
-  a, .menu-item-title {
+  a {
     color: $primary-links !important;
-  }
-
-  .menu-item-title {
-    text-transform: none;
   }
 
   // Disable request-type badges, see https://github.com/Rebilly/ReDoc/issues/61

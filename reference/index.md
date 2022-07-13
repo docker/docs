@@ -30,7 +30,8 @@ various APIs, CLIs, and file formats.
 |:------------------------------------------------------|:---------------------------------------------------------------------------------------|
 | [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a daemon                      |
 | [Registry API](/registry/spec/api/)                   | Facilitates distribution of images to the engine                                       |
-| [Docker Hub API](/docker-hub/api/latest/)             | API to interact with Docker Hub                                                        | 
+| [Docker Hub API](/docker-hub/api/latest/)             | API to interact with Docker Hub                                                        |
+| [DVP Data API](/docker-hub/api/dvp/)                  | API for Docker Verified Publishers to fetch analytics data                             | 
 
 ## Drivers and specifications
 

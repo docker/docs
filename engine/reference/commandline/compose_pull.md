@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_pull
 title: docker compose pull
+redirect_from:
+- /compose/reference/pull/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

@@ -1,18 +1,12 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: Dialog
 
 Allows opening native dialog boxes.
-
-## Table of contents
-
-### Methods
-
-- [showOpenDialog](Dialog.md#showopendialog)
 
 ## Methods
 

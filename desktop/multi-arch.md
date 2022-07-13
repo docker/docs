@@ -153,9 +153,9 @@ Manifests:
 ```
 
 The image is now available on Docker Hub with the tag `username/demo:latest`. You
-can use this image to run a container on Intel laptops, Amazon EC2 A1 instances,
+can use this image to run a container on Intel laptops, Amazon EC2 Graviton instances,
 Raspberry Pis, and on other architectures. Docker pulls the correct image for the
-current architecture, so Raspberry Pis run the 32-bit Arm version and EC2 A1
+current architecture, so Raspberry Pis run the 32-bit Arm version and EC2 Graviton
 instances run 64-bit Arm. The SHA tags identify a fully qualified image variant.
 You can also run images targeted for a different architecture on Docker Desktop.
 

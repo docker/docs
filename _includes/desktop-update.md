@@ -2,7 +2,7 @@
 
 When an update is available, Docker Desktop displays an icon on the Docker menu to indicate the availability of a newer version. Additionally, the **Software Updates** section in **Settings** (**Preferences** on Mac) also notifies you of any updates available to Docker Desktop. You can choose to download the update right away, or click the **Release Notes** option to learn what's included in the updated version.
 
-Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. For more information, see [Software Updates](../#software-updates).
+Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro..
 
 > **Docker Subscription Service Agreement**
 >

@@ -1,31 +1,10 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: BackendV0
-
-## Table of contents
-
-### Container Methods
-
-- [execInContainer](BackendV0.md#execincontainer)
-
-### HTTP Methods
-
-- [get](BackendV0.md#get)
-- [post](BackendV0.md#post)
-- [put](BackendV0.md#put)
-- [patch](BackendV0.md#patch)
-- [delete](BackendV0.md#delete)
-- [head](BackendV0.md#head)
-- [request](BackendV0.md#request)
-
-### VM Methods
-
-- [execInVMExtension](BackendV0.md#execinvmextension)
-- [spawnInVMExtension](BackendV0.md#spawninvmextension)
 
 ## Container Methods
 
@@ -36,9 +15,9 @@ keywords: Docker, extensions, sdk, API, reference
 Executes a command inside a container.
 
 ```typescript
- const output = await window.ddClient.backend.execInContainer(container, cmd);
+const output = await window.ddClient.backend.execInContainer(container, cmd);
 
- console.log(output);
+console.log(output);
 ```
 
 **`deprecated`** :warning: It will be removed in a future version.
@@ -67,7 +46,7 @@ Performs an HTTP GET request to a backend service.
 ```typescript
 window.ddClient.backend
  .get("/some/service")
- .then((value: any) => console.log(value)
+ .then((value: any) => console.log(value));
 ```
 
 **`deprecated`** :warning: It will be removed in a future version. Use [HttpService.get](HttpService.md#get) instead.
@@ -91,7 +70,7 @@ ___
 Performs an HTTP POST request to a backend service.
 
 ```typescript
- window.ddClient.backend
+window.ddClient.backend
  .post("/some/service", { ... })
  .then((value: any) => console.log(value));
 ```
@@ -118,7 +97,7 @@ ___
 Performs an HTTP PUT request to a backend service.
 
 ```typescript
- window.ddClient.backend
+window.ddClient.backend
  .put("/some/service", { ... })
  .then((value: any) => console.log(value));
 ```
@@ -145,7 +124,7 @@ ___
 Performs an HTTP PATCH request to a backend service.
 
 ```typescript
- window.ddClient.backend
+window.ddClient.backend
  .patch("/some/service", { ... })
  .then((value: any) => console.log(value));
 ```
@@ -172,7 +151,7 @@ ___
 Performs an HTTP DELETE request to a backend service.
 
 ```typescript
- window.ddClient.backend
+window.ddClient.backend
  .delete("/some/service")
  .then((value: any) => console.log(value));
 ```
@@ -198,7 +177,7 @@ ___
 Performs an HTTP HEAD request to a backend service.
 
 ```typescript
- window.ddClient.backend
+window.ddClient.backend
  .head("/some/service")
  .then((value: any) => console.log(value));
 ```
@@ -224,7 +203,7 @@ ___
 Performs an HTTP request to a backend service.
 
 ```typescript
- window.ddClient.backend
+window.ddClient.backend
  .request({ url: "/url", method: "GET", headers: { 'header-key': 'header-value' }, data: { ... }})
  .then((value: any) => console.log(value));
 ```
@@ -253,11 +232,11 @@ Executes a command inside the backend container.
 If your extensions ships with additional binaries that should be run inside the backend container you can use the `execInVMExtension` function.
 
 ```typescript
- const output = await window.ddClient.backend.execInVMExtension(
-   `cliShippedInTheVm xxx`
- );
+const output = await window.ddClient.backend.execInVMExtension(
+  `cliShippedInTheVm xxx`
+);
 
- console.log(output);
+console.log(output);
 ```
 
 **`deprecated`** :warning: It will be removed in a future version. Use [ExtensionCli.exec](ExtensionCli.md#exec) instead.

@@ -6,9 +6,9 @@ title: Docker Desktop for Linux user manual
 
 Welcome to Docker Desktop! The Docker Desktop for Linux user manual provides information on how to configure and manage your Docker Desktop settings.
 
-Docker Desktop is an easy-to-install application that enables you to build and share containerized applications and microservices. 
+Docker Desktop is an easy-to-install application that enables you to build and share containerized applications and microservices.
 
-For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
+For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](../install/linux-install.md).
 
 ## Settings
 
@@ -234,15 +234,6 @@ Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docke
 > **Note**
 >
 > When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
-
-## Give feedback and get help
-
-To report bugs or problems, log on to Docker Desktop [for Linux issues on
-GitHub](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"},
-where you can review community reported issues, and file new ones.  See
-[Logs and Troubleshooting](troubleshoot.md) for more details.
-
-For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
 
 ## Where to go next
 
