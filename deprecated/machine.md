@@ -2,7 +2,9 @@
 description: Docker Machine
 keywords: docker, machine
 title: Docker Machine
+redirect_to: /desktop/
 redirect_from:
+- /machine/
 - /machine/overview/
 - /machine/AVAILABLE_DRIVER_PLUGINS/
 - /machine/DRIVER_SPEC/

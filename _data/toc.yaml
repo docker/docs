@@ -1137,10 +1137,26 @@ manuals:
   section:
     - path: /desktop/
       title: Overview
+    - sectiontitle: Install Docker Desktop
+      section:
+       - path: /desktop/install/mac-install/
+         title: Install on Mac
+       - path: /desktop/install/windows-install/
+         title: Install on Windows
+       - path: /desktop/install/linux-install/
+         title: Insall on Linux
+       - sectiontitle: Installation per Linux distro
+         section:
+            - path: /desktop/install/debian/
+              title: Install on Debian
+            - path: /desktop/install/fedora/
+              title: Install on Fedora
+            - path: /desktop/install/ubuntu/
+              title: Install on Ubuntu
+            - path: /desktop/install/archlinux/
+              title: Install on Arch
     - sectiontitle: Mac
       section:
-        - path: /desktop/mac/install/
-          title: Install Docker Desktop for Mac
         - path: /desktop/mac/
           title: User manual
         - path: /desktop/mac/troubleshoot/
@@ -1151,8 +1167,6 @@ manuals:
           title: Privileged Helper
     - sectiontitle: Windows
       section:
-        - path: /desktop/windows/install/
-          title: Install Docker Desktop for Windows
         - path: /desktop/windows/
           title: User manual
         - path: /desktop/windows/troubleshoot/
@@ -1161,18 +1175,6 @@ manuals:
           title: Docker Desktop WSL 2 backend
     - sectiontitle: Linux
       section:
-        - path: /desktop/linux/install/
-          title: Install Docker Desktop for Linux
-        - sectiontitle: Installation per distro
-          section:
-            - path: /desktop/linux/install/debian/
-              title: Install on Debian
-            - path: /desktop/linux/install/fedora/
-              title: Install on Fedora
-            - path: /desktop/linux/install/ubuntu/
-              title: Install on Ubuntu
-            - path: /desktop/linux/install/archlinux/
-              title: Install on Arch
         - path: /desktop/linux/
           title: User manual
         - path: /desktop/linux/troubleshoot/
@@ -1588,11 +1590,3 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
-- sectiontitle: Superseded products and tools
-  section:
-  - path: /machine/
-    title: Docker Machine (deprecated)
-  - path: /toolbox/
-    title: Docker Toolbox (deprecated)
-  - path: /kitematic/
-    title: Kitematic (deprecated)

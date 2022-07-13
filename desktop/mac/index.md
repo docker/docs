@@ -21,7 +21,7 @@ title: Docker Desktop for Mac user manual
 
 Welcome to Docker Desktop! The Docker Desktop for Mac user manual provides information on how to configure and manage your Docker Desktop settings.
 
-For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
+For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](../install/mac-install.md).
 
 ## Preferences
 

@@ -11,7 +11,7 @@ redirect_from:
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
 For information about Stable releases, see the [Stable release notes](../windows/release-notes/index.md). For Docker Desktop system requirements, see
-[What to know before you install](../windows/install.md#system-requirements).
+[What to know before you install](../install/windows-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
@@ -2347,7 +2347,7 @@ Unreleased. See Beta 23 for changes.
 
 **New**
 
-* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](../windows/install.md).
+* Docker for Windows is now available from two channels: **stable** and **beta**. New features and bug fixes go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see [Install Docker Desktop on Windows](../install/windows-install.md).
 
 * Removed the docker host name. Containers with exported ports are reachable via localhost.
 

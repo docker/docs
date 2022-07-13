@@ -3,6 +3,8 @@ description: Instructions for installing Docker Desktop on Debian
 keywords: debian, install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Debian
 toc_max: 4
+redirect_from:
+- /desktop/linux/install/debian/
 ---
 
 This page contains information on how to install, launch, and upgrade Docker Desktop on a Debian distribution.
@@ -10,7 +12,7 @@ This page contains information on how to install, launch, and upgrade Docker Des
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
- - Meet the [system requirements](../install.md#system-requirements). 
+ - Meet the [system requirements](linux-install.md#system-requirements). 
  - Have a 64-bit version of Debian 11.
  - Uninstall the tech preview or beta version of Docker Desktop for Linux. Run:
 
@@ -45,9 +47,9 @@ $ sudo apt install gnome-terminal
 
 Recommended approach to install Docker Desktop on Debian:
 
-1. Set up [Docker's package repository](../../../engine/install/debian.md#set-up-the-repository). 
+1. Set up [Docker's package repository](../../engine/install/debian.md#set-up-the-repository). 
 
-2. Download latest DEB package from the [release](../release-notes/index.md) page.
+2. Download latest DEB package from the [release](../release-notes.md) page.
 
 3. Install the package with apt as follows:
     
@@ -109,5 +111,5 @@ Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/conf
 
 ## Next steps
 
-- Take a look at the [Get started](../../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](../../../develop/index.md) to learn how to build new applications using Docker.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.
