@@ -3,10 +3,12 @@ description: Docker Desktop for Windows and Docker Toolbox
 keywords: windows, alpha, beta, toolbox, docker-machine, tutorial
 sitemap: false
 title: Docker Toolbox
+redirect_to: /desktop/
 redirect_from:
 - /docker-for-mac/docker-toolbox/
 - /docker-for-windows/docker-toolbox/
 - /mackit/docker-toolbox/
+- /toolbox/
 - /toolbox/faqs/
 - /toolbox/faqs/troubleshoot/
 - /toolbox/overview/
