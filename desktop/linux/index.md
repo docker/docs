@@ -8,7 +8,7 @@ Welcome to Docker Desktop! The Docker Desktop for Linux user manual provides inf
 
 Docker Desktop is an easy-to-install application that enables you to build and share containerized applications and microservices. 
 
-For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
+For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](../install/linux-install.md).
 
 ## Settings
 
