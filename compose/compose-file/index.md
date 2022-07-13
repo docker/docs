@@ -2,7 +2,7 @@
 description: Compose file reference
 keywords: fig, composition, compose, docker
 redirect_from:
-- /compose/yaml
+- /compose/yaml/
 - /compose/compose-file/compose-file-v1/
 title: Compose specification
 toc_max: 4
