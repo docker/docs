@@ -70,7 +70,6 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 1. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to
     the Applications folder.
 
-      ![Install Docker app](images/docker-app-drag.png)
 
 2. Double-click `Docker.app` in the Applications folder to start Docker. In the example below, the Applications folder is in "grid" view mode.
 
