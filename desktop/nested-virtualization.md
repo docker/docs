@@ -3,13 +3,13 @@ description: Instructions on how to enable nested virtualization
 keywords: nested virtualization, Docker Desktop
 title: Enable nested virtualization
 ---
->Note: 
+>Note 
 >
 >This is work in progress. The steps haven’t been validated yet in our test environment.
 {: .important}
 
 
-In general, Docker recommends running Docker Desktop natively on either Mac, Linux, or Windows. However, Docker Desktop can run inside a virtual machine provided the virtual desktop is properly configured. 
+In general, Docker recommends running Docker Desktop natively on either Mac, Linux, or Windows. However, Docker Desktop can run inside a virtual desktop provided the virtual desktop is properly configured. 
 
 To run Docker Desktop in a virtual desktop environment, it is essential nested virtualization is enabled on the virtual machine that provides the virtual desktop. This is because, under the hood, Docker Desktop is using a Linux VM in which it runs Docker engine and the containers.
 
