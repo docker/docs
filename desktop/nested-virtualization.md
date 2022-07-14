@@ -17,9 +17,7 @@ To run Docker Desktop in a virtual desktop environment, it is essential nested v
 
 The support available from Docker extends to installing and running Docker Desktop inside the VM, once the nested virtualization is set up correctly. For more information on Docker Desktop support, see [Get support](support.md).
 
-For troubleshooting problems and intermittent failures that are outside of Docker's control, you should contact your hypervisor vendor. Each hypervisor vendor offers diferent levels of support. For example, Microsoft supports running nested Hyper-V both on-prem and on Azure, with some version constraints. This may not not be the case for VMWare ESXi or Citrix Hypervisor.
-
-The level of support available for nested virtualization inside a host VM is dependent on the hypervisor that runs the host VM. F
+For troubleshooting problems and intermittent failures that are outside of Docker's control, you should contact your hypervisor vendor. Each hypervisor vendor offers different levels of support. For example, Microsoft supports running nested Hyper-V both on-prem and on Azure, with some version constraints. This may not not be the case for VMWare ESXi or Citrix Hypervisor.
 
 ## Enable nested virtualization
 
