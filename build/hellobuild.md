@@ -45,7 +45,9 @@ def hello():
 
 Don’t worry about understanding the full example if you’re not familiar with Python - it’s just a simple web server that will contain a single page that says “Hello World”.
 
-> **Note:** If you test the example, make sure to copy over the indentation as well!
+> **Note** 
+>
+> If you test the example, make sure to copy over the indentation as well!
 
 **Sample B**
 <br/>Here’s a Dockerfile that Docker Build can use to create an image for our application:
@@ -72,7 +74,9 @@ CMD flask run --host 0.0.0.0 --port 8000
     This is our syntax directive. It pins the exact version of the dockerfile syntax we’re using. As a [best practice](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/), this should be the very first line in all our Dockerfiles as it informs Buildkit the right version of the Dockerfile to use. 
     <br/>See also [Syntax](../engine/reference/builder/#syntax).
     
-    > **Note:** Initiated by a "#" like regular comments, this line is treated as a directive when you are using BuildKit (default), otherwise it is ignored.
+    > **Note** 
+    > 
+    > Initiated by a "#" like regular comments, this line is treated as a directive when you are using BuildKit (default), otherwise it is ignored.
 
 
 * `FROM ubuntu:22.04`
