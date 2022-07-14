@@ -8,7 +8,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](images/whale-x.png){: .inline} and then **Settings** 
+- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Settings** 
 - Select the **Settings** icon from the Docker Dashboard. 
 
 ## General
@@ -19,7 +19,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Expose daemon on tcp://localhost:2375 without TLS**: Check this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 
-- **Use the WSL 2 based engine**. WSL 2 provides better performance than the legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](wsl.md).
+- **Use the WSL 2 based engine**. WSL 2 provides better performance than the legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
 
 - **Send usage statistics**: By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and

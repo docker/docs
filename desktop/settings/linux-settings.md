@@ -8,7 +8,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](images/whale-x.png){: .inline} and then **Settings** 
+- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Settings** 
 - Select the **Settings** icon from the Docker Dashboard. 
 
 ## General

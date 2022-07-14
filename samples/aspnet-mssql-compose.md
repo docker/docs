@@ -176,8 +176,8 @@ configure this app to use our SQL Server database, and then create a
 
 1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
-    [Docker Desktop for Mac](../desktop/mac/index.md#advanced) and
-    [Docker Desktop for Windows](../desktop/windows/index.md#advanced).
+    [Docker Desktop for Mac](../desktop/settings/mac-settings.md#advanced) and
+    [Docker Desktop for Windows](../desktop/settings/windows-settings.md#advanced).
     This is necessary to run the SQL Server on Linux container.
 
 1.  Run the `docker-compose up` command. After a few seconds, you should be able

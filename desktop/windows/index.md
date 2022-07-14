@@ -53,10 +53,9 @@ For more information on Windows containers, refer to the following documentation
 > When you switch to Windows containers, the Settings dialog only shows those tabs that are active and apply to your Windows containers:
 >
 
-  * [General](#general)
-  * [Proxies](#proxies)
-  * [Daemon](#docker-engine)
-  * [Reset](#reset)
+  * [General](../settings/windows-settings.md#general)
+  * [Proxies](../settings/windows-settings.md#proxies)
+  * [Daemon](../settings/windows-settings.md#docker-engine)
 
 If you set proxies or daemon configuration in Windows containers mode, these
 apply only on Windows containers. If you switch back to Linux containers,
@@ -146,7 +145,7 @@ You need to restart Docker Desktop after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 
 The registry cannot be listed as an _insecure registry_ (see
-[Docker Daemon](#docker-engine)). Docker Desktop ignores
+[Docker Daemon](../settings/windows-settings.md#docker-engine)). Docker Desktop ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
 produce error messages on the command line, as well as on the registry.
