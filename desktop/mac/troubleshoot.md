@@ -335,7 +335,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](../inst
   - Magento
   - Zend Framework
   - PHP applications that use [Composer](https://getcomposer.org) to install
-    dependencies in a ```vendor``` folder<br><br>
+    dependencies in a `vendor` folder
 
   As a workaround for this behavior, you can put vendor or third-party library
   directories in Docker volumes, perform temporary file system operations
@@ -343,4 +343,3 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](../inst
   synchronize between container directories and bind-mounted directories. We are
   actively working on performance improvements using a number of different
   techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
-

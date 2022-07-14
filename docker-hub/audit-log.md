@@ -35,13 +35,9 @@ By default, all activities that occur at organization and repository levels are 
 
 ![Activities list](images/activity-list.png){:width="600px"}
 
-<br />
-
 > **Note**
 >
 > Activities created by the Docker Support team as part of resolving customer issues appear in the audit log as **dockersupport**.
-
-<br />
 
 Click the **All Activities** drop-down list to view activities that are specific to an organization or a repository. After choosing **Organization** or **Repository**, you can further refine the results using the **All Actions** drop-down list. If you select the **Activities** tab from the **Repository** view, you can only filter repository-level activities.
 
