@@ -1144,7 +1144,7 @@ manuals:
        - path: /desktop/install/windows-install/
          title: Install on Windows
        - path: /desktop/install/linux-install/
-         title: Insall on Linux
+         title: Install on Linux
        - sectiontitle: Installation per Linux distro
          section:
             - path: /desktop/install/debian/
