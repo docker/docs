@@ -8,10 +8,9 @@ Docker Build is one of Docker Engine’s most used features. Whenever you are cr
 
 Engine uses a client-server architecture and is composed of multiple components and tools. The most common method of executing a build is by issuing a docker build command from the Docker CLI. The CLI sends the request to Docker Engine which, in turn, executes your build.
 
-There are now two components in Engine that can be used to create the build. Starting with the 18.09 release, Engine is shipped with BuildKit, a new component for executing your builds and the one that is now used by default.
+There are now two components in Engine that can be used to create the build. Starting with the 18.09 release, Engine is shipped with BuildKit, the new component for executing your builds by default.
 
-The previous component, which we are calling the Legacy Builder, still exists in Engine to cover some functionality not yet supported by BuildKit.
-With BuildKit, a new client, Docker Buildx, becomes available as a CLI plugin. 
-Docker Buildx extends the docker build command - namely through the additional docker buildx build command - and fully supports the new features BuildKit offers. 
+With BuildKit, the new client Docker Buildx, becomes available as a CLI plugin. 
+<br/>Docker Buildx extends the docker build command - namely through the additional docker buildx build command - and fully supports the new features BuildKit offers.
 
-BuildKit is the backend evolution from the Legacy Builder, it comes with new and much improved functionality that can be powerful tools in helping improve performance of your builds, reusability of your Dockerfiles and introduces support for complex scenarios.
+BuildKit is the backend evolution from the Legacy Builder, it comes with new and much improved functionality that can be powerful tools for improving your builds' performance or reusability of your Dockerfiles and it also introduces support for complex scenarios.
