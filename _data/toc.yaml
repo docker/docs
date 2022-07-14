@@ -1181,6 +1181,14 @@ manuals:
           title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
+    - sectiontitle: Change settings
+      section:
+        - path: /desktop/settings/mac-settings/
+          title: On Mac
+        - path: /desktop/settings/windows-settings/
+          title: On Windows
+        - path: /desktop/settings/linux-settings/
+          title: On Linux
     - path: /desktop/networking/
       title: Explore networking features
     - sectiontitle: Dev Environments (Beta)
