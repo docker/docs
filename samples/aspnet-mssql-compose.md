@@ -27,8 +27,8 @@ configure this app to use our SQL Server database, and then create a
 1.  Create a new directory for your application.
 
     This directory is the context of your docker-compose project. For
-    [Docker Desktop for Windows](../desktop/windows/index.md#file-sharing) and
-    [Docker Desktop for Mac](../desktop/mac/index.md#file-sharing), you
+    [Docker Desktop for Windows](../desktop/settings/windows-settings.md#file-sharing) and
+    [Docker Desktop for Mac](../desktop/settings/mac-settings.md#file-sharing), you
     need to set up file sharing for the volume that you need to map.
 
 1.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a

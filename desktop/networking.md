@@ -46,9 +46,9 @@ syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 ### HTTP/HTTPS Proxy Support
 
 See:
-- [Proxies on Linux](linux/index.md#proxies)
-- [Proxies on Mac](mac/index.md#proxies)
-- [Proxies on Windows](windows/index.md#proxies)
+- [Proxies on Linux](settings/linux-settings.md#proxies)
+- [Proxies on Mac](settings/mac-settings.md#proxies)
+- [Proxies on Windows](settings/windows-settings.md#proxies)
 
 ## Features for Mac and Linux
 
