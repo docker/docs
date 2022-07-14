@@ -142,6 +142,8 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 
 4. In the Security section of your Docker organization, click **Verify** next to the domain you want to verify after 72 hours.
 
+Once you've verified your domain, you can move forward to test your configuration and enforce SSO, or you can [Configure your System Cross-domain Identity Management (SCIM)](../docker-hub/scim.md).
+
 ## Test your SSO configuration
 
 After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you log in to Docker Hub using an incognito browser. Login using your domain email address and IdP password.  You will then get redirected to your identity provider’s login page to authenticate.

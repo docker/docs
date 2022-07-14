@@ -2315,7 +2315,7 @@ volumes:
 >
 > External volumes that do not exist _are created_ if you use [docker stack deploy](#deploy) 
 > to launch the app in [swarm mode](../../engine/swarm/index.md) (instead of
-> [docker compose up](../reference/up.md)). In swarm mode, a volume is
+> [docker compose up](../../engine/reference/commandline/compose_up.md)). In swarm mode, a volume is
 > automatically created when it is defined by a service. As service tasks are
 > scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
 > creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).

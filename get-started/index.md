@@ -71,7 +71,7 @@ This page contains step-by-step instructions on how to get started with Docker. 
 - Build and run an image as a container
 - Share images using Docker Hub
 - Deploy Docker applications using multiple containers with a database
-- Running applications using Docker Compose
+- Run applications using Docker Compose
 
 In addition, you'll also learn about the best practices for building images, including instructions on how to scan your images for security vulnerabilities.
 
@@ -79,7 +79,7 @@ If you are looking for information on how to containerize an application using y
 
 We also recommend the video walkthrough from DockerCon 2020.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Download and install Docker
 
@@ -89,12 +89,12 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 [Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
-[Linux](../desktop/linux/install.md){: .button .primary-btn}
+[Linux](../desktop/install/linux-install.md){: .button .primary-btn}
 
 For Docker Desktop installation instructions, see:
- - [Install Docker Desktop on Mac](../desktop/mac/install.md)
- - [Install Docker Desktop on Windows](../desktop/windows/install.md)
- - [Install Docker Desktop on Linux](../desktop/linux/install.md)
+ - [Install Docker Desktop on Mac](../desktop/install/mac-install.md)
+ - [Install Docker Desktop on Windows](../desktop/install/windows-install.md)
+ - [Install Docker Desktop on Linux](../desktop/install/linux-install.md)
 
 ## Start the tutorial
 
@@ -122,9 +122,9 @@ You'll notice a few flags being used. Here's some more info on them:
 ## The Docker Dashboard
 
 Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows.
+you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac, Windows, and Linux.
 It gives you quick access to container logs, lets you get a shell inside the container, and lets you
-easily manage container lifecycle (stop, remove, etc.).
+easily manage container lifecycles (stop, remove, etc.).
 
 To access the dashboard, follow the instructions in the
 [Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
@@ -153,7 +153,7 @@ capabilities approachable and easy to use. To summarize, a container:
 > does not go into networking, using images for the filesystem, and other advanced topics,
 > it gives a _fantastic_ deep dive into how things are working.
 >
-> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+> <iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is a container image?
 

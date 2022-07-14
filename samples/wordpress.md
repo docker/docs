@@ -38,37 +38,36 @@ Compose to set up and run WordPress. Before starting, make sure you have
     mounts for data persistence:
 
     ```yaml
-    version: "{{ site.compose_file_v3 }}"
-    
     services:
       db:
-        image: mysql:5.7
+        # We use a mariadb image which supports both amd64 & arm64 architecture
+        image: mariadb:10.6.4-focal
+        # If you really want to use MySQL, uncomment the following line
+        #image: mysql:8.0.27
+        command: '--default-authentication-plugin=mysql_native_password'
         volumes:
           - db_data:/var/lib/mysql
         restart: always
         environment:
-          MYSQL_ROOT_PASSWORD: somewordpress
-          MYSQL_DATABASE: wordpress
-          MYSQL_USER: wordpress
-          MYSQL_PASSWORD: wordpress
-    
+          - MYSQL_ROOT_PASSWORD=somewordpress
+          - MYSQL_DATABASE=wordpress
+          - MYSQL_USER=wordpress
+          - MYSQL_PASSWORD=wordpress
+        expose:
+          - 3306
+          - 33060
       wordpress:
-        depends_on:
-          - db
         image: wordpress:latest
-        volumes:
-          - wordpress_data:/var/www/html
         ports:
-          - "8000:80"
+          - 80:80
         restart: always
         environment:
-          WORDPRESS_DB_HOST: db
-          WORDPRESS_DB_USER: wordpress
-          WORDPRESS_DB_PASSWORD: wordpress
-          WORDPRESS_DB_NAME: wordpress
+          - WORDPRESS_DB_HOST=db
+          - WORDPRESS_DB_USER=wordpress
+          - WORDPRESS_DB_PASSWORD=wordpress
+          - WORDPRESS_DB_NAME=wordpress
     volumes:
-      db_data: {}
-      wordpress_data: {}
+      db_data:
     ```
 
    > **Notes**:
@@ -81,14 +80,14 @@ Compose to set up and run WordPress. Before starting, make sure you have
 
 ### Build the project
 
-Now, run `docker-compose up -d` from your project directory.
+Now, run `docker compose up -d` from your project directory.
 
-This runs [`docker-compose up`](../compose/reference/up.md) in detached mode, pulls
+This runs [`docker compose up`](../engine/reference/commandline/compose_up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 
 ```console
-$ docker-compose up -d
+$ docker compose up -d
 
 Creating network "my_wordpress_default" with the default driver
 Pulling db (mysql:5.7)...
@@ -135,10 +134,10 @@ browser.
 
 ### Shutdown and cleanup
 
-The command [`docker-compose down`](../compose/reference/down.md) removes the
+The command [`docker compose down`](../engine/reference/commandline/compose_down.md) removes the
 containers and default network, but preserves your WordPress database.
 
-The command `docker-compose down --volumes` removes the containers, default
+The command `docker compose down --volumes` removes the containers, default
 network, and the WordPress database.
 
 ## More Compose documentation

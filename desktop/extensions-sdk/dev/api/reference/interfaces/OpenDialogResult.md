@@ -1,18 +1,10 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: OpenDialogResult
-
-## Table of contents
-
-### Properties
-
-- [canceled](OpenDialogResult.md#canceled)
-- [filePaths](OpenDialogResult.md#filepaths)
-- [bookmarks](OpenDialogResult.md#bookmarks)
 
 ## Properties
 

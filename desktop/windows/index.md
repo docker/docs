@@ -18,7 +18,7 @@ title: Docker Desktop for Windows user manual
 
 Welcome to Docker Desktop! The Docker Desktop for Windows user manual provides information on how to configure and manage your Docker Desktop settings.
 
-For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](install.md).
+For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](../install/windows-install.md).
 
 ## Settings
 
@@ -142,26 +142,27 @@ containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
 #### Proxies
 
-Docker Desktop detects the HTTP/HTTPS proxy settings and
-automatically propagates these to Docker. For example, if you set your proxy
-settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 
-Your proxy settings, however, will not be propagated into the containers you start.
-If you wish to set the proxy settings for your containers, you need to define
-environment variables for them, just like you would do on Linux, for example:
+HTTP/HTTPS proxies can be used when
 
-```ps
-> docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
+- Logging in to Docker
+- Pulling or pushing images
+- Fetching artifacts during image builds
+- Containers interact with the external network
+- Scanning images.
 
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=b7edf988b2b5
-TERM=xterm
-HOME=/root
-HTTP_PROXY=http://proxy.example.com:3128
-```
+These are configured slightly differently.
 
-For more information on setting environment variables for running containers,
-see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
+If the host uses a static HTTP/HTTPS proxy configuration, Docker Desktop reads this configuration
+and automatically uses these settings for logging into Docker and for pulling and pushing images.
+If the host uses a more sophisticated HTTP/HTTPS configuration, enable **Manual proxy configuration**
+in the **Settings** > **Resources** **Proxies** in the Docker Dashboard and enter a single upstream proxy URL
+of the form `http://username:password@proxy:port`.
+
+The HTTP/HTTPS proxy settings used for fetching artifacts during builds and for running containers
+are set via the `.docker/config.json` file, see [Configure the Docker client](/network/proxy#configure-the-docker-client).
+
+The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
 #### Network
 
@@ -284,12 +285,6 @@ The **Restart Docker Desktop** and **Reset to factory defaults** options are now
 
 Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
 
-Log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
-
-Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues.
-
-For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
-
 ## Switch between Windows and Linux containers
 
 From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
@@ -310,7 +305,7 @@ For more information on Windows containers, refer to the following documentation
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
 - To understand how to connect to Windows containers from the local host, see
-  [I want to connect to a container from Windows](networking.md#i-want-to-connect-to-a-container-from-windows)
+  [I want to connect to a container from Windows](../networking.md#i-want-to-connect-to-a-container-from-the-host)
 
 > Settings dialog changes with Windows containers
 >

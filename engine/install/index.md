@@ -33,13 +33,13 @@ redirect_from:
 > Docker Desktop helps you build, share, and run containers easily on Mac and
 > Windows as you do on Linux. We are excited to share that Docker Desktop for
 > Linux is now GA. For more information, see
-[Docker Desktop for Linux](../../desktop/linux/install.md).
+[Docker Desktop for Linux](../../desktop/install/linux-install.md).
 {: .important}
 
 ## Supported platforms
 
-Docker Engine is available on a variety of [Linux platforms](../../desktop/linux/install.md),
-[macOS](../../desktop/mac/install.md) and [Windows 10](../../desktop/windows/install.md)
+Docker Engine is available on a variety of [Linux platforms](../../desktop/install/linux-install.md),
+[macOS](../../desktop/install/mac-install.md) and [Windows 10](../../desktop/install/windows-install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
@@ -49,9 +49,9 @@ your preferred operating system below.
 
 | Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
 |:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
-| [Docker Desktop for Linux](../../desktop/linux/install.md)        | [{{ yes }}](../../desktop/linux/install.md)      |                                                  |
-| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)        |
-| [Docker Desktop for Windows](../../desktop/windows/install.md)    | [{{ yes }}](../../desktop/windows/install.md)    |                                                  |
+| [Docker Desktop for Linux](../../desktop/install/linux-install.md)        | [{{ yes }}](../../desktop/install/linux-install.md)      |                                                  |
+| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md)    | [{{ yes }}](../../desktop/install/mac-install.md)        | [{{ yes }}](../../desktop/install/mac-install.md)        |
+| [Docker Desktop for Windows](../../desktop/install/windows-install.md)    | [{{ yes }}](../../desktop/install/windows-install.md)    |                                                  |
 
 ### Server
 

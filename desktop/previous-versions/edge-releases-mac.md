@@ -11,7 +11,7 @@ redirect_from:
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
 For information about Stable releases, see the [Stable release notes](../mac/index.md). For Docker Desktop system requirements, see
-[What to know before you install](../mac/install.md#system-requirements).
+[What to know before you install](../install/mac-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
@@ -2163,7 +2163,7 @@ events or unexpected unmounts.
 
 **New**
 
-* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](../mac/install.md).
+* Docker for Mac is now available from 2 channels: **stable** and **beta**. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. For downloads of both and more information, see the [installation guide](../install/mac-install.md).
 
 **Upgrades**
 

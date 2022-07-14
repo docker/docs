@@ -18,7 +18,7 @@ The Authorization Code grant type is used by confidential and public clients to 
 
 After the user returns to the client via the redirect URL, the application gets the authorization code from the URL and uses it to request an access token.
 
-![oauth2-flow](./images/oauth2-flow.png){: style=width:80% }
+![oauth2-flow](images/oauth2-flow.png){: style=width:80% }
 
 The image above shows that:
 - The Docker Extension asks the user to authorize access to their data.
@@ -37,7 +37,7 @@ Once the user enters the username and password, they are successfully authentica
 
 From the extension UI, you can provide a button that, when selected, opens a new window in a browser to authenticate the user.
 
-Use the [ddClient.host.openExternal](https://docs.docker.com/desktop/extensions-sdk/dev/api/dashboard/#open-a-url) API to open a browser to the auth URL. For example:
+Use the [ddClient.host.openExternal](api/dashboard.md#open-a-url) API to open a browser to the auth URL. For example:
 
 ```typescript
 window.ddClient.openExternal("https://authorization-server.com/authorize?
@@ -107,3 +107,6 @@ It is highly recommended that you use an external source of storage to store the
 >
 > Storing the access token in a client's localStorage is a security risk as that storage is currently shared amongst all extensions.
 {: .warning}
+
+## What's next 
+Learn how to [publish and distribute your extension](../extensions/index.md)

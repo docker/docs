@@ -1,0 +1,747 @@
+openapi: 3.0.0
+info:
+  title: DVP Data API
+  version: 1.0.0
+  x-logo:
+    url: https://docs.docker.com/images/logo-docker-main.png
+    href: /reference
+  description: |
+     The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces
+servers:
+  - url: https://hub.docker.com/api/dvp/v1
+security:
+  - HubAuth: []
+
+features.openapi:
+  schemaDefinitionsTagName: Schemas
+
+tags:
+  - name: namespaces
+    x-displayName: Namespace data
+  - name: repos
+    x-displayName: Repository data
+  - name: discovery
+    x-displayName: Discovery
+  - name: responseDataFile
+    x-displayName: ResponseDataFile
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ResponseDataFile" />
+  - name: yearModel
+    x-displayName: Year Data Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/YearModel" />
+  - name: monthModel
+    x-displayName: Month Data Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/MonthModel" />
+  - name: weekModel
+    x-displayName: Week Data Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/WeekModel" />
+
+x-tagGroups:
+  - name: API
+    tags:
+      - discovery
+      - namespaces
+      - repos
+  - name: Models
+    tags:
+      - responseDataFile
+      - yearModel
+      - monthModel
+      - weekModel
+
+paths:
+  /data:
+    get:
+      tags: [discovery]
+      summary: Get namespaces and repos
+      description: Gets a list of your namespaces and repos which have data available
+      operationId: getNamespaces
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceData'
+  /data/namespaces/{namespace}:
+    get:
+      tags: [discovery]
+      summary: Get namespace
+      description: Gets metadata associated with specified namespace, including extra repos associated with the namespace
+      operationId: getNamespace
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceMetadata'
+  /data/namespaces/{namespace}/years:
+    get:
+      tags: [namespaces]
+      summary: Get years with data
+      description: Gets a list of years that have data for the given namespace
+      operationId: getNamespaceYears
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearData'
+  /data/namespaces/{namespace}/years/{year}/months:
+    get:
+      tags: [namespaces]
+      summary: Get months with data
+      description: Gets a list of months that have data for the given namespace and year
+      operationId: getNamespaceMonths
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthData'
+  /data/namespaces/{namespace}/years/{year}/weeks:
+    get:
+      tags: [namespaces]
+      summary: Get weeks with data
+      description: Gets a list of weeks that have data for the given namespace and year
+      operationId: getNamespaceWeeks
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeekData'
+  /data/namespaces/{namespace}/years/{year}/months/{month}:
+    get:
+      tags: [namespaces]
+      summary: Get namespace metadata for month
+      description: Gets info about data for the given namespace and month
+      operationId: getNamespaceMonthMetadata
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: month
+          schema:
+            type: integer
+          required: true
+          description: Month to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthModel'
+        '404':
+          description: Not Found
+  /data/namespaces/{namespace}/years/{year}/months/{month}/raw:
+    get:
+      tags: [namespaces]
+      summary: Get namespace data for month
+      description: Gets a list of URLs that can be used to download the raw pull data for the given namespace and month
+      operationId: getNamespaceDataByMonth
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: month
+          schema:
+            type: integer
+          required: true
+          description: Month to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+  /data/namespaces/{namespace}/years/{year}/weeks/{week}:
+    get:
+      tags: [namespaces]
+      summary: Get namespace metadata for week
+      description: Gets info about data for the given namespace and week
+      operationId: getNamespaceWeekMetadata
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: week
+          schema:
+            type: integer
+          required: true
+          description: Week to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeekModel'
+        '404':
+          description: Not Found
+  /data/namespaces/{namespace}/years/{year}/weeks/{week}/raw:
+    get:
+      tags: [namespaces]
+      summary: Get namespace data for week
+      description: Gets a list of URLs that can be used to download the raw pull data for the given namespace and week
+      operationId: getNamespaceDataByWeek
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: week
+          schema:
+            type: integer
+          required: true
+          description: Week to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+  /data/namespaces/{namespace}/years/{year}/months/{month}/summary:
+    get:
+      tags: [namespaces]
+      summary: Get namespace summary data for month
+      description: Gets a list of URLs that can be used to download the summary pull data for the given namespace and month
+      operationId: getNamespaceSummaryByMonth
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: month
+          schema:
+            type: integer
+          required: true
+          description: Month to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+  /data/namespaces/{namespace}/years/{year}/weeks/{week}/summary:
+    get:
+      tags: [namespaces]
+      summary: Get namespace summary data for week
+      description: Gets a list of URLs that can be used to download the summary pull data for the given namespace and week
+      operationId: getNamespaceSummaryByWeek
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: week
+          schema:
+            type: integer
+          required: true
+          description: Week to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+  /data/repos/{namespace}/{repo}/years:
+    get:
+      tags: [repos]
+      summary: Get years with data
+      description: Gets a list of years that have data for the given repository
+      operationId: getRepoYears
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearData'
+  /data/repos/{namespace}/{repo}/years/{year}/months:
+    get:
+      tags: [repos]
+      summary: Get months with data
+      description: Gets a list of months that have data for the given repository and year
+      operationId: getRepoMonths
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthData'
+  /data/repos/{namespace}/{repo}/years/{year}/weeks:
+    get:
+      tags: [repos]
+      summary: Get weeks with data
+      description: Gets a list of weeks that have data for the given repository and year
+      operationId: getRepoWeeks
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeekData'
+  /data/repos/{namespace}/{repo}/years/{year}/months/{month}:
+    get:
+      tags: [repos]
+      summary: Get repository metadata for month
+      description: Gets info about data for the given repository and month
+      operationId: getRepoMonthMetadata
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: month
+          schema:
+            type: integer
+          required: true
+          description: Month to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthModel'
+        '404':
+          description: Not Found
+  /data/repos/{namespace}/{repo}/years/{year}/months/{month}/raw:
+    get:
+      tags: [repos]
+      summary: Get repository data for month
+      description: Gets a list of URLs that can be used to download the raw pull data for the given repository and month
+      operationId: getRepoDataByMonth
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: month
+          schema:
+            type: integer
+          required: true
+          description: Month to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+  /data/repos/{namespace}/{repo}/years/{year}/weeks/{week}:
+    get:
+      tags: [repos]
+      summary: Get repository metadata for week
+      description: Gets info about data for the given repository and week
+      operationId: getRepoWeekMetadata
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: week
+          schema:
+            type: integer
+          required: true
+          description: Week to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeekModel'
+        '404':
+          description: Not Found
+  /data/repos/{namespace}/{repo}/years/{year}/weeks/{week}/raw:
+    get:
+      tags: [repos]
+      summary: Get repository data for week
+      description: Gets a list of URLs that can be used to download the raw pull data for the given repository and week
+      operationId: getRepoDataByWeek
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: week
+          schema:
+            type: integer
+          required: true
+          description: Week to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+  /data/repos/{namespace}/{repo}/years/{year}/months/{month}/summary:
+    get:
+      tags: [repos]
+      summary: Get repository summary data for month
+      description: Gets a list of URLs that can be used to download the summary pull data for the given repository and month
+      operationId: getRepoSummaryByMonth
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: month
+          schema:
+            type: integer
+          required: true
+          description: Month to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+  /data/repos/{namespace}/{repo}/years/{year}/weeks/{week}/summary:
+    get:
+      tags: [repos]
+      summary: Get repository summary data for week
+      description: Gets a list of URLs that can be used to download the summary pull data for the given repository and week
+      operationId: getRepoSummaryByWeek
+      parameters:
+        - in: path
+          name: namespace
+          schema:
+            type: string
+          required: true
+          description: Namespace to fetch data for
+        - in: path
+          name: repo
+          schema:
+            type: string
+          required: true
+          description: Repo to fetch data for
+        - in: path
+          name: year
+          schema:
+            type: integer
+          required: true
+          description: Year to fetch data for
+        - in: path
+          name: week
+          schema:
+            type: integer
+          required: true
+          description: Week to fetch data for
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseData'
+
+components:
+  schemas:
+    ResponseData:
+      properties:
+        data:
+          type: array
+          items: 
+            $ref: '#/components/schemas/ResponseDataFile'
+    ResponseDataFile:
+      properties:
+        url:
+          type: string
+    NamespaceData:
+      properties:
+        namespaces:
+          type: array
+          items:
+            type: string
+        repos:
+          type: array
+          items:
+            type: string
+    NamespaceMetadata:
+      properties:
+        namespace:
+          type: string
+        extraRepos:
+          type: array
+          items:
+            type: string
+    YearData:
+      properties:
+        years:
+          type: array
+          items:
+            $ref: '#/components/schemas/YearModel'
+    YearModel:
+      properties:
+        year:
+          type: integer
+    MonthData:
+      properties:
+        months:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthModel'
+    MonthModel:
+      properties:
+        month:
+          type: integer
+    WeekData:
+      properties:
+        weeks:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeekModel'
+    WeekModel:
+      properties:
+        week:
+          type: integer
+  securitySchemes:
+    HubAuth:
+      type: https
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        See [Hub API Authentication docs](https://docs.docker.com/docker-hub/api/latest/#tag/authentication)
+      x-displayName: Docker Hub Authentication
