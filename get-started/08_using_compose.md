@@ -329,7 +329,7 @@ Compose and used to group the containers together. By default, the project name 
 ![Docker Dashboard with app project](images/dashboard-app-project-collapsed.png)
 
 If you twirl down the app, you will see the two containers we defined in the compose file. The names are also a little
-more descriptive, as they follow the pattern of `<project-name>_<service-name>_<replica-number>`. So, it's very easy to
+more descriptive, as they follow the pattern of `<service-name>-<replica-number>`. So, it's very easy to
 quickly see what container is our app and which container is the mysql database.
 
 ![Docker Dashboard with app project expanded](images/dashboard-app-project-expanded.png)
