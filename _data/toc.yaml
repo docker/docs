@@ -1285,8 +1285,6 @@ manuals:
         title: Windows FAQs
       - path: /desktop/faqs/linuxfaqs/
         title: Linux FAQs
-    - path: /desktop/support/
-      title: Get support
     - path: /desktop/feedback/
       title: Give feedback
     - path: /desktop/release-notes/
@@ -1598,3 +1596,6 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
+
+- path: /support/
+  title: Get Support
