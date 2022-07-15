@@ -15,19 +15,27 @@ To navigate to **Settings** either:
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
-- **Start Docker Desktop when you log in**. This automatically starts Docker Desktop when you open your session.
+- **Start Docker Desktop when you log in**. Select to automatically start Docker
+  Desktop when you log into your machine.
 
-- **Send usage statistics**. Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
+- **Send usage statistics**. Select so Docker Desktop sends diagnostics,
+  crash reports, and usage data. This information helps Docker improve and
+  troubleshoot the application. Clear the check box to opt out. Docker may
+  periodically prompt you for more information.
 
-- **Show weekly tips**. Select to display useful advice and suggestions about using Docker.
+- **Show weekly tips**. Select to display useful advice and suggestions about
+  using Docker.
 
-- **Open Docker Desktop dashboard at startup**. Select to automatically opens the dashboard when starting Docker Desktop.
+- **Open Docker Desktop dashboard at startup**. Select to automatically open the
+  dashboard when starting Docker Desktop.
 
-- **Use Docker Compose V2**. Select to enable the `docker-compose` command to use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command)
+- **Use Docker Compose V2**. Select to enable the `docker-compose` command to
+  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command).
 
 ## Resources
 
-The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
+The **Resources** tab allows you to configure CPU, memory, disk, proxies,
+network, and other resources.
 
 ### Advanced
 
@@ -36,10 +44,12 @@ On the **Advanced** tab, you can limit resources available to Docker.
 Advanced settings are:
 
 - **CPUs**. By default, Docker Desktop is set to use half the number of processors
-available on the host machine. To increase processing power, set this to a
-higher number; to decrease, lower the number.
+  available on the host machine. To increase processing power, set this to a
+  higher number; to decrease, lower the number.
 
-- **Memory**. By default, Docker Desktop is set to use 25% of your host's memory. To increase the RAM, set this to a higher number. To decrease it, lower the number.
+- **Memory**. By default, Docker Desktop is set to use 25% of your host's
+  memory. To increase the RAM, set this to a higher number; to decrease it,
+  lower the number.
 
 - **Swap**. Configure swap file size as needed. The default is 1 GB.
 
