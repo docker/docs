@@ -147,15 +147,20 @@ see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" cla
 
 ## Software Updates
 
-The **Software Updates** tab notifies you of any updates available to Docker Desktop. When there's a new update, click the **Release Notes** option to learn what's included in the updated version.
+The **Software Updates** tab notifies you of any updates available to Docker Desktop.
+When there's a new update,
+click the **Release Notes** option to learn what's included in the updated version.
 
-> **Disable automatic check for updates**
->
-> Turn off the check for updates by clearing the **Automatically check for updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
+Turn off the check for updates by clearing the **Automatically check for updates**
+check box. This disables notifications in the Docker menu and the notification
+badge that appears on the Docker Dashboard. To check for updates manually, select
+the **Check for updates** option in the Docker menu.
 
-Turn off the check for updates by clearing the **Automatically check for updates** check box. This disables notifications in the Docker menu and also the notification badge that appears on the Docker Dashboard. To check for updates manually, select the **Check for updates** option in the Docker menu.
-
-To allow Docker Desktop to automatically download new updates in the background, select **Always download updates**. This downloads newer versions of Docker Desktop when an update becomes available. After downloading the update, click **Apply and Restart** to install the update. You can do this either through the Docker menu or in the **Updates** section in the Docker Dashboard.
+To allow Docker Desktop to automatically download new updates in the background,
+select **Always download updates**. This downloads newer versions of Docker Desktop
+when an update becomes available. After downloading the update, click
+**Apply and Restart** to install the update. You can do this either through the
+Docker menu or in the **Updates** section in the Docker Dashboard.
 
 ## Extensions 
 
