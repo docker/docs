@@ -1183,11 +1183,11 @@ manuals:
       title: Dashboard
     - sectiontitle: Change settings
       section:
-        - path: /desktop/settings/mac-settings/
+        - path: /desktop/settings/mac/
           title: On Mac
-        - path: /desktop/settings/windows-settings/
+        - path: /desktop/settings/windows/
           title: On Windows
-        - path: /desktop/settings/linux-settings/
+        - path: /desktop/settings/linux/
           title: On Linux
     - path: /desktop/networking/
       title: Explore networking features

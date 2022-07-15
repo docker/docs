@@ -24,7 +24,7 @@ The Troubleshoot page contains the following options:
 
 * **Support**: Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](../../support/index.md).
 
-* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/linux-settings.md#kubernetes).
+* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/linux.md#kubernetes).
 
 * **Clean / Purge data**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
@@ -146,7 +146,7 @@ to learn how to view the Docker Daemon logs.
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
 cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
-you might need to enable [file sharing](../settings/linux-settings.md#file-sharing).
+you might need to enable [file sharing](../settings/linux.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
 `/home/<user>` directory. Go to ![whale menu](images/whale-x.png){: .inline} >
