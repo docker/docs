@@ -67,11 +67,13 @@ You can also move the disk image to a different location. If you attempt to move
 
 ### File sharing
 
-Use File sharing to allow local directories on the Mac to be shared with Linux containers.
-This is especially useful for
-editing source code in an IDE on the host while running and testing the code in a container.
-By default the `/Users`, `/Volume`, `/private`, `/tmp` and `/var/folders` directory are shared. If your project is outside this directory then it must be added
-to the list. Otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
+Use File sharing to allow local directories on your machine to be shared with
+Linux containers. This is especially useful for editing source code in an IDE on
+the host while running and testing the code in a container.
+
+By default the `/Users`, `/Volume`, `/private`, `/tmp` and `/var/folders` directory are shared.
+If your project is outside this directory then it must be added to the list,
+otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
 
 File share settings are:
 
@@ -84,32 +86,31 @@ File share settings are:
 
 > Tips on shared folders, permissions, and volume mounts
 >
- * Share only the directories that you need with the container. File sharing
- introduces overhead as any changes to the files on the host need to be notified
- to the Linux VM. Sharing too many files can lead to high CPU load and slow
- filesystem performance.
+> * Share only the directories that you need with the container. File sharing
+>   introduces overhead as any changes to the files on the host need to be notified
+>   to the Linux VM. Sharing too many files can lead to high CPU load and slow
+>   filesystem performance.
+> * Shared folders are designed to allow application code to be edited
+>   on the host while being executed in containers. For non-code items
+>   such as cache directories or databases, the performance will be much
+>   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
+>   (named volume) or [data container](../../storage/volumes.md).
+> * If you share the whole of your home directory into a container, MacOS may
+>   prompt you to give Docker access to personal areas of your home directory such as
+>   your Reminders or Downloads.
+> * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
+>   On Linux, it is possible to create two separate files: `test` and `Test`,
+>   while on Mac these filenames would actually refer to the same underlying
+>   file. This can lead to problems where an app works correctly on a developer's
+>   machine (where the file contents are shared) but fails when run in Linux in
+>   production (where the file contents are distinct). To avoid this, Docker Desktop
+>   insists that all shared files are accessed as their original case. Therefore,
+>   if a file is created called `test`, it must be opened as `test`. Attempts to
+>   open `Test` will fail with the error "No such file or directory". Similarly,
+>   once a file called `test` is created, attempts to create a second file called
+>   `Test` will fail.
 >
- * Shared folders are designed to allow application code to be edited 
- on the host while being executed in containers. For non-code items
- such as cache directories or databases, the performance will be much 
- better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
- (named volume) or [data container](../../storage/volumes.md).
->
- * If you share the whole of your home directory into a container, MacOS may
- prompt you to give Docker access to personal areas of your home directory such as
- your Reminders or Downloads.
->
- * By default, Mac file systems are case-insensitive while Linux is case-sensitive.
- On Linux, it is possible to create 2 separate files: `test` and `Test`, 
- while on Mac these filenames would actually refer to the same underlying file. 
- This can lead to problems where an app works correctly on a Mac 
- (where the file contents are shared) but fails when run in Linux in 
- production (where the file contents are distinct). To avoid this, Docker Desktop 
- insists that all shared files are accessed as their original case. Therefore, if a file 
- is created called `test`, it must be opened as `test`. Attempts to open `Test` will 
- fail with the error `No such file or directory`. Similarly, once a file called `test` 
- is created, attempts to create a second file called `Test` will fail. For more information, 
- see [Volume mounting requires file sharing for any project directories outside of `/Users`](../mac/troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](../mac/troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 ### Proxies
 

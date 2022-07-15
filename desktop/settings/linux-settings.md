@@ -61,33 +61,34 @@ You can also move the disk image to a different location. If you attempt to move
 
 ### File sharing
 
-Use File sharing to allow local directories on the Linux host to be shared with Linux containers.
-This is especially useful for
-editing source code in an IDE on the host while running and testing the code in a container.
-By default the `/home/<user>` directory is shared. If your project is outside this directory then it must be added
-to the list. Otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
+Use File sharing to allow local directories on your machine to be shared with
+Linux containers. This is especially useful for editing source code in an IDE on
+the host while running and testing the code in a container.
+
+By default the `/home/<user>` directory is shared.
+If your project is outside this directory then it must be added to the list,
+otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
 
 File share settings are:
 
-- **Add a Directory**: Click `+` and navigate to the directory you want to add.
+- **Add a Directory**. Click `+` and navigate to the directory you want to add.
 
-- **Remove a Directory**: Click `-` next to the directory you want to remove
+- **Remove a Directory**. Click `-` next to the directory you want to remove
 
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
 > Tips on shared folders, permissions, and volume mounts
 >
- * Share only the directories that you need with the container. File sharing
- introduces overhead as any changes to the files on the host need to be notified
- to the Linux VM. Sharing too many files can lead to high CPU load and slow
- filesystem performance.
->
- * Shared folders are designed to allow application code to be edited 
- on the host while being executed in containers. For non-code items
- such as cache directories or databases, the performance will be much 
- better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
- (named volume) or [data container](../../storage/volumes.md).
+> * Share only the directories that you need with the container. File sharing
+>   introduces overhead as any changes to the files on the host need to be notified
+>   to the Linux VM. Sharing too many files can lead to high CPU load and slow
+>   filesystem performance.
+> * Shared folders are designed to allow application code to be edited
+>   on the host while being executed in containers. For non-code items
+>   such as cache directories or databases, the performance will be much
+>   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
+>   (named volume) or [data container](../../storage/volumes.md).
 
 ### Proxies
 
