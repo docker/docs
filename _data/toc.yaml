@@ -1155,6 +1155,16 @@ manuals:
               title: Install on Ubuntu
             - path: /desktop/install/archlinux/
               title: Install on Arch
+    - sectiontitle: Navigate Docker Desktop
+      section:
+        - path: /desktop/use-desktop/get-started/
+          title: Sign in and get started
+        - path: /desktop/use-desktop/containers/
+          title: Explore Containers
+        - path: /desktop/use-desktop/images/
+          title: Explore Images
+        - path: /desktop/use-desktop/volumes/
+          title: Explore Volumes
     - sectiontitle: Mac
       section:
         - path: /desktop/mac/
@@ -1175,12 +1185,8 @@ manuals:
           title: Docker Desktop WSL 2 backend
     - sectiontitle: Linux
       section:
-        - path: /desktop/linux/
-          title: User manual
         - path: /desktop/linux/troubleshoot/
           title: Logs and troubleshooting    
-    - path: /desktop/dashboard/
-      title: Dashboard
     - sectiontitle: Change settings
       section:
         - path: /desktop/settings/mac-settings/

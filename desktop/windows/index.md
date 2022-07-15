@@ -63,57 +63,6 @@ proxies and daemon configurations return to what you had set for Linux
 containers. Your Windows container settings are retained and become available
 again when you switch back.
 
-## Dashboard
-
-The Docker Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../dashboard.md).
-
-## Docker Hub
-
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
-
-For more information, refer to the following [Docker Hub topics](../../docker-hub/index.md){: target="_blank" rel="noopener" class="_" }:
-
-* [Organizations and Teams in Docker Hub](../../docker-hub/orgs.md){: target="_blank" rel="noopener" class="_" }
-* [Builds and Images](../../docker-hub/builds/index.md){: target="_blank" rel="noopener" class="_" }
-
-### Two-factor authentication
-
-Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
-
-You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
-
-After you have enabled two-factor authentication:
-
-1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
-
-2. Enter your Docker ID and password and click **Sign in**.
-
-3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then click **Verify**.
-
-![Docker Desktop 2FA](images/desktop-win-2fa.png){:width="500px"}
-
-After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
-
-## Pause/Resume
-
-Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine will be paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
-
-> **Note**
->
-> The Pause/Resume feature is currently not available in the Windows containers mode.
-
-To pause Docker Desktop, right-click the Docker icon in the notifications area (or System tray) and then click **Pause**.
-
-![Docker Desktop popup menu](images/docker-menu-settings.png){:width="300px"}
-
-Docker Desktop now displays the paused status on the Docker menu and on all screens on the Docker Dashboard. You can still access the **Preferences** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
-
-Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
-
-> **Note**
->
-> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
-
 ## Adding TLS certificates
 
 You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.

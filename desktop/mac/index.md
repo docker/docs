@@ -19,7 +19,7 @@ redirect_from:
 title: Docker Desktop for Mac user manual
 ---
 
-The Docker Desktop for Mac user manual provides information on how to Add TLS certificates and other useful topics. 
+The Docker Desktop for Mac user manual provides information on how to Add TLS certificates and how to install shell completion. 
 
 For information about Docker Desktop download, system requirements, and installation instructions, see [Install Docker Desktop](../install/mac-install.md).
 
@@ -190,50 +190,6 @@ Now add fish completions from docker.
 $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
 $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
-
-## Docker Hub
-
-Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } account. Once logged in, you can access your Docker Hub repositories and organizations directly from the Docker Desktop menu.
-
-For more information, refer to the following [Docker Hub topics](../../docker-hub/index.md){:target="_blank"
-class="_"}:
-
-* [Organizations and Teams in Docker Hub](../../docker-hub/orgs.md){:target="_blank" rel="noopener" class="_"}
-* [Builds](../../docker-hub/builds/index.md){:target="_blank" rel="noopener" class="_"}
-
-### Two-factor authentication
-
-Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
-
-You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
-
-After you have enabled two-factor authentication:
-
-1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
-
-2. Enter your Docker ID and password and click **Sign in**.
-
-3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then click **Verify**.
-
-![Docker Desktop 2FA](images/desktop-mac-2fa.png){:width="500px"}
-
-After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.
-
-## Pause/Resume
-
-Starting with the Docker Desktop 4.2 release, you can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the Resume option.
-
-From the Docker menu, select ![whale menu](images/whale-x.png){: .inline} > **Pause** to pause Docker Desktop.
-
-![Docker context menu](images/menu/prefs.png){:width="250px"}
-
-Docker Desktop now displays the paused status on the Docker menu and on the  **Containers / Apps**, **Images**, **Volumes**, and **Dev Environment** screens on the Docker Dashboard. You can still access the **Preferences** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
-
-Select ![whale menu](images/whale-x.png){: .inline} > **Resume** to resume Docker Desktop.
-
-> **Note**
->
-> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.
 
 ## Where to go next
 
