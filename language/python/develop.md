@@ -219,6 +219,8 @@ We expose port 8000 so that we can reach the dev web server inside the container
 
 Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we've named our MySQL service as in the Compose file.
 
+Note that we did not specify a network for those 2 services. When we use docker-compose it automatically creates a network and connect the services to it. For more information see [Networking in Compose](../../compose/networking.md)
+
 Now, to start our application and to confirm that it is running properly, run the following command:
 
 ```console
