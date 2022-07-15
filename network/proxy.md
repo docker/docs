@@ -7,7 +7,7 @@ keywords: network, networking, proxy, client
 > **Note**
 >
 > This page describes how to configure the Docker CLI to configure proxies via environment variables in containers.
-> For information on configuring Docker Desktop to use HTTP/HTTPS proxies, see [proxies on Mac](../desktop/settings/mac-settings.md#proxies), [proxies on Windows](../desktop/settings/windows-settings.md#proxies), and [proxies on Linux](../desktop/settings/linux-settings.md#proxies).
+> For information on configuring Docker Desktop to use HTTP/HTTPS proxies, see [proxies on Mac](../desktop/settings/mac.md#proxies), [proxies on Windows](../desktop/settings/windows.md#proxies), and [proxies on Linux](../desktop/settings/linux.md#proxies).
 
 > If you are not running Docker Desktop, and have installed the Docker Engine in
 > other ways, refer to the "HTTP/HTTPS proxy" section in
