@@ -1,7 +1,7 @@
 ---
 description: Docker Desktop settings
-keywords: Settings, Docker Desktop, Linux
-title: Change Docker Dektop settings on Linux
+keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Linux
+title: Change Docker Desktop settings on Linux
 ---
 
 This page provides information on how to configure and manage your Docker Desktop settings.

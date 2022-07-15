@@ -1,7 +1,7 @@
 ---
 description: Docker Desktop settings
-keywords: Settings, Docker Desktop, Mac
-title: Change Docker Dektop preferences on Mac
+keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
+title: Change Docker Desktop preferences on Mac
 ---
 
 This page provides information on how to configure and manage your Docker Desktop settings.
