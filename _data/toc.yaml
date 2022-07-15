@@ -1144,7 +1144,7 @@ manuals:
        - path: /desktop/install/windows-install/
          title: Install on Windows
        - path: /desktop/install/linux-install/
-         title: Insall on Linux
+         title: Install on Linux
        - sectiontitle: Installation per Linux distro
          section:
             - path: /desktop/install/debian/
@@ -1181,6 +1181,14 @@ manuals:
           title: Logs and troubleshooting    
     - path: /desktop/dashboard/
       title: Dashboard
+    - sectiontitle: Change settings
+      section:
+        - path: /desktop/settings/mac/
+          title: On Mac
+        - path: /desktop/settings/windows/
+          title: On Windows
+        - path: /desktop/settings/linux/
+          title: On Linux
     - path: /desktop/networking/
       title: Explore networking features
     - sectiontitle: Dev Environments (Beta)
@@ -1277,8 +1285,6 @@ manuals:
         title: Windows FAQs
       - path: /desktop/faqs/linuxfaqs/
         title: Linux FAQs
-    - path: /desktop/support/
-      title: Get support
     - path: /desktop/feedback/
       title: Give feedback
     - path: /desktop/release-notes/
@@ -1590,3 +1596,6 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
+
+- path: /support/
+  title: Get Support

@@ -5,7 +5,7 @@ title: Logs and troubleshooting
 ---
 
 {% include upgrade-cta.html
-  body="Did you know that Docker Desktop offers support for developers on a paid Docker subscription (Pro, Team, or Business)? Upgrade now to benefit from Docker Support. Click [here](#support) to learn more."
+  body="Did you know that Docker Desktop offers support for developers on a paid Docker subscription (Pro, Team, or Business)? Upgrade now to benefit from Docker Support. Click [here](../../support/index.md) to learn more."
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 
@@ -22,9 +22,9 @@ The Troubleshoot page contains the following options:
 
 * **Restart Docker Desktop**: Select to restart Docker Desktop.
 
-* **Support**: Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](#support).
+* **Support**: Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](../../support/index.md).
 
-* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](index.md#kubernetes).
+* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/linux.md#kubernetes).
 
 * **Clean / Purge data**: This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.
@@ -146,7 +146,7 @@ to learn how to view the Docker Daemon logs.
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
 cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
-you might need to enable [file sharing](index.md#file-sharing).
+you might need to enable [file sharing](../settings/linux.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
 `/home/<user>` directory. Go to ![whale menu](images/whale-x.png){: .inline} >
