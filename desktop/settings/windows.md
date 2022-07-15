@@ -8,8 +8,8 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Settings** 
-- Select the **Settings** icon from the Docker Dashboard. 
+- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Settings**
+- Select the **Settings** icon from the Docker Dashboard.
 
 ## General
 
@@ -176,16 +176,16 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 ### WSL Integration
 
-In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker 
+In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker
 WSL integration.
 
 By default, the integration is enabled on your default WSL distribution.
-To change your default WSL distro, run `wsl --set-default <distro name>`. (For example, 
+To change your default WSL distro, run `wsl --set-default <distro name>`. (For example,
 to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 
 You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
-For more details on configuring Docker Desktop to use WSL 2, see 
+For more details on configuring Docker Desktop to use WSL 2, see
 [Docker Desktop WSL 2 backend](../windows/wsl.md).
 
 ## Docker Engine
