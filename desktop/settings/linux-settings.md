@@ -98,7 +98,7 @@ HTTP_PROXY=http://proxy.example.com:3128
 ```
 
 For more information on configuring the Docker CLI to automatically set proxy variables for both `docker run` and `docker build`
-see [Configure the Docker client](/network/proxy#configure-the-docker-client).
+see [Configure the Docker client](../../network/proxy.md#configure-the-docker-client).
 
 ### Network
 

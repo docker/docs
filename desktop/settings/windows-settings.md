@@ -136,7 +136,7 @@ If the host uses a more sophisticated HTTP/HTTPS configuration, enable **Manual 
 of the form `http://username:password@proxy:port`.
 
 The HTTP/HTTPS proxy settings used for fetching artifacts during builds and for running containers
-are set via the `.docker/config.json` file, see [Configure the Docker client](/network/proxy#configure-the-docker-client).
+are set via the `.docker/config.json` file, see [Configure the Docker client](../../network/proxy.md#configure-the-docker-client).
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 

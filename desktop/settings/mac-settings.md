@@ -121,7 +121,7 @@ of the form `http://username:password@proxy:port`.
 HTTP/HTTPS traffic from image builds and running containers is forwarded transparently to the same
 upstream proxy used for logging in and image pulls.
 If you want to override this behaviour and use different HTTP/HTTPS proxies for image builds and
-running containers, see [Configure the Docker client](/network/proxy#configure-the-docker-client).
+running containers, see [Configure the Docker client](../../network/proxy.md#configure-the-docker-client).
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
