@@ -193,8 +193,7 @@ For more details on configuring Docker Desktop to use WSL 2, see
 The **Docker Engine** tab allows you to configure the Docker daemon to determine how your containers run.
 
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
-class="_"}.
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
@@ -210,10 +209,18 @@ From the **Experimental features** tab, you can sign up to the [Developer Previe
 >
 > The **Kubernetes** tab is not available in Windows container mode.
 
-Docker Desktop includes a standalone Kubernetes server that runs on your Windows machine, so
-that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
+Docker Desktop includes a standalone Kubernetes server, so that you can test
+deploying your Docker workloads on Kubernetes. To enable Kubernetes support and
+install a standalone instance of Kubernetes running as a Docker container,
+select **Enable Kubernetes**.
 
-For more information about using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+Select **Show system containers (advanced)** to view internal containers when
+using Docker commands.
+
+Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
+
+For more information about using the Kubernetes integration with Docker Desktop,
+see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ## Software Updates
 

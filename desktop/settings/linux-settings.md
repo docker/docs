@@ -132,12 +132,18 @@ From the **Experimental features** tab, you can sign up to the [Developer Previe
 
 ## Kubernetes
 
-Docker Desktop includes a standalone Kubernetes server, so
-that you can test deploying your Docker workloads on Kubernetes. To enable Kubernetes support and install a standalone instance of Kubernetes running as a Docker container, select **Enable Kubernetes**.
+Docker Desktop includes a standalone Kubernetes server, so that you can test
+deploying your Docker workloads on Kubernetes. To enable Kubernetes support and
+install a standalone instance of Kubernetes running as a Docker container,
+select **Enable Kubernetes**.
 
-Select **Show system containers (advanced)** to view internal containers when using Docker commands.
+Select **Show system containers (advanced)** to view internal containers when
+using Docker commands.
 
-Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
+
+For more information about using the Kubernetes integration with Docker Desktop,
+see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
 
 ## Software Updates
 
