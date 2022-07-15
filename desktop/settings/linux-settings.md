@@ -29,7 +29,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
 
-#### Advanced
+### Advanced
 
 On the **Advanced** tab, you can limit resources available to Docker.
 

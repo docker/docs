@@ -11,7 +11,7 @@ To navigate to **Preferences** either:
 - Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Preferences** 
 - Select the **Preferences** icon from the Docker Dashboard. 
 
-### General
+## General
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
@@ -54,7 +54,7 @@ allocated from the total available memory on your Mac. To increase the RAM, set 
 
 You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
 
-#### File sharing
+### File sharing
 
 Use File sharing to allow local directories on the Mac to be shared with Linux containers.
 This is especially useful for
@@ -138,7 +138,7 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Experimental features
+## Experimental Features
 
 {% include experimental.md %}
 
