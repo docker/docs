@@ -193,11 +193,6 @@ The **Software Updates** tab notifies you of any updates available to Docker Des
 When there's a new update, you can choose to download the update right away, or
 click the **Release Notes** option to learn what's included in the updated version.
 
-> **Disable automatic check for updates**
->
-> Starting with Docker Desktop 4.2.0, the option to turn off the automatic check for updates is available for users on all Docker subscriptions, including Docker Personal and Docker Pro. Update to [Docker Desktop 4.2.0](../release-notes.md) to start using this feature.
-{: .important}
-
 Turn off the check for updates by clearing the **Automatically check for updates**
 check box. This disables notifications in the Docker menu and the notification
 badge that appears on the Docker Dashboard. To check for updates manually, select
