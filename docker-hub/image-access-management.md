@@ -14,8 +14,6 @@ The following video walks you through the process of configuring Image Access Ma
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<br>
-
 ### Detailed instructions
 
 To configure Image Access Management permissions, perform the following steps:
