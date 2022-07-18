@@ -35,7 +35,7 @@ You may also need to [configure some network settings](https://www.vembu.com/blo
 
 Nested virtualization is supported by Microsoft for running Hyper-V inside a VM running on a Hyper-V host, in Azure or on-prem (Hyper-V on Hyper-V).
 
-For Azure virtual machines, [check that the VM size chosen supports nested virtualization](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes). Microsoft provides [a helpful list on Azure VM sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/acu) and highlights the sizes that currently support nested virtualization.
+For Azure virtual machines, [check that the VM size chosen supports nested virtualization](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes). Microsoft provides [a helpful list on Azure VM sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/acu) and highlights the sizes that currently support nested virtualization. Docker recommends using D4s_v5 machines. Internal testing confirms this is a good option for performance. 
 
 For on-prem virtual machines, check the constraints on the host VM operating system and [follow the steps documented by Microsoft](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization).
 
