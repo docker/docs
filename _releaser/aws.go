@@ -70,13 +70,13 @@ func (s *AwsLambdaInvokeCmd) Run() error {
 		Region: aws.String(s.Region),
 	})
 
-	out, err := svc.Invoke(&lambda.InvokeInput{
+	_, err := svc.Invoke(&lambda.InvokeInput{
 		FunctionName: aws.String(s.LambdaFunction),
 	})
 	if err != nil {
 		return err
 	}
 
-	log.Printf("INFO: lambda function %q invoked successfully: %s\n", s.LambdaFunction, *out.LogResult)
+	log.Printf("INFO: lambda function %q invoked successfully\n", s.LambdaFunction)
 	return nil
 }
