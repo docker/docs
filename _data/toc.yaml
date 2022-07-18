@@ -1155,10 +1155,10 @@ manuals:
               title: Install on Ubuntu
             - path: /desktop/install/archlinux/
               title: Install on Arch
-    - sectiontitle: Navigate Docker Desktop
+    - path: /desktop/get-started/
+      title: Sign in and get started
+    - sectiontitle: Explore Docker Desktop
       section:
-        - path: /desktop/use-desktop/get-started/
-          title: Sign in and get started
         - path: /desktop/use-desktop/containers/
           title: Explore Containers
         - path: /desktop/use-desktop/images/
@@ -1167,8 +1167,6 @@ manuals:
           title: Explore Volumes
     - sectiontitle: Mac
       section:
-        - path: /desktop/mac/
-          title: User manual
         - path: /desktop/mac/troubleshoot/
           title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
@@ -1177,8 +1175,6 @@ manuals:
           title: Privileged Helper
     - sectiontitle: Windows
       section:
-        - path: /desktop/windows/
-          title: User manual
         - path: /desktop/windows/troubleshoot/
           title: Logs and troubleshooting
         - path: /desktop/windows/wsl/

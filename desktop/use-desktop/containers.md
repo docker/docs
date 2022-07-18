@@ -78,8 +78,6 @@ From the **Containers** view you can also perform the following actions on multi
 
 Click **Open in Visual Studio Code** to open the application in VS Code. Hover over the list of containers to see some of the core actions you can perform.
 
-![Application view](images/mac-application-view.png){:width="700px"}
-
 ### Container view
 
 Click on a specific container for detailed information about the container. The **container view** displays **Logs**, **Inspect**, and **Stats** tabs and provides quick action buttons to perform various actions.

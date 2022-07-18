@@ -4,6 +4,33 @@ keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user man
 title: Sign in and get started
 redirect_from:
 - /desktop/dashboard/
+- /docker-for-windows/
+- /docker-for-windows/index/
+- /docker-for-windows/started/
+- /engine/installation/windows/
+- /installation/windows/
+- /win/
+- /windows/
+- /windows/started/
+- /winkit/
+- /winkit/getting-started/
+- /desktop/linux/index/
+- /desktop/windows/index/
+- /docker-for-mac/
+- /docker-for-mac/index/
+- /docker-for-mac/mutagen/
+- /docker-for-mac/mutagen-caching/
+- /docker-for-mac/osx/
+- /docker-for-mac/started/
+- /engine/installation/mac/
+- /installation/mac/
+- /mac/
+- /mac/started/
+- /mackit/
+- /mackit/getting-started/
+- /docker-for-mac/osxfs/
+- /docker-for-mac/osxfs-caching/
+- /desktop/mac/index/
 ---
 
 ## Sign in to Docker Desktop
@@ -85,7 +112,7 @@ The **Containers** view provides a runtime view of all your containers and appli
 
 The **Images** view displays a list of your Docker images, and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the Images view contains clean up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub. For more information, see [Explore your images](images.md)
 
-The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](volumes.m).
+The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](volumes.md).
 
 In addition, the Docker Dashboard allows you to:
 

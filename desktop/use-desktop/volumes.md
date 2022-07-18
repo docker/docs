@@ -5,7 +5,7 @@ title: Explore Volumes
 ---
 ## Explore volumes
 
-You can use [volumes](../storage/volumes.md) to store files and share them among containers. Volumes are created and are directly managed by Docker. They are also the preferred mechanism to persist data in Docker containers and services.
+You can use [volumes](../../storage/volumes.md) to store files and share them among containers. Volumes are created and are directly managed by Docker. They are also the preferred mechanism to persist data in Docker containers and services.
 
 > **Volume Management is now available for all subscriptions**
 >
@@ -17,8 +17,6 @@ The **Volumes** view in Docker Dashboard enables you to easily create and delete
 ### Manage volumes
 
 By default, the **Volumes** view displays a list of all the volumes. Volumes that are currently used by a container display the **In Use** badge.
-
-![List volumes](images/volumes-list.png){:width="700px"}
 
 Use the **Search** field to search for any specific volumes. You can also sort volumes by the name, the date created, and the size of the volume.
 
