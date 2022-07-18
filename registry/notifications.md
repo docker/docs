@@ -160,7 +160,7 @@ request coming to an endpoint.
 An example of a full event may look as follows:
 
 ```http
-GET /callback HTTP/1.1
+POST /callback HTTP/1.1
 Host: application/vnd.docker.distribution.events.v1+json
 Authorization: Bearer <your token, if needed>
 Content-Type: application/vnd.docker.distribution.events.v1+json
