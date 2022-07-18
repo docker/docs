@@ -21,5 +21,3 @@ After completing the Java getting started modules, you should be able to contain
 Let’s get started!
 
 [Build your first Java image](build-images.md){: .button .primary-btn}
-
-<br />

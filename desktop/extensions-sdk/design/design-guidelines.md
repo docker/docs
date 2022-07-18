@@ -19,17 +19,14 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 - Ensure the extension has both a light and dark theme. Using the components and styles as per the Docker style guide ensures that your extension meets the [level AA accessibility standard.](https://www.w3.org/WAI/WCAG2AA-Conformance)
 
 ![light and dark mode](images/light_dark_mode.png)
-<br>
 
 - Ensure that your extension icon is visible both in light and dark mode.
 
 ![icon colors](images/icon_colors.png)
-<br> 
 
 - Ensure that the navigational behavior is consistent with the rest of Docker Desktop. Add a header to set the context for the extension.
 
 ![header](images/header.png)
-<br> 
 
 - Avoid embedding terminal windows. The advantage we have with Docker Desktop over the CLI is that we have the opportunity to provide rich information to users. Make use of this interface as much as possible. 
 
@@ -50,7 +47,6 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 - If a flow is too complicated or the concept is abstract, break down the flow into multiple steps with one simple call-to-action in each step. This helps when onboarding novice users to your extension
 
 ![complicated flow](images/complicated_flows.png)
-<br> 
 
 - Where there are multiple call-to-actions, ensure you use the primary (filled button style) and secondary buttons (outline button style) to convey the importance of each action.
 

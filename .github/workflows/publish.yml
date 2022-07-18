@@ -14,23 +14,25 @@ jobs:
         name: Prepare
         run: |
           JEKYLL_ENV=development
+          DOCS_AWS_REGION=us-east-1
           if [ "${{ github.ref }}" = "refs/heads/master" ]; then
-            DOCS_S3_HOST="docs.docker.com-stage-us-east-1"
-            DOCS_AWS_LAMBDA="arn:aws:lambda:us-east-1:710015040892:function:docs-stage-cache-invalidator"
+            DOCS_S3_BUCKET="docs.docker.com-stage-us-east-1"
+            DOCS_S3_CONFIG="_website-config-docs-stage.json"
+            DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-stage-cache-invalidator"
             DOCS_SLACK_MSG="Successfully promoted docs-stage from master. https://docs-stage.docker.com/"
-            DOCS_WEBCONFIG="_website-config-docs-stage.json"
           elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
             JEKYLL_ENV=production
-            DOCS_S3_HOST="docs.docker.com-us-east-1"
-            DOCS_AWS_LAMBDA="arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator"
+            DOCS_S3_BUCKET="docs.docker.com-us-east-1"
+            DOCS_S3_CONFIG="_website-config-docs.json"
+            DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator"
             DOCS_SLACK_MSG="Successfully published docs. https://docs.docker.com/"
-            DOCS_WEBCONFIG="_website-config-docs.json"
           fi
           echo "JEKYLL_ENV=$JEKYLL_ENV" >> $GITHUB_ENV
-          echo "DOCS_S3_HOST=$DOCS_S3_HOST" >> $GITHUB_ENV
-          echo "DOCS_AWS_LAMBDA=$DOCS_AWS_LAMBDA" >> $GITHUB_ENV
+          echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
+          echo "DOCS_S3_BUCKET=$DOCS_S3_BUCKET" >> $GITHUB_ENV
+          echo "DOCS_S3_CONFIG=$DOCS_S3_CONFIG" >> $GITHUB_ENV
+          echo "DOCS_LAMBDA_FUNCTION_CACHE=$DOCS_LAMBDA_FUNCTION_CACHE" >> $GITHUB_ENV
           echo "DOCS_SLACK_MSG=$DOCS_SLACK_MSG" >> $GITHUB_ENV
-          echo "DOCS_WEBCONFIG=$DOCS_WEBCONFIG" >> $GITHUB_ENV
       -
         name: Checkout
         uses: actions/checkout@v3
@@ -38,7 +40,7 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
-        name: Build
+        name: Build website
         uses: docker/bake-action@v2
         with:
           targets: release
@@ -48,27 +50,35 @@ jobs:
       -
         name: Upload files to S3 bucket
         run: |
-          aws --region us-east-1 s3 sync --acl public-read _site s3://${{ env.DOCS_S3_HOST }}/ --delete
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync --acl public-read _site s3://${{ env.DOCS_S3_BUCKET }}/ --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       -
-        name: Update S3 website config
-        uses: ./.github/actions/update-website-config
+        name: Update S3 config
+        uses: docker/bake-action@v2
         with:
-          bucketName: ${{ env.DOCS_S3_HOST }}
-          regionName: us-east-1
-          websiteConfig: ${{ env.DOCS_WEBCONFIG }}
+          targets: aws-s3-update-config
+          set: |
+            *.cache-from=type=gha,scope=releaser
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ env.DOCS_AWS_REGION }}
+          AWS_S3_BUCKET: ${{ env.DOCS_S3_BUCKET }}
+          AWS_S3_CONFIG: ${{ env.DOCS_S3_CONFIG }}
       -
         name: Invalidate docs website cache
-        run: |
-          aws --region us-east-1 lambda invoke --function-name ${{ env.DOCS_AWS_LAMBDA }} response.json
+        uses: docker/bake-action@v2
+        with:
+          targets: aws-lambda-invoke
+          set: |
+            *.cache-from=type=gha,scope=releaser
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ env.DOCS_AWS_REGION }}
+          AWS_LAMBDA_FUNCTION: ${{ env.DOCS_LAMBDA_FUNCTION_CACHE }}
       -
         name: Send Slack notification
         run: |

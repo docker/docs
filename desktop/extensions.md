@@ -35,8 +35,9 @@ To add Docker Extensions:
 1. Open Docker Desktop.
 2. From the Dashboard, select **Add Extensions** in the menu bar. 
 The Extensions Marketplace opens. 
-2. Browse the available extensions.
-3. Click **Install**.<br>
+3. Browse the available extensions.
+4. Click **Install**.
+
 From here, you can click **Open** to access the extension or install additional extensions. The extension also appears in the menu bar.
 
 ## See containers created by extensions
