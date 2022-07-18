@@ -121,7 +121,7 @@ Note that we do not currently have vulnerability data for your image.
 If your computer needs to use an HTTP proxy, then set the `HTTPS_PROXY` environment variable when using scan. For example:
 
 ```console
-$ export HTTPS_PROXY=http://username:password@proxy:port
+$ export HTTPS_PROXY=http://username:password@proxyAddress:port
 $ docker scan hello-world
 ```
 
