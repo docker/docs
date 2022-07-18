@@ -171,7 +171,7 @@ Desktop `xhyve` virtual machine).
 >   effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
->   Engine](../settings/mac#docker-engine). Docker Desktop ignores certificates listed
+>   Engine](../settings/mac.md#docker-engine). Docker Desktop ignores certificates listed
 >   under insecure registries, and does not send client certificates. Commands
 >   like `docker run` that attempt to pull from the registry produce error
 >   messages on the command line, as well as on the registry.
