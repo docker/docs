@@ -185,7 +185,7 @@ Successfully tagged java-docker:latest
 
 ## View local images
 
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../use-desktop/images.md). As we are currently working in the terminal let’s take a look at listing images using the CLI.
+To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As we are currently working in the terminal let’s take a look at listing images using the CLI.
 
 To list images, simply run the `docker images` command.
 
