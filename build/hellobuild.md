@@ -21,15 +21,15 @@ Here are the most common types of instructions:
  
 * [**FROM \<image\>**](../engine/reference/builder/#from) - defines a base for your image.
 * [**RUN \<command\>**](../engine/reference/builder/#run) - executes any commands in a new layer on top of the current image and commits the result. <br/>RUN also has a shell form for running commands.
-* [**WORKDIR \<directory\>**](../engine/reference/builder/#workdir) - sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile.
-* [**COPY \<src\> \<dest\>**](../engine/reference/builder/#copy) - copies new files or directories from \<src\> and adds them to the filesystem of the container at the path \<dest\>.
+* [**WORKDIR \<directory\>**](../engine/reference/builder/#workdir) - sets the working directory for any RUN, CMD, ENTRYPOINT, COPY, and ADD instructions that follow it in the Dockerfile.
+* [**COPY \<src\> \<dest\>**](../engine/reference/builder/#copy) - copies new files or directories from `\<src\>` and adds them to the filesystem of the container at the path `\<dest\>`.
 * [**CMD \<command\>**](../engine/reference/builder/#cmd) - lets you define the default program that is run once you start the container based on this image. Each Dockerfile only has one CMD, and only the last CMD instance is respected when multiple exist.
 <br/>Dockerfiles are crucial inputs for image builds and can facilitate automated, multi-layer image builds based on your unique configurations. Dockerfiles can start simple and grow with your needs and support images that require complex instructions.
   
 For all the possible instructions, see the [Dockerfile reference](../engine/reference/builder/).
 
 ## Example
-Here’s a simple Dockerfile example to get you started with building images. We’ll take a simple "Hello World" Python Flask application, and bundle it into a docker image that we can test locally or deploy anywhere!
+Here’s a simple Dockerfile example to get you started with building images. We’ll take a simple "Hello World" Python Flask application, and bundle it into a Docker image that we can test locally or deploy anywhere!
 
 **Sample A**
 <br/>Let’s say we have the following in a `hello.py` file in our local directory:
@@ -58,7 +58,7 @@ FROM ubuntu:22.04
 
 # install app dependencies
 RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip install flask
+RUN pip install flask==2.1.*
 
 # install app
 COPY hello.py /
@@ -88,7 +88,7 @@ CMD flask run --host 0.0.0.0 --port 8000
 
 * `# install app dependencies`
 
-    Comments in dockerfiles begin with the # symbol. 
+    Comments in dockerfiles begin with the `#` symbol. 
     As your Dockerfile evolves, comments can be instrumental to document how your dockerfile works for any future readers and editors of the file. 
     <br/>See also the [FROM instruction](../engine/reference/builder/#from) page in the Dockerfile reference.
 
@@ -107,7 +107,7 @@ CMD flask run --host 0.0.0.0 --port 8000
 
 * `ENV FLASK_APP=hello` 
 
-    This ENV instruction sets a linux environment variable we’ll need later. This is a flask-specific variable, that configures the command later used to run our `hello.py` application. Without this, flask wouldn’t know where to find our application to be able to run it. <br/>See also the [ENV instruction](../engine/reference/builder/#env) page in the Dockerfile reference.
+    This ENV instruction sets a Linux environment variable we’ll need later. This is a flask-specific variable, that configures the command later used to run our `hello.py` application. Without this, flask wouldn’t know where to find our application to be able to run it. <br/>See also the [ENV instruction](../engine/reference/builder/#env) page in the Dockerfile reference.
 
 
 * `EXPOSE 8000` 
