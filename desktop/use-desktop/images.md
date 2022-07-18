@@ -18,8 +18,6 @@ If you don’t have any images on your disk, run the command `docker pull redis`
 
 Select **Dashboard** > **Images** to see the Redis image.
 
-![Redis image](images/redis-image.png){:width="700px"}
-
 ### Run an image as a container
 
 Now that you have a Redis image on your disk, let’s run this image as a container:

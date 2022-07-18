@@ -1159,7 +1159,7 @@ manuals:
       title: Sign in and get started
     - sectiontitle: Explore Docker Desktop
       section:
-        - path: /desktop/use-desktop/containers/
+        - path: /desktop/use-desktop/container/
           title: Explore Containers
         - path: /desktop/use-desktop/images/
           title: Explore Images
