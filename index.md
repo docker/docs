@@ -8,7 +8,9 @@ notags: true
 skip_read_time: true
 redirect_from:
 - /app-template/working-with-template/
+- /compliance/
 - /cluster/reference/
+- /datacenter/
 - /docker-for-aws/
 - /docker-for-aws/archive/
 - /docker-for-aws/deploy/
@@ -30,6 +32,14 @@ redirect_from:
 - /docker-for-azure/release-notes/
 - /docker-for-azure/upgrade/
 - /docker-for-azure/why/
+- /ee/
+- /ee/cluster/
+- /ee/docker-ee/
+- /ee/dtr/
+- /ee/licensing/
+- /ee/get-support/
+- /ee/supported-platforms/
+- /ee/ucp/
 - /engine/reference/commandline/cluster/
 - /engine/reference/commandline/cluster_backup/
 - /engine/reference/commandline/cluster_create/
@@ -39,4 +49,24 @@ redirect_from:
 - /engine/reference/commandline/cluster_rm/
 - /engine/reference/commandline/cluster_update/
 - /engine/reference/commandline/cluster_version/
+- /v1.4/
+- /v1.5/
+- /v1.6/
+- /v1.7/
+- /v1.8/
+- /v1.9/
+- /v1.10/
+- /v1.10/
+- /v1.11/
+- /v1.12/
+- /v1.13/
+- /v17.03/
+- /v17.06/
+- /v17.06/enterprise/
+- /v17.09/
+- /v17.12/
+- /v18.03/
+- /v18.03/ee/
+- /v18.09/
+- /v18.09/ee/
 ---
