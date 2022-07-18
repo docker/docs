@@ -20,10 +20,6 @@ Before you start to on board your organization, ensure that you've completed the
 
 To begin, you should identify which users you will need to add to your Docker Business organization. Identifying your users will help you efficiently allocate your subscription's seats and manage access.
 
-> **Note**
->
-> If you will use Docker Single Sign-on (SSO), users from your identity provider (IdP) are automatically provisioned in your organization when they sign in. You can identify which users have signed in to Docker Hub by viewing your organization's members in Docker Hub. You can also perform the steps below to identify users before you configure SSO.
-
 1. Identify the Docker users in your organization.
    - If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify Docker users. See your device management software's documentation for details. You can identify Docker users by checking if Docker Desktop is installed at the following location on each user's machine:
       - Mac: `/Applications/Docker.app`
