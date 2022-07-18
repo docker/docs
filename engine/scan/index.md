@@ -116,6 +116,24 @@ Licenses:          enabled
 Note that we do not currently have vulnerability data for your image.
 ```
 
+## Using an HTTP proxy
+
+If your computer needs to use an HTTP proxy, then set the `HTTPS_PROXY` environment variable when using scan. For example:
+
+```console
+$ export HTTPS_PROXY=http://username:password@proxyAddress:port
+$ docker scan hello-world
+```
+
+or for PowerShell:
+
+```console
+> $env:HTTPS_PROXY = "http://username:password@proxy:port"
+> docker scan hello-world
+```
+
+Note that `docker scan` does not use the same proxy settings as Docker Desktop or the settings specified in `.docker/config.json` or the settings used by the Docker engine.
+
 ### Get a detailed scan report
 
 You can get a detailed scan report about a Docker image by providing the Dockerfile used to create the image. The syntax is `docker scan --file PATH_TO_DOCKERFILE DOCKER_IMAGE`.
