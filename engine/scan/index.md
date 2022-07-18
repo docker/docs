@@ -125,7 +125,7 @@ $ export HTTPS_PROXY=http://username:password@proxyAddress:port
 $ docker scan hello-world
 ```
 
-or for powershell:
+or for PowerShell:
 
 ```console
 > $env:HTTPS_PROXY = "http://username:password@proxy:port"
