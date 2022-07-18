@@ -74,7 +74,7 @@ CMD flask run --host 0.0.0.0 --port 8000
 
 * `# syntax=docker/dockerfile:1` 
 
-    This is our syntax directive. It pins the exact version of the dockerfile syntax we’re using. As a [best practice](../../develop/develop-images/dockerfile_best-practices.md), this should be the very first line in all our Dockerfiles as it informs Buildkit the right version of the Dockerfile to use. 
+    This is our syntax directive. It pins the exact version of the dockerfile syntax we’re using. As a [best practice](../../develop/dev-best-practices/), this should be the very first line in all our Dockerfiles as it informs Buildkit the right version of the Dockerfile to use. 
       See also [Syntax](../../engine/reference/builder/#syntax).
     
     > **Note** 
