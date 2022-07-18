@@ -1,4 +1,4 @@
-name: remove published site from netlify
+name: clean-pr
 
 on:
   pull_request:
@@ -6,16 +6,22 @@ on:
       - closed
 
 jobs:
-  remove-site-from-netlify:
-    name: build
-    runs-on: ubuntu-18.04
+  netlify-remove:
+    runs-on: ubuntu-20.04
     if: github.event.pull_request.head.repo.fork == false
     steps:
-      - uses: actions/checkout@v2
+      -
+        name: Checkout
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: delete from netlify
-        uses: ./.github/actions/netlify-clean
+      -
+        name: Remove site from Netlify
+        uses: docker/bake-action@v2
         with:
-          netlify_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          site_name: "${{ github.repository }}/${{ github.head_ref }}"
+          targets: netlify-remove
+          set: |
+            *.cache-from=type=gha,scope=releaser
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_NAME: ${{ github.repository }}/${{ github.head_ref }}
