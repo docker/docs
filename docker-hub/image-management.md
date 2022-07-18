@@ -25,13 +25,16 @@ With the new Advanced Image Management dashboard, all of this is now simpler and
 To access the  Advanced Image Management dashboard:
 
 1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-2. Click **General** and click **Go to Advanced Image Management** from the main menu, and select a repository from the list.
+2. Click **Repositories** from the main menu and select a repository from the list.
+3. Click **General** or **Tags**, and click **Go to Advanced Image Management**.
 
-![Advanced image management dashboard](images/advanced-image-general.png){:width="700px"}
+  ![Advanced image management dashboard](images/advanced-image-general.png){:width="700px"}
 
-3. In the dashboard you can sort and filter by active, inactive and untagged images.
+4. In the dashboard you can sort and filter by active, inactive and untagged images.
 
-    >Note: You must be logged in as a Docker Pro, Team, or a Business user to use the Advanced Image Management dashboard. Click [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener" class="_"} to upgrade your existing subscription.
+    > **Note**
+    >
+    > You must be logged in as a Docker Pro, Team, or a Business user to use the Advanced Image Management dashboard. Click [Upgrade](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){: target="_blank" rel="noopener"class="_"} to upgrade your existing subscription.
 
 ## View images
 
@@ -41,17 +44,18 @@ The Advanced Image Management dashboard provides a snapshot of your existing ima
 
 ## Delete images
 
-> You must be logged in as a Docker Pro, Team, or a Business user and have admin access to the repository to delete images.
+You must be logged in as a Docker Pro, Team, or a Business user and have admin access to the repository to delete images. By default, the Advanced Image Management dashboard displays inactive images in the repository.
 
-By default, the Advanced Image Management dashboard displays inactive images in the repository. To delete an inactive image:
+To delete an inactive image:
 
 1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-2. Click **General** or **Tab** and click Go to Advanced Image Management from the main menu.
-3. Click **Inactive images** and select the images that you want to delete from the repository and click the delete icon.
+2. Click **Repositories** from the main menu and select a repository from the list.
+3. Click **General** or **Tags**, and click **Go to Advanced Image Management**.
+4. Enable the **Inactive** filter to view your inactive tags.
 
     ![Advanced image management dashboard](images/dashboard-delete-image.png){:width="700px"}
 
-4. Select the check box to confirm your action and then click **Delete**.
+5. Select the images that you want to delete from the repository and click the delete icon.
 
 ### Deleting a tagged image
 
