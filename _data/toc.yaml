@@ -1392,11 +1392,15 @@ manuals:
       title: Hello Build
     - sectiontitle: Buildx
       section:
-        - path: /build/buildx/
-          title: Working with Buildx
         - path: /build/buildx/install/
           title: Install Buildx
-
+        - path: /build/buildx/
+          title: Working with Buildx
+        - path: /build/buildx/multiple-builders/
+          title: Using multiple builders
+        - path: /build/buildx/
+          title: Bulding multiplatform images          
+          
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
