@@ -1039,8 +1039,14 @@ reference:
         title: ExecResultV0
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
         title: BackendV0  
-- title: Dockerfile reference
-  path: /reference/dockerfile/
+
+- sectiontitle: Dockerfile reference
+  section:
+    - path: /reference/dockerfile/
+      title: Dockerfile specification
+    - path: /reference/dockerfile/release-notes/
+      title: Release notes
+
 - sectiontitle: Compose file reference
   section:
     - path: /compose/compose-file/
