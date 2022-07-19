@@ -116,6 +116,7 @@ automatically added to the "docker images" view by default, whereas when using
 other drivers, the method for outputting an image needs to be selected
 with `--output`.
 
+<<<<<<< Updated upstream:buildx/working-with-buildx.md
 ## Work with builder instances
 
 By default, Buildx uses the `docker` driver if it is supported, providing a user
@@ -224,6 +225,9 @@ RUN echo "I am running on $BUILDPLATFORM, building for $TARGETPLATFORM" > /log
 FROM alpine
 COPY --from=build /log /log
 ```
+=======
+
+>>>>>>> Stashed changes:build/buildx/index.md
 
 ## High-level build options
 

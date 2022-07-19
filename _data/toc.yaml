@@ -1388,6 +1388,20 @@ manuals:
       title: Overview
     - path: /build/hellobuild/
       title: Hello Build
+<<<<<<< Updated upstream
+=======
+    - sectiontitle: Buildx
+      section:
+        - path: /build/buildx/install/
+          title: Install Buildx
+        - path: /build/buildx/
+          title: Working with Buildx
+        - path: /build/buildx/multiple-builders/
+          title: Using with multiple builders
+        - path: /build/buildx/
+          title: Bulding multiplatform images
+          
+>>>>>>> Stashed changes
 
 - sectiontitle: Docker Compose
   section:
