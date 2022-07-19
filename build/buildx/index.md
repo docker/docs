@@ -157,25 +157,7 @@ FROM alpine
 COPY --from=build /log /log
 ```
 
-## High-level build options
+## High-level build options with Bake
 
-Buildx also aims to provide support for high-level build concepts that go beyond
-invoking a single build command.
-
-BuildKit efficiently handles multiple concurrent build requests and de-duplicating
-work. The build commands can be combined with general-purpose command runners
-(for example, `make`). However, these tools generally invoke builds in sequence
-and therefore cannot leverage the full potential of BuildKit parallelization,
-or combine BuildKit’s output for the user. For this use case, we have added a
-command called [`docker buildx bake`](../../engine/reference/commandline/buildx_bake.md).
-
-The `bake` command supports building images from compose files, similar to
-[`docker-compose build`](../../engine/reference/commandline/compose_build.md),
-but allowing all the services to be built concurrently as part of a single
-request.
-
-There is also support for custom build rules from HCL/JSON files allowing
-better code reuse and different target groups. The design of bake is in very
-early stages, and we are looking for feedback from users. Let us know your
-feedback by creating an issue in the [Docker Buildx](https://github.com/docker/buildx/issues){:target="_blank" rel="noopener" class="_"}
-GitHub repository.
+Check out our guide about [Bake](../bake/index.md) to get started with the
+[`docker buildx bake` command](../../engine/reference/commandline/buildx_bake.md).

@@ -1396,6 +1396,38 @@ manuals:
           title: Working with Buildx
         - path: /build/buildx/install/
           title: Install Buildx
+    - sectiontitle: Bake
+      section:
+        - path: /build/bake/
+          title: Overview
+        - path: /build/bake/file-definition/
+          title: File definition
+        - path: /build/bake/configuring-build/
+          title: Configuring builds
+        - path: /build/bake/hcl-funcs/
+          title: User defined HCL functions
+        - path: /build/bake/build-contexts/
+          title: Build contexts and linking targets
+        - path: /build/bake/compose-file/
+          title: Building from Compose file
+    - sectiontitle: Guides
+      section:
+        - path: /build/guides/cni-networking/
+          title: CNI networking
+        - path: /build/guides/custom-network/
+          title: Using a custom network
+        - path: /build/guides/custom-registry-config/
+          title: Using a custom registry config
+        - path: /build/guides/kubernetes-builder/
+          title: Kubernetes builder
+        - path: /build/guides/opentelemetry/
+          title: OpenTelemetry support
+        - path: /build/guides/registry-mirror/
+          title: Define a registry mirror
+        - path: /build/guides/remote-builder/
+          title: Remote builder
+        - path: /build/guides/resource-limiting/
+          title: Resource limiting
 
 - sectiontitle: Docker Compose
   section:
