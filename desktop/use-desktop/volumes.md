@@ -12,7 +12,7 @@ By default, the **Volumes** view displays a list of all the volumes. Volumes tha
 
 ## Manage your volumes
 
-Use the **Search** field to search for any specific volumes. 
+Use the **Search** field to search for any specific volume. 
 
 You can sort volumes by:
 - Name
@@ -21,7 +21,7 @@ You can sort volumes by:
 
 From the **More options** menu to the right of the search bar, you can choose what volume information to display.
 
-## Examine a volume
+## Inspect a volume
 
 To explore the details of a specific volume, select a volume from the list. This opens the detailed view.
 
