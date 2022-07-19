@@ -42,7 +42,7 @@ cannot access features that require an active internet
 connection. Additionally, any functionality that requires you to sign won't work while using Docker Desktop offline or in air-gapped environments.
 This includes:
 
-- The in-app [Quick Start Guide](../install/mac-install.md#quick-start-guide)
+- The in-app [Quick Start Guide](../get-started.md#quick-start-guide)
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
