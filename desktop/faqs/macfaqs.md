@@ -254,7 +254,31 @@ In Zsh, the [completion
 system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank" rel="nooopener" class="_"}
 takes care of things. To activate completion for Docker commands,
 these files need to be copied or symlinked to your Zsh `site-functions/`
-directory. For example, if you installed Zsh via [Homebrew](https://brew.sh){:target="_blank" rel="nooopener" class="_"}:
+directory.
+
+If you are using Zsh from MacOS (starting with MacOS Catalina):
+
+Create the `completions` directory:
+```bash
+mkdir -p ~/.zsh/completions
+```
+ 
+Enable autocompletion for Zsh:
+
+```bash
+cat ~/.zshrc | grep 'fpath=(~/.zsh/completions $fpath)' > /dev/null || echo 'fpath=(~/.zsh/completions $fpath)' >> ~/.zshrc
+cat ~/.zshrc | grep 'autoload -Uz compinit && compinit' > /dev/null || echo 'autoload -Uz compinit && compinit' >> ~/.zshrc
+```
+ 
+Now add the completion for Docker:
+
+```
+etc=/Applications/Docker.app/Contents/Resources/etc
+ln -s $etc/docker.zsh-completion  ~/.zsh/completions/_docker
+ln -s $etc/docker-compose.zsh-completion ~/.zsh/completions/_docker-compose
+```
+ 
+Or if you installed Zsh via [Homebrew](https://brew.sh){:target="_blank" rel="nooopener" class="_"}:
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
@@ -282,3 +306,4 @@ Now add fish completions from docker.
 $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
 $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
+
