@@ -49,14 +49,22 @@ jobs:
           set: |
             *.cache-from=type=gha,scope=build
 
-      # Disabled netlify-deploy due to flakey 502 http errors
-      # - name: copy static files
-      #   if: github.event.pull_request.head.repo.fork == false
-      #   run: docker run -v ${PWD}:/output documentation:latest cp -r /usr/share/nginx/html /output/_site
-      # - uses: ./.github/actions/netlify-deploy
-      #   if: github.event.pull_request.head.repo.fork == false
-      #   with:
-      #     directory: _site
-      #     netlify_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     netlify_account_slug: ${{ secrets.NETLIFY_ACCOUNT_SLUG }}
-      #     site_name: "${{ github.repository }}/${{ github.head_ref }}"
+  # build-releaser job will just build _releaser app used for Netlify and
+  # AWS deployment in publish workflow. it's just to be sure it builds correctly.
+  build-releaser:
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build
+        uses: docker/bake-action@v2
+        with:
+          targets: releaser-build
+          set: |
+            *.cache-from=type=gha,scope=releaser
+            *.cache-to=type=gha,scope=releaser,mode=max

@@ -24,6 +24,7 @@ kramdown:
   toc_levels: 2..3
 
 exclude:
+  - _releaser
   - _samples
   - _scripts
   - datacenter

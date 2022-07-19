@@ -6,6 +6,7 @@
 # such as the "enterprise" stubs, which are in place to facilitate redirects
 # to Mirantis.
 exclude:
+  - _releaser
   - _scripts
   - docker-bake.hcl
   - LICENSE

@@ -1383,6 +1383,14 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
+
+- sectiontitle: Docker Build
+  section:
+    - path: /build/
+      title: Overview
+    - path: /build/hellobuild/
+      title: Hello Build
+
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
