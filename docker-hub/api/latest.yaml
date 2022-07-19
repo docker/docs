@@ -5,7 +5,7 @@ info:
   x-logo:
     url: https://docs.docker.com/images/logo-docker-main.png
     href: /reference
-  description: >
+  description: |
     Docker Hub is a service provided by Docker for finding and sharing container
     images with your team.
 
@@ -19,43 +19,28 @@ info:
 tags:
   - name: resources
     x-displayName: Resources
-    description: >
+    description: |
       The following resources are available to interact with the documented API:
 
-
       - <a href="https://github.com/docker/hub-tool#readme" target="_blank">Docker Hub CLI tool</a> (currently experimental)
-
       - <a href="https://www.postman.com/dockerdev/workspace/docker-hub/collection/17990590-9574e087-2a50-4ecf-88b3-55f12a29d99e" target="_blank">Postman Collection</a>
   - name: rate-limiting
     x-displayName: Rate Limiting
-    description: >
-      The Docker Hub API is limited on the amount of requests you can perform
-
-      per minute against it.
-
+    description: |
+      The Docker Hub API is limited on the amount of requests you can perform per minute against it.
 
       If you haven't hit the limit, each request to the API will return the
 
       following headers in the response.
 
       - `X-RateLimit-Limit` - The limit of requests per minute.
-
-      - `X-RateLimit-Remaining` - The remaining amount of calls within the limit
-
-      period.
-
+      - `X-RateLimit-Remaining` - The remaining amount of calls within the limit period.
       - `X-RateLimit-Reset` - The unix timestamp of when the remaining resets.
 
+      If you have hit the limit, you will receive a response status of `429` and the `X-Retry-After` 
+      header in the response.
 
-      If you have hit the limit, you will receive a response status of `429` and
-
-      the `X-Retry-After` header in the response.
-
-
-      The `X-Retry-After` header is a unix timestamp of when you can call the
-
-      API again.
-
+      The `X-Retry-After` header is a unix timestamp of when you can call the API again.
 
       *Note: These rate limits are separate from anti-abuse and Docker Hub
 
@@ -64,72 +49,55 @@ tags:
       limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).*
   - name: authentication
     x-displayName: Authentication
-    description: >
+    description: |
       Most Docker Hub API endpoints require you to authenticate using your
       Docker credentials before using them.
 
-
-      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending on your plan (Free, Pro, or Team) and your account's permissions.
+      Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending 
+      on your plan (Free, Pro, or Team) and your account's permissions.
 
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
   - name: access-tokens
     x-displayName: Personal Access Tokens
-    description: >
-      The Personal Access Token endpoints lets you manage personal access
+    description: |
+      The Personal Access Token endpoints lets you manage personal access tokens. For more 
+      information, see [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
 
-      tokens. For more information, see
-
-      [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
-
-
-      You can use a personal access token instead of a password in the
-
-      [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) or
-
-      in the [Create an authentication token](#operation/PostUsersLogin) route
-
-      to obtain a bearer token.
-
+      You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) 
+      or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer 
+      token.
 
       ### Scopes
 
-
-      For each scope grouping (in this case "repo"), you only need to define 1
-
-      scope as any lower scopes are assumed. For example: If you define
-
-      `repo:write`, the API assumes the scope of both `repo:read` *and*
-
-      `repo:public_read` as well. If you were to define both `repo:write` *and*
-
+      For each scope grouping (in this case "repo"), you only need to define 1 scope as any lower 
+      scopes are assumed. For example: If you define `repo:write`, the API assumes the scope of both 
+      `repo:read` *and* `repo:public_read` as well. If you were to define both `repo:write` *and* 
       `repo:read`, then `repo:read` is assumed by `repo:write` and ignored.
 
-
-      ***Treat your personal access token like your password and keep it secret. You cannot retrieve your token after
-
-      it is generated.***
+      ***Treat your personal access token like your password and keep it secret. You cannot retrieve 
+      your token after it is generated.***
   - name: images
     x-displayName: Advanced Image Management
-    description: >
+    description: |
       The Advanced Image Management API endpoints allow you to manage Docker
       images across all repositories.
 
       For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
   - name: audit-logs
     x-displayName: Audit Logs
-    description: >
+    description: |
       The Audit Logs API endpoints allow you to query audit log events across a
       namespace.
 
       For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/)
   - name: org-settings
     x-displayName: Org Settings
-    description: >
+    description: |
       The Org Settings API endpoints allow you to manage your organization's
       settings.
   - name: repositories
     x-displayName: Repositories
-    description: >
+    description: |
       The repository endpoints allow you to manage your repository's
       configuration like description.
 x-tagGroups:
@@ -152,13 +120,11 @@ paths:
         - authentication
       summary: Create an authentication token
       operationId: PostUsersLogin
-      description: >
+      description: |
         Creates and returns a bearer token in JWT format that you can use to
         authenticate with Docker Hub APIs.
 
-
         The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
-
 
         Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
       requestBody:
@@ -169,13 +135,13 @@ paths:
         description: Login details.
         required: true
       responses:
-        "200":
+        200:
           description: Authentication successful
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
-        "401":
+        401:
           description: Authentication failed or second factor required
           content:
             application/json:
@@ -187,16 +153,13 @@ paths:
         - authentication
       summary: Second factor authentication.
       operationId: PostUsers2FALogin
-      description: >
+      description: |
         When user has 2FA enabled, this is the second call to perform after
         `/v2/users/login` call.
 
-
         Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
 
-
         The returned token is used in the HTTP Authorization header like `Authorization: Bearer {TOKEN}`.
-
 
         Most Docker Hub APIs require this token either to consume or to get detailed information. For example, to list images in a private repository.
       requestBody:
@@ -207,13 +170,13 @@ paths:
         description: Login details.
         required: true
       responses:
-        "200":
+        200:
           description: Authentication successful
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/PostUsersLoginSuccessResponse"
-        "401":
+        401:
           description: Authentication failed or second factor required
           content:
             application/json:
@@ -232,15 +195,15 @@ paths:
               $ref: "#/components/schemas/createAccessTokenRequest"
         required: true
       responses:
-        "201":
+        201:
           description: Created
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/createAccessTokensResponse"
-        "400":
+        400:
           $ref: "#/components/responses/BadRequest"
-        "401":
+        401:
           $ref: "#/components/responses/Unauthorized"
     get:
       summary: Get a list of personal access tokens
@@ -259,17 +222,23 @@ paths:
             type: number
             default: 10
       responses:
-        "200":
+        200:
           description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/getAccessTokensResponse"
-        "400":
+        400:
           $ref: "#/components/responses/BadRequest"
-        "401":
+        401:
           $ref: "#/components/responses/Unauthorized"
-  "/v2/access-tokens/{uuid}":
+  /v2/access-tokens/{uuid}:
+    parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
     patch:
       summary: Update a personal access token
       description: |
@@ -277,12 +246,6 @@ paths:
         token's label or enable/disable it.
       tags:
         - access-tokens
-      parameters:
-        - in: path
-          name: uuid
-          required: true
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -290,15 +253,15 @@ paths:
               $ref: "#/components/schemas/patchAccessTokenRequest"
         required: true
       responses:
-        "200":
+        200:
           description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/patchAccessTokenResponse"
-        "400":
+        400:
           $ref: "#/components/responses/BadRequest"
-        "401":
+        401:
           $ref: "#/components/responses/Unauthorized"
     get:
       summary: Get a personal access token
@@ -306,7 +269,7 @@ paths:
       tags:
         - access-tokens
       responses:
-        "200":
+        200:
           description: OK
           content:
             application/json:
@@ -318,9 +281,9 @@ paths:
                       token:
                         type: string
                         example: ""
-        "401":
+        401:
           $ref: "#/components/responses/Unauthorized"
-        "404":
+        404:
           $ref: "#/components/responses/NotFound"
     delete:
       summary: Delete a personal access token
@@ -328,25 +291,19 @@ paths:
         Deletes a personal access token permanently. This cannot be undone.
       tags:
         - access-tokens
-      parameters:
-        - in: path
-          name: uuid
-          required: true
-          schema:
-            type: string
       responses:
-        "204":
+        204:
           description: A successful response.
-        "401":
+        401:
           $ref: "#/components/responses/Unauthorized"
-        "404":
+        404:
           $ref: "#/components/responses/NotFound"
-  "/v2/namespaces/{namespace}/repositories/{repository}/images-summary":
+  /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
     get:
       tags:
         - images
       summary: Get summary of repository's images
-      description: >
+      description: |
         Gets the number of images in a repository and the number of images
         counted as active and inactive.
       operationId: GetNamespacesRepositoriesImagesSummary
@@ -366,29 +323,28 @@ paths:
         - name: active_from
           in: query
           required: false
-          description: >
+          description: |
             Sets the time from which an image must have been pushed or pulled to
             be counted as active.
-
 
             Defaults to 1 month before the current time.
           schema:
             type: string
       responses:
-        "200":
+        200:
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetNamespaceRepositoryImagesSummaryResp\
-                  onse"
-        "401":
+                $ref:
+                  "#/components/schemas/GetNamespaceRepositoryImagesSummaryResponse"
+        401:
           description: Unauthorized - user does not have read access to the namespace
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  "/v2/namespaces/{namespace}/repositories/{repository}/images":
+  /v2/namespaces/{namespace}/repositories/{repository}/images:
     get:
       tags:
         - images
@@ -422,8 +378,8 @@ paths:
           required: false
           description: |
             Filters to only show images with:
-            * `true`: at least 1 current tag.
-            * `false`: no current tags.
+            - `true`: at least 1 current tag.
+            - `false`: no current tags.
           schema:
             type: boolean
         - name: ordering
@@ -443,10 +399,9 @@ paths:
         - name: active_from
           in: query
           required: false
-          description: >
+          description: |
             Sets the time from which an image must have been pushed or pulled to
             be counted as active.
-
 
             Defaults to 1 month before the current time.
           schema:
@@ -464,25 +419,25 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        200:
           description: Success
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetNamespaceRepositoryImagesResponse"
-        "401":
+        401:
           description: Unauthorized - user does not have read access to the namespace.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-        "403":
+        403:
           description: Forbidden - this API is only available to users on Pro or Team plans.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  "/v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags":
+  /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
     get:
       tags:
         - images
@@ -521,42 +476,38 @@ paths:
           schema:
             type: integer
       responses:
-        "200":
+        200:
           description: Success
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetNamespaceRepositoryImagesTagsResponse"
-        "401":
+        401:
           description: Unauthorized - user does not have read access to the namespace
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-        "403":
+        403:
           description: Forbidden - this API is only available to users on Pro or Team plans
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  "/v2/namespaces/{namespace}/delete-images":
+  /v2/namespaces/{namespace}/delete-images:
     post:
       tags:
         - images
       summary: Delete images
       operationId: PostNamespacesDeleteImages
-      description: >
-        Deletes one or more images within a namespace. This is currently limited
-        to a single repostiory.
-
+      description: |
+        Deletes one or more images within a namespace. This is currently limited to a single 
+        repository.
 
         If you attempt to delete images that are marked as active or are currently tagged, the deletion does not happen and it displays the warnings.
-
         To continue with the deletion, you must ignore these warnings by putting them in the `ignore_warnings` property.
 
-
         Deleting a currently tagged image deletes the tag from the repository.
-
 
         You cannot ignore errors. It is not possible to directly delete children of multi-arch images.
       parameters:
@@ -574,32 +525,31 @@ paths:
         description: Delete request.
         required: true
       responses:
-        "200":
+        200:
           description: Deletion completed
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PostNamespacesDeleteImagesResponseSucce\
-                  ss"
-        "400":
+                $ref: "#/components/schemas/PostNamespacesDeleteImagesResponseSuccess"
+        400:
           description: Deletion not possible
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/PostNamespacesDeleteImagesResponseError"
-        "403":
+        403:
           description: Forbidden - this API is only available to users on Pro or Team plans
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-  "/v2/auditlogs/{account}":
+  /v2/auditlogs/{account}:
     get:
       summary: Returns list of audit log  events.
       description: Get audit log events for a given namespace.
       operationId: AuditLogs_GetAuditLogs
       responses:
-        "200":
+        200:
           description: A successful response.
           content:
             application/json:
@@ -617,9 +567,10 @@ paths:
                           digest: sha256:c1ae9c435032a276f80220c7d9b40f76266bbe79243d34f9cda30b76fe114dfa
                           tag: latest
                         timestamp: 2021-02-19T01:34:35Z
-                        action_description: pushed the tag latest with the digest
+                        action_description:
+                          pushed the tag latest with the digest
                           sha256:c1ae9c435032a to the repository docker/example
-        "429":
+        429:
           description: ""
           content:
             application/json:
@@ -629,7 +580,7 @@ paths:
                   value:
                     detail: Rate limit exceeded
                     error: false
-        "500":
+        500:
           description: ""
           content:
             application/json:
@@ -648,14 +599,16 @@ paths:
           schema:
             type: string
         - name: action
-          description: action name one of ["repo.tag.push", ...]. Optional parameter to
+          description:
+            action name one of ["repo.tag.push", ...]. Optional parameter to
             filter specific audit log actions.
           in: query
           required: false
           schema:
             type: string
         - name: name
-          description: name. Optional parameter to filter audit log events to a specific
+          description:
+            name. Optional parameter to filter audit log events to a specific
             name. For repository events, this is the name of the repository. For
             organization events, this is the name of the organization. For team
             member events, this is the username of the team member.
@@ -664,7 +617,8 @@ paths:
           schema:
             type: string
         - name: actor
-          description: actor name. Optional parameter to filter audit log events to the
+          description:
+            actor name. Optional parameter to filter audit log events to the
             specific user who triggered the event.
           in: query
           required: false
@@ -702,14 +656,15 @@ paths:
             default: 25
       tags:
         - audit-logs
-  "/v2/auditlogs/{account}/actions":
+  /v2/auditlogs/{account}/actions:
     get:
       summary: Returns list of audit log actions.
-      description: Get audit log actions for a namespace to be used as a filter for
+      description:
+        Get audit log actions for a namespace to be used as a filter for
         querying audit events.
       operationId: AuditLogs_GetAuditActions
       responses:
-        "200":
+        200:
           description: A successful response.
           content:
             application/json:
@@ -761,7 +716,7 @@ paths:
                             description: contains image tag delete events
                             label: Tag Deleted
                         label: Repository
-        "429":
+        429:
           description: ""
           content:
             application/json:
@@ -771,7 +726,7 @@ paths:
                   value:
                     detail: Rate limit exceeded
                     error: false
-        "500":
+        500:
           description: ""
           content:
             application/json:
@@ -791,7 +746,7 @@ paths:
             type: string
       tags:
         - audit-logs
-  "/v2/orgs/{name}/settings":
+  /v2/orgs/{name}/settings:
     parameters:
       - in: path
         name: name
@@ -806,30 +761,27 @@ paths:
       tags:
         - org-settings
       responses:
-        "200":
+        200:
           description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/orgSettings"
-        "401":
+        401:
           $ref: "#/components/responses/Unauthorized"
-        "403":
+        403:
           $ref: "#/components/responses/Forbidden"
-        "404":
+        404:
           $ref: "#/components/responses/NotFound"
     put:
       summary: Update organization settings
-      description: >
+      description: |
         Updates an organization's settings. Some settings are only used when the
         organization is on a business plan.
 
-
         ***Only users in the "owners" group of the organization can use this endpoint.***
 
-
         The following settings are only used on a business plan:
-
         - `restricted_images`
       tags:
         - org-settings
@@ -850,19 +802,19 @@ paths:
                         - allow_verified_publishers
         required: true
       responses:
-        "200":
+        200:
           description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/orgSettings"
-        "401":
+        401:
           $ref: "#/components/responses/Unauthorized"
-        "403":
+        403:
           $ref: "#/components/responses/Forbidden"
-        "404":
+        404:
           $ref: "#/components/responses/NotFound"
-  "/v2/repositories/{namespace}/{repository}/":
+  /v2/repositories/{namespace}/{repository}/:
     parameters:
       - name: namespace
         in: path
@@ -880,16 +832,12 @@ paths:
       tags:
         - repositories
       summary: Update repository configuration
-      description: >
+      description: |
         Update the configuration of a repository:
 
-
         - description: the summary of a repository
-
         - full description: the readme displayed on repository's page, markdown accepted
-
         - visibility: is the repository public or private
-
 
         Authentication is required.
       operationId: PatchRepositoryDescription
@@ -899,14 +847,15 @@ paths:
             schema:
               $ref: "#/components/schemas/update_repository"
       responses:
-        "200":
+        200:
           description: Success
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/repository"
-        "403":
-          description: Forbidden - access to the resource is forbidden, you don't have
+        403:
+          description:
+            Forbidden - access to the resource is forbidden, you don't have
             needed permission to perform this action.
           content:
             application/json:
@@ -916,8 +865,8 @@ paths:
                 response:
                   value:
                     detail: You do not have permission to perform this action.
-        "404":
-          description: Repository not found or unable to access the ressource
+        404:
+          description: Repository not found or unable to access the resource
           content:
             application/json:
               schema:
@@ -967,7 +916,8 @@ components:
           type: string
           example: myusername
         password:
-          description: The password or personal access token (PAT) of the Docker Hub
+          description:
+            The password or personal access token (PAT) of the Docker Hub
             account to authenticate with.
           type: string
           example: hunter2
@@ -976,7 +926,7 @@ components:
       type: object
       properties:
         token:
-          description: >
+          description: |
             Created authentication token.
 
             This token can be used in the HTTP Authorization header as a JWT to authenticate with the Docker Hub APIs.
@@ -995,7 +945,8 @@ components:
           example: Incorrect authentication credentials
           nullable: false
         login_2fa_token:
-          description: Short time lived token to be used on `/v2/users/2fa-login` to
+          description:
+            Short time lived token to be used on `/v2/users/2fa-login` to
             complete the authentication. This field is present only if 2FA is
             enabled.
           type: string
@@ -1013,7 +964,8 @@ components:
           type: string
           example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
         code:
-          description: The Time-based One-Time Password of the Docker Hub account to
+          description:
+            The Time-based One-Time Password of the Docker Hub account to
             authenticate with.
           type: string
           example: 123456
@@ -1066,7 +1018,8 @@ components:
       type: object
       properties:
         active_from:
-          description: Time from which an image must have been pushed or pulled to be
+          description:
+            Time from which an image must have been pushed or pulled to be
             counted as active.
           type: string
           example: 2021-01-25T14:25:37.076343059Z
@@ -1094,13 +1047,15 @@ components:
           type: integer
           example: 100
         next:
-          description: Link to the next page with the same query parameters if there are
+          description:
+            Link to the next page with the same query parameters if there are
             more images.
           type: string
           example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=4&page_size=20
           nullable: true
         previous:
-          description: Link to the previous page with the same query parameters if not on
+          description:
+            Link to the previous page with the same query parameters if not on
             first page.
           type: string
           example: https://hub.docker.com/v2/namespaces/mynamespace/repositories/myrepo/images?&page=2&page_size=20
@@ -1134,9 +1089,8 @@ components:
                       type: string
                       example: latest
                     is_current:
-                      description: >
+                      description: |
                         `true` if the tag currently points to this image.
-
 
                         `false` if it has been overwritten to point at a different image.
                       type: boolean
@@ -1147,13 +1101,15 @@ components:
                 example: 2021-02-24T22:05:27.526308Z
                 nullable: true
               last_pulled:
-                description: Time when this image was last pulled. Note this is updated at
+                description:
+                  Time when this image was last pulled. Note this is updated at
                   most once per hour.
                 type: string
                 example: 2021-02-24T23:16:10.200008Z
                 nullable: true
               status:
-                description: The status of the image based on its last activity against the
+                description:
+                  The status of the image based on its last activity against the
                   `active_from` time.
                 type: string
                 enum:
@@ -1189,9 +1145,8 @@ components:
                 type: string
                 example: latest
               is_current:
-                description: >
+                description: |
                   `true` if the tag currently points to this image.
-
 
                   `false` if it has been overwritten to point at a different image.
                 type: boolean
@@ -1201,15 +1156,15 @@ components:
       type: object
       properties:
         dry_run:
-          description: If `true` then will check and return errors and unignored warnings
+          description:
+            If `true` then will check and return errors and unignored warnings
             for the deletion request but will not delete any images.
           type: boolean
           example: false
         active_from:
-          description: >
+          description: |
             Sets the time from which an image must have been pushed or pulled to
             be counted as active.
-
 
             Defaults to 1 month before the current time.
           type: string
@@ -1232,19 +1187,15 @@ components:
                 type: string
                 example: sha256:1234567890abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqr
         ignore_warnings:
-          description: >
-            Warnings to ignore. If a warning is not ignored then no deletions
-            will happen and the warning is returned in the response.
-
+          description: |
+            Warnings to ignore. If a warning is not ignored then no deletions will happen and the 
+            warning is returned in the response.
 
             These warnings include:
 
-
-            * is_active: warning when attempting to delete an image that is marked as active.
-
-
-            * current_tag: warning when attempting to delete an image that has one or more current tags in the repository.
-
+            - is_active: warning when attempting to delete an image that is marked as active.
+            - current_tag: warning when attempting to delete an image that has one or more current 
+            tags in the repository.
 
             Warnings can be copied from the response to the request.
           type: array
@@ -1326,14 +1277,16 @@ components:
                   type: object
                   properties:
                     errors:
-                      description: Errors from validating delete request. These cannot be
+                      description:
+                        Errors from validating delete request. These cannot be
                         ignored.
                       type: array
                       items:
                         type: object
                         properties:
                           repository:
-                            description: Name of the repository of the image that caused
+                            description:
+                              Name of the repository of the image that caused
                               the error.
                             type: string
                             example: myrepo
@@ -1350,18 +1303,15 @@ components:
                               - child_manifest
                             example: not_found
                     warnings:
-                      description: >
+                      description: |
                         Warnings that can be ignored.
-
 
                         These warnings include:
 
-
-                        * is_active: warning when attempting to delete an image that is marked as active.
-
-
-                        * current_tag: warning when attempting to delete an image that has one or more current tags in the repository.
-
+                        - is_active: warning when attempting to delete an image that is marked as 
+                        active.
+                        - current_tag: warning when attempting to delete an image that has one or 
+                        more current tags in the repository.
 
                         Warnings can be copied from the response to the request.
                       type: array
@@ -1369,7 +1319,8 @@ components:
                         type: object
                         properties:
                           repository:
-                            description: Name of the repository of the image that caused
+                            description:
+                              Name of the repository of the image that caused
                               the warning.
                             type: string
                             example: myrepo
@@ -1542,8 +1493,8 @@ components:
           example: My read only token
         scopes:
           type: array
-          description: 'Valid scopes: "repo:admin", "repo:write", "repo:read",
-            "repo:public_read"'
+          description: |
+            Valid scopes: "repo:admin", "repo:write", "repo:read", "repo:public_read"
           example:
             - repo:read
           items:
@@ -1611,32 +1562,25 @@ components:
       properties:
         description:
           type: string
-          description: The description of a repository, as displayed below the repository
+          description:
+            The description of a repository, as displayed below the repository
             name.
           example: Hello World! (an example of minimal Dockerization)
         full_description:
           type: string
-          description: The full description displayed on the repository page. Markdown
+          description:
+            The full description displayed on the repository page. Markdown
             accepted.
-          example: >
+          example: |
             # Quick reference
-
-
-            * Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)
-
-
+            - Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)
+            
             # Example output
-
-
             ```
-
             $ docker run hello-world
 
-
             Hello from Docker!
-
             This message shows that your installation appears to be working correctly.
-
             ```
     repository:
       type: object
@@ -1663,24 +1607,15 @@ components:
         full_description:
           type: string
           description: Description (readme) of the repository, in Markdown
-          example: >-
+          example: |
             # Quick reference 
 
-
-            * Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)
-
+            - Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)
 
             # Example output
-
-
             ```
-
             $ docker run hello-world
 
-
-
             Hello from Docker!
-
             This message shows that your installation appears to be working correctly.
-
             ```
