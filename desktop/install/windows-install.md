@@ -180,16 +180,6 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
     For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 
-### Quick Start Guide
-
-When the initialization is complete, Docker Desktop launches the **Quick Start Guide**. This tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
-
-To run the Quick Start Guide on demand, right-click the Docker icon in the Notifications area (or System tray) to open the Docker Desktop menu and then select **Quick Start Guide**.
-
-![Docker Quick Start tutorial](images/docker-tutorial-win.png){:width="450px"}
-
-Congratulations! You are now successfully running Docker Desktop on Windows.
-
 ## Updates
 
 {% include desktop-update.md %}
