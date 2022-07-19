@@ -269,7 +269,13 @@ paths:
           $ref: "#/components/responses/BadRequest"
         "401":
           $ref: "#/components/responses/Unauthorized"
-  "/v2/access-tokens/{uuid}":
+  /v2/access-tokens/{uuid}:
+    parameters:
+      - in: path
+        name: uuid
+        required: true
+        schema:
+          type: string
     patch:
       summary: Update a personal access token
       description: |
@@ -277,12 +283,6 @@ paths:
         token's label or enable/disable it.
       tags:
         - access-tokens
-      parameters:
-        - in: path
-          name: uuid
-          required: true
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -328,12 +328,6 @@ paths:
         Deletes a personal access token permanently. This cannot be undone.
       tags:
         - access-tokens
-      parameters:
-        - in: path
-          name: uuid
-          required: true
-          schema:
-            type: string
       responses:
         "204":
           description: A successful response.
