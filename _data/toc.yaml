@@ -1388,6 +1388,12 @@ manuals:
       title: Overview
     - path: /build/hellobuild/
       title: Hello Build
+    - sectiontitle: Buildx
+      section:
+        - path: /build/buildx/
+          title: Working with Buildx
+        - path: /build/buildx/install/
+          title: Install Buildx
 
 - sectiontitle: Docker Compose
   section:
