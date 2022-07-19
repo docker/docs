@@ -1161,24 +1161,18 @@ manuals:
           title: User manual
         - path: /desktop/mac/troubleshoot/
           title: Logs and troubleshooting
-        - path: /desktop/mac/apple-silicon/
-          title: Apple silicon
-        - path: /desktop/mac/privileged-helper/
-          title: Privileged Helper
     - sectiontitle: Windows
       section:
         - path: /desktop/windows/
           title: User manual
         - path: /desktop/windows/troubleshoot/
           title: Logs and troubleshooting
-        - path: /desktop/windows/wsl/
-          title: Docker Desktop WSL 2 backend
     - sectiontitle: Linux
       section:
         - path: /desktop/linux/
           title: User manual
         - path: /desktop/linux/troubleshoot/
-          title: Logs and troubleshooting    
+          title: Logs and troubleshooting
     - path: /desktop/dashboard/
       title: Dashboard
     - sectiontitle: Change settings
@@ -1189,8 +1183,22 @@ manuals:
           title: On Windows
         - path: /desktop/settings/linux/
           title: On Linux
-    - path: /desktop/networking/
-      title: Explore networking features
+    - sectiontitle: Additional resources
+      section:
+        - path: /desktop/multi-arch/
+          title: Multi-arch support
+        - path: /desktop/kubernetes/
+          title: Deploy on Kubernetes
+        - path: /desktop/backup-and-restore/
+          title: Back up and restore data
+        - path: /desktop/networking/
+          title: Explore networking features
+        - path: /desktop/mac/apple-silicon/
+          title: Apple silicon
+        - path: /desktop/mac/privileged-helper/
+          title: Privileged Helper
+        - path: /desktop/windows/wsl/
+          title: Docker Desktop WSL 2 backend
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1269,12 +1277,6 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
-    - path: /desktop/multi-arch/
-      title: Multi-arch support
-    - path: /desktop/kubernetes/
-      title: Deploy on Kubernetes
-    - path: /desktop/backup-and-restore/
-      title: Back up and restore data
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
