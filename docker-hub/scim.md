@@ -6,7 +6,7 @@ title: System for Cross-domain Identity Management
 
 This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. SCIM is a provisioning system that lets you manage users within your identity provider (IdP). You can enable SCIM on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md){:target="blank" rel="noopener" class=""}.
 
-SCIM provides automated user provisioning and de-provisioning for your Docker organization through your Identity Provider (IdP).  Once SCIM is enabled in the IdP, any user assigned to the Docker application in the IdP, is automatically provisioned in Docker Hub and added to the organization. Also, if a user gets unassigned from the Docker application in the IdP, the user is removed from the organization in Docker Hub. SCIM also synchronizes changes made to users’ attributes in the IdP, for instance the user’s first name and last name.
+SCIM provides automated user provisioning and de-provisioning for your Docker organization through your identity provider (IdP).  Once SCIM is enabled in the IdP, any user assigned to the Docker application in the IdP, is automatically provisioned in Docker Hub and added to the organization. Also, if a user gets unassigned from the Docker application in the IdP, the user is removed from the organization in Docker Hub. SCIM also synchronizes changes made to users’ attributes in the IdP, for instance the user’s first name and last name.
 
 We currently support the following provisioning features: creating new users, push user profile updates, remove users, deactivate users and reactivate users.  Group management is currently not supported.
 
@@ -111,14 +111,14 @@ You must run a full-sync after enabling SCIM, if you already have users assigned
     * SCIM Base URL: SCIM Base URL
     * Custom Headers:
 
-```console
+    ```console
      Content-Type: application/scim+json
      User-Agent: OneLogin SCIM
-```
-   * SCIM Bearer Token: SCIM Bearer Token
-   * SCIM JSON Template:
+    ```
+    * SCIM Bearer Token: SCIM Bearer Token
+    * SCIM JSON Template:
 
- ```console
+    ```console
     {
     "schemas": [
         "urn:ietf:params:scim:schemas:core:2.0:User"
@@ -135,7 +135,7 @@ You must run a full-sync after enabling SCIM, if you already have users assigned
         }
     ]
 }
-```
+    ```
 
    ![application-details](images/application-details.png){:width="700px"}
 
