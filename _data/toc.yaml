@@ -1141,6 +1141,8 @@ manuals:
       section:
        - path: /desktop/install/mac-install/
          title: Install on Mac
+       - path: /desktop/mac/apple-silicon/
+         title: Install on Apple silicon
        - path: /desktop/install/windows-install/
          title: Install on Windows
        - path: /desktop/install/linux-install/
@@ -1193,12 +1195,10 @@ manuals:
           title: Back up and restore data
         - path: /desktop/networking/
           title: Explore networking features
-        - path: /desktop/mac/apple-silicon/
-          title: Apple silicon
         - path: /desktop/mac/privileged-helper/
-          title: Privileged Helper
+          title: Privileged Helper on Mac
         - path: /desktop/windows/wsl/
-          title: Docker Desktop WSL 2 backend
+          title: Docker Desktop WSL 2 backend on Windows
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
