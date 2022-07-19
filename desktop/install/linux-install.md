@@ -6,7 +6,7 @@ redirect_from:
 - /desktop/linux/install/
 ---
 
-Welcome to Docker Desktop for Linux. This page contains information about system requirements, download URLs, and instructions on how to install and update Docker Desktop for Linux.
+ This page contains information about system requirements, download URLs, and instructions on how to install and update Docker Desktop for Linux.
 
 > Download Docker Desktop for Linux packages
 >
@@ -215,16 +215,6 @@ Current context is now "desktop-linux"
 ```
 
 Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
-
-
-## Quick Start Guide  
-  
-  If you've just installed the app, Docker Desktop launches the Quick Start Guide. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
-
-   ![Docker Quick Start tutorial](images/docker-tutorial-linux.png)
-
-Congratulations! You are now successfully running Docker Desktop. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
-**Settings** and other options. To run the Quick Start Guide on demand, select the Docker menu and then choose **Quick Start Guide**.
 
 ## Updates
 
