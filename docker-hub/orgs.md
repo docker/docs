@@ -91,7 +91,7 @@ The Organization landing page displays various options that allow you to
 configure your organization.
 
 - **Members**: Displays a list of team members. You
-  can invite new members using the **Invite Member** button. See [Invite members](#invite-members) for details.
+  can invite new members using the **Invite members** button. See [Manage members](../docker-hub/members.md) for details.
 
 - **Teams**: Displays a list of existing teams and the number of
   members in each team. See [Create a team](#create-a-team) for details.
