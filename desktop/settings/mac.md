@@ -110,7 +110,7 @@ File share settings are:
 >   once a file called `test` is created, attempts to create a second file called
 >   `Test` will fail.
 >
-> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](../mac/troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+> For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](../troubleshoot/topics.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users.)
 
 ### Proxies
 

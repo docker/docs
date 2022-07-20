@@ -116,7 +116,7 @@ File share settings are:
 >   (named volume) or [data container](../../storage/volumes.md).
 > * Docker Desktop sets permissions to read/write/execute for users, groups and
 >   others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
->   This is not configurable. See [Permissions errors on data directories for shared volumes](../windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+>   This is not configurable. See [Permissions errors on data directories for shared volumes](../troubleshoot/topics.md#permissions-errors-on-data-directories-for-shared-volumes).
 > * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive.
 >   On Linux, it is possible to create two separate files: `test` and `Test`,
 >   while on Windows these filenames would actually refer to the same underlying

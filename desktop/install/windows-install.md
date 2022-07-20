@@ -52,7 +52,7 @@ WSL 2 on Windows 10 or Windows 11:
   - 4GB system RAM
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
-    [Virtualization](../windows/troubleshoot.md#virtualization-must-be-enabled).
+    [Virtualization](..//troubleshoot/topics.md#virtualization-must-be-enabled).
 - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
 
 </div>
@@ -87,7 +87,7 @@ accounts use the same VM to build and run containers. Note that it is not possib
 
 Nested virtualization scenarios, such as running Docker Desktop on a
 VMWare or Parallels instance might work, but there are no guarantees. For
-more information, see [Running Docker Desktop in nested virtualization scenarios](../windows/troubleshoot.md#running-docker-desktop-in-nested-virtualization-scenarios).
+more information, see [Running Docker Desktop in nested virtualization scenarios](../troubleshoot/topics.md#running-docker-desktop-in-nested-virtualization-scenarios).
 
 ### About Windows containers
 
