@@ -689,6 +689,9 @@ components:
       properties:
         url:
           type: string
+        size:
+          type: integer
+          format: int64
     NamespaceData:
       properties:
         namespaces:
