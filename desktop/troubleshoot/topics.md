@@ -208,7 +208,7 @@ In the subsequent screen, verify that Hyper-V is enabled.
 
 #### Virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](wsl.md), virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](../windows/wsl.md), virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
 ![Task Manager](../images/virtualization-enabled.png){:width="700px"}
@@ -322,7 +322,7 @@ As well as on the registry. For example:
 ```
 
 For more about using client and server side certificates, see
-[Adding TLS certificates](index.md#add-tls-certificates).
+[Adding TLS certificates](../faqs/windowsfaqs.md#how-do-i-add-client-certificates).
 
 ### Volume mounting requires file sharing for any project directories outside of `/Users`
 

@@ -30,15 +30,15 @@ To navigate to **Troubleshoot** either:
 - Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Troubleshoot**
 - Select the **Troubleshoot** icon from the Docker Dashboard
 
-![Troubleshoot Docker Desktop](../images/menu/troubleshoot.png){:width="600px"}
+![Troubleshoot Docker Desktop](../images/troubleshoot.png){:width="600px"}
 
 The Troubleshoot page contains the following options:
 
 - **Restart Docker Desktop**. Select to restart Docker Desktop.
 
-- **Support**. Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](../../support/index.md).
+- **Support**. Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose) and [Support](../../support/index.md).
 
-- **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../../settings/linux.md#kubernetes).
+- **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/linux.md#kubernetes).
 
 - **Clean / Purge data**. This option resets all Docker data _without_ a
 reset to factory defaults. Selecting this option results in the loss of existing settings.

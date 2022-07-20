@@ -49,7 +49,7 @@ deployed containers, but rather sets permissions to a default value of
 `group`) which is not configurable.
 
 For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](../windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+[Permissions errors on data directories for shared volumes](../troubleshoot/topics.md#permissions-errors-on-data-directories-for-shared-volumes).
 
 ### How do symlinks work on Windows?
 
