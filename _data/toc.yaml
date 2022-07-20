@@ -1183,7 +1183,7 @@ manuals:
           title: On Windows
         - path: /desktop/settings/linux/
           title: On Linux
-    - sectiontitle: Troubleshoot and Diagnose
+    - sectiontitle: Troubleshoot and diagnose
       section:
         - path: /desktop/troubleshoot/overview/
           title: Overview

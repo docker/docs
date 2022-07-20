@@ -52,7 +52,7 @@ WSL 2 on Windows 10 or Windows 11:
   - 4GB system RAM
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
-    [Virtualization](../troubleshoot/topics.md#virtualization-must-be-enabled).
+    [Virtualization](../troubleshoot/topics.md).
 - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
 
 </div>

@@ -1,7 +1,7 @@
 ---
 description: Troubleshooting, logs, and known issues
 keywords: linux, mac, windows, troubleshooting, logs, issues
-title: Troubleshoot and diagnose
+title: Overview
 redirect_from:
 - /desktop/linux/troubleshoot/
 - /desktop/mac/troubleshoot/

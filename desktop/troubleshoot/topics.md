@@ -2,15 +2,10 @@
 description: Troubleshooting topics
 keywords: linux, mac, windows, troubleshooting, topics
 title: Troubleshoot topics
+toc_max: 3
 ---
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
-<li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
-<li class="active"><a data-toggle="tab" data-target="#linux1">Linux</a></li>
-</ul>
-<div class="tab-content">
-<div id="windows1" class="tab-pane fade in active" markdown="1">
+## Topics for all platforms
 
 ### Make sure certificates are set up correctly
 
@@ -30,9 +25,47 @@ As well as on the registry. For example:
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```
 
-For more about using client and server side certificates, see
-[How do I add custom CA certificates?](../faqs/windowsfaqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](../faqs/windowsfaqs.md#how-do-i-add-client-certificates).
+## Topics for Linux and Mac
+
+### Volume mounting requires file sharing for any project directories outside of `$HOME`
+
+If you are using mounted volumes and get runtime errors indicating an
+application file is not found, access to a volume mount is denied, or a service
+cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
+you might need to enable [file sharing](../settings/linux.md#file-sharing).
+
+Volume mounting requires shared drives for projects that live outside of the
+`/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
+
+## Topics for Mac
+
+### Incompatible CPU detected
+
+Docker Desktop requires a processor (CPU) that supports virtualization and, more
+specifically, the [Apple Hypervisor
+framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
+Docker Desktop is only compatible with Mac systems that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it,as described in the Apple Hypervisor Framework documentation about supported hardware:
+
+*Generally, machines with an Intel VT-x feature set that includes Extended Page
+Tables (EPT) and Unrestricted Mode are supported.*
+
+To check if your Mac supports the Hypervisor framework, run the following command in a terminal window.
+
+```console
+$ sysctl kern.hv_support
+```
+
+If your Mac supports the Hypervisor Framework, the command prints
+`kern.hv_support: 1`.
+
+If not, the command prints `kern.hv_support: 0`.
+
+See also, [Hypervisor Framework
+Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
+in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
+
+## Topics for Windows
+
 ### Volumes
 
 #### Permissions errors on data directories for shared volumes
@@ -299,77 +332,3 @@ Set-VMProcessor -VMName <Windows VM Name> -ExposeVirtualizationExtensions $true
 ### Networking issues
 
 IPv6 is not (yet) supported on Docker Desktop.
-
-
-</div>
-<div id="mac1" class="tab-pane fade" markdown="1">
-
-### Make sure certificates are set up correctly
-
-Docker Desktop ignores certificates listed under insecure registries, and does
-not send client certificates to them. Commands like `docker run` that attempt to
-pull from the registry produces error messages on the command line, for example:
-
-```
-Error response from daemon: Get http://192.168.203.139:5858/v2/: malformed HTTP response "\x15\x03\x01\x00\x02\x02"
-```
-
-As well as on the registry. For example:
-
-```
-2019/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52882: tls: client didn't provide a certificate
-2019/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
-```
-
-For more about using client and server side certificates, see
-[Adding TLS certificates](../faqs/windowsfaqs.md#how-do-i-add-client-certificates).
-
-### Volume mounting requires file sharing for any project directories outside of `/Users`
-
-If you are using mounted volumes and get runtime errors indicating an
-application file is not found, access to a volume mount is denied, or a service
-cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
-you might need to enable [file sharing](../settings/mac.md#file-sharing).
-
-Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. From **Preferences**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
-
-### Incompatible CPU detected
-
-Docker Desktop requires a processor (CPU) that supports virtualization and, more
-specifically, the [Apple Hypervisor
-framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
-Docker Desktop is only compatible with Mac systems that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it,as described in the Apple Hypervisor Framework documentation about supported hardware:
-
-*Generally, machines with an Intel VT-x feature set that includes Extended Page
-Tables (EPT) and Unrestricted Mode are supported.*
-
-To check if your Mac supports the Hypervisor framework, run the following command in a terminal window.
-
-```console
-$ sysctl kern.hv_support
-```
-
-If your Mac supports the Hypervisor Framework, the command prints
-`kern.hv_support: 1`.
-
-If not, the command prints `kern.hv_support: 0`.
-
-See also, [Hypervisor Framework
-Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
-in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
-
-</div>
-<div id="linux1" class="tab-pane fade" markdown="1">
-
-### Volume mounting requires file sharing for any project directories outside of `$HOME`
-
-If you are using mounted volumes and get runtime errors indicating an
-application file is not found, access to a volume mount is denied, or a service
-cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
-you might need to enable [file sharing](../settings/linux.md#file-sharing).
-
-Volume mounting requires shared drives for projects that live outside of the
-`/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
-</div>
-</div>
