@@ -1520,9 +1520,9 @@ manuals:
       title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
-  - path: /docker-hub/configure-sign-in/
-    title: Manage members
   - path: /docker-hub/members/
+    title: Manage members
+  - path: /docker-hub/configure-sign-in/
     title: Enforce sign in
   - sectiontitle: Single-Sign-on
     section:
