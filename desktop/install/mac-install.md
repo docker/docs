@@ -74,7 +74,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 2. Double-click `Docker.app` in the Applications folder to start Docker. In the example below, the Applications folder is in "grid" view mode.
 
-    ![Docker app in Hockeyapp](images/docker-app-in-appss.png)
+    ![Docker app in Hockeyapp](images/docker-app-in-apps-mac.png)
 
 3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 
