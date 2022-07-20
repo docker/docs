@@ -50,7 +50,7 @@ If you are a Mac user, you also have the option to **Uninstall** Docker Desktop 
 
 ## Diagnose
 
-### Send in-app diagnostics
+### Diagnose from the app
 
 Make sure you are signed in to Docker Desktop and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 
@@ -59,7 +59,7 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](../images/diagnose-support.png){:width="600px"}
 2. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
 3. When the diagnostics have been uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
-4. If you have a paid Docker subscription, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied in step four to the Diagnostics ID field. 
+4. If you have a paid Docker subscription, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied in step four to the **Diagnostics ID** field. 
 5. Click **Submit** to request Docker Desktop support.
    > **Note**
     >
@@ -68,12 +68,12 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
     Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. Complete the information required and ensure you add the diagnostic ID you copied earlier. 
 7. Click **submit new issue** to create a new issue.
 
-### Diagnosing from the terminal
+### Diagnose from the terminal
 
 In some cases, it is useful to run the diagnostics yourself, for instance, if
 Docker Desktop cannot start.
 
-First, locate the `com.docker.diagnose` tool.  If you have installed Docker Desktop in the Applications directory, then it is located at:
+First, locate the `com.docker.diagnose` tool. It is located at:
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
@@ -111,18 +111,8 @@ To create and upload diagnostics, run:
 $ <tool location> gather -upload
 ```
 
-After the diagnostics have finished, the following output displays:
-
-```sh
-Diagnostics Bundle: /tmp/B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20190726143610.zip
-Diagnostics ID:     B8CF8400-47B3-4068-ADA4-3BBDCE3985D9/20190726143610 (uploaded)
-Diagnostics Bundle: /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
-Diagnostics ID:     BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051 (uploaded)
-```
-
-It contains your diagnostics ID. The diagnostics ID (here BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051) is
-composed of your user ID (BE9AFAAF-F68B-41D0-9D12-84760E6B8740) and a timestamp
-(20190905152051). Ensure you provide the full diagnostics ID, and not just the user ID.
+After the diagnostics have finished, the terminal displays your diagnostics ID. The diagnostics ID is
+composed of your user ID and a timestamp. Ensure you provide the full diagnostics ID, and not just the user ID.
 
 To view the contents of the diagnostic file, run:
 
@@ -153,7 +143,7 @@ If you have a paid Docker subscription, open the [Docker Desktop support](https:
 
 Docker Desktop contains a self-diagnose tool which helps you to identify some common problems. 
 
-Before you run the self-diagnose tool, locate `com.docker.diagnose`. 
+First, locate the `com.docker.diagnose` tool. It is located at:
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
@@ -192,7 +182,7 @@ $ <tool location> check
 
 The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
-Let us know your feedback on the self-diagnose tool by creating an issue on GitHub:
+You can then create and issue on GitHub:
 - [For Linux](https://github.com/docker/desktop-linux/issues)
 - [For Mac](https://github.com/docker/for-mac/issues)
 - [For Windows](https://github.com/docker/for-win/issues)
@@ -208,7 +198,7 @@ In addition to using the diagnose option to submit logs, you can browse the logs
 <div class="tab-content">
 <div id="mac4" class="tab-pane fade" markdown="1">
 
-#### In a terminal
+### In a terminal
 
 To watch the live flow of Docker Desktop logs in the command line, run the following script from your favorite shell.
 
@@ -223,12 +213,12 @@ Alternatively, to collect the last day of logs (`1d`) in a file, run:
 $ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 
-#### In the Console app
+### In the Console app
 
-Macs provide a built-in log viewer, named "Console", which you can use to check
+Mac provides a built-in log viewer, named "Console", which you can use to check
 Docker logs.
 
-The Console lives in `/Applications/Utilities`; you can search for it with
+The Console lives in `/Applications/Utilities`. You can search for it with
 Spotlight Search.
 
 To read the Docker app log messages, type `docker` in the Console window search bar and press Enter. Then select `ANY` to expand the drop-down list next to your `docker` search entry, and select `Process`.
@@ -238,7 +228,7 @@ To read the Docker app log messages, type `docker` in the Console window search 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.
 
-#### View the Docker Daemon logs
+### View the Docker Daemon logs
 
 Refer to the [read the logs](../../config/daemon/index.md#read-the-logs) section
 to learn how to view the Docker Daemon logs.

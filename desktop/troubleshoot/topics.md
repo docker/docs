@@ -12,8 +12,6 @@ title: Troubleshoot topics
 <div class="tab-content">
 <div id="windows1" class="tab-pane fade in active" markdown="1">
 
-## Troubleshooting topics
-
 ### Make sure certificates are set up correctly
 
 Docker Desktop ignores certificates listed under insecure registries, and
@@ -33,10 +31,8 @@ As well as on the registry. For example:
 ```
 
 For more about using client and server side certificates, see
-[How do I add custom CA certificates?](index.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](index.md#how-do-i-add-client-certificates) in the
-Getting Started topic.
-
+[How do I add custom CA certificates?](../faqs/windowsfaqs.md#how-do-i-add-custom-ca-certificates)
+and [How do I add client certificates?](../faqs/windowsfaqs.md#how-do-i-add-client-certificates).
 ### Volumes
 
 #### Permissions errors on data directories for shared volumes
@@ -62,13 +58,12 @@ application file is not found, access is denied to a volume mount, or a service
 cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
 you might need to enable [shared folders](../settings/windows.md#file-sharing).
 
-With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. Click ![whale menu](images/whale-x.png){: .inline}
- and then **Settings** > **Shared Folders** and share the folder that contains the
+With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. From **Settings**, select **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
 
 #### Support for symlinks
 
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs/windowsfaqs.md#how-do-symlinks-work-on-windows) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs/windowsfaqs.md#how-do-symlinks-work-on-windows).
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -116,7 +111,7 @@ $ docker run --rm -ti -v /c/Users/user/work:/work alpine ls /work
 
 #### Working with Git Bash
 
-Git Bash (or MSYS) provides Unix-like environment on Windows. These tools apply their own
+Git Bash (or MSYS) provides a Unix-like environment on Windows. These tools apply their own
 preprocessing on the command line. For example, if you run the following command in Git Bash, it gives an error:
 
 ```console
@@ -187,7 +182,7 @@ Your machine must have the following features for Docker Desktop to function cor
 3. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 4. Hypervisor enabled at Windows startup
 
-![WSL 2 enabled](images/wsl2-enabled.png){:width="600px"}
+![WSL 2 enabled](../images/wsl2-enabled.png){:width="600px"}
 
 #### Hyper-V
 
@@ -198,7 +193,7 @@ On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following fea
 2. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 3. Hypervisor enabled at Windows startup
 
-![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
+![Hyper-V on Windows features](../images/hyperv-enabled.png){:width="600px"}
 
 Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker Desktop installer enables
@@ -216,7 +211,7 @@ In the subsequent screen, verify that Hyper-V is enabled.
 In addition to [Hyper-V](#hyper-v) or [WSL 2](wsl.md), virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
-![Task Manager](images/virtualization-enabled.png){:width="700px"}
+![Task Manager](../images/virtualization-enabled.png){:width="700px"}
 
 If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
 Docker Desktop cannot start. See [Unable to run Docker for Windows on
@@ -238,7 +233,7 @@ You can also refer to the [Microsoft TechNet article](https://social.technet.mic
 ### Windows containers and Windows Server
 
 Docker Desktop is not supported on Windows Server. If you have questions about how to run Windows containers on Windows 10, see
-[Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers).
+[Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) on
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
@@ -309,7 +304,7 @@ IPv6 is not (yet) supported on Docker Desktop.
 </div>
 <div id="mac1" class="tab-pane fade" markdown="1">
 
-## Make sure certificates are set up correctly
+### Make sure certificates are set up correctly
 
 Docker Desktop ignores certificates listed under insecure registries, and does
 not send client certificates to them. Commands like `docker run` that attempt to
@@ -329,7 +324,7 @@ As well as on the registry. For example:
 For more about using client and server side certificates, see
 [Adding TLS certificates](index.md#add-tls-certificates).
 
-## Volume mounting requires file sharing for any project directories outside of `/Users`
+### Volume mounting requires file sharing for any project directories outside of `/Users`
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
@@ -337,10 +332,9 @@ cannot start, such as when using [Docker Compose](../../compose/gettingstarted.m
 you might need to enable [file sharing](../settings/mac.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/Users` directory. Go to ![whale menu](images/whale-x.png){: .inline} >
-**Preferences** > **Resources** > **File sharing** and share the drive that contains the Dockerfile and volume.
+`/Users` directory. From **Preferences**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
 
-## Incompatible CPU detected
+### Incompatible CPU detected
 
 Docker Desktop requires a processor (CPU) that supports virtualization and, more
 specifically, the [Apple Hypervisor
@@ -368,7 +362,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](../inst
 </div>
 <div id="linux1" class="tab-pane fade" markdown="1">
 
-## Volume mounting requires file sharing for any project directories outside of `$HOME`
+### Volume mounting requires file sharing for any project directories outside of `$HOME`
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
@@ -376,8 +370,6 @@ cannot start, such as when using [Docker Compose](../../compose/gettingstarted.m
 you might need to enable [file sharing](../settings/linux.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
-`/home/<user>` directory. Go to ![whale menu](images/whale-x.png){: .inline} >
-**Settings** > **Resources** > **File sharing** and share the drive that contains the Dockerfile and volume.
-
+`/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
 </div>
 </div>

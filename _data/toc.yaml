@@ -1190,7 +1190,7 @@ manuals:
         - path: /desktop/troubleshoot/topics/
           title: Troubleshoot topics
         - path: /desktop/troubleshoot/workarounds/
-          title: Common workarounds
+          title: Workarounds for common problems
         - path: /desktop/troubleshoot/known-issues/
           title: Known issues for Mac
     - path: /desktop/networking/
