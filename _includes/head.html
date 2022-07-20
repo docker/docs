@@ -30,7 +30,7 @@
 {%- endif -%}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  {%- if page.sitemap == false or site.GH_ENV == "gh_pages" %}
+  {%- if page.sitemap == false or jekyll.environment != 'production' %}
   <meta name="robots" content="noindex"/>
   {%- endif %}
   {%- if jekyll.environment == 'production' and site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}

@@ -1167,18 +1167,6 @@ manuals:
           title: Explore Images
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
-    - sectiontitle: Mac
-      section:
-        - path: /desktop/mac/troubleshoot/
-          title: Logs and troubleshooting
-    - sectiontitle: Windows
-      section:
-        - path: /desktop/windows/troubleshoot/
-          title: Logs and troubleshooting
-    - sectiontitle: Linux
-      section:
-        - path: /desktop/linux/troubleshoot/
-          title: Logs and troubleshooting
     - sectiontitle: Change settings
       section:
         - path: /desktop/settings/mac/
@@ -1187,6 +1175,16 @@ manuals:
           title: On Windows
         - path: /desktop/settings/linux/
           title: On Linux
+    - sectiontitle: Troubleshoot and diagnose
+      section:
+        - path: /desktop/troubleshoot/overview/
+          title: Overview
+        - path: /desktop/troubleshoot/topics/
+          title: Troubleshoot topics
+        - path: /desktop/troubleshoot/workarounds/
+          title: Workarounds for common problems
+        - path: /desktop/troubleshoot/known-issues/
+          title: Known issues for Mac
     - sectiontitle: Additional resources
       section:
         - path: /desktop/multi-arch/
@@ -1392,6 +1390,12 @@ manuals:
       title: Overview
     - path: /build/hellobuild/
       title: Hello Build
+    - sectiontitle: Buildx
+      section:
+        - path: /build/buildx/
+          title: Working with Buildx
+        - path: /build/buildx/install/
+          title: Install Buildx
 
 - sectiontitle: Docker Compose
   section:

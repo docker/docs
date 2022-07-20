@@ -54,8 +54,8 @@ This includes:
   [ACI](../../cloud/aci-integration.md) and [ECS](../../cloud/ecs-integration.md)
   integrations
 - [Kubernetes](../kubernetes.md) (Images are download when you enable Kubernetes for the first time)
-- [Check for updates](../install/mac-install.md#updates) (manual and automatic)
-- [In-app diagnostics](../mac/troubleshoot.md#diagnose-and-feedback) (including the [Self-diagnose tool](../mac/troubleshoot.md#self-diagnose-tool))
+- Check for updates
+- [In-app diagnostics](../troubleshoot/overview.md#diagnose-from-the-app) (including the [Self-diagnose tool](../troubleshoot/overview.md#diagnose-from-the-app))
 - Tip of the week
 - Sending usage statistics
 
@@ -65,10 +65,7 @@ This includes:
 
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 
-You can find information about diagnosing and troubleshooting common issues in the Troubleshooting topic. See:
-- [Mac logs and troubleshooting](../mac/troubleshoot.md)
-- [Windows logs and troubleshooting](../windows/troubleshoot.md)
-- [Linux logs and troubleshooting](../linux/troubleshoot.md)
+You can find information about diagnosing and troubleshooting common issues in the [Troubleshooting topic](../troubleshoot/overview.md).
 
 If you do not find a solution in troubleshooting, browse the Github repositories or create a new issue:
 
