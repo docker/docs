@@ -72,7 +72,7 @@ Hyper-V on Windows 10:
   - 4GB system RAM
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings.  For more information, see
-    [Virtualization](../windows/troubleshoot.md#virtualization-must-be-enabled).
+    [Virtualization](../troubleshoot/topics.md).
 
 </div>
 </div>
@@ -204,7 +204,7 @@ To uninstall Docker Desktop from your Windows machine:
 * [Getting started](../windows/index.md) introduces Docker Desktop for Windows.
 * [Get started with Docker](/get-started/) is a tutorial that teaches you how to
   deploy a multi-service stack.
-* [Troubleshooting](../windows/troubleshoot.md) describes common problems, workarounds, and
+* [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, and
   how to get support.
 * [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 * [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
