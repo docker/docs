@@ -1,18 +1,19 @@
 ---
-description: Keeping your images small with multi-stage images
-keywords: images, containers, best practices, multi-stage, multistage
-title: Use multi-stage builds
+title: Multi-stage builds
+description: Keeping your images small with multi-stage builds
+keywords: build, best practices
 redirect_from:
 - /engine/userguide/eng-image/multistage-build/
+- /develop/develop-images/multistage-build/
 ---
 
-Multistage builds are useful to anyone who has struggled to optimize Dockerfiles
-while keeping them easy to read and maintain.
+Multi-stage builds are useful to anyone who has struggled to optimize
+Dockerfiles while keeping them easy to read and maintain.
 
-> **Acknowledgment**:
+> **Acknowledgment**
+>
 > Special thanks to [Alex Ellis](https://twitter.com/alexellisuk) for granting
-> permission to use his blog post
-> [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/)
+> permission to use his blog post [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/)
 > as the basis of the examples below.
 
 ## Before multi-stage builds
@@ -31,10 +32,10 @@ to use for production, which only contained your application and exactly what
 was needed to run it. This has been referred to as the "builder
 pattern". Maintaining two Dockerfiles is not ideal.
 
-Here's an example of a `Dockerfile.build` and `Dockerfile` which adhere to the
+Here's an example of a `build.Dockerfile` and `Dockerfile` which adhere to the
 builder pattern above:
 
-**`Dockerfile.build`**:
+**`build.Dockerfile`**:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -66,16 +67,13 @@ CMD ["./app"]
 ```bash
 #!/bin/sh
 echo Building alexellis2/href-counter:build
-
-docker build --build-arg https_proxy=$https_proxy --build-arg http_proxy=$http_proxy \  
-    -t alexellis2/href-counter:build . -f Dockerfile.build
+docker build -t alexellis2/href-counter:build . -f build.Dockerfile
 
 docker container create --name extract alexellis2/href-counter:build  
 docker container cp extract:/go/src/github.com/alexellis/href-counter/app ./app  
 docker container rm -f extract
 
 echo Building alexellis2/href-counter:latest
-
 docker build --no-cache -t alexellis2/href-counter:latest .
 rm ./app
 ```
@@ -143,7 +141,7 @@ Dockerfile are re-ordered later, the `COPY` doesn't break.
 FROM golang:1.16 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
-COPY app.go    ./
+COPY app.go ./
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
 
 FROM alpine:latest  
@@ -186,7 +184,8 @@ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 
 ## Use a previous stage as a new stage
 
-You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
+You can pick up where a previous stage left off by referring to it when using
+the `FROM` directive. For example:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -204,4 +203,4 @@ RUN g++ -o /binary source.cpp
 
 ## Version compatibility
 
-Multistage build syntax was introduced in Docker Engine 17.05.
+Multi-stage build syntax was introduced in Docker Engine 17.05.

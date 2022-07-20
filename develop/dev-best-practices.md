@@ -20,7 +20,7 @@ keep image size small:
   starting with a generic `ubuntu` image and installing `openjdk` as part of the
   Dockerfile.
 
-- [Use multistage builds](develop-images/multistage-build.md). For
+- [Use multistage builds](../build/guides/multi-stage-build.md). For
   instance, you can use the `maven` image to build your Java application, then
   reset to the `tomcat` image and copy the Java artifacts into the correct
   location to deploy your app, all in the same Dockerfile. This means that your

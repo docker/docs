@@ -252,9 +252,9 @@ similar to `.gitignore` files. For information on creating one, see the
 
 ### Use multi-stage builds
 
-[Multi-stage builds](multistage-build.md) allow you to drastically reduce the
-size of your final image, without struggling to reduce the number of intermediate
-layers and files.
+[Multi-stage builds](../../build/guides/multi-stage-build.md) allow you to
+drastically reduce the size of your final image, without struggling to reduce
+the number of intermediate layers and files.
 
 Because an image is built during the final stage of the build process, you can
 minimize image layers by [leveraging build cache](#leverage-build-cache).
@@ -334,10 +334,10 @@ were added to reduce this limitation:
 - Only the instructions `RUN`, `COPY`, `ADD` create layers. Other instructions
   create temporary intermediate images, and do not increase the size of the build.
 
-- Where possible, use [multi-stage builds](multistage-build.md), and only copy
-  the artifacts you need into the final image. This allows you to include tools
-  and debug information in your intermediate build stages without increasing the
-  size of the final image.
+- Where possible, use [multi-stage builds](../../build/guides/multi-stage-build.md),
+  and only copy the artifacts you need into the final image. This allows you to
+  include tools and debug information in your intermediate build stages without
+  increasing the size of the final image.
 
 ### Sort multi-line arguments
 
