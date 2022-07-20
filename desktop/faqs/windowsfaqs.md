@@ -37,7 +37,7 @@ Right-click to add the user to the group. Log out and log back in for the change
 ### Why does Docker Desktop fail to start when anti-virus software is installed?
 
 Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
-Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../windows/troubleshoot.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
+Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../troubleshoot/workarounds.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
 
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 
@@ -49,7 +49,7 @@ deployed containers, but rather sets permissions to a default value of
 `group`) which is not configurable.
 
 For workarounds and to learn more, see
-[Permissions errors on data directories for shared volumes](../windows/troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+[Permissions errors on data directories for shared volumes](../troubleshoot/topics.md#permissions-errors-on-data-directories-for-shared-volumes).
 
 ### How do symlinks work on Windows?
 

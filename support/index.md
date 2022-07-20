@@ -98,10 +98,7 @@ For more information, see [Docker Data Processing Agreement](https://www.docker.
 
 ## What can I do before seeking support?
 
-Before seeking support, you can perform basic troubleshooting using the following troubleshooting topics:
-- [Docker Desktop for Linux](../desktop/linux/troubleshoot.md)
-- [Docker Desktop for Mac](../desktop/mac/troubleshoot.md)
-- [Docker Desktop for Windows](../desktop/windows/troubleshoot.md)
+Before seeking support, you can perform basic troubleshooting. See [Diagnose and Troubleshooting](../desktop/troubleshoot/overview.md) for more information.
 
 You can also see if an answer already exists in the following FAQs:
 - [Docker Business or Team onboarding](../docker-hub/onboarding-faqs.md)

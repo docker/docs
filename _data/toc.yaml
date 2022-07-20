@@ -1167,22 +1167,14 @@ manuals:
           title: Explore Volumes
     - sectiontitle: Mac
       section:
-        - path: /desktop/mac/troubleshoot/
-          title: Logs and troubleshooting
         - path: /desktop/mac/apple-silicon/
           title: Apple silicon
         - path: /desktop/mac/privileged-helper/
           title: Privileged Helper
     - sectiontitle: Windows
       section:
-        - path: /desktop/windows/troubleshoot/
-          title: Logs and troubleshooting
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend
-    - sectiontitle: Linux
-      section:
-        - path: /desktop/linux/troubleshoot/
-          title: Logs and troubleshooting
     - sectiontitle: Change settings
       section:
         - path: /desktop/settings/mac/
@@ -1191,6 +1183,16 @@ manuals:
           title: On Windows
         - path: /desktop/settings/linux/
           title: On Linux
+    - sectiontitle: Troubleshoot and diagnose
+      section:
+        - path: /desktop/troubleshoot/overview/
+          title: Overview
+        - path: /desktop/troubleshoot/topics/
+          title: Troubleshoot topics
+        - path: /desktop/troubleshoot/workarounds/
+          title: Workarounds for common problems
+        - path: /desktop/troubleshoot/known-issues/
+          title: Known issues for Mac
     - path: /desktop/networking/
       title: Explore networking features
     - sectiontitle: Dev Environments (Beta)
