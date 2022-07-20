@@ -174,7 +174,7 @@ Use the following steps to invite members to your organization via Docker ID or 
    > You can view the pending invitations in the **Members** tab. The invitees receive an email with a link to the organization in Docker Hub where they can accept or decline the invitation.
 
 
-### Invite multiple members via CSV file
+### Invite members via CSV file
 
 To invite multiple members to your organization via a CSV file containing email addresses:
 
