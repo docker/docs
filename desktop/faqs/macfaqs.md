@@ -282,8 +282,8 @@ Or if you installed Zsh via [Homebrew](https://brew.sh){:target="_blank" rel="no
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
-ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
-ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
+ln -s $etc/docker.zsh-completion $(brew --prefix)/share/zsh/site-functions/_docker
+ln -s $etc/docker-compose.zsh-completion $(brew --prefix)/share/zsh/site-functions/_docker-compose
 ```
 
 #### Fish-Shell
@@ -306,4 +306,3 @@ Now add fish completions from docker.
 $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion ~/.config/fish/completions/docker.fish
 $ ln -shi /Applications/Docker.app/Contents/Resources/etc/docker-compose.fish-completion ~/.config/fish/completions/docker-compose.fish
 ```
-
