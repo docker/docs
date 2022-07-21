@@ -1,6 +1,7 @@
 name: publish
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - lab
@@ -31,6 +32,9 @@ jobs:
             DOCS_S3_BUCKET=""
             DOCS_LAMBDA_FUNCTION_CACHE=""
             DOCS_S3_CONFIG="_website-config-docs-lab.json"
+          else
+            echo >&2 "ERROR: unknown branch ${{ github.ref }}"
+            exit 1
           fi
           echo "JEKYLL_ENV=$JEKYLL_ENV" >> $GITHUB_ENV
           echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
