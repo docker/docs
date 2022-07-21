@@ -28,7 +28,7 @@ To access the  Advanced Image Management dashboard:
 2. Click **Repositories** from the main menu and select a repository from the list.
 3. Click **General** or **Tags**, and click **Go to Advanced Image Management**.
 
-  ![Advanced image management dashboard](images/advanced-image-general.png){:width="700px"}
+   ![Advanced image management dashboard](images/advanced-image-general.png){:width="700px"}
 
 4. In the dashboard you can sort and filter by active, inactive and untagged images.
 
