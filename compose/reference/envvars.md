@@ -29,7 +29,7 @@ Specifies the path to a Compose file. Specifying multiple Compose files is suppo
     * Mac and Linux: `:` (colon),
     * Windows: `;` (semicolon).
 
-The path separator can also be customized using [`COMPOSE_PATH_SEPARATOR`](#composepathseparator).  
+The path separator can also be customized using `COMPOSE_PATH_SEPARATOR`.  
 Example: `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`.  
 **See also** the [command-line options overview](index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files).
 
