@@ -88,7 +88,7 @@ any JSON file should be valid YAML. To use a JSON file with Compose,
 specify the filename to use, for example:
 
 ```console
-$ docker compose -f docker-compose.JSON up
+$ docker compose -f docker-compose.json up
 ```
 
 ## Should I include my code with `COPY`/`ADD` or a volume?
