@@ -26,7 +26,7 @@ redirect_from:
 - Fixed parsing of properties `deploy.limits.cpus` and `deploy.limits.pids` to respect floating-point values. Fixes [#9542](https://github.com/docker/compose/issues/9542){:target="_blank" rel="noopener" class="_"} and [#9501](https://github.com/docker/compose/issues/9501){:target="_blank" rel="noopener" class="_"}. 
 - Fixed `compose ps` output to list all exposed ports. Fixes [#9257](https://github.com/docker/compose/issues/9527){:target="_blank" rel="noopener" class="_"}.
 - Fixed spelling mistakes in `compose ps` code.
-- Fixed `docker-compose`to honor `--no-ansi` even when deprecated option is requested.
+- Fixed `docker compose`to honor `--no-ansi` even when deprecated option is requested.
 - Fixed network name and network ID possible ambiguity.
 
 
@@ -185,7 +185,7 @@ For the full change log or additional information, check the [Compose repository
 - Dependencies update: Bumped github.com/spf13/cobra from 1.3.0 to 1.4.0. Cobra library no longer requires Viper and all of its indirect dependencies [See cobra's release page](https://github.com/spf13/cobra/releases){:target="_blank" rel="noopener" class="_"}.
 - Dependencies update: Bumped buildx from v0.7.1 to v0.8.0.
 - Removed the need to get the original compose.yaml file to run 'docker compose kill'.
-- `docker-compose down -v` now does not remove external volumes and networks as per the option's expected and documented behavior. Whenever project is specified it is also now used to enforce down to only remove resources listed in compose.yaml file.
+- `docker compose down -v` now does not remove external volumes and networks as per the option's expected and documented behavior. Whenever project is specified it is also now used to enforce down to only remove resources listed in compose.yaml file.
 Fixes [#9172](https://github.com/docker/compose/issues/9172){:target="_blank" rel="noopener" class="_"}, [#9145](https://github.com/docker/compose/issues/9145){:target="_blank" rel="noopener" class="_"}.
 - Introduced changes to use RunExec and RunStart from docker/cli to handle all the interactive/tty/* terminal logic.
 - Changed Compose API reference docs automation to pick up diffs code vs. docs.
@@ -203,7 +203,7 @@ For the releases later than 1.29.2 and earlier than 2.3.4, please check the [Com
 
 ### Miscellaneous
 
-- Removed the prompt to use `docker compose` in the `up` command.
+- Removed the prompt to use `docker-compose` in the `up` command.
 
 - Bumped `py` to `1.10.0` in `requirements-indirect.txt`.
 

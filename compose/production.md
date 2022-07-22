@@ -60,9 +60,9 @@ recreating any services which `web` depends on.
 
 You can use Compose to deploy an app to a remote Docker host by setting the
 `DOCKER_HOST`, `DOCKER_TLS_VERIFY`, and `DOCKER_CERT_PATH` environment variables
-appropriately.
+appropriately. See also [Compose CLI environment variables](../compose/reference/envvars.md).
 
-Once you've set up your environment variables, all the normal `docker-compose`
+Once you've set up your environment variables, all the normal `docker compose`
 commands work with no further configuration.
 
 ## Compose documentation

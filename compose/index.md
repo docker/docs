@@ -29,7 +29,7 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Run `docker compose up` and the [Docker compose command](#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using the docker-compose binary.
+3. Run `docker compose up` and the [Docker compose command](#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(docker-compose binary).
 
 A `docker-compose.yml` looks like this:
 
