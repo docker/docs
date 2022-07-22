@@ -58,7 +58,7 @@ options:
 - option: driver
   value_type: string
   description: |
-    Driver to use (available: `docker`, `docker-container`, `kubernetes`)
+    Driver to use (available: `docker`, `docker-container`, `kubernetes`, `remote`)
   details_url: '#driver'
   deprecated: false
   hidden: false
@@ -179,6 +179,11 @@ examples: |-
   can be overridden by [`--buildkitd-flags`](#buildkitd-flags).
   See an [example buildkitd configuration file](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md).
 
+  If the configuration file is not specified, will look for one by default in:
+  * `$BUILDX_CONFIG/buildkitd.default.toml`
+  * `$DOCKER_CONFIG/buildx/buildkitd.default.toml`
+  * `~/.docker/buildx/buildkitd.default.toml`
+
   Note that if you create a `docker-container` builder and have specified
   certificates for registries in the `buildkitd.toml` configuration, the files
   will be copied into the container under `/etc/buildkit/certs` and configuration
@@ -218,32 +223,59 @@ examples: |-
   `docker images` and [`build --load`](buildx_build.md#load) needs to be used
   to achieve that.
 
+  #### `remote` driver
+
+  Uses a remote instance of buildkitd over an arbitrary connection. With this
+  driver, you manually create and manage instances of buildkit yourself, and
+  configure buildx to point at it.
+
+  Unlike `docker` driver, built images will not automatically appear in
+  `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+  to achieve that.
+
   ### Set additional driver-specific options (--driver-opt) {#driver-opt}
 
   ```
   --driver-opt OPTIONS
   ```
 
-  Passes additional driver-specific options. Details for each driver:
+  Passes additional driver-specific options.
 
-  - `docker` - No driver options
-  - `docker-container`
-    - `image=IMAGE` - Sets the container image to be used for running buildkit.
-    - `network=NETMODE` - Sets the network mode for running the buildkit container.
-    - `cgroup-parent=CGROUP` - Sets the cgroup parent of the buildkit container if docker is using the "cgroupfs" driver. Defaults to `/docker/buildx`.
-  - `kubernetes`
-    - `image=IMAGE` - Sets the container image to be used for running buildkit.
-    - `namespace=NS` - Sets the Kubernetes namespace. Defaults to the current namespace.
-    - `replicas=N` - Sets the number of `Pod` replicas. Defaults to 1.
-    - `requests.cpu` - Sets the request CPU value specified in units of Kubernetes CPU. Example `requests.cpu=100m`, `requests.cpu=2`
-    - `requests.memory` - Sets the request memory value specified in bytes or with a valid suffix. Example `requests.memory=500Mi`, `requests.memory=4G`
-    - `limits.cpu` - Sets the limit CPU value specified in units of Kubernetes CPU. Example `limits.cpu=100m`, `limits.cpu=2`
-    - `limits.memory` - Sets the limit memory value specified in bytes or with a valid suffix. Example `limits.memory=500Mi`, `limits.memory=4G`
-    - `nodeselector="label1=value1,label2=value2"` - Sets the kv of `Pod` nodeSelector. No Defaults. Example `nodeselector=kubernetes.io/arch=arm64`
-    - `rootless=(true|false)` - Run the container as a non-root user without `securityContext.privileged`. [Using Ubuntu host kernel is recommended](https://github.com/moby/buildkit/blob/master/docs/rootless.md). Defaults to false.
-    - `loadbalance=(sticky|random)` - Load-balancing strategy. If set to "sticky", the pod is chosen using the hash of the context path. Defaults to "sticky"
-    - `qemu.install=(true|false)` - Install QEMU emulation for multi platforms support.
-    - `qemu.image=IMAGE` - Sets the QEMU emulation image. Defaults to `tonistiigi/binfmt:latest`
+  Note: When using quoted values for example for the `nodeselector` or
+  `tolerations` options, ensure that quotes are escaped correctly for your shell.
+
+  #### `docker` driver
+
+  No driver options.
+
+  #### `docker-container` driver
+
+  - `image=IMAGE` - Sets the container image to be used for running buildkit.
+  - `network=NETMODE` - Sets the network mode for running the buildkit container.
+  - `cgroup-parent=CGROUP` - Sets the cgroup parent of the buildkit container if docker is using the "cgroupfs" driver. Defaults to `/docker/buildx`.
+
+  #### `kubernetes` driver
+
+  - `image=IMAGE` - Sets the container image to be used for running buildkit.
+  - `namespace=NS` - Sets the Kubernetes namespace. Defaults to the current namespace.
+  - `replicas=N` - Sets the number of `Pod` replicas. Defaults to 1.
+  - `requests.cpu` - Sets the request CPU value specified in units of Kubernetes CPU. Example `requests.cpu=100m`, `requests.cpu=2`
+  - `requests.memory` - Sets the request memory value specified in bytes or with a valid suffix. Example `requests.memory=500Mi`, `requests.memory=4G`
+  - `limits.cpu` - Sets the limit CPU value specified in units of Kubernetes CPU. Example `limits.cpu=100m`, `limits.cpu=2`
+  - `limits.memory` - Sets the limit memory value specified in bytes or with a valid suffix. Example `limits.memory=500Mi`, `limits.memory=4G`
+  - `"nodeselector=label1=value1,label2=value2"` - Sets the kv of `Pod` nodeSelector. No Defaults. Example `nodeselector=kubernetes.io/arch=arm64`
+  - `"tolerations=key=foo,value=bar;key=foo2,operator=exists;key=foo3,effect=NoSchedule"` - Sets the `Pod` tolerations. Accepts the same values as the kube manifest tolera>tions. Key-value pairs are separated by `,`, tolerations are separated by `;`. No Defaults. Example `tolerations=operator=exists`
+  - `rootless=(true|false)` - Run the container as a non-root user without `securityContext.privileged`. Needs Kubernetes 1.19 or later. [Using Ubuntu host kernel is recommended](https://github.com/moby/buildkit/blob/master/docs/rootless.md). Defaults to false.
+  - `loadbalance=(sticky|random)` - Load-balancing strategy. If set to "sticky", the pod is chosen using the hash of the context path. Defaults to "sticky"
+  - `qemu.install=(true|false)` - Install QEMU emulation for multi platforms support.
+  - `qemu.image=IMAGE` - Sets the QEMU emulation image. Defaults to `tonistiigi/binfmt:latest`
+
+  #### `remote` driver
+
+  - `key=KEY` - Sets the TLS client key.
+  - `cert=CERT` - Sets the TLS client certificate to present to buildkitd.
+  - `cacert=CACERT` - Sets the TLS certificate authority used for validation.
+  - `servername=SERVER` - Sets the TLS server name to be used in requests (defaults to the endpoint hostname).
 
   ### Remove a node from a builder (--leave) {#leave}
 
