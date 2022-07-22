@@ -5,13 +5,12 @@ long: |-
 
   ```console
   $ docker buildx ls
-
-  NAME/NODE       DRIVER/ENDPOINT             STATUS  PLATFORMS
+  NAME/NODE       DRIVER/ENDPOINT             STATUS  BUILDKIT PLATFORMS
   elated_tesla *  docker-container
-    elated_tesla0 unix:///var/run/docker.sock running linux/amd64
-    elated_tesla1 ssh://ubuntu@1.2.3.4        running linux/arm64*, linux/arm/v7, linux/arm/v6
+    elated_tesla0 unix:///var/run/docker.sock running v0.10.3  linux/amd64
+    elated_tesla1 ssh://ubuntu@1.2.3.4        running v0.10.3  linux/arm64*, linux/arm/v7, linux/arm/v6
   default         docker
-    default       default                     running linux/amd64
+    default       default                     running 20.10.14 linux/amd64
   ```
 
   Each builder has one or more nodes associated with it. The current builder's
