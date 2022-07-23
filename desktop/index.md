@@ -26,7 +26,7 @@ Docker Desktop includes:
 - [Docker Engine](../engine/index.md)
 - Docker CLI client
 - [Docker Compose](../compose/index.md)
--[Docker Content Trust](../engine/security/trust/index.md)
+- [Docker Content Trust](../engine/security/trust/index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 
