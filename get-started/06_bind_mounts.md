@@ -25,8 +25,8 @@ volume drivers are available to support other use cases ([SFTP](https://github.c
 | - | ------------- | ----------- |
 | Host Location | Docker chooses | You control |
 | Mount Example (using `-v`) | my-volume:/usr/local/data | /path/to/data:/usr/local/data |
-| Populates new volume with container contents | Yes | No |
-| Supports Volume Drivers | Yes | No |
+| Populates new volume with container contents | No | Yes |
+| Supports Volume Drivers | No | Yes |
 
 ## Start a dev-mode container
 
