@@ -1,7 +1,7 @@
 ---
-title: Buildx
+title: Working with Buildx
 description: Working with Docker Buildx
-keywords: build, buildx, buildkit
+keywords: build, buildx, BuildKit
 redirect_from:
 - /buildx/working-with-buildx/
 ---

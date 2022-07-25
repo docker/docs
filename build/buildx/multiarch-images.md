@@ -1,10 +1,9 @@
 ---
 title: Building multi-platform images
 description: Different strategies for building multiplatform images
-keywords: build, buildx, buildkit, multiplatform images
+keywords: build, buildx, BuildKit, multiplatform images
 ---
 
-## Build multi-platform images
 
 BuildKit is designed to work well for building for multiple platforms and not
 only for the architecture and operating system that the user invoking the build
