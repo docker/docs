@@ -52,7 +52,7 @@ Improve build performance by using a persistent shared build cache to avoid repe
 
 * **Creating build-once, run-anywhere with multi-architecture builds**
 Collaborate across platforms with one build artifact.  
-See [Build multi platform images](buildx/index.md/#build-multi-platform-images).
+See [Build multi platform images](buildx/multiarch-images.md).
 
 ### Automating your builds
 
@@ -84,4 +84,3 @@ See also the [Syntax directive](../engine/reference/builder/#syntax).
 * **Configure BuildKit**  
 Take a deep dive into the internal BuildKit configuration to get the most out of your builds.  
 See also [`buildkitd.toml`](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md), the configuration file for `buildkitd`.
-
