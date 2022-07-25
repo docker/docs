@@ -1,7 +1,7 @@
 ---
 title: Install Docker Buildx
 description: How to install Docker Buildx
-keywords: build, buildx, BuildKit
+keywords: build, buildx, buildkit
 ---
 
 ## Docker Desktop
