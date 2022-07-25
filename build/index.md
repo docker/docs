@@ -48,8 +48,6 @@ Here’s a quick overview of the drivers and the use cases they support:
     * `kubernetes`– connect to your Kubernetes cluster to unlock more features and to run your builds at scale.
     * `remote`–  manually manage your own BuildKit builder and connect directly to it.
 
-
-
 * **Optimizing builds with cache management**  
 Improve build performance by using a persistent shared build cache to avoid repeating costly operations such as package installations, downloading files from the internet, or code build steps.
 
@@ -64,12 +62,10 @@ Automate your image builds to run in GitHub actions using the official docker bu
     * [GitHub Action to build and push Docker images with Buildx](https://github.com/docker/build-push-action).
     * [GitHub Action to extract metadata from Git reference and GitHub events](https://github.com/docker/metadata-action/).
 
-
-
 * **Orchestrating builds across complex projects together**  
 Connect your builds together and easily parameterize your images using buildx bake.  
 <!--replace when Bake content is onboarded -->
-See [High-level build options](/buildx/#high-level-build-options).
+See [High-level build options](buildx/index.md/#high-level-build-options)
 
 
 ### Customizing your Builds
@@ -85,19 +81,9 @@ Securely access protected repositories and resources at build time without leaki
 
 * **Custom syntax on Dockerfile**  
 Use experimental versions of the Dockerfile frontend, or even just bring your own to BuildKit using the power of custom frontends.  
-See also the [Syntax directive](../engine/reference/commandline/builder.md/#syntax).
+See also the [Syntax directive](../engine/reference/builder/#syntax).
 
 * **Configure BuildKit**  
 Take a deep dive into the internal BuildKit configuration to get the most out of your builds.  
 See also [`buildkitd.toml`](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md), the configuration file for `buildkitd`.
-
-
-
-
-
-
-
-
-
-
 
