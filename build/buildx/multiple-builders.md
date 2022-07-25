@@ -3,8 +3,6 @@ title: Using multiple builders
 description: How to instantiate and work with multiple builders
 keywords: build, buildx, BuildKit, builders, build drivers
 ---
-
-
 By default, Buildx uses the `docker` driver if it is supported, providing a user
 experience very similar to the native `docker build`. Note that you must use a
 local shared daemon to build your applications.
