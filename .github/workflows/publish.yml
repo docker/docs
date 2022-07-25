@@ -3,6 +3,7 @@ name: publish
 on:
   push:
     branches:
+      - lab
       - master
       - published
 
@@ -26,6 +27,10 @@ jobs:
             DOCS_S3_CONFIG="_website-config-docs.json"
             DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator"
             DOCS_SLACK_MSG="Successfully published docs. https://docs.docker.com/"
+          elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
+            DOCS_S3_BUCKET=""
+            DOCS_LAMBDA_FUNCTION_CACHE=""
+            DOCS_S3_CONFIG="_website-config-docs-lab.json"
           fi
           echo "JEKYLL_ENV=$JEKYLL_ENV" >> $GITHUB_ENV
           echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
@@ -69,6 +74,7 @@ jobs:
           AWS_S3_CONFIG: ${{ env.DOCS_S3_CONFIG }}
       -
         name: Invalidate docs website cache
+        if: ${{ env.DOCS_LAMBDA_FUNCTION_CACHE != '' }}
         uses: docker/bake-action@v2
         with:
           targets: aws-lambda-invoke
@@ -81,5 +87,6 @@ jobs:
           AWS_LAMBDA_FUNCTION: ${{ env.DOCS_LAMBDA_FUNCTION_CACHE }}
       -
         name: Send Slack notification
+        if: ${{ env.DOCS_SLACK_MSG != '' }}
         run: |
           curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.DOCS_SLACK_MSG }}"}' ${{ secrets.SLACK_WEBHOOK }}
