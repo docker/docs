@@ -3,8 +3,6 @@ description: Known issues for Mac
 keywords: mac, troubleshooting, known issues
 title: Known issues for Docker Desktop on Mac
 ---
-## Known issues
-
 * The following issues are seen when using the `virtualization.framework` experimental feature:
 
   * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
