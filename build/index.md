@@ -72,7 +72,7 @@ See [High-level build options](buildx/index.md/#high-level-build-options)
 
 * **Select your build output format**  
 Choose from a variety of available output formats, to export any artifact you like from BuildKit, not just docker images.  
-See [Set the export action for the build result](https://github.com/docker/buildx/blob/master/docs/reference/buildx_build.md#-set-the-export-action-for-the-build-result--o---output).
+See [Set the export action for the build result](../engine/reference/commandline/buildx_build.md/#output).
 
 * **Managing build secrets**  
 Securely access protected repositories and resources at build time without leaking data into the final build or the cache.
