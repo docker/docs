@@ -179,6 +179,6 @@ fetch-remote:
     default_branch: "master"
     ref: "master"
     paths:
-      - dest: "_includes/dockerfile/reference.md"
+      - dest: "engine/reference/builder.md"
         src:
           - "frontend/dockerfile/docs/reference.md"
