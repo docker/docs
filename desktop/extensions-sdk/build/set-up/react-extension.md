@@ -49,7 +49,7 @@ If you want to set up user authentication for the extension, see [Authentication
 
 ## Create a Dockerfile
 
-Use the Dockerfile below as a template and change it accodingly to suit your needs. 
+Use the Dockerfile below as a template and change it accordingly to suit your needs. 
 
 ```Dockerfile
 FROM node:14.17-alpine3.13 AS client-builder
