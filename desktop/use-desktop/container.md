@@ -21,7 +21,7 @@ When you hover over individual containers, you can also:
 - Click **Open in Visual Studio Code** to open the application in VS Code.
 - Open the port exposed by the container in a browser.
 
-### Inspect a container
+## Inspect a container
 
 You can obtain detailed information about the container when you select a container.
 
