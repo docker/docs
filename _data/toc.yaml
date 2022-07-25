@@ -1399,8 +1399,7 @@ manuals:
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
         - path: /build/buildx/multiarch-images/
-          title: Bulding multiplatform images        
-          
+          title: Bulding multi-platform images                  
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
