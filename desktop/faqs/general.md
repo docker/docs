@@ -106,11 +106,7 @@ serial port) to a container as it requires support at the hypervisor level.
 
 ### Can I run Docker Desktop in nested virtualization scenarios?
 
-Docker Desktop can run inside a Windows 10 VM running on apps like Parallels or
-VMware Fusion on a Mac provided that the VM is properly configured. However,
-problems and intermittent failures may still occur due to the way these apps
-virtualize the hardware. For these reasons, **Docker Desktop is not supported in
-nested virtualization scenarios**. It might work in some cases and not in others.
+In general, Docker recommends running Docker Desktop natively on either Mac, Linux, or Windows. However, Docker Desktop can run inside a virtual desktop provided the virtual desktop is properly configured. For more informatio, see [Enable nested virtualization](../nested-virtualization.md)
 
 ### Docker Desktop's UI appears green, distorted, or has visual artifacts. How do I fix this?
 

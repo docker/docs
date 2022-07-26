@@ -1199,6 +1199,8 @@ manuals:
           title: Privileged Helper on Mac
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
+        - path: /desktop/nested-virtualization/
+          title: Enable nested virtualization
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
