@@ -62,7 +62,7 @@ services:
 Run with Docker Compose:
 
 ```console
-$ docker-compose up
+$ docker compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
 Attaching to gpu_test_1    
@@ -104,7 +104,7 @@ services:
 ```
 
 ```console
-$ docker-compose up
+$ docker compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
 Attaching to gpu_test_1
@@ -163,7 +163,7 @@ services:
 ```
 
 ```sh
-$ docker-compose up
+$ docker compose up
 ...
 Created TensorFlow device (/device:GPU:0 with 13970 MB memory -> physical GPU (device: 0, name: Tesla T4, pci bus id: 0000:00:1b.0, compute capability: 7.5)
 ...

@@ -122,7 +122,7 @@ cache:
 To deploy with this production Compose file you can run
 
 ```console
-$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+$ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 This deploys all three services using the configuration in
@@ -135,7 +135,7 @@ production.
 
 #### Administrative tasks
 
-Another common use case is running adhoc or administrative tasks against one
+Another common use case is running when necessary or administrative tasks against one
 or more services in a Compose app. This example demonstrates running a
 database backup.
 
@@ -165,7 +165,7 @@ To start a normal environment run `docker-compose up -d`. To run a database
 backup, include the `docker-compose.admin.yml` as well.
 
 ```console
-$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml \
+$ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
   run dbadmin db-backup
 ```
 

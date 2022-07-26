@@ -35,7 +35,7 @@ Once you've got a second configuration file, tell Compose to use it with the
 `-f` option:
 
 ```console
-$ docker-compose -f docker-compose.yml -f production.yml up -d
+$ docker compose -f docker-compose.yml -f production.yml up -d
 ```
 
 See [Using multiple compose files](extends.md#different-environments) for a more
@@ -48,8 +48,8 @@ recreate your app's containers. To redeploy a service called
 `web`, use:
 
 ```console
-$ docker-compose build web
-$ docker-compose up --no-deps -d web
+$ docker compose build web
+$ docker compose up --no-deps -d web
 ```
 
 This first rebuilds the image for `web` and then stop, destroy, and recreate

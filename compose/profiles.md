@@ -61,8 +61,8 @@ To enable a profile supply the `--profile` [command-line option](reference/index
 use the [`COMPOSE_PROFILES` environment variable](reference/envvars.md#compose_profiles):
 
 ```sh
-$ docker-compose --profile debug up
-$ COMPOSE_PROFILES=debug docker-compose up
+$ docker compose --profile debug up
+$ COMPOSE_PROFILES=debug docker compose up
 ```
 
 The above command would both start your application with the `debug` profile enabled.
@@ -73,8 +73,8 @@ Multiple profiles can be specified by passing multiple `--profile` flags or
 a comma-separated list for the `COMPOSE_PROFILES` environment variable:
 
 ```sh
-$ docker-compose --profile frontend --profile debug up
-$ COMPOSE_PROFILES=frontend,debug docker-compose up
+$ docker compose --profile frontend --profile debug up
+$ COMPOSE_PROFILES=frontend,debug docker compose up
 ```
 
 ## Auto-enabling profiles and dependency resolution
@@ -104,11 +104,11 @@ services:
 
 ```sh
 # will only start backend and db
-$ docker-compose up -d
+$ docker compose up -d
 
 # this will run db-migrations (and - if necessary - start db)
 # by implicitly enabling profile `tools`
-$ docker-compose run db-migrations
+$ docker compose run db-migrations
 ```
 
 But keep in mind that `docker compose` will only automatically enable the
