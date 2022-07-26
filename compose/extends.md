@@ -161,7 +161,7 @@ export or backup.
         - db
 ```
 
-To start a normal environment run `docker-compose up -d`. To run a database
+To start a normal environment run `docker compose up -d`. To run a database
 backup, include the `docker-compose.admin.yml` as well.
 
 ```console
