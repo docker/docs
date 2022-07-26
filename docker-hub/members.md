@@ -18,7 +18,7 @@ Use the following steps to invite members to your organization via Docker ID or 
 1. Go to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select **Invite Member**.
 3. Select **Emails Or Docker IDs**.
-4. Enter the Docker IDs or email addresses that you want to invite, up to a maximum of 1000. After each entry, press `Enter`to enter a new entry, or copy and paste multiple entries that are separated by a comma, space, or newline.
+4. Enter the Docker IDs or email addresses that you want to invite, up to a maximum of 1000. After each entry, press `Enter` to enter a new entry, or copy and paste multiple entries that are separated by a comma, space, or newline.
 5. Select a team from the drop-down list to add all invited users to that team.
   > **Note**
   >
