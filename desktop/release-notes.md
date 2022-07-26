@@ -28,12 +28,72 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 > Download Docker Desktop
 >
-> [Windows](https://desktop.docker.com/win/main/amd64/83496/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/83496/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/83496/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/83496/docker-desktop-4.11.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/83496/docker-desktop-4.11.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/83496/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
+> {% include desktop-install.html %}
+
+### New
+
+- Docker Desktop is now fully supported for Docker Business customers inside VMware ESXi and Azure VMs. See [here](https://docs.docker.com/desktop/vm-vdi/) for details.
+- Added two new extensions ([vcluster](https://hub.docker.com/extensions/loftsh/vcluster-dd-extension) and [PGAdmin4](https://hub.docker.com/extensions/mochoa/pgadmin4-docker-extension)) to the Extensions Marketplace.
+- The ability to sort extensions has been added to the Extensions Marketplace.
+- Fixed a bug that caused some users to be asked for feedback too frequently. You'll now only be asked for feedback twice a year.
+- Added custom theme settings for Docker Desktop. This allows you to specify dark or light mode for Docker Desktop independent of your device settings. Fixes [docker/for-win#12747](https://github.com/docker/for-win/issues/12747)
+- Added a new flag for Windows installer. `--no-windows-containers` disables the Windows containers integration.
+- Added a new flag for Mac install command. `--user <username>` sets up Docker Desktop for a specific user, preventing them from needing an admin password on first run.
+
+### Upgrades
+- [Docker Compose v2.7.0](https://github.com/docker/compose/releases/tag/v2.7.0)
+- [Docker Compose "Cloud Integrations" v1.0.28](https://github.com/docker/compose-cli/releases/tag/v1.0.28)
+- [Kubernetes v1.24.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.2)
+- [Go 1.18.4](https://github.com/golang/go/releases/tag/go1.18.4)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Added the Container / Compose icon as well as the exposed port(s) / exit code to the Containers screen.
+- Updated the Docker theme palette colour values to match our design system.
+- Improved an error message from `docker login` if Registry Access Management is blocking the Docker engine's access to Docker Hub.
+- Increased throughput between the Host and Docker. For example increasing performance of `docker cp`.
+- Collecting diagnostics takes less time to complete.
+- Selecting or deselecting a compose app on the containers overview now selects/deselects all its containers.
+- Tag names on the container overview image column are visible.
+- Added search decorations to the terminal's scrollbar so that matches outside the viewport are visible.
+- Fixed an issue with search which doesn't work well on containers page [docker/for-win#12828](https://github.com/docker/for-win/issues/12828).
+- Fixed an issue which caused infinite loading on the **Volume** screen [docker/for-win#12789](https://github.com/docker/for-win/issues/12789).
+- Fixed a problem in the Container UI where resizing or hiding columns didn't work. Fixes [docker/for-mac#6391](https://github.com/docker/for-mac/issues/6391).
+- Fixed a bug where the state of installing, updating, or uninstalling multiple extensions at once was lost when leaving the Marketplace screen.
+- Fixed an issue where the compose version in the about page would only get updated from v2 to v1 after restarting Docker Desktop.
+- Fixed an issue where users cannot see the log view because their underlying hardware didn't support WebGL2 rendering. Fixes [docker/for-win#12825](https://github.com/docker/for-win/issues/12825).
+- Fixed a bug where the UI for Containers and Images got out of sync.
+- Fixed a startup race when the experimental virtualization framework is enabled.
+
+#### For Mac
+
+- Fixed an issue executing Compose commands from the UI. Fixes [docker/for-mac#6400](https://github.com/docker/for-mac/issues/6400).
+
+#### For Windows
+
+- Fixed horizontal resizing issue. Fixes [docker/for-win#12816](https://github.com/docker/for-win/issues/12816).
+- If an HTTP/HTTPS proxy is configured in the UI, then it automatically sends traffic from image builds and running containers to the proxy. This avoids the need to separately configure environment variables in each container or build.
+- Added the `--backend=windows` installer option to set Windows containers as the default backend.
+
+
+#### For Linux
+
+- Fixed bug related to setting up file shares with spaces in their path.
+
+
+## Docker Desktop 4.10.1
+2022-07-05
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/82475/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/82475/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/82475/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.pkg.tar.zst)
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
@@ -47,78 +107,16 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
       </div>
       <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
         <div class="panel-body">
-        <li><b>Windows:</b> SHA-256 9f92222ea43c3157c754525ac3c4958f4f6d5330d5ce295650db2ab8abaf545f</li>
-        <li><b>Mac Intel:</b> SHA-256 727747ab43d7257c335044406aeb780c894f4b700534e25d86ef38629cc992b9</li>
-        <li><b>Mac Arm:</b> SHA-256 8d67da857b7f9cf6d5cce54fdccf3bbc8b918c4f1cf1247bceda21948d45a1d2</li>
-        <li><b>Linux DEB:</b> SHA-256 7f061ce12b177b822fcb622bae0779212b0a69a07ec5f53341d85550d1f9a3c6</li>
-        <li><b>Linux RPM:</b> SHA-256 cc44ffa7531eeb4f04cd1d03741637d0b708242ff51a5a34b8c4557804376285</li>
-        <li><b>Linux Arch:</b> SHA-256 081589005b40d7e425e213d9fdedc84d6c8487db483638582363b54bd53bebfe</li>
+        <li><b>Windows:</b> SHA-256 fe430d19d41cc56fd9a4cd2e22fc0e3522bed910c219208345918c77bbbd2a65</li>
+        <li><b>Mac Intel:</b> SHA-256 8be8e5245d6a8dbf7b8cb580fb7d99f04cc143c95323695c0d9be4f85dd60b0e</li>
+        <li><b>Mac Arm:</b> SHA-256 b3d4ef222325bde321045f3b8d946c849cd2812e9ad52a801000a95edb8af57b</li>
+        <li><b>Linux DEB:</b> SHA-256 9363bc584478c5c7654004bacb51429c275b58a868ef43c3bc6249d5844ec5be</li>
+        <li><b>Linux RPM:</b> SHA-256 92371d1a1ae4b57921721da95dc0252aefa4c79eb12208760c800ac07c0ae1d2</li>
+        <li><b>Linux Arch:</b> SHA-256 799af244b05e8b08f03b6e0dbbc1dfcc027ff49f15506b3c460e0f9bae06ca5d</li>
         </div>
       </div>
     </div>
   </div>
-
-### New
-
-- Added two new extensions (vcluster and PGAdmin4) are available in the Extensions Marketplace.
-- Ability to sort extensions has been added to the Extensions Marketplace.
-- No more feedback nagging - thanks to all your feedback we were able to identify a bug with our feedback dialog, in 4.11+ you should only experience the NPS twice a year.
-- Custom theme settings for Docker Desktop allow you to specify dark or light mode for Docker Desktop independent of your device settings.
-
-### Upgrades
-- [Docker Compose v2.7.0](https://github.com/docker/compose/releases/tag/v2.7.0)
-- [Docker Compose "Cloud Integrations" v1.0.28](https://github.com/docker/compose-cli/releases/tag/v1.0.28)
-- [Kubernetes v1.24.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.2)
-- [Go 1.18.4](https://github.com/golang/go/releases/tag/go1.18.4)
-
-### Bug fixes and minor changes
-
-#### For all platforms
-
-- Add new flag for Windows installer, `--no-windows-containers` to disable Windows Containers integration.
-- Adds the Container / Compose icon as well as the exposed port(s) / exit code to the Containers screen.
-- Updated Docker theme palette colours values to match design system.
-- Improved an error message from `docker login` if Registry Access Management is blocking the Docker engine's access to Docker Hub.
-- Increase throughput between the Host and Docker, for example increasing performance of "docker cp".
-- Collecting diagnostics takes less time to complete.
-- Selecting/unselecting a compose app on the containers overview will select/unselect all its containers.
-- Show tag names on the container overview image column.
-- Added search decorations to the terminal's scrollbar so that matches outside the viewport are visible.
-- Fixed issue on search which doesn't work well on containers page [docker/for-win#12828](https://github.com/docker/for-win/issues/12828).
-- Fixed issue on infinite loading on volume screen [docker/for-win#12789](https://github.com/docker/for-win/issues/12789).
-- Fixed a problem in the Container UI where resizing or hiding columns didn't work. Fixed [docker/for-mac#6391](https://github.com/docker/for-mac/issues/6391).
-- Fixed a bug where the state of installing, updating, or uninstalling multiple extensions at once was lost when leaving the Marketplace screen.
-- Fixed issue where compose version in the about page would only get updated from v2 to v1 after restart.
-- Fixed an issue where user cannot not see log view because their underlying hardware didn't support WebGL2 rendering [docker/for-win#12825](https://github.com/docker/for-win/issues/12825).
-- Fixed a bug in user survey nagging too frequently.
-- Added setting under Settings -> General to override the OS's light mode / dark mode. Addresses (docker/for-win#12747)[https://github.com/docker/for-win/issues/12747].
-- Fixed a bug where the UI for Containers and Images got out of sync.
-- Fix a startup race when the experimental virtualization framework is enabled.
-
-#### For Mac
-
-- Fixed an issue executing Compose commands from the UI. Fixes [docker/for-mac#6400](https://github.com/docker/for-mac/issues/6400).
-
-#### For Windows
-
-- Fixed resizing issue on Windows. Fixes [docker/for-win#12816](https://github.com/docker/for-win/issues/12816).
-- send HTTP and HTTPS traffic from containers via the proxy.
-- Fixed an issue doing actions in the UI with Compose apps that were created from a WSL distro. Fixes [docker/for-win#12806](https://github.com/docker/for-win/issues/12806).
-
-
-#### For Linux
-
-- Fixes bug related to setting up file shares with spaces in their path on Linux.
-
-### Known Issues
-
-
-## Docker Desktop 4.10.1
-2022-07-05
-
-> Download Docker Desktop
->
-> {% include desktop-install.html %}
 
 ### Bug fixes and minor changes
 
