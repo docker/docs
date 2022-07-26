@@ -9,6 +9,16 @@ for the bash and zsh shell.
 
 ## Install command completion
 
+### Fig
+
+<a href="https://fig.io/" target="_blank"><img src="https://fig.io/badges/Logo.svg" width="15" height="15"/></a> [Fig](https://fig.io/) provides IDE-style autocompletions for Docker. It works in bash, zsh, and fish.
+
+To install, run:
+
+```shell
+brew install fig
+```
+
 ### Bash
 
 Make sure bash completion is installed.
