@@ -23,7 +23,7 @@ then Compose starts containers named `myapp-db-1` and `myapp-web-1` respectively
 
 Specifies the path to a Compose file. Specifying multiple Compose files is supported.
 
-* **Default behavior:** If not provided, Compose looks for a file named `docker-compose.yml` in the current directory and, if not found, then Compose searches each parent directory recursively until a file by that name is found.
+* **Default behavior:** If not provided, Compose looks for a file named `compose.yaml` or `docker-compose.yaml` in the current directory and, if not found, then Compose searches each parent directory recursively until a file by that name is found.
 
 * **Default separator:** When specifying multiple Compose files, the path separators are, by default, on:
     * Mac and Linux: `:` (colon),
@@ -88,6 +88,7 @@ When enabled, Compose doesn't try to detect orphaned containers for the project.
 * **Supported values:** 
     * `true` or `1`, to enable,
     * `false` or `0`, to disable.
+* **Defaults to:** `0`.
 
 ## Deprecated in Compose v2
 
