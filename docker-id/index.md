@@ -39,7 +39,8 @@ Once you register and verify your Docker ID email address, you can log in to [Do
 
 You can also log in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
 
-> **Warning**:
+> **Warning**
+>
 > When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64-encoded in this file.
 >
