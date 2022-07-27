@@ -102,6 +102,7 @@ $ sudo hdiutil detach /Volumes/Docker
 The `install` command accepts the following flags:
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--user=<username>`: Runs the privileged helper service once during installation, then disables it at runtime. This removes the need for the user to grant root privileges on first run. For more detail, please read the [Permission requirements documentation](https://docs.docker.com/desktop/mac/privileged-helper/#permission-requirements){: target="_blank" rel="noopener" class="_"}. Username can be found by entering `ls /Users` in the CLI.
 
 ## Updates
 
