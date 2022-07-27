@@ -1,7 +1,7 @@
 ---
 title: Hello Build
 description: Build Hello World
-keywords: build, buildx, buildkit, getting started, Dockerfile, image layers, build instructions, build context
+keywords: build, buildx, buildkit, getting started, dockerfile, image layers, build instructions, build context
 ---
 
 ## Hello Build!
