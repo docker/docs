@@ -39,7 +39,7 @@ clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/m
     The tags below are multi-arch meaning they pull either Windows or
     Linux containers depending on what mode is set in
     Docker Desktop for Windows. Read more on
-    [switching containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
+    [switching containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change
    the `Dockerfile` to use the DLL file of your project.
 
@@ -80,7 +80,7 @@ obj/
     The tags below are multi-arch meaning they pull either Windows or
     Linux containers depending on what mode is set in
     Docker Desktop for Windows. Read more on
-    [switching containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
+    [switching containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change the `Dockerfile` to use the DLL file of your project. This method assumes that your project is already built and it copies the build artifacts from the publish folder. Refer to the Microsoft documentation on [Containerize a .Net Core app](https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile){: target="blank" rel="noopener" class=“"}.
 
     The `docker build` step here will be much faster than method 1, as all the artifacts are built outside of the `docker build` step and the size of the base     image is much smaller compared to the build base image.

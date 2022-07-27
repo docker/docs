@@ -55,7 +55,7 @@ single-node and multi-node swarm scenarios on Linux machines.
 
 #### Use Docker Desktop for Mac or Docker Desktop for Windows
 
-Alternatively, install the latest [Docker Desktop](/desktop/index.md) application on one
+Alternatively, install the latest [Docker Desktop](../../../desktop/index.md) application on one
 computer. You can test both single-node and multi-node swarm from this computer.
 
 * You can use Docker Desktop for Mac or Windows to test _single-node_ features
