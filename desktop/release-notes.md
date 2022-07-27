@@ -11,6 +11,7 @@ redirect_from:
 - /docker-for-windows/release-notes/
 - /desktop/windows/release-notes/
 - /desktop/linux/release-notes/
+- /mackit/release-notes/
 ---
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
