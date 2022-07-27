@@ -28,7 +28,6 @@ and much improved functionality that can be powerful tools for improving your
 builds' performance or reusability of your Dockerfiles, and it also introduces
 support for complex scenarios.
 
-
 ## Docker Build features
 
 Docker Build is way more than your `docker build` command and is not only about packaging your code, it’s a whole ecosystem of tools and features that support you not only with common workflow tasks but also provides you with support for more complex and advanced scenarios.
@@ -67,7 +66,6 @@ Connect your builds together and easily parameterize your images using buildx ba
 <!--replace when Bake content is onboarded -->
 See [High-level build options](buildx/index.md/#high-level-build-options)
 
-
 ### Customizing your Builds
 
 * **Select your build output format**  
@@ -86,4 +84,3 @@ See also the [Syntax directive](../engine/reference/builder/#syntax).
 * **Configure BuildKit**  
 Take a deep dive into the internal BuildKit configuration to get the most out of your builds.  
 See also [`buildkitd.toml`](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md), the configuration file for `buildkitd`.
-
