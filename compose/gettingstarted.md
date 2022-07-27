@@ -272,7 +272,7 @@ If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker Desktop for Windows that uses [Linux containers](../desktop/windows/index.md#switch-between-windows-and-linux-containers).
+Docker Desktop for Windows that uses [Linux containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 For more information, see [File sharing](../desktop/settings/mac.md#file-sharing) on Docker
 for Mac, and the general examples on how to
 > [Manage data in containers](../storage/volumes.md).

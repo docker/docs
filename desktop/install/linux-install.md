@@ -270,9 +270,7 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
 ## Where to go next
 
-- [Getting started](../linux/index.md) provides an overview of Docker Desktop on Linux, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Linux.
-- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
-  to run and submit diagnostics, and submit issues.
+- [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.

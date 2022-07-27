@@ -64,8 +64,7 @@ notoc: true
 
 > **Deprecated**
 >
-> Docker Machine has been deprecated. Please use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/mac/index.md)
-> and [Docker Desktop for Windows](../desktop/windows/index.md).
+> Docker Machine has been deprecated. Please use [Docker Desktop](../desktop/index.md) instead.
 > You can also use other cloud provisioning tools.
 {: .warning }
 

@@ -93,7 +93,7 @@ more information, see [Running Docker Desktop in nested virtualization scenarios
 
 Looking for information on using Windows containers?
 
-* [Switch between Windows and Linux containers](../windows/index.md#switch-between-windows-and-linux-containers)
+* [Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers)
   describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
 * [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
   provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
@@ -201,7 +201,6 @@ To uninstall Docker Desktop from your Windows machine:
 
 ## Where to go next
 
-* [Getting started](../windows/index.md) introduces Docker Desktop for Windows.
 * [Get started with Docker](/get-started/) is a tutorial that teaches you how to
   deploy a multi-service stack.
 * [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, and

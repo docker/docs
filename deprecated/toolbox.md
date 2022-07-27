@@ -21,8 +21,7 @@ toc_max: 2
 > **Deprecated**
 >
 > Docker Toolbox has been deprecated and is no longer in active development. Please
-> use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/mac/index.md)
-> and [Docker Desktop for Windows](../desktop/windows/index.md).
+> use Docker Desktop instead. See [Docker Desktop for Mac](../desktop/index.md)
 {: .warning }
 
 The source code for Toolbox has been archived, You can find the source code 

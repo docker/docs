@@ -138,7 +138,6 @@ To uninstall Docker Desktop from your Mac:
 
 ## Where to go next
 
-- [Getting started](../mac/index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
 - [Docker Desktop for Apple silicon](../mac/apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
