@@ -87,7 +87,7 @@ accounts use the same VM to build and run containers. Note that it is not possib
 
 Nested virtualization scenarios, such as running Docker Desktop on a
 VMWare or Parallels instance might work, but there are no guarantees. For
-more information, see [Running Docker Desktop in nested virtualization scenarios](../troubleshoot/topics.md#running-docker-desktop-in-nested-virtualization-scenarios).
+more information, see [Running Docker Desktop in a VM or VDI environment](../vm-vdi.md).
 
 ### About Windows containers
 
