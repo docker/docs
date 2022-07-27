@@ -83,8 +83,9 @@ $ sudo hdiutil detach /Volumes/Docker
 To manually create a `registry.json` file, run the following commands in a terminal and replace `myorg` with your organization's name.
 
 ```bash
-$ sudo touch /Library/Application Support/com.docker.docker/registry.json
-$ sudo echo '{"allowedOrgs":["myorg"]}' >> /Library/Application Support/com.docker.docker/registry.json
+$ sudo mkdir -p "/Library/Application Support/com.docker.docker"
+$ sudo touch "/Library/Application Support/com.docker.docker/registry.json"
+$ sudo echo '{"allowedOrgs":["myorg"]}' >> "/Library/Application Support/com.docker.docker/registry.json"
 ```
 
 This creates the `registry.json` file at `/Library/Application Support/com.docker.docker/registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
