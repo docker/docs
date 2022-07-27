@@ -8,7 +8,9 @@ toc_max: 2
 
 Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality. There is no limit to the number of extensions you can install.
 
-Docker Community members and partners can use our [SDK](extensions-sdk/index.md) to create new extensions. 
+You can explore the list of available extensions in [Docker Hub](https://hub.docker.com/search?q=&type=extension) or in the Extensions Marketplace within Docker Desktop.
+
+Docker Community members and partners can use our [SDK](extensions-sdk/index.md) to create new extensions.
 
 > **Beta**
 >
@@ -18,11 +20,7 @@ Docker Community members and partners can use our [SDK](extensions-sdk/index.md)
 
 ## Prerequisites
 
-Docker Extensions is available as part of Docker Desktop 4.8.0 or a later release. Download and install Docker Desktop 4.8.0 or later:
-
-* [Mac](mac/release-notes/index.md)
-* [Windows](windows/release-notes/index.md)
-* [Linux](linux/index.md)
+Docker Extensions is available as part of Docker Desktop 4.8.0 or a later release. [Download and install Docker Desktop 4.8.0 or later](release-notes.md).
 
 ## Add an extension
 

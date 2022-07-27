@@ -34,7 +34,7 @@ services:
       - "8001:5432"
 ```
 
-When you run `docker-compose up`, the following happens:
+When you run `docker compose up`, the following happens:
 
 1.  A network called `myapp_default` is created.
 2.  A container is created using `web`'s configuration. It joins the network
@@ -68,7 +68,7 @@ look like `postgres://{DOCKER_IP}:8001`.
 
 ## Update containers
 
-If you make a configuration change to a service and run `docker-compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
+If you make a configuration change to a service and run `docker compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
 
 If any containers have connections open to the old container, they are closed. It is a container's responsibility to detect this condition, look up the name again and reconnect.
 

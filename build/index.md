@@ -44,6 +44,7 @@ Run Buildx with different configurations depending on the scenario you are worki
 Here’s a quick overview of the drivers and the use cases they support:  
     * `docker`– use the default built-in builder to get started quickly.
     * `docker-container` – spin up a dedicated builder in a docker container to unlock more advanced features like advanced caching, and multi-platform images.
+
     * `kubernetes`– connect to your Kubernetes cluster to unlock more features and to run your builds at scale.
     * `remote`–  manually manage your own BuildKit builder and connect directly to it.
 

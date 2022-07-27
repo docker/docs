@@ -1,108 +1,11 @@
 ---
-description: Troubleshooting, logs, and known issues
-keywords: windows, troubleshooting, logs, issues
-redirect_from:
-- /windows/troubleshoot/
-- /docker-for-win/troubleshoot/
-- /docker-for-windows/troubleshoot/
-title: Logs and troubleshooting
+description: Troubleshooting topics
+keywords: linux, mac, windows, troubleshooting, topics
+title: Troubleshoot topics
+toc_max: 3
 ---
 
-{% include upgrade-cta.html
-  body="Did you know that Docker Desktop offers support for developers on a paid Docker subscription (Pro, Team, or Business)? Upgrade now to benefit from Docker Support. Click [here](../../support/index.md) to learn more."
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
-%}
-
-This page contains information on how to diagnose and troubleshoot Docker Desktop issues, request Docker Desktop support, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.
-
-## Troubleshoot
-
-Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
-from the menu bar to see the troubleshoot options.
-
-![Troubleshoot Docker Desktop](images/troubleshoot.png){:width="600px"}
-
-The Troubleshoot page contains the following options:
-
-* **Restart Docker Desktop**: Select to restart Docker Desktop.
-
-* **Support**: Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose-and-feedback) and [Support](../../support/index.md).
-
-* **Reset Kubernetes cluster**: Select this option to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/windows.md#kubernetes).
-
-* **Clean / Purge data**: Select this option to delete container and image data. Choose whether you'd like to delete data from Hyper-V, WSL 2, or Windows Containers and then click **Delete** to confirm.
-
-* **Reset to factory defaults**: Choose this option to reset all options on
-Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
-
-## Diagnose and feedback
-
-### In-app diagnostics
-
-If you experience issues for which you do not find solutions in this
-documentation, on [Docker Desktop for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), or the [Docker Desktop for Windows
-forum](https://forums.docker.com/c/docker-for-windows), we can help you
-troubleshoot the log data. Before reporting an issue, we recommend that you read the information provided on this page to fix some common known issues.
-
-1. Choose ![whale menu](images/whale-x.png){: .inline} > **Troubleshoot**
-from the menu.
-2. Optional: Sign into Docker Desktop. In addition, ensure you are signed into your [Docker account](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"}.
-3. Click **Get support**. This opens the in-app **Support** page and starts collecting the diagnostics.
-    ![Diagnose & Support](../mac/images/diagnose-support.png){:width="600px"}
-4. When the diagnostics collection process is complete, click **Upload to get a Diagnostic ID**.
-5. When the diagnostics have been uploaded, Docker Desktop prints a Diagnostic ID. Copy this ID.
-6. If you have a paid Docker subscription, click **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied earlier to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
-
-   > **Note**
-   >
-   > You must be signed in to Docker Desktop using your Pro or Team plan credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
-7. If you don't have a paid Docker subscription, click **Upgrade to benefit from Docker Support** to upgrade your existing account.
-    Alternatively, click **Report a Bug** to open a new Docker Desktop issue on GitHub. This opens Docker Desktop [for Windows](https://github.com/docker/for-win/issues/) on GitHub in your web browser in a 'New issue' template. Complete the information required and ensure you add the diagnostic ID you copied earlier. Click **submit new issue** to create a new issue.
-
-### Diagnosing from the terminal
-
-On occasions it is useful to run the diagnostics yourself, for instance if
-Docker Desktop for Windows cannot start.
-
-First locate the `com.docker.diagnose`, that should be in `C:\Program
-Files\Docker\Docker\resources\com.docker.diagnose.exe`.
-
-To create *and upload*  diagnostics in Powershell, run:
-
-```powershell
-  PS C:\> & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
-```
-
-After the diagnostics have finished, you should have the following output,
-containing your diagnostic ID:
-
-```sh
-Diagnostics Bundle: C:\Users\User\AppData\Local\Temp\CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2\20180720152545.zip
-Diagnostics ID:     CD6CF862-9CBD-4007-9C2F-5FBE0572BBC2/20180720152545 (uploaded)
-```
-
-If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Click **Submit** to request Docker Desktop support.
-
-### Self-diagnose tool
-
-Docker Desktop contains a self-diagnose tool which helps you to identify some common
-problems. Before you run the self-diagnose tool, locate `com.docker.diagnose.exe`. This is usually installed in `C:\Program
-Files\Docker\Docker\resources\com.docker.diagnose.exe`.
-
-To run the self-diagnose tool in Powershell:
-
-```powershell
-PS C:\> & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
-```
-
-The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end.
-
-> **Feedback**
->
-> Let us know your feedback on the self-diagnose tool by creating an issue in the [for-win](https://github.com/docker/for-win/issues) GitHub repository.
-
-## Troubleshooting topics
+## Topics for all platforms
 
 ### Make sure certificates are set up correctly
 
@@ -122,10 +25,46 @@ As well as on the registry. For example:
 2017/06/20 18:15:30 http: TLS handshake error from 192.168.203.139:52883: tls: first record does not look like a TLS handshake
 ```
 
-For more about using client and server side certificates, see
-[How do I add custom CA certificates?](index.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](index.md#how-do-i-add-client-certificates) in the
-Getting Started topic.
+## Topics for Linux and Mac
+
+### Volume mounting requires file sharing for any project directories outside of `$HOME`
+
+If you are using mounted volumes and get runtime errors indicating an
+application file is not found, access to a volume mount is denied, or a service
+cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
+you might need to enable [file sharing](../settings/linux.md#file-sharing).
+
+Volume mounting requires shared drives for projects that live outside of the
+`/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
+
+## Topics for Mac
+
+### Incompatible CPU detected
+
+Docker Desktop requires a processor (CPU) that supports virtualization and, more
+specifically, the [Apple Hypervisor
+framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
+Docker Desktop is only compatible with Mac systems that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it,as described in the Apple Hypervisor Framework documentation about supported hardware:
+
+*Generally, machines with an Intel VT-x feature set that includes Extended Page
+Tables (EPT) and Unrestricted Mode are supported.*
+
+To check if your Mac supports the Hypervisor framework, run the following command in a terminal window.
+
+```console
+$ sysctl kern.hv_support
+```
+
+If your Mac supports the Hypervisor Framework, the command prints
+`kern.hv_support: 1`.
+
+If not, the command prints `kern.hv_support: 0`.
+
+See also, [Hypervisor Framework
+Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
+in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
+
+## Topics for Windows
 
 ### Volumes
 
@@ -152,13 +91,12 @@ application file is not found, access is denied to a volume mount, or a service
 cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
 you might need to enable [shared folders](../settings/windows.md#file-sharing).
 
-With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. Click ![whale menu](images/whale-x.png){: .inline}
- and then **Settings** > **Shared Folders** and share the folder that contains the
+With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. From **Settings**, select **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
 
 #### Support for symlinks
 
-Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs/windowsfaqs.md#how-do-symlinks-work-on-windows) in the FAQs.
+Symlinks work within and across containers. To learn more, see [How do symlinks work on Windows?](../faqs/windowsfaqs.md#how-do-symlinks-work-on-windows).
 
 #### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
@@ -206,7 +144,7 @@ $ docker run --rm -ti -v /c/Users/user/work:/work alpine ls /work
 
 #### Working with Git Bash
 
-Git Bash (or MSYS) provides Unix-like environment on Windows. These tools apply their own
+Git Bash (or MSYS) provides a Unix-like environment on Windows. These tools apply their own
 preprocessing on the command line. For example, if you run the following command in Git Bash, it gives an error:
 
 ```console
@@ -277,7 +215,7 @@ Your machine must have the following features for Docker Desktop to function cor
 3. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 4. Hypervisor enabled at Windows startup
 
-![WSL 2 enabled](images/wsl2-enabled.png){:width="600px"}
+![WSL 2 enabled](../images/wsl2-enabled.png){:width="600px"}
 
 #### Hyper-V
 
@@ -288,7 +226,7 @@ On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following fea
 2. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
 3. Hypervisor enabled at Windows startup
 
-![Hyper-V on Windows features](images/hyperv-enabled.png){:width="600px"}
+![Hyper-V on Windows features](../images/hyperv-enabled.png){:width="600px"}
 
 Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker Desktop installer enables
@@ -303,10 +241,10 @@ In the subsequent screen, verify that Hyper-V is enabled.
 
 #### Virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](wsl.md), virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](../windows/wsl.md), virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
-![Task Manager](images/virtualization-enabled.png){:width="700px"}
+![Task Manager](../images/virtualization-enabled.png){:width="700px"}
 
 If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
 Docker Desktop cannot start. See [Unable to run Docker for Windows on
@@ -328,7 +266,7 @@ You can also refer to the [Microsoft TechNet article](https://social.technet.mic
 ### Windows containers and Windows Server
 
 Docker Desktop is not supported on Windows Server. If you have questions about how to run Windows containers on Windows 10, see
-[Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers).
+[Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) on
 [Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
@@ -394,48 +332,3 @@ Set-VMProcessor -VMName <Windows VM Name> -ExposeVirtualizationExtensions $true
 ### Networking issues
 
 IPv6 is not (yet) supported on Docker Desktop.
-
-## Workarounds
-
-### Reboot
-
-Restart your PC to stop / discard any vestige of the daemon running from the
-previously installed version.
-
-### Unset `DOCKER_HOST`
-
-The `DOCKER_HOST` environmental variable does not need to be set.  If you use
-bash, use the command `unset ${!DOCKER_*}` to unset it.  For other shells,
-consult the shell's documentation.
-
-### Make sure Docker is running for webserver examples
-
-For the `hello-world-nginx` example and others, Docker Desktop must be
-running to get to the webserver on `http://localhost/`. Make sure that the
-Docker whale is showing in the menu bar, and that you run the Docker commands in
-a shell that is connected to the Docker Desktop Engine. Otherwise, you might start the webserver container but get a "web page
-not available" error when you go to `docker`.
-
-### How to solve `port already allocated` errors
-
-If you see errors like `Bind for 0.0.0.0:8080 failed: port is already allocated`
-or `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
-
-These errors are often caused by some other software on Windows using those
-ports. To discover the identity of this software, either use the `resmon.exe`
-GUI and click "Network" and then "Listening Ports" or in a Powershell use
-`netstat -aon | find /i "listening "` to discover the PID of the process
-currently using the port (the PID is the number in the rightmost column). Decide
-whether to shut the other process down, or to use a different port in your
-docker app.
-
-### Docker Desktop fails to start when anti-virus software is installed
-
-Some anti-virus software may be incompatible with Hyper-V and Microsoft
-Windows 10 builds. The conflict
-typically occurs after a Windows update and
-manifests as an error response from the Docker daemon and a Docker Desktop start failure.
-
-For a temporary workaround, uninstall the anti-virus software, or
-explore other workarounds suggested on Docker Desktop forums.
-

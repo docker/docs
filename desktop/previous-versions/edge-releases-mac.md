@@ -10,7 +10,7 @@ redirect_from:
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
-For information about Stable releases, see the [Stable release notes](../mac/index.md). For Docker Desktop system requirements, see
+For Docker Desktop system requirements, see
 [What to know before you install](../install/mac-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
@@ -1683,7 +1683,7 @@ TCP connection is idle for more than five minutes (related to
 
 **New**
 
-- More options when moving disk image (see [Storage location](../mac/space.md) under Advanced preference settings)
+- More options when moving disk image
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order
@@ -2026,7 +2026,7 @@ issue is being investigated. The workaround is to restart Docker.app.
 traversals of large directories are currently slow. Additionally, containers
 that perform large numbers of directory operations, such as repeated scans of
 large directory trees, may suffer from poor performance. More information is
-available in [Known Issues](../mac/troubleshoot.md#known-issues) in Troubleshooting.
+available in [Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart `Docker.app`.
 
@@ -2056,7 +2056,7 @@ with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
 trees, may suffer from poor performance. More information is available in
-[Known Issues](../mac/troubleshoot.md#known-issues) in Troubleshooting.
+[Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app.
 
@@ -2090,7 +2090,7 @@ trees, may suffer from poor performance. More information is available in
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
 numbers of directory operations, such as repeated scans of large directory
-trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../mac/troubleshoot.md#known-issues) in Troubleshooting.
+trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart `Docker.app`.
 
@@ -2116,7 +2116,7 @@ trees, may suffer from poor performance. For more information and workarounds, s
 
 * Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../mac/troubleshoot.md#known-issues) in Troubleshooting.
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on performance of bind-mounted directories in [Known Issues](../troubleshoot/known-issues.md) in Troubleshooting.
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -2139,7 +2139,7 @@ trees, may suffer from poor performance. For more information and workarounds, s
 
 * Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](../mac/troubleshoot.md#known-issues) in [Troubleshooting](../mac/troubleshoot.md)
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](../troubleshoot/known-issues.md).
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -2186,7 +2186,7 @@ events or unexpected unmounts.
 
 * Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
-* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](../mac/troubleshoot.md#known-issues) in [Logs and Troubleshooting](../mac/troubleshoot.md).
+* There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](../troubleshoot/known-issues.md) in [Logs and Troubleshooting](../troubleshoot/overview.md).
 
 * Under some unhandled error conditions, `inotify` event delivery can fail and become permanently disabled. The workaround is to restart Docker.app
 
@@ -2230,7 +2230,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../mac/troubleshoot.md#known-issues) in [Troubleshooting](../mac/troubleshoot.md)
+* See [Known Issues](../troubleshoot/known-issues.md).
 
 ### Beta 18.1 Release Notes (2016-07-07 1.12.0-rc3-beta18.1)
 
@@ -2256,7 +2256,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../mac/troubleshoot.md#known-issues) in [Troubleshooting](../mac/troubleshoot.md)
+* See [Known Issues](../troubleshoot/known-issues.md).
 
 ### Beta 18 Release Notes (2016-07-06 1.12.0-rc3-beta18)
 
@@ -2277,7 +2277,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../mac/troubleshoot.md#known-issues) in [Troubleshooting](../mac/troubleshoot.md)
+* See [Known Issues](../troubleshoot/known-issues.md).
 
 ### Beta 17 Release Notes (2016-06-29 1.12.0-rc2-beta17)
 
@@ -2287,7 +2287,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [https://docs.docker.com/desktop/mac/](../mac/index.md)
+* Documentation moved to [https://docs.docker.com/desktop/mac/](../index.md)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links
@@ -2296,7 +2296,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../mac/troubleshoot.md#known-issues) in [Troubleshooting](../mac/troubleshoot.md)
+* See [Known Issues](../troubleshoot/known-issues.md).
 
 ### Beta 16 Release Notes (2016-06-17 1.12.0-rc2-beta16)
 
@@ -2318,7 +2318,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../mac/troubleshoot.md#known-issues) in [Troubleshooting](../mac/troubleshoot.md)
+* See [Known Issues](../troubleshoot/known-issues.md).
 
 ### Beta 15 Release Notes (2016-06-10 1.11.2-beta15)
 
@@ -2342,7 +2342,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* See [Known Issues](../mac/troubleshoot.md#known-issues) in [Troubleshooting](../mac/troubleshoot.md)
+* See [Known Issues](../troubleshoot/known-issues.md).
 
 ### Beta 14 Release Notes (2016-06-02 1.11.1-beta14)
 

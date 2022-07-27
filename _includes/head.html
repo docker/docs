@@ -30,7 +30,7 @@
 {%- endif -%}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  {%- if page.sitemap == false or site.GH_ENV == "gh_pages" %}
+  {%- if page.sitemap == false or jekyll.environment != 'production' %}
   <meta name="robots" content="noindex"/>
   {%- endif %}
   {%- if jekyll.environment == 'production' and site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}
@@ -80,12 +80,15 @@
   by older browsers, and we don't optimize for those.
   {%- endcomment -%}
   <link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" as="font" href="/fonts/geomanist/hinted-Geomanist-Book.woff2"    type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" as="font" href="/fonts/geomanist/hinted-Geomanist-Regular.woff2" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" as="font" href="/fonts/glyphicons-halflings-regular.woff2"       type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" as="font" href="/fonts/fontawesome-webfont.woff2?v=4.7.0"        type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fontawesome/webfonts/fa-brands-400.woff2"        type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fontawesome/webfonts/fa-regular-400.woff2"       type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fontawesome/webfonts/fa-solid-900.woff2"         type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fontawesome/webfonts/fa-v4compatibility.woff2"   type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/fonts/geomanist/hinted-Geomanist-Book.woff2"            type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/fonts/geomanist/hinted-Geomanist-Regular.woff2"         type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/fonts/glyphicons-halflings-regular.woff2"               type="font/woff2" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css" id="pagestyle">
 

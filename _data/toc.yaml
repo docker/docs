@@ -1141,6 +1141,8 @@ manuals:
       section:
        - path: /desktop/install/mac-install/
          title: Install on Mac
+       - path: /desktop/mac/apple-silicon/
+         title: Install on Apple silicon
        - path: /desktop/install/windows-install/
          title: Install on Windows
        - path: /desktop/install/linux-install/
@@ -1165,24 +1167,8 @@ manuals:
           title: Explore Images
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
-    - sectiontitle: Mac
-      section:
-        - path: /desktop/mac/troubleshoot/
-          title: Logs and troubleshooting
-        - path: /desktop/mac/apple-silicon/
-          title: Apple silicon
-        - path: /desktop/mac/privileged-helper/
-          title: Privileged Helper
-    - sectiontitle: Windows
-      section:
-        - path: /desktop/windows/troubleshoot/
-          title: Logs and troubleshooting
-        - path: /desktop/windows/wsl/
-          title: Docker Desktop WSL 2 backend
-    - sectiontitle: Linux
-      section:
-        - path: /desktop/linux/troubleshoot/
-          title: Logs and troubleshooting
+        - path: /desktop/use-desktop/pause/
+          title: Pause Docker Desktop
     - sectiontitle: Change settings
       section:
         - path: /desktop/settings/mac/
@@ -1191,8 +1177,30 @@ manuals:
           title: On Windows
         - path: /desktop/settings/linux/
           title: On Linux
-    - path: /desktop/networking/
-      title: Explore networking features
+    - sectiontitle: Troubleshoot and diagnose
+      section:
+        - path: /desktop/troubleshoot/overview/
+          title: Overview
+        - path: /desktop/troubleshoot/topics/
+          title: Troubleshoot topics
+        - path: /desktop/troubleshoot/workarounds/
+          title: Workarounds for common problems
+        - path: /desktop/troubleshoot/known-issues/
+          title: Known issues for Mac
+    - sectiontitle: Additional resources
+      section:
+        - path: /desktop/multi-arch/
+          title: Multi-arch support
+        - path: /desktop/kubernetes/
+          title: Deploy on Kubernetes
+        - path: /desktop/backup-and-restore/
+          title: Back up and restore data
+        - path: /desktop/networking/
+          title: Explore networking features
+        - path: /desktop/mac/privileged-helper/
+          title: Privileged Helper on Mac
+        - path: /desktop/windows/wsl/
+          title: Docker Desktop WSL 2 backend on Windows
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1271,12 +1279,6 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
-    - path: /desktop/multi-arch/
-      title: Multi-arch support
-    - path: /desktop/kubernetes/
-      title: Deploy on Kubernetes
-    - path: /desktop/backup-and-restore/
-      title: Back up and restore data
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
@@ -1523,6 +1525,8 @@ manuals:
       title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
+  - path: /docker-hub/members/
+    title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign in
   - sectiontitle: Single-Sign-on

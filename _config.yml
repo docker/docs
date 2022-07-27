@@ -41,7 +41,7 @@ exclude:
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
 compose_v1_version: "1.29.2"
-compose_version: "v2.6.1"
+compose_version: "v2.7.0"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -179,6 +179,6 @@ fetch-remote:
     default_branch: "master"
     ref: "master"
     paths:
-      - dest: "engine/reference/builder.md"
+      - dest: "_includes/dockerfile/reference.md"
         src:
           - "frontend/dockerfile/docs/reference.md"
