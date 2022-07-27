@@ -159,7 +159,7 @@ fetch-remote:
   - repo: "https://github.com/docker/compose-cli"
     default_branch: "main"
     ref: "main"
-    completion_marker: "cloud/ecs-integration.md"
+    completion_marker: "cloud/ecs-compose-features.md"
     paths:
       - dest: "cloud"
         src:
