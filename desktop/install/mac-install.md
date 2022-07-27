@@ -3,8 +3,8 @@ description: How to install Docker Desktop on Mac
 keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 redirect_from:
-- /docker-for-mac/install/
-- /desktop/mac/install/
+  - /docker-for-mac/install/
+  - /desktop/mac/install/
 ---
 
 > **Update to the Docker Desktop terms**
@@ -12,7 +12,7 @@ redirect_from:
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
 > subscription.
-{: .important}
+> {: .important}
 
 Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, instructions to install and update Docker Desktop for Mac.
 
@@ -21,7 +21,7 @@ Welcome to Docker Desktop for Mac. This page contains information about Docker D
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
-*For checksums, see [Release notes](../release-notes.md)*
+_For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 
@@ -59,7 +59,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
   $ softwareupdate --install-rosetta
   ```
 
- For more information, see [Docker Desktop for Apple silicon](../mac/apple-silicon.md).
+For more information, see [Docker Desktop for Apple silicon](../mac/apple-silicon.md).
 
 </div>
 </div>
@@ -69,25 +69,24 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 ### Install interactively
 
 1. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to
-    the Applications folder.
-
+   the Applications folder.
 
 2. Double-click `Docker.app` in the Applications folder to start Docker. In the example below, the Applications folder is in "grid" view mode.
 
-    ![Docker app in Hockeyapp](images/docker-app-in-apps-mac.png)
+   ![Docker app in Hockeyapp](images/docker-app-in-apps-mac.png)
 
 3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window. It includes a change to the terms of use for Docker Desktop.
 
-    {% include desktop-license-update.md %}
+   {% include desktop-license-update.md %}
 
 4. Click the checkbox to indicate that you accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-    > **Important**
-    >
-    > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-    {: .important}
+   > **Important**
+   >
+   > If you do not agree to the terms, the Docker Desktop application will close and you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
+   > {: .important}
 
-    For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
+   For more information, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement). We recommend that you also read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr*docs_desktop_install_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"} to learn how companies using Docker Desktop may be affected.
 
 ### Install from the command line
 
@@ -100,6 +99,7 @@ $ sudo hdiutil detach /Volumes/Docker
 ```
 
 The `install` command accepts the following flags:
+
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 
@@ -116,8 +116,7 @@ To uninstall Docker Desktop from your Mac:
 
 > Uninstall Docker Desktop from the command line
 >
-> To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
-> --uninstall`. If your instance is installed in the default location, this
+> To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath> --uninstall`. If your instance is installed in the default location, this
 > command provides a clean uninstall:
 >
 > ```console
@@ -145,5 +144,6 @@ To uninstall Docker Desktop from your Mac:
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
+
 * [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.
