@@ -349,7 +349,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 - Resync HTTP(S) proxy settings on application start
 - Interpret system proxy setting of `localhost` correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
 - All Docker binaries bundled with Docker for Mac are now signed
-- Display all Docker Cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
+- Display all Docker Cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538))
 - OSXFS: improved latency for many common operations, such as read and write, by approximately 25%
 - Fixed GUI crash when text table view was selected and windows re-opened (fixes [docker/for-mac#1477](https://github.com/docker/for-mac/issues/1477))
 - Reset to default / uninstall also remove `config.json` and `osxkeychain` credentials

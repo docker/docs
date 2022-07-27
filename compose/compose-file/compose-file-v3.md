@@ -2709,7 +2709,7 @@ this stack. The source of the secret is either `file` or `external`.
   supported when using `docker stack`.
 
 In this example, `my_first_secret` is created as
-`<stack_name>_my_first_secret `when the stack is deployed,
+`<stack_name>_my_first_secret` when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
 ```yaml

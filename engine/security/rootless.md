@@ -409,7 +409,7 @@ For example:
 
 **[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
 
-This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone ` is set to 0:
+This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone` is set to 0:
 
 ```console
 $ cat /proc/sys/kernel/unprivileged_userns_clone
