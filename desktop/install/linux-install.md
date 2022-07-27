@@ -129,7 +129,7 @@ Log out and log back in so that your group membership is re-evaluated.
 
 3. Select **Docker Desktop** to start Docker. <br> The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window.
 
-5. Select the checkbox to accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
+4. Select the checkbox to accept the updated terms and then click **Accept** to continue. Docker Desktop starts after you accept the terms.
 
     > **Important**
     >
