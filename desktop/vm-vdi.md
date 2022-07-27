@@ -1,7 +1,9 @@
 ---
 description: Instructions on how to enable nested virtualization
 keywords: nested virtualization, Docker Desktop
-title: Enable nested virtualization
+title: Run Docker Desktop in a VM or VDI environment
+redirect_from:
+- /desktop/nested-virtualization/
 ---
 >Note 
 >
