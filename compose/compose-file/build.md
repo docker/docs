@@ -302,4 +302,4 @@ build:
 ## Implementations
 
 * [docker-compose](https://docs.docker.com/compose)
-* [buildX bake](https://docs.docker.com/buildx/working-with-buildx/)
+* [buildx bake](../../build/bake/index.md)

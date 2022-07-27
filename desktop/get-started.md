@@ -3,33 +3,28 @@ description: Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
 title: Sign in and get started
 redirect_from:
+- /desktop/linux/
+- /desktop/linux/index/
+- /desktop/mac/
+- /desktop/mac/index/
+- /desktop/windows/
+- /desktop/windows/index/
+- /docker-for-mac/
+- /docker-for-mac/index/
+- /docker-for-mac/osx/
+- /docker-for-mac/started/
 - /docker-for-windows/
 - /docker-for-windows/index/
 - /docker-for-windows/started/
-- /engine/installation/windows/
-- /installation/windows/
+- /mac/
+- /mac/started/
+- /mackit/
+- /mackit/getting-started/
 - /win/
 - /windows/
 - /windows/started/
 - /winkit/
 - /winkit/getting-started/
-- /desktop/linux/index/
-- /desktop/windows/index/
-- /docker-for-mac/
-- /docker-for-mac/index/
-- /docker-for-mac/mutagen/
-- /docker-for-mac/mutagen-caching/
-- /docker-for-mac/osx/
-- /docker-for-mac/started/
-- /engine/installation/mac/
-- /installation/mac/
-- /mac/
-- /mac/started/
-- /mackit/
-- /mackit/getting-started/
-- /docker-for-mac/osxfs/
-- /docker-for-mac/osxfs-caching/
-- /desktop/mac/index/
 ---
 
 ## Quick Start Guide

@@ -72,7 +72,7 @@ On Mac, you can use the following methods to create a `registry.json` file.
 
 To automatically create a registry.json file when installing Docker Desktop, download `Docker.dmg` and run the following commands in a terminal from the directory containing `Docker.dmg`. Replace `myorg` with your organization's name.
 
-```bash
+```console
 $ sudo hdiutil attach Docker.dmg 
 $ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg
 $ sudo hdiutil detach /Volumes/Docker
@@ -80,13 +80,32 @@ $ sudo hdiutil detach /Volumes/Docker
 
 ####  Create registry.json manually on Mac
 
-To manually create a `registry.json` file, run the following commands in a terminal and replace `myorg` with your organization's name.
+To manually create a `registry.json` file, run the following commands in a terminal
+and replace `myorg` with your organization's name.
 
-```bash
-$ sudo touch /Library/Application Support/com.docker.docker/registry.json
-$ sudo echo '{"allowedOrgs":["myorg"]}' >> /Library/Application Support/com.docker.docker/registry.json
+```console
+$ sudo mkdir -p "/Library/Application Support/com.docker.docker"
+$ echo '{"allowedOrgs":["myorg"]}' | sudo tee "/Library/Application Support/com.docker.docker/registry.json"
 ```
 
-This creates the `registry.json` file at `/Library/Application Support/com.docker.docker/registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
+This creates (or updates, if the file already exists) the `registry.json` file
+at `/Library/Application Support/com.docker.docker/registry.json` and includes
+the organization information the user belongs to. Make sure the file has the
+expected content and can't be edited by the user, only by the administrator.
+
+Verify that the content of the file contains the correct information;
+
+```console
+$ sudo cat "/Library/Application Support/com.docker.docker/registry.json"
+{"allowedOrgs":["myorg"]}
+```
+
+Verify that the file has the expected permissions (`-rw-r--r--`) and ownership
+(`root` and `admin`):
+
+```console
+$ sudo ls -l "/Library/Application Support/com.docker.docker/registry.json"
+-rw-r--r--  1 root  admin  26 Jul 27 22:01 /Library/Application Support/com.docker.docker/registry.json
+```
 
 </div></div>
