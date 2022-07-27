@@ -17,8 +17,7 @@ The following list compiles any updates to Docker Engine that created
 backwards-incompatibility for old versions of Docker tools.
 
 > **Note**: In the case of your local environment, you should be updating your
-  Docker Engine using [Docker Desktop for Mac](../desktop/mac/index.md),
-  [Docker Desktop for Windows](../desktop/windows/index.md). That way all your tools stay
+  Docker Engine using [Docker Desktop](../desktop/index.md). That way all your tools stay
   in sync with Docker Engine.
 
 ## Engine 1.10

@@ -254,7 +254,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Released [Docker Desktop for Linux](install/linux-install.md).
 - Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
@@ -283,7 +283,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
+- Released [Docker Desktop for Linux](install/linux-install.md).
 - Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
