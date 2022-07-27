@@ -90,7 +90,7 @@ Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
 
 Note that configuring file sharing is not necessary for Windows containers,
-only [Linux containers](../windows/index.md#switch-between-windows-and-linux-containers).
+only [Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 If a directory is not shared with a Linux container you may get `file not found`
 or `cannot start service` errors at runtime. See [Volume mounting requires shared folders for Linux containers](../troubleshoot/topics.md).
 
