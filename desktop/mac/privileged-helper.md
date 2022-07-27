@@ -14,15 +14,15 @@ While Docker Desktop does not generally require the user running or installing i
 
 The reason for this is that Docker Desktop needs to perform a limited set of privileged operations using the privileged helper process `com.docker.vmnetd`. This approach allows, following the principle of least privilege, `root` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
 
-From version 4.11, it will be possible to avoid running a privileged service in the background by using `com.docker.vmnetd` for setup during installation and disabling it at runtime. In this case the user will not be prompted on the first run. Administrators would be able to do that by using the `–-user` flag on the [install command](../install/mac-install.md#install-from-the-command-line) which would:
-- Uninstall the previous `com.docker.vmnetd` if present
-- Set up symlinks for the user
-- Ensure that `localhost` and `kubernetes.docker.internal` are present in `/etc/hosts`
+From version 4.11 of Docker Desktop, it is possible to avoid running a privileged service in the background by using `com.docker.vmnetd` for setup during installation and disabling it at runtime. In this case the user is not prompted on the first run. Administrators are able to do that by using the `–-user` flag on the [install command](../install/mac-install.md#install-from-the-command-line) which:
+- Uninstalls the previous `com.docker.vmnetd` if present
+- Sets up symlinks for the user
+- Ensures that `localhost` and `kubernetes.docker.internal` are present in `/etc/hosts`
 
-This approach will have certain limitations:
-- Docker Desktop would only be able to be run by one user account per machine, namely the one specified in the `-–user` flag.
-- Ports 1-79 would be blocked - the containers would run but the port won’t be exposed on the host.
-- Spindump diagnostics for fine grained CPU utilization would not be gathered.
+This approach has certain limitations:
+- Docker Desktop can only be run by one user account per machine, namely the one specified in the `-–user` flag.
+- Ports 1-79 is blocked - the containers will run but the port won’t be exposed on the host.
+- Spindump diagnostics for fine grained CPU utilization are not gathered.
 
 ## Privileged Helper
 
