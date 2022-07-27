@@ -13,8 +13,10 @@ module Jekyll
         engine_ver = site.config['latest_engine_api_version']
         toc_file = File.read("_data/toc.yaml")
         replace = toc_file.gsub!("{{ site.latest_engine_api_version }}", engine_ver)
-        Jekyll.logger.info "  Replacing '{{ site.latest_engine_api_version }}' with #{engine_ver} in _data/toc.yaml"
-        File.open("_data/toc.yaml", "w") { |file| file.puts replace }
+        if toc_file != replace
+          Jekyll.logger.info "  Replacing '{{ site.latest_engine_api_version }}' with #{engine_ver} in _data/toc.yaml"
+          File.open("_data/toc.yaml", "w") { |file| file.puts replace }
+        end
       end
 
       end_time = Time.now
