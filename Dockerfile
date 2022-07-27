@@ -79,8 +79,13 @@ RUN --mount=type=bind,from=generate,source=/out,target=_site \
 
 # mdl is a lint tool for markdown files
 FROM gem AS mdl
+ARG MDL_STYLE
 RUN --mount=type=bind,target=. \
-  mdl --rules .mdlrc.style.rb .
+  mdl --ignore-front-matter --style=${MDL_STYLE:-'.mdlrc.style.rb'} $( \
+    find '.' -name '*.md' \
+      -not -path './registry/*' \
+      -not -path './desktop/extensions-sdk/*' \
+  )
 
 # Release the generated files in a scratch image
 # Can be output to your host with:
