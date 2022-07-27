@@ -1683,7 +1683,7 @@ TCP connection is idle for more than five minutes (related to
 
 **New**
 
-- More options when moving disk image (see [Storage location](../mac/space.md) under Advanced preference settings)
+- More options when moving disk image
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order
@@ -2287,7 +2287,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [https://docs.docker.com/desktop/mac/](../desktop/index.md)
+* Documentation moved to [https://docs.docker.com/desktop/mac/](../index.md)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links
