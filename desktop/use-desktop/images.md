@@ -20,11 +20,12 @@ It also displays **In Use** tags next to images used by running and stopped cont
 
 The **Images on disk** status bar displays the number of images and the total disk space used by the images.
 
- ## Manage your images
+## Manage your images
 
- Use the **Search** field to search for any specific image.
+Use the **Search** field to search for any specific image.
 
- You can sort images by:
+You can sort images by:
+
 - Name
 - Date created
 - Size
