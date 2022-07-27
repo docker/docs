@@ -40,6 +40,11 @@ RUN bundle update \
 FROM scratch AS vendor
 COPY --from=vendored /out /
 
+# Serve the files using jekyll to enable file watching
+# and livereload for a faster inner loop
+FROM gem AS dev
+CMD ["./dev-start.sh"]
+
 # Build the static HTML for the current docs.
 # After building with jekyll, fix up some links
 FROM gem AS generate

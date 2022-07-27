@@ -11,6 +11,10 @@ services:
       args:
         - JEKYLL_ENV
       context: .
+      target: dev
     image: docs/docstage
     ports:
-     - "4000:4000"
+      - 4000:4000
+      - 35729:35729
+    volumes:
+      - ./:/src
