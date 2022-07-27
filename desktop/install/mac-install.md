@@ -102,6 +102,7 @@ The `install` command accepts the following flags:
 
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--user=<user name>`: setup Docker Desktop for a specific user, doesn't install privileged daemon and never asks for admin password at startup
 
 ## Updates
 
