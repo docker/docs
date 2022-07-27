@@ -2,3 +2,4 @@
 
 rule 'header-style'
 rule 'ol-prefix', :style => :ordered
+rule 'no-reversed-links'
