@@ -64,8 +64,7 @@ Automate your image builds to run in GitHub actions using the official docker bu
 
 * **Orchestrating builds across complex projects together**  
 Connect your builds together and easily parameterize your images using buildx bake.  
-<!--replace when Bake content is onboarded -->
-See [High-level build options](buildx/index.md/#high-level-build-options)
+See [High-level build options with Bake](bake/index.md).
 
 ### Customizing your Builds
 
