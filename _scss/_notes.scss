@@ -32,9 +32,12 @@ The available classes are:
     font-weight: 700;
     margin-top:  0;
 
+    // https://fontawesome.com/docs/web/setup/upgrade/pseudo-elements
     &::before {
-      font-family: FontAwesome;
-      content:     "#{$icon} \00a0";
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font: var(--fa-font-solid);
+      content: "#{$icon} \00a0";
     }
   }
 
