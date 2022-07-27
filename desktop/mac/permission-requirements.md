@@ -22,7 +22,7 @@ From version 4.11 of Docker Desktop for Mac it will be possible to avoid running
 
 This approach has the following limitations:
 - Docker Desktop can only be run by one user account per machine, namely the one specified in the `-–user` flag.
-- Ports 1-79 are blocked. the containers will run but the port won’t be exposed on the host.
+- Ports 1-79 are blocked. The containers will run but the port won’t be exposed on the host.
 - Spindump diagnostics for fine grained CPU utilization are not gathered.
 
 ## Privileged Helper
