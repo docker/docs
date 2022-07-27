@@ -123,6 +123,7 @@ defaults:
 # Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
 # - repo is the GitHub repository to fetch from
 # - ref the Git reference
+# - completion_marker is a file path that, if it exists, will prevent a redownload from occurring
 # - paths is a list to the resources within the remote repository
 #   - dest is the destination path within the working tree
 #   - src is a list of glob source paths within the remote repository
@@ -130,6 +131,7 @@ fetch-remote:
   - repo: "https://github.com/docker/cli"
     default_branch: "master"
     ref: "20.10"
+    completion_marker: "engine/deprecated.md"
     paths:
       - dest: "engine/extend"
         src:
@@ -148,6 +150,7 @@ fetch-remote:
   - repo: "https://github.com/docker/docker"
     default_branch: "master"
     ref: "20.10"
+    completion_marker: "engine/api/version-history.md"
     paths:
       - dest: "engine/api"
         src:
@@ -156,6 +159,7 @@ fetch-remote:
   - repo: "https://github.com/docker/compose-cli"
     default_branch: "main"
     ref: "main"
+    completion_marker: "cloud/ecs-integration.md"
     paths:
       - dest: "cloud"
         src:
@@ -166,6 +170,7 @@ fetch-remote:
   - repo: "https://github.com/docker/buildx"
     default_branch: "master"
     ref: "master"
+    completion_marker: "build/bake/index.md"
     paths:
       - dest: "build/bake"
         src:
@@ -174,6 +179,7 @@ fetch-remote:
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
     ref: "release/2.7"
+    completion_marker: "registry/spec/index.md"
     paths:
       - dest: "registry/spec"
         src:
@@ -186,6 +192,7 @@ fetch-remote:
   - repo: "https://github.com/moby/buildkit"
     default_branch: "master"
     ref: "master"
+    completion_marker: "engine/reference/builder.md"
     paths:
       - dest: "engine/reference/builder.md"
         src:

@@ -49,79 +49,83 @@ module Jekyll
       puts "Starting plugin fetch_remote.rb..."
       site.config['fetch-remote'].each do |entry|
         puts "  Repo #{entry['repo']} (#{entry['ref']})"
-        Dir.mktmpdir do |tmpdir|
-          tmpfile = FetchRemote.download("#{entry['repo']}/archive/#{entry['ref']}.zip", tmpdir)
-          Dir.mktmpdir do |ztmpdir|
-            puts "    Extracting #{tmpfile}"
-            Archive::Zip.extract(
-              tmpfile,
-              ztmpdir,
-              :create => true
-            )
-            entry['paths'].each do |path|
-              if File.extname(path['dest']) != ""
-                if path['src'].size > 1
-                  raise "Cannot use file destination #{path['dest']} with multiple sources"
-                end
-                FileUtils.mkdir_p File.dirname(path['dest'])
-              else
-                FileUtils.mkdir_p path['dest']
-              end
 
-              puts "    Copying files"
-
-              # prepare file list to be copied
-              files = FileList[]
-              path['src'].each do |src|
-                if "#{src}".start_with?("!")
-                  files.exclude(File.join(ztmpdir, "*/"+"#{src}".delete_prefix("!")))
+        if(File.exist?(entry['completion_marker']))
+          puts "    Skipping fetch as #{entry['completion_marker']} exists"
+        else
+          Dir.mktmpdir do |tmpdir|
+            tmpfile = FetchRemote.download("#{entry['repo']}/archive/#{entry['ref']}.zip", tmpdir)
+            Dir.mktmpdir do |ztmpdir|
+              puts "    Extracting #{tmpfile}"
+              Archive::Zip.extract(
+                tmpfile,
+                ztmpdir,
+                :create => true
+              )
+              entry['paths'].each do |path|
+                if File.extname(path['dest']) != ""
+                  if path['src'].size > 1
+                    raise "Cannot use file destination #{path['dest']} with multiple sources"
+                  end
+                  FileUtils.mkdir_p File.dirname(path['dest'])
                 else
-                  files.include(File.join(ztmpdir, "*/#{src}"))
+                  FileUtils.mkdir_p path['dest']
                 end
-              end
 
-              files.each do |file|
-                FetchRemote.copy(file, path['dest']) do |s, d|
-                  s = File.realpath(s)
-                  # traverse source directory
-                  FileUtils::Entry_.new(s, nil, false).wrap_traverse(proc do |ent|
-                    file_clean = ent.path.delete_prefix(ztmpdir).split("/").drop(2).join("/")
-                    destent = FileUtils::Entry_.new(d, ent.rel, false)
-                    puts "      #{file_clean} => #{destent.path}"
+                puts "    Copying files"
 
-                    if File.file?(destent.path)
-                      fmp = FrontMatterParser::Parser.parse_file(destent.path)
-                      if fmp['fetch_remote'].nil?
-                        raise "Local file #{destent.path} already exists"
+                # prepare file list to be copied
+                files = FileList[]
+                path['src'].each do |src|
+                  if "#{src}".start_with?("!")
+                    files.exclude(File.join(ztmpdir, "*/"+"#{src}".delete_prefix("!")))
+                  else
+                    files.include(File.join(ztmpdir, "*/#{src}"))
+                  end
+                end
+
+                files.each do |file|
+                  FetchRemote.copy(file, path['dest']) do |s, d|
+                    s = File.realpath(s)
+                    # traverse source directory
+                    FileUtils::Entry_.new(s, nil, false).wrap_traverse(proc do |ent|
+                      file_clean = ent.path.delete_prefix(ztmpdir).split("/").drop(2).join("/")
+                      destent = FileUtils::Entry_.new(d, ent.rel, false)
+                      puts "      #{file_clean} => #{destent.path}"
+
+                      if File.file?(destent.path)
+                        fmp = FrontMatterParser::Parser.parse_file(destent.path)
+                        if fmp['fetch_remote'].nil?
+                          raise "Local file #{destent.path} already exists"
+                        end
+                        line_start, line_end = FetchRemote.resolve_line_numbers(fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_start'] : nil, fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_end'] : nil)
+                        lines = File.readlines(ent.path)[line_start..line_end]
+                        File.open(destent.path, "a") { |fow| fow.puts lines.join }
+                      else
+                        ent.copy destent.path
                       end
-                      line_start, line_end = FetchRemote.resolve_line_numbers(fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_start'] : nil, fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_end'] : nil)
-                      lines = File.readlines(ent.path)[line_start..line_end]
-                      File.open(destent.path, "a") { |fow| fow.puts lines.join }
-                    else
-                      ent.copy destent.path
-                    end
 
-                    next unless File.file?(ent.path) && File.extname(ent.path) == ".md"
-                    # set edit and issue url and remote info for markdown files in site config defaults
-                    edit_url = "#{entry['repo']}/edit/#{entry['default_branch']}/#{file_clean}"
-                    issue_url = "#{entry['repo']}/issues/new?body=File: [#{file_clean}](https://docs.docker.com/#{destent.path.sub(/#{File.extname(destent.path)}$/, '')}/)"
-                    puts "        edit_url:  #{edit_url}"
-                    puts "        issue_url: #{issue_url}"
-                    site.config['defaults'] << {
-                      "scope" => { "path" => destent.path },
-                      "values" => {
-                        "edit_url" => edit_url,
-                        "issue_url" => issue_url
-                      },
-                    }
-                  end, proc do |_| end)
+                      next unless File.file?(ent.path) && File.extname(ent.path) == ".md"
+                      # set edit and issue url and remote info for markdown files in site config defaults
+                      edit_url = "#{entry['repo']}/edit/#{entry['default_branch']}/#{file_clean}"
+                      issue_url = "#{entry['repo']}/issues/new?body=File: [#{file_clean}](https://docs.docker.com/#{destent.path.sub(/#{File.extname(destent.path)}$/, '')}/)"
+                      puts "        edit_url:  #{edit_url}"
+                      puts "        issue_url: #{issue_url}"
+                      site.config['defaults'] << {
+                        "scope" => { "path" => destent.path },
+                        "values" => {
+                          "edit_url" => edit_url,
+                          "issue_url" => issue_url
+                        },
+                      }
+                    end, proc do |_| end)
+                  end
                 end
               end
             end
           end
         end
       end
-
       end_time = Time.now
       puts "done in #{(end_time - beginning_time)} seconds"
     end
