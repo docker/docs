@@ -103,7 +103,7 @@ function handleSearch(/* KeyboardEvent */ e) {
 }
 
 ready(() => {
-    getJSON( "/js/metadata.json", function(data) {
+    getJSON( "/assets/js/metadata.json", function(data) {
         pages = data
         const input = _("#st-search-input")
         if (/* HTMLInputElement */ input) {
