@@ -11,6 +11,5 @@ _releaser
 _site
 CONTRIBUTING.md
 Dockerfile
-Dockerfile.archive
 docker-compose.yml
 /vendor

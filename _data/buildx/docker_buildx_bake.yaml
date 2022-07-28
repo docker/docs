@@ -334,11 +334,11 @@ examples: |-
   ```console
   $ docker buildx bake --progress=plain
 
-  #2 [backend internal] load build definition from Dockerfile.test
+  #2 [backend internal] load build definition from test.Dockerfile
   #2 sha256:de70cb0bb6ed8044f7b9b1b53b67f624e2ccfb93d96bb48b70c1fba562489618
   #2 ...
 
-  #1 [database internal] load build definition from Dockerfile.test
+  #1 [database internal] load build definition from test.Dockerfile
   #1 sha256:453cb50abd941762900a1212657a35fc4aad107f5d180b0ee9d93d6b74481bce
   #1 transferring dockerfile: 36B done
   #1 DONE 0.1s
@@ -398,7 +398,7 @@ examples: |-
   }
 
   target "webapp-dev" {
-      dockerfile = "Dockerfile.webapp"
+      dockerfile = "webapp.Dockerfile"
       tags = ["docker.io/username/webapp"]
   }
 
@@ -408,7 +408,7 @@ examples: |-
   }
 
   target "db" {
-      dockerfile = "Dockerfile.db"
+      dockerfile = "db.Dockerfile"
       tags = ["docker.io/username/db"]
   }
   ```

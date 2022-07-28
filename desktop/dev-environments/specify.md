@@ -10,13 +10,13 @@ Use a JSON file to specify a Dockerfile which in turn defines your Dev Environme
 
 ```jsx
 {
-    "dockerfile": "Dockerfile.devenv"
+    "dockerfile": "devenv.Dockerfile"
 }
 ```
 
-Next, define the dependencies you want to include in your `Dockerfile.devenv`.
+Next, define the dependencies you want to include in your `devenv.Dockerfile`.
 
-While some images or Dockerfiles include a non-root user, many base images and Dockerfiles do not. Fortunately, you can add a non-root user named `vscode`. If you include Docker tooling, for example the Docker CLI or `docker compose`, in the `Dockerfile.devenv`, you need the `vscode` user to be included in the `docker` group.
+While some images or Dockerfiles include a non-root user, many base images and Dockerfiles do not. Fortunately, you can add a non-root user named `vscode`. If you include Docker tooling, for example the Docker CLI or `docker compose`, in the `devenv.Dockerfile`, you need the `vscode` user to be included in the `docker` group.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
