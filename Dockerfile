@@ -53,7 +53,7 @@ if [ "${JEKYLL_ENV}" = "production" ]; then
   (
     set -x
     bundle exec jekyll build --profile -d ${TARGET} --config _config.yml,_config_production.yml
-    sed -i 's#<loc>/#<loc>https://${DOMAIN}/#' "${TARGET}/sitemap.xml"
+    sed -i "s#<loc>/#<loc>https://${DOMAIN}/#" "${TARGET}/sitemap.xml"
   )
 else
   (
@@ -64,7 +64,7 @@ else
   )
 fi
 find ${TARGET} -type f -name '*.html' | while read i; do
-  sed -i 's#\(<a[^>]* href="\)https://${DOMAIN}/#\1/#g' "$i"
+  sed -i "s#\(<a[^>]* href=\"\)https://${DOMAIN}/#\1/#g" "$i"
 done
 EOT
 
