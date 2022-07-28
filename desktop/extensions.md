@@ -34,6 +34,7 @@ To add Docker Extensions:
 2. From the Dashboard, select **Add Extensions** in the menu bar. 
 The Extensions Marketplace opens. 
 3. Browse the available extensions.
+    You can sort the list of extensions by **Recently added** or alphabetically. 
 4. Click **Install**.
 
 From here, you can click **Open** to access the extension or install additional extensions. The extension also appears in the menu bar.
@@ -84,10 +85,9 @@ Feedback can be given to an extension author through a dedicated Slack channel o
 extension, select:
     - Support
     - Slack
-    - Issues
-    You'll be sent to a page outside of Docker Desktop to submit your feedback.
+    - Issues. You'll be sent to a page outside of Docker Desktop to submit your feedback.
 
-If an extension does not provide a way for you to give feedback, contact us and we'll pass on the feedback for you. 
+If an extension does not provide a way for you to give feedback, contact us and we'll pass on the feedback for you. To provide feedback, select the **Give feedback** to the right of **Extensions Marketplace**
 
 ## Uninstall an extension
  You can uninstall an extension at any time. 
