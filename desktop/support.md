@@ -57,6 +57,10 @@ Docker Desktop excludes support for the following types of issues:
 * Reimbursing and expenses spent for third-party services not provided by Docker
 * Docker Support excludes training, customization, and integration
 
+>Note
+>
+> Support for [running Docker Desktop in a VM or VDI environment](vm-vdi.md) is only available to Docker Business customers.
+
 ### What versions are supported?
 
 We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.

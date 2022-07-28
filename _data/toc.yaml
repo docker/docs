@@ -1197,10 +1197,12 @@ manuals:
           title: Back up and restore data
         - path: /desktop/networking/
           title: Explore networking features
-        - path: /desktop/mac/privileged-helper/
-          title: Privileged Helper on Mac
+        - path: /desktop/mac/permission-requirements/
+          title: Docker Desktop permission requirements for Mac
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
+        - path: /desktop/vm-vdi/
+          title: Run Docker Desktop in a VM or VDI environment
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/

@@ -18,6 +18,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Start Docker Desktop when you log in**. Select to automatically start Docker
   Desktop when you log into your machine.
 
+- **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
   troubleshoot the application. Clear the check box to opt out. Docker may
