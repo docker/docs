@@ -46,7 +46,7 @@ Here the services `frontend` and `phpmyadmin` are assigned to the profiles
 respective profiles are enabled.
 
 Services without a `profiles` attribute will _always_ be enabled, i.e. in this
-case running `docker-compose up` would only start `backend` and `db`.
+case running `docker compose up` would only start `backend` and `db`.
 
 Valid profile names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 
@@ -61,8 +61,8 @@ To enable a profile supply the `--profile` [command-line option](reference/index
 use the [`COMPOSE_PROFILES` environment variable](reference/envvars.md#compose_profiles):
 
 ```sh
-$ docker-compose --profile debug up
-$ COMPOSE_PROFILES=debug docker-compose up
+$ docker compose --profile debug up
+$ COMPOSE_PROFILES=debug docker compose up
 ```
 
 The above command would both start your application with the `debug` profile enabled.
@@ -73,8 +73,8 @@ Multiple profiles can be specified by passing multiple `--profile` flags or
 a comma-separated list for the `COMPOSE_PROFILES` environment variable:
 
 ```sh
-$ docker-compose --profile frontend --profile debug up
-$ COMPOSE_PROFILES=frontend,debug docker-compose up
+$ docker compose --profile frontend --profile debug up
+$ COMPOSE_PROFILES=frontend,debug docker compose up
 ```
 
 ## Auto-enabling profiles and dependency resolution
@@ -104,14 +104,14 @@ services:
 
 ```sh
 # will only start backend and db
-$ docker-compose up -d
+$ docker compose up -d
 
 # this will run db-migrations (and - if necessary - start db)
 # by implicitly enabling profile `tools`
-$ docker-compose run db-migrations
+$ docker compose run db-migrations
 ```
 
-But keep in mind that `docker-compose` will only automatically enable the
+But keep in mind that `docker compose` will only automatically enable the
 profiles of the services on the command line and not of any dependencies. This
 means that all services the targeted service `depends_on` must have a common
 profile with it, be always enabled (by omitting `profiles`) or have a matching
@@ -142,14 +142,14 @@ services:
 
 ```sh
 # will only start "web"
-$ docker-compose up -d
+$ docker compose up -d
 
 # this will start mock-backend (and - if necessary - db)
 # by implicitly enabling profile `dev`
-$ docker-compose up -d mock-backend
+$ docker compose up -d mock-backend
 
 # this will fail because profile "dev" is disabled
-$ docker-compose up phpmyadmin
+$ docker compose up phpmyadmin
 ```
 
 Although targeting `phpmyadmin` will automatically enable its profiles - i.e.
@@ -166,8 +166,8 @@ or enable a profile of `db` explicitly:
 
 ```sh
 # profile "debug" is enabled automatically by targeting phpmyadmin
-$ docker-compose --profile dev up phpmyadmin
-$ COMPOSE_PROFILES=dev docker-compose up phpmyadmin
+$ docker compose --profile dev up phpmyadmin
+$ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 ```
 
 

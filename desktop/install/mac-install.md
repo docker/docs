@@ -3,8 +3,10 @@ description: How to install Docker Desktop on Mac
 keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 redirect_from:
-- /docker-for-mac/install/
 - /desktop/mac/install/
+- /docker-for-mac/install/
+- /engine/installation/mac/
+- /installation/mac/
 ---
 
 > **Update to the Docker Desktop terms**
@@ -138,7 +140,6 @@ To uninstall Docker Desktop from your Mac:
 
 ## Where to go next
 
-- [Getting started](../mac/index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
 - [Docker Desktop for Apple silicon](../mac/apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.

@@ -5,6 +5,7 @@ keywords: build, dockerfile, reference
 toc_max: 3
 redirect_from:
 - /reference/builder/
+fetch_remote:
+  line_start: 2
+  line_end: -1
 ---
-
-{% include_remote dockerfile/reference.md 2 -1 -%}

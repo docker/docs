@@ -20,11 +20,7 @@ Docker Community members and partners can use our [SDK](extensions-sdk/index.md)
 
 ## Prerequisites
 
-Docker Extensions is available as part of Docker Desktop 4.8.0 or a later release. Download and install Docker Desktop 4.8.0 or later:
-
-* [Mac](mac/release-notes/index.md)
-* [Windows](windows/release-notes/index.md)
-* [Linux](linux/index.md)
+Docker Extensions is available as part of Docker Desktop 4.8.0 or a later release. [Download and install Docker Desktop 4.8.0 or later](release-notes.md).
 
 ## Add an extension
 
