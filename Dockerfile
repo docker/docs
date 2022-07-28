@@ -47,16 +47,11 @@ ARG JEKYLL_ENV
 ARG DOCS_URL
 ENV TARGET=/out
 RUN --mount=type=bind,target=.,rw \
-  --mount=type=cache,target=/src/.jekyll-cache <<EOT
-set -eu
-CONFIG_FILES=_config.yml$([ "$JEKYLL_ENV" = "production" ] && echo ",_config_production.yml" || true)
-(
+    --mount=type=cache,target=/src/.jekyll-cache <<EOT
+  set -eu
+  CONFIG_FILES=_config.yml$([ "$JEKYLL_ENV" = "production" ] && echo ",_config_production.yml" || true)
   set -x
   bundle exec jekyll build --profile -d ${TARGET} --config ${CONFIG_FILES}
-)
-find ${TARGET} -type f -name '*.html' | while read i; do
-  sed -i "s#\(<a[^>]* href=\"\)${DOCS_URL}/#\1/#g" "$i"
-done
 EOT
 
 # htmlproofer checks for broken links
