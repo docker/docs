@@ -33,7 +33,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Docker Desktop is now fully supported for Docker Business customers inside VMware ESXi and Azure VMs.
+- Docker Desktop is now fully supported for Docker Business customers inside VMware ESXi and Azure VMs. For more information, see [Run Docker Desktop inside a VM or VDI environment](../desktop/vm-vdi.md)
 - Added two new extensions ([vcluster](https://hub.docker.com/extensions/loftsh/vcluster-dd-extension) and [PGAdmin4](https://hub.docker.com/extensions/mochoa/pgadmin4-docker-extension)) to the Extensions Marketplace.
 - The ability to sort extensions has been added to the Extensions Marketplace.
 - Fixed a bug that caused some users to be asked for feedback too frequently. You'll now only be asked for feedback twice a year.
