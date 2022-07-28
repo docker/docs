@@ -45,7 +45,12 @@ What you'll see is that the files created in one container aren't available in a
     ```console
     $ docker exec <container-id> cat /data.txt
     ```
+    
+    Windows bash users add second /
 
+    ```console
+    $ docker exec <container-id> cat //data.txt
+    ```
     You should see a random number!
 
 3. Now, let's start another `ubuntu` container (the same image) and we'll see we don't have the same
@@ -53,6 +58,11 @@ What you'll see is that the files created in one container aren't available in a
 
     ```console
     $ docker run -it ubuntu ls /
+    ```
+    Windows bash users add second /
+    
+    ```console
+    $ docker run -it ubuntu ls //
     ```
 
     And look! There's no `data.txt` file there! That's because it was written to the scratch space for
