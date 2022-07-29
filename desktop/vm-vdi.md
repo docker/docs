@@ -41,17 +41,3 @@ For Azure virtual machines, [check that the VM size chosen supports nested virtu
 
 For on-prem virtual machines, check the constraints on the host VM operating system and [follow the steps documented by Microsoft](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization).
 
-### Enable nested virtualization on Citrix Hypervisor
-
->Note 
->
->This is work in progress. The steps haven’t been validated yet in our test environment.
-{: .important}
-
-Nested virtualization on Citrix Hypervisor is unsupported in production scenarios. However, running a VM inside a Citrix Hypervisor VM is possible. In fact, Docker Desktop is currently being used in Virtual Desktop Environments where Citrix is the host hypervisor.
-
-Steps on enabling nested virtualization can be found in [Citrix's documentation](https://docs.citrix.com/en-us/citrix-hypervisor/vms/bromium.html#configuration). It contains instructions for the only scenario where nested virtualization is supported by Citrix which is to support Bromium’s Secure Platform solution.
-
->Note
->
-> Nested virtualization is only available for Citrix Hypervisor Premium Edition customers or those customers who have access to Citrix Hypervisor through their Citrix Virtual Apps and Desktop entitlement.
