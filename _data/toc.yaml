@@ -1199,6 +1199,8 @@ manuals:
           title: Explore networking features
         - path: /desktop/mac/permission-requirements/
           title: Docker Desktop permission requirements for Mac
+        - path: /desktop/windows/permission-requirements/
+          title: Docker Desktop permission requirements for Windows
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
