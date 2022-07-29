@@ -32,6 +32,8 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 
 - At least 4 GB of RAM.
 
+- Enable configuring ID mapping in user namespaces, see [File sharing](#file-sharing).
+
 Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](linux-install.md#why-docker-desktop-for-linux-runs-a-vm).
 
 > **Note:**
@@ -267,6 +269,58 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
     The VM utilized by DD4L uses [`virtiofs`](https://virtio-fs.gitlab.io){:target="_blank" rel="noopener" class="_"}, a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
 
     As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
+
+## File sharing
+
+Docker Desktop for Linux uses [virtiofs](https://virtio-fs.gitlab.io/){:target="_blank" rel="noopener"}{:target="_blank" rel="noopener"} as the
+default (and currently only) mechanism to enable file sharing between the host
+and Docker Desktop VM. In order not to require elevated privileges, without
+unnecessarily restricting operations on the shared files, Docker Desktop runs
+the file sharing service (`virtiofsd`) inside a user namespace (see
+`user_namespaces(7)`) with UID and GID mapping configured. As a result Docker
+Desktop relies on the host being configured to enable the current user to use
+subordinate ID delegation. For this to be true `/etc/subuid` (see `subuid(5)`)
+and `/etc/subgid` (see `subgid(5)`) must be present. Docker Desktop only
+supports subordinate ID delegation configured via files. Docker Desktop maps the
+current user ID and GID to 0 in the containers. It uses the first entry
+corresponding to the current user in `/etc/subuid` and `/etc/subgid` to set up
+mappings for IDs above 0 in the containers.
+
+| ID in container | ID on host                                                                       |
+| --------------- | -------------------------------------------------------------------------------- |
+| 0 (root)        | ID of the user running DD (e.g. 1000)                                            |
+| 1               | 0 + beginning of ID range specified in `/etc/subuid`/`/etc/subgid` (e.g. 100000) |
+| 2               | 1 + beginning of ID range specified in `/etc/subuid`/`/etc/subgid` (e.g. 100001) |
+| 3               | 2 + beginning of ID range specified in `/etc/subuid`/`/etc/subgid` (e.g. 100002) |
+| ...             | ...                                                                              |
+
+If `/etc/subuid` and `/etc/subgid` are missing, they need to be created.
+Both should contain entries in the form -
+`<username>:<start of id range>:<id range size>`. For example, to allow the current user
+to use IDs from 100000 to 165535:
+
+```console
+$ grep "$USER" /etc/subuid >> /dev/null 2&>1 || (echo "$USER:100000:65536" | sudo tee -a /etc/subuid)
+$ grep "$USER" /etc/subgid >> /dev/null 2&>1 || (echo "$USER:100000:65536" | sudo tee -a /etc/subgid)
+```
+
+To verify the configs have been created correctly, inspect their contents:
+
+```console
+$ echo $USER
+exampleuser
+$ cat /etc/subuid
+exampleuser:100000:65536
+$ cat /etc/subgid
+exampleuser:100000:65536
+```
+
+In this scenario if a shared file is `chown`ed inside a Docker Desktop container
+owned by a user with a UID of 1000, it shows up on the host as owned by
+a user with a UID of 100999. This has the unfortunate side effect of preventing
+easy access to such a file on the host. The problem is resolved by creating
+a group with the new GID and adding our user to it, or by setting a recursive
+ACL (see `setfacl(1)`) for folders shared with the Docker Desktop VM.
 
 ## Where to go next
 
