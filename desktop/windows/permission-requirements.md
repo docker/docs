@@ -1,6 +1,6 @@
 ---
 description: Permission requirements for Docker Desktop for Windows
-keywords: Docker Desktop, mac, security, install
+keywords: Docker Desktop, Windows, security, install
 title: Docker Desktop permission requirements for Windows
 redirect_from:
 - /desktop/windows/privileged-helper/
@@ -39,7 +39,7 @@ This means that although containers run by default as `root`, this does not allo
 
 ## Windows Containers
 
-Unlike the Linux Docker engine and containers which run in a VM, Windows containers are an operating system feature, and run directly on the Windows host with `Administrator` privileges For organizations which would not like their developers to run Windows containers, a `–no-windows-containers` installer flag is available from version 4.11 to disable their use. 
+Unlike the Linux Docker engine and containers which run in a VM, Windows containers are an operating system feature, and run directly on the Windows host with `Administrator` privileges. For organizations which do not want their developers to run Windows containers, a `–no-windows-containers` installer flag is available from version 4.11 to disable their use. 
 
 ## Networking
 
