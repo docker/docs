@@ -45,9 +45,56 @@ jobs:
         name: Validate
         uses: docker/bake-action@v2
         with:
-          targets: ${{ matrix.target }}
+          targets: ${{ matrix.target }}-output
           set: |
+            *.cache-to=type=gha,scope=validate-${{ matrix.target }},mode=max
+            *.cache-from=type=gha,scope=validate-${{ matrix.target }}
             *.cache-from=type=gha,scope=build
+      -
+        name: Annotate
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('lint/results', 'utf-8');
+            if (results.length == 0) {
+              process.exit(0);
+            }
+
+            // print results
+            console.log(results);
+            process.exitCode = 1;
+
+            // construct annotations by parsing output
+            switch ("${{ matrix.target }}") {
+            case "htmlproofer":
+              const re = /^- (.+)\n  \*  (.+) \(line (\d+)\)\n(.+)$/gm;
+              while (true) {
+                const result = re.exec(results);
+                if (result === null) {
+                  break;
+                }
+
+                core.error(`${result[2]}\n${result[4]}`, {
+                  title: 'Link check failed',
+                  // file: result[1],
+                  // startLine: result[3],
+                });
+              }
+              break;
+            case "mdl":
+              const jsonResults = JSON.parse(results);
+              for (const result of jsonResults) {
+                const title = result.rule + (result.aliases.length > 0 ? ` (${result.aliases[0]})` : ``);
+                console.log(`${result.filename}:${result.line}; ${title} - ${result.description}`);
+                core.error(result.description, {
+                  title: title,
+                  file: result.filename,
+                  startLine: result.line,
+                });
+              }
+              break;
+            }
 
   # build-releaser job will just build _releaser app used for Netlify and
   # AWS deployment in publish workflow. it's just to be sure it builds correctly.

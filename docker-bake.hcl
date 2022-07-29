@@ -41,10 +41,25 @@ target "htmlproofer" {
   output = ["type=cacheonly"]
 }
 
+target "htmlproofer-output" {
+  inherits = ["_common"]
+  target = "htmlproofer-output"
+  output = ["./lint"]
+}
+
 target "mdl" {
   inherits = ["_common"]
   target = "mdl"
   output = ["type=cacheonly"]
+}
+
+target "mdl-output" {
+  inherits = ["_common"]
+  target = "mdl-output"
+  output = ["./lint"]
+  args = {
+    MDL_JSON = 1
+  }
 }
 
 #

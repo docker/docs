@@ -55,23 +55,52 @@ RUN --mount=type=bind,target=.,rw \
 EOT
 
 # htmlproofer checks for broken links
-FROM gem AS htmlproofer
-RUN --mount=type=bind,from=generate,source=/out,target=_site \
+FROM gem AS htmlproofer-base
+RUN --mount=type=bind,from=generate,source=/out,target=_site <<EOF
   htmlproofer ./_site \
     --disable-external \
     --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" \
     --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" \
-    --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/"
+    --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/" > /results 2>&1
+  rc=$?
+  if [[ $rc -eq 0 ]]; then
+    echo -n > /results
+  fi
+EOF
+
+FROM htmlproofer-base as htmlproofer
+RUN <<EOF
+  cat /results
+  [ ! -s /results ] || exit 1
+EOF
+
+FROM scratch as htmlproofer-output
+COPY --from=htmlproofer-base /results /results
 
 # mdl is a lint tool for markdown files
-FROM gem AS mdl
+FROM gem AS mdl-base
+ARG MDL_JSON
 ARG MDL_STYLE
-RUN --mount=type=bind,target=. \
-  mdl --ignore-front-matter --style=${MDL_STYLE:-'.mdlrc.style.rb'} $( \
+RUN --mount=type=bind,target=. <<EOF
+  mdl --ignore-front-matter ${MDL_JSON:+'--json'} --style=${MDL_STYLE:-'.mdlrc.style.rb'} $( \
     find '.' -name '*.md' \
       -not -path './registry/*' \
       -not -path './desktop/extensions-sdk/*' \
-  )
+  ) > /results
+  rc=$?
+  if [[ $rc -eq 0 ]]; then
+    echo -n > /results
+  fi
+EOF
+
+FROM mdl-base as mdl
+RUN <<EOF
+  cat /results
+  [ ! -s /results ] || exit 1
+EOF
+
+FROM scratch as mdl-output
+COPY --from=mdl-base /results /results
 
 # Release the generated files in a scratch image
 # Can be output to your host with:
