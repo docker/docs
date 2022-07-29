@@ -103,7 +103,8 @@ tags:
   - name: scim
     x-displayName: SCIM
     description: |
-      Endpoints for SCIM integrations.
+      SCIM is a provisioning system that lets you manage users within your identity provider (IdP).
+      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/docker-hub/scim/).
 x-tagGroups:
   - name: General
     tags:
@@ -981,13 +982,12 @@ paths:
     get:
       summary: List users
       description: |
-        Returns paginated users for an organization. Use `startIndex` and
-        `count` query parameters to receive paginated results.
+        List users, returns paginated users for an organization. Use `startIndex`
+        and `count` query parameters to receive paginated results.
 
         **Sorting:**<br>
-        Sorting allows you to specify the order in which resources are returned
-        by specifying a combination of `sortBy` and `sortOrder` query
-        parameters.
+        Sorting lets you to specify the order of returned resources by specifying
+        a combination of `sortBy` and `sortOrder` query parameters.
 
         The `sortBy` parameter specifies the attribute whose value will be used
         to order the returned responses. The `sortOrder` parameter defines the
@@ -1117,7 +1117,7 @@ paths:
     put:
       summary: Update a user
       description: |
-        Updates a user. This route is used to change the user's name, activate,
+        Updates a user. Use this route to change the user's name, activate,
         and deactivate the user.
       tags: [ scim ]
       security:
