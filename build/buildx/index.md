@@ -34,19 +34,18 @@ In addition, Buildx also supports new features that are not yet available for
 regular `docker build` like building manifest lists, distributed caching, and
 exporting build results to OCI image tarballs.
 
-You can run Buildx in different configurations that are exposed through a driver
-concept. Currently, Docker supports a "docker" driver that uses the BuildKit
-library bundled into the Docker daemon binary, and a "docker-container" driver
-that automatically launches BuildKit inside a Docker container.
+Buildx is flexible and can be run in different configurations that are exposed
+through various "drivers". Each driver defines how and where a build should
+run, and have different feature sets.
 
-The user experience of using Buildx is very similar across drivers. However,
-there are some features that are not currently supported by the "docker" driver,
-because the BuildKit library which is bundled into docker daemon uses a different
-storage component. In contrast, all images built with the "docker" driver are
-automatically added to the "docker images" view by default, whereas when using
-other drivers, the method for outputting an image needs to be selected
-with `--output`.
+We currently support the following drivers:
 
+* The `docker` driver ([reference](/engine/reference/commandline/buildx_create/#driver))
+* The `docker-container` driver ([guide](drivers/docker-container.md), [reference](/engine/reference/commandline/buildx_create/#driver))
+* The `kubernetes` driver ([guide](drivers/kubernetes.md), [reference](/engine/reference/commandline/buildx_create/#driver))
+* The `remote` driver ([guide](drivers/remote.md))
+
+For more information on drivers, see the [drivers guide](drivers/index.md).
 
 ## High-level build options with Bake
 

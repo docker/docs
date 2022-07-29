@@ -1400,6 +1400,16 @@ manuals:
           title: Buildx overview
         - path: /build/buildx/install/
           title: Install Buildx
+        - sectiontitle: Drivers
+          section:
+            - path: /build/buildx/drivers/
+              title: Overview
+            - path: /build/buildx/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/buildx/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/buildx/drivers/remote/
+              title: Remote driver
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
         - path: /build/buildx/multiplatform-images/
