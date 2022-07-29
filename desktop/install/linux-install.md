@@ -8,27 +8,26 @@ redirect_from:
 
  This page contains information about system requirements, download URLs, and instructions on how to install and update Docker Desktop for Linux.
 
-> Download Docker Desktop for Linux packages
+> Follow the links below to view the distro-specific installation instructions:
 >
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-
-*For checksums, see [Release notes](../release-notes.md)*
+> * [Ubuntu](ubuntu.md)
+> * [Debian](debian.md)
+> * [Fedora](fedora.md)
 
 ## System requirements
 
 To install Docker Desktop successfully, your Linux host must meet the following requirements:
 
-- 64-bit kernel and CPU support for virtualization 
+- 64-bit kernel and CPU support for virtualization.
 
 - KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the kvm device.
 
-- **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version. 
+- **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version.
 
 - systemd init system.
 
 - Gnome or KDE Desktop environment.
-  -For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/)).
+  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/)).
 
 - At least 4 GB of RAM.
 
@@ -65,7 +64,7 @@ Docker supports Docker Desktop on the current LTS release of the aforementioned 
 ### KVM virtualization support
 
 
-Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org). 
+Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org).
 
 The `kvm` module should load automatically if the host has virtualization support. To load the module manually, run:
 
