@@ -170,6 +170,9 @@ fetch-remote:
       - dest: "build/bake"
         src:
           - "docs/guides/bake/**"
+      - dest: "build/buildx/drivers"
+        src:
+          - "docs/guides/drivers/**"
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
