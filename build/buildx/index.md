@@ -40,7 +40,7 @@ run, and have different feature sets.
 
 We currently support the following drivers:
 
-* The `docker` driver ([reference](/engine/reference/commandline/buildx_create/#driver))
+* The `docker` driver ([guide](drivers/docker.md), [reference](/engine/reference/commandline/buildx_create/#driver))
 * The `docker-container` driver ([guide](drivers/docker-container.md), [reference](/engine/reference/commandline/buildx_create/#driver))
 * The `kubernetes` driver ([guide](drivers/kubernetes.md), [reference](/engine/reference/commandline/buildx_create/#driver))
 * The `remote` driver ([guide](drivers/remote.md))
