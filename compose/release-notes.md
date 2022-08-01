@@ -7,6 +7,41 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 2.7.0
+
+(2022-07-20)
+
+### Enhancements
+
+- Added support for environment secrets during build step. Fixes [compose#9606](https://github.com/docker/compose/issues/9606){:target="_blank" rel="noopener" class="_"}.
+
+### Bug fixes
+
+- Networks: prevented issues due to duplicate names. Fixes [moby/moby#18864](https://github.com/moby/moby/issues/18864){:target="_blank" rel="noopener" class="_"}.
+- Used appropriate dependency condition for one-shot containers when running `compose up --wait`. Fixes [compose#9606](https://github.com/docker/compose/pull/9572){:target="_blank" rel="noopener" class="_"}.
+- Fixed environment variable expansion.
+- Validated depended-on services exist in consistency check. Fixes [compose#8910](https://github.com/docker/compose/issues/8910){:target="_blank" rel="noopener" class="_"}.
+- Fixed hash usage in environment values. Fixes [compose#9509](https://github.com/docker/compose/issues/9509){:target="_blank" rel="noopener" class="_"}. 
+- Docker Build: added fix to respect dependency order for classic builder. Fixes [compose#8538](https://github.com/docker/compose/issues/8538){:target="_blank" rel="noopener" class="_"}.
+- Fixed panic caused by empty string argument. Fixes [compose-switch#35](https://github.com/docker/compose-switch/issues/35){:target="_blank" rel="noopener" class="_"}.
+- Fixed start/restart as to not impact one-off containers. Fixes [compose#9509](https://github.com/docker/compose/issues/9044){:target="_blank" rel="noopener" class="_"}.
+- Fixed issue with close networks name on `compose up` and `compose down` commands. Fixes [compose#9630](https://github.com/docker/compose/issues/9044){:target="_blank" rel="noopener" class="_"}.
+- Fixed to keep the container reference when `volumes_from` targets a container and not a service. Fixes [compose#8874](https://github.com/docker/compose/issues/8874){:target="_blank" rel="noopener" class="_"}.
+- build.go: added fix to initialize `CustomLabels` map if `nil`.
+
+### Changes
+
+- Added new targets to build Compose binary before running e2e tests.
+- CI: released workflow to open a PR on docs repo with latest changes.
+- Dependencies upgrade: bumped [containerd from 1.6.2 to 1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6).
+- Dependencies upgrade: bumped [go to 1.18.4](https://github.com/golang/go/compare/go1.18.3...go1.18.4){:target="_blank" rel="noopener" class="_"}. 
+- Dependencies upgrade: bumped [compose-go to v1.2.9](https://github.com/compose-spec/compose-go/releases/tag/v1.2.9).
+- e2e: added test for `ps`.
+- e2e: split out pause tests and add more cases.
+- e2e: add more start/stop test cases.
+
+For the full change log or additional information, check the [Compose repository 2.7.0 release page](https://github.com/docker/compose/releases/tag/v2.7.0){:target="_blank" rel="noopener" class="_"}.
+
 
 ## 2.6.1
 
