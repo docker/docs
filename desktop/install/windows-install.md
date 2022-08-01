@@ -54,7 +54,7 @@ Your Windows machine must meet the following requirements to successfully instal
   - 4GB system RAM
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings. For more information, see
-    [Virtualization](../troubleshoot/topics.md).
+    [Virtualization](../troubleshoot/topics.md#virtualization).
 
 - Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
 
@@ -76,7 +76,7 @@ Your Windows machine must meet the following requirements to successfully instal
   - 4GB system RAM
   - BIOS-level hardware virtualization support must be enabled in the
     BIOS settings. For more information, see
-    [Virtualization](../troubleshoot/topics.md).
+    [Virtualization](../troubleshoot/topics.md#virtualization).
 
 </div>
 </div>
@@ -89,9 +89,9 @@ Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
 accounts use the same VM to build and run containers. Note that it is not possible to share containers and images between user accounts when using the Docker Desktop WSL 2 backend.
 
-Nested virtualization scenarios, such as running Docker Desktop on a
-VMWare or Parallels instance might work, but there are no guarantees. For
-more information, see [Running Docker Desktop in a VM or VDI environment](../vm-vdi.md).
+Running Docker Desktop inside a VMware ESXi or Azure VM is supported for Docker Business customers.
+It requires enabling nested virtualization on the hypervisor first.
+For more information, see [Running Docker Desktop in a VM or VDI environment](../vm-vdi.md).
 
 ### About Windows containers
 
