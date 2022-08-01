@@ -44,7 +44,7 @@ $ docker run -it --rm -d -v mysql_data:/var/lib/mysql \
 --name mysqlserver \
 -e MYSQL_USER=petclinic -e MYSQL_PASSWORD=petclinic \
 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=petclinic \
--p 3306:3306 mysql:8
+-p 3306:3306 mysql:8.0
 ```
 
 Okay, now that we have a running MySQL, let’s update our Dockerfile to activate the MySQL Spring profile defined in the application and switch from an in-memory H2 database to the MySQL server we just created.
