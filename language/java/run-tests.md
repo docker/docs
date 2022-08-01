@@ -33,7 +33,7 @@ $ docker run -it --rm --name springboot-test java-docker ./mvnw test
 
 ### Multi-stage Dockerfile for testing
 
-Let’s take a look at pulling the testing commands into our Dockerfile. Below is a multi-stage Dockerfile that we will use to build our production image and our test image. Replace the contents of your Dockerfile with the following.
+Let’s take a look at pulling the testing commands into our Dockerfile. Below is our updated multi-stage Dockerfile that we will use to build our test image. Replace the contents of your Dockerfile with the following.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -61,7 +61,7 @@ COPY --from=build /app/target/spring-petclinic-*.jar /spring-petclinic.jar
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
 ```
 
-We first add a label to the `FROM eclipse-temurin:17-jdk-jammy` statement. This allows us to refer to this build stage in other build stages. Next, we added a new build stage labeled `test`. We'll use this stage for running our tests.
+We added a new build stage labeled `test`. We'll use this stage for running our tests.
 
 Now let’s rebuild our image and run our tests. We will run the `docker build` command as above, but this time we will add the `--target test` flag so that we specifically run the test build stage.
 
@@ -118,7 +118,6 @@ CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-
 FROM base as build
 RUN ./mvnw package
 
-
 FROM eclipse-temurin:17-jre-jammy as production
 EXPOSE 8080
 COPY --from=build /app/target/spring-petclinic-*.jar /spring-petclinic.jar
@@ -164,39 +163,6 @@ $ docker build -t java-docker --target test .
 ...
 ------
 executor failed running [./mvnw test]: exit code: 1
-```
-
-### Multi-stage Dockerfile for development
-
-The new version of the Dockerfile produces a final image which is ready for production, but as you can notice, you also have a dedicated step to produce a development container.
-
-```dockerfile
-FROM base as development
-CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"]
-```
-
-We can now update our `docker-compose.dev.yml` to use this specific target to build the `petclinic` service and remove the `command` definition as follows:
-
-```dockerfile
-services:
- petclinic:
-   build:
-     context: .
-     target: development
-   ports:
-     - 8000:8000
-     - 8080:8080
-   environment:
-     - SERVER_PORT=8080
-     - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
-   volumes:
-     - ./:/app
-```
-
-Now, let's run the Compose application. You should now see that application behaves as previously and you can still debug it.
-
-```console
-$ docker-compose -f docker-compose.dev.yml up --build
 ```
 
 ## Next steps

@@ -55,7 +55,7 @@ We only need to add the MySQL profile as an argument to the `CMD` definition.
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]
 ```
 
-Let's build our image
+Let's build our image.
 
 ```console
 $ docker build --tag java-docker .
@@ -85,30 +85,64 @@ You should receive the following json back from our service.
 {"vetList":[{"id":1,"firstName":"James","lastName":"Carter","specialties":[],"nrOfSpecialties":0,"new":false},{"id":2,"firstName":"Helen","lastName":"Leary","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":3,"firstName":"Linda","lastName":"Douglas","specialties":[{"id":3,"name":"dentistry","new":false},{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":2,"new":false},{"id":4,"firstName":"Rafael","lastName":"Ortega","specialties":[{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":1,"new":false},{"id":5,"firstName":"Henry","lastName":"Stevens","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":6,"firstName":"Sharon","lastName":"Jenkins","specialties":[],"nrOfSpecialties":0,"new":false}]}
 ```
 
+## Multi-stage Dockerfile for development
+
+Let’s take a look at updating our Dockerfile to produce a final image which is ready for production as well as a dedicated step to produce a development image.
+
+We’ll also set up the Dockerfile to start the application in debug mode in the development container so that we can connect a debugger to the running Java process.
+
+Below is a multi-stage Dockerfile that we will use to build our production image and our development image. Replace the contents of your Dockerfile with the following.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM eclipse-temurin:17-jdk-jammy as base
+WORKDIR /app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
+COPY src ./src
+
+FROM base as development
+CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"]
+
+FROM base as build
+RUN ./mvnw package
+
+FROM eclipse-temurin:17-jre-jammy as production
+EXPOSE 8080
+COPY --from=build /app/target/spring-petclinic-*.jar /spring-petclinic.jar
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
+```
+
+We first add a label to the `FROM eclipse-temurin:17-jdk-jammy` statement. This allows us to refer to this build stage in other build stages. Next, we added a new build stage labeled `development`.
+
+We expose port 8000 and declare the debug configuration for the JVM so that we can attach a debugger.
+
 ## Use Compose to develop locally
 
-In this section, we’ll create a Compose file to start our `java-docker` and the MySQL database using a single command. We’ll also set up the Compose file to start the `java-docker` application in debug mode so that we can connect a debugger to the running Java process.
+We can now create a Compose file to start our development container and the MySQL database using a single command.
 
 Open the `petclinic` in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 
 ```yaml
 version: '3.8'
 services:
-  petclinic:
-    build:
-      context: .
-    ports:
-      - 8000:8000
-      - 8080:8080
-    environment:
-      - SERVER_PORT=8080
-      - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
-    volumes:
-      - ./:/app
-    command: ./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
+ petclinic:
+   build:
+     context: .
+     target: development
+   ports:
+     - 8000:8000
+     - 8080:8080
+   environment:
+     - SERVER_PORT=8080
+     - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
+   volumes:
+     - ./:/app
 
-  mysqlserver:
-    image: mysql:8
+ mysqlserver:
+    image: mysql:8.0
     ports:
       - 3306:3306
     environment:
@@ -121,13 +155,11 @@ services:
       - mysql_data:/var/lib/mysql
       - mysql_config:/etc/mysql/conf.d
 volumes:
-  mysql_data:
-  mysql_config:
+    mysql_data:
+    mysql_config:
 ```
 
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that using a Compose file.
-
-We expose port 8000 and declare the debug configuration for the JVM so that we can attach a debugger.
 
 Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use `mysqlserver` in our connection string. The reason we use `mysqlserver` is because that is what we've named our MySQL service as in the Compose file.
 
