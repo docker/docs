@@ -31,7 +31,7 @@ The **Data** tab displays the files and folders in the volume and the file size.
 
 To delete a file or a folder from the volume, select **Remove** from the **More options** menu.
 
-### Remove a volume
+## Remove a volume
 
 Removing a volume deletes the volume and all its data. 
 

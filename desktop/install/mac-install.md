@@ -3,8 +3,10 @@ description: How to install Docker Desktop on Mac
 keywords: mac, install, download, run, docker, local
 title: Install Docker Desktop on Mac
 redirect_from:
-- /docker-for-mac/install/
 - /desktop/mac/install/
+- /docker-for-mac/install/
+- /engine/installation/mac/
+- /installation/mac/
 ---
 
 > **Update to the Docker Desktop terms**
@@ -102,6 +104,7 @@ $ sudo hdiutil detach /Volumes/Docker
 The `install` command accepts the following flags:
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
+- `--user=<username>`: Runs the privileged helper service once during installation, then disables it at runtime. This removes the need for the user to grant root privileges on first run. For more information, see [Privileged helper permission requirements](../mac/permission-requirements.md#permission-requirements){: target="_blank" rel="noopener" class="_"}. To find the username, enter `ls /Users` in the CLI.
 
 ## Updates
 
@@ -138,7 +141,6 @@ To uninstall Docker Desktop from your Mac:
 
 ## Where to go next
 
-- [Getting started](../mac/index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
 - [Docker Desktop for Apple silicon](../mac/apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.

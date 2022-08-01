@@ -47,6 +47,8 @@ in the Team and Business plan.
 your organization in Docker Hub. Note that it is not possible to change the name
 of the organization after you've created it.
 
+      > **Note**
+      >
       > The organization name cannot be the same as your Docker ID.
 
 5. Enter the name of your company. This is the full name of your company.
@@ -68,14 +70,17 @@ To view an organization:
    organization. You must be part of the **owners** team to access the
    organization's **Settings** page.
 
-      > **Note:**
+      > **Note**
       >
-      > You can't _directly_ log into an organization. This is especially
+      > You can't _directly_ log in to an organization. This is especially
       > important to note if you create an organization by
       [converting a user account](convert-account.md), as conversion means you lose the ability to log into that
-      > "account", since it no longer exists. If you don't see the organization,
+      > "account", since it no longer exists. To view the organization you 
+      > need to log in with the new owner account assigned during the
+      > conversion or another account that was added as a member. If you 
+      > don't see the organization after logging in,
       > then you are neither a member or an owner of it. An organization
-      > administrator will need to add you as a member of the organization team.
+      > administrator will need to add you as a member of the organization.
 
 2. Click **Organizations** in the top navigation bar, then choose your
    organization from the list.
@@ -86,7 +91,7 @@ The Organization landing page displays various options that allow you to
 configure your organization.
 
 - **Members**: Displays a list of team members. You
-  can invite new members using the **Add Member** option. See [Invite members](#invite-members) for details.
+  can invite new members using the **Invite members** button. See [Manage members](../docker-hub/members.md) for details.
 
 - **Teams**: Displays a list of existing teams and the number of
   members in each team. See [Create a team](#create-a-team) for details.
@@ -103,23 +108,14 @@ configure your organization.
 - **Settings**: Displays information about your
   organization, and allows you to view and change your repository privacy
   settings, configure org permissions such as
-  [Image Access Management](image-access-management.md) and notification settings. You can
-  also [deactivate](deactivate-account.md#deactivating-an-organization) your
-  organization on this tab.
+  [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivating-an-organization) your
+  organization. You can also update your organization name and company name that appear on your organization landing page.
+
 
 - **Billing**: Displays information about your existing
 [Docker subscription (plan)](../subscription/index.md) and your billing history.
 You can also access your invoices from this tab.
 
-- **Invitees**: Displays a list of users invited to the organization through
-  their email address. This list only includes email addresses that **do not** have a Docker ID or an account associated with it. Only Org owners can view and manage the Invitees list.
-
-> **Important**
->
-> If you are on a Team or a Business subscription, every user listed on the
-> **Invitees** tab counts towards a seat, even if they do not have a Docker
-> ID or an account yet.
-{: .important }
 
 ## Create a team
 
@@ -156,44 +152,6 @@ users who'd like to have a separate Docker ID for company use through SSO
 enforcement.
 
 The org owner can also add additional org owners to help them manage users, teams, and repositories in the organization.
-
-## Invite members
-
-Organization owners can invite new members to the organization using their Docker ID or email address.  If the invitee does not have a Docker account, they must create an account and verify their email address before they can accept the invitation to join the organization.  When inviting members, their pending invitation occupies a seat.
-
-To add a member to an organization:
-
-1. Go to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
-2. In the Members tab, click **Invite Member**.
-3. Enter the invitee's Docker ID or email, and select a team from the drop-down list.
-4. Click **Invite** to confirm.
-
-   > **Note**
-   >
-   > You can view the pending invitation in the **Members** tab. The invitee receives an email with a link to the organization in Docker Hub where they can  accept or decline the invitation.
-
-  To add a member to a team:
-
-1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
-2. In the **Members** tab, click the additional options from the table menu and select **Add to team**.
-
-    > **Note**
-    >
-    > You can also navigate to **Organizations** > **Your Organization** > **Teams** > **Your Team Name** and click **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
-
-3. Select the team and click **Add**.
-
-    > **Note**
-    >
-    > The invitee must first accept the invitation to join the organization before being added to the team.
-
-## Resend invitations
-
-To resend an invitation if the invite is pending or declined:
-
-1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select your organization.
-2. In the **Members** tab, locate the invitee and select **Resend invitation** from the table menu.
-3. Click **Invite** to confirm.
 
 ## Configure repository permissions
 
@@ -238,27 +196,6 @@ you automatically have Read-only permissions:
 > A User who has not yet verified their email address only has
 > `Read-only` access to the repository, regardless of the rights their team
 > membership has given them.
-
-## Remove members
-
-To remove a member from an organization:
-
-1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
-2. In the **Members** tab, select Remove member from the table menu.
-3. When prompted, click **Remove** to confirm.
-
-To remove an invitee from an organization:
-
-1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
-2. In the **Members** tab, locate the invitee you would like to remove and select **Remove invitee** from the table menu.
-3. When prompted, click **Remove** to confirm.
-
-To remove a member from a specific team:
-
-1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
-2. Click on the **Teams** tab and select the team from the list.
-3. Click the **X** next to the user’s name to remove them from the team.
-4. When prompted, click **Remove** to confirm.
 
 ## Videos
 

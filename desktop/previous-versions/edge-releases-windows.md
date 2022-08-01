@@ -10,7 +10,7 @@ redirect_from:
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
 
-For information about Stable releases, see the [Stable release notes](../windows/release-notes/index.md). For Docker Desktop system requirements, see
+ For Docker Desktop system requirements, see
 [What to know before you install](../install/windows-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
@@ -2009,7 +2009,7 @@ registry access (fixes [docker/for-win#569](https://github.com/docker/for-win/is
 **New**
 
 - Windows containers settings panel and options are working. In previous releases, settings were not implemented for
-[Windows containers mode](../windows/index.md#switch-between-windows-and-linux-containers).
+[Windows containers mode](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 - Windows containers: Restart from the settings panel works
 - Windows containers: Factory default
 - Windows containers: `Daemon.json` can be modified

@@ -28,7 +28,7 @@ To get started with Docker Engine on RHEL, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of RHEL 7 or 8 on s390x (IBM Z).
+To install Docker Engine, you need a maintained version of RHEL 7, RHEL 8 or RHEL 9 on s390x (IBM Z).
 Archived versions aren't supported or tested.
 
 The `overlay2` storage driver is recommended.

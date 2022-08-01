@@ -10,7 +10,7 @@ ARG RUBY_VERSION=2.7.6
 ARG BUNDLER_VERSION=2.3.13
 
 ARG JEKYLL_ENV=development
-ARG DOMAIN=docs.docker.com
+ARG DOCS_URL=http://localhost:4000
 
 # Base stage for building
 FROM ruby:${RUBY_VERSION}-alpine AS base
@@ -44,28 +44,14 @@ COPY --from=vendored /out /
 # After building with jekyll, fix up some links
 FROM gem AS generate
 ARG JEKYLL_ENV
-ARG DOMAIN
+ARG DOCS_URL
 ENV TARGET=/out
 RUN --mount=type=bind,target=.,rw \
-  --mount=type=cache,target=/src/.jekyll-cache <<EOT
-set -eu
-if [ "${JEKYLL_ENV}" = "production" ]; then
-  (
-    set -x
-    bundle exec jekyll build --profile -d ${TARGET} --config _config.yml,_config_production.yml
-    sed -i 's#<loc>/#<loc>https://${DOMAIN}/#' "${TARGET}/sitemap.xml"
-  )
-else
-  (
-    set -x
-    bundle exec jekyll build --trace --profile -d ${TARGET}
-    mkdir -p ${TARGET}/js
-    echo '[]' > ${TARGET}/js/metadata.json
-  )
-fi
-find ${TARGET} -type f -name '*.html' | while read i; do
-  sed -i 's#\(<a[^>]* href="\)https://${DOMAIN}/#\1/#g' "$i"
-done
+    --mount=type=cache,target=/src/.jekyll-cache <<EOT
+  set -eu
+  CONFIG_FILES=_config.yml$([ "$JEKYLL_ENV" = "production" ] && echo ",_config_production.yml" || true)
+  set -x
+  bundle exec jekyll build --profile -d ${TARGET} --config ${CONFIG_FILES}
 EOT
 
 # htmlproofer checks for broken links

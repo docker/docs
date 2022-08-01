@@ -106,9 +106,9 @@ $ docker run -d -p 80:80 docker/getting-started
 
 You'll notice a few flags being used. Here's some more info on them:
 
-- `-d` - run the container in detached mode (in the background)
-- `-p 80:80` - map port 80 of the host to port 80 in the container
-- `docker/getting-started` - the image to use
+- `-d` - Run the container in detached mode (in the background).
+- `-p 80:80` - Map port 80 of the host to port 80 in the container. To access the tutorial, open a web browser and navigate to `http://localhost:80`. If you already have a service listening on port 80 on your host machine, you can specify another port. For example, specify `-p 3000:80` and then access the tutorial via a web browser at `http://localhost:3000`.
+- `docker/getting-started` - Specify the image to use.
 
 > **Tip**
 >
@@ -143,8 +143,8 @@ capabilities approachable and easy to use. To summarize, a container:
 
 - is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
 - can be run on local machines, virtual machines or deployed to the cloud.
-- is portable (can be run on any OS)
-- Containers are isolated from each other and run their own software, binaries, and configurations.
+- is portable (can be run on any OS).
+- is isolated from other containers and runs its own software, binaries, and configurations.
 
 > **Creating containers from scratch**
 >

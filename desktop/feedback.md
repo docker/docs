@@ -27,6 +27,6 @@ GitHub](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="no
 
 ### ... Dev Environments
 
-To report bugs or problems, visit [Dev Environments issues on Github](https://github.com/docker/dev-environments/issues){:target="_blank" rel="noopener" class="_"}. 
+To report bugs or problems, visit [Dev Environments issues on Github](https://github.com/docker/dev-environments/issues){:target="_blank" rel="noopener" class="_"}.
 
 Alternatively, get in touch with us on the **#docker-dev-environments** channel in the [Docker Community Slack](https://dockercommunity.slack.com/messages){:target="_blank" rel="noopener" class="_"}.

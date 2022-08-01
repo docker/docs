@@ -280,55 +280,6 @@ C:\Program Files\Docker\docker.exe:
  See 'C:\Program Files\Docker\docker.exe run --help'.
 ```
 
-### Running Docker Desktop in nested virtualization scenarios
-
-Docker Desktop can run inside a Hyper-V VM, see
-[Microsoft's nested virtualization user guide](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization) for more information.
-Docker Desktop can also run inside a Windows 10 VM running on apps like Parallels or VMware Fusion on a Mac provided that the VM is properly configured.
-
-However, problems and intermittent failures may still occur due to the way these apps virtualize the hardware. For these reasons, _**Docker Desktop is not supported in nested virtualization scenarios**_. It might work
-in some cases, and not in others.
-
-For best results, we recommend you run Docker Desktop natively on a Windows system (to work with Windows or Linux containers), or on Mac or Linux to work with Linux containers.
-
-#### If you still want to use nested virtualization
-
-* If using Hyper-V, make sure nested virtualization support is enabled for the
-  Windows VM by running the following powershell as Administrator:
-
-```none
-Set-VMProcessor -VMName <Windows VM Name> -ExposeVirtualizationExtensions $true
-```
-
-* If using VMware or Parallels, make sure nested virtualization support is enabled.
-  Check the settings in **Hardware > CPU & Memory > Advanced Options > Enable
-  nested virtualization** (the exact menu sequence might vary slightly).
-
-* Configure your Windows VM with at least 2 CPUs and sufficient memory to run your
-  workloads.
-
-* Make sure your system is more or less idle.
-
-* Make sure your Windows OS is up-to-date. There have been several issues with
-  some insider builds.
-
-* The processor you have may also be relevant. For example, Westmere based Mac
-  Pros have some additional hardware virtualization features over Nehalem based
-  Mac Pros and so do newer generations of Intel processors. For Hyper-V, check
-  [Microsoft's nested virtualization user guide](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/nested-virtualization)
-  to verify the host OS version is supported on your hardware.
-
-#### Typical failures we see with nested virtualization
-
-* Sometimes the VM fails to boot when Linux tries to calibrate the time stamp
-  counter (TSC). This process is quite timing sensitive and may fail when
-  executed inside a VM which itself runs inside a VM. CPU utilization is also
-  likely to be higher.
-
-* Ensure "PMU Virtualization" is turned off in Parallels on Macs. Check the
-  settings in **Hardware > CPU & Memory > Advanced Settings > PMU
-  Virtualization**.
-
 ### Networking issues
 
 IPv6 is not (yet) supported on Docker Desktop.

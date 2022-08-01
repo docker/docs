@@ -18,6 +18,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Start Docker Desktop when you log in**. Select to automatically start Docker
   Desktop when you log into your machine.
 
+- **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+
 - **Expose daemon on tcp://localhost:2375 without TLS**. Check this option to
   enable legacy clients to connect to the Docker daemon. You must use this option
   with caution as exposing the daemon without TLS can result in remote code
@@ -90,7 +92,7 @@ Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
 
 Note that configuring file sharing is not necessary for Windows containers,
-only [Linux containers](../windows/index.md#switch-between-windows-and-linux-containers).
+only [Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 If a directory is not shared with a Linux container you may get `file not found`
 or `cannot start service` errors at runtime. See [Volume mounting requires shared folders for Linux containers](../troubleshoot/topics.md).
 

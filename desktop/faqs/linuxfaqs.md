@@ -3,7 +3,7 @@ description: Frequently asked questions
 keywords: desktop, linux, faqs
 title: Frequently asked questions for Linux
 redirect_from:
-- desktop/linux/space
+- /desktop/linux/space/
 ---
 
 ## Where does Docker Desktop store Linux containers?

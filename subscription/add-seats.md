@@ -19,7 +19,7 @@ to add seats to a subscription:
 
 5. The **Billing** tab displays the number of seats currently in use.
 
-6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../docker-hub/orgs.md#invite-members).
+6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../docker-hub/members.md).
 
 > **Note:**
 >

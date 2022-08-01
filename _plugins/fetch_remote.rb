@@ -1,4 +1,5 @@
 require 'archive/zip'
+require 'front_matter_parser'
 require 'jekyll'
 require 'json'
 require 'octopress-hooks'
@@ -31,6 +32,16 @@ module Jekyll
           yield src, File.path(dest)
         end
       end
+    end
+
+    def self.resolve_line_numbers(first, last)
+      if first.nil? && last.nil?
+        first = 0
+        last  = -1
+      elsif last.nil?
+        last = first
+      end
+      [first.to_i, last.to_i]
     end
 
     def pre_read(site)
@@ -77,7 +88,18 @@ module Jekyll
                     file_clean = ent.path.delete_prefix(ztmpdir).split("/").drop(2).join("/")
                     destent = FileUtils::Entry_.new(d, ent.rel, false)
                     puts "      #{file_clean} => #{destent.path}"
-                    ent.copy destent.path
+
+                    if File.file?(destent.path)
+                      fmp = FrontMatterParser::Parser.parse_file(destent.path)
+                      if fmp['fetch_remote'].nil?
+                        raise "Local file #{destent.path} already exists"
+                      end
+                      line_start, line_end = FetchRemote.resolve_line_numbers(fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_start'] : nil, fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_end'] : nil)
+                      lines = File.readlines(ent.path)[line_start..line_end]
+                      File.open(destent.path, "a") { |fow| fow.puts lines.join }
+                    else
+                      ent.copy destent.path
+                    end
 
                     next unless File.file?(ent.path) && File.extname(ent.path) == ".md"
                     # set edit and issue url and remote info for markdown files in site config defaults
