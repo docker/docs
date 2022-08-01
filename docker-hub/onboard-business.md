@@ -52,7 +52,7 @@ Now that you have a Docker Business organization, it's time to start adding memb
 
    * **Single Sign-on**: Automatically provision and add members when they sign in to Docker through your identity provider. For details, see [Configure Single Sign-on](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"}.
    * **System for Cross-domain Identity Management**: Automatically provision, add, and de-provision members from your identity provider. For details, see [System for Cross-domain Identity Management](../docker-hub/scim.md/){: target="_blank" rel="noopener" class="_"}.
-   * **Invite members**: Invite members using their Docker ID or email address. For details, see [Invite members](../docker-hub/orgs.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
+   * **Invite members**: Invite members using their Docker ID or email address. For details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
       > **Note**
       >
       > Before you invite members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.

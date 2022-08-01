@@ -47,8 +47,8 @@ latest version to fix this issue.
 
 If you are using the `docker scan` plugin shipped
 with Docker Desktop, update Docker Desktop to version 4.3.1 or
-higher. See the release notes for [Mac](../../desktop/mac/release-notes/index.md) and
-[Windows](../../desktop/windows/release-notes/index.md) for download information.
+higher. See the release notes for [Mac](../../desktop/release-notes.md) and
+[Windows](../../desktop/release-notes.md) for download information.
 
 If you are using Linux, run the following command to manually install the latest
 version of `docker scan`:

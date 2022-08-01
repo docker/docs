@@ -73,20 +73,20 @@ Docker Desktop: |
 
   Docker Desktop works with your choice of development tools and languages and gives you access to a vast library of certified images and templates in Docker Hub. This enables development teams to extend their environment to rapidly auto-build, continuously integrate, and collaborate using a secure repository.
 Docker Desktop for Mac: |
-  [Docker Desktop for Mac](/desktop/mac/) is an easy-to-install, lightweight
+  Docker Desktop for Mac is an easy-to-install, lightweight
   Docker development environment designed specifically for the Mac. A native
   Mac application, Docker Desktop for Mac uses the macOS Hypervisor
   framework, networking, and filesystem. It's the best solution if you want
   to build, debug, test, package, and ship Dockerized applications on a
   Mac.
 Docker Desktop for Windows: |
-  [Docker Desktop for Windows](/desktop/windows/) is an
+  Docker Desktop for Windows is an
   easy-to-install, lightweight Docker development environment designed
   specifically for Windows systems that support WSL 2 and Microsoft Hyper-V.
   Docker Desktop for Windows uses WSL 2 or Hyper-V for
   virtualization. Docker Desktop for Windows is the best solution if you want to build, debug, test, package, and ship Dockerized applications from Windows machines.
 Docker Desktop for Linux: |
-  [Docker Desktop for Linux](/desktop/linux/) is an an easy-to-install, lightweight Docker development environment designed specifically for Linux machines. It's the best solution if you want to build, debug, test, package, and ship Dockerized applications on a Linux machine.
+  Docker Desktop for Linux is an an easy-to-install, lightweight Docker development environment designed specifically for Linux machines. It's the best solution if you want to build, debug, test, package, and ship Dockerized applications on a Linux machine.
 Docker Hub: |
   The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with Docker and its components. It provides the following services:
 

@@ -32,9 +32,12 @@ The available classes are:
     font-weight: 700;
     margin-top:  0;
 
+    // https://fontawesome.com/docs/web/setup/upgrade/pseudo-elements
     &::before {
-      font-family: FontAwesome;
-      content:     "#{$icon} \00a0";
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font: var(--fa-font-solid);
+      content: "#{$icon} \00a0";
     }
   }
 
@@ -53,7 +56,7 @@ blockquote {
   body.night & {
     // DARK THEME
 
-    &:not(.important):not(.warning):not(.restricted) {
+    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
       @include notification(
         $bg-color: $dark-palette-blue-200,
         $header-color: $white-0,
@@ -88,12 +91,21 @@ blockquote {
         $icon: "\f135"
       );
     }
+
+    &.experimental {
+      @include notification(
+        $bg-color: $dark-palette-blue-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f492"
+      );
+    }
   }
 
   body:not(.night) & {
     // LIGHT THEME
 
-    &:not(.important):not(.warning):not(.restricted) {
+    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
       @include notification(
         $bg-color: $light-palette-blue-100,
         $header-color: $light-palette-blue-500,
@@ -126,6 +138,15 @@ blockquote {
         $header-color: $light-palette-violet-500,
         $body-text-color: inherit,
         $icon: "\f135"
+      );
+    }
+
+    &.experimental {
+      @include notification(
+        $bg-color: $light-palette-blue-100,
+        $header-color: $light-palette-blue-500,
+        $body-text-color: inherit,
+        $icon: "\f492"
       );
     }
   }

@@ -48,6 +48,7 @@ If you have a paid Docker subscription, you can get support for the following ty
    For Windows users, you can also request support on:
    * Enabling virtualization in BIOS
    * Enabling Windows features
+   * Running inside [certain VM or VDI environments](../desktop/vm-vdi.md) (Docker Business customers only)
 
 
 ## What is not supported?

@@ -130,7 +130,7 @@ Docker Hub.
 
 1. Download and install [Docker Desktop](../desktop/#download-and-install).
 
-2. Sign in to the Docker Desktop application using the Docker ID you created in Step 1.
+2. Sign in to the Docker Desktop application using the Docker ID you've just created.
 
 ### Step 4: Build and push a container image to Docker Hub from your computer
 
@@ -152,7 +152,9 @@ Docker image locally.
 
     ![Terminal](images/index-terminal.png)
 
-    > **Having trouble pushing?** Remember, you must be signed into Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
+    >**Note**
+    >
+    > You must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps.
 
 5. Your repository in Docker Hub should now display a new `latest` tag under **Tags**:
 

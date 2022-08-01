@@ -5,6 +5,7 @@
 .jekyll-metadata
 _site/**
 .sass-cache/**
+.vscode
 CNAME
 _kbase/**
 /vendor

@@ -215,7 +215,7 @@ $ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" 
 
 ### In the Console app
 
-Mac provides a built-in log viewer, named "Console", which you can use to check
+Mac provides a built-in log viewer, named **Console**, which you can use to check
 Docker logs.
 
 The Console lives in `/Applications/Utilities`. You can search for it with
@@ -254,7 +254,11 @@ to learn how to view the Docker Daemon logs.
 
 </div></div>
 
+## What's next?
 
+- View [Troubleshoot topics](topics.md).
+- Implement [workarounds for common problems](workarounds.md)
+- If you're a Mac user, see [Known issues for Mac](known-issues.md)
 
 
 
