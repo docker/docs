@@ -108,7 +108,7 @@ services:
     command: ./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
 
   mysqlserver:
-    image: mysql:8
+    image: mysql:8.0
     ports:
       - 3306:3306
     environment:
