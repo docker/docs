@@ -30,7 +30,6 @@ exclude:
   - datacenter
   - docker-bake.hcl
   - ee
-  - js/metadata.json
   - LICENSE
   - Makefile
   - README.md
@@ -67,12 +66,15 @@ compose_switch_version: "1.0.4"
 # which we show a badge (currently: API v1.40, or "Docker 19.03").
 min_api_threshold: 1.40
 
+# Enable search autocompletion (requires metadata.json to be generated)
+local_search: true
+
 # List of plugins to enable for local development builds. Mostly the same as
-# for production, but without the "jekyll-sitemap" plugin, which is not needed
-# for previewing, and excluding saves some time to build
+# for production.
 plugins:
   - jekyll-redirect-from
   - jekyll-relative-links
+  - jekyll-sitemap
 
 # Assets
 #
@@ -87,10 +89,7 @@ sass:
 # Set default options / metadata for some paths.
 #
 # Setting options here prevents having to repeat the same option in front-matter
-# on every page. Avoid using wildcards, such as "path: engine/api/v1.*", as
-# limitations in Jekyll cause those to introduce a _severe_ impact on build-time,
-# affecting generation of (e.g.) sitemap.xml and metadata.json, resulting in the
-# total build to take 60 seconds longer to build (!).
+# on every page.
 defaults:
   # Default one for development builds (local and PR previews)
   # sitemap is disabled here but not for production in _config_production.yml
@@ -99,7 +98,6 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      sitemap: false
       toc_min: 2
       toc_max: 4
 
@@ -170,6 +168,9 @@ fetch-remote:
       - dest: "build/bake"
         src:
           - "docs/guides/bake/**"
+      - dest: "build/buildx/drivers"
+        src:
+          - "docs/guides/drivers/**"
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"

@@ -40,18 +40,15 @@ Bundle and package your code to run anywhere, from your local Docker Desktop, to
 To get started with Build, see the [Hello Build](hellobuild.md) page.
 
 * **Choosing a build driver**  
-Run Buildx with different configurations depending on the scenario you are working on, regardless of whether you are using your local machine or a remote compute cluster, all from the comfort of your local working environment.  
-Here’s a quick overview of the drivers and the use cases they support:  
-    * `docker`– use the default built-in builder to get started quickly.
-    * `docker-container` – spin up a dedicated builder in a docker container to unlock more advanced features like advanced caching, and multi-platform images.
-
-    * `kubernetes`– connect to your Kubernetes cluster to unlock more features and to run your builds at scale.
-    * `remote`–  manually manage your own BuildKit builder and connect directly to it.
+Run Buildx with different configurations depending on the scenario you are
+working on, regardless of whether you are using your local machine or a remote
+compute cluster, all from the comfort of your local working environment.
+For more information on drivers, see the [drivers guide](buildx/drivers/index.md).
 
 * **Optimizing builds with cache management**  
 Improve build performance by using a persistent shared build cache to avoid repeating costly operations such as package installations, downloading files from the internet, or code build steps.
 
-* **Creating build-once, run-anywhere with multi-architecture builds**
+* **Creating build-once, run-anywhere with multi-platform builds**
 Collaborate across platforms with one build artifact.  
 See [Build multi-platform images](buildx/multiplatform-images.md).
 

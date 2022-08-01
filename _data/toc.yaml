@@ -1199,6 +1199,8 @@ manuals:
           title: Explore networking features
         - path: /desktop/mac/permission-requirements/
           title: Docker Desktop permission requirements for Mac
+        - path: /desktop/windows/permission-requirements/
+          title: Docker Desktop permission requirements for Windows
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
@@ -1400,6 +1402,16 @@ manuals:
           title: Buildx overview
         - path: /build/buildx/install/
           title: Install Buildx
+        - sectiontitle: Drivers
+          section:
+            - path: /build/buildx/drivers/
+              title: Overview
+            - path: /build/buildx/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/buildx/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/buildx/drivers/remote/
+              title: Remote driver
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
         - path: /build/buildx/multiplatform-images/

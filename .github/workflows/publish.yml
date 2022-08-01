@@ -18,17 +18,20 @@ jobs:
           JEKYLL_ENV=development
           DOCS_AWS_REGION=us-east-1
           if [ "${{ github.ref }}" = "refs/heads/master" ]; then
+            DOCS_URL="https://docs-stage.docker.com"
             DOCS_S3_BUCKET="docs.docker.com-stage-us-east-1"
             DOCS_S3_CONFIG="_website-config-docs-stage.json"
             DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-stage-cache-invalidator"
             DOCS_SLACK_MSG="Successfully promoted docs-stage from master. https://docs-stage.docker.com/"
           elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
             JEKYLL_ENV=production
+            DOCS_URL="https://docs.docker.com"
             DOCS_S3_BUCKET="docs.docker.com-us-east-1"
             DOCS_S3_CONFIG="_website-config-docs.json"
             DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator"
             DOCS_SLACK_MSG="Successfully published docs. https://docs.docker.com/"
           elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
+            DOCS_URL="https://docs-lab.docker.com"
             DOCS_S3_BUCKET=""
             DOCS_LAMBDA_FUNCTION_CACHE=""
             DOCS_S3_CONFIG="_website-config-docs-lab.json"
@@ -37,6 +40,7 @@ jobs:
             exit 1
           fi
           echo "JEKYLL_ENV=$JEKYLL_ENV" >> $GITHUB_ENV
+          echo "DOCS_URL=$DOCS_URL" >> $GITHUB_ENV
           echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
           echo "DOCS_S3_BUCKET=$DOCS_S3_BUCKET" >> $GITHUB_ENV
           echo "DOCS_S3_CONFIG=$DOCS_S3_CONFIG" >> $GITHUB_ENV
