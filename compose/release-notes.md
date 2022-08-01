@@ -33,7 +33,6 @@ redirect_from:
 
 - Added new targets to build Compose binary before running e2e tests.
 - CI: released workflow to open a PR on docs repo with latest changes.
-- Dependencies upgrade: bumped [containerd from 1.6.2 to 1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6).
 - Dependencies upgrade: bumped [go to 1.18.4](https://github.com/golang/go/compare/go1.18.3...go1.18.4){:target="_blank" rel="noopener" class="_"}. 
 - Dependencies upgrade: bumped [compose-go to v1.2.9](https://github.com/compose-spec/compose-go/releases/tag/v1.2.9).
 - e2e: added test for `ps`.
