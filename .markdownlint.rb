@@ -1,4 +1,7 @@
 # https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md
+#
+# When updating rules in this file, ensure the corresponding rule list in
+# .markdownlint.json is also updated.
 
 # style
 rule 'header-style'
