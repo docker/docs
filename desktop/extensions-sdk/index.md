@@ -57,6 +57,10 @@ For further inspiration, see the other examples in the [samples folder](https://
 Docker Desktop displays published extensions in the Extensions Marketplace. If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
 
 ## What’s next?
-If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md). 
+If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md).
 
 Alternatively, get started with Part one: Build for more in-depth information about each step of the extension creation process.
+
+For an in-depth tutorial of the entire build process, we recommend the following video walkthrough from DockerCon 2022:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Yv7OG-EGJsg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
