@@ -101,6 +101,8 @@ $ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
 $ sudo hdiutil detach /Volumes/Docker
 ```
 
+As macOS typically performs security checks the first time an application is used, the `install` command can take several minutes to run.
+
 The `install` command accepts the following flags:
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
