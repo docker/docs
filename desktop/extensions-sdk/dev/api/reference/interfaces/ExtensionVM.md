@@ -25,6 +25,11 @@ await ddClient.extension.vm.cli.exec(
 
 Streams the output of the command executed in the backend container.
 
+When the extension defines its own `docker-compose.yaml` file
+with multiple containers, the command is executed on the first container defined.
+Change the order in which containers are defined to execute commands on another
+container.
+
 Example: Spawn the command `ls -l` inside the **backend container**:
 
 ```typescript
