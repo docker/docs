@@ -77,9 +77,9 @@ Docker repository, regardless of the Autotest settings.
 
 1. Log in to Docker Hub and select **Repositories** in the top navigation.
 
-3. Select the repository you want to enable `Autotest` on.
+2. Select the repository you want to enable `Autotest` on.
 
-4. From the repository view, click the **Builds** tab.
+3. From the repository view, click the **Builds** tab.
 
 4. Click **Configure automated builds**.
 
@@ -91,7 +91,7 @@ Docker repository, regardless of the Autotest settings.
     * the build location
     * at least one build rule
 
-8. Choose your **Autotest** option.
+6. Choose your **Autotest** option.
 
     The following options are available:
 
@@ -111,7 +111,7 @@ Docker repository, regardless of the Autotest settings.
     environment variables defined in Docker Hub are not
     available. Automated builds continue to work as usual.
 
-9. Click **Save** to save the settings, or click **Save and build** to save and
+7. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.
 
 ## Check your test results

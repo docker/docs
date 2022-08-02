@@ -139,7 +139,7 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
     ```
 
     b. Install a specific version using the version string from the second column,
-       for example, `5:18.09.1~3-0~debian-stretch `.
+       for example, `5:18.09.1~3-0~debian-stretch`.
 
     ```console
     $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin

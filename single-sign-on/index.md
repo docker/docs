@@ -187,8 +187,8 @@ To remove a member from an organization:
 
 1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
 2. Select the organization from the list. The organization page displays a list of members.
-2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
-3. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
+3. Click the **x** next to a member’s name to remove them from all the teams in the organization.
+4. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
 
 > **Note**
 >

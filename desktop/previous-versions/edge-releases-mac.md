@@ -1495,7 +1495,7 @@ TCP connection is idle for more than five minutes (related to
 - Resync HTTP(S) proxy settings on application start
 - Interpret system proxy setting of localhost correctly (see [docker/for-mac#1511](https://github.com/docker/for-mac/issues/1511))
 - All docker binaries bundled with Docker for Mac are now signed
-- Display all docker cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538 ](https://github.com/docker/for-mac/issues/1538))
+- Display all docker cloud organizations and repositories in the whale menu (fixes [docker/for-mac#1538](https://github.com/docker/for-mac/issues/1538))
 - OSXFS: improved latency for many common operations, such as read and write by approximately 25%
 
 ### Docker Community Edition 17.05.0-ce-mac11, 2017-05-12
@@ -2226,7 +2226,7 @@ events or unexpected unmounts.
 * Improved Moby syslog facilities
 * Improved file-sharing tab
 * `com.docker.slirp`: included the DNS TCP fallback fix, required when UDP responses are truncated
-* `docker build/events/logs/stats... ` won't leak when iterrupted with Ctrl-C
+* `docker build/events/logs/stats...` won't leak when iterrupted with Ctrl-C
 
 **Known issues**
 

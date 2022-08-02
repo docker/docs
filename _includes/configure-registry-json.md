@@ -68,7 +68,7 @@ This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.
 On Mac, you can use the following methods to create a `registry.json` file.
 
 
-####  Create registry.json when installing Docker Desktop on Mac
+#### Create registry.json when installing Docker Desktop on Mac
 
 To automatically create a registry.json file when installing Docker Desktop, download `Docker.dmg` and run the following commands in a terminal from the directory containing `Docker.dmg`. Replace `myorg` with your organization's name.
 
@@ -78,7 +78,7 @@ $ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg
 $ sudo hdiutil detach /Volumes/Docker
 ```
 
-####  Create registry.json manually on Mac
+#### Create registry.json manually on Mac
 
 To manually create a `registry.json` file, run the following commands in a terminal
 and replace `myorg` with your organization's name.

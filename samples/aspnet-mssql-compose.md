@@ -31,7 +31,7 @@ configure this app to use our SQL Server database, and then create a
     [Docker Desktop for Mac](../desktop/settings/mac.md#file-sharing), you
     need to set up file sharing for the volume that you need to map.
 
-1.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a
+2.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a
     sample web application within the container under the `/app` directory and
     into your host machine in the working directory:
 
@@ -42,7 +42,7 @@ configure this app to use our SQL Server database, and then create a
     > **Note**: If running in Docker Desktop for Windows, make sure to use Powershell
     or specify the absolute path of your app directory.
 
-1.  Create a `Dockerfile` within your app directory and add the following content:
+3.  Create a `Dockerfile` within your app directory and add the following content:
 
     ```dockerfile
     # syntax=docker/dockerfile:1
@@ -62,7 +62,7 @@ configure this app to use our SQL Server database, and then create a
     project and exposes port 80. After that, it calls an `entrypoint` script
     that we create in the next step.
 
-1.  The `Dockerfile` makes use of an entrypoint to your webapp Docker
+4.  The `Dockerfile` makes use of an entrypoint to your webapp Docker
     image. Create this script in a file called `entrypoint.sh` and paste the
     contents below.
 
@@ -88,7 +88,7 @@ configure this app to use our SQL Server database, and then create a
     the application. This allows some time for the SQL Server database image to
     start up.
 
-1.  Create a `docker-compose.yml` file. Write the following in the file, and
+5.  Create a `docker-compose.yml` file. Write the following in the file, and
     make sure to replace the password in the `SA_PASSWORD` environment variable
     under `db` below. This file defines the way the images interact as
     independent services.
@@ -119,7 +119,7 @@ configure this app to use our SQL Server database, and then create a
     > **Note**: You may receive an error if you choose the wrong Compose file
     > version. Be sure to choose a version that is compatible with your system.
 
-1.  Go to `Startup.cs` and locate the function called `ConfigureServices` (Hint:
+6.  Go to `Startup.cs` and locate the function called `ConfigureServices` (Hint:
     it should be under line 42). Replace the entire function to use the following
     code (watch out for the brackets!).
 
@@ -152,7 +152,7 @@ configure this app to use our SQL Server database, and then create a
     <...>
     ```
 
-1.  Go to `app.csproj`. You see a line like:
+7.  Go to `app.csproj`. You see a line like:
 
     ```
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.2" />
@@ -168,19 +168,19 @@ configure this app to use our SQL Server database, and then create a
     The Sqlite dependency was at version 1.1.2 at the time of this writing. Use the same
     version for the SQL Server dependency.
 
-1.  Ready! You can now run the `docker-compose build` command.
+8.  Ready! You can now run the `docker-compose build` command.
 
     ```console
     $ docker-compose build
     ```
 
-1.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
+9.  Make sure you allocate at least 2GB of memory to Docker Engine. Here is how
     to do it on
     [Docker Desktop for Mac](../desktop/settings/mac.md#advanced) and
     [Docker Desktop for Windows](../desktop/settings/windows.md#advanced).
     This is necessary to run the SQL Server on Linux container.
 
-1.  Run the `docker-compose up` command. After a few seconds, you should be able
+10. Run the `docker-compose up` command. After a few seconds, you should be able
     to open [localhost:8000](http://localhost:8000) and see the ASP.NET core
     sample website. The application is listening on port 80 by default, but we
     mapped it to port 8000 in the `docker-compose.yml`.

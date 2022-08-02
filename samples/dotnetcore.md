@@ -41,31 +41,31 @@ clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/m
     Docker Desktop for Windows. Read more on
     [switching containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 3.  The `Dockerfile` assumes that your application is called `aspnetapp`. Change
-   the `Dockerfile` to use the DLL file of your project.
+    the `Dockerfile` to use the DLL file of your project.
 
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
-WORKDIR /app
-
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy everything else and build
-COPY ../engine/examples ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
-```
+    ```dockerfile
+    # syntax=docker/dockerfile:1
+    FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+    WORKDIR /app
+    
+    # Copy csproj and restore as distinct layers
+    COPY *.csproj ./
+    RUN dotnet restore
+    
+    # Copy everything else and build
+    COPY ../engine/examples ./
+    RUN dotnet publish -c Release -o out
+    
+    # Build runtime image
+    FROM mcr.microsoft.com/dotnet/aspnet:6.0
+    WORKDIR /app
+    COPY --from=build-env /app/out .
+    ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+    ```
 
 4.  To make your build context as small as possible add a [`.dockerignore`
-   file](/engine/reference/builder/#dockerignore-file)
-   to your project folder and copy the following into it.
+    file](/engine/reference/builder/#dockerignore-file)
+    to your project folder and copy the following into it.
 
 ```dockerignore
 bin/

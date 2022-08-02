@@ -60,7 +60,7 @@ Docker Desktop on Mac and Linux allows you to use the host’s SSH agent inside 
 
     `--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock`
 
-1. Add the `SSH_AUTH_SOCK` environment variable in your container:
+2. Add the `SSH_AUTH_SOCK` environment variable in your container:
 
     `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
 

@@ -122,7 +122,7 @@ services:
     image: 'webapp:v1.5'
 ```
 
-Passing the `--env-file ` argument overrides the default file path:
+Passing the `--env-file` argument overrides the default file path:
 
 ```console
 $ docker compose --env-file ./config/.env.dev config 

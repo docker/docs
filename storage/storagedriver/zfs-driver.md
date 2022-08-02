@@ -74,7 +74,7 @@ use unless you have substantial experience with ZFS on Linux.
     zpool-docker    55K  96.4G    19K  /var/lib/docker
     ```
 
-3.  Configure Docker to use `zfs`. Edit `/etc/docker/daemon.json` and set the
+4.  Configure Docker to use `zfs`. Edit `/etc/docker/daemon.json` and set the
     `storage-driver` to `zfs`. If the file was empty before, it should now look
     like this:
 
@@ -86,7 +86,7 @@ use unless you have substantial experience with ZFS on Linux.
 
     Save and close the file.
 
-4.  Start Docker. Use `docker info` to verify that the storage driver is `zfs`.
+5.  Start Docker. Use `docker info` to verify that the storage driver is `zfs`.
 
     ```console
     $ sudo docker info

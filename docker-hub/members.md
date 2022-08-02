@@ -63,7 +63,7 @@ To invite multiple members to your organization via a CSV file containing email 
 	  - **Already invited**: The user has already been sent an invite email and another invite email will not be sent.
 	  - **Member**: The user is already a member of your organization and an invite email will not be sent.
 	  - **Duplicate**: The CSV file has multiple occurrences of the same email address. The user will be sent only one invite email.
-4. Click **Send invites**.
+9. Click **Send invites**.
    > **Note**
    >
    > You can view the pending invitations in the **Members** tab. The invitees receive an email with a link to the organization in Docker Hub where they can accept or decline the invitation.

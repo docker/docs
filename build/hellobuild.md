@@ -133,17 +133,22 @@ CMD flask run --host 0.0.0.0 --port 8000
 Go ahead and try this example in your local Docker installation or you can use [Play with Docker](https://labs.play-with-docker.com){:target="_blank" rel="noopener" class="_"} that provides you with a temporary Docker instance on the cloud.
 
 To test this example:
+
 1. Create a file hello.py with the content of sample A.
+
 2. Create a file named Dockerfile without an extension with the contents of sample B.
+
 3. From your Docker instance build it with `docker build -t test:latest .`
 
     Breaking down the docker build command:  
     * **`-t test:latest`** option specifies the name (required) and tag (optional) of the image we’re building.
     * **`.`** specifies the build context as the current directory. In this example, this is where build expects to find the Dockerfile and the local files the Dockerfile needs to access, in this case your python application.
-      So, in accordance with the build command issued and how build context works, your Dockerfile and python app need to be on the same directory.
+
+    So, in accordance with the build command issued and how build context works, your Dockerfile and python app need to be on the same directory.
 
 4. Run your newly built image with `docker run -p 8000:8000 test:latest` 
-From your computer, open a browser and navigate to `http://localhost:8000` or, if you’re using [Play with Docker](https://labs.play-with-docker.com){:target="_blank" rel="noopener" class="_"}, click on Open Port. 
+
+    From your computer, open a browser and navigate to `http://localhost:8000` or, if you’re using [Play with Docker](https://labs.play-with-docker.com){:target="_blank" rel="noopener" class="_"}, click on Open Port. 
 
 ## Other resources
 

@@ -90,7 +90,7 @@ new instance that has never seen this container image! To do this, we will use P
 
     You should see the image get pulled down and eventually start up!
 
-5. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
+6. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
     If the 3000 badge doesn't show up, you can click on the "Open Port" button and type in 3000.
 
 ## Recap
