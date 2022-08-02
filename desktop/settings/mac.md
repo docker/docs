@@ -2,6 +2,11 @@
 description: Docker Desktop settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
 title: Change Docker Desktop preferences on Mac
+redirect_from:
+- /docker-for-mac/mutagen-caching/
+- /docker-for-mac/mutagen/
+- /docker-for-mac/osxfs-caching/
+- /docker-for-mac/osxfs/
 ---
 
 This page provides information on how to configure and manage your Docker Desktop settings.
@@ -17,6 +22,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Start Docker Desktop when you log in**. Select to automatically start Docker
   Desktop when you log into your machine.
+
+- **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
 
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is disabled by default.

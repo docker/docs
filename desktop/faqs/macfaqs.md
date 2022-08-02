@@ -3,7 +3,8 @@ description: Frequently asked questions
 keywords: desktop, mac, faqs
 title: Frequently asked questions for Mac
 redirect_from:
-- desktop/mac/space
+- /desktop/mac/space/
+- /docker-for-mac/space/
 ---
 
 ### What is Docker.app?

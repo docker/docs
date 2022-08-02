@@ -3,33 +3,28 @@ description: Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
 title: Sign in and get started
 redirect_from:
+- /desktop/linux/
+- /desktop/linux/index/
+- /desktop/mac/
+- /desktop/mac/index/
+- /desktop/windows/
+- /desktop/windows/index/
+- /docker-for-mac/
+- /docker-for-mac/index/
+- /docker-for-mac/osx/
+- /docker-for-mac/started/
 - /docker-for-windows/
 - /docker-for-windows/index/
 - /docker-for-windows/started/
-- /engine/installation/windows/
-- /installation/windows/
+- /mac/
+- /mac/started/
+- /mackit/
+- /mackit/getting-started/
 - /win/
 - /windows/
 - /windows/started/
 - /winkit/
 - /winkit/getting-started/
-- /desktop/linux/index/
-- /desktop/windows/index/
-- /docker-for-mac/
-- /docker-for-mac/index/
-- /docker-for-mac/mutagen/
-- /docker-for-mac/mutagen-caching/
-- /docker-for-mac/osx/
-- /docker-for-mac/started/
-- /engine/installation/mac/
-- /installation/mac/
-- /mac/
-- /mac/started/
-- /mackit/
-- /mackit/getting-started/
-- /docker-for-mac/osxfs/
-- /docker-for-mac/osxfs-caching/
-- /desktop/mac/index/
 ---
 
 ## Quick Start Guide
@@ -112,17 +107,3 @@ Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
 Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
-
-## Pause or resume Docker Desktop
-
-You can pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine. When you pause Docker Desktop, the Linux VM running Docker Engine is paused, the current state of all your containers are saved in memory, and all processes are frozen. This reduces the CPU usage and helps you retain a longer battery life on your laptop. You can resume Docker Desktop when you want by clicking the **Resume** option.
-
-From the Docker menu, select![whale menu](images/whale-x.png){: .inline} and then **Pause** to pause Docker Desktop.
-
-Docker Desktop displays the paused status on the Docker menu and on the  **Containers**, **Images**, **Volumes**, and **Dev Environment** screens in Docker Dashboard. You can still access the **Preferences** (or **Settings** if you are a Windows user) and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
-
-Select ![whale menu](images/whale-x.png){: .inline} then **Resume** to resume Docker Desktop.
-
-> **Note**
->
-> When Docker Desktop is paused, running any commands in the Docker CLI will automatically resume Docker Desktop.

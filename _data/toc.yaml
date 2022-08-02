@@ -1167,6 +1167,8 @@ manuals:
           title: Explore Images
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
+        - path: /desktop/use-desktop/pause/
+          title: Pause Docker Desktop
     - sectiontitle: Change settings
       section:
         - path: /desktop/settings/mac/
@@ -1195,10 +1197,14 @@ manuals:
           title: Back up and restore data
         - path: /desktop/networking/
           title: Explore networking features
-        - path: /desktop/mac/privileged-helper/
-          title: Privileged Helper on Mac
+        - path: /desktop/mac/permission-requirements/
+          title: Docker Desktop permission requirements for Mac
+        - path: /desktop/windows/permission-requirements/
+          title: Docker Desktop permission requirements for Windows
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
+        - path: /desktop/vm-vdi/
+          title: Run Docker Desktop in a VM or VDI environment
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1393,10 +1399,37 @@ manuals:
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/
-          title: Working with Buildx
+          title: Buildx overview
         - path: /build/buildx/install/
           title: Install Buildx
-
+        - sectiontitle: Drivers
+          section:
+            - path: /build/buildx/drivers/
+              title: Overview
+            - path: /build/buildx/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/buildx/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/buildx/drivers/remote/
+              title: Remote driver
+        - path: /build/buildx/multiple-builders/
+          title: Using multiple builders
+        - path: /build/buildx/multiplatform-images/
+          title: Building multi-platform images
+    - sectiontitle: Bake
+      section:
+        - path: /build/bake/
+          title: Bake overview
+        - path: /build/bake/file-definition/
+          title: File definition
+        - path: /build/bake/configuring-build/
+          title: Configuring builds
+        - path: /build/bake/hcl-funcs/
+          title: User defined HCL functions
+        - path: /build/bake/build-contexts/
+          title: Build contexts and linking targets
+        - path: /build/bake/compose-file/
+          title: Building from Compose file
 - sectiontitle: Docker Compose
   section:
   - path: /compose/

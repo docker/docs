@@ -1,6 +1,9 @@
 variable "JEKYLL_ENV" {
   default = "development"
 }
+variable "DOCS_URL" {
+  default = "http://localhost:4000"
+}
 variable "DOCS_SITE_DIR" {
   default = "_site"
 }
@@ -8,6 +11,7 @@ variable "DOCS_SITE_DIR" {
 target "_common" {
   args = {
     JEKYLL_ENV = JEKYLL_ENV
+    DOCS_URL = DOCS_URL
   }
   no-cache-filter = ["generate"]
 }
