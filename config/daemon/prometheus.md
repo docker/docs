@@ -42,7 +42,7 @@ If the file is currently empty, paste the following:
 
 ```json
 {
-  "metrics-addr" : "127.0.0.1:9323",
+  "metrics-addr" : "0.0.0.0:9323",
   "experimental" : true
 }
 ```
@@ -109,7 +109,7 @@ scrape_configs:
          # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9323']
+      - targets: ['host.docker.internal:9323']
 ```
 
 </div><!-- linux -->
@@ -212,6 +212,7 @@ Next, start a single-replica Prometheus service using this configuration.
 $ docker service create --replicas 1 --name my-prometheus \
     --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
     --publish published=9090,target=9090,protocol=tcp \
+    --host host.docker.internal:host-gateway \
     prom/prometheus
 ```
 
