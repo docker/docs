@@ -101,7 +101,7 @@ Docker then clones the repository with your specified branch or tag.
 1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started** and then the **Local Folder** tab.
 3. Select **Select directory** to open the root of the code that you would like to work on.
-3. Select **Continue**.
+4. Select **Continue**.
 
     This detects the main language of your local folder, creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. It then opens VS Code inside the Dev Environment container.
 

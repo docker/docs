@@ -1689,12 +1689,12 @@ by another client (#15489)
 
 ## 1.6.2 (2015-05-13)
 
-###  Runtime
+### Runtime
 - Revert change prohibiting mounting into /sys
 
 ## 1.6.1 (2015-05-07)
 
-###  Security
+### Security
 - Fix read/write /proc paths (CVE-2015-3630)
 - Prohibit VOLUME /proc and VOLUME / (CVE-2015-3631)
 - Fix opening of file-descriptor 1 (CVE-2015-3627)

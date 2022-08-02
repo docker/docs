@@ -176,7 +176,7 @@ When asked if you want to allow this app to make changes to your device, click *
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
 
-3.  Test the installation.
+4.  Test the installation.
 
     ```console
     $ docker compose version

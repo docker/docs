@@ -377,7 +377,7 @@ For more information about the vulnerability data, see [Docker Vulnerability Sca
 ### Limiting the level of vulnerabilities displayed
 
 Docker scan allows you to choose the level of vulnerabilities displayed in your scan report using the `--severity` flag.
-You can set the severity flag to `low`, `medium`, or` high` depending on the level of vulnerabilities you’d like to see in your report.  
+You can set the severity flag to `low`, `medium`, or `high` depending on the level of vulnerabilities you’d like to see in your report.  
 For example, if you set the severity level as `medium`, the scan report displays all vulnerabilities that are classified as medium and high.
  
  ```console

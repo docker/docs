@@ -54,7 +54,7 @@ machines.
     join as managers or workers depending on the value for the `--token`
     flag.
 
-2.  Run `docker info` to view the current state of the swarm:
+3.  Run `docker info` to view the current state of the swarm:
 
     ```console
     $ docker info
@@ -72,7 +72,7 @@ machines.
       ...snip...
     ```
 
-3.  Run the `docker node ls` command to view information about nodes:
+4.  Run the `docker node ls` command to view information about nodes:
 
     ```console
     $ docker node ls

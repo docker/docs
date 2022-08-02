@@ -28,6 +28,10 @@ release:
 # Vendor Gemfile.lock
 vendor:
 	$(BUILDX_CMD) bake vendor
+	
+# Run all validators
+validate:
+	$(BUILDX_CMD) bake validate
 
 # Check for broken links
 htmlproofer:

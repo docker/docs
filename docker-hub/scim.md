@@ -144,12 +144,12 @@ You must run a full-sync after enabling SCIM, if you already have users assigned
 
     ![parameters-tab](images/parameters-tab.png){:width="700px"}
 
-10. Navigate to the SSO tab, and copy the **SAML 2.0 Endpoint (HTTP)** url and paste it in to [**Docker Hub**](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} > **Settings** > **Security** > **SSO** > **SAML Sign-in URL**.
-11. In the **X.509 Certificate** field, click **View Details**.
-12. Copy the **PEM certificate**, and paste it in to [**Docker Hub**](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} > **Settings** > **Security** > **SSO** > **Key x509 Certificate** and click **Save**.
+9. Navigate to the SSO tab, and copy the **SAML 2.0 Endpoint (HTTP)** url and paste it in to [**Docker Hub**](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} > **Settings** > **Security** > **SSO** > **SAML Sign-in URL**.
+10. In the **X.509 Certificate** field, click **View Details**.
+11. Copy the **PEM certificate**, and paste it in to [**Docker Hub**](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} > **Settings** > **Security** > **SSO** > **Key x509 Certificate** and click **Save**.
 12. In Onelogin, navigate to the **Access** tab, enable the app for `ol_role` that was already created and click **Save**.
-14. Navigate to the **Provisioning** tab and select **Enable provisioning**, and deselect the other options.
-15. In the drop-down, select **Suspend** and click **Save**.
+13. Navigate to the **Provisioning** tab and select **Enable provisioning**, and deselect the other options.
+14. In the drop-down, select **Suspend** and click **Save**.
 
 
 #### Generate a full-sync

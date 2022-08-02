@@ -65,7 +65,7 @@ Docker Hub Webhook payloads have the following payload JSON format:
 To validate a callback in a webhook chain, you need to
 
 1. Retrieve the `callback_url` value in the request's JSON payload.
-1. Send a POST request to this URL containing a valid JSON body.
+2. Send a POST request to this URL containing a valid JSON body.
 
 > **Note**: A chain request is only considered complete once the last
 > callback has been validated.

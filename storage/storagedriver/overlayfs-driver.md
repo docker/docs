@@ -101,7 +101,7 @@ need to use the legacy `overlay` driver, specify it instead.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that the daemon is using the `overlay2` storage driver.
+6.  Verify that the daemon is using the `overlay2` storage driver.
     Use the `docker info` command and look for `Storage Driver` and
     `Backing filesystem`.
 

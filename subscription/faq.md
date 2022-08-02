@@ -39,7 +39,7 @@ A Docker ID is the core of a Docker subscription. You can get one for free at [D
 
 ### I want to buy a large number of Docker Team Subscription seats. How do I do this?
 
-Contact the [Docker Sales Team ](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
+Contact the [Docker Sales Team](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
 
 ### How do I access support? Do I have any extra benefits?
 
