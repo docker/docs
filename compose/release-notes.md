@@ -7,6 +7,41 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+
+## 2.8.0
+
+(2022-07-29)
+
+> **Important**
+>
+>This release introduced a breaking change via `compose-go v1.3.0` and this [PR](https://
+github.com/compose-spec/compose-go/pull/294){:target="_blank" rel="noopener" class="_"}.
+In this Docker Compose recreates new resources (networks, volumes, secrets, configs...) with new names, using a `-` (dash) instead a `_` (underscore) and try to connect/use to this new created resources instead of your existing ones!
+>
+> Please use Compose the v2.9.0 release instead.
+>
+{: .important}
+
+
+### Enhancements
+- Introduced `--pull` flag to allow the force pull of updated service images. Fixes [compose#9451](https://github.com/docker/compose/issues/9451){:target="_blank" rel="noopener" class="_"}.
+
+### Bug fixes
+- Fixed interpolation error message output. Fixes [compose-spec/compose-go#292](https://github.com/compose-spec/compose-go/pull/292){:target="_blank" rel="noopener" class="_"}.
+- Defined precedence of the environment variables evaluation. Fixes [compose#9521](https://github.com/docker/compose/issues/9606){:target="_blank" rel="noopener" class="_"}, 
+[compose#9638](https://github.com/docker/compose/issues/9638){:target="_blank" rel="noopener" class="_"},
+[compose#9608](https://github.com/docker/compose/issues/9608){:target="_blank" rel="noopener" class="_"},
+[compose#9578](https://github.com/docker/compose/issues/9578){:target="_blank" rel="noopener" class="_"}.
+[compose#9468](https://github.com/docker/compose/issues/9468){:target="_blank" rel="noopener" class="_"}, and
+[compose#9683](https://github.com/docker/compose/issues/9468){:target="_blank" rel="noopener" class="_"}.
+
+### Changes
+- Docs CI: Fixed to use push-to-fork when creating a PR.
+- Increased code quality by adding `gocritic` to the linters.
+- Used environmental variable for golang's version and updates GitHub Actions from v2 to v3.
+- Used [google/addlicense](https://github.com/google/addlicense){:target="_blank" rel="noopener" class="_"} instead of [kunalkushwaha/ltag](https://github.com/kunalkushwaha/ltag){:target="_blank" rel="noopener" class="_"}.
+
+
 ## 2.7.0
 
 (2022-07-20)
