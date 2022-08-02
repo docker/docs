@@ -6,17 +6,21 @@ toc_min: 1
 toc_max: 2
 ---
 
+> **Beta**
+>
+> The Docker Extensions feature is currently in Beta. We recommend that you do not use Extensions in production environments.
+
 Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality. There is no limit to the number of extensions you can install.
+
+![extenstions](images/extensions-marketplace.PNG){:width="750px"}
 
 You can explore the list of available extensions in [Docker Hub](https://hub.docker.com/search?q=&type=extension) or in the Extensions Marketplace within Docker Desktop.
 
 Docker Community members and partners can use our [SDK](extensions-sdk/index.md) to create new extensions.
 
-> **Beta**
->
-> The Docker Extensions feature is currently in Beta. We recommend that you do not use Extensions in production environments.
+To find out more about Docker Extensions, we recommend the video walkthrough from DockerCon 2022:
 
-![extenstions](images/extensions-marketplace.PNG){:width="750px"}
+<iframe src="https://www.youtube.com/watch?v=3rAGXS8pszQ" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Prerequisites
 
