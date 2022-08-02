@@ -7,6 +7,25 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 2.9.0
+
+(2022-08-7)
+
+> **Note**
+>
+> This release reverts the breaking changes introduced in [Compose v2.8.0](#280) by [`compose-go v1.3.0`](https://github.com/compose-spec/compose-go/releases/tag/v1.3.0){:target="_blank" rel="noopener" class="_"}.
+
+### Bug fixes
+
+- Overwritten parent commands PreRun code for `compose version`. Fixes [compose#9698](https://github.com/docker/compose/issues/9698){:target="_blank" rel="noopener" class="_"}.
+- Fixed `LinkLocalIPs` in V2. Fixes [compose#9692](https://github.com/docker/compose/issues/9692){:target="_blank" rel="noopener" class="_"}.
+
+### Changes
+
+- Linked to `BUILDING.md` for testing instructions. Fixes [compose#9439](https://github.com/docker/compose/issues/9439){:target="_blank" rel="noopener" class="_"}.
+- Update [`compose-go` to v1.4.0](https://github.com/compose-spec/compose-go/releases/tag/v1.4.0){:target="_blank" rel="noopener" class="_"} as previous version introduced breaking changes. Fixes [compose#9700](https://github.com/docker/compose/issues/9700){:target="_blank" rel="noopener" class="_"}.
+
+For the full change log or additional information, check the [Compose repository 2.9.0 release page](https://github.com/docker/compose/releases/tag/v2.9.0){:target="_blank" rel="noopener" class="_"}.
 
 ## 2.8.0
 
@@ -14,9 +33,8 @@ redirect_from:
 
 > **Important**
 >
->This release introduced a breaking change via `compose-go v1.3.0` and this [PR](https://
-github.com/compose-spec/compose-go/pull/294){:target="_blank" rel="noopener" class="_"}.
-In this Docker Compose recreates new resources (networks, volumes, secrets, configs...) with new names, using a `-` (dash) instead a `_` (underscore) and try to connect/use to this new created resources instead of your existing ones!
+>This release introduced a breaking change via `compose-go v1.3.0` and this [PR](https://github.com/compose-spec/compose-go/pull/294){:target="_blank" rel="noopener" class="_"}.
+In this release, Docker Compose recreates new resources (networks, volumes, secrets, configs, etc.) with new names, using a `-` (dash) instead an `_` (underscore) and tries to connect to or use these newly created resources instead of your existing ones!
 >
 > Please use Compose the v2.9.0 release instead.
 >
@@ -24,9 +42,11 @@ In this Docker Compose recreates new resources (networks, volumes, secrets, conf
 
 
 ### Enhancements
+
 - Introduced `--pull` flag to allow the force pull of updated service images. Fixes [compose#9451](https://github.com/docker/compose/issues/9451){:target="_blank" rel="noopener" class="_"}.
 
 ### Bug fixes
+
 - Fixed interpolation error message output. Fixes [compose-spec/compose-go#292](https://github.com/compose-spec/compose-go/pull/292){:target="_blank" rel="noopener" class="_"}.
 - Defined precedence of the environment variables evaluation. Fixes [compose#9521](https://github.com/docker/compose/issues/9606){:target="_blank" rel="noopener" class="_"}, 
 [compose#9638](https://github.com/docker/compose/issues/9638){:target="_blank" rel="noopener" class="_"},
@@ -36,11 +56,13 @@ In this Docker Compose recreates new resources (networks, volumes, secrets, conf
 [compose#9683](https://github.com/docker/compose/issues/9468){:target="_blank" rel="noopener" class="_"}.
 
 ### Changes
+
 - Docs CI: Fixed to use push-to-fork when creating a PR.
 - Increased code quality by adding `gocritic` to the linters.
 - Used environmental variable for golang's version and updates GitHub Actions from v2 to v3.
 - Used [google/addlicense](https://github.com/google/addlicense){:target="_blank" rel="noopener" class="_"} instead of [kunalkushwaha/ltag](https://github.com/kunalkushwaha/ltag){:target="_blank" rel="noopener" class="_"}.
 
+For the full change log or additional information, check the [Compose repository 2.8.0 release page](https://github.com/docker/compose/releases/tag/v2.8.0){:target="_blank" rel="noopener" class="_"}.
 
 ## 2.7.0
 
@@ -132,6 +154,7 @@ For the full change log or additional information, check the [Compose repository
 
 
 ### Bug fixes
+
 - Fixed `compose up` to attach only to services declared in project with enabled profiles. Fixes [#9286](https://github.com/docker/compose/issues/9286){:target="_blank" rel="noopener" class="_"}.
 - Fixed flickering prompt when pulling same image from multiple services. Fixes [#9469](https://github.com/docker/compose/issues/9469){:target="_blank" rel="noopener" class="_"}.
 - Fixed compose go to import .env file to OS environment to allow setting variables (such as DOCKER_BUILDKIT) through this file. Fixes [#9345](https://github.com/docker/compose/issues/9345){:target="_blank" rel="noopener" class="_"}.
@@ -140,6 +163,7 @@ For the full change log or additional information, check the [Compose repository
 
 
 ### Changes
+
 - Added the tags property to the build section. In this property tags can be defined to be applied to the final image, in addition to the one defined in the image property.
 - Added end-to-end tests to ensure there is no regression on environment variables precedence.
 - Added ddev's end-to-end test.
