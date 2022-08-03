@@ -416,9 +416,9 @@ application binary had been compiled.
 These are legit concerns. Both can be solved by using _multi-stage builds_. The
 following example is provided with little explanation because this would derail
 us from our current concerns, but please feel free to explore on your own later.
-The main idea is that we use one image to produce some artefacts, which are then
+The main idea is that we use one image to produce some artifacts, which are then
 placed into another, much smaller image, containing only the parts necessary for
-running the artefacts that we'd built.
+running the artifacts that we'd built.
 
 The `Dockerfile.multistage` in the sample application's repo has the following
 content:
