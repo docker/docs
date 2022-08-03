@@ -176,7 +176,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Removed Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
 
 ### Upgrades
-- [Docker Engine v20.10.17](https://docs.docker.com/engine/release-notes/#201017)
+- [Docker Engine v20.10.17](../engine/release-notes/index.md#201017)
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
 - [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
 - [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
@@ -270,7 +270,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### Upgrades
 
 - [Compose v2.6.0](https://github.com/docker/compose/releases/tag/v2.6.0)
-- [Docker Engine v20.10.16](https://docs.docker.com/engine/release-notes/#201016)
+- [Docker Engine v20.10.16](../engine/release-notes/index.md#201016)
 - [containerd v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4)
 - [runc v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1)
 - [Go 1.18.2](https://github.com/golang/go/releases/tag/go1.18.2)
@@ -343,7 +343,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Beta release of [Docker Extensions](extensions.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -372,7 +372,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Beta release of [Docker Extensions](extensions.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -468,7 +468,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### Upgrades
 
-- [Docker Engine v20.10.14](https://docs.docker.com/engine/release-notes/#201014)
+- [Docker Engine v20.10.14](../engine/release-notes/index.md#201014)
 - [Compose v2.4.1](https://github.com/docker/compose/releases/tag/v2.4.1)
 - [Buildx 0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2)
 - [containerd v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11)
@@ -546,7 +546,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms 
 
-- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
+- [Docker Engine v20.10.13](../engine/release-notes/index.md#201013)
 - [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
 - [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
 - [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
@@ -707,7 +707,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 ### Security
 
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+- Fixed [CVE-2021-45449](../security/index.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
 
 Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
 This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
@@ -720,7 +720,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ### Upgrades
 
-- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Docker Engine v20.10.12](../engine/release-notes/index.md#201012)
 - [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
 - [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
 - [docker scan v0.16.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.16.0){: target="_blank" rel="noopener" class="_"}
@@ -765,7 +765,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ### Security
 
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+- Fixed [CVE-2021-45449](../security/index.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
 
 Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
 This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
@@ -822,7 +822,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 ### Upgrades
 
-- [Docker Engine v20.10.11](https://docs.docker.com/engine/release-notes/#201011)
+- [Docker Engine v20.10.11](../engine/release-notes/index.md#201011)
 - [containerd v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12)
 - [Buildx 0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1)
 - [Compose v2.2.1](https://github.com/docker/compose/releases/tag/v2.2.1)
@@ -887,7 +887,7 @@ actual memory usage. See
 
 ### Upgrades
 
-- [Docker Engine v20.10.10](https://docs.docker.com/engine/release-notes/#201010)
+- [Docker Engine v20.10.10](../engine/release-notes/index.md#201010)
 - [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)

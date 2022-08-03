@@ -43,9 +43,9 @@ We recommend that you authenticate using the **Sign in/Create ID** option in the
 
 Once logged in, you can access your Docker Hub repositories directly from Docker Desktop.
 
-Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).
+Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
 
-In large enterprises where admin access is restricted, administrators can create a registry.json file and deploy it to the developers’ machines using a device management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows administrators to set up guardrails using features such as [Image Access Management](https://docs.docker.com/docker-hub/image-access-management/) which allows team members to only have access to Trusted Content on Docker Hub, and pull only from the specified categories of images. For more information, see Configure registry.json to enforce sign in https://docs.docker.com/docker-hub/configure-sign-in/.
+In large enterprises where admin access is restricted, administrators can create a registry.json file and deploy it to the developers’ machines using a device management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows administrators to set up guardrails using features such as [Image Access Management](../docker-hub/image-access-management.md) which allows team members to only have access to Trusted Content on Docker Hub, and pull only from the specified categories of images. For more information, see [Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md).
 
 ### Two-factor authentication
 

@@ -26,7 +26,7 @@ file system objects required.
 To complete this tutorial, you need the following:
 
 - Go version 1.16 or later. You might want to [download and install Go](https://golang.org/dl/) first.
-- Docker running locally. Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
+- Docker running locally. Follow the instructions to [download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. We recommend using [Visual Studio Code](https://code.visualstudio.com/){: target="_blank" rel="noopener" class="_"}.
 
 ## Meet the example application
@@ -153,7 +153,7 @@ When we have used that `FROM` command, we told Docker to include in our image al
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [creating base images](https://docs.docker.com/develop/develop-images/baseimages/) section of the guide.
+> If you want to learn more about creating your own base images, see [creating base images](../../develop/develop-images/baseimages.md) section of the guide.
 
 To make things easier when running the rest of our commands, let’s create a
 directory _inside_ the image that we are building. This also instructs Docker

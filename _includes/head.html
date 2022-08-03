@@ -24,10 +24,6 @@
         {%- assign page_description = content | strip_html | strip | truncatewords: 30 -%}
     {%- endif -%}
 {%- endif -%}
-{%- assign domain_name = 'https://docs.docker.com' -%}
-{%- if jekyll.environment == 'development' -%}
-{%- assign domain_name = 'https://localhost:4000' -%}
-{%- endif -%}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   {%- if page.sitemap == false or jekyll.environment != 'production' %}
@@ -37,7 +33,7 @@
   <title>{{ page.title | default: page_title }} | Docker Documentation</title>
   <meta name="description" content="{{ page.description | default: page_description | escape}}" />
   <meta name="keywords" content="{{ page.keywords | default: 'docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization' }}">
-  <link rel="canonical" href="{{ domain_name }}{{ page.url }}" />
+  <link rel="canonical" href="{{ site.docs_url }}{{ page.url }}" />
 
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128">
@@ -96,20 +92,20 @@
   <meta name="twitter:title" itemprop="title name" content="{{ page.title | default: page_title }}"/>
   <meta name="twitter:description" property="og:description" itemprop="description" content="{{ page_description | escape_once }}" />
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:domain" content="docs.docker.com"/>
+  <meta name="twitter:domain" content="{{ site.docs_url | replace_first: 'http://', '' | replace_first: 'https://', '' }}"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:image:src" content="https://docs.docker.com/images/docs@2x.png"/>
+  <meta name="twitter:image:src" content="{{ site.docs_url }}/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker Documentation"/>
   <meta property="og:title" content="{{ page.title | default: page_title }}" />
   <meta property="og:description" content="{{ page.description | default: page_description | escape_once }}" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
-  <meta property="og:image" itemprop="image primaryImageOfPage" content="https://docs.docker.com/images/docs@2x.png"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="{{ site.docs_url }}/images/docs@2x.png"/>
   <meta property="og:locale" content="en_US" />
-  <meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
+  <meta property="og:url" content="{{ site.docs_url }}{{ page.url }}" />
   <meta property="og:site_name" content="Docker Documentation" />
   <meta property="article:published_time" itemprop="datePublished" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":{{ page.title | default: page_title | jsonify }},"description":{{ page.description | default: page_description | jsonify }},"url":"https://docs.docker.com{{ page.url }}"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":{{ page.title | default: page_title | jsonify }},"description":{{ page.description | default: page_description | jsonify }},"url":"{{ site.docs_url }}{{ page.url }}"}</script>
   <!-- END SEO STUFF -->
 </head>
