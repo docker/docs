@@ -25,7 +25,7 @@ Before deactivating your Docker Hub account, please complete the following:
 
 5. If you are the sole owner of any organization, either add someone to the **owners** team and then remove yourself from the organization, or deactivate the organization as well.
 
-6. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+6. Unlink your [Github and Bitbucket accounts](builds/link-source.md#unlink-a-github-user-account).
 
 Once you have completed all the steps above, you may deactivate your account. On Docker Hub, go to **_Your Account_** > **Accounts Settings** > **Deactivate Account**.
 
@@ -46,7 +46,7 @@ Before deactivating an organization, please complete the following:
 
 3. Remove all other members, including those in the **Owners** team, within the organization.
 
-4. Unlink your [Github and Bitbucket accounts](https://docs.docker.com/docker-hub/builds/link-source/#unlink-a-github-user-account).
+4. Unlink your [Github and Bitbucket accounts](builds/link-source.md#unlink-a-github-user-account).
 
 Once you have completed all the steps above, you may deactivate your organization. On Docker Hub, go to **Organizations** > **_Your Organization_** > **Settings** > **Deactivate Org**.
 

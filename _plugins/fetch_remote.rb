@@ -6,6 +6,8 @@ require 'octopress-hooks'
 require 'open-uri'
 require 'rake'
 
+require_relative 'util.rb'
+
 module Jekyll
   class FetchRemote < Octopress::Hooks::Site
     priority :highest
@@ -104,7 +106,7 @@ module Jekyll
                     next unless File.file?(ent.path) && File.extname(ent.path) == ".md"
                     # set edit and issue url and remote info for markdown files in site config defaults
                     edit_url = "#{entry['repo']}/edit/#{entry['default_branch']}/#{file_clean}"
-                    issue_url = "#{entry['repo']}/issues/new?body=File: [#{file_clean}](https://docs.docker.com/#{destent.path.sub(/#{File.extname(destent.path)}$/, '')}/)"
+                    issue_url = "#{entry['repo']}/issues/new?body=File: [#{file_clean}](#{get_docs_url}/#{destent.path.sub(/#{File.extname(destent.path)}$/, '')}/)"
                     puts "        edit_url:  #{edit_url}"
                     puts "        issue_url: #{issue_url}"
                     site.config['defaults'] << {

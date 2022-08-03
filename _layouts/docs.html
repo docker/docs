@@ -8,7 +8,7 @@
 {%- if page.issue_url -%}
     {%- assign issue_url = page.issue_url -%}
 {%- else -%}
-    {%- assign issue_url = "https://github.com/docker/docker.github.io/issues/new?body=File: [" | append: page.path | append: "](https://docs.docker.com" | append: page.url | append: ")" -%}
+    {%- assign issue_url = "https://github.com/docker/docker.github.io/issues/new?body=File: [" | append: page.path | append: "](" | append: site.docs_url | append: page.url | append: ")" -%}
 {%- endif -%} -->
 <html lang="en">
 {%- include head.html -%}
