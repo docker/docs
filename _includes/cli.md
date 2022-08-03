@@ -55,7 +55,7 @@ your client and daemon API versions.
 
 > This command is experimental.
 >
-> [Experimental features](https://docs.docker.com/engine/reference/commandline/cli/#experimental-features)
+> [Experimental features](/engine/reference/commandline/cli/#experimental-features)
 > are intended for testing and feedback as their functionality or UX may change
 > between releases without warning or can be removed entirely in a future release.
 {: .important }

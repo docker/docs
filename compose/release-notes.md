@@ -2205,8 +2205,8 @@ naming scheme accordingly before upgrading.
     You don't have to use it - your existing Compose files will run on Compose
     1.6 exactly as they do today.
 
-    Check the upgrade guide for full details:
-    https://docs.docker.com/compose/compose-file#upgrading
+    Check the [upgrade guide](../compose/compose-file/compose-versioning.md#upgrading)
+    for full details.
 
 -   Support for networking has exited experimental status and is the recommended
     way to enable communication between containers.
@@ -2217,8 +2217,7 @@ naming scheme accordingly before upgrading.
 
     By default, you don't have to configure any networks. In fact, using
     networking with Compose involves even less configuration than using links.
-    Consult the networking guide for how to use it:
-    https://docs.docker.com/compose/networking
+    Consult the [networking guide](../compose/networking.md) for how to use it.
 
     The experimental flags `--x-networking` and `--x-network-driver`, introduced
     in Compose 1.5, have been removed.

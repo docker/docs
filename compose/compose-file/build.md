@@ -301,5 +301,5 @@ build:
 
 ## Implementations
 
-* [docker-compose](https://docs.docker.com/compose)
+* [docker-compose](../../compose/index.md)
 * [buildx bake](../../build/bake/index.md)

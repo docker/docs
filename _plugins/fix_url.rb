@@ -13,8 +13,7 @@ module Jekyll
       #   but needs to remove first all absolute URLs in our code base.
       docs_url = "https://docs.docker.com"
 
-      dest = site.config['destination'] || '_site'
-      files = Dir.glob("#{dest}/**/*.html")
+      files = Dir.glob("#{site.dest}/**/*.html")
       Jekyll.logger.info "  Fixing up URLs in #{files.size} html file(s) to be relative"
       files.each do|f|
         text = File.read(f)

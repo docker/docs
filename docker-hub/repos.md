@@ -9,7 +9,7 @@ redirect_from:
 Docker Hub repositories allow you share container images with your team,
 customers, or the Docker community at large.
 
-Docker images are pushed to Docker Hub through the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/)
+Docker images are pushed to Docker Hub through the [`docker push`](/engine/reference/commandline/push/)
 command. A single Docker Hub repository can hold many Docker images (stored as
 **tags**).
 

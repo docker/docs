@@ -79,7 +79,7 @@ Docker images can be inherited from other images. Therefore, instead of creating
 
 > **Note**
 >
-> To learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> To learn more about creating your own base images, see [Creating base images](../../develop/develop-images/baseimages.md).
 
 To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.
 
