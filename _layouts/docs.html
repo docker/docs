@@ -28,7 +28,7 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            <p>{%- include read_time.html -%}</p>
+                            <p>{%- include read_time.html -%} &emsp; {%- include last_reviewed.html -%} </p>
                             {{ content }}
                             {%- unless page.notags == true -%}
                             {%- assign keywords = page.keywords | split:"," -%}

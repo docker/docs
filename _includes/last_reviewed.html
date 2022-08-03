@@ -1,0 +1,5 @@
+{%- unless page.skip_read_time == true -%}
+{%- if page.reviewed -%}
+<em class="reviewed-time">Last reviewed: {{ page.reviewed | date: "%Y-%m-%d"}} &emsp; </em>
+{%- endif -%}
+{%- endunless -%}
