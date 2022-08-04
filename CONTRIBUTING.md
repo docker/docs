@@ -6,8 +6,8 @@ as possible for you to work in this repository. The documentation for Docker is 
 ## Table of Contents
 
 - [Contribution guidelines](#contribution-guidelines)
-  - [Files not edited here](#files-not-edited-here)
   - [Important files](#important-files)
+  - [Files not edited here](#files-not-edited-here)
   - [Per-page front-matter](#per-page-front-matter)
 - [Pull request guidelines](#pull-request-guidelines)
 - [Collaborate on a pull request](#collaborate-on-a-pull-request)
@@ -192,7 +192,18 @@ repository. Compressing images after adding them to the repository actually wors
 
 ### Style guide
 
-Docker does not currently maintain a style guide. Follow the examples set by the existing documentation and use your best judgment.
+Docker does not currently maintain a style guide. Follow the examples set by
+the existing documentation and use your best judgment.
+
+We use [markdownlint](https://github.com/markdownlint/markdownlint) to ensure
+consistent markdown source, and to catch potential formatting issues as early
+as possible. While CI/CD will catch these during the PR review process, you may
+wish to configure your IDE to catch these while writing.
+
+For VSCode, you can use the [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
+plugin, which will automatically detect and apply the pre-made rules in
+`.markdownlint.json`. This plugin also comes with auto-fix functionality, see
+the plugin documentation for more information.
 
 ## Build and preview the docs locally
 
