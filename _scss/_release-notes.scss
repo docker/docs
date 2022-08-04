@@ -1,0 +1,56 @@
+.release-date {
+  font-size: 12px;
+  color: rgba(13, 86, 125, 0.55);
+}
+
+table.release-notes {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  tr {
+    td:first-child {
+      vertical-align: top;
+      text-align: right;
+      width: 6em;
+    }
+    td {
+      vertical-align: top;
+      padding: 0.5em;
+      p {
+        margin: 0;
+      }
+    }
+  }
+  ul {
+    margin-top: 0.5em;
+  }
+}
+
+span {
+  &.release-tag {
+    border-radius: .25rem;
+    margin-right: .15em;
+    color: #fff;
+    display: inline;
+    background-color: $light-palette-grey-400;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    padding: .25em .4em;
+    text-align: center;
+    letter-spacing: .08em;
+    vertical-align: baseline;
+    white-space: nowrap;
+
+    &.release-tag-new {
+      background-color: $light-palette-green-400;
+    }
+
+    &.release-tag-improved {
+      background-color: $light-palette-blue-400;
+    }
+
+    &.release-tag-fixed {
+      background-color: $light-palette-amber-400;
+    }
+  }
+}
