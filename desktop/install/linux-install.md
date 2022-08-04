@@ -8,11 +8,15 @@ redirect_from:
 
  This page contains information about system requirements, download URLs, and instructions on how to install and update Docker Desktop for Linux.
 
-> Follow the links below to view the distro-specific installation instructions:
+> During first installation make sure to meet the [system requirements](#system-requirements) outlined below and follow the distro-specific installation instructions:
 >
 > * [Ubuntu](ubuntu.md)
 > * [Debian](debian.md)
 > * [Fedora](fedora.md)
+>
+> [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+> [Arch package (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
 ## System requirements
 
