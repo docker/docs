@@ -24,12 +24,57 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## Docker Desktop 4.11.1
+2022-08-05
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed regression preventing VM system locations (e.g. /var/lib/docker) from being bind mounted [for-mac/issues#6433](https://github.com/docker/for-mac/issues/6433)
+
+#### For Windows
+
+- Fixed `docker login` to private registries from WSL2 distro [docker/for-win#12871](https://github.com/docker/for-win/issues/12871)
+
 ## Docker Desktop 4.11.0
 2022-07-28
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/83626/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/83626/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/83626/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Checksums
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+        <li><b>Windows:</b> SHA-256 48ca8cabe67aee94a934b4c0f97a5001e89cb66bbbf824924fbc8bed6a8c90d3</li>
+        <li><b>Mac Intel:</b> SHA-256 295694d7c2df05e37ac0d27fe8be5af6295b1edc6fa00a00a47134a14d5d0b34</li>
+        <li><b>Mac Arm:</b> SHA-256 9824103e3d5a7d01a4d7d8086210157e1cc02217cb9edd82fe4bf2d16c138c44</li>
+        <li><b>Linux DEB:</b> SHA-256 a0dc8ac97cc21e5a13a9e316cac11d85b7c248fd0c166b22a2ab239d17d43d9f</li>
+        <li><b>Linux RPM:</b> SHA-256 eb077737298827092b283d3c85edacd128ecd993e987aa30d8081e2306401774</li>
+        <li><b>Linux Arch:</b> SHA-256 a85fd5e83d5b613ef43d335c0ab0af4600aeb8a92921b617cb7a555826e361de</li>
+        </div>
+      </div>
+    </div>
+  </div>
 
 ### New
 
