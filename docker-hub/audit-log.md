@@ -69,3 +69,15 @@ Refer to the following section for a list of events and their descriptions:
 | Privacy Changed | Details related to the privacy policies that were updated |
 | Tag Pushed | Activities related to the tags pushed |
 | Tag Deleted | Activities related to the tags deleted |
+
+### Billing events
+
+| Event                                                          | Description                                   |
+|:------------------------------------------------------------------|:------------------------------------------------|
+| Plan Upgraded | Billing plan upgrade events|
+| Plan Downgraded | Billing plan downgrade events |
+| Seat Upgraded | Billing seats upgrade events |
+| Seat Downgraded | Billing seat downgrage events |
+| Cycle Changed | Billing cycle change events |
+| Canceled Downgrade | Billing plan cancel downgrade events |
+| Canceled Seat Downgrade | Billing seat cancel downgrade events |
