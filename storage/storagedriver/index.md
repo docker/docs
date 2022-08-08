@@ -124,7 +124,7 @@ The total disk space used by all of the running containers on disk is some
 combination of each container's `size` and the `virtual size` values. If
 multiple containers started from the same exact image, the total size on disk for
 these containers would be SUM (`size` of containers) plus one image size
-(`virtual size`-`size`).
+(`virtual size` - `size`).
 
 This also does not count the following additional ways a container can take up
 disk space:
