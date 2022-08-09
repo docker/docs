@@ -1107,9 +1107,7 @@ reference:
 samples:
 - path: /samples/
   title: Samples overview
-- path: /samples/#tutorial-labs
-  title: Tutorial labs
-- sectiontitle: Sample applications
+- sectiontitle: Samples
   section:
   - path: /samples/apt-cacher-ng/
     title: apt-cacher-ng
@@ -1129,8 +1127,7 @@ samples:
     title: Rails and PostgreSQL
   - path: /samples/running_riak_service/
     title: Riak
-- path: /samples/#library-references
-  title: Library references
+
 
 manuals:
 - sectiontitle: Docker Desktop
