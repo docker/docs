@@ -61,8 +61,8 @@ Refer to the following section for a list of events and their descriptions:
 | Organization Member Removed | Details about the member removed from your organization |
 | Organization Created| Activities related to the creation of a new organization |
 | Organization Settings Updated | Details related to the organization setting that was updated |
-| Registry Access Management enabled | Activities related to the enablement of Registry Access Management |
-| Registry Access Management disabled | Activities related to the disablement of Registry Access Management |
+| Registry Access Management enabled | Activities related to enabling Registry Access Management |
+| Registry Access Management disabled | Activities related to disabling Registry Access Management |
 | Registry Access Management registry added | Activities related to the addition of a registry |
 | Registry Access Management registry removed | Activities related to the removal of a registry |
 | Registry Access Management registry updated | Details related to the registry that was updated |
