@@ -76,8 +76,8 @@ Refer to the following section for a list of events and their descriptions:
 |:------------------------------------------------------------------|:------------------------------------------------|
 | Plan Upgraded | Billing plan upgrade events|
 | Plan Downgraded | Billing plan downgrade events |
-| Seat Upgraded | Billing seats upgrade events |
-| Seat Downgraded | Billing seat downgrage events |
+| Seat Added | Billing seat added events |
+| Seat Removed | Billing seat removed events |
 | Cycle Changed | Billing cycle change events |
-| Canceled Downgrade | Billing plan cancel downgrade events |
-| Canceled Seat Downgrade | Billing seat cancel downgrade events |
+| Downgrade Canceled | Billing plan cancel downgrade events |
+| Seat Removal Canceled | Billing cancel seat removal events |
