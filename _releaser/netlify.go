@@ -23,8 +23,7 @@ type NetlifyCmd struct {
 }
 
 type netlifyGlobalFlags struct {
-	SiteName  string `kong:"name='site-name',env='NETLIFY_SITE_NAME'"`
-	AuthToken string `kong:"name='auth-token',env='NETLIFY_AUTH_TOKEN'"`
+	SiteName string `kong:"name='site-name',env='NETLIFY_SITE_NAME'"`
 }
 
 type NetlifyRemoveCmd struct {
@@ -33,7 +32,7 @@ type NetlifyRemoveCmd struct {
 
 func (s *NetlifyRemoveCmd) Run() error {
 	siteName := cleanSiteName(s.SiteName)
-	c := newNetlifyClient(s.AuthToken)
+	c := newNetlifyClient(getEnvOrSecret("NETLIFY_AUTH_TOKEN"))
 	site, err := c.getSite(siteName)
 	if err != nil {
 		return fmt.Errorf("failed to get site %q: %w", siteName, err)
@@ -47,8 +46,7 @@ func (s *NetlifyRemoveCmd) Run() error {
 
 type NetlifyDeployCmd struct {
 	netlifyGlobalFlags
-	AccountSlug string `kong:"name='account-slug',env='NETLIFY_ACCOUNT_SLUG'"`
-	PublishDir  string `kong:"name='publish-dir',env='NETLIFY_PUBLISH_DIR'"`
+	PublishDir string `kong:"name='publish-dir',env='NETLIFY_PUBLISH_DIR'"`
 }
 
 func (s *NetlifyDeployCmd) Run() error {
@@ -59,11 +57,11 @@ func (s *NetlifyDeployCmd) Run() error {
 	}
 
 	siteName := cleanSiteName(s.SiteName)
-	c := newNetlifyClient(s.AuthToken)
+	c := newNetlifyClient(getEnvOrSecret("NETLIFY_AUTH_TOKEN"))
 
 	site, err := c.CreateSite(c.ctx, &netlify.SiteSetup{
 		Site: netlify.Site{
-			AccountSlug: s.AccountSlug,
+			AccountSlug: getEnvOrSecret("NETLIFY_ACCOUNT_SLUG"),
 			Name:        siteName,
 		},
 	}, false)

@@ -7,6 +7,7 @@ import (
 	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/lambda"
 	"github.com/aws/aws-sdk-go/service/s3"
@@ -36,8 +37,9 @@ func (s *AwsS3UpdateConfigCmd) Run() error {
 	}
 
 	sess, err := session.NewSession(&aws.Config{
-		Region: aws.String(s.Region)},
-	)
+		Credentials: awsCredentials(),
+		Region:      aws.String(s.Region),
+	})
 
 	svc := s3.New(sess)
 
@@ -67,7 +69,8 @@ func (s *AwsLambdaInvokeCmd) Run() error {
 	svc := lambda.New(session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	})), &aws.Config{
-		Region: aws.String(s.Region),
+		Credentials: awsCredentials(),
+		Region:      aws.String(s.Region),
 	})
 
 	_, err := svc.Invoke(&lambda.InvokeInput{
@@ -79,4 +82,18 @@ func (s *AwsLambdaInvokeCmd) Run() error {
 
 	log.Printf("INFO: lambda function %q invoked successfully\n", s.LambdaFunction)
 	return nil
+}
+
+func awsCredentials() *credentials.Credentials {
+	return credentials.NewChainCredentials(
+		[]credentials.Provider{
+			&credentials.StaticProvider{
+				Value: credentials.Value{
+					AccessKeyID:     getEnvOrSecret("AWS_ACCESS_KEY_ID"),
+					SecretAccessKey: getEnvOrSecret("AWS_SECRET_ACCESS_KEY"),
+					SessionToken:    getEnvOrSecret("AWS_SESSION_TOKEN"),
+				},
+			},
+		},
+	)
 }
