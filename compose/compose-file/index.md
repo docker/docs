@@ -1665,7 +1665,7 @@ the service's containers.
 The following example sets the name of the `server-certificate` secret file to `server.crt`
 within the container, sets the mode to `0440` (group-readable) and sets the user and group
 to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
-the secret lifecycle not directly managed by the Compose implementation.
+the secret lifecycle is not directly managed by the Compose implementation.
 
 ```yml
 services:
