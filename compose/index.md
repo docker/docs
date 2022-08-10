@@ -43,7 +43,7 @@ services:
     volumes:
       - .:/code
       - logvolume01:/var/log
-    links:
+    depends_on:
       - redis
   redis:
     image: redis
