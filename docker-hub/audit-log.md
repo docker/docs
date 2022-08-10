@@ -59,7 +59,7 @@ Refer to the following section for a list of events and their descriptions:
 | Team Member Removed | Details of the member removed from your team |
 | Team Member Invited | Details of the member invited to your team |
 | Organization Member Removed | Details about the member removed from your organization |
-| Organization Created| Activities related to the creation of a new organization |
+| Organization Created | Activities related to the creation of a new organization |
 | Organization Settings Updated | Details related to the organization setting that was updated |
 | Registry Access Management enabled | Activities related to enabling Registry Access Management |
 | Registry Access Management disabled | Activities related to disabling Registry Access Management |
