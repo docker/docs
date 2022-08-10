@@ -15,6 +15,9 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
+- title: Contribute
+  path: /contribute/overview/
+  node: contribute
   # TODO unify navbbar links: homepage currently has a custom "articles" link
   hide_home: true
 
@@ -1649,6 +1652,28 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
-
 - path: /support/
   title: Get Support
+
+contribute:
+  - path: /contribute/overview/
+    title: Contribute to Docker's docs
+  - path: /contribute/contribute-guide/
+  - sectiontitle: Style guide
+    section:
+    - path: /contribute/style/grammar/
+      title: Grammar and style
+    - path: /contribute/style/formatting/
+      title: Formatting
+    - path: /contribute/style/recommended-words/
+      title: Recommended word list
+    - path: /contribute/style/terminology/
+      title: Docker terminology
+    - path: /contribute/style/voice-tone/
+      title: Voice and tone
+  - path: /contribute/file-conventions/
+    title: Source file conventions
+  - path: /components/
+    title: Useful components
+  - path: /contribute/checklist
+    title: Writing checklist

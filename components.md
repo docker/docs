@@ -1,6 +1,6 @@
 ---
 description: Components page
-title: Components
+title: Useful components
 sitemap: false
 ---
 
