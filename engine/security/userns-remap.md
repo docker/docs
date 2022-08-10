@@ -7,7 +7,7 @@ title: Isolate containers with a user namespace
 Linux namespaces provide isolation for running processes, limiting their access
 to system resources without the running process being aware of the limitations.
 For more information on Linux namespaces, see
-[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" class="_" }.
+[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" rel="noopener" class="_" }.
 
 The best way to prevent privilege-escalation attacks from within a container is
 to configure your container's applications to run as unprivileged users. For
@@ -53,7 +53,7 @@ purpose.
 > ranges, in this case. This step is covered in [Prerequisites](#prerequisites).
 {: .warning-vanila }
 
-It is very important that the ranges not overlap, so that a process cannot gain
+It is very important that the ranges do not overlap, so that a process cannot gain
 access in a different namespace. On most Linux distributions, system utilities
 manage the ranges for you when you add or remove users.
 
@@ -76,7 +76,7 @@ avoid these situations.
 
     To verify this, use the `id` command:
 
-    ```bash
+    ```console
     $ id testuser
 
     uid=1001(testuser) gid=1001(testuser) groups=1001(testuser)
@@ -135,7 +135,7 @@ procedure to configure the daemon using the `daemon.json` configuration file.
 The `daemon.json` method is recommended. If you use the flag, use the following
 command as a model:
 
-```bash
+```console
 $ dockerd --userns-remap="testuser:testuser"
 ```
 
@@ -168,7 +168,7 @@ $ dockerd --userns-remap="testuser:testuser"
 2.  If you are using the `dockremap` user, verify that Docker created it using
     the `id` command.
 
-    ```bash
+    ```console
     $ id dockremap
 
     uid=112(dockremap) gid=116(dockremap) groups=116(dockremap)
@@ -176,7 +176,7 @@ $ dockerd --userns-remap="testuser:testuser"
 
     Verify that the entry has been added to `/etc/subuid` and `/etc/subgid`:
 
-    ```bash
+    ```console
     $ grep dockremap /etc/subuid
 
     dockremap:231072:65536
@@ -196,16 +196,16 @@ $ dockerd --userns-remap="testuser:testuser"
 
 4.  Start a container from the `hello-world` image.
 
-    ```bash
+    ```console
     $ docker run hello-world
     ```
 
-4.  Verify that a namespaced directory exists within `/var/lib/docker/` named
+5.  Verify that a namespaced directory exists within `/var/lib/docker/` named
     with the UID and GID of the namespaced user, owned by that UID and GID,
     and not group-or-world-readable. Some of the subdirectories are still
     owned by `root` and have different permissions.
 
-    ```bash
+    ```console
     $ sudo ls -ld /var/lib/docker/231072.231072/
 
     drwx------ 11 231072 231072 11 Jun 21 21:19 /var/lib/docker/231072.231072/
@@ -245,7 +245,7 @@ for some of these limitations.
 To disable user namespaces for a specific container, add the `--userns=host`
 flag to the `docker container create`, `docker container run`, or `docker container exec` command.
 
-There is a side effect when using this flag: user remapping will not be enabled for that container but, because the read-only (image) layers are shared between containers, ownership of the the containers filesystem will still be remapped.
+There is a side effect when using this flag: user remapping will not be enabled for that container but, because the read-only (image) layers are shared between containers, ownership of the containers filesystem will still be remapped.
 
 What this means is that the whole container filesystem will belong to the user specified in the `--userns-remap` daemon config (`231072` in the example above). This can lead to unexpected behavior of programs inside the container. For instance `sudo` (which checks that its binaries belong to user `0`) or binaries with a `setuid` flag.
 

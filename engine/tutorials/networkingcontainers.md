@@ -33,11 +33,11 @@ The network named `bridge` is a special network. Unless you tell it otherwise, D
 
     74695c9cea6d9810718fddadc01a727a5dd3ce6a69d09752239736c030599741
 
-<p style="text-align:center;"><img src="bridge1.png" alt="bridge1"></p>
+![bridge1](bridge1.png)
 
 Inspecting the network is an easy way to find out the container's IP address.
 
-```bash
+```console
 $ docker network inspect bridge
 
 [
@@ -211,4 +211,4 @@ The `ping` shows it is contacting a different IP address, the address on the `my
 
 ## Next steps
 
-Now that you know how to network containers, see [how to manage data in containers](dockervolumes.md).
+Now that you know how to network containers, see [how to manage data in containers](../../storage/volumes.md).

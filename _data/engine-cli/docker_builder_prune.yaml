@@ -9,7 +9,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Remove all unused images, not just dangling ones
+  description: Remove all unused build cache, not just dangling ones
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
   swarm: false
 - option: filter
   value_type: filter
-  description: Provide filter values (e.g. 'unused-for=24h')
+  description: Provide filter values (e.g. 'until=24h')
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -1,96 +1,46 @@
 /*
-*
-* layout
-*
-*/
-
-/*
-*
-* branding *********************************************************************
-*
-*/
+ * branding ********************************************************************
+ */
 
 .logo {
     margin: 12px 10px 0 10px;
     width: 160px;
+    display: none;
+
+    @include lg-width {
+        display: initial;
+    }
+}
+.logo-mobile {
+    a {
+        float: left;
+
+        img {
+            margin: 12px 15px;
+            height: 30px;
+        }
+    }
+
+    @include lg-width {
+        display: none;
+    }
 }
 
 /*
-*
-* Header ***********************************************************************
-*
-*/
+ * Header **********************************************************************
+ */
 
 .header {
-    background: $bg-secondary;
-    // animation: gradientswitch 80s infinite;
-    // -webkit-animation: gradientswitch 80s infinite;
-    height: $global-header-height;
+    background-color: $bg-header;
     position: relative;
     z-index: 1;
     transition: all 0.1s ease;
+    border: unset;
+    border-radius: unset;
+    height: unset;
 }
 
-// @keyframes gradientswitch {
-//     0% {
-//         background: #0087C9;
-//     }
-//     16% {
-//         background: #EF4A53;
-//     }
-//     32% {
-//         background: #FFB463;
-//     }
-//     49% {
-//         background: #33D5D4;
-//     }
-//     65% {
-//         background: #254356;
-//     }
-//     81% {
-//         background: #5B4097
-//     }
-//     100% {
-//         background: #0087C9
-//     }
-// }
-
-// @-webkit-keyframes gradientswitch {
-//     0% {
-//         background: #0087C9;
-//     }
-//     16% {
-//         background: #EF4A53;
-//     }
-//     32% {
-//         background: #FFB463;
-//     }
-//     49% {
-//         background: #33D5D4;
-//     }
-//     65% {
-//         background: #254356;
-//     }
-//     81% {
-//         background: #5B4097
-//     }
-//     100% {
-//         background: #0087C9
-//     }
-// }
-
-// .fan {
-//     // background: linear-gradient(-120deg, rgba(245, 33, 33, 0) 87%, rgba(255, 255, 255, 0.08) 15%), linear-gradient(-110deg, rgba(27, 0, 255, 0) 85%, rgba(255, 255, 255, 0.08) 15%), linear-gradient(-103deg, rgba(255, 33, 33, 0) 84%, rgba(255, 255, 255, 0.08) 15%), radial-gradient(circle, rgba(0, 135, 201, 0) 0%, rgba(0, 135, 201, 0) 100%);
-
-//     position: absolute;
-//     height: 100%;
-//     width: 100%;
-//     z-index: -1;
-// }
-
-.columns,
-.col-body {
-    display: flex;
+.columns {
     flex-direction: column;
 }
 
@@ -99,13 +49,18 @@
 }
 
 .col-body {
+    display: flex;
     flex-direction: row;
     flex: 1;
     min-height: 555px;
 }
 
 .col-content {
-    flex: 1;
+    flex:      1;
+    padding:   $top-navigation-height 20px 40px 40px;
+    max-width: 1024px;
+    min-width:  300px;
+    min-height: 500px;
 }
 
 .col-nav,
@@ -124,51 +79,28 @@
     }
 }
 
-.content {
-    padding: 80px 70px 20px 70px;
-    max-width: 1024px;
-    min-width: 300px;
-    min-height: 500px;
-}
-
-.main-content {
-    padding: 0 35px 25px 30px;
-}
-
 section.section {
     margin: 0 auto;
 }
 
-.content ul {
-    margin-top: 10px;
-}
-
 /*
-*
-* sidebar ***********************************************************************
-*
-*/
+ * sidebar *********************************************************************
+ */
 
 .wrapper.right-open #sidebar-wrapper {
-    width: 270px;                                                                                                                                                                            
+    width: 270px;
 }
 
 .wrapper.right-open .page-content {
     padding-right: 190px;
 }
 
-/*
-* Sidebar
-*/
-
 .col-nav,
 .col-toc {
     min-height: 100vh;
 }
 
-.col-nav,
-.col-toc,
-.sidebar {
+.col-nav {
     background-color: $bg-sidebar;
 }
 
@@ -177,25 +109,16 @@ section.section {
 }
 
 .sidebar {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 55px;
-    overflow: auto;
-    max-height: calc(100vh - 55px);
-    padding-top: 20px;
+    position:       sticky;
+    top:            $top-navigation-height;
+    overflow:       auto;
+    max-height:     calc(100vh - #{$top-navigation-height});
     padding-bottom: 20px;
 }
-/***Swagger***/
-
-.swagger-section {
-   padding-top: 2rem;
-}   
 
 /*
-*
-* global footer  ***********************************************************************
-*
-*/
+ * global footer  **************************************************************
+ */
 
 footer {
     background: $white;
@@ -216,7 +139,6 @@ footer {
             color: #637986;
             font-size: 12px;
             line-height: 16px;
-            text-decoration: none;
         }
     }
 }
@@ -253,7 +175,6 @@ footer {
 }
 
 .footer-copyright p {
-    font-family: $font;
     font-size: 12px;
     line-height: 17px;
     color: #637986;

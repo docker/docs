@@ -1,0 +1,341 @@
+$dark-blue: #002c66;
+
+body.landing {
+  background-color: $bg-body-landing;
+
+  h2, h5, h6 {
+    font-family: $headings-landing;
+  }
+
+  section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .header {
+    // Container holds both the top-navigation bar (div.navbar-header), and
+    // the "hamburger menu" (div.navbar-collapse)
+    >.container {
+      background-color: $bg-header;
+    }
+
+    @include md-width {
+      .navbar-collapse.collapse {
+        display: flex !important;
+
+        ul:first-of-type {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    @include before-lg-width {
+      .container {
+        width: unset;
+      }
+    }
+
+    a, .toggle-mode {
+      color: white;
+    }
+
+    .navbar-brand {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .navbar-toggle {
+      margin: 15px;
+      height: 20px;
+      display: block;
+
+      @include md-width {
+        display: none;
+      }
+    }
+
+    .toggle-mode {
+      margin-top: 15px;
+
+      .icon {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .hero {
+    padding-top: 20px;
+
+    h2 {
+      font-size: 32px;
+      line-height: 32px;
+      margin-bottom: 14px;
+    }
+
+    input {
+      font-size: 18px;
+      height: 50px;
+      line-height: 24px;
+      padding: 13px 20px;
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
+    #autocompleteResults {
+      left: 14px;
+      right: 14px;
+      width: unset;
+
+      @include before-lg-width {
+          padding: 0;
+      }
+    }
+  }
+
+  .card-holder {
+    padding: 7.5px;
+  }
+
+  .video-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 6.5px;
+    margin-bottom: 6.5px;
+
+    .video-image {
+      margin-right: 13px;
+    }
+
+    .video-title {
+      flex: 1;
+    }
+  }
+
+  %icon-card {
+    background-image:  none;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-size:   auto 35px;
+
+    @include sm-width { background-size: auto 40px; min-height: 220px; }
+    @include md-width { background-size: auto 50px }
+    @include lg-width { background-size: auto 60px }
+
+    .title {
+      margin-top: 0;
+      margin-left: 60px;
+      @include sm-width { margin-left: 0; margin-top: 60px }
+      @include md-width { margin-left: 0; margin-top: 72px }
+      @include lg-width { margin-left: 0; margin-top: 90px }
+    }
+
+    p {
+      margin-left: 60px;
+      @include sm-width { margin-left: 0 }
+    }
+  }
+
+  $icons: rocket, download-docker, guides, language-guides, whats-new, manuals, reference;
+
+  .card {
+    color: $body-text;
+    background-color: $bg-card;
+    box-shadow: 0 3px 6px rgba(11, 33, 74, 0.09),
+      0 -2px 2px rgba(11, 33, 74, 0.03);
+    padding: 24px 36px;
+    min-height: 100px;
+
+    @include sm-width {
+      min-height: 185px;
+    }
+
+    @each $icon in $icons {
+      &.#{$icon} {
+        @extend %icon-card;
+        background-image: url("/images/#{$icon}.svg");
+      }
+    }
+
+    .title {
+      font-size: 16px;
+      line-height: 16px;
+      margin: 10px 0;
+
+      @include sm-width {
+        font-size: 18px;
+        line-height: 18px;
+        margin: 6px 0;
+      }
+
+      @include md-width {
+        font-size: 20px;
+        line-height: 20px;
+        margin: 6px 0;
+      }
+
+      @include lg-width {
+        font-size: 22px;
+        line-height: 22px;
+        margin: 8px 0;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 19px;
+    }
+  }
+
+  a.card {
+    display: block;
+    transition: transform 150ms ease-in-out;
+
+    &:hover {
+      opacity: 1;
+      transform: scale(1.01);
+    }
+
+    &[target=_blank] {
+      background-image:    url(/images/arrow.svg);
+      background-position: top 10px right 10px;
+      background-repeat:   no-repeat;
+      background-size:     15px 15px;
+    }
+  }
+
+  .cardlet {
+    background-color: $white-25;
+    padding: 24px 36px;
+
+    .title {
+      font-family: "Open Sans", sans-serif;
+      line-height: 22px;
+      font-size: 22px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  section.cta-banner {
+    background-color: $dark-blue;
+    padding:          65px 0;
+
+    h2, h5, p {
+      color: white;
+    }
+
+    text-align: center;
+
+    @include md-width {
+      text-align: left;
+    }
+
+    img {
+      margin-bottom: 10px;
+      max-height:    190px;
+    }
+
+    h2 {
+      font-size:   32px;
+      line-height: 37px;;
+    }
+
+    a.btn {
+      background:  #FF3F73;
+      color:       white;
+      font-size:   17px;
+      margin-top:  20px;
+      padding:     15px 30px;
+
+      img {
+        margin: 0;
+      }
+
+      &.slack-button {
+        background:  white;
+        color:       $dark-blue;
+        padding:     2px 25px 2px 10px;
+      }
+    }
+  }
+
+  .help-by-product {
+    .title {
+      font-family: "Open Sans", sans-serif;
+      font-size: 22px;
+    }
+
+    ul.nav.nav-tabs li a, h5, h6 {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+    }
+
+    ul.nav.nav-tabs {
+      margin-bottom: 30px;
+
+      li a {
+        cursor: pointer;
+        padding: 10px 3px;
+        @include sm-width { padding: 10px 15px; }
+      }
+
+      li.active a {
+        background-color: inherit;
+        border: none;
+        border-bottom: 5px solid $dark-blue;
+      }
+    }
+
+    .row[data-tab] {
+      display: none;
+
+      &[data-os] .only-win,
+      &[data-os] .only-mac {
+        display: none;
+      }
+
+      &[data-os="win"] .only-win,
+      &[data-os="mac"] .only-mac {
+        display: initial;
+      }
+
+      &[data-os="win"] p.only-win,
+      &[data-os="mac"] p.only-mac {
+        display: block;
+      }
+
+      &.active {
+        display: block;
+      }
+
+      .image {
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-top: 15px;
+        width: 130px;
+        height: 130px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  footer {
+    background-color: $bg-footer-landing;
+    margin-top: 130px;
+
+    a, p {
+      color: white;
+    }
+  }
+}

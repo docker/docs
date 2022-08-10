@@ -2,6 +2,7 @@
 description: How to create base images
 keywords: images, base image, examples
 redirect_from:
+- /articles/baseimages/
 - /engine/articles/baseimages/
 - /engine/userguide/eng-image/baseimages/
 title: Create a base image
@@ -11,13 +12,13 @@ Most Dockerfiles start from a parent image. If you need to completely control
 the contents of your image, you might need to create a base image instead.
 Here's the difference:
 
-- A [parent image](/glossary.md?term=parent%20image) is the image that your
+- A [parent image](../../glossary.md#parent-image) is the image that your
   image is based on. It refers to the contents of the `FROM` directive in the
   Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
   image. Most Dockerfiles start from a parent image, rather than a base image.
   However, the terms are sometimes used interchangeably.
 
-- A [base image](/glossary.md?term=base%20image) has `FROM scratch` in its Dockerfile.
+- A [base image](../../glossary.md#base-image) has `FROM scratch` in its Dockerfile.
 
 This topic shows you several ways to create a base image. The specific process
 will depend heavily on the Linux distribution you want to package. We have some
@@ -34,28 +35,20 @@ use to build Ubuntu images.
 
 It can be as simple as this to create an Ubuntu parent image:
 
-    $ sudo debootstrap xenial xenial > /dev/null
-    $ sudo tar -C xenial -c . | docker import - xenial
+    $ sudo debootstrap focal focal > /dev/null
+    $ sudo tar -C focal -c . | docker import - focal
 
-    a29c15f1bf7a
+    sha256:81ec9a55a92a5618161f68ae691d092bf14d700129093158297b3d01593f4ee3
 
-    $ docker run xenial cat /etc/lsb-release
+    $ docker run focal cat /etc/lsb-release
 
     DISTRIB_ID=Ubuntu
-    DISTRIB_RELEASE=16.04
-    DISTRIB_CODENAME=xenial
-    DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
+    DISTRIB_RELEASE=20.04
+    DISTRIB_CODENAME=focal
+    DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
 
-There are more example scripts for creating parent images in the Docker
-GitHub Repo:
-
- - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static)
- - CentOS / Scientific Linux CERN (SLC) [on Debian/Ubuntu](
-   https://github.com/moby/moby/blob/master/contrib/mkimage/rinse) or
-   [on CentOS/RHEL/SLC/etc.](
-   https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh)
- - [Debian / Ubuntu](
-   https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap)
+There are more example scripts for creating parent images in [the Docker
+GitHub repository](https://github.com/docker/docker/blob/master/contrib).
 
 ## Create a simple parent image using scratch
 
@@ -69,20 +62,20 @@ run it, or tag any image with the name `scratch`. Instead, you can refer to it
 in your `Dockerfile`. For example, to create a minimal container using
 `scratch`:
 
-```Dockerfile
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM scratch
 ADD hello /
 CMD ["/hello"]
 ```
 
-Assuming you built the "hello" executable example by following the instructions
-at
-[https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/),
+Assuming you built the "hello" executable example by using the source code at
+[https://github.com/docker-library/hello-world](https://github.com/docker-library/hello-world),
 and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
 
-```bash
-docker build --tag hello .
+```console
+$ docker build --tag hello .
 ```
 
 Don't forget the `.` character at the end, which sets the build context to the
@@ -92,30 +85,29 @@ current directory.
 > you need a Linux binary, rather than a Mac or Windows binary.
 > You can use a Docker container to build it:
 >
-> ```bash
-> $ docker run --rm -it -v $PWD:/build ubuntu:16.04
+> ```console
+> $ docker run --rm -it -v $PWD:/build ubuntu:20.04
 >
 > container# apt-get update && apt-get install build-essential
 > container# cd /build
-> container# gcc -o hello -static -nostartfiles hello.c
+> container# gcc -o hello -static hello.c
 > ```
 
 To run your new image, use the `docker run` command:
 
-```bash
-docker run --rm hello
+```console
+$ docker run --rm hello
 ```
 
 This example creates the hello-world image used in the tutorials.
 If you want to test it out, you can clone
 [the image repo](https://github.com/docker-library/hello-world).
 
-
 ## More resources
 
-There are lots more resources available to help you write your `Dockerfile`.
+There are lots of resources available to help you write your `Dockerfile`.
 
-* There's a [complete guide to all the instructions](/engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
+* There's a [complete guide to all the instructions](../../engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
 written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
-* If your goal is to create a new Official Image, be sure to read up on Docker's [Official Images](/docker-hub/official_images/).
+* If your goal is to create a new Docker Official Image, read [Docker Official Images](../../docker-hub/official_images.md).

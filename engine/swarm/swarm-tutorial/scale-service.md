@@ -16,13 +16,13 @@ the service. Containers running in a service are called "tasks."
 2.  Run the following command to change the desired state of the
     service running in the swarm:
 
-    ```bash
+    ```console
     $ docker service scale <SERVICE-ID>=<NUMBER-OF-TASKS>
     ```
 
     For example:
 
-    ```bash
+    ```console
     $ docker service scale helloworld=5
 
     helloworld scaled to 5
@@ -30,7 +30,7 @@ the service. Containers running in a service are called "tasks."
 
 3.  Run `docker service ps <SERVICE-ID>` to see the updated task list:
 
-    ```bash
+    ```console
     $ docker service ps helloworld
 
     NAME                                    IMAGE   NODE      DESIRED STATE  CURRENT STATE
@@ -48,7 +48,7 @@ the service. Containers running in a service are called "tasks."
 4.  Run `docker ps` to see the containers running on the node where you're
     connected. The following example shows the tasks running on `manager1`:
 
-    ```bash
+    ```console
     $ docker ps
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES

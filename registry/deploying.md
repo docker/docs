@@ -4,6 +4,8 @@ keywords: registry, on-prem, images, tags, repository, distribution, deployment
 title: Deploy a registry server
 ---
 
+{% include registry.md %}
+
 Before you can deploy a registry, you need to install Docker on the host.
 A registry is an instance of the `registry` image, and runs within Docker.
 
@@ -18,17 +20,20 @@ If you have an air-gapped datacenter, see
 
 Use a command like the following to start the registry container:
 
-```bash
+```console
 $ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 ```
 
 The registry is now ready to use.
 
-> **Warning**: These first few examples show registry configurations that are
+> **Warning**
+>
+> These first few examples show registry configurations that are
 > only appropriate for testing. A production-ready registry must be protected by
 > TLS and should ideally use an access-control mechanism. Keep reading and then
 > continue to the [configuration guide](configuration.md) to deploy a
 > production-ready registry.
+{: .important}
 
 ## Copy an image from Docker Hub to your registry
 
@@ -40,7 +45,7 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 
 1.  Pull the `ubuntu:16.04` image from Docker Hub.
 
-    ```bash
+    ```console
     $ docker pull ubuntu:16.04
     ```
 
@@ -48,13 +53,13 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
     for the existing image. When the first part of the tag is a hostname and
     port, Docker interprets this as the location of a registry, when pushing.
 
-    ```bash
+    ```console
     $ docker tag ubuntu:16.04 localhost:5000/my-ubuntu
     ```
 
 3.  Push the image to the local registry running at `localhost:5000`:
 
-    ```bash
+    ```console
     $ docker push localhost:5000/my-ubuntu
     ```
 
@@ -62,14 +67,14 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
     images, so that you can test pulling the image from your registry. This
     does not remove the `localhost:5000/my-ubuntu` image from your registry.
 
-    ```bash
+    ```console
     $ docker image remove ubuntu:16.04
     $ docker image remove localhost:5000/my-ubuntu
     ```
 
 5.  Pull the `localhost:5000/my-ubuntu` image from your local registry.
 
-    ```bash
+    ```console
     $ docker pull localhost:5000/my-ubuntu
     ```
 
@@ -78,13 +83,13 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 To stop the registry, use the same `docker container stop` command as with any other
 container.
 
-```bash
+```console
 $ docker container stop registry
 ```
 
 To remove the container, use `docker container rm`.
 
-```bash
+```console
 $ docker container stop registry && docker container rm -v registry
 ```
 
@@ -103,7 +108,7 @@ should set it to restart automatically when Docker restarts or if it exits.
 This example uses the `--restart always` flag to set a restart policy for the
 registry.
 
-```bash
+```console
 $ docker run -d \
   -p 5000:5000 \
   --restart=always \
@@ -120,7 +125,7 @@ port settings. This example runs the registry on port 5001 and also names it
 and the second part is the port within the container. Within the container, the
 registry listens on port `5000` by default.
 
-```bash
+```console
 $ docker run -d \
   -p 5001:5000 \
   --name registry-test \
@@ -131,7 +136,7 @@ If you want to change the port the registry listens on within the container, you
 can use the environment variable `REGISTRY_HTTP_ADDR` to change it. This command
 causes the registry to listen on port 5001 within the container:
 
-```bash
+```console
 $ docker run -d \
   -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 \
   -p 5001:5001 \
@@ -144,16 +149,15 @@ $ docker run -d \
 
 ### Customize the storage location
 
-By default, your registry data is persisted as a [docker
-volume](/engine/tutorials/dockervolumes.md) on the host filesystem. If you want
-to store your registry contents at a specific location on your host filesystem,
-such as if you have an SSD or SAN mounted into a particular directory, you might
-decide to use a bind mount instead. A bind mount is more dependent on the
-filesystem layout of the Docker host, but more performant in many situations.
-The following example bind-mounts the host directory `/mnt/registry` into the
-registry container at `/var/lib/registry/`.
+By default, your registry data is persisted as a [docker volume](../storage/volumes.md)
+on the host filesystem. If you want to store your registry contents at a specific
+location on your host filesystem, such as if you have an SSD or SAN mounted into
+a particular directory, you might decide to use a bind mount instead. A bind mount
+is more dependent on the filesystem layout of the Docker host, but more performant
+in many situations. The following example bind-mounts the host directory
+`/mnt/registry` into the registry container at `/var/lib/registry/`.
 
-```bash
+```console
 $ docker run -d \
   -p 5000:5000 \
   --restart=always \
@@ -166,9 +170,9 @@ $ docker run -d \
 
 By default, the registry stores its data on the local filesystem, whether you
 use a bind mount or a volume. You can store the registry data in an Amazon S3
-bucket, Google Cloud Platform, or on another storage back-end by using [storage
-drivers](./storage-drivers/index.md). For more information, see [storage
-configuration options](./configuration.md#storage).
+bucket, Google Cloud Platform, or on another storage back-end by using
+[storage drivers](./storage-drivers/index.md). For more information, see
+[storage configuration options](./configuration.md#storage).
 
 ## Run an externally-accessible registry
 
@@ -193,7 +197,7 @@ If you have been issued an _intermediate_ certificate instead, see
 
 1.  Create a `certs` directory.
 
-    ```bash
+    ```console
     $ mkdir -p certs
     ```
 
@@ -203,7 +207,7 @@ If you have been issued an _intermediate_ certificate instead, see
 
 2.  Stop the registry if it is currently running.
 
-    ```bash
+    ```console
     $ docker container stop registry
     ```
 
@@ -212,7 +216,7 @@ If you have been issued an _intermediate_ certificate instead, see
     environment variables that tell the container where to find the `domain.crt`
     and `domain.key` file. The registry runs on port 443, the default HTTPS port.
 
-    ```bash
+    ```console
     $ docker run -d \
       --restart=always \
       --name registry \
@@ -227,11 +231,11 @@ If you have been issued an _intermediate_ certificate instead, see
 4.  Docker clients can now pull from and push to your registry using its
     external address. The following commands demonstrate this:
 
-    ```bash
+    ```console
     $ docker pull ubuntu:16.04
-    $ docker tag ubuntu:16.04 myregistrydomain.com/my-ubuntu
-    $ docker push myregistrydomain.com/my-ubuntu
-    $ docker pull myregistrydomain.com/my-ubuntu
+    $ docker tag ubuntu:16.04 myregistry.domain.com/my-ubuntu
+    $ docker push myregistry.domain.com/my-ubuntu
+    $ docker pull myregistry.domain.com/my-ubuntu
     ```
 
 #### Use an intermediate certificate
@@ -240,7 +244,7 @@ A certificate issuer may supply you with an *intermediate* certificate. In this
 case, you must concatenate your certificate with the intermediate certificate to
 form a *certificate bundle*. You can do this using the `cat` command:
 
-```bash
+```console
 cat domain.crt intermediate-certificates.pem > certs/domain.crt
 ```
 
@@ -259,18 +263,17 @@ and the relevant section of the
 
 It is possible to use a self-signed certificate, or to use our registry
 insecurely. Unless you have set up verification for your self-signed
-certificate, this is for testing only. See [run an insecure
-registry](insecure.md).
+certificate, this is for testing only. See [run an insecure registry](insecure.md).
 
 ## Run the registry as a service
 
-[Swarm services](/engine/swarm/services.md) provide several advantages over
+[Swarm services](../engine/swarm/services.md) provide several advantages over
 standalone containers. They use a declarative model, which means that you define
 the desired state and Docker works to keep your service in that state. Services
 provide automatic load balancing scaling, and the ability to control the
 distribution of your service, among other advantages. Services also allow you to
 store sensitive data such as TLS certificates in
-[secrets](/engine/swarm/secrets.md).
+[secrets](../engine/swarm/secrets.md).
 
 The storage back-end you use determines whether you use a fully scaled service
 or a service with either only a single node or a node constraint.
@@ -291,7 +294,7 @@ TLS certificates as in the previous examples.
 
 First, save the TLS certificate and key as secrets:
 
-```bash
+```console
 $ docker secret create domain.crt certs/domain.crt
 
 $ docker secret create domain.key certs/domain.key
@@ -301,7 +304,7 @@ Next, add a label to the node where you want to run the registry.
 To get the node's name, use `docker node ls`. Substitute your node's name for
 `node1` below.
 
-```bash
+```console
 $ docker node update --label-add registry=true node1
 ```
 
@@ -315,7 +318,7 @@ running the following `docker service create` command.
 
 By default, secrets are mounted into a service at `/run/secrets/<secret-name>`.
 
-```bash
+```console
 $ docker service create \
   --name registry \
   --secret domain.crt \
@@ -398,29 +401,35 @@ secrets.
 > **Warning**:
 > You **cannot** use authentication with authentication schemes that send
 > credentials as clear text. You must
-> [configure TLS first](deploying.md#running-a-domain-registry) for
+> [configure TLS first](deploying.md#run-an-externally-accessible-registry) for
 > authentication to work.
 {:.warning}
 
 1.  Create a password file with one entry for the user `testuser`, with password
     `testpassword`:
 
-    ```bash
+    ```console
     $ mkdir auth
     $ docker run \
       --entrypoint htpasswd \
-      registry:2 -Bbn testuser testpassword > auth/htpasswd
+      httpd:2 -Bbn testuser testpassword > auth/htpasswd
+    ```
+    
+    On Windows, make sure the output file is correctly encoded:
+
+    ```powershell
+    docker run --rm --entrypoint htpasswd httpd:2 -Bbn testuser testpassword | Set-Content -Encoding ASCII auth/htpasswd
     ```
 
 2.  Stop the registry.
 
-    ```bash
+    ```console
     $ docker container stop registry
     ```
 
 3.  Start the registry with basic authentication.
 
-    ```bash
+    ```console
     $ docker run -d \
       -p 5000:5000 \
       --restart=always \
@@ -440,7 +449,7 @@ secrets.
 
 5.  Log in to the registry.
 
-    ```bash
+    ```console
     $ docker login myregistrydomain.com:5000
     ```
 
@@ -499,7 +508,7 @@ directories.
 Start your registry by issuing the following command in the directory containing
 the `docker-compose.yml` file:
 
-```bash
+```console
 $ docker-compose up -d
 ```
 
@@ -520,8 +529,8 @@ following:
   pushed, but are always fetched from their authorized location. This is fine
   for internet-connected hosts, but not in an air-gapped set-up.
 
-  In Docker 17.06 and higher, you can configure the Docker daemon to allow
-  pushing non-distributable layers to private registries, in this scenario.
+  You can configure the Docker daemon to allow pushing non-distributable layers 
+  to private registries.
   **This is only useful in air-gapped set-ups in the presence of
   non-distributable images, or in extremely bandwidth-limited situations.**
   You are responsible for ensuring that you are in compliance with the terms of
@@ -562,6 +571,6 @@ More specific and advanced information is available in the following sections:
  - [Configuration reference](configuration.md)
  - [Working with notifications](notifications.md)
  - [Advanced "recipes"](recipes/index.md)
- - [Registry API](/registry/spec/api.md)
+ - [Registry API](spec/api.md)
  - [Storage driver model](storage-drivers/index.md)
  - [Token authentication](spec/auth/token.md)

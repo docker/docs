@@ -26,7 +26,7 @@ node and launches replica tasks on a node with `ACTIVE` availability.
 
 2.  Verify that all your nodes are actively available.
 
-    ```bash
+    ```console
     $ docker node ls
 
     ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
@@ -35,10 +35,10 @@ node and launches replica tasks on a node with `ACTIVE` availability.
     e216jshn25ckzbvmwlnh5jr3g *  manager1  Ready   Active        Leader
     ```
 
-3.  If you aren't still running the `redis` service from the [rolling
-update](rolling-update.md) tutorial, start it now:
+3.  If you aren't still running the `redis` service from the
+    [rolling update](rolling-update.md) tutorial, start it now:
 
-    ```bash
+    ```console
     $ docker service create --replicas 3 --name redis --update-delay 10s redis:3.0.6
 
     c5uo6kdmzpon37mgj9mwglcfw
@@ -47,7 +47,7 @@ update](rolling-update.md) tutorial, start it now:
 4.  Run `docker service ps redis` to see how the swarm manager assigned the
 tasks to different nodes:
 
-    ```bash
+    ```console
     $ docker service ps redis
 
     NAME                               IMAGE        NODE     DESIRED STATE  CURRENT STATE
@@ -62,15 +62,15 @@ tasks to different nodes:
 5.  Run `docker node update --availability drain <NODE-ID>` to drain a node that
 had a task assigned to it:
 
-    ```bash
-    docker node update --availability drain worker1
+    ```console
+    $ docker node update --availability drain worker1
 
     worker1
     ```
 
 6.  Inspect the node to check its availability:
 
-    ```bash
+    ```console
     $ docker node inspect --pretty worker1
 
     ID:			38ciaotwjuritcdtn9npbnkuz
@@ -86,7 +86,7 @@ had a task assigned to it:
 7.  Run `docker service ps redis` to see how the swarm manager updated the
 task assignments for the `redis` service:
 
-    ```bash
+    ```console
     $ docker service ps redis
 
     NAME                                    IMAGE        NODE      DESIRED STATE  CURRENT STATE           ERROR
@@ -103,7 +103,7 @@ task assignments for the `redis` service:
 8.  Run  `docker node update --availability active <NODE-ID>` to return the
 drained node to an active state:
 
-    ```bash
+    ```console
     $ docker node update --availability active worker1
 
     worker1
@@ -111,7 +111,7 @@ drained node to an active state:
 
 9.  Inspect the node to see the updated state:
 
-    ```bash
+    ```console
     $ docker node inspect --pretty worker1
 
     ID:			38ciaotwjuritcdtn9npbnkuz
@@ -131,4 +131,4 @@ drained node to an active state:
 
 ## What's next?
 
-Learn how to [use a swarm mode routing mesh](/engine/swarm/ingress.md).
+Learn how to [use a swarm mode routing mesh](../ingress.md).

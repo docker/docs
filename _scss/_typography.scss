@@ -1,8 +1,6 @@
 /*
-*
-* Fonts  ***********************************************************************
-*
-*/
+ * Fonts  **********************************************************************
+ */
 
 @font-face {
     font-family: 'Geomanist Book';
@@ -10,18 +8,44 @@
     src: url("../fonts/geomanist/hinted-Geomanist-Book.eot?#iefix") format("embedded-opentype"), url("../fonts/geomanist/hinted-Geomanist-Book.woff2") format("woff2"), url("../fonts/geomanist/hinted-Geomanist-Book.woff") format("woff"), url("../fonts/geomanist/hinted-Geomanist-Book.ttf") format("truetype"), url("../fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Book") format("svg");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+@font-face {
+    font-family: 'Geomanist Regular';
+    src: url("../fonts/geomanist/hinted-Geomanist-Regular.eot");
+    src: url("../fonts/geomanist/hinted-Geomanist-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/geomanist/hinted-Geomanist-Regular.woff2") format("woff2"), url("../fonts/geomanist/hinted-Geomanist-Regular.woff") format("woff"), url("../fonts/geomanist/hinted-Geomanist-Regular.ttf") format("truetype"), url("../fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Regular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+ * inlining the style from https://fonts.googleapis.com/css?family=Open+Sans&display=swap
+ *
+ * We're only including the "latin" glyphs. While including @font-faces for more
+ * glyphs would not cause the fonts to be loaded, it would make the stylesheet
+ * itself larger, and we don't need those glyhps for our purpose as the website
+ * is written in US-English; https://stackoverflow.com/a/14897846/1811501
+ */
+
+/* latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+h1,h2,h3,h4,h5,h6 {
     font-family: $headings;
-    color: $body-text-color;
     clear: both;
     line-height: 26px;
+    margin-top:  30px;
+    margin-bottom: 0;
+    font-weight: 600;
 }
 
 h1 {
@@ -39,8 +63,7 @@ h3 {
 }
 
 h4 {
-    font-size: 16px;
-    text-transform: uppercase;
+    font-size: 18px;
 }
 
 h5 {
@@ -52,20 +75,10 @@ h6 {
     font-size: 14px;
 }
 
-p {
-    color: $body-text-color;
-    font-family: $font;
-    font-size: $body-text-size;
-    line-height: 24px;
-    margin: 10px 0 10px 0;
-}
-
-ul {
-    li {
-        font-size: 14px;
-    }
-}
-
 dd, dt {
     line-height: 25px;
+}
+
+ol, ul {
+  padding-left: 25px;
 }

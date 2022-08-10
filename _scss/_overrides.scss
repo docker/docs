@@ -1,48 +1,19 @@
 /*
-*
-* Bootstrap Overrides ***********************************************************************
-*
-*/
+ * Bootstrap Overrides *********************************************************
+ */
 
-.nav-secondary-tabs .dropdown-btn {
-    background: transparent;
-    color: #fff;
-    padding: 5px 11px 0px 0px;
-    margin-top: 7px;
-    border: 0;
-    font-size: 12px;
-    font-weight: 600;
-}
-.nav-secondary .dropdown-btn {
-    background: transparent;
-    color: #b4d4e4;
-    padding: 5px 11px 0px 0px;
-    margin-top: 7px;
-    border: 0;
-    font-size: 12px;
-    font-weight: 600;
-}
 .navbar-toggle {
     padding: 0;
     margin: 0;
-}
 
-@media (max-width: 767px) {
-    .navbar-nav .open .dropdown-menu .dropdown-header,
-    .navbar-nav .open .dropdown-menu>li>a {
-        padding: 5px 15px 5px 25px;
-        color: #fff;
-        text-align: center;
+    .icon-bar {
+      background-color: #fff !important;
     }
 }
 
 .navbar-collapse,
 .navbar-form {
     border-color: transparent;
-}
-
-.navbar-toggle .icon-bar {
-    background-color: #fff !important;
 }
 
 .nav>li>a:focus,
@@ -58,6 +29,27 @@
     display: block;
 }
 
+.btn {
+  font-weight: bold;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 10px 15px 6px;
+  font-family: $buttons;
+}
+.btn-primary {
+  background-color: $marine-50;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    opacity: 0.8;
+
+    // override default bootstrap behaviour
+    background-color: $marine-50;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
 .btn-default:hover {
     color: #fff!important;
     background-color: transparent!important;
@@ -68,8 +60,6 @@
 
 .btn-group.open .dropdown-toggle {
     -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-    background: trr;
     background: transparent;
     color: #fff;
     box-shadow: none;
@@ -82,7 +72,7 @@
 .open>.dropdown-toggle.btn-default:hover {
     color: #fff!important;
     background-color: transparent!important;
-    border-color: none!important;
+    border-color: transparent !important;
     box-shadow: none!important
 }
 
@@ -90,27 +80,24 @@
 .nav .open>a:focus,
 .nav .open>a:hover {
     background-color: transparent;
-    border-color: #337ab7;
+    border-color: $primary-links;
 }
 
 .dropdown-menu>li>a:focus,
 .dropdown-menu>li>a:hover {
     color: #ffffff;
-    text-decoration: none;
     background-color: #0c5176;
 }
 
 /*
-*
-* Bootstrap expand/collapse accordions
-*
-*/
+ * Bootstrap expand/collapse accordions ****************************************
+ */
 
-.panel-heading .chevron:after {
+.panel-heading .chevron::after {
     content: "\f0d8";
 }
 
-.panel-heading.collapsed .chevron:after {
+.panel-heading.collapsed .chevron::after {
     content: "\f0d7";
 }
 
@@ -118,12 +105,9 @@
     background-color: #fafdfe;
 }
 
-
 /*
-*
-* override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-*
-*/
+ * override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ */
 .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
     color: #27343B!important;
     line-height: 23px!important;
@@ -153,15 +137,8 @@ a.gs-title {
     background: transparent;
 }
 
-img.with-border {
-  border: 1px solid #eaeaea;
-}
-
-.cse input.gsc-search-button:focus,
-input.gsc-search-button:focus {
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
-  -webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
-  -moz-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+  display: none!important;
 }
 
 .cse .gsc-search-button input.gsc-search-button-v2,

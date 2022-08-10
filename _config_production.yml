@@ -1,0 +1,70 @@
+##
+# This file overrides options set in _config.yml for production / deploy
+##
+
+# Override the exclusion list to include files that are excluded in "development",
+# such as the "enterprise" stubs, which are in place to facilitate redirects
+# to Mirantis.
+exclude:
+  - _releaser
+  - _scripts
+  - docker-bake.hcl
+  - LICENSE
+  - Makefile
+  - README.md
+
+# Google Analytics, etc.
+google_analytics: GTM-WL2QLG5
+polldaddy_id:     8453675
+
+# Assets
+#
+# For production/deploy, we build css with the "compressed" format, to produce
+# smaller files.
+sass:
+  style: compressed
+
+collections:
+  samples:
+    output: true
+
+# Set default options / metadata for some paths.
+#
+# Setting options here prevents having to repeat the same option in front-matter
+# on every page.
+#
+# The list below is used for *production* deploys, and overrides the one defined
+# in "_config.yml", which is used for local builds and pull-request previews.
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: docs
+      toc_min: 2
+      toc_max: 4
+
+  # Hide Enterprise content from sitemap. These directories still contains stubs
+  # that are needed to redirect old URLs
+  - scope:
+      path: "datacenter"
+    values:
+      sitemap: false
+      title: Docker Enterprise moved to Mirantis
+  - scope:
+      path: "desktop/enterprise"
+    values:
+      sitemap: false
+  - scope:
+      path: "ee"
+    values:
+      sitemap: false
+      title: Docker Enterprise moved to Mirantis
+  - scope:
+      path: "machine"
+    values:
+      sitemap: false
+  - scope:
+      path: "samples/library"
+    values:
+      sitemap: false

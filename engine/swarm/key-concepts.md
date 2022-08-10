@@ -16,7 +16,7 @@ directly within Docker.
 
 A swarm consists of multiple Docker hosts which run in **swarm mode** and act as
 managers (to manage membership and delegation) and workers (which run
-[swarm services](key-concepts.md#services-and-tasks)). A given Docker host can
+[swarm services](#services-and-tasks)). A given Docker host can
 be a manager, a worker, or perform both roles. When you create a service, you
 define its optimal state (number of replicas, network and storage resources
 available to it, ports the service exposes to the outside world, and more).
@@ -38,9 +38,8 @@ that only swarm managers can manage a swarm, while standalone containers can be
 started on any daemon. Docker daemons can participate in a swarm as managers,
 workers, or both.
 
-In the same way that you can use [Docker Compose](/compose/) to define and run
-containers, you can define and run swarm service
-[stacks](/get-started/part5.md).
+In the same way that you can use [Docker Compose](../../compose/index.md) to define and run
+containers, you can define and run [Swarm service](services.md) stacks.
 
 Keep reading for details about concepts relating to Docker swarm services,
 including nodes, services, tasks, and load balancing.
@@ -107,5 +106,6 @@ distribute requests among services within the cluster based upon the DNS name of
 the service.
 
 ## What's next?
-* Read the [swarm mode overview](index.md).
-* Get started with the [swarm mode tutorial](swarm-tutorial/index.md).
+
+* Read the [Swarm mode overview](index.md).
+* Get started with the [Swarm mode tutorial](swarm-tutorial/index.md).

@@ -8,7 +8,7 @@ title: Engine tutorials
 
 # Learn by example
 
-* [Network containers](/engine/tutorials/networkingcontainers.md)
-* [Manage data in containers](/engine/tutorials/dockervolumes.md)
-* [Samples](/samples/)
-* [Get Started](/get-started/)
+* [Network containers](networkingcontainers.md)
+* [Manage data in containers](../../storage/volumes.md)
+* [Samples](../../samples/index.md)
+* [Get Started](../../get-started/index.md)

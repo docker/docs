@@ -56,17 +56,17 @@ offers a high-level tool with several powerful functionalities:
  uploads and downloads, similar to `git pull`, so new versions of a container
  can be transferred by only sending diffs.
 
- - *Component re-use.* Any container can be used as a [*"parent image"*](/glossary.md?term=image) to
+ - *Component re-use.* Any container can be used as a [*parent image*](../glossary.md#parent-image) to
 create more specialized components. This can be done manually or as part of an
 automated build. For example you can prepare the ideal Python environment, and
 use it as a base for 10 different applications. Your ideal PostgreSQL setup can
 be re-used for all your future projects. And so on.
 
  - *Sharing.* Docker has access to a public registry [on Docker
-Hub](https://hub.docker.com/){: target="_blank" class="_"} where thousands of
+Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} where thousands of
 people have uploaded useful images: anything from Redis, CouchDB, PostgreSQL to
 IRC bouncers to Rails app servers to Hadoop to base images for various Linux
-distros. The [*registry*](/registry/) also includes an official "standard
+distros. The [*registry*](../registry/index.md) also includes an official "standard
 library" of useful containers maintained by the Docker team. The registry itself
 is open-source, so anyone can deploy their own registry to store and transfer
 private containers, for internal server deployments for example.
@@ -83,7 +83,7 @@ private containers, for internal server deployments for example.
 ### What is different between a Docker container and a VM?
 
 There's a great StackOverflow answer [showing the differences](
-http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" class="_"}.
+https://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine){: target="_blank" rel="noopener" class="_"}.
 
 ### Do I lose my data when the container exits?
 
@@ -100,37 +100,15 @@ thousands or even millions of containers.
 
 ### How do I connect Docker containers?
 
-Currently the recommended way to connect containers is via the Docker network feature. You can see details of how to [work with Docker networks here](userguide/networking/work-with-networks.md).
+Currently the recommended way to connect containers is via the Docker network
+feature. You can see details of [how to work with Docker networks](../network/bridge.md).
 
 ### How do I run more than one process in a Docker container?
 
 This approach is discouraged for most use cases. For maximum efficiency and
 isolation, each container should address one specific area of concern. However,
 if you need to run multiple services within a single container, see
-[Run multiple services in a container](admin/multi-service_container.md).
-
-### What platforms does Docker run on?
-
-Linux:
-
- - Any distribution running version 3.10+ of the Linux kernel
- - Specific instructions are available for most Linux distributions, including
-   [RHEL](installation/linux/rhel.md), [Ubuntu](installation/linux/ubuntulinux.md),
-   [Oracle Linux](installation/linux/oracle.md),
-   [SuSE](installation/linux/suse.md), and many others.
-
-Microsoft Windows:
-
- - Windows Server 2016
- - Windows 10
-
-Cloud:
-
- - Amazon EC2
- - Google Compute Engine
- - Microsoft Azure
- - Rackspace
- - Oracle Cloud Infrastructure
+[Run multiple services in a container](../config/containers/multi-service_container.md).
 
 ### How do I report a security issue with Docker?
 
@@ -141,12 +119,12 @@ You can learn about the project's security policy
 ### Why do I need to sign my commits to Docker with the DCO?
 
 Read [our blog post](
-http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" class="_"} on the introduction of the DCO.
+https://www.docker.com/blog/docker-code-contributions-require-developer-certificate-of-origin/){: target="_blank" rel="noopener" class="_"} on the introduction of the DCO.
 
 ### When building an image, should I prefer system libraries or bundled ones?
 
 *This is a summary of a discussion on the [docker-dev mailing list](
-https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" class="_"}.*
+https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0){: target="_blank" rel="noopener" class="_"}.*
 
 Virtually all programs depend on third-party libraries. Most frequently, they
 use dynamic linking and some kind of package dependency, so that when
@@ -163,9 +141,9 @@ The key point about system libraries is not about saving disk or memory space.
 It is about security. All major distributions handle security seriously, by
 having dedicated security teams, following up closely with published
 vulnerabilities, and disclosing advisories themselves. (Look at the [Debian
-Security Information](https://www.debian.org/security/){: target="_blank"
-class="_"} for an example of those procedures.) Upstream developers, however, do
-not always implement similar practices.
+Security Information](https://www.debian.org/security/){: target="_blank" rel="noopener" class="_"}
+for an example of those procedures.) Upstream developers, however, do not always
+implement similar practices.
 
 Before setting up a Docker image to compile a program from source, if you want
 to use bundled libraries, you should check if the upstream authors provide a
@@ -177,8 +155,7 @@ Likewise, before using packages built by others, you should check if the
 channels providing those packages implement similar security best practices.
 Downloading and installing an "all-in-one" .deb or .rpm sounds great at first,
 except if you have no way to figure out that it contains a copy of the OpenSSL
-library vulnerable to the [Heartbleed](http://heartbleed.com/){: target="_blank"
-class="_"} bug.
+library vulnerable to the [Heartbleed](https://heartbleed.com){: target="_blank" rel="noopener" class="_"} bug.
 
 ### Why is `DEBIAN_FRONTEND=noninteractive` discouraged in Dockerfiles?
 
@@ -208,7 +185,7 @@ Because of this, and because setting `DEBIAN_FRONTEND` to `noninteractive` is
 mainly a 'cosmetic' change, we *discourage* changing it.
 
 If you *really* need to change its setting, make sure to change it back to its
-[default value](https://www.debian.org/releases/stable/i386/ch05s03.html.en){: target="_blank" class="_"}
+[default value](https://www.debian.org/releases/stable/amd64/ch05s03.en.html#installer-args){: target="_blank" rel="noopener" class="_"}
 afterwards.
 
 ### Why do I get `Connection reset by peer` when making a request to a service running in a container?
@@ -245,11 +222,8 @@ You need to tell Docker to talk to that machine. You can do this with the
 
 You can find more answers on:
 
-- [Docker user mailinglist](https://groups.google.com/d/forum/docker-user){: target="_blank" class="_"}
-- [Docker developer mailinglist](https://groups.google.com/d/forum/docker-dev){: target="_blank" class="_"}
-- [IRC, docker on freenode](irc://chat.freenode.net#docker)
-- [GitHub](https://github.com/moby/moby){: target="_blank" class="_"}
-- [Ask questions on Stackoverflow](http://stackoverflow.com/search?q=docker){: target="_blank" class="_"}
-- [Join the conversation on Twitter](http://twitter.com/docker){: target="_blank" class="_"}
-
-Looking for something else to read? Checkout the [User Guide](userguide/index.md).
+- [Docker community Slack channel](https://dockr.ly/slack){: target="_blank" rel="noopener" class="_"}
+- [Docker Support Forums](https://forums.docker.com){: target="_blank" rel="noopener" class="_"}
+- [GitHub](https://github.com/moby/moby){: target="_blank" rel="noopener" class="_"}
+- [Ask questions on Stackoverflow](https://stackoverflow.com/search?q=docker){: target="_blank" rel="noopener" class="_"}
+- [Join the conversation on Twitter](https://twitter.com/docker){: target="_blank" rel="noopener" class="_"}

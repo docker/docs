@@ -46,7 +46,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker system prune
 
   WARNING! This will remove:
@@ -76,7 +76,7 @@ examples: |-
   deleted if there is currently no container using the volume. Use the `--volumes`
   flag when running the command to prune volumes as well:
 
-  ```bash
+  ```console
   $ docker system prune -a --volumes
 
   WARNING! This will remove:
@@ -116,13 +116,6 @@ examples: |-
 
   Total reclaimed space: 13.5 MB
   ```
-
-  > **Note**: The `--volumes` option was added in Docker 17.06.1. Older versions
-  > of Docker prune volumes by default, along with other Docker objects. On older
-  > versions, run `docker container prune`, `docker network prune`, and
-  > `docker image prune` separately to remove unused containers, networks, and
-  > images, without removing volumes.
-
 
   ### Filtering
 

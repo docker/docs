@@ -1,13 +1,33 @@
 command: docker stats
 short: Display a live stream of container(s) resource usage statistics
 long: |-
-  The `docker stats` command returns a live data stream for running containers. To limit data to one or more specific containers, specify a list of container names or ids separated by a space. You can specify a stopped container but stopped containers do not return any data.
+  The `docker stats` command returns a live data stream for running containers. To
+  limit data to one or more specific containers, specify a list of container names
+  or ids separated by a space. You can specify a stopped container but stopped
+  containers do not return any data.
 
-  If you want more detailed information about a container's resource usage, use the `/containers/(id)/stats` API endpoint.
+  If you need more detailed information about a container's resource usage, use
+  the `/containers/(id)/stats` API endpoint.
 
-  > **Note**: On Linux, the Docker CLI reports memory usage by subtracting page cache usage from the total memory usage. The API does not perform such a calculation but rather provides the total memory usage and the amount from the page cache so that clients can use the data as needed.
+  > **Note**
+  >
+  > On Linux, the Docker CLI reports memory usage by subtracting cache usage from
+  > the total memory usage. The API does not perform such a calculation but rather
+  > provides the total memory usage and the amount from the cache so that clients
+  > can use the data as needed. The cache usage is defined as the value of
+  > `total_inactive_file` field in the `memory.stat` file on cgroup v1 hosts.
+  >
+  > On Docker 19.03 and older, the cache usage was defined as the value of `cache`
+  > field. On cgroup v2 hosts, the cache usage is defined as the value of
+  > `inactive_file` field.
 
-  > **Note**: The `PIDS` column contains the number of processes and kernel threads created by that container. Threads is the term used by Linux kernel. Other equivalent terms are "lightweight process" or "kernel task", etc. A large number in the `PIDS` column combined with a small number of processes (as reported by `ps` or `top`) may indicate that something in the container is creating many threads.
+  > **Note**
+  >
+  > The `PIDS` column contains the number of processes and kernel threads created
+  > by that container. Threads is the term used by Linux kernel. Other equivalent
+  > terms are "lightweight process" or "kernel task", etc. A large number in the
+  > `PIDS` column combined with a small number of processes (as reported by `ps`
+  > or `top`) may indicate that something in the container is creating many threads.
 usage: docker stats [OPTIONS] [CONTAINER...]
 pname: docker
 plink: docker.yaml
@@ -51,7 +71,7 @@ options:
 examples: |-
   Running `docker stats` on all running containers against a Linux daemon.
 
-  ```bash
+  ```console
   $ docker stats
 
   CONTAINER ID        NAME                                    CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
@@ -75,7 +95,7 @@ examples: |-
 
   Running `docker stats` on multiple containers by name and id against a Linux daemon.
 
-  ```bash
+  ```console
   $ docker stats awesome_brattain 67b2525d8ad1
 
   CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
@@ -83,9 +103,16 @@ examples: |-
   67b2525d8ad1        foobar              0.00%               1.727MiB / 1.952GiB   0.09%               2.48kB / 0B         4.11MB / 0B         2
   ```
 
+  Running `docker stats` on container with name nginx and getting output in `json` format.
+
+  ```console
+  $ docker stats nginx --no-stream --format "{{ json . }}"
+  {"BlockIO":"0B / 13.3kB","CPUPerc":"0.03%","Container":"nginx","ID":"ed37317fbf42","MemPerc":"0.24%","MemUsage":"2.352MiB / 982.5MiB","Name":"nginx","NetIO":"539kB / 606kB","PIDs":"2"}
+  ```
+
   Running `docker stats` with customized format on all (Running and Stopped) containers.
 
-  ```bash
+  ```console
   $ docker stats --all --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" fervent_panini 5acfcb1b4fd1 drunk_visvesvaraya big_heisenberg
 
   CONTAINER                CPU %               MEM USAGE / LIMIT
@@ -129,27 +156,26 @@ examples: |-
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder  | Description
-  ------------ | --------------------------------------------
-  `.Container` | Container name or ID (user input)
-  `.Name`      | Container name
-  `.ID`        | Container ID
-  `.CPUPerc`   | CPU percentage
-  `.MemUsage`  | Memory usage
-  `.NetIO`     | Network IO
-  `.BlockIO`   | Block IO
-  `.MemPerc`   | Memory percentage (Not available on Windows)
-  `.PIDs`      | Number of PIDs (Not available on Windows)
-
+  | Placeholder  | Description                                  |
+  |--------------|----------------------------------------------|
+  | `.Container` | Container name or ID (user input)            |
+  | `.Name`      | Container name                               |
+  | `.ID`        | Container ID                                 |
+  | `.CPUPerc`   | CPU percentage                               |
+  | `.MemUsage`  | Memory usage                                 |
+  | `.NetIO`     | Network IO                                   |
+  | `.BlockIO`   | Block IO                                     |
+  | `.MemPerc`   | Memory percentage (Not available on Windows) |
+  | `.PIDs`      | Number of PIDs (Not available on Windows)    |
 
   When using the `--format` option, the `stats` command either
   outputs the data exactly as the template declares or, when using the
   `table` directive, includes column headers as well.
 
   The following example uses a template without headers and outputs the
-  `Container` and `CPUPerc` entries separated by a colon for all images:
+  `Container` and `CPUPerc` entries separated by a colon (`:`) for all images:
 
-  ```bash
+  ```console
   $ docker stats --format "{{.Container}}: {{.CPUPerc}}"
 
   09d3bb5b1604: 6.61%
@@ -160,7 +186,7 @@ examples: |-
   To list all containers statistics with their name, CPU percentage and memory
   usage in a table format you can use:
 
-  ```bash
+  ```console
   $ docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 
   CONTAINER           CPU %               PRIV WORKING SET
@@ -178,10 +204,6 @@ examples: |-
   On Windows:
 
       "table {{.ID}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}"
-
-
-  > **Note**: On Docker 17.09 and older, the `{{.Container}}` column was used,
-  > instead of `{{.ID}}\t{{.Name}}`.
 deprecated: false
 experimental: false
 experimentalcli: false

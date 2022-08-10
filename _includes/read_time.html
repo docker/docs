@@ -1,9 +1,6 @@
-<span class="reading-time" title="Estimated reading time">
-  <span class="reading-time-label">Estimated reading time: </span>
-  {% assign words = content | number_of_words %}
-  {% if words < 360 %}
-    1 minute
-  {% else %}
-    {{ words | divided_by:180 }} minutes
-  {% endif %}
-</span>
+{%- unless page.skip_read_time == true -%}
+{%- assign words = content | number_of_words -%}
+{%- if words >= 360 -%}
+<em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes</em>
+{%- endif -%}
+{%- endunless -%}

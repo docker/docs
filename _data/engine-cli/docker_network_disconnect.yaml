@@ -18,8 +18,8 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
-    $ docker network disconnect multi-host-network container1
+  ```console
+  $ docker network disconnect multi-host-network container1
   ```
 deprecated: false
 min_api_version: "1.21"

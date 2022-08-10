@@ -36,7 +36,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only show numeric IDs
+  description: Only show image IDs
   deprecated: false
   experimental: false
   experimentalcli: false

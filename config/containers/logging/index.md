@@ -20,15 +20,14 @@ may include input from the keyboard or input from another command. `STDOUT` is
 usually a command's normal output, and `STDERR` is typically used to output
 error messages. By default, `docker logs` shows the command's `STDOUT` and
 `STDERR`. To read more about I/O and Linux, see the
-[Linux Documentation Project article on I/O redirection](http://www.tldp.org/LDP/abs/html/io-redirection.html).
+[Linux Documentation Project article on I/O redirection](https://tldp.org/LDP/abs/html/io-redirection.html).
 
 In some cases, `docker logs` may not show useful information unless you take
 additional steps.
 
 - If you use a [logging driver](configure.md) which sends logs to a file, an
-  external host, a database, or another logging back-end, `docker logs` may not
-  show useful information.
-
+  external host, a database, or another logging back-end, and have ["dual logging"](dual-logging.md)
+  disabled, `docker logs` may not show useful information.
 - If your image runs a non-interactive process such as a web server or a
   database, that application may send its output to log files instead of `STDOUT`
   and `STDERR`.
@@ -51,4 +50,4 @@ its errors to `/proc/self/fd/2` (which is `STDERR`). See the
 ## Next steps
 
 - Configure [logging drivers](configure.md).
-- Write a [Dockerfile](/engine/reference/builder.md).
+- Write a [Dockerfile](../../../engine/reference/builder.md).

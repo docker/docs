@@ -2,8 +2,9 @@
 description: Measure the behavior of running containers
 keywords: docker, metrics, CPU, memory, disk, IO, run, runtime, stats
 redirect_from:
-- /engine/articles/run_metrics
-- /engine/articles/runmetrics
+- /articles/runmetrics/
+- /engine/articles/run_metrics/
+- /engine/articles/runmetrics/
 - /engine/admin/runmetrics/
 title: Runtime metrics
 ---
@@ -16,7 +17,7 @@ and network IO metrics.
 
 The following is a sample output from the `docker stats` command
 
-```bash
+```console
 $ docker stats redis1 redis2
 
 CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O
@@ -24,7 +25,7 @@ redis1              0.07%               796 KB / 64 MB        1.21%             
 redis2              0.07%               2.746 MB / 64 MB      4.29%               1.266 KB / 648 B    12.4 MB / 0 B
 ```
 
-The [docker stats](/engine/reference/commandline/stats.md) reference page has
+The [docker stats](../../engine/reference/commandline/stats.md) reference page has
 more details about the `docker stats` command.
 
 ## Control groups
@@ -49,12 +50,24 @@ corresponding to existing containers.
 
 To figure out where your control groups are mounted, you can run:
 
-```bash
+```console
 $ grep cgroup /proc/mounts
 ```
 
 ### Enumerate cgroups
 
+The file layout of cgroups is significantly different between v1 and v2.
+
+If `/sys/fs/cgroup/cgroup.controllers` is present on your system, you are using v2,
+otherwise you are using v1.
+Refer to the subsection that corresponds to your cgroup version.
+
+cgroup v2 is used by default on the following distributions:
+- Fedora (since 31)
+- Debian GNU/Linux (since 11)
+- Ubuntu (since 21.10)
+
+#### cgroup v1
 You can look into `/proc/cgroups` to see the different control group subsystems
 known to the system, the hierarchy they belong to, and how many groups they contain.
 
@@ -63,6 +76,41 @@ belongs to. The control group is shown as a path relative to the root of
 the hierarchy mountpoint. `/` means the process has not been assigned to a
 group, while `/lxc/pumpkin` indicates that the process is a member of a
 container named `pumpkin`.
+
+#### cgroup v2
+
+On cgroup v2 hosts, the content of `/proc/cgroups` isn't meaningful.
+See `/sys/fs/cgroup/cgroup.controllers` to the available controllers.
+
+### Changing cgroup version
+
+Changing cgroup version requires rebooting the entire system.
+
+On systemd-based systems, cgroup v2 can be enabled by adding `systemd.unified_cgroup_hierarchy=1`
+to the kernel cmdline.
+To revert the cgroup version to v1, you need to set `systemd.unified_cgroup_hierarchy=0` instead.
+
+If `grubby` command is available on your system (e.g. on Fedora), the cmdline can be modified as follows:
+
+```console
+$ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=1"
+```
+
+If `grubby` command is not available, edit the `GRUB_CMDLINE_LINUX` line in `/etc/default/grub`
+and run `sudo update-grub`.
+
+### Running Docker on cgroup v2
+
+Docker supports cgroup v2 since Docker 20.10.
+Running Docker on cgroup v2 also requires the following conditions to be satisfied:
+* containerd: v1.4 or later
+* runc: v1.0.0-rc91 or later
+* Kernel: v4.15 or later (v5.2 or later is recommended)
+
+Note that the cgroup v2 mode behaves slightly different from the cgroup v1 mode:
+* The default cgroup driver (`dockerd --exec-opt native.cgroupdriver`) is "systemd" on v2, "cgroupfs" on v1.
+* The default cgroup namespace mode (`docker run --cgroupns`) is "private" on v2, "host" on v1.
+* The `docker run` flags `--oom-kill-disable` and `--kernel-memory` are discarded on v2.
 
 ### Find the cgroup for a given container
 
@@ -78,9 +126,18 @@ in `docker ps`, its long ID might be something like
 look it up with `docker inspect` or `docker ps --no-trunc`.
 
 Putting everything together to look at the memory metrics for a Docker
-container, take a look at `/sys/fs/cgroup/memory/docker/<longid>/`.
+container, take a look at the following paths:
+- `/sys/fs/cgroup/memory/docker/<longid>/` on cgroup v1, `cgroupfs` driver
+- `/sys/fs/cgroup/memory/system.slice/docker-<longid>.scope/` on cgroup v1, `systemd` driver
+- `/sys/fs/cgroup/docker/<longid/>` on cgroup v2, `cgroupfs` driver
+- `/sys/fs/cgroup/system.slice/docker-<longid>.scope/` on cgroup v2, `systemd` driver
 
 ### Metrics from cgroups: memory, CPU, block I/O
+
+> **Note**
+>
+> This section is not yet updated for cgroup v2.
+> For further information about cgroup v2, refer to [the kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html).
 
 For each subsystem (memory, CPU, and block I/O), one or
 more pseudo-files exist and contain statistics.
@@ -143,7 +200,7 @@ Metric                                | Description
 **cache**                             | The amount of memory used by the processes of this control group that can be associated precisely with a block on a block device. When you read from and write to files on disk, this amount increases. This is the case if you use "conventional" I/O (`open`, `read`, `write` syscalls) as well as mapped files (with `mmap`). It also accounts for the memory used by `tmpfs` mounts, though the reasons are unclear.
 **rss**                               | The amount of memory that *doesn't* correspond to anything on disk: stacks, heaps, and anonymous memory maps.
 **mapped_file**                       | Indicates the amount of memory mapped by the processes in the control group. It doesn't give you information about *how much* memory is used; it rather tells you *how* it is used.
-**pgfault**, **pgmajfault**           | Indicate the number of times that a process of the cgroup triggered a "page fault" and a "major fault", respectively. A page fault happens when a process accesses a part of its virtual memory space which is nonexistent or protected. The former can happen if the process is buggy and tries to access an invalid address (it is sent a `SIGSEGV` signal, typically killing it with the famous `Segmentation fault` message). The latter can happen when the process reads from a memory zone which has been swapped out, or which corresponds to a mapped file: in that case, the kernel loads the page from disk, and let the CPU complete the memory access. It can also happen when the process writes to a copy-on-write memory zone: likewise, the kernel preempts the process, duplicate the memory page, and resume the write operation on the process` own copy of the page. "Major" faults happen when the kernel actually needs to read the data from disk. When it just  duplicates an existing page, or allocate an empty page, it's a regular (or "minor") fault.
+**pgfault**, **pgmajfault**           | Indicate the number of times that a process of the cgroup triggered a "page fault" and a "major fault", respectively. A page fault happens when a process accesses a part of its virtual memory space which is nonexistent or protected. The former can happen if the process is buggy and tries to access an invalid address (it is sent a `SIGSEGV` signal, typically killing it with the famous `Segmentation fault` message). The latter can happen when the process reads from a memory zone which has been swapped out, or which corresponds to a mapped file: in that case, the kernel loads the page from disk, and let the CPU complete the memory access. It can also happen when the process writes to a copy-on-write memory zone: likewise, the kernel preempts the process, duplicate the memory page, and resume the write operation on the process's own copy of the page. "Major" faults happen when the kernel actually needs to read the data from disk. When it just  duplicates an existing page, or allocate an empty page, it's a regular (or "minor") fault.
 **swap**                              | The amount of swap currently used by the processes in this cgroup.
 **active_anon**, **inactive_anon**    | The amount of *anonymous* memory that has been identified has respectively *active* and *inactive* by the kernel. "Anonymous" memory is the memory that is *not* linked to disk pages. In other words, that's the equivalent of the rss counter described above. In fact, the very definition of the rss counter is **active_anon** + **inactive_anon** - **tmpfs** (where tmpfs is the amount of memory used up by `tmpfs` filesystems mounted by this control group). Now, what's the difference between "active" and "inactive"? Pages are initially "active"; and at regular intervals, the kernel sweeps over the memory, and tags some pages as "inactive". Whenever they are accessed again, they are immediately retagged "active". When the kernel is almost out of memory, and time comes to swap out to disk, the kernel swaps "inactive" pages.
 **active_file**, **inactive_file**    | Cache memory, with *active* and *inactive* similar to the *anon* memory above. The exact formula is **cache** = **active_file** + **inactive_file** + **tmpfs**. The exact rules used by the kernel to move memory pages between active and inactive sets are different from the ones used for anonymous memory, but the general principle is the same. When the kernel needs to reclaim memory, it is cheaper to reclaim a clean (=non modified) page from this pool, since it can be reclaimed immediately (while anonymous pages and dirty/modified pages need to be written to disk first).
@@ -177,7 +234,7 @@ Those times are expressed in ticks of 1/100th of a second, also called "user
 jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 `USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
 "ticks" per second, but higher frequency scheduling and
-[tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
+[tickless kernels](https://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
 
 #### Block I/O metrics
@@ -222,7 +279,7 @@ an interface) can do some serious accounting.
 For instance, you can setup a rule to account for the outbound HTTP
 traffic on a web server:
 
-```bash
+```console
 $ iptables -I OUTPUT -p tcp --sport 80
 ```
 
@@ -232,7 +289,7 @@ rule.
 
 Later, you can check the values of the counters, with:
 
-```bash
+```console
 $ iptables -nxvL OUTPUT
 ```
 
@@ -274,13 +331,13 @@ Containers can interact with their sub-containers, though.
 
 The exact format of the command is:
 
-```bash
+```console
 $ ip netns exec <nsname> <command...>
 ```
 
 For example:
 
-```bash
+```console
 $ ip netns exec mycontainer netstat -i
 ```
 
@@ -312,7 +369,7 @@ cgroup (and thus, in the container). Pick any one of the PIDs.
 Putting everything together, if the "short ID" of a container is held in
 the environment variable `$CID`, then you can do this:
 
-```bash
+```console
 $ TASKS=/sys/fs/cgroup/devices/docker/$CID*/tasks
 $ PID=$(head -n 1 $TASKS)
 $ mkdir -p /var/run/netns

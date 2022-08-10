@@ -4,15 +4,12 @@ keywords: docker, documentation, about, technology, understanding,  release
 title: Docker release notes
 ---
 
-Find out what's new in Docker! Release notes also contain detailed information about known issues and fixes for each component. 
+Find out what's new in Docker! Release notes contain information about new
+features, improvements, known issues, and bug fixes in each release. You can
+find release notes for each component in the Manuals section. We suggest
+that you regularly visit the release notes to learn about updates.
 
-- [Docker Engine](/engine/release-notes)
-- [Docker Desktop Enterprise](/ee/desktop/release-notes/)
-- [Docker Desktop for Mac](/docker-for-mac/release-notes.md) 
-- [Docker Desktop for Mac Edge Releases](/docker-for-mac/edge-release-notes.md)
-- [Docker Desktop for Windows](/docker-for-windows/release-notes.md) 
-- [Docker Desktop for Windows Edge Releases](/docker-for-windows/edge-release-notes.md)
-- [Docker for AWS](/docker-for-aws/release-notes.md)
-- [Docker Compose](docker-compose.md)
-- [Docker Machine](docker-machine.md)
-- [Docker Swarm (standalone)](docker-swarm.md)
+- [Docker Engine](../engine/release-notes/index.md)
+- [Docker Desktop](../desktop/release-notes.md)
+- [Docker Hub](../docker-hub/release-notes.md)
+- [Docker Compose](../compose/release-notes.md)

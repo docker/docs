@@ -2,7 +2,12 @@ command: docker events
 short: Get real time events from the server
 long: |-
   Use `docker events` to get real-time events from the server. These events differ
-  per Docker object type.
+  per Docker object type. Different event types have different scopes. Local
+  scoped events are only seen on the node they take place on, and swarm scoped
+  events are seen on all managers.
+
+  Only the last 1000 log events are returned. You can use filters to further limit
+  the number of events returned.
 
   ### Object types
 
@@ -131,6 +136,9 @@ long: |-
   seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
   fraction of a second no more than nine digits long.
 
+  Only the last 1000 log events are returned. You can use filters to further limit
+  the number of events returned.
+
   #### Filtering
 
   The filtering flag (`-f` or `--filter`) format is of "key=value". If you would
@@ -166,11 +174,11 @@ long: |-
 
   If a format (`--format`) is specified, the given template will be executed
   instead of the default
-  format. Go's [text/template](http://golang.org/pkg/text/template/) package
+  format. Go's [text/template](https://golang.org/pkg/text/template/) package
   describes all the details of the format.
 
   If a format is set to `{{json .}}`, the events are streamed as valid JSON
-  Lines. For information about JSON Lines, please refer to http://jsonlines.org/ .
+  Lines. For information about JSON Lines, please refer to https://jsonlines.org/.
 usage: docker events [OPTIONS]
 pname: docker
 plink: docker.yaml
@@ -215,13 +223,13 @@ examples: |-
 
   **Shell 1: Listening for events:**
 
-  ```bash
+  ```console
   $ docker events
   ```
 
   **Shell 2: Start and Stop containers:**
 
-  ```bash
+  ```console
   $ docker create --name test alpine:latest top
   $ docker start test
   $ docker stop test
@@ -229,7 +237,7 @@ examples: |-
 
   **Shell 1: (Again .. now showing events):**
 
-  ```none
+  ```console
   2017-01-05T00:35:58.859401177+08:00 container create 0fdb48addc82871eb34eb23a847cfd033dedd1a0a37bef2e6d9eb3870fc7ff37 (image=alpine:latest, name=test)
   2017-01-05T00:36:04.703631903+08:00 network connect e2e1f5ceda09d4300f3a846f0acfaa9a8bb0d89e775eb744c5acecd60e0529e2 (container=0fdb...ff37, name=bridge, type=bridge)
   2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
@@ -246,7 +254,7 @@ examples: |-
   You can filter the output by an absolute timestamp or relative time on the host
   machine, using the following different time syntaxes:
 
-  ```bash
+  ```console
   $ docker events --since 1483283804
   2017-01-05T00:35:41.241772953+08:00 volume create testVol (driver=local)
   2017-01-05T00:35:58.859401177+08:00 container create d9cd...4d70 (image=alpine:latest, name=test)
@@ -299,7 +307,7 @@ examples: |-
   The following commands show several different ways to filter the `docker event`
   output.
 
-  ```bash
+  ```console
   $ docker events --filter 'event=stop'
 
   2017-01-05T00:40:22.880175420+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
@@ -395,7 +403,7 @@ examples: |-
 
   ### Format the output
 
-  ```bash
+  ```console
   $ docker events --filter 'type=container' --format 'Type={{.Type}}  Status={{.Status}}  ID={{.ID}}'
 
   Type=container  Status=create  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
@@ -408,14 +416,14 @@ examples: |-
 
   #### Format as JSON
 
-  ```none
-      $ docker events --format '{{json .}}'
+  ```console
+  $ docker events --format '{{json .}}'
 
-      {"status":"create","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
-      {"status":"attach","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
-      {"Type":"network","Action":"connect","Actor":{"ID":"1b50a5bf755f6021dfa78e..
-      {"status":"start","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f42..
-      {"status":"resize","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+  {"status":"create","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+  {"status":"attach","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+  {"Type":"network","Action":"connect","Actor":{"ID":"1b50a5bf755f6021dfa78e..
+  {"status":"start","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f42..
+  {"status":"resize","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
   ```
 deprecated: false
 experimental: false

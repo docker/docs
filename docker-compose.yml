@@ -1,11 +1,17 @@
-version: "2"
 services:
   docs:
+    # By default, docker compose up --build builds docs for a development
+    # environment (no Google Analytics, omitting some enterprise redirects,
+    # etc.)
+    #
+    # To test a "production" build, override the environment using:
+    #
+    # JEKYLL_ENV=production docker compose up --build
     build:
+      args:
+        - JEKYLL_ENV
+        - DOCS_URL
       context: .
-      dockerfile: Dockerfile
     image: docs/docstage
     ports:
      - "4000:4000"
-    volumes:
-     - "./:/usr/src/app"

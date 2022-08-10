@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<!-- Page generated {{ site.time }} -->
+<html lang="en">
+{%- include head.html -%}
+<body id="landing" class="landing">
+  <nav class="navbar header">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-content" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <img src="/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="header-content">
+        <ul class="nav navbar-nav">
+        {%- for entry in site.data.toc.horizontalnav -%}
+          {%- if entry.hide_home -%}{% continue %}{%- endif -%}
+          <li{% if entry.node == "home" %} class=active{% endif %}><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
+        {%- endfor -%}
+          <li><a href="https://www.docker.com/blog/">Articles</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>{% include theme-switch.html %}</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero container">
+    <div class="row justify-content-center">
+      <div class="col-xs-12 text-center">
+        <h2>What can we help you find?</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <form action="/search/" method="get" class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        <label class="sr-only" for="st-search-input">Search</label>
+        <input
+          id="st-search-input"
+          class="form-control"
+          name="q"
+          placeholder="Search for guides, terms, commands and more..."
+          type="search"
+          autocomplete="off"
+          spellcheck="false"
+          dir="auto"
+          autofocus
+        />
+        <div id="autocompleteResults"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
+        <a class="card rocket" href="/get-started/">
+          <h5 class="title">Get started</h5>
+          <p>
+            Learn Docker basics and the benefits of containerizing your
+            applications.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
+        <a class="card download-docker" href="/get-docker/">
+          <h5 class="title">Download and install</h5>
+          <p>
+            Download and install Docker on your machine in a few easy steps.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
+        <a class="card guides" href="/get-started/overview/">
+          <h5 class="title">Guides</h5>
+          <p>
+            Learn how to set up your Docker environment and start containerizing
+            your applications.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
+        <a class="card language-guides" href="/language/">
+          <h5 class="title">Language-specific guides</h5>
+          <p>
+            Learn how to containerize language-specific applications using Docker.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
+        <a class="card manuals" href="/desktop/">
+          <h5 class="title">Manuals</h5>
+          <p>
+            Browse through the manuals and learn how to use Docker products.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
+        <a class="card reference" href="/reference/">
+          <h5 class="title">Reference</h5>
+          <p>
+            Browse through the CLI and API reference documentation.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 card-holder">
+        <div class="cardlet container-fluid" style="min-height:307px">
+          <div class="row">
+            <div class="col-xs-12 col-lg-8">
+              <h5 class="title">How do I?</h5>
+              <p>
+                Check out the following topics to learn how to build, run, and
+                deploy your applications using Docker.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6"><a href="/language/">Containerize language-specific apps using Docker</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/engine/reference/builder/">Write a Dockerfile</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/network/">Manage container networking</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/compose/compose-file/">Write a Docker Compose file</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/storage/">Work with volumes and bind mounts</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/get-started/04_sharing_app/">Share my image on Docker Hub</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/config/daemon/">Configure the Docker daemon</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/get-started/02_our_app/">Build and run an image</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/config/labels-custom-metadata/">Manage Docker objects</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/develop/develop-images/multistage-build/">Use multi-stage builds</a></div>
+            <div class="col-xs-12 col-md-6"><a href="/get-started/swarm-deploy/">Scale apps using Swarm</a></div>
+          </div>
+        </div>
+      </div>
+      {% include landing-page/popular-videos.html %}
+    </div>
+  </section>
+
+  {% include landing-page/extensions-banner.html %}
+
+  <section class="container help-by-product">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="cardlet container-fluid">
+          <div class="row">
+            <div class="col-xs-12">
+              <h5 class="title">Help by product</h5>
+            </div>
+            <div class="col-xs-12">
+              <ul class="nav nav-tabs">
+                <li class="active" role="presentation" data-tab="desktop">
+                  <a onclick="onChangeHelpTab('desktop')">Desktop</a>
+                </li>
+                <li role="presentation" data-tab="hub">
+                  <a onclick="onChangeHelpTab('hub')">Hub</a>
+                </li>
+                <li role="presentation" data-tab="engine">
+                    <a onclick="onChangeHelpTab('engine')">Engine</a>
+                </li>
+                <li role="presentation" data-tab="compose">
+                  <a onclick="onChangeHelpTab('compose')">Compose</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- DESKTOP -->
+          <div class="row active" data-tab="desktop" data-os="win">
+            <div class="col-xs-12 col-md-4 col-lg-2 text-center">
+              <div class="image" style="background-image: url(/images/laptop.svg);"></div>
+              <h5>Docker Desktop</h5>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="os-label only-win">Windows</span>
+                  <span class="os-label only-mac">Mac</span>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a onclick="onChangeHelpOs('win')">Windows</a></li>
+                  <li><a onclick="onChangeHelpOs('mac')">Mac</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Getting Started with Docker</h6>
+              <p>
+                Take a walkthrough that covers writing your first app, data
+                storage, networking, and swarms, and ends with your app running
+                on production servers in the cloud.
+              </p>
+              <p>
+                <a href="/get-started/">Learn Docker</a>
+              </p>
+              <h6>FAQs</h6>
+              <p class="only-win">
+                <a href="/desktop/faqs/windowsfaqs/#can-i-install-docker-desktop-on-windows-10-home">
+                  Can I install Docker Desktop on Windows 10 Home?
+                </a>
+              </p>
+              <p class="only-win">
+                <a href="/desktop/install/windows-install/#system-requirements">
+                  What are the system requirements for Docker Desktop?
+                </a>
+              </p>
+              <p class="only-win">
+                <a href="/desktop/faqs/general">
+                  How do I connect from a container to a service?
+                </a>
+              </p>
+              <p class="only-mac">
+                <a href="/desktop/install/mac-install/#system-requirements">
+                  What are the system requirements for Docker Desktop?
+                </a>
+              </p>
+              <p class="only-mac">
+                <a href="/desktop/faqs/general/">
+                  How do I connect to a container from Mac?
+                </a>
+              </p>
+              <p class="only-mac">
+                <a href="/desktop/faqs/general/">
+                  View all
+                </a>
+              </p>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Popular articles</h6>
+              <p class="only-win"><a href="/desktop/windows/wsl/">Docker Desktop WSL 2 backend</a></p>
+              <p class="only-mac"><a href="/desktop/install/mac-install/">Install Docker Desktop on Mac</a></p>
+              <p><a href="/desktop/dashboard/">Docker Desktop Dashboard</a></p>
+              <p class="only-win"><a href="/desktop/kubernetes/">Deploy on Kubernetes</a></p>
+              <p class="only-win"><a href="/desktop/windows/release-notes/">Release notes</a></p>
+              <p class="only-win"><a href="/desktop/windows/troubleshoot/">Logs and troubleshooting</a></p>
+              <p class="only-mac"><a href="/desktop/mac/networking/">Networking features in Docker Desktop</a></p>
+            </div>
+          </div>
+          <!-- HUB -->
+          <div class="row" data-tab="hub">
+            <div class="col-xs-12 col-md-4 col-lg-2 text-center">
+              <div class="image" style="background-image: url(/images/hub.svg);"></div>
+              <h5>Hub</h5>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Getting Started with Docker</h6>
+              <p>
+                Take a walkthrough that covers writing your first app, data
+                storage, networking, and swarms, and ends with your app running
+                on production servers in the cloud.
+              </p>
+              <p><a href="/get-started/">Learn Docker</a></p>
+
+              <h6>FAQs</h6>
+              <p><a href="/get-started/04_sharing_app/">How do I share images on Docker Hub?</a></p>
+              <p><a href="/docker-hub/orgs/#create-an-organization">How do I create an organization?</a></p>
+              <p><a href="/docker-hub/orgs/#create-a-team">How do I create a team and add team members?</a></p>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Popular articles</h6>
+              <p><a href="/docker-hub/official_images/">Docker Hub official images</a></p>
+              <p><a href="/docker-hub/repos/">Create Docker Hub repositories</a></p>
+              <p><a href="/docker-hub/builds/">Set up automated builds</a></p>
+              <p><a href="/docker-hub/access-tokens/">Manage access tokens</a></p>
+              <p><a href="/docker-hub/webhooks/">Docker Hub Webhooks</a></p>
+            </div>
+          </div>
+          <!-- ENGINE -->
+          <div class="row" data-tab="engine">
+            <div class="col-xs-12 col-md-4 col-lg-2 text-center">
+              <div class="image" style="background-image: url(/images/engine.svg);"></div>
+              <h5>Engine</h5>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Getting Started with Docker</h6>
+              <p>
+                Take a walkthrough that covers writing your first app, data
+                storage, networking, and swarms, and ends with your app running
+                on production servers in the cloud.
+              </p>
+              <p><a href="/get-started/">Learn Docker</a></p>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Popular articles</h6>
+              <p><a href="/engine/install/ubuntu/">Install Docker Engine on Ubuntu</a></p>
+              <p><a href="/engine/reference/commandline/run/">Run a command in a container</a></p>
+              <p><a href="/engine/reference/builder/">Dockerfile reference</a></p>
+              <p><a href="/engine/reference/commandline/dockerd/#description">Docker daemon reference</a></p>
+              <p><a href="/engine/reference/commandline/build/">Docker build reference</a></p>
+            </div>
+          </div>
+          <!-- COMPOSE -->
+          <div class="row" data-tab="compose">
+            <div class="col-xs-12 col-md-4 col-lg-2 text-center">
+              <div
+                class="image"
+                style="background-image: url(/images/Compose.png);"
+              ></div>
+              <h5>Compose</h5>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Getting Started with Docker</h6>
+              <p>
+                Take a walkthrough that covers writing your first app, data
+                storage, networking, and swarms, and ends with your app running
+                on production servers in the cloud.
+              </p>
+              <p><a href="/get-started/">Learn Docker</a></p>
+
+              <h6>FAQs</h6>
+              <p><a href="/compose/faq/#how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host">How do I run multiple copies of a Compose file on the same host?</a></p>
+              <p><a href="/compose/faq/#can-i-use-json-instead-of-yaml-for-my-compose-file">Can I use json instead of yaml for my Compose file?</a></p>
+              <p><a href="/compose/faq/#where-can-i-find-example-compose-files">Where can I find example Compose files?</a></p>
+              <p><a href="/compose/faq/">View all</a></p>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Popular articles</h6>
+              <p><a href="/compose/install/">Install Docker Compose</a></p>
+              <p><a href="/compose/gettingstarted/">Getting started with Docker Compose</a></p>
+              <p><a href="/compose/environment-variables/">Environment variables in Compose</a></p>
+              <p><a href="/compose/networking/">Networking in Compose</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <h2 class="title">Best practices</h2>
+              <p>
+                Take a look at our best practices and reference architecture
+                topics to fine tune your deployment.
+              </p>
+              <p><a href="/develop/develop-images/dockerfile_best-practices/">Best practices for writing Dockerfile</a></p>
+              <p><a href="/develop/develop-images/dockerfile_best-practices/">Best practices for writing a Docker Compose file</a></p>
+              <p><a href="/develop/dev-best-practices/">Docker Development best practices</a></p>
+              <p><a href="/engine/security/">Docker Security best practices</a></p>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <h2 class="title">Develop with Docker</h2>
+              <p>Learn how to develop language-specific apps using Docker.</p>
+              <p><a href="/language/nodejs/" target="_blank" rel="noopener">Containerize Node.js app using Docker</a></p>
+              <p><a href="https://github.com/docker/labs/tree/master/developer-tools/java/" target="_blank" rel="noopener">Docker for Java developers</a></p>
+              <p><a href="https://github.com/docker/labs/tree/master/developer-tools/ruby" target="_blank" rel="noopener">Ruby on Rails app on Docker</a></p>
+              <p><a href="/engine/examples/dotnetcore/">Dockerize a .Net Core application</a></p>
+              <p><a href="/compose/aspnet-mssql-compose/" target="_blank" rel="noopener">Dockerize an ASP.NET Core application with SQL Server on Linux</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="play-with-docker" class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="title">Play with Docker</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="https://www.docker.com/101-tutorial" class="card" target="_blank" rel="noopener">
+          <h5 class="title">Tutorial</h5>
+          <p>Self-paced tutorials to increase your Docker knowledge.</p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="https://labs.play-with-docker.com/" class="card" target="_blank" rel="noopener">
+          <h5 class="title">Lab Environment</h5>
+          <p>
+            Complete a workshop without installing anything using this Docker
+            playground.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="/get-started/resources/" class="card">
+          <h5 class="title">Community Training</h5>
+          <p>Free and paid learning materials from Docker Captains.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="community-resources" class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="title">Community resources</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="https://events.docker.com/chapters/" class="card" target="_blank" rel="noopener">
+          <h5 class="title">Find a local meetup</h5>
+          <p>Attend one of the 200+ Docker Meetups around the globe.</p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="https://www.docker.com/events" class="card" target="_blank" rel="noopener">
+          <h5 class="title">Upcoming Events</h5>
+          <p>
+            Complete a workshop without installing anything using this Docker
+            playground.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="https://events.docker.com/docker-virtual-meetups/" class="card" target="_blank" rel="noopener">
+          <h5 class="title">Tune in Monthly</h5>
+          <p>
+            Join the Virtual Docker Meetup Group and online meetups every month.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="https://www.docker.com/newsletter-subscription" class="card" target="_blank" rel="noopener">
+          <h5 class="title">Community news</h5>
+          <p>
+            The Docker Weekly is a email newsletter with the latest content on
+            Docker and the event agenda for the upcoming weeks.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="https://www.docker.com/docker-captains" class="card" target="_blank" rel="noopener">
+          <h5 class="title">Meet the Captains</h5>
+          <p>
+            Select members of the community that are both experts in their field
+            and are passionate about sharing their Docker knowledge with others.
+          </p>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
+        <a href="/get-started/resources/" class="card">
+          <h5 class="title">Educational resources</h5>
+          <p>
+            Expand your understanding of Docker with these additional resources.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    {% include footer.html %}
+  </footer>
+
+  <script>
+    window.onChangeHelpTab = function (name) {
+      const currentActiveTab = document.querySelector(".help-by-product ul.nav li.active");
+      if (currentActiveTab) currentActiveTab.classList.remove("active");
+      const currentActiveBody = document.querySelector(".help-by-product div.row.active[data-tab]");
+      if (currentActiveBody) currentActiveBody.classList.remove("active");
+      const nextActiveTab = document.querySelector('.help-by-product ul.nav li[data-tab="' + name + '"]');
+      if (nextActiveTab) nextActiveTab.classList.add("active");
+      const nextActiveBody = document.querySelector('.help-by-product div.row[data-tab="' + name + '"]');
+      if (nextActiveBody) nextActiveBody.classList.add("active");
+    };
+    window.onChangeHelpOs = function (os) {
+      const container = document.querySelector('div[data-tab="desktop"]');
+      if (container) container.setAttribute("data-os", os);
+    };
+  </script>
+</body>
+</html>

@@ -5,6 +5,7 @@ redirect_from:
 - /docker-cloud/tutorials/slack-integration/
 - /docker-cloud/slack-integration/
 title: Set up Docker Hub notifications in Slack
+sitemap: false
 ---
 
 Docker Hub can integrate with your **Slack** team to provide notifications about builds.
@@ -34,7 +35,7 @@ Once configured, choose a notification level:
 * **Off** Do not receive any notifications.
 * **Only failures** Only receive notifications about failed builds.
 * **Everything** Receive notifications for both failed and successful builds.
-  ![](images/slack-notification-updates.png)
+  ![slack notifications](images/slack-notification-updates.png)
 
 Enjoy your new Slack channel integration!
 
@@ -44,4 +45,4 @@ Enjoy your new Slack channel integration!
 
 * From the Slack **Notifications** section you can also change the channel that the integration posts to. Click the reload icon (two arrows) next to the Slack integration to reopen the OAuth channel selector.
 
-* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.
+* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank" rel="noopener">Slack App Management page</a> and search for "Docker Hub". Click the result to see all of the Docker Hub notification channels set for the Slack team.

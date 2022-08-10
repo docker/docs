@@ -1,0 +1,114 @@
+// This file defines two palettes. The light palette should only be used
+// in light mode, and vice versa. In general, if you use one of the colors
+// in light mode, you should the same-named color in the dark palette in
+// dark mode.
+
+// light palette contrast colors:
+// 100-400: black
+// 500-800: white
+
+$light-palette-background: #F9F9FA;
+
+$light-palette-amber-100: #FFF6E2;
+$light-palette-amber-200: #FCE1A9;
+$light-palette-amber-300: #FBB552;
+$light-palette-amber-400: #DD7805;
+$light-palette-amber-500: #B85504;
+$light-palette-amber-600: #AA4409;
+$light-palette-amber-700: #893607;
+$light-palette-amber-800: #421A02;
+$light-palette-blue-100: #E8F4FD;
+$light-palette-blue-200: #C0E0FA;
+$light-palette-blue-300: #8BC7F5;
+$light-palette-blue-400: #1C90ED;
+$light-palette-blue-500: #116ED0;
+$light-palette-blue-600: #0055BD;
+$light-palette-blue-700: #1144A6;
+$light-palette-blue-800: #00084D;
+$light-palette-green-100: #F3FAF9;
+$light-palette-green-200: #C6EAE1;
+$light-palette-green-300: #88D5C0;
+$light-palette-green-400: #3BA08D;
+$light-palette-green-500: #2E7F74;
+$light-palette-green-600: #1E6C5F;
+$light-palette-green-700: #185A51;
+$light-palette-green-800: #0C2C28;
+$light-palette-grey-100: #EAEAED;
+$light-palette-grey-200: #E1E2E6;
+$light-palette-grey-300: #C4C8D1;
+$light-palette-grey-400: #8993A5;
+$light-palette-grey-500: #677285;
+$light-palette-grey-600: #505968;
+$light-palette-grey-700: #393F49;
+$light-palette-grey-800: #17191E;
+$light-palette-red-100: #FEEFEF;
+$light-palette-red-200: #F6CFD0;
+$light-palette-red-300: #EEA3A5;
+$light-palette-red-400: #E25D68;
+$light-palette-red-500: #D52536;
+$light-palette-red-600: #B72132;
+$light-palette-red-700: #8B1924;
+$light-palette-red-800: #350A10;
+$light-palette-violet-100: #F7ECFF;
+$light-palette-violet-200: #E9D4FF;
+$light-palette-violet-300: #C9A6FF;
+$light-palette-violet-400: #9860FF;
+$light-palette-violet-500: #7D2EFF;
+$light-palette-violet-600: #6D00EB;
+$light-palette-violet-700: #5700BB;
+$light-palette-violet-800: #220041;
+
+// dark palette contrast colors:
+// 100-400: white
+// 500-800: black
+
+$dark-palette-background: #1C262D;
+
+$dark-palette-amber-100: #672805;
+$dark-palette-amber-200: #7B3606;
+$dark-palette-amber-300: #944307;
+$dark-palette-amber-400: #AF560A;
+$dark-palette-amber-500: #CD6A0A;
+$dark-palette-amber-600: #ED8D25;
+$dark-palette-amber-700: #F6A650;
+$dark-palette-amber-800: #F8B974;
+$dark-palette-blue-100: #0B1B46;
+$dark-palette-blue-200: #06326D;
+$dark-palette-blue-300: #084391;
+$dark-palette-blue-400: #1557B8;
+$dark-palette-blue-500: #116ED0;
+$dark-palette-blue-600: #3391EE;
+$dark-palette-blue-700: #55A4F1;
+$dark-palette-blue-800: #7CB9F4;
+$dark-palette-green-100: #0D342E;
+$dark-palette-green-200: #11423B;
+$dark-palette-green-300: #145348;
+$dark-palette-green-400: #1A655A;
+$dark-palette-green-500: #228375;
+$dark-palette-green-600: #2AA391;
+$dark-palette-green-700: #3CC1AD;
+$dark-palette-green-800: #7ACCC3;
+$dark-palette-grey-100: #141B1F;
+$dark-palette-grey-200: #27343E;
+$dark-palette-grey-300: #364754;
+$dark-palette-grey-400: #465C6E;
+$dark-palette-grey-500: #7794AB;
+$dark-palette-grey-600: #94ABBC;
+$dark-palette-grey-700: #ADBECB;
+$dark-palette-grey-800: #C4D0DA;
+$dark-palette-red-100: #58111B;
+$dark-palette-red-200: #741624;
+$dark-palette-red-300: #951C2F;
+$dark-palette-red-400: #BC233C;
+$dark-palette-red-500: #C32438;
+$dark-palette-red-600: #DD4659;
+$dark-palette-red-700: #E36676;
+$dark-palette-red-800: #EA8E9A;
+$dark-palette-violet-100: #341458;
+$dark-palette-violet-200: #491D7B;
+$dark-palette-violet-300: #5F25A0;
+$dark-palette-violet-400: #8032D6;
+$dark-palette-violet-500: #8A53EC;
+$dark-palette-violet-600: #A371FC;
+$dark-palette-violet-700: #B38BFC;
+$dark-palette-violet-800: #C5A6FD;

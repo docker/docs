@@ -1,8 +1,0 @@
-<div class="btn-group" style="visibility: hidden">
-  <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {% for item in site.data.docsarchive.archives %}{% if item.current == true %}Docker {{ item.name }} (current) {% endif %} {% endfor %}<span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    {% for item in site.data.docsarchive.archives %}{% if item.current != true %}<li><a href="/{{ item.name }}/">Docker {{ item.name }}</a></li>{% endif %}{% endfor %}
-  </ul>
-</div>

@@ -1,7 +1,15 @@
 command: docker stack ls
 aliases: list
 short: List stacks
-long: Lists the stacks.
+long: |-
+  Lists the stacks.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker stack ls [OPTIONS]
 pname: docker stack
 plink: docker_stack.yaml
@@ -10,7 +18,7 @@ options:
   value_type: bool
   default_value: "false"
   description: List stacks from all Kubernetes namespaces
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -27,7 +35,7 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: Kubernetes namespaces to use
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -36,7 +44,7 @@ inherited_options:
 - option: kubeconfig
   value_type: string
   description: Kubernetes config file
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -44,7 +52,7 @@ inherited_options:
 - option: orchestrator
   value_type: string
   description: Orchestrator to use (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -52,7 +60,7 @@ inherited_options:
 examples: |-
   The following command shows all stacks and some additional information:
 
-  ```bash
+  ```console
   $ docker stack ls
 
   ID                 SERVICES            ORCHESTRATOR
@@ -67,7 +75,7 @@ examples: |-
   Valid placeholders for the Go template are listed below:
 
   | Placeholder     | Description        |
-  | --------------- | ------------------ |
+  |-----------------|--------------------|
   | `.Name`         | Stack name         |
   | `.Services`     | Number of services |
   | `.Orchestrator` | Orchestrator name  |
@@ -78,9 +86,9 @@ examples: |-
   `table` directive, includes column headers as well.
 
   The following example uses a template without headers and outputs the
-  `Name` and `Services` entries separated by a colon for all stacks:
+  `Name` and `Services` entries separated by a colon (`:`) for all stacks:
 
-  ```bash
+  ```console
   $ docker stack ls --format "{{.Name}}: {{.Services}}"
   web-server: 1
   web-cache: 4

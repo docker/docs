@@ -2,7 +2,11 @@
 description: Restricting access to your registry using a nginx proxy
 keywords: registry, on-prem, images, tags, repository, distribution, nginx, proxy, authentication, TLS, recipe, advanced
 title: Authenticate proxy with nginx
+redirect_from:
+- /registry/nginx/
 ---
+
+{% include registry.md %}
 
 ## Use-case
 
@@ -40,8 +44,8 @@ proxy itself.
 
 > **Note**: Docker does not recommend binding your registry to `localhost:5000` without
 > authentication. This creates a potential loophole in your Docker Registry security.
-> As a result, anyone who can log on to the server where your Docker Registry is running 
-> can push images without authentication. 
+> As a result, anyone who can log on to the server where your Docker Registry is running
+> can push images without authentication.
 
 Furthermore, introducing an extra http layer in your communication pipeline
 makes it more complex to deploy, maintain, and debug. Make sure the extra
@@ -72,12 +76,12 @@ properly. For more information, see
 
 ## Setting things up
 
-Review the [requirements](/registry/recipes/index.md#requirements), then follow these steps.
+Review the [requirements](index.md#requirements), then follow these steps.
 
 1.  Create the required directories
 
-    ```bash
-    mkdir -p auth data
+    ```console
+    $ mkdir -p auth data
     ```
 
 2.  Create the main nginx configuration. Paste this code block into a new file called `auth/nginx.conf`:
@@ -150,7 +154,7 @@ Review the [requirements](/registry/recipes/index.md#requirements), then follow 
 
 3.  Create a password file `auth/nginx.htpasswd` for "testuser" and "testpassword".
 
-    ```bash
+    ```console
     $ docker run --rm --entrypoint htpasswd registry:2 -Bbn testuser testpassword > auth/nginx.htpasswd
     ```
 
@@ -158,7 +162,7 @@ Review the [requirements](/registry/recipes/index.md#requirements), then follow 
 
 4.  Copy your certificate files to the `auth/` directory.
 
-    ```bash
+    ```console
     $ cp domain.crt auth
     $ cp domain.key auth
     ```

@@ -4,6 +4,8 @@ keywords: registry, on-prem, images, tags, repository, distribution, macOS, reci
 title: macOS setup guide
 ---
 
+{% include registry.md %}
+
 ## Use-case
 
 This is useful if you intend to run a registry server natively on macOS.
@@ -11,8 +13,6 @@ This is useful if you intend to run a registry server natively on macOS.
 ### Alternatives
 
 You can start a VM on macOS, and deploy your registry normally as a container using Docker inside that VM.
-
-The simplest road to get there is traditionally to use the [docker Toolbox](https://www.docker.com/toolbox), or [docker-machine](/machine/index.md), which usually relies on the [boot2docker](http://boot2docker.io/) ISO inside a VirtualBox VM.
 
 ### Solution
 
@@ -52,14 +52,14 @@ If you want to understand, you should read [How to Write Go Code](https://golang
 Copy the registry configuration file in place:
 
     mkdir /Users/Shared/Registry
-    cp docs/osx/config.yml /Users/Shared/Registry/config.yml
+    cp docs/recipes/osx/config.yml /Users/Shared/Registry/config.yml
 
 ## Run the Docker Registry under launchd
 
 Copy the Docker registry plist into place:
 
-    plutil -lint registry/recipes/osx/com.docker.registry.plist
-    cp registry/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
+    plutil -lint docs/recipes/osx/com.docker.registry.plist
+    cp docs/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
     chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
 
 Start the Docker registry:

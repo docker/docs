@@ -3,10 +3,13 @@ description: Introduction and Overview of Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: Overview of Docker Compose
 redirect_from:
+ - /compose/cli-command/
+ - /compose/networking/swarm/
  - /compose/overview/
+ - /compose/swarm/
 ---
 
->**Looking for Compose file reference?** [Find the latest version here](/compose/compose-file/index.md).
+>**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a YAML file to configure your application's services.
@@ -26,25 +29,27 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Run `docker-compose up` and Compose starts and runs your entire app.
+3. Run `docker compose up` and the [Docker compose command](#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(`docker-compose` binary).
 
 A `docker-compose.yml` looks like this:
 
-    version: '3'
-    services:
-      web:
-        build: .
-        ports:
-        - 5000:5000
-        volumes:
-        - .:/code
-        - logvolume01:/var/log
-        depends_on:
-        - redis
-      redis:
-        image: redis
+```yaml
+version: "{{ site.compose_file_v3 }}"  # optional since v1.27.0
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
     volumes:
-      logvolume01: {}
+      - .:/code
+      - logvolume01:/var/log
+    depends_on:
+      - redis
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}
+```
 
 For more information about the Compose file, see the
 [Compose file reference](compose-file/index.md).
@@ -56,25 +61,55 @@ Compose has commands for managing the whole lifecycle of your application:
  * Stream the log output of running services
  * Run a one-off command on a service
 
-## Compose documentation
+## Compose V2 and the new `docker compose` command
 
-- [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
-- [Frequently asked questions](faq.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file/index.md)
+> Important
+>
+> The new Compose V2, which supports the `compose` command as part of the Docker
+> CLI, is now available.
+>
+> Compose V2 integrates compose functions into the Docker platform, continuing
+> to support most of the previous `docker-compose` features and flags. You can
+> run Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose`,
+> instead of `docker-compose`.
+{: .important}
+
+If you rely on using Docker Compose as `docker-compose` (with a hyphen), you can
+set up Compose V2 to act as a drop-in replacement of the previous `docker-compose`.
+Refer to the [Installing Compose](install/index.md) section for detailed instructions.
+
+## Context of Docker Compose evolution
+
+Introduction of the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}
+makes a clean distinction between the Compose YAML file model and the `docker-compose`
+implementation. Making this change has enabled a number of enhancements, including
+adding the `compose` command directly into the Docker CLI,  being able to "up" a
+Compose application on cloud platforms by simply switching the Docker context,
+and launching of [Amazon ECS](../cloud/ecs-integration.md) and [Microsoft ACI](../cloud/aci-integration.md).
+As the Compose specification evolves, new features land faster in the Docker CLI.
+
+Compose V2 relies directly on the compose-go bindings which are maintained as part
+of the specification. This allows us to include community proposals, experimental
+implementations by the Docker CLI and/or Engine, and deliver features faster to
+users. Compose V2 also supports some of the newer additions to the specification,
+such as [profiles](profiles.md) and [GPU](gpu-support.md) devices.
+
+Compose V2 has been re-written in [Go](https://go.dev), which improves integration
+with other Docker command-line features, and allows it to run natively on 
+[macOS on Apple silicon](../desktop/mac/apple-silicon.md), Windows, and Linux,
+without dependencies such as Python. 
+
+For more information about compatibility with the compose v1 command-line, see the [docker-compose compatibility list](cli-command-compatibility.md).
+
 
 ## Features
 
 The features of Compose that make it effective are:
 
-* [Multiple isolated environments on a single host](overview.md#Multiple-isolated-environments-on-a-single-host)
-* [Preserve volume data when containers are created](overview.md#preserve-volume-data-when-containers-are-created)
-* [Only recreate containers that have changed](overview.md#only-recreate-containers-that-have-changed)
-* [Variables and moving a composition between environments](overview.md#variables-and-moving-a-composition-between-environments)
+* [Multiple isolated environments on a single host](#multiple-isolated-environments-on-a-single-host)
+* [Preserve volume data when containers are created](#preserve-volume-data-when-containers-are-created)
+* [Only recreate containers that have changed](#only-recreate-containers-that-have-changed)
+* [Variables and moving a composition between environments](#variables-and-moving-a-composition-between-environments)
 
 ### Multiple isolated environments on a single host
 
@@ -88,12 +123,16 @@ Compose uses a project name to isolate environments from each other. You can mak
 
 The default project name is the basename of the project directory. You can set
 a custom project name by using the
-[`-p` command line option](./reference/overview.md) or the
-[`COMPOSE_PROJECT_NAME` environment variable](./reference/envvars.md#compose-project-name).
+[`-p` command line option](reference/index.md) or the
+[`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
+
+The default project directory is the base directory of the Compose file. A custom value
+for it can be defined with the `--project-directory` command line option.
+
 
 ### Preserve volume data when containers are created
 
-Compose preserves all volumes used by your services. When `docker-compose up`
+Compose preserves all volumes used by your services. When `docker compose up`
 runs, if it finds any containers from previous runs, it copies the volumes from
 the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
@@ -115,7 +154,7 @@ environment very quickly.
 
 Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.
-See [Variable substitution](compose-file.md#variable-substitution) for more
+See [Variable substitution](compose-file/compose-file-v3.md#variable-substitution) for more
 details.
 
 You can extend a Compose file using the `extends` field or by creating multiple
@@ -133,7 +172,7 @@ When you're developing software, the ability to run an application in an
 isolated environment and interact with it is crucial. The Compose command
 line tool can be used to create the environment and interact with it.
 
-The [Compose file](compose-file.md) provides a way to document and configure
+The [Compose file](compose-file/index.md) provides a way to document and configure
 all of the application's service dependencies (databases, queues, caches,
 web service APIs, etc). Using the Compose command line tool you can create
 and start one or more containers for each dependency with a single command
@@ -148,18 +187,18 @@ started guide" to a single machine readable Compose file and a few commands.
 An important part of any Continuous Deployment or Continuous Integration process
 is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
-and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file.md), you can create and destroy these environments in just a few commands:
+and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
 
-    $ docker-compose up -d
-    $ ./run_tests
-    $ docker-compose down
+```console
+$ docker compose up -d
+$ ./run_tests
+$ docker compose down
+```
 
 ### Single host deployments
 
 Compose has traditionally been focused on development and testing workflows,
-but with each release we're making progress on more production-oriented features. You can use Compose to deploy to a remote Docker Engine. The Docker Engine may be a single instance provisioned with
-[Docker Machine](/machine/overview.md) or an entire
-[Docker Swarm](/engine/swarm/index.md) cluster.
+but with each release we're making progress on more production-oriented features.
 
 For details on using production-oriented features, see
 [compose in production](production.md) in this documentation.
@@ -180,8 +219,6 @@ individuals, we have a number of open channels for communication.
 * To report bugs or file feature requests: use the [issue tracker on Github](https://github.com/docker/compose/issues).
 
 * To talk about the project with people in real time: join the
-  `#docker-compose` channel on freenode IRC.
+  `#docker-compose` channel on the Docker Community Slack.
 
 * To contribute code or documentation changes: submit a [pull request on Github](https://github.com/docker/compose/pulls).
-
-For more information and resources, visit the [Getting Help project page](/opensource/get-help/).

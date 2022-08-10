@@ -1,53 +1,57 @@
 ---
 description: Sign up for a Docker ID and log in
-keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access
+keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access, email, activation, verification
 title: Docker ID accounts
 redirect_from:
 - /docker-cloud/dockerid/
 - /docker-hub/accounts/
 ---
 
-Your free Docker ID grants you access to Docker Hub repositories, and some beta programs. All you need is an email address.
-
-This account also allows you to log in to services such as the Docker Support
-Center, the Docker Forums, and the Docker Success portal.
-
+Your free Docker ID grants you access to Docker Hub repositories and some beta programs. All you need is an email address.
 
 ## Register for a Docker ID
 
-Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the Docker Forums.
+Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the [Docker forums](https://forums.docker.com/). To create a new Docker ID:
 
 1. Go to the [Docker Hub signup page](https://hub.docker.com/signup/).
 
-2. Enter a username that is also your Docker ID.
+2. Enter a username that will become your Docker ID.
 
-    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters.
+    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. Once you create your Docker ID you cannot reuse it in the future if you deactivate this account.
 
 3. Enter a unique, valid email address.
 
-4. Enter a password between 6 and 128 characters long.
+4. Enter a password that is at least 9 characters.
 
-3. Click **Sign up**.
+5. Complete the Captcha verification and then then click **Sign up**.
 
    Docker sends a verification email to the address you provided.
 
-4. Click the link in the email to verify your address.
+6. Verify your email address to complete the registration process.
 
-> **Note**: You cannot log in with your Docker ID until you verify your email address.
-
+> **Note**
+>
+> You have limited actions available until you verify your email address.
 
 ## Log in
 
-Once you register and verify your Docker ID email address, you can log in
-to [Docker Hub](https://hub.docker.com) and [Docker Support](https://support.docker.com).
+Once you register and verify your Docker ID email address, you can log in to [Docker Hub](https://hub.docker.com).
 
-![Login](images/login2019.png)
+You can also log in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
 
-You can also log in using the `docker login` command. (You can read more about `docker login` [here](/engine/reference/commandline/login.md).)
-
-> **Warning**:
+> **Warning**
+>
 > When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64-encoded in this file.
 >
-> For extra security, you can use a [personal access token](/docker-hub/access-tokens) to log in instead, which is still encoded in this file but doesn't allow admin actions (such as changing the password). If you require secure storage for this password or personal access token, use the [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
+> We recommend using one of the [Docker credential helpers](https://github.com/docker/docker-credential-helpers) for secure storage of passwords. For extra security, you can also use a [personal access token](../docker-hub/access-tokens.md) to log in instead, which is still encoded in this file (without a Docker credential helper) but doesn't allow admin actions (such as changing the password).
 {:.warning}
+
+## Troubleshooting
+
+If you run into trouble with your Docker ID account, know that we are here to help! If you want to retrieve or reset your password, [enter your email address](https://id.docker.com/reset-password/){: target="_blank" rel="noopener" class="_"} for additional instructions.
+
+You can use the [Docker forums](https://forums.docker.com/) to ask questions amongst other Docker community members, while our [hub-feedback GitHub repository](https://github.com/docker/hub-feedback) allows you to provide feedback on how we can better improve the experience with Docker Hub.
+
+If you still need any help, [create a support ticket](https://hub.docker.com/support/contact/) and let us know how we can help you.
+

@@ -51,7 +51,7 @@ once updates this for all images published by your organization.
 
 ### Can we show customers all tags for a specific repository, the way we show all tags for official images?
 
-We don't support the abiltiy to view available tags for published products because published products usually require entitlement.
+We don't support the ability to view available tags for published products because published products usually require entitlement.
 
 Official images and community images have available tags visible because anyone can access any tag at any time anonymously.
 
@@ -85,8 +85,7 @@ In the future, we may enable product listings published with the concept of vers
 
 ### How can I remove a published product?
 
-If you would like your submission removed, let us know by contacting us at
-publisher-support@docker.com.
+If you would like to remove your submission, contact us at [publisher-support@docker.com](mailto:publisher-support@docker.com).
 
 ### Can publishers publish multi-container apps?
 
@@ -195,4 +194,4 @@ You will need to apply for access. Please either follow [this direct link](https
 
 ### What kind of DockerID should I use to publish my content?
 
-Publishing should be done with an [Organization level DockerID](https://docs.docker.com/docker-hub/orgs/). We recommend that this account utilize a shared alias with your corporate email account and only individual DockerIDs with company email are added to that organization. 
+Publishing should be done with an [Organization level DockerID](../orgs.md). We recommend that this account utilize a shared alias with your corporate email account and only individual DockerIDs with company email are added to that organization. 

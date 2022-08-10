@@ -13,26 +13,27 @@ machines.
     node. This tutorial uses a machine named `manager1`. If you use Docker Machine,
     you can connect to it via SSH using the following command:
 
-    ```bash
+    ```console
     $ docker-machine ssh manager1
     ```
 
 2.  Run the following command to create a new swarm:
 
-    ```bash
+    ```console
     $ docker swarm init --advertise-addr <MANAGER-IP>
     ```
 
-    >**Note**: If you are using Docker Desktop for Mac or Docker Desktop for Windows to test
-single-node swarm, simply run `docker swarm init` with no arguments. There is no
-need to specify `--advertise-addr` in this case. To learn more, see the topic
-on how to [Use Docker Desktop or Mac or Docker Desktop for
-Windows](/engine/swarm/swarm-tutorial/index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
+    > **Note**: If you are using Docker Desktop for Mac or Docker Desktop for Windows to test
+    > single-node swarm, simply run `docker swarm init` with no arguments. There is no
+    > need to specify `--advertise-addr` in this case. To learn more, see the topic
+    > on how to
+    > [Use Docker Desktop for Mac or Docker Desktop for Windows](index.md#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
+    > with Swarm.
 
     In the tutorial, the following command creates a swarm on the `manager1`
     machine:
 
-    ```bash
+    ```console
     $ docker swarm init --advertise-addr 192.168.99.100
     Swarm initialized: current node (dxn1zf6l61qsb1josjja83ngz) is now a manager.
 
@@ -53,9 +54,9 @@ Windows](/engine/swarm/swarm-tutorial/index.md#use-docker-for-mac-or-docker-for-
     join as managers or workers depending on the value for the `--token`
     flag.
 
-2.  Run `docker info` to view the current state of the swarm:
+3.  Run `docker info` to view the current state of the swarm:
 
-    ```bash
+    ```console
     $ docker info
 
     Containers: 2
@@ -71,9 +72,9 @@ Windows](/engine/swarm/swarm-tutorial/index.md#use-docker-for-mac-or-docker-for-
       ...snip...
     ```
 
-3.  Run the `docker node ls` command to view information about nodes:
+4.  Run the `docker node ls` command to view information about nodes:
 
-    ```bash
+    ```console
     $ docker node ls
 
     ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS

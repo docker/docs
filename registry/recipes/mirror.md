@@ -6,6 +6,8 @@ redirect_from:
 - /engine/admin/registry_mirror/
 ---
 
+{% include registry.md %}
+
 ## Use-case
 
 If you have multiple instances of Docker running in your environment, such as
@@ -13,6 +15,10 @@ multiple physical or virtual machines all running Docker, each daemon goes out
 to the internet and fetches an image it doesn't have locally, from the Docker
 repository. You can run a local registry mirror and point all your daemons
 there, to avoid this extra internet traffic.
+
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker.
 
 ### Alternatives
 
@@ -26,6 +32,10 @@ relying entirely on your local registry is the simplest scenario.
 
 It's currently not possible to mirror another private registry. Only the central
 Hub can be mirrored.
+
+> **Note**
+>
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
 
 ### Solution
 
@@ -66,6 +76,10 @@ Multiple registry caches can be deployed over the same back-end. A single
 registry cache ensures that concurrent requests do not pull duplicate data,
 but this property does not hold true for a registry cache cluster.
 
+> **Note**
+>
+> Service accounts included in the Team plan are limited to 5,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
+
 ### Configure the cache
 
 To configure a Registry to run as a pull through cache, the addition of a
@@ -88,12 +102,12 @@ proxy:
 
 > **Warning**: For the scheduler to clean up old entries, `delete` must
 > be enabled in the registry configuration. See
-> [Registry Configuration](/registry/configuration.md) for more details.
+> [Registry Configuration](../configuration.md) for more details.
 
 ### Configure the Docker daemon
 
 Either pass the `--registry-mirror` option when starting `dockerd` manually,
-or edit [`/etc/docker/daemon.json`](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
+or edit [`/etc/docker/daemon.json`](../../engine/reference/commandline/dockerd.md#daemon-configuration-file)
 and add the `registry-mirrors` key and value, to make the change persistent.
 
 ```json

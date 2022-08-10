@@ -2,11 +2,12 @@
 description: How to set up and use certificates with a registry to verify access
 keywords: Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials
 redirect_from:
+- /articles/certificates/
 - /engine/articles/certificates/
 title: Verify repository client with certificates
 ---
 
-In [Running Docker with HTTPS](https.md), you learned that, by default,
+In [Running Docker with HTTPS](protect-access.md), you learned that, by default,
 Docker runs via a non-networked Unix socket and TLS must be enabled in order
 to have the Docker client and the daemon communicate securely over HTTPS.  TLS ensures authenticity of the registry endpoint and that traffic to/from registry is encrypted.
 
@@ -23,12 +24,12 @@ A custom certificate is configured by creating a directory under
 `/etc/docker/certs.d` using the same name as the registry's hostname, such as
 `localhost`. All `*.crt` files are added to this directory as CA roots.
 
-> **Note**:
-> As of Docker 1.13, on Linux any root certificates authorities are merged
-> with the system defaults, including as the host's root CA set. On prior
-versions of Docker, and on Docker Enterprise Edition for Windows Server,
-> the system default certificates are only used when no custom root certificates
-> are configured.
+> **Note**
+>
+> On Linux any root certificates authorities are merged with the system defaults,
+> including the host's root CA set. If you are running Docker on Windows Server,
+> or Docker Desktop for Windows with Windows containers, the system default
+> certificates are only used when no custom root certificates are configured.
 
 The presence of one or more `<filename>.key/cert` pairs indicates to Docker
 that there are custom certificates required for access to the desired
@@ -60,8 +61,10 @@ creating an os-provided bundled certificate chain.
 Use OpenSSL's `genrsa` and `req` commands to first generate an RSA
 key and then use the key to create the certificate.   
 
-    $ openssl genrsa -out client.key 4096
-    $ openssl req -new -x509 -text -key client.key -out client.cert
+```console
+$ openssl genrsa -out client.key 4096
+$ openssl req -new -x509 -text -key client.key -out client.cert
+```
 
 > **Note**:
 > These TLS commands only generate a working set of certificates on Linux.
@@ -91,5 +94,5 @@ If the Docker registry is accessed without a port number, do not add the port to
 
 ## Related information
 
-* [Use trusted images](index.md)
-* [Protect the Docker daemon socket](https.md)
+* [Use trusted images](trust/index.md)
+* [Protect the Docker daemon socket](protect-access.md)

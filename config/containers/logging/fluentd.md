@@ -9,9 +9,9 @@ title: Fluentd logging driver
 ---
 
 The `fluentd` logging driver sends container logs to the
-[Fluentd](http://www.fluentd.org/) collector as structured log data. Then, users
+[Fluentd](https://www.fluentd.org) collector as structured log data. Then, users
 can use any of the [various output plugins of
-Fluentd](http://www.fluentd.org/plugins) to write these logs to various
+Fluentd](https://www.fluentd.org/plugins) to write these logs to various
 destinations.
 
 In addition to the log message itself, the `fluentd` log
@@ -39,7 +39,7 @@ Some options are supported by specifying `--log-opt` as many times as needed:
  located in `/etc/docker/` on Linux hosts or
  `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
  +configuring Docker using `daemon.json`, see
- +[daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+ +[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `fluentd` and sets the
 `fluentd-address` option.
@@ -55,9 +55,11 @@ The following example sets the log driver to `fluentd` and sets the
 
 Restart Docker for the changes to take effect.
 
-> **Note**: `log-opt` configuration options in the `daemon.json` configuration
-> file must be provided as strings. Boolean and numeric values (such as the value
-> for `fluentd-async-connect` or `fluentd-max-retries`) must therefore be enclosed
+> **Note**
+>
+> `log-opts` configuration options in the `daemon.json` configuration file must
+> be provided as strings. Boolean and numeric values (such as the value for
+> `fluentd-async` or `fluentd-max-retries`) must therefore be enclosed
 > in quotes (`"`).
 
 To set the logging driver for a specific container, pass the
@@ -72,7 +74,7 @@ connects to this daemon through `localhost:24224` by default. Use the
     docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 
 If container cannot connect to the Fluentd daemon, the container stops
-immediately unless the `fluentd-async-connect` option is used.
+immediately unless the `fluentd-async` option is used.
 
 ## Options
 
@@ -96,26 +98,29 @@ Refer to the [log tag option documentation](log_tags.md) for customizing
 the log tag format.
 
 
-### labels, env, and env-regex
+### labels, labels-regex, env, and env-regex
 
 The `labels` and `env` options each take a comma-separated list of keys. If
 there is collision between `label` and `env` keys, the value of the `env` takes
 precedence. Both options add additional fields to the extra attributes of a
 logging message.
 
-The `env-regex` option is similar to and compatible with `env`. Its value is a
-regular expression to match logging-related environment variables. It is used
-for advanced [log tag options](log_tags.md).
+The `env-regex` and `labels-regex` options are similar to and compatible with
+respectively `env` and `labels`. Their values are regular expressions to match
+logging-related environment variables and labels. It is used for advanced
+[log tag options](log_tags.md).
 
-### fluentd-async-connect
+### fluentd-async
 
 Docker connects to Fluentd in the background. Messages are buffered until the
 connection is established. Defaults to `false`.
 
 ### fluentd-buffer-limit
 
-The amount of data to buffer before flushing to disk. Defaults to the amount of RAM
-available to the container.
+Sets the number of events buffered on the memory. Records will be stored in memory
+up to this number. If the buffer is full, the call to record logs will fail.
+The default is 8192.
+(https://github.com/fluent/fluent-logger-golang/tree/master#bufferlimit)
 
 ### fluentd-retry-wait
 
@@ -131,8 +136,8 @@ Generates event logs in nanosecond resolution. Defaults to `false`.
 
 ## Fluentd daemon management with Docker
 
-About `Fluentd` itself, see [the project webpage](http://www.fluentd.org)
-and [its documents](http://docs.fluentd.org/).
+About `Fluentd` itself, see [the project webpage](https://www.fluentd.org)
+and [its documents](https://docs.fluentd.org).
 
 To use this logging driver, start the `fluentd` daemon on a host. We recommend
 that you use [the Fluentd docker

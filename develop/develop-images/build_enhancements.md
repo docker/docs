@@ -1,50 +1,60 @@
 ---
-title: Build Enhancements for Docker
-description: Learn the new features of Docker Build 
-keywords: build, security, engine, secret, buildkit
+title: Build images with BuildKit
+description: Learn the new features of Docker Build with BuildKit
+keywords: build, security, engine, secret, BuildKit
 ---
 
-Docker Build is one of the most used features of the Docker Engine - users ranging from developers, build teams, and release teams all use Docker Build. 
+Docker Build is one of the most used features of the Docker Engine - users
+ranging from developers, build teams, and release teams all use Docker Build. 
 
-Docker Build enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
+Docker Build enhancements for 18.09 release introduces a much-needed overhaul of
+the build architecture. By integrating BuildKit, users should see an improvement
+on performance, storage management, feature functionality, and security.
 
-* Docker images created with buildkit can be pushed to Docker Hub and DTR just like Docker images created with legacy build
-* the Dockerfile format that works on legacy build will also work with buildkit builds
-* The new `--secret` command line option allows the user to pass secret information for building new images with a specified Dockerfile 
+* Docker images created with BuildKit can be pushed to Docker Hub just like
+  Docker images created with legacy build
+* the Dockerfile format that works on legacy build will also work with BuildKit
+  builds
+* The new `--secret` command line option allows the user to pass secret
+  information for building new images with a specified Dockerfile 
 
-For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
+For more information on build options, see the reference guide on the
+[command line build options](../../engine/reference/commandline/build.md) and
+the [Dockerfile reference](/engine/reference/builder/) page.
 
 
 ## Requirements
 
-* System requirements are docker-ce x86_64, ppc64le, s390x, aarch64, armhf; or docker-ee x86_64 only
+* A current version of Docker (18.09 or higher)
 * Network connection required for downloading images of custom frontends 
 
 ## Limitations
 
 * Only supported for building Linux containers
-* BuildKit mode is compatible with UCP 3.2 or newer
-* BuildKit mode is incompatible with Swarm Classic
 
-## To enable buildkit builds
+## To enable BuildKit builds
 
-Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1` environment variable when invoking the `docker build` command, such as:
+Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1`
+environment variable when invoking the `docker build` command, such as:
 
-```
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 
-To enable docker buildkit by default, set daemon configuration in `/etc/docker/daemon.json` feature to true and restart the daemon:
+To enable docker BuildKit by default, set daemon configuration in
+`/etc/docker/daemon.json` feature to true and restart the daemon:
 
-```
+```json
 { "features": { "buildkit": true } }
 ```
 
 ## New Docker Build command line build output
 
 New docker build BuildKit TTY output (default):
-```
+
+```console
 $ docker build . 
+
 [+] Building 70.9s (34/59)                                                      
  => [runc 1/4] COPY hack/dockerfile/install/install.sh ./install.sh       14.0s
  => [frozen-images 3/4] RUN /download-frozen-image-v2.sh /build  buildpa  24.9s
@@ -71,7 +81,8 @@ $ docker build .
 ```
 
 New docker build BuildKit plain output:
-```
+
+```console
 $ docker build --progress=plain . 
 
 #1 [internal] load .dockerignore
@@ -100,39 +111,62 @@ $ docker build --progress=plain .
 
 ## Overriding default frontends
 
-The new syntax features in `Dockerfile` are available if you override the default frontend. To override 
-the default frontend, set the first line of the `Dockerfile` as a comment with a specific frontend image: 
+The new syntax features in `Dockerfile` are available if you override the default
+frontend. To override the default frontend, set the first line of the
+`Dockerfile` as a comment with a specific frontend image:
+
+```dockerfile
+# syntax=<frontend image>, e.g. # syntax=docker/dockerfile:1.2
 ```
-# syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
-```
+
+The examples on this page use features that are available in `docker/dockerfile`
+version 1.2.0 and up. We recommend using `docker/dockerfile:1`, which always
+points to the latest release of the version 1 syntax. BuildKit automatically
+checks for updates of the syntax before building, making sure you are using the
+most current version. Learn more about the `syntax` directive in the
+[Dockerfile reference](/engine/reference/builder/#syntax).
 
 ## New Docker Build secret information
 
-The new `--secret` flag for docker build allows the user to pass secret information to be used in the Dockerfile for building docker images in a safe way that will not end up stored in the final image.
+The new `--secret` flag for docker build allows the user to pass secret
+information to be used in the Dockerfile for building docker images in a safe
+way that will not end up stored in the final image.
 
-`id` is the identifier to pass into the `docker build --secret`. This identifier is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker does not use the filename of where the secret is kept outside of the Dockerfile, since this may be sensitive information.
+`id` is the identifier to pass into the `docker build --secret`. This identifier
+is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker
+does not use the filename of where the secret is kept outside of the Dockerfile,
+since this may be sensitive information.
 
-`dst` renames the secret file to a specific file in the Dockerfile `RUN` command to use.
+`dst` renames the secret file to a specific file in the Dockerfile `RUN` command
+to use.
 
 For example, with a secret piece of information stored in a text file:
 
-```
+```console
 $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
-And with a Dockerfile that specifies use of a buildkit frontend `docker/dockerfile:1.0-experimental`, the secret can be accessed. 
+And with a Dockerfile that specifies use of a BuildKit frontend
+`docker/dockerfile:1.2`, the secret can be accessed when performing a `RUN`:
 
-For example:
-```
-# syntax = docker/dockerfile:1.0-experimental
+```dockerfile
+# syntax=docker/dockerfile:1.2
+
 FROM alpine
-RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret # shows secret from default secret location
-RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar # shows secret from custom secret location
+
+# shows secret from default secret location:
+RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret
+
+# shows secret from custom secret location:
+RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 ```
 
-This Dockerfile is only to demonstrate that the secret can be accessed. As you can see the secret printed in the build output. The final image built will not have the secret file:
+The secret needs to be passed to the build using the `--secret` flag.
+This Dockerfile is only to demonstrate that the secret can be accessed. As you
+can see the secret printed in the build output. The final image built will not
+have the secret file:
 
-```
+```console
 $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt .
 ...
 #8 [2/3] RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret
@@ -156,46 +190,64 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 
 ## Using SSH to access private data in builds
 
-> **Acknowledgment**:
+> **Acknowledgment**
+>
 > Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 > for more information and examples.
 
-The `docker build` has a `--ssh` option to allow the Docker Engine to forward SSH agent connections. For more information 
-on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).
+Some commands in a `Dockerfile` may need specific SSH authentication - for example, to clone a private repository.
+Rather than copying private keys into the image, which runs the risk of exposing them publicly, `docker build` provides a way to use the host system's ssh access while building the image.
 
-Only the commands in the `Dockerfile` that have explicitly requested the SSH access by defining `type=ssh` mount have 
-access to SSH agent connections. The other commands have no knowledge of any SSH agent being available.
+There are three steps to this process.
 
-To request SSH access for a `RUN` command in the `Dockerfile`, define a mount with type `ssh`. This will set up the 
-`SSH_AUTH_SOCK` environment variable to make programs relying on SSH automatically use that socket.
+First, run `ssh-add` to add private key identities to the authentication agent.
+If you have more than one SSH key and your default `id_rsa` is not the one you use for accessing the resources in question, you'll need to add that key by path: `ssh-add ~/.ssh/<some other key>`.
+(For more information on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).)
 
-Here is an example Dockerfile using SSH in the container:
+Second, when running `docker build`, use the `--ssh` option to pass in an existing SSH agent connection socket.
+For example, `--ssh default=$SSH_AUTH_SOCK`, or the shorter equivalent, `--ssh default`.
 
-```Dockerfile
-# syntax=docker/dockerfile:experimental
+Third, to make use of that SSH access in a `RUN` command in the `Dockerfile`, define a mount with type `ssh`.
+This will set the `SSH_AUTH_SOCK` environment variable for that command to the value provided by the host to `docker build`, which will cause any programs in the `RUN` command which rely on SSH to automatically use that socket.
+Only the commands in the `Dockerfile` that have explicitly requested SSH access by defining `type=ssh` mount will have access to SSH agent connections.
+The other commands will have no knowledge of any SSH agent being available.
+
+Here is an example `Dockerfile` using SSH in the container:
+
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 
 # Install ssh client and git
 RUN apk add --no-cache openssh-client git
 
 # Download public key for github.com
-RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Clone private repository
 RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
 ```
 
-Once the `Dockerfile` is created, use the `--ssh` option for connectivity with the SSH agent.
+The image could be built as follows:
 
-```bash
+```console
 $ docker build --ssh default .
 ```
+
+As with `--mount=type=secret`, you can specify an `id` if you want to use multiple sockets per build and want to differentiate them.
+For example, you could run `docker build --ssh main=$SSH_AUTH_SOCK --ssh other=$OTHER_SSH_AUTH_SOCK`.
+In your `Dockerfile`, you could then have a `RUN --mount=type=ssh,id=main` and a `RUN --mount=type=ssh,id=other` to use those two sockets.
+If a `--mount=type=ssh` doesn't specify an `id`, `default` is assumed.
 
 ## Troubleshooting : issues with private registries
 
 #### x509: certificate signed by unknown authority
-If you are fetching images from insecure registry (with self-signed certificates) and/or using such a registry as a mirror, you are facing a known issue in Docker 18.09 :
-```
+
+If you are fetching images from insecure registry (with self-signed certificates)
+and/or using such a registry as a mirror, you are facing a known issue in
+Docker 18.09 :
+
+```console
 [+] Building 0.4s (3/3) FINISHED
  => [internal] load build definition from Dockerfile
  => => transferring dockerfile: 169B
@@ -207,13 +259,17 @@ If you are fetching images from insecure registry (with self-signed certificates
 ------
 failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manifests/experimental: x509: certificate signed by unknown authority
 ```
-Solution : secure your registry properly. You can get SSL certificates from Let's Encrypt for free. See https://docs.docker.com/registry/deploying/
+
+Solution: secure your registry properly. You can get SSL certificates from
+Let's Encrypt for free. See [Deploy a registry server](../../registry/deploying.md).
 
 
 #### image not found when the private registry is running on Sonatype Nexus version < 3.15
 
-If you are running a private registry using Sonatype Nexus version < 3.15, and receive an error similar to the following :
-```
+If you are running a private registry using Sonatype Nexus version < 3.15, and
+receive an error similar to the following :
+
+```console
 ------
  > [internal] load metadata for docker.io/library/maven:3.5.3-alpine:
 ------
@@ -222,7 +278,7 @@ If you are running a private registry using Sonatype Nexus version < 3.15, and r
 ------
 rpc error: code = Unknown desc = docker.io/library/maven:3.5.3-alpine not found
 ```
-you may be facing the bug below : https://issues.sonatype.org/browse/NEXUS-12684
+
+you may be facing the bug below : [NEXUS-12684](https://issues.sonatype.org/browse/NEXUS-12684)
 
 Solution is to upgrade your Nexus to version 3.15 or above.
-

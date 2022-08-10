@@ -16,13 +16,14 @@ efficient images.
 Docker builds images automatically by reading the instructions from a
 `Dockerfile` -- a text file that contains all commands, in order, needed to
 build a given image. A `Dockerfile` adheres to a specific format and set of
-instructions which you can find at [Dockerfile reference](/engine/reference/builder/).
+instructions which you can find at [Dockerfile reference](../../engine/reference/builder.md).
 
 A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 
-```Dockerfile
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -39,10 +40,10 @@ Each instruction creates one layer:
 When you run an image and generate a container, you add a new _writable layer_
 (the "container layer") on top of the underlying layers. All changes made to
 the running container, such as writing new files, modifying existing files, and
-deleting files, are written to this thin writable container layer.
+deleting files, are written to this writable container layer.
 
 For more on image layers (and how Docker builds and stores images), see
-[About storage drivers](/storage/storagedriver/).
+[About storage drivers](../../storage/storagedriver/index.md).
 
 ## General guidelines and recommendations
 
@@ -72,21 +73,21 @@ context.
 > a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
 > the image from within the build context (`.`):
 >
-> ```shell
-> mkdir myproject && cd myproject
-> echo "hello" > hello
-> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> docker build -t helloapp:v1 .
+> ```console
+> $ mkdir myproject && cd myproject
+> $ echo "hello" > hello
+> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> $ docker build -t helloapp:v1 .
 > ```
 >
 > Move `Dockerfile` and `hello` into separate directories and build a second
 > version of the image (without relying on cache from the last build). Use `-f`
 > to point to the Dockerfile and specify the directory of the build context:
 >
-> ```shell
-> mkdir -p dockerfiles context
-> mv Dockerfile dockerfiles && mv hello context
-> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```console
+> $ mkdir -p dockerfiles context
+> $ mv Dockerfile dockerfiles && mv hello context
+> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
 
 Inadvertently including files that are not necessary for building an image
@@ -107,7 +108,7 @@ can be useful to perform one-off builds without writing a Dockerfile to disk,
 or in situations where the `Dockerfile` is generated, and should not persist
 afterwards.
 
-> The examples in this section use [here documents](http://tldp.org/LDP/abs/html/here-docs.html)
+> The examples in this section use [here documents](https://tldp.org/LDP/abs/html/here-docs.html)
 > for convenience, but any method to provide the `Dockerfile` on `stdin` can be
 > used.
 > 
@@ -169,13 +170,13 @@ context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
 > 
 > docker build -t myimage:latest -<<EOF
 > FROM busybox
-> COPY somefile.txt .
+> COPY somefile.txt ./
 > RUN cat /somefile.txt
 > EOF
 > 
 > # observe that the build fails
 > ...
-> Step 2/3 : COPY somefile.txt .
+> Step 2/3 : COPY somefile.txt ./
 > COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
 > ```
 
@@ -192,7 +193,7 @@ docker build [OPTIONS] -f- PATH
 
 The example below uses the current directory (`.`) as the build context, and builds
 an image using a `Dockerfile` that is passed through `stdin` using a [here
-document](http://tldp.org/LDP/abs/html/here-docs.html).
+document](https://tldp.org/LDP/abs/html/here-docs.html).
 
 ```bash
 # create a directory to work in
@@ -205,7 +206,7 @@ touch somefile.txt
 # build an image using the current directory as context, and a Dockerfile passed through stdin
 docker build -t myimage:latest -f- . <<EOF
 FROM busybox
-COPY somefile.txt .
+COPY somefile.txt ./
 RUN cat /somefile.txt
 EOF
 ```
@@ -231,7 +232,7 @@ the `hello.c` file from the ["hello-world" Git repository on GitHub](https://git
 ```bash
 docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY hello.c .
+COPY hello.c ./
 EOF
 ```
 
@@ -247,7 +248,7 @@ EOF
 To exclude files not relevant to the build (without restructuring your source
 repository) use a `.dockerignore` file. This file supports exclusion patterns
 similar to `.gitignore` files. For information on creating one, see the
-[.dockerignore file](/engine/reference/builder.md#dockerignore-file).
+[.dockerignore file](../../engine/reference/builder.md#dockerignore-file).
 
 ### Use multi-stage builds
 
@@ -270,8 +271,9 @@ frequently changed:
 
 A Dockerfile for a Go application could look like:
 
-```Dockerfile
-FROM golang:1.11-alpine AS build
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM golang:1.16-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -313,14 +315,14 @@ database, and an in-memory cache in a decoupled manner.
 
 Limiting each container to one process is a good rule of thumb, but it is not a
 hard and fast rule. For example, not only can containers be
-[spawned with an init process](/engine/reference/run.md#specify-an-init-process),
+[spawned with an init process](../../engine/reference/run.md#specify-an-init-process),
 some programs might spawn additional processes of their own accord. For
-instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
+instance, [Celery](https://docs.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 
 Use your best judgment to keep containers as clean and modular as possible. If
-containers depend on each other, you can use [Docker container networks](/engine/userguide/networking/)
+containers depend on each other, you can use [Docker container networks](../../network/index.md)
 to ensure that these containers can communicate.
 
 ### Minimize the number of layers
@@ -346,13 +348,14 @@ review. Adding a space before a backslash (`\`) helps as well.
 
 Here’s an example from the [`buildpack-deps` image](https://github.com/docker-library/buildpack-deps):
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
   bzr \
   cvs \
   git \
   mercurial \
-  subversion
+  subversion \
+  && rm -rf /var/lib/apt/lists/*
 ```
 
 ### Leverage build cache
@@ -399,16 +402,16 @@ maintainable `Dockerfile`.
 
 ### FROM
 
-[Dockerfile reference for the FROM instruction](/engine/reference/builder.md#from)
+[Dockerfile reference for the FROM instruction](../../engine/reference/builder.md#from)
 
 Whenever possible, use current official images as the basis for your
 images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
-is tightly controlled and small in size (currently under 5 MB), while still
+is tightly controlled and small in size (currently under 6 MB), while still
 being a full Linux distribution.
 
 ### LABEL
 
-[Understanding object labels](/config/labels-custom-metadata.md)
+[Understanding object labels](../../config/labels-custom-metadata.md)
 
 You can add labels to your image to help organize images by project, record
 licensing information, to aid in automation, or for other reasons. For each
@@ -418,7 +421,7 @@ The following examples show the different acceptable formats. Explanatory commen
 > Strings with spaces must be quoted **or** the spaces must be escaped. Inner
 > quote characters (`"`), must also be escaped.
 
-```Dockerfile
+```dockerfile
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor1="ACME Incorporated"
@@ -432,14 +435,14 @@ to combine all labels into a single `LABEL` instruction, to prevent extra layers
 from being created. This is no longer necessary, but combining labels is still
 supported.
 
-```Dockerfile
+```dockerfile
 # Set multiple labels on one line
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 ```
 
 The above can also be written as:
 
-```Dockerfile
+```dockerfile
 # Set multiple labels at once, using line-continuation characters to break long lines
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
@@ -448,15 +451,15 @@ LABEL vendor=ACME\ Incorporated \
       com.example.release-date="2015-02-12"
 ```
 
-See [Understanding object labels](/config/labels-custom-metadata.md)
+See [Understanding object labels](../../config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
-querying labels, refer to the items related to filtering in [Managing labels on
-objects](/config/labels-custom-metadata.md#managing-labels-on-objects). See also
-[LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
+querying labels, refer to the items related to filtering in
+[Managing labels on objects](../../config/labels-custom-metadata.md#manage-labels-on-objects).
+See also [LABEL](../../engine/reference/builder.md#label) in the Dockerfile reference.
 
 ### RUN
 
-[Dockerfile reference for the RUN instruction](/engine/reference/builder.md#run)
+[Dockerfile reference for the RUN instruction](../../engine/reference/builder.md#run)
 
 Split long or complex `RUN` statements on multiple lines separated with
 backslashes to make your `Dockerfile` more readable, understandable, and
@@ -468,28 +471,23 @@ Probably the most common use-case for `RUN` is an application of `apt-get`.
 Because it installs packages, the `RUN apt-get` command has several gotchas to
 look out for.
 
-Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
-packages from the parent images cannot upgrade inside an
-[unprivileged container](/engine/reference/run.md#security-configuration). If a package
-contained in the parent image is out-of-date, contact its maintainers. If you
-know there is a particular package, `foo`, that needs to be updated, use
-`apt-get install -y foo` to update automatically.
-
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
-    package-foo
+    package-foo  \
+    && rm -rf /var/lib/apt/lists/*
 ```
 
 Using `apt-get update` alone in a `RUN` statement causes caching issues and
 subsequent `apt-get install` instructions fail. For example, say you have a
 Dockerfile:
 
-```Dockerfile
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
@@ -498,7 +496,8 @@ RUN apt-get install -y curl
 After building the image, all layers are in the Docker cache. Suppose you later
 modify `apt-get install` by adding extra package:
 
-```Dockerfile
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
@@ -516,7 +515,7 @@ intervention. This technique is known as "cache busting". You can also achieve
 cache-busting by specifying a package version. This is known as version pinning,
 for example:
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
@@ -530,7 +529,7 @@ in required packages.
 Below is a well-formed `RUN` instruction that demonstrates all the `apt-get`
 recommendations.
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     aufs-tools \
     automake \
@@ -564,7 +563,7 @@ refreshed prior to `apt-get install`.
 
 Some `RUN` commands depend on the ability to pipe the output of one command into another, using the pipe character (`|`), as in the following example:
 
-```Dockerfile
+```dockerfile
 RUN wget -O - https://some.site | wc -l > /number
 ```
 
@@ -577,24 +576,25 @@ If you want the command to fail due to an error at any stage in the pipe,
 prepend `set -o pipefail &&` to ensure that an unexpected error prevents the
 build from inadvertently succeeding. For example:
 
-```Dockerfile
+```dockerfile
 RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
+
 > Not all shells support the `-o pipefail` option.
 >
 > In cases such as the `dash` shell on
 > Debian-based images, consider using the _exec_ form of `RUN` to explicitly
 > choose a shell that does support the `pipefail` option. For example:
 >
-> ```Dockerfile
+> ```dockerfile
 > RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
 > ```
 
 ### CMD
 
-[Dockerfile reference for the CMD instruction](/engine/reference/builder.md#cmd)
+[Dockerfile reference for the CMD instruction](../../engine/reference/builder.md#cmd)
 
-The `CMD` instruction should be used to run the software contained by your
+The `CMD` instruction should be used to run the software contained in your
 image, along with any arguments. `CMD` should almost always be used in the form
 of `CMD ["executable", "param1", "param2"…]`. Thus, if the image is for a
 service, such as Apache and Rails, you would run something like `CMD
@@ -606,13 +606,13 @@ python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
 ["php", "-a"]`. Using this form means that when you execute something like
 `docker run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
-conjunction with [`ENTRYPOINT`](/engine/reference/builder.md#entrypoint), unless
+conjunction with [`ENTRYPOINT`](../../engine/reference/builder.md#entrypoint), unless
 you and your expected users are already quite familiar with how `ENTRYPOINT`
 works.
 
 ### EXPOSE
 
-[Dockerfile reference for the EXPOSE instruction](/engine/reference/builder.md#expose)
+[Dockerfile reference for the EXPOSE instruction](../../engine/reference/builder.md#expose)
 
 The `EXPOSE` instruction indicates the ports on which a container listens
 for connections. Consequently, you should use the common, traditional port for
@@ -627,11 +627,11 @@ the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
 
 ### ENV
 
-[Dockerfile reference for the ENV instruction](/engine/reference/builder.md#env)
+[Dockerfile reference for the ENV instruction](../../engine/reference/builder.md#env)
 
 To make new software easier to run, you can use `ENV` to update the
 `PATH` environment variable for the software your container installs. For
-example, `ENV PATH /usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
+example, `ENV PATH=/usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
 just works.
 
 The `ENV` instruction is also useful for providing required environment
@@ -641,11 +641,11 @@ variables specific to services you wish to containerize, such as Postgres’s
 Lastly, `ENV` can also be used to set commonly used version numbers so that
 version bumps are easier to maintain, as seen in the following example:
 
-```Dockerfile
-ENV PG_MAJOR 9.3
-ENV PG_VERSION 9.3.4
-RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
-ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+```dockerfile
+ENV PG_MAJOR=9.3
+ENV PG_VERSION=9.3.4
+RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgres && …
+ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 
 Similar to having constant variables in a program (as opposed to hard-coding
@@ -657,14 +657,15 @@ means that even if you unset the environment variable in a future layer, it
 still persists in this layer and its value can be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
 
-```Dockerfile
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
 RUN unset ADMIN_USER
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 mark
@@ -678,7 +679,8 @@ good idea. Using `\` as a line continuation character for Linux Dockerfiles
 improves readability. You could also put all of the commands into a shell script
 and have the `RUN` command just run that shell script.
 
-```Dockerfile
+```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \
@@ -686,7 +688,7 @@ RUN export ADMIN_USER="mark" \
 CMD sh
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
@@ -694,8 +696,8 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ### ADD or COPY
 
-- [Dockerfile reference for the ADD instruction](/engine/reference/builder.md#add)
-- [Dockerfile reference for the COPY instruction](/engine/reference/builder.md#copy)
+- [Dockerfile reference for the ADD instruction](../../engine/reference/builder.md#add)
+- [Dockerfile reference for the COPY instruction](../../engine/reference/builder.md#copy)
 
 Although `ADD` and `COPY` are functionally similar, generally speaking, `COPY`
 is preferred. That’s because it’s more transparent than `ADD`. `COPY` only
@@ -711,7 +713,7 @@ the specifically required files change.
 
 For example:
 
-```Dockerfile
+```dockerfile
 COPY requirements.txt /tmp/
 RUN pip install --requirement /tmp/requirements.txt
 COPY . /tmp/
@@ -726,17 +728,17 @@ delete the files you no longer need after they've been extracted and you don't
 have to add another layer in your image. For example, you should avoid doing
 things like:
 
-```Dockerfile
-ADD http://example.com/big.tar.xz /usr/src/things/
+```dockerfile
+ADD https://example.com/big.tar.xz /usr/src/things/
 RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
 ```
 
 And instead, do something like:
 
-```Dockerfile
+```dockerfile
 RUN mkdir -p /usr/src/things \
-    && curl -SL http://example.com/big.tar.xz \
+    && curl -SL https://example.com/big.tar.xz \
     | tar -xJC /usr/src/things \
     && make -C /usr/src/things all
 ```
@@ -746,7 +748,7 @@ auto-extraction capability, you should always use `COPY`.
 
 ### ENTRYPOINT
 
-[Dockerfile reference for the ENTRYPOINT instruction](/engine/reference/builder.md#entrypoint)
+[Dockerfile reference for the ENTRYPOINT instruction](../../engine/reference/builder.md#entrypoint)
 
 The best use for `ENTRYPOINT` is to set the image's main command, allowing that
 image to be run as though it was that command (and then use `CMD` as the
@@ -754,20 +756,20 @@ default flags).
 
 Let's start with an example of an image for the command line tool `s3cmd`:
 
-```Dockerfile
+```dockerfile
 ENTRYPOINT ["s3cmd"]
 CMD ["--help"]
 ```
 
 Now the image can be run like this to show the command's help:
 
-```bash
+```console
 $ docker run s3cmd
 ```
 
 Or using the right parameters to execute a command:
 
-```bash
+```console
 $ docker run s3cmd ls s3://mybucket
 ```
 
@@ -800,15 +802,15 @@ exec "$@"
 
 > Configure app as PID 1
 >
-> This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
+> This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec)
 > so that the final running application becomes the container's PID 1. This
 > allows the application to receive any Unix signals sent to the container.
-> For more, see the [`ENTRYPOINT` reference](/engine/reference/builder.md#entrypoint).
+> For more, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
 
 The helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
 
-```Dockerfile
+```dockerfile
 COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]
@@ -818,25 +820,25 @@ This script allows the user to interact with Postgres in several ways.
 
 It can simply start Postgres:
 
-```bash
+```console
 $ docker run postgres
 ```
 
 Or, it can be used to run Postgres and pass parameters to the server:
 
-```bash
+```console
 $ docker run postgres postgres --help
 ```
 
 Lastly, it could also be used to start a totally different tool, such as Bash:
 
-```bash
+```console
 $ docker run --rm -it postgres bash
 ```
 
 ### VOLUME
 
-[Dockerfile reference for the VOLUME instruction](/engine/reference/builder.md#volume)
+[Dockerfile reference for the VOLUME instruction](../../engine/reference/builder.md#volume)
 
 The `VOLUME` instruction should be used to expose any database storage area,
 configuration storage, or files/folders created by your docker container. You
@@ -845,11 +847,15 @@ parts of your image.
 
 ### USER
 
-[Dockerfile reference for the USER instruction](/engine/reference/builder.md#user)
+[Dockerfile reference for the USER instruction](../../engine/reference/builder.md#user)
 
 If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
-like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`.
+like:
+
+```dockerfile
+RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
+```
 
 > Consider an explicit UID/GID
 >
@@ -874,7 +880,7 @@ frequently.
 
 ### WORKDIR
 
-[Dockerfile reference for the WORKDIR instruction](/engine/reference/builder.md#workdir)
+[Dockerfile reference for the WORKDIR instruction](../../engine/reference/builder.md#workdir)
 
 For clarity and reliability, you should always use absolute paths for your
 `WORKDIR`. Also, you should use `WORKDIR` instead of  proliferating instructions
@@ -883,7 +889,7 @@ maintain.
 
 ### ONBUILD
 
-[Dockerfile reference for the ONBUILD instruction](/engine/reference/builder.md#onbuild)
+[Dockerfile reference for the ONBUILD instruction](../../engine/reference/builder.md#onbuild)
 
 An `ONBUILD` command executes after the current `Dockerfile` build completes.
 `ONBUILD` executes in any child image derived `FROM` the current image.  Think
@@ -906,7 +912,7 @@ fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
 
-## Examples for Official Images
+## Examples of Docker Official Images
 
 These Official Images have exemplary `Dockerfile`s:
 
@@ -917,8 +923,9 @@ These Official Images have exemplary `Dockerfile`s:
 
 ## Additional resources:
 
-* [Dockerfile Reference](/engine/reference/builder.md)
+* [Dockerfile Reference](../../engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
-* [More about Automated Builds](/docker-hub/builds/)
-* [Guidelines for Creating Official Images](/docker-hub/official_images/)
+* [More about Automated Builds](../../docker-hub/builds/index.md)
+* [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
+* [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 

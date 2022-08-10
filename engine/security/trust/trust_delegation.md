@@ -28,71 +28,66 @@ server URL is the same as the registry URL. However, for self-hosted
 environments or 3rd party registries, you will need to specify an alternative
 URL for the notary server. This is done with:
 
-```
-export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
+```console
+$ export DOCKER_CONTENT_TRUST_SERVER=https://<URL>:<PORT>
 ```
 
 If you do not export this variable in self-hosted environments, you may see 
 errors such as: 
 
-```
-$ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
-Adding signer "jeff" to dtr.example.com/admin/demo...
-[...]
-Error: trust data missing for remote repository dtr.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
+```console
+$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
+Adding signer "jeff" to registry.example.com/admin/demo...
+<...>
+Error: trust data missing for remote repository registry.example.com/admin/demo or remote repository not found: timestamp key trust data unavailable.  Has a notary repository been initialized?
 
-$ docker trust inspect dtr.example.com/admin/demo --pretty
+$ docker trust inspect registry.example.com/admin/demo --pretty
 WARN[0000] Error while downloading remote metadata, using cached timestamp - this might not be the latest version available remotely
-[...]
+<...>
 ```
 
 If you have enabled authentication for your notary server, or are using DTR, you will need to log in 
 before you can push data to the notary server. 
 
-```
-$ docker login dtr.example.com/user/repo
+```console
+$ docker login registry.example.com/user/repo
 Username: admin
 Password:
 
 Login Succeeded
 
-$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
-Adding signer "jeff" to dtr.example.com/user/repo...
-Initializing signed repository for dtr.example.com/user/repo...
-Successfully initialized "dtr.example.com/user/repo"
-Successfully added signer: jeff to dtr.example.com/user/repo
+$ docker trust signer add --key cert.pem jeff registry.example.com/user/repo
+Adding signer "jeff" to registry.example.com/user/repo...
+Initializing signed repository for registry.example.com/user/repo...
+Successfully initialized "registry.example.com/user/repo"
+Successfully added signer: jeff to registry.example.com/user/repo
 ```
 
 If you do not log in, you will see:
 
-```bash
-$ docker trust signer add --key cert.pem jeff dtr.example.com/user/repo
-Adding signer "jeff" to dtr.example.com/user/repo...
-Initializing signed repository for dtr.example.com/user/repo...
+```console
+$ docker trust signer add --key cert.pem jeff registry.example.com/user/repo
+Adding signer "jeff" to registry.example.com/user/repo...
+Initializing signed repository for registry.example.com/user/repo...
 you are not authorized to perform this operation: server returned 401.
 
-Failed to add signer to: dtr.example.com/user/repo
+Failed to add signer to: registry.example.com/user/repo
 ```
-
-If you are using DTR and would like to work with a remote UCP's signing policy, 
-you must [register your DTR instance with that remote UCP](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/#registering-dtr-with-a-remote-universal-control-plane). 
-See [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp/) for more details. 
 
 ## Configuring the Notary Client
 
 Some of the more advanced features of DCT require the Notary CLI. To install and 
 configure the Notary CLI:
 
-1) Download the [client](https://github.com/theupdateframework/notary/releases) 
-and ensure that it is available on your path.
+1. Download the [client](https://github.com/theupdateframework/notary/releases) and ensure that it is available on your path.
 
-2) Create a configuration file at `~/.notary/config.json` with the following content:
+2. Create a configuration file at `~/.notary/config.json` with the following content:
 
-```
+```json
 {
   "trust_dir" : "~/.docker/trust",
   "remote_server": {
-    "url": "https://dtr.example.com",
+    "url": "https://registry.example.com",
     "root_ca": "../.docker/ca.pem"
   }
 }
@@ -100,16 +95,15 @@ and ensure that it is available on your path.
 
 The newly created configuration file contains information about the location of your local Docker trust data and the notary server URL.
 
-For more detailed information about how to use notary outside of the 
-Docker Content Trust use cases, refer to the Notary CLI documentation 
-[here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md)
+For more detailed information about how to use notary outside of the
+Docker Content Trust use cases, refer to the Notary CLI documentation
+[here](https://github.com/theupdateframework/notary/blob/master/docs/command_reference.md){:target="_blank" rel="noopener" class="_"} 
 
 ## Creating Delegation Keys
 
 A prerequisite to adding your first contributor is a pair of delegation keys. 
 These keys can either be generated locally using `$ docker trust`, generated by 
-a certificate authority, or can be taken from a Universal Control Plane's 
-[Client Bundle](ee/ucp/user-access/cli/#download-client-certificates).
+a certificate authority.
 
 ### Using Docker Trust to Generate Keys
 
@@ -117,8 +111,9 @@ Docker trust has a built-in generator for a delegation key pair,
 `$ docker trust generate <name>`. Running this command will automatically load 
 the delegation private key in to the local Docker trust store. 
 
-```
+```console
 $ docker trust key generate jeff
+
 Generating key for jeff...
 Enter passphrase for new jeff key with ID 9deed25: 
 Repeat passphrase for new jeff key with ID 9deed25: 
@@ -134,13 +129,13 @@ cfssl along with a local or company-wide Certificate Authority.
 Here is an example of how to generate a 2048-bit RSA portion key (all RSA keys
 must be at least 2048 bits):
 
-```
+```console
 $ openssl genrsa -out delegation.key 2048
+
 Generating RSA private key, 2048 bit long modulus
 ....................................................+++
 ............+++
 e is 65537 (0x10001)
-
 ```
 
 They should keep `delegation.key` private because it is used to sign tags.
@@ -149,7 +144,7 @@ Then they need to generate an x509 certificate containing the public key, which 
 what you need from them. Here is the command to generate a CSR (certificate
 signing request):
 
-```
+```console
 $ openssl req -new -sha256 -key delegation.key -out delegation.csr
 ```
 
@@ -157,7 +152,7 @@ Then they can send it to whichever CA you trust to sign certificates, or they
 can self-sign the certificate (in this example, creating a certificate that is
 valid for 1 year):
 
-```
+```console
 $ openssl x509 -req -sha256 -days 365 -in delegation.csr -signkey delegation.key -out delegation.crt
 ```
 
@@ -166,35 +161,13 @@ by a CA.
 
 Finally you will need to add the private key into your local Docker trust store.
 
-```
+```console
 $ docker trust key load delegation.key --name jeff
+
 Loading key from "delegation.key"...
 Enter passphrase for new jeff key with ID 8ae710e: 
 Repeat passphrase for new jeff key with ID 8ae710e: 
 Successfully imported key from delegation.key
-```
-
-### Using Universal Control Plane's Client Bundles
-
-Universal Control Plane (UCP) manages CLI and API access to its clusters through 
-certificates generated in a Client Bundle. These certificates and keys can be 
-used as a delegation key pair. Within each client bundle there is a unique 
-private key (`key.pem`) and x509 certificate containing a public key 
-(`cert.pem`).
-
-1) Download a user's client bundle from the 
-[Universal Control Plane](ee/ucp/user-access/cli/#download-client-certificates).
-
-2) Extract the client bundle into your current directory
-
-3) Load the private key into your local Docker trust store
-
-```
-$ docker trust key load key.pem --name jeff
-Loading key from "key.pem"...
-Enter passphrase for new jeff key with ID 9deed25: 
-Repeat passphrase for new jeff key with ID 9deed25: 
-Successfully imported key from key.pem
 ```
 
 ### Viewing local Delegation keys 
@@ -202,7 +175,7 @@ Successfully imported key from key.pem
 To list the keys that have been imported in to the local Docker trust store we 
 can use the Notary CLI.
 
-```
+```console
 $ notary key list
 
 ROLE       GUN                          KEY ID                                                              LOCATION
@@ -217,13 +190,13 @@ When the first Delegation is added to the Notary Server using `$ docker trust`,
 we automatically initiate trust data for the repository. This includes creating 
 the notary target and snapshots keys, and rotating the snapshot key to be 
 managed by the notary server. More information on these keys can be found 
-[here](./trust_key_mng.md)
+[here](trust_key_mng.md)
 
 When initiating a repository, you will need the key and the passphrase of a local
 Notary Canonical Root Key. If you have not initiated a repository before, and 
 therefore don't have a Notary root key, `$ docker trust` will create one for you.
 
-> Be sure to protect and back up your [Notary Canonical Root Key](./trust_key_mng.md)
+> Be sure to protect and back up your [Notary Canonical Root Key](trust_key_mng.md)
 
 ### Initiating the Repository
 
@@ -236,32 +209,33 @@ For DCT the name of the second delegation, in the below example
 `jeff`, is there to help you keep track of the owner of the keys. In more 
 advanced use cases of Notary additional delegations are used for hierarchy. 
 
-```
-$ docker trust signer add --key cert.pem jeff dtr.example.com/admin/demo
-Adding signer "jeff" to dtr.example.com/admin/demo...
-Initializing signed repository for dtr.example.com/admin/demo...
+```console
+$ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo
+
+Adding signer "jeff" to registry.example.com/admin/demo...
+Initializing signed repository for registry.example.com/admin/demo...
 Enter passphrase for root key with ID f6c6a4b: 
 Enter passphrase for new repository key with ID b0014f8: 
 Repeat passphrase for new repository key with ID b0014f8: 
-Successfully initialized "dtr.example.com/admin/demo"
-Successfully added signer: jeff to dtr.example.com/admin/demo
+Successfully initialized "registry.example.com/admin/demo"
+Successfully added signer: jeff to registry.example.com/admin/demo
 ```
 
 You can see which keys have been pushed to the Notary server for each repository
 with the `$ docker trust inspect` command. 
 
-```
-$ docker trust inspect --pretty dtr.example.com/admin/demo
+```console
+$ docker trust inspect --pretty registry.example.com/admin/demo
 
-No signatures for dtr.example.com/admin/demo
+No signatures for registry.example.com/admin/demo
 
 
-List of signers and their keys for dtr.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 jeff                1091060d7bfd
 
-Administrative keys for dtr.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
@@ -270,8 +244,8 @@ Administrative keys for dtr.example.com/admin/demo
 You could also use the Notary CLI to list delegations and keys. Here you can 
 clearly see the keys were attached to `targets/releases` and `targets/jeff`.
 
-```
-$ notary delegation list dtr.example.com/admin/demo
+```console
+$ notary delegation list registry.example.com/admin/demo
 
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
 ----                -----             -------                                                             ---------
@@ -290,27 +264,28 @@ the `targets/release` role.
 > Note you will need the passphrase for the repository key; this would have been
 > configured when you first initiated the repository.
 
-```
-$ docker trust signer add --key ben.pub ben dtr.example.com/admin/demo
-Adding signer "ben" to dtr.example.com/admin/demo...
+```console
+$ docker trust signer add --key ben.pub ben registry.example.com/admin/demo
+
+Adding signer "ben" to registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
-Successfully added signer: ben to dtr.example.com/admin/demo
+Successfully added signer: ben to registry.example.com/admin/demo
 ```
 
 Check to prove that there are now 2 delegations (Signer).
 
-```
-$ docker trust inspect --pretty dtr.example.com/admin/demo
+```console
+$ docker trust inspect --pretty registry.example.com/admin/demo
 
-No signatures for dtr.example.com/admin/demo
+No signatures for registry.example.com/admin/demo
 
-List of signers and their keys for dtr.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 ben                 afa404703b25
 jeff                1091060d7bfd
 
-Administrative keys for dtr.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
@@ -326,27 +301,28 @@ will automatically handle adding this new key to `targets/releases`.
 > Note you will need the passphrase for the repository key; this would have been
 > configured when you first initiated the repository.
 
-```
-$ docker trust signer add --key cert2.pem jeff dtr.example.com/admin/demo
-Adding signer "jeff" to dtr.example.com/admin/demo...
+```console
+$ docker trust signer add --key cert2.pem jeff registry.example.com/admin/demo
+
+Adding signer "jeff" to registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
-Successfully added signer: jeff to dtr.example.com/admin/demo
+Successfully added signer: jeff to registry.example.com/admin/demo
 ```
 
 Check to prove that the delegation (Signer) now contains multiple Key IDs. 
 
-```
-$ docker trust inspect --pretty dtr.example.com/admin/demo
+```console
+$ docker trust inspect --pretty registry.example.com/admin/demo
 
-No signatures for dtr.example.com/admin/demo
+No signatures for registry.example.com/admin/demo
 
 
-List of signers and their keys for dtr.example.com/admin/demo
+List of signers and their keys for registry.example.com/admin/demo
 
 SIGNER              KEYS
 jeff                1091060d7bfd, 5570b88df073
 
-Administrative keys for dtr.example.com/admin/demo
+Administrative keys for registry.example.com/admin/demo
 
   Repository Key:	b0014f8e4863df2d028095b74efcb05d872c3591de0af06652944e310d96598d
   Root Key:	64d147e59e44870311dd2d80b9f7840039115ef3dfa5008127d769a5f657a5d7
@@ -361,11 +337,11 @@ attached to the `targets/releases` role, you can use the
 > Note tags that were signed by the removed delegation will need to be resigned 
 > by an active delegation
 
-```
-$ docker trust signer remove dtr.example.com/admin/demo
-Removing signer "ben" from dtr.example.com/admin/demo...
+```console
+$ docker trust signer remove registry.example.com/admin/demo
+Removing signer "ben" from registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
-Successfully removed ben from dtr.example.com/admin/demo
+Successfully removed ben from registry.example.com/admin/demo
 ```
 
 #### Troubleshooting
@@ -374,7 +350,7 @@ Successfully removed ben from dtr.example.com/admin/demo
 will need to add additional delegations using `docker trust signer add` before 
 resigning images.
 
-```
+```console
 WARN[0000] role targets/releases has fewer keys than its threshold of 1; it will not be usable until keys are added to it
 ```
 
@@ -382,18 +358,18 @@ WARN[0000] role targets/releases has fewer keys than its threshold of 1; it will
 message that there are no valid signatures in `targest/releases`, you will need
 to resign the `targets/releases` delegation file with the Notary CLI.
 
-```
+```console
 WARN[0000] Error getting targets/releases: valid signatures did not meet threshold for targets/releases 
 ```
 
 Resigning the delegation file is done with the `$ notary witness` command
 
-```
-$ notary witness dtr.example.com/admin/demo targets/releases --publish
+```console
+$ notary witness registry.example.com/admin/demo targets/releases --publish
 ```
 
 More information on the `$ notary witness` command can be found 
-[here](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation)
+[here](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#recovering-a-delegation){:target="_blank" rel="noopener" class="_"}
 
 ### Removing a Contributor's Key from a Delegation
 
@@ -405,8 +381,8 @@ and the role specific to that signer `targets/<name>`.
 
 1) We will need to grab the Key ID from the Notary Server
 
-```
-$ notary delegation list dtr.example.com/admin/demo
+```console
+$ notary delegation list registry.example.com/admin/demo
 
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
 ----                -----             -------                                                             ---------
@@ -418,33 +394,34 @@ targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075
 
 2) Remove from the `targets/releases` delegation
 
-```
-$ notary delegation remove dtr.example.com/admin/demo targets/targets 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
-Auto-publishing changes to dtr.example.com/admin/demo
+```console
+$ notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
+
+Auto-publishing changes to registry.example.com/admin/demo
 Enter username: admin
 Enter password: 
 Enter passphrase for targets key with ID b0014f8: 
-Successfully published changes for repository dtr.example.com/admin/demo
+Successfully published changes for repository registry.example.com/admin/demo
 ```
 
 3) Remove from the `targets/<name>` delegation
 
-```
-$ notary delegation remove dtr.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
+```console
+$ notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
 
-Removal of delegation role targets/jeff with keys [5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository "dtr.example.com/admin/demo" staged for next publish.
+Removal of delegation role targets/jeff with keys [5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository "registry.example.com/admin/demo" staged for next publish.
 
-Auto-publishing changes to dtr.example.com/admin/demo
+Auto-publishing changes to registry.example.com/admin/demo
 Enter username: admin    
 Enter password: 
 Enter passphrase for targets key with ID b0014f8: 
-Successfully published changes for repository dtr.example.com/admin/demo
+Successfully published changes for repository registry.example.com/admin/demo
 ```
 
 4) Check the remaining delegation list 
 
-```
-$ notary delegation list dtr.example.com/admin/demo
+```console
+$ notary delegation list registry.example.com/admin/demo
 
 ROLE                PATHS             KEY IDS                                                             THRESHOLD
 ----                -----             -------                                                             ---------
@@ -460,7 +437,7 @@ the `$ notary key remove` command.
 
 1) We will need to get the Key ID from the local Docker Trust store
 
-```
+```console
 $ notary key list
 
 ROLE       GUN                          KEY ID                                                              LOCATION
@@ -473,7 +450,7 @@ targets    ...example.com/admin/demo    c819f2eda8fba2810ec6a7f95f051c90276c87fd
 
 2) Remove the key from the local Docker Trust store
 
-```
+```console
 $ notary key remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
 
 Are you sure you want to remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role jeff) from /home/ubuntu/.docker/trust/private?  (yes/no)  y
@@ -489,21 +466,22 @@ snapshot and all delegations keys using the Notary CLI.
 This is often required by a container registry before a particular repository
 can be deleted. 
 
-```
-$ notary delete dtr.example.com/admin/demo --remote
-Deleting trust data for repository dtr.example.com/admin/demo
+```console
+$ notary delete registry.example.com/admin/demo --remote
+
+Deleting trust data for repository registry.example.com/admin/demo
 Enter username: admin
 Enter password: 
-Successfully deleted local and remote trust data for repository dtr.example.com/admin/demo
+Successfully deleted local and remote trust data for repository registry.example.com/admin/demo
 
-$ docker trust inspect --pretty dtr.example.com/admin/demo
-No signatures or cannot access dtr.example.com/admin/demo
+$ docker trust inspect --pretty registry.example.com/admin/demo
+
+No signatures or cannot access registry.example.com/admin/demo
 ```
 
 ## Related information
 
-* [Content trust in Docker](content_trust.md)
+* [Content trust in Docker](index.md)
 * [Manage keys for content trust](trust_key_mng.md)
 * [Automation with content trust](trust_automation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
-* [Using Docker Content Trust with a Remote UCP Cluster](/ee/dtr/user/manage-images/sign-images/trust-with-remote-ucp.md)

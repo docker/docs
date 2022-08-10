@@ -10,24 +10,22 @@ AUFS is a *union filesystem*. The `aufs` storage driver was previously the defau
 storage driver used for managing images and layers on Docker for Ubuntu, and for
 Debian versions prior to Stretch. If your Linux kernel is version 4.0 or higher,
 and you use Docker Engine - Community, consider using the newer
-[overlay2](overlayfs-driver.md){: target="_blank" class="_" }, which has
+[overlay2](overlayfs-driver.md){: target="_blank" rel="noopener" class="_" }, which has
 potential performance advantages over the `aufs` storage driver.
 
-> **Note**: AUFS is not supported on some distributions and Docker editions. See
-> [Prerequisites](#prerequisites) > for more information about supported
-> platforms, and see also
-> [the order of preferences for storage drivers](selectadriver.md#storage-driver-order).
+> **Note**
+>
+> AUFS is not supported on some distributions and Docker editions. See
+> [Prerequisites](#prerequisites) for more information about supported
+> platforms.
 
 ## Prerequisites
 
 - For Docker Engine - Community, AUFS is supported on Ubuntu, and on Debian versions prior to
   Stretch.
 - For Docker EE, AUFS is supported on Ubuntu.
-- If you use Ubuntu, you need to
-  [install extra packages](/install/linux/ubuntu.md#recommended-extra-packages-for-trusty-1404){: target="_blank" class="_"}
-  to add the AUFS module to the kernel. If you do not install these packages,
-  you need to use `devicemapper` on Ubuntu 14.04 (which is not recommended),
-  or `overlay2` on Ubuntu 16.04 and higher, which is also supported.
+- If you use Ubuntu, you need to add the AUFS module to the kernel. If you do
+  not install these packages, you need to use  `overlay2`.
 - AUFS cannot use the following backing filesystems: `aufs`, `btrfs`, or
   `ecryptfs`. This means that the filesystem which contains
   `/var/lib/docker/aufs` cannot be one of these filesystem types.
@@ -39,7 +37,7 @@ storage driver is configured, Docker uses it by default.
 
 1.  Use the following command to verify that your kernel supports AUFS.
 
-    ```bash
+    ```console
     $ grep aufs /proc/filesystems
 
     nodev   aufs
@@ -47,7 +45,7 @@ storage driver is configured, Docker uses it by default.
 
 2.  Check which storage driver Docker is using.
 
-    ```bash
+    ```console
     $ docker info
 
     <truncated output>
@@ -90,7 +88,7 @@ minimize overhead.
 The following `docker pull` command shows a Docker host downloading a Docker
 image comprising five layers.
 
-```bash
+```console
 $ docker pull ubuntu
 
 Using default tag: latest
@@ -227,6 +225,6 @@ The following generic performance best practices also apply to AUFS.
 
 ## Related information
 
-- [Volumes](/storage/volumes.md)
-- [Understand images, containers, and storage drivers](imagesandcontainers.md)
-- [Select a storage driver](selectadriver.md)
+- [Volumes](../volumes.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)

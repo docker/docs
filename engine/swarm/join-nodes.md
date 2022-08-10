@@ -18,24 +18,17 @@ goes down, the remaining manager nodes elect a new leader and resume
 orchestration and maintenance of the swarm state. By default, manager nodes
 also run tasks.
 
-Before you add nodes to a swarm you must install Docker Engine 1.12 or later on
-the host machine.
-
 The Docker Engine joins the swarm depending on the **join-token** you provide to
 the `docker swarm join` command. The node only uses the token at join time. If
 you subsequently rotate the token, it doesn't affect existing swarm nodes. Refer
 to [Run Docker Engine in swarm mode](swarm-mode.md#view-the-join-command-or-update-a-swarm-join-token).
-
-> **Note**: Docker engine allows a non-FIPS node to join a FIPS-enabled swarm cluster.
-
-While a mixed FIPS environment makes upgrading or changing status easier, Docker recommends not running a mixed FIPS environment in production.
 
 ## Join as a worker node
 
 To retrieve the join command including the join token for worker nodes, run the
 following command on a manager node:
 
-```bash
+```console
 $ docker swarm join-token worker
 
 To add a worker to this swarm, run the following command:
@@ -47,7 +40,7 @@ To add a worker to this swarm, run the following command:
 
 Run the command from the output on the worker to join the swarm:
 
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
   192.168.99.100:2377
@@ -83,7 +76,7 @@ For more detail about swarm managers and administering a swarm, see
 To retrieve the join command including the join token for manager nodes, run the
 following command on a manager node:
 
-```bash
+```console
 $ docker swarm join-token manager
 
 To add a manager to this swarm, run the following command:
@@ -95,7 +88,7 @@ To add a manager to this swarm, run the following command:
 
 Run the command from the output on the new manager node to join it to the swarm:
 
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-61ztec5kyafptydic6jfc1i33t37flcl4nuipzcusor96k7kby-5vy9t8u35tuqm7vh67lrz9xp6 \
   192.168.99.100:2377

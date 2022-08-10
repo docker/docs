@@ -1,12 +1,102 @@
 command: docker buildx rm
 short: Remove a builder instance
-long: Remove a builder instance
+long: |-
+  Removes the specified or current builder. It is a no-op attempting to remove the
+  default builder.
 usage: docker buildx rm [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml
+options:
+- option: all-inactive
+  value_type: bool
+  default_value: "false"
+  description: Remove all inactive builders
+  details_url: '#all-inactive'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: force
+  shorthand: f
+  value_type: bool
+  default_value: "false"
+  description: Do not prompt for confirmation
+  details_url: '#force'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: keep-daemon
+  value_type: bool
+  default_value: "false"
+  description: Keep the buildkitd daemon running
+  details_url: '#keep-daemon'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: keep-state
+  value_type: bool
+  default_value: "false"
+  description: Keep BuildKit state
+  details_url: '#keep-state'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: builder
+  value_type: string
+  description: Override the configured builder instance
+  details_url: '#builder'
+  deprecated: false
+  hidden: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+examples: |-
+  ### Remove all inactive builders (--all-inactive) {#all-inactive}
+
+  Remove builders that are not in running state.
+
+  ```console
+  $ docker buildx rm --all-inactive
+  WARNING! This will remove all builders that are not in running state. Are you sure you want to continue? [y/N] y
+  ```
+
+  ### Override the configured builder instance (--builder) {#builder}
+
+  Same as [`buildx --builder`](buildx.md#builder).
+
+  ### Do not prompt for confirmation (--force) {#force}
+
+  Do not prompt for confirmation before removing inactive builders.
+
+  ```console
+  $ docker buildx rm --all-inactive --force
+  ```
+
+  ### Keep the buildkitd daemon running (--keep-daemon) {#keep-daemon}
+
+  Keep the buildkitd daemon running after the buildx context is removed. This is useful when you manage buildkitd daemons and buildx contexts independently.
+  Currently, only supported by the [`docker-container` and `kubernetes` drivers](buildx_create.md#driver).
+
+  ### Keep BuildKit state (--keep-state) {#keep-state}
+
+  Keep BuildKit state, so it can be reused by a new builder with the same name.
+  Currently, only supported by the [`docker-container` driver](buildx_create.md#driver).
 deprecated: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

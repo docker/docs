@@ -18,19 +18,13 @@ easily combine multiple physical block devices into a single Btrfs filesystem.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
 Btrfs Filesystem as Btrfs.
 
-> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu
-> or Debian, and Docker EE / CS Engine on SLES.
+> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on SLES, Ubuntu or Debian.
 
 ## Prerequisites
 
 `btrfs` is supported if you meet the following prerequisites:
 
 - **Docker Engine - Community**: For Docker Engine - Community, `btrfs` is only recommended on Ubuntu or Debian.
-
-- **Docker EE**: For Docker EE and CS-Engine, `btrfs` is only supported on SLES.
-  See the
-  [Product compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix)
-  for all supported configurations for commercially-supported Docker.
 
 - Changing the storage driver makes any containers you have already
   created inaccessible on the local system. Use `docker save` to save containers,
@@ -47,8 +41,8 @@ Btrfs Filesystem as Btrfs.
 - `btrfs` support must exist in your kernel. To check this, run the following
   command:
 
-  ```bash
-  $ sudo cat /proc/filesystems | grep btrfs
+  ```console
+  $ grep btrfs /proc/filesystems
 
   btrfs
   ```
@@ -66,7 +60,7 @@ This procedure is essentially identical on SLES and Ubuntu.
 2.  Copy the contents of `/var/lib/docker/` to a backup location, then empty
     the contents of `/var/lib/docker/`:
 
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
     $ sudo rm -rf /var/lib/docker/*
     ```
@@ -76,7 +70,7 @@ This procedure is essentially identical on SLES and Ubuntu.
     `/dev/xvdg`. Double-check the block device names because this is a
     destructive operation.
 
-    ```bash
+    ```console
     $ sudo mkfs.btrfs -f /dev/xvdf /dev/xvdg
     ```
 
@@ -86,7 +80,7 @@ This procedure is essentially identical on SLES and Ubuntu.
 4.  Mount the new Btrfs filesystem on the `/var/lib/docker/` mount point. You
     can specify any of the block devices used to create the Btrfs filesystem.
 
-    ```bash
+    ```console
     $ sudo mount -t btrfs /dev/xvdf /var/lib/docker
     ```
 
@@ -95,7 +89,7 @@ This procedure is essentially identical on SLES and Ubuntu.
 
 5.  Copy the contents of `/var/lib/docker.bk` to `/var/lib/docker/`.
 
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker.bk/* /var/lib/docker/
     ```
 
@@ -112,15 +106,13 @@ This procedure is essentially identical on SLES and Ubuntu.
     }
     ```
 
-    See all storage options for each storage driver:
-
-    - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
-    - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+    See all storage options for each storage driver in the
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
 
 7.  Start Docker. After it is running, verify that `btrfs` is being used as the
     storage driver.
 
-    ```bash
+    ```console
     $ docker info
 
     Containers: 0
@@ -132,7 +124,7 @@ This procedure is essentially identical on SLES and Ubuntu.
     Storage Driver: btrfs
      Build Version: Btrfs v4.4
      Library Version: 101
-    <output truncated>
+    <...>
     ```
 
 8.  When you are ready, remove the `/var/lib/docker.bk` directory.
@@ -148,7 +140,7 @@ roughly 1 GB.
 To add a block device to a Btrfs volume, use the `btrfs device add` and
 `btrfs filesystem balance` commands.
 
-```bash
+```console
 $ sudo btrfs device add /dev/svdh /var/lib/docker
 
 $ sudo btrfs filesystem balance /var/lib/docker
@@ -313,6 +305,6 @@ storage driver.
 
 ## Related Information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
+- [Volumes](../volumes.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)

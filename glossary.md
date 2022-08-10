@@ -1,9 +1,10 @@
 ---
-title: "Docker glossary"
+title: "Glossary"
 description: "Glossary of terms used around Docker"
 keywords: "glossary, docker, terms, definitions"
 notoc: true
 noratings: true
+skip_read_time: true
 redirect_from:
 - /engine/reference/glossary/
 - /reference/glossary/
@@ -16,17 +17,17 @@ To get a specific entry while writing a page in the docs, enter Liquid text
 like so:
 {{ site.data.glossary["aufs"] }}
 -->
-<span id="glossaryMatch" />
-<span id="topicMatch" />
-
-## Glossary terms
-
-To see a definition for a term, and all topics in the documentation that have
-been tagged with that term, click any entry below:
-
-{% for entry in site.data.glossary %}- [{{ entry[0] }}]
-{% endfor %}
-
-{% for entry in site.data.glossary %}[{{ entry[0] }}]: /glossary/?term={{ entry[0] }}
-{: class="glossLink" data-content="{{ entry[1] | markdownify | strip_html | strip | truncatewords: 50, "..."}}" data-trigger="hover" id="popoverData{{ forloop.index }}" rel="popover" data-placement="bottom" data-original-title="Definition of: {{ entry[0]}}"}
-{% endfor %}
+<table>
+  <thead>
+    <tr><th>Term</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+  {%- for entry in site.data.glossary -%}
+    {%- assign id = entry[0] | slugify -%}
+    <tr>
+      <td><a class="glossary" id="{{ id }}" href="#{{ id }}">{{ entry[0] }}</a></td>
+      <td>{{ entry[1] | markdownify }}</td>
+    </tr>
+  {%- endfor -%}
+  </tbody>
+</table>

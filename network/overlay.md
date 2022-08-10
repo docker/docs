@@ -3,7 +3,6 @@ title: Use overlay networks
 description: All about using overlay networks
 keywords: network, overlay, user-defined, swarm, service
 redirect_from:
-- /engine/swarm/networking/
 - /engine/userguide/networking/overlay-security-model/
 - /config/containers/overlay/
 ---
@@ -11,14 +10,14 @@ redirect_from:
 The `overlay` network driver creates a distributed network among multiple
 Docker daemon hosts. This network sits on top of (overlays) the host-specific
 networks, allowing containers connected to it (including swarm service
-containers) to communicate securely. Docker transparently handles routing of
-each packet to and from the correct Docker daemon host and the correct
-destination container.
+containers) to communicate securely when encryption is enabled. Docker
+transparently handles routing of each packet to and from the correct Docker
+daemon host and the correct destination container.
 
 When you initialize a swarm or join a Docker host to an existing swarm, two
 new networks are created on that Docker host:
 
-- an overlay network called `ingress`, which handles control and data traffic
+- an overlay network called `ingress`, which handles the control and data traffic
   related to swarm services. When you create a swarm service and do not
   connect it to a user-defined overlay network, it connects to the `ingress`
   network by default.
@@ -61,7 +60,7 @@ apply to overlay networks used by standalone containers.
 To create an overlay network for use with swarm services, use a command like
 the following:
 
-```bash
+```console
 $ docker network create -d overlay my-overlay
 ```
 
@@ -69,7 +68,7 @@ To create an overlay network which can be used by swarm services **or**
 standalone containers to communicate with other standalone containers running on
 other Docker daemons, add the `--attachable` flag:
 
-```bash
+```console
 $ docker network create -d overlay --attachable my-attachable-overlay
 ```
 
@@ -105,16 +104,16 @@ automatically rotate the keys every 12 hours.
 You can use the overlay network feature with both `--opt encrypted --attachable`
  and attach unmanaged containers to that network:
 
-```bash
+```console
 $ docker network create --opt encrypted --driver overlay --attachable my-attachable-multi-host-network
 ```
 
 ### Customize the default ingress network
 
-Most users never need to configure the `ingress` network, but Docker 17.05 and
-higher allow you to do so. This can be useful if the automatically-chosen subnet
-conflicts with one that already exists on your network, or you need to customize
-other low-level network settings such as the MTU.
+Most users never need to configure the `ingress` network, but Docker allows you
+to do so. This can be useful if the automatically-chosen subnet conflicts with
+one that already exists on your network, or you need to customize other low-level
+network settings such as the MTU.
 
 Customizing the `ingress` network involves removing and recreating it. This is
 usually done before you create any services in the swarm. If you have existing
@@ -133,7 +132,7 @@ services which publish ports, such as a WordPress service which publishes port
 
 2.  Remove the existing `ingress` network:
 
-    ```bash
+    ```console
     $ docker network rm ingress
 
     WARNING! Before removing the routing-mesh network, make sure all the nodes
@@ -147,7 +146,7 @@ services which publish ports, such as a WordPress service which publishes port
     custom options you want to set. This example sets the MTU to 1200, sets
     the subnet to `10.11.0.0/16`, and sets the gateway to `10.11.0.2`.
 
-    ```bash
+    ```console
     $ docker network create \
       --driver overlay \
       --ingress \
@@ -177,7 +176,7 @@ from the swarm.
 
 2.  Delete the existing `docker_gwbridge` interface.
 
-    ```bash
+    ```console
     $ sudo ip link set docker_gwbridge down
 
     $ sudo ip link del dev docker_gwbridge
@@ -188,9 +187,9 @@ from the swarm.
 4.  Create or re-create the `docker_gwbridge` bridge manually with your custom
     settings, using the `docker network create` command.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](/engine/reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../engine/reference/commandline/network_create.md#bridge-driver-options).
 
-    ```bash
+    ```console
     $ docker network create \
     --subnet 10.11.0.0/16 \
     --opt com.docker.network.bridge.name=docker_gwbridge \
@@ -287,7 +286,7 @@ For most situations, you should connect to the service name, which is load-balan
 
 ## Next steps
 
-- Go through the [overlay networking tutorial](/network/network-tutorial-overlay.md)
-- Learn about [networking from the container's point of view](/config/containers/container-networking.md)
-- Learn about [standalone bridge networks](/network/bridge.md)
-- Learn about [Macvlan networks](/network/macvlan.md)
+- Go through the [overlay networking tutorial](network-tutorial-overlay.md)
+- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Learn about [standalone bridge networks](bridge.md)
+- Learn about [Macvlan networks](macvlan.md)

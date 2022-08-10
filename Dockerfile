@@ -1,93 +1,125 @@
+# syntax=docker/dockerfile:1
+
 # This Dockerfile builds the docs for https://docs.docker.com/
 # from the master branch of https://github.com/docker/docker.github.io
-#
-# Here is the sequence:
-# 1.  Set up base stages for building and deploying
-# 2.  Collect and build the archived documentation
-# 3.  Collect and build the reference documentation (from upstream resources)
-# 4.  Build static HTML from the current branch
-# 5.  Build the final image, combining the archives, reference docs, and
-#     current version of the documentation
-#
-# When the image is run, it starts Nginx and serves the docs at port 4000
 
+# Use same ruby version as the one in .ruby-version
+# that is used by Netlify
+ARG RUBY_VERSION=2.7.6
+# Same as the one in Gemfile.lock
+ARG BUNDLER_VERSION=2.3.13
 
-# Engine
-ARG ENGINE_BRANCH="19.03.x"
+ARG JEKYLL_ENV=development
+ARG DOCS_URL=http://localhost:4000
 
-# Distribution
-ARG DISTRIBUTION_BRANCH="release/2.7"
+# Base stage for building
+FROM ruby:${RUBY_VERSION}-alpine AS base
+WORKDIR /src
+RUN apk add --no-cache bash build-base git
 
+# Gem stage will install bundler used as dependency manager
+# for our dependencies in Gemfile for Jekyll
+FROM base AS gem
+ARG BUNDLER_VERSION
+COPY Gemfile* .
+RUN gem uninstall -aIx bundler \
+  && gem install bundler -v ${BUNDLER_VERSION} \
+  && bundle install --jobs 4 --retry 3
 
-###
-# Set up base stages for building and deploying
-###
+# Vendor Gemfile for Jekyll
+FROM gem AS vendored
+ARG BUNDLER_VERSION
+RUN bundle update \
+  && mkdir /out \
+  && cp Gemfile.lock /out
 
-# Get basic configs and Jekyll env
-FROM docs/docker.github.io:docs-builder AS builderbase
-ENV TARGET=/usr/share/nginx/html
-WORKDIR /usr/src/app/md_source/
+# Stage used to output the vendored Gemfile.lock:
+# > make vendor
+# or
+# > docker buildx bake vendor
+FROM scratch AS vendor
+COPY --from=vendored /out /
 
-# Set vars used by fetch-upstream-resources.sh script
-# Branch to pull from, per ref doc. To get master from svn the svn branch needs
-# to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
-ARG ENGINE_BRANCH
-ENV ENGINE_BRANCH=${ENGINE_BRANCH}
-ENV ENGINE_SVN_BRANCH=branches/${ENGINE_BRANCH}
+# Build the static HTML for the current docs.
+# After building with jekyll, fix up some links
+FROM gem AS generate
+ARG JEKYLL_ENV
+ARG DOCS_URL
+ENV TARGET=/out
+RUN --mount=type=bind,target=.,rw \
+    --mount=type=cache,target=/src/.jekyll-cache <<EOT
+  set -eu
+  CONFIG_FILES=_config.yml$([ "$JEKYLL_ENV" = "production" ] && echo ",_config_production.yml" || true)
+  set -x
+  bundle exec jekyll build --profile -d ${TARGET} --config ${CONFIG_FILES}
+EOT
 
-ARG DISTRIBUTION_BRANCH
-ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
-ENV DISTRIBUTION_SVN_BRANCH=branches/${DISTRIBUTION_BRANCH}
+# htmlproofer checks for broken links
+FROM gem AS htmlproofer-base
+RUN --mount=type=bind,from=generate,source=/out,target=_site <<EOF
+  htmlproofer ./_site \
+    --disable-external \
+    --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" \
+    --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" \
+    --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/" > /results 2>&1
+  rc=$?
+  if [[ $rc -eq 0 ]]; then
+    echo -n > /results
+  fi
+EOF
 
+FROM htmlproofer-base as htmlproofer
+RUN <<EOF
+  cat /results
+  [ ! -s /results ] || exit 1
+EOF
 
-# Reset to alpine so we don't get any docs source or extra apps
-FROM nginx:alpine AS deploybase
-ENV TARGET=/usr/share/nginx/html
+FROM scratch as htmlproofer-output
+COPY --from=htmlproofer-base /results /results
 
-# Get the nginx config from the nginx-onbuild image
-# This hardly ever changes so should usually be cached
-COPY --from=docs/docker.github.io:nginx-onbuild /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+# mdl is a lint tool for markdown files
+FROM gem AS mdl-base
+ARG MDL_JSON
+ARG MDL_STYLE
+RUN --mount=type=bind,target=. <<EOF
+  mdl --ignore-front-matter ${MDL_JSON:+'--json'} --style=${MDL_STYLE:-'.markdownlint.rb'} $( \
+    find '.' -name '*.md' \
+      -not -path './registry/*' \
+      -not -path './desktop/extensions-sdk/*' \
+  ) > /results
+  rc=$?
+  if [[ $rc -eq 0 ]]; then
+    echo -n > /results
+  fi
+EOF
 
-# Set the default command to serve the static HTML site
-CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000"; exec nginx -g 'daemon off;'
+FROM mdl-base as mdl
+RUN <<EOF
+  cat /results
+  [ ! -s /results ] || exit 1
+EOF
 
+FROM scratch as mdl-output
+COPY --from=mdl-base /results /results
 
-# Build the archived docs
-# these docs barely change, so can be cached
-FROM deploybase AS archives
-# Get all the archive static HTML and put it into place. To add a new archive,
-# add it here, and ALSO edit _data/docsarchives/archives.yaml to add it to the drop-down
-COPY --from=docs/docker.github.io:v17.03 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v17.06 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v17.09 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v17.12 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v18.03 ${TARGET} ${TARGET}
-COPY --from=docs/docker.github.io:v18.09 ${TARGET} ${TARGET}
+# Release the generated files in a scratch image
+# Can be output to your host with:
+# > make release
+# or
+# > docker buildx bake release
+FROM scratch AS release
+COPY --from=generate /out /
 
-# Fetch upstream resources (reference documentation)
-# Only add the files that are needed to build these reference docs, so that
-# these docs are only rebuilt if changes were made to the configuration.
-FROM builderbase AS upstream-resources
-COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
-COPY ./_config.yml .
-COPY ./_data/toc.yaml ./_data/
-RUN bash ./_scripts/fetch-upstream-resources.sh .
+# Create a runnable nginx instance with generated HTML files.
+# When the image is run, it starts Nginx and serves the docs at port 4000:
+# > make deploy
+# or
+# > docker-compose up --build
+FROM nginx:alpine AS deploy
+COPY --from=release / /usr/share/nginx/html
+COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
+ARG JEKYLL_ENV
+ENV JEKYLL_ENV=${JEKYLL_ENV}
+CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000 (build target: ${JEKYLL_ENV})"; exec nginx -g 'daemon off;'
 
-
-# Build the current docs from the checked out branch
-FROM builderbase AS current
-COPY . .
-COPY --from=upstream-resources /usr/src/app/md_source/. ./
-
-# Build the static HTML, now that everything is in place
-RUN jekyll build -d ${TARGET}
-
-# Fix up some links, don't touch the archives
-RUN find ${TARGET} -type f -name '*.html' | grep -vE "v[0-9]+\." | while read i; do sed -i 's#href="https://docs.docker.com/#href="/#g' "$i"; done
-
-
-# Docs with archives (for deploy)
-FROM archives AS deploy
-
-# Add the current version of the docs
-COPY --from=current ${TARGET} ${TARGET}
+FROM deploy

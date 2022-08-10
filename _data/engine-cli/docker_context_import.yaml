@@ -1,6 +1,7 @@
 command: docker context import
 short: Import a context from a tar or zip file
-long: Imports a context previously exported with `docker context export`. To import
+long: |-
+  Imports a context previously exported with `docker context export`. To import
   from stdin, use a hyphen (`-`) as filename.
 usage: docker context import CONTEXT FILE|-
 pname: docker context

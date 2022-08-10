@@ -1,8 +1,14 @@
 command: docker service rollback
 short: Revert changes to a service's configuration
 long: |-
-  Roll back a specified service to its previous version from the swarm. This command must be run
-  targeting a manager node.
+  Roll back a specified service to its previous version from the swarm.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker service rollback [OPTIONS] SERVICE
 pname: docker service
 plink: docker_service.yaml
@@ -43,13 +49,13 @@ examples: |-
 
   Create a service with a single replica:
 
-  ```bash
+  ```console
   $ docker service create --name my-service -p 8080:80 nginx:alpine
   ```
 
   Confirm that the service is running with a single replica:
 
-  ```bash
+  ```console
   $ docker service ls
 
   ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
@@ -58,7 +64,7 @@ examples: |-
 
   Update the service to use three replicas:
 
-  ```bash
+  ```console
   $ docker service update --replicas=3 my-service
 
   $ docker service ls
@@ -70,7 +76,7 @@ examples: |-
   Now roll back the service to its previous version, and confirm it is
   running a single replica again:
 
-  ```bash
+  ```console
   $ docker service rollback my-service
 
   $ docker service ls

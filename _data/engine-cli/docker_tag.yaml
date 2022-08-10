@@ -15,7 +15,7 @@ long: |-
   period or a dash and may contain a maximum of 128 characters.
 
   You can group your images together using names and tags, and then upload them
-  to [*Share Images via Repositories*](https://docs.docker.com/engine/tutorials/dockerrepos/#/contributing-to-docker-hub).
+  to [*Share images on Docker Hub*](https://docs.docker.com/get-started/part3/).
 usage: docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 pname: docker
 plink: docker.yaml
@@ -25,7 +25,7 @@ examples: |-
   To tag a local image with ID "0e5574283393" into the "fedora" repository with
   "version1.0":
 
-  ```bash
+  ```console
   $ docker tag 0e5574283393 fedora/httpd:version1.0
   ```
 
@@ -34,7 +34,7 @@ examples: |-
   To tag a local image with name "httpd" into the "fedora" repository with
   "version1.0":
 
-  ```bash
+  ```console
   $ docker tag httpd fedora/httpd:version1.0
   ```
 
@@ -46,7 +46,7 @@ examples: |-
   To tag a local image with name "httpd" and tag "test" into the "fedora"
   repository with "version1.0.test":
 
-  ```bash
+  ```console
   $ docker tag httpd:test fedora/httpd:version1.0.test
   ```
 
@@ -55,7 +55,7 @@ examples: |-
   To push an image to a private registry and not the central Docker
   registry you must tag it with the registry hostname and port (if needed).
 
-  ```bash
+  ```console
   $ docker tag 0e5574283393 myregistryhost:5000/fedora/httpd:version1.0
   ```
 deprecated: false
