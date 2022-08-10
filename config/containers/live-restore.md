@@ -25,7 +25,7 @@ when the daemon becomes unavailable. **Only do one of the following**.
 * Add the configuration to the daemon configuration file. On Linux, this
   defaults to `/etc/docker/daemon.json`. On Docker Desktop for Mac or Docker
   Desktop for Windows, select the Docker icon from the task bar, then click
-  **Preferences** -> **Daemon** -> **Advanced**.
+  **Settings** -> **Docker Engine**.
 
   - Use the following JSON to enable `live-restore`.
 
