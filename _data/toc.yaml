@@ -1339,9 +1339,6 @@ manuals:
       title: Install binaries
   - path: /engine/install/linux-postinstall/
     title: Optional post-installation steps
-  - path: /engine/release-notes/
-    title: Release notes
-  - sectiontitle: Previous versions
     section:
     - path: /engine/release-notes/19.03/
       title: Engine 19.03 release notes
@@ -1389,7 +1386,9 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
-
+  - path: /engine/release-notes/
+    title: Release notes
+  - sectiontitle: Previous versions
 - sectiontitle: Docker Build
   section:
     - path: /build/
