@@ -1465,10 +1465,10 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/release-notes/
-    title: Release notes
   - path: /compose/cli-command-compatibility/
     title: Compose v2 compatibility
+  - path: /compose/release-notes/
+    title: Release notes
 
 - sectiontitle: Docker Hub
   section:
