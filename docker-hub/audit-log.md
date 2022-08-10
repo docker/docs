@@ -52,13 +52,20 @@ Refer to the following section for a list of events and their descriptions:
 
 | Event                                                          | Description                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|
-| Team Created | Activities related to the creation of a team     |
+| Team Created | Activities related to the creation of a team |
+| Team Updated | Activities related to the modification of a team |
 | Team Deleted | Activities related to the deletion of a team |
 | Team Member Added | Details of the member added to your team |
 | Team Member Removed | Details of the member removed from your team |
 | Team Member Invited | Details of the member invited to your team |
-| Organization Member Removed | Details about member removed from your organization |
-|  Organization Created| Activities related to the creation of a new organization |
+| Organization Member Removed | Details about the member removed from your organization |
+| Organization Created | Activities related to the creation of a new organization |
+| Organization Settings Updated | Details related to the organization setting that was updated |
+| Registry Access Management enabled | Activities related to enabling Registry Access Management |
+| Registry Access Management disabled | Activities related to disabling Registry Access Management |
+| Registry Access Management registry added | Activities related to the addition of a registry |
+| Registry Access Management registry removed | Activities related to the removal of a registry |
+| Registry Access Management registry updated | Details related to the registry that was updated |
 
 ### Repository events
 
