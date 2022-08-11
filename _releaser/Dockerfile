@@ -24,7 +24,6 @@ FROM base AS netlify-remove
 ARG NETLIFY_SITE_NAME
 RUN --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
   --mount=type=secret,id=NETLIFY_AUTH_TOKEN \
-  NETLIFY_AUTH_TOKEN=$(cat /run/secrets/NETLIFY_AUTH_TOKEN) \
   releaser netlify remove
 
 FROM base AS netlify-deploy
@@ -33,10 +32,7 @@ RUN --mount=type=bind,from=sitedir,target=/site \
   --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
   --mount=type=secret,id=NETLIFY_AUTH_TOKEN \
   --mount=type=secret,id=NETLIFY_ACCOUNT_SLUG \
-  NETLIFY_AUTH_TOKEN=$(cat /run/secrets/NETLIFY_AUTH_TOKEN) \
-  NETLIFY_ACCOUNT_SLUG=$(cat /run/secrets/NETLIFY_ACCOUNT_SLUG) \
-  NETLIFY_DIR=/site \
-  releaser netlify deploy
+  NETLIFY_DIR=/site releaser netlify deploy
 
 FROM base AS aws-s3-update-config
 ARG AWS_REGION
@@ -46,8 +42,6 @@ RUN --mount=type=bind,target=. \
   --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
   --mount=type=secret,id=AWS_ACCESS_KEY_ID \
   --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
-  AWS_ACCESS_KEY_ID=$(cat /run/secrets/AWS_ACCESS_KEY_ID) \
-  AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/AWS_SECRET_ACCESS_KEY) \
   releaser aws s3-update-config
 
 FROM base AS aws-lambda-invoke
@@ -56,6 +50,4 @@ ARG AWS_LAMBDA_FUNCTION
 RUN --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
   --mount=type=secret,id=AWS_ACCESS_KEY_ID \
   --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
-  AWS_ACCESS_KEY_ID=$(cat /run/secrets/AWS_ACCESS_KEY_ID) \
-  AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/AWS_SECRET_ACCESS_KEY) \
   releaser aws lambda-invoke
