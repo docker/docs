@@ -29,7 +29,7 @@ The `ddClient` object gives access to various APIs:
 
 - [Extension Backend](backend.md)
 - [Docker](docker.md)
-- [Dashboard](dashboard.md)
+- [Dashboard](index.md)
 - [Navigation](dashboard-routes-navigation.md)
 
 Find the Extensions API reference [here](reference/README.md).

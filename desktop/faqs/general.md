@@ -46,7 +46,7 @@ This includes:
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
-- Viewing remote images in the [Docker Dashboard](../dashboard.md)
+- Viewing remote images in the Docker Dashboard
 - Settting up [Dev Environments](../dev-environments/index.md)
 - Docker build when using [Buildkit](../../develop/develop-images/build_enhancements.md). You can work around this by disabling
   BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
