@@ -23,47 +23,21 @@ Try to make sure the title of your page is action orientated:
     - enable SCIM
     - Install Docker Desktop
 Make sure the title of your page and the TOC entry matches
-If you want to use a ‘:’ in a page title in the table of contents, you must wrap the entire title in “” to avoid breaking the build. 
+If you want to use a ‘:’ in a page title in the table of contents, you must wrap the entire title in “” to avoid breaking the build.
 
 ## Images
 
-- Images, including screenshots, can help a reader better understand a concept. However, they should be used sparingly because they tend to go out-of-date quickly.
+- Images, including screenshots, can help a reader better understand a concept. However, they should be used sparingly as they tend to go out-of-date quickly.
+
+### Best practice:
 - When you take screenshots:
     - Don’t use lorem ipsum text. Try to replicate how the feature would be used in a real-world scenario, and use realistic text.
     - Capture only the relevant UI. Don’t include unnecessary white space or areas of the UI that don’t help illustrate the point.
     - Keep it small. If you don’t need to show the full width of the screen, don’t.
     - Review how the image renders on the page. Make sure the image isn’t blurry or overwhelming.
     - Be consistent. Coordinate screenshots with the other screenshots already on a documentation page for a consistent reading experience.
-
-    ### Images
-
-Don't forget to remove images that are no longer used. Keep the images sorted
-in the local `images/` directory, with names that naturally group related images
-together in alphabetical order. For example,  use `settings-file-share.png`
-and `settings-proxies.png` instead of `file-share-settings.png` and
-`proxies-settings.png`.
-
-You may also use numbers, especially in the case of a
-sequence, for example, `run-only-the-images-you-trust-1.svg`,
-`run-only-the-images-you-trust-2.png`, `run-only-the-images-you-trust-3.png`.
-When applicable, capture windows rather than the rectangular regions. This
-eliminates unpleasant background and saves the editors the need to crop images.
-
-On Mac, capture windows without shadows. To do this, when  you press
-<kbd>Command-Shift-4</kbd>, press <kbd>Option</kbd> while clicking on the window. To disable shadows completely, run:
-
-```bash
-$ defaults write com.apple.screencapture disable-shadow -bool TRUE
-$ killall SystemUIServer  # restart it.
-```
-
-You can restore the shadows later using `-bool FALSE`.
-
-To keep the Git repository light, _please_ compress the images
-(losslessly). On Mac, you can use [ImageOptim](https://imageoptim.com) for
-instance. Be sure to compress the images **before** adding them to the
-repository. Compressing images after adding them to the repository actually worsens the impact on the Git repo (however, ut still optimizes the bandwidth during browsing).
-
+    - To keep the Git repository light, compress the images (losslessly). Be sure to compress the images **before** adding them to the repository. Compressing images after adding them to the repository actually worsens the impact on the Git repo (however, ut still optimizes the bandwidth during browsing).
+    - Don't forget to remove images that are no longer used.
 
 ## Links
 

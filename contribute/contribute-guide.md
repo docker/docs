@@ -2,9 +2,7 @@
 title: Contributing guidelines
 description: Guidelines for contributing to Docker's docs
 keywords: contribute, guide, style guide
---- 
-
-## Contribution guidelines
+---
 
 The live docs are published from the `master` branch. Therefore, you must create pull requests against the `master` branch for all content updates. This includes:
 
@@ -43,12 +41,10 @@ Some files and directories are maintained in the upstream repositories. You can 
 Help us review your PRs more quickly by following these guidelines.
 
 - Try not to touch a large number of files in a single PR if possible.
-- Don't change whitespace or line wrapping in parts of a file you are not
-  editing for other reasons. Make sure your text editor is not configured to
+- Don't change whitespace or line wrapping in parts of a file you are not editing for other reasons. Make sure your text editor is not configured to
   automatically reformat the whole file when saving.
 - We highly recommend that you build the docs locally and verify your changes before submitting a PR. See the section [Build and preview the docs locally](#build-and-preview-the-docs-locally).
 - A Netlify test runs for each PR that is against the `master` branch, and deploys the result of your PR to a staging site. The URL will be available at in the **Conversation** tab. Check the staging site to verify how your changes look and fix issues, if necessary.
-- Use relative linking to link to other topics. See [Relative linking for GitHub viewing](#relative-linking-for-GitHub-viewing).
 
 ## Collaborate on a pull request
 

@@ -38,7 +38,7 @@ Use a tone that's natural, friendly, and respectful without being overly colloqu
 
 ## Positive language
 
-Use a positive language. Instead of highlighting the limitations and what the users cannot do, emphasize on the positive outcomes. 
+Use a positive language. Instead of highlighting the limitations and what the users cannot do, emphasize on the positive outcomes.
 
 For example, **instead of**:
 
@@ -47,7 +47,3 @@ For example, **instead of**:
 **Use**:
 
 “*Features such as Single Sign-on (SSO), Image Access Management, Registry Access Management are  available in Docker Business subscription*.”
-
-# A Note About Moby
-
-Moby is Docker's mascot and is tightly tied into our history. Moby is a "blue whale" (the largest known animal to have ever existed!) and is gender-neutral. While Moby smiles and communicates with other facial expressions, they do not speak. Do not try to write in Moby's voice. Learn more about how to use Moby by reading through our usage guidelines.

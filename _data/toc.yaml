@@ -1659,6 +1659,7 @@ contribute:
   - path: /contribute/overview/
     title: Contribute to Docker's docs
   - path: /contribute/contribute-guide/
+    title: Contribution guidelines
   - sectiontitle: Style guide
     section:
     - path: /contribute/style/grammar/

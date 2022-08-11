@@ -1,10 +1,11 @@
 ---
 title: Contribute to Docker's docs
 ---
+
 We deeply value documentation contributions from the Docker community. We'd like to make it as easy
 as possible for you to work in this repository. The following sections guide you through the process of contributing to Docker documentation.
 
-This section defines the standards for Docker documentation, including grammar, formatting, word use, and more.
+
 
   <section class="container">
     <div class="row">
@@ -28,8 +29,8 @@ This section defines the standards for Docker documentation, including grammar, 
         <a class="card guides" href="/contribute/style/formatting/">
           <h5 class="title">Formatting guidelines</h5>
           <p>
-            Learn how to format your content to match the rest of our documentation.
-            your applications.
+            Format your content to match the rest of our documentation.
+            
           </p>
         </a>
       </div>
@@ -37,7 +38,7 @@ This section defines the standards for Docker documentation, including grammar, 
         <a class="card language-guides" href="/contribute/recommended-words/">
           <h5 class="title">Recommended word list</h5>
           <p>
-            This section can help you choose the right words for your content.
+            Choose the right words for your content.
           </p>
         </a>
       </div>
@@ -45,7 +46,7 @@ This section defines the standards for Docker documentation, including grammar, 
         <a class="card manuals" href="/contribute/file-conventions">
           <h5 class="title">Source file conventions</h5>
           <p>
-            
+            Guidelines for creating a new page
           </p>
         </a>
       </div>
@@ -53,7 +54,7 @@ This section defines the standards for Docker documentation, including grammar, 
         <a class="card reference" href="/contribute/style/terminology/">
           <h5 class="title">Docker terminology</h5>
           <p>
-            
+            Explore commonly-used Docker terms
           </p>
         </a>
       </div>
