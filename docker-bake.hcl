@@ -112,7 +112,7 @@ variable "AWS_S3_BUCKET" {
   default = ""
 }
 variable "AWS_S3_CONFIG" {
-  default = "_website-config-docs-stage.json"
+  default = ""
 }
 variable "AWS_CLOUDFRONT_ID" {
   default = ""

@@ -63,5 +63,6 @@ RUN --mount=type=bind,target=. \
   --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
   --mount=type=secret,id=AWS_SESSION_TOKEN \
   AWS_LAMBDA_FUNCTION_FILE=cloudfront-lambda-redirects.js \
-  REDIRECTS_JSON=$(cat /site/redirects.json) \
+  REDIRECTS_JSON=$(jq -c '.' /site/redirects.json) \
+  REDIRECTS_PREFIXES_JSON=$(jq -c '.' redirects-prefixes.json) \
   releaser aws cloudfront-update

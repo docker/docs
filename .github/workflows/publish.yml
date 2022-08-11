@@ -37,6 +37,7 @@ jobs:
           elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
             DOCS_URL="https://docs-lab.docker.com"
             DOCS_S3_BUCKET=""
+            DOCS_S3_CONFIG="s3-config.json"
             DOCS_LAMBDA_FUNCTION_CACHE=""
             DOCS_S3_CONFIG="_website-config-docs-lab.json"
           else
