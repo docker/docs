@@ -78,7 +78,7 @@ First, locate the `com.docker.diagnose` tool. It is located at:
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
 <li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
-<li class="active"><a data-toggle="tab" data-target="#linux1">Linux</a></li>
+<li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
 </ul>
 <div class="tab-content">
 <div id="windows1" class="tab-pane fade in active" markdown="1">
@@ -117,11 +117,11 @@ composed of your user ID and a timestamp. Ensure you provide the full diagnostic
 To view the contents of the diagnostic file, run:
 
 <ul class="nav nav-tabs">
-<li><a data-toggle="tab" data-target="#mac2">Mac</a></li>
-<li class="active"><a data-toggle="tab" data-target="#linux2">Linux</a></li>
+<li class="active"><a data-toggle="tab" data-target="#mac2">Mac</a></li>
+<li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
 </ul>
 <div class="tab-content">
-<div id="mac2" class="tab-pane fade" markdown="1">
+<div id="mac2" class="tab-pane fade in active" markdown="1">
 
 ```console
 $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
@@ -148,7 +148,7 @@ First, locate the `com.docker.diagnose` tool. It is located at:
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
 <li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
-<li class="active"><a data-toggle="tab" data-target="#linux3">Linux</a></li>
+<li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
 </ul>
 <div class="tab-content">
 <div id="windows3" class="tab-pane fade in active" markdown="1">
@@ -192,11 +192,11 @@ You can then create and issue on GitHub:
 In addition to using the diagnose option to submit logs, you can browse the logs yourself.
 
 <ul class="nav nav-tabs">
-<li><a data-toggle="tab" data-target="#mac4">Mac</a></li>
-<li class="active"><a data-toggle="tab" data-target="#linux4">Linux</a></li>
+<li class="active"><a data-toggle="tab" data-target="#mac4">Mac</a></li>
+<li><a data-toggle="tab" data-target="#linux4">Linux</a></li>
 </ul>
 <div class="tab-content">
-<div id="mac4" class="tab-pane fade" markdown="1">
+<div id="mac4" class="tab-pane fade in active" markdown="1">
 
 ### In a terminal
 
@@ -252,7 +252,8 @@ Desktop at `$HOME/.docker/desktop/log/`.
 Refer to the [read the logs](../../config/daemon/index.md#read-the-logs) section
 to learn how to view the Docker Daemon logs.
 
-</div></div>
+</div>
+</div>
 
 ## What's next?
 

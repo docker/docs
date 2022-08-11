@@ -127,7 +127,7 @@ It gives you quick access to container logs, lets you get a shell inside the con
 easily manage container lifecycles (stop, remove, etc.).
 
 To access the dashboard, follow the instructions in the
-[Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
+[Docker Desktop manual](../desktop/index.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 
