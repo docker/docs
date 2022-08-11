@@ -54,7 +54,7 @@ the remaining systemd service files.
 ```console
 $ rm -r $HOME/.docker/desktop
 $ sudo rm /usr/local/bin/com.docker.cli
-$ sudo apt purge docker-desktop
+$ sudo pacman -Rns docker-desktop
 ```
 
 Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/config.json`. Additionally, you must delete any edited configuration files manually. 
