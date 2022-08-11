@@ -78,7 +78,7 @@ First, locate the `com.docker.diagnose` tool. It is located at:
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
 <li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
-<li class="active"><a data-toggle="tab" data-target="#linux1">Linux</a></li>
+<li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
 </ul>
 <div class="tab-content">
 <div id="windows1" class="tab-pane fade in active" markdown="1">
@@ -148,7 +148,7 @@ First, locate the `com.docker.diagnose` tool. It is located at:
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
 <li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
-<li class="active"><a data-toggle="tab" data-target="#linux3">Linux</a></li>
+<li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
 </ul>
 <div class="tab-content">
 <div id="windows3" class="tab-pane fade in active" markdown="1">
