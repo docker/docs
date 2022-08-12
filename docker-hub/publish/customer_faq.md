@@ -12,7 +12,7 @@ redirect_from:
 
 ### What is the difference between a Community User and a Verified Publisher?
 
-Community Users have simply signed up to receive a DockerID and made some of their repositories Public on Docker Hub. By contrast, Verified Publishers have engaged directly with Docker's partner team, and enrolled in our Docker Technology Partner program. These profiles indicate that the business entity of the publisher has been validated, and have taken proactive steps to partner with Docker. Unlike Community content, these Verified Publisher profiles indicate true provenance of the content. 
+Community Users have simply signed up to receive a DockerID and made some of their repositories Public on Docker Hub. By contrast, Verified Publishers have engaged directly with Docker's partner team, and enrolled in our Docker Technology Partner program. These profiles indicate that the business entity of the publisher has been validated, and have taken proactive steps to partner with Docker. Unlike Community content, these Verified Publisher profiles indicate true provenance of the content.
 
 ## Certified content
 
