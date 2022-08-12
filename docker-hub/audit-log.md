@@ -81,10 +81,10 @@ Refer to the following section for a list of events and their descriptions:
 
 | Event                                                          | Description                                   |
 |:------------------------------------------------------------------|:------------------------------------------------|
-| Plan Upgraded | Billing plan upgrade events|
-| Plan Downgraded | Billing plan downgrade events |
-| Seat Added | Billing seat added events |
-| Seat Removed | Billing seat removed events |
-| Cycle Changed | Billing cycle change events |
-| Downgrade Canceled | Billing plan cancel downgrade events |
-| Seat Removal Canceled | Billing cancel seat removal events |
+| Plan Upgraded | Occurs when your organization’s billing plan is upgraded to a higher tier plan.|
+| Plan Downgraded | Occurs when your organization’s billing plan is downgraded to a lower tier plan. |
+| Seat Added | Occurs when a seat is added to your organization’s billing plan. |
+| Seat Removed | Occurs when a seat is removed from your organization’s billing plan. |
+| Billing Cycle Changed | Occurs when there is a change in the recurring interval that your organization is charged.|
+| Plan Downgrade Canceled | Occurs when a scheduled downgrade for your organization is canceled.|
+| Seat Removal Canceled | Occurs when a scheduled seat removal for an organization’s billing plan is canceled. |
