@@ -37,7 +37,7 @@ As you can see, our `curl` command failed because the connection to our server w
 
 To stop the container, press `ctrl-c`. This will return you to the terminal prompt.
 
-To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 8000 inside the container to port 8080 outside the container, we would pass `8080:8000` to the `--publish` flag.
+To publish a port for our container, we’ll use the `--publish` flag (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 8000 inside the container to port 8080 outside the container, we would pass `8080:8000` to the `--publish` flag.
 
 Start the container and expose port 8080 to port 8080 on the host.
 
