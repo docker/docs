@@ -1,0 +1,18 @@
+extends: capitalization
+message: "Use sentence case for headings: '%s'."
+level: warning
+scope: heading
+match: $sentence
+indicators:
+  - ':'
+exceptions:
+  - Docker
+  - Docker Desktop
+  - Docker Hub
+  - Docker Engine
+  - Kubernetes
+  - Windows
+  - Linux
+  - macOS
+  - GitHub
+  - GitHub Actions
