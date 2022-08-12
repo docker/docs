@@ -1,7 +1,7 @@
 ---
 title: Contributing guidelines
 description: Guidelines for contributing to Docker's docs
-keywords: contribus, guide, style guide
+keywords: contribute, guide, style guide
 ---
 
 The live docs are published from the `master` branch. Therefore, you must create pull requests against the `master` branch for all content updates. This includes:
@@ -34,7 +34,7 @@ Here’s a list of some of the important files:
 
 ### Files not edited here
 
-Some files and directories are maintained in the upstream repositories. You can find a list of such files in [`_config_production.yml`](_config_production.yml#L52). Pull requests against these files will be rejected.
+Some files and directories are maintained in the upstream repositories. You can find a list of such files in `_config_production.yml`. Pull requests against these files will be rejected.
 
 ## Pull request guidelines
 

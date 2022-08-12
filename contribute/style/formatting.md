@@ -69,13 +69,13 @@ For information on how to add links to your content, see [Useful component and f
 
 Format the following as code: docker commands, instructions and filenames (package names).
 
-To apply inline code style, wrap the text in a single backtick (`). For example, `this is inline code style`.
+To apply inline code style, wrap the text in a single backtick (`).
 
 For information on how to add codeblocks to your content, see [Useful component and formatting examples](../components.md#code-blocks).
 
 ## Callouts
 
-Use callouts to emphasize selected information in a page. 
+Use callouts to emphasize selected information in a page.
 
 ### Best practice:
 
@@ -124,7 +124,7 @@ In these cases, use < and > to call out where a reader must replace text with th
 
 ## Tables
 
-Tables should be used to describe complex information in a straightforward manner. 
+Tables should be used to describe complex information in a straightforward manner.
 
 Note that in many cases, an unordered list is sufficient to describe a list of items with a single, simple description per item. But, if you have data that’s best described by a matrix, tables are the best choice.
 

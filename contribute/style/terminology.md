@@ -24,7 +24,7 @@ Use  when we talk about the application, or all the functionality associated wit
 
 Use code formatting) for referring to the commands in text and command usage examples/code samples.
 
-#### Docker Compose CL
+#### Docker Compose CLI
 
 Use when referring to family of Compose commands as offered from the Docker CLI.
 
@@ -36,7 +36,7 @@ Use when referring to family of Compose commands as offered from the Docker CLI.
 
 To use when referring specifically to CPU architecture or something that is hardware-architecture-based. Avoid using it as meaning the same as multi-platform.
 
-#### Member 
+#### Member
 
 A user of Docker Hub that is a part of an organization
 
@@ -56,5 +56,5 @@ Online storage for Docker images.
 
 #### Repository
 
-Lets users share container images with their team, customers, or Docker community.  
+Lets users share container images with their team, customers, or Docker community.
 

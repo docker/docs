@@ -35,7 +35,7 @@ as possible for you to work in this repository. The following sections guide you
         </a>
       </div>
       <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
-        <a class="card language-guides" href="/contribute/recommended-words/">
+        <a class="card language-guides" href="/contribute/style/recommended-words/">
           <h5 class="title">Recommended word list</h5>
           <p>
             Choose the right words for your content.
@@ -65,6 +65,6 @@ as possible for you to work in this repository. The following sections guide you
 
 We also provide:
 
-- A page of [useful components](../components.md) you can add to your documentation.
+- A page of [useful components](components.md) you can add to your documentation.
 - Information on Docker's [tone and voice](style/voice-tone.md).
 - A [writing checklist](checklist.md) to help you when you're contributing to Docker's documenation.

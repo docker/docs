@@ -91,7 +91,7 @@ then it takes up the whole row.</div>
 
 This
 implementation makes use of the `.panel-heading` classes in
-[`_utilities.scss`](../_scss/_utilities.scss){: target="_blank" rel="noopener" class="_" },
+`_utilities.scss.md`,
 along with [FontAwesome icons](http://fontawesome.io/cheatsheet/){: target="_blank" rel="noopener" class="_" }
 <i class="fa fa-caret-down" aria-hidden="true"></i> (fa-caret-down) and
 <i class="fa fa-caret-up" aria-hidden="true"></i> (fa-caret-up).
@@ -158,9 +158,7 @@ work on mobile. (You can use the [Xcode iPhone simulator](https://developer.appl
 >
 >For each drop-down, the value for `data-target` and
 `collapse` `id` must match, and id's must be unique per page. In this example,
-we name these `collapseSample1` and `collapseSample2`. Check out the
-[Compose file structure example](compose/compose-file/compose-file-v3.md#compose-file-structure-and-examples)
-to see another example.
+we name these `collapseSample1` and `collapseSample2`.
 
 ### Badges
 
@@ -174,10 +172,10 @@ You can make a badge a link. Wrap the `<span>` with an `<a>` (not the other way
 around) so that the text on the badge is still white.
 
 ```html
-<a href="/contribute/components/" target="_blank" rel="noopener" class="_"><span class="badge badge-info">Test</span></a>
+<a href="/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info">Test</span></a>
 ```
 
-<a href="/contribute/components/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" >Test</span></a>
+<a href="/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" >Test</span></a>
 
 ### Tooltips
 
@@ -216,13 +214,13 @@ You can also put tooltips on badges with a link.
 <a href="/components/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the test page (in a new window)">Test</span></a>
 
 
-## Formatting examples 
+## Formatting examples
 
 ### Links
 
 It is best practice if [a link opens in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
 
-You can also have [a markdown link to a custom target ID](#custom-target-id)
+You can also have [a markdown link to a custom target ID](#formatting-examples)
 
 #### Links to auto-generated content
 
