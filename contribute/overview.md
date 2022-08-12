@@ -1,5 +1,6 @@
 ---
 title: Contribute to Docker's docs
+toc_max: 1
 ---
 
 We deeply value documentation contributions from the Docker community. We'd like to make it as easy
@@ -30,7 +31,6 @@ as possible for you to work in this repository. The following sections guide you
           <h5 class="title">Formatting guidelines</h5>
           <p>
             Format your content to match the rest of our documentation.
-            
           </p>
         </a>
       </div>

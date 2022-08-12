@@ -65,7 +65,7 @@ Following our conversational approach, it's acceptable to use contractions in al
 
 - Stay consistent - don't switch between contractions and their spelled-out equivalents in body copy or Ul text.
 - Avoid negative contractions (can't, don't, wouldn't, and shouldn't) whenever possible. Try to rewrite your sentence to align with our helpful approach that puts the focus on solutions, not problems.
-- Never contract a noun with is, does, has, or was as this can make it look like the noun is possessive. ✅ Your container is ready. ❌ Your container’s ready.
+- Never contract a noun with is, does, has, or was as this can make it look like the noun is possessive. Your container is ready. Your container’s ready.
 
 ## Dates
 
@@ -96,7 +96,7 @@ Lists are a great way to break down complex ideas and make them easier to read a
     - Some content types may use bulleted lists that contain 10 items, but it's preferable to break longer lists into several lists, each with its own subheading or introduction.
 - Never create a bulleted list with only one bullet, and never use a dash to indicate a bulleted list.
 - If your list items are fragments, capitalize the list items for ease of scanning but do not use terminal punctuation. 
-✅Example:
+Example:
     
     I went to the shops to buy:
     
@@ -125,7 +125,7 @@ When you work with numbers in content, the best practices include:
 - Avoid using commas in numbers because they can represent decimals in different cultures. For numbers that are five digits or more, use a space to separate.
     
     
-    | Correct ✅ | Incorrect ❌ |
+    | Correct | Incorrect |
     | --- | --- |
     | 1000 | 1,000 |
     | 14 586 | 14,586 |

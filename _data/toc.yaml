@@ -1674,7 +1674,7 @@ contribute:
       title: Voice and tone
   - path: /contribute/file-conventions/
     title: Source file conventions
-  - path: /components/
+  - path: /contribute/components/
     title: Useful components
-  - path: /contribute/checklist
+  - path: /contribute/checklist/
     title: Writing checklist

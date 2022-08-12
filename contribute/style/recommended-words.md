@@ -4,107 +4,100 @@ description: Recommended word list for Technical documentation
 keywords: recommended word list, style guide, contribute
 ---
 
-To help ensure consistency in the documentation, the Technical Writing team recommends these wording choices.
+To help ensure consistency across our documentation, the Technical Writing team recommends these wording choices.
 
 #### above
-Try to avoid using above when referring to an example or table in a documentation page. If required, use previous instead. For example:
+Try to avoid using `above` when referring to an example or table in a documentation page. If required, use `previous` instead. 
 
-In the previous example, the dog had fleas.
+For example:
+
+_In the previous example, the dog had fleas._
 
 #### below
-Try to avoid below when referring to an example or table in a documentation page. If required, use following instead.
+Try to avoid `below` when referring to an example or table in a documentation page. If required, use `following` instead.
+
+For example:
+
+_In the following example, the dog had fleas._
 
 #### checkbox
 
-Use one word for checkbox. Do not use check box.
+Use one word for `checkbox`. Do not use `check box`.
+
 You select (not check or enable) and clear (not deselect or disable) checkboxes.
 
 #### click
 
-Do not use click. Instead, use select with buttons, links, menu items, and lists. 
+Do not use `click`. Instead, use `select` with buttons, links, menu items, and lists. 
+
 Select applies to more devices, while click is more specific to a mouse.
 
 #### currently 
 
-Do not use currently when talking about the product or its features. The documentation describes the product as it is today.
-
-#### delete
-
-We use delete in the UI 
+Do not use `currently` when talking about the product or its features. The documentation describes the product as it is today.
 
 #### deselect 
 
-Don’t use deselect. Instead, use clear. 
+Don’t use `deselect`. Instead, use `clear`. 
 
 #### earlier
 
-Use earlier when talking about version numbers.
+Use `earlier` when talking about version numbers.
 
 Use:
 
-In GitLab 14.1 and earlier.
+_In Docker Desktop 4.1 and earlier._
+
 Instead of:
 
-In GitLab 14.1 and lower.
+_In Docker Desktop 4.1 and lower._
 
 #### later
-Use later when talking about version numbers.
+Use `later` when talking about version numbers.
 
 Use:
 
-In GitLab 14.1 and later…
+_In GitLab 14.1 and later._
+
 Instead of:
 
-In GitLab 14.1 and higher…
-In GitLab 14.1 and above…
-
-#### prerequisites 
+_In GitLab 14.1 and higher…_ or _In GitLab 14.1 and above…_
 
 #### register
-Use register instead of sign up when talking about creating an account
+Use `register` instead of sign up when talking about creating an account.
 
 #### respectively
-Avoid respectively and be more precise instead.
-
-Use:
-
-To create a user, select Create user. For an existing user, select Save changes.
+Avoid `respectively` and be more precise instead.
 
 #### scroll
 
-Avoid. Use a verb phrase such as move through or navigate to instead, if the context is clear.
+Avoid. Use a verb phrase such as _move through_ or _navigate to_ instead, if the context is clear.
 
 #### sign in
-Use sign in instead of sign on or log on or log in. If the user interface has different words, use those.
+Use `sign in` instead of `sign on` or `log on` or `log in`. If the user interface has different words, use those.
 
 
 #### sign up
-Use register or create account instead of sign up when talking about creating an account.
+Use `register` or `create account` instead of `sign up` when talking about creating an account.
 
 #### toggle
 
 You turn on or turn off a toggle. For example:
 
-Turn on the blah toggle.
-
-#### update 
-
-To repair or improve the product
-
+_Turn on the dark mode toggle._
 
 #### upgrade
-Use upgrade for:
-
-Choosing a higher subscription tier
+Use `upgrade` for when describing a higher subscription tier
 
 #### we
 
-Try to avoid we and focus instead on how the user can accomplish something in GitLab.
+Try to avoid `we` and focus instead on how the user can accomplish something in Docker.
 
 Use:
 
-Use widgets when you have work you want to organize.
+_Use widgets when you have work you want to organize._
+
 Instead of:
 
-We created a feature for you to add widgets.
-One exception: You can use we recommend instead of it is recommended or GitLab recommends.
+_We created a feature for you to add widgets.
+One exception: You can use we recommend instead of it is recommended or GitLab recommends._

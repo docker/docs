@@ -15,7 +15,7 @@ We align our tone of voice and content with our virtues. The most important prin
 1. **Correct**
 2. **Concise**
 3. **Complete**
-4. **Clea**r
+4. **Clear**
 
 We ensure the information is accurate, succinct, thorough, and easy to understand. We keep sentences as simple as possible, but include enough detail for the user to complete the intended task.
 

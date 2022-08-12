@@ -1,7 +1,7 @@
 ---
 title: Contributing guidelines
 description: Guidelines for contributing to Docker's docs
-keywords: contribute, guide, style guide
+keywords: contribus, guide, style guide
 ---
 
 The live docs are published from the `master` branch. Therefore, you must create pull requests against the `master` branch for all content updates. This includes:
@@ -21,7 +21,7 @@ There are two ways to contribute a pull request to the docs repository:
 
     This is the manual, more advanced version of clicking 'Edit this page' on a published docs page. Initiating a docs changes in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
-    For a demo of the components, tags, Markdown syntax, styles, etc we use at [https://docs.docker.com/](https://docs.docker.com/), see [test.md](/test.md).
+    For a demo of the components, tags, Markdown syntax, styles, etc we use at [https://docs.docker.com/](https://docs.docker.com/), see [Usefule components](/components.md).
 
 ### Important files
 
