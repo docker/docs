@@ -58,13 +58,16 @@ First, we will name this workflow:
 name: CI to Docker Hub
  ```
 
-Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:
+Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the master branch of our project:
 
 ```yaml
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 ```
+> **Note**
+>
+> The branch name may be `main` or `master`. Verify the name of the branch for your repository and update the configuration accordingly.
 
 Now, we need to specify what we actually want to happen within our action (what jobs), we are going to add our build one and select that it runs on the latest Ubuntu instances available:
 
