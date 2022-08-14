@@ -1,0 +1,9 @@
+extends: existence
+message: "Avoid generic calls to action: '%s'"
+link: https://deploy-preview-15350--docsdocker.netlify.app/contribute/style/formatting/#links
+level: warning
+ignorecase: true
+tokens:
+  - click here
+  - find out more
+  - learn more

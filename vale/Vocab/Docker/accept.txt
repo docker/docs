@@ -1,61 +1,25 @@
-Artifactory
+(Certified|Verified) Publisher
 Autotest
 BuildKit
-BusyBox
-Ceph
-Codefresh
-Ddosify
+Docker
+Dockerize
+Dockerizing
+Docker Business
+Docker Dasboard
+Docker Desktop
+Docker Engine
+Docker Hub
+Docker Team
 Dockerfile
-Dockeriz(ed?|(ing))?
-Fargate
-GUI
 HyperKit
 Kitematic
 LinuxKit
-Moby
-MySQL
-Nginx
-Okta
-Postgres
-QEMU
-SQLite
-Snyk
-UI
-VM
-VPNKit
-Zsh
+Official Image
+Sponsored (OSS|Open Source Software)
+Swarm
+Swarm Mode
 [Bb]uildx
-[Cc]groups?
-[Cc]onfig
-[Dd]eserializ(e|(ation))
-[Ff]ilepaths?
-[Gg]oroutines?
-[Hh]ostnames?
-[Ll]ookups?
-[Nn]amespaces?
-[Pp]aravirtualization
-[Pp]roxying
-[Rr]eal-time
-[Rr]untime
-[Ss]wappable
-[Uu]ngated
-[Vv]irtualize(s|d)?
-[Ww]alkthroughs?
-containerd
+[Cc]ompose
+[Mm]oby
 dockerd
 dockerignore
-glibc
-inotify
-iptables
-kubectl
-kubelet
-mfsymlinks?
-musl
-osquery
-osxfs
-runc
-stdin
-stdout
-subnet
-systemd
-virtiofs

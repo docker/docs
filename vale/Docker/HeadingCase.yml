@@ -6,13 +6,6 @@ match: $sentence
 indicators:
   - ':'
 exceptions:
-  - Docker
-  - Docker Desktop
-  - Docker Hub
-  - Docker Engine
-  - Kubernetes
-  - Windows
-  - Linux
-  - macOS
-  - GitHub
-  - GitHub Actions
+  - Vocab/Docker/accept.txt
+  - Vocab/Technology/accept.txt
+  - Vocab/Industry/accept.txt
