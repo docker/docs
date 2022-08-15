@@ -225,7 +225,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
 - [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
 - [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
-- [CNI plugins to v1.1.1](https://github.com/containernetworking/releases/tag/v1.1.1)
+- [CNI plugins to v1.1.1](https://github.com/containernetworking/plugins/releases/tag/v1.1.1)
 - [containerd to v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6)
 - [runc to v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2)
 - [Go 1.18.3](https://github.com/golang/go/releases/tag/go1.18.3)
