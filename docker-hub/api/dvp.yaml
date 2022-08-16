@@ -135,7 +135,7 @@ paths:
       summary: Second factor authentication.
       operationId: PostUsers2FALogin
       description: |
-        When user has 2FA enabled, this is the second call to perform after
+        When a user has 2FA enabled, this is the second call to perform after
         `/v2/users/login` call.
 
         Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
