@@ -99,7 +99,7 @@ The following image depicts the various signing keys and their relationships:
 >
 > Loss of the root key is **very difficult** to recover from.
 > Correcting this loss requires intervention from [Docker
-> Support](https://support.docker.com) to reset the repository state. This loss
+> Support](/support/) to reset the repository state. This loss
 > also requires **manual intervention** from every consumer that used a signed
 > tag from this repository prior to the loss.
 {:.warning}
