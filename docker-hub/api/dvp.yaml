@@ -20,7 +20,7 @@ info:
 
      #### Raw data
 
-     In your raw data CSV you will have access to the data points listed below. You can request raw data for a complete week (Monday to Monday) or for a complete month (available on the 1st day of the following month). Please note that each Action is represented as a single row.
+     In your raw data CSV you will have access to the data points listed below. You can request raw data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). **Note:** each action is represented as a single row.
 
      - Type (industry)
      - Host (cloud provider)
