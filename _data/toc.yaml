@@ -1448,8 +1448,12 @@ manuals:
         title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
     title: Getting started
-  - path: /compose/environment-variables/
-    title: Environment variables in Compose
+  - sectiontitle: Environment variables
+    section:
+    - path: /compose/environment-variables/
+      title: Overview
+    - path: /compose/envvars-precedence/
+      title: Environment variables' precedence
   - path: /compose/env-file/
     title: Environment file
   - path: /compose/profiles/
