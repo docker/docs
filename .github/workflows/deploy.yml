@@ -33,11 +33,11 @@ jobs:
           elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
             #JEKYLL_ENV=production # TODO: uncomment when new env switched and ready
             DOCS_URL="https://docs2.docker.com" # TODO: change this to https://docs.docker.com when new env switched and ready
-            DOCS_AWS_IAM_ROLE=""
-            DOCS_S3_BUCKET=""
+            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docker.github.io-20220816161549883800000001"
+            DOCS_S3_BUCKET="prod-docs-docker.github.io"
             DOCS_S3_CONFIG="s3-config.json"
-            DOCS_CLOUDFRONT_ID=""
-            DOCS_LAMBDA_FUNCTION_REDIRECTS=""
+            DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
             DOCS_SLACK_MSG="Successfully deployed docs2 from published branch. $DOCS_URL" # TODO: change to "deployed docs" when new env switched and ready
           elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
             DOCS_URL="https://docs-labs.docker.com"
