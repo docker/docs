@@ -27,14 +27,14 @@ info:
      - Country (geolocation)
      - Timestamp
      - Namespace
-     - Repo
-     - Reference (digest will always be included, we provide tag when available)
-     - HTTP Method
-     - Action - can filter on the below
+     - Repository
+     - Reference (digest is always included, tag is provided when available)
+     - HTTP request method
+     - Action, one of the following:
        - Pull by tag
        - Pull by digest
        - Version check
-     - User-Agent Tool
+     - User-Agent
 
 servers:
   - url: https://hub.docker.com/api/dvp/v1
