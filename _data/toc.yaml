@@ -1339,46 +1339,6 @@ manuals:
       title: Install binaries
   - path: /engine/install/linux-postinstall/
     title: Optional post-installation steps
-  - path: /engine/release-notes/
-    title: Release notes
-  - sectiontitle: Previous versions
-    section:
-    - path: /engine/release-notes/19.03/
-      title: Engine 19.03 release notes
-    - path: /engine/release-notes/18.09/
-      title: Engine 18.09 release notes
-    - path: /engine/release-notes/18.06/
-      title: Engine 18.06 release notes
-    - path: /engine/release-notes/18.05/
-      title: Engine 18.05 release notes
-    - path: /engine/release-notes/18.04/
-      title: Engine 18.04 release notes
-    - path: /engine/release-notes/18.03/
-      title: Engine 18.03 release notes
-    - path: /engine/release-notes/18.02/
-      title: Engine 18.02 release notes
-    - path: /engine/release-notes/18.01/
-      title: Engine 18.01 release notes
-    - path: /engine/release-notes/17.12/
-      title: Engine 17.12 release notes
-    - path: /engine/release-notes/17.11/
-      title: Engine 17.11 release notes
-    - path: /engine/release-notes/17.10/
-      title: Engine 17.10 release notes
-    - path: /engine/release-notes/17.09/
-      title: Engine 17.09 release notes
-    - path: /engine/release-notes/17.07/
-      title: Engine 17.07 release notes
-    - path: /engine/release-notes/17.06/
-      title: Engine 17.06 release notes
-    - path: /engine/release-notes/17.05/
-      title: Engine 17.05 release notes
-    - path: /engine/release-notes/17.04/
-      title: Engine 17.04 release notes
-    - path: /engine/release-notes/17.03/
-      title: Engine 17.03 release notes
-    - path: /engine/release-notes/prior-releases/
-      title: Engine 1.13 and earlier
   - path: /engine/deprecated/
     title: Deprecated features
   - path: /buildx/working-with-buildx/
@@ -1389,7 +1349,46 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
-
+  - path: /engine/release-notes/
+    title: Release notes
+  - sectiontitle: Previous versions
+    section:
+      - path: /engine/release-notes/19.03/
+        title: Engine 19.03 release notes
+      - path: /engine/release-notes/18.09/
+        title: Engine 18.09 release notes
+      - path: /engine/release-notes/18.06/
+        title: Engine 18.06 release notes
+      - path: /engine/release-notes/18.05/
+        title: Engine 18.05 release notes
+      - path: /engine/release-notes/18.04/
+        title: Engine 18.04 release notes
+      - path: /engine/release-notes/18.03/
+        title: Engine 18.03 release notes
+      - path: /engine/release-notes/18.02/
+        title: Engine 18.02 release notes
+      - path: /engine/release-notes/18.01/
+        title: Engine 18.01 release notes
+      - path: /engine/release-notes/17.12/
+        title: Engine 17.12 release notes
+      - path: /engine/release-notes/17.11/
+        title: Engine 17.11 release notes
+      - path: /engine/release-notes/17.10/
+        title: Engine 17.10 release notes
+      - path: /engine/release-notes/17.09/
+        title: Engine 17.09 release notes
+      - path: /engine/release-notes/17.07/
+        title: Engine 17.07 release notes
+      - path: /engine/release-notes/17.06/
+        title: Engine 17.06 release notes
+      - path: /engine/release-notes/17.05/
+        title: Engine 17.05 release notes
+      - path: /engine/release-notes/17.04/
+        title: Engine 17.04 release notes
+      - path: /engine/release-notes/17.03/
+        title: Engine 17.03 release notes
+      - path: /engine/release-notes/prior-releases/
+        title: Engine 1.13 and earlier
 - sectiontitle: Docker Build
   section:
     - path: /build/
@@ -1470,10 +1469,10 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/release-notes/
-    title: Release notes
   - path: /compose/cli-command-compatibility/
     title: Compose v2 compatibility
+  - path: /compose/release-notes/
+    title: Release notes
 
 - sectiontitle: Docker Hub
   section:
