@@ -86,5 +86,5 @@ Refer to the following section for a list of events and their descriptions:
 | Seat Added | Occurs when a seat is added to your organization’s billing plan. |
 | Seat Removed | Occurs when a seat is removed from your organization’s billing plan. |
 | Billing Cycle Changed | Occurs when there is a change in the recurring interval that your organization is charged.|
-| Plan Downgrade Canceled | Occurs when a scheduled downgrade for your organization is canceled.|
+| Plan Downgrade Canceled | Occurs when a scheduled plan downgrade for your organization is canceled.|
 | Seat Removal Canceled | Occurs when a scheduled seat removal for an organization’s billing plan is canceled. |
