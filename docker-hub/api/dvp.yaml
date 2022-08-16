@@ -12,7 +12,7 @@ info:
 
      In your summary data CSV, you will have access to the data points listed below. You can request summary data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). 
 
-     - For every namespace, repo, and reference (tag or digest):
+     - For every namespace, repository, and reference (tag or digest):
        - Unique IP address count
        - Pulls by tag count
        - Pulls by digest count
