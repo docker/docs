@@ -46,7 +46,6 @@ jobs:
             DOCS_S3_CONFIG="s3-config.json"
             DOCS_CLOUDFRONT_ID="E1MYDYF65FW3HG"
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-labs"
-            DOCS_SLACK_MSG="Successfully deployed docs-labs from lab branch. $DOCS_URL"
           else
             echo >&2 "ERROR: unknown branch ${{ github.ref }}"
             exit 1
