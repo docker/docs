@@ -35,13 +35,12 @@ RUN --mount=type=bind,from=sitedir,target=/site \
 FROM base AS aws-s3-update-config
 ARG AWS_REGION
 ARG AWS_S3_BUCKET
-ARG AWS_S3_CONFIG
 RUN --mount=type=bind,target=. \
   --mount=type=bind,from=releaser,source=/out/releaser,target=/usr/bin/releaser \
   --mount=type=secret,id=AWS_ACCESS_KEY_ID \
   --mount=type=secret,id=AWS_SECRET_ACCESS_KEY \
   --mount=type=secret,id=AWS_SESSION_TOKEN \
-  releaser aws s3-update-config
+  AWS_S3_CONFIG=s3-config.json releaser aws s3-update-config
 
 FROM base AS aws-lambda-invoke
 ARG AWS_REGION

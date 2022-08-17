@@ -111,9 +111,6 @@ variable "AWS_REGION" {
 variable "AWS_S3_BUCKET" {
   default = ""
 }
-variable "AWS_S3_CONFIG" {
-  default = ""
-}
 variable "AWS_CLOUDFRONT_ID" {
   default = ""
 }
@@ -125,7 +122,6 @@ target "_common-aws" {
   args = {
     AWS_REGION = AWS_REGION
     AWS_S3_BUCKET = AWS_S3_BUCKET
-    AWS_S3_CONFIG = AWS_S3_CONFIG
     AWS_CLOUDFRONT_ID = AWS_CLOUDFRONT_ID
     AWS_LAMBDA_FUNCTION = AWS_LAMBDA_FUNCTION
   }
