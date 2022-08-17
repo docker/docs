@@ -6,7 +6,7 @@ info:
     url: https://docs.docker.com/images/logo-docker-main.png
     href: /reference
   description: |
-     The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces  
+     The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces. Analytics data can be retrieved as raw data, or in a summary format.
        
      #### Summary data
 
