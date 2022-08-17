@@ -93,7 +93,7 @@ It might take a few minutes to reclaim space on the host depending on the format
 Space is only freed when images are deleted. Space is not freed automatically when files are deleted inside running containers. To trigger a space reclamation at any point, run the command:
 
 ```console
-$ docker run --privileged --pid=host docker/desktop-reclaim-space
+$ docker run -it --rm --privileged --pid=host justincormack/nsenter1 /sbin/fstrim -v /var/lib/docker
 ```
 
 Note that many tools report the maximum file size, not the actual file size.
