@@ -25,9 +25,15 @@ exports.handler = (event, context, callback) => {
     }
 
     const redirectsPrefixes = JSON.parse(`{{.RedirectsPrefixesJSON}}`);
-    for (let key in redirectsPrefixes) {
-        if (!request.uri.startsWith(key)) {
+    for (let x in redirectsPrefixes) {
+        const rp = redirectsPrefixes[x];
+        if (!request.uri.startsWith(`/${rp['prefix']}`)) {
             continue;
+        }
+        let newlocation = "/";
+        if (rp['strip']) {
+            let re = new RegExp(`(^/${rp['prefix']})`, 'gi');
+            newlocation = request.uri.replace(re,'/');
         }
         //console.log(`redirect: ${request.uri} to ${redirectsPrefixes[key]}`);
         const response = {
@@ -36,7 +42,7 @@ exports.handler = (event, context, callback) => {
             headers: {
                 location: [{
                     key: 'Location',
-                    value: redirectsPrefixes[key],
+                    value: newlocation,
                 }],
             },
         }

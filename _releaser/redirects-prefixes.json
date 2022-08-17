@@ -1,21 +1,90 @@
-{
-  "/compliance/": "/",
-  "/datacenter/": "/",
-  "/ee/": "/",
-  "/v1.4/": "/",
-  "/v1.5/": "/",
-  "/v1.6/": "/",
-  "/v1.7/": "/",
-  "/v1.8/": "/",
-  "/v1.9/": "/",
-  "/v1.10/": "/",
-  "/v1.11/": "/",
-  "/v1.12/": "/",
-  "/v1.13/": "/",
-  "/v17.03/": "/",
-  "/v17.06/": "/",
-  "/v17.09/": "/",
-  "/v17.12/": "/",
-  "/v18.03/": "/",
-  "/v18.09/": "/"
-}
+[
+  {
+    "prefix": "compliance/",
+    "strip": false
+  },
+  {
+    "prefix": "datacenter/",
+    "strip": false
+  },
+  {
+    "prefix": "ee/",
+    "strip": false
+  },
+  {
+    "prefix": "v1.4/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.5/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.6/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.7/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.8/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.9/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.10/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.11/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.12/",
+    "strip": true
+  },
+  {
+    "prefix": "v1.13/",
+    "strip": true
+  },
+  {
+    "prefix": "v17.03/",
+    "strip": true
+  },
+  {
+    "prefix": "v17.06/enterprise/",
+    "strip": false
+  },
+  {
+    "prefix": "v17.06/",
+    "strip": true
+  },
+  {
+    "prefix": "v17.09/",
+    "strip": true
+  },
+  {
+    "prefix": "v17.12/",
+    "strip": true
+  },
+  {
+    "prefix": "v18.03/ee/",
+    "strip": false
+  },
+  {
+    "prefix": "v18.03/",
+    "strip": true
+  },
+  {
+    "prefix": "v18.09/ee/",
+    "strip": false
+  },
+  {
+    "prefix": "v18.09/",
+    "strip": true
+  }
+]
