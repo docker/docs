@@ -80,6 +80,14 @@ jobs:
             *.cache-from=type=gha,scope=deploy-${{ env.BRANCH_NAME }}
             *.cache-to=type=gha,scope=deploy-${{ env.BRANCH_NAME }},mode=max
       -
+        name: Build releaser
+        uses: docker/bake-action@v2
+        with:
+          targets: releaser-build
+          set: |
+            *.cache-from=type=gha,scope=releaser-${{ env.BRANCH_NAME }}
+            *.cache-to=type=gha,scope=releaser-${{ env.BRANCH_NAME }},mode=max
+      -
         name: Configure AWS Credentials
         if: ${{ env.DOCS_AWS_IAM_ROLE != '' }}
         uses: aws-actions/configure-aws-credentials@v1

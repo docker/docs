@@ -112,6 +112,3 @@ jobs:
         uses: docker/bake-action@v2
         with:
           targets: releaser-build
-          set: |
-            *.cache-from=type=gha,scope=releaser
-            *.cache-to=type=gha,scope=releaser,mode=max
