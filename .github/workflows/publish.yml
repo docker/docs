@@ -21,6 +21,8 @@ jobs:
             DOCS_URL="https://docs-stage.docker.com"
             DOCS_S3_BUCKET="docs.docker.com-stage-us-east-1"
             DOCS_S3_CONFIG="_website-config-docs-stage.json"
+            DOCS_CLOUDFRONT_ID="E2Q9X128R7SWCF" # FIXME: use correct cloudfront ID
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction" # FIXME: make sure this lambda edge function eixsts
             DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-stage-cache-invalidator"
             DOCS_SLACK_MSG="Successfully promoted docs-stage from master. https://docs-stage.docker.com/"
           elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
@@ -28,6 +30,8 @@ jobs:
             DOCS_URL="https://docs.docker.com"
             DOCS_S3_BUCKET="docs.docker.com-us-east-1"
             DOCS_S3_CONFIG="_website-config-docs.json"
+            DOCS_CLOUDFRONT_ID="E2Q9X128R7SWCF" # FIXME: use correct cloudfront ID
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction" # FIXME: make sure this lambda edge function eixsts
             DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator"
             DOCS_SLACK_MSG="Successfully published docs. https://docs.docker.com/"
           elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
@@ -44,6 +48,8 @@ jobs:
           echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
           echo "DOCS_S3_BUCKET=$DOCS_S3_BUCKET" >> $GITHUB_ENV
           echo "DOCS_S3_CONFIG=$DOCS_S3_CONFIG" >> $GITHUB_ENV
+          echo "DOCS_CLOUDFRONT_ID=$DOCS_CLOUDFRONT_ID" >> $GITHUB_ENV
+          echo "DOCS_LAMBDA_FUNCTION_REDIRECTS=$DOCS_LAMBDA_FUNCTION_REDIRECTS" >> $GITHUB_ENV
           echo "DOCS_LAMBDA_FUNCTION_CACHE=$DOCS_LAMBDA_FUNCTION_CACHE" >> $GITHUB_ENV
           echo "DOCS_SLACK_MSG=$DOCS_SLACK_MSG" >> $GITHUB_ENV
       -
@@ -80,6 +86,17 @@ jobs:
           AWS_REGION: ${{ env.DOCS_AWS_REGION }}
           AWS_S3_BUCKET: ${{ env.DOCS_S3_BUCKET }}
           AWS_S3_CONFIG: ${{ env.DOCS_S3_CONFIG }}
+      -
+        name: Update Cloudfront config
+        uses: docker/bake-action@v2
+        with:
+          targets: aws-cloudfront-update
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1 # cloudfront and lambda edge functions are only available in us-east-1 region
+          AWS_CLOUDFRONT_ID: ${{ env.DOCS_CLOUDFRONT_ID }}
+          AWS_LAMBDA_FUNCTION: ${{ env.DOCS_LAMBDA_FUNCTION_REDIRECTS }}
       -
         name: Invalidate docs website cache
         if: ${{ env.DOCS_LAMBDA_FUNCTION_CACHE != '' }}

@@ -114,6 +114,9 @@ variable "AWS_S3_BUCKET" {
 variable "AWS_S3_CONFIG" {
   default = "_website-config-docs-stage.json"
 }
+variable "AWS_CLOUDFRONT_ID" {
+  default = ""
+}
 variable "AWS_LAMBDA_FUNCTION" {
   default = ""
 }
@@ -123,11 +126,13 @@ target "_common-aws" {
     AWS_REGION = AWS_REGION
     AWS_S3_BUCKET = AWS_S3_BUCKET
     AWS_S3_CONFIG = AWS_S3_CONFIG
+    AWS_CLOUDFRONT_ID = AWS_CLOUDFRONT_ID
     AWS_LAMBDA_FUNCTION = AWS_LAMBDA_FUNCTION
   }
   secret = [
     "id=AWS_ACCESS_KEY_ID,env=AWS_ACCESS_KEY_ID",
-    "id=AWS_SECRET_ACCESS_KEY,env=AWS_SECRET_ACCESS_KEY"
+    "id=AWS_SECRET_ACCESS_KEY,env=AWS_SECRET_ACCESS_KEY",
+    "id=AWS_SESSION_TOKEN,env=AWS_SESSION_TOKEN"
   ]
 }
 
@@ -144,5 +149,16 @@ target "aws-lambda-invoke" {
   context = "_releaser"
   target = "aws-lambda-invoke"
   no-cache-filter = ["aws-lambda-invoke"]
+  output = ["type=cacheonly"]
+}
+
+target "aws-cloudfront-update" {
+  inherits = ["_common-aws"]
+  context = "_releaser"
+  target = "aws-cloudfront-update"
+  contexts = {
+    sitedir = DOCS_SITE_DIR
+  }
+  no-cache-filter = ["aws-cloudfront-update"]
   output = ["type=cacheonly"]
 }
