@@ -47,8 +47,8 @@ The following illustrates a configuration with custom certificates:
     └── localhost:5000          <-- Hostname:port
        ├── client.cert          <-- Client certificate
        ├── client.key           <-- Client key
-       └── ca.crt               <-- Certificate authority that signed
-                                    the registry certificate in PEM
+       └── ca.crt               <-- Root CA that signed
+                                    the registry certificate, in PEM
 ```
 
 The preceding example is operating-system specific and is for illustrative
