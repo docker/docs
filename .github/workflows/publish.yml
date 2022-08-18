@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - lab
       - master
       - published
 
@@ -30,15 +29,13 @@ jobs:
             DOCS_S3_CONFIG="_website-config-docs.json"
             DOCS_LAMBDA_FUNCTION_CACHE="arn:aws:lambda:us-east-1:710015040892:function:docs-cache-invalidator"
             DOCS_SLACK_MSG="Successfully published docs. https://docs.docker.com/"
-          elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
-            DOCS_URL="https://docs-lab.docker.com"
-            DOCS_S3_BUCKET=""
-            DOCS_LAMBDA_FUNCTION_CACHE=""
-            DOCS_S3_CONFIG="_website-config-docs-lab.json"
           else
             echo >&2 "ERROR: unknown branch ${{ github.ref }}"
             exit 1
           fi
+          echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
           echo "JEKYLL_ENV=$JEKYLL_ENV" >> $GITHUB_ENV
           echo "DOCS_URL=$DOCS_URL" >> $GITHUB_ENV
           echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
@@ -58,15 +55,12 @@ jobs:
         with:
           targets: release
           set: |
-            *.cache-from=type=gha,scope=publish
-            *.cache-to=type=gha,scope=publish,mode=max
+            *.cache-from=type=gha,scope=publish-${{ env.BRANCH_NAME }}
+            *.cache-to=type=gha,scope=publish-${{ env.BRANCH_NAME }},mode=max
       -
         name: Upload files to S3 bucket
         run: |
           aws --region ${{ env.DOCS_AWS_REGION }} s3 sync --acl public-read _site s3://${{ env.DOCS_S3_BUCKET }}/ --delete
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       -
         name: Update S3 config
         uses: docker/bake-action@v2
@@ -75,8 +69,6 @@ jobs:
           set: |
             *.cache-from=type=gha,scope=releaser
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ env.DOCS_AWS_REGION }}
           AWS_S3_BUCKET: ${{ env.DOCS_S3_BUCKET }}
           AWS_S3_CONFIG: ${{ env.DOCS_S3_CONFIG }}
@@ -89,8 +81,6 @@ jobs:
           set: |
             *.cache-from=type=gha,scope=releaser
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ env.DOCS_AWS_REGION }}
           AWS_LAMBDA_FUNCTION: ${{ env.DOCS_LAMBDA_FUNCTION_CACHE }}
       -
