@@ -3,16 +3,14 @@ description: Publisher & Certified Content FAQs
 keywords: Docker, docker, store, purchase images
 title: Docker Hub Publisher & Certified Content FAQs
 redirect_from:
-- /docker-store/customer_faq/
+  - /docker-store/customer_faq/
 ---
-
-## Customer FAQs
 
 ## Hub publisher profile
 
 ### What is the difference between a Community User and a Verified Publisher?
 
-Community Users have simply signed up to receive a DockerID and made some of their repositories Public on Docker Hub. By contrast, Verified Publishers have engaged directly with Docker's partner team, and enrolled in our Docker Technology Partner program. These profiles indicate that the business entity of the publisher has been validated, and have taken proactive steps to partner with Docker. Unlike Community content, these Verified Publisher profiles indicate true provenance of the content.
+Community users are users who have signed up to receive a Docker ID and made some of their repositories public on Docker Hub. By contrast, Verified Publishers have engaged directly with Docker's partner team, and enrolled in our Docker Technology Partner program. Verified Publisher profiles indicate that the business entity of the publisher has been validated, and have taken proactive steps to partner with Docker. Unlike community content, Verified Publisher profiles indicate true provenance of the content.
 
 ## Certified content
 
@@ -32,15 +30,15 @@ If a publisher publishes multiple images as part of their plan - we do not
 display the pull command. The pull command visual is exclusively for submissions
 that have a single image.
 
-### Where can I see all of my subscribed content?
+### Where can I see all my subscribed content?
 
 To view your accessible content, go to the account menu at the upper right corner, and
-click **My Content**. The page that appears lists all of your active
+click **My Content**. The page that appears lists all your active
 subscriptions, and any lapsed or canceled subscriptions.
 
 ### Can I subscribe to content for my organization?
 
-Yes! Members of an Organization's "Owners" team can subcsribe to content
+Yes! Members of an Organization's **Owners** team can subscribe to content
 for use in their Organization. Once the subscription has been completed, images are available for any
 organization member to pull.
 
