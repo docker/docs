@@ -33,14 +33,10 @@ You can set default values for any environment variables referenced in the
 Compose file, or used to configure Compose, in an [environment file](env-file.md)
 named `.env`. The `.env` file path is as follows:
 
-  - Starting with `+v1.28`, `.env` file is placed at the base of the project directory 
+  - Starting with `+v1.28`, `.env` file is placed at the base of the project directory.
   - Project directory can be explicitly defined with the `--file` option or `COMPOSE_FILE`
-  environment variable. Otherwise, it is the current working directory where the 
-  `docker compose` command is executed (`+1.28`).
-  - For previous versions, it might have trouble resolving `.env` file with 
-  `--file` or `COMPOSE_FILE`. To work around it, it is recommended to use `--project-directory`,
-  which overrides the path for the `.env` file. This inconsistency is addressed
-  in `+v1.28` by limiting the filepath to the project directory.
+  environment variable. Otherwise, it is the current working directory where the `docker compose` command is executed (`+1.28`).
+  - For previous versions, it might have trouble resolving `.env` file with `--file` or `COMPOSE_FILE`. To work around it, it is recommended to use `--project-directory`, which overrides the path for the `.env` file. This inconsistency is addressed in `+v1.28` by limiting the file path to the project directory.
 
 
 ```console
@@ -233,7 +229,7 @@ $ docker compose exec api node
 ```
 
 Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is
-no Docker Compose entry for `environment` or `env_file`.
+no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
 > Specifics for NodeJS containers
 >
