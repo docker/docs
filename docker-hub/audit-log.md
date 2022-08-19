@@ -67,9 +67,9 @@ Refer to the following section for a list of events and their descriptions:
 | Registry Access Management registry added | Activities related to the addition of a registry |
 | Registry Access Management registry removed | Activities related to the removal of a registry |
 | Registry Access Management registry updated | Details related to the registry that was updated |
-| Single Sign-On domain added | Details of the Single Sign-On domain added to your organization |
-| Single Sign-On domain removed | Details of the Single Sign-On domain removed from your organization |
-| Single Sign-On domain verified | Details of the Single Sign-On domain verified for your organization |
+| Single Sign-On domain added | Details of the single sign-on domain added to your organization |
+| Single Sign-On domain removed | Details of the single sign-on domain removed from your organization |
+| Single Sign-On domain verified | Details of the single sign-on domain verified for your organization |
 
 ### Repository events
 
