@@ -171,21 +171,6 @@ $ docker build --tag python-docker .
  => => naming to docker.io/library/python-docker
 ```
 
-## View local images
-
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As we are currently working in the terminal let’s take a look at listing images using the CLI.
-
-To list images, simply run the `docker images` command.
-
-```console
-$ docker images
-REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
-python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
-python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
-```
-
-You should see at least two images listed. One for the base image `3.8-slim-buster` and the other for the image we just built `python-docker:latest`.
-
 ## Tag images
 
 As mentioned earlier, an image name is made up of slash-separated name components. Name components may contain lowercase letters, digits and separators. A separator is defined as a period, one or two underscores, or one or more dashes. A name component may not start or end with a separator.
