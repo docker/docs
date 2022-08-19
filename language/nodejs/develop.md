@@ -55,9 +55,27 @@ const mocks     = require( 'ronin-mocks' )
 const database  = require( 'ronin-database' )
 const server = ronin.server()
 
-database.connect( process.env.CONNECTIONSTRING )
-server.use( '/', mocks.server( server.Router(), false, false ) )
-server.start()
+// Error when docker container starts
+// Error connecting to mongo. connect ECONNREFUSED 127.0.0.1:27017
+// database.connect( process.env.CONNECTIONSTRING )
+// server.use( '/', mocks.server( server.Router(), false, false ) )
+// server.start()
+
+async function main() {
+  const server = ronin.server();
+  
+  try {
+    await database.connect(process.env.CONNECTIONSTRING);
+  } catch (error) {
+    console.log(error)
+  }
+
+  server.use('/', mocks.server(server.Router(), false, false))
+
+  server.start()
+}
+
+main()
 ```
 
 We’ve added the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
