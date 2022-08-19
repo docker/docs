@@ -6,38 +6,38 @@ info:
     url: https://docs.docker.com/images/logo-docker-main.png
     href: /reference
   description: |
-     The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces. Analytics data can be retrieved as raw data, or in a summary format.
+     The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces  
        
      #### Summary data
 
-     In your summary data CSV, you will have access to the data points listed below. You can request summary data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). 
+     In your summary data CSV, you will have access to the data points listed below. You can request summary data for a complete week (Monday to Monday) or for a complete month (available on the 1st day of the following month). 
 
-     - For every namespace, repository, and reference (tag or digest):
+     - For every namespace, repo, and reference (tag or digest):
        - Unique IP address count
        - Pulls by tag count
        - Pulls by digest count
-       - Version check count
+       - Version Check count
 
      #### Raw data
 
-     In your raw data CSV you will have access to the data points listed below. You can request raw data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). **Note:** each action is represented as a single row.
+     In your raw data CSV you will have access to the data points listed below. You can request raw data for a complete week (Monday to Monday) or for a complete month (available on the 1st day of the following month). Please note that each Action is represented as a single row.
 
      - Type (industry)
      - Host (cloud provider)
      - Country (geolocation)
      - Timestamp
      - Namespace
-     - Repository
-     - Reference (digest is always included, tag is provided when available)
-     - HTTP request method
-     - Action, one of the following:
+     - Repo
+     - Reference (digest will always be included, we provide tag when available)
+     - HTTP Method
+     - Action - can filter on the below
        - Pull by tag
        - Pull by digest
        - Version check
-     - User-Agent
+     - User-Agent Tool
 
 servers:
-  - url: https://hub.docker.com/api/dvp/v1
+  - url: https://hub.docker.com/api/publisher/analytics/v1
 security:
   - HubAuth: []
 
@@ -135,7 +135,7 @@ paths:
       summary: Second factor authentication.
       operationId: PostUsers2FALogin
       description: |
-        When a user has 2FA enabled, this is the second call to perform after
+        When user has 2FA enabled, this is the second call to perform after
         `/v2/users/login` call.
 
         Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
@@ -165,7 +165,7 @@ paths:
                 $ref: "#/components/schemas/PostUsers2FALoginErrorResponse"
 
 
-  /data:
+  /:
     get:
       tags: [discovery]
       summary: Get namespaces and repos
@@ -178,7 +178,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NamespaceData'
-  /data/namespaces/{namespace}:
+  /namespaces/{namespace}:
     get:
       tags: [discovery]
       summary: Get namespace
@@ -198,7 +198,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NamespaceMetadata'
-  /data/namespaces/{namespace}/years:
+  /namespaces/{namespace}/pulls/exports/years:
     get:
       tags: [namespaces]
       summary: Get years with data
@@ -218,7 +218,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/YearData'
-  /data/namespaces/{namespace}/years/{year}/{timespantype}:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}:
     get:
       tags: [namespaces]
       summary: Get timespans with data
@@ -250,7 +250,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimespanData'
-  /data/namespaces/{namespace}/years/{year}/{timespantype}/{timespan}:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}:
     get:
       tags: [namespaces]
       summary: Get namespace metadata for timespan
@@ -290,7 +290,7 @@ paths:
                 $ref: '#/components/schemas/TimespanModel'
         '404':
           description: Not Found
-  /data/namespaces/{namespace}/years/{year}/{timespantype}/{timespan}/raw:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/raw:
     get:
       tags: [namespaces]
       summary: Get namespace data for timespan
@@ -328,7 +328,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseData'
-  /data/namespaces/{namespace}/years/{year}/{timespantype}/{timespan}/summary:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/summary:
     get:
       tags: [namespaces]
       summary: Get namespace summary data for timespan
@@ -366,7 +366,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseData'
-  /data/repos/{namespace}/{repo}/years:
+  /repos/{namespace}/{repo}/pulls/exports/years:
     get:
       tags: [repos]
       summary: Get years with data
@@ -392,7 +392,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/YearData'
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}:
     get:
       tags: [repos]
       summary: Get timespans with data
@@ -430,7 +430,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimespanData'
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}/{timespan}:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}/{timespan}:
     get:
       tags: [repos]
       summary: Get repository metadata for timespan
@@ -476,7 +476,7 @@ paths:
                 $ref: '#/components/schemas/TimespanModel'
         '404':
           description: Not Found
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}/{timespan}/raw:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}/{timespan}/raw:
     get:
       tags: [repos]
       summary: Get repository data for timespan
@@ -520,7 +520,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseData'
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}/{timespan}/summary:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}/{timespan}/summary:
     get:
       tags: [repos]
       summary: Get repository summary data for timespan
