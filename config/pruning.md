@@ -141,6 +141,40 @@ Other filtering expressions are available. See the
 [`docker network prune` reference](../engine/reference/commandline/network_prune.md)
 for more examples.
 
+## Prune build cache
+
+The `docker builder prune` command allows you to clean the build cache. By
+default, `docker builder prune` only cleans up build cache objects not attached
+to an image. To remove unused build cache objects:
+
+```console
+$ docker builder prune
+WARNING! This will remove all dangling build cache. Are you sure you want to continue? [y/N] y
+```
+
+By default, you are prompted to continue. To bypass the prompt, use the `-f` or
+`--force` flag.
+
+To remove all build cache, including ones used by images, use the `-a` or
+`--all` flag:
+
+```console
+$ docker builder prune -a
+WARNING! This will remove all build cache. Are you sure you want to continue? [y/N] y
+```
+
+You can additionally limit which build cache objects are pruned using filtering
+expressions with the `--filter` flag. For example, to only consider build
+cache objects created more than 24 hours ago:
+
+```console
+$ docker builder prune --filter "until=24h"
+```
+
+Other filtering expressions are available. See the
+[`docker builder prune` reference](../engine/reference/commandline/builder_prune.md)
+for more examples.
+
 ## Prune everything
 
 The `docker system prune` command is a shortcut that prunes images, containers,
