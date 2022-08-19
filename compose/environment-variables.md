@@ -201,14 +201,9 @@ $ docker compose run -e DEBUG web python console.py
 The value of the `DEBUG` variable in the container is taken from the value for
 the same variable in the shell in which Compose is run.
 
-When you set the same environment variable in multiple files, here's the
-priority used by Compose to choose which value to use:
-
-1. Compose file
-2. Shell environment variables
-3. Environment file
-4. Dockerfile
-5. Variable is not defined
+When you set the same environment variable in multiple files, there's
+a priority used by Compose to choose which value to use. 
+Please refer to [Environment Variables precedence](envvars-precedence.md).
 
 In the example below, we set the same environment variable on an Environment
 file, and the Compose file:
@@ -239,7 +234,7 @@ $ docker compose exec api node
 ```
 
 Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is
-no Docker Compose entry for `environment` or `env_file`.
+no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
 > Specifics for NodeJS containers
 >
