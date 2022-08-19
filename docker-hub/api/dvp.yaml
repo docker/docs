@@ -6,35 +6,35 @@ info:
     url: https://docs.docker.com/images/logo-docker-main.png
     href: /reference
   description: |
-     The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces  
+     The Docker DVP Data API allows [Docker Verified Publishers](https://docs.docker.com/docker-hub/publish/) to view image pull analytics data for their namespaces. Analytics data can be retrieved as raw data, or in a summary format.
        
      #### Summary data
 
-     In your summary data CSV, you will have access to the data points listed below. You can request summary data for a complete week (Monday to Monday) or for a complete month (available on the 1st day of the following month). 
+     In your summary data CSV, you will have access to the data points listed below. You can request summary data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). 
 
-     - For every namespace, repo, and reference (tag or digest):
+     - For every namespace, repository, and reference (tag or digest):
        - Unique IP address count
        - Pulls by tag count
        - Pulls by digest count
-       - Version Check count
+       - Version check count
 
      #### Raw data
 
-     In your raw data CSV you will have access to the data points listed below. You can request raw data for a complete week (Monday to Monday) or for a complete month (available on the 1st day of the following month). Please note that each Action is represented as a single row.
+     In your raw data CSV you will have access to the data points listed below. You can request raw data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). **Note:** each action is represented as a single row.
 
      - Type (industry)
      - Host (cloud provider)
      - Country (geolocation)
      - Timestamp
      - Namespace
-     - Repo
-     - Reference (digest will always be included, we provide tag when available)
-     - HTTP Method
-     - Action - can filter on the below
+     - Repository
+     - Reference (digest is always included, tag is provided when available)
+     - HTTP request method
+     - Action, one of the following:
        - Pull by tag
        - Pull by digest
        - Version check
-     - User-Agent Tool
+     - User-Agent
 
 servers:
   - url: https://hub.docker.com/api/publisher/analytics/v1
@@ -135,7 +135,7 @@ paths:
       summary: Second factor authentication.
       operationId: PostUsers2FALogin
       description: |
-        When user has 2FA enabled, this is the second call to perform after
+        When a user has 2FA enabled, this is the second call to perform after
         `/v2/users/login` call.
 
         Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
