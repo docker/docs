@@ -37,7 +37,7 @@ info:
      - User-Agent
 
 servers:
-  - url: https://hub.docker.com/api/dvp/v1
+  - url: https://hub.docker.com/api/publisher/analytics/v1
 security:
   - HubAuth: []
 
@@ -165,7 +165,7 @@ paths:
                 $ref: "#/components/schemas/PostUsers2FALoginErrorResponse"
 
 
-  /data:
+  /:
     get:
       tags: [discovery]
       summary: Get namespaces and repos
@@ -178,7 +178,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NamespaceData'
-  /data/namespaces/{namespace}:
+  /namespaces/{namespace}:
     get:
       tags: [discovery]
       summary: Get namespace
@@ -198,7 +198,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NamespaceMetadata'
-  /data/namespaces/{namespace}/years:
+  /namespaces/{namespace}/pulls/exports/years:
     get:
       tags: [namespaces]
       summary: Get years with data
@@ -218,7 +218,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/YearData'
-  /data/namespaces/{namespace}/years/{year}/{timespantype}:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}:
     get:
       tags: [namespaces]
       summary: Get timespans with data
@@ -250,7 +250,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimespanData'
-  /data/namespaces/{namespace}/years/{year}/{timespantype}/{timespan}:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}:
     get:
       tags: [namespaces]
       summary: Get namespace metadata for timespan
@@ -290,7 +290,7 @@ paths:
                 $ref: '#/components/schemas/TimespanModel'
         '404':
           description: Not Found
-  /data/namespaces/{namespace}/years/{year}/{timespantype}/{timespan}/raw:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/raw:
     get:
       tags: [namespaces]
       summary: Get namespace data for timespan
@@ -328,7 +328,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseData'
-  /data/namespaces/{namespace}/years/{year}/{timespantype}/{timespan}/summary:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/summary:
     get:
       tags: [namespaces]
       summary: Get namespace summary data for timespan
@@ -366,7 +366,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseData'
-  /data/repos/{namespace}/{repo}/years:
+  /repos/{namespace}/{repo}/pulls/exports/years:
     get:
       tags: [repos]
       summary: Get years with data
@@ -392,7 +392,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/YearData'
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}:
     get:
       tags: [repos]
       summary: Get timespans with data
@@ -430,7 +430,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimespanData'
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}/{timespan}:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}/{timespan}:
     get:
       tags: [repos]
       summary: Get repository metadata for timespan
@@ -476,7 +476,7 @@ paths:
                 $ref: '#/components/schemas/TimespanModel'
         '404':
           description: Not Found
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}/{timespan}/raw:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}/{timespan}/raw:
     get:
       tags: [repos]
       summary: Get repository data for timespan
@@ -520,7 +520,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseData'
-  /data/repos/{namespace}/{repo}/years/{year}/{timespantype}/{timespan}/summary:
+  /repos/{namespace}/{repo}/pulls/exports/years/{year}/{timespantype}/{timespan}/summary:
     get:
       tags: [repos]
       summary: Get repository summary data for timespan
