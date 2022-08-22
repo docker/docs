@@ -7,6 +7,7 @@ redirect_from:
  - /compose/networking/swarm/
  - /compose/overview/
  - /compose/swarm/
+ - /compose/completion/
 ---
 
 >**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
