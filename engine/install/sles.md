@@ -44,16 +44,18 @@ The [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/s
 must be enabled. This repository is not added by default, and you need to enable
 it for the version of SLES you are running. Run the following commands to add it:
 
-For SLES 15-SP3,
+For SLES 15-SP3:
+
 ```console
-$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP3/security:SELinux.repo" 
-$ sudo zypper addrepo $opensuse_repo 
+$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP3/security:SELinux.repo"
+$ sudo zypper addrepo $opensuse_repo
 ```
 
-For SLES 15-SP4,
+For SLES 15-SP4:
+
 ```console
 $ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/15.4/security:SELinux.repo"
-$ sudo zypper addrepo $opensuse_repo 
+$ sudo zypper addrepo $opensuse_repo
 ```
 
 The `overlay2` storage driver is recommended.
