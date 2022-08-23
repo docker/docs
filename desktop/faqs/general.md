@@ -59,10 +59,6 @@ This includes:
 - Tip of the week
 - Sending usage statistics
 
-### What is an experimental feature?
-
-{% include experimental.md %}
-
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 
 You can find information about diagnosing and troubleshooting common issues in the [Troubleshooting topic](../troubleshoot/overview.md).
