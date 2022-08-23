@@ -1,6 +1,6 @@
 ---
 description: Feedback
-keywords: Feedback, Docker Desktop, Linux, Mac, Windows, Dev Environments
+keywords: Feedback, Docker Desktop, Linux, Mac, Windows, Dev Environments, Extensions, Community forum, bugs, problems, issues
 title: Give feedback
 ---
 
@@ -30,8 +30,14 @@ GitHub](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener
 GitHub](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
 - [Dev Environments issues on Github](https://github.com/docker/dev-environments/issues){:target="_blank" rel="noopener" class="_"}
 
+- [Docker Extensions issues on GitHub](https://github.com/docker/extensions-sdk/issues){:target="_blank" rel="noopener" class="_"}
+
 #### Feedback via Community Slack channels
 
-You can also provide feedback 
+You can also provide feedback through the following [Docker Community Slack](https://www.docker.com/community/){:target="_blank" rel="noopener" class="_"} channels:
 
-Alternatively, get in touch with us on the **#docker-dev-environments** channel in the [Docker Community Slack](https://dockercommunity.slack.com/messages){:target="_blank" rel="noopener" class="_"}.
+- #docker-desktop-mac
+- #docker-desktop-windows
+- #docker-desktop-linux
+- #docker-dev-environments
+- #extensions
