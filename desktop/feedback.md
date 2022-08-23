@@ -13,7 +13,7 @@ On each Docker Dashboard view, there is a **Give feedback** link. This sends you
 #### Feedback via Docker Community forums
 
 To get help from the community, review current user topics, join or start a
-discussion, log on to the appropriate Docker Forums:
+discussion, log on to the appropriate Docker forums:
 
 - [Docker Desktop for Mac
 forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" rel="noopener" class="_"}
