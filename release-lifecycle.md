@@ -15,8 +15,8 @@ This page details Docker's product release lifecycle and how Docker defines each
 | Lifecycle stage  | Customer availability | Support availability | Limitations | Retirement |
 | --- | --- | ---- | ---| ---|
 |[Beta](#beta) | All or those involved in a Beta Feedback Program | Community support | Software may have limitations, bugs and/or stability concerns | Can be discontinued without notice |
-| [Early Access (EA)](#early-access-ea) | All or those involved n an Early Access Feedback Program | Full | Software may have limitations, bugs and/or stability concerns | Follows [retirement process](#retirement-process) |
-| [General Availability (GA)](#general-availability-ga) | All | Full | Few or no limitations for supported use cases | Follow [retirement process](#retirement-process) |
+| [Early Access (EA)](#early-access-ea) | All or those involved in an Early Access Feedback Program | Full | Software may have limitations, bugs and/or stability concerns.  These limitations will be documented. | Follows [retirement process](#retirement-process) |
+| [General Availability (GA)](#general-availability-ga) | All | Full | Few or no limitations for supported use cases | Follows [retirement process](#retirement-process) |
 
 ### Beta
 
@@ -50,7 +50,7 @@ General Availability offerings are fully functional products or features that ar
 
 **Limitations:** General Availability features and products will have few or no limitations for supported use cases.
 
-**Support:** All General Availability offerings are fully supported, as described in our [Support Service Level Agreement](https://www.docker.com/wp-content/uploads/2022/03/Docker-Support-SLA.pdf).
+**Support:** All General Availability offerings are fully supported, as described in our [support page](https://www.docker.com/support/).
 
 **Retirement:** General Availability offerings follow the [retirement process](#retirement-process) outlined below.
 
