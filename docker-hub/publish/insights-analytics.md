@@ -6,36 +6,23 @@ keywords: docker hub, hub, insights, analytics, api, verified publisher
 
 Insights & analytics provides usage analytics for your organization's images on
 Docker Hub. With this tool, you have self-serve access to metrics as both raw
-data and summary data for a desired time span. You can access the data either
-from the Docker Hub website, at `hub.docker.com/orgs/{namespace}/insights`, or
-using the [Verified Publisher API](/docker-hub/api/dvp/){: target="_blank"
-rel="noopener" class="_"}. All members of an organization has access to the
-analytics data.
+data and summary data for a desired time span. You can view how many times your
+images have been pulled by tag or by digest, and get breakouts by geolocation,
+cloud provider, and client (user agent).
 
-You can view how many times your images have been pulled by tag or by digest,
-and get breakouts by geolocation, cloud provider, and client (user agent). The
-data is available as a downloadable CSV file, in a weekly (Monday through
+## Exporting analytics data
+
+You can access the data either from the Docker Hub website, at
+`hub.docker.com/orgs/{namespace}/insights`, or using the
+[DVP Data API](/docker-hub/api/dvp/){: target="_blank" rel="noopener"
+class="_"}. All members of an organization has access to the analytics data.
+
+The data is available as a downloadable CSV file, in a weekly (Monday through
 Sunday) or monthly format (available on the first day of the following calendar
 month). You can import this data into your own systems, or you can analyze it
-manually as a spreadsheet. Review the [Data definitions](#data-definitions)
-section for more information about how to read the data contained in the CSV
-file.
+manually as a spreadsheet.
 
-Automated systems frequently check for new versions of your images. The insights
-and analytics metrics show the number of pulls that were triggered by users, and
-pulls by automated systems such as CI/CD tools, respectively. Automated "version
-checks" and real image downloads are differentiated by inspecting the order and
-timing of image pulls coming from the same IP address. Being able to distinguish
-between different types of image pulls grants you more insight into your users'
-behavior. You can inspect the rules for determining intent behind pulls in the
-[Action classification rules](#action-classification-rules) section on this
-page.
-
-Please let us know if you have any
-[feedback](https://forms.gle/nb7beTUQz9wzXy1b6){: target="_blank" rel="noopener"
-class="_"} or questions on these rules.
-
-## Export analytics data from the web
+### Export data using the website
 
 Here's how to export usage data for your organization's images using the Docker
 Hub website.
@@ -53,7 +40,28 @@ Hub website.
 
    ![Filtering options and download links for analytics data](./images/download-analytics-data.png)
 
-## Raw data
+### Export data using the API
+
+The HTTP API endpoints are available at:
+`https://hub.docker.com/api/publisher/analytics/v1`. Learn how to export data
+using the API in the [DVP Data API documentation](/docker-hub/api/dvp/){:
+target="_blank" rel="noopener" class="_"}.
+
+```bash
+curl https://hub.docker.com/api/publisher/analytics/v1 \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer ${TOKEN}"
+```
+
+## Data formats
+
+The data can be exported as either of two formats: raw and summary. Each format
+contains different data points and are formatted differently.
+
+Review the [Data definitions](#data-definitions) section for more information
+about the data points and how to read them.
+
+### Raw data
 
 The raw data format contains the following data points for the selected time
 span. Each action is represented as a single row in the CSV file.
@@ -76,7 +84,7 @@ span. Each action is represented as a single row in the CSV file.
 - User agent tool
 - User agent version
 
-## Summary data
+### Summary data
 
 The summary data format contains the following data points for each namespace,
 repository, and reference (tag or digest), for the selected time span.
@@ -86,11 +94,11 @@ repository, and reference (tag or digest), for the selected time span.
 - Pulls by digest
 - Version checks
 
-## Data definitions
+### Data definitions
 
 | Data point         | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Action             | An action represents the multiple request events associated with a `docker pull`. We have applied rules to these events so that the data is more meaningful in analyzing user behavior and intent. An action can be filtered into three distinct categories: version check, pull by tag, and pull by digest. Each action is represented as a single row in the raw data.                                                                                                                                                                      |
+| Action             | An action represents the multiple request events associated with a `docker pull`. We have applied rules to these events so that the data is more meaningful in analyzing user behavior and intent. An action can be filtered into three distinct categories: version check, pull by tag, and pull by digest. Each action is represented as a single row in the raw data. For more information, see [Action classification rules](#action-classification-rules).                                                                               |
 | Version check      | This is a filter on the action data point. It is a speculation of user intent. Includes: HEAD by tag not followed by a GET (from the same IP address within a 5-second window). Excludes: HEAD by digest                                                                                                                                                                                                                                                                                                                                      |
 | Pull by tag        | This is a filter on the action data point. It is a speculation of user intent. Includes: GET (by digest or by tag). If the GET is immediately preceded by a HEAD by tag (from the same IP address within a 5-second window), then the GET and HEAD together are counted as a single Pull by Tag. If the GET by tag is immediately followed by another GET (from the same IP address within a 5-second window, but a different digest), then the two GETs are counted as a single Pull by Tag.                                                 |
 | Pull by digest     | This is a filter on the action data point. It is a speculation of user intent. Includes: GET by digest. If the GET is immediately preceded by a HEAD by digest (from the same IP address within a 5-second window), then the GET and HEAD together are counted as a single pull by digest. If the GET is immediately followed by another GET (from the same IP address within a 5-second window, but a different digest), then the two GETs together are counted as a single pull by digest. Includes: HEAD by digest, not followed by a GET. |
@@ -111,6 +119,20 @@ repository, and reference (tag or digest), for the selected time span.
 | Unique IP address  | As part of our privacy-preserving policy, Docker only shares the count of distinct unique IP addresses that request an image.                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ## Action classification rules
+
+Automated systems frequently check for new versions of your images. The insights
+and analytics metrics show the number of pulls that were triggered by users, and
+pulls by automated systems such as CI/CD tools, respectively. Automated "version
+checks" and real image downloads are differentiated by inspecting the order and
+timing of image pulls coming from the same IP address. Being able to distinguish
+between different types of image pulls grants you more insight into your users'
+behavior. You can inspect the rules for determining intent behind pulls in the
+[Action classification rules](#action-classification-rules) section on this
+page.
+
+Please let us know if you have any
+[feedback](https://forms.gle/nb7beTUQz9wzXy1b6){: target="_blank" rel="noopener"
+class="_"} or questions on these rules.
 
 | Starting event | Reference | Followed by                                                     | Resulting action | Use case(s)                                                                                                    | Notes                                                                                                                                                                                                                                                                                          |
 | :------------- | :-------- | :-------------------------------------------------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
