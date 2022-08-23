@@ -8,7 +8,7 @@ toc_max: 2
 
 > **Beta**
 >
-> The Docker Extensions feature is currently in Beta. We recommend that you do not use Extensions in production environments.
+> The Docker Extensions feature is currently in [Beta](../release-lifecycle.md#beta). We recommend that you do not use Extensions in production environments.
 
 Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality. There is no limit to the number of extensions you can install.
 
