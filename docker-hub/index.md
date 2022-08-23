@@ -145,7 +145,7 @@ You'll need to download Docker Desktop to  build, push, and pull container image
    docker.io/library/hello-world:latest
    ```
 
-2. Run `docker run hellow-world` to run the image locally. You should see output similar to:
+2. Run `docker run hello-world` to run the image locally. You should see output similar to:
 
     ```console
     $ docker run hello-world
