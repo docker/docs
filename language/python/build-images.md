@@ -181,10 +181,9 @@ To list images, simply run the `docker images` command.
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
-python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 ```
 
-You should see at least two images listed. One for the base image `3.8-slim-buster` and the other for the image we just built `python-docker:latest`.
+You should see at least one image listed, the image we just built `python-docker:latest`.
 
 ## Tag images
 
