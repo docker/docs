@@ -5,31 +5,35 @@ keywords: docker hub, hub, insights, analytics, api, verified publisher
 ---
 
 Insights & analytics provides usage analytics for your organization's images on
-Docker Hub. With this tool, you have self-serve access to metrics where you can
-download both raw data and summary data for a time span. You can access the data
-either from Docker Hub website, at `hub.docker.com/orgs/{namespace}/insights`,
-or using the [DVP API](/docker-hub/api/dvp/){: target="_blank" rel="noopener"
-class="_"}. All members of an organization has access to the analytics data.
+Docker Hub. With this tool, you have self-serve access to metrics as both raw
+data and summary data for a desired time span. You can access the data either
+from the Docker Hub website, at `hub.docker.com/orgs/{namespace}/insights`, or
+using the [Verified Publisher API](/docker-hub/api/dvp/){: target="_blank"
+rel="noopener" class="_"}. All members of an organization has access to the
+analytics data.
 
 You can view how many times your images have been pulled by tag or by digest,
-and get breakouts by geolocation, cloud provider, and tool. The data is
-available as a downloadable CSV file, in a weekly (Monday through Sunday) or
-monthly format (available on the first day of the following calendar month). You
-can import this data into your own systems or you can analyze it manually as a
-spreadsheet. Review the [Data definitions](#data-definitions) section for more
-information about how to read the data contained in the CSV file.
+and get breakouts by geolocation, cloud provider, and client (user agent). The
+data is available as a downloadable CSV file, in a weekly (Monday through
+Sunday) or monthly format (available on the first day of the following calendar
+month). You can import this data into your own systems, or you can analyze it
+manually as a spreadsheet. Review the [Data definitions](#data-definitions)
+section for more information about how to read the data contained in the CSV
+file.
 
 Automated systems frequently check for new versions of your images. The insights
 and analytics metrics show the number of pulls that were triggered by users, and
-pulls by automated systems such as CI/CD tools, respectively. We distinguish
-between automated "version checks" and real image downloads by inspecting the
-order and timing of image pulls coming from the same IP address. Being able to
-distinguish between different types of image pulls grants you more insight into
-your user's behavior. You can inspect the rules we have applied for determining
-intent behind pulls in the
+pulls by automated systems such as CI/CD tools, respectively. Automated "version
+checks" and real image downloads are differentiated by inspecting the order and
+timing of image pulls coming from the same IP address. Being able to distinguish
+between different types of image pulls grants you more insight into your users'
+behavior. You can inspect the rules for determining intent behind pulls in the
 [Action classification rules](#action-classification-rules) section on this
-page. We welcome [feedback](https://forms.gle/nb7beTUQz9wzXy1b6){:
-target="_blank" rel="noopener" class="_"} and questions on these rules.
+page.
+
+Please let us know if you have any
+[feedback](https://forms.gle/nb7beTUQz9wzXy1b6){: target="_blank" rel="noopener"
+class="_"} or questions on these rules.
 
 ## Export analytics data from the web
 
@@ -37,17 +41,13 @@ Here's how to export usage data for your organization's images using the Docker
 Hub website.
 
 1. Log in to [Docker Hub](https://hub.docker.com/){: target="_blank"
-   rel="noopener" class="_"}.
+   rel="noopener" class="_"} and select **Organizations**.
 
-2. Click **Organizations** in the top navigation bar, then choose your
-   organization from the list.
-
-3. On your organization's landing page, click the **Insights and analytics**
-   tab.
+2. Choose your organization and click **Insights and analytics**.
 
    ![Organization overview page, with the Insights and Analytics tab](./images/organization-tabs.png)
 
-4. Set the time span for which you want to export analytics data. The
+3. Set the time span for which you want to export analytics data. The
    downloadable CSV files for summary and raw data appear on the right-hand
    side.
 
