@@ -377,6 +377,7 @@ guides:
   title: "Educational resources"
 - path: /opensource/
   title: "Contribute to documentation"
+
 reference:
 - path: /reference/
   title: Reference documentation
@@ -1652,6 +1653,7 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
-
 - path: /support/
   title: Get Support
+- path: /release-lifecycle/
+  title: Product release lifecycle
