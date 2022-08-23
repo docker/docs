@@ -13,9 +13,9 @@ Check a list of what's shipped with Docker Desktop and a list of key features in
 Docker Desktop is available for Mac, Windows, and Linux.
 For download information, system requirements, and installation instructions, see:
 
-* [Docker Desktop for Linux](../../desktop/linux/install.md){:target="_blank" rel="noopener" class="_"}
-* [Docker Desktop for Mac](../../desktop/mac/install.md){:target="_blank" rel="noopener" class="_"}
-* [Docker Desktop for Windows](../../desktop/windows/install.md){:target="_blank" rel="noopener" class="_"}
+* [Docker Desktop for Linux](../../desktop/install/linux-install.md){:target="_blank" rel="noopener" class="_"}
+* [Docker Desktop for Mac](../../desktop/install/mac-install.md){:target="_blank" rel="noopener" class="_"}
+* [Docker Desktop for Windows](../../desktop/install/windows-install.md){:target="_blank" rel="noopener" class="_"}
 
 For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement){:target="_blank" rel="noopener" class="_"}.
 

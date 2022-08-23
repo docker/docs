@@ -4,6 +4,15 @@ description: How to configure the Docker client to use a proxy server
 keywords: network, networking, proxy, client
 ---
 
+> **Note**
+>
+> This page describes how to configure the Docker CLI to configure proxies via environment variables in containers.
+> For information on configuring Docker Desktop to use HTTP/HTTPS proxies, see [proxies on Mac](../desktop/settings/mac.md#proxies), [proxies on Windows](../desktop/settings/windows.md#proxies), and [proxies on Linux](../desktop/settings/linux.md#proxies).
+
+> If you are not running Docker Desktop, and have installed the Docker Engine in
+> other ways, refer to the "HTTP/HTTPS proxy" section in
+> [configuring the Docker daemon with systemd](../config/daemon/systemd.md#httphttps-proxy).
+
 If your container needs to use an HTTP, HTTPS, or FTP proxy server, you can
 configure it in different ways:
 

@@ -11,6 +11,7 @@ redirect_from:
 - /docker-for-windows/release-notes/
 - /desktop/windows/release-notes/
 - /desktop/linux/release-notes/
+- /mackit/release-notes/
 ---
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
@@ -21,24 +22,285 @@ This page contains information about the new features, improvements, known issue
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
+
+## Docker Desktop 4.11.1
+2022-08-05
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed regression preventing VM system locations (e.g. /var/lib/docker) from being bind mounted [for-mac/issues#6433](https://github.com/docker/for-mac/issues/6433)
+
+#### For Windows
+
+- Fixed `docker login` to private registries from WSL2 distro [docker/for-win#12871](https://github.com/docker/for-win/issues/12871)
+
+## Docker Desktop 4.11.0
+2022-07-28
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/83626/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/83626/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/83626/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Checksums
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+        <li><b>Windows:</b> SHA-256 48ca8cabe67aee94a934b4c0f97a5001e89cb66bbbf824924fbc8bed6a8c90d3</li>
+        <li><b>Mac Intel:</b> SHA-256 295694d7c2df05e37ac0d27fe8be5af6295b1edc6fa00a00a47134a14d5d0b34</li>
+        <li><b>Mac Arm:</b> SHA-256 9824103e3d5a7d01a4d7d8086210157e1cc02217cb9edd82fe4bf2d16c138c44</li>
+        <li><b>Linux DEB:</b> SHA-256 a0dc8ac97cc21e5a13a9e316cac11d85b7c248fd0c166b22a2ab239d17d43d9f</li>
+        <li><b>Linux RPM:</b> SHA-256 eb077737298827092b283d3c85edacd128ecd993e987aa30d8081e2306401774</li>
+        <li><b>Linux Arch:</b> SHA-256 a85fd5e83d5b613ef43d335c0ab0af4600aeb8a92921b617cb7a555826e361de</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+### New
+
+- Docker Desktop is now fully supported for Docker Business customers inside VMware ESXi and Azure VMs. For more information, see [Run Docker Desktop inside a VM or VDI environment](../desktop/vm-vdi.md)
+- Added two new extensions ([vcluster](https://hub.docker.com/extensions/loftsh/vcluster-dd-extension) and [PGAdmin4](https://hub.docker.com/extensions/mochoa/pgadmin4-docker-extension)) to the Extensions Marketplace.
+- The ability to sort extensions has been added to the Extensions Marketplace.
+- Fixed a bug that caused some users to be asked for feedback too frequently. You'll now only be asked for feedback twice a year.
+- Added custom theme settings for Docker Desktop. This allows you to specify dark or light mode for Docker Desktop independent of your device settings. Fixes [docker/for-win#12747](https://github.com/docker/for-win/issues/12747)
+- Added a new flag for Windows installer. `--no-windows-containers` disables the Windows containers integration.
+- Added a new flag for Mac install command. `--user <username>` sets up Docker Desktop for a specific user, preventing them from needing an admin password on first run.
+
+### Upgrades
+- [Docker Compose v2.7.0](https://github.com/docker/compose/releases/tag/v2.7.0)
+- [Docker Compose "Cloud Integrations" v1.0.28](https://github.com/docker/compose-cli/releases/tag/v1.0.28)
+- [Kubernetes v1.24.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.2)
+- [Go 1.18.4](https://github.com/golang/go/releases/tag/go1.18.4)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Added the Container / Compose icon as well as the exposed port(s) / exit code to the Containers screen.
+- Updated the Docker theme palette colour values to match our design system.
+- Improved an error message from `docker login` if Registry Access Management is blocking the Docker engine's access to Docker Hub.
+- Increased throughput between the Host and Docker. For example increasing performance of `docker cp`.
+- Collecting diagnostics takes less time to complete.
+- Selecting or deselecting a compose app on the containers overview now selects/deselects all its containers.
+- Tag names on the container overview image column are visible.
+- Added search decorations to the terminal's scrollbar so that matches outside the viewport are visible.
+- Fixed an issue with search which doesn't work well on containers page [docker/for-win#12828](https://github.com/docker/for-win/issues/12828).
+- Fixed an issue which caused infinite loading on the **Volume** screen [docker/for-win#12789](https://github.com/docker/for-win/issues/12789).
+- Fixed a problem in the Container UI where resizing or hiding columns didn't work. Fixes [docker/for-mac#6391](https://github.com/docker/for-mac/issues/6391).
+- Fixed a bug where the state of installing, updating, or uninstalling multiple extensions at once was lost when leaving the Marketplace screen.
+- Fixed an issue where the compose version in the about page would only get updated from v2 to v1 after restarting Docker Desktop.
+- Fixed an issue where users cannot see the log view because their underlying hardware didn't support WebGL2 rendering. Fixes [docker/for-win#12825](https://github.com/docker/for-win/issues/12825).
+- Fixed a bug where the UI for Containers and Images got out of sync.
+- Fixed a startup race when the experimental virtualization framework is enabled.
+
+#### For Mac
+
+- Fixed an issue executing Compose commands from the UI. Fixes [docker/for-mac#6400](https://github.com/docker/for-mac/issues/6400).
+
+#### For Windows
+
+- Fixed horizontal resizing issue. Fixes [docker/for-win#12816](https://github.com/docker/for-win/issues/12816).
+- If an HTTP/HTTPS proxy is configured in the UI, then it automatically sends traffic from image builds and running containers to the proxy. This avoids the need to separately configure environment variables in each container or build.
+- Added the `--backend=windows` installer option to set Windows containers as the default backend.
+
+
+#### For Linux
+
+- Fixed bug related to setting up file shares with spaces in their path.
+
+
+## Docker Desktop 4.10.1
+2022-07-05
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/82475/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/82475/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/82475/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Checksums
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+        <li><b>Windows:</b> SHA-256 fe430d19d41cc56fd9a4cd2e22fc0e3522bed910c219208345918c77bbbd2a65</li>
+        <li><b>Mac Intel:</b> SHA-256 8be8e5245d6a8dbf7b8cb580fb7d99f04cc143c95323695c0d9be4f85dd60b0e</li>
+        <li><b>Mac Arm:</b> SHA-256 b3d4ef222325bde321045f3b8d946c849cd2812e9ad52a801000a95edb8af57b</li>
+        <li><b>Linux DEB:</b> SHA-256 9363bc584478c5c7654004bacb51429c275b58a868ef43c3bc6249d5844ec5be</li>
+        <li><b>Linux RPM:</b> SHA-256 92371d1a1ae4b57921721da95dc0252aefa4c79eb12208760c800ac07c0ae1d2</li>
+        <li><b>Linux Arch:</b> SHA-256 799af244b05e8b08f03b6e0dbbc1dfcc027ff49f15506b3c460e0f9bae06ca5d</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+### Bug fixes and minor changes
+
+#### For Windows
+
+- Fixed a bug where actions in the UI failed with Compose apps that were created from WSL. Fixes [docker/for-win#12806](https://github.com/docker/for-win/issues/12806).
+
+#### For Mac
+- Fixed a bug where the install command failed because paths were not initialized. Fixes [docker/for-mac#6384](https://github.com/docker/for-mac/issues/6384).
+
+
+## Docker Desktop 4.10.0
+2022-06-30
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/82025/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/82025/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/82025/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Checksums
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+        <li><b>Windows:</b> SHA-256 10615f4425e59eef7a22ce79ec13e41057df278547aa81c9fe4d623a848e80d8</li>
+        <li><b>Mac Intel:</b> SHA-256 07bfe00296b724e4e772e268217bc8169a8b23ad98e6da419b13ebfe31b54643</li>
+        <li><b>Mac Arm:</b> SHA-256 c9d2e72e5438726ab5a94c227d9130a65719f8fd09b877860ca2dcd86cfc188e</li>
+        <li><b>Linux DEB:</b> SHA-256 c5f10b3d902b4ea10c8f75c17ba174e8838fc75889f76bc27abcab6afaf1969c</li>
+        <li><b>Linux RPM:</b> SHA-256 a8ad3f8d4e93dfb6f28559f7dc84b7652e651fd6a49506e18958f1e69b51d9be</li>
+        <li><b>Linux Arch:</b> SHA-256 37131c48df6436c1066c41ec0beda039e726e33bee689f751648c473f4abd96e</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+### New
+
+- You can now add environment variables before running an image in Docker Desktop.
+- Added features to make it easier to work with a container's logs, such as regular expression search and the ability to clear container logs while the container is still running.
+- Implemented feedback on the containers table. Added ports and separated container and image names.
+- Added two new extensions, Ddosify and Lacework, to the Extensions Marketplace.
+
+### Removed
+
+- Removed Homepage while working on a new design. You can provide [feedback here](https://docs.google.com/forms/d/e/1FAIpQLSfYueBkJHdgxqsWcQn4VzBn2swu4u_rMQRIMa8LExYb_72mmQ/viewform?entry.1237514594=4.10).
+
+### Upgrades
+- [Docker Engine v20.10.17](../engine/release-notes/index.md#201017)
+- [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
+- [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
+- [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
+- [CNI plugins to v1.1.1](https://github.com/containernetworking/plugins/releases/tag/v1.1.1)
+- [containerd to v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6)
+- [runc to v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2)
+- [Go 1.18.3](https://github.com/golang/go/releases/tag/go1.18.3)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Added additional bulk actions for starting/pausing/stopping selected containers in the **Containers** tab.
+- Added pause and restart actions for compose projects in the **Containers** tab.
+- Added icons and exposed ports or exit code information in the **Containers** tab.
+- External URLs can now refer to extension details in the Extension Marketplace using links such as `docker-desktop://extensions/marketplace?extensionId=docker/logs-explorer-extension`.
+- The expanded or collapsed state of the Compose apps is now persisted.
+- `docker extension` CLI commands are available with Docker Desktop by default.
+- Increased the size of the screenshots displayed in the Extension marketplace.
+- Fixed a bug where a Docker extension fails to load if its backend container(s) are stopped. Fixes [docker/extensions-sdk#16](https://github.com/docker/extensions-sdk/issues/162).
+- Fixed a bug where the image search field is cleared without a reason. Fixes [docker/for-win#12738](https://github.com/docker/for-win/issues/12738).
+- Fixed a bug where the license agreement does not display and silently blocks Docker Desktop startup.
+- Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
+- Fixed the duplicate footer on the Support screen.
+- Dev Environments can be created from a subdirectory in a GitHub repository.
+- Removed the error message if the tips of the day cannot be loaded when using Docker Desktop offline. Fixes [docker/for-mac#6366](https://github.com/docker/for-mac/issues/6366).
+
+#### For Mac
+
+- Fixed a bug with location of bash completion files on macOS. Fixes [docker/for-mac#6343](https://github.com/docker/for-mac/issues/6343).
+- Fixed a bug where Docker Desktop does not start if the username is longer than 25 characters. Fixes [docker/for-mac#6122](https://github.com/docker/for-mac/issues/6122).
+- Fixed a bug where Docker Desktop was not starting due to invalid system proxy configuration. Fixes some issues reported in [docker/for-mac#6289](https://github.com/docker/for-mac/issues/6289).
+- Fixed a bug where Docker Desktop failed to start when the experimental virtualization framework is enabled.
+- Fixed a bug where the tray icon still displayed after uninstalling Docker Desktop.
+
+#### For Windows
+
+- Fixed a bug which caused high CPU usage on Hyper-V. Fixes [docker/for-win#12780](https://github.com/docker/for-win/issues/12780).
+- Fixed a bug where Docker Desktop for Windows would fail to start. Fixes [docker/for-win#12784](https://github.com/docker/for-win/issues/12784).
+- Fixed the `--backend=wsl-2` installer flag which did not set the backend to WSL 2. Fixes [docker/for-win#12746](https://github.com/docker/for-win/issues/12746).
+
+#### For Linux
+
+- Fixed a bug when settings cannot be applied more than once.
+- Fixed Compose version displayed in the `About` screen.
+
+### Known Issues
+
+- Occasionally the Docker engine will restart during a `docker system prune`. This is a [known issue](https://github.com/moby/buildkit/pull/2177) in the version of buildkit used in the current engine and will be fixed in future releases.
+
+## Docker Desktop 4.9.1
+2022-06-16
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/81317/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/81317/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/81317/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.pkg.tar.zst)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed blank dashboard screen. Fixes [docker/for-win#12759](https://github.com/docker/for-win/issues/12759).
+
 ## Docker Desktop 4.9.0
 2022-06-02
 
 > Download Docker Desktop
 >
-> [
-> Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){:
-> .button .primary-btn }
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple
-> chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){:
-> .button .primary-btn }
-> [DEB](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
-> .button .primary-btn }
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
-> .button .primary-btn }
-> [Arch (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.9.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){:
-> .button .primary-btn }
+> [Windows](https://desktop.docker.com/win/main/amd64/80466/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/80466/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/80466/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-x86_64.pkg.tar.zst)
 
 ### New
 
@@ -54,7 +316,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 ### Upgrades
 
 - [Compose v2.6.0](https://github.com/docker/compose/releases/tag/v2.6.0)
-- [Docker Engine v20.10.16](https://docs.docker.com/engine/release-notes/#201016)
+- [Docker Engine v20.10.16](../engine/release-notes/index.md#201016)
 - [containerd v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4)
 - [runc v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1)
 - [Go 1.18.2](https://github.com/golang/go/releases/tag/go1.18.2)
@@ -126,8 +388,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
-- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Released [Docker Desktop for Linux](install/linux-install.md).
+- Beta release of [Docker Extensions](extensions.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -155,8 +417,8 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- Released [Docker Desktop for Linux](https://docs.docker.com/desktop/linux/).
-- Beta release of [Docker Extensions](https://docs.docker.com/desktop/extensions) and Extensions SDK.
+- Released [Docker Desktop for Linux](install/linux-install.md).
+- Beta release of [Docker Extensions](extensions.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -252,7 +514,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Upgrades
 
-- [Docker Engine v20.10.14](https://docs.docker.com/engine/release-notes/#201014)
+- [Docker Engine v20.10.14](../engine/release-notes/index.md#201014)
 - [Compose v2.4.1](https://github.com/docker/compose/releases/tag/v2.4.1)
 - [Buildx 0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2)
 - [containerd v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11)
@@ -324,13 +586,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 #### For Mac
 
-- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](../mac/#experimental-features).
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](settings/mac.md#experimental-features).
 
 ### Upgrades
 
 #### For all platforms 
 
-- [Docker Engine v20.10.13](https://docs.docker.com/engine/release-notes/#201013)
+- [Docker Engine v20.10.13](../engine/release-notes/index.md#201013)
 - [Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
 - [Buildx 0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0)
 - [containerd v1.4.13](https://github.com/containerd/containerd/releases/tag/v1.4.13)
@@ -491,7 +753,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 ### Security
 
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+- Fixed [CVE-2021-45449](../security/index.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
 
 Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
 This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
@@ -504,7 +766,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ### Upgrades
 
-- [Docker Engine v20.10.12](https://docs.docker.com/engine/release-notes/#201012)
+- [Docker Engine v20.10.12](../engine/release-notes/index.md#201012)
 - [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
 - [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
 - [docker scan v0.16.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.16.0){: target="_blank" rel="noopener" class="_"}
@@ -549,7 +811,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ### Security
 
-- Fixed [CVE-2021-45449](https://docs.docker.com/security/#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
+- Fixed [CVE-2021-45449](../security/index.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
 
 Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
 This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
@@ -606,7 +868,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 ### Upgrades
 
-- [Docker Engine v20.10.11](https://docs.docker.com/engine/release-notes/#201011)
+- [Docker Engine v20.10.11](../engine/release-notes/index.md#201011)
 - [containerd v1.4.12](https://github.com/containerd/containerd/releases/tag/v1.4.12)
 - [Buildx 0.7.1](https://github.com/docker/buildx/releases/tag/v0.7.1)
 - [Compose v2.2.1](https://github.com/docker/compose/releases/tag/v2.2.1)
@@ -671,7 +933,7 @@ actual memory usage. See
 
 ### Upgrades
 
-- [Docker Engine v20.10.10](https://docs.docker.com/engine/release-notes/#201010)
+- [Docker Engine v20.10.10](../engine/release-notes/index.md#201010)
 - [containerd v1.4.11](https://github.com/containerd/containerd/releases/tag/v1.4.11)
 - [runc v1.0.2](https://github.com/opencontainers/runc/releases/tag/v1.0.2)
 - [Go 1.17.2](https://golang.org/doc/go1.17)

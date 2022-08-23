@@ -194,4 +194,4 @@ You will need to apply for access. Please either follow [this direct link](https
 
 ### What kind of DockerID should I use to publish my content?
 
-Publishing should be done with an [Organization level DockerID](https://docs.docker.com/docker-hub/orgs/). We recommend that this account utilize a shared alias with your corporate email account and only individual DockerIDs with company email are added to that organization. 
+Publishing should be done with an [Organization level DockerID](../orgs.md). We recommend that this account utilize a shared alias with your corporate email account and only individual DockerIDs with company email are added to that organization. 

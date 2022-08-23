@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_pause
 title: docker compose pause
+redirect_from:
+- /compose/reference/pause/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

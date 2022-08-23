@@ -19,7 +19,7 @@ changes and then restart the application. There are equivalent tools in most oth
 ## Quick volume type comparisons
 
 Bind mounts and named volumes are the two main types of volumes that come with the Docker engine. However, additional
-volume drivers are available to support other uses cases ([SFTP](https://github.com/vieux/docker-volume-sshfs){:target="_blank" rel="noopener" class="_"}, [Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/){:target="_blank" rel="noopener" class="_"}, [NetApp](https://netappdvp.readthedocs.io/en/stable/){:target="_blank" rel="noopener" class="_"}, [S3](https://github.com/elementar/docker-s3-volume){:target="_blank" rel="noopener" class="_"}, and more).
+volume drivers are available to support other use cases ([SFTP](https://github.com/vieux/docker-volume-sshfs){:target="_blank" rel="noopener" class="_"}, [Ceph](https://ceph.com/geen-categorie/getting-started-with-the-docker-rbd-volume-plugin/){:target="_blank" rel="noopener" class="_"}, [NetApp](https://netappdvp.readthedocs.io/en/stable/){:target="_blank" rel="noopener" class="_"}, [S3](https://github.com/elementar/docker-s3-volume){:target="_blank" rel="noopener" class="_"}, and more).
 
 |   | Named Volumes | Bind Mounts |
 | - | ------------- | ----------- |
@@ -40,7 +40,9 @@ So, let's do it!
 
 1. Make sure you don't have any previous `getting-started` containers running.
 
-2. Run the following command from the app directory. We'll explain what's going on afterwards:
+2. Run the following command from the app directory. We'll explain what's going on afterwards.
+
+    If you are using an x86-64 Mac or Linux device, then use the following command.
 
     ```console
     $ docker run -dp 3000:3000 \
@@ -49,7 +51,7 @@ So, let's do it!
         sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using Windows then use this command in PowerShell:
+    If you are using Windows, then use the following command in PowerShell.
 
     ```powershell
     PS> docker run -dp 3000:3000 `
@@ -60,7 +62,7 @@ So, let's do it!
 
     If you are using an Apple silicon Mac or another ARM64 device, then use the following command.
 
-    ```bash
+    ```console
     $ docker run -dp 3000:3000 \
         -w /app -v "$(pwd):/app" \
         node:12-alpine \

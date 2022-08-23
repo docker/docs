@@ -79,7 +79,7 @@ Docker images can be inherited from other images. Therefore, instead of creating
 
 > **Note**
 >
-> To learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> To learn more about creating your own base images, see [Creating base images](../../develop/develop-images/baseimages.md).
 
 To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.
 
@@ -173,7 +173,7 @@ $ docker build --tag python-docker .
 
 ## View local images
 
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/dashboard.md#explore-your-images). As we are currently working in the terminal let’s take a look at listing images using the CLI.
+To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As we are currently working in the terminal let’s take a look at listing images using the CLI.
 
 To list images, simply run the `docker images` command.
 
@@ -239,5 +239,3 @@ In this module, we took a look at setting up our example Python application that
 ## Feedback
 
 Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
-
-<br />

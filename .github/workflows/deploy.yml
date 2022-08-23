@@ -1,0 +1,120 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - lab
+      - master
+      - published
+
+# these permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-20.04
+    steps:
+      -
+        name: Prepare
+        run: |
+          JEKYLL_ENV=development
+          DOCS_AWS_REGION=us-east-1
+          if [ "${{ github.ref }}" = "refs/heads/master" ]; then
+            DOCS_URL="https://docs-stage2.docker.com" # TODO: change this to https://docs-stage.docker.com when new env switched and ready
+            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/stage-docs-docs.docker.com-20220818202135984800000001"
+            DOCS_S3_BUCKET="stage-docs-docs.docker.com"
+            DOCS_S3_CONFIG="s3-config.json"
+            DOCS_CLOUDFRONT_ID="E1R7CSW3F0X4H8"
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-stage"
+            DOCS_SLACK_MSG="Successfully deployed docs-stage2 from master branch. $DOCS_URL" # TODO: change to "deployed docs-stage" when new env switched and ready
+          elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
+            #JEKYLL_ENV=production # TODO: uncomment when new env switched and ready
+            DOCS_URL="https://docs2.docker.com" # TODO: change this to https://docs.docker.com when new env switched and ready
+            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
+            DOCS_S3_BUCKET="prod-docs-docs.docker.com"
+            DOCS_S3_CONFIG="s3-config.json"
+            DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
+            DOCS_SLACK_MSG="Successfully deployed docs2 from published branch. $DOCS_URL" # TODO: change to "deployed docs" when new env switched and ready
+          elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
+            DOCS_URL="https://docs-labs.docker.com"
+            DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/labs-docs-docs.docker.com-20220818202218402500000001"
+            DOCS_S3_BUCKET="labs-docs-docs.docker.com"
+            DOCS_S3_CONFIG="s3-config.json"
+            DOCS_CLOUDFRONT_ID="E1MYDYF65FW3HG"
+            DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-labs"
+          else
+            echo >&2 "ERROR: unknown branch ${{ github.ref }}"
+            exit 1
+          fi
+          SEND_SLACK_MSG="true"
+          if [ -z "$DOCS_AWS_IAM_ROLE" ] || [ -z "$DOCS_S3_BUCKET" ] || [ -z "$DOCS_CLOUDFRONT_ID" ] || [ -z "$DOCS_SLACK_MSG" ]; then
+            SEND_SLACK_MSG="false"
+          fi
+          echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "JEKYLL_ENV=$JEKYLL_ENV" >> $GITHUB_ENV
+          echo "DOCS_URL=$DOCS_URL" >> $GITHUB_ENV
+          echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
+          echo "DOCS_AWS_IAM_ROLE=$DOCS_AWS_IAM_ROLE" >> $GITHUB_ENV
+          echo "DOCS_S3_BUCKET=$DOCS_S3_BUCKET" >> $GITHUB_ENV
+          echo "DOCS_S3_CONFIG=$DOCS_S3_CONFIG" >> $GITHUB_ENV
+          echo "DOCS_CLOUDFRONT_ID=$DOCS_CLOUDFRONT_ID" >> $GITHUB_ENV
+          echo "DOCS_LAMBDA_FUNCTION_REDIRECTS=$DOCS_LAMBDA_FUNCTION_REDIRECTS" >> $GITHUB_ENV
+          echo "DOCS_SLACK_MSG=$DOCS_SLACK_MSG" >> $GITHUB_ENV
+          echo "SEND_SLACK_MSG=$SEND_SLACK_MSG" >> $GITHUB_ENV
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build website
+        uses: docker/bake-action@v2
+        with:
+          targets: release
+          set: |
+            *.cache-from=type=gha,scope=deploy-${{ env.BRANCH_NAME }}
+            *.cache-to=type=gha,scope=deploy-${{ env.BRANCH_NAME }},mode=max
+      -
+        name: Configure AWS Credentials
+        if: ${{ env.DOCS_AWS_IAM_ROLE != '' }}
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.DOCS_AWS_IAM_ROLE }}
+          aws-region: ${{ env.DOCS_AWS_REGION }}
+      -
+        name: Upload files to S3 bucket
+        if: ${{ env.DOCS_S3_BUCKET != '' }}
+        run: |
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync --acl public-read _site s3://${{ env.DOCS_S3_BUCKET }}/ --delete
+      -
+        name: Update S3 config
+        if: ${{ env.DOCS_S3_BUCKET != '' && env.DOCS_S3_CONFIG != '' }}
+        uses: docker/bake-action@v2
+        with:
+          targets: aws-s3-update-config
+          set: |
+            *.cache-from=type=gha,scope=releaser
+        env:
+          AWS_REGION: ${{ env.DOCS_AWS_REGION }}
+          AWS_S3_BUCKET: ${{ env.DOCS_S3_BUCKET }}
+          AWS_S3_CONFIG: ${{ env.DOCS_S3_CONFIG }}
+      -
+        name: Update Cloudfront config
+        if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}
+        uses: docker/bake-action@v2
+        with:
+          targets: aws-cloudfront-update
+        env:
+          AWS_REGION: us-east-1 # cloudfront and lambda edge functions are only available in us-east-1 region
+          AWS_CLOUDFRONT_ID: ${{ env.DOCS_CLOUDFRONT_ID }}
+          AWS_LAMBDA_FUNCTION: ${{ env.DOCS_LAMBDA_FUNCTION_REDIRECTS }}
+      -
+        name: Send Slack notification
+        if: ${{ env.SEND_SLACK_MSG == 'true' }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"${{ env.DOCS_SLACK_MSG }}"}' ${{ secrets.SLACK_WEBHOOK }}

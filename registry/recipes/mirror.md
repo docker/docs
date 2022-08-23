@@ -68,7 +68,7 @@ be configured to use the `filesystem` driver for storage.
 ## Run a Registry as a pull-through cache
 
 The easiest way to run a registry as a pull through cache is to run the official
-Registry image.
+[Registry](https://hub.docker.com/_/registry) image.
 At least, you need to specify `proxy.remoteurl` within `/etc/docker/registry/config.yml`
 as described in the following subsection.
 

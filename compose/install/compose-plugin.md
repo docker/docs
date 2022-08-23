@@ -15,8 +15,8 @@ In this section, you can find various methods for installing Compose on Linux.
 
 ### Installation methods
 
-* [Installing Docker Desktop for Linux](../../desktop/linux/install.md/){:target="_blank" rel="noopener" class="_"} is the easiest and recommended installation route. 
-Check the Desktop for Linux [supported platforms](../../desktop/linux/install.md/#supported-platforms){:target="_blank" rel="noopener" class="_"} page to verify the supported Linux distributions and architectures.
+* [Installing Docker Desktop for Linux](../../desktop/install/linux-install.md/){:target="_blank" rel="noopener" class="_"} is the easiest and recommended installation route. 
+Check the Desktop for Linux [supported platforms](../../desktop/install/linux-install.md/#supported-platforms){:target="_blank" rel="noopener" class="_"} page to verify the supported Linux distributions and architectures.
 
 
 The following other methods are possible:
@@ -176,7 +176,7 @@ When asked if you want to allow this app to make changes to your device, click *
     > To install a different version of Compose, substitute `{{site.compose_version}}`
     > with the version of Compose you want to use.
 
-3.  Test the installation.
+4.  Test the installation.
 
     ```console
     $ docker compose version

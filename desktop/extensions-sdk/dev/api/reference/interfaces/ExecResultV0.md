@@ -1,27 +1,10 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: ExecResultV0
-
-## Table of contents
-
-### Properties
-
-- [cmd](ExecResultV0.md#cmd)
-- [killed](ExecResultV0.md#killed)
-- [signal](ExecResultV0.md#signal)
-- [code](ExecResultV0.md#code)
-- [stdout](ExecResultV0.md#stdout)
-- [stderr](ExecResultV0.md#stderr)
-
-### Methods
-
-- [lines](ExecResultV0.md#lines)
-- [parseJsonLines](ExecResultV0.md#parsejsonlines)
-- [parseJsonObject](ExecResultV0.md#parsejsonobject)
 
 ## Properties
 

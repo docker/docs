@@ -6,6 +6,7 @@
 # such as the "enterprise" stubs, which are in place to facilitate redirects
 # to Mirantis.
 exclude:
+  - _releaser
   - _scripts
   - docker-bake.hcl
   - LICENSE
@@ -16,20 +17,12 @@ exclude:
 google_analytics: GTM-WL2QLG5
 polldaddy_id:     8453675
 
-# Enable search autocompletion (requires metadata.json to be generated)
-local_search: true
-
-plugins:
-  - jekyll-redirect-from
-  - jekyll-relative-links
-  - jekyll-sitemap
-
 # Assets
 #
 # For production/deploy, we build css with the "compressed" format, to produce
 # smaller files.
 sass:
-  style:    compressed
+  style: compressed
 
 collections:
   samples:
@@ -38,10 +31,7 @@ collections:
 # Set default options / metadata for some paths.
 #
 # Setting options here prevents having to repeat the same option in front-matter
-# on every page. Avoid using wildcards, such as "path: engine/api/v1.*", as
-# limitations in Jekyll cause those to introduce a _severe_ impact on build-time,
-# affecting generation of (e.g.) sitemap.xml and metadata.json, resulting in the
-# total build to take 60 seconds longer to build (!).
+# on every page.
 #
 # The list below is used for *production* deploys, and overrides the one defined
 # in "_config.yml", which is used for local builds and pull-request previews.
@@ -53,66 +43,6 @@ defaults:
       layout: docs
       toc_min: 2
       toc_max: 4
-
-  # Set the correct edit-URL for upstream resources. We usually don't create a direct
-  # edit link for these, and instead point to the directory that contains the file.
-  - scope:
-      path: cloud/aci-compose-features.md
-    values:
-      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
-  - scope:
-      path: cloud/aci-container-features.md
-    values:
-      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
-  - scope:
-      path: cloud/ecs-architecture.md
-    values:
-      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
-  - scope:
-      path: cloud/ecs-compose-features.md
-    values:
-      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
-  - scope:
-      path: cloud/ecs-compose-examples.md
-    values:
-      edit_url: "https://github.com/docker/compose-cli/tree/master/docs/"
-  - scope:
-      path: engine/deprecated.md
-    values:
-      edit_url: "https://github.com/docker/cli/tree/master/docs/"
-  - scope:
-      path: engine/extend.md
-    values:
-      edit_url: "https://github.com/docker/cli/tree/master/docs/extend"
-  - scope:
-      path: engine/extend
-    values:
-      edit_url: "https://github.com/docker/cli/tree/master/docs/extend"
-  - scope:
-      path: engine/reference
-    values:
-      edit_url: "https://github.com/docker/cli/tree/master/docs/reference"
-  - scope:
-      path: engine/reference/commandline
-    values:
-      edit_url: "https://github.com/docker/cli/tree/master/docs/reference/commandline"
-      skip_read_time: true
-  - scope:
-      path: glossary.md
-    values:
-      edit_url: "https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml"
-  - scope:
-      path: notary/reference
-    values:
-      edit_url: "https://github.com/theupdateframework/notary/tree/master/docs/reference"
-  - scope:
-      path: registry/configuration
-    values:
-      edit_url: "https://github.com/docker/distribution/tree/master/docs"
-  - scope:
-      path: registry/spec
-    values:
-      edit_url: "https://github.com/docker/distribution/tree/master/docs/spec"
 
   # Hide Enterprise content from sitemap. These directories still contains stubs
   # that are needed to redirect old URLs

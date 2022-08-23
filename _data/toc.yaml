@@ -238,7 +238,7 @@ guides:
       - sectiontitle: Get started with swarm mode
         section:
         - path: /engine/swarm/swarm-tutorial/
-          title: Set up for the tutorial
+          title: Swarm mode tutorial overview
         - path: /engine/swarm/swarm-tutorial/create-swarm/
           title: Create a swarm
         - path: /engine/swarm/swarm-tutorial/add-nodes/
@@ -281,6 +281,8 @@ guides:
         title: Manage sensitive data with Docker secrets
       - path: /engine/swarm/swarm_manager_locking/
         title: Lock your swarm
+      - path: /engine/swarm/networking/
+        title: Manage swarm service networks
       - path: /engine/swarm/admin_guide/
         title: Swarm administration guide
       - path: /engine/swarm/raft/
@@ -483,6 +485,10 @@ reference:
       title: docker commit
     - sectiontitle: docker compose
       section:
+        - path: /compose/reference/
+          title: overview
+        - path: /compose/reference/envvars/
+          title: environment variables
         - path: /engine/reference/commandline/compose/
           title: docker compose
         - path: /engine/reference/commandline/compose_build/
@@ -909,60 +915,9 @@ reference:
         title: docker volume rm
     - path: /engine/reference/commandline/wait/
       title: docker wait
-  - sectiontitle: Docker Compose CLI reference
-    section:
-    - path: /compose/reference/
-      title: Overview of docker-compose CLI
-    - path: /compose/reference/envvars/
-      title: CLI environment variables
-    - path: /compose/reference/build/
-      title: docker-compose build
-    - path: /compose/reference/config/
-      title: docker-compose config
-    - path: /compose/reference/create/
-      title: docker-compose create
-    - path: /compose/reference/down/
-      title: docker-compose down
-    - path: /compose/reference/events/
-      title: docker-compose events
-    - path: /compose/reference/exec/
-      title: docker-compose exec
-    - path: /compose/reference/help/
-      title: docker-compose help
-    - path: /compose/reference/images/
-      title: docker-compose images
-    - path: /compose/reference/kill/
-      title: docker-compose kill
-    - path: /compose/reference/logs/
-      title: docker-compose logs
-    - path: /compose/reference/pause/
-      title: docker-compose pause
-    - path: /compose/reference/port/
-      title: docker-compose port
-    - path: /compose/reference/ps/
-      title: docker-compose ps
-    - path: /compose/reference/pull/
-      title: docker-compose pull
-    - path: /compose/reference/push/
-      title: docker-compose push
-    - path: /compose/reference/restart/
-      title: docker-compose restart
-    - path: /compose/reference/rm/
-      title: docker-compose rm
-    - path: /compose/reference/run/
-      title: docker-compose run
-    - path: /compose/reference/scale/
-      title: docker-compose scale
-    - path: /compose/reference/start/
-      title: docker-compose start
-    - path: /compose/reference/stop/
-      title: docker-compose stop
-    - path: /compose/reference/top/
-      title: docker-compose top
-    - path: /compose/reference/unpause/
-      title: docker-compose unpause
-    - path: /compose/reference/up/
-      title: docker-compose up
+  - title: Docker Compose CLI reference
+    # using old URL that redirects to the new location
+    path: /compose/reference/overview/
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
 - sectiontitle: API reference
@@ -1029,8 +984,12 @@ reference:
         title: v1.19 reference
       - path: /engine/api/v1.18/
         title: v1.18 reference
-  - title: Docker Hub API
-    path: /docker-hub/api/latest/
+  - sectiontitle: Docker Hub API
+    section:
+      - title: Docker Hub API
+        path: /docker-hub/api/latest/
+      - title: DVP Data API
+        path: /docker-hub/api/dvp/
   - title: Registry API
     path: /registry/spec/api/
   - sectiontitle: Docker Extension SDK API (Beta)
@@ -1179,132 +1138,164 @@ manuals:
   section:
     - path: /desktop/
       title: Overview
-    - sectiontitle: Mac
+    - sectiontitle: Install Docker Desktop
       section:
-        - path: /desktop/mac/install/
-          title: Install Docker Desktop for Mac
-        - path: /desktop/mac/
-          title: User manual
-        - path: /desktop/mac/networking/
-          title: Networking
-        - path: /desktop/mac/space/
-          title: Disk utilization
-        - path: /desktop/mac/troubleshoot/
-          title: Logs and troubleshooting
-        - path: /desktop/mac/apple-silicon/
-          title: Apple silicon
-    - sectiontitle: Windows
-      section:
-        - path: /desktop/windows/install/
-          title: Install Docker Desktop for Windows
-        - path: /desktop/windows/
-          title: User manual
-        - path: /desktop/windows/networking/
-          title: Networking
-        - path: /desktop/windows/troubleshoot/
-          title: Logs and troubleshooting
-        - path: /desktop/windows/wsl/
-          title: Docker Desktop WSL 2 backend
-    - sectiontitle: Linux
-      section:
-        - path: /desktop/linux/install/
-          title: Install Docker Desktop for Linux
-        - sectiontitle: Installation per distro
-          section:
-            - path: /desktop/linux/install/debian/
+       - path: /desktop/install/mac-install/
+         title: Install on Mac
+       - path: /desktop/mac/apple-silicon/
+         title: Install on Apple silicon
+       - path: /desktop/install/windows-install/
+         title: Install on Windows
+       - path: /desktop/install/linux-install/
+         title: Install on Linux
+       - sectiontitle: Installation per Linux distro
+         section:
+            - path: /desktop/install/debian/
               title: Install on Debian
-            - path: /desktop/linux/install/fedora/
+            - path: /desktop/install/fedora/
               title: Install on Fedora
-            - path: /desktop/linux/install/ubuntu/
+            - path: /desktop/install/ubuntu/
               title: Install on Ubuntu
-            - path: /desktop/linux/install/archlinux/
+            - path: /desktop/install/archlinux/
               title: Install on Arch
-        - path: /desktop/linux/
-          title: User manual
-        - path: /desktop/linux/networking/
-          title: Networking
-        - path: /desktop/linux/space/
-          title: Disk utilization
-        - path: /desktop/linux/troubleshoot/
-          title: Logs and troubleshooting    
-    - path: /desktop/dashboard/
-      title: Dashboard
-    - path: /desktop/dev-environments/
-      title: Dev Environments (Preview)
+    - path: /desktop/get-started/
+      title: Quick Start Guide and sign in
+    - sectiontitle: Explore Docker Desktop
+      section:
+        - path: /desktop/use-desktop/container/
+          title: Explore Containers
+        - path: /desktop/use-desktop/images/
+          title: Explore Images
+        - path: /desktop/use-desktop/volumes/
+          title: Explore Volumes
+        - path: /desktop/use-desktop/pause/
+          title: Pause Docker Desktop
+    - sectiontitle: Change settings
+      section:
+        - path: /desktop/settings/mac/
+          title: On Mac
+        - path: /desktop/settings/windows/
+          title: On Windows
+        - path: /desktop/settings/linux/
+          title: On Linux
+    - sectiontitle: Troubleshoot and diagnose
+      section:
+        - path: /desktop/troubleshoot/overview/
+          title: Overview
+        - path: /desktop/troubleshoot/topics/
+          title: Troubleshoot topics
+        - path: /desktop/troubleshoot/workarounds/
+          title: Workarounds for common problems
+        - path: /desktop/troubleshoot/known-issues/
+          title: Known issues for Mac
+    - sectiontitle: Additional resources
+      section:
+        - path: /desktop/multi-arch/
+          title: Multi-arch support
+        - path: /desktop/kubernetes/
+          title: Deploy on Kubernetes
+        - path: /desktop/backup-and-restore/
+          title: Back up and restore data
+        - path: /desktop/networking/
+          title: Explore networking features
+        - path: /desktop/mac/permission-requirements/
+          title: Docker Desktop permission requirements for Mac
+        - path: /desktop/windows/permission-requirements/
+          title: Docker Desktop permission requirements for Windows
+        - path: /desktop/windows/wsl/
+          title: Docker Desktop WSL 2 backend on Windows
+        - path: /desktop/vm-vdi/
+          title: Run Docker Desktop in a VM or VDI environment
+    - sectiontitle: Dev Environments (Beta)
+      section:
+        - path: /desktop/dev-environments/
+          title: Overview
+        - path: /desktop/dev-environments/create-dev-env/
+          title: Create a Dev Environment
+        - path: /desktop/dev-environments/create-compose-dev-env/
+          title: Create a Compose Dev Environment
+        - path: /desktop/dev-environments/share/
+          title: Share your Dev Environment
+        - path: /desktop/dev-environments/specify/
+          title: Specify a Dockerfile or base image
     - path: /desktop/extensions/
       title: Extensions (Beta)
     - sectiontitle: Extensions SDK (Beta)
       section:
         - path: /desktop/extensions-sdk/
-          title: Introduction
-        - sectiontitle: Tutorials
+          title: Overview
+        - path: /desktop/extensions-sdk/quickstart/
+          title: Quickstart
+        - sectiontitle: "Part one: Build"
           section:
-            - title: Create your first extension
-              path: /desktop/extensions-sdk/tutorials/initialize/
-            - title: Create a minimal frontend extension
-              path: /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
-            - title: Create a ReactJS-based extension
-              path: /desktop/extensions-sdk/tutorials/react-extension/
-            - title: Create a minimal extension invoking docker commands
-              path: /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
-            - title: Create a minimal backend extension
-              path: /desktop/extensions-sdk/tutorials/minimal-backend-extension/
-        - sectiontitle: Design
+            - sectiontitle: "Step one: Set up..."
+              section:
+                - title: ...a minimal frontend extension
+                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
+                - title: ... a ReactJS-based extension
+                  path: /desktop/extensions-sdk/build/set-up/react-extension/
+                - title: ... a minimal extension invoking Docker commands
+                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
+                - title: ... a minimal backend extension
+                  path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
+            - title: "Step two: Build and install"
+              path: /desktop/extensions-sdk/build/build-install/
+            - title: "Step three: Test and debug"
+              path: /desktop/extensions-sdk/build/test-debug/
+        - sectiontitle: "Part two: Publish"
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/extensions/
+            - title: Metadata
+              path: /desktop/extensions-sdk/extensions/METADATA/
+            - title: Labels
+              path: /desktop/extensions-sdk/extensions/labels/
+            - title: Distribution
+              path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+            - title: Build multi-arch extensions
+              path: /desktop/extensions-sdk/extensions/multi-arch/
+        - sectiontitle: "Design and UI styling"
           section:
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
-             - title: Docker's design principles
+             - title: Docker design principles
                path: /desktop/extensions-sdk/design/design-principles/
-        - sectiontitle: UI Styling
-          section:
-             - title: Overview
+             - title: UI styling guidelines
                path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
         - sectiontitle: Developer SDK tools
           section:
-            - title: Overview
-              path: /desktop/extensions-sdk/dev/overview/
-            - title: CLI overview
-              path: /desktop/extensions-sdk/dev/cli/usage/
-            - title: Build, test and install an extension
-              path: /desktop/extensions-sdk/dev/cli/build-test-install-extension/
-            - title: OAuth 2.0 flow
+            - title: Authentication
               path: /desktop/extensions-sdk/dev/oauth2-flow/
-        - sectiontitle: Publishing extensions
-          section:
-            - title: Metadata
-              path: /desktop/extensions-sdk/extensions/METADATA/
-            - title: Labels
-              path: /desktop/extensions-sdk/extensions/labels/
-            - title: Validation
-              path: /desktop/extensions-sdk/extensions/validation/
-            - title: Distribution
-              path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
-            - title: Building multi-arch extensions
-              path: /desktop/extensions-sdk/extensions/multi-arch/
-        - sectiontitle: Extension APIs
-          section:
-            - title: Overview
-              path: /desktop/extensions-sdk/dev/api/overview/
-            - title: Extension Backend
-              path: /desktop/extensions-sdk/dev/api/backend/
-            - title: Docker
-              path: /desktop/extensions-sdk/dev/api/docker/
-            - title: Dashboard
-              path: /desktop/extensions-sdk/dev/api/dashboard/
-            - title: Navigation
-              path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
-            - title: API Reference
-              path: /desktop/extensions-sdk/dev/api/reference/README/
-    - path: /desktop/multi-arch/
-      title: Multi-arch support
-    - path: /desktop/kubernetes/
-      title: Deploy on Kubernetes
-    - path: /desktop/faqs/
-      title: FAQs
-    - path: /desktop/backup-and-restore/
-      title: Back up and restore data
+            - title: CLI reference
+              path: /desktop/extensions-sdk/dev/usage/
+            - sectiontitle: Extension APIs
+              section:
+                - title: Overview
+                  path: /desktop/extensions-sdk/dev/api/overview/
+                - title: Extension Backend
+                  path: /desktop/extensions-sdk/dev/api/backend/
+                - title: Docker
+                  path: /desktop/extensions-sdk/dev/api/docker/
+                - title: Dashboard
+                  path: /desktop/extensions-sdk/dev/api/dashboard/
+                - title: Navigation
+                  path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
+                - title: API Reference
+                  path: /desktop/extensions-sdk/dev/api/reference/README/
+    - sectiontitle: FAQs
+      section:
+      - path: /desktop/faqs/general/
+        title: General FAQs
+      - path: /desktop/faqs/macfaqs/
+        title: Mac FAQs
+      - path: /desktop/faqs/windowsfaqs/
+        title: Windows FAQs
+      - path: /desktop/faqs/linuxfaqs/
+        title: Linux FAQs
+    - path: /desktop/feedback/
+      title: Give feedback
     - path: /desktop/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -1349,46 +1340,6 @@ manuals:
       title: Install binaries
   - path: /engine/install/linux-postinstall/
     title: Optional post-installation steps
-  - path: /engine/release-notes/
-    title: Release notes
-  - sectiontitle: Previous versions
-    section:
-    - path: /engine/release-notes/19.03/
-      title: Engine 19.03 release notes
-    - path: /engine/release-notes/18.09/
-      title: Engine 18.09 release notes
-    - path: /engine/release-notes/18.06/
-      title: Engine 18.06 release notes
-    - path: /engine/release-notes/18.05/
-      title: Engine 18.05 release notes
-    - path: /engine/release-notes/18.04/
-      title: Engine 18.04 release notes
-    - path: /engine/release-notes/18.03/
-      title: Engine 18.03 release notes
-    - path: /engine/release-notes/18.02/
-      title: Engine 18.02 release notes
-    - path: /engine/release-notes/18.01/
-      title: Engine 18.01 release notes
-    - path: /engine/release-notes/17.12/
-      title: Engine 17.12 release notes
-    - path: /engine/release-notes/17.11/
-      title: Engine 17.11 release notes
-    - path: /engine/release-notes/17.10/
-      title: Engine 17.10 release notes
-    - path: /engine/release-notes/17.09/
-      title: Engine 17.09 release notes
-    - path: /engine/release-notes/17.07/
-      title: Engine 17.07 release notes
-    - path: /engine/release-notes/17.06/
-      title: Engine 17.06 release notes
-    - path: /engine/release-notes/17.05/
-      title: Engine 17.05 release notes
-    - path: /engine/release-notes/17.04/
-      title: Engine 17.04 release notes
-    - path: /engine/release-notes/17.03/
-      title: Engine 17.03 release notes
-    - path: /engine/release-notes/prior-releases/
-      title: Engine 1.13 and earlier
   - path: /engine/deprecated/
     title: Deprecated features
   - path: /buildx/working-with-buildx/
@@ -1399,6 +1350,88 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
+  - path: /engine/release-notes/
+    title: Release notes
+  - sectiontitle: Previous versions
+    section:
+      - path: /engine/release-notes/19.03/
+        title: Engine 19.03 release notes
+      - path: /engine/release-notes/18.09/
+        title: Engine 18.09 release notes
+      - path: /engine/release-notes/18.06/
+        title: Engine 18.06 release notes
+      - path: /engine/release-notes/18.05/
+        title: Engine 18.05 release notes
+      - path: /engine/release-notes/18.04/
+        title: Engine 18.04 release notes
+      - path: /engine/release-notes/18.03/
+        title: Engine 18.03 release notes
+      - path: /engine/release-notes/18.02/
+        title: Engine 18.02 release notes
+      - path: /engine/release-notes/18.01/
+        title: Engine 18.01 release notes
+      - path: /engine/release-notes/17.12/
+        title: Engine 17.12 release notes
+      - path: /engine/release-notes/17.11/
+        title: Engine 17.11 release notes
+      - path: /engine/release-notes/17.10/
+        title: Engine 17.10 release notes
+      - path: /engine/release-notes/17.09/
+        title: Engine 17.09 release notes
+      - path: /engine/release-notes/17.07/
+        title: Engine 17.07 release notes
+      - path: /engine/release-notes/17.06/
+        title: Engine 17.06 release notes
+      - path: /engine/release-notes/17.05/
+        title: Engine 17.05 release notes
+      - path: /engine/release-notes/17.04/
+        title: Engine 17.04 release notes
+      - path: /engine/release-notes/17.03/
+        title: Engine 17.03 release notes
+      - path: /engine/release-notes/prior-releases/
+        title: Engine 1.13 and earlier
+- sectiontitle: Docker Build
+  section:
+    - path: /build/
+      title: Overview
+    - path: /build/hellobuild/
+      title: Hello Build
+    - sectiontitle: Buildx
+      section:
+        - path: /build/buildx/
+          title: Buildx overview
+        - path: /build/buildx/install/
+          title: Install Buildx
+        - sectiontitle: Drivers
+          section:
+            - path: /build/buildx/drivers/
+              title: Overview
+            - path: /build/buildx/drivers/docker/
+              title: Docker driver
+            - path: /build/buildx/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/buildx/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/buildx/drivers/remote/
+              title: Remote driver
+        - path: /build/buildx/multiple-builders/
+          title: Using multiple builders
+        - path: /build/buildx/multiplatform-images/
+          title: Building multi-platform images
+    - sectiontitle: Bake
+      section:
+        - path: /build/bake/
+          title: Bake overview
+        - path: /build/bake/file-definition/
+          title: File definition
+        - path: /build/bake/configuring-build/
+          title: Configuring builds
+        - path: /build/bake/hcl-funcs/
+          title: User defined HCL functions
+        - path: /build/bake/build-contexts/
+          title: Build contexts and linking targets
+        - path: /build/bake/compose-file/
+          title: Building from Compose file
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -1415,8 +1448,12 @@ manuals:
         title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
     title: Getting started
-  - path: /compose/environment-variables/
-    title: Environment variables in Compose
+  - sectiontitle: Environment variables
+    section:
+    - path: /compose/environment-variables/
+      title: Overview
+    - path: /compose/envvars-precedence/
+      title: Environment variables' precedence
   - path: /compose/env-file/
     title: Environment file
   - path: /compose/profiles/
@@ -1433,10 +1470,10 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/release-notes/
-    title: Release notes
   - path: /compose/cli-command-compatibility/
     title: Compose v2 compatibility
+  - path: /compose/release-notes/
+    title: Release notes
 
 - sectiontitle: Docker Hub
   section:
@@ -1522,6 +1559,8 @@ manuals:
       title: FAQs
   - path: /docker-hub/orgs/
     title: Teams and organizations
+  - path: /docker-hub/members/
+    title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign in
   - sectiontitle: Single-Sign-on
@@ -1530,6 +1569,8 @@ manuals:
          title: Configure
       -  path: /single-sign-on/faqs/
          title: FAQs
+  - path: /docker-hub/scim/
+    title: System for Cross-domain Identity Management
   - path: /docker-hub/image-access-management/
     title: Image Access Management
   - path: /docker-hub/registry-access-management/
@@ -1612,14 +1653,7 @@ manuals:
       title: Getting help
 - path: /release-notes/
   title: Release notes
+- path: /support/
+  title: Get Support
 - path: /release-lifecycle/
   title: Product release lifecycle
-- sectiontitle: Superseded products and tools
-  section:
-  - path: /machine/
-    title: Docker Machine (deprecated)
-  - path: /toolbox/
-    title: Docker Toolbox (deprecated)
-  - path: /kitematic/
-    title: Kitematic (deprecated)
-

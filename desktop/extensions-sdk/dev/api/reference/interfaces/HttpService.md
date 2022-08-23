@@ -1,22 +1,10 @@
 ---
-title: Docker extension API reference
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
+skip_read_time: true
 ---
 
 # Interface: HttpService
-
-## Table of contents
-
-### Methods
-
-- [get](HttpService.md#get)
-- [post](HttpService.md#post)
-- [put](HttpService.md#put)
-- [patch](HttpService.md#patch)
-- [delete](HttpService.md#delete)
-- [head](HttpService.md#head)
-- [request](HttpService.md#request)
 
 ## Methods
 
@@ -27,7 +15,7 @@ keywords: Docker, extensions, sdk, API, reference
 Performs an HTTP GET request to a backend service.
 
 ```typescript
- ddClient.extension.vm.service
+ddClient.extension.vm.service
  .get("/some/service")
  .then((value: any) => console.log(value)
 ```
@@ -51,7 +39,7 @@ ___
 Performs an HTTP POST request to a backend service.
 
 ```typescript
- ddClient.extension.vm.service
+ddClient.extension.vm.service
  .post("/some/service", { ... })
  .then((value: any) => console.log(value));
 ```
@@ -76,7 +64,7 @@ ___
 Performs an HTTP PUT request to a backend service.
 
 ```typescript
- ddClient.extension.vm.service
+ddClient.extension.vm.service
  .put("/some/service", { ... })
  .then((value: any) => console.log(value));
 ```
@@ -101,7 +89,7 @@ ___
 Performs an HTTP PATCH request to a backend service.
 
 ```typescript
- ddClient.extension.vm.service
+ddClient.extension.vm.service
  .patch("/some/service", { ... })
  .then((value: any) => console.log(value));
 ```
@@ -126,7 +114,7 @@ ___
 Performs an HTTP DELETE request to a backend service.
 
 ```typescript
- ddClient.extension.vm.service
+ddClient.extension.vm.service
  .delete("/some/service")
  .then((value: any) => console.log(value));
 ```
@@ -150,7 +138,7 @@ ___
 Performs an HTTP HEAD request to a backend service.
 
 ```typescript
- ddClient.extension.vm.service
+ddClient.extension.vm.service
  .head("/some/service")
  .then((value: any) => console.log(value));
 ```
@@ -174,7 +162,7 @@ ___
 Performs an HTTP request to a backend service.
 
 ```typescript
- ddClient.extension.vm.service
+ddClient.extension.vm.service
  .request({ url: "/url", method: "GET", headers: { 'header-key': 'header-value' }, data: { ... }})
  .then((value: any) => console.log(value));
 ```

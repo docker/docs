@@ -26,7 +26,9 @@ $ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 The registry is now ready to use.
 
-> **Warning**: These first few examples show registry configurations that are
+> **Warning**
+>
+> These first few examples show registry configurations that are
 > only appropriate for testing. A production-ready registry must be protected by
 > TLS and should ideally use an access-control mechanism. Keep reading and then
 > continue to the [configuration guide](configuration.md) to deploy a

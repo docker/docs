@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_run
 title: docker compose run
+redirect_from:
+- /compose/reference/run/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

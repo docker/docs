@@ -66,7 +66,7 @@ testuser:231072:65536
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
 
-- Known to work on Ubuntu 18.04, 20.04, and 21.04.
+- Known to work on Ubuntu 18.04, 20.04, and 22.04.
 </div>
 <div id="hint-debian" class="tab-pane fade in" markdown="1">
 - Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
@@ -132,7 +132,7 @@ testuser:231072:65536
   - Exposing SCTP ports
 - To use the `ping` command, see [Routing ping packets](#routing-ping-packets).
 - To expose privileged TCP/UDP ports (< 1024), see [Exposing privileged ports](#exposing-privileged-ports).
-- `IPAddress` shown in `docker inspect` and is namespaced inside RootlessKit's network namespace.
+- `IPAddress` shown in `docker inspect` is namespaced inside RootlessKit's network namespace.
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
 - NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
@@ -409,7 +409,7 @@ For example:
 
 **[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
 
-This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone ` is set to 0:
+This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone` is set to 0:
 
 ```console
 $ cat /proc/sys/kernel/unprivileged_userns_clone

@@ -26,7 +26,7 @@ file system objects required.
 To complete this tutorial, you need the following:
 
 - Go version 1.16 or later. You might want to [download and install Go](https://golang.org/dl/) first.
-- Docker running locally. Follow the instructions to [download and install Docker](https://docs.docker.com/desktop/).
+- Docker running locally. Follow the instructions to [download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. We recommend using [Visual Studio Code](https://code.visualstudio.com/){: target="_blank" rel="noopener" class="_"}.
 
 ## Meet the example application
@@ -153,7 +153,7 @@ When we have used that `FROM` command, we told Docker to include in our image al
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [creating base images](https://docs.docker.com/develop/develop-images/baseimages/) section of the guide.
+> If you want to learn more about creating your own base images, see [creating base images](../../develop/develop-images/baseimages.md) section of the guide.
 
 To make things easier when running the rest of our commands, let’s create a
 directory _inside_ the image that we are building. This also instructs Docker
@@ -416,9 +416,9 @@ application binary had been compiled.
 These are legit concerns. Both can be solved by using _multi-stage builds_. The
 following example is provided with little explanation because this would derail
 us from our current concerns, but please feel free to explore on your own later.
-The main idea is that we use one image to produce some artefacts, which are then
+The main idea is that we use one image to produce some artifacts, which are then
 placed into another, much smaller image, containing only the parts necessary for
-running the artefacts that we'd built.
+running the artifacts that we'd built.
 
 The `Dockerfile.multistage` in the sample application's repo has the following
 content:
@@ -427,9 +427,7 @@ content:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-##
 ## Build
-##
 FROM golang:1.16-buster AS build
 
 WORKDIR /app
@@ -442,9 +440,7 @@ COPY *.go ./
 
 RUN go build -o /docker-gs-ping
 
-##
 ## Deploy
-##
 FROM gcr.io/distroless/base-debian10
 
 WORKDIR /
@@ -504,5 +500,3 @@ Help us improve this topic by providing your feedback. Let us know what you
 think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"}
 GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"}
 to suggest updates.
-
-<br />

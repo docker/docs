@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_images
 title: docker compose images
+redirect_from:
+- /compose/reference/images/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

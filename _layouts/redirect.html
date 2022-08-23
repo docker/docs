@@ -2,15 +2,14 @@
 <html lang="en-US">
   <meta charset="utf-8">
   <title>Redirecting&hellip;</title>
-  {%- assign redirect_to = page.redirect.to | remove_first: 'https://docs.docker.com' | remove_first: 'http://docs.docker.com' %}
-  {%- if redirect_to contains "://" %}
-  <link rel="canonical" href="{{ redirect_to }}">
+  {%- if page.redirect.to contains "://" %}
+  <link rel="canonical" href="{{ page.redirect.to }}">
   {%- else %}
-  <link rel="canonical" href="https://docs.docker.com{{ redirect_to }}">
+  <link rel="canonical" href="{{ site.docs_url }}{{ page.redirect.to }}">
   {%- endif %}
-  <meta http-equiv="refresh" content="0; url={{ redirect_to }}">
+  <meta http-equiv="refresh" content="0; url={{ page.redirect.to }}">
   <meta name="robots" content="noindex">
   <h1>Redirecting&hellip;</h1>
-  <a href="{{ redirect_to }}">Click here if you are not redirected.</a>
-  <script>location="{{ redirect_to }}"</script>
+  <a href="{{ page.redirect.to }}">Click here if you are not redirected.</a>
+  <script>location="{{ page.redirect.to }}"</script>
 </html>

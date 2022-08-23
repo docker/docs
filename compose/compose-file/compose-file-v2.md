@@ -1292,7 +1292,7 @@ web:
 Specify the default number of containers to deploy for this service. Whenever
 you run `docker-compose up`, Compose creates or removes containers to match
 the specified number. This value can be overridden using the
-[`--scale`](../reference/up.md) flag.
+[`--scale`](../../engine/reference/commandline/compose_up.md)
 
 ```yaml
 web:

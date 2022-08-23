@@ -103,7 +103,7 @@ You can specify the API version to use, in one of the following ways:
   `/v1.41/containers/`.
 
 - To force the Docker CLI or the Docker Engine SDKs to use an old version
-  version of the API than the version reported by `docker version`, set the
+  of the API than the version reported by `docker version`, set the
   environment variable `DOCKER_API_VERSION` to the correct version. This works
   on Linux, Windows, or macOS clients.
 

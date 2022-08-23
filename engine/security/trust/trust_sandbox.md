@@ -262,7 +262,7 @@ data. Then, you try and pull it.
     Docker to attempt to download the tampered image from the registry and reject
     it because it is invalid.
 
-8.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
+9.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
         / # docker pull sandboxregistry:5000/test/trusttest
         Using default tag: latest

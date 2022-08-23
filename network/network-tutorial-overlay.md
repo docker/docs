@@ -395,7 +395,7 @@ example also uses Linux hosts, but the same commands work on Windows.
     The two containers communicate with the overlay network connecting the two
     hosts. If you run another alpine container on `host2` that is _not detached_,
     you can ping `alpine1` from `host2` (and here we add the
-    [remove option](https://docs.docker.com/engine/reference/run/#clean-up---rm) for automatic container cleanup):
+    [remove option](/engine/reference/run/#clean-up---rm) for automatic container cleanup):
 
     ```sh
     $ docker run -it --rm --name alpine3 --network test-net alpine

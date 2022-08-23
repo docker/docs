@@ -17,7 +17,7 @@ Yes - see [Controlling startup order](startup-order.md).
 ## Why do my services take 10 seconds to recreate or stop?
 
 Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
-for a [default timeout of 10 seconds](reference/stop.md).  After the timeout,
+for a [default timeout of 10 seconds](../engine/reference/commandline/compose_stop.md). After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it.  If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
@@ -63,13 +63,13 @@ or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compos
 
 ## What's the difference between `up`, `run`, and `start`?
 
-Typically, you want `docker-compose up`. Use `up` to start or restart all the
+Typically, you want `docker compose up`. Use `up` to start or restart all the
 services defined in a `docker-compose.yml`. In the default "attached"
 mode, you see all the logs from all the containers. In "detached" mode (`-d`),
 Compose exits after starting the containers, but the containers continue to run
 in the background.
 
-The `docker-compose run` command is for running "one-off" or "adhoc" tasks. It
+The `docker compose run` command is for running "one-off" or "adhoc" tasks. It
 requires the service name you want to run and only starts containers for services
 that the running service depends on. Use `run` to run tests or perform
 an administrative task such as removing or adding data to a data volume
@@ -77,18 +77,18 @@ container. The `run` command acts like `docker run -ti` in that it opens an
 interactive terminal to the container and returns an exit status matching the
 exit status of the process in the container.
 
-The `docker-compose start` command is useful only to restart containers
+The `docker compose start` command is useful only to restart containers
 that were previously created, but were stopped. It never creates new
 containers.
 
-## Can I use json instead of yaml for my Compose file?
+## Can I use JSON instead of YAML for my Compose file?
 
-Yes. [Yaml is a superset of json](https://stackoverflow.com/a/1729545/444646) so
-any JSON file should be valid Yaml.  To use a JSON file with Compose,
+Yes. [YAML is a superset of JSON](https://stackoverflow.com/a/1729545/444646) so
+any JSON file should be valid YAML. To use a JSON file with Compose,
 specify the filename to use, for example:
 
 ```console
-$ docker-compose -f docker-compose.json up
+$ docker compose -f docker-compose.json up
 ```
 
 ## Should I include my code with `COPY`/`ADD` or a volume?

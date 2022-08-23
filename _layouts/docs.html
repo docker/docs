@@ -4,6 +4,11 @@
     {%- assign edit_url = page.edit_url -%}
 {%- else -%}
     {%- assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path -%}
+{%- endif -%}
+{%- if page.issue_url -%}
+    {%- assign issue_url = page.issue_url -%}
+{%- else -%}
+    {%- assign issue_url = "https://github.com/docker/docker.github.io/issues/new?body=File: [" | append: page.path | append: "](" | append: site.docs_url | append: page.url | append: ")" -%}
 {%- endif -%} -->
 <html lang="en">
 {%- include head.html -%}
@@ -23,12 +28,7 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            {%- unless page.skip_read_time == true -%}
-                            {%- assign words = content | number_of_words -%}
-                            {%- if words >= 360 -%}
-                            <p><em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes</em></p>
-                            {%- endif -%}
-                            {%- endunless -%}
+                            <p>{%- include read_time.html -%}</p>
                             {{ content }}
                             {%- unless page.notags == true -%}
                             {%- assign keywords = page.keywords | split:"," -%}
@@ -63,7 +63,9 @@
                                         {%- if edit_url != "" -%}
                                         <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
                                         {%- endif -%}
-                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+                                        {%- if issue_url != "" -%}
+                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+                                        {%- endif -%}
                                         <li>{%- include theme-switch.html -%}</li>
                                     </ul>
                                 </div>

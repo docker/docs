@@ -7,6 +7,7 @@ redirect_from:
  - /compose/networking/swarm/
  - /compose/overview/
  - /compose/swarm/
+ - /compose/completion/
 ---
 
 >**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
@@ -29,7 +30,7 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Run `docker compose up` and the [Docker compose command](#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using the docker-compose binary.
+3. Run `docker compose up` and the [Docker compose command](#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(`docker-compose` binary).
 
 A `docker-compose.yml` looks like this:
 
@@ -43,7 +44,7 @@ services:
     volumes:
       - .:/code
       - logvolume01:/var/log
-    links:
+    depends_on:
       - redis
   redis:
     image: redis
@@ -132,7 +133,7 @@ for it can be defined with the `--project-directory` command line option.
 
 ### Preserve volume data when containers are created
 
-Compose preserves all volumes used by your services. When `docker-compose up`
+Compose preserves all volumes used by your services. When `docker compose up`
 runs, if it finds any containers from previous runs, it copies the volumes from
 the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
@@ -190,9 +191,9 @@ environment in which to run tests. Compose provides a convenient way to create
 and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
 
 ```console
-$ docker-compose up -d
+$ docker compose up -d
 $ ./run_tests
-$ docker-compose down
+$ docker compose down
 ```
 
 ### Single host deployments

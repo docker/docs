@@ -81,12 +81,10 @@ we would like to use for our application.
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM openjdk:16-alpine3.13
+FROM eclipse-temurin:17-jdk-jammy
 ```
 
-Docker images can be inherited from other images. For this guide, we use the
-official `openjdk` image from Docker Hub with Java JDK that already has all the
-tools and packages that we need to run a Java application.
+Docker images can be inherited from other images. For this guide, we use Eclipse Termurin, one of the most popular official images with a build-worthy JDK.
 
 To make things easier when running the rest of our commands, let’s set the image's
 working directory. This instructs Docker to use this path as the default location
@@ -113,15 +111,15 @@ COPY mvnw pom.xml ./
 ```
 
 Once we have our `pom.xml` file inside the image, we can use the `RUN` command
-to execute the command `mvnw dependency:go-offline`. This works exactly the same
+to execute the command `mvnw dependency:resolve`. This works exactly the same
 way as if we were running `mvnw` (or `mvn`) dependency locally on our machine,
 but this time the dependencies will be installed into the image.
 
 ```dockerfile
-RUN ./mvnw dependency:go-offline
+RUN ./mvnw dependency:resolve
 ```
 
-At this point, we have an Alpine version 3.13 image that is based on OpenJDK version 16, and we have also installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the `COPY` command just like we did with our `pom.xml` file above.
+At this point, we have an Eclipse Termurin image that is based on OpenJDK version 17, and we have also installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the `COPY` command just like we did with our `pom.xml` file above.
 
 ```dockerfile
 COPY src ./src
@@ -138,13 +136,13 @@ Here's the complete Dockerfile.
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM openjdk:16-alpine3.13
+FROM eclipse-temurin:17-jdk-jammy
 
 WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+RUN ./mvnw dependency:resolve
 
 COPY src ./src
 
@@ -176,7 +174,7 @@ $ docker build --tag java-docker .
 
 ```console
 Sending build context to Docker daemon  5.632kB
-Step 1/7 : FROM java:3.7-alpine
+Step 1/7 : FROM eclipse-temurin:17-jdk-jammy
 Step 2/7 : WORKDIR /app
 ...
 Successfully built a0bb458aabd0
@@ -185,7 +183,7 @@ Successfully tagged java-docker:latest
 
 ## View local images
 
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/dashboard.md#explore-your-images). As we are currently working in the terminal let’s take a look at listing images using the CLI.
+To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As we are currently working in the terminal let’s take a look at listing images using the CLI.
 
 To list images, simply run the `docker images` command.
 
@@ -195,7 +193,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED          SIZ
 java-docker         latest              b1b5f29f74f0        47 minutes ago   567MB
 ```
 
-You should see at least the we just built `java-docker:latest`.
+You should see at least the image we just built `java-docker:latest`.
 
 ## Tag images
 
@@ -248,5 +246,3 @@ In this module, we took a look at setting up our example Java application that w
 ## Feedback
 
 Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Java%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
-
-<br />

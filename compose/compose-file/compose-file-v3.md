@@ -2315,7 +2315,7 @@ volumes:
 >
 > External volumes that do not exist _are created_ if you use [docker stack deploy](#deploy) 
 > to launch the app in [swarm mode](../../engine/swarm/index.md) (instead of
-> [docker compose up](../reference/up.md)). In swarm mode, a volume is
+> [docker compose up](../../engine/reference/commandline/compose_up.md)). In swarm mode, a volume is
 > automatically created when it is defined by a service. As service tasks are
 > scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
 > creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).
@@ -2709,7 +2709,7 @@ this stack. The source of the secret is either `file` or `external`.
   supported when using `docker stack`.
 
 In this example, `my_first_secret` is created as
-`<stack_name>_my_first_secret `when the stack is deployed,
+`<stack_name>_my_first_secret` when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
 ```yaml

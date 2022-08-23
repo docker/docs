@@ -37,7 +37,7 @@ As you can see, our `curl` command failed because the connection to our server w
 
 To stop the container, press `ctrl-c`. This will return you to the terminal prompt.
 
-To publish a port for our container, we’ll use the `--publish flag` (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 8000 inside the container to port 8080 outside the container, we would pass `8080:8000` to the `--publish` flag.
+To publish a port for our container, we’ll use the `--publish` flag (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 8000 inside the container to port 8080 outside the container, we would pass `8080:8000` to the `--publish` flag.
 
 Start the container and expose port 8080 to port 8080 on the host.
 
@@ -145,7 +145,7 @@ trusting_beaver
 
 Now that our container is stopped, let’s remove it. When you remove a container, the process inside the container will be stopped and the metadata for the container will be removed.
 
-To remove a container, simple run the `docker rm` command passing the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.
+To remove a container, simply run the `docker rm` command passing the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.
 
 ```console
 $ docker rm trusting_beaver modest_khayyam lucid_greider
@@ -181,5 +181,3 @@ In the next module, we’ll learn how to run a database in a container and conne
 ## Feedback
 
 Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Java%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
-
-<br />

@@ -118,7 +118,7 @@ PS> docker run -dp 3000:3000 `
           - 3000:3000
     ```
  
-5. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
+4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
    the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/compose-file-v3.md#short-syntax-3) and [long](../compose/compose-file/compose-file-v3.md#long-syntax-3) syntax.
 
     One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.
@@ -137,7 +137,7 @@ PS> docker run -dp 3000:3000 `
           - ./:/app
     ```
 
-6. Finally, we need to migrate the environment variable definitions using the `environment` key.
+5. Finally, we need to migrate the environment variable definitions using the `environment` key.
 
     ```yaml
     version: "3.7"
@@ -329,7 +329,7 @@ Compose and used to group the containers together. By default, the project name 
 ![Docker Dashboard with app project](images/dashboard-app-project-collapsed.png)
 
 If you twirl down the app, you will see the two containers we defined in the compose file. The names are also a little
-more descriptive, as they follow the pattern of `<project-name>_<service-name>_<replica-number>`. So, it's very easy to
+more descriptive, as they follow the pattern of `<service-name>-<replica-number>`. So, it's very easy to
 quickly see what container is our app and which container is the mysql database.
 
 ![Docker Dashboard with app project expanded](images/dashboard-app-project-expanded.png)

@@ -88,12 +88,9 @@ The following video walks you through the process of configuring SSO.
 1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the **Security** tab.
 3. Select an authentication method for **Azure AD**.
-
-    ![SSO Azure1](images/sso-azure1.png){:width="500px"}
-
 4. In the Identity Provider Set Up, copy the **Redirect URL / Reply URL**.
 
-    ![SSO Azure2](images/sso-azure2.png){:width="500px"}
+    ![SSO Azure AD OIDC](images/sso-azure-oidc.png){:width="500px"}
 
 5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 
@@ -108,7 +105,7 @@ The following video walks you through the process of configuring SSO.
 
 7. Proceed to **add your domain** before you test and enforce SSO.
 
-### Domain control
+## Domain control
 
 Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
 
@@ -120,7 +117,7 @@ Click **Add Domain** and specify the corporate domain you’d like to manage wit
 
 ![SSO Domain](images/sso-domain.png){:width="500px"}
 
-### Domain verification
+## Domain verification
 
 To verify ownership of a domain, add a TXT record to your Domain Name System (DNS) settings.
 
@@ -141,6 +138,8 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
     > this time.
 
 4. In the Security section of your Docker organization, click **Verify** next to the domain you want to verify after 72 hours.
+
+Once you've verified your domain, you can move forward to test your configuration and enforce SSO, or you can [Configure your System Cross-domain Identity Management (SCIM)](../docker-hub/scim.md).
 
 ## Test your SSO configuration
 
@@ -188,8 +187,8 @@ To remove a member from an organization:
 
 1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
 2. Select the organization from the list. The organization page displays a list of members.
-2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
-3. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
+3. Click the **x** next to a member’s name to remove them from all the teams in the organization.
+4. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
 
 > **Note**
 >

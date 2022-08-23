@@ -9,7 +9,7 @@ redirect_from:
 Docker Hub repositories allow you share container images with your team,
 customers, or the Docker community at large.
 
-Docker images are pushed to Docker Hub through the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/)
+Docker images are pushed to Docker Hub through the [`docker push`](/engine/reference/commandline/push/)
 command. A single Docker Hub repository can hold many Docker images (stored as
 **tags**).
 
@@ -47,9 +47,9 @@ images to this repository.
 
 2. Select a repository from the list, click **Settings** and then Delete Repository.
 
-  > **Note:**
-  >
-  > Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.
+    > **Note:**
+    >
+    > Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.
 
 3. Enter the name of the repository to confirm the deletion and click **Delete**.
 

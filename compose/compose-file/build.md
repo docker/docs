@@ -99,7 +99,7 @@ Alternatively `build` can be an object with fields defined as follow
 
 When the value supplied is a relative path, it MUST be interpreted as relative to the location of the Compose file.
 Compose implementations MUST warn user about absolute path used to define build context as those prevent Compose file
-for being portable.
+from being portable.
 
 ```yml
 build:
@@ -110,7 +110,7 @@ build:
 
 `dockerfile` allows to set an alternate Dockerfile. A relative path MUST be resolved from the build context.
 Compose implementations MUST warn user about absolute path used to define Dockerfile as those prevent Compose file
-for being portable.
+from being portable.
 
 ```yml
 build:
@@ -301,5 +301,5 @@ build:
 
 ## Implementations
 
-* [docker-compose](https://docs.docker.com/compose)
-* [buildX bake](https://docs.docker.com/buildx/working-with-buildx/)
+* [docker-compose](../../compose/index.md)
+* [buildx bake](../../build/bake/index.md)

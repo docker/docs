@@ -1,11 +1,12 @@
 ---
 description: Docker Desktop overview
-keywords: Desktop, Docker, GUI, run, docker, local, machine
-title: Docker Desktop overview
+keywords: Desktop, Docker, GUI, run, docker, local, machine, dashboard
+title: Docker Desktop
 redirect_from:
 - /desktop/opensource/
 - /docker-for-mac/opensource/
 - /docker-for-windows/opensource/
+- /desktop/dashboard/
 ---
 
 > **Update to the Docker Desktop terms**
@@ -16,11 +17,18 @@ redirect_from:
 {: .important}
 
 Docker Desktop is an easy-to-install application for your Mac or Windows environment
-that enables you to build and share containerized applications and microservices.
-Docker Desktop includes [Docker Engine](../engine/index.md), Docker CLI client,
-[Docker Compose](../compose/index.md), [Docker Content Trust](../engine/security/trust/index.md),
-[Kubernetes](https://github.com/kubernetes/kubernetes/), and
-[Credential Helper](https://github.com/docker/docker-credential-helpers/).
+that enables you to build and share containerized applications and microservices. 
+
+It provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.
+
+Docker Desktop includes:
+
+- [Docker Engine](../engine/index.md)
+- Docker CLI client
+- [Docker Compose](../compose/index.md)
+- [Docker Content Trust](../engine/security/trust/index.md)
+- [Kubernetes](https://github.com/kubernetes/kubernetes/)
+- [Credential Helper](https://github.com/docker/docker-credential-helpers/)
 
 Docker Desktop works with your choice of development tools and languages and
 gives you access to a vast library of certified images and templates in
@@ -28,58 +36,44 @@ gives you access to a vast library of certified images and templates in
 their environment to rapidly auto-build, continuously integrate, and collaborate
 using a secure repository.
 
-Some of the key features of Docker Desktop include:
+## Overview of Docker Dashboard
 
-* Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks
-* Easy installation and setup of a complete Docker development environment
-* Includes the latest version of Kubernetes
-* Automatic updates to keep you up to date and secure
-* On Windows, the ability to toggle between Linux and Windows Server environments to build applications
-* Fast and reliable performance with native Windows Hyper-V virtualization
-* Ability to work natively on Linux through WSL 2 on Windows machines
-* Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network
-* In-container development and debugging with supported IDEs
+When you open Docker Desktop, the Docker Dashboard displays.
+
+![dashboard](images/dashboard.PNG){:width="750px"}
+
+The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](use-desktop/container.md).
+
+The **Images** view displays a list of your Docker images and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the **Images** view contains clean-up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub. For more information, see [Explore your images](use-desktop/images.md).
+
+The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](use-desktop/volumes.md).
+
+In addition, the Docker Dashboard allows you to:
+
+- Easily navigate to the **Preferences** (**Settings** in Windows) menu to configure Docker Desktop preferences. Select the **Preferences** or **Settings** icon in the Dashboard header.
+- Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
+
+### Other key features of Docker Desktop:
+
+* Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
+* Easy installation and setup of a complete Docker development environment.
+* Includes the latest version of Kubernetes.
+* Automatic updates to keep you up to date and secure.
+* On Windows, the ability to toggle between Linux and Windows Server environments to build applications.
+* Fast and reliable performance with native Windows Hyper-V virtualization.
+* Ability to work natively on Linux through WSL 2 on Windows machines.
+* Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
+* In-container development and debugging with supported IDEs.
 
 ## Download and install
 
-Docker Desktop is available for Mac and Windows. For download information, system requirements, and installation instructions, see:
+Docker Desktop is available for Mac, Linux, and Windows. For download information, system requirements, and installation instructions, see:
 
 
-* [Install Docker Desktop on Linux](linux/install.md)
-* [Install Docker Desktop on Mac](mac/install.md)
-* [Install Docker Desktop on Windows](windows/install.md)
+* [Install Docker Desktop on Linux](install/linux-install.md)
+* [Install Docker Desktop on Mac](install/mac-install.md)
+* [Install Docker Desktop on Windows](install/windows-install.md)
 
 For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
 
-## Sign in to Docker Desktop
-
-After you’ve successfully installed and started Docker Desktop, we recommend
-that you authenticate using the **Sign in/Create ID** option from the Docker
-menu.
-
-Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
-
-In large enterprises where admin access is restricted, administrators can create
-a `registry.json` file and deploy it to the developers' machines using a device
-management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows
-administrators to set up guardrails using features such as
-[Image Access Management](../docker-hub/image-access-management.md) which allows team
-members to only have access to Trusted Content on Docker Hub, and pull only from
-the specified categories of images. For more information, see
-[Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md).
-
-## Configure Docker Desktop
-
-To learn about the various UI options and their usage, see:
-
-* [Docker Desktop for Linux user manual](linux/index.md)
-* [Docker Desktop for Mac user manual](mac/index.md)
-* [Docker Desktop for Windows user manual](windows/index.md)
-
-## Release notes
-
-For information about new features, improvements, and bug fixes in Docker Desktop releases, see:
-
-* [Docker Desktop for Linux Release notes](linux/release-notes/index.md)
-* [Docker Desktop for Mac Release notes](mac/release-notes/index.md)
-* [Docker Desktop for Windows Release notes](windows/release-notes/index.md)
+For information about new features, improvements, and bug fixes in Docker Desktop releases, see [Release notes](release-notes.md).

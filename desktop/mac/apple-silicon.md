@@ -18,8 +18,6 @@ Download Docker Desktop for Mac on Apple silicon:
 >
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
-<br>
-
 ### System requirements
 
 Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the Known issues section below. However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
@@ -31,10 +29,10 @@ $ softwareupdate --install-rosetta
 ### Known issues
 
 - Some command line tools do not work when Rosetta 2 is not installed.
-  - The old version 1.x of `docker-compose`. We recommend that you use Compose V2 instead. Either type `docker compose` or enable the **Use Docker Compose V2** option in the [General preferences tab](./index.md#general).
+  - The old version 1.x of `docker-compose`. We recommend that you use Compose V2 instead. Either type `docker compose` or enable the **Use Docker Compose V2** option in the [General preferences tab](../settings/mac.md#general).
   - The `docker scan` command and the underlying `snyk` binary.
   - The `docker-credential-ecr-login` credential helper.
-- Not all images are available for ARM64 architecture. You can add `--platform linux/amd64` to run an Intel image under emulation. In particular, the [mysql](https://hub.docker.com/_/mysql?tab=tags&page=1&ordering=last_updated) image is not available for ARM64. You can work around this issue by using a [mariadb](https://hub.docker.com/_/mariadb?tab=tags&page=1&ordering=last_updated) image.
+- Some images do not support the ARM64 architecture. You can add `--platform linux/amd64` to run (or build) an Intel image using emulation.
 
    However, attempts to run Intel-based containers on Apple silicon machines under emulation can crash as qemu sometimes fails to run the container. In addition, filesystem change notification APIs (`inotify`) do not work under qemu emulation. Even when the containers do run correctly under emulation, they will be slower and use more memory than the native equivalent.
 

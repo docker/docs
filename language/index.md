@@ -38,5 +38,3 @@ Learn how to set up your Docker environment and start containerizing your applic
         </div>
     </div>
 </div>
-
-<br />
