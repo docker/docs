@@ -66,9 +66,3 @@ $ softwareupdate --install-rosetta
 - Removed hard-coded IP addresses: Docker Desktop now dynamically discovers the IP allocated by macOS.
 - The updated version includes a  change that should improve disk performance.
 - The **Restart** option in the Docker menu works.
-
-## Feedback
-
-Your feedback is important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Mac GitHub](https://github.com/docker/for-mac/issues) repository.
-
-We also recommend that you join the [Docker Community Slack](https://www.docker.com/docker-community) and ask questions in **#docker-desktop-mac** channel.
