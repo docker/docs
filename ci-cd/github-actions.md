@@ -70,16 +70,20 @@ name: ci
 {% endraw %}
 
 Then, we will choose when we run this workflow. In our example, we are going to
-do it for every push against the main branch of our project:
+do it for every push against the master branch of our project:
 
 {% raw %}
 ```yaml
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
 ```
 {% endraw %}
+
+> **Note**
+>
+> The branch name may be `main` or `master`. Verify the name of the branch for your repository and update the configuration accordingly.
 
 Now, we need to specify what we actually want to happen within our workflow
 (what jobs), we are going to add our build one and select that it runs on the
@@ -191,7 +195,7 @@ tags and pull requests:
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
     tags:
       - 'v*'
 ```
@@ -221,12 +225,12 @@ First we have to handle pull request events:
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
     tags:
       - 'v*'
   pull_request:
     branches:
-      - 'main'
+      - 'master'
 ```
 {% endraw %}
 
