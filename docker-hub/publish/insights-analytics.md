@@ -4,10 +4,10 @@ description: Provides usage statistics of your images on Docker Hub.
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 ---
 
-Insights & analytics provides usage analytics for your organization's images on
-Docker Hub. With this tool, you have self-serve access to metrics as both raw
+Insights and analytics provides usage analytics for your organization's images
+on Docker Hub. With this tool, you have self-serve access to metrics as both raw
 data and summary data for a desired time span. You can view how many times your
-images have been pulled by tag or by digest, and get breakouts by geolocation,
+images have been pulled by tag or by digest, and get breakdowns by geolocation,
 cloud provider, and client (user agent).
 
 ## Exporting analytics data
@@ -15,7 +15,7 @@ cloud provider, and client (user agent).
 You can access the data either from the Docker Hub website, at
 `hub.docker.com/orgs/{namespace}/insights`, or using the
 [DVP Data API](/docker-hub/api/dvp/){: target="_blank" rel="noopener"
-class="_"}. All members of an organization has access to the analytics data.
+class="_"}. All members of an organization have access to the analytics data.
 
 The data is available as a downloadable CSV file, in a weekly (Monday through
 Sunday) or monthly format (available on the first day of the following calendar
@@ -47,16 +47,10 @@ The HTTP API endpoints are available at:
 using the API in the [DVP Data API documentation](/docker-hub/api/dvp/){:
 target="_blank" rel="noopener" class="_"}.
 
-```bash
-curl https://hub.docker.com/api/publisher/analytics/v1 \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer ${TOKEN}"
-```
-
 ## Data formats
 
-The data can be exported as either of two formats: raw and summary. Each format
-contains different data points and are formatted differently.
+The data can be exported in either raw or summary format. Each format contains
+different data points and are formatted differently.
 
 Review the [Data definitions](#data-definitions) section for more information
 about the data points and how to read them.
@@ -108,7 +102,7 @@ repository, and reference (tag or digest), for the selected time span.
 | Digest             | The image version digest.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | Tag                | The tag name. Only available if the pull referred to a tag, not available if the pull referred to a digest.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Country            | The country from which the request originated.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Timestamp          | Date & time of an event in the following schema: YYYY-MM-DD 00:00:00                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Timestamp          | Date and time of an event in the following schema: YYYY-MM-DD 00:00:00                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Action day         | The date portion of the timestamp: YYYY-MM-DD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Namespace          | The Docker organization that a repository is a part of.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | Repository         | The repository that an image belongs to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -130,9 +124,9 @@ behavior. You can inspect the rules for determining intent behind pulls in the
 [Action classification rules](#action-classification-rules) section on this
 page.
 
-Please let us know if you have any
-[feedback](https://forms.gle/nb7beTUQz9wzXy1b6){: target="_blank" rel="noopener"
-class="_"} or questions on these rules.
+To provide feedback or ask questions about these rules,
+[fill out the Google Form](https://forms.gle/nb7beTUQz9wzXy1b6){:
+target="_blank" rel="noopener" class="_"}.
 
 | Starting event | Reference | Followed by                                                     | Resulting action | Use case(s)                                                                                                    | Notes                                                                                                                                                                                                                                                                                          |
 | :------------- | :-------- | :-------------------------------------------------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
