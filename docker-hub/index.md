@@ -134,7 +134,6 @@ You'll need to download Docker Desktop to  build, push, and pull container image
 ### Step 4: Pull and run a container image from Docker Hub
 
 1. Run `docker pull hello-world` to pull the image from Docker Hub. You should see output similar to:
-
 ```console
 $ docker pull hello-world
 Using default tag: latest
@@ -144,7 +143,6 @@ Digest: sha256:7d246653d0511db2a6b2e0436cfd0e52ac8c066000264b3ce63331ac66dca625
 Status: Downloaded newer image for hello-world:latest
 docker.io/library/hello-world:latest
 ```
-
 2. Run `docker run hellow-world` to run the image locally. You should see output similar to:
 
 ```console
