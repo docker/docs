@@ -6,60 +6,68 @@ toc_max: 1
 We deeply value documentation contributions from the Docker community. We'd like to make it as easy
 as possible for you to work in this repository. The following sections guide you through the process of contributing to Docker documentation.
 
-
-
-  <section class="container">
+<div class="component-container">
+    <!--start row-->
     <div class="row">
-      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
-        <a class="card rocket" href="/contribute/contribute-guide/">
-          <h5 class="title">Contribution guidelines</h5>
-          <p>
-            Learn about the process of contributing to our docs.
-          </p>
-        </a>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+             <div class="component-icon">
+                 <img src="/images/contribute.svg" alt="Docker Desktop for Mac" width="45" height="45">
+             </div>
+                 <h2 id="docker-for-mac"><a href="/contribute/contribute-guide/">Contribution guidelines </a></h2>
+                <p>Learn about the process of contributing to our docs. </p>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
-        <a class="card download-docker" href="/contribute/style/grammar/">
-          <h5 class="title">Grammar guide</h5>
-          <p>
-            Explore Docker's grammar guide.
-          </p>
-        </a>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
-        <a class="card guides" href="/contribute/style/formatting/">
-          <h5 class="title">Formatting guidelines</h5>
-          <p>
-            Format your content to match the rest of our documentation.
-          </p>
-        </a>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
-        <a class="card language-guides" href="/contribute/style/recommended-words/">
-          <h5 class="title">Recommended word list</h5>
-          <p>
-            Choose the right words for your content.
-          </p>
-        </a>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
-        <a class="card manuals" href="/contribute/file-conventions">
-          <h5 class="title">Source file conventions</h5>
-          <p>
-            Guidelines for creating a new page
-          </p>
-        </a>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4 card-holder">
-        <a class="card reference" href="/contribute/style/terminology/">
-          <h5 class="title">Docker terminology</h5>
-          <p>
-            Explore commonly-used Docker terms
-          </p>
-        </a>
-      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/images/grammar.svg" alt="Docker Desktop for Mac" width="45" height="45">
+            </div>
+                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Grammar guide</a></h2>
+                <p>Explore Docker's grammar guide</p>
+         </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <img src="/images/formatting.svg" alt="Docker for Linux" width="45" height="45">
+            </div>
+                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Formatting guidelines</a></h2>
+                <p>Format your content to match the rest of our documentation.</p>
+        </div>
     </div>
-  </section>
+    </div>
+    <!--start row-->
+    <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/images/check.svg" alt="Docker Desktop for Mac" width="45" height="45">
+            </div>
+                <h2 id="docker-for-linux"><a href="/contribute/style/recommended-words/">Recommended word list</a></h2>
+                <p>Choose the right words for you content</p>
+        </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+          <div class="component-icon">
+                 <img src="/images/new-page.svg" alt="Docker Desktop for Mac" width="45" height="45">
+          </div>
+                <h2 id="docker-for-windows/install/"><a href="/contribute/file-conventions/">Source file conventions</a></h2>
+                <p>Guidelines for creating a new page</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <img src="/images/terminology.svg" alt="Docker Desktop for Windows" width="45" height="45">
+            </div>
+                <h2 id="docker-for-windows/install/"><a href="/contribute/style/terminology/">Docker terminology</a></h2>
+                <p>Explore commonly-used Docker terms</p>
+        </div>
+     </div>
+    </div>
+</div>
 
 ### Additional resources
 
