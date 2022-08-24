@@ -88,8 +88,6 @@ the `trustsandbox` container, the Notary server, and the Registry server.
               sandbox:
                 aliases:
                   - notaryserver
-            ports:
-              - "4443:4443"
             depends_on:
               - signer
             volumes:
@@ -246,7 +244,7 @@ data. Then, you try and pull it.
 2.  Open a new interactive terminal from your host, and obtain a shell into the
     `sandboxregistry` container.
 
-        $ docker container exec -it sandboxregistry bash
+        $ docker container exec -it sandboxregistry sh
         root@65084fc6f047:/#
 
 3.  List the layers for the `test/trusttest` image you pushed:
