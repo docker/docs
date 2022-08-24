@@ -175,7 +175,7 @@ around) so that the text on the badge is still white.
 <a href="/contribute/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info">Test</span></a>
 ```
 
-<a href="/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" >Test</span></a>
+<a href="/contribute/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" >Test</span></a>
 
 ### Tooltips
 
