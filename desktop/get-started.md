@@ -35,7 +35,7 @@ redirect_from:
 
 To run the Quick Start Guide on demand, select ![whale menu](images/whale-x.png){: .inline} and then choose **Quick Start Guide**.
 
-For a more detailed guide, see [Get started](../get-started/index.md)
+For a more detailed guide, see [Get started](../get-started/index.md).
 
 ## Sign in to Docker Desktop
 
@@ -107,3 +107,9 @@ Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
 Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
+
+## Where to go next
+
+- [Explore Docker Desktop](use-desktop/overview.md) and its features. 
+- Change your Docker Desktop settings
+- [Browse common FAQs](faqs/general.md)
