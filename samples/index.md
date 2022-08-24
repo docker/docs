@@ -1,5 +1,5 @@
 ---
-title: Samples Overview
+title: Official Docker samples
 description: Learn how to develop and ship containerized applications, by walking through samples that exhibit canonical practices.
 redirect_from:
 - /en/latest/examples/
@@ -7,35 +7,12 @@ redirect_from:
 - /examples/
 ---
 
- You can find samples in this documentation and in various GitHub repositories.
-
-## Samples in this documentation
-
-| Sample                                                        | Description                                               |
-| --------------------------------------------------------------| --------------------------------------------------------- |
-| [apt-cacher-ng](apt-cacher-ng.md)                             | Run a Dockerized apt-cacher-ng instance.                  |
-| [ASP.NET Core application](dotnetcore.md)                        | Run a Dockerized ASP.NET Core application.                |
-| [ASP.NET Core + SQL Server on Linux](aspnet-mssql-compose.md) | Run a Dockerized ASP.NET Core + SQL Server environment.   |
-| [CouchDB](couchdb_data_volumes.md)                            | Run a Dockerized CouchDB instance.                        |
-| [Django + PostgreSQL](django.md)                              | Run a Dockerized Django + PostgreSQL environment.         |
-| [PostgreSQL](postgresql_service.md)                           | Run a Dockerized PostgreSQL instance.                     |
-| [Rails + PostgreSQL](rails.md)                                | Run a Dockerized Rails + PostgreSQL environment.          |
-| [Riak](running_riak_service.md)                               | Run a Dockerized Riak instance.                           |
-| [WordPress](wordpress.md)                                     | Quickstart: Compose and WordPress.                        |
-
-## Official Docker samples
-
-Docker Samples on GitHub provides over 30 Dockerized sample applications. Some popular samples are listed below. To see a full list of the sample applications, visit [Docker Samples on GitHub](https://github.com/dockersamples){: target="_blank" rel="noopener" class="_"}.
+Visit [Docker Samples on GitHub](https://github.com/dockersamples?q=&type=all&language=&sort=stargazers){: target="_blank" rel="noopener" class="_"} and the [Awesome-compose repository on GitHub](https://github.com/docker/awesome-compose){: target="_blank" rel="noopener" class="_"} for a full list of samples. The following are a few samples from those repositories.
 
 | Sample | Description |
 | ------ | ----------- |
 | [atsea-sample-shop-app](https://github.com/dockersamples/atsea-sample-shop-app){: target="_blank" rel="noopener" class="_"} | A sample Java REST application. |
+| [ASP.NET / MS-SQL](https://github.com/docker/awesome-compose/tree/master/aspnet-mssql){: target="_blank" rel="noopener" class="_"} | A sample ASP.NET core application with MS SQL server database. |
 | [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" rel="noopener" class="_"} | A sample distributed application running across multiple Docker containers. |
+| [Django](https://github.com/docker/awesome-compose/tree/master/django){: target="_blank" rel="noopener" class="_"} | A sample Django application. |
 | [k8s-wordsmith-demo](https://github.com/dockersamples/k8s-wordsmith-demo){: target="_blank" rel="noopener" class="_"} | A sample Wordsmith project that runs across three containers: a Postgres database, a Java REST API, and a Go web application. |
-| [linux_tweet_app](https://github.com/dockersamples/linux_tweet_app){: target="_blank" rel="noopener" class="_"} | A sample NGINX website that allows a user to send a tweet. |
-| [spring-petclinic-docker](https://github.com/dockersamples/spring-petclinic-docker){: target="_blank" rel="noopener" class="_"} | A sample Spring Boot application built using Maven. |
-
-
-## Awesome Compose samples
-
-The Awesome Compose samples provide a starting point on how to integrate different frameworks and technologies using Docker Compose. All samples are available in the [Awesome-compose GitHub repo](https://github.com/docker/awesome-compose){: target="_blank" rel="noopener" class="_"}.

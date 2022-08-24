@@ -1106,27 +1106,8 @@ reference:
 
 samples:
 - path: /samples/
-  title: Samples overview
-- sectiontitle: Samples
-  section:
-  - path: /samples/apt-cacher-ng/
-    title: apt-cacher-ng
-  - path: /samples/dotnetcore/
-    title: ASP.NET Core application
-  - path: /samples/aspnet-mssql-compose/
-    title: ASP.NET Core + SQL Server on Linux
-  - path: /samples/couchdb_data_volumes/
-    title: CouchDB
-  - path: /samples/django/
-    title: Django and PostgreSQL
-  - path: /samples/wordpress/
-    title: WordPress
-  - path: /samples/postgresql_service/
-    title: PostgreSQL
-  - path: /samples/rails/
-    title: Rails and PostgreSQL
-  - path: /samples/running_riak_service/
-    title: Riak
+  title: Official Docker samples
+
 
 
 manuals:
