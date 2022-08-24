@@ -6,7 +6,7 @@ title: Docker Hub API v1 (deprecated)
 
 > **Deprecated**
 >
-> Docker Hub API v1 has been deprecated. Please use Docker Hub API v1 instead.
+> Docker Hub API v1 has been deprecated. Please use Docker Hub API v2 instead.
 {: .warning }
 
 The following API routes within the v1 path will no longer work and will return a 410 status code:
