@@ -172,7 +172,7 @@ You can make a badge a link. Wrap the `<span>` with an `<a>` (not the other way
 around) so that the text on the badge is still white.
 
 ```html
-<a href="/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info">Test</span></a>
+<a href="/contribute/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info">Test</span></a>
 ```
 
 <a href="/overview/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" >Test</span></a>
@@ -211,7 +211,7 @@ This is a paragraph that has a tooltip. We position it to the left so it doesn't
 
 You can also put tooltips on badges with a link.
 
-<a href="/components/" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the test page (in a new window)">Test</span></a>
+<a href="/contribute/components" target="_blank" rel="noopener" class="_"><span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="Open the test page (in a new window)">Test</span></a>
 
 
 ## Formatting examples

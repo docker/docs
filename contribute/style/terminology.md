@@ -12,7 +12,7 @@ The current designation for the Compose file, as it is a file, format as code.
 
 The compose app as an add-on (for Docker CLI) that can be enabled/disabled.
 
-####  Digest
+#### Digest
 
 The long number that’s automatically created every time you push an image. You can pull an image by Digest or by Tag.
 
