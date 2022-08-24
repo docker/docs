@@ -1,0 +1,7 @@
+{% if include.ONETRUST_ID and include.ONETRUST_ID != '' %}<!-- OneTrust Cookies Consent Notice start for http://docs.docker.com  -->
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="{{ include.ONETRUST_ID }}" ></script>
+<script type="text/javascript">
+  function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for http://docs.docker.com  -->
+{% else %}<!-- No consent manager configured -->{% endif %}

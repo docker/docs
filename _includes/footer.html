@@ -86,6 +86,11 @@
                 <p class="copyright">
                     Copyright &copy; 2013-{{ site.time | date: '%Y' }} Docker Inc. All rights reserved.
                 </p>
+                {%- if jekyll.environment == 'production' and site.onetrust_id != '' -%}
+                <!-- OneTrust Cookies Settings button start -->
+                <button id="ot-sdk-btn" class="ot-sdk-show-settings">Cookie Settings</button>
+                <!-- OneTrust Cookies Settings button end -->
+                {%- endif -%}
             </div>
             <div class="footer_social_nav">
                 <ul class="nav-social">
