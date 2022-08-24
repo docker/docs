@@ -1162,6 +1162,8 @@ manuals:
       title: Quick Start Guide and sign in
     - sectiontitle: Explore Docker Desktop
       section:
+        - path: /desktop/use-desktop/overview/
+          title: Overview
         - path: /desktop/use-desktop/container/
           title: Explore Containers
         - path: /desktop/use-desktop/images/
