@@ -84,14 +84,12 @@ services:
 
 You can override the environment file path using a command line argument `--env-file`.
 
-### Using the “--env-file”  option 
+### Using the “--env-file”  option
 
-By passing the file as an argument, you can store it anywhere and name it 
-appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
-done using the `--env-file` option:
+By passing the file as an argument, you can store it anywhere and name it appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is done using the `--env-file` option:
 
 ```console
-$ docker compose --env-file ./config/.env.dev up 
+$ docker compose --env-file ./config/.env.dev up
 ```
 
 This file path is relative to the current working directory where the Docker Compose
@@ -115,7 +113,7 @@ services:
 The `.env` file is loaded by default:
 
 ```console
-$ docker compose convert 
+$ docker compose convert
 version: '3'
 services:
   web:
@@ -125,7 +123,7 @@ services:
 Passing the `--env-file` argument overrides the default file path:
 
 ```console
-$ docker compose --env-file ./config/.env.dev config 
+$ docker compose --env-file ./config/.env.dev config
 version: '3'
 services:
   web:
@@ -201,14 +199,10 @@ $ docker compose run -e DEBUG web python console.py
 The value of the `DEBUG` variable in the container is taken from the value for
 the same variable in the shell in which Compose is run.
 
-When you set the same environment variable in multiple files, here's the
-priority used by Compose to choose which value to use:
-
-1. Compose file
-2. Shell environment variables
-3. Environment file
-4. Dockerfile
-5. Variable is not defined
+>**Note**
+>
+> When you set the same environment variable in multiple files, there's a precedence rule used by Compose when trying to resolve the value for the variable in question.
+You can find this precedence rule and a table illustrating how interpolation works in the [Environment variables precedence](../compose/envvars-precedence.md) page.
 
 In the example below, we set the same environment variable on an Environment
 file, and the Compose file:
