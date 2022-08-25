@@ -990,6 +990,8 @@ reference:
         path: /docker-hub/api/latest/
       - title: DVP Data API
         path: /docker-hub/api/dvp/
+      - title: Deprecated API
+        path: /docker-hub/api/deprecated/
   - title: Registry API
     path: /registry/spec/api/
   - sectiontitle: Docker Extension SDK API (Beta)
@@ -1205,7 +1207,7 @@ manuals:
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
-          title: Run Docker Desktop in a VM or VDI environment
+          title: Run Docker Desktop for Windows in a VM or VDI environment
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
