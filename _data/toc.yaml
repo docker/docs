@@ -1122,10 +1122,14 @@ manuals:
       section:
        - path: /desktop/install/mac-install/
          title: Install on Mac
-       - path: /desktop/mac/apple-silicon/
-         title: Install on Apple silicon
+       - path: /desktop/mac/permission-requirements/
+         title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Install on Windows
+       - path: /desktop/windows/permission-requirements/
+         title: Understand permission requirements for Windows
+       - path: /desktop/mac/apple-silicon/
+         title: Install on Apple silicon
        - path: /desktop/install/linux-install/
          title: Install on Linux
        - sectiontitle: Installation per Linux distro
@@ -1178,10 +1182,6 @@ manuals:
           title: Back up and restore data
         - path: /desktop/networking/
           title: Explore networking features
-        - path: /desktop/mac/permission-requirements/
-          title: Docker Desktop permission requirements for Mac
-        - path: /desktop/windows/permission-requirements/
-          title: Docker Desktop permission requirements for Windows
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
