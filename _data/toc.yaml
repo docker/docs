@@ -1646,6 +1646,38 @@ manuals:
       title: Compatibility
     - path: /registry/help/
       title: Getting help
+
+- sectiontitle: Atomist
+  section:
+    - path: /atomist/
+      title: Introduction
+    - path: /atomist/try-atomist/
+      title: Try Atomist
+    - path: /atomist/get-started/
+      title: Get started
+    - sectiontitle: Configure
+      section:
+        - path: /atomist/configure/image-policies/
+          title: Image policies
+        - path: /atomist/configure/advisories/
+          title: Advisories
+        - path: /atomist/configure/secrets/
+          title: Secret scanning
+        - path: /atomist/configure/gitops/
+          title: GitOps
+    - sectiontitle: Integrate
+      section:
+        - path: /atomist/integrate/github/
+          title: GitHub app
+        - path: /atomist/integrate/deploys/
+          title: Track image deployments
+        - path: /atomist/integrate/jfrog/
+          title: JFrog Artifactory
+        - path: /atomist/integrate/slack/
+          title: Slack
+        - path: /atomist/integrate/kubernetes/
+          title: Kubernetes
+
 - path: /release-notes/
   title: Release notes
 - path: /support/
