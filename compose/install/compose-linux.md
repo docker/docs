@@ -26,11 +26,11 @@ For Compose standalone, see [Install Compose Standalone](#install-compose-standa
 If you have already set up the Docker repository, jump to step 2.
 
 1. Set up the repository in:
-[Ubuntu](../../engine/install/ubuntu/#set-up-the-repository) |
-[CentOS](../../engine/install/centos/#set-up-the-repository) |
-[Debian](../../engine/install/fedora/#set-up-the-repository) |
-[RHEL](../../engine/install/RHEL/#install-using-the-repository) |
-[SLES](../../engine/install/SLES/#install-using-the-repository).
+[Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
+[CentOS](../../engine/install/centos.md/#set-up-the-repository) |
+[Debian](../../engine/install/fedora.md/#set-up-the-repository) |
+[RHEL](../../engine/install/fedora.md/#set-up-the-repository) |
+[SLES](../../engine/install/sles.md/#set-up-the-repository).
 
 2. Update the `apt` package index, and install the _latest version_ of Docker Compose:
 

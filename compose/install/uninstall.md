@@ -20,7 +20,7 @@ See Uninstall Docker Desktop for:
 [Mac](../../desktop/install/mac-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"} |
 [Windows](../../desktop/install/windows-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"} |
 [Linux](../../desktop/install/linux-install.md/#uninstall-docker-desktop){:target="_blank" rel="noopener" class="_"}.
-S
+
 ### Uninstalling the Docker Compose CLI plugin
 
 To remove the Compose CLI plugin, run:
