@@ -990,6 +990,8 @@ reference:
         path: /docker-hub/api/latest/
       - title: DVP Data API
         path: /docker-hub/api/dvp/
+      - title: Deprecated API
+        path: /docker-hub/api/deprecated/
   - title: Registry API
     path: /registry/spec/api/
   - sectiontitle: Docker Extension SDK API (Beta)
