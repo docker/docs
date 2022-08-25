@@ -17,22 +17,22 @@ Each row represents a scenario and each columns represents a context where you c
 
 | # | `.env` file                | `compose.yaml`:`env_file` key | `compose.yaml`:`environment` key  | CMD          |    Image      |  OS          |    Resolved as    |
 |:-:|:--------------------------:|:-----------------------------:|:---------------------------------:|:------------:|:-------------:|:------------:|:-----------------:|
-| 1 | `TAG=1.3`                  |  Unset                        |    Unset                          |    -         |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.6`           |
+| 1 | `TAG=1.3`                  |  Unset                        |    Unset                          |  Unset       |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.6`           |
 | 2 | `TAG=1.3`                  |  Unset                        |    Unset                          |    `TAG`      |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.3`           |
 | 3 | `TAG=$TAG:-1.2`            |  Unset                        |    Unset                          |    `TAG`      |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
-| 4 | `TAG=$TAG:-1.2`            |  Unset                        |    Unset                          |    -         |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.6`           |
-| 5 | `TAG=$TAG:-1.2`            |  Unset                        |    Unset                          |    `TAG`      |     `TAG=1.6`   |      -       | `TAG=1.6`           |
+| 4 | `TAG=$TAG:-1.2`            |  Unset                        |    Unset                          |  Unset       |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.6`           |
+| 5 | `TAG=$TAG:-1.2`            |  Unset                        |    Unset                          |    `TAG`      |     `TAG=1.6`   |    Unset     | `TAG=1.6`           |
 | 6 | `TAG=$TAG:-1.2`            |  Unset                        |    Unset                          |    `TAG=1.5`   |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.5`           |
-| 7 | `TAG=$TAG:-1.2`            |  Unset                        |    `TAG`                           |    -         |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
+| 7 | `TAG=$TAG:-1.2`            |  Unset                        |    `TAG`                           |  Unset       |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
 | 8 | `TAG=$TAG:-1.2`            |  Unset                        |    `TAG=1.7`                        |    `TAG`      |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.7`           |
 | 9 | `TAG=$TAG:-1.2`            |  Unset                        |    `TAG=1.7`                        |    `TAG=1.5`   |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.5`           |
 | 10| `TAG=$TAG:-1.2`            |  Unset                        |    `TAG`                           |    `TAG`      |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
 | 11| `TAG=$TAG:-1.2`            |  Unset                        |    `TAG`                           |    `TAG`      |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
-| 12| `TAG=$TAG:-1.2`            |  `TAG=1.8`                    |    -                              |  **`TAG=1.5`** |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.5`           |
+| 12| `TAG=$TAG:-1.2`            |  `TAG=1.8`                    |  Unset                            |  **`TAG=1.5`** |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.5`           |
 | 13| `TAG=$TAG:-1.2`            |  `TAG=1.8`                    |  **`TAG=1.7`**                      |    `TAG=1.5`   |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.7`           |
-| 14| -                          |**`TAG=1.8`**                  |     -                             |     -        |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.8`           |
-| 15| -                          |  -                            |     `TAG=1.7`                       |     -        |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
-| 16| -                          |  -                            |     `TAG=1.7`                       |     -        |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
+| 14| Unset                       |**`TAG=1.8`**                  |   Unset                           |   Unset      |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.8`           |
+| 15| Unset                      |  Unset                        |     `TAG=1.7`                       |     Unset     |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
+| 16| Unset                      |  Unset                        |     `TAG=1.7`                       |     Unset    |     `TAG=1.6`   |   `TAG=1.4`    | `TAG=1.4`           |
 
 Description for each column:
 * Image - `ENV` directive in the Dockerfile
