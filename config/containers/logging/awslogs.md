@@ -22,13 +22,14 @@ located in `/etc/docker/` on Linux hosts or
 configuring Docker using `daemon.json`, see
 [daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 The following example sets the log driver to `awslogs` and sets the
-`awslogs-region` option.
+`awslogs-region`, `awslogs` options.
 
 ```json
 {
   "log-driver": "awslogs",
   "log-opts": {
-    "awslogs-region": "us-east-1"
+    "awslogs-region": "us-east-1",
+    "awslogs": "myLogGroup"
   }
 }
 ```
