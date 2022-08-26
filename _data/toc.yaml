@@ -1330,6 +1330,8 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
+  - path: /engine/containerd/
+    title: containerd integration (Experimental)
   - path: /engine/release-notes/
     title: Release notes
   - sectiontitle: Previous versions
