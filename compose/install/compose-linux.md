@@ -21,7 +21,7 @@ To install Compose:
 > **Note**
 >
 > These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin.  
-For Compose standalone, see [Install Compose Standalone](#install-compose-standalone).
+For Compose standalone, see [Install Compose Standalone](./compose-other.md#on-linux).
 
 If you have already set up the Docker repository, jump to step 2.
 
@@ -116,24 +116,3 @@ If you have already set up the Docker repository, jump to step 2.
 > To run Compose as a non-root user, see [Manage Docker as a non-root user](../../engine/install/linux-postinstall.md){:target="_blank" rel="noopener" class="_"}.
 
 
-## Install Compose Standalone
-
-> **Compose standalone**
->
-> Note that Compose standalone uses the _dash compose_ syntax instead of current's standard syntax (_space compose_).
-
-1. To download and install Compose standalone, run:
-  ```console
-  $ curl -SL https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-  ```
-2. Apply executable permissions to the standalone binary in the target path for the installation.
-3. Test and execute compose commands using `docker-compose`.
-
-> **Note**
->
-> If the command `docker-compose` fails after installation, check your path.
-> You can also create a symbolic link to `/usr/bin` or any other directory in your path. 
-> For example:
-> ```console
-> $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-> ```
