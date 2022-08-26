@@ -2,6 +2,7 @@ extends: existence
 message: "Avoid generic calls to action: '%s'"
 link: https://deploy-preview-15350--docsdocker.netlify.app/contribute/style/formatting/#links
 level: warning
+scope: link
 ignorecase: true
 tokens:
   - click here

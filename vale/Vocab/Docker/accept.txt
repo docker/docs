@@ -10,6 +10,7 @@ Docker Desktop
 Docker Engine
 Docker Hub
 Docker Team
+Docker Extension
 Dockerfile
 HyperKit
 Kitematic
