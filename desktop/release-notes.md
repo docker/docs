@@ -24,6 +24,71 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## Docker Desktop 4.12.0
+2022-09-01
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+## New
+
+- Minimum version to install or update Docker Desktop on macOS is now 10.15
+- Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
+- Added the experimental docker daemon with the containerd image store.
+- Allow Docker Desktop to run untagged image (https://github.com/docker/for-mac/issues/6425)
+- Add search capabilities to Docker Extension Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
+- [mac] Quit Docker Desktop completely from the Dock menu (https://github.com/docker/for-mac/issues/6440)
+- Enable ComposeV2 after factory reset
+- Copied terminal contents do not contain non-breaking spaces anymore
+- Upgrade kernel to 5.10.124
+- Enables ComposeV2 by default on new installations/if there is no previous configuration.
+- Prevents users on ARM macs without Rosetta installed from switching back to ComposeV1 (only has intel binaries).
+- Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
+- Descending default sort order for volumes size and created column, containers started column
+- Defined sort order for container/compose state column running > some running > paused > some paused > exited > some exited > created
+- Re-organized container row actions
+- Added compose stop button if any related container is stoppable.
+- Individual compose containers are now deletable from overview
+- Runs every command on the Quickstart guide immediately.
+- Remove workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
+- Implemented an integrated terminal for containers.
+- Updated the tooltip design.
+- Show address for external links.
+
+### Upgrades
+
+- [Docker Compose v2.10.1](https://github.com/docker/compose/releases/tag/v2.10.1)
+- [Docker Compose "Cloud Integrations" v1.0.29](https://github.com/docker/compose-cli/releases/tag/v1.0.29)
+- [Docker Scan v0.19.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.19.0)
+- [Kubernetes v1.25.0](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.0)
+- [Go 1.19](https://github.com/golang/go/releases/tag/go1.19)
+- [cri-dockerd v0.2.5](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.5)
+- [Buildx v0.9.1](https://github.com/docker/buildx/releases/tag/v0.9.1)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed issues with the image list appearing empty in Docker Desktop even though there are images. Related to [docker/for-win#12693](https://github.com/docker/for-win/issues/12693) and [docker/for-mac#6347](https://github.com/docker/for-mac/issues/6347).
+- Fixed a bug that made Docker clients in some languages hang on `docker exec`. Fixes [https://github.com/apocas/dockerode/issues/534](https://github.com/apocas/dockerode/issues/534).
+- Extensions SDK: prevent failed spawned command to make Docker Desktop unexpectedly quit.
+- Fixes container terminal resizing issues.
+- Fixes extensions being displayed as disabled in the left menu but they are not.
+- Fix `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
+- Fix bug where we fail to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
+
+#### For Mac
+
+- Fixed a bug where Tray menu could incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
+- Fixed a bug that didn't restart Docker Desktop after applying an update.
+- When using virtualization.framework, fix bugs where connection to Docker is lost when the computer sleeps and when using restrictive firewall software.
+
+#### For Windows
+
+- Fixed a bug where versions displayed during an update could be incorrect. Fixes [for-win/issues#12822](https://github.com/docker/for-win/issues/12822).
+
+
 ## Docker Desktop 4.11.1
 2022-08-05
 
