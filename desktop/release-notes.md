@@ -65,6 +65,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - [Go 1.19](https://github.com/golang/go/releases/tag/go1.19)
 - [cri-dockerd v0.2.5](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.5)
 - [Buildx v0.9.1](https://github.com/docker/buildx/releases/tag/v0.9.1)
+- [containerd v1.6.8](https://github.com/containerd/containerd/releases/tag/v1.6.8)
+- [containerd v1.6.7](https://github.com/containerd/containerd/releases/tag/v1.6.7)
+- [runc v1.1.4](https://github.com/opencontainers/runc/releases/tag/v1.1.4)
+- [runc v1.1.3](https://github.com/opencontainers/runc/releases/tag/v1.1.3)
 
 ### Bug fixes and minor changes
 
