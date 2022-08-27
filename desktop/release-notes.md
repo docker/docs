@@ -58,7 +58,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### Upgrades
 
-- [Docker Compose v2.10.1](https://github.com/docker/compose/releases/tag/v2.10.1)
+- [Docker Compose v2.10.2](https://github.com/docker/compose/releases/tag/v2.10.2)
 - [Docker Compose "Cloud Integrations" v1.0.29](https://github.com/docker/compose-cli/releases/tag/v1.0.29)
 - [Docker Scan v0.19.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.19.0)
 - [Kubernetes v1.25.0](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.0)
