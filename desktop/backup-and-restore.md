@@ -30,7 +30,7 @@ computer, for example.
    Make sure to configure the [repository's visibility as "private"](../docker-hub/repos.md#private-repositories)
    for images that should not be publicly accessible. 
 
-   Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](../engine/reference/commandline/save.md)
+   Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](../engine/reference/commandline/image_save.md)
    to save any images you want to keep to a local tar file. 
 
 After backing up your data, you can uninstall the current version of Docker Desktop
