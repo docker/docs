@@ -51,7 +51,9 @@ def hello_world():
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created.
 
 ```console
-$ python3 -m flask run
+$ cd /path/to/python-docker
+$ source .venv/bin/activate
+(.venv) $ python3 -m flask run
 ```
 
 To test that the application is working properly, open a new browser and navigate to `http://localhost:5000`.
