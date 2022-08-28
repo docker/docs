@@ -28,9 +28,11 @@ Let’s create a simple Python application using the Flask framework that we’l
 
 ```console
 $ cd /path/to/python-docker
-$ pip3 install Flask
-$ pip3 freeze | grep Flask >> requirements.txt
-$ touch app.py
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $ python3 -m pip install Flask
+(.venv) $ python3 -m pip freeze > requirements.txt
+(.venv) $ touch app.py
 ```
 
 Now, let’s add some code to handle simple web requests. Open this working directory in your favorite IDE and enter the following code into the `app.py` file.
