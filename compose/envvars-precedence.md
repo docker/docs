@@ -8,7 +8,7 @@ keywords: compose, environment, env file
 1. Passed from the command-line [`docker compose run --env <KEY[=[VAL]]>`](../../engine/reference/commandline/compose_run/#options).
 2. Passed from/set in `compose.yaml` service's configuration, from the [environment key](../../compose/compose-file/#environment).
 3. Passed from/set in `compose.yaml` service's configuration, from the [env_file key](../../compose/compose-file/#env_file).
-4. Passed from/set in Container Image in [ENV directive](../../engine/reference/builder/#env).
+4. Passed from/set in Container Image in the [ENV directive](../../engine/reference/builder/#env).
 
 ### Precedence quick overview table
 The table below provides a quick overview of how interpolation works when using all environment variables on Compose, using `TAG`, an environmental variable defining the version for an image, as an example.
