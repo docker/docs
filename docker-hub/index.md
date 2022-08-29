@@ -125,7 +125,7 @@ To create a repository:
 
 ### Step 3: Download and install Docker Desktop
 
-You'll need to download Docker Desktop to  build, push, and pull container images.
+You'll need to download Docker Desktop to build, push, and pull container images.
 
 1. Download and install [Docker Desktop](../desktop/#download-and-install).
 
