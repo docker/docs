@@ -13,10 +13,13 @@ On this page you can find information on how to get and install Compose.
 
 If you have Docker Desktop, you've got a full Docker installation, including Compose.
 
+You can check this by clicking on **About Docker Desktop** from the Docker menu ![whale menu](../../desktop/images/whale-x.png){: .inline}.
+
+![about-desktop](../images/about_desktop.png){:width="750px"}
+
 ### New Docker Installation
 
-The best way of getting Compose is by installing Docker Desktop.
- Get [Docker Desktop](../../desktop/#download-and-install) to get a full Docker installation and managed updates.
+If you haven’t yet installed Docker Desktop:
 
 {% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto; align=right"}' %}
 
@@ -29,11 +32,14 @@ The best way of getting Compose is by installing Docker Desktop.
 
 ### Pre-existing Docker Installation
 
-If you have a Docker installation on Linux to which you want to add the Compose plugin, check [Install on Linux](./compose-linux.md).
+If you have a Docker installation on Linux to which you want to add the Compose plugin, you can choose one of these options:
+
+* [Set up Docker's repository on your Linux system](./compose-linux.md#install-using-the-repository)
+* [Install the plugin manually](./compose-linux.md#install-the-plugin-manually)
 
 ### Other install scenarios
 
-For other options check, [Other scenarios](./compose-other.md/).
+For other options check, [Other install scenarios](./compose-other.md/).
 
 
 ## Where to go next

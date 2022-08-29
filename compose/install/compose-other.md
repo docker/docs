@@ -3,7 +3,7 @@ description: How to install Docker Compose - Other Scenarios
 keywords: compose, orchestration, install, installation, docker, documentation
 toc_max: 3
 
-title: Install on other scenarios
+title: Other install Scenarios
 ---
 
 ## Install Compose Standalone

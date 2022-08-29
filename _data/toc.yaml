@@ -1443,7 +1443,7 @@ manuals:
       - path: /compose/install/compose-linux/
         title: Install on Linux
       - path: /compose/install/compose-other/
-        title: Install on other scenarios
+        title: Other scenarios install
       - path: /compose/install/uninstall/
         title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
