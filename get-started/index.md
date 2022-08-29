@@ -77,9 +77,15 @@ In addition, you'll also learn about the best practices for building images, inc
 
 If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).
 
-We also recommend the video walkthrough from DockerCon 2020.
+We also recommend the video workshop from DockerCon 2022. Watch the video below or use the links to open the video at a particular section.
 
-<iframe src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+* <a href="https://youtu.be/gAGEar5HQoU">Docker overview and installation</a>
+* <a href="https://youtu.be/gAGEar5HQoU?t=1400">Pull, run, and explore containers</a>
+* <a href="https://youtu.be/gAGEar5HQoU?t=3185">Containerize an app</a>
+* <a href="https://youtu.be/gAGEar5HQoU?t=6305">Connect a DB and set up a bind mount</a>
+* <a href="https://youtu.be/gAGEar5HQoU?t=8280">Deploy a container to the cloud</a>
+
+<iframe src="https://www.youtube-nocookie.com/embed/gAGEar5HQoU" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Download and install Docker
 
