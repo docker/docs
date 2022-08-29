@@ -34,7 +34,7 @@ If you haven’t yet installed Docker Desktop:
 
 If you have a Docker installation on Linux to which you want to add the Compose plugin, you can choose one of these options:
 
-* [Set up Docker's repository on your Linux system](./compose-linux.md#install-using-the-repository)
+* [Install using the repository](./compose-linux.md#install-using-the-repository)
 * [Install the plugin manually](./compose-linux.md#install-the-plugin-manually)
 
 ### Other install scenarios

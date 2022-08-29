@@ -48,7 +48,9 @@ If you have already set up the Docker repository, jump to step 2.
       ```console
       $ apt-cache madison docker-compose-plugin
 
-        docker-compose-plugin | 2.3.3~ubuntu-focal | https://download.docker.com/linux/ubuntu focal/stable arm64 Packages
+      docker-compose-plugin | 2.6.0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+      docker-compose-plugin | 2.5.0~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+      docker-compose-plugin | 2.3.3~ubuntu-bionic | https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
       ```
 
     b. From the list obtained use the version string you can in the second column to specify the version you wish to install.
