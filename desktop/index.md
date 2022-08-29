@@ -3,10 +3,12 @@ description: Docker Desktop overview
 keywords: Desktop, Docker, GUI, run, docker, local, machine, dashboard
 title: Docker Desktop
 redirect_from:
-- /desktop/opensource/
-- /docker-for-mac/opensource/
-- /docker-for-windows/opensource/
 - /desktop/dashboard/
+- /desktop/opensource/
+- /docker-for-mac/dashboard/
+- /docker-for-mac/opensource/
+- /docker-for-windows/dashboard/
+- /docker-for-windows/opensource/
 ---
 
 > **Update to the Docker Desktop terms**
