@@ -9,9 +9,11 @@ Desktop and access all their organizations.
 
 Based on the user's operating system, you must create a `registry.json` file at the following location and make sure the file can't be edited by the user:
 
-- Windows: `/ProgramData/DockerDesktop/registry.json`
-- Mac: `/Library/Application Support/com.docker.docker/registry.json`
-- Linux: `/usr/share/docker-desktop/registry/registry.json`
+| Platform | Location                                                       |
+|----------|----------------------------------------------------------------|
+| Windows  | `/ProgramData/DockerDesktop/registry.json`                     |
+| Mac      | `/Library/Application Support/com.docker.docker/registry.json` |
+| Linux    | `/usr/share/docker-desktop/registry/registry.json`             |
 
 The `registry.json` file must contain the following contents, where `myorg` is replaced with your organization's name.
 
