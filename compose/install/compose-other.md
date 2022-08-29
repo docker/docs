@@ -11,7 +11,8 @@ title: Other install Scenarios
 ### On Linux
 > **Compose standalone**
 >
-> Note that Compose standalone uses the _dash compose_ syntax instead of current's standard syntax (_space compose_).
+> Note that Compose standalone uses the _dash compose_ syntax instead of current's standard syntax (_space compose_).  
+For example: type `docker-compose up` when using Compose standalone, instead of `docker compose up`.
 
 1. To download and install Compose standalone, run:
   ```console
