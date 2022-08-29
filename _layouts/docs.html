@@ -28,7 +28,7 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            <p>{%- include read_time.html -%} &emsp; {%- include last_reviewed.html -%} </p>
+                            <p>{%- include read_time.html -%} &emsp; {%- include last_reviewed.html -%}</p>
                             {{ content }}
                             {%- unless page.notags == true -%}
                             {%- assign keywords = page.keywords | split:"," -%}
@@ -43,7 +43,7 @@
                             {%- endif -%}
                             {%- endunless %}
                             {%- if site.polldaddy_id and page.noratings != true -%}
-                            <div class="ratings-div"><div id="pd_rating_holder_{{ site.polldaddy_id }}"></div></div>
+                            <div class="ratings-div"><div id="pd_rating_holder_{{ site.poll,daddy_id }}"></div></div>
                             {%- endif -%}
                         </section>
                     </main>
@@ -60,12 +60,6 @@
                             <div class="toc-nav">
                                 <div class="feedback-links">
                                     <ul>
-                                        {%- if edit_url != "" -%}
-                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
-                                        {%- endif -%}
-                                        {%- if issue_url != "" -%}
-                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
-                                        {%- endif -%}
                                         <li>{%- include theme-switch.html -%}</li>
                                     </ul>
                                 </div>
@@ -73,9 +67,37 @@
                                 {%- assign my_min = page.toc_min | default: site.toc_min | default: 2 -%}
                                 {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
                                 {%- assign my_name = page.url | default: "unnamed" -%}
+                                <hr>
                                 <div id="side-toc-title">On this page:</div>
                                 {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
                                 {%- endunless -%}
+                                <hr>
+                                <div id="side-toc-title">Make a contribution</div>
+                                <div class="feedback-links">
+                                    <ul>
+                                        {%- if edit_url != "" -%}
+                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
+                                        {%- endif -%}
+                                        {%- if issue_url != "" -%}
+                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+                                        {%- endif -%}
+                                    </ul>
+                                    <hr>
+                                    <div id="side-toc-title">Latest contributers</div>
+                                                <a href="https://github.com/usha-mandya">
+                                                    <img  style="position:relative;left:15px;" src="https://avatars.githubusercontent.com/u/47779042?s=64&amp;v=4" alt="@usha-mandya" size="32" height="32" width="32" >
+                                                </a>
+
+                                                <a href="https://github.com/thaJeztah">
+                                                    <img style="position:relative;left:15px;" src="https://avatars.githubusercontent.com/u/1804568?s=64&amp;v=4" alt="@thaJeztah" size="32" height="32" width="32" >
+                                                  </a>
+                                    <hr>
+                                    <div id="side-toc-title">Latest updates</div>
+                                    <a  style="font-size: 12px; position:relative;left:15px;" href="https://github.com/docker/docker.github.io/commit/81fb76d3f408c8ea6c0ccdbd2ffb58bf37c8570b">2022-08-01   ENGDOCS-835: DD ...</a>
+                                    <hr>
+                                    <div id="side-toc-title">Latest issues</div>
+                                    <a  style="font-size: 12px; position:relative;left:15px;" href="https://github.com/docker/docker.github.io/commit/81fb76d3f408c8ea6c0ccdbd2ffb58bf37c8570b">2022-08-01   ENGDOCS-835: DD ...</a>
+                                </div>
                             </div>
                         </div>
                     </div>

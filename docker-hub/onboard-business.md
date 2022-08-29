@@ -4,6 +4,7 @@ keywords: business, organizations, get started, onboarding
 title: Get started onboarding with Docker Business
 toc_min: 1
 toc_max: 2
+reviewed: 2022-08-01
 ---
 
 The following section contains step-by-step instructions on how to get started onboarding your organization after you obtain a Docker Business subscription.

@@ -1,0 +1,5 @@
+{%- unless page.skip_read_time == true -%}
+{%- if page.reviewed -%}
+<img class="reviewed-time" src="/images/favicon.png" alt="Popular page" title="This is a popular page. Popular pages are reviewed periodically. Last reviewed: {{ page.reviewed | date: '%Y-%m-%d'}}"/>
+{%- endif -%}
+{%- endunless -%}

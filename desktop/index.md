@@ -2,6 +2,7 @@
 description: Docker Desktop overview
 keywords: Desktop, Docker, GUI, run, docker, local, machine, dashboard
 title: Docker Desktop
+reviewed: 2022-07-25
 redirect_from:
 - /desktop/opensource/
 - /docker-for-mac/opensource/

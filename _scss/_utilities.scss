@@ -9,10 +9,14 @@
     display: none;
 }
 
-.reading-time,
-.reviewed-time {
+.reading-time {
     font-size: 12px;
     color: rgba(13, 86, 125, 0.55);
+}
+
+.reviewed-time {
+   vertical-align: middle;
+  
 }
 
 .break {
