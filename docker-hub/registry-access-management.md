@@ -10,9 +10,9 @@ Registry Access Management is a feature available to organizations with a Docker
 
 Download Docker Desktop v4.8 or a later release.
 
-- [Download and install for Windows](/desktop/install/windows-install/)
-- [Download and install for Mac](/desktop/install/mac-install/)
-- [Download and install for Linux](/desktop/install/linux-install/)
+- [Download and install for Windows](../desktop/install/windows-install.md)
+- [Download and install for Mac](../desktop/install/mac-install.md)
+- [Download and install for Linux](../desktop/install/linux-install.md)
 
 ## Configure Registry Access Management permissions
 
