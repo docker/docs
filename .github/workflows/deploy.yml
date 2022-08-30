@@ -23,13 +23,13 @@ jobs:
           JEKYLL_ENV=development
           DOCS_AWS_REGION=us-east-1
           if [ "${{ github.ref }}" = "refs/heads/master" ]; then
-            DOCS_URL="https://docs-stage2.docker.com" # TODO: change this to https://docs-stage.docker.com when new env switched and ready
+            DOCS_URL="https://docs-stage.docker.com"
             DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/stage-docs-docs.docker.com-20220818202135984800000001"
             DOCS_S3_BUCKET="stage-docs-docs.docker.com"
             DOCS_S3_CONFIG="s3-config.json"
             DOCS_CLOUDFRONT_ID="E1R7CSW3F0X4H8"
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-stage"
-            DOCS_SLACK_MSG="Successfully deployed docs-stage2 from master branch. $DOCS_URL" # TODO: change to "deployed docs-stage" when new env switched and ready
+            DOCS_SLACK_MSG="Successfully deployed docs-stage from master branch. $DOCS_URL"
           elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
             #JEKYLL_ENV=production # TODO: uncomment when new env switched and ready
             DOCS_URL="https://docs2.docker.com" # TODO: change this to https://docs.docker.com when new env switched and ready
