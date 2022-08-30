@@ -13,6 +13,8 @@ title: Docker Registry
 The Registry is a stateless, highly scalable server side application that stores
 and lets you distribute Docker images. The Registry is open-source, under the
 permissive [Apache license](https://en.wikipedia.org/wiki/Apache_License).
+You can find the source code on
+[GitHub](https://github.com/distribution/distribution){: target="blank" rel="noopener" class=""}.
 
 ## Why use it
 
