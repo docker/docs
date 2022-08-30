@@ -23,7 +23,7 @@ Docker has two options for containers to store files on the host machine, so
 that the files are persisted even after the container stops: _volumes_, and
 _bind mounts_. 
 
-Docker also supports containers storing files in-memory on the the host machine. Such files are not persisted.
+Docker also supports containers storing files in-memory on the host machine. Such files are not persisted.
 If you're running Docker on Linux, _tmpfs mount_ is used to store files in the host's system memory.
 If you're running Docker on Windows, _named pipe_ is used to store files in the host's system memory.
 
