@@ -16,6 +16,7 @@ info:
     Docker provides an API that allows you to interact with Docker Hub.
 
     Browse through the Docker Hub API documentation to explore the supported endpoints.
+
 tags:
   - name: resources
     x-displayName: Resources
@@ -1275,7 +1276,7 @@ components:
                 type: array
                 items:
                   type: string
-                example: [ urn:ietf:params:scim:api:messages:2.0:ListResponse ]
+                example: [ "urn:ietf:params:scim:api:messages:2.0:ListResponse" ]
               totalResults:
                 type: integer
                 example: 1
@@ -1302,7 +1303,7 @@ components:
                 type: array
                 items:
                   type: string
-                example: [ urn:ietf:params:scim:api:messages:2.0:ListResponse ]
+                example: [ "urn:ietf:params:scim:api:messages:2.0:ListResponse" ]
               totalResults:
                 type: integer
                 example: 1
@@ -2300,7 +2301,7 @@ components:
           type: array
           items:
             type: string
-          example: [ urn:ietf:params:scim:schemas:core:2.0:Schema ]
+          example: [ "urn:ietf:params:scim:schemas:core:2.0:Schema" ]
         id:
           type: string
           example: urn:ietf:params:scim:schemas:core:2.0:User
