@@ -31,14 +31,14 @@ jobs:
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-stage"
             DOCS_SLACK_MSG="Successfully deployed docs-stage from master branch. $DOCS_URL"
           elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
-            #JEKYLL_ENV=production # TODO: uncomment when new env switched and ready
-            DOCS_URL="https://docs2.docker.com" # TODO: change this to https://docs.docker.com when new env switched and ready
+            JEKYLL_ENV=production
+            DOCS_URL="https://docs.docker.com"
             DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
             DOCS_S3_BUCKET="prod-docs-docs.docker.com"
             DOCS_S3_CONFIG="s3-config.json"
             DOCS_CLOUDFRONT_ID="E228TTN20HNU8F"
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-prod"
-            DOCS_SLACK_MSG="Successfully deployed docs2 from published branch. $DOCS_URL" # TODO: change to "deployed docs" when new env switched and ready
+            DOCS_SLACK_MSG="Successfully deployed docs from published branch. $DOCS_URL"
           elif [ "${{ github.ref }}" = "refs/heads/lab" ]; then
             DOCS_URL="https://docs-labs.docker.com"
             DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/labs-docs-docs.docker.com-20220818202218402500000001"
