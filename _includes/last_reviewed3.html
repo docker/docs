@@ -1,5 +1,6 @@
 {%- unless page.skip_read_time == true -%}
 {%- if page.reviewed -%}
-<em class="">Popular page</em> <img class="reviewed-time" src="/images/info_icon.png" alt="Popular page" title="This is a popular page. Popular pages are reviewed periodically. Last reviewed: {{ page.reviewed | date: '%Y-%m-%d'}}"/>
+<em class=""> Last reviewed: {{ page.reviewed | date: '%Y-%m-%d'}} </em>
+    <!--Popular page</em> <img class="reviewed-time" src="/images/info_icon.png" alt="Popular page" title="This is a popular page. Popular pages are reviewed periodically.-->
 {%- endif -%}
 {%- endunless -%}
