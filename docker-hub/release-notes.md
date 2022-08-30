@@ -12,7 +12,7 @@ known issues for each Docker Hub release.
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
 
-## 2022-7-22
+## 2022-07-22
 ### Enhancement
 
 You can now invite members to your organization with a CSV file containing their email addresses. The CSV file can either be a file you create for this specific purpose or one that’s extracted from another in-house system.
