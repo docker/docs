@@ -4,7 +4,9 @@ keywords: quickstart, dev environments
 title: Quickstart guide
 ---
 
-## Prerequisites
+The quickstart guide is a useful way of learning the basics of Dev Environments before geting into it more deeply.
+
+## Step one: Preparation
 
 Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
 
@@ -30,7 +32,17 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 >
 > After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
 
+## Step two: Explore the project information 
 
+## Step three: Launch the sample project
+
+From the Dev Environments tab in Docker Desktop, hover over the sample project and select the **Run** icon. 
+
+WHAT IS THE SAMPLE PROJECT???
+
+## Step four: 
+
+WHAT DO YOU DO AFTER THE SAMPLE PROJECT?
 
 AWESOME COMPOSE EXAMPLES LIVE HERE
 
@@ -38,4 +50,5 @@ AWESOME COMPOSE EXAMPLES LIVE HERE
 
 
 ## What's next
+- Increase your familiarity with Dev Environments by running other sample projects. Select the **See more samples** link at the bottom-right corner. 
 - If you're a 

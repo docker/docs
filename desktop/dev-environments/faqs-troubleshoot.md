@@ -4,10 +4,10 @@ keywords: faqs, troubleshooting, known issues
 title: FAQs and troubleshooting
 ---
 
-This page contains information on:
+This page contains:
 
-- How to diagnose and troubleshoot Docker Desktop issues
-- Workarounds for known issues
+- Frequently asked questions
+- Known issues and workarounds
 
 ## Known issues
 
