@@ -1190,14 +1190,18 @@ manuals:
       section:
         - path: /desktop/dev-environments/
           title: Overview
-        - path: /desktop/dev-environments/create-dev-env/
-          title: Create a Dev Environment
-        - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create a Compose Dev Environment
-        - path: /desktop/dev-environments/share/
-          title: Share your Dev Environment
-        - path: /desktop/dev-environments/specify/
-          title: Specify a Dockerfile or base image
+        - path: /desktop/dev-environments/quickstart/
+          title: Quickstart guide
+        - path : /desktop/dev-environments/create/
+          title: Create a dev environment
+        - path: /desktop/dev-environments/run/
+          title: Run a dev environment
+        - path: /desktop/dev-environments/samples/
+          title: Working examples
+        - path: /desktop/dev-environments/faqs-troubleshoot/
+          title: FAQs and troubleshooting
+        - path: /desktop/dev-environments/feedback/
+          title: Give feedback
     - path: /desktop/extensions/
       title: Extensions (Beta)
     - sectiontitle: Extensions SDK (Beta)

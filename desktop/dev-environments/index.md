@@ -4,54 +4,79 @@ keywords: Dev Environments, share, collaborate, local
 title: Overview
 ---
 
-Dev Environments boosts collaboration by allowing you to share work-in-progress code with your team members. This removes any potential merge conflicts while moving between Git branches to get your code on to their machine.
-
-Dev Environments uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
-
-You can also switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch. This makes reviewing PRs as simple as opening a new environment.
-
 > **Beta**
 >
 > The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
 
-![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 
-## Prerequisites
 
-Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
 
-- [Docker Desktop](../release-notes.md)
+## QUICK Catchy benefits and what DEVENVs is
 
-To get started with Dev Environments, you must also install the following tools and extension on your machine:
+With Microsoft Dev Box, organizations can:
 
-- [Git](https://git-scm.com){:target="_blank" rel="noopener" class="_"}
-- [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
-- [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers){:target="_blank" rel="noopener" class="_"}
+- Maximize dev productivity with ready-to-code, self-service Dev Boxes.
+- Centralize governance of workstations running anywhere to maintain greater security, compliance, and cost efficiency.
+- Customize dev boxes with everything developers need for their current projects.
 
-### Add Git to your PATH on Windows
+Designed to work with most major languages, frameworks and services, Lando provides an easy way for developers of all skill levels to specify simple or complex requirements for their projects, and then quickly get to work on them.
 
-If you have already installed Git, and it's not detected properly, run the following command to check whether you can use Git with the CLI or PowerShell:
+## WHO IS IT FOR?
+Martines need a self-service experience so you can run different dev environments for you teamas and when you need them. Helps you get set up and to your code faster 
 
-`$ git --version`
+Kevins can efficiently configure and assign dev environments which provide the right tools for the job - 
 
-If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the **Adjusting your PATH environment**  step.
+removes the onerous experience of onboarding team members. Standardizing your team's dev environments and tooling on OSX, Windows and Linuxs
 
-![Windows add Git to path](../images/dev-env-gitbash.png){:width="300px"}
+### HOW DOES IT WORK?
 
-> **Note**
->
-> After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
+Pwered by Docker Compose - This is why it is good it’s powered by Docker Compose and this is why it means it’s flexible 
 
-## Known issues
+On a high level, your compose.yaml configuration should contain ALL the things you need to run, develop and test your project. 
 
-The following section lists known issues and workarounds:
+We've found a useful pattern here is for the senior-est, most DevOps-y person on your team to craft the initial lando configuration and be responsible for its maintenance but to generally "set it and forget it"
 
-1. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-2. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment is emulated.
 
-## What's next?
+Use the pages below that fits in best with your use case / Find the right manual 
 
-Learn how to:
-- [Create a Dev Environment](create-dev-env.md)
-- [Create a Compose Dev Environment](create-compose-dev-env.md)
-- [Share your Dev Environment](share.md)
+<div class="component-container">
+    <!--start row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+             <div class="component-icon">
+                 <img src="/images/quickstart.svg" alt="Docker Desktop for Mac" width="45" height="45">
+             </div>
+                 <h2 id="docker-for-mac"><a href="/contribute/contribute-guide/">Quickstart guide </a></h2>
+                <p>Get up and running quickly and easily with a sample dev environment. </p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/images/icon-machine@2X.png" alt="Docker Desktop for Mac" width="45" height="45">
+            </div>
+                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Run a dev environment</a></h2>
+                <p>Explore Docker's grammar guide</p>
+         </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <img src="/images/compose_48.svg" alt="build-devenv" width="45" height="45">
+            </div>
+                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Build a dev environment</a></h2>
+                <p>Format your content to match the rest of our documentation.</p>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+

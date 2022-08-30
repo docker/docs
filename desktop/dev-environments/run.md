@@ -1,8 +1,14 @@
 ---
 description: Dev Environments
-keywords: Dev Environments, share, collaborate, local, share
-title: Share your Dev Environment
+keywords: Dev Environments, local, run
+title: Run a dev environment
 ---
+
+
+
+
+
+Make it more explicit about what is exaclty being shared - dev env shares a snapshot of what you’re working on. Not working on somethingat the same time
 
 {% include upgrade-cta.html
   body="Docker Pro, Team, and Business users can now share Dev Environments with their team members."
@@ -25,3 +31,4 @@ This creates an image of your Dev Environment, uploads it to the Docker Hub name
 To open a Dev Environment that has been shared with you, select the **Create** button in the top right-hand corner, select the **Existing Dev Environment** tab, and then paste the URL.
 
 Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback even before you create a pull request!
+
