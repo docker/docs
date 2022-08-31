@@ -40,7 +40,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
 - Added compose stop button if any related container is stoppable.
 - Individual compose containers are now deletable from the **Container** view. 
-- Remove workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
+- Removed the workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
 - Implemented an integrated terminal for containers.
 - Added a tooltip to display the link address for all external links by default.
 
