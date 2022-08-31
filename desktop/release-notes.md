@@ -33,7 +33,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ## New
 
-- Added the experimental docker daemon with the containerd image store.
+- Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
 - Allow Docker Desktop to run untagged images. Fixes [https://github.com/docker/for-mac/issues/6425]
 - Add search capabilities to Docker Extension Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
 - Copied terminal contents do not contain non-breaking spaces anymore.
