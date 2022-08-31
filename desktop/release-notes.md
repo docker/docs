@@ -35,7 +35,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
 - Docker Desktop now runs untagged images. Fixes [https://github.com/docker/for-mac/issues/6425]
-- Add search capabilities to Docker Extension Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
+- Added search capabilities to Docker Extension's Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
 - Copied terminal contents do not contain non-breaking spaces anymore.
 - Enabled Compose V2 by default on new installations of Docker Desktop.
 - Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
