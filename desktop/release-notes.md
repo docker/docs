@@ -67,22 +67,22 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
 - Changed the default sort order to descending for volume size and the **Created** column, along with the container's **Started** column.
 - Re-organized container row actions by keeping only the start/stop and delete actions visible at all times, while allowing access to the rest via the row menu item.
-- Run every command on the Quickstart guide immediately.
-- Defined sort order for container/compose state column running > some running > paused > some paused > exited > some exited > created.
+- The Quickstart guide now runs every command immediately.
+- Defined the sort order for container/compose **Status** column to running > some running > paused > some paused > exited > some exited > created.
 - Fixed issues with the image list appearing empty in Docker Desktop even though there are images. Related to [docker/for-win#12693](https://github.com/docker/for-win/issues/12693) and [docker/for-mac#6347](https://github.com/docker/for-mac/issues/6347).
 - Defined what images are "in use" based on whether or not system containers are displayed. If system containers related to Kubernetes and Extensions are not displayed, the related images are not defined as "in use."
 - Fixed a bug that made Docker clients in some languages hang on `docker exec`. Fixes [https://github.com/apocas/dockerode/issues/534](https://github.com/apocas/dockerode/issues/534).
-- Extensions SDK: prevent failed spawned command to make Docker Desktop unexpectedly quit.
-- Fixed extensions being displayed as disabled in the left menu when they are not.
+- A failed spawned command when building an extension no longer causes Docker Desktop to unexpectedly quit.
+- Fixed a bug that caused extensions to be displayed as disabled in the left menu when they are not.
 - Fixed `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
-- Fixed bug where we fail to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
+- Fixed a bug where Docker Desktop fails to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
 - UUpdated the tooltips in Docker Desktop and MUI theme package to align with the overall system design.
 - Copied terminal contents do not contain non-breaking spaces anymore.
 
 #### For Mac
 
 - Minimum version to install or update Docker Desktop on macOS is now 10.15. Fixes [docker/for-mac#6007](https://github.com/docker/for-mac/issues/6007).
-- Fixed a bug where Tray menu could incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
+- Fixed a bug where the Tray menu incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
 - Fixed a bug that didn't restart Docker Desktop after applying an update.
 - Fixed a bug that caused the connection to Docker to be lost when the computer sleeps if a user is using virtualization.framework and restrictive firewall software.
 - Fixed a bug that caused Docker Desktop to run in the background even after a user had quit the application.  Fixes [https://github.com/docker/for-mac/issues/6440]
