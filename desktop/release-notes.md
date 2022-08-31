@@ -36,7 +36,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
 - Docker Desktop now runs untagged images. Fixes [https://github.com/docker/for-mac/issues/6425]
 - Added search capabilities to Docker Extension's Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
-- Copied terminal contents do not contain non-breaking spaces anymore.
 - Enabled Compose V2 by default on new installations of Docker Desktop.
 - Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
 - Added compose stop button if any related container is stoppable.
@@ -72,12 +71,14 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Run every command on the Quickstart guide immediately.
 - Defined sort order for container/compose state column running > some running > paused > some paused > exited > some exited > created.
 - Fixed issues with the image list appearing empty in Docker Desktop even though there are images. Related to [docker/for-win#12693](https://github.com/docker/for-win/issues/12693) and [docker/for-mac#6347](https://github.com/docker/for-mac/issues/6347).
+- Defined what images are "in use" based on whether or not system containers are displayed. If system containers related to Kubernetes and Extensions are not displayed, the related images are not defined as "in use."
 - Fixed a bug that made Docker clients in some languages hang on `docker exec`. Fixes [https://github.com/apocas/dockerode/issues/534](https://github.com/apocas/dockerode/issues/534).
 - Extensions SDK: prevent failed spawned command to make Docker Desktop unexpectedly quit.
 - Fixed extensions being displayed as disabled in the left menu when they are not.
 - Fixed `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
 - Fixed bug where we fail to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
 - Updated the tooltip design.
+- Copied terminal contents do not contain non-breaking spaces anymore.
 
 #### For Mac
 
@@ -94,13 +95,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### Security 
 
-#### For Windows
-- Fixed a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
-- Fixed the argument injection to the Docker Desktop installer which may result in local privilege escalation.
-
 #### For all platforms
 - Fix RCE via query parameters in the message-box route in the Electron client.
 - Fix RCE via extension description/changelog which could be abused by a malicious extension.
+
+#### For Windows
+- Fixed a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
+- Fixed the argument injection to the Docker Desktop installer which may result in local privilege escalation.
 
 ## Docker Desktop 4.11.1
 2022-08-05
