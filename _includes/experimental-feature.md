@@ -1,3 +1,3 @@
 <!-- This text will be included in the docs that are marked as experimental -->
 
-Experimental features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Experimental features must not be used in production environments. Docker does not offer support for experimental features.
+Beta features provide early access to future product functionality. These features are intended for testing and feedback only as they may change between releases without warning or can be removed entirely from a future release. Beta features must not be used in production environments. For more information about Beta features, see [Product release lifecycle](../release-lifecycle.md)
