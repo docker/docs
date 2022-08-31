@@ -133,7 +133,7 @@ at `/usr/share/docker-desktop/registry/registry.json` and includes
 the organization information to which the user belongs. Make sure the file has the
 expected content and can't be edited by the user, only by root.
 
-Verify that the content of the file contains the correct information;
+Verify that the content of the file contains the correct information:
 
 ```console
 $ sudo cat /usr/share/docker-desktop/registry/registry.json
