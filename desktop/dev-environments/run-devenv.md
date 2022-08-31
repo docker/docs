@@ -1,21 +1,20 @@
 ---
 description: Dev Environments
 keywords: Dev Environments, local, run
-title: Launch a dev environment or a project
+title: Launch a dev environment
 ---
 
-This page contains information on how to add and launch a single dev environment
+Remove the challenge of figuring out what you need in order to get set up properly with a new project or to review a team member's PR.
 
-You can launch a Dev Environment from a:
+This page contains information on how to add and launch a single dev environment.
+
+You can launch a dev environment from a:
 - Git repository
 - Branch or tag of a Git repository
 - Subfolder of a Git repository
 - Local folder
 
 This did not conflict with any of the local files or local tooling set up on your host.  
-
-
-Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback even before you create a pull request!
 
 ## Step one: Preparation 
 
@@ -67,10 +66,11 @@ To add your environment from a local folder, select the **Browse** button to the
 
 ## Step three: Launch your environment
 
-Hover over 
+
 
 ## Optional step four: Share your Dev Environment
-Make it more explicit about what is exaclty being shared - dev env shares a snapshot of what you’re working on. Not working on somethingat the same time
+
+Dev Environments can be easily shared with your team members and provides a snapshot of the current state of your project. They can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback before you create a pull request.
 
 {% include upgrade-cta.html
   body="Docker Pro, Team, and Business users can now share Dev Environments with their team members."
@@ -78,9 +78,7 @@ Make it more explicit about what is exaclty being shared - dev env shares a snap
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade"
 %}
 
-Sharing a Dev Environment lets your team members access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback before you create a pull request.
-
-When you are ready to share your environment, hover over your Dev Environment, select the **Share** icon, and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
+To share your environment, hover over your Dev Environment, select the **Share** icon, and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
 
 This creates an image of your Dev Environment, uploads it to the Docker Hub namespace you have specified, and provides a tiny URL to share with your team members.
 

@@ -4,6 +4,40 @@ keywords: Dev Environments, share, collaborate, local
 title: Create a dev environment
 ---
 
+This page contains information on how to create a dev environment. It walks you through the recommended steps and links to useful resources that are great starting points. 
+
+## Step one: Preparation and gathering requirements
+
+Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
+
+- [Docker Desktop](../release-notes.md)
+
+To get started with Dev Environments, you must also install the following tools and extension on your machine:
+
+- [Git](https://git-scm.com){:target="_blank" rel="noopener" class="_"}
+- [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
+- [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers){:target="_blank" rel="noopener" class="_"}
+
+#### Add Git to your PATH on Windows
+
+If you have already installed Git, and it's not detected properly, run the following command to check whether you can use Git with the CLI or PowerShell:
+
+`$ git --version`
+
+If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the **Adjusting your PATH environment**  step.
+
+> **Note**
+>
+> After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
+
+## Step two: Dive into Compose
+
+Once you've gathered your dev environment requirements you're ready to start building your compose.yaml file which powers your dev environment. 
+
+You can either start your compose.yaml file from scratch or use [sample dev environment](https://github.com/docker/awesome-compose) as a starting point then add or amend accordingly. 
+
+
+
 Need to emphasise - Kevin can use anything he wants in the dev environment (link to the Awesome compose samples he can test) and then be pointed to Compose/yaml help to answer the ‘ok, what next?’
 
 "Don't interrupt your team. Test out upgrades in a safe sandbox. Atomically roll it out to everyone when you're ready.”
@@ -15,7 +49,7 @@ Step 1. Get set up with Dev Env tab, gather your team requirements
 
 step 2. Dive into Compose
 
-You can either start your compose off from scratch or use an Awesome Compose sample as a starting point  then add additional requirements 
+
 
 links to relevant compose files 
 

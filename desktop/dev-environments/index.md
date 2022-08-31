@@ -19,10 +19,10 @@ With Dev Environments, you can:
 
 You'll find Dev Environments useful if you are a developer that:
 - Needs to get up and running with a project or multiple projects quickly and easily.
-- Has limited time to set up all the individual project dependencies.
+- Has limited time to set up all the individual project dependencies and are tired of following out of date README files.
 - Wants a self-service experience that helps you get set up and to your code faster.
 
-You'll also find Dev Environments useful if you are a developer that sets up your application's services for developer teams and wants to standardize the onboarding experience of new team members.
+You'll also find Dev Environments useful if you are a developer that sets up your application's services for developer teams and wants to standardize the onboarding experience of new team members. 
 
 Dev Environments provides an easy way for developer teams of all skill levels to specify simple or complex requirements for their projects, and then quickly hit the ground running.
 
