@@ -42,12 +42,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Individual compose containers are now deletable from overview.
 - Remove workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
 - Implemented an integrated terminal for containers.
-- Show address for external links.
+- Added a tooltip to display the link address for all external links by default.
 
 ### Upgrades
 
 - [Docker Compose v2.10.2](https://github.com/docker/compose/releases/tag/v2.10.2)
-- [Docker Compose "Cloud Integrations" v1.0.29](https://github.com/docker/compose-cli/releases/tag/v1.0.29)
 - [Docker Scan v0.19.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.19.0)
 - [Kubernetes v1.25.0](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.0)
 - [Go 1.19](https://github.com/golang/go/releases/tag/go1.19)
@@ -67,7 +66,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Prevent users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
 - Descending default sort order for volumes size and created column, containers started column.
-- Re-organized container row actions.
+- Re-organized container row actions by keeping only the start/stop and delete actions visible at all times, while allowing access to the rest via the row menu item.
 - Run every command on the Quickstart guide immediately.
 - Defined sort order for container/compose state column running > some running > paused > some paused > exited > some exited > created.
 - Fixed issues with the image list appearing empty in Docker Desktop even though there are images. Related to [docker/for-win#12693](https://github.com/docker/for-win/issues/12693) and [docker/for-mac#6347](https://github.com/docker/for-mac/issues/6347).
@@ -77,7 +76,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed extensions being displayed as disabled in the left menu when they are not.
 - Fixed `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
 - Fixed bug where we fail to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
-- Updated the tooltip design.
+- UUpdated the tooltips in Docker Desktop and MUI theme package to align with the overall system design.
 - Copied terminal contents do not contain non-breaking spaces anymore.
 
 #### For Mac
