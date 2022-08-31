@@ -31,7 +31,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 >
 > {% include desktop-install.html %}
 
-## New
+### New
 
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
 - Docker Desktop now runs untagged images. Fixes [https://github.com/docker/for-mac/issues/6425]
