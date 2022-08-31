@@ -74,7 +74,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed issues with the image list appearing empty in Docker Desktop even though there are images. Related to [docker/for-win#12693](https://github.com/docker/for-win/issues/12693) and [docker/for-mac#6347](https://github.com/docker/for-mac/issues/6347).
 - Fixed a bug that made Docker clients in some languages hang on `docker exec`. Fixes [https://github.com/apocas/dockerode/issues/534](https://github.com/apocas/dockerode/issues/534).
 - Extensions SDK: prevent failed spawned command to make Docker Desktop unexpectedly quit.
-- Fixed container terminal resizing issues.
 - Fixed extensions being displayed as disabled in the left menu when they are not.
 - Fixed `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
 - Fixed bug where we fail to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
@@ -86,12 +85,22 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where Tray menu could incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
 - Fixed a bug that didn't restart Docker Desktop after applying an update.
 - When using virtualization.framework, fix bugs where connection to Docker is lost when the computer sleeps and when using restrictive firewall software.
-- Quit Docker Desktop completely from the Dock menu. Fixes [https://github.com/docker/for-mac/issues/6440]
+- Quit Docker Desktop completely from the Dock menu, to ensure Docker Desktop isn't running in the background without the whale icon in the menu bar visible. Fixes [https://github.com/docker/for-mac/issues/6440]
+- Disabled both Virtualization Framework and VirtioFS for users running macOS < 12.5
 
 #### For Windows
 
 - Fixed a bug where versions displayed during an update could be incorrect. Fixes [for-win/issues#12822](https://github.com/docker/for-win/issues/12822).
 
+### Security 
+
+#### For Windows
+- Fix a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
+- Fix argument injection to the Docker Desktop installer which may result in local privilege escalation.
+
+#### For all platforms
+- Fix RCE via query parameters in the message-box route in the Electron client.
+- Fix RCE via extension description/changelog which could be abused by a malicious extension.
 
 ## Docker Desktop 4.11.1
 2022-08-05
