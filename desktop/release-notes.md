@@ -84,7 +84,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Minimum version to install or update Docker Desktop on macOS is now 10.15. Fixes [docker/for-mac#6007](https://github.com/docker/for-mac/issues/6007).
 - Fixed a bug where Tray menu could incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
 - Fixed a bug that didn't restart Docker Desktop after applying an update.
-- When using virtualization.framework, fix bugs where connection to Docker is lost when the computer sleeps and when using restrictive firewall software.
+- Fixed a bug that caused the connection to Docker to be lost when the computer sleeps if a user is using virtualization.framework and restrictive firewall software.
 - Quit Docker Desktop completely from the Dock menu, to ensure Docker Desktop isn't running in the background without the whale icon in the menu bar visible. Fixes [https://github.com/docker/for-mac/issues/6440]
 - Disabled both Virtualization Framework and VirtioFS for users running macOS < 12.5
 
