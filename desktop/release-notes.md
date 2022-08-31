@@ -33,27 +33,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ## New
 
-- Minimum version to install or update Docker Desktop on macOS is now 10.15
-- Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Added the experimental docker daemon with the containerd image store.
 - Allow Docker Desktop to run untagged image (https://github.com/docker/for-mac/issues/6425)
 - Add search capabilities to Docker Extension Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
 - [mac] Quit Docker Desktop completely from the Dock menu (https://github.com/docker/for-mac/issues/6440)
-- Enable ComposeV2 after factory reset
 - Copied terminal contents do not contain non-breaking spaces anymore
-- Upgrade kernel to 5.10.124
 - Enables ComposeV2 by default on new installations/if there is no previous configuration.
-- Prevents users on ARM macs without Rosetta installed from switching back to ComposeV1 (only has intel binaries).
 - Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
-- Descending default sort order for volumes size and created column, containers started column
-- Defined sort order for container/compose state column running > some running > paused > some paused > exited > some exited > created
-- Re-organized container row actions
 - Added compose stop button if any related container is stoppable.
 - Individual compose containers are now deletable from overview
-- Runs every command on the Quickstart guide immediately.
 - Remove workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
 - Implemented an integrated terminal for containers.
-- Updated the tooltip design.
 - Show address for external links.
 
 ### Upgrades
@@ -74,6 +64,15 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
+- Minimum version to install or update Docker Desktop on macOS is now 10.15
+- Enable ComposeV2 after factory reset
+- Upgrade kernel to 5.10.124
+- Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
+- Prevents users on ARM macs without Rosetta installed from switching back to ComposeV1 (only has intel binaries).
+- Descending default sort order for volumes size and created column, containers started column.
+- Re-organized container row actions.
+- Runs every command on the Quickstart guide immediately.
+- Defined sort order for container/compose state column running > some running > paused > some paused > exited > some exited > created.
 - Fixed issues with the image list appearing empty in Docker Desktop even though there are images. Related to [docker/for-win#12693](https://github.com/docker/for-win/issues/12693) and [docker/for-mac#6347](https://github.com/docker/for-mac/issues/6347).
 - Fixed a bug that made Docker clients in some languages hang on `docker exec`. Fixes [https://github.com/apocas/dockerode/issues/534](https://github.com/apocas/dockerode/issues/534).
 - Extensions SDK: prevent failed spawned command to make Docker Desktop unexpectedly quit.
@@ -81,6 +80,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixes extensions being displayed as disabled in the left menu but they are not.
 - Fix `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
 - Fix bug where we fail to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
+- Updated the tooltip design.
 
 #### For Mac
 
@@ -98,7 +98,35 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/84025/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/84025/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/84025/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 8af32948447ddab655455542f6a12c8d752642a2bd451e2a48f76398cfd872b0</li>
+      <li><b>Mac Intel:</b> SHA-256 b2f4ad8fea37dfb7d9147f169a9ceab71d7d0d12ff912057c60b58c0e91aed35</li>
+      <li><b>Mac Arm:</b> SHA-256 a7d84117bef83764cb9bf275cd01b8ba0c43f08dbfe4d4a7d4f05549cdd81f54</li>
+      <li><b>Linux DEB:</b> SHA-256 8877443ded0dee19b1bacaa608bd81d4bb216b59ff5fc12c89489e9ac5b00e0f</li>
+      <li><b>Linux RPM:</b> SHA-256 a4a12071cdb4c3a845711eec13b97b838ae088f85f81cb5dd0db51aa6b050ed5</li>
+      <li><b>Linux Arch:</b> SHA-256 66bdf3b4eb3cd29e190cf660ede53d3e854a4ec823c2ea04a4a02a175203f880</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Bug fixes and minor changes
 
