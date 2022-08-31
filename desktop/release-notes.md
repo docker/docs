@@ -95,7 +95,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### Security 
 
 #### For Windows
-- Fix a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
+- Fixed a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
 - Fix argument injection to the Docker Desktop installer which may result in local privilege escalation.
 
 #### For all platforms
