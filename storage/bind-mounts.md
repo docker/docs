@@ -158,7 +158,7 @@ $ docker container rm devtest
 
 ### Mount into a non-empty directory on the container
 
-If you bind-mount into a non-empty directory on the container, the directory's
+If you bind-mount a directory into a non-empty directory on the container, the directory's
 existing contents are obscured by the bind mount. This can be beneficial,
 such as when you want to test a new version of your application without
 building a new image. However, it can also be surprising and this behavior
