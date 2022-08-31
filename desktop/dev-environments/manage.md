@@ -8,5 +8,4 @@ title: Manage dev environments and projects
 
 what are the post-release steps kevin can do? 
 what about debugging projects and dev environments? Or checking on the healthstatus?
-what about admin stuff? Seeing how many users are using the project?
-
+what about admin stuff? Seeing how many users are using the project? removing projects? removing access of projects?

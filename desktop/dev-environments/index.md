@@ -8,36 +8,29 @@ title: Overview
 >
 > The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
 
+With Dev Environments, you can:
 
+- Customize dev environments with everything you need for your current project.
+- Reduce the time investment needed to onboard onto new projects.
+- Hit the ground running with ready-to-code environments.
+- Avoid dependency conflicts when switching between projects or reviewing a team member's code.
 
+### Who is Dev Environments for?
 
-## QUICK Catchy benefits and what DEVENVs is
+You'll find Dev Environments useful if you are a developer that:
+- Needs to get up and running with a project or multiple projects quickly and easily.
+- Has limited time to set up all the individual project dependencies.
+- Wants a self-service experience that helps you get set up and to your code faster.
 
-With Microsoft Dev Box, organizations can:
+You'll also find Dev Environments useful if you are a developer that sets up your application's services for developer teams and wants to standardize the onboarding experience of new team members.
 
-- Maximize dev productivity with ready-to-code, self-service Dev Boxes.
-- Centralize governance of workstations running anywhere to maintain greater security, compliance, and cost efficiency.
-- Customize dev boxes with everything developers need for their current projects.
+Dev Environments provides an easy way for developer teams of all skill levels to specify simple or complex requirements for their projects, and then quickly hit the ground running.
 
-Designed to work with most major languages, frameworks and services, Lando provides an easy way for developers of all skill levels to specify simple or complex requirements for their projects, and then quickly get to work on them.
+### How does it work?
 
-## WHO IS IT FOR?
-Martines need a self-service experience so you can run different dev environments for you teamas and when you need them. Helps you get set up and to your code faster 
+Dev Environments is powered by [Docker Compose](../../compose/index.md). This allows Dev Envs to take advantage of all the benefits and features of Compose whilst adding an intuitive GUI where you can launch projects with the click of a button and have a centralized place for you to manage more than one project at a time.
 
-Kevins can efficiently configure and assign dev environments which provide the right tools for the job - 
-
-removes the onerous experience of onboarding team members. Standardizing your team's dev environments and tooling on OSX, Windows and Linuxs
-
-### HOW DOES IT WORK?
-
-Pwered by Docker Compose - This is why it is good it’s powered by Docker Compose and this is why it means it’s flexible 
-
-On a high level, your compose.yaml configuration should contain ALL the things you need to run, develop and test your project. 
-
-We've found a useful pattern here is for the senior-est, most DevOps-y person on your team to craft the initial lando configuration and be responsible for its maintenance but to generally "set it and forget it"
-
-
-Use the pages below that fits in best with your use case / Find the right manual 
+Every dev environment you want to run needs a compose.YAML which configures your application's services and lives in your project directory. But you don't need to be an expert in Docker Compose or write a compose.YAML file from scratch - there are many [sample dev environments](https://github.com/docker/awesome-compose) that provide a useful starting point for how to integrate different services.
 
 <div class="component-container">
     <!--start row-->
@@ -45,28 +38,28 @@ Use the pages below that fits in best with your use case / Find the right manual
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
              <div class="component-icon">
-                 <img src="/images/quickstart.svg" alt="Docker Desktop for Mac" width="45" height="45">
+                 <img src="/images/quickstart.svg" alt="Quickstart guide" width="45" height="45">
              </div>
-                 <h2 id="docker-for-mac"><a href="/contribute/contribute-guide/">Quickstart guide </a></h2>
-                <p>Get up and running quickly and easily with a sample dev environment. </p>
+                 <h2 id="docker-for-mac"><a href="/desktop/dev-environments/quickstart/">Quickstart guide </a></h2>
+                <p>Step-by-step instructions on how to easily get started with Dev Environments </p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <img src="/images/icon-machine@2X.png" alt="Docker Desktop for Mac" width="45" height="45">
+                 <img src="/images/icon-machine@2X.png" alt="Run a dev environment" width="45" height="45">
             </div>
-                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Run a dev environment</a></h2>
-                <p>Explore Docker's grammar guide</p>
+                <h2 id="docker-for-mac"><a href="/desktop/dev-environments/run-devenv/">Run a dev environment</a></h2>
+                <p>Get up and running with a project or multiple projects quickly and easily.</p>
          </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                <img src="/images/compose_48.svg" alt="build-devenv" width="45" height="45">
+                <img src="/images/compose_48.svg" alt="build a dev environment" width="45" height="45">
             </div>
-                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Build a dev environment</a></h2>
-                <p>Format your content to match the rest of our documentation.</p>
+                <h2 id="docker-for-linux"><a href="/desktop/dev-environments/create-devenv/">Build a dev environment</a></h2>
+                <p>Learn how to build a dev environment and onboard team members to your projects.</p>
         </div>
     </div>
 </div>

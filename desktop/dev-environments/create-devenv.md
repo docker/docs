@@ -24,6 +24,19 @@ step 3. test in a sandbox
 step 4. distribute to your team 
 
 
+#How do I make one?
+There are various ways to craft your Landofile but we've found and observed a strategy to be generally a good approach as follows:
+
+Shop around for a recipe that can serve as a good starting point. lando init is helpful for this.
+Add in additional services when you need more JUICE.
+Define more complex tooling and events to simplify difficult command patterns and automate common tasks.
+Add in some build steps to further automate setting your services up or to mix in additional project dependencies.
+Define custom services as a catch all for anything else you need.
+Create custom recipes or services to lock down your new power tools.
+Rinse and repeat
+
+
+
 
 # Share a dev environment 
 

@@ -40,7 +40,7 @@ From the Dev Environments tab in Docker Desktop, hover over the sample project a
 
 WHAT IS THE SAMPLE PROJECT???
 
-## Step four: 
+## Step four: Make changes to the code
 
 WHAT DO YOU DO AFTER THE SAMPLE PROJECT?
 
