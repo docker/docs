@@ -61,7 +61,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
-- Enable Compose V2 after factory reset.
+- Compose V2 is now enabled after factory reset.
 - Upgraded kernel to 5.10.124
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Prevent users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
