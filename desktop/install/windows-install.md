@@ -142,7 +142,7 @@ After downloading **Docker Desktop Installer.exe**, run the following command in
 If you’re using PowerShell you should run it as:
 
 ```
-Start-Process '.\win\build\Docker Desktop Installer.exe' -Wait install
+Start-Process 'Docker Desktop Installer.exe' -Wait install
 ```
 
 If using the Windows Command Prompt:
