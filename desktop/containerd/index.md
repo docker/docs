@@ -224,8 +224,7 @@ Initial implementation of the Docker commands: `run`, `commit`, `build`, `push`,
     >
     > If an older version is installed, the Docker daemon will report an error: **Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver**.  
     Install a newer version of Buildx following the instructions on [Docker Buildx Manual download](../../build/buildx/install/#manual-download).
-* The Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. 
-Disable the containerd integration feature from the Experimental features tab if you are using the Kubernetes   from Docker Desktop.
+* The Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. Disable the Containerd Image Store feature if you are using the Kubernetes from Docker Desktop.
 
 ## Feedback
 
