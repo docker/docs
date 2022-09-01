@@ -1189,7 +1189,7 @@ manuals:
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
-          title: Overview
+          title: What is Dev Environments?
         - path: /desktop/dev-environments/quickstart/
           title: Quickstart guide
         - sectiontitle: Launch

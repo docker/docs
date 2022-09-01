@@ -1,7 +1,7 @@
 ---
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
-title: Overview
+title: What is Dev Environments?
 ---
 
 > **Beta**
@@ -66,7 +66,25 @@ Every dev environment you want to run needs a compose.YAML which configures your
 </div>
 
 
-
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Still to do
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+            <p>
+            Maybe move the 'How does it work' section to its own page and expand more
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

@@ -4,7 +4,9 @@ keywords: quickstart, dev environments
 title: Quickstart guide
 ---
 
-The quickstart guide is a useful way of learning the basics of Dev Environments before geting into it more deeply.
+The quickstart guide is a useful way of learning the basics of Dev Environments before getting into it more deeply.
+
+The quickstart guide walks you through a scenario where you've been onboarded onto a new project that is building a mobile app and you have multiple environments in which to test your code changes. As a new joiner youve been tasked with TASK A. 
 
 ## Step one: Preparation
 
@@ -34,21 +36,47 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 
 ## Step two: Explore the project information 
 
+Showcase the README, contributing.md etc. 
+
 ## Step three: Launch the sample project
 
 From the Dev Environments tab in Docker Desktop, hover over the sample project and select the **Run** icon. 
 
-WHAT IS THE SAMPLE PROJECT???
+## Step four: Make changes to the code in the sandbox environment
 
-## Step four: Make changes to the code
+## Step five: Switch to the product environment and add your changes
 
-WHAT DO YOU DO AFTER THE SAMPLE PROJECT?
+## Step six: Share your code changes 
 
-AWESOME COMPOSE EXAMPLES LIVE HERE
+
 
 
 
 
 ## What's next
 - Increase your familiarity with Dev Environments by running other sample projects. Select the **See more samples** link at the bottom-right corner. 
-- If you're a 
+- Learn how to add a dev environment
+- Learn how to add a project with multiple dev environments
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Still to do
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+            <p>
+            Questions: is the Git PATH item still relevant? I'm not sure it is but need to check. So we can slim down the preparation step. 
+            To-dos: need to flesh out the quickstart in more detail, am awaiting user research results
+            Thoughts: the quickstart would also familiarise the user with the language of Dev Envs 
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>

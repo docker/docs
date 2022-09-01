@@ -85,6 +85,26 @@ This creates an image of your Dev Environment, uploads it to the Docker Hub name
 ## What's next?
 - Learn how to add and launch a project with multiple dev environments
 
-
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Still to do
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+            <p>
+            Questions: is sharing still going to be a paid feature?
+            To-dos: need to flesh out the what next - sharing? what if you need to raise an issue in the dev environment? How to check how fresh the dev environment is? can I get a snapshot of it's health
+            
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
