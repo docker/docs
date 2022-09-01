@@ -32,7 +32,7 @@ Hub publishers, such as:
 ![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
 
 The verified publisher badge signals high quality, and trust, to developers.
-Images with this badge is verified to be of high quality, and that the content
+Images with this badge are verified to be of high quality, and that the content
 can be trusted.
 
 ## Insights and analytic
@@ -75,7 +75,7 @@ limiting; users can pull these images an unlimited number of times.
 
 ## Who's eligible to become a verified publisher?
 
-Any independent software vendor who distribute software on Docker Hub can join
+Any independent software vendor who distributes software on Docker Hub can join
 the Verified Publisher Program and enjoy the benefits. Find out more by heading
 to the
 [Docker Verified Publisher Program](https://www.docker.com/partners/programs){:target="_blank"
