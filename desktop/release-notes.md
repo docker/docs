@@ -34,7 +34,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
-- Docker Desktop now runs untagged images. Fixes [https://github.com/docker/for-mac/issues/6425]
+- Docker Desktop now runs untagged images. Fixes [docker/for-mac#6425](https://github.com/docker/for-mac/issues/6425).
 - Added search capabilities to Docker Extension's Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
 - Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
 - Added compose stop button if any related container is stoppable.
