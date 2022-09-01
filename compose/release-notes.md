@@ -7,12 +7,90 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 2.10.2
+
+(2022-08-26)
+### Bug fixes
+* Properly respect `DOCKER_TLS_VERIFY` and `DOCKER_CERT_PATH` (#9792)
+
+### Changes
+* Improved `Makefile` for usage within [docker/docker-ce-packaging](https://github.com/docker/docker-ce-packaging) (#9776)
+* Revert "Apply newly loaded envvars to `DockerCli` and `APIClient`" by @milas in https://github.com/docker/compose/pull/9792
+* Makefile: mutualize local and Dockerfile build opts by @crazy-max in https://github.com/docker/compose/pull/9776
+
+
+For the full change log or additional information, check the [Compose repository 2.10.2 release page](https://github.com/docker/compose/releases/tag/v2.10.2){:target="_blank" rel="noopener" class="_"}.
+
+## 2.10.1
+
+(2022-08-24)
+### Bug fixes
+* Fix image pulls being skipped when `pull_policy` not set (#9773)
+* Restore `.sha256` checksum files in release artifacts (#9772)
+
+### Changes
+* Wake up! by @ulyssessouza in https://github.com/docker/compose/pull/9769
+* pull: always pull when policy not specified by @nicksieger in https://github.com/docker/compose/pull/9777
+* Remove error message showing exit code when using --exit-code-from by @mikesir87 in https://github.com/docker/compose/pull/9783
+* ci: fix checksums checking by @nicksieger in https://github.com/docker/compose/pull/9784
+* Pull image regardless of whether it exists locally if `tag=latest` by @laurazard in https://github.com/docker/compose/pull/9781
+* build(deps): bump github.com/moby/buildkit from 0.10.3 to 0.10.4 by @dependabot in https://github.com/docker/compose/pull/9780
+* ci: bring back individual checksum files by @nicksieger in https://github.com/docker/compose/pull/9786
+
+For the full change log or additional information, check the [Compose repository 2.10.1 release page](https://github.com/docker/compose/releases/tag/v2.10.1){:target="_blank" rel="noopener" class="_"}.
+
+
+## 2.10.0
+
+(2022-08-19)
+### Enhancements
+* Apply newly loaded envvars to "DockerCli" and "APIClient" by @ulyssessouza in https://github.com/docker/compose/pull/9745
+* Build windows/arm64 and linux/riscv64 binaries by @crazy-max in https://github.com/docker/compose/pull/9751
+
+### Bug fixes
+* Give environment variables precedence back to OS over .env by @ulyssessouza in https://github.com/docker/compose/pull/9761
+* Update usage strings for consistency by @thaJeztah in https://github.com/docker/compose/pull/9706
+* Resolve environment variables case-insensitively on Windows by @ikedam in https://github.com/docker/compose/pull/9438
+* Do not stop dependency containers by @milas in https://github.com/docker/compose/pull/9701
+* If command is ran with a compose file, apply the compose model by @ndeloof in https://github.com/docker/compose/pull/9375
+* Remove extra whitespaces in help text of some subcommands by @tkhoa2711 in https://github.com/docker/compose/pull/9710
+* Don't apply default pull policy from command line if one is defined in service configuration by @glours in https://github.com/docker/compose/pull/9720
+* Filter out commandConn.Close* warning message by @crazy-max in https://github.com/docker/compose/pull/9748
+* Don't wait for disabled dependency by @nicksieger in https://github.com/docker/compose/pull/9759
+* Apply compose model on `compose kill`, add `--remove-orphans` by @laurazard in https://github.com/docker/compose/pull/9764
+* Avoid pulling same images multiple times ⚡️ by @KoditkarVedant in https://github.com/docker/compose/pull/9173
+
+### Changes
+* Remove unused workflows, especially the pr-closed which always failed by @glours in https://github.com/docker/compose/pull/9689
+* Update Dockerfile syntax to latest stable, and rename docs Dockerfile by @thaJeztah in https://github.com/docker/compose/pull/9711
+* Use correct YAML marshal func by @milas in https://github.com/docker/compose/pull/9712
+* Run gofmt from Go 1.19 by @milas in https://github.com/docker/compose/pull/9728
+* Add `nolintlint` and clean up `nolint` directives by @milas in https://github.com/docker/compose/pull/9738
+* Better sandboxed workflow and enhanced cross compilation by @crazy-max in https://github.com/docker/compose/pull/9744
+* Fix badges by @crazy-max in https://github.com/docker/compose/pull/9747
+* Fix checksums file by @crazy-max in https://github.com/docker/compose/pull/9750
+* Bump to Go 1.18.5 by @milas in https://github.com/docker/compose/pull/9708
+* Upgrade BuildKit & docker/distribution by @milas in https://github.com/docker/compose/pull/9709
+* Bump github.com/cnabio/cnab-to-oci from 0.3.5 to 0.3.6 by @dependabot in https://github.com/docker/compose/pull/9714
+* Fix version of golangci-lint to v1.47.3, issue with v1.48.0 for now by @glours in https://github.com/docker/compose/pull/9722
+* Bump github.com/containerd/containerd from 1.6.6 to 1.6.7 by @dependabot in https://github.com/docker/compose/pull/9723
+* Update Docker CLI version use in CI to v20.10.17 by @glours in https://github.com/docker/compose/pull/9721
+* Bump github.com/containerd/containerd from 1.6.7 to 1.6.8 by @dependabot in https://github.com/docker/compose/pull/9736
+* Bump github.com/mattn/go-isatty from 0.0.14 to 0.0.16 by @dependabot in https://github.com/docker/compose/pull/9754
+
+For the full change log or additional information, check the [Compose repository 2.10.0 release page](https://github.com/docker/compose/releases/tag/v2.10.0){:target="_blank" rel="noopener" class="_"}.
+
 ## 2.9.0
 
 (2022-08-7)
+> **Important**
+>
+> Compose v2.9.0 contains changes to environment variable precedence that have since been reverted. We recommend using v2.10+ to avoid compatibility issues.
+>
+{: .important}
 
 > **Note**
->
+> 
 > This release reverts the breaking changes introduced in [Compose v2.8.0](#280) by [`compose-go v1.3.0`](https://github.com/compose-spec/compose-go/releases/tag/v1.3.0){:target="_blank" rel="noopener" class="_"}.
 
 ### Bug fixes
