@@ -311,11 +311,11 @@ build:
 ```
 
 ### secrets
-`secrets` grants access to sensitive data defined by [secrets](secrets) on a per-service build basis. Two
+`secrets` grants access to sensitive data defined by [secrets](index.md#secrets) on a per-service build basis. Two
 different syntax variants are supported: the short syntax and the long syntax.
 
 Compose implementations MUST report an error if the secret isn't defined in the
-[`secrets`](#secrets-top-level-element) section of this Compose file.
+[`secrets`](index.md#secrets-top-level-element) section of this Compose file.
 
 #### Short syntax
 
@@ -378,12 +378,12 @@ secrets:
 
 Service builds MAY be granted access to multiple secrets. Long and short syntax for secrets MAY be used in the
 same Compose file. Defining a secret in the top-level `secrets` MUST NOT imply granting any service build access to it.
-Such grant must be explicit within service specification as [secrets](spec.md#secrets) service element.
+Such grant must be explicit within service specification as [secrets](index.md#secrets) service element.
 
 ### tags
 
 `tags` defines a list of tag mappings that MUST be associated to the build image. This list comes in addition of 
-the `image` [property defined in the service section](spec.md#image)
+the `image` [property defined in the service section](index.md#image)
 
 ```yml
 tags:
@@ -393,7 +393,7 @@ tags:
 
 ### platforms
 
-`platforms` defines a list of target [platforms](spec.md#platform).
+`platforms` defines a list of target [platforms](index.md#platform).
 
 ```yml
 build:
