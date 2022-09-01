@@ -159,7 +159,7 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Beta Features
+## Experimental Features
 
 {% include experimental.md %}
 
