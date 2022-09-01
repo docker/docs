@@ -1,57 +1,93 @@
 ---
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
-title: Overview
+title: What is Dev Environments?
 ---
-
-Dev Environments boosts collaboration by allowing you to share work-in-progress code with your team members. This removes any potential merge conflicts while moving between Git branches to get your code on to their machine.
-
-Dev Environments uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
-
-You can also switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch. This makes reviewing PRs as simple as opening a new environment.
 
 > **Beta**
 >
 > The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
 
-![Dev environment intro](../images/dev-env.PNG){:width="700px"}
+With Dev Environments, you can:
 
-## Prerequisites
+- Customize dev environments with everything you need for your current project.
+- Reduce the time investment needed to onboard onto new projects.
+- Hit the ground running with ready-to-code environments.
+- Avoid dependency conflicts when switching between projects or reviewing a team member's code.
 
-Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
+### Who is Dev Environments for?
 
-- [Docker Desktop](../release-notes.md)
+You'll find Dev Environments useful if you are a developer that:
+- Needs to get up and running with a project or multiple projects quickly and easily.
+- Has limited time to set up all the individual project dependencies and are tired of following out of date README files.
+- Wants a self-service experience that helps you get set up and to your code faster.
 
-To get started with Dev Environments, you must also install the following tools and extension on your machine:
+You'll also find Dev Environments useful if you are a developer that sets up your application's services for developer teams and wants to standardize the onboarding experience of new team members. 
 
-- [Git](https://git-scm.com){:target="_blank" rel="noopener" class="_"}
-- [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
-- [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers){:target="_blank" rel="noopener" class="_"}
+Dev Environments provides an easy way for developer teams of all skill levels to specify simple or complex requirements for their projects, and then quickly hit the ground running.
 
-### Add Git to your PATH on Windows
+### How does it work?
 
-If you have already installed Git, and it's not detected properly, run the following command to check whether you can use Git with the CLI or PowerShell:
+Dev Environments is powered by [Docker Compose](../../compose/index.md). This allows Dev Envs to take advantage of all the benefits and features of Compose whilst adding an intuitive GUI where you can launch projects with the click of a button and have a centralized place for you to manage more than one project at a time.
 
-`$ git --version`
+Every dev environment you want to run needs a compose.YAML which configures your application's services and lives in your project directory. But you don't need to be an expert in Docker Compose or write a compose.YAML file from scratch - there are many [sample dev environments](https://github.com/docker/awesome-compose) that provide a useful starting point for how to integrate different services.
 
-If it doesn't detect Git as a valid command, you must reinstall Git and ensure you choose the option  **Git from the command line...** or the **Use Git and optional Unix tools...**  on the **Adjusting your PATH environment**  step.
+<div class="component-container">
+    <!--start row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+             <div class="component-icon">
+                 <img src="/images/quickstart.svg" alt="Quickstart guide" width="45" height="45">
+             </div>
+                 <h2 id="docker-for-mac"><a href="/desktop/dev-environments/quickstart/">Quickstart guide </a></h2>
+                <p>Step-by-step instructions on how to easily get started with Dev Environments </p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/images/icon-machine@2X.png" alt="Run a dev environment" width="45" height="45">
+            </div>
+                <h2 id="docker-for-mac"><a href="/desktop/dev-environments/run-devenv/">Run a dev environment</a></h2>
+                <p>Get up and running with a project or multiple projects quickly and easily.</p>
+         </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <img src="/images/compose_48.svg" alt="build a dev environment" width="45" height="45">
+            </div>
+                <h2 id="docker-for-linux"><a href="/desktop/dev-environments/create-devenv/">Build a dev environment</a></h2>
+                <p>Learn how to build a dev environment and onboard team members to your projects.</p>
+        </div>
+    </div>
+</div>
+</div>
 
-![Windows add Git to path](../images/dev-env-gitbash.png){:width="300px"}
 
-> **Note**
->
-> After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Still to do
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+            <p>
+            Maybe move the 'How does it work' section to its own page and expand more
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-## Known issues
 
-The following section lists known issues and workarounds:
 
-1. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-2. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment is emulated.
 
-## What's next?
 
-Learn how to:
-- [Create a Dev Environment](create-dev-env.md)
-- [Create a Compose Dev Environment](create-compose-dev-env.md)
-- [Share your Dev Environment](share.md)
+
