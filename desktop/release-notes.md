@@ -36,7 +36,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
 - Docker Desktop now runs untagged images. Fixes [https://github.com/docker/for-mac/issues/6425]
 - Added search capabilities to Docker Extension's Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
--  Compose V2 is now enabled by default on new installations of Docker Desktop.
 - Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
 - Added compose stop button if any related container is stoppable.
 - Individual compose containers are now deletable from the **Container** view. 
@@ -62,6 +61,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 #### For all platforms
 
 - Compose V2 is now enabled after factory reset.
+- Compose V2 is now enabled by default on new installations of Docker Desktop.
+- Precedence order of environment variables in Compose is more consistent, and clearly [documented](https://docs.docker.com/compose/envvars-precedence/).
 - Upgraded kernel to 5.10.124.
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
