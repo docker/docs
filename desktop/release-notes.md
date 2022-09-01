@@ -36,7 +36,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
 - Docker Desktop now runs untagged images. Fixes [docker/for-mac#6425](https://github.com/docker/for-mac/issues/6425).
 - Added search capabilities to Docker Extension's Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
-- Added View menu with Zoom In, Zoom Out, and Actual Size options to control the size of the Docker Desktop UI.
+- Added the ability to zoom in, out or set Docker Desktop to Actual Size. This is done by using keyboard shortcuts ⌘ + / CTRL +, ⌘ - / CTRL -, ⌘ 0 / CTRL 0 on Mac and Windows respectively, or through the View menu on Mac.
 - Added compose stop button if any related container is stoppable.
 - Individual compose containers are now deletable from the **Container** view. 
 - Removed the workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
