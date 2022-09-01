@@ -77,7 +77,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug that caused extensions to be displayed as disabled in the left menu when they are not.
 - Fixed `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
 - Fixed a bug where Docker Desktop fails to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
-- UUpdated the tooltips in Docker Desktop and MUI theme package to align with the overall system design.
+- Updated the tooltips in Docker Desktop and MUI theme package to align with the overall system design.
 - Copied terminal contents do not contain non-breaking spaces anymore.
 
 #### For Mac
