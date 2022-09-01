@@ -21,7 +21,7 @@ To enable this feature:
 2. Select the **Experimental** features tab.
 3. Next to **Use containerd for pulling and storing images**, select the checkbox.
 
-To disable this feature uncheck **Use containerd for pulling and storing images**.
+To disable this feature, clear the **Use containerd for pulling and storing images** checkbox.
 
 ![containerd feature](../images/containerd_feature_activation.png){:width="750px"}
 
