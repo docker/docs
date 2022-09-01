@@ -10,32 +10,34 @@ redirect_from:
 ## 2.10.2
 
 (2022-08-26)
+
 ### Bug fixes
-* Properly respect `DOCKER_TLS_VERIFY` and `DOCKER_CERT_PATH` (#9792)
+
+* Properly respect `DOCKER_TLS_VERIFY` and `DOCKER_CERT_PATH` environment variables. Fixes [compose#9789](https://github.com/docker/compose/issues/9789){:target="_blank" rel="noopener" class="_"}.
 
 ### Changes
-* Improved `Makefile` for usage within [docker/docker-ce-packaging](https://github.com/docker/docker-ce-packaging) (#9776)
-* Revert "Apply newly loaded envvars to `DockerCli` and `APIClient`" by @milas in https://github.com/docker/compose/pull/9792
-* Makefile: mutualize local and Dockerfile build opts by @crazy-max in https://github.com/docker/compose/pull/9776
 
+- Improved `Makefile` used in [docker/docker-ce-packaging#742](https://github.com/docker/docker-ce-packaging/pull/742){:target="_blank" rel="noopener" class="_"}.
 
 For the full change log or additional information, check the [Compose repository 2.10.2 release page](https://github.com/docker/compose/releases/tag/v2.10.2){:target="_blank" rel="noopener" class="_"}.
+
 
 ## 2.10.1
 
 (2022-08-24)
+
 ### Bug fixes
-* Fix image pulls being skipped when `pull_policy` not set (#9773)
-* Restore `.sha256` checksum files in release artifacts (#9772)
+
+- Fixed image pulls being skipped when `pull_policy` was not set. Fixes [compose#9773](https://github.com/docker/compose/issues/9773){:target="_blank" rel="noopener" class="_"}.
+- Restored `.sha256` checksum files in release artifacts. Fixes [compose#9772](https://github.com/docker/compose/issues/9772){:target="_blank" rel="noopener" class="_"}.
 
 ### Changes
-* Wake up! by @ulyssessouza in https://github.com/docker/compose/pull/9769
-* pull: always pull when policy not specified by @nicksieger in https://github.com/docker/compose/pull/9777
-* Remove error message showing exit code when using --exit-code-from by @mikesir87 in https://github.com/docker/compose/pull/9783
-* ci: fix checksums checking by @nicksieger in https://github.com/docker/compose/pull/9784
-* Pull image regardless of whether it exists locally if `tag=latest` by @laurazard in https://github.com/docker/compose/pull/9781
-* build(deps): bump github.com/moby/buildkit from 0.10.3 to 0.10.4 by @dependabot in https://github.com/docker/compose/pull/9780
-* ci: bring back individual checksum files by @nicksieger in https://github.com/docker/compose/pull/9786
+
+- Remove error message showing exit code when using --exit-code-from. Fixes [compose#9782](https://github.com/docker/compose/issues/9782){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose pull` to pull images even when they existed locally if `tag=latest`.
+- CI: Fixed checksums checking and brought back individual checksum files.
+- Dependencies update: Bumped github.com/moby/buildkit from [0.10.3 to 0.10.4](https://github.com/moby/buildkit/releases/tag/v0.10.4){:target="_blank" rel="noopener" class="_"}.
+
 
 For the full change log or additional information, check the [Compose repository 2.10.1 release page](https://github.com/docker/compose/releases/tag/v2.10.1){:target="_blank" rel="noopener" class="_"}.
 
@@ -43,49 +45,44 @@ For the full change log or additional information, check the [Compose repository
 ## 2.10.0
 
 (2022-08-19)
+
 ### Enhancements
-* Apply newly loaded envvars to "DockerCli" and "APIClient" by @ulyssessouza in https://github.com/docker/compose/pull/9745
-* Build windows/arm64 and linux/riscv64 binaries by @crazy-max in https://github.com/docker/compose/pull/9751
+- Applied newly loaded environment variables to `DockerCli` and `APIClient`. Fixes [compose#9210](https://github.com/docker/compose/issues/9210){:target="_blank" rel="noopener" class="_"}.
+- Added support for windows/arm64 and linux/riscv64.
 
 ### Bug fixes
-* Give environment variables precedence back to OS over .env by @ulyssessouza in https://github.com/docker/compose/pull/9761
-* Update usage strings for consistency by @thaJeztah in https://github.com/docker/compose/pull/9706
-* Resolve environment variables case-insensitively on Windows by @ikedam in https://github.com/docker/compose/pull/9438
-* Do not stop dependency containers by @milas in https://github.com/docker/compose/pull/9701
-* If command is ran with a compose file, apply the compose model by @ndeloof in https://github.com/docker/compose/pull/9375
-* Remove extra whitespaces in help text of some subcommands by @tkhoa2711 in https://github.com/docker/compose/pull/9710
-* Don't apply default pull policy from command line if one is defined in service configuration by @glours in https://github.com/docker/compose/pull/9720
-* Filter out commandConn.Close* warning message by @crazy-max in https://github.com/docker/compose/pull/9748
-* Don't wait for disabled dependency by @nicksieger in https://github.com/docker/compose/pull/9759
-* Apply compose model on `compose kill`, add `--remove-orphans` by @laurazard in https://github.com/docker/compose/pull/9764
-* Avoid pulling same images multiple times ⚡️ by @KoditkarVedant in https://github.com/docker/compose/pull/9173
+- Reverted environment variables precedence to OS over `.env` file. Fixes [compose#9737](https://github.com/docker/compose/issues/9737){:target="_blank" rel="noopener" class="_"}.
+- Updated usage strings for consistency.
+- Resolved environment variables case-insensitively on Windows. Fixes [compose#9431](https://github.com/docker/compose/issues/9431){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose up` so dependency containers aren't stopped when a stop signal is issued. This keeps parity with v1 behavior-wise.
+Fixes [compose#9696](https://github.com/docker/compose/issues/9696){:target="_blank" rel="noopener" class="_"}.
+- Fixed commands that start/restart/pause/unpause so that, if ran from the Compose file, the Compose model is also applied. Fixes [compose#9705](https://github.com/docker/compose/issues/9705){:target="_blank" rel="noopener" class="_"} and [compose#9705](https://github.com/docker/compose/issues/9671){:target="_blank" rel="noopener" class="_"}.
+- Removed extra whitespaces in help text of some subcommands.
+- Fixed `compose create` to not override service pull policy when the value from the command line is configured as the default. Fixes [compose#9717](https://github.com/docker/compose/issues/9717){:target="_blank" rel="noopener" class="_"}.
+- Filtered out "commandConn.Close- warning" message. Fixes[compose#8544](https://github.com/docker/compose/issues/8544){:target="_blank" rel="noopener" class="_"}.
+- Fixed up/start/run to not wait for disabled dependency. Fixes [compose#9591](https://github.com/docker/compose/issues/9591){:target="_blank" rel="noopener" class="_"}.
+- Applied Compose model on `compose kill`, added `--remove-orphans` option. Fixes [compose#9742](https://github.com/docker/compose/issues/9742){:target="_blank" rel="noopener" class="_"}.
+- Fixed `compose pull` to avoid pulling the same images multiple times. Fixes [compose#8768](https://github.com/docker/compose/issues/8768){:target="_blank" rel="noopener" class="_"}.
 
 ### Changes
-* Remove unused workflows, especially the pr-closed which always failed by @glours in https://github.com/docker/compose/pull/9689
-* Update Dockerfile syntax to latest stable, and rename docs Dockerfile by @thaJeztah in https://github.com/docker/compose/pull/9711
-* Use correct YAML marshal func by @milas in https://github.com/docker/compose/pull/9712
-* Run gofmt from Go 1.19 by @milas in https://github.com/docker/compose/pull/9728
-* Add `nolintlint` and clean up `nolint` directives by @milas in https://github.com/docker/compose/pull/9738
-* Better sandboxed workflow and enhanced cross compilation by @crazy-max in https://github.com/docker/compose/pull/9744
-* Fix badges by @crazy-max in https://github.com/docker/compose/pull/9747
-* Fix checksums file by @crazy-max in https://github.com/docker/compose/pull/9750
-* Bump to Go 1.18.5 by @milas in https://github.com/docker/compose/pull/9708
-* Upgrade BuildKit & docker/distribution by @milas in https://github.com/docker/compose/pull/9709
-* Bump github.com/cnabio/cnab-to-oci from 0.3.5 to 0.3.6 by @dependabot in https://github.com/docker/compose/pull/9714
-* Fix version of golangci-lint to v1.47.3, issue with v1.48.0 for now by @glours in https://github.com/docker/compose/pull/9722
-* Bump github.com/containerd/containerd from 1.6.6 to 1.6.7 by @dependabot in https://github.com/docker/compose/pull/9723
-* Update Docker CLI version use in CI to v20.10.17 by @glours in https://github.com/docker/compose/pull/9721
-* Bump github.com/containerd/containerd from 1.6.7 to 1.6.8 by @dependabot in https://github.com/docker/compose/pull/9736
-* Bump github.com/mattn/go-isatty from 0.0.14 to 0.0.16 by @dependabot in https://github.com/docker/compose/pull/9754
+- Updated Dockerfile syntax to latest stable and renamed docs Dockerfile.
+- Fixed version of golangci-lint to v1.47.3, issue with v1.48.0 for now.
+- Dependencies update: Upgraded BuildKit & docker/distribution.
+- Dependencies update: Updated Docker CLI version used in CI to v20.10.17.
+- Dependencies update: Bumped github.com/containerd/containerd from [1.6.6 to 1.6.7](https://github.com/containerd/containerd/releases/tag/v1.6.7){:target="_blank" rel="noopener" class="_"}.
+- Dependencies update: Bump github.com/containerd/containerd from [1.6.7 to 1.6.8](https://github.com/containerd/containerd/releases/tag/v1.6.8){:target="_blank" rel="noopener" class="_"}.
+- Dependencies update: Bumped to Go 1.18.5.
+- Dependencies update: Bumped github.com/cnabio/cnab-to-oci from [0.3.5 to 0.3.6](https://github.com/cnabio/cnab-to-oci/releases/tag/v0.3.6){:target="_blank" rel="noopener" class="_"}.
 
-For the full change log or additional information, check the [Compose repository 2.10.0 release page](https://github.com/docker/compose/releases/tag/v2.10.0){:target="_blank" rel="noopener" class="_"}.
+For the full change log, check the [Compose repository 2.10.0 release page](https://github.com/docker/compose/releases/tag/v2.10.0){:target="_blank" rel="noopener" class="_"}.
 
 ## 2.9.0
 
 (2022-08-7)
+
 > **Important**
 >
-> Compose v2.9.0 contains changes to environment variable precedence that have since been reverted. We recommend using v2.10+ to avoid compatibility issues.
+> Compose v2.9.0 contains changes to the environment variable's precedence that have since been reverted. We recommend using v2.10+ to avoid compatibility issues.
 >
 {: .important}
 
@@ -157,7 +154,7 @@ For the full change log or additional information, check the [Compose repository
 - Used appropriate dependency condition for one-shot containers when running `compose up --wait`. Fixes [compose#9606](https://github.com/docker/compose/pull/9572){:target="_blank" rel="noopener" class="_"}.
 - Fixed environment variable expansion.
 - Validated depended-on services exist in consistency check. Fixes [compose#8910](https://github.com/docker/compose/issues/8910){:target="_blank" rel="noopener" class="_"}.
-- Fixed hash usage in environment values. Fixes [compose#9509](https://github.com/docker/compose/issues/9509){:target="_blank" rel="noopener" class="_"}. 
+- Fixed hash usage in environment values. Fixes [compose#9509](https://github.com/docker/compose/issues/9509){:target="_blank" rel="noopener" class="_"}.
 - Docker Build: added fix to respect dependency order for classic builder. Fixes [compose#8538](https://github.com/docker/compose/issues/8538){:target="_blank" rel="noopener" class="_"}.
 - Fixed panic caused by empty string argument. Fixes [compose-switch#35](https://github.com/docker/compose-switch/issues/35){:target="_blank" rel="noopener" class="_"}.
 - Fixed start/restart as to not impact one-off containers. Fixes [compose#9509](https://github.com/docker/compose/issues/9044){:target="_blank" rel="noopener" class="_"}.
@@ -192,14 +189,14 @@ For the full change log or additional information, check the [Compose repository
 - Fixed `compose up` 'service not found' errors when using `--no-deps` option. Fixes [#9427](https://github.com/docker/compose/issues/9427){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose down` to respect `COMPOSE_REMOVE_ORPHANS` environment variable. Fixes [#9562](https://github.com/docker/compose/issues/9562){:target="_blank" rel="noopener" class="_"}.
 - Fixed project-level bind mount volumes. Fixes [docker/for-mac#6317](https://github.com/docker/for-mac/issues/6317){:target="_blank" rel="noopener" class="_"}.
-- Fixed parsing of properties `deploy.limits.cpus` and `deploy.limits.pids` to respect floating-point values. Fixes [#9542](https://github.com/docker/compose/issues/9542){:target="_blank" rel="noopener" class="_"} and [#9501](https://github.com/docker/compose/issues/9501){:target="_blank" rel="noopener" class="_"}. 
+- Fixed parsing of properties `deploy.limits.cpus` and `deploy.limits.pids` to respect floating-point values. Fixes [#9542](https://github.com/docker/compose/issues/9542){:target="_blank" rel="noopener" class="_"} and [#9501](https://github.com/docker/compose/issues/9501){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose ps` output to list all exposed ports. Fixes [#9257](https://github.com/docker/compose/issues/9527){:target="_blank" rel="noopener" class="_"}.
 - Fixed spelling mistakes in `compose ps` code.
 - Fixed `docker compose` to honor `--no-ansi` even when deprecated option is requested.
 - Fixed network name and network ID possible ambiguity.
 
 
-### Changes 
+### Changes
 
 - Upgrade: compose-go [v1.2.8](https://github.com/compose-spec/compose-go/releases/tag/v1.2.8){:target="_blank" rel="noopener" class="_"}.
 - Upgrade: buildx [v0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2){:target="_blank" rel="noopener" class="_"}.
@@ -366,7 +363,7 @@ For the full change log or additional information, check the [Compose repository
 
 (2022-03-8 to 2022-04-14)
 
-For the releases later than 1.29.2 and earlier than 2.3.4, please check the [Compose repository release pages](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.  
+For the releases later than 1.29.2 and earlier than 2.3.4, please check the [Compose repository release pages](https://github.com/docker/compose/releases){:target="_blank" rel="noopener" class="_"}.
 
 ## 1.29.2
 (2021-05-10)
@@ -429,7 +426,7 @@ For the releases later than 1.29.2 and earlier than 2.3.4, please check the [Com
 
 - Added `compose.yml` and `compose.yaml` to the default filename list.
 
-## 1.28.5 
+## 1.28.5
 (2021-02-26)
 
 ### Bugs
@@ -550,7 +547,7 @@ For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https:/
 
 - Updated READMEs.
 
-## 1.27.4 
+## 1.27.4
 (2020-09-24)
 
 ### Bug fixes
@@ -561,7 +558,7 @@ For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https:/
 
 - Added protocol to the Docker socket address.
 
-## 1.27.3 
+## 1.27.3
 (2020-09-16)
 
 ### Bug fixes
@@ -596,7 +593,7 @@ For a list of PRs and issues fixed in this release, see [Compose 1.28.3](https:/
 
 - Preserved the version number configured in the Compose file.
 
-## 1.27.0 
+## 1.27.0
 (2020-09-07)
 
 ### Features
