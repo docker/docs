@@ -157,9 +157,9 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Experimental Features
+## Beta Features
 
-{% include experimental.md %}
+{% include beta.md %}
 
 ### Enable the new Apple Virtualization framework
 
