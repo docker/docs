@@ -315,9 +315,8 @@ container images.
 
 1. Go to <https://dso.docker.com> and sign in using your Docker ID credentials.
 2. Connect your GitHub account as instructed in the
-   [GitHub app page](./github){: target="blank" rel="noopener" class=""}.
-   Install the app into the GitHub account that contains your GitHub Container
-   Registry.
+   [GitHub app page](./integrate/github.md#connect-to-github). Install the app into the GitHub
+   account that contains your GitHub Container Registry.
 3. Open the [**Integrations**](https://dso.docker.com/r/auth/integrations){:
    target="blank" rel="noopener" class=""} tab, and click the **Configure** link
    next to the **GitHub Container Registry** in the list of integrations.
