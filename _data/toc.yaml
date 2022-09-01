@@ -1264,6 +1264,8 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
+    - path: /desktop/containerd/
+      title: Containerd Image Store (Beta)
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/

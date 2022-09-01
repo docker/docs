@@ -24,12 +24,119 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## Docker Desktop 4.12.0
+2022-09-01
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### New
+
+- Added the ability to use containerd for pulling and storing images. This is an experimental feature. 
+- Docker Desktop now runs untagged images. Fixes [docker/for-mac#6425](https://github.com/docker/for-mac/issues/6425).
+- Added search capabilities to Docker Extension's Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
+- Added the ability to zoom in, out or set Docker Desktop to Actual Size. This is done by using keyboard shortcuts ⌘ + / CTRL +, ⌘ - / CTRL -, ⌘ 0 / CTRL 0 on Mac and Windows respectively, or through the View menu on Mac.
+- Added compose stop button if any related container is stoppable.
+- Individual compose containers are now deletable from the **Container** view. 
+- Removed the workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
+- Implemented an integrated terminal for containers.
+- Added a tooltip to display the link address for all external links by default.
+
+### Upgrades
+
+- [Docker Compose v2.10.2](https://github.com/docker/compose/releases/tag/v2.10.2)
+- [Docker Scan v0.19.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.19.0)
+- [Kubernetes v1.25.0](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.0)
+- [Go 1.19](https://github.com/golang/go/releases/tag/go1.19)
+- [cri-dockerd v0.2.5](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.5)
+- [Buildx v0.9.1](https://github.com/docker/buildx/releases/tag/v0.9.1)
+- [containerd v1.6.8](https://github.com/containerd/containerd/releases/tag/v1.6.8)
+- [containerd v1.6.7](https://github.com/containerd/containerd/releases/tag/v1.6.7)
+- [runc v1.1.4](https://github.com/opencontainers/runc/releases/tag/v1.1.4)
+- [runc v1.1.3](https://github.com/opencontainers/runc/releases/tag/v1.1.3)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Compose V2 is now enabled after factory reset.
+- Compose V2 is now enabled by default on new installations of Docker Desktop.
+- Precedence order of environment variables in Compose is more consistent, and clearly [documented](https://docs.docker.com/compose/envvars-precedence/).
+- Upgraded kernel to 5.10.124.
+- Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
+- Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
+- Changed the default sort order to descending for volume size and the **Created** column, along with the container's **Started** column.
+- Re-organized container row actions by keeping only the start/stop and delete actions visible at all times, while allowing access to the rest via the row menu item.
+- The Quickstart guide now runs every command immediately.
+- Defined the sort order for container/compose **Status** column to running > some running > paused > some paused > exited > some exited > created.
+- Fixed issues with the image list appearing empty in Docker Desktop even though there are images. Related to [docker/for-win#12693](https://github.com/docker/for-win/issues/12693) and [docker/for-mac#6347](https://github.com/docker/for-mac/issues/6347).
+- Defined what images are "in use" based on whether or not system containers are displayed. If system containers related to Kubernetes and Extensions are not displayed, the related images are not defined as "in use."
+- Fixed a bug that made Docker clients in some languages hang on `docker exec`. Fixes [https://github.com/apocas/dockerode/issues/534](https://github.com/apocas/dockerode/issues/534).
+- A failed spawned command when building an extension no longer causes Docker Desktop to unexpectedly quit.
+- Fixed a bug that caused extensions to be displayed as disabled in the left menu when they are not.
+- Fixed `docker login` to private registries when Registry Access Management is enabled and access to Docker Hub is blocked.
+- Fixed a bug where Docker Desktop fails to start the Kubernetes cluster if the current cluster metadata is not stored in the `.kube/config` file.
+- Updated the tooltips in Docker Desktop and MUI theme package to align with the overall system design.
+- Copied terminal contents do not contain non-breaking spaces anymore.
+
+#### For Mac
+
+- Minimum version to install or update Docker Desktop on macOS is now 10.15. Fixes [docker/for-mac#6007](https://github.com/docker/for-mac/issues/6007).
+- Fixed a bug where the Tray menu incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
+- Fixed a bug that didn't restart Docker Desktop after applying an update.
+- Fixed a bug that caused the connection to Docker to be lost when the computer sleeps if a user is using virtualization.framework and restrictive firewall software.
+- Fixed a bug that caused Docker Desktop to run in the background even after a user had quit the application.  Fixes [https://github.com/docker/for-mac/issues/6440]
+- Disabled both Virtualization Framework and VirtioFS for users running macOS < 12.5
+
+#### For Windows
+
+- Fixed a bug where versions displayed during an update could be incorrect. Fixes [for-win/issues#12822](https://github.com/docker/for-win/issues/12822).
+
+### Security 
+
+#### For all platforms
+- Fix RCE via query parameters in the message-box route in the Electron client.
+- Fix RCE via extension description/changelog which could be abused by a malicious extension.
+
+#### For Windows
+- Fixed a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
+- Fixed the argument injection to the Docker Desktop installer which may result in local privilege escalation.
+
 ## Docker Desktop 4.11.1
 2022-08-05
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/84025/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/84025/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/84025/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 8af32948447ddab655455542f6a12c8d752642a2bd451e2a48f76398cfd872b0</li>
+      <li><b>Mac Intel:</b> SHA-256 b2f4ad8fea37dfb7d9147f169a9ceab71d7d0d12ff912057c60b58c0e91aed35</li>
+      <li><b>Mac Arm:</b> SHA-256 a7d84117bef83764cb9bf275cd01b8ba0c43f08dbfe4d4a7d4f05549cdd81f54</li>
+      <li><b>Linux DEB:</b> SHA-256 8877443ded0dee19b1bacaa608bd81d4bb216b59ff5fc12c89489e9ac5b00e0f</li>
+      <li><b>Linux RPM:</b> SHA-256 a4a12071cdb4c3a845711eec13b97b838ae088f85f81cb5dd0db51aa6b050ed5</li>
+      <li><b>Linux Arch:</b> SHA-256 66bdf3b4eb3cd29e190cf660ede53d3e854a4ec823c2ea04a4a02a175203f880</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Bug fixes and minor changes
 

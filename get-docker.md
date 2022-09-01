@@ -8,12 +8,11 @@ redirect_from:
 - /installation/
 ---
 
-> **Update to the Docker Desktop terms**
+> **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) now requires a paid
+> employees OR more than $10 million USD in annual revenue) and in government entities requires a paid
 > subscription.
-{: .important}
 
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so you

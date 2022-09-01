@@ -21,6 +21,20 @@ When you hover over individual containers, you can also:
 - Click **Open in Visual Studio Code** to open the application in VS Code.
 - Open the port exposed by the container in a browser.
 
+### Integrated terminal
+
+You also have the option to open an integrated terminal, on a running container, directly within Docker Desktop. This allows you to quickly execute commands within your container so you can understand its current state or debug when something goes wrong.
+
+Using the integrated terminal is the same as running `docker exec -it <container-id> /bin/sh`, or `docker exec -it <container-id> cmd.exe` if you are using Windows containers, in your external terminal. It also:
+
+- Automatically detects the default user for a running container from the image's Dockerfile. If no use is specified it defaults to `root`.
+- Persists your session if you navigate to another part of the Docker Dashboard and then return.
+- Supports copy, paste, search, and clearing your session.
+
+To open the integrated terminal, hover over your running container and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
+
+ To use your external terminal, change your settings.
+
 ## Inspect a container
 
 You can obtain detailed information about the container when you select a container.
