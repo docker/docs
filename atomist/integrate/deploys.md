@@ -21,7 +21,7 @@ both increasing and decreasing. This can be integrated in several ways:
 Each Atomist workspace exposes an endpoint to call whenever an image is
 deployed. All subsequent scans will now be compared against each recorded
 environment. Look up the endpoint URL in the
-[Atomist app](https://dso.atomist.com/r/auth/integrations).
+[Atomist app](https://dso.docker.com/r/auth/integrations).
 
 ![integration](img/deploy/integration.png)
 

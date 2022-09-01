@@ -43,11 +43,11 @@ team=<replace this>
 
 The `apiKey` and `url` must be filled in with your values from your Atomist
 workspace. You can find these values in the
-[integrations tab](https://dso.atomist.com/r/auth/integrations).
+[integrations tab](https://dso.docker.com/r/auth/integrations).
 
 You'll also need your `id` for your Atomist `team`. This is the nine character
 value that you'll find at the top of
-[this page](https://dso.atomist.com/r/auth/policies).
+[this page](https://dso.docker.com/r/auth/policies).
 
 ![workspace id](./img/kubernetes/settings.png)
 
