@@ -61,11 +61,11 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 Docker Desktop is licensed under the Docker Subscription Service Agreement. When you download and install Docker Desktop, you will be asked to agree to the updated terms.
 
-Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms of use for Docker Desktop.
+Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} states: 
 
-- It **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
-- It requires a paid subscription for professional use in larger enterprises.
-- The existing Docker Free subscription has been renamed **Docker Personal** and we have introduced a Docker Business subscription .
+ - Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+ - Otherwise, it requires a paid subscription for professional use.
+- Paid subscriptions are also required for government entities.
 - The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 
 Please read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected.
