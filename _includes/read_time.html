@@ -1,6 +1,6 @@
 {%- unless page.skip_read_time == true -%}
 {%- assign words = content | number_of_words -%}
 {%- if words >= 360 -%}
-<em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes</em>
+<em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes &emsp;</em>
 {%- endif -%}
 {%- endunless -%}

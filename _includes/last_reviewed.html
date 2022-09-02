@@ -1,6 +1,13 @@
 {%- unless page.skip_read_time == true -%}
 {%- if page.reviewed -%}
-<em class="reading-time"> Last reviewed: {{ page.reviewed | date: '%Y-%m-%d'}}</em>
+<i class="fa fa-check reading-time" aria-hidden="true"></i>
+<em class="reading-time"> Last reviewed: {{ page.reviewed }}</em>
 <!--<em class="reading-time">&emsp; Popular page </em><img class="reviewed-time" src="/images/info_icon.png"  width="10" height="10" style=" display: inline-block;" alt="Popular page" title="This is a popular page. Popular pages are reviewed periodically. Last reviewed on {{ page.reviewed | date: '%Y-%m-%d'}}."/>-->
+{%- elsif site.data.last_updated[page.path] != Nil -%}
+
+   {%- assign updated = site.data.last_updated[page.path] -%}
+
+    <em class="reading-time"> Last updated: {{ updated.date }}</em> 
+
 {%- endif -%}
 {%- endunless -%}

@@ -1,0 +1,3808 @@
+.docker/Dockerfile.devenv:
+    date: 2021-06-22
+.docker/config.json:
+    date: 2021-06-22
+.dockerignore:
+    date: 2022-07-18
+.editorconfig:
+    date: 2021-07-09
+.env:
+    date: 2020-02-21
+.gitattributes:
+    date: 2021-05-26
+.github/CODEOWNERS:
+    date: 2022-06-23
+.github/ISSUE_TEMPLATE.md:
+    date: 2021-11-22
+.github/PULL_REQUEST_TEMPLATE.md:
+    date: 2022-04-26
+.github/workflows/build.yml:
+    date: 2022-07-18
+.github/workflows/clean-pr.yml:
+    date: 2022-07-18
+.github/workflows/publish.yml:
+    date: 2022-07-28
+.gitignore:
+    date: 2022-07-28
+.mdlrc.style.rb:
+    date: 2022-07-28
+.nojekyll:
+    date: 2018-04-11
+.ruby-version:
+    date: 2022-05-25
+404.md:
+    date: 2020-10-21
+CONTRIBUTING.md:
+    date: 2022-02-02
+Dockerfile:
+    date: 2022-08-02
+Gemfile:
+    date: 2022-07-25
+Gemfile.lock:
+    date: 2022-07-25
+LICENSE:
+    date: 2016-09-30
+Makefile:
+    date: 2022-07-27
+README.md:
+    date: 2022-02-02
+_config.yml:
+    date: 2022-07-29
+_config_production.yml:
+    date: 2022-07-28
+_data/advisories.yaml:
+    date: 2021-08-09
+_data/buildx/docker_buildx.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_bake.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_build.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_create.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_du.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_imagetools.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_imagetools_create.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_imagetools_inspect.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_inspect.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_install.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_ls.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_prune.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_rm.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_stop.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_uninstall.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_use.yaml:
+    date: 2022-03-10
+_data/buildx/docker_buildx_version.yaml:
+    date: 2022-03-10
+_data/compose-cli/docker_compose.yaml:
+    date: 2022-07-21
+_data/compose-cli/docker_compose_build.yaml:
+    date: 2022-04-01
+_data/compose-cli/docker_compose_convert.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_cp.yaml:
+    date: 2022-07-21
+_data/compose-cli/docker_compose_create.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_down.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_events.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_exec.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_images.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_kill.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_logs.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_ls.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_pause.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_port.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_ps.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_pull.yaml:
+    date: 2022-07-21
+_data/compose-cli/docker_compose_push.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_restart.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_rm.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_run.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_start.yaml:
+    date: 2021-06-09
+_data/compose-cli/docker_compose_stop.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_top.yaml:
+    date: 2021-09-13
+_data/compose-cli/docker_compose_unpause.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_up.yaml:
+    date: 2022-04-29
+_data/compose-cli/docker_compose_version.yaml:
+    date: 2022-04-29
+_data/docker-app/docker_app.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_bundle.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_completion.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_init.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_inspect.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_install.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_list.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_pull.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_push.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_render.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_status.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_uninstall.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_upgrade.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_validate.yaml:
+    date: 2021-06-02
+_data/docker-app/docker_app_version.yaml:
+    date: 2021-06-02
+_data/docsarchive/archives.yaml:
+    date: 2020-02-25
+_data/engine-cli/docker.yaml:
+    date: 2020-04-20
+_data/engine-cli/docker_attach.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_build.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_builder.yaml:
+    date: 2019-05-16
+_data/engine-cli/docker_builder_build.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_builder_prune.yaml:
+    date: 2020-03-15
+_data/engine-cli/docker_checkpoint.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_checkpoint_create.yaml:
+    date: 2018-11-26
+_data/engine-cli/docker_checkpoint_ls.yaml:
+    date: 2018-11-26
+_data/engine-cli/docker_checkpoint_rm.yaml:
+    date: 2018-11-26
+_data/engine-cli/docker_commit.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_config.yaml:
+    date: 2021-05-04
+_data/engine-cli/docker_config_create.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_config_inspect.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_config_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_config_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_container.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_attach.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_commit.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_cp.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_create.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_container_diff.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_exec.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_container_export.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_inspect.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_kill.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_logs.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_container_ls.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_container_pause.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_port.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_prune.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_container_rename.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_restart.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_rm.yaml:
+    date: 2020-02-10
+_data/engine-cli/docker_container_run.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_container_start.yaml:
+    date: 2018-11-26
+_data/engine-cli/docker_container_stats.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_stop.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_top.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_unpause.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_container_update.yaml:
+    date: 2019-05-16
+_data/engine-cli/docker_container_wait.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_context.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_context_create.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_context_export.yaml:
+    date: 2021-07-02
+_data/engine-cli/docker_context_import.yaml:
+    date: 2020-09-29
+_data/engine-cli/docker_context_inspect.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_context_ls.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_context_rm.yaml:
+    date: 2019-05-16
+_data/engine-cli/docker_context_update.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_context_use.yaml:
+    date: 2020-09-29
+_data/engine-cli/docker_cp.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_create.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_diff.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_events.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_exec.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_export.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_history.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_image.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_image_build.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_image_history.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_image_import.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_image_inspect.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_image_load.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_image_ls.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_image_prune.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_image_pull.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_image_push.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_image_rm.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_image_save.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_image_tag.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_images.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_import.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_info.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_inspect.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_kill.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_load.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_login.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_logout.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_logs.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_manifest.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_manifest_annotate.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_manifest_create.yaml:
+    date: 2018-11-26
+_data/engine-cli/docker_manifest_inspect.yaml:
+    date: 2018-11-26
+_data/engine-cli/docker_manifest_push.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_manifest_rm.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_network.yaml:
+    date: 2019-05-16
+_data/engine-cli/docker_network_connect.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_network_create.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_network_disconnect.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_network_inspect.yaml:
+    date: 2019-05-16
+_data/engine-cli/docker_network_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_network_prune.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_network_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_node.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_node_demote.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_node_inspect.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_node_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_node_promote.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_node_ps.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_node_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_node_update.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_pause.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_plugin_create.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_disable.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_enable.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_inspect.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_install.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_plugin_push.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_set.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_plugin_upgrade.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_port.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_ps.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_pull.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_push.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_rename.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_restart.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_rmi.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_run.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_save.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_search.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_secret.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_secret_create.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_secret_inspect.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_secret_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_secret_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_service.yaml:
+    date: 2020-04-20
+_data/engine-cli/docker_service_create.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_service_inspect.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_service_logs.yaml:
+    date: 2020-12-09
+_data/engine-cli/docker_service_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_service_ps.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_service_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_service_rollback.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_service_scale.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_service_update.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_stack.yaml:
+    date: 2021-07-02
+_data/engine-cli/docker_stack_deploy.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_stack_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_stack_ps.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_stack_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_stack_services.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_start.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_stats.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_stop.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_swarm_ca.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm_init.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm_join-token.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm_join.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm_leave.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm_unlock-key.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm_unlock.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_swarm_update.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_system.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_system_df.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_system_events.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_system_info.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_system_prune.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_tag.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_top.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_trust.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_trust_inspect.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_trust_key.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_trust_key_generate.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_trust_key_load.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_trust_revoke.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_trust_sign.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_trust_signer.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_trust_signer_add.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_trust_signer_remove.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_unpause.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_update.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_version.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_volume.yaml:
+    date: 2018-03-21
+_data/engine-cli/docker_volume_create.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_volume_inspect.yaml:
+    date: 2021-10-07
+_data/engine-cli/docker_volume_ls.yaml:
+    date: 2022-04-01
+_data/engine-cli/docker_volume_prune.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_volume_rm.yaml:
+    date: 2021-08-21
+_data/engine-cli/docker_wait.yaml:
+    date: 2021-08-21
+_data/glossary.yaml:
+    date: 2022-07-27
+_data/staging-container/Dockerfile:
+    date: 2017-07-18
+_data/toc.yaml:
+    date: 2022-07-29
+_deploy/nginx/default.conf:
+    date: 2020-02-28
+_includes/analytics/google_analytics.html:
+    date: 2020-05-20
+_includes/analytics/polldaddy.html:
+    date: 2020-10-13
+_includes/api-version-matrix.md:
+    date: 2020-12-09
+_includes/breadcrumbs.html:
+    date: 2021-09-10
+_includes/cli.md:
+    date: 2022-04-30
+_includes/configure-registry-json.md:
+    date: 2022-07-27
+_includes/content/compose-extfields-sub.md:
+    date: 2020-10-24
+_includes/content/compose-matrix.md:
+    date: 2021-05-07
+_includes/content/compose-var-sub.md:
+    date: 2021-08-14
+_includes/content/moby.md:
+    date: 2020-04-01
+_includes/content/ssh/ssh-add-keys-to-agent.md:
+    date: 2018-08-21
+_includes/content/ssh/ssh-copy-key.md:
+    date: 2017-08-16
+_includes/content/ssh/ssh-find-keys.md:
+    date: 2018-01-25
+_includes/content/ssh/ssh-gen-keys.md:
+    date: 2017-08-16
+_includes/content/ssh/ssh-overview.md:
+    date: 2020-10-13
+_includes/deploy.md:
+    date: 2021-08-03
+_includes/desktop-install.html:
+    date: 2022-07-28
+_includes/desktop-license-update.md:
+    date: 2022-05-12
+_includes/desktop-linux-launch.md:
+    date: 2022-05-06
+_includes/desktop-update.md:
+    date: 2022-07-13
+_includes/eula-modal.html:
+    date: 2021-08-31
+_includes/eula.md:
+    date: 2021-09-01
+_includes/experimental-feature.md:
+    date: 2019-06-10
+_includes/experimental.md:
+    date: 2021-01-22
+_includes/footer.html:
+    date: 2022-07-28
+_includes/github-pr.md:
+    date: 2017-04-20
+_includes/guides/create-dockerfile.md:
+    date: 2021-08-25
+_includes/guides/enable-buildkit.md:
+    date: 2021-08-25
+_includes/head.html:
+    date: 2022-07-27
+_includes/header.html:
+    date: 2021-04-30
+_includes/install-script.md:
+    date: 2021-07-26
+_includes/landing-page/community-banner.html:
+    date: 2022-03-04
+_includes/landing-page/dev-environments.html:
+    date: 2021-08-12
+_includes/landing-page/develop-with-docker.html:
+    date: 2020-06-08
+_includes/landing-page/docker-hub-signup.html:
+    date: 2021-08-12
+_includes/landing-page/docker-pricing.html:
+    date: 2021-08-24
+_includes/landing-page/dockercon-banner.html:
+    date: 2022-05-17
+_includes/landing-page/dockercon-wrapup-banner.html:
+    date: 2021-06-22
+_includes/landing-page/extensions-banner.html:
+    date: 2022-07-05
+_includes/landing-page/popular-videos.html:
+    date: 2020-10-15
+_includes/landing-page/volume-management.html:
+    date: 2021-10-15
+_includes/last_reviewed.html:
+    date: 2022-08-30
+_includes/last_reviewed2.html:
+    date: 2022-08-29
+_includes/last_reviewed3.html:
+    date: 2022-08-30
+_includes/navigation.html:
+    date: 2021-08-17
+_includes/read_time.html:
+    date: 2022-07-27
+_includes/registry.md:
+    date: 2020-07-03
+_includes/sign-up-cta.html:
+    date: 2021-09-24
+_includes/theme-switch.html:
+    date: 2020-10-13
+_includes/toc_pure_liquid.html:
+    date: 2018-10-11
+_includes/upgrade-cta.html:
+    date: 2021-08-24
+_layouts/archive-redirect.html:
+    date: 2020-10-12
+_layouts/docs.html:
+    date: 2022-08-30
+_layouts/engine-api.html:
+    date: 2022-06-01
+_layouts/hub-api.html:
+    date: 2022-06-30
+_layouts/landing.html:
+    date: 2022-07-13
+_layouts/redirect.html:
+    date: 2020-10-21
+_plugins/fetch_remote.rb:
+    date: 2022-07-25
+_plugins/fix_swagger.rb:
+    date: 2022-07-28
+_plugins/fix_url.rb:
+    date: 2022-07-28
+_plugins/relative_links_filter.rb:
+    date: 2021-09-13
+_plugins/update_api_toc.rb:
+    date: 2022-06-29
+_plugins/update_sitemap.rb:
+    date: 2022-07-28
+_plugins/util.rb:
+    date: 2022-07-28
+_releaser/Dockerfile:
+    date: 2022-07-18
+_releaser/_website-config-docs-lab.json:
+    date: 2022-07-25
+_releaser/_website-config-docs-stage.json:
+    date: 2022-07-18
+_releaser/_website-config-docs.json:
+    date: 2022-07-18
+_releaser/aws.go:
+    date: 2022-07-18
+_releaser/go.mod:
+    date: 2022-07-18
+_releaser/go.sum:
+    date: 2022-07-18
+_releaser/main.go:
+    date: 2022-07-18
+_releaser/netlify.go:
+    date: 2022-07-18
+_samples/library/adminer.md:
+    date: 2020-10-21
+_samples/library/adoptopenjdk.md:
+    date: 2020-10-21
+_samples/library/aerospike.md:
+    date: 2020-10-21
+_samples/library/alpine.md:
+    date: 2020-10-21
+_samples/library/alt.md:
+    date: 2020-10-21
+_samples/library/amazoncorretto.md:
+    date: 2020-10-21
+_samples/library/amazonlinux.md:
+    date: 2020-10-21
+_samples/library/arangodb.md:
+    date: 2020-10-21
+_samples/library/backdrop.md:
+    date: 2020-10-21
+_samples/library/bash.md:
+    date: 2020-10-21
+_samples/library/bonita.md:
+    date: 2020-10-21
+_samples/library/buildpack-deps.md:
+    date: 2020-10-21
+_samples/library/busybox.md:
+    date: 2020-10-21
+_samples/library/cassandra.md:
+    date: 2020-10-21
+_samples/library/centos.md:
+    date: 2020-10-21
+_samples/library/chronograf.md:
+    date: 2020-10-21
+_samples/library/cirros.md:
+    date: 2020-10-21
+_samples/library/clearlinux.md:
+    date: 2020-10-21
+_samples/library/clefos.md:
+    date: 2020-10-21
+_samples/library/clojure.md:
+    date: 2020-10-21
+_samples/library/composer.md:
+    date: 2020-10-21
+_samples/library/consul.md:
+    date: 2020-10-21
+_samples/library/convertigo.md:
+    date: 2020-10-21
+_samples/library/couchbase.md:
+    date: 2020-10-21
+_samples/library/couchdb.md:
+    date: 2020-10-21
+_samples/library/crate.md:
+    date: 2020-10-21
+_samples/library/crux.md:
+    date: 2020-10-21
+_samples/library/debian.md:
+    date: 2020-10-21
+_samples/library/docker.md:
+    date: 2020-10-21
+_samples/library/drupal.md:
+    date: 2020-10-21
+_samples/library/eclipse-mosquitto.md:
+    date: 2020-10-21
+_samples/library/eggdrop.md:
+    date: 2020-10-21
+_samples/library/elasticsearch.md:
+    date: 2020-10-21
+_samples/library/elixir.md:
+    date: 2020-10-21
+_samples/library/erlang.md:
+    date: 2020-10-21
+_samples/library/euleros.md:
+    date: 2020-10-21
+_samples/library/express-gateway.md:
+    date: 2020-10-21
+_samples/library/fedora.md:
+    date: 2020-10-21
+_samples/library/flink.md:
+    date: 2020-10-21
+_samples/library/fluentd.md:
+    date: 2020-10-21
+_samples/library/fsharp.md:
+    date: 2020-10-21
+_samples/library/gazebo.md:
+    date: 2020-10-21
+_samples/library/gcc.md:
+    date: 2020-10-21
+_samples/library/geonetwork.md:
+    date: 2020-10-21
+_samples/library/ghost.md:
+    date: 2020-10-21
+_samples/library/golang.md:
+    date: 2020-10-21
+_samples/library/gradle.md:
+    date: 2020-10-21
+_samples/library/groovy.md:
+    date: 2020-10-21
+_samples/library/haproxy.md:
+    date: 2020-10-21
+_samples/library/haskell.md:
+    date: 2020-10-21
+_samples/library/haxe.md:
+    date: 2020-10-21
+_samples/library/hello-world.md:
+    date: 2020-10-21
+_samples/library/httpd.md:
+    date: 2020-10-21
+_samples/library/hylang.md:
+    date: 2020-10-21
+_samples/library/ibmjava.md:
+    date: 2020-10-21
+_samples/library/influxdb.md:
+    date: 2020-10-21
+_samples/library/irssi.md:
+    date: 2020-10-21
+_samples/library/jetty.md:
+    date: 2020-10-21
+_samples/library/jobber.md:
+    date: 2020-10-21
+_samples/library/joomla.md:
+    date: 2020-10-21
+_samples/library/jruby.md:
+    date: 2020-10-21
+_samples/library/julia.md:
+    date: 2020-10-21
+_samples/library/kaazing-gateway.md:
+    date: 2020-10-21
+_samples/library/kapacitor.md:
+    date: 2020-10-21
+_samples/library/kibana.md:
+    date: 2020-10-21
+_samples/library/known.md:
+    date: 2020-10-21
+_samples/library/kong.md:
+    date: 2020-10-21
+_samples/library/lightstreamer.md:
+    date: 2020-10-21
+_samples/library/logstash.md:
+    date: 2020-10-21
+_samples/library/mageia.md:
+    date: 2020-10-21
+_samples/library/mariadb.md:
+    date: 2020-10-21
+_samples/library/matomo.md:
+    date: 2020-10-21
+_samples/library/maven.md:
+    date: 2020-10-21
+_samples/library/mediawiki.md:
+    date: 2020-10-21
+_samples/library/memcached.md:
+    date: 2020-10-21
+_samples/library/mongo-express.md:
+    date: 2020-10-21
+_samples/library/mongo.md:
+    date: 2020-10-21
+_samples/library/mono.md:
+    date: 2020-10-21
+_samples/library/mysql.md:
+    date: 2020-10-21
+_samples/library/nats-streaming.md:
+    date: 2020-10-21
+_samples/library/nats.md:
+    date: 2020-10-21
+_samples/library/neo4j.md:
+    date: 2020-10-21
+_samples/library/neurodebian.md:
+    date: 2020-10-21
+_samples/library/nextcloud.md:
+    date: 2020-10-21
+_samples/library/nginx.md:
+    date: 2020-10-21
+_samples/library/node.md:
+    date: 2020-10-21
+_samples/library/notary.md:
+    date: 2020-10-21
+_samples/library/nuxeo.md:
+    date: 2020-10-21
+_samples/library/odoo.md:
+    date: 2020-10-21
+_samples/library/open-liberty.md:
+    date: 2020-10-21
+_samples/library/openjdk.md:
+    date: 2020-10-21
+_samples/library/opensuse.md:
+    date: 2020-10-21
+_samples/library/oraclelinux.md:
+    date: 2020-10-21
+_samples/library/orientdb.md:
+    date: 2020-10-21
+_samples/library/percona.md:
+    date: 2020-10-21
+_samples/library/perl.md:
+    date: 2020-10-21
+_samples/library/photon.md:
+    date: 2020-10-21
+_samples/library/php-zendserver.md:
+    date: 2020-10-21
+_samples/library/php.md:
+    date: 2020-10-21
+_samples/library/plone.md:
+    date: 2020-10-21
+_samples/library/postfixadmin.md:
+    date: 2020-10-21
+_samples/library/postgres.md:
+    date: 2020-10-21
+_samples/library/pypy.md:
+    date: 2020-10-21
+_samples/library/python.md:
+    date: 2020-10-21
+_samples/library/r-base.md:
+    date: 2020-10-21
+_samples/library/rabbitmq.md:
+    date: 2020-10-21
+_samples/library/rakudo-star.md:
+    date: 2020-10-21
+_samples/library/rapidoid.md:
+    date: 2020-10-21
+_samples/library/redis.md:
+    date: 2020-10-21
+_samples/library/redmine.md:
+    date: 2020-10-21
+_samples/library/registry.md:
+    date: 2020-10-21
+_samples/library/rethinkdb.md:
+    date: 2020-10-21
+_samples/library/rocket.chat.md:
+    date: 2020-10-21
+_samples/library/ros.md:
+    date: 2020-10-21
+_samples/library/ruby.md:
+    date: 2020-10-21
+_samples/library/rust.md:
+    date: 2020-10-21
+_samples/library/sapmachine.md:
+    date: 2020-10-21
+_samples/library/scratch.md:
+    date: 2020-10-21
+_samples/library/sentry.md:
+    date: 2020-10-21
+_samples/library/silverpeas.md:
+    date: 2020-10-21
+_samples/library/sl.md:
+    date: 2020-10-21
+_samples/library/solr.md:
+    date: 2020-10-21
+_samples/library/sonarqube.md:
+    date: 2020-10-21
+_samples/library/sourcemage.md:
+    date: 2020-10-21
+_samples/library/spiped.md:
+    date: 2020-10-21
+_samples/library/storm.md:
+    date: 2020-10-21
+_samples/library/swarm.md:
+    date: 2020-10-21
+_samples/library/swift.md:
+    date: 2020-10-21
+_samples/library/swipl.md:
+    date: 2020-10-21
+_samples/library/teamspeak.md:
+    date: 2020-10-21
+_samples/library/telegraf.md:
+    date: 2020-10-21
+_samples/library/thrift.md:
+    date: 2020-10-21
+_samples/library/tomcat.md:
+    date: 2020-10-21
+_samples/library/tomee.md:
+    date: 2020-10-21
+_samples/library/traefik.md:
+    date: 2020-10-21
+_samples/library/ubuntu.md:
+    date: 2020-10-21
+_samples/library/varnish.md:
+    date: 2020-10-21
+_samples/library/vault.md:
+    date: 2020-10-21
+_samples/library/websphere-liberty.md:
+    date: 2020-10-21
+_samples/library/wordpress.md:
+    date: 2021-04-24
+_samples/library/xwiki.md:
+    date: 2020-10-21
+_samples/library/yourls.md:
+    date: 2020-10-21
+_samples/library/znc.md:
+    date: 2020-10-21
+_samples/library/zookeeper.md:
+    date: 2020-10-21
+_scss/_base.scss:
+    date: 2021-11-10
+_scss/_breakpoint.scss:
+    date: 2020-05-15
+_scss/_buttons.scss:
+    date: 2021-08-17
+_scss/_color-palette-v2.scss:
+    date: 2022-04-22
+_scss/_color-palette-v3.scss:
+    date: 2022-04-22
+_scss/_content.scss:
+    date: 2021-09-02
+_scss/_github.scss:
+    date: 2020-05-19
+_scss/_landing.scss:
+    date: 2022-07-05
+_scss/_layout.scss:
+    date: 2021-09-01
+_scss/_mobile.scss:
+    date: 2021-08-17
+_scss/_navigation.scss:
+    date: 2022-02-07
+_scss/_night-mode.scss:
+    date: 2022-08-03
+_scss/_notes.scss:
+    date: 2022-07-27
+_scss/_overrides.scss:
+    date: 2021-08-17
+_scss/_perldoc.scss:
+    date: 2021-04-20
+_scss/_typography.scss:
+    date: 2021-11-08
+_scss/_upgrade-cta.scss:
+    date: 2021-07-16
+_scss/_utilities.scss:
+    date: 2022-08-29
+_scss/_variables.scss:
+    date: 2022-04-22
+assets/fontawesome/css/all.min.css:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-brands-400.ttf:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-brands-400.woff2:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-regular-400.ttf:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-regular-400.woff2:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-solid-900.ttf:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-solid-900.woff2:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-v4compatibility.ttf:
+    date: 2022-07-27
+assets/fontawesome/webfonts/fa-v4compatibility.woff2:
+    date: 2022-07-27
+build/bake/build-contexts.md:
+    date: 2022-07-27
+build/bake/compose-file.md:
+    date: 2022-07-27
+build/bake/configuring-build.md:
+    date: 2022-07-27
+build/bake/file-definition.md:
+    date: 2022-07-27
+build/bake/hcl-funcs.md:
+    date: 2022-07-27
+build/bake/index.md:
+    date: 2022-07-27
+build/buildx/drivers/docker-container.md:
+    date: 2022-07-29
+build/buildx/drivers/index.md:
+    date: 2022-07-29
+build/buildx/drivers/kubernetes.md:
+    date: 2022-07-29
+build/buildx/drivers/remote.md:
+    date: 2022-07-29
+build/buildx/index.md:
+    date: 2022-07-29
+build/buildx/install.md:
+    date: 2022-07-29
+build/buildx/multiplatform-images.md:
+    date: 2022-07-29
+build/buildx/multiple-builders.md:
+    date: 2022-07-29
+build/hellobuild.md:
+    date: 2022-07-27
+build/index.md:
+    date: 2022-07-29
+ci-cd/best-practices.md:
+    date: 2022-02-23
+ci-cd/github-actions.md:
+    date: 2022-02-28
+ci-cd/images/ci-to-hub.png:
+    date: 2020-10-23
+ci-cd/images/ghcr-logic.png:
+    date: 2020-10-23
+ci-cd/images/github-access-token.png:
+    date: 2020-10-23
+ci-cd/images/github-secrets.png:
+    date: 2020-10-23
+ci-cd/images/inner-outer-loop.png:
+    date: 2020-12-03
+ci-cd/images/push-tagged-version.png:
+    date: 2020-10-23
+ci-cd/images/simplewhaledemo.png:
+    date: 2020-10-23
+cloud/aci-integration.md:
+    date: 2022-07-13
+cloud/ecs-integration.md:
+    date: 2022-07-13
+components.md:
+    date: 2022-04-13
+compose/cli-command-compatibility.md:
+    date: 2022-07-26
+compose/completion.md:
+    date: 2022-06-02
+compose/compose-file/build.md:
+    date: 2022-07-27
+compose/compose-file/compose-file-v2.md:
+    date: 2022-06-21
+compose/compose-file/compose-file-v3.md:
+    date: 2022-07-27
+compose/compose-file/compose-versioning.md:
+    date: 2022-02-09
+compose/compose-file/deploy.md:
+    date: 2022-04-27
+compose/compose-file/index.md:
+    date: 2022-07-18
+compose/env-file.md:
+    date: 2022-06-02
+compose/environment-variables.md:
+    date: 2022-07-27
+compose/extends.md:
+    date: 2022-07-26
+compose/faq.md:
+    date: 2022-07-26
+compose/gettingstarted.md:
+    date: 2022-07-27
+compose/gpu-support.md:
+    date: 2022-07-26
+compose/images/quick-hello-world-1.png:
+    date: 2021-01-18
+compose/images/quick-hello-world-2.png:
+    date: 2021-01-18
+compose/images/quick-hello-world-3.png:
+    date: 2021-01-18
+compose/index.md:
+    date: 2022-07-26
+compose/install/compose-desktop.md:
+    date: 2022-07-13
+compose/install/compose-plugin.md:
+    date: 2022-07-27
+compose/install/index.md:
+    date: 2022-06-09
+compose/install/uninstall.md:
+    date: 2022-07-13
+compose/networking.md:
+    date: 2022-07-26
+compose/production.md:
+    date: 2022-07-26
+compose/profiles.md:
+    date: 2022-07-26
+compose/reference/envvars.md:
+    date: 2022-07-26
+compose/reference/index.md:
+    date: 2022-06-21
+compose/release-notes.md:
+    date: 2022-08-02
+compose/samples-for-compose.md:
+    date: 2022-06-02
+compose/startup-order.md:
+    date: 2022-07-06
+config/containers/container-networking.md:
+    date: 2020-10-02
+config/containers/live-restore.md:
+    date: 2020-10-24
+config/containers/logging/awslogs.md:
+    date: 2021-08-07
+config/containers/logging/configure.md:
+    date: 2021-08-27
+config/containers/logging/dual-logging.md:
+    date: 2021-04-17
+config/containers/logging/etwlogs.md:
+    date: 2020-04-08
+config/containers/logging/fluentd.md:
+    date: 2021-04-06
+config/containers/logging/gcplogs.md:
+    date: 2022-02-08
+config/containers/logging/gelf.md:
+    date: 2021-12-20
+config/containers/logging/index.md:
+    date: 2021-04-17
+config/containers/logging/journald.md:
+    date: 2022-02-01
+config/containers/logging/json-file.md:
+    date: 2021-08-06
+config/containers/logging/local.md:
+    date: 2022-05-30
+config/containers/logging/log_tags.md:
+    date: 2021-08-06
+config/containers/logging/logentries.md:
+    date: 2021-08-06
+config/containers/logging/plugins.md:
+    date: 2020-04-08
+config/containers/logging/splunk.md:
+    date: 2021-08-06
+config/containers/logging/syslog.md:
+    date: 2021-08-06
+config/containers/multi-service_container.md:
+    date: 2021-12-20
+config/containers/resource_constraints.md:
+    date: 2021-11-19
+config/containers/runmetrics.md:
+    date: 2022-07-13
+config/containers/start-containers-automatically.md:
+    date: 2021-11-26
+config/daemon/images/prometheus-graph_idle.png:
+    date: 2020-03-18
+config/daemon/images/prometheus-graph_load.png:
+    date: 2020-03-18
+config/daemon/images/prometheus-targets.png:
+    date: 2020-03-18
+config/daemon/index.md:
+    date: 2021-12-20
+config/daemon/ipv6.md:
+    date: 2021-08-06
+config/daemon/prometheus.md:
+    date: 2022-07-27
+config/daemon/systemd.md:
+    date: 2021-12-20
+config/formatting.md:
+    date: 2021-08-14
+config/labels-custom-metadata.md:
+    date: 2022-05-30
+config/pruning.md:
+    date: 2021-08-06
+css/api-reference.scss:
+    date: 2022-06-01
+css/bootstrap.min.css:
+    date: 2020-11-11
+css/bootstrap.min.css.map:
+    date: 2020-11-11
+css/style.scss:
+    date: 2022-04-22
+datacenter/dtr/2.0/architecture.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/configure/config-general.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/configure/config-security.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/configure/config-storage.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/configure/configuration.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/high-availability/backups-and-disaster-recovery.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/high-availability/index.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/install/index.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/install/install-dtr-offline.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/install/license.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/install/system-requirements.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/install/uninstall.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/install/upgrade/index.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/install/upgrade/upgrade-major.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/monitor-troubleshoot/index.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/monitor-troubleshoot/troubleshoot.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/release-notes/prior-release-notes.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/repos-and-images/delete-an-image.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/repos-and-images/pull-an-image.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/repos-and-images/push-an-image.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/support.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/user-management/create-and-manage-orgs.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/user-management/create-and-manage-teams.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/user-management/create-and-manage-users.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/user-management/index.md:
+    date: 2020-04-20
+datacenter/dtr/2.0/user-management/permission-levels.md:
+    date: 2020-04-20
+datacenter/dtr/2.1/guides/release-notes.md:
+    date: 2020-04-20
+datacenter/dtr/2.4/guides/admin/configure/set-up-vulnerability-scans.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/guides/index.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/backup.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/destroy.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/emergency-repair.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/images.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/index.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/install.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/join.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/reconfigure.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/remove.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/restore.md:
+    date: 2020-04-20
+datacenter/dtr/2.5/reference/cli/upgrade.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/access-ucp/cli-based-access.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/access-ucp/web-based-access.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/applications/deploy-app-cli.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/applications/deploy-app-ui.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/architecture.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/configuration/configure-logs.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/configuration/dtr-integration.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/configuration/ldap-integration.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/configuration/multi-host-networking.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/configuration/use-externally-signed-certs.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/high-availability/backups-and-disaster-recovery.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/high-availability/replicate-cas.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/high-availability/set-up-high-availability.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/install-sandbox-2.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/install-sandbox.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/installation/install-offline.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/installation/install-production.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/installation/license.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/installation/plan-production-install.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/installation/system-requirements.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/installation/uninstall.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/monitor/index.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/overview.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/reference/uninstall.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/support.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/user-management/authentication-and-authorization.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/user-management/create-and-manage-teams.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/user-management/create-and-manage-users.md:
+    date: 2020-04-20
+datacenter/ucp/1.1/user-management/permission-levels.md:
+    date: 2020-04-20
+datacenter/ucp/2.0/guides/installation/upgrade.md:
+    date: 2020-04-20
+datacenter/ucp/2.0/guides/release-notes.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/api/index.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/backup.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/dump-certs.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/example-config.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/id.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/images.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/index.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/install.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/restart.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/restore.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/stop.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/support.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/uninstall-ucp.md:
+    date: 2020-04-20
+datacenter/ucp/3.0/reference/cli/upgrade.md:
+    date: 2020-04-20
+datacenter/ucp/3.1/guides/admin/install/system-requirements.md:
+    date: 2020-04-20
+datacenter/ucp/3.1/guides/index.md:
+    date: 2020-04-20
+deprecated/kitematic.md:
+    date: 2022-07-13
+deprecated/machine.md:
+    date: 2022-07-27
+deprecated/toolbox.md:
+    date: 2022-07-27
+desktop/backup-and-restore.md:
+    date: 2022-06-14
+desktop/dashboard.md:
+    date: 2022-07-05
+desktop/dev-environments/create-compose-dev-env.md:
+    date: 2022-06-30
+desktop/dev-environments/create-dev-env.md:
+    date: 2022-07-27
+desktop/dev-environments/index.md:
+    date: 2022-06-30
+desktop/dev-environments/share.md:
+    date: 2022-06-30
+desktop/dev-environments/specify.md:
+    date: 2022-06-30
+desktop/enterprise/index.md:
+    date: 2020-11-17
+desktop/extensions-sdk/build/build-install.md:
+    date: 2022-07-01
+desktop/extensions-sdk/build/images/extensions-enabled.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/images/ui-minimal-extension.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/images/backend-minimal-extension.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/images/docker-cli-minimal-extension.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/images/initialized-extension.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/images/types-autocomplete.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/images/ui-extension-hello-world.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/images/ui-extension-react.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/images/ui-minimal-extension-dark.png:
+    date: 2022-06-10
+desktop/extensions-sdk/build/set-up/minimal-backend-extension.md:
+    date: 2022-07-01
+desktop/extensions-sdk/build/set-up/minimal-frontend-extension.md:
+    date: 2022-07-01
+desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli.md:
+    date: 2022-07-01
+desktop/extensions-sdk/build/set-up/react-extension.md:
+    date: 2022-07-25
+desktop/extensions-sdk/build/test-debug.md:
+    date: 2022-07-01
+desktop/extensions-sdk/design/design-guidelines.md:
+    date: 2022-07-14
+desktop/extensions-sdk/design/design-principles.md:
+    date: 2022-07-14
+desktop/extensions-sdk/design/images/complicated_flows.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/cta.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/header.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/icon_colors.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/light_dark_mode.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/start_page.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/switch_context_do.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/switch_context_dont.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/terminal_window_do.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/images/terminal_window_dont.png:
+    date: 2022-06-09
+desktop/extensions-sdk/design/mui-best-practices.md:
+    date: 2022-06-10
+desktop/extensions-sdk/design/overview.md:
+    date: 2022-06-10
+desktop/extensions-sdk/dev/api/backend.md:
+    date: 2022-06-09
+desktop/extensions-sdk/dev/api/dashboard-routes-navigation.md:
+    date: 2022-06-30
+desktop/extensions-sdk/dev/api/dashboard.md:
+    date: 2022-06-09
+desktop/extensions-sdk/dev/api/docker.md:
+    date: 2022-06-09
+desktop/extensions-sdk/dev/api/overview.md:
+    date: 2022-06-10
+desktop/extensions-sdk/dev/api/reference/README.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/Dialog.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/Docker.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/DockerCommand.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/DockerDesktopClient.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/Exec.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ExecProcess.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ExecResult.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ExecResultV0.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ExecStreamOptions.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/Extension.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionCli.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionHost.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ExtensionVM.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/Host.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/HttpService.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/NavigationIntents.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/OpenDialogResult.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/RawExecResult.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfig.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/RequestConfigV0.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/ServiceError.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/api/reference/interfaces/Toast.md:
+    date: 2022-06-24
+desktop/extensions-sdk/dev/images/oauth2-flow.png:
+    date: 2022-06-09
+desktop/extensions-sdk/dev/oauth2-flow.md:
+    date: 2022-06-10
+desktop/extensions-sdk/dev/usage.md:
+    date: 2022-06-10
+desktop/extensions-sdk/extensions/DISTRIBUTION.md:
+    date: 2022-06-10
+desktop/extensions-sdk/extensions/METADATA.md:
+    date: 2022-06-09
+desktop/extensions-sdk/extensions/images/details-preview.png:
+    date: 2022-06-09
+desktop/extensions-sdk/extensions/images/hub-multi-arch-extension.png:
+    date: 2022-06-09
+desktop/extensions-sdk/extensions/images/list-preview.png:
+    date: 2022-06-09
+desktop/extensions-sdk/extensions/index.md:
+    date: 2022-06-10
+desktop/extensions-sdk/extensions/labels.md:
+    date: 2022-06-29
+desktop/extensions-sdk/extensions/multi-arch.md:
+    date: 2022-06-10
+desktop/extensions-sdk/index.md:
+    date: 2022-08-02
+desktop/extensions-sdk/quickstart.md:
+    date: 2022-07-01
+desktop/extensions.md:
+    date: 2022-08-02
+desktop/faqs/general.md:
+    date: 2022-07-28
+desktop/faqs/linuxfaqs.md:
+    date: 2022-07-27
+desktop/faqs/macfaqs.md:
+    date: 2022-07-27
+desktop/faqs/windowsfaqs.md:
+    date: 2022-07-20
+desktop/feedback.md:
+    date: 2022-07-28
+desktop/get-started.md:
+    date: 2022-07-27
+desktop/images/app-dashboard-view.png:
+    date: 2020-05-01
+desktop/images/console.png:
+    date: 2022-07-20
+desktop/images/dashboard.PNG:
+    date: 2022-07-19
+desktop/images/dev-env-compose.png:
+    date: 2021-08-06
+desktop/images/dev-env-container.png:
+    date: 2021-08-06
+desktop/images/dev-env-create.png:
+    date: 2021-08-06
+desktop/images/dev-env-gitbash.png:
+    date: 2021-07-20
+desktop/images/dev-env-localhost.png:
+    date: 2021-06-21
+desktop/images/dev-env-share.png:
+    date: 2021-08-06
+desktop/images/dev-env-shared.png:
+    date: 2021-08-06
+desktop/images/dev-env.PNG:
+    date: 2022-06-30
+desktop/images/dev-share.PNG:
+    date: 2022-06-30
+desktop/images/diagnose-support.png:
+    date: 2022-07-20
+desktop/images/docker-tutorial-linux.png:
+    date: 2022-07-19
+desktop/images/example-app-architecture.png:
+    date: 2020-05-01
+desktop/images/extensions-marketplace.PNG:
+    date: 2022-07-28
+desktop/images/hyperv-enabled.png:
+    date: 2022-07-20
+desktop/images/image-details.png:
+    date: 2020-11-02
+desktop/images/kube-context.png:
+    date: 2021-03-24
+desktop/images/kube-enable.png:
+    date: 2021-04-23
+desktop/images/mac-application-view.png:
+    date: 2020-09-29
+desktop/images/mac-browser-view.png:
+    date: 2020-05-01
+desktop/images/mac-container-view.png:
+    date: 2020-05-01
+desktop/images/mac-dashboard.png:
+    date: 2020-09-29
+desktop/images/mac-redis-container.png:
+    date: 2020-05-01
+desktop/images/redis-image.png:
+    date: 2020-09-29
+desktop/images/settings.PNG:
+    date: 2022-07-14
+desktop/images/shared-folder-on-demand.png:
+    date: 2022-07-14
+desktop/images/troubleshoot.png:
+    date: 2022-07-20
+desktop/images/virtualization-enabled.png:
+    date: 2022-07-20
+desktop/images/volumes-list.png:
+    date: 2021-08-09
+desktop/images/whale-x.png:
+    date: 2022-07-14
+desktop/images/wsl2-enabled.png:
+    date: 2022-07-20
+desktop/index.md:
+    date: 2022-08-29
+desktop/install/archlinux.md:
+    date: 2022-07-13
+desktop/install/debian.md:
+    date: 2022-07-29
+desktop/install/fedora.md:
+    date: 2022-07-29
+desktop/install/images/docker-app-in-apps-mac.png:
+    date: 2022-07-20
+desktop/install/images/docker-app-in-apps.png:
+    date: 2022-07-13
+desktop/install/images/docker-app-search.png:
+    date: 2022-07-13
+desktop/install/images/docker-tutorial-mac.png:
+    date: 2022-07-13
+desktop/install/images/docker-tutorial-win.png:
+    date: 2022-07-13
+desktop/install/images/whale-x.png:
+    date: 2022-07-13
+desktop/install/linux-install.md:
+    date: 2022-08-02
+desktop/install/mac-install.md:
+    date: 2022-07-28
+desktop/install/ubuntu.md:
+    date: 2022-07-29
+desktop/install/windows-install.md:
+    date: 2022-08-01
+desktop/kubernetes.md:
+    date: 2022-06-22
+desktop/linux/Makefile:
+    date: 2022-05-06
+desktop/linux/images/diagnose-support.png:
+    date: 2022-05-06
+desktop/linux/images/menu/prefs-advanced.png:
+    date: 2022-05-06
+desktop/linux/images/menu/prefs-general.png:
+    date: 2022-05-06
+desktop/linux/images/menu/prefs.png:
+    date: 2022-05-06
+desktop/linux/images/whale-in-menu-bar.png:
+    date: 2022-05-06
+desktop/linux/images/whale-x.png:
+    date: 2022-05-06
+desktop/mac/Makefile:
+    date: 2021-08-14
+desktop/mac/apple-silicon.md:
+    date: 2022-07-18
+desktop/mac/images/changelog-placeholder.png:
+    date: 2021-08-14
+desktop/mac/images/desktop-mac-2fa.png:
+    date: 2021-08-14
+desktop/mac/images/docker-app-drag.png:
+    date: 2021-08-14
+desktop/mac/images/hello-world-nginx.png:
+    date: 2021-08-14
+desktop/mac/images/localhost-arm.png:
+    date: 2021-08-14
+desktop/mac/images/menu/prefs-advanced.png:
+    date: 2021-09-29
+desktop/mac/images/menu/prefs-general.png:
+    date: 2021-11-02
+desktop/mac/images/menu/prefs.png:
+    date: 2021-11-04
+desktop/mac/images/menu/troubleshoot.png:
+    date: 2021-08-14
+desktop/mac/images/proxy-settings.png:
+    date: 2021-08-14
+desktop/mac/images/snooze-update.png:
+    date: 2021-08-24
+desktop/mac/images/subscription-terms.png:
+    date: 2021-08-26
+desktop/mac/images/whale-in-menu-bar.png:
+    date: 2021-08-14
+desktop/mac/images/whale-x.png:
+    date: 2022-04-07
+desktop/mac/permission-requirements.md:
+    date: 2022-07-28
+desktop/multi-arch.md:
+    date: 2022-07-19
+desktop/networking.md:
+    date: 2022-07-27
+desktop/previous-versions/2.x-mac.md:
+    date: 2022-07-27
+desktop/previous-versions/2.x-windows.md:
+    date: 2022-07-27
+desktop/previous-versions/3.x-mac.md:
+    date: 2022-07-19
+desktop/previous-versions/3.x-windows.md:
+    date: 2022-07-19
+desktop/previous-versions/archive-mac.md:
+    date: 2022-07-27
+desktop/previous-versions/archive-windows.md:
+    date: 2022-05-18
+desktop/previous-versions/edge-releases-mac.md:
+    date: 2022-07-27
+desktop/previous-versions/edge-releases-windows.md:
+    date: 2022-07-27
+desktop/release-notes.md:
+    date: 2022-07-28
+desktop/settings/linux.md:
+    date: 2022-07-28
+desktop/settings/mac.md:
+    date: 2022-07-28
+desktop/settings/windows.md:
+    date: 2022-07-28
+desktop/support.md:
+    date: 2022-07-28
+desktop/troubleshoot/known-issues.md:
+    date: 2022-07-25
+desktop/troubleshoot/overview.md:
+    date: 2022-07-25
+desktop/troubleshoot/topics.md:
+    date: 2022-07-28
+desktop/troubleshoot/workarounds.md:
+    date: 2022-07-20
+desktop/use-desktop/container.md:
+    date: 2022-07-25
+desktop/use-desktop/images.md:
+    date: 2022-07-27
+desktop/use-desktop/pause.md:
+    date: 2022-07-25
+desktop/use-desktop/volumes.md:
+    date: 2022-07-25
+desktop/vm-vdi.md:
+    date: 2022-08-01
+desktop/windows/Makefile:
+    date: 2021-08-14
+desktop/windows/images/desktop-win-2fa.png:
+    date: 2021-08-14
+desktop/windows/images/diagnose-support.png:
+    date: 2021-08-14
+desktop/windows/images/docker-app-welcome.png:
+    date: 2021-08-14
+desktop/windows/images/docker-menu-context-switch.png:
+    date: 2021-08-14
+desktop/windows/images/docker-menu-settings.png:
+    date: 2021-11-04
+desktop/windows/images/docker-menu-switch.png:
+    date: 2021-08-14
+desktop/windows/images/hyperv-manager.png:
+    date: 2021-08-14
+desktop/windows/images/issue-template.png:
+    date: 2021-08-14
+desktop/windows/images/nginx-homepage.png:
+    date: 2021-08-14
+desktop/windows/images/redis-container.png:
+    date: 2021-08-14
+desktop/windows/images/settings-general.png:
+    date: 2021-11-04
+desktop/windows/images/settings-resources.png:
+    date: 2021-08-14
+desktop/windows/images/troubleshoot.png:
+    date: 2021-08-14
+desktop/windows/images/whale-icon-systray-hidden.png:
+    date: 2021-08-14
+desktop/windows/images/whale-icon-systray.png:
+    date: 2021-08-14
+desktop/windows/images/whale-x.png:
+    date: 2021-08-14
+desktop/windows/images/wsl2-choose-distro.png:
+    date: 2021-08-14
+desktop/windows/images/wsl2-context.png:
+    date: 2021-08-14
+desktop/windows/images/wsl2-enable.png:
+    date: 2021-08-14
+desktop/windows/images/wsl2-ui.png:
+    date: 2021-08-14
+desktop/windows/permission-requirements.md:
+    date: 2022-07-29
+desktop/windows/wsl.md:
+    date: 2022-05-30
+develop/dev-best-practices.md:
+    date: 2020-11-06
+develop/develop-images/baseimages.md:
+    date: 2021-12-20
+develop/develop-images/build_enhancements.md:
+    date: 2022-02-17
+develop/develop-images/dockerfile_best-practices.md:
+    date: 2022-06-24
+develop/develop-images/image_management.md:
+    date: 2020-04-08
+develop/develop-images/multistage-build.md:
+    date: 2021-08-06
+develop/index.md:
+    date: 2022-04-22
+develop/scan-images/images/desktop-scan-summary.png:
+    date: 2021-05-24
+develop/scan-images/images/dev-security-journey.png:
+    date: 2021-05-24
+develop/scan-images/images/docker-scan-cli.png:
+    date: 2021-05-24
+develop/scan-images/images/hub-hvs.png:
+    date: 2021-05-24
+develop/scan-images/images/hub-official-images.png:
+    date: 2021-05-24
+develop/scan-images/images/hvs-scan-summary.png:
+    date: 2021-05-24
+develop/scan-images/index.md:
+    date: 2021-12-13
+docker-bake.hcl:
+    date: 2022-07-28
+docker-compose.yml:
+    date: 2022-07-28
+docker-hub/2fa/disable-2fa.md:
+    date: 2019-10-21
+docker-hub/2fa/index.md:
+    date: 2021-04-27
+docker-hub/2fa/new-recovery-code.md:
+    date: 2022-07-11
+docker-hub/2fa/recover-hub-account.md:
+    date: 2022-07-11
+docker-hub/access-tokens.md:
+    date: 2022-07-14
+docker-hub/api/dvp.md:
+    date: 2022-06-01
+docker-hub/api/dvp.yaml:
+    date: 2022-07-19
+docker-hub/api/latest.md:
+    date: 2021-03-17
+docker-hub/api/latest.yaml:
+    date: 2022-07-28
+docker-hub/audit-log.md:
+    date: 2022-07-14
+docker-hub/builds/advanced.md:
+    date: 2021-12-23
+docker-hub/builds/automated-testing.md:
+    date: 2022-07-27
+docker-hub/builds/images/authorize-builder.png:
+    date: 2019-11-13
+docker-hub/builds/images/build-cancelicon.png:
+    date: 2018-10-03
+docker-hub/builds/images/classic-vs-new-classic-only.png:
+    date: 2018-12-06
+docker-hub/builds/images/classic-vs-new-switch-to-classic.png:
+    date: 2018-12-06
+docker-hub/builds/images/classic-vs-new-switch-to-new.png:
+    date: 2018-12-06
+docker-hub/builds/images/index-active.png:
+    date: 2019-11-13
+docker-hub/builds/images/index-dashboard.png:
+    date: 2019-11-13
+docker-hub/builds/images/index-report.png:
+    date: 2019-11-13
+docker-hub/builds/images/link-source-github-ind.png:
+    date: 2018-11-27
+docker-hub/builds/images/link-source-github-org-lite.png:
+    date: 2018-11-27
+docker-hub/builds/images/link-source-github-org-revoke.png:
+    date: 2018-10-03
+docker-hub/builds/images/link-source-github-org.png:
+    date: 2018-11-27
+docker-hub/builds/images/linked-accounts.png:
+    date: 2019-11-13
+docker-hub/builds/images/linking-connect-providers.png:
+    date: 2018-11-27
+docker-hub/builds/images/repo-general.png:
+    date: 2018-10-03
+docker-hub/builds/images/retry-build.png:
+    date: 2019-11-13
+docker-hub/builds/images/source-providers.png:
+    date: 2018-10-03
+docker-hub/builds/index.md:
+    date: 2021-10-20
+docker-hub/builds/link-source.md:
+    date: 2022-03-01
+docker-hub/configure-sign-in.md:
+    date: 2022-06-22
+docker-hub/convert-account.md:
+    date: 2021-08-26
+docker-hub/deactivate-account.md:
+    date: 2022-07-27
+docker-hub/download-rate-limit.md:
+    date: 2022-07-08
+docker-hub/image-access-management.md:
+    date: 2022-07-14
+docker-hub/image-management.md:
+    date: 2022-07-21
+docker-hub/images/2Fa-lost-authentication.png:
+    date: 2022-07-11
+docker-hub/images/2fa-disable-2fa.png:
+    date: 2019-10-21
+docker-hub/images/2fa-enter-2fa-code.png:
+    date: 2019-10-21
+docker-hub/images/2fa-enter-code.png:
+    date: 2019-10-21
+docker-hub/images/2fa-enter-pw-disable-2fa.png:
+    date: 2019-10-21
+docker-hub/images/2fa-enter-recover-code.png:
+    date: 2019-10-21
+docker-hub/images/2fa-have-recovery-code.png:
+    date: 2019-10-21
+docker-hub/images/2fa-pw-new-code.png:
+    date: 2019-10-21
+docker-hub/images/2fa-recovery-code.png:
+    date: 2019-10-21
+docker-hub/images/2fa-security-home.png:
+    date: 2019-10-21
+docker-hub/images/activity-list.png:
+    date: 2021-01-25
+docker-hub/images/add-to-team.PNG:
+    date: 2022-05-02
+docker-hub/images/advanced-image-general.png:
+    date: 2022-07-18
+docker-hub/images/application-details.png:
+    date: 2022-07-18
+docker-hub/images/attribute-mapping.png:
+    date: 2022-07-18
+docker-hub/images/dashboard-delete-image.png:
+    date: 2021-05-11
+docker-hub/images/generate-full-sync.png:
+    date: 2022-07-18
+docker-hub/images/hub-copy-token.png:
+    date: 2021-10-13
+docker-hub/images/hub-create-token.png:
+    date: 2021-10-13
+docker-hub/images/hub-delete-edit-token.png:
+    date: 2021-10-13
+docker-hub/images/hub-edit-token.png:
+    date: 2021-10-13
+docker-hub/images/image-access-management-error.png:
+    date: 2021-10-15
+docker-hub/images/image-access-management.png:
+    date: 2021-10-15
+docker-hub/images/image-management-dashboard.png:
+    date: 2022-07-18
+docker-hub/images/index-create-repo.png:
+    date: 2020-11-06
+docker-hub/images/index-repo-created.png:
+    date: 2020-11-06
+docker-hub/images/index-tag.png:
+    date: 2020-11-06
+docker-hub/images/index-terminal.png:
+    date: 2020-11-06
+docker-hub/images/invite-members.PNG:
+    date: 2022-05-02
+docker-hub/images/org-activity-tab.png:
+    date: 2021-01-25
+docker-hub/images/org-all-actions.png:
+    date: 2021-01-25
+docker-hub/images/parameters-tab.png:
+    date: 2022-07-18
+docker-hub/images/provision-user.png:
+    date: 2022-07-18
+docker-hub/images/provisioning-to-app.png:
+    date: 2022-07-18
+docker-hub/images/registry-access-management.png:
+    date: 2022-02-24
+docker-hub/images/repo-create-details.png:
+    date: 2019-11-07
+docker-hub/images/repo-create-private.png:
+    date: 2019-11-07
+docker-hub/images/repo-image-layers.png:
+    date: 2019-11-07
+docker-hub/images/repo-make-private.png:
+    date: 2019-11-07
+docker-hub/images/repo-overview.png:
+    date: 2020-10-30
+docker-hub/images/repo-tags-list.png:
+    date: 2020-10-30
+docker-hub/images/repos-create.png:
+    date: 2020-10-30
+docker-hub/images/resend-invitation-message.png:
+    date: 2022-05-02
+docker-hub/images/resend-invitation.PNG:
+    date: 2022-05-02
+docker-hub/images/scim-app- provisioning.png:
+    date: 2022-06-23
+docker-hub/images/scim-app-provisioning.png:
+    date: 2022-06-23
+docker-hub/images/scim-attributes.png:
+    date: 2022-06-24
+docker-hub/images/scim-disable.png:
+    date: 2022-06-24
+docker-hub/images/scim-full-sync.png:
+    date: 2022-06-23
+docker-hub/images/scim-hub-provision.png:
+    date: 2022-07-18
+docker-hub/images/scim-okta-button.png:
+    date: 2022-07-07
+docker-hub/images/scim-provisioner-saml.png:
+    date: 2022-07-18
+docker-hub/images/scim-provisioning-tab.png:
+    date: 2022-06-23
+docker-hub/images/scim-provisioning.png:
+    date: 2022-07-19
+docker-hub/images/slack-notification-updates.png:
+    date: 2018-11-21
+docker-hub/images/team-repo-permission.png:
+    date: 2022-02-03
+docker-hub/images/view-org.png:
+    date: 2022-07-22
+docker-hub/images/vuln-scan-details.png:
+    date: 2021-04-30
+docker-hub/images/vuln-scan-report.png:
+    date: 2021-12-13
+docker-hub/images/webhooks-create.png:
+    date: 2018-11-22
+docker-hub/images/webhooks-empty.png:
+    date: 2018-11-22
+docker-hub/images/webhooks-history.png:
+    date: 2018-11-22
+docker-hub/images/webhooks-submenu.png:
+    date: 2018-11-22
+docker-hub/index.md:
+    date: 2022-07-26
+docker-hub/members.md:
+    date: 2022-07-27
+docker-hub/official_images.md:
+    date: 2022-01-12
+docker-hub/onboard-business.md:
+    date: 2022-08-29
+docker-hub/onboarding-faqs.md:
+    date: 2022-06-27
+docker-hub/orgs.md:
+    date: 2022-07-22
+docker-hub/publish/byol.md:
+    date: 2018-11-21
+docker-hub/publish/certify-images.md:
+    date: 2021-08-14
+docker-hub/publish/certify-plugins-logging.md:
+    date: 2021-08-14
+docker-hub/publish/customer_faq.md:
+    date: 2019-06-07
+docker-hub/publish/images/Docker-Hub-tags-system-info.png:
+    date: 2019-09-05
+docker-hub/publish/images/Docker-Hub-tags-vulnerabilities.png:
+    date: 2019-09-05
+docker-hub/publish/images/Docker-hub-tags-vulnerability-details.png:
+    date: 2019-09-05
+docker-hub/publish/images/FAQ-certified-content.png:
+    date: 2018-10-03
+docker-hub/publish/images/FAQ-types-of-certified-content.png:
+    date: 2018-10-03
+docker-hub/publish/images/VerifiedPublisherBadge.png:
+    date: 2021-10-28
+docker-hub/publish/images/certified_container.png:
+    date: 2018-10-03
+docker-hub/publish/images/certified_infrastructure.png:
+    date: 2018-10-03
+docker-hub/publish/images/certified_plugins.png:
+    date: 2018-10-03
+docker-hub/publish/images/gforghetti-apache-latest_inspection_report.html-1.png:
+    date: 2018-10-03
+docker-hub/publish/images/gforghetti-apache-latest_inspection_report.html-2.png:
+    date: 2018-10-03
+docker-hub/publish/images/gforghetti-apache-latest_inspection_report.html-3.png:
+    date: 2018-10-03
+docker-hub/publish/images/gforghetti-log-driver-latest_inspection_report.html.png:
+    date: 2018-10-03
+docker-hub/publish/images/image-tags.png:
+    date: 2019-11-05
+docker-hub/publish/images/image_0.png:
+    date: 2018-10-03
+docker-hub/publish/images/node-tags-system-info.png:
+    date: 2019-11-05
+docker-hub/publish/images/node-tags-vulnerabilities.png:
+    date: 2019-11-05
+docker-hub/publish/images/node-tags-vulnerability-details.png:
+    date: 2019-11-05
+docker-hub/publish/images/publish-diagram.png:
+    date: 2018-10-03
+docker-hub/publish/images/publish_byol.png:
+    date: 2018-10-03
+docker-hub/publish/images/scan-full-details.png:
+    date: 2018-10-03
+docker-hub/publish/images/scan-single.png:
+    date: 2018-10-03
+docker-hub/publish/images/scan-tags.png:
+    date: 2019-09-05
+docker-hub/publish/images/scan-view.png:
+    date: 2018-10-03
+docker-hub/publish/images/store-browse.png:
+    date: 2018-10-03
+docker-hub/publish/images/store-get.png:
+    date: 2018-10-03
+docker-hub/publish/images/store-product-id.png:
+    date: 2018-10-03
+docker-hub/publish/images/store-pullcmd.png:
+    date: 2018-10-03
+docker-hub/publish/images/store-search.png:
+    date: 2018-10-03
+docker-hub/publish/images/subscribed.png:
+    date: 2019-09-05
+docker-hub/publish/index.md:
+    date: 2021-08-19
+docker-hub/publish/publish.md:
+    date: 2020-10-15
+docker-hub/publish/publisher-center-migration.md:
+    date: 2022-04-20
+docker-hub/publish/publisher_faq.md:
+    date: 2020-03-10
+docker-hub/publish/trustchain.md:
+    date: 2020-10-07
+docker-hub/registry-access-management.md:
+    date: 2022-07-13
+docker-hub/release-notes.md:
+    date: 2022-05-12
+docker-hub/repos.md:
+    date: 2022-07-27
+docker-hub/scim.md:
+    date: 2022-07-27
+docker-hub/service-accounts.md:
+    date: 2022-02-03
+docker-hub/slack_integration.md:
+    date: 2022-02-25
+docker-hub/vulnerability-scanning.md:
+    date: 2021-12-15
+docker-hub/webhooks.md:
+    date: 2022-07-27
+docker-id/images/login.png:
+    date: 2018-11-22
+docker-id/images/login2019.png:
+    date: 2019-10-21
+docker-id/index.md:
+    date: 2022-07-26
+docsarchive.md:
+    date: 2021-08-14
+ee/admin/backup/index.md:
+    date: 2020-04-20
+ee/index.md:
+    date: 2020-04-20
+ee/telemetry.md:
+    date: 2020-04-20
+ee/ucp/admin/monitor-and-troubleshoot/index.md:
+    date: 2020-04-20
+ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-node-messages.md:
+    date: 2020-04-20
+ee/upgrade.md:
+    date: 2020-04-20
+engine/api/index.md:
+    date: 2021-08-06
+engine/api/latest/index.html:
+    date: 2019-01-11
+engine/api/sdk/examples.md:
+    date: 2021-11-24
+engine/api/sdk/index.md:
+    date: 2022-01-15
+engine/api/v1.25.md:
+    date: 2020-02-24
+engine/api/v1.26.md:
+    date: 2020-02-24
+engine/api/v1.27.md:
+    date: 2020-02-24
+engine/api/v1.28.md:
+    date: 2020-02-24
+engine/api/v1.29.md:
+    date: 2020-02-24
+engine/api/v1.30.md:
+    date: 2020-02-24
+engine/api/v1.31.md:
+    date: 2020-02-24
+engine/api/v1.32.md:
+    date: 2020-02-24
+engine/api/v1.33.md:
+    date: 2020-02-24
+engine/api/v1.34.md:
+    date: 2020-02-24
+engine/api/v1.35.md:
+    date: 2020-02-24
+engine/api/v1.36.md:
+    date: 2020-02-24
+engine/api/v1.37.md:
+    date: 2020-02-24
+engine/api/v1.38.md:
+    date: 2020-02-24
+engine/api/v1.39.md:
+    date: 2020-02-24
+engine/api/v1.40.md:
+    date: 2020-02-24
+engine/api/v1.41.md:
+    date: 2020-12-09
+engine/breaking_changes.md:
+    date: 2022-07-27
+engine/context/working-with-contexts.md:
+    date: 2022-05-25
+engine/faq.md:
+    date: 2021-09-13
+engine/images/architecture.svg:
+    date: 2018-02-01
+engine/images/engine-components-flow.png:
+    date: 2018-02-01
+engine/index.md:
+    date: 2020-09-25
+engine/install/binaries.md:
+    date: 2022-03-16
+engine/install/centos.md:
+    date: 2022-05-25
+engine/install/debian.md:
+    date: 2022-07-27
+engine/install/fedora.md:
+    date: 2022-05-25
+engine/install/index.md:
+    date: 2022-07-13
+engine/install/linux-postinstall.md:
+    date: 2022-07-27
+engine/install/rhel.md:
+    date: 2022-07-27
+engine/install/sles.md:
+    date: 2022-07-27
+engine/install/ubuntu.md:
+    date: 2022-07-13
+engine/migration.md:
+    date: 2018-01-25
+engine/reference/builder.md:
+    date: 2022-07-25
+engine/reference/commandline/README.md:
+    date: 2022-02-11
+engine/reference/commandline/app.md:
+    date: 2022-07-27
+engine/reference/commandline/app_bundle.md:
+    date: 2020-10-22
+engine/reference/commandline/app_completion.md:
+    date: 2020-10-22
+engine/reference/commandline/app_init.md:
+    date: 2020-10-22
+engine/reference/commandline/app_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/app_install.md:
+    date: 2020-10-22
+engine/reference/commandline/app_list.md:
+    date: 2020-10-22
+engine/reference/commandline/app_pull.md:
+    date: 2020-10-22
+engine/reference/commandline/app_push.md:
+    date: 2020-10-22
+engine/reference/commandline/app_render.md:
+    date: 2020-10-22
+engine/reference/commandline/app_status.md:
+    date: 2020-10-22
+engine/reference/commandline/app_uninstall.md:
+    date: 2020-10-22
+engine/reference/commandline/app_upgrade.md:
+    date: 2020-10-22
+engine/reference/commandline/app_validate.md:
+    date: 2020-10-22
+engine/reference/commandline/app_version.md:
+    date: 2020-10-22
+engine/reference/commandline/attach.md:
+    date: 2020-10-22
+engine/reference/commandline/build.md:
+    date: 2020-10-22
+engine/reference/commandline/builder.md:
+    date: 2020-10-22
+engine/reference/commandline/builder_build.md:
+    date: 2020-10-22
+engine/reference/commandline/builder_prune.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_bake.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_build.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_create.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_du.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_imagetools.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_imagetools_create.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_imagetools_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_install.md:
+    date: 2021-03-27
+engine/reference/commandline/buildx_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_prune.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_stop.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_uninstall.md:
+    date: 2021-03-27
+engine/reference/commandline/buildx_use.md:
+    date: 2020-10-22
+engine/reference/commandline/buildx_version.md:
+    date: 2020-10-22
+engine/reference/commandline/checkpoint.md:
+    date: 2020-10-22
+engine/reference/commandline/checkpoint_create.md:
+    date: 2020-10-22
+engine/reference/commandline/checkpoint_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/checkpoint_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/commit.md:
+    date: 2020-10-22
+engine/reference/commandline/compose.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_build.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_convert.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_cp.md:
+    date: 2021-09-02
+engine/reference/commandline/compose_create.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_down.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_events.md:
+    date: 2022-07-13
+engine/reference/commandline/compose_exec.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_images.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_kill.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_logs.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_ls.md:
+    date: 2021-09-02
+engine/reference/commandline/compose_pause.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_port.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_ps.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_pull.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_push.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_restart.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_rm.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_run.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_start.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_stop.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_top.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_unpause.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_up.md:
+    date: 2022-06-21
+engine/reference/commandline/compose_version.md:
+    date: 2021-09-13
+engine/reference/commandline/config.md:
+    date: 2020-10-22
+engine/reference/commandline/config_create.md:
+    date: 2020-10-22
+engine/reference/commandline/config_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/config_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/config_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/container.md:
+    date: 2020-10-22
+engine/reference/commandline/container_attach.md:
+    date: 2020-10-22
+engine/reference/commandline/container_commit.md:
+    date: 2020-10-22
+engine/reference/commandline/container_cp.md:
+    date: 2020-10-22
+engine/reference/commandline/container_create.md:
+    date: 2020-10-22
+engine/reference/commandline/container_diff.md:
+    date: 2020-10-22
+engine/reference/commandline/container_exec.md:
+    date: 2020-10-22
+engine/reference/commandline/container_export.md:
+    date: 2020-10-22
+engine/reference/commandline/container_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/container_kill.md:
+    date: 2020-10-22
+engine/reference/commandline/container_logs.md:
+    date: 2020-10-22
+engine/reference/commandline/container_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/container_pause.md:
+    date: 2020-10-22
+engine/reference/commandline/container_port.md:
+    date: 2020-10-22
+engine/reference/commandline/container_prune.md:
+    date: 2020-10-22
+engine/reference/commandline/container_rename.md:
+    date: 2020-10-22
+engine/reference/commandline/container_restart.md:
+    date: 2020-10-22
+engine/reference/commandline/container_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/container_run.md:
+    date: 2020-10-22
+engine/reference/commandline/container_start.md:
+    date: 2020-10-22
+engine/reference/commandline/container_stats.md:
+    date: 2020-10-22
+engine/reference/commandline/container_stop.md:
+    date: 2020-10-22
+engine/reference/commandline/container_top.md:
+    date: 2020-10-22
+engine/reference/commandline/container_unpause.md:
+    date: 2020-10-22
+engine/reference/commandline/container_update.md:
+    date: 2020-10-22
+engine/reference/commandline/container_wait.md:
+    date: 2020-10-22
+engine/reference/commandline/context.md:
+    date: 2020-10-22
+engine/reference/commandline/context_create.md:
+    date: 2020-10-22
+engine/reference/commandline/context_export.md:
+    date: 2020-10-22
+engine/reference/commandline/context_import.md:
+    date: 2020-10-22
+engine/reference/commandline/context_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/context_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/context_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/context_update.md:
+    date: 2020-10-22
+engine/reference/commandline/context_use.md:
+    date: 2020-10-22
+engine/reference/commandline/cp.md:
+    date: 2020-10-22
+engine/reference/commandline/create.md:
+    date: 2020-10-22
+engine/reference/commandline/diff.md:
+    date: 2020-10-22
+engine/reference/commandline/docker.md:
+    date: 2021-06-03
+engine/reference/commandline/events.md:
+    date: 2020-10-22
+engine/reference/commandline/exec.md:
+    date: 2020-10-22
+engine/reference/commandline/export.md:
+    date: 2020-10-22
+engine/reference/commandline/history.md:
+    date: 2020-10-22
+engine/reference/commandline/image.md:
+    date: 2020-10-22
+engine/reference/commandline/image_build.md:
+    date: 2020-10-22
+engine/reference/commandline/image_history.md:
+    date: 2020-10-22
+engine/reference/commandline/image_import.md:
+    date: 2020-10-22
+engine/reference/commandline/image_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/image_load.md:
+    date: 2020-10-22
+engine/reference/commandline/image_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/image_prune.md:
+    date: 2020-10-22
+engine/reference/commandline/image_pull.md:
+    date: 2020-10-22
+engine/reference/commandline/image_push.md:
+    date: 2020-10-22
+engine/reference/commandline/image_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/image_save.md:
+    date: 2020-10-22
+engine/reference/commandline/image_tag.md:
+    date: 2020-10-22
+engine/reference/commandline/images.md:
+    date: 2020-10-22
+engine/reference/commandline/import.md:
+    date: 2020-10-22
+engine/reference/commandline/info.md:
+    date: 2020-10-22
+engine/reference/commandline/inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/kill.md:
+    date: 2020-10-22
+engine/reference/commandline/load.md:
+    date: 2020-10-22
+engine/reference/commandline/login.md:
+    date: 2020-10-22
+engine/reference/commandline/logout.md:
+    date: 2020-10-22
+engine/reference/commandline/logs.md:
+    date: 2020-10-22
+engine/reference/commandline/manifest.md:
+    date: 2020-10-22
+engine/reference/commandline/manifest_annotate.md:
+    date: 2020-10-22
+engine/reference/commandline/manifest_create.md:
+    date: 2020-10-22
+engine/reference/commandline/manifest_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/manifest_push.md:
+    date: 2020-10-22
+engine/reference/commandline/manifest_rm.md:
+    date: 2020-12-09
+engine/reference/commandline/network.md:
+    date: 2020-10-22
+engine/reference/commandline/network_connect.md:
+    date: 2020-10-22
+engine/reference/commandline/network_create.md:
+    date: 2020-10-22
+engine/reference/commandline/network_disconnect.md:
+    date: 2020-10-22
+engine/reference/commandline/network_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/network_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/network_prune.md:
+    date: 2020-10-22
+engine/reference/commandline/network_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/node.md:
+    date: 2020-10-22
+engine/reference/commandline/node_demote.md:
+    date: 2020-10-22
+engine/reference/commandline/node_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/node_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/node_promote.md:
+    date: 2020-10-22
+engine/reference/commandline/node_ps.md:
+    date: 2020-10-22
+engine/reference/commandline/node_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/node_update.md:
+    date: 2020-10-22
+engine/reference/commandline/pause.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_create.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_disable.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_enable.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_install.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_push.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_set.md:
+    date: 2020-10-22
+engine/reference/commandline/plugin_upgrade.md:
+    date: 2020-10-22
+engine/reference/commandline/port.md:
+    date: 2020-10-22
+engine/reference/commandline/ps.md:
+    date: 2020-10-22
+engine/reference/commandline/pull.md:
+    date: 2020-10-22
+engine/reference/commandline/push.md:
+    date: 2020-10-22
+engine/reference/commandline/rename.md:
+    date: 2020-10-22
+engine/reference/commandline/restart.md:
+    date: 2020-10-22
+engine/reference/commandline/rm.md:
+    date: 2020-10-22
+engine/reference/commandline/rmi.md:
+    date: 2020-10-22
+engine/reference/commandline/run.md:
+    date: 2020-10-22
+engine/reference/commandline/save.md:
+    date: 2020-10-22
+engine/reference/commandline/search.md:
+    date: 2020-10-22
+engine/reference/commandline/secret.md:
+    date: 2020-10-22
+engine/reference/commandline/secret_create.md:
+    date: 2020-10-22
+engine/reference/commandline/secret_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/secret_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/secret_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/service.md:
+    date: 2020-10-22
+engine/reference/commandline/service_create.md:
+    date: 2020-10-22
+engine/reference/commandline/service_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/service_logs.md:
+    date: 2020-10-22
+engine/reference/commandline/service_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/service_ps.md:
+    date: 2020-10-22
+engine/reference/commandline/service_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/service_rollback.md:
+    date: 2020-10-22
+engine/reference/commandline/service_scale.md:
+    date: 2020-10-22
+engine/reference/commandline/service_update.md:
+    date: 2020-10-22
+engine/reference/commandline/stack.md:
+    date: 2020-10-22
+engine/reference/commandline/stack_deploy.md:
+    date: 2020-10-22
+engine/reference/commandline/stack_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/stack_ps.md:
+    date: 2020-10-22
+engine/reference/commandline/stack_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/stack_services.md:
+    date: 2020-10-22
+engine/reference/commandline/start.md:
+    date: 2020-10-22
+engine/reference/commandline/stats.md:
+    date: 2020-10-22
+engine/reference/commandline/stop.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_ca.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_init.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_join-token.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_join.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_leave.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_unlock-key.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_unlock.md:
+    date: 2020-10-22
+engine/reference/commandline/swarm_update.md:
+    date: 2020-10-22
+engine/reference/commandline/system.md:
+    date: 2020-10-22
+engine/reference/commandline/system_df.md:
+    date: 2020-10-22
+engine/reference/commandline/system_events.md:
+    date: 2020-10-22
+engine/reference/commandline/system_info.md:
+    date: 2020-10-22
+engine/reference/commandline/system_prune.md:
+    date: 2020-10-22
+engine/reference/commandline/tag.md:
+    date: 2020-10-22
+engine/reference/commandline/top.md:
+    date: 2020-10-22
+engine/reference/commandline/trust.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_key.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_key_generate.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_key_load.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_revoke.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_sign.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_signer.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_signer_add.md:
+    date: 2020-10-22
+engine/reference/commandline/trust_signer_remove.md:
+    date: 2020-10-22
+engine/reference/commandline/unpause.md:
+    date: 2020-10-22
+engine/reference/commandline/update.md:
+    date: 2020-10-22
+engine/reference/commandline/version.md:
+    date: 2020-10-22
+engine/reference/commandline/volume.md:
+    date: 2020-10-22
+engine/reference/commandline/volume_create.md:
+    date: 2020-10-22
+engine/reference/commandline/volume_inspect.md:
+    date: 2020-10-22
+engine/reference/commandline/volume_ls.md:
+    date: 2020-10-22
+engine/reference/commandline/volume_prune.md:
+    date: 2020-10-22
+engine/reference/commandline/volume_rm.md:
+    date: 2020-10-22
+engine/reference/commandline/wait.md:
+    date: 2020-10-22
+engine/release-notes/17.03.md:
+    date: 2020-11-11
+engine/release-notes/17.04.md:
+    date: 2021-05-31
+engine/release-notes/17.05.md:
+    date: 2020-03-17
+engine/release-notes/17.06.md:
+    date: 2022-07-27
+engine/release-notes/17.07.md:
+    date: 2020-03-17
+engine/release-notes/17.09.md:
+    date: 2020-10-13
+engine/release-notes/17.10.md:
+    date: 2020-03-17
+engine/release-notes/17.11.md:
+    date: 2021-09-13
+engine/release-notes/17.12.md:
+    date: 2020-03-17
+engine/release-notes/18.01.md:
+    date: 2020-03-17
+engine/release-notes/18.02.md:
+    date: 2020-03-17
+engine/release-notes/18.03.md:
+    date: 2020-03-17
+engine/release-notes/18.04.md:
+    date: 2020-03-17
+engine/release-notes/18.05.md:
+    date: 2020-03-17
+engine/release-notes/18.06.md:
+    date: 2020-03-18
+engine/release-notes/18.09.md:
+    date: 2022-05-25
+engine/release-notes/19.03.md:
+    date: 2021-02-01
+engine/release-notes/index.md:
+    date: 2022-07-06
+engine/release-notes/prior-releases.md:
+    date: 2022-07-27
+engine/sbom/index.md:
+    date: 2022-04-08
+engine/scan/index.md:
+    date: 2022-07-27
+engine/security/antivirus.md:
+    date: 2019-01-15
+engine/security/apparmor.md:
+    date: 2022-05-25
+engine/security/certificates.md:
+    date: 2021-12-20
+engine/security/https/Dockerfile:
+    date: 2016-10-10
+engine/security/https/Makefile:
+    date: 2016-10-10
+engine/security/https/README.md:
+    date: 2021-02-03
+engine/security/https/make_certs.sh:
+    date: 2016-10-10
+engine/security/https/parsedocs.sh:
+    date: 2021-02-03
+engine/security/index.md:
+    date: 2021-04-10
+engine/security/non-events.md:
+    date: 2016-11-11
+engine/security/protect-access.md:
+    date: 2021-05-11
+engine/security/rootless.md:
+    date: 2022-07-27
+engine/security/seccomp.md:
+    date: 2022-05-25
+engine/security/trust/deploying_notary.md:
+    date: 2022-06-02
+engine/security/trust/images/tag_signing.png:
+    date: 2016-12-22
+engine/security/trust/images/trust_.gliffy:
+    date: 2016-09-29
+engine/security/trust/images/trust_components.gliffy:
+    date: 2016-09-29
+engine/security/trust/images/trust_components.png:
+    date: 2016-12-22
+engine/security/trust/images/trust_signing.gliffy:
+    date: 2016-09-29
+engine/security/trust/images/trust_signing.png:
+    date: 2016-12-22
+engine/security/trust/images/trust_view.gliffy:
+    date: 2016-09-29
+engine/security/trust/images/trust_view.png:
+    date: 2016-12-22
+engine/security/trust/index.md:
+    date: 2021-08-14
+engine/security/trust/trust_automation.md:
+    date: 2021-08-14
+engine/security/trust/trust_delegation.md:
+    date: 2021-08-14
+engine/security/trust/trust_key_mng.md:
+    date: 2021-08-14
+engine/security/trust/trust_sandbox.md:
+    date: 2022-07-27
+engine/security/userns-remap.md:
+    date: 2022-07-27
+engine/swarm/admin_guide.md:
+    date: 2022-07-27
+engine/swarm/configs.md:
+    date: 2021-08-14
+engine/swarm/how-swarm-mode-works/nodes.md:
+    date: 2020-04-08
+engine/swarm/how-swarm-mode-works/pki.md:
+    date: 2020-10-24
+engine/swarm/how-swarm-mode-works/services.md:
+    date: 2018-01-25
+engine/swarm/how-swarm-mode-works/swarm-task-states.md:
+    date: 2021-08-06
+engine/swarm/images/ingress-lb.png:
+    date: 2016-12-22
+engine/swarm/images/ingress-routing-mesh.png:
+    date: 2016-12-22
+engine/swarm/images/placement_prefs.png:
+    date: 2020-08-31
+engine/swarm/images/replicated-vs-global.png:
+    date: 2016-12-22
+engine/swarm/images/service-lifecycle.png:
+    date: 2016-12-22
+engine/swarm/images/service-vip.png:
+    date: 2016-12-22
+engine/swarm/images/services-diagram.png:
+    date: 2016-12-22
+engine/swarm/images/src/ingress-lb.svg:
+    date: 2016-09-29
+engine/swarm/images/src/ingress-routing-mesh.svg:
+    date: 2016-09-29
+engine/swarm/images/src/replicated-vs-global.svg:
+    date: 2016-09-29
+engine/swarm/images/src/service-lifecycle.svg:
+    date: 2016-09-29
+engine/swarm/images/src/service-vip.svg:
+    date: 2016-09-29
+engine/swarm/images/src/services-diagram.svg:
+    date: 2016-09-29
+engine/swarm/images/src/simple-cluster.svg:
+    date: 2016-09-29
+engine/swarm/images/src/tls.svg:
+    date: 2016-09-29
+engine/swarm/images/swarm-diagram.png:
+    date: 2016-12-22
+engine/swarm/images/swarm-discovery-service.png:
+    date: 2019-02-05
+engine/swarm/images/swarm-high-availability.png:
+    date: 2019-02-05
+engine/swarm/images/swarm-multiple-clouds.png:
+    date: 2019-02-05
+engine/swarm/images/tls.png:
+    date: 2016-12-22
+engine/swarm/index.md:
+    date: 2021-03-25
+engine/swarm/ingress.md:
+    date: 2022-07-06
+engine/swarm/join-nodes.md:
+    date: 2021-08-06
+engine/swarm/key-concepts.md:
+    date: 2020-04-08
+engine/swarm/manage-nodes.md:
+    date: 2021-09-13
+engine/swarm/networking.md:
+    date: 2022-07-08
+engine/swarm/raft.md:
+    date: 2020-10-13
+engine/swarm/secrets.md:
+    date: 2022-07-27
+engine/swarm/services.md:
+    date: 2021-10-07
+engine/swarm/stack-deploy.md:
+    date: 2022-06-02
+engine/swarm/swarm-mode.md:
+    date: 2021-08-14
+engine/swarm/swarm-tutorial/add-nodes.md:
+    date: 2021-08-06
+engine/swarm/swarm-tutorial/create-swarm.md:
+    date: 2022-07-27
+engine/swarm/swarm-tutorial/delete-service.md:
+    date: 2022-04-12
+engine/swarm/swarm-tutorial/deploy-service.md:
+    date: 2021-08-06
+engine/swarm/swarm-tutorial/drain-node.md:
+    date: 2021-08-06
+engine/swarm/swarm-tutorial/index.md:
+    date: 2022-07-27
+engine/swarm/swarm-tutorial/inspect-service.md:
+    date: 2022-07-27
+engine/swarm/swarm-tutorial/rolling-update.md:
+    date: 2021-08-06
+engine/swarm/swarm-tutorial/scale-service.md:
+    date: 2021-08-06
+engine/swarm/swarm_manager_locking.md:
+    date: 2021-08-06
+engine/tutorials/bridge1.png:
+    date: 2017-04-23
+engine/tutorials/bridge2.png:
+    date: 2017-04-23
+engine/tutorials/bridge3.png:
+    date: 2017-06-09
+engine/tutorials/index.md:
+    date: 2020-04-08
+engine/tutorials/networkingcontainers.md:
+    date: 2021-08-06
+favicon.ico:
+    date: 2017-03-02
+favicons/docs.ico:
+    date: 2017-03-02
+favicons/docs@2x.ico:
+    date: 2017-03-02
+fonts/geomanist/demo.html:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Black.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Black.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Black.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Black.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Black.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Bold.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Bold.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Bold.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Bold.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Bold.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Book.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Book.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Book.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Book.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Book.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-ExtraLight.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-ExtraLight.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-ExtraLight.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-ExtraLight.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-ExtraLight.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Light.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Light.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Light.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Light.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Light.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Medium.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Medium.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Medium.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Medium.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Medium.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Regular.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Regular.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Regular.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Regular.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Regular.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Thin.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Thin.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Thin.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Thin.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Thin.woff2:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Ultra.eot:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Ultra.svg:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Ultra.ttf:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Ultra.woff:
+    date: 2016-09-29
+fonts/geomanist/hinted-Geomanist-Ultra.woff2:
+    date: 2016-09-29
+fonts/geomanist/stylesheet.css:
+    date: 2016-09-29
+fonts/glyphicons-halflings-regular.eot:
+    date: 2016-09-29
+fonts/glyphicons-halflings-regular.svg:
+    date: 2016-09-29
+fonts/glyphicons-halflings-regular.ttf:
+    date: 2016-09-29
+fonts/glyphicons-halflings-regular.woff:
+    date: 2016-09-29
+fonts/glyphicons-halflings-regular.woff2:
+    date: 2016-09-29
+get-docker.md:
+    date: 2022-07-13
+get-started/02_our_app.md:
+    date: 2022-07-27
+get-started/03_updating_app.md:
+    date: 2022-01-10
+get-started/04_sharing_app.md:
+    date: 2022-07-27
+get-started/05_persisting_data.md:
+    date: 2021-09-02
+get-started/06_bind_mounts.md:
+    date: 2022-07-27
+get-started/07_multi_container.md:
+    date: 2022-05-11
+get-started/08_using_compose.md:
+    date: 2022-07-27
+get-started/09_image_best.md:
+    date: 2021-11-27
+get-started/11_what_next.md:
+    date: 2021-02-02
+get-started/docker_cheatsheet.pdf:
+    date: 2022-06-09
+get-started/images/app-in-browser-redis.png:
+    date: 2017-06-09
+get-started/images/app-in-browser-swarm.png:
+    date: 2017-09-27
+get-started/images/app-in-browser.png:
+    date: 2017-06-09
+get-started/images/app80-in-browser.png:
+    date: 2017-10-05
+get-started/images/cloud-app-in-browser.png:
+    date: 2017-10-09
+get-started/images/cloud-aws-running-instances-x.png:
+    date: 2017-10-09
+get-started/images/cloud-aws-running-instances.png:
+    date: 2017-10-09
+get-started/images/cloud-aws-web-and-visualizer-ports.png:
+    date: 2017-10-09
+get-started/images/cloud-aws-web-port-open.png:
+    date: 2017-10-09
+get-started/images/cloud-swarm-connect-desktop.png:
+    date: 2017-10-09
+get-started/images/cloud-swarm-connect.png:
+    date: 2017-10-09
+get-started/images/cloud-visualizer.png:
+    date: 2017-10-09
+get-started/images/dashboard-app-project-collapsed.png:
+    date: 2022-07-14
+get-started/images/dashboard-app-project-expanded.png:
+    date: 2022-07-14
+get-started/images/dashboard-multi-container-app.png:
+    date: 2022-07-14
+get-started/images/dashboard-open-cli-ubuntu.png:
+    date: 2022-07-14
+get-started/images/dashboard-removing-container.png:
+    date: 2022-07-14
+get-started/images/dashboard-two-containers.png:
+    date: 2022-07-14
+get-started/images/get-started-visualizer1.png:
+    date: 2017-06-13
+get-started/images/hvs.png:
+    date: 2020-12-02
+get-started/images/ide-screenshot.png:
+    date: 2020-12-02
+get-started/images/items-added.png:
+    date: 2020-12-02
+get-started/images/laurel-docker-containers.png:
+    date: 2018-01-31
+get-started/images/laurel-docker-containers2019.png:
+    date: 2019-10-21
+get-started/images/multi-app-architecture.png:
+    date: 2020-12-02
+get-started/images/newrepo.png:
+    date: 2019-10-09
+get-started/images/push-command.png:
+    date: 2020-12-02
+get-started/images/pwd-add-new-instance.png:
+    date: 2020-12-02
+get-started/images/todo-list-empty.png:
+    date: 2020-12-02
+get-started/images/todo-list-sample.png:
+    date: 2020-12-02
+get-started/images/todo-list-updated-empty-text.png:
+    date: 2020-12-02
+get-started/images/tutorial-in-dashboard.png:
+    date: 2022-07-14
+get-started/images/updated-add-button.png:
+    date: 2020-12-02
+get-started/images/vid-get-started-pmckee.png:
+    date: 2020-06-03
+get-started/images/visualizer-with-redis.png:
+    date: 2017-06-09
+get-started/index.md:
+    date: 2022-07-27
+get-started/kube-deploy.md:
+    date: 2021-11-21
+get-started/nav.html:
+    date: 2020-12-21
+get-started/orchestration.md:
+    date: 2022-04-12
+get-started/overview.md:
+    date: 2022-02-07
+get-started/resources.md:
+    date: 2022-06-09
+get-started/swarm-deploy.md:
+    date: 2021-08-06
+glossary.md:
+    date: 2020-10-07
+go/about.md:
+    date: 2020-10-02
+go/access-tokens.md:
+    date: 2021-07-26
+go/apple-silicon.md:
+    date: 2021-08-14
+go/attack-surface.md:
+    date: 2021-02-25
+go/buildkit.md:
+    date: 2020-10-24
+go/buildx.md:
+    date: 2022-07-19
+go/compose-native-build.md:
+    date: 2022-06-21
+go/daemon-access.md:
+    date: 2021-02-25
+go/deprecated.md:
+    date: 2021-08-11
+go/experimental.md:
+    date: 2021-08-23
+go/formatting.md:
+    date: 2021-01-19
+go/guides.md:
+    date: 2020-12-01
+go/linux-credentials.md:
+    date: 2022-07-27
+go/mac-desktop-pause.md:
+    date: 2022-07-27
+go/rootless.md:
+    date: 2021-02-25
+go/storage-driver.md:
+    date: 2022-03-23
+go/tip-scanning.md:
+    date: 2021-02-16
+go/win-desktop-pause.md:
+    date: 2022-07-27
+go/wsl2.md:
+    date: 2021-08-20
+google161104f9fdea6089.html:
+    date: 2020-02-06
+googlecbe7fee896be512c.html:
+    date: 2016-10-10
+images/404-docs.png:
+    date: 2019-01-08
+images/Cloud_icon.png:
+    date: 2016-12-22
+images/Compose.png:
+    date: 2016-12-22
+images/Compose_icon.png:
+    date: 2016-12-22
+images/Container@2x.png:
+    date: 2018-11-14
+images/Engine_icon.png:
+    date: 2016-12-22
+images/Engine_icon_0.png:
+    date: 2016-12-22
+images/Hub_icon.png:
+    date: 2016-12-22
+images/Hub_icon_0.png:
+    date: 2016-12-22
+images/Kitematic_icon.png:
+    date: 2016-12-22
+images/Machine_icon.png:
+    date: 2016-12-22
+images/Swarm_icon.png:
+    date: 2016-12-22
+images/VM@2x.png:
+    date: 2018-11-14
+images/angles.png:
+    date: 2017-02-15
+images/apple_48.svg:
+    date: 2017-03-02
+images/applen_48.svg:
+    date: 2017-03-02
+images/arrow.svg:
+    date: 2020-05-13
+images/banner_image_24512.png:
+    date: 2016-12-22
+images/chat.png:
+    date: 2016-12-22
+images/cloud_48.svg:
+    date: 2017-03-02
+images/cloudn_48.svg:
+    date: 2017-03-02
+images/compose_48.svg:
+    date: 2017-03-02
+images/composen_48.svg:
+    date: 2017-03-02
+images/docker-docs-logo.svg:
+    date: 2017-02-15
+images/docker-docs.png:
+    date: 2021-12-09
+images/docker-friends.png:
+    date: 2016-12-22
+images/docker-icon.svg:
+    date: 2020-05-25
+images/docker_icon.png:
+    date: 2016-12-22
+images/dockercon.png:
+    date: 2022-05-17
+images/docs.png:
+    date: 2017-03-02
+images/docs@2x.png:
+    date: 2017-03-02
+images/down.png:
+    date: 2016-12-22
+images/download-docker.svg:
+    date: 2020-04-29
+images/engine.svg:
+    date: 2020-04-29
+images/engine_48.svg:
+    date: 2017-03-02
+images/enginen_48.svg:
+    date: 2017-03-02
+images/extensions.PNG:
+    date: 2022-07-05
+images/fan.svg:
+    date: 2017-03-02
+images/favicon.png:
+    date: 2016-12-22
+images/footer_moby_icon.png:
+    date: 2016-12-22
+images/green-check.svg:
+    date: 2020-04-12
+images/guides.svg:
+    date: 2020-04-29
+images/hub.svg:
+    date: 2020-04-29
+images/icon-apple@2X.png:
+    date: 2016-12-22
+images/icon-cloud@2X.png:
+    date: 2016-12-22
+images/icon-compose@2X.png:
+    date: 2016-12-22
+images/icon-engine@2X.png:
+    date: 2016-12-22
+images/icon-hub@2X.png:
+    date: 2016-12-22
+images/icon-linux@2X.png:
+    date: 2016-12-22
+images/icon-machine@2X.png:
+    date: 2016-12-22
+images/icon-registry@2X.png:
+    date: 2016-12-22
+images/icon-ucp@2X.png:
+    date: 2016-12-22
+images/icon-windows@2X.png:
+    date: 2016-12-22
+images/info_icon.png:
+    date: 2022-08-29
+images/language-guides.svg:
+    date: 2021-03-01
+images/laptop.svg:
+    date: 2020-04-29
+images/linux_48.svg:
+    date: 2017-03-02
+images/linuxn_48.svg:
+    date: 2017-03-02
+images/logo-docker-main.png:
+    date: 2021-06-09
+images/logo-docker-main.svg:
+    date: 2021-06-09
+images/logo-docker-main2.png:
+    date: 2016-12-22
+images/logo-docker-main2.svg:
+    date: 2022-05-25
+images/machine_48.svg:
+    date: 2017-03-02
+images/machinen_48.svg:
+    date: 2017-03-02
+images/manuals.svg:
+    date: 2020-04-29
+images/placeholder_24517_13.png:
+    date: 2016-12-22
+images/reference.svg:
+    date: 2020-04-29
+images/resources_file_icon.svg:
+    date: 2022-05-25
+images/resources_lap_icon.svg:
+    date: 2022-05-25
+images/rocket.svg:
+    date: 2020-04-29
+images/seach.png:
+    date: 2017-03-02
+images/search-icon.png:
+    date: 2016-12-22
+images/search.png:
+    date: 2017-03-02
+images/slack-icon.svg:
+    date: 2020-04-29
+images/small-linux.png:
+    date: 2016-12-22
+images/small-mac.png:
+    date: 2016-12-22
+images/small-windows.png:
+    date: 2016-12-22
+images/social_icons_24518.png:
+    date: 2016-12-22
+images/up.png:
+    date: 2016-12-22
+images/video.svg:
+    date: 2020-06-08
+images/whale-x.png:
+    date: 2016-12-22
+images/whats-new.svg:
+    date: 2020-04-29
+images/windows_48.svg:
+    date: 2017-03-02
+images/windowsn_48.svg:
+    date: 2017-03-02
+index.md:
+    date: 2021-11-11
+js/anchorlinks.js:
+    date: 2020-10-13
+js/bootstrap.min.js:
+    date: 2020-11-11
+js/docs.js:
+    date: 2021-08-17
+js/jquery.js:
+    date: 2020-11-11
+js/metadata.json:
+    date: 2020-10-21
+js/redoc.standalone.js:
+    date: 2022-06-01
+js/redoc.standalone.js.map:
+    date: 2022-06-01
+js/search.js:
+    date: 2020-10-11
+js/theme-switcher.js:
+    date: 2020-10-11
+js/toc.json:
+    date: 2020-10-14
+language/golang/build-images.md:
+    date: 2022-07-27
+language/golang/configure-ci-cd.md:
+    date: 2022-07-27
+language/golang/deploy.md:
+    date: 2022-07-27
+language/golang/develop.md:
+    date: 2022-07-14
+language/golang/images/cdsuccess.png:
+    date: 2021-06-14
+language/golang/images/loginerror.png:
+    date: 2021-06-14
+language/golang/images/runworkflow.png:
+    date: 2021-06-14
+language/golang/images/triggerontag.png:
+    date: 2021-06-14
+language/golang/index.md:
+    date: 2022-07-14
+language/golang/nav.html:
+    date: 2021-06-14
+language/golang/run-containers.md:
+    date: 2022-07-27
+language/golang/run-tests.md:
+    date: 2022-07-14
+language/images/golang.png:
+    date: 2021-06-14
+language/images/java.png:
+    date: 2021-01-11
+language/images/nodejs.png:
+    date: 2021-01-11
+language/images/python.png:
+    date: 2021-01-11
+language/index.md:
+    date: 2022-07-14
+language/java/build-images.md:
+    date: 2022-07-19
+language/java/configure-ci-cd.md:
+    date: 2022-07-14
+language/java/deploy.md:
+    date: 2022-07-14
+language/java/develop.md:
+    date: 2022-03-06
+language/java/images/compose-logs.png:
+    date: 2021-04-26
+language/java/images/connect-debugger.png:
+    date: 2021-04-26
+language/java/images/debug-menu.png:
+    date: 2021-04-26
+language/java/images/debugger-breakpoint.png:
+    date: 2021-04-26
+language/java/images/java-compose-output.png:
+    date: 2021-04-26
+language/java/index.md:
+    date: 2022-07-14
+language/java/nav.html:
+    date: 2021-04-26
+language/java/run-containers.md:
+    date: 2022-07-14
+language/java/run-tests.md:
+    date: 2022-07-14
+language/nodejs/build-images.md:
+    date: 2022-07-14
+language/nodejs/configure-ci-cd.md:
+    date: 2022-07-27
+language/nodejs/deploy.md:
+    date: 2022-07-14
+language/nodejs/develop.md:
+    date: 2022-07-14
+language/nodejs/images/chrome-inspect.png:
+    date: 2021-01-11
+language/nodejs/images/node-compile.png:
+    date: 2021-01-11
+language/nodejs/images/nodemon.png:
+    date: 2021-01-11
+language/nodejs/index.md:
+    date: 2022-07-14
+language/nodejs/nav.html:
+    date: 2021-01-11
+language/nodejs/run-containers.md:
+    date: 2022-07-14
+language/nodejs/run-tests.md:
+    date: 2022-07-14
+language/python/build-images.md:
+    date: 2022-07-19
+language/python/configure-ci-cd.md:
+    date: 2022-07-14
+language/python/deploy.md:
+    date: 2022-07-14
+language/python/develop.md:
+    date: 2022-02-09
+language/python/index.md:
+    date: 2022-07-14
+language/python/nav.html:
+    date: 2021-01-28
+language/python/run-containers.md:
+    date: 2022-07-14
+network/bridge.md:
+    date: 2021-12-27
+network/host.md:
+    date: 2022-05-23
+network/images/ipvlan-l3.gliffy:
+    date: 2016-03-16
+network/images/ipvlan-l3.png:
+    date: 2016-03-16
+network/images/ipvlan-l3.svg:
+    date: 2016-03-16
+network/images/ipvlan_l2_simple.gliffy:
+    date: 2016-03-16
+network/images/ipvlan_l2_simple.png:
+    date: 2016-03-16
+network/images/ipvlan_l2_simple.svg:
+    date: 2016-03-16
+network/images/macvlan-bridge-ipvlan-l2.gliffy:
+    date: 2016-03-16
+network/images/macvlan-bridge-ipvlan-l2.png:
+    date: 2016-03-16
+network/images/macvlan-bridge-ipvlan-l2.svg:
+    date: 2016-03-16
+network/images/multi_tenant_8021q_vlans.gliffy:
+    date: 2016-03-16
+network/images/multi_tenant_8021q_vlans.png:
+    date: 2016-03-16
+network/images/multi_tenant_8021q_vlans.svg:
+    date: 2016-03-16
+network/images/vlans-deeper-look.gliffy:
+    date: 2016-03-16
+network/images/vlans-deeper-look.png:
+    date: 2016-03-16
+network/images/vlans-deeper-look.svg:
+    date: 2016-03-16
+network/index.md:
+    date: 2021-11-07
+network/iptables.md:
+    date: 2021-08-06
+network/ipvlan.md:
+    date: 2022-07-27
+network/links.md:
+    date: 2021-03-20
+network/macvlan.md:
+    date: 2021-08-06
+network/network-tutorial-host.md:
+    date: 2021-08-06
+network/network-tutorial-macvlan.md:
+    date: 2021-08-06
+network/network-tutorial-overlay.md:
+    date: 2021-08-06
+network/network-tutorial-standalone.md:
+    date: 2021-08-06
+network/none.md:
+    date: 2021-08-06
+network/overlay.md:
+    date: 2021-09-13
+network/proxy.md:
+    date: 2022-07-15
+opensource/images/bonus.png:
+    date: 2016-12-22
+opensource/images/docker-friends.png:
+    date: 2016-12-22
+opensource/images/docs-site-feedback.png:
+    date: 2021-11-25
+opensource/images/gordon.jpeg:
+    date: 2016-09-29
+opensource/images/irc_login.png:
+    date: 2016-12-22
+opensource/images/triage-label.png:
+    date: 2016-12-22
+opensource/images/tutorials.png:
+    date: 2016-12-22
+opensource/index.md:
+    date: 2021-12-09
+opensource/ways.md:
+    date: 2020-10-27
+reference/index.md:
+    date: 2022-06-30
+registry/compatibility.md:
+    date: 2020-07-03
+registry/deploying.md:
+    date: 2022-05-25
+registry/deprecated.md:
+    date: 2020-07-03
+registry/garbage-collection.md:
+    date: 2021-12-01
+registry/glossary.md:
+    date: 2020-04-24
+registry/help.md:
+    date: 2021-06-03
+registry/images/notifications.gliffy:
+    date: 2016-09-28
+registry/images/notifications.png:
+    date: 2016-12-22
+registry/images/notifications.svg:
+    date: 2016-09-28
+registry/index.md:
+    date: 2020-10-13
+registry/insecure.md:
+    date: 2022-07-27
+registry/introduction.md:
+    date: 2020-07-03
+registry/migration.md:
+    date: 2016-10-10
+registry/notifications.md:
+    date: 2022-01-17
+registry/recipes/apache.md:
+    date: 2020-07-03
+registry/recipes/index.md:
+    date: 2020-07-03
+registry/recipes/mirror.md:
+    date: 2022-01-12
+registry/recipes/nginx.md:
+    date: 2021-08-06
+registry/recipes/osx-setup-guide.md:
+    date: 2022-03-12
+registry/recipes/osx/com.docker.registry.plist:
+    date: 2016-09-29
+registry/recipes/osx/config.yml:
+    date: 2016-09-29
+registry/storage-drivers/azure.md:
+    date: 2020-10-13
+registry/storage-drivers/filesystem.md:
+    date: 2020-10-13
+registry/storage-drivers/gcs.md:
+    date: 2020-07-03
+registry/storage-drivers/index.md:
+    date: 2021-10-07
+registry/storage-drivers/inmemory.md:
+    date: 2020-07-03
+registry/storage-drivers/oss.md:
+    date: 2020-07-03
+registry/storage-drivers/s3.md:
+    date: 2022-04-06
+registry/storage-drivers/swift.md:
+    date: 2020-07-03
+release-notes/index.md:
+    date: 2022-05-23
+robots.txt:
+    date: 2022-07-19
+samples/apt-cacher-ng.Dockerfile:
+    date: 2020-10-01
+samples/apt-cacher-ng.md:
+    date: 2021-08-06
+samples/aspnet-mssql-compose.md:
+    date: 2022-07-27
+samples/couchbase/web-console.png:
+    date: 2020-10-01
+samples/couchdb_data_volumes.md:
+    date: 2021-08-06
+samples/django.md:
+    date: 2022-06-21
+samples/dotnetcore.md:
+    date: 2022-07-27
+samples/images/django-it-worked.png:
+    date: 2021-04-14
+samples/images/rails-welcome.png:
+    date: 2021-04-14
+samples/images/wordpress-lang.png:
+    date: 2021-04-14
+samples/images/wordpress-welcome.png:
+    date: 2021-04-14
+samples/index.md:
+    date: 2021-04-24
+samples/postgresql_service.Dockerfile:
+    date: 2020-10-01
+samples/postgresql_service.md:
+    date: 2021-08-06
+samples/rails.md:
+    date: 2022-06-21
+samples/running_riak_service.Dockerfile:
+    date: 2020-10-01
+samples/running_riak_service.md:
+    date: 2021-08-06
+samples/running_ssh_service.md:
+    date: 2020-10-01
+samples/supervisord.conf:
+    date: 2020-10-01
+samples/wordpress.md:
+    date: 2022-06-27
+search.md:
+    date: 2020-10-11
+security/index.md:
+    date: 2022-07-27
+single-sign-on/faqs.md:
+    date: 2022-07-22
+single-sign-on/images/delete-sso.png:
+    date: 2022-07-25
+single-sign-on/images/sso-attribute.png:
+    date: 2022-02-22
+single-sign-on/images/sso-azure-oidc.png:
+    date: 2022-07-25
+single-sign-on/images/sso-azure1.png:
+    date: 2022-01-12
+single-sign-on/images/sso-azure2.png:
+    date: 2022-01-13
+single-sign-on/images/sso-azure3.png:
+    date: 2022-01-13
+single-sign-on/images/sso-domain.png:
+    date: 2022-01-13
+single-sign-on/images/sso-enforce.png:
+    date: 2021-12-22
+single-sign-on/images/sso-saml.png:
+    date: 2021-12-22
+single-sign-on/images/sso-saml1.png:
+    date: 2022-01-12
+single-sign-on/images/sso-saml2.png:
+    date: 2022-01-13
+single-sign-on/images/sso-saml3.png:
+    date: 2022-01-12
+single-sign-on/index.md:
+    date: 2022-07-27
+sitemap.xsl:
+    date: 2022-07-28
+storage/bind-mounts.md:
+    date: 2022-07-20
+storage/images/types-of-mounts-bind.png:
+    date: 2018-01-31
+storage/images/types-of-mounts-tmpfs.png:
+    date: 2018-01-31
+storage/images/types-of-mounts-volume.png:
+    date: 2018-01-31
+storage/images/types-of-mounts.png:
+    date: 2018-01-31
+storage/images/volumes-shared-storage.svg:
+    date: 2018-04-03
+storage/index.md:
+    date: 2022-02-04
+storage/storagedriver/aufs-driver.md:
+    date: 2021-08-06
+storage/storagedriver/btrfs-driver.md:
+    date: 2021-09-13
+storage/storagedriver/device-mapper-driver.md:
+    date: 2021-09-13
+storage/storagedriver/images/aufs_delete.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/aufs_layers.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/aufs_metadata.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/base_device.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/btfs_constructs.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/btfs_container_layer.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/btfs_layers.png:
+    date: 2018-01-31
+storage/storagedriver/images/btfs_pool.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/btfs_snapshots.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/btfs_subvolume.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/container-layers-cas.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/container-layers.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/dm_container.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/driver-pros-cons.png:
+    date: 2018-01-31
+storage/storagedriver/images/image-layers.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/lsblk-diagram.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/overlay_constructs.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/overlay_constructs2.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/saving-space.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/shared-uuid.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/sharing-layers.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/two_dm_container.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/zfs_clones.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/zfs_zpool.jpg:
+    date: 2018-01-31
+storage/storagedriver/images/zpool_blocks.jpg:
+    date: 2018-01-31
+storage/storagedriver/index.md:
+    date: 2022-01-21
+storage/storagedriver/overlayfs-driver.md:
+    date: 2022-07-27
+storage/storagedriver/select-storage-driver.md:
+    date: 2021-07-28
+storage/storagedriver/vfs-driver.md:
+    date: 2021-08-06
+storage/storagedriver/zfs-driver.md:
+    date: 2022-07-27
+storage/tmpfs.md:
+    date: 2021-08-06
+storage/troubleshooting_volume_errors.md:
+    date: 2021-08-06
+storage/volumes.md:
+    date: 2022-06-13
+subscription/add-seats.md:
+    date: 2022-07-22
+subscription/downgrade.md:
+    date: 2022-03-04
+subscription/faq.md:
+    date: 2022-07-27
+subscription/images/billing-personal-account.png:
+    date: 2021-11-15
+subscription/index.md:
+    date: 2022-06-29
+subscription/remove-seats.md:
+    date: 2021-11-01
+subscription/upgrade.md:
+    date: 2022-03-01
+support/index.md:
+    date: 2022-08-01
+test.md:
+    date: 2021-12-09

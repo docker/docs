@@ -28,7 +28,7 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            <p>{%- include read_time.html -%} &emsp; {%- include last_reviewed.html -%}</p>
+                            <p>{%- include read_time.html -%}  {%- include last_reviewed.html -%}</p>
                             {{ content }}
                             {%- unless page.notags == true -%}
                             {%- assign keywords = page.keywords | split:"," -%}
@@ -71,34 +71,6 @@
                                 <div id="side-toc-title">On this page:</div>
                                 {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
                                 {%- endunless -%}
-                                <hr>
-                                <div id="side-toc-title">Make a contribution</div>
-                                <div class="feedback-links">
-                                    <ul>
-                                        {%- if edit_url != "" -%}
-                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
-                                        {%- endif -%}
-                                        {%- if issue_url != "" -%}
-                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
-                                        {%- endif -%}
-                                    </ul>
-                                    <hr>
-                                    <div id="side-toc-title">Latest contributers</div>
-                                                <a href="https://github.com/usha-mandya">
-                                                    <img  style="position:relative;left:15px;" src="https://avatars.githubusercontent.com/u/47779042?s=64&amp;v=4" alt="@usha-mandya" size="32" height="32" width="32" >
-                                                </a>
-
-                                                <a href="https://github.com/thaJeztah">
-                                                    <img style="position:relative;left:15px;" src="https://avatars.githubusercontent.com/u/1804568?s=64&amp;v=4" alt="@thaJeztah" size="32" height="32" width="32" >
-                                                  </a>
-                                    <hr>
-                                    <div id="side-toc-title">Latest updates</div>
-                                    <a  style="font-size: 12px; position:relative;left:15px;" href="https://github.com/docker/docker.github.io/commit/81fb76d3f408c8ea6c0ccdbd2ffb58bf37c8570b">2022-08-01   here is commit text</a></br>
-                                    <a  style="font-size: 12px; position:relative;left:15px;" href="https://github.com/docker/docker.github.io/commit/81fb76d3f408c8ea6c0ccdbd2ffb58bf37c8570b">2022-07-05   another commit text</a>
-                                    <hr>
-                                    <div id="side-toc-title">Open issues</div>
-                                    <a  style="font-size: 12px; position:relative;left:15px;" href="https://github.com/docker/docker.github.io/commit/81fb76d3f408c8ea6c0ccdbd2ffb58bf37c8570b">2022-08-01  issue title here</a>
-                                </div>
                             </div>
                         </div>
                     </div>
