@@ -51,5 +51,4 @@ For other options, see [Other install scenarios](./other.md).
 
 ## Feedback
 
-We have updated this page and would like to hear from you.
-[Give feedback](https://survey.alchemer.com/s3/7002962/Compose-Install-Documentation-Feedback).
+We'd love to hear from you about the improvements we've recently made to the Docker Compose installation instructions. Let us know what you think by completing this short [survey](https://survey.alchemer.com/s3/7002962/Compose-Install-Documentation-Feedback){:target="_blank" rel="noopener" class="_"}.
