@@ -2,31 +2,45 @@
 description: How to install Docker Compose
 keywords: compose, orchestration, install, installation, docker, documentation
 title: Install Docker Compose
-toc_max: 2
+toc_max: 3
+redirect_from:
+- /compose/compose-desktop/
 ---
 
-On this page you can find a summary of the available options for installing Docker Compose. 
+On this page you can find information on how to get and install Compose.
 
-## Compose prerequisites
+## Install Compose
 
-* Docker Compose requires Docker Engine.
-* Docker Compose plugin requires Docker CLI.
+If you have Docker Desktop, you've got a full Docker installation, including Compose.
 
-## Compose installation scenarios
-You can run Compose on macOS, Windows, and 64-bit Linux. Check what installation scenario fits your needs. 
+You can check this by clicking on **About Docker Desktop** from the Docker menu ![whale menu](../../desktop/images/whale-x.png){: .inline}.
 
-Are you looking to:
+![about-desktop](../../desktop/images/about_desktop.png){:width="750px"}
 
-* __Get latest Docker Compose and its prerequisites__:
-[Install Docker Desktop for your platform](./compose-desktop.md). This is the fastest route and you get Docker Engine and Docker CLI with the Compose plugin. Docker Desktop is available for Mac, Windows and Linux.
+### New Docker Installation
 
-* __Install Compose plugin:__
-  + __(Mac, Win, Linux) Docker Desktop__: If you have Desktop installed then you already have the Compose plugin installed.
-  + __Linux systems__: To install the Docker CLI's Compose plugins use one of these methods of installation: 
-     + Using the [convenience scripts](../../engine/install/#server){: target="_blank" rel="noopener" class="_"} offered per Linux distro from the Engine install section.
-     + [Setting up Docker's repository](compose-plugin#install-using-the-repository) and using it to install the compose plugin package.     
-     + Other scenarios, check the [Linux install](compose-plugin#installing-compose-on-linux-systems).
-  + __Windows Server__: If you want to run the Docker daemon and client directly on Microsoft Windows Server, follow the [Windows Server install instructions](compose-plugin#install-compose-on-windows-server).
+If you haven’t yet installed Docker Desktop:
+
+{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto; align=right"}' %}
+
+| Platform       | Docker Desktop                 |
+|:---------------|:------------------------------:|
+|Linux (64-bit)  |{{ yes }} [Install](../../desktop/install/linux-install.md)|
+|Mac             |{{ yes }} [Install](../../desktop/install/mac-install.md)|
+|Windows         |{{ yes }} [Install](../../desktop/install/windows-install.md)|
+
+
+### Pre-existing Docker Installation
+
+If you have a Docker installation on Linux to which you want to add the Compose plugin, you can choose one of these options:
+
+* [Install using the repository](./linux.md#install-using-the-repository)
+* [Install the plugin manually](./linux.md#install-the-plugin-manually)
+
+### Other install scenarios
+
+For other options check, see [Other install scenarios](./other.md/).
+
 
 ## Where to go next
 
