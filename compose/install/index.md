@@ -39,7 +39,7 @@ If you have a Docker installation on Linux to which you want to add the Compose 
 
 ### Other install scenarios
 
-For other options check, see [Other install scenarios](./other.md/).
+For other options, see [Other install scenarios](./other.md).
 
 
 ## Where to go next
