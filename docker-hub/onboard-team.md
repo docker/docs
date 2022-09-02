@@ -44,7 +44,7 @@ organization’s settings apply to the user’s session, you can use a `registry
 
 ## What's next
 
-Get the most out of your Docker Team subscription by leveraging these popular features:
+Create and manage your repositories:
 
 - Create [repositories](../docker-hub/repos.md) to share container images.
 - [Consolidate a repository](../docker-hub/repos.md/#personal-to-an-organization) from your personal account to your organization.

@@ -65,9 +65,8 @@ organization’s settings apply to the user’s session, you can use a `registry
 
 ## What's next
 
-Get the most out of your Docker Business subscription by leveraging these popular features:
+Create and manage your registries and repositories:
 
-- If you haven't configured [System for Cross-domain Identity Management](../docker-hub/scim.md/) yet, configure it now for centralized account management.
 - Create [repositories](../docker-hub/repos.md) to share container images.
 - [Consolidate a repository](../docker-hub/repos.md/#personal-to-an-organization) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
