@@ -15,7 +15,7 @@ If you have Docker Desktop, you've got a full Docker installation, including Com
 
 You can check this by clicking on **About Docker Desktop** from the Docker menu ![whale menu](../../desktop/images/whale-x.png){: .inline}.
 
-![about-desktop](../../desktop/images/about_desktop.png){:width="750px"}
+![about-desktop](../../desktop/images/about_desktop_versions.png){:width="750px"}
 
 ### New Docker Installation
 
@@ -49,3 +49,7 @@ For other options check, see [Other install scenarios](./other.md/).
 - [Compose file reference](../compose-file/index.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 
+## Feedback
+
+We have updated this page and would like to hear from you.
+[Give feedback](https://survey.alchemer.com/s3/7002962/Compose-Install-Documentation-Feedback).
