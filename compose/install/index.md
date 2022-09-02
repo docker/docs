@@ -15,7 +15,7 @@ If you have Docker Desktop, you've got a full Docker installation, including Com
 
 You can check this by clicking on **About Docker Desktop** from the Docker menu ![whale menu](../../desktop/images/whale-x.png){: .inline}.
 
-![about-desktop](../images/about_desktop.png){:width="750px"}
+![about-desktop](../../desktop/images/about_desktop.png){:width="750px"}
 
 ### New Docker Installation
 
@@ -34,12 +34,12 @@ If you haven’t yet installed Docker Desktop:
 
 If you have a Docker installation on Linux to which you want to add the Compose plugin, you can choose one of these options:
 
-* [Install using the repository](./compose-linux.md#install-using-the-repository)
-* [Install the plugin manually](./compose-linux.md#install-the-plugin-manually)
+* [Install using the repository](./linux.md#install-using-the-repository)
+* [Install the plugin manually](./linux.md#install-the-plugin-manually)
 
 ### Other install scenarios
 
-For other options check, see [Other install scenarios](./compose-other.md/).
+For other options check, see [Other install scenarios](./other.md/).
 
 
 ## Where to go next

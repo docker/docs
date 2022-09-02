@@ -25,10 +25,16 @@ See Uninstall Docker Desktop for:
 
 To remove the Compose CLI plugin, run:
 
+Ubuntu, Debian:
+
 ```console
 $ sudo apt-get remove docker-compose-plugin
 ```
-Or, if using a different distro, use the equivalent package manager instruction to remove `docker-compose-plugin`.
+RPM-based distros:
+
+```console
+$ sudo yum remove docker-compose-plugin
+```
 
 #### Manually installed
 
@@ -54,7 +60,7 @@ $ rm /usr/local/lib/docker/cli-plugins/docker-compose
 
 #### Inspect the location of the Compose CLI plugin
 
-Use:
+To check where Compose is installed, use:
 
 ```console
 $ docker info --format '{{range .ClientInfo.Plugins}}{{if eq .Name "compose"}}{{.Path}}{{end}}{{end}}'
