@@ -19,13 +19,16 @@ redirect_from:
 ---
 
 The Verified Publisher Program provides several benefits and features to Docker
-Hub publishers, such as:
+Hub publishers. Including, but not limited to:
 
 - Verified publisher badge
 - Insights and analytics
-- Advanced image management
 - Vulnerability scanning
-- No rate limiting
+- Additional Docker Business seats
+- [Rate limiting](/docker-hub/download-rate-limit/){: target="blank"
+  rel="noopener" class=""} exempt<sup>1</sup>
+
+<sup>1</sup>: Depending on purchase plan.
 
 ## Verified publisher badge
 
@@ -50,13 +53,6 @@ per tag, and the raw format lists information about every image pull for the
 selected time span. Data points include tag, type of pull, user geolocation,
 client tool (user agent), and more.
 
-## Advanced image management
-
-[Advanced image management](/docker-hub/image-management/){: target="blank"
-rel="noopener" class=""} is a tool that lets publishers browse and manage their
-Docker Hub inventory. List, filter, and delete image tags in your repositories,
-using the dashboard or API.
-
 ## Vulnerability scanning
 
 Automatic vulnerability scanning using Snyk for images published to Docker Hub.
@@ -65,13 +61,6 @@ developers that it can be trusted. Scanning can be enabled on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
 target="blank" rel="noopener" class=""} for more information about how to use
 it.
-
-## No rate limiting
-
-For regular Docker images, image downloads are
-[rate limited](/docker-hub/download-rate-limit/){: target="blank" rel="noopener"
-class=""}. Images by verified publishers, however, are exempted from rate
-limiting; users can pull these images an unlimited number of times.
 
 ## Who's eligible to become a verified publisher?
 
