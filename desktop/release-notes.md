@@ -111,9 +111,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [Windows](https://desktop.docker.com/win/main/amd64/84025/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/84025/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/84025/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
+> [Debian](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-x86_64.pkg.tar.zst)
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
