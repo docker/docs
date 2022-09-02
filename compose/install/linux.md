@@ -23,42 +23,32 @@ To install Compose:
 > **Note**
 >
 > These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin.  
-For Compose standalone, see [Install Compose Standalone](./other.md#on-linux).
+For Compose standalone, see [Install Compose Standalone](other.md#install-compose-standalone).
 
 If you have already set up the Docker repository, jump to step 2.
 
 1. Set up the repository. Find distro-specific instructions in:
-[Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
-[CentOS](../../engine/install/centos.md/#set-up-the-repository) |
-[Debian](../../engine/install/debian.md/#set-up-the-repository) |
-[RHEL](../../engine/install/fedora.md/#set-up-the-repository) |
-[SLES](../../engine/install/sles.md/#set-up-the-repository).
-To upgrade, do:
+
+    [Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
+    [CentOS](../../engine/install/centos.md/#set-up-the-repository) |
+    [Debian](../../engine/install/debian.md/#set-up-the-repository) |
+    [Fefora](../../engine/install/fedora.md/#set-up-the-repository) |
+    [RHEL](../../engine/install/rhel.md/#set-up-the-repository) |
+    [SLES](../../engine/install/sles.md/#set-up-the-repository).
+
+2. Update the package index, and install the _latest version_ of Docker Compose:
 
 * Ubuntu, Debian:
 
     ```console
-
     $ sudo apt-get update
     $ sudo apt-get install docker-compose-plugin
-
     ```
-RPM-based distros:
+* RPM-based distros:
 
     ```console
-
     $ sudo yum update
     $ sudo yum install docker-compose-plugin
-
-    ```
-
-2. Update the `apt` package index, and install the _latest version_ of Docker Compose:
-
-    Ubuntu, Dei:
-
-    ```console
-    $ sudo apt-get update
-    $ sudo apt-get install docker-compose-plugin
     ```
 
 3.  Verify that Docker Compose is installed correctly by checking the version.
@@ -67,33 +57,23 @@ RPM-based distros:
     $ docker compose version
     Docker Compose version vN.N.N
     ```
-Where `vN.N.N` is a placeholder for the latest version.
 
-> **Note**
->
-> To run Compose as a non-root user, see [Manage Docker as a non-root user](../../engine/install/linux-postinstall.md){:target="_blank" rel="noopener" class="_"}.
+Where `vN.N.N` is placeholder text standing in for the latest version.
 
 #### Update Compose
-
-To update, do:
 
 * Ubuntu, Debian:
 
     ```console
-
     $ sudo apt-get update
     $ sudo apt-get install docker-compose-plugin
-
     ```
-RPM-based distros:
+* RPM-based distros:
 
     ```console
-
     $ sudo yum update
     $ sudo yum install docker-compose-plugin
-
     ```
-
 
 ### Install the plugin manually
 
@@ -113,11 +93,12 @@ RPM-based distros:
 
     To install:
     * Docker Compose for _all users_ on your system, replace `~/.docker/cli-plugins` with `/usr/local/lib/docker/cli-plugins`.
-    * A different version of Compose, substitute `{{site.compose_version}}` with the version of Compose you want to use.
+    * A different version of Compose, substitute `{{site.compose_version}}` with the version of Compose you want to use.  
+
 
 2. Apply executable permissions to the binary:
 
-     ```console
+    ```console
     $ chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
     ```
     or, if you chose to install Compose for all users:
