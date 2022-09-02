@@ -60,12 +60,6 @@
                             <div class="toc-nav">
                                 <div class="feedback-links">
                                     <ul>
-                                        {%- if edit_url != "" -%}
-                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
-                                        {%- endif -%}
-                                        {%- if issue_url != "" -%}
-                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
-                                        {%- endif -%}
                                         <li>{%- include theme-switch.html -%}</li>
                                     </ul>
                                 </div>
@@ -73,9 +67,18 @@
                                 {%- assign my_min = page.toc_min | default: site.toc_min | default: 2 -%}
                                 {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
                                 {%- assign my_name = page.url | default: "unnamed" -%}
-                                <div id="side-toc-title">On this page:</div>
+                                <div id="side-toc-title">Contents:</div>
                                 {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
                                 {%- endunless -%}
+                                <div class="feedback-links">
+                                    <ul>
+                                        {%- if edit_url != "" -%}
+                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this page</a></li>
+                                        {%- endif -%}
+                                        {%- if issue_url != "" -%}
+                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request changes</a></li>
+                                        {%- endif -%}
+                                    </ul>
                             </div>
                         </div>
                     </div>
