@@ -52,6 +52,10 @@ Instead of:
 
 _In Docker Desktop 4.1 and lower._
 
+#### execute
+
+Avoid where possible. Use `run` instead.
+
 #### later
 Use `later` when talking about version numbers.
 

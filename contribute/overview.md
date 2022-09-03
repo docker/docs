@@ -1,6 +1,8 @@
 ---
 title: Contribute to Docker's docs
 toc_max: 1
+redirect_from:
+- /contribute/
 ---
 
 We deeply value documentation contributions from the Docker community. We'd like to make it as easy
@@ -73,6 +75,6 @@ as possible for you to work in this repository. The following sections guide you
 
 We also provide:
 
-- A page of [useful components](components.md) you can add to your documentation.
+- A section of useful components you can add to your documentation. For components and controls we are using [Bootstrap](https://getbootstrap.com)
 - Information on Docker's [tone and voice](style/voice-tone.md).
 - A [writing checklist](checklist.md) to help you when you're contributing to Docker's documenation.

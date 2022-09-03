@@ -1674,7 +1674,29 @@ contribute:
       title: Voice and tone
   - path: /contribute/file-conventions/
     title: Source file conventions
-  - path: /contribute/components/
-    title: Useful components
+  - sectiontitle: Useful components
+    section:
+    - path: /contribute/components/accordions/
+      title: Accordions
+    - path: /contribute/components/badges/
+      title: Badges
+    - path: /contribute/components/call-outs/
+      title: Call outs
+    - path: /contribute/components/cards/
+      title: Cards
+    - path: /contribute/components/images/
+      title: Images
+    - path: /contribute/components/links/
+      title: Links
+    - path: /contribute/components/lists/
+      title: Lists
+    - path: /contribute/components/tables/
+      title: Tables
+    - path: /contribute/components/tabs/
+      title: Tabs
+    - path: /contribute/components/tooltips/
+      title: Tooltips
+    - path: /contribute/components/videos/
+      title: Videos
   - path: /contribute/checklist/
     title: Writing checklist

@@ -14,7 +14,7 @@ An initialism is a type of acronym that comprises a group of initial letters use
 ### Best practice:
 
 - Spell out lesser-known acronyms or initialisms on first use, then follow with the acronym or initialism in parentheses. After this, throughout the rest of your page or document, use the acronym or initialism alone.
-> ‘You can use Single-Sign-on (SSO) to sign in to Notion. You may need to ask your administrator to enable SSO.’
+> ‘You can use single sign-on (SSO) to sign in to Notion. You may need to ask your administrator to enable SSO.’
 - Where the acronym or initialism is more commonly used than the full phrase, for example, URL, HTML, you do not need to follow this spell-it-out rule.
 - Use all caps for acronyms of file types (a JPEG file).
 - Don't use apostrophes for plural acronyms. ✅URLs ❌URL’S
@@ -28,7 +28,7 @@ Unless you're referring to Ul text or user-defined text, you should not add emph
 
 - Don't use bold to refer to a feature name.
 - Use italics sparingly, as this type of formatting can be difficult to read in digital experiences.
-Notable exceptions are titles of books, newspapers or magazines.
+Notable exceptions are titles of articles, blog posts, or specifcation documents.
 
 ## Capitalization
 
@@ -93,7 +93,7 @@ Lists are a great way to break down complex ideas and make them easier to read a
 
 - Bulleted lists should contain relatively few words or short phrases. For most content types, limit the number of items in a list to five.
 - Don’t add commas (,) or semicolons (;) to the ends of list items.
-    - Some content types may use bulleted lists that contain 10 items, but it's preferable to break longer lists into several lists, each with its own subheading or introduction.
+- Some content types may use bulleted lists that contain 10 items, but it's preferable to break longer lists into several lists, each with its own subheading or introduction.
 - Never create a bulleted list with only one bullet, and never use a dash to indicate a bulleted list.
 - If your list items are fragments, capitalize the list items for ease of scanning but do not use terminal punctuation. 
 Example:
