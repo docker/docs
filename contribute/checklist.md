@@ -29,7 +29,7 @@ Write short, concise sentences. Punchy sentences are faster to read and easier t
 
 This helps ‘scanners’ find the information they need quickly and easily.
 
-For more information, see the [formtatting](style/formatting.md#headings-and-subheadings) page, or see the [components](components.md#lists) for examples.
+For more information, see the [formtatting](style/formatting.md#headings-and-subheadings) page, or see the [components](components/lists.md) for examples.
 
 ##### Started the title of your page with a verb
 
@@ -41,7 +41,7 @@ For example, 'Install Docker Desktop'.
 
 Use relative links to link to other pages or images within the docker.github.io repository.
 
-For more information, see the [formatting](style/formatting.md#links) page, or see the [components](components.md#links) for examples.
+For more information, see the [formatting](style/formatting.md#links) page, or see the [components](components/links.md) for examples.
 
 ##### Checked that any redirects you may have added, work
 

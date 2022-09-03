@@ -42,7 +42,7 @@ Images, including screenshots, can help a reader better understand a concept. Ho
     - To keep the Git repository light, compress the images (losslessly). Be sure to compress the images before adding them to the repository. Compressing images after adding them to the repository actually worsens the impact on the Git repo (however, it still optimizes the bandwidth during browsing).
     - Don't forget to remove images from the repo that are no longer used.
 
-For information on how to add images to your content, see [Useful component and formatting examples](../components.md#images).
+For information on how to add images to your content, see [Useful component and formatting examples](../components/images.md).
 
 ## Links
 
@@ -63,7 +63,7 @@ The best links offer readers another way to scan information.
 - Do not make link text italics or bold, unless it would be so as normal body copy.
 - Make sure your link opens in a new tab so it doesn't interrupt the user-flow.
 
-For information on how to add links to your content, see [Useful component and formatting examples](../components.md#links).
+For information on how to add links to your content, see [Useful component and formatting examples](../components/links.md).
 
 ## Code and code samples
 
@@ -71,7 +71,7 @@ Format the following as code: docker commands, instructions and filenames (packa
 
 To apply inline code style, wrap the text in a single backtick (`).
 
-For information on how to add codeblocks to your content, see [Useful component and formatting examples](../components.md#code-blocks).
+For information on how to add codeblocks to your content, see [Useful component and formatting examples](../components/code-blocks.md).
 
 ## Callouts
 
@@ -91,7 +91,7 @@ Use callouts to emphasize selected information in a page.
 | Note | Use the Note tag for information that may not apply to all readers, or if the information is tangential to a topic. | Blue |
 |  | ✅ Example: Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.|
 
-For information on how to add call outs to your content, see [Useful component and formatting examples](../components.md#call-outs).
+For information on how to add call outs to your content, see [Useful component and formatting examples](../components/call-outs.md).
 
 ## Navigation
 
@@ -133,4 +133,4 @@ Note that in many cases, an unordered list is sufficient to describe a list of i
 - Use sentence case for table headings.
 - To keep tables accessible and scannable, tables should not have any empty cells. If there is no otherwise meaningful value for a cell, consider entering N/A for ‘not applicable’ or None.
 
-For information on how to add tables to your content, see [Useful component and formatting examples](../components.md#tables).
+For information on how to add tables to your content, see [Useful component and formatting examples](../components/tables.md).
