@@ -18,25 +18,23 @@ redirect_from:
   - /docker-hub/publish/byol/
 ---
 
-The Verified Publisher Program provides several benefits and features to Docker
-Hub publishers. Including, but not limited to:
+The Verified Publisher Program provides several features and benefits to Docker
+Hub publishers. The following perks are granted based on participation tier:
 
 - Verified publisher badge
 - Insights and analytics
 - Vulnerability scanning
 - Additional Docker Business seats
-- [Rate limiting](/docker-hub/download-rate-limit/){: target="blank"
-  rel="noopener" class=""} exempt<sup>1</sup>
-
-<sup>1</sup>: Depending on purchase plan.
+- Removal of rate limiting for developers
+- Co-marketing opportunities
 
 ## Verified publisher badge
 
-![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
-
 The verified publisher badge signals high quality, and trust, to developers.
-Images with this badge are verified to be of high quality, and that the content
-can be trusted.
+Images with this badge are verified as high quality, and the content can be
+trusted.
+
+![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
 
 ## Insights and analytic
 
@@ -47,9 +45,9 @@ behavior.
 
 ![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
 
-Select the time span for which you want to view analytics data, and export the
-data in either a summary or raw format. The summary format shows you image pulls
-per tag, and the raw format lists information about every image pull for the
+Select the time span you want to view analytics data, and export the data in
+either a summary or raw format. The summary format shows you image pulls per
+tag, and the raw format lists information about every image pull for the
 selected time span. Data points include tag, type of pull, user geolocation,
 client tool (user agent), and more.
 
@@ -65,7 +63,6 @@ it.
 ## Who's eligible to become a verified publisher?
 
 Any independent software vendor who distributes software on Docker Hub can join
-the Verified Publisher Program and enjoy the benefits. Find out more by heading
-to the
+the Verified Publisher Program. Find out more by heading to the
 [Docker Verified Publisher Program](https://www.docker.com/partners/programs){:target="_blank"
 rel="noopener" class="_"} page.
