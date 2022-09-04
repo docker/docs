@@ -18,6 +18,7 @@ as possible for you to work in this repository. The documentation for Docker is 
   - [Running in-page Javascript](#running-in-page-javascript)
   - [Images](#images)
   - [Style guide](#style-guide)
+  - [Style design](#style-design)
 - [Build and preview the docs locally](#build-and-preview-the-docs-locally)
   - [Build the docs with deployment features enabled](#build-the-docs-with-deployment-features-enabled)
 - [Copyright and license](#copyright-and-license)
