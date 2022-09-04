@@ -1662,7 +1662,7 @@ the service's containers.
   Default value is world-readable permissions (mode `0444`).
   The writable bit MUST be ignored if set. The executable bit MAY be set.
 
-The following example sets the name of the `server-certificate` secret file to `server.crt`
+The following example sets the name of the `server-certificate` secret file to `server.cert`
 within the container, sets the mode to `0440` (group-readable) and sets the user and group
 to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
 the secret lifecycle is not directly managed by the Compose implementation.
