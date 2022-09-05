@@ -12,7 +12,7 @@ that are currently deployed.
 This level of tracking gives developers contexts about when security debt is
 both increasing and decreasing. This can be integrated in several ways:
 
-- steps in continuous deployment pipelines
+- Steps in continuous deployment pipelines
 - Kubernetes Admission Controllers (for kube-based deployments)
 - Calling the API directly
 
@@ -20,12 +20,12 @@ both increasing and decreasing. This can be integrated in several ways:
 
 Each Atomist workspace exposes an endpoint to call whenever an image is
 deployed. All subsequent scans will now be compared against each recorded
-environment. Look up the endpoint URL in the
-[Atomist app](https://dso.docker.com/r/auth/integrations).
+environment. Find your endpoint URL on the
+[Integrations](https://dso.docker.com/r/auth/integrations) page.
 
-![integration](img/deploy/integration.png)
-
-!!! Note you must create an api-key to use this endpoint.
+> Note
+>
+> you must create an API key to use this endpoint.
 
 The simplest form of integration is to call this API whenever a new image is
 deployed. The default environment name is `deployed` - if you want to scan
@@ -63,9 +63,9 @@ The payload supports additional fields to support additional use cases.
 }
 ```
 
-- use custom environment names to track different image versions in environments
+- Use custom environment names to track different image versions in environments
   like `staging` and `production`
-- multi-platform image manifest lists are supported. Add the platform details
+- Multi-platform image manifest lists are supported. Add the platform details
   for the environments. Vulnerability scans are dependent on the platform.
-- if you are deploying multiple images from the same container repository into
+- If you are deploying multiple images from the same container repository into
   one environment, it is mandatory that each `image` have a unique `name`.
