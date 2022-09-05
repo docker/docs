@@ -98,13 +98,13 @@
   <meta name="twitter:domain" content="{{ site.docs_url | replace_first: 'http://', '' | replace_first: 'https://', '' }}"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:image:src" content="{{ site.docs_url }}/images/docs@2x.png"/>
+  <meta name="twitter:image:src" content="{{ site.docs_url }}/assets/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker Documentation"/>
   <meta property="og:title" content="{{ page.title | default: page_title }}" />
   <meta property="og:description" content="{{ page.description | default: page_description | escape_once }}" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
-  <meta property="og:image" itemprop="image primaryImageOfPage" content="{{ site.docs_url }}/images/docs@2x.png"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="{{ site.docs_url }}/assets/images/docs@2x.png"/>
   <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="{{ site.docs_url }}{{ page.url }}" />
   <meta property="og:site_name" content="Docker Documentation" />
