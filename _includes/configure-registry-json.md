@@ -8,14 +8,18 @@ least one organization the user is a member of, they can sign in to Docker
 Desktop and access all their organizations.
 
 Based on the user's operating system, you must create a `registry.json` file at the following location and make sure the file can't be edited by the user:
-   - Windows: `/ProgramData/DockerDesktop/registry.json`
-   - Mac: `/Library/Application Support/com.docker.docker/registry.json`
+
+| Platform | Location                                                       |
+|----------|----------------------------------------------------------------|
+| Windows  | `/ProgramData/DockerDesktop/registry.json`                     |
+| Mac      | `/Library/Application Support/com.docker.docker/registry.json` |
+| Linux    | `/usr/share/docker-desktop/registry/registry.json`             |
 
 The `registry.json` file must contain the following contents, where `myorg` is replaced with your organization's name.
 
 ```json
 {
-   "allowedOrgs":["myorg"]
+  "allowedOrgs": ["myorg"]
 }
 ```
 
@@ -24,15 +28,14 @@ You can use the following methods to create a `registry.json` file based on the 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows">Windows</a></li>
 <li><a data-toggle="tab" data-target="#mac">Mac</a></li>
+<li><a data-toggle="tab" data-target="#linux">Linux</a></li>
 </ul>
 <div class="tab-content">
 <div id="windows" class="tab-pane fade in active" markdown="1">
 
-
 ### Windows
 
 On Windows, you can use the following methods to create a `registry.json` file.
-
 
 #### Create registry.json when installing Docker Desktop on Windows
 
@@ -67,13 +70,12 @@ This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.
 
 On Mac, you can use the following methods to create a `registry.json` file.
 
-
 #### Create registry.json when installing Docker Desktop on Mac
 
 To automatically create a registry.json file when installing Docker Desktop, download `Docker.dmg` and run the following commands in a terminal from the directory containing `Docker.dmg`. Replace `myorg` with your organization's name.
 
 ```console
-$ sudo hdiutil attach Docker.dmg 
+$ sudo hdiutil attach Docker.dmg
 $ sudo /Volumes/Docker/Docker.app/Contents/MacOS/install --allowed-org=myorg
 $ sudo hdiutil detach /Volumes/Docker
 ```
@@ -106,6 +108,44 @@ Verify that the file has the expected permissions (`-rw-r--r--`) and ownership
 ```console
 $ sudo ls -l "/Library/Application Support/com.docker.docker/registry.json"
 -rw-r--r--  1 root  admin  26 Jul 27 22:01 /Library/Application Support/com.docker.docker/registry.json
+```
+
+</div>
+
+<div id="linux" class="tab-pane fade" markdown="1">
+
+### Linux
+
+On Linux, you can use the following methods to create a `registry.json` file.
+
+#### Create registry.json manually on Linux
+
+To manually create a `registry.json` file, run the following commands in a terminal
+and replace `myorg` with your organization's name.
+
+```console
+$ sudo mkdir -p /usr/share/docker-desktop/registry
+$ echo '{"allowedOrgs":["myorg"]}' | sudo tee /usr/share/docker-desktop/registry/registry.json
+```
+
+This creates (or updates, if the file already exists) the `registry.json` file
+at `/usr/share/docker-desktop/registry/registry.json` and includes
+the organization information to which the user belongs. Make sure the file has the
+expected content and can't be edited by the user, only by root.
+
+Verify that the content of the file contains the correct information:
+
+```console
+$ sudo cat /usr/share/docker-desktop/registry/registry.json
+{"allowedOrgs":["myorg"]}
+```
+
+Verify that the file has the expected permissions (`-rw-r--r--`) and ownership
+(`root`):
+
+```console
+$ sudo ls -l /usr/share/docker-desktop/registry/registry.json
+-rw-r--r--  1 root  root  26 Jul 27 22:01 /usr/share/docker-desktop/registry/registry.json
 ```
 
 </div></div>

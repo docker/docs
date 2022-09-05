@@ -7,6 +7,7 @@ redirect_from:
  - /compose/networking/swarm/
  - /compose/overview/
  - /compose/swarm/
+ - /compose/completion/
 ---
 
 >**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
@@ -43,7 +44,7 @@ services:
     volumes:
       - .:/code
       - logvolume01:/var/log
-    links:
+    depends_on:
       - redis
   redis:
     image: redis

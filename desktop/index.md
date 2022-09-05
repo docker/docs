@@ -3,18 +3,19 @@ description: Docker Desktop overview
 keywords: Desktop, Docker, GUI, run, docker, local, machine, dashboard
 title: Docker Desktop
 redirect_from:
-- /desktop/opensource/
-- /docker-for-mac/opensource/
-- /docker-for-windows/opensource/
 - /desktop/dashboard/
+- /desktop/opensource/
+- /docker-for-mac/dashboard/
+- /docker-for-mac/opensource/
+- /docker-for-windows/dashboard/
+- /docker-for-windows/opensource/
 ---
 
-> **Update to the Docker Desktop terms**
+> **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) now requires a paid
+> employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
-{: .important}
 
 Docker Desktop is an easy-to-install application for your Mac or Windows environment
 that enables you to build and share containerized applications and microservices. 

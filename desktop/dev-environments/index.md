@@ -12,7 +12,7 @@ You can also switch between your developer environments or your team members' en
 
 > **Beta**
 >
-> The Dev Environments feature is currently offered in Beta. We recommend that you do not use this in production environments.
+> The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
 
 ![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 

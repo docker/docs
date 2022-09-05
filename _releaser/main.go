@@ -2,6 +2,8 @@ package main
 
 import (
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/alecthomas/kong"
 )
@@ -28,4 +30,16 @@ func main() {
 			Summary: true,
 		}))
 	ctx.FatalIfErrorf(ctx.Run())
+}
+
+// getEnvOrSecret retrieves secret's value from secret file or env
+func getEnvOrSecret(name string) string {
+	if v, ok := os.LookupEnv(name); ok {
+		return v
+	}
+	b, err := os.ReadFile(filepath.Join("/run/secrets", name))
+	if err != nil {
+		return ""
+	}
+	return string(b)
 }

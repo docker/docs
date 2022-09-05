@@ -53,6 +53,35 @@ images to this repository.
 
 3. Enter the name of the repository to confirm the deletion and click **Delete**.
 
+## Consolidating a repository
+
+### Personal to personal
+
+When consolidating personal repositories, you can pull private images from the initial repository and push them into another repository that is owned by you. To avoid losing your private images, perform the following steps listed below.
+
+1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} create a Docker ID and select the personal subscription.
+2. Using `docker login` from the CLI, log in using your original Docker ID and pull your private images.
+3. Tag your private images with your newly created Docker ID using:
+`docker tag namespace1/docker101tutorial new_namespace/docker101tutorial`
+4. Using `docker login` from the CLI, log in with your newly created Docker ID, and push your newly tagged private images to your new Docker ID namespace.
+`docker push new_namespace/docker101tutorial`
+5. The private images that existed in your previous namespace are now available in your new Docker ID namespace.
+
+### Personal to an organization
+
+To avoid losing your private images, you can pull your private images from your personal namespace and push them to an organization that is owned by you.
+
+1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Organizations**.
+2. Select the applicable organization and verify that your user account is a member of the organization.
+3. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} using your original Docker ID, and pull your images from the initial namespace.
+`docker pull namespace1/docker101tutorial`
+4. Tag your images with your new organization namespace.
+`docker tag namespace1/docker101tutorial <new_org>/docker101tutorial`
+5. Push your newly tagged images to your new org namespace.
+`docker push new_org/docker101tutorial`
+
+The private images that existed in the initial namespace are now available for your organization.
+
 ## Pushing a Docker container image to Docker Hub
 
 To push an image to Docker Hub, you must first name your local image using your

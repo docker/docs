@@ -380,6 +380,7 @@ guides:
   title: "Educational resources"
 - path: /opensource/
   title: "Contribute to documentation"
+
 reference:
 - path: /reference/
   title: Reference documentation
@@ -992,6 +993,8 @@ reference:
         path: /docker-hub/api/latest/
       - title: DVP Data API
         path: /docker-hub/api/dvp/
+      - title: Deprecated API
+        path: /docker-hub/api/deprecated/
   - title: Registry API
     path: /registry/spec/api/
   - sectiontitle: Docker Extension SDK API (Beta)
@@ -1109,31 +1112,9 @@ reference:
 
 samples:
 - path: /samples/
-  title: Samples overview
-- path: /samples/#tutorial-labs
-  title: Tutorial labs
-- sectiontitle: Sample applications
-  section:
-  - path: /samples/apt-cacher-ng/
-    title: apt-cacher-ng
-  - path: /samples/dotnetcore/
-    title: ASP.NET Core application
-  - path: /samples/aspnet-mssql-compose/
-    title: ASP.NET Core + SQL Server on Linux
-  - path: /samples/couchdb_data_volumes/
-    title: CouchDB
-  - path: /samples/django/
-    title: Django and PostgreSQL
-  - path: /samples/wordpress/
-    title: WordPress
-  - path: /samples/postgresql_service/
-    title: PostgreSQL
-  - path: /samples/rails/
-    title: Rails and PostgreSQL
-  - path: /samples/running_riak_service/
-    title: Riak
-- path: /samples/#library-references
-  title: Library references
+  title: Official Docker samples
+
+
 
 manuals:
 - sectiontitle: Docker Desktop
@@ -1144,10 +1125,14 @@ manuals:
       section:
        - path: /desktop/install/mac-install/
          title: Install on Mac
-       - path: /desktop/mac/apple-silicon/
-         title: Install on Apple silicon
+       - path: /desktop/mac/permission-requirements/
+         title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
          title: Install on Windows
+       - path: /desktop/windows/permission-requirements/
+         title: Understand permission requirements for Windows
+       - path: /desktop/mac/apple-silicon/
+         title: Install on Apple silicon
        - path: /desktop/install/linux-install/
          title: Install on Linux
        - sectiontitle: Installation per Linux distro
@@ -1200,14 +1185,10 @@ manuals:
           title: Back up and restore data
         - path: /desktop/networking/
           title: Explore networking features
-        - path: /desktop/mac/permission-requirements/
-          title: Docker Desktop permission requirements for Mac
-        - path: /desktop/windows/permission-requirements/
-          title: Docker Desktop permission requirements for Windows
         - path: /desktop/windows/wsl/
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
-          title: Run Docker Desktop in a VM or VDI environment
+          title: Run Docker Desktop for Windows in a VM or VDI environment
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1286,6 +1267,8 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
+    - path: /desktop/containerd/
+      title: Containerd Image Store (Beta)
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
@@ -1342,46 +1325,6 @@ manuals:
       title: Install binaries
   - path: /engine/install/linux-postinstall/
     title: Optional post-installation steps
-  - path: /engine/release-notes/
-    title: Release notes
-  - sectiontitle: Previous versions
-    section:
-    - path: /engine/release-notes/19.03/
-      title: Engine 19.03 release notes
-    - path: /engine/release-notes/18.09/
-      title: Engine 18.09 release notes
-    - path: /engine/release-notes/18.06/
-      title: Engine 18.06 release notes
-    - path: /engine/release-notes/18.05/
-      title: Engine 18.05 release notes
-    - path: /engine/release-notes/18.04/
-      title: Engine 18.04 release notes
-    - path: /engine/release-notes/18.03/
-      title: Engine 18.03 release notes
-    - path: /engine/release-notes/18.02/
-      title: Engine 18.02 release notes
-    - path: /engine/release-notes/18.01/
-      title: Engine 18.01 release notes
-    - path: /engine/release-notes/17.12/
-      title: Engine 17.12 release notes
-    - path: /engine/release-notes/17.11/
-      title: Engine 17.11 release notes
-    - path: /engine/release-notes/17.10/
-      title: Engine 17.10 release notes
-    - path: /engine/release-notes/17.09/
-      title: Engine 17.09 release notes
-    - path: /engine/release-notes/17.07/
-      title: Engine 17.07 release notes
-    - path: /engine/release-notes/17.06/
-      title: Engine 17.06 release notes
-    - path: /engine/release-notes/17.05/
-      title: Engine 17.05 release notes
-    - path: /engine/release-notes/17.04/
-      title: Engine 17.04 release notes
-    - path: /engine/release-notes/17.03/
-      title: Engine 17.03 release notes
-    - path: /engine/release-notes/prior-releases/
-      title: Engine 1.13 and earlier
   - path: /engine/deprecated/
     title: Deprecated features
   - path: /buildx/working-with-buildx/
@@ -1392,7 +1335,46 @@ manuals:
     title: Docker Scan
   - path: /engine/sbom/
     title: Docker SBOM (Experimental)
-
+  - path: /engine/release-notes/
+    title: Release notes
+  - sectiontitle: Previous versions
+    section:
+      - path: /engine/release-notes/19.03/
+        title: Engine 19.03 release notes
+      - path: /engine/release-notes/18.09/
+        title: Engine 18.09 release notes
+      - path: /engine/release-notes/18.06/
+        title: Engine 18.06 release notes
+      - path: /engine/release-notes/18.05/
+        title: Engine 18.05 release notes
+      - path: /engine/release-notes/18.04/
+        title: Engine 18.04 release notes
+      - path: /engine/release-notes/18.03/
+        title: Engine 18.03 release notes
+      - path: /engine/release-notes/18.02/
+        title: Engine 18.02 release notes
+      - path: /engine/release-notes/18.01/
+        title: Engine 18.01 release notes
+      - path: /engine/release-notes/17.12/
+        title: Engine 17.12 release notes
+      - path: /engine/release-notes/17.11/
+        title: Engine 17.11 release notes
+      - path: /engine/release-notes/17.10/
+        title: Engine 17.10 release notes
+      - path: /engine/release-notes/17.09/
+        title: Engine 17.09 release notes
+      - path: /engine/release-notes/17.07/
+        title: Engine 17.07 release notes
+      - path: /engine/release-notes/17.06/
+        title: Engine 17.06 release notes
+      - path: /engine/release-notes/17.05/
+        title: Engine 17.05 release notes
+      - path: /engine/release-notes/17.04/
+        title: Engine 17.04 release notes
+      - path: /engine/release-notes/17.03/
+        title: Engine 17.03 release notes
+      - path: /engine/release-notes/prior-releases/
+        title: Engine 1.13 and earlier
 - sectiontitle: Docker Build
   section:
     - path: /build/
@@ -1451,8 +1433,12 @@ manuals:
         title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
     title: Getting started
-  - path: /compose/environment-variables/
-    title: Environment variables in Compose
+  - sectiontitle: Environment variables
+    section:
+    - path: /compose/environment-variables/
+      title: Overview
+    - path: /compose/envvars-precedence/
+      title: Environment variables' precedence
   - path: /compose/env-file/
     title: Environment file
   - path: /compose/profiles/
@@ -1469,10 +1455,10 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/release-notes/
-    title: Release notes
   - path: /compose/cli-command-compatibility/
     title: Compose v2 compatibility
+  - path: /compose/release-notes/
+    title: Release notes
 
 - sectiontitle: Docker Hub
   section:
@@ -1530,6 +1516,8 @@ manuals:
     section:
       - path: /docker-hub/publish/
         title: Overview
+      - path: /docker-hub/publish/insights-analytics/
+        title: Insights & analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
@@ -1561,7 +1549,7 @@ manuals:
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
-    title: Enforce sign in
+    title: Enforce sign-in
   - sectiontitle: Single-Sign-on
     section:
       -  path: /single-sign-on/
@@ -1654,7 +1642,8 @@ manuals:
   title: Release notes
 - path: /support/
   title: Get Support
-
+- path: /release-lifecycle/
+  title: Product release lifecycle
 contribute:
   - path: /contribute/overview/
     title: Contribute to Docker's docs

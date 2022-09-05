@@ -16,6 +16,7 @@ info:
     Docker provides an API that allows you to interact with Docker Hub.
 
     Browse through the Docker Hub API documentation to explore the supported endpoints.
+
 tags:
   - name: resources
     x-displayName: Resources
@@ -820,67 +821,62 @@ paths:
           $ref: "#/components/responses/Forbidden"
         404:
           $ref: "#/components/responses/NotFound"
-  /v2/repositories/{namespace}/{repository}/:
+          
+
+  /v2/namespace/{namespace}/repositories/{repository}/tags:
     parameters:
-      - name: namespace
-        in: path
-        required: true
-        description: Namespace of the repository.
-        schema:
-          type: string
-      - name: repository
-        in: path
-        required: true
-        description: Name of the repository.
-        schema:
-          type: string
-    patch:
-      tags:
-        - repositories
-      summary: Update repository configuration
-      description: |
-        Update the configuration of a repository:
-
-        - description: the summary of a repository
-        - full description: the readme displayed on repository's page, markdown accepted
-        - visibility: is the repository public or private
-
-        Authentication is required.
-      operationId: PatchRepositoryDescription
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/update_repository"
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+    get:
+      summary: "List repository tags"
+      tags: [ repositories ]
+      parameters:
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/page_size"
       responses:
         200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/repository"
+          $ref: "#/components/responses/list_tags"
         403:
-          description:
-            Forbidden - access to the resource is forbidden, you don't have
-            needed permission to perform this action.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDetail"
-              examples:
-                response:
-                  value:
-                    detail: You do not have permission to perform this action.
+          $ref: "#/components/responses/Forbidden"
         404:
-          description: Repository not found or unable to access the resource
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorDetail"
-              examples:
-                response:
-                  value:
-                    detail: Object not found
+          $ref: "#/components/responses/NotFound"
+    head:
+      summary: "Check repository tags"
+      tags: [ repositories ]
+      responses:
+        200:
+          description: "Repository contains tags"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /v2/namespaces/{namespace}/repositories/{repository}/tags/{tag}:
+    parameters:
+      - $ref: "#/components/parameters/namespace"
+      - $ref: "#/components/parameters/repository"
+      - $ref: "#/components/parameters/tag"
+    get:
+      summary: "Read repository tag"
+      tags: [ repositories ]
+      responses:
+        200:
+          $ref: "#/components/responses/get_tag"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+    head:
+      summary: "Check repository tag"
+      tags: [ repositories ]
+      responses:
+        200:
+          description: "Repository tag exists"
+        403:
+          $ref: "#/components/responses/Forbidden"
+        404:
+          $ref: "#/components/responses/NotFound"
+
 
   /v2/scim/2.0/ServiceProviderConfig:
     get:
@@ -1280,7 +1276,7 @@ components:
                 type: array
                 items:
                   type: string
-                example: [ urn:ietf:params:scim:api:messages:2.0:ListResponse ]
+                example: [ "urn:ietf:params:scim:api:messages:2.0:ListResponse" ]
               totalResults:
                 type: integer
                 example: 1
@@ -1307,7 +1303,7 @@ components:
                 type: array
                 items:
                   type: string
-                example: [ urn:ietf:params:scim:api:messages:2.0:ListResponse ]
+                example: [ "urn:ietf:params:scim:api:messages:2.0:ListResponse" ]
               totalResults:
                 type: integer
                 example: 1
@@ -1342,6 +1338,20 @@ components:
         application/scim+json:
           schema:
             $ref: "#/components/schemas/scim_user"
+            
+    list_tags:
+      description: "list repository tags"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/paginated_tags"
+            
+    get_tag:
+      description: "repository tag"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/tag"
 
   schemas:
     UsersLoginRequest:
@@ -1997,68 +2007,138 @@ components:
           type: boolean
           description: Allow usage of verified publisher images if "enabled" is `true`.
           example: true
-    update_repository:
+    layer:
       type: object
       properties:
-        description:
+        digest:
           type: string
-          description:
-            The description of a repository, as displayed below the repository
-            name.
-          example: Hello World! (an example of minimal Dockerization)
-        full_description:
+          description: "image layer digest"
+          nullable: true
+        size:
+          type: integer
+          description: "size of the layer"
+        instruction:
           type: string
-          description:
-            The full description displayed on the repository page. Markdown
-            accepted.
-          example: |
-            # Quick reference
-            - Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)
-            
-            # Example output
-            ```
-            $ docker run hello-world
-
-            Hello from Docker!
-            This message shows that your installation appears to be working correctly.
-            ```
-    repository:
+          description: "Dockerfile instruction"
+    image:
       type: object
       properties:
-        name:
+        architecture:
           type: string
-          description: name of the repository
-          example: hello-world
-        namespace:
+          description: "CPU architecture"
+        features:
           type: string
-          description: namespace of the repository
-          example: docker
-        description:
+          description: "CPU features"
+        variant:
           type: string
-          description: short description of the repository
-          example: Hello World! (an example of minimal Dockerization)
-        is_private:
-          type: boolean
-          description: visibility of the repository
-          example: true
+          description: "CPU variant"
+        digest:
+          type: string
+          description: "image digest"
+          nullable: true
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/layer'
+        os:
+          type: string
+          description: "operating system"
+        os_features:
+          type: string
+          description: "OS features"
+        os_version:
+          type: string
+          description: "OS version"
+        size:
+          type: integer
+          description: "size of the image"
+        status:
+          type: string
+          enum: ["active", "inactive"]
+          description: "Status of the image"
+        last_pulled:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: "datetime of last pull"
+          nullable: true
+        last_pushed:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: "datetime of last push"
+          nullable: true
+    tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "tag ID"
+        images:
+          type: object
+          $ref: '#/components/schemas/image'
+        creator:
+          type: integer
+          description: "ID of the user that pushed the tag"
         last_updated:
           type: string
-          example: 2020-04-22T09:47:28.119596Z
-        full_description:
+          example: "2021-01-05T21:06:53.506400Z"
+          description: "datetime of last update"
+          nullable: true
+        last_updater:
+          type: integer
+          description: "ID of the last user that updated the tag"
+        last_updater_username:
           type: string
-          description: Description (readme) of the repository, in Markdown
-          example: |
-            # Quick reference 
+          description: "Hub username of the user that updated the tag"
+        name:
+          type: string
+          description: "name of the tag"
+        repository:
+          type: integer
+          description: "repository ID"
+        full_size:
+          type: integer
+          description: "compressed size (sum of all layers) of the tagged image"
+        v2:
+          type: string
+          description: "repository API version"
+        status:
+          type: string
+          enum: ["active", "inactive"]
+          description: "whether a tag has been pushed to or pulled in the past month"
+        tag_last_pulled:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: "datetime of last pull"
+          nullable: true
+        tag_last_pushed:
+          type: string
+          example: "2021-01-05T21:06:53.506400Z"
+          description: "datetime of last push"
+          nullable: true
 
-            - Maintained by: [the Docker Community](https://github.com/docker-library/hello-world)
-
-            # Example output
-            ```
-            $ docker run hello-world
-
-            Hello from Docker!
-            This message shows that your installation appears to be working correctly.
-            ```
+    paginated_tags:
+      allOf:
+        - $ref: '#/components/schemas/page'
+        - type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/tag'
+    page:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: total number of results available across all pages
+        next:
+          type: string
+          description: link to next page of results if any
+          nullable: true
+        previous:
+          type: string
+          description: link to previous page of results  if any
+          nullable: true
 
     scim_error:
       type: object
@@ -2221,7 +2301,7 @@ components:
           type: array
           items:
             type: string
-          example: [ urn:ietf:params:scim:schemas:core:2.0:Schema ]
+          example: [ "urn:ietf:params:scim:schemas:core:2.0:Schema" ]
         id:
           type: string
           example: urn:ietf:params:scim:schemas:core:2.0:User
@@ -2352,6 +2432,38 @@ components:
         type: string
       description: The user ID.
       example: "d80f7c79-7730-49d8-9a41-7c42fb622d9c"
+    namespace:
+      in: path
+      name: namespace
+      required: true
+      schema:
+        type: string
+    repository:
+      in: path
+      name: repository
+      required: true
+      schema:
+        type: string
+    tag:
+      in: path
+      name: tag
+      required: true
+      schema:
+        type: string
+    page:
+      in: query
+      name: page
+      required: false
+      schema:
+        type: integer
+      description: "Page number to get. Defaults to 1."
+    page_size:
+      in: query
+      name: page_size
+      required: false
+      schema:
+        type: integer
+      description: "Number of images to get per page. Defaults to 10. Max of 1000."
 
   requestBodies:
     scim_create_user_request:

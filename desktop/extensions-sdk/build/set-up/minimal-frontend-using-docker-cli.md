@@ -25,7 +25,7 @@ Although you can start from an empty directory, it is highly recommended that yo
 └── client # (3)
 │   └── src
 │       ├── App.tsx
-│       └── ... React aplication
+│       └── ... React application
 ```
 
 1. Contains everything required to build the extension and run it in Docker Desktop.

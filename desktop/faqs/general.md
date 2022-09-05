@@ -30,10 +30,9 @@ You can find the checksums on the [release notes](../release-notes.md) page.
 
 ### Do I need to pay to use Docker Desktop?
 
-Docker Desktop remains free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. It requires a paid subscription for professional use in larger enterprises.
-The effective date of these terms is August 31, 2021. When downloading and installing Docker Desktop, you are asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
+Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. Otherwise, it requires a paid subscription for professional use. Paid subscriptions are also required for government entities. When downloading and installing Docker Desktop, you are asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
 
-Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected. For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../../subscription/index.md#docker-desktop-license-agreement).
+Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn more.
 
 ### Can I use Docker Desktop offline?
 
@@ -46,7 +45,7 @@ This includes:
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
-- Viewing remote images in the [Docker Dashboard](../dashboard.md)
+- Viewing remote images in the Docker Dashboard
 - Settting up [Dev Environments](../dev-environments/index.md)
 - Docker build when using [Buildkit](../../develop/develop-images/build_enhancements.md). You can work around this by disabling
   BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
@@ -58,10 +57,6 @@ This includes:
 - [In-app diagnostics](../troubleshoot/overview.md#diagnose-from-the-app) (including the [Self-diagnose tool](../troubleshoot/overview.md#diagnose-from-the-app))
 - Tip of the week
 - Sending usage statistics
-
-### What is an experimental feature?
-
-{% include experimental.md %}
 
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 

@@ -17,7 +17,7 @@ notoc: true
 > **Deprecated**
 >
 > Kitematic has been deprecated. Please use the Dashboard included with Docker
-> Desktop instead. See [Docker Desktop](../desktop/dashboard.md).
+> Desktop instead. See [Docker Desktop](../desktop/overview.md).
 {: .warning }
 
 The source code for Kitematic has been archived, but [can be found on GitHub](https://github.com/docker/kitematic){:target="_blank" rel="noopener" class="_"}.

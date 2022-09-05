@@ -33,14 +33,10 @@ You can set default values for any environment variables referenced in the
 Compose file, or used to configure Compose, in an [environment file](env-file.md)
 named `.env`. The `.env` file path is as follows:
 
-  - Starting with `+v1.28`, `.env` file is placed at the base of the project directory 
+  - Starting from `v1.28`, the `.env` file is placed at the base of the project directory.
   - Project directory can be explicitly defined with the `--file` option or `COMPOSE_FILE`
-  environment variable. Otherwise, it is the current working directory where the 
-  `docker compose` command is executed (`+1.28`).
-  - For previous versions, it might have trouble resolving `.env` file with 
-  `--file` or `COMPOSE_FILE`. To work around it, it is recommended to use `--project-directory`,
-  which overrides the path for the `.env` file. This inconsistency is addressed
-  in `+v1.28` by limiting the filepath to the project directory.
+  environment variable. Otherwise, it is the current working directory where the `docker compose` command is executed (`+1.28`).
+  - For versions older than `v1.28`, it might have trouble resolving `.env` file with `--file` or `COMPOSE_FILE`. To work around it, it is recommended to use `--project-directory`, which overrides the path for the `.env` file. This inconsistency is addressed in `v1.28` by limiting the file path to the project directory.
 
 
 ```console
@@ -84,14 +80,12 @@ services:
 
 You can override the environment file path using a command line argument `--env-file`.
 
-### Using the “--env-file”  option 
+### Using the “--env-file”  option
 
-By passing the file as an argument, you can store it anywhere and name it 
-appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is 
-done using the `--env-file` option:
+By passing the file as an argument, you can store it anywhere and name it appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is done using the `--env-file` option:
 
 ```console
-$ docker compose --env-file ./config/.env.dev up 
+$ docker compose --env-file ./config/.env.dev up
 ```
 
 This file path is relative to the current working directory where the Docker Compose
@@ -115,7 +109,7 @@ services:
 The `.env` file is loaded by default:
 
 ```console
-$ docker compose convert 
+$ docker compose convert
 version: '3'
 services:
   web:
@@ -125,7 +119,7 @@ services:
 Passing the `--env-file` argument overrides the default file path:
 
 ```console
-$ docker compose --env-file ./config/.env.dev config 
+$ docker compose --env-file ./config/.env.dev config
 version: '3'
 services:
   web:
@@ -201,14 +195,10 @@ $ docker compose run -e DEBUG web python console.py
 The value of the `DEBUG` variable in the container is taken from the value for
 the same variable in the shell in which Compose is run.
 
-When you set the same environment variable in multiple files, here's the
-priority used by Compose to choose which value to use:
-
-1. Compose file
-2. Shell environment variables
-3. Environment file
-4. Dockerfile
-5. Variable is not defined
+>**Note**
+>
+> When you set the same environment variable in multiple files, there's a precedence rule used by Compose when trying to resolve the value for the variable in question.
+You can find this precedence rule and a table illustrating how interpolation works in the [Environment variables precedence](../compose/envvars-precedence.md) page.
 
 In the example below, we set the same environment variable on an Environment
 file, and the Compose file:
@@ -239,7 +229,7 @@ $ docker compose exec api node
 ```
 
 Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is
-no Docker Compose entry for `environment` or `env_file`.
+no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
 > Specifics for NodeJS containers
 >

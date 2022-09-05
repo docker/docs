@@ -48,7 +48,7 @@ CMD python /app/app.py
 ```
 
 This Dockerfile contains four commands. Commands that modify the filesystem create
-a layer. The`FROM` statement starts out by creating a layer from the `ubuntu:18.04`
+a layer. The `FROM` statement starts out by creating a layer from the `ubuntu:18.04`
 image. The `LABEL` command only modifies the image's metadata, and does not produce
 a new layer. The `COPY` command adds some files from your Docker client's current
 directory. The first `RUN` command builds your application using the `make` command,
@@ -124,7 +124,7 @@ The total disk space used by all of the running containers on disk is some
 combination of each container's `size` and the `virtual size` values. If
 multiple containers started from the same exact image, the total size on disk for
 these containers would be SUM (`size` of containers) plus one image size
-(`virtual size`- `size`).
+(`virtual size` - `size`).
 
 This also does not count the following additional ways a container can take up
 disk space:
