@@ -55,7 +55,7 @@ Docker provides `.deb` and `.rpm` packages from the following Linux distribution
 and architectures:
 
 
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
 
 | Platform                | x86_64 / amd64         | 

@@ -32,7 +32,7 @@ If you have already set up the Docker repository, jump to step 2.
     [Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
     [CentOS](../../engine/install/centos.md/#set-up-the-repository) |
     [Debian](../../engine/install/debian.md/#set-up-the-repository) |
-    [Fefora](../../engine/install/fedora.md/#set-up-the-repository) |
+    [Fedora](../../engine/install/fedora.md/#set-up-the-repository) |
     [RHEL](../../engine/install/rhel.md/#set-up-the-repository) |
     [SLES](../../engine/install/sles.md/#set-up-the-repository).
 
@@ -61,6 +61,8 @@ If you have already set up the Docker repository, jump to step 2.
 Where `vN.N.N` is placeholder text standing in for the latest version.
 
 #### Update Compose
+
+To update Compose, run the following commands:
 
 * Ubuntu, Debian:
 
