@@ -97,7 +97,7 @@ The following image depicts the various signing keys and their relationships:
 
 > **WARNING**
 >
-> Loss of the root key is **very difficult** to recover from.
+> The root key once lost is not recoverable.
 > Correcting this loss requires intervention from [Docker
 > Support](/support/) to reset the repository state. This loss
 > also requires **manual intervention** from every consumer that used a signed

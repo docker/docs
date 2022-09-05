@@ -1420,16 +1420,16 @@ manuals:
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
-    title: Overview of Docker Compose
-  - sectiontitle: Install Compose
+    title: Overview
+  - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
-        title: Install Docker Compose 
-      - path: /compose/install/compose-desktop/
-        title: Install Compose plugin through Desktop 
-      - path: /compose/install/compose-plugin/
-        title: Install Docker Compose Plugin 
-      - path: /compose/install/uninstall/ 
+        title: Install overview
+      - path: /compose/install/linux/
+        title: Install on Linux
+      - path: /compose/install/other/
+        title: Other install scenarios
+      - path: /compose/install/uninstall/
         title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
     title: Getting started
@@ -1516,8 +1516,6 @@ manuals:
     section:
       - path: /docker-hub/publish/
         title: Overview
-      - path: /docker-hub/publish/insights-analytics/
-        title: Insights & analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
