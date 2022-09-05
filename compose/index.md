@@ -1,7 +1,7 @@
 ---
 description: Introduction and Overview of Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
-title: Overview
+title: Overview of Docker Compose
 redirect_from:
  - /compose/cli-command/
  - /compose/networking/swarm/
