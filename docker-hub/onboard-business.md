@@ -58,10 +58,10 @@ Now that you have a Docker Business organization, it's time to start adding memb
       > Before you invite members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.
 
 
-## Step 4: Enforce sign in for Docker Desktop
+## Step 4: Enforce sign-in for Docker Desktop
 
 By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the
-organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
+organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
 
 ## What's next
 
