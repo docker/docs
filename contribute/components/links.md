@@ -7,7 +7,7 @@ toc_max: 3
 
 It is best practice if [a link opens in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
 
-You can also have [a markdown link to a custom target ID](#formatting-examples)
+You can also have [a markdown link to a custom target ID](#HTML)
 
 #### Links to auto-generated content
 
