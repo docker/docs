@@ -22,7 +22,7 @@ Docker and Snyk have partnered together to bring security natively into the deve
 
 Including the vulnerability scanning options into the Docker platform extends the existing, familiar process of vulnerability detection, and allows for remediation of vulnerabilities earlier in the development process. The process of simple and continuous checks, for example, by checking images in the background using [Snyk Advisor](https://snyk.io/advisor/docker){:target="_blank" rel="noopener" class="_"}, can lead to fewer vulnerabilities checked into Docker Hub. This can result in a shorter CI cycle and a more reliable deployment into production.
 
-![Developer's security journey](/images/dev-security-journey.png){:width="700px"}
+![Developer's security journey](images/dev-security-journey.png){:width="700px"}
 
 ## Scanning images
 
@@ -41,7 +41,7 @@ You can trigger scans automatically by pushing an image to Docker Hub. You can a
 
 After you’ve built an image and before you push your image to Docker Hub, run the `docker scan` command. For detailed instructions on how to scan images using the CLI, see [docker scan](../../engine/scan/index.md).
 
-![Docker Scan CL](/images/docker-scan-cli.png){:width="700px"}
+![Docker Scan CL](images/docker-scan-cli.png){:width="700px"}
 
 ### Scan using Docker Hub
 
@@ -51,13 +51,13 @@ You can trigger scans, view, and inspect vulnerabilities through Docker Hub. For
 >
 > Docker Hub Vulnerability Scanning is available for developers subscribed to a Docker Pro, Team, or a Business tier. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"}.
 
-![Hub Vulnerability scanning](/images/hub-hvs.png){:width="700px"}
+![Hub Vulnerability scanning](images/hub-hvs.png){:width="700px"}
 
 ### View the scan summary in Docker Desktop
 
 Docker Desktop provides you a snapshot of your vulnerabilities status on the Docker Dashboard. Hover over the image and click **View in Hub** to view a detailed vulnerability report in Docker Hub.
 
-![Hub Vulnerability scan summary](/images/hvs-scan-summary.png){:width="700px"}
+![Hub Vulnerability scan summary](images/hvs-scan-summary.png){:width="700px"}
 
 ## Best practices
 
@@ -77,7 +77,7 @@ The first step towards achieving a secure image is to choose the right base imag
 
 Docker Hub has more than 8.3 million repositories. Some of these images are [Official Images](../../docker-hub/official_images.md), which are published by Docker as a curated set of Docker open source and drop-in solution repositories. Docker also offers images that are published by [Verified Publishers](../../docker-hub/publish/index.md). These high-quality images are published and maintained by the organizations partnering with Docker, with Docker verifying the authenticity of the content in their repositories. When you pick your base image, look out for the **Official Image** and **Verified Publisher** badges.
 
-![Docker Hub Official and Verified Publisher images](/images/hub-official-images.png){:width="700px"}
+![Docker Hub Official and Verified Publisher images](images/hub-official-images.png){:width="700px"}
 
 When building your own image from a Dockerfile, ensure you choose a minimal base image that matches your requirements. A smaller base image not just offers portability and fast downloads, but also shrinks the size of your image and minimizes the number of vulnerabilities introduced through the dependencies.
 

@@ -21,7 +21,7 @@ You can check this by clicking on **About Docker Desktop** from the Docker menu 
 
 If you haven’t yet installed Docker Desktop:
 
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto; align=right"}' %}
+{% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto; align=right"}' %}
 
 | Platform       | Docker Desktop                 |
 |:---------------|:------------------------------:|
