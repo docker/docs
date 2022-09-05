@@ -22,7 +22,8 @@
           {%- if entry.hide_home -%}{% continue %}{%- endif -%}
           <li{% if entry.node == "home" %} class=active{% endif %}><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
         {%- endfor -%}
-          <li><a href="https://www.docker.com/blog/">Articles</a></li>
+        <li><a href="https://www.docker.com/blog/">Articles</a></li>  
+        <li><a href="/contribute/overview/">Contribute</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>{% include theme-switch.html %}</li>
