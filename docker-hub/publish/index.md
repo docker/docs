@@ -36,7 +36,7 @@ trusted.
 
 ![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
 
-## Insights and analytic
+## Insights and analytics
 
 The [insights and analytics](/docker-hub/publish/insights-analytics){:
 target="blank" rel="noopener" class=""} service provides usage metrics for how
