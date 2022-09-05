@@ -1,0 +1,9 @@
+extends: existence
+message: Consider removing '%s'
+level: warning
+code: false
+ignorecase: true
+tokens:
+  - currently
+  - respectively
+  - we

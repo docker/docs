@@ -1,0 +1,6 @@
+extends: existence
+message: Don’t add commas (,) or semicolons (;) to the ends of list items.
+link: https://deploy-preview-15350--docsdocker.netlify.app/contribute/style/grammar/#lists
+level: warning
+scope: list
+raw: '[,;]$'

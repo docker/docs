@@ -1,0 +1,15 @@
+extends: substitution
+message: "Consider using '%s' instead of '%s'"
+link: https://docs.docker.com/contribute/style/recommended-words/
+ignorecase: true
+level: error
+swap:
+  above: previous
+  below: following
+  check box: checkbox
+  click: select
+  deselect: clear
+  execute: run, invoke
+  sign up: register, create account
+  scroll: navigate
+  (?:sign on|log on|log in): sign in

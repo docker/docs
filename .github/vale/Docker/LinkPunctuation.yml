@@ -9,6 +9,6 @@ action:
   name: edit
   params:
     - remove
-    - '.?!'
+    - ".?!"
 tokens:
   - '[a-z0-9][.?!](?:\s|$)'

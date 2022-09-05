@@ -1,10 +1,12 @@
 extends: capitalization
 message: "Use sentence case for headings: '%s'."
 level: warning
-scope: heading
+scope:
+  - heading
+  - link
 match: $sentence
 indicators:
-  - ':'
+  - ":"
 exceptions:
   - Vocab/Docker/accept.txt
   - Vocab/Technology/accept.txt
