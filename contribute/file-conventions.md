@@ -10,7 +10,7 @@ When you create a new .md file for new content, make sure:
 - File names are as short as possible
 - Try to keep the file name to one word or two words
 - Use a dash to separate words. For example:
-        - `add-seats.md`  and `remove-seats.md` which you can find under /subscription.
+        - `add-seats.md`  and `remove-seats.md`.
         - `multiplatform-images` preferred to `multi-platform-images`.
 
 ## Frontmatter
@@ -57,36 +57,6 @@ toc_max: 4
 ## Body
 
 The body of the page (with the exception of keywords) starts after the frontmatter 
-
-### Paragraphs and new lines
-
-**To change the line without creating a paragraph:** 
-
-Convention:
-
-✅ 2 trailing spaces (at the end of line). As in sample below where “[]” represents a whitespace character.
-
-```markdown
-This is a sample sentence[][].
-Next sentence coming here.
-```
-
-❌Don’t use the HTML tag <br/> 
-
-Context: 
-
-We want to avoid mixing HTML with our markdown markup as much possible. There are some HTML tags that we use that provide some presentation enrichment like tabs, etc. but we prefer the markdown markup whenever it solves the ask in question.
-
-**Note** that simple trailing and isolated white spaces will probably be removed after linters are applied.
-
-**Paragraphs**
-
-CR:LF or pressing ENTER to create new lines
-
-**Indentation ?**
-
-- Empty lines and end of file
-- Cross-references and upstream repos
 
 ### Text length
 
