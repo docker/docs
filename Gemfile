@@ -5,6 +5,7 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 gem 'jekyll', '4.2.2'
 group :jekyll_plugins do
+  gem 'jekyll-last-modified-at'
   gem 'jekyll-redirect-from'
   gem 'jekyll-relative-links'
   gem 'jekyll-sitemap'
