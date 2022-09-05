@@ -32,24 +32,24 @@ If you have already set up the Docker repository, jump to step 2.
     [Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
     [CentOS](../../engine/install/centos.md/#set-up-the-repository) |
     [Debian](../../engine/install/debian.md/#set-up-the-repository) |
-    [Fefora](../../engine/install/fedora.md/#set-up-the-repository) |
+    [Fedora](../../engine/install/fedora.md/#set-up-the-repository) |
     [RHEL](../../engine/install/rhel.md/#set-up-the-repository) |
     [SLES](../../engine/install/sles.md/#set-up-the-repository).
 
 2. Update the package index, and install the _latest version_ of Docker Compose:
 
-* Ubuntu, Debian:
+    * Ubuntu, Debian:
 
-    ```console
-    $ sudo apt-get update
-    $ sudo apt-get install docker-compose-plugin
-    ```
-* RPM-based distros:
+        ```console
+        $ sudo apt-get update
+        $ sudo apt-get install docker-compose-plugin
+        ```
+    * RPM-based distros:
 
-    ```console
-    $ sudo yum update
-    $ sudo yum install docker-compose-plugin
-    ```
+        ```console
+        $ sudo yum update
+        $ sudo yum install docker-compose-plugin
+        ```
 
 3.  Verify that Docker Compose is installed correctly by checking the version.
 
@@ -61,6 +61,8 @@ If you have already set up the Docker repository, jump to step 2.
 Where `vN.N.N` is placeholder text standing in for the latest version.
 
 #### Update Compose
+
+To update Compose, run the following commands:
 
 * Ubuntu, Debian:
 
