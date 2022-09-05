@@ -315,8 +315,8 @@ container images.
 
 1. Go to <https://dso.docker.com> and sign in using your Docker ID credentials.
 2. Connect your GitHub account as instructed in the
-   [GitHub app page](./integrate/github.md#connect-to-github). Install the app into the GitHub
-   account that contains your GitHub Container Registry.
+   [GitHub app page](./integrate/github.md#connect-to-github). Install the app
+   into the GitHub account that contains your GitHub Container Registry.
 3. Open the [**Integrations**](https://dso.docker.com/r/auth/integrations){:
    target="blank" rel="noopener" class=""} tab, and click the **Configure** link
    next to the **GitHub Container Registry** in the list of integrations.
@@ -390,14 +390,9 @@ Atomist to gain visibility into container workload systems like Kubernetes.
 
 - [Set up image policies](configure/image-policies.md) with rules that will run
   whenever a new image is pushed to your registry
-- [Create a Slack notification channel](integrate/slack.md) to receive
-  notifications about new security advisories impacting workloads.
 - Atomist watches for new advisories from public sources, but you can also add
   your own internal advisories. Refer to [Advisories](configure/advisories.md)
   for more information.
 - Use [Kubernetes admission control](integrate/kubernetes.md) to ensure that
   images conform to your policy before being admitted into different clusters or
   namespaces.
-- Try adding another rule to add [secret scanning](configure/secrets.md) to make
-  sure that the sources used to build an image are always scanned for leaked
-  secrets.

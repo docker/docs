@@ -1661,8 +1661,6 @@ manuals:
           title: Image policies
         - path: /atomist/configure/advisories/
           title: Advisories
-        - path: /atomist/configure/secrets/
-          title: Secret scanning
         - path: /atomist/configure/gitops/
           title: GitOps
     - sectiontitle: Integrate
@@ -1671,10 +1669,6 @@ manuals:
           title: GitHub app
         - path: /atomist/integrate/deploys/
           title: Track image deployments
-        - path: /atomist/integrate/jfrog/
-          title: JFrog Artifactory
-        - path: /atomist/integrate/slack/
-          title: Slack
         - path: /atomist/integrate/kubernetes/
           title: Kubernetes
 
