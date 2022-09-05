@@ -63,7 +63,7 @@ We can support the co-organizers of the Docker Meetup Groups based on their spec
 
 ### Host a Docker meetup at your location
 
-![Meetup](../images/docker-friends.png)
+![Meetup](../assets/images/docker-friends.png)
 
 ### Want to host a Docker Meetup?
 

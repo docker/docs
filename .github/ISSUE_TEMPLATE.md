@@ -5,7 +5,7 @@
 
 This repository is for reporting issues related to Docker Documentation. Before submitting a new issue, check whether the issue has already been reported. You can join the discussion using an emoji, or by adding a comment to an existing issue.
 
-You can ask general questions and get community support through the Docker Community Slack - http://dockr.ly/slack. Personalized support is available through the Docker Pro, Team, and Business subscriptions. See https://www.docker.com/pricing for details.
+You can ask general questions and get community support through the Docker Community Forums - https://forums.docker.com/ and Slack - http://dockr.ly/slack. Personalized support is available through the Docker Pro, Team, and Business subscriptions. See https://www.docker.com/pricing for details.
 
 -->
 
