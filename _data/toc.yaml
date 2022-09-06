@@ -1487,7 +1487,7 @@ manuals:
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
   - path: /docker-hub/audit-log/
-    title: Audit log
+    title: Audit logs
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/

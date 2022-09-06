@@ -100,9 +100,9 @@ configure your organization.
   organization. See [Repositories](repos.md) for detailed information about
   working with repositories.
 
-- **Activity** Displays the audit log, a chronological list of activities that
+- **Activity** Displays the audit logs, a chronological list of activities that
   occur at organization and repository levels. It provides the org owners a
-  report of all their team member activities. See [Audit log](audit-log.md) for
+  report of all their team member activities. See [Audit logs](audit-log.md) for
   details.
 
 - **Settings**: Displays information about your
