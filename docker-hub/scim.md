@@ -10,7 +10,7 @@ SCIM provides automated user provisioning and de-provisioning for your Docker or
 
 We currently support the following provisioning features: creating new users, push user profile updates, remove users, deactivate users and reactivate users.  Group management is currently not supported.
 
-The table below lists the supported attributes. Note, that your attribute mappings must match for SAML to prevent duplicating your members.
+The table below lists the supported attributes. Note, that your attribute mappings must match for SSO to prevent duplicating your members.
 
 | Attribute    | Description
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
