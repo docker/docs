@@ -18,13 +18,15 @@ rel="noopener" class=""}.
 
 ## Connect container registry
 
-The steps for how to integrate Atomist with your container registry depends on
-the type of registry that you use. Select the applicable container registry type
-below and follow the instructions:
+If you are using Docker Hub as your container registry, you can skip this step
+and [Link images with Git source](#link-images-with-git-source). Atomist
+integrates seamlessly with your Docker Hub organizations.
+
+For other registry types, follow the applicable instructions below.
 
 After completing this setup, Atomist will have read-only access, and is notified
 when images are pushed or deleted. This will enable Atomist to scan, and report
-on your Images.
+on your images.
 
 <ul class="nav nav-tabs">
   <li><a data-toggle="tab" data-target="#tab-ecr">Amazon ECR</a></li>
