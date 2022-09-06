@@ -6,50 +6,231 @@ keywords:
 
 {% include atomist/disclaimer.md %}
 
-## Prerequisites
+This page describes how to set up the Atomist-Kubernetes integration using a
+validating admission control webhook. This integration enables the following use
+cases:
 
-1.  [`kustomize`][kustomize] (tested with `v4.4.1`)
-2.  [`kubectl`][kubectl] (tested with `v1.21.1`)
-3.  `kubectl` must be authenticated and the current context should be set to the
+- Protection from running vulnerable images in configured namespaces.
+- Ability to track what images are currently deployed in your environments.
+
+This integration deploys a Clojure web service in your cluster. The web service
+queries the Atomist API to check whether images have passed the policy checks
+successfully, before admitting them into the target namespace. The service also
+updates Atomist about what images are deployed in the cluster, across all
+namespaces. This allows for tracking of images as they move through the
+deployment process (from staging to production) and builds an inventory of
+deployed images.
+
+## Configuration
+
+The following parameters, defined as environment variables, are used to
+configure the service:
+
+- `ATOMIST_URL`: the webhook URL to use when talking back to Atomist. This can
+  be found via the
+  [Integrations page](https://dso.atomist.com/r/auth/integrations) on the
+  Atomist website.
+- `ATOMIST_WORKSPACE`: the ID of your Atomist workspace. This can be found via
+  the [Integrations page](https://dso.atomist.com/r/auth/integrations) on the
+  Atomist website.
+- `ATOMIST_APIKEY`: key used to authenticate with the Atomist API. This needs to
+  have sufficient privileges against the workspace above. API keys can be
+  generated via the
+  [Integrations page](https://dso.atomist.com/r/auth/integrations) on the
+  Atomist website.
+- `CLUSTER_NAME`: a name which is used to describe the cluster. This name will
+  be used to track which clusters an image has been deployed to as it progresses
+  so a name like `staging` or `production` is a likely value.
+
+## Installation
+
+Below are instructions for two methods of installing admission controllers in
+Kubernetes:
+
+- [Using flux](#install-using-flux)
+- [Manually](#install-manually)
+
+### Install using Flux
+
+To install the controller using [Flux](https://fluxcd.io), start by creating a
+`GitRepository` resource, pointing to the GitHub repository containing the
+Kubernetes resources that the controller requires. Put that someplace where Flux
+can find it.
+
+```yaml
+# gitrepo.yml
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: adm-ctrl
+  namespace: flux-system
+spec:
+  interval: 30s
+  ref:
+    branch: main
+  url: https://github.com/atomisthq/adm-ctrl
+```
+
+Using that source we can create a `Kustomization` which will allow us to pull in
+the resources (from the `resources/k8s/controller` directory of the repository)
+required by the controller. We'll want to customize the `CLUSTER_NAME`
+environment variable in the controller deployment so we can use Kustomize to do
+that. This file will also be the place where we specify which controller image
+we are running.
+
+```yaml
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: adm-ctrl
+  namespace: flux-system
+spec:
+  targetNamespace: atomist
+  interval: 10m0s
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  sourceRef:
+    kind: GitRepository
+    name: adm-ctrl
+  path: ./resources/k8s/controller
+  prune: true
+  patches:
+    - patch: |-
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: policy-controller
+          namespace: atomist
+        spec:
+          template:
+            spec:
+              containers:
+                - name: controller
+                  env:
+                    - name: CLUSTER_NAME
+                      value: production
+      target:
+        kind: Deployment
+        name: policy-controller
+  images:
+    - newTag: v4-5-ga51c3ee
+      name: atomist/adm-ctrl
+```
+
+For this example we're going to encode the remaining three environment variables
+listed above (`ATOMIST_URL`, `ATOMIST_WORKSPACE`, `ATOMIST_APIKEY`) into a
+single secret using [sops](https://fluxcd.io/docs/guides/mozilla-sops/). Once
+that secret file has been created somewhere in the repo we'll need a
+`kustomization.yaml` alongside it to let Flux know about it.
+
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - secret.yaml
+```
+
+We can then create another `Kustomization` file which will pull in all resources
+in the directory we put the lat file. For this example that happens to be in
+`./adm-ctrl/production` but it can, of course, be anywhere relevant to the
+layout of your Flux repository.
+
+```yaml
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: adm-ctrl-resources
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./adm-ctrl/production
+  prune: true
+```
+
+Now you can commit these changes to your Flux repository and have the various
+controllers pick up the changes and create all the necessary resources.
+
+## Install manually
+
+If you prefer to have complete control over the resources which are created in
+your cluster then you can choose to install the various resources in the
+`resources/k8s` directory of this repo manually. You can use
+[Kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/) to
+generate the files to `kubectl apply` if that works for you.
+
+### Prerequisites
+
+1.  [Kustomize][kustomize] (tested with `v4.4.1`)
+2.  [kubectl][kubectl] (tested with `v1.21.1`)
+3.  kubectl must be authenticated and the current context should be set to the
     cluster that you will be updating
 
 [kustomize]: https://kubectl.docs.kubernetes.io/installation/kustomize/
 [kubectl]: https://kubectl.docs.kubernetes.io/installation/kubectl/
 
-## Fork repository
+### Fork this repository
 
 [Fork this repository](https://github.com/atomisthq/adm-ctrl/fork).
 
-This repository contains a set of base Kubernetes resources that you'll adapt
-using `kustomize`.
+This repository contains a set of base Kubernetes that you'll adapt using
+Kustomize.
 
 ### API key and endpoint URL
 
 Create an overlay for your cluster. Choose a cluster name and then create a new
 overlay directory.
 
-```
-$ CLUSTER_NAME=replacethis
-$ mkdir -p resources/k8s/overlays/${CLUSTER_NAME}
+```bash
+CLUSTER_NAME=replacethis
+mkdir -p resources/k8s/overlays/${CLUSTER_NAME}
 ```
 
 Create a file named `resources/k8s/overlays/${CLUSTER_NAME}/endpoint.env`.
 
+The file will start out like this.
+
 ```properties
 apiKey=<replace this>
 url=<replace this>
-team=<replace this>
 ```
 
-The `apiKey` and `url` must be filled in with your values from your Atomist
-workspace. You can find these values in the
-[integrations tab](https://dso.docker.com/r/auth/integrations).
+The `apiKey` and `url` should be filled in with your workspace values. Find
+these in the [Integrations page](https://dso.atomist.com/r/auth/integrations) of
+the Atomist app and replace them in the file.
 
-You'll also need your `id` for your Atomist `team`. This is the nine character
-value that you'll find at the top of
-[this page](https://dso.docker.com/r/auth/policies).
+### Create certificates for the admission controller
 
-![workspace id](./img/kubernetes/settings.png)
+The communication between the api-server and the admission controller will be
+over HTTPS. This will be configured by running 3 Kubernetes jobs in the cluster.
+
+- `policy-controller-cert-create` job: this job will create SSL certificates and
+  store them in a secret named `policy-controller-admission-cert` in the atomist
+  namespace
+- `policy-controller-cert-path` job: this will patch the admission controller
+  webhook with the ca cert (so that the api-server will trust the new
+  policy-controller)
+- `keystore-create` job: this will read the SSL certificates created by the
+  policy-controller-cert-create job and create a key store for the
+  policy-controller HTTP server. The key store is also stored in a secret named
+  `keystore` in the atomist namespace.
+
+You can do steps 1 and 3 now.
+
+```bash
+# creates roles and service account for running jobs
+kustomize build resources/k8s/certs | kubectl apply -f -
+kubectl apply -f resources/k8s/jobs/create.yaml
+kubectl apply -f resources/k8s/jobs/keystore_secret.yaml
+```
 
 ### Update Kubernetes cluster
 
@@ -57,18 +238,20 @@ This procedure will create a service account, a cluster role binding, two
 secrets, a service, and a deployment. All will be created in a new namespaced
 called `atomist`.
 
-![controller diagram](./img/kubernetes/controller.png)
+![controller diagram](./docs/controller.png)
 
 Use the same overlay that you created above
 (`resources/k8s/overlays/${CLUSTER_NAME}`). Copy in a template
-kustomization.yaml file.
+`kustomization.yaml` file.
 
-```
-$ cp resources/templates/default_controller.yaml resources/k8s/overlays/${CLUSTER_NAME}/kustomization.yaml
+```bash
+cp resources/templates/default_controller.yaml resources/k8s/overlays/${CLUSTER_NAME}/kustomization.yaml
 ```
 
-This Kustomization file requires one edit. The last line shows a patch with a
-`value` of `"default"`. This should be updated to be the name of your cluster.
+This `kustomization.yaml` file will permit you to change the `CLUSTER_NAME`
+environment variable. In the initial copy of the file, the value will be
+`"default"`, but it should be changed to the name of your cluster. This change
+is made to the final line in your new `kustomization.yaml` file.
 
 ```yaml
 resources:
@@ -78,9 +261,6 @@ secretGenerator:
     behavior: merge
     envs:
       - endpoint.env
-images:
-  - name: atomist/adm-ctrl
-    newTag: v4
 patchesJson6902:
   - target:
       group: apps
@@ -93,44 +273,35 @@ patchesJson6902:
         value: "default"
 ```
 
-Deploy the admission controller into the current Kubernetes context by running
-the following script.
+Deploy the admission controller into the current Kubernetes context using the
+command shown below.
 
 ```bash
-# creates roles and service account for running jobs
-kustomize build resources/k8s/certs | kubectl apply -f -
-# create SSL certs for your new admission controller - stores them as secrets in the atomist namespace of your cluster
-kubectl apply -f resources/k8s/jobs/create.yaml
-# creates a secret to store the keystore for your new admission controller
-kubectl apply -f resources/k8s/jobs/keystore_secret.yaml
-# install admission controller pod
-kustomize build resources/k8s/overlays/${CLUSTER_NAME} | kubectl apply -f -
+kustomize build resources/k8s/overlays/sandbox | kubectl apply -f -
+```
+
+At this point, the admission controller will be running but the cluster will not
+be routing any admission control requests to it. Create a configuration to start
+sending admission control requests to the controller using the following script.
+
+```bash
 # skip the kube-system namespace
 kubectl label namespace kube-system policy-controller.atomist.com/webhook=ignore
 # validating webhook configuration
 kubectl apply -f resources/k8s/admission/admission.yaml
-# patch the admission webhook with the ca certificate generated earlier
+# finally, patch the admission webhook with the ca certificate generated earlier
 kubectl apply -f resources/k8s/jobs/patch.yaml
 ```
 
-## Enable image policy
-
-The admission controller will still be admitting all pods. Reject pods with
-un-checked images by enabling the policy one namespace at a time. For example,
-start verifying that new pods in namespace `production` must have passed all
-necessary rules by annotating the namespace with the annotation
-`policy-controller.atomist.com/policy`.
+## Enable image check policy
 
 ```bash
-$ kubectl annotate namespace production policy-controller.atomist.com/policy=enabled
+kubectl annotate namespace production policy-controller.atomist.com/policy=enabled
 ```
 
-Disable admission control on a namespace by removing the annotation or setting
-it to something other than `enabled`.
+Disable policy on a namespace by removing the annotation or setting it to
+something other than `enabled`.
 
 ```bash
-$ kubectl annotate namespace production policy-controller.atomist.com/policy-
+kubectl annotate namespace production policy-controller.atomist.com/policy-
 ```
-
-[dynamic-admission-control]:
-  https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
