@@ -47,9 +47,11 @@ All the Docker trust keys are stored encrypted using the passphrase you provide
 on creation. Even so, you should still take care of the location where you back them up.
 Good practice is to create two encrypted USB keys.
 
-> **Important**
-> It is very important that you back up your keys to a safe, secure location. Loss of the repository key is recoverable. Loss of the root key is not.
-{:important}
+> **WARNING**
+>
+> It is **very important** that you back up your keys to a safe, secure location.
+The loss of the repository key is recoverable, but the loss of the root key is not.
+{:.warning}
 
 The Docker client stores the keys in the `~/.docker/trust/private` directory.
 Before backing them up, you should `tar` them into an archive:
@@ -69,16 +71,18 @@ for more details.
 
 Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 
-## Lost keys
+## Key loss
 
-If a publisher loses keys it means losing the ability to sign trusted content for
-your repositories.  If you lose a key, send an email to [Docker Hub
-Support](mailto:hub-support@docker.com) to reset the repository
-state.
+> **WARNING**
+>
+> If a publisher loses keys it means losing the ability to sign images for the repositories in
+question. If you lose a key, send an email to [Docker Hub Support](mailto:hub-support@docker.com).
+As a reminder, the loss of a root key is not recoverable.
+{:.warning}
 
-This loss also requires **manual intervention** from every consumer that pulled
-the tagged image prior to the loss. Image consumers would get an error for
-content that they already downloaded:
+This loss also requires **manual intervention** from every consumer that used a signed
+tag from this repository prior to the loss.  
+Image consumers get the following error for content previously downloaded from the affected repo(s):
 
 ```console
 Warning: potential malicious behavior - trust data has insufficient signatures for remote repository docker.io/my/image: valid signatures did not meet threshold

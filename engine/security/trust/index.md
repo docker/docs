@@ -97,11 +97,8 @@ The following image depicts the various signing keys and their relationships:
 
 > **WARNING**
 >
-> The root key once lost is not recoverable.
-> Correcting this loss requires intervention from [Docker
-> Support](/support/) to reset the repository state. This loss
-> also requires **manual intervention** from every consumer that used a signed
-> tag from this repository prior to the loss.
+>The root key once lost is not recoverable. If you lose any other key, send an email to [Docker Hub Support](mailto:hub-support@docker.com). This loss also requires manual intervention from every
+consumer that used a signed tag from this repository prior to the loss.
 {:.warning}
 
 You should back up the root key somewhere safe. Given that it is only required
