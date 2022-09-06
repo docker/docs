@@ -342,11 +342,11 @@ repository repository, the image must be annotated with labels at build time.
 
 The image labels that Atomist requires are:
 
-| Label                                     | Value                                             |
-| ----------------------------------------- | ------------------------------------------------- |
-| `org.opencontainers.image.revision`       | The commit revision that the image is built for.  |
-| `org.opencountainers.image.source`        | HTTP(S) address of the project.                   |
-| `com.atomist.containers.image.dockerfile` | Path to the Dockerfile, relative to project root. |
+| Label                                | Value                                             |
+| ------------------------------------ | ------------------------------------------------- |
+| `org.opencontainers.image.revision`  | The commit revision that the image is built for.  |
+| `org.opencountainers.image.source`   | HTTP(S) address of the project.                   |
+| `com.docker.image.source.entrypoint` | Path to the Dockerfile, relative to project root. |
 
 Labels can be added to an image using either the `--label` CLI argument, or the
 `LABEL` command in the Dockerfile.
@@ -355,7 +355,7 @@ Labels can be added to an image using either the `--label` CLI argument, or the
 docker build . -f docker/Dockerfile -t $IMAGE_NAME \
     --label "org.opencontainers.image.revision=10ac8f8bdaa343677f2f394f9615e521188d736a" \
     --label "org.opencontainers.image.source=https://github.com/org/repo" \
-    --label "com.atomist.containers.image.dockerfile=docker/Dockerfile"
+    --label "com.docker.image.source.entrypoint=docker/Dockerfile"
 ```
 
 Adding these labels using the CLI is recommended. When building your Docker
@@ -368,7 +368,7 @@ to create labels. For example, if you build your images using GitHub Actions:
 docker build . -f docker/Dockerfile -t $IMAGE_NAME \
     --label "org.opencontainers.image.revision=${{ github.sha }}" \
     --label "org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}" \
-    --label "com.atomist.containers.image.dockerfile=docker/Dockerfile"
+    --label "com.docker.image.source.entrypoint=docker/Dockerfile"
 ```
 
 {% endraw %}
