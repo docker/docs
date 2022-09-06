@@ -247,8 +247,6 @@ This procedure will create a service account, a cluster role binding, two
 secrets, a service, and a deployment. All will be created in a new namespaced
 called `atomist`.
 
-![controller diagram](./docs/controller.png)
-
 Use the same overlay that you created above
 (`resources/k8s/overlays/${CLUSTER_NAME}`). Copy in a template
 `kustomization.yaml` file.

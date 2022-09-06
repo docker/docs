@@ -1665,7 +1665,7 @@ manuals:
           title: Advisories
     - sectiontitle: Integrate
       section:
-        - path: /atomist/configure/gitops/
+        - path: /atomist/integrate/gitops/
           title: GitOps
         - path: /atomist/integrate/github/
           title: GitHub

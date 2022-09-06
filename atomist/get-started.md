@@ -27,36 +27,12 @@ when images are pushed or deleted. This will enable Atomist to scan, and report
 on your Images.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#tab1">Docker Hub</a></li>
-  <li><a data-toggle="tab" data-target="#tab2">Amazon ECR</a></li>
-  <li><a data-toggle="tab" data-target="#tab4">Google Artifact Registry</a></li>
-  <li><a data-toggle="tab" data-target="#tab5">GitHub Container Registry</a></li>
+  <li><a data-toggle="tab" data-target="#tab-ecr">Amazon ECR</a></li>
+  <li><a data-toggle="tab" data-target="#tab-gar">Google Artifact Registry</a></li>
+  <li><a data-toggle="tab" data-target="#tab-ghcr">GitHub Container Registry</a></li>
 </ul>
 <div class="tab-content"><br>
-<div id="tab1" class="tab-pane fade in active" markdown="1">
-<!-- Docker Hub -->
-
-1. Go to <https://dso.docker.com> and sign in using your Docker ID credentials.
-2. Navigate to the **Integrations** tab and click **Configure** next to the
-   Docker Hub integration.
-3. Enter the **Namespace**, **Docker ID**, and your Docker Hub **Personal access
-   token**.
-4. Click **Save Configuration**.
-5. Copy the **Destination webhook URL**.
-6. In a new browser tab or window, go to the Docker Hub page of the repository
-   that you want to integrate with Atomist.
-7. Open the **Webhooks** tab and create a new webhook. In the **Webhook URL**
-   field, paste the Atomist webhook URL copied in step 5.
-
-   ![configuring a webhook on Docker Hub](./images/dockerhub/webhook.png){:
-   width="700px" }
-
-With the webhook created, the Docker Hub integration is now complete. You can
-repeat steps 6-8 for any additional repositories that you wish to integrate with
-Atomist.
-
-</div>
-<div id="tab2" class="tab-pane fade" markdown="1">
+<div id="tab-ecr" class="tab-pane fade" markdown="1">
 <!-- ECR -->
 
 When setting up an ECR integration with Atomist, we need to create the following
@@ -206,7 +182,7 @@ with the appropriate condition on the IAM role statement.
    width="700px"}
 
 </div>
-<div id="tab4" class="tab-pane fade" markdown="1">
+<div id="tab-gar" class="tab-pane fade" markdown="1">
 <!-- Google Artifact Registry -->
 
 Setting up an Atomist integration with Google Artifact Registry involves:
@@ -306,7 +282,7 @@ integration page will indicate that the webhook event was received and that the
 integration works.
 
 </div>
-<div id="tab5" class="tab-pane fade" markdown="1">
+<div id="tab-ghcr" class="tab-pane fade" markdown="1">
 <!-- GitHub Container Registry -->
 
 To integrate Atomist with GitHub Container Registry, connect your GitHub
@@ -388,11 +364,16 @@ also used to help teams track and remediate new vulnerabilities that impact
 existing workloads. In the next sections, we'll look at how teams can use
 Atomist to gain visibility into container workload systems like Kubernetes.
 
-- [Set up image policies](configure/image-policies.md) with rules that will run
-  whenever a new image is pushed to your registry
+- Connect Atomist with your GitHub repositories by
+  [installing the Atomist app](./integrate/github.md) for your GitHub
+  organization.
+- Manage which Atomist features should be enabled
+  [settings](./configure/settings.md).
 - Atomist watches for new advisories from public sources, but you can also add
-  your own internal advisories. Refer to [Advisories](configure/advisories.md)
+  your own internal advisories. Refer to [advisories](configure/advisories.md)
   for more information.
-- Use [Kubernetes admission control](integrate/kubernetes.md) to ensure that
+- Use [Kubernetes admission controllers](integrate/kubernetes.md) to ensure that
   images conform to your policy before being admitted into different clusters or
   namespaces.
+- Set up [deployment policies](configure/deployment-policies.md) with rules that
+  will run whenever a new image is pushed to your registry
