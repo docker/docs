@@ -10,7 +10,7 @@ SCIM provides automated user provisioning and de-provisioning for your Docker or
 
 We currently support the following provisioning features: creating new users, push user profile updates, remove users, deactivate users and reactivate users.  Group management is currently not supported.
 
-The table below lists the supported attributes.
+The table below lists the supported attributes. Note, that your attribute mappings must match for SSO to prevent duplicating your members.
 
 | Attribute    | Description
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
@@ -20,7 +20,7 @@ The table below lists the supported attributes.
 
 ## Configure
 
-SAML-based SSO must be properly set up and be functional for your organization before you start configuring automated provisioning. In addition, you must verify your company domain and have the appropriate connectors in your IdP. Your user email domain must be the same company domain you use for Single Sign-on (SSO). Enforcing SSO is not required to enable SCIM. However, you must [configure SAML SSO](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"} before you enable SCIM.
+SSO must be properly set up and be functional for your organization before you start configuring automated provisioning. In addition, you must verify your company domain and have the appropriate connectors in your IdP. Your user email domain must be the same company domain you use for Single Sign-on (SSO). Enforcing SSO is not required to enable SCIM. However, you must [configure SSO](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"} before you enable SCIM.
 
 Before you make SCIM configuration changes in your IdP, navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Organizations** > **Settings** > **Security**. SCIM is locked until you complete the SSO configuration and verify your company domain. Enable SCIM and access your Base URL and API Token. You can also generate a new API token.
 
