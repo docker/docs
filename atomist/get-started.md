@@ -18,11 +18,12 @@ rel="noopener" class=""}.
 
 ## Connect container registry
 
-For other registry types, follow the applicable instructions below.
-
 After completing this setup, Atomist will have read-only access, and is notified
 when images are pushed or deleted. This will enable Atomist to scan, and report
 on your images.
+
+Follow the applicable instructions below, depending on the type of container
+registry you use.
 
 <ul class="nav nav-tabs">
   <li><a data-toggle="tab" data-target="#tab-hub">Docker Hub</a></li>
