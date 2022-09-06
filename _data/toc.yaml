@@ -116,6 +116,20 @@ guides:
       path: /language/golang/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/golang/deploy/
+  - sectiontitle: C# (.NET)
+    section:
+    - title: "Overview"
+      path: /language/dotnet/
+    - title: "Build images"
+      path: /language/dotnet/build-images/
+    - title: "Run containers"
+      path: /language/dotnet/run-containers/
+    - title: "Develop your app"
+      path: /language/dotnet/develop/
+    - title: "Configure CI/CD"
+      path: /language/dotnet/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/dotnet/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
