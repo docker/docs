@@ -61,11 +61,11 @@ Use `later` when talking about version numbers.
 
 Use:
 
-_In GitLab 14.1 and later._
+_In Docker Desktop 4.1 and later._
 
 Instead of:
 
-_In GitLab 14.1 and higher…_ or _In GitLab 14.1 and above…_
+_In Docker Desktop 4.1 and higher…_ or _In Docker Desktop 4.1 and above…_
 
 #### register
 Use `register` instead of sign up when talking about creating an account.
@@ -104,4 +104,4 @@ _Use widgets when you have work you want to organize._
 Instead of:
 
 _We created a feature for you to add widgets.
-One exception: You can use we recommend instead of it is recommended or GitLab recommends._
+One exception: You can use we recommend instead of it is recommended or Docker recommends._
