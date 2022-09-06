@@ -6,20 +6,29 @@ keywords:
 
 {% include atomist/disclaimer.md %}
 
-This page describes how to set up the Atomist-Kubernetes integration using a
-validating admission control webhook. This integration enables the following use
-cases:
+This page describes how to set up the Atomist-Kubernetes integration for using a
+validating admission control webhook. This integration is a prerequisite for the
+following use cases:
 
-- Protection from running vulnerable images in configured namespaces.
-- Ability to track what images are currently deployed in your environments.
+- Deployment policies: protecting your cluster from running vulnerable images.
+- Deployment tracking: keeping track of what images are currently deployed in
+  your environments.
 
-This integration deploys a Clojure web service in your cluster. The web service
-queries the Atomist API to check whether images have passed the policy checks
-successfully, before admitting them into the target namespace. The service also
-updates Atomist about what images are deployed in the cluster, across all
-namespaces. This allows for tracking of images as they move through the
-deployment process (from staging to production) and builds an inventory of
-deployed images.
+## How the integration works
+
+This integration deploys, among other things, a Clojure web service in your
+cluster. The web service interacts with the Atomist webhook to retrieve and
+upload data about images.
+
+Data about images is retrieved if you are using
+[deployment policies](../configure/deployment-policies.md) to control whether
+images get deployed to Kubernetes based on policy checks.
+
+The service will also upload data to Atomist. The payload that it sends
+describes what images are deployed in the cluster, across all namespaces. This
+helps you keep track of your deployed images, in what environment (staging,
+production), and lets you see a delta between candidate images and what you are
+currently running. Go to [deployment tracking](./deploys.md) to learn more.
 
 ## Configuration
 
@@ -42,7 +51,7 @@ configure the service:
   be used to track which clusters an image has been deployed to as it progresses
   so a name like `staging` or `production` is a likely value.
 
-## Installation
+## Installation steps
 
 Below are instructions for two methods of installing admission controllers in
 Kubernetes:

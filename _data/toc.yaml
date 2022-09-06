@@ -1657,18 +1657,20 @@ manuals:
       title: Get started
     - sectiontitle: Configure
       section:
-        - path: /atomist/configure/image-policies/
-          title: Image policies
+        - path: /atomist/configure/settings/
+          title: Settings
+        - path: /atomist/configure/deployment-policies/
+          title: Deployment policies
         - path: /atomist/configure/advisories/
           title: Advisories
-        - path: /atomist/configure/gitops/
-          title: GitOps
     - sectiontitle: Integrate
       section:
+        - path: /atomist/configure/gitops/
+          title: GitOps
         - path: /atomist/integrate/github/
-          title: GitHub app
+          title: GitHub
         - path: /atomist/integrate/deploys/
-          title: Track image deployments
+          title: Deployment tracking
         - path: /atomist/integrate/kubernetes/
           title: Kubernetes
 

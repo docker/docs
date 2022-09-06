@@ -1,5 +1,5 @@
 ---
-title: GitHub app
+title: Connect to GitHub
 description:
 keywords:
 ---
