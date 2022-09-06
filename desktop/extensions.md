@@ -104,16 +104,16 @@ If an extension does not provide a way for you to give feedback, contact us and 
 2. Click **Manage Extensions**. This displays a list of extensions you've installed.
 3. Click **Uninstall**.
 
-## Install an extension which is not in the Marketplace
+## Install an extension not available in the Marketplace
 
-The Extensions Marketplace is the trusted and official place to install extensions from within Docker Desktop. These extensions have gone through a review process and thus meet a minimum set of requirements. However, the Marketplace it is not the only place where to install extensions from.
+The Extensions Marketplace is the trusted and official place to install extensions from within Docker Desktop. These extensions have gone through a review process by Docker. However, other extensions can also be installed in Docker Desktop if you trust the extension author.
 
 Given the nature of a Docker Extension (i.e. a Docker image) you could find other places where users have their extensions' source code published: GitHub, GitLab or even hosted in image registries like DockerHub or GHCR.
 You can install Docker Extensions that have been developed by the community or internally at your company from a teammate: you are not limited to install extensions from the Marketplace only.
 
 > **Note**
 >
-> Ensure the option "Allow only extensions distributed through the Docker Marketplace" is disabled. Otherwise this will This will prevent to install any other extension via the Extension SDK tools.
+> Ensure the option "Allow only extensions distributed through the Docker Marketplace" is disabled. Otherwise this will This will prevent to install any extension not listed in the Marketplace via the Extension SDK tools.
 > You can change this option in the Settings > Extensions.
 
 
@@ -122,9 +122,9 @@ You can install Docker Extensions that have been developed by the community or i
 > Docker Extensions that are not in the Marketplace haven't been gone through a review process by Docker.
 > Extensions can install binaries, invoke commands and access files on your machine. Installing them is at your own risk.
 
-To install an extension which is not present in the Marketplace, you can use the Extensions CLI that is bundled as part of Docker Desktop.
+To install an extension which is not present in the Marketplace, you can use the Extensions CLI that is bundled with Docker Desktop.
 
-In a terminal, type `docker extension install IMAGE[:TAG]` to install an extension by its image reference and optionally a tag. Use the `-f` or `--force` flag to not prompt for confirmation.
+In a terminal, type `docker extension install IMAGE[:TAG]` to install an extension by its image reference and optionally a tag. Use the `-f` or `--force` flag to avoid interactive confirmation.
 
 Go to the Docker Dashboard to see the new extension installed.
 
@@ -151,4 +151,4 @@ Go to the Docker Dashboard to see the new extension updated.
 
 ## Uninstall an extension which is not in the Marketplace
 
-To uninstall an extension which is not present in the Marketplace, you could either navigate to the "Installed" tab in the Marketplace and press on the "Uninstall" button, or from a terminal type `docker extension rm IMAGE[:TAG]`.
+To uninstall an extension which is not present in the Marketplace, you could either navigate to the "Installed" tab in the Marketplace and click the "Uninstall" button, or from a terminal type `docker extension uninstall IMAGE[:TAG]`.
