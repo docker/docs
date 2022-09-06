@@ -1307,7 +1307,7 @@ services:
 
 In the example below, service `frontend` will be able to reach the `backend` service at
 the hostname `backend` or `database` on the `back-tier` network, and service `monitoring`
-will be able to reach same `backend` service at `db` or `mysql` on the `admin` network.
+will be able to reach same `backend` service at `backend` or `mysql` on the `admin` network.
 
 ```yml
 services:
