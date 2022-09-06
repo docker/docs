@@ -18,10 +18,6 @@ rel="noopener" class=""}.
 
 ## Connect container registry
 
-If you are using Docker Hub as your container registry, you can skip this step
-and [Link images with Git source](#link-images-with-git-source). Atomist
-integrates seamlessly with your Docker Hub organizations.
-
 For other registry types, follow the applicable instructions below.
 
 After completing this setup, Atomist will have read-only access, and is notified
@@ -29,11 +25,17 @@ when images are pushed or deleted. This will enable Atomist to scan, and report
 on your images.
 
 <ul class="nav nav-tabs">
+  <li><a data-toggle="tab" data-target="#tab-hub">Docker Hub</a></li>
   <li><a data-toggle="tab" data-target="#tab-ecr">Amazon ECR</a></li>
   <li><a data-toggle="tab" data-target="#tab-gar">Google Artifact Registry</a></li>
   <li><a data-toggle="tab" data-target="#tab-ghcr">GitHub Container Registry</a></li>
 </ul>
 <div class="tab-content"><br>
+<div id="tab-hub" class="tab-pane fade in active">
+  <p>If you are using Docker Hub as your container registry, you can skip this step
+  and <a href="#link-images-with-git-repository">Link images with Git source</a>. Atomist
+  integrates seamlessly with your Docker Hub organizations.</p>
+</div>
 <div id="tab-ecr" class="tab-pane fade" markdown="1">
 <!-- ECR -->
 
