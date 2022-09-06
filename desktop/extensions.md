@@ -135,8 +135,8 @@ As part of the output you could see the extension ID, the provider, version, the
 
 ```
 $ docker extension ls
-ID                                       PROVIDER            VERSION             UI                              VM                  HOST
-docker/volumes-backup-extension          Docker Inc.         1.0.0               1 tab(Volumes Backup & Share)   Running(1)          1 binarie(s)
+ID                  PROVIDER            VERSION             UI                    VM                  HOST
+john/my-extension   John                latest              1 tab(My-Extension)   Running(1)          -
 ```
 
 Go to the Docker Dashboard, click on "Add Extensions" and on the "Installed" tab to see the new extension installed.
@@ -148,6 +148,10 @@ To update an extension which is not present in the Marketplace, in a terminal ty
 
 For instance, if you installed an extension with `docker extension install john/my-extension:0.0.1`, you can update it by running `docker extension update john/my-extension:0.0.2`.
 Go to the Docker Dashboard to see the new extension updated.
+
+> **Note**
+>
+> Extensions that have not been installed through the Marketplace will not receive update notifications from Docker Desktop.
 
 ## Uninstall an extension which is not in the Marketplace
 
