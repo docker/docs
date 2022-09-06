@@ -71,11 +71,11 @@ for more details.
 
 Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 
-## Key Loss
+## Key loss
 
 > **WARNING**
 >
-> If a publisher loses keys it means losing the ability to sign trusted content for the repositories in
+> If a publisher loses keys it means losing the ability to sign images for the repositories in
 question. If you lose a key, send an email to [Docker Hub Support](mailto:hub-support@docker.com).
 As a reminder, the loss of a root key is not recoverable.
 {:.warning}

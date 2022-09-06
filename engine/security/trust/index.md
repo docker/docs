@@ -101,11 +101,6 @@ The following image depicts the various signing keys and their relationships:
 consumer that used a signed tag from this repository prior to the loss.
 {:.warning}
 
-
-
-
-
-
 You should back up the root key somewhere safe. Given that it is only required
 to create new repositories, it is a good idea to store it offline in hardware.
 For details on securing, and backing up your keys, make sure you
