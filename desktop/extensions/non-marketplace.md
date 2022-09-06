@@ -4,15 +4,6 @@ keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, feedback
 title: Non-Marketplace extensions
 ---
 
-## Enable or disable extensions not available in the Marketplace
-
-You can install Docker Extensions through the Marketplace or through the Extensions SDK tools. You can choose to only allow published extensions (that have been published in the Extensions Marketplace).
-
-1. Navigate to **Settings**, or **Preferences** if you're a Mac user.
-2. Select the **Extensions** tab.
-3. Next to **Allow only extensions distributed through the Docker Marketplace**, select or clear the checkbox to set your desired state.
-4. In the bottom-right corner, click **Apply & Restart**.
-
 ## Install an extension not available in the Marketplace
 
 > **Warning**
@@ -51,7 +42,7 @@ john/my-extension   John                latest              1 tab(My-Extension) 
 Go to the Docker Dashboard, click on **Add Extensions** and on the **Installed** tab to see the new extension installed.
 Notice that an `UNPUBLISHED` label displays which indicates that the extension has not been installed from the Marketplace.
 
-## Update an extension which is not in the Marketplace
+## Update an extension 
 
 To update an extension which is not present in the Marketplace, in a terminal type `docker extension update IMAGE[:TAG]` where the `TAG` should be different from the extension that is already installed.
 
@@ -62,6 +53,6 @@ Go to the Docker Dashboard to see the new extension updated.
 >
 > Extensions that have not been installed through the Marketplace will not receive update notifications from Docker Desktop.
 
-## Uninstall an extension which is not in the Marketplace
+## Uninstall an extension
 
 To uninstall an extension which is not present in the Marketplace, you can either navigate to the **Installed** tab in the Marketplace and select the **Uninstall** button, or from a terminal type `docker extension uninstall IMAGE[:TAG]`.
