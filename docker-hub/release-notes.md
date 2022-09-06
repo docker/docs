@@ -101,9 +101,9 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 ### New feature
 
-Docker introduces Audit log, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
+Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
+For more information about this feature and for instructions on how to use it, see [Audit logs](audit-log.md).
 
 ## 2020-11-10
 
