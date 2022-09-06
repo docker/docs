@@ -1391,6 +1391,8 @@ manuals:
       section:
         - path: /build/building/packaging/
           title: Packaging your software
+        - path: /build/building/cache/
+          title: Optimizing builds with cache management
         - sectiontitle: Choosing a build driver
           section:
             - path: /build/building/drivers/
