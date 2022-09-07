@@ -13,7 +13,7 @@ On this page you can find information on how to get and install Compose.
 
 If you have Docker Desktop, you've got a full Docker installation, including Compose.
 
-You can check this by clicking on **About Docker Desktop** from the Docker menu ![whale menu](../../desktop/images/whale-x.png){: .inline}.
+You can check this by clicking on **About Docker Desktop** from the Docker menu ![whale menu](../../desktop/images/whale-x.svg){: .inline}.
 
 ![about-desktop](../../desktop/images/about_desktop_versions.png){:width="750px"}
 

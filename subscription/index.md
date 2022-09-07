@@ -74,7 +74,7 @@ Please read the [Blog](https://www.docker.com/blog/updating-product-subscription
 >
 > The licensing and distribution terms for Docker and Moby **open-source** projects, such as Docker Engine, are not changing.
 
-Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.png){: .inline} > **About Docker Desktop** > **Acknowledgements**.
+Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.svg){: .inline} > **About Docker Desktop** > **Acknowledgements**.
 
 Docker Desktop distributes some components that are licensed under the
 GNU General Public License. Click [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.

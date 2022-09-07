@@ -77,7 +77,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
     ![Docker app in Hockeyapp](images/docker-app-in-apps-mac.png)
 
-3. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window.
+3. The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement window.
 
     {% include desktop-license-update.md %}
 

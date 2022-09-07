@@ -137,7 +137,7 @@ Log out and log back in so that your group membership is re-evaluated.
 
     ![Docker app in Applications](images/docker-app-in-apps.png)
 
-3. Select **Docker Desktop** to start Docker. <br> The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window.
+3. Select **Docker Desktop** to start Docker. <br> The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement window.
 
 4. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
