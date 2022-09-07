@@ -34,7 +34,7 @@ registry you use.
 <div class="tab-content"><br>
 <div id="tab-hub" class="tab-pane fade in active">
   <p>If you are using Docker Hub as your container registry, you can skip this step
-  and <a href="#link-images-with-git-repository">Link images with Git source</a>. Atomist
+  and <a href="#link-images-to-git-repository">Link images to Git source</a>. Atomist
   integrates seamlessly with your Docker Hub organizations.</p>
 </div>
 <div id="tab-ecr" class="tab-pane fade" markdown="1">
@@ -374,11 +374,8 @@ Atomist to gain visibility into container workload systems like Kubernetes.
   organization.
 - Manage which Atomist features should be enabled
   [settings](./configure/settings.md).
+- Learn about [deployment tracking](integrate/deploys.md) and how Atomist can
+  help monitor your deployed containers.
 - Atomist watches for new advisories from public sources, but you can also add
   your own internal advisories. Refer to [advisories](configure/advisories.md)
   for more information.
-- Use [Kubernetes admission controllers](integrate/kubernetes.md) to ensure that
-  images conform to your policy before being admitted into different clusters or
-  namespaces.
-- Set up [deployment policies](configure/deployment-policies.md) with rules that
-  will run whenever a new image is pushed to your registry
