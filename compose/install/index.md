@@ -9,7 +9,7 @@ redirect_from:
 
 On this page you can find information on how to get and install Compose.
 
-> **Give Feedback!**
+> **Give feedback!**
 >
 > [Give us feedback](#where-to-go-next) on this page and get entered into a lottery for Docker swag!
 
