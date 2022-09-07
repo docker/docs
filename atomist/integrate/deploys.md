@@ -1,71 +1,71 @@
 ---
-title: Tracking image deployments
+title: Deployment tracking
 description:
 keywords:
 ---
 
 {% include atomist/disclaimer.md %}
 
-Atomist compares recent image Vulnerability scans against the scans of images
-that are currently deployed.
+By integrating Atomist with a runtime environment, you can track vulnerabilities
+for deployed containers. This gives you contexts for whether security debt is
+increasing or decreasing.
 
-This level of tracking gives developers contexts about when security debt is
-both increasing and decreasing. This can be integrated in several ways:
+There are several options for how you could implement deployment tracking:
 
-- Steps in continuous deployment pipelines
-- Kubernetes Admission Controllers (for kube-based deployments)
-- Calling the API directly
+- Invoking the API directly
+- Adding it as a step in your continuous deployment pipeline
+- For Kubernetes, creating [admission controllers](./kubernetes.md)
 
 ## API
 
-Each Atomist workspace exposes an endpoint to call whenever an image is
-deployed. All subsequent scans will now be compared against each recorded
-environment. Find your endpoint URL on the
-[Integrations](https://dso.docker.com/r/auth/integrations) page.
+Each Atomist workspace exposes an API endpoint. Submitting a POST request to the
+endpoint updates Atomist about what image you are running in your environments.
+This will let you compare scan results for images you build against images of
+containers running in staging or production.
 
-> Note
->
-> you must create an API key to use this endpoint.
+You can find the API endpoint URL on the
+[Integrations](https://dso.docker.com/r/auth/integrations) page. Using this API
+requires an API key.
 
-The simplest form of integration is to call this API whenever a new image is
-deployed. The default environment name is `deployed` - if you want to scan
-images, and activate GitHub Checks to start comparing against a "deployed"
-image, then call:
+The most straight-forward usage is to post to this endpoint using a webhook.
+When deploying a new image, submit an automated POST request (using `curl`, for
+example) as part of your deployment pipeline.
 
-```
-$ curl \\
+```bash
+$ curl <api-endpoint-url> \\
   -X POST \\
   -H "Content-Type: application/json" \\
-  -H "Authorization: bearer api-token" \\
-  https://webhook.atomist.com/atomist/resource/39b472d9-c249-4ee2-80ec-bdbdbcb15026 \\
-  -d '{"image": {"url": "gcr.io/atomist-container-registry/bot-service@sha256:698e0b6c22c8922b2c4ed257afbff40bcfe6597c744648f695f907598d3f6b5c"}}'
+  -H "Authorization: Bearer <api-token>" \\
+  -d '{"image": {"url": "<image-url>@<sha256-digest>"}}'
 ```
 
-You must use the `digest` form of an image URL. Images tags can move. They are
-not suitable for stable vulnerability comparisons.
+### Parameters
 
-### Options
-
-The payload supports additional fields to support additional use cases.
+The API supports the following parameters in the request body:
 
 ```json
 {
-  "environment": { "name": "unique-env-name" },
   "image": {
-    "url": "host/repository@digest",
-    "name": "optional service name"
+    "url": "string",
+    "name": "string"
+  },
+  "environment": {
+    "name": "string"
   },
   "platform": {
-    "os": "linux",
-    "architecture": "amd64",
-    "variant": "optional variant"
+    "os": "string",
+    "architecture": "string",
+    "variant": "string"
   }
 }
 ```
 
-- Use custom environment names to track different image versions in environments
-  like `staging` and `production`
-- Multi-platform image manifest lists are supported. Add the platform details
-  for the environments. Vulnerability scans are dependent on the platform.
-- If you are deploying multiple images from the same container repository into
-  one environment, it is mandatory that each `image` have a unique `name`.
+| Parameter               | Mandatory | Default    | Description                                                                                                                           |
+| ----------------------- | :-------: | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `image.url`             |    Yes    |            | Fully qualified reference name of the image, plus version (digest). You **must** specify the image version by digest.                 |
+| `image.name`            |    No     |            | Optional identifier. If you deploy many containers from the same image in any one environment, each instance must have a unique name. |
+| `environment.name`      |    No     | `deployed` | Use custom environment names to track different image versions in environments, like `staging` and `production`                       |
+| `platform.os`           |    No     | `linux`    | Image operating system.                                                                                                               |
+| `platform.architecture` |    No     | `amd64`    | Instruction set architecture.                                                                                                         |
+| `platform.variant`      |    No     |            | Optional variant label.                                                                                                               |
+
