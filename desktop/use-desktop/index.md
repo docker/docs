@@ -20,3 +20,11 @@ In addition, the Docker Dashboard allows you to:
 
 - Easily navigate to the **Preferences** (**Settings** in Windows) menu to configure Docker Desktop preferences. Select the **Preferences** or **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
+
+## The Whale menu
+
+Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is reffered to as the Whale menu ![whale menu](../images/whale-x.png){: .inline}.
+
+To display the Whale menu, right-click on the ![whale menu](../images/whale-x.png){: .inline} icon. It displays the following options:
+
+- 
