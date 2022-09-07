@@ -47,4 +47,4 @@ extension, select:
     - Slack
     - Issues. You'll be sent to a page outside of Docker Desktop to submit your feedback.
 
-If an extension does not provide a way for you to give feedback, contact us and we'll pass on the feedback for you. To provide feedback, select the **Give feedback** to the right of **Extensions Marketplace**
+If an extension does not provide a way for you to give feedback, contact us and we'll pass on the feedback for you. To provide feedback, select the **Give feedback** to the right of **Extensions Marketplace**.

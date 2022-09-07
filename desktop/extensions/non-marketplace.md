@@ -20,7 +20,7 @@ You can install an extension that has been developed by the community or interna
 > **Note**
 >
 > Ensure the option **Allow only extensions distributed through the Docker Marketplace** is disabled. Otherwise, this prevents any extension not listed in the Marketplace, via the Extension SDK tools from, being installed.
-> You can change this option in the Settings > Extensions.
+> You can change this option in **Settings**, or **Preferences** if you use macOS. 
 
 To install an extension which is not present in the Marketplace, you can use the Extensions CLI that is bundled with Docker Desktop.
 
