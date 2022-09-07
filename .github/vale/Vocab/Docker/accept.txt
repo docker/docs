@@ -1,4 +1,4 @@
-(Certified|Verified) Publisher
+(Certified|Verified) Publisher( Program)?
 Autotest
 BuildKit
 Docker
@@ -15,7 +15,7 @@ Dockerfile
 HyperKit
 Kitematic
 LinuxKit
-Official Image
+Official Images?
 Sponsored (OSS|Open Source Software)
 Swarm
 Swarm Mode
