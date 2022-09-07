@@ -1,14 +1,8 @@
-# An example rule from the "Microsoft" style.
 extends: existence
 message: "Don't use end punctuation in links."
-link: https://deploy-preview-15350--docsdocker.netlify.app/contribute/style/formatting/#links
+link: https://docs.docker.com/contribute/style/formatting/#links
 nonword: true
 level: warning
 scope: link
-action:
-  name: edit
-  params:
-    - remove
-    - ".?!"
 tokens:
   - '[a-z0-9][.?!](?:\s|$)'

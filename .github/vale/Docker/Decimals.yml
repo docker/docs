@@ -1,6 +1,6 @@
 extends: existence
 message: Use decimals instead of fractions.
-link: https://deploy-preview-15350--docsdocker.netlify.app/contribute/style/grammar/#decimals-and-fractions
+link: https://docs.docker.com/contribute/style/grammar/#decimals-and-fractions
 level: warning
 raw:
   - '[\w\s]'

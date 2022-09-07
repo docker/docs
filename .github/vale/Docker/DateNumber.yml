@@ -1,6 +1,6 @@
 extends: existence
 message: "Don't use ordinal numbers for dates."
-link: https://deploy-preview-15350--docsdocker.netlify.app/contribute/style/grammar/#dates
+link: https://docs.docker.com/contribute/style/grammar/#dates
 level: error
 nonword: true
 ignorecase: true

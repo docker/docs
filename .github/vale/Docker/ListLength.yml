@@ -1,5 +1,6 @@
 extends: occurrence
 message: List items should contain relatively few words or short phrases.
+link: https://docs.docker.com/contribute/style/grammar/#lists
 level: suggestion
 scope: list
 max: 20

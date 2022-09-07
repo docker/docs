@@ -1,6 +1,6 @@
 extends: existence
 message: "When possible, spell out the name of the month."
-link: https://deploy-preview-15350--docsdocker.netlify.app/contribute/style/grammar/#dates
+link: https://docs.docker.com/contribute/style/grammar/#dates
 ignorecase: true
 level: warning
 nonword: true
