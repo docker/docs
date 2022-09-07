@@ -88,7 +88,7 @@ using a secure repository.
             <div class="component-icon">
                  <img src="/assets/images/explore.svg" alt="Docker Desktop" width="70" height="70">
             </div>
-                <h2 id="docker-for-mac"><a href="/desktop/use-desktop/overview/">Explore Docker Desktop</a></h2>
+                <h2 id="docker-for-mac"><a href="/desktop/use-desktop/">Explore Docker Desktop</a></h2>
                 <p>Navigate Docker Desktop and learn about its key features.</p>
          </div>
      </div>
