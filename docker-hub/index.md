@@ -84,7 +84,7 @@ Users get access to free public repositories for storing and sharing images or c
 
 Docker Hub provides the following major features:
 
-* [Repositories](repos.md): Push and pull container images.
+* [Repositories](../docker-hub/repos/index.md): Push and pull container images.
 * [Teams & Organizations](orgs.md): Manage access to private
 repositories of container images.
 * [Docker Official Images](official_images.md): Pull and use high-quality

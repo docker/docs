@@ -40,7 +40,7 @@ The following sections provide recommendations for publishers to migrate content
 ### Create your new Docker organization
 
 1. Create a new namespace/organization in [Docker Hub](https://hub.docker.com/orgs){: target="_blank" rel="noopener" class="_"}.
-For step-by-step instructions, see [Teams and Organizations](../orgs.md). For information about creating repositories, see [Repositories](../repos.md).
+For step-by-step instructions, see [Teams and Organizations](../orgs.md). For information about creating repositories, see [Repositories](../repos/index.md).
 2. As part of creating a new organization, we recommend that you create a secure group alias or email login as a backup administrator login.
 3. When you create a new organization, we recommend that you use a name similar to the one you used in the Publisher Center.
 4. Edit your new Docker Hub namespace settings to include the Gravatar image `https://hub.docker.com/orgs/<namespace>/settings/general`. You may need to create a new Gravatar based on a logo you saved earlier.
@@ -51,7 +51,7 @@ For step-by-step instructions, see [Teams and Organizations](../orgs.md). For in
 
 ### Upload all your images
 
-1. Create individual repositories in the organization. For more information, see [Create new repositories](../repos.md#creating-repositories). Note that the repository descriptions are more streamlined in Docker Hub than in the Publisher Center. Also, the Buy Now and Licensing options do not exist anymore as these features have been deprecated.
+1. Create individual repositories in the organization. For more information, see [Create new repositories](../../docker-hub/repos/index.md#creating-repositories). Note that the repository descriptions are more streamlined in Docker Hub than in the Publisher Center. Also, the Buy Now and Licensing options do not exist anymore as these features have been deprecated.
 2. In many cases, publishers choose to refer to and link to the licensing terms in the repository description to clarify what the users may be agreeing to. You may want to consider creating the individual repositories as a Private repository so you can test the settings before making it available externally.
 3. Push each image and tag to the corresponding repository.
 

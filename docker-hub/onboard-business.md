@@ -68,7 +68,7 @@ organization’s settings apply to the user’s session, you can use a `registry
 Get the most out of your Docker Business subscription by leveraging these popular features:
 
 - If you haven't configured [System for Cross-domain Identity Management](../docker-hub/scim.md/) yet, configure it now for centralized account management.
-- Create [repositories](../docker-hub/repos.md) to share container images.
+- Create [repositories](../docker-hub/repos/index.md#creating-repositories) to share container images.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
 - Control which registries your members can access with [Registry Access Management](../docker-hub/registry-access-management.md/).
