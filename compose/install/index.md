@@ -9,6 +9,10 @@ redirect_from:
 
 On this page you can find information on how to get and install Compose.
 
+> **Give Feedback!**
+>
+> [Give us feedback](#where-to-go-next) on this page and get entered into a lottery for Docker swag!
+
 ## Install Compose
 
 If you have Docker Desktop, you've got a full Docker installation, including Compose.
