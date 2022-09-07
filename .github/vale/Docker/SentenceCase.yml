@@ -1,9 +1,7 @@
 extends: capitalization
-message: "Use sentence case for headings and link texts: '%s'."
+message: "Use sentence case for headings: '%s'."
 level: warning
-scope:
-  - heading
-  - link
+scope: heading
 match: $sentence
 indicators:
   - ":"
