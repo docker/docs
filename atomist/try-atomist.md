@@ -12,9 +12,13 @@ need of having to integrate with and connect to a remote container registry. The
 CLI uses your local Docker daemon directly to upload the Software Bill of
 Materials (SBOM) to the Atomist control plane for analysis.
 
+## Prerequisites
+
 Before you can begin the setup, you’ll need a Docker ID. If you do not already
 have one, you can [sign up here](https://hub.docker.com/signup){: target="blank"
 rel="noopener" class=""}.
+
+## Steps
 
 > Note
 >
@@ -63,7 +67,7 @@ rel="noopener" class=""}.
    [info] Indexing completed successfully
    [info] Transacting image manifest for docker.io/david/myimage:latest with digest sha256:a8077d2b2ff4feb1588d941f00dd26560fe3a919c16a96305ce05f7b90f388f6
    [info] Successfully transacted entities in team AQ1K5FIKA
-   [info] Image URL is https://dso.atomist.com/AR5C23OPM/overview/images/python/digests/sha256:a8077d2b2ff4feb1588d941f00dd26560fe3a919c16a96305ce05f7b90f388f6
+   [info] Image URL is https://dso.atomist.com/AQ1K5FIKA/overview/images/myimage/digests/sha256:a8077d2b2ff4feb1588d941f00dd26560fe3a919c16a96305ce05f7b90f388f6
    [info] Transacting SBOM...
    [info] Successfully transacted entities in team AQ1K5FIKA
    [info] Transacting SBOM...
@@ -93,7 +97,9 @@ rel="noopener" class=""}.
    ![vulnerability breakdown view](./images/vulnerabilities-overview.png){:
    width="700px"}
 
-This is the end of the tutorial. Take some time to explore the different data
-views that Atomist presents about your image. When you're ready, head to the
+## Where to go next
+
+The tutorial ends here. Take some time to explore the different data views that
+Atomist presents about your image. When you're ready, head to the
 [get started guide](./get-started.md) to learn how to start integrating Atomist
 in your software supply chain.
