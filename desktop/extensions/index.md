@@ -10,13 +10,18 @@ toc_max: 2
 >
 > The Docker Extensions feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use Docker Extensions in production environments.
 
-Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality. There is no limit to the number of extensions you can install.
+Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality. 
+
+You can seamlessly connect your favorite development tools to your application development and deployment workflows. Augment Docker Desktop with debugging, testing, security, and networking functionalities, and build custom add-ons using the Extensions [SDK](../extensions-sdk/index.md).
+
+Anyone can use Docker Extensions and there is no limit to the number of extensions you can install. 
 
 ![extenstions](../images/extensions-marketplace.PNG){:width="750px"}
 
-You can explore the list of available extensions in [Docker Hub](https://hub.docker.com/search?q=&type=extension) or in the Extensions Marketplace within Docker Desktop.
+## What extensions are available?
 
-Docker Community members and partners can use our [SDK](../extensions-sdk/index.md) to create new extensions.
+There is a mix of partner and community-built extensions and Docker-built extensions. 
+You can explore the list of available extensions in [Docker Hub](https://hub.docker.com/search?q=&type=extension) or in the Extensions Marketplace within Docker Desktop.
 
 To find out more about Docker Extensions, we recommend the video walkthrough from DockerCon 2022:
 

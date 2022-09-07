@@ -251,4 +251,4 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions.md).
+For more information about Docker extensions, see [Extensions](../extensions/index.md).
