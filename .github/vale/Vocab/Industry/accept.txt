@@ -24,6 +24,7 @@ Lightstreamer
 Linux
 Logstash
 Mac
+Mail(chimp|gun)
 Microsoft
 MySQL
 Nginx
@@ -42,6 +43,7 @@ Snyk
 Solr
 SonarQube
 Syft
+Twilio
 Ubuntu
 WSL
 Windows
