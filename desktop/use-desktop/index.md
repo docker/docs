@@ -23,8 +23,8 @@ In addition, the Docker Dashboard allows you to:
 
 ## The Whale menu
 
-Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is reffered to as the Whale menu ![whale menu](../images/whale-x.png){: .inline}.
+Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is reffered to as the Whale menu ![whale menu](../../assets/images/whale-x.svg){: .inline}.
 
-To display the Whale menu, right-click on the ![whale menu](../images/whale-x.png){: .inline} icon. It displays the following options:
+To display the Whale menu, right-click on the ![whale menu](../../assets/images/whale-x.svg){: .inline} icon. It displays the following options:
 
 - 
