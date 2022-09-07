@@ -173,7 +173,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
    ![search for Docker app](images/docker-app-search.png){:width="300px"}
 
-2. The Docker menu (![whale menu](images/whale-x.png){: .inline}) displays the Docker Subscription Service Agreement window.
+2. The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement window.
 
    {% include desktop-license-update.md %}
 

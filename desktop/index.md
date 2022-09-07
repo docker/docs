@@ -3,7 +3,6 @@ description: Docker Desktop overview
 keywords: Desktop, Docker, GUI, run, docker, local, machine, dashboard
 title: Docker Desktop
 redirect_from:
-- /desktop/dashboard/
 - /desktop/opensource/
 - /docker-for-mac/dashboard/
 - /docker-for-mac/opensource/
@@ -17,12 +16,32 @@ redirect_from:
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
 
-Docker Desktop is an easy-to-install application for your Mac or Windows environment
+Docker Desktop is an easy-to-install application for your Mac, Linux, or Windows environment
 that enables you to build and share containerized applications and microservices. 
 
 It provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.
 
-Docker Desktop includes:
+<style>
+.tab-content > .tab-pane {
+  background-color: #fafafb;
+  border: 1px solid #ddd;
+  border-top: 0;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 10px;
+}
+.night .tab-content > .tab-pane {
+  background-color: #0e1c25;
+  border: 1px solid #4f6071;
+}
+</style>
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#includes">What's included in Docker Desktop?</a></li>
+<li><a data-toggle="tab" data-target="#features">What are the key features of Docker Desktop?</a></li>
+</ul>
+<div class="tab-content">
+<div id="includes" class="tab-pane fade in active" markdown="1">
 
 - [Docker Engine](../engine/index.md)
 - Docker CLI client
@@ -31,50 +50,85 @@ Docker Desktop includes:
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/)
 
+</div>
+<div id="features" class="tab-pane fade" markdown="1">
+
+* Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
+* Easy installation and setup of a complete Docker development environment.
+* Includes the latest version of Kubernetes.
+* On Windows, the ability to toggle between Linux and Windows Server environments to build applications.
+* Fast and reliable performance with native Windows Hyper-V virtualization.
+* Ability to work natively on Linux through WSL 2 on Windows machines.
+* Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
+
+</div>
+</div>
+
 Docker Desktop works with your choice of development tools and languages and
 gives you access to a vast library of certified images and templates in
 [Docker Hub](https://hub.docker.com/). This enables development teams to extend
 their environment to rapidly auto-build, continuously integrate, and collaborate
 using a secure repository.
 
-## Overview of Docker Dashboard
-
-When you open Docker Desktop, the Docker Dashboard displays.
-
-![dashboard](images/dashboard.PNG){:width="750px"}
-
-The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](use-desktop/container.md).
-
-The **Images** view displays a list of your Docker images and allows you to run an image as a container, pull the latest version of an image from Docker Hub, and inspect images. It also displays a summary of the vulnerability scanning report using Snyk. In addition, the **Images** view contains clean-up options to remove unwanted images from the disk to reclaim space. If you are logged in, you can also see the images you and your organization have shared on Docker Hub. For more information, see [Explore your images](use-desktop/images.md).
-
-The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](use-desktop/volumes.md).
-
-In addition, the Docker Dashboard allows you to:
-
-- Easily navigate to the **Preferences** (**Settings** in Windows) menu to configure Docker Desktop preferences. Select the **Preferences** or **Settings** icon in the Dashboard header.
-- Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
-
-### Other key features of Docker Desktop:
-
-* Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
-* Easy installation and setup of a complete Docker development environment.
-* Includes the latest version of Kubernetes.
-* Automatic updates to keep you up to date and secure.
-* On Windows, the ability to toggle between Linux and Windows Server environments to build applications.
-* Fast and reliable performance with native Windows Hyper-V virtualization.
-* Ability to work natively on Linux through WSL 2 on Windows machines.
-* Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
-* In-container development and debugging with supported IDEs.
-
-## Download and install
-
-Docker Desktop is available for Mac, Linux, and Windows. For download information, system requirements, and installation instructions, see:
-
-
-* [Install Docker Desktop on Linux](install/linux-install.md)
-* [Install Docker Desktop on Mac](install/mac-install.md)
-* [Install Docker Desktop on Windows](install/windows-install.md)
-
-For information about Docker Desktop licensing, see [Docker Desktop License Agreement](../subscription/index.md#docker-desktop-license-agreement).
-
-For information about new features, improvements, and bug fixes in Docker Desktop releases, see [Release notes](release-notes.md).
+<div class="component-container">
+    <!--start row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+             <div class="component-icon">
+                 <img src="/assets/images/download.svg" alt="Download and install" width="70" height="70">
+             </div>
+                 <h2 id="docker-for-mac"><a href="/desktop/install/mac-install/">Install Docker Desktop </a></h2>
+                <p> <a href="/desktop/install/windows-install/">On Mac </a>, <a href="/desktop/install/mac-install/">Windows</a> or <a href="/desktop/install/linux-install/">Linux</a></p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/assets/images/explore.svg" alt="Docker Desktop" width="70" height="70">
+            </div>
+                <h2 id="docker-for-mac"><a href="/desktop/use-desktop/">Explore Docker Desktop</a></h2>
+                <p>Navigate Docker Desktop and learn about its key features.</p>
+         </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <img src="/assets/images/note-add.svg" alt="Release notes" width="70" height="70">
+            </div>
+                <h2 id="docker-for-linux"><a href="/desktop/release-notes/">View the release notes</a></h2>
+                <p>Find out about new features, improvements, and bug fixes.</p>
+        </div>
+    </div>
+    </div>
+    <!--start row-->
+    <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/assets/images/help.svg" alt="FAQs" width="70" height="70">
+            </div>
+                <h2 id="docker-for-linux"><a href="/desktop/faqs/general/">Browse common FAQs</a></h2>
+                <p>Explore general FAQs or FAQs for specific platforms.</p>
+        </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+          <div class="component-icon">
+                 <img src="/assets/images/all-inbox.svg" alt="Additional resources" width="70" height="70">
+          </div>
+                <h2 id="docker-for-windows/install/"><a href="/desktop/kubernetes/">Find additional resources</a></h2>
+                <p>Find information on networking features, deploying on Kuberntes and more.</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <img src="/assets/images/sms.svg" alt="Give feedback" width="70" height="70">
+            </div>
+                <h2 id="docker-for-windows/install/"><a href="/desktop/feedback/">Give feedback</a></h2>
+                <p>Provide feedback on Docker Desktop or Docker Desktop features.</p>
+        </div>
+     </div>
+    </div>
+</div>
