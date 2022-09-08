@@ -79,7 +79,7 @@ using a secure repository.
                  <img src="/assets/images/download.svg" alt="Download and install" width="70" height="70">
              </div>
                  <h2 id="docker-for-mac"><a href="/desktop/install/mac-install/">Install Docker Desktop </a></h2>
-                <p> <a href="/desktop/install/windows-install/">On Mac </a>, <a href="/desktop/install/mac-install/">Windows</a> or <a href="/desktop/install/linux-install/">Linux</a></p>
+                <p> <a href="/desktop/install/mac-install/">On Mac </a>, <a href="/desktop/install/windows-install/">Windows</a> or <a href="/desktop/install/linux-install/">Linux</a></p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
