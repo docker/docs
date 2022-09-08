@@ -16,12 +16,13 @@ rel="noopener" class=""} on the Atomist website.
 
 ## New image vulnerabilities
 
-Scan container images for new critical and high-severity vulnerabilities
-introduced via pull requests. New vulnerabilities display as a GitHub status
-check on the pull request.
+Extract software bill of material from container images, and match packages with
+data from vulnerability advisories. Identify when new vulnerabilities get
+introduced, and display them as GitHub status check on the pull request that
+introduces them.
 
 ## Base image tags
 
-Pin base image tags to digests in Dockerfiles and check for supported tags on
+Pin base image tags to digests in Dockerfiles, and check for supported tags on
 Docker official images. Automatically creates a pull request pinning the
 Dockerfile to the latest digest for the base image tag used.
