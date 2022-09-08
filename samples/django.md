@@ -243,6 +243,10 @@ In this section, you set up the database connection for Django.
    > This value is **not** safe for production usage.  Refer to the
    > [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
 
+Note: if this errors with "ModuleNotFoundError: No module named 'psycopg2'", first you will need to run 
+  ```console
+  $ docker compose up --build
+
 5. List running containers.
 
    In another terminal window, list the running Docker processes with the `docker ps` or `docker container ls` command.
