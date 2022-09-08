@@ -126,7 +126,7 @@ The CSV file contains the following fields:
  * **Email**: The user's email address.
  * **Type**: The type of user. For example, **Invitee** for users who have not accepted the organization's invite, or **User** for users who are members of the organization.
  * **Permissions**: The user's organization permissions. For example, **Member** or **Owner**.
- * **Teams**: The teams the user is a member of. A team is not listed for invitees.
+ * **Teams**: The teams where the user is a member.  A team is not listed for invitees.
  * **Date Joined**: The time and date when the user was invited to the organization.
 
 To export a CSV file of an organization's members:
