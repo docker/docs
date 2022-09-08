@@ -1673,7 +1673,7 @@ manuals:
         #   title: Kubernetes
     - sectiontitle: Reference
       section:
-        - path: /atomist/configure/advisories/
+        - path: /atomist/reference/advisories/
           title: Advisories
 
 - path: /release-notes/

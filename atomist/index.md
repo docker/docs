@@ -17,6 +17,8 @@ validation, and more.
 
 Example capabilities made possible with Atomist are:
 
+- Stay up to date with advisory databases without having to re-analyze your
+  images.
 - Automatically open pull requests to update base images for improved product
   security.
 - Check that your applications don't contain secrets, such as a password or API

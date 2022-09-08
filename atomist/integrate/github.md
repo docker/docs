@@ -7,7 +7,11 @@ keywords:
 {% include atomist/disclaimer.md %}
 
 When installed for a GitHub organization, the Atomist GitHub app links
-repository activity to container images.
+repository activity to container images. This linking enables Atomist link image
+tags and digests directly to specific commits in the source repository. It also
+opens up the possibility to incorporate image analysis in your Git workflow. For
+example, by adding analysis checks to pull request, or automatically raising
+pull requests for updating and pinning base image versions.
 
 Install the GitHub app in the organization that contains the source code
 repositories for your Docker images.
@@ -16,7 +20,7 @@ repositories for your Docker images.
 
 1. Go to <https://dso.docker.com/> and sign in using your Docker ID.
 2. Open the **Repositories** tab.
-3. Click **Connect to GitHub** and follow the authorization flow. You will be
+3. Select **Connect to GitHub** and follow the authorization flow. You will be
    installing the
    [Atomist GitHub App](https://github.com/apps/atomist "Atomist GitHub App").
 
@@ -24,24 +28,33 @@ repositories for your Docker images.
 
 4. Install the app.
 
-   > If your GitHub account is a member of one or more organizations, you will
-   > be asked to choose which account to install the app into.
+   > If your GitHub account is a member of one or more organizations, GitHub
+   > prompts you to choose which account to install the app into. Select the
+   > account that contains the source repositories for your images.
 
-Once you are redirected back to Atomist, you'll be asked to select a set of
-repositories that are used to create container images. Atomist will start
-watching for images built from the repositories you select here.
+   After installing the app, you'll be redirected back to Atomist.
 
-![activate-repos](images/activate-repos.png){: width="700px" }
+5. In the repository selection menu, select what repositories you want Atomist
+   to start watching.
 
-If you are just looking to evaluate Atomist, we recommend that you start by
-selecting a few repositories during evaluation. Then, once you are comfortable
-using Atomist, you may want to switch on the integration for all repositories.
-Selecting **All repositories** also includes any repository created in the
-future.
+   ![activate-repos](images/activate-repos.png){: width="700px" }
 
-> Note: if Atomist detects `FROM` commands in Dockerfiles in the selected
-> repositories, it will begin raising automated pull requests for version
-> pinning the image versions in the `FROM` command.
+   If you are just looking to evaluate Atomist, start by selecting a few
+   repositories during evaluation. Once you are comfortable using Atomist, you
+   can switch on the integration for all repositories. Selecting **All
+   repositories** also includes any repository created in the future.
+
+   > **Important**
+   >
+   > If Atomist detects `FROM` commands in Dockerfiles in the selected
+   > repositories, it will begin raising automated pull requests for version
+   > pinning the image versions in the `FROM` command.
+   {: .important }
+
+6. Select **Save selection**.
+
+Atomist is now connected with your GitHub repositories and will be able to link
+image analyses with Git commits.
 
 ## Manage repository access
 

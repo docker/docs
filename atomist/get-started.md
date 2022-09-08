@@ -34,7 +34,7 @@ registry you use.
 <div class="tab-content"><br>
 <div id="tab-hub" class="tab-pane fade in active">
   <p>If you are using Docker Hub as your container registry, you can skip this step
-  and <a href="#link-images-to-git-repository">Link images to Git source</a>. Atomist
+  and go straight to <a href="#link-images-to-git-repository">linking images to Git source</a>. Atomist
   integrates seamlessly with your Docker Hub organizations.</p>
 </div>
 <div id="tab-ecr" class="tab-pane fade" markdown="1">
@@ -326,10 +326,13 @@ The image labels that Atomist requires are:
 | Label                                | Value                                             |
 | ------------------------------------ | ------------------------------------------------- |
 | `org.opencontainers.image.revision`  | The commit revision that the image is built for.  |
-| `org.opencontainers.image.source`   | HTTP(S) address of the project.                   |
+| `org.opencontainers.image.source`    | HTTP(S) URL of the source code.                   |
 | `com.docker.image.source.entrypoint` | Path to the Dockerfile, relative to project root. |
 
-Labels can be added to an image using either the `--label` CLI argument, or the
+For more information about pre-defined OCI annotations, see the
+[specification document on GitHub](https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys).
+
+Labels can be added to an image using either the `--label` CLI argument, or th.
 `LABEL` command in the Dockerfile.
 
 ```bash
