@@ -14,7 +14,7 @@ There are several options for how you could implement deployment tracking:
 
 - Invoking the API directly
 - Adding it as a step in your continuous deployment pipeline
-- For Kubernetes, creating [admission controllers](./kubernetes.md)
+- Creating Kubernetes admission controllers
 
 ## API
 
@@ -68,4 +68,3 @@ The API supports the following parameters in the request body:
 | `platform.os`           |    No     | `linux`    | Image operating system.                                                                                                               |
 | `platform.architecture` |    No     | `amd64`    | Instruction set architecture.                                                                                                         |
 | `platform.variant`      |    No     |            | Optional variant label.                                                                                                               |
-
