@@ -118,7 +118,7 @@ To remove a member from a specific team:
 
 ## Export members
 
-Organization owners can export a CSV file containing the organization's members.
+Export members is a feature available to organizations with a Docker Business subscription. Organization owners can export a CSV file containing the organization's members.
 The CSV file contains the following fields:
 
  * **Name**: The user's name.
