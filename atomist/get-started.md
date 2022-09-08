@@ -18,18 +18,18 @@ rel="noopener" class=""}.
 
 ## Connect container registry
 
-After completing this setup, Atomist will have read-only access, and is notified
-when images are pushed or deleted. This will enable Atomist to scan, and report
-on your images.
+After completing this setup, Atomist will have read-only access to your
+registry, and gets notified about pushed or deleted images.
 
-Follow the applicable instructions below, depending on the type of container
-registry you use.
+Follow the applicable instructions depending on the type of container registry
+you use.
 
 <ul class="nav nav-tabs">
   <li><a data-toggle="tab" data-target="#tab-hub">Docker Hub</a></li>
   <li><a data-toggle="tab" data-target="#tab-ecr">Amazon ECR</a></li>
-  <li><a data-toggle="tab" data-target="#tab-gar">Google Artifact Registry</a></li>
+  <li><a data-toggle="tab" data-target="#tab-google">GCR/GAR</a></li>
   <li><a data-toggle="tab" data-target="#tab-ghcr">GitHub Container Registry</a></li>
+  <li><a data-toggle="tab" data-target="#tab-jfrog">JFrog Artifactory</a></li>
 </ul>
 <div class="tab-content"><br>
 <div id="tab-hub" class="tab-pane fade in active">
@@ -40,8 +40,8 @@ registry you use.
 <div id="tab-ecr" class="tab-pane fade" markdown="1">
 <!-- ECR -->
 
-When setting up an ECR integration with Atomist, we need to create the following
-resources on the AWS side:
+When setting up an Amazon Elastic Container Registry (ECR) integration with
+Atomist, we need to create the following resources on the AWS side:
 
 - Read-only IAM role, for Atomist to be able to access the container registry
 - Amazon EventBridge, to notify Atomist of pushed and deleted images
@@ -187,18 +187,18 @@ with the appropriate condition on the IAM role statement.
    width="700px"}
 
 </div>
-<div id="tab-gar" class="tab-pane fade" markdown="1">
-<!-- Google Artifact Registry -->
+<div id="tab-google" class="tab-pane fade" markdown="1">
+<!-- GCR/GAR -->
 
-Setting up an Atomist integration with Google Artifact Registry involves:
+Setting up an Atomist integration with Google Container Registry (GCR) and
+Google Artifact Registry (GAR) involves:
 
-- Creating a service account and grant it the `roles/artifactregistry.reader`
-  role.
-- Creating a PubSub subscription on the `gcr` topic to notify when new images
-  are pushed.
+- Creating a service account and grant it the required role.
+- Creating a PubSub subscription on the `gcr` topic to watch for activity in the
+  registry.
 
 To complete the following procedure requires administrator's permissions in the
-Google Artifact Registry project.
+project.
 
 1. Set the following variables in your shell session. They will be used in
    subsequent steps when configuring the Google Cloud resources, using the
@@ -311,74 +311,119 @@ container images.
    scan images in public repositories.
 
 </div>
+<div id="tab-jfrog" class="tab-pane fade" markdown="1">
+<!-- JFrog Artifactory -->
+
+Atomist can index images in a JFrog Artifactory repository by means of a
+monitoring agent.
+
+The agent scans configured repositories at regular intervals, and send newly
+discovered images' metadata to the Atomist data plane.
+
+In the following example, `https://hal9000.atomist.com` is a private registry
+only visible on an internal network.
+
+```
+docker run -ti atomist/docker-registry-broker:latest\
+  index-image remote \
+  --workspace AQ1K5FIKA \
+  --api-key team::6016307E4DF885EAE0579AACC71D3507BB38E1855903850CF5D0D91C5C8C6DC0 \
+  --artifactory-url https://hal9000.docker.com \
+  --artifactory-repository atomist-docker-local \
+  --container-registry-host atomist-docker-local.hal9000.docker.com
+  --username admin \
+  --password password
+```
+
+| Parameter                 | Description                                                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `workspace`               | ID of your Atomist workspace.                                                                                   |
+| `api-key`                 | Atomist API key.                                                                                                |
+| `artifactory-url`         | Base URL of the Artifactory instance. Must not contain trailing slashes.                                        |
+| `artifactory-repository`  | The name of the container registry to watch.                                                                    |
+| `container-registry-host` | The hostname associated with the Artifactory repository containing images, if different from `artifactory-url`. |
+| `username`                | Username for HTTP basic authentication with Artifactory.                                                        |
+| `password`                | Password for HTTP basic authentication with Artifactory.                                                        |
+
+</div>
 <hr>
 </div>
 
 ## Link images to Git repository
 
 Knowing the source repository of an image is a prerequisite for Atomist to
-interact with the Git repository, such as adding scan results as a status check
-in pull requests. For Atomist to be able to link scanned images to a Git
-repository repository, the image must be annotated with labels at build time.
+interact with the Git repository. For Atomist to be able to link scanned images
+back to a Git repository repository, you must annotate the image at build time.
 
 The image labels that Atomist requires are:
 
 | Label                                | Value                                             |
 | ------------------------------------ | ------------------------------------------------- |
 | `org.opencontainers.image.revision`  | The commit revision that the image is built for.  |
-| `org.opencontainers.image.source`    | HTTP(S) URL of the source code.                   |
 | `com.docker.image.source.entrypoint` | Path to the Dockerfile, relative to project root. |
 
 For more information about pre-defined OCI annotations, see the
 [specification document on GitHub](https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys).
 
-Labels can be added to an image using either the `--label` CLI argument, or th.
-`LABEL` command in the Dockerfile.
+There are different ways of adding these labels to an image.
+
+### Add labels using Docker Buildx
+
+> Beta
+>
+> Git provenance labels via Buildx is a beta feature.
+
+To add the image labels using Docker Buildx, set the environment variable
+`BUILDX_GIT_LABELS=1`:
+
+```bash
+export BUILDX_GIT_LABELS=1
+docker buildx build . -f docker/Dockerfile
+```
+
+### Add labels using the label CLI argument
+
+You can create labels using the `--label` argument for `docker build`.
 
 ```bash
 docker build . -f docker/Dockerfile -t $IMAGE_NAME \
     --label "org.opencontainers.image.revision=10ac8f8bdaa343677f2f394f9615e521188d736a" \
-    --label "org.opencontainers.image.source=https://github.com/org/repo" \
     --label "com.docker.image.source.entrypoint=docker/Dockerfile"
 ```
 
-Adding these labels using the CLI is recommended. When building your Docker
-images on a CI/CD platform, you can leverage the built-in environment variables
-to create labels. For example, if you build your images using GitHub Actions:
+Images built in a CI/CD environment can leverage the built-in environment
+variables. For example, to set the `org.opencontainers.image.revision` in GitHub
+Actions, you can use {% raw %}`${{ github.sha }}`{% endraw %}. Consult the
+documentation for your CI/CD platform to learn which variables to use.
 
-{% raw %}
+### Add labels in the Dockerfile
 
-```bash
-docker build . -f docker/Dockerfile -t $IMAGE_NAME \
-    --label "org.opencontainers.image.revision=${{ github.sha }}" \
-    --label "org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}" \
-    --label "com.docker.image.source.entrypoint=docker/Dockerfile"
+You can specify the labels directly in the Dockerfile using the `LABEL` command,
+should you want to.
+
+```dockerfile
+LABEL org.opencontainers.image.revision="10ac8f8bdaa343677f2f394f9615e521188d736a"
+LABEL com.docker.image.source.entrypoint="docker/Dockerfile"
 ```
-
-{% endraw %}
-
-Consult the documentation for your CI/CD platform to learn which variables to
-use.
 
 ## Where to go next
 
-Atomist is now tracking new container images! Bill of materials, packages, and
-vulnerabilities are being tracked by Atomist. You can view your image scan
-results on the
+Atomist is now tracking bill of materials, packages, and vulnerabilities for
+your images! You can view your image scan results on the
 [images overview page](https://dso.docker.com/r/auth/overview/images).
 
 Teams use Atomist to protect downstream workloads from new vulnerabilities. It's
 also used to help teams track and remediate new vulnerabilities that impact
-existing workloads. In the next sections, we'll look at how teams can use
-Atomist to gain visibility into container workload systems like Kubernetes.
+existing workloads. The following sections describe integrate and configure
+Atomist further. For example, to gain visibility into container workload systems
+like Kubernetes.
 
 - Connect Atomist with your GitHub repositories by
   [installing the Atomist app](./integrate/github.md) for your GitHub
   organization.
-- Manage which Atomist features should be enabled
-  [settings](./configure/settings.md).
+- Manage which Atomist features you use in [settings](./configure/settings.md).
 - Learn about [deployment tracking](integrate/deploys.md) and how Atomist can
   help monitor your deployed containers.
-- Atomist watches for new advisories from public sources, but you can also add
-  your own internal advisories. Refer to [advisories](reference/advisories.md)
-  for more information.
+- Atomist watches for new advisories from public sources, but you can also
+  [add your own internal advisories](reference/advisories.md) for more
+  information.
