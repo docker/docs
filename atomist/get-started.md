@@ -326,7 +326,7 @@ The image labels that Atomist requires are:
 | Label                                | Value                                             |
 | ------------------------------------ | ------------------------------------------------- |
 | `org.opencontainers.image.revision`  | The commit revision that the image is built for.  |
-| `org.opencountainers.image.source`   | HTTP(S) address of the project.                   |
+| `org.opencontainers.image.source`   | HTTP(S) address of the project.                   |
 | `com.docker.image.source.entrypoint` | Path to the Dockerfile, relative to project root. |
 
 Labels can be added to an image using either the `--label` CLI argument, or the
