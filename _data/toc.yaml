@@ -1661,8 +1661,6 @@ manuals:
           title: Settings
           # - path: /atomist/configure/deployment-policies/
           #   title: Deployment policies
-        - path: /atomist/configure/advisories/
-          title: Advisories
     - sectiontitle: Integrate
       section:
         - path: /atomist/integrate/gitops/
@@ -1673,6 +1671,10 @@ manuals:
           title: Deployment tracking
         - path: /atomist/integrate/kubernetes/
           title: Kubernetes
+    - sectiontitle: Reference
+      section:
+        - path: /atomist/configure/advisories/
+          title: Advisories
 
 - path: /release-notes/
   title: Release notes

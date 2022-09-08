@@ -377,5 +377,5 @@ Atomist to gain visibility into container workload systems like Kubernetes.
 - Learn about [deployment tracking](integrate/deploys.md) and how Atomist can
   help monitor your deployed containers.
 - Atomist watches for new advisories from public sources, but you can also add
-  your own internal advisories. Refer to [advisories](configure/advisories.md)
+  your own internal advisories. Refer to [advisories](reference/advisories.md)
   for more information.
