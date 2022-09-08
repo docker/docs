@@ -1203,8 +1203,16 @@ manuals:
           title: Share your Dev Environment
         - path: /desktop/dev-environments/specify/
           title: Specify a Dockerfile or base image
-    - path: /desktop/extensions/
-      title: Extensions (Beta)
+    - sectiontitle: Extensions (Beta)
+      section:
+      - path: /desktop/extensions/
+        title: What is Docker Extensions?
+      - path: /desktop/extensions/marketplace/
+        title: Manage marketplace Extensions
+      - path: /desktop/extensions/non-marketplace/
+        title: Manage non-Marketplace extensions
+      - path: /desktop/extensions/settings-feedback/
+        title: Change Settings and give feedback
     - sectiontitle: Extensions SDK (Beta)
       section:
         - path: /desktop/extensions-sdk/
