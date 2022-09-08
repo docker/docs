@@ -45,7 +45,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 
-Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, an [audit log](../docker-hub/audit-log.md), and more.
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [audit logs](../docker-hub/audit-log.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
@@ -61,11 +61,11 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 Docker Desktop is licensed under the Docker Subscription Service Agreement. When you download and install Docker Desktop, you will be asked to agree to the updated terms.
 
-Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms of use for Docker Desktop.
+Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} states: 
 
-- It **remains free** for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
-- It requires a paid subscription for professional use in larger enterprises.
-- The existing Docker Free subscription has been renamed **Docker Personal** and we have introduced a Docker Business subscription .
+ - Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+ - Otherwise, it requires a paid subscription for professional use.
+- Paid subscriptions are also required for government entities.
 - The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 
 Please read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn how companies using Docker Desktop may be affected.
@@ -74,7 +74,7 @@ Please read the [Blog](https://www.docker.com/blog/updating-product-subscription
 >
 > The licensing and distribution terms for Docker and Moby **open-source** projects, such as Docker Engine, are not changing.
 
-Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.png){: .inline} > **About Docker Desktop** > **Acknowledgements**.
+Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.svg){: .inline} > **About Docker Desktop** > **Acknowledgements**.
 
 Docker Desktop distributes some components that are licensed under the
 GNU General Public License. Click [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.

@@ -8,7 +8,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Settings**
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
 ## General
@@ -19,6 +19,8 @@ On the **General** tab, you can configure when to start Docker and specify other
   Desktop when you log into your machine.
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+
+- **Use integrated container terminal**. Select to execute commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
 - **Expose daemon on tcp://localhost:2375 without TLS**. Check this option to
   enable legacy clients to connect to the Docker daemon. You must use this option
@@ -249,4 +251,4 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions.md).
+For more information about Docker extensions, see [Extensions](../extensions/index.md).

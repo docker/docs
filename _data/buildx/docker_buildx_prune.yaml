@@ -1,76 +1,93 @@
 command: docker buildx prune
 short: Remove build cache
-long: Remove build cache
+long: |-
+    Clears the build cache of the selected builder.
+
+    You can finely control what cache data is kept using:
+
+    - The `--filter=until=<duration>` flag to keep images that have been used in
+      the last `<duration>` time.
+
+      `<duration>` is a duration string, e.g. `24h` or `2h30m`, with allowable
+      units of `(h)ours`, `(m)inutes` and `(s)econds`.
+
+    - The `--keep-storage=<size>` flag to keep `<size>` bytes of data in the cache.
+
+      `<size>` is a human-readable memory string, e.g. `128mb`, `2gb`, etc. Units
+      are case-insensitive.
+
+    - The `--all` flag to allow clearing internal helper images and frontend images
+      set using the `#syntax=` directive or the `BUILDKIT_SYNTAX` build argument.
 usage: docker buildx prune
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
-- option: all
-  shorthand: a
-  value_type: bool
-  default_value: "false"
-  description: Remove all unused images, not just dangling ones
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: filter
-  value_type: filter
-  description: Provide filter values (e.g., `until=24h`)
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: force
-  shorthand: f
-  value_type: bool
-  default_value: "false"
-  description: Do not prompt for confirmation
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: keep-storage
-  value_type: bytes
-  default_value: "0"
-  description: Amount of disk space to keep for cache
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: verbose
-  value_type: bool
-  default_value: "false"
-  description: Provide a more verbose output
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: all
+      shorthand: a
+      value_type: bool
+      default_value: "false"
+      description: Include internal/frontend images
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: filter
+      value_type: filter
+      description: Provide filter values (e.g., `until=24h`)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: force
+      shorthand: f
+      value_type: bool
+      default_value: "false"
+      description: Do not prompt for confirmation
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: keep-storage
+      value_type: bytes
+      default_value: "0"
+      description: Amount of disk space to keep for cache
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose
+      value_type: bool
+      default_value: "false"
+      description: Provide a more verbose output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
-- option: builder
-  value_type: string
-  description: Override the configured builder instance
-  details_url: '#builder'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      details_url: '#builder'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
-  ### Override the configured builder instance (--builder) {#builder}
+    ### Override the configured builder instance (--builder) {#builder}
 
-  Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](buildx.md#builder).
 deprecated: false
 experimental: false
 experimentalcli: false

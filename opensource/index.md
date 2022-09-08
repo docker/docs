@@ -71,9 +71,5 @@ We've made it really easy for you to file new issues.
 We value your contribution. We'd like to make it as easy as possible to submit
 your contributions to the Docker docs repository. Changes to the docs are
 handled through pull requests against the `master` branch. To learn how to
-contribute, see
-[CONTRIBUTING.md](https://github.com/docker/docker.github.io/blob/master/CONTRIBUTING.md).
-
-For a demo of the components, tags, Markdown syntax, styles, used in Docker
-documentation, see
-[test.md](https://github.com/docker/docker.github.io/blob/master/test.md).
+contribute, see the
+[Contribution guidelines](../contribute/overview.md).

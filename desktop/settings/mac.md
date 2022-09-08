@@ -13,7 +13,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Preferences** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Preferences**
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Preferences**
 - Select the **Preferences** icon from the Docker Dashboard.
 
 ## General
@@ -24,6 +24,8 @@ On the **General** tab, you can configure when to start Docker and specify other
   Desktop when you log into your machine.
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+
+- **Use integrated container terminal**. Select to execute commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is disabled by default.
@@ -219,4 +221,4 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions.md).
+For more information about Docker extensions, see [Extensions](../extensions/index.md).

@@ -33,9 +33,9 @@ redirect_from:
 
    ![Docker Quick Start tutorial](images/docker-tutorial-linux.png)
 
-To run the Quick Start Guide on demand, select ![whale menu](images/whale-x.png){: .inline} and then choose **Quick Start Guide**.
+To run the Quick Start Guide on demand, select ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
 
-For a more detailed guide, see [Get started](../get-started/index.md)
+For a more detailed guide, see [Get started](../get-started/index.md).
 
 ## Sign in to Docker Desktop
 
@@ -45,7 +45,7 @@ Once logged in, you can access your Docker Hub repositories directly from Docker
 
 Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
 
-In large enterprises where admin access is restricted, administrators can create a registry.json file and deploy it to the developers’ machines using a device management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows administrators to set up guardrails using features such as [Image Access Management](../docker-hub/image-access-management.md) which allows team members to only have access to Trusted Content on Docker Hub, and pull only from the specified categories of images. For more information, see [Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md).
+In large enterprises where admin access is restricted, administrators can create a registry.json file and deploy it to the developers’ machines using a device management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows administrators to set up guardrails using features such as [Image Access Management](../docker-hub/image-access-management.md) which allows team members to only have access to Trusted Content on Docker Hub, and pull only from the specified categories of images. For more information, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md).
 
 ### Two-factor authentication
 
@@ -107,3 +107,8 @@ Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
 Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
+## Where to go next
+
+- [Explore Docker Desktop](use-desktop/index.md) and its features. 
+- Change your Docker Desktop settings
+- [Browse common FAQs](faqs/general.md)

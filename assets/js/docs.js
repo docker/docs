@@ -62,7 +62,7 @@ function walkTree(tree) {
 }
 
 function renderNav() {
-    getJSON( "/js/toc.json", function( data ) {
+    getJSON( "/assets/js/toc.json", function( data ) {
         for (const item of data.horizontalnav) {
             if (item.path === pageURL || pageIsInSection(data[item.node])) {
                 // This is the current section. Set the corresponding header-nav link

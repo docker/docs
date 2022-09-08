@@ -114,6 +114,13 @@ jobs:
           AWS_CLOUDFRONT_ID: ${{ env.DOCS_CLOUDFRONT_ID }}
           AWS_LAMBDA_FUNCTION: ${{ env.DOCS_LAMBDA_FUNCTION_REDIRECTS }}
       -
+        name: Invalidate Cloudfront cache
+        if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ env.DOCS_CLOUDFRONT_ID }} --paths "/*"
+        env:
+          AWS_REGION: us-east-1 # cloudfront is only available in us-east-1 region
+      -
         name: Send Slack notification
         if: ${{ env.SEND_SLACK_MSG == 'true' }}
         run: |

@@ -233,7 +233,7 @@ services:
     volumes:
       - .:/code
     environment:
-      FLASK_ENV: development
+      FLASK_DEBUG: True
   redis:
     image: "redis:alpine"
 ```

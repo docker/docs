@@ -15,6 +15,9 @@ horizontalnav:
 - title: Samples
   path: /samples/
   node: samples
+- title: Contribute
+  path: /contribute/overview/
+  node: contribute
   # TODO unify navbbar links: homepage currently has a custom "articles" link
   hide_home: true
 
@@ -1146,6 +1149,8 @@ manuals:
       title: Quick Start Guide and sign in
     - sectiontitle: Explore Docker Desktop
       section:
+        - path: /desktop/use-desktop/
+          title: Overview
         - path: /desktop/use-desktop/container/
           title: Explore Containers
         - path: /desktop/use-desktop/images/
@@ -1198,8 +1203,16 @@ manuals:
           title: Share your Dev Environment
         - path: /desktop/dev-environments/specify/
           title: Specify a Dockerfile or base image
-    - path: /desktop/extensions/
-      title: Extensions (Beta)
+    - sectiontitle: Extensions (Beta)
+      section:
+      - path: /desktop/extensions/
+        title: What is Docker Extensions?
+      - path: /desktop/extensions/marketplace/
+        title: Manage marketplace Extensions
+      - path: /desktop/extensions/non-marketplace/
+        title: Manage non-Marketplace extensions
+      - path: /desktop/extensions/settings-feedback/
+        title: Change Settings and give feedback
     - sectiontitle: Extensions SDK (Beta)
       section:
         - path: /desktop/extensions-sdk/
@@ -1264,6 +1277,8 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
+    - path: /desktop/containerd/
+      title: Containerd Image Store (Beta)
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
@@ -1415,16 +1430,16 @@ manuals:
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
-    title: Overview of Docker Compose
-  - sectiontitle: Install Compose
+    title: Overview
+  - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
-        title: Install Docker Compose 
-      - path: /compose/install/compose-desktop/
-        title: Install Compose plugin through Desktop 
-      - path: /compose/install/compose-plugin/
-        title: Install Docker Compose Plugin 
-      - path: /compose/install/uninstall/ 
+        title: Install overview
+      - path: /compose/install/linux/
+        title: Install on Linux
+      - path: /compose/install/other/
+        title: Other install scenarios
+      - path: /compose/install/uninstall/
         title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
     title: Getting started
@@ -1482,7 +1497,7 @@ manuals:
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
   - path: /docker-hub/audit-log/
-    title: Audit log
+    title: Audit logs
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
@@ -1511,8 +1526,6 @@ manuals:
     section:
       - path: /docker-hub/publish/
         title: Overview
-      - path: /docker-hub/publish/insights-analytics/
-        title: Insights & analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
@@ -1544,7 +1557,7 @@ manuals:
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
-    title: Enforce sign in
+    title: Enforce sign-in
   - sectiontitle: Single-Sign-on
     section:
       -  path: /single-sign-on/
@@ -1639,3 +1652,48 @@ manuals:
   title: Get Support
 - path: /release-lifecycle/
   title: Product release lifecycle
+contribute:
+  - path: /contribute/overview/
+    title: Contribute to Docker's docs
+  - path: /contribute/contribute-guide/
+    title: Contribution guidelines
+  - sectiontitle: Style guide
+    section:
+    - path: /contribute/style/grammar/
+      title: Grammar and style
+    - path: /contribute/style/formatting/
+      title: Formatting
+    - path: /contribute/style/recommended-words/
+      title: Recommended word list
+    - path: /contribute/style/terminology/
+      title: Docker terminology
+    - path: /contribute/style/voice-tone/
+      title: Voice and tone
+  - path: /contribute/file-conventions/
+    title: Source file conventions
+  - sectiontitle: Useful components
+    section:
+    - path: /contribute/components/accordions/
+      title: Accordions
+    - path: /contribute/components/badges/
+      title: Badges
+    - path: /contribute/components/call-outs/
+      title: Call outs
+    - path: /contribute/components/cards/
+      title: Cards
+    - path: /contribute/components/images/
+      title: Images
+    - path: /contribute/components/links/
+      title: Links
+    - path: /contribute/components/lists/
+      title: Lists
+    - path: /contribute/components/tables/
+      title: Tables
+    - path: /contribute/components/tabs/
+      title: Tabs
+    - path: /contribute/components/tooltips/
+      title: Tooltips
+    - path: /contribute/components/videos/
+      title: Videos
+  - path: /contribute/checklist/
+    title: Writing checklist
