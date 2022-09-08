@@ -21,6 +21,7 @@ stores the following metadata in the journal with each message:
 | `CONTAINER_ID_FULL`                  | The full 64-character container ID.                                                                                                                    |
 | `CONTAINER_NAME`                     | The container name at the time it was started. If you use `docker rename` to rename a container, the new name is not reflected in the journal entries. |
 | `CONTAINER_TAG`, `SYSLOG_IDENTIFIER` | The container tag ([log tag option documentation](log_tags.md)).                                                                                       |
+| `IMAGE_NAME` | The container image name.                                                                                                                                                     |
 | `CONTAINER_PARTIAL_MESSAGE`          | A field that flags log integrity. Improve logging of long log lines.                                                                                   |
 
 ## Usage
