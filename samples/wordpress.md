@@ -116,16 +116,16 @@ configured for WordPress is already in use by another service.
 
 ### Bring up WordPress in a web browser
 
-At this point, WordPress should be running on port `8000` of your Docker Host,
+At this point, WordPress should be running on port `80` of your Docker Host,
 and you can complete the "famous five-minute installation" as a WordPress
 administrator.
 
-> **Note**: The WordPress site is not immediately available on port `8000`
+> **Note**: The WordPress site is not immediately available on port `80`
 because the containers are still being initialized and may take a couple of
 minutes before the first load.
 
 If you are using Docker Desktop for Mac or Docker Desktop for Windows, you can use
-`http://localhost` as the IP address, and open `http://localhost:8000` in a web
+`http://localhost` as the IP address, and open `http://localhost:80` in a web
 browser.
 
 ![Choose language for WordPress install](images/wordpress-lang.png)
