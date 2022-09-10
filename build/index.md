@@ -58,7 +58,8 @@ from the internet, or code build steps.
 
 ### Creating build-once, run-anywhere with multi-platform builds
 
-Collaborate across platforms with one build artifact. See [Build multi-platform images](buildx/multiplatform-images.md).
+Collaborate across platforms with one build artifact. See
+[Multi-platform images](building/multi-platform.md) page.
 
 ## Automating your builds
 
