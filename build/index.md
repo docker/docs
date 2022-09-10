@@ -37,7 +37,7 @@ Here’s an overview of all the use cases with which Build can support you:
 
 * **Packaging your software**  
 Bundle and package your code to run anywhere, from your local Docker Desktop, to Docker Engine and Kubernetes on the cloud.  
-To get started with Build, see the [Hello Build](hellobuild.md) page.
+To get started with Build, see the [Packaging your software](building/packaging.md) page.
 
 * **Choosing a build driver**  
 Run Buildx with different configurations depending on the scenario you are
