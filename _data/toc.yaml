@@ -1179,8 +1179,6 @@ manuals:
           title: Known issues for Mac
     - sectiontitle: Additional resources
       section:
-        - path: /desktop/multi-arch/
-          title: Multi-arch support
         - path: /desktop/kubernetes/
           title: Deploy on Kubernetes
         - path: /desktop/backup-and-restore/
