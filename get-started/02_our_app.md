@@ -50,7 +50,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    COPY . .
    RUN yarn install --production
    CMD ["node", "src/index.js"]
-   EXPOSE 3000
+   EXPOSE 8000
    ```
 
    Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
@@ -85,14 +85,14 @@ command (remember that from earlier?).
    just created:
 
    ```console
-   $ docker run -dp 3000:3000 getting-started
+   $ docker run -dp 8000:8000 getting-started
    ```
 
    Remember the `-d` and `-p` flags? We're running the new container in "detached" mode (in the 
    background) and creating a mapping between the host's port 3000 to the container's port 3000.
    Without the port mapping, we wouldn't be able to access the application.
 
-2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
+2. After a few seconds, open your web browser to [http://localhost:8000](http://localhost:8000).
    You should see our app.
 
    ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
