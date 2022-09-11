@@ -57,6 +57,8 @@ $ rm /usr/local/lib/docker/cli-plugins/docker-compose
 
 To check where Compose is installed, use:
 
+{% raw %}
 ```console
 $ docker info --format '{{range .ClientInfo.Plugins}}{{if eq .Name "compose"}}{{.Path}}{{end}}{{end}}'
 ```
+{% endraw %}
