@@ -44,11 +44,11 @@ Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, and `s390
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
+Older versions of Docker were called `docker`, `docker.io`, `docker-engine` or `docker-compose-pligin`.
 If these are installed, uninstall them:
 
 ```console
-$ sudo apt-get remove docker docker-engine docker.io containerd runc
+$ sudo apt-get remove docker docker-engine docker.io containerd runc docker-compose-plugin
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
