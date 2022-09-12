@@ -11,6 +11,10 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2022-09-19
+### Enhancement
+
+In Docker Hub, you can now download a [registry.json](../docker-hub/configure-sign-in.md) file for your organization or copy the commands to create a registry.json file for your organization.
 
 ## 2022-07-22
 ### Enhancement
