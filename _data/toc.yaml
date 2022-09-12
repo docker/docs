@@ -1427,6 +1427,8 @@ manuals:
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/
           title: Building from Compose file
+    - path: /build/release-notes/
+      title: Release notes
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
