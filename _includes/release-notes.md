@@ -7,8 +7,11 @@
 
 <em class="release-date">{{ release.date }}</em>
 
+{%- for component in release.components %}
+{% if component.name != "" %}### {{ component.name }}{% endif %}
+
 <table class="release-notes"><tbody>
-{%- for entry in release.entries %}
+{%- for entry in component.entries %}
   <tr>
     <td><span class="release-tag release-tag-{{ entry.type }}">{{ entry.type | upcase }}</span></td>
     <td>
@@ -26,4 +29,5 @@
 </tbody></table>
 
 > For more details, see the complete release notes in the [{{ metadata.name }} repository](https://github.com/{{ metadata.repo }}/releases/tag/{{ release.version }}){:target="_blank" rel="noopener" class="_"}.
+{% endfor -%}
 {% endfor -%}
