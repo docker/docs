@@ -823,7 +823,7 @@ paths:
           $ref: "#/components/responses/NotFound"
           
 
-  /v2/namespace/{namespace}/repositories/{repository}/tags:
+  /v2/namespaces/{namespace}/repositories/{repository}/tags:
     parameters:
       - $ref: "#/components/parameters/namespace"
       - $ref: "#/components/parameters/repository"
