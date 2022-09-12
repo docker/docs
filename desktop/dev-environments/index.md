@@ -4,9 +4,9 @@ keywords: Dev Environments, share, collaborate, local
 title: Overview
 ---
 
-Dev Environments boosts collaboration by allowing you to share work-in-progress code with your team members. This removes any potential merge conflicts while moving between Git branches to get your code on to their machine.
+Dev Environments lets you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
 
-Dev Environments uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
+It uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
 
 You can also switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch. This makes reviewing PRs as simple as opening a new environment.
 
