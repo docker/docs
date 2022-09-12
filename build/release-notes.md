@@ -5,7 +5,7 @@ keywords: build, buildx, buildkit, release notes
 toc_max: 2
 ---
 
-This page contains information about the new features, improvements and bug
+This page contains information about the new features, improvements, and bug
 fixes in [Buildx](buildx/index.md).
 
 ## 0.9.1
@@ -14,11 +14,11 @@ fixes in [Buildx](buildx/index.md).
 
 ### Enhancements
 
-* Ensure used buildkit version also shows up in the inspect command {% include github_issue.md repo="docker/buildx" number="1279" %}
+* The `inspect` command now displays the BuildKit version in use {% include github_issue.md repo="docker/buildx" number="1279" %}
 
 ### Fixes
 
-* Fix regression on building compose files that contain services without a
+* Fixed a regression when building Compose files that contain services without a
   build block {% include github_issue.md repo="docker/buildx" number="1277" %}
 
 For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.9.1){:target="_blank" rel="noopener" class="_"}.
