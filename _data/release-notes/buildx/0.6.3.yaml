@@ -1,0 +1,13 @@
+version: v0.6.3
+date: 2021-08-30
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fix BuildKit state volume location for Windows clients
+        issues:
+          - docker/buildx#751

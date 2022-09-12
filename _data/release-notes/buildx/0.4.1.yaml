@@ -1,0 +1,19 @@
+version: v0.4.1
+date: 2020-05-01
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fix regression on flag parsing
+        issues:
+          - docker/buildx#268
+      -
+        tags: fixed
+        content: >
+          Fix using pull and no-cache keys in HCL targets
+        issues:
+          - docker/buildx#268

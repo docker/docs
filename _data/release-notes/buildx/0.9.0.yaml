@@ -1,0 +1,271 @@
+version: v0.9.0
+date: 2022-08-17
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          Support for new [driver `remote`](/build/buildx/drivers/remote/) that you
+          can use to connect to any already running BuildKit instance
+        issues:
+          - docker/buildx#1078
+          - docker/buildx#1093
+          - docker/buildx#1094
+          - docker/buildx#1103
+          - docker/buildx#1134
+          - docker/buildx#1204
+      -
+        tags: new
+        content: >
+          You can now load Dockerfile from standard input even when the build
+          context is coming from external Git or HTTP URL
+        issues:
+          - docker/buildx#994
+      -
+        tags: new
+        content: >
+          Build commands now support the new build context type `oci-layout://` for
+          loading build context from local OCI layout directories](/engine/reference/commandline/buildx_build/#-source-image-from-oci-layout-directory).
+          Note that this feature depends on an unreleased BuildKit feature and
+          builder instance from `moby/buildkit:master` needs to be used until
+          BuildKit v0.11 is released
+        issues:
+          - docker/buildx#1173
+      -
+        tags: new
+        content: >
+          You can now use the new `--print` flag to run helper functions supported
+          by the BuildKit frontend performing the build and print their results.
+          You can use this feature in Dockerfile to show the build arguments
+          and secrets that the current build supports with `--print=outline`
+          and list all available Dockerfile stages with `--print=targets`.
+          This feature is experimental for gathering early feedback and
+          requires enabling `BUILDX_EXPERIMENTAL=1` environment variable. We
+          plan to update/extend this feature in the future without keeping
+          backward compatibility
+        issues:
+          - docker/buildx#1100
+          - docker/buildx#1272
+      -
+        tags: new
+        content: >
+          You can now use the new `--invoke` flag to launch interactive containers
+          from build results for an iterative debugging cycle. You can reload these
+          containers with code changes or restore them to an initial state from
+          the special monitor mode. This feature is experimental for gathering
+          early feedback and requires enabling `BUILDX_EXPERIMENTAL=1`
+          environment variable. We plan to update/extend this feature in the
+          future without enabling backward compatibility
+        issues:
+          - docker/buildx#1168
+          - docker/buildx#1257
+          - docker/buildx#1259
+      -
+        tags: new
+        content: >
+          Buildx now understands environment variable `BUILDKIT_COLORS` and
+          `NO_COLOR` to customize/disable the colors of interactive build
+          progress bar
+        issues:
+          - docker/buildx#1230
+          - docker/buildx#1226
+      -
+        tags: new
+        content: >
+          `buildx ls` command now shows the current BuildKit version of each
+          builder instance
+        issues:
+          - docker/buildx#998
+      -
+        tags: new
+        content: >
+          The `bake` command now loads `.env` file automatically when building
+          Compose files for compatibility
+        issues:
+          - docker/buildx#1261
+      -
+        tags: new
+        content: >
+          Bake now supports Compose files with `cache_to` definition
+        issues:
+          - docker/buildx#1155
+      -
+        tags: new
+        content: >
+          Bake now supports new builtin function `timestamp()` to access
+          current time
+        issues:
+          - docker/buildx#1214
+      -
+        tags: new
+        content: >
+          Bake now supports Compose build secrets definition
+        issues:
+          - docker/buildx#1069
+      -
+        tags: new
+        content: >
+          Additional build context configuration is now supported in Compose
+          files via `x-bake`
+        issues:
+          - docker/buildx#1256
+      -
+        tags: new
+        content: >
+          Inspecting builder now shows current driver options configuration
+        issues:
+          - docker/buildx#1003
+          - docker/buildx#1066
+      -
+        tags: improved
+        content: >
+          The `buildx create` command now perfoms additional additional validation
+          of builder parameters to avoid creating a builder instance with invalid
+          configuration
+        issues:
+          - docker/buildx#1206
+      -
+        tags: improved
+        content: >
+          The `buildx imagetools create` command can now create new multi-platform
+          images even if the source subimages are located on different
+          repositories or registries
+        issues:
+          - docker/buildx#1137
+      -
+        tags: improved
+        content: >
+          You can now set the default builder config that is used when creating
+          builder instances without passing custom `--config` value
+        issues:
+          - docker/buildx#1111
+      -
+        tags: improved
+        content: >
+          The `buildx ls` command output has been updated with better access to
+          errors from different builders
+        issues:
+          - docker/buildx#1109
+      -
+        tags: improved
+        content: >
+          Docker driver can now detect if `dockerd` instance supports initially
+          disabled BuildKit features like multi-platform images
+        issues:
+          - docker/buildx#1260
+          - docker/buildx#1262
+      -
+        tags: improved
+        content: >
+          Compose files using targets with `.` in the name are now converted to
+          use `_` so the selector keys can still be used in such targets
+        issues:
+          - docker/buildx#1011
+      -
+        tags: improved
+        content: >
+          Updated the Compose Specification to 1.4.0
+        issues:
+          - docker/buildx#1246
+          - docker/buildx#1251
+      -
+        tags: improved
+        content: >
+          Included an additional validation for checking valid driver
+          configurations
+        issues:
+          - docker/buildx#1188
+          - docker/buildx#1273
+      -
+        tags: improved
+        content: >
+          The `remove` command now displays the removed builder and avoids removing
+          context builders
+        issues:
+          - docker/buildx#1128
+      -
+        tags: improved
+        content: >
+          Enable Azure authentication when using `kubernetes` driver
+        issues:
+          - docker/buildx#974
+      -
+        tags: improved
+        content: >
+          Add tolerations handling for `kubernetes` driver
+        issues:
+          - docker/buildx#1045
+          - docker/buildx#1053
+      -
+        tags: improved
+        content: >
+          Replace deprecated seccomp annotations with `securityContext` in
+          `kubernetes` driver
+        issues:
+          - docker/buildx#1052
+      -
+        tags: fixed
+        content: >
+          Fix panic on handling manifests with nil platform
+        issues:
+          - docker/buildx#1144
+      -
+        tags: fixed
+        content: >
+          Fix using duration filter with `prune` command
+        issues:
+          - docker/buildx#1252
+      -
+        tags: fixed
+        content: >
+          Fix merging multiple JSON files on Bake definition
+        issues:
+          - docker/buildx#1025
+      -
+        tags: fixed
+        content: >
+          Fix issues with implicit builder created from Docker context had
+          invalid configuration or dropped connection
+        issues:
+          - docker/buildx#1129
+      -
+        tags: fixed
+        content: >
+          Fix conditions for showing no-output warning when using named contexts
+        issues:
+          - docker/buildx#968
+      -
+        tags: fixed
+        content: >
+          Fix deduplicating builders when builder instance and docker context
+          have the same name
+        issues:
+          - docker/buildx#1131
+      -
+        tags: fixed
+        content: >
+          Fix printing unnecessary SSH warning logs
+        issues:
+          - docker/buildx#1085
+      -
+        tags: fixed
+        content: >
+          Fix possible panic when using an empty variable block with Bake JSON
+          definition
+        issues:
+          - docker/buildx#1080
+      -
+        tags: fixed
+        content: >
+          Fix imagetools commands not handling `--builder` flag correctly
+        issues:
+          - docker/buildx#1067
+      -
+        tags: fixed
+        content: >
+          Fix using custom image together with rootless option
+        issues:
+          - docker/buildx#1063

@@ -1,0 +1,13 @@
+version: v0.2.2
+date: 2019-05-30
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: improved
+        content: >
+          Change Compose file handling to require valid service specifications
+        issues:
+          - docker/buildx#87

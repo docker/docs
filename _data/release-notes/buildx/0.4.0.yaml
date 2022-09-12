@@ -1,0 +1,57 @@
+version: v0.4.0
+date: 2020-04-30
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          Add `kubernetes` driver
+        issues:
+          - docker/buildx#167
+      -
+        tags: new
+        content: >
+          New global `--builder` flag to override builder instance for a single
+          command
+        issues:
+          - docker/buildx#246
+      -
+        tags: new
+        content: >
+          New `prune` and `du` commands for managing local builder cache
+        issues:
+          - docker/buildx#249
+      -
+        tags: new
+        content: >
+          You can now set the new `pull` and `no-cache` options can be set for
+          HCL targets
+        issues:
+          - docker/buildx#165
+      -
+        tags: improved
+        content: >
+          Upgrade Bake to HCL2 with support for variables and functions
+        issues:
+          - docker/buildx#192
+      -
+        tags: improved
+        content: >
+          Bake now supports `--load` and `--push`
+        issues:
+          - docker/buildx#164
+      -
+        tags: improved
+        content: >
+          Bake now supports wildcard overrides for multiple targets
+        issues:
+          - docker/buildx#164
+      -
+        tags: improved
+        content: >
+          Container driver allows setting environment variables via `driver-opt`
+        issues:
+          - docker/buildx#170

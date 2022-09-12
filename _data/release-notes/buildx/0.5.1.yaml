@@ -1,0 +1,14 @@
+version: v0.5.1
+date: 2020-12-15
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fix regression on setting `--platform` on `buildx create` outside
+          `kubernetes` driver
+        issues:
+          - docker/buildx#475

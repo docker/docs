@@ -1,0 +1,37 @@
+version: v0.2.1
+date: 2019-05-25
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          Add `BUILDKIT_PROGRESS` env var
+        issues:
+          - docker/buildx#69
+      -
+        tags: new
+        content: >
+          Add `local` platform
+        issues:
+          - docker/buildx#70
+      -
+        tags: improved
+        content: >
+          Keep arm variant if one is defined in the config
+        issues:
+          - docker/buildx#68
+      -
+        tags: improved
+        content: >
+          Make Dockerfile relative to context
+        issues:
+          - docker/buildx#83
+      -
+        tags: fixed
+        content: >
+          Fix parsing target from Compose files
+        issues:
+          - docker/buildx#53

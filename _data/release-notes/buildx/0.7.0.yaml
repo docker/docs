@@ -1,0 +1,172 @@
+version: v0.7.0
+date: 2021-11-10
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          TLS certificates from BuildKit configuration are now transferred to
+          build container with `docker-container` and `kubernetes` drivers
+        issues:
+          - docker/buildx#787
+      -
+        tags: new
+        content: >
+          Builds support `--ulimit` flag for feature parity
+        issues:
+          - docker/buildx#800
+      -
+        tags: new
+        content: >
+          Builds support `--shm-size` flag for feature parity
+        issues:
+          - docker/buildx#790
+      -
+        tags: new
+        content: >
+          Builds support `--quiet` for feature parity
+        issues:
+          - docker/buildx#740
+      -
+        tags: new
+        content: >
+          Builds support `--cgroup-parent` flag for feature parity
+        issues:
+          - docker/buildx#814
+      -
+        tags: new
+        content: >
+          Bake supports builtin variable `BAKE_LOCAL_PLATFORM`
+        issues:
+          - docker/buildx#748
+      -
+        tags: new
+        content: >
+          Bake supports `x-bake` extension field in Compose files
+        issues:
+          - docker/buildx#721
+      -
+        tags: new
+        content: >
+          `kubernetes` driver now supports colon-separated `KUBECONFIG`
+        issues:
+          - docker/buildx#761
+      -
+        tags: new
+        content: >
+          `kubernetes` driver now supports setting BuildKit config file with
+          `--config`
+        issues:
+          - docker/buildx#682
+      -
+        tags: new
+        content: >
+          `kubernetes` driver now supports installing QEMU emulators with
+          driver-opt
+        issues:
+          - docker/buildx#682
+      -
+        tags: improved
+        content: >
+          Allow using custom registry configuration for multi-node pushes from
+          the client
+        issues:
+          - docker/buildx#825
+      -
+        tags: improved
+        content: >
+          Allow using custom registry configuration for `buildx imagetools`
+          command
+        issues:
+          - docker/buildx#825
+      -
+        tags: improved
+        content: >
+          Allow booting builder after creating with `buildx create --bootstrap`
+        issues:
+          - docker/buildx#692
+      -
+        tags: improved
+        content: >
+          Allow `registry:insecure` output option for multi-node pushes
+        issues:
+          - docker/buildx#825
+      -
+        tags: improved
+        content: >
+          BuildKit config and TLS files are now kept in Buildx state directory
+          and reused if BuildKit instance needs to be recreated
+        issues:
+          - docker/buildx#824
+      -
+        tags: improved
+        content: >
+          Ensure different projects use separate destination directories for
+          incremental context transfer for better performance
+        issues:
+          - docker/buildx#817
+      -
+        tags: improved
+        content: >
+          Build containers are now placed on separate cgroup by default
+        issues:
+          - docker/buildx#782
+      -
+        tags: improved
+        content: >
+          Bake now prints the default group with `--print`
+        issues:
+          - docker/buildx#720
+      -
+        tags: improved
+        content: >
+          `docker` driver now dials build session over HTTP for better
+          performance
+        issues:
+          - docker/buildx#804
+      -
+        tags: fixed
+        content: >
+          Fix using `--iidfile` together with a multi-node push
+        issues:
+          - docker/buildx#826
+      -
+        tags: fixed
+        content: >
+          Using `--push` in Bake does not clear other image export options in
+          the file
+        issues:
+          - docker/buildx#773
+      -
+        tags: fixed
+        content: >
+          Fix Git URL detection for `buildx bake` when `https` protocol was used
+        issues:
+          - docker/buildx#822
+      -
+        tags: fixed
+        content: >
+          Fix pushing image with multiple names on multi-node builds
+        issues:
+          - docker/buildx#815
+      -
+        tags: fixed
+        content: >
+          Avoid showing `--builder` flags for commands that don't use it
+        issues:
+          - docker/buildx#818
+      -
+        tags: fixed
+        content: >
+          Unsupported build flags now show a warning
+        issues:
+          - docker/buildx#810
+      -
+        tags: fixed
+        content: >
+          Fix reporting error details in some OpenTelemetry traces
+        issues:
+          - docker/buildx#812

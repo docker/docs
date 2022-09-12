@@ -1,0 +1,11 @@
+version: v0.2.0
+date: 2019-04-25
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          First release

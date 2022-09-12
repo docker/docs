@@ -1,0 +1,158 @@
+version: v0.8.0
+date: 2022-03-09
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          Build command now accepts `--build-context` flag to [define additional named build contexts](/engine/reference/commandline/buildx_build/#build-context)
+          for your builds
+        issues:
+          - docker/buildx#904
+      -
+        tags: new
+        content: >
+          Bake definitions now support [defining dependencies between targets](/build/bake/build-contexts/)
+          and using the result of one target in another build
+        issues:
+          - docker/buildx#928
+          - docker/buildx#965
+          - docker/buildx#963
+          - docker/buildx#962
+          - docker/buildx#981
+      -
+        tags: new
+        content: >
+          `imagetools inspect` now accepts `--format` flag allowing access to
+          config and buildinfo for specific images
+        issues:
+          - docker/buildx#854
+          - docker/buildx#972
+      -
+        tags: new
+        content: >
+          New flag `--no-cache-filter` allows configuring build, so it ignores
+          cache only for specified Dockerfile stages
+        issues:
+          - docker/buildx#860
+      -
+        tags: new
+        content: >
+          Builds can now show a summary of warnings sets by the building
+          frontend
+        issues:
+          - docker/buildx#892
+      -
+        tags: new
+        content: >
+          The new build argument `BUILDKIT_INLINE_BUILDINFO_ATTRS` allows opting-in
+          to embed building attributes to resulting image
+        issues:
+          - docker/buildx#908
+      -
+        tags: new
+        content: >
+          The new flag `--keep-buildkitd` allows keeping BuildKit daemon running
+          when removing a builder
+        issues:
+          - docker/buildx#852
+      -
+        tags: improved
+        content: >
+          `--metadata-file` output now supports embedded structure types
+        issues:
+          - docker/buildx#946
+      -
+        tags: improved
+        content: >
+          `buildx rm` now accepts new flag `--all-inactive` for removing all
+          builders that are not currently running
+        issues:
+          - docker/buildx#885
+      -
+        tags: improved
+        content: >
+          Proxy config is now read from Docker configuration file and sent with
+          build requests for backward compatibility
+        issues:
+          - docker/buildx#959
+      -
+        tags: improved
+        content: >
+          Support host networking in Compose
+        issues:
+          - docker/buildx#863
+          - docker/buildx#880
+      -
+        tags: improved
+        content: >
+          Bake files can now be read from stdin with `-f -`
+        issues:
+          - docker/buildx#864
+      -
+        tags: improved
+        content: >
+          `--iidfile` now always writes the image config digest independently
+          of the driver being used (use `--metadata-file` for digest)
+        issues:
+          - docker/buildx#980
+      -
+        tags: improved
+        content: >
+          Target names in Bake are now restricted to not use special characters
+        issues:
+          - docker/buildx#929
+      -
+        tags: improved
+        content: >
+          Image manifest digest can be read from metadata when pushed with
+          `docker` driver
+        issues:
+          - docker/buildx#989
+      -
+        tags: fixed
+        content: >
+          Fix environment file handling in Compose files
+        issues:
+          - docker/buildx#905
+      -
+        tags: fixed
+        content: >
+          Show last access time in `du` command
+        issues:
+          - docker/buildx#867
+      -
+        tags: fixed
+        content: >
+          Fix possible double output logs when multiple Bake targets run same
+          build steps
+        issues:
+          - docker/buildx#977
+      -
+        tags: fixed
+        content: >
+          Fix possible errors on multi-node builder building multiple targets
+          with mixed platform
+        issues:
+          - docker/buildx#985
+      -
+        tags: fixed
+        content: >
+          Fix some nested inheritance cases in Bake
+        issues:
+          - docker/buildx#914
+      -
+        tags: fixed
+        content: >
+          Fix printing default group on Bake files
+        issues:
+          - docker/buildx#884
+      -
+        tags: fixed
+        content: >
+          Fix `UsernsMode` when using rootless container
+        issues:
+          - docker/buildx#887

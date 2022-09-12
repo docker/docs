@@ -1,0 +1,25 @@
+version: v0.6.1
+date: 2021-07-30
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: improved
+        content: >
+          Set `ConfigFile` to parse Compose files with Bake
+        issues:
+          - docker/buildx#704
+      -
+        tags: fixed
+        content: >
+          Duplicated progress env var
+        issues:
+          - docker/buildx#693
+      -
+        tags: fixed
+        content: >
+          Should ignore nil client
+        issues:
+          - docker/buildx#686

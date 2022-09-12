@@ -1,0 +1,19 @@
+version: v0.7.1
+date: 2021-11-25
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fix issue with matching exclude rules in `.dockerignore`
+        issues:
+          - docker/buildx#858
+      -
+        tags: fixed
+        content: >
+          Fix `bake --print` JSON output for current group
+        issues:
+          - docker/buildx#857

@@ -1,0 +1,26 @@
+version: v0.3.1
+date: 2019-09-27
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: improved
+        content: >
+          Handle copying unix sockets instead of erroring
+        issues:
+          - docker/buildx#155
+          - moby/buildkit#1144
+      -
+        tags: fixed
+        content: >
+          Running Bake with multiple Compose files now merges targets correctly
+        issues:
+          - docker/buildx#134
+      -
+        tags: fixed
+        content: >
+          Fix bug when building a Dockerfile from stdin (`build -f -`)
+        issues:
+          - docker/buildx#153

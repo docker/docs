@@ -1,0 +1,49 @@
+version: v0.3.0
+date: 2019-08-02
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          Custom `buildkitd` daemon flags
+        issues:
+          - docker/buildx#102
+      -
+        tags: new
+        content: >
+          Driver-specific options on `create`
+        issues:
+          - docker/buildx#122
+      -
+        tags: improved
+        content: >
+          Environment variables are used in Compose files
+        issues:
+          - docker/buildx#117
+      -
+        tags: improved
+        content: >
+          Bake now honors `--no-cache` and `--pull`
+        issues:
+          - docker/buildx#118
+      -
+        tags: improved
+        content: >
+          Custom BuildKit config file
+        issues:
+          - docker/buildx#121
+      -
+        tags: improved
+        content: >
+          Entitlements support with `build --allow`
+        issues:
+          - docker/buildx#104
+      -
+        tags: fixed
+        content: >
+          Fix bug where `--build-arg foo` would not read `foo` from environment
+        issues:
+          - docker/buildx#116

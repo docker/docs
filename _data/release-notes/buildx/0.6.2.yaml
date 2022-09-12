@@ -1,0 +1,13 @@
+version: v0.6.2
+date: 2021-08-21
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fix connection error showing up in some SSH configurations
+        issues:
+          - docker/buildx#741

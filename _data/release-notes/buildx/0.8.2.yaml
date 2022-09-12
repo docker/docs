@@ -1,0 +1,27 @@
+version: v0.8.2
+date: 2022-04-04
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: fixed
+        content: >
+          Update Compose spec used by `buildx bake` to v1.2.1 to fix parsing
+          ports definition
+        issues:
+          - docker/buildx#1033
+      -
+        tags: fixed
+        content: >
+          Fix possible crash on handling progress streams from BuildKit v0.10
+        issues:
+          - docker/buildx#1042
+      -
+        tags: fixed
+        content: >
+          Fix parsing groups in `buildx bake` when already loaded by a parent
+          group
+        issues:
+          - docker/buildx#1021

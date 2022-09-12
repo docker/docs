@@ -1,0 +1,173 @@
+version: v0.6.0
+date: 2021-07-16
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          Support for OpenTelemetry traces and forwarding Buildx client traces
+          to BuildKit
+        issues:
+          - docker/buildx#635
+      -
+        tags: new
+        content: >
+          Experimental GitHub Actions remote cache backend with
+          `--cache-to type=gha` and `--cache-from type=gha`
+        issues:
+          - docker/buildx#535
+      -
+        tags: new
+        content: >
+          New `--metadata-file` flag has been added to build and Bake command
+          that allows saving build result metadata in JSON format
+        issues:
+          - docker/buildx#605
+      -
+        tags: new
+        content: >
+          This is the first release supporting Windows ARM64
+        issues:
+          - docker/buildx#654
+      -
+        tags: new
+        content: >
+          This is the first release supporting Linux Risc-V
+        issues:
+          - docker/buildx#652
+      -
+        tags: new
+        content: >
+          Bake now supports building from remote definition with local files or
+          another remote source as context
+        issues:
+          - docker/buildx#671
+      -
+        tags: new
+        content: >
+          Bake now allows variables to reference each other and using user
+          functions in variables and vice-versa
+        issues:
+          - docker/buildx#575
+          - docker/buildx#539
+          - docker/buildx#532
+      -
+        tags: new
+        content: >
+          Bake allows defining attributes in the global scope
+        issues:
+          - docker/buildx#541
+      -
+        tags: new
+        content: >
+          Bake allows variables across multiple files
+        issues:
+          - docker/buildx#538
+      -
+        tags: new
+        content: >
+          New quiet mode has been added to progress printer
+        issues:
+          - docker/buildx#558
+      -
+        tags: new
+        content: >
+          `kubernetes` driver now supports defining resources/limits
+        issues:
+          - docker/buildx#618
+      -
+        tags: new
+        content: >
+          Buildx binaries can now be accessed through [buildx-bin](https://hub.docker.com/r/docker/buildx-bin){:target="_blank" rel="noopener" class="_"}
+          Docker image
+        issues:
+          - docker/buildx#656
+      -
+        tags: improved
+        content: >
+          `docker-container` driver now keeps BuildKit state in volume. Enabling
+          updates with keeping state
+        issues:
+          - docker/buildx#672
+      -
+        tags: improved
+        content: >
+          Compose parser is now based on new [compose-go parser](https://github.com/compose-spec/compose-go){:target="_blank" rel="noopener" class="_"}
+          fixing support for some newer syntax
+        issues:
+          - docker/buildx#669
+      -
+        tags: improved
+        content: >
+          SSH socket is now automatically forwarded when building an ssh-based
+          git URL
+        issues:
+          - docker/buildx#581
+      -
+        tags: improved
+        content: >
+          Bake HCL parser has been rewritten
+        issues:
+          - docker/buildx#645
+      -
+        tags: improved
+        content: >
+          Extend HCL support with more functions
+        issues:
+          - docker/buildx#491
+          - docker/buildx#503
+      -
+        tags: improved
+        content: >
+          Allow secrets from environment variables
+        issues:
+          - docker/buildx#488
+      -
+        tags: improved
+        content: >
+          Builds with an unsupported multi-platform and load configuration now
+          fail fast
+        issues:
+          - docker/buildx#582
+      -
+        tags: improved
+        content: >
+          Allow to set default progress through `BUILDX_PROGRESS_DEFAULT`
+          env var
+        issues:
+          - docker/buildx#504
+      -
+        tags: improved
+        content: >
+          Store Kubernetes config file to make buildx builder switchable
+        issues:
+          - docker/buildx#497
+      -
+        tags: improved
+        content: >
+          Kubernetes now lists all pods as nodes on inspection
+        issues:
+          - docker/buildx#477
+      -
+        tags: improved
+        content: >
+          Default Rootless image has been set to `moby/buildkit:buildx-stable-1-rootless`
+        issues:
+          - docker/buildx#480
+      -
+        tags: fixed
+        content: >
+          `imagetools create` command now correctly merges JSON descriptor with
+          old one
+        issues:
+          - docker/buildx#592
+      -
+        tags: fixed
+        content: >
+          Fix building with `--network=none` not requiring extra security
+          entitlements
+        issues:
+          - docker/buildx#531

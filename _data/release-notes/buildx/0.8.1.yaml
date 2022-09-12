@@ -1,0 +1,20 @@
+version: v0.8.1
+date: 2022-03-21
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: improved
+        content: >
+          Allow `.` in Compose target names in `buildx bake` for backward
+          compatibility
+        issues:
+          - docker/buildx#1018
+      -
+        tags: fixed
+        content: >
+          Fix possible panic on handling build context scanning errors
+        issues:
+          - docker/buildx#1005

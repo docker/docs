@@ -1,0 +1,20 @@
+version: v0.9.1
+date: 2022-08-18
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: improved
+        content: >
+          The `inspect` command now displays the BuildKit version in use
+        issues:
+          - docker/buildx#1279
+      -
+        tags: fixed
+        content: >
+          Fixed a regression when building Compose files that contain services
+          without a build block
+        issues:
+          - docker/buildx#1277

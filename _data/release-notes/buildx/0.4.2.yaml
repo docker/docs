@@ -1,0 +1,43 @@
+version: v0.4.2
+date: 2020-08-22
+github_link: true
+
+components:
+  - name: ""
+    entries:
+      -
+        tags: new
+        content: >
+          Support `cacheonly` exporter
+        issues:
+          - docker/buildx#337
+      -
+        tags: improved
+        content: >
+          Update `go-cty` to pull in more `stdlib` functions
+        issues:
+          - docker/buildx#277
+      -
+        tags: improved
+        content: >
+          Improve error checking on load
+        issues:
+          - docker/buildx#281
+      -
+        tags: fixed
+        content: >
+          Fix parsing json config with HCL
+        issues:
+          - docker/buildx#280
+      -
+        tags: fixed
+        content: >
+          Ensure `--builder` is wired from root options
+        issues:
+          - docker/buildx#321
+      -
+        tags: fixed
+        content: >
+          Remove warning for multi-platform iidfile
+        issues:
+          - docker/buildx#351
