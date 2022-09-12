@@ -28,6 +28,9 @@
 {%- endfor %}
 </tbody></table>
 
+{%- if release.github_link == true %}
 > For more details, see the complete release notes in the [{{ metadata.name }} repository](https://github.com/{{ metadata.repo }}/releases/tag/{{ release.version }}){:target="_blank" rel="noopener" class="_"}.
+{%- endif %}
+
 {% endfor -%}
 {% endfor -%}
