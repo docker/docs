@@ -45,6 +45,7 @@ It provides a simple interface that enables you to manage your containers, appli
 
 - [Docker Engine](../engine/index.md)
 - Docker CLI client
+- [Docker Buildx](../build/buildx/index.md)
 - [Docker Compose](../compose/index.md)
 - [Docker Content Trust](../engine/security/trust/index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
