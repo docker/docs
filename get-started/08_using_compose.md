@@ -278,7 +278,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
    background.
 
     ```console
-    $ docker-compose up -d
+    $ docker compose up -d
     ```
 
     When we run this, we should see output like this:
