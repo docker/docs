@@ -23,6 +23,7 @@ We currently support enabling SSO on a single organization. However, we do not s
 
 ![SSO architecture](images/sso-architecture.png)
 
+
 ## Prerequisites
 
 * You must first notify your company about the new SSO login procedures
