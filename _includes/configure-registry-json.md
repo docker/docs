@@ -23,7 +23,9 @@ The `registry.json` file must contain the following contents, where `myorg` is r
 }
 ```
 
-You can use the following methods to create a `registry.json` file based on the user's operating system.
+In Docker Hub, you can download the registry.json file for your organization or see the specific commands to create the file for your organization. To download the file or view the commands in [Docker Hub](http://hub.docker.com), go to **Organizations** > **<org name>** > **Settings** > **Enforce Sign-in**.
+
+Alternatively, you can use the following methods to create a `registry.json` file based on the user's operating system.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows">Windows</a></li>
@@ -95,7 +97,7 @@ at `/Library/Application Support/com.docker.docker/registry.json` and includes
 the organization information the user belongs to. Make sure the file has the
 expected content and can't be edited by the user, only by the administrator.
 
-Verify that the content of the file contains the correct information;
+Verify that the content of the file contains the correct information:
 
 ```console
 $ sudo cat "/Library/Application Support/com.docker.docker/registry.json"
