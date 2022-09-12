@@ -18,6 +18,11 @@ To enable SSO in Docker Hub, you need the following information from your identi
 
 We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests. Guests will continue to authenticate through Docker with their Docker login credentials (Docker ID and password).
 
+
+## Single Sign-on Architecture flow
+
+![SSO architecture](images/sso-architecture.png)
+
 ## Prerequisites
 
 * You must first notify your company about the new SSO login procedures
