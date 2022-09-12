@@ -23,7 +23,7 @@ might be used to create a C/C++ program:
 ```dockerfile
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get upgrade -y build-essentials
+RUN apt-get update && apt-get install -y build-essentials
 COPY . /src/
 WORKDIR /src/
 RUN make build
@@ -33,27 +33,22 @@ Each instruction in this Dockerfile (roughly) translates into a layer in your
 final image. You can think of layers in a stack, with each layer adding more
 content to the filesystem on top of the layer before it:
 
-```
-stack diagram
-```
+![Image layer diagram showing the above commands chained together one after the other](../images/cache-stack.svg){:.invertible}
+
 
 Now, if one of the layers changes, somewhere - for example, suppose you make a
 change to your C/C++ program in `main.c`. After this change, the `COPY` command
 will have to run again, so that the layer changes, so the cache for that layer
 has been invalidated.
 
-```
-stack diagram with COPY layer cache invalidated
-```
+![Image layer diagram, but now with the link between COPY and WORKDIR marked as invalid](../images/cache-stack-invalidate-copy.svg){:.invertible}
 
 But since we have a change to that file, we now need to run our `make build`
 step again, so that those changes are built into our program. So since our
 cache for `COPY` was invalidated, we also have to invalidate the cache for all
 the layers after it, including our `RUN make build`, so that it will run again:
 
-```
-stack diagram with COPY + other layer cache invalidated
-```
+![Image layer diagram, but now with all links after COPY marked as invalid](../images/cache-stack-invalidate-rest.svg){:.invertible}
 
 That's pretty much all there is to understand the cache - once there's a change
 in a layer, then all the layers after it will need to be rebuilt as well (even
