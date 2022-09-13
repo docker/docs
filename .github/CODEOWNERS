@@ -3,20 +3,20 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/build @dockertopia @crazy-max
+/build/ @crazy-max @usha-mandya
 
-/compose/ @dockertopia @usha-mandya
+/compose/ @usha-mandya
 
-/desktop/ @aevesdocker @usha-mandya
+/desktop/ @aevesdocker
 
 /docker-hub/ @jerae-duffin @craig-osterhout
 
-/engine/ @dockertopia @usha-mandya
-
-/registry/ @usha-mandya
-
-/single-sign-on/ @jerae-duffin 
-
-/single-sign-on/index.md @craig-osterhout
+/engine/ @usha-mandya
 
 /subscription/ @jerae-duffin
+
+/docker-hub/publish/ @dvdksn
+
+/docker-hub/official_images/ @dvdksn
+
+/registry/ @dvdksn
