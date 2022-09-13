@@ -1,0 +1,218 @@
+version: v4.11.0
+date: 2022-07-28
+github_link: false
+
+header: |
+  > Download Docker Desktop
+  >
+  > [Windows](https://desktop.docker.com/win/main/amd64/83626/Docker%20Desktop%20Installer.exe) |
+  > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/83626/Docker.dmg) |
+  > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/83626/Docker.dmg) |
+  > [Debian](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-amd64.deb) |
+  > [RPM](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.rpm) |
+  > [Arch package](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
+  
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingSeven">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            Checksums
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+        <li><b>Windows:</b> SHA-256 48ca8cabe67aee94a934b4c0f97a5001e89cb66bbbf824924fbc8bed6a8c90d3</li>
+        <li><b>Mac Intel:</b> SHA-256 295694d7c2df05e37ac0d27fe8be5af6295b1edc6fa00a00a47134a14d5d0b34</li>
+        <li><b>Mac Arm:</b> SHA-256 9824103e3d5a7d01a4d7d8086210157e1cc02217cb9edd82fe4bf2d16c138c44</li>
+        <li><b>Linux DEB:</b> SHA-256 a0dc8ac97cc21e5a13a9e316cac11d85b7c248fd0c166b22a2ab239d17d43d9f</li>
+        <li><b>Linux RPM:</b> SHA-256 eb077737298827092b283d3c85edacd128ecd993e987aa30d8081e2306401774</li>
+        <li><b>Linux Arch:</b> SHA-256 a85fd5e83d5b613ef43d335c0ab0af4600aeb8a92921b617cb7a555826e361de</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+components:
+  - name: "All platforms"
+    entries:
+      -
+        tags: new
+        content: >
+          Docker Desktop is now fully supported for Docker Business customers
+          inside VMware ESXi and Azure VMs. For more information, see
+          [Run Docker Desktop inside a VM or VDI environment](/desktop/vm-vdi/)
+      -
+        tags: new
+        content: >
+          Added two new extensions ([vcluster](https://hub.docker.com/extensions/loftsh/vcluster-dd-extension)
+          and [PGAdmin4](https://hub.docker.com/extensions/mochoa/pgadmin4-docker-extension))
+          to the Extensions Marketplace
+      -
+        tags: new
+        content: >
+          The ability to sort extensions has been added to the Extensions
+          Marketplace
+      -
+        tags: new
+        content: >
+          Fixed a bug that caused some users to be asked for feedback too
+          frequently. You'll now only be asked for feedback twice a year
+      -
+        tags: new
+        content: >
+          Added custom theme settings for Docker Desktop. This allows you to
+          specify dark or light mode for Docker Desktop independent of your
+          device settings
+        issues:
+          - docker/for-win#12747
+      -
+        tags: new
+        content: >
+          Added a new flag for Windows installer. `--no-windows-containers`
+          disables the Windows containers integration
+      -
+        tags: new
+        content: >
+          Added a new flag for Mac install command. `--user <username>` sets up
+          Docker Desktop for a specific user, preventing them from needing an
+          admin password on first run
+      -
+        tags: new
+        content: >
+          Implemented an integrated terminal for containers
+      -
+        tags: new
+        content: >
+          Added a tooltip to display the link address for all external links
+          by default
+      -
+        tags: upgrade
+        content: |
+          * [Docker Compose v2.7.0](https://github.com/docker/compose/releases/tag/v2.7.0)
+          * [Docker Compose "Cloud Integrations" v1.0.28](https://github.com/docker/compose-cli/releases/tag/v1.0.28)
+          * [Kubernetes v1.24.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.2)
+          * [Go 1.18.4](https://github.com/golang/go/releases/tag/go1.18.4)
+      -
+        tags: fixed
+        content: >
+          Added the Container / Compose icon as well as the exposed port(s) /
+          exit code to the Containers screen
+      -
+        tags: fixed
+        content: >
+          Updated the Docker theme palette colour values to match our design
+          system
+      -
+        tags: fixed
+        content: >
+          Improved an error message from `docker login` if Registry Access
+          Management is blocking the Docker engine's access to Docker Hub
+      -
+        tags: fixed
+        content: >
+          Increased throughput between the Host and Docker. For example
+          increasing performance of `docker cp`
+      -
+        tags: fixed
+        content: >
+          Collecting diagnostics takes less time to complete
+      -
+        tags: fixed
+        content: >
+          Selecting or deselecting a compose app on the containers overview now
+          selects/deselects all its containers
+      -
+        tags: fixed
+        content: >
+          Tag names on the container overview image column are visible
+      -
+        tags: fixed
+        content: >
+          Added search decorations to the terminal's scrollbar so that matches
+          outside the viewport are visible
+      -
+        tags: fixed
+        content: >
+          Fixed an issue with search which doesn't work well on containers page
+        issues:
+          - docker/for-win#12828
+      -
+        tags: fixed
+        content: >
+          Fixed an issue which caused infinite loading on the **Volume** screen
+        issues:
+          - docker/for-win#12789
+      -
+        tags: fixed
+        content: >
+          Fixed a problem in the Container UI where resizing or hiding columns
+          didn't work
+        issues:
+          - docker/for-mac#6391
+      -
+        tags: fixed
+        content: >
+          Fixed a bug where the state of installing, updating, or uninstalling
+          multiple extensions at once was lost when leaving the Marketplace
+          screen
+      -
+        tags: fixed
+        content: >
+          Fixed an issue where the compose version in the about page would only
+          get updated from v2 to v1 after restarting Docker Desktop
+      -
+        tags: fixed
+        content: >
+          Fixed an issue where users cannot see the log view because their
+          underlying hardware didn't support WebGL2 rendering
+        issues:
+          - docker/for-win#12825
+      -
+        tags: fixed
+        content: >
+          Fixed a bug where the UI for Containers and Images got out of sync
+      -
+        tags: fixed
+        content: >
+          Fixed a startup race when the experimental virtualization framework
+          is enabled
+
+  - name: "For Mac"
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fixed an issue executing Compose commands from the UI
+        issues:
+          - docker/for-mac#6400
+
+  - name: "For Windows"
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fixed horizontal resizing issue
+        issues:
+          - docker/for-win#12816
+      -
+        tags: fixed
+        content: >
+          If an HTTP/HTTPS proxy is configured in the UI, then it automatically
+          sends traffic from image builds and running containers to the proxy.
+          This avoids the need to separately configure environment variables in
+          each container or build
+      -
+        tags: fixed
+        content: >
+          Added the `--backend=windows` installer option to set Windows
+          containers as the default backend
+
+  - name: "For Linux"
+    entries:
+      -
+        tags: fixed
+        content: >
+          Fixed bug related to setting up file shares with spaces in their path

@@ -1,0 +1,5 @@
+name: Docker Desktop
+repo: docker/desktop
+releases:
+  - 4.12.0
+  - 4.11.0
