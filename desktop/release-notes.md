@@ -62,7 +62,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Compose V2 is now enabled after factory reset.
 - Compose V2 is now enabled by default on new installations of Docker Desktop.
-- Precedence order of environment variables in Compose is more consistent, and clearly [documented](https://docs.docker.com/compose/envvars-precedence/).
+- Precedence order of environment variables in Compose is more consistent, and clearly [documented](../compose/envvars-precedence.md).
 - Upgraded kernel to 5.10.124.
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
