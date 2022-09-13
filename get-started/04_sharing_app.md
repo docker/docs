@@ -58,7 +58,7 @@ If you look at the image below an example **Docker command** can be seen. This c
     ```console
     $ docker tag getting-started YOUR-USER-NAME/getting-started
     ```
-    `YOUR-USER-NAME/getting-started` is a tag (Target) that refers to `getting-started` (Source). Learn more about [docker tag](https://docs.docker.com/engine/reference/commandline/tag/).
+    Learn more about [docker tag](https://docs.docker.com/engine/reference/commandline/tag/).
 
 4. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
    `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
