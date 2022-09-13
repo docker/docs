@@ -1391,24 +1391,24 @@ manuals:
       section:
         - path: /build/building/packaging/
           title: Packaging your software
+        - sectiontitle: Choosing a build driver
+          section:
+            - path: /build/building/drivers/
+              title: Overview
+            - path: /build/building/drivers/docker/
+              title: Docker driver
+            - path: /build/building/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/building/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/building/drivers/remote/
+              title: Remote driver
         - path: /build/building/multi-platform/
           title: Multi-platform images
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
           title: Install Buildx
-        - sectiontitle: Drivers
-          section:
-            - path: /build/buildx/drivers/
-              title: Overview
-            - path: /build/buildx/drivers/docker/
-              title: Docker driver
-            - path: /build/buildx/drivers/docker-container/
-              title: Docker container driver
-            - path: /build/buildx/drivers/kubernetes/
-              title: Kubernetes driver
-            - path: /build/buildx/drivers/remote/
-              title: Remote driver
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
     - sectiontitle: Bake

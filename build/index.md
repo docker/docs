@@ -56,7 +56,7 @@ see the [Packaging your software](building/packaging.md) page.
 Run Buildx with different configurations depending on the scenario you are
 working on, regardless of whether you are using your local machine or a remote
 compute cluster, all from the comfort of your local working environment.
-For more information on drivers, see the [drivers guide](buildx/drivers/index.md).
+For more information on drivers, see the [drivers guide](building/drivers/index.md).
 
 ### Optimizing builds with cache management
 
