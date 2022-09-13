@@ -58,6 +58,7 @@ If you look at the image below an example **Docker command** can be seen. This c
     ```console
     $ docker tag getting-started YOUR-USER-NAME/getting-started
     ```
+    Learn more about [docker tag](../engine/reference/commandline/tag.md).
 
 4. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
    `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
