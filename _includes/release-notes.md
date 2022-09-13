@@ -1,3 +1,4 @@
+{% assign known_tags = "new,improved,fixed,upgrade,security" | split: "," %}
 {% assign data = site.data.release-notes[page.release] %}
 {% assign metadata = data.metadata %}
 {% for release_name in metadata.releases %}
@@ -7,13 +8,21 @@
 
 <em class="release-date">{{ release.date }}</em>
 
+{{ release.header }}
+
 {%- for component in release.components %}
 {% if component.name != "" %}### {{ component.name }}{% endif %}
 
 <table class="release-notes"><tbody>
 {%- for entry in component.entries %}
   <tr>
-    <td><span class="release-tag release-tag-{{ entry.type }}">{{ entry.type | upcase }}</span></td>
+    <td>
+      {% assign first_tag = true -%}
+      {% for tag in entry.tags -%}
+        {% capture tag_class %}{% if known_tags contains tag %}-{{ tag }}{% endif %}{% endcapture -%}
+        {% if first_tag == false %}<br />{% endif %}<span class="release-tag release-tag{{ tag_class }}">{{ tag | upcase }}</span>
+      {% assign first_tag = false %}{%- endfor %}
+    </td>
     <td>
       {{ entry.content | markdownify }}
       <ul class="fa-ul">

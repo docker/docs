@@ -52,5 +52,13 @@ span {
     &.release-tag-fixed {
       background-color: $light-palette-amber-400;
     }
+
+    &.release-tag-upgrade {
+      background-color: $light-palette-violet-400;
+    }
+
+    &.release-tag-security {
+      background-color: $light-palette-red-400;
+    }
   }
 }
