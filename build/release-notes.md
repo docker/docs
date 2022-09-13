@@ -6,7 +6,7 @@ toc_max: 2
 ---
 
 This page contains information about the new features, improvements, and bug
-fixes in [Buildx](buildx/index.md).
+fixes in [Docker Buildx](https://github.com/docker/buildx){:target="_blank" rel="noopener" class="_"}.
 
 ## 0.9.1
 

@@ -28,9 +28,9 @@ start to build, push, pull, and run images seamlessly on different compute
 architectures. In most cases, you don't have to make any changes to Dockerfiles
 or source code to start building for Arm.
 
-BuildKit with [Buildx](../buildx/index.md) is designed to work well for
-building for multiple platforms and not only for the architecture and
-operating system that the user invoking the build happens to run.
+BuildKit with Buildx is designed to work well for building for multiple
+platforms and not only for the architecture and operating system that the user
+invoking the build happens to run.
 
 When you invoke a build, you can set the `--platform` flag to specify the target
 platform for the build output, (for example, `linux/amd64`, `linux/arm64`, or

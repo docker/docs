@@ -2,6 +2,8 @@
 title: Overview of Docker Build
 description: Introduction and overview of Docker Build
 keywords: build, buildx, buildkit
+redirect_from:
+- /build/buildx/
 ---
 
 ## Overview
@@ -17,23 +19,29 @@ and tools. The most common method of executing a build is by issuing a
 sends the request to Docker Engine which, in turn, executes your build.
 
 There are now two components in Engine that can be used to build an image.
-Starting with the 18.09 release, Engine is shipped with Moby [BuildKit](https://github.com/moby/buildkit){:target="_blank" rel="noopener" class="_"},
+Starting with the [18.09 release](../engine/release-notes/18.09.md#18090), Engine is
+shipped with Moby [BuildKit](https://github.com/moby/buildkit){:target="_blank" rel="noopener" class="_"},
 the new component for executing your builds by default.
-
-With BuildKit, the new client [Docker Buildx](buildx/index.md), becomes
-available as a CLI plugin. Docker Buildx extends the docker build command -
-namely through the additional `docker buildx build` command - and fully
-supports the new features BuildKit offers.
 
 BuildKit is the backend evolution from the Legacy Builder, it comes with new
 and much improved functionality that can be powerful tools for improving your
 builds' performance or reusability of your Dockerfiles, and it also introduces
 support for complex scenarios.
 
-Docker Build is way more than the `docker build` command and is not only about
+The new client [Docker Buildx](https://github.com/docker/buildx){:target="_blank" rel="noopener" class="_"},
+is a CLI plugin that extends the docker command with the full support of the
+features provided by BuildKit builder toolkit. `docker buildx build` provides
+the same user experience as `docker build` with many new features like creating
+scoped builder instances, building against multiple nodes concurrently, outputs
+configuration, inline build caching, and specifying target platform. In
+addition, Buildx also supports new features that are not yet available for
+regular `docker build` like building manifest lists, distributed caching, and
+exporting build results to OCI image tarballs.
+
+Docker Build is way more than a simple build command and is not only about
 packaging your code, it's a whole ecosystem of tools and features that support
-you not only with common workflow tasks but also provides you with support for
-more complex and advanced scenarios:
+not only common workflow tasks but also provides support for more complex and
+advanced scenarios:
 
 ## Building your images
 
@@ -94,7 +102,7 @@ leaking data into the final build or the cache.
 
 Use experimental versions of the Dockerfile frontend, or even just bring your
 own to BuildKit using the power of custom frontends. See also the
-[Syntax directive](../engine/reference/builder/#syntax).
+[Syntax directive](../engine/reference/builder.md#syntax).
 
 ### Configure BuildKit
 
