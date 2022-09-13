@@ -6,11 +6,13 @@ toc_max: 3
 
 ## Example
 
-- A small image: ![a small cute image](/assets/images/footer_moby_icon.png)
+- A small image: ![a small image](/assets/images/footer_moby_icon.png)
 
 - A small image that is a link. The extra newline here makes it not show inline:
 
-  [![a small cute image](/assets/images/footer_moby_icon.png)](https://www.docker.com/)
+  [![a small image](/assets/images/footer_moby_icon.png)](https://www.docker.com/)
+
+- Make the image open in a new tab: [![an image](/assets/images/footer_moby_icon.png)](/assets/images/footer_moby_icon.png){: target="_blank" rel="noopener" class="_"}
 
 - Set the size of an image: ![a pretty wide image](/assets/images/banner_image_24512.png){:width="750px"}
 
