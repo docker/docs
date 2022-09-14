@@ -1,0 +1,26 @@
+(Certified|Verified) Publisher( Program)?
+Autotest
+BuildKit
+Docker
+Dockerize
+Dockerizing
+Docker Business
+Docker Dasboard
+Docker Desktop
+Docker Engine
+Docker Hub
+Docker Team
+Docker Extension
+Dockerfile
+HyperKit
+Kitematic
+LinuxKit
+Official Images?
+Sponsored (OSS|Open Source Software)
+Swarm
+Swarm Mode
+[Bb]uildx
+[Cc]ompose
+[Mm]oby
+dockerd
+dockerignore
