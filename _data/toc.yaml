@@ -1179,8 +1179,6 @@ manuals:
           title: Known issues for Mac
     - sectiontitle: Additional resources
       section:
-        - path: /desktop/multi-arch/
-          title: Multi-arch support
         - path: /desktop/kubernetes/
           title: Deploy on Kubernetes
         - path: /desktop/backup-and-restore/
@@ -1389,30 +1387,30 @@ manuals:
   section:
     - path: /build/
       title: Overview
-    - path: /build/hellobuild/
-      title: Hello Build
+    - sectiontitle: Building images
+      section:
+        - path: /build/building/packaging/
+          title: Packaging your software
+        - sectiontitle: Choosing a build driver
+          section:
+            - path: /build/building/drivers/
+              title: Overview
+            - path: /build/building/drivers/docker/
+              title: Docker driver
+            - path: /build/building/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/building/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/building/drivers/remote/
+              title: Remote driver
+        - path: /build/building/multi-platform/
+          title: Multi-platform images
     - sectiontitle: Buildx
       section:
-        - path: /build/buildx/
-          title: Buildx overview
         - path: /build/buildx/install/
           title: Install Buildx
-        - sectiontitle: Drivers
-          section:
-            - path: /build/buildx/drivers/
-              title: Overview
-            - path: /build/buildx/drivers/docker/
-              title: Docker driver
-            - path: /build/buildx/drivers/docker-container/
-              title: Docker container driver
-            - path: /build/buildx/drivers/kubernetes/
-              title: Kubernetes driver
-            - path: /build/buildx/drivers/remote/
-              title: Remote driver
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
-        - path: /build/buildx/multiplatform-images/
-          title: Building multi-platform images
     - sectiontitle: Bake
       section:
         - path: /build/bake/

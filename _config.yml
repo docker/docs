@@ -168,7 +168,7 @@ fetch-remote:
       - dest: "build/bake"
         src:
           - "docs/guides/bake/**"
-      - dest: "build/buildx/drivers"
+      - dest: "build/building/drivers"
         src:
           - "docs/guides/drivers/**"
 
