@@ -1405,26 +1405,28 @@ manuals:
               title: Remote driver
         - path: /build/building/multi-platform/
           title: Multi-platform images
+    - sectiontitle: Customizing builds
+      section:
+        - sectiontitle: Orchestrating builds with Bake
+          section:
+            - path: /build/customize/bake/
+              title: Overview
+            - path: /build/customize/bake/file-definition/
+              title: File definition
+            - path: /build/customize/bake/configuring-build/
+              title: Configuring builds
+            - path: /build/customize/bake/hcl-funcs/
+              title: User defined HCL functions
+            - path: /build/customize/bake/build-contexts/
+              title: Build contexts and linking targets
+            - path: /build/customize/bake/compose-file/
+              title: Building from Compose file
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
           title: Install Buildx
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
-    - sectiontitle: Bake
-      section:
-        - path: /build/bake/
-          title: Bake overview
-        - path: /build/bake/file-definition/
-          title: File definition
-        - path: /build/bake/configuring-build/
-          title: Configuring builds
-        - path: /build/bake/hcl-funcs/
-          title: User defined HCL functions
-        - path: /build/bake/build-contexts/
-          title: Build contexts and linking targets
-        - path: /build/bake/compose-file/
-          title: Building from Compose file
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
