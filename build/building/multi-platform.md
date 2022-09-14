@@ -4,6 +4,7 @@ description: Different strategies for building multi-platform images
 keywords: build, buildx, buildkit, multi-platform images
 redirect_from:
 - /build/buildx/multiplatform-images/
+- /desktop/multi-arch/
 - /docker-for-mac/multi-arch/
 - /mackit/multi-arch/
 ---
@@ -127,7 +128,7 @@ $ docker buildx create --name mybuilder --driver docker-container --bootstrap
 mybuilder
 ```
 
-Switch to the new builder and inspect it:
+Switch to the new builder:
 
 ```console
 $ docker buildx use mybuilder
