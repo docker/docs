@@ -4,6 +4,7 @@ description: Different strategies for building multi-platform images
 keywords: build, buildx, buildkit, multi-platform images
 redirect_from:
 - /build/buildx/multiplatform-images/
+- /desktop/multi-arch/
 - /docker-for-mac/multi-arch/
 - /mackit/multi-arch/
 ---
