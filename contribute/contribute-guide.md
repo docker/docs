@@ -13,7 +13,7 @@ The live docs are published from the `master` branch. Therefore, you must create
 
 There are two ways to contribute a pull request to the docs repository:
 
-1. You can click **Edit this page** option  in the right column of every page on [https://docs.docker.com/](https://docs.docker.com/).
+1. You can click **Edit this page** option  in the right column of every page on [https://docs.docker.com/](/).
 
     This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
@@ -21,7 +21,7 @@ There are two ways to contribute a pull request to the docs repository:
 
     This is the manual, more advanced version of clicking 'Edit this page' on a published docs page. Initiating a docs changes in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
-    For a demo of the components, tags, Markdown syntax, styles, etc we use at [https://docs.docker.com/](https://docs.docker.com/), see the Useful components section.
+    For a demo of the components, tags, Markdown syntax, styles, etc we use at [https://docs.docker.com/](/), see the Useful components section.
 
 ### Important files
 
@@ -71,14 +71,14 @@ git clone --recursive https://github.com/docker/docker.github.io.git
 cd docker.github.io
 ```
 
-Then, build and run the documentation using [Docker Compose](https://docs.docker.com/compose/)
+Then, build and run the documentation using [Docker Compose](../compose/index.md)
 
 ```bash
 docker compose up -d --build
 ```
 
-> You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](https://docs.docker.com/desktop/).
-> If you don't have Docker Desktop installed, follow the [instructions](https://docs.docker.com/compose/install/) to install Docker Compose.
+> You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/index.md).
+> If you don't have Docker Desktop installed, follow the [instructions](../compose/install/index.md) to install Docker Compose.
 
 When the container is built and running, visit [http://localhost:4000](http://localhost:4000) in your web browser to view the docs.
 
@@ -99,7 +99,7 @@ docker compose down
 
 The default configuration for local builds of the documentation disables some
 features to allow for a shorter build-time. The following options differ between
-local builds, and builds that are deployed to [docs.docker.com](https://docs.docker.com/):
+local builds, and builds that are deployed to [docs.docker.com](/):
 
 - search auto-completion, and generation of `js/metadata.json`
 - Google Analytics
