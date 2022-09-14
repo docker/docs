@@ -24,6 +24,8 @@ An example of a link to an auto-generated reference page that we pull in during 
   - Keep in mind that this link doesn't resolve until you merge the PR and
   your docs are published on [docs.docker.com](/).
 
+- It is best practice to use absolute links when linking to other docs pages. Otherwise broken links may not be picked up. 
+
 ## HTML
 
 ```html
