@@ -3,7 +3,7 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/build/ @crazy-max @usha-mandya
+/build/ @crazy-max @usha-mandya @jedevc
 
 /compose/ @usha-mandya
 
