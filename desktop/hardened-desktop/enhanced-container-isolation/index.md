@@ -10,9 +10,22 @@ title: What is Enhanced Container Isolation?
 
 
 ## What it is
+
+Wait, that last point doesn’t make sense ! I thought Admin Controls would automatically lock any security controls I create, but you’re saying that Enhanced Container Isolation is also required to prevent containers from modifying these ?
+Using Admin Controls, your Docker Business admin can lock in Docker Desktop settings such as HTTP Proxies and Network settings. This means that users of Docker Desktop will then have no path within Docker Desktop to change these settings (e.g. via the user interface or CLI).
+However, malicious code in a container could still potentially modify these controls without the developer knowing. Enhanced Container Isolation is an extra layer of security that prevents containers from modifying any Admin Controls or security policies, so that admins have complete peace of mind that their settings are enforced.
+
+
+Containers will no longer run as root inside the Docker Desktop Linux VM and will instead run using the Linux user namespace.
+As a result, user containers will be unable to modify any security configurations created by your Docker admins (e.g. Registry Access Management policies and Admin Controls).
+
+
+Enhanced Container Isolation is a feature that admins can enable, which prevents containers from running as root in the Docker Desktop Linux VM. 
 Allows Docker Desktop admins to lock-in configurations (e.g. Registry Access Management) such that they can’t be modified by Docker Desktop users. See below for more details on this.
 Enhances container isolation using the Sysbox container runtime (see below for more info). This prevents containers from running as root inside the DD Linux VM and from potentially gaining control of it.
 
+
+With Enhanced Container Isolation enabled, all containers run unprivileged in the Docker Desktop Linux VM, in user namespaces. Root access to the Linux VM is removed, privileged containers cannot be run and there is no access to the host namespaces. As a result, it becomes impossible for users to alter Admin Controls via containers. 
 
 Enabling the feature prevents containers from running as root within Docker Desktop’s Linux VM and allows admins to lock-in sensitive security configs.
 

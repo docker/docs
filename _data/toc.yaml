@@ -1189,16 +1189,22 @@ manuals:
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
-    - sectiontitle: Enhanced Container Isolation (Early Access)
+    - sectiontitle: Hardened Desktop (Early Access)
       section:
-        - path: /desktop/enhanced-container-isolation/
-          title: What is Enhanced Container Isolation?
-        - path: /desktop/enhanced-container-isolation/enable-eci/
-          title: Enable Enhanced Container Isolation
-        - path: /desktop/enhanced-container-isolation/faq/
-          title: FAQ and known issues
-    - path: /desktop/desktop-managed/
-      title: Desktop Managed (Early Access)
+        - path: /desktop/hardened-desktop/
+          title: Overview 
+        - path: /docker-hub/registry-access-management/
+          title: Registry Access Management
+        - path: /desktop/desktop-managed/
+          title: Desktop Managed (Early Access)
+        - sectiontitle: Enhanced Container Isolation (Early Access)
+          section:
+          - path: /desktop/enhanced-container-isolation/
+            title: What is Enhanced Container Isolation?
+          - path: /desktop/enhanced-container-isolation/enable-eci/
+            title: Enable Enhanced Container Isolation
+          - path: /desktop/enhanced-container-isolation/faq/
+            title: FAQ and known issues
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1568,8 +1574,7 @@ manuals:
     title: System for Cross-domain Identity Management
   - path: /docker-hub/image-access-management/
     title: Image Access Management
-  - path: /docker-hub/registry-access-management/
-    title: Registry Access Management
+
 
 - sectiontitle: Security
   section:

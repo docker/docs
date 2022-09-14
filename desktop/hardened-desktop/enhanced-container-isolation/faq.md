@@ -28,6 +28,34 @@ Privileged containers are typically used to run advanced workloads in containers
 By virtue of allowing the –privileged flag but restricting its impact within the container's user-namespace, it’s possible to do this.
 
 
+I’ve heard that Docker Desktop’s settings can also be configured via a settings.json file ? What’s the difference between Admin Controls (which uses the admin-settings.json) and the original settings.json method ?
+
+Some organizations currently use the settings.json file to pre-configure Docker Desktop settings for their users. The problem with this approach is that developers own the settings.json file and can therefore adjust any settings that their admins create (for example, modifying network and proxy controls). The admin-settings.json on the other hand, can only be used by an admin with root privileges and as such cannot be modified by users. This means that admins can lock in settings for their users via the admin-settings.json.
+
+
+With Hardened Desktop enabled, can the user still override the --runtime flag from the CLI ?
+
+No. With Hardened Desktop enabled, Docker’s hardened container runtime (using Sysbox) is locked as the default (and only) runtime. If a user attempts to override the runtime by launching a container with the standard runc runtime (e.g. docker run --runtime=runc), container creation will fail. The reason runc is disallowed with Hardened Desktop is that it allows users to run as root on the Docker Desktop Linux VM, thereby providing them with implicit control of the VM and the ability to do things like modifying the Admin Controls for Docker Desktop.
+
+With Hardened Desktop enabled, can the user still use the --privileged flag from the CLI?
+
+Yes, but by virtue of using Sysbox the container will only be privileged within its assigned Linux user-namespace. It will not be privileged within the Docker Desktop Linux VM. 
+
+For example, the container’s init process will have all Linux capabilities enabled, have read/write access to the kernel’s /proc and /sys, run without system call or other restrictions normally imposed by Docker on regular containers (e.g. seccomp, AppArmor), and see all host devices under the container’s /dev directory. However, because Sysbox launches each container within a dedicated Linux user-namespace and vets sensitive accesses to the kernel, the container can only access resources assigned to it. For example, the container can’t access resources under /proc and /sys that are not namespaced. And though it can see all host devices under /dev, it won’t have permission to access them. Also, while the container can use system calls such as “mount” and “umount”, Sysbox will prevent the container from using them to modify the container’s chroot jail.
+
+This makes running a privileged container with Hardened Desktop much safer than a privileged container launched with the standard runc, which offers almost no isolation.
+
+Why not just restrict usage of the --privileged flag in Hardened Desktop ?
+
+Privileged containers are typically used to run advanced workloads in containers (e.g. Docker-in-Docker), to perform kernel operations (e.g. loading modules) or to access hardware devices. We wish to allow the first within Hardened Desktop (e.g. running advanced workloads), yet deny the latter two. By virtue of allowing the –privileged flag but restricting its impact within the container's user-namespace, it’s possible to do this.
+
+
+
+
+
+
+
+
 ## Known issues
 
 Known issues?
