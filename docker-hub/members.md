@@ -129,7 +129,7 @@ The CSV file contains the following fields:
  * **Teams**: The teams where the user is a member. A team is not listed for invitees.
  * **Date Joined**: The time and date when the user was invited to the organization.
 
-To export a CSV file of an organization's members:
+To export a CSV file of the organization's members:
 
 1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select **Export members** to download the CSV file.
