@@ -4,6 +4,7 @@ description: Introduction and overview of Docker Build
 keywords: build, buildx, buildkit
 redirect_from:
 - /build/buildx/
+- /buildx/working-with-buildx/
 ---
 
 ## Overview
