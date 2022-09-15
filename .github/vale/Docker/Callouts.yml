@@ -1,0 +1,12 @@
+extends: existence
+message: "Use a liquid tag for 'Important' or 'Warning' callouts."
+link: https://docs.docker.com/contribute/components/call-outs/
+level: warning
+nonword: true
+scope: raw
+raw:
+  - '[:blank:]*\> .*?'
+  - "(?i)(?:important|warning|danger|caution)(?-i)"
+  - '.*\n'
+  - '(?:[:blank:]*\>.*\n)+?'
+  - '[:blank:]*(?!\{: \.(important|warning))'

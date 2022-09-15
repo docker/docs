@@ -23,6 +23,7 @@ Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -39,7 +40,7 @@ Each instruction creates one layer:
 When you run an image and generate a container, you add a new _writable layer_
 (the "container layer") on top of the underlying layers. All changes made to
 the running container, such as writing new files, modifying existing files, and
-deleting files, are written to this thin writable container layer.
+deleting files, are written to this writable container layer.
 
 For more on image layers (and how Docker builds and stores images), see
 [About storage drivers](../../storage/storagedriver/index.md).
@@ -72,21 +73,21 @@ context.
 > a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
 > the image from within the build context (`.`):
 >
-> ```shell
-> mkdir myproject && cd myproject
-> echo "hello" > hello
-> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> docker build -t helloapp:v1 .
+> ```console
+> $ mkdir myproject && cd myproject
+> $ echo "hello" > hello
+> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> $ docker build -t helloapp:v1 .
 > ```
 >
 > Move `Dockerfile` and `hello` into separate directories and build a second
 > version of the image (without relying on cache from the last build). Use `-f`
 > to point to the Dockerfile and specify the directory of the build context:
 >
-> ```shell
-> mkdir -p dockerfiles context
-> mv Dockerfile dockerfiles && mv hello context
-> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```console
+> $ mkdir -p dockerfiles context
+> $ mv Dockerfile dockerfiles && mv hello context
+> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
 
 Inadvertently including files that are not necessary for building an image
@@ -169,13 +170,13 @@ context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
 > 
 > docker build -t myimage:latest -<<EOF
 > FROM busybox
-> COPY somefile.txt .
+> COPY somefile.txt ./
 > RUN cat /somefile.txt
 > EOF
 > 
 > # observe that the build fails
 > ...
-> Step 2/3 : COPY somefile.txt .
+> Step 2/3 : COPY somefile.txt ./
 > COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
 > ```
 
@@ -205,7 +206,7 @@ touch somefile.txt
 # build an image using the current directory as context, and a Dockerfile passed through stdin
 docker build -t myimage:latest -f- . <<EOF
 FROM busybox
-COPY somefile.txt .
+COPY somefile.txt ./
 RUN cat /somefile.txt
 EOF
 ```
@@ -231,7 +232,7 @@ the `hello.c` file from the ["hello-world" Git repository on GitHub](https://git
 ```bash
 docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY hello.c .
+COPY hello.c ./
 EOF
 ```
 
@@ -271,7 +272,8 @@ frequently changed:
 A Dockerfile for a Go application could look like:
 
 ```dockerfile
-FROM golang:1.11-alpine AS build
+# syntax=docker/dockerfile:1
+FROM golang:1.16-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -404,7 +406,7 @@ maintainable `Dockerfile`.
 
 Whenever possible, use current official images as the basis for your
 images. We recommend the [Alpine image](https://hub.docker.com/_/alpine/) as it
-is tightly controlled and small in size (currently under 5 MB), while still
+is tightly controlled and small in size (currently under 6 MB), while still
 being a full Linux distribution.
 
 ### LABEL
@@ -469,13 +471,6 @@ Probably the most common use-case for `RUN` is an application of `apt-get`.
 Because it installs packages, the `RUN apt-get` command has several gotchas to
 look out for.
 
-Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
-packages from the parent images cannot upgrade inside an
-[unprivileged container](../../engine/reference/run.md#security-configuration). If a package
-contained in the parent image is out-of-date, contact its maintainers. If you
-know there is a particular package, `foo`, that needs to be updated, use
-`apt-get install -y foo` to update automatically.
-
 Always combine `RUN apt-get update` with `apt-get install` in the same `RUN`
 statement. For example:
 
@@ -492,6 +487,7 @@ subsequent `apt-get install` instructions fail. For example, say you have a
 Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
@@ -501,6 +497,7 @@ After building the image, all layers are in the Docker cache. Suppose you later
 modify `apt-get install` by adding extra package:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
@@ -582,6 +579,7 @@ build from inadvertently succeeding. For example:
 ```dockerfile
 RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
+
 > Not all shells support the `-o pipefail` option.
 >
 > In cases such as the `dash` shell on
@@ -646,7 +644,7 @@ version bumps are easier to maintain, as seen in the following example:
 ```dockerfile
 ENV PG_MAJOR=9.3
 ENV PG_VERSION=9.3.4
-RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
+RUN curl -SL https://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgres && …
 ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 
@@ -656,17 +654,18 @@ auto-magically bump the version of the software in your container.
 
 Each `ENV` line creates a new intermediate layer, just like `RUN` commands. This
 means that even if you unset the environment variable in a future layer, it
-still persists in this layer and its value can't be dumped. You can test this by
+still persists in this layer and its value can be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
 RUN unset ADMIN_USER
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 mark
@@ -681,6 +680,7 @@ improves readability. You could also put all of the commands into a shell script
 and have the `RUN` command just run that shell script.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \
@@ -688,7 +688,7 @@ RUN export ADMIN_USER="mark" \
 CMD sh
 ```
 
-```bash
+```console
 $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
@@ -763,13 +763,13 @@ CMD ["--help"]
 
 Now the image can be run like this to show the command's help:
 
-```bash
+```console
 $ docker run s3cmd
 ```
 
 Or using the right parameters to execute a command:
 
-```bash
+```console
 $ docker run s3cmd ls s3://mybucket
 ```
 
@@ -820,19 +820,19 @@ This script allows the user to interact with Postgres in several ways.
 
 It can simply start Postgres:
 
-```bash
+```console
 $ docker run postgres
 ```
 
 Or, it can be used to run Postgres and pass parameters to the server:
 
-```bash
+```console
 $ docker run postgres postgres --help
 ```
 
 Lastly, it could also be used to start a totally different tool, such as Bash:
 
-```bash
+```console
 $ docker run --rm -it postgres bash
 ```
 
@@ -851,7 +851,11 @@ parts of your image.
 
 If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
-like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`.
+like:
+
+```dockerfile
+RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres
+```
 
 > Consider an explicit UID/GID
 >
@@ -908,7 +912,7 @@ fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
 
-## Examples for Official Images
+## Examples of Docker Official Images
 
 These Official Images have exemplary `Dockerfile`s:
 
@@ -922,5 +926,6 @@ These Official Images have exemplary `Dockerfile`s:
 * [Dockerfile Reference](../../engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
-* [Guidelines for Creating Official Images](../../docker-hub/official_images.md)
+* [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
+* [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 

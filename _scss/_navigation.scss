@@ -18,9 +18,22 @@
 .nav-secondary {
     background-color: $bg-secondary;
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-    height: 55px;
 }
 
+/*
+ * Breadcrumbs  ****************************************************************
+ */
+.breadcrumb {
+  background-color: $bg-sidebar-active;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding-left:  22px; // left-align with logo
+  border-bottom: 0.1px solid rgba($primary-links, .5);
+
+  a:not([href]) {
+    cursor: default;
+  }
+}
 
 /*
  * NAV SIDEBAR *****************************************************************
@@ -45,15 +58,11 @@
 
 .nav-sidebar ul {
     list-style: none;
-    padding: 0 15px;
+    padding: 0;
     text-align: left;
 
     li {
         display: block;
-    }
-
-    @include lg-width {
-        padding: 0;
     }
 }
 
@@ -67,22 +76,31 @@
 }
 
 .nav-sidebar ul li a,
-.nav-sidebar ul li a:focus,
-.nav-sidebar ul li a:hover {
+.nav-sidebar ul li a:focus {
     border-bottom: none;
+    border-left:   1px solid $primary-links;
+}
+
+.nav-sidebar .nav > li > a {
+  padding-left: 22px; // left-padding to align with logo
+  &.active {
+    padding-left: 19px; // compensate for 1px -> 4px border-width
+  }
+  @include before-md-width {
+    padding-right: 32px; // right-align with hamburger menu
+  }
 }
 
 .nav-sidebar ul li a.active,
-.nav-sidebar.nav>li>a:focus {
-    background: #F3F4F4;
+.nav-sidebar.nav > li > a:focus {
+    background:  $bg-sidebar-active;
     border-left: 4px solid $primary-links;
     font-weight: 600;
 }
 
-.nav-sidebar ul li li a {
-    border-left: 1px solid $primary-links;
-    font-size: 12px;
-    margin-left: 15px;
+.nav-sidebar ul li ul li a {
+  font-size:   12px;
+  margin-left:  8px;
 }
 
 .nav-sidebar .caret {
@@ -118,21 +136,29 @@
         a {
             display: inline-block;
             font-size: 12px;
-            padding: 5px 10px 5px 10px;
+            padding: 2px 10px 2px 10px;
+            color: #677285;
+        }
+        .slider{
+            background-color: #e0e4e7;
+            border: 1px solid #e0e4e7;
+        }
+        .slider:before{
+            background-color: #677285;
         }
     }
 }
 
 .toc-nav li a.active {
-    color: #2089C4;
-    border-left: 4px solid #2089C4;
+    border-left: 4px solid #677285;
     font-weight: bold;
+    color: #677285;
 }
 
 .toc-nav i.fa {
     font-size: 14px;
     margin: 0 8px 0 0;
-    color: $primary-links;
+    color: #677285;
 }
 
 div#side-toc-title {
@@ -201,7 +227,7 @@ div#side-toc-title {
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px $slider-btn;
 }
 
 input:checked+.slider:before {
@@ -221,37 +247,36 @@ input:checked+.slider:before {
 /*
  * Tabs ************************************************************************
  */
-#tabs {
-    float: left;
-    margin: 0;
-    padding-left: 8px;
-    ul {
-        padding: 0;
-    }
+
+.navbar-nav > li > a {
+  border-left:   4px solid rgba($white, 0.0);
+}
+.navbar-nav > li.active > a {
+  border-left:   4px solid rgba($white, 0.75);
 }
 
-.tabs {
-    li {
-        float: left;
-        list-style: none;
-        a {
-            color: $white;
-            padding: 17px 19px 14px 15px;
-            float: left;
-            font-weight: 600;
-            &:hover {
-                background: rgba(0, 0, 0, 0.17) !important;
-                border-bottom: 4px solid #fff;
-            }
-        }
-    }
-}
+@include md-width {
+  .landing .navbar-nav > li > a {
+    padding-top:    17px;
+    padding-bottom:  9px;
+  }
+  .navbar-nav > li > a {
+    color:          $white;
+    line-height:    25px;
+    padding-top:    14px;
+    padding-bottom: 12px;
+    font-weight:    600;
 
-.tabs li.active a {
-    background: transparent !important;
-    color: #fff;
-    cursor: default;
-    border-bottom: 4px solid #fff;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.17);
+      border-bottom:    4px solid rgba($white, 0.75);
+    }
+  }
+  .navbar-nav > li.active > a {
+    cursor:        default;
+    border-left:   none;
+    border-bottom: 4px solid rgba($white, 0.5);
+  }
 }
 
 /*
@@ -259,7 +284,7 @@ input:checked+.slider:before {
  */
 
 .feedback-links {
-    margin: 0 0 10px 0;
+    margin: 15px 0 10px 0;
 }
 
 /* polldaddy */
@@ -271,6 +296,12 @@ input:checked+.slider:before {
 .rating-msg {
     font: inherit !important;
     color: inherit !important;
+}
+
+/* remove polldaddy ratings */
+
+.rating-nero-value {
+    visibility: hidden
 }
 
 /*

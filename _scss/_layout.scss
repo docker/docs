@@ -56,7 +56,11 @@
 }
 
 .col-content {
-    flex: 1;
+    flex:      1;
+    padding:   $top-navigation-height 20px 40px 40px;
+    max-width: 1024px;
+    min-width:  300px;
+    min-height: 500px;
 }
 
 .col-nav,
@@ -75,19 +79,8 @@
     }
 }
 
-.content {
-    padding: 80px 20px 40px 40px;
-    max-width: 1024px;
-    min-width: 300px;
-    min-height: 500px;
-}
-
 section.section {
     margin: 0 auto;
-}
-
-.content ul {
-    margin-top: 10px;
 }
 
 /*
@@ -116,11 +109,10 @@ section.section {
 }
 
 .sidebar {
-    position: sticky;
-    top: 55px;
-    overflow: auto;
-    max-height: calc(100vh - 55px);
-    padding-top: 20px;
+    position:       sticky;
+    top:            $top-navigation-height;
+    overflow:       auto;
+    max-height:     calc(100vh - #{$top-navigation-height});
     padding-bottom: 20px;
 }
 

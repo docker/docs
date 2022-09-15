@@ -33,8 +33,7 @@ To run this tutorial, you need the following:
 
 This tutorial requires three Linux hosts which have Docker installed and can
 communicate over a network. These can be physical machines, virtual machines,
-Amazon EC2 instances, or hosted in some other way. You can even use Docker Machine
-from a Linux, Mac, or Windows host. Check out
+Amazon EC2 instances, or hosted in some other way. Check out
 [Getting started - Swarms](../../../get-started/swarm-deploy.md#prerequisites)
 for one possible set-up for the hosts.
 
@@ -56,10 +55,8 @@ single-node and multi-node swarm scenarios on Linux machines.
 
 #### Use Docker Desktop for Mac or Docker Desktop for Windows
 
-Alternatively, install the latest [Docker Desktop for Mac](../../../docker-for-mac/index.md) or
-[Docker Desktop for Windows](../../../docker-for-windows/index.md) application on one
-computer. You can test both single-node and multi-node swarm from this computer,
-but you need to use Docker Machine to test the multi-node scenarios.
+Alternatively, install the latest [Docker Desktop](../../../desktop/index.md) application on one
+computer. You can test both single-node and multi-node swarm from this computer.
 
 * You can use Docker Desktop for Mac or Windows to test _single-node_ features
   of swarm mode, including initializing a swarm with a single node, creating
@@ -79,10 +76,6 @@ fixed IP address.
 
 You can run `ifconfig` on Linux or macOS to see a list of the
 available network interfaces.
-
-If you are using Docker Machine, you can get the manager IP with either
-`docker-machine ls` or `docker-machine ip <MACHINE-NAME>` &#8212; for example,
-`docker-machine ip manager1`.
 
 The tutorial uses `manager1` : `192.168.99.100`.
 

@@ -1,5 +1,13 @@
 {
-    "default": true,
-    "MD013": { "line_length": -1 },
-    "MD030": { "ol_multi": 2 }
+  "default": false,
+  "hr-style": true,
+  "no-missing-space-atx": true,
+  "no-multiple-space-atx": true,
+  "no-missing-space-closed-atx": true,
+  "no-multiple-space-closed-atx": true,
+  "no-space-in-emphasis": true,
+  "no-space-in-code": true,
+  "no-space-in-links": true,
+  "ol-prefix": {"style": "ordered"},
+  "no-reversed-links": true
 }

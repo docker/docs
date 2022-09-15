@@ -18,7 +18,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker network disconnect multi-host-network container1
   ```
 deprecated: false

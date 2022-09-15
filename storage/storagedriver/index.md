@@ -14,14 +14,22 @@ stores images, and how these images are used by containers. You can use this
 information to make informed choices about the best way to persist data from
 your applications and avoid performance problems along the way.
 
-Storage drivers allow you to create data in the writable layer of your container.
-The files won't be persisted after the container is deleted, and both read and
-write speeds are lower than native file system performance. 
+## Storage drivers versus Docker volumes
 
- > **Note**: Operations that are known to be problematic include write-intensive database storage,
-particularly when pre-existing data exists in the read-only layer. More details are provided in this document.
+Docker uses storage drivers to store image layers, and to store data in the
+writable layer of a container. The container's writable layer does not persist
+after the container is deleted, but is suitable for storing ephemeral data that
+is generated at runtime. Storage drivers are optimized for space efficiency, but
+(depending on the storage driver) write speeds are lower than native file system
+performance, especially for storage drivers that use a copy-on-write filesystem.
+Write-intensive applications, such as database storage, are impacted by a
+performance overhead, particularly if pre-existing data exists in the read-only
+layer.
 
-[Learn how to use volumes](../volumes.md) to persist data and improve performance.
+Use Docker volumes for write-intensive data, data that must persist beyond the
+container's lifespan, and data that must be shared between containers. Refer to
+the [volumes section](../volumes.md) to learn how to use volumes to persist data
+and improve performance.
 
 ## Images and layers
 
@@ -30,25 +38,39 @@ instruction in the image's Dockerfile. Each layer except the very last one is
 read-only. Consider the following Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:18.04
+LABEL org.opencontainers.image.authors="org@example.com"
 COPY . /app
 RUN make /app
+RUN rm -r $HOME/.cache
 CMD python /app/app.py
 ```
 
-This Dockerfile contains four commands, each of which creates a layer. The
-`FROM` statement starts out by creating a layer from the `ubuntu:18.04` image.
-The `COPY` command adds some files from your Docker client's current directory.
-The `RUN` command builds your application using the `make` command. Finally,
-the last layer specifies what command to run within the container.
+This Dockerfile contains four commands. Commands that modify the filesystem create
+a layer. The `FROM` statement starts out by creating a layer from the `ubuntu:18.04`
+image. The `LABEL` command only modifies the image's metadata, and does not produce
+a new layer. The `COPY` command adds some files from your Docker client's current
+directory. The first `RUN` command builds your application using the `make` command,
+and writes the result to a new layer. The second `RUN` command removes a cache
+directory, and writes the result to a new layer. Finally, the `CMD` instruction
+specifies what command to run within the container, which only modifies the
+image's metadata, which does not produce an image layer.
 
-Each layer is only a set of differences from the layer before it. The layers are
-stacked on top of each other. When you create a new container, you add a new
-writable layer on top of the underlying layers. This layer is often called the
-"container layer". All changes made to the running container, such as writing
-new files, modifying existing files, and deleting files, are written to this thin
-writable container layer. The diagram below shows a container based on the Ubuntu
-15.04 image.
+Each layer is only a set of differences from the layer before it. Note that both
+_adding_, and _removing_ files will result in a new layer. In the example above,
+the `$HOME/.cache` directory is removed, but will still be available in the
+previous layer and add up to the image's total size. Refer to the
+[Best practices for writing Dockerfiles](../../develop/develop-images/dockerfile_best-practices.md)
+and [use multi-stage builds](../../develop/develop-images/multistage-build.md)
+sections to learn how to optimize your Dockerfiles for efficient images.
+
+The layers are stacked on top of each other. When you create a new container,
+you add a new writable layer on top of the underlying layers. This layer is often
+called the "container layer". All changes made to the running container, such as
+writing new files, modifying existing files, and deleting files, are written to
+this thin writable container layer. The diagram below shows a container based
+on an `ubuntu:15.04` image.
 
 ![Layers of a container based on the Ubuntu image](images/container-layers.jpg)
 
@@ -70,14 +92,17 @@ multiple containers sharing the same Ubuntu 15.04 image.
 
 ![Containers sharing same image](images/sharing-layers.jpg)
 
-> **Note**: If you need multiple images to have shared access to the exact
-> same data, store this data in a Docker volume and mount it into your
-> containers.
-
 Docker uses storage drivers to manage the contents of the image layers and the
 writable container layer. Each storage driver handles the implementation
 differently, but all drivers use stackable image layers and the copy-on-write
 (CoW) strategy.
+
+> **Note**
+>
+> Use Docker volumes if you need multiple containers to have shared access to
+> the exact same data. Refer to the [volumes section](../volumes.md) to learn
+> about volumes.
+
 
 ## Container size on disk
 
@@ -86,7 +111,6 @@ command. Two different columns relate to size.
 
 - `size`: the amount of data (on disk) that is used for the writable layer of
   each container.
-
 - `virtual size`: the amount of data used for the read-only image data
   used by the container plus the container's writable layer `size`.
   Multiple containers may share some or all read-only
@@ -100,14 +124,14 @@ The total disk space used by all of the running containers on disk is some
 combination of each container's `size` and the `virtual size` values. If
 multiple containers started from the same exact image, the total size on disk for
 these containers would be SUM (`size` of containers) plus one image size
-(`virtual size`- `size`).
+(`virtual size` - `size`).
 
 This also does not count the following additional ways a container can take up
 disk space:
 
-- Disk space used for log files if you use the `json-file` logging driver. This
-  can be non-trivial if your container generates a large amount of logging data
-  and log rotation is not configured.
+- Disk space used for log files stored by the [logging-driver](../../config/containers/logging/index.md).
+  This can be non-trivial if your container generates a large amount of logging
+  data and log rotation is not configured.
 - Volumes and bind mounts used by the container.
 - Disk space used for the container's configuration files, which are typically
   small.
@@ -132,7 +156,7 @@ pulled down separately, and stored in Docker's local storage area, which is
 usually `/var/lib/docker/` on Linux hosts. You can see these layers being pulled
 in this example:
 
-```bash
+```console
 $ docker pull ubuntu:18.04
 18.04: Pulling from library/ubuntu
 f476d66f5408: Pull complete
@@ -148,7 +172,7 @@ local storage area. To examine the layers on the filesystem, list the contents
 of `/var/lib/docker/<storage-driver>`. This example uses the `overlay2` 
 storage driver:
 
-```bash
+```console
 $ ls /var/lib/docker/overlay2
 16802227a96c24dcbeab5b37821e2b67a9f921749cd9a2e386d5a6d5bc6fc6d3
 377d73dbb466e0bc7c9ee23166771b35ebdbe02ef17753d79fd3571d4ce659d7
@@ -157,32 +181,35 @@ ec1ec45792908e90484f7e629330666e7eee599f08729c93890a7205a6ba35f5
 l
 ```
 
-The directory names do not correspond to the layer IDs (this has been true since
-Docker 1.10).
+The directory names do not correspond to the layer IDs.
 
 Now imagine that you have two different Dockerfiles. You use the first one to
 create an image called `acme/my-base-image:1.0`.
 
 ```dockerfile
-FROM ubuntu:18.04
-COPY . /app
+# syntax=docker/dockerfile:1
+FROM alpine
+RUN apk add --no-cache bash
 ```
 
 The second one is based on `acme/my-base-image:1.0`, but has some additional
 layers:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM acme/my-base-image:1.0
+COPY . /app
+RUN chmod +x /app/hello.sh
 CMD /app/hello.sh
 ```
 
-The second image contains all the layers from the first image, plus a new layer
-with the `CMD` instruction, and a read-write container layer. Docker already
-has all the layers from the first image, so it does not need to pull them again.
-The two images share any layers they have in common.
+The second image contains all the layers from the first image, plus new layers
+created by the `COPY` and `RUN` instructions, and a read-write container layer.
+Docker already has all the layers from the first image, so it does not need to
+pull them again. The two images share any layers they have in common.
 
 If you build images from the two Dockerfiles, you can use `docker image ls` and
-`docker history` commands to verify that the cryptographic IDs of the shared
+`docker image history` commands to verify that the cryptographic IDs of the shared
 layers are the same.
 
 1.  Make a new directory `cow-test/` and change into it.
@@ -190,14 +217,8 @@ layers are the same.
 2.  Within `cow-test/`, create a new file called `hello.sh` with the following contents:
 
     ```bash
-    #!/bin/sh
+    #!/usr/bin/env bash
     echo "Hello world"
-    ```
-
-    Save the file, and make it executable:
-
-    ```bash
-    chmod +x hello.sh
     ```
 
 3.  Copy the contents of the first Dockerfile above into a new file called
@@ -210,80 +231,151 @@ layers are the same.
     include the final `.` in the command. That sets the `PATH`, which tells
     Docker where to look for any files that need to be added to the image.
 
-    ```bash
+    ```console
     $ docker build -t acme/my-base-image:1.0 -f Dockerfile.base .
-    Sending build context to Docker daemon  812.4MB
-    Step 1/2 : FROM ubuntu:18.04
-     ---> d131e0fa2585
-    Step 2/2 : COPY . /app
-     ---> Using cache
-     ---> bd09118bcef6
-    Successfully built bd09118bcef6
-    Successfully tagged acme/my-base-image:1.0
+    [+] Building 6.0s (11/11) FINISHED
+    => [internal] load build definition from Dockerfile.base                                      0.4s
+    => => transferring dockerfile: 116B                                                           0.0s
+    => [internal] load .dockerignore                                                              0.3s
+    => => transferring context: 2B                                                                0.0s
+    => resolve image config for docker.io/docker/dockerfile:1                                     1.5s
+    => [auth] docker/dockerfile:pull token for registry-1.docker.io                               0.0s
+    => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:9e2c9eca7367393aecc68795c671... 0.0s
+    => [internal] load .dockerignore                                                              0.0s
+    => [internal] load build definition from Dockerfile.base                                      0.0s
+    => [internal] load metadata for docker.io/library/alpine:latest                               0.0s
+    => CACHED [1/2] FROM docker.io/library/alpine                                                 0.0s
+    => [2/2] RUN apk add --no-cache bash                                                          3.1s
+    => exporting to image                                                                         0.2s
+    => => exporting layers                                                                        0.2s
+    => => writing image sha256:da3cf8df55ee9777ddcd5afc40fffc3ead816bda99430bad2257de4459625eaa   0.0s
+    => => naming to docker.io/acme/my-base-image:1.0                                              0.0s
     ```
 
 6.  Build the second image.
 
-    ```bash
+    ```console
     $ docker build -t acme/my-final-image:1.0 -f Dockerfile .
 
-    Sending build context to Docker daemon  4.096kB
-    Step 1/2 : FROM acme/my-base-image:1.0
-     ---> bd09118bcef6
-    Step 2/2 : CMD /app/hello.sh
-     ---> Running in a07b694759ba
-     ---> dbf995fc07ff
-    Removing intermediate container a07b694759ba
-    Successfully built dbf995fc07ff
-    Successfully tagged acme/my-final-image:1.0
+    [+] Building 3.6s (12/12) FINISHED
+    => [internal] load build definition from Dockerfile                                            0.1s
+    => => transferring dockerfile: 156B                                                            0.0s
+    => [internal] load .dockerignore                                                               0.1s
+    => => transferring context: 2B                                                                 0.0s
+    => resolve image config for docker.io/docker/dockerfile:1                                      0.5s
+    => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:9e2c9eca7367393aecc68795c671...  0.0s
+    => [internal] load .dockerignore                                                               0.0s
+    => [internal] load build definition from Dockerfile                                            0.0s
+    => [internal] load metadata for docker.io/acme/my-base-image:1.0                               0.0s
+    => [internal] load build context                                                               0.2s
+    => => transferring context: 340B                                                               0.0s
+    => [1/3] FROM docker.io/acme/my-base-image:1.0                                                 0.2s
+    => [2/3] COPY . /app                                                                           0.1s
+    => [3/3] RUN chmod +x /app/hello.sh                                                            0.4s
+    => exporting to image                                                                          0.1s
+    => => exporting layers                                                                         0.1s
+    => => writing image sha256:8bd85c42fa7ff6b33902ada7dcefaaae112bf5673873a089d73583b0074313dd    0.0s
+    => => naming to docker.io/acme/my-final-image:1.0                                              0.0s
     ```
 
 7.  Check out the sizes of the images:
 
-    ```bash
+    ```console
     $ docker image ls
 
-    REPOSITORY                         TAG                     IMAGE ID            CREATED             SIZE
-    acme/my-final-image                1.0                     dbf995fc07ff        58 seconds ago      103MB
-    acme/my-base-image                 1.0                     bd09118bcef6        3 minutes ago       103MB
+    REPOSITORY             TAG     IMAGE ID         CREATED               SIZE
+    acme/my-final-image    1.0     8bd85c42fa7f     About a minute ago    7.75MB
+    acme/my-base-image     1.0     da3cf8df55ee     2 minutes ago         7.75MB
     ```
 
-8.  Check out the layers that comprise each image:
+8.  Check out the history of each image:
 
-    ```bash
-    $ docker history bd09118bcef6
-    IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-    bd09118bcef6        4 minutes ago       /bin/sh -c #(nop) COPY dir:35a7eb158c1504e...   100B                
-    d131e0fa2585        3 months ago        /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B                  
-    <missing>           3 months ago        /bin/sh -c mkdir -p /run/systemd && echo '...   7B                  
-    <missing>           3 months ago        /bin/sh -c sed -i 's/^#\s*\(deb.*universe\...   2.78kB              
-    <missing>           3 months ago        /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
-    <missing>           3 months ago        /bin/sh -c set -xe   && echo '#!/bin/sh' >...   745B                
-    <missing>           3 months ago        /bin/sh -c #(nop) ADD file:eef57983bd66e3a...   103MB      
+    ```console
+    $ docker image history acme/my-base-image:1.0
+
+    IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+    da3cf8df55ee   5 minutes ago   RUN /bin/sh -c apk add --no-cache bash # bui…   2.15MB    buildkit.dockerfile.v0
+    <missing>      7 weeks ago     /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B
+    <missing>      7 weeks ago     /bin/sh -c #(nop) ADD file:f278386b0cef68136…   5.6MB
     ```
 
-    ```bash
-    $ docker history dbf995fc07ff
+    Some steps do not have a size (`0B`), and are metadata-only changes, which do
+    not produce an image layer and do not take up any size, other than the metadata
+    itself. The output above shows that this image consists of 2 image layers.
 
-    IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-    dbf995fc07ff        3 minutes ago       /bin/sh -c #(nop)  CMD ["/bin/sh" "-c" "/a...   0B                  
-    bd09118bcef6        5 minutes ago       /bin/sh -c #(nop) COPY dir:35a7eb158c1504e...   100B                
-    d131e0fa2585        3 months ago        /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B                  
-    <missing>           3 months ago        /bin/sh -c mkdir -p /run/systemd && echo '...   7B                  
-    <missing>           3 months ago        /bin/sh -c sed -i 's/^#\s*\(deb.*universe\...   2.78kB              
-    <missing>           3 months ago        /bin/sh -c rm -rf /var/lib/apt/lists/*          0B                  
-    <missing>           3 months ago        /bin/sh -c set -xe   && echo '#!/bin/sh' >...   745B                
-    <missing>           3 months ago        /bin/sh -c #(nop) ADD file:eef57983bd66e3a...   103MB  
+    ```console
+    $ docker image history  acme/my-final-image:1.0
+
+    IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+    8bd85c42fa7f   3 minutes ago   CMD ["/bin/sh" "-c" "/app/hello.sh"]            0B        buildkit.dockerfile.v0
+    <missing>      3 minutes ago   RUN /bin/sh -c chmod +x /app/hello.sh # buil…   39B       buildkit.dockerfile.v0
+    <missing>      3 minutes ago   COPY . /app # buildkit                          222B      buildkit.dockerfile.v0
+    <missing>      4 minutes ago   RUN /bin/sh -c apk add --no-cache bash # bui…   2.15MB    buildkit.dockerfile.v0
+    <missing>      7 weeks ago     /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B
+    <missing>      7 weeks ago     /bin/sh -c #(nop) ADD file:f278386b0cef68136…   5.6MB
     ```
 
-    Notice that all the layers are identical except the top layer of the second
-    image. All the other layers are shared between the two images, and are only
-    stored once in `/var/lib/docker/`. The new layer actually doesn't take any
-    room at all, because it is not changing any files, but only running a command.
+    Notice that all steps of the first image are also included in the final
+    image. The final image includes the two layers from the first image, and
+    two layers that were added in the second image.
 
-    > **Note**: The `<missing>` lines in the `docker history` output indicate
-    > that those layers were built on another system and are not available
-    > locally. This can be ignored.
+    > What are the `<missing>` steps?
+    > 
+    > The `<missing>` lines in the `docker history` output indicate that those
+    > steps were either built on another system and part of the `alpine` image
+    > that was pulled from Docker Hub, or were built with BuildKit as builder.
+    > Before BuildKit, the "classic" builder would produce a new "intermediate"
+    > image for each step for caching purposes, and the `IMAGE` column would show
+    > the ID of that image.
+    > BuildKit uses its own caching mechanism, and no longer requires intermediate
+    > images for caching. Refer to [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+    > to learn more about other enhancements made in BuildKit.
+
+
+9.  Check out the layers for each image
+
+    Use the `docker image inspect` command to view the cryptographic IDs of the
+    layers in each image:
+
+    {% raw %}
+    ```console
+    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-base-image:1.0
+    [
+      "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
+      "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a"
+    ]
+    ```
+    {% endraw %}
+
+    {% raw %}
+    ```console
+    $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-final-image:1.0
+    [
+      "sha256:72e830a4dff5f0d5225cdc0a320e85ab1ce06ea5673acfe8d83a7645cbd0e9cf",
+      "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a",
+      "sha256:cc644054967e516db4689b5282ee98e4bc4b11ea2255c9630309f559ab96562e",
+      "sha256:e84fb818852626e89a09f5143dbc31fe7f0e0a6a24cd8d2eb68062b904337af4"
+    ]
+    ```
+    {% endraw %}
+
+    Notice that the first two layers are identical in both images. The second
+    image adds two additional layers. Shared image layers are only stored once
+    in `/var/lib/docker/` and are also shared when pushing and pulling and image
+    to an image registry. Shared image layers can therefore reduce network
+    bandwidth and storage.
+
+    > Tip: format output of Docker commands with the `--format` option
+    > 
+    > The examples above use the `docker image inspect` command with the `--format`
+    > option to view the layer IDs, formatted as a JSON array. The `--format`
+    > option on Docker commands can be a powerful feature that allows you to
+    > extract and format specific information from the output, without requiring
+    > additional tools such as `awk` or `sed`. To learn more about formatting
+    > the output of docker commands using the `--format` flag, refer to the
+    > [format command and log output section](../../config/formatting.md).
+    > We also pretty-printed the JSON output using the [`jq` utility](https://stedolan.github.io/jq/){: target="_blank" rel="noopener" class="_" }
+    > for readability.
 
 ### Copying makes containers efficient
 
@@ -294,16 +386,14 @@ layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the 
+storage driver. For the `overlay2`, `overlay`, and `aufs` drivers, the 
 copy-on-write operation follows this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts
    at the newest layer and works down to the base layer one layer at a time.
    When results are found, they are added to a cache to speed future operations.
-
 *  Perform a `copy_up` operation on the first copy of the file that is found, to
    copy the file to the container's writable layer.
-
 *  Any modifications are made to this copy of the file, and the container cannot
    see the read-only copy of the file that exists in the lower layer.
 
@@ -313,13 +403,20 @@ descriptions.
 
 Containers that write a lot of data consume more space than containers
 that do not. This is because most write operations consume new space in the
-container's thin writable top layer.
+container's thin writable top layer. Note that changing the metadata of files,
+for example, changing file permissions or ownership of a file, can also result
+in a `copy_up` operation, therefore duplicating the file to the writable layer.
 
-> **Note**: for write-heavy applications, you should not store the data in
-> the container. Instead, use Docker volumes, which are independent of the
-> running container and are designed to be efficient for I/O. In addition,
-> volumes can be shared among containers and do not increase the size of your
-> container's writable layer.
+> Tip: Use volumes for write-heavy applications
+>
+> For write-heavy applications, you should not store the data in the container.
+> Applications, such as write-intensive database storage, are known to be
+> problematic particularly when pre-existing data exists in the read-only layer.
+> 
+> Instead, use Docker volumes, which are independent of the running container,
+> and designed to be efficient for I/O. In addition, volumes can be shared among
+> containers and do not increase the size of your container's writable layer.
+> Refer to the [use volumes](../volumes.md) section to learn about volumes.
 
 A `copy_up` operation can incur a noticeable performance overhead. This overhead
 is different depending on which storage driver is in use. Large files,
@@ -331,72 +428,107 @@ To verify the way that copy-on-write works, the following procedures spins up 5
 containers based on the `acme/my-final-image:1.0` image we built earlier and
 examines how much room they take up.
 
-> **Note**: This procedure doesn't work on Docker Desktop for Mac or Docker Desktop for Windows.
-
 1.  From a terminal on your Docker host, run the following `docker run` commands.
     The strings at the end are the IDs of each container.
 
-    ```bash
+    ```console
     $ docker run -dit --name my_container_1 acme/my-final-image:1.0 bash \
       && docker run -dit --name my_container_2 acme/my-final-image:1.0 bash \
       && docker run -dit --name my_container_3 acme/my-final-image:1.0 bash \
       && docker run -dit --name my_container_4 acme/my-final-image:1.0 bash \
       && docker run -dit --name my_container_5 acme/my-final-image:1.0 bash
 
-      c36785c423ec7e0422b2af7364a7ba4da6146cbba7981a0951fcc3fa0430c409
-      dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
-      1e7264576d78a3134fbaf7829bc24b1d96017cf2bc046b7cd8b08b5775c33d0c
-      38fa94212a419a082e6a6b87a8e2ec4a44dd327d7069b85892a707e3fc818544
-      1a174fc216cccf18ec7d4fe14e008e30130b11ede0f0f94a87982e310cf2e765
+    40ebdd7634162eb42bdb1ba76a395095527e9c0aa40348e6c325bd0aa289423c
+    a5ff32e2b551168b9498870faf16c9cd0af820edf8a5c157f7b80da59d01a107
+    3ed3c1a10430e09f253704116965b01ca920202d52f3bf381fbb833b8ae356bc
+    939b3bf9e7ece24bcffec57d974c939da2bdcc6a5077b5459c897c1e2fa37a39
+    cddae31c314fbab3f7eabeb9b26733838187abc9a2ed53f97bd5b04cd7984a5a
     ```
 
+2.  Run the `docker ps` command with the `--size` option to verify the 5 containers
+    are running, and to see each container's size.
 
-2.  Run the `docker ps` command to verify the 5 containers are running.
+    {% raw %}
+    ```console
+    $ docker ps --size --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Size}}"
 
-    ```bash
-    CONTAINER ID      IMAGE                     COMMAND     CREATED              STATUS              PORTS      NAMES
-    1a174fc216cc      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_5
-    38fa94212a41      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_4
-    1e7264576d78      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_3
-    dcad7101795e      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_2
-    c36785c423ec      acme/my-final-image:1.0   "bash"      About a minute ago   Up About a minute              my_container_1
+    CONTAINER ID   IMAGE                     NAMES            SIZE
+    cddae31c314f   acme/my-final-image:1.0   my_container_5   0B (virtual 7.75MB)
+    939b3bf9e7ec   acme/my-final-image:1.0   my_container_4   0B (virtual 7.75MB)
+    3ed3c1a10430   acme/my-final-image:1.0   my_container_3   0B (virtual 7.75MB)
+    a5ff32e2b551   acme/my-final-image:1.0   my_container_2   0B (virtual 7.75MB)
+    40ebdd763416   acme/my-final-image:1.0   my_container_1   0B (virtual 7.75MB)
     ```
+    {% endraw %}
 
+    The output above shows that all containers share the image's read-only layers
+    (7.75MB), but no data was written to the container's filesystem, so no additional
+    storage is used for the containers.
 
-3.  List the contents of the local storage area.
+    > Advanced: metadata and logs storage used for containers
+    >
+    > **Note**: This step requires a Linux machine, and does not work on Docker
+    > Desktop for Mac or Docker Desktop for Windows, as it requires access to
+    > the Docker Daemon's file storage.
+    >
+    > While the output of `docker ps` provides you information about disk space
+    > consumed by a container's writable layer, it does not include information
+    > about metadata and log-files stored for each container.
+    >
+    > More details can be obtained by exploring the Docker Daemon's storage location
+    > (`/var/lib/docker` by default).
+    >
+    > ```console
+    > $ sudo du -sh /var/lib/docker/containers/*
+    >
+    > 36K  /var/lib/docker/containers/3ed3c1a10430e09f253704116965b01ca920202d52f3bf381fbb833b8ae356bc
+    > 36K  /var/lib/docker/containers/40ebdd7634162eb42bdb1ba76a395095527e9c0aa40348e6c325bd0aa289423c
+    > 36K  /var/lib/docker/containers/939b3bf9e7ece24bcffec57d974c939da2bdcc6a5077b5459c897c1e2fa37a39
+    > 36K  /var/lib/docker/containers/a5ff32e2b551168b9498870faf16c9cd0af820edf8a5c157f7b80da59d01a107
+    > 36K  /var/lib/docker/containers/cddae31c314fbab3f7eabeb9b26733838187abc9a2ed53f97bd5b04cd7984a5a
+    > ```
+    >
+    > Each of these containers only takes up 36k of space on the filesystem.
 
-    ```bash
-    $ sudo ls /var/lib/docker/containers
+3. Per-container storage
 
-    1a174fc216cccf18ec7d4fe14e008e30130b11ede0f0f94a87982e310cf2e765
-    1e7264576d78a3134fbaf7829bc24b1d96017cf2bc046b7cd8b08b5775c33d0c
-    38fa94212a419a082e6a6b87a8e2ec4a44dd327d7069b85892a707e3fc818544
-    c36785c423ec7e0422b2af7364a7ba4da6146cbba7981a0951fcc3fa0430c409
-    dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
+    To demonstrate this, run the following command to write the word 'hello' to
+    a file on the container's writable layer in containers `my_container_1`,
+    `my_container_2`, and `my_container_3`:
+
+    ```console
+    $ for i in {1..3}; do docker exec my_container_$i sh -c 'printf hello > /out.txt'; done
     ```
+   
+    Running the `docker ps` command again afterward shows that those containers
+    now consume 5 bytes each. This data is unique to each container, and not
+    shared. The read-only layers of the containers are not affected, and are still
+    shared by all containers.
 
-4.  Now check out their sizes:
+   {% raw %}
+    ```console
+    $ docker ps --size --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Size}}"
 
-    ```bash
-    $ sudo du -sh /var/lib/docker/containers/*
-
-    32K  /var/lib/docker/containers/1a174fc216cccf18ec7d4fe14e008e30130b11ede0f0f94a87982e310cf2e765
-    32K  /var/lib/docker/containers/1e7264576d78a3134fbaf7829bc24b1d96017cf2bc046b7cd8b08b5775c33d0c
-    32K  /var/lib/docker/containers/38fa94212a419a082e6a6b87a8e2ec4a44dd327d7069b85892a707e3fc818544
-    32K  /var/lib/docker/containers/c36785c423ec7e0422b2af7364a7ba4da6146cbba7981a0951fcc3fa0430c409
-    32K  /var/lib/docker/containers/dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
+    CONTAINER ID   IMAGE                     NAMES            SIZE
+    cddae31c314f   acme/my-final-image:1.0   my_container_5   0B (virtual 7.75MB)
+    939b3bf9e7ec   acme/my-final-image:1.0   my_container_4   0B (virtual 7.75MB)
+    3ed3c1a10430   acme/my-final-image:1.0   my_container_3   5B (virtual 7.75MB)
+    a5ff32e2b551   acme/my-final-image:1.0   my_container_2   5B (virtual 7.75MB)
+    40ebdd763416   acme/my-final-image:1.0   my_container_1   5B (virtual 7.75MB)
     ```
+   {% endraw %}
 
-    Each of these containers only takes up 32k of space on the filesystem.
-
-Not only does copy-on-write save space, but it also reduces start-up time.
-When you start a container (or multiple containers from the same image), Docker
-only needs to create the thin writable container layer.
+The examples above illustrate how copy-on-write filesystems help making containers
+efficient. Not only does copy-on-write save space, but it also reduces container
+start-up time. When you create a container (or multiple containers from the same
+image), Docker only needs to create the thin writable container layer.
 
 If Docker had to make an entire copy of the underlying image stack each time it
-started a new container, container start times and disk space used would be
+created a new container, container create times and disk space used would be
 significantly increased. This would be similar to the way that virtual machines
-work, with one or more virtual disks per virtual machine.
+work, with one or more virtual disks per virtual machine. The [`vfs` storage](vfs-driver.md)
+does not provide a CoW filesystem or other optimizations. When using this storage
+driver, a full copy of the image's data is created for each container.
 
 ## Related information
 

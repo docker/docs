@@ -1,51 +1,153 @@
 //noinspection CssNoGenericFontName
-blockquote {
-  background-color:  $note-bg-color;
-  border-left-color: $note-color;
+
+/*
+
+These rules control the display of notes/notifications/alerts. They can be used like so:
+
+> This is a paid feature
+>
+> Docker Hub Vulnerability Scanning is available for developers subscribed to a Pro or a Team plan. For more information about the pricing plans, see [Docker Pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade)
+{: .restricted }
+
+(The first line is always treated as a header, unless it's the only line)
+
+The available classes are:
+
+.important: Yellow
+.warning: Red/orange
+.restricted: Purple, used to indicate features that require paid plans
+[no class]: Blue, the default
+
+*/
+
+@mixin notification($bg-color, $header-color, $body-text-color, $icon) {
+  background-color:  $bg-color;
   font-size:         unset; // override bootstrap font-size for blockquotes
 
-  > p:first-child {
-    color:       $note-color;
+  // The first child will generally be a header (e.g. "Note" or "This is an experimental feature"),
+  // but we have some notes that don't have headers; if there's only one child of the note,
+  // assume it's not a header
+  > p:first-child:not(:only-child) {
+    color:       $header-color;
     font-weight: 700;
     margin-top:  0;
 
+    // https://fontawesome.com/docs/web/setup/upgrade/pseudo-elements
     &::before {
-      font-family: FontAwesome;
-      content:     "\f058 \00a0";
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font: var(--fa-font-solid);
+      content: "#{$icon} \00a0";
     }
   }
 
-  // Maintain backwards compatibility with old note style
-  > p:only-child {
-    color:       inherit;
-    font-weight: inherit;
+  > p:only-child, > p:not(:first-child) {
+    color: $body-text-color;
+  }
 
-    &::before {
-      content: none;
+  a {
+    text-decoration: underline;
+  }
+}
+
+
+
+blockquote {
+  body.night & {
+    // DARK THEME
+
+    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
+      @include notification(
+        $bg-color: $dark-palette-blue-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f06a"
+      );
+    }
+
+    &.important {
+      @include notification(
+        $bg-color: $dark-palette-amber-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f06a"
+      );
+    }
+
+    &.warning {
+      @include notification(
+        $bg-color: $dark-palette-red-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f06a"
+      );
+    }
+
+    &.restricted {
+      @include notification(
+        $bg-color: $dark-palette-violet-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f135"
+      );
+    }
+
+    &.experimental {
+      @include notification(
+        $bg-color: $dark-palette-blue-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f492"
+      );
     }
   }
 
-  &.important {
-    border-left-color: $important-color;
+  body:not(.night) & {
+    // LIGHT THEME
 
-    > p:first-child {
-      color: $important-color;
-
-      &::before {
-        content: "\f06a  \00a0";
-      }
+    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
+      @include notification(
+        $bg-color: $light-palette-blue-100,
+        $header-color: $light-palette-blue-500,
+        $body-text-color: inherit,
+        $icon: "\f05a"
+      );
     }
-  }
 
-  &.warning {
-    border-left-color: $warning-color;
+    &.important {
+      @include notification(
+        $bg-color: $light-palette-amber-100,
+        $header-color: $light-palette-amber-500,
+        $body-text-color: inherit,
+        $icon: "\f06a"
+      );
+    }
 
-    > p:first-child {
-      color: $warning-color;
+    &.warning {
+      @include notification(
+        $bg-color: $light-palette-red-100,
+        $header-color: $light-palette-red-500,
+        $body-text-color: inherit,
+        $icon: "\f06a"
+      );
+    }
 
-      &::before {
-        content: "\f057  \00a0";
-      }
+    &.restricted {
+      @include notification(
+        $bg-color: $light-palette-violet-100,
+        $header-color: $light-palette-violet-500,
+        $body-text-color: inherit,
+        $icon: "\f135"
+      );
+    }
+
+    &.experimental {
+      @include notification(
+        $bg-color: $light-palette-blue-100,
+        $header-color: $light-palette-blue-500,
+        $body-text-color: inherit,
+        $icon: "\f492"
+      );
     }
   }
 }

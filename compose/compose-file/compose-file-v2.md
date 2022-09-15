@@ -182,6 +182,8 @@ build process.
 First, specify the arguments in your Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG buildno
 ARG gitcommithash
 
@@ -997,8 +999,6 @@ options:
 ### network_mode
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `network_mode` option replaces the version 1 [net](compose-file-v1.md#net) option.
 
 Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
@@ -1022,8 +1022,6 @@ network_mode: "container:[container name/id]"
 ### networks
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `networks` option replaces the version 1 [net](compose-file-v1.md#net) option.
 
 Networks to join, referencing entries under the
 [top-level `networks` key](#network-configuration-reference).
@@ -1105,7 +1103,7 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet and gateway configurations covering each static address.
 
-> If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+> If IPv6 addressing is desired, the [`enable_ipv6`](#enable_ipv6) option must be set.
 
 An example:
 
@@ -1294,7 +1292,7 @@ web:
 Specify the default number of containers to deploy for this service. Whenever
 you run `docker-compose up`, Compose creates or removes containers to match
 the specified number. This value can be overridden using the
-[`--scale`](../reference/up.md) flag.
+[`--scale`](../../engine/reference/commandline/compose_up.md)
 
 ```yaml
 web:
@@ -1407,7 +1405,7 @@ userns_mode: "host"
 ```
 
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
+See [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) for
 more information.
 
 ### volumes
@@ -1534,31 +1532,22 @@ volumes_from:
 ```
 
 > Changed in [version 2](compose-versioning.md#version-2) file format.
->
-> The `container:...` formats are only supported in the [version 2](compose-versioning.md#version-2)
-> file format. In [version 1](compose-versioning.md#version-1), you can use container
-> names without marking them as such:
->
->     - `service_name`
->     - `service_name:ro`
->     - `container_name`
->     - `container_name:rw`
 
 ### restart
 
 `no` is the default restart policy, and it doesn't restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
 
 ```yaml
-restart: no
+restart: "no"
 ```
 ```yaml
-restart: always
+restart: "always"
 ```
 ```yaml
-restart: on-failure
+restart: "on-failure"
 ```
 ```yaml
-restart: unless-stopped
+restart: "unless-stopped"
 ```
 
 {: id="cpu-and-other-resources"}
@@ -1607,7 +1596,7 @@ stdin_open: true
 tty: true
 ```
 
-{: id="orig-resources" }
+<a name="orig-resources"></a>
 
 ## Specifying durations
 
@@ -1626,7 +1615,7 @@ The supported units are `us`, `ms`, `s`, `m` and `h`.
 ## Specifying byte values
 
 Some configuration options, such as the `device_read_bps` sub-option for
-[`blkio_config`](#blkioconfig), accept a byte value as a string in a format
+[`blkio_config`](#blkio_config), accept a byte value as a string in a format
 that looks like this:
 
     2b
@@ -1817,7 +1806,7 @@ driver: overlay
 
 > Changed in [version 2.1](compose-versioning.md#version-21) file format.
 >
-> Starting in Compose file format 2.1, overlay networks are always created as
+> Starting with Compose file format 2.1, overlay networks are always created as
 > `attachable`, and this is not configurable. This means that standalone
 > containers can connect to overlay networks.
 
@@ -1990,7 +1979,7 @@ networks:
 ## Compose documentation
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 - [Command line reference](../reference/index.md)

@@ -34,7 +34,9 @@ can be applied over the original `docker-compose.yml` to create a new configurat
 Once you've got a second configuration file, tell Compose to use it with the
 `-f` option:
 
-    docker-compose -f docker-compose.yml -f production.yml up -d
+```console
+$ docker compose -f docker-compose.yml -f production.yml up -d
+```
 
 See [Using multiple compose files](extends.md#different-environments) for a more
 complete example.
@@ -45,8 +47,10 @@ When you make changes to your app code, remember to rebuild your image and
 recreate your app's containers. To redeploy a service called
 `web`, use:
 
-    $ docker-compose build web
-    $ docker-compose up --no-deps -d web
+```console
+$ docker compose build web
+$ docker compose up --no-deps -d web
+```
 
 This first rebuilds the image for `web` and then stop, destroy, and recreate
 *just* the `web` service. The `--no-deps` flag prevents Compose from also
@@ -56,15 +60,15 @@ recreating any services which `web` depends on.
 
 You can use Compose to deploy an app to a remote Docker host by setting the
 `DOCKER_HOST`, `DOCKER_TLS_VERIFY`, and `DOCKER_CERT_PATH` environment variables
-appropriately.
+appropriately. See also [Compose CLI environment variables](../compose/reference/envvars.md).
 
-Once you've set up your environment variables, all the normal `docker-compose`
+Once you've set up your environment variables, all the normal `docker compose`
 commands work with no further configuration.
 
 ## Compose documentation
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
+- [Installing Compose](install/index.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)

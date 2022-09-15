@@ -3,48 +3,71 @@ title: Install Docker Engine
 description: Lists the installation methods
 keywords: docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge
 redirect_from:
-- /engine/installation/linux/
-- /engine/installation/linux/frugalware/
+- /cs-engine/
+- /cs-engine/1.12/
+- /cs-engine/1.12/upgrade/
+- /cs-engine/1.13/
+- /cs-engine/1.13/upgrade/
+- /ee/docker-ee/oracle/
+- /ee/supported-platforms/
+- /en/latest/installation/
+- /engine/installation/
 - /engine/installation/frugalware/
-- /engine/installation/linux/other/
+- /engine/installation/linux/
 - /engine/installation/linux/archlinux/
 - /engine/installation/linux/cruxlinux/
-- /engine/installation/linux/gentoolinux/
 - /engine/installation/linux/docker-ce/
 - /engine/installation/linux/docker-ee/
-- /engine/installation/
-- /en/latest/installation/
+- /engine/installation/linux/docker-ee/oracle/
+- /engine/installation/linux/frugalware/
+- /engine/installation/linux/gentoolinux/
+- /engine/installation/linux/oracle/
+- /engine/installation/linux/other/
+- /engine/installation/oracle/
+- /enterprise/supported-platforms/
+- /install/linux/docker-ee/oracle/
 ---
 
+> **Docker Desktop for Linux**
+>
+> Docker Desktop helps you build, share, and run containers easily on Mac and
+> Windows as you do on Linux. We are excited to share that Docker Desktop for
+> Linux is now GA. For more information, see
+[Docker Desktop for Linux](../../desktop/install/linux-install.md).
+{: .important}
 
 ## Supported platforms
 
-Docker Engine is available on a variety of [Linux platforms](#server),
-[macOS](../../docker-for-mac/install.md) and [Windows 10](../../docker-for-windows/install.md)
+Docker Engine is available on a variety of [Linux platforms](../../desktop/install/linux-install.md),
+[macOS](../../desktop/install/mac-install.md) and [Windows 10](../../desktop/install/windows-install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
 ### Desktop
 
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                          | x86_64 / amd64                                   |
-|:------------------------------------------------------------------|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../docker-for-mac/install.md) | [{{ yes }}](../../docker-for-mac/install.md)     |
-| [Docker Desktop for Windows](../../docker-for-windows/install.md) | [{{ yes }}](../../docker-for-windows/install.md) |
+| Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
+|:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
+| [Docker Desktop for Linux](../../desktop/install/linux-install.md)        | [{{ yes }}](../../desktop/install/linux-install.md)      |                                                  |
+| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md)    | [{{ yes }}](../../desktop/install/mac-install.md)        | [{{ yes }}](../../desktop/install/mac-install.md)        |
+| [Docker Desktop for Windows](../../desktop/install/windows-install.md)    | [{{ yes }}](../../desktop/install/windows-install.md)    |                                                  |
 
 ### Server
 
 Docker provides `.deb` and `.rpm` packages from the following Linux distributions
 and architectures:
 
-| Platform              | x86_64 / amd64         | ARM                      | ARM64 / AARCH64        |
-|:----------------------|:-----------------------|:-------------------------|:-----------------------|
-| [CentOS](centos.md)   | [{{ yes }}](centos.md) |                          | [{{ yes }}](centos.md) |
-| [Debian](debian.md)   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
-| [Fedora](fedora.md)   | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |
-| [Raspbian](debian.md) |                        | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |
-| [Ubuntu](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) |
+| Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)           | s390x                  |
+|:------------------------|:-----------------------|:-----------------------|:-----------------------|:-----------------------|
+| [CentOS](centos.md)     | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                        |                        |
+| [Debian](debian.md)     | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) |                        |
+| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                        |                        |
+| [Raspbian](debian.md)   |                        |                        | [{{ yes }}](debian.md) |                        |
+| [RHEL](rhel.md)         |                        |                        |                        | [{{ yes }}](rhel.md)   |
+| [SLES](sles.md)         |                        |                        |                        | [{{ yes }}](sles.md)   |
+| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
+| [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) |                        |
 
 ### Other Linux distributions
 
@@ -75,23 +98,20 @@ These binaries are statically linked and can be used on any Linux distribution.
 
 ## Release channels
 
-Docker Engine has three types of update channels, **stable**, **test**,
-and **nightly**:
+Docker Engine has two types of update channels, **stable** and **test**:
 
 * The **Stable** channel gives you latest releases for general availability.
 * The **Test** channel gives pre-releases that are ready for testing before
   general availability (GA).
-* The **Nightly** channel gives you latest builds of work in progress for the
-  next major release.
 
 ### Stable
 
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
-`19.03`. The year-month name indicates the earliest possible calendar
+`20.10`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v19.03.0` is
-released, all subsequent patch releases are built from the `19.03` branch.
+releases are performed from that branch. For example, once `v20.10.0` is
+released, all subsequent patch releases are built from the `20.10` branch.
 
 ### Test
 
@@ -101,20 +121,6 @@ Docker for the release have achieved feature-complete. Pre-releases
 such as betas and release candidates are conducted from their respective release
 branches. Patch releases and the corresponding pre-releases are performed
 from within the corresponding release branch.
-
-### Nightly
-
-Nightly builds give you the latest builds of work in progress for the next major
-release. They are created once per day from the master branch with the version
-format:
-
-    0.0.0-YYYYmmddHHMMSS-abcdefabcdef
-
-where the time is the commit time in UTC and the final suffix is the prefix
-of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
-
-These builds allow for testing from the latest code on the master branch. No
-qualifications or guarantees are made for the nightly builds.
 
 ## Support
 

@@ -32,8 +32,6 @@ creates a Unix socket accessible by members of the `docker` group.
 >
 > To run Docker without root privileges, see
 > [Run the Docker daemon as a non-root user (Rootless mode)](../security/rootless.md).
->
-> Rootless mode is currently available as an experimental feature.
 
 To create the `docker` group and add your user:
 
@@ -68,7 +66,7 @@ To create the `docker` group and add your user:
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints an informational message and exits.
+    container runs, it prints a message and exits.
 
     If you initially ran Docker CLI commands using `sudo` before adding
     your user to the `docker` group, you may see the following error,
@@ -93,10 +91,10 @@ To create the `docker` group and add your user:
 ## Configure Docker to start on boot
 
 Most current Linux distributions (RHEL, CentOS, Fedora, Debian, Ubuntu 16.04 and
-higher) use [`systemd`](#systemd) to manage which services start when the system
-boots. On Debian and Ubuntu, the Docker service is configured to start on boot
-by default. To automatically start Docker and Containerd on boot for other
-distros, use the commands below:
+higher) use [`systemd`](../../config/daemon/systemd.md) to manage which services
+start when the system boots. On Debian and Ubuntu, the Docker service is configured
+to start on boot by default. To automatically start Docker and Containerd on boot
+for other distros, use the commands below:
 
 ```console
 $ sudo systemctl enable docker.service
@@ -151,7 +149,7 @@ the [Docker CLI Reference](/engine/reference/commandline/dockerd/) article.
 > understand the security implications of opening docker to the network. If steps are not taken to secure the connection, 
 > it is possible for remote non-root users to gain root access on the host. For more information on how to use TLS 
 > certificates to secure this connection, check this article on 
-> [how to protect the Docker daemon socket](../security/https.md).
+> [how to protect the Docker daemon socket](../security/protect-access.md).
 {: .warning}
 
 Configuring Docker to accept remote connections can be done with the `docker.service`
@@ -170,7 +168,7 @@ recommended for Linux distributions that do not use systemd.
 
 2.  Add or modify the following lines, substituting your own values.
 
-    ```none
+    ```systemd
     [Service]
     ExecStart=
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
@@ -286,13 +284,12 @@ file in `/usr/lib/systemd/network/` on your Docker host
 (ex: `/usr/lib/systemd/network/80-container-host0.network`) and add the
 following block within the `[Network]` section.
 
-```
+```systemd
 [Network]
 ...
 IPForward=kernel
 # OR
 IPForward=true
-...
 ```
 
 This configuration allows IP forwarding from the container as expected.
@@ -409,12 +406,12 @@ IP address, follow these instructions to disable `dnsmasq` in NetworkManager.
 
     Save and close the file.
 
-4.  Restart both NetworkManager and Docker. As an alternative, you can reboot
+3.  Restart both NetworkManager and Docker. As an alternative, you can reboot
     your system.
 
     ```console
-    $ sudo restart network-manager
-    $ sudo restart docker
+    $ sudo systemctl restart network-manager
+    $ sudo systemctl restart docker
     ```
 
 ##### RHEL, CentOS, or Fedora
@@ -424,8 +421,7 @@ To disable `dnsmasq` on RHEL, CentOS, or Fedora:
 1.  Disable the `dnsmasq` service:
 
     ```console
-    $ sudo service dnsmasq stop
-
+    $ sudo systemctl stop dnsmasq
     $ sudo systemctl disable dnsmasq
     ```
 

@@ -10,7 +10,7 @@ toc_max: 2
 
 ## Overview
 
-The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon EC2 Container Service (ECS) when building cloud-native applications.
+The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon Elastic Container Service (ECS) when building cloud-native applications.
 
 The integration between Docker and Amazon ECS allows developers to use the Docker Compose CLI to:
 
@@ -23,10 +23,10 @@ Also see the [ECS integration architecture](ecs-architecture.md), [full list of 
 
 To deploy Docker containers on ECS, you must meet the following requirements:
 
-1. Download and install Docker Desktop Stable version 2.3.0.5 or later, or Edge version 2.3.2.0 or later.
+1. Download and install the latest version of Docker Desktop.
 
-    - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" rel="noopener" class="_"}
-    - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" rel="noopener" class="_"}
+    - [Download for Mac](../desktop/install/mac-install.md)
+    - [Download for Windows](../desktop/install/windows-install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
@@ -45,31 +45,45 @@ AWS uses a fine-grained permission model, with specific role for each resource t
 
 To ensure that Docker ECS integration is allowed to manage resources for your Compose application, you have to ensure your AWS credentials [grant access to following AWS IAM permissions](https://aws.amazon.com/iam/features/manage-permissions/):
 
+* application-autoscaling:*
 * cloudformation:*
-* ecs:ListAccountSettings
+* ec2:AuthorizeSecurityGroupIngress
+* ec2:CreateSecurityGroup
+* ec2:CreateTags
+* ec2:DeleteSecurityGroup
+* ec2:DescribeRouteTables
+* ec2:DescribeSecurityGroups
+* ec2:DescribeSubnets
+* ec2:DescribeVpcs
+* ec2:RevokeSecurityGroupIngress
 * ecs:CreateCluster
 * ecs:CreateService
-* ec2:DescribeVpcs
-* ec2:DescribeSubnets
-* ec2:CreateSecurityGroup
-* ec2:DescribeSecurityGroups
-* ec2:DeleteSecurityGroup
-* iam:CreateRole
-* iam:AttachRolePolicy
-* iam:DetachRolePolicy
-* iam:DeleteRole
+* ecs:DeleteCluster
+* ecs:DeleteService
+* ecs:DeregisterTaskDefinition
+* ecs:DescribeClusters
+* ecs:DescribeServices
+* ecs:DescribeTasks
+* ecs:ListAccountSettings
+* ecs:ListTasks
+* ecs:RegisterTaskDefinition
+* ecs:UpdateService
 * elasticloadbalancing:*
-* application-autoscaling:*
-* servicediscovery:*
+* iam:AttachRolePolicy
+* iam:CreateRole
+* iam:DeleteRole
+* iam:DetachRolePolicy
+* iam:PassRole
 * logs:CreateLogGroup
+* logs:DeleteLogGroup
 * logs:DescribeLogGroups
 * logs:FilterLogEvents
-* logs:DeleteLogGroup
 * route53:CreateHostedZone
 * route53:DeleteHostedZone
 * route53:GetHealthCheck
 * route53:GetHostedZone
 * route53:ListHostedZonesByName
+* servicediscovery:*
 
 GPU support, which relies on EC2 instances to run containers with attached GPU devices,
 require a few additional permissions:
@@ -119,8 +133,8 @@ current context using the command `docker context use myecscontext`.
 stop a full Compose application.
 
   By default, `docker compose up` uses the `compose.yaml` or `docker-compose.yaml` file in
-  the current folder. You can specify the Compose file directly using the
-  `--file` flag.
+  the current folder. You can specify the working directory using the --workdir flag or
+  specify the Compose file directly using `docker compose --file mycomposefile.yaml up`.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
@@ -145,7 +159,7 @@ Your ECS services are created with rolling update configuration. As you run
 `docker compose up` with a modified Compose file, the stack will be
 updated to reflect changes, and if required, some services will be replaced.
 This replacement process will follow the rolling-update configuration set by
-your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)
+your services [`deploy.update_config`](../compose/compose-file/compose-file-v3.md#update_config)
 configuration.
 
 AWS ECS uses a percent-based model to define the number of containers to be
@@ -169,13 +183,13 @@ By default you can see logs of your compose application the same way you check l
 
 ```console
 # fetch logs for application in current working directory
-docker compose logs
+$ docker compose logs
 
 # specify compose project name
-docker compose logs --project-name PROJECT
+$ docker compose --project-name PROJECT logs
 
 # specify compose file
-docker compose logs --file /path/to/docker-compose.yaml
+$ docker compose --file /path/to/docker-compose.yaml logs
 ```
 
 A log group is created for the application as `docker-compose/<application_name>`,
@@ -186,7 +200,7 @@ You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retentio
 in your Compose file to set the number of retention days for log events. The
 default behavior is to keep logs forever.
 
-You can also pass `awslogs` 
+You can also pass `awslogs`
 parameters to your container as standard
 Compose file `logging.driver_opts` elements. See [AWS documentation](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html){:target="_blank" rel="noopener" class="_"} for details on available log driver options.
 
@@ -198,7 +212,7 @@ For your convenience, the Docker Compose CLI offers the `docker secret` command,
 
 First, create a `token.json` file to define your DockerHub username and access token.
 
-For instructions on how to generate access tokens, see [Managing access tokens](https://docs.docker.com/docker-hub/access-tokens/).
+For instructions on how to generate access tokens, see [Managing access tokens](../docker-hub/access-tokens.md).
 
 ```json
 {
@@ -210,11 +224,11 @@ For instructions on how to generate access tokens, see [Managing access tokens](
 You can then create a secret from this file using `docker secret`:
 
 ```console
-docker secret create dockerhubAccessToken token.json
+$ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
-Once created, you can use this ARN in you Compose file using using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
+Once created, you can use this ARN in your Compose file using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
 
 ```yaml
 services:
@@ -237,9 +251,13 @@ Services are registered automatically by the Docker Compose CLI on [AWS Cloud Ma
 
 Services can retrieve their dependencies using Compose service names (as they do when deploying locally with docker-compose), or optionally use the fully qualified names.
 
+> **Note**
+> 
+> Short service names, nor the fully qualified service names, will resolve unless you enable public dns names in your VPC.
+
 ### Dependent service startup time and DNS resolution
 
-Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](https://docs.docker.com/compose/startup-order/).
+Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](../compose/startup-order.md).
 Note this need to wait for dependent services in your Compose application also exists when deploying locally with docker-compose, but the delay is typically shorter. Issues might become more visible when deploying to ECS if services do not wait for their dependencies to be available.
 
 Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
@@ -352,7 +370,7 @@ services:
 secrets:
   foo:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
-    keys:
+    x-aws-keys:
       - "bar"
 ```
 
@@ -427,13 +445,13 @@ services:
 The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 
 Once you have identified the changes required to your CloudFormation template, you can include _overlays_ in your
-Compose file that will be automatically applied on `compose up`. An _overlay_ is a yaml object that uses the same CloudFormation template data structure as the one generated by ECS integration, but only contains attributes to 
+Compose file that will be automatically applied on `compose up`. An _overlay_ is a yaml object that uses the same CloudFormation template data structure as the one generated by ECS integration, but only contains attributes to
 be updated or added. It will be merged with the generated template before being applied on the AWS infrastructure.
 
 ### Adjusting Load Balancer http HealthCheck configuration
 
 While ECS cluster uses the `HealthCheck` command on container to get service health, Application Load Balancers define
-their own URL-based HealthCheck mechanism so traffic gets routed. As the Compose model does not offer such an 
+their own URL-based HealthCheck mechanism so traffic gets routed. As the Compose model does not offer such an
 abstraction (yet), the default one is applied, which queries your service under `/` expecting HTTP status code
 `200`.
 
@@ -452,7 +470,7 @@ x-aws-cloudformation:
     WebappTCP80TargetGroup:
       Properties:
         HealthCheckPath: /health
-        Matcher: 
+        Matcher:
           HttpCode: 200-499
 ```
 
@@ -472,9 +490,10 @@ x-aws-cloudformation:
   Resources:
     WebappTCP80Listener:
       Properties:
-        Certificates: 
+        Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
         Protocol: HTTPS
+        Port: 443
 ```
 
 ## Using existing AWS network resources
@@ -508,35 +527,37 @@ use an existing domain name for your application:
 
 1. Use the AWS web console or CLI to get your VPC and Subnets IDs. You can retrieve the default VPC ID and attached subnets using this AWS CLI commands:
 
-```console
-$ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
+        ```console
+        $ aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query 'Vpcs[0].VpcId'
+        
+        "vpc-123456"
+        $ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
+        
+        [
+            "subnet-1234abcd",
+            "subnet-6789ef00",
+        ]
+        ```
+ 
+2. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
 
-"vpc-123456"
-$ aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-123456 --query 'Subnets[*].SubnetId'
-
-[
-    "subnet-1234abcd",
-    "subnet-6789ef00",
-]
-```
-1. Use the AWS CLI to create your load balancer. The AWS Web Console can also be used but will require adding at least one listener, which we don't need here.
-
-```console
-$ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
-
-{
-    "LoadBalancers": [
+        ```console
+        $ aws elbv2 create-load-balancer --name myloadbalancer --type application --subnets "subnet-1234abcd" "subnet-6789ef00"
+        
         {
-            "IpAddressType": "ipv4",
-            "VpcId": "vpc-123456",
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
-            "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
-...
-```
-1. To assign your application an existing domain name, you can configure your DNS with a
-CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
+            "LoadBalancers": [
+                {
+                    "IpAddressType": "ipv4",
+                    "VpcId": "vpc-123456",
+                    "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:1234567890:loadbalancer/app/myloadbalancer/123abcd456",
+                    "DNSName": "myloadbalancer-123456.us-east-1.elb.amazonaws.com",
+        <...>
+        ```
+ 
+3. To assign your application an existing domain name, you can configure your DNS with a
+   CNAME entry pointing to just-created loadbalancer's `DNSName` reported as you created the loadbalancer.
 
-1. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
+4. Use Loadbalancer ARN to set `x-aws-loadbalancer` in your compose file, and deploy your application using `docker compose up` command.
 
 Please note Docker ECS integration won't be aware of this domain name, so `docker compose ps` command will report URLs with loadbalancer DNSName, not your own domain.
 
@@ -582,14 +603,14 @@ The Docker Compose CLI adds support for running and managing containers on ECS.
 
 ### Install Prerequisites
 
-[Docker 19.03 or later](https://docs.docker.com/get-docker/)
+[Docker 19.03 or later](../get-docker.md)
 
 ### Install script
 
 You can install the new CLI using the install script:
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
+$ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 ## FAQ

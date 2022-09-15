@@ -29,7 +29,9 @@ In general, `--mount` is more explicit and verbose. The biggest difference is th
 the `-v` syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
 
-> **Tip**: New users should use the `--mount` syntax. Experienced users may
+> Tip
+>
+> New users should use the `--mount` syntax. Experienced users may
 > be more familiar with the `-v` or `--volume` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
 
@@ -91,6 +93,7 @@ on your development host. Use the following command to bind-mount the `target/`
 directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
+If you're on Windows, see also [Path conversions on Windows](../desktop/troubleshoot/topics.md).
 
 The `--mount` and `-v` examples below produce the same result. You
 can't run them both unless you remove the `devtest` container after running the
@@ -103,7 +106,7 @@ first one.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -114,7 +117,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -147,7 +150,7 @@ set to `rprivate`.
 
 Stop the container:
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -174,7 +177,7 @@ The `--mount` and `-v` examples have the same end result.
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name broken-container \
@@ -188,7 +191,7 @@ starting container process caused "exec: \"nginx\": executable file not found in
 </div><!--mount-->
 <div id="v-empty-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name broken-container \
@@ -204,7 +207,7 @@ starting container process caused "exec: \"nginx\": executable file not found in
 
 The container is created but does not start. Remove it:
 
-```bash
+```console
 $ docker container rm broken-container
 ```
 
@@ -228,7 +231,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -239,7 +242,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-readonly" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -268,7 +271,7 @@ correctly. Look for the `Mounts` section:
 
 Stop the container:
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -287,6 +290,11 @@ control whether a mount on `/tmp/a` would also be available on `/mnt/a`. Each
 propagation setting has a recursive counterpoint. In the case of recursion,
 consider that `/tmp/a` is also mounted as `/foo`. The propagation settings
 control whether `/mnt/a` and/or `/tmp/a` would exist.
+
+> Warning
+>
+> Mount propagation doesn't work with Docker Desktop.
+{: .warning }
 
 | Propagation setting | Description                                                                                                                                                                                                         |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -316,7 +324,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-propagation" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -328,7 +336,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-propagation" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
@@ -367,13 +375,35 @@ the bind mount's contents:
 
 It is not possible to modify the selinux label using the `--mount` flag.
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name devtest \
   -v "$(pwd)"/target:/app:z \
   nginx:latest
 ```
+
+
+## Use a bind mount with compose
+
+A single Docker Compose service with a bind mount looks like this:
+
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  frontend:
+    image: node:lts
+    volumes:
+      - type: bind
+        source: ./static
+        target: /opt/app/staticvolumes:
+  myapp:
+```
+
+For more information about using volumes of the `bind` type with Compose, see
+[Compose reference on volumes](../compose/compose-file/compose-file-v3.md#volumes).
+and
+[Compose reference on volume configuration](../compose/compose-file/compose-file-v3.md#volume-configuration-reference).
 
 ## Next steps
 

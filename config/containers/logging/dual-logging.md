@@ -1,7 +1,7 @@
 ---
 description: Learn how to read container logs locally when using a third party logging solution.
-keywords: docker, logging, driver
-title: Use docker logs to read container logs for remote logging drivers
+keywords: docker, logging, driver, dual logging, dual-logging, cache, ring-buffer, configuration
+title: Use docker logs with remote logging drivers
 ---
 
 ## Overview 
@@ -21,9 +21,16 @@ logs regardless of the configured logging driver or plugin. This capability,
 referred to as "dual logging", allows you to use `docker logs` to read container
 logs locally in a consistent format, regardless of the log driver used, because
 the engine is configured to log information to the “local” logging driver. Refer
-to [Configure the default logging driver](/config/containers/logging/configure)
-for additional information. 
+to [Configure the default logging driver](configure.md) for additional information. 
 
+Dual logging uses the [`local`](local.md) logging driver to act as cache for
+reading the latest logs of your containers. By default, the cache has log-file
+rotation enabled, and is limited to a maximum of 5 files of 20MB each (before
+compression) per container.
+
+Refer to the [configuration options](#configuration-options) section to customize
+these defaults, or to the [disable dual-logging](#disable-the-dual-logging-cache)
+section to disable this feature.
 
 ## Prerequisites 
  
@@ -34,11 +41,11 @@ support reading logs.
 The following examples show the result of running a `docker logs` command with
 and without dual logging availability:
 
-### Without dual logging capability:
+### Without dual logging capability
 
-When a container or `dockerd` was configured with a remote logging driver such
-as `splunk`, an error was displayed when attempting to read container logs
-locally:
+When a container is configured with a remote logging driver such as `splunk`, and
+dual logging is disabled, an error is displayed when attempting to read container
+logs locally:
 
 - Step 1: Configure Docker daemon
 
@@ -47,7 +54,8 @@ locally:
     {
       "log-driver": "splunk",
       "log-opts": {
-        ...
+        "cache-disabled": "true",
+        ... (options for "splunk" logging driver)
       }
     }
     ```
@@ -65,9 +73,12 @@ locally:
     Error response from daemon: configured logging driver does not support reading
     ```
 
-### With dual logging capability:
+### With dual logging capability
 
-To configure a container or docker with a remote logging driver such as splunk:
+With the dual logging cache enabled, the `docker logs` command can be used to
+read logs, even if the logging driver does not support reading logs. The following
+examples shows a daemon configuration that uses the `splunk` remote logging driver
+as a default, with dual logging caching enabled:
 
 - Step 1: Configure Docker daemon
 
@@ -76,7 +87,7 @@ To configure a container or docker with a remote logging driver such as splunk:
     {
       "log-driver": "splunk",
       "log-opts": {
-        ...
+        ... (options for "splunk" logging driver)
       }
     }
     ```
@@ -102,14 +113,63 @@ To configure a container or docker with a remote logging driver such as splunk:
 
 > **Note**
 >
-> For a local driver, such as `json-file` and `journald`, there is no difference in
-> functionality before or after the dual logging capability became available.
-> The log is locally visible in both scenarios.
+> For logging drivers that support reading logs, such as the `local`, `json-file`
+> and `journald` drivers, there is no difference in functionality before or after
+> the dual logging capability became available. For these drivers, Logs can be
+> read using `docker logs` in both scenarios.
 
+
+### Configuration options
+
+The "dual logging" cache accepts the same configuration options as the
+[`local` logging driver](local.md), but with a `cache-` prefix. These options
+can be specified per container, and defaults for new containers can be set using
+the [daemon configuration file](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+
+By default, the cache has log-file rotation enabled, and is limited to a maximum
+of 5 files of 20MB each (before compression) per container. Use the configuration
+options described below to customize these defaults.
+
+
+| Option           | Default   | Description                                                                                                                                       |
+|:-----------------|:----------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `cache-disabled` | `"false"` | Disable local caching. Boolean value passed as a string (`true`, `1`, `0`, or `false`).                                                           |
+| `cache-max-size` | `"20m"`   | The maximum size of the cache before it is rotated. A positive integer plus a modifier representing the unit of measure (`k`, `m`, or `g`).       |
+| `cache-max-file` | `"5"`     | The maximum number of cache files that can be present. If rotating the logs creates excess files, the oldest file is removed. A positive integer. |
+| `cache-compress` | `"true"`  | Enable or disable compression of rotated log files. Boolean value passed as a string (`true`, `1`, `0`, or `false`).                              |
+
+## Disable the dual logging cache
+
+Use the `cache-disabled` option to disable the dual logging cache. Disabling the
+cache can be useful to save storage space in situations where logs are only read
+through a remote logging system, and if there is no need to read logs through
+`docker logs` for debugging purposes.
+
+Caching can be disabled for individual containers or by default for new containers,
+when using the [daemon configuration file](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+
+The following example uses the daemon configuration file to use the ["splunk'](splunk.md)
+logging driver as a default, with caching disabled:
+
+```console
+$ cat /etc/docker/daemon.json
+{
+  "log-driver": "splunk",
+  "log-opts": {
+    "cache-disabled": "true",
+    ... (options for "splunk" logging driver)
+  }
+}
+```
+
+> **Note**
+>
+> For logging drivers that support reading logs, such as the `local`, `json-file`
+> and `journald` drivers, dual logging is not used, and disabling the option has
+> no effect.
 
 ## Limitations
 
-- You cannot specify more than one log driver. 
 - If a container using a logging driver or plugin that sends logs remotely
   suddenly has a "network" issue, no ‘write’ to the local cache occurs. 
 - If a write to `logdriver` fails for any reason (file system full, write

@@ -19,6 +19,4 @@ After completing the Node.js getting started modules, you should be able to cont
 
 Let's get started!
 
-[Build your Node.js image](build-images.md){: .button .outline-btn}
-
-<br />
+[Build your Node.js image](build-images.md){: .button .primary-btn}

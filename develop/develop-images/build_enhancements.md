@@ -19,7 +19,8 @@ on performance, storage management, feature functionality, and security.
   information for building new images with a specified Dockerfile 
 
 For more information on build options, see the reference guide on the
-[command line build options](/engine/reference/commandline/build/).
+[command line build options](../../engine/reference/commandline/build.md) and
+the [Dockerfile reference](/engine/reference/builder/) page.
 
 
 ## Requirements
@@ -36,7 +37,7 @@ For more information on build options, see the reference guide on the
 Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1`
 environment variable when invoking the `docker build` command, such as:
 
-```bash
+```console
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 
@@ -112,11 +113,18 @@ $ docker build --progress=plain .
 
 The new syntax features in `Dockerfile` are available if you override the default
 frontend. To override the default frontend, set the first line of the
-`Dockerfile` as a comment with a specific frontend image: 
+`Dockerfile` as a comment with a specific frontend image:
 
 ```dockerfile
-# syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
+# syntax=<frontend image>, e.g. # syntax=docker/dockerfile:1.2
 ```
+
+The examples on this page use features that are available in `docker/dockerfile`
+version 1.2.0 and up. We recommend using `docker/dockerfile:1`, which always
+points to the latest release of the version 1 syntax. BuildKit automatically
+checks for updates of the syntax before building, making sure you are using the
+most current version. Learn more about the `syntax` directive in the
+[Dockerfile reference](/engine/reference/builder/#syntax).
 
 ## New Docker Build secret information
 
@@ -139,12 +147,11 @@ $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
 And with a Dockerfile that specifies use of a BuildKit frontend
-`docker/dockerfile:1.0-experimental`, the secret can be accessed. 
-
-For example:
+`docker/dockerfile:1.2`, the secret can be accessed when performing a `RUN`:
 
 ```dockerfile
-# syntax = docker/dockerfile:1.0-experimental
+# syntax=docker/dockerfile:1.2
+
 FROM alpine
 
 # shows secret from default secret location:
@@ -154,6 +161,7 @@ RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret
 RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 ```
 
+The secret needs to be passed to the build using the `--secret` flag.
 This Dockerfile is only to demonstrate that the secret can be accessed. As you
 can see the secret printed in the build output. The final image built will not
 have the secret file:
@@ -187,42 +195,49 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 > Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 > for more information and examples.
 
-The `docker build` has a `--ssh` option to allow the Docker Engine to forward
-SSH agent connections. For more information on SSH agent, see the
-[OpenSSH man page](https://man.openbsd.org/ssh-agent).
+Some commands in a `Dockerfile` may need specific SSH authentication - for example, to clone a private repository.
+Rather than copying private keys into the image, which runs the risk of exposing them publicly, `docker build` provides a way to use the host system's ssh access while building the image.
 
-Only the commands in the `Dockerfile` that have explicitly requested the SSH
-access by defining `type=ssh` mount have access to SSH agent connections. The
-other commands have no knowledge of any SSH agent being available.
+There are three steps to this process.
 
-To request SSH access for a `RUN` command in the `Dockerfile`, define a mount
-with type `ssh`. This will set up the `SSH_AUTH_SOCK` environment variable to
-make programs relying on SSH automatically use that socket.
+First, run `ssh-add` to add private key identities to the authentication agent.
+If you have more than one SSH key and your default `id_rsa` is not the one you use for accessing the resources in question, you'll need to add that key by path: `ssh-add ~/.ssh/<some other key>`.
+(For more information on SSH agent, see the [OpenSSH man page](https://man.openbsd.org/ssh-agent).)
 
-Here is an example Dockerfile using SSH in the container:
+Second, when running `docker build`, use the `--ssh` option to pass in an existing SSH agent connection socket.
+For example, `--ssh default=$SSH_AUTH_SOCK`, or the shorter equivalent, `--ssh default`.
+
+Third, to make use of that SSH access in a `RUN` command in the `Dockerfile`, define a mount with type `ssh`.
+This will set the `SSH_AUTH_SOCK` environment variable for that command to the value provided by the host to `docker build`, which will cause any programs in the `RUN` command which rely on SSH to automatically use that socket.
+Only the commands in the `Dockerfile` that have explicitly requested SSH access by defining `type=ssh` mount will have access to SSH agent connections.
+The other commands will have no knowledge of any SSH agent being available.
+
+Here is an example `Dockerfile` using SSH in the container:
 
 ```dockerfile
-# syntax=docker/dockerfile:experimental
+# syntax=docker/dockerfile:1
 FROM alpine
 
 # Install ssh client and git
 RUN apk add --no-cache openssh-client git
 
 # Download public key for github.com
-RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Clone private repository
 RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
 ```
 
-Once the `Dockerfile` is created, use the `--ssh` option for connectivity with
-the SSH agent.
+The image could be built as follows:
 
-```bash
+```console
 $ docker build --ssh default .
 ```
 
-You may need to run `ssh-add` to add private key identities to the authentication agent first for this to work.
+As with `--mount=type=secret`, you can specify an `id` if you want to use multiple sockets per build and want to differentiate them.
+For example, you could run `docker build --ssh main=$SSH_AUTH_SOCK --ssh other=$OTHER_SSH_AUTH_SOCK`.
+In your `Dockerfile`, you could then have a `RUN --mount=type=ssh,id=main` and a `RUN --mount=type=ssh,id=other` to use those two sockets.
+If a `--mount=type=ssh` doesn't specify an `id`, `default` is assumed.
 
 ## Troubleshooting : issues with private registries
 
@@ -245,8 +260,8 @@ Docker 18.09 :
 failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manifests/experimental: x509: certificate signed by unknown authority
 ```
 
-Solution : secure your registry properly. You can get SSL certificates from
-Let's Encrypt for free. See /registry/deploying/
+Solution: secure your registry properly. You can get SSL certificates from
+Let's Encrypt for free. See [Deploy a registry server](../../registry/deploying.md).
 
 
 #### image not found when the private registry is running on Sonatype Nexus version < 3.15

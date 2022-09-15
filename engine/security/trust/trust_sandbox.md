@@ -23,7 +23,7 @@ This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
 [list of supported platforms](../../install/index.md). To install
 Docker Compose, see the
-[detailed instructions here](../../../compose/install.md).
+[detailed instructions here](../../../compose/install/index.md).
 
 ## What is in the sandbox?
 
@@ -222,7 +222,7 @@ data. Then, you try and pull it.
 
 3.  List the layers for the `test/trusttest` image you pushed:
 
-    ```bash
+    ```console
     root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
     total 12
     drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
@@ -262,7 +262,7 @@ data. Then, you try and pull it.
     Docker to attempt to download the tampered image from the registry and reject
     it because it is invalid.
 
-8.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
+9.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
         / # docker pull sandboxregistry:5000/test/trusttest
         Using default tag: latest

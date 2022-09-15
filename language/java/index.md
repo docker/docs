@@ -1,20 +1,23 @@
 ---
-description: Containerize Java apps using Docker
+title: Getting started with Java
 keywords: Docker, getting started, java, language
-title: What will you learn in this module?
+description: Containerize Java apps using Docker
 toc_min: 1
 toc_max: 2
 ---
 
-> ### Coming soon
->
-> Thanks for your interest in learning how to containerize a Java application. We are actively writing this guide. Watch this space!
+The Java getting started guide teaches you how to create a containerized Spring Boot application using Docker. In this module, you’ll learn how to:
 
-Meanwhile, here's an outline of the tasks we are planning to cover. Here's an outline of what we'd like to cover. Using the Java getting started guide, you'll learn how to:
-
+* Clone and run a Spring Boot application with Maven
 * Create a new Dockerfile which contains instructions required to build a Java image
-* Build an image and run the newly built image as a container
-* Set up a local development environment to connect a database to the container, and use Docker Compose to run the application.
-* Configure a CI/CD pipeline for your application using GitHub Actions.
+* Run the newly built image as a container
+* Set up a local development environment to connect a database to the container
+* Use Docker Compose to run the Spring Boot application
+* Configure a CI/CD pipeline for your application using GitHub Actions
+* Deploy your application to the cloud
 
-<br />
+After completing the Java getting started modules, you should be able to containerize your own Java application based on the examples and instructions provided in this guide.
+
+Let’s get started!
+
+[Build your first Java image](build-images.md){: .button .primary-btn}

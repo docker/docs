@@ -17,7 +17,7 @@ This guide contains instructions on how to:
 
 ## Set up a Docker project
 
-Let’s get started. This guide uses a simple Docker project as an example. The [SimpleWhaleDemo](https://github.com/usha-mandya/SimpleWhaleDemo){:target="_blank" rel="noopener" class="_"} repository contains an Ngnix alpine image. You can either clone this repository, or use your own Docker project.
+Let’s get started. This guide uses a simple Docker project as an example. The [SimpleWhaleDemo](https://github.com/usha-mandya/SimpleWhaleDemo){:target="_blank" rel="noopener" class="_"} repository contains an Nginx alpine image. You can either clone this repository, or use your own Docker project.
 
 ![SimpleWhaleDemo](../../ci-cd/images/simplewhaledemo.png){:width="500px"}
 
@@ -39,7 +39,7 @@ Before we start, ensure you can access [Docker Hub](https://hub.docker.com/) fro
 
 ## Set up the GitHub Actions workflow
 
-In the previous section, we created a PAT and added it to GitHub to ensure we can access Docker Hub from any workflow. Now, let’s set up our GitHub Actions workflow to build and store our images in Hub. We can achieve this by creating two Docker actions:
+In the previous section, we created a PAT and added it to GitHub to ensure we can access Docker Hub from any workflow. Now, let’s set up our GitHub Actions workflow to build and store our images in Hub. We can achieve this by creating two Docker actions in the YAML file below:
 
 1. The first action enables us to log in to Docker Hub using the secrets we stored in the GitHub Repository.
 2. The second one is the build and push action.
@@ -57,13 +57,17 @@ First, we will name this workflow:
 name: CI to Docker Hub
  ```
 
-Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:
+Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the master branch of our project:
 
 ```yaml
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 ```
+
+> **Note**
+>
+> The branch name may be `main` or `master`. Verify the name of the branch for your repository and update the configuration accordingly.
 
 Now, we need to specify what we actually want to happen within our action (what jobs), we are going to add our build one and select that it runs on the latest Ubuntu instances available:
 
@@ -100,7 +104,7 @@ Now, we can add the steps required. The first one checks-out our repository unde
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
@@ -153,7 +157,7 @@ Using the cache we set up earlier for it to store to and to retrieve
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags:  ushamandya/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
@@ -187,9 +191,9 @@ on:
 
 This ensures that the main CI will only trigger if we tag our commits with `V.n.n.n.` Let’s test this. For example, run the following command:
 
-```bash
-git tag -a v1.0.2
-git push origin v1.0.2
+```console
+$ git tag -a v1.0.2
+$ git push origin v1.0.2
 ```
 
 Now, go to GitHub and check your Actions
@@ -209,12 +213,17 @@ Next, change your Docker Hub login to a GitHub container registry login:
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
-        registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 ```
 {% endraw %}
 
+To authenticate against the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry), use the [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow) for the best security and experience.
+
+You may need to [manage write and read access of GitHub Actions](https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-ghcrio) for repositories in the container settings.
+
+You can also use a [personal access token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with the [appropriate scopes](https://docs.github.com/en/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry).
 Remember to change how the image is tagged. The following example keeps ‘latest’ as the only tag. However, you can add any logic to this if you prefer:
 
 {% raw %}
@@ -231,12 +240,10 @@ Now, we will have two different flows: one for our changes to master, and one fo
 
 In this module, you have learnt how to set up GitHub Actions workflow to an existing Docker project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. You can also set up nightly tests against the latest tag, test each PR, or do something more elegant with the tags we are using and make use of the Git tag for the same tag in our image.
 
-You can also consider deploying your application to the cloud. For detailed instructions, see:
+You can also consider deploying your application. For detailed instructions, see:
 
-[Deploy your app to the cloud](/deploy.md){: .button .outline-btn}
+[Deploy your app](/deploy.md){: .button .primary-btn}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
-
-<br />
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

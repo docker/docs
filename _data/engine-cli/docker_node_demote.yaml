@@ -12,7 +12,7 @@ usage: docker node demote NODE [NODE...]
 pname: docker node
 plink: docker_node.yaml
 examples: |-
-  ```bash
+  ```console
   $ docker node demote <node name>
   ```
 deprecated: false

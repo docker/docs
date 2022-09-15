@@ -56,24 +56,6 @@ body.landing {
       }
     }
 
-    @include md-width {
-      .navbar-nav > li > a {
-        font-weight: bold;
-        line-height: 25px;
-        padding-top: 17px;
-        padding-bottom: 9px;
-        border-bottom-style: solid;
-        border-bottom-width: 4px;
-        border-bottom-color: rgba(255, 255, 255, 0);
-      }
-    }
-
-    @include md-width {
-      .navbar-nav > li.active > a {
-        border-bottom-color: rgba(255, 255, 255, 0.5);
-      }
-    }
-
     .toggle-mode {
       margin-top: 15px;
 
@@ -159,7 +141,7 @@ body.landing {
     }
   }
 
-  $icons: rocket, download-docker, guides, whats-new, manuals, reference;
+  $icons: rocket, download-docker, guides, language-guides, whats-new, manuals, reference;
 
   .card {
     color: $body-text;
@@ -176,7 +158,7 @@ body.landing {
     @each $icon in $icons {
       &.#{$icon} {
         @extend %icon-card;
-        background-image: url("/images/#{$icon}.svg");
+        background-image: url("/assets/images/#{$icon}.svg");
       }
     }
 
@@ -220,7 +202,7 @@ body.landing {
     }
 
     &[target=_blank] {
-      background-image:    url(/images/arrow.svg);
+      background-image:    url(/assets/images/arrow.svg);
       background-position: top 10px right 10px;
       background-repeat:   no-repeat;
       background-size:     15px 15px;
@@ -228,11 +210,11 @@ body.landing {
   }
 
   .cardlet {
-    background-color: #F2F3F5;
+    background-color: $white-25;
     padding: 24px 36px;
 
     .title {
-      font-family: 'Geomanist Book', sans-serif;
+      font-family: "Open Sans", sans-serif;
       line-height: 22px;
       font-size: 22px;
     }
@@ -245,7 +227,7 @@ body.landing {
 
   section.cta-banner {
     background-color: $dark-blue;
-    padding:          75px 0;
+    padding:          65px 0;
 
     h2, h5, p {
       color: white;
@@ -258,8 +240,8 @@ body.landing {
     }
 
     img {
-      margin-bottom: 20px;
-      max-height:    100px;
+      margin-bottom: 10px;
+      max-height:    190px;
     }
 
     h2 {
@@ -271,9 +253,8 @@ body.landing {
       background:  #FF3F73;
       color:       white;
       font-size:   17px;
-      font-weight: bold;
-      margin-top:  50px;
-      padding:     20px 60px;
+      margin-top:  20px;
+      padding:     15px 30px;
 
       img {
         margin: 0;
@@ -289,12 +270,12 @@ body.landing {
 
   .help-by-product {
     .title {
-      font-family: 'Geomanist Book', sans-serif;
+      font-family: "Open Sans", sans-serif;
       font-size: 22px;
     }
 
     ul.nav.nav-tabs li a, h5, h6 {
-      font-family: 'Geomanist Regular', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-size: 18px;
     }
 

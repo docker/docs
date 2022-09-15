@@ -16,6 +16,10 @@ to the internet and fetches an image it doesn't have locally, from the Docker
 repository. You can run a local registry mirror and point all your daemons
 there, to avoid this extra internet traffic.
 
+> **Note**
+>
+> Docker Official Images are an intellectual property of Docker.
+
 ### Alternatives
 
 Alternatively, if the set of images you are using is well delimited, you can
@@ -28,6 +32,10 @@ relying entirely on your local registry is the simplest scenario.
 
 It's currently not possible to mirror another private registry. Only the central
 Hub can be mirrored.
+
+> **Note**
+>
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
 
 ### Solution
 
@@ -60,13 +68,17 @@ be configured to use the `filesystem` driver for storage.
 ## Run a Registry as a pull-through cache
 
 The easiest way to run a registry as a pull through cache is to run the official
-Registry image.
+[Registry](https://hub.docker.com/_/registry) image.
 At least, you need to specify `proxy.remoteurl` within `/etc/docker/registry/config.yml`
 as described in the following subsection.
 
 Multiple registry caches can be deployed over the same back-end. A single
 registry cache ensures that concurrent requests do not pull duplicate data,
 but this property does not hold true for a registry cache cluster.
+
+> **Note**
+>
+> Service accounts included in the Team plan are limited to 5,000 pulls per day. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 
 ### Configure the cache
 

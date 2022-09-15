@@ -247,6 +247,8 @@ build process.
 First, specify the arguments in your Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG buildno
 ARG gitcommithash
 
@@ -501,7 +503,7 @@ configs:
 The long syntax provides more granularity in how the config is created within
 the service's task containers.
 
-- `source`: The name of the config as it exists in Docker.
+- `source`: The identifier of the config as it is defined in this configuration.
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the mounted config file
@@ -577,10 +579,7 @@ format `file://<filename>` or `registry://<value-name>`.
 When using `file:`, the referenced file must be present in the `CredentialSpecs`
 subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
 on Windows. The following example loads the credential spec from a file named
-
-```
-C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json
-```
+`C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`.
 
 ```yaml
 credential_spec:
@@ -652,7 +651,6 @@ services:
 >   starting `web` - only until they have been started. If you need to wait
 >   for a service to be ready, see [Controlling startup order](../startup-order.md)
 >   for more on this problem and strategies for solving it.
-> - Version 3 no longer supports the `condition` form of `depends_on`.
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
@@ -661,10 +659,10 @@ services:
 
 > Added in [version 3](compose-versioning.md#version-3) file format.
 
-Specify configuration related to the deployment and running of services. This
-only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
+Specify configuration related to the deployment and running of services. The following  
+sub-options only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
 [docker stack deploy](../../engine/reference/commandline/stack_deploy.md), and is
-ignored by `docker-compose up` and `docker-compose run`.
+ignored by `docker-compose up` and `docker-compose run`, except for `resources`.
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -1109,6 +1107,16 @@ also ignored.
 RACK_ENV=development
 ```
 
+Compose also recognizes inline comments, like in:
+```
+MY_VAR = value # this is a comment
+```
+
+To avoid interpreting "#" as an inline comment, use the quotation marks:
+```
+MY_VAR = "All the # inside are taken as part of the value"
+```
+
 > **Note**
 >
 > If your service specifies a [build](#build) option, variables defined in
@@ -1209,7 +1217,7 @@ external_links:
 > **Note**
 >
 > The externally-created  containers must be connected to at least one of the same
-> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> networks as the service that is linking to them. [Links](compose-file-v2.md#links)
 > are a legacy option. We recommend using [networks](#networks) instead.
 
 > Note when using docker stack deploy
@@ -1594,8 +1602,18 @@ The corresponding network configuration in the
 [top-level networks section](#network-configuration-reference) must have an
 `ipam` block with subnet configurations covering each static address.
 
-> If IPv6 addressing is desired, the [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
-> option must be set, and you must use a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
+If you'd like to use IPv6, you must first ensure that the Docker daemon is configured to support IPv6.  See [Enable IPv6](../../config/daemon/ipv6.md) for detailed instructions. You can then access IPv6 addressing in a version 3.x Compose file by editing the `/etc/docker/daemon.json` to contain:
+`{"ipv6": true, "fixed-cidr-v6": "2001:db8:1::/64"}`
+
+Then, reload the docker daemon and edit docker-compose.yml to contain the following under the service:
+
+```yaml
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+```
+
+> The [`enable_ipv6`](compose-file-v2.md#enable_ipv6)
+> option is only available in a [version 2.x Compose file](compose-file-v2.md#ipv4_address-ipv6_address).
 > _IPv6 options do not currently work in swarm mode_.
 
 An example:
@@ -1639,10 +1657,16 @@ Expose ports.
 >
 > Port mapping is incompatible with `network_mode: host`
 
+> **Note**
+>
+> `docker-compose run` ignores `ports` unless you include `--service-ports`.
+
 #### Short syntax
 
-Either specify both ports (`HOST:CONTAINER`), or just the container
-port (an ephemeral host port is chosen).
+There are three options: 
+* Specify both ports (`HOST:CONTAINER`)
+* Specify just the container port (an ephemeral host port is chosen for the host port).
+* Specify the host IP address to bind to AND both ports (the default is 0.0.0.0, meaning all interfaces): (`IPADDR:HOSTPORT:CONTAINERPORT`). If HOSTPORT is empty (for example `127.0.0.1::80`), an ephemeral port is chosen to bind to on the host.
 
 > **Note**
 >
@@ -1660,6 +1684,7 @@ ports:
   - "49100:22"
   - "127.0.0.1:8001:8001"
   - "127.0.0.1:5000-5010:5000-5010"
+  - "127.0.0.1::5000"
   - "6060:6060/udp"
   - "12400-12500:1240"
 ```
@@ -1775,7 +1800,7 @@ secrets:
 The long syntax provides more granularity in how the secret is created within
 the service's task containers.
 
-- `source`: The name of the secret as it exists in Docker.
+- `source`: The identifier of the secret as it is defined in this configuration.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
   service's task containers. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the file within
@@ -1783,8 +1808,8 @@ the service's task containers.
   specified.
 - `mode`: The permissions for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation. For instance, `0444`
-  represents world-readable. The default in Docker 1.13.1 is `0000`, but is
-  be `0444` in newer versions. Secrets cannot be writable because they are mounted
+  represents world-readable. The default in Docker 1.13.1 is `0000`, but it is
+  `0444` in newer versions. Secrets cannot be writable because they are mounted
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
@@ -1942,7 +1967,7 @@ userns_mode: "host"
 ```
 
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
+See [dockerd](../../engine/security/userns-remap.md#disable-namespace-remapping-for-a-container) for
 more information.
 
 > Note when using docker stack deploy
@@ -2290,7 +2315,7 @@ volumes:
 >
 > External volumes that do not exist _are created_ if you use [docker stack deploy](#deploy) 
 > to launch the app in [swarm mode](../../engine/swarm/index.md) (instead of
-> [docker compose up](../reference/up.md)). In swarm mode, a volume is
+> [docker compose up](../../engine/reference/commandline/compose_up.md)). In swarm mode, a volume is
 > automatically created when it is defined by a service. As service tasks are
 > scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
 > creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).
@@ -2684,7 +2709,7 @@ this stack. The source of the secret is either `file` or `external`.
   supported when using `docker stack`.
 
 In this example, `my_first_secret` is created as
-`<stack_name>_my_first_secret `when the stack is deployed,
+`<stack_name>_my_first_secret` when the stack is deployed,
 and `my_second_secret` already exists in Docker.
 
 ```yaml
@@ -2735,7 +2760,7 @@ stack.
 ## Compose documentation
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 - [Command line reference](../reference/index.md)

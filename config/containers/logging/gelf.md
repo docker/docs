@@ -50,9 +50,9 @@ Restart Docker for the changes to take effect.
 You can set the logging driver for a specific container by setting the
 `--log-driver` flag when using `docker container create` or `docker run`:
 
-```bash
+```console
 $ docker run \
-      --log-driver gelf –-log-opt gelf-address=udp://1.2.3.4:12201 \
+      --log-driver gelf --log-opt gelf-address=udp://1.2.3.4:12201 \
       alpine echo hello world
 ```
 
@@ -73,12 +73,16 @@ The `gelf` logging driver supports the following options:
 | `env`                      | optional  | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon accepts. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).                         | `--log-opt env=os,customer`                         |
 | `env-regex`                | optional  | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                                                                                                                        | `--log-opt env-regex=^(os|customer)`                |
 
+> **Note**
+> 
+> The `gelf` driver does not support TLS for TCP connections. Messages sent to TLS-protected inputs can silently fail.
+
 ### Examples
 
 This example configures the container to use the GELF server running at
 `192.168.0.42` on port `12201`.
 
-```bash
+```console
 $ docker run -dit \
     --log-driver=gelf \
     --log-opt gelf-address=udp://192.168.0.42:12201 \

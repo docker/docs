@@ -11,7 +11,7 @@ options:
   value_type: string
   description: |
     Default orchestrator for stack operations to use with this context (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -45,10 +45,10 @@ options:
   value_type: stringToString
   default_value: '[]'
   description: set the kubernetes endpoint
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
-  kubernetes: false
+  kubernetes: true
   swarm: false
 examples: |-
   ### Create a context with a docker and kubernetes endpoint
@@ -58,7 +58,7 @@ examples: |-
   with a docker endpoint of `/var/run/docker.sock` and a kubernetes configuration
   sourced from the file `/home/me/my-kube-config`:
 
-  ```bash
+  ```console
   $ docker context create \
       --docker host=unix:///var/run/docker.sock \
       --kubernetes config-file=/home/me/my-kube-config \
@@ -71,19 +71,19 @@ examples: |-
   an existing context. The example below creates a new context named `my-context`
   from the existing context `existing-context`:
 
-  ```bash
+  ```console
   $ docker context create --from existing-context my-context
   ```
 
   If the `--from` option is not set, the `context` is created from the current context:
 
-  ```bash
+  ```console
   $ docker context create my-context
   ```
 
   This can be used to create a context out of an existing `DOCKER_HOST` based script:
 
-  ```bash
+  ```console
   $ source my-setup-script.sh
   $ docker context create my-context
   ```
@@ -94,7 +94,7 @@ examples: |-
   the existing context `existing-context` and a kubernetes configuration sourced
   from the file `/home/me/my-kube-config`:
 
-  ```bash
+  ```console
   $ docker context create \
       --docker from=existing-context \
       --kubernetes config-file=/home/me/my-kube-config \
@@ -106,7 +106,7 @@ examples: |-
   context named `my-context` using the kuberentes configuration from the existing
   context `existing-context` and a docker endpoint of `/var/run/docker.sock`:
 
-  ```bash
+  ```console
   $ docker context create \
       --docker host=unix:///var/run/docker.sock \
       --kubernetes from=existing-context \

@@ -4,9 +4,9 @@ long: Print version information
 usage: docker app version
 pname: docker app
 plink: docker_app.yaml
-deprecated: false
+deprecated: true
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

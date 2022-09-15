@@ -40,11 +40,11 @@ Before you convert a user account to an organization, ensure that you have compl
 
     Your Community account has now been converted to an organization.
 
-## Convert a Pro account into an organization
+## Convert a Docker Pro tier into an organization
 
 >**Note:**
 >
-> When you convert a Pro or a legacy individual repository plan to an organization, the account
+> When you convert a Docker Pro subscription to an organization, the account
 will be migrated to a Team plan and will be charged $35 per month for 5 seats. For more information,
 see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 

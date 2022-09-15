@@ -63,15 +63,16 @@ This is more secure than the insecure registry solution.
 
 1.  Generate your own certificate:
 
-    ```bash
+    ```console
     $ mkdir -p certs
 
     $ openssl req \
       -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key \
+      -addext "subjectAltName = DNS:myregistry.domain.com" \
       -x509 -days 365 -out certs/domain.crt
     ```
 
-    Be sure to use the name `myregistrydomain.com` as a CN.
+    Be sure to use the name `myregistry.domain.com` as a CN.
 
 2.  Use the result to [start your registry with TLS enabled](./deploying.md#get-a-certificate).
 
@@ -96,11 +97,11 @@ This is more secure than the insecure registry solution.
       3.  Click **Finish**. Restart Docker.
 
     - **Docker Desktop for Mac**: Follow the instructions in
-      [Adding custom CA certificates](../docker-for-mac/index.md#add-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/faqs/macfaqs.md#add-custom-ca-certificates-server-side){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 
     - **Docker Desktop for Windows**: Follow the instructions in
-      [Adding custom CA certificates](../docker-for-windows/index.md#adding-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/faqs/windowsfaqs.md#how-do-i-add-custom-ca-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 
 
@@ -129,21 +130,21 @@ certificate at the OS level.
 
 #### Ubuntu
 
-```bash
+```console
 $ cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
 update-ca-certificates
 ```
 
 #### Red Hat Enterprise Linux
 
-```bash
-cp certs/domain.crt /etc/pki/ca-trust/source/anchors/myregistrydomain.com.crt
+```console
+$ cp certs/domain.crt /etc/pki/ca-trust/source/anchors/myregistrydomain.com.crt
 update-ca-trust
 ```
 
 #### Oracle Linux
 
-```bash
+```console
 $ update-ca-trust enable
 ```
 

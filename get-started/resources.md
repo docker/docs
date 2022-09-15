@@ -8,12 +8,11 @@ Docker and the broader community of Docker experts have put together many differ
 
 ## Hosted labs
 
-These self-paced and hands-on workshops use free, hosted environments ([Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"} and [Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}) that do not require anything to be installed. Follow along and learn more about Docker and Kubernetes.
+These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/){:target="_blank" rel="noopener" class="_"}) that does not require any installation. Follow along and learn more about Kubernetes.
 
 * [Kubernetes Workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/){:target="_blank" rel="noopener" class="_"}
-* [Microservice containerization and orchestration](https://training.play-with-docker.com/microservice-orchestration/){:target="_blank" rel="noopener" class="_"}
 
-\* Labs are free but require registration with a Docker ID.
+* Labs are free but require registration with a Docker ID.
 
 ## Self-guided tutorials
 
@@ -42,6 +41,10 @@ If books are your preferred learning style, check out these written by the [Dock
 * [Docker Deep Dive](https://www.amazon.com/Docker-Deep-Dive-Nigel-Poulton/dp/1521822808/ref=sr_1_1?ie=UTF8&qid=1509660871&sr=8-1&keywords=nigel+poulton){:target="_blank" rel="noopener" class="_"}, Nigel Poulton, March 2018
 * [Portuguese] [Docker para desenvolvedores](https://leanpub.com/dockerparadesenvolvedores){:target="_blank" rel="noopener" class="_"} (2017) by Rafael Gomes
 
+## CLI cheat sheet
+
+The [Docker CLI cheat sheet](docker_cheatsheet.pdf){: target="_blank" rel="noopener" class="_"} features the common Docker CLI commands for easy reference. It covers working with Images, Containers, Docker Hub, and other general purpose commands.
+
 ## Self-Paced online learning
 
 A number of Docker Captains have also created video courses on Docker and Kubernetes.
@@ -53,6 +56,5 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 * [Arun Gupta](https://www.lynda.com/Docker-tutorials/Docker-Java-developers/576584-2.html){:target="_blank" rel="noopener" class="_"}: Docker for Java Developers
 * [Ajeet Singh Raina](https://collabnix.com/){:target="_blank" rel="noopener" class="_"}: Docker and Kubernetes Labs
 * [French] [Luc Juggery](https://www.udemy.com/user/lucjuggery/){:target="_blank" rel="noopener" class="_"}: Introduction to Kubernetes, The Docker Platform
-* [Spanish] [Manuel Morejón](https://www.udemy.com/course/integrando-docker-a-su-infraestrucutra-y-servicios/learn/lecture/6624848#overview){:target="_blank" rel="noopener" class="_"}: Integrating Docker to its Infrastructure and Services
 
 \* Many of the courses are fee-based

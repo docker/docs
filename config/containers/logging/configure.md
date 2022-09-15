@@ -56,7 +56,7 @@ logging driver to the [`local` log driver](local.md):
 
 If the logging driver has configurable options, you can set them in the
 `daemon.json` file as a JSON object with the key `log-opts`. The following
-example sets two configurable options on the `json-file` logging driver:
+example sets four configurable options on the `json-file` logging driver:
 
 ```json
 {

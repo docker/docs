@@ -9,7 +9,7 @@ redirect_from:
 Docker Hub repositories allow you share container images with your team,
 customers, or the Docker community at large.
 
-Docker images are pushed to Docker Hub through the [`docker push`](https://docs.docker.com/engine/reference/commandline/push/)
+Docker images are pushed to Docker Hub through the [`docker push`](/engine/reference/commandline/push/)
 command. A single Docker Hub repository can hold many Docker images (stored as
 **tags**).
 
@@ -25,8 +25,12 @@ When creating a new repository:
 * You can choose to put it in your Docker ID namespace, or in any
   [organization](orgs.md) where you are an [_owner_](orgs.md#the-owners-team).
 * The repository name needs to be unique in that namespace, can be two
-  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`),
-  and underscores (`_`).
+  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`), and underscores (`_`).
+
+  > **Note:**
+  >
+  > You cannot rename a Docker Hub repository once it has been created.
+
 * The description can be up to 100 characters and is used in the search result.
 * You can link a GitHub or Bitbucket account now, or choose to do it later in
   the repository settings.
@@ -35,6 +39,48 @@ When creating a new repository:
 
 After you hit the **Create** button, you can start using `docker push` to push
 images to this repository.
+
+
+## Deleting a repository
+
+1. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and click **Repositories**.
+
+2. Select a repository from the list, click **Settings** and then Delete Repository.
+
+    > **Note:**
+    >
+    > Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.
+
+3. Enter the name of the repository to confirm the deletion and click **Delete**.
+
+## Consolidating a repository
+
+### Personal to personal
+
+When consolidating personal repositories, you can pull private images from the initial repository and push them into another repository that is owned by you. To avoid losing your private images, perform the following steps listed below.
+
+1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} create a Docker ID and select the personal subscription.
+2. Using `docker login` from the CLI, log in using your original Docker ID and pull your private images.
+3. Tag your private images with your newly created Docker ID using:
+`docker tag namespace1/docker101tutorial new_namespace/docker101tutorial`
+4. Using `docker login` from the CLI, log in with your newly created Docker ID, and push your newly tagged private images to your new Docker ID namespace.
+`docker push new_namespace/docker101tutorial`
+5. The private images that existed in your previous namespace are now available in your new Docker ID namespace.
+
+### Personal to an organization
+
+To avoid losing your private images, you can pull your private images from your personal namespace and push them to an organization that is owned by you.
+
+1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Organizations**.
+2. Select the applicable organization and verify that your user account is a member of the organization.
+3. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} using your original Docker ID, and pull your images from the initial namespace.
+`docker pull namespace1/docker101tutorial`
+4. Tag your images with your new organization namespace.
+`docker tag namespace1/docker101tutorial <new_org>/docker101tutorial`
+5. Push your newly tagged images to your new org namespace.
+`docker push new_org/docker101tutorial`
+
+The private images that existed in the initial namespace are now available for your organization.
 
 ## Pushing a Docker container image to Docker Hub
 
@@ -78,7 +124,7 @@ You can also make an existing repository private by going to its **Settings** ta
 You get one private repository for free with your Docker Hub user account (not
 usable for organizations you're a member of). If you need more private
 repositories for your user account, upgrade your Docker Hub plan from your
-[Billing Information](https://hub.docker.com/billing/plan) page.
+[Billing Information](https://hub.docker.com/billing/plan){: target="_blank" rel="noopener" class="_"} page.
 
 Once the private repository is created, you can `push` and `pull` images to and
 from it using Docker.
@@ -93,7 +139,7 @@ You can designate collaborators and manage their access to a private
 repository from that repository's **Settings** page. You can also toggle the
 repository's status between public and private, if you have an available
 repository slot open. Otherwise, you can upgrade your
-[Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
+[Docker Hub](https://hub.docker.com/account/billing-plans/){: target="_blank" rel="noopener" class="_"} plan.
 
 ## Collaborators and their role
 
@@ -171,7 +217,7 @@ There you can see two example results: `centos` and `ansible/centos7-ansible`.
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the top-level namespace for
-[official images](official_images.md). The `/` character separates
+[Docker Official Images](official_images.md). The `/` character separates
 a user's repository from the image name.
 
 Once you've found the image you want, you can download it with `docker pull <imagename>`:
@@ -195,30 +241,3 @@ You now have an image from which you can run containers.
 Your repositories can be starred and you can star repositories in return. Stars
 are a way to show that you like a repository. They are also an easy way of
 bookmarking your favorites.
-
-## Service accounts
-
-A service account is a Docker ID used by a bot for automating the build pipeline
-for containerized applications. Service accounts are typically used in automated
-workflows, and do not share Docker IDs with the members in the Team plan.
-
-To create a new service account for your Team account:
-
-1. Create a new Docker ID.
-2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
-3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
-4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
-5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
-
-To create a new service account for your Pro account:
-
-1. Create a new Docker ID.
-2. Click **Repositories** from the main menu.
-3. Select a repository from the list and go to the **Collaborators** tab.
-4. Add the new Docker ID as a collaborator.
-5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
-
-> **Note**
->
-> If you want a read-only PAT just for your open source repos, or to access
-> official images and other public images, you do not have to grant any access permissions to the new Docker ID.

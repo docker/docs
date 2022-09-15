@@ -12,7 +12,7 @@ This guide follows the steps as described
 [here](index.md#signing-images-with-docker-content-trust) so please read 
 that and understand its prerequisites. 
 
-When working directly with the Notary client, it uses its [own set of environment variables](../../../notary/reference/client-config.md#environment-variables-optional).
+When working directly with the Notary client, it uses its [own set of environment variables](https://github.com/theupdateframework/notary/blob/master/docs/reference/client-config.md#environment-variables-optional){:target="_blank" rel="noopener" class="_"}.
 
 ## Add a delegation private key
 
@@ -20,7 +20,7 @@ To automate importing a delegation private key to the local Docker trust store, 
 need to pass a passphrase for the new key. This passphrase will be required 
 everytime that delegation signs a tag. 
 
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust key load delegation.key --name jeff
@@ -35,7 +35,7 @@ public key, then you will need to use the local Notary Canonical Root Key's
 passphrase to create the repositories trust data. If the repository has already 
 been initiated then you only need the repositories passphrase. 
 
-```
+```console
 # Export the Local Root Key Passphrase if required.
 $ export DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE="rootpassphrase123"
 
@@ -56,7 +56,7 @@ Finally when signing an image, we will need to export the passphrase of the
 signing key. This was created when the key was loaded into the local Docker 
 trust store with `$ docker trust key load`.
 
-```
+```console
 $ export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="mypassphrase123"
 
 $ docker trust sign registry.example.com/admin/demo:1
@@ -75,6 +75,7 @@ you should set the environment variable `DOCKER_CONTENT_TRUST` either manually o
 in a scripted fashion. Consider the simple Dockerfile below.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM docker/trusttest:latest
 RUN echo
 ```
@@ -83,7 +84,7 @@ The `FROM` tag is pulling a signed image. You cannot build an image that has a
 `FROM` that is not either present locally or signed. Given that content trust
 data exists for the tag `latest`, the following build should succeed:
 
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 Using default tag: latest
 latest: Pulling from docker/trusttest
@@ -96,7 +97,7 @@ Digest: sha256:d149ab53f871
 If content trust is enabled, building from a Dockerfile that relies on tag 
 without trust data, causes the build command to fail:
 
-```bash
+```console
 $  docker build -t docker/trusttest:testing .
 unable to process Dockerfile: No trust data for notrust
 ```

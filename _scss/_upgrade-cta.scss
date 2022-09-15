@@ -1,0 +1,27 @@
+.docker-upgrade-cta {
+  body.night & {
+    background-color: change-color($orange-10, $alpha: 0.3);
+    border: 1px solid $orange-10;
+    p, .docker-upgrade-cta__heading { color: $white-0; }
+  }
+
+  body:not(.night) & {
+    background-color: $orange-10;
+    border: 1px solid $orange-20;
+    p, .docker-upgrade-cta__heading { color: inherit; }
+  }
+
+  padding: 16px 25px;
+  margin: 0 0 20px;
+
+  border-radius: 3px;
+
+  .docker-upgrade-cta__heading {
+    font-weight: bold;
+    font-size: 16px;
+
+    font-family: $headings;
+
+    margin-top: 0;
+  }
+}

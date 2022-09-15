@@ -1,10 +1,15 @@
+<!DOCTYPE html>
 <!-- Page generated {{ site.time }}
 {%- if page.edit_url -%}
     {%- assign edit_url = page.edit_url -%}
 {%- else -%}
     {%- assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path -%}
+{%- endif -%}
+{%- if page.issue_url -%}
+    {%- assign issue_url = page.issue_url -%}
+{%- else -%}
+    {%- assign issue_url = "https://github.com/docker/docker.github.io/issues/new?body=File: [" | append: page.path | append: "](" | append: site.docs_url | append: page.url | append: ")" -%}
 {%- endif -%} -->
-<!DOCTYPE html>
 <html lang="en">
 {%- include head.html -%}
 <body class="colums">
@@ -23,12 +28,7 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            {%- unless page.skip_read_time == true -%}
-                            {%- assign words = content | number_of_words -%}
-                            {%- if words >= 360 -%}
-                            <p><em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes</em></p>
-                            {%- endif -%}
-                            {%- endunless -%}
+                            <p>{%- include read_time.html -%}</p>
                             {{ content }}
                             {%- unless page.notags == true -%}
                             {%- assign keywords = page.keywords | split:"," -%}
@@ -50,7 +50,7 @@
                     <nav class="col-nav">
                         <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
                             <div id="navbar" class="nav-sidebar">
-                                <ul class="nav jsTOCHorizontal hidden-md hidden-lg"></ul>
+                                <ul class="nav hidden-md hidden-lg"></ul>
                                 <ul class="nav" id="jsTOCLeftNav"></ul>
                             </div>
                         </div>
@@ -60,10 +60,6 @@
                             <div class="toc-nav">
                                 <div class="feedback-links">
                                     <ul>
-                                        {%- if edit_url != "" -%}
-                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>
-                                        {%- endif -%}
-                                        <li><a href="https://github.com/docker/docker.github.io/issues/new?body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
                                         <li>{%- include theme-switch.html -%}</li>
                                     </ul>
                                 </div>
@@ -71,9 +67,18 @@
                                 {%- assign my_min = page.toc_min | default: site.toc_min | default: 2 -%}
                                 {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
                                 {%- assign my_name = page.url | default: "unnamed" -%}
-                                <div id="side-toc-title">On this page:</div>
+                                <div id="side-toc-title">Contents:</div>
                                 {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
                                 {%- endunless -%}
+                                <div class="feedback-links">
+                                    <ul>
+                                        {%- if edit_url != "" -%}
+                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this page</a></li>
+                                        {%- endif -%}
+                                        {%- if issue_url != "" -%}
+                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request changes</a></li>
+                                        {%- endif -%}
+                                    </ul>
                             </div>
                         </div>
                     </div>

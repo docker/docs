@@ -31,8 +31,7 @@ workflow.  They need to be
 
 **Note**: Prior to Docker Engine 1.11, the snapshot key was also generated and stored
 locally client-side.
-Use the Notary CLI to [manage your snapshot key locally again](../../../notary/advanced_usage.md#rotate-keys)
-for repositories created with newer versions of Docker.
+Use the Notary CLI to [manage your snapshot key locally again](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys){:target="_blank" rel="noopener" class="_"} for repositories created with newer versions of Docker.
 
 ## Choose a passphrase
 
@@ -48,13 +47,16 @@ All the Docker trust keys are stored encrypted using the passphrase you provide
 on creation. Even so, you should still take care of the location where you back them up.
 Good practice is to create two encrypted USB keys.
 
-It is very important that you back up your keys to a safe, secure location. Loss
-of the repository key is recoverable; loss of the root key is not.
+> **WARNING**
+>
+> It is **very important** that you back up your keys to a safe, secure location.
+The loss of the repository key is recoverable, but the loss of the root key is not.
+{:.warning}
 
 The Docker client stores the keys in the `~/.docker/trust/private` directory.
 Before backing them up, you should `tar` them into an archive:
 
-```bash
+```console
 $ umask 077; tar -zcvf private_keys_backup.tar.gz ~/.docker/trust/private; umask 022
 ```
 
@@ -64,23 +66,25 @@ Docker Content Trust can store and sign with root keys from a Yubikey 4. The
 Yubikey is prioritized over keys stored in the filesystem. When you initialize a
 new repository with content trust, Docker Engine looks for a root key locally. If a
 key is not found and the Yubikey 4 exists, Docker Engine creates a root key in the
-Yubikey 4. Consult the [Notary documentation](../../../notary/advanced_usage.md#use-a-yubikey)
+Yubikey 4. Consult the [Notary documentation](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#use-a-yubikey){:target="_blank" rel="noopener" class="_"}
 for more details.
 
 Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 
-## Lost keys
+## Key loss
 
-If a publisher loses keys it means losing the ability to sign trusted content for
-your repositories.  If you lose a key, send an email to [Docker Hub
-Support](mailto:hub-support@docker.com) to reset the repository
-state.
+> **WARNING**
+>
+> If a publisher loses keys it means losing the ability to sign images for the repositories in
+question. If you lose a key, send an email to [Docker Hub Support](mailto:hub-support@docker.com).
+As a reminder, the loss of a root key is not recoverable.
+{:.warning}
 
-This loss also requires **manual intervention** from every consumer that pulled
-the tagged image prior to the loss. Image consumers would get an error for
-content that they already downloaded:
+This loss also requires **manual intervention** from every consumer that used a signed
+tag from this repository prior to the loss.  
+Image consumers get the following error for content previously downloaded from the affected repo(s):
 
-```
+```console
 Warning: potential malicious behavior - trust data has insufficient signatures for remote repository docker.io/my/image: valid signatures did not meet threshold
 ```
 

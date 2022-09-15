@@ -29,7 +29,7 @@ only one container.
 To use the `json-file` driver as the default logging driver, set the `log-driver`
 and `log-opts` keys to appropriate values in the `daemon.json` file, which is
 located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\` on Windows Server. For more information about
+`C:\ProgramData\docker\config\` on Windows Server. If the file does not exist, create it first. For more information about
 configuring Docker using `daemon.json`, see
 [daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
@@ -58,7 +58,7 @@ Existing containers do not use the new logging configuration.
 You can set the logging driver for a specific container by using the
 `--log-driver` flag to `docker container create` or `docker run`:
 
-```bash
+```console
 $ docker run \
       --log-driver json-file --log-opt max-size=10m \
       alpine echo hello world
@@ -84,6 +84,6 @@ The `json-file` logging driver supports the following logging options:
 This example starts an `alpine` container which can have a maximum of 3 log
 files no larger than 10 megabytes each.
 
-```bash
+```console
 $ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```

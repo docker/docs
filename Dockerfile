@@ -1,102 +1,125 @@
+# syntax=docker/dockerfile:1
+
 # This Dockerfile builds the docs for https://docs.docker.com/
 # from the master branch of https://github.com/docker/docker.github.io
-#
-# Here is the sequence:
-# 1.  Set up base stages for building and deploying
-# 2.  Collect and build the reference documentation (from upstream resources)
-# 3.  Build static HTML from the current branch
-# 4.  Build the final image, combining the reference docs and current version
-#     of the documentation
-#
-# When the image is run, it starts Nginx and serves the docs at port 4000
 
-# Jekyll environment (development/production)
+# Use same ruby version as the one in .ruby-version
+# that is used by Netlify
+ARG RUBY_VERSION=2.7.6
+# Same as the one in Gemfile.lock
+ARG BUNDLER_VERSION=2.3.13
+
 ARG JEKYLL_ENV=development
+ARG DOCS_URL=http://localhost:4000
 
-# Engine
-# TODO change to 20.10 branch, once created
-ARG ENGINE_BRANCH="master"
+# Base stage for building
+FROM ruby:${RUBY_VERSION}-alpine AS base
+WORKDIR /src
+RUN apk add --no-cache bash build-base git
 
-# Distribution
-ARG DISTRIBUTION_BRANCH="release/2.7"
+# Gem stage will install bundler used as dependency manager
+# for our dependencies in Gemfile for Jekyll
+FROM base AS gem
+ARG BUNDLER_VERSION
+COPY Gemfile* .
+RUN gem uninstall -aIx bundler \
+  && gem install bundler -v ${BUNDLER_VERSION} \
+  && bundle install --jobs 4 --retry 3
 
-# Compose CLI
-ARG COMPOSE_CLI_BRANCH="main"
+# Vendor Gemfile for Jekyll
+FROM gem AS vendored
+ARG BUNDLER_VERSION
+RUN bundle update \
+  && mkdir /out \
+  && cp Gemfile.lock /out
 
-###
-# Set up base stages for building and deploying
-###
-FROM starefossen/github-pages:198 AS builderbase
-ENV TARGET=/usr/share/nginx/html
-WORKDIR /usr/src/app/md_source/
-
-# Set vars used by fetch-upstream-resources.sh script as an environment variable,
-# so that they are persisted in the image for use in later stages.
-ARG ENGINE_BRANCH
-ENV ENGINE_BRANCH=${ENGINE_BRANCH}
-
-ARG DISTRIBUTION_BRANCH
-ENV DISTRIBUTION_BRANCH=${DISTRIBUTION_BRANCH}
-
-ARG COMPOSE_CLI_BRANCH
-ENV COMPOSE_CLI_BRANCH=${COMPOSE_CLI_BRANCH}
-
-# Fetch upstream resources (reference documentation)
-# Only add the files that are needed to build these reference docs, so that these
-# docs are only rebuilt if changes were made to ENGINE_BRANCH or DISTRIBUTION_BRANCH.
-# Disable caching (docker build --no-cache) to force updating these docs.
-FROM alpine AS upstream-resources
-RUN apk add --no-cache subversion wget
-WORKDIR /usr/src/app/md_source/
-COPY ./_scripts/fetch-upstream-resources.sh ./_scripts/
-ARG ENGINE_BRANCH
-ARG DISTRIBUTION_BRANCH
-ARG COMPOSE_CLI_BRANCH
-RUN ./_scripts/fetch-upstream-resources.sh .
-
+# Stage used to output the vendored Gemfile.lock:
+# > make vendor
+# or
+# > docker buildx bake vendor
+FROM scratch AS vendor
+COPY --from=vendored /out /
 
 # Build the static HTML for the current docs.
 # After building with jekyll, fix up some links
-FROM builderbase AS current
-COPY . .
-COPY --from=upstream-resources /usr/src/app/md_source/. ./
-# substitute the "{site.latest_engine_api_version}" in the title for the latest
-# API docs, based on the latest_engine_api_version parameter in _config.yml
-RUN ./_scripts/update-api-toc.sh
+FROM gem AS generate
 ARG JEKYLL_ENV
-RUN echo "Building docs for ${JEKYLL_ENV} environment"
-RUN set -eu; \
- if [ "${JEKYLL_ENV}" = "production" ]; then \
-    jekyll build --profile -d ${TARGET} --config _config.yml,_config_production.yml; \
-    sed -i 's#<loc>/#<loc>https://docs.docker.com/#' "${TARGET}/sitemap.xml"; \
- else \
-    jekyll build --profile -d ${TARGET}; \
-    echo '[]' > ${TARGET}/js/metadata.json; \
- fi; \
- find ${TARGET} -type f -name '*.html' | while read i; do sed -i 's#\(<a[^>]* href="\)https://docs.docker.com/#\1/#g' "$i"; done;
+ARG DOCS_URL
+ENV TARGET=/out
+RUN --mount=type=bind,target=.,rw \
+    --mount=type=cache,target=/src/.jekyll-cache <<EOT
+  set -eu
+  CONFIG_FILES=_config.yml$([ "$JEKYLL_ENV" = "production" ] && echo ",_config_production.yml" || true)
+  set -x
+  bundle exec jekyll build --profile -d ${TARGET} --config ${CONFIG_FILES}
+EOT
 
+# htmlproofer checks for broken links
+FROM gem AS htmlproofer-base
+RUN --mount=type=bind,from=generate,source=/out,target=_site <<EOF
+  htmlproofer ./_site \
+    --disable-external \
+    --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" \
+    --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" \
+    --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/" > /results 2>&1
+  rc=$?
+  if [[ $rc -eq 0 ]]; then
+    echo -n > /results
+  fi
+EOF
 
-# This stage only contains the generated files. It can be used to host the
-# documentation on a non-containerised service (e.g. to deploy to an s3 bucket).
-# When using BuildKit, use the '--output' option to build the files and to copy
-# them to your local filesystem.
-#
-# DOCKER_BUILDKIT=1 docker build --target=deploy-source --output=./_site .
-FROM scratch AS deploy-source
-COPY --from=current /usr/share/nginx/html /
+FROM htmlproofer-base as htmlproofer
+RUN <<EOF
+  cat /results
+  [ ! -s /results ] || exit 1
+EOF
 
-# Final stage, which includes nginx, and the current docs.
-#
-# To build current docs:
-# DOCKER_BUILDKIT=1 docker build -t docs .
+FROM scratch as htmlproofer-output
+COPY --from=htmlproofer-base /results /results
+
+# mdl is a lint tool for markdown files
+FROM gem AS mdl-base
+ARG MDL_JSON
+ARG MDL_STYLE
+RUN --mount=type=bind,target=. <<EOF
+  mdl --ignore-front-matter ${MDL_JSON:+'--json'} --style=${MDL_STYLE:-'.markdownlint.rb'} $( \
+    find '.' -name '*.md' \
+      -not -path './registry/*' \
+      -not -path './desktop/extensions-sdk/*' \
+  ) > /results
+  rc=$?
+  if [[ $rc -eq 0 ]]; then
+    echo -n > /results
+  fi
+EOF
+
+FROM mdl-base as mdl
+RUN <<EOF
+  cat /results
+  [ ! -s /results ] || exit 1
+EOF
+
+FROM scratch as mdl-output
+COPY --from=mdl-base /results /results
+
+# Release the generated files in a scratch image
+# Can be output to your host with:
+# > make release
+# or
+# > docker buildx bake release
+FROM scratch AS release
+COPY --from=generate /out /
+
+# Create a runnable nginx instance with generated HTML files.
+# When the image is run, it starts Nginx and serves the docs at port 4000:
+# > make deploy
+# or
+# > docker-compose up --build
 FROM nginx:alpine AS deploy
-ENV TARGET=/usr/share/nginx/html
-WORKDIR $TARGET
-
-COPY --from=current  /usr/share/nginx/html .
-
-# Configure NGINX
+COPY --from=release / /usr/share/nginx/html
 COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
 ARG JEKYLL_ENV
 ENV JEKYLL_ENV=${JEKYLL_ENV}
 CMD echo -e "Docker docs are viewable at:\nhttp://0.0.0.0:4000 (build target: ${JEKYLL_ENV})"; exec nginx -g 'daemon off;'
+
+FROM deploy

@@ -1,17 +1,23 @@
 ---
-title: "Image building tips"
+title: "Image-building best practices"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Tips for building the images for our application
 ---
-## Security Scanning
 
-When you have built an image, it is good practice to scan it for security vulnerabilities using the `docker scan` command.
-Docker has partnered with [Snyk](http://snyk.io) to provide the vulnerability scanning service.
+## Security scanning
+
+When you have built an image, it is a good practice to scan it for security vulnerabilities using the `docker scan` command.
+Docker has partnered with [Snyk](https://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
+
+> **Note**
+> 
+> You must be logged in to Docker Hub to scan your images. Run the command `docker scan --login`, and then scan your images using
+> `docker scan <image-name>`.
 
 For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type
 
-```bash
-docker scan getting-started
+```console
+$ docker scan getting-started
 ```
 
 The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new
@@ -39,15 +45,15 @@ vulnerabilities are discovered, but it might look something like this:
 The output lists the type of vulnerability, a URL to learn more, and importantly which version of the relevant library
 fixes the vulnerability.
 
-There are several other options, which you can read about in the [docker scan documentation](https://docs.docker.com/engine/scan/).
+There are several other options, which you can read about in the [docker scan documentation](../engine/scan/index.md).
 
-As well as scanning your newly built image on the command line, you can also [configure Docker Hub](https://docs.docker.com/docker-hub/vulnerability-scanning/)
+As well as scanning your newly built image on the command line, you can also [configure Docker Hub](../docker-hub/vulnerability-scanning.md)
 to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.
 
 ![Hub vulnerability scanning](images/hvs.png){: style=width:75% }
 {: .text-center }
 
-## Image Layering
+## Image layering
 
 Did you know that you can look at what makes up an image? Using the `docker image history`
 command, you can see the command that was used to create each layer within an image.
@@ -55,8 +61,8 @@ command, you can see the command that was used to create each layer within an im
 1. Use the `docker image history` command to see the layers in the `getting-started` image you
    created earlier in the tutorial.
 
-    ```bash
-    docker image history getting-started
+    ```console
+    $ docker image history getting-started
     ```
 
     You should get output that looks something like this (dates/IDs may be different).
@@ -82,15 +88,14 @@ command, you can see the command that was used to create each layer within an im
     the newest layer at the top. Using this, you can also quickly see the size of each layer, helping 
     diagnose large images.
 
-1. You'll notice that several of the lines are truncated. If you add the `--no-trunc` flag, you'll get the
+2. You'll notice that several of the lines are truncated. If you add the `--no-trunc` flag, you'll get the
    full output (yes... funny how you use a truncated flag to get untruncated output, huh?)
 
-    ```bash
-    docker image history --no-trunc getting-started
+    ```console
+    $ docker image history --no-trunc getting-started
     ```
 
-
-## Layer Caching
+## Layer caching
 
 Now that you've seen the layering in action, there's an important lesson to learn to help decrease build
 times for your container images.
@@ -100,7 +105,9 @@ times for your container images.
 Let's look at the Dockerfile we were using one more time...
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12-alpine
+RUN apk add --no-cache python2 g++ make
 WORKDIR /app
 COPY . .
 RUN yarn install --production
@@ -119,7 +126,9 @@ a change to the `package.json`. Make sense?
 1. Update the Dockerfile to copy in the `package.json` first, install dependencies, and then copy everything else in.
 
     ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM node:12-alpine
+    RUN apk add --no-cache python2 g++ make
     WORKDIR /app
     COPY package.json yarn.lock ./
     RUN yarn install --production
@@ -127,7 +136,7 @@ a change to the `package.json`. Make sense?
     CMD ["node", "src/index.js"]
     ```
 
-1. Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
+2. Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
 
     ```ignore
     node_modules
@@ -135,17 +144,17 @@ a change to the `package.json`. Make sense?
 
     `.dockerignore` files are an easy way to selectively copy only image relevant files.
     You can read more about this
-    [here](https://docs.docker.com/engine/reference/builder/#dockerignore-file).
+    [here](../engine/reference/builder.md#dockerignore-file).
     In this case, the `node_modules` folder should be omitted in the second `COPY` step because otherwise,
     it would possibly overwrite files which were created by the command in the `RUN` step.
     For further details on why this is recommended for Node.js applications and other best practices,
     have a look at their guide on
-    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
+    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/){:target="_blank" rel="noopener" class="_"}.
 
-1. Build a new image using `docker build`.
+3. Build a new image using `docker build`.
 
-    ```bash
-    docker build -t getting-started .
+    ```console
+    $ docker build -t getting-started .
     ```
 
     You should see output like this...
@@ -183,9 +192,9 @@ a change to the `package.json`. Make sense?
 
     You'll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.
 
-1. Now, make a change to the `src/static/index.html` file (like change the `<title>` to say "The Awesome Todo App").
+4. Now, make a change to the `src/static/index.html` file (like change the `<title>` to say "The Awesome Todo App").
 
-1. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
+5. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
 
     ```plaintext
     Sending build context to Docker daemon  219.1kB
@@ -214,8 +223,7 @@ a change to the `package.json`. Make sense?
     `Using cache`. So, hooray! We're using the build cache. Pushing and pulling this image and updates to it
     will be much faster as well. Hooray!
 
-
-## Multi-Stage Builds
+## Multi-stage builds
 
 While we're not going to dive into it too much in this tutorial, multi-stage builds are an incredibly powerful
 tool to help use multiple stages to create an image. There are several advantages for them:
@@ -223,13 +231,14 @@ tool to help use multiple stages to create an image. There are several advantage
 - Separate build-time dependencies from runtime dependencies
 - Reduce overall image size by shipping _only_ what your app needs to run
 
-### Maven/Tomcat Example
+### Maven/Tomcat example
 
 When building Java-based applications, a JDK is needed to compile the source code to Java bytecode. However,
 that JDK isn't needed in production. Also, you might be using tools like Maven or Gradle to help build the app.
 Those also aren't needed in our final image. Multi-stage builds help.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM maven AS build
 WORKDIR /app
 COPY . .
@@ -243,14 +252,14 @@ In this example, we use one stage (called `build`) to perform the actual Java bu
 stage (starting at `FROM tomcat`), we copy in files from the `build` stage. The final image is only the last stage
 being created (which can be overridden using the `--target` flag).
 
-
-### React Example
+### React example
 
 When building React applications, we need a Node environment to compile the JS code (typically JSX), SASS stylesheets,
 and more into static HTML, JS, and CSS. If we aren't doing server-side rendering, we don't even need a Node environment
 for our production build. Why not ship the static resources in a static nginx container?
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:12 AS build
 WORKDIR /app
 COPY package* yarn.lock ./
@@ -265,7 +274,6 @@ COPY --from=build /app/build /usr/share/nginx/html
 
 Here, we are using a `node:12` image to perform the build (maximizing layer caching) and then copying the output
 into an nginx container. Cool, huh?
-
 
 ## Recap
 

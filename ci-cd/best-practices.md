@@ -36,10 +36,11 @@ The other change you may want to make is only have your release images go to Doc
 
 ## Next steps
 
-We know there are a lot more tips and tricks for using Docker in CI, however, we think these are some of the important things, considering the recent Docker Hub rate limit updates.
+We know there are a lot more tips and tricks for using Docker in CI.
+However, we think these are some of the important things, considering the [Docker Hub rate limits](../docker-hub/download-rate-limit.md).
 
   > **Note**
   >
-  > If you are still experiencing issues with pull limits after you are authenticated, you can consider upgrading to either a [Pro or a Team account](https://www.docker.com/pricing){:target="_blank" rel="noopener" class="_"} .
+  > If you are still experiencing issues with pull limits after you are authenticated, you can consider upgrading to a [Docker subscription](https://www.docker.com/pricing){:target="_blank" rel="noopener" class="_"}.
 
 For information on how to configure GitHub Actions CI/CD pipeline, see [Configure GitHub Actions](github-actions.md).

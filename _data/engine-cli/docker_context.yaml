@@ -1,6 +1,6 @@
 command: docker context
 short: Manage contexts
-long: Manage contexts
+long: Manage contexts.
 usage: docker context
 pname: docker
 plink: docker.yaml

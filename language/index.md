@@ -1,6 +1,6 @@
 ---
 description: :Language-specific getting started guides overview
-keywords: guides, docker, language, node, java, python
+keywords: guides, docker, language, node, java, python, go, golang
 title: Overview
 toc_min: 1
 toc_max: 2
@@ -12,10 +12,10 @@ In addition to the language-specific modules, Docker documentation also provides
 
 For more information, refer to the following topics:
 
-* [Best practices for writing Dockerfiles](/develop/develop-images/dockerfile_best-practices/)
-* [Docker development best practices](/develop/dev-best-practices/)
-* [Build images with BuildKit](/develop-images/build_enhancements/)
-* [Manage images](/develop/develop-images/image_management/)
+* [Best practices for writing Dockerfiles](../develop/develop-images/dockerfile_best-practices.md)
+* [Docker development best practices](../develop/dev-best-practices.md)
+* [Build images with BuildKit](../develop/develop-images/build_enhancements.md)
+* [Manage images](../develop/develop-images/image_management.md)
 
 ## Language-specific getting started guides
 
@@ -23,27 +23,18 @@ Learn how to set up your Docker environment and start containerizing your applic
 
 <div class="component-container">
     <!--start row-->
-    <div class="row" style="display: flex; align-items: center">
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
-                <div class="component-icon">
-                    <a href="/language/nodejs/"><img src="/language/images/nodejs.png" alt="Develop with Node"></a>
-                </div>
+    <div class="row" style="display: flex; align-items: center; flex-wrap: nowrap;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/nodejs/"><img src="/language/images/nodejs.png" alt="Develop with Node"></a>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
-        <a href="/language/python/">
-                <div class="component-icon">
-                    <img src="/language/images/python.png" alt="Develop with Python">
-                </div>
-            </a>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/python/"><img src="/language/images/python.png" alt="Develop with Python"></a>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-4 block" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
-                <div class="component-icon">
-                    <a href="/language/java/"><img src="/language/images/java.png" alt="Develop with Java"></a>
-                </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/java/"><img src="/language/images/java.png" alt="Develop with Java"></a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" style="margin: 0 10px;box-shadow: 0 3px 6px #0b214a17, 0 -2px 2px #0b214a08; height: 140px; display: flex; align-items: center">
+            <a href="/language/golang/"><img src="/language/images/golang.png" alt="Develop with Go"></a>
         </div>
     </div>
 </div>
-
-To request a guide for other languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
-
-<br />

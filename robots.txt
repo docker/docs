@@ -1,3 +1,7 @@
+---
+layout: null
+---
+{%- if jekyll.environment == 'production' -%}
 User-agent: *
 
 # Docker Engine archives
@@ -25,4 +29,10 @@ Disallow: /ee/
 
 Disallow: /apidocs/v*
 
-Sitemap: https://docs.docker.com/sitemap.xml
+Sitemap: {{ site.docs_url }}/sitemap.xml
+{%- else -%}
+# Disable all indexing on staging websites and Netlify previews to prevent
+# them showing up in search results.
+User-agent: *
+Disallow: /
+{%- endif %}

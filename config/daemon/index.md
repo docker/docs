@@ -2,22 +2,26 @@
 description: Configuring and troubleshooting the Docker daemon
 keywords: docker, daemon, configuration, troubleshooting
 redirect_from:
-- /engine/articles/chef/
-- /engine/articles/configuring/
-- /engine/articles/dsc/
-- /engine/articles/puppet/
-- /engine/admin/configuring/
-- /engine/admin/
-- /engine/admin/ansible/
-- /engine/admin/chef/
-- /engine/admin/dsc/
-- /engine/admin/puppet/
-- /engine/userguide/
+- /articles/chef/
+- /articles/configuring/
+- /articles/dsc/
+- /articles/puppet/
 - /config/thirdparty/
 - /config/thirdparty/ansible/
 - /config/thirdparty/chef/
 - /config/thirdparty/dsc/
 - /config/thirdparty/puppet/
+- /engine/admin/
+- /engine/admin/ansible/
+- /engine/admin/chef/
+- /engine/admin/configuring/
+- /engine/admin/dsc/
+- /engine/admin/puppet/
+- /engine/articles/chef/
+- /engine/articles/configuring/
+- /engine/articles/dsc/
+- /engine/articles/puppet/
+- /engine/userguide/
 
 title: Configure and troubleshoot the Docker daemon
 ---
@@ -48,7 +52,7 @@ configuration.
 When you start Docker this way, it runs in the foreground and sends its logs
 directly to your terminal.
 
-```bash
+```console
 $ dockerd
 
 INFO[0000] +job init_networkdriver()
@@ -98,8 +102,8 @@ This can be useful for troubleshooting problems.
 Here's an example of how to manually start the Docker daemon, using the same
 configurations as above:
 
-```bash
-dockerd --debug \
+```console
+$ dockerd --debug \
   --tls=true \
   --tlscert=/var/docker/server.pem \
   --tlskey=/var/docker/serverkey.pem \
@@ -109,8 +113,8 @@ dockerd --debug \
 You can learn what configuration options are available in the
 [dockerd reference docs](../../engine/reference/commandline/dockerd.md), or by running:
 
-```
-dockerd --help
+```console
+$ dockerd --help
 ```
 
 Many specific configuration options are discussed throughout the Docker
@@ -220,15 +224,30 @@ The daemon logs may help you diagnose problems. The logs may be saved in one of
 a few locations, depending on the operating system configuration and the logging
 subsystem used:
 
-| Operating system      | Location                                                                                 |
-|:----------------------|:-----------------------------------------------------------------------------------------|
-| RHEL, Oracle Linux    | `/var/log/messages`                                                                      |
-| Debian                | `/var/log/daemon.log`                                                                    |
-| Ubuntu 16.04+, CentOS | Use the command `journalctl -u docker.service` or `/var/log/syslog`                      |
-| Ubuntu 14.10-         | `/var/log/upstart/docker.log`                                                            |
-| macOS (Docker 18.01+) | `~/Library/Containers/com.docker.docker/Data/vms/0/console-ring`                         |
-| macOS (Docker <18.01) | `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring` |
-| Windows               | `AppData\Local`                                                                          |
+| Operating system                    | Location                                                                                                                                 |
+|:------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|
+| Linux                               | Use the command `journalctl -xu docker.service` (or read `/var/log/syslog` or `/var/log/messages`, depending on your Linux Distribution) |
+| macOS (`dockerd` logs)              | `~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log`                                                                         |
+| macOS (`containerd` logs)           | `~/Library/Containers/com.docker.docker/Data/log/vm/containerd.log`                                                                      |
+| Windows (WSL2) (`dockerd` logs)     | `AppData\Roaming\Docker\log\vm\dockerd.log`                                                                                              |
+| Windows (WSL2) (`containerd` logs)  | `AppData\Roaming\Docker\log\vm\containerd.log`                                                                                           |
+| Windows (Windows containers)        | Logs are in the Windows Event Log                                                                                                        |
+
+To view the `dockerd` logs on macOS, open a terminal Window, and use the `tail`
+command with the `-f` flag to "follow" the logs. Logs will be printed until you
+terminate the command using `CTRL+c`:
+
+```console
+$ tail -f ~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log
+2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.497642089Z" level=debug msg="attach: stdout: begin"
+2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.497714291Z" level=debug msg="attach: stderr: begin"
+2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.499798390Z" level=debug msg="Calling POST /v1.41/containers/35fc5ec0ffe1ad492d0a4fbf51fd6286a087b89d4dd66367fa3b7aec70b46a40/wait?condition=removed"
+2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.518403686Z" level=debug msg="Calling GET /v1.41/containers/35fc5ec0ffe1ad492d0a4fbf51fd6286a087b89d4dd66367fa3b7aec70b46a40/json"
+2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.527074928Z" level=debug msg="Calling POST /v1.41/containers/35fc5ec0ffe1ad492d0a4fbf51fd6286a087b89d4dd66367fa3b7aec70b46a40/start"
+2021-07-28T10:21:21Z dockerd time="2021-07-28T10:21:21.528203579Z" level=debug msg="container mounted via layerStore: &{/var/lib/docker/overlay2/6e76ffecede030507fcaa576404e141e5f87fc4d7e1760e9ce5b52acb24
+...
+^C
+```
 
 
 ### Enable debugging
@@ -259,7 +278,7 @@ Docker platform.
 3.  Send a `HUP` signal to the daemon to cause it to reload its configuration.
     On Linux hosts, use the following command.
 
-    ```bash
+    ```console
     $ sudo kill -SIGHUP $(pidof dockerd)
     ```
 
@@ -277,7 +296,7 @@ by sending a `SIGUSR1` signal to the daemon.
 
 - **Linux**:
 
-  ```bash
+  ```console
   $ sudo kill -SIGUSR1 $(pidof dockerd)
   ```
 
@@ -305,10 +324,12 @@ The Docker daemon log can be viewed by using one of the following methods:
 - `/var/log/messages`, `/var/log/daemon.log`, or `/var/log/docker.log` on older
   Linux systems
 
-> **Note**: It is not possible to manually generate a stack trace on Docker Desktop for
-> Mac or Docker Desktop for Windows. However, you can click the Docker taskbar icon and
-> choose **Diagnose and feedback** to send information to Docker if you run into
-> issues.
+> **Note**
+> 
+> It is not possible to manually generate a stack trace on Docker Desktop for
+> Mac or Docker Desktop for Windows. However, you can click the Docker taskbar
+> icon and choose **Troubleshoot** to send information to Docker if you
+> run into issues.
 
 Look in the Docker logs for a message like the following:
 

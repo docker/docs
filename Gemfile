@@ -1,43 +1,23 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-# Update me once in a while: https://github.com/github/pages-gem/releases
-# Please ensure, before upgrading, that this version exists as a tag in starefossen/github-pages here:
-# https://hub.docker.com/r/starefossen/github-pages/tags/
-#
-# Fresh install?
-#
-# Windows:
-# Install Ruby 2.3.3 x64 and download the Development Kit for 64-bit:
-# https://rubyinstaller.org/downloads/
-#
-# Run this to install devkit after extracting:
-# ruby <path_to_devkit>/dk.rb init
-# ruby <path_to_devkit>/dk.rb install
-#
-# then:
-# gem install bundler
-# bundle install
-#
-# Mac/Linux:
-# Install Ruby 2.3.x and then:
-# gem install bundler
-# bundle install
-#
-# ---------------------
-# Upgrading? Probably best to reset your environment:
-#
-# Remove all gems:
-# gem uninstall -aIx
-#
-# (If Windows, do the dk.rb bits above, then go to the next step below)
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
-# Install anew:
-# gem install bundler
-# bundle install
+gem 'jekyll', '4.2.2'
+group :jekyll_plugins do
+  gem 'jekyll-redirect-from'
+  gem 'jekyll-relative-links'
+  gem 'jekyll-sitemap'
+end
 
-# This only affects interactive builds (local build, Netlify) and not the
-# live site deploy, which uses the Dockerfiles found in the publish-tools
-# branch.
+# FIXME: This is a workaround for a bug in rouge console lexer
+#  introduced by https://github.com/rouge-ruby/rouge/pull/1779
+#  more info: https://github.com/docker/docker.github.io/issues/14788
+gem 'rouge', '3.27.0'
 
-gem "github-pages", "198"
-gem 'wdm' if Gem.win_platform?
+gem 'archive-zip', '0.12.0'
+gem 'front_matter_parser', '1.0.1'
+gem 'html-proofer', '3.19.4'
+gem 'mdl', '0.11.0'
+gem 'octopress-hooks', '2.6.2'
+gem 'rake', '13.0.6'

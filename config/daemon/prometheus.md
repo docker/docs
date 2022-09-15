@@ -19,6 +19,12 @@ container, and monitor your Docker instance using Prometheus.
 Currently, you can only monitor Docker itself. You cannot currently monitor your
 application using the Docker target.
 
+## Prerequisites
+
+1.  One or more Docker engines are joined into a Docker swarm, using `docker
+    swarm init` on one manager and `docker swarm join` on other managers and
+    worker nodes.
+2.  You need an internet connection to pull the Prometheus image.
 
 ## Configure Docker
 
@@ -53,14 +59,6 @@ Docker now exposes Prometheus-compatible metrics on port 9323.
 ## Configure and run Prometheus
 
 Prometheus runs as a Docker service on a Docker swarm.
-
-> **Prerequisites**
->
-> 1.  One or more Docker engines are joined into a Docker swarm, using `docker swarm init`
->     on one manager and `docker swarm join` on other managers and worker nodes.
->
-> 2.  You need an internet connection to pull the Prometheus image.
-
 
 Copy one of the following configuration files and save it to
 `/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This
@@ -210,7 +208,7 @@ Next, start a single-replica Prometheus service using this configuration.
 
 <div id="linux-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker service create --replicas 1 --name my-prometheus \
     --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
     --publish published=9090,target=9090,protocol=tcp \
@@ -220,7 +218,7 @@ $ docker service create --replicas 1 --name my-prometheus \
 </div><!-- linux -->
 <div id="mac-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker service create --replicas 1 --name my-prometheus \
     --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
     --publish published=9090,target=9090,protocol=tcp \
@@ -263,7 +261,7 @@ To make the graph more interesting, create some network actions by starting
 a service with 10 tasks that just ping Docker non-stop (you can change the
 ping target to anything you like):
 
-```bash
+```console
 $ docker service create \
   --replicas 10 \
   --name ping_service \
@@ -278,7 +276,7 @@ your graph.
 When you are ready, stop and remove the `ping_service` service, so that you
 are not flooding a host with pings for no reason.
 
-```bash
+```console
 $ docker service remove ping_service
 ```
 

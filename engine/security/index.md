@@ -81,8 +81,8 @@ started in 2006, and initially merged in kernel 2.6.24.
 
 Running containers (and applications) with Docker implies running the
 Docker daemon. This daemon requires `root` privileges unless you opt-in
-to [Rootless mode](rootless.md) (experimental), and you should therefore
-be aware of some important details.
+to [Rootless mode](rootless.md), and you should therefore be aware of
+some important details.
 
 First of all, **only trusted users should be allowed to control your
 Docker daemon**. This is a direct consequence of some powerful Docker
@@ -116,7 +116,7 @@ Note that even if you have a firewall to limit accesses to the REST API
 endpoint from other hosts in the network, the endpoint can be still accessible
 from containers, and it can easily result in the privilege escalation.
 Therefore it is *mandatory* to secure API endpoints with 
-[HTTPS and certificates](https.md).
+[HTTPS and certificates](protect-access.md).
 It is also recommended to ensure that it is reachable only from a trusted
 network or VPN.
 
