@@ -54,6 +54,10 @@ Worker nodes execute tasks.
 
 Online storage for Docker images.
 
+### Updating registry
+
+Compiling docker images
+
 #### Repository
 
 Lets users share container images with their team, customers, or Docker community.
