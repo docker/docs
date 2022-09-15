@@ -73,34 +73,32 @@ The command will create a new directory called `src`. View the `src` directory a
 
 ## Test the application
 
-Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the `src` directory and use the `dotnet watch run` command.
+Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the `src` directory and use the `dotnet run` command.
 
 ```console
 $ cd /path/to/dotnet-docker/src
-$ dotnet watch run
+$ dotnet run –urls http://localhost:5000
 ```
 
 Output similar to the following appears.
 
 ```console
-dotnet watch 🔥 Hot reload enabled. For a list of supported edits, see https://aka.ms/dotnet/hot-reload. 
-  💡 Press "Ctrl + R" to restart.
-dotnet watch 🔧 Building...
-  Determining projects to restore...
-  All projects are up-to-date for restore.
-  myWebApp -> \Users\path\dotnet-docker\src\bin\Debug\net6.0\myWebApp.dll
-dotnet watch 🚀 Started
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://localhost:5267
+Building...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+    Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when the container is destroyed.
+warn: Microsoft.AspNetCore.Server.Kestrel[0]
+     Unable to bind to http://localhost:5000 on the IPv6 loopback interface: 'Cannot assign requested address'.
 info: Microsoft.Hosting.Lifetime[0]
-      Application started. Press Ctrl+C to shut down.
+    Now listening on: http://localhost:5000
 info: Microsoft.Hosting.Lifetime[0]
-      Hosting environment: Development
+    Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: \path\to\dotnet-docker\src\
+    Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+    Content root path: /src
 ```
 
-Your web browser will open and display the following page.
+Open a web browser and access `http://localhost:5000`. The following page should appear.
 
 ![image of app page](./images/dotnet-app-verify-build.png)
 
