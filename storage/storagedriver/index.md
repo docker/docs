@@ -62,7 +62,7 @@ _adding_, and _removing_ files will result in a new layer. In the example above,
 the `$HOME/.cache` directory is removed, but will still be available in the
 previous layer and add up to the image's total size. Refer to the
 [Best practices for writing Dockerfiles](../../develop/develop-images/dockerfile_best-practices.md)
-and [use multi-stage builds](../../develop/develop-images/multistage-build.md)
+and [use multi-stage builds](../../build/building/multi-stage.md)
 sections to learn how to optimize your Dockerfiles for efficient images.
 
 The layers are stacked on top of each other. When you create a new container,

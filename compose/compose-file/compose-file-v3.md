@@ -392,7 +392,7 @@ build:
 > Added in [version 3.4](compose-versioning.md#version-34) file format
 
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](../../develop/develop-images/multistage-build.md) for
+[multi-stage build docs](../../build/building/multi-stage.md) for
 details.
 
 ```yaml

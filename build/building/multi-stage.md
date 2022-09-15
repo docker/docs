@@ -1,18 +1,19 @@
 ---
-description: Keeping your images small with multi-stage images
-keywords: images, containers, best practices, multi-stage, multistage
-title: Use multi-stage builds
+title: Multi-stage builds
+description: Keeping your images small with multi-stage builds
+keywords: build, best practices
 redirect_from:
 - /engine/userguide/eng-image/multistage-build/
+- /develop/develop-images/multistage-build/
 ---
 
-Multistage builds are useful to anyone who has struggled to optimize Dockerfiles
-while keeping them easy to read and maintain.
+Multi-stage builds are useful to anyone who has struggled to optimize
+Dockerfiles while keeping them easy to read and maintain.
 
-> **Acknowledgment**:
+> **Acknowledgment**
+>
 > Special thanks to [Alex Ellis](https://twitter.com/alexellisuk) for granting
-> permission to use his blog post
-> [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/)
+> permission to use his blog post [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/)
 > as the basis of the examples below.
 
 ## Before multi-stage builds
@@ -31,10 +32,10 @@ to use for production, which only contained your application and exactly what
 was needed to run it. This has been referred to as the "builder
 pattern". Maintaining two Dockerfiles is not ideal.
 
-Here's an example of a `Dockerfile.build` and `Dockerfile` which adhere to the
+Here's an example of a `build.Dockerfile` and `Dockerfile` which adhere to the
 builder pattern above:
 
-**`Dockerfile.build`**:
+**`build.Dockerfile`**:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -42,7 +43,7 @@ FROM golang:1.16
 WORKDIR /go/src/github.com/alexellis/href-counter/
 COPY app.go ./
 RUN go get -d -v golang.org/x/net/html \
-  && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+  && CGO_ENABLED=0 go build -a -installsuffix cgo -o app .
 ```
 
 Notice that this example also artificially compresses two `RUN` commands together
@@ -58,7 +59,7 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY app ./
-CMD ["./app"]  
+CMD ["./app"]
 ```
 
 **`build.sh`**:
@@ -66,16 +67,13 @@ CMD ["./app"]
 ```bash
 #!/bin/sh
 echo Building alexellis2/href-counter:build
-
-docker build --build-arg https_proxy=$https_proxy --build-arg http_proxy=$http_proxy \  
-    -t alexellis2/href-counter:build . -f Dockerfile.build
+docker build -t alexellis2/href-counter:build . -f build.Dockerfile
 
 docker container create --name extract alexellis2/href-counter:build  
 docker container cp extract:/go/src/github.com/alexellis/href-counter/app ./app  
 docker container rm -f extract
 
 echo Building alexellis2/href-counter:latest
-
 docker build --no-cache -t alexellis2/href-counter:latest .
 rm ./app
 ```
@@ -93,24 +91,23 @@ With multi-stage builds, you use multiple `FROM` statements in your Dockerfile.
 Each `FROM` instruction can use a different base, and each of them begins a new
 stage of the build. You can selectively copy artifacts from one stage to
 another, leaving behind everything you don't want in the final image. To show
-how this works, let's adapt the Dockerfile from the previous section to use
+how this works, let's adapt the `Dockerfile` from the previous section to use
 multi-stage builds.
-
-**`Dockerfile`**:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
+
 FROM golang:1.16
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
 COPY app.go ./
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o app .
 
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=0 /go/src/github.com/alexellis/href-counter/app ./
-CMD ["./app"]  
+CMD ["./app"]
 ```
 
 You only need the single Dockerfile. You don't need a separate build script,
@@ -122,7 +119,7 @@ $ docker build -t alexellis2/href-counter:latest .
 
 The end result is the same tiny production image as before, with a
 significant reduction in complexity. You don't need to create any intermediate
-images and you don't need to extract any artifacts to your local system at all.
+images, and you don't need to extract any artifacts to your local system at all.
 
 How does it work? The second `FROM` instruction starts a new build stage with
 the `alpine:latest` image as its base. The `COPY --from=0` line copies just the
@@ -140,11 +137,12 @@ Dockerfile are re-ordered later, the `COPY` doesn't break.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
+
 FROM golang:1.16 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html  
-COPY app.go    ./
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+COPY app.go ./
+RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o app .
 
 FROM alpine:latest  
 RUN apk --no-cache add ca-certificates
@@ -186,10 +184,12 @@ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 
 ## Use a previous stage as a new stage
 
-You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
+You can pick up where a previous stage left off by referring to it when using
+the `FROM` directive. For example:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
+
 FROM alpine:latest AS builder
 RUN apk --no-cache add build-base
 
@@ -204,4 +204,4 @@ RUN g++ -o /binary source.cpp
 
 ## Version compatibility
 
-Multistage build syntax was introduced in Docker Engine 17.05.
+Multi-stage build syntax was introduced in Docker Engine 17.05.
