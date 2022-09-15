@@ -43,7 +43,7 @@ Help us review your PRs more quickly by following these guidelines.
 - Try not to touch a large number of files in a single PR if possible.
 - Don't change whitespace or line wrapping in parts of a file you are not editing for other reasons. Make sure your text editor is not configured to
   automatically reformat the whole file when saving.
-- We highly recommend that you [build](#build-and-preview-the-docs-locally) and [test](#test-the-docs) the docs locally before submitting a PR. 
+- We highly recommend that you [build](#build-and-preview-the-docs-locally) and [test](#test-the-docs-locally) the docs locally before submitting a PR. 
 - A Netlify test runs for each PR that is against the `master` branch, and deploys the result of your PR to a staging site. The URL will be available at in the **Conversation** tab. Check the staging site to verify how your changes look and fix issues, if necessary.
 
 ### Collaborate on a pull request
