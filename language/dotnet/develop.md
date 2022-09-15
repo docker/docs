@@ -262,7 +262,7 @@ $ docker run \
   dotnet-docker
 ```
 
-Let's test that the application works and is connecting to the database. Using a web browser, access `http:\\localhost:5050`. A page similar to the following image appears.
+Let's test that the application works and is connecting to the database. Using a web browser, access `http://localhost:5050`. A page similar to the following image appears.
 
 ![image of app page](./images/dotnet-verify-db.png)
 
@@ -280,7 +280,7 @@ $ docker run \
   adminer
 ```
 
-Using a web browser, access `http:\\localhost:8080`.
+Using a web browser, access `http://localhost:8080`.
 
 The Adminer login page appears.
 
@@ -386,7 +386,7 @@ $ docker-compose up --build
 
 We pass the `--build` flag so Docker will compile our image and then start the containers.
 
-Now let’s test our application. Using a web browser, access `http:\\localhost:5000` to view the page.
+Now let’s test our application. Using a web browser, access `http://localhost:5000` to view the page.
 
 ## Shutting down
 
@@ -406,7 +406,7 @@ Then, you can use `docker-compose stop` to stop the containers and `docker-compo
 
 ## The `.env` file
 
-Docker Compose will automatically read environment variables from a .env file if it is available. Since our Compose file requires `POSTGRES_PASSWORD` to be set, we add the following content to the `.env` file:
+Docker Compose will automatically read environment variables from a `.env` file if it is available. Since our Compose file requires `POSTGRES_PASSWORD` to be set, we create an `.env`  file and add the following content:
 
 ```shell
 POSTGRES_PASSWORD=example
@@ -447,7 +447,7 @@ Build and run your application to confirm the changes are applied properly.
 $ docker-compose up --build -d
 ```
 
-Now let’s test our application. Using a web browser, access `http:\\localhost:5000` to view the page.
+Now let’s test our application. Using a web browser, access `http://localhost:5000` to view the page.
 
 ## Next steps
 
