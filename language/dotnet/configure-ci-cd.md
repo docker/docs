@@ -1,6 +1,6 @@
 ---
 title: "Configure CI/CD for your application"
-keywords: python, CI/CD, local, development
+keywords: .net, CI/CD, local, development
 description: Learn how to Configure CI/CD for your application
 ---
 

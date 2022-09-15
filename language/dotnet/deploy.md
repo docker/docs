@@ -1,6 +1,6 @@
 ---
 title: "Deploy your app"
-keywords: deploy, ACI, ECS, Python, local, development
+keywords: deploy, ACI, ECS, .net, local, development
 description: Learn how to deploy your application
 ---
 

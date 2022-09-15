@@ -1,6 +1,6 @@
 ---
 description: Containerize .NET apps using Docker
-keywords: Docker, getting started, .NET, language
+keywords: Docker, getting started, .net, language
 title: What will you learn in this module?
 toc_min: 1
 toc_max: 2

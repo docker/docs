@@ -1,6 +1,6 @@
 ---
 description: :Language-specific getting started guides overview
-keywords: guides, docker, language, node, java, python, go, golang, c#, .net
+keywords: guides, docker, language, node, java, python, go, golang, .net
 title: Overview
 toc_min: 1
 toc_max: 2
