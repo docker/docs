@@ -165,7 +165,7 @@ fetch-remote:
     default_branch: "master"
     ref: "master"
     paths:
-      - dest: "build/bake"
+      - dest: "build/customize/bake"
         src:
           - "docs/guides/bake/**"
       - dest: "build/building/drivers"

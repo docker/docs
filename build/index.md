@@ -4,6 +4,7 @@ description: Introduction and overview of Docker Build
 keywords: build, buildx, buildkit
 redirect_from:
 - /build/buildx/
+- /buildx/working-with-buildx/
 ---
 
 ## Overview
@@ -69,9 +70,9 @@ from the internet, or code build steps.
 Collaborate across platforms with one build artifact. See
 [Multi-platform images](building/multi-platform.md) page.
 
-## Automating your builds
+## Continuous integration
 
-### Integrating with GitHub
+### GitHub Actions
 
 Automate your image builds to run in GitHub actions using the official docker
 build actions:
@@ -79,12 +80,7 @@ build actions:
 * [GitHub Action to build and push Docker images with Buildx](https://github.com/docker/build-push-action).
 * [GitHub Action to extract metadata from Git reference and GitHub events](https://github.com/docker/metadata-action/).
 
-### Orchestrating builds across complex projects together
-
-Connect your builds together and easily parameterize your images using buildx bake.
-See [High-level build options with Bake](bake/index.md).
-
-## Customizing your Builds
+## Customizing your builds
 
 ### Select your build output format
 
@@ -95,6 +91,11 @@ like from BuildKit, not just docker images. See [Set the export action for the b
 
 Securely access protected repositories and resources at build time without
 leaking data into the final build or the cache.
+
+### Orchestrating builds using Bake
+
+Connect your builds together and easily parameterize your images using buildx bake.
+See [High-level build options with Bake](customize/bake/index.md).
 
 ## Extending BuildKit
 
