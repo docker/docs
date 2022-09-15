@@ -1335,8 +1335,6 @@ manuals:
     title: Optional post-installation steps
   - path: /engine/deprecated/
     title: Deprecated features
-  - path: /buildx/working-with-buildx/
-    title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
   - path: /engine/scan/
