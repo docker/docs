@@ -4,25 +4,47 @@ description: Overview of what Hardened Desktop is
 keywords: security, hardened desktop, enhanced container isolation,
 ---
 
-Hardened Desktop is Docker's ongoing effort to increase Docker Desktop security without impacting the developer experience
+Hardened Desktop is a new security model for Docker Desktop. It is part of Docker's ongoing effort to increase Docker Desktop security without impacting the developer experience.
 
-These new features from Docker follow a number of security related acquisitions (Nestybox, Atomist) that sees the company establishing itself as the undoubted market leader in providing an Enterprise-ready offering for containerised development.
+The Hardened Desktop security model provides Enterprise admins with a simple and powerful way to increase the security of their containerised development and moves the ownership boundary for containers to the organization, meaning that any security controls admins set cannot be altered by the user.
 
-This configuration is designed for organizations that don't give root/admin access to their developers on their machines, and wish to configure Docker Desktop to also be within the organization's centralized control.
+Hardened Desktop currently includes:
+- Enhanced Container Isolation. This is a setting that helps admins to instantly enhance security by preventing containers from running as root in Docker Desktop’s Linux VM.
+- Admin Controls. which helps Enterprise admins to confidently manage and control usage of Docker Desktop.
+- Registry Access Management. Working in tandem with Admin Controls and Enhanced Container Isolation 
 
-In order to use this model, the application and VM image need to be installed as root/admin so that the user cannot modify them. All containers are run unprivileged in the VM, in user namespaces. Root access to the VM is removed, and privileged containers cannot be run, and there is no access to the host namespaces. The ownership boundary of system code in the VM moves to the organization. The user owns the (unprivileged) containers that they run, the equivalent of being able to run unprivileged applications on the host but not being able to modify the host configuration.
+Docker will be adding more security enhancements to the Hardened Desktop security model over the coming months.
 
+ <div class="component-container">
+    <!--start row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/assets/images/lock.svg" alt="Hardened Desktop" width="70" height="70">
+            </div>
+                <h2 id="docker-for-mac"><a href="/desktop/hardened-desktop/admin-controls/">Admin Controls </a></h2>
+                <p>Learn how Admin Controls can secure your developers' workflows.</p>
+         </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <img src="/assets/images/secure.svg" alt="Release notes" width="70" height="70">
+            </div>
+                <h2 id="docker-for-linux"><a href="/desktop/hardened-desktop/enhanced-container-isolation">Enhanced Container Isolation</a></h2>
+                <p>Understand how Enhanced Container Isolation can prevent container attacks. </p>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <img src="/assets/images/registry.svg" alt="Hardened Desktop" width="70" height="70">
+            </div>
+                <h2 id="docker-for-mac"><a href="/desktop/hardened-desktop/regsistry-access-management/">Registry Access Management</a></h2>
+                <p>Control the registries developers can access while using Docker Desktop.</p>
+         </div>
+     </div>
+    </div>
+</div>
 
-We have introduced features such as registry access management, that controls which registries a user can pull from on Docker Desktop, as organizations want to only allow users to pull from their central repository, but again this cannot actually be enforced if the user can modify the VM freely and disable controls, which this model prevents.
-
-
-We have some longer term roadmap items around secure boot and code verification to increase trust in the code on the VM, as well as supporting trusted logging and audit.
-
- a new security model for Docker Desktop. The Hardened Desktop security model is designed to provide Enterprise admins with a simple and powerful way to increase their security posture for containerised development.
-
-
- As part of the Hardened Desktop model, Docker announced the release of two initial features. The first is Enhanced Container Isolation, a setting that helps admins to instantly enhance security by preventing containers from running as root in Docker Desktop’s Linux VM. The second is Admin Controls, which helps Enterprise admins to confidently manage and control usage of Docker Desktop. With just a few lines of JSON, admins will be able to enforce preferences like HTTP proxies, Network settings and the Docker Engine configuration, saving them significant time and cost in securing their developer workflows.
-
-With the Hardened Desktop security model, and our new Enhanced Container Isolation and Admin Controls features we’re moving the ownership boundary for containers to the organization, meaning that any security controls admins set cannot be altered by the user.
-
- Docker will be adding more security enhancements to their Hardened Desktop model over the coming months.

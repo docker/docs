@@ -35,7 +35,7 @@ To configure Registry Access Management permissions, perform the following steps
    >
    > Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop. Also, there is no limit on the number of registries you can add. See the [Caveats](#caveats) section to learn more about limitations when using this feature.
 
-![Registry Access Management](images/registry-access-management.png){:width="700px"}
+![Registry Access Management](../../assets/images/registry-access-management.png){:width="700px"}
 
 ## Enforce authentication
 
