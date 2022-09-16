@@ -32,12 +32,6 @@ Using the `admin-settings.json` file, admins can:
 
 For more details on the syntax and options you can set, see [Configure Admin Controls](configure-ac.md).
 
-### What do users see when the settings are enforced?
-
-Docker Desktop users will see a notification in the **Settings**, or **Preferences** if macOS user, which states **Some settings are managed by your Admin**. 
-
-Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or by modifying the Docker Desktop Linux VM.
-
 ### How does this differ to the `settings.json` file?
 
 Using the `settings.json` file to pre-configure Docker Desktop settings menas that developers own the settings.json file and can therefore adjust any settings that their admins create, for example, modifying network and proxy controls. 
@@ -52,7 +46,11 @@ Next, you must [create and configure the admin-settings.json file](configure-ac.
 
 Once this is done, Docker Desktop users receive the changed settings when they next authenticate to your organization on Docker Desktop. We do not automatically mandate that developers re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
 
+### What do users see when the settings are enforced?
 
+Docker Desktop users will see a notification in the **Settings**, or **Preferences** if macOS user, which states **Some settings are managed by your Admin**. 
+
+Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or by modifying the Docker Desktop Linux VM.
 
 
 

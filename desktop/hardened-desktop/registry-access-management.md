@@ -12,9 +12,9 @@ Registry Access Management is a feature available to organizations with a Docker
 
 Download Docker Desktop v4.8 or a later release.
 
-- [Download and install for Windows](../desktop/install/windows-install.md)
-- [Download and install for Mac](../desktop/install/mac-install.md)
-- [Download and install for Linux](../desktop/install/linux-install.md)
+- [Download and install for Windows](../install/windows-install.md)
+- [Download and install for Mac](../install/mac-install.md)
+- [Download and install for Linux](../install/linux-install.md)
 
 ## Configure Registry Access Management permissions
 
@@ -35,14 +35,14 @@ To configure Registry Access Management permissions, perform the following steps
    >
    > Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop. Also, there is no limit on the number of registries you can add. See the [Caveats](#caveats) section to learn more about limitations when using this feature.
 
-![Registry Access Management](../../assets/images/registry-access-management.png){:width="700px"}
+![Registry Access Management](../../docker-hub/images/registry-access-management.png){:width="700px"}
 
 ## Enforce authentication
 
 To ensure that each org member uses Registry Access Management on their local machine, you can perform the steps below to enforce sign-in under your organization. To do this:
 
 1. Download the latest version of Docker Desktop, and then
-2. Create a `registry.json` file by following the instructions for [Windows, Mac and Linux](configure-sign-in.md).
+2. Create a `registry.json` file by following the instructions for [Windows, Mac and Linux](../../docker-hub/configure-sign-in.md).
 
 ## Verify the restrictions
 

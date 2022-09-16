@@ -20,7 +20,7 @@ Place the `admin-settings.json` file on your developers machines in the followin
 
 - Mac: /Library/Application Support/com.docker.docker/admin-settings.json
 - Windows: /ProgramData/DockerDesktop/admin-settings.json
-- Linux - /usr/share/docker-desktop/registry/admin-settings.json
+- Linux - /usr/share/docker-desktop/admin-settings.json 
 
 By placing this file in the above protected directories, end users are unable to modify it.
 
