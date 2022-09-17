@@ -23,7 +23,10 @@ The `registry.json` file must contain the following contents, where `myorg` is r
 }
 ```
 
-In Docker Hub, you can download the registry.json file for your organization or copy the specific commands to create the file for your organization. To download the file or copy the commands from [Docker Hub](http://hub.docker.com), go to **Organizations** > **_Your Organization_** > **Settings** > **Enforce Sign-in**.
+In Docker Hub, you can download the `registry.json` file for your organization or copy the specific commands to create the file for your organization. To download the file or copy the commands from Docker Hub:
+1. Log in to [Docker Hub](http://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an organization owner.
+2. Go to **Organizations** > **_Your Organization_** > **Settings**.
+3. Select **Enforce Sign-in** and continue with the on-screen instructions for Windows, Mac, or Linux.
 
 Alternatively, you can use the following methods to create a `registry.json` file based on the user's operating system.
 
