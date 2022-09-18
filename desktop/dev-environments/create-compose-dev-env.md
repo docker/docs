@@ -120,4 +120,4 @@ In the example, the Docker Compose files are the same. However, they could be di
 
 ## What's next?
 
-Learn how to [share your Dev Environment](share.md)
+Learn how to [distribute your Dev Environment](share.md)

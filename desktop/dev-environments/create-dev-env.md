@@ -111,4 +111,4 @@ Docker then clones the repository with your specified branch or tag.
 
 ## What's next?
 
-Learn how to [share your Dev Environment](share.md)
+Learn how to [distribute your Dev Environment](share.md)

@@ -3,16 +3,16 @@ description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
 title: Overview
 ---
+> **Beta**
+>
+> The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
 
 Dev Environments lets you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
 
 It uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
 
-You can also switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch. This makes reviewing PRs as simple as opening a new environment.
+You can also distribute your dev environment easy so everyone can access the same code and any dependencies.
 
-> **Beta**
->
-> The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
 
 ![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 
