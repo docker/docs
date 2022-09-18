@@ -1200,7 +1200,7 @@ manuals:
         - path: /desktop/dev-environments/create-compose-dev-env/
           title: Create a Compose Dev Environment
         - path: /desktop/dev-environments/share/
-          title: Share your Dev Environment
+          title: Distribute your Dev Environment
         - path: /desktop/dev-environments/specify/
           title: Specify a Dockerfile or base image
     - sectiontitle: Extensions (Beta)
