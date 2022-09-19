@@ -178,25 +178,6 @@ To view a team's permissions across all repositories:
 1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
 2. Click on the **Permissions** tab, where you can view the repositories this team can access.
 
-### Permissions reference
-
-Permissions are cumulative. For example, if you have Read & Write permissions,
-you automatically have Read-only permissions:
-
-- `Read-only` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
-- `Read & Write` access allows users to pull, push, and view a repository Docker
-  Hub. In addition, it allows users to view, cancel, retry or trigger builds
-- `Admin` access allows users to Pull, push, view, edit, and delete a
-  repository; edit build settings; update the repository description modify the
-  repositories "Description", "Collaborators" rights, "Public/Private"
-  visibility, and "Delete".
-
-> **Note**
->
-> A User who has not yet verified their email address only has
-> `Read-only` access to the repository, regardless of the rights their team
-> membership has given them.
-
 ## Videos
 
 You can also check out the following videos for information about creating Teams
