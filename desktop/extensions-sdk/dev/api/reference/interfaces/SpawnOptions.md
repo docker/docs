@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: SpawnOptions
 
+**`since`** 0.3.0
+
 ## Hierarchy
 
 - [`ExecOptions`](ExecOptions.md)

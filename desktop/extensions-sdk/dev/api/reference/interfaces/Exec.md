@@ -14,6 +14,8 @@ skip_read_time: true
 
 Executes a command.
 
+**`since`** 0.2.0
+
 #### Parameters
 
 | Name | Type | Description |
@@ -35,6 +37,8 @@ A promise that will resolve once the command finishes.
 Streams the result of a command if `stream` is specified in the `options` parameter.
 
 Specify the `stream` if the output of your command is too long or if you need to stream things indefinitely (for example container logs).
+
+**`since`** 0.2.2
 
 #### Parameters
 

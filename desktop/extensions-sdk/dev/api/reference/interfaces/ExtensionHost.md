@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: ExtensionHost
 
+**`since`** 0.2.0
+
 ## Properties
 
 ### cli
