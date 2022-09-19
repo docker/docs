@@ -1476,8 +1476,14 @@ manuals:
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
-  - path: /docker-hub/repos/
-    title: Repositories
+  - sectiontitle: Repositories
+    section:
+      - path: /docker-hub/repos/
+        title: Manage
+      - path: /docker-hub/repos/access/
+        title: Accessing
+      - path: /docker-hub/repos/configure/
+        title: Configuring
   - path: /docker-hub/service-accounts/
     title: Service accounts
   - path: /docker-hub/official_images/
