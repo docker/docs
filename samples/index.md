@@ -64,8 +64,8 @@ A curated repository containing over 30 Docker Compose samples. These samples of
 | [PHP]({{awesomeComposeRepo}}/apache-php){: target="_blank" rel="noopener" class="_"} | [Open in Docker Dev Environment]({{awesomeComposeDevEnv}}/apache-php) |
 | [Plex]({{awesomeComposeRepo}}/plex){: target="_blank" rel="noopener" class="_"} | - |
 | [Portainer]({{awesomeComposeRepo}}/portainer){: target="_blank" rel="noopener" class="_"} | - |
-| [Spark](sparkjava){: target="_blank" rel="noopener" class="_"} | [Open in Docker Dev Environment]({{awesomeComposeDevEnv}}/sparkjava) |
-| [Traefik](traefik-golang){: target="_blank" rel="noopener" class="_"} | [Open in Docker Dev Environment]({{awesomeComposeDevEnv}}/traefik-golang) |
+| [Spark]({{awesomeComposeRepo}}/sparkjava){: target="_blank" rel="noopener" class="_"} | [Open in Docker Dev Environment]({{awesomeComposeDevEnv}}/sparkjava) |
+| [Traefik]({{awesomeComposeRepo}}/traefik-golang){: target="_blank" rel="noopener" class="_"} | [Open in Docker Dev Environment]({{awesomeComposeDevEnv}}/traefik-golang) |
 | [Wireguard]({{awesomeComposeRepo}}/wireguard){: target="_blank" rel="noopener" class="_"} | - |
 | [VueJS]({{awesomeComposeRepo}}/vuejs){: target="_blank" rel="noopener" class="_"} | [Open in Docker Dev Environment]({{awesomeComposeDevEnv}}/vuejs) |
 
