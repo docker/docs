@@ -1,7 +1,8 @@
 ---
 title: Introduction to Atomist
 description: Introduction to Atomist
-keywords: atomist, software supply chain, vulnerability scanning, tutorial
+keywords:
+  atomist, software supply chain, indexing, sbom, vulnerabilities, automation
 ---
 
 {% include atomist/disclaimer.md %}
@@ -10,10 +11,10 @@ Atomist is a data and automation platform for managing the software supply
 chain. It will extract metadata from container images, evaluate the data, and
 help you understand the state of the image.
 
-By integrating Atomist into your systems and repositories, you will obtain new,
-essential information about your containers. Beyond collecting and presenting
-data, Atomist can help you further by giving you recommendations, notifications,
-validation, and more.
+Integrating Atomist into your systems and repositories grants you essential
+information about the images you build, and the containers running in
+production. Beyond collecting and visualizing information, Atomist can help you
+further by giving you recommendations, notifications, validation, and more.
 
 Example capabilities made possible with Atomist are:
 
@@ -28,14 +29,10 @@ Example capabilities made possible with Atomist are:
 ## How it works
 
 Atomist monitors your container registry for new images. When it finds a new
-image, it will analyze and extract metadata about the image contents as well as
-any base images it uses. The metadata is uploaded to the Atomist data plane
-where it's securely stored.
+image, it will analyze and extract metadata about the image contents and any
+base images used. The metadata is uploaded to an isolated partition in the
+Atomist data plane where it's securely stored.
 
-The Atomist data plane consists of a large knowledge graph of software and
-vulnerability data. Atomist determines the state of your container by combining
-the container metadata with the knowledge graph.
-
-Atomist gets it's data about software vulnerabilities from public data
-sources—security advisories. Information about your private container images is
-never shared with anyone.
+The Atomist data plane is a combination of metadata and a large knowledge graph
+of public software and vulnerability data. Atomist determines the state of your
+container by overlaying the image metadata with the knowledge graph.

@@ -20,15 +20,14 @@ There are several options for how you could implement deployment tracking:
 
 Each Atomist workspace exposes an API endpoint. Submitting a POST request to the
 endpoint updates Atomist about what image you are running in your environments.
-This will let you compare scan results for images you build against images of
-containers running in staging or production.
+This will let you compare data for images you build against images of containers
+running in staging or production.
 
-You can find the API endpoint URL on the
-[Integrations](https://dso.docker.com/r/auth/integrations) page. Using this API
+You can find the API endpoint URL on the **Integrations** page. Using this API
 requires an API key.
 
-The most straight-forward usage is to post to this endpoint using a webhook.
-When deploying a new image, submit an automated POST request (using `curl`, for
+The most straight-forward use is to post to this endpoint using a webhook. When
+deploying a new image, submit an automated POST request (using `curl`, for
 example) as part of your deployment pipeline.
 
 ```bash

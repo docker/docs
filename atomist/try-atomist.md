@@ -22,9 +22,9 @@ target="blank" rel="noopener" class=""}.
 
 > Note
 >
-> Only use this CLI-based method of indexing images for testing purposes. For
-> recurring use, integrate Atomist with your container registry. See
-> [get started](./get-started.md).
+> Only use this CLI-based method of indexing images for testing or trial
+> purposes. For further evaluation or production use, integrate Atomist with
+> your container registry. See [get started](./get-started.md).
 
 1. Go to the [Atomist website](https://dso.docker.com) and sign in using your
    Docker ID.
@@ -54,7 +54,7 @@ target="blank" rel="noopener" class=""}.
    > able to identify the image in the
    > [Atomist web UI](https://dso.docker.com/r/auth/overview/images).
 
-   The output should look something like this:
+   The output should be similar to the following:
 
    ```bash
    [info] Starting session with correlation-id c12e08d3-3bcc-4475-ab21-7114da599eaf

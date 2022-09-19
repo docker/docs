@@ -33,7 +33,7 @@ you use.
 
 <!-- vale off -->
 <ul class="nav nav-tabs">
-  <li><a data-toggle="tab" data-target="#tab-ecr">Amazon</a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab-ecr" aria-expanded="true">Amazon</a></li>
   <li><a data-toggle="tab" data-target="#tab-ghcr">GitHub</a></li>
   <li><a data-toggle="tab" data-target="#tab-google">Google</a></li>
   <li><a data-toggle="tab" data-target="#tab-jfrog">JFrog</a></li>
@@ -176,7 +176,7 @@ with the appropriate condition on the IAM role statement.
 5. After creating the stack, copy the **Value** for the **AssumeRoleArn** key
    from the **Outputs** tab in AWS.
 
-   ![AWS stack creation output](./images/ecr/stackoutput.png){: width="700px"}
+   ![AWS stack creation output](./images/ecr/stack-output.png){: width="700px"}
 
 6. Paste the copied **AssumeRoleArn** value into the **Trusted Role ARN** field
    on the Atomist configuration page.
@@ -186,7 +186,7 @@ with the appropriate condition on the IAM role statement.
    Atomist will now test the connection with your ECR registry. You'll see a
    green check mark beside the integration if a successful connection was made.
 
-   ![integration list showing a successful ECR integration](./images/ecr/ConnectionSuccessful.png){:
+   ![integration list showing a successful ECR integration](./images/ecr/connection-successful.png){:
    width="700px"}
 
 </div>
@@ -278,7 +278,7 @@ project.
 8. Select **Save Configuration**. Atomist will test the connection. Green check
    marks indicate a successful connection.
 
-   ![GCP configuration successful](./images/gcp/config_success.png){:
+   ![GCP configuration successful](./images/gcp/config-success.png){:
    width="700px"}
 
    Next, create a new PubSub subscription on the `gcr` topic in registry. This

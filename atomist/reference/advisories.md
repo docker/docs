@@ -6,6 +6,10 @@ keywords:
 
 {% include atomist/disclaimer.md %}
 
+With no configuration required, Atomist already draws vulnerability data from
+several public advisories. You can extend this by adding your own, custom
+advisories if you wish.
+
 ## Adding and updating advisories
 
 To add your own advisories:
