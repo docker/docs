@@ -6,25 +6,25 @@ keywords:
 
 {% include atomist/disclaimer.md %}
 
-The quickest way to try Atomist is to run it locally as a CLI tool. You can run
-it as a Docker image that scans one of your local images. This eliminates the
-need of having to integrate with and connect to a remote container registry. The
-CLI uses your local Docker daemon directly to upload the Software Bill of
-Materials (SBOM) to the Atomist control plane for analysis.
+The quickest way to try Atomist is to run it on your local images, as a CLI
+tool. Trying it locally eliminates the need of having to integrate with and
+connect to a remote container registry. The CLI uses your local Docker daemon
+directly to upload the Software Bill of Materials (SBOM) to the Atomist control
+plane for analysis.
 
 ## Prerequisites
 
-Before you can begin the setup, you’ll need a Docker ID. If you do not already
-have one, you can [sign up here](https://hub.docker.com/signup){: target="blank"
-rel="noopener" class=""}.
+Before you can begin the setup, you’ll need a Docker ID. If you don't already
+have one, you can [register here](https://hub.docker.com/signup){:
+target="blank" rel="noopener" class=""}.
 
 ## Steps
 
 > Note
 >
-> We only recommend using this CLI-based method of scanning images for testing
-> purposes. For continuous scanning, please integrate Atomist with your
-> container registry. See [get started](./get-started.md).
+> Only use this CLI-based method of indexing images for testing purposes. For
+> recurring use, integrate Atomist with your container registry. See
+> [get started](./get-started.md).
 
 1. Go to the [Atomist website](https://dso.docker.com) and sign in using your
    Docker ID.
@@ -36,7 +36,7 @@ rel="noopener" class=""}.
    - `--workspace`: the workspace ID found on the **Integrations** page on the
      Atomist website.
    - `--api-key`: the API key you just created.
-   - `--image`: the Docker image that you want to scan.
+   - `--image`: the Docker image that you want to index.
 
    ```bash
    docker run \
@@ -51,7 +51,7 @@ rel="noopener" class=""}.
    > Note
    >
    > The image must have a tag (for example, `myimage:latest`) so that you are
-   > able to identify the scan in the
+   > able to identify the image in the
    > [Atomist web UI](https://dso.docker.com/r/auth/overview/images).
 
    The output should look something like this:
@@ -73,29 +73,28 @@ rel="noopener" class=""}.
    [info] Transacting SBOM...
    ```
 
-5. When the scan is finished, open the
+5. When the command exits, open the
    [Atomist web UI](https://dso.docker.com/r/auth/overview/images), where you
-   should see the scanned image in the list.
+   should see the image in the list.
 
-   ![scanned image in the image overview list](./images/images-overview.png){:
+   ![indexed image in the image overview list](./images/images-overview.png){:
    width="700px"}
 
-6. Click the image name. This gets you to the list of image tags scanned by
-   Atomist.
+6. Select the image name. This gets you to the list of image tags.
 
    ![list of image tags](./images/tags-list.png){: width="700px"}
 
-   Since we just ran our first scan, our list only contains one tag, for now.
-   When you integrate Atomist with your container registry, any image tag you
-   push to your registry will be scanned automatically, and show up in this
-   list.
+   Since this is your first time indexing this image, the list only has one tag
+   for now. When you integrate Atomist with your container registry, images and
+   tags show up in this list automatically.
 
-7. Click the tag name. This shows you the scan results for this tag. In this
-   view, you can see how many vulnerabilities this image contains, their
-   severity levels, whether there is a fix version available, and more.
+7. Select the tag name. This shows you the insights for this tag.
 
    ![vulnerability breakdown view](./images/vulnerabilities-overview.png){:
    width="700px"}
+
+   In this view, you can see how many vulnerabilities this image has, their
+   severity levels, whether there is a fix version available, and more.
 
 ## Where to go next
 
