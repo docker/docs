@@ -4,6 +4,8 @@ description:
 keywords:
 ---
 
+{% include atomist/disclaimer.md %}
+
 This page describes the configurable settings for Atomist. Enabling any of these
 settings instructs Atomist to carry out an action whenever a specific Git event
 occurs. These features require that you
