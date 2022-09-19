@@ -13,7 +13,7 @@ The live docs are published from the `master` branch. Therefore, you must create
 
 There are two ways to contribute a pull request to the docs repository:
 
-1. You can click **Edit this page** option  in the right column of every page on [https://docs.docker.com/](https://docs.docker.com/).
+1. You can click **Edit this page** option  in the right column of every page on [https://docs.docker.com/](/).
 
     This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
@@ -21,9 +21,9 @@ There are two ways to contribute a pull request to the docs repository:
 
     This is the manual, more advanced version of clicking 'Edit this page' on a published docs page. Initiating a docs changes in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
-    For a demo of the components, tags, Markdown syntax, styles, etc we use at [https://docs.docker.com/](https://docs.docker.com/), see the Useful components section.
+    For a demo of the components, tags, Markdown syntax, styles, etc we use at [https://docs.docker.com/](/), see the Useful components section.
 
-### Important files
+## Important files
 
 Here’s a list of some of the important files:
 
@@ -43,10 +43,10 @@ Help us review your PRs more quickly by following these guidelines.
 - Try not to touch a large number of files in a single PR if possible.
 - Don't change whitespace or line wrapping in parts of a file you are not editing for other reasons. Make sure your text editor is not configured to
   automatically reformat the whole file when saving.
-- We highly recommend that you build the docs locally and verify your changes before submitting a PR. See the section [Build and preview the docs locally](#build-and-preview-the-docs-locally).
+- We highly recommend that you [build](#build-and-preview-the-docs-locally) and [test](#test-the-docs-locally) the docs locally before submitting a PR. 
 - A Netlify test runs for each PR that is against the `master` branch, and deploys the result of your PR to a staging site. The URL will be available at in the **Conversation** tab. Check the staging site to verify how your changes look and fix issues, if necessary.
 
-## Collaborate on a pull request
+### Collaborate on a pull request
 
 Unless the PR author specifically disables it, you can push commits into another
 contributor's PR. You can do it from the command line by adding and fetching
@@ -58,7 +58,7 @@ If a PR consists of multiple small addendum commits on top of a more significant
 one, the commit will usually be "squash-merged", so that only one commit is
 merged into the `master` branch. In some scenarios where a squash and merge isn't appropriate, all commits are kept separate when merging.
 
-## Per-PR staging on GitHub
+### Per-PR staging on GitHub
 
 A Netlify test runs for each PR created against the `master` branch and deploys the result of your PR to a staging site. When the site builds successfully, you will see a comment in the **Conversation** tab in the PR stating **Deploy Preview for docsdocker ready!**. Click the **Browse the preview** URL and check the staging site to verify how your changes look and fix issues, if necessary. Reviewers also check the staged site before merging the PR to protect the integrity of the docs site.
 
@@ -71,14 +71,14 @@ git clone --recursive https://github.com/docker/docker.github.io.git
 cd docker.github.io
 ```
 
-Then, build and run the documentation using [Docker Compose](https://docs.docker.com/compose/)
+Then, build and run the documentation using [Docker Compose](../compose/index.md)
 
 ```bash
 docker compose up -d --build
 ```
 
-> You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](https://docs.docker.com/desktop/).
-> If you don't have Docker Desktop installed, follow the [instructions](https://docs.docker.com/compose/install/) to install Docker Compose.
+> You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/index.md).
+> If you don't have Docker Desktop installed, follow the [instructions](../compose/install/index.md) to install Docker Compose.
 
 When the container is built and running, visit [http://localhost:4000](http://localhost:4000) in your web browser to view the docs.
 
@@ -99,7 +99,7 @@ docker compose down
 
 The default configuration for local builds of the documentation disables some
 features to allow for a shorter build-time. The following options differ between
-local builds, and builds that are deployed to [docs.docker.com](https://docs.docker.com/):
+local builds, and builds that are deployed to [docs.docker.com](/):
 
 - search auto-completion, and generation of `js/metadata.json`
 - Google Analytics
@@ -119,6 +119,24 @@ When the container is built and running, visit [http://localhost:4000](http://lo
 
 To rebuild the docs after you make changes, repeat the steps above.
 
-## Copyright and license
+### Test the docs locally
 
-Copyright 2013-2022 Docker, inc, released under the Apache 2.0 license.
+We use a command-line tool called [vale](https://vale.sh/) to check the style and help you find
+errors in your writing. We highly recommend that you use vale to lint your documentation before
+you submit your pull request.
+
+You can run vale as a stand-alone tool using the command-line, or you can integrate it with
+your editor to get real-time feedback on your writing.
+
+To get started, follow the [vale installation instructions](https://vale.sh/docs/vale-cli/installation/)
+for your operating system. To enable the vale integration for your editor, install the relevant plugin:
+
+- [VS Code](https://github.com/errata-ai/vale-vscode)
+- [Neovim](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#vale)
+- [Emacs](https://github.com/tpeacock19/flymake-vale)
+- [Jetbrains](https://vale.sh/docs/integrations/jetbrains/)
+
+The vale rules that implement the Docker style guide are included in the Docker docs repository,
+in the `.github/vale` directory. Vale will automatically apply these rules when invoked in this
+repository.
+

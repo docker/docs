@@ -7,6 +7,9 @@ on:
       - master
   pull_request:
 
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
 jobs:
   build:
     runs-on: ubuntu-20.04

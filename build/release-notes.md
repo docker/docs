@@ -6,7 +6,7 @@ toc_max: 2
 ---
 
 This page contains information about the new features, improvements, and bug
-fixes in [Buildx](buildx/index.md).
+fixes in [Docker Buildx](https://github.com/docker/buildx){:target="_blank" rel="noopener" class="_"}.
 
 ## 0.9.1
 
@@ -29,7 +29,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 ### New features
 
-* Support for new [driver `remote`](buildx/drivers/remote.md) that you can use
+* Support for new [driver `remote`](building/drivers/remote.md) that you can use
   to connect to any already running BuildKit instance {% include github_issue.md repo="docker/buildx" number="1078" %}
   {% include github_issue.md repo="docker/buildx" number="1093" %} {% include github_issue.md repo="docker/buildx" number="1094" %}
   {% include github_issue.md repo="docker/buildx" number="1103" %} {% include github_issue.md repo="docker/buildx" number="1134" %}
@@ -153,7 +153,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 * Build command now accepts `--build-context` flag to [define additional named build contexts](/engine/reference/commandline/buildx_build/#build-context)
   for your builds {% include github_issue.md repo="docker/buildx" number="904" %}
-* Bake definitions now support [defining dependencies between targets](bake/build-contexts.md)
+* Bake definitions now support [defining dependencies between targets](customize/bake/build-contexts.md)
   and using the result of one target in another build {% include github_issue.md repo="docker/buildx" number="928" %}
   {% include github_issue.md repo="docker/buildx" number="965" %} {% include github_issue.md repo="docker/buildx" number="963" %}
   {% include github_issue.md repo="docker/buildx" number="962" %} {% include github_issue.md repo="docker/buildx" number="981" %}

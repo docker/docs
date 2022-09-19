@@ -1,5 +1,5 @@
 ---
-title: Docker 
+title: Docker
 description: Docker extension API
 keywords: Docker, extensions, sdk, API
 ---
@@ -127,6 +127,10 @@ await ddClient.docker.cli.exec(
   }
 );
 ```
+
+> You cannot use this to chain commands in a single `exec()` invocation (like `docker kill $(docker ps -q)` or using pipe between commands).
+>
+> You need to invoke `exec()` for each command and parse results to pass parameters to the next command if needed.
 
 See the [Exec API reference](reference/interfaces/Exec.md) for details about these methods.
 

@@ -480,7 +480,7 @@ that we have used to deploy our Go application is very barebones and is meant
 for lean deployments of static binaries.
 
 For more information on multi-stage builds, please feel free to check out
-[other parts](../../develop/develop-images/multistage-build.md) of the Docker
+[other parts](../../build/building/multi-stage.md) of the Docker
 documentation. This is, however, not essential for our progress here, so we'll
 leave it at that.
 

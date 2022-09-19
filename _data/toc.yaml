@@ -128,8 +128,6 @@ guides:
       title: Dockerfile best practices
     - path: /develop/develop-images/build_enhancements/
       title: Build images with BuildKit
-    - path: /develop/develop-images/multistage-build/
-      title: Use multi-stage builds
     - path: /develop/develop-images/image_management/
       title: Manage images
     - path: /develop/develop-images/baseimages/
@@ -1179,8 +1177,6 @@ manuals:
           title: Known issues for Mac
     - sectiontitle: Additional resources
       section:
-        - path: /desktop/multi-arch/
-          title: Multi-arch support
         - path: /desktop/kubernetes/
           title: Deploy on Kubernetes
         - path: /desktop/backup-and-restore/
@@ -1337,8 +1333,6 @@ manuals:
     title: Optional post-installation steps
   - path: /engine/deprecated/
     title: Deprecated features
-  - path: /buildx/working-with-buildx/
-    title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
   - path: /engine/scan/
@@ -1389,44 +1383,48 @@ manuals:
   section:
     - path: /build/
       title: Overview
-    - path: /build/hellobuild/
-      title: Hello Build
+    - sectiontitle: Building images
+      section:
+        - path: /build/building/packaging/
+          title: Packaging your software
+        - sectiontitle: Choosing a build driver
+          section:
+            - path: /build/building/drivers/
+              title: Overview
+            - path: /build/building/drivers/docker/
+              title: Docker driver
+            - path: /build/building/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/building/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/building/drivers/remote/
+              title: Remote driver
+        - path: /build/building/multi-stage/
+          title: Multi-stage builds
+        - path: /build/building/multi-platform/
+          title: Multi-platform images
+    - sectiontitle: Customizing builds
+      section:
+        - sectiontitle: Orchestrating builds with Bake
+          section:
+            - path: /build/customize/bake/
+              title: Overview
+            - path: /build/customize/bake/file-definition/
+              title: File definition
+            - path: /build/customize/bake/configuring-build/
+              title: Configuring builds
+            - path: /build/customize/bake/hcl-funcs/
+              title: User defined HCL functions
+            - path: /build/customize/bake/build-contexts/
+              title: Build contexts and linking targets
+            - path: /build/customize/bake/compose-file/
+              title: Building from Compose file
     - sectiontitle: Buildx
       section:
-        - path: /build/buildx/
-          title: Buildx overview
         - path: /build/buildx/install/
           title: Install Buildx
-        - sectiontitle: Drivers
-          section:
-            - path: /build/buildx/drivers/
-              title: Overview
-            - path: /build/buildx/drivers/docker/
-              title: Docker driver
-            - path: /build/buildx/drivers/docker-container/
-              title: Docker container driver
-            - path: /build/buildx/drivers/kubernetes/
-              title: Kubernetes driver
-            - path: /build/buildx/drivers/remote/
-              title: Remote driver
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
-        - path: /build/buildx/multiplatform-images/
-          title: Building multi-platform images
-    - sectiontitle: Bake
-      section:
-        - path: /build/bake/
-          title: Bake overview
-        - path: /build/bake/file-definition/
-          title: File definition
-        - path: /build/bake/configuring-build/
-          title: Configuring builds
-        - path: /build/bake/hcl-funcs/
-          title: User defined HCL functions
-        - path: /build/bake/build-contexts/
-          title: Build contexts and linking targets
-        - path: /build/bake/compose-file/
-          title: Building from Compose file
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
