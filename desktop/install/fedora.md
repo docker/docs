@@ -29,7 +29,7 @@ To install Docker Desktop on Fedora:
 
 1. Set up [Docker's package repository](../../engine/install/fedora.md#set-up-the-repository). 
 
-2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with dnf as follows:
 

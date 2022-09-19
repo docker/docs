@@ -42,6 +42,7 @@
 // Some links don't have 'href' attr, hence no mouse pointer
 .nav-sidebar li a {
     cursor: pointer;
+    color: $light-palette-grey-800;
 }
 
 .nav-sidebar>li>a {
@@ -78,7 +79,7 @@
 .nav-sidebar ul li a,
 .nav-sidebar ul li a:focus {
     border-bottom: none;
-    border-left:   1px solid $primary-links;
+    border-left:   1px solid $light-palette-grey-200;
 }
 
 .nav-sidebar .nav > li > a {
@@ -96,6 +97,7 @@
     background:  $bg-sidebar-active;
     border-left: 4px solid $primary-links;
     font-weight: 600;
+    color: #2089C4;
 }
 
 .nav-sidebar ul li ul li a {

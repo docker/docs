@@ -128,8 +128,6 @@ guides:
       title: Dockerfile best practices
     - path: /develop/develop-images/build_enhancements/
       title: Build images with BuildKit
-    - path: /develop/develop-images/multistage-build/
-      title: Use multi-stage builds
     - path: /develop/develop-images/image_management/
       title: Manage images
     - path: /develop/develop-images/baseimages/
@@ -1401,6 +1399,8 @@ manuals:
               title: Kubernetes driver
             - path: /build/building/drivers/remote/
               title: Remote driver
+        - path: /build/building/multi-stage/
+          title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
     - sectiontitle: Customizing builds
