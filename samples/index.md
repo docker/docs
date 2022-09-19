@@ -6,7 +6,6 @@ redirect_from:
 - /engine/examples/
 - /examples/
 ---
-
 ## Awesome Compose
 
 [https://github.com/docker/awesome-compose](https://github.com/docker/awesome-compose)
