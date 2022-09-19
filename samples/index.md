@@ -6,8 +6,8 @@ redirect_from:
 - /engine/examples/
 - /examples/
 ---
-{% assign awesomeComposeRepo = "https://github.com/docker/awesome-compose/tree/master" %}
-{% assign awesomeComposeDevEnv = "https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master" %}
+{%assign awesomeComposeRepo="https://github.com/docker/awesome-compose/tree/master"%}
+{%assign awesomeComposeDevEnv="https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master"%}
 
 ## Awesome Compose
 
