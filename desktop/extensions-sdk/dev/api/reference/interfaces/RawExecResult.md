@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: RawExecResult
 
+**`since`** 0.2.0
+
 ## Hierarchy
 
 - **`RawExecResult`**
