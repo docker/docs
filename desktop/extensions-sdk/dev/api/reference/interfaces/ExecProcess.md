@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: ExecProcess
 
+**`since`** 0.2.3
+
 ## Methods
 
 ### close

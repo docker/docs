@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: Host
 
+**`since`** 0.2.0
+
 ## Methods
 
 ### openExternal
@@ -13,6 +15,8 @@ skip_read_time: true
 ▸ **openExternal**(`url`): `void`
 
 Opens an external URL with the system default browser.
+
+**`since`** 0.2.0
 
 ```typescript
 ddClient.host.openExternal("https://docker.com");
@@ -36,6 +40,8 @@ ddClient.host.openExternal("https://docker.com");
 
 Returns a string identifying the operating system platform. See https://nodejs.org/api/os.html#osplatform
 
+**`since`** 0.2.2
+
 ___
 
 ### arch
@@ -44,6 +50,8 @@ ___
 
 Returns the operating system CPU architecture. See https://nodejs.org/api/os.html#osarch
 
+**`since`** 0.2.2
+
 ___
 
 ### hostname
@@ -51,3 +59,5 @@ ___
 • **hostname**: `string`
 
 Returns the host name of the operating system. See https://nodejs.org/api/os.html#oshostname
+
+**`since`** 0.2.2
