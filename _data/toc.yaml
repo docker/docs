@@ -1659,18 +1659,12 @@ manuals:
       section:
         - path: /atomist/configure/settings/
           title: Settings
-        # - path: /atomist/configure/deployment-policies/
-        #   title: Deployment policies
     - sectiontitle: Integrate
       section:
-        # - path: /atomist/integrate/gitops/
-        #   title: GitOps
         - path: /atomist/integrate/github/
           title: GitHub
         - path: /atomist/integrate/deploys/
-          title: Deployment tracking
-        # - path: /atomist/integrate/kubernetes/
-        #   title: Kubernetes
+          title: Track deployments
     - sectiontitle: Reference
       section:
         - path: /atomist/reference/advisories/
