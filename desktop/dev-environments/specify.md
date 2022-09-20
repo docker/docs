@@ -6,7 +6,7 @@ title: Specify a Dockerfile or base image
 
 ## Specify a Dockerfile 
 
-Use a JSON file to specify a Dockerfile which in turn defines your Dev Environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example:
+Use a JSON file to specify a Dockerfile which in turn defines your dev environment. You must include this as part of the `.docker` folder and then add it as a `config.json` file. For example:
 
 ```jsx
 {
