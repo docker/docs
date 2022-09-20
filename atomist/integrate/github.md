@@ -1,5 +1,5 @@
 ---
-title: Connect to GitHub
+title: Integrate with GitHub
 description:
 keywords:
 ---

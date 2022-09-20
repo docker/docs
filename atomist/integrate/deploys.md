@@ -1,5 +1,5 @@
 ---
-title: Deployment tracking
+title: Track deployments
 description:
 keywords:
 ---

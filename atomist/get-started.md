@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: Get started
 description: Getting started with Atomist
 keywords: atomist, software supply chain, vulnerability scanning, tutorial
 toc_max: 2
@@ -369,7 +369,8 @@ The image labels that Atomist requires are:
 For more information about pre-defined OCI annotations, see the
 [specification document on GitHub](https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys).
 
-There are different ways of adding these labels to an image.
+You can add these labels to images using the built-in Git provenance feature of
+Buildx, or set using the `--label` CLI argument.
 
 ### Add labels using Docker Buildx
 
@@ -378,7 +379,8 @@ There are different ways of adding these labels to an image.
 > Git provenance labels via Buildx is a beta feature.
 
 To add the image labels using Docker Buildx, set the environment variable
-`BUILDX_GIT_LABELS=1`:
+`BUILDX_GIT_LABELS=1`. The Buildx will set the labels automatically when
+building the image.
 
 ```bash
 export BUILDX_GIT_LABELS=1
@@ -387,7 +389,7 @@ docker buildx build . -f docker/Dockerfile
 
 ### Add labels using the label CLI argument
 
-You can create labels using the `--label` argument for `docker build`.
+Assign image labels using the `--label` argument for `docker build`.
 
 ```bash
 docker build . -f docker/Dockerfile -t $IMAGE_NAME \
@@ -396,19 +398,20 @@ docker build . -f docker/Dockerfile -t $IMAGE_NAME \
 ```
 
 Images built in a CI/CD environment can leverage the built-in environment
-variables. For example, to set the `org.opencontainers.image.revision` in GitHub
-Actions, you can use {% raw %}`${{ github.sha }}`{% endraw %}. Consult the
-documentation for your CI/CD platform to learn which variables to use.
+variables when setting the Git revision label:
 
-### Add labels in the Dockerfile
+| Build tool                    | Environment variable                                             |
+| ----------------------------- | ---------------------------------------------------------------- |
+| GitHub Actions                | {% raw %}`${{ github.sha }}`{% endraw %}                         |
+| GitHub Actions, pull requests | {% raw %}`${{ github.event.pull_request.head.sha }}`{% endraw %} |
+| GitLab CI/CD                  | `$CI_COMMIT_SHA`                                                 |
+| Docker Hub automated builds   | `$SOURCE_COMMIT`                                                 |
+| Google Cloud Build            | `$COMMIT_SHA`                                                    |
+| AWS CodeBuild                 | `$CODEBUILD_RESOLVED_SOURCE_VERSION`                             |
+| Manual                        | `$(git rev-parse HEAD)`                                          |
 
-You can specify the labels directly in the Dockerfile using the `LABEL` command,
-should you want to.
-
-```dockerfile
-LABEL org.opencontainers.image.revision="10ac8f8bdaa343677f2f394f9615e521188d736a"
-LABEL com.docker.image.source.entrypoint="docker/Dockerfile"
-```
+Consult the documentation for your CI/CD platform to learn which variables to
+use.
 
 ## Where to go next
 
