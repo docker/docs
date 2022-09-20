@@ -3,5 +3,5 @@ message: "Write short, concise sentences."
 scope: sentence
 link: https://docs.docker.com/contribute/checklist/
 level: warning
-max: 25
+max: 30
 token: \b(\w+)\b

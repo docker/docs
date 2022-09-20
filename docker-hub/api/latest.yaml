@@ -2463,7 +2463,7 @@ components:
       required: false
       schema:
         type: integer
-      description: "Number of images to get per page. Defaults to 10. Max of 1000."
+      description: "Number of items to get per page. Defaults to 10. Max of 100."
 
   requestBodies:
     scim_create_user_request:
