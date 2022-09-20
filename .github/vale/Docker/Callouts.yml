@@ -1,3 +1,6 @@
+# Checks that a callout block is followed by a liquid tag
+# (Doesn't actually check that there is a well-formed liquid
+# tag, just checks that it is not an empty line.)
 extends: existence
 message: "Use a liquid tag for 'Important' or 'Warning' callouts."
 link: https://docs.docker.com/contribute/components/call-outs/
@@ -5,8 +8,8 @@ level: warning
 nonword: true
 scope: raw
 raw:
-  - '[:blank:]*\> .*?'
+  - '[:blank:]*\>.*?'
   - "(?i)(?:important|warning|danger|caution)(?-i)"
   - '.*\n'
-  - '(?:[:blank:]*\>.*\n)+?'
-  - '[:blank:]*(?!\{: \.(important|warning))'
+  - '(?:\s*\>.*?\n)+?'
+  - '\s*\n'
