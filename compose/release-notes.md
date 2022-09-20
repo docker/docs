@@ -6,6 +6,48 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.11.1
+
+(2022-09-20)
+
+### Bug fixes
+* Keep `depends_on` condition when service has `volumes_from` by @laurazard in https://github.com/docker/compose/pull/9849
+* keep the platform defined at service level during build if no build patforms provided by @glours in https://github.com/docker/compose/pull/9847
+* keep the platform defined via DOCKER_DEFAULT_PLATFORM during build if no build platforms provided by @glours in https://github.com/docker/compose/pull/9854
+
+For the full change log or additional information, check the [Compose repository 2.11.1 release page](https://github.com/docker/compose/releases/tag/v2.11.1){:target="_blank" rel="noopener" class="_"}.
+
+## 2.11.0
+
+(2022-09-14)
+
+### Enhancements
+* Add platforms build by @glours in https://github.com/docker/compose/pull/9729
+* chore: add improvement output warning when pulling image by @RiskyFeryansyahP in https://github.com/docker/compose/pull/9829
+* logs: filter to services from current Compose file by @milas in https://github.com/docker/compose/pull/9811
+
+### Bug fixes
+* Correctly capture exit code when service has dependencies by @laurazard in https://github.com/docker/compose/pull/9794
+* Fix `down` with `--rmi` by @ulyssessouza in https://github.com/docker/compose/pull/9715
+* Fix docker-compose convert that turns $ into $$ when using the --no-interpolate option by @BergLucas in https://github.com/docker/compose/pull/9703
+* patch: build.go access custom labels directly cause panic by @RiskyFeryansyahP in https://github.com/docker/compose/pull/9810
+* Apply newly loaded envvars to "DockerCli" and "APIClient" by @ulyssessouza in https://github.com/docker/compose/pull/9817
+* Only attempt to start specified services on `compose start [services]` by @laurazard in https://github.com/docker/compose/pull/9797
+* build: label built images for reliable cleanup on `down` by @milas in https://github.com/docker/compose/pull/9819
+
+### Changes
+* ci: reduce noise from dependabot on Docker deps by @milas in https://github.com/docker/compose/pull/9770
+* ci: upgrade to Go 1.19.1 by @milas in https://github.com/docker/compose/pull/9812
+* Update README.md by @Taha-Chaudhry in https://github.com/docker/compose/pull/9828
+* Update api.go by @Sh9hid in https://github.com/docker/compose/pull/9798
+* build(deps): bump github.com/docker/go-units from 0.4.0 to 0.5.0 by @dependabot in https://github.com/docker/compose/pull/9802
+* build(deps): bump github.com/cnabio/cnab-to-oci from 0.3.6 to 0.3.7 by @dependabot in https://github.com/docker/compose/pull/9809
+* build(deps): bump go.opentelemetry.io/otel from 1.9.0 to 1.10.0 by @dependabot in https://github.com/docker/compose/pull/9835
+* build(deps): bump github.com/AlecAivazis/survey/v2 from 2.3.5 to 2.3.6 by @dependabot in https://github.com/docker/compose/pull/9830
+* build(deps): bump go.opentelemetry.io/otel from 1.4.1 to 1.9.0 by @dependabot in https://github.com/docker/compose/pull/9821
+* update compose-go version to v1.5.1 by @glours in https://github.com/docker/compose/pull/9840
+
+For the full change log or additional information, check the [Compose repository 2.11.0 release page](https://github.com/docker/compose/releases/tag/v2.11.0){:target="_blank" rel="noopener" class="_"}.
 
 ## 2.10.2
 
@@ -55,7 +97,7 @@ For the full change log or additional information, check the [Compose repository
 - Updated usage strings for consistency.
 - Resolved environment variables case-insensitively on Windows. Fixes [compose#9431](https://github.com/docker/compose/issues/9431){:target="_blank" rel="noopener" class="_"}.
 - Fixed `compose up` so dependency containers aren't stopped when a stop signal is issued. This keeps parity with v1 behavior-wise.
-Fixes [compose#9696](https://github.com/docker/compose/issues/9696){:target="_blank" rel="noopener" class="_"}.
+- Fixes [compose#9696](https://github.com/docker/compose/issues/9696){:target="_blank" rel="noopener" class="_"}.
 - Fixed commands that start/restart/pause/unpause so that, if ran from the Compose file, the Compose model is also applied. Fixes [compose#9705](https://github.com/docker/compose/issues/9705){:target="_blank" rel="noopener" class="_"} and [compose#9705](https://github.com/docker/compose/issues/9671){:target="_blank" rel="noopener" class="_"}.
 - Removed extra whitespaces in help text of some subcommands.
 - Fixed `compose create` to not override service pull policy when the value from the command line is configured as the default. Fixes [compose#9717](https://github.com/docker/compose/issues/9717){:target="_blank" rel="noopener" class="_"}.
