@@ -44,6 +44,7 @@ Allowing the `-–privileged` flag but restricting its impact within the contain
 
 - Docker Engine Limitations: When running Docker inside a Sysbox container (e.g., for extra isolation), most Docker functionality is supported. However, there may be some advanced Docker functionality that does not currently work as the environment inside the Sysbox container does not yet fully resemble that of a bare-metal machine or VM. Fixing this requires further changes in Sysbox.
 
+
 <hr>
 </div>
 </div>
