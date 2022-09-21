@@ -1,10 +1,10 @@
 ---
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
-title: Create a Dev Environment
+title: Create a simple dev environment
 ---
 
-You can create a Dev Environment from a:
+You can create a dev environment from a:
 - Git repository
 - Branch or tag of a Git repository
 - Subfolder of a Git repository
@@ -12,7 +12,7 @@ You can create a Dev Environment from a:
 
 This did not conflict with any of the local files or local tooling set up on your host. 
 
-## Create a Dev Environment from a Git repository
+## Create a dev environment from a Git repository
 
 The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. 
 
@@ -55,7 +55,7 @@ fi
     </div>
 </div>
 
-To create a Dev Environment:
+To create a dev environment:
 
 1. From **Under Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** tab.
@@ -68,7 +68,7 @@ To create a Dev Environment:
 5. To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
 
-## Create a Dev Environment from a specific branch or tag
+## Create a dev environment from a specific branch or tag
 
 You can create a dev environment from a specific branch (for example, a branch corresponding to a Pull Request) or a tag by adding `@mybranch` or `@tag` as a suffix to your Git URL:
 
@@ -80,7 +80,7 @@ You can create a dev environment from a specific branch (for example, a branch c
 
 Docker then clones the repository with your specified branch or tag.
 
-## Create a Dev Environment from a subdirectory of a Git repository
+## Create a dev environment from a subdirectory of a Git repository
 
 >Note
 >
@@ -96,7 +96,7 @@ Docker then clones the repository with your specified branch or tag.
 
 5. To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
-## Create a Dev Environment from a local folder
+## Create a dev environment from a local folder
 
 1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started** and then the **Local Folder** tab.
@@ -107,8 +107,8 @@ Docker then clones the repository with your specified branch or tag.
 
 > **Note**
 >
-> When using a local folder for a Dev Environment, file changes are synchronized between your Dev Environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
+> When using a local folder for a dev environment, file changes are synchronized between your environment container and your local files. This can affect the performance inside the container, depending on the number of files in your local folder and the operations performed in the container.
 
 ## What's next?
 
-Learn how to [distribute your Dev Environment](share.md)
+Learn how to [distribute your dev environment](share.md)
