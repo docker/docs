@@ -16,7 +16,7 @@ For extensions with a backend service running REST services over sockets or name
 
 > Note
 >
-> If you want to start a codebase for your new extension, our [Quickstart guide](../../quickstart.md) and `docker extension init <my-extension>` will provide a better base for your extension, more up-to-date and related to your install of Docker Desktop.
+> If you want to start a codebase for your new extension, our [Quickstart guide](../../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension as it is more up-to-date and related to your install of Docker Desktop.
 
 ## Extension folder structure
 
