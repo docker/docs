@@ -3,9 +3,9 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/build/ @crazy-max @usha-mandya @jedevc
+/build/ @crazy-max @usha-mandya @jedevc @dvdksn
 
-/compose/ @usha-mandya
+/compose/ @usha-mandya @aevesdocker
 
 /desktop/ @aevesdocker
 
