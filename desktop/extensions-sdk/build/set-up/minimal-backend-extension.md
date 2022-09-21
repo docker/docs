@@ -116,7 +116,7 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 > **Warning**
 >
 > Do not replace the `${DESKTOP_PLUGIN_IMAGE}` placeholder in the `metadata.json` file. The placeholder is replaced automatically with the correct image name when the extension is installed.
-> {: .warning}
+{: .warning}
 
 ## What's next?
 
