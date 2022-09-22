@@ -224,10 +224,11 @@ Initial implementation of the Docker commands: `run`, `commit`, `build`, `push`,
     >
     > If an older version is installed, the Docker daemon will report an error: **Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver**.  
     Install a newer version of Buildx following the instructions on [Docker Buildx Manual download](../../build/buildx/install/#manual-download).
-* The Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. Disable the Containerd Image Store feature if you are using the Kubernetes from Docker Desktop.
-* The Docker deamon settings `registry-mirrors` and `insecure-registries` to configure local registry mirrors are not supported at the moment.
+* Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. Disable the Containerd Image Store feature if you are using the Kubernetes from Docker Desktop.
+* Local registry mirror configuration isn't implemented yet with the Containerd Image Store. Hence the `registry-mirrors` and `insecure-registries` aren't taken into account by the Docker daemon.
+* The `reference` filter isn't implemented yet and will return the error `invalid filter 'reference'` when listing images.
 
 ## Feedback
 
 Thanks for trying the new features available with `containerd`.   
-We’d love to hear from you! Please feel free to provide us feedback or report any bugs you may find through the issues tracker on the [feedback form](https://dockr.ly/3PODIhD){: target="_blank" rel="noopener" class="_"}.
+We’d love to hear from you! Please feel free to give feedback or report any bugs you may find through the issues tracker on the [feedback form](https://dockr.ly/3PODIhD){: target="_blank" rel="noopener" class="_"}.
