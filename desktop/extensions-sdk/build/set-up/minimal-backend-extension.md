@@ -1,18 +1,22 @@
 ---
-title: Set up a minimal backend extension 
+title: Set up a minimal backend extension
 description: Minimal backend extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:
-- /desktop/extensions-sdk/tutorials/minimal-backend-extension/
+  - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker Extension that runs CLI commands in the backend.
 
 For extensions with a backend service running REST services over sockets or named pipes, see the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples).
 
->Note
+> Note
 >
->Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+> Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+
+> Note
+>
+> If you want to start a codebase for your new extension, our [Quickstart guide](../../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension as it is more up-to-date and related to your install of Docker Desktop.
 
 ## Extension folder structure
 
@@ -111,12 +115,9 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 
 > **Warning**
 >
->Do not replace the `${DESKTOP_PLUGIN_IMAGE}` placeholder in the `metadata.json` file. The placeholder is replaced automatically with the correct image name when the extension is installed.
+> Do not replace the `${DESKTOP_PLUGIN_IMAGE}` placeholder in the `metadata.json` file. The placeholder is replaced automatically with the correct image name when the extension is installed.
 {: .warning}
-
 
 ## What's next?
 
 Learn how to [build and install your extension](../build-install.md).
-
-

@@ -140,6 +140,8 @@ services:
      - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
    volumes:
      - ./:/app
+    depends_on:
+      - mysqlserver
 
  mysqlserver:
     image: mysql:8.0
