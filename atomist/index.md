@@ -8,8 +8,8 @@ keywords:
 {% include atomist/disclaimer.md %}
 
 Atomist is a data and automation platform for managing the software supply
-chain. It will extract metadata from container images, evaluate the data, and
-help you understand the state of the image.
+chain. It extracts metadata from container images, evaluates the data, and helps
+you understand the state of the image.
 
 Integrating Atomist into your systems and repositories grants you essential
 information about the images you build, and the containers running in
@@ -29,10 +29,15 @@ Example capabilities made possible with Atomist are:
 ## How it works
 
 Atomist monitors your container registry for new images. When it finds a new
-image, it will analyze and extract metadata about the image contents and any
-base images used. The metadata is uploaded to an isolated partition in the
-Atomist data plane where it's securely stored.
+image, it analyzes and extracts metadata about the image contents and any base
+images used. The metadata is uploaded to an isolated partition in the Atomist
+data plane where it's securely stored.
 
 The Atomist data plane is a combination of metadata and a large knowledge graph
 of public software and vulnerability data. Atomist determines the state of your
 container by overlaying the image metadata with the knowledge graph.
+
+## What's next?
+
+Head over to the [try atomist](./try-atomist.md) page for instructions on how to
+run Atomist, locally and with no strings attached.

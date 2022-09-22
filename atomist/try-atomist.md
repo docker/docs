@@ -1,7 +1,7 @@
 ---
 title: Try Atomist
 description:
-keywords:
+keywords: atomist, tutorial, introduction, local images
 ---
 
 {% include atomist/disclaimer.md %}
@@ -14,7 +14,7 @@ plane for analysis.
 
 ## Prerequisites
 
-Before you can begin the setup, you’ll need a Docker ID. If you don't already
+Before you can begin the setup, you need a Docker ID. If you don't already
 have one, you can [register here](https://hub.docker.com/signup){:
 target="blank" rel="noopener" class=""}.
 

@@ -1531,6 +1531,27 @@ manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
+- sectiontitle: Atomist
+  section:
+    - path: /atomist/
+      title: Introduction
+    - path: /atomist/try-atomist/
+      title: Try Atomist
+    - path: /atomist/get-started/
+      title: Get started
+    - sectiontitle: Configure
+      section:
+        - path: /atomist/configure/settings/
+          title: Settings
+        - path: /atomist/configure/advisories/
+          title: Advisories
+    - sectiontitle: Integrate
+      section:
+        - path: /atomist/integrate/github/
+          title: GitHub
+        - path: /atomist/integrate/deploys/
+          title: Track deployments
+
 - sectiontitle: Docker subscription
   section:
   - path: /subscription/
@@ -1646,29 +1667,6 @@ manuals:
       title: Compatibility
     - path: /registry/help/
       title: Getting help
-
-- sectiontitle: Atomist
-  section:
-    - path: /atomist/
-      title: Introduction
-    - path: /atomist/try-atomist/
-      title: Try Atomist
-    - path: /atomist/get-started/
-      title: Get started
-    - sectiontitle: Configure
-      section:
-        - path: /atomist/configure/settings/
-          title: Settings
-    - sectiontitle: Integrate
-      section:
-        - path: /atomist/integrate/github/
-          title: GitHub
-        - path: /atomist/integrate/deploys/
-          title: Track deployments
-    - sectiontitle: Reference
-      section:
-        - path: /atomist/reference/advisories/
-          title: Advisories
 
 - path: /release-notes/
   title: Release notes

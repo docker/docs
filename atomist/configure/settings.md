@@ -1,7 +1,7 @@
 ---
 title: Settings
 description:
-keywords:
+keywords: settings, configure, vulnerabilities, base images, atomist
 ---
 
 {% include atomist/disclaimer.md %}

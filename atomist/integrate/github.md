@@ -1,13 +1,13 @@
 ---
 title: Integrate with GitHub
-description:
-keywords:
+description: Link images with commits and pull requests on GitHub
+keywords: github, app, link, commits, source code, atomist
 ---
 
 {% include atomist/disclaimer.md %}
 
 When installed for a GitHub organization, the Atomist GitHub app links
-repository activity to images. This linking enables Atomist link image tags and
+repository activity to images. This enables Atomist to relate image tags and
 digests directly to specific commits in the source repository. It also opens up
 the possibility to incorporate image analysis in your Git workflow. For example,
 by adding analysis checks to pull request, or automatically raising pull
@@ -20,14 +20,16 @@ repositories for your Docker images.
 
 1. Go to <https://dso.docker.com/> and sign in using your Docker ID.
 2. Open the **Repositories** tab.
-3. Select **Connect to GitHub** and follow the authorization flow. You will be
-   installing the
+3. Select **Connect to GitHub** and follow the authorization flow. This installs
+   the
    [Atomist GitHub App](https://github.com/apps/atomist "Atomist GitHub App").
 
    ![install the GitHub app](images/gh-install.png){: width="700px" }
 
 4. Install the app.
 
+   > **Note**
+   >
    > If your GitHub account is a member of one or more organizations, GitHub
    > prompts you to choose which account to install the app into. Select the
    > account that contains the source repositories for your images.
@@ -37,7 +39,7 @@ repositories for your Docker images.
 5. In the repository selection menu, select what repositories you want Atomist
    to start watching.
 
-   ![activate repositories](images/activate-repos.png){: width="700px" }
+   ![activate repositories](images/activate-repos.png){: width="500px" }
 
    If you are just looking to evaluate Atomist, start by selecting a few
    repositories during evaluation. Once you are comfortable using Atomist, you
@@ -47,13 +49,14 @@ repositories for your Docker images.
    > **Important**
    >
    > If Atomist detects `FROM` commands in Dockerfiles in the selected
-   > repositories, it will begin raising automated pull requests. The pull
-   > requests will update the Dockerfile `FROM`-line to specify the image
-   > versions (as digests). {: .important }
+   > repositories, it begins raising automated pull requests. The pull requests
+   > update the Dockerfile `FROM`-line to specify the image versions (as
+   > digests).
+   {: .important }
 
 6. Select **Save selection**.
 
-Atomist is now connected with your GitHub repositories and will be able to link
+Atomist is now connected with your GitHub repositories and is be able to link
 image analyses with Git commits.
 
 ## Manage repository access
@@ -66,9 +69,9 @@ If you wish to add or remove repository access for Atomist, go to the
 - Select **Only select repositories** if you want to provision access to only a
   subset of repositories.
 
-## Disconnecting GitHub
+## Disconnect from GitHub
 
-You might want to disconnect GitHub when:
+You might want to disconnect from GitHub when:
 
 - You want to change which GitHub organization or account connected to your
   Atomist workspace.

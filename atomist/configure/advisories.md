@@ -1,7 +1,9 @@
 ---
 title: Advisory sources
-description:
-keywords:
+description: Add and remove vulnerability advisories
+keywords: >
+  advisories, vulnerabilities, databases, open source, configure, security,
+  atomist
 ---
 
 {% include atomist/disclaimer.md %}
@@ -30,10 +32,12 @@ To add your own advisories:
    [GitHub Advisory Database](https://github.com/github/advisory-database/tree/main/advisories/github-reviewed)
    for examples of advisories.
 
-### Deleting advisories
+## Deleting advisories
 
 Delete an advisory from the database by removing the corresponding JSON advisory
 file from the `atomist-advisories` repository.
 
+> **Note**
+>
 > Atomist only considers additions, changes and removals of JSON advisory files
 > in the repository's **default branch**.

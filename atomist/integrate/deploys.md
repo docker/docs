@@ -1,7 +1,9 @@
 ---
 title: Track deployments
-description:
-keywords:
+description: >
+  Deployment tracking lets Atomist compare your image builds with what's running
+  in your environments.
+keywords: deployment, kubernetes, security
 ---
 
 {% include atomist/disclaimer.md %}
@@ -20,7 +22,7 @@ There are several options for how you could implement deployment tracking:
 
 Each Atomist workspace exposes an API endpoint. Submitting a POST request to the
 endpoint updates Atomist about what image you are running in your environments.
-This will let you compare data for images you build against images of containers
+This lets you compare data for images you build against images of containers
 running in staging or production.
 
 You can find the API endpoint URL on the **Integrations** page. Using this API

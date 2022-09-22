@@ -12,17 +12,16 @@ To get started with Atomist, you'll need to:
 - Connect Atomist with your container registry
 - Link your container images with their Git source
 
-Before you can begin the setup, you’ll need a Docker ID. If you don't already
-have one, you can [register here](https://hub.docker.com/signup){:
-target="blank" rel="noopener" class=""}.
+Before you can begin the setup, you need a Docker ID. If you don't already have
+one, you can [register here](https://hub.docker.com/signup){: target="blank"
+rel="noopener" class=""}.
 
 ## Connect container registry
 
-After completing this setup, Atomist will have read-only access to your
-registry, and gets notified about pushed or deleted images.
-
+This section describes how to integrate Atomist with your container registry.
 Follow the applicable instructions depending on the type of container registry
-you use.
+you use. After completing this setup, Atomist will have read-only access to your
+registry, and gets notified about pushed or deleted images.
 
 > Using Docker Hub? 🐳
 >
@@ -62,12 +61,12 @@ with the appropriate condition on the IAM role statement.
 3. Fill out all the fields, except **Trusted Role ARN**. The trusted role
    identity is known only after applying the CloudFormation template.
 
-   Choose basic auth credentials to protect the endpoint that AWS will use to
-   notify Atomist. The URL and the basic auth credentials are parameters to the
+   Choose basic auth credentials to protect the endpoint that AWS uses to notify
+   Atomist. The URL and the basic auth credentials are parameters to the
    CloudFormation template.
 
-4. Now create the CloudFormation stack. Before creating the stack, AWS will ask
-   you to enter three parameters.
+4. Now create the CloudFormation stack. Before creating the stack, AWS asks you
+   to enter three parameters.
 
    - `Url`: the API endpoint copied from Atomist
    - `Username`, `Password`: basic authentication credentials for the endpoint.
@@ -183,8 +182,8 @@ with the appropriate condition on the IAM role statement.
 
 7. Select **Save Configuration**.
 
-   Atomist will now test the connection with your ECR registry. You'll see a
-   green check mark beside the integration if a successful connection was made.
+   Atomist tests the connection with your ECR registry. A green check mark
+   displays beside the integration if a successful connection is made.
 
    ![integration list showing a successful ECR integration](./images/ecr/connection-successful.png){:
    width="700px"}
@@ -376,10 +375,11 @@ Buildx, or set using the `--label` CLI argument.
 
 > Beta
 >
-> Git provenance labels via Buildx is a beta feature.
+> Git provenance labels in Buildx is a [Beta](/release-lifecycle.md#beta)
+> feature.
 
 To add the image labels using Docker Buildx, set the environment variable
-`BUILDX_GIT_LABELS=1`. The Buildx will set the labels automatically when
+`BUILDX_GIT_LABELS=1`. The Buildx will create the labels automatically when
 building the image.
 
 ```bash
@@ -408,7 +408,7 @@ variables when setting the Git revision label:
 | Docker Hub automated builds   | `$SOURCE_COMMIT`                                                 |
 | Google Cloud Build            | `$COMMIT_SHA`                                                    |
 | AWS CodeBuild                 | `$CODEBUILD_RESOLVED_SOURCE_VERSION`                             |
-| Manual                        | `$(git rev-parse HEAD)`                                          |
+| Manually                      | `$(git rev-parse HEAD)`                                          |
 
 Consult the documentation for your CI/CD platform to learn which variables to
 use.
@@ -426,11 +426,11 @@ Atomist further. For example, to gain visibility into container workload systems
 like Kubernetes.
 
 - Connect Atomist with your GitHub repositories by
-  [installing the Atomist app](./integrate/github.md) for your GitHub
+  [installing the Atomist app](integrate/github.md) for your GitHub
   organization.
-- Manage which Atomist features you use in [settings](./configure/settings.md).
+- Manage which Atomist features you use in [settings](configure/settings.md).
 - Learn about [deployment tracking](integrate/deploys.md) and how Atomist can
   help watch your deployed containers.
 - Atomist watches for new advisories from public sources, but you can also
-  [add your own internal advisories](reference/advisories.md) for more
+  [add your own internal advisories](configure/advisories.md) for more
   information.

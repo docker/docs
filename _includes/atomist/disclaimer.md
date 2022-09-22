@@ -1,5 +1,4 @@
-<!-- This text will be included on the Atomist pages -->
-
-> Atomist is not yet generally available. Information on these pages is
-> preliminary and subject to change.
-{: .important }
+> **Note**
+>
+> Atomist is currently in [Early Access](/release-lifecycle.md#early-access-ea).
+> Features and APIs are subject to change.
