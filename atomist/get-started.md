@@ -375,7 +375,7 @@ Buildx, or set using the `--label` CLI argument.
 
 > Beta
 >
-> Git provenance labels in Buildx is a [Beta](/release-lifecycle.md#beta)
+> Git provenance labels in Buildx is a [Beta](/release-lifecycle#beta)
 > feature.
 
 To add the image labels using Docker Buildx, set the environment variable
