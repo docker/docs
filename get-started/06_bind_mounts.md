@@ -51,7 +51,8 @@ So, let's do it!
         sh -c "yarn install && yarn run dev"
     ```
 
-    If you are using Windows, then use the following command in PowerShell.
+    If you are using Windows, then use the following command in PowerShell. If you are using git-bash on Windows 
+    you may want to run `export MSYS_NO_PATHCONV=1` otherwise you will come across path conversion issues (https://stackoverflow.com/questions/7250130/how-to-stop-mingw-and-msys-from-mangling-path-names-given-at-the-command-line/34386471#34386471)
 
     ```powershell
     PS> docker run -dp 3000:3000 `
