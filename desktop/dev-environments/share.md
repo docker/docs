@@ -12,4 +12,4 @@ When you are ready to share your environment, simply copy the link to the Github
 
 ### Open a dev environment that has been distributed to you
 
-To open a dev environment that has been shared with you, select the **Create** button in the top right-hand corner, select the **Existing Dev Environment** tab, and then paste the URL.
+To open a dev environment that has been shared with you, select the **Create** button in the top right-hand corner, select the **New Dev Environment** tab, with source **Existing Git repo**, and then paste the URL.
