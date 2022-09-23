@@ -92,7 +92,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>us-east-1</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-east-1/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-east-1/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -100,7 +100,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>us-east-2</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-east-2/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=us-east-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-east-2/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -108,7 +108,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>us-west-1</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-west-1/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=us-west-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-west-1/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -116,7 +116,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>us-west-2</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-west-2/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-us-west-2/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -124,7 +124,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>eu-west-1</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-west-1/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-west-1/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -132,7 +132,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>eu-west-2</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-west-2/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-west-2/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -140,7 +140,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>eu-west-3</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-3#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-west-3/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=eu-west-3#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-west-3/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -148,7 +148,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>eu-central-1</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-central-1/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-eu-central-1/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -156,7 +156,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>ca-central-1</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=ca-central-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-ca-central-1/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=ca-central-1#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-ca-central-1/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -164,7 +164,7 @@ with the appropriate condition on the IAM role statement.
        <tr>
          <th>ap-southeast-2</th>
          <td>
-           <a href="https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-ap-southeast-2/atomist-public-templates/latest/ecr-integration.template">
+           <a target="blank" rel="nooopener" href="https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=atomist-public-templates-ecr-integration&templateURL=https://s3.amazonaws.com/atomist-ap-southeast-2/atomist-public-templates/latest/ecr-integration.template">
              <img alt="Launch Stack" src="https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png" />
            </a>
          </td>
@@ -205,7 +205,8 @@ container images.
 
    Atomist requires the **Personal access token** for connecting images to
    private repositories. The token must have the
-   [`read:packages` scope](https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages).
+   [`read:packages` scope](https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages){:
+   target="blank" rel="noopener" class=""}.
 
    Leave the **Personal access token** field blank if you only want to index
    images in public repositories.
@@ -265,7 +266,8 @@ project.
        --role="roles/iam.serviceAccountTokenCreator"
    ```
 
-5. Go to <https://dso.docker.com> and sign in with your Docker ID credentials.
+5. Go to [dso.docker.com](https://dso.docker.com){: target="blank"
+   rel="noopener" class=""} and sign in with your Docker ID credentials.
 6. Navigate to the **Integrations** tab and select **Configure** next to the
    **Google Artifact Registry** integration.
 7. Fill out the following fields:
@@ -366,7 +368,8 @@ The image labels that Atomist requires are:
 | `com.docker.image.source.entrypoint` | Path to the Dockerfile, relative to project root. |
 
 For more information about pre-defined OCI annotations, see the
-[specification document on GitHub](https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys).
+[specification document on GitHub](https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys){:
+target="blank" rel="noopener" class=""}.
 
 You can add these labels to images using the built-in Git provenance feature of
 Buildx, or set using the `--label` CLI argument.
@@ -375,8 +378,7 @@ Buildx, or set using the `--label` CLI argument.
 
 > Beta
 >
-> Git provenance labels in Buildx is a [Beta](/release-lifecycle#beta)
-> feature.
+> Git provenance labels in Buildx is a [Beta](/release-lifecycle#beta) feature.
 
 To add the image labels using Docker Buildx, set the environment variable
 `BUILDX_GIT_LABELS=1`. The Buildx will create the labels automatically when
@@ -417,7 +419,8 @@ use.
 
 Atomist is now tracking bill of materials, packages, and vulnerabilities for
 your images! You can view your image scan results on the
-[images overview page](https://dso.docker.com/r/auth/overview/images).
+[images overview page](https://dso.docker.com/r/auth/overview/images){:
+target="blank" rel="noopener" class=""}.
 
 Teams use Atomist to protect downstream workloads from new vulnerabilities. It's
 also used to help teams track and remediate new vulnerabilities that impact
