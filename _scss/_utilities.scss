@@ -222,3 +222,15 @@ input[type=text] {
       display: none !important;
     }
 }
+
+/*
+ * lists **********************************************************************
+ */
+
+ol li ol li{
+  list-style-type: lower-alpha;
+}
+
+ol li ol li ol li{
+  list-style-type: lower-roman;
+}
