@@ -37,7 +37,7 @@ Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: t
 
 ## Do I need to pay to create or share Docker Extensions?
 
-No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client) is licensed under the Apache 2.0 License and is free to use ; anyone can create new Docker Extensions and share them without constraints.
+No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client) is licensed under the Apache 2.0 License and is free to use. Anyone can create new Docker Extensions and share them without constraints.
 
 ## Do I need to use a specific license when I create a Docker Extension?
 
