@@ -3,7 +3,7 @@ info:
   title: Docker HUB API
   version: beta
   x-logo:
-    url: https://docs.docker.com/images/logo-docker-main.png
+    url: https://docs.docker.com/assets/images/logo-docker-main.png
     href: /reference
   description: |
     Docker Hub is a service provided by Docker for finding and sharing container
