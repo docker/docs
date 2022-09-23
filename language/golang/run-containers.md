@@ -36,7 +36,7 @@ ____________________________________O/_______
 ⇨ http server started on [::]:8080
 ```
 
-When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without return control back to the OS until we stop the container.
+When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
 Let’s make a GET request to the server using the curl command.
 
