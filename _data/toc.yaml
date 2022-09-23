@@ -1610,6 +1610,27 @@ manuals:
       - path: /engine/security/rootless/
         title: Rootless mode
 
+- sectiontitle: Atomist
+  section:
+    - path: /atomist/
+      title: Introduction
+    - path: /atomist/try-atomist/
+      title: Try Atomist
+    - path: /atomist/get-started/
+      title: Get started
+    - sectiontitle: Configure
+      section:
+        - path: /atomist/configure/settings/
+          title: Settings
+        - path: /atomist/configure/advisories/
+          title: Advisories
+    - sectiontitle: Integrate
+      section:
+        - path: /atomist/integrate/github/
+          title: GitHub
+        - path: /atomist/integrate/deploys/
+          title: Track deployments
+
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Registry
@@ -1646,27 +1667,6 @@ manuals:
       title: Compatibility
     - path: /registry/help/
       title: Getting help
-
-- sectiontitle: Atomist
-  section:
-    - path: /atomist/
-      title: Introduction
-    - path: /atomist/try-atomist/
-      title: Try Atomist
-    - path: /atomist/get-started/
-      title: Get started
-    - sectiontitle: Configure
-      section:
-        - path: /atomist/configure/settings/
-          title: Settings
-        - path: /atomist/configure/advisories/
-          title: Advisories
-    - sectiontitle: Integrate
-      section:
-        - path: /atomist/integrate/github/
-          title: GitHub
-        - path: /atomist/integrate/deploys/
-          title: Track deployments
 
 - path: /release-notes/
   title: Release notes
