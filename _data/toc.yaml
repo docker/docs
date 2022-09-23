@@ -1110,7 +1110,91 @@ reference:
 
 samples:
 - path: /samples/
-  title: Official Docker samples
+  title: Overview
+- sectiontitle: Databases
+  section:
+    - path: /samples/mariadb/
+      title: MariaDB
+    - path: /samples/mongodb/
+      title: MongoDB
+    - path: /samples/ms-sql/
+      title: MS-SQL
+    - path: /samples/mysql/
+      title: MySQL
+    - path: /samples/postgres/
+      title: PostgreSQL
+    - path: /samples/redis/
+      title: Redis
+- sectiontitle: Frameworks
+  section:
+    - path: /samples/dotnet/
+      title: .NET
+    - path: /samples/angular/
+      title: Angular
+    - path: /samples/django-sample/
+      title: Django
+    - path: /samples/express/
+      title: Express
+    - path: /samples/fastapi/
+      title: FastAPI
+    - path: /samples/flask/
+      title: Flask
+    - path: /samples/nodejs/
+      title: Node.js
+    - path: /samples/react/
+      title: React
+    - path: /samples/spark/
+      title: Spark
+    - path: /samples/spring/
+      title: Spring Boot
+    - path: /samples/vuejs/
+      title: Vue.js
+- sectiontitle: Languages
+  section:
+    - path: /samples/go/
+      title: Go
+    - path: /samples/java/
+      title: Java
+    - path: /samples/javascript/
+      title: JavaScript
+    - path: /samples/php/
+      title: PHP
+    - path: /samples/python/
+      title: Python
+    - path: /samples/rust/
+      title: Rust
+    - path: /samples/typescript/
+      title: TypeScript
+- sectiontitle: Platforms
+  section:
+    - path: /samples/gitea/
+      title: Gitea
+    - path: /samples/nextcloud/
+      title: Nextcloud
+    - path: /samples/portainer/
+      title: Portainer
+    - path: /samples/grafana/
+      title: Prometheus / Grafana
+    - path: /samples/wordpress-sample/
+      title: WordPress
+- sectiontitle: Other services
+  section:
+    - path: /samples/cloudflared/
+      title: Cloudflared
+    - path: /samples/elasticsearch/
+      title: Elasticsearch / Logstash / Kibana
+    - path: /samples/minecraft/
+      title: Minecraft
+    - path: /samples/nginx/
+      title: NGINX
+    - path: /samples/pi-hole/
+      title: Pi-hole
+    - path: /samples/plex/
+      title: Plex
+    - path: /samples/traefik/
+      title: Traefik
+    - path: /samples/wireguard/
+      title: Wireguard
 
 
 manuals:
