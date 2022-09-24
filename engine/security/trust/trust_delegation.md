@@ -338,7 +338,7 @@ attached to the `targets/releases` role, you can use the
 > by an active delegation
 
 ```console
-$ docker trust signer remove registry.example.com/admin/demo
+$ docker trust signer remove ben registry.example.com/admin/demo
 Removing signer "ben" from registry.example.com/admin/demo...
 Enter passphrase for repository key with ID b0014f8: 
 Successfully removed ben from registry.example.com/admin/demo
