@@ -18,6 +18,7 @@ GeoNetwork
 GitHub( Actions)?
 Google
 Intel
+JFrog
 JetBrains
 Kubernetes
 Lightstreamer
@@ -30,6 +31,7 @@ MySQL
 Nginx
 Nuxeo
 OAuth
+OCI
 Okta
 Postgres
 PowerShell

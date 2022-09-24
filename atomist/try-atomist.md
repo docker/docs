@@ -14,9 +14,9 @@ plane for analysis.
 
 ## Prerequisites
 
-Before you can begin the setup, you need a Docker ID. If you don't already
-have one, you can [register here](https://hub.docker.com/signup){:
-target="blank" rel="noopener" class=""}.
+Before you can begin the setup, you need a Docker ID. If you don't already have
+one, you can [register here](https://hub.docker.com/signup){: target="blank"
+rel="noopener" class=""}.
 
 ## Steps
 
@@ -26,8 +26,8 @@ target="blank" rel="noopener" class=""}.
 > purposes. For further evaluation or production use, integrate Atomist with
 > your container registry. See [get started](./get-started.md).
 
-1. Go to the [Atomist website](https://dso.docker.com) and sign in using your
-   Docker ID.
+1. Go to the [Atomist website](https://dso.docker.com){: target="blank"
+   rel="noopener" class=""} and sign in using your Docker ID.
 2. Open the **Integrations** tab.
 3. Under **API Keys**, create a new API key.
 4. In your terminal of choice, invoke the Atomist CLI tool using `docker run`.
@@ -41,7 +41,7 @@ target="blank" rel="noopener" class=""}.
    ```bash
    docker run \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      -ti atomist/docker-registry-broker:0.0.1 \
+      -ti atomist/docker-registry-broker:latest \
       index-image local \
       --workspace AQ1K5FIKA \
       --api-key team::6016307E4DF885EAE0579AACC71D3507BB38E1855903850CF5D0D91C5C8C6DC0 \
@@ -51,8 +51,7 @@ target="blank" rel="noopener" class=""}.
    > Note
    >
    > The image must have a tag (for example, `myimage:latest`) so that you are
-   > able to identify the image in the
-   > [Atomist web UI](https://dso.docker.com/r/auth/overview/images).
+   > able to identify the image later.
 
    The output should be similar to the following:
 
@@ -74,8 +73,9 @@ target="blank" rel="noopener" class=""}.
    ```
 
 5. When the command exits, open the
-   [Atomist web UI](https://dso.docker.com/r/auth/overview/images), where you
-   should see the image in the list.
+   [Atomist web UI](https://dso.docker.com/r/auth/overview/images){:
+   target="blank" rel="noopener" class=""}, where you should see the image in
+   the list.
 
    ![indexed image in the image overview list](./images/images-overview.png){:
    width="700px"}

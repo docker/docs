@@ -22,7 +22,7 @@ repositories for your Docker images.
 2. Open the **Repositories** tab.
 3. Select **Connect to GitHub** and follow the authorization flow. This installs
    the
-   [Atomist GitHub App](https://github.com/apps/atomist "Atomist GitHub App").
+   [Atomist GitHub App](https://github.com/apps/atomist "Atomist GitHub App"){: target="blank" rel="noopener" class=""}.
 
    ![install the GitHub app](images/gh-install.png){: width="700px" }
 
