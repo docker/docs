@@ -148,14 +148,17 @@ step:
 
 {% raw %}
 ```yaml
-      -
-        name: Login to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      -
-        name: Build and push
+      
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1        
+      
+      - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: ./
