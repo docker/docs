@@ -24,7 +24,7 @@ In order to validate that our containerized application works well on Kubernetes
 
 All containers in Kubernetes are scheduled as _pods_, which are groups of co-located containers that share some resources. Furthermore, in a realistic application we almost never create individual pods; instead, most of our workloads are scheduled as _deployments_, which are scalable groups of pods maintained automatically by Kubernetes. Lastly, all Kubernetes objects can and should be described in manifests called _Kubernetes YAML_ files. These YAML files describe all the components and configurations of your Kubernetes app, and can be used to easily create and destroy your app in any Kubernetes environment.
 
-1.  You already wrote a very basic Kubernetes YAML file in the Orchestration overview part of this tutorial. Now, let's write a slightly more sophisticated YAML file to run and manage our bulletin board. Place the following in a file called `bb.yaml`:
+1.  You already wrote a very basic Kubernetes YAML file in the Orchestration overview part of this tutorial. Now, let's write a slightly more sophisticated YAML file to run and manage our Todo app, the container `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. Place the following in a file called `bb.yaml`:
 
     ```yaml
     apiVersion: apps/v1
@@ -62,8 +62,8 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
     ```
 
     In this Kubernetes YAML file, we have two objects, separated by the `---`:
-    - A `Deployment`, describing a scalable group of identical pods. In this case, you'll get just one `replica`, or copy of your pod, and that pod (which is described under the `template:` key) has just one container in it, based off of your `bulletinboard:1.0` image from the previous step in this tutorial.
-    - A `NodePort` service, which will route traffic from port 30001 on your host to port 3000 inside the pods it routes to, allowing you to reach your bulletin board from the network.
+    - A `Deployment`, describing a scalable group of identical pods. In this case, you'll get just one `replica`, or copy of your pod, and that pod (which is described under the `template:` key) has just one container in it, based off of your `getting-started` image from the previous step in this tutorial.
+    - A `NodePort` service, which will route traffic from port 30001 on your host to port 3000 inside the pods it routes to, allowing you to reach your Todo app from the network.
 
     Also, notice that while Kubernetes YAML can appear long and complicated at first, it almost always follows the same pattern:
     - The `apiVersion`, which indicates the Kubernetes API that parses this object
@@ -111,7 +111,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
 
     In addition to the default `kubernetes` service, we see our `bb-entrypoint` service, accepting traffic on port 30001/TCP.
 
-3.  Open a browser and visit your bulletin board at `localhost:30001`; you should see your bulletin board, the same as when we ran it as a stand-alone container in [Part 2](02_our_app.md) of the Quickstart tutorial.
+3.  Open a browser and visit your Todo app at `localhost:30001`; you should see your Todo application, the same as when we ran it as a stand-alone container in [Part 2](02_our_app.md) of the Quickstart tutorial.
 
 4.  Once satisfied, tear down your application:
 
