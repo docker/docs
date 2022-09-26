@@ -115,3 +115,24 @@ To remove a member from a specific team:
 2. Click on the **Teams** tab and select the team from the list.
 3. Click the **X** next to the user’s name to remove them from the team.
 4. When prompted, click **Remove** to confirm.
+<<<<<<< HEAD
+=======
+
+## Export members
+
+Export members is a feature available to organizations with a Docker Business subscription. Organization owners can export a CSV file containing the organization's members.
+The CSV file contains the following fields:
+
+ * **Name**: The user's name.
+ * **Username**: The user's Docker ID.
+ * **Email**: The user's email address.
+ * **Type**: The type of user. For example, **Invitee** for users who have not accepted the organization's invite, or **User** for users who are members of the organization.
+ * **Permissions**: The user's organization permissions. For example, **Member** or **Owner**.
+ * **Teams**: The teams where the user is a member. A team is not listed for invitees.
+ * **Date Joined**: The time and date when the user was invited to the organization.
+
+To export a CSV file of the organization's members:
+
+1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
+2. In the **Members** tab, select **Export members** to download the CSV file.
+>>>>>>> 5c68a7ad02a3a842aca984dcb72d13732506c06f

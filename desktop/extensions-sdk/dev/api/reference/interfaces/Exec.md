@@ -10,9 +10,11 @@ skip_read_time: true
 
 ### Exec
 
-▸ **Exec**(`cmd`, `args`): `Promise`<[`ExecResult`](ExecResult.md)\>
+▸ **Exec**(`cmd`, `args`, `options?`): `Promise`<[`ExecResult`](ExecResult.md)\>
 
 Executes a command.
+
+**`since`** 0.2.0
 
 #### Parameters
 
@@ -20,6 +22,7 @@ Executes a command.
 | :------ | :------ | :------ |
 | `cmd` | `string` | The command to execute. |
 | `args` | `string`[] | The arguments of the command to execute. |
+| `options?` | [`ExecOptions`](ExecOptions.md) | The list of options. |
 
 #### Returns
 
@@ -35,15 +38,18 @@ Streams the result of a command if `stream` is specified in the `options` parame
 
 Specify the `stream` if the output of your command is too long or if you need to stream things indefinitely (for example container logs).
 
+**`since`** 0.2.2
+
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `cmd` | `string` | The command to execute. |
 | `args` | `string`[] | The arguments of the command to execute. |
-| `options` | `Object` | The list of options. |
-| `options.stream` | [`ExecStreamOptions`](ExecStreamOptions.md) | Provides three functions: `onOutput` (invoked every time `stdout` or `stderr` is received), `onError` and `onClose` (invoked when the stream has ended). |
+| `options` | [`SpawnOptions`](SpawnOptions.md) | The list of options. |
 
 #### Returns
 
 [`ExecProcess`](ExecProcess.md)
+
+The spawned process.

@@ -23,6 +23,8 @@ swap:
   check box: checkbox
   click: select
   deselect: clear
+  disable: turn off|toggle off
+  enable: turn on|toggle on
   ergo: therefore
   execute: invoke
   gb: GB

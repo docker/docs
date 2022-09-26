@@ -3,8 +3,6 @@ message: "Use sentence case for headings: '%s'."
 level: warning
 scope: heading
 match: $sentence
-indicators:
-  - ":"
 exceptions:
   - Vocab/Docker/accept.txt
   - Vocab/Technology/accept.txt

@@ -10,7 +10,7 @@ title: Settings and feedback
 
 Docker Extensions is switched on by default. To change your settings:
 
-1. Navigate to  **Settings**, or **Preferences** if you're a Mac user.
+1. Navigate to **Settings**, or **Preferences** if you're a Mac user.
 2. Select the **Extensions** tab.
 3. Next to **Enable Docker Extensions**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, click **Apply & Restart**.
@@ -24,18 +24,24 @@ You can install extensions through the Marketplace or through the Extensions SDK
 3. Next to **Allow only extensions distributed through the Docker Marketplace**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, click **Apply & Restart**.
 
-
 ### See containers created by extensions
 
-By default, containers created by extensions are hidden from the list of containers in Docker Dashboard and the Docker CLI. To make them visible 
+By default, containers created by extensions are hidden from the list of containers in Docker Dashboard and the Docker CLI. To make them visible
 update your settings:
 
-1. Navigate to  **Settings**, or **Preferences** if you're a Mac user.
+1. Navigate to **Settings**, or **Preferences** if you're a Mac user.
 2. Select the **Extensions** tab.
 3. Next to **Show Docker Extensions system containers**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, click **Apply & Restart**.
 
+> **Note**
+>
+> Enabling extensions does not use computer resources (CPU / Memory) by itself.
+>
+> Specific extensions might use computer resources, depending on the features and implementation of each extension, but there is no reserved resources or usage cost associated with enabling extensions.
+
 ## Submit feedback
+
 Feedback can be given to an extension author through a dedicated Slack channel or Github. To submit feedback about a particular extension:
 
 1. Navigate to Docker Dashboard and from the menu bar select the ellipsis to the right of **Extensions**.

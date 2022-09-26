@@ -1,7 +1,7 @@
 extends: occurrence
-message: "Write short, concise sentences."
+message: "Write short, concise sentences. (<=30 words)"
 scope: sentence
 link: https://docs.docker.com/contribute/checklist/
 level: warning
-max: 25
+max: 30
 token: \b(\w+)\b

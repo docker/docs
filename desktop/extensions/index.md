@@ -1,14 +1,14 @@
 ---
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows
-title: What is Docker Extensions?
+title: What are Docker Extensions?
 toc_min: 1
 toc_max: 2
 ---
 
 > **Beta**
 >
-> The Docker Extensions feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use Docker Extensions in production environments.
+> This feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use Docker Extensions in production environments.
 
 Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality. 
 
@@ -29,4 +29,4 @@ To find out more about Docker Extensions, we recommend the video walkthrough fro
 
 ## Prerequisites
 
-Docker Extensions is available as part of Docker Desktop 4.8.0 or a later release. [Download and install Docker Desktop 4.8.0 or later](../release-notes.md).
+Docker Extensions are available as part of Docker Desktop 4.8.0 or a later release. [Download and install Docker Desktop 4.8.0 or later](../release-notes.md).
