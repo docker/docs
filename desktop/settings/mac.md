@@ -163,6 +163,8 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 {% include experimental.md %}
 
+On the **Beta features** tab, you also have the option to allow version 4.13 feature flags, which are product features Docker is currently experimenting with. This is switched on by default. 
+
 ### Enable the new Apple Virtualization framework
 
 Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
