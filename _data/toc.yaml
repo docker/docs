@@ -1481,7 +1481,7 @@ manuals:
       - path: /docker-hub/repos/
         title: Manage
       - path: /docker-hub/repos/access/
-        title: Accessing
+        title: Access
       - path: /docker-hub/repos/configure/
         title: Configuring
   - path: /docker-hub/service-accounts/

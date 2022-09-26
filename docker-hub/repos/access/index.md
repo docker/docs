@@ -1,5 +1,5 @@
 ---
-description: Accessing repositories on Docker Hub
+description: Access repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, collaborators, viewing, searching, starring
 title: Access
 redirect_from:
@@ -8,43 +8,42 @@ redirect_from:
 ## Collaborators and their role
 
 A collaborator is someone you want to give access to a private repository. Once
-designated, they can `push` and `pull` to your repositories. They are not
+designated, they can `push` and `pull` to your repositories. They're not
 allowed to perform any administrative tasks such as deleting the repository or
 changing its status from private to public.
 
 > **Note**
 >
-> A collaborator cannot add other collaborators. Only the owner of
+> A collaborator can't add other collaborators. Only the owner of
 > the repository has administrative access.
 
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
-see the [organizations documentation](orgs.md).
+see the [organizations documentation](/docker-hub/orgs.md#create-an-organization).
 
 
 ## Viewing repository tags
 
 Docker Hub's individual repositories view shows you the available tags and the
-size of the associated image. Go to the **Repositories** view and click on a
-repository to see its tags.
+size of the associated image. Go to the **Repositories** view and select repository to see its tags.
 
-![Repository View](images/repos-create.png)
+![Repository View](../../images/repos-create.png)
 
-![View Repo Tags](images/repo-overview.png)
+![View Repo Tags](../../images/repo-overview.png)
 
 Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the `.tar` file
 created when you `docker save` an image.
 
-To view individual tags, click on the **Tags** tab.
+To view individual tags, select the **Tags** tab.
 
-![Manage Repo Tags](images/repo-tags-list.png)
+![Manage Repo Tags](../../images/repo-tags-list.png)
 
 An image is considered stale if there has been no push/pull activity for more
 than 1 month, i.e.:
 
-* It has not been pulled for more than 1 month
-* And it has not been pushed for more than 1 month
+* It hasn't been pulled for more than 1 month
+* And it hasn't been pushed for more than 1 month
 
 A multi-architecture image is considered stale if all single-architecture images
 part of its manifest are stale.
@@ -59,7 +58,7 @@ To delete a tag, select the corresponding checkbox and select **Delete** from th
 
 Select a tag's digest to view details.
 
-![View Tag](images/repo-image-layers.png)
+![View Tag](../../images/repo-image-layers.png)
 
 ## Searching for Repositories
 
@@ -81,7 +80,7 @@ There you can see two example results: `centos` and `ansible/centos7-ansible`.
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the top-level namespace for
-[Docker Official Images](official_images.md). The `/` character separates
+[Docker Official Images](../../official_images.md). The `/` character separates
 a user's repository from the image name.
 
 Once you've found the image you want, you can download it with `docker pull <imagename>`:
@@ -103,5 +102,5 @@ You now have an image from which you can run containers.
 ## Starring Repositories
 
 Your repositories can be starred and you can star repositories in return. Stars
-are a way to show that you like a repository. They are also an easy way of
+are a way to show that you like a repository. They're also an easy way of
 bookmarking your favorites.
