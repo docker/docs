@@ -1,6 +1,6 @@
 > **Note**
 >
-> Samples compatible with [Docker Dev Environments](/desktop/dev-environments/) require [Docker Desktop](../get-docker.md) version 4.10 or later.
+> Samples compatible with [Docker Dev Environments](/desktop/dev-environments/) require [Docker Desktop](/get-docker/) version 4.10 or later.
 
 | Name | Description | Docker Dev Environment (if compatible) |
 | ---- | ----------- | -------------------------------------- |
