@@ -1,11 +1,8 @@
 ---
 title: MariaDB samples
 description: Docker samples for MariaDB.
+service: mariadb
 ---
 
-| Name | Description |
-| ---- | ----------- |
-| [Nextcloud / Redis / MariaDB](https://github.com/docker/awesome-compose/tree/master/nextcloud-redis-mariadb){: target="_blank" rel="noopener" class="_"} |  A sample that demonstrates how to integrate Nextcloud, Redis, and MariaDB using a Compose file. |
 
-
-{% include samples-more.md %}
+{% include_relative samples-body.md %}

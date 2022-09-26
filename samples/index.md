@@ -19,7 +19,7 @@ Learn how to containerize different types of services by walking through Officia
 [Go](../samples/go.md) \| [Java](../samples/java.md) \| [JavaScript](../samples/javascript.md) \| [PHP](../samples/php.md) \| [Python](../samples/python.md) \| [Rust](../samples/rust.md) \| [TypeScript](../samples/typescript.md)
 
 ## Platforms
-[Gitea](../samples/gitea.md) \| [Nextcloud](../samples/nextcloud.md) \| [Portainer](../samples/portainer.md) \|  [Prometheus / Grafana](../samples/grafana.md) \| [WordPress](../samples/wordpress-sample.md)
+[Gitea](../samples/gitea.md) \| [Nextcloud](../samples/nextcloud.md) \| [Portainer](../samples/portainer.md) \|  [Prometheus](../samples/prometheus.md) \| [WordPress](../samples/wordpress-sample.md)
 
 ## Other services
 [Cloudflared](../samples/cloudflared.md) \| [Elasticsearch / Logstash / Kibana](../samples/elasticsearch.md) \| [Minecraft](../samples/minecraft.md) \| [NGINX](../samples/nginx.md) \| [Pi-hole](../samples/pi-hole.md) \| [Plex](../samples/plex.md) \| [Traefik](../samples/traefik.md) \| [WireGuard](../samples/wireguard.md)

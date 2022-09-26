@@ -1173,8 +1173,8 @@ samples:
       title: Nextcloud
     - path: /samples/portainer/
       title: Portainer
-    - path: /samples/grafana/
-      title: Prometheus / Grafana
+    - path: /samples/prometheus/
+      title: Prometheus
     - path: /samples/wordpress-sample/
       title: WordPress
 - sectiontitle: Other services
