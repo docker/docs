@@ -1202,7 +1202,7 @@ manuals:
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
-        title: What is Docker Extensions?
+        title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
         title: Manage marketplace Extensions
       - path: /desktop/extensions/non-marketplace/
