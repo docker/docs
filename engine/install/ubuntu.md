@@ -120,7 +120,7 @@ from the repository.
 
     ```console
     $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo apt-get install containerd.io docker-ce docker-ce-cli docker-compose-plugin
     ```
 
     > Receiving a GPG error when running `apt-get update`?
