@@ -69,7 +69,7 @@ business needs dictate, in near real time.
 **Running more workloads on the same hardware**
 
 Docker is lightweight and fast. It provides a viable, cost-effective alternative
-to hypervisor-based virtual machines, so you can use more of your compute
+to hypervisor-based virtual machines, so you can use more of your computer
 capacity to achieve your business goals. Docker is perfect for high density
 environments and for small and medium deployments where you need to do more with
 fewer resources.
