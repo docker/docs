@@ -7,7 +7,7 @@
 {% for sample in site.data.samples.samples -%}
 {% for service in sample.services -%}
 {% if service == page.service -%}
-| [{{sample.title}}]({{sample.url}}) | {{sample.description}} | {% if sample.dev_env -%} [Open in Docker Dev Environment](https://open.docker.com/dashboard/dev-envs?url={{sample.url}}) {% else -%}-{% endif -%}|
+| [{{sample.title}}]({{sample.url}}){: target="_blank" rel="noopener" class="_"} | {{sample.description}} | {% if sample.dev_env -%} [Open in Docker Dev Environment](https://open.docker.com/dashboard/dev-envs?url={{sample.url}}) {% else -%}-{% endif -%}|
 {% endif -%}
 {%- endfor -%}
 {%- endfor -%}
