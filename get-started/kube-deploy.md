@@ -45,6 +45,7 @@ All containers in Kubernetes are scheduled as _pods_, which are groups of co-loc
           containers:
           - name: bb-site
             image: getting-started
+            imagePullPolicy: IfNotPresent
     ---
     apiVersion: v1
     kind: Service
