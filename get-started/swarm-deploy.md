@@ -24,19 +24,19 @@ In order to validate that our containerized application works well on Swarm, we'
 
 Swarm never creates individual containers like we did in the previous step of this tutorial. Instead, all Swarm workloads are scheduled as _services_, which are scalable groups of containers with added networking features maintained automatically by Swarm. Furthermore, all Swarm objects can and should be described in manifests called _stack files_. These YAML files describe all the components and configurations of your Swarm app, and can be used to easily create and destroy your app in any Swarm environment.
 
-Let's write a simple stack file to run and manage our bulletin board. Place the following in a file called `bb-stack.yaml`:
+Let's write a simple stack file to run and manage our Todo app, the container `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. Place the following in a file called `bb-stack.yaml`:
 
 ```yaml
 version: '3.7'
 
 services:
   bb-app:
-    image: bulletinboard:1.0
+    image: getting-started
     ports:
-      - "8000:8080"
+      - "8000:3000"
 ```
 
-In this Swarm YAML file, we have just one object: a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based on your `bulletinboard:1.0` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 8080 inside our bulletin board container.
+In this Swarm YAML file, we have just one object: a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based on your `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 3000 inside our getting-started container.
 
 > **Kubernetes Services and Swarm Services are very different!** Despite the similar name, the two orchestrators mean very different things by the term 'service'. In Swarm, a service provides both scheduling _and_ networking facilities, creating containers and providing tools for routing traffic to them. In Kubernetes, scheduling and networking are handled separately: _deployments_ (or other controllers) handle the scheduling of containers as pods, while _services_ are responsible only for adding networking features to those pods.
 
@@ -67,12 +67,12 @@ In this Swarm YAML file, we have just one object: a `service`, describing a scal
 
     ```shell
     ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-    il7elwunymbs        demo_bb-app         replicated          1/1                 bulletinboard:1.0   *:8000->8080/tcp
+    il7elwunymbs        demo_bb-app         replicated          1/1                 getting-started:latest   *:8000->3000/tcp
     ```
 
-    This indicates 1/1 containers you asked for as part of your services are up and running. Also, we see that port 8000 on your development machine is getting forwarded to port 8080 in your bulletin board container.
+    This indicates 1/1 containers you asked for as part of your services are up and running. Also, we see that port 8000 on your development machine is getting forwarded to port 3000 in your getting-started container.
 
-3.  Open a browser and visit your bulletin board at `localhost:8000`; you should see your bulletin board, the same as when we ran it as a stand-alone container in Part 2 of the Quickstart tutorial.
+3.  Open a browser and visit your Todo app at `localhost:8000`; you should see your Todo application, the same as when we ran it as a stand-alone container in Part 2 of the Quickstart tutorial.
 
 4.  Once satisfied, tear down your application:
 
