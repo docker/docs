@@ -4,29 +4,56 @@ keywords: fig, composition, compose, docker, orchestration, environment, env fil
 title: Declare default environment variables in file
 ---
 
-Compose supports declaring default environment variables in an environment file
-named `.env` placed in the project directory. Docker Compose versions earlier than `1.28`,
-load the `.env` file from the current working directory, where the command is executed, or from the
-project directory if this is explicitly set with the `--project-directory` option. This
-inconsistency has been addressed starting with `+v1.28` by limiting the default `.env` file path
-to the project directory. You can use the `--env-file` commandline option to override the default
-`.env` and specify the path to a custom environment file.
+Compose supports declaring environment variables in an environment file.
 
-The project directory is specified by the order of precedence:
+## Syntax
+The following syntax rules apply to environment files:
 
-- `--project-directory` flag
-- Folder of the first `--file` flag
-- Current directory
-
-## Syntax rules
-
-The following syntax rules apply to the `.env` file:
-
-- Compose expects each line in an `env` file to be in `VAR=VAL` format.
+- Each line represents a key-value pair. Values can optionally be quoted.
+  - `VAR=VAL` -> `VAL`
+  - `VAR="VAL"` -> `VAL`
+  - `VAR='VAL'` -> `VAL`
 - Lines beginning with `#` are processed as comments and ignored.
+- Inline comments for unquoted values must be proceeded with a space.
+  - `VAR=VAL # comment` -> `VAL`
+  - `VAR=VAL# not a comment` -> `VAL# not a comment`
+- Inline comments for quoted values must follow the closing quote.
+  - `VAR="VAL # not a comment"` -> `VAL # not a comment`
+  - `VAR="VAL" # comment` -> `VAL`
 - Blank lines are ignored.
-- There is no special handling of quotation marks. This means that
-  **they are part of the VAL**.
+- Unquoted and double-quoted (`"`) values will have [parameter expansion](#parameter-expansion) applied.
+- Single-quoted (`'`) values will be used literally.
+  - `VAR='$OTHER'` -> `$OTHER`
+  - `VAR='${OTHER}'` -> `${OTHER}`
+- Quotes can be escaped with `\`.
+  - `VAR='Let\'s go!'` -> `Let's go!`
+  - `VAR="{\"hello\": \"json\"}"` -> `{"hello": "json"}`
+- Common shell escape sequences including `\n`, `\r`, `\t`, and `\\` are supported in double-quoted values.
+  - `VAR="some\tvalue"` -> `some  value`
+  - `VAR='some\tvalue'` -> `some\tvalue`
+  - `VAR=some\tvalue` -> `some\tvalue`
+
+### Parameter Expansion
+Compose supports parameter expansion in environment files.
+Parameter expansion is applied for unquoted and double-quoted values.
+Both braced (`${VAR}`) and unbraced (`$VAR`) expressions are supported.
+
+For braced expressions, the following formats are supported:
+- Direct substitution
+  - `${VAR}` -> value of `VAR`
+- Default value
+  - `${VAR:-default}` -> value of `VAR` if set and non-empty, otherwise `default`
+  - `${VAR-default}` -> value of `VAR` if set, otherwise `default`
+- Required value
+  - `${VAR:?error}` -> value of `VAR` if set and non-empty, otherwise exit with error
+  - `${VAR?error}` -> value of `VAR` if set, otherwise exit with error
+- Alternative value
+  - `${VAR:+replacement}` -> `replacement` if `VAR` is set and non-empty, otherwise empty
+  - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
+
+## Precedence
+Environment variables from an environment file have lower precedence than those passed via the command-line or via the `environment` section in project YAML.
+Refer to [Environment Variables Precedence](./envvars-precedence.md) for details.
 
 ## Compose file and CLI variables
 
