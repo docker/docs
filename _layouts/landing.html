@@ -159,14 +159,17 @@
                 <li class="active" role="presentation" data-tab="desktop">
                   <a onclick="onChangeHelpTab('desktop')">Desktop</a>
                 </li>
-                <li role="presentation" data-tab="hub">
-                  <a onclick="onChangeHelpTab('hub')">Hub</a>
-                </li>
                 <li role="presentation" data-tab="engine">
                     <a onclick="onChangeHelpTab('engine')">Engine</a>
                 </li>
+                <li role="presentation" data-tab="build">
+                  <a onclick="onChangeHelpTab('build')">Build</a>
+                </li>
                 <li role="presentation" data-tab="compose">
                   <a onclick="onChangeHelpTab('compose')">Compose</a>
+                </li>
+                <li role="presentation" data-tab="hub">
+                  <a onclick="onChangeHelpTab('hub')">Hub</a>
                 </li>
               </ul>
             </div>
@@ -241,35 +244,6 @@
               <p class="only-mac"><a href="/desktop/mac/networking/">Networking features in Docker Desktop</a></p>
             </div>
           </div>
-          <!-- HUB -->
-          <div class="row" data-tab="hub">
-            <div class="col-xs-12 col-md-4 col-lg-2 text-center">
-              <div class="image" style="background-image: url(/assets/images/hub.svg);"></div>
-              <h5>Hub</h5>
-            </div>
-            <div class="col-xs-12 col-md-4 col-lg-5">
-              <h6>Getting Started with Docker</h6>
-              <p>
-                Take a walkthrough that covers writing your first app, data
-                storage, networking, and swarms, and ends with your app running
-                on production servers in the cloud.
-              </p>
-              <p><a href="/get-started/">Learn Docker</a></p>
-
-              <h6>FAQs</h6>
-              <p><a href="/get-started/04_sharing_app/">How do I share images on Docker Hub?</a></p>
-              <p><a href="/docker-hub/orgs/#create-an-organization">How do I create an organization?</a></p>
-              <p><a href="/docker-hub/orgs/#create-a-team">How do I create a team and add team members?</a></p>
-            </div>
-            <div class="col-xs-12 col-md-4 col-lg-5">
-              <h6>Popular articles</h6>
-              <p><a href="/docker-hub/official_images/">Docker Hub official images</a></p>
-              <p><a href="/docker-hub/repos/">Create Docker Hub repositories</a></p>
-              <p><a href="/docker-hub/builds/">Set up automated builds</a></p>
-              <p><a href="/docker-hub/access-tokens/">Manage access tokens</a></p>
-              <p><a href="/docker-hub/webhooks/">Docker Hub Webhooks</a></p>
-            </div>
-          </div>
           <!-- ENGINE -->
           <div class="row" data-tab="engine">
             <div class="col-xs-12 col-md-4 col-lg-2 text-center">
@@ -292,6 +266,33 @@
               <p><a href="/engine/reference/builder/">Dockerfile reference</a></p>
               <p><a href="/engine/reference/commandline/dockerd/#description">Docker daemon reference</a></p>
               <p><a href="/engine/reference/commandline/build/">Docker build reference</a></p>
+            </div>
+          </div>
+          <!-- BUILD -->
+          <div class="row" data-tab="build">
+            <div class="col-xs-12 col-md-4 col-lg-2 text-center">
+              <div
+                class="image"
+                style="background-image: url(/assets/images/whale-car.png);"
+              ></div>
+              <h5>Build</h5>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Getting Started with Docker</h6>
+              <p>
+                Take a walkthrough that covers writing your first app, data
+                storage, networking, and swarms, and ends with your app running
+                on production servers in the cloud.
+              </p>
+              <p><a href="/get-started/">Learn Docker</a></p>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Popular articles</h6>
+              <p><a href="/build/">Overview of Docker Build</a></p>
+              <p><a href="/engine/reference/builder/">Dockerfile reference</a></p>
+              <p><a href="/build/building/packaging/">Packaging your software</a></p>
+              <p><a href="/build/building/multi-stage/">Multi-stage builds</a></p>
+              <p><a href="/build/building/multi-platform/">Multi-platform images</a></p>
             </div>
           </div>
           <!-- COMPOSE -->
@@ -324,6 +325,35 @@
               <p><a href="/compose/gettingstarted/">Getting started with Docker Compose</a></p>
               <p><a href="/compose/environment-variables/">Environment variables in Compose</a></p>
               <p><a href="/compose/networking/">Networking in Compose</a></p>
+            </div>
+          </div>
+          <!-- HUB -->
+          <div class="row" data-tab="hub">
+            <div class="col-xs-12 col-md-4 col-lg-2 text-center">
+              <div class="image" style="background-image: url(/assets/images/hub.svg);"></div>
+              <h5>Hub</h5>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Getting Started with Docker</h6>
+              <p>
+                Take a walkthrough that covers writing your first app, data
+                storage, networking, and swarms, and ends with your app running
+                on production servers in the cloud.
+              </p>
+              <p><a href="/get-started/">Learn Docker</a></p>
+
+              <h6>FAQs</h6>
+              <p><a href="/get-started/04_sharing_app/">How do I share images on Docker Hub?</a></p>
+              <p><a href="/docker-hub/orgs/#create-an-organization">How do I create an organization?</a></p>
+              <p><a href="/docker-hub/orgs/#create-a-team">How do I create a team and add team members?</a></p>
+            </div>
+            <div class="col-xs-12 col-md-4 col-lg-5">
+              <h6>Popular articles</h6>
+              <p><a href="/docker-hub/official_images/">Docker Hub official images</a></p>
+              <p><a href="/docker-hub/repos/">Create Docker Hub repositories</a></p>
+              <p><a href="/docker-hub/builds/">Set up automated builds</a></p>
+              <p><a href="/docker-hub/access-tokens/">Manage access tokens</a></p>
+              <p><a href="/docker-hub/webhooks/">Docker Hub Webhooks</a></p>
             </div>
           </div>
         </div>
