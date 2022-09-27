@@ -180,6 +180,11 @@ body.night {
     img.white-bg {
         background-color: white;
     }
+    
+    /* apply to images that support being inverted */
+    img.invertible {
+      filter: invert(100%) hue-rotate(180deg);
+    }
 
     /* accordion */
     .panel {
