@@ -215,17 +215,16 @@ With all of that explained, let's start our dev-ready container!
     ```
     If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
     
-        ```console
+    ```console
     $ docker run -dp 3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \
-      --platform "linux/amd64" \
       -e MYSQL_HOST=mysql \
       -e MYSQL_USER=root \
       -e MYSQL_PASSWORD=secret \
       -e MYSQL_DB=todos \
       node:12-alpine \
-      sh -c "yarn install && yarn run dev"
+      sh -c "apk add --no-cache python2 g++ make && yarn install && yarn run dev"
     ```
 
     If you are using Windows then use this command in PowerShell.
