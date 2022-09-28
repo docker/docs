@@ -22,7 +22,7 @@ The following syntax rules apply to environment files:
   - `VAR="VAL" # comment` -> `VAL`
 - Blank lines are ignored.
 - Unquoted and double-quoted (`"`) values will have [parameter expansion](#parameter-expansion) applied.
-- Single-quoted (`'`) values will be used literally.
+- Single-quoted (`'`) values are used literally.
   - `VAR='$OTHER'` -> `$OTHER`
   - `VAR='${OTHER}'` -> `${OTHER}`
 - Quotes can be escaped with `\`.
