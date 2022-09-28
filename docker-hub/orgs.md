@@ -97,7 +97,7 @@ configure your organization.
   members in each team. See [Create a team](#create-a-team) for details.
 
 - **Repositories**: Displays a list of repositories associated with the
-  organization. See [Repositories](repos.md) for detailed information about
+  organization. See [Repositories](../docker-hub/repos/index.md) for detailed information about
   working with repositories.
 
 - **Activity** Displays the audit logs, a chronological list of activities that
