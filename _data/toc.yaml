@@ -1528,7 +1528,7 @@ manuals:
     section:
       - path: /docker-hub/publish/
         title: Overview
-      - path: /docker-hub/publish/insights-and-analytics/
+      - path: /docker-hub/publish/insights-analytics/
         title: Insights & analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
