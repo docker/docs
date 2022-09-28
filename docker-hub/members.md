@@ -115,7 +115,6 @@ To remove a member from a specific team:
 2. Click on the **Teams** tab and select the team from the list.
 3. Click the **X** next to the user’s name to remove them from the team.
 4. When prompted, click **Remove** to confirm.
-<<<<<<< HEAD
 =======
 
 ## Export members
