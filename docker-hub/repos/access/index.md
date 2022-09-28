@@ -2,7 +2,6 @@
 description: Access repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, collaborators, viewing, searching, starring
 title: Access
-redirect_from:
 ---
 
 ## Collaborators and their role

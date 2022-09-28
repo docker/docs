@@ -133,4 +133,3 @@ To export a CSV file of the organization's members:
 
 1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select **Export members** to download the CSV file.
->>>>>>> 5c68a7ad02a3a842aca984dcb72d13732506c06f
