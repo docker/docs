@@ -1,7 +1,7 @@
 ---
 description: Configuring repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, creating, deleting, consolidating
-title: Configure
+title: Configure repositories
 ---
 ## Private repositories
 
