@@ -6,51 +6,51 @@ redirect_from:
 - /docker-hub/registry-access-management/
 ---
 
-Registry Access Management is a feature available to organizations with a Docker Business subscription. With Registry Access Management, organization owners can ensure that their developers using Docker Desktop can only access registries that have been allow-listed via the Registry Access Management dashboard on Docker Hub to reflect support for other registries: AWS ECR, GitHub Container Registry, Google Container Registry, Quay, and others.
+>Note
+>
+>Registry Access Management is available to Docker Business customers only. 
 
-## Requirements:
+With Registry Access Management, administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
 
-Download Docker Desktop v4.8 or a later release.
+Below are some example registries administrators can allow: 
+ - AWS ECR
+ - GitHub Container Registry
+ - Google Container Registry Quay
 
-- [Download and install for Windows](../install/windows-install.md)
-- [Download and install for Mac](../install/mac-install.md)
-- [Download and install for Linux](../install/linux-install.md)
+Administrators can ensure registries locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on with Admin Controls. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
+
+## Prerequisites 
+
+You need to [configure a registry.json to enforce sign-in](../../docker-hub/configure-sign-in.md). For Registry Access Management to take effect, Docker Desktop users must authenticate to your organization. 
 
 ## Configure Registry Access Management permissions
 
-To configure Registry Access Management permissions, perform the following steps:
+To configure Registry Access Management permissions:
 
-1. Sign into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner.
-2. Select an organization, navigate to the **Settings** tab on the **Organizations** page and click **Registry Access**.
-3. Enable Registry Access Management to set the permissions for your registry.
+1. Sign in to your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner.
+2. Select an organization and then navigate to the **Settings** tab on the **Organizations** page and click **Registry Access**.
+3. Toggle on Registry Access Management to set the permissions for your registry.
 
    > **Note**
    >
    > When enabled, the Docker Hub registry is set by default, however you can also restrict this registry for your developers.
 
-4. Click **Add** and enter your registry details in the applicable fields, and click **Create** to add the registry to your list.
-5. Verify that the registry appears in your list and click **Save & Apply**. You can verify that your changes are saved in the Activity tab.
+4. To add registries to your list, select **Add** and enter your registry details in the applicable fields, then select **Create**.
+5. Verify that the registry appears in your list and select **Save & Apply**. You can verify that your changes are saved in the **Activity** tab. There is no limit on the number of registries you can add.
 
    > **Note**
    >
-   > Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop. Also, there is no limit on the number of registries you can add. See the [Caveats](#caveats) section to learn more about limitations when using this feature.
+   > Once you add a registry, it takes up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop.
 
 ![Registry Access Management](../../docker-hub/images/registry-access-management.png){:width="700px"}
 
-## Enforce authentication
-
-To ensure that each org member uses Registry Access Management on their local machine, you can perform the steps below to enforce sign-in under your organization. To do this:
-
-1. Download the latest version of Docker Desktop, and then
-2. Create a `registry.json` file by following the instructions for [Windows, Mac and Linux](../../docker-hub/configure-sign-in.md).
-
 ## Verify the restrictions
 
-The new Registry Access Management policy should be in place after the developer successfully authenticates to Docker Desktop using their organization credentials. The developer can attempt to pull an image from a disallowed registry via the Docker CLI. They will then receive an error message that your organization has disallowed this registry.
+The new Registry Access Management policy takes effect after the developer successfully authenticates to Docker Desktop using their organization credentials. If a developer attempts to pull an image from a disallowed registry via the Docker CLI, they receive an error message that the organization has disallowed this registry.
 
-### Caveats
+## Known issues
 
-There are certain limitations when using Registry Access Management; they are as follows:
+There are certain limitations when using Registry Access Management:
 
 - Windows image pulls, and image builds are not restricted
 - Builds such as `docker buildx` using a Kubernetes driver are not restricted

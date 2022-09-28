@@ -20,9 +20,9 @@ The reason `runc` is disallowed with Enhanced Container Isolation is because it 
 
 ### With Enhanced Container Isolation enabled, can the user still use the `--privileged` flag from the CLI?
 
-Yes, with Enhanced Container Isolation the container is only privileged within its assigned Linux user-namespace. It is not privileged within the Docker Desktop Linux VM. 
+Yes, with Enhanced Container Isolation the container is only privileged within its assigned Linux user-namespace. It is not privileged within the Docker Desktop Linux VM.
 
-For example, the container’s init process will have all Linux capabilities enabled, have read/write access to the kernel’s /proc and /sys, run without system call or other restrictions normally imposed by Docker on regular containers (for example, seccomp, AppArmor), and see all host devices under the container’s /dev directory. 
+For example, the container’s init process will have all Linux capabilities enabled, have read/write access to the kernel’s /proc and /sys, run without system call or other restrictions normally imposed by Docker on regular containers (for example, seccomp, AppArmor), and see all host devices under the container’s /dev directory.
 
 However, because Sysbox launches each container within a dedicated Linux user-namespace and vets sensitive accesses to the kernel, the container can only access resources assigned to it. For example, the container can’t access resources under /proc and /sys that are not namespaced. Although it can see all host devices under /dev, it won’t have permission to access them. Also, while the container can use system calls such as “mount” and “umount”, Sysbox prevents the container from using them to modify the container’s chroot jail.
 
@@ -38,12 +38,14 @@ Allowing the `-–privileged` flag but restricting its impact within the contain
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
 
-- Users may experience some differences between running a container in Docker Desktop with Enhanced Container Isolation enabled, and running that same container in production. This is because in production the container may run on another runtime, typically the OCI runc.
+#### Incompatibility with WSL
+Enhanced Container Isolation does not currently work when Docker Desktop runs on Windows with WSL/WSL2. This is due to some limitations of the WSL/WSL2 Linux Kernel. As a result, to use Enhanced Container Isolation on Windows, you must configure Docker Desktop to use Hyper-V.
 
-- Kernel Day-0 Vulnerabilities: Sysbox can’t protect against kernel day-0 vulnerabilities (e.g., flaws in user-namespace isolation). There have been a few of these recently, but fortunately they are patched pretty quickly in the Linux kernel.
+#### Kubernetes pods are not yet protected
+ When Enhanced Container Isolation feature is enabled, Kubernetes pods are not yet protected. A malicious or privileged pod can compromise the Docker Desktop Linux VM and bypass security controls. 
 
-- Docker Engine Limitations: When running Docker inside a Sysbox container (e.g., for extra isolation), most Docker functionality is supported. However, there may be some advanced Docker functionality that does not currently work as the environment inside the Sysbox container does not yet fully resemble that of a bare-metal machine or VM. Fixing this requires further changes in Sysbox.
-
+#### Use in production
+Users may experience some differences between running a container in Docker Desktop with Enhanced Container Isolation enabled, and running that same container in production. This is because in production the container may run on another runtime, typically the OCI runc.
 
 <hr>
 </div>

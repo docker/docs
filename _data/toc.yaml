@@ -1193,8 +1193,6 @@ manuals:
       section:
         - path: /desktop/hardened-desktop/
           title: Overview
-        - path: /desktop/hardened-desktop/registry-access-management/
-          title: Registry Access Management
         - sectiontitle: Admin controls (Early Access)
           section:
           - path: /desktop/hardened-desktop/admin-controls/
@@ -1209,6 +1207,8 @@ manuals:
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
             title: FAQ and known issues
+        - path: /desktop/hardened-desktop/registry-access-management/
+          title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/

@@ -8,15 +8,14 @@ title: What is Enhanced Container Isolation?
 >
 >Enhanced Container Isolation is currently in [Early Access](../../release-lifecycle.md#early-access-ea) and available to Docker Business customers only. 
 
-Enhanced Container Isolation provides an additional layer of security was it which prevents containers from running as root in the Docker Desktop Linux VM. This ensures a strong container-to-host isolation and locks in any security configurations that have been created, for instance Registry Access Management policies and Admin Controls. 
+Enhanced Container Isolation provides an additional layer of security that prevents containers from running as root in the Docker Desktop Linux VM. This ensures a strong container-to-host isolation and locks in any security configurations that have been created, for instance through Registry Access Management policies or with Admin Controls. 
 
-With Enhanced Container Isolation, Docker Desktop:
+### Who is it for?
 
-- Has a secure boot to prevent modification of Docker provided binaries pre-boot (e.g. docker engine, containerd, runc, etc)
-- Prevents user containers from bypassing security controls and modifying system files.
-- Prevents exposure of docker daemon on TCP without TLS
+- For organizations that want to prevent container attacks and reduce vulnerabilities.
+- For organizations that want ensure stronger container isolation that is easy and intuitive to implement on developers' machines.
 
-It also means all containers run unprivileged in the Docker Desktop Linux VM, in user namespaces. Root access to the Linux VM is removed, privileged containers cannot be run and there is no access to the host namespaces. As a result, it becomes impossible for users to alter Admin Controls via containers. 
+### What happens when Enhanced Container Isolation is switched on?
 
 When Enhanced Container Isolation is enabled using [Admin Controls](../admin-controls/index.md), developers can no longer:
 
@@ -27,18 +26,20 @@ When Enhanced Container Isolation is enabled using [Admin Controls](../admin-con
 - Bind mount and modify system files
 - Escape containers
 
+It also means all containers run unprivileged in the Docker Desktop Linux VM, in user namespaces. Root access to the Linux VM is removed, privileged containers cannot be run and there is no access to the host namespaces. As a result, it becomes impossible for users to alter any settings that have been locked in using [Admin Controls](../admin-controls/index.md).
+
 For more information on how Enhanced Container Isolation work, see [How does it work?](how-eci-works.md).
 
-### Who is it for?
+>Important
+>
+>Enhanced Container Isolation is currently incompatible with WSL and does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQS and known issues](faq.md).
+{: .important}
 
-- For organizations that want to prevent container attacks and reduce vulnerabilities.
-- For organizations that want ensure stronger container isolation that is easy and intuitive to implement on developers' machines.
+### How do I switch on Enhanced Container Isolation?
 
-### How to enable Enahnced Container Isolation
+As an administrator, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
-As an Enterprise admin, you first need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because your Docker Desktop users must authenticate to your organization for this configuration to take effect.
-
-Next, you must [create and configure the admin-settings.json file](configure-ac.md) and specify:
+Next, you must [create and configure the `admin-settings.json` file](configure-ac.md) and specify:
 
 ```JSON
 {
@@ -51,8 +52,10 @@ Next, you must [create and configure the admin-settings.json file](configure-ac.
 
 Once this is done, Docker Desktop users receive the changed settings when they next authenticate to your organization on Docker Desktop. We do not automatically mandate that developers re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
 
-### What do users see when the settings are enforced?
+### What do users see when this setting is enforced?
 
-Docker Desktop users will see a notification in the **Settings**, or **Preferences** if macOS user, which states **Some settings are managed by your Admin**. 
+If Enhanced Container Isolation is enabled along with other settings in the `admin-settings.json`, users see a notification in the **Settings**, or **Preferences** using a macOS, which states **Some settings are managed by your Admin**. 
 
-Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or by modifying the Docker Desktop Linux VM.
+As displayed in the image below, any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or by modifying the Docker Desktop Linux VM.
+
+[add a screenshot]
