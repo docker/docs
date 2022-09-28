@@ -19,8 +19,7 @@ changing its status from private to public.
 
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
-see the [organizations documentation](/docker-hub/orgs.md#create-an-organization).
-
+see the [organizations documentation](../../../docker-hub/orgs.md#create-an-organization).
 
 ## Viewing repository tags
 
