@@ -107,39 +107,6 @@ The `install` command accepts the following flags:
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 - `--user=<username>`: Runs the privileged helper service once during installation, then disables it at runtime. This removes the need for the user to grant root privileges on first run. For more information, see [Privileged helper permission requirements](../mac/permission-requirements.md#permission-requirements){: target="_blank" rel="noopener" class="_"}. To find the username, enter `ls /Users` in the CLI.
 
-## Updates
-
-{% include desktop-update.md %}
-
-## Uninstall Docker Desktop
-
-To uninstall Docker Desktop from your Mac:
-
-1. From the Docker menu, select **Troubleshoot** and then select **Uninstall**.
-2. Click **Uninstall** to confirm your selection.
-
-> Uninstall Docker Desktop from the command line
->
-> To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
-> --uninstall`. If your instance is installed in the default location, this
-> command provides a clean uninstall:
->
-> ```console
-> $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
-> Docker is running, exiting...
-> Docker uninstalled successfully. You can move the Docker application to the trash.
-> ```
->
-> You might want to use the command-line uninstall if, for example, you find that
-> the app is non-functional, and you cannot uninstall it from the menu.
-
-> **Note**
->
-> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
-> other Docker related data local to the machine, and removes the files generated
-> by the application. Refer to the [back up and restore data](../backup-and-restore.md)
-> section to learn how to preserve important data before uninstalling.
-
 ## Where to go next
 
 - [Docker Desktop for Apple silicon](../mac/apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
