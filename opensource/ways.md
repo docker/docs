@@ -114,7 +114,7 @@ Docker users are people using Docker in their daily work. To help Docker users, 
 * the [Docker Community Forum](https://forums.docker.com/){: target="_blank" rel="noopener" class="_"}
 * [StackOverflow](https://stackoverflow.com/questions/tagged/docker){: target="_blank" rel="noopener" class="_"}
 
-You can also check the lists of [open issues on the Docker docs](https://github.com/docker/docker.github.io/issues){: target="_blank" rel="noopener" class="_"} and [open issues on the Moby project](https://github.com/moby/moby/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fquestion+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee){: target="_blank" rel="noopener" class="_"}.
+You can also check the lists of [open issues on the Docker docs]({{ site.repo }}/issues){: target="_blank" rel="noopener" class="_"} and [open issues on the Moby project](https://github.com/moby/moby/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fquestion+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee){: target="_blank" rel="noopener" class="_"}.
 
 
 ### Docker contributors

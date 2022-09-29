@@ -39,7 +39,7 @@ For example, 'Install Docker Desktop'.
 
 ##### Checked for broken links and images
 
-Use relative links to link to other pages or images within the docker.github.io repository.
+Use relative links to link to other pages or images within the GitHub repository.
 
 For more information, see the [formatting](style/formatting.md#links) page, or see the [components](components/links.md) for examples.
 

@@ -7,7 +7,7 @@ keywords: application, development
 The following development patterns have proven to be helpful for people
 building applications with Docker. If you have discovered something we should
 add,
-[let us know](https://github.com/docker/docker.github.io/issues/new){: target="_blank" rel="noopener" class="_"}.
+[let us know]({{ site.repo }}/issues/new){: target="_blank" rel="noopener" class="_"}.
 
 ## How to keep your images small
 
