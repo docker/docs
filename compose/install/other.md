@@ -19,6 +19,9 @@ For example: type `docker-compose up` when using Compose standalone, instead of 
   $ curl -SL https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
   ```
 2. Apply executable permissions to the standalone binary in the target path for the installation.
+  ```console
+  $ sudo chmod +x /usr/local/bin/docker-compose
+  ```
 3. Test and execute compose commands using `docker-compose`.
 
 > **Note**
