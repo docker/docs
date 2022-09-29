@@ -90,7 +90,7 @@ we can use flags to display the stopped projects, to filter by conditions and ch
 
 ```console
 $ docker compose ls --all --format json
-[{"Name":"dockergithubio","Status":"exited(1)","ConfigFiles":"/path/to/docker.github.io/docker-compose.yml"}]
+[{"Name":"dockergithubio","Status":"exited(1)","ConfigFiles":"/path/to/docs/docker-compose.yml"}]
 ```
 
 ## Use `--project-name` with Compose commands
