@@ -1187,6 +1187,26 @@ manuals:
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
+    - sectiontitle: Hardened Desktop
+      section:
+        - path: /desktop/hardened-desktop/
+          title: Overview
+        - sectiontitle: Admin controls (Early Access)
+          section:
+          - path: /desktop/hardened-desktop/admin-controls/
+            title: What is Admin Controls?
+          - path: /desktop/hardened-desktop/admin-controls/configure-ac/
+            title: Configure Admin controls
+        - sectiontitle: Enhanced Container Isolation (Early Access)
+          section:
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/
+            title: What is Enhanced Container Isolation?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
+            title: How does it work?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQ and known issues
+        - path: /desktop/hardened-desktop/registry-access-management/
+          title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1568,8 +1588,7 @@ manuals:
     title: System for Cross-domain Identity Management
   - path: /docker-hub/image-access-management/
     title: Image Access Management
-  - path: /docker-hub/registry-access-management/
-    title: Registry Access Management
+
 
 - sectiontitle: Security
   section:
