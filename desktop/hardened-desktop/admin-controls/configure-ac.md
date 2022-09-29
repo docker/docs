@@ -36,7 +36,7 @@ By placing this file in the above protected directories, end users are unable to
 >
 >Some of the configuration parameters only apply to Windows. This is highlighted in the table below.
 
-The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the  `locked` setting. 
+The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the  `locked` parameter. 
 If set to `true`, users are not able to edit this setting from Docker Desktop or the CLI. 
 If set to `false`, users can change this setting from Docker Desktop or the CLI by directly editing the `settings.json` file. If this setting is omitted, the default value is `false`.
 
@@ -98,23 +98,25 @@ The following `admin-settings.json` code and table provides the required syntax 
 | Parameter                        | Description                      |
 | :------------------------------- | :------------------------------- |
 | `configurationFileVersion`        | Specifies the version of the configuration file format.    |
-| `exposeDockerAPIOnTCP2375` |<span class="badge badge-info">Windows only</span> Exposes the Docker API on a specified port. In the example above, “true” means expose the Docker API on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
-| `proxy` | It will be used for http and https.  If the port is custom, specify it in the property. And auth can be either basic (username/password) or none if not needed.|
-| `enhancedContainerIsolation`  | If true, configures Docker Desktop to prevent user containers from running as root and from being able to mount sensitive Docker Desktop configuration directories from the Docker Desktop VM. |
-|`useWindowsContainers` | <span class="badge badge-info">Windows only</span> If true, switches Docker Desktop to toggle the Docker CLI to talk to the Windows daemon, enabling Windows containers. If false, switches Docker Desktop to toggle the Docker CLI to talk to the Linux daemon, enabling Linux containers.This overrides anything that may have been set at installation|
+| `exposeDockerAPIOnTCP2375` |<span class="badge badge-info">Windows only</span> Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
+| `proxy` | It is used for `http` and `https`.  If the port is custom, specify it in the property. |
+| `enhancedContainerIsolation`  | If `value` is set to true, Docker Desktop prevents user containers from running as root and from being able to mount sensitive Docker Desktop configuration directories from the Docker Desktop VM. |
+|`useWindowsContainers` | <span class="badge badge-info">Windows only</span> If `value` is set to true, it switches Docker Desktop to toggle the Docker CLI to talk to the Windows daemon, enabling Windows containers. If false, switches Docker Desktop to toggle the Docker CLI to talk to the Linux daemon, enabling Linux containers. This overrides anything that may have been set at installation using the `--no-windows-containers` flag.|
 | `linuxVM` | Parameters and settings related to Linux VM options - grouped together here for convenience. |
-|`wslEngineEnabled`  |<span class="badge badge-info">Windows only</span> If true, configures Docker Desktop to use the WSL 2 based engine.|
-| `dockerDaemonOptions`| Overrides the options in the linux daemon config file. See the [Docker Engine reference](../../../engine/reference/commandline/dockerd/#daemon-configuration-file). |
-| `vpnkitCIDR` |Overrides the network range used for vpnkit DHCP/DNS for *.docker.internal  |
+|`wslEngineEnabled`  |<span class="badge badge-info">Windows only</span> If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. It is also incompatible with Enhanced Container Isolation. See [Known issues](faq.md) for more information.|
+| `dockerDaemonOptions`|If `value` is set to true, it overrides the options in the Linux daemon config file. See the [Docker Engine reference](../../../engine/reference/commandline/dockerd/#daemon-configuration-file). |
+| `vpnkitCIDR` |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |
 | (End of `linuxVM` section.)       |                                   |
 | `windowsContainers` | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.                  |
 | `dockerDaemonOptions` | Overrides the options in the linux daemon config file. See the [Docker Engine reference](../../../engine/reference/commandline/dockerd/#daemon-configuration-file).|
 | (End of `windowsContainers` section.)    |                                   |
-|`disableUpdate`|If true, disables checking and notifications about Docker Desktop updates.|
-|`analyticsEnabled`|If false, configures Docker Desktop to not send usage statistics to Docker. |
+|`disableUpdate`|If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|
+|`analyticsEnabled`|If `value` is set to false, Docker Desktop does not send usage statistics to Docker. |
 
+## Step three: Re-launch and re-authenticate 
+Once you have created and configured `admin-settings.json`, developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings.
 
-Once you have created and configured `admin-settings.json`, Docker Desktop users receive the changed settings when they next authenticate to your organization on Docker Desktop. We do not automatically mandate that developers re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
+Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made so as not to disrupt your developers workflow. 
 
 ## Example
 

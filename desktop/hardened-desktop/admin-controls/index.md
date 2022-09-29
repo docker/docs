@@ -9,7 +9,7 @@ title: What is Admin Controls?
 
 Admin Controls is a feature that gives administrators the ability to enforce certain Docker Desktop settings for their organization. 
 
-With just a few lines of JSON, administrators are able to enforce preferences for HTTP proxies, network settings, and the Docker Engine configuration. This saves significant time and cost in securing developer workflows.
+With a few lines of JSON, administrators are able to enforce preferences for HTTP proxies, network settings, and the Docker Engine configuration. This saves significant time and cost in securing developer workflows.
 
 ### Who is it for? 
 
@@ -44,11 +44,11 @@ As an administrator, you first need to [configure a registry.json to enforce sig
 
 Next, you must [create and configure the admin-settings.json file](configure-ac.md).
 
-Once this is done, Docker Desktop users receive the changed settings when they next authenticate to your organization on Docker Desktop. We do not automatically mandate that developers re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
+Once this is done, Docker Desktop users receive the changed settings when they re-launch Docker Desktop and re-authenticate to your organization. Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
 
 ### What do users see when the settings are enforced?
 
-Docker Desktop users will see a notification in the **Settings**, or **Preferences** using a macOS, which states **Some settings are managed by your Admin**. 
+Docker Desktop users see a notification in the **Settings**, or **Preferences** if using a macOS, which states **Some settings are managed by your Admin**. 
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or by modifying the Docker Desktop Linux VM.
 
