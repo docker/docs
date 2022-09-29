@@ -58,7 +58,7 @@ Select a tag's digest to view details.
 
 ![View Tag](../../images/repo-image-layers.png)
 
-## Searching for Repositories
+## Searching for repositories
 
 You can search the [Docker Hub](https://hub.docker.com) registry through its
 search interface or by using the command line interface. Searching can find
@@ -97,7 +97,7 @@ Status: Downloaded newer image for centos:latest
 
 You now have an image from which you can run containers.
 
-## Starring Repositories
+## Starring repositories
 
 Your repositories can be starred and you can star repositories in return. Stars
 are a way to show that you like a repository. They're also an easy way of
