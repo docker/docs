@@ -9,6 +9,8 @@ redirect_from:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
 
+[RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
