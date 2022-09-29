@@ -113,7 +113,7 @@ The following video walks you through the process of configuring SSO.
 
 7. Proceed to **add your domain** before you test and enforce SSO.
 
-## Domain control
+## Domain
 
 Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
 
