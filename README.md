@@ -1,6 +1,6 @@
 # Docs @ Docker
 
-<img src="images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
+<img src="assets/images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
 
 Welcome to the Docker Documentation repository. This is the source for
 [https://docs.docker.com/](https://docs.docker.com/).
