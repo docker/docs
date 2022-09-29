@@ -5,6 +5,7 @@
 ##
 
 name: Docker Documentation
+repo: https://github.com/docker/docs
 
 markdown: kramdown
 highlighter: rouge
@@ -116,7 +117,7 @@ defaults:
   - scope:
       path: glossary.md
     values:
-      edit_url: "https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml"
+      edit_url: "https://github.com/docker/docs/blob/master/_data/glossary.yaml"
 
 # Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
 # - repo is the GitHub repository to fetch from
