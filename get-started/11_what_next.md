@@ -4,8 +4,8 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, containe
 description: Making sure you have more ideas of what you could do next with your application
 ---
 
-Although we're done with our workshop, there's still a LOT more to learn about containers!
-We're not going to go deep-dive here, but here are a few other areas to look at next!
+Although you're done with the tutorial, there's still a lot more to learn about containers!
+Here are a few other areas to look at next!
 
 ## Container orchestration
 
@@ -28,3 +28,21 @@ solve problems around monitoring, logging, security, image registries, messaging
 
 So, if you're new to the container landscape and cloud-native application development, welcome! Please
 connect with the community, ask questions, and keep learning! We're excited to have you!
+
+## Getting started with Docker workshop
+
+We highly recommend the DockerCon 2022 getting started workshop. Watch the video below or use the links to open the video at a particular section.
+
+* [Docker overview and installation](https://youtu.be/gAGEar5HQoU)
+* [Pull, run, and explore containers](https://youtu.be/gAGEar5HQoU?t=1400)
+* [Build a container image](https://youtu.be/gAGEar5HQoU?t=3185)
+* [Containerize an app](https://youtu.be/gAGEar5HQoU?t=4683)
+* [Connect a DB and set up a bind mount](https://youtu.be/gAGEar5HQoU?t=6305)
+* [Deploy a container to the cloud](https://youtu.be/gAGEar5HQoU?t=8280)
+
+<iframe src="https://www.youtube-nocookie.com/embed/gAGEar5HQoU" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Language-specific guides
+
+If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).

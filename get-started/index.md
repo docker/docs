@@ -64,34 +64,17 @@ redirect_from:
 > subscription.
 {: .important}
 
-Welcome! We are excited that you want to learn Docker.
-
-This page contains step-by-step instructions on how to get started with Docker. In this tutorial, you'll learn how to:
+This tutorial contains step-by-step instructions on how to get started with Docker. Here are some of the things you'll learn in this tutorial:
 
 - Build and run an image as a container
 - Share images using Docker Hub
 - Deploy Docker applications using multiple containers with a database
 - Run applications using Docker Compose
 
-In addition, you'll also learn about the best practices for building images, including instructions on how to scan your images for security vulnerabilities.
-
-If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).
-
-We also recommend the video workshop from DockerCon 2022. Watch the video below or use the links to open the video at a particular section.
-
-* [Docker overview and installation](https://youtu.be/gAGEar5HQoU)
-* [Pull, run, and explore containers](https://youtu.be/gAGEar5HQoU?t=1400)
-* [Build a container image](https://youtu.be/gAGEar5HQoU?t=3185)
-* [Containerize an app](https://youtu.be/gAGEar5HQoU?t=4683)
-* [Connect a DB and set up a bind mount](https://youtu.be/gAGEar5HQoU?t=6305)
-* [Deploy a container to the cloud](https://youtu.be/gAGEar5HQoU?t=8280)
-
-<iframe src="https://www.youtube-nocookie.com/embed/gAGEar5HQoU" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Download and install Docker
 
 This tutorial assumes you have a current version of Docker installed on your
-machine. If you do not have Docker installed, choose your preferred operating system below to download Docker:
+machine. If you don't have Docker installed, choose your preferred operating system below to download Docker:
 
 [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
@@ -103,87 +86,42 @@ For Docker Desktop installation instructions, see:
  - [Install Docker Desktop on Windows](../desktop/install/windows-install.md)
  - [Install Docker Desktop on Linux](../desktop/install/linux-install.md)
 
-## Start the tutorial
+## Docker overview
 
-If you've already run the command to get started with the tutorial, congratulations! If not, open a command prompt or bash window, and run the command:
+### What can I use Docker for?
 
-```console
-$ docker run -d -p 80:80 docker/getting-started
-```
+**Fast, consistent delivery of your applications**
 
-You'll notice a few flags being used. Here's some more info on them:
+Docker streamlines the development lifecycle by allowing developers to work in standardized environments using local containers which provide your applications and services. Containers are great for continuous integration and continuous delivery (CI/CD) workflows.
 
-- `-d` - Run the container in detached mode (in the background).
-- `-p 80:80` - Map port 80 of the host to port 80 in the container. To access the tutorial, open a web browser and navigate to `http://localhost:80`. If you already have a service listening on port 80 on your host machine, you can specify another port. For example, specify `-p 3000:80` and then access the tutorial via a web browser at `http://localhost:3000`.
-- `docker/getting-started` - Specify the image to use.
+**Responsive deployment and scaling**
 
-> **Tip**
->
-> You can combine single character flags to shorten the full command.
-> As an example, the command above could be written as:
->
-> ```console
-> $ docker run -dp 80:80 docker/getting-started
-> ```
+Docker’s container-based platform allows for highly portable workloads. Docker containers can run on a developer’s local laptop, on physical or virtual machines in a data center, on cloud providers, or in a mixture of environments.
 
-## The Docker Dashboard
+Docker’s portability and lightweight nature also make it easy to dynamically manage workloads, scaling up or tearing down applications and services as business needs dictate, in near real time.
 
-Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac, Windows, and Linux.
-It gives you quick access to container logs, lets you get a shell inside the container, and lets you
-easily manage container lifecycles (stop, remove, etc.).
+**Running more workloads on the same hardware**
 
-To access the dashboard, follow the instructions in the
-[Docker Desktop manual](../desktop/index.md). If you open the dashboard
-now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
-randomly created name. So, you'll most likely have a different name.
+Docker is lightweight and fast. It provides a viable, cost-effective alternative to hypervisor-based virtual machines, so you can use more of your server capacity to achieve your business goals. Docker is perfect for high density environments and for small and medium deployments where you need to do more with fewer resources.
 
-![Tutorial container running in Docker Dashboard](images/tutorial-in-dashboard.png)
+### What is a container?
 
-## What is a container?
+A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
 
-Now that you've run a container, what _is_ a container? Simply put, a container is
-a sandboxed process on your machine that is isolated from all other processes
-on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
-features that have been in Linux for a long time. Docker has worked to make these
-capabilities approachable and easy to use. To summarize, a container:
+By default, a container is relatively well isolated from other containers and its host machine. You can control how isolated a container’s network, storage, or other underlying subsystems are from other containers or from the host machine.
 
-- is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
-- can be run on local machines, virtual machines or deployed to the cloud.
-- is portable (can be run on any OS).
-- is isolated from other containers and runs its own software, binaries, and configurations.
+A container is defined by its image as well as any configuration options you provide to it when you create or start it. When a container is removed, any changes to its state that are not stored in persistent storage disappear.
 
-> **Creating containers from scratch**
->
-> If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
-> has a fantastic talk in which she creates a container from scratch in Go. While the talk
-> does not go into networking, using images for the filesystem, and other advanced topics,
-> it gives a _fantastic_ deep dive into how things are working.
->
-> <iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+### What is a container image?
 
-## What is a container image?
+An image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization. For example, you may build an image which is based on the ubuntu image, but installs the Apache web server and your application, as well as the configuration details needed to make your application run.
 
-When running a container, it uses an isolated filesystem. This custom filesystem is provided
-by a **container image**. Since the image contains the container's filesystem, it must contain everything
-needed to run an application - all dependencies, configurations, scripts, binaries, etc. The
-image also contains other configuration for the container, such as environment variables,
-a default command to run, and other metadata.
+You might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a Dockerfile with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
 
-We'll dive deeper into images later on, covering topics such as layering, best practices, and more.
+## Next steps
 
-> **Info**
->
-> If you're familiar with `chroot`, think of a container as an extended version of `chroot`. The
-> filesystem is simply coming from the image. But, a container adds additional isolation not
-> available when simply using chroot.
+In this section, you installed Docker, learned about Docker, and learned about containers and images.
 
-## CLI references
+In the next section, you'll containerize your first application.
 
-Refer to the following topics for further documentation on all CLI commands used in this article:
-
-- [docker version](../engine/reference/commandline/version.md)
-- [docker run](../engine/reference/commandline/run.md)
-- [docker image](../engine/reference/commandline/image.md)
-- [docker container](../engine/reference/commandline/container.md)
-
+[Containerize an application](02_our_app.md){: .button .outline-btn}

@@ -1,12 +1,12 @@
 ---
 title: "Image-building best practices"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
-description: Tips for building the images for our application
+description: Tips for building the images for your application
 ---
 
 ## Security scanning
 
-When you have built an image, it is a good practice to scan it for security vulnerabilities using the `docker scan` command.
+When you have built an image, it's a good practice to scan it for security vulnerabilities using the `docker scan` command.
 Docker has partnered with [Snyk](https://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
 
 > **Note**
@@ -14,7 +14,7 @@ Docker has partnered with [Snyk](https://snyk.io){:target="_blank" rel="noopener
 > You must be logged in to Docker Hub to scan your images. Run the command `docker scan --login`, and then scan your images using
 > `docker scan <image-name>`.
 
-For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type
+For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type the following command:
 
 ```console
 $ docker scan getting-started
@@ -100,9 +100,9 @@ command, you can see the command that was used to create each layer within an im
 Now that you've seen the layering in action, there's an important lesson to learn to help decrease build
 times for your container images.
 
-> Once a layer changes, all downstream layers have to be recreated as well
+Once a layer changes, all downstream layers have to be recreated as well.
 
-Let's look at the Dockerfile we were using one more time...
+Look at the Dockerfile you were using one more time.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -114,14 +114,14 @@ RUN yarn install --production
 CMD ["node", "src/index.js"]
 ```
 
-Going back to the image history output, we see that each command in the Dockerfile becomes a new layer in the image.
-You might remember that when we made a change to the image, the yarn dependencies had to be reinstalled. Is there a
-way to fix this? It doesn't make much sense to ship around the same dependencies every time we build, right?
+Going back to the image history output, you see that each command in the Dockerfile becomes a new layer in the image.
+You might remember that when you made a change to the image, the yarn dependencies had to be reinstalled. Is there a
+way to fix this? It doesn't make much sense to ship around the same dependencies every time you build, right?
 
-To fix this, we need to restructure our Dockerfile to help support the caching of the dependencies. For Node-based
-applications, those dependencies are defined in the `package.json` file. So, what if we copied only that file in first,
-install the dependencies, and _then_ copy in everything else? Then, we only recreate the yarn dependencies if there was
-a change to the `package.json`. Make sense?
+To fix this, you need to restructure your Dockerfile to help support the caching of the dependencies. For Node-based
+applications, those dependencies are defined in the `package.json` file. So, what if you copied only that file in first,
+install the dependencies, and then copy in everything else? Then, you only recreate the yarn dependencies if there was
+a change to the `package.json`.
 
 1. Update the Dockerfile to copy in the `package.json` first, install dependencies, and then copy everything else in.
 
@@ -190,7 +190,7 @@ a change to the `package.json`. Make sense?
     Successfully tagged getting-started:latest
     ```
 
-    You'll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.
+    You'll see that all layers were rebuilt. Perfectly fine since you changed the Dockerfile quite a bit.
 
 4. Now, make a change to the `src/static/index.html` file (like change the `<title>` to say "The Awesome Todo App").
 
@@ -219,23 +219,23 @@ a change to the `package.json`. Make sense?
     Successfully tagged getting-started:latest
     ```
 
-    First off, you should notice that the build was MUCH faster! And, you'll see that steps 1-4 all have
-    `Using cache`. So, hooray! We're using the build cache. Pushing and pulling this image and updates to it
+    First off, you should notice that the build was much faster! And, you'll see that steps 1-4 all have
+    `Using cache`. So, hooray! You're using the build cache. Pushing and pulling this image and updates to it
     will be much faster as well. Hooray!
 
 ## Multi-stage builds
 
-While we're not going to dive into it too much in this tutorial, multi-stage builds are an incredibly powerful
+While you're not going to dive into it too much in this tutorial, multi-stage builds are an incredibly powerful
 tool to help use multiple stages to create an image. There are several advantages for them:
 
 - Separate build-time dependencies from runtime dependencies
-- Reduce overall image size by shipping _only_ what your app needs to run
+- Reduce overall image size by shipping only what your app needs to run
 
 ### Maven/Tomcat example
 
 When building Java-based applications, a JDK is needed to compile the source code to Java bytecode. However,
 that JDK isn't needed in production. Also, you might be using tools like Maven or Gradle to help build the app.
-Those also aren't needed in our final image. Multi-stage builds help.
+Those also aren't needed in your final image. Multi-stage builds help.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -248,15 +248,15 @@ FROM tomcat
 COPY --from=build /app/target/file.war /usr/local/tomcat/webapps 
 ```
 
-In this example, we use one stage (called `build`) to perform the actual Java build using Maven. In the second
-stage (starting at `FROM tomcat`), we copy in files from the `build` stage. The final image is only the last stage
+In this example, there is one stage (called `build`) to perform the actual Java build using Maven. In the second
+stage (starting at `FROM tomcat`), it copies in files from the `build` stage. The final image is only the last stage
 being created (which can be overridden using the `--target` flag).
 
 ### React example
 
-When building React applications, we need a Node environment to compile the JS code (typically JSX), SASS stylesheets,
-and more into static HTML, JS, and CSS. If we aren't doing server-side rendering, we don't even need a Node environment
-for our production build. Why not ship the static resources in a static nginx container?
+When building React applications, you need a Node environment to compile the JS code (typically JSX), SASS stylesheets,
+and more into static HTML, JS, and CSS. If you aren't doing server-side rendering, you don't even need a Node environment
+for your production build. Why not ship the static resources in a static nginx container?
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -272,12 +272,16 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-Here, we are using a `node:12` image to perform the build (maximizing layer caching) and then copying the output
-into an nginx container. Cool, huh?
+The example above is using a `node:12` image to perform the build (maximizing layer caching) and then copying the output
+into an nginx container.
 
-## Recap
+## Next steps
 
-By understanding a little bit about how images are structured, we can build images faster and ship fewer changes.
-Scanning images gives us confidence that the containers we are running and distributing are secure.
-Multi-stage builds also help us reduce overall image size and increase final container security by separating
+By understanding a little bit about how images are structured, you can build images faster and ship fewer changes.
+Scanning images gives you confidence that the containers you are running and distributing are secure.
+Multi-stage builds also help you reduce overall image size and increase final container security by separating
 build-time dependencies from runtime dependencies.
+
+In the next section, you'll learn about additional resources you can use to continue learning about containers.
+
+[What next](11_what_next.md){: .button .outline-btn}

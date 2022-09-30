@@ -1,17 +1,15 @@
 ---
 title: "Update the application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
-description: Making changes to our example learning application
+description: Making changes to your example learning application
 ---
 
 
-As a small feature request, we've been asked by the product team to
-change the "empty text" when we don't have any todo list items. They
+As a small feature request, you've been asked by the product team to
+change the "empty text" when there aren't any todo list items. They
 would like to change it to the following:
 
-> You have no todo items yet! Add one above!
-
-Pretty simple, right? Let's make the change.
+`You have no todo items yet! Add one above!`
 
 ## Update the source code
 
@@ -22,13 +20,13 @@ Pretty simple, right? Let's make the change.
     +                <p className="text-center">You have no todo items yet! Add one above!</p>
     ```
 
-2. Let's build our updated version of the image, using the same command we used before.
+2. Now build your updated version of the image, using the same command you used before.
 
     ```console
     $ docker build -t getting-started .
     ```
 
-3. Let's start a new container using the updated code.
+3. Start a new container using the updated code.
 
     ```console
     $ docker run -dp 3000:3000 getting-started
@@ -41,15 +39,15 @@ docker: Error response from daemon: driver failed programming external connectiv
 (bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd): Bind for 0.0.0.0:3000 failed: port is already allocated.
 ```
 
-So, what happened? We aren't able to start the new container because our old container is still
+So, what happened? You aren't able to start the new container because your old container is still
 running. It is because the container is using the host's port 3000 and
 only one process on the machine (containers included) can listen to a specific port. To fix this, 
-we need to remove the old container.
+you need to remove the old container.
 
 ## Replace the old container
 
-To remove a container, it first needs to be stopped. Once it has stopped, it can be removed. We have two
-ways that we can remove the old container. Feel free to choose the path that you're most comfortable with.
+To remove a container, it first needs to be stopped. Once it has stopped, it can be removed. You have two
+ways that you can remove the old container. Feel free to choose the path that you're most comfortable with.
 
 ### Remove a container using the CLI
 
@@ -80,7 +78,7 @@ ways that we can remove the old container. Feel free to choose the path that you
 
 ### Remove a container using the Docker Dashboard
 
-If you open the Docker dashboard, you can remove a container with two clicks! It's certainly
+If you open the Docker Dashboard, you can remove a container with two clicks! It's certainly
 much easier than having to look up the container ID and remove it.
 
 1. With the dashboard opened, hover over the app container and you'll see a collection of action
@@ -105,13 +103,16 @@ much easier than having to look up the container ID and remove it.
 ![Updated application with updated empty text](images/todo-list-updated-empty-text.png){: style="width:55%" }
 {: .text-center }
 
-## Recap
+## Next steps
 
-While we were able to build an update, there were two things you might have noticed:
+While you were able to build an update, there were two things you might have noticed:
 
-- All of the existing items in our todo list are gone! That's not a very good app! We'll talk about that
+- All of the existing items in your todo list are gone! That's not a very good app! You'll fix that
 shortly.
-- There were _a lot_ of steps involved for such a small change. In an upcoming section, we'll talk about 
-how to see code updates without needing to rebuild and start a new container every time we make a change.
+- There were a lot of steps involved for such a small change. In an upcoming section, you'll learn
+how to see code updates without needing to rebuild and start a new container every time you make a change.
 
-Before talking about persistence, we'll quickly see how to share these images with others.
+Before talking about persistence, you'll see how to share these images with others.
+
+
+[Sharing the application](04_sharing_app.md){: .button .outline-btn}
