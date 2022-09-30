@@ -140,7 +140,7 @@ volumes:
 
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Compose file.
 
-We are exposing `port 9229` so that we can attach a debugger. We are also mapping our local source code into the running container so that we can make changes in our text editor and have those changes picked up in the container.
+We are exposing `port 9229` so that we can attach a debugger. With `volumes`,  we are also mapping our local source code into the running container so that we can make changes in our text editor and have those changes picked up in the container.
 
 One other really cool feature of using a Compose file is that we have service resolution set up to use the service names. So we are now able to use `“mongo”` in our connection string. The reason we use mongo is because that is what we have named our MongoDB service in the Compose file as.
 
