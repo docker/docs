@@ -157,4 +157,4 @@ At this point, you have a functioning application that can survive restarts! You
 However, you saw earlier that rebuilding images for every change takes quite a bit of time. There's got to be a better
 way to make changes, right? With bind mounts (which was hinted at earlier), there is a better way!
 
-[Use bind mounts](06_bind_mounts.md){: .button .outline-btn}
+[Use bind mounts](06_bind_mounts.md){: .button  .primary-btn}

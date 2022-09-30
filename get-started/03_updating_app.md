@@ -115,4 +115,4 @@ how to see code updates without needing to rebuild and start a new container eve
 Before talking about persistence, you'll see how to share these images with others.
 
 
-[Sharing the application](04_sharing_app.md){: .button .outline-btn}
+[Sharing the application](04_sharing_app.md){: .button .primary-btn}

@@ -156,4 +156,4 @@ Dockerfile to do so. Once you built an image, you started the container and saw 
 Next, you're going to make a modification to your app and learn how to update your running application
 with a new image. Along the way, you'll learn a few other useful commands.
 
-[Update the application](03_updating_app.md){: .button .outline-btn}
+[Update the application](03_updating_app.md){: .button .primary-btn}

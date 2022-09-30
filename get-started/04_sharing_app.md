@@ -105,4 +105,4 @@ section. As a reminder, you noticed that when you restarted the app, you lost al
 That's obviously not a great user experience, so next you'll learn how you can persist the data across restarts!
 
 
-[Persist the DB](05_persisting_data.md){: .button .outline-btn}
+[Persist the DB](05_persisting_data.md){: .button  .primary-btn}

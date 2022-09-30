@@ -124,4 +124,4 @@ In this section, you installed Docker, learned about Docker, and learned about c
 
 In the next section, you'll containerize your first application.
 
-[Containerize an application](02_our_app.md){: .button .outline-btn}
+[Containerize an application](02_our_app.md){: .button  .primary-btn}

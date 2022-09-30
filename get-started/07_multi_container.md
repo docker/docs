@@ -317,4 +317,4 @@ In the next section, you'll learn about Docker Compose. With Docker Compose, you
 much easier way and let others spin them up with a single (and simple) command!
 
 
-[Use Docker Compose](08_using_compose.md){: .button .outline-btn}
+[Use Docker Compose](08_using_compose.md){: .button  .primary-btn}
