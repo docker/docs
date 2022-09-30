@@ -247,7 +247,7 @@ Now let's change the Docker Hub login with the GitHub Container Registry one:
 ```
 {% endraw %}
 
-Remember to change how the image is tagged and where it's cached. The following example is a
+And remember to change how the image is tagged and where it's cached. The following example is a
 functional equivalent for the aforementioned logic against the GitHub Container Registry:
 
 {% raw %}
@@ -258,7 +258,7 @@ functional equivalent for the aforementioned logic against the GitHub Container 
 ```
 {% endraw %}
 
-> **Note**: The repository owner's username needs to be lowercase.
+> **Note**: The [repository name must be lowercase](https://github.com/docker/build-push-action/blob/master/TROUBLESHOOTING.md#repository-name-must-be-lowercase){:target="_blank" rel="noopener" class="_"}.
 
 ![Update tagged images](images/ghcr-logic.png){:width="500px"}
 
