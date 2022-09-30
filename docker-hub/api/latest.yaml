@@ -3,7 +3,7 @@ info:
   title: Docker HUB API
   version: beta
   x-logo:
-    url: https://docs.docker.com/images/logo-docker-main.png
+    url: https://docs.docker.com/assets/images/logo-docker-main.png
     href: /reference
   description: |
     Docker Hub is a service provided by Docker for finding and sharing container
@@ -16,6 +16,7 @@ info:
     Docker provides an API that allows you to interact with Docker Hub.
 
     Browse through the Docker Hub API documentation to explore the supported endpoints.
+
 tags:
   - name: resources
     x-displayName: Resources
@@ -822,7 +823,7 @@ paths:
           $ref: "#/components/responses/NotFound"
           
 
-  /v2/namespace/{namespace}/repositories/{repository}/tags:
+  /v2/namespaces/{namespace}/repositories/{repository}/tags:
     parameters:
       - $ref: "#/components/parameters/namespace"
       - $ref: "#/components/parameters/repository"
@@ -1275,7 +1276,7 @@ components:
                 type: array
                 items:
                   type: string
-                example: [ urn:ietf:params:scim:api:messages:2.0:ListResponse ]
+                example: [ "urn:ietf:params:scim:api:messages:2.0:ListResponse" ]
               totalResults:
                 type: integer
                 example: 1
@@ -1302,7 +1303,7 @@ components:
                 type: array
                 items:
                   type: string
-                example: [ urn:ietf:params:scim:api:messages:2.0:ListResponse ]
+                example: [ "urn:ietf:params:scim:api:messages:2.0:ListResponse" ]
               totalResults:
                 type: integer
                 example: 1
@@ -2300,7 +2301,7 @@ components:
           type: array
           items:
             type: string
-          example: [ urn:ietf:params:scim:schemas:core:2.0:Schema ]
+          example: [ "urn:ietf:params:scim:schemas:core:2.0:Schema" ]
         id:
           type: string
           example: urn:ietf:params:scim:schemas:core:2.0:User
@@ -2462,7 +2463,7 @@ components:
       required: false
       schema:
         type: integer
-      description: "Number of images to get per page. Defaults to 10. Max of 1000."
+      description: "Number of items to get per page. Defaults to 10. Max of 100."
 
   requestBodies:
     scim_create_user_request:

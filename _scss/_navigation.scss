@@ -42,6 +42,7 @@
 // Some links don't have 'href' attr, hence no mouse pointer
 .nav-sidebar li a {
     cursor: pointer;
+    color: $light-palette-grey-800;
 }
 
 .nav-sidebar>li>a {
@@ -78,7 +79,7 @@
 .nav-sidebar ul li a,
 .nav-sidebar ul li a:focus {
     border-bottom: none;
-    border-left:   1px solid $primary-links;
+    border-left:   1px solid $light-palette-grey-200;
 }
 
 .nav-sidebar .nav > li > a {
@@ -96,6 +97,7 @@
     background:  $bg-sidebar-active;
     border-left: 4px solid $primary-links;
     font-weight: 600;
+    color: #2089C4;
 }
 
 .nav-sidebar ul li ul li a {
@@ -136,21 +138,29 @@
         a {
             display: inline-block;
             font-size: 12px;
-            padding: 5px 10px 5px 10px;
+            padding: 2px 10px 2px 10px;
+            color: #677285;
+        }
+        .slider{
+            background-color: #e0e4e7;
+            border: 1px solid #e0e4e7;
+        }
+        .slider:before{
+            background-color: #677285;
         }
     }
 }
 
 .toc-nav li a.active {
-    color: $primary-links;
-    border-left: 4px solid $primary-links;
+    border-left: 4px solid #677285;
     font-weight: bold;
+    color: #677285;
 }
 
 .toc-nav i.fa {
     font-size: 14px;
     margin: 0 8px 0 0;
-    color: $primary-links;
+    color: #677285;
 }
 
 div#side-toc-title {

@@ -1,18 +1,27 @@
 ---
-title: Official Docker samples
-description: Learn how to develop and ship containerized applications, by walking through samples that exhibit canonical practices.
+title: Samples overview
+description: Learn how to containerize different types of services by walking through Official Docker samples.
 redirect_from:
 - /en/latest/examples/
 - /engine/examples/
 - /examples/
 ---
 
-Visit [Docker Samples on GitHub](https://github.com/dockersamples?q=&type=all&language=&sort=stargazers){: target="_blank" rel="noopener" class="_"} and the [Awesome-compose repository on GitHub](https://github.com/docker/awesome-compose){: target="_blank" rel="noopener" class="_"} for a full list of samples. The following are a few samples from those repositories.
+Learn how to containerize different types of services by walking through Official Docker samples.
 
-| Sample | Description |
-| ------ | ----------- |
-| [atsea-sample-shop-app](https://github.com/dockersamples/atsea-sample-shop-app){: target="_blank" rel="noopener" class="_"} | A sample Java REST application. |
-| [ASP.NET / MS-SQL](https://github.com/docker/awesome-compose/tree/master/aspnet-mssql){: target="_blank" rel="noopener" class="_"} | A sample ASP.NET core application with MS SQL server database. |
-| [example-voting-app](https://github.com/dockersamples/example-voting-app){: target="_blank" rel="noopener" class="_"} | A sample distributed application running across multiple Docker containers. |
-| [Django](https://github.com/docker/awesome-compose/tree/master/django){: target="_blank" rel="noopener" class="_"} | A sample Django application. |
-| [k8s-wordsmith-demo](https://github.com/dockersamples/k8s-wordsmith-demo){: target="_blank" rel="noopener" class="_"} | A sample Wordsmith project that runs across three containers: a Postgres database, a Java REST API, and a Go web application. |
+## Databases
+[MariaDB](../samples/mariadb.md) \| [MongoDB](../samples/mongodb.md) \| [MS-SQL](../samples/ms-sql.md) \| [MySQL](../samples/mysql.md) \| [PostgreSQL](../samples/postgres.md) \| [Redis](../samples/redis.md)
+
+## Frameworks
+[.NET](../samples/dotnet.md) \| [Angular](../samples/angular.md) \| [Django](../samples/django-sample.md) \| [Express](../samples/express.md) \|[FastAPI](../samples/fastapi.md) \| [Flask](../samples/flask.md) \| [Node.js](../samples/nodejs.md) \| [React](../samples/react.md) \| [Spark](../samples/spark.md) \| [Spring Boot](../samples/spring.md) \| [Vue.js](../samples/vuejs.md)
+
+## Languages
+[Go](../samples/go.md) \| [Java](../samples/java.md) \| [JavaScript](../samples/javascript.md) \| [PHP](../samples/php.md) \| [Python](../samples/python.md) \| [Rust](../samples/rust.md) \| [TypeScript](../samples/typescript.md)
+
+## Platforms
+[Gitea](../samples/gitea.md) \| [Nextcloud](../samples/nextcloud.md) \| [Portainer](../samples/portainer.md) \|  [Prometheus](../samples/prometheus.md) \| [WordPress](../samples/wordpress-sample.md)
+
+## Other services
+[Cloudflared](../samples/cloudflared.md) \| [Elasticsearch / Logstash / Kibana](../samples/elasticsearch.md) \| [Minecraft](../samples/minecraft.md) \| [NGINX](../samples/nginx.md) \| [Pi-hole](../samples/pi-hole.md) \| [Plex](../samples/plex.md) \| [Traefik](../samples/traefik.md) \| [WireGuard](../samples/wireguard.md)
+
+{% include_relative samples-footer.md %}

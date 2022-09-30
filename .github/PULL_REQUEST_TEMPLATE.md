@@ -1,6 +1,4 @@
-<!--Thanks for your contribution. See [CONTRIBUTING](CONTRIBUTING.md)
-    for this project's contribution guidelines. Remove these comments
-    as you go.-->
+<!--We’d like to make it as easy as possible for you to contribute to the Docker documentation repository. Before you submit the pull request, we recommend that you review the [Contribution guidelines](/contribute/overview.md). Remove these comments as you go.-->
 
 ### Proposed changes
 

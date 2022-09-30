@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: ExecStreamOptions
 
+**`since`** 0.2.2
+
 ## Methods
 
 ### onOutput
@@ -16,6 +18,8 @@ Invoked when receiving output from command execution.
 By default, the output is split into chunks at arbitrary boundaries.
 If you prefer the output to be split into complete lines, set `splitOutputLines`
 to true. The callback is then invoked once for each line.
+
+**`since`** 0.2.0
 
 #### Parameters
 

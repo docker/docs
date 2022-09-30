@@ -39,10 +39,10 @@
   <link rel="canonical" href="{{ site.docs_url }}{{ page.url }}" />
 
   <!-- favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128">
-  <link rel="apple-touch-icon" type="image/x-icon" href="/favicons/docs@2x.ico" sizes="129x128">
-  <meta name="msapplication-TileImage" content="/favicons/docs@2x.ico">
-  <meta property="og:image" content="/favicons/docs@2x.ico"/>
+  <link rel="icon" type="image/x-icon" href="/assets/favicons/docs@2x.ico" sizes="129x128">
+  <link rel="apple-touch-icon" type="image/x-icon" href="/assets/favicons/docs@2x.ico" sizes="129x128">
+  <meta name="msapplication-TileImage" content="/assets/favicons/docs@2x.ico">
+  <meta property="og:image" content="/assets/favicons/docs@2x.ico"/>
   <meta name="theme-color" content="#2496ed" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,18 +59,18 @@
   {%- endcomment -%}
   {%- if page.layout == 'landing' -%}
   <!-- landing page scripts -->
-  <script defer src="/js/theme-switcher.js"></script>
-  <script defer src="/js/jquery.js"></script>
-  <script defer src="/js/bootstrap.min.js"></script>
+  <script defer src="/assets/js/theme-switcher.js"></script>
+  <script defer src="/assets/jquery/jquery.js"></script>
+  <script defer src="/assets/bootstrap/js/bootstrap.min.js"></script>
   {%- else -%}
-  <script defer src="/js/theme-switcher.js"></script>
-  <script defer src="/js/anchorlinks.js"></script>
-  <script defer src="/js/jquery.js"></script>
-  <script defer src="/js/bootstrap.min.js"></script>
-  <script defer src="/js/docs.js"></script>
+  <script defer src="/assets/js/theme-switcher.js"></script>
+  <script defer src="/assets/js/anchorlinks.js"></script>
+  <script defer src="/assets/jquery/jquery.js"></script>
+  <script defer src="/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script defer src="/assets/js/docs.js"></script>
   {%- endif -%}
   {%- if site.local_search -%}
-  <script defer src="/js/search.js"></script>
+  <script defer src="/assets/js/search.js"></script>
   {%- endif -%}
 
   {%- comment -%}
@@ -83,13 +83,13 @@
   <link rel="preload" as="font" href="/assets/fontawesome/webfonts/fa-regular-400.woff2"       type="font/woff2" crossorigin="anonymous">
   <link rel="preload" as="font" href="/assets/fontawesome/webfonts/fa-solid-900.woff2"         type="font/woff2" crossorigin="anonymous">
   <link rel="preload" as="font" href="/assets/fontawesome/webfonts/fa-v4compatibility.woff2"   type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" as="font" href="/fonts/geomanist/hinted-Geomanist-Book.woff2"            type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" as="font" href="/fonts/geomanist/hinted-Geomanist-Regular.woff2"         type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" as="font" href="/fonts/glyphicons-halflings-regular.woff2"               type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fonts/geomanist/hinted-Geomanist-Book.woff2"            type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/fonts/geomanist/hinted-Geomanist-Regular.woff2"         type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" as="font" href="/assets/bootstrap/fonts/glyphicons-halflings-regular.woff2"               type="font/woff2" crossorigin="anonymous">
 
   <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/style.css" id="pagestyle">
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css" id="pagestyle">
 
   <!-- SEO stuff -->
   <meta name="twitter:title" itemprop="title name" content="{{ page.title | default: page_title }}"/>
@@ -98,13 +98,13 @@
   <meta name="twitter:domain" content="{{ site.docs_url | replace_first: 'http://', '' | replace_first: 'https://', '' }}"/>
   <meta name="twitter:site" content="@docker_docs"/>
   <meta name="twitter:url" content="https://twitter.com/docker_docs"/>
-  <meta name="twitter:image:src" content="{{ site.docs_url }}/images/docs@2x.png"/>
+  <meta name="twitter:image:src" content="{{ site.docs_url }}/assets/images/docs@2x.png"/>
   <meta name="twitter:image:alt" content="Docker Documentation"/>
   <meta property="og:title" content="{{ page.title | default: page_title }}" />
   <meta property="og:description" content="{{ page.description | default: page_description | escape_once }}" />
   <meta property="og:type" content="website"/>
   <meta property="og:updated_time" itemprop="dateUpdated" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
-  <meta property="og:image" itemprop="image primaryImageOfPage" content="{{ site.docs_url }}/images/docs@2x.png"/>
+  <meta property="og:image" itemprop="image primaryImageOfPage" content="{{ site.docs_url }}/assets/images/docs@2x.png"/>
   <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="{{ site.docs_url }}{{ page.url }}" />
   <meta property="og:site_name" content="Docker Documentation" />

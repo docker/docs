@@ -24,7 +24,7 @@ In version 4.11 and above of Docker Desktop for Mac you can avoid running the pr
 
 This approach has the following limitations:
 - Docker Desktop can only be run by one user account per machine, namely the one specified in the `-–user` flag.
-- Ports 1-79 are blocked. The containers will run but the port won’t be exposed on the host.
+- Binding privileged ports (<1024) on `127.0.0.1` will not work. For example, `docker run -p 127.0.0.1:80:80 docker/getting-started` will fail, `docker run -p 80:80 docker/getting-started` however will succeed as binding privileged ports on `0.0.0.0` is no longer a privileged operation on recent versions of MacOS.
 - Spindump diagnostics for fine grained CPU utilization are not gathered.
 
 ## Privileged Helper
