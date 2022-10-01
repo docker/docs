@@ -54,7 +54,7 @@ services:
     ports:
     - mode: ingress
       target: 80
-      published: 80
+      published: "80"
       protocol: tcp
 networks:
   default:
