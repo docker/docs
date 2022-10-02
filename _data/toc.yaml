@@ -1613,7 +1613,7 @@ manuals:
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
-  - sectiontitle: Docker Verified Publisher Program
+  - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
         title: Overview
