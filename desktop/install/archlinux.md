@@ -40,27 +40,6 @@ $ sudo pacman -U ./docker-desktop-<version>-<arch>.pkg.tar.zst
 
 {% include desktop-linux-launch.md %}
 
-## Uninstall Docker Desktop
-
-To remove Docker Desktop for Linux, run:
-
-```console
-$ sudo pacman -R docker-desktop
-```
-
-For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
-the remaining systemd service files.
-
-```console
-$ rm -r $HOME/.docker/desktop
-$ sudo rm /usr/local/bin/com.docker.cli
-$ sudo pacman -Rns docker-desktop
-```
-
-Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/config.json`. Additionally, you must delete any edited configuration files manually. 
-
-
-
 ## Next steps
 
 - Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
