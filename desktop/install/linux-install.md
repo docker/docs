@@ -226,28 +226,6 @@ Current context is now "desktop-linux"
 
 Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
 
-## Updates
-
-Once a new version for Docker Desktop is released, the Docker UI shows a notification. 
-You need to download the new package each time you want to upgrade manually.
-
-To upgrade your installation of Docker Desktop, first stop any instance of Docker Desktop running locally,
-then follow the regular installation steps to install the new version on top of the existing
-version.
-
-## Uninstall Docker Desktop
-
-Docker Desktop can be removed from a Linux host using the package manager.
-
-Once Docker Desktop has been removed, users must remove the `credsStore` and `currentContext` properties from the `~/.docker/config.json`.
-
-> **Note**
->
-> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
-> other Docker related data local to the machine, and removes the files generated
-> by the application. Refer to the [back up and restore data](../backup-and-restore.md)
-> section to learn how to preserve important data before uninstalling.
-
 ## Why Docker Desktop for Linux runs a VM
 
 
