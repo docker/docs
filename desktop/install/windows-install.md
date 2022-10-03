@@ -187,25 +187,6 @@ Docker Desktop does not start automatically after installation. To start Docker 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"}.
 
 
-## Updates
-
-{% include desktop-update.md %}
-
-## Uninstall Docker Desktop
-
-To uninstall Docker Desktop from your Windows machine:
-
-1. From the Windows **Start** menu, select **Settings** > **Apps** > **Apps & features**.
-2. Select **Docker Desktop** from the **Apps & features** list and then select **Uninstall**.
-3. Click **Uninstall** to confirm your selection.
-
-> **Important**
->
-> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
-> other Docker related data local to the machine, and removes the files generated
-> by the application. Refer to the [back up and restore data](../backup-and-restore.md)
-> section to learn how to preserve important data before uninstalling.
-
 ## Where to go next
 
 * [Get started with Docker](/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
