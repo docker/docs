@@ -286,8 +286,8 @@ Both should contain entries in the form -
 to use IDs from 100000 to 165535:
 
 ```console
-$ grep "$USER" /etc/subuid >> /dev/null 2&>1 || (echo "$USER:100000:65536" | sudo tee -a /etc/subuid)
-$ grep "$USER" /etc/subgid >> /dev/null 2&>1 || (echo "$USER:100000:65536" | sudo tee -a /etc/subgid)
+$ grep "$USER" /etc/subuid >> /dev/null 2&>1 || (echo "$USER:100000:165536" | sudo tee -a /etc/subuid)
+$ grep "$USER" /etc/subgid >> /dev/null 2&>1 || (echo "$USER:100000:165536" | sudo tee -a /etc/subgid)
 ```
 
 To verify the configs have been created correctly, inspect their contents:
@@ -296,9 +296,9 @@ To verify the configs have been created correctly, inspect their contents:
 $ echo $USER
 exampleuser
 $ cat /etc/subuid
-exampleuser:100000:65536
+exampleuser:100000:165536
 $ cat /etc/subgid
-exampleuser:100000:65536
+exampleuser:100000:165536
 ```
 
 In this scenario if a shared file is `chown`ed inside a Docker Desktop container
