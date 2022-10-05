@@ -13,7 +13,7 @@ Enhanced Container Isolation provides an additional layer of security that uses 
 These techniques include:
 - Running all containers unprivileged (via the Linux user-namespace)
 - Restricting containers from modifying Docker Desktop VM settings
-- Vetting some critical system calls to prevent container escapes, and partially virtualizing portions of `/proc` and c/sys` inside the container for further isolation. 
+- Vetting some critical system calls to prevent container escapes, and partially virtualizing portions of `/proc` and `/sys` inside the container for further isolation. 
 
 This is done automatically and with minimal performance impact. 
 
@@ -21,7 +21,7 @@ Enhanced Container Isolation helps ensure a strong container-to-host isolation a
 
 >Note
 >
-> Enhanced Container Isolation is in addition to other security techniques used by Docker. For example, reduced Linux Capabilities, Seccomp, AppArmor
+> Enhanced Container Isolation is in addition to other security techniques used by Docker. For example, reduced Linux Capabilities, Seccomp, AppArmor.
 
 ### Who is it for?
 

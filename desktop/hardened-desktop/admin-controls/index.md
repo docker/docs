@@ -43,7 +43,7 @@ As an administrator, you first need to [configure a registry.json to enforce sig
 
 Next, you must [create and configure the admin-settings.json file](configure-ac.md).
 
-Once this is done, Docker Desktop users receive the changed settings when they re-launch Docker Desktop and re-authenticate to your organization. Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
+Once this is done, Docker Desktop users receive the changed settings when they quit and then re-launch Docker Desktop, or launch Docker Desktop for the first time, and sign in to your organization. Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
 
 ### What do users see when the settings are enforced?
 

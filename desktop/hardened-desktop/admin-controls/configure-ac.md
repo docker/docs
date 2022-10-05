@@ -37,21 +37,13 @@ By placing this file in the above protected directories, end users are unable to
 >Some of the configuration parameters only apply to Windows. This is highlighted in the table below.
 
 The `admin-settings.json` file requires a nested list of configuration parameters, each of which must contain the  `locked` parameter. You can add or remove configuration parameters as per your requirements.
-If set to `true`, users are not able to edit this setting from Docker Desktop or the CLI. 
-If set to `false`, the configuration value acts as a default value, but users can change this setting from Docker Desktop or the CLI by directly editing the `settings.json` file.
 
-<div class="panel panel-default">
-<div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Additional <code>Locked: false</code> information<i class="chevron fa fa-fw"></i></div>
-<div class="collapse block" id="collapseSample2">
-<p>
-<code>Locked: false</code> is similar to having a setting be the factory default.
-<br>
-<li>For new installs, <code>Locked: false</code> pre-populates the relevant settings in the Desktop UI.</li>
-<br>
-<li> If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting which may have been written to the relevant config file, for example the <code>settings.json</code> or <code>daemon.json</code> file. In these instances, Docker respects the user's preference. This can be overridden by the admin by setting <code>locked: true</code>.</li>
-</p>
- </div>
-</div>
+If `locked: true`, users are not able to edit this setting from Docker Desktop or the CLI.
+
+If `locked: false`, it is similar to setting a factory default in that:
+- For new installs, `locked: false` pre-populates the relevant settings in the Docker Desktop UI, but users are able to modify it.
+
+- If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting, which in turn will have been written to the relevant config file, for example the `settings.json` or `daemon.json`. In these instances, the user's preferences are respected and we don't alter these values. These can be controlled by the admin by setting `locked: true`.
 
 The following `admin-settings.json` code and table provides an example of the required syntax and descriptions for parameters and values:
 
@@ -122,16 +114,18 @@ The following `admin-settings.json` code and table provides an example of the re
 | `windowsContainers` | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.                  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` | Overrides the options in the linux daemon config file. See the [Docker Engine reference](../../../engine/reference/commandline/dockerd/#daemon-configuration-file).|                                |
 |`disableUpdate`|If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|
-|`analyticsEnabled`|If `value` is set to false, Docker Desktop does not send usage statistics to Docker. |
+|`analyticsEnabled`|If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
 
-## Step three: Re-launch and re-authenticate
+## Step three: Re-launch Docker Desktop
 >Note
 >
 >Administrators should test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.
 
-Once you have created and configured `admin-settings.json`, developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. Selecting **Restart** from the Whale menu isn't sufficient as it only restarts some components of Docker Desktop.
+For settings to take effect:
+- On a new install: developers need to launch Docker Desktop and authenticate to their organization
+- On an existing install: developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop.
 
-Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made so as not to disrupt your developers workflow. 
+Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers workflow. 
 
 In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
 
