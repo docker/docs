@@ -11,43 +11,26 @@ redirect_from:
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
 
- This page contains information about system requirements, download URLs, and instructions on how to install and update Docker Desktop for Linux.
-
-> During first installation make sure to meet the [system requirements](#system-requirements) outlined below and follow the distro-specific installation instructions:
->
-> * [Ubuntu](ubuntu.md)
-> * [Debian](debian.md)
-> * [Fedora](fedora.md)
->
-> [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
-> [Arch package (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+ This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
 ## System requirements
 
-To install Docker Desktop successfully, your Linux host must meet the following requirements:
+To install Docker Desktop successfully, your Linux host must meet the following general requirements:
 
 - 64-bit kernel and CPU support for virtualization.
-
 - KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the kvm device.
-
 - **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version.
-
 - systemd init system.
-
 - Gnome or KDE Desktop environment.
-  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/)).
-
+  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
 - At least 4 GB of RAM.
+- Enable configuring ID mapping in user namespaces, see [File sharing](../faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
 
-- Enable configuring ID mapping in user namespaces, see [File sharing](#file-sharing).
-
-Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](linux-install.md#why-docker-desktop-for-linux-runs-a-vm).
+Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](../faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
 
 > **Note:**
 >
 > Docker does not provide support for running Docker Desktop in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
-
 
 ## Supported platforms
 
@@ -126,6 +109,11 @@ Log out and log back in so that your group membership is re-evaluated.
 
 
 ## Generic installation steps
+
+>Important
+>
+>Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
+{: .important} 
 
 1. Download the correct package for your Linux distribution and install it with the corresponding package manager. 
  - [Install on Debian](debian.md)
