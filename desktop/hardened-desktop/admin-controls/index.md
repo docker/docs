@@ -9,7 +9,7 @@ title: What is Admin Controls?
 
 Admin Controls is a feature that gives admins the ability to configure certain Docker Desktop settings for their organization. 
 
-With a few lines of JSON, admins can configure Docker Desktop settings for HTTP proxies, network settings, and the Docker Engine configuration. This saves significant time and cost in securing developer workflows. If admins also enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md), it ensures that any configurations set with Admin Controls cannot be modified by containers.
+With a few lines of JSON, admins can configure Docker Desktop settings for HTTP proxies, network settings, and the Docker Engine configuration, which reduces effort spent on securing developer workflows. If admins also enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md), it ensures that any configurations set with Admin Controls cannot be modified by containers.
 
 ### Who is it for? 
 
@@ -21,9 +21,9 @@ With a few lines of JSON, admins can configure Docker Desktop settings for HTTP 
 
 Administrators can configure several Docker Desktop settings using the `admin-settings.json` file. This file is located within the Docker Desktop host and can only be accessed by users with root or admin privileges. 
 
-As the `admin-settings.json` overrides the `settings.json` file, which contains the settings configured by regular Docker Desktop users and is located in a directory users can write to, admins can configure default values for several Docker Desktop settings and lock them in so regular users are prevented from modifying them.
+Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by users and ensure that these cannot be modified. For more information, see [Configure Admin Controls](../admin-controls/configure-ac.md#step-two-configure-the-admin-controls-you-want-to-lock-in).
 
-### What can be set?
+### What features can I configure with Admin Controls?
 
 Using the `admin-settings.json` file, admins can:
 
