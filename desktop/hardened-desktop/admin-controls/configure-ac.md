@@ -55,15 +55,15 @@ The following `admin-settings.json` code and table provides an example of the re
     "value": false
   },
   "proxy": {
-    "locked": false,
-    "mode": "system",
+    "locked": true,
+    "mode": "manual",
     "server": "myproxy.com",
     "port":3129,
     "exclude": ["foo.com", "bar.com"]
   },
   "enhancedContainerIsolation": {
-    "locked": false,
-    "value": false
+    "locked": true,
+    "value": true
   },
   "useWindowsContainers": {
       "locked": false,
@@ -76,7 +76,7 @@ The following `admin-settings.json` code and table provides an example of the re
     },
     "dockerDaemonOptions": {
       "locked": false,
-      "value":"<json string>"
+      "value":"{\"debug\": false}"
     },
     "vpnkitCIDR": {
       "locked": false,
@@ -86,7 +86,7 @@ The following `admin-settings.json` code and table provides an example of the re
   "windowsContainers": {
     "dockerDaemonOptions": {
       "locked": false,
-      "value":"<json string>"
+      "value":"{\"debug\": false}"
     }
   },
   "disableUpdate": {
