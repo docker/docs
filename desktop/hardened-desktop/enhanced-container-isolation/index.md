@@ -15,7 +15,7 @@ These techniques include:
 - Restricting containers from modifying Docker Desktop VM settings
 - Vetting some critical system calls to prevent container escapes, and partially virtualizing portions of `/proc` and c/sys` inside the container for further isolation. 
 
-This is all done automatically and with minimal performance impact. 
+This is done automatically and with minimal performance impact. 
 
 Enhanced Container Isolation helps ensure a strong container-to-host isolation and locks in any security configurations that have been created, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Admin Controls](../admin-controls/index.md). 
 
@@ -49,7 +49,7 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 
 ### How do I switch on Enhanced Container Isolation?
 
-As an administrator, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must [create and configure the `admin-settings.json` file](configure-ac.md) and specify:
 

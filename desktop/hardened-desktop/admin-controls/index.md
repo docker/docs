@@ -7,9 +7,9 @@ title: What is Admin Controls?
 >
 >Admin Controls is available to Docker Business customers only. 
 
-Admin Controls is a feature that gives administrators the ability to configure certain Docker Desktop settings for their organization. 
+Admin Controls is a feature that gives admins the ability to configure certain Docker Desktop settings for their organization. 
 
-With a few lines of JSON, administrators can configure Docker Desktop settings for HTTP proxies, network settings, and the Docker Engine configuration. This saves significant time and cost in securing developer workflows. If administrators also enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md), it ensures that any configurations set with Admin Controls cannot be modified by containers.
+With a few lines of JSON, admins can configure Docker Desktop settings for HTTP proxies, network settings, and the Docker Engine configuration. This saves significant time and cost in securing developer workflows. If admins also enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md), it ensures that any configurations set with Admin Controls cannot be modified by containers.
 
 ### Who is it for? 
 
@@ -21,11 +21,11 @@ With a few lines of JSON, administrators can configure Docker Desktop settings f
 
 Administrators can configure several Docker Desktop settings using the `admin-settings.json` file. This file is located within the Docker Desktop host and can only be accessed by users with root or admin privileges. 
 
-As the `admin-settings.json` overrides the `settings.json` file, which contains the settings configured by regular Docker Desktop users and is located in a directory users can write to, administrators can configure default values for several Docker Desktop settings and lock them in so regular users are prevented from modifying them.
+As the `admin-settings.json` overrides the `settings.json` file, which contains the settings configured by regular Docker Desktop users and is located in a directory users can write to, admins can configure default values for several Docker Desktop settings and lock them in so regular users are prevented from modifying them.
 
 ### What can be set?
 
-Using the `admin-settings.json` file, administrators can:
+Using the `admin-settings.json` file, admins can:
 
 - Enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md)
 - Configure HTTP Proxies
@@ -35,7 +35,7 @@ Using the `admin-settings.json` file, administrators can:
 - Turn off Docker Desktop's ability to checks for updates
 - Turn off Docker Desktop's ability to send usage statistics
 
-For more details on the syntax and options administrators can set, see [Configure Admin Controls](configure-ac.md).
+For more details on the syntax and options admins can set, see [Configure Admin Controls](configure-ac.md).
 
 ### How do I set up and enforce Admin Controls?
 
@@ -51,5 +51,4 @@ Docker Desktop users see a notification in the **Settings**, or **Preferences** 
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 
-
-
+![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="750px"}

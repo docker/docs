@@ -8,7 +8,7 @@ title: Configure Admin Controls
 >
 >Admin Controls is available to Docker Business customers only. 
 
-This page contains information about how administrators can configure Admin Controls to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
+This page contains information about how admins can configure Admin Controls to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
 
 Admin Controls is designed specifically for organizations who don’t give developers root access to their machines.
 
@@ -41,14 +41,14 @@ If set to `true`, users are not able to edit this setting from Docker Desktop or
 If set to `false`, the configuration value acts as a default value, but users can change this setting from Docker Desktop or the CLI by directly editing the `settings.json` file.
 
 <div class="panel panel-default">
-<div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Additional <code>Locked: false</code> logic<i class="chevron fa fa-fw"></i></div>
+<div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample2"  style="cursor: pointer"> Additional <code>Locked: false</code> information<i class="chevron fa fa-fw"></i></div>
 <div class="collapse block" id="collapseSample2">
 <p>
 <code>Locked: false</code> is similar to having a setting be the factory default.
 <br>
 <li>For new installs, <code>Locked: false</code> pre-populates the relevant settings in the Desktop UI.</li>
 <br>
-<li> If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting which may have been written to the relevant config file, for example the <code>settings.json</code> or <code>daemon.json</code> file. In these instances, Docker respects the user's preference. This can be overridden by the administrator by setting <code>locked: true</code></li>.
+<li> If Docker Desktop is already installed and being used, `locked: false` is ignored. This is because existing users of Docker Desktop may have already updated a setting which may have been written to the relevant config file, for example the <code>settings.json</code> or <code>daemon.json</code> file. In these instances, Docker respects the user's preference. This can be overridden by the admin by setting <code>locked: true</code>.</li>
 </p>
  </div>
 </div>
@@ -133,12 +133,6 @@ Once you have created and configured `admin-settings.json`, developers need to q
 
 Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made so as not to disrupt your developers workflow. 
 
-## Example
+In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
 
-The following image displays an example `admin-settings.json` file:
-
-![admin-settings.json](../../images/admin-settings.PNG){:width="500px"}
-
-In Docker Desktop, developers see the relevant settings grayed out and the message **This is locked by your admin**.
-
-[screenshot]
+![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="750px"}
