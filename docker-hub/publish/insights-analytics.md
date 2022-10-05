@@ -64,20 +64,20 @@ represents an image pull.
 | Data point                    | Value                                             | Description                                                                           | Available from  |
 | ----------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------- |
 | Timestamp                     | `YYYY-MM-DD 00:00:00`                             | Date and time of the request.                                                         | January 1, 2022 |
-| Namespace                     | `String`                                          | Docker organization (image namespace).                                                | January 1, 2022 |
-| Repository                    | `String`                                          | Image name.                                                                           | January 1, 2022 |
-| Reference                     | `String`                                          | Image digest or tag, as requested.                                                    | January 1, 2022 |
-| Digest                        | `String`                                          | Image digest.                                                                         | January 1, 2022 |
-| Tag (included when available) | `String`                                          | Tag name. Only available if the request referred to a tag.                            | January 1, 2022 |
+| Namespace                     | String                                            | Docker organization (image namespace).                                                | January 1, 2022 |
+| Repository                    | String                                            | Image name.                                                                           | January 1, 2022 |
+| Reference                     | String                                            | Image digest or tag, as requested.                                                    | January 1, 2022 |
+| Digest                        | String                                            | Image digest.                                                                         | January 1, 2022 |
+| Tag (included when available) | String                                            | Tag name. Only available if the request referred to a tag.                            | January 1, 2022 |
 | Action day                    | `YYYY-MM-DD`                                      | The date part of the timestamp.                                                       | January 1, 2022 |
-| HTTP method                   | `String`                                          | HTTP method used in the request, see [registry API documentation][1] for details.     | January 1, 2022 |
+| HTTP method                   | String                                            | HTTP method used in the request, see [registry API documentation][1] for details.     | January 1, 2022 |
 | Action                        | `pull_by_tag`, `pull_by_digest`, `version_check`  | Request type, see [Action classification rules][2].                                   | January 1, 2022 |
 | Type                          | `business`, `isp`, `hosting`, `education`, `null` | The industry from which the event originates.                                         | January 1, 2022 |
-| Host                          | `String`                                          | The cloud service provider used in an event.                                          | January 1, 2022 |
-| Country                       | `String`                                          | Request origin country.                                                               | January 1, 2022 |
-| Domain                        | `String`                                          | Request origin domain, see [Privacy][3].                                              | October n, 2022 |
-| User agent tool               | `String`                                          | The application a user used to pull an image (for example, `docker` or `containerd`). | January 1, 2022 |
-| User agent version            | `String`                                          | The version of the application used to pull an image.                                 | January 1, 2022 |
+| Host                          | String                                            | The cloud service provider used in an event.                                          | January 1, 2022 |
+| Country                       | String                                            | Request origin country.                                                               | January 1, 2022 |
+| Domain                        | String                                            | Request origin domain, see [Privacy][3].                                              | October n, 2022 |
+| User agent tool               | String                                            | The application a user used to pull an image (for example, `docker` or `containerd`). | January 1, 2022 |
+| User agent version            | String                                            | The version of the application used to pull an image.                                 | January 1, 2022 |
 
 [1]: /registry/spec/api/
 [2]: #action-classification-rules
@@ -87,12 +87,12 @@ represents an image pull.
 The summary data format contains the following data points for each namespace,
 repository, and reference (tag or digest), for the selected time span.
 
-| Data point        | Value     | Description                                       | Available from  |
-| ----------------- | --------- | ------------------------------------------------- | --------------- |
-| Unique IP address | `String`  | Number of unique IP addresses, see [Privacy][3].  | January 1, 2022 |
-| Pull by tag       | `Integer` | GET request, by digest or by tag.                 | January 1, 2022 |
-| Pull by digest    | `Integer` | GET or HEAD request by digest, or HEAD by digest. | January 1, 2022 |
-| Version check     | `Integer` | HEAD by tag, not followed by a GET                | January 1, 2022 |
+| Data point        | Value   | Description                                       | Available from  |
+| ----------------- | ------- | ------------------------------------------------- | --------------- |
+| Unique IP address | String  | Number of unique IP addresses, see [Privacy][3].  | January 1, 2022 |
+| Pull by tag       | Integer | GET request, by digest or by tag.                 | January 1, 2022 |
+| Pull by digest    | Integer | GET or HEAD request by digest, or HEAD by digest. | January 1, 2022 |
+| Version check     | Integer | HEAD by tag, not followed by a GET                | January 1, 2022 |
 
 [3]: #privacy
 
@@ -150,7 +150,8 @@ consumers of content on Docker Hub remain completely anonymous.
 > **Important**
 >
 > Docker never shares any Personally Identifiable Information (PII) as part of
-> analytics data. {: .important }
+> analytics data.
+{: .important }
 
 The summary dataset includes Unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.
