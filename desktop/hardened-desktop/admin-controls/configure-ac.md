@@ -6,7 +6,7 @@ title: Configure Admin Controls
 
 >Note
 >
->Admin Controls is currently in [Early Access](../../../release-lifecycle.md#early-access-ea) and available to Docker Business customers only. 
+>Admin Controls is available to Docker Business customers only. 
 
 This page contains information about how administrators can configure Admin Controls to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
 

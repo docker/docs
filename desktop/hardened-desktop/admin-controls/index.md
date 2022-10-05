@@ -5,11 +5,11 @@ title: What is Admin Controls?
 --- 
 >Note
 >
->Admin Controls is currently in [Early Access](../../../release-lifecycle.md#early-access-ea) and available to Docker Business customers only. 
+>Admin Controls is available to Docker Business customers only. 
 
-Admin Controls is a feature that gives administrators the ability to enforce certain Docker Desktop settings for their organization. 
+Admin Controls is a feature that gives administrators the ability to configure certain Docker Desktop settings for their organization. 
 
-With a few lines of JSON, administrators are able to enforce preferences for HTTP proxies, network settings, and the Docker Engine configuration. This saves significant time and cost in securing developer workflows.
+With a few lines of JSON, administrators can configure Docker Desktop settings for HTTP proxies, network settings, and the Docker Engine configuration. This saves significant time and cost in securing developer workflows. If administrators also enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md), it ensures that any configurations set with Admin Controls cannot be modified by containers.
 
 ### Who is it for? 
 
@@ -17,26 +17,25 @@ With a few lines of JSON, administrators are able to enforce preferences for HTT
 - For Organizations who want to create a standardized Docker Desktop environment at scale.
 - For security conscious Docker Business customers who want to confidently manage their use of Docker Desktop within tightly regulated environments.
 
+## How does it work?
+
+Administrators can configure several Docker Desktop settings using the `admin-settings.json` file. This file is located within the Docker Desktop host and can only be accessed by users with root or admin privileges. 
+
+As the `admin-settings.json` overrides the `settings.json` file, which contains the settings configured by regular Docker Desktop users and is located in a directory users can write to, administrators can configure default values for several Docker Desktop settings and lock them in so regular users are prevented from modifying them.
+
 ### What can be set?
 
 Using the `admin-settings.json` file, administrators can:
 
-- Switch on Enhanced Container Isolation
+- Enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md)
 - Configure HTTP Proxies
 - Configure network settings
-- Expose daemon on tcp://localhost:2375 without TLS Resources. This is applicable to Docker Desktop on Windows only.
 - Enforce the use of WSL2 based engine or Hyper-V
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
 - Turn off Docker Desktop's ability to send usage statistics
 
 For more details on the syntax and options administrators can set, see [Configure Admin Controls](configure-ac.md).
-
-### How is this different to the `settings.json` file?
-
-Using the `settings.json` file to pre-configure Docker Desktop settings means that developers own the `settings.json` file. They can therefore adjust any settings that their admins create, for example, modifying network and proxy controls. 
-
-The `admin-settings.json` file can only be used by an administrator with root privileges and cannot be modified by users. 
 
 ### How do I set up and enforce Admin Controls?
 
@@ -50,8 +49,7 @@ Once this is done, Docker Desktop users receive the changed settings when they r
 
 Docker Desktop users see a notification in the **Settings**, or **Preferences** if using a macOS, which states **Some settings are managed by your Admin**. 
 
-Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or by modifying the Docker Desktop Linux VM.
-
+Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 
 
 

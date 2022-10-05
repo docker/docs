@@ -6,7 +6,7 @@ keywords: set up, enhanced container isolation, rootless, security
 
 >Note
 >
->Enhance Container Isolation is currently in [Early Access](../../../release-lifecycle.md#early-access-ea) and available to Docker Business customers only.
+>Enhance Container Isolation is available to Docker Business customers only.
 
 Enhanced Container Isolation takes advantage of the recent integration of Sysbox, the secure container runtime created by [Nestybox](https://www.nestybox.com/). 
 
