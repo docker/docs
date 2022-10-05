@@ -223,10 +223,8 @@ This option is ignored if `awslogs-datetime-format` is also configured.
 > Multiline logging performs regular expression parsing and matching of all log
 > messages. This may have a negative impact on logging performance.
 
-For example, to process the following log stream where new log messages start with the pattern `INFO`:
-
 Consider the following log stream, where each log message should start with the
-patther `INFO`:
+pattern `INFO`:
 
 ```console
 INFO A message was logged
