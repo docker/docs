@@ -15,12 +15,10 @@ redirect_from:
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
 
-Welcome to Docker Desktop for Mac. This page contains information about Docker Desktop for Mac system requirements, download URLs, instructions to install and update Docker Desktop for Mac.
+This page contains information about system requirements, download URLs, and instructions on how to install Docker Desktop for Mac.
 
-> Download Docker Desktop for Mac
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+[Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+[Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
 *For checksums, see [Release notes](../release-notes.md)*
 
@@ -37,9 +35,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Intel chip
 
-- **macOS must be version 10.15 or newer**. That is, Catalina, Big Sur, or Monterey. We recommend upgrading to the latest version of macOS.
-
-  If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
+- macOS must be version 10.15 or newer. That is, Catalina, Big Sur, or Monterey. We recommend upgrading to the latest version of macOS.
 
   > **Note**
   >
@@ -73,9 +69,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
     the Applications folder.
 
 
-2. Double-click `Docker.app` in the Applications folder to start Docker. In the example below, the Applications folder is in "grid" view mode.
-
-    ![Docker app in Hockeyapp](images/docker-app-in-apps-mac.png)
+2. Double-click `Docker.app` in the **Applications** folder to start Docker.
 
 3. The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement window.
 
