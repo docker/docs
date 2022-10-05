@@ -7,18 +7,18 @@ keywords: security, hardened desktop, enhanced container isolation, registry acc
 >
 >Hardened Desktop is available to Docker Business customers only.
 
-Hardened Desktop is a new security model for Docker Desktop. It's part of Docker's ongoing effort to increase Docker Desktop security without impacting the developer experience.
+Hardened Desktop is a new security model for Docker Desktop. It's designed to provide administrators with a simple and powerful way to improve their organizations security posture for containerised development, without impacting the developer experience that Docker Desktop offers.
 
-The Hardened Desktop security model provides administrators with a simple and powerful way to increase the security of their containerised development and moves the ownership boundary for containers to the organization, meaning that any security controls administrators set cannot be altered by the user.
+This configuration is designed for security conscious organizations who don’t give their users root or admin access on their machines, and who would like Docker Desktop to be within the organization’s centralized control.
 
-It is designed specifically for organizations who don’t give developers root access to their machines, and who would like Docker Desktop to be within the organization’s centralized control.
+The Hardened Desktop security model moves the ownership boundary for containers to the organization, meaning that any security controls administrators set cannot be altered by the user of Docker Desktop.
 
 Hardened Desktop includes:
-- Admin Controls, which helps administrators to confidently manage and control usage of Docker Desktop.
-- Enhanced Container Isolation, an admin setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM.
-- Registry Access Management, which allows administrators to control the registries developers can access and can be locked in if  Enhanced Container Isolation is switched on by using Admin Controls.
+- Admin Controls, which helps administrators to confidently manage and control the usage of Docker Desktop within their organization.
+- Enhanced Container Isolation, a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM and ensures that configurations set using Admin Controls cannot be modified by containers.
+- Registry Access Management, which allows administrators to control the registries developers can access.
 
-Docker plant to add more security enhancements to the Hardened Desktop security model over the coming months.
+Docker plans to continue adding more security enhancements to the Hardened Desktop security model.
 
  <div class="component-container">
     <!--start row-->
