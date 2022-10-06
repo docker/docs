@@ -27,7 +27,7 @@ The example below, taken from the `compose-dev-env` project from the [Docker Sam
 >For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql) or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres). 
 
 1. From **Dev Environments**, select **Create**. The **Create a Dev Environment** dialog displays. 
-2. Click **Get Started** and then copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** tab.
+2. Click **Get Started** and then copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Enter the Git Repository** field with **Existing Git repo** as the source.
 3. Click **Continue**. This initializes the project, clones the Git code, and builds the Compose application. This:
 
     - Builds local images for services that are defined in the Compose file

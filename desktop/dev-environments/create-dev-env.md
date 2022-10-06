@@ -58,7 +58,7 @@ fi
 To create a dev environment:
 
 1. From **Under Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** tab.
+2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** field with **Existing Git repo** as the source.
 3. Select **Continue**.
 
     This detects the main language of your repository, clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
@@ -87,7 +87,7 @@ Docker then clones the repository with your specified branch or tag.
 >Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or compose file in a .docker folder located in your subdirectory. For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql) or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres). 
 
 1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then copy your Git subfolder link into the **Enter the Git Repository** field on the **Existing Git repo** tab.
+2. Select **Get Started** and then copy your Git subfolder link into the **Enter the Git Repository** field with **Existing Git repo** as the source.
 3. Select **Continue**.
 
     This clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
@@ -99,7 +99,7 @@ Docker then clones the repository with your specified branch or tag.
 ## Create a dev environment from a local folder
 
 1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then the **Local Folder** tab.
+2. Select **Get Started** and then choose **Local Folder** as the source.
 3. Select **Select directory** to open the root of the code that you would like to work on.
 4. Select **Continue**.
 

@@ -1196,13 +1196,13 @@ manuals:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a Dev Environment
+          title: Create a simple dev environment
         - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create a Compose Dev Environment
+          title: Create an adanced dev environment
         - path: /desktop/dev-environments/share/
-          title: Distribute your Dev Environment
+          title: Distribute your dev environment
         - path: /desktop/dev-environments/specify/
-          title: Specify a Dockerfile or base image
+          title: Specify a Dockerfile
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/

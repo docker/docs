@@ -11,8 +11,6 @@ Dev Environments lets you create a configurable developer environment with all t
 
 It uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
 
-You can also easily distribute your dev environment so everyone can access the same code and any dependencies.
-
 ![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 
 ## Prerequisites
