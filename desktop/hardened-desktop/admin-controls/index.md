@@ -9,7 +9,7 @@ title: What is Admin Controls?
 
 Admin Controls is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization.
 
-With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) to ensure that any configurations set with Admin Controls cannot be modified by containers.
+With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Admin Controls to enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Admin Controls cannot be modified by containers.
 
 ### Who is it for? 
 
@@ -17,7 +17,7 @@ With a few lines of JSON, admins can configure controls for Docker Desktop setti
 - For Organizations who want to create a standardized Docker Desktop environment at scale.
 - For security conscious Docker Business customers who want to confidently manage their use of Docker Desktop within tightly regulated environments.
 
-## How does it work?
+### How does it work?
 
 Administrators can configure several Docker Desktop settings using the `admin-settings.json` file. This file is located within the Docker Desktop host and can only be accessed by users with root or admin privileges. 
 
@@ -43,11 +43,11 @@ As an administrator, you first need to [configure a registry.json to enforce sig
 
 Next, you must [create and configure the admin-settings.json file](configure-ac.md).
 
-Once this is done, Docker Desktop users receive the changed settings when they quit and then re-launch Docker Desktop, or launch Docker Desktop for the first time, and sign in to your organization. Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
+Once this is done, Docker Desktop users receive the changed settings when they either quit, re-launch, and sign in to Docker Desktop, or launch and sign in to Docker Desktop for the first time. Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
 
 ### What do users see when the settings are enforced?
 
-Docker Desktop users see a notification in the **Settings**, or **Preferences** if using a macOS, which states **Some settings are managed by your Admin**. 
+Docker Desktop users see a notification in **Settings**, or **Preferences** if using a macOS, which states **Some settings are managed by your Admin**. 
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 

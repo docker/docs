@@ -11,7 +11,7 @@ title: What is Enhanced Container Isolation?
 Enhanced Container Isolation provides an additional layer of security that uses a variety of advanced techniques to harden container isolation without impacting developer productivity. 
 
 These techniques include:
-- Running all containers unprivileged (via the Linux user-namespace)
+- Running all containers unprivileged through the Linux user-namespace
 - Restricting containers from modifying Docker Desktop VM settings
 - Vetting some critical system calls to prevent container escapes, and partially virtualizing portions of `/proc` and `/sys` inside the container for further isolation. 
 
@@ -62,13 +62,11 @@ Next, you must [create and configure the `admin-settings.json` file](configure-a
 }
 ```
 
-Once this is done, developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. Selecting **Restart** from the Whale menu isn't sufficient as it only restarts some components of Docker Desktop.
-
-Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made so as not to disrupt your developers workflow. 
+Once this is done, developers need to either quit, re-launch, and sign in to Docker Desktop, or launch and sign in to Docker Desktop for the first time.
 
 ### What do users see when this setting is enforced?
 
-When Enhanced Container Isolation is enabled, users see that containers run within a Linux User Namespace. For example:
+When Enhanced Container Isolation is enabled, users see that containers run within a Linux user-namespace. For example:
 
 ```
 $ docker run -it --rm alpine

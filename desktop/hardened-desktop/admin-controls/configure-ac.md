@@ -122,10 +122,8 @@ The following `admin-settings.json` code and table provides an example of the re
 >Administrators should test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.
 
 For settings to take effect:
-- On a new install: developers need to launch Docker Desktop and authenticate to their organization
-- On an existing install: developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop.
-
-Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers workflow. 
+- On a new install, developers need to launch Docker Desktop and authenticate to their organization.
+- On an existing install, developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop. Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers workflow. 
 
 In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
 

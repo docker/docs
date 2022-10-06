@@ -1191,12 +1191,12 @@ manuals:
       section:
         - path: /desktop/hardened-desktop/
           title: Overview
-        - sectiontitle: Admin controls
+        - sectiontitle: Admin Controls
           section:
           - path: /desktop/hardened-desktop/admin-controls/
             title: What is Admin Controls?
           - path: /desktop/hardened-desktop/admin-controls/configure-ac/
-            title: Configure Admin controls
+            title: Configure Admin Controls
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
