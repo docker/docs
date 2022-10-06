@@ -98,9 +98,32 @@ Verify that the mount is a `tmpfs` mount by running `docker container inspect
 tmptest` and looking for the `Mounts` section:
 
 ```json
-"Tmpfs": {
-    "/app": ""
-},
+[
+    {
+        "Id": "1c7595d232ae6948c3a63fd98fc2ae542a80710dc8ecbe0ce756f8b159aa7b62",
+        "Created": "2022-10-06T02:13:32.497728869Z",
+        "Path": "/docker-entrypoint.sh",
+        "Args": [
+            "nginx",
+            "-g",
+            "daemon off;"
+        ],
+        ...
+        "Mounts": [
+            {
+                "Type": "tmpfs",
+                "Source": "",
+                "Destination": "/app",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+           ...
+        }
+        ...
+]
 ```
 
 Remove the container:
