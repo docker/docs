@@ -1,5 +1,5 @@
 ---
-title: "High-level build options with Bake"
+title: High-level builds with Bake
 keywords: build, buildx, bake, buildkit, hcl, json, compose
 redirect_from:
 - /build/bake/
