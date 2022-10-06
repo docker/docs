@@ -16,7 +16,7 @@ redirect_from:
 > - Setting `DOCKER_HOST` via `.env` files is not supported in Compose v2
 
 ### Bug fixes
-- Fixed a but to prevent "invalid template" errors on valid environment variable values. Fixes [compose##9806](https://github.com/docker/compose/issues/9806){:target="_blank" rel="noopener" class="_"}, [compose##9746](https://github.com/docker/compose/issues/9746){:target="_blank" rel="noopener" class="_"}, [compose##9704](https://github.com/docker/compose/issues/9704){:target="_blank" rel="noopener" class="_"}, [compose##9294](https://github.com/docker/compose/issues/9294){:target="_blank" rel="noopener" class="_"}
+- Fixed a bug to prevent "invalid template" errors on valid environment variable values. Fixes [compose##9806](https://github.com/docker/compose/issues/9806){:target="_blank" rel="noopener" class="_"}, [compose##9746](https://github.com/docker/compose/issues/9746){:target="_blank" rel="noopener" class="_"}, [compose##9704](https://github.com/docker/compose/issues/9704){:target="_blank" rel="noopener" class="_"}, [compose##9294](https://github.com/docker/compose/issues/9294){:target="_blank" rel="noopener" class="_"}
 - Fixed a bug to ensure new images from `docker compose build` are used. Fixes [compose#9856](https://github.com/docker/compose/issues/9856){:target="_blank" rel="noopener" class="_"}
 - Fixed cross-architecture builds when `DOCKER_DEFAULT_PLATFORM` not set. Fixes [compose#9864](https://github.com/docker/compose/pull/9864){:target="_blank" rel="noopener" class="_"}
 - Fixed intermittent conflict errors when using `depends_on`. Fixes [compose#9014](https://github.com/docker/compose/issues/9014){:target="_blank" rel="noopener" class="_"}
