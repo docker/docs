@@ -8,13 +8,13 @@ title: Configure Admin Controls
 >
 >Admin Controls is available to Docker Business customers only. 
 
-This page contains information about how admins can configure Admin Controls to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
+This page contains information for admin on how to configure Admin Controls to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
 
 Admin Controls is designed specifically for organizations who don’t give developers root access to their machines.
 
 ## Prerequisite
 
-You need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). For this configuration to take effect, Docker Desktop users must authenticate to your organization. 
+As an admin, you need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). For this configuration to take effect, Docker Desktop users must authenticate to your organization. 
 
 ## Step one: Place the `admin-settings.json` file in the correct location
 
@@ -123,7 +123,14 @@ The following `admin-settings.json` code and table provides an example of the re
 
 For settings to take effect:
 - On a new install, developers need to launch Docker Desktop and authenticate to their organization.
-- On an existing install, developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop. Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers workflow. 
+- On an existing install, developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. 
+  >Important
+  >
+  >Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop.
+  {: .important}
+
+Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers workflow. 
+
 
 In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
 

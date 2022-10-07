@@ -51,7 +51,7 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 
 As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
-Next, you must [create and configure the `admin-settings.json` file](configure-ac.md) and specify:
+Next, you must [create and configure the `admin-settings.json` file](../admin-controls/configure-ac.md) and specify:
 
 ```JSON
 {
@@ -63,6 +63,11 @@ Next, you must [create and configure the `admin-settings.json` file](configure-a
 ```
 
 Once this is done, developers need to either quit, re-launch, and sign in to Docker Desktop, or launch and sign in to Docker Desktop for the first time.
+
+>Important
+  >
+  >Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop.
+  {: .important}
 
 ### What do users see when this setting is enforced?
 
@@ -84,4 +89,4 @@ $ docker run -it --rm alpine
          0          0 4294967295
 ```
 
-This means that the root user in the container (0) is in fact the root user in the Docker Desktop VM (0), reducing container isolation.
+This means that the root user in the container (0) is in fact the root user in the Docker Desktop VM (0) which reduces container isolation.

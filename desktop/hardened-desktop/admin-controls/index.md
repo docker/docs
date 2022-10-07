@@ -27,7 +27,7 @@ Values that are set to `locked: true` within the `admin-settings.json` override 
 
 Using the `admin-settings.json` file, admins can:
 
-- Enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md)(currently incompatible with WSL)
+- Enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) (currently incompatible with WSL)
 - Configure HTTP Proxies
 - Configure network settings
 - Enforce the use of WSL2 based engine or Hyper-V
