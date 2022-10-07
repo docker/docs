@@ -1798,6 +1798,8 @@ contribute:
       title: Call outs
     - path: /contribute/components/cards/
       title: Cards
+    - path: /contribute/components/code-blocks/
+      title: Code blocks
     - path: /contribute/components/images/
       title: Images
     - path: /contribute/components/links/
