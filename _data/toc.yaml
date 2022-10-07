@@ -1529,7 +1529,7 @@ manuals:
       - path: /compose/install/uninstall/
         title: Uninstall Docker Compose
   - path: /compose/gettingstarted/
-    title: Getting started
+    title: Try Docker Compose
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
