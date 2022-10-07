@@ -96,7 +96,7 @@ The following `admin-settings.json` code and table provides an example of the re
   "analyticsEnabled": {
     "locked": false,
     "value": true
-  },
+  }
 }
 ```
 
@@ -105,7 +105,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `configurationFileVersion`        | Specifies the version of the configuration file format.    |
 | `exposeDockerAPIOnTCP2375` |<span class="badge badge-info">Windows only</span> Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
 | `proxy` | It is used for `http` and `https`.  If the port is custom, specify it in the property. |
-| `enhancedContainerIsolation`  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md). |
+| `enhancedContainerIsolation`  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md). Note: Enhanced Container Isolation is currently [incompatible with WSL](../enhanced-container-isolation/faq.md#incompatibility-with-wsl). |
 |`useWindowsContainers` | <span class="badge badge-info">Windows only</span> If `value` is set to true, it switches Docker Desktop to toggle the Docker CLI to talk to the Windows daemon, enabling Windows containers. If false, switches Docker Desktop to toggle the Docker CLI to talk to the Linux daemon, enabling Linux containers. This overrides anything that may have been set at installation using the `--no-windows-containers` flag.|
 | `linuxVM` | Parameters and settings related to Linux VM options - grouped together here for convenience. |
 | &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  |<span class="badge badge-info">Windows only</span> If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. It is also incompatible with Enhanced Container Isolation. See [Known issues](faq.md) for more information.|
