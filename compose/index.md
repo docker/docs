@@ -16,7 +16,19 @@ Then, with a single command, you create and start all the services
 from your configuration.
 
 Compose works in all environments: production, staging, development, testing, as
-well as CI workflows. 
+well as CI workflows, and has commands for managing the whole lifecycle of your application:
+
+ * Start, stop, and rebuild services
+ * View the status of running services
+ * Stream the log output of running services
+ * Run a one-off command on a service
+
+The key features of Compose that make it effective are:
+
+* [Have multiple isolated environments on a single host](how-it-works.md#have-multiple-isolated-environments-on-a-single-host)
+* [Preserves volume data when containers are created](how-it-works.md#preserves-volume-data-when-containers-are-created)
+* [Only recreate containers that have changed](how-it-works.md#only-recreate-containers-that-have-changed)
+* [Supports variables and moving a composition between environments](how-it-works.md#supports-variables-and-moving-a-composition-between-environments)
 
 <div class="component-container">
     <!--start row-->
@@ -26,16 +38,16 @@ well as CI workflows.
              <div class="component-icon">
                  <img src="/assets/images/download.svg" alt="Download and install" width="70" height="70">
              </div>
-                 <h2 id="docker-for-mac"><a href="/compose/install/">Install Docker Compose </a></h2>
+                 <h2 id="docker-compose"><a href="/compose/install/">Install Compose </a></h2>
                 <p>Follow the instructions on how to install Docker Compose.</p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <img src="/assets/images/explore.svg" alt="Docker Desktop" width="70" height="70">
+                 <img src="/assets/images/explore.svg" alt="Docker Compose" width="70" height="70">
             </div>
-                <h2 id="docker-for-mac"><a href="/compose/gettingstarted/">Try Docker Compose</a></h2>
+                <h2 id="docker-compose"><a href="/compose/gettingstarted/">Try Compose</a></h2>
                 <p>Learn the key concepts of Docker Compose whilst building a simple Python web application.</p>
          </div>
      </div>
@@ -44,7 +56,7 @@ well as CI workflows.
             <div class="component-icon">
                 <img src="/assets/images/note-add.svg" alt="Release notes" width="70" height="70">
             </div>
-                <h2 id="docker-for-linux"><a href="/compose/release-notes/">View the release notes</a></h2>
+                <h2 id="docker-compose"><a href="/compose/release-notes/">View the release notes</a></h2>
                 <p>Find out about the latest enhancements and bug fixes.</p>
         </div>
     </div>
@@ -56,7 +68,7 @@ well as CI workflows.
             <div class="component-icon">
                  <img src="/assets/images/help.svg" alt="FAQs" width="70" height="70">
             </div>
-                <h2 id="docker-for-linux"><a href="/compose/how-it-works/">Understand how Docker Compose works</a></h2>
+                <h2 id="docker-compose"><a href="/compose/how-it-works/">Understand how Compose works</a></h2>
                 <p>Understand how Docker Compose works and its key features.</p>
         </div>
      </div>
@@ -65,7 +77,7 @@ well as CI workflows.
           <div class="component-icon">
                  <img src="/assets/images/all-inbox.svg" alt="Additional resources" width="70" height="70">
           </div>
-                <h2 id="docker-for-windows/install/"><a href="/compose-file/">Explore the Compose file reference</a></h2>
+                <h2 id="docker-compose"><a href="/compose/compose-file/">Explore the Compose file reference</a></h2>
                 <p>Find information on defining services, networks, and volumes for a Docker application.</p>
         </div>
       </div>
@@ -74,7 +86,7 @@ well as CI workflows.
             <div class="component-icon">
                 <img src="/assets/images/sms.svg" alt="Give feedback" width="70" height="70">
             </div>
-                <h2 id="docker-for-windows/install/"><a href="/compose/faq/">Browse common FAQs</a></h2>
+                <h2 id="docker-compose"><a href="/compose/faq/">Browse common FAQs</a></h2>
                 <p>Explore general FAQs and find out how to give feedback.</p>
         </div>
      </div>

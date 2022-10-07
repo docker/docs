@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers, uses,
 title: Key features and use cases
 ---
 
-Using Compose is basically a three-step process:
+Using Compose is essentially a three-step process:
 
 1. Define your app's environment with a `Dockerfile` so it can be reproduced
 anywhere.
@@ -12,7 +12,7 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Run `docker compose up` and the [Docker compose command](#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(`docker-compose` binary).
+3. Run `docker compose up` and the [Docker compose command](compose-v2/index.md#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(`docker-compose` binary).
 
 A `docker-compose.yml` looks like this:
 
@@ -37,24 +37,9 @@ volumes:
 For more information about the Compose file, see the
 [Compose file reference](compose-file/index.md).
 
-Compose has commands for managing the whole lifecycle of your application:
-
- * Start, stop, and rebuild services
- * View the status of running services
- * Stream the log output of running services
- * Run a one-off command on a service
-
-
 ## Key features of Docker Compose
 
-The features of Compose that make it effective are:
-
-* [Multiple isolated environments on a single host](#multiple-isolated-environments-on-a-single-host)
-* [Preserve volume data when containers are created](#preserve-volume-data-when-containers-are-created)
-* [Only recreate containers that have changed](#only-recreate-containers-that-have-changed)
-* [Variables and moving a composition between environments](#variables-and-moving-a-composition-between-environments)
-
-### Multiple isolated environments on a single host
+### Have multiple isolated environments on a single host
 
 Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
 
@@ -73,7 +58,7 @@ The default project directory is the base directory of the Compose file. A custo
 for it can be defined with the `--project-directory` command line option.
 
 
-### Preserve volume data when containers are created
+### Preserves volume data when containers are created
 
 Compose preserves all volumes used by your services. When `docker compose up`
 runs, if it finds any containers from previous runs, it copies the volumes from
@@ -93,7 +78,7 @@ containers. Re-using containers means that you can make changes to your
 environment very quickly.
 
 
-### Variables and moving a composition between environments
+### Supports variables and moving a composition between environments
 
 Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.

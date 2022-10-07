@@ -19,7 +19,7 @@ title: Compose V2 Overview
 
 If you rely on using Docker Compose as `docker-compose` (with a hyphen), you can
 set up Compose V2 to act as a drop-in replacement of the previous `docker-compose`.
-Refer to the [Installing Compose](install/index.md) section for detailed instructions.
+Refer to the [Installing Compose](../install/index.md) section for detailed instructions.
 
 ## Context of Docker Compose evolution
 
@@ -28,18 +28,18 @@ makes a clean distinction between the Compose YAML file model and the `docker-co
 implementation. Making this change has enabled a number of enhancements, including
 adding the `compose` command directly into the Docker CLI,  being able to "up" a
 Compose application on cloud platforms by simply switching the Docker context,
-and launching of [Amazon ECS](../cloud/ecs-integration.md) and [Microsoft ACI](../cloud/aci-integration.md).
+and launching of [Amazon ECS](../../cloud/ecs-integration.md) and [Microsoft ACI](../../cloud/aci-integration.md).
 As the Compose specification evolves, new features land faster in the Docker CLI.
 
 Compose V2 relies directly on the compose-go bindings which are maintained as part
 of the specification. This allows us to include community proposals, experimental
 implementations by the Docker CLI and/or Engine, and deliver features faster to
 users. Compose V2 also supports some of the newer additions to the specification,
-such as [profiles](profiles.md) and [GPU](gpu-support.md) devices.
+such as [profiles](../profiles.md) and [GPU](../gpu-support.md) devices.
 
 Compose V2 has been re-written in [Go](https://go.dev), which improves integration
 with other Docker command-line features, and allows it to run natively on 
-[macOS on Apple silicon](../desktop/mac/apple-silicon.md), Windows, and Linux,
+[macOS on Apple silicon](../../desktop/mac/apple-silicon.md), Windows, and Linux,
 without dependencies such as Python. 
 
-For more information about compatibility with the compose v1 command-line, see the [docker-compose compatibility list](cli-command-compatibility.md).
+For more information about compatibility with the compose v1 command-line, see the [docker-compose compatibility list](../cli-command-compatibility.md).
