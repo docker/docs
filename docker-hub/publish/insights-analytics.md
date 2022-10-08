@@ -8,7 +8,7 @@ Insights and analytics provides usage analytics for your Docker Verified
 Publisher (DVP) images on Docker Hub. With this tool, you have self-serve access
 to metrics as both raw data and summary data for a desired time span. You can
 view number of image pulls by tag or by digest, and get breakdowns by
-geolocation, cloud provider, and client, and more.
+geolocation, cloud provider, client, and more.
 
 ## Exporting analytics data
 
