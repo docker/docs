@@ -22,7 +22,7 @@ Use  when we talk about the application, or all the functionality associated wit
 
 #### `docker compose`
 
-Use code formatting) for referring to the commands in text and command usage examples/code samples.
+Use code formatting for referring to the commands in text and command usage examples/code samples.
 
 #### Docker Compose CLI
 
