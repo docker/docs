@@ -16,7 +16,7 @@ as possible for you to work in this repository. The following sections guide you
              <div class="component-icon">
                  <img src="/assets/images/description.svg" alt="Docker Desktop for Mac" width="45" height="45">
              </div>
-                 <h2 id="docker-for-mac"><a href="/contribute/contribute-guide/">Contribution guidelines </a></h2>
+                 <h2 id="docker-for-mac"><a href="/contribute/contribute-guide.md">Contribution guidelines </a></h2>
                 <p>Learn about the process of contributing to our docs. </p>
         </div>
       </div>
@@ -25,7 +25,7 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                  <img src="/assets/images/menu-book.svg" alt="Docker Desktop for Mac" width="45" height="45">
             </div>
-                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Grammar guide</a></h2>
+                <h2 id="docker-for-mac"><a href="/contribute/style/grammar.md">Grammar guide</a></h2>
                 <p>Explore Docker's grammar guide.</p>
          </div>
      </div>
@@ -34,7 +34,7 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                 <img src="/assets/images/newspaper.svg" alt="Docker for Linux" width="45" height="45">
             </div>
-                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Formatting guidelines</a></h2>
+                <h2 id="docker-for-linux"><a href="/contribute/style/formatting.md">Formatting guidelines</a></h2>
                 <p>Format your content to match the rest of our documentation.</p>
         </div>
     </div>
@@ -46,7 +46,7 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                  <img src="/assets/images/checklist.svg" alt="Docker Desktop for Mac" width="45" height="45">
             </div>
-                <h2 id="docker-for-linux"><a href="/contribute/style/recommended-words/">Recommended word list</a></h2>
+                <h2 id="docker-for-linux"><a href="/contribute/style/recommended-words.md">Recommended word list</a></h2>
                 <p>Choose the right words for you content.</p>
         </div>
      </div>
@@ -55,7 +55,7 @@ as possible for you to work in this repository. The following sections guide you
           <div class="component-icon">
                  <img src="/assets/images/note-add.svg" alt="Docker Desktop for Mac" width="45" height="45">
           </div>
-                <h2 id="docker-for-windows/install/"><a href="/contribute/file-conventions/">Source file conventions</a></h2>
+                <h2 id="docker-for-windows/install/"><a href="/contribute/file-conventions.md">Source file conventions</a></h2>
                 <p>Guidelines for creating a new page.</p>
         </div>
       </div>
@@ -64,7 +64,7 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                 <img src="/assets/images/spellcheck.svg" alt="Docker Desktop for Windows" width="45" height="45">
             </div>
-                <h2 id="docker-for-windows/install/"><a href="/contribute/style/terminology/">Docker terminology</a></h2>
+                <h2 id="docker-for-windows/install/"><a href="/contribute/style/terminology.md">Docker terminology</a></h2>
                 <p>Explore commonly used Docker terms.</p>
         </div>
      </div>
