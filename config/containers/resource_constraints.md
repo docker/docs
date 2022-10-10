@@ -274,9 +274,18 @@ Verify that your GPU is running and accessible.
 Follow the instructions at (https://nvidia.github.io/nvidia-container-runtime/)
 and then run this command:
 
+#####Debian based systems:
 ```console
 $ apt-get install nvidia-container-runtime
+$ apt-get install nvidia-container-toolkit
 ```
+
+#####RHEL based systems:
+```console
+$ sudo dnf install nvidia-container-runtime
+$ sudo dnf install nvidia-container-toolkit
+```
+\* Depending the RHEL-based system version, replace `dnf` for `yum`
 
 Ensure the `nvidia-container-runtime-hook` is accessible from `$PATH`.
 
@@ -284,7 +293,7 @@ Ensure the `nvidia-container-runtime-hook` is accessible from `$PATH`.
 $ which nvidia-container-runtime-hook
 ```
 
-Restart the Docker daemon.
+Restart the Docker daemon. Normally is with `$ sudo systemctl restart docker`
 
 #### Expose GPUs for use
 
