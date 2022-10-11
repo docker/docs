@@ -153,15 +153,17 @@ consumers of content on Docker Hub remain completely anonymous.
 > **Important**
 >
 > Docker never shares any Personally Identifiable Information (PII) as part of
-> analytics data. {: .important }
+> analytics data.
+{: .important }
 
 The summary dataset includes Unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.
 Individual IP addresses are never shared.
 
 The raw dataset includes user IP domains as a data point. That's the domain name
-of the company associated with an IP address that pulled an image (for example,
-`docker.com`). This data point is only included where the IP type is `business`,
-which only includes a small subset of all pull data. On average, only about 30%
-of all pulls classify as the `business` IP type (this varies between publishers
-and images).
+associated with the IP address used to pull an image. If the IP type is
+`business`, the domain represents the company or organization associated with
+that IP address (for example, `docker.com`). For any other IP type that's not
+`business`, the domain represents the internet service provider or hosting
+provider used to make the request. On average, only about 30% of all pulls
+classify as the `business` IP type (this varies between publishers and images).
