@@ -1654,7 +1654,7 @@ the service's containers.
 
 - `source`: The name of the secret as it exists on the platform.
 - `target`: The name of the file to be mounted in `/run/secrets/` in the
-  service's task containers. Defaults to `source` if not specified.
+  service's task containers, or absolute path of the file if an alternate location is required.  Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the file within
   `/run/secrets/` in the service's task containers. Default value is USER running container.
 - `mode`: The [permissions](https://web.archive.org/web/20220310140126/http://permissions-calculator.org/) for the file to be mounted in `/run/secrets/`
