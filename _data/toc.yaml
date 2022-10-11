@@ -1473,7 +1473,7 @@ manuals:
         - path: /build/building/packaging/
           title: Packaging your software
         - path: /build/building/cache/
-          title: Optimizing builds with cache management
+          title: Optimizing builds with cache
         - sectiontitle: Choosing a build driver
           section:
             - path: /build/building/drivers/
@@ -1492,7 +1492,7 @@ manuals:
           title: Multi-platform images
     - sectiontitle: Customizing builds
       section:
-        - sectiontitle: Orchestrating builds with Bake
+        - sectiontitle: High-level builds with Bake
           section:
             - path: /build/customize/bake/
               title: Overview

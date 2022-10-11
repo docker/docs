@@ -48,27 +48,41 @@ advanced scenarios:
 
 ### Packaging your software
 
-Bundle and package your code to run anywhere, from your local Docker Desktop,
-to Docker Engine and Kubernetes on the cloud. To get started with Build,
-see the [Packaging your software](building/packaging.md) page.
+Build and package your application to run it anywhere: locally using Docker
+Desktop, or in the cloud using Docker Engine and Kubernetes:
+
+[Packaging your software](building/packaging.md){: .button .outline-btn }
 
 ### Choosing a build driver
 
 Run Buildx with different configurations depending on the scenario you are
 working on, regardless of whether you are using your local machine or a remote
-compute cluster, all from the comfort of your local working environment.
-For more information on drivers, see the [drivers guide](building/drivers/index.md).
+cluster, all from the comfort of your local working environment:
 
-### Optimizing builds with cache management
+[Choosing a build driver](building/drivers/index.md){: .button .outline-btn }
+
+### Optimizing builds with cache
 
 Improve build performance by using a persistent shared build cache to avoid
-repeating costly operations such as package installations, downloading files
-from the internet, or code build steps.
+repeating costly operations such as package installs, file downloads, or code
+build steps:
 
-### Creating build-once, run-anywhere with multi-platform builds
+[Optimizing builds with cache](building/cache.md){: .button .outline-btn }
 
-Collaborate across platforms with one build artifact. See
-[Multi-platform images](building/multi-platform.md) page.
+### Multi-stage builds
+
+Use the multi-stage feature to selectively copy artifacts from one stage to
+another, leaving behind everything you don't want in the final image, so you
+keep your images small and secure with minimal depeendencies:
+
+[Multi-stage builds](building/multi-stage.md){: .button .outline-btn }
+
+### Multi-platform images
+
+Using the standard Docker tooling and processes, you can start to build, push,
+pull, and run images seamlessly on different computer architectures:
+
+[Multi-platform images](building/multi-platform.md){: .button .outline-btn }
 
 ## Continuous integration
 
@@ -92,10 +106,13 @@ like from BuildKit, not just docker images. See [Set the export action for the b
 Securely access protected repositories and resources at build time without
 leaking data into the final build or the cache.
 
-### Orchestrating builds using Bake
+### High-level builds with Bake
 
-Connect your builds together and easily parameterize your images using buildx bake.
-See [High-level build options with Bake](customize/bake/index.md).
+Bake provides support for high-level build concepts using a file definition
+that goes beyond invoking a single build command. Bake allows all the services
+to be built concurrently as part of a single request:
+
+[High-level builds with Bake](customize/bake/index.md){: .button .outline-btn }
 
 ## Extending BuildKit
 
