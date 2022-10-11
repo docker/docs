@@ -1518,8 +1518,8 @@ manuals:
   section:
   - path: /compose/
     title: Overview
-  - path: /compose/how-it-works/
-    title: How does it work?
+  - path: /compose/features-uses/
+    title: Key features and use cases
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/

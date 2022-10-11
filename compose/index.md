@@ -68,8 +68,8 @@ The key features of Compose that make it effective are:
             <div class="component-icon">
                  <img src="/assets/images/help.svg" alt="FAQs" width="70" height="70">
             </div>
-                <h2 id="docker-compose"><a href="/compose/how-it-works/">Understand how Compose works</a></h2>
-                <p>Understand how Docker Compose works and its key features.</p>
+                <h2 id="docker-compose"><a href="/compose/how-it-works/">Understand key features of Compose</a></h2>
+                <p>Understand its key features and explore common use casess.</p>
         </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
