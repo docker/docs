@@ -25,10 +25,10 @@ well as CI workflows, and has commands for managing the whole lifecycle of your 
 
 The key features of Compose that make it effective are:
 
-* [Have multiple isolated environments on a single host](how-it-works.md#have-multiple-isolated-environments-on-a-single-host)
-* [Preserves volume data when containers are created](how-it-works.md#preserves-volume-data-when-containers-are-created)
-* [Only recreate containers that have changed](how-it-works.md#only-recreate-containers-that-have-changed)
-* [Supports variables and moving a composition between environments](how-it-works.md#supports-variables-and-moving-a-composition-between-environments)
+* [Have multiple isolated environments on a single host](features-uses.md#have-multiple-isolated-environments-on-a-single-host)
+* [Preserves volume data when containers are created](features-uses.md#preserves-volume-data-when-containers-are-created)
+* [Only recreate containers that have changed](features-uses.md#only-recreate-containers-that-have-changed)
+* [Supports variables and moving a composition between environments](features-uses.md#supports-variables-and-moving-a-composition-between-environments)
 
 <div class="component-container">
     <!--start row-->
@@ -68,7 +68,7 @@ The key features of Compose that make it effective are:
             <div class="component-icon">
                  <img src="/assets/images/help.svg" alt="FAQs" width="70" height="70">
             </div>
-                <h2 id="docker-compose"><a href="/compose/how-it-works/">Understand key features of Compose</a></h2>
+                <h2 id="docker-compose"><a href="/compose/features-uses/">Understand key features of Compose</a></h2>
                 <p>Understand its key features and explore common use casess.</p>
         </div>
      </div>
