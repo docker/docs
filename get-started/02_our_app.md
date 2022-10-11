@@ -20,17 +20,15 @@ think about how it will work for a large team, multiple developers, etc.
 
 ## Get the app
 
-Before you can run the application, you need to get the application source code onto 
-your machine. The repository contains the entire getting started tutorial, but you'll be working with the sample application in the `app` folder.
+Before you can run the application, you need to get the application source code onto your machine.
 
-1. Download the contents from the [getting-started repository](https://github.com/docker/getting-started/tree/master){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or [download it as a zip](https://github.com/docker/getting-started/archive/refs/heads/master.zip) and extract the `app` folder out to get started with.
+1. Download the contents from the [getting-started-app repository](https://github.com/craig-osterhout/getting-started-app){:target="_blank" rel="noopener" class="_"}. You can either clone the repository using the following [git](https://git-scm.com/downloads) command, or [download the repository as a zip](https://github.com/craig-osterhout/getting-started-app/archive/refs/heads/main.zip) and extract the contents.
 
-    > **Note**
-    >
-    > While the repository contains many other files and folders, the sample application is inside the `app` folder.
+```console
+$ git clone https://github.com/craig-osterhout/getting-started-app.git
+```
 
-
-2. Once extracted, use your favorite code editor to open the project. If you're in need of an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should see the following contents inside the `app` folder.
+2. Once you have the app, use your favorite code editor to open the project. If you're in need of an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should see the following contents inside the `app` folder.
 
     ![Screenshot of Visual Studio Code opened with the app loaded](images/ide-screenshot.png){: style="width:650px;margin-top:20px;"}
     {: .text-center }
