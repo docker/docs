@@ -1472,9 +1472,7 @@ manuals:
       section:
         - path: /build/building/packaging/
           title: Packaging your software
-        - path: /build/building/cache/
-          title: Optimizing builds with cache
-        - sectiontitle: Choosing a build driver
+        - sectiontitle: Build drivers
           section:
             - path: /build/building/drivers/
               title: Overview
@@ -1486,6 +1484,24 @@ manuals:
               title: Kubernetes driver
             - path: /build/building/drivers/remote/
               title: Remote driver
+        - path: /build/building/cache/
+          title: Optimizing builds with cache
+        - sectiontitle: Cache backends
+          section:
+            - path: /build/building/cache/backends/
+              title: Overview
+            - path: /build/building/cache/backends/inline/
+              title: Inline
+            - path: /build/building/cache/backends/local/
+              title: Local
+            - path: /build/building/cache/backends/registry/
+              title: Registry
+            - path: /build/building/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/building/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/building/cache/backends/s3/
+              title: Amazon S3
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
