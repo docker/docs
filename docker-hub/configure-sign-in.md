@@ -1,7 +1,7 @@
 ---
 description: Configure registry.json to enforce users to sign into Docker Desktop
 keywords: authentication, registry.json, configure,
-title: Configure registry.json to enforce sign in
+title: Configure registry.json to enforce sign-in
 ---
 
 By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the

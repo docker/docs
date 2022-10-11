@@ -13,7 +13,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Preferences** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Preferences**
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Preferences**
 - Select the **Preferences** icon from the Docker Dashboard.
 
 ## General
@@ -221,4 +221,4 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions.md).
+For more information about Docker extensions, see [Extensions](../extensions/index.md).

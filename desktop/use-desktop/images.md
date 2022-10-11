@@ -47,7 +47,7 @@ Inspecting an image displays detailed information about the image such as the:
 - Image history
 - Image ID
 - Date the image was created
-- Size of the imag
+- Size of the image
 
 To inspect an image, hover over an image, select the **More options** button and then select **Inspect** from the dropdown menu. 
 

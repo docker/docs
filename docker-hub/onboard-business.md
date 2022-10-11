@@ -58,17 +58,17 @@ Now that you have a Docker Business organization, it's time to start adding memb
       > Before you invite members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.
 
 
-## Step 4: Enforce sign in for Docker Desktop
+## Step 4: Enforce sign-in for Docker Desktop
 
 By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the
-organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
+organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
 
 ## What's next
 
 Create and manage your registries and repositories:
 
-- Create [repositories](../docker-hub/repos.md) to share container images.
-- [Consolidate a repository](../docker-hub/repos.md/#personal-to-an-organization) from your personal account to your organization.
+- If you haven't configured [System for Cross-domain Identity Management](../docker-hub/scim.md/) yet, configure it now for centralized account management.
+- Create [repositories](../docker-hub/repos/index.md) to share container images.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
 - Control which registries your members can access with [Registry Access Management](../docker-hub/registry-access-management.md/).

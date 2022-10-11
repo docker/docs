@@ -84,61 +84,61 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-  return 'Hello, Docker!'
+    return 'Hello, Docker!'
 
 @app.route('/widgets')
 def get_widgets():
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1",
-    database="inventory"
-  )
-  cursor = mydb.cursor()
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="inventory"
+    )
+    cursor = mydb.cursor()
 
 
-  cursor.execute("SELECT * FROM widgets")
+    cursor.execute("SELECT * FROM widgets")
 
-  row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
 
-  results = cursor.fetchall()
-  json_data=[]
-  for result in results:
-    json_data.append(dict(zip(row_headers,result)))
+    results = cursor.fetchall()
+    json_data=[]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
 
-  cursor.close()
+    cursor.close()
 
-  return json.dumps(json_data)
+    return json.dumps(json_data)
 
 @app.route('/initdb')
 def db_init():
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1"
-  )
-  cursor = mydb.cursor()
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1"
+    )
+    cursor = mydb.cursor()
 
-  cursor.execute("DROP DATABASE IF EXISTS inventory")
-  cursor.execute("CREATE DATABASE inventory")
-  cursor.close()
+    cursor.execute("DROP DATABASE IF EXISTS inventory")
+    cursor.execute("CREATE DATABASE inventory")
+    cursor.close()
 
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1",
-    database="inventory"
-  )
-  cursor = mydb.cursor()
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="inventory"
+    )
+    cursor = mydb.cursor()
 
-  cursor.execute("DROP TABLE IF EXISTS widgets")
-  cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
-  cursor.close()
+    cursor.execute("DROP TABLE IF EXISTS widgets")
+    cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
+    cursor.close()
 
-  return 'init database'
+    return 'init database'
 
 if __name__ == "__main__":
-  app.run(host ='0.0.0.0')
+    app.run(host ='0.0.0.0')
 ```
 
 We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.
@@ -219,6 +219,8 @@ We expose port 8000 so that we can reach the dev web server inside the container
 
 Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we've named our MySQL service as in the Compose file.
 
+Note that we did not specify a network for those 2 services. When we use docker-compose it automatically creates a network and connect the services to it. For more information see [Networking in Compose](../../compose/networking.md)
+
 Now, to start our application and to confirm that it is running properly, run the following command:
 
 ```console
@@ -252,4 +254,4 @@ In the next module, we’ll take a look at how to set up a CI/CD pipeline using 
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

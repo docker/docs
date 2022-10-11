@@ -27,7 +27,7 @@ This page contains information on:
 
 To navigate to **Troubleshoot** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Troubleshoot**
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Troubleshoot**
 - Select the **Troubleshoot** icon from the Docker Dashboard
 
 ![Troubleshoot Docker Desktop](../images/troubleshoot.png){:width="600px"}

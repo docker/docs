@@ -101,7 +101,9 @@ section.section {
 }
 
 .col-nav {
-    background-color: $bg-sidebar;
+//    background-color: $bg-sidebar;
+border-right: 1px solid #ddd;
+
 }
 
 .col-toc {

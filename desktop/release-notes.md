@@ -62,7 +62,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Compose V2 is now enabled after factory reset.
 - Compose V2 is now enabled by default on new installations of Docker Desktop.
-- Precedence order of environment variables in Compose is more consistent, and clearly [documented](https://docs.docker.com/compose/envvars-precedence/).
+- Precedence order of environment variables in Compose is more consistent, and clearly [documented](../compose/envvars-precedence.md).
 - Upgraded kernel to 5.10.124.
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
@@ -496,7 +496,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](extensions.md) and Extensions SDK.
+- Beta release of [Docker Extensions](/extensions/index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -525,7 +525,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](extensions.md) and Extensions SDK.
+- Beta release of [Docker Extensions](/extensions/index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 

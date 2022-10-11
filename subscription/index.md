@@ -37,7 +37,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Pro** enables individual developers to get more control of their development environment and provides an integrated and reliable developer experience. It reduces the amount of time developers spend on mundane and repetitive tasks and empowers developers to spend more time creating value for their customers.
 
-Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
+Docker Pro includes all the features available in Personal, additionally, it includes unlimited private repositories, unlimited public repositories, unlimited [collaborators](../docker-hub/repos/access/index.md#collaborators-and-their-role) for public repositories, [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds, 300 [Hub Vulnerability Scans](../docker-hub/vulnerability-scanning.md), unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
@@ -45,7 +45,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 
-Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, an [audit log](../docker-hub/audit-log.md), and more.
+Docker Team includes everything included in Docker Pro, plus unlimited private repositories, [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [audit logs](../docker-hub/audit-log.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
@@ -74,7 +74,7 @@ Please read the [Blog](https://www.docker.com/blog/updating-product-subscription
 >
 > The licensing and distribution terms for Docker and Moby **open-source** projects, such as Docker Engine, are not changing.
 
-Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.png){: .inline} > **About Docker Desktop** > **Acknowledgements**.
+Docker Desktop is built using open-source software. For information about the licensing of open-source components in Docker Desktop, Select ![whale menu](../desktop/mac/images/whale-x.svg){: .inline} > **About Docker Desktop** > **Acknowledgements**.
 
 Docker Desktop distributes some components that are licensed under the
 GNU General Public License. Click [here](https://download.docker.com/opensource/License.tar.gz) to download the source for these components.

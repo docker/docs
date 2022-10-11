@@ -5,7 +5,7 @@ title: Share your Dev Environment
 ---
 
 {% include upgrade-cta.html
-  body="Docker Pro, Team, and Business users can now share Dev Environments with their team members."
+  body="Docker Team and Business users can now share Dev Environments with their team members."
   header-text="This feature requires a paid Docker subscription"
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade"
 %}
@@ -22,6 +22,6 @@ This creates an image of your Dev Environment, uploads it to the Docker Hub name
 
 ## Open a Dev Environment that has been shared with you
 
-To open a Dev Environment that has been shared with you, select the **Create** button in the top right-hand corner, select the **Existing Dev Environment** tab, and then paste the URL.
+To open a Dev Environment that was shared with you, select the **Create** button in the top right-hand corner, select the **Existing Dev Environment** tab, and then paste the URL.
 
-Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback even before you create a pull request!
+Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and give feedback even before you create a pull request!
