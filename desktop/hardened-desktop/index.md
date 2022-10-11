@@ -28,7 +28,7 @@ Docker plans to continue adding more security enhancements to the Hardened Deskt
             <div class="component-icon">
                  <img src="/assets/images/lock.svg" alt="Hardened Desktop" width="70" height="70">
             </div>
-                <h2 id="docker-for-mac"><a href="/desktop/hardened-desktop/admin-controls/">Admin Controls </a></h2>
+                <h2 id="hardened-desktop"><a href="/desktop/hardened-desktop/admin-controls/">Admin Controls </a></h2>
                 <p>Learn how Admin Controls can secure your developers' workflows.</p>
          </div>
      </div>
@@ -37,7 +37,7 @@ Docker plans to continue adding more security enhancements to the Hardened Deskt
             <div class="component-icon">
                 <img src="/assets/images/secure.svg" alt="Release notes" width="70" height="70">
             </div>
-                <h2 id="docker-for-linux"><a href="/desktop/hardened-desktop/enhanced-container-isolation">Enhanced Container Isolation</a></h2>
+                <h2 id="hardened-desktop"><a href="/desktop/hardened-desktop/enhanced-container-isolation">Enhanced Container Isolation</a></h2>
                 <p>Understand how Enhanced Container Isolation can prevent container attacks. </p>
         </div>
     </div>
@@ -46,7 +46,7 @@ Docker plans to continue adding more security enhancements to the Hardened Deskt
             <div class="component-icon">
                  <img src="/assets/images/registry.svg" alt="Hardened Desktop" width="70" height="70">
             </div>
-                <h2 id="docker-for-mac"><a href="/desktop/hardened-desktop/regsistry-access-management/">Registry Access Management</a></h2>
+                <h2 id="hardened-desktop"><a href="/desktop/hardened-desktop/registry-access-management/">Registry Access Management</a></h2>
                 <p>Control the registries developers can access while using Docker Desktop.</p>
          </div>
      </div>

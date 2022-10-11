@@ -39,11 +39,15 @@ For more details on the syntax and options admins can set, see [Configure Admin 
 
 ### How do I set up and enforce Admin Controls?
 
-As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must [create and configure the admin-settings.json file](configure-ac.md).
 
-Once this is done, Docker Desktop users receive the changed settings when they either quit, re-launch, and sign in to Docker Desktop, or launch and sign in to Docker Desktop for the first time. Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
+Once this is done, Docker Desktop users receive the changed settings when they either:
+- Quit, re-launch, and sign in to Docker Desktop
+- Launch and sign in to Docker Desktop for the first time
+
+Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers workflow. 
 
 ### What do users see when the settings are enforced?
 

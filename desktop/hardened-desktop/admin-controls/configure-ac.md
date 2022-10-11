@@ -14,7 +14,7 @@ Admin Controls is designed specifically for organizations who don’t give devel
 
 ## Prerequisite
 
-As an admin, you need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). For this configuration to take effect, Docker Desktop users must authenticate to your organization. 
+As an admin, you need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 ## Step one: Place the `admin-settings.json` file in the correct location
 
@@ -57,8 +57,8 @@ The following `admin-settings.json` code and table provides an example of the re
   "proxy": {
     "locked": true,
     "mode": "manual",
-    "server": "myproxy.com",
-    "port":3129,
+    "http": "http://myproxy.com:1234",
+    "https": "http://myotherproxy.com:4321",
     "exclude": ["foo.com", "bar.com"]
   },
   "enhancedContainerIsolation": {
@@ -104,12 +104,12 @@ The following `admin-settings.json` code and table provides an example of the re
 | :------------------------------- | :------------------------------- |
 | `configurationFileVersion`        | Specifies the version of the configuration file format.    |
 | `exposeDockerAPIOnTCP2375` |<span class="badge badge-info">Windows only</span> Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
-| `proxy` | It is used for `http` and `https`.  If the port is custom, specify it in the property. |
+| `proxy` | Used to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`.|
 | `enhancedContainerIsolation`  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md). Note: Enhanced Container Isolation is currently [incompatible with WSL](../enhanced-container-isolation/faq.md#incompatibility-with-wsl). |
 |`useWindowsContainers` | <span class="badge badge-info">Windows only</span> If `value` is set to true, it switches Docker Desktop to toggle the Docker CLI to talk to the Windows daemon, enabling Windows containers. If false, switches Docker Desktop to toggle the Docker CLI to talk to the Linux daemon, enabling Linux containers. This overrides anything that may have been set at installation using the `--no-windows-containers` flag.|
 | `linuxVM` | Parameters and settings related to Linux VM options - grouped together here for convenience. |
-| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  |<span class="badge badge-info">Windows only</span> If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. It is also incompatible with Enhanced Container Isolation. See [Known issues](faq.md) for more information.|
-| &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|If `value` is set to true, it overrides the options in the Linux daemon config file. See the [Docker Engine reference](../../../engine/reference/commandline/dockerd/#daemon-configuration-file). |
+| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  |<span class="badge badge-info">Windows only</span> If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. It is also incompatible with Enhanced Container Isolation. See [Known issues](../enhanced-container-isolation/faq.md) for more information.|
+| &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](../../../engine/reference/commandline/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |
 | &nbsp;&nbsp; &nbsp; &nbsp;`vpnkitCIDR` |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |
 | `windowsContainers` | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.                  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` | Overrides the options in the linux daemon config file. See the [Docker Engine reference](../../../engine/reference/commandline/dockerd/#daemon-configuration-file).|                                |

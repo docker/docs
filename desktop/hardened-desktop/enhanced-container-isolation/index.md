@@ -11,24 +11,25 @@ title: What is Enhanced Container Isolation?
 Enhanced Container Isolation provides an additional layer of security that uses a variety of advanced techniques to harden container isolation without impacting developer productivity. 
 
 These techniques include:
-- Running all containers unprivileged through the Linux user-namespace
-- Restricting containers from modifying Docker Desktop VM settings
+- Running all containers unprivileged through the Linux user-namespace.
+- Restricting containers from modifying Docker Desktop VM settings.
 - Vetting some critical system calls to prevent container escapes, and partially virtualizing portions of `/proc` and `/sys` inside the container for further isolation. 
+- Preventing console access to the Docker Desktop VM.
 
-This is done automatically and with minimal performance impact. 
+This is done automatically and with minimal functional or performance impact. 
 
-Enhanced Container Isolation helps ensure a strong container-to-host isolation and locks in any security configurations that have been created, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Admin Controls](../admin-controls/index.md). 
+Enhanced Container Isolation helps ensure strong container isolation and also locks in any security configurations that have been created, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Admin Controls](../admin-controls/index.md). 
 
 >Note
 >
-> Enhanced Container Isolation is in addition to other security techniques used by Docker. For example, reduced Linux Capabilities, Seccomp, AppArmor.
+> Enhanced Container Isolation is in addition to other container security techniques used by Docker. For example, reduced Linux Capabilities, Seccomp, AppArmor.
 
 ### Who is it for?
 
 - For organizations that want to prevent container attacks and reduce vulnerabilities.
 - For organizations that want to ensure stronger container isolation that is easy and intuitive to implement on developers' machines.
 
-### What happens when Enhanced Container Isolation is switched on?
+### What happens when Enhanced Container Isolation is enabled?
 
 When Enhanced Container Isolation is enabled using [Admin Controls](../admin-controls/index.md), the following features are enabled: 
 
@@ -37,7 +38,8 @@ When Enhanced Container Isolation is enabled using [Admin Controls](../admin-con
 - Users can continue using containers as usual, including bind-mounting host directories, volumes, networking configurations, etc.
 - Privileged containers work, but they are only privileged within the container's Linux User Namespace, not in the Docker Desktop VM.
 - Containers can no longer share namespaces with the Docker Desktop VM. For example, `--network=host`, `--pid=host`.
-- Containers can no longer modify configuration files in the Docker Desktop VM.
+- Containers can no longer modify configuration files in the Docker Desktop VM
+- Console access to the Desktop VM is forbidden for all users
 - Containers become harder to breach. For example, sensitive system calls are vetted and portions of `/proc` and `/sys` are emulated.
 
 For more information on how Enhanced Container Isolation work, see [How does it work?](how-eci-works.md).
@@ -47,9 +49,9 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 >Enhanced Container Isolation is currently incompatible with WSL and does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQS and known issues](faq.md).
 {: .important}
 
-### How do I switch on Enhanced Container Isolation?
+### How do I enable Enhanced Container Isolation?
 
-As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must [create and configure the `admin-settings.json` file](../admin-controls/configure-ac.md) and specify:
 
@@ -89,4 +91,4 @@ $ docker run -it --rm alpine
          0          0 4294967295
 ```
 
-This means that the root user in the container (0) is in fact the root user in the Docker Desktop VM (0) which reduces container isolation.
+This means that the root user in the container (0) is in fact the root user in the Docker Desktop VM (0) which reduces container isolation. If a process were to escape the container, it would find itself without privileges at the VM level. For further details, see [How Enhanced Container Isolation works](how-eci-works.md).
