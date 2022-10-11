@@ -24,9 +24,9 @@ Before you can run the application, you need to get the application source code 
 
 1. Download the contents from the [getting-started-app repository](https://github.com/craig-osterhout/getting-started-app){:target="_blank" rel="noopener" class="_"}. You can either clone the repository using the following [git](https://git-scm.com/downloads) command, or [download the repository as a zip](https://github.com/craig-osterhout/getting-started-app/archive/refs/heads/main.zip) and extract the contents.
 
-```console
-$ git clone https://github.com/craig-osterhout/getting-started-app.git
-```
+    ```console
+    $ git clone https://github.com/craig-osterhout/getting-started-app.git
+    ```
 
 2. Once you have the app, use your favorite code editor to open the project. If you're in need of an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should see the following contents inside the `app` folder.
 
