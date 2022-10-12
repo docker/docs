@@ -1521,13 +1521,13 @@ manuals:
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
-        title: Install overview
+        title: Overview
       - path: /compose/install/linux/
-        title: Install on Linux
+        title: Install the Compose plugin
       - path: /compose/install/other/
-        title: Other install scenarios
+        title: Install the Compose standalone
       - path: /compose/install/uninstall/
-        title: Uninstall Docker Compose
+        title: Uninstall Compose
   - path: /compose/gettingstarted/
     title: Getting started
   - sectiontitle: Environment variables
