@@ -8,7 +8,7 @@ digraph {
 
   from [ label = <<B>FROM </B>ubuntu:latest> ];
   deps [ label = <<B>RUN </B>apt-get update &amp;&amp; \\<br/>apt-get install -y build-essentials> ];
-  copy [ label = <<B>COPY </B>main.c /src/>, color = "red" ];
+  copy [ label = <<B>COPY </B>main.c Makefile /src/>, color = "red" ];
   workdir [ label = <<B>WORKDIR </B>/src/>, color = "red" ];
   build [ label = <<B>RUN </B>make build>, color = "red" ];
   

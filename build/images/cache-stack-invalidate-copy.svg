@@ -33,8 +33,8 @@
 <g id="node3" class="node">
 <title>copy</title>
 <polygon fill="none" stroke="red" points="360,-146 0,-146 0,-117 360,-117 360,-146"/>
-<text text-anchor="start" x="128" y="-130" font-family="monospace" font-weight="bold" font-size="10.00">COPY </text>
-<text text-anchor="start" x="159" y="-130" font-family="monospace" font-size="10.00">main.c /src/</text>
+<text text-anchor="start" x="101" y="-130" font-family="monospace" font-weight="bold" font-size="10.00">COPY </text>
+<text text-anchor="start" x="132" y="-130" font-family="monospace" font-size="10.00">main.c Makefile /src/</text>
 </g>
 <!-- deps&#45;&gt;copy -->
 <g id="edge2" class="edge">
