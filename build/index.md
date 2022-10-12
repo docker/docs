@@ -67,7 +67,7 @@ Improve build performance by using a persistent shared build cache to avoid
 repeating costly operations such as package installs, file downloads, or code
 build steps:
 
-[Optimizing builds with cache](building/cache.md){: .button .outline-btn }
+[Optimizing builds with cache](./building/cache/index.md){: .button .outline-btn }
 
 ### Multi-stage builds
 

@@ -172,6 +172,9 @@ fetch-remote:
       - dest: "build/building/drivers"
         src:
           - "docs/guides/drivers/**"
+      - dest: "build/building/cache/backends"
+        src:
+          - "docs/guides/cache/**"
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
