@@ -73,7 +73,7 @@ In the above command, we logged in to the MySQL database by passing the ‘mysql
 
 Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
 
-Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
+Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for creating our database and table.
 
 ```python
 import mysql.connector
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     app.run(host ='0.0.0.0')
 ```
 
-We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.
+We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a route to fetch widgets. We now need to rebuild our image so it contains our changes.
 
 First, let’s add the `mysql-connector-python` module to our application using pip.
 
