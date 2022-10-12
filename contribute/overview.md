@@ -25,8 +25,8 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                  <img src="/assets/images/menu-book.svg" alt="Docker Desktop for Mac" width="45" height="45">
             </div>
-                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Grammar guide</a></h2>
-                <p>Explore Docker's grammar guide.</p>
+                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Grammar and style</a></h2>
+                <p>Explore Docker's grammar and style guide.</p>
          </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
@@ -34,7 +34,7 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                 <img src="/assets/images/newspaper.svg" alt="Docker for Linux" width="45" height="45">
             </div>
-                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Formatting guidelines</a></h2>
+                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Formatting</a></h2>
                 <p>Format your content to match the rest of our documentation.</p>
         </div>
     </div>

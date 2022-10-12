@@ -1811,7 +1811,7 @@ contribute:
     - path: /contribute/components/badges/
       title: Badges
     - path: /contribute/components/call-outs/
-      title: Call outs
+      title: Callouts
     - path: /contribute/components/cards/
       title: Cards
     - path: /contribute/components/code-blocks/
