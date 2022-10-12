@@ -9,8 +9,10 @@ HTTP
 IPs?
 IPv[46]
 IPvlan
+JPEG
 MAC
 RPM
+PNG
 SDKs?
 SSO
 TCP
@@ -28,6 +30,7 @@ deserialization
 deserialize
 filepath
 firewalld
+filetype
 glibc
 goroutine
 hostname
