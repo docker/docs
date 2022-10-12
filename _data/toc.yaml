@@ -1204,7 +1204,7 @@ manuals:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
-            title: FAQ and known issues
+            title: FAQs and known issues
         - path: /desktop/hardened-desktop/registry-access-management/
           title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)

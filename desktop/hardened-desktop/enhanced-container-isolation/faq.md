@@ -14,7 +14,7 @@ toc_max: 2
 
 ### With Enhanced Container Isolation enabled, can the user still override the `--runtime` flag from the CLI ?
 
-No. With Hardened Desktop enabled, Sysbox is locked as the default (and only) runtime. If a user attempts to override the runtime by launching a container with the standard `runc` runtime, for example `docker run --runtime=runc`, container creation fails. 
+No. With Hardened Desktop enabled, Sysbox is locked as the default (and only) runtime. If a user attempts to override the runtime by launching a container with the standard `runc` runtime, for example `docker run --runtime=runc`, this request is ignored and the container is created through the Sysbox runtime. 
 
 The reason `runc` is disallowed with Enhanced Container Isolation is because it allows users to run as root on the Docker Desktop Linux VM, thereby providing them with implicit control of the VM and the ability to modify the administrative configurations for Docker Desktop, for example.
 
@@ -32,7 +32,7 @@ This makes running a privileged container with Enhanced Container Isolation much
 
 Privileged containers are typically used to run advanced workloads in containers, for example Docker-in-Docker, to perform kernel operations such as loading modules, or to access hardware devices. We aim to allow running advanced workloads, but deny the ability to perform kernel operations or access hardware devices.
 
-Allowing the `-–privileged` flag but restricting its impact within the container's user-namespace, it’s possible to do this.
+By allowing the `-–privileged` flag but restricting its impact within the container's user-namespace, it’s possible to do this.
 
 <hr>
 </div>

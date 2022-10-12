@@ -4,7 +4,7 @@ keywords: containers, rootless, security, sysbox, runtime
 title: What is Enhanced Container Isolation?
 ---
 
->Note
+>**Note**
 >
 >Enhanced Container Isolation is available to Docker Business customers only. 
 
@@ -20,7 +20,7 @@ This is done automatically and with minimal functional or performance impact.
 
 Enhanced Container Isolation helps ensure strong container isolation and also locks in any security configurations that have been created, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Admin Controls](../admin-controls/index.md). 
 
->Note
+>**Note**
 >
 > Enhanced Container Isolation is in addition to other container security techniques used by Docker. For example, reduced Linux Capabilities, Seccomp, AppArmor.
 
@@ -38,20 +38,20 @@ When Enhanced Container Isolation is enabled using [Admin Controls](../admin-con
 - Users can continue using containers as usual, including bind-mounting host directories, volumes, networking configurations, etc.
 - Privileged containers work, but they are only privileged within the container's Linux User Namespace, not in the Docker Desktop VM.
 - Containers can no longer share namespaces with the Docker Desktop VM. For example, `--network=host`, `--pid=host`.
-- Containers can no longer modify configuration files in the Docker Desktop VM
-- Console access to the Desktop VM is forbidden for all users
+- Containers can no longer modify configuration files in the Docker Desktop VM.
+- Console access to the Desktop VM is forbidden for all users.
 - Containers become harder to breach. For example, sensitive system calls are vetted and portions of `/proc` and `/sys` are emulated.
 
-For more information on how Enhanced Container Isolation work, see [How does it work?](how-eci-works.md).
+For more information on how Enhanced Container Isolation work, see [How does it work](how-eci-works.md).
 
->Important
+>**Important**
 >
->Enhanced Container Isolation is currently incompatible with WSL and does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQS and known issues](faq.md).
+>Enhanced Container Isolation is currently incompatible with WSL and does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
 {: .important}
 
 ### How do I enable Enhanced Container Isolation?
 
-As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must [create and configure the `admin-settings.json` file](../admin-controls/configure-ac.md) and specify:
 
@@ -68,7 +68,7 @@ Once this is done, developers need to either quit, re-launch, and sign in to Doc
 
 >Important
   >
-  >Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop.
+  >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
   {: .important}
 
 ### What do users see when this setting is enforced?

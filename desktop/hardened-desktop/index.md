@@ -7,7 +7,7 @@ keywords: security, hardened desktop, enhanced container isolation, registry acc
 >
 >Hardened Desktop is available to Docker Business customers only.
 
-Hardened Desktop is a new security model for Docker Desktop. It's designed to provide admins with a simple and powerful way to improve their organizations security posture for containerised development, without impacting the developer experience that Docker Desktop offers.
+Hardened Desktop is a security model for Docker Desktop. It's designed to provide admins with a simple and powerful way to improve their organizations security posture for containerized development, without impacting the developer experience that Docker Desktop offers.
 
 It is for security conscious organizations who don’t give their users root or admin access on their machines, and who would like Docker Desktop to be within their organization’s centralized control.
 

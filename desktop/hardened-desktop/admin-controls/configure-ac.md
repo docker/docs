@@ -4,7 +4,7 @@ keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Admin Controls
 --- 
 
->Note
+>**Note**
 >
 >Admin Controls is available to Docker Business customers only. 
 
@@ -26,13 +26,13 @@ Place the `admin-settings.json` file on your developers' machines in the followi
 
 By placing this file in the above protected directories, end users are unable to modify it.
 
->Note
+>**Note**
 >
 > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified above through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
 
 ## Step two: Configure the admin controls you want to lock in
 
->Note
+>**Note**
 >
 >Some of the configuration parameters only apply to Windows. This is highlighted in the table below.
 
@@ -117,19 +117,19 @@ The following `admin-settings.json` code and table provides an example of the re
 |`analyticsEnabled`|If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
 
 ## Step three: Re-launch Docker Desktop
->Note
+>**Note**
 >
 >Administrators should test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.
 
 For settings to take effect:
 - On a new install, developers need to launch Docker Desktop and authenticate to their organization.
-- On an existing install, developers need to quit Docker Desktop through the Whale menu, and then relaunch Docker Desktop and sign in to receive the changed settings. 
-  >Important
+- On an existing install, developers need to quit Docker Desktop through the Docker menu, and then relaunch Docker Desktop and sign in to receive the changed settings. 
+  >**Important**
   >
-  >Selecting **Restart** from the Whale menu isn't enough as it only restarts some components of Docker Desktop.
+  >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
   {: .important}
 
-Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers workflow. 
+Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers' workflow. 
 
 
 In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.

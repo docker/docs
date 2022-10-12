@@ -13,9 +13,9 @@ redirect_from:
 With Registry Access Management, administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
 
 Below are some example registries administrators can allow: 
- - AWS ECR
+ - Amazon ECR
  - GitHub Container Registry
- - Google Container Registry Quay
+ - Google Container Registry
 
 Administrators can ensure registries are locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on with Admin Controls. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
 
@@ -59,4 +59,4 @@ There are certain limitations when using Registry Access Management:
 - WSL 2 requires at least a 5.4 series Linux kernel (this does not apply to earlier Linux kernel series)
 - Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
 
-Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Blocking these forms of manipulation is outside the remit of Docker Desktop.
+Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Docker Desktop does not support blocking these forms of manipulation.
