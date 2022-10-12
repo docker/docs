@@ -22,10 +22,14 @@ think about how it will work for a large team, multiple developers, etc.
 
 Before you can run the application, you need to get the application source code onto your machine.
 
-1. Download the contents from the [getting-started-app repository](https://github.com/craig-osterhout/getting-started-app){:target="_blank" rel="noopener" class="_"}. You can either clone the repository using the following [git](https://git-scm.com/downloads) command, or [download the repository as a zip](https://github.com/craig-osterhout/getting-started-app/archive/refs/heads/main.zip) and extract the contents.
+1. Download the app from the [getting-started repository](https://github.com/docker/getting-started){:target="_blank" rel="noopener" class="_"}. You can either pull the `app` folder from the repository using the following [git](https://git-scm.com/downloads) commands, or [download the repository as a zip](https://github.com/docker/getting-started/archive/refs/heads/master.zip) and extract the `app` folder.
 
     ```console
-    $ git clone https://github.com/craig-osterhout/getting-started-app.git
+    $ git init
+    $ git remote add -f origin https://github.com/docker/getting-started.git
+    $ git config core.sparseCheckout true
+    $ git sparse-checkout set app/
+    $ git pull origin master
     ```
 
 2. Once you have the app, use your favorite code editor to open the project. If you're in need of an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should see the following contents inside the `app` folder.
