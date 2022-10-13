@@ -4,7 +4,7 @@ title: How does it work?
 keywords: set up, enhanced container isolation, rootless, security
 ---
 
->Note
+>**Note**
 >
 >Enhance Container Isolation is available to Docker Business customers only.
 
