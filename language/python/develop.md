@@ -16,7 +16,7 @@ In this module, we’ll walk through setting up a local development environment 
 
 ## Run a database in a container
 
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command.
 
 Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.
 
@@ -182,7 +182,7 @@ You should receive the following JSON back from our service.
 
 ## Use Compose to develop locally
 
-In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker-dev` application in debug mode so that we can connect a debugger to the running process.
+In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command.
 
 Open the `python-docker` directory in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 
@@ -246,7 +246,7 @@ This is because our database is empty.
 
 ## Next steps
 
-In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.
+In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container.
 
 In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
 
