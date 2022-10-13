@@ -18,7 +18,6 @@ horizontalnav:
 - title: Contribute
   path: /contribute/overview/
   node: contribute
-  # TODO unify navbbar links: homepage currently has a custom "articles" link
   hide_home: true
 
 home: {}
@@ -376,8 +375,6 @@ guides:
         title: Use the VFS storage driver
 - path: /get-started/resources/
   title: "Educational resources"
-- path: /opensource/
-  title: "Contribute to documentation"
 
 reference:
 - path: /reference/
