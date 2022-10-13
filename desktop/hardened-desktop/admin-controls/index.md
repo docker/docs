@@ -7,9 +7,11 @@ title: What is Admin Controls?
 >
 >Admin Controls is available to Docker Business customers only. 
 
-Admin Controls is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization.
+Admin Controls is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization. 
 
 With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Admin Controls to enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Admin Controls cannot be modified by containers.
+
+It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
 ### Who is it for? 
 

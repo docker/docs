@@ -12,16 +12,17 @@ This page contains information for admins on how to configure Admin Controls to 
 
 Admin Controls is designed specifically for organizations who don’t give developers root access to their machines.
 
-### Prerequisite
+### Prerequisites
 
-As an admin, you need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+- [Download and install Docker Desktop 4.13.0 or later](../../release-notes.md).
+- As an admin, you need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
-### Step one: Create the `admin-settings.json` file and place it in the correct location
+### Step one: Create the `admin-settings.json` file and save it in the correct location
 
-1. Create a new JSON file and name it `admin-settings`.
-2. Place the `admin-settings.json` file on your developers' machines in the following locations:
+1. Create a new, empty JSON file and name it `admin-settings`.
+2. Save the `admin-settings.json` file on your developers' machines in the following locations:
 
-    - Mac: `/Library/Application Support/com.docker.docker/admin-settings.json`
+    - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
     - Windows: `/ProgramData/DockerDesktop/admin-settings.json`
     - Linux: `/usr/share/docker-desktop/admin-settings.json`
 

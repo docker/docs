@@ -8,7 +8,7 @@ title: What is Enhanced Container Isolation?
 >
 >Enhanced Container Isolation is available to Docker Business customers only. 
 
-Enhanced Container Isolation provides an additional layer of security that uses a variety of advanced techniques to harden container isolation without impacting developer productivity. 
+Enhanced Container Isolation provides an additional layer of security that uses a variety of advanced techniques to harden container isolation without impacting developer productivity. It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
 These techniques include:
 - Running all containers unprivileged through the Linux user-namespace.
