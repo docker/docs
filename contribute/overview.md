@@ -3,6 +3,7 @@ title: Contribute to Docker's docs
 toc_max: 1
 redirect_from:
 - /CONTRIBUTING/
+- /opensource/
 ---
 
 We deeply value documentation contributions from the Docker community. We'd like to make it as easy
