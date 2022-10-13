@@ -18,7 +18,7 @@ These techniques include:
 
 This is done automatically and with minimal functional or performance impact. 
 
-Enhanced Container Isolation helps ensure strong container isolation and also locks in any security configurations that have been created, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Admin Controls](../admin-controls/index.md). 
+Enhanced Container Isolation helps ensure strong container isolation and also locks in any security configurations that have been created, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Settings Management](../settings-management/index.md). 
 
 >**Note**
 >
@@ -31,7 +31,7 @@ Enhanced Container Isolation helps ensure strong container isolation and also lo
 
 ### What happens when Enhanced Container Isolation is enabled?
 
-When Enhanced Container Isolation is enabled using [Admin Controls](../admin-controls/index.md), the following features are enabled: 
+When Enhanced Container Isolation is enabled using [Settings Management](../settings-management/index.md), the following features are enabled: 
 
 - All user containers are automatically run in Linux User Namespaces which ensures stronger isolation.
 - The root user in the container maps to an unprivileged user at VM level.
@@ -53,7 +53,7 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 
 As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
-Next, you must [create and configure the `admin-settings.json` file](../admin-controls/configure-ac.md) and specify:
+Next, you must [create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
 
 ```JSON
 {
@@ -73,21 +73,25 @@ Once this is done, developers need to either quit, re-launch, and sign in to Doc
 
 ### What do users see when this setting is enforced?
 
-When Enhanced Container Isolation is enabled, users see that containers run within a Linux user-namespace. For example:
+When Enhanced Container Isolation is enabled, users see that containers run within a Linux user-namespace. 
+
+To check, run:
 
 ```
-$ docker run -it --rm alpine
-/ # cat /proc/self/uid_map 
+$ docker run -it --rm alpine / # cat /proc/self/uid_map 
+```
+
+The following output displays:
+
+```
          0     100000      65536
 ```
 
 This indicates that the container's root user (0) maps to unprivileged user (100000) in the Docker Desktop VM, and that the mapping extends for a range of 64K user-IDs.
 
-In contrast, without Enhanced Container Isolation the Linux user-namespace is not used:
+In contrast, without Enhanced Container Isolation the Linux user-namespace is not used, the following displays:
 
 ```
-$ docker run -it --rm alpine             
-/ # cat /proc/self/uid_map                           
          0          0 4294967295
 ```
 

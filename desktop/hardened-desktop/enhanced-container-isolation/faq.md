@@ -39,7 +39,7 @@ By allowing the `-–privileged` flag but restricting its impact within the cont
 <div id="tab4" class="tab-pane fade" markdown="1">
 
 #### Incompatibility with WSL
-Enhanced Container Isolation does not currently work when Docker Desktop runs on Windows with WSL/WSL2. This is due to some limitations of the WSL/WSL2 Linux Kernel. As a result, to use Enhanced Container Isolation on Windows, you must configure Docker Desktop to use Hyper-V. This can be enforced using Admin Controls. For more information, see [Admin Controls](../admin-controls/index.md).
+Enhanced Container Isolation does not currently work when Docker Desktop runs on Windows with WSL/WSL2. This is due to some limitations of the WSL/WSL2 Linux Kernel. As a result, to use Enhanced Container Isolation on Windows, you must configure Docker Desktop to use Hyper-V. This can be enforced using Admin Controls. For more information, see [Settings Management](../settings-management/index.md).
 
 #### Kubernetes pods and extension containers are not yet protected
 When Enhanced Container Isolation is enabled, Kubernetes pods and extension containers are not yet protected. A malicious or privileged pod or extension container can compromise the Docker Desktop Linux VM and bypass security controls. 

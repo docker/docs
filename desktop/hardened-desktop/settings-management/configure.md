@@ -1,16 +1,16 @@
 ---
-description: admin controls for desktop
+description: settings management for desktop
 keywords: admin, controls, rootless, enhanced container isolation
-title: Configure Admin Controls
+title: Configure Settings Management
 --- 
 
 >**Note**
 >
->Admin Controls is available to Docker Business customers only. 
+>Settings Management is available to Docker Business customers only. 
 
-This page contains information for admins on how to configure Admin Controls to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
+This page contains information for admins on how to configure Settings Management to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
 
-Admin Controls is designed specifically for organizations who don’t give developers root access to their machines.
+Settings Management is designed specifically for organizations who don’t give developers root access to their machines.
 
 ### Prerequisites
 
@@ -32,7 +32,7 @@ Admin Controls is designed specifically for organizations who don’t give devel
     >
     > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified above through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
 
-### Step two: Configure the admin controls you want to lock in
+### Step two: Configure the settings you want to lock in
 
 >**Note**
 >

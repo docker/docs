@@ -17,7 +17,7 @@ Below are some example registries administrators can allow:
  - GitHub Container Registry
  - Google Container Registry
 
-Administrators can ensure registries are locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on with Admin Controls. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
+Administrators can ensure registries are locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on with Enhanced Container Isolation. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
 
 ## Prerequisites 
 

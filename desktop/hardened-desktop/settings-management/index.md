@@ -1,15 +1,15 @@
 ---
-description: admin controls for desktop
-keywords: admin controls, rootless, docker desktop, hardened desktop
-title: What is Admin Controls?
+description: Settings Management for desktop
+keywords: Settings Management, rootless, docker desktop, hardened desktop
+title: What is Settings Management?
 --- 
 >**Note**
 >
->Admin Controls is available to Docker Business customers only. 
+>Settings Management is available to Docker Business customers only. 
 
-Admin Controls is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization. 
+Settings Management is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization. 
 
-With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Admin Controls to enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Admin Controls cannot be modified by containers.
+With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
 
 It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
@@ -23,9 +23,9 @@ It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
 Administrators can configure several Docker Desktop settings using an `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by users with root or admin privileges. 
 
-Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by users and ensure that these cannot be modified. For more information, see [Configure Admin Controls](../admin-controls/configure-ac.md#step-two-configure-the-admin-controls-you-want-to-lock-in).
+Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by users and ensure that these cannot be modified. For more information, see [Configure Settings Management](../settings-management/configure.md#step-two-configure-the-settings-you-want-to-lock-in).
 
-### What features can I configure with Admin Controls?
+### What features can I configure with Settings Management?
 
 Using the `admin-settings.json` file, admins can:
 
@@ -37,13 +37,13 @@ Using the `admin-settings.json` file, admins can:
 - Turn off Docker Desktop's ability to checks for updates
 - Turn off Docker Desktop's ability to send usage statistics
 
-For more details on the syntax and options admins can set, see [Configure Admin Controls](configure-ac.md).
+For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 
-### How do I set up and enforce Admin Controls?
+### How do I set up and enforce Settings Management?
 
-As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Admin Controls feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Settings Management feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
-Next, you must [create and configure the admin-settings.json file](configure-ac.md).
+Next, you must [create and configure the admin-settings.json file](configure.md).
 
 Once this is done, Docker Desktop users receive the changed settings when they either:
 - Quit, re-launch, and sign in to Docker Desktop
