@@ -23,7 +23,7 @@ Settings Management is designed specifically for organizations who don’t give 
 2. Save the `admin-settings.json` file on your developers' machines in the following locations:
 
     - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
-    - Windows: `/ProgramData/DockerDesktop/admin-settings.json`
+    - Windows: `C:\ProgramData\DockerDesktop\admin-settings.json`
     - Linux: `/usr/share/docker-desktop/admin-settings.json`
 
     By placing this file in the above protected directories, end users are unable to modify it.

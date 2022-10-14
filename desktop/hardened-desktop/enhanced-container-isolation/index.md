@@ -57,6 +57,7 @@ Next, you must [create and configure the `admin-settings.json` file](../settings
 
 ```JSON
 {
+ "configurationFileVersion": 2,
  "enhancedContainerIsolation": {
     "value": true,
     "locked": true
@@ -95,4 +96,20 @@ In contrast, without Enhanced Container Isolation the Linux user-namespace is no
          0          0 4294967295
 ```
 
-This means that the root user in the container (0) is in fact the root user in the Docker Desktop VM (0) which reduces container isolation. If a process were to escape the container, it would find itself without privileges at the VM level. For further details, see [How Enhanced Container Isolation works](how-eci-works.md).
+This means that the root user in the container (0) is in fact the root user in the Docker Desktop VM (0) which reduces container isolation. The user-ID mapping varies with each new container, as each container gets an exclusive range of host User-IDs for isolation. User-ID mapping is automatically managed by Docker Desktop.
+
+With Enhanced Container Isolation, if a process were to escape the container, it would find itself without privileges at the VM level. For further details, see [How Enhanced Container Isolation works](how-eci-works.md).
+
+Since, Enhanced Container Isolation [uses the Sysbox container runtime](how-eci-works.md) embedded in the Docker Desktop Linux VM, another way to determine if a container is running with Enhanced Container Isolation is by using `docker inspect`:
+
+```
+docker inspect --format='{{.HostConfig.Runtime}}' my_container
+```
+
+It outputs:
+
+```
+sysbox-runc
+```
+
+Without Enhanced Container Isolation, `docker inspect` outputs `runc`, which is the standard OCI runtime.
