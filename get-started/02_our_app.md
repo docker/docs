@@ -22,15 +22,7 @@ think about how it will work for a large team, multiple developers, etc.
 
 Before you can run the application, you need to get the application source code onto your machine.
 
-1. Download the app from the [getting-started repository](https://github.com/docker/getting-started){:target="_blank" rel="noopener" class="_"}. You can either pull the `app` folder from the repository using the following [git](https://git-scm.com/downloads) commands, or [download the repository as a zip](https://github.com/docker/getting-started/archive/refs/heads/master.zip) and extract the `app` folder.
-
-    ```console
-    $ git init
-    $ git remote add -f origin https://github.com/docker/getting-started.git
-    $ git config core.sparseCheckout true
-    $ git sparse-checkout set app/
-    $ git pull origin master
-    ```
+1. Download the App contents from the [getting-started repository](https://github.com/docker/getting-started/tree/master){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or [download it as a zip](https://github.com/docker/getting-started/archive/refs/heads/master.zip) and extract the app folder out to get started with.
 
 2. Once you have the app, use your favorite code editor to open the project. If you're in need of an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should see the following contents inside the `app` folder.
 
@@ -83,7 +75,7 @@ see a few flaws in the Dockerfile below. But, don't worry. This tutorial will ad
        |— yarn.lock
      ```
 
-2. Add the following contents to the Dockerfile.
+2. Use your IDE or a text editor to add the following contents to the Dockerfile.
 
    ```dockerfile
    # syntax=docker/dockerfile:1
@@ -96,6 +88,7 @@ see a few flaws in the Dockerfile below. But, don't worry. This tutorial will ad
    EXPOSE 3000
    ```
 
+   To learn more about Dockerfiles, see [Packaging your software](https://docs.docker.com/build/building/packaging/).
 
 3. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
 
@@ -152,7 +145,7 @@ If you take a quick look at the Docker Dashboard, you should see at least one  c
 
 ## Next steps
 
-In this short section, you learned the very basics about building a container image and created a
+In this short section, you learned the basics about building a container image and created a
 Dockerfile to do so. Once you built an image, you started the container and saw the running app.
 
 Next, you're going to make a modification to your app and learn how to update your running application

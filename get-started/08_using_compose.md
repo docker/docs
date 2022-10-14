@@ -30,19 +30,9 @@ $ docker compose version
 
 1. At the root of the app project, create a file named `docker-compose.yml`.
 
-2. In the Compose file, you'll start off by defining the schema version. In most cases, it's best to use
-   the latest supported version. You can look at the [Compose file reference](../compose/compose-file/index.md)
-   for the current schema versions and the compatibility matrix.
+2.In the Compose file, you'll start off by defining the list of services (or containers) you want to run as part of your application.
 
     ```yaml
-    version: "3.8"
-    ```
-
-3. Next, you'll define the list of services (or containers) you want to run as part of your application.
-
-    ```yaml
-    version: "3.8"
-
     services:
     ```
 
@@ -70,8 +60,6 @@ You'll now migrate that command into your Compose file.
    The name will automatically become a network alias, which will be useful when defining your MySQL service.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         image: node:12-alpine
@@ -81,8 +69,6 @@ You'll now migrate that command into your Compose file.
    So, go ahead and move that into your file.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         image: node:12-alpine
@@ -94,8 +80,6 @@ You'll now migrate that command into your Compose file.
    [long syntax](../compose/compose-file/compose-file-v3.md#long-syntax-1) available as well.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         image: node:12-alpine
@@ -109,8 +93,6 @@ You'll now migrate that command into your Compose file.
     One advantage of Docker Compose volume definitions is you can use relative paths from the current directory.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         image: node:12-alpine
@@ -125,8 +107,6 @@ You'll now migrate that command into your Compose file.
 5. Finally, you need to migrate the environment variable definitions using the `environment` key.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         image: node:12-alpine
@@ -160,8 +140,6 @@ $ docker run -d \
    go ahead and specify the image to use as well.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         # The app service definition
@@ -175,8 +153,6 @@ $ docker run -d \
    the default options are used. There are [many more options available](../compose/compose-file/compose-file-v3.md#volume-configuration-reference) though.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         # The app service definition
@@ -192,8 +168,6 @@ $ docker run -d \
 3. Finally, you only need to specify the environment variables.
 
     ```yaml
-    version: "3.8"
-
     services:
       app:
         # The app service definition
@@ -213,8 +187,6 @@ At this point, your complete `docker-compose.yml` should look like this:
 
 
 ```yaml
-version: "3.8"
-
 services:
   app:
     image: node:12-alpine
