@@ -4,7 +4,7 @@ keywords: Dev Environments, share, collaborate, local, share
 title: Distribute your dev environment
 ---
 
-The config file makes distributing your dev environment easy so everyone can access the same code and any dependencies.
+The `compose-dev.yaml` config file makes distributing your dev environment easy so everyone can access the same code and any dependencies.
 
 ### Distribute your dev environment
 
@@ -16,7 +16,7 @@ To create the link simply join the following link with the link to your dev envi
 
 `https://open.docker.com/dashboard/dev-envs?url=`
 
-The following example opens the Compose sample, [Go server with an Nginx proxy and a MariaDB/MySQL database](https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql), in Docker Desktop.
+The following example opens a [Compose sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql), a Go server with an Nginx proxy and a MariaDB/MySQL database, in Docker Desktop.
 
 [https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql](https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql)
 

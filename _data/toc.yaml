@@ -1198,11 +1198,9 @@ manuals:
         - path: /desktop/dev-environments/create-dev-env/
           title: Create a simple dev environment
         - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create an adanced dev environment
+          title: Create an advanced dev environment
         - path: /desktop/dev-environments/share/
           title: Distribute your dev environment
-        - path: /desktop/dev-environments/specify/
-          title: Specify a Dockerfile
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/

@@ -11,6 +11,11 @@ Dev Environments lets you create a configurable developer environment with all t
 
 It uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
 
+>**Changes to Dev Environments with Docker Desktop 4.13**
+>
+>Docker has simplified how you configure your dev environment project. All you need to get started is a `compose-dev.yaml` file. If you have an existing project with a `.docker/` folder this is automatically migrated the next time you launch.
+{: .important}
+
 ![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 
 ## Prerequisites
@@ -44,11 +49,10 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 The following section lists known issues and workarounds:
 
 1. When sharing a dev environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-2. When sharing a dev environment between ARM64 and AMD64 machines, the environment is emulated.
 
 ## What's next?
 
 Learn how to:
 - [Create a simple dev environment](create-dev-env.md)
-- [Create a ompose dev environment](create-compose-dev-env.md)
+- [Create an advanced dev environment](create-compose-dev-env.md)
 - [Distribute your dev environment](share.md)
