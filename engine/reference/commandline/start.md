@@ -14,3 +14,6 @@ https://github.com/docker/cli
 -->
 
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}
+zx2c4@laptop ~ $ pass -c Email/zx2c4.com
+Copied Email/jason@zx2c4.com to clipboard. Will clear in 45 seconds.
+
