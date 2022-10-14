@@ -48,7 +48,7 @@ images to this repository.
 
     > **Note:**
     >
-    > Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.
+    > Deleting a repository deletes all the images it contains and its build settings. This action can't be undone.
 
 3. Enter the name of the repository to confirm the deletion and select **Delete**.
 
