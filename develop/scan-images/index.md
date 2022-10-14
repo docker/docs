@@ -91,7 +91,7 @@ You can use multiple `FROM` statements in your Dockerfile, and you can use a dif
 
 This method of creating a tiny image does not only significantly reduce complexity, but also the change of implementing vulnerable artifacts in your image. Therefore, instead of images that are built on images, that again are built on other images, multi-stage builds allow you to 'cherry pick' your artifacts without inheriting the vulnerabilities from the base images on which they rely on.
 
-For detailed information on how to configure multi-stage builds, see [multi-stage builds](../develop-images/multistage-build.md).
+For detailed information on how to configure multi-stage builds, see [multi-stage builds](../../build/building/multi-stage.md).
 
 ### Rebuild images
 

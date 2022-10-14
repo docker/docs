@@ -16,7 +16,7 @@ In this module, we’ll walk through setting up a local development environment 
 
 ## Run a database in a container
 
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command.
 
 Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.
 
@@ -73,7 +73,7 @@ In the above command, we logged in to the MySQL database by passing the ‘mysql
 
 Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
 
-Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for inserting records.
+Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for creating our database and table.
 
 ```python
 import mysql.connector
@@ -84,64 +84,64 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-  return 'Hello, Docker!'
+    return 'Hello, Docker!'
 
 @app.route('/widgets')
 def get_widgets():
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1",
-    database="inventory"
-  )
-  cursor = mydb.cursor()
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="inventory"
+    )
+    cursor = mydb.cursor()
 
 
-  cursor.execute("SELECT * FROM widgets")
+    cursor.execute("SELECT * FROM widgets")
 
-  row_headers=[x[0] for x in cursor.description] #this will extract row headers
+    row_headers=[x[0] for x in cursor.description] #this will extract row headers
 
-  results = cursor.fetchall()
-  json_data=[]
-  for result in results:
-    json_data.append(dict(zip(row_headers,result)))
+    results = cursor.fetchall()
+    json_data=[]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
 
-  cursor.close()
+    cursor.close()
 
-  return json.dumps(json_data)
+    return json.dumps(json_data)
 
 @app.route('/initdb')
 def db_init():
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1"
-  )
-  cursor = mydb.cursor()
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1"
+    )
+    cursor = mydb.cursor()
 
-  cursor.execute("DROP DATABASE IF EXISTS inventory")
-  cursor.execute("CREATE DATABASE inventory")
-  cursor.close()
+    cursor.execute("DROP DATABASE IF EXISTS inventory")
+    cursor.execute("CREATE DATABASE inventory")
+    cursor.close()
 
-  mydb = mysql.connector.connect(
-    host="mysqldb",
-    user="root",
-    password="p@ssw0rd1",
-    database="inventory"
-  )
-  cursor = mydb.cursor()
+    mydb = mysql.connector.connect(
+        host="mysqldb",
+        user="root",
+        password="p@ssw0rd1",
+        database="inventory"
+    )
+    cursor = mydb.cursor()
 
-  cursor.execute("DROP TABLE IF EXISTS widgets")
-  cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
-  cursor.close()
+    cursor.execute("DROP TABLE IF EXISTS widgets")
+    cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
+    cursor.close()
 
-  return 'init database'
+    return 'init database'
 
 if __name__ == "__main__":
-  app.run(host ='0.0.0.0')
+    app.run(host ='0.0.0.0')
 ```
 
-We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a couple of routes to save widgets and fetch widgets. We now need to rebuild our image so it contains our changes.
+We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a route to fetch widgets. We now need to rebuild our image so it contains our changes.
 
 First, let’s add the `mysql-connector-python` module to our application using pip.
 
@@ -182,7 +182,7 @@ You should receive the following JSON back from our service.
 
 ## Use Compose to develop locally
 
-In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command. We’ll also set up the Compose file to start the `python-docker-dev` application in debug mode so that we can connect a debugger to the running process.
+In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command.
 
 Open the `python-docker` directory in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 
@@ -219,6 +219,8 @@ We expose port 8000 so that we can reach the dev web server inside the container
 
 Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we've named our MySQL service as in the Compose file.
 
+Note that we did not specify a network for those 2 services. When we use docker-compose it automatically creates a network and connect the services to it. For more information see [Networking in Compose](../../compose/networking.md)
+
 Now, to start our application and to confirm that it is running properly, run the following command:
 
 ```console
@@ -244,7 +246,7 @@ This is because our database is empty.
 
 ## Next steps
 
-In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.
+In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container.
 
 In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
 
@@ -252,4 +254,4 @@ In the next module, we’ll take a look at how to set up a CI/CD pipeline using 
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

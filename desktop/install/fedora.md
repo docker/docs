@@ -9,6 +9,8 @@ redirect_from:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
 
+[RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
@@ -29,7 +31,7 @@ To install Docker Desktop on Fedora:
 
 1. Set up [Docker's package repository](../../engine/install/fedora.md#set-up-the-repository). 
 
-2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with dnf as follows:
 
@@ -60,25 +62,6 @@ You need to first remove the previous version and then download the new package 
 $ sudo dnf remove docker-desktop
 $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
 ```
-
-
-## Uninstall Docker Desktop
-
-To remove Docker Desktop for Linux, run:
-
-```console
-$ sudo dnf remove docker-desktop
-```
-
-For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
-the remaining systemd service files.
-
-```console
-$ rm -r $HOME/.docker/desktop
-$ sudo rm /usr/local/bin/com.docker.cli
-```
-
-Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/config.json`. Additionally, you must delete any edited configuration files manually. 
 
 ## Next steps
 

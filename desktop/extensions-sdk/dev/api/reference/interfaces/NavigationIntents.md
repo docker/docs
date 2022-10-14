@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: NavigationIntents
 
+**`since`** 0.2.0
+
 ## Container Methods
 
 ### viewContainers

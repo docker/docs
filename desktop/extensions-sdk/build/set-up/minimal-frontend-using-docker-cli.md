@@ -3,14 +3,18 @@ title: Set up a minimal extension invoking Docker commands
 description: Minimal docker CLI extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:
-- /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
+  - /desktop/extensions-sdk/tutorials/minimal-frontend-using-docker-cli/
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker extension that invokes Docker CLI commands.
 
->Note
+> Note
 >
->Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+> Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+
+> Note
+>
+> If you want to start a codebase for your new extension, our [Quickstart guide](../../quickstart.md) and `docker extension init <my-extension>` will provide a better base for your extension, more up-to-date and related to your install of Docker Desktop.
 
 ## Extension folder structure
 
