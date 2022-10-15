@@ -78,7 +78,7 @@ Hello, Docker!
 
 ## List containers
 
-Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, to see a list of containers running on our machine, run `docker ps`. This is similar to how ps command is used to see a list of processes on a Linux machine.
+Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, to see a list of containers running on our machine, run `docker ps`. This is similar to how the ps command is used to see a list of processes on a Linux machine.
 
 ```console
 $ docker ps
