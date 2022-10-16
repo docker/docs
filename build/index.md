@@ -73,7 +73,7 @@ build steps:
 
 Use the multi-stage feature to selectively copy artifacts from one stage to
 another, leaving behind everything you don't want in the final image, so you
-keep your images small and secure with minimal depeendencies:
+keep your images small and secure with minimal dependencies:
 
 [Multi-stage builds](building/multi-stage.md){: .button .outline-btn }
 
