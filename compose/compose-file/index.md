@@ -1252,6 +1252,41 @@ logging:
 The `driver` name specifies a logging driver for the service's containers. The default and available values
 are platform specific. Driver specific options can be set with `options` as key-value pairs.
 
+### mac_address
+
+`mac_address` sets a MAC address for service container.
+
+### mem_limit
+
+_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
+
+### mem_reservation
+
+_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
+
+### mem_swappiness
+
+`mem_swappiness` defines as a percentage (a value between 0 and 100) for the host kernel to swap out
+anonymous memory pages used by a container.
+
+- a value of 0 turns off anonymous page swapping.
+- a value of 100 sets all anonymous pages as swappable.
+
+Default value is platform specific.
+
+### memswap_limit
+
+`memswap_limit` defines the amount of memory container is allowed to swap to disk. This is a modifier
+attribute that only has meaning if `memory` is also set. Using swap allows the container to write excess
+memory requirements to disk when the container has exhausted all the memory that is available to it.
+There is a performance penalty for applications that swap memory to disk often.
+
+- If `memswap_limit` is set to a positive integer, then both `memory` and `memswap_limit` MUST be set. `memswap_limit` represents the total amount of memory and swap that can be used, and `memory` controls the amount used by non-swap memory. So if `memory`="300m" and `memswap_limit`="1g", the container can use 300m of memory and 700m (1g - 300m) swap.
+- If `memswap_limit` is set to 0, the setting MUST be ignored, and the value is treated as unset.
+- If `memswap_limit` is set to the same value as `memory`, and `memory` is set to a positive integer, the container does not have access to swap. See Prevent a container from using swap.
+- If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
+- If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
+
 ### network_mode
 
 `network_mode` set service containers network mode. Available values are platform specific, but Compose
@@ -1410,41 +1445,6 @@ networks:
   app_net_2:
   app_net_3:
 ```
-
-### mac_address
-
-`mac_address` sets a MAC address for service container.
-
-### mem_limit
-
-_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
-
-### mem_reservation
-
-_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
-
-### mem_swappiness
-
-`mem_swappiness` defines as a percentage (a value between 0 and 100) for the host kernel to swap out
-anonymous memory pages used by a container.
-
-- a value of 0 turns off anonymous page swapping.
-- a value of 100 sets all anonymous pages as swappable.
-
-Default value is platform specific.
-
-### memswap_limit
-
-`memswap_limit` defines the amount of memory container is allowed to swap to disk. This is a modifier
-attribute that only has meaning if `memory` is also set. Using swap allows the container to write excess
-memory requirements to disk when the container has exhausted all the memory that is available to it.
-There is a performance penalty for applications that swap memory to disk often.
-
-- If `memswap_limit` is set to a positive integer, then both `memory` and `memswap_limit` MUST be set. `memswap_limit` represents the total amount of memory and swap that can be used, and `memory` controls the amount used by non-swap memory. So if `memory`="300m" and `memswap_limit`="1g", the container can use 300m of memory and 700m (1g - 300m) swap.
-- If `memswap_limit` is set to 0, the setting MUST be ignored, and the value is treated as unset.
-- If `memswap_limit` is set to the same value as `memory`, and `memory` is set to a positive integer, the container does not have access to swap. See Prevent a container from using swap.
-- If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
-- If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
 
 ### oom_kill_disable
 

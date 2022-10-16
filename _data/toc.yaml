@@ -18,7 +18,6 @@ horizontalnav:
 - title: Contribute
   path: /contribute/overview/
   node: contribute
-  # TODO unify navbbar links: homepage currently has a custom "articles" link
   hide_home: true
 
 home: {}
@@ -376,8 +375,6 @@ guides:
         title: Use the VFS storage driver
 - path: /get-started/resources/
   title: "Educational resources"
-- path: /opensource/
-  title: "Contribute to documentation"
 
 reference:
 - path: /reference/
@@ -1110,8 +1107,91 @@ reference:
 
 samples:
 - path: /samples/
-  title: Official Docker samples
-
+  title: Overview
+- sectiontitle: Databases
+  section:
+    - path: /samples/mariadb/
+      title: MariaDB
+    - path: /samples/mongodb/
+      title: MongoDB
+    - path: /samples/ms-sql/
+      title: MS-SQL
+    - path: /samples/mysql/
+      title: MySQL
+    - path: /samples/postgres/
+      title: PostgreSQL
+    - path: /samples/redis/
+      title: Redis
+- sectiontitle: Frameworks
+  section:
+    - path: /samples/dotnet/
+      title: .NET
+    - path: /samples/angular/
+      title: Angular
+    - path: /samples/django-sample/
+      title: Django
+    - path: /samples/express/
+      title: Express
+    - path: /samples/fastapi/
+      title: FastAPI
+    - path: /samples/flask/
+      title: Flask
+    - path: /samples/nodejs/
+      title: Node.js
+    - path: /samples/react/
+      title: React
+    - path: /samples/spark/
+      title: Spark
+    - path: /samples/spring/
+      title: Spring Boot
+    - path: /samples/vuejs/
+      title: Vue.js
+- sectiontitle: Languages
+  section:
+    - path: /samples/go/
+      title: Go
+    - path: /samples/java/
+      title: Java
+    - path: /samples/javascript/
+      title: JavaScript
+    - path: /samples/php/
+      title: PHP
+    - path: /samples/python/
+      title: Python
+    - path: /samples/rust/
+      title: Rust
+    - path: /samples/typescript/
+      title: TypeScript
+- sectiontitle: Platforms
+  section:
+    - path: /samples/gitea/
+      title: Gitea
+    - path: /samples/nextcloud/
+      title: Nextcloud
+    - path: /samples/portainer/
+      title: Portainer
+    - path: /samples/prometheus/
+      title: Prometheus
+    - path: /samples/wordpress-sample/
+      title: WordPress
+- sectiontitle: Other services
+  section:
+    - path: /samples/cloudflared/
+      title: Cloudflared
+    - path: /samples/elasticsearch/
+      title: Elasticsearch / Logstash / Kibana
+    - path: /samples/minecraft/
+      title: Minecraft
+    - path: /samples/nginx/
+      title: NGINX
+    - path: /samples/pi-hole/
+      title: Pi-hole
+    - path: /samples/plex/
+      title: Plex
+    - path: /samples/traefik/
+      title: Traefik
+    - path: /samples/wireguard/
+      title: Wireguard
 
 
 manuals:
@@ -1187,6 +1267,8 @@ manuals:
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
+        - path: /desktop/uninstall/
+          title: Uninstall Docker Desktop
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1202,7 +1284,7 @@ manuals:
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
-        title: What is Docker Extensions?
+        title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
         title: Manage marketplace Extensions
       - path: /desktop/extensions/non-marketplace/
@@ -1387,7 +1469,7 @@ manuals:
       section:
         - path: /build/building/packaging/
           title: Packaging your software
-        - sectiontitle: Choosing a build driver
+        - sectiontitle: Build drivers
           section:
             - path: /build/building/drivers/
               title: Overview
@@ -1399,13 +1481,31 @@ manuals:
               title: Kubernetes driver
             - path: /build/building/drivers/remote/
               title: Remote driver
+        - path: /build/building/cache/
+          title: Optimizing builds with cache
+        - sectiontitle: Cache backends
+          section:
+            - path: /build/building/cache/backends/
+              title: Overview
+            - path: /build/building/cache/backends/inline/
+              title: Inline
+            - path: /build/building/cache/backends/local/
+              title: Local
+            - path: /build/building/cache/backends/registry/
+              title: Registry
+            - path: /build/building/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/building/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/building/cache/backends/s3/
+              title: Amazon S3
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
     - sectiontitle: Customizing builds
       section:
-        - sectiontitle: Orchestrating builds with Bake
+        - sectiontitle: High-level builds with Bake
           section:
             - path: /build/customize/bake/
               title: Overview
@@ -1476,8 +1576,14 @@ manuals:
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
-  - path: /docker-hub/repos/
-    title: Repositories
+  - sectiontitle: Repositories
+    section:
+      - path: /docker-hub/repos/
+        title: Manage
+      - path: /docker-hub/repos/access/
+        title: Access
+      - path: /docker-hub/repos/configure/
+        title: Configure
   - path: /docker-hub/service-accounts/
     title: Service accounts
   - path: /docker-hub/official_images/
@@ -1526,31 +1632,12 @@ manuals:
     section:
       - path: /docker-hub/publish/
         title: Overview
+      - path: /docker-hub/publish/insights-analytics/
+        title: Insights & analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
     title: Release notes
-
-- sectiontitle: Atomist
-  section:
-    - path: /atomist/
-      title: Introduction
-    - path: /atomist/try-atomist/
-      title: Try Atomist
-    - path: /atomist/get-started/
-      title: Get started
-    - sectiontitle: Configure
-      section:
-        - path: /atomist/configure/settings/
-          title: Settings
-        - path: /atomist/configure/advisories/
-          title: Advisories
-    - sectiontitle: Integrate
-      section:
-        - path: /atomist/integrate/github/
-          title: GitHub
-        - path: /atomist/integrate/deploys/
-          title: Track deployments
 
 - sectiontitle: Docker subscription
   section:
@@ -1631,6 +1718,27 @@ manuals:
       - path: /engine/security/rootless/
         title: Rootless mode
 
+- sectiontitle: Atomist
+  section:
+    - path: /atomist/
+      title: Introduction
+    - path: /atomist/try-atomist/
+      title: Try Atomist
+    - path: /atomist/get-started/
+      title: Get started
+    - sectiontitle: Configure
+      section:
+        - path: /atomist/configure/settings/
+          title: Settings
+        - path: /atomist/configure/advisories/
+          title: Advisories
+    - sectiontitle: Integrate
+      section:
+        - path: /atomist/integrate/github/
+          title: GitHub
+        - path: /atomist/integrate/deploys/
+          title: Track deployments
+
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Registry
@@ -1700,9 +1808,11 @@ contribute:
     - path: /contribute/components/badges/
       title: Badges
     - path: /contribute/components/call-outs/
-      title: Call outs
+      title: Callouts
     - path: /contribute/components/cards/
       title: Cards
+    - path: /contribute/components/code-blocks/
+      title: Code blocks
     - path: /contribute/components/images/
       title: Images
     - path: /contribute/components/links/

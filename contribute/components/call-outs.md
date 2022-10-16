@@ -1,10 +1,10 @@
 ---
 description: components and formatting examples used in Docker's docs
-title: Call outs
+title: Callouts
 toc_max: 3
 ---
 
-We support these broad categories of call outs:
+We support these broad categories of callouts:
 
 - Notes (no Liquid tag required)
 - Important, which use the `{: .important}` tag
@@ -37,21 +37,21 @@ We support these broad categories of call outs:
 > `docker-compose down`. If you want to remove the volumes, you will need to add
 > the `--volumes` flag.
 >
-> The Docker Dashboard does _not_ remove volumes when you delete the app stack.
+> The Docker Dashboard does not remove volumes when you delete the app stack.
 {: .warning}
 
 ## HTML
 
 ```html
 > **Note**
-  >
-  > Note the way the `get_hit_count` function is written. This basic retry
-  > loop lets us attempt our request multiple times if the redis service is
-  > not available. This is useful at startup while the application comes
-  > online, but also makes our application more resilient if the Redis
-  > service needs to be restarted anytime during the app's lifetime. In a
-  > cluster, this also helps handling momentary connection drops between
-  > nodes.
+>
+> Note the way the `get_hit_count` function is written. This basic retry
+> loop lets us attempt our request multiple times if the redis service is
+> not available. This is useful at startup while the application comes
+> online, but also makes our application more resilient if the Redis
+> service needs to be restarted anytime during the app's lifetime. In a
+> cluster, this also helps handling momentary connection drops between
+> nodes.
 
 > **Important**
 >

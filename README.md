@@ -1,6 +1,6 @@
 # Docs @ Docker
 
-<img src="images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
+<img src="assets/images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
 
 Welcome to the Docker Documentation repository. This is the source for
 [https://docs.docker.com/](https://docs.docker.com/).
@@ -41,7 +41,7 @@ We've made it really easy for you to file new issues.
 We value your contribution. We'd like to make it as easy as possible to submit
 your contributions to the Docker docs repository. Changes to the docs are
 handled through pull requests against the `master` branch. To learn how to
-contribute, see our [Contribute section](/contribute/overview).
+contribute, see our [Contribute section](https://docs.docker.com/contribute/overview/).
 
 ## Copyright and license
 

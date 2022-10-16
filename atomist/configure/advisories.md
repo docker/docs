@@ -26,11 +26,12 @@ To add your own advisories:
    - `source-id` has to be a unique id for the advisory within `source`.
 
 3. The JSON file must follow the schema defined in
-   [Open Source Vulnerability format](https://ossf.github.io/osv-schema/).
+   [Open Source Vulnerability format](https://ossf.github.io/osv-schema/){:
+   target="blank" rel="noopener" class=""}.
 
    Refer to the
-   [GitHub Advisory Database](https://github.com/github/advisory-database/tree/main/advisories/github-reviewed)
-   for examples of advisories.
+   [GitHub Advisory Database](https://github.com/github/advisory-database/tree/main/advisories/github-reviewed){:
+   target="blank" rel="noopener" class=""} for examples of advisories.
 
 ## Deleting advisories
 

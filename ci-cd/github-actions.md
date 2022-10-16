@@ -109,19 +109,19 @@ BuildKit container under the hood.
     steps:
       -
         name: Checkout 
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       -
         name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile
@@ -148,6 +148,7 @@ step:
 
 {% raw %}
 ```yaml
+
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -157,8 +158,8 @@ step:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       
-      - name: Build and push
-        uses: docker/build-push-action@v2
+        name: Build and push
+        uses: docker/build-push-action@v3
         with:
           context: ./
           file: ./Dockerfile
@@ -245,7 +246,7 @@ Now let's change the Docker Hub login with the GitHub Container Registry one:
 {% raw %}
 ```yaml
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}

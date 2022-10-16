@@ -3,12 +3,12 @@
 {%- if page.edit_url -%}
     {%- assign edit_url = page.edit_url -%}
 {%- else -%}
-    {%- assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path -%}
+    {% capture edit_url %}{{ site.repo }}/edit/master/{{ page.path }}{% endcapture %}
 {%- endif -%}
 {%- if page.issue_url -%}
     {%- assign issue_url = page.issue_url -%}
 {%- else -%}
-    {%- assign issue_url = "https://github.com/docker/docker.github.io/issues/new?body=File: [" | append: page.path | append: "](" | append: site.docs_url | append: page.url | append: ")" -%}
+    {% capture issue_url %}{{ site.repo }}/issues/new?body=File: [{{ page.path }}]({{ site.docs_url }}{{ page.url }}){% endcapture %}
 {%- endif -%} -->
 <html lang="en">
 {%- include head.html -%}

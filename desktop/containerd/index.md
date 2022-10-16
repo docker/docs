@@ -227,6 +227,7 @@ Initial implementation of the Docker commands: `run`, `commit`, `build`, `push`,
 * Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. Disable the Containerd Image Store feature if you are using the Kubernetes from Docker Desktop.
 * Local registry mirror configuration isn't implemented yet with the Containerd Image Store. Hence the `registry-mirrors` and `insecure-registries` aren't taken into account by the Docker daemon.
 * The `reference` filter isn't implemented yet and will return the error `invalid filter 'reference'` when listing images.
+* Pulling an image may fail with the error `pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed`, in the situation where the image does not contain a manifest list. To workaround this issue run the `docker login` command and pull the image again.
 
 ## Feedback
 
