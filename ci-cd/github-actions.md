@@ -155,8 +155,7 @@ step:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       
       - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1        
+        uses: docker/setup-buildx-action@v2
       
       - name: Build and push
         uses: docker/build-push-action@v2
