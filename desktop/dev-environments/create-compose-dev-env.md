@@ -22,7 +22,7 @@ The example below, taken from the `compose-dev-env` project from the [Docker Sam
 
 >Note
 >
->If you want to create an advanced dev environment from a subdirectory of a Git repo, you need to define your own compose file in a .docker folder located in your subdirectory as currently, Dev Environments is not able to detect the main language of the subdirectory. 
+>Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or compose services in a `compose-dev.yaml` located in your subdirectory.
 >
 >For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql) or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres). 
 
