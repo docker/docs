@@ -50,6 +50,6 @@ Create and manage your repositories:
 - [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 
-Your Docker Team subscription provides many more additional features. [Learn more](../subscription/index.md).
+Your Docker Team subscription provides many more [additional features](../subscription/index.md).
 
 
