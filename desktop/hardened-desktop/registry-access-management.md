@@ -13,11 +13,12 @@ redirect_from:
 With Registry Access Management, administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
 
 Below are some example registries administrators can allow: 
+ - Docker Hub. This is enabled by default.
  - Amazon ECR
  - GitHub Container Registry
  - Google Container Registry
 
-Administrators can ensure registries are locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on with Enhanced Container Isolation. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
+Administrators can ensure registries are locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
 
 ## Prerequisites 
 
