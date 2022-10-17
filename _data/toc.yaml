@@ -1628,7 +1628,7 @@ manuals:
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
-  - sectiontitle: Docker Verified Publisher Program
+  - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
         title: Overview
@@ -1656,8 +1656,10 @@ manuals:
   section:
   - sectiontitle: Onboarding
     section:
+    - path: /docker-hub/onboard-team/
+      title: Team
     - path: /docker-hub/onboard-business/
-      title: Get started with Business
+      title: Business
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
   - path: /docker-hub/orgs/
