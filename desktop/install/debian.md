@@ -9,7 +9,7 @@ redirect_from:
 
 This page contains information on how to install, launch, and upgrade Docker Desktop on a Debian distribution.
 
-[DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.12.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+[DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.13.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
 *For checksums, see [Release notes](../release-notes.md)*
 
