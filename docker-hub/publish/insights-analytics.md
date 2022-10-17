@@ -72,7 +72,7 @@ represents an image pull.
 | Namespace                     | Docker [organization][3] (image namespace).                                                                  | January 1, 2022  |
 | Reference                     | Image digest or tag used in the request.                                                                     | January 1, 2022  |
 | Repository                    | Docker [repository][4] (image name).                                                                         | January 1, 2022  |
-| Tag (included when available) | Tag name. Only available if the request referred to a tag.                                                   | January 1, 2022  |
+| Tag (included when available) | Tag name that's only available if the request referred to a tag.                                                   | January 1, 2022  |
 | Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`                                                          | January 1, 2022  |
 | Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`       | January 1, 2022  |
 | User agent tool               | The application a user used to pull an image (for example, `docker` or `containerd`).                        | January 1, 2022  |
@@ -113,7 +113,7 @@ Automated systems frequently check for new versions of your images. Being able
 to distinguish between "version checks" in CI versus actual image pulls by a
 user grants you more insight into your users' behavior.
 
-The following table describe the rules applied for determining intent behind
+The following table describes the rules applied for determining intent behind
 pulls. To provide feedback or ask questions about these rules,
 [fill out the Google Form](https://forms.gle/nb7beTUQz9wzXy1b6){:
 target="_blank" rel="noopener" class="_"}.
