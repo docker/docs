@@ -1,9 +1,9 @@
 ---
-title: "Sample application"
+title: "Containerize an application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 redirect_from:
 - /get-started/part2/
-description: overview of our simple application for learning docker
+description: Containerize and run a simple application to learn Docker
 ---
 
 
@@ -111,10 +111,12 @@ If you take a quick look at the Docker Dashboard, you should see your two contai
 
 ![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
 
-## Recap
+## Next steps
 
-In this short section, we learned the very basics about building a container image and created a
-Dockerfile to do so. Once we built an image, we started the container and saw the running app.
+In this short section, you learned the basics about building a container image and created a
+Dockerfile to do so. Once you built an image, you started the container and saw the running app.
 
-Next, we're going to make a modification to our app and learn how to update our running application
-with a new image. Along the way, we'll learn a few other useful commands.
+Next, you're going to make a modification to your app and learn how to update your running application
+with a new image. Along the way, you'll learn a few other useful commands.
+
+[Update the application](03_updating_app.md){: .button .primary-btn}
