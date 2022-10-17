@@ -15,6 +15,31 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.19
+2022-10-14
+
+This release of Docker Engine comes with some bug-fixes, and an updated version
+of Docker Compose.
+
+### Builder
+
+- Fix an issue that could result in a panic during `docker builder prune` or
+  `docker system prune` [moby/moby#44122](https://github.com/moby/moby/pull/44122){:target="_blank" rel="noopener"}.
+
+### Daemon
+
+- Fix a bug where using `docker volume prune` would remove volumes that were
+  still in use if the daemon was running with "live restore" and was restarted
+  [moby/moby#44238](https://github.com/moby/moby/pull/44238){:target="_blank" rel="noopener"}.
+
+### Packaging
+
+- Update Docker Compose to [v2.11.2](https://github.com/docker/compose/releases/tag/v2.11.2){:target="_blank" rel="noopener"}.
+- Update Go runtime to [1.18.7](https://go.dev/doc/devel/release#go1.18.minor){:target="_blank" rel="noopener"},
+  which contains fixes for [CVE-2022-2879](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2879){:target="_blank" rel="noopener"},
+  [CVE-2022-2880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2880){:target="_blank" rel="noopener"},
+  and [CVE-2022-41715](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41715){:target="_blank" rel="noopener"}.
+
 ## 20.10.18
 2022-09-09
 
