@@ -96,7 +96,9 @@ GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
 
-Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
+Docker Hub also provides HTTP APIs and an experimental CLI, see [Docker Hub APIs](./api/index.md).
+
+## Getting started
 
 The following section contains step-by-step instructions on how to easily get started with Docker Hub.
 

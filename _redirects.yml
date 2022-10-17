@@ -547,3 +547,57 @@
 "https://hub.docker.com/_/zookeeper/":
   - /samples/zookeeper
   - /samples/library/zookeeper
+
+# Registry
+"https://github.com/distribution/distribution/blob/main/docs/index.md":
+  - /registry
+"https://github.com/distribution/distribution/tree/main/docs/compatibility.md":
+  - /registry/compatibility
+"https://github.com/distribution/distribution/tree/main/docs/deploying.md":
+  - /registry/deploying
+"https://github.com/distribution/distribution/tree/main/docs/deprecated.md":
+  - /registry/deprecated
+"https://github.com/distribution/distribution/tree/main/docs/garbage-collection.md":
+  - /registry/garbage-collection
+"https://github.com/distribution/distribution/tree/main/docs/help.md":
+  - /registry/help
+"https://github.com/distribution/distribution/tree/main/docs/insecure.md":
+  - /registry/insecure
+"https://github.com/distribution/distribution/tree/main/docs/introduction.md":
+  - /registry/introduction
+"https://github.com/distribution/distribution/tree/main/docs/notifications.md":
+  - /registry/notifications
+"https://github.com/distribution/distribution/tree/main/docs/recipes/index.md":
+  - /registry/recipes
+"https://github.com/distribution/distribution/tree/main/docs/recipes/apache.md":
+  - /registry/recipes/apache
+"https://github.com/distribution/distribution/tree/main/docs/recipes/mirror.md":
+  - /registry/recipes/mirror
+"https://github.com/distribution/distribution/tree/main/docs/recipes/nginx.md":
+  - /registry/recipes/nginx
+"https://github.com/distribution/distribution/tree/main/docs/recipes/osx-setup-guide.md":
+  - /registry/recipes/osx-setup-guide
+"https://github.com/distribution/distribution/tree/main/docs/spec/index.md":
+  - /registry/spec
+"https://github.com/distribution/distribution/tree/main/docs/spec/implementations.md":
+  - /registry/spec/implementations
+"https://github.com/distribution/distribution/tree/main/docs/spec/json.md":
+  - /registry/spec/json
+"https://github.com/distribution/distribution/tree/main/docs/spec/menu.md":
+  - /registry/spec/menu
+"https://github.com/distribution/distribution/tree/main/docs/storage-drivers/index.md":
+  - /registry/storage-drivers
+"https://github.com/distribution/distribution/tree/main/docs/storage-drivers/azure.md":
+  - /registry/storage-drivers/azure
+"https://github.com/distribution/distribution/tree/main/docs/storage-drivers/filesystem.md":
+  - /registry/storage-drivers/filesystem
+"https://github.com/distribution/distribution/tree/main/docs/storage-drivers/gcs.md":
+  - /registry/storage-drivers/gcs
+"https://github.com/distribution/distribution/tree/main/docs/storage-drivers/inmemory.md":
+  - /registry/storage-drivers/inmemory
+"https://github.com/distribution/distribution/tree/main/docs/storage-drivers/oss.md":
+  - /registry/storage-drivers/oss
+"https://github.com/distribution/distribution/tree/main/docs/storage-drivers/s3.md":
+  - /registry/storage-drivers/s3
+"https://github.com/distribution/distribution/tree/main/docs/swift.md":
+  - /registry/storage-drivers/swift

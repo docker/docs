@@ -49,9 +49,9 @@ compose_version: "v2.12.2"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
-distribution_version: "2.7"
 compose_switch_version: "1.0.4"
 buildkit_version: "0.10.5"
+oci_distribution_spec_version: "1.0.1"
 
 # Options for displaying minimum API version requirements in the reference pages.
 #
@@ -200,18 +200,6 @@ fetch-remote:
           - "docs/manuals/cache"
           - "docs/manuals/exporters"
 
-  - repo: "https://github.com/distribution/distribution"
-    default_branch: "main"
-    ref: "main"
-    paths:
-      - dest: "registry/spec"
-        src:
-          - "docs/spec/**"
-          - "!docs/spec/api.md.tmpl"
-      - dest: "registry"
-        src:
-          - "docs/configuration.md"
-
   - repo: "https://github.com/moby/buildkit"
     default_branch: "master"
     ref: "master"
@@ -222,3 +210,15 @@ fetch-remote:
       - dest: "build/buildkit/toml-configuration.md"
         src:
           - "docs/buildkitd.toml.md"
+
+  - repo: "https://github.com/distribution/distribution"
+    default_branch: "master"
+    ref: "main"
+    paths:
+      - dest: "registry/spec"
+        src:
+          - "docs/spec/auth"
+          - "docs/spec/deprecated-schema-v1.md"
+          - "docs/spec/images"
+          - "docs/spec/manifest-v2-1.md"
+          - "docs/spec/manifest-v2-2.md"

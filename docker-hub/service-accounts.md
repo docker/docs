@@ -51,5 +51,5 @@ official images and other public images, you do not have to grant any access per
 
 Refer to the following topics for additional information:
 
-- [Mirroring Docker Hub](../registry/recipes/mirror.md)
+- [Mirroring Docker Hub](https://github.com/distribution/distribution/blob/main/docs/recipes/mirror.md){:target="_blank" rel="noopener" class="_"}
 - [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){:target="_blank" rel="noopener" class="_"}
