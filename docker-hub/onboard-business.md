@@ -1,7 +1,7 @@
 ---
-description: Get started onboarding with Docker Business
+description: Docker Business onboarding
 keywords: business, organizations, get started, onboarding
-title: Get started onboarding with Docker Business
+title: Docker Business onboarding
 toc_min: 1
 toc_max: 2
 ---
@@ -65,10 +65,11 @@ organization’s settings apply to the user’s session, you can use a `registry
 
 ## What's next
 
-Get the most out of your Docker Business subscription by leveraging these popular features:
+Create and manage your registries and repositories:
 
 - If you haven't configured [System for Cross-domain Identity Management](../docker-hub/scim.md/) yet, configure it now for centralized account management.
 - Create [repositories](../docker-hub/repos/index.md) to share container images.
+- [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
 - Control which registries your members can access with [Registry Access Management](../docker-hub/registry-access-management.md/).
