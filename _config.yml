@@ -178,7 +178,7 @@ fetch-remote:
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
-    ref: "release/2.7"
+    ref: "main"
     paths:
       - dest: "registry/spec"
         src:
