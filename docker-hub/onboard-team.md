@@ -12,7 +12,7 @@ The following section contains step-by-step instructions on how to get started o
 
 Before you start to on board your organization, ensure that you've completed the following:
 - You have a Docker Team subscription. [Buy now](https://www.docker.com/pricing/) if you haven't subscribed to Docker Team yet.
--  You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
+- You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
 
 
 ## Step 1: Identify your Docker users and their Docker accounts
