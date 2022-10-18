@@ -100,7 +100,7 @@ This means that the root user in the container (0) is in fact the root user in t
 
 With Enhanced Container Isolation, if a process were to escape the container, it would find itself without privileges at the VM level. For further details, see [How Enhanced Container Isolation works](how-eci-works.md).
 
-Since, Enhanced Container Isolation [uses the Sysbox container runtime](how-eci-works.md) embedded in the Docker Desktop Linux VM, another way to determine if a container is running with Enhanced Container Isolation is by using `docker inspect`:
+Since Enhanced Container Isolation [uses the Sysbox container runtime](how-eci-works.md) embedded in the Docker Desktop Linux VM, another way to determine if a container is running with Enhanced Container Isolation is by using `docker inspect`:
 
 ```
 docker inspect --format='{{.HostConfig.Runtime}}' my_container
