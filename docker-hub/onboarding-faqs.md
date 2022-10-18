@@ -70,7 +70,7 @@ No. Organization owners can invite users through email and also choose a team fo
 
 ### Can I force my organization's members to authenticate before using Docker Desktop and are there any benefits?
 
-Yes. You can [enforce sign in](../docker-hub/configure-sign-in.md) and some benefits are:
+Yes. You can [enforce sign-in](../docker-hub/configure-sign-in.md) and some benefits are:
 
 - Administrators can enforce features like [Image Access Management](../docker-hub/image-access-management.md) and [Registry Access Management](../docker-hub/registry-access-management.md).
  - Administrators can ensure compliance by blocking Docker Desktop usage for users who do not sign in as members of the organization.

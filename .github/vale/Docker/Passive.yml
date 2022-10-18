@@ -1,0 +1,9 @@
+extends: existence
+message: "'%s' looks like passive voice."
+link: https://docs.docker.com/contribute/checklist/
+ignorecase: true
+level: suggestion
+raw:
+  - \b(am|are|were|being|is|been|was|be)\b\s*
+tokens:
+  - '[\w]+ed'

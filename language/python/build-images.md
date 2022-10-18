@@ -79,7 +79,7 @@ Docker images can be inherited from other images. Therefore, instead of creating
 
 > **Note**
 >
-> To learn more about creating your own base images, see [Creating base images](https://docs.docker.com/develop/develop-images/baseimages/).
+> To learn more about creating your own base images, see [Creating base images](../../develop/develop-images/baseimages.md).
 
 To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.
 
@@ -181,10 +181,9 @@ To list images, simply run the `docker images` command.
 $ docker images
 REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
-python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 ```
 
-You should see at least two images listed. One for the base image `3.8-slim-buster` and the other for the image we just built `python-docker:latest`.
+You should see at least one image listed, the image we just built `python-docker:latest`.
 
 ## Tag images
 
@@ -238,4 +237,4 @@ In this module, we took a look at setting up our example Python application that
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

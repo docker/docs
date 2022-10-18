@@ -1,31 +1,31 @@
 command: docker buildx imagetools
 short: Commands to work on images in registry
 long: |-
-  Imagetools contains commands for working with manifest lists in the registry.
-  These commands are useful for inspecting multi-platform build results.
+    Imagetools contains commands for working with manifest lists in the registry.
+    These commands are useful for inspecting multi-platform build results.
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:
-- docker buildx imagetools create
-- docker buildx imagetools inspect
+    - docker buildx imagetools create
+    - docker buildx imagetools inspect
 clink:
-- docker_buildx_imagetools_create.yaml
-- docker_buildx_imagetools_inspect.yaml
+    - docker_buildx_imagetools_create.yaml
+    - docker_buildx_imagetools_inspect.yaml
 inherited_options:
-- option: builder
-  value_type: string
-  description: Override the configured builder instance
-  details_url: '#builder'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      details_url: '#builder'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
-  ### Override the configured builder instance (--builder) {#builder}
+    ### Override the configured builder instance (--builder) {#builder}
 
-  Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](buildx.md#builder).
 deprecated: false
 experimental: false
 experimentalcli: false

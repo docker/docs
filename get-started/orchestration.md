@@ -329,5 +329,5 @@ Further documentation for all CLI commands used in this article are available he
 - [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
 - [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)
 - [`kubectl delete`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#delete)
-- [`docker swarm init`](https://docs.docker.com/engine/reference/commandline/swarm_init/)
-- [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)
+- [`docker swarm init`](/engine/reference/commandline/swarm_init/)
+- [`docker service *`](/engine/reference/commandline/service/)

@@ -31,10 +31,6 @@ When an organization uses SSO, MFA is determined on the IdP level, not on the Do
 
 Yes, all users in your organization must upgrade to Docker Desktop version 4.4.0 or higher. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO if the company domain email is used to log in or as the primary email associated with an existing Docker account Your users with existing accounts cannot sign in with their username and password.
 
-### Q: Is there a way to test this functionality in a test tenant with Okta before going to production?
-
-You can create a test organization. Companies can set up a new five-seat Business Plan on a new organization to test with (making sure you enable SSO only, if you enforce it, all domain email users will be forced to sign in to that test tenant).
-
 ## SAML SSO
 
 ### Q: Does SAML authentication require additional attributes?

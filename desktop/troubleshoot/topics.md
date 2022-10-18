@@ -71,7 +71,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](../inst
 #### Permissions errors on data directories for shared volumes
 
 When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](../settings/windows.md#file-sharing)
-to a default value of [0777](http://permissions-calculator.org/decode/0777/)
+to a default value of [0777](https://chmodcommand.com/chmod-0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 
 The default permissions on shared volumes are not configurable. If you are

@@ -77,9 +77,16 @@ In addition, you'll also learn about the best practices for building images, inc
 
 If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).
 
-We also recommend the video walkthrough from DockerCon 2020.
+We also recommend the video workshop from DockerCon 2022. Watch the video below or use the links to open the video at a particular section.
 
-<iframe src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+* [Docker overview and installation](https://youtu.be/gAGEar5HQoU)
+* [Pull, run, and explore containers](https://youtu.be/gAGEar5HQoU?t=1400)
+* [Build a container image](https://youtu.be/gAGEar5HQoU?t=3185)
+* [Containerize an app](https://youtu.be/gAGEar5HQoU?t=4683)
+* [Connect a DB and set up a bind mount](https://youtu.be/gAGEar5HQoU?t=6305)
+* [Deploy a container to the cloud](https://youtu.be/gAGEar5HQoU?t=8280)
+
+<iframe src="https://www.youtube-nocookie.com/embed/gAGEar5HQoU" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Download and install Docker
 
@@ -127,7 +134,7 @@ It gives you quick access to container logs, lets you get a shell inside the con
 easily manage container lifecycles (stop, remove, etc.).
 
 To access the dashboard, follow the instructions in the
-[Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
+[Docker Desktop manual](../desktop/index.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 
@@ -159,7 +166,7 @@ capabilities approachable and easy to use. To summarize, a container:
 
 When running a container, it uses an isolated filesystem. This custom filesystem is provided
 by a **container image**. Since the image contains the container's filesystem, it must contain everything
-needed to run an application - all dependencies, configuration, scripts, binaries, etc. The
+needed to run an application - all dependencies, configurations, scripts, binaries, etc. The
 image also contains other configuration for the container, such as environment variables,
 a default command to run, and other metadata.
 

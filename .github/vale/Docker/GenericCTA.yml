@@ -1,0 +1,10 @@
+extends: existence
+message: "Avoid generic calls to action: '%s'"
+link: https://docs.docker.com/contribute/style/formatting/#links
+level: warning
+scope: link
+ignorecase: true
+tokens:
+  - click here
+  - find out more
+  - learn more

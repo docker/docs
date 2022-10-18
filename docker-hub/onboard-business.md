@@ -1,7 +1,7 @@
 ---
-description: Get started onboarding with Docker Business
+description: Docker Business onboarding
 keywords: business, organizations, get started, onboarding
-title: Get started onboarding with Docker Business
+title: Docker Business onboarding
 toc_min: 1
 toc_max: 2
 reviewed: 2022-08-01
@@ -59,17 +59,18 @@ Now that you have a Docker Business organization, it's time to start adding memb
       > Before you invite members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.
 
 
-## Step 4: Enforce sign in for Docker Desktop
+## Step 4: Enforce sign-in for Docker Desktop
 
 By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the
-organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
+organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
 
 ## What's next
 
-Get the most out of your Docker Business subscription by leveraging these popular features:
+Create and manage your registries and repositories:
 
 - If you haven't configured [System for Cross-domain Identity Management](../docker-hub/scim.md/) yet, configure it now for centralized account management.
-- Create [repositories](../docker-hub/repos.md) to share container images.
+- Create [repositories](../docker-hub/repos/index.md) to share container images.
+- [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
 - Control which registries your members can access with [Registry Access Management](../docker-hub/registry-access-management.md/).

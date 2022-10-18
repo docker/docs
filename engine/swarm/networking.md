@@ -391,8 +391,8 @@ the `--data-path-addr` flag when initializing or joining the swarm. If there are
 multiple interfaces, `--advertise-addr` must be specified explicitly, and
 `--data-path-addr` defaults to `--advertise-addr` if not specified. Traffic about
 joining, leaving, and managing the swarm is sent over the
-`--advertise-addr` interface, and traffic among a service's containers is sent
-sent over the `--data-path-addr` interface. These flags can take an IP address or
+`--advertise-addr` interface, and traffic among a service's containers is sent 
+over the `--data-path-addr` interface. These flags can take an IP address or
 a network device name, such as `eth0`.
 
 This example initializes a swarm with a separate `--data-path-addr`. It assumes

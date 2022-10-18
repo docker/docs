@@ -38,7 +38,7 @@ If you have a paid Docker subscription, you can get support for the following ty
    * Desktop installation issues
       * Installation crashes
       * Failure to launch Docker Desktop on first run
-   * Desktop upgrade issues
+   * Desktop update issues
    * Login issues in both the command line interface and Docker Hub user interface
    * Push or pull issues, including rate limiting
    * Usage issues
@@ -73,7 +73,9 @@ Docker excludes support for the following types of issues:
 
 ## What Docker Desktop versions are supported?
 
-We currently only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to upgrade before we investigate your support request.
+For Docker Business customers, we offer support for versions up to six months older than the latest version, although any fixes will be on the latest version.
+
+For Pro and Team customers, we only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to update before we investigate your support request.
 
 ## How many machines can I get support for Docker Desktop on?
 

@@ -44,7 +44,7 @@ Desktop. For more information, see [Docker Desktop fails to start when anti-viru
 Docker Desktop does not enable you to control (`chmod`)
 the Unix-style permissions on [shared volumes](../settings/windows.md#file-sharing) for
 deployed containers, but rather sets permissions to a default value of
-[0777](http://permissions-calculator.org/decode/0777/){: target="_blank" rel="noopener" class="_"}
+[0777](https://chmodcommand.com/chmod-0777/){: target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for
 `group`) which is not configurable.
 

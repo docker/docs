@@ -379,7 +379,7 @@ overlay.
 
 - **The file does not exist in the container layer**: If a container opens a
   file for read access and the file does not already exist in the container
-  (`upperdir`) it is read from the image (`lowerdir)`. This incurs very little
+  (`upperdir`) it is read from the image (`lowerdir`). This incurs very little
   performance overhead.
 
 - **The file only exists in the container layer**: If a container opens a file

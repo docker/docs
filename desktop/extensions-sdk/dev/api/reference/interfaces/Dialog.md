@@ -8,6 +8,8 @@ skip_read_time: true
 
 Allows opening native dialog boxes.
 
+**`since`** 0.2.3
+
 ## Methods
 
 ### showOpenDialog

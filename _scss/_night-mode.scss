@@ -17,8 +17,9 @@ body.night {
     }
 
     .rating-nero-value,
-    .reading-time, 
-    .reviewed-time {
+    .reading-time,
+    .release-date,
+    .reviewed-date {
         color: $body-text-night !important;
     }
 
@@ -179,6 +180,11 @@ body.night {
     /* apply to images with garbled text */
     img.white-bg {
         background-color: white;
+    }
+    
+    /* apply to images that support being inverted */
+    img.invertible {
+      filter: invert(100%) hue-rotate(180deg);
     }
 
     /* accordion */

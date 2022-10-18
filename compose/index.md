@@ -1,12 +1,13 @@
 ---
 description: Introduction and Overview of Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
-title: Overview of Docker Compose
+title: Overview
 redirect_from:
  - /compose/cli-command/
  - /compose/networking/swarm/
  - /compose/overview/
  - /compose/swarm/
+ - /compose/completion/
 ---
 
 >**Looking for Compose file reference?** [Find the latest version here](compose-file/index.md).
@@ -43,7 +44,7 @@ services:
     volumes:
       - .:/code
       - logvolume01:/var/log
-    links:
+    depends_on:
       - redis
   redis:
     image: redis

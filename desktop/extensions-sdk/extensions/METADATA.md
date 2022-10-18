@@ -98,7 +98,7 @@ services:
 
 ### Use the docker socket from your extension backend
 
-Docker extensions can invoke Docker commands directly from the frontend with the SDK. In some cases, it is useful to also interact with the Docker engine from the backend. Extension backend containers can mount the Docker socket and use it to interact with the Docker engine from the extension backend logic. (Learn more about the [Docker engine socket](https://docs.docker.com/engine/reference/commandline/dockerd/#examples))
+Docker extensions can invoke Docker commands directly from the frontend with the SDK. In some cases, it is useful to also interact with the Docker engine from the backend. Extension backend containers can mount the Docker socket and use it to interact with the Docker engine from the extension backend logic. (Learn more about the [Docker engine socket](/engine/reference/commandline/dockerd/#examples))
 
 However, when mounting the docker socket from an extension container that lives in the Desktop virtual machine, you want to mount the Docker socket from inside the VM, and not mount `/var/run/docker.sock` from the host filsystem (using the Docker socket from the host can lead to permission issues in containers).
 In order to do so, you can use `/var/run/docker.sock.raw`. Docker Desktop mounts the socket that lives in the Desktop VM, and not from the host.

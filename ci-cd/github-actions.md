@@ -70,16 +70,20 @@ name: ci
 {% endraw %}
 
 Then, we will choose when we run this workflow. In our example, we are going to
-do it for every push against the main branch of our project:
+do it for every push against the master branch of our project:
 
 {% raw %}
 ```yaml
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
 ```
 {% endraw %}
+
+> **Note**
+>
+> The branch name may be `main` or `master`. Verify the name of the branch for your repository and update the configuration accordingly.
 
 Now, we need to specify what we actually want to happen within our workflow
 (what jobs), we are going to add our build one and select that it runs on the
@@ -105,19 +109,19 @@ BuildKit container under the hood.
     steps:
       -
         name: Checkout 
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       -
         name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./Dockerfile
@@ -146,13 +150,13 @@ step:
 ```yaml
       -
         name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./
           file: ./Dockerfile
@@ -191,7 +195,7 @@ tags and pull requests:
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
     tags:
       - 'v*'
 ```
@@ -221,12 +225,12 @@ First we have to handle pull request events:
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
     tags:
       - 'v*'
   pull_request:
     branches:
-      - 'main'
+      - 'master'
 ```
 {% endraw %}
 
@@ -239,7 +243,7 @@ Now let's change the Docker Hub login with the GitHub Container Registry one:
 {% raw %}
 ```yaml
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
