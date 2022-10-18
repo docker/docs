@@ -24,6 +24,8 @@ To find out how to ship the `kubectl` command line tool for multiple platforms a
 
 ## Examples
 
+The code snippets below have been put together in the [Kubernetes Sample Extension](https://github.com/docker/extensions-sdk/tree/main/samples/kubernetes-sample-extension). It shows how to interact with a Kubernetes cluster by shipping the `kubectl` commandline tool.
+
 ### Check the Kubernetes API server is reachable
 
 Once the `kubectl` commandline tool is added to the extension image in the `Dockerfile`, and defined in the `metadata.json`, the Extensions framework deploys `kubectl` to the users' host when the extension is installed.
@@ -72,7 +74,7 @@ Below there are different ways to persist and read the kubeconfig file from the 
 > Warning
 >
 > The `kubeconfig` file is very sensitive and if found can give an attacker administrative access to the Kubernetes Cluster.
-{: .warning}
+> {: .warning}
 
 ### Extension's backend container
 
