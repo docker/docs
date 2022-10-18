@@ -17,10 +17,13 @@ info:
     - Repository-level, a summary of every namespace and repository
     - Tag- or digest-level, a summary of every namespace, repository, and reference
       (tag or digest)
-       - Unique IP address count
-       - Pulls by tag count
-       - Pulls by digest count
-       - Version check count
+
+     The summary data formats contain the following data points:
+
+    - Unique IP address count
+    - Pulls by tag count
+    - Pulls by digest count
+    - Version check count
 
      #### Raw data
 
