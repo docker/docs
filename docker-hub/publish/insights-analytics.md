@@ -72,32 +72,35 @@ represents an image pull.
 | Namespace                     | Docker [organization][3] (image namespace).                                                                  | January 1, 2022  |
 | Reference                     | Image digest or tag used in the request.                                                                     | January 1, 2022  |
 | Repository                    | Docker [repository][4] (image name).                                                                         | January 1, 2022  |
-| Tag (included when available) | Tag name that's only available if the request referred to a tag.                                                   | January 1, 2022  |
+| Tag (included when available) | Tag name that's only available if the request referred to a tag.                                             | January 1, 2022  |
 | Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`                                                          | January 1, 2022  |
 | Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`       | January 1, 2022  |
 | User agent tool               | The application a user used to pull an image (for example, `docker` or `containerd`).                        | January 1, 2022  |
 | User agent version            | The version of the application used to pull an image.                                                        | January 1, 2022  |
-| Domain                        | Request origin domain, see [Privacy][5].                                                                     | October 11, 2022 |
+| Domain                        | Request origin domain, see [Privacy](#privacy).                                                              | October 11, 2022 |
 
 [1]: #action-classification-rules
 [2]: /registry/spec/api/
 [3]: /docker-hub/orgs/
 [4]: /docker-hub/repos/
-[5]: #privacy
 
 ### Summary data
 
-The summary data format contains the following data points for each namespace,
-repository, and reference (tag or digest), for the selected time span.
+There are two levels of summary data available:
 
-| Data point        | Value   | Description                                       | Available from  |
-| ----------------- | ------- | ------------------------------------------------- | --------------- |
-| Unique IP address | String  | Number of unique IP addresses, see [Privacy][3].  | January 1, 2022 |
-| Pull by tag       | Integer | GET request, by digest or by tag.                 | January 1, 2022 |
-| Pull by digest    | Integer | GET or HEAD request by digest, or HEAD by digest. | January 1, 2022 |
-| Version check     | Integer | HEAD by tag, not followed by a GET                | January 1, 2022 |
+- Repository-level, a summary of every namespace and repository
+- Tag- or digest-level, a summary of every namespace, repository, and reference
+  (tag or digest)
 
-[3]: #privacy
+The summary data formats contain the following data points for the selected time
+span:
+
+| Data point        | Value   | Description                                             | Available from  |
+| ----------------- | ------- | ------------------------------------------------------- | --------------- |
+| Unique IP address | String  | Number of unique IP addresses, see [Privacy](#privacy). | January 1, 2022 |
+| Pull by tag       | Integer | GET request, by digest or by tag.                       | January 1, 2022 |
+| Pull by digest    | Integer | GET or HEAD request by digest, or HEAD by digest.       | January 1, 2022 |
+| Version check     | Integer | HEAD by tag, not followed by a GET                      | January 1, 2022 |
 
 ### Action classification rules
 

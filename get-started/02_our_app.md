@@ -40,7 +40,7 @@ Dockerfile is simply a text-based script of instructions that is used to
 create a container image. If you've created Dockerfiles before, you might
 see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
 
-1. Create a file named `Dockerfile` in the same folder as the file `package.json` with the following contents.
+1. In the `app` folder, the same location as the `package.json` file, create a file named `Dockerfile` with the following contents.
 
    ```dockerfile
    # syntax=docker/dockerfile:1
@@ -55,7 +55,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
 
    Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
 
-2. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
+2. Open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
 
    ```console
    $ docker build -t getting-started .

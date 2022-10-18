@@ -50,7 +50,7 @@ $ curl localhost:8000
 Hello, Docker!
 ```
 
-Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the GET request logged to the console.
+Success! We were able to connect to the application running inside of our container on port 8000. Switch back to the terminal where your container is running and you should see the `GET` request logged to the console.
 
 ```shell
 [31/Jan/2021 23:39:31] "GET / HTTP/1.1" 200 -
@@ -78,7 +78,7 @@ Hello, Docker!
 
 ## List containers
 
-Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, we can run the `docker ps` command. Just like on Linux to see a list of processes on your machine, we would run the `ps` command. In the same spirit, we can run the `docker ps` command which displays a list of containers running on our machine.
+Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, to see a list of containers running on our machine, run `docker ps`. This is similar to how the ps command is used to see a list of processes on a Linux machine.
 
 ```console
 $ docker ps
@@ -86,7 +86,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ce02b3179f0f        python-docker         "python3 -m flask ru…"   6 minutes ago       Up 6 minutes        0.0.0.0:8000->5000/tcp   wonderful_kalam
 ```
 
-The `docker ps` command provides a bunch of information about our running containers. We can see the container ID, The image running inside the container, the command that was used to start the container, when it was created, the status, ports that exposed and the name of the container.
+The `docker ps` command provides a bunch of information about our running containers. We can see the container ID, the image running inside the container, the command that was used to start the container, when it was created, the status, ports that were exposed, and the name of the container.
 
 You are probably wondering where the name of our container is coming from. Since we didn’t provide a name for the container when we started it, Docker generated a random name. We’ll fix this in a minute, but first we need to stop the container. To stop the container, run the `docker stop` command which does just that, stops the container. You need to pass the name of the container or you can use the container ID.
 
@@ -145,10 +145,10 @@ Now that all of our containers are stopped, let’s remove them. When you remove
 
 ```console
 $ docker ps --all
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS                    NAMES
-ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Up 8 seconds                0.0.0.0:8000->5000/tcp   wonderful_kalam
-ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                            agitated_moser
-fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                            goofy_khayyam
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+ce02b3179f0f        python-docker         "python3 -m flask ru…"   19 minutes ago      Exited (0) 5 seconds ago                        wonderful_kalam
+ec45285c456d        python-docker         "python3 -m flask ru…"   31 minutes ago      Exited (0) 23 minutes ago                       agitated_moser
+fb7a41809e5d        python-docker         "python3 -m flask ru…"   40 minutes ago      Exited (0) 39 minutes ago                       goofy_khayyam
 ```
 
 To remove a container, run the `docker rm` command with the container name. You can pass multiple container names to the command using a single command. Again, replace the container names in the following command with the container names from your system.
@@ -178,7 +178,7 @@ That’s better! We can now easily identify our container based on the name.
 
 ## Next steps
 
-In this module, we took a look at running containers, publishing ports, and running containers in detached mode. We also took a look at managing containers by starting, stopping, and, restarting them. We also looked at naming our containers so they are more easily identifiable. In the next module, we’ll learn how to run a database in a container and connect it to our application. See:
+In this module, we took a look at running containers, publishing ports, and running containers in detached mode. We also took a look at managing containers by starting, stopping, and restarting them. We also looked at naming our containers so they are more easily identifiable. In the next module, we’ll learn how to run a database in a container and connect it to our application. See:
 
 [How to develop your application](develop.md){: .button .primary-btn}
 
