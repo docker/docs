@@ -97,7 +97,7 @@ The output shows the `<CONTAINER-PORT>` (labeled `TargetPort`) from the containe
 
 By default, when you publish a port, it is a TCP port. You can
 specifically publish a UDP port instead of or in addition to a TCP port. When
-you publish both TCP and UDP ports, If you omit the protocol specifier,
+you publish both TCP and UDP ports, if you omit the protocol specifier,
 the port is published as a TCP port. If you use the longer syntax (recommended),
 set the `protocol` key to either `tcp` or `udp`.
 

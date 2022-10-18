@@ -8,15 +8,11 @@ redirect_from:
 - /installation/
 ---
 
-> **Update to the Docker Desktop terms**
+> **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn
-> more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
-{: .important}
+> employees OR more than $10 million USD in annual revenue) and in government entities requires a paid
+> subscription.
 
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so you
@@ -34,28 +30,28 @@ section and choose the best installation path for you.
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="/desktop/mac/install/"><img src="/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
+                    <a href="/desktop/install/mac-install/"><img src="/assets/images/apple_48.svg" alt="Docker Desktop for Mac" width="70" height="70"></a>
                 </div>
-                <h2 id="docker-for-mac"><a href="/desktop/mac/install/">Docker Desktop for Mac</a></h2>
+                <h2 id="docker-for-mac"><a href="/desktop/install/mac-install/">Docker Desktop for Mac</a></h2>
                 <p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="/desktop/windows/install/"><img src="/images/windows_48.svg" alt="Docker Desktop for Windows" width="70" height="70"></a>
+                    <a href="/desktop/install/windows-install/"><img src="/assets/images/windows_48.svg" alt="Docker Desktop for Windows" width="70" height="70"></a>
                 </div>
-                <h2 id="docker-for-windows/install/"><a href="/desktop/windows/install/">Docker Desktop for Windows</a></h2>
+                <h2 id="docker-for-windows/install/"><a href="/desktop/install/windows-install/">Docker Desktop for Windows</a></h2>
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="/engine/install/"><img src="/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
+                    <a href="/desktop/install/linux-install/"><img src="/assets/images/linux_48.svg" alt="Docker for Linux" width="70" height="70"></a>
                 </div>
-                <h2 id="docker-for-linux"><a href="/engine/install/">Docker for Linux</a></h2>
-                <p>Install Docker on a computer which already has a Linux distribution installed.</p>
+                <h2 id="docker-for-linux"><a href="/desktop/install/linux-install/">Docker Desktop for Linux</a></h2>
+                <p>A native Linux application which delivers all Docker tools to your Linux computer.</p>
             </div>
         </div>
     </div>

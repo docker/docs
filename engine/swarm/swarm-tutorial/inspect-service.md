@@ -86,7 +86,7 @@ the Docker CLI to see details about the service running in the swarm.
     ]
     ```
 
-4.  Run `docker service ps <SERVICE-ID>` to see which nodes are running the
+3.  Run `docker service ps <SERVICE-ID>` to see which nodes are running the
     service:
 
     ```console

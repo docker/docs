@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_kill
 title: docker compose kill
+redirect_from:
+- /compose/reference/kill/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

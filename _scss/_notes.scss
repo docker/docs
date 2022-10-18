@@ -32,14 +32,21 @@ The available classes are:
     font-weight: 700;
     margin-top:  0;
 
+    // https://fontawesome.com/docs/web/setup/upgrade/pseudo-elements
     &::before {
-      font-family: FontAwesome;
-      content:     "#{$icon} \00a0";
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font: var(--fa-font-solid);
+      content: "#{$icon} \00a0";
     }
   }
 
   > p:only-child, > p:not(:first-child) {
     color: $body-text-color;
+  }
+
+  a {
+    text-decoration: underline;
   }
 }
 
@@ -49,39 +56,48 @@ blockquote {
   body.night & {
     // DARK THEME
 
-    &:not(.important):not(.warning):not(.restricted) {
+    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
       @include notification(
-        $bg-color: change-color($marine-10, $alpha: 0.2),
-        $header-color: $marine-10,
-        $body-text-color: $marine-10,
+        $bg-color: $dark-palette-blue-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
         $icon: "\f06a"
       );
     }
 
     &.important {
       @include notification(
-        $bg-color: change-color($orange-60, $alpha: 0.4),
-        $header-color: $orange-20,
-        $body-text-color: $orange-20,
+        $bg-color: $dark-palette-amber-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
         $icon: "\f06a"
       );
     }
 
     &.warning {
       @include notification(
-        $bg-color: change-color($red-60, $alpha: 0.3),
-        $header-color: $red-10,
-        $body-text-color: $red-10,
+        $bg-color: $dark-palette-red-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
         $icon: "\f06a"
       );
     }
 
     &.restricted {
       @include notification(
-        $bg-color: change-color($purple-60, $alpha: 0.44),
-        $header-color: $purple-10,
-        $body-text-color: $purple-10,
+        $bg-color: $dark-palette-violet-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
         $icon: "\f135"
+      );
+    }
+
+    &.experimental {
+      @include notification(
+        $bg-color: $dark-palette-blue-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f492"
       );
     }
   }
@@ -89,10 +105,10 @@ blockquote {
   body:not(.night) & {
     // LIGHT THEME
 
-    &:not(.important):not(.warning):not(.restricted) {
+    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
       @include notification(
-        $bg-color: #E8F4FD, // Hardcoding this variable temporary till we migrate to the new color pallette
-        $header-color: $blue-80,
+        $bg-color: $light-palette-blue-100,
+        $header-color: $light-palette-blue-500,
         $body-text-color: inherit,
         $icon: "\f05a"
       );
@@ -100,8 +116,8 @@ blockquote {
 
     &.important {
       @include notification(
-        $bg-color: $orange-10,
-        $header-color: $orange-100,
+        $bg-color: $light-palette-amber-100,
+        $header-color: $light-palette-amber-500,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -109,8 +125,8 @@ blockquote {
 
     &.warning {
       @include notification(
-        $bg-color: #FEEFEF, // Hardcoding this variable temporary till we migrate to the new color pallette
-        $header-color: $red-50,
+        $bg-color: $light-palette-red-100,
+        $header-color: $light-palette-red-500,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -118,10 +134,19 @@ blockquote {
 
     &.restricted {
       @include notification(
-        $bg-color: $purple-10,
-        $header-color: $purple-50,
+        $bg-color: $light-palette-violet-100,
+        $header-color: $light-palette-violet-500,
         $body-text-color: inherit,
         $icon: "\f135"
+      );
+    }
+
+    &.experimental {
+      @include notification(
+        $bg-color: $light-palette-blue-100,
+        $header-color: $light-palette-blue-500,
+        $body-text-color: inherit,
+        $icon: "\f492"
       );
     }
   }

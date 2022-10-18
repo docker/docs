@@ -69,7 +69,7 @@ business needs dictate, in near real time.
 **Running more workloads on the same hardware**
 
 Docker is lightweight and fast. It provides a viable, cost-effective alternative
-to hypervisor-based virtual machines, so you can use more of your compute
+to hypervisor-based virtual machines, so you can use more of your server
 capacity to achieve your business goals. Docker is perfect for high density
 environments and for small and medium deployments where you need to do more with
 fewer resources.
@@ -101,7 +101,7 @@ Docker API. The Docker client can communicate with more than one daemon.
 
 ### Docker Desktop
 
-Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](../desktop/index.md).
+Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](../desktop/index.md).
 
 ### Docker registries
 

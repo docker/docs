@@ -3,7 +3,7 @@ description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
 title: Configure Single Sign-on
 ---
-This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. Docker currently supports SAML 2.0 and Azure AD authentication methods. You can enable SSO on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
+This section is for administrators who want to enable Docker Single Sign-on (SSO) for their businesses. Docker SSO allows users to authenticate using their identity providers (IdPs)  to access Docker. You can enable SSO on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade/){:target="blank" rel="noopener" class=""}.
 
 When SSO is enabled, users are redirected to your provider’s authentication page to log in. They cannot authenticate using their Docker login credentials  (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
 
@@ -17,6 +17,14 @@ To enable SSO in Docker Hub, you need the following information from your identi
 * **Azure AD**: Client ID (a unique identifier for your registered AD application), Client Secret (a string used to gain access to your registered Azure AD application), and AD Domain details
 
 We currently support enabling SSO on a single organization. However, we do not support single logout. If you have any users in your organization with a different domain (including social domains), they will be added to the organization as guests. Guests will continue to authenticate through Docker with their Docker login credentials (Docker ID and password).
+
+
+## Single Sign-on architecture flow
+
+The following diagram shows how Single Sign-on (SSO) operates and is managed in Docker Hub and Docker Desktop. In addition, it provides information on how to authenticate between your IdPs.
+
+[![SSO architecture](images/sso-architecture.png)](images/sso-architecture.png){: target="_blank" rel="noopener" class="_"}
+
 
 ## Prerequisites
 
@@ -88,12 +96,9 @@ The following video walks you through the process of configuring SSO.
 1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator and navigate to **Organizations** and select the organization that you want to enable SSO on.
 2. Click **Settings** and select the **Security** tab.
 3. Select an authentication method for **Azure AD**.
-
-    ![SSO Azure1](images/sso-azure1.png){:width="500px"}
-
 4. In the Identity Provider Set Up, copy the **Redirect URL / Reply URL**.
 
-    ![SSO Azure2](images/sso-azure2.png){:width="500px"}
+    ![SSO Azure AD OIDC](images/sso-azure-oidc.png){:width="500px"}
 
 5. Log in to your IdP to complete the IdP server configuration process. Refer to your IdP documentation for detailed instructions.
 
@@ -108,7 +113,7 @@ The following video walks you through the process of configuring SSO.
 
 7. Proceed to **add your domain** before you test and enforce SSO.
 
-### Domain control
+## Domain control
 
 Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
 
@@ -120,7 +125,7 @@ Click **Add Domain** and specify the corporate domain you’d like to manage wit
 
 ![SSO Domain](images/sso-domain.png){:width="500px"}
 
-### Domain verification
+## Domain verification
 
 To verify ownership of a domain, add a TXT record to your Domain Name System (DNS) settings.
 
@@ -141,6 +146,8 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
     > this time.
 
 4. In the Security section of your Docker organization, click **Verify** next to the domain you want to verify after 72 hours.
+
+Once you've verified your domain, you can move forward to test your configuration and enforce SSO, or you can [Configure your System Cross-domain Identity Management (SCIM)](../docker-hub/scim.md).
 
 ## Test your SSO configuration
 
@@ -170,12 +177,11 @@ Admins can force users to authenticate with Docker Desktop by provisioning a reg
 
 ## Manage users when SSO is enabled
 
-You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP. When users sign in to Docker Hub, they're automatically assigned to the organization using their domain email address.
+You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP.
 
  > **Note**
  >
- > When the first-time user logs in to Docker using their domain email
- > address, they are then added to your organization.
+ > When you enable SSO for your organization, a first-time user can log in to Docker Hub using their company's domain email address. They are then added to your organization and assigned to your company's team.
 
 To add a guest to your organization in Docker Hub if they aren’t verified through your IdP:
 
@@ -189,8 +195,8 @@ To remove a member from an organization:
 
 1. Log in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
 2. Select the organization from the list. The organization page displays a list of members.
-2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
-3. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
+3. Click the **x** next to a member’s name to remove them from all the teams in the organization.
+4. Click **Remove** to confirm. The member will receive an email notification confirming the removal.
 
 > **Note**
 >

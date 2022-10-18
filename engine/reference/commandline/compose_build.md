@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_build
 title: docker compose build
+redirect_from:
+- /compose/reference/build/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

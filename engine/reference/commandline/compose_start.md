@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_start
 title: docker compose start
+redirect_from:
+- /compose/reference/start/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

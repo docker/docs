@@ -29,5 +29,3 @@ You can containerize your own Go application using the examples and resources pr
 Let's get started!
 
 [Build your Go image](build-images.md){: .button .outline-btn}
-
-<br />

@@ -66,7 +66,7 @@ For now, we will create the network first and attach the MySQL container at star
         mysql:5.7
     ```
 
-    If you are using PowerShell then use this command.
+    If you are using Windows then use this command in PowerShell.
 
     ```powershell
     PS> docker run -d `
@@ -213,8 +213,21 @@ With all of that explained, let's start our dev-ready container!
       node:12-alpine \
       sh -c "yarn install && yarn run dev"
     ```
+    If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
+    
+    ```console
+    $ docker run -dp 3000:3000 \
+      -w /app -v "$(pwd):/app" \
+      --network todo-app \
+      -e MYSQL_HOST=mysql \
+      -e MYSQL_USER=root \
+      -e MYSQL_PASSWORD=secret \
+      -e MYSQL_DB=todos \
+      node:12-alpine \
+      sh -c "apk add --no-cache python2 g++ make && yarn install && yarn run dev"
+    ```
 
-    If you are using PowerShell then use this command.
+    If you are using Windows then use this command in PowerShell.
 
     ```powershell
     PS> docker run -dp 3000:3000 `

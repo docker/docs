@@ -14,8 +14,6 @@ The following video walks you through the process of configuring Image Access Ma
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/phFp0iqzwRQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<br>
-
 ### Detailed instructions
 
 To configure Image Access Management permissions, perform the following steps:
@@ -49,14 +47,9 @@ organization. To do this:
 
 Download Docker Desktop 4.0 or a later release.
 
-- [Download and install for Windows](/desktop/windows/install/)
-- [Download and install for Mac](/desktop/mac/install/)
-
-> **Note**
->
-> There is currently no Docker Desktop for Linux. Linux users will have the same
-> restrictions as Mac and Windows users while logged in. However, there is
-> currently no way to enforce Linux users to log in.
+- [Download and install for Windows](/desktop/install/windows-install)
+- [Download and install for Mac](/desktop/install/mac-install/)
+- [Download and install for Linux](/desktop/install/linux-install)
 
 {% include configure-registry-json.md %}
 

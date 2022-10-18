@@ -6,7 +6,9 @@ title: Enabling GPU access with Compose
 
 Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure to install the [prerequisites](../config/containers/resource_constraints.md#gpu) if you have not already done so.
 
-The examples in the following sections focus specifically on providing service containers access to GPU devices with Docker Compose. You can use either `docker-compose` or `docker compose` commands.
+The examples in the following sections focus specifically on providing service containers access to GPU devices with Docker Compose. 
+You can use either `docker-compose` or `docker compose` commands.  
+See also, [Compose command compatibility with docker-compose](cli-command-compatibility.md).
 
 ### Use of service `runtime` property from Compose v2.3 format (legacy)
 
@@ -60,7 +62,7 @@ services:
 Run with Docker Compose:
 
 ```console
-$ docker-compose up
+$ docker compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
 Attaching to gpu_test_1    
@@ -102,7 +104,7 @@ services:
 ```
 
 ```console
-$ docker-compose up
+$ docker compose up
 Creating network "gpu_default" with the default driver
 Creating gpu_test_1 ... done
 Attaching to gpu_test_1
@@ -161,7 +163,7 @@ services:
 ```
 
 ```sh
-$ docker-compose up
+$ docker compose up
 ...
 Created TensorFlow device (/device:GPU:0 with 13970 MB memory -> physical GPU (device: 0, name: Tesla T4, pci bus id: 0000:00:1b.0, compute capability: 7.5)
 ...

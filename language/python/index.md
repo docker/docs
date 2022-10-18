@@ -22,5 +22,3 @@ After completing the Python getting started modules, you should be able to conta
 Let's get started!
 
 [Build your first Python image](build-images.md){: .button .primary-btn}
-
-<br />

@@ -38,7 +38,3 @@ Learn how to set up your Docker environment and start containerizing your applic
         </div>
     </div>
 </div>
-
-To request a guide in other programming languages, create an issue in the [Docker Docs github repository](https://github.com/docker/docker.github.io/issues/new?title=Language-specific%20guides%20request){:target="_blank" rel="noopener" class="_"}.
-
-<br />

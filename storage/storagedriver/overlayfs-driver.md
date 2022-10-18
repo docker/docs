@@ -101,7 +101,7 @@ need to use the legacy `overlay` driver, specify it instead.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that the daemon is using the `overlay2` storage driver.
+6.  Verify that the daemon is using the `overlay2` storage driver.
     Use the `docker info` command and look for `Storage Driver` and
     `Backing filesystem`.
 
@@ -379,7 +379,7 @@ overlay.
 
 - **The file does not exist in the container layer**: If a container opens a
   file for read access and the file does not already exist in the container
-  (`upperdir`) it is read from the image (`lowerdir)`. This incurs very little
+  (`upperdir`) it is read from the image (`lowerdir`). This incurs very little
   performance overhead.
 
 - **The file only exists in the container layer**: If a container opens a file

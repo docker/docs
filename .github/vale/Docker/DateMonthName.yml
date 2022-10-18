@@ -1,0 +1,8 @@
+extends: existence
+message: "When possible, spell out the name of the month."
+link: https://docs.docker.com/contribute/style/grammar/#dates
+ignorecase: true
+level: warning
+nonword: true
+tokens:
+  - '\b\d{1,2}/\d{1,2}/(?:\d{4}|\d{2})\b'

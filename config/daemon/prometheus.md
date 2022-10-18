@@ -19,6 +19,12 @@ container, and monitor your Docker instance using Prometheus.
 Currently, you can only monitor Docker itself. You cannot currently monitor your
 application using the Docker target.
 
+## Prerequisites
+
+1.  One or more Docker engines are joined into a Docker swarm, using `docker
+    swarm init` on one manager and `docker swarm join` on other managers and
+    worker nodes.
+2.  You need an internet connection to pull the Prometheus image.
 
 ## Configure Docker
 
@@ -53,14 +59,6 @@ Docker now exposes Prometheus-compatible metrics on port 9323.
 ## Configure and run Prometheus
 
 Prometheus runs as a Docker service on a Docker swarm.
-
-> **Prerequisites**
->
-> 1.  One or more Docker engines are joined into a Docker swarm, using `docker swarm init`
->     on one manager and `docker swarm join` on other managers and worker nodes.
->
-> 2.  You need an internet connection to pull the Prometheus image.
-
 
 Copy one of the following configuration files and save it to
 `/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This

@@ -97,11 +97,11 @@ This is more secure than the insecure registry solution.
       3.  Click **Finish**. Restart Docker.
 
     - **Docker Desktop for Mac**: Follow the instructions in
-      [Adding custom CA certificates](../desktop/mac/index.md#add-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/faqs/macfaqs.md#add-custom-ca-certificates-server-side){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 
     - **Docker Desktop for Windows**: Follow the instructions in
-      [Adding custom CA certificates](../desktop/windows/index.md#adding-tls-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/faqs/windowsfaqs.md#how-do-i-add-custom-ca-certificates){: target="_blank" rel="noopener" class="_"}.
       Restart Docker.
 
 

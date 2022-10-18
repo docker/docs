@@ -8,14 +8,30 @@ else
 	$(error "Buildx is required: https://github.com/docker/buildx#installing")
 endif
 
-BUILDX_REPO ?= https://github.com/docker/buildx.git
-BUILDX_REF ?= master
+# Build website and output to _site folder
+release:
+	rm -rf _site
+	$(BUILDX_CMD) bake release
 
-# Generate YAML docs from remote bake definition
-# Usage BUILDX_REF=v0.7.0 make buildx-yaml
-buildx-yaml:
-	$(eval $@_TMP_OUT := $(shell mktemp -d -t docs-output.XXXXXXXXXX))
-	DOCS_FORMATS=yaml $(BUILDX_CMD) bake --set "*.output=$($@_TMP_OUT)" "$(BUILDX_REPO)#$(BUILDX_REF)" update-docs
-	rm -rf ./_data/buildx/*
-	cp -R "$($@_TMP_OUT)"/out/reference/*.yaml ./_data/buildx/
-	rm -rf $($@_TMP_OUT)/*
+# Vendor Gemfile.lock
+vendor:
+	$(BUILDX_CMD) bake vendor
+	
+# Run all validators
+validate:
+	$(BUILDX_CMD) bake validate
+
+# Check for broken links
+htmlproofer:
+	$(BUILDX_CMD) bake htmlproofer
+
+# Lint tool for markdown files
+mdl:
+	$(BUILDX_CMD) bake mdl
+
+# Deploy website and run it through Docker compose
+# Available in your browser at http://localhost:4000
+deploy:
+	docker compose up --build
+
+.PHONY: buildx-yaml release vendor htmlproofer mdl deploy

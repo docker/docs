@@ -39,7 +39,7 @@ A Docker ID is the core of a Docker subscription. You can get one for free at [D
 
 ### I want to buy a large number of Docker Team Subscription seats. How do I do this?
 
-Contact the [Docker Sales Team ](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
+Contact the [Docker Sales Team](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} to buy a larger number of Docker Team Subscription seats.
 
 ### How do I access support? Do I have any extra benefits?
 
@@ -104,7 +104,7 @@ Before you downgrade to a Free plan, ensure that your account organization detai
 
 ### How do I add a member to a team in my organization?
 
-For information on how to add a member to a team, see [Add a member to a team](../docker-hub/orgs.md#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
+For information on how to add a member to a team, see [Add a member to a team](../docker-hub/members.md#add-a-member-to-a-team){:target="blank" rel="noopener" class=""}.
 
 ### What happens to my collaborators when I move to a free individual plan?
 
@@ -200,7 +200,7 @@ More details are available at the [Docker Pricing](https://www.docker.com/pricin
 * Support for an unlimited number of teams
 * Unlimited Hub image vulnerability scans
 * Higher scan limits in Docker Desktop
-* Audit Logs
+* Audit logs
 * Slack notifications
 * Premium customer support for Docker Desktop
 

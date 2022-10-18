@@ -16,8 +16,8 @@ For detailed information, see [CVE-2021-45449](https://cve.mitre.org/cgi-bin/cve
 
 ### References
 
-* [Release Notes (Windows)](../desktop/windows/release-notes/index.md)
-* [Release Notes (Mac)](../desktop/mac/release-notes/index.md)
+* [Release Notes (Windows)](../desktop/release-notes.md)
+* [Release Notes (Mac)](../desktop/release-notes.md)
 
 ## Log4j 2 CVE-2021-44228
 

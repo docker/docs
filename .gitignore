@@ -1,9 +1,12 @@
 **/.DS_Store
 **/desktop.ini
 .bundle/**
+.jekyll-cache
 .jekyll-metadata
 _site/**
 .sass-cache/**
+.vscode
 CNAME
-Gemfile.lock
 _kbase/**
+/vendor
+/lint

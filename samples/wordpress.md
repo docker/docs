@@ -9,7 +9,7 @@ redirect_from:
 You can use Docker Compose to easily run WordPress in an isolated environment
 built with Docker containers. This quick-start guide demonstrates how to use
 Compose to set up and run WordPress. Before starting, make sure you have
-[Compose installed](../compose/install.md).
+[Compose installed](../compose/install/index.md).
 
 ### Define the project
 
@@ -38,37 +38,39 @@ Compose to set up and run WordPress. Before starting, make sure you have
     mounts for data persistence:
 
     ```yaml
-    version: "{{ site.compose_file_v3 }}"
-    
     services:
       db:
-        image: mysql:5.7
+        # We use a mariadb image which supports both amd64 & arm64 architecture
+        image: mariadb:10.6.4-focal
+        # If you really want to use MySQL, uncomment the following line
+        #image: mysql:8.0.27
+        command: '--default-authentication-plugin=mysql_native_password'
         volumes:
           - db_data:/var/lib/mysql
         restart: always
         environment:
-          MYSQL_ROOT_PASSWORD: somewordpress
-          MYSQL_DATABASE: wordpress
-          MYSQL_USER: wordpress
-          MYSQL_PASSWORD: wordpress
-    
+          - MYSQL_ROOT_PASSWORD=somewordpress
+          - MYSQL_DATABASE=wordpress
+          - MYSQL_USER=wordpress
+          - MYSQL_PASSWORD=wordpress
+        expose:
+          - 3306
+          - 33060
       wordpress:
-        depends_on:
-          - db
         image: wordpress:latest
         volumes:
-          - wordpress_data:/var/www/html
+          - wp_data:/var/www/html
         ports:
-          - "8000:80"
+          - 80:80
         restart: always
         environment:
-          WORDPRESS_DB_HOST: db
-          WORDPRESS_DB_USER: wordpress
-          WORDPRESS_DB_PASSWORD: wordpress
-          WORDPRESS_DB_NAME: wordpress
+          - WORDPRESS_DB_HOST=db
+          - WORDPRESS_DB_USER=wordpress
+          - WORDPRESS_DB_PASSWORD=wordpress
+          - WORDPRESS_DB_NAME=wordpress
     volumes:
-      db_data: {}
-      wordpress_data: {}
+      db_data:
+      wp_data:
     ```
 
    > **Notes**:
@@ -81,14 +83,14 @@ Compose to set up and run WordPress. Before starting, make sure you have
 
 ### Build the project
 
-Now, run `docker-compose up -d` from your project directory.
+Now, run `docker compose up -d` from your project directory.
 
-This runs [`docker-compose up`](../compose/reference/up.md) in detached mode, pulls
+This runs [`docker compose up`](../engine/reference/commandline/compose_up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 
 ```console
-$ docker-compose up -d
+$ docker compose up -d
 
 Creating network "my_wordpress_default" with the default driver
 Pulling db (mysql:5.7)...
@@ -117,16 +119,16 @@ configured for WordPress is already in use by another service.
 
 ### Bring up WordPress in a web browser
 
-At this point, WordPress should be running on port `8000` of your Docker Host,
+At this point, WordPress should be running on port `80` of your Docker Host,
 and you can complete the "famous five-minute installation" as a WordPress
 administrator.
 
-> **Note**: The WordPress site is not immediately available on port `8000`
+> **Note**: The WordPress site is not immediately available on port `80`
 because the containers are still being initialized and may take a couple of
 minutes before the first load.
 
 If you are using Docker Desktop for Mac or Docker Desktop for Windows, you can use
-`http://localhost` as the IP address, and open `http://localhost:8000` in a web
+`http://localhost` as the IP address, and open `http://localhost:80` in a web
 browser.
 
 ![Choose language for WordPress install](images/wordpress-lang.png)
@@ -135,16 +137,16 @@ browser.
 
 ### Shutdown and cleanup
 
-The command [`docker-compose down`](../compose/reference/down.md) removes the
+The command [`docker compose down`](../engine/reference/commandline/compose_down.md) removes the
 containers and default network, but preserves your WordPress database.
 
-The command `docker-compose down --volumes` removes the containers, default
+The command `docker compose down --volumes` removes the containers, default
 network, and the WordPress database.
 
 ## More Compose documentation
 
 - [Docker Compose overview](../compose/index.md)
-- [Install Docker Compose](../compose/install.md)
+- [Install Docker Compose](../compose/install/index.md)
 - [Getting Started with Docker Compose](../compose/gettingstarted.md)
 - [Docker Compose Command line reference](../compose/reference/index.md)
 - [Compose file reference](../compose/compose-file/index.md)

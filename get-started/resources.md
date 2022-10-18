@@ -41,6 +41,10 @@ If books are your preferred learning style, check out these written by the [Dock
 * [Docker Deep Dive](https://www.amazon.com/Docker-Deep-Dive-Nigel-Poulton/dp/1521822808/ref=sr_1_1?ie=UTF8&qid=1509660871&sr=8-1&keywords=nigel+poulton){:target="_blank" rel="noopener" class="_"}, Nigel Poulton, March 2018
 * [Portuguese] [Docker para desenvolvedores](https://leanpub.com/dockerparadesenvolvedores){:target="_blank" rel="noopener" class="_"} (2017) by Rafael Gomes
 
+## CLI cheat sheet
+
+The [Docker CLI cheat sheet](docker_cheatsheet.pdf){: target="_blank" rel="noopener" class="_"} features the common Docker CLI commands for easy reference. It covers working with Images, Containers, Docker Hub, and other general purpose commands.
+
 ## Self-Paced online learning
 
 A number of Docker Captains have also created video courses on Docker and Kubernetes.

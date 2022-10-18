@@ -93,7 +93,7 @@ on your development host. Use the following command to bind-mount the `target/`
 directory into your container at `/app/`. Run the command from within the
 `source` directory. The `$(pwd)` sub-command expands to the current working
 directory on Linux or macOS hosts.
-If you're on Windows, see also [Path conversions on Windows](../desktop/windows/troubleshoot.md#path-conversion-on-windows).
+If you're on Windows, see also [Path conversions on Windows](../desktop/troubleshoot/topics.md).
 
 The `--mount` and `-v` examples below produce the same result. You
 can't run them both unless you remove the `devtest` container after running the
@@ -284,7 +284,7 @@ only configurable for bind mounts, and only on Linux host machines. Bind
 propagation is an advanced topic and many users never need to configure it.
 
 Bind propagation refers to whether or not mounts created within a given
-bind-mount or named volume can be propagated to replicas of that mount. Consider
+bind-mount can be propagated to replicas of that mount. Consider
 a mount point `/mnt`, which is also mounted on `/tmp`. The propagation settings
 control whether a mount on `/tmp/a` would also be available on `/mnt/a`. Each
 propagation setting has a recursive counterpoint. In the case of recursion,
@@ -396,7 +396,8 @@ services:
     volumes:
       - type: bind
         source: ./static
-        target: /opt/app/staticvolumes:
+        target: /opt/app/static
+volumes:
   myapp:
 ```
 

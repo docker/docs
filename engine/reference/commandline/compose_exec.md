@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_exec
 title: docker compose exec
+redirect_from:
+- /compose/reference/exec/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

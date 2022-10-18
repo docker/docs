@@ -23,7 +23,7 @@ This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
 [list of supported platforms](../../install/index.md). To install
 Docker Compose, see the
-[detailed instructions here](../../../compose/install.md).
+[detailed instructions here](../../../compose/install/index.md).
 
 ## What is in the sandbox?
 
@@ -262,7 +262,7 @@ data. Then, you try and pull it.
     Docker to attempt to download the tampered image from the registry and reject
     it because it is invalid.
 
-8.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
+9.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
         / # docker pull sandboxregistry:5000/test/trusttest
         Using default tag: latest

@@ -6,7 +6,7 @@ description: Learn how to Configure CI/CD for your application
 
 {% include_relative nav.html selected="4" %}
 
-This page guides you through the process of setting up a GitHub Action CI/CD pipeline with Docker containers. Before setting up a new pipeline, we recommend that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"} on CI/CD best practices .
+This page guides you through the process of setting up a GitHub Action CI/CD pipeline with Docker containers. Before setting up a new pipeline, we recommend that you take a look at [Ben's blog](https://www.docker.com/blog/best-practices-for-using-docker-hub-for-ci-cd/){:target="_blank" rel="noopener" class="_"} on CI/CD best practices.
 
 This guide contains instructions on how to:
 
@@ -57,13 +57,17 @@ First, we will name this workflow:
 name: CI to Docker Hub
  ```
 
-Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:
+Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the master branch of our project:
 
 ```yaml
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 ```
+
+> **Note**
+>
+> The branch name may be `main` or `master`. Verify the name of the branch for your repository and update the configuration accordingly.
 
 Now, we need to specify what we actually want to happen within our action (what jobs), we are going to add our build one and select that it runs on the latest Ubuntu instances available:
 
@@ -242,6 +246,4 @@ You can also consider deploying your application. For detailed instructions, see
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
-
-<br />
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

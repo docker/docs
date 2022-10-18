@@ -32,25 +32,26 @@ redirect_from:
 >
 > Docker Desktop helps you build, share, and run containers easily on Mac and
 > Windows as you do on Linux. We are excited to share that Docker Desktop for
-> Linux (Beta) is now available for you to test. For more information, see
-[Docker Desktop for Linux](../../desktop/linux/index.md).
+> Linux is now GA. For more information, see
+[Docker Desktop for Linux](../../desktop/install/linux-install.md).
 {: .important}
 
 ## Supported platforms
 
-Docker Engine is available on a variety of [Linux platforms](#server),
-[macOS](../../desktop/mac/install.md) and [Windows 10](../../desktop/windows/install.md)
+Docker Engine is available on a variety of [Linux platforms](../../desktop/install/linux-install.md),
+[macOS](../../desktop/install/mac-install.md) and [Windows 10](../../desktop/install/windows-install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
 ### Desktop
 
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
 | Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
 |:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
-| [Docker Desktop for Mac (macOS)](../../desktop/mac/install.md)    | [{{ yes }}](../../desktop/mac/install.md)        | [{{ yes }}](../../desktop/mac/install.md)     |
-| [Docker Desktop for Windows](../../desktop/windows/install.md) | [{{ yes }}](../../desktop/windows/install.md) |                                                  |
+| [Docker Desktop for Linux](../../desktop/install/linux-install.md)        | [{{ yes }}](../../desktop/install/linux-install.md)      |                                                  |
+| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md)    | [{{ yes }}](../../desktop/install/mac-install.md)        | [{{ yes }}](../../desktop/install/mac-install.md)        |
+| [Docker Desktop for Windows](../../desktop/install/windows-install.md)    | [{{ yes }}](../../desktop/install/windows-install.md)    |                                                  |
 
 ### Server
 
@@ -97,14 +98,11 @@ These binaries are statically linked and can be used on any Linux distribution.
 
 ## Release channels
 
-Docker Engine has three types of update channels, **stable**, **test**,
-and **nightly**:
+Docker Engine has two types of update channels, **stable** and **test**:
 
 * The **Stable** channel gives you latest releases for general availability.
 * The **Test** channel gives pre-releases that are ready for testing before
   general availability (GA).
-* The **Nightly** channel gives you latest builds of work in progress for the
-  next major release.
 
 ### Stable
 
@@ -123,20 +121,6 @@ Docker for the release have achieved feature-complete. Pre-releases
 such as betas and release candidates are conducted from their respective release
 branches. Patch releases and the corresponding pre-releases are performed
 from within the corresponding release branch.
-
-### Nightly
-
-Nightly builds give you the latest builds of work in progress for the next major
-release. They are created once per day from the master branch with the version
-format:
-
-    0.0.0-YYYYmmddHHMMSS-abcdefabcdef
-
-where the time is the commit time in UTC and the final suffix is the prefix
-of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
-
-These builds allow for testing from the latest code on the master branch. No
-qualifications or guarantees are made for the nightly builds.
 
 ## Support
 

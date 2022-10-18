@@ -406,7 +406,7 @@ IP address, follow these instructions to disable `dnsmasq` in NetworkManager.
 
     Save and close the file.
 
-4.  Restart both NetworkManager and Docker. As an alternative, you can reboot
+3.  Restart both NetworkManager and Docker. As an alternative, you can reboot
     your system.
 
     ```console

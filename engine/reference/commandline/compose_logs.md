@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_logs
 title: docker compose logs
+redirect_from:
+- /compose/reference/logs/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

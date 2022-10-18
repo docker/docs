@@ -37,7 +37,7 @@ even leverage secure supply-chain features such as signed `push` and `pull` oper
 This guide walks you through two scenarios:
 
 1. Initialize and deploy a new Docker App project from scratch.
-1. Convert an existing Compose app into a Docker App project (added later in the beta process).
+2. Convert an existing Compose app into a Docker App project (added later in the beta process).
 
 The first scenario describes basic components of a Docker App with tools and workflow.
 
@@ -46,12 +46,12 @@ The first scenario describes basic components of a Docker App with tools and wor
 This section describes the steps for creating a new Docker App project to familiarize you with the workflow and most important commands.
 
 1. Prerequisites
-1. Initialize an empty new project
-1. Populate the project
-1. Validate the app
-1. Deploy the app
-1. Push the app to Docker Hub
-1. Install the app directly from Docker Hub
+2. Initialize an empty new project
+3. Populate the project
+4. Validate the app
+5. Deploy the app
+6. Push the app to Docker Hub
+7. Install the app directly from Docker Hub
 
 ### Prerequisites
 

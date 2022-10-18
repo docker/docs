@@ -29,7 +29,7 @@ need this level of resilience, you can work around the problem with a wrapper
 script:
 
 - Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-  [dockerize](https://github.com/powerman/dockerize), sh-compatible
+  [dockerize](https://github.com/powerman/dockerize), [Wait4X](https://github.com/atkrad/wait4x), sh-compatible
   [wait-for](https://github.com/Eficode/wait-for), or [RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) template. These are small
   wrapper scripts which you can include in your application's image to
   poll a given host and port until it's accepting TCP connections.
@@ -89,7 +89,7 @@ script:
 ## Compose documentation
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
+- [Installing Compose](install/index.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)

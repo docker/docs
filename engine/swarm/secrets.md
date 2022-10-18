@@ -250,7 +250,7 @@ real-world example, continue to
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
     ```
 
-7.  Stop and remove the service, and remove the secret from Docker.
+9.  Stop and remove the service, and remove the secret from Docker.
 
     ```console
     $ docker service rm redis
@@ -457,7 +457,7 @@ generate the site key and certificate, name the files `site.key` and
     zoa5df26f7vpcoz42qf2csth8   site.conf      11 seconds ago      11 seconds ago
     ```
 
-4.  Create a service that runs Nginx and has access to the three secrets. The
+3.  Create a service that runs Nginx and has access to the three secrets. The
     last part of the `docker service create` command creates a symbolic link
     from the location of the `site.conf` secret to `/etc/nginx.conf.d/`, where
     Nginx looks for extra configuration files. This step happens before Nginx
@@ -510,7 +510,7 @@ generate the site key and certificate, name the files `site.key` and
     - `/run/secrets/site.crt`
     - `/etc/nginx/conf.d/site.conf`
 
-5.  Verify that the Nginx service is running.
+4.  Verify that the Nginx service is running.
 
     ```console
     $ docker service ls
@@ -524,7 +524,7 @@ generate the site key and certificate, name the files `site.key` and
     nginx.1.9ls3yo9ugcls  nginx:latest  moby  Running        Running 3 minutes ago
     ```
 
-6.  Verify that the service is operational: you can reach the Nginx
+5.  Verify that the service is operational: you can reach the Nginx
     server, and that the correct TLS certificate is being used.
 
     ```console
@@ -598,7 +598,7 @@ generate the site key and certificate, name the files `site.key` and
         Verify return code: 0 (ok)
     ```
 
-7.  To clean up after running this example, remove the `nginx` service and the
+6.  To clean up after running this example, remove the `nginx` service and the
     stored secrets.
 
     ```console

@@ -1,904 +1,957 @@
 command: docker buildx build
-aliases: b
+aliases: docker buildx build, docker buildx b
 short: Start a build
 long: |-
-  The `buildx build` command starts a build using BuildKit. This command is similar
-  to the UI of `docker build` command and takes the same flags and arguments.
+    The `buildx build` command starts a build using BuildKit. This command is similar
+    to the UI of `docker build` command and takes the same flags and arguments.
 
-  For documentation on most of these flags, refer to the [`docker build`
-  documentation](/engine/reference/commandline/build/). In
-  here we'll document a subset of the new flags.
+    For documentation on most of these flags, refer to the [`docker build`
+    documentation](/engine/reference/commandline/build/). In
+    here we'll document a subset of the new flags.
 usage: docker buildx build [OPTIONS] PATH | URL | -
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
-- option: add-host
-  value_type: stringSlice
-  default_value: '[]'
-  description: 'Add a custom host-to-IP mapping (format: `host:ip`)'
-  details_url: /engine/reference/commandline/build/#add-entries-to-container-hosts-file---add-host
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: allow
-  value_type: stringSlice
-  default_value: '[]'
-  description: |
-    Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`)
-  details_url: '#allow'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: build-arg
-  value_type: stringArray
-  default_value: '[]'
-  description: Set build-time variables
-  details_url: '#build-arg'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: build-context
-  value_type: stringArray
-  default_value: '[]'
-  description: Additional build contexts (e.g., name=path)
-  details_url: '#build-context'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cache-from
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    External cache sources (e.g., `user/app:cache`, `type=local,src=path/to/dir`)
-  details_url: '#cache-from'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cache-to
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    Cache export destinations (e.g., `user/app:cache`, `type=local,dest=path/to/dir`)
-  details_url: '#cache-to'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cgroup-parent
-  value_type: string
-  description: Optional parent cgroup for the container
-  details_url: /engine/reference/commandline/build/#use-a-custom-parent-cgroup---cgroup-parent
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: compress
-  value_type: bool
-  default_value: "false"
-  description: Compress the build context using gzip
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cpu-period
-  value_type: int64
-  default_value: "0"
-  description: Limit the CPU CFS (Completely Fair Scheduler) period
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cpu-quota
-  value_type: int64
-  default_value: "0"
-  description: Limit the CPU CFS (Completely Fair Scheduler) quota
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cpu-shares
-  shorthand: c
-  value_type: int64
-  default_value: "0"
-  description: CPU shares (relative weight)
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cpuset-cpus
-  value_type: string
-  description: CPUs in which to allow execution (`0-3`, `0,1`)
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: cpuset-mems
-  value_type: string
-  description: MEMs in which to allow execution (`0-3`, `0,1`)
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: file
-  shorthand: f
-  value_type: string
-  description: 'Name of the Dockerfile (default: `PATH/Dockerfile`)'
-  details_url: /engine/reference/commandline/build/#specify-a-dockerfile--f
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: force-rm
-  value_type: bool
-  default_value: "false"
-  description: Always remove intermediate containers
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: iidfile
-  value_type: string
-  description: Write the image ID to the file
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: isolation
-  value_type: string
-  description: Container isolation technology
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: label
-  value_type: stringArray
-  default_value: '[]'
-  description: Set metadata for an image
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: load
-  value_type: bool
-  default_value: "false"
-  description: Shorthand for `--output=type=docker`
-  details_url: '#load'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: memory
-  shorthand: m
-  value_type: string
-  description: Memory limit
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: memory-swap
-  value_type: string
-  description: |
-    Swap limit equal to memory plus swap: `-1` to enable unlimited swap
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: metadata-file
-  value_type: string
-  description: Write build result metadata to the file
-  details_url: '#metadata-file'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: network
-  value_type: string
-  default_value: default
-  description: Set the networking mode for the `RUN` instructions during build
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: no-cache
-  value_type: bool
-  default_value: "false"
-  description: Do not use cache when building the image
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: no-cache-filter
-  value_type: stringArray
-  default_value: '[]'
-  description: Do not cache specified stages
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: output
-  shorthand: o
-  value_type: stringArray
-  default_value: '[]'
-  description: 'Output destination (format: `type=local,dest=path`)'
-  details_url: '#output'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: platform
-  value_type: stringArray
-  default_value: '[]'
-  description: Set target platform for build
-  details_url: '#platform'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: progress
-  value_type: string
-  default_value: auto
-  description: |
-    Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
-  details_url: '#progress'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: pull
-  value_type: bool
-  default_value: "false"
-  description: Always attempt to pull all referenced images
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: push
-  value_type: bool
-  default_value: "false"
-  description: Shorthand for `--output=type=registry`
-  details_url: '#push'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: quiet
-  shorthand: q
-  value_type: bool
-  default_value: "false"
-  description: Suppress the build output and print image ID on success
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: rm
-  value_type: bool
-  default_value: "true"
-  description: Remove intermediate containers after a successful build
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: secret
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    Secret to expose to the build (format: `id=mysecret[,src=/local/secret]`)
-  details_url: '#secret'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: security-opt
-  value_type: stringSlice
-  default_value: '[]'
-  description: Security options
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: shm-size
-  value_type: bytes
-  default_value: "0"
-  description: Size of `/dev/shm`
-  details_url: '#shm-size'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: squash
-  value_type: bool
-  default_value: "false"
-  description: Squash newly built layers into a single new layer
-  deprecated: false
-  hidden: true
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: ssh
-  value_type: stringArray
-  default_value: '[]'
-  description: |
-    SSH agent socket or keys to expose to the build (format: `default|<id>[=<socket>|<key>[,<key>]]`)
-  details_url: '#ssh'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: tag
-  shorthand: t
-  value_type: stringArray
-  default_value: '[]'
-  description: 'Name and optionally a tag (format: `name:tag`)'
-  details_url: /engine/reference/commandline/build/#tag-an-image--t
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: target
-  value_type: string
-  description: Set the target build stage to build
-  details_url: /engine/reference/commandline/build/#specifying-target-build-stage---target
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: ulimit
-  value_type: ulimit
-  default_value: '[]'
-  description: Ulimit options
-  details_url: '#ulimit'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: add-host
+      value_type: stringSlice
+      default_value: '[]'
+      description: 'Add a custom host-to-IP mapping (format: `host:ip`)'
+      details_url: /engine/reference/commandline/build/#add-entries-to-container-hosts-file---add-host
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: allow
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`)
+      details_url: '#allow'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: build-arg
+      value_type: stringArray
+      default_value: '[]'
+      description: Set build-time variables
+      details_url: '#build-arg'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: build-context
+      value_type: stringArray
+      default_value: '[]'
+      description: Additional build contexts (e.g., name=path)
+      details_url: '#build-context'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cache-from
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        External cache sources (e.g., `user/app:cache`, `type=local,src=path/to/dir`)
+      details_url: '#cache-from'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cache-to
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Cache export destinations (e.g., `user/app:cache`, `type=local,dest=path/to/dir`)
+      details_url: '#cache-to'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cgroup-parent
+      value_type: string
+      description: Optional parent cgroup for the container
+      details_url: /engine/reference/commandline/build/#use-a-custom-parent-cgroup---cgroup-parent
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: compress
+      value_type: bool
+      default_value: "false"
+      description: Compress the build context using gzip
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cpu-period
+      value_type: int64
+      default_value: "0"
+      description: Limit the CPU CFS (Completely Fair Scheduler) period
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cpu-quota
+      value_type: int64
+      default_value: "0"
+      description: Limit the CPU CFS (Completely Fair Scheduler) quota
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cpu-shares
+      shorthand: c
+      value_type: int64
+      default_value: "0"
+      description: CPU shares (relative weight)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cpuset-cpus
+      value_type: string
+      description: CPUs in which to allow execution (`0-3`, `0,1`)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cpuset-mems
+      value_type: string
+      description: MEMs in which to allow execution (`0-3`, `0,1`)
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: file
+      shorthand: f
+      value_type: string
+      description: 'Name of the Dockerfile (default: `PATH/Dockerfile`)'
+      details_url: /engine/reference/commandline/build/#specify-a-dockerfile--f
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: force-rm
+      value_type: bool
+      default_value: "false"
+      description: Always remove intermediate containers
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: iidfile
+      value_type: string
+      description: Write the image ID to the file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: invoke
+      value_type: string
+      description: Invoke a command after the build [experimental]
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: isolation
+      value_type: string
+      description: Container isolation technology
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: label
+      value_type: stringArray
+      default_value: '[]'
+      description: Set metadata for an image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: load
+      value_type: bool
+      default_value: "false"
+      description: Shorthand for `--output=type=docker`
+      details_url: '#load'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: memory
+      shorthand: m
+      value_type: string
+      description: Memory limit
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: memory-swap
+      value_type: string
+      description: |
+        Swap limit equal to memory plus swap: `-1` to enable unlimited swap
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: metadata-file
+      value_type: string
+      description: Write build result metadata to the file
+      details_url: '#metadata-file'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: network
+      value_type: string
+      default_value: default
+      description: Set the networking mode for the `RUN` instructions during build
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: no-cache
+      value_type: bool
+      default_value: "false"
+      description: Do not use cache when building the image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: no-cache-filter
+      value_type: stringArray
+      default_value: '[]'
+      description: Do not cache specified stages
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: stringArray
+      default_value: '[]'
+      description: 'Output destination (format: `type=local,dest=path`)'
+      details_url: '#output'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: stringArray
+      default_value: '[]'
+      description: Set target platform for build
+      details_url: '#platform'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: print
+      value_type: string
+      description: |
+        Print result of information request (e.g., outline, targets) [experimental]
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: progress
+      value_type: string
+      default_value: auto
+      description: |
+        Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
+      details_url: '#progress'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: pull
+      value_type: bool
+      default_value: "false"
+      description: Always attempt to pull all referenced images
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: push
+      value_type: bool
+      default_value: "false"
+      description: Shorthand for `--output=type=registry`
+      details_url: '#push'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: quiet
+      shorthand: q
+      value_type: bool
+      default_value: "false"
+      description: Suppress the build output and print image ID on success
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: rm
+      value_type: bool
+      default_value: "true"
+      description: Remove intermediate containers after a successful build
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: secret
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        Secret to expose to the build (format: `id=mysecret[,src=/local/secret]`)
+      details_url: '#secret'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: security-opt
+      value_type: stringSlice
+      default_value: '[]'
+      description: Security options
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: shm-size
+      value_type: bytes
+      default_value: "0"
+      description: Size of `/dev/shm`
+      details_url: '#shm-size'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: squash
+      value_type: bool
+      default_value: "false"
+      description: Squash newly built layers into a single new layer
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ssh
+      value_type: stringArray
+      default_value: '[]'
+      description: |
+        SSH agent socket or keys to expose to the build (format: `default|<id>[=<socket>|<key>[,<key>]]`)
+      details_url: '#ssh'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tag
+      shorthand: t
+      value_type: stringArray
+      default_value: '[]'
+      description: 'Name and optionally a tag (format: `name:tag`)'
+      details_url: /engine/reference/commandline/build/#tag-an-image--t
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: target
+      value_type: string
+      description: Set the target build stage to build
+      details_url: /engine/reference/commandline/build/#specifying-target-build-stage---target
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ulimit
+      value_type: ulimit
+      default_value: '[]'
+      description: Ulimit options
+      details_url: '#ulimit'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
-- option: builder
-  value_type: string
-  description: Override the configured builder instance
-  details_url: '#builder'
-  deprecated: false
-  hidden: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      details_url: '#builder'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
-  ### Allow extra privileged entitlement (--allow) {#allow}
+    ### Allow extra privileged entitlement (--allow) {#allow}
 
-  ```
-  --allow=ENTITLEMENT
-  ```
+    ```
+    --allow=ENTITLEMENT
+    ```
 
-  Allow extra privileged entitlement. List of entitlements:
+    Allow extra privileged entitlement. List of entitlements:
 
-  - `network.host` - Allows executions with host networking.
-  - `security.insecure` - Allows executions without sandbox. See
-    [related Dockerfile extensions](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/experimental.md#run---securityinsecuresandbox).
+    - `network.host` - Allows executions with host networking.
+    - `security.insecure` - Allows executions without sandbox. See
+      [related Dockerfile extensions](/engine/reference/builder/#run---securitysandbox).
 
-  For entitlements to be enabled, the `buildkitd` daemon also needs to allow them
-  with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](buildx_create.md#buildkitd-flags))
+    For entitlements to be enabled, the `buildkitd` daemon also needs to allow them
+    with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](buildx_create.md#buildkitd-flags))
 
-  **Examples**
+    **Examples**
 
-  ```console
-  $ docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
-  $ docker buildx build --allow security.insecure .
-  ```
+    ```console
+    $ docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
+    $ docker buildx build --allow security.insecure .
+    ```
 
-  ### Set build-time variables (--build-arg) {#build-arg}
+    ### Set build-time variables (--build-arg) {#build-arg}
 
-  Same as [`docker build` command](/engine/reference/commandline/build/#set-build-time-variables---build-arg).
+    Same as [`docker build` command](/engine/reference/commandline/build/#set-build-time-variables---build-arg).
 
-  There are also useful built-in build args like:
+    There are also useful built-in build args like:
 
-  * `BUILDKIT_CONTEXT_KEEP_GIT_DIR=<bool>` trigger git context to keep the `.git` directory
-  * `BUILDKIT_INLINE_BUILDINFO_ATTRS=<bool>` inline build info attributes in image config or not
-  * `BUILDKIT_INLINE_CACHE=<bool>` inline cache metadata to image config or not
-  * `BUILDKIT_MULTI_PLATFORM=<bool>` opt into determnistic output regardless of multi-platform output or not
+    * `BUILDKIT_CONTEXT_KEEP_GIT_DIR=<bool>` trigger git context to keep the `.git` directory
+    * `BUILDKIT_INLINE_BUILDINFO_ATTRS=<bool>` inline build info attributes in image config or not
+    * `BUILDKIT_INLINE_CACHE=<bool>` inline cache metadata to image config or not
+    * `BUILDKIT_MULTI_PLATFORM=<bool>` opt into deterministic output regardless of multi-platform output or not
 
-  ```console
-  $ docker buildx build --build-arg BUILDKIT_MULTI_PLATFORM=1 .
-  ```
+    ```console
+    $ docker buildx build --build-arg BUILDKIT_MULTI_PLATFORM=1 .
+    ```
 
-  More built-in build args can be found in [dockerfile frontend docs](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#built-in-build-args).
+    > **Note**
+    >
+    > More built-in build args can be found in [Dockerfile reference docs](/engine/reference/builder/#buildkit-built-in-build-args).
 
-  ### Additional build contexts (--build-context) {#build-context}
+    ### Additional build contexts (--build-context) {#build-context}
 
-  ```
-  --build-context=name=VALUE
-  ```
+    ```
+    --build-context=name=VALUE
+    ```
 
-  Define additional build context with specified contents. In Dockerfile the context can be accessed when `FROM name` or `--from=name` is used.
-  When Dockerfile defines a stage with the same name it is overwritten.
+    Define additional build context with specified contents. In Dockerfile the context can be accessed when `FROM name` or `--from=name` is used.
+    When Dockerfile defines a stage with the same name it is overwritten.
 
-  The value can be a local source directory, container image (with docker-image:// prefix), Git or HTTP URL.
+    The value can be a local source directory, [local OCI layout compliant directory](https://github.com/opencontainers/image-spec/blob/main/image-layout.md), container image (with docker-image:// prefix), Git or HTTP URL.
 
-  Replace `alpine:latest` with a pinned one:
+    Replace `alpine:latest` with a pinned one:
 
-  ```console
-  $ docker buildx build --build-context alpine=docker-image://alpine@sha256:0123456789 .
-  ```
+    ```console
+    $ docker buildx build --build-context alpine=docker-image://alpine@sha256:0123456789 .
+    ```
 
-  Expose a secondary local source directory:
+    Expose a secondary local source directory:
 
-  ```console
-  $ docker buildx build --build-context project=path/to/project/source .
-  # docker buildx build --build-context project=https://github.com/myuser/project.git .
-  ```
+    ```console
+    $ docker buildx build --build-context project=path/to/project/source .
+    # docker buildx build --build-context project=https://github.com/myuser/project.git .
+    ```
 
-  ```Dockerfile
-  FROM alpine
-  COPY --from=project myfile /
-  ```
+    ```Dockerfile
+    FROM alpine
+    COPY --from=project myfile /
+    ```
 
-  ### Override the configured builder instance (--builder) {#builder}
+    #### Source image from OCI layout directory {#source-oci-layout}
 
-  Same as [`buildx --builder`](buildx.md#builder).
+    Source an image from a local [OCI layout compliant directory](https://github.com/opencontainers/image-spec/blob/main/image-layout.md):
 
-  ### Use an external cache source for a build (--cache-from) {#cache-from}
+    ```console
+    $ docker buildx build --build-context foo=oci-layout:///path/to/local/layout@sha256:abcd12345 .
+    ```
 
-  ```
-  --cache-from=[NAME|type=TYPE[,KEY=VALUE]]
-  ```
+    ```Dockerfile
+    FROM alpine
+    RUN apk add git
 
-  Use an external cache source for a build. Supported types are `registry`,
-  `local` and `gha`.
+    COPY --from=foo myfile /
 
-  - [`registry` source](https://github.com/moby/buildkit#registry-push-image-and-cache-separately)
-    can import cache from a cache manifest or (special) image configuration on the
-    registry.
-  - [`local` source](https://github.com/moby/buildkit#local-directory-1) can
-    import cache from local files previously exported with `--cache-to`.
-  - [`gha` source](https://github.com/moby/buildkit#github-actions-cache-experimental)
-    can import cache from a previously exported cache with `--cache-to` in your
-    GitHub repository
+    FROM foo
+    ```
 
-  If no type is specified, `registry` exporter is used with a specified reference.
+    The OCI layout directory must be compliant with the [OCI layout specification](https://github.com/opencontainers/image-spec/blob/main/image-layout.md). It looks _solely_ for hashes. It does not
+    do any form of `image:tag` resolution to find the hash of the manifest; that is up to you.
 
-  `docker` driver currently only supports importing build cache from the registry.
+    The format of the `--build-context` must be: `<context>=oci-layout://<path-to-local-layout>@sha256:<hash-of-manifest>`, where:
 
-  ```console
-  $ docker buildx build --cache-from=user/app:cache .
-  $ docker buildx build --cache-from=user/app .
-  $ docker buildx build --cache-from=type=registry,ref=user/app .
-  $ docker buildx build --cache-from=type=local,src=path/to/cache .
-  $ docker buildx build --cache-from=type=gha .
-  ```
+    * `context` is the name of the build context as used in the `Dockerfile`.
+    * `path-to-local-layout` is the path on the local machine, where you are running `docker build`, to the spec-compliant OCI layout.
+    * `hash-of-manifest` is the hash of the manifest for the image. It can be a single-architecture manifest or a multi-architecture index.
 
-  More info about cache exporters and available attributes: https://github.com/moby/buildkit#export-cache
+    ### Override the configured builder instance (--builder) {#builder}
 
-  ### Export build cache to an external cache destination (--cache-to) {#cache-to}
+    Same as [`buildx --builder`](buildx.md#builder).
 
-  ```
-  --cache-to=[NAME|type=TYPE[,KEY=VALUE]]
-  ```
+    ### Use an external cache source for a build (--cache-from) {#cache-from}
 
-  Export build cache to an external cache destination. Supported types are
-  `registry`, `local`, `inline` and `gha`.
+    ```
+    --cache-from=[NAME|type=TYPE[,KEY=VALUE]]
+    ```
 
-  - [`registry` type](https://github.com/moby/buildkit#registry-push-image-and-cache-separately) exports build cache to a cache manifest in the registry.
-  - [`local` type](https://github.com/moby/buildkit#local-directory-1) type
-    exports cache to a local directory on the client.
-  - [`inline` type](https://github.com/moby/buildkit#inline-push-image-and-cache-together)
-    type writes the cache metadata into the image configuration.
-  - [`gha` type](https://github.com/moby/buildkit#github-actions-cache-experimental)
-    type exports cache through the [Github Actions Cache service API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md#authentication).
+    Use an external cache source for a build. Supported types are `registry`,
+    `local` and `gha`.
 
-  `docker` driver currently only supports exporting inline cache metadata to image
-  configuration. Alternatively, `--build-arg BUILDKIT_INLINE_CACHE=1` can be used
-  to trigger inline cache exporter.
+    - [`registry` source](https://github.com/moby/buildkit#registry-push-image-and-cache-separately)
+      can import cache from a cache manifest or (special) image configuration on the
+      registry.
+    - [`local` source](https://github.com/moby/buildkit#local-directory-1) can
+      import cache from local files previously exported with `--cache-to`.
+    - [`gha` source](https://github.com/moby/buildkit#github-actions-cache-experimental)
+      can import cache from a previously exported cache with `--cache-to` in your
+      GitHub repository
 
-  Attribute key:
+    If no type is specified, `registry` exporter is used with a specified reference.
 
-  - `mode` - Specifies how many layers are exported with the cache. `min` on only
-    exports layers already in the final build stage, `max` exports layers for
-    all stages. Metadata is always exported for the whole build.
+    `docker` driver currently only supports importing build cache from the registry.
 
-  ```console
-  $ docker buildx build --cache-to=user/app:cache .
-  $ docker buildx build --cache-to=type=inline .
-  $ docker buildx build --cache-to=type=registry,ref=user/app .
-  $ docker buildx build --cache-to=type=local,dest=path/to/cache .
-  $ docker buildx build --cache-to=type=gha .
-  ```
+    ```console
+    $ docker buildx build --cache-from=user/app:cache .
+    $ docker buildx build --cache-from=user/app .
+    $ docker buildx build --cache-from=type=registry,ref=user/app .
+    $ docker buildx build --cache-from=type=local,src=path/to/cache .
+    $ docker buildx build --cache-from=type=gha .
+    ```
 
-  More info about cache exporters and available attributes: https://github.com/moby/buildkit#export-cache
+    More info about cache exporters and available attributes: https://github.com/moby/buildkit#export-cache
 
-  ### Load the single-platform build result to `docker images` (--load) {#load}
+    ### Export build cache to an external cache destination (--cache-to) {#cache-to}
 
-  Shorthand for [`--output=type=docker`](#docker). Will automatically load the
-  single-platform build result to `docker images`.
+    ```
+    --cache-to=[NAME|type=TYPE[,KEY=VALUE]]
+    ```
 
-  ### Write build result metadata to the file (--metadata-file) {#metadata-file}
+    Export build cache to an external cache destination. Supported types are
+    `registry`, `local`, `inline` and `gha`.
 
-  To output build metadata such as the image digest, pass the `--metadata-file` flag.
-  The metadata will be written as a JSON object to the specified file. The
-  directory of the specified file must already exist and be writable.
+    - [`registry` type](https://github.com/moby/buildkit#registry-push-image-and-cache-separately) exports build cache to a cache manifest in the registry.
+    - [`local` type](https://github.com/moby/buildkit#local-directory-1) type
+      exports cache to a local directory on the client.
+    - [`inline` type](https://github.com/moby/buildkit#inline-push-image-and-cache-together)
+      type writes the cache metadata into the image configuration.
+    - [`gha` type](https://github.com/moby/buildkit#github-actions-cache-experimental)
+      type exports cache through the [Github Actions Cache service API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md#authentication).
 
-  ```console
-  $ docker buildx build --load --metadata-file metadata.json .
-  $ cat metadata.json
-  ```
-  ```json
-  {
-    "containerimage.buildinfo": {
-      "frontend": "dockerfile.v0",
-      "attrs": {
-        "context": "https://github.com/crazy-max/buildkit-buildsources-test.git#master",
-        "filename": "Dockerfile",
-        "source": "docker/dockerfile:master"
-      },
-      "sources": [
-        {
-          "type": "docker-image",
-          "ref": "docker.io/docker/buildx-bin:0.6.1@sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0",
-          "pin": "sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0"
+    `docker` driver currently only supports exporting inline cache metadata to image
+    configuration. Alternatively, `--build-arg BUILDKIT_INLINE_CACHE=1` can be used
+    to trigger inline cache exporter.
+
+    Attribute key:
+
+    - `mode` - Specifies how many layers are exported with the cache. `min` on only
+      exports layers already in the final build stage, `max` exports layers for
+      all stages. Metadata is always exported for the whole build.
+
+    ```console
+    $ docker buildx build --cache-to=user/app:cache .
+    $ docker buildx build --cache-to=type=inline .
+    $ docker buildx build --cache-to=type=registry,ref=user/app .
+    $ docker buildx build --cache-to=type=local,dest=path/to/cache .
+    $ docker buildx build --cache-to=type=gha .
+    ```
+
+    More info about cache exporters and available attributes: https://github.com/moby/buildkit#export-cache
+
+    ### Load the single-platform build result to `docker images` (--load) {#load}
+
+    Shorthand for [`--output=type=docker`](#docker). Will automatically load the
+    single-platform build result to `docker images`.
+
+    ### Write build result metadata to the file (--metadata-file) {#metadata-file}
+
+    To output build metadata such as the image digest, pass the `--metadata-file` flag.
+    The metadata will be written as a JSON object to the specified file. The
+    directory of the specified file must already exist and be writable.
+
+    ```console
+    $ docker buildx build --load --metadata-file metadata.json .
+    $ cat metadata.json
+    ```
+    ```json
+    {
+      "containerimage.buildinfo": {
+        "frontend": "dockerfile.v0",
+        "attrs": {
+          "context": "https://github.com/crazy-max/buildkit-buildsources-test.git#master",
+          "filename": "Dockerfile",
+          "source": "docker/dockerfile:master"
         },
-        {
-          "type": "docker-image",
-          "ref": "docker.io/library/alpine:3.13",
-          "pin": "sha256:026f721af4cf2843e07bba648e158fb35ecc876d822130633cc49f707f0fc88c"
-        }
-      ]
-    },
-    "containerimage.config.digest": "sha256:2937f66a9722f7f4a2df583de2f8cb97fc9196059a410e7f00072fc918930e66",
-    "containerimage.descriptor": {
-      "annotations": {
-        "config.digest": "sha256:2937f66a9722f7f4a2df583de2f8cb97fc9196059a410e7f00072fc918930e66",
-        "org.opencontainers.image.created": "2022-02-08T21:28:03Z"
+        "sources": [
+          {
+            "type": "docker-image",
+            "ref": "docker.io/docker/buildx-bin:0.6.1@sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0",
+            "pin": "sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0"
+          },
+          {
+            "type": "docker-image",
+            "ref": "docker.io/library/alpine:3.13",
+            "pin": "sha256:026f721af4cf2843e07bba648e158fb35ecc876d822130633cc49f707f0fc88c"
+          }
+        ]
       },
-      "digest": "sha256:19ffeab6f8bc9293ac2c3fdf94ebe28396254c993aea0b5a542cfb02e0883fa3",
-      "mediaType": "application/vnd.oci.image.manifest.v1+json",
-      "size": 506
-    },
-    "containerimage.digest": "sha256:19ffeab6f8bc9293ac2c3fdf94ebe28396254c993aea0b5a542cfb02e0883fa3"
-  }
-  ```
+      "containerimage.config.digest": "sha256:2937f66a9722f7f4a2df583de2f8cb97fc9196059a410e7f00072fc918930e66",
+      "containerimage.descriptor": {
+        "annotations": {
+          "config.digest": "sha256:2937f66a9722f7f4a2df583de2f8cb97fc9196059a410e7f00072fc918930e66",
+          "org.opencontainers.image.created": "2022-02-08T21:28:03Z"
+        },
+        "digest": "sha256:19ffeab6f8bc9293ac2c3fdf94ebe28396254c993aea0b5a542cfb02e0883fa3",
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "size": 506
+      },
+      "containerimage.digest": "sha256:19ffeab6f8bc9293ac2c3fdf94ebe28396254c993aea0b5a542cfb02e0883fa3"
+    }
+    ```
 
-  ### Set the export action for the build result (-o, --output) {#output}
+    ### Set the export action for the build result (-o, --output) {#output}
 
-  ```
-  -o, --output=[PATH,-,type=TYPE[,KEY=VALUE]
-  ```
+    ```
+    -o, --output=[PATH,-,type=TYPE[,KEY=VALUE]
+    ```
 
-  Sets the export action for the build result. In `docker build` all builds finish
-  by creating a container image and exporting it to `docker images`. `buildx` makes
-  this step configurable allowing results to be exported directly to the client,
-  oci image tarballs, registry etc.
+    Sets the export action for the build result. In `docker build` all builds finish
+    by creating a container image and exporting it to `docker images`. `buildx` makes
+    this step configurable allowing results to be exported directly to the client,
+    oci image tarballs, registry etc.
 
-  Buildx with `docker` driver currently only supports local, tarball exporter and
-  image exporter. `docker-container` driver supports all the exporters.
+    Buildx with `docker` driver currently only supports local, tarball exporter and
+    image exporter. `docker-container` driver supports all the exporters.
 
-  If just the path is specified as a value, `buildx` will use the local exporter
-  with this path as the destination. If the value is "-", `buildx` will use `tar`
-  exporter and write to `stdout`.
+    If just the path is specified as a value, `buildx` will use the local exporter
+    with this path as the destination. If the value is "-", `buildx` will use `tar`
+    exporter and write to `stdout`.
 
-  ```console
-  $ docker buildx build -o . .
-  $ docker buildx build -o outdir .
-  $ docker buildx build -o - - > out.tar
-  $ docker buildx build -o type=docker .
-  $ docker buildx build -o type=docker,dest=- . > myimage.tar
-  $ docker buildx build -t tonistiigi/foo -o type=registry
-  ```
+    ```console
+    $ docker buildx build -o . .
+    $ docker buildx build -o outdir .
+    $ docker buildx build -o - - > out.tar
+    $ docker buildx build -o type=docker .
+    $ docker buildx build -o type=docker,dest=- . > myimage.tar
+    $ docker buildx build -t tonistiigi/foo -o type=registry
+    ```
 
-  Supported exported types are:
+    Supported exported types are:
 
-  #### `local`
+    #### `local`
 
-  The `local` export type writes all result files to a directory on the client. The
-  new files will be owned by the current user. On multi-platform builds, all results
-  will be put in subdirectories by their platform.
+    The `local` export type writes all result files to a directory on the client. The
+    new files will be owned by the current user. On multi-platform builds, all results
+    will be put in subdirectories by their platform.
 
-  Attribute key:
+    Attribute key:
 
-  - `dest` - destination directory where files will be written
+    - `dest` - destination directory where files will be written
 
-  #### `tar`
+    #### `tar`
 
-  The `tar` export type writes all result files as a single tarball on the client.
-  On multi-platform builds all results will be put in subdirectories by their platform.
+    The `tar` export type writes all result files as a single tarball on the client.
+    On multi-platform builds all results will be put in subdirectories by their platform.
 
-  Attribute key:
+    Attribute key:
 
-  - `dest` - destination path where tarball will be written. “-” writes to stdout.
+    - `dest` - destination path where tarball will be written. “-” writes to stdout.
 
-  #### `oci`
+    #### `oci`
 
-  The `oci` export type writes the result image or manifest list as an [OCI image
-  layout](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-layout.md)
-  tarball on the client.
+    The `oci` export type writes the result image or manifest list as an [OCI image
+    layout](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-layout.md)
+    tarball on the client.
 
-  Attribute key:
+    Attribute key:
 
-  - `dest` - destination path where tarball will be written. “-” writes to stdout.
+    - `dest` - destination path where tarball will be written. “-” writes to stdout.
 
-  #### `docker`
+    #### `docker`
 
-  The `docker` export type writes the single-platform result image as a [Docker image
-  specification](https://github.com/docker/docker/blob/v20.10.2/image/spec/v1.2.md)
-  tarball on the client. Tarballs created by this exporter are also OCI compatible.
+    The `docker` export type writes the single-platform result image as a [Docker image
+    specification](https://github.com/docker/docker/blob/v20.10.2/image/spec/v1.2.md)
+    tarball on the client. Tarballs created by this exporter are also OCI compatible.
 
-  Currently, multi-platform images cannot be exported with the `docker` export type.
-  The most common usecase for multi-platform images is to directly push to a registry
-  (see [`registry`](#registry)).
+    Currently, multi-platform images cannot be exported with the `docker` export type.
+    The most common usecase for multi-platform images is to directly push to a registry
+    (see [`registry`](#registry)).
 
-  Attribute keys:
+    Attribute keys:
 
-  - `dest` - destination path where tarball will be written. If not specified the
-    tar will be loaded automatically to the current docker instance.
-  - `context` - name for the docker context where to import the result
+    - `dest` - destination path where tarball will be written. If not specified the
+      tar will be loaded automatically to the current docker instance.
+    - `context` - name for the docker context where to import the result
 
-  #### `image`
+    #### `image`
 
-  The `image` exporter writes the build result as an image or a manifest list. When
-  using `docker` driver the image will appear in `docker images`. Optionally, image
-  can be automatically pushed to a registry by specifying attributes.
+    The `image` exporter writes the build result as an image or a manifest list. When
+    using `docker` driver the image will appear in `docker images`. Optionally, image
+    can be automatically pushed to a registry by specifying attributes.
 
-  Attribute keys:
+    Attribute keys:
 
-  - `name` - name (references) for the new image.
-  - `push` - boolean to automatically push the image.
+    - `name` - name (references) for the new image.
+    - `push` - boolean to automatically push the image.
 
-  #### `registry`
+    #### `registry`
 
-  The `registry` exporter is a shortcut for `type=image,push=true`.
+    The `registry` exporter is a shortcut for `type=image,push=true`.
 
-  ### Set the target platforms for the build (--platform) {#platform}
+    ### Set the target platforms for the build (--platform) {#platform}
 
-  ```
-  --platform=value[,value]
-  ```
+    ```
+    --platform=value[,value]
+    ```
 
-  Set the target platform for the build. All `FROM` commands inside the Dockerfile
-  without their own `--platform` flag will pull base images for this platform and
-  this value will also be the platform of the resulting image. The default value
-  will be the current platform of the buildkit daemon.
+    Set the target platform for the build. All `FROM` commands inside the Dockerfile
+    without their own `--platform` flag will pull base images for this platform and
+    this value will also be the platform of the resulting image. The default value
+    will be the current platform of the buildkit daemon.
 
-  When using `docker-container` driver with `buildx`, this flag can accept multiple
-  values as an input separated by a comma. With multiple values the result will be
-  built for all of the specified platforms and joined together into a single manifest
-  list.
+    When using `docker-container` driver with `buildx`, this flag can accept multiple
+    values as an input separated by a comma. With multiple values the result will be
+    built for all of the specified platforms and joined together into a single manifest
+    list.
 
-  If the `Dockerfile` needs to invoke the `RUN` command, the builder needs runtime
-  support for the specified platform. In a clean setup, you can only execute `RUN`
-  commands for your system architecture.
-  If your kernel supports [`binfmt_misc`](https://en.wikipedia.org/wiki/Binfmt_misc)
-  launchers for secondary architectures, buildx will pick them up automatically.
-  Docker desktop releases come with `binfmt_misc` automatically configured for `arm64`
-  and `arm` architectures. You can see what runtime platforms your current builder
-  instance supports by running `docker buildx inspect --bootstrap`.
+    If the `Dockerfile` needs to invoke the `RUN` command, the builder needs runtime
+    support for the specified platform. In a clean setup, you can only execute `RUN`
+    commands for your system architecture.
+    If your kernel supports [`binfmt_misc`](https://en.wikipedia.org/wiki/Binfmt_misc)
+    launchers for secondary architectures, buildx will pick them up automatically.
+    Docker desktop releases come with `binfmt_misc` automatically configured for `arm64`
+    and `arm` architectures. You can see what runtime platforms your current builder
+    instance supports by running `docker buildx inspect --bootstrap`.
 
-  Inside a `Dockerfile`, you can access the current platform value through
-  `TARGETPLATFORM` build argument. Please refer to the [`docker build`
-  documentation](/engine/reference/builder/#automatic-platform-args-in-the-global-scope)
-  for the full description of automatic platform argument variants .
+    Inside a `Dockerfile`, you can access the current platform value through
+    `TARGETPLATFORM` build argument. Please refer to the [`docker build`
+    documentation](/engine/reference/builder/#automatic-platform-args-in-the-global-scope)
+    for the full description of automatic platform argument variants .
 
-  The formatting for the platform specifier is defined in the [containerd source
-  code](https://github.com/containerd/containerd/blob/v1.4.3/platforms/platforms.go#L63).
+    The formatting for the platform specifier is defined in the [containerd source
+    code](https://github.com/containerd/containerd/blob/v1.4.3/platforms/platforms.go#L63).
 
-  ```console
-  $ docker buildx build --platform=linux/arm64 .
-  $ docker buildx build --platform=linux/amd64,linux/arm64,linux/arm/v7 .
-  $ docker buildx build --platform=darwin .
-  ```
+    ```console
+    $ docker buildx build --platform=linux/arm64 .
+    $ docker buildx build --platform=linux/amd64,linux/arm64,linux/arm/v7 .
+    $ docker buildx build --platform=darwin .
+    ```
 
-  ### Set type of progress output (--progress) {#progress}
+    ### Set type of progress output (--progress) {#progress}
 
-  ```
-  --progress=VALUE
-  ```
+    ```
+    --progress=VALUE
+    ```
 
-  Set type of progress output (auto, plain, tty). Use plain to show container
-  output (default "auto").
+    Set type of progress output (auto, plain, tty). Use plain to show container
+    output (default "auto").
 
-  > You can also use the `BUILDKIT_PROGRESS` environment variable to set
-  > its value.
+    > **Note**
+    >
+    > You can also use the `BUILDKIT_PROGRESS` environment variable to set its value.
 
-  The following example uses `plain` output during the build:
+    The following example uses `plain` output during the build:
 
-  ```console
-  $ docker buildx build --load --progress=plain .
+    ```console
+    $ docker buildx build --load --progress=plain .
 
-  #1 [internal] load build definition from Dockerfile
-  #1 transferring dockerfile: 227B 0.0s done
-  #1 DONE 0.1s
+    #1 [internal] load build definition from Dockerfile
+    #1 transferring dockerfile: 227B 0.0s done
+    #1 DONE 0.1s
 
-  #2 [internal] load .dockerignore
-  #2 transferring context: 129B 0.0s done
-  #2 DONE 0.0s
-  ...
-  ```
+    #2 [internal] load .dockerignore
+    #2 transferring context: 129B 0.0s done
+    #2 DONE 0.0s
+    ...
+    ```
 
-  ### Push the build result to a registry (--push) {#push}
+    > **Note**
+    >
+    > Check also our [Color output controls guide](https://github.com/docker/buildx/blob/master/docs/guides/color-output.md)
+    > for modifying the colors that are used to output information to the terminal.
 
-  Shorthand for [`--output=type=registry`](#registry). Will automatically push the
-  build result to registry.
+    ### Push the build result to a registry (--push) {#push}
 
-  ### Secret to expose to the build (--secret) {#secret}
+    Shorthand for [`--output=type=registry`](#registry). Will automatically push the
+    build result to registry.
 
-  ```
-  --secret=[type=TYPE[,KEY=VALUE]
-  ```
+    ### Secret to expose to the build (--secret) {#secret}
 
-  Exposes secret to the build. The secret can be used by the build using
-  [`RUN --mount=type=secret` mount](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypesecret).
+    ```
+    --secret=[type=TYPE[,KEY=VALUE]
+    ```
 
-  If `type` is unset it will be detected. Supported types are:
+    Exposes secret to the build. The secret can be used by the build using
+    [`RUN --mount=type=secret` mount](/engine/reference/builder/#run---mounttypesecret).
 
-  #### `file`
+    If `type` is unset it will be detected. Supported types are:
 
-  Attribute keys:
+    #### `file`
 
-  - `id` - ID of the secret. Defaults to basename of the `src` path.
-  - `src`, `source` - Secret filename. `id` used if unset.
+    Attribute keys:
 
-  ```dockerfile
-  # syntax=docker/dockerfile:1.3
-  FROM python:3
-  RUN pip install awscli
-  RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
-    aws s3 cp s3://... ...
-  ```
+    - `id` - ID of the secret. Defaults to basename of the `src` path.
+    - `src`, `source` - Secret filename. `id` used if unset.
 
-  ```console
-  $ docker buildx build --secret id=aws,src=$HOME/.aws/credentials .
-  ```
+    ```dockerfile
+    # syntax=docker/dockerfile:1.4
+    FROM python:3
+    RUN pip install awscli
+    RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
+      aws s3 cp s3://... ...
+    ```
 
-  #### `env`
+    ```console
+    $ docker buildx build --secret id=aws,src=$HOME/.aws/credentials .
+    ```
 
-  Attribute keys:
+    #### `env`
 
-  - `id` - ID of the secret. Defaults to `env` name.
-  - `env` - Secret environment variable. `id` used if unset, otherwise will look for `src`, `source` if `id` unset.
+    Attribute keys:
 
-  ```dockerfile
-  # syntax=docker/dockerfile:1.3
-  FROM node:alpine
-  RUN --mount=type=bind,target=. \
-    --mount=type=secret,id=SECRET_TOKEN \
-    SECRET_TOKEN=$(cat /run/secrets/SECRET_TOKEN) yarn run test
-  ```
+    - `id` - ID of the secret. Defaults to `env` name.
+    - `env` - Secret environment variable. `id` used if unset, otherwise will look for `src`, `source` if `id` unset.
 
-  ```console
-  $ SECRET_TOKEN=token docker buildx build --secret id=SECRET_TOKEN .
-  ```
+    ```dockerfile
+    # syntax=docker/dockerfile:1.4
+    FROM node:alpine
+    RUN --mount=type=bind,target=. \
+      --mount=type=secret,id=SECRET_TOKEN \
+      SECRET_TOKEN=$(cat /run/secrets/SECRET_TOKEN) yarn run test
+    ```
 
-  ### Size of /dev/shm (--shm-size) {#shm-size}
+    ```console
+    $ SECRET_TOKEN=token docker buildx build --secret id=SECRET_TOKEN .
+    ```
 
-  The format is `<number><unit>`. `number` must be greater than `0`. Unit is
-  optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g`
-  (gigabytes). If you omit the unit, the system uses bytes.
+    ### Size of /dev/shm (--shm-size) {#shm-size}
 
-  ### SSH agent socket or keys to expose to the build (--ssh) {#ssh}
+    The format is `<number><unit>`. `number` must be greater than `0`. Unit is
+    optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g`
+    (gigabytes). If you omit the unit, the system uses bytes.
 
-  ```
-  --ssh=default|<id>[=<socket>|<key>[,<key>]]
-  ```
+    ### SSH agent socket or keys to expose to the build (--ssh) {#ssh}
 
-  This can be useful when some commands in your Dockerfile need specific SSH
-  authentication (e.g., cloning a private repository).
+    ```
+    --ssh=default|<id>[=<socket>|<key>[,<key>]]
+    ```
 
-  `--ssh` exposes SSH agent socket or keys to the build and can be used with the
-  [`RUN --mount=type=ssh` mount](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md#run---mounttypessh).
+    This can be useful when some commands in your Dockerfile need specific SSH
+    authentication (e.g., cloning a private repository).
 
-  Example to access Gitlab using an SSH agent socket:
+    `--ssh` exposes SSH agent socket or keys to the build and can be used with the
+    [`RUN --mount=type=ssh` mount](/engine/reference/builder/#run---mounttypessh).
 
-  ```dockerfile
-  # syntax=docker/dockerfile:1.3
-  FROM alpine
-  RUN apk add --no-cache openssh-client
-  RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-  RUN --mount=type=ssh ssh -q -T git@gitlab.com 2>&1 | tee /hello
-  # "Welcome to GitLab, @GITLAB_USERNAME_ASSOCIATED_WITH_SSHKEY" should be printed here
-  # with the type of build progress is defined as `plain`.
-  ```
+    Example to access Gitlab using an SSH agent socket:
 
-  ```console
-  $ eval $(ssh-agent)
-  $ ssh-add ~/.ssh/id_rsa
-  (Input your passphrase here)
-  $ docker buildx build --ssh default=$SSH_AUTH_SOCK .
-  ```
+    ```dockerfile
+    # syntax=docker/dockerfile:1.4
+    FROM alpine
+    RUN apk add --no-cache openssh-client
+    RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    RUN --mount=type=ssh ssh -q -T git@gitlab.com 2>&1 | tee /hello
+    # "Welcome to GitLab, @GITLAB_USERNAME_ASSOCIATED_WITH_SSHKEY" should be printed here
+    # with the type of build progress is defined as `plain`.
+    ```
 
-  ### Set ulimits (--ulimit) {#ulimit}
+    ```console
+    $ eval $(ssh-agent)
+    $ ssh-add ~/.ssh/id_rsa
+    (Input your passphrase here)
+    $ docker buildx build --ssh default=$SSH_AUTH_SOCK .
+    ```
 
-  `--ulimit` is specified with a soft and hard limit as such:
-  `<type>=<soft limit>[:<hard limit>]`, for example:
+    ### Set ulimits (--ulimit) {#ulimit}
 
-  ```console
-  $ docker buildx build --ulimit nofile=1024:1024 .
-  ```
+    `--ulimit` is specified with a soft and hard limit as such:
+    `<type>=<soft limit>[:<hard limit>]`, for example:
 
-  > **Note**
-  >
-  > If you do not provide a `hard limit`, the `soft limit` is used
-  > for both values. If no `ulimits` are set, they are inherited from
-  > the default `ulimits` set on the daemon.
+    ```console
+    $ docker buildx build --ulimit nofile=1024:1024 .
+    ```
+
+    > **Note**
+    >
+    > If you do not provide a `hard limit`, the `soft limit` is used
+    > for both values. If no `ulimits` are set, they are inherited from
+    > the default `ulimits` set on the daemon.
 deprecated: false
 experimental: false
 experimentalcli: false

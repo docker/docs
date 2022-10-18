@@ -24,7 +24,7 @@ Before we can run the application, we need to get the application source code on
 our machine. For real projects, you will typically clone the repo. But, for this tutorial,
 we have created a ZIP file containing the application.
 
-1. [Download the App contents](https://github.com/docker/getting-started/tree/master/app){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or download it as a zip and extract the app folder out to get started with.
+1. Download the App contents from the [getting-started repository](https://github.com/docker/getting-started/tree/master){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or [download it as a zip](https://github.com/docker/getting-started/archive/refs/heads/master.zip) and extract the app folder out to get started with.
 
 2. Once extracted, use your favorite code editor to open the project. If you're in need of
     an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should
@@ -74,7 +74,7 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    for the final image. Since we named the image `getting-started`, we can refer to that
    image when we run a container.
 
-   The `.` at the end of the `docker build` command tells that Docker should look for the `Dockerfile` in the current directory.
+   The `.` at the end of the `docker build` command tells Docker that it should look for the `Dockerfile` in the current directory.
 
 ## Start an app container
 

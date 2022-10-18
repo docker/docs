@@ -2,7 +2,7 @@
 description: Compose file reference
 keywords: fig, composition, compose, docker
 redirect_from:
-- /compose/yaml
+- /compose/yaml/
 - /compose/compose-file/compose-file-v1/
 title: Compose specification
 toc_max: 4
@@ -280,7 +280,7 @@ available resources.
 
 Deploy support is an OPTIONAL aspect of the Compose specification, and is
 described in detail in the [Deployment support](deploy.md) documentation.
-not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
+If not implemented the Deploy section SHOULD be ignored and the Compose file MUST still be considered valid.
 
 ### build
 
@@ -427,13 +427,13 @@ cgroup_parent: m-executor-abcd
 
 ### command
 
-`command` overrides the the default command declared by the container image (i.e. by Dockerfile's `CMD`).
+`command` overrides the default command declared by the container image (i.e. by Dockerfile's `CMD`).
 
 ```
 command: bundle exec thin -p 3000
 ```
 
-The command can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The command can also be a list, in a manner similar to [Dockerfile](../../engine/reference/builder.md#cmd):
 
 ```
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
@@ -486,7 +486,7 @@ The long syntax provides more granularity in how the config is created within th
   task containers. Defaults to `/<source>` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the mounted config file
   within the service's task containers. Default value when not specified is USER running container.
-- `mode`: The [permissions](http://permissions-calculator.org/) for the file that is mounted within the service's
+- `mode`: The [permissions](https://web.archive.org/web/20220310140126/http://permissions-calculator.org/) for the file that is mounted within the service's
   task containers, in octal notation. Default value is world-readable (`0444`).
   Writable bit MUST be ignored. The executable bit can be set.
 
@@ -737,7 +737,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+[Dockerfile](../../engine/reference/builder.md#cmd):
 
 ```yml
 entrypoint:
@@ -1082,7 +1082,7 @@ been the case if `group_add` were not declared.
 
 `healthcheck` declares a check that's run to determine whether or not containers for this
 service are "healthy". This overrides
-[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/engine/reference/builder/#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
 set by the service's Docker image.
 
 ```yml
@@ -1252,6 +1252,41 @@ logging:
 The `driver` name specifies a logging driver for the service's containers. The default and available values
 are platform specific. Driver specific options can be set with `options` as key-value pairs.
 
+### mac_address
+
+`mac_address` sets a MAC address for service container.
+
+### mem_limit
+
+_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
+
+### mem_reservation
+
+_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
+
+### mem_swappiness
+
+`mem_swappiness` defines as a percentage (a value between 0 and 100) for the host kernel to swap out
+anonymous memory pages used by a container.
+
+- a value of 0 turns off anonymous page swapping.
+- a value of 100 sets all anonymous pages as swappable.
+
+Default value is platform specific.
+
+### memswap_limit
+
+`memswap_limit` defines the amount of memory container is allowed to swap to disk. This is a modifier
+attribute that only has meaning if `memory` is also set. Using swap allows the container to write excess
+memory requirements to disk when the container has exhausted all the memory that is available to it.
+There is a performance penalty for applications that swap memory to disk often.
+
+- If `memswap_limit` is set to a positive integer, then both `memory` and `memswap_limit` MUST be set. `memswap_limit` represents the total amount of memory and swap that can be used, and `memory` controls the amount used by non-swap memory. So if `memory`="300m" and `memswap_limit`="1g", the container can use 300m of memory and 700m (1g - 300m) swap.
+- If `memswap_limit` is set to 0, the setting MUST be ignored, and the value is treated as unset.
+- If `memswap_limit` is set to the same value as `memory`, and `memory` is set to a positive integer, the container does not have access to swap. See Prevent a container from using swap.
+- If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
+- If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
+
 ### network_mode
 
 `network_mode` set service containers network mode. Available values are platform specific, but Compose
@@ -1410,41 +1445,6 @@ networks:
   app_net_2:
   app_net_3:
 ```
-
-### mac_address
-
-`mac_address` sets a MAC address for service container.
-
-### mem_limit
-
-_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
-
-### mem_reservation
-
-_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
-
-### mem_swappiness
-
-`mem_swappiness` defines as a percentage (a value between 0 and 100) for the host kernel to swap out
-anonymous memory pages used by a container.
-
-- a value of 0 turns off anonymous page swapping.
-- a value of 100 sets all anonymous pages as swappable.
-
-Default value is platform specific.
-
-### memswap_limit
-
-`memswap_limit` defines the amount of memory container is allowed to swap to disk. This is a modifier
-attribute that only has meaning if `memory` is also set. Using swap allows the container to write excess
-memory requirements to disk when the container has exhausted all the memory that is available to it.
-There is a performance penalty for applications that swap memory to disk often.
-
-- If `memswap_limit` is set to a positive integer, then both `memory` and `memswap_limit` MUST be set. `memswap_limit` represents the total amount of memory and swap that can be used, and `memory` controls the amount used by non-swap memory. So if `memory`="300m" and `memswap_limit`="1g", the container can use 300m of memory and 700m (1g - 300m) swap.
-- If `memswap_limit` is set to 0, the setting MUST be ignored, and the value is treated as unset.
-- If `memswap_limit` is set to the same value as `memory`, and `memory` is set to a positive integer, the container does not have access to swap. See Prevent a container from using swap.
-- If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
-- If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
 
 ### oom_kill_disable
 
@@ -1613,7 +1613,7 @@ web:
 
 ### scale
 
--DEPRECATED: use [deploy/replicas](deploy.md#replicas)_
+_DEPRECATED: use [deploy/replicas](deploy.md#replicas)_
 
 `scale` specifies the default number of containers to deploy for this service.
 
@@ -1657,15 +1657,15 @@ the service's containers.
   service's task containers. Defaults to `source` if not specified.
 - `uid` and `gid`: The numeric UID or GID that owns the file within
   `/run/secrets/` in the service's task containers. Default value is USER running container.
-- `mode`: The [permissions](http://permissions-calculator.org/) for the file to be mounted in `/run/secrets/`
+- `mode`: The [permissions](https://web.archive.org/web/20220310140126/http://permissions-calculator.org/) for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation.
   Default value is world-readable permissions (mode `0444`).
   The writable bit MUST be ignored if set. The executable bit MAY be set.
 
-The following example sets the name of the `server-certificate` secret file to `server.crt`
+The following example sets the name of the `server-certificate` secret file to `server.cert`
 within the container, sets the mode to `0440` (group-readable) and sets the user and group
 to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
-the secret lifecycle not directly managed by the Compose implementation.
+the secret lifecycle is not directly managed by the Compose implementation.
 
 ```yml
 services:
@@ -1709,7 +1709,7 @@ Specified as a [byte value](#specifying-byte-values).
 
 `stop_grace_period` specifies how long the Compose implementation MUST wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whichever stop signal has been specified with
-[`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
+[`stop_signal`](#stop_signal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
 
 ```yml
@@ -1756,7 +1756,7 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to [configure namespaced kernel
-parameters (sysctls) at runtime](https://docs.docker.com/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
 
 ### tmpfs
 
@@ -1876,6 +1876,7 @@ expressed in the short form.
   - `nocopy`: flag to disable copying of data from a container when a volume is created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes (either numeric or as bytes unit)
+  - `mode`: the filemode for the tmpfs mount as Unix permission bits as an octal number
 - `consistency`: the consistency requirements of the mount. Available values are platform specific
 
 ### volumes_from
@@ -2061,6 +2062,8 @@ Compose implementations MUST set `com.docker.compose.project` and `com.docker.co
 If set to `true`, `external` specifies that this network’s lifecycle is maintained outside of that of the application.
 Compose Implementations SHOULD NOT attempt to create these networks, and raises an error if one doesn't exist.
 
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
+
 In the example below, `proxy` is the gateway to the outside world. Instead of attempting to create a network, Compose
 implementations SHOULD interrogate the platform for an existing network simply called `outside` and connect the
 `proxy` service's containers to it.
@@ -2158,6 +2161,9 @@ volumes:
 If set to `true`, `external` specifies that this volume already exist on the platform and its lifecycle is managed outside
 of that of the application. Compose implementations MUST NOT attempt to create these volumes, and MUST return an error if they
 do not exist.
+
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
+
 
 In the example below, instead of attempting to create a volume called
 `{project_name}_db-data`, Compose looks for an existing volume simply
@@ -2283,6 +2289,8 @@ configs:
     name: "${HTTP_CONFIG_KEY}"
 ```
 
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
+
 Compose file need to explicitly grant access to the configs to relevant services in the application.
 
 ## Secrets top-level element
@@ -2293,19 +2301,29 @@ The top-level `secrets` declaration defines or references sensitive data that ca
 application. The source of the secret is either `file` or `external`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
+- `environment`: The secret is created with the value of an environment variable.
 - `external`: If set to true, specifies that this secret has already been created. Compose implementation does
   not attempt to create it, and if it does not exist, an error occurs.
 - `name`: The name of the secret object in Docker. This field can be used to
   reference secrets that contain special characters. The name is used as is
   and will **not** be scoped with the project name.
 
-In this example, `server-certificate` is created as `<project_name>_server-certificate` when the application is deployed,
+In this example, `server-certificate` secret is created as `<project_name>_server-certificate` when the application is deployed,
 by registering content of the `server.cert` as a platform secret.
 
 ```yml
 secrets:
   server-certificate:
     file: ./server.cert
+```
+
+In this example, `token` secret  is created as `<project_name>_token` when the application is deployed,
+by registering content of the `OAUTH_TOKEN` environment variable as a platform secret.
+
+```yml
+secrets:
+  token:
+    environment: "OAUTH_TOKEN"
 ```
 
 Alternatively, `server-certificate` can be declared as external, doing so Compose implementation will lookup `server-certificate` to expose secret to relevant services.
@@ -2328,6 +2346,7 @@ secrets:
     name: "${CERTIFICATE_KEY}"
 ```
 
+If `external` is set to `true` , then the resource is not managed by Compose. If `external` is set to `true` and the network configuration has other attributes set besides `name`, then Compose Implementations SHOULD reject the Compose file as invalid.
 Compose file need to explicitly grant access to the secrets to relevant services in the application.
 
 ## Fragments
@@ -2501,7 +2520,7 @@ for complex elements, interpolation MUST be applied _before_ merge on a per-file
 ## Compose documentation
 
 - [User guide](../index.md)
-- [Installing Compose](../install.md)
+- [Installing Compose](../install/index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
 - [Enabling GPU access with Compose](../gpu-support.md)

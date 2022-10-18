@@ -10,6 +10,7 @@ services:
     build:
       args:
         - JEKYLL_ENV
+        - DOCS_URL
       context: .
     image: docs/docstage
     ports:

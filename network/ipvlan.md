@@ -278,7 +278,7 @@ are as follows:
 - VLAN: 10, Subnet: 172.16.80.0/24, Gateway: 172.16.80.1
     - `--subnet=172.16.80.0/24 --gateway=172.16.80.1 -o parent=eth0.10` 
 - VLAN: 20, IP subnet: 172.16.50.0/22, Gateway: 172.16.50.1
-    - `--subnet=172.16.50.0/22 --gateway=172.16.50.1 -o parent=eth0.20 ` 
+    - `--subnet=172.16.50.0/22 --gateway=172.16.50.1 -o parent=eth0.20` 
 - VLAN: 30, Subnet: 10.1.100.0/16, Gateway: 10.1.100.1
     - `--subnet=10.1.100.0/16 --gateway=10.1.100.1 -o parent=eth0.30` 
 

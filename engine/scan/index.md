@@ -47,8 +47,8 @@ latest version to fix this issue.
 
 If you are using the `docker scan` plugin shipped
 with Docker Desktop, update Docker Desktop to version 4.3.1 or
-higher. See the release notes for [Mac](../../desktop/mac/release-notes/index.md) and
-[Windows](../../desktop/windows/release-notes/index.md) for download information.
+higher. See the release notes for [Mac](../../desktop/release-notes.md) and
+[Windows](../../desktop/release-notes.md) for download information.
 
 If you are using Linux, run the following command to manually install the latest
 version of `docker scan`:
@@ -115,6 +115,24 @@ Licenses:          enabled
 
 Note that we do not currently have vulnerability data for your image.
 ```
+
+## Using an HTTP proxy
+
+If your computer needs to use an HTTP proxy, then set the `HTTPS_PROXY` environment variable when using scan. For example:
+
+```console
+$ export HTTPS_PROXY=http://username:password@proxyAddress:port
+$ docker scan hello-world
+```
+
+or for PowerShell:
+
+```console
+> $env:HTTPS_PROXY = "http://username:password@proxy:port"
+> docker scan hello-world
+```
+
+Note that `docker scan` does not use the same proxy settings as Docker Desktop or the settings specified in `.docker/config.json` or the settings used by the Docker engine.
 
 ### Get a detailed scan report
 
@@ -359,7 +377,7 @@ For more information about the vulnerability data, see [Docker Vulnerability Sca
 ### Limiting the level of vulnerabilities displayed
 
 Docker scan allows you to choose the level of vulnerabilities displayed in your scan report using the `--severity` flag.
-You can set the severity flag to `low`, `medium`, or` high` depending on the level of vulnerabilities you’d like to see in your report.  
+You can set the severity flag to `low`, `medium`, or `high` depending on the level of vulnerabilities you’d like to see in your report.  
 For example, if you set the severity level as `medium`, the scan report displays all vulnerabilities that are classified as medium and high.
  
  ```console

@@ -200,7 +200,7 @@ $ dockerd --userns-remap="testuser:testuser"
     $ docker run hello-world
     ```
 
-4.  Verify that a namespaced directory exists within `/var/lib/docker/` named
+5.  Verify that a namespaced directory exists within `/var/lib/docker/` named
     with the UID and GID of the namespaced user, owned by that UID and GID,
     and not group-or-world-readable. Some of the subdirectories are still
     owned by `root` and have different permissions.

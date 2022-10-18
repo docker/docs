@@ -71,9 +71,9 @@ services:
 
 When used to build service images from source, such a Compose file will create three docker images:
 
-* `awesome/webapp` docker image is build using `webapp` sub-directory within Compose file parent folder as docker build context. Lack of a `Dockerfile` within this folder will throw an error.
-* `awesome/database` docker image is build using `backend` sub-directory within Compose file parent folder. `backend.Dockerfile` file is used to define build steps, this file is searched relative to context path, which means for this sample `..` will resolve to Compose file parent folder, so `backend.Dockerfile` is a sibling file.
-* a docker image is build using `custom` directory within user's HOME as docker context. Compose implementation warn user about non-portable path used to build image.
+* `awesome/webapp` docker image is built using `webapp` sub-directory within Compose file parent folder as docker build context. Lack of a `Dockerfile` within this folder will throw an error.
+* `awesome/database` docker image is built using `backend` sub-directory within Compose file parent folder. `backend.Dockerfile` file is used to define build steps, this file is searched relative to context path, which means for this sample `..` will resolve to Compose file parent folder, so `backend.Dockerfile` is a sibling file.
+* a docker image is built using `custom` directory within user's HOME as docker context. Compose implementation warn user about non-portable path used to build image.
 
 On push, both `awesome/webapp` and `awesome/database` docker images are pushed to (default) registry. `custom` service image is skipped as no `Image` attribute is set and user is warned about this missing attribute.
 
@@ -99,7 +99,7 @@ Alternatively `build` can be an object with fields defined as follow
 
 When the value supplied is a relative path, it MUST be interpreted as relative to the location of the Compose file.
 Compose implementations MUST warn user about absolute path used to define build context as those prevent Compose file
-for being portable.
+from being portable.
 
 ```yml
 build:
@@ -110,7 +110,7 @@ build:
 
 `dockerfile` allows to set an alternate Dockerfile. A relative path MUST be resolved from the build context.
 Compose implementations MUST warn user about absolute path used to define Dockerfile as those prevent Compose file
-for being portable.
+from being portable.
 
 ```yml
 build:
@@ -272,6 +272,17 @@ build:
     - "com.example.label-with-empty-value"
 ```
 
+### no_cache
+
+`no_cache` disables image builder cache and enforces a full rebuild from source for all image layers. This only
+applies to layers declared in the Dockerfile, referenced images COULD be retrieved from local image store whenever tag
+has been updated on registry (see [pull](#pull)).
+
+### pull
+
+`pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already 
+available in the local image store.
+
 ### shm_size
 
 `shm_size` set the size of the shared memory (`/dev/shm` partition on Linux) allocated for building Docker image. Specify
@@ -299,7 +310,124 @@ build:
   target: prod
 ```
 
+### secrets
+`secrets` grants access to sensitive data defined by [secrets](index.md#secrets) on a per-service build basis. Two
+different syntax variants are supported: the short syntax and the long syntax.
+
+Compose implementations MUST report an error if the secret isn't defined in the
+[`secrets`](index.md#secrets-top-level-element) section of the Compose file.
+
+#### Short syntax
+
+The short syntax variant only specifies the secret name. This grants the
+container access to the secret and mounts it as read-only to `/run/secrets/<secret_name>`
+within the container. The source name and destination mountpoint are both set
+to the secret name.
+
+The following example uses the short syntax to grant the build of the `frontend` service
+access to the `server-certificate` secret. The value of `server-certificate` is set
+to the contents of the file `./server.cert`.
+
+```yml
+services:
+  frontend:
+    build: 
+      context: .
+      secrets:
+        - server-certificate
+secrets:
+  server-certificate:
+    file: ./server.cert
+```
+
+#### Long syntax
+
+The long syntax provides more granularity in how the secret is created within
+the service's containers.
+
+- `source`: The name of the secret as it exists on the platform.
+- `target`: The name of the file to be mounted in `/run/secrets/` in the
+  service's task containers. Defaults to `source` if not specified.
+- `uid` and `gid`: The numeric UID or GID that owns the file within
+  `/run/secrets/` in the service's task containers. Default value is USER running container.
+- `mode`: The [permissions](https://chmod-calculator.com/) for the file to be mounted in `/run/secrets/`
+  in the service's task containers, in octal notation.
+  Default value is world-readable permissions (mode `0444`).
+  The writable bit MUST be ignored if set. The executable bit MAY be set.
+
+The following example sets the name of the `server-certificate` secret file to `server.crt`
+within the container, sets the mode to `0440` (group-readable), and sets the user and group
+to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
+the secret lifecycle is not directly managed by the Compose implementation.
+
+```yml
+services:
+  frontend:
+    build:
+      context: .
+      secrets:
+        - source: server-certificate
+          target: server.cert
+          uid: "103"
+          gid: "103"
+          mode: 0440
+secrets:
+  server-certificate:
+    external: true
+```
+
+Service builds MAY be granted access to multiple secrets. Long and short syntax for secrets MAY be used in the
+same Compose file. Defining a secret in the top-level `secrets` MUST NOT imply granting any service build access to it.
+Such grant must be explicit within the service specification as a [secrets](index.md#secrets) service element.
+
+### tags
+
+`tags` defines a list of tag mappings that MUST be associated to the build image. This list comes in addition of 
+the `image` [property defined in the service section](index.md#image)
+
+```yml
+tags:
+  - "myimage:mytag"
+  - "registry/username/myrepos:my-other-tag"
+```
+
+### platforms
+
+`platforms` defines a list of target [platforms](index.md#platform).
+
+```yml
+build:
+  context: "."
+  platforms:
+    - "linux/amd64"
+    - "linux/arm64"
+```
+
+When the `platforms` attribute is omitted, Compose implementations MUST include the service's platform
+in the list of the default build target platforms.
+
+Compose implementations SHOULD report an error in the following cases:
+* when the list contains multiple platforms but the implementation is incapable of storing multi-platform images
+* when the list contains an unsupported platform
+```yml
+build:
+  context: "."
+  platforms:
+    - "linux/amd64"
+    - "unsupported/unsupported"
+```
+* when the list is non-empty and does not contain the service's platform
+```yml
+services:
+  frontend:
+    platform: "linux/amd64"
+    build:
+      context: "."
+      platforms:
+        - "linux/arm64"
+```
+
 ## Implementations
 
-* [docker-compose](https://docs.docker.com/compose)
-* [buildX bake](https://docs.docker.com/buildx/working-with-buildx/)
+* [docker-compose](../../compose/index.md)
+* [buildx bake](../../build/customize/bake/index.md)

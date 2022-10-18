@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_push
 title: docker compose push
+redirect_from:
+- /compose/reference/push/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

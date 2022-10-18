@@ -2,6 +2,8 @@
 datafolder: compose-cli
 datafile: docker_compose_unpause
 title: docker compose unpause
+redirect_from:
+- /compose/reference/unpause/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

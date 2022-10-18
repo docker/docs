@@ -54,6 +54,8 @@ $ docker run \
       alpine echo hello world
 ```
 
+Note that `local` is a bash reserved keyword, so you may need to quote it in scripts.
+
 ### Options
 
 The `local` logging driver supports the following logging options:

@@ -25,8 +25,8 @@ To deploy Docker containers on ECS, you must meet the following requirements:
 
 1. Download and install the latest version of Docker Desktop.
 
-    - [Download for Mac](../desktop/mac/install.md)
-    - [Download for Windows](../desktop/windows/install.md)
+    - [Download for Mac](../desktop/install/mac-install.md)
+    - [Download for Windows](../desktop/install/windows-install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
@@ -228,7 +228,7 @@ $ docker secret create dockerhubAccessToken token.json
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
-Once created, you can use this ARN in you Compose file using using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
+Once created, you can use this ARN in your Compose file using `x-aws-pull_credentials` custom extension with the Docker image URI for your service.
 
 ```yaml
 services:

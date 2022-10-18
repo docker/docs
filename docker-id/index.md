@@ -39,7 +39,8 @@ Once you register and verify your Docker ID email address, you can log in to [Do
 
 You can also log in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
 
-> **Warning**:
+> **Warning**
+>
 > When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64-encoded in this file.
 >
@@ -49,8 +50,6 @@ stored in your home directory in `.docker/config.json`. The password is base64-e
 ## Troubleshooting
 
 If you run into trouble with your Docker ID account, know that we are here to help! If you want to retrieve or reset your password, [enter your email address](https://id.docker.com/reset-password/){: target="_blank" rel="noopener" class="_"} for additional instructions.
-
- The most frequently asked questions regarding Docker ID accounts can be found on our [support troubleshooting FAQ](https://hub.docker.com/support/).
 
 You can use the [Docker forums](https://forums.docker.com/) to ask questions amongst other Docker community members, while our [hub-feedback GitHub repository](https://github.com/docker/hub-feedback) allows you to provide feedback on how we can better improve the experience with Docker Hub.
 

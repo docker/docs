@@ -22,6 +22,7 @@ To install Docker Engine, you need the 64-bit version of one of these Fedora ver
 
 - Fedora 34
 - Fedora 35
+- Fedora 36
 
 ### Uninstall old versions
 
@@ -74,7 +75,7 @@ from the repository.
 {% assign download-url-base = "https://download.docker.com/linux/fedora" %}
 
 Install the `dnf-plugins-core` package (which provides the commands to manage
-your DNF repositories) and set up the **stable** repository.
+your DNF repositories) and set up the repository.
 
 ```console
 $ sudo dnf -y install dnf-plugins-core
@@ -84,50 +85,17 @@ $ sudo dnf config-manager \
     {{ download-url-base }}/docker-ce.repo
 ```
 
-> **Optional**: Enable the **nightly** or **test** repositories.
->
-> These repositories are included in the `docker.repo` file above but are disabled
-> by default. You can enable them alongside the stable repository.  The following
-> command enables the **nightly** repository.
->
-> ```console
-> $ sudo dnf config-manager --set-enabled docker-ce-nightly
-> ```
->
-> To enable the **test** channel, run the following command:
->
-> ```console
-> $ sudo dnf config-manager --set-enabled docker-ce-test
-> ```
->
-> You can disable the **nightly** or **test** repository by running the
-> `dnf config-manager` command with the `--set-disabled` flag. To re-enable it,
-> use the `--set-enabled` flag. The following command disables the **nightly**
-> repository.
->
-> ```console
-> $ sudo dnf config-manager --set-disabled docker-ce-nightly
-> ```
->
-> [Learn about **nightly** and **test** channels](index.md).
-
 #### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose
+    or go to the next step to install a specific version:
 
     ```console
-    $ sudo dnf install docker-ce docker-ce-cli containerd.io
+    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
     `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
-
-    > Got multiple Docker repositories?
-    >
-    > If you have multiple Docker repositories enabled, installing
-    > or updating without specifying a version in the `dnf install` or
-    > `dnf update` command always installs the highest possible version,
-    > which may not be appropriate for your stability needs.
 
     This command installs Docker, but it doesn't start Docker. It also creates a
     `docker` group, however, it doesn't add any users to the group by default.
@@ -156,7 +124,7 @@ $ sudo dnf config-manager \
        `docker-ce-3:18.09.1`.
 
     ```console
-    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
+    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -197,12 +165,6 @@ a new file each time you want to upgrade Docker Engine.
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
-
-    > **Note**
-    >
-    > To install a **nightly** or **test** (pre-release) package,
-    > change the word `stable` in the above URL to `nightly` or `test`.
-    > [Learn about **nightly** and **test** channels](index.md).
 
 2.  Install Docker Engine, changing the path below to the path where you downloaded
     the Docker package.
@@ -245,10 +207,10 @@ instead of `dnf -y install`, and point to the new file.
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, and Containerd packages:
+1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io
+    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

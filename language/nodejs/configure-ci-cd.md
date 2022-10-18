@@ -39,7 +39,7 @@ Before we start, ensure you can access [Docker Hub](https://hub.docker.com/) fro
 
 ## Set up the GitHub Actions workflow
 
-In the previous section, we created a PAT and added it to GitHub to ensure we can access Docker Hub from any workflow. Now, let’s set up our GitHub Actions workflow to build and store our images in Hub. We can achieve this by creating two Docker actions:
+In the previous section, we created a PAT and added it to GitHub to ensure we can access Docker Hub from any workflow. Now, let’s set up our GitHub Actions workflow to build and store our images in Hub. We can achieve this by creating two Docker actions in the YAML file below:
 
 1. The first action enables us to log in to Docker Hub using the secrets we stored in the GitHub Repository.
 2. The second one is the build and push action.
@@ -57,13 +57,17 @@ First, we will name this workflow:
 name: CI to Docker Hub
  ```
 
-Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the main branch of our project:
+Then, we will choose when we run this workflow. In our example, we are going to do it for every push against the master branch of our project:
 
 ```yaml
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 ```
+
+> **Note**
+>
+> The branch name may be `main` or `master`. Verify the name of the branch for your repository and update the configuration accordingly.
 
 Now, we need to specify what we actually want to happen within our action (what jobs), we are going to add our build one and select that it runs on the latest Ubuntu instances available:
 
@@ -242,6 +246,4 @@ You can also consider deploying your application. For detailed instructions, see
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs ](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
-
-<br />
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

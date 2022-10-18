@@ -61,9 +61,7 @@ redirect_from:
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) now requires a paid
-> subscription. The grace period for those that will require a paid subscription
-> ends on January 31, 2022. [Learn more](https://www.docker.com/blog/the-grace-period-for-the-docker-subscription-service-agreement-ends-soon-heres-what-you-need-to-know/){:
- target="_blank" rel="noopener" class="_" id="dkr_docs_cta"}.
+> subscription.
 {: .important}
 
 Welcome! We are excited that you want to learn Docker.
@@ -73,15 +71,22 @@ This page contains step-by-step instructions on how to get started with Docker. 
 - Build and run an image as a container
 - Share images using Docker Hub
 - Deploy Docker applications using multiple containers with a database
-- Running applications using Docker Compose
+- Run applications using Docker Compose
 
 In addition, you'll also learn about the best practices for building images, including instructions on how to scan your images for security vulnerabilities.
 
 If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).
 
-We also recommend the video walkthrough from DockerCon 2020.
+We also recommend the video workshop from DockerCon 2022. Watch the video below or use the links to open the video at a particular section.
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+* [Docker overview and installation](https://youtu.be/gAGEar5HQoU)
+* [Pull, run, and explore containers](https://youtu.be/gAGEar5HQoU?t=1400)
+* [Build a container image](https://youtu.be/gAGEar5HQoU?t=3185)
+* [Containerize an app](https://youtu.be/gAGEar5HQoU?t=4683)
+* [Connect a DB and set up a bind mount](https://youtu.be/gAGEar5HQoU?t=6305)
+* [Deploy a container to the cloud](https://youtu.be/gAGEar5HQoU?t=8280)
+
+<iframe src="https://www.youtube-nocookie.com/embed/gAGEar5HQoU" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Download and install Docker
 
@@ -91,9 +96,12 @@ machine. If you do not have Docker installed, choose your preferred operating sy
 [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 [Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64){: .button .primary-btn }
-[Linux](../engine/install/index.md){: .button .primary-btn}
+[Linux](../desktop/install/linux-install.md){: .button .primary-btn}
 
-For Docker Desktop installation instructions, see [Install Docker Desktop on Mac](../desktop/mac/install.md) and [Install Docker Desktop on Windows](../desktop/windows/install.md).
+For Docker Desktop installation instructions, see:
+ - [Install Docker Desktop on Mac](../desktop/install/mac-install.md)
+ - [Install Docker Desktop on Windows](../desktop/install/windows-install.md)
+ - [Install Docker Desktop on Linux](../desktop/install/linux-install.md)
 
 ## Start the tutorial
 
@@ -105,9 +113,9 @@ $ docker run -d -p 80:80 docker/getting-started
 
 You'll notice a few flags being used. Here's some more info on them:
 
-- `-d` - run the container in detached mode (in the background)
-- `-p 80:80` - map port 80 of the host to port 80 in the container
-- `docker/getting-started` - the image to use
+- `-d` - Run the container in detached mode (in the background).
+- `-p 80:80` - Map port 80 of the host to port 80 in the container. To access the tutorial, open a web browser and navigate to `http://localhost:80`. If you already have a service listening on port 80 on your host machine, you can specify another port. For example, specify `-p 3000:80` and then access the tutorial via a web browser at `http://localhost:3000`.
+- `docker/getting-started` - Specify the image to use.
 
 > **Tip**
 >
@@ -121,12 +129,12 @@ You'll notice a few flags being used. Here's some more info on them:
 ## The Docker Dashboard
 
 Before going too far, we want to highlight the Docker Dashboard, which gives
-you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac and Windows. 
+you a quick view of the containers running on your machine. The Docker Dashboard is available for Mac, Windows, and Linux.
 It gives you quick access to container logs, lets you get a shell inside the container, and lets you
-easily manage container lifecycle (stop, remove, etc.).
+easily manage container lifecycles (stop, remove, etc.).
 
 To access the dashboard, follow the instructions in the
-[Docker Desktop manual](../desktop/dashboard.md). If you open the dashboard
+[Docker Desktop manual](../desktop/index.md). If you open the dashboard
 now, you will see this tutorial running! The container name (`jolly_bouman` below) is a
 randomly created name. So, you'll most likely have a different name.
 
@@ -142,23 +150,23 @@ capabilities approachable and easy to use. To summarize, a container:
 
 - is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
 - can be run on local machines, virtual machines or deployed to the cloud.
-- is portable (can be run on any OS)
-- Containers are isolated from each other and run their own software, binaries, and configurations.
+- is portable (can be run on any OS).
+- is isolated from other containers and runs its own software, binaries, and configurations.
 
 > **Creating containers from scratch**
 >
 > If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security
 > has a fantastic talk in which she creates a container from scratch in Go. While the talk
-> does not go into networking, using images for the filesystem, and other advanced topics, 
+> does not go into networking, using images for the filesystem, and other advanced topics,
 > it gives a _fantastic_ deep dive into how things are working.
-> 
-> <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>
+> <iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is a container image?
 
-When running a container, it uses an isolated filesystem. This custom filesystem is provided 
-by a **container image**. Since the image contains the container's filesystem, it must contain everything 
-needed to run an application - all dependencies, configuration, scripts, binaries, etc. The 
+When running a container, it uses an isolated filesystem. This custom filesystem is provided
+by a **container image**. Since the image contains the container's filesystem, it must contain everything
+needed to run an application - all dependencies, configurations, scripts, binaries, etc. The
 image also contains other configuration for the container, such as environment variables,
 a default command to run, and other metadata.
 

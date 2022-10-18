@@ -14,8 +14,7 @@ Two-factor authentication is enabled on your Docker Hub account.
 ## Generate a new recovery code
 
 To disable two-factor authentication, log in to your Docker Hub account. Click
-on your username and select **Account Settings**.  Go to **Security** and click
-on **Click here to generate a new code**.
+on your username and select **Account Settings**. Go to **Security** and **Click here to generate a new code**.
 
 ![New recovery code link](../images/2fa-disable-2fa.png)
 
