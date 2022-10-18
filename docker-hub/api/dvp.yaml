@@ -14,16 +14,16 @@ info:
 
      There are two levels of summary data:
 
-    - Repository-level, a summary of every namespace and repository
-    - Tag- or digest-level, a summary of every namespace, repository, and reference
-      (tag or digest)
+     - Repository-level, a summary of every namespace and repository
+     - Tag- or digest-level, a summary of every namespace, repository, and reference
+       (tag or digest)
 
-     The summary data formats contain the following data points:
+      The summary data formats contain the following data points:
 
-    - Unique IP address count
-    - Pulls by tag count
-    - Pulls by digest count
-    - Version check count
+     - Unique IP address count
+     - Pulls by tag count
+     - Pulls by digest count
+     - Version check count
 
      #### Raw data
 

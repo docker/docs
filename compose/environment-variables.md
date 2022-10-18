@@ -35,7 +35,7 @@ named `.env`. The `.env` file path is as follows:
 
   - Starting from `v1.28`, the `.env` file is placed at the base of the project directory.
   - Project directory can be explicitly defined with the `--file` option or `COMPOSE_FILE`
-  environment variable. Otherwise, it is the current working directory where the `docker compose` command is executed (`+1.28`).
+  environment variable. Otherwise, it is the current working directory where the `docker compose` command is executed (`v1.28`).
   - For versions older than `v1.28`, it might have trouble resolving `.env` file with `--file` or `COMPOSE_FILE`. To work around it, it is recommended to use `--project-directory`, which overrides the path for the `.env` file. This inconsistency is addressed in `v1.28` by limiting the file path to the project directory.
 
 

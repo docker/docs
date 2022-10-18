@@ -10,36 +10,41 @@ Rouge provides lots of different code block "hints". If you leave off the hint,
 it tries to guess and sometimes gets it wrong. These are just a few hints that
 we use often.
 
-#### Raw, no highlighting
+## Raw
 
-The raw markup is needed to keep Liquid from interpreting the things with double
+Use the {% raw %}`{% raw %}`{% endraw %} markup tag to prevent Liquid from interpreting double
 braces as templating language.
 
 {% raw %}
+````
+{​% raw %}
 ```none
-none with raw
+generic code block without syntax highlighting
 $ some command with {{double braces}}
 $ some other command
 ```
+{​% endraw %}
+````
 {% endraw %}
 
-#### Raw, Bash
+## Bash
 
-{% raw %}
+Use the `bash` language code block when you want to a Bash script:
+
 ```bash
-bash with raw
-$ some command with {{double braces}}
-$ some other command
+#!/usr/bin/bash
+echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
 ```
-{% endraw %}
 
-#### Bash
+If you want to illustrate an interactive shell, use `console` instead.
+In cases where you use `console`, make sure to add a dollar character
+for the user sign:
 
-```bash
+```console
 $ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
 ```
 
-#### Go
+## Go
 
 ```go
 incoming := map[string]interface{}{
@@ -54,7 +59,7 @@ incoming := map[string]interface{}{
 }
 ```
 
-#### PowerShell
+## PowerShell
 
 ```powershell
 Install-Module DockerMsftProvider -Force
@@ -63,13 +68,13 @@ Install-Package Docker -ProviderName DockerMsftProvider -Force
 Expand-Archive docker-18.09.1.zip -DestinationPath $Env:ProgramFiles -Force
 ```
 
-#### Python
+## Python
 
 ```python
 return html.format(name=os.getenv('NAME', "world"), hostname=socket.gethostname(), visits=visits)
 ```
 
-#### Ruby
+## Ruby
 
 ```ruby
 docker_service 'default' do
@@ -77,7 +82,7 @@ docker_service 'default' do
 end
 ```
 
-#### JSON
+## JSON
 
 ```json
 "server": {
@@ -98,13 +103,26 @@ end
 </html>
 ```
 
-#### Markdown
+## Markdown
 
 ```markdown
 # Hello
 ```
 
-#### ini
+If you want to include a triple-fenced code block inside your code block,
+you can wrap your block in a quadruple-fenced code block:
+
+`````markdown
+````markdown
+# Hello
+
+```go
+log.Println("did something")
+```
+````
+`````
+
+## ini
 
 ```ini
 [supervisord]
@@ -114,7 +132,7 @@ nodaemon=true
 command=/usr/sbin/sshd -D
 ```
 
-#### Dockerfile
+## Dockerfile
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -151,7 +169,7 @@ VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
 ```
 
-#### YAML
+## YAML
 
 ```yaml
 authorizedkeys:
