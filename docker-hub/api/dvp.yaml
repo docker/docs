@@ -14,12 +14,9 @@ info:
 
      There are two levels of summary data:
 
-     - **Tag/digest-level** - for every namespace, repository, and reference (tag or digest):
-       - Unique IP address count
-       - Pulls by tag count
-       - Pulls by digest count
-       - Version check count
-     - **Repository-level** - for every namespace and repository:
+    - Repository-level, a summary of every namespace and repository
+    - Tag- or digest-level, a summary of every namespace, repository, and reference
+      (tag or digest)
        - Unique IP address count
        - Pulls by tag count
        - Pulls by digest count
