@@ -1,12 +1,12 @@
 ---
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local, compose
-title: Create a Compose Dev Environment
+title: Create an advanced dev environment
 ---
 
-Use Dev Environments to collaborate on any Docker Compose-based projects. 
+Create an advanced dev environment such as a microservice with a server, proxy and DB. 
 
-As with a simple Dev Environment, you can create a Compose Dev Environment from a:
+As with a simple dev environment, you can create a more advanced dev environment from a:
 - Git repository
 - Branch or tag of a Git repository
 - Subfolder of a Git repository
@@ -22,12 +22,12 @@ The example below, taken from the `compose-dev-env` project from the [Docker Sam
 
 >Note
 >
->If you want to create a Compose Dev Environment from a subdirectory of a Git repo, you need to define your own compose file in a .docker folder located in your subdirectory as currently, Dev Environments is not able to detect the main language of the subdirectory. 
+>Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or compose services in a `compose-dev.yaml` located in your subdirectory.
 >
 >For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql) or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres). 
 
 1. From **Dev Environments**, select **Create**. The **Create a Dev Environment** dialog displays. 
-2. Click **Get Started** and then copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Enter the Git Repository** field on the **Existing Git repo** tab.
+2. Click **Get Started** and then copy `https://github.com/dockersamples/compose-dev-env.git` and add it to the **Enter the Git Repository** field with **Existing Git repo** as the source.
 3. Click **Continue**. This initializes the project, clones the Git code, and builds the Compose application. This:
 
     - Builds local images for services that are defined in the Compose file
@@ -43,13 +43,21 @@ Note that VS Code doesn't open directly, unlike a simple Dev Environment, as the
 
 You can now update your service and test it against your Compose application.
 
-## Set up your own Compose Dev Environment
+## Set up your own dev environment
 
-To set up a Dev Environment for your own Compose-based project, there are additional configuration steps to tell Docker Desktop how to build, start, and use the right Dev Environment image for your services.
+>**Changes to Dev Environments with Docker Desktop 4.13**
+>
+>Docker has simplified how you configure your dev environment project. All you need to get started is a `compose-dev.yaml` file. If you have an existing project with a `.docker/` folder this is automatically migrated the next time you launch.
+>
+> If you are using `.docker/docker-compose.yaml`, we move it to `../compose-dev.yaml`.
+>If you are using `.docker/config.json`, we create a `../compose-dev.yaml` file with a single service named "app”. It is configured to use the image or Dockerfile referenced in the JSON as a starting point.
+{: .important}
 
-Dev Environments use an additional `docker-compose.yaml` file located in the `.docker` directory at the root of your project. This file allows you to define the image required for a dedicated service, the ports you'd like to expose, along with additional configuration options dedicated to Dev Environments coming in the future.
+To set up a dev environment, there are additional configuration steps to tell Docker Desktop how to build, start, and use the right image for your services.
 
-Take a detailed look at the `docker-compose.yaml` file used in the [compose-dev-env](https://github.com/dockersamples/compose-dev-env/blob/main/.docker/docker-compose.yaml){:target="_blank" rel="noopener" class="_"} sample project.
+Dev Environments use an `compose-dev.yaml` file located in the at the root of your project. This file allows you to define the image required for a dedicated service, the ports you'd like to expose, along with additional configuration options dedicated to Dev Environments coming in the future.
+
+Take a detailed look at the `compose-dev.yaml` file used in the [compose-dev-env](https://github.com/dockersamples/compose-dev-env/blob/main/.docker/docker-compose.yaml){:target="_blank" rel="noopener" class="_"} sample project.
 
 ```yaml
 version: "3.7"
@@ -120,4 +128,4 @@ In the example, the Docker Compose files are the same. However, they could be di
 
 ## What's next?
 
-Learn how to [share your Dev Environment](share.md)
+Learn how to [distribute your dev environment](share.md)

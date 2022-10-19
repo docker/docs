@@ -3,16 +3,18 @@ description: Dev Environments
 keywords: Dev Environments, share, collaborate, local
 title: Overview
 ---
-
-Dev Environments boosts collaboration by allowing you to share work-in-progress code with your team members. This removes any potential merge conflicts while moving between Git branches to get your code on to their machine.
-
-Dev Environments uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
-
-You can also switch between your developer environments or your team members' environments, move between branches to look at changes that are in progress, without moving off your current Git branch. This makes reviewing PRs as simple as opening a new environment.
-
 > **Beta**
 >
 > The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
+
+Dev Environments lets you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
+
+It uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
+
+>**Changes to Dev Environments with Docker Desktop 4.13**
+>
+>Docker has simplified how you configure your dev environment project. All you need to get started is a `compose-dev.yaml` file. If you have an existing project with a `.docker/` folder this is automatically migrated the next time you launch.
+{: .important}
 
 ![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 
@@ -46,12 +48,11 @@ If it doesn't detect Git as a valid command, you must reinstall Git and ensure y
 
 The following section lists known issues and workarounds:
 
-1. When sharing a Dev Environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
-2. When sharing a Dev Environment between ARM64 and AMD64 machines, the environment is emulated.
+1. When sharing a dev environment between Mac and Windows, the VS Code terminal may not function correctly in some cases. To work around this issue, use the Exec in CLI option in the Docker Dashboard.
 
 ## What's next?
 
 Learn how to:
-- [Create a Dev Environment](create-dev-env.md)
-- [Create a Compose Dev Environment](create-compose-dev-env.md)
-- [Share your Dev Environment](share.md)
+- [Create a simple dev environment](create-dev-env.md)
+- [Create an advanced dev environment](create-compose-dev-env.md)
+- [Distribute your dev environment](share.md)
