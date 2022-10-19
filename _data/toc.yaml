@@ -1337,6 +1337,8 @@ manuals:
                path: /desktop/extensions-sdk/design/mui-best-practices/
         - sectiontitle: Developer SDK tools
           section:
+            - title: Interacting with Kubernetes
+              path: /desktop/extensions-sdk/dev/kubernetes/          
             - title: Authentication
               path: /desktop/extensions-sdk/dev/oauth2-flow/
             - title: CLI reference
