@@ -6,26 +6,20 @@ const codeBlocks = document.querySelectorAll("div.highlighter-rouge")
 codeBlocks.forEach((codeBlock) => {
   codeBlock.insertAdjacentHTML(
     "afterbegin",
-    `<button class="copy">
-            ${copyIcon}
-          </button>`
+    `<button class="copy">${copyIcon}</button>`
   )
 })
 
 // handler that saves the code block innerText to clipboard
 function copyCodeBlock(event) {
   const copyButton = event.currentTarget
-  console.log(copyButton)
-  console.log(copyButton.parentElement)
-  console.log(copyButton.parentElement.querySelector("pre.highlight code"))
   const codeBlock = copyButton.parentElement.querySelector("pre.highlight code")
   const code = codeBlock.innerText.trim()
   window.navigator.clipboard.writeText(code)
 
-  copyButton.textContent = "Copied ✔"
-  setTimeout(function () {
-    copyButton.innerHTML = copyIcon
-  }, 3000)
+  // change the button text temporarily
+  copyButton.textContent = "Copied!"
+  setTimeout(() => copyButton.innerHTML = copyIcon, 3000)
 }
 
 // register event listeners for copy buttons
