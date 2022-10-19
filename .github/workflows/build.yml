@@ -4,7 +4,7 @@ on:
   push:
     # needs push event on default branch otherwise cache is evicted when pull request is merged
     branches:
-      - master
+      - main
   pull_request:
 
 permissions:
