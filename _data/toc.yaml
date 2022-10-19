@@ -1269,6 +1269,28 @@ manuals:
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
+    - sectiontitle: Hardened Desktop
+      section:
+        - path: /desktop/hardened-desktop/
+          title: Overview
+        - sectiontitle: Settings Management
+          section:
+          - path: /desktop/hardened-desktop/settings-management/
+            title: What is Settings Management?
+          - path: /desktop/hardened-desktop/settings-management/configure/
+            title: Configure Settings Management
+        - sectiontitle: Enhanced Container Isolation
+          section:
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/
+            title: What is Enhanced Container Isolation?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
+            title: How does it work?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
+            title: Key features and benefits
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQs and known issues
+        - path: /desktop/hardened-desktop/registry-access-management/
+          title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1680,8 +1702,7 @@ manuals:
     title: System for Cross-domain Identity Management
   - path: /docker-hub/image-access-management/
     title: Image Access Management
-  - path: /docker-hub/registry-access-management/
-    title: Registry Access Management
+
 
 - sectiontitle: Security
   section:

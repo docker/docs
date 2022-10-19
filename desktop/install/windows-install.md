@@ -158,6 +158,10 @@ The install command accepts the following flags:
 - `--no-windows-containers`: disables Windows containers integration
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 - `--backend=<backend name>`: selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
+- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
+  - It must be used together with the `--allowed-org=<org name>` flag. 
+  - For example:
+    `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
