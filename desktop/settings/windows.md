@@ -207,6 +207,8 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 From the **Experimental features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/).
 
+On the **Beta features** tab, you also have the option to allow version 4.13 feature flags, which are product features Docker is currently experimenting with. This is switched on by default. 
+
 ## Kubernetes
 
 > **Note**
