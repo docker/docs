@@ -35,7 +35,7 @@ When Enhanced Container Isolation is enabled using [Settings Management](../sett
 
 - All user containers are automatically run in Linux User Namespaces which ensures stronger isolation.
 - The root user in the container maps to an unprivileged user at VM level.
-- Users can continue using containers as usual, including bind-mounting host directories, volumes, networking configurations, etc.
+- Users can continue using containers as usual, including bind mounting host directories, volumes, networking configurations, etc.
 - Privileged containers work, but they are only privileged within the container's Linux User Namespace, not in the Docker Desktop VM.
 - Containers can no longer share namespaces with the Docker Desktop VM. For example, `--network=host`, `--pid=host`.
 - Containers can no longer modify configuration files in the Docker Desktop VM.
@@ -65,7 +65,10 @@ Next, you must [create and configure the `admin-settings.json` file](../settings
 }
 ```
 
-Once this is done, developers need to either quit, re-launch, and sign in to Docker Desktop, or launch and sign in to Docker Desktop for the first time.
+For this to take effect:
+
+- On a new install, developers need to launch Docker Desktop and authenticate to their organization.
+- On an existing install, developers need to quit Docker Desktop through the Docker menu, and then relaunch Docker Desktop. If they are already signed in, they don’t need to sign in again for the changes to take effect.
 
 >Important
   >
@@ -74,7 +77,7 @@ Once this is done, developers need to either quit, re-launch, and sign in to Doc
 
 ### What do users see when this setting is enforced?
 
-When Enhanced Container Isolation is enabled, users see that containers run within a Linux user-namespace. 
+When Enhanced Container Isolation is enabled, users see that containers run within a Linux user namespace. 
 
 To check, run:
 
@@ -90,7 +93,7 @@ The following output displays:
 
 This indicates that the container's root user (0) maps to unprivileged user (100000) in the Docker Desktop VM, and that the mapping extends for a range of 64K user-IDs.
 
-In contrast, without Enhanced Container Isolation the Linux user-namespace is not used, the following displays:
+In contrast, without Enhanced Container Isolation the Linux user namespace is not used, the following displays:
 
 ```
          0          0 4294967295

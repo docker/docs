@@ -45,12 +45,12 @@ devices.
 Enhanced Container Isolation allows running advanced workloads, but denies the ability to perform
 kernel operations or access hardware devices.
 
-#### Does Enhanced Container Isolation restrict bind-mounts inside the container?
+#### Does Enhanced Container Isolation restrict bind mounts inside the container?
 
-Yes, it restricts bind-mounts of directories located in the Docker Desktop Linux
+Yes, it restricts bind mounts of directories located in the Docker Desktop Linux
 VM into the container.
 
-It does not restrict bind-mounts of your host machine files into the container,
+It does not restrict bind mounts of your host machine files into the container,
 as configured via Docker Desktop's **Settings** > **Resources** > **File Sharing**.
 
 #### Does Enhanced Container Isolation protect all containers launched with Docker Desktop?

@@ -29,7 +29,7 @@ You need to [configure a registry.json to enforce sign-in](../../docker-hub/conf
 To configure Registry Access Management permissions:
 
 1. Sign in to your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner.
-2. Select an organization and then navigate to the **Settings** tab on the **Organizations** page and click **Registry Access**.
+2. Select an organization and then navigate to the **Settings** tab on the **Organizations** page and select **Registry Access**.
 3. Toggle on Registry Access Management to set the permissions for your registry.
 
    > **Note**

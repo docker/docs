@@ -43,7 +43,7 @@ For more details on the syntax and options admins can set, see [Configure Settin
 
 As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Settings Management feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
-Next, you must [create and configure the admin-settings.json file](configure.md). You can also use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location
+Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
 
 Once this is done, Docker Desktop users receive the changed settings when they either:
 - Quit, re-launch, and sign in to Docker Desktop
@@ -51,11 +51,7 @@ Once this is done, Docker Desktop users receive the changed settings when they e
 
 Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers' workflow. 
 
-
-
 ### What do users see when the settings are enforced?
-
-Docker Desktop users see a notification in **Settings**, or **Preferences** if using a macOS, which states **Some settings are managed by your Admin**. 
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 

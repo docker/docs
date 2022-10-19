@@ -40,10 +40,10 @@ mode or Rootless Docker. This is explained further below.
 Sysbox enhances container isolation by using techniques such as:
 
 * Enabling the Linux user-namespace on all containers (root user in the container maps to an unprivileged user in the Linux VM).
-* Restricting the container from mounting sensitive VM directories
-* Vetting sensitive system-calls between the container and the Linux kernel
-* Mapping filesystem user/group IDs between the container's user-namespace and the Linux VM
-* Emulating portions of the procfs and sysfs filesystems inside the container
+* Restricting the container from mounting sensitive VM directories.
+* Vetting sensitive system-calls between the container and the Linux kernel.
+* Mapping filesystem user/group IDs between the container's user-namespace and the Linux VM.
+* Emulating portions of the procfs and sysfs filesystems inside the container.
 
 Some of these are made possible by recent advances in the Linux kernel which
 Docker Desktop now incorporates. Sysbox applies these techniques with minimal
@@ -58,7 +58,7 @@ For more information, see [Key features and benefits](features-benefits.md).
 
 ### Enhanced Container Isolation vs Docker Userns-Remap Mode
 
-The Docker Engine includes a feature called [userns-remap mode][/engine/security/userns-remap/]
+The Docker Engine includes a feature called [userns-remap mode](/engine/security/userns-remap/)
 that enables the user-namespace in all containers. However it suffers from a few
 [limitations](/engine/security/userns-remap/) and it's
 not supported within Docker Desktop.
@@ -73,7 +73,7 @@ Desktop in organizations with stringent security requirements.
 
 ### Enhanced Container Isolation vs Rootless Docker
 
-[Rootless Docker][/engine/security/rootless/] allows the Docker Engine, and by
+[Rootless Docker](/engine/security/rootless/) allows the Docker Engine, and by
 extension the containers, to run without root privileges natively a Linux host. This
 allows non-root users install and run Docker natively on Linux.
 

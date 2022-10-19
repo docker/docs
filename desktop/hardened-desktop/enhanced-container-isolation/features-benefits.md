@@ -134,18 +134,18 @@ Finally, Docker build `--network=host` and Docker buildx entitlements
 (`network.host`, `security.insecure`) are not allowed. Builds that require these
 won't work properly.
 
-### Bind-Mount restrictions
+### Bind mount restrictions
 
 When Enhanced Container Isolation is enabled, Docker Desktop users can continue
-to bind-mount host directories into containers as configured via **Settings** >
-**Resources** > **File sharing**, but they are no longer allowed to bind-mount
+to bind mount host directories into containers as configured via **Settings** >
+**Resources** > **File sharing**, but they are no longer allowed to bind mount
 arbitrary Linux VM directories into containers.
 
 This prevents containers from modifying sensitive files inside the Docker
 Desktop Linux VM, files that can hold configurations for registry access
 management, proxies, docker engine configurations, and more.
 
-For example, the following bind-mount of the Docker Engine's configuration file
+For example, the following bind mount of the Docker Engine's configuration file
 (`/etc/docker/daemon.json` inside the Linux VM) into a container is restricted
 and therefore fails:
 
@@ -157,9 +157,9 @@ docker: Error response from daemon: failed to create shim task: OCI runtime crea
 In contrast, without Enhanced Container Isolation this mount works and gives the
 container full read and write access to the Docker Engine's configuration.
 
-Of course, bind-mounts of host files continue to work as usual. For example,
+Of course, bind mounts of host files continue to work as usual. For example,
 assuming a user configures Docker Desktop to file share her $HOME directory,
-she can bind-mount it into the container:
+she can bind mount it into the container:
 
 ```
 $ docker run -it --rm -v $HOME:/mnt alpine
@@ -168,7 +168,7 @@ $ docker run -it --rm -v $HOME:/mnt alpine
 
 > Note
 >
-> Enhanced Container Isolation won't allow bind-mounting the Docker socket
+> Enhanced Container Isolation won't allow bind mounting the Docker socket
 > (/var/run/docker.sock) into a container, as doing so essentially grants the
 > container control of Docker, thus breaking container isolation. Containers
 > that rely on this will not work with Enhanced Container Isolation enabled.
@@ -181,7 +181,7 @@ few highly sensitive system calls inside containers, such as `mount` and
 system calls can't use them to breach the container.
 
 For example, a container that has `CAP_SYS_ADMIN` (required to execute the
-`mount` system call) can't use that capability to change a read-only bind-mount
+`mount` system call) can't use that capability to change a read-only bind mount
 into a read-write mount:
 
 ```
