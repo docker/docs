@@ -28,7 +28,7 @@ Yes, you can use the `--privileged` flag in containers but unlike privileged
 containers without Enhanced Container Isolation, the container can only use it's elevated privileges to
 access resources assigned to the container. It can't access global kernel
 resources in the Docker Desktop Linux VM. This allows you to run privileged
-containers securely. For more information, so [How it works](how-eci-works.md#privileged-containers-are-also-secured).
+containers securely. For more information, see [Key features and benefits](features-benefits.md#privileged-containers-are-also-secured).
 
 #### Will all privileged container workloads run with Enhanced Container Isolation?
 
@@ -78,7 +78,7 @@ administrative configurations for Docker Desktop, for example.
 
 #### How is ECI different from Docker Engine's userns-remap mode?
 
-See [How does it work](how-eci-works.md#enhanced-container-isolation-vs-docker-userns--remap-mode).
+See [How does it work](how-eci-works.md#enhanced-container-isolation-vs-docker-userns-remap-mode).
 
 #### How is ECI different from Rootless Docker?
 

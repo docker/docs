@@ -11,7 +11,7 @@ keywords: set up, enhanced container isolation, rootless, security
 Enhanced Container Isolation hardens container isolation using the [Sysbox
 container runtime](https://github.com/nestybox/sysbox). Sysbox is a fork of the
 standard OCI runc runtime that was modified to enhance container isolation and
-workloads. For more details see [Under the covers](under-the-covers).
+workloads. For more details see [Under the covers](#under-the-hood).
 
 Starting with version 4.13, Docker Desktop includes a customized version of
 Sysbox.
@@ -68,7 +68,7 @@ container isolation by leveraging the Linux user-namespace.
 
 However, Enhanced Container Isolation is much more advanced since it assigns
 exclusive user-namespace mappings per container automatically and add several
-other [container isolation features](#under-the-covers) meant to secure Docker
+other [container isolation features](#under-the-hood) meant to secure Docker
 Desktop in organizations with stringent security requirements.
 
 ### Enhanced Container Isolation vs Rootless Docker
