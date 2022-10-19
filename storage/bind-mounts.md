@@ -396,7 +396,8 @@ services:
     volumes:
       - type: bind
         source: ./static
-        target: /opt/app/staticvolumes:
+        target: /opt/app/static
+volumes:
   myapp:
 ```
 

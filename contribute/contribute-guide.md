@@ -17,7 +17,7 @@ There are two ways to contribute a pull request to the docs repository:
 
     This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
-2. Fork the [docs GitHub repository](https://github.com/docker/docker.github.io). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `master` branch.
+2. Fork the [docs GitHub repository]({{ site.repo }}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `master` branch.
 
     This is the manual, more advanced version of clicking 'Edit this page' on a published docs page. Initiating a docs changes in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
@@ -67,8 +67,8 @@ A Netlify test runs for each PR created against the `master` branch and deploys 
 On your local machine, clone the docs repository:
 
 ```bash
-git clone --recursive https://github.com/docker/docker.github.io.git
-cd docker.github.io
+git clone {{ site.repo }}.git
+cd docs
 ```
 
 Then, build and run the documentation using [Docker Compose](../compose/index.md)

@@ -11,7 +11,7 @@ redirect_from:
 ---
 <!--
 To edit/add/remove glossary entries, visit the YAML file at:
-https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml
+https://github.com/docker/docs/blob/master/_data/glossary.yaml
 
 To get a specific entry while writing a page in the docs, enter Liquid text
 like so:

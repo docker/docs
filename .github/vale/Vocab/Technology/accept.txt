@@ -10,8 +10,10 @@ SDKs?
 SSO
 TCP
 UDP
+Unix
 VLAN
 VM
+[Nn]amespace
 cgroup
 config
 containerd
@@ -29,7 +31,6 @@ lookup
 macvlan
 mfsymlinks
 musl
-namespace
 osquery
 osxfs
 paravirtualization

@@ -66,7 +66,19 @@ To manually create a `registry.json` file, run the following PowerShell command 
 PS>  Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myorg"]}'
 ```
 
-This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
+This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator:
+
+```console
+PS C:\ProgramData\DockerDesktop> Get-Acl .\registry.json
+
+
+    Directory: C:\ProgramData\DockerDesktop
+
+
+Path          Owner                  Access
+----          -----                  ------
+registry.json BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
+```
 
 </div>
 <div id="mac" class="tab-pane fade" markdown="1">

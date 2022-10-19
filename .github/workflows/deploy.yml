@@ -120,6 +120,7 @@ jobs:
           aws cloudfront create-invalidation --distribution-id ${{ env.DOCS_CLOUDFRONT_ID }} --paths "/*"
         env:
           AWS_REGION: us-east-1 # cloudfront is only available in us-east-1 region
+          AWS_MAX_ATTEMPTS: 5
       -
         name: Send Slack notification
         if: ${{ env.SEND_SLACK_MSG == 'true' }}

@@ -1,6 +1,7 @@
 AWS
 Amazon
 Apple
+Azure( Blob Storage)?
 Artifactory
 BusyBox
 CentOS
@@ -45,6 +46,7 @@ Snyk
 Solr
 SonarQube
 Syft
+TLS
 Twilio
 Ubuntu
 WSL
@@ -52,3 +54,4 @@ Windows
 XWiki
 Zsh
 macOS
+minikube

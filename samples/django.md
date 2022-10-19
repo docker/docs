@@ -267,7 +267,7 @@ In this section, you set up the database connection for Django.
       ```
 
     * Or, for a more elegant shutdown, switch to a different shell, and run
-      [docker compose down](../engine/reference/commandline/compose_down.md) from the top level of your
+      [docker-compose down](../engine/reference/commandline/compose_down.md) from the top level of your
       Django sample project directory.
 
       ```console
