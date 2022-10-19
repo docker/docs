@@ -4,6 +4,8 @@ keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker
 title: Access repositories
 ---
 
+ Within your repository, you can give others access to push and pull to your repository, and you can assign permissions. You can also view your repository tags and the associated images.
+
 ## Collaborators and their role
 
 A collaborator is someone you want to give access to a private repository. Once
@@ -23,38 +25,28 @@ see the [organizations documentation](../../../docker-hub/orgs.md#create-an-orga
 ## Viewing repository tags
 
 Docker Hub's individual repositories view shows you the available tags and the
-size of the associated image. Go to the **Repositories** view and select repository to see its tags.
-
-![Repository View](../../images/repos-create.png)
+size of the associated image. Go to the **Repositories** view and select repository to see its tags. To view individual tags, select the **Tags** tab.
 
 ![View Repo Tags](../../images/repo-overview.png)
 
 Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the `.tar` file
-created when you `docker save` an image.
+created when you `docker save` an image. An image is stale if there has been no push/pull activity for more than one month. For example:
 
-To view individual tags, select the **Tags** tab.
+* It hasn't been pulled for more than one month
+* And it hasn't been pushed for more than one month
 
-![Manage Repo Tags](../../images/repo-tags-list.png)
-
-An image is considered stale if there has been no push/pull activity for more
-than 1 month, i.e.:
-
-* It hasn't been pulled for more than 1 month
-* And it hasn't been pushed for more than 1 month
-
-A multi-architecture image is considered stale if all single-architecture images
+A multi-architecture image is stale if all single-architecture images
 part of its manifest are stale.
 
-To delete a tag, select the corresponding checkbox and select **Delete** from the
-**Action** drop-down list.
+To delete a tag, select the corresponding checkbox and select **Delete** from the **Action** drop-down list.
 
 > **Note**
 >
 > Only a user with administrative access (owner or team member with Admin
 > permission) over the repository can delete tags.
 
-Select a tag's digest to view details.
+You can select a tag's digest to view more details.
 
 ![View Tag](../../images/repo-image-layers.png)
 
@@ -99,6 +91,4 @@ You now have an image from which you can run containers.
 
 ## Starring repositories
 
-Your repositories can be starred and you can star repositories in return. Stars
-are a way to show that you like a repository. They're also an easy way of
-bookmarking your favorites.
+Your can star your repositories. Stars are a way to show that you like a repository. They're also an easy way of bookmarking your favorites.
