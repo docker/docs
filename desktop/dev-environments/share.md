@@ -1,27 +1,25 @@
 ---
 description: Dev Environments
 keywords: Dev Environments, share, collaborate, local, share
-title: Share your Dev Environment
+title: Distribute your dev environment
 ---
 
-{% include upgrade-cta.html
-  body="Docker Team and Business users can now share Dev Environments with their team members."
-  header-text="This feature requires a paid Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade"
-%}
+The `compose-dev.yaml` config file makes distributing your dev environment easy so everyone can access the same code and any dependencies.
 
-Sharing a Dev Environment lets your team members access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and provide feedback before you create a pull request.
+### Distribute your dev environment
 
-## Share your Dev Environment
+When you are ready to share your environment, simply copy the link to the Github repo where your project is stored, and share the link with your team members. 
 
-When you are ready to share your environment, hover over your Dev Environment, select the **Share** icon, and specify the Docker Hub namespace where you’d like to push your Dev Environment to.
+You can also create a link that automatically starts your dev environment when opened. This can then be placed on a GitHub README or pasted into a Slack channel, for example. 
 
-This creates an image of your Dev Environment, uploads it to the Docker Hub namespace you have specified, and provides a tiny URL to share with your team members.
+To create the link simply join the following link with the link to your dev environment's GitHub repository:
 
-![Dev environment shared](../images/dev-share.PNG){:width="700px"}
+`https://open.docker.com/dashboard/dev-envs?url=`
 
-## Open a Dev Environment that has been shared with you
+The following example opens a [Compose sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql), a Go server with an Nginx proxy and a MariaDB/MySQL database, in Docker Desktop.
 
-To open a Dev Environment that was shared with you, select the **Create** button in the top right-hand corner, select the **Existing Dev Environment** tab, and then paste the URL.
+[https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql](https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql)
 
-Using this shared Dev Environment, your team members can access the code, any dependencies, and the current Git branch you are working on. They can also review your changes and give feedback even before you create a pull request!
+### Open a dev environment that has been distributed to you
+
+To open a dev environment that has been shared with you, select the **Create** button in the top right-hand corner, select source **Existing Git repo**, and then paste the URL.
