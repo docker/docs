@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # This Dockerfile builds the docs for https://docs.docker.com/
-# from the master branch of https://github.com/docker/docker.github.io
+# from the master branch of https://github.com/docker/docs
 
 # Use same ruby version as the one in .ruby-version
 # that is used by Netlify

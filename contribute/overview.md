@@ -3,6 +3,7 @@ title: Contribute to Docker's docs
 toc_max: 1
 redirect_from:
 - /CONTRIBUTING/
+- /opensource/
 ---
 
 We deeply value documentation contributions from the Docker community. We'd like to make it as easy
@@ -25,8 +26,8 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                  <img src="/assets/images/menu-book.svg" alt="Docker Desktop for Mac" width="45" height="45">
             </div>
-                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Grammar guide</a></h2>
-                <p>Explore Docker's grammar guide.</p>
+                <h2 id="docker-for-mac"><a href="/contribute/style/grammar/">Grammar and style</a></h2>
+                <p>Explore Docker's grammar and style guide.</p>
          </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
@@ -34,7 +35,7 @@ as possible for you to work in this repository. The following sections guide you
             <div class="component-icon">
                 <img src="/assets/images/newspaper.svg" alt="Docker for Linux" width="45" height="45">
             </div>
-                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Formatting guidelines</a></h2>
+                <h2 id="docker-for-linux"><a href="/contribute/style/formatting/">Formatting</a></h2>
                 <p>Format your content to match the rest of our documentation.</p>
         </div>
     </div>
@@ -78,3 +79,4 @@ We also provide:
 - A section of useful components you can add to your documentation. For components and controls, we use [Bootstrap](https://getbootstrap.com)
 - Information on Docker's [tone and voice](style/voice-tone.md).
 - A [writing checklist](checklist.md) to help you when you're contributing to Docker's documentation.
+- A command-line tool called vale to check the style and [help you find errors in your writing](contribute-guide.md#test-the-docs-locally). 

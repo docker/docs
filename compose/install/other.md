@@ -46,7 +46,7 @@ When asked if you want to allow this app to make changes to your device, click *
 3. Run the following command to download the latest release of Compose ({{site.compose_version}}):
 
     ```powershell
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
+     Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
     > **Note**

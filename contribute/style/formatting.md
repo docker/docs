@@ -56,7 +56,7 @@ The best links offer readers another way to scan information.
 
 - Use plain language that does not mislead or promise too much.
 - Be short and descriptive (around five words is best).
-- Allow people to predict (with a fair degree of confidence) what they will get if they click mirror the heading text on the destination page in links whenever possible.
+- Allow people to predict (with a fair degree of confidence) what they will get if they click. Mirror the heading text on the destination page in links whenever possible.
 - Front-load user-and-action-oriented terms at the beginning of the link (Download our app).
 - Avoid generic calls to action (such as click here, find out more).
 - Do not include any end punctuation when you hyperlink text (for example, periods, question marks, or exclamation points).

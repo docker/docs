@@ -1,6 +1,7 @@
 AWS
 Amazon
 Apple
+Azure( Blob Storage)?
 Artifactory
 BusyBox
 CentOS
@@ -18,6 +19,7 @@ GeoNetwork
 GitHub( Actions)?
 Google
 Intel
+JFrog
 JetBrains
 Kubernetes
 Lightstreamer
@@ -30,6 +32,7 @@ MySQL
 Nginx
 Nuxeo
 OAuth
+OCI
 Okta
 Postgres
 PowerShell
@@ -43,6 +46,7 @@ Snyk
 Solr
 SonarQube
 Syft
+TLS
 Twilio
 Ubuntu
 WSL
@@ -50,3 +54,4 @@ Windows
 XWiki
 Zsh
 macOS
+minikube
