@@ -13,7 +13,7 @@ Docker images are pushed to Docker Hub through the [`docker push`](/engine/refer
 command. A single Docker Hub repository can hold many Docker images (stored as
 **tags**).
 
-## Creating repositories
+## Creating a repository
 
 To create a repository, sign into Docker Hub, select **Repositories** then
 **Create Repository**:
@@ -31,20 +31,26 @@ When creating a new repository:
   >
   > You can't rename a Docker Hub repository once it's created.
 
-* The description can be up to 100 characters and is used in the search result.
+* The description can be up to 100 characters and used in the search result.
 * You can link a GitHub or Bitbucket account now, or choose to do it later in
   the repository settings.
 
 ![Setting page for creating a repo](../images/repo-create-details.png)
 
-After you hit the **Create** button, you can start using `docker push` to push
+After you select **Create**, you can start using `docker push` to push
 images to this repository.
+
+## Creating a private repository
+
+To create a private repository, navigate to Docker Hub and select **Repositories** and **Private**.
+
+![Create Private Repo](/docker-hub/images/repo-create-private.png){: style="max-width: 60%"}
 
 ## Deleting a repository
 
-1. Sign into [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Repositories**.
+1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Repositories**.
 
-2. Select a repository from the list, select **Settings** and then Delete Repository.
+2. Select a repository from the list, select **Settings**, and then Delete Repository.
 
     > **Note:**
     >
