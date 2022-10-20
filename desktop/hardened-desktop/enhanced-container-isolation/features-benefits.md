@@ -191,8 +191,8 @@ mount: permission denied (are you root?)
 ```
 
 Since the `$HOME` directory was mounted into the container's `/mnt` directory as
-read-only, it can't be changed from within the container to read-write. This
-ensures container processes use `mount`, or `umount`, to breach the container's
+read-only, it can't be changed from within the container to read-write, even if the container process has the capability to do so. This
+ensures container processes can't use `mount`, or `umount`, to breach the container's
 root filesystem.
 
 Note however that in the example above the container can still create mounts

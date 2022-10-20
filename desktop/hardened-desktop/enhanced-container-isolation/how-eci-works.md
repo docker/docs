@@ -11,7 +11,7 @@ keywords: set up, enhanced container isolation, rootless, security
 Enhanced Container Isolation hardens container isolation using the [Sysbox
 container runtime](https://github.com/nestybox/sysbox). Sysbox is a fork of the
 standard OCI runc runtime that was modified to enhance container isolation and
-workloads. For more details see [Under the covers](#under-the-hood).
+workloads. For more details see [Under the hood](#under-the-hood).
 
 Starting with version 4.13, Docker Desktop includes a customized version of
 Sysbox.
