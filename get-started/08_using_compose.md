@@ -352,12 +352,13 @@ for the entire app. The containers will stop and the network will be removed.
 Once torn down, you can switch to another project, run `docker compose up` and be ready to contribute to that project! It really
 doesn't get much simpler than that!
 
-## Recap
+## Next steps
 
-In this section, we learned about Docker Compose and how it helps us dramatically simplify the defining and
-sharing of multi-service applications. We created a Compose file by translating the commands we were
+In this section, you learned about Docker Compose and how it helps you dramatically simplify the defining and
+sharing of multi-service applications. You created a Compose file by translating the commands you were
 using into the appropriate compose format.
 
-At this point, we're starting to wrap up the tutorial. However, there are a few best practices about
-image building we want to cover, as there is a big issue with the Dockerfile we've been using. So,
-let's take a look!
+At this point, you're starting to wrap up the tutorial. However, there are a few best practices about
+image building you should cover, as there is a big issue with the Dockerfile you've been using. 
+
+[Image-building best practices](09_image_best.md){: .button  .primary-btn}

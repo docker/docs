@@ -94,14 +94,16 @@ new instance that has never seen this container image! To do this, we will use P
 6. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
     If the 3000 badge doesn't show up, you can click on the "Open Port" button and type in 3000.
 
-## Recap
 
-In this section, we learned how to share our images by pushing them to a registry. We then went to a
+## Next steps
+
+In this section, you learned how to share your images by pushing them to a registry. You then went to a
 brand new instance and were able to run the freshly pushed image. This is quite common in CI pipelines,
 where the pipeline will create the image and push it to a registry and then the production environment
 can use the latest version of the image.
 
-Now that we have that figured out, let's circle back around to what we noticed at the end of the last
-section. As a reminder, we noticed that when we restarted the app, we lost all of our todo list items.
-That's obviously not a great user experience, so let's learn how we can persist the data across 
-restarts!
+Now you can circle back around to what you noticed at the end of the last
+section. As a reminder, you noticed that when you restarted the app, you lost all of your todo list items.
+That's obviously not a great user experience, so next you'll learn how you can persist the data across restarts!
+
+[Persist the DB](05_persisting_data.md){: .button  .primary-btn}

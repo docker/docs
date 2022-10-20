@@ -156,10 +156,11 @@ need to have root access to access this directory from the host. But, that's whe
 >If you wanted to look at the actual contents of the Mountpoint directory, you would need to first get inside
 >of the VM.
 
-## Recap
+## Next steps
 
-At this point, we have a functioning application that can survive restarts! We can show it off to our investors and
-hope they can catch our vision!
+At this point, you have a functioning application that can survive restarts! You can show it off to your investors and hope they can catch your vision!
 
-However, we saw earlier that rebuilding images for every change takes quite a bit of time. There's got to be a better
-way to make changes, right? With bind mounts (which we hinted at earlier), there is a better way! Let's take a look at that now!
+However, you saw earlier that rebuilding images for every change takes quite a bit of time. There's got to be a better
+way to make changes, right? With bind mounts (which was hinted at earlier), there is a better way!
+
+[Use bind mounts](06_bind_mounts.md){: .button  .primary-btn}
