@@ -35,7 +35,7 @@ Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 
 ```console
-$ sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 It's OK if `apt-get` reports that none of these packages are installed.
@@ -82,9 +82,9 @@ from the repository.
     repository over HTTPS:
 
     ```console
-    $ sudo apt-get update
+    sudo apt-get update
 
-    $ sudo apt-get install \
+    sudo apt-get install \
         ca-certificates \
         curl \
         gnupg \
@@ -94,14 +94,14 @@ from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo mkdir -p /etc/apt/keyrings
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the repository:
 
     ```console
-    $ echo \
+    echo \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
@@ -114,8 +114,8 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
    Engine, containerd, and Docker Compose, or go to the next step to install a specific version:
 
     ```console
-    $ sudo apt-get update
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
     > Receiving a GPG error when running `apt-get update`?
@@ -130,7 +130,7 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
     a. List the versions available in your repo:
 
     ```console
-    $ apt-cache madison docker-ce
+    apt-cache madison docker-ce
 
       docker-ce | 5:18.09.1~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
       docker-ce | 5:18.09.0~3-0~debian-stretch | {{ download-url-base }} stretch/stable amd64 Packages
@@ -142,14 +142,14 @@ This procedure works for Debian on `x86_64` / `amd64`, `armhf`, `arm64`, and Ras
        for example, `5:18.09.1~3-0~debian-stretch`.
 
     ```console
-    $ sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
+    sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io docker-compose-plugin
     ```
 
 3.  Verify that Docker Engine is installed correctly by running the `hello-world`
     image.
 
     ```console
-    $ sudo docker run hello-world
+    sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -181,7 +181,7 @@ a new file each time you want to upgrade Docker.
     the Docker package.
 
     ```console
-    $ sudo dpkg -i /path/to/package.deb
+    sudo dpkg -i /path/to/package.deb
     ```
 
     The Docker daemon starts automatically.
@@ -190,7 +190,7 @@ a new file each time you want to upgrade Docker.
     image.
 
     ```console
-    $ sudo docker run hello-world
+    sudo docker run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -214,7 +214,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
@@ -222,8 +222,8 @@ To upgrade Docker Engine, download the newer package file and repeat the
     volumes:
 
     ```console
-    $ sudo rm -rf /var/lib/docker
-    $ sudo rm -rf /var/lib/containerd
+    sudo rm -rf /var/lib/docker
+    sudo rm -rf /var/lib/containerd
     ```
 
 You must delete any edited configuration files manually.
