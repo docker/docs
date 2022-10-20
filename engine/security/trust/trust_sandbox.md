@@ -331,5 +331,5 @@ anonymous volumes that have been created, just run the following command in the
 directory where you've created your Docker Compose file:
 
   ```console
-  $ docker-compose down -v
+  $ docker compose down -v
   ```
