@@ -32,7 +32,7 @@ containers securely. For more information, see [Key features and benefits](featu
 
 #### Will all privileged container workloads run with Enhanced Container Isolation?
 
-No. Privileged container workloads that wish to access global kernel resources, for example non-namespaced, inside the Docker Desktop Linux VM won't
+No. Privileged container workloads, or non-namespaced workloads, that wish to access global kernel resources inside the Docker Desktop Linux VM won't
 work. For example, you can't use a privileged container to load a kernel module.
 
 #### Why not just restrict usage of the `--privileged` flag?
