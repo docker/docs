@@ -213,11 +213,13 @@ View Tags on DockerHub to see multi-platform result:
 New commands and multiple bug fixes included with Docker Desktop 4.13.0.
 
 ### New
-* Fixed: Kubernetes not starting.
-* Fixed: Kubernetes IN Docker (kind) not starting.
-* Fixed: Dev Environments not working.
-* Fixed: Insecure Registries not working.
-* New: `docker diff` and `docker run --platform` support.
+* Added `docker diff` and `docker run --platform` support.
+
+### Bug fixes
+* Fixed a bug which caused Kubernetes not starting.
+* Fixed a bug which caused Kubernetes IN Docker (kind) not starting.
+* Fixed a bug which caused Dev Environments not working.
+* Fixed a bug which caused Insecure Registries not working.
 
 ### Known issues
 * Listing images with `docker images` returns the error `content digest not found` on ARM machines after running or pulling an image with the `--platform` parameter.
