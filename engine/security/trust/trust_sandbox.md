@@ -79,10 +79,9 @@ the `trustsandbox` container, the Notary server, and the Registry server.
 
 4. Add the following to the new file.
 
-        version: "2"
         services:
           server:
-            image: notary:server-0.6.1-2
+            image: notary:server-0.7.0
             container_name: notaryserver
             networks:
               sandbox:
@@ -98,7 +97,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
               notary-server -config=/notarydir/fixtures/server-config-local.json"
 
           signer:
-            image: notary:signer-0.6.1-2
+            image: notary:signer-0.7.0
             container_name: notarysigner
             networks:
               sandbox:
@@ -112,7 +111,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
               notary-signer -config=/notarydir/fixtures/signer-config-local.json"
 
           trustsandbox:
-            image: docker:dind
+            image: docker:20.10.20-dind
             networks:
               - sandbox
             volumes:
@@ -127,7 +126,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
                     dockerd-entrypoint.sh --insecure-registry sandboxregistry:5000'
 
           sandboxregistry:
-            image: registry:2.7
+            image: registry:2.8.1
             networks:
               sandbox:
                 aliases:
