@@ -15,6 +15,53 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.20
+2022-10-18
+
+This release of Docker Engine contains partial mitigations for a Git vulnerability
+([CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"}),
+and has updated handling of `image:tag@digest` image references.
+
+The Git vulnerability allows a maliciously crafted Git repository, when used as a
+build context, to copy arbitrary filesystem paths into resulting containers/images;
+this can occur in both the daemon, and in API clients, depending on the versions and
+tools in use.
+
+The mitigations available in this release and in other consumers of the daemon API
+are partial and only protect users who build a Git URL context (e.g. `git+protocol://`).
+As the vulnerability could still be exploited by manually run Git commands that interact
+with and check out submodules, users should immediately upgrade to a patched version of
+Git to protect against this vulernability. Further details are available from the GitHub
+blog (["Git security vulnerabilities announced"](https://github.blog/2022-10-18-git-security-vulnerabilities-announced/){:target="_blank" rel="noopener"}).
+
+
+### Client
+
+- Added a mitigation for [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"},
+  when using the classic Builder with a Git URL as the build context.
+
+### Daemon
+
+- Updated handling of `image:tag@digest` references. When pulling an image using
+  the `image:tag@digest` ("pull by digest"), image resolution happens through
+  the content-addressable digest and the `image` and `tag` are not used. While
+  this is expected, this could lead to confusing behavior, and could potentially
+  be exploited through social engineering to run an image that is already present
+  in the local image store. Docker now checks if the digest matches the repository
+  name used to pull the image, and otherwise will produce an error.
+
+
+### Builder
+
+- Updated handling of `image:tag@digest` references. Refer to the "Daemon" section
+  above for details.
+- Added a mitigation to the classic Builder and updated BuildKit to [v0.8.3-31-gc0149372](https://github.com/moby/buildkit/commit/c014937225cba29cfb1d5161fd134316c0e9bdaa){:target="_blank" rel="noopener"},
+  for [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"}.
+
+### Packaging
+
+- Update Docker Compose to [v2.12.0](https://github.com/docker/compose/releases/tag/v2.12.0){:target="_blank" rel="noopener"}.
+
 ## 20.10.19
 2022-10-14
 

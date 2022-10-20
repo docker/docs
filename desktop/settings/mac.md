@@ -159,9 +159,11 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Experimental Features
+## Beta Features
 
-{% include experimental.md %}
+{% include beta.md %}
+
+On the **Beta features** tab, you also have the option to allow version 4.13 feature flags, which are product features Docker is currently experimenting with. This is switched on by default. 
 
 ### Enable the new Apple Virtualization framework
 

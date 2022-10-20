@@ -1269,18 +1269,38 @@ manuals:
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
+    - sectiontitle: Hardened Desktop
+      section:
+        - path: /desktop/hardened-desktop/
+          title: Overview
+        - sectiontitle: Settings Management
+          section:
+          - path: /desktop/hardened-desktop/settings-management/
+            title: What is Settings Management?
+          - path: /desktop/hardened-desktop/settings-management/configure/
+            title: Configure Settings Management
+        - sectiontitle: Enhanced Container Isolation
+          section:
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/
+            title: What is Enhanced Container Isolation?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
+            title: How does it work?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
+            title: Key features and benefits
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQs and known issues
+        - path: /desktop/hardened-desktop/registry-access-management/
+          title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a Dev Environment
+          title: Create a simple dev environment
         - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create a Compose Dev Environment
+          title: Create an advanced dev environment
         - path: /desktop/dev-environments/share/
-          title: Share your Dev Environment
-        - path: /desktop/dev-environments/specify/
-          title: Specify a Dockerfile or base image
+          title: Distribute your dev environment
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
@@ -1337,6 +1357,8 @@ manuals:
                path: /desktop/extensions-sdk/design/mui-best-practices/
         - sectiontitle: Developer SDK tools
           section:
+            - title: Interacting with Kubernetes
+              path: /desktop/extensions-sdk/dev/kubernetes/          
             - title: Authentication
               path: /desktop/extensions-sdk/dev/oauth2-flow/
             - title: CLI reference
@@ -1678,8 +1700,7 @@ manuals:
     title: System for Cross-domain Identity Management
   - path: /docker-hub/image-access-management/
     title: Image Access Management
-  - path: /docker-hub/registry-access-management/
-    title: Registry Access Management
+
 
 - sectiontitle: Security
   section:
