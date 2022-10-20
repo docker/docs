@@ -105,13 +105,15 @@ much easier than having to look up the container ID and remove it.
 ![Updated application with updated empty text](images/todo-list-updated-empty-text.png){: style="width:55%" }
 {: .text-center }
 
-## Recap
+## Next steps
 
-While we were able to build an update, there were two things you might have noticed:
+While you were able to build an update, there were two things you might have noticed:
 
-- All of the existing items in our todo list are gone! That's not a very good app! We'll talk about that
+- All of the existing items in your todo list are gone! That's not a very good app! You'll fix that
 shortly.
-- There were _a lot_ of steps involved for such a small change. In an upcoming section, we'll talk about 
-how to see code updates without needing to rebuild and start a new container every time we make a change.
+- There were a lot of steps involved for such a small change. In an upcoming section, you'll learn
+how to see code updates without needing to rebuild and start a new container every time you make a change.
 
-Before talking about persistence, we'll quickly see how to share these images with others.
+Before talking about persistence, you'll see how to share these images with others.
+
+[Sharing the application](04_sharing_app.md){: .button .primary-btn}
