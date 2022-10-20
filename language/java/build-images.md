@@ -181,6 +181,15 @@ Successfully built a0bb458aabd0
 Successfully tagged java-docker:latest
 ```
 
+> **Note**
+>
+> If you are using Windows, the source file line endings may cause errors when building the container image.
+> To ensure the line endings are compatible, open a Git bash terminal and run the following command.
+> ```console
+> $ cd /path/to/working/directory/spring-petclinic/
+> $  find . -type f -exec dos2unix {} \;
+> ```
+
 ## View local images
 
 To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As we are currently working in the terminal let’s take a look at listing images using the CLI.
