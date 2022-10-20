@@ -187,3 +187,11 @@ Refer to the following topics for further documentation on all CLI commands used
 - [docker image](../engine/reference/commandline/image.md)
 - [docker container](../engine/reference/commandline/container.md)
 
+## Next steps
+
+In this section, you installed Docker, learned about Docker, and learned about containers and images.
+
+In the next section, you'll containerize your first application.
+
+[Containerize an application](02_our_app.md){: .button  .primary-btn}
+
