@@ -82,7 +82,7 @@ When Enhanced Container Isolation is enabled, users see that containers run with
 To check, run:
 
 ```
-$ docker run -it --rm alpine / # cat /proc/self/uid_map 
+$ docker run --rm alpine cat /proc/self/uid_map 
 ```
 
 The following output displays:
@@ -105,9 +105,9 @@ With Enhanced Container Isolation, if a process were to escape the container, it
 
 Since Enhanced Container Isolation [uses the Sysbox container runtime](how-eci-works.md) embedded in the Docker Desktop Linux VM, another way to determine if a container is running with Enhanced Container Isolation is by using `docker inspect`:
 
-```
-docker inspect --format='{{.HostConfig.Runtime}}' my_container
-```
+{% highlight liquid %}
+docker inspect --format={% raw %}'{{.HostConfig.Runtime}}'{% endraw %} my_container
+{% endhighlight %}
 
 It outputs:
 
