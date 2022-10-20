@@ -187,7 +187,7 @@ Successfully tagged java-docker:latest
 > To ensure the line endings are compatible, open a Git bash terminal and run the following command.
 > ```console
 > $ cd /path/to/working/directory/spring-petclinic/
-> $  find . -type f -exec dos2unix {} \;
+> $ find . -type f -exec dos2unix {} \;
 > ```
 
 ## View local images
