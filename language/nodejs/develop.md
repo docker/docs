@@ -50,14 +50,30 @@ $ docker run -it --rm -d -v mongodb:/data/db \
 Okay, now that we have a running MongoDB, let’s update `server.js` to use MongoDB and not an in-memory data store.
 
 ```javascript
-const ronin     = require( 'ronin-server' )
-const mocks     = require( 'ronin-mocks' )
+const ronin 		= require( 'ronin-server' )
 const database  = require( 'ronin-database' )
-const server = ronin.server()
+const mocks 		= require( 'ronin-mocks' )
 
-database.connect( process.env.CONNECTIONSTRING )
-server.use( '/', mocks.server( server.Router(), false, false ) )
-server.start()
+async function main() {
+
+    try {
+    await database.connect( process.env.CONNECTIONSTRING )
+    
+    const server = ronin.server({
+            port: process.env.SERVER_PORT
+        })
+
+        server.use( '/', mocks.server( server.Router()) )
+
+    const result = await server.start()
+        console.info( result )
+    
+    } catch( error ) {
+        console.error( error )
+    }
+}
+
+main()
 ```
 
 We’ve added the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
