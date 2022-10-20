@@ -38,12 +38,13 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
     The parent image is modified by adding a new `code` directory, as well as any required intermediate directories. 
     
-    The working directory is set to `/code`. While the `WORKDIR` keyword does create a new directory if required, it does so at root. It is therefore preferable to create a directory with `mkdir` before, which allows the container to be run as a different user.
+    The working directory is set to `/code`. While the `WORKDIR` keyword creates a new directory if required, it does so at root. Therefore, you must first create a directory using `mkdir` as this allows the container to run as a different user.
 
-    Next we `COPY` `requirements.txt` into the working directory before `RUN`-ing the `pip install -r requirements.txt` command. The order of copying `requirements.txt` (a list of dependencies to install) before running the install command is commonly used in Dockerfiles. It ensures only changes made to `requirements.txt` (or a previous line) would bust the build cache. Without changes affecting prior lines, the result of the install command can be served from the build cache, greatly speeding up the build time.
+    Next, `COPY` `requirements.txt` into the working directory before you `RUN` the `pip install -r requirements.txt` command. The order of copying `requirements.txt`, a list of dependencies to install before running the install command, is commonly used in Dockerfiles. It ensures only changes made to `requirements.txt` or a previous line would invalidate the build cache. This results in a faster build time as the install command uses build cache and doesn't have to reinstall all the dependencies when there's no change.
+
     
-    Lastly we `COPY` our remaining files from our current directory to our working directory.
-    The `COPY` of remaining files is deliberately left until the end, as it means changes to _any_ file would invalidate the cache from that command onwards.
+    Lastly, `COPY` the remaining files from the current directory to the working directory.
+    The `COPY` command is deliberately included at the end, as changes to _any_ file would invalidate the cache starting with that command.
 
 4. Save and close the `Dockerfile`.
 
