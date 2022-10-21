@@ -37,3 +37,8 @@ If you already have Docker Engine and Docker CLI installed, you can install the 
 ### Scenario three: Install the Compose standalone 
 
 You can [install the Compose standalone](other.md) on Linux or on Windows Server.
+
+>Note
+>
+>This install scenario is no longer supported.
+{: .important}
