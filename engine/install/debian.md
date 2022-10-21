@@ -59,11 +59,10 @@ You can install Docker Engine in different ways, depending on your needs:
 - You can also set up and install Docker Engine from
   [Docker's `apt` repository](#install-using-the-repository).
 
-- [Install it manually](#install-from-a-package) and manage upgrades completely
-  manually.
+- [Install it manually](#install-from-a-package) and manage upgrades manually.
 
-- Using a [convenience scripts](#install-using-the-convenience-script) (only
-  recommended for testing and development environments). This is the only
+- Using a [convenience scripts](#install-using-the-convenience-script). Only
+  recommended for testing and development environments. This is the only
   approach available for Raspbian.
 
 ### Install using the repository
@@ -72,7 +71,7 @@ Before you install Docker Engine for the first time on a new host machine, you
 need to set up the Docker repository. Afterward, you can install and update
 Docker from the repository.
 
-> **Raspbian users can't use this method!**
+> **Raspbian users can't use this method.**
 >
 > For Raspbian, installing using the repository isn't yet supported. You must
 > instead use the [convenience script](#install-using-the-convenience-script).
@@ -160,8 +159,8 @@ Raspbian.
 
    5:18.09.1~3-0~debian-stretch
    5:18.09.0~3-0~debian-stretch
-   18.06.1~ce~3-0~debian       
-   18.06.0~ce~3-0~debian       
+   18.06.1~ce~3-0~debian
+   18.06.0~ce~3-0~debian
    ```
 
    Select the desired version and install:
@@ -175,7 +174,7 @@ Raspbian.
    <hr>
    </div>
 
-3. Verify that the Docker Engine installation was successful by running the
+3. Verify that the Docker Engine installation is successful by running the
    `hello-world` image:
 
    ```console
@@ -231,7 +230,7 @@ download a new file each time you want to upgrade Docker Engine.
 
    The Docker daemon starts automatically.
 
-6. Verify that the Docker Engine installation was successful by running the
+6. Verify that the Docker Engine installation is successful by running the
    `hello-world` image:
 
    ```console

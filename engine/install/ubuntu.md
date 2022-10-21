@@ -33,8 +33,8 @@ versions:
 - Ubuntu Focal 20.04 (LTS)
 - Ubuntu Bionic 18.04 (LTS)
 
-Docker Engine is compatible with `x86_64` (or `amd64`), `armhf`, `arm64`, and `s390x`
-architectures.
+Docker Engine is compatible with `x86_64` (or `amd64`), `armhf`, `arm64`, and
+`s390x` architectures.
 
 ### Uninstall old versions
 
@@ -64,11 +64,10 @@ You can install Docker Engine in different ways, depending on your needs:
 - You can also set up and install Docker Engine from
   [Docker's `apt` repository](#install-using-the-repository).
 
-- [Install it manually](#install-from-a-package) and manage upgrades completely
-  manually.
+- [Install it manually](#install-from-a-package) and manage upgrades manually.
 
-- Using a [convenience scripts](#install-using-the-convenience-script) (only
-  recommended for testing and development environments).
+- Using a [convenience scripts](#install-using-the-convenience-script). Only
+  recommended for testing and development environments.
 
 ### Install using the repository
 
@@ -171,7 +170,7 @@ Docker from the repository.
    <hr>
    </div>
 
-3. Verify that the Docker Engine installation was successful by running the
+3. Verify that the Docker Engine installation is successful by running the
    `hello-world` image:
 
    ```console
@@ -227,7 +226,7 @@ download a new file each time you want to upgrade Docker Engine.
 
    The Docker daemon starts automatically.
 
-6. Verify that the Docker Engine installation was successful by running the
+6. Verify that the Docker Engine installation is successful by running the
    `hello-world` image:
 
    ```console
