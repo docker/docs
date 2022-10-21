@@ -38,7 +38,7 @@ we have created a ZIP file containing the application.
 In order to build the application, you'll need to use a `Dockerfile`. A
 Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that are used to create a container image. 
 
-1. In the `app` folder, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands to create a Dockerfile based on your operating system.
+1. In the `app` folder, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
 
    <ul class="nav nav-tabs">
      <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
@@ -47,7 +47,7 @@ Dockerfile is simply a text-based file with no file extension. A Dockerfile cont
    <div class="tab-content">
    <div id="mac-linux" class="tab-pane fade in active" markdown="1">
 
-    In the terminal, run the following commands.
+    In the terminal, run the following commands listed below.
 
    ```console
    $ cd /path/to/app
@@ -58,7 +58,7 @@ Dockerfile is simply a text-based file with no file extension. A Dockerfile cont
    </div>
    <div id="windows" class="tab-pane fade" markdown="1">
 
-   In the Windows Command Prompt, run the following commands.
+   In the Windows Command Prompt, run the following commands listed below.
 
    ```console
    $ cd \path\to\app
@@ -80,7 +80,7 @@ Dockerfile is simply a text-based file with no file extension. A Dockerfile cont
    CMD ["node", "src/index.js"]
    EXPOSE 3000
    ```
-  > **Tip**
+  > **Note**
   >
   > Select an instruction in the Dockerfile example to learn more about the instruction.
 
