@@ -46,7 +46,7 @@ The following video walks you through the process of configuring SSO.
     > **Note**
     >
     > The NameID is your email address and is set as the default.
-    > For example, yourname@mycompany.com. We also support the optional `name` attribute. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
+    > For example, yourname@mycompany.com. The optional `name` attribute is also supported. This attribute name must be lower-cased. _The following is an example of this attribute in Okta._
 
     ![SSO Attribute](/single-sign-on/images/sso-attribute.png){:width="500px"}
 
@@ -129,7 +129,7 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
     > **Note**
     >
     > Once you've verified your domain, you can move forward to test your
-    > configuration and enforce SSO, or you can [Configure your System Cross-domain Identity Management (SCIM)](/docker-hub/scim.md).
+    > configuration and enforce SSO, or you can configure your [System Cross-domain Identity Management (SCIM)](/docker-hub/scim.md).
 
 ## Test your SSO configuration
 

@@ -41,4 +41,4 @@ When you disable SSO, you can delete the connection to remove the configuration 
 
 ## FAQs
 
-To learn more see [FAQs](/single-sign-on/faqs.md).
+To learn more see [FAQs](../faqs.md).
