@@ -914,7 +914,7 @@ and see [Understand the risks of running out of memory](../../config/containers/
 Configures if and how to restart containers when they exit. Replaces
 [`restart`](compose-file-v2.md#orig-resources).
 
-  - `condition`: One of `no`, `on-failure`, `always` or `unless-stopped` (default: `no`).
+- `condition`: One of `no`, `on-failure`, `always` or `unless-stopped` (default: `no`).
 - `delay`: How long to wait between restart attempts, specified as a
   [duration](#specifying-durations) (default: 5s).
 - `max_attempts`: How many times to attempt to restart a container before giving
