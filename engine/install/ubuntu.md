@@ -175,7 +175,6 @@ Docker from the repository.
    `hello-world` image:
 
    ```console
-   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
@@ -232,7 +231,6 @@ download a new file each time you want to upgrade Docker Engine.
    `hello-world` image:
 
    ```console
-   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 

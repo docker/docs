@@ -179,7 +179,6 @@ Raspbian.
    `hello-world` image:
 
    ```console
-   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
