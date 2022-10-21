@@ -34,7 +34,7 @@ On the **General** tab, you can configure when to start Docker and specify other
   dashboard when starting Docker Desktop.
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command).
+  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
 
 ## Resources
 
