@@ -1,6 +1,7 @@
 APIs?
 Ethernet
 Git
+GPG
 HTTP
 IPs?
 IPv[46]
@@ -43,6 +44,7 @@ stdout
 subnet
 swappable
 systemd
+umask
 ungated
 virtiofs
 virtualize
