@@ -1,16 +1,36 @@
 ---
 description: Docker security announcements
-keywords: Docker, CVEs, security, notice, Log4J 2, Log4Shell, announcements
+keywords: Docker, CVEs, security, notice, Log4J 2, Log4Shell, Text4Shell, announcements
 title: Docker security announcements
 toc_min: 1
 toc_max: 2
 ---
 
-## CVE-2022-42889
+## Text4Shell CVE-2022-42889
 
 [CVE-2022-42889](https://nvd.nist.gov/vuln/detail/CVE-2022-42889){:target="_blank" rel="noopener" class="_"} was discovered in the popular Apache Commons Text library. Versions of this library up to but not including 1.10.0 are affected by this vulnerability.
 
 We strongly encourage you to update to the [latest version](https://commons.apache.org/proper/commons-text/download_text.cgi) if you can.
+
+### Scan images using the `docker scan` command
+
+`docker scan` as shipped with latest versions of Docker Desktop detects the Text4Shell CVE-2022-42889 vulnerability.
+
+If an image is vulnerable to CVE-2022-42889, the output of `docker scan` will contain the following text:
+
+```
+  Upgrade org.apache.commons:commons-text@1.9 to org.apache.commons:commons-text@1.10.0 to fix
+  ✗ Arbitrary Code Execution (new) [High Severity][https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-3043138] in org.apache.commons:commons-text@1.9
+    introduced by org.apache.commons:commons-text@1.9
+```
+
+### Scan images on Docker Hub
+
+Docker Hub security scans triggered **after 1200 UTC 21 October 2021** are now
+correctly identifying the Text4Shell CVE. Scans before this date **do not**
+currently reflect the status of this vulnerability. Therefore, we recommend that
+you trigger scans by pushing new images to Docker Hub to view the status of
+the Text4Shell CVE in the vulnerability report. For detailed instructions, see [Scan images on Docker Hub](../docker-hub/vulnerability-scanning.md).
 
 ### Docker Official Images impacted by CVE-2022-42889
 
@@ -29,13 +49,13 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 
 | Repository                | Patched version         | Additional documentation       |
 |:------------------------|:-----------------------|:-----------------------|
-| [bonita](https://hub.docker.com/_/bonita) | Awaiting info | Awaiting info |
-| [Couchbase](https://hub.docker.com/_/couchbase) | Awaiting info | Awaiting info |
-| [Geonetwork](https://hub.docker.com/_/geonetwork) | Awaiting info | Awaiting info |
-| [neo4j](https://hub.docker.com/_/neo4j) | Awaiting info | Awaiting info |
-| [sliverpeas](https://hub.docker.com/_/sliverpeas) | Awaiting info | Awaiting info |
-| [solr](https://hub.docker.com/_/solr) | Awaiting info | Awaiting info |
-| [xwiki](https://hub.docker.com/_/xwiki) |  Awaiting info | Awaiting info |
+| [bonita](https://hub.docker.com/_/bonita) |  | In progress |
+| [Couchbase](https://hub.docker.com/_/couchbase) |  | In progress |
+| [Geonetwork](https://hub.docker.com/_/geonetwork) |  | In progress |
+| [neo4j](https://hub.docker.com/_/neo4j) |  | In progress |
+| [sliverpeas](https://hub.docker.com/_/sliverpeas) |  | In progress |
+| [solr](https://hub.docker.com/_/solr) |  | In progress |
+| [xwiki](https://hub.docker.com/_/xwiki) |  | In progress |
 
 
 ## CVE-2021-45449
