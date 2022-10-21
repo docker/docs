@@ -113,9 +113,9 @@ The following video walks you through the process of configuring SSO.
 
 7. Proceed to **add your domain** before you test and enforce SSO.
 
-## Domain control
+## Domain
 
-Click **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker currently supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
+Select **Add Domain** and specify the corporate domain you’d like to manage with SSO. Domains should be formatted without protocol or www information, for example, yourcompany.com. Docker supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
 
 > **Note**
 >
@@ -137,7 +137,7 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
     * Name/Host/Alias: leave the default (@ or blank)
     * Time to live (TTL): enter **86400**
 
-3. After you have updated the fields, click **Save**.
+3. After you have updated the fields, select **Save**.
 
     > **Note**
     >
@@ -145,7 +145,7 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
     > your DNS host. The Domains table will have an Unverified status during
     > this time.
 
-4. In the Security section of your Docker organization, click **Verify** next to the domain you want to verify after 72 hours.
+4. In the Security section of your Docker organization, select **Verify** next to the domain you want to verify after 72 hours.
 
 Once you've verified your domain, you can move forward to test your configuration and enforce SSO, or you can [Configure your System Cross-domain Identity Management (SCIM)](../docker-hub/scim.md).
 
@@ -163,7 +163,7 @@ Test SSO by logging in and out successfully, confirm that all members in your or
 
 Admins can force users to authenticate with Docker Desktop by provisioning a registry.json configuration file. The registry.json file will force users to authenticate as a user that is configured in the allowedOrgs list in the registry.json file. For info on how to configure a registry.json file see [Configure registry.json](../docker-hub/image-access-management.md#enforce-authentication)
 
-1. On the Single Sign-On page in Docker Hub, click **Turn ON Enforcement** to enable your SSO.
+1. On the Single Sign-On page in Docker Hub, select **Turn ON Enforcement** to enable your SSO.
 2. When SSO is enforced, your members are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
 
 > **Note**
