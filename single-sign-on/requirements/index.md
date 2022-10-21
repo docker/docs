@@ -3,6 +3,7 @@ description: Single Sign-on requirements
 keywords: Single Sign-on, SSO, sign-on, requirements
 title: Requirements
 ---
+
 ## Prerequisites
 
 * You must first notify your company about the new SSO login procedures
