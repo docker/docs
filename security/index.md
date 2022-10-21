@@ -8,9 +8,9 @@ toc_max: 2
 
 ## Text4Shell CVE-2022-42889
 
-[CVE-2022-42889](https://nvd.nist.gov/vuln/detail/CVE-2022-42889){:target="_blank" rel="noopener" class="_"} was discovered in the popular Apache Commons Text library. Versions of this library up to but not including 1.10.0 are affected by this vulnerability.
+[CVE-2022-42889](https://nvd.nist.gov/vuln/detail/CVE-2022-42889){:target="_blank" rel="noopener" class="_"} has been discovered in the popular Apache Commons Text library. Versions of this library up to but not including 1.10.0 are affected by this vulnerability.
 
-We strongly encourage you to update to the [latest version](https://commons.apache.org/proper/commons-text/download_text.cgi) if you can.
+We strongly encourage you to update to the latest version of [Apache Commons Text](https://commons.apache.org/proper/commons-text/download_text.cgi){:target="_blank" rel="noopener" class="_"}.
 
 ### Scan images using the `docker scan` command
 
