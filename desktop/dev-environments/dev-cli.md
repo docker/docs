@@ -23,7 +23,7 @@ docker dev [OPTIONS] COMMAND
 | `list`               | Lists all dev environments               |
 | `logs`               | Traces logs from a dev environment       |
 | `open`               | Open Dev Envrionment with the IDE        |
-| `rm `                | Removes a dev environment                |
+| `rm`                 | Removes a dev environment                |
 | `start`              | Starts a dev environment                 |
 | `stop`               | Stops a dev environment                  |
 | `version`            | Shows the Docker Dev version information |
