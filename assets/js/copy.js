@@ -15,8 +15,8 @@ function copyCodeBlock(event) {
   const copyButton = event.currentTarget
   const codeBlock = copyButton.parentElement.querySelector("pre.highlight code")
   const code = codeBlock.innerText.trim()
-  // remove "$ " prompt at start of lines in code
-  const strippedCode = code.replace(/^[\s]?\$\s+/gm, "")
+  // remove $ prompt and space at start of lines in code
+  const strippedCode = code.replace( /(^ ?\$ )|(^ )/gm, "")
   window.navigator.clipboard.writeText(strippedCode)
 
   // change the button text temporarily
