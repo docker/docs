@@ -205,3 +205,78 @@ RUN g++ -o /binary source.cpp
 ## Version compatibility
 
 Multi-stage build syntax was introduced in Docker Engine 17.05.
+
+## Differences between legacy build and BuildKit
+
+The legacy Docker Engine builder processes all stages of a Dockerfile leading up to the selected `--target`. It will build a stage even if the selected target doesn't depend on that stage.
+
+BuildKit only builds the stages that the target stage depends on.
+
+For example, given the following Dockerfile:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM ubuntu AS base
+RUN echo "base"
+
+FROM base AS stage1
+RUN echo "stage1"
+
+FROM base AS stage2
+RUN echo "stage2"
+```
+
+With BuildKit enabled, building the `stage2` target in this Dockerfile means only `base` and `stage2` are processed. There is no dependency on `stage1`, so it's skipped.
+
+```console
+$ DOCKER_BUILDKIT=1 docker build --no-cache -f Dockerfile --target stage2 .
+[+] Building 0.4s (7/7) FINISHED                                                                                                                                                                                
+ => [internal] load build definition from Dockerfile                                                                                                                                                       0.0s
+ => => transferring dockerfile: 36B                                                                                                                                                                        0.0s
+ => [internal] load .dockerignore                                                                                                                                                                          0.0s
+ => => transferring context: 2B                                                                                                                                                                            0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                                                                                                                                           0.0s
+ => CACHED [base 1/2] FROM docker.io/library/ubuntu                                                                                                                                                        0.0s
+ => [base 2/2] RUN echo "base"                                                                                                                                                                             0.1s
+ => [stage2 1/1] RUN echo "stage2"                                                                                                                                                                         0.2s
+ => exporting to image                                                                                                                                                                                     0.0s
+ => => exporting layers                                                                                                                                                                                    0.0s
+ => => writing image sha256:f55003b607cef37614f607f0728e6fd4d113a4bf7ef12210da338c716f2cfd15                                                                                                               0.0s
+```
+
+On the other hand, building the same target without BuildKit results in all stages being processed:
+
+```console
+$ DOCKER_BUILDKIT=0 docker build --no-cache -f Dockerfile --target stage2 .
+Sending build context to Docker daemon  219.1kB
+Step 1/6 : FROM ubuntu AS base
+ ---> a7870fd478f4
+Step 2/6 : RUN echo "base"
+ ---> Running in e850d0e42eca
+base
+Removing intermediate container e850d0e42eca
+ ---> d9f69f23cac8
+Step 3/6 : FROM base AS stage1
+ ---> d9f69f23cac8
+Step 4/6 : RUN echo "stage1"
+ ---> Running in 758ba6c1a9a3
+stage1
+Removing intermediate container 758ba6c1a9a3
+ ---> 396baa55b8c3
+Step 5/6 : FROM base AS stage2
+ ---> d9f69f23cac8
+Step 6/6 : RUN echo "stage2"
+ ---> Running in bbc025b93175
+stage2
+Removing intermediate container bbc025b93175
+ ---> 09fc3770a9c4
+Successfully built 09fc3770a9c4
+```
+
+`stage1` gets executed when BuildKit is disabled, even if `stage2` does not depend on it.
+
+BuildKit is enabled by default if you use Docker Desktop.
+
+Always run multi-stage builds with
+[BuildKit enabled](/develop/develop-images/build_enhancements/)
+for better performance.
