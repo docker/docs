@@ -206,13 +206,13 @@ RUN g++ -o /binary source.cpp
 
 Multi-stage build syntax was introduced in Docker Engine 17.05.
 
-## Moby vs BuildKit engine differences
+## Differences between legacy build and BuildKit
 
-- With Moby engine, all stages from the beginning of the Dockerfile up to the specified stage are executed, even if 
-some stages are not dependencies of the target stage.
-- With BuildKit, only the transitive dependencies of the target stage are executed.
+The legacy Docker Engine builder processes all stages of a Dockerfile leading up to the selected `--target`. It will build a stage even if the selected target doesn't depend on that stage.
 
-For example, check the following Dockerfile:
+BuildKit only builds the stages that the target stage depends on.
+
+For example, given the following Dockerfile:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -226,12 +226,10 @@ FROM base AS stage2
 RUN echo "stage2"
 ```
 
-- Output for BuildKit enabled:
+With BuildKit enabled, building the `stage2` target in this Dockerfile means only `base` and `stage2` are processed. There is no dependency on `stage1`, so it's skipped.
 
 ```console
 $ DOCKER_BUILDKIT=1 docker build --no-cache -f Dockerfile --target stage2 .
-```
-```console
 [+] Building 0.4s (7/7) FINISHED                                                                                                                                                                                
  => [internal] load build definition from Dockerfile                                                                                                                                                       0.0s
  => => transferring dockerfile: 36B                                                                                                                                                                        0.0s
@@ -246,12 +244,10 @@ $ DOCKER_BUILDKIT=1 docker build --no-cache -f Dockerfile --target stage2 .
  => => writing image sha256:f55003b607cef37614f607f0728e6fd4d113a4bf7ef12210da338c716f2cfd15                                                                                                               0.0s
 ```
 
-- Output for BuildKit disabled:
+On the other hand, building the same target without BuildKit results in all stages being processed:
 
 ```console
 $ DOCKER_BUILDKIT=0 docker build --no-cache -f Dockerfile --target stage2 .
-```
-```console
 Sending build context to Docker daemon  219.1kB
 Step 1/6 : FROM ubuntu AS base
  ---> a7870fd478f4
@@ -279,9 +275,8 @@ Successfully built 09fc3770a9c4
 
 `stage1` gets executed when BuildKit is disabled, even if `stage2` does not depend on it.
 
-BuildKit is not enabled by default on all platforms. For example, while it is enabled on macOS, it is
-NOT on Linux.
+BuildKit is enabled by default if you use Docker Desktop.
 
-Docker multi-stage builds should always be run with
+Always run multi-stage builds with
 [BuildKit enabled](/develop/develop-images/build_enhancements/)
-to avoid the problem described above.
+for better performance.
