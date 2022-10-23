@@ -85,7 +85,7 @@ In this example, the Wasm application will leverage a MariaDB database running i
     Resolving deltas: 100% (29/29), done.
     ```
 
-1. Navigate into the cloned project and start the project using Docker Compose.
+2. Navigate into the cloned project and start the project using Docker Compose.
 
     ```
     $ cd microservice-rust-mysql
@@ -98,7 +98,7 @@ In this example, the Wasm application will leverage a MariaDB database running i
     microservice-rust-mysql-db-1      | Version: '10.9.3-MariaDB-1:10.9.3+maria~ubu2204'  socket: '/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
     ```
 
-1. In another terminal, we can see the Wasm image that was created.
+3. In another terminal, we can see the Wasm image that was created.
 
     ```
     $ docker images
@@ -106,7 +106,7 @@ In this example, the Wasm application will leverage a MariaDB database running i
     server       latest    2c798ddecfa1   2 minutes ago   3MB
     ```
 
-1. Inspecting the image will show the image has a `wasi/wasm32` platform (combination of Os and Architecture).
+4. Inspecting the image will show the image has a `wasi/wasm32` platform (combination of Os and Architecture).
 
     ```
     $ docker image inspect server | grep -A 3 "Architecture"
@@ -116,16 +116,16 @@ In this example, the Wasm application will leverage a MariaDB database running i
             "VirtualSize": 3001146,
     ```
 
-1. Open the website at http://localhost:8090 and create a few sample orders. All of these are interacting with the Wasm server.
+5. Open the website at http://localhost:8090 and create a few sample orders. All of these are interacting with the Wasm server.
 
-1. When you're all done, tear everything down by hitting Ctrl+C in the terminal you launched the application.
+6. When you're all done, tear everything down by hitting Ctrl+C in the terminal you launched the application.
 
 
 ### Building and pushing a Wasm module
 
 1. Create a Dockerfile that will build your Wasm application. This will vary depending on the language you are using.
 
-1. In a separate stage in your `Dockerfile`, extract the module and set it as the `ENTRYPOINT`.
+2. In a separate stage in your `Dockerfile`, extract the module and set it as the `ENTRYPOINT`.
 
     ```
     FROM scratch
@@ -133,19 +133,19 @@ In this example, the Wasm application will leverage a MariaDB database running i
     ENTRYPOINT [ "hello_world.wasm" ]
     ```
 
-1. Build and push the image specifying the `wasi/wasm32` architecture. Buildx makes this easy to do in a single command.
+3. Build and push the image specifying the `wasi/wasm32` architecture. Buildx makes this easy to do in a single command.
 
-```
-$ docker buildx build --platform wasi/wasm32 -t username/hello-world .
-...
- => exporting to image                                                                             0.0s
- => => exporting layers                                                                            0.0s
- => => exporting manifest sha256:2ca02b5be86607511da8dc688234a5a00ab4d58294ab9f6beaba48ab3ba8de56  0.0s
- => => exporting config sha256:a45b465c3b6760a1a9fd2eda9112bc7e3169c9722bf9e77cf8c20b37295f954b    0.0s
- => => naming to docker.io/username/hello-world:latest                                            0.0s
- => => unpacking to docker.io/username/hello-world:latest                                         0.0s
- $ docker push username/hello-world
-```
+    ```
+    $ docker buildx build --platform wasi/wasm32 -t username/hello-world .
+    ...
+    => exporting to image                                                                             0.0s
+    => => exporting layers                                                                            0.0s
+    => => exporting manifest sha256:2ca02b5be86607511da8dc688234a5a00ab4d58294ab9f6beaba48ab3ba8de56  0.0s
+    => => exporting config sha256:a45b465c3b6760a1a9fd2eda9112bc7e3169c9722bf9e77cf8c20b37295f954b    0.0s
+    => => naming to docker.io/username/hello-world:latest                                            0.0s
+    => => unpacking to docker.io/username/hello-world:latest                                         0.0s
+    $ docker push username/hello-world
+    ```
 
 
 ## Docker+Wasm Release Notes
