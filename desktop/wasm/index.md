@@ -19,6 +19,7 @@ To learn more about the launch and how it works, read [the launch blog post here
 The Docker+Wasm integration currently requires a technical preview build of Docker Desktop.
 
 >**Warning**
+>
 > With the technical preview build of Docker Desktop, things might not work as expected. Be sure to back up your containers and images before proceeding.
 {: .warning}
 
@@ -162,7 +163,7 @@ Initial release
 ### New
 - Initial implementation of Wasm integration
 
-## Known issues
+### Known issues
 - Docker Compose may not exit cleanly when interrupted
     - Workaround: Clean up `docker-compose` processes by sending them a SIGKILL (`killall -9 docker-compose`).
 - Pushes to Hub might give an error stating `server message: insufficient_scope: authorization failed`, even after logging in using Docker Desktop
