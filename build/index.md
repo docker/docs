@@ -5,6 +5,7 @@ keywords: build, buildx, buildkit
 redirect_from:
 - /build/buildx/
 - /buildx/working-with-buildx/
+- /develop/develop-images/build_enhancements/
 ---
 
 ## Overview
