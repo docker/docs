@@ -56,10 +56,49 @@ a prepared set of build steps.
 
 ## Frontend
 
-A frontend is a component that takes a human-readable
-build format and converts it to LLB so BuildKit can execute it. Frontends can
-be distributed as images, and the user can target a specific version of a
-frontend that is guaranteed to work for the features used by their definition.
+A frontend is a component that takes a human-readable build format and converts
+it to LLB so BuildKit can execute it. Frontends can be distributed as images,
+and the user can target a specific version of a frontend that is guaranteed to
+work for the features used by their definition.
 
 For example, to build a [Dockerfile](../../engine/reference/builder.md) with
 BuildKit, you would [use an external Dockerfile frontend](dockerfile-frontend.md).
+
+## Getting started
+
+BuildKit is enabled by default for all users on [Docker Desktop](../../desktop/index.md).
+If you have installed Docker Desktop, you don't have to manually enable
+BuildKit. If you are running Docker on Linux, you can enable BuildKit either by
+using an environment variable or by making BuildKit the default setting.
+
+To set the BuildKit environment variable when running the `docker build`
+command, run:
+
+```console
+$ DOCKER_BUILDKIT=1 docker build .
+```
+
+>**Note**
+>
+> Buildx always enables BuildKit.
+
+To enable docker BuildKit by default, set daemon configuration in `/etc/docker/daemon.json`
+feature to `true` and restart the daemon. If the `daemon.json` file doesn't
+exist, create new file called `daemon.json` and then add the following to the
+file.
+
+```json
+{
+  "features": {
+    "buildkit" : true
+  }
+}
+```
+
+And restart the Docker daemon.
+
+> **Warning**
+>
+> BuildKit only supports building Linux containers. Windows support is tracked
+> in [`moby/buildkit#616`](https://github.com/moby/buildkit/issues/616){:target="_blank" rel="noopener" class="_"}
+{: .warning}

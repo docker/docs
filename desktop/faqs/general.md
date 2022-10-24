@@ -56,8 +56,8 @@ This includes:
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
 - Settting up [Dev Environments](../dev-environments/index.md)
-- Docker build when using [Buildkit](../../develop/develop-images/build_enhancements.md). You can work around this by disabling
-  BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
+- Docker build when using [BuildKit](../../build/buildkit/index.md#getting-started).
+  You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
 - Deploying an app to the cloud through Compose
   [ACI](../../cloud/aci-integration.md) and [ECS](../../cloud/ecs-integration.md)
   integrations
