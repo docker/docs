@@ -5,7 +5,9 @@ keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
 
-This page provides information about the ongoing integration of `containerd` for image and file system management in the Docker Engine.
+This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker.
+
+To learn more about the launch and how it works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/).
 
 > **Beta**
 >
