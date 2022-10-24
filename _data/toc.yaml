@@ -1379,6 +1379,8 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/reference/README/
     - path: /desktop/containerd/
       title: Containerd Image Store (Beta)
+    - path: /desktop/wasm/
+      title: Wasm (Beta)
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
