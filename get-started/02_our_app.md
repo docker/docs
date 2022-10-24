@@ -35,12 +35,40 @@ we have created a ZIP file containing the application.
 
 ## Build the app's container image
 
-In order to build the application, we need to use a `Dockerfile`. A
-Dockerfile is simply a text-based script of instructions that is used to
-create a container image. If you've created Dockerfiles before, you might
-see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
+In order to build the application, you'll need to use a `Dockerfile`. A
+Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that are used to create a container image. 
 
-1. In the `app` folder, the same location as the `package.json` file, create a file named `Dockerfile` with the following contents.
+1. In the `app` folder, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
+
+   <ul class="nav nav-tabs">
+     <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
+     <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
+   </ul>
+   <div class="tab-content">
+   <div id="mac-linux" class="tab-pane fade in active" markdown="1">
+
+    In the terminal, run the following commands listed below.
+
+   ```console
+   $ cd /path/to/app
+   $ touch Dockerfile
+   ```
+
+   <hr>
+   </div>
+   <div id="windows" class="tab-pane fade" markdown="1">
+
+   In the Windows Command Prompt, run the following commands listed below.
+
+   ```console
+   $ cd \path\to\app
+   $ type nul > Dockerfile
+   ```
+    <hr>
+   </div>
+   </div>
+
+2. Add the following contents to the Dockerfile. If you've created Dockerfiles before, you might see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
 
    ```dockerfile
    # syntax=docker/dockerfile:1
@@ -52,10 +80,11 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    CMD ["node", "src/index.js"]
    EXPOSE 3000
    ```
+  > **Note**
+  >
+  > Select an instruction in the Dockerfile example to learn more about the instruction.
 
-   Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
-
-2. Open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
+3. Open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
 
    ```console
    $ docker build -t getting-started .
