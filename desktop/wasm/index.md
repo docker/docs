@@ -5,9 +5,9 @@ keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
 
-This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker.
+Wasm (short for WebAssembly) is a faster, lighter alternative to the Linux & Windows containers you’re using in Docker today (with [some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/)). 
 
-To learn more about the launch and how it works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/).
+This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker. To learn more about the launch and how the preview works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/).
 
 > **Beta**
 >
