@@ -21,7 +21,7 @@
         {%- for entry in site.data.toc.horizontalnav -%}
           {%- if entry.hide_home -%}{% continue %}{%- endif -%}
           <li{% if entry.node == "home" %} class=active{% endif %}><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
-        {%- endfor -%} 
+        {%- endfor -%}
         <li><a href="/contribute/overview/">Contribute</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -125,17 +125,38 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-md-6"><a href="/language/">Containerize language-specific apps using Docker</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/engine/reference/builder/">Write a Dockerfile</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/network/">Manage container networking</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/compose/compose-file/">Write a Docker Compose file</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/storage/">Work with volumes and bind mounts</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/get-started/04_sharing_app/">Share my image on Docker Hub</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/config/daemon/">Configure the Docker daemon</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/get-started/02_our_app/">Build and run an image</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/config/labels-custom-metadata/">Manage Docker objects</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/build/building/multi-stage/">Multi-stage builds</a></div>
-            <div class="col-xs-12 col-md-6"><a href="/get-started/swarm-deploy/">Scale apps using Swarm</a></div>
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" data-target="#includes">Explore Docker</a></li>
+              <li><a data-toggle="tab" data-target="#features">Get Support</a></li>
+              <li><a data-toggle="tab" data-target="#faqs">Browse FAQs</a></li>
+              </ul>
+              <div class="tab-content">
+              <div id="includes" class="tab-pane fade in active" markdown="1">
+               <div class="col-xs-12 col-md-6"><a href="/engine/reference/builder/">Write a Dockerfile</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/network/">Manage container networking</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/compose/compose-file/">Write a Docker Compose file</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/storage/">Work with volumes and bind mounts</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/get-started/04_sharing_app/">Share my image on Docker Hub</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/config/daemon/">Configure the Docker daemon</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/get-started/02_our_app/">Build and run an image</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/config/labels-custom-metadata/">Manage Docker objects</a></div>
+               <div class="col-xs-12 col-md-6"><a href="/build/building/multi-stage/">Multi-stage builds</a></div>
+              </div>
+              <div id="features" class="tab-pane fade" markdown="1">
+              <div class="col-xs-12 col-md-6"><a href="https://github.com/docker/for-win">Docker Desktop for Windows Github repo</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://github.com/docker/for-mac">Docker Desktop for Mac Github repo</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://www.docker.com/company/contact/">Contact Docker</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://github.com/docker/for-linux">Docker Desktop for Linux Github repo</a></div>
+              <div class="col-xs-12 col-md-6"><a href="/desktop/troubleshoot/overview/">Troubleshoot and diagnose</a></div></div>
+              <div id="faqs" class="tab-pane fade" markdown="1">
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/desktop/faqs/windowsfaqs/#can-i-install-docker-desktop-on-windows-10-home">Can I install Docker Desktop on Windows 10 Home?</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/desktop/install/windows-install/#system-requirements">What are the system requirements for Docker Desktop?</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/desktop/faqs/general">How do I connect from a container to a service?</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/compose/faq/#how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host">How do I run multiple copies of a Compose file on the same host?</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/compose/faq/#can-i-use-json-instead-of-yaml-for-my-compose-file">Can I use json instead of yaml for my Compose file?</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/compose/faq/#where-can-i-find-example-compose-files">Where can I find example Compose files?</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/get-started/04_sharing_app/">How do I share images on Docker Hub?</a></div>
+              <div class="col-xs-12 col-md-6"><a href="https://docs.docker.com/docker-hub/orgs/#create-an-organization">How do I create an organization?</a></div></div></div>
           </div>
         </div>
       </div>
@@ -199,37 +220,6 @@
               </p>
               <p>
                 <a href="/get-started/">Learn Docker</a>
-              </p>
-              <h6>FAQs</h6>
-              <p class="only-win">
-                <a href="/desktop/faqs/windowsfaqs/#can-i-install-docker-desktop-on-windows-10-home">
-                  Can I install Docker Desktop on Windows 10 Home?
-                </a>
-              </p>
-              <p class="only-win">
-                <a href="/desktop/install/windows-install/#system-requirements">
-                  What are the system requirements for Docker Desktop?
-                </a>
-              </p>
-              <p class="only-win">
-                <a href="/desktop/faqs/general">
-                  How do I connect from a container to a service?
-                </a>
-              </p>
-              <p class="only-mac">
-                <a href="/desktop/install/mac-install/#system-requirements">
-                  What are the system requirements for Docker Desktop?
-                </a>
-              </p>
-              <p class="only-mac">
-                <a href="/desktop/faqs/general/">
-                  How do I connect to a container from Mac?
-                </a>
-              </p>
-              <p class="only-mac">
-                <a href="/desktop/faqs/general/">
-                  View all
-                </a>
               </p>
             </div>
             <div class="col-xs-12 col-md-4 col-lg-5">
@@ -311,12 +301,6 @@
                 on production servers in the cloud.
               </p>
               <p><a href="/get-started/">Learn Docker</a></p>
-
-              <h6>FAQs</h6>
-              <p><a href="/compose/faq/#how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host">How do I run multiple copies of a Compose file on the same host?</a></p>
-              <p><a href="/compose/faq/#can-i-use-json-instead-of-yaml-for-my-compose-file">Can I use json instead of yaml for my Compose file?</a></p>
-              <p><a href="/compose/faq/#where-can-i-find-example-compose-files">Where can I find example Compose files?</a></p>
-              <p><a href="/compose/faq/">View all</a></p>
             </div>
             <div class="col-xs-12 col-md-4 col-lg-5">
               <h6>Popular articles</h6>
@@ -340,11 +324,6 @@
                 on production servers in the cloud.
               </p>
               <p><a href="/get-started/">Learn Docker</a></p>
-
-              <h6>FAQs</h6>
-              <p><a href="/get-started/04_sharing_app/">How do I share images on Docker Hub?</a></p>
-              <p><a href="/docker-hub/orgs/#create-an-organization">How do I create an organization?</a></p>
-              <p><a href="/docker-hub/orgs/#create-a-team">How do I create a team and add team members?</a></p>
             </div>
             <div class="col-xs-12 col-md-4 col-lg-5">
               <h6>Popular articles</h6>
@@ -398,7 +377,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
-        <a href="https://www.docker.com/101-tutorial" class="card" target="_blank" rel="noopener">
+        <a href="https://docs.docker.com/get-started/overview/" class="card" target="_blank" rel="noopener">
           <h5 class="title">Tutorial</h5>
           <p>Self-paced tutorials to increase your Docker knowledge.</p>
         </a>
@@ -421,6 +400,7 @@
     </div>
   </section>
 
+
   <section id="community-resources" class="container">
     <div class="row">
       <div class="col-xs-12">
@@ -429,7 +409,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
-        <a href="https://events.docker.com/chapters/" class="card" target="_blank" rel="noopener">
+        <a href="https://www.meetup.com/pro/docker/" class="card" target="_blank" rel="noopener">
           <h5 class="title">Find a local meetup</h5>
           <p>Attend one of the 200+ Docker Meetups around the globe.</p>
         </a>
@@ -444,7 +424,7 @@
         </a>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4 card-holder">
-        <a href="https://events.docker.com/docker-virtual-meetups/" class="card" target="_blank" rel="noopener">
+        <a href="https://www.meetup.com/pro/docker/" class="card" target="_blank" rel="noopener">
           <h5 class="title">Tune in Monthly</h5>
           <p>
             Join the Virtual Docker Meetup Group and online meetups every month.
