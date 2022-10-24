@@ -5,9 +5,9 @@ keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
 
-This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker.
+Wasm (short for WebAssembly) is a faster, lighter alternative to the Linux & Windows containers you’re using in Docker today (with [some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/)). 
 
-To learn more about the launch and how it works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/).
+This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker. To learn more about the launch and how the preview works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/).
 
 > **Beta**
 >
@@ -30,11 +30,11 @@ The Docker+Wasm integration currently requires a technical preview build of Dock
 
 Download the technical preview build of Docker Desktop:
 
-- [macOS Apple Silicon](https://dockr.ly/3sf56vH)
-- [macOS Intel](https://dockr.ly/3VF6uFB)
-- [Windows AMD64](https://dockr.ly/3ShlsP0)
-- Linux Arm64 ([deb](https://dockr.ly/3TDcjRV))
-- Linux AMD64 ([deb](https://dockr.ly/3TgpWH8), [rpm](https://dockr.ly/3eG6Mvp), [tar](https://dockr.ly/3yUhdCk))
+- [macOS Apple Silicon](https://www.docker.com/download/wasm-preview/linuxamd64deb)
+- [macOS Intel](https://www.docker.com/download/wasm-preview/linuxamd64deb)
+- [Windows AMD64](https://www.docker.com/download/wasm-preview/linuxamd64deb)
+- Linux Arm64 ([deb](https://www.docker.com/download/wasm-preview/linuxarm64deb))
+- Linux AMD64 ([deb](https://www.docker.com/download/wasm-preview/linuxamd64deb), [rpm](https://www.docker.com/download/wasm-preview/linuxamd64rpm), [tar](https://www.docker.com/download/wasm-preview/linuxamd64tarball))
 
 ## Usage examples
 
