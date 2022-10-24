@@ -14,14 +14,20 @@ To learn more about the launch and how it works, read [the launch blog post here
 > The Docker+Wasm feature is currently in [Beta](../../release-lifecycle.md/#beta). We recommend that you do not use this feature in production environments as this feature may change or be removed from future releases.
 
 
-## Enabling the Docker+Wasm integration
+## Enable the Docker+Wasm integration
 
-The Docker+Wasm integration currently requires a special build of Docker Desktop.
+The Docker+Wasm integration currently requires a technical preview build of Docker Desktop.
 
-- **Important note #1:** This is a technical preview build of Docker Desktop and things might not work as expected. Be sure to back up your containers and images before proceeding.
-- **Important note #2:** This preview has the containerd image store enabled and cannot be disabled. If you’re not currently using the containerd image store, then pre-existing images and containers will be inaccessible.
+>**Warning**
+> With the technical preview build of Docker Desktop, things might not work as expected. Be sure to back up your containers and images before proceeding.
+{: .warning}
 
-You can download the technical preview build of Docker Desktop here:
+>**Important**
+>
+> The technical preview build enables the [Containerd Image Store](../containerd/index.md) feature. This cannot be disabled. If you’re not currently using the Containerd Image Store, then pre-existing images and containers will be inaccessible.
+{: .important}
+
+Download the technical preview build of Docker Desktop:
 
 - [macOS Apple Silicon](https://dockr.ly/3sf56vH)
 - [macOS Intel](https://dockr.ly/3VF6uFB)
@@ -29,10 +35,9 @@ You can download the technical preview build of Docker Desktop here:
 - Linux Arm64 ([deb](https://dockr.ly/3TDcjRV))
 - Linux AMD64 ([deb](https://dockr.ly/3TgpWH8), [rpm](https://dockr.ly/3eG6Mvp), [tar](https://dockr.ly/3yUhdCk))
 
-
 ## Usage examples
 
-### Running a Wasm application with docker run
+### Running a Wasm application with `docker run`
 
 ```
 $ docker run -dp 8080:8080 \
@@ -42,10 +47,10 @@ $ docker run -dp 8080:8080 \
   michaelirwin244/wasm-example
 ```
 
-Note the addition of two additional flags to the run command:
+Note the two additional flags to the run command:
 
-- **--runtime=io.containerd.wasmedge.v1** - This informs the Docker engine that we want to use the Wasm containerd shim instead of the standard Linux container runtime
-- **--platform=wasi/wasm32** - This specifies the architecture of the image we want to use. By leveraging a Wasm architecture, we don’t need to build separate images for the different machine architectures. The Wasm runtime will do the final step of converting the Wasm binary to machine instructions.
+- `--runtime=io.containerd.wasmedge.v1`. This informs the Docker engine that you want to use the Wasm containerd shim instead of the standard Linux container runtime
+- `--platform=wasi/wasm32`. This specifies the architecture of the image you want to use. By leveraging a Wasm architecture, you don’t need to build separate images for the different machine architectures. The Wasm runtime does the final step of converting the Wasm binary to machine instructions.
 
 ### Running a Wasm application with Docker Compose
 
@@ -61,20 +66,19 @@ services:
       - 8080:8080
 ```
 
-Then start the application using the normal Docker Compose commands:
+Start the application using the normal Docker Compose commands:
 
 ```
 docker compose up
 ```
 
-
 ### Running a multi-service application with Wasm
 
-Networking works the same as you expect with Linux containers, giving you the flexibility to combine Wasm applications with other containerized workloads (such as a database) in a single application stack.
+Networking works the same as you expect with Linux containers, giving you the flexibility to combine Wasm applications with other containerized workloads, such as a database, in a single application stack.
 
-In this example, the Wasm application will leverage a MariaDB database running in a container.
+In the following example, the Wasm application leverages a MariaDB database running in a container.
 
-1. Start by cloning the repository.
+1. Clone the repository.
 
     ```
     $ git clone https://github.com/second-state/microservice-rust-mysql.git
@@ -100,7 +104,7 @@ In this example, the Wasm application will leverage a MariaDB database running i
     microservice-rust-mysql-db-1      | Version: '10.9.3-MariaDB-1:10.9.3+maria~ubu2204'  socket: '/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
     ```
 
-3. In another terminal, we can see the Wasm image that was created.
+    In another terminal, we can see the Wasm image that was created.
 
     ```
     $ docker images
@@ -108,7 +112,7 @@ In this example, the Wasm application will leverage a MariaDB database running i
     server       latest    2c798ddecfa1   2 minutes ago   3MB
     ```
 
-4. Inspecting the image will show the image has a `wasi/wasm32` platform (combination of Os and Architecture).
+    Inspecting the image shows the image has a `wasi/wasm32` platform. A combination of Os and Architecture.
 
     ```
     $ docker image inspect server | grep -A 3 "Architecture"
@@ -118,14 +122,14 @@ In this example, the Wasm application will leverage a MariaDB database running i
             "VirtualSize": 3001146,
     ```
 
-5. Open the website at http://localhost:8090 and create a few sample orders. All of these are interacting with the Wasm server.
+3. Open the website at http://localhost:8090 and create a few sample orders. All of these are interacting with the Wasm server.
 
-6. When you're all done, tear everything down by hitting Ctrl+C in the terminal you launched the application.
+4. When you're all done, tear everything down by hitting `Ctrl+C` in the terminal you launched the application.
 
 
 ### Building and pushing a Wasm module
 
-1. Create a Dockerfile that will build your Wasm application. This will vary depending on the language you are using.
+1. Create a Dockerfile that builds your Wasm application. This varies depending on the language you are using.
 
 2. In a separate stage in your `Dockerfile`, extract the module and set it as the `ENTRYPOINT`.
 
@@ -152,13 +156,13 @@ In this example, the Wasm application will leverage a MariaDB database running i
 
 ## Docker+Wasm Release Notes
 
-(2022-10-24)  
+2022-10-24  
 Initial release
 
 ### New
 - Initial implementation of Wasm integration
 
-### Known issues
+## Known issues
 - Docker Compose may not exit cleanly when interrupted
     - Workaround: Clean up `docker-compose` processes by sending them a SIGKILL (`killall -9 docker-compose`).
 - Pushes to Hub might give an error stating `server message: insufficient_scope: authorization failed`, even after logging in using Docker Desktop
@@ -166,4 +170,4 @@ Initial release
 
 ## Feedback
 
-Thanks for trying the new Docker+Wasm integration. We’d love to hear from you! Please feel free to give feedback or report any bugs you may find through the issues tracker on the [public roadmap item](https://github.com/docker/roadmap/issues/426){: target="_blank" rel="noopener" class="_"}.
+Thanks for trying the new Docker+Wasm integration. Give feedback or report any bugs you may find through the issues tracker on the [public roadmap item](https://github.com/docker/roadmap/issues/426){: target="_blank" rel="noopener" class="_"}.
