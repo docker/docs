@@ -206,11 +206,14 @@ RUN g++ -o /binary source.cpp
 
 Multi-stage build syntax was introduced in Docker Engine 17.05.
 
-## Differences between legacy build and BuildKit
+## Differences between legacy builder and BuildKit
 
-The legacy Docker Engine builder processes all stages of a Dockerfile leading up to the selected `--target`. It will build a stage even if the selected target doesn't depend on that stage.
+The legacy Docker Engine builder processes all stages of a Dockerfile leading
+up to the selected `--target`. It will build a stage even if the selected
+target doesn't depend on that stage.
 
-BuildKit only builds the stages that the target stage depends on.
+[BuildKit](../buildkit/index.md) only builds the stages that the target stage
+depends on.
 
 For example, given the following Dockerfile:
 
@@ -226,25 +229,28 @@ FROM base AS stage2
 RUN echo "stage2"
 ```
 
-With BuildKit enabled, building the `stage2` target in this Dockerfile means only `base` and `stage2` are processed. There is no dependency on `stage1`, so it's skipped.
+With [BuildKit enabled](../buildkit/index.md#getting-started), building the
+`stage2` target in this Dockerfile means only `base` and `stage2` are processed.
+There is no dependency on `stage1`, so it's skipped.
 
 ```console
 $ DOCKER_BUILDKIT=1 docker build --no-cache -f Dockerfile --target stage2 .
-[+] Building 0.4s (7/7) FINISHED                                                                                                                                                                                
- => [internal] load build definition from Dockerfile                                                                                                                                                       0.0s
- => => transferring dockerfile: 36B                                                                                                                                                                        0.0s
- => [internal] load .dockerignore                                                                                                                                                                          0.0s
- => => transferring context: 2B                                                                                                                                                                            0.0s
- => [internal] load metadata for docker.io/library/ubuntu:latest                                                                                                                                           0.0s
- => CACHED [base 1/2] FROM docker.io/library/ubuntu                                                                                                                                                        0.0s
- => [base 2/2] RUN echo "base"                                                                                                                                                                             0.1s
- => [stage2 1/1] RUN echo "stage2"                                                                                                                                                                         0.2s
- => exporting to image                                                                                                                                                                                     0.0s
- => => exporting layers                                                                                                                                                                                    0.0s
- => => writing image sha256:f55003b607cef37614f607f0728e6fd4d113a4bf7ef12210da338c716f2cfd15                                                                                                               0.0s
+[+] Building 0.4s (7/7) FINISHED                                                                    
+ => [internal] load build definition from Dockerfile                                            0.0s
+ => => transferring dockerfile: 36B                                                             0.0s
+ => [internal] load .dockerignore                                                               0.0s
+ => => transferring context: 2B                                                                 0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                                0.0s
+ => CACHED [base 1/2] FROM docker.io/library/ubuntu                                             0.0s
+ => [base 2/2] RUN echo "base"                                                                  0.1s
+ => [stage2 1/1] RUN echo "stage2"                                                              0.2s
+ => exporting to image                                                                          0.0s
+ => => exporting layers                                                                         0.0s
+ => => writing image sha256:f55003b607cef37614f607f0728e6fd4d113a4bf7ef12210da338c716f2cfd15    0.0s
 ```
 
-On the other hand, building the same target without BuildKit results in all stages being processed:
+On the other hand, building the same target without BuildKit results in all
+stages being processed:
 
 ```console
 $ DOCKER_BUILDKIT=0 docker build --no-cache -f Dockerfile --target stage2 .
@@ -273,10 +279,5 @@ Removing intermediate container bbc025b93175
 Successfully built 09fc3770a9c4
 ```
 
-`stage1` gets executed when BuildKit is disabled, even if `stage2` does not depend on it.
-
-BuildKit is enabled by default if you use Docker Desktop.
-
-Always run multi-stage builds with
-[BuildKit enabled](/develop/develop-images/build_enhancements/)
-for better performance.
+`stage1` gets executed when BuildKit is disabled, even if `stage2` does not
+depend on it.
