@@ -157,3 +157,6 @@ Version 4.8.2
     - Avoid awkward doubling of vowels. For example ‘semi-independence*’,* or ‘re-elect’.
     - Prevent misreading of certain words. For example ‘Re-collect’ means to collect again; without a hyphen the word recollect has a different meaning.
 
+### Parentheses
+
+Don't use parentheses in technical documentation. They can reduce the readability of a sentence.  
