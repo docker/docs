@@ -30,11 +30,11 @@ The Docker+Wasm integration currently requires a technical preview build of Dock
 
 Download the technical preview build of Docker Desktop:
 
-- [macOS Apple Silicon](https://dockr.ly/3sf56vH)
-- [macOS Intel](https://dockr.ly/3VF6uFB)
-- [Windows AMD64](https://dockr.ly/3ShlsP0)
-- Linux Arm64 ([deb](https://dockr.ly/3TDcjRV))
-- Linux AMD64 ([deb](https://dockr.ly/3TgpWH8), [rpm](https://dockr.ly/3eG6Mvp), [tar](https://dockr.ly/3yUhdCk))
+- [macOS Apple Silicon](https://www.docker.com/download/wasm-preview/linuxamd64deb)
+- [macOS Intel](https://www.docker.com/download/wasm-preview/linuxamd64deb)
+- [Windows AMD64](https://www.docker.com/download/wasm-preview/linuxamd64deb)
+- Linux Arm64 ([deb](https://www.docker.com/download/wasm-preview/linuxarm64deb))
+- Linux AMD64 ([deb](https://www.docker.com/download/wasm-preview/linuxamd64deb), [rpm](https://www.docker.com/download/wasm-preview/linuxamd64rpm), [tar](https://www.docker.com/download/wasm-preview/linuxamd64tarball))
 
 ## Usage examples
 
