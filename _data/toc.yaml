@@ -1830,6 +1830,8 @@ contribute:
       title: Voice and tone
   - path: /contribute/file-conventions/
     title: Source file conventions
+  - path: /contribute/ui/
+    title: UI elements in content
   - sectiontitle: Useful components
     section:
     - path: /contribute/components/accordions/
