@@ -8,9 +8,10 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-* Some awareness of basic Docker concepts. If unsure, work through the orientation
+* You understand basic Docker concepts, and you have completed the orientation
   and setup in Get started [Part 1](../../get-started/index.md).
-* Ensure you have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
+* You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
+* You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
   on your machine.
 
 ## Overview
@@ -68,8 +69,6 @@ Switch back to the terminal where our server is running and you should see the f
 ## Create a Dockerfile for Python
 
 Now that our application is running properly, let’s take a look at creating a Dockerfile.
-
-{% include guides/create-dockerfile.md %}
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
