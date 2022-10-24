@@ -212,26 +212,26 @@ View Tags on DockerHub to see multi-platform result:
 ### 2022-10-19 
 New commands and multiple bug fixes included with Docker Desktop 4.13.0.
 
-### New
+#### New
 * Added `docker diff` and `docker run --platform` support.
 
-### Bug fixes
+#### Bug fixes
 * Fixed a bug which caused Kubernetes not starting.
 * Fixed a bug which caused Kubernetes IN Docker (kind) not starting.
 * Fixed a bug which caused Dev Environments not working.
 * Fixed a bug which caused Insecure Registries not working.
 
-### Known issues
+#### Known issues
 * Listing images with `docker images` returns the error `content digest not found` on ARM machines after running or pulling an image with the `--platform` parameter.
 
 ### 2022-09-01  
 The Containerd Image Store is shipped as a [Beta](../../release-lifecycle.md/#beta) feature on Docker Desktop 4.12.0.
 
-### New
+#### New
 
 Initial implementation of the Docker commands: `run`, `commit`, `build`, `push`, `load`, `search` and `save`.
 
-### Known issues
+#### Known issues
 
 * The Containerd Image Store feature requires Buildx version 0.9.0 or newer.
     + On Docker Desktop for Linux (DD4L), validate if your locally installed version meets this requirement.  
