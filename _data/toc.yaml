@@ -18,7 +18,6 @@ horizontalnav:
 - title: Contribute
   path: /contribute/overview/
   node: contribute
-  # TODO unify navbbar links: homepage currently has a custom "articles" link
   hide_home: true
 
 home: {}
@@ -30,9 +29,9 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-    - title: "Part 1: Getting started"
+    - title: "Part 1: Orientation and setup"
       path: /get-started/
-    - title: "Part 2: Sample application"
+    - title: "Part 2: Containerize an application"
       path: /get-started/02_our_app/
     - title: "Part 3: Update the application"
       path: /get-started/03_updating_app/
@@ -142,8 +141,6 @@ guides:
       title: Dockerfile best practices
     - path: /develop/develop-images/build_enhancements/
       title: Build images with BuildKit
-    - path: /develop/develop-images/multistage-build/
-      title: Use multi-stage builds
     - path: /develop/develop-images/image_management/
       title: Manage images
     - path: /develop/develop-images/baseimages/
@@ -392,8 +389,6 @@ guides:
         title: Use the VFS storage driver
 - path: /get-started/resources/
   title: "Educational resources"
-- path: /opensource/
-  title: "Contribute to documentation"
 
 reference:
 - path: /reference/
@@ -1126,8 +1121,91 @@ reference:
 
 samples:
 - path: /samples/
-  title: Official Docker samples
-
+  title: Overview
+- sectiontitle: Databases
+  section:
+    - path: /samples/mariadb/
+      title: MariaDB
+    - path: /samples/mongodb/
+      title: MongoDB
+    - path: /samples/ms-sql/
+      title: MS-SQL
+    - path: /samples/mysql/
+      title: MySQL
+    - path: /samples/postgres/
+      title: PostgreSQL
+    - path: /samples/redis/
+      title: Redis
+- sectiontitle: Frameworks
+  section:
+    - path: /samples/dotnet/
+      title: .NET
+    - path: /samples/angular/
+      title: Angular
+    - path: /samples/django-sample/
+      title: Django
+    - path: /samples/express/
+      title: Express
+    - path: /samples/fastapi/
+      title: FastAPI
+    - path: /samples/flask/
+      title: Flask
+    - path: /samples/nodejs/
+      title: Node.js
+    - path: /samples/react/
+      title: React
+    - path: /samples/spark/
+      title: Spark
+    - path: /samples/spring/
+      title: Spring Boot
+    - path: /samples/vuejs/
+      title: Vue.js
+- sectiontitle: Languages
+  section:
+    - path: /samples/go/
+      title: Go
+    - path: /samples/java/
+      title: Java
+    - path: /samples/javascript/
+      title: JavaScript
+    - path: /samples/php/
+      title: PHP
+    - path: /samples/python/
+      title: Python
+    - path: /samples/rust/
+      title: Rust
+    - path: /samples/typescript/
+      title: TypeScript
+- sectiontitle: Platforms
+  section:
+    - path: /samples/gitea/
+      title: Gitea
+    - path: /samples/nextcloud/
+      title: Nextcloud
+    - path: /samples/portainer/
+      title: Portainer
+    - path: /samples/prometheus/
+      title: Prometheus
+    - path: /samples/wordpress-sample/
+      title: WordPress
+- sectiontitle: Other services
+  section:
+    - path: /samples/cloudflared/
+      title: Cloudflared
+    - path: /samples/elasticsearch/
+      title: Elasticsearch / Logstash / Kibana
+    - path: /samples/minecraft/
+      title: Minecraft
+    - path: /samples/nginx/
+      title: NGINX
+    - path: /samples/pi-hole/
+      title: Pi-hole
+    - path: /samples/plex/
+      title: Plex
+    - path: /samples/traefik/
+      title: Traefik
+    - path: /samples/wireguard/
+      title: Wireguard
 
 
 manuals:
@@ -1193,8 +1271,6 @@ manuals:
           title: Known issues for Mac
     - sectiontitle: Additional resources
       section:
-        - path: /desktop/multi-arch/
-          title: Multi-arch support
         - path: /desktop/kubernetes/
           title: Deploy on Kubernetes
         - path: /desktop/backup-and-restore/
@@ -1205,22 +1281,44 @@ manuals:
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
+        - path: /desktop/uninstall/
+          title: Uninstall Docker Desktop
+    - sectiontitle: Hardened Desktop
+      section:
+        - path: /desktop/hardened-desktop/
+          title: Overview
+        - sectiontitle: Settings Management
+          section:
+          - path: /desktop/hardened-desktop/settings-management/
+            title: What is Settings Management?
+          - path: /desktop/hardened-desktop/settings-management/configure/
+            title: Configure Settings Management
+        - sectiontitle: Enhanced Container Isolation
+          section:
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/
+            title: What is Enhanced Container Isolation?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
+            title: How does it work?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
+            title: Key features and benefits
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQs and known issues
+        - path: /desktop/hardened-desktop/registry-access-management/
+          title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a Dev Environment
+          title: Create a simple dev environment
         - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create a Compose Dev Environment
+          title: Create an advanced dev environment
         - path: /desktop/dev-environments/share/
-          title: Share your Dev Environment
-        - path: /desktop/dev-environments/specify/
-          title: Specify a Dockerfile or base image
+          title: Distribute your dev environment
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
-        title: What is Docker Extensions?
+        title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
         title: Manage marketplace Extensions
       - path: /desktop/extensions/non-marketplace/
@@ -1273,6 +1371,8 @@ manuals:
                path: /desktop/extensions-sdk/design/mui-best-practices/
         - sectiontitle: Developer SDK tools
           section:
+            - title: Interacting with Kubernetes
+              path: /desktop/extensions-sdk/dev/kubernetes/          
             - title: Authentication
               path: /desktop/extensions-sdk/dev/oauth2-flow/
             - title: CLI reference
@@ -1293,6 +1393,8 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/reference/README/
     - path: /desktop/containerd/
       title: Containerd Image Store (Beta)
+    - path: /desktop/wasm/
+      title: Wasm (Beta)
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
@@ -1351,8 +1453,6 @@ manuals:
     title: Optional post-installation steps
   - path: /engine/deprecated/
     title: Deprecated features
-  - path: /buildx/working-with-buildx/
-    title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
   - path: /engine/scan/
@@ -1403,60 +1503,92 @@ manuals:
   section:
     - path: /build/
       title: Overview
-    - path: /build/hellobuild/
-      title: Hello Build
+    - sectiontitle: Building images
+      section:
+        - path: /build/building/packaging/
+          title: Packaging your software
+        - sectiontitle: Build drivers
+          section:
+            - path: /build/building/drivers/
+              title: Overview
+            - path: /build/building/drivers/docker/
+              title: Docker driver
+            - path: /build/building/drivers/docker-container/
+              title: Docker container driver
+            - path: /build/building/drivers/kubernetes/
+              title: Kubernetes driver
+            - path: /build/building/drivers/remote/
+              title: Remote driver
+        - path: /build/building/cache/
+          title: Optimizing builds with cache
+        - sectiontitle: Cache backends
+          section:
+            - path: /build/building/cache/backends/
+              title: Overview
+            - path: /build/building/cache/backends/inline/
+              title: Inline
+            - path: /build/building/cache/backends/local/
+              title: Local
+            - path: /build/building/cache/backends/registry/
+              title: Registry
+            - path: /build/building/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/building/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/building/cache/backends/s3/
+              title: Amazon S3
+        - path: /build/building/multi-stage/
+          title: Multi-stage builds
+        - path: /build/building/multi-platform/
+          title: Multi-platform images
+    - sectiontitle: Customizing builds
+      section:
+        - sectiontitle: High-level builds with Bake
+          section:
+            - path: /build/customize/bake/
+              title: Overview
+            - path: /build/customize/bake/file-definition/
+              title: File definition
+            - path: /build/customize/bake/configuring-build/
+              title: Configuring builds
+            - path: /build/customize/bake/hcl-funcs/
+              title: User defined HCL functions
+            - path: /build/customize/bake/build-contexts/
+              title: Build contexts and linking targets
+            - path: /build/customize/bake/compose-file/
+              title: Building from Compose file
     - sectiontitle: Buildx
       section:
-        - path: /build/buildx/
-          title: Buildx overview
         - path: /build/buildx/install/
           title: Install Buildx
-        - sectiontitle: Drivers
-          section:
-            - path: /build/buildx/drivers/
-              title: Overview
-            - path: /build/buildx/drivers/docker/
-              title: Docker driver
-            - path: /build/buildx/drivers/docker-container/
-              title: Docker container driver
-            - path: /build/buildx/drivers/kubernetes/
-              title: Kubernetes driver
-            - path: /build/buildx/drivers/remote/
-              title: Remote driver
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
-        - path: /build/buildx/multiplatform-images/
-          title: Building multi-platform images
-    - sectiontitle: Bake
-      section:
-        - path: /build/bake/
-          title: Bake overview
-        - path: /build/bake/file-definition/
-          title: File definition
-        - path: /build/bake/configuring-build/
-          title: Configuring builds
-        - path: /build/bake/hcl-funcs/
-          title: User defined HCL functions
-        - path: /build/bake/build-contexts/
-          title: Build contexts and linking targets
-        - path: /build/bake/compose-file/
-          title: Building from Compose file
+    - path: /build/release-notes/
+      title: Release notes
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
     title: Overview
+  - path: /compose/features-uses/
+    title: Key features and use cases
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
-        title: Install overview
+        title: Overview
       - path: /compose/install/linux/
-        title: Install on Linux
+        title: Install the Compose plugin
       - path: /compose/install/other/
-        title: Other install scenarios
+        title: Install the Compose standalone
       - path: /compose/install/uninstall/
-        title: Uninstall Docker Compose
+        title: Uninstall Compose
   - path: /compose/gettingstarted/
-    title: Getting started
+    title: Try Docker Compose
+  - sectiontitle: Compose V2
+    section:
+    - path: /compose/compose-v2/
+      title: Overview
+    - path: /compose/cli-command-compatibility/
+      title: Compose v2 compatibility
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
@@ -1479,8 +1611,6 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/cli-command-compatibility/
-    title: Compose v2 compatibility
   - path: /compose/release-notes/
     title: Release notes
 
@@ -1490,8 +1620,14 @@ manuals:
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
-  - path: /docker-hub/repos/
-    title: Repositories
+  - sectiontitle: Repositories
+    section:
+      - path: /docker-hub/repos/
+        title: Manage
+      - path: /docker-hub/repos/access/
+        title: Access
+      - path: /docker-hub/repos/configure/
+        title: Configure
   - path: /docker-hub/service-accounts/
     title: Service accounts
   - path: /docker-hub/official_images/
@@ -1536,10 +1672,12 @@ manuals:
        title: Convert an account into an organization
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
-  - sectiontitle: Docker Verified Publisher Program
+  - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
         title: Overview
+      - path: /docker-hub/publish/insights-analytics/
+        title: Insights & analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
@@ -1562,8 +1700,10 @@ manuals:
   section:
   - sectiontitle: Onboarding
     section:
+    - path: /docker-hub/onboard-team/
+      title: Team
     - path: /docker-hub/onboard-business/
-      title: Get started with Business
+      title: Business
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
   - path: /docker-hub/orgs/
@@ -1582,8 +1722,7 @@ manuals:
     title: System for Cross-domain Identity Management
   - path: /docker-hub/image-access-management/
     title: Image Access Management
-  - path: /docker-hub/registry-access-management/
-    title: Registry Access Management
+
 
 - sectiontitle: Security
   section:
@@ -1624,6 +1763,27 @@ manuals:
       - path: /engine/security/rootless/
         title: Rootless mode
 
+- sectiontitle: Atomist
+  section:
+    - path: /atomist/
+      title: Introduction
+    - path: /atomist/try-atomist/
+      title: Try Atomist
+    - path: /atomist/get-started/
+      title: Get started
+    - sectiontitle: Configure
+      section:
+        - path: /atomist/configure/settings/
+          title: Settings
+        - path: /atomist/configure/advisories/
+          title: Advisories
+    - sectiontitle: Integrate
+      section:
+        - path: /atomist/integrate/github/
+          title: GitHub
+        - path: /atomist/integrate/deploys/
+          title: Track deployments
+
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Registry
@@ -1660,6 +1820,7 @@ manuals:
       title: Compatibility
     - path: /registry/help/
       title: Getting help
+
 - path: /release-notes/
   title: Release notes
 - path: /support/
@@ -1685,6 +1846,8 @@ contribute:
       title: Voice and tone
   - path: /contribute/file-conventions/
     title: Source file conventions
+  - path: /contribute/ui/
+    title: UI elements in content
   - sectiontitle: Useful components
     section:
     - path: /contribute/components/accordions/
@@ -1692,9 +1855,11 @@ contribute:
     - path: /contribute/components/badges/
       title: Badges
     - path: /contribute/components/call-outs/
-      title: Call outs
+      title: Callouts
     - path: /contribute/components/cards/
       title: Cards
+    - path: /contribute/components/code-blocks/
+      title: Code blocks
     - path: /contribute/components/images/
       title: Images
     - path: /contribute/components/links/

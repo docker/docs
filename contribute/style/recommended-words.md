@@ -40,6 +40,12 @@ Do not use `currently` when talking about the product or its features. The docum
 
 Don’t use `deselect`. Instead, use `clear`. 
 
+#### disable
+
+Do not use `disable`. Implies that disability is a less-desired or negative state.
+
+Instead, use `turn off` or `toggle off`.
+
 #### earlier
 
 Use `earlier` when talking about version numbers.
@@ -51,6 +57,12 @@ _In Docker Desktop 4.1 and earlier._
 Instead of:
 
 _In Docker Desktop 4.1 and lower._
+
+#### enable
+
+Do not use `enable`. Implies that disability is a less-desired or negative state.
+
+Instead, use `turn on` or `toggle on`.
 
 #### execute
 

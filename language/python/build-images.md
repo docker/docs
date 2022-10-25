@@ -28,9 +28,11 @@ Let’s create a simple Python application using the Flask framework that we’l
 
 ```console
 $ cd /path/to/python-docker
-$ pip3 install Flask
-$ pip3 freeze | grep Flask >> requirements.txt
-$ touch app.py
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $ python3 -m pip install Flask
+(.venv) $ python3 -m pip freeze > requirements.txt
+(.venv) $ touch app.py
 ```
 
 Now, let’s add some code to handle simple web requests. Open this working directory in your favorite IDE and enter the following code into the `app.py` file.
@@ -49,7 +51,9 @@ def hello_world():
 Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created.
 
 ```console
-$ python3 -m flask run
+$ cd /path/to/python-docker
+$ source .venv/bin/activate
+(.venv) $ python3 -m flask run
 ```
 
 To test that the application is working properly, open a new browser and navigate to `http://localhost:5000`.
@@ -237,4 +241,4 @@ In this module, we took a look at setting up our example Python application that
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

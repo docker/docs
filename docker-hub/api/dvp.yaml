@@ -12,11 +12,18 @@ info:
 
      In your summary data CSV, you will have access to the data points listed below. You can request summary data for a complete week (Monday through Sunday) or for a complete month (available on the first day of the following month). 
 
-     - For every namespace, repository, and reference (tag or digest):
-       - Unique IP address count
-       - Pulls by tag count
-       - Pulls by digest count
-       - Version check count
+     There are two levels of summary data:
+
+     - Repository-level, a summary of every namespace and repository
+     - Tag- or digest-level, a summary of every namespace, repository, and reference
+       (tag or digest)
+
+      The summary data formats contain the following data points:
+
+     - Unique IP address count
+     - Pulls by tag count
+     - Pulls by digest count
+     - Version check count
 
      #### Raw data
 
@@ -285,11 +292,11 @@ paths:
                 $ref: '#/components/schemas/TimespanModel'
         '404':
           description: Not Found
-  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/raw:
+  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/{dataview}:
     get:
       tags: [namespaces]
       summary: Get namespace data for timespan
-      description: Gets a list of URLs that can be used to download the raw pull data for the given namespace and timespan
+      description: Gets a list of URLs that can be used to download the pull data for the given namespace and timespan
       operationId: getNamespaceDataByTimespan
       parameters:
         - in: path
@@ -316,44 +323,12 @@ paths:
             type: integer
           required: true
           description: Timespan to fetch data for
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseData'
-  /namespaces/{namespace}/pulls/exports/years/{year}/{timespantype}/{timespan}/summary:
-    get:
-      tags: [namespaces]
-      summary: Get namespace summary data for timespan
-      description: Gets a list of URLs that can be used to download the summary pull data for the given namespace and timespan
-      operationId: getNamespaceSummaryByTimespan
-      parameters:
         - in: path
-          name: namespace
+          name: dataview
           schema:
-            type: string
+            $ref: '#/components/schemas/DataviewType'
           required: true
-          description: Namespace to fetch data for
-        - in: path
-          name: year
-          schema:
-            type: integer
-          required: true
-          description: Year to fetch data for
-        - in: path
-          name: timespantype
-          schema:
-            $ref: '#/components/schemas/TimespanType'
-          required: true
-          description: Type of timespan to fetch data for
-        - in: path
-          name: timespan
-          schema:
-            type: integer
-          required: true
-          description: Timespan to fetch data for
+          description: Type of data to fetch
       responses:
         '200':
           description: Success
@@ -458,10 +433,6 @@ components:
           type: array
           items:
             type: string
-        repos:
-          type: array
-          items:
-            type: string
     NamespaceMetadata:
       properties:
         namespace:
@@ -521,7 +492,7 @@ components:
       enum: [months,weeks]
     DataviewType:
       type: string
-      enum: [raw,summary]
+      enum: [raw,summary,repo-summary]
     DatasetType:
       type: string
       enum: [pulls]

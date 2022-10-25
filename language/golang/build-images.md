@@ -480,7 +480,7 @@ that we have used to deploy our Go application is very barebones and is meant
 for lean deployments of static binaries.
 
 For more information on multi-stage builds, please feel free to check out
-[other parts](../../develop/develop-images/multistage-build.md) of the Docker
+[other parts](../../build/building/multi-stage.md) of the Docker
 documentation. This is, however, not essential for our progress here, so we'll
 leave it at that.
 
@@ -497,6 +497,6 @@ how to:
 ## Feedback
 
 Help us improve this topic by providing your feedback. Let us know what you
-think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"}
-GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"}
+think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"}
+GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"}
 to suggest updates.

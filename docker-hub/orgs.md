@@ -97,7 +97,7 @@ configure your organization.
   members in each team. See [Create a team](#create-a-team) for details.
 
 - **Repositories**: Displays a list of repositories associated with the
-  organization. See [Repositories](repos.md) for detailed information about
+  organization. See [Repositories](../docker-hub/repos/index.md) for detailed information about
   working with repositories.
 
 - **Activity** Displays the audit logs, a chronological list of activities that
@@ -143,7 +143,7 @@ process. The owners team has full access to all repositories in the organization
 An organization owner is an administrator who is responsible to manage
 repositories and add team members to the organization. They have full access to
 private repositories, all teams, billing information, and org settings. An org
-owner can also specify [permissions](#permissions-reference) for each team in
+owner can also specify [permissions](../docker-hub/repos/configure/index.md#permissions-reference) for each team in
 the organization. Only an org owner can enable [SSO](../single-sign-on/index.md)
 for
 the organization. When SSO is enabled for your organization, the org owner can
@@ -177,25 +177,6 @@ To view a team's permissions across all repositories:
 
 1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
 2. Click on the **Permissions** tab, where you can view the repositories this team can access.
-
-### Permissions reference
-
-Permissions are cumulative. For example, if you have Read & Write permissions,
-you automatically have Read-only permissions:
-
-- `Read-only` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
-- `Read & Write` access allows users to pull, push, and view a repository Docker
-  Hub. In addition, it allows users to view, cancel, retry or trigger builds
-- `Admin` access allows users to Pull, push, view, edit, and delete a
-  repository; edit build settings; update the repository description modify the
-  repositories "Description", "Collaborators" rights, "Public/Private"
-  visibility, and "Delete".
-
-> **Note**
->
-> A User who has not yet verified their email address only has
-> `Read-only` access to the repository, regardless of the rights their team
-> membership has given them.
 
 ## Videos
 

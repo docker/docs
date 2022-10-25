@@ -1,9 +1,9 @@
 ---
-title: "Sample application"
+title: "Containerize an application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 redirect_from:
 - /get-started/part2/
-description: overview of our simple application for learning docker
+description: Containerize and run a simple application to learn Docker
 ---
 
 
@@ -35,12 +35,40 @@ we have created a ZIP file containing the application.
 
 ## Build the app's container image
 
-In order to build the application, we need to use a `Dockerfile`. A
-Dockerfile is simply a text-based script of instructions that is used to
-create a container image. If you've created Dockerfiles before, you might
-see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
+In order to build the application, you'll need to use a `Dockerfile`. A
+Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that are used to create a container image. 
 
-1. Create a file named `Dockerfile` in the same folder as the file `package.json` with the following contents.
+1. In the `app` folder, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
+
+   <ul class="nav nav-tabs">
+     <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
+     <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
+   </ul>
+   <div class="tab-content">
+   <div id="mac-linux" class="tab-pane fade in active" markdown="1">
+
+    In the terminal, run the following commands listed below.
+
+   ```console
+   $ cd /path/to/app
+   $ touch Dockerfile
+   ```
+
+   <hr>
+   </div>
+   <div id="windows" class="tab-pane fade" markdown="1">
+
+   In the Windows Command Prompt, run the following commands listed below.
+
+   ```console
+   $ cd \path\to\app
+   $ type nul > Dockerfile
+   ```
+    <hr>
+   </div>
+   </div>
+
+2. Add the following contents to the Dockerfile. If you've created Dockerfiles before, you might see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
 
    ```dockerfile
    # syntax=docker/dockerfile:1
@@ -52,10 +80,11 @@ see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
    CMD ["node", "src/index.js"]
    EXPOSE 3000
    ```
+  > **Note**
+  >
+  > Select an instruction in the Dockerfile example to learn more about the instruction.
 
-   Please check that the file `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and this would result in an error in the next step.
-
-2. If you haven't already done so, open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
+3. Open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
 
    ```console
    $ docker build -t getting-started .
@@ -111,10 +140,12 @@ If you take a quick look at the Docker Dashboard, you should see your two contai
 
 ![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
 
-## Recap
+## Next steps
 
-In this short section, we learned the very basics about building a container image and created a
-Dockerfile to do so. Once we built an image, we started the container and saw the running app.
+In this short section, you learned the basics about building a container image and created a
+Dockerfile to do so. Once you built an image, you started the container and saw the running app.
 
-Next, we're going to make a modification to our app and learn how to update our running application
-with a new image. Along the way, we'll learn a few other useful commands.
+Next, you're going to make a modification to your app and learn how to update your running application
+with a new image. Along the way, you'll learn a few other useful commands.
+
+[Update the application](03_updating_app.md){: .button .primary-btn}

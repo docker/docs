@@ -4,11 +4,11 @@ description: Provides usage statistics of your images on Docker Hub.
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 ---
 
-Insights and analytics provides usage analytics for your organization's images
-on Docker Hub. With this tool, you have self-serve access to metrics as both raw
-data and summary data for a desired time span. You can view how many times your
-images have been pulled by tag or by digest, and get breakdowns by geolocation,
-cloud provider, and client (user agent).
+Insights and analytics provides usage analytics for your Docker Verified
+Publisher (DVP) images on Docker Hub. With this tool, you have self-serve access
+to metrics as both raw data and summary data for a desired time span. You can
+view number of image pulls by tag or by digest, and get breakdowns by
+geolocation, cloud provider, client, and more.
 
 ## Exporting analytics data
 
@@ -27,18 +27,19 @@ manually as a spreadsheet.
 Here's how to export usage data for your organization's images using the Docker
 Hub website.
 
-1. Log in to [Docker Hub](https://hub.docker.com/){: target="_blank"
-   rel="noopener" class="_"} and select **Organizations**.
+1.  Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank"
+    rel="noopener" class="_"} and select **Organizations**.
 
-2. Choose your organization and click **Insights and analytics**.
+2.  Choose your organization and select **Insights and analytics**.
 
-   ![Organization overview page, with the Insights and Analytics tab](./images/organization-tabs.png)
+    ![Organization overview page, with the Insights and Analytics tab](./images/organization-tabs.png)
 
-3. Set the time span for which you want to export analytics data. The
-   downloadable CSV files for summary and raw data appear on the right-hand
-   side.
+3.  Set the time span for which you want to export analytics data.
 
-   ![Filtering options and download links for analytics data](./images/download-analytics-data.png)
+    The downloadable CSV files for summary and raw data appear on the right-hand
+    side.
+
+    ![Filtering options and download links for analytics data](./images/download-analytics-data.png)
 
 ### Export data using the API
 
@@ -47,84 +48,76 @@ The HTTP API endpoints are available at:
 using the API in the [DVP Data API documentation](/docker-hub/api/dvp/){:
 target="_blank" rel="noopener" class="_"}.
 
-## Data formats
+## Data points
 
-The data can be exported in either raw or summary format. Each format contains
-different data points and are formatted differently.
+Export data in either raw or summary format. Each format contains different data
+points and with different structure.
 
-Review the [Data definitions](#data-definitions) section for more information
-about the data points and how to read them.
+The following sections describe the available data points for each format. The
+**Available from** column shows when the field was first added.
 
 ### Raw data
 
-The raw data format contains the following data points for the selected time
-span. Each action is represented as a single row in the CSV file.
+The raw data format contains the following data points. Each row in the CSV file
+represents an image pull.
 
-- Timestamp
-- Namespace
-- Repository
-- Reference
-- Digest
-- Tag (included when available)
-- Action day
-- HTTP method
-- Action, one of the following:
-  - Pull by tag
-  - Pull by digest
-  - Version check
-- Type
-- Host
-- Country
-- User agent tool
-- User agent version
+| Data point                    | Description                                                                                                  | Available from   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------- |
+| Action                        | Request type, see [Action classification rules][1]. One of `pull_by_tag`, `pull_by_digest`, `version_check`. | January 1, 2022  |
+| Action day                    | The date part of the timestamp: `YYYY-MM-DD`                                                                 | January 1, 2022  |
+| Country                       | Request origin country.                                                                                      | January 1, 2022  |
+| Digest                        | Image digest.                                                                                                | January 1, 2022  |
+| HTTP method                   | HTTP method used in the request, see [registry API documentation][2] for details.                            | January 1, 2022  |
+| Host                          | The cloud service provider used in an event.                                                                 | January 1, 2022  |
+| Namespace                     | Docker [organization][3] (image namespace).                                                                  | January 1, 2022  |
+| Reference                     | Image digest or tag used in the request.                                                                     | January 1, 2022  |
+| Repository                    | Docker [repository][4] (image name).                                                                         | January 1, 2022  |
+| Tag (included when available) | Tag name that's only available if the request referred to a tag.                                             | January 1, 2022  |
+| Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`                                                          | January 1, 2022  |
+| Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`       | January 1, 2022  |
+| User agent tool               | The application a user used to pull an image (for example, `docker` or `containerd`).                        | January 1, 2022  |
+| User agent version            | The version of the application used to pull an image.                                                        | January 1, 2022  |
+| Domain                        | Request origin domain, see [Privacy](#privacy).                                                              | October 11, 2022 |
+
+[1]: #action-classification-rules
+[2]: /registry/spec/api/
+[3]: /docker-hub/orgs/
+[4]: /docker-hub/repos/
 
 ### Summary data
 
-The summary data format contains the following data points for each namespace,
-repository, and reference (tag or digest), for the selected time span.
+There are two levels of summary data available:
 
-- Unique IP addresses
-- Pulls by tag
-- Pulls by digest
-- Version checks
+- Repository-level, a summary of every namespace and repository
+- Tag- or digest-level, a summary of every namespace, repository, and reference
+  (tag or digest)
 
-### Data definitions
+The summary data formats contain the following data points for the selected time
+span:
 
-| Data point         | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Action             | An action represents the multiple request events associated with a `docker pull`. We have applied rules to these events so that the data is more meaningful in analyzing user behavior and intent. An action can be filtered into three distinct categories: version check, pull by tag, and pull by digest. Each action is represented as a single row in the raw data. For more information, see [Action classification rules](#action-classification-rules).                                                                               |
-| Version check      | This is a filter on the action data point. It is a speculation of user intent. Includes: HEAD by tag not followed by a GET (from the same IP address within a 5-second window). Excludes: HEAD by digest                                                                                                                                                                                                                                                                                                                                      |
-| Pull by tag        | This is a filter on the action data point. It is a speculation of user intent. Includes: GET (by digest or by tag). If the GET is immediately preceded by a HEAD by tag (from the same IP address within a 5-second window), then the GET and HEAD together are counted as a single Pull by Tag. If the GET by tag is immediately followed by another GET (from the same IP address within a 5-second window, but a different digest), then the two GETs are counted as a single Pull by Tag.                                                 |
-| Pull by digest     | This is a filter on the action data point. It is a speculation of user intent. Includes: GET by digest. If the GET is immediately preceded by a HEAD by digest (from the same IP address within a 5-second window), then the GET and HEAD together are counted as a single pull by digest. If the GET is immediately followed by another GET (from the same IP address within a 5-second window, but a different digest), then the two GETs together are counted as a single pull by digest. Includes: HEAD by digest, not followed by a GET. |
-| Type               | The industry from which the event originates. Industry types include `business`, `isp` (internet service provider), `hosting`, `education`, and `null` in cases where the industry could not be identified.                                                                                                                                                                                                                                                                                                                                   |
-| Host               | The cloud service provider used in an event.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Reference          | The digest or tag that was referenced in the action.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Digest             | The image version digest.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Tag                | The tag name. Only available if the pull referred to a tag, not available if the pull referred to a digest.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| Country            | The country from which the request originated.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Timestamp          | Date and time of an event in the following schema: YYYY-MM-DD 00:00:00                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Action day         | The date portion of the timestamp: YYYY-MM-DD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Namespace          | The Docker organization that a repository is a part of.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Repository         | The repository that an image belongs to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Reference          | The tag or digest of any given image.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| HTTP method        | The HTTP method used in a request by the client. More information on Docker Registry HTTP API protocols can be found [here](/registry/spec/api/){: target="_blank" rel="noopener" class="_"}.                                                                                                                                                                                                                                                                                                                                                 |
-| User agent tool    | The application a user used to pull an image (for example, `docker` or `containerd`). Extracted from the UA string.                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| User agent version | The version of the application used to pull an image.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Unique IP address  | As part of our privacy-preserving policy, Docker only shares the count of distinct unique IP addresses that request an image.                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Data point        | Value   | Description                                             | Available from  |
+| ----------------- | ------- | ------------------------------------------------------- | --------------- |
+| Unique IP address | String  | Number of unique IP addresses, see [Privacy](#privacy). | January 1, 2022 |
+| Pull by tag       | Integer | GET request, by digest or by tag.                       | January 1, 2022 |
+| Pull by digest    | Integer | GET or HEAD request by digest, or HEAD by digest.       | January 1, 2022 |
+| Version check     | Integer | HEAD by tag, not followed by a GET                      | January 1, 2022 |
 
-## Action classification rules
+### Action classification rules
 
-Automated systems frequently check for new versions of your images. The insights
-and analytics metrics show the number of pulls that were triggered by users, and
-pulls by automated systems such as CI/CD tools, respectively. Automated "version
-checks" and real image downloads are differentiated by inspecting the order and
-timing of image pulls coming from the same IP address. Being able to distinguish
-between different types of image pulls grants you more insight into your users'
-behavior. You can inspect the rules for determining intent behind pulls in the
-[Action classification rules](#action-classification-rules) section on this
-page.
+An action represents the multiple request events associated with a
+`docker pull`. Pulls are grouped by category to make the data more meaningful
+for understanding user behavior and intent. The categories are:
 
-To provide feedback or ask questions about these rules,
+- Version check
+- Pull by tag
+- Pull by digest
+
+Automated systems frequently check for new versions of your images. Being able
+to distinguish between "version checks" in CI versus actual image pulls by a
+user grants you more insight into your users' behavior.
+
+The following table describes the rules applied for determining intent behind
+pulls. To provide feedback or ask questions about these rules,
 [fill out the Google Form](https://forms.gle/nb7beTUQz9wzXy1b6){:
 target="_blank" rel="noopener" class="_"}.
 
@@ -141,3 +134,39 @@ target="_blank" rel="noopener" class="_"}.
 | GET            | digest    | GET by different digest                                         | Pull by digest   | Image is multi-arch                                                                                            | The second GET by digest must be different from the first                                                                                                                                                                                                                                      |
 | HEAD           | digest    | GET by same digest                                              | Pull by digest   | Image is single arch and/or image is multi-arch but some part of the image already exists on the local machine |
 | HEAD           | digest    | GET by same digest, then a second GET by different digest       | Pull by Digest   | Image is multi-arch                                                                                            |
+
+## Changes in data over time
+
+The insights and analytics service is continuously improved to increase the
+value it brings to publishers. Some changes might include adding new data
+points, or improving existing data to make it more useful.
+
+When there is a change in the dataset provided by the service, such a change
+doesn't get retroactively applied. As new data points get added, they're
+available from the point of introduction and going forward.
+
+Refer to the tables in the [Data points](#data-points) section to see from which
+date a given data point is available.
+
+## Privacy
+
+This section contains information about privacy-protecting measures that ensures
+consumers of content on Docker Hub remain completely anonymous.
+
+> **Important**
+>
+> Docker never shares any Personally Identifiable Information (PII) as part of
+> analytics data.
+{: .important }
+
+The summary dataset includes Unique IP address count. This data point only
+includes the number of distinct unique IP addresses that request an image.
+Individual IP addresses are never shared.
+
+The raw dataset includes user IP domains as a data point. That's the domain name
+associated with the IP address used to pull an image. If the IP type is
+`business`, the domain represents the company or organization associated with
+that IP address (for example, `docker.com`). For any other IP type that's not
+`business`, the domain represents the internet service provider or hosting
+provider used to make the request. On average, only about 30% of all pulls
+classify as the `business` IP type (this varies between publishers and images).

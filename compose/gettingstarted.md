@@ -1,23 +1,23 @@
 ---
 description: Get started with Docker Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
-title: Get started with Docker Compose
+title: Try Docker Compose
 ---
 
-On this page you build a simple Python web application running on Docker
-Compose. The application uses the Flask framework and maintains a hit counter in
-Redis. While the sample uses Python, the concepts demonstrated here should be
-understandable even if you're not familiar with it.
+This tutorial is designed to introduce the key concepts of Docker Compose whilst building a simple Python web application. The application uses the Flask framework and maintains a hit counter in
+Redis. 
+
+The concepts demonstrated here should be understandable even if you're not familiar Python. 
 
 ## Prerequisites
 
-Make sure you have already installed both [Docker Engine](../get-docker.md)
-and [Docker Compose](install/index.md). You don't need to install Python or Redis, as
-both are provided by Docker images.
+You need to have Docker Engine and Docker Compose on your machine. You can either:
+- Install [Docker Engine](../get-docker.md) and [Docker Compose](install/index.md) as standalone binaries
+- Install [Docker Desktop](../desktop/index.md) which includes both Docker Engine and Docker Compose
 
-## Step 1: Setup
+You don't need to install Python or Redis, as both are provided by Docker images.
 
-Define the application dependencies.
+## Step 1: Define the application dependencies
 
 1. Create a directory for the project:
 
@@ -26,7 +26,7 @@ Define the application dependencies.
    $ cd composetest
    ```
 
-2. Create a file called `app.py` in your project directory and paste this in:
+2. Create a file called `app.py` in your project directory and paste the following code in:
 
    ```python
    import time
@@ -62,13 +62,13 @@ Define the application dependencies.
    > Note the way the `get_hit_count` function is written. This basic retry
    > loop lets us attempt our request multiple times if the redis service is
    > not available. This is useful at startup while the application comes
-   > online, but also makes our application more resilient if the Redis
+   > online, but also makes the application more resilient if the Redis
    > service needs to be restarted anytime during the app's lifetime. In a
    > cluster, this also helps handling momentary connection drops between
    > nodes.
 
 3. Create another file called `requirements.txt` in your project directory and
-   paste this in:
+   paste the following code in:
 
    ```text
    flask
@@ -77,12 +77,11 @@ Define the application dependencies.
 
 ## Step 2: Create a Dockerfile
 
-In this step, you write a Dockerfile that builds a Docker image. The image
+The Dockerfile is used to build a Docker image. The image
 contains all the dependencies the Python application requires, including Python
 itself.
 
-In your project directory, create a file named `Dockerfile` and paste the
-following:
+In your project directory, create a file named `Dockerfile` and paste the following code in:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -109,6 +108,11 @@ This tells Docker to:
 * Copy the current directory `.` in the project to the workdir `.` in the image.
 * Set the default command for the container to `flask run`.
 
+>Important
+>
+>Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and which results in an error when you run the application.
+{: .important}
+
 For more information on how to write Dockerfiles, see the
 [Docker user guide](../develop/index.md)
 and the [Dockerfile reference](/engine/reference/builder/).
@@ -132,13 +136,8 @@ services:
 
 This Compose file defines two services: `web` and `redis`. 
 
-### Web service
-
 The `web` service uses an image that's built from the `Dockerfile` in the current directory.
-It then binds the container and the host machine to the exposed port, `8000`. This example service uses the default port for 
-the Flask web server, `5000`.
-
-### Redis service
+It then binds the container and the host machine to the exposed port, `8000`. This example service uses the default port for the Flask web server, `5000`.
 
 The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) 
 image pulled from the Docker Hub registry.
@@ -175,11 +174,7 @@ image pulled from the Docker Hub registry.
 
 2. Enter http://localhost:8000/ in a browser to see the application running.
 
-   If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
-   Windows, then the web app should now be listening on port 8000 on your
-   Docker daemon host. Point your web browser to http://localhost:8000 to
-   find the `Hello World` message. If this doesn't resolve, you can also try
-   http://127.0.0.1:8000.
+   If this doesn't resolve, you can also try http://127.0.0.1:8000.
 
    You should see a message in your browser saying:
 
@@ -346,12 +341,9 @@ container:
 $ docker compose down --volumes
 ```
 
-At this point, you have seen the basics of how Compose works.
-
-
 ## Where to go next
 
-- Next, try the [Sample apps with Compose](samples-for-compose.md)
+- Next, try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
 - [Explore the full list of Compose commands](reference/index.md)
-- [Compose configuration file reference](compose-file/index.md)
+- [Explore the Compose configuration file reference](compose-file/index.md)
 - To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)

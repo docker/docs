@@ -2,17 +2,16 @@
 description: How to install Docker Compose - Other Scenarios
 keywords: compose, orchestration, install, installation, docker, documentation
 toc_max: 3
-
-title: Other install Scenarios
+title: Install the Compose standalone
 ---
 
-## Install Compose Standalone
+On this page you can find instructions on how to install the Compose standalone on Linux or Windows Server, from the command line.
 
 ### On Linux
 > **Compose standalone**
 >
-> Note that Compose standalone uses the _dash compose_ syntax instead of current's standard syntax (_space compose_).  
-For example: type `docker-compose up` when using Compose standalone, instead of `docker compose up`.
+> Note that Compose standalone uses the `-compose` syntax instead of the current standard syntax `compose`.  
+>For example type `docker-compose up` when using Compose standalone, instead of `docker compose up`.
 
 1. To download and install Compose standalone, run:
   ```console
@@ -35,7 +34,7 @@ For example: type `docker-compose up` when using Compose standalone, instead of 
 Follow these instructions if you are running the Docker daemon and client directly
 on Microsoft Windows Server and want to install Docker Compose.
 
-1.  Run a PowerShell as an administrator.
+1.  Run PowerShell as an administrator.
 When asked if you want to allow this app to make changes to your device, click **Yes** in order to proceed with the installation.
 
 2.  GitHub now requires TLS1.2. In PowerShell, run the following:
@@ -46,7 +45,7 @@ When asked if you want to allow this app to make changes to your device, click *
 3. Run the following command to download the latest release of Compose ({{site.compose_version}}):
 
     ```powershell
-    Invoke-WebRequest "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
+     Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
     > **Note**

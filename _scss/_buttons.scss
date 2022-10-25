@@ -11,7 +11,6 @@ a.button {
 a.button.outline-btn {
     color: $primary-links;
     float: none;
-    margin-bottom: 30px;
     display: inline-block;
 }
 
@@ -23,7 +22,7 @@ a.button.outline-btn.min-hgt {
     display: inline-block;
     margin: 10px 10px 10px 0;
     font-family: $buttons;
-    padding: 12px 35px 10px;
+    padding: 12px 35px;
     min-width: 200px;
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -35,10 +34,9 @@ a.button.outline-btn.min-hgt {
 }
 
 .primary-btn {
-    background:    $primary-links;
-    border:        1px solid rgba(0, 0, 0, 0.1);
+    background: $primary-links;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    padding-top:   16px
 }
 
 /*

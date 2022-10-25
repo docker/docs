@@ -12,7 +12,8 @@ title: Frequently asked questions
 ### What are the system requirements for Docker Desktop?
 
 For information about Docker Desktop system requirements, see:
-- [Mac system requirements](../install/mac-install.md#system-requirements) 
+
+- [Mac system requirements](../install/mac-install.md#system-requirements)
 - [Windows system requirements](../install/windows-install.md#system-requirements)
 - [Linux system requirements](../install/linux-install.md#system-requirements)
 
@@ -33,6 +34,14 @@ You can find the checksums on the [release notes](../release-notes.md) page.
 Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. Otherwise, it requires a paid subscription for professional use. Paid subscriptions are also required for government entities. When downloading and installing Docker Desktop, you are asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
 
 Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn more.
+
+## Do I need to pay to create or share Docker Extensions?
+
+No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client) is licensed under the Apache 2.0 License and is free to use. Anyone can create new Docker Extensions and share them without constraints.
+
+## Do I need to use a specific license when I create a Docker Extension?
+
+No, there is no constraint on how each extension should be licensed, this is up to the extension authors to decide when creating a new extension.
 
 ### Can I use Docker Desktop offline?
 
@@ -64,7 +73,8 @@ You can find information about diagnosing and troubleshooting common issues in t
 
 If you do not find a solution in troubleshooting, browse the Github repositories or create a new issue:
 
-- [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} - - [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
+- [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} 
+- [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
 - [docker/for-linux](https://github.com/docker/for-linux/issues){: target="_blank" rel="noopener" class="_"}
 
 ### How do I connect to the remote Docker Engine API?
@@ -118,7 +128,7 @@ After updating the `settings.json` file, close and restart Docker Desktop to app
 
 ### Can I run Docker Desktop on Virtualized hardware?
 
-No, currently this is unsupported and against terms of use. 
+No, currently this is unsupported and against terms of use.
 
 ## Releases
 
@@ -140,4 +150,4 @@ Sometimes we may roll out a new version gradually over a few days. Therefore, if
 
 ### Where can I find information about Stable and Edge releases?
 
-Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single, cumulative release stream for all users. 
+Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single, cumulative release stream for all users.

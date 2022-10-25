@@ -4,7 +4,9 @@ keywords: registry, access, managment
 title: Registry Access Management
 ---
 
-Registry Access Management is a feature available to organizations with a Docker Business subscription. With Registry Access Management, organization owners can ensure that their developers using Docker Desktop can only access registries that have been allow-listed via the Registry Access Management dashboard on Docker Hub to reflect support for other registries: AWS ECR, GitHub Container Registry, Google Container Registry, Quay, and others.
+Registry Access Management (RAM) is a feature available to organizations with a Docker Business subscription. When RAM is enabled, organization owners can ensure that their developers using Docker Desktop can only access registries that have been allow-listed via the Registry Access Management dashboard on Docker Hub to reflect support for other registries: AWS ECR, GitHub Container Registry, Google Container Registry, Quay, a local private registry, and others.
+
+For example, you can use RAM if you manage engineering teams that use Docker Desktop for local development and want to ensure that the images they are pulling are licensed and reputable before using them.
 
 ## Requirements:
 

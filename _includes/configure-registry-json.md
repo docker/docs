@@ -23,7 +23,12 @@ The `registry.json` file must contain the following contents, where `myorg` is r
 }
 ```
 
-You can use the following methods to create a `registry.json` file based on the user's operating system.
+In Docker Hub, you can download the `registry.json` file for your organization or copy the specific commands to create the file for your organization. To download the file or copy the commands from Docker Hub:
+1. Log in to [Docker Hub](http://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an organization owner.
+2. Go to **Organizations** > **_Your Organization_** > **Settings**.
+3. Select **Enforce Sign-in** and continue with the on-screen instructions for Windows, Mac, or Linux.
+
+Alternatively, you can use the following methods to create a `registry.json` file based on the user's operating system.
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows">Windows</a></li>
@@ -61,7 +66,19 @@ To manually create a `registry.json` file, run the following PowerShell command 
 PS>  Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myorg"]}'
 ```
 
-This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator.
+This creates the `registry.json` file at `C:\ProgramData\DockerDesktop\registry.json` and includes the organization information the user belongs to. Make sure this file can't be edited by the user, only by the administrator:
+
+```console
+PS C:\ProgramData\DockerDesktop> Get-Acl .\registry.json
+
+
+    Directory: C:\ProgramData\DockerDesktop
+
+
+Path          Owner                  Access
+----          -----                  ------
+registry.json BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
+```
 
 </div>
 <div id="mac" class="tab-pane fade" markdown="1">
@@ -95,7 +112,7 @@ at `/Library/Application Support/com.docker.docker/registry.json` and includes
 the organization information the user belongs to. Make sure the file has the
 expected content and can't be edited by the user, only by the administrator.
 
-Verify that the content of the file contains the correct information;
+Verify that the content of the file contains the correct information:
 
 ```console
 $ sudo cat "/Library/Application Support/com.docker.docker/registry.json"

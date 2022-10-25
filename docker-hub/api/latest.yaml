@@ -3,7 +3,7 @@ info:
   title: Docker HUB API
   version: beta
   x-logo:
-    url: https://docs.docker.com/images/logo-docker-main.png
+    url: https://docs.docker.com/assets/images/logo-docker-main.png
     href: /reference
   description: |
     Docker Hub is a service provided by Docker for finding and sharing container
@@ -823,7 +823,7 @@ paths:
           $ref: "#/components/responses/NotFound"
           
 
-  /v2/namespace/{namespace}/repositories/{repository}/tags:
+  /v2/namespaces/{namespace}/repositories/{repository}/tags:
     parameters:
       - $ref: "#/components/parameters/namespace"
       - $ref: "#/components/parameters/repository"
@@ -2463,7 +2463,7 @@ components:
       required: false
       schema:
         type: integer
-      description: "Number of images to get per page. Defaults to 10. Max of 1000."
+      description: "Number of items to get per page. Defaults to 10. Max of 100."
 
   requestBodies:
     scim_create_user_request:

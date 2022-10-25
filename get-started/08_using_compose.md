@@ -24,7 +24,7 @@ a Linux machine, you will need to [install Docker Compose](../compose/install/in
 After installation, you should be able to run the following and see version information.
 
 ```console
-$ docker-compose version
+$ docker compose version
 ```
 
 ## Create the Compose file
@@ -274,11 +274,11 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 
 1. Make sure no other copies of the app/db are running first (`docker ps` and `docker rm -f <ids>`).
 
-2. Start up the application stack using the `docker-compose up` command. We'll add the `-d` flag to run everything in the
+2. Start up the application stack using the `docker compose up` command. We'll add the `-d` flag to run everything in the
    background.
 
     ```console
-    $ docker-compose up -d
+    $ docker compose up -d
     ```
 
     When we run this, we should see output like this:
@@ -292,7 +292,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 
     You'll notice that the volume was created as well as a network! By default, Docker Compose automatically creates a network specifically for the application stack (which is why we didn't define one in the compose file).
 
-3. Let's look at the logs using the `docker-compose logs -f` command. You'll see the logs from each of the services interleaved
+3. Let's look at the logs using the `docker compose logs -f` command. You'll see the logs from each of the services interleaved
     into a single stream. This is incredibly useful when you want to watch for timing-related issues. The `-f` flag "follows" the
     log, so will give you live output as it's generated.
 
@@ -307,7 +307,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 
     The service name is displayed at the beginning of the line (often colored) to help distinguish messages. If you want to
     view the logs for a specific service, you can add the service name to the end of the logs command (for example,
-    `docker-compose logs -f app`).
+    `docker compose logs -f app`).
 
     > **Tip: Waiting for the DB before starting the app**
     >
@@ -336,28 +336,29 @@ quickly see what container is our app and which container is the mysql database.
 
 ## Tear it all down
 
-When you're ready to tear it all down, simply run `docker-compose down` or hit the trash can on the Docker Dashboard
+When you're ready to tear it all down, simply run `docker compose down` or hit the trash can on the Docker Dashboard
 for the entire app. The containers will stop and the network will be removed.
 
 >**Warning**
 >
 >Removing Volumes
 >
->By default, named volumes in your compose file are NOT removed when running `docker-compose down`. If you want to
+>By default, named volumes in your compose file are NOT removed when running `docker compose down`. If you want to
 >remove the volumes, you will need to add the `--volumes` flag.
 >
 >The Docker Dashboard does _not_ remove volumes when you delete the app stack.
 {: .warning}
 
-Once torn down, you can switch to another project, run `docker-compose up` and be ready to contribute to that project! It really
+Once torn down, you can switch to another project, run `docker compose up` and be ready to contribute to that project! It really
 doesn't get much simpler than that!
 
-## Recap
+## Next steps
 
-In this section, we learned about Docker Compose and how it helps us dramatically simplify the defining and
-sharing of multi-service applications. We created a Compose file by translating the commands we were
+In this section, you learned about Docker Compose and how it helps you dramatically simplify the defining and
+sharing of multi-service applications. You created a Compose file by translating the commands you were
 using into the appropriate compose format.
 
-At this point, we're starting to wrap up the tutorial. However, there are a few best practices about
-image building we want to cover, as there is a big issue with the Dockerfile we've been using. So,
-let's take a look!
+At this point, you're starting to wrap up the tutorial. However, there are a few best practices about
+image building you should cover, as there is a big issue with the Dockerfile you've been using. 
+
+[Image-building best practices](09_image_best.md){: .button  .primary-btn}

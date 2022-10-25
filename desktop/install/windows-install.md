@@ -151,13 +151,18 @@ If using the Windows Command Prompt:
 start /w "" "Docker Desktop Installer.exe" install
 ```
 
-The install command accepts the following flags:
+The `install` command accepts the following flags:
 
 - `--quiet`: suppresses information output when running the installer
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--no-windows-containers`: disables Windows containers integration
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 - `--backend=<backend name>`: selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
+- `--installation-dir=<path>`: changes the default installation location (`C:\Program Files\Docker\Docker`)
+- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
+  - It must be used together with the `--allowed-org=<org name>` flag. 
+  - For example:
+    `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
@@ -186,25 +191,6 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"}.
 
-
-## Updates
-
-{% include desktop-update.md %}
-
-## Uninstall Docker Desktop
-
-To uninstall Docker Desktop from your Windows machine:
-
-1. From the Windows **Start** menu, select **Settings** > **Apps** > **Apps & features**.
-2. Select **Docker Desktop** from the **Apps & features** list and then select **Uninstall**.
-3. Click **Uninstall** to confirm your selection.
-
-> **Important**
->
-> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
-> other Docker related data local to the machine, and removes the files generated
-> by the application. Refer to the [back up and restore data](../backup-and-restore.md)
-> section to learn how to preserve important data before uninstalling.
 
 ## Where to go next
 

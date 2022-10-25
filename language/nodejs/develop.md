@@ -50,14 +50,30 @@ $ docker run -it --rm -d -v mongodb:/data/db \
 Okay, now that we have a running MongoDB, let’s update `server.js` to use MongoDB and not an in-memory data store.
 
 ```javascript
-const ronin     = require( 'ronin-server' )
-const mocks     = require( 'ronin-mocks' )
+const ronin 		= require( 'ronin-server' )
 const database  = require( 'ronin-database' )
-const server = ronin.server()
+const mocks 		= require( 'ronin-mocks' )
 
-database.connect( process.env.CONNECTIONSTRING )
-server.use( '/', mocks.server( server.Router(), false, false ) )
-server.start()
+async function main() {
+
+    try {
+    await database.connect( process.env.CONNECTIONSTRING )
+    
+    const server = ronin.server({
+            port: process.env.SERVER_PORT
+        })
+
+        server.use( '/', mocks.server( server.Router()) )
+
+    const result = await server.start()
+        console.info( result )
+    
+    } catch( error ) {
+        console.error( error )
+    }
+}
+
+main()
 ```
 
 We’ve added the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
@@ -140,7 +156,7 @@ volumes:
 
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Compose file.
 
-We are exposing `port 9229` so that we can attach a debugger. We are also mapping our local source code into the running container so that we can make changes in our text editor and have those changes picked up in the container.
+We are exposing `port 9229` so that we can attach a debugger. With `volumes`,  we are also mapping our local source code into the running container so that we can make changes in our text editor and have those changes picked up in the container.
 
 One other really cool feature of using a Compose file is that we have service resolution set up to use the service names. So we are now able to use `“mongo”` in our connection string. The reason we use mongo is because that is what we have named our MongoDB service in the Compose file as.
 
@@ -226,4 +242,4 @@ In the next module, we’ll take a look at how to run unit tests in Docker. See:
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
