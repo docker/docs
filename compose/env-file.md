@@ -14,7 +14,7 @@ The following syntax rules apply to environment files:
   - `VAR="VAL"` -> `VAL`
   - `VAR='VAL'` -> `VAL`
 - Lines beginning with `#` are processed as comments and ignored.
-- Inline comments for unquoted values must be proceeded with a space.
+- Inline comments for unquoted values must be preceded with a space.
   - `VAR=VAL # comment` -> `VAL`
   - `VAR=VAL# not a comment` -> `VAL# not a comment`
 - Inline comments for quoted values must follow the closing quote.
