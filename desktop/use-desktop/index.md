@@ -9,7 +9,7 @@ redirect_from:
 When you open Docker Desktop, the Docker Dashboard displays.
 
 
-<img id="myImg" src="/desktop/images/dashboard.PNG" alt="Docker Desktop dashboard" style="width:100%;max-width:500px">
+<img id="myImg" src="/desktop/images/dashboard.PNG" alt="Docker Dashboard" style="width:100%;max-width:500px">
 <div id="myModal" class="modal">
   <span class="close">&times;</span>
   <img class="modal-content" id="img01">
