@@ -8,10 +8,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-
-{% include guides/enable-buildkit.md %}
-
-* You understand basic [Docker concepts](../../get-started/overview.md), and you have installed [Docker](../../get-docker.md).
+* You understand basic [Docker concepts](../../get-started/overview.md).
 * You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
 * You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
   on your machine.
