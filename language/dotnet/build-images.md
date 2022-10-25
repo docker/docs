@@ -118,7 +118,7 @@ We will use a multi-stage build and define a stage for building the application.
 
 > **Note**
 >
-> To learn more about multi-stage builds, see [Use multi-stage builds](../../develop/develop-images/multistage-build.md).
+> To learn more about multi-stage builds, see [Multi-stage builds](../../build/building/multi-stage.md).
 
 To make things easier when running the rest of our commands, let’s create a working directory for our source files. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.
 
