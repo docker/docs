@@ -1436,7 +1436,7 @@ manuals:
     - path: /engine/install/binaries/
       title: Install binaries
     - path: /engine/install/linux-postinstall/
-      title: Optional post-installation steps
+      title: Post-installation steps
   - path: /engine/troubleshoot/
     title: Troubleshoot
   - path: /engine/deprecated/

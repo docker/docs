@@ -21,7 +21,10 @@ The Docker daemon binds to a Unix socket, not a TCP port. By default it's the
 
 If you don't want to preface the `docker` command with `sudo`, create a Unix
 group called `docker` and add users to it. When the Docker daemon starts, it
-creates a Unix socket accessible by members of the `docker` group.
+creates a Unix socket accessible by members of the `docker` group. On some Linux
+distributions, the system automatically creates this group when installing
+Docker Engine using a package manager. In that case, there is no need for you to
+manually create the group.
 
 <!-- prettier-ignore -->
 > **Warning**
@@ -90,7 +93,7 @@ To create the `docker` group and add your user:
    $ sudo chmod g+rwx "$HOME/.docker" -R
    ```
 
-## Configure Docker to start on boot
+## Configure Docker to start on boot with systemd
 
 Many modern Linux distributions use [systemd](../../config/daemon/systemd.md) to
 manage which services start when the system boots. On Debian and Ubuntu, the
@@ -113,20 +116,13 @@ If you need to add an HTTP proxy, set a different directory or partition for the
 Docker runtime files, or make other customizations, see
 [customize your systemd Docker daemon options](../../config/daemon/systemd.md).
 
-## Use a different storage engine
-
-For information about the different storage engines, see
-[Storage drivers](../../storage/storagedriver/index.md). The default storage
-engine and the list of supported storage engines depend on your host's Linux
-distribution and available kernel drivers.
-
 ## Configure default logging driver
 
-Docker provides the [capability](../../config/containers/logging/index.md) to
-collect and view log data from all containers running on a host via a series of
-logging drivers. The default logging driver, `json-file`, writes log data to
-JSON-formatted files on the host filesystem. Over time, these log files expand
-in size, leading to potential exhaustion of disk resources.
+Docker provides [logging drivers](../../config/containers/logging/index.md) for
+collecting and viewing log data from all containers running on a host. The
+default logging driver, `json-file`, writes log data to JSON-formatted files on
+the host filesystem. Over time, these log files expand in size, leading to
+potential exhaustion of disk resources.
 
 To avoid issues with overusing disk for log data, consider one of the following
 options:
@@ -165,11 +161,11 @@ can use the `daemon.json` file, if your distribution doesn't use systemd.
 
 > systemd vs `daemon.json`
 >
-> Configuring Docker to listen for connections using both the `systemd` unit
-> file and the `daemon.json` file causes a conflict that prevents Docker from
+> Configuring Docker to listen for connections using both the systemd unit file
+> and the `daemon.json` file causes a conflict that prevents Docker from
 > starting.
 
-### Configuring remote access with `systemd` unit file
+### Configuring remote access with systemd unit file
 
 1. Use the command `sudo systemctl edit docker.service` to open an override file
    for `docker.service` in a text editor.
