@@ -25,5 +25,5 @@ The process for generating the YAML files is still in flux. Check with
 release branch of `docker/cli`, for example, the `19.03` branch.
 
 After generating the YAML files, replace the YAML files in
-[https://github.com/docker/docs/tree/master/_data/engine-cli](https://github.com/docker/docs/tree/master/_data/engine-cli)
+[https://github.com/docker/docs/tree/main/_data/engine-cli](https://github.com/docker/docs/tree/main/_data/engine-cli)
 with the newly-generated files. Submit a pull request.
