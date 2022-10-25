@@ -125,8 +125,6 @@ guides:
     section:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Dockerfile best practices
-    - path: /develop/develop-images/build_enhancements/
-      title: Build images with BuildKit
     - path: /develop/develop-images/image_management/
       title: Manage images
     - path: /develop/develop-images/baseimages/
@@ -1543,6 +1541,12 @@ manuals:
               title: Build contexts and linking targets
             - path: /build/customize/bake/compose-file/
               title: Building from Compose file
+    - sectiontitle: BuildKit
+      section:
+        - path: /build/buildkit/
+          title: Overview
+        - path: /build/buildkit/dockerfile-frontend/
+          title: Custom Dockerfile syntax
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
