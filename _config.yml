@@ -190,7 +190,7 @@ fetch-remote:
 
   - repo: "https://github.com/moby/buildkit"
     default_branch: "master"
-    ref: "8bc51649bc7e712a8e2ff90412f48fdc35f602a9"
+    ref: "master"
     paths:
       - dest: "engine/reference/builder.md"
         src:

@@ -29,6 +29,21 @@ multi-layer image builds based on your unique configurations. Dockerfiles can
 start simple and grow with your needs and support images that require complex
 instructions. For all the possible instructions, see the [Dockerfile reference](../../engine/reference/builder.md).
 
+The default filename to use for a Dockerfile is `Dockerfile`, without a file
+extension. Using the default name allows you to run the `docker build` command
+without having to specify additional command flags.
+
+Some projects may need distinct Dockerfiles for specific purposes. A common
+convention is to name these `<something>.Dockerfile`. Such Dockerfiles can then
+be used through the `--file` (or `-f` shorthand) option on the `docker build` command.
+Refer to the ["Specify a Dockerfile" section](../../engine/reference/commandline/build.md#specify-a-dockerfile--f)
+in the `docker build` reference to learn about the `--file` option.
+
+> **Note**
+>
+> We recommend using the default (`Dockerfile`) for your project's primary
+> Dockerfile.
+
 Docker images consist of **read-only layers**, each resulting from an
 instruction in the Dockerfile. Layers are stacked sequentially and each one is
 a delta representing the changes applied to the previous layer.
@@ -80,16 +95,23 @@ EXPOSE 8000
 CMD flask run --host 0.0.0.0 --port 8000
 ```
 
-We start by specifying the [syntax directive](../../engine/reference/builder.md#syntax).
-It pins the exact version of the Dockerfile syntax we're using:
+The first line to add to a Dockerfile is a [`# syntax` parser directive](../../engine/reference/builder.md#syntax).
+While optional, this directive instructs the Docker builder what syntax to use
+when parsing the Dockerfile, and allows older Docker versions with [BuildKit enabled](../buildkit/index.md#getting-started)
+to use a specific [Dockerfile frontend](../buildkit/dockerfile-frontend.md)
+before starting the build. [Parser directives](../../engine/reference/builder.md/#parser-directives)
+must appear before any other comment, whitespace, or Dockerfile instruction in
+your Dockerfile, and should be the first line in Dockerfiles.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
 ```
 
-As a [best practice](../../develop/dev-best-practices.md), this should be the
-very first line in all our Dockerfiles as it informs BuildKit the right version
-of the Dockerfile to use.
+> **Note**
+>
+> We recommend using `docker/dockerfile:1`, which always points to the latest
+> release of the version 1 syntax. BuildKit automatically checks for updates of
+> the syntax before building, making sure you are using the most current version.
 
 Next we define the first instruction:
 
@@ -185,11 +207,18 @@ To test our Dockerfile, we'll first build it using the [`docker build` command](
 $ docker build -t test:latest .
 ```
 
-* `-t test:latest` option specifies the name (required) and tag (optional) of
-  the image we're building.
-* `.` specifies the build context as the current directory. In this example,
-  this is where build expects to find the Dockerfile and the local files the
-  Dockerfile needs to access, in this case your python application.
+Here `-t test:latest` option specifies the name (required) and tag (optional)
+of  the image we're building. `.` specifies the build context as the current
+directory. In this example, this is where build expects to find the Dockerfile
+and the local files the Dockerfile needs to access, in this case your Python
+application.
+
+> **Warning**
+>
+> Avoid using your root directory, `/`, as the `PATH` for your build context,
+> as it causes the build to transfer the entire contents of your hard drive to
+> the daemon.
+{:.warning}
 
 So, in accordance with the build command issued and how build context works,
 your Dockerfile and python app need to be in the same directory.
