@@ -1417,10 +1417,10 @@ manuals:
   section:
   - path: /engine/
     title: Overview
-  - path: /engine/install/
-    title: Install
-  - sectiontitle: Installation per distro
+  - sectiontitle: Install
     section:
+    - path: /engine/install/
+      title: Installation Overview
     - path: /engine/install/centos/
       title: Install on CentOS
     - path: /engine/install/debian/
@@ -1435,8 +1435,10 @@ manuals:
       title: Install on Ubuntu
     - path: /engine/install/binaries/
       title: Install binaries
-  - path: /engine/install/linux-postinstall/
-    title: Optional post-installation steps
+    - path: /engine/install/linux-postinstall/
+      title: Optional post-installation steps
+  - path: /engine/troubleshoot/
+    title: Troubleshoot
   - path: /engine/deprecated/
     title: Deprecated features
   - path: /engine/context/working-with-contexts/
