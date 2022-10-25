@@ -8,9 +8,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
-
-{% include guides/enable-buildkit.md %}
+Work through the [Get started guide](../../get-started/index.md) to understand Docker concepts.
 
 ## Overview
 
@@ -77,17 +75,13 @@ Let’s start our application and make sure it’s running properly. Open your t
 
 ```console
 $ cd /path/to/dotnet-docker/src
-$ dotnet run –urls http://localhost:5000
+$ dotnet run --urls http://localhost:5000
 ```
 
 Output similar to the following appears.
 
 ```console
 Building...
-warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
-    Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when the container is destroyed.
-warn: Microsoft.AspNetCore.Server.Kestrel[0]
-     Unable to bind to http://localhost:5000 on the IPv6 loopback interface: 'Cannot assign requested address'.
 info: Microsoft.Hosting.Lifetime[0]
     Now listening on: http://localhost:5000
 info: Microsoft.Hosting.Lifetime[0]
@@ -95,10 +89,11 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
     Hosting environment: Development
 info: Microsoft.Hosting.Lifetime[0]
-    Content root path: /src
+    Content root path: C:\Users\username\dotnet-docker\src\
 ```
+Read the output to verify how you can access the application. In the example above, `Now listening on: http://localhost:5000` indicates that you access the application at `http://localhost:5000`.
 
-Open a web browser and access `http://localhost:5000`. The following page should appear.
+Open a web browser and access the application based on the URL in the output. The following page should appear.
 
 ![image of app page](./images/dotnet-app-verify-build.png)
 
@@ -144,7 +139,7 @@ RUN dotnet restore
 Next, you'll need to copy the rest of your source files into the image. The line below will copy the files from the `src` directory on your local machine to a directory called `src` in the image.
 
 ```dockerfile
-COPY src ./src
+COPY src .
 ```
 
 Next, you'll need to run the `dotnet publish` command to build the project.
@@ -206,9 +201,9 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 To make your build context as small as possible, add a .dockerignore file to your `dotnet-docker` folder and copy the following into it.
 
-```console
-bin/
-obj/
+```shell
+**/bin/
+**/obj/
 ```
 
 > **Note**

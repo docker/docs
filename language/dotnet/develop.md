@@ -262,7 +262,7 @@ $ docker run \
   dotnet-docker
 ```
 
-Let's test that the application works and is connecting to the database. Using a web browser, access `http://localhost:5050`. A page similar to the following image appears.
+Let's test that the application works and is connecting to the database. Using a web browser, access `http://localhost:5000`. A page similar to the following image appears.
 
 ![image of app page](./images/dotnet-verify-db.png)
 
