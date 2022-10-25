@@ -30,11 +30,11 @@ The Docker+Wasm integration currently requires a technical preview build of Dock
 
 Download the technical preview build of Docker Desktop:
 
-- [macOS Apple Silicon](https://www.docker.com/download/wasm-preview/linuxamd64deb)
-- [macOS Intel](https://www.docker.com/download/wasm-preview/linuxamd64deb)
-- [Windows AMD64](https://www.docker.com/download/wasm-preview/linuxamd64deb)
-- Linux Arm64 ([deb](https://www.docker.com/download/wasm-preview/linuxarm64deb))
-- Linux AMD64 ([deb](https://www.docker.com/download/wasm-preview/linuxamd64deb), [rpm](https://www.docker.com/download/wasm-preview/linuxamd64rpm), [tar](https://www.docker.com/download/wasm-preview/linuxamd64tarball))
+- [macOS Apple Silicon](https://www.docker.com/download/wasm-preview/macosxsilicon){: id="dkr_docs_dl_wasm_apple"}
+- [macOS Intel](https://www.docker.com/download/wasm-preview/macintel){: id="dkr_docs_dl_wasm_intel"}
+- [Windows AMD64](https://www.docker.com/download/wasm-preview/windowsamd64){: id="dkr_docs_dl_wasm_windows"}
+- Linux Arm64 ([deb](https://www.docker.com/download/wasm-preview/linuxarm64deb){: id="dkr_docs_dl_wasm_arm64deb"})
+- Linux AMD64 ([deb](https://www.docker.com/download/wasm-preview/linuxamd64deb){: id="dkr_docs_dl_wasm_amd64deb"}, [rpm](https://www.docker.com/download/wasm-preview/linuxamd64rpm){: id="dkr_docs_dl_wasm_amd64rpm"}, [tar](https://www.docker.com/download/wasm-preview/linuxamd64tarball){: id="dkr_docs_dl_wasm_amd64tar"})
 
 ## Usage examples
 
