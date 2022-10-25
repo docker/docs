@@ -1543,6 +1543,12 @@ manuals:
               title: Build contexts and linking targets
             - path: /build/customize/bake/compose-file/
               title: Building from Compose file
+    - sectiontitle: BuildKit
+      section:
+        - path: /build/buildkit/
+          title: Overview
+        - path: /build/buildkit/dockerfile-frontend/
+          title: Custom Dockerfile syntax
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
