@@ -494,6 +494,18 @@ This error occurs when the number of available entries in `/etc/subuid` or
 images. However, 65,536 entries are sufficient for most images. See
 [Prerequisites](#prerequisites).
 
+If not, edit the `/etc/subuid` and `/etc/subgid` to add more entries.
+Example: log message:
+```console
+Error processing tar file(exit status 1): potentially insufficient UIDs or GIDs available in user namespace (requested 200162:0 for /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.312.b07-1.el7_9.x86_64/jre/bin/alt-java): Check /etc/subuid and /etc/subgid: lchown /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.312.b07-1.el7_9.x86_64/jre/bin/alt-java: invalid argument
+```
+The requested is `200162` here, so the fix could be to add more than this:
+
+```console
+$ grep ^$(whoami): /etc/subgid
+testuser:100000:231073
+```
+
 **docker: failed to register layer: ApplyLayer exit status 1 stdout:  stderr: lchown &lt;FILE&gt;: operation not permitted**
 
 This error occurs mostly when `~/.local/share/docker` is located on NFS.
