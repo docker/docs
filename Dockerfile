@@ -49,7 +49,12 @@ ENV TARGET=/out
 RUN --mount=type=bind,target=.,rw \
     --mount=type=cache,target=/src/.jekyll-cache <<EOT
   set -eu
-  CONFIG_FILES=_config.yml$([ "$JEKYLL_ENV" = "production" ] && echo ",_config_production.yml" || true)
+  CONFIG_FILES="_config.yml"
+  if [ "${JEKYLL_ENV}" = "production" ]; then
+    CONFIG_FILES="${CONFIG_FILES},_config_prod.yml"
+  elif [ "${DOCS_URL}" = "https://docs-stage.docker.com" ]; then
+    CONFIG_FILES="${CONFIG_FILES},_config_stage.yml"
+  fi
   set -x
   bundle exec jekyll build --profile -d ${TARGET} --config ${CONFIG_FILES}
 EOT
