@@ -8,7 +8,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
+Work through the [Get started guide](../../get-started/index.md) to understand Docker concepts.
 
 {% include guides/enable-buildkit.md %}
 

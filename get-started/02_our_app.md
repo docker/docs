@@ -34,7 +34,7 @@ Before you can run the application, you need to get the application source code 
 
 ## Build the app's container image
 
-In order to build the [container image](../get-started/overview.md/#docker-objects), you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that Docker uses to create a container image.
+In order to build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that Docker uses to create a container image.
 
 1. In the `app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
 
@@ -113,7 +113,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
 
 ## Start an app container
 
-Now that you have an image, you can run the application in a [container](../get-started/overview.md/#docker-objects). To do so, you will use the `docker run` command.
+Now that you have an image, you can run the application in a [container](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}. To do so, you will use the `docker run` command.
 
 1. Start your container using the `docker run` command and specify the name of the image you just created:
 
@@ -124,7 +124,7 @@ Now that you have an image, you can run the application in a [container](../get-
    You use the `-d` flag to run the new container in "detached" mode (in the background). You also use the `-p` flag to create a mapping between the host's port 3000 to the container's port 3000.
    Without the port mapping, you wouldn't be able to access the application.
 
-2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
+2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
    You should see your app.
 
    ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}

@@ -8,7 +8,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](../../get-started/index.md){:target="_blank" rel="noopener" class="_"} to understand Docker concepts. Refer to the following section for Java prerequisites.
+Work through the [Get started guide](../../get-started/index.md){:target="_blank" rel="noopener" class="_"} to understand Docker concepts. Refer to the following section for Java prerequisites.
 
 {% include guides/enable-buildkit.md %}
 

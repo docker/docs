@@ -29,7 +29,7 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-    - title: "Part 1: Orientation and setup"
+    - title: "Part 1: Overview"
       path: /get-started/
     - title: "Part 2: Containerize an application"
       path: /get-started/02_our_app/

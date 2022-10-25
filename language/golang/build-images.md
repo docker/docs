@@ -13,8 +13,7 @@ redirect_from:
 * Some understanding of Go and its toolchain. This is not a tutorial on Go. If
   you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"}
   is a good starting point, so go (pun intended) check it out.
-* Some awareness of basic Docker concepts. If unsure, work through the orientation
-  and setup in Get started [Part 1](../../get-started/index.md).
+* Some awareness of basic Docker concepts. If unsure, work through the [Get started guide](../../get-started/index.md).
 
 ## Overview
 

@@ -10,7 +10,7 @@ redirect_from:
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
+Work through the [Get started guide](../../get-started/index.md) to understand Docker concepts.
 
 {% include guides/enable-buildkit.md %}
 

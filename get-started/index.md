@@ -1,7 +1,7 @@
 ---
-title: "Orientation and setup"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
-description: Get oriented on some basics of Docker and install Docker Desktop.
+title: "Overview"
+keywords: get started, overview, quickstart, intro, concepts, containers, images
+description: Get an overview of the Get started guide and learn about containers and images.
 redirect_from:
 - /engine/getstarted-voting-app/
 - /engine/getstarted-voting-app/cleanup/
@@ -77,7 +77,6 @@ features that have been in Linux for a long time. Docker has worked to make thes
 - can be run on local machines, virtual machines or deployed to the cloud.
 - is portable (can be run on any OS).
 - is isolated from other containers and runs its own software, binaries, and configurations.
-
 
 ## What is a container image?
 
