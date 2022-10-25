@@ -51,7 +51,7 @@ RUN --mount=type=bind,target=.,rw \
   set -eu
   CONFIG_FILES="_config.yml"
   if [ "${JEKYLL_ENV}" = "production" ]; then
-    CONFIG_FILES="${CONFIG_FILES},_config_prod.yml"
+    CONFIG_FILES="${CONFIG_FILES},_config_production.yml"
   elif [ "${DOCS_URL}" = "https://docs-stage.docker.com" ]; then
     CONFIG_FILES="${CONFIG_FILES},_config_stage.yml"
   fi
