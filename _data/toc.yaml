@@ -1296,11 +1296,13 @@ manuals:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a simple dev environment
-        - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create an advanced dev environment
+          title: Launch a dev environment
+        - path: /desktop/dev-environments/set-up/
+          title: Set up a dev environment
         - path: /desktop/dev-environments/share/
           title: Distribute your dev environment
+        - path: /desktop/dev-environments/dev-cli/
+          title: Use the docker dev CLI plugin
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
