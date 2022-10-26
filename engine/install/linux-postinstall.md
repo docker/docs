@@ -97,8 +97,9 @@ To create the `docker` group and add your user:
 
 Many modern Linux distributions use [systemd](../../config/daemon/systemd.md) to
 manage which services start when the system boots. On Debian and Ubuntu, the
-Docker starts on boot by default. To automatically start Docker and containerd
-on boot for other Linux distributions using systemd, run the following commands:
+Docker service starts on boot by default. To automatically start Docker and
+containerd on boot for other Linux distributions using systemd, run the
+following commands:
 
 ```console
 $ sudo systemctl enable docker.service
@@ -155,9 +156,9 @@ refer to the
 > [Protect the Docker daemon socket](../security/protect-access.md).
 {: .warning}
 
-You can configure Docker to accept remote connections can be done using the
-`docker.service` systemd unit file for Linux distributions using systemd. Or you
-can use the `daemon.json` file, if your distribution doesn't use systemd.
+You can configure Docker to accept remote connections. This can be done using
+the `docker.service` systemd unit file for Linux distributions using systemd. Or
+you can use the `daemon.json` file, if your distribution doesn't use systemd.
 
 > systemd vs `daemon.json`
 >

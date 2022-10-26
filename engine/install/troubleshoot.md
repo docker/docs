@@ -24,7 +24,7 @@ $ bash ./check-config.sh
 
 The script only works on Linux.
 
-## `Cannot connect to the Docker daemon`
+## Unable to connect to the Docker daemon
 
 ```none
 Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
@@ -85,7 +85,11 @@ IPForward=true
 
 This configuration allows IP forwarding from the container as expected.
 
-## `DNS resolver found in resolv.conf and containers can't use it`
+## DNS resolver issues
+
+```console
+DNS resolver found in resolv.conf and containers can't use it
+```
 
 Linux desktop environments often have a network manager program running, that
 uses `dnsmasq` to cache DNS requests by adding them to `/etc/resolv.conf`. The
@@ -250,9 +254,9 @@ system down more.
 
   Make sure that the interface names and chain names are correct.
 
-## `Your kernel does not support cgroup swap limit capabilities`
+## Kernel cgroup swap limit capabilities
 
-On Ubuntu or Debian hosts, You may see messages similar to the following when
+On Ubuntu or Debian hosts, you may see messages similar to the following when
 working with an image.
 
 ```none
