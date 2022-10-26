@@ -47,6 +47,7 @@ ARG JEKYLL_ENV
 ARG DOCS_URL
 ENV TARGET=/out
 RUN --mount=type=bind,target=.,rw \
+    --mount=type=cache,target=/tmp/docker-docs-clone \
     --mount=type=cache,target=/src/.jekyll-cache <<EOT
   set -eu
   CONFIG_FILES="_config.yml"
