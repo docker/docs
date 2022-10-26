@@ -68,6 +68,7 @@
                                 {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
                                 {%- assign my_name = page.url | default: "unnamed" -%}
                                 <div id="side-toc-title">Contents:</div>
+                                {% include image-modal.html %}
                                 {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
                                 {%- endunless -%}
                                 <div class="feedback-links">

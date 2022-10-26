@@ -16,6 +16,8 @@ It uses tools built into code editors that allows Docker to access code mounted 
 >Docker has simplified how you configure your dev environment project. All you need to get started is a `compose-dev.yaml` file. If you have an existing project with a `.docker/` folder this is automatically migrated the next time you launch.
 {: .important}
 
+<img id="myImg" src="/desktop/images/dev-env.PNG" alt="Dev Environments tab in Docker Desktop" style="width:100%;max-width:500px">
+
 ![Dev environment intro](../images/dev-env.PNG){:width="700px"}
 
 ## Prerequisites

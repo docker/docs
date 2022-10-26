@@ -10,11 +10,6 @@ When you open Docker Desktop, the Docker Dashboard displays.
 
 
 <img id="myImg" src="/desktop/images/dashboard.PNG" alt="Docker Dashboard" style="width:100%;max-width:500px">
-<div id="myModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="img01">
-  <div id="caption"></div>
-</div>
 
 The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](container.md).
 
@@ -46,3 +41,4 @@ To display the Whale menu, right-click on the ![whale menu](../../assets/images/
 - **Pause**
 - **Restart**
 - **Quit Docker Desktop**
+
