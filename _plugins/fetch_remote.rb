@@ -49,19 +49,17 @@ module Jekyll
           puts "    Opening #{clonedir}"
           begin
             git = Git.open(clonedir)
-            git.chdir do
-              puts "    Fetching #{entry['ref']}"
-              git.checkout(entry['ref'])
-              git.fetch
-            end
+            puts "    Fetching #{entry['ref']}"
+            git.fetch
+            git.checkout(entry['ref'])
           rescue => e
             FileUtils.rm_rf(clonedir)
             puts "    Cloning repository into #{clonedir}"
-            Git.clone("#{entry['repo']}.git", Pathname.new(clonedir), branch: entry['ref'])
+            git = Git.clone("#{entry['repo']}.git", Pathname.new(clonedir), branch: entry['ref'], depth: 1)
           end
         else
           puts "    Cloning repository into #{clonedir}"
-          Git.clone("#{entry['repo']}.git", Pathname.new(clonedir), branch: entry['ref'])
+          git = Git.clone("#{entry['repo']}.git", Pathname.new(clonedir), branch: entry['ref'], depth: 1)
         end
 
         entry['paths'].each do |path|
@@ -111,13 +109,16 @@ module Jekyll
                 # set edit and issue url and remote info for markdown files in site config defaults
                 edit_url = "#{entry['repo']}/edit/#{entry['default_branch']}/#{file_clean}"
                 issue_url = "#{entry['repo']}/issues/new?body=File: [#{file_clean}](#{get_docs_url}/#{destent.path.sub(/#{File.extname(destent.path)}$/, '')}/)"
-                puts "        edit_url:  #{edit_url}"
-                puts "        issue_url: #{issue_url}"
+                last_modified_at = git.log.path(file_clean).first.date.strftime(LastModifiedAt::DATE_FORMAT)
+                puts "        edit_url:         #{edit_url}"
+                puts "        issue_url:        #{issue_url}"
+                puts "        last_modified_at: #{last_modified_at}"
                 site.config['defaults'] << {
                   "scope" => { "path" => destent.path },
                   "values" => {
                     "edit_url" => edit_url,
-                    "issue_url" => issue_url
+                    "issue_url" => issue_url,
+                    "last_modified_at" => last_modified_at,
                   },
                 }
               end, proc do |_| end)
