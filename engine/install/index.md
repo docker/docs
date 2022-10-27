@@ -1,5 +1,5 @@
 ---
-title: Install Docker Engine
+title: Docker Engine installation overview
 description: Lists the installation methods
 keywords: docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge
 redirect_from:

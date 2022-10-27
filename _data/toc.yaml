@@ -115,6 +115,20 @@ guides:
       path: /language/golang/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/golang/deploy/
+  - sectiontitle: C# (.NET)
+    section:
+    - title: "Overview"
+      path: /language/dotnet/
+    - title: "Build images"
+      path: /language/dotnet/build-images/
+    - title: "Run containers"
+      path: /language/dotnet/run-containers/
+    - title: "Develop your app"
+      path: /language/dotnet/develop/
+    - title: "Configure CI/CD"
+      path: /language/dotnet/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/dotnet/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -1415,10 +1429,10 @@ manuals:
   section:
   - path: /engine/
     title: Overview
-  - path: /engine/install/
-    title: Install
-  - sectiontitle: Installation per distro
+  - sectiontitle: Install
     section:
+    - path: /engine/install/
+      title: Installation Overview
     - path: /engine/install/centos/
       title: Install on CentOS
     - path: /engine/install/debian/
@@ -1433,8 +1447,10 @@ manuals:
       title: Install on Ubuntu
     - path: /engine/install/binaries/
       title: Install binaries
-  - path: /engine/install/linux-postinstall/
-    title: Optional post-installation steps
+    - path: /engine/install/linux-postinstall/
+      title: Post-installation steps
+    - path: /engine/install/troubleshoot/
+      title: Troubleshoot installation
   - path: /engine/deprecated/
     title: Deprecated features
   - path: /engine/context/working-with-contexts/

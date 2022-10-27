@@ -10,7 +10,10 @@ Docker Hub organizations let you create teams so you can give your team access
 to shared image repositories.
 
 An **Organization** is a collection of teams and repositories
-that can be managed together. Docker users become members of an organization
+that can be managed together. A **Team** is a group of Docker members that belong to an organization. 
+An organization can have multiple teams. 
+
+Docker users become members of an organization
 when they are assigned to at least one team in the organization. When you first
 create an organization, you’ll see that you have a team, the **owners** (Admins)
 team, with a single member. An organization owner is someone that is part of the
@@ -19,12 +22,6 @@ members to an existing team using their Docker ID or email address and by
 selecting a team the user should be part of. An org owner can also add
 additional org owners to help them manage users, teams, and repositories in the
 organization.
-
-A **Team** is a group of Docker users that belong to an organization. An
-organization can have multiple teams. When you first create an organization,
-you’ll see that you have a team, the **owners** team, with a single member. An
-organization owner can then create new teams and add members to an existing team
-using their Docker ID or email address and by selecting a team the user should be part of.
 
 ## Create an organization
 

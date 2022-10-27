@@ -1,5 +1,8 @@
 APIs?
+DHCP
+DNS
 Ethernet
+GRUB
 Git
 GPG
 HTTP
@@ -7,6 +10,7 @@ IPs?
 IPv[46]
 IPvlan
 MAC
+RPM
 SDKs?
 SSO
 TCP
@@ -14,6 +18,8 @@ UDP
 Unix
 VLAN
 VM
+[Ll]oopback
+[Nn]ameserver
 [Nn]amespace
 cgroup
 config
@@ -21,6 +27,7 @@ containerd
 deserialization
 deserialize
 filepath
+firewalld
 glibc
 goroutine
 hostname
