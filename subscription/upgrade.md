@@ -23,7 +23,7 @@ To purchase a Pro, Team, or Business subscription:
 
    > **Note**
    >
-   > If you have not created an organization for a Team or Business subscription, select **Create Organization** from the drop-down menu and select your plan. If you already have a subscription, you can also add another organization. Click **Buy Now** and continue with the on-screen instructions.
+   > If you haven't created an organization for a Team or Business subscription, select **Create Organization** from the drop-down menu and select your plan. If you already have a subscription, you can also add another organization. Select **Buy Now** and continue with the on-screen instructions. The Team subscription is now a 100 seat limit. For more seats, you can upgrade to a Business subscription.
 
 3. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. If you are upgrading to a Business subscription, you must choose an annual subscription.
 
