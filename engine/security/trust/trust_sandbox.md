@@ -80,7 +80,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
     ```yaml
     services:
       notaryserver:
-        image: notary:server-0.6.1-2
+        image: notary:server-0.7.0
         networks:
           - sandbox
         depends_on:
@@ -93,7 +93,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
           notary-server -config=/notarydir/fixtures/server-config-local.json"
 
       notarysigner:
-        image: notary:signer-0.6.1-2
+        image: notary:signer-0.7.0
         networks:
           - sandbox
         volumes:
