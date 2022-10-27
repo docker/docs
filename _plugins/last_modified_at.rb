@@ -5,28 +5,45 @@ require 'octopress-hooks'
 module Jekyll
   class LastModifiedAt < Octopress::Hooks::Site
     DATE_FORMAT = '%Y-%m-%d %H:%M:%S %z'
+
+    def current_last_modified_at(site, page)
+      if page.data.key?('last_modified_at')
+        return page.data['last_modified_at']
+      end
+      site.config['defaults'].map do |set|
+        if set['values'].key?('last_modified_at') && set['scope']['path'].include?(page.relative_path)
+          return set['values']['last_modified_at']
+        end
+      end.compact
+      nil
+    end
+
     def pre_render(site)
       beginning_time = Time.now
       Jekyll.logger.info "Starting plugin last_modified_at.rb..."
 
       git = Git.open(site.source)
       use_file_mtime = get_docs_url == "http://localhost:4000" && ENV['DOCS_ENFORCE_GIT_LOG_HISTORY'] == "0"
-      site.pages.each do |page|
+      site.pages.sort!{|l,r| l.relative_path <=> r.relative_path }.each do |page|
         next if page.relative_path == "redirect.html"
         next unless File.extname(page.relative_path) == ".md" || File.extname(page.relative_path) == ".html"
-        unless page.data.key?('last_modified_at')
+        page.data['last_modified_at'] = current_last_modified_at(site, page)
+        set_mode = "frontmatter"
+        if page.data['last_modified_at'].nil?
           begin
             if use_file_mtime
               # Use file's mtime for local development
               page.data['last_modified_at'] = File.mtime(page.relative_path).strftime(DATE_FORMAT)
+              set_mode = "mtime"
             else
               page.data['last_modified_at'] = git.log.path(page.relative_path).first.date.strftime(DATE_FORMAT)
+              set_mode = "git"
             end
           rescue => e
             # Ignored
           end
         end
-        puts"  #{page.relative_path}\n    last_modified_at(#{use_file_mtime ? 'mtime': 'git'}): #{page.data['last_modified_at']}"
+        puts"  #{page.relative_path}\n    last_modified_at(#{set_mode}): #{page.data['last_modified_at']}"
       end
 
       end_time = Time.now
