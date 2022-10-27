@@ -24,12 +24,108 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## Docker Desktop 4.13.0
+2022-10-19
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### New
+
+- Two new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Desktop security model](hardened-desktop/index.md).
+- Added the new Dev Environments CLI `docker dev`, so you can create, list, and run Dev Envs via command line. Now it's easier to integrate Dev Envs into custom scripts.
+- Docker Desktop can now be installed to any drive and folder using the `--installation-dir`. Partially addresses [docker/roadmap#94](https://github.com/docker/roadmap/issues/94).
+
+### Upgrades
+
+- [Docker Scan v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0)
+- [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879){: target="_blank" rel="noopener"}, [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880){: target="_blank" rel="noopener"} and  [CVE-2022-41715](https://www.cve.org/CVERecord?id= CVE-2022-41715){: target="_blank" rel="noopener"}
+- Updated Docker Engine and Docker CLI to [v20.10.20](https://docs.docker.com/engine/release-notes/#201020),
+  which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"},
+  and updated handling of `image:tag@digest` image references, as well as a fix for [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109).
+- [Docker Credential Helpers v0.7.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.7.0){: target="blank" rel="noopener" class=""}
+- [Docker Compose v2.12.0](https://github.com/docker/compose/releases/tag/v2.12.0)
+- [Kubernetes v1.25.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.2)
+- [Qemu 7.0.0](https://wiki.qemu.org/ChangeLog/7.0) used for cpu emulation, inside the Docker Desktop VM.
+- [Linux kernel 5.15.49](https://hub.docker.com/layers/docker/for-desktop-kernel/5.15.49-13422a825f833d125942948cf8a8688cef721ead/images/sha256-ebf1f6f0cb58c70eaa260e9d55df7c43968874d62daced966ef6a5c5cd96b493?context=explore)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Docker Desktop now allows the use of TLS when talking to HTTP and HTTPS proxies to encrypt proxy usernames and passwords.
+- Docker Desktop now stores HTTP and HTTPS proxy passwords in the OS credential store.
+- If Docker Desktop detects that the HTTP or HTTPS proxy password has changed then it will prompt developers for the new password.
+- The **Bypass proxy settings for these hosts and domains** setting now handles domain names correctly for HTTPS.
+- The **Remote Repositories** view and Tip of the Day now works with HTTP and HTTPS proxies which require authentication
+- We’ve introduced dark launch for features that are in early stages of the product development lifecycle. Users that are opted in can opt out at any time in the settings under the “beta features” section.
+- Added categories to the Extensions Marketplace.
+- Added an indicator in the whale menu and on the **Extension** tab on when extension updates are available.
+- Fixed failing uninstalls of extensions with image names that do not have a namespace, as in 'my-extension'.
+- Show port mapping explicitly in the **Container** tab.
+- Changed the refresh rate for disk usage information for images to happen automatically once a day.
+- Made the tab style consistent for the **Container** and **Volume** tabs.
+- Fixed Grpcfuse filesharing mode enablement in **Settings**. Fixes [docker/for-mac#6467](https://github.com/docker/for-mac/issues/6467)
+- Virtualization Framework and VirtioFS are disabled for users running macOS < 12.5.
+- Ports on the **Containers** tab are now clickable.
+- The Extensions SDK now allows `ddClient.extension.vm.cli.exec`, `ddClient.extension.host.cli.exec`, `ddClient.docker.cli.exec` to accept a different working directory and pass environment variables through the options parameters.
+- Added a small improvement to navigate to the Extensions Marketplace when clicking on **Extensions** in the sidebar.
+- Added a badge to identify new extensions in the Marketplace.
+- Fixed kubernetes not starting with the containerd integration.
+- Fixed `kind` not starting with the containerd integration.
+- Fixed dev environments not working with the containerd integration.
+- Implemented `docker diff` in the containerd integration.
+- Implemented `docker run —-platform` in the containerd integration.
+- Fixed insecure registries not working with the containerd integration.
+- Fixed a bug that showed incorrect values on used space in **Settings**.
+- Docker Desktop now installs credential helpers from Github releases. See [docker/for-win#10247](https://github.com/docker/for-win/issues/10247), [docker/for-win#12995](https://github.com/docker/for-win/issues/12995), [docker/for-mac#12399](https://github.com/docker/for-mac/issues/12399).
+- Fixed an issue where users were logged out of Docker Desktop after 7 days.
+
+
+#### For Mac
+
+- Added **Hide**, **Hide others**, **Show all** menu items for Docker Desktop. See [docker/for-mac#6446](https://github.com/docker/for-mac/issues/6446).
+- Fixed a bug which caused the application to be deleted when running the install utility from the installed application. Fixes [docker/for-mac#6442](https://github.com/docker/for-mac/issues/6442).
+- By default Docker will not create the /var/run/docker.sock symlink on the host and use the docker-desktop CLI context instead.
+
+#### For Linux
+- Fixed a bug that prevented pushing images from the Dashboard
+
 ## Docker Desktop 4.12.0
 2022-09-01
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/85629/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/85629/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/85629/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 996a4c5fff5b80b707ecfc0121d7ebe70d96c0bd568f058fd96f32cdec0c10cf</li>
+      <li><b>Mac Intel:</b> SHA-256 41085009458ba1741c6a86c414190780ff3b288879aa27821fc4a985d229653c</li>
+      <li><b>Mac Arm:</b> SHA-256 7eb63b4819cd1f87c61d5e8f54613692e07fb203d81bcf8d66f5de55489d3b81</li>
+      <li><b>Linux DEB:</b> SHA-256 4407023db032219d6ac6031f81da6389ab192d3d06084ee6dad1ba4f4c64a4fe</li>
+      <li><b>Linux RPM:</b> SHA-256 05e91f2a9763089acdfe710140893cb096bec955bcd99279bbe3aea035d09bc5</li>
+      <li><b>Linux Arch:</b> SHA-256 7c6b43c8ab140c755e6c8ce4ec494b3f5c4f3b0c1ab3cee8bfd0b6864f795d8a</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### New
 
@@ -693,7 +789,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Mac
 
-- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](settings/mac.md#experimental-features).
+- Docker Desktop 4.6.0 gives macOS users the option of enabling a new experimental file sharing technology called VirtioFS. During testing VirtioFS has been shown to drastically reduce the time taken to sync changes between the host and VM, leading to substantial performance improvements. For more information, see [VirtioFS](settings/mac.md#beta-features).
 
 ### Upgrades
 

@@ -281,15 +281,16 @@ no real indication that they are grouped together in a single app. We'll see how
 
 ![Docker Dashboard showing two ungrouped app containers](images/dashboard-multi-container-app.png)
 
-## Recap
+## Next steps
 
-At this point, we have an application that now stores its data in an external database running in a separate
-container. We learned a little bit about container networking and saw how service discovery can be performed
-using DNS.
+At this point, you have an application that now stores its data in an external database running in a separate
+container. You learned a little bit about container networking and service discovery using DNS.
 
 But, there's a good chance you are starting to feel a little overwhelmed with everything you need to do to start up
-this application. We have to create a network, start containers, specify all of the environment variables, expose
+this application. You have to create a network, start containers, specify all of the environment variables, expose
 ports, and more! That's a lot to remember and it's certainly making things harder to pass along to someone else.
 
-In the next section, we'll talk about Docker Compose. With Docker Compose, we can share our application stacks in a
+In the next section, you'll learn about Docker Compose. With Docker Compose, you can share your application stacks in a
 much easier way and let others spin them up with a single (and simple) command!
+
+[Use Docker Compose](08_using_compose.md){: .button  .primary-btn}

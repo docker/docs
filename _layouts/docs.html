@@ -3,7 +3,7 @@
 {%- if page.edit_url -%}
     {%- assign edit_url = page.edit_url -%}
 {%- else -%}
-    {% capture edit_url %}{{ site.repo }}/edit/master/{{ page.path }}{% endcapture %}
+    {% capture edit_url %}{{ site.repo }}/edit/main/{{ page.path }}{% endcapture %}
 {%- endif -%}
 {%- if page.issue_url -%}
     {%- assign issue_url = page.issue_url -%}

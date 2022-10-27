@@ -209,27 +209,41 @@ View Tags on DockerHub to see multi-platform result:
 
 ## Containerd Image Store Release Notes
 
-(2022-09-01)  
+### 2022-10-19 
+New commands and multiple bug fixes included with Docker Desktop 4.13.0.
+
+#### New
+* Added `docker diff` and `docker run --platform` support.
+
+#### Bug fixes
+* Fixed a bug which caused Kubernetes not starting.
+* Fixed a bug which caused Kubernetes IN Docker (kind) not starting.
+* Fixed a bug which caused Dev Environments not working.
+* Fixed a bug which caused Insecure Registries not working.
+
+#### Known issues
+* Listing images with `docker images` returns the error `content digest not found` on ARM machines after running or pulling an image with the `--platform` parameter.
+
+### 2022-09-01  
 The Containerd Image Store is shipped as a [Beta](../../release-lifecycle.md/#beta) feature on Docker Desktop 4.12.0.
 
-### New
+#### New
 
 Initial implementation of the Docker commands: `run`, `commit`, `build`, `push`, `load`, `search` and `save`.
 
-### Known issues
+#### Known issues
 
 * The Containerd Image Store feature requires Buildx version 0.9.0 or newer.
     + On Docker Desktop for Linux (DD4L), validate if your locally installed version meets this requirement.  
     >**Note**
     >
-    > If an older version is installed, the Docker daemon will report an error: **Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver**.  
+    > If an older version is installed, the Docker daemon reports the following error **Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver**.  
     Install a newer version of Buildx following the instructions on [Docker Buildx Manual download](../../build/buildx/install/#manual-download).
-* Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. Disable the Containerd Image Store feature if you are using the Kubernetes from Docker Desktop.
-* Local registry mirror configuration isn't implemented yet with the Containerd Image Store. Hence the `registry-mirrors` and `insecure-registries` aren't taken into account by the Docker daemon.
+* Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. Turn off the Containerd Image Store feature if you are using the Kubernetes from Docker Desktop.
+* Local registry mirror configuration isn't implemented yet with the Containerd Image Store. The `registry-mirrors` and `insecure-registries` aren't taken into account by the Docker daemon.
 * The `reference` filter isn't implemented yet and will return the error `invalid filter 'reference'` when listing images.
 * Pulling an image may fail with the error `pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed`, in the situation where the image does not contain a manifest list. To workaround this issue run the `docker login` command and pull the image again.
 
 ## Feedback
 
-Thanks for trying the new features available with `containerd`.   
-We’d love to hear from you! Please feel free to give feedback or report any bugs you may find through the issues tracker on the [feedback form](https://dockr.ly/3PODIhD){: target="_blank" rel="noopener" class="_"}.
+Thanks for trying the new features available with `containerd`. Give feedback or report any bugs you may find through the issues tracker on the [feedback form](https://dockr.ly/3PODIhD){: target="_blank" rel="noopener" class="_"}.

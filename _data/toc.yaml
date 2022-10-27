@@ -29,9 +29,9 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-    - title: "Part 1: Getting started"
+    - title: "Part 1: Orientation and setup"
       path: /get-started/
-    - title: "Part 2: Sample application"
+    - title: "Part 2: Containerize an application"
       path: /get-started/02_our_app/
     - title: "Part 3: Update the application"
       path: /get-started/03_updating_app/
@@ -115,6 +115,20 @@ guides:
       path: /language/golang/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/golang/deploy/
+  - sectiontitle: C# (.NET)
+    section:
+    - title: "Overview"
+      path: /language/dotnet/
+    - title: "Build images"
+      path: /language/dotnet/build-images/
+    - title: "Run containers"
+      path: /language/dotnet/run-containers/
+    - title: "Develop your app"
+      path: /language/dotnet/develop/
+    - title: "Configure CI/CD"
+      path: /language/dotnet/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/dotnet/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -125,8 +139,6 @@ guides:
     section:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Dockerfile best practices
-    - path: /develop/develop-images/build_enhancements/
-      title: Build images with BuildKit
     - path: /develop/develop-images/image_management/
       title: Manage images
     - path: /develop/develop-images/baseimages/
@@ -1269,18 +1281,38 @@ manuals:
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
+    - sectiontitle: Hardened Desktop
+      section:
+        - path: /desktop/hardened-desktop/
+          title: Overview
+        - sectiontitle: Settings Management
+          section:
+          - path: /desktop/hardened-desktop/settings-management/
+            title: What is Settings Management?
+          - path: /desktop/hardened-desktop/settings-management/configure/
+            title: Configure Settings Management
+        - sectiontitle: Enhanced Container Isolation
+          section:
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/
+            title: What is Enhanced Container Isolation?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
+            title: How does it work?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
+            title: Key features and benefits
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
+            title: FAQs and known issues
+        - path: /desktop/hardened-desktop/registry-access-management/
+          title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a Dev Environment
+          title: Create a simple dev environment
         - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create a Compose Dev Environment
+          title: Create an advanced dev environment
         - path: /desktop/dev-environments/share/
-          title: Share your Dev Environment
-        - path: /desktop/dev-environments/specify/
-          title: Specify a Dockerfile or base image
+          title: Distribute your dev environment
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
@@ -1359,6 +1391,8 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/reference/README/
     - path: /desktop/containerd/
       title: Containerd Image Store (Beta)
+    - path: /desktop/wasm/
+      title: Wasm (Beta)
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
@@ -1395,10 +1429,10 @@ manuals:
   section:
   - path: /engine/
     title: Overview
-  - path: /engine/install/
-    title: Install
-  - sectiontitle: Installation per distro
+  - sectiontitle: Install
     section:
+    - path: /engine/install/
+      title: Installation Overview
     - path: /engine/install/centos/
       title: Install on CentOS
     - path: /engine/install/debian/
@@ -1413,8 +1447,10 @@ manuals:
       title: Install on Ubuntu
     - path: /engine/install/binaries/
       title: Install binaries
-  - path: /engine/install/linux-postinstall/
-    title: Optional post-installation steps
+    - path: /engine/install/linux-postinstall/
+      title: Post-installation steps
+    - path: /engine/install/troubleshoot/
+      title: Troubleshoot installation
   - path: /engine/deprecated/
     title: Deprecated features
   - path: /engine/context/working-with-contexts/
@@ -1521,6 +1557,12 @@ manuals:
               title: Build contexts and linking targets
             - path: /build/customize/bake/compose-file/
               title: Building from Compose file
+    - sectiontitle: BuildKit
+      section:
+        - path: /build/buildkit/
+          title: Overview
+        - path: /build/buildkit/dockerfile-frontend/
+          title: Custom Dockerfile syntax
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
@@ -1533,18 +1575,26 @@ manuals:
   section:
   - path: /compose/
     title: Overview
+  - path: /compose/features-uses/
+    title: Key features and use cases
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
-        title: Install overview
+        title: Overview
       - path: /compose/install/linux/
-        title: Install on Linux
+        title: Install the Compose plugin
       - path: /compose/install/other/
-        title: Other install scenarios
+        title: Install the Compose standalone
       - path: /compose/install/uninstall/
-        title: Uninstall Docker Compose
+        title: Uninstall Compose
   - path: /compose/gettingstarted/
-    title: Getting started
+    title: Try Docker Compose
+  - sectiontitle: Compose V2
+    section:
+    - path: /compose/compose-v2/
+      title: Overview
+    - path: /compose/cli-command-compatibility/
+      title: Compose v2 compatibility
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
@@ -1567,8 +1617,6 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/cli-command-compatibility/
-    title: Compose v2 compatibility
   - path: /compose/release-notes/
     title: Release notes
 
@@ -1686,8 +1734,7 @@ manuals:
     title: SCIM
   - path: /docker-hub/image-access-management/
     title: Image Access Management
-  - path: /docker-hub/registry-access-management/
-    title: Registry Access Management
+
 
 - sectiontitle: Security
   section:
@@ -1811,6 +1858,8 @@ contribute:
       title: Voice and tone
   - path: /contribute/file-conventions/
     title: Source file conventions
+  - path: /contribute/ui/
+    title: UI elements in content
   - sectiontitle: Useful components
     section:
     - path: /contribute/components/accordions/

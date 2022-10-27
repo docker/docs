@@ -10,9 +10,11 @@ redirect_from:
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
-
-{% include guides/enable-buildkit.md %}
+* You understand basic Docker concepts, and you have completed the orientation
+  and setup in Get started [Part 1](../../get-started/index.md).
+* You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
+* You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
+  on your machine.
 
 ## Overview
 
@@ -92,8 +94,6 @@ Press `CTRL-c` from within the terminal session where the server is running to s
 We will now continue to build and run the application in Docker.
 
 ## Create a Dockerfile for Node.js
-
-{% include guides/create-dockerfile.md %}
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.

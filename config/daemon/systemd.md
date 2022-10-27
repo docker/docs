@@ -26,7 +26,7 @@ $ sudo systemctl start docker
 ### Start automatically at system boot
 
 If you want Docker to start at boot, see
-[Configure Docker to start on boot](../../engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](../../engine/install/linux-postinstall.md#configure-docker-to-start-on-boot-with-systemd).
 
 ## Custom Docker daemon options
 

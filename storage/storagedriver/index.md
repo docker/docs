@@ -328,7 +328,7 @@ layers are the same.
     > image for each step for caching purposes, and the `IMAGE` column would show
     > the ID of that image.
     > BuildKit uses its own caching mechanism, and no longer requires intermediate
-    > images for caching. Refer to [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+    > images for caching. Refer to [BuildKit](../../build/buildkit/index.md)
     > to learn more about other enhancements made in BuildKit.
 
 

@@ -183,7 +183,13 @@ repository.
 
 From either location, you can select a build job to view its build report. The
 build report shows information about the build job. This includes the source
-repository and branch (or tag), the build logs, the build duration, creation time and location, and the user namespace the build occurred in. You can also refresh the page to see the current progress of your build logs.
+repository and branch (or tag), the build logs, the build duration, creation time and location, and the user namespace the build occurred in.
+
+>**Note**
+>
+> You can now view the progress of your builds every 30 seconds when you
+> refresh the Builds page. With the in-progress build logs, you can debug your
+> builds before they're finished.
 
 ![Build Report](/docker-hub/images/index-report.png)
 
@@ -311,7 +317,7 @@ sources. For example, you might have
 
 Autobuilds use the BuildKit build system by default. If you want to use the legacy
 Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"}
-`DOCKER_BUILDKIT=0`. Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+`DOCKER_BUILDKIT=0`. Refer to the [BuildKit](../../build/buildkit/index.md)
 page for more information on BuildKit.
 
 ## Build repositories with linked private submodules

@@ -41,7 +41,7 @@ exclude:
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
 compose_v1_version: "1.29.2"
-compose_version: "v2.11.2"
+compose_version: "v2.12.2"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -101,6 +101,24 @@ defaults:
       layout: docs
       toc_min: 2
       toc_max: 4
+
+  # Exclude from sitemap
+  - scope:
+      path: "assets/**"
+    values:
+      sitemap: false
+  - scope:
+      path: "**/nav.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "google*.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "**/*.pdf"
+    values:
+      sitemap: false
 
   # Set the correct edit-URL for some local and remote resources. We usually don't create a direct
   # edit link for these, and instead point to the directory that contains the file.
