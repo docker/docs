@@ -29,7 +29,7 @@ When an organization uses SSO, MFA is determined on the IdP level, not on the Do
 
 ### Q: Do I need a specific version of Docker Desktop for SSO?
 
-Yes, all users in your organization must upgrade to Docker Desktop version 4.4.0 or later. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO if the company domain email is used to sign in or as the primary email associated with an existing Docker account Your users with existing accounts can't sign in with their username and password.
+Yes, all users in your organization must upgrade to Docker Desktop version 4.4.2 or later. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO if the company domain email is used to sign in or as the primary email associated with an existing Docker account Your users with existing accounts can't sign in with their username and password.
 
 ## SAML SSO
 
