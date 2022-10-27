@@ -103,6 +103,7 @@ local builds, and builds that are deployed to [docs.docker.com](/):
 
 - search auto-completion, and generation of `js/metadata.json`
 - Google Analytics
+- page feedback
 - `sitemap.xml` generation
 - minification of stylesheets (`css/style.css`)
 - adjusting "edit this page" links for content in other repositories

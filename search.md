@@ -1,6 +1,7 @@
 ---
 description: Docker documentation search results
 keywords: Search, Docker, documentation, manual, guide, reference, api
+skip_feedback: true
 notoc: true
 notags: true
 title: "Docs search"
