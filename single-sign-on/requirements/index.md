@@ -8,7 +8,7 @@ title: Requirements
 
 * You must first notify your company about the new SSO login procedures
 * Verify that your org members have the latest Docker Desktop version 4.4.2, or later, installed on their machines
-* New org members must create a PAT to sign in to the CLI, however existing users can use their username and password during the grace period as specified below
+* New org members must create a Personal Access Token (PAT) to sign in to the CLI, however existing users can use their username and password during the grace period as specified below
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs
 * For your service accounts, add your additional domains or enable it in your IdP
 * Test SSO using your domain email address and IdP password to successfully sign in and log out of Docker Hub
