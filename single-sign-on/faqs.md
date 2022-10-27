@@ -245,7 +245,7 @@ Users may still be able to authenticate as a "guest" account to the organization
 Yes, you can convert existing users to an SSO account. To convert users from a non-SSO account:
 
 * Ensure your users have a company domain email address and they have an account in your IdP
-* Verify that all users have Docker Desktop version 4.4.0 or later installed on their machines
+* Verify that all users have Docker Desktop version 4.4.2 or later installed on their machines
 * Each user has created a PAT to replace their passwords to allow them to sign in through Docker CLI
 * Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 

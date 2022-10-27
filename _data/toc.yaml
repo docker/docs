@@ -1670,7 +1670,7 @@ manuals:
     title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in
-  - sectiontitle: Single-Sign-on
+  - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
          title: Overview

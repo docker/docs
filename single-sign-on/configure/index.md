@@ -23,11 +23,11 @@ The following video walks you through the process of configuring SSO.
 ### Configuring your IdP
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#SAML 2.0">SAML 2.0</a></li>
-<li><a data-toggle="tab" data-target="#Azure AD (OIDC)">Azure AD (OIDC)</a></li>
+<li class="active"><a data-toggle="tab" data-target="#SAML-2.0">SAML 2.0</a></li>
+<li><a data-toggle="tab" data-target="#Azure-AD">Azure AD (OIDC)</a></li>
 </ul>
 <div class="tab-content">
-<div id="windows" class="tab-pane fade in active" markdown="1">
+<div id="SAML-2.0" class="tab-pane fade in active" markdown="1">
 
 #### SAML 2.0
 
@@ -58,7 +58,7 @@ The following video walks you through the process of configuring SSO.
 
 <hr>
 </div>
-<div id="Azure AD" class="tab-pane fade" markdown="1">
+<div id="Azure-AD" class="tab-pane fade" markdown="1">
 
 ### Azure AD (OIDC)
 
@@ -88,6 +88,10 @@ The following video walks you through the process of configuring SSO.
 
 7. Proceed to **add your domain** before you test and enforce SSO.
 
+<hr>
+</div>
+</div>
+
 ## Domain control
 
 Select **Add Domain** and specify the corporate domain you’d like to manage with SSO. Format your domains without protocol or www information, for example, yourcompany.com. Docker supports multiple domains that are part of your IdP. Make sure that your domain is reachable through email.
@@ -99,10 +103,6 @@ Select **Add Domain** and specify the corporate domain you’d like to manage wi
 > Also, the email domain should be set as the primary email.
 
 ![SSO Domain](/single-sign-on/images/sso-domain.png){:width="500px"}
-
-<hr>
-</div>
-</div>
 
 ## Domain verification
 
@@ -129,7 +129,7 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
     > **Note**
     >
     > Once you've verified your domain, you can move forward to test your
-    > configuration and enforce SSO, or you can configure your [System Cross-domain Identity Management (SCIM)](/docker-hub/scim.md).
+    > configuration and enforce SSO, or you can configure your [System Cross-domain Identity Management (SCIM)](../../docker-hub/scim.md).
 
 ## Test your SSO configuration
 
