@@ -29,17 +29,17 @@ For the full change log or additional information, check the [Compose repository
 (2022-10-18)
 
 ### Enhancements
-- Added a `quiet` option when pushing image. Fixed [compose#9089](https://github.com/docker/compose/issues/9089){:target="_blank" rel="noopener" class="_"}
+- Added a `quiet` option when pushing an image. Fixed [compose#9089](https://github.com/docker/compose/issues/9089){:target="_blank" rel="noopener" class="_"}
 - Fixed a misleading error message for `port` command. Pull Request [compose#9909](https://github.com/docker/compose/pull/9909){:target="_blank" rel="noopener" class="_"}
 
 ### Bug fixes
-- Fixed a bug to prevent failure when Compose try to remove a non-existing container. Fixed by [compose#9896](https://github.com/docker/compose/pull/9896/){:target="_blank" rel="noopener" class="_"}
+- Fixed a bug to prevent failure when Compose tries to remove a non-existing container. Fixed by [compose#9896](https://github.com/docker/compose/pull/9896/){:target="_blank" rel="noopener" class="_"}
 
 ### Changes
-- CI update the documentation repository path
+- CI update to the documentation repository path
 - Upgraded to compose-go from [1.5.1 to 1.6.0](https://github.com/compose-spec/compose-go/releases/tag/v1.6.0){:target="_blank" rel="noopener" class="_"}
-- Switch GitHub issue template form
-- Update to go 1.19.2 to address CVE-2022-2879, CVE-2022-2880, CVE-2022-41715
+- Switched GitHub issue template form
+- Updated to go 1.19.2 to address CVE-2022-2879, CVE-2022-2880, CVE-2022-41715
 
 
 For the full change log or additional information, check the [Compose repository 2.12.0 release page](https://github.com/docker/compose/releases/tag/v2.12.0){:target="_blank" rel="noopener" class="_"}.
