@@ -6,6 +6,44 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.12.2
+
+(2022-10-21)
+
+### Changes
+- Updated Docker Engine API to restore compatibility with Golang 1.18 needed for Linux packaging. Pull Request [compose#9940](https://github.com/docker/compose/pull/9940){:target="_blank" rel="noopener" class="_"}
+
+For the full change log or additional information, check the [Compose repository 2.12.2 release page](https://github.com/docker/compose/releases/tag/v2.12.2){:target="_blank" rel="noopener" class="_"}.
+
+## 2.12.1
+
+(2022-10-21)
+
+### Security Fixes
+- Updated Docker Engine API to apply fix of [CVE-2022-39253](https://nvd.nist.gov/vuln/detail/CVE-2022-39253). Pull Request [compose#9934](https://github.com/docker/compose/pull/9934){:target="_blank" rel="noopener" class="_"}
+
+For the full change log or additional information, check the [Compose repository 2.12.1 release page](https://github.com/docker/compose/releases/tag/v2.12.1){:target="_blank" rel="noopener" class="_"}.
+
+## 2.12.0
+
+(2022-10-18)
+
+### Enhancements
+- Added a `quiet` option when pushing an image. Fixed [compose#9089](https://github.com/docker/compose/issues/9089){:target="_blank" rel="noopener" class="_"}
+- Fixed a misleading error message for `port` command. Pull Request [compose#9909](https://github.com/docker/compose/pull/9909){:target="_blank" rel="noopener" class="_"}
+
+### Bug fixes
+- Fixed a bug to prevent failure when Compose tries to remove a non-existing container. Fixed by [compose#9896](https://github.com/docker/compose/pull/9896/){:target="_blank" rel="noopener" class="_"}
+
+### Changes
+- CI update to the documentation repository path
+- Upgraded to compose-go from [1.5.1 to 1.6.0](https://github.com/compose-spec/compose-go/releases/tag/v1.6.0){:target="_blank" rel="noopener" class="_"}
+- Switched GitHub issue template form
+- Updated to go 1.19.2 to address CVE-2022-2879, CVE-2022-2880, CVE-2022-41715
+
+
+For the full change log or additional information, check the [Compose repository 2.12.0 release page](https://github.com/docker/compose/releases/tag/v2.12.0){:target="_blank" rel="noopener" class="_"}.
+
 ## 2.11.2
 
 (2022-09-27)
