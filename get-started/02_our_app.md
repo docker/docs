@@ -6,7 +6,7 @@ redirect_from:
 description: Containerize and run a simple application to learn Docker
 ---
 
-For rest of this guide, you will be working with a simple todo
+For the rest of this guide, you will be working with a simple todo
 list manager that's running in Node.js. If you're not familiar with Node.js,
 don't worry. This guide doesn't require JavaScript experience.
 
@@ -21,7 +21,7 @@ To complete this guide, you'll need the following:
 
 Before you can run the application, you need to get the application source code onto your machine.
 
-1. Clone the [getting-started repository](https://github.com/docker/getting-started/tree/master){:target="_blank" rel="noopener" class="_"} using the following command.
+1. Clone the [getting-started repository](https://github.com/docker/getting-started/tree/master){:target="_blank" rel="noopener" class="_"} using the following command:
 
    ```console
    $ git clone https://github.com/docker/getting-started.git
@@ -74,7 +74,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
    </div>
    </div>
 
-2. Using a text editor or code editor, add the following contents to the Dockerfile.
+2. Using a text editor or code editor, add the following contents to the Dockerfile:
 
    ```dockerfile
    # syntax=docker/dockerfile:1
@@ -90,7 +90,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
    >
    > Select an instruction in the Dockerfile example to learn more about the instruction.
 
-3. Build the container image using the following commands.
+3. Build the container image using the following commands:
 
    In the terminal, change directory to the `getting-started/app` directory. Replace `/path/to/app` with the path to your `getting-started/app` directory.
 
@@ -141,7 +141,7 @@ If you take a quick look at your Docker Dashboard, you should see at least one c
 
 ## Next steps
 
-In this short section, you learned the basics about creating a  Dockerfile to build a container image. Once you built an image, you started a container and saw the running app.
+In this short section, you learned the basics about creating a Dockerfile to build a container image. Once you built an image, you started a container and saw the running app.
 
 Next, you're going to make a modification to your app and learn how to update your running application with a new image. Along the way, you'll learn a few other useful commands.
 

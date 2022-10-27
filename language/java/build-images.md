@@ -13,7 +13,6 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 * You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
   on your machine.
 
-
 ## Overview
 
 Now that we have a good overview of containers and the Docker platform, let’s take a look at building our first image. An image includes everything needed to run an application - the code or binary, runtime, dependencies, and any other file system objects required.
