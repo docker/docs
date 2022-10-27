@@ -41,7 +41,7 @@ module Jekyll
       beginning_time = Time.now
       puts "Starting plugin fetch_remote.rb..."
 
-      fetch_depth = get_docs_url == "http://localhost:4000" ? 1 : 0
+      fetch_depth = get_docs_url == "http://localhost:4000" && ENV['DOCS_ENFORCE_GIT_LOG_HISTORY'] == "0" ? 1 : 0
       site.config['fetch-remote'].each do |entry|
         puts "  Repo #{entry['repo']}"
 
@@ -51,10 +51,16 @@ module Jekyll
           puts "    Opening #{clonedir}"
           begin
             git = Git.open(clonedir)
-            puts "    Fetching #{entry['ref']}"
-            git.fetch
-            git.checkout(entry['ref'])
+            puts "    Fetch repository"
+            if fetch_depth > 0
+              git.fetch('origin', prune: true, depth: fetch_depth)
+            else
+              git.fetch('origin', prune: true)
+            end
+            puts "    Checkout #{entry['ref']}"
+            git.checkout(entry['ref'], force: true)
           rescue => e
+            puts "    WARNING: #{e}"
             FileUtils.rm_rf(clonedir)
             puts "    Cloning repository into #{clonedir}"
             git = Git.clone("#{entry['repo']}.git", Pathname.new(clonedir), branch: entry['ref'], depth: fetch_depth)
