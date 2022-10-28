@@ -102,6 +102,24 @@ defaults:
       toc_min: 2
       toc_max: 4
 
+  # Exclude from sitemap
+  - scope:
+      path: "assets/**"
+    values:
+      sitemap: false
+  - scope:
+      path: "**/nav.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "google*.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "**/*.pdf"
+    values:
+      sitemap: false
+
   # Set the correct edit-URL for some local and remote resources. We usually don't create a direct
   # edit link for these, and instead point to the directory that contains the file.
   - scope:

@@ -94,21 +94,19 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Verify that the mount is a `tmpfs` mount by running `docker container inspect
-tmptest` and looking for the `Mounts` section:
-
-```json
-"Tmpfs": {
-    "/app": ""
-},
-```
-
-Remove the container:
+Verify that the mount is a `tmpfs` mount by looking in the `Mounts` section of
+the `docker inspect` output:
 
 ```console
-$ docker container stop tmptest
+$ docker inspect tmptest --format '{{ json .Mounts }}'
+[{"Type":"tmpfs","Source":"","Destination":"/app","Mode":"","RW":true,"Propagation":""}]
+```
 
-$ docker container rm tmptest
+Stop and remove the container:
+
+```console
+$ docker stop tmptest
+$ docker rm tmptest
 ```
 
 ### Specify tmpfs options

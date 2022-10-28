@@ -42,9 +42,6 @@
                             </span>
                             {%- endif -%}
                             {%- endunless %}
-                            {%- if site.polldaddy_id and page.noratings != true -%}
-                            <div class="ratings-div"><div id="pd_rating_holder_{{ site.polldaddy_id }}"></div></div>
-                            {%- endif -%}
                         </section>
                     </main>
                     <nav class="col-nav">
@@ -90,6 +87,5 @@
         {% include footer.html %}
     </footer>
     <script>const pageURL = "{{ page.url }}";</script>
-    {%- if jekyll.environment == 'production' -%}{%- include analytics/polldaddy.html -%}{%- endif -%}
 </body>
 </html>

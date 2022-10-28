@@ -15,8 +15,8 @@ exclude:
 
 # Google Analytics, etc.
 google_analytics: GTM-WL2QLG5
-polldaddy_id:     8453675
-onetrust_id:      8e0ebfd9-035d-4ec2-9b2f-a2de9c09f906
+onetrust_id: 8e0ebfd9-035d-4ec2-9b2f-a2de9c09f906
+hotjar_id: 3169877
 
 # Assets
 #
