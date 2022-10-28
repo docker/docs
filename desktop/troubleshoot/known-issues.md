@@ -21,6 +21,8 @@ title: Known issues for Docker Desktop on Mac
 
 * On Apple silicon in native `arm64` containers, older versions of `libssl` such as `debian:buster`, `ubuntu:20.04`, and `centos:8` will segfault when connected to some TLS servers, for example, `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04`, and `fedora:35`.
 
+* The Mac Activity Monitor reports that Docker is using twice the amount of memory than it is actually using. This is due to a bug in MacOS. We have written [a detailed report](https://docs.google.com/document/d/17ZiQC1Tp9iH320K-uqVLyiJmk4DHJ3c4zgQetJiKYQM/edit?usp=sharing) on this.
+
 * You might encounter errors when using `docker-compose up` with Docker Desktop
   (`ValueError: Extra Data`). We've identified this is likely related to data
   and/or events being passed all at once rather than one by one, so sometimes

@@ -5,6 +5,8 @@ keywords: grammar, style, contribute
 toc_max: 2
 --- 
 
+Docker documentation should always be written in US English with US grammar. 
+
 ## Acronyms and initialisms
 
 An acronym is an abbreviation you would speak as a word, for example, ROM (for read only memory). Other examples include radar and scuba, which started out as acronyms but are now considered words in their own right.
