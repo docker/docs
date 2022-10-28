@@ -6,39 +6,37 @@ redirect_from:
 description: Containerize and run a simple application to learn Docker
 ---
 
+For the rest of this guide, you will be working with a simple todo
+list manager that's running in Node.js. If you're not familiar with Node.js,
+don't worry. This guide doesn't require JavaScript experience.
 
-For the rest of this tutorial, we will be working with a simple todo
-list manager that is running in Node.js. If you're not familiar with Node.js,
-don't worry. No real JavaScript experience is needed.
+To complete this guide, you'll need the following:
 
-At this point, your development team is quite small and you're simply
-building an app to prove out your MVP (minimum viable product). You want
-to show how it works and what it's capable of doing without needing to
-think about how it will work for a large team, multiple developers, etc.
-
-![Todo List Manager Screenshot](images/todo-list-sample.png){: style="width:50%;" }
+- Docker running locally. Follow the instructions to [download and install Docker](../get-docker.md).
+- A [Git client](https://git-scm.com/downloads){:target="_blank" rel="noopener" class="_"}.
+- An IDE or a text editor to edit files. Docker recommends using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}.
+- A conceptual understanding of [containers and images](../get-started/overview.md/#docker-objects).
 
 ## Get the app
 
-Before we can run the application, we need to get the application source code onto 
-our machine. For real projects, you will typically clone the repo. But, for this tutorial,
-we have created a ZIP file containing the application.
+Before you can run the application, you need to get the application source code onto your machine.
 
-1. Download the App contents from the [getting-started repository](https://github.com/docker/getting-started/tree/master){:target="_blank" rel="noopener" class="_"}. You can either pull the entire project or [download it as a zip](https://github.com/docker/getting-started/archive/refs/heads/master.zip) and extract the app folder out to get started with.
+1. Clone the [getting-started repository](https://github.com/docker/getting-started/tree/master){:target="_blank" rel="noopener" class="_"} using the following command:
 
-2. Once extracted, use your favorite code editor to open the project. If you're in need of
-    an editor, you can use [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}. You should
-    see the `package.json` and two subdirectories (`src` and `spec`).
+   ```console
+   $ git clone https://github.com/docker/getting-started.git
+   ```
+
+2. View the contents of the cloned repository. Inside the `getting-started/app` directory you should see `package.json` and two subdirectories (`src` and `spec`).
 
     ![Screenshot of Visual Studio Code opened with the app loaded](images/ide-screenshot.png){: style="width:650px;margin-top:20px;"}
     {: .text-center }
 
 ## Build the app's container image
 
-In order to build the application, you'll need to use a `Dockerfile`. A
-Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that are used to create a container image. 
+In order to build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that Docker uses to create a container image.
 
-1. In the `app` folder, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
+1. In the `app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
 
    <ul class="nav nav-tabs">
      <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
@@ -49,26 +47,34 @@ Dockerfile is simply a text-based file with no file extension. A Dockerfile cont
 
     In the terminal, run the following commands listed below.
 
-   ```console
-   $ cd /path/to/app
-   $ touch Dockerfile
-   ```
+    Change directory to the `app` directory. Replace `/path/to/app` with the path to your `getting-started/app` directory.
+    ```console
+    $ cd /path/to/app
+    ```
+    Create an empty file named `Dockerfile`.
+    ```console
+    $ touch Dockerfile
+    ```
 
-   <hr>
+    <hr>
    </div>
    <div id="windows" class="tab-pane fade" markdown="1">
 
-   In the Windows Command Prompt, run the following commands listed below.
+    In the Windows Command Prompt, run the following commands listed below.
 
-   ```console
-   $ cd \path\to\app
-   $ type nul > Dockerfile
-   ```
+    Change directory to the `app` directory. Replace `\path\to\app` with the path to your `getting-started\app` directory.
+    ```console
+    $ cd \path\to\app
+    ```
+    Create an empty file named `Dockerfile`.
+    ```console
+    $ type nul > Dockerfile
+    ```
     <hr>
    </div>
    </div>
 
-2. Add the following contents to the Dockerfile. If you've created Dockerfiles before, you might see a few flaws in the Dockerfile below. But, don't worry. We'll go over them.
+2. Using a text editor or code editor, add the following contents to the Dockerfile:
 
    ```dockerfile
    # syntax=docker/dockerfile:1
@@ -80,72 +86,63 @@ Dockerfile is simply a text-based file with no file extension. A Dockerfile cont
    CMD ["node", "src/index.js"]
    EXPOSE 3000
    ```
-  > **Note**
-  >
-  > Select an instruction in the Dockerfile example to learn more about the instruction.
+   > **Note**
+   >
+   > Select an instruction in the Dockerfile example to learn more about the instruction.
 
-3. Open a terminal and go to the `app` directory with the `Dockerfile`. Now build the container image using the `docker build` command.
+3. Build the container image using the following commands:
 
+   In the terminal, change directory to the `getting-started/app` directory. Replace `/path/to/app` with the path to your `getting-started/app` directory.
+
+   ```console
+   $ cd /path/to/app
+   ```
+
+   Build the container image.
    ```console
    $ docker build -t getting-started .
    ```
 
-   This command used the Dockerfile to build a new container image. You might
-   have noticed that a lot of "layers" were downloaded. This is because we instructed
-   the builder that we wanted to start from the `node:12-alpine` image. But, since we
-   didn't have that on our machine, that image needed to be downloaded.
+   The `docker build` command uses the Dockerfile to build a new container image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:12-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
 
-   After the image was downloaded, we copied in our application and used `yarn` to 
-   install our application's dependencies. The `CMD` directive specifies the default 
-   command to run when starting a container from this image.
+   After Docker downloaded the image, the instructions from the Dockerfile copied in your application and used `yarn` to install your application's dependencies. The `CMD` directive specifies the default command to run when starting a container from this image.
 
-   Finally, the `-t` flag tags our image. Think of this simply as a human-readable name
-   for the final image. Since we named the image `getting-started`, we can refer to that
-   image when we run a container.
+   Finally, the `-t` flag tags your image. Think of this simply as a human-readable name for the final image. Since you named the image `getting-started`, you can refer to that image when you run a container.
 
    The `.` at the end of the `docker build` command tells Docker that it should look for the `Dockerfile` in the current directory.
 
 ## Start an app container
 
-Now that we have an image, let's run the application. To do so, we will use the `docker run`
-command (remember that from earlier?).
+Now that you have an image, you can run the application in a [container](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}. To do so, you will use the `docker run` command.
 
-1. Start your container using the `docker run` command and specify the name of the image we 
-   just created:
+1. Start your container using the `docker run` command and specify the name of the image you just created:
 
    ```console
    $ docker run -dp 3000:3000 getting-started
    ```
 
-   Remember the `-d` and `-p` flags? We're running the new container in "detached" mode (in the 
-   background) and creating a mapping between the host's port 3000 to the container's port 3000.
-   Without the port mapping, we wouldn't be able to access the application.
+   You use the `-d` flag to run the new container in "detached" mode (in the background). You also use the `-p` flag to create a mapping between the host's port 3000 to the container's port 3000.
+   Without the port mapping, you wouldn't be able to access the application.
 
-2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
-   You should see our app.
+2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
+   You should see your app.
 
    ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
    {: .text-center }
 
-3. Go ahead and add an item or two and see that it works as you expect. You can mark items as
-   complete and remove items. Your frontend is successfully storing items in the backend.
-   Pretty quick and easy, huh?
+3. Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend.
 
 
 At this point, you should have a running todo list manager with a few items, all built by you.
-Now, let's make a few changes and learn about managing our containers.
 
-If you take a quick look at the Docker Dashboard, you should see your two containers running now 
-(this tutorial and your freshly launched app container).
+If you take a quick look at your Docker Dashboard, you should see at least one container running that is using the `getting-started` image and on port `3000`.
 
 ![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
 
 ## Next steps
 
-In this short section, you learned the basics about building a container image and created a
-Dockerfile to do so. Once you built an image, you started the container and saw the running app.
+In this short section, you learned the basics about creating a Dockerfile to build a container image. Once you built an image, you started a container and saw the running app.
 
-Next, you're going to make a modification to your app and learn how to update your running application
-with a new image. Along the way, you'll learn a few other useful commands.
+Next, you're going to make a modification to your app and learn how to update your running application with a new image. Along the way, you'll learn a few other useful commands.
 
 [Update the application](03_updating_app.md){: .button .primary-btn}

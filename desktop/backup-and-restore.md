@@ -22,7 +22,7 @@ computer, for example.
    Also note that filesystem changes in volume that are attached to the
    container are not included in the image, and must be backed up separately.
 
-   If you used a [named volume](../storage/index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [backup, restore, or migrate data volumes](../storage/volumes.md#backup-restore-or-migrate-data-volumes) page in the storage section.
+   If you used a [named volume](../storage/index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](../storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
 
 2. Use [`docker push`](../engine/reference/commandline/push.md) to push any
    images you have built locally and want to keep to the [Docker Hub registry](../docker-hub/index.md).
@@ -47,4 +47,4 @@ and [install a different version](release-notes.md) or reset Docker Desktop to f
 2. Re-create your containers if needed, using [`docker run`](../engine/reference/commandline/load.md),
    or [Docker Compose](../compose/index.md).
 
-Refer to the [backup, restore, or migrate data volumes](../storage/volumes.md#backup-restore-or-migrate-data-volumes) page in the storage section to restore volume data.
+Refer to the [backup, restore, or migrate data volumes](../storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section to restore volume data.
