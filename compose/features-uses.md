@@ -65,7 +65,7 @@ runs, if it finds any containers from previous runs, it copies the volumes from
 the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 
-If you use `docker-compose` on a Windows machine, see
+If you use `docker compose` on a Windows machine, see
 [Environment variables](reference/envvars.md) and adjust the necessary environment
 variables for your specific needs.
 
@@ -103,7 +103,7 @@ The [Compose file](compose-file/index.md) provides a way to document and configu
 all of the application's service dependencies (databases, queues, caches,
 web service APIs, etc). Using the Compose command line tool you can create
 and start one or more containers for each dependency with a single command
-(`docker-compose up`).
+(`docker compose up`).
 
 Together, these features provide a convenient way for developers to get
 started on a project. Compose can reduce a multi-page "developer getting
