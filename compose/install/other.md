@@ -28,6 +28,11 @@ On this page you can find instructions on how to install the Compose standalone 
 > ```console
 > $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 > ```
+> 
+> If you already installed docker plugin and docker-compose is only working with "docker compose" and not "docker-compose", you could check if its in the home directory tehn make a symbolic link.
+> ```console
+> /home/USERDIRECTORY/.docker/cli-plugins/docker-compose
+> ```
 
 ### On Windows Server
 
