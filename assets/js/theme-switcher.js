@@ -22,17 +22,17 @@ const darkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: 
 const selectedTheme = window.localStorage ? localStorage.getItem("theme") : null;
 
 if (selectedTheme !== null) {
-    if (selectedTheme === "night") _("body").classList.add("night");
+    if (selectedTheme === "night") _("html").classList.add("night");
 } else if (darkMode) {
-    _("body").classList.add("night");
+    _("html").classList.add("night");
 }
 
 function themeToggler() {
-    const sw = _("#switch-style"), b = _("body");
-    if (sw && b) {
-        sw.checked = b.classList.contains("night")
+    const sw = _("#switch-style"), h = _("html");
+    if (sw && h) {
+        sw.checked = h.classList.contains("night")
         sw.addEventListener("change", function (){
-            b.classList.toggle("night", this.checked)
+            h.classList.toggle("night", this.checked)
             if (window.localStorage) {
                 this.checked ? localStorage.setItem("theme", "night") : localStorage.setItem("theme", "day")
             }
