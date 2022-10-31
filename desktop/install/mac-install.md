@@ -48,7 +48,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 </div>
 <div id="mac-apple-silicon" class="tab-pane fade" markdown="1">
 
-### Mac with Apple silicon
+### Mac with Apple Silicon
 
 - Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](../mac/apple-silicon.md#known-issues). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 
@@ -56,7 +56,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
   $ softwareupdate --install-rosetta
   ```
 
- For more information, see [Docker Desktop for Apple silicon](../mac/apple-silicon.md).
+ For more information, see [Docker Desktop for Apple Silicon](../mac/apple-silicon.md).
 
 </div>
 </div>
