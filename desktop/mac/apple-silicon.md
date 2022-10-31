@@ -58,7 +58,7 @@ $ softwareupdate --install-rosetta
 - The build should update automatically to future versions.
 - HTTP proxy support is working, including support for domain name based `no_proxy` rules via TLS SNI. Fixes [docker/for-mac#2732](https://github.com/docker/for-mac/issues/2732).
 
-### Fixes since the Apple Silicon preview 7
+### Fixes since the Apple silicon preview 7
 
 - Kubernetes now works (although you might need to reset the cluster in our Troubleshoot menu one time to regenerate the certificates).
 - osxfs file sharing works.

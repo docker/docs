@@ -189,7 +189,7 @@ scrape_configs:
          # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['192.168.65.1:9323']
+      - targets: ['host.docker.internal:9323']
 ```
 
 </div><!-- windows -->

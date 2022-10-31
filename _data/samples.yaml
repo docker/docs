@@ -371,4 +371,27 @@ samples:
       - react
       - javascript
       - nodejs
-
+  - title: Compose and Rails
+    url: https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/rails/
+    description: This Quickstart guide shows you how to use Docker Compose to set up and run a Rails/PostgreSQL app.
+    dev_env: false
+    services:
+      - rails
+      - postgres
+      - ruby
+  - title: Compose and Django
+    url: https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/django/
+    description: This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
+    dev_env: false
+    services:
+      - django
+      - python
+      - postgres
+  - title: Compose and WordPress
+    url: https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/wordpress/
+    description: This quick-start guide demonstrates how to use Compose to set up and run WordPress.
+    dev_env: false
+    services:
+      - wordpress
+      - mariadb
+      - postgres

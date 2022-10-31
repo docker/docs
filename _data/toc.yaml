@@ -1138,7 +1138,7 @@ samples:
       title: .NET
     - path: /samples/angular/
       title: Angular
-    - path: /samples/django-sample/
+    - path: /samples/django/
       title: Django
     - path: /samples/express/
       title: Express
@@ -1150,6 +1150,8 @@ samples:
       title: Node.js
     - path: /samples/react/
       title: React
+    - path: /samples/rails/
+      title: Rails
     - path: /samples/spark/
       title: Spark
     - path: /samples/spring/
@@ -1168,6 +1170,8 @@ samples:
       title: PHP
     - path: /samples/python/
       title: Python
+    - path: /samples/ruby/
+      title: Ruby
     - path: /samples/rust/
       title: Rust
     - path: /samples/typescript/
@@ -1182,7 +1186,7 @@ samples:
       title: Portainer
     - path: /samples/prometheus/
       title: Prometheus
-    - path: /samples/wordpress-sample/
+    - path: /samples/wordpress/
       title: WordPress
 - sectiontitle: Other services
   section:

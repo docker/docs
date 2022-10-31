@@ -24,6 +24,10 @@ kramdown:
   syntax_highlighter: rouge
   toc_levels: 2..3
 
+# https://jekyllrb.com/docs/configuration/liquid/
+liquid:
+  error_mode: strict
+
 exclude:
   - _releaser
   - _samples

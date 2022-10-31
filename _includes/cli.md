@@ -133,7 +133,8 @@ For example uses of this command, refer to the [examples section](#examples) bel
   {%- endif -%}
   {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
   {% capture all-badges %}{{ deprecated-badge }}{{ experimental-daemon-badge }}{{ experimental-cli-badge }}{{ min-api }}{{ flag-orchestrator }}{% endcapture %}
-  {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
+  {% capture defaults-to-skip-str %}[],map[],false,0,0s,default,'',""{% endcapture %}
+  {% capture defaults-to-skip %}{{ defaults-to-skip-str | split: ',' }}{% endcapture %}
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
     {% if option.details_url and option.details_url != '' -%}

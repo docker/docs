@@ -62,7 +62,7 @@ services:
   app:
     image: michaelirwin244/wasm-example
     platform: wasi/wasm32
-    runtime: io.container.wasmedge.v1
+    runtime: io.containerd.wasmedge.v1
     ports:
       - 8080:8080
 ```

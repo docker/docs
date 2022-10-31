@@ -1,18 +1,22 @@
-body.night {
-    background-color: $bg-body-night;
-    color:            $body-text-night;
+html.night {
+    color-scheme: dark;
+  
+    body {
+        background-color: $bg-body-night;
+        color: $body-text-night;
 
-    &.landing {
-        background-color: $bg-body-landing-night;
-        .header > .container {
-            background-color: $bg-header-night;
-        }
-        .card, .cardlet {
-            color: inherit;
-            background-color: $bg-card-night;
-        }
-        footer {
-            background-color: $bg-footer-landing-night;
+        &.landing {
+            background-color: $bg-body-landing-night;
+            .header > .container {
+                background-color: $bg-header-night;
+            }
+            .card, .cardlet {
+                color: inherit;
+                background-color: $bg-card-night;
+            }
+            footer {
+                background-color: $bg-footer-landing-night;
+            }
         }
     }
 

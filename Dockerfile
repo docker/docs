@@ -11,6 +11,7 @@ ARG BUNDLER_VERSION=2.3.13
 
 ARG JEKYLL_ENV=development
 ARG DOCS_URL=http://localhost:4000
+ARG DOCS_ENFORCE_GIT_LOG_HISTORY=0
 
 # Base stage for building
 FROM ruby:${RUBY_VERSION}-alpine AS base
@@ -45,6 +46,7 @@ COPY --from=vendored /out /
 FROM gem AS generate
 ARG JEKYLL_ENV
 ARG DOCS_URL
+ARG DOCS_ENFORCE_GIT_LOG_HISTORY
 ENV TARGET=/out
 RUN --mount=type=bind,target=.,rw \
     --mount=type=cache,target=/tmp/docker-docs-clone \
