@@ -28,7 +28,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#mac-intel">Mac with Intel chip</a></li>
-<li><a data-toggle="tab" data-target="#mac-apple-silicon">Mac with Apple silicon</a></li>
+<li><a data-toggle="tab" data-target="#mac-apple-silicon">Mac with Apple chip</a></li>
 </ul>
 <div class="tab-content">
 <div id="mac-intel" class="tab-pane fade in active" markdown="1">
