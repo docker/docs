@@ -1561,6 +1561,10 @@ manuals:
           title: Overview
         - path: /build/buildkit/dockerfile-frontend/
           title: Custom Dockerfile syntax
+        - path: /build/buildkit/configure/
+          title: Configure
+        - path: /build/buildkit/toml-configuration/
+          title: TOML configuration
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
