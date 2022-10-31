@@ -115,7 +115,7 @@
   <section class="container">
     <div class="row">
       <div class="col-xs-12 col-lg-8 card-holder">
-        <div class="cardlet container-fluid" style="min-height:307px">
+        <div class="cardlet container-fluid" style="min-height:317px">
           <div class="row">
             <div class="col-xs-12 col-lg-8">
               <h5 class="title"></h5>
@@ -124,38 +124,42 @@
           <div class="row">
             <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" data-target="#includes">Explore Docker</a></li>
-              <li><a data-toggle="tab" data-target="#features">Get Support</a></li>
               <li><a data-toggle="tab" data-target="#faqs">Browse FAQs</a></li>
+              <li><a data-toggle="tab" data-target="#features">Get Support</a></li>
               </ul>
               <div class="tab-content">
               <div id="includes" class="tab-pane fade in active" markdown="1">
-               <p style="padding: 5px;"><a href="/engine/reference/builder/">Write a Dockerfile</a></p>
+              <div class="row">
+              <div class="col-xs-12 col-md-6 col-lg-6">
+               <p><a href="/engine/reference/builder/">Write a Dockerfile</a></p>
                <p><a href="/network/">Manage container networking</a></p>
                <p><a href="/compose/compose-file/">Write a Docker Compose file</a></p>
                <p><a href="/storage/">Work with volumes and bind mounts</a></p>
                <p><a href="/get-started/04_sharing_app/">Share my image on Docker Hub</a></p>
+               </div>
+               <div class="col-xs-12 col-md-6 col-lg-6">
                <p><a href="/config/daemon/">Configure the Docker daemon</a></p>
                <p><a href="/get-started/02_our_app/">Build and run an image</a></p>
                <p><a href="/config/labels-custom-metadata/">Manage Docker objects</a></p>
                <p><a href="/build/building/multi-stage/">Multi-stage builds</a></p>
-              </div>
+              </div></div></div>
               <div id="features" class="tab-pane fade" markdown="1">
               <p><a href="https://docs.docker.com/support/"target="_blank" rel="noopener">Get support</a></p>
               <p><a href="https://dockercommunity.slack.com/"target="_blank" rel="noopener">Docker community Slack</a></p>
               <p><a href="https://www.docker.com/company/contact/"target="_blank" rel="noopener">Contact Docker</a></dp>
               <p></a></p>
-              <p></a></div></p>
+              <p></a></div>
               <div id="faqs" class="tab-pane fade" markdown="1">
               <div class="row">
               <div class="col-xs-12 col-md-6 col-lg-6">
-              <h6>Common FAQs</h6>
+              <h6 style="margin-top: 0;">Common FAQs</h6>
               <p><a href="https://github.com/docker/for-linux">What are the system requirements for Docker Desktop?</a></p>
               <p><a href="https://docs.docker.com/desktop/install/windows-install/#system-requirements">Where can I find example Compose files?</a></p>
               <p><a href="https://docs.docker.com/desktop/install/windows-install/#system-requirements">              <p><a href="https://docs.docker.com/desktop/faqs/general/">How do I connect to a container service?</a></p></a></p>
               <p><a href="https://docs.docker.com/get-started/04_sharing_app/">How do I share images on Docker Hub?</a></p></a></p>
             </div>
             <div class="col-xs-12 col-md-6 col-lg-6">
-            <h6>Products</h6>
+            <h6 style="margin-top: 0;">Products</h6>
               <p><a href="https://docs.docker.com/desktop/faqs/general/">Docker Desktop</a></p>
               <p><a href="https://docs.docker.com/desktop/faqs/macfaqs/">Docker Desktop for Mac</a></p>
               <p><a href="https://docs.docker.com/desktop/faqs/windowsfaqs/">Docker Desktop for Windows</a></p>
