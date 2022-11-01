@@ -121,6 +121,7 @@ own to BuildKit using the power of custom frontends.
 
 ### Configure BuildKit
 
-Take a deep dive into the internal BuildKit configuration to get the most out
-of your builds. See also [`buildkitd.toml`](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md),
-the configuration file for `buildkitd`.
+Take a deep dive into the internal [BuildKit configuration](buildkit/toml-configuration.md)
+to get the most out of your builds.
+
+[Configure BuildKit](buildkit/configure.md){: .button .outline-btn }
