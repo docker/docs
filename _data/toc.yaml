@@ -1310,11 +1310,13 @@ manuals:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a simple dev environment
-        - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create an advanced dev environment
+          title: Launch a dev environment
+        - path: /desktop/dev-environments/set-up/
+          title: Set up a dev environment
         - path: /desktop/dev-environments/share/
           title: Distribute your dev environment
+        - path: /desktop/dev-environments/dev-cli/
+          title: Use the docker dev CLI plugin
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
@@ -1521,24 +1523,28 @@ manuals:
               title: Kubernetes driver
             - path: /build/building/drivers/remote/
               title: Remote driver
-        - path: /build/building/cache/
-          title: Optimizing builds with cache
-        - sectiontitle: Cache backends
+        - sectiontitle: Cache
           section:
-            - path: /build/building/cache/backends/
-              title: Overview
-            - path: /build/building/cache/backends/inline/
-              title: Inline
-            - path: /build/building/cache/backends/local/
-              title: Local
-            - path: /build/building/cache/backends/registry/
-              title: Registry
-            - path: /build/building/cache/backends/gha/
-              title: GitHub Actions
-            - path: /build/building/cache/backends/azblob/
-              title: Azure Blob Storage
-            - path: /build/building/cache/backends/s3/
-              title: Amazon S3
+            - path: /build/building/cache/
+              title: Optimizing builds with cache
+            - path: /build/building/cache/garbage-collection/
+              title: Garbage collection
+            - sectiontitle: Cache backends
+              section:
+                - path: /build/building/cache/backends/
+                  title: Overview
+                - path: /build/building/cache/backends/inline/
+                  title: Inline
+                - path: /build/building/cache/backends/local/
+                  title: Local
+                - path: /build/building/cache/backends/registry/
+                  title: Registry
+                - path: /build/building/cache/backends/gha/
+                  title: GitHub Actions
+                - path: /build/building/cache/backends/azblob/
+                  title: Azure Blob Storage
+                - path: /build/building/cache/backends/s3/
+                  title: Amazon S3
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
@@ -1559,12 +1565,18 @@ manuals:
               title: Build contexts and linking targets
             - path: /build/customize/bake/compose-file/
               title: Building from Compose file
+        - path: /build/customize/color-output-controls/
+          title: Color output controls
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
           title: Overview
         - path: /build/buildkit/dockerfile-frontend/
           title: Custom Dockerfile syntax
+        - path: /build/buildkit/configure/
+          title: Configure
+        - path: /build/buildkit/toml-configuration/
+          title: TOML configuration
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
