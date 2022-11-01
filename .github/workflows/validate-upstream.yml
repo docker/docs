@@ -70,10 +70,10 @@ jobs:
       -
         name: Download data files
         uses: actions/download-artifact@v3
-        if: ${{ inputs.data-files-id != '' && inputs.data-files-dest != '' }}
+        if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
         with:
           name: ${{ inputs.data-files-id }}
-          path: ./_data/${{ inputs.data-files-dest }}
+          path: ./_data/${{ inputs.data-files-folder }}
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
