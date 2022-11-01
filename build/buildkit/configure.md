@@ -4,51 +4,56 @@ description: Learn how to configure BuildKit for your builder.
 keywords: build, buildkit, configuration, buildx, network, cni, registry
 ---
 
-If you [create a `docker-container` or `kubernetes` builder](../building/drivers/index.md)
-with Buildx, you can set a custom [BuildKit configuration](toml-configuration.md)
-by passing the [`--config` flag](../../engine/reference/commandline/buildx_create.md#config)
-to the [`docker buildx create` command](../../engine/reference/commandline/buildx_create.md):
+If you create a `docker-container` or `kubernetes` builder with Buildx, you can
+apply a custom [BuildKit configuration](toml-configuration.md) by passing the
+[`--config` flag](../../engine/reference/commandline/buildx_create.md#config) to
+the `docker buildx create` command.
 
 ## Registry mirror
 
-You can define a registry mirror to use for your builds:
+You can define a registry mirror to use for your builds. Doing so redirects
+BuildKit to pull images from a different hostname. The following steps exemplify
+defining a mirror for `docker.io` (Docker Hub) to `mirror.gcr.io`.
 
-```toml
-# /etc/buildkitd.toml
-debug = true
-[registry."docker.io"]
-  mirrors = ["mirror.gcr.io"]
-```
+1. Create a TOML at `/etc/buildkitd.toml` with the following content:
 
-> **Note**
->
-> `debug = true` has been added to be able to debug requests
-> in the BuildKit daemon and see if the mirror is effectively used.
+   ```toml
+   debug = true
+   [registry."docker.io"]
+     mirrors = ["mirror.gcr.io"]
+   ```
 
-Then [create a `docker-container` builder](../building/drivers/docker-container.md)
-that will use this [BuildKit configuration](toml-configuration.md):
+   > **Note**
+   >
+   > `debug = true` turns on debug requests in the BuildKit daemon, which logs a
+   > message that shows when a mirror is being used.
 
-```console
-$ docker buildx create --use --bootstrap \
-  --name mybuilder \
-  --driver docker-container \
-  --config /etc/buildkitd.toml
-```
+2. Create a `docker-container` builder that uses this BuildKit configuration:
 
-Build an image:
+   ```console
+   $ docker buildx create --use --bootstrap \
+     --name mybuilder \
+     --driver docker-container \
+     --config /etc/buildkitd.toml
+   ```
 
-```console
-$ docker buildx build --load . -f-<<EOF
-FROM alpine
-RUN echo "hello world"
-EOF
-```
+3. Build an image:
 
-Now let's check the BuildKit logs in the builder container:
+   ```console
+   $ docker buildx build --load . -f - <<EOF
+   FROM alpine
+   RUN echo "hello world"
+   EOF
+   ```
+
+The BuildKit logs for this builder now shows that it uses the GCR mirror. You
+can tell by the fact that the response messages include the `x-goog-*` HTTP
+headers.
 
 ```console
 $ docker logs buildx_buildkit_mybuilder0
 ```
+
 ```text
 ...
 time="2022-02-06T17:47:48Z" level=debug msg="do request" request.header.accept="application/vnd.docker.container.image.v1+json, */*" request.header.user-agent=containerd/1.5.8+unknown request.method=GET spanID=9460e5b6e64cec91 traceID=b162d3040ddf86d6614e79c66a01a577
@@ -63,66 +68,66 @@ time="2022-02-06T17:47:48Z" level=debug msg="fetch response received" response.h
 ...
 ```
 
-As you can see, requests come from the GCR registry mirror (`response.header.x-goog*`).
-
 ## Setting registry certificates
 
-If you specify certificates for registries in the [BuildKit configuration](toml-configuration.md),
-the files will be copied into the container under `/etc/buildkit/certs` and
-configuration will be updated to reflect that.
+If you specify registry certificates in the BuildKit configuration, the daemon
+copies the files into the container under `/etc/buildkit/certs`. The following
+steps show adding a self-signed registry certificate to the BuildKit
+configuration.
 
-Take the following configuration that will be used for pushing an image to
-this registry using self-signed certificates:
+1. Add the following configuration to `/etc/buildkitd.toml`:
 
-```toml
-# /etc/buildkitd.toml
-debug = true
-[registry."myregistry.com"]
-  ca=["/etc/certs/myregistry.pem"]
-  [[registry."myregistry.com".keypair]]
-    key="/etc/certs/myregistry_key.pem"
-    cert="/etc/certs/myregistry_cert.pem"
-```
+   ```toml
+   # /etc/buildkitd.toml
+   debug = true
+   [registry."myregistry.com"]
+     ca=["/etc/certs/myregistry.pem"]
+     [[registry."myregistry.com".keypair]]
+       key="/etc/certs/myregistry_key.pem"
+       cert="/etc/certs/myregistry_cert.pem"
+   ```
 
-Here we have configured a self-signed certificate for `myregistry.com` registry.
+   This tells the builder to push images to the `myregistry.com` registry using
+   the certificates in the specified location (`/etc/certs`).
 
-Now [create a `docker-container` builder](../building/drivers/docker-container.md)
-that will use this BuildKit configuration:
+2. Create a `docker-container` builder that uses this configuration:
 
-```console
-$ docker buildx create --use --bootstrap \
-  --name mybuilder \
-  --driver docker-container \
-  --config /etc/buildkitd.toml
-```
+   ```console
+   $ docker buildx create --use --bootstrap \
+     --name mybuilder \
+     --driver docker-container \
+     --config /etc/buildkitd.toml
+   ```
 
-Inspecting the builder container, you can see that buildkitd configuration
-has changed:
+3. Inspect the builder's configuration file (`/etc/buildkit/buildkitd.toml`), it
+   shows that the certificate configuration is now configured in the builder.
 
-```console
-$ docker exec -it buildx_buildkit_mybuilder0 cat /etc/buildkit/buildkitd.toml
-```
-```toml
-debug = true
+   ```console
+   $ docker exec -it buildx_buildkit_mybuilder0 cat /etc/buildkit/buildkitd.toml
+   ```
 
-[registry]
+   ```toml
+   debug = true
 
-  [registry."myregistry.com"]
-    ca = ["/etc/buildkit/certs/myregistry.com/myregistry.pem"]
+   [registry]
 
-    [[registry."myregistry.com".keypair]]
-      cert = "/etc/buildkit/certs/myregistry.com/myregistry_cert.pem"
-      key = "/etc/buildkit/certs/myregistry.com/myregistry_key.pem"
-```
+     [registry."myregistry.com"]
+       ca = ["/etc/buildkit/certs/myregistry.com/myregistry.pem"]
 
-And certificates copied inside the container:
+       [[registry."myregistry.com".keypair]]
+         cert = "/etc/buildkit/certs/myregistry.com/myregistry_cert.pem"
+         key = "/etc/buildkit/certs/myregistry.com/myregistry_key.pem"
+   ```
 
-```console
-$ docker exec -it buildx_buildkit_mybuilder0 ls /etc/buildkit/certs/myregistry.com/
-myregistry.pem    myregistry_cert.pem   myregistry_key.pem
-```
+4. Verify that the certificates are inside the container:
 
-Now you should be able to push to the registry with this builder:
+   ```console
+   $ docker exec -it buildx_buildkit_mybuilder0 ls /etc/buildkit/certs/myregistry.com/
+   myregistry.pem    myregistry_cert.pem   myregistry_key.pem
+   ```
+
+Now you can push to the registry using this builder, and it will authenticate
+using the certificates:
 
 ```console
 $ docker buildx build --push --tag myregistry.com/myimage:latest .
@@ -130,12 +135,17 @@ $ docker buildx build --push --tag myregistry.com/myimage:latest .
 
 ## CNI networking
 
-It can be useful to use a bridge network for your builder if for example you
-encounter a network port contention during multiple builds. If you're using
-the BuildKit image, CNI is not [(yet)](https://github.com/moby/buildkit/issues/28){:target="_blank" rel="noopener" class="_"}.
-available in it.
+CNI networking for builders can be useful for dealing with network port
+contention during concurrent builds. CNI is
+[not yet](https://github.com/moby/buildkit/issues/28){:target="_blank"
+rel="noopener" class="_"} available in the default BuildKit image. But you can
+create your own image that includes CNI support.
 
-But you can create your own BuildKit image with CNI support:
+The following Dockerfile example shows a custom BuildKit image with CNI support.
+It uses the
+[CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json){:target="_blank"
+rel="noopener" class="_"} in BuildKit as an example. Feel free to include your
+own CNI configuration.
 
 ```dockerfile
 ARG BUILDKIT_VERSION=v{{ site.buildkit_version }}
@@ -156,21 +166,11 @@ COPY --from=cni-plugins /opt/cni/bin /opt/cni/bin
 ADD https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/hack/fixtures/cni.json /etc/buildkit/cni.json
 ```
 
-> **Note**
->
-> Here we use the [CNI config for integration tests in BuildKit](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json){:target="_blank" rel="noopener" class="_"},
-> but feel free to use your own config.
-
-Now build this image:
+Now you can build this image, and create a builder instance from it using
+[the `--driver-opt image` option](../../engine/reference/commandline/buildx_create.md#driver-opt):
 
 ```console
 $ docker buildx build --tag buildkit-cni:local --load .
-```
-
-Then [create a `docker-container` builder](../building/drivers/docker-container.md)
-that will use this image:
-
-```console
 $ docker buildx create --use --bootstrap \
   --name mybuilder \
   --driver docker-container \
