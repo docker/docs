@@ -17,6 +17,8 @@ To set up a dev environment, there are additional configuration steps to tell Do
 
 Dev Environments use an `compose-dev.yaml` file located at the root of your project. This file allows you to define the image required for a dedicated service, the ports you'd like to expose, along with additional configuration options.
 
+The following is an example `compose-dev.yaml` file.
+
 ```yaml
 version: "3.7"
 services:
