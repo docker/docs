@@ -77,7 +77,9 @@ For this to take effect:
 
 ### What do users see when this setting is enforced?
 
-When Enhanced Container Isolation is enabled, users see that containers run within a Linux user namespace. 
+When Enhanced Container Isolation is enabled, users see:
+- **Use Enhanced Container Isolation** toggled on in **Settings**
+- Containers run within a Linux user namespace. 
 
 To check, run:
 
