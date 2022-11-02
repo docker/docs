@@ -147,7 +147,7 @@ samples:
       - javascript
   - title: React / NGINX
     url: https://github.com/docker/awesome-compose/blob/master/react-nginx
-    description: Aample React application with Nginx.
+    description: A sample React application with Nginx.
     dev_env: true
     services:
       - react
