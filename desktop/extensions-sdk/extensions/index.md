@@ -4,16 +4,13 @@ description: General steps in how to publish an extension
 keywords: Docker, Extensions, sdk, publish
 ---
 
-This section provides general information on publishing your extension, a how-to guide, and provides other useful resources.  
-
-The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and upload their own extension to share with the world. 
+This section provides a how-to guide, general information on publishing your extension to the Extensions Marketplace, and provides other useful resources.  
 
 ## How to publish your extension 
 
-To publish the extension;
+To publish the extension you need to upload the Docker image to [DockerHub](https://hub.docker.com/):
 
-1. Upload the Docker image to [DockerHub](https://hub.docker.com/).
-2. Tag the previous image to prepend the account owner at the beginning of the image name:
+1. Tag the previous image to prepend the account owner at the beginning of the image name:
 
     `docker tag <name-of-your-extension> owner/<name-of-your-extension>`
 
@@ -25,38 +22,38 @@ To publish the extension;
     > 
     > See [semver.org](https://semver.org/) to learn more about semantic versioning.
 
-3. Push the image to Docker Hub:
+2. Push the image to Docker Hub:
 
     `docker push owner/<name-of-your-extension>`
 
     > Having trouble pushing the image?
     >  
     > Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
-    > 
-
-Your extension is now published.
 
 ## Submit your extension to be published in the Extensions Marketplace
 
-Docker Desktop displays published extensions in the Extensions Marketplace.
+Docker Desktop displays published extensions in the Extensions Marketplace. The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and upload their own extension to share with the world. 
+
 If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). 
 
-All extensions submitted to the Extension Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using Extensions and allows for Extension developers to get feedback on what will improve their Extensions experience.
+All extensions submitted to the Extension Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using Docker Extensions and allows for extension developers to get feedback.
 
 ### Before you submit
 
-Ensure your extension has followed the guidelines outlined in this section before submitting for review. These guidelines help to ensure your extension delivers a great experience for other Extensions users and that the extension approval process goes as smoothly as possible. We highly encourage you to check our guidelines as not doing so may considerably impact the duration of the approval process. These guidelines do not replace our terms of service or guarantee approval. As the Extension Marketplace continues adding new features for both Extension users and publishers, expect that your extension should be maintained over time to ensure it stays available in the Marketplace.
+Ensure your extension has followed the guidelines outlined in this section before submitting for your extension for review. We highly encourage you to check our guidelines as not doing so may considerably impact the duration of the approval process. 
 
-Guidelines:
-Test your extension for crashes, bugs, and performance issues
-Test your extension with potential users
-Ensure that you’ve ran our validation checks
-Review our design guidelines
-Ensure the UI styling is in line with Docker Desktop guidelines
-Ensure your extensions support both light and dark mode
-Consider the needs of both new and existing users of your extension
-Test your extension on various platforms (Mac, Windows, Linux)
-Read our Terms of Service
+These guidelines do not replace our terms of service or guarantee approval. As the Extension Marketplace continues adding new features for both Extension users and publishers, expect that your extension should be maintained over time to ensure it stays available in the Marketplace.
+
+#### Guidelines:
+- Test your extension for crashes, bugs, and performance issues
+- Test your extension with potential users
+- Ensure that you’ve ran our [validation checks](../build/build-install.md)
+- Review our [design guidelines](../design/design-guidelines.md)
+- Ensure the [UI styling](../design/overview.md) is in line with Docker Desktop guidelines
+- Ensure your extensions support both light and dark mode
+- Consider the needs of both new and existing users of your extension
+- Test your extension on various platforms (Mac, Windows, Linux)
+- Read our [Terms of Service](https://www.docker.com/legal/extensions_marketplace_developer_agreement/)
 
 ### After you submit
 
