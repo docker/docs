@@ -33,7 +33,9 @@ or containers on the same machine. So, how do we allow one container to talk to 
 
 ## Start MySQL
 
-There are two ways to put a container on a network: 1) Assign it at start or 2) connect an existing container.
+There are two ways to put a container on a network:
+1) Assign it at start or
+2) connect an existing container.
 For now, we will create the network first and attach the MySQL container at startup.
 
 1. Create the network.
