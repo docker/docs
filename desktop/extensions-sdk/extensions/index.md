@@ -4,40 +4,66 @@ description: General steps in how to publish an extension
 keywords: Docker, Extensions, sdk, publish
 ---
 
-To publish the extension, upload the Docker image to [DockerHub](https://hub.docker.com/).
+This section provides general information on publishing your extension, a how-to guide, and provides other useful resources.  
 
-Tag the previous image to prepend the account owner at the beginning of the image name:
+The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and upload their own extension to share with the world. 
 
-`docker tag <name-of-your-extension> owner/<name-of-your-extension>`
+## How to publish your extension 
 
-Push the image to Docker Hub:
+To publish the extension;
 
-`docker push owner/<name-of-your-extension>`
+1. Upload the Docker image to [DockerHub](https://hub.docker.com/).
+2. Tag the previous image to prepend the account owner at the beginning of the image name:
 
-> Note
-> 
-> For Docker Extensions images to be listed in Docker Desktop, they must be approved by Docker and the tags must follow semantic versioning, e.g: `0.0.1`.
-> 
-> See [distribution and new releases](DISTRIBUTION.md#distribution-and-new-releases) for more information.
-> 
-> See [semver.org](https://semver.org/) to learn more about semantic versioning.
-> 
+    `docker tag <name-of-your-extension> owner/<name-of-your-extension>`
 
-> Having trouble pushing the image?
-> 
-> Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
-> 
+    > Note
+    > 
+    > For Docker Extensions images to be listed in Docker Desktop, they must be approved by Docker and the tags must follow semantic versioning, e.g: `0.0.1`.
+    > 
+    > See [distribution and new releases](DISTRIBUTION.md#distribution-and-new-releases) for more information.
+    > 
+    > See [semver.org](https://semver.org/) to learn more about semantic versioning.
 
-## Publish your extension in the Marketplace
+3. Push the image to Docker Hub:
+
+    `docker push owner/<name-of-your-extension>`
+
+    > Having trouble pushing the image?
+    >  
+    > Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
+    > 
+
+Your extension is now published.
+
+## Submit your extension to be published in the Extensions Marketplace
 
 Docker Desktop displays published extensions in the Extensions Marketplace.
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We'll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
+If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). 
 
-## Clean up
+All extensions submitted to the Extension Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using Extensions and allows for Extension developers to get feedback on what will improve their Extensions experience.
 
-To remove the extension, run:
+### Before you submit
 
-`docker extension rm <name-of-your-extension>`
+Ensure your extension has followed the guidelines outlined in this section before submitting for review. These guidelines help to ensure your extension delivers a great experience for other Extensions users and that the extension approval process goes as smoothly as possible. We highly encourage you to check our guidelines as not doing so may considerably impact the duration of the approval process. These guidelines do not replace our terms of service or guarantee approval. As the Extension Marketplace continues adding new features for both Extension users and publishers, expect that your extension should be maintained over time to ensure it stays available in the Marketplace.
+
+Guidelines:
+Test your extension for crashes, bugs, and performance issues
+Test your extension with potential users
+Ensure that you’ve ran our validation checks
+Review our design guidelines
+Ensure the UI styling is in line with Docker Desktop guidelines
+Ensure your extensions support both light and dark mode
+Consider the needs of both new and existing users of your extension
+Test your extension on various platforms (Mac, Windows, Linux)
+Read our Terms of Service
+
+### After you submit
+
+Once you’ve submitted your extension, here is what you can expect from the review process:
+
+- Timing: Extensions are reviewed by us manually. Although we strive for having your submission approved as soon as possible, bear in mind this is a manual process to ensure extensions meet high standards. If your extension is complex, if it does not follow our guidelines, or if you did not complete the submission form properly, it may require more time to properly consider your extension.
+- Rejections: Docker strives to review extensions for consideration fairly and consistently. We will do our best to provide adequate and actionable feedback for you so that we can reconsider publishing your extension after you’ve made appropriate changes. If your extension has been rejected, you can communicate directly with us.
 
 ## What's next
 Find more information about:
