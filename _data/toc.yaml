@@ -145,12 +145,6 @@ guides:
       title: Create your own base image (advanced)
   - path: /develop/scan-images/
     title: Scan images
-- sectiontitle: Set up CI/CD
-  section:
-  - path: /ci-cd/best-practices/
-    title: CI/CD Best practices
-  - path: /ci-cd/github-actions/
-    title: Configure GitHub Actions
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -1583,6 +1577,16 @@ manuals:
           title: Install Buildx
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/examples/
+            title: Examples
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
