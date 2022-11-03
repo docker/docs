@@ -137,10 +137,6 @@ command=/usr/sbin/sshd -D
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-#
-# example Dockerfile for https://docs.docker.com/examples/postgresql_service/
-#
-
 FROM ubuntu
 
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
