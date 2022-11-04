@@ -100,8 +100,7 @@ $ docker run --net=db_net_ipv --name=ipv1 -itd alpine /bin/sh
 
 # Start a second container and ping using the container name
 # to see the docker included name resolution functionality
-$ docker run --net=db_net_ipv --name=ipv2 -it --rm alpine /bin/sh
-$ ping -c 4 ipv1
+$ docker run --net=db_net_ipv --name=ipv2 -it --rm alpine ping -c 4 ipv1
 
 # NOTE: the containers can NOT ping the underlying host interfaces as
 # they are intentionally filtered by Linux for additional isolation.
