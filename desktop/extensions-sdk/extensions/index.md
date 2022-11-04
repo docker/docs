@@ -55,7 +55,7 @@ These guidelines do not replace our terms of service or guarantee approval. As t
 - Ensure your extensions support both light and dark mode
 - Consider the needs of both new and existing users of your extension
 - Test your extension on various platforms (Mac, Windows, Linux)
-- Read our [Terms of Service](https://www.docker.com/legal/extensions_marketplace_developer_agreement/)
+- Read our [Terms of Service](https://www.docker.com/legal/extensions_marketplace_developer_agreement/){: target="_blank" rel="noopener" class="_" }
 
 ### After you submit
 
