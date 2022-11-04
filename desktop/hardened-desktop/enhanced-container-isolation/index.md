@@ -79,10 +79,16 @@ For this to take effect:
 
 When Enhanced Container Isolation is enabled, users see that containers run within a Linux user namespace. 
 
-To check, run:
+To check, first run:
 
 ```
-$ docker run --rm alpine cat /proc/self/uid_map 
+$ docker run -it --rm alpine cat /proc/self/uid_map 
+```
+
+Then:
+
+```
+cat /proc/self/uid_map 
 ```
 
 The following output displays:
