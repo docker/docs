@@ -29,7 +29,7 @@ What you'll see is that the files created in one container aren't available in a
     commands (why we have the `&&`). The first portion picks a single random number and writes
     it to `/data.txt`. The second command is simply watching a file to keep the container running.
 
-2. Validate that you can see the output by `exec`ing into the container. To do so, go to **Containers** in Docker Desktop, hover over your running container and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
+2. Validate that you can see the output by accessing the terminal in the container. To do so, go to **Containers** in Docker Desktop, hover over the container running  the **ubuntu** image, and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
 
     You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
 
