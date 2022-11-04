@@ -330,7 +330,7 @@ $$ ip a show eth0
   gateway points to the containers `eth0` device. See below for CLI output
   of `ip route` or `ip -6 route` from inside an L3 container for details.
 
-The mode ` -o ipvlan_mode=l3` must be explicitly specified since the default
+The mode `-o ipvlan_mode=l3` must be explicitly specified since the default
 IPvlan mode is `l2`.
 
 The following example does not specify a parent interface. The network drivers
