@@ -1345,13 +1345,13 @@ manuals:
               path: /desktop/extensions-sdk/build/test-debug/
         - sectiontitle: "Part two: Publish"
           section:
-            - title: Overview
+            - title: Publish your extension
               path: /desktop/extensions-sdk/extensions/
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
-            - title: Distribution
+            - title: Packaging, distribution, and API dependencies
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/

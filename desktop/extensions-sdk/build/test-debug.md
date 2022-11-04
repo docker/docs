@@ -64,6 +64,14 @@ To update the extension, you must first [rebuild and reinstall](build-install.md
 
 `docker extension update <name-of-your-extensions>`
 
+## Clean up
+
+To remove the extension, run:
+
+```console
+$ docker extension rm <name-of-your-extension>
+```
+
 ## What's next?
 
 - Explore our [design principles](../design/design-principles.md).
