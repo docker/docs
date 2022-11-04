@@ -198,6 +198,9 @@ fetch-remote:
       - dest: "build/building/cache/backends"
         src:
           - "docs/guides/cache/**"
+      - dest: "build/building/exporters"
+        src:
+          - "docs/guides/exporters/**"
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
