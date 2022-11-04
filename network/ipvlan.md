@@ -461,7 +461,7 @@ Start a container and view eth0 and both v4 & v6 routing tables:
 ```console
 $ docker run --net=ipvlan140 --ip6=2001:db8:abc2::51 -it --rm alpine /bin/sh
 
-$ ip a show eth0
+$$ ip a show eth0
 78: eth0@if77: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN group default
     link/ether 00:50:56:2b:29:40 brd ff:ff:ff:ff:ff:ff
     inet 192.168.140.2/24 scope global eth0
