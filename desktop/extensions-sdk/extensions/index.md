@@ -14,7 +14,9 @@ To publish the extension you need to upload the Docker image to [DockerHub](http
 
 1. Tag the previous image to prepend the account owner at the beginning of the image name:
 
-    `docker tag <name-of-your-extension> owner/<name-of-your-extension>`
+    ```console
+    $ docker tag <name-of-your-extension> owner/<name-of-your-extension>
+    ```
 
     > Note
     > 
