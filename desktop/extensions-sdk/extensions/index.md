@@ -10,7 +10,7 @@ For information on how Docker Extensions are packaged and distributed, see [Pack
 
 ## How to publish your extension 
 
-To publish the extension you need to upload the Docker image to [DockerHub](https://hub.docker.com/):
+To publish the extension you need to upload the Docker image to [DockerHub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" }:
 
 1. Tag the previous image to prepend the account owner at the beginning of the image name:
 
