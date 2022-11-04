@@ -36,7 +36,7 @@ To publish the extension you need to upload the Docker image to [DockerHub](http
 
 Docker Desktop displays published extensions in the Extensions Marketplace. The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and upload their own extension to share with the world. 
 
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). 
+If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/){: target="_blank" rel="noopener" class="_" }. 
 
 All extensions submitted to the Extension Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using Docker Extensions and allows for extension developers to get feedback.
 
