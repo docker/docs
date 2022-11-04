@@ -4,7 +4,9 @@ description: General steps in how to publish an extension
 keywords: Docker, Extensions, sdk, publish
 ---
 
-This section provides a how-to guide, general information on publishing your extension to the Extensions Marketplace, and provides other useful resources.  
+This section provides a how-to guide, general information on publishing your extension to the Extensions Marketplace.
+
+For information on how Docker Extensions are packaged and distributed, see [Packaging, distribution and API dependencies](DISTRIBUTION.md)
 
 ## How to publish your extension 
 
