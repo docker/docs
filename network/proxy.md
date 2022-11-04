@@ -43,7 +43,7 @@ configure it in different ways:
        "default":
        {
          "httpProxy": "http://192.168.1.12:3128",
-         "httpsProxy": "http://192.168.1.12:3128",
+         "httpsProxy": "https://192.168.1.12:3128",
          "noProxy": "*.test.example.com,.example2.com,127.0.0.0/8"
        }
      }
