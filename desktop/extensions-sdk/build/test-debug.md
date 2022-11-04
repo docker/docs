@@ -68,7 +68,9 @@ To update the extension, you must first [rebuild and reinstall](build-install.md
 
 To remove the extension, run:
 
-`docker extension rm <name-of-your-extension>`
+```console
+$ docker extension rm <name-of-your-extension>
+```
 
 ## What's next?
 
