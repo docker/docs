@@ -25,6 +25,7 @@ ARG BUNDLER_VERSION
 COPY Gemfile* .
 RUN gem uninstall -aIx bundler \
   && gem install bundler -v ${BUNDLER_VERSION} \
+  && bundle config set force_ruby_platform true \
   && bundle install --jobs 4 --retry 3
 
 # Vendor Gemfile for Jekyll
