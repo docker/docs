@@ -191,16 +191,12 @@ fetch-remote:
     paths:
       - dest: "build/customize/bake"
         src:
-          - "docs/guides/bake/**"
-      - dest: "build/building/drivers"
+          - "docs/manuals/bake/**"
+      - dest: "build/building"
         src:
-          - "docs/guides/drivers/**"
-      - dest: "build/building/cache/backends"
-        src:
-          - "docs/guides/cache/**"
-      - dest: "build/building/exporters"
-        src:
-          - "docs/guides/exporters/**"
+          - "docs/manuals/drivers"
+          - "docs/manuals/cache"
+          - "docs/manuals/exporters"
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
