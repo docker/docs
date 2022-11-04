@@ -26,7 +26,9 @@ To publish the extension you need to upload the Docker image to [DockerHub](http
 
 2. Push the image to Docker Hub:
 
-    `docker push owner/<name-of-your-extension>`
+    ```console
+    $ docker push owner/<name-of-your-extension>
+    ```
 
     > Having trouble pushing the image?
     >  
