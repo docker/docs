@@ -126,10 +126,10 @@ To get started, here are a few tips and tricks:
 
 Be considerate of what files you add to the image.
 
-Running a command like `COPY . /src` will `COPY` your entire build context into
-the image. If you've got logs, package manager artifacts, or even previous build
-results in your current directory, those will also be copied over. This could
-make your image larger than it needs to be, especially as those files are
+Running a command like `COPY . /src` will `COPY` your entire [build context](../context.md)
+into the image. If you've got logs, package manager artifacts, or even previous
+build results in your current directory, those will also be copied over. This
+could make your image larger than it needs to be, especially as those files are
 usually not useful.
 
 Avoid adding unnecessary files to your builds by explicitly stating the files or

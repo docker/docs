@@ -63,8 +63,8 @@ clone our [ASP.NET Docker Sample](https://github.com/dotnet/dotnet-docker/tree/m
     ENTRYPOINT ["dotnet", "aspnetapp.dll"]
     ```
 
-4.  To make your build context as small as possible add a [`.dockerignore`
-    file](/engine/reference/builder/#dockerignore-file)
+4.  To make your [build context](../build/building/context.md) as small as 
+    possible add a [`.dockerignore` file](../engine/reference/builder.md#dockerignore-file)
     to your project folder and copy the following into it.
 
 ```dockerignore
@@ -95,10 +95,10 @@ obj/
       ENTRYPOINT ["dotnet", "aspnetapp.dll"]
       ```
   
-4.  To make your build context as small as possible add a [`.dockerignore`
-   file](/engine/reference/builder/#dockerignore-file)
-   to your project folder.
-   
+4.  To make your [build context](../build/building/context.md) as small as
+    possible add a [`.dockerignore`file](../engine/reference/builder.md#dockerignore-file)
+    to your project folder.
+
 ## Build and run the Docker image
 
 1.  Open a command prompt and navigate to your project folder.

@@ -14,8 +14,8 @@ complex scenarios:
 
 - Detect and skip executing unused build stages
 - Parallelize building independent build stages
-- Incrementally transfer only the changed files in your build context between builds
-- Detect and skip transferring unused files in your build context
+- Incrementally transfer only the changed files in your [build context](../building/context.md) between builds
+- Detect and skip transferring unused files in your [build context](../building/context.md)
 - Use [Dockerfile frontend](dockerfile-frontend.md) implementations with many new features
 - Avoid side effects with rest of the API (intermediate images and containers)
 - Prioritize your build cache for automatic pruning
