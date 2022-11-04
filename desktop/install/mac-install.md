@@ -7,6 +7,9 @@ redirect_from:
 - /docker-for-mac/install/
 - /engine/installation/mac/
 - /installation/mac/
+- /docker-for-mac/apple-m1/
+- /docker-for-mac/apple-silicon/
+- /desktop/mac/apple-silicon/
 ---
 
 > **Docker Desktop terms**

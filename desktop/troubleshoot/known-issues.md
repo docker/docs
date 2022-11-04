@@ -3,6 +3,13 @@ description: Known issues for Mac
 keywords: mac, troubleshooting, known issues
 title: Known issues for Docker Desktop on Mac
 ---
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab3">Known issues for Mac with Intel chip</a></li>
+  <li><a data-toggle="tab" data-target="#tab4">Known issues for Mac with Apple silicon</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab3" class="tab-pane fade in active" markdown="1">
+<br>
 * The following issues are seen when using the `virtualization.framework` experimental feature:
 
   * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
@@ -77,3 +84,21 @@ title: Known issues for Docker Desktop on Mac
   actively working on performance improvements using a number of different
   techniques.  To learn more, see the [topic on our roadmap](https://github.com/docker/roadmap/issues/7){: target="_blank" rel="noopener" class="_" }.
 
+<hr>
+</div>  
+<div id="tab4" class="tab-pane fade" markdown="1">
+<br>
+- Some command line tools do not work when Rosetta 2 is not installed.
+  - The old version 1.x of `docker-compose`. We recommend that you use Compose V2 instead. Either type `docker compose` or enable the **Use Docker Compose V2** option in the [General preferences tab](../settings/mac.md#general).
+  - The `docker scan` command and the underlying `snyk` binary.
+  - The `docker-credential-ecr-login` credential helper.
+- Some images do not support the ARM64 architecture. You can add `--platform linux/amd64` to run (or build) an Intel image using emulation.
+
+   However, attempts to run Intel-based containers on Apple silicon machines under emulation can crash as qemu sometimes fails to run the container. In addition, filesystem change notification APIs (`inotify`) do not work under qemu emulation. Even when the containers do run correctly under emulation, they will be slower and use more memory than the native equivalent.
+
+   In summary, running Intel-based containers on Arm-based machines should be regarded as "best effort" only. We recommend running arm64 containers on Apple silicon machines whenever possible, and encouraging container authors to produce arm64, or multi-arch, versions of their containers. We expect this issue to become less common over time, as more and more images are rebuilt [supporting multiple architectures](https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/).
+- `ping` from inside a container to the Internet does not work as expected.  To test the network, we recommend using `curl` or `wget`. See [docker/for-mac#5322](https://github.com/docker/for-mac/issues/5322#issuecomment-809392861).
+- Users may occasionally experience data drop when a TCP stream is half-closed.
+<hr>
+</div>
+</div>
