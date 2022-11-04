@@ -85,12 +85,6 @@ To check, first run:
 $ docker run -it --rm alpine cat /proc/self/uid_map 
 ```
 
-Then:
-
-```
-cat /proc/self/uid_map 
-```
-
 The following output displays:
 
 ```
