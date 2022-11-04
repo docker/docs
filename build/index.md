@@ -85,10 +85,9 @@ pull, and run images seamlessly on different computer architectures:
 ### GitHub Actions
 
 Automate your image builds to run in GitHub actions using the official docker
-build actions:
+build actions.
 
-* [GitHub Action to build and push Docker images with Buildx](https://github.com/docker/build-push-action).
-* [GitHub Action to extract metadata from Git reference and GitHub events](https://github.com/docker/metadata-action/).
+[GitHub Actions](ci/github-actions/index.md){: .button .outline-btn }
 
 ## Customizing your builds
 
