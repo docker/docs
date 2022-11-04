@@ -1,5 +1,5 @@
 ---
-title: Packaging, distribution and API dependencies
+title: Packaging, distribution, and API dependencies
 description: Docker extension disctribution
 keywords: Docker, extensions, sdk, distribution
 ---
