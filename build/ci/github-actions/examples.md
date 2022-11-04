@@ -9,12 +9,10 @@ Docker GitHub Actions in your CI pipelines.
 
 ## Push to multi-registries
 
-The following workflow will connect you to Docker Hub and
-[GitHub Container Registry](https://github.com/docker/login-action#github-container-registry)
+The following workflow will connect you to Docker Hub and [GitHub Container Registry](https://github.com/docker/login-action#github-container-registry){: target="_blank" rel="noopener" class="_" }
 and push the image to both registries:
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -27,24 +25,30 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Login to GitHub Container Registry
+      -
+        name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -56,21 +60,16 @@ jobs:
             ghcr.io/user/app:latest
             ghcr.io/user/app:1.0.0
 ```
-
 {% endraw %}
 
 ## Manage tags and labels
 
-If you want an "automatic" tag management and
-[OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/master/annotations.md){:
-target="blank" rel="noopener"} for labels, you can do it in a dedicated setup
-step. The following workflow will use the
-[Docker Metadata Action](https://github.com/docker/metadata-action){:
-target="blank" rel="noopener"} to handle tags and labels based on GitHub Actions
-events and Git metadata:
+If you want an "automatic" tag management and [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/master/annotations.md){: target="_blank" rel="noopener" class="_" }
+for labels, you can do it in a dedicated setup step. The following workflow
+will use the [Docker Metadata Action](https://github.com/docker/metadata-action){: target="_blank" rel="noopener" class="_" }
+to handle tags and labels based on GitHub Actions events and Git metadata:
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -90,9 +89,11 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Docker meta
+      -
+        name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
         with:
@@ -109,24 +110,29 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Login to GHCR
+      -
+        name: Login to GHCR
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -134,7 +140,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
-
 {% endraw %}
 
 ## Multi-platform images
@@ -144,14 +149,12 @@ the `platforms` option, as described in the following example.
 
 > **Note**
 >
-> - For a list of available platforms, see the
->   [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:
->   target="blank" rel="noopener"} action.
-> - If you want support for more platforms, you can use QEMU with the
->   [Docker Setup QEMU](https://github.com/docker/setup-qemu-action) action.
+> - For a list of available platforms, see the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){: target="_blank" rel="noopener" class="_" }
+>   action.
+> - If you want support for more platforms, you can use QEMU with the [Docker Setup QEMU](https://github.com/docker/setup-qemu-action){: target="_blank" rel="noopener" class="_" }
+>   action.
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -164,18 +167,23 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -198,15 +206,12 @@ actions.
 
 ### Inline cache
 
-In most cases you want to use the
-[inline cache exporter](../../building/cache/backends/inline.md). However, note
-that the `inline` cache exporter only supports `min` cache mode. To use `max`
-cache mode, push the image and the cache separately using the registry cache
-exporter with the `cache-to` option, as shown in the
-[registry cache example](#registry-cache).
+In most cases you want to use the [inline cache exporter](../../building/cache/backends/inline.md).
+However, note that the `inline` cache exporter only supports `min` cache mode.
+To use `max` cache mode, push the image and the cache separately using the
+registry cache exporter with the `cache-to` option, as shown in the [registry cache example](#registry-cache).
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -219,16 +224,20 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -237,17 +246,14 @@ jobs:
           cache-from: type=registry,ref=user/app:latest
           cache-to: type=inline
 ```
-
 {% endraw %}
 
 ### Registry cache
 
 You can import/export cache from a cache manifest or (special) image
-configuration on the registry with the
-[registry cache exporter](../../building/cache/backends/registry.md).
+configuration on the registry with the [registry cache exporter](../../building/cache/backends/registry.md).
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -260,16 +266,20 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -278,31 +288,26 @@ jobs:
           cache-from: type=registry,ref=user/app:buildcache
           cache-to: type=registry,ref=user/app:buildcache,mode=max
 ```
-
 {% endraw %}
 
 ### GitHub cache
 
 #### Cache backend API
 
-<!-- prettier-ignore -->
 > **Warning**
 >
-> This cache exporter is experimental. Please provide feedback on
-> [BuildKit repository](https://github.com/moby/buildkit) if you experience any
-> issues.
+> This cache exporter is experimental. Please provide feedback on [BuildKit repository](https://github.com/moby/buildkit){: target="_blank" rel="noopener" class="_" }
+> if you experience any issues.
 {: .warning }
 
 The [GitHub Actions cache exporter](../../building/cache/backends/gha.md)
-backend uses the
-[GitHub Cache API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md)
+backend uses the [GitHub Cache API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md)
 to fetch and upload cache blobs. That's why you should only use this cache
 backend in a GitHub Action workflow, as the `url` (`$ACTIONS_CACHE_URL`) and
 `token` (`$ACTIONS_RUNTIME_TOKEN`) attributes only get populated in a workflow
 context.
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -315,16 +320,20 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -333,28 +342,22 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 ```
-
 {% endraw %}
 
 #### Local cache
 
-<!-- prettier-ignore -->
 > **Warning**
 >
-> At the moment, old cache entries aren't deleted, so the cache size
-> [keeps growing](https://github.com/docker/build-push-action/issues/252). The
-> The following example uses the `Move cache` step as a workaround (see
-> [moby/buildkit#1896](https://github.com/moby/buildkit/issues/1896) for more
-> info).
+> At the moment, old cache entries aren't deleted, so the cache size [keeps growing](https://github.com/docker/build-push-action/issues/252){:target="_blank" rel="noopener" class="_"}.
+> The following example uses the `Move cache` step as a workaround (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896){:target="_blank" rel="noopener" class="_"}
+> for more info).
 {: .warning }
 
-You can also leverage
-[GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
-using the [actions/cache](https://github.com/actions/cache) and
-[local cache exporter](../../building/cache/backends/local.md) with this action:
+You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
+using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../building/cache/backends/local.md)
+with this action:
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -367,23 +370,28 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Cache Docker layers
+      -
+        name: Cache Docker layers
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -391,7 +399,8 @@ jobs:
           tags: user/app:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-      - # Temp fix
+      -
+        # Temp fix
         # https://github.com/docker/build-push-action/issues/252
         # https://github.com/moby/buildkit/issues/1896
         name: Move cache
@@ -399,13 +408,11 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 ```
-
 {% endraw %}
 
 ## Secrets
 
-In the following example uses and exposes the
-[GITHUB_TOKEN secret](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret)
+In the following example uses and exposes the [`GITHUB_TOKEN` secret](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret){:target="_blank" rel="noopener" class="_"}
 as provided by GitHub in your workflow.
 
 First, create a `Dockerfile` that uses the secret:
@@ -421,7 +428,6 @@ In this example, the secret name is `github_token`. The following workflow
 exposes this secret using the `secrets` input:
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -434,13 +440,17 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build
+      -
+        name: Build
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -461,13 +471,11 @@ jobs:
 >   "MY_SECRET=./secret.txt"
 > ```
 
-If you're using
-[GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:
-target="blank" rel="noopener"} and need to handle multi-line value, you will
-need to place the key-value pair between quotes:
+If you're using [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target="_blank" rel="noopener" class="_"}
+and need to handle multi-line value, you will need to place the key-value pair
+between quotes:
 
 {% raw %}
-
 ```yaml
 secrets: |
   "MYSECRET=${{ secrets.GPG_KEY }}"
@@ -482,11 +490,10 @@ secrets: |
   ccc"
   "JSON_SECRET={""key1"":""value1"",""key2"":""value2""}"
 ```
-
 {% endraw %}
 
 | Key              | Value                               |
-| ---------------- | ----------------------------------- |
+|------------------|-------------------------------------|
 | `MYSECRET`       | `***********************`           |
 | `GIT_AUTH_TOKEN` | `abcdefghi,jklmno=0123456789`       |
 | `MYSECRET`       | `aaaaaaaa\nbbbbbbb\nccccccccc`      |
@@ -515,17 +522,21 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build
+      -
+        name: Build
         uses: docker/build-push-action@v3
         with:
           context: .
           load: true
           tags: myimage:latest
-      - name: Inspect
+      -
+        name: Inspect
         run: |
           docker image inspect myimage:latest
 ```
@@ -542,7 +553,6 @@ The following workflow implements several steps to achieve this:
 - Multi-platform build and push the image
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -559,27 +569,34 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and export to Docker
+      -
+        name: Build and export to Docker
         uses: docker/build-push-action@v3
         with:
           context: .
           load: true
           tags: ${{ env.TEST_TAG }}
-      - name: Test
+      -
+        name: Test
         run: |
           docker run --rm ${{ env.TEST_TAG }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -587,7 +604,6 @@ jobs:
           push: true
           tags: ${{ env.LATEST_TAG }}
 ```
-
 {% endraw %}
 
 > **Note**
@@ -599,9 +615,8 @@ jobs:
 
 ## Local registry
 
-For testing purposes you may need to create a
-[local registry](https://hub.docker.com/_/registry){: target="blank"
-rel="noopener" class=""} to push images into:
+For testing purposes you may need to create a [local registry](https://hub.docker.com/_/registry){: target="_blank" rel="noopener" class="_" }
+to push images into:
 
 ```yaml
 name: ci
@@ -620,21 +635,26 @@ jobs:
         ports:
           - 5000:5000
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           driver-opts: network=host
-      - name: Build and push to local registry
+      -
+        name: Build and push to local registry
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: localhost:5000/name/app:latest
-      - name: Inspect
+      -
+        name: Inspect
         run: |
           docker buildx imagetools inspect localhost:5000/name/app:latest
 ```
@@ -642,13 +662,10 @@ jobs:
 ## Share built image between jobs
 
 As each job is isolated in its own runner, you can't use your built image
-between jobs, except if you're using
-[self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners).
-However, you can
-[pass data between jobs](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts#passing-data-between-jobs-in-a-workflow)
-in a workflow using the
-[actions/upload-artifact](https://github.com/actions/upload-artifact) and
-[actions/download-artifact](https://github.com/actions/download-artifact)
+between jobs, except if you're using [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners){: target="_blank" rel="noopener" class="_" }.
+However, you can [pass data between jobs](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts#passing-data-between-jobs-in-a-workflow){: target="_blank" rel="noopener" class="_" }
+in a workflow using the [actions/upload-artifact](https://github.com/actions/upload-artifact){: target="_blank" rel="noopener" class="_" }
+and [actions/download-artifact](https://github.com/actions/download-artifact){: target="_blank" rel="noopener" class="_" }
 actions:
 
 ```yaml
@@ -663,17 +680,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build and export
+      -
+        name: Build and export
         uses: docker/build-push-action@v3
         with:
           context: .
           tags: myimage:latest
           outputs: type=docker,dest=/tmp/myimage.tar
-      - name: Upload artifact
+      -
+        name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: myimage
@@ -683,14 +704,17 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Download artifact
+      -
+        name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: myimage
           path: /tmp
-      - name: Load image
+      -
+        name: Load image
         run: |
           docker load --input /tmp/myimage.tar
           docker image ls -a
@@ -698,8 +722,7 @@ jobs:
 
 ## Named contexts
 
-You can define
-[additional build contexts](../../../engine/reference/commandline/buildx_build.md#build-context),
+You can define [additional build contexts](../../../engine/reference/commandline/buildx_build.md#build-context),
 and access them in your Dockerfile with `FROM name` or `--from=name`. When
 Dockerfile defines a stage with the same name it's overwritten.
 
@@ -728,11 +751,14 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build
+      -
+        name: Build
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -743,10 +769,9 @@ jobs:
 
 ### Use image in subsequent steps
 
-By default, the
-[Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:
-target="blank" rel="noopener"} action uses `docker-container` as a build driver,
-so built Docker images aren't loaded automatically.
+By default, the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){: target="_blank" rel="noopener" class="_" }
+action uses `docker-container` as a build driver, so built Docker images aren't
+loaded automatically.
 
 With named contexts you can reuse the built image:
 
@@ -768,17 +793,21 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build base image
+      -
+        name: Build base image
         uses: docker/build-push-action@v3
         with:
           context: base
           load: true
           tags: my-base-image:latest
-      - name: Build
+      -
+        name: Build
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -806,19 +835,17 @@ intrinsically linked to GitHub Actions: you can only use strings in the input
 fields:
 
 | Name              | Type   | Description                                                                                                                                                                                                                                                             |
-| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `name`            | String | [Name of the node](../../../engine/reference/commandline/buildx_create.md#node). If empty, it's the name of the builder it belongs to, with an index number suffix. This is useful to set it if you want to modify/remove a node in an underlying step of you workflow. |
 | `endpoint`        | String | [Docker context or endpoint](../../../engine/reference/commandline/buildx_create.md#description) of the node to add to the builder                                                                                                                                      |
 | `driver-opts`     | List   | List of additional [driver-specific options](../../../engine/reference/commandline/buildx_create.md#driver-opt)                                                                                                                                                         |
 | `buildkitd-flags` | String | [Flags for buildkitd](../../../engine/reference/commandline/buildx_create.md#buildkitd-flags) daemon                                                                                                                                                                    |
 | `platforms`       | String | Fixed [platforms](../../../engine/reference/commandline/buildx_create.md#platform) for the node. If not empty, values take priority over the detected ones.                                                                                                             |
 
-Here is an example using remote nodes with the
-[`remote` driver](../../building/drivers/remote.md) and
-[TLS authentication](#tls-authentication):
+Here is an example using remote nodes with the [`remote` driver](../../building/drivers/remote.md)
+and [TLS authentication](#tls-authentication):
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -829,7 +856,8 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           driver: remote
@@ -850,7 +878,6 @@ jobs:
           BUILDER_NODE_2_AUTH_TLS_CERT: ${{ secrets.LINUXONE_CERT }}
           BUILDER_NODE_2_AUTH_TLS_KEY: ${{ secrets.LINUXONE_KEY }}
 ```
-
 {% endraw %}
 
 ### Authentication for remote builders
@@ -860,12 +887,10 @@ using SSH or TLS.
 
 #### SSH authentication
 
-To be able to connect to an SSH endpoint using the
-[`docker-container` driver](../../building/drivers/docker-container.md), you
-have to set up the SSH private key and configuration on the GitHub Runner:
+To be able to connect to an SSH endpoint using the [`docker-container` driver](../../building/drivers/docker-container.md),
+you have to set up the SSH private key and configuration on the GitHub Runner:
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -876,24 +901,24 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up SSH
+      -
+        name: Set up SSH
         uses: MrSquaare/ssh-setup-action@523473d91581ccbf89565e12b40faba93f2708bd # v1.1.0
         with:
           host: graviton2
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           private-key-name: aws_graviton2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           endpoint: ssh://me@graviton2
 ```
-
 {% endraw %}
 
 #### TLS authentication
 
-You can also
-[set up a remote BuildKit instance](../../building/drivers/remote.md#example-remote-buildkit-in-docker-container)
+You can also [set up a remote BuildKit instance](../../building/drivers/remote.md#example-remote-buildkit-in-docker-container)
 using the remote driver. To ease the integration in your workflow, you can use
 an environment variables that sets up authentication using the BuildKit client
 certificates for the `tcp://`:
@@ -905,7 +930,6 @@ certificates for the `tcp://`:
 The `<idx>` placeholder is the position of the node in the list of nodes.
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -916,7 +940,8 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           driver: remote
@@ -926,14 +951,12 @@ jobs:
           BUILDER_NODE_0_AUTH_TLS_CERT: ${{ secrets.GRAVITON2_CERT }}
           BUILDER_NODE_0_AUTH_TLS_KEY: ${{ secrets.GRAVITON2_KEY }}
 ```
-
 {% endraw %}
 
 ### Daemon configuration
 
 You can provide a [BuildKit configuration](../../buildkit/toml-configuration.md)
-to your builder if you're using the
-[`docker-container` driver](../../building/drivers/docker-container.md)
+to your builder if you're using the [`docker-container` driver](../../building/drivers/docker-container.md)
 (default) with the `config` or `config-inline` inputs:
 
 ### Registry mirror
@@ -951,9 +974,11 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           config-inline: |
@@ -961,8 +986,7 @@ jobs:
               mirrors = ["mirror.gcr.io"]
 ```
 
-For more information about using a registry mirror, see
-[Registry mirror](../../buildkit/configure.md#registry-mirror).
+For more information about using a registry mirror, see [Registry mirror](../../buildkit/configure.md#registry-mirror).
 
 #### Max parallelism
 
@@ -989,9 +1013,11 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           config: .github/buildkitd.toml
@@ -1014,13 +1040,16 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           driver: kubernetes
-      - name: Build
+      -
+        name: Build
         run: |
           buildx build .
 ```
@@ -1036,12 +1065,10 @@ some packages may be particularly resource-intensive to build and require more
 compute. Or they require a builder equipped with a particular capability or
 hardware.
 
-For more information about remote builder, see
-[`remote` driver](../../building/drivers/remote.md) and the
-[append builder nodes example](#append-additional-nodes-to-the-builder).
+For more information about remote builder, see [`remote` driver](../../building/drivers/remote.md)
+and the [append builder nodes example](#append-additional-nodes-to-the-builder).
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -1054,40 +1081,44 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - uses: docker/setup-buildx-action@v2
+      -
+        uses: docker/setup-buildx-action@v2
         id: builder1
-      - uses: docker/setup-buildx-action@v2
+      -
+        uses: docker/setup-buildx-action@v2
         id: builder2
-      - name: Builder 1 name
+      -
+        name: Builder 1 name
         run: echo ${{ steps.builder1.outputs.name }}
-      - name: Builder 2 name
+      -
+        name: Builder 2 name
         run: echo ${{ steps.builder2.outputs.name }}
-      - name: Build against builder1
+      -
+        name: Build against builder1
         uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.builder1.outputs.name }}
           context: .
           target: mytarget1
-      - name: Build against builder2
+      -
+        name: Build against builder2
         uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.builder2.outputs.name }}
           context: .
           target: mytarget2
 ```
-
 {% endraw %}
 
 ## Copy images between registries
 
 [Multi-platform images](../../building/multi-platform.md) built using Buildx can
-be copied from one registry to another using the
-[`buildx imagetools create` command](../../../engine/reference/commandline/buildx_imagetools_create.md):
+be copied from one registry to another using the [`buildx imagetools create` command](../../../engine/reference/commandline/buildx_imagetools_create.md):
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -1100,24 +1131,30 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Login to GitHub Container Registry
+      -
+        name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -1126,25 +1163,23 @@ jobs:
           tags: |
             user/app:latest
             user/app:1.0.0
-      - name: Push image to GHCR
+      -
+        name: Push image to GHCR
         run: |
           docker buildx imagetools create \
             --tag ghcr.io/user/app:latest \
             --tag ghcr.io/user/app:1.0.0 \
             user/app:latest
 ```
-
 {% endraw %}
 
 ## Update Docker Hub repository description
 
 You can update the Docker Hub repository description using a third party action
-called
-[Docker Hub Description](https://github.com/peter-evans/dockerhub-description)
+called [Docker Hub Description](https://github.com/peter-evans/dockerhub-description){: target="_blank" rel="noopener" class="_" }
 with this action:
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -1157,29 +1192,34 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Set up QEMU
+      -
+        name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
           tags: user/app:latest
-      - name: Update repo description
+      -
+        name: Update repo description
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: user/app
 ```
-
 {% endraw %}
