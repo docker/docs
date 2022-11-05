@@ -51,6 +51,8 @@ To ensure that Docker ECS integration is allowed to manage resources for your Co
 * ec2:CreateSecurityGroup
 * ec2:CreateTags
 * ec2:DeleteSecurityGroup
+* ec2:DescribeAccountAttributes
+* ec2:DescribeInternetGateways
 * ec2:DescribeRouteTables
 * ec2:DescribeSecurityGroups
 * ec2:DescribeSubnets
@@ -71,6 +73,7 @@ To ensure that Docker ECS integration is allowed to manage resources for your Co
 * elasticloadbalancing:*
 * iam:AttachRolePolicy
 * iam:CreateRole
+* iam:CreateServiceLinkedRole
 * iam:DeleteRole
 * iam:DetachRolePolicy
 * iam:PassRole
