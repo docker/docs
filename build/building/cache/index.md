@@ -148,7 +148,7 @@ COPY . /src
 ```
 
 You can also create a
-[`.dockerignore` file](https://docs.docker.com/engine/reference/builder/#dockerignore-file),
+[`.dockerignore` file](../../../engine/reference/builder.md#dockerignore-file),
 and use that to specify which files and directories to exclude from the build
 context.
 
