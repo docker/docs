@@ -1541,13 +1541,13 @@ manuals:
                   title: Amazon S3
         - sectiontitle: Exporters
           section:
-          - path: /build/building/exporters
+          - path: /build/building/exporters/
             title: Overview
-          - path: /build/building/image-registry/
+          - path: /build/building/exporters/image-registry/
             title: Image and registry exporters
-          - path: /build/building/local-tar/
+          - path: /build/building/exporters/local-tar/
             title: Local and tar exporters
-          - path: /build/building/oci-docker/
+          - path: /build/building/exporters/oci-docker/
             title: OCI and Docker exporters
         - path: /build/building/multi-stage/
           title: Multi-stage builds
