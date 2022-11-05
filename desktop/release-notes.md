@@ -97,7 +97,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - [Docker Scan v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0)
 - [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879){: target="_blank" rel="noopener"}, [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880){: target="_blank" rel="noopener"} and  [CVE-2022-41715](https://www.cve.org/CVERecord?id= CVE-2022-41715){: target="_blank" rel="noopener"}
-- Updated Docker Engine and Docker CLI to [v20.10.20](https://docs.docker.com/engine/release-notes/#201020),
+- Updated Docker Engine and Docker CLI to [v20.10.20](../engine/release-notes/index.md#201020),
   which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"},
   and updated handling of `image:tag@digest` image references, as well as a fix for [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109).
 - [Docker Credential Helpers v0.7.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.7.0){: target="blank" rel="noopener" class=""}
