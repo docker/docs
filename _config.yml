@@ -29,12 +29,9 @@ liquid:
   error_mode: strict
 
 exclude:
+  - _deploy
   - _releaser
-  - _samples
-  - _scripts
-  - datacenter
   - docker-bake.hcl
-  - ee
   - LICENSE
   - Makefile
   - README.md

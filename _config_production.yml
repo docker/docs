@@ -48,24 +48,6 @@ defaults:
   # Hide Enterprise content from sitemap. These directories still contains stubs
   # that are needed to redirect old URLs
   - scope:
-      path: "datacenter"
-    values:
-      sitemap: false
-      title: Docker Enterprise moved to Mirantis
-  - scope:
       path: "desktop/enterprise"
-    values:
-      sitemap: false
-  - scope:
-      path: "ee"
-    values:
-      sitemap: false
-      title: Docker Enterprise moved to Mirantis
-  - scope:
-      path: "machine"
-    values:
-      sitemap: false
-  - scope:
-      path: "samples/library"
     values:
       sitemap: false
