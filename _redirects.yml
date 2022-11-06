@@ -76,6 +76,57 @@
   - /toolbox/toolbox_install_mac/
   - /toolbox/toolbox_install_windows/
 
+# Use the `/go/` URL prefix to provide "vanity" URLs linking to the
+# documentation. These URLs can be used in (for example) the `docker` CLI to
+# provide a short, permanent link to refer to a topic in the documentation.
+# For example, the docker CLI can output https://docs.docker.com/go/some-topic
+# in its help output, which can be redirected to elsewhere in the documentation.
+"/docker-hub/access-tokens/":
+  - /go/access-tokens/
+"/desktop/mac/apple-silicon/":
+  - /go/apple-silicon/
+"/engine/security/#docker-daemon-attack-surface":
+  # Details about the "Docker Daemon attack surface". This redirect is currently
+  # used in warnings printed by the Docker Engine, and in the installation script
+  # at "get.docker.com"
+  - /go/attack-surface/
+"/build/buildkit/#getting-started":
+  - /go/buildkit/
+"/build/buildx/install/":
+  # Instructions on installing Buildx. Redirect used in Docker CLI.
+  - /go/buildx/
+"/engine/reference/commandline/compose_build/":
+  - /go/compose-native-build/
+"/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user":
+  # Details about how to give "non-root" users access to a privileged Docker
+  # Daemon/ This redirect is currently in the installation script at "get.docker.com"
+  - /go/daemon-access/
+"/engine/deprecated/#deprecated-engine-features-1":
+  - /go/deprecated/
+"/engine/reference/commandline/cli/#experimental-features":
+  - /go/experimental/
+"/config/formatting/":
+  # Instructions on using Go templates to format CLI output with --format
+  - /go/formatting/
+"/?utm_source=docker&utm_medium=inproductad&utm_campaign=20-11nurturecli_docs":
+  - /go/guides/
+"/desktop/get-started/#credentials-management-for-linux-users":
+  - /go/linux-credentials/
+"/desktop/use-desktop/pause/":
+  - /go/mac-desktop-pause/
+  - /go/win-desktop-pause/
+"/engine/security/rootless/":
+  # Instructions on running docker in rootless mode. This redirect is currently
+  # used in the installation script at "get.docker.com"
+  - /go/rootless/
+"/storage/storagedriver/select-storage-driver/":
+  - /go/storage-driver/
+"/docker-hub/vulnerability-scanning/":
+  - /go/tip-scanning/
+"/desktop/windows/wsl/":
+  # Link used by Docker Desktop to refer users on how to activate WSL 2
+  - /go/wsl2/
+
 # samples
 "https://hub.docker.com/_/adminer/":
   - /samples/adminer
