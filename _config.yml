@@ -28,13 +28,13 @@ kramdown:
 liquid:
   error_mode: strict
 
+# Exclude directories and/or files from the conversion. These exclusions are
+# relative to the site's source directory and cannot be outside the source
+# directory.
 exclude:
+  - _deploy
   - _releaser
-  - _samples
-  - _scripts
-  - datacenter
   - docker-bake.hcl
-  - ee
   - LICENSE
   - Makefile
   - README.md
@@ -92,13 +92,10 @@ sass:
   sass_dir: _scss
   style: expanded
 
-# Set default options / metadata for some paths.
-#
 # Setting options here prevents having to repeat the same option in front-matter
 # on every page.
+# https://jekyllrb.com/docs/configuration/front-matter-defaults/
 defaults:
-  # Default one for development builds (local and PR previews)
-  # sitemap is disabled here but not for production in _config_production.yml
   - scope:
       path: ""
       type: "pages"
@@ -108,6 +105,10 @@ defaults:
       toc_max: 4
 
   # Exclude from sitemap
+  - scope:
+      path: "desktop/enterprise"
+    values:
+      sitemap: false
   - scope:
       path: "assets/**"
     values:
@@ -144,6 +145,7 @@ defaults:
 
 # Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
 # - repo is the GitHub repository to fetch from
+# - default_branch used to generate edit_url link
 # - ref the Git reference
 # - paths is a list to the resources within the remote repository
 #   - dest is the destination path within the working tree
