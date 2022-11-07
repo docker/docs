@@ -70,7 +70,7 @@ If you want to make your extension available to all Docker Desktop users, you ca
 
 To remove the extension, run:
 
-```
+```console
 $ docker extension rm <name-of-your-extension>
 ```
 
