@@ -200,6 +200,7 @@
 "https://hub.docker.com/_/couchbase/":
   - /samples/couchbase
   - /samples/library/couchbase
+  - /samples/couchdb_data_volumes
 "https://hub.docker.com/_/couchdb/":
   - /samples/couchdb
   - /samples/library/couchdb
