@@ -38,8 +38,8 @@ During UI development, it’s helpful to use hot reloading to test your changes 
 Assuming your app runs on the default port, start your UI app and then run:
 
 ```console
-cd ui
-npm start
+$ cd ui
+$ npm start
 ```
 
 This starts a development server that listens on port 3000.
