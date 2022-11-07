@@ -54,7 +54,7 @@ The `docker build` generates an image with name `john/my-extension`.
 
 To install the extension in Docker Desktop, run:
 
-```
+```console
 $ docker extension install <name-of-your-extension>
 ```
 
