@@ -13,7 +13,7 @@ redirect_from:
 
 >Important
 >
->Be aware that Docker Desktop on Linux runs a Virtual Machine (VM), creates and uses a custom docker context `desktop-linux` on startup. 
+>Docker Desktop on Linux runs a Virtual Machine (VM) so creates and uses a custom docker context `desktop-linux` on startup. 
 >
 >This means images and containers deployed on the Linux Docker Engine (before installation) are not available in Docker Desktop for Linux. 
 >
