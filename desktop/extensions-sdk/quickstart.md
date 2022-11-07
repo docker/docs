@@ -45,7 +45,7 @@ $ docker build -t <name-of-your-extension> .
 
 `docker build` builds your extension and also generates an image which is named after your chosen hub repository. For instance, if you typed `john/my-extension` as the answer to the following question:
 
-```
+```console
 ? Hub repository (eg. namespace/repository on hub): john/my-extension`
 ```
 The `docker build` generates an image with name `john/my-extension`.
