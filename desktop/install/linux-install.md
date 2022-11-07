@@ -11,6 +11,15 @@ redirect_from:
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
 
+>Important
+>
+>Docker Desktop on Linux runs a Virtual Machine (VM) so creates and uses a custom docker context `desktop-linux` on startup. 
+>
+>This means images and containers deployed on the Linux Docker Engine (before installation) are not available in Docker Desktop for Linux. 
+>
+>For more information see [What is the difference between Docker Desktop for Linux and Docker Engine](../faqs/linuxfaqs.md#what-is-the-difference-between-docker-desktop-for-linux-and-docker-engine). 
+{: .important} 
+
  This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
 ## System requirements
