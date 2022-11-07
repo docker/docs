@@ -1,6 +1,6 @@
 ---
 description: Networking on Docker Desktop
-keywords: networking, docker desktop
+keywords: networking, docker desktop, proxy, vpn, Linux, Mac, Windows
 title: Explore networking features
 redirect_from:
 - /desktop/linux/networking/

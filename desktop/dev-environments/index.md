@@ -1,6 +1,6 @@
 ---
 description: Dev Environments
-keywords: Dev Environments, share, collaborate, local
+keywords: Dev Environments, share, local, Compose
 title: Overview
 ---
 > **Beta**
@@ -26,7 +26,7 @@ Dev Environments is powered by [Docker Compose](/compose/). This allows Dev Envi
 
 Every dev environment you want to run needs a `compose-dev.yaml` file which configures your application's services and lives in your project directory. You don't need to be an expert in Docker Compose or write a `compose-dev.yaml` file from scratch as Dev Environments creates a starter `compose-dev.yaml` files based on the main language in your project. 
 
-You can also use the many [sample dev environments](https://github.com/docker/awesome-compose) as a starting point for how to integrate different services. Alternatively, see [Set up a dev environment](set-up.md) for more information. 
+You can also use the many [sample dev environments](https://github.com/docker/awesome-compose){:target="_blank" rel="noopener" class="_"} as a starting point for how to integrate different services. Alternatively, see [Set up a dev environment](set-up.md) for more information. 
 
 ## What's next?
 

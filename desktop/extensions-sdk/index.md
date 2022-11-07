@@ -46,11 +46,11 @@ This build section provides sample folders with ready-to-go examples that walk y
 
 >Note
 >
->Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
+>Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
 
-If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service) example.
+If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service){:target="_blank" rel="noopener" class="_"} example.
 
-For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples)
+For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}.
 
 ### Part two: Publish and distribute your extension
 
@@ -58,7 +58,7 @@ Docker Desktop displays published extensions in the Extensions Marketplace. The 
 
 All extensions submitted to the Extension Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using Extensions and allows for Extension developers to get feedback on what will improve their Extensions experience.
 
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
+If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/){:target="_blank" rel="noopener" class="_"}. We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
 
 ## What’s next?
 If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md).

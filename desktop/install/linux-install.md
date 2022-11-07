@@ -1,7 +1,7 @@
 ---
 description: How to install Docker Desktop on Linux
 keywords: linux, desktop, docker desktop, docker desktop for linux, dd4l, install, system requirements
-title: Install Docker Desktop on Linux
+title: Install on Linux
 redirect_from:
 - /desktop/linux/install/
 ---
@@ -22,7 +22,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version.
 - systemd init system.
 - Gnome, KDE, or MATE Desktop environment.
-  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
+  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/){:target="_blank" rel="noopener" class="_"}.
 - At least 4 GB of RAM.
 - Enable configuring ID mapping in user namespaces, see [File sharing](../faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
 
@@ -58,7 +58,7 @@ Docker supports Docker Desktop on the current LTS release of the aforementioned 
 ### KVM virtualization support
 
 
-Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org).
+Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org){:target="_blank" rel="noopener" class="_"}.
 
 The `kvm` module should load automatically if the host has virtualization support. To load the module manually, run:
 
@@ -134,7 +134,7 @@ Log out and log back in so that your group membership is re-evaluated.
     > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
     {: .important}
 
-    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
+    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
 
 
 ## Where to go next

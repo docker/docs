@@ -1,6 +1,6 @@
 ---
 description: Dev Environments
-keywords: Dev Environments, share, collaborate, local, share
+keywords: Dev Environments, share, Docker Desktop
 title: Distribute your dev environment
 ---
 

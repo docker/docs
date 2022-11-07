@@ -1,6 +1,6 @@
 ---
 description: Troubleshooting, logs, and known issues
-keywords: linux, mac, windows, troubleshooting, logs, issues
+keywords: Linux, Mac, Windows, troubleshooting, logs, issues, Docker Desktop
 title: Overview
 redirect_from:
 - /desktop/linux/troubleshoot/
@@ -14,7 +14,7 @@ redirect_from:
 ---
 
 {% include upgrade-cta.html
-  body="Did you know that Docker Desktop offers support for developers on a paid Docker subscription (Pro, Team, or Business)? Upgrade now to benefit from Docker Support. Click [here](../../support/index.md) to learn more."
+  body="Docker Desktop offers support for developers on a paid Docker subscription (Pro, Team, or Business). Upgrade now to benefit from Docker Support. For more information, see [Support](../../support/index.md)."
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 
@@ -183,9 +183,9 @@ $ <tool location> check
 The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
 You can then create and issue on GitHub:
-- [For Linux](https://github.com/docker/desktop-linux/issues)
-- [For Mac](https://github.com/docker/for-mac/issues)
-- [For Windows](https://github.com/docker/for-win/issues)
+- [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
+- [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
+- [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
 
 ## Check the logs
 

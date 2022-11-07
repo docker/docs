@@ -24,7 +24,7 @@ To publish the extension you need to upload the Docker image to [DockerHub](http
     > 
     > See [distribution and new releases](DISTRIBUTION.md#distribution-and-new-releases) for more information.
     > 
-    > See [semver.org](https://semver.org/) to learn more about semantic versioning.
+    > See [semver.org](https://semver.org/){:target="_blank" rel="noopener" class="_"} to learn more about semantic versioning.
 
 2. Push the image to Docker Hub:
 
