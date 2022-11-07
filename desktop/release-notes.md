@@ -24,13 +24,95 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## Docker Desktop 4.14
+
+2022-11-10
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### Upgrades
+
+- [Docker Engine v20.10.21](https://docs.docker.com/engine/release-notes/#201021),
+  which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="\_blank" rel="noopener"},
+  and updated handling of `image:tag@digest` image references.
+- [Docker Compose v2.12.2](https://github.com/docker/compose/releases/tag/v2.12.2)
+- [Containerd v1.6.9](https://github.com/containerd/containerd/releases/tag/v1.6.9)
+- [Go 1.19.3](https://github.com/golang/go/releases/tag/go1.19.3)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Docker Desktop now requires an internal network subnet of size /24. If you were previously using a /28, it will be automatically expanded to /24. If you experience networking issues, check to see if you have a clash between the Docker subnet and your infrastructure. Fixes [docker/for-win#13025](https://github.com/docker/for-win/issues/13025)
+- Fixes an issue that prevents users from creating Dev Environments when the Git URL has upper case characters
+- Fix error `vpnkit.exe is not running` reported in diagnostics
+- Revert qemu to 6.2.0 to fix errors like `PR_SET_CHILD_SUBREAPER is unavailable` when running emulated amd64 code.
+- Enabled [contextIsolation](https://www.electronjs.org/docs/latest/tutorial/context-isolation) and [sandbox](https://www.electronjs.org/docs/latest/tutorial/sandbox) mode inside Extensions. Now Extensions run in a separate context and this limits the harm that malicious code can cause by limiting access to most system resources.
+- Included `unpigz` to allow parallel decompression of pulled images.
+- Fixed issues related to performing action on selected containers (https://github.com/docker/for-win/issues/13005)
+- Adds the possibility of displaying timestamps for the container / project view.
+- Fix a possible segfault when interrupting `docker pull` with Control+C
+- Increase the default DHCP lease time to avoid the VM's network glitching and dropping connections every 2 hours
+- Remove infinite spinner on containers list (https://github.com/docker/for-mac/issues/6486)
+- Fixed bug showing incorrect values on used space in Settings
+- Fixed kubernetes not starting with the containerd integration
+- Fixed `kind` not starting with the containerd integration
+- Fixed dev environments not working with the containerd integration
+- Implemented `docker diff` in the containerd integration
+- Implemented `docker run —-platform` in the containerd integration
+- Fixed insecure registries not working with the containerd integration
+
+#### For Mac
+
+- Promoted Virtualization framework to default hypervisor for macOS >= 12.5.
+- Fix a startup failure for users of virtualization framework
+- Add back the `/var/run/docker.sock` on Mac by default, to increase compatibility with tooling like `tilt` and `docker-py.`
+- Fixes an issue preventing creation of Dev Environments on new Mac installs (error "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?").
+
+#### For Windows
+
+- Re-add `DockerCli.exe -SharedDrives`. Fixes [docker/for-win#5625](https://github.com/docker/for-win#5625).
+- Allow Docker to function on machines where powershell is disabled.
+- Fixed an issue where Compose v2 was not always enabled by default on Windows.
+- Docker Desktop now deletes the `C:\Program Files\Docker` folder at uninstall
+
 ## Docker Desktop 4.13.1
 
 2022-10-31
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/90346/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/90346/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/90346/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 11bb799f85668f368e3071ac17067ebbe575349d1ccfb7c28a5dc1f872ced54e</li>
+      <li><b>Mac Intel:</b> SHA-256 9147ca38d46c59a758ac53560814c91c4deda9b0c4c63adfa3df76f37bacbf00</li>
+      <li><b>Mac Arm:</b> SHA-256 21a2bd82ade4b4776d3a4c28524e114733f172e9cd4f1da2193487db217c319f</li>
+      <li><b>Linux DEB:</b> SHA-256 1be90be14b53bc555d3bc16e4b9454d9dff0286b90c4b864cfdbb2e0cdbd2a56</li>
+      <li><b>Linux RPM:</b> SHA-256 49516e246d61d2f8da6753408e3c42c5a71d06de155aaea584135e34dde3af33</li>
+      <li><b>Linux Arch:</b> SHA-256 7fb7ef0fdcb762df2298dcd2578d3c749cccd554e3c652ba7a4648ce815ca140</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Upgrades
 
