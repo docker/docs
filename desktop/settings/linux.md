@@ -1,7 +1,7 @@
 ---
 description: Docker Desktop settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Linux
-title: Change Docker Desktop settings on Linux
+title: Change on Linux
 ---
 
 This page provides information on how to configure and manage your Docker Desktop settings.
@@ -132,7 +132,7 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 {% include beta.md %}
 
-From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/).
+From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"}.
 
 On the **Beta features** tab, you also have the option to allow version 4.13 feature flags, which are product features Docker is currently experimenting with. This is switched on by default. 
 

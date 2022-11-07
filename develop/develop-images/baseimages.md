@@ -78,8 +78,8 @@ image using this `docker build` command:
 $ docker build --tag hello .
 ```
 
-Don't forget the `.` character at the end, which sets the build context to the
-current directory.
+Don't forget the `.` character at the end, which sets the [build context](../../build/building/context.md)
+to the current directory.
 
 > **Note**: Because Docker Desktop for Mac and Docker Desktop for Windows use a Linux VM,
 > you need a Linux binary, rather than a Mac or Windows binary.

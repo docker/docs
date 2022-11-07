@@ -1,6 +1,6 @@
 ---
 description: Docker Dashboard
-keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
+keywords: Docker Dashboard, manage, containers, gui, dashboard, volumes, user manual
 title: Explore Volumes
 ---
 
@@ -27,7 +27,7 @@ To explore the details of a specific volume, select a volume from the list. This
 
 The **In Use** tab displays the name of the container using the volume, the image name, the port number used by the container, and the target. A target is a path inside a container that gives access to the files in the volume.
 
-The **Data** tab displays the files and folders in the volume and the file size. To save a file or a folder, hover over the file or folder and click on the more options menu. Select **Save As** and then specify a location to download the file.
+The **Data** tab displays the files and folders in the volume and the file size. To save a file or a folder, hover over the file or folder and select on the more options menu. Select **Save As** and then specify a location to download the file.
 
 To delete a file or a folder from the volume, select **Remove** from the **More options** menu.
 
@@ -35,4 +35,4 @@ To delete a file or a folder from the volume, select **Remove** from the **More 
 
 Removing a volume deletes the volume and all its data. 
 
-To remove a volume, hover over the volume and then click the **Delete** icon. Alternatively, select the volume from the list and then click the **Delete** button.
+To remove a volume, hover over the volume and then select the **Delete** icon. Alternatively, select the volume from the list and then select the **Delete** button.

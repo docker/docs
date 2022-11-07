@@ -227,7 +227,7 @@ Bash has [built-in support for
 completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1){:target="_blank"
 class="_"} To activate completion for Docker commands, these files need to be
 copied or symlinked to your `bash_completion.d/` directory. For example, if you
-installed bash via [Homebrew](https://brew.sh):
+installed bash via [Homebrew](https://brew.sh){:target="_blank" rel="noopener" class="_"}:
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc

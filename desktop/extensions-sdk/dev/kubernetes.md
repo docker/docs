@@ -6,7 +6,7 @@ keywords: Docker, Extensions, sdk, Kubernetes
 
 Currently, the Extensions SDK does not provide any API methods to directly interact with the Docker Desktop managed Kubernetes cluster or any other created using other tools such as KinD. However, this page provides a way for you to use other SDK APIs to interact indirectly with a Kubernetes cluster from your Docker extension.
 
-To request an API that directly interacts with Docker Desktop-managed Kubernetes, you can upvote [this issue](https://github.com/docker/extensions-sdk/issues/181) in our GitHub repository.
+To request an API that directly interacts with Docker Desktop-managed Kubernetes, you can upvote [this issue](https://github.com/docker/extensions-sdk/issues/181){:target="_blank" rel="noopener" class="_"} in our GitHub repository.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ To find out how to ship the `kubectl` command line tool for multiple platforms a
 
 ## Examples
 
-The code snippets below have been put together in the [Kubernetes Sample Extension](https://github.com/docker/extensions-sdk/tree/main/samples/kubernetes-sample-extension). It shows how to interact with a Kubernetes cluster by shipping the `kubectl` commandline tool.
+The code snippets below have been put together in the [Kubernetes Sample Extension](https://github.com/docker/extensions-sdk/tree/main/samples/kubernetes-sample-extension){:target="_blank" rel="noopener" class="_"}. It shows how to interact with a Kubernetes cluster by shipping the `kubectl` commandline tool.
 
 ### Check the Kubernetes API server is reachable
 

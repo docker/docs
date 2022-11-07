@@ -1,6 +1,6 @@
 ---
 description: Common workarounds
-keywords: linux, mac, windows, troubleshooting, workarounds
+keywords: linux, mac, windows, troubleshooting, workarounds, Docker Desktop
 title: Workarounds for common problems
 ---
 

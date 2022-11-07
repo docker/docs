@@ -5,9 +5,9 @@ keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
 
-Wasm (short for WebAssembly) is a faster, lighter alternative to the Linux & Windows containers you’re using in Docker today (with [some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/)). 
+Wasm (short for WebAssembly) is a faster, lighter alternative to the Linux & Windows containers you’re using in Docker today (with [some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/){:target="_blank" rel="noopener" class="_"}). 
 
-This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker. To learn more about the launch and how the preview works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/).
+This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker. To learn more about the launch and how the preview works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/){:target="_blank" rel="noopener" class="_"}.
 
 > **Beta**
 >
@@ -40,7 +40,7 @@ Download the technical preview build of Docker Desktop:
 
 ### Running a Wasm application with `docker run`
 
-```
+```console
 $ docker run -dp 8080:8080 \
   --name=wasm-example \
   --runtime=io.containerd.wasmedge.v1 \
@@ -69,8 +69,8 @@ services:
 
 Start the application using the normal Docker Compose commands:
 
-```
-docker compose up
+```console
+$ docker compose up
 ```
 
 ### Running a multi-service application with Wasm
@@ -81,7 +81,7 @@ In the following example, the Wasm application leverages a MariaDB database runn
 
 1. Clone the repository.
 
-    ```
+    ```console
     $ git clone https://github.com/second-state/microservice-rust-mysql.git
     Cloning into 'microservice-rust-mysql'...
     remote: Enumerating objects: 75, done.
@@ -94,7 +94,7 @@ In the following example, the Wasm application leverages a MariaDB database runn
 
 2. Navigate into the cloned project and start the project using Docker Compose.
 
-    ```
+    ```console
     $ cd microservice-rust-mysql
     $ docker compose up
     [+] Running 0/1
@@ -107,7 +107,7 @@ In the following example, the Wasm application leverages a MariaDB database runn
 
     In another terminal, we can see the Wasm image that was created.
 
-    ```
+    ```console
     $ docker images
     REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
     server       latest    2c798ddecfa1   2 minutes ago   3MB
@@ -115,7 +115,7 @@ In the following example, the Wasm application leverages a MariaDB database runn
 
     Inspecting the image shows the image has a `wasi/wasm32` platform. A combination of Os and Architecture.
 
-    ```
+    ```console
     $ docker image inspect server | grep -A 3 "Architecture"
             "Architecture": "wasm32",
             "Os": "wasi",
@@ -134,7 +134,7 @@ In the following example, the Wasm application leverages a MariaDB database runn
 
 2. In a separate stage in your `Dockerfile`, extract the module and set it as the `ENTRYPOINT`.
 
-    ```
+    ```dockerfile
     FROM scratch
     COPY --from=build /build/hello_world.wasm /hello_world.wasm
     ENTRYPOINT [ "hello_world.wasm" ]
@@ -142,7 +142,7 @@ In the following example, the Wasm application leverages a MariaDB database runn
 
 3. Build and push the image specifying the `wasi/wasm32` architecture. Buildx makes this easy to do in a single command.
 
-    ```
+    ```console
     $ docker buildx build --platform wasi/wasm32 -t username/hello-world .
     ...
     => exporting to image                                                                             0.0s
