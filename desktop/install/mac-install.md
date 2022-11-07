@@ -1,7 +1,7 @@
 ---
 description: How to install Docker Desktop on Mac
-keywords: mac, install, download, run, docker, local
-title: Install Docker Desktop on Mac
+keywords: mac, install, download, Docker Desktop, intel, apple silicon,
+title: Install on Mac
 redirect_from:
 - /desktop/mac/install/
 - /docker-for-mac/install/
@@ -23,7 +23,7 @@ This page contains information about system requirements, download URLs, and ins
 [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 [Mac with Apple silicon](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
-*For checksums, see [Release notes](../release-notes.md)*
+*For checksums, see [Release notes](../release-notes.md).*
 
 ## System requirements
 
@@ -85,7 +85,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
     > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
     {: .important}
 
-    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
+    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" }. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 
 ### Install from the command line
 

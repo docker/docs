@@ -13,7 +13,9 @@ Once you have set up your directory correctly, you can build your extension for 
 
 To build the extension, run:
 
-`docker build -t <name-of-your-extension> .`
+```console
+$ docker build -t <name-of-your-extension> .
+```
 
 ## Validate your extension
 
@@ -23,23 +25,31 @@ The validation checks if the extension’s `Dockerfile` specifies all the requir
 
 To validate, run:
 
-`docker extension validate <name-of-your-extension>`
+```console
+$ docker extension validate <name-of-your-extension>
+```
 
 If your extension is valid, the message below displays:
 
-`The extension image "name-of-your-extension" is valid`.
+```console
+The extension image "name-of-your-extension" is valid
+```
 
 Before the image is built, it is also possible to validate only the metadata.json file:
 
-`$ docker extension validate /path/to/metadata.json`
+```console
+$ docker extension validate /path/to/metadata.json
+```
 
-The JSON schema used to validate the `metadata.json` file against can be found under the [releases page](https://github.com/docker/extensions-sdk/releases/latest).
+The JSON schema used to validate the `metadata.json` file against can be found under the [releases page](https://github.com/docker/extensions-sdk/releases/latest){:target="_blank" rel="noopener" class="_"}.
 
 ## Install the extension
 
 To install the extension in Docker Desktop, run:
 
-`docker extension install <name-of-your-extension>`
+```console
+$ docker extension install <name-of-your-extension>
+```
 
 > Note 
 > 

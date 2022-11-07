@@ -1,7 +1,7 @@
 <!-- This text will be included in the Docker Desktop install topic for each Linux distribution -->
 
 To start Docker Desktop for Linux, search **Docker Desktop** on the
-**Applications** menu and open it. This launches the whale menu icon and opens
+**Applications** menu and open it. This launches the Docker menu icon and opens
 the Docker Dashboard, reporting the status of Docker Desktop.
 
 Alternatively, open a terminal and run:
@@ -49,7 +49,7 @@ Alternatively, open a terminal and run:
 $ systemctl --user enable docker-desktop
 ```
 
-To stop Docker Desktop, click on the whale menu tray icon to open the Docker menu and select **Quit Docker Desktop**.
+To stop Docker Desktop, select the Docker menu icon to open the Docker menu and select **Quit Docker Desktop**.
 
 Alternatively, open a terminal and run:
 

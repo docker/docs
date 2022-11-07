@@ -1,7 +1,7 @@
 ---
 description: Instructions for installing Docker Desktop Arch package. Mostly meant for hackers who want to try out Docker Desktop on a variety of Arch-based distributions.
 keywords: Arch Linux, install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
-title: Install Docker Desktop on Arch-based distributions
+title: Install on Arch-based distributions
 redirect_from:
 - /desktop/linux/install/archlinux/
 ---
@@ -22,7 +22,6 @@ Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be insta
 $ sudo pacman -S gnome-terminal
 ```
 
-
 ## Install Docker Desktop 
 
 1. Install client binaries. Docker does not have an Arch package repository. Binaries not included in the package must be installed manually before installing Docker Desktop. 
@@ -37,7 +36,6 @@ Static binaries for the Docker client are available for Linux (as `docker`).
 ```console
 $ sudo pacman -U ./docker-desktop-<version>-<arch>.pkg.tar.zst
 ```
-
 
 ## Launch Docker Desktop
 

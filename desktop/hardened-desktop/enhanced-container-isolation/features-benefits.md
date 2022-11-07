@@ -1,12 +1,12 @@
 ---
 description: Instructions on how to set up enhanced container isolation
 title: Key features and benefits
-keywords: set up, enhanced container isolation, rootless, security
+keywords: set up, enhanced container isolation, rootless, security, features, Docker Desktop
 ---
 
 ### Linux User Namespace on all Containers
 
-With Enhanced Container Isolation, all user containers leverage the [Linux user-namespace](https://man7.org/linux/man-pages/man7/user_namespaces.7.html)
+With Enhanced Container Isolation, all user containers leverage the [Linux user-namespace](https://man7.org/linux/man-pages/man7/user_namespaces.7.html){:target="_blank" rel="noopener" class="_"}
 for extra isolation. This means that the root user in the container maps to an unprivileged
 user in the Docker Desktop Linux VM.
 

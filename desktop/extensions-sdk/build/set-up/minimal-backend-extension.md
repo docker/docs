@@ -8,7 +8,7 @@ redirect_from:
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker Extension that runs CLI commands in the backend.
 
-For extensions with a backend service running REST services over sockets or named pipes, see the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples).
+For extensions with a backend service running REST services over sockets or named pipes, see the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}.
 
 > Note
 >
@@ -20,7 +20,7 @@ For extensions with a backend service running REST services over sockets or name
 
 ## Extension folder structure
 
-In the `minimal-backend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples), you can find a ready-to-go example that represents a UI extension built on HTML that runs a backend service. We will go through this code example in this tutorial.
+In the `minimal-backend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}, you can find a ready-to-go example that represents a UI extension built on HTML that runs a backend service. We will go through this code example in this tutorial.
 
 Although you can start from an empty directory, it is highly recommended that you start from the template below and change it accordingly to suit your needs.
 

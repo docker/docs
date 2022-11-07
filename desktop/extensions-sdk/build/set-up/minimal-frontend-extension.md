@@ -18,7 +18,7 @@ To start creating your extension, you first need a directory with files which ra
 
 ## Extension folder structure
 
-In the `minimal-frontend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples), you can find a ready-to-go example that represents a UI Extension built on HTML. We will go through this code example in this tutorial.
+In the `minimal-frontend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}, you can find a ready-to-go example that represents a UI Extension built on HTML. We will go through this code example in this tutorial.
 
 Although you can start from an empty directory, it is highly recommended that you start from the template below and change it accordingly to suit your needs.
 

@@ -29,7 +29,7 @@ To disable this feature, clear the **Use containerd for pulling and storing imag
 
 ### Show server and storage driver version
 
-```
+```console
 $ docker info
 Client:
  Context:    default
@@ -93,9 +93,8 @@ Server:
 
 ### Run a simple container
 
-```
+```console
 $ docker run --rm hello-world
-
 Unable to find image 'hello-world:latest' locally
 7d246653d051: Download complete
 432f982638b3: Download complete
@@ -112,7 +111,7 @@ This message shows that your installation appears to be working correctly.
 
 Run the container specifying port settings:
 
-```
+```console
 $ docker run -p 8080:80 -d nginx
 
 Unable to find image 'nginx:latest' locally
@@ -131,7 +130,7 @@ fd61d71c75fe: Download complete
 
 Confirm the NGINX container is running:
 
-```
+```console
 $ docker ps
 CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                  NAMES
 93b4d60dfd08   nginx     "/docker-entrypoint.…"   3 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp   stoic_mccarthy
@@ -145,18 +144,15 @@ You can also check from the browser that NGINX is running:
 
 Sample Dockerfile:
 
-```
-
+```dockerfile
 FROM alpine
 
 ENTRYPOINT ["echo", "hello friends"]
-
 ```
 
 Build a multi-platform image:
 
-```
-
+```console
 $ docker buildx build --platform linux/amd64,linux/arm64 -t <username>/hello-friends .
 [+] Building 0.7s (7/7)
 FINISHED
@@ -184,13 +180,13 @@ FINISHED
 ```
 Run multi-platform image:
 
-```
+```console
 $ docker run <username>/hello-friends
 
 ```
 Push a multi-platform image:
 
-```
+```console
 $ docker push <username>/hello-friends
 Using default tag: latest
 f1edbf6b99d2: Pushed

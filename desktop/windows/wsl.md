@@ -1,10 +1,10 @@
 ---
 description: Docker Desktop WSL 2 backend
-keywords: WSL, WSL 2 Tech Preview, Windows Subsystem for Linux, WSL 2 backend Docker
+keywords: WSL, WSL 2, Windows Subsystem for Linux, WSL 2 backend Docker, Docker Desktop
 redirect_from:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
-title: Docker Desktop WSL 2 backend
+title: Docker Desktop WSL 2 backend on Windows
 ---
 
 Windows Subsystem for Linux (WSL) 2 introduces a significant architectural change as it is a full Linux kernel built by Microsoft, allowing Linux distributions to run without having to manage Virtual Machines. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid having to maintain both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing, boot time, and allows access to some cool new features for Docker Desktop users.
@@ -97,9 +97,9 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
 ## Develop with Docker and WSL 2
 
-The following section describes how to start developing your applications using Docker and WSL 2. We recommend that you have your code in your default Linux distribution for the best development experience using Docker and WSL 2. After you have enabled WSL 2 on Docker Desktop, you can start working with your code inside the Linux distro and ideally with your IDE still in Windows. This workflow can be pretty straightforward if you are using [VSCode](https://code.visualstudio.com/download).
+The following section describes how to start developing your applications using Docker and WSL 2. We recommend that you have your code in your default Linux distribution for the best development experience using Docker and WSL 2. After you have enabled WSL 2 on Docker Desktop, you can start working with your code inside the Linux distro and ideally with your IDE still in Windows. This workflow can be pretty straightforward if you are using [VSCode](https://code.visualstudio.com/download){:target="_blank" rel="noopener" class="_"}.
 
-1. Open VSCode and install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension. This extension allows you to work with a remote server in the Linux distro and your IDE client still on Windows.
+1. Open VSCode and install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl){:target="_blank" rel="noopener" class="_"} extension. This extension allows you to work with a remote server in the Linux distro and your IDE client still on Windows.
 2. Now, you can start working in VSCode remotely. To do this, open your terminal and type:
 
     `wsl`
