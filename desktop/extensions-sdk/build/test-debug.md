@@ -70,7 +70,7 @@ If your extension is composed of one or more services running as containers in t
 
 To update the extension, you must first [rebuild and reinstall](build-install.md) your extension. You can then use the update command.
 
-```
+```console
 $ docker extension update <name-of-your-extensions>
 ```
 
