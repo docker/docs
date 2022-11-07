@@ -1217,8 +1217,6 @@ manuals:
          title: Install on Windows
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
-       - path: /desktop/mac/apple-silicon/
-         title: Install on Apple silicon
        - path: /desktop/install/linux-install/
          title: Install on Linux
        - sectiontitle: Installation per Linux distro
@@ -1345,13 +1343,13 @@ manuals:
               path: /desktop/extensions-sdk/build/test-debug/
         - sectiontitle: "Part two: Publish"
           section:
-            - title: Overview
+            - title: Publish your extension
               path: /desktop/extensions-sdk/extensions/
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
-            - title: Distribution
+            - title: Packaging, distribution, and API dependencies
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
@@ -1539,6 +1537,16 @@ manuals:
                   title: Azure Blob Storage
                 - path: /build/building/cache/backends/s3/
                   title: Amazon S3
+        - sectiontitle: Exporters
+          section:
+          - path: /build/building/exporters/
+            title: Overview
+          - path: /build/building/exporters/image-registry/
+            title: Image and registry exporters
+          - path: /build/building/exporters/local-tar/
+            title: Local and tar exporters
+          - path: /build/building/exporters/oci-docker/
+            title: OCI and Docker exporters
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/

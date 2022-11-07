@@ -177,7 +177,7 @@ $ npm install nodemon
 Let’s start our application and confirm that it is running properly.
 
 ```console
-$ docker-compose -f docker-compose.dev.yml up --build
+$ docker compose -f docker-compose.dev.yml up --build
 ```
 
 We pass the `--build` flag so Docker compiles our image and then starts it.

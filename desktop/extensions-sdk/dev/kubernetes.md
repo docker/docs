@@ -20,7 +20,7 @@ Docker Desktop conveniently provides the user with a local preconfigured `kubeco
 
 If your extension needs to interact with Kubernetes clusters, it is recommended that you include the `kubectl` command line tool as part of your extension. By doing this, users who install your extension get `kubectl` installed in their host.
 
-To find out how to ship the `kubectl` command line tool for multiple platforms as part of your Docker Extension image, see [Build multi-arch extensions](https://docs.docker.com/desktop/extensions-sdk/extensions/multi-arch/#adding-multi-arch-binaries).
+To find out how to ship the `kubectl` command line tool for multiple platforms as part of your Docker Extension image, see [Build multi-arch extensions](../../../desktop/extensions-sdk/extensions/multi-arch.md#adding-multi-arch-binaries).
 
 ## Examples
 

@@ -1,4 +1,0 @@
----
-redirect_from:
-  - /enterprise/
----

@@ -1,8 +1,10 @@
 ---
-title: Distribute your extension
+title: Packaging, distribution, and API dependencies
 description: Docker extension disctribution
 keywords: Docker, extensions, sdk, distribution
 ---
+
+This page contains additional information on how Docker Extensions are packaged and distributed, and specifying API dependencies. 
 
 ## Packaging
 

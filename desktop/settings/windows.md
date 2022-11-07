@@ -28,7 +28,7 @@ On the **General** tab, you can configure when to start Docker and specify other
   execution attacks.
 
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
