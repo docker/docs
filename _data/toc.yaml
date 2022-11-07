@@ -1217,8 +1217,6 @@ manuals:
          title: Install on Windows
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
-       - path: /desktop/mac/apple-silicon/
-         title: Install on Apple silicon
        - path: /desktop/install/linux-install/
          title: Install on Linux
        - sectiontitle: Installation per Linux distro

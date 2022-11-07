@@ -7,6 +7,9 @@ redirect_from:
 - /docker-for-mac/install/
 - /engine/installation/mac/
 - /installation/mac/
+- /docker-for-mac/apple-m1/
+- /docker-for-mac/apple-silicon/
+- /desktop/mac/apple-silicon/
 ---
 
 > **Docker Desktop terms**
@@ -50,13 +53,13 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Apple silicon
 
-- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](../mac/apple-silicon.md#known-issues). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
+- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](../troubleshoot/known-issues.md). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 
   ```console
   $ softwareupdate --install-rosetta
   ```
 
- For more information, see [Docker Desktop for Apple silicon](../mac/apple-silicon.md).
+ For more information, see [Docker Desktop for Apple silicon](../install/mac-install.md).
 
 </div>
 </div>
@@ -107,7 +110,7 @@ The `install` command accepts the following flags:
 
 ## Where to go next
 
-- [Docker Desktop for Apple silicon](../mac/apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
+- [Docker Desktop for Apple silicon](../install/mac-install.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
