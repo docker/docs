@@ -1503,6 +1503,8 @@ manuals:
       section:
         - path: /build/building/packaging/
           title: Packaging your software
+        - path: /build/building/context/
+          title: Build context
         - sectiontitle: Build drivers
           section:
             - path: /build/building/drivers/

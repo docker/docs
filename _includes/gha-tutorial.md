@@ -114,7 +114,7 @@ The previous YAML snippet contains a sequence of steps that:
 
    The `with` key lists a number of input parameters that configures the step:
 
-   - `context`: the build context.
+   - `context`: the [build context](/build/building/context/).
    - `file`: filepath to the Dockerfile.
    - `push`: tells the action to upload the image to a registry after building
      it.

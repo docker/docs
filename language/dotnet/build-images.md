@@ -197,17 +197,14 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 ## .dockerignore file
 
-To make your build context as small as possible, add a .dockerignore file to your `dotnet-docker` folder and copy the following into it.
+To make your [build context](../../build/building/context.md) as small as
+possible, add a [`.dockerignore` file](../../engine/reference/builder.md#dockerignore-file)
+to your `dotnet-docker` folder and copy the following into it.
 
 ```shell
 **/bin/
 **/obj/
 ```
-
-> **Note**
->
-> To learn more about .dockerignore, see [.dockerignore file](../../engine/reference/builder.md/#dockerignore-file).
-
 
 ### Directory structure
 

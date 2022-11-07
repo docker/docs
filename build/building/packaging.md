@@ -134,8 +134,7 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 ```
 
 This [`RUN` instruction](../../engine/reference/builder.md#run) executes a shell
-command in the build context. A build's context is the set of files located in
-the specified PATH or URL.
+command in the [build context](context.md).
 
 In this example, our context is a full Ubuntu operating system, so we have
 access to its package manager, apt. The provided commands update our package
@@ -167,9 +166,9 @@ COPY hello.py /
 ```
 
 Now we use the [`COPY` instruction](../../engine/reference/builder.md#copy) to
-copy our `hello.py` file from the local build context into the root directory
-of our image. After being executed, we'll end up with a file called `/hello.py`
-inside the image.
+copy our `hello.py` file from the local [build context](context.md) into the
+root directory of our image. After being executed, we'll end up with a file
+called `/hello.py` inside the image.
 
 ```dockerfile
 ENV FLASK_APP=hello
@@ -208,20 +207,13 @@ $ docker build -t test:latest .
 ```
 
 Here `-t test:latest` option specifies the name (required) and tag (optional)
-of  the image we're building. `.` specifies the build context as the current
-directory. In this example, this is where build expects to find the Dockerfile
-and the local files the Dockerfile needs to access, in this case your Python
-application.
+of the image we're building. `.` specifies the [build context](context.md) as
+the current directory. In this example, this is where build expects to find the
+Dockerfile and the local files the Dockerfile needs to access, in this case
+your Python application.
 
-> **Warning**
->
-> Avoid using your root directory, `/`, as the `PATH` for your build context,
-> as it causes the build to transfer the entire contents of your hard drive to
-> the daemon.
-{:.warning}
-
-So, in accordance with the build command issued and how build context works,
-your Dockerfile and python app need to be in the same directory.
+So, in accordance with the build command issued and how [build context](context.md)
+works, your Dockerfile and python app need to be in the same directory.
 
 Now run your newly built image:
 

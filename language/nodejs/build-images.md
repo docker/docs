@@ -182,7 +182,11 @@ CMD [ "node", "server.js" ]
 
 ## Create a .dockerignore file
 
-To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase the build’s performance, exclude files and directories by adding a .dockerignore file to the context directory. To improve the context load time create a `.dockerignore` file and add `node_modules` directory in it.
+To use a file in the [build context](../../build/building/context.md), the
+Dockerfile refers to the file specified in an instruction, for example, a
+COPY instruction. A `.dockerignore` file lets you specify files and directories
+to be excluded from the build context. To improve the build's performance,
+create a `.dockerignore` file and add the `node_modules` directory in it:
 
 ```.dockerignore
 node_modules
