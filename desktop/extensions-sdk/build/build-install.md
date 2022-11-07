@@ -47,7 +47,7 @@ The JSON schema used to validate the `metadata.json` file against can be found u
 
 To install the extension in Docker Desktop, run:
 
-```
+```console
 $ docker extension install <name-of-your-extension>
 ```
 
