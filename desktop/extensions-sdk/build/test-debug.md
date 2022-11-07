@@ -54,7 +54,7 @@ Close and reopen the Docker Desktop dashboard and go to your extension. All the 
 
 Once finished, you can reset the extension configuration to the original settings. This will also reset opening Chrome dev tools if you used `docker extension dev debug <name-of-your-extensions>`:
 
-```
+```console
 $ docker extension dev reset <name-of-your-extensions>
 ```
 
