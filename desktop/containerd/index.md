@@ -144,7 +144,7 @@ You can also check from the browser that NGINX is running:
 
 Sample Dockerfile:
 
-```console
+```dockerfile
 FROM alpine
 
 ENTRYPOINT ["echo", "hello friends"]

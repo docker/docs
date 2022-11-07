@@ -69,8 +69,8 @@ services:
 
 Start the application using the normal Docker Compose commands:
 
-```
-docker compose up
+```console
+$ docker compose up
 ```
 
 ### Running a multi-service application with Wasm
