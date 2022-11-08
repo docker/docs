@@ -67,11 +67,33 @@ For information on how to add links to your content, see [Useful component and f
 
 ## Code and code samples
 
-Format the following as code: docker commands, instructions and filenames (package names).
+Format the following as code: docker commands, instructions, and filenames (package names).
 
 To apply inline code style, wrap the text in a single backtick (`).
 
-For information on how to add codeblocks to your content, see [Useful component and formatting examples](../components/code-blocks.md).
+For information on how to add code blocks to your content, see [Useful component and formatting examples](../components/code-blocks.md).
+
+### Best practice for commands:
+
+- Command prompt and shell:
+  - For a non-privileged shell, prefix commands in code blocks with the $ prompt symbol.
+  - For a privileged shell, prefix commands in code blocks with the # prompt symbol.
+  - For a remote shell, add the context of the remote machine and exclude the path. For example, `user@host $`.
+  - Specify the Windows shell (Command Prompt, PowerShell, or Git Bash), when you add any Windows-specific command. It's not necessary to include a command for each Windows shell.
+  - Use tabs when you add commands for multiple operating systems or shells. For information on how to add tabs to your content, see [Tabs](../components/tabs.md).
+- Commands that users will copy and run:
+  - Add a single command per code block if a command produces output or requires the user to verify the results.
+  - Add command output to a separate code block from the command.
+- Commands that users will not copy and run:
+  - Use POSIX-compatible syntax. It's not necessary to include Windows syntax.
+  - Wrap optional arguments in square brackets ( [ ] ).
+  - Use pipes (  \| ) between mutually exclusive arguments.
+  - Use three dots ( ... ) after repeated arguments.
+
+### Best practice for code:
+
+ - Indent code blocks by 3 spaces when you nest a code block under a list item.
+ - Use three dots ( ... ) when you omit code.
 
 ## Callouts
 

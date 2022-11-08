@@ -30,7 +30,7 @@ As you'll see, the connection to our server was refused. This means, we were not
 
 To stop the container, press Ctrl-C. This will return you to the terminal prompt.
 
-To publish a port for our container, we’ll use the `--publish` flag (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 80 inside the container to port 5050 outside the container, we would pass `5000:80` to the `--publish` flag. Run the container using the following command:
+To publish a port for our container, we’ll use the `--publish` flag (`-p` for short) on the `docker run` command. The format of the `--publish` command is `[host port]:[container port]`. So, if we wanted to expose port 80 inside the container to port 5000 outside the container, we would pass `5000:80` to the `--publish` flag. Run the container using the following command:
 
 ```console
 $ docker run --publish 5000:80 dotnet-docker
