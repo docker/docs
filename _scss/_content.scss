@@ -134,33 +134,6 @@ a.accept-eula {
 
 #myImg:hover {opacity: 0.7;}
 
-/* Style the Image Used to Trigger the Modal 2 */
-#myImg2 {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#myImg2:hover {opacity: 0.7;}
-
-/* Style the Image Used to Trigger the Modal 3*/
-#myImg3 {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#myImg3:hover {opacity: 0.7;}
-
-/* Style the Image Used to Trigger the Modal 4 */
-#myImg4 {
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#myImg4:hover {opacity: 0.7;}
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -185,42 +158,6 @@ a.accept-eula {
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
 #caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
-
-/* Caption of Modal Image2 (Image Text) - Same Width as the Image */
-#caption2 {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
-
-/* Caption of Modal Image 3 (Image Text) - Same Width as the Image */
-#caption3 {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
-}
-
-/* Caption of Modal Image 4 (Image Text) - Same Width as the Image */
-#caption4 {
   margin: auto;
   display: block;
   width: 80%;
