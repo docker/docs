@@ -1,6 +1,6 @@
 ---
 description: Docker Dashboard
-keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
+keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, whale menu
 title: Overview
 redirect_from:
 - /desktop/dashboard/
@@ -21,15 +21,17 @@ In addition, the Docker Dashboard allows you to:
 - Easily navigate to the **Preferences** (**Settings** in Windows) menu to configure Docker Desktop preferences. Select the **Preferences** or **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
 
-## The Whale menu
+## The Docker menu
 
-Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is reffered to as the Whale menu ![whale menu](../../assets/images/whale-x.svg){: .inline}.
+Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is referred to as the Docker menu ![whale menu](../../assets/images/whale-x.svg){: .inline}.
 
-To display the Whale menu, right-click on the ![whale menu](../../assets/images/whale-x.svg){: .inline} icon. It displays the following options:
+To display the Docker menu, right-click on the ![whale menu](../../assets/images/whale-x.svg){: .inline} icon. It displays the following options:
 
 - **Dashboard**. This takes you to the Docker Dashboard.
 - **Sign in/Create Dock Id**
 - **Settings**. Takes you to the Settings, or Preferences is you use a macOS.
+- **Check for updates**
+- **Troubleshoot** 
 - **Switch to Windows containers**
 - **About Docker Desktop**. Contains information on the versions you are running, and links to the Subscription Service Agreement for example. 
 - **Documentation**

@@ -39,7 +39,7 @@ such as [profiles](../profiles.md) and [GPU](../gpu-support.md) devices.
 
 Compose V2 has been re-written in [Go](https://go.dev), which improves integration
 with other Docker command-line features, and allows it to run natively on 
-[macOS on Apple silicon](../../desktop/mac/apple-silicon.md), Windows, and Linux,
+[macOS on Apple silicon](../../desktop/install/mac-install.md), Windows, and Linux,
 without dependencies such as Python. 
 
 For more information about compatibility with the compose v1 command-line, see the [docker-compose compatibility list](../cli-command-compatibility.md).

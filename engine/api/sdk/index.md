@@ -100,6 +100,7 @@ func main() {
     if err != nil {
         panic(err)
     }
+    defer cli.Close()
 
     reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
     if err != nil {

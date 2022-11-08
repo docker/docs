@@ -33,12 +33,12 @@ You can sort images by:
 
 ## Run an image as a container
 
-From the **Images view**, hover over an image and click **Run**.
+From the **Images view**, hover over an image and select **Run**.
 
 When prompted you can either:
 
-- Click the **Optional settings** drop-down to specify a name, port, volumes, environment variables and click **Run**
-- Click **Run** without specifying any optional settings.
+- Select the **Optional settings** drop-down to specify a name, port, volumes, environment variables and select **Run**
+- Select **Run** without specifying any optional settings.
 
 ## Inspect an image
 
@@ -53,7 +53,7 @@ To inspect an image, hover over an image, select the **More options** button and
 
 ## Pull the latest image from Docker Hub
 
-Select the image from the list, click the **More options** button and click **Pull**.
+Select the image from the list, select the **More options** button and select **Pull**.
 
 > **Note**
 >
@@ -61,7 +61,7 @@ Select the image from the list, click the **More options** button and click **Pu
 
 ## Push an image to Docker Hub
 
-Select the image from the list, click the **More options** button and click **Push to Hub**.
+Select the image from the list, select the **More options** button and select **Push to Hub**.
 
 > **Note**
 >
@@ -77,7 +77,7 @@ You can remove individual images or use the **Clean up** option to delete unused
 
 An unused image is an image which is not used by any running or stopped containers. An image becomes dangling when you build a new version of the image with the same tag.
 
-To remove individual images, select the image from the list, click the **More options** button and click **Remove**
+To remove individual images, select the image from the list, select the **More options** button and select **Remove**
 
 To remove an unused or a dangling image:
 
@@ -98,11 +98,11 @@ The **Pull** option allows you to pull the latest version of the image from Dock
 
 To interact with remote repositories:
 
-1. Click the **Remote repositories** tab.
+1. select the **Remote repositories** tab.
 2. Select an organization from the drop-down list. This displays a list of repositories in your organization.
 3. Hover over an image from the list and then select **Pull** to pull the latest image from the remote repository.
 
-To view a detailed information about the image in Docker Hub, select the image and then click **View in Hub**.
+To view a detailed information about the image in Docker Hub, select the image and then select **View in Hub**.
 
 The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 

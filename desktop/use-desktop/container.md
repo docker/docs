@@ -20,7 +20,7 @@ From the **Containers** view you can perform the following actions on one or mor
 
 ### Integrated terminal
 
-You also have the option to open an integrated terminal, on a running container, directly within Docker Desktop. This allows you to quickly execute commands within your container so you can understand its current state or debug when something goes wrong.
+You also have the option to open an integrated terminal, on a running container, directly within Docker Desktop. This allows you to quickly run commands within your container so you can understand its current state or debug when something goes wrong.
 
 Using the integrated terminal is the same as running `docker exec -it <container-id> /bin/sh`, or `docker exec -it <container-id> cmd.exe` if you are using Windows containers, in your external terminal. It also:
 

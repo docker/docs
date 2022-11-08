@@ -1,7 +1,7 @@
 ---
 description: How to install Docker Desktop for Windows
-keywords: windows, install, download, run, docker, local
-title: Install Docker Desktop on Windows
+keywords: windows, install, download, run, docker, local, Docker Desktop
+title: Install on Windows
 redirect_from:
 - /desktop/windows/install/
 - /docker-ee-for-windows/install/
@@ -102,7 +102,7 @@ Looking for information on using Windows containers?
   provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
   with Windows containers.
 - Docker Container Platform for Windows [articles and blog
-  posts](https://www.docker.com/microsoft/) on the Docker website.
+  posts](https://www.docker.com/microsoft/){:target="_blank" rel="noopener" class="_"} on the Docker website.
 
 > **Note**
 >
@@ -116,7 +116,7 @@ Looking for information on using Windows containers?
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
    If you haven't already downloaded the installer (`Docker Desktop Installer.exe`), you can get it from
-   [**Docker Hub**](https://hub.docker.com/editions/community/docker-ce-desktop-windows/).
+   [**Docker Hub**](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:target="_blank" rel="noopener" class="_"}.
    It typically downloads to your `Downloads` folder, or you can run it from
    the recent downloads bar at the bottom of your web browser.
 
@@ -135,13 +135,13 @@ Looking for information on using Windows containers?
 
 After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
 
-```
-"Docker Desktop Installer.exe" install
+```console
+$ "Docker Desktop Installer.exe" install
 ```
 
 If you’re using PowerShell you should run it as:
 
-```
+```powershell
 Start-Process 'Docker Desktop Installer.exe' -Wait install
 ```
 
@@ -166,8 +166,8 @@ The `install` command accepts the following flags:
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
-```
-net localgroup docker-users <user> /add
+```console
+$ net localgroup docker-users <user> /add
 ```
 
 ## Start Docker Desktop
@@ -189,7 +189,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
    > If you do not agree to the terms, the Docker Desktop application will close and you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
    {: .important}
 
-   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"}.
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"}.
 
 
 ## Where to go next

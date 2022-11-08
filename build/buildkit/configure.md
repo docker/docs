@@ -39,8 +39,8 @@ defining a mirror for `docker.io` (Docker Hub) to `mirror.gcr.io`.
 
 3. Build an image:
 
-   ```console
-   $ docker buildx build --load . -f - <<EOF
+   ```bash
+   docker buildx build --load . -f - <<EOF
    FROM alpine
    RUN echo "hello world"
    EOF

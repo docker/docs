@@ -1,6 +1,6 @@
 ---
 description: Extensions
-keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, feedback
+keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, Marketplace
 title: Marketplace extensions
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: Set up a dev Environments
-keywords: Dev Environments, share, collaborate, local, set up
+keywords: Dev Environments, share, docker dev, Docker Desktop
 title: Use the docker dev CLI plugin
 ---
 

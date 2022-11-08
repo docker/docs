@@ -1,10 +1,8 @@
 ---
 description: Set up a dev Environments
-keywords: Dev Environments, share, collaborate, local, set up
+keywords: Dev Environments, share, set up, Compose, Docker Desktop
 title: Set up a dev environment
 ---
-
-## Set up your own dev environment
 
 >**Changes to Dev Environments with Docker Desktop 4.13**
 >

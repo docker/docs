@@ -202,6 +202,8 @@ display for the build.
 
 ![list of builds showing the cancel icon](images/build-cancelicon.png)
 
+## Failing builds
+
 If a build fails, a **Retry** icon appears next to the build report line on the
 **General** and **Builds** tabs. The **Build report** page and **Timeline logs** also display a **Retry** button.
 
@@ -212,6 +214,15 @@ If a build fails, a **Retry** icon appears next to the build report line on the
 > If you are viewing the build details for a repository that belongs to an
 > Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
 
+Automated builds have a 4-hour execution time limit. If a build reaches this time limit, it's
+automatically cancelled, and the build logs display the following message:
+
+```text
+2022-11-02T17:42:27Z The build was cancelled or exceeded the maximum execution time.
+```
+
+This log message is the same as when you actively cancel a build. To identify
+whether a build was automatically cancelled, check the build duration.
 
 ## Disable an automated build
 

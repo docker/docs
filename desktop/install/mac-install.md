@@ -1,12 +1,15 @@
 ---
 description: How to install Docker Desktop on Mac
-keywords: mac, install, download, run, docker, local
-title: Install Docker Desktop on Mac
+keywords: mac, install, download, Docker Desktop, intel, apple silicon,
+title: Install on Mac
 redirect_from:
 - /desktop/mac/install/
 - /docker-for-mac/install/
 - /engine/installation/mac/
 - /installation/mac/
+- /docker-for-mac/apple-m1/
+- /docker-for-mac/apple-silicon/
+- /desktop/mac/apple-silicon/
 ---
 
 > **Docker Desktop terms**
@@ -20,7 +23,7 @@ This page contains information about system requirements, download URLs, and ins
 [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
 [Mac with Apple silicon](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
 
-*For checksums, see [Release notes](../release-notes.md)*
+*For checksums, see [Release notes](../release-notes.md).*
 
 ## System requirements
 
@@ -50,13 +53,13 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Apple silicon
 
-- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](../mac/apple-silicon.md#known-issues). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
+- Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install **Rosetta 2**. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See the [Known issues section](../troubleshoot/known-issues.md). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 
   ```console
   $ softwareupdate --install-rosetta
   ```
 
- For more information, see [Docker Desktop for Apple silicon](../mac/apple-silicon.md).
+ For more information, see [Docker Desktop for Apple silicon](../install/mac-install.md).
 
 </div>
 </div>
@@ -82,7 +85,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
     > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
     {: .important}
 
-    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
+    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" }. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 
 ### Install from the command line
 
@@ -107,7 +110,7 @@ The `install` command accepts the following flags:
 
 ## Where to go next
 
-- [Docker Desktop for Apple silicon](../mac/apple-silicon.md) for detailed information about Docker Desktop for Apple silicon.
+- [Docker Desktop for Apple silicon](../install/mac-install.md) for detailed information about Docker Desktop for Apple silicon.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.

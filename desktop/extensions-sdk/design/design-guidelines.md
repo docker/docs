@@ -14,9 +14,9 @@ Here is a simple checklist to go through when building your extension:
 
 ## Build a consistent experience with Docker Desktop.
 
-Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-mui-theme) and the [Docker Extensions Styleguide](https://www.figma.com/file/U7pLWfEf6IQKUHLhdateBI/Docker-Design-Guidelines?node-id=1%3A28771) to ensure that your extension feels like it is part of Docker Desktop to create a seamless experience for users.
+Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-mui-theme){:target="_blank" rel="noopener" class="_"} and the [Docker Extensions Styleguide](https://www.figma.com/file/U7pLWfEf6IQKUHLhdateBI/Docker-Design-Guidelines?node-id=1%3A28771){:target="_blank" rel="noopener" class="_"} to ensure that your extension feels like it is part of Docker Desktop to create a seamless experience for users.
 
-- Ensure the extension has both a light and dark theme. Using the components and styles as per the Docker style guide ensures that your extension meets the [level AA accessibility standard.](https://www.w3.org/WAI/WCAG2AA-Conformance)
+- Ensure the extension has both a light and dark theme. Using the components and styles as per the Docker style guide ensures that your extension meets the [level AA accessibility standard.](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
 
 ![light and dark mode](images/light_dark_mode.png)
 
