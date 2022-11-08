@@ -4,7 +4,7 @@ description: Scenario Overview illustrating how environment variables are resolv
 keywords: compose, environment, env file
 ---
 
-This page contains information on how how interpolation works when using environment variables in Compose.
+This page contains information on how interpolation works when using environment variables in Compose.
 
 When you set the same environment variable in multiple files, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question. 
 
