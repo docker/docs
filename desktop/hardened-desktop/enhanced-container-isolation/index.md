@@ -54,8 +54,8 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 #### As a developer
 
 To enable Enhanced Container Isolation as a developer:
-1. Navigate **Settings** > **General** in Docker Desktop.
-2. Next to **Use Enhanced Container Isolation, select the checkbox. 
+1. Navigate to **Settings** > **General** in Docker Desktop.
+2. Next to **Use Enhanced Container Isolation**, select the checkbox. 
 3. Select **Apply and restart** to save your settings. 
 
 #### As an admin 
