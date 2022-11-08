@@ -1,6 +1,6 @@
 ---
 description: Using bind mounts
-title: Use bind mounts
+title: Bind mounts
 keywords: storage, persistence, data persistence, mounts, bind mounts
 redirect_from:
 - /engine/admin/volumes/bind-mounts/

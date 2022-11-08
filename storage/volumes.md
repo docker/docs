@@ -1,6 +1,6 @@
 ---
 description: Using volumes
-title: Use volumes
+title: Volumes
 keywords: storage, persistence, data persistence, volumes
 redirect_from:
 - /userguide/dockervolumes/
