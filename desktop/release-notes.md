@@ -32,6 +32,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 >
 > {% include desktop-install.html %}
 
+### New
+
+- Promoted Virtualization framework to default hypervisor for macOS >= 12.5.
+
 ### Upgrades
 
 - [Docker Engine v20.10.21](https://docs.docker.com/engine/release-notes/#201021),
@@ -66,7 +70,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Mac
 
-- Promoted Virtualization framework to default hypervisor for macOS >= 12.5.
 - Fix a startup failure for users of virtualization framework
 - Add back the `/var/run/docker.sock` on Mac by default, to increase compatibility with tooling like `tilt` and `docker-py.`
 - Fixes an issue preventing creation of Dev Environments on new Mac installs (error "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?").
