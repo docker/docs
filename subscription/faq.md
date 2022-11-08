@@ -96,7 +96,7 @@ When you downgrade your Pro or Team plan, changes are applied at the end of your
 
 ### How do I downgrade from a Team plan to a Free Team plan?
 
-Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](index.md#pricing-plans){:target="blank" rel="noopener" class=""} page.
+Before you downgrade to a Free plan, ensure that your organization details are updated to reflect features available in the Free plan. For example, you may need to reduce the number of team members and convert any private repositories to public repositories. For information on what’s included in the Free plan, see the [billing](index.md){:target="blank" rel="noopener" class=""} page.
 
 ### How do I downgrade from Pro to a Free plan?
 
@@ -141,8 +141,7 @@ Team starts at $25 per month for the first five users and $7 per month for each 
 ### How will the new pricing plan impact existing Docker Hub customers?
 
 Legacy individual and organizational repository customers have until their January 2021 billing cycle to switch to the new pricing plans.
-To view the status of your individual repository plan, see [the billing](https://
-hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
+To view the status of your individual repository plan, see [the billing](https://hub.docker.com/billing/plan/update){:target="blank" rel="noopener" class=""} page.
 To view the status of your organizational repository plan, see [Docker Hub Orgs](https://hub.docker.com/orgs){:target="blank" rel="noopener" class=""} page.
 
 ### What is the difference between the legacy repository plans and the newly announced plans?

@@ -60,45 +60,7 @@ stateless fashion.
 
 ### Understand build context
 
-When you issue a `docker build` command, the current working directory is called
-the _build context_. By default, the Dockerfile is assumed to be located here,
-but you can specify a different location with the file flag (`-f`). Regardless
-of where the `Dockerfile` actually lives, all recursive contents of files and
-directories in the current directory are sent to the Docker daemon as the build
-context.
-
-> Build context example
->
-> Create a directory for the build context and `cd` into it. Write "hello" into
-> a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
-> the image from within the build context (`.`):
->
-> ```console
-> $ mkdir myproject && cd myproject
-> $ echo "hello" > hello
-> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> $ docker build -t helloapp:v1 .
-> ```
->
-> Move `Dockerfile` and `hello` into separate directories and build a second
-> version of the image (without relying on cache from the last build). Use `-f`
-> to point to the Dockerfile and specify the directory of the build context:
->
-> ```console
-> $ mkdir -p dockerfiles context
-> $ mv Dockerfile dockerfiles && mv hello context
-> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
-> ```
-
-Inadvertently including files that are not necessary for building an image
-results in a larger build context and larger image size. This can increase the
-time to build the image, time to pull and push it, and the container runtime
-size. To see how big your build context is, look for a message like this when
-building your `Dockerfile`:
-
-```none
-Sending build context to Docker daemon  187.8MB
-```
+See [Build context](../../build/building/context.md) page for more information.
 
 ### Pipe Dockerfile through `stdin`
 

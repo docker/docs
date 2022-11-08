@@ -10,9 +10,10 @@ redirect_from:
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](../../get-started/index.md) to understand Docker concepts.
-
-{% include guides/enable-buildkit.md %}
+* You understand basic [Docker concepts](../../get-started/overview.md).
+* You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
+* You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
+  on your machine.
 
 ## Overview
 
@@ -92,8 +93,6 @@ Press `CTRL-c` from within the terminal session where the server is running to s
 We will now continue to build and run the application in Docker.
 
 ## Create a Dockerfile for Node.js
-
-{% include guides/create-dockerfile.md %}
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
@@ -183,7 +182,11 @@ CMD [ "node", "server.js" ]
 
 ## Create a .dockerignore file
 
-To use a file in the build context, the Dockerfile refers to the file specified in an instruction, for example, a COPY instruction. To increase the build’s performance, exclude files and directories by adding a .dockerignore file to the context directory. To improve the context load time create a `.dockerignore` file and add `node_modules` directory in it.
+To use a file in the [build context](../../build/building/context.md), the
+Dockerfile refers to the file specified in an instruction, for example, a
+COPY instruction. A `.dockerignore` file lets you specify files and directories
+to be excluded from the build context. To improve the build's performance,
+create a `.dockerignore` file and add the `node_modules` directory in it:
 
 ```.dockerignore
 node_modules

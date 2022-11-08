@@ -109,4 +109,4 @@ You can also see if an answer already exists in the following FAQs:
 - [Docker Desktop for Linux](../desktop/faqs/linuxfaqs.md)
 - [Docker Desktop for Mac](../desktop/faqs/macfaqs.md)
 - [Docker Desktop for Windows](../desktop/faqs/windowsfaqs.md)
-- [Single Sign-on](..//single-sign-on/faqs.md)
+- [Single Sign-on](../single-sign-on/faqs.md)

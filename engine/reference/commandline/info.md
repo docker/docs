@@ -30,4 +30,3 @@ WARNING: No swap limit support
 You can ignore these warnings unless you actually need the ability to
 [limit these resources](../../../config/containers/resource_constraints.md), in which case you
 should consult your operating system's documentation for enabling them.
-[Learn more](../../install/linux-postinstall.md#your-kernel-does-not-support-cgroup-swap-limit-capabilities).

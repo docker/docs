@@ -29,7 +29,7 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-    - title: "Part 1: Orientation and setup"
+    - title: "Part 1: Overview"
       path: /get-started/
     - title: "Part 2: Containerize an application"
       path: /get-started/02_our_app/
@@ -115,6 +115,20 @@ guides:
       path: /language/golang/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/golang/deploy/
+  - sectiontitle: C# (.NET)
+    section:
+    - title: "Overview"
+      path: /language/dotnet/
+    - title: "Build images"
+      path: /language/dotnet/build-images/
+    - title: "Run containers"
+      path: /language/dotnet/run-containers/
+    - title: "Develop your app"
+      path: /language/dotnet/develop/
+    - title: "Configure CI/CD"
+      path: /language/dotnet/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/dotnet/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -125,20 +139,12 @@ guides:
     section:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Dockerfile best practices
-    - path: /develop/develop-images/build_enhancements/
-      title: Build images with BuildKit
     - path: /develop/develop-images/image_management/
       title: Manage images
     - path: /develop/develop-images/baseimages/
       title: Create your own base image (advanced)
   - path: /develop/scan-images/
     title: Scan images
-- sectiontitle: Set up CI/CD
-  section:
-  - path: /ci-cd/best-practices/
-    title: CI/CD Best practices
-  - path: /ci-cd/github-actions/
-    title: Configure GitHub Actions
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -179,6 +185,28 @@ guides:
       title: Configure and run Docker
     - path: /config/daemon/systemd/
       title: Control Docker with systemd
+    - path: /config/daemon/ipv6/
+      title: Configure the daemon for IPv6
+    - path: /network/iptables/
+      title: Docker and iptables
+    - sectiontitle: Store data within containers
+      section:
+      - path: /storage/storagedriver/
+        title: About storage drivers
+      - path: /storage/storagedriver/select-storage-driver/
+        title: Select a storage driver
+      - path: /storage/storagedriver/aufs-driver/
+        title: Use the AUFS storage driver
+      - path: /storage/storagedriver/btrfs-driver/
+        title: Use the Btrfs storage driver
+      - path: /storage/storagedriver/device-mapper-driver/
+        title: Use the Device mapper storage driver
+      - path: /storage/storagedriver/overlayfs-driver/
+        title: Use the OverlayFS storage driver
+      - path: /storage/storagedriver/zfs-driver/
+        title: Use the ZFS storage driver
+      - path: /storage/storagedriver/vfs-driver/
+        title: Use the VFS storage driver
   - path: /config/daemon/prometheus/
     title: Collect metrics with Prometheus
   - sectiontitle: Configure containers
@@ -307,6 +335,10 @@ guides:
     section:
     - path: /network/
       title: Networking overview
+    - path: /config/containers/container-networking/
+      title: Container networking
+    - path: /network/proxy/
+      title: Configure Docker to use a proxy server
     - path: /network/bridge/
       title: Use bridge networks
     - path: /network/overlay/
@@ -329,24 +361,14 @@ guides:
         title: Overlay networking tutorial
       - path: /network/network-tutorial-macvlan/
         title: Macvlan network tutorial
-    - sectiontitle: Configure the daemon and containers
-      section:
-      - path: /config/daemon/ipv6/
-        title: Configure the daemon for IPv6
-      - path: /network/iptables/
-        title: Docker and iptables
-      - path: /config/containers/container-networking/
-        title: Container networking
-      - path: /network/proxy/
-        title: Configure Docker to use a proxy server
     - sectiontitle: Legacy networking content
       section:
       - path: /network/links/
         title: (Legacy) Container links
-  - sectiontitle: Manage application data
+  - sectiontitle: Configure storage
     section:
     - path: /storage/
-      title: Storage overview
+      title: Overview
     - path: /storage/volumes/
       title: Volumes
     - path: /storage/bind-mounts/
@@ -354,25 +376,7 @@ guides:
     - path: /storage/tmpfs/
       title: tmpfs mounts
     - path: /storage/troubleshooting_volume_errors/
-      title: Troubleshoot volume problems
-    - sectiontitle: Store data within containers
-      section:
-      - path: /storage/storagedriver/
-        title: About storage drivers
-      - path: /storage/storagedriver/select-storage-driver/
-        title: Select a storage driver
-      - path: /storage/storagedriver/aufs-driver/
-        title: Use the AUFS storage driver
-      - path: /storage/storagedriver/btrfs-driver/
-        title: Use the Btrfs storage driver
-      - path: /storage/storagedriver/device-mapper-driver/
-        title: Use the Device mapper storage driver
-      - path: /storage/storagedriver/overlayfs-driver/
-        title: Use the OverlayFS storage driver
-      - path: /storage/storagedriver/zfs-driver/
-        title: Use the ZFS storage driver
-      - path: /storage/storagedriver/vfs-driver/
-        title: Use the VFS storage driver
+      title: Troubleshoot
 - path: /get-started/resources/
   title: "Educational resources"
 
@@ -1128,7 +1132,7 @@ samples:
       title: .NET
     - path: /samples/angular/
       title: Angular
-    - path: /samples/django-sample/
+    - path: /samples/django/
       title: Django
     - path: /samples/express/
       title: Express
@@ -1140,6 +1144,8 @@ samples:
       title: Node.js
     - path: /samples/react/
       title: React
+    - path: /samples/rails/
+      title: Rails
     - path: /samples/spark/
       title: Spark
     - path: /samples/spring/
@@ -1158,6 +1164,8 @@ samples:
       title: PHP
     - path: /samples/python/
       title: Python
+    - path: /samples/ruby/
+      title: Ruby
     - path: /samples/rust/
       title: Rust
     - path: /samples/typescript/
@@ -1172,7 +1180,7 @@ samples:
       title: Portainer
     - path: /samples/prometheus/
       title: Prometheus
-    - path: /samples/wordpress-sample/
+    - path: /samples/wordpress/
       title: WordPress
 - sectiontitle: Other services
   section:
@@ -1209,8 +1217,6 @@ manuals:
          title: Install on Windows
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
-       - path: /desktop/mac/apple-silicon/
-         title: Install on Apple silicon
        - path: /desktop/install/linux-install/
          title: Install on Linux
        - sectiontitle: Installation per Linux distro
@@ -1296,11 +1302,13 @@ manuals:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a simple dev environment
-        - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create an advanced dev environment
+          title: Launch a dev environment
+        - path: /desktop/dev-environments/set-up/
+          title: Set up a dev environment
         - path: /desktop/dev-environments/share/
           title: Distribute your dev environment
+        - path: /desktop/dev-environments/dev-cli/
+          title: Use the docker dev CLI plugin
     - sectiontitle: Extensions (Beta)
       section:
       - path: /desktop/extensions/
@@ -1335,13 +1343,13 @@ manuals:
               path: /desktop/extensions-sdk/build/test-debug/
         - sectiontitle: "Part two: Publish"
           section:
-            - title: Overview
+            - title: Publish your extension
               path: /desktop/extensions-sdk/extensions/
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
-            - title: Distribution
+            - title: Packaging, distribution, and API dependencies
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
@@ -1417,10 +1425,10 @@ manuals:
   section:
   - path: /engine/
     title: Overview
-  - path: /engine/install/
-    title: Install
-  - sectiontitle: Installation per distro
+  - sectiontitle: Install
     section:
+    - path: /engine/install/
+      title: Installation Overview
     - path: /engine/install/centos/
       title: Install on CentOS
     - path: /engine/install/debian/
@@ -1435,8 +1443,10 @@ manuals:
       title: Install on Ubuntu
     - path: /engine/install/binaries/
       title: Install binaries
-  - path: /engine/install/linux-postinstall/
-    title: Optional post-installation steps
+    - path: /engine/install/linux-postinstall/
+      title: Post-installation steps
+    - path: /engine/install/troubleshoot/
+      title: Troubleshoot installation
   - path: /engine/deprecated/
     title: Deprecated features
   - path: /engine/context/working-with-contexts/
@@ -1493,6 +1503,8 @@ manuals:
       section:
         - path: /build/building/packaging/
           title: Packaging your software
+        - path: /build/building/context/
+          title: Build context
         - sectiontitle: Build drivers
           section:
             - path: /build/building/drivers/
@@ -1505,24 +1517,38 @@ manuals:
               title: Kubernetes driver
             - path: /build/building/drivers/remote/
               title: Remote driver
-        - path: /build/building/cache/
-          title: Optimizing builds with cache
-        - sectiontitle: Cache backends
+        - sectiontitle: Cache
           section:
-            - path: /build/building/cache/backends/
-              title: Overview
-            - path: /build/building/cache/backends/inline/
-              title: Inline
-            - path: /build/building/cache/backends/local/
-              title: Local
-            - path: /build/building/cache/backends/registry/
-              title: Registry
-            - path: /build/building/cache/backends/gha/
-              title: GitHub Actions
-            - path: /build/building/cache/backends/azblob/
-              title: Azure Blob Storage
-            - path: /build/building/cache/backends/s3/
-              title: Amazon S3
+            - path: /build/building/cache/
+              title: Optimizing builds with cache
+            - path: /build/building/cache/garbage-collection/
+              title: Garbage collection
+            - sectiontitle: Cache backends
+              section:
+                - path: /build/building/cache/backends/
+                  title: Overview
+                - path: /build/building/cache/backends/inline/
+                  title: Inline
+                - path: /build/building/cache/backends/local/
+                  title: Local
+                - path: /build/building/cache/backends/registry/
+                  title: Registry
+                - path: /build/building/cache/backends/gha/
+                  title: GitHub Actions
+                - path: /build/building/cache/backends/azblob/
+                  title: Azure Blob Storage
+                - path: /build/building/cache/backends/s3/
+                  title: Amazon S3
+        - sectiontitle: Exporters
+          section:
+          - path: /build/building/exporters/
+            title: Overview
+          - path: /build/building/exporters/image-registry/
+            title: Image and registry exporters
+          - path: /build/building/exporters/local-tar/
+            title: Local and tar exporters
+          - path: /build/building/exporters/oci-docker/
+            title: OCI and Docker exporters
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
@@ -1543,12 +1569,34 @@ manuals:
               title: Build contexts and linking targets
             - path: /build/customize/bake/compose-file/
               title: Building from Compose file
+        - path: /build/customize/color-output-controls/
+          title: Color output controls
+    - sectiontitle: BuildKit
+      section:
+        - path: /build/buildkit/
+          title: Overview
+        - path: /build/buildkit/dockerfile-frontend/
+          title: Custom Dockerfile syntax
+        - path: /build/buildkit/configure/
+          title: Configure
+        - path: /build/buildkit/toml-configuration/
+          title: TOML configuration
     - sectiontitle: Buildx
       section:
         - path: /build/buildx/install/
           title: Install Buildx
         - path: /build/buildx/multiple-builders/
           title: Using multiple builders
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/examples/
+            title: Examples
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
@@ -1698,14 +1746,20 @@ manuals:
     title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in
-  - sectiontitle: Single-Sign-on
+  - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
+         title: Overview
+      -  path: /single-sign-on/requirements/
+         title: Requirements
+      -  path: /single-sign-on/configure/
          title: Configure
+      -  path: /single-sign-on/manage/
+         title: Manage
       -  path: /single-sign-on/faqs/
          title: FAQs
   - path: /docker-hub/scim/
-    title: System for Cross-domain Identity Management
+    title: SCIM
   - path: /docker-hub/image-access-management/
     title: Image Access Management
 
@@ -1810,7 +1864,7 @@ manuals:
 - path: /release-notes/
   title: Release notes
 - path: /support/
-  title: Get Support
+  title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
 contribute:

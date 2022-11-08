@@ -37,7 +37,7 @@ Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: t
 
 ## Do I need to pay to create or share Docker Extensions?
 
-No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client) is licensed under the Apache 2.0 License and is free to use. Anyone can create new Docker Extensions and share them without constraints.
+No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client){:target="_blank" rel="noopener" class="_"} is licensed under the Apache 2.0 License and is free to use. Anyone can create new Docker Extensions and share them without constraints.
 
 ## Do I need to use a specific license when I create a Docker Extension?
 
@@ -56,8 +56,8 @@ This includes:
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
 - Settting up [Dev Environments](../dev-environments/index.md)
-- Docker build when using [Buildkit](../../develop/develop-images/build_enhancements.md). You can work around this by disabling
-  BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
+- Docker build when using [BuildKit](../../build/buildkit/index.md#getting-started).
+  You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
 - Deploying an app to the cloud through Compose
   [ACI](../../cloud/aci-integration.md) and [ECS](../../cloud/ecs-integration.md)
   integrations

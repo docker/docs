@@ -28,7 +28,7 @@ On the **General** tab, you can configure when to start Docker and specify other
   execution attacks.
 
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -119,7 +119,7 @@ File share settings are:
 >   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
 >   (named volume) or [data container](../../storage/volumes.md).
 > * Docker Desktop sets permissions to read/write/execute for users, groups and
->   others [0777 or a+rwx](https://chmodcommand.com/chmod-0777/).
+>   others [0777 or a+rwx](https://chmodcommand.com/chmod-0777/){:target="_blank" rel="noopener" class="_"}.
 >   This is not configurable. See [Permissions errors on data directories for shared volumes](../troubleshoot/topics.md).
 > * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive.
 >   On Linux, it is possible to create two separate files: `test` and `Test`,
@@ -205,7 +205,7 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 {% include beta.md %}
 
-From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/).
+From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"}.
 
 On the **Beta features** tab, you also have the option to allow version 4.13 feature flags, which are product features Docker is currently experimenting with. This is switched on by default. 
 

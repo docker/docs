@@ -114,14 +114,13 @@ To create a repository:
 2. Click **Create a Repository** on the Docker Hub welcome page.
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
-    <img id="myImg" src="/docker-hub/images/index-create-repo.png" alt="Create a repository" style="width:100%;max-width:500px">
+
     ![Create Repository](images/index-create-repo.png)
 
 5. Click **Create**.
 
     You've created your first repository. You should see:
 
-    <img id="myImg2" src="/docker-hub/images/index-repo-created.png" alt="Create a repositoryyyyy" style="width:100%;max-width:500px">
     ![Repository Created](images/index-repo-created.png)
 
 ### Step 3: Download and install Docker Desktop

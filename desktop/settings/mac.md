@@ -1,7 +1,7 @@
 ---
 description: Docker Desktop settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
-title: Change Docker Desktop preferences on Mac
+title: Change preferences on Mac
 redirect_from:
 - /docker-for-mac/mutagen-caching/
 - /docker-for-mac/mutagen/

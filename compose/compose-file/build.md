@@ -106,6 +106,8 @@ build:
   context: ./dir
 ```
 
+See [Build context](../../build/building/context.md) page for more information.
+
 ### dockerfile
 
 `dockerfile` allows to set an alternate Dockerfile. A relative path MUST be resolved from the build context.

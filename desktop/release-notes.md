@@ -24,12 +24,68 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## Docker Desktop 4.13.1
+2022-10-31
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### Upgrades
+
+- [Docker Compose v2.12.1](https://github.com/docker/compose/releases/tag/v2.12.1)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed a possible segfault when interrupting `docker pull` with `Control+C` or `CMD+C`.
+- Increased the default DHCP lease time to avoid the VM's network glitching and dropping connections every two hours.
+- Reverted `Qemu` to `6.2.0` to fix errors like `PR_SET_CHILD_SUBREAPER is unavailable` when running emulated amd64 code.
+
+#### For Mac
+
+- Added back the `/var/run/docker.sock` symlink on Mac by default, to increase compatibility with tooling like `tilt` and `docker-py`. Fixes [docker/for-mac#6529](https://github.com/docker/for-mac/issues/6529).
+- Fixed an issue preventing the creation of Dev Environments on new Mac installs and causing `error "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?")`
+
+#### For Windows
+
+- Docker Desktop now functions on machines where PowerShell is disabled.
+
 ## Docker Desktop 4.13.0
 2022-10-19
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/89412/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/89412/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/89412/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 2452d4c9e315d36ad4cade724c962dd18515b8e2f0c2e7f66290648e0319d72b</li>
+      <li><b>Mac Intel:</b> SHA-256 5a9e7b810bc9937a0945f9cbbb7ec00c2c5c386b5897c59c1c93187eaf0f2081</li>
+      <li><b>Mac Arm:</b> SHA-256 f33037ef7b02946d5714012398848654bd7a759ee729b0346acc46a8e73a76ed</li>
+      <li><b>Linux DEB:</b> SHA-256 aa1d4ee1c2c72bf7be05c88d33d8f1f6344ab4e6d9de52f50367d9e799641102</li>
+      <li><b>Linux RPM:</b> SHA-256 6f70246d11d06f123b8011eeafb7b0a161d60764719b44b817a49dee7da4a06e</li>
+      <li><b>Linux Arch:</b> SHA-256 8aa42c18d643b5dc333cbea096f9585d89b912344a26fc9ea902f30d2c5140d8</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### New
 
@@ -41,7 +97,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - [Docker Scan v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0)
 - [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879){: target="_blank" rel="noopener"}, [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880){: target="_blank" rel="noopener"} and  [CVE-2022-41715](https://www.cve.org/CVERecord?id= CVE-2022-41715){: target="_blank" rel="noopener"}
-- Updated Docker Engine and Docker CLI to [v20.10.20](https://docs.docker.com/engine/release-notes/#201020),
+- Updated Docker Engine and Docker CLI to [v20.10.20](../engine/release-notes/index.md#201020),
   which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"},
   and updated handling of `image:tag@digest` image references, as well as a fix for [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109).
 - [Docker Credential Helpers v0.7.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.7.0){: target="blank" rel="noopener" class=""}
@@ -1093,7 +1149,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 #### For Mac
 
-- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](mac/apple-silicon.md#known-issues).
+- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](troubleshoot/known-issues.md).
 
 #### For Windows
 

@@ -29,7 +29,7 @@ When you run this command, you’ll notice that you were not returned to the com
 Let’s open a new terminal then make a GET request to the server using the curl command.
 
 ```console
-$ curl --request POST \
+$ curl --request GET \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
   --data '{"msg": "testing"}'

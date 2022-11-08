@@ -53,7 +53,7 @@ The available classes are:
 
 
 blockquote {
-  body.night & {
+  html.night & {
     // DARK THEME
 
     &:not(.important):not(.warning):not(.restricted):not(.experimental) {
@@ -102,7 +102,7 @@ blockquote {
     }
   }
 
-  body:not(.night) & {
+  html:not(.night) & {
     // LIGHT THEME
 
     &:not(.important):not(.warning):not(.restricted):not(.experimental) {

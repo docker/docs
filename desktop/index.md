@@ -1,6 +1,6 @@
 ---
 description: Docker Desktop overview
-keywords: Desktop, Docker, GUI, run, docker, local, machine, dashboard
+keywords: Docker Desktop, Docker, features, GUI, linux, mac, windows
 title: Docker Desktop
 redirect_from:
 - /desktop/opensource/
@@ -22,7 +22,7 @@ that enables you to build and share containerized applications and microservices
 It provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.
 
 <style>
-.tab-content > .tab-pane {
+.tab-content > .tab-pane {s
   background-color: #fafafb;
   border: 1px solid #ddd;
   border-top: 0;

@@ -1,6 +1,6 @@
 ---
 description: Permission requirements for Docker Desktop for Mac
-keywords: Docker Desktop, mac, security, install
+keywords: Docker Desktop, mac, security, install, permissions
 title: Understand permission requirements for Mac
 redirect_from:
 - /docker-for-mac/privileged-helper/
@@ -13,11 +13,11 @@ It also provides clarity on running containers as `root` as opposed to having `r
 
 ## Permission requirements
 
-In the default set up flow, Docker Desktop for Mac does not require root privileges for installation but does require `root` access to be granted on the first run. The first time that Docker Desktop is launched the user receives an admin prompt to grant permissions for a privileged helper service to be installed. For subsequent runs, no `root` privileges are required.
+In the default set up flow, Docker Desktop for Mac doesn't require root privileges for installation but does require `root` access to be granted on the first run. The first time that Docker Desktop is launched the user receives an admin prompt to grant permissions for a privileged helper service to be installed. For subsequent runs, no `root` privileges are required.
 
 The reason for this is that Docker Desktop needs to perform a limited set of privileged operations using the privileged helper process `com.docker.vmnetd`. This approach allows, following the principle of least privilege, `root` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
 
-In version 4.11 and above of Docker Desktop for Mac you can avoid running the privileged helper service in the background by using the `--user` flag on the [install command](../install/mac-install.md#install-from-the-command-line). This will result in `com.docker.vmnetd` being used for set up during installation and then disabled at runtime. In this case, the user will not be prompted to grant root privileges on the first run of Docker Desktop. Specifically, the `--user` flag:
+In version 4.11 and later of Docker Desktop for Mac you can avoid running the privileged helper service in the background by using the `--user` flag on the [install command](../install/mac-install.md#install-from-the-command-line). This results in `com.docker.vmnetd` being used for set up during installation and then disabled at runtime. In this case, the user is  not prompted to grant root privileges on the first run of Docker Desktop. Specifically, the `--user` flag:
 - Uninstalls the previous `com.docker.vmnetd` if present
 - Sets up symlinks for the user
 - Ensures that `localhost` and `kubernetes.docker.internal` are present in `/etc/hosts`
@@ -39,6 +39,6 @@ The privileged helper is started by `launchd` and runs in the background unless 
 
 ## Containers running as root within the Linux VM
 
-The Docker daemon and containers run in a lightweight Linux VM managed by Docker. This means that although containers run by default as `root`, this does not grant `root` access to the Mac host machine. The Linux VM serves as a security boundary and limits what resources can be accessed from the host. Any directories from the host bind mounted into Docker containers still retain their original permissions.
+The Docker daemon and containers run in a lightweight Linux VM managed by Docker. This means that although containers run by default as `root`, this doesn't grant `root` access to the Mac host machine. The Linux VM serves as a security boundary and limits what resources can be accessed from the host. Any directories from the host bind mounted into Docker containers still retain their original permissions.
 
 

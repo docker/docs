@@ -1,6 +1,6 @@
 ---
 description: How to uninstall Docker Desktop 
-keywords: windows, install, download, run, docker, local
+keywords: Windows, unintall, Mac, Linux, Docker Desktop
 title: Uninstall Docker Desktop
 ---
 

@@ -3,7 +3,7 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/build/ @crazy-max @usha-mandya @jedevc @dvdksn
+/build/ @crazy-max @jedevc @dvdksn
 
 /compose/ @usha-mandya @aevesdocker
 
@@ -11,7 +11,7 @@
 
 /docker-hub/ @jerae-duffin @craig-osterhout
 
-/engine/ @usha-mandya
+/engine/ @dvdksn
 
 /subscription/ @jerae-duffin
 
@@ -20,3 +20,5 @@
 /docker-hub/official_images/ @dvdksn
 
 /registry/ @dvdksn
+
+/atomist/ @dvdksn
