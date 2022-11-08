@@ -207,6 +207,8 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 {% include beta.md %}
 
+On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
+
 From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/).
 
 ### Enable containerd
