@@ -1,5 +1,5 @@
 ---
-title: Insights & analytics
+title: Insights and analytics
 description: Provides usage statistics of your images on Docker Hub.
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 ---
@@ -10,17 +10,53 @@ to metrics as both raw data and summary data for a desired time span. You can
 view number of image pulls by tag or by digest, and get breakdowns by
 geolocation, cloud provider, client, and more.
 
+## View the analytics data
+
+Analytics data for your repositories is available on the **Insights and
+analytics** dashboard at the following URL:
+`https://hub.docker.com/orgs/{namespace}/insights`. The dashboard contains a
+chart visualization of the usage data, as well as a table where you can download
+the data as CSV files.
+
+To view data in the chart:
+
+- Select the data granularity: weekly or monthly
+- Select the time interval: 3, 6, or 12 months
+- Select one or more repositories in the list.
+
+  You can filter the list by repository name.
+
+![Insights and analytics chart visualization](./images/chart.png)
+
+> **Tip**
+>
+> Hovering your cursor over the chart displays a tooltip, showing precise data
+> for points in time.
+{: .tip }
+
+### Share
+
+You can share the visualization chart with others using the share icon located
+just above the chart:
+
+![Chart share icon](./images/chart-share-icon.png)
+
+Selecting the icon generates a link that gets copied to your clipboard. The link
+preserves the display selections you've made. When someone uses the link, the
+**Insights and analytics** page opens and displays the chart with the same
+configuration as you had set up when creating the link. This is a convenient way
+to quickly share statistics with others in your organization.
+
 ## Exporting analytics data
 
-You can access the data either from the Docker Hub website, at
-`hub.docker.com/orgs/{namespace}/insights`, or using the
+You can export the analytics data either from the web dashboard, or using the
 [DVP Data API](/docker-hub/api/dvp/){: target="_blank" rel="noopener"
 class="_"}. All members of an organization have access to the analytics data.
 
 The data is available as a downloadable CSV file, in a weekly (Monday through
-Sunday) or monthly format (available on the first day of the following calendar
-month). You can import this data into your own systems, or you can analyze it
-manually as a spreadsheet.
+Sunday) or monthly format. Monthly data is available from the first day of the
+following calendar month. You can import this data into your own systems, or you
+can analyze it manually as a spreadsheet.
 
 ### Export data using the website
 
@@ -156,8 +192,7 @@ consumers of content on Docker Hub remain completely anonymous.
 > **Important**
 >
 > Docker never shares any Personally Identifiable Information (PII) as part of
-> analytics data.
-{: .important }
+> analytics data. {: .important }
 
 The summary dataset includes Unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.
