@@ -7,20 +7,27 @@ toc_max: 3
 We support these broad categories of callouts:
 
 - Notes (no Liquid tag required)
+- Tips, which use the `{: .tip }` tag
 - Important, which use the `{: .important}` tag
 - Warning , which use the `{: .warning}` tag
 
 ## Examples
 
-  > **Note**
-  >
-  > Note the way the `get_hit_count` function is written. This basic retry
-  > loop lets us attempt our request multiple times if the redis service is
-  > not available. This is useful at startup while the application comes
-  > online, but also makes our application more resilient if the Redis
-  > service needs to be restarted anytime during the app's lifetime. In a
-  > cluster, this also helps handling momentary connection drops between
-  > nodes.
+> **Note**
+>
+> Note the way the `get_hit_count` function is written. This basic retry
+> loop lets us attempt our request multiple times if the redis service is
+> not available. This is useful at startup while the application comes
+> online, but also makes our application more resilient if the Redis
+> service needs to be restarted anytime during the app's lifetime. In a
+> cluster, this also helps handling momentary connection drops between
+> nodes.
+
+> **Tip**
+>
+> For a smaller base image, use `alpine`.
+{: .tip }
+
 
 > **Important**
 >
@@ -52,6 +59,11 @@ We support these broad categories of callouts:
 > service needs to be restarted anytime during the app's lifetime. In a
 > cluster, this also helps handling momentary connection drops between
 > nodes.
+
+> **Tip**
+>
+> For a smaller base image, use `alpine`.
+{: .tip }
 
 > **Important**
 >
