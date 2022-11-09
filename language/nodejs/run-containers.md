@@ -26,10 +26,10 @@ $ docker run node-docker
 
 When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
-Let’s open a new terminal then make a GET request to the server using the curl command.
+Let’s open a new terminal then make a POST request to the server using the curl command.
 
 ```console
-$ curl --request GET \
+$ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
   --data '{"msg": "testing"}'
