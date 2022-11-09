@@ -406,7 +406,7 @@ several options have been removed:
     [top-level `volumes` option](compose-file-v3.md#volume-configuration-reference)
     and specify the driver there.
 
-        version: "{{ site.compose_file_v3 }}"
+        version: "{{ site.compose_file_v3 }}"  # optional since v1.27.0
         services:
           db:
             image: postgres

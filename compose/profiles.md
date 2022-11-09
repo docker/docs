@@ -21,7 +21,6 @@ Services are associated with profiles through the
 array of profile names:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: frontend
@@ -85,7 +84,6 @@ manually. This can be used for one-off services and debugging tools.
 As an example consider this configuration:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   backend:
     image: backend
@@ -118,7 +116,6 @@ profile with it, be always enabled (by omitting `profiles`) or have a matching
 profile enabled explicitly:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web

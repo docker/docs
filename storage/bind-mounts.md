@@ -389,7 +389,6 @@ $ docker run -d \
 A single Docker Compose service with a bind mount looks like this:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts

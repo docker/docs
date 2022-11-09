@@ -31,7 +31,7 @@ topic on [Deploying an app to a Swarm](https://github.com/docker/labs/blob/maste
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample1">
 <pre><code>
-version: "{{ site.compose_file_v3 }}"
+version: "{{ site.compose_file_v3 }}" # optional since v1.27.0
 services:
 
   redis:
@@ -173,7 +173,6 @@ Configuration options that are applied at build time.
 context:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   webapp:
     build: ./dir
@@ -183,7 +182,6 @@ Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   webapp:
     build:
@@ -482,7 +480,6 @@ the stack deployment fails with a `config not found` error.
 > compose file format.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -524,7 +521,6 @@ to `103`. The `redis` service does not have access to the `my_other_config`
 config.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -604,7 +600,6 @@ When configuring a gMSA credential spec for a service, you only need
 to specify a credential spec with `config`, as shown in the following example:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   myservice:
     image: myimage:latest
@@ -632,7 +627,6 @@ behaviors:
 Simple example:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -665,7 +659,6 @@ sub-options only takes effect when deploying to a [swarm](../../engine/swarm/ind
 ignored by `docker-compose up` and `docker-compose run`, except for `resources`.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:alpine
@@ -703,8 +696,6 @@ in cases where you want to use your own load balancer, or for Hybrid
 Windows and Linux applications.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   wordpress:
     image: wordpress
@@ -751,7 +742,6 @@ Specify labels for the service. These labels are *only* set on the service,
 and *not* on any containers for the service.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web
@@ -763,7 +753,6 @@ services:
 To set labels on containers instead, use the `labels` key outside of `deploy`:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web
@@ -780,7 +769,6 @@ in the [swarm](../../engine/swarm/index.md) topics.)
 
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -797,7 +785,6 @@ documentation for a full description of the syntax and available types of
 and [specifying the maximum replicas per node](../../engine/reference/commandline/service_create.md#specify-maximum-replicas-per-node---replicas-max-per-node)
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   db:
     image: postgres
@@ -821,7 +808,6 @@ When there are more tasks requested than running nodes, an error
 `no suitable node (max replicas per node limit exceed)` is raised.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -841,7 +827,6 @@ If the service is `replicated` (which is the default), specify the number of
 containers that should be running at any given time.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -873,7 +858,6 @@ In this general example, the `redis` service is constrained to use no more than
 and has `20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:alpine
@@ -927,7 +911,6 @@ Configures if and how to restart containers when they exit. Replaces
   decide immediately).
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:alpine
@@ -972,7 +955,6 @@ updates.
 > file format.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   vote:
     image: dockersamples/examplevotingapp_vote:before
@@ -1326,7 +1308,6 @@ Run an init inside the container that forwards signals and reaps processes.
 Set this option to `true` to enable this feature for the service.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: alpine:latest
@@ -1473,7 +1454,6 @@ files are removed to allow storage of new logs.
 Here is an example `docker-compose.yml` file that limits logging storage:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   some-service:
     image: some-service
@@ -1566,8 +1546,6 @@ the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on
 the `legacy` network.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   web:
     image: "nginx:alpine"
@@ -1619,8 +1597,6 @@ Then, reload the docker daemon and edit docker-compose.yml to contain the follow
 An example:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   app:
     image: nginx:alpine
@@ -1779,7 +1755,6 @@ command or by another stack deployment. If the external secret does not exist,
 the stack deployment fails with a `secret not found` error.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -1822,7 +1797,6 @@ to `103`. The `redis` service does not have access to the `my_other_secret`
 secret.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   redis:
     image: redis:latest
@@ -2002,7 +1976,6 @@ for mounting a named volume. Named volumes must be listed under the top-level
 `volumes` key, as shown.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: nginx:alpine
@@ -2084,7 +2057,6 @@ expressed in the short form.
   - `size`: the size for the tmpfs mount in bytes
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: nginx:alpine
@@ -2139,7 +2111,6 @@ as a named volume to persist the data on the swarm, _and_ is constrained to run
 only on `manager` nodes. Here is the relevant snip-it from that file:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   db:
     image: postgres:9.4
@@ -2221,8 +2192,6 @@ shared with another service as a volume so that it can be periodically backed
 up:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   db:
     image: db
@@ -2283,8 +2252,6 @@ In the example below, instead of attempting to create a volume called
 called `data` and mount it into the `db` service's containers.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   db:
     image: postgres
@@ -2353,7 +2320,6 @@ volumes that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 volumes:
   data:
     name: my-app-data
@@ -2362,7 +2328,6 @@ volumes:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 volumes:
   data:
     external: true
@@ -2428,7 +2393,6 @@ Docker has already created automatically) and an alias that Compose can use
 network using the alias.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     networks:
@@ -2572,8 +2536,6 @@ looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   proxy:
     build: ./proxy
@@ -2599,7 +2561,6 @@ You can also specify the name of the network separately from the name used to
 refer to it within the Compose file:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 networks:
   outside:
     external:
@@ -2615,7 +2576,6 @@ networks which contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 networks:
   network1:
     name: my-app-net
@@ -2624,7 +2584,6 @@ networks:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 networks:
   network1:
     external: true
