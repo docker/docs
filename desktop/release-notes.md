@@ -34,13 +34,15 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Promoted Virtualization framework to default hypervisor for macOS >= 12.5.
+- Set Virtualization framework as the default hypervisor for macOS >= 12.5.
+- Migrate previous install to Virtualization framework hypervisor for macOS >= 12.5.
+- The Enhanced Container Isolation feature, available to Docker Business users, can now be enabled from the General Settings.
 
 ### Upgrades
 
 - [Docker Engine v20.10.21](https://docs.docker.com/engine/release-notes/#201021),
-  which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="\_blank" rel="noopener"},
-  and updated handling of `image:tag@digest` image references.
+  which contains mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="\_blank" rel="noopener"},
+  and updates the handling of `image:tag@digest` image references.
 - [Docker Compose v2.12.2](https://github.com/docker/compose/releases/tag/v2.12.2)
 - [Containerd v1.6.9](https://github.com/containerd/containerd/releases/tag/v1.6.9)
 - [Go 1.19.3](https://github.com/golang/go/releases/tag/go1.19.3)
@@ -49,37 +51,37 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
-- Docker Desktop now requires an internal network subnet of size /24. If you were previously using a /28, it will be automatically expanded to /24. If you experience networking issues, check to see if you have a clash between the Docker subnet and your infrastructure. Fixes [docker/for-win#13025](https://github.com/docker/for-win/issues/13025)
-- Fixes an issue that prevents users from creating Dev Environments when the Git URL has upper case characters
-- Fix error `vpnkit.exe is not running` reported in diagnostics
-- Revert qemu to 6.2.0 to fix errors like `PR_SET_CHILD_SUBREAPER is unavailable` when running emulated amd64 code.
+- Docker Desktop now requires an internal network subnet of size /24. If you were previously using a /28, it is automatically expanded to /24. If you experience networking issues, check to see if you have a clash between the Docker subnet and your infrastructure. Fixes [docker/for-win#13025](https://github.com/docker/for-win/issues/13025).
+- Fixed an issue that prevents users from creating Dev Environments when the Git URL has upper-case characters.
+- Fix the `vpnkit.exe is not running` error reported in diagnostics.
+- Reverted qemu to 6.2.0 to fix errors like `PR_SET_CHILD_SUBREAPER is unavailable` when running emulated amd64 code.
 - Enabled [contextIsolation](https://www.electronjs.org/docs/latest/tutorial/context-isolation) and [sandbox](https://www.electronjs.org/docs/latest/tutorial/sandbox) mode inside Extensions. Now Extensions run in a separate context and this limits the harm that malicious code can cause by limiting access to most system resources.
 - Included `unpigz` to allow parallel decompression of pulled images.
-- Fixed issues related to performing action on selected containers (https://github.com/docker/for-win/issues/13005)
-- Adds the possibility of displaying timestamps for the container / project view.
-- Fix a possible segfault when interrupting `docker pull` with Control+C
-- Increase the default DHCP lease time to avoid the VM's network glitching and dropping connections every 2 hours
-- Remove infinite spinner on containers list (https://github.com/docker/for-mac/issues/6486)
-- Fixed bug showing incorrect values on used space in Settings
-- Fixed kubernetes not starting with the containerd integration
-- Fixed `kind` not starting with the containerd integration
-- Fixed dev environments not working with the containerd integration
-- Implemented `docker diff` in the containerd integration
-- Implemented `docker run —-platform` in the containerd integration
-- Fixed insecure registries not working with the containerd integration
+- Fixed issues related to performing actions on selected containers. [Fixes https://github.com/docker/for-win/issues/13005](https://github.com/docker/for-win/issues/13005)
+- Added functionality that allows you to display timestamps for your container or project view.
+- Fixed a possible segfault when interrupting `docker pull` with Control+C.
+- Increased the default DHCP lease time to avoid the VM's network glitching and dropping connections every two hours.
+- Removed the infinite spinner on the containers list. [Fixes https://github.com/docker/for-mac/issues/6486](https://github.com/docker/for-mac/issues/6486)
+- Fixed bug which showed incorrect values on used space in **Settings**.
+- Fixed a bug that caused Kubernetes not to start with the containerd integration.
+- Fixed a bug that caused `kind` not to start with the containerd integration.
+- Fixed a bug that caused Dev Environments to not work with the containerd integration.
+- Implemented `docker diff` in the containerd integration.
+- Implemented `docker run —-platform` in the containerd integration.
+- Fixed a bug that caused insecure registries not to work with the containerd integration.
 
 #### For Mac
 
-- Fix a startup failure for users of virtualization framework
-- Add back the `/var/run/docker.sock` on Mac by default, to increase compatibility with tooling like `tilt` and `docker-py.`
-- Fixes an issue preventing creation of Dev Environments on new Mac installs (error "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?").
+- Fixed a startup failure for users of Virtualization framework.
+- Re-added the `/var/run/docker.sock` on Mac by default, to increase compatibility with tooling like `tilt` and `docker-py.`
+- Fixed an issue that prevented the creation of Dev Environments on new Mac installs (error "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?").
 
 #### For Windows
 
-- Re-add `DockerCli.exe -SharedDrives`. Fixes [docker/for-win#5625](https://github.com/docker/for-win#5625).
-- Allow Docker to function on machines where powershell is disabled.
+- Re-added `DockerCli.exe -SharedDrives`. Fixes [docker/for-win#5625](https://github.com/docker/for-win#5625).
+- Docker Desktop now allows Docker to function on machines where PowerShell is disabled.
 - Fixed an issue where Compose v2 was not always enabled by default on Windows.
-- Docker Desktop now deletes the `C:\Program Files\Docker` folder at uninstall
+- Docker Desktop now deletes the `C:\Program Files\Docker` folder at uninstall.
 
 ## Docker Desktop 4.13.1
 
