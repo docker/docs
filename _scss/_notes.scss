@@ -15,6 +15,7 @@ The available classes are:
 
 .important: Yellow
 .warning: Red/orange
+.tip: Green
 .restricted: Purple, used to indicate features that require paid plans
 [no class]: Blue, the default
 
@@ -56,7 +57,7 @@ blockquote {
   html.night & {
     // DARK THEME
 
-    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
+    &:not(.important):not(.warning):not(.restricted):not(.experimental):not(.tip) {
       @include notification(
         $bg-color: $dark-palette-blue-200,
         $header-color: $white-0,
@@ -100,12 +101,21 @@ blockquote {
         $icon: "\f492"
       );
     }
+
+    &.tip {
+      @include notification(
+        $bg-color: $dark-palette-green-200,
+        $header-color: $white-0,
+        $body-text-color: $white-0,
+        $icon: "\f164"
+      );
+    }
   }
 
   html:not(.night) & {
     // LIGHT THEME
 
-    &:not(.important):not(.warning):not(.restricted):not(.experimental) {
+    &:not(.important):not(.warning):not(.restricted):not(.experimental):not(.tip) {
       @include notification(
         $bg-color: $light-palette-blue-100,
         $header-color: $light-palette-blue-500,
@@ -148,6 +158,15 @@ blockquote {
         $body-text-color: inherit,
         $icon: "\f492"
       );
+    }
+
+    &.tip {
+      @include notification(
+        $bg-color: $light-palette-green-100,
+        $header-color: $light-palette-green-500,
+        $body-text-color: inherit,
+        $icon: "\f164"
+      )
     }
   }
 }
