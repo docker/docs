@@ -56,7 +56,7 @@
                                 <div class="metadata-items">
                                     <ul>
                                       {%- unless page.skip_read_time == true %}{% assign words = content | number_of_words %}{% if words >= 360 -%}
-                                      <li title="Estimated reading time"><i class="fa fa-clock" aria-hidden="true"></i> {{ words | divided_by:180 }} minutes read</span></li>
+                                      <li title="Estimated reading time"><i class="fa fa-clock" aria-hidden="true"></i> {{ words | divided_by:180 }} minute read</span></li>
                                       {%- endif %}{% endunless -%}
                                       {%- if edit_url != "" -%}
                                       <li><a href="{{ edit_url }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this page</a></li>
