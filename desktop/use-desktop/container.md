@@ -11,15 +11,12 @@ The **Containers** view lists all your running containers and applications. You 
 Use the **Search** field to search for any specific container.
 
 From the **Containers** view you can perform the following actions on one or more containers at once:
-- Pause
-- Resume
-- Stop
-- Start
+- Pause/Resume
+- Stop/Start
 - Delete
-
-When you hover over individual containers, you can also:
-- Select **Open in Visual Studio Code** to open the application in VS Code.
-- Open the port exposed by the container in a browser.
+- Open the application in VS code
+- Open the port exposed by the container in a browser
+- Copy docker run. This allows you to easily share container run details or modify certain parameters
 
 ### Integrated terminal
 
@@ -48,7 +45,6 @@ The **container view** displays **Logs**, **Inspect**, and **Stats** tabs and pr
     - Automatically copy any logs content by highlighting a few lines or a section of the logs.
     - Use the **Clear terminal** icon in the top right-hand corner to clear the logs terminal. 
     - Select and view external links that may be in your logs. 
-
 
 - Select **Inspect** to view low-level information about the container. You can see the local path, version number of the image, SHA-256, port mapping, and other details.
 

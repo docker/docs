@@ -26,7 +26,7 @@ Enhanced Container Isolation helps ensure strong container isolation and also lo
 
 ### Who is it for?
 
-- For organizations that want to prevent container attacks and reduce vulnerabilities.
+- For organizations and developers that want to prevent container attacks and reduce vulnerabilities.
 - For organizations that want to ensure stronger container isolation that is easy and intuitive to implement on developers' machines.
 
 ### What happens when Enhanced Container Isolation is enabled?
@@ -51,7 +51,16 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 
 ### How do I enable Enhanced Container Isolation?
 
-As an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+#### As a developer
+
+To enable Enhanced Container Isolation as a developer:
+1. Navigate to **Settings** > **General** in Docker Desktop.
+2. Next to **Use Enhanced Container Isolation**, select the checkbox. 
+3. Select **Apply and restart** to save your settings. 
+
+#### As an admin 
+
+To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must [create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
 
@@ -75,9 +84,11 @@ For this to take effect:
   >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
   {: .important}
 
-### What do users see when this setting is enforced?
+### What do users see when this setting is enforced by an admin?
 
-When Enhanced Container Isolation is enabled, users see that containers run within a Linux user namespace. 
+When Enhanced Container Isolation is enabled, users see:
+- **Use Enhanced Container Isolation** toggled on in **Settings** > **General**.
+- Containers run within a Linux user namespace. 
 
 To check, run:
 

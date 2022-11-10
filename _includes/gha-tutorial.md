@@ -73,22 +73,25 @@ target="blank" rel="noopener"}.
 Now the essentials: what steps to run, and in what order to run them.
 
 {% raw %}
-
 ```yaml
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -96,7 +99,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
 ```
-
 {% endraw %}
 
 The previous YAML snippet contains a sequence of steps that:
@@ -124,7 +126,6 @@ Add these steps to your workflow file. The full workflow configuration should
 look as follows:
 
 {% raw %}
-
 ```yaml
 name: ci
 
@@ -137,16 +138,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      -
+        name: Checkout
         uses: actions/checkout@v3
-      - name: Login to Docker Hub
+      -
+        name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Set up Docker Buildx
+      -
+        name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Build and push
+      -
+        name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -154,7 +159,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
 ```
-
 {% endraw %}
 
 ### Run the workflow
@@ -175,4 +179,3 @@ Save the workflow file and run the job.
 
    If you see the new repository in that list, it means the GitHub Actions
    successfully pushed the image to Docker Hub!
-

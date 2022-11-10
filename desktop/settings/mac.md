@@ -30,6 +30,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is disabled by default.
 
+- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
+
 - **Use gRPC FUSE for file sharing**. Clear this check box to use the legacy
   osxfs file sharing instead.
 
@@ -43,6 +45,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
+
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
@@ -163,11 +167,7 @@ Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
 {% include beta.md %}
 
-On the **Beta features** tab, you also have the option to allow version 4.13 feature flags, which are product features Docker is currently experimenting with. This is switched on by default. 
-
-### Enable the new Apple Virtualization framework
-
-Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
+On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
 
 ### Enable VirtioFS
 
@@ -182,6 +182,10 @@ To enable virtioFS:
 2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
 
 3. Click **Apply & Restart**.
+
+### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
 
 ## Kubernetes
 
