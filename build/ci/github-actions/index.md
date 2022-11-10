@@ -2,7 +2,7 @@
 title: Introduction to GitHub Actions
 description: >
   Docker maintains a set of official GitHub Actions for building Docker images.
-keywords: github, actions, gha, ci, build, introduction, tutorial
+keywords: ci, github actions, gha,  build, introduction, tutorial
 redirect_from:
   - /ci-cd/github-actions/
 ---
@@ -43,4 +43,5 @@ using the official Docker actions, to build and push an image to Docker Hub.
 There are many more things you can do to customize your workflow to better suit
 your needs. To learn more about some of the more advanced use cases, take a look
 at the advanced examples, such as [building multi-platform images](examples.md#multi-platform-images),
-or [using cache storage backends](examples.md#cache).
+or [using cache storage backends](examples.md#cache) and also how to
+[configure your builder](configure-builder.md).
