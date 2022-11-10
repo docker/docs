@@ -15,6 +15,34 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.21
+2022-10-25
+
+This release of Docker Engine contains updated versions of Docker Compose,
+Docker Scan, Containerd, added packages for Ubuntu 22.10, and some minor bug
+fixes and enhancements.
+
+### Client
+
+- Remove experimental gate for `--platform` in bash completion [docker/cli#3824](https://github.com/docker/cli/pull/3824){:target="_blank" rel="noopener"}.
+
+### Daemon
+
+- Add support for `allow-nondistributable-artifacts` towards Docker Hub [moby/moby#44313](https://github.com/moby/moby/pull/44313){:target="_blank" rel="noopener"}.
+- Fix an `Invalid standard handle identifier` panic when  registering the Docker Engine as a service from a legacy CLI on Windows [moby/moby#44326](https://github.com/moby/moby/pull/44326){:target="_blank" rel="noopener"}.
+
+### Builder
+
+- Fix running Git commands in Cygwin on Windows [moby/moby#44332](https://github.com/moby/moby/pull/44332){:target="_blank" rel="noopener"}.
+- Update bundled BuildKit version to to fix `output clipped, log limit 1MiB reached` errors [moby/moby#44339](https://github.com/moby/moby/pull/44339){:target="_blank" rel="noopener"}.
+
+### Packaging
+
+- Provide packages for Ubuntu 22.10 (Kinetic Kudu).
+- Update Docker Compose to [v2.12.2](https://github.com/docker/compose/releases/tag/v2.12.2){:target="_blank" rel="noopener"}.
+- Update Docker Scan to [v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0){:target="_blank" rel="noopener"}.
+- Update containerd (`containerd.io` package) to [v1.6.9](https://github.com/containerd/containerd/releases/tag/v1.6.9){:target="_blank" rel="noopener"}.
+
 ## 20.10.20
 2022-10-18
 
@@ -31,7 +59,7 @@ The mitigations available in this release and in other consumers of the daemon A
 are partial and only protect users who build a Git URL context (e.g. `git+protocol://`).
 As the vulnerability could still be exploited by manually run Git commands that interact
 with and check out submodules, users should immediately upgrade to a patched version of
-Git to protect against this vulernability. Further details are available from the GitHub
+Git to protect against this vulnerability. Further details are available from the GitHub
 blog (["Git security vulnerabilities announced"](https://github.blog/2022-10-18-git-security-vulnerabilities-announced/){:target="_blank" rel="noopener"}).
 
 
