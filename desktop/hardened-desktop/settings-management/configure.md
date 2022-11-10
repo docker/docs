@@ -84,6 +84,12 @@ The following `admin-settings.json` code and table provides an example of the re
       "value":"192.168.65.0/24"
     }
   },
+  "kubernetes": {
+     "locked": false,
+     "enabled": false,
+     "showSystemContainers": false,
+     "imagesRepository": ""
+  },
   "windowsContainers": {
     "dockerDaemonOptions": {
       "locked": false,
@@ -111,6 +117,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  | <span class="badge badge-info">Windows only</span> | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. It is also incompatible with Enhanced Container Isolation. See [Known issues](../enhanced-container-isolation/faq.md) for more information.| 
 | &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |
 | &nbsp;&nbsp; &nbsp; &nbsp;`vpnkitCIDR` |  |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |
+|`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the UI and when you run `docker ps`.  `imagesRepository` allows you to specify which repository Docker Desktop pulls the Kubernetes images from. For example, `"imagesRepository": "registry-1.docker.io/docker"`.  |
 | `windowsContainers` |  | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.                  |
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the linux daemon config file. See the [Docker Engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file).|                                |
 |`disableUpdate`|  |If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|
