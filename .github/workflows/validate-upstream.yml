@@ -47,7 +47,7 @@ jobs:
                 remote['repo'] = "${{ github.event.pull_request.head.repo.html_url }}";
                 remote['ref'] = "${{ github.event.pull_request.head.ref }}"
               } else {
-                remote['ref'] = "${{ github.ref }}";
+                remote['ref'] = "${{ github.ref_name }}";
               }
             }
 
