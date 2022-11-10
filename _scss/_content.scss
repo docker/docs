@@ -126,13 +126,13 @@ a.accept-eula {
 }
 
 /* Style the Image Used to Trigger the Modal  */
-#myImg {
+main img {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-#myImg:hover {opacity: 0.7;}
+main img:hover {opacity: 0.7;}
 
 /* The Modal (background) */
 .modal {
@@ -153,12 +153,13 @@ a.accept-eula {
 .modal-content {
   margin: auto;
   display: block;
-  width: 1400px;
+  width: 90%;
+  top:20px;
 }
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
-#caption {
-  margin: auto;
+#img-modal-caption {
+  margin: 15px auto;
   display: block;
   width: 80%;
   max-width: 700px;
@@ -169,7 +170,7 @@ a.accept-eula {
 }
 
 /* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
+.modal-content, #img-modal-caption {
   animation-name: zoom;
   animation-duration: 0.6s;
 }
@@ -180,18 +181,16 @@ a.accept-eula {
 }
 
 /* The Close Button */
-.close {
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
+#img-modal-close {
   font-size: 40px;
   font-weight: bold;
+  color: #f1f1f1;
   transition: 0.3s;
   margin-right: 10px;
 }
 
-.close:hover,
-.close:focus {
+#img-modal-close:hover,
+#img-modal-close:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;

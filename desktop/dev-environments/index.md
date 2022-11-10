@@ -22,13 +22,7 @@ You can use Dev Environments through the intuitive GUI in Docker Dashboard or st
 >Docker has simplified how you configure your dev environment project. All you need to get started is a `compose-dev.yaml` file. If you have an existing project with a `.docker/` folder this is automatically migrated the next time you launch.
 {: .important}
 
-<<<<<<< HEAD
-<img id="myImg" src="/desktop/images/dev-env.PNG" alt="Dev Environments tab in Docker Desktop" style="width:100%;max-width:500px">
-
-![Dev environment intro](../images/dev-env.PNG){:width="700px"}
-=======
 Dev Environments is powered by [Docker Compose](/compose/). This allows Dev Environments to take advantage of all the benefits and features of Compose whilst adding an intuitive GUI where you can launch environments with the click of a button.
->>>>>>> 80d4f9a3f7df63081fa701d359a4c8fe7afe0317
 
 Every dev environment you want to run needs a `compose-dev.yaml` file which configures your application's services and lives in your project directory. You don't need to be an expert in Docker Compose or write a `compose-dev.yaml` file from scratch as Dev Environments creates a starter `compose-dev.yaml` files based on the main language in your project. 
 
