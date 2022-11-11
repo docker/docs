@@ -3,22 +3,42 @@ horizontalnav:
 - title: Home
   path: /
   node: home
-- title: Guides
-  path: /get-started/overview/
-  node: guides
-- title: Manuals
-  path: /desktop/
-  node: manuals
-- title: Reference
-  path: /reference/
-  node: reference
+- title: Docs
+  path: /
+  sublinks:
+    - path: /get-started/
+      title: Get started
+      node: get-started
+    - path: /desktop/
+      title: Docker Desktop
+      node: desktop
+    - path: /engine/
+      title: Docker Engine
+      node: engine
+    - path: /build/
+      title: Docker Build
+      node: build
+    - path: /compose/
+      title: Docker Compose
+      node: compose
+    - path: /hub/
+      title: Docker Hub
+      node: hub
+    - path: /admin/
+      title: Docker Administration
+      node: admin
+    - path: /registry/
+      title: Docker Registry
+      node: registry
 - title: Samples
   path: /samples/
   node: samples
-- title: Contribute
-  path: /contribute/overview/
-  node: contribute
-  hide_home: true
+- title: Support
+  path: https://www.docker.com/support/
+- title: Community
+  path: https://www.docker.com/community/
+- title: Blog
+  path: https://www.docker.com/blog/
 
 home: {}
 

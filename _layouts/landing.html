@@ -19,10 +19,21 @@
       <div class="collapse navbar-collapse" id="header-content">
         <ul class="nav navbar-nav">
         {%- for entry in site.data.toc.horizontalnav -%}
-          {%- if entry.hide_home -%}{% continue %}{%- endif -%}
-          <li{% if entry.node == "home" %} class=active{% endif %}><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
-        {%- endfor -%} 
-        <li><a href="/contribute/overview/">Contribute</a></li>
+          {% if entry.sublinks %}
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="{{ entry.path }}">{{ entry.title }}<span class="caret"></span></a>
+            <ul class="dropdown-menu" style="display:block; background-color: grey;" >
+            {% for sublink in entry.sublinks %}
+              <li ><a href="{{ sublink.path }}">{{ sublink.title }}</a></li>
+            {% endfor %}
+            </ul>
+          {% else %}
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>{% include theme-switch.html %}</li>
