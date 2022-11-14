@@ -4,11 +4,11 @@ keywords: Docker, service, accounts, Docker Hub
 title: Service accounts
 ---
 
-A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and do not share Docker IDs with the members in the Team plan. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
+A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and do not share Docker IDs with the members in the organization. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
 
 > **Note**
 >
-> Service accounts included with the Team plan are limited to 5,000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
+> All paid Docker subscriptions are limited to 5000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on. 
 
 ## Enhanced Service Account add-on pricing
 
@@ -22,7 +22,7 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 | 4 | 50,000-100,000 | $58,950/yr |
 | 5 | 100,000+ | [Contact Sales](https://www.docker.com/pricing/questions){:target="_blank" rel="noopener" class="_"} |
 
-<sub>*Once the initial Tier is established, that is the minimum fee for the year.  Annual commitment required.  The service account may exceed Pulls by up to 25% for up to 20 days during the year without incurring additional fees.  Reports on consumption will be provided upon request.  At the end of the initial 1-year term, the appropriate Tier will be established for the following year.<sub>
+<sub>*Once the initial Tier is established, that is the minimum fee for the year. Annual commitment required. The service account may exceed Pulls by up to 25% for up to 20 days during the year without incurring additional fees. Reports on consumption will be provided upon request. At the end of the initial 1-year term, the appropriate Tier will be established for the following year.<sub>
 
 ## How a pull is defined
 
