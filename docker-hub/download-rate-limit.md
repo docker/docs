@@ -84,9 +84,9 @@ This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pull
 
 ### I don't see any RateLimit headers
 
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because you are authenticated with a Docker Hub account associated with a Pro, Team, or a Business subscription, or because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
+If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
 
-## I'm being limited even though I have a paid Docker subscription
+## I'm being limited to a lower rate even though I have a paid Docker subscription
 
 To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account.
 
