@@ -28,41 +28,102 @@ for the current page, we:
       to sections (containing the landing page of the section).
 {%- endcomment -%}
 {%- for section in site.data.toc.horizontalnav -%}
-    {%- for level1 in site.data.toc[section.node] -%}
-        {%- if level1.path == page.url -%}
-            {%- assign found = "true" -%}
-            {%- assign section_title = section.title -%}
-            {%- assign section_url   = section.path -%}
-            {%- assign level1_title  = level1.title -%}
-            {%- assign level1_url    = level1.path -%}
-            {%- break -%}
-        {%- endif -%}
-        {%- for level2 in level1.section -%}
-            {%- if level2.path == page.url -%}
+    {% if section.sublinks %}
+        {%- for sublink in section.sublinks -%}
+            {%- for level1 in site.data.toc[sublink.node] -%}
+                {%- if level1.path == page.url -%}
+                    {%- assign found = "true" -%}
+                    {%- assign section_title = sublink.title -%}
+                    {%- assign section_url   = sublink.path -%}
+                    {%- assign level1_title  = level1.title -%}
+                    {%- assign level1_url    = level1.path -%}
+                    {%- break -%}
+                {%- endif -%}
+                {%- for level2 in level1.section -%}
+                    {%- if level2.path == page.url -%}
+                        {%- assign found = "true" -%}
+                        {%- assign section_title = sublink.title -%}
+                        {%- assign section_url   = sublink.path -%}
+                        {%- assign level1_title  = level1.sectiontitle -%}
+                        {%- assign level1_url    = level1.section[0].path -%}
+                        {%- assign level2_title  = level2.title -%}
+                        {%- assign level2_url    = level2.path -%}
+                        {%- break -%}
+                    {%- endif -%}
+                    {%- for level3 in level2.section -%}
+                        {%- if level3.path == page.url -%}
+							{%- assign found = "true" -%}
+							{%- assign section_title = sublink.title -%}
+							{%- assign section_url   = sublink.path -%}
+							{%- assign level1_title  = level1.sectiontitle -%}
+							{%- assign level1_url    = level1.section[0].path -%}
+							{%- assign level2_title  = level2.sectiontitle -%}
+							{%- assign level2_url    = level2.section[0].path -%}
+							{%- assign level3_title  = level3.title -%}
+							{%- assign level3_url    = level3.path -%}
+							{%- break -%}
+						{%- endif -%}
+						{%- for level4 in level3.section -%}
+							{%- if level4.path == page.url -%}
+								{%- assign found = "true" -%}
+								{%- assign section_title = sublink.title -%}
+								{%- assign section_url   = sublink.path -%}
+								{%- assign level1_title  = level1.sectiontitle -%}
+								{%- assign level1_url    = level1.section[0].path -%}
+								{%- assign level2_title  = level2.sectiontitle -%}
+								{%- assign level2_url    = level2.section[0].path -%}
+								{%- assign level3_title  = level3.sectiontitle -%}
+								{%- assign level3_url    = level3.section[0].path -%}
+								{%- assign level4_title  = level4.title -%}
+								{%- assign level4_url    = level4.path -%}
+								{%- break -%}
+							{%- endif -%}
+							{%- for level5 in level4.section -%}
+								{%- if level5.path == page.url -%}
+									{%- assign found = "true" -%}
+									{%- assign section_title = sublink.title -%}
+									{%- assign section_url   = sublink.path -%}
+									{%- assign level1_title  = level1.sectiontitle -%}
+									{%- assign level1_url    = level1.section[0].path -%}
+									{%- assign level2_title  = level2.sectiontitle -%}
+									{%- assign level2_url    = level2.section[0].path -%}
+									{%- assign level3_title  = level3.sectiontitle -%}
+									{%- assign level3_url    = level3.section[0].path -%}
+									{%- assign level4_title  = level4.title -%}
+									{%- assign level4_url    = level4.path -%}
+									{%- assign level5_title  = level5.title -%}
+									{%- assign level5_url    = level5.path -%}
+									{%- break -%}
+								{%- endif -%}
+							{%- endfor -%}
+                        {%- endfor -%}
+                    {%- endfor -%}
+                {%- endfor -%}
+            {%- endfor -%}
+        {%- endfor -%}
+    {%- else -%}
+        {%- for level1 in site.data.toc[section.node] -%}
+            {%- if level1.path == page.url -%}
                 {%- assign found = "true" -%}
                 {%- assign section_title = section.title -%}
                 {%- assign section_url   = section.path -%}
-                {%- assign level1_title  = level1.sectiontitle -%}
-                {%- assign level1_url    = level1.section[0].path -%}
-                {%- assign level2_title  = level2.title -%}
-                {%- assign level2_url    = level2.path -%}
+                {%- assign level1_title  = level1.title -%}
+                {%- assign level1_url    = level1.path -%}
                 {%- break -%}
             {%- endif -%}
-            {%- for level3 in level2.section -%}
-                {%- if level3.path == page.url -%}
+            {%- for level2 in level1.section -%}
+                {%- if level2.path == page.url -%}
                     {%- assign found = "true" -%}
                     {%- assign section_title = section.title -%}
                     {%- assign section_url   = section.path -%}
                     {%- assign level1_title  = level1.sectiontitle -%}
                     {%- assign level1_url    = level1.section[0].path -%}
-                    {%- assign level2_title  = level2.sectiontitle -%}
-                    {%- assign level2_url    = level2.section[0].path -%}
-                    {%- assign level3_title  = level3.title -%}
-                    {%- assign level3_url    = level3.path -%}
+                    {%- assign level2_title  = level2.title -%}
+                    {%- assign level2_url    = level2.path -%}
                     {%- break -%}
                 {%- endif -%}
-                {%- for level4 in level3.section -%}
-                    {%- if level4.path == page.url -%}
+                {%- for level3 in level2.section -%}
+                    {%- if level3.path == page.url -%}
                         {%- assign found = "true" -%}
                         {%- assign section_title = section.title -%}
                         {%- assign section_url   = section.path -%}
@@ -70,14 +131,12 @@ for the current page, we:
                         {%- assign level1_url    = level1.section[0].path -%}
                         {%- assign level2_title  = level2.sectiontitle -%}
                         {%- assign level2_url    = level2.section[0].path -%}
-                        {%- assign level3_title  = level3.sectiontitle -%}
-                        {%- assign level3_url    = level3.section[0].path -%}
-                        {%- assign level4_title  = level4.title -%}
-                        {%- assign level4_url    = level4.path -%}
+                        {%- assign level3_title  = level3.title -%}
+                        {%- assign level3_url    = level3.path -%}
                         {%- break -%}
                     {%- endif -%}
-                    {%- for level5 in level4.section -%}
-                        {%- if level5.path == page.url -%}
+                    {%- for level4 in level3.section -%}
+                        {%- if level4.path == page.url -%}
                             {%- assign found = "true" -%}
                             {%- assign section_title = section.title -%}
                             {%- assign section_url   = section.path -%}
@@ -89,15 +148,31 @@ for the current page, we:
                             {%- assign level3_url    = level3.section[0].path -%}
                             {%- assign level4_title  = level4.title -%}
                             {%- assign level4_url    = level4.path -%}
-                            {%- assign level5_title  = level5.title -%}
-                            {%- assign level5_url    = level5.path -%}
                             {%- break -%}
                         {%- endif -%}
+                        {%- for level5 in level4.section -%}
+                            {%- if level5.path == page.url -%}
+                                {%- assign found = "true" -%}
+                                {%- assign section_title = section.title -%}
+                                {%- assign section_url   = section.path -%}
+                                {%- assign level1_title  = level1.sectiontitle -%}
+                                {%- assign level1_url    = level1.section[0].path -%}
+                                {%- assign level2_title  = level2.sectiontitle -%}
+                                {%- assign level2_url    = level2.section[0].path -%}
+                                {%- assign level3_title  = level3.sectiontitle -%}
+                                {%- assign level3_url    = level3.section[0].path -%}
+                                {%- assign level4_title  = level4.title -%}
+                                {%- assign level4_url    = level4.path -%}
+                                {%- assign level5_title  = level5.title -%}
+                                {%- assign level5_url    = level5.path -%}
+                                {%- break -%}
+                            {%- endif -%}
+                        {%- endfor -%}
                     {%- endfor -%}
                 {%- endfor -%}
             {%- endfor -%}
         {%- endfor -%}
-    {%- endfor -%}
+    {%- endif -%}
     {%- comment -%}
     Some section's overview page are not in the TOC. If we didn't find a matching
     page in the TOC so far, use the section itself for the breadcrumb.

@@ -22,9 +22,23 @@
 <div class="nav-container hidden-sm hidden-xs">
     <div>
         <ul class="nav navbar-nav">
-        {%- for entry in site.data.toc.horizontalnav -%}
-          <li><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
-        {%- endfor -%}
+            {%- for entry in site.data.toc.horizontalnav -%}
+            {% if entry.sublinks %}
+            <li class="nav-item">
+              <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}<span class="caret"></span></a>
+              <ul class="dropdown-menu" >
+                
+              {% for sublink in entry.sublinks %}
+                <li><a href="{{ sublink.path }}" id="{{ sublink.node }}">{{ sublink.title }}</a></li>
+              {% endfor %}
+              </ul>
+            {% else %}
+            {%- if entry.hide_home -%}{% continue %}{%- endif -%}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
         </ul>
     </div>
     <div class="ctrl-right">

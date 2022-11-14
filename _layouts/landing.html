@@ -17,18 +17,20 @@
         </a>
       </div>
       <div class="collapse navbar-collapse" id="header-content">
+
         <ul class="nav navbar-nav">
-        {%- for entry in site.data.toc.horizontalnav -%}
+          {%- for entry in site.data.toc.horizontalnav -%}
           {% if entry.sublinks %}
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="{{ entry.path }}">{{ entry.title }}<span class="caret"></span></a>
-            <ul class="dropdown-menu" style="display:block; background-color: grey;" >
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}<span class="caret"></span></a>
+            <ul class="dropdown-menu" >
+              
             {% for sublink in entry.sublinks %}
-              <li ><a href="{{ sublink.path }}">{{ sublink.title }}</a></li>
+              <li><a style="color:#1488c6;" href="{{ sublink.path }}" id="{{ sublink.node }}">{{ sublink.title }}</a></li>
             {% endfor %}
             </ul>
           {% else %}
-          
+          {%- if entry.hide_home -%}{% continue %}{%- endif -%}
           <li class="nav-item">
             <a class="nav-link" href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a>
           {% endif %}

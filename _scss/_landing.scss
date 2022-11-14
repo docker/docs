@@ -7,6 +7,12 @@ body.landing {
     font-family: $headings-landing;
   }
 
+  .dropdown:hover .dropdown-menu{
+    display:block;
+  }
+
+
+
   section {
     margin-top: 40px;
     margin-bottom: 40px;
@@ -23,13 +29,16 @@ body.landing {
       .navbar-collapse.collapse {
         display: flex !important;
 
-        ul:first-of-type {
+
+        ul.nav:first-of-type {
           flex: 1;
           display: flex;
           justify-content: center;
-        }
+        } 
       }
     }
+
+
 
     @include before-lg-width {
       .container {

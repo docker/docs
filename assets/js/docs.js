@@ -64,6 +64,15 @@ function walkTree(tree) {
 function renderNav() {
     getJSON( "/assets/js/toc.json", function( data ) {
         for (const item of data.horizontalnav) {
+            if (item.sublinks){
+                for (const sublink of item.sublinks) {
+                    if (sublink.path === pageURL || pageIsInSection(data[sublink.node])) {
+                        _('#'+sublink.node).closest("li").classList.add("active")
+                        walkTree(data[sublink.node]);
+                        _("#jsTOCLeftNav").innerHTML = outputLetNav.join("");
+                    }
+                }
+            }
             if (item.path === pageURL || pageIsInSection(data[item.node])) {
                 // This is the current section. Set the corresponding header-nav link
                 // to active, and build the left-hand (vertical) navigation
