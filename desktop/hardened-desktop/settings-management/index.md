@@ -9,7 +9,7 @@ title: What is Settings Management?
 
 Settings Management is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization. 
 
-With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
+With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
 
 It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
@@ -29,7 +29,7 @@ Values that are set to `locked: true` within the `admin-settings.json` override 
 
 Using the `admin-settings.json` file, admins can:
 
-- Enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) (currently incompatible with WSL)
+- Enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) (currently incompatible with WSL)
 - Configure HTTP proxies
 - Configure network settings
 - Enforce the use of WSL2 based engine or Hyper-V

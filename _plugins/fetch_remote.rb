@@ -37,38 +37,48 @@ module Jekyll
       [first.to_i, last.to_i]
     end
 
+    def self.git_init(repo, dir)
+      puts "    Init repository"
+      git = Git.init(dir)
+      git.add_remote('origin', repo)
+    end
+
+    def self.git_fetch(repo, ref, fetch_depth, dir)
+      unless Dir.exist?(dir)
+        FetchRemote.git_init(repo, dir)
+      end
+      begin
+        puts "    Open repository"
+        git = Git.open(dir)
+        git.clean(force: true, d: true)
+      rescue => e
+        puts "    WARNING: #{e}"
+        FileUtils.rm_rf(dir)
+        FetchRemote.git_init(repo, dir)
+        git = Git.open(dir)
+      end
+      puts "    Fetch repository (depth #{fetch_depth})"
+      if fetch_depth > 0
+        git.fetch('origin', prune: true, depth: fetch_depth)
+      else
+        git.fetch('origin', prune: true)
+      end
+      puts "    Checkout repository"
+      git.checkout(ref, force: true)
+      return git
+    end
+
     def pre_read(site)
       beginning_time = Time.now
       puts "Starting plugin fetch_remote.rb..."
 
       fetch_depth = get_docs_url == "http://localhost:4000" && ENV['DOCS_ENFORCE_GIT_LOG_HISTORY'] == "0" ? 1 : 0
       site.config['fetch-remote'].each do |entry|
-        puts "  Repo #{entry['repo']}"
+        puts "  Repo #{entry['repo']} (#{entry['ref']})"
 
         gituri = Git::URL.parse(entry['repo'])
-        clonedir = "#{Dir.tmpdir}/docker-docs-clone#{gituri.path}"
-        if Dir.exist?(clonedir)
-          puts "    Opening #{clonedir}"
-          begin
-            git = Git.open(clonedir)
-            puts "    Fetch repository"
-            if fetch_depth > 0
-              git.fetch('origin', prune: true, depth: fetch_depth)
-            else
-              git.fetch('origin', prune: true)
-            end
-            puts "    Checkout #{entry['ref']}"
-            git.checkout(entry['ref'], force: true)
-          rescue => e
-            puts "    WARNING: #{e}"
-            FileUtils.rm_rf(clonedir)
-            puts "    Cloning repository into #{clonedir}"
-            git = Git.clone("#{entry['repo']}.git", Pathname.new(clonedir), branch: entry['ref'], depth: fetch_depth)
-          end
-        else
-          puts "    Cloning repository into #{clonedir}"
-          git = Git.clone("#{entry['repo']}.git", Pathname.new(clonedir), branch: entry['ref'], depth: fetch_depth)
-        end
+        clonedir = "#{Dir.tmpdir}/docker-docs-clone#{gituri.path}/#{Digest::SHA256.hexdigest(entry['ref'])}"
+        git = FetchRemote.git_fetch("#{entry['repo']}.git", entry['ref'], fetch_depth, clonedir)
 
         entry['paths'].each do |path|
           if File.extname(path['dest']) != ""

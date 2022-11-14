@@ -46,7 +46,13 @@ module Jekyll
               set_mode = "git"
             end
           rescue => e
-            # Ignored
+            begin
+              page.data['last_modified_at'] = File.mtime(page_relative_path).strftime(DATE_FORMAT)
+              set_mode = "mtime"
+            rescue => e
+              page.data['last_modified_at'] = Time.now.strftime(DATE_FORMAT)
+              set_mode = "rescue"
+            end
           end
         end
         puts"  #{page.relative_path}#{path_override}\n    last_modified_at(#{set_mode}): #{page.data['last_modified_at']}"

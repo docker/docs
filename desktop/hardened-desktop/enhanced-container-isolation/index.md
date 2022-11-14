@@ -31,7 +31,7 @@ Enhanced Container Isolation helps ensure strong container isolation and also lo
 
 ### What happens when Enhanced Container Isolation is enabled?
 
-When Enhanced Container Isolation is enabled using [Settings Management](../settings-management/index.md), the following features are enabled: 
+When Enhanced Container Isolation is turned on, the following features are enabled: 
 
 - All user containers are automatically run in Linux User Namespaces which ensures stronger isolation.
 - The root user in the container maps to an unprivileged user at VM level.

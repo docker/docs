@@ -1297,6 +1297,8 @@ manuals:
             title: FAQs and known issues
         - path: /desktop/hardened-desktop/registry-access-management/
           title: Registry Access Management
+        - path: /docker-hub/image-access-management/
+          title: Image Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
