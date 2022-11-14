@@ -78,7 +78,7 @@ but this property does not hold true for a registry cache cluster.
 
 > **Note**
 >
-> All paid Docker subscriptions are limited to 5000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on. See [Service Accounts](/docker-hub/service-accounts/) for more details.
+> When using Docker Hub, all paid Docker subscriptions are limited to 5000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on. See [Service Accounts](/docker-hub/service-accounts/) for more details.
 
 ### Configure the cache
 
