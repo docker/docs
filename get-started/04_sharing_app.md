@@ -113,7 +113,7 @@ In the steps below, you will build an additional image that's compatible with th
    ```console
     $ docker build --platform linux/amd64 -t <your-docker-id>/getting-started:amd64 .
    ```
-   In the command above, you use `--platform amd64` to specify the compatible platform for the image and you use `-t <your-docker-id>/getting-started:amd64` to name the new image.
+   In the command above, you use `--platform` to specify the platform for the image and you use `-t <your-docker-id>/getting-started:amd64` to name the new image.
 
 2. In a terminal, log in to Docker Hub using  the `docker login` command. Replace `<your-docker-id>` with your Docker ID.
 
