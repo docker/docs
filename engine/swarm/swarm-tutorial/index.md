@@ -53,18 +53,6 @@ hosts, simply follow the [Linux install instructions](../../install/index.md)
 for your platform. Spin up the three machines, and you are ready. You can test both
 single-node and multi-node swarm scenarios on Linux machines.
 
-#### Use Docker Desktop for Mac or Docker Desktop for Windows
-
-Alternatively, install the latest [Docker Desktop](../../../desktop/index.md) application on one
-computer. You can test both single-node and multi-node swarm from this computer.
-
-* You can use Docker Desktop for Mac or Windows to test _single-node_ features
-  of swarm mode, including initializing a swarm with a single node, creating
-  services, and scaling services.
-* Currently, you cannot use Docker Desktop for Mac or Docker Desktop for Windows
-  alone to test a _multi-node_ swarm, but many examples are applicable to a
-  single-node Swarm setup.
-
 ### The IP address of the manager machine
 
 The IP address must be assigned to a network interface available to the host

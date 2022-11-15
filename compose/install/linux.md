@@ -89,7 +89,8 @@ To update the Compose plugin, run the following commands:
 
     To install:
     * Docker Compose for _all users_ on your system, replace `~/.docker/cli-plugins` with `/usr/local/lib/docker/cli-plugins`.
-    * A different version of Compose, substitute `{{site.compose_version}}` with the version of Compose you want to use.  
+    * A different version of Compose, substitute `{{site.compose_version}}` with the version of Compose you want to use.
+    - For a different architecture, substitute `x86_64` with the [architecture you want](https://github.com/docker/compose/releases).   
 
 
 2. Apply executable permissions to the binary:

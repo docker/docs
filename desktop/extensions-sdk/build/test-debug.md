@@ -15,7 +15,7 @@ The example below shows the [`Min FrontEnd Extension`](set-up/minimal-frontend-e
 
 ![minimal-frontend-extension](images/ui-minimal-extension.png)
 
-### Open Chome DevTools
+### Open Chrome DevTools
 
 In order to open the Chrome DevTools for your extension when you click on the extension tab, run:
 
