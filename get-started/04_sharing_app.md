@@ -70,7 +70,7 @@ After creating the repository, the repository page appears. On the page, you can
 Now that your image has been built and pushed into a registry, try running your app on a brand new instance that has never seen this container image. To do this, you will use Play with Docker.
 
 
-If you are using an Apple silicon device, the process is different because the cloud platform is AMD64. Select your device's platform below.
+If you are using an Apple silicon device, you must first build a new image because your device's platform differs from the Play with Docker platform. Select your device's platform below.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#amd">Mac / Linux / Windows with AMD64</a></li>
@@ -106,10 +106,12 @@ If you are using an Apple silicon device, the process is different because the c
 
 ### Mac with Apple silicon
 
-1. Build a new image that is compatible with the cloud platform. Replace <`your-docker-id>` with your Docker ID. 
+In the steps below, you will build an additional image that's compatible with the Play with Docker platform. You can also build a single [multi-platform image](./build/building/multi-platform), but that's outside of the scope of this tutorial.
+
+1. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a new image that's compatible with the Play with Docker platform. Replace <`your-docker-id>` with your Docker ID.
 
    ```console
-    $ docker build --platform amd64 -t <your-docker-id>/getting-started:amd64
+    $ docker build --platform linux/amd64 -t <your-docker-id>/getting-started:amd64 .
    ```
    In the command above, you use `--platform amd64` to specify the compatible platform for the image and you use `-t <your-docker-id>/getting-started:amd64` to name the new image.
 
@@ -119,7 +121,7 @@ If you are using an Apple silicon device, the process is different because the c
    $ docker login -u <your-docker-id>
    ```
 
-3. Now use  `docker push` to push the image to Docker Hub. Replace `<your-docker-id>` with your Docker ID.
+3. Now use `docker push` to push the image to Docker Hub. Replace `<your-docker-id>` with your Docker ID.
 
    ```console
    $ docker push <your-docker-id>/getting-started:amd64
