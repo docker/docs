@@ -103,8 +103,8 @@ A `metadata.json` file is required at the root of your extension directory.
 The React application can import `@docker/extension-api-client` and use extension APIs to perform actions with Docker Desktop.
 For example, to get the list of containers, call the `docker.cli.exec` function to execute the `docker ps` command 
 and display the result in a table:
-
 ```tsx
+{% raw %}
 import React, { useEffect } from 'react';
 import {
   Paper,
@@ -175,6 +175,7 @@ export function App() {
     </Stack>
   );
 }
+{% endraw %}
 ```
 
 ![Screenshot of the container list built above.](images/react-extension.png)
