@@ -1,0 +1,8 @@
+extends: existence
+message: "If you expect users to copy and run the command, specify one command per code block."
+link: https://docs.docker.com/contribute/style/formatting/#best-practice-for-commands
+level: warning
+scope: raw
+#check for console code fence followed by two or more newlines with $ or #
+raw:
+  - '(?m:\`\`\`console\n+(\s*.*(\$|#).*\n){2,})'

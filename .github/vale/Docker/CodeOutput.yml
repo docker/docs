@@ -1,0 +1,8 @@
+extends: existence
+message: "If you expect users to copy and run the command, specify output in a separate code block."
+link: https://docs.docker.com/contribute/style/formatting/#best-practice-for-commands
+level: warning
+scope: raw
+#check for console code fence followed by one line with $ or #, and not ending in `or \. Followed by more lines without $ or # and terminated by code fence
+raw:
+  - '(?m:\`\`\`console\n+(\s*.*(\$|#).*[^\`\\]$)([^\$#(\`\`\`)]+\n)\s*\`\`\`)'
