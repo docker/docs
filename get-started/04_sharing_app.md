@@ -106,7 +106,7 @@ If you are using an Apple silicon device, you must first build a new image becau
 
 ### Mac with Apple silicon
 
-In the steps below, you will build an additional image that's compatible with the Play with Docker platform. You can also build a single [multi-platform image](./build/building/multi-platform), but that's outside of the scope of this tutorial.
+In the steps below, you will build an additional image that's compatible with the Play with Docker platform. You can also build a single [multi-platform image](../build/building/multi-platform.md), but that's outside of the scope of this tutorial.
 
 1. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a new image that's compatible with the Play with Docker platform. Replace <`your-docker-id>` with your Docker ID.
 
