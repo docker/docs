@@ -101,24 +101,84 @@ A `metadata.json` file is required at the root of your extension directory.
 ## Use extension APIs in the application code
 
 The React application can import `@docker/extension-api-client` and use extension APIs to perform actions with Docker Desktop.
+For example, to get the list of containers, call the `docker.cli.exec` function to execute the `docker ps` command 
+and display the result in a table:
+```tsx
+{% raw %}
+import React, { useEffect } from 'react';
+import {
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography
+} from "@mui/material";
+import { createDockerDesktopClient } from "@docker/extension-api-client";
 
-```ts
-import { Box, Button } from '@mui/material';
-import { createDockerDesktopClient } from '@docker/extension-api-client';
+//obtain docker destkop extension client
+const ddClient = createDockerDesktopClient();
 
 export function App() {
-  //obtain docker destkop extension client
-  const ddClient = createDockerDesktopClient();
+  const [containers, setContainers] = React.useState([]);
 
-  function sayHello() {
-    ddClient.desktopUI.toast.success('Hello, World!');
-  }
+  useEffect(() => {
+    // List all containers
+    ddClient.docker.cli.exec('ps', ['--all', '--format', '"{{json .}}"']).then((result) => {
+      setContainers(result.parseJsonLines());
+    });
+  }, []);
 
-  ...
+  return (
+    <Stack>
+      <Typography data-testid="heading" variant="h3" role="title">
+        Container list
+      </Typography>
+      <Typography
+      data-testid="subheading"
+      variant="body1"
+      color="text.secondary"
+      sx={{ mt: 2 }}
+    >
+      Simple list of containers using Docker Extensions SDK.
+      </Typography>
+      <TableContainer sx={{mt:2}}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Container id</TableCell>
+              <TableCell>Image</TableCell>
+              <TableCell>Command</TableCell>
+              <TableCell>Created</TableCell>
+              <TableCell>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {containers.map((container) => (
+              <TableRow
+                key={container.ID}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell>{container.ID}</TableCell>
+                <TableCell>{container.Image}</TableCell>
+                <TableCell>{container.Command}</TableCell>
+                <TableCell>{container.CreatedAt}</TableCell>
+                <TableCell>{container.Status}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Stack>
+  );
 }
+{% endraw %}
 ```
 
-For more information on the `metadata.json`, see [Metadata](../../extensions/METADATA.md).
+![Screenshot of the container list built above.](images/react-extension.png)
 
 ## What's next?
 
