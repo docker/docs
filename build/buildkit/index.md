@@ -69,7 +69,12 @@ BuildKit, you would [use an external Dockerfile frontend](dockerfile-frontend.md
 BuildKit is enabled by default for all users on [Docker Desktop](../../desktop/index.md).
 If you have installed Docker Desktop, you don't have to manually enable
 BuildKit. If you are running Docker on Linux, you can enable BuildKit either by
-using an environment variable or by making BuildKit the default setting.
+using an environment variable.
+
+```console
+$ export DOCKER_BUILDKIT=1 # or configure in daemon.json
+$ export COMPOSE_DOCKER_CLI_BUILD=1
+```
 
 To set the BuildKit environment variable when running the `docker build`
 command, run:
