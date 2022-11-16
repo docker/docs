@@ -26,7 +26,11 @@
             <ul class="dropdown-menu" >
               
             {% for sublink in entry.sublinks %}
+              {% if sublink.title == "separator"%}
+              <li class="divider"></li>
+              {% else %}
               <li><a style="color:#1488c6;" href="{{ sublink.path }}" id="{{ sublink.node }}">{{ sublink.title }}</a></li>
+              {% endif %}
             {% endfor %}
             </ul>
           {% else %}

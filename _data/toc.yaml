@@ -5,29 +5,46 @@ horizontalnav:
   node: home
 - title: Docs
   path: #
-  node: guides
+  node: docs
   sublinks:
-    - title: Guides
+    - title: Get started
       path: /get-started/overview/
       node: guides
+    - title: separator
+      node: home
+      path: #
     - title: Docker Desktop
       path: /desktop/
       node: desktop
+    - title: Docker Engine
+      path: /engine/
+      node: engine
+    - title: Docker Build
+      path: /build/
+      node: build
+    - title: Docker Compose
+      path: /compose/
+      node: compose
+    - title: Docker Hub
+      path: /docker-hub/
+      node: hub
+    - title: Docker Registry
+      path: /registry/
+      node: registry
 - title: Samples
   path: /samples/
   node: samples
 
 
-
-
 home: {}
+docs: {}
 
 guides:
 - title: Docker overview
   path: /get-started/overview/
 - title: Get Docker
   path: /get-docker/
-- sectiontitle: Get started
+- sectiontitle: Quickstart guide
   section:
     - title: "Part 1: Overview"
       path: /get-started/
@@ -1203,303 +1220,8 @@ samples:
 
 
 manuals:
-- sectiontitle: Docker Engine
-  section:
-  - path: /engine/
-    title: Overview
-  - sectiontitle: Install
-    section:
-    - path: /engine/install/
-      title: Installation Overview
-    - path: /engine/install/centos/
-      title: Install on CentOS
-    - path: /engine/install/debian/
-      title: Install on Debian
-    - path: /engine/install/fedora/
-      title: Install on Fedora
-    - path: /engine/install/rhel/
-      title: Install on RHEL
-    - path: /engine/install/sles/
-      title: Install on SLES
-    - path: /engine/install/ubuntu/
-      title: Install on Ubuntu
-    - path: /engine/install/binaries/
-      title: Install binaries
-    - path: /engine/install/linux-postinstall/
-      title: Post-installation steps
-    - path: /engine/install/troubleshoot/
-      title: Troubleshoot installation
-  - path: /engine/deprecated/
-    title: Deprecated features
-  - path: /engine/context/working-with-contexts/
-    title: Docker Context
-  - path: /engine/scan/
-    title: Docker Scan
-  - path: /engine/sbom/
-    title: Docker SBOM (Experimental)
-  - path: /engine/release-notes/
-    title: Release notes
-  - sectiontitle: Previous versions
-    section:
-      - path: /engine/release-notes/19.03/
-        title: Engine 19.03 release notes
-      - path: /engine/release-notes/18.09/
-        title: Engine 18.09 release notes
-      - path: /engine/release-notes/18.06/
-        title: Engine 18.06 release notes
-      - path: /engine/release-notes/18.05/
-        title: Engine 18.05 release notes
-      - path: /engine/release-notes/18.04/
-        title: Engine 18.04 release notes
-      - path: /engine/release-notes/18.03/
-        title: Engine 18.03 release notes
-      - path: /engine/release-notes/18.02/
-        title: Engine 18.02 release notes
-      - path: /engine/release-notes/18.01/
-        title: Engine 18.01 release notes
-      - path: /engine/release-notes/17.12/
-        title: Engine 17.12 release notes
-      - path: /engine/release-notes/17.11/
-        title: Engine 17.11 release notes
-      - path: /engine/release-notes/17.10/
-        title: Engine 17.10 release notes
-      - path: /engine/release-notes/17.09/
-        title: Engine 17.09 release notes
-      - path: /engine/release-notes/17.07/
-        title: Engine 17.07 release notes
-      - path: /engine/release-notes/17.06/
-        title: Engine 17.06 release notes
-      - path: /engine/release-notes/17.05/
-        title: Engine 17.05 release notes
-      - path: /engine/release-notes/17.04/
-        title: Engine 17.04 release notes
-      - path: /engine/release-notes/17.03/
-        title: Engine 17.03 release notes
-      - path: /engine/release-notes/prior-releases/
-        title: Engine 1.13 and earlier
-- sectiontitle: Docker Build
-  section:
-    - path: /build/
-      title: Overview
-    - sectiontitle: Building images
-      section:
-        - path: /build/building/packaging/
-          title: Packaging your software
-        - path: /build/building/context/
-          title: Build context
-        - sectiontitle: Build drivers
-          section:
-            - path: /build/building/drivers/
-              title: Overview
-            - path: /build/building/drivers/docker/
-              title: Docker driver
-            - path: /build/building/drivers/docker-container/
-              title: Docker container driver
-            - path: /build/building/drivers/kubernetes/
-              title: Kubernetes driver
-            - path: /build/building/drivers/remote/
-              title: Remote driver
-        - sectiontitle: Cache
-          section:
-            - path: /build/building/cache/
-              title: Optimizing builds with cache
-            - path: /build/building/cache/garbage-collection/
-              title: Garbage collection
-            - sectiontitle: Cache backends
-              section:
-                - path: /build/building/cache/backends/
-                  title: Overview
-                - path: /build/building/cache/backends/inline/
-                  title: Inline
-                - path: /build/building/cache/backends/local/
-                  title: Local
-                - path: /build/building/cache/backends/registry/
-                  title: Registry
-                - path: /build/building/cache/backends/gha/
-                  title: GitHub Actions
-                - path: /build/building/cache/backends/azblob/
-                  title: Azure Blob Storage
-                - path: /build/building/cache/backends/s3/
-                  title: Amazon S3
-        - sectiontitle: Exporters
-          section:
-          - path: /build/building/exporters/
-            title: Overview
-          - path: /build/building/exporters/image-registry/
-            title: Image and registry exporters
-          - path: /build/building/exporters/local-tar/
-            title: Local and tar exporters
-          - path: /build/building/exporters/oci-docker/
-            title: OCI and Docker exporters
-        - path: /build/building/multi-stage/
-          title: Multi-stage builds
-        - path: /build/building/multi-platform/
-          title: Multi-platform images
-    - sectiontitle: Customizing builds
-      section:
-        - sectiontitle: High-level builds with Bake
-          section:
-            - path: /build/customize/bake/
-              title: Overview
-            - path: /build/customize/bake/file-definition/
-              title: File definition
-            - path: /build/customize/bake/configuring-build/
-              title: Configuring builds
-            - path: /build/customize/bake/hcl-funcs/
-              title: User defined HCL functions
-            - path: /build/customize/bake/build-contexts/
-              title: Build contexts and linking targets
-            - path: /build/customize/bake/compose-file/
-              title: Building from Compose file
-        - path: /build/customize/color-output-controls/
-          title: Color output controls
-    - sectiontitle: BuildKit
-      section:
-        - path: /build/buildkit/
-          title: Overview
-        - path: /build/buildkit/dockerfile-frontend/
-          title: Custom Dockerfile syntax
-        - path: /build/buildkit/configure/
-          title: Configure
-        - path: /build/buildkit/toml-configuration/
-          title: TOML configuration
-    - sectiontitle: Buildx
-      section:
-        - path: /build/buildx/install/
-          title: Install Buildx
-        - path: /build/buildx/multiple-builders/
-          title: Using multiple builders
-    - sectiontitle: Continuous integration
-      section:
-        - path: /build/ci/
-          title: CI with Docker
-        - sectiontitle: GitHub Actions
-          section:
-          - path: /build/ci/github-actions/
-            title: Introduction
-          - path: /build/ci/github-actions/examples/
-            title: Examples
-          - path: /build/ci/github-actions/configure-builder/
-            title: Configuring your builder
-    - path: /build/release-notes/
-      title: Release notes
-- sectiontitle: Docker Compose
-  section:
-  - path: /compose/
-    title: Overview
-  - path: /compose/features-uses/
-    title: Key features and use cases
-  - sectiontitle: Install Docker Compose
-    section:
-      - path: /compose/install/
-        title: Overview
-      - path: /compose/install/linux/
-        title: Install the Compose plugin
-      - path: /compose/install/other/
-        title: Install the Compose standalone
-      - path: /compose/install/uninstall/
-        title: Uninstall Compose
-  - path: /compose/gettingstarted/
-    title: Try Docker Compose
-  - sectiontitle: Compose V2
-    section:
-    - path: /compose/compose-v2/
-      title: Overview
-    - path: /compose/cli-command-compatibility/
-      title: Compose v2 compatibility
-  - sectiontitle: Environment variables
-    section:
-    - path: /compose/environment-variables/
-      title: Overview
-    - path: /compose/envvars-precedence/
-      title: Environment variables' precedence
-  - path: /compose/env-file/
-    title: Environment file
-  - path: /compose/profiles/
-    title: Using service profiles
-  - path: /compose/gpu-support/
-    title: GPU support in Compose
-  - path: /compose/extends/
-    title: Extend services in Compose
-  - path: /compose/networking/
-    title: Networking in Compose
-  - path: /compose/production/
-    title: Using Compose in production
-  - path: /compose/startup-order/
-    title: Control startup order
-  - path: /compose/samples-for-compose/
-    title: Sample apps with Compose
-  - path: /compose/release-notes/
-    title: Release notes
 
-- sectiontitle: Docker Hub
-  section:
-  - path: /docker-hub/
-    title: Quickstart
-  - path: /docker-id/
-    title: Docker ID accounts
-  - sectiontitle: Repositories
-    section:
-      - path: /docker-hub/repos/
-        title: Manage
-      - path: /docker-hub/repos/access/
-        title: Access
-      - path: /docker-hub/repos/configure/
-        title: Configure
-  - path: /docker-hub/service-accounts/
-    title: Service accounts
-  - path: /docker-hub/official_images/
-    title: Docker Official images
-  - sectiontitle: Automated builds
-    section:
-      - path: /docker-hub/builds/
-        title: Set up automated builds
-      - path: /docker-hub/builds/automated-testing/
-        title: Testing in automated builds
-      - path: /docker-hub/builds/advanced/
-        title: Advanced automated builds
-      - path: /docker-hub/builds/link-source/
-        title: Link to GitHub and BitBucket
-  - path: /docker-hub/webhooks/
-    title: Webhooks
-  - path: /docker-hub/vulnerability-scanning/
-    title: Vulnerability scanning
-  - path: /docker-hub/audit-log/
-    title: Audit logs
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
-  - path: /docker-hub/download-rate-limit/
-    title: Download rate limit
-  - sectiontitle: Administration
-    section:
-     - path: /docker-hub/image-management/
-       title: Advanced Image Management dashboard
-     - path: /docker-hub/convert-account/
-       title: Convert an account into an organization
-     - path: /docker-hub/deactivate-account/
-       title: Deactivate an account or an organization
-  - sectiontitle: Docker Verified Publisher
-    section:
-      - path: /docker-hub/publish/
-        title: Overview
-      - path: /docker-hub/publish/insights-analytics/
-        title: Insights and analytics
-      - path: /docker-hub/publish/publisher-center-migration/
-        title: Migrate content from the Publisher Center
-  - path: /docker-hub/release-notes/
-    title: Release notes
+
 
 - sectiontitle: Docker subscription
   section:
@@ -1610,40 +1332,7 @@ manuals:
 
 - sectiontitle: Open-source projects
   section:
-  - sectiontitle: Docker Registry
-    section:
-    - path: /registry/
-      title: Registry overview
-    - path: /registry/introduction/
-      title: Understand the Registry
-    - path: /registry/deploying/
-      title: Deploy a registry server
-    - path: /registry/configuration/
-      title: Configure a registry
-    - path: /registry/notifications/
-      title: Work with notifications
-    - sectiontitle: Recipes
-      section:
-      - path: /registry/recipes/
-        title: Recipes overview
-      - path: /registry/recipes/apache/
-        title: Authenticating proxy with apache
-      - path: /registry/recipes/nginx/
-        title: Authenticating proxy with nginx
-      - path: /registry/recipes/mirror/
-        title: Mirroring Docker Hub
-      - path: /registry/recipes/osx-setup-guide/
-        title: Running on macOS
-      - path: /registry/garbage-collection/
-        title: Garbage collection
-      - path: /registry/insecure/
-        title: Testing an insecure registry
-    - path: /registry/deprecated/
-      title: Deprecated features
-    - path: /registry/compatibility/
-      title: Compatibility
-    - path: /registry/help/
-      title: Getting help
+
 
 - path: /release-notes/
   title: Release notes
@@ -1920,3 +1609,333 @@ desktop:
     title: Older versions for Windows
   - path: /desktop/previous-versions/archive-mac/
     title: Older versions for Mac
+
+engine:
+- path: /engine/
+  title: Overview
+- sectiontitle: Install
+  section:
+  - path: /engine/install/
+    title: Installation Overview
+  - path: /engine/install/centos/
+    title: Install on CentOS
+  - path: /engine/install/debian/
+    title: Install on Debian
+  - path: /engine/install/fedora/
+    title: Install on Fedora
+  - path: /engine/install/rhel/
+    title: Install on RHEL
+  - path: /engine/install/sles/
+    title: Install on SLES
+  - path: /engine/install/ubuntu/
+    title: Install on Ubuntu
+  - path: /engine/install/binaries/
+    title: Install binaries
+  - path: /engine/install/linux-postinstall/
+    title: Post-installation steps
+  - path: /engine/install/troubleshoot/
+    title: Troubleshoot installation
+- path: /engine/deprecated/
+  title: Deprecated features
+- path: /engine/context/working-with-contexts/
+  title: Docker Context
+- path: /engine/scan/
+  title: Docker Scan
+- path: /engine/sbom/
+  title: Docker SBOM (Experimental)
+- path: /engine/release-notes/
+  title: Release notes
+- sectiontitle: Previous versions
+  section:
+    - path: /engine/release-notes/19.03/
+      title: Engine 19.03 release notes
+    - path: /engine/release-notes/18.09/
+      title: Engine 18.09 release notes
+    - path: /engine/release-notes/18.06/
+      title: Engine 18.06 release notes
+    - path: /engine/release-notes/18.05/
+      title: Engine 18.05 release notes
+    - path: /engine/release-notes/18.04/
+      title: Engine 18.04 release notes
+    - path: /engine/release-notes/18.03/
+      title: Engine 18.03 release notes
+    - path: /engine/release-notes/18.02/
+      title: Engine 18.02 release notes
+    - path: /engine/release-notes/18.01/
+      title: Engine 18.01 release notes
+    - path: /engine/release-notes/17.12/
+      title: Engine 17.12 release notes
+    - path: /engine/release-notes/17.11/
+      title: Engine 17.11 release notes
+    - path: /engine/release-notes/17.10/
+      title: Engine 17.10 release notes
+    - path: /engine/release-notes/17.09/
+      title: Engine 17.09 release notes
+    - path: /engine/release-notes/17.07/
+      title: Engine 17.07 release notes
+    - path: /engine/release-notes/17.06/
+      title: Engine 17.06 release notes
+    - path: /engine/release-notes/17.05/
+      title: Engine 17.05 release notes
+    - path: /engine/release-notes/17.04/
+      title: Engine 17.04 release notes
+    - path: /engine/release-notes/17.03/
+      title: Engine 17.03 release notes
+    - path: /engine/release-notes/prior-releases/
+      title: Engine 1.13 and earlier
+
+build:
+- path: /build/
+  title: Overview
+- sectiontitle: Building images
+  section:
+    - path: /build/building/packaging/
+      title: Packaging your software
+    - path: /build/building/context/
+      title: Build context
+    - sectiontitle: Build drivers
+      section:
+        - path: /build/building/drivers/
+          title: Overview
+        - path: /build/building/drivers/docker/
+          title: Docker driver
+        - path: /build/building/drivers/docker-container/
+          title: Docker container driver
+        - path: /build/building/drivers/kubernetes/
+          title: Kubernetes driver
+        - path: /build/building/drivers/remote/
+          title: Remote driver
+    - sectiontitle: Cache
+      section:
+        - path: /build/building/cache/
+          title: Optimizing builds with cache
+        - path: /build/building/cache/garbage-collection/
+          title: Garbage collection
+        - sectiontitle: Cache backends
+          section:
+            - path: /build/building/cache/backends/
+              title: Overview
+            - path: /build/building/cache/backends/inline/
+              title: Inline
+            - path: /build/building/cache/backends/local/
+              title: Local
+            - path: /build/building/cache/backends/registry/
+              title: Registry
+            - path: /build/building/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/building/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/building/cache/backends/s3/
+              title: Amazon S3
+    - sectiontitle: Exporters
+      section:
+      - path: /build/building/exporters/
+        title: Overview
+      - path: /build/building/exporters/image-registry/
+        title: Image and registry exporters
+      - path: /build/building/exporters/local-tar/
+        title: Local and tar exporters
+      - path: /build/building/exporters/oci-docker/
+        title: OCI and Docker exporters
+    - path: /build/building/multi-stage/
+      title: Multi-stage builds
+    - path: /build/building/multi-platform/
+      title: Multi-platform images
+- sectiontitle: Customizing builds
+  section:
+    - sectiontitle: High-level builds with Bake
+      section:
+        - path: /build/customize/bake/
+          title: Overview
+        - path: /build/customize/bake/file-definition/
+          title: File definition
+        - path: /build/customize/bake/configuring-build/
+          title: Configuring builds
+        - path: /build/customize/bake/hcl-funcs/
+          title: User defined HCL functions
+        - path: /build/customize/bake/build-contexts/
+          title: Build contexts and linking targets
+        - path: /build/customize/bake/compose-file/
+          title: Building from Compose file
+    - path: /build/customize/color-output-controls/
+      title: Color output controls
+- sectiontitle: BuildKit
+  section:
+    - path: /build/buildkit/
+      title: Overview
+    - path: /build/buildkit/dockerfile-frontend/
+      title: Custom Dockerfile syntax
+    - path: /build/buildkit/configure/
+      title: Configure
+    - path: /build/buildkit/toml-configuration/
+      title: TOML configuration
+- sectiontitle: Buildx
+  section:
+    - path: /build/buildx/install/
+      title: Install Buildx
+    - path: /build/buildx/multiple-builders/
+      title: Using multiple builders
+- sectiontitle: Continuous integration
+  section:
+    - path: /build/ci/
+      title: CI with Docker
+    - sectiontitle: GitHub Actions
+      section:
+      - path: /build/ci/github-actions/
+        title: Introduction
+      - path: /build/ci/github-actions/examples/
+        title: Examples
+      - path: /build/ci/github-actions/configure-builder/
+        title: Configuring your builder
+- path: /build/release-notes/
+  title: Release notes
+
+compose:
+- path: /compose/
+  title: Overview
+- path: /compose/features-uses/
+  title: Key features and use cases
+- sectiontitle: Install Docker Compose
+  section:
+    - path: /compose/install/
+      title: Overview
+    - path: /compose/install/linux/
+      title: Install the Compose plugin
+    - path: /compose/install/other/
+      title: Install the Compose standalone
+    - path: /compose/install/uninstall/
+      title: Uninstall Compose
+- path: /compose/gettingstarted/
+  title: Try Docker Compose
+- sectiontitle: Compose V2
+  section:
+  - path: /compose/compose-v2/
+    title: Overview
+  - path: /compose/cli-command-compatibility/
+    title: Compose v2 compatibility
+- sectiontitle: Environment variables
+  section:
+  - path: /compose/environment-variables/
+    title: Overview
+  - path: /compose/envvars-precedence/
+    title: Environment variables' precedence
+- path: /compose/env-file/
+  title: Environment file
+- path: /compose/profiles/
+  title: Using service profiles
+- path: /compose/gpu-support/
+  title: GPU support in Compose
+- path: /compose/extends/
+  title: Extend services in Compose
+- path: /compose/networking/
+  title: Networking in Compose
+- path: /compose/production/
+  title: Using Compose in production
+- path: /compose/startup-order/
+  title: Control startup order
+- path: /compose/samples-for-compose/
+  title: Sample apps with Compose
+- path: /compose/release-notes/
+  title: Release notes
+
+hub:
+- path: /docker-hub/
+  title: Quickstart
+- path: /docker-id/
+  title: Docker ID accounts
+- sectiontitle: Repositories
+  section:
+    - path: /docker-hub/repos/
+      title: Manage
+    - path: /docker-hub/repos/access/
+      title: Access
+    - path: /docker-hub/repos/configure/
+      title: Configure
+- path: /docker-hub/service-accounts/
+  title: Service accounts
+- path: /docker-hub/official_images/
+  title: Docker Official images
+- sectiontitle: Automated builds
+  section:
+    - path: /docker-hub/builds/
+      title: Set up automated builds
+    - path: /docker-hub/builds/automated-testing/
+      title: Testing in automated builds
+    - path: /docker-hub/builds/advanced/
+      title: Advanced automated builds
+    - path: /docker-hub/builds/link-source/
+      title: Link to GitHub and BitBucket
+- path: /docker-hub/webhooks/
+  title: Webhooks
+- path: /docker-hub/vulnerability-scanning/
+  title: Vulnerability scanning
+- path: /docker-hub/audit-log/
+  title: Audit logs
+- sectiontitle: Security and authentication
+  section:
+    - path: /docker-hub/access-tokens/
+      title: Manage access tokens
+    - sectiontitle: Two-factor authentication
+      section:
+        - path: /docker-hub/2fa/
+          title: Enable two-factor authentication
+        - path: /docker-hub/2fa/disable-2fa/
+          title: Disable two-factor authentication
+        - path: /docker-hub/2fa/recover-hub-account/
+          title: Recover your Docker Hub account
+        - path: /docker-hub/2fa/new-recovery-code/
+          title: Generate a new recovery code
+- path: /docker-hub/download-rate-limit/
+  title: Download rate limit
+- sectiontitle: Administration
+  section:
+   - path: /docker-hub/image-management/
+     title: Advanced Image Management dashboard
+   - path: /docker-hub/convert-account/
+     title: Convert an account into an organization
+   - path: /docker-hub/deactivate-account/
+     title: Deactivate an account or an organization
+- sectiontitle: Docker Verified Publisher
+  section:
+    - path: /docker-hub/publish/
+      title: Overview
+    - path: /docker-hub/publish/insights-analytics/
+      title: Insights and analytics
+    - path: /docker-hub/publish/publisher-center-migration/
+      title: Migrate content from the Publisher Center
+- path: /docker-hub/release-notes/
+  title: Release notes
+
+registry:
+- path: /registry/
+  title: Registry overview
+- path: /registry/introduction/
+  title: Understand the Registry
+- path: /registry/deploying/
+  title: Deploy a registry server
+- path: /registry/configuration/
+  title: Configure a registry
+- path: /registry/notifications/
+  title: Work with notifications
+- sectiontitle: Recipes
+  section:
+  - path: /registry/recipes/
+    title: Recipes overview
+  - path: /registry/recipes/apache/
+    title: Authenticating proxy with apache
+  - path: /registry/recipes/nginx/
+    title: Authenticating proxy with nginx
+  - path: /registry/recipes/mirror/
+    title: Mirroring Docker Hub
+  - path: /registry/recipes/osx-setup-guide/
+    title: Running on macOS
+  - path: /registry/garbage-collection/
+    title: Garbage collection
+  - path: /registry/insecure/
+    title: Testing an insecure registry
+- path: /registry/deprecated/
+  title: Deprecated features
+- path: /registry/compatibility/
+  title: Compatibility
+- path: /registry/help/
+  title: Getting help
