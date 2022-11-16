@@ -24,7 +24,22 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
-## Docker Desktop 4.14
+## Docker Desktop 4.14.1
+
+2022-11-16
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fix container DNS lookups when using Registry Access Management.
+
+#### For Mac
+
+- Fixes an issue preventing "Analyze Image" button from Images screen to be working.
+- Fixes a bug causing symlinks to not be created for the user if `/usr/local/lib` doesn't already exist. Fixes [docker/for-mac#6569](https://github.com/docker/for-mac/issues/6569)
+
+## Docker Desktop 4.14.0
 
 2022-11-10
 
