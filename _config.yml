@@ -196,9 +196,9 @@ fetch-remote:
           - "docs/manuals/bake/**"
       - dest: "build/building"
         src:
-          - "docs/manuals/drivers/**"
-          - "docs/manuals/cache/**"
-          - "docs/manuals/exporters/**"
+          - "docs/manuals/drivers/"
+          - "docs/manuals/cache/"
+          - "docs/manuals/exporters/"
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
