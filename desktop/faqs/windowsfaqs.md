@@ -115,7 +115,7 @@ For more information on Windows containers, refer to the following documentation
   gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){:target="_blank" rel="noopener" class="_"}
-  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md){:target="_blank" rel="noopener" class="_"}
+  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/){:target="_blank" rel="noopener" class="_"}
   application with Windows containers. The MusicStore is a standard .NET application and,
   [forked here to use containers](https://github.com/friism/MusicStore){:target="_blank" rel="noopener" class="_"}, is a good example of a multi-container application.
 
