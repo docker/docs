@@ -3,14 +3,14 @@ description: Instructions for installing Docker Desktop Arch package. Mostly mea
 keywords: Arch Linux, install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
 title: Install on Arch-based distributions
 redirect_from:
-- /desktop/linux/install/archlinux/
+  - /desktop/linux/install/archlinux/
 ---
 
-This topic discusses installation of Docker Desktop from an [Arch package](https://desktop-stage.docker.com/linux/main/amd64/78459/docker-desktop-4.14.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
+This topic discusses installation of Docker Desktop from an [Arch package](https://desktop-stage.docker.com/linux/main/amd64/docker-desktop-4.14.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
 
-[Arch package (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.14.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+[Arch package (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.14.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
-*For checksums, see [Release notes](../release-notes.md)*
+_For checksums, see [Release notes](../release-notes.md)_
 
 ## Prerequisites
 
@@ -22,12 +22,12 @@ Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be insta
 $ sudo pacman -S gnome-terminal
 ```
 
-## Install Docker Desktop 
+## Install Docker Desktop
 
-1. Install client binaries. Docker does not have an Arch package repository. Binaries not included in the package must be installed manually before installing Docker Desktop. 
+1. Install client binaries. Docker does not have an Arch package repository. Binaries not included in the package must be installed manually before installing Docker Desktop.
 
 2. [Install Docker client binary on Linux](../../engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). On Arch-based distributions, users must install the Docker client binary.
-Static binaries for the Docker client are available for Linux (as `docker`).
+   Static binaries for the Docker client are available for Linux (as `docker`).
 
 3. Download the Arch package from the [release](../release-notes.md) page.
 
@@ -43,5 +43,5 @@ $ sudo pacman -U ./docker-desktop-<version>-<arch>.pkg.tar.zst
 
 ## Next steps
 
-- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn how to build an image and run it as a containerized application.
 - Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.
