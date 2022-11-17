@@ -163,30 +163,6 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Beta Features
-
-{% include beta.md %}
-
-On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
-
-### Enable VirtioFS
-
- Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
-
-To enable virtioFS:
-
-1. Verify that you are on the following macOS version:
-   - macOS 12.2 or later (for Apple Silicon)
-   - macOS 12.3 or later (for Intel)
-
-2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
-
-3. Click **Apply & Restart**.
-
-### Enable containerd
-
-Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
-
 ## Kubernetes
 
 Docker Desktop includes a standalone Kubernetes server, so that you can test
@@ -228,3 +204,35 @@ Use the **Extensions** tab to:
 - **Show Docker Extensions system containers**
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
+
+## Feature control 
+
+On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
+
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"} from the **Feature control** tab.
+
+### Beta features
+
+{% include beta.md %}
+
+#### Enable VirtioFS
+
+ Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
+
+To enable virtioFS:
+
+1. Verify that you are on the following macOS version:
+   - macOS 12.2 or later (for Apple Silicon)
+   - macOS 12.3 or later (for Intel)
+
+2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
+
+3. Click **Apply & Restart**.
+
+#### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
+
+### Experimental features
+
+{% include desktop-experimental.md %}
