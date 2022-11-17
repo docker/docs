@@ -43,6 +43,21 @@ your contributions to the Docker docs repository. Changes to the docs are
 handled through pull requests against the `master` branch. To learn how to
 contribute, see our [Contribute section](https://docs.docker.com/contribute/overview/).
 
+### Dev Environment
+
+The fastest inner loop can be done in a Dev Environment container in combination with Visual Studio Code. 
+
+- The source codes will be cloned into a volume with the best file performance inside a container. 
+- The repo (763 MB) doesn't need to be uploaded to the build context every time.
+- The remote repos for engine, cli, ... don't need to be fetched on every build.
+
+To use the Dev Environment
+1. Create a Dev Environment: [Open in Docker Dev Environments](https://open.docker.com/dashboard/dev-envs?url=https://github.com/StefanScherer/docker.github.io/tree/docs-dev-env)
+2. Click on the "Open in VScode" button
+3. Open a Terminal inside VScode
+4. Run `make watch` to start Jekyll in watch mode
+5. Open http://localhost:4002 in your browser to see the latest changes
+
 ## Copyright and license
 
 Copyright 2013-2022 Docker, inc, released under the Apache 2.0 license.
