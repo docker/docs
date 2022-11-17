@@ -23,11 +23,11 @@ The following video walks you through the process of configuring SSO.
 ### Configuring your IdP
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#SAML-2.0">SAML 2.0</a></li>
-<li><a data-toggle="tab" data-target="#Azure-AD">Azure AD (OIDC)</a></li>
+<li class="active"><a data-toggle="tab" data-target="#saml-2">SAML 2.0</a></li>
+<li><a data-toggle="tab" data-target="#azure-ad">Azure AD (OIDC)</a></li>
 </ul>
 <div class="tab-content">
-<div id="SAML-2.0" class="tab-pane fade in active" markdown="1">
+<div id="saml-2" class="tab-pane fade in active" markdown="1">
 
 #### SAML 2.0
 
@@ -58,7 +58,8 @@ The following video walks you through the process of configuring SSO.
 
 <hr>
 </div>
-<div id="Azure-AD" class="tab-pane fade" markdown="1">
+
+<div id="azure-ad" class="tab-pane fade" markdown="1">
 
 ### Azure AD (OIDC)
 
@@ -89,8 +90,7 @@ The following video walks you through the process of configuring SSO.
 7. Proceed to **add your domain** before you test and enforce SSO.
 
 <hr>
-</div>
-</div>
+</div></div>
 
 ## Domain control
 
