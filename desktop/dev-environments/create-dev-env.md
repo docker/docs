@@ -77,12 +77,13 @@ fi
 To launch a dev environment:
 
 1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
-2. Optional: Provide a name for you dev environment.
-3. Select **Existing Git repo** as the source and then paste your Git repository link into the **Enter the Git Repository** field.
-4. Choose your IDE. You can choose either:
+2. Select **Get Started**. 
+3. Optional: Provide a name for you dev environment.
+4. Select **Existing Git repo** as the source and then paste your Git repository link into the **Enter the Git Repository** field.
+5. Choose your IDE. You can choose either:
     - **Visual Studio Code**. The Git repository is cloned into a Volume and attaches to your containers. This allows you to develop directly inside of them using Visual Studio Code.
     - **Other**. The Git repository is cloned into your chosen local directory and attaches to your containers as a bind mount. This shares the directory from your computer to the container, and allows you to develop using any local editor or IDE.
-5. Select **Continue**.
+6. Select **Continue**.
 
 To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
@@ -106,21 +107,23 @@ Docker then clones the repository with your specified branch or tag.
 >Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or services in a `compose-dev.yaml`file located in your subdirectory. For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql){:target="_blank" rel="noopener" class="_"} or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres){:target="_blank" rel="noopener" class="_"}. 
 
 1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
-2. Optional: Provide a name for you dev environment.
-3. Select **Existing Git repo** as the source and then paste the link of your Git repo subfolder into the **Enter the Git Repository** field.
-4. Choose your IDE. You can choose either:
+2. Select **Get Started**.
+3. Optional: Provide a name for you dev environment.
+4. Select **Existing Git repo** as the source and then paste the link of your Git repo subfolder into the **Enter the Git Repository** field.
+5. Choose your IDE. You can choose either:
     - **Visual Studio Code**. The Git repository is cloned into a Volume and attaches to your containers. This allows you to develop directly inside of them using Visual Studio Code.
     - **Other**. The Git repository is cloned into your chosen local directory and attaches to your containers as a bind mount. This shares the directory from your computer to the container, and allows you to develop using any local editor or IDE.
-5. Select **Continue**.
+6. Select **Continue**.
 
 To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
 ## Launch from a local folder
 
 1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
-2. Optional: Provide a name for you dev environment.
-3. Choose **Local directory** as the source.
-4. Select **Select** to open the root of the code that you would like to work on.
+2. Select **Get Started**.
+3. Optional: Provide a name for you dev environment.
+4. Choose **Local directory** as the source.
+5. Select **Select** to open the root of the code that you would like to work on.
     A bind mount is created to share the directory from your computer to the container. You can use an editor or IDE of your choice.
 
 > **Note**
