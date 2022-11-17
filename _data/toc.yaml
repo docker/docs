@@ -3,16 +3,13 @@ horizontalnav:
 - title: Home
   path: /
   node: empty
-- title: Docs
+- title: Guides
+  path: /get-started/overview/
+  node: guides
+- title: Manuals
   path: #
   node: empty
   sublinks:
-    - title: Get started
-      path: /get-started/overview/
-      node: guides
-    - title: separator
-      node: empty
-      path: #
     - title: Docker Desktop
       path: /desktop/
       node: desktop
@@ -37,12 +34,9 @@ horizontalnav:
     - title: Atomist
       path: /atomist/
       node: atomist
-    - title: separator
-      node: empty
-      path: #
-    - title: Reference
-      path: /reference/
-      node: reference
+- title: Reference
+  path: /reference/
+  node: reference
 - title: Samples
   path: /samples/
   node: samples
@@ -1752,10 +1746,6 @@ compose:
   title: Sample apps with Compose
 - path: /compose/release-notes/
   title: Release notes
-- path: /security/
-  title: Security announcements
-- path: /release-lifecycle/
-  title: Product release lifecycle
 
 hub:
 - path: /docker-hub/
