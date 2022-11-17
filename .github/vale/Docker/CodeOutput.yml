@@ -5,4 +5,8 @@ level: warning
 scope: raw
 #check for console code fence followed by one line with $ or #, and not ending in `or \. Followed by more lines without $ or # and terminated by code fence
 raw:
-  - '(?m:\`\`\`console\n+(\s*.*(\$|#).*[^\`\\]$)([^\$#(\`\`\`)]+\n)\s*\`\`\`)'
+  - '(\`\`\`console\n)'         # start ```console
+  - '[^(\$|#)]*'           # 0 or more characters without $ or #
+  - '.*(\$|#).*[^\`\\]\n'    # 1 line with $ or #, without ` or \ at end
+  - '((?!\`\`\`|\$|#)(.|\n))*'  # 0 or more lines without ```, $, or #
+  - '\`\`\`'               # stop ```

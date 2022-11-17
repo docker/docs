@@ -3,6 +3,13 @@ message: "If you expect users to copy and run the command, specify one command p
 link: https://docs.docker.com/contribute/style/formatting/#best-practice-for-commands
 level: warning
 scope: raw
-#check for console code fence followed by two or more newlines with $ or #
+#check for console code fence followed by at least two lines with $ or #
 raw:
-  - '(?m:\`\`\`console\n+(\s*.*(\$|#).*\n){2,})'
+  - '\`\`\`console\n'      # start at ```console
+  - '[^(\$|#)]*'           # 0 or more characters without $ or #
+  - '.*(\$|#).*\n'         # 1 line with $ or #
+  - '[^(\$|#)]*'           #  0 or more characters without $ or #
+  - '.*(\$|#).*\n'         # 1 line with $ or #
+  - '((?!\`\`\`)(.|\n))*'  # 0 or characters without ```
+  - '\`\`\`'               # stop ```
+
