@@ -123,7 +123,7 @@ In the following example, the Wasm application leverages a MariaDB database runn
             "VirtualSize": 3001146,
     ```
 
-3. Open the website at http://localhost:8090 and create a few sample orders. All of these are interacting with the Wasm server.
+3. Open the website at http://localhost:8080 and create a few sample orders. All of these are interacting with the Wasm server.
 
 4. When you're all done, tear everything down by hitting `Ctrl+C` in the terminal you launched the application.
 
