@@ -34,4 +34,9 @@ mdl:
 deploy:
 	docker compose up --build
 
-.PHONY: buildx-yaml release vendor htmlproofer mdl deploy
+# Used in a Dev Environment container
+watch:
+	bundle install
+	bundle exec jekyll serve --watch --config _config.yml --disable-disk-cache
+
+.PHONY: buildx-yaml release vendor htmlproofer mdl deploy watch
