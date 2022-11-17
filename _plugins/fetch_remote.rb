@@ -111,10 +111,13 @@ module Jekyll
                 destent = FileUtils::Entry_.new(d, ent.rel, false)
                 puts "      #{file_clean} => #{destent.path}"
 
-                if File.file?(destent.path)
+                if File.file?(destent.path) && File.extname(ent.path) == ".md"
                   fmp = FrontMatterParser::Parser.parse_file(destent.path)
                   if fmp['fetch_remote'].nil?
-                    raise "Local file #{destent.path} already exists"
+                    ent.copy destent.path
+                  else
+                    puts "      skip fetching lines again #{destent.path}"
+                    next # raise "Local file #{destent.path} already exists"
                   end
                   line_start, line_end = FetchRemote.resolve_line_numbers(fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_start'] : nil, fmp['fetch_remote'].kind_of?(Hash) ? fmp['fetch_remote']['line_end'] : nil)
                   lines = File.readlines(ent.path)[line_start..line_end]
