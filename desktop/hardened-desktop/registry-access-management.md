@@ -18,8 +18,6 @@ Below are some example registries administrators can allow:
  - GitHub Container Registry
  - Google Container Registry
 
-Administrators can ensure registries are locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
-
 ## Prerequisites 
 
 You need to [configure a registry.json to enforce sign-in](../../docker-hub/configure-sign-in.md). For Registry Access Management to take effect, Docker Desktop users must authenticate to your organization. 
