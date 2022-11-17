@@ -37,7 +37,7 @@ Development of extensions can be done locally without the need to push the exten
             <div class="component-icon">
                  <a href="/desktop/extensions-sdk/quickstart/"><img src="/assets/images/explore.svg" alt="Quickstart" width="70" height="70"></a>
             </div>
-                <h2 id="docker-extensions"><a href="/desktop/estensions-sdk/quickstart/">Quickstart guide</a></h2>
+                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/quickstart/">Quickstart guide</a></h2>
                 <p>Follow the quickstart guide to build a basic Docker Extension quickly.</p>
          </div>
      </div>
