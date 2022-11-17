@@ -24,13 +24,60 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
-## Docker Desktop 4.14
+## Docker Desktop 4.14.1
+
+2022-11-17
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed container DNS lookups when using Registry Access Management.
+
+#### For Mac
+
+- Fixed an issue preventing the **Analyze Image** button on the **Images** tab from working.
+- Fixed a bug causing symlinks to not be created for the user if `/usr/local/lib` doesn't already exist. Fixes [docker/for-mac#6569](https://github.com/docker/for-mac/issues/6569)
+
+## Docker Desktop 4.14.0
 
 2022-11-10
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/91374/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/91374/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/91374/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 7e2d34cb7573b81cc067ff9e979e44675d46eb6a26801031c27f83bbf93dfc3b</li>
+      <li><b>Mac Intel:</b> SHA-256 f554d67e1189efdc5e85e4c28bc4b82a979914016bfb5cc83cde719d557ce062</li>
+      <li><b>Mac Arm:</b> SHA-256 38be55c1dc0686e17c761c4953892ff21ffc5cddef19171e428ca2c0224f3b95</li>
+      <li><b>Linux DEB:</b> SHA-256 5b9e701a907a901c77f2093e54a41b5d706e97e39a30416d5c1519a77f024240</li>
+      <li><b>Linux RPM:</b> SHA-256 505f503636acf842cf5228d21d30f95d8e5d0f111feb9a1448f21d80c8169e93</li>
+      <li><b>Linux Arch:</b> SHA-256 8bcf97f361f02e9a7ba3fb2bab4b0905d51d75f7b2ef918c31d946a2a1ab201d</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### New
 
