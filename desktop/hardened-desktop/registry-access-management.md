@@ -59,5 +59,6 @@ There are certain limitations when using Registry Access Management:
 - Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”
 - WSL 2 requires at least a 5.4 series Linux kernel (this does not apply to earlier Linux kernel series)
 - Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
+- Not currently supported on Hyper-V Windows Containers
 
 Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Docker Desktop does not support blocking these forms of manipulation.
