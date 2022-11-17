@@ -1,3 +1,11 @@
 FROM docker/dev-environments-ruby:stable-1
-ARG DOCS_URL=http://localhost:4000
-ARG DOCS_ENFORCE_GIT_LOG_HISTORY=0
+
+# Same as the one in Gemfile.lock
+ARG BUNDLER_VERSION=2.3.13
+ARG JEKYLL_ENV=development
+
+# Gem stage will install bundler used as dependency manager
+# for our dependencies in Gemfile for Jekyll
+RUN gem uninstall -aIx bundler \
+  && gem install bundler -v ${BUNDLER_VERSION} \
+  && bundle config set force_ruby_platform true
