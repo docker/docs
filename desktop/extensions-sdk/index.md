@@ -20,51 +20,65 @@ An extension can contain a UI part and backend parts that run either on the host
 Extensions are distributed through the Docker Hub.
 Development of extensions can be done locally without the need to push the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
 
-## How to use the resources in this section
-
-The documentation is structured so that it matches the steps you need to take when creating your extension. There are two main parts to creating a Docker Extension; build the foundations and then publish your extension.
-
-### Part one: Build the foundations
-
-The build process consists of:
-
-- Installing the latest version of Docker Desktop.
-- Setting up the directory with files which range from the extension’s source code to the required extension-specific files.
-- Creating the Dockerfile to build, publish, and run your extension in Docker Desktop.
-- Configuring the metadata file which is required at the root of the image filesystem.
-- Building and installing the extension.
-- Testing and debugging the extension.
-
-There are also instructions on [how to set authentication](dev/oauth2-flow.md) for your extension.
-
-This build section provides sample folders with ready-to-go examples that walk you through building:
-
-- A frontend extension based on plain HTML
-- A simple Docker extension that contains only a UI part and is based on ReactJS. This is useful if you want to develop an extension which consists exclusively of a visual part with no services running in the VM.
-- An extension that invokes Docker CLI commands
-- A simple backend extension
-
->Note
->
->Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
-
-If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service){:target="_blank" rel="noopener" class="_"} example.
-
-For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}.
-
-### Part two: Publish and distribute your extension
-
-Docker Desktop displays published extensions in the Extensions Marketplace. The Extensions Marketplace is a curated space where developers from all over can discover extensions to improve their developer experience and upload their own extension to share with the world. 
-
-All extensions submitted to the Extension Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using Extensions and allows for Extension developers to get feedback on what will improve their Extensions experience.
-
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/){:target="_blank" rel="noopener" class="_"}. We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
-
-## What’s next?
-If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md).
-
-Alternatively, get started with Part one: Build for more in-depth information about each step of the extension creation process.
-
-For an in-depth tutorial of the entire build process, we recommend the following video walkthrough from DockerCon 2022:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Yv7OG-EGJsg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="component-container">
+    <!--start row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+             <div class="component-icon">
+                 <a href="/desktop/extensions-sdk/process/"><img src="/assets/images/process.svg" alt="Process" width="70" height="70"></a>
+                 </div>
+                 <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/process/">The build and publish process</a></h2>
+                <p> Understand the process for building and publishing an extension.</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <a href="/desktop/extensions-sdk/quickstart/"><img src="/assets/images/explore.svg" alt="Quickstart" width="70" height="70"></a>
+            </div>
+                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/quickstart/">Quickstart guide</a></h2>
+                <p>Follow the quickstart guide to build a basic Docker Extension quickly.</p>
+         </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <a href="/desktop/extensions-sdk/design/design-guidelines/"><img src="/assets/images/design.svg" alt="Design quidelines" width="70" height="70"></a>
+            </div>
+                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/design/design-guidelines/">View the design guidelines</a></h2>
+                <p>Ensure your extension aligns to Docker's design guidelines and principles</p>
+        </div>
+    </div>
+    </div>
+    <!--start row-->
+    <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <a href="/desktop/extensions-sdk/extensions/"><img src="/assets/images/publish.svg" alt="Publish" width="70" height="70"></a>
+            </div>
+                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/extensions/">Publish your extension</a></h2>
+                <p>Understand how to publish your extension to the Marketplace.</p>
+        </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+          <div class="component-icon">
+                 <a href="/desktop/extensions-sdk/dev/kubernetes/"><img src="/assets/images/sync.svg" alt="Kubernetes" width="70" height="70"></a>
+          </div>
+                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/dev/kubernetes/">Interacting with Kubernetes</a></h2>
+                <p>Find information on how to interact indirectly with a Kubernetes cluster from your Docker extension.</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <a href="/desktop/extensions-sdk/extensions/multi-arch/"><img src="/assets/images/build-multi-platform.svg" alt="Multi-arch" width="70" height="70"></a>
+            </div>
+                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/extensions/multi-arch/">Multi-arch extensions</a></h2>
+                <p>Build your extension for multiple architectures.</p>
+        </div>
+     </div>
+    </div>
+</div>

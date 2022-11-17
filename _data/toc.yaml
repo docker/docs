@@ -1325,6 +1325,8 @@ manuals:
       section:
         - path: /desktop/extensions-sdk/
           title: Overview
+        - path: /desktop/extensions-sdk/process/
+          title: The build and publish process
         - path: /desktop/extensions-sdk/quickstart/
           title: Quickstart
         - sectiontitle: "Part one: Build"
