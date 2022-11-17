@@ -37,6 +37,6 @@ deploy:
 # Used in a Dev Environment container
 watch:
 	bundle install
-	bundle exec jekyll serve --watch --config _config.yml --disable-disk-cache
+	DOCS_URL=http://localhost:4000 DOCS_ENFORCE_GIT_LOG_HISTORY=0 DOCS_FETCH_ONLY_ONCE=1 bundle exec jekyll serve --host 0.0.0.0 --watch --config _config.yml
 
 .PHONY: buildx-yaml release vendor htmlproofer mdl deploy watch

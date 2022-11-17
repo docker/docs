@@ -78,6 +78,8 @@ module Jekyll
 
         gituri = Git::URL.parse(entry['repo'])
         clonedir = "#{Dir.tmpdir}/docker-docs-clone#{gituri.path}/#{Digest::SHA256.hexdigest(entry['ref'])}"
+
+        next if ENV['DOCS_FETCH_ONLY_ONCE'] == "1" && File.exist?(clonedir)
         git = FetchRemote.git_fetch("#{entry['repo']}.git", entry['ref'], fetch_depth, clonedir)
 
         entry['paths'].each do |path|
