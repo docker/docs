@@ -58,9 +58,11 @@ To install the extension in Docker Desktop, run:
 $ docker extension install <name-of-your-extension>
 ```
 
-To preview the extension in Docker Desktop, close and open Docker Dashboard once the installation is complete.
+To preview the extension in Docker Desktop, open Docker Dashboard once the installation is complete.
 
 During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. See [Preview whilst developing the UI](build/test-debug.md#hot-reloading-whilst-developing-the-ui) for more information.
+
+You may also want to inspect the containers that belong to the extension. By default, extension containers are hidden from the Docker Dashboard. You can change this in **Settings**, see [how to show extension containers](build/test-debug.md#show-the-extension-containers) for more information.
 
 ## Step four: Submit and publish your extension to the Marketplace
 
