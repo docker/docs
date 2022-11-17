@@ -92,6 +92,12 @@ COPY --from=client-builder /app/client/dist ui
 CMD [ "sleep", "infinity" ]
 ```
 
+> **Tip**
+>
+> Enable the "Show system containers" option in Docker Desktop to see the extension container running.
+> See [how to show extension containers](../test-debug.md#show-the-extension-containers) for more information.
+{: .tip }
+
 ## Configure the metadata file
 
 A `metadata.json` file is required at the root of the image filesystem.
