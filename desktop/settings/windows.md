@@ -239,7 +239,7 @@ when an update becomes available. After downloading the update, click
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Extensions 
+## Features in development
 
 Use the **Extensions** tab to:
 

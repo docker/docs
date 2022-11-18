@@ -23,7 +23,7 @@ This page details Docker's product release lifecycle and how Docker defines each
 
 Experimental offerings are features that Docker is currently experimenting with. Customers who access experimental features have the opportunity to test, validate, and provide feedback on future functionality. This helps us focus our efforts on what provides the most value to our customers.
 
-**Customer availability:** Availability of experimental features is limited. A portion users may be opted into none, one or many experimental features. 
+**Customer availability:** Availability of experimental features is limited. A portion of users may have access to none, one or many experimental features. 
 
 **Support:** Support for Experimental features is best effort via Community support channels and forums.
 

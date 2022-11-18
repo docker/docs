@@ -205,7 +205,7 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
 
-## Feature control 
+## Features in development
 
 On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
 
