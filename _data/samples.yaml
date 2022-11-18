@@ -1,14 +1,14 @@
 samples:
 # Awesome Compose ----------------------------
   - title: ASP.NET / MS-SQL 
-    url: https://github.com/docker/awesome-compose/blob/master/aspnet-mssql
+    url: https://github.com/docker/awesome-compose/tree/master/aspnet-mssql
     description: A sample ASP.NET core application with MS SQL server database.
     dev_env: false
     services:
       - .net
       - ms-sql
   - title: Elasticsearch / Logstash / Kibana
-    url: https://github.com/docker/awesome-compose/blob/master/elasticsearch-logstash-kibana
+    url: https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana
     description: A sample Elasticsearch, Logstash, and Kibana stack.
     dev_env: false
     services:
@@ -17,7 +17,7 @@ samples:
       - kibana
       - elk
   - title: Go / NGINX / MySQL
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-golang-mysql
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-golang-mysql
     description: A sample Go application with an Nginx proxy and a MySQL database.
     dev_env: true
     services: 
@@ -25,7 +25,7 @@ samples:
       - nginx
       - mysql
   - title: Go / NGINX / PostgreSQL
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-golang-postgres
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres
     description: A sample Go application with an Nginx proxy and a PostgreSQL database.
     dev_env: true
     services:
@@ -33,7 +33,7 @@ samples:
       - nginx
       - postgresql
   - title: Java Spark / MySQL
-    url: https://github.com/docker/awesome-compose/blob/master/sparkjava-mysql
+    url: https://github.com/docker/awesome-compose/tree/master/sparkjava-mysql
     description: A sample Java application and a MySQL database. 
     dev_env: true
     services:
@@ -41,7 +41,7 @@ samples:
       - java
       - mysql
   - title: NGINX / ASP.NET / MySQL
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-aspnet-mysql
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-aspnet-mysql
     description: A sample Nginx reverse proxy with an C# backend using ASP.NET.
     dev_env: true
     services: 
@@ -49,7 +49,7 @@ samples:
       - .net
       - mysql
   - title: NGINX / Flask / MongoDB 
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-flask-mongo
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-flask-mongo
     description: A sample Python/Flask application with Nginx proxy and a Mongo database.
     dev_env: true
     services:
@@ -58,7 +58,7 @@ samples:
       - mongodb
       - python
   - title: NGINX / Flask / MySQL
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-flask-mysql
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-flask-mysql
     description: A sample Python/Flask application with an Nginx proxy and a MySQL database.
     dev_env: false
     services:
@@ -67,7 +67,7 @@ samples:
       - python
       - mysql
   - title: NGINX / Node.js / Redis
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-nodejs-redis
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-nodejs-redis
     description: A sample Node.js application with Nginx proxy and a Redis database.
     dev_env: false
     services:
@@ -76,14 +76,14 @@ samples:
       - redis
       - javascript
   - title: NGINX / Go
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-golang
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-golang
     description: A sample Nginx proxy with a Go backend.
     dev_env: true
     services:
       - nginx
       - go
   - title: NGINX / WSGI / Flask
-    url: https://github.com/docker/awesome-compose/blob/master/nginx-wsgi-flask
+    url: https://github.com/docker/awesome-compose/tree/master/nginx-wsgi-flask
     description: A sample Nginx reverse proxy with a Flask backend using WSGI.
     dev_env: false
     services:
@@ -92,14 +92,14 @@ samples:
       - python
       - wsgi
   - title: PostgreSQL / pgAdmin
-    url: https://github.com/docker/awesome-compose/blob/master/postgresql-pgadmin
+    url: https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin
     description: A sample setup for postgreSQL database with pgAdmin web interface.
     dev_env: false
     services:
       - postgresql
       - pgadmin
   - title: Python / Flask / Redis
-    url: https://github.com/docker/awesome-compose/blob/master/flask-redis
+    url: https://github.com/docker/awesome-compose/tree/master/flask-redis
     description: A sample Python/Flask and a Redis database.
     dev_env: true
     services:
@@ -107,7 +107,7 @@ samples:
       - flask
       - redis
   - title: React / Spring / MySQL
-    url: https://github.com/docker/awesome-compose/blob/master/react-java-mysql
+    url: https://github.com/docker/awesome-compose/tree/master/react-java-mysql
     description: A sample React application with a Spring backend and a MySQL database.
     dev_env: true
     services:
@@ -117,7 +117,7 @@ samples:
       - javascript
       - mysql
   - title: React / Express / MySQL
-    url: https://github.com/docker/awesome-compose/blob/master/react-express-mysql
+    url: https://github.com/docker/awesome-compose/tree/master/react-express-mysql
     description: A sample React application with a Node.js backend and a MySQL database.
     dev_env: true
     services:
@@ -127,7 +127,7 @@ samples:
       - mysql
       - nodejs
   - title: React / Express / MongoDB 
-    url: https://github.com/docker/awesome-compose/blob/master/react-express-mongodb
+    url: https://github.com/docker/awesome-compose/tree/master/react-express-mongodb
     description: A sample React application with a Node.js backend and a Mongo database.
     dev_env: true
     services:
@@ -137,7 +137,7 @@ samples:
       - nodejs
       - mongodb
   - title: React / Rust / PostgreSQL
-    url: https://github.com/docker/awesome-compose/blob/master/react-rust-postgres
+    url: https://github.com/docker/awesome-compose/tree/master/react-rust-postgres
     description: A sample React application with a Rust backend and a Postgres database.
     dev_env: true
     services:
@@ -146,7 +146,7 @@ samples:
       - postgresql
       - javascript
   - title: React / NGINX
-    url: https://github.com/docker/awesome-compose/blob/master/react-nginx
+    url: https://github.com/docker/awesome-compose/tree/master/react-nginx
     description: A sample React application with Nginx.
     dev_env: true
     services:
@@ -154,7 +154,7 @@ samples:
       - javascript
       - nginx
   - title: Spring / PostgreSQL
-    url: https://github.com/docker/awesome-compose/blob/master/spring-postgres
+    url: https://github.com/docker/awesome-compose/tree/master/spring-postgres
     description: A sample Java application with Spring framework and a Postgres database.
     dev_env: true
     services:
@@ -162,48 +162,48 @@ samples:
       - spring
       - postgresql
   - title: Angular
-    url: https://github.com/docker/awesome-compose/blob/master/angular
+    url: https://github.com/docker/awesome-compose/tree/master/angular
     description: A sample Angular application.
     dev_env: true
     services:
       - angular
       - typescript
   - title: Spark
-    url: https://github.com/docker/awesome-compose/blob/master/sparkjava
+    url: https://github.com/docker/awesome-compose/tree/master/sparkjava
     description: A sample Spark application.
     dev_env: true
     services:
       - spark
       - java
   - title: VueJS
-    url: https://github.com/docker/awesome-compose/blob/master/vuejs
+    url: https://github.com/docker/awesome-compose/tree/master/vuejs
     description: A sample Vue.jus application.
     dev_env: true
     services:
       - vuejs
       - javascript
   - title: Flask
-    url: https://github.com/docker/awesome-compose/blob/master/flask
+    url: https://github.com/docker/awesome-compose/tree/master/flask
     description: A sample Flask application.
     dev_env: true
     services:
       - flask
       - python
   - title: PHP
-    url: https://github.com/docker/awesome-compose/blob/master/apache-php
+    url: https://github.com/docker/awesome-compose/tree/master/apache-php
     description: A sample PHP application.
     dev_env: true
     services:
       - php
   - title: Traefik
-    url: https://github.com/docker/awesome-compose/blob/master/traefik-golang
+    url: https://github.com/docker/awesome-compose/tree/master/traefik-golang
     description: A sample Traefik proxy with a Go backend.
     dev_env: true
     services:
       - traefik
       - go
   - title: Django
-    url: https://github.com/docker/awesome-compose/blob/master/django
+    url: https://github.com/docker/awesome-compose/tree/master/django
     description: A sample Django application.
     dev_env: true
     services:
@@ -234,28 +234,28 @@ samples:
     services:
       - wireguard
   - title: FastAPI
-    url: https://github.com/docker/awesome-compose/blob/master/fastapi
+    url: https://github.com/docker/awesome-compose/tree/master/fastapi
     description: A sample FastAPI application.
     dev_env: true
     services:
       - python
       - fastapi
   - title: Gitea / PostgreSQL
-    url: https://github.com/docker/awesome-compose/blob/master/gitea-postgres
+    url: https://github.com/docker/awesome-compose/tree/master/gitea-postgres
     description: A sample setup for Gitea.
     dev_env: false
     services:
       - gitea
       - popstgresql
   - title: Nextcloud / PostgreSQL
-    url: https://github.com/docker/awesome-compose/blob/master/nextcloud-postgres
+    url: https://github.com/docker/awesome-compose/tree/master/nextcloud-postgres
     description: A sample Nextcloud setup.
     dev_env: false
     services:
       - nextcloud
       - postgresql
   - title: Nextcloud / Redis / MariaDB
-    url: https://github.com/docker/awesome-compose/blob/master/nextcloud-redis-mariadb
+    url: https://github.com/docker/awesome-compose/tree/master/nextcloud-redis-mariadb
     description: A sample Nextcloud setup.
     dev_env: false
     services:
@@ -263,21 +263,21 @@ samples:
       - mariadb
       - redis
   - title: Pi-hole / cloudflared
-    url: https://github.com/docker/awesome-compose/blob/master/pihole-cloudflared-DoH
+    url: https://github.com/docker/awesome-compose/tree/master/pihole-cloudflared-DoH
     description: A sample Pi-hole setup with use of DoH cloudflared service.
     dev_env: false
     services:
       - pi-hole
       - cloudflared
   - title: Prometheus / Grafana
-    url: https://github.com/docker/awesome-compose/blob/master/prometheus-grafana
+    url: https://github.com/docker/awesome-compose/tree/master/prometheus-grafana
     description: A sample Prometheus and Grafana stack.
     dev_env: false
     services:
       - prometheus
       - grafana
   - title: WordPress / MySQL
-    url: https://github.com/docker/awesome-compose/blob/master/wordpress-mysql
+    url: https://github.com/docker/awesome-compose/tree/master/wordpress-mysql
     description: A sample WordPress setup.
     dev_env: false
     services:
@@ -372,7 +372,7 @@ samples:
       - javascript
       - nodejs
   - title: Compose and Rails
-    url: https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/rails/
+    url: https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/
     description: This Quickstart guide shows you how to use Docker Compose to set up and run a Rails/PostgreSQL app.
     dev_env: false
     services:
@@ -380,7 +380,7 @@ samples:
       - postgres
       - ruby
   - title: Compose and Django
-    url: https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/django/
+    url: https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/
     description: This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
     dev_env: false
     services:
@@ -388,7 +388,7 @@ samples:
       - python
       - postgres
   - title: Compose and WordPress
-    url: https://github.com/docker/awesome-compose/blob/master/official-documentation-samples/wordpress/
+    url: https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/
     description: This quick-start guide demonstrates how to use Compose to set up and run WordPress.
     dev_env: false
     services:
