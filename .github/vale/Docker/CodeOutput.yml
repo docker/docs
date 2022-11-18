@@ -8,5 +8,5 @@ raw:
   - '(\`\`\`console\n)'         # start ```console
   - '[^(\$|#)]*'           # 0 or more characters without $ or #
   - '.*(\$|#).*[^\`\\]\n'    # 1 line with $ or #, without ` or \ at end
-  - '((?!\`\`\`|\$|#)(.|\n))*'  # 0 or more lines without ```, $, or #
+  - '((?!\`\`\`|\$|#)(.|\n))+'  # 1 or more lines without ```, $, or #
   - '\`\`\`'               # stop ```

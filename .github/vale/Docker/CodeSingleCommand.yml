@@ -6,10 +6,9 @@ scope: raw
 #check for console code fence followed by at least two lines with $ or #
 raw:
   - '\`\`\`console\n'      # start at ```console
-  - '[^(\$|#)]*'           # 0 or more characters without $ or #
+  - '[^(\$|#|\`\`\`)]*'           # 0 or more characters without $, #, or ```
   - '.*(\$|#).*\n'         # 1 line with $ or #
-  - '[^(\$|#)]*'           #  0 or more characters without $ or #
+  - '[^(\$|#|\`\`\`)]*' # 0 or more characters without $, #, or ```
   - '.*(\$|#).*\n'         # 1 line with $ or #
-  - '((?!\`\`\`)(.|\n))*'  # 0 or characters without ```
-  - '\`\`\`'               # stop ```
-
+  - '[^(\`\`\`)]*'   # 0 or more characters without  ```
+  - '\`\`\`' # stop ```
