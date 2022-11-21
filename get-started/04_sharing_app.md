@@ -14,7 +14,7 @@ Now that you've built an image, you can share it. To share Docker images, you ha
 
 ## Create a repo
 
-To push an image, we first need to create a repository on Docker Hub.
+To push an image, you first need to create a repository on Docker Hub.
 
 1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} or Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
 
@@ -30,56 +30,35 @@ To push an image, we first need to create a repository on Docker Hub.
 
 After creating the repository, the repository page appears. On the page, you can view the **Docker commands** section. In this section, you'll see the command to push an image to this repository.
 
-## Push the image
 
-1. In the command line, try running the `docker push` command. Replace `<your-docker-id>` with your Docker ID.
+## Build a multi-platform image and push it to Docker Hub
+
+The image that you have built will only run on platforms using the same architecture as your development machine. If you want to share and run the image on machines with different architectures, you can use buildx to build a [multi-platform image](../build/building/multi-platform.md).
+
+In the following steps, you will build a multi-platform image that can run on AMD64 and ARM64/v8.
+
+1. In a terminal, run the following command to create and use a new builder with the `docker-container` driver which gives you access to more complex features like multi-platform builds.
 
    ```console
-    $ docker push <your-docker-id>/getting-started
-   ```
-   You will see output similar to the following:
-   ```console
-   The push refers to repository [docker.io/<your-docker-id>/getting-started]
-   An image does not exist locally with the tag: <your-docker-id>/getting-started
+   $ docker buildx create --name mybuilder --driver docker-container --bootstrap --use
    ```
 
-   Why did it fail? The push command was looking for an image named `<your-docker-id>/getting-started`, but didn't find one. If you run `docker image ls`, you won't see one either. You will see your image name is `getting-started`.
-
-    To push the image to the repository, you need to "tag" your existing image you've built to give it another name that is prepended with your Docker ID.
-
-2. In a terminal, log in to Docker Hub using the `docker login` command. Replace `<your-docker-id>` with your Docker ID.
+2. In a terminal, log in to Docker Hub using  the `docker login` command. Replace `<your-docker-id>` with your Docker ID.
 
    ```console
    $ docker login -u <your-docker-id>
    ```
 
-3. Use the `docker tag` command to rename your `getting-started` image to `<your-docker-id>/getting-started`. Replace `<your-docker-id>` with your Docker ID.
-
-    ```console
-    $ docker tag getting-started <your-docker-id>/getting-started
-    ```
-
-4. Now try the `docker push` command again. Replace `<your-docker-id>` with your Docker ID.
+3. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image and push it to Docker Hub. Replace <`your-docker-id>` with your Docker ID.
 
    ```console
-   $ docker push <your-docker-id>/getting-started
+    $ docker buildx build --platform linux/amd64,linux/arm/v8 -t <your-docker-id>/getting-started --push .
    ```
+   In the command above, you use `--platform` to specify the platforms for the image and you use `--push` to push the image to Docker Hub.
 
 ## Run the image on a new instance
 
-Now that your image has been built and pushed into a registry, try running your app on a brand new instance that has never seen this container image. To do this, you will use Play with Docker.
-
-
-If you are using an Apple silicon device, you must first build a new image because your device's platform differs from the Play with Docker platform. Select your device's platform below.
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#amd">Mac / Linux / Windows with AMD64</a></li>
-  <li><a data-toggle="tab" data-target="#arm">Mac with Apple silicon</a></li>
-</ul>
-<div class="tab-content">
-<div id="amd" class="tab-pane fade in active" markdown="1">
-
-### Mac / Linux / Windows with AMD64
+Now that your image has been built and pushed into a registry, try running your app on a brand new instance that has never seen this container image! To do this, you will use Play with Docker.
 
 1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
 
@@ -91,65 +70,15 @@ If you are using an Apple silicon device, you must first build a new image becau
 
 5. In the terminal, start your freshly pushed app. Replace `<your-docker-id>` with your Docker ID.
 
-    ```console
-    $ docker run -dp 3000:3000 <your-docker-id>/getting-started
-    ```
+   ```console
+   $ docker run -dp 3000:3000 <your-docker-id>/getting-started
+   ```
 
-    You should see the image get pulled down and eventually start up.
+   You should see the image get pulled down and eventually start up.
 
 6. Select the 3000 badge when it comes up and you should see the app with your modifications.
     If the 3000 badge doesn't show up, you can select the **Open Port** button and type in 3000.
 
-<hr>
-</div>
-<div id="arm" class="tab-pane fade" markdown="1">
-
-### Mac with Apple silicon
-
-In the steps below, you will build an additional image that's compatible with the Play with Docker platform. You can also build a single [multi-platform image](../build/building/multi-platform.md), but that's outside of the scope of this tutorial.
-
-1. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a new image that's compatible with the Play with Docker platform. Replace <`your-docker-id>` with your Docker ID.
-
-   ```console
-    $ docker build --platform linux/amd64 -t <your-docker-id>/getting-started:amd64 .
-   ```
-   In the command above, you use `--platform` to specify the platform for the image and you use `-t <your-docker-id>/getting-started:amd64` to name the new image.
-
-2. In a terminal, log in to Docker Hub using  the `docker login` command. Replace `<your-docker-id>` with your Docker ID.
-
-   ```console
-   $ docker login -u <your-docker-id>
-   ```
-
-3. Now use `docker push` to push the image to Docker Hub. Replace `<your-docker-id>` with your Docker ID.
-
-   ```console
-   $ docker push <your-docker-id>/getting-started:amd64
-   ```
-
-4. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
-
-5. Select **Login** and then select **docker** from the drop-down list.
-
-6. Connect with your Docker Hub account.
-
-7. Once you're logged in, select the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
-
-8. In the terminal, start your freshly pushed app. Replace `<your-docker-id>` with your Docker ID.
-
-    ```console
-    $ docker run -dp 3000:3000 <your-docker-id>/getting-started:amd64
-    ```
-
-    You should see the image get pulled down and eventually start up.
-
-9. Select the 3000 badge when it comes up and you should see the app with your modifications.
-    If the 3000 badge doesn't show up, you can select the **Open Port** button and type in 3000.
-
-
-<hr>
-</div>
-</div>
 
 ## Next steps
 
