@@ -20,6 +20,8 @@ jobs:
   Generate-Tar-File:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v2
       - name: Build docker images
         run: docker build . -t dockerdocs
       - name: save image as tar file
