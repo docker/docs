@@ -1335,10 +1335,8 @@ manuals:
               section:
                 - title: ...a minimal frontend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
-                - title: ... a ReactJS-based extension
-                  path: /desktop/extensions-sdk/build/set-up/react-extension/
-                - title: ... a minimal extension invoking Docker commands
-                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
+                - title: ... an advanced frontend extension
+                  path: /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
                 - title: ... a minimal backend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
             - title: "Step two: Build and install"
