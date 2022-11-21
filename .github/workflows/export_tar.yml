@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Export Docker Tar
+run-name: ${{ github.actor }} is exporting a tar file containing ready built docker docs 🚀
 on: [push]
 jobs:
   Explore-GitHub-Actions:
@@ -17,3 +17,20 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  Generate-Tar-File:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build docker images
+      - run: docker build . -t dockerdocs
+      - name: save image as tar file
+      - run: docker save -o dockerdocs.tar dockerdocs
+      - name: Upload Release asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          #           upload_url: ${{ steps.createRelease.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/dockerdocs.tar
+          asset_name: dockerdocs.tar
+          asset_content_type: application/octet-stream
+          
