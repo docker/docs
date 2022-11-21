@@ -10,7 +10,8 @@ redirect_from:
 title: Docker overview
 ---
 
-Docker is an open platform for developing, shipping, and running applications.
+Docker is an open platform for developing, shipping, and running applications
+and it allows you to build test and deploy applications quickly.
 Docker enables you to separate your applications from your infrastructure so
 you can deliver software quickly. With Docker, you can manage your infrastructure
 in the same ways you manage your applications. By taking advantage of Docker's
@@ -23,7 +24,6 @@ Docker provides the ability to package and run an application in a loosely isola
 environment called a container. The isolation and security allows you to run many
 containers simultaneously on a given host. Containers are lightweight and contain
 everything needed to run the application, so you do not need to rely on what is
-currently installed on the host. You can easily share containers while you work,
 and be sure that everyone you share with gets the same container that works in the
 same way.
 
