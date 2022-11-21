@@ -2,6 +2,8 @@
 title: OAuth 2.0 flow
 description: Docker extension OAuth 2.0 flow
 keywords: Docker, extensions, sdk, OAuth 2.0
+redirect_from:
+  - /desktop/extensions-sdk/dev/oauth2-flow/
 ---
 
 > Note

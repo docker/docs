@@ -2,6 +2,8 @@
 title: Interacting with Kubernetes from a Docker Extension
 description: How to connect to a Kubernetes cluster from a Docker Extension
 keywords: Docker, Extensions, sdk, Kubernetes
+redirect_from:
+  - /desktop/extensions-sdk/dev/kubernetes/
 ---
 
 Currently, the Extensions SDK does not provide any API methods to directly interact with the Docker Desktop managed Kubernetes cluster or any other created using other tools such as KinD. However, this page provides a way for you to use other SDK APIs to interact indirectly with a Kubernetes cluster from your Docker extension.
