@@ -12,7 +12,6 @@ To start creating your extension, you first need a directory with files which ra
 
 > Note
 >
-<<<<<<< HEAD
 > Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 ## Extension folder structure
@@ -29,23 +28,6 @@ The quickest way to create a new extension is to run `docker extension init my-e
 
 Although you can start from an empty directory or from the `react-extension` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"},
 it's highly recommended that you start from the `docker extension init` command and change it to suit your needs.
-=======
-> Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
-
-## Extension folder structure
-
-The easiest way to create a new extension is to run `docker extension init <my-extension>` as in the [Quickstart](../../quickstart.md).
-This will create a new directory `<my-extension>` that contains a fully functional extension.
-
-> **Note**
->
-> The `docker extension init` generates a React based extension. But you can still use it as a starting point for 
-> your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or event stay with 
-> vanilla Javascript.
-
-Although you can start from an empty directory of from the `react-extension` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"},
-it's highly recommended that you start from the `docker extension init` command and change it so to suit your needs.
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 
 ```bash
 .
@@ -70,7 +52,6 @@ it's highly recommended that you start from the `docker extension init` command 
 5. The icon that is displayed in the left-menu of the Docker Desktop Dashboard.
 6. A file that provides information about the extension such as the name, description, and version.
 
-<<<<<<< HEAD
 ## Adapting the Dockerfile
 
 > **Note**
@@ -81,11 +62,6 @@ it's highly recommended that you start from the `docker extension init` command 
 Once the extension is created, you need to configure the `Dockerfile` to build the extension and configure the labels
 that are used to populate the extension's card in the Marketplace. Here is an example of a `Dockerfile` for a React
 extension:
-=======
-## Create a Dockerfile
-
-Use the Dockerfile below as a template and change it accordingly to suit your needs.
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#react-dockerfile" data-group="react">For React</a></li>
@@ -113,11 +89,7 @@ RUN npm run build
 FROM alpine
 LABEL org.opencontainers.image.title="My extension" \
     org.opencontainers.image.description="Your Desktop Extension Description" \
-<<<<<<< HEAD
     org.opencontainers.image.vendor="Awesome Inc." \
-=======
-    org.opencontainers.image.vendor="Docker Inc." \
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
     com.docker.desktop.extension.api.version="0.3.0" \
     com.docker.desktop.extension.icon="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
     com.docker.extension.screenshots="" \
@@ -135,14 +107,10 @@ COPY --from=client-builder /ui/build ui
   </div>
   <div id="vue-dockerfile" class="tab-pane fade" markdown="1">
 
-<<<<<<< HEAD
 <br/>
 
 > **Important**
 >
-=======
-> **Important**
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 > We don't have a working Dockerfile for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know you'd like a Dockerfile for Vue.
 {: .important }
@@ -150,14 +118,10 @@ COPY --from=client-builder /ui/build ui
   </div>
   <div id="angular-dockerfile" class="tab-pane fade" markdown="1">
 
-<<<<<<< HEAD
 <br/>
 
 > **Important**
 >
-=======
-> **Important**
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 > We don't have a working Dockerfile for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know you'd like a Dockerfile for Angular.
 {: .important }
@@ -165,14 +129,10 @@ COPY --from=client-builder /ui/build ui
   </div>
   <div id="svelte-dockerfile" class="tab-pane fade" markdown="1">
 
-<<<<<<< HEAD
 <br/>
 
 > **Important**
 >
-=======
-> **Important**
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 > We don't have a working Dockerfile for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know you'd like a Dockerfile for Svelte.
 {: .important }
@@ -182,7 +142,8 @@ COPY --from=client-builder /ui/build ui
 
 ## Configure the metadata file
 
-A `metadata.json` file is required at the root of your extension directory.
+In order to add a tab in Docker Desktop for your extension, you have to configure it in the `metadata.json`
+file the root of your extension directory.
 
 ```json
 {
@@ -197,15 +158,34 @@ A `metadata.json` file is required at the root of your extension directory.
 }
 ```
 
-<<<<<<< HEAD
+The `title` property is the name of the extension that is displayed in the left-menu of the Docker Desktop Dashboard.
+The `root` property is the path to the frontend application in the extension's container filesystem used by the
+system to deploy it on the host.
+The `src` property is the path to the HTML entry point of the frontend application within the `root` folder.
+
+For more information on the `ui` section of hte `metadata.json`, see [Metadata](../../extensions/METADATA.md#ui-section).
+
+## Build the extension and install it
+
+Now that you have configured the extension, you need to build the extension image that Docker Desktop will use to
+install it.
+
+```bash
+docker build --tag= awesome-inc/my-extension:latest .
+```
+
+This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect
+awesome-inc/my-extension:latest` to see more details about it.
+
+Finally, you can install the extension and see it appearing in the Docker Desktop Dashboard.
+
+```bash
+docker extension install awesome-inc/my-extension:latest
+```
+
 ## Use the Extension APIs client
 
-To use the Extension APIs and perform actions with Docker Desktop, the extension must first import the 
-=======
-## Use extension APIs in the application code
-
-To use the extension APIs and perform actions with Docker Desktop, the application must first import the 
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
+To use the Extension APIs and perform actions with Docker Desktop, the extension must first import the
 `@docker/extension-api-client` library. To install it, run the command below:
 
 ```bash
@@ -220,17 +200,16 @@ import { createDockerDesktopClient } from '@docker/extension-api-client';
 const ddClient = createDockerDesktopClient();
 ```
 
-When using Typescript, you can also install `@docker/extension-api-client-types` as a dev dependency. This will 
+When using Typescript, you can also install `@docker/extension-api-client-types` as a dev dependency. This will
 provide you with type definitions for the extension APIs and auto-completion in your IDE.
 
-<<<<<<< HEAD
 ```bash
 npm install @docker/extension-api-client-types --save-dev
 ```
 
 ![types auto complete](images/types-autocomplete.png)
 
-For example, you can use the `docker.cli.exec` function to get the list of all the containers via the `docker ps --all` 
+For example, you can use the `docker.cli.exec` function to get the list of all the containers via the `docker ps --all`
 command and display the result in a table.
 
 <ul class="nav nav-tabs">
@@ -238,28 +217,12 @@ command and display the result in a table.
   <li><a data-toggle="tab" data-target="#vue-app" data-group="vue">Vue</a></li>
   <li><a data-toggle="tab" data-target="#angular-app" data-group="angular">Angular</a></li>
   <li><a data-toggle="tab" data-target="#svelte-app" data-group="svelte">Svelte</a></li>
-=======
-![types auto complete](images/types-autocomplete.png)
-
-For example, you can use the `docker.cli.exec` function to get the list of all the containers via the `docker ps` 
-command and display the result in a table.
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#react-app" data-group="react">For React</a></li>
-  <li><a data-toggle="tab" data-target="#vue-app" data-group="vue">For Vue</a></li>
-  <li><a data-toggle="tab" data-target="#angular-app" data-group="angular">For Angular</a></li>
-  <li><a data-toggle="tab" data-target="#svelte-app" data-group="svelte">For Svelte</a></li>
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 </ul>
 
 <div class="tab-content">
   <div id="react-app" class="tab-pane fade in active" markdown="1">
 
-<<<<<<< HEAD
 Replace the `ui/src/App.tsx` file with the following code:
-=======
-Edit the `ui/src/App.tsx` file to add the following code:
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 
 ```tsx
 {% raw %}
@@ -340,16 +303,11 @@ export function App() {
 
   </div>
   <div id="vue-app" class="tab-pane fade" markdown="1">
-<<<<<<< HEAD
     
 <br/>
 
 > **Important**
 >
-=======
-
-> **Important**
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 > We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know you'd like a sample with Vue.
 {: .important }
@@ -357,14 +315,10 @@ export function App() {
   </div>
   <div id="angular-app" class="tab-pane fade" markdown="1">
 
-<<<<<<< HEAD
 <br/>
 
 > **Important**
 >
-=======
-> **Important**
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 > We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know you'd like a sample with Angular.
 {: .important }
@@ -372,14 +326,10 @@ export function App() {
   </div>
   <div id="svelte-app" class="tab-pane fade" markdown="1">
 
-<<<<<<< HEAD
 <br/>
 
 > **Important**
 >
-=======
-> **Important**
->>>>>>> 13c6e38f63 (Genericize frontend tutorial and make it clear other tech are usable and track it)
 > We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know you'd like a sample with Svelte.
 {: .important }
