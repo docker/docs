@@ -99,7 +99,10 @@ COPY --from=client-builder /ui/build ui
   </div>
   <div id="vue-dockerfile" class="tab-pane fade" markdown="1">
 
+<br/>
+
 > **Important**
+>
 > We don't have a working Dockerfile for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know you'd like a Dockerfile for Vue.
 {: .important }
@@ -107,7 +110,10 @@ COPY --from=client-builder /ui/build ui
   </div>
   <div id="angular-dockerfile" class="tab-pane fade" markdown="1">
 
+<br/>
+
 > **Important**
+>
 > We don't have a working Dockerfile for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know you'd like a Dockerfile for Angular.
 {: .important }
@@ -115,7 +121,10 @@ COPY --from=client-builder /ui/build ui
   </div>
   <div id="svelte-dockerfile" class="tab-pane fade" markdown="1">
 
+<br/>
+
 > **Important**
+>
 > We don't have a working Dockerfile for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know you'd like a Dockerfile for Svelte.
 {: .important }
@@ -256,8 +265,11 @@ export function App() {
 
   </div>
   <div id="vue-app" class="tab-pane fade" markdown="1">
+    
+<br/>
 
 > **Important**
+>
 > We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know you'd like a sample with Vue.
 {: .important }
@@ -265,7 +277,10 @@ export function App() {
   </div>
   <div id="angular-app" class="tab-pane fade" markdown="1">
 
+<br/>
+
 > **Important**
+>
 > We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know you'd like a sample with Angular.
 {: .important }
@@ -273,7 +288,10 @@ export function App() {
   </div>
   <div id="svelte-app" class="tab-pane fade" markdown="1">
 
+<br/>
+
 > **Important**
+>
 > We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know you'd like a sample with Svelte.
 {: .important }
