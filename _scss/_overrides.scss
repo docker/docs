@@ -38,14 +38,14 @@
   font-family: $buttons;
 }
 .btn-primary {
-  background-color: $marine-50;
+  background-color: $light-blue-500;
   border: 1px solid rgba(0, 0, 0, 0.1);
 
   &:hover {
     opacity: 0.8;
 
     // override default bootstrap behaviour
-    background-color: $marine-50;
+    background-color: $light-blue-500;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 }

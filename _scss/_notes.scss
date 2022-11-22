@@ -60,8 +60,8 @@ blockquote {
     &:not(.important):not(.warning):not(.restricted):not(.experimental):not(.tip) {
       @include notification(
         $bg-color: $dark-palette-blue-200,
-        $header-color: $white-0,
-        $body-text-color: $white-0,
+        $header-color: $white,
+        $body-text-color: $white,
         $icon: "\f06a"
       );
     }
@@ -69,8 +69,8 @@ blockquote {
     &.important {
       @include notification(
         $bg-color: $dark-palette-amber-200,
-        $header-color: $white-0,
-        $body-text-color: $white-0,
+        $header-color: $white,
+        $body-text-color: $white,
         $icon: "\f06a"
       );
     }
@@ -78,8 +78,8 @@ blockquote {
     &.warning {
       @include notification(
         $bg-color: $dark-palette-red-200,
-        $header-color: $white-0,
-        $body-text-color: $white-0,
+        $header-color: $white,
+        $body-text-color: $white,
         $icon: "\f06a"
       );
     }
@@ -87,8 +87,8 @@ blockquote {
     &.restricted {
       @include notification(
         $bg-color: $dark-palette-violet-200,
-        $header-color: $white-0,
-        $body-text-color: $white-0,
+        $header-color: $white,
+        $body-text-color: $white,
         $icon: "\f135"
       );
     }
@@ -96,8 +96,8 @@ blockquote {
     &.experimental {
       @include notification(
         $bg-color: $dark-palette-blue-200,
-        $header-color: $white-0,
-        $body-text-color: $white-0,
+        $header-color: $white,
+        $body-text-color: $white,
         $icon: "\f492"
       );
     }
@@ -105,8 +105,8 @@ blockquote {
     &.tip {
       @include notification(
         $bg-color: $dark-palette-green-200,
-        $header-color: $white-0,
-        $body-text-color: $white-0,
+        $header-color: $white,
+        $body-text-color: $white,
         $icon: "\f164"
       );
     }
