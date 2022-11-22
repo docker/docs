@@ -52,7 +52,7 @@ guides:
   path: /get-started/overview/
 - title: Get Docker
   path: /get-docker/
-- sectiontitle: Quickstart guide
+- sectiontitle: Get started
   section:
     - title: "Part 1: Overview"
       path: /get-started/
@@ -154,22 +154,6 @@ guides:
       path: /language/dotnet/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/dotnet/deploy/
-- sectiontitle: Develop with Docker
-  section:
-  - path: /develop/
-    title: Overview
-  - path: /develop/dev-best-practices/
-    title: Best practices
-  - sectiontitle: Build images
-    section:
-    - path: /develop/develop-images/dockerfile_best-practices/
-      title: Dockerfile best practices
-    - path: /develop/develop-images/image_management/
-      title: Manage images
-    - path: /develop/develop-images/baseimages/
-      title: Create your own base image (advanced)
-  - path: /develop/scan-images/
-    title: Scan images
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -196,166 +180,6 @@ guides:
       path: /get-started/kube-deploy/
     - title: "Deploy to Swarm"
       path: /get-started/swarm-deploy/
-  - sectiontitle: Configure all objects
-    section:
-    - path: /config/labels-custom-metadata/
-      title: Apply custom metadata to objects
-    - path: /config/pruning/
-      title: Prune unused objects
-    - path: /config/formatting/
-      title: Format command and log output
-  - sectiontitle: Configure the daemon
-    section:
-    - path: /config/daemon/
-      title: Configure and run Docker
-    - path: /config/daemon/systemd/
-      title: Control Docker with systemd
-    - path: /config/daemon/ipv6/
-      title: Configure the daemon for IPv6
-    - path: /network/iptables/
-      title: Docker and iptables
-    - sectiontitle: Store data within containers
-      section:
-      - path: /storage/storagedriver/
-        title: About storage drivers
-      - path: /storage/storagedriver/select-storage-driver/
-        title: Select a storage driver
-      - path: /storage/storagedriver/aufs-driver/
-        title: Use the AUFS storage driver
-      - path: /storage/storagedriver/btrfs-driver/
-        title: Use the Btrfs storage driver
-      - path: /storage/storagedriver/device-mapper-driver/
-        title: Use the Device mapper storage driver
-      - path: /storage/storagedriver/overlayfs-driver/
-        title: Use the OverlayFS storage driver
-      - path: /storage/storagedriver/zfs-driver/
-        title: Use the ZFS storage driver
-      - path: /storage/storagedriver/vfs-driver/
-        title: Use the VFS storage driver
-  - path: /config/daemon/prometheus/
-    title: Collect metrics with Prometheus
-  - sectiontitle: Configure containers
-    section:
-    - path: /config/containers/start-containers-automatically/
-      title: Start containers automatically
-    - path: /config/containers/live-restore/
-      title: Keep containers alive during daemon downtime
-    - path: /config/containers/multi-service_container/
-      title: Run multiple services in a container
-    - path: /config/containers/runmetrics/
-      title: Container runtime metrics
-    - path: /config/containers/resource_constraints/
-      title: Runtime options with Memory, CPUs, and GPUs
-    - sectiontitle: Logging
-      section:
-      - path: /config/containers/logging/
-        title: View a container's logs
-      - path: /config/containers/logging/configure/
-        title: Configure logging drivers
-      - path: /config/containers/logging/dual-logging/
-        title: Use docker logs with a logging driver
-      - path: /config/containers/logging/plugins/
-        title: Use a logging driver plugin
-      - path: /config/containers/logging/log_tags/
-        title: Customize log driver output
-      - sectiontitle: Logging driver details
-        section:
-        - path: /config/containers/logging/local/
-          title: Local file logging driver
-        - path: /config/containers/logging/logentries/
-          title: Logentries logging driver
-        - path: /config/containers/logging/json-file/
-          title: JSON File logging driver
-        - path: /config/containers/logging/gelf/
-          title: Graylog Extended Format (GELF) logging driver
-        - path: /config/containers/logging/syslog/
-          title: Syslog logging driver
-        - path: /config/containers/logging/awslogs/
-          title: Amazon CloudWatch logs logging driver
-        - path: /config/containers/logging/etwlogs/
-          title: ETW logging driver
-        - path: /config/containers/logging/fluentd/
-          title: Fluentd logging driver
-        - path: /config/containers/logging/gcplogs/
-          title: Google Cloud logging driver
-        - path: /config/containers/logging/journald/
-          title: Journald logging driver
-        - path: /config/containers/logging/splunk/
-          title: Splunk logging driver
-    - sectiontitle: Scale your app
-      section:
-      - path: /engine/swarm/
-        title: Swarm mode overview
-      - path: /engine/swarm/key-concepts/
-        title: Swarm mode key concepts
-      - sectiontitle: Get started with swarm mode
-        section:
-        - path: /engine/swarm/swarm-tutorial/
-          title: Swarm mode tutorial overview
-        - path: /engine/swarm/swarm-tutorial/create-swarm/
-          title: Create a swarm
-        - path: /engine/swarm/swarm-tutorial/add-nodes/
-          title: Add nodes to the swarm
-        - path: /engine/swarm/swarm-tutorial/deploy-service/
-          title: Deploy a service
-        - path: /engine/swarm/swarm-tutorial/inspect-service/
-          title: Inspect the service
-        - path: /engine/swarm/swarm-tutorial/scale-service/
-          title: Scale the service
-        - path: /engine/swarm/swarm-tutorial/delete-service/
-          title: Delete the service
-        - path: /engine/swarm/swarm-tutorial/rolling-update/
-          title: Apply rolling updates
-        - path: /engine/swarm/swarm-tutorial/drain-node/
-          title: Drain a node
-        - path: /engine/swarm/ingress/
-          title: Use swarm mode routing mesh
-      - sectiontitle: How swarm mode works
-        section:
-        - path: /engine/swarm/how-swarm-mode-works/nodes/
-          title: How nodes work
-        - path: /engine/swarm/how-swarm-mode-works/services/
-          title: How services work
-        - path: /engine/swarm/how-swarm-mode-works/pki/
-          title: Manage swarm security with PKI
-        - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
-          title: Swarm task states
-      - path: /engine/swarm/swarm-mode/
-        title: Run Docker in swarm mode
-      - path: /engine/swarm/join-nodes/
-        title: Join nodes to a swarm
-      - path: /engine/swarm/manage-nodes/
-        title: Manage nodes in a swarm
-      - path: /engine/swarm/services/
-        title: Deploy services to a swarm
-      - path: /engine/swarm/configs/
-        title: Store service configuration data
-      - path: /engine/swarm/secrets/
-        title: Manage sensitive data with Docker secrets
-      - path: /engine/swarm/swarm_manager_locking/
-        title: Lock your swarm
-      - path: /engine/swarm/networking/
-        title: Manage swarm service networks
-      - path: /engine/swarm/admin_guide/
-        title: Swarm administration guide
-      - path: /engine/swarm/raft/
-        title: Raft consensus in swarm mode
-    - sectiontitle: Extend Docker
-      section:
-      - path: /engine/extend/
-        title: Managed plugin system
-      - path: /engine/extend/plugins_authorization/
-        title: Access authorization plugin
-      - path: /engine/extend/legacy_plugins/
-        title: Extending Docker with plugins
-      - path: /engine/extend/plugins_network/
-        title: Docker network driver plugins
-      - path: /engine/extend/plugins_volume/
-        title: Volume plugins
-      - title: Plugin configuration
-        path: /engine/extend/config/
-      - path: /engine/extend/plugin_api/
-        title: Plugins
 - path: /get-started/resources/
   title: "Educational resources"
 
@@ -1516,6 +1340,166 @@ engine:
     title: tmpfs mounts
   - path: /storage/troubleshooting_volume_errors/
     title: Troubleshoot
+- sectiontitle: Configure all objects
+  section:
+  - path: /config/labels-custom-metadata/
+    title: Apply custom metadata to objects
+  - path: /config/pruning/
+    title: Prune unused objects
+  - path: /config/formatting/
+    title: Format command and log output
+- sectiontitle: Configure the daemon
+  section:
+  - path: /config/daemon/
+    title: Configure and run Docker
+  - path: /config/daemon/systemd/
+    title: Control Docker with systemd
+  - path: /config/daemon/ipv6/
+    title: Configure the daemon for IPv6
+  - path: /network/iptables/
+    title: Docker and iptables
+  - sectiontitle: Store data within containers
+    section:
+    - path: /storage/storagedriver/
+      title: About storage drivers
+    - path: /storage/storagedriver/select-storage-driver/
+      title: Select a storage driver
+    - path: /storage/storagedriver/aufs-driver/
+      title: Use the AUFS storage driver
+    - path: /storage/storagedriver/btrfs-driver/
+      title: Use the Btrfs storage driver
+    - path: /storage/storagedriver/device-mapper-driver/
+      title: Use the Device mapper storage driver
+    - path: /storage/storagedriver/overlayfs-driver/
+      title: Use the OverlayFS storage driver
+    - path: /storage/storagedriver/zfs-driver/
+      title: Use the ZFS storage driver
+    - path: /storage/storagedriver/vfs-driver/
+      title: Use the VFS storage driver
+- path: /config/daemon/prometheus/
+  title: Collect metrics with Prometheus
+- sectiontitle: Configure containers
+  section:
+  - path: /config/containers/start-containers-automatically/
+    title: Start containers automatically
+  - path: /config/containers/live-restore/
+    title: Keep containers alive during daemon downtime
+  - path: /config/containers/multi-service_container/
+    title: Run multiple services in a container
+  - path: /config/containers/runmetrics/
+    title: Container runtime metrics
+  - path: /config/containers/resource_constraints/
+    title: Runtime options with Memory, CPUs, and GPUs
+  - sectiontitle: Logging
+    section:
+    - path: /config/containers/logging/
+      title: View a container's logs
+    - path: /config/containers/logging/configure/
+      title: Configure logging drivers
+    - path: /config/containers/logging/dual-logging/
+      title: Use docker logs with a logging driver
+    - path: /config/containers/logging/plugins/
+      title: Use a logging driver plugin
+    - path: /config/containers/logging/log_tags/
+      title: Customize log driver output
+    - sectiontitle: Logging driver details
+      section:
+      - path: /config/containers/logging/local/
+        title: Local file logging driver
+      - path: /config/containers/logging/logentries/
+        title: Logentries logging driver
+      - path: /config/containers/logging/json-file/
+        title: JSON File logging driver
+      - path: /config/containers/logging/gelf/
+        title: Graylog Extended Format (GELF) logging driver
+      - path: /config/containers/logging/syslog/
+        title: Syslog logging driver
+      - path: /config/containers/logging/awslogs/
+        title: Amazon CloudWatch logs logging driver
+      - path: /config/containers/logging/etwlogs/
+        title: ETW logging driver
+      - path: /config/containers/logging/fluentd/
+        title: Fluentd logging driver
+      - path: /config/containers/logging/gcplogs/
+        title: Google Cloud logging driver
+      - path: /config/containers/logging/journald/
+        title: Journald logging driver
+      - path: /config/containers/logging/splunk/
+        title: Splunk logging driver
+  - sectiontitle: Scale your app
+    section:
+    - path: /engine/swarm/
+      title: Swarm mode overview
+    - path: /engine/swarm/key-concepts/
+      title: Swarm mode key concepts
+    - sectiontitle: Get started with swarm mode
+      section:
+      - path: /engine/swarm/swarm-tutorial/
+        title: Swarm mode tutorial overview
+      - path: /engine/swarm/swarm-tutorial/create-swarm/
+        title: Create a swarm
+      - path: /engine/swarm/swarm-tutorial/add-nodes/
+        title: Add nodes to the swarm
+      - path: /engine/swarm/swarm-tutorial/deploy-service/
+        title: Deploy a service
+      - path: /engine/swarm/swarm-tutorial/inspect-service/
+        title: Inspect the service
+      - path: /engine/swarm/swarm-tutorial/scale-service/
+        title: Scale the service
+      - path: /engine/swarm/swarm-tutorial/delete-service/
+        title: Delete the service
+      - path: /engine/swarm/swarm-tutorial/rolling-update/
+        title: Apply rolling updates
+      - path: /engine/swarm/swarm-tutorial/drain-node/
+        title: Drain a node
+      - path: /engine/swarm/ingress/
+        title: Use swarm mode routing mesh
+    - sectiontitle: How swarm mode works
+      section:
+      - path: /engine/swarm/how-swarm-mode-works/nodes/
+        title: How nodes work
+      - path: /engine/swarm/how-swarm-mode-works/services/
+        title: How services work
+      - path: /engine/swarm/how-swarm-mode-works/pki/
+        title: Manage swarm security with PKI
+      - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
+        title: Swarm task states
+    - path: /engine/swarm/swarm-mode/
+      title: Run Docker in swarm mode
+    - path: /engine/swarm/join-nodes/
+      title: Join nodes to a swarm
+    - path: /engine/swarm/manage-nodes/
+      title: Manage nodes in a swarm
+    - path: /engine/swarm/services/
+      title: Deploy services to a swarm
+    - path: /engine/swarm/configs/
+      title: Store service configuration data
+    - path: /engine/swarm/secrets/
+      title: Manage sensitive data with Docker secrets
+    - path: /engine/swarm/swarm_manager_locking/
+      title: Lock your swarm
+    - path: /engine/swarm/networking/
+      title: Manage swarm service networks
+    - path: /engine/swarm/admin_guide/
+      title: Swarm administration guide
+    - path: /engine/swarm/raft/
+      title: Raft consensus in swarm mode
+  - sectiontitle: Extend Docker
+    section:
+    - path: /engine/extend/
+      title: Managed plugin system
+    - path: /engine/extend/plugins_authorization/
+      title: Access authorization plugin
+    - path: /engine/extend/legacy_plugins/
+      title: Extending Docker with plugins
+    - path: /engine/extend/plugins_network/
+      title: Docker network driver plugins
+    - path: /engine/extend/plugins_volume/
+      title: Volume plugins
+    - title: Plugin configuration
+      path: /engine/extend/config/
+    - path: /engine/extend/plugin_api/
+      title: Plugins
 - path: /engine/release-notes/
   title: Release notes
 - sectiontitle: Previous versions
@@ -1590,6 +1574,9 @@ engine:
       title: Isolate containers with a user namespace
     - path: /engine/security/rootless/
       title: Rootless mode
+
+
+
 
 build:
 - path: /build/
@@ -1694,6 +1681,22 @@ build:
         title: Examples
       - path: /build/ci/github-actions/configure-builder/
         title: Configuring your builder
+- sectiontitle: Best practices
+  section:
+  - path: /develop/
+    title: Overview
+  - path: /develop/dev-best-practices/
+    title: Best practices
+  - sectiontitle: Build images
+    section:
+    - path: /develop/develop-images/dockerfile_best-practices/
+      title: Dockerfile best practices
+    - path: /develop/develop-images/image_management/
+      title: Manage images
+    - path: /develop/develop-images/baseimages/
+      title: Create your own base image (advanced)
+  - path: /develop/scan-images/
+    title: Scan images
 - path: /build/release-notes/
   title: Release notes
 
