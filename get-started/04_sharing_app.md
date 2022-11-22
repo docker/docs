@@ -27,7 +27,7 @@ In the following steps, you will build a multi-platform image that can run on AM
 2. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image.
 
    ```console
-    $ docker buildx build --platform linux/amd64,linux/arm/v8 --load -t getting-started .
+    $ docker buildx build --platform linux/amd64,linux/arm/v8 -t getting-started .
    ```
    In the command above, you use `--platform` to specify the OS and architecture for the image, and `-t` to tag or name the image.
 
