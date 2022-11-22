@@ -24,20 +24,14 @@ In the following steps, you will build a multi-platform image that can run on AM
    $ docker buildx create --name mybuilder --driver docker-container --bootstrap --use
    ```
 
-2. In a terminal, log in to Docker Hub using  the `docker login` command. Replace `<your-docker-id>` with your Docker ID.
-
-   ```console
-   $ docker login -u <your-docker-id>
-   ```
-
-3. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image. Replace `<your-docker-id>` with your Docker ID.
+2. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image.
 
    ```console
     $ docker buildx build --platform linux/amd64,linux/arm/v8 --load -t getting-started .
    ```
    In the command above, you use `--platform` to specify the OS and architecture for the image, and `-t` to tag or name the image.
 
-4. The `docker-container` driver, by default, doesn't make the image available in your local image store. To make the image available, you must use the `--load` flag.
+3. The `docker-container` driver, by default, doesn't make the image available in your local image store. To make the image available, you must use the `--load` flag.
 
    ```console
    $ docker buildx build --load -t getting-started .
