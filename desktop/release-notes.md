@@ -275,7 +275,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Implemented `docker run —-platform` in the containerd integration.
 - Fixed insecure registries not working with the containerd integration.
 - Fixed a bug that showed incorrect values on used space in **Settings**.
-- Docker Desktop now installs credential helpers from Github releases. See [docker/for-win#10247](https://github.com/docker/for-win/issues/10247), [docker/for-win#12995](https://github.com/docker/for-win/issues/12995), [docker/for-mac#12399](https://github.com/docker/for-mac/issues/12399).
+- Docker Desktop now installs credential helpers from Github releases. See [docker/for-win#10247](https://github.com/docker/for-win/issues/10247), [docker/for-win#12995](https://github.com/docker/for-win/issues/12995).
 - Fixed an issue where users were logged out of Docker Desktop after 7 days.
 
 #### For Mac
