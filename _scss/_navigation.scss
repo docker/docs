@@ -53,8 +53,8 @@
 .nav-sidebar>.active>a,
 .nav-sidebar>.active>a:focus,
 .nav-sidebar>.active>a:hover {
-    color: #2089C4;
-    background-color: #428bca;
+    color: $light-blue-400;
+    background-color: $light-blue-400;
 }
 
 .nav-sidebar ul {
@@ -97,7 +97,7 @@
     background:  $bg-sidebar-active;
     border-left: 4px solid $primary-links;
     font-weight: 600;
-    color: #2089C4;
+    color: $light-blue-400;
 }
 
 .nav-sidebar ul li ul li a {
@@ -139,28 +139,28 @@
             display: inline-block;
             font-size: 12px;
             padding: 2px 10px 2px 10px;
-            color: #677285;
+            color: $light-grey-500;
         }
         .slider{
-            background-color: #e0e4e7;
-            border: 1px solid #e0e4e7;
+            background-color: $light-grey-200;
+            border: 1px solid $light-grey-200;
         }
         .slider:before{
-            background-color: #677285;
+            background-color: $light-grey-500;
         }
     }
 }
 
 .toc-nav li a.active {
-    border-left: 4px solid #677285;
+    border-left: 4px solid $light-grey-500;
     font-weight: bold;
-    color: #677285;
+    color: $light-grey-500;
 }
 
 .toc-nav i.fa {
     font-size: 14px;
     margin: 0 8px 0 0;
-    color: #677285;
+    color: $light-grey-500;
 }
 
 div.side-toc-title {
@@ -215,7 +215,7 @@ div.side-toc-title {
     right: 0;
     bottom: 0;
     background-color: $slider-bg;
-    border: 1px solid #c3e4f7;
+    border: 1px solid $light-blue-200;
 }
 
 .slider:before {
