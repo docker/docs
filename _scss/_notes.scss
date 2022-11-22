@@ -59,7 +59,7 @@ blockquote {
 
     &:not(.important):not(.warning):not(.restricted):not(.experimental):not(.tip) {
       @include notification(
-        $bg-color: $dark-palette-blue-200,
+        $bg-color: $dark-blue-200,
         $header-color: $white,
         $body-text-color: $white,
         $icon: "\f06a"
@@ -68,7 +68,7 @@ blockquote {
 
     &.important {
       @include notification(
-        $bg-color: $dark-palette-amber-200,
+        $bg-color: $dark-amber-300,
         $header-color: $white,
         $body-text-color: $white,
         $icon: "\f06a"
@@ -77,7 +77,7 @@ blockquote {
 
     &.warning {
       @include notification(
-        $bg-color: $dark-palette-red-200,
+        $bg-color: $dark-red-200,
         $header-color: $white,
         $body-text-color: $white,
         $icon: "\f06a"
@@ -86,7 +86,7 @@ blockquote {
 
     &.restricted {
       @include notification(
-        $bg-color: $dark-palette-violet-200,
+        $bg-color: $dark-viole-200,
         $header-color: $white,
         $body-text-color: $white,
         $icon: "\f135"
@@ -95,7 +95,7 @@ blockquote {
 
     &.experimental {
       @include notification(
-        $bg-color: $dark-palette-blue-200,
+        $bg-color: $dark-blue-200,
         $header-color: $white,
         $body-text-color: $white,
         $icon: "\f492"
@@ -104,7 +104,7 @@ blockquote {
 
     &.tip {
       @include notification(
-        $bg-color: $dark-palette-green-200,
+        $bg-color: $dark-green-200,
         $header-color: $white,
         $body-text-color: $white,
         $icon: "\f164"
@@ -117,8 +117,8 @@ blockquote {
 
     &:not(.important):not(.warning):not(.restricted):not(.experimental):not(.tip) {
       @include notification(
-        $bg-color: $light-palette-blue-100,
-        $header-color: $light-palette-blue-500,
+        $bg-color: $light-blue-100,
+        $header-color: $light-blue-500,
         $body-text-color: inherit,
         $icon: "\f05a"
       );
@@ -126,8 +126,8 @@ blockquote {
 
     &.important {
       @include notification(
-        $bg-color: $light-palette-amber-100,
-        $header-color: $light-palette-amber-500,
+        $bg-color: $light-amber-100,
+        $header-color: $light-amber-500,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -135,8 +135,8 @@ blockquote {
 
     &.warning {
       @include notification(
-        $bg-color: $light-palette-red-100,
-        $header-color: $light-palette-red-500,
+        $bg-color: $light-red-300,
+        $header-color: $light-red-500,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -144,8 +144,8 @@ blockquote {
 
     &.restricted {
       @include notification(
-        $bg-color: $light-palette-violet-100,
-        $header-color: $light-palette-violet-500,
+        $bg-color: $light-viole-200,
+        $header-color: $light-viole-500,
         $body-text-color: inherit,
         $icon: "\f135"
       );
@@ -153,8 +153,8 @@ blockquote {
 
     &.experimental {
       @include notification(
-        $bg-color: $light-palette-blue-100,
-        $header-color: $light-palette-blue-500,
+        $bg-color: $light-blue-100,
+        $header-color: $light-blue-500,
         $body-text-color: inherit,
         $icon: "\f492"
       );
@@ -162,8 +162,8 @@ blockquote {
 
     &.tip {
       @include notification(
-        $bg-color: $light-palette-green-100,
-        $header-color: $light-palette-green-500,
+        $bg-color: $light-green-200,
+        $header-color: $light-green-500,
         $body-text-color: inherit,
         $icon: "\f164"
       )
