@@ -33,9 +33,15 @@ In the following steps, you will build a multi-platform image that can run on AM
 3. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image and push it to Docker Hub. Replace `<your-docker-id>` with your Docker ID.
 
    ```console
-    $ docker buildx build --platform linux/amd64,linux/arm/v8 -t getting-started .
+    $ docker buildx build --platform linux/amd64,linux/arm/v8 --load -t getting-started .
    ```
-   In the command above, you use `--platform` to specify the OS and architecture for the image, `-t` to tag or name the image.
+   In the command above, you use `--platform` to specify the OS and architecture for the image, and `-t` to tag or name the image.
+
+4. The `docker-container` driver, by default, doesn't make the image available in your local image store. To make the image available, you must use the `--load` flag.
+
+   ```console
+   $ docker buildx build --load -t getting-started .
+   ```
 
 ## Create a repository
 
