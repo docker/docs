@@ -30,7 +30,7 @@ In the following steps, you will build a multi-platform image that can run on AM
    $ docker login -u <your-docker-id>
    ```
 
-3. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image and push it to Docker Hub. Replace `<your-docker-id>` with your Docker ID.
+3. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image. Replace `<your-docker-id>` with your Docker ID.
 
    ```console
     $ docker buildx build --platform linux/amd64,linux/arm/v8 --load -t getting-started .
