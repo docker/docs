@@ -886,8 +886,8 @@ These Official Images have exemplary `Dockerfile`s:
 ## Additional resources:
 
 * [Dockerfile Reference](../../engine/reference/builder.md)
-* [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
 * [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
+* [More about Base Images](../../build/building/base-images.md)
 

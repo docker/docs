@@ -154,7 +154,7 @@ When we have used that `FROM` command, we told Docker to include in our image al
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [creating base images](../../develop/develop-images/baseimages.md) section of the guide.
+> If you want to learn more about creating your own base images, see [creating base images](../../build/building/base-images.md) section of the guide.
 
 To make things easier when running the rest of our commands, let’s create a
 directory _inside_ the image that we are building. This also instructs Docker

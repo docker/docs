@@ -5,6 +5,7 @@ redirect_from:
 - /articles/baseimages/
 - /engine/articles/baseimages/
 - /engine/userguide/eng-image/baseimages/
+- /develop/develop-images/baseimages/
 title: Create a base image
 ---
 
@@ -109,5 +110,5 @@ There are lots of resources available to help you write your `Dockerfile`.
 
 * There's a [complete guide to all the instructions](../../engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
-written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
+written a [Dockerfile best practices guide](../../develop/develop-images/dockerfile_best-practices.md).
 * If your goal is to create a new Docker Official Image, read [Docker Official Images](../../docker-hub/official_images.md).
