@@ -12,12 +12,9 @@ fixes in [Docker Buildx](https://github.com/docker/buildx){:target="_blank" rel=
 
 {% include release-date.html date="2022-08-18" %} 
 
-### Enhancements
+### Bug fixes and enhancements
 
 * The `inspect` command now displays the BuildKit version in use {% include github_issue.md repo="docker/buildx" number="1279" %}
-
-### Fixes
-
 * Fixed a regression when building Compose files that contain services without a
   build block {% include github_issue.md repo="docker/buildx" number="1277" %}
 
@@ -27,7 +24,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 {% include release-date.html date="2022-08-17" %} 
 
-### New features
+### New 
 
 * Support for new [driver `remote`](building/drivers/remote.md) that you can use
   to connect to any already running BuildKit instance {% include github_issue.md repo="docker/buildx" number="1078" %}
@@ -72,24 +69,27 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Inspecting builder now shows current driver options configuration {% include github_issue.md repo="docker/buildx" number="1003" %}
   {% include github_issue.md repo="docker/buildx" number="1066" %}
 
-### Enhancements
+### Updates
 
-* The `buildx create` command now perfoms additional validation of builder parameters
+* The `buildx ls` command output has been updated with better access to errors
+  from different builders {% include github_issue.md repo="docker/buildx" number="1109" %}
+* Updated the Compose Specification to 1.4.0 {% include github_issue.md repo="docker/buildx" number="1246" %}
+  {% include github_issue.md repo="docker/buildx" number="1251" %}
+
+### Bug fixes and enhancements
+
+* The `buildx create` command now performs additional validation of builder parameters
   to avoid creating a builder instance with invalid configuration {% include github_issue.md repo="docker/buildx" number="1206" %}
 * The `buildx imagetools create` command can now create new multi-platform images
   even if the source subimages are located on different repositories or
   registries {% include github_issue.md repo="docker/buildx" number="1137" %}
 * You can now set the default builder config that is used when creating
   builder instances without passing custom `--config` value {% include github_issue.md repo="docker/buildx" number="1111" %}
-* The `buildx ls` command output has been updated with better access to errors
-  from different builders {% include github_issue.md repo="docker/buildx" number="1109" %}
 * Docker driver can now detect if `dockerd` instance supports initially
   disabled Buildkit features like multi-platform images {% include github_issue.md repo="docker/buildx" number="1260" %}
   {% include github_issue.md repo="docker/buildx" number="1262" %}
 * Compose files using targets with `.` in the name are now converted to use `_`
   so the selector keys can still be used in such targets {% include github_issue.md repo="docker/buildx" number="1011" %}
-* Updated the Compose Specification to 1.4.0 {% include github_issue.md repo="docker/buildx" number="1246" %}
-  {% include github_issue.md repo="docker/buildx" number="1251" %}
 * Included an additional validation for checking valid driver configurations {% include github_issue.md repo="docker/buildx" number="1188" %}
   {% include github_issue.md repo="docker/buildx" number="1273" %}
 * The `remove` command now displays the removed builder and forbids removing
@@ -99,21 +99,18 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
   {% include github_issue.md repo="docker/buildx" number="1053" %}
 * Replace deprecated seccomp annotations with `securityContext` in kubernetes
   driver {% include github_issue.md repo="docker/buildx" number="1052" %}
-
-### Fixes
-
 * Fix panic on handling manifests with nil platform {% include github_issue.md repo="docker/buildx" number="1144" %}
 * Fix using duration filter with `prune` command {% include github_issue.md repo="docker/buildx" number="1252" %}
 * Fix merging multiple JSON files on Bake definition {% include github_issue.md repo="docker/buildx" number="1025" %}
 * Fix issues with implicit builder created from Docker context had invalid
   configuration or dropped connection {% include github_issue.md repo="docker/buildx" number="1129" %}
 * Fix conditions for showing no-output warning when using named contexts {% include github_issue.md repo="docker/buildx" number="968" %}
-* Fix deduplicating builders when builder instance and docker context have the
+* Fix duplicating builders when builder instance and docker context have the
   same name {% include github_issue.md repo="docker/buildx" number="1131" %}
 * Fix printing unnecessary SSH warning logs {% include github_issue.md repo="docker/buildx" number="1085" %}
 * Fix possible panic when using an empty variable block with Bake JSON
   definition {% include github_issue.md repo="docker/buildx" number="1080" %}
-* Fix imagetools commands not handling `--builder` flag correctly {% include github_issue.md repo="docker/buildx" number="1067" %}
+* Fix image tools commands not handling `--builder` flag correctly {% include github_issue.md repo="docker/buildx" number="1067" %}
 * Fix using custom image together with rootless option {% include github_issue.md repo="docker/buildx" number="1063" %}
 
 For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.9.0){:target="_blank" rel="noopener" class="_"}.
@@ -122,10 +119,10 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 {% include release-date.html date="2022-04-04" %} 
 
-### Fixes
+### Updates
+* Update Compose spec used by `buildx bake` to v1.2.1 to fix parsing ports definition {% include github_issue.md repo="docker/buildx" number="1033" %}
 
-* Update Compose spec used by `buildx bake` to v1.2.1 to fix parsing ports
-  definition {% include github_issue.md repo="docker/buildx" number="1033" %}
+### Bug fixes and enhancements
 * Fix possible crash on handling progress streams from BuildKit v0.10 {% include github_issue.md repo="docker/buildx" number="1042" %}
 * Fix parsing groups in `buildx bake` when already loaded by a parent group {% include github_issue.md repo="docker/buildx" number="1021" %}
 
@@ -135,12 +132,9 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 {% include release-date.html date="2022-03-21" %}
 
-### Fixes
+### Bug fixes and enhancements
 
 * Fix possible panic on handling build context scanning errors {% include github_issue.md repo="docker/buildx" number="1005" %}
-
-### Enhancements
-
 * Allow `.` on Compose target names in `buildx bake` for backward compatibility {% include github_issue.md repo="docker/buildx" number="1018" %}
 
 For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.8.1){:target="_blank" rel="noopener" class="_"}.
@@ -149,7 +143,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 {% include release-date.html date="2022-03-09" %}
 
-### New features
+### New
 
 * Build command now accepts `--build-context` flag to [define additional named build contexts](/engine/reference/commandline/buildx_build/#build-context)
   for your builds {% include github_issue.md repo="docker/buildx" number="904" %}
@@ -168,7 +162,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * The new flag `--keep-buildkitd` allows keeping BuildKit daemon running when removing a builder
   * {% include github_issue.md repo="docker/buildx" number="852" %}
 
-### Enhancements
+### Bug fixes and enhancements
 
 * `--metadata-file` output now supports embedded structure types {% include github_issue.md repo="docker/buildx" number="946" %}
 * `buildx rm` now accepts new flag `--all-inactive` for removing all builders
@@ -183,9 +177,6 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Target names in Bake are now restricted to not use special characters {% include github_issue.md repo="docker/buildx" number="929" %}
 * Image manifest digest can be read from metadata when pushed with `docker`
   driver {% include github_issue.md repo="docker/buildx" number="989" %}
-
-### Fixes
-
 * Fix environment file handling in Compose files {% include github_issue.md repo="docker/buildx" number="905" %}
 * Show last access time in `du` command {% include github_issue.md repo="docker/buildx" number="867" %}
 * Fix possible double output logs when multiple Bake targets run same build

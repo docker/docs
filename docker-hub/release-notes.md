@@ -12,55 +12,58 @@ known issues for each Docker Hub release.
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
 ## 2022-09-26
-### New feature
 
-The new [autobuild feature](../docker-hub/builds/index.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
+### New 
+
+- The new [autobuild feature](../docker-hub/builds/index.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
 
 ## 2022-09-21
-### Enhancement
 
-In Docker Hub, you can now download a [registry.json](../docker-hub/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+### Bug fixes and enhancements
+
+- In Docker Hub, you can now download a [registry.json](../docker-hub/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
-### Enhancement
 
-You can now [export a CSV file of members](../docker-hub/members.md/#export-members) from organizations that you own.
+### Bug fixes and enhancements
 
+- You can now [export a CSV file of members](../docker-hub/members.md/#export-members) from organizations that you own.
 
 ## 2022-07-22
-### Enhancement
 
-You can now invite members to your organization with a CSV file containing their email addresses. The CSV file can either be a file you create for this specific purpose or one that’s extracted from another in-house system.
+### Bug fixes and enhancements
+
+- You can now invite members to your organization with a CSV file containing their email addresses. The CSV file can either be a file you create for this specific purpose or one that’s extracted from another in-house system.
 
 ## 2022-07-19
 
-### Enhancement
+### Bug fixes and enhancements
 
-SCIM is now available for organizations with a Docker Business subscription using an Azure AD identity provider.
+- SCIM is now available for organizations with a Docker Business subscription using an Azure AD identity provider.
 
 ## 2022-06-23
 
-### New feature
+### New
 
-With [SCIM](scim.md), you can manage users within your Okta identity provider (IdP). In addition, you can enable SCIM on organizations that are part of the Docker Business subscription.
+- With [SCIM](scim.md), you can manage users within your Okta identity provider (IdP). In addition, you can enable SCIM on organizations that are part of the Docker Business subscription.
 
 ## 2022-05-24
 
-### New feature
+### New
 
-[Registry Access Management](registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
+- [Registry Access Management](registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
 
 ## 2022-05-03
 
-### New feature
+### New
 
-Organization owners can [invite new members](members.md#invite-members) to an organization via Docker ID or email address.
+- Organization owners can [invite new members](members.md#invite-members) to an organization via Docker ID or email address.
 
 ## 2021-11-15
 
 ### New
 
-You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
 
 ## 2021-08-31
 
