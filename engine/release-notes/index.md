@@ -16,35 +16,30 @@ for Docker Engine.
 # Version 20.10
 
 ## 20.10.21
-2022-10-25
+{% include release-date.html date="2022-10-25" %}
 
 This release of Docker Engine contains updated versions of Docker Compose,
 Docker Scan, Containerd, added packages for Ubuntu 22.10, and some minor bug
 fixes and enhancements.
 
-### Client
-
-- Remove experimental gate for `--platform` in bash completion [docker/cli#3824](https://github.com/docker/cli/pull/3824){:target="_blank" rel="noopener"}.
-
-### Daemon
-
-- Add support for `allow-nondistributable-artifacts` towards Docker Hub [moby/moby#44313](https://github.com/moby/moby/pull/44313){:target="_blank" rel="noopener"}.
-- Fix an `Invalid standard handle identifier` panic when  registering the Docker Engine as a service from a legacy CLI on Windows [moby/moby#44326](https://github.com/moby/moby/pull/44326){:target="_blank" rel="noopener"}.
-
-### Builder
-
-- Fix running Git commands in Cygwin on Windows [moby/moby#44332](https://github.com/moby/moby/pull/44332){:target="_blank" rel="noopener"}.
-- Update bundled BuildKit version to to fix `output clipped, log limit 1MiB reached` errors [moby/moby#44339](https://github.com/moby/moby/pull/44339){:target="_blank" rel="noopener"}.
-
-### Packaging
-
+### New
 - Provide packages for Ubuntu 22.10 (Kinetic Kudu).
+- Add support for `allow-nondistributable-artifacts` towards Docker Hub [moby/moby#44313](https://github.com/moby/moby/pull/44313){:target="_blank" rel="noopener"}.
+
+### Updates
+
 - Update Docker Compose to [v2.12.2](https://github.com/docker/compose/releases/tag/v2.12.2){:target="_blank" rel="noopener"}.
 - Update Docker Scan to [v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0){:target="_blank" rel="noopener"}.
 - Update containerd (`containerd.io` package) to [v1.6.9](https://github.com/containerd/containerd/releases/tag/v1.6.9){:target="_blank" rel="noopener"}.
+- Update bundled BuildKit version to to fix `output clipped, log limit 1MiB reached` errors [moby/moby#44339](https://github.com/moby/moby/pull/44339){:target="_blank" rel="noopener"}.
+
+### Bug fixes and enhancements
+- Remove experimental gate for `--platform` in bash completion [docker/cli#3824](https://github.com/docker/cli/pull/3824){:target="_blank" rel="noopener"}.
+- Fix an `Invalid standard handle identifier` panic when  registering the Docker Engine as a service from a legacy CLI on Windows [moby/moby#44326](https://github.com/moby/moby/pull/44326){:target="_blank" rel="noopener"}.
+- Fix running Git commands in Cygwin on Windows [moby/moby#44332](https://github.com/moby/moby/pull/44332){:target="_blank" rel="noopener"}.
 
 ## 20.10.20
-2022-10-18
+{% include release-date.html date="2022-10-18" %}
 
 This release of Docker Engine contains partial mitigations for a Git vulnerability
 ([CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"}),
@@ -62,14 +57,9 @@ with and check out submodules, users should immediately upgrade to a patched ver
 Git to protect against this vulnerability. Further details are available from the GitHub
 blog (["Git security vulnerabilities announced"](https://github.blog/2022-10-18-git-security-vulnerabilities-announced/){:target="_blank" rel="noopener"}).
 
+### Updates
 
-### Client
-
-- Added a mitigation for [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"},
-  when using the classic Builder with a Git URL as the build context.
-
-### Daemon
-
+- Update Docker Compose to [v2.12.0](https://github.com/docker/compose/releases/tag/v2.12.0){:target="_blank" rel="noopener"}.
 - Updated handling of `image:tag@digest` references. When pulling an image using
   the `image:tag@digest` ("pull by digest"), image resolution happens through
   the content-addressable digest and the `image` and `tag` are not used. While
@@ -77,37 +67,23 @@ blog (["Git security vulnerabilities announced"](https://github.blog/2022-10-18-
   be exploited through social engineering to run an image that is already present
   in the local image store. Docker now checks if the digest matches the repository
   name used to pull the image, and otherwise will produce an error.
-
-
-### Builder
-
 - Updated handling of `image:tag@digest` references. Refer to the "Daemon" section
   above for details.
+
+### Bug fixes and enhancements
+
+- Added a mitigation for [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"},
+  when using the classic Builder with a Git URL as the build context.
 - Added a mitigation to the classic Builder and updated BuildKit to [v0.8.3-31-gc0149372](https://github.com/moby/buildkit/commit/c014937225cba29cfb1d5161fd134316c0e9bdaa){:target="_blank" rel="noopener"},
   for [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="_blank" rel="noopener"}.
 
-### Packaging
-
-- Update Docker Compose to [v2.12.0](https://github.com/docker/compose/releases/tag/v2.12.0){:target="_blank" rel="noopener"}.
-
 ## 20.10.19
-2022-10-14
+{% include release-date.html date="2022-10-14" %}
 
 This release of Docker Engine comes with some bug-fixes, and an updated version
 of Docker Compose.
 
-### Builder
-
-- Fix an issue that could result in a panic during `docker builder prune` or
-  `docker system prune` [moby/moby#44122](https://github.com/moby/moby/pull/44122){:target="_blank" rel="noopener"}.
-
-### Daemon
-
-- Fix a bug where using `docker volume prune` would remove volumes that were
-  still in use if the daemon was running with "live restore" and was restarted
-  [moby/moby#44238](https://github.com/moby/moby/pull/44238){:target="_blank" rel="noopener"}.
-
-### Packaging
+### Updates
 
 - Update Docker Compose to [v2.11.2](https://github.com/docker/compose/releases/tag/v2.11.2){:target="_blank" rel="noopener"}.
 - Update Go runtime to [1.18.7](https://go.dev/doc/devel/release#go1.18.minor){:target="_blank" rel="noopener"},
@@ -115,26 +91,38 @@ of Docker Compose.
   [CVE-2022-2880](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2880){:target="_blank" rel="noopener"},
   and [CVE-2022-41715](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41715){:target="_blank" rel="noopener"}.
 
+### Bug fixes and enhancements
+
+- Fix an issue that could result in a panic during `docker builder prune` or
+  `docker system prune` [moby/moby#44122](https://github.com/moby/moby/pull/44122){:target="_blank" rel="noopener"}.
+- Fix a bug where using `docker volume prune` would remove volumes that were
+  still in use if the daemon was running with "live restore" and was restarted
+  [moby/moby#44238](https://github.com/moby/moby/pull/44238){:target="_blank" rel="noopener"}.
+
 ## 20.10.18
-2022-09-09
+{% include release-date.html date="2022-09-09" %}
 
 This release of Docker Engine comes with a fix for a low-severity security issue,
 some minor bug fixes, and updated versions of Docker Compose, Docker Buildx,
 `containerd`, and `runc`.
 
-### Client
+### Updates
+
+- Update Docker Buildx to [v0.9.1](https://github.com/docker/buildx/releases/tag/v0.9.1){:target="_blank" rel="noopener"}.
+- Update Docker Compose to [v2.10.2](https://github.com/docker/compose/releases/tag/v2.10.2){:target="_blank" rel="noopener"}.
+- Update containerd (`containerd.io` package) to [v1.6.8](https://github.com/containerd/containerd/releases/tag/v1.6.8){:target="_blank" rel="noopener"}.
+- Update runc version to [v1.1.4](https://github.com/opencontainers/runc/releases/tag/v1.1.4){:target="_blank" rel="noopener"}.
+- Update Go runtime to [1.18.6](https://go.dev/doc/devel/release#go1.18.minor){:target="_blank" rel="noopener"},
+  which contains fixes for [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664){:target="_blank" rel="noopener"} and
+  [CVE-2022-32190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32190){:target="_blank" rel="noopener"}.
+
+### Bug fixes and enhancements
 
 - Add Bash completion for Docker Compose [docker/cli#3752](https://github.com/docker/cli/pull/3752){:target="_blank" rel="noopener"}.
-
-### Builder
-
 - Fix an issue where file-capabilities were not preserved during build
   [moby/moby#43876](https://github.com/moby/moby/pull/43876){:target="_blank" rel="noopener"}.
 - Fix an issue that could result in a panic caused by a concurrent map read and
   map write [moby/moby#44067](https://github.com/moby/moby/pull/44067){:target="_blank" rel="noopener"}.
-
-### Daemon
-
 - Fix a security vulnerability relating to supplementary group permissions, which
   could allow a container process to bypass primary group restrictions within the
   container [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109){:target="_blank" rel="noopener"},
@@ -146,32 +134,13 @@ some minor bug fixes, and updated versions of Docker Compose, Docker Buildx,
 - Fix an issue where `exec` processes and healthchecks were not terminated
   when they timed out [moby/moby#44018](https://github.com/moby/moby/pull/44018){:target="_blank" rel="noopener"}.
 
-### Packaging
-
-- Update Docker Buildx to [v0.9.1](https://github.com/docker/buildx/releases/tag/v0.9.1){:target="_blank" rel="noopener"}.
-- Update Docker Compose to [v2.10.2](https://github.com/docker/compose/releases/tag/v2.10.2){:target="_blank" rel="noopener"}.
-- Update containerd (`containerd.io` package) to [v1.6.8](https://github.com/containerd/containerd/releases/tag/v1.6.8){:target="_blank" rel="noopener"}.
-- Update runc version to [v1.1.4](https://github.com/opencontainers/runc/releases/tag/v1.1.4){:target="_blank" rel="noopener"}.
-- Update Go runtime to [1.18.6](https://go.dev/doc/devel/release#go1.18.minor){:target="_blank" rel="noopener"},
-  which contains fixes for [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664){:target="_blank" rel="noopener"} and
-  [CVE-2022-32190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32190){:target="_blank" rel="noopener"}.
-
 ## 20.10.17
-2022-06-06
+{% include release-date.html date="2022-06-06" %}
 
 This release of Docker Engine comes with updated versions of Docker Compose and the
 `containerd`, and `runc` components, as well as some minor bug fixes.
 
-### Client
-
-- Remove asterisk from docker commands in zsh completion script [docker/cli#3648](https://github.com/docker/cli/pull/3648){:target="_blank" rel="noopener"}.
-
-### Networking
-
-- Fix Windows port conflict with published ports in host mode for overlay [moby/moby#43644](https://github.com/moby/moby/pull/43644){:target="_blank" rel="noopener"}.
-- Ensure performance tuning is always applied to libnetwork sandboxes [moby/moby#43683](https://github.com/moby/moby/pull/43683){:target="_blank" rel="noopener"}.
-
-### Packaging
+### Updates
 
 - Update Docker Compose to [v2.6.0](https://github.com/docker/compose/releases/tag/v2.6.0){:target="_blank" rel="noopener"}.
 - Update containerd (`containerd.io` package) to [v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6),
@@ -184,84 +153,74 @@ This release of Docker Engine comes with updated versions of Docker Compose and 
   [CVE-2022-30580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30580){:target="_blank" rel="noopener"} and
   [CVE-2022-29804](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29804){:target="_blank" rel="noopener"}
 
+### Bug fixes and enhancements
+
+- Remove asterisk from docker commands in zsh completion script [docker/cli#3648](https://github.com/docker/cli/pull/3648){:target="_blank" rel="noopener"}.
+- Fix Windows port conflict with published ports in host mode for overlay [moby/moby#43644](https://github.com/moby/moby/pull/43644){:target="_blank" rel="noopener"}.
+- Ensure performance tuning is always applied to libnetwork sandboxes [moby/moby#43683](https://github.com/moby/moby/pull/43683){:target="_blank" rel="noopener"}.
+
 ## 20.10.16
-2022-05-12
+{% include release-date.html date="2022-05-12" %}
 
 This release of Docker Engine fixes a regression in the Docker CLI builds for
 macOS, fixes an issue with `docker stats` when using containerd 1.5 and up,
 and updates the Go runtime to include a fix for [CVE-2022-29526](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
 
-### Client
-
-- Fixed a regression in binaries for macOS introduced in [20.10.15](#201015), which
-  resulted in a panic [docker/cli#43426](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener"}.
+### Updates
 - Update golang.org/x/sys dependency which contains a fix for
   [CVE-2022-29526](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
-
-### Daemon
-
-- Fixed an issue where `docker stats` was showing empty stats when running with
-  containerd 1.5.0 or up [moby/moby#43567](https://github.com/moby/moby/pull/43567){:target="_blank" rel="noopener"}.
 - Updated the `golang.org/x/sys` build-time dependency which contains a fix for [CVE-2022-29526](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
-
-### Packaging
-
 - Updated Go runtime to [1.17.10](https://go.dev/doc/devel/release#go1.17.minor){:target="_blank" rel="noopener"},
   which contains a fix for [CVE-2022-29526](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29526){:target="_blank" rel="noopener"}.
+
+### Bug fixes and enhancements
+- Fixed a regression in binaries for macOS introduced in [20.10.15](#201015), which
+  resulted in a panic [docker/cli#43426](https://github.com/docker/cli/pull/3592){:target="_blank" rel="noopener"}.
+- Fixed an issue where `docker stats` was showing empty stats when running with
+  containerd 1.5.0 or up [moby/moby#43567](https://github.com/moby/moby/pull/43567){:target="_blank" rel="noopener"}.
 - Used "weak" dependencies for the `docker scan` CLI plugin, to prevent a
   "conflicting requests" error when users performed an off-line installation from
   downloaded RPM packages [docker/docker-ce-packaging#659](https://github.com/docker/docker-ce-packaging/pull/659){:target="_blank" rel="noopener"}.
 
 ## 20.10.15
-2022-05-05
+{% include release-date.html date="2022-05-05" %}
 
 This release of Docker Engine comes with updated versions of the `compose`,
 `buildx`, `containerd`, and `runc` components, as well as some minor bug fixes.
 
-> **Known issues**
-> 
-> We've identified an issue with the [macOS CLI binaries](https://download.docker.com/mac/static/stable/){:target="_blank" rel="noopener" class="_"}
-> in the 20.10.15 release. This issue has been resolved in the [20.10.16](#201016) release.
-{:.important}
-
-### Daemon
-
-- Use a RWMutex for stateCounter to prevent potential locking congestion [moby/moby#43426](https://github.com/moby/moby/pull/43426).
-- Prevent an issue where the daemon was unable to find an available IP-range in
-  some conditions [moby/moby#43360](https://github.com/moby/moby/pull/43360) 
-
-### Packaging
-
+### Updates
 - Update Docker Compose to [v2.5.0](https://github.com/docker/compose/releases/tag/v2.5.0).
 - Update Docker Buildx to [v0.8.2](https://github.com/docker/buildx/releases/tag/v0.8.2).
 - Update Go runtime to [1.17.9](https://go.dev/doc/devel/release#go1.17.minor).
 - Update containerd (`containerd.io` package) to [v1.6.4](https://github.com/containerd/containerd/releases/tag/v1.6.4).
 - Update runc version to [v1.1.1](https://github.com/opencontainers/runc/releases/tag/v1.1.1).
+
+### Bug fixes and enhancements
+- Use a RWMutex for stateCounter to prevent potential locking congestion [moby/moby#43426](https://github.com/moby/moby/pull/43426).
+- Prevent an issue where the daemon was unable to find an available IP-range in
+  some conditions [moby/moby#43360](https://github.com/moby/moby/pull/43360) 
 - Add packages for CentOS 9 stream and Fedora 36.
 
+### Known issues
+- We've identified an issue with the [macOS CLI binaries](https://download.docker.com/mac/static/stable/){:target="_blank" rel="noopener" class="_"}
+in the 20.10.15 release. This issue has been resolved in the [20.10.16](#201016) release.
+
 ## 20.10.14
-2022-03-23
+{% include release-date.html date="2022-03-23" %}
 
 This release of Docker Engine updates the default inheritable capabilities for
 containers to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769),
 a new version of the `containerd.io` runtime is also included to address the same
 issue.
 
-### Daemon
-
+### Updates
 - Update the default inheritable capabilities.
-
-### Builder
-
 - Update the default inheritable capabilities for containers used during build.
-
-### Packaging
-
 - Update containerd (`containerd.io` package) to [v1.5.11](https://github.com/containerd/containerd/releases/tag/v1.5.11).
 - Update `docker buildx` to [v0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1).
 
 ## 20.10.13
-2022-03-10
+{% include release-date.html date="2022-03-10" %} 
 
 This release of Docker Engine contains some bug-fixes and packaging changes,
 updates to the `docker scan` and `docker buildx` commands, an updated version of
@@ -270,35 +229,7 @@ Together with this release, we now also provide `.deb` and `.rpm` packages of
 Docker Compose V2, which can be installed using the (optional) `docker-compose-plugin`
 package.
 
-### Builder
-
-- Updated the bundled version of buildx to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
-
-### Daemon
-
-- Fix a race condition when updating the container's state [moby/moby#43166](https://github.com/moby/moby/pull/43166).
-- Update the etcd dependency to prevent the daemon from incorrectly holding file locks [moby/moby#43259](https://github.com/moby/moby/pull/43259)
-- Fix detection of user-namespaces when configuring the default `net.ipv4.ping_group_range` sysctl [moby/moby#43084](https://github.com/moby/moby/pull/43084).
-
-### Distribution
-
-- Retry downloading image-manifests if a connection failure happens during image
-  pull [moby/moby#43333](https://github.com/moby/moby/pull/43333).
-
-### Documentation
-
-- Various fixes in command-line reference and API documentation.
-
-### Logging
-
-- Prevent an OOM when using the "local" logging driver with containers that produce
-  a large amount of log messages [moby/moby#43165](https://github.com/moby/moby/pull/43165).
-- Updates the fluentd log driver to prevent a potential daemon crash, and prevent
-  containers from hanging when using the `fluentd-async-connect=true` and the
-  remote server is unreachable [moby/moby#43147](https://github.com/moby/moby/pull/43147).
-
-### Packaging
-
+### New
 - Provide `.deb` and `.rpm` packages for Docker Compose V2. [Docker Compose v2.3.3](https://github.com/docker/compose/releases/tag/v2.3.3)
   can now be installed on Linux using the `docker-compose-plugin` packages, which
   provides the `docker compose` subcommand on the Docker CLI. The Docker Compose
@@ -307,12 +238,27 @@ package.
   The `compose-cli-plugin` package can also be used on older version of the Docker
   CLI with support for CLI plugins (Docker CLI 18.09 and up).
 - Provide packages for the upcoming Ubuntu 22.04 "Jammy Jellyfish" LTS release [docker/docker-ce-packaging#645](https://github.com/docker/docker-ce-packaging/pull/645), [docker/containerd-packaging#271](https://github.com/docker/containerd-packaging/pull/271).
+
+### Updates
+- Updated the bundled version of buildx to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
 - Update `docker buildx` to [v0.8.0](https://github.com/docker/buildx/releases/tag/v0.8.0).
 - Update `docker scan` (`docker-scan-plugin`) to [v0.17.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.17.0).
 - Update containerd (`containerd.io` package) to [v1.5.10](https://github.com/containerd/containerd/releases/tag/v1.5.10).
 - Update the bundled runc version to [v1.0.3](https://github.com/opencontainers/runc/releases/tag/v1.0.3).
 - Update Golang runtime to Go 1.16.15.
+- Updates the fluentd log driver to prevent a potential daemon crash, and prevent
+  containers from hanging when using the `fluentd-async-connect=true` and the
+  remote server is unreachable [moby/moby#43147](https://github.com/moby/moby/pull/43147).
 
+### Bug fixes and enhancements
+- Fix a race condition when updating the container's state [moby/moby#43166](https://github.com/moby/moby/pull/43166).
+- Update the etcd dependency to prevent the daemon from incorrectly holding file locks [moby/moby#43259](https://github.com/moby/moby/pull/43259)
+- Fix detection of user-namespaces when configuring the default `net.ipv4.ping_group_range` sysctl [moby/moby#43084](https://github.com/moby/moby/pull/43084).
+- Retry downloading image-manifests if a connection failure happens during image
+  pull [moby/moby#43333](https://github.com/moby/moby/pull/43333).
+- Various fixes in command-line reference and API documentation.
+- Prevent an OOM when using the "local" logging driver with containers that produce
+  a large amount of log messages [moby/moby#43165](https://github.com/moby/moby/pull/43165).
 
 ## 20.10.12
 2021-12-13
