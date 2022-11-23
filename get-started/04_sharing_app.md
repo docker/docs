@@ -79,6 +79,7 @@ To push an image, you first need to create a repository on Docker Hub.
 
 Now that your image has been built and pushed to a registry, try running your app on a brand new instance that has never seen this container image. To do this, you will use Play with Docker.
 
+
 1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
 
 2. Select **Login** and then select **docker** from the drop-down list.
@@ -94,6 +95,10 @@ Now that your image has been built and pushed to a registry, try running your ap
    ```
 
    You should see the image get pulled down and eventually start up.
+
+   > **Note**
+   >
+   > Play with Docker is a free service with limited capacity. If you encounter `no space left on device` errors, you can try again later or skip this section.
 
 6. Select the 3000 badge when it comes up and you should see the app with your modifications.
    If the 3000 badge doesn't show up, you can select the **Open Port** button and type in 3000.
