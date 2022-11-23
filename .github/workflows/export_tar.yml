@@ -30,13 +30,8 @@ jobs:
         run: DOCKER_BUILDKIT=1 docker build . -t dockerdocs
       - name: save image as tar file
         run: docker save -o dockerdocs.tar dockerdocs
-      - name: Upload Release asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release the Tar Asset to Github
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          #           upload_url: ${{ steps.createRelease.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/dockerdocs.tar
-          asset_name: dockerdocs.tar
-          asset_content_type: application/octet-stream
-          
+          files: ${{ github.workspace }}/dockerdocs.tar
