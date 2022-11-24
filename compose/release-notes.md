@@ -6,6 +6,29 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.13.0
+
+(2022-11-23)
+
+### Enhancements
+- Add a `no-consistency` option to `convert` command. Fixed [compose#9963](https://github.com/docker/compose/issues/9963){:target="_blank" rel="noopener" class="_"}
+- Add a `build` option to `run` command. Fixed [compose#10003](https://github.com/docker/compose/issues/10003){:target="_blank" rel="noopener" class="_"}
+
+### Bug fixes
+- Fixed mapping `restart_policy.condition` to engine supported values. Fixed [compose#8756](https://github.com/docker/compose/issues/8756){:target="_blank" rel="noopener" class="_"}, [docs#15936](https://github.com/docker/docs/pull/15936){:target="_blank" rel="noopener" class="_"}
+- Fixed missing support of `deploy.reservation.memory`. Fixed [compose#9902](https://github.com/docker/compose/issues/9902){:target="_blank" rel="noopener" class="_"}
+- Fixed a bug to prevent usage of `COMPOSE_PROFILES` when `--profile` arg is used. Fixed [compose#9895](https://github.com/docker/compose/issues/9895){:target="_blank" rel="noopener" class="_"}
+- Fixed a bug to prevent pulling a service's image when depending on a service which will build this image. Fixed [compose#9983](https://github.com/docker/compose/issues/9983){:target="_blank" rel="noopener" class="_"}
+- Fixed parsing issue when a container number label is not found. Fixed [compose#10004](https://github.com/docker/compose/issues/10004){:target="_blank" rel="noopener" class="_"}
+- Use platform value defined by `DOCKER_DEFAULT_PLATFORM` when no `service.platform` defined. Fixed [compose#9889](https://github.com/docker/compose/issues/9889){:target="_blank" rel="noopener" class="_"}
+
+### Changes
+- Remove usage of the deprecated dependency `gotest.tools` v2. Pull Request [compose#9935](https://github.com/docker/compose/pull/9935){:target="_blank" rel="noopener" class="_"}
+- Update CI dependencies. Pull Request [compose#9982](https://github.com/docker/compose/pull/9982){:target="_blank" rel="noopener" class="_"}
+- Exclude issues labeled with `kind/feature` from stale bot process. Fixed [compose#9988](https://github.com/docker/compose/pull/9988){:target="_blank" rel="noopener" class="_"}
+- Dependencies upgrade: bump containerd to 1.6.10
+- Dependencies upgrade: bump docker-credential-helpers to v0.7.0
+
 ## 2.12.2
 {% include release-date.html date="2022-10-21" %}
 
