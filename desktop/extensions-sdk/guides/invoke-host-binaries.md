@@ -7,7 +7,7 @@ keywords: Docker, extensions, sdk, build
 In some cases, your extension needs to invoke some command from the host (the computer of your users). For example, you
 might want to invoke the CLI of your cloud provider to create a new resource, or the CLI of a tool your extension
 provides, or even a shell script that you want to run on the host. You could do that executing the CLI from a container with the extension SDK. But this CLI needs to access the host's
-filesystem, which isn't possible if it runs in a container.
+filesystem, which isn't easy nor fast if it runs in a container.
 Host binaries allow exactly this: to invoke from the extension executables (as binaries, shell scripts)
 shipped as part of your extension and deployed to the host. As extensions can run on multiple platforms, this
 means that you need to ship the executables for all the platforms you want to support.

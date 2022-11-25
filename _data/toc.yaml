@@ -1361,7 +1361,7 @@ manuals:
                path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
-        - sectiontitle: Guides
+        - sectiontitle: "Developer Guides"
           section:
             - title: Invoke host binaries
               path: /desktop/extensions-sdk/guides/invoke-host-binaries/
