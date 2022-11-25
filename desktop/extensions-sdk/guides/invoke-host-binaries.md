@@ -8,44 +8,41 @@ In some cases, your extension needs to invoke some command from the host (the co
 might want to invoke the CLI of your cloud provider to create a new resource, or the CLI of a tool your extension
 provides, or even a shell script that you want to run on the host. You could do that executing the CLI from a container with the extension SDK. But this CLI needs to access the host's
 filesystem, which isn't possible if it runs in a container.
-Host binaries allow exactly this: to invoke from the extension those executables (e.g. binaries, shell scripts) that are
-shipped as part of your extension and have been deployed to host. As extensions can run on multiple platforms, this
+Host binaries allow exactly this: to invoke from the extension executables (as binaries, shell scripts)
+shipped as part of your extension and deployed to the host. As extensions can run on multiple platforms, this
 means that you need to ship the executables for all the platforms you want to support.
 
 > **Note**
-> Only executables shipped as part of the extension can be invoked with the SDK.
+>
+> Only executables shipped as part of the extension can be invoked with the SDK. 
 
 In this example, this CLI will be a simple `Hello world` script that must be invoked with a parameter and will return a 
-string. Since the extension will support multiple platforms, the script will be written in `bash` for macOS and Linux, 
-and in `powershell` for Windows.
+string.
 
 ## Add the executables to the extension
-Create a file `binaries/unix/hello.sh` with the following content:
+
+Create a `bash` script for macOS and Linux, in the file `binaries/unix/hello.sh` with the following content:
 
 ```bash
 #!/bin/sh
 echo "Hello, $1!"
 ```
 
-Create another file `binaries/windows/hello.ps1` with the following content:
-
-```powershell
-Write-Output "Hello, $args[0]!"
-```
-
-Make them both executable:
+Create a `batch script` for Windows in another file `binaries/windows/hello.cmd` with the following content:
 
 ```bash
-chmod +x binaries/*
+@echo off
+echo "Hello, %1!"
 ```
 
-Then update the `Dockerfile` to copy the `binaries` folder into the extension's container filesystem.
+Then update the `Dockerfile` to copy the `binaries` folder into the extension's container filesystem and make the
+files executable.
 
 ```dockerfile
 # Copy the binaries into the right folder
-COPY binaries/windows/hello.ps1 /windows/hello.ps1
-COPY binaries/unix/hello.sh /linux/hello.sh
-COPY binaries/unix/hello.sh /darwin/hello.sh
+COPY --chmod=0755 binaries/windows/hello.cmd /windows/hello.cmd
+COPY --chmod=0755 binaries/unix/hello.sh /linux/hello.sh
+COPY --chmod=0755 binaries/unix/hello.sh /darwin/hello.sh
 ```
 
 ## Invoke the executable from the UI
@@ -73,7 +70,7 @@ export function App() {
     const run = async () => {
       let binary = "hello.sh";
       if (ddClient.host.platform === 'win32') {
-        binary = "hello.ps1";
+        binary = "hello.cmd";
       }
 
       const result = await ddClient.extension.host?.cli.exec(binary, ["world"]);
@@ -153,7 +150,7 @@ the extension. Once the extension is uninstalled, the binaries that were copied 
         ],
         "windows": [
           {
-            "path": "/windows/hello.ps1"
+            "path": "/windows/hello.cmd"
           }
         ]
       }
