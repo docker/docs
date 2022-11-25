@@ -78,5 +78,4 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 ## What's next?
 
 - Learn how to [build and install your extension](../build-install.md).
-- Build a more advanced frontend extension by following the [Advanced frontend extension tutorial](..
-  /advanced-frontend-extension.md).
+- Build a more advanced frontend extension by following the [Advanced frontend extension tutorial](./frontend-extension-tutorial.md).
