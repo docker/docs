@@ -45,7 +45,7 @@ keep image size small:
     ```
 
 - If you have multiple images with a lot in common, consider creating your own
-  [base image](develop-images/baseimages.md) with the shared
+  [base image](../build/building/base-images.md) with the shared
   components, and basing your unique images on that. Docker only needs to load
   the common layers once, and they are cached. This means that your
   derivative images use memory on the Docker host more efficiently and load more

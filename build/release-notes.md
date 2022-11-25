@@ -71,13 +71,13 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 ### Updates
 
-* The `buildx ls` command output has been updated with better access to errors
-  from different builders {% include github_issue.md repo="docker/buildx" number="1109" %}
 * Updated the Compose Specification to 1.4.0 {% include github_issue.md repo="docker/buildx" number="1246" %}
   {% include github_issue.md repo="docker/buildx" number="1251" %}
 
 ### Bug fixes and enhancements
 
+* The `buildx ls` command output has been updated with better access to errors
+  from different builders {% include github_issue.md repo="docker/buildx" number="1109" %}
 * The `buildx create` command now performs additional validation of builder parameters
   to avoid creating a builder instance with invalid configuration {% include github_issue.md repo="docker/buildx" number="1206" %}
 * The `buildx imagetools create` command can now create new multi-platform images

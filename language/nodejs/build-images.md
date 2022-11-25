@@ -113,7 +113,7 @@ In the same way, when we use the `FROM` command, we tell Docker to include in ou
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [Creating base images](../../develop/develop-images/baseimages.md).
+> If you want to learn more about creating your own base images, see [Creating base images](../../build/building/base-images.md).
 
 The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production). One of the simplest things you can do to improve performance is to set `NODE_ENV` to `production`.
 

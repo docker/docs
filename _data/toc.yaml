@@ -139,10 +139,6 @@ guides:
     section:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Dockerfile best practices
-    - path: /develop/develop-images/image_management/
-      title: Manage images
-    - path: /develop/develop-images/baseimages/
-      title: Create your own base image (advanced)
   - path: /develop/scan-images/
     title: Scan images
 - sectiontitle: Deploy your app to the cloud
@@ -1557,6 +1553,8 @@ manuals:
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
+        - path: /build/building/base-images/
+          title: Create your own base image
     - sectiontitle: Customizing builds
       section:
         - sectiontitle: High-level builds with Bake
