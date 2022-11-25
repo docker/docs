@@ -20,7 +20,7 @@ To use the Docker+Wasm integration, developers must enable the [Containerd Image
 
 >**Important**
 >
-> The Docker+Wasm integration requires the [Containerd Image Store](../containerd/index.md) feature. This cannot be disabled. If you’re not currently using the Containerd Image Store, then pre-existing images and containers will be inaccessible.
+> The Docker+Wasm integration requires the [Containerd Image Store](../containerd/index.md) feature. If you’re not currently using the Containerd Image Store, then pre-existing images and containers will be inaccessible.
 {: .important}
 
 ## Usage examples
