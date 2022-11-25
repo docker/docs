@@ -16,7 +16,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker restart my_container
   ```
 deprecated: false

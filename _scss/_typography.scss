@@ -4,8 +4,8 @@
 
 @font-face {
     font-family: 'Geomanist Book';
-    src: url("../fonts/geomanist/hinted-Geomanist-Book.eot");
-    src: url("../fonts/geomanist/hinted-Geomanist-Book.eot?#iefix") format("embedded-opentype"), url("../fonts/geomanist/hinted-Geomanist-Book.woff2") format("woff2"), url("../fonts/geomanist/hinted-Geomanist-Book.woff") format("woff"), url("../fonts/geomanist/hinted-Geomanist-Book.ttf") format("truetype"), url("../fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Book") format("svg");
+    src: url("../assets/fonts/geomanist/hinted-Geomanist-Book.eot");
+    src: url("../assets/fonts/geomanist/hinted-Geomanist-Book.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/geomanist/hinted-Geomanist-Book.woff2") format("woff2"), url("../assets/fonts/geomanist/hinted-Geomanist-Book.woff") format("woff"), url("../assets/fonts/geomanist/hinted-Geomanist-Book.ttf") format("truetype"), url("../assets/fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Book") format("svg");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -13,8 +13,8 @@
 
 @font-face {
     font-family: 'Geomanist Regular';
-    src: url("../fonts/geomanist/hinted-Geomanist-Regular.eot");
-    src: url("../fonts/geomanist/hinted-Geomanist-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/geomanist/hinted-Geomanist-Regular.woff2") format("woff2"), url("../fonts/geomanist/hinted-Geomanist-Regular.woff") format("woff"), url("../fonts/geomanist/hinted-Geomanist-Regular.ttf") format("truetype"), url("../fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Regular") format("svg");
+    src: url("../assets/fonts/geomanist/hinted-Geomanist-Regular.eot");
+    src: url("../assets/fonts/geomanist/hinted-Geomanist-Regular.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/geomanist/hinted-Geomanist-Regular.woff2") format("woff2"), url("../assets/fonts/geomanist/hinted-Geomanist-Regular.woff") format("woff"), url("../assets/fonts/geomanist/hinted-Geomanist-Regular.ttf") format("truetype"), url("../assets/fonts/geomanist/hinted-Geomanist-Book.svg#Geomanist-Regular") format("svg");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -43,6 +43,9 @@ h1,h2,h3,h4,h5,h6 {
     font-family: $headings;
     clear: both;
     line-height: 26px;
+    margin-top:  30px;
+    margin-bottom: 0;
+    font-weight: 600;
 }
 
 h1 {
@@ -60,8 +63,7 @@ h3 {
 }
 
 h4 {
-    font-size: 16px;
-    text-transform: uppercase;
+    font-size: 18px;
 }
 
 h5 {
@@ -75,4 +77,8 @@ h6 {
 
 dd, dt {
     line-height: 25px;
+}
+
+ol, ul {
+  padding-left: 25px;
 }

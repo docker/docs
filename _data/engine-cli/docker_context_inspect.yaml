@@ -17,7 +17,7 @@ options:
 examples: |-
   ### Inspect a context by name
 
-  ```bash
+  ```console
   $ docker context inspect "local+aks"
 
   [

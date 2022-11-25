@@ -72,7 +72,7 @@ If you need to specify volume driver options, you must use `--mount`.
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
   - The `readonly` option, if present, causes the bind mount to be [mounted into
-    the container as read-only](#use-a-read-only-volume).
+    the container as read-only](#use-a-read-only-volume). May be specified as `readonly` or `ro`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
@@ -110,13 +110,13 @@ container.
 
 **Create a volume**:
 
-```bash
+```console
 $ docker volume create my-vol
 ```
 
 **List volumes**:
 
-```bash
+```console
 $ docker volume ls
 
 local               my-vol
@@ -124,7 +124,7 @@ local               my-vol
 
 **Inspect a volume**:
 
-```bash
+```console
 $ docker volume inspect my-vol
 [
     {
@@ -140,13 +140,13 @@ $ docker volume inspect my-vol
 
 **Remove a volume**:
 
-```bash
+```console
 $ docker volume rm my-vol
 ```
 
 ## Start a container with a volume
 
-If you start a container with a volume that does not yet exist, Docker creates
+If you start a container with a volume that doesn't yet exist, Docker creates
 the volume for you. The following example mounts the volume `myvol2` into
 `/app/` in the container.
 
@@ -161,7 +161,7 @@ after running the first one.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name devtest \
   --mount source=myvol2,target=/app \
@@ -171,7 +171,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name devtest \
   -v myvol2:/app \
@@ -205,7 +205,7 @@ destination, and that the mount is read-write.
 Stop the container and remove the volume. Note volume removal is a separate
 step.
 
-```bash
+```console
 $ docker container stop devtest
 
 $ docker container rm devtest
@@ -213,12 +213,11 @@ $ docker container rm devtest
 $ docker volume rm myvol2
 ```
 
-## Use a volume with docker-compose
+## Use a volume with Docker Compose
 
-A single docker compose service with a volume looks like this:
+Here's an example of a single Docker Compose service with a volume:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts
@@ -228,14 +227,12 @@ volumes:
   myapp:
 ```
 
-On the first invocation of `docker-compose up` the volume will be created. The same
-volume will be reused on following invocations.
+Running `docker compose up` for the first time creates a volume. The same volume is reused when you subsequently run the command.
 
-A volume may be created directly outside of compose with `docker volume create` and
-then referenced inside `docker-compose.yml` as follows:
+You can create a volume directly outside of Compose using `docker volume create` and
+then reference it inside `docker-compose.yml` as follows:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: node:lts
@@ -246,20 +243,18 @@ volumes:
     external: true
 ```
 
-For more information about using volumes with compose see
-[the compose reference](../compose/compose-file/index.md#volume-configuration-reference).
+For more information about using volumes with Compose, refer to the [Volumes](../compose/compose-file/index.md#volumes) section in the Compose specification.
 
 ### Start a service with volumes
 
 When you start a service and define a volume, each service container uses its own
 local volume. None of the containers can share this data if you use the `local`
-volume driver, but some volume drivers do support shared storage. Docker for AWS and
-Docker for Azure both support persistent storage using the Cloudstor plugin.
+volume driver. However, some volume drivers do support shared storage.
 
-The following example starts a `nginx` service with four replicas, each of which
+The following example starts an `nginx` service with four replicas, each of which
 uses a local volume called `myvol2`.
 
-```bash
+```console
 $ docker service create -d \
   --replicas=4 \
   --name devtest-service \
@@ -269,39 +264,39 @@ $ docker service create -d \
 
 Use `docker service ps devtest-service` to verify that the service is running:
 
-```bash
+```console
 $ docker service ps devtest-service
 
 ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR               PORTS
 4d7oz1j85wwn        devtest-service.1   nginx:latest        moby                Running             Running 14 seconds ago
 ```
 
-Remove the service, which stops all its tasks:
+You can remove the service to stop the running tasks:
 
-```bash
+```console
 $ docker service rm devtest-service
 ```
 
-Removing the service does not remove any volumes created by the service.
+Removing the service doesn't remove any volumes created by the service.
 Volume removal is a separate step.
 
 #### Syntax differences for services
 
-The `docker service create` command does not support the `-v` or `--volume` flag.
+The `docker service create` command doesn't support the `-v` or `--volume` flag.
 When mounting a volume into a service's containers, you must use the `--mount`
 flag.
 
 ### Populate a volume using a container
 
-If you start a container which creates a new volume, as above, and the container
-has files or directories in the directory to be mounted (such as `/app/` above),
+If you start a container which creates a new volume, and the container
+has files or directories in the directory to be mounted such as `/app/`,
 the directory's contents are copied into the volume. The container then
 mounts and uses the volume, and other containers which use the volume also
 have access to the pre-populated content.
 
-To illustrate this, this example starts an `nginx` container and populates the
-new volume `nginx-vol` with the contents of the container's
-`/usr/share/nginx/html` directory, which is where Nginx stores its default HTML
+To illustrate this, the following example starts an `nginx` container and
+populates the new volume `nginx-vol` with the contents of the container's
+`/usr/share/nginx/html` directory. This is where Nginx stores its default HTML
 content.
 
 The `--mount` and `-v` examples have the same end result.
@@ -313,7 +308,7 @@ The `--mount` and `-v` examples have the same end result.
 <div class="tab-content">
 <div id="mount-empty-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html \
@@ -323,7 +318,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-empty-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html \
@@ -334,10 +329,10 @@ $ docker run -d \
 </div><!--tab-content-->
 
 After running either of these examples, run the following commands to clean up
-the containers and volumes.  Note volume removal is a separate step.
+the containers and volumes. Note volume removal is a separate step.
 
 
-```bash
+```console
 $ docker container stop nginxtest
 
 $ docker container rm nginxtest
@@ -349,14 +344,14 @@ $ docker volume rm nginx-vol
 
 For some development applications, the container needs to write into the bind
 mount so that changes are propagated back to the Docker host. At other times,
-the container only needs read access to the data. Remember that multiple
-containers can mount the same volume, and it can be mounted read-write for some
-of them and read-only for others, at the same time.
+the container only needs read access to the data. Multiple
+containers can mount the same volume. You can simultaneously mount a
+single volume as `read-write` for some containers and as `read-only` for others.
 
-This example modifies the one above but mounts the directory as a read-only
+The following example modifies the one above but mounts the directory as a read-only
 volume, by adding `ro` to the (empty by default) list of options, after the
-mount point within the container. Where multiple options are present, separate
-them by commas.
+mount point within the container. Where multiple options are present, you can separate
+them using commas.
 
 The `--mount` and `-v` examples have the same result.
 
@@ -367,7 +362,7 @@ The `--mount` and `-v` examples have the same result.
 <div class="tab-content">
 <div id="mount-readonly" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   --mount source=nginx-vol,destination=/usr/share/nginx/html,readonly \
@@ -377,7 +372,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="v-readonly" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   --name=nginxtest \
   -v nginx-vol:/usr/share/nginx/html:ro \
@@ -387,7 +382,7 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Use `docker inspect nginxtest` to verify that the readonly mount was created
+Use `docker inspect nginxtest` to verify that the read-only mount was created
 correctly. Look for the `Mounts` section:
 
 ```json
@@ -408,7 +403,7 @@ correctly. Look for the `Mounts` section:
 Stop and remove the container, and remove the volume. Volume removal is a
 separate step.
 
-```bash
+```console
 $ docker container stop nginxtest
 
 $ docker container rm nginxtest
@@ -416,9 +411,9 @@ $ docker container rm nginxtest
 $ docker volume rm nginx-vol
 ```
 
-## Share data among machines
+## Share data between machines
 
-When building fault-tolerant applications, you might need to configure multiple
+When building fault-tolerant applications, you may need to configure multiple
 replicas of the same service to have access to the same files.
 
 ![shared storage](images/volumes-shared-storage.svg)
@@ -441,24 +436,24 @@ The following examples use the `vieux/sshfs` volume driver, first when creating
 a standalone volume, and then when starting a container which creates a new
 volume.
 
-### Initial set-up
+### Initial setup
 
-This example assumes that you have two nodes, the first of which is a Docker
-host and can connect to the second using SSH.
+The following example assumes that you have two nodes, the first of which is a Docker
+host and can connect to the second node using SSH.
 
 On the Docker host, install the `vieux/sshfs` plugin:
 
-```bash
+```console
 $ docker plugin install --grant-all-permissions vieux/sshfs
 ```
 
 ### Create a volume using a volume driver
 
-This example specifies a SSH password, but if the two hosts have shared keys
-configured, you can omit the password. Each volume driver may have zero or more
+This example specifies an SSH password, but if the two hosts have shared keys
+configured, you can exclude the password. Each volume driver may have zero or more
 configurable options, each of which is specified using an `-o` flag.
 
-```bash
+```console
 $ docker volume create --driver vieux/sshfs \
   -o sshcmd=test@node2:/home/test \
   -o password=testpassword \
@@ -467,12 +462,15 @@ $ docker volume create --driver vieux/sshfs \
 
 ### Start a container which creates a volume using a volume driver
 
-This example specifies a SSH password, but if the two hosts have shared keys
-configured, you can omit the password. Each volume driver may have zero or more
-configurable options. **If the volume driver requires you to pass options, you
-must use the `--mount` flag to mount the volume, rather than `-v`.**
+The following example specifies an SSH password. However, if the two hosts have
+shared keys configured, you can exclude the password. Each volume driver may have zero or more configurable options.
 
-```bash
+> **Note:**
+>
+> If the volume driver requires you to pass any options, you must use the `--mount` flag to mount the volume, and not `-v`.
+
+
+```console
 $ docker run -d \
   --name sshfs-container \
   --volume-driver vieux/sshfs \
@@ -482,10 +480,11 @@ $ docker run -d \
 
 ### Create a service which creates an NFS volume
 
-This example shows how you can create an NFS volume when creating a service. This example uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
+The following example shows how you can create an NFS volume when creating a service. It uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
 
 #### NFSv3
-```bash
+
+```console
 $ docker service create -d \
   --name nfs-service \
   --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,volume-opt=o=addr=10.0.0.10' \
@@ -493,100 +492,105 @@ $ docker service create -d \
 ```
 
 #### NFSv4
-```bash
-docker service create -d \
+
+```console
+$ docker service create -d \
     --name nfs-service \
     --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/docker-nfs,"volume-opt=o=addr=10.0.0.10,rw,nfsvers=4,async"' \
     nginx:latest
 ```
 
-## Backup, restore, or migrate data volumes
+### Create CIFS/Samba volumes
+
+You can mount a Samba share directly in docker without configuring a mount point on your host.
+```console
+$ docker volume create \
+	--driver local \
+	--opt type=cifs \
+	--opt device=//uxxxxx.your-server.de/backup \
+	--opt o=addr=uxxxxx.your-server.de,username=uxxxxxxx,password=*****,file_mode=0777,dir_mode=0777 \
+	--name cif-volume
+```
+
+Notice the `addr` option is required if using a hostname instead of an IP so docker can perform the hostname lookup.
+
+## Back up, restore, or migrate data volumes
 
 Volumes are useful for backups, restores, and migrations. Use the
 `--volumes-from` flag to create a new container that mounts that volume.
 
-### Backup a container
+### Back up a volume
 
 For example, create a new container named `dbstore`:
 
-```
+```console
 $ docker run -v /dbdata --name dbstore ubuntu /bin/bash
 ```
 
-Then in the next command, we:
+In the next command:
 
 - Launch a new container and mount the volume from the `dbstore` container
 - Mount a local host directory as `/backup`
 - Pass a command that tars the contents of the `dbdata` volume to a `backup.tar` file inside our `/backup` directory.
 
-```
+```console
 $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
 ```
 
-When the command completes and the container stops, we are left with a backup of
-our `dbdata` volume.
+When the command completes and the container stops, it creates a backup of
+the `dbdata` volume.
 
-### Restore container from backup
+### Restore volume from a backup
 
-With the backup just created, you can restore it to the same container, or
-another that you made elsewhere.
+With the backup just created, you can restore it to the same container, or to
+another container that you created elsewhere.
 
 For example, create a new container named `dbstore2`:
 
-```
+```console
 $ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 
-Then un-tar the backup file in the new container`s data volume:
+Then, un-tar the backup file in the new container’s data volume:
 
-```
+```console
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 
-You can use the techniques above to automate backup, migration and restore
+You can use the techniques above to automate backup, migration, and restore
 testing using your preferred tools.
 
 ## Remove volumes
 
-A Docker data volume persists after a container is deleted. There are two types
+A Docker data volume persists after you delete a container. There are two types
 of volumes to consider:
 
-- **Named volumes** have a specific source from outside the container, for example `awesome:/bar`.
-- **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
+- Named volumes have a specific source from outside the container, for example, `awesome:/bar`.
+- Anonymous volumes have no specific source, therefore, when the container is deleted, you can instruct the Docker Engine daemon to remove them.
 
 ### Remove anonymous volumes
 
 To automatically remove anonymous volumes, use the `--rm` option. For example,
-this command creates an anonymous `/foo` volume. When the container is removed,
+this command creates an anonymous `/foo` volume. When you remove the container,
 the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 
-```
+```console
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
+
+> **Note**:
+>
+> If another container binds the volumes with
+> `--volumes-from`, the volume definitions are _copied_ and the
+> anonymous volume also stays after the first container is removed.
 
 ### Remove all volumes
 
 To remove all unused volumes and free up space:
 
-```
+```console
 $ docker volume prune
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Next steps
 

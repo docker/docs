@@ -1,0 +1,8 @@
+# Checks for use of bold that doesn't start with a capital letter
+# which might indicate a reference to something other than a UI label
+extends: existence
+message: "Only use bold for UI elements."
+link: https://docs.docker.com/contribute/checklist/
+level: suggestion
+scope: strong
+raw: "^[^A-Z].*"

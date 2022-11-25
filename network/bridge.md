@@ -104,7 +104,7 @@ flag.
 Use the `docker network create` command to create a user-defined bridge
 network.
 
-```bash
+```console
 $ docker network create my-net
 ```
 
@@ -118,7 +118,7 @@ network. If containers are currently connected to the network,
 [disconnect them](#disconnect-a-container-from-a-user-defined-bridge)
 first.
 
-```bash
+```console
 $ docker network rm my-net
 ```
 
@@ -139,7 +139,7 @@ publishes port 80 in the container to port 8080 on the Docker host, so external
 clients can access that port. Any other container connected to the `my-net`
 network has access to all ports on the `my-nginx` container, and vice versa.
 
-```bash
+```console
 $ docker create --name my-nginx \
   --network my-net \
   --publish 8080:80 \
@@ -150,7 +150,7 @@ To connect a **running** container to an existing user-defined bridge, use the
 `docker network connect` command. The following command connects an already-running
 `my-nginx` container to an already-existing `my-net` network:
 
-```bash
+```console
 $ docker network connect my-net my-nginx
 ```
 
@@ -160,7 +160,7 @@ To disconnect a running container from a user-defined bridge, use the `docker
 network disconnect` command. The following command disconnects the `my-nginx`
 container from the `my-net` network.
 
-```bash
+```console
 $ docker network disconnect my-net my-nginx
 ```
 
@@ -183,14 +183,14 @@ kernel.
 
 1.  Configure the Linux kernel to allow IP forwarding.
 
-    ```bash
+    ```console
     $ sysctl net.ipv4.conf.all.forwarding=1
     ```
 
 2.  Change the policy for the `iptables` `FORWARD` policy from `DROP` to
     `ACCEPT`.
 
-    ```bash
+    ```console
     $ sudo iptables -P FORWARD ACCEPT
     ```
 
@@ -219,11 +219,11 @@ the settings you need to customize.
 
 ```json
 {
-  "bip": "192.168.1.5/24",
-  "fixed-cidr": "192.168.1.5/25",
+  "bip": "192.168.1.1/24",
+  "fixed-cidr": "192.168.1.0/25",
   "fixed-cidr-v6": "2001:db8::/64",
   "mtu": 1500,
-  "default-gateway": "10.20.1.1",
+  "default-gateway": "192.168.1.254",
   "default-gateway-v6": "2001:db8:abcd::89",
   "dns": ["10.20.1.2","10.20.1.3"]
 }

@@ -62,7 +62,7 @@ options:
 examples: |-
   ### Commit a container
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
@@ -81,7 +81,7 @@ examples: |-
 
   ### Commit a container with new configurations
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID       IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
@@ -103,7 +103,7 @@ examples: |-
 
   ### Commit a container with new `CMD` and `EXPOSE` instructions
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES

@@ -28,7 +28,7 @@ to [Run Docker Engine in swarm mode](swarm-mode.md#view-the-join-command-or-upda
 To retrieve the join command including the join token for worker nodes, run the
 following command on a manager node:
 
-```bash
+```console
 $ docker swarm join-token worker
 
 To add a worker to this swarm, run the following command:
@@ -40,7 +40,7 @@ To add a worker to this swarm, run the following command:
 
 Run the command from the output on the worker to join the swarm:
 
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
   192.168.99.100:2377
@@ -76,7 +76,7 @@ For more detail about swarm managers and administering a swarm, see
 To retrieve the join command including the join token for manager nodes, run the
 following command on a manager node:
 
-```bash
+```console
 $ docker swarm join-token manager
 
 To add a manager to this swarm, run the following command:
@@ -88,7 +88,7 @@ To add a manager to this swarm, run the following command:
 
 Run the command from the output on the new manager node to join it to the swarm:
 
-```bash
+```console
 $ docker swarm join \
   --token SWMTKN-1-61ztec5kyafptydic6jfc1i33t37flcl4nuipzcusor96k7kby-5vy9t8u35tuqm7vh67lrz9xp6 \
   192.168.99.100:2377

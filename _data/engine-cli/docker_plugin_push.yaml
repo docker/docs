@@ -22,7 +22,7 @@ options:
 examples: |-
   The following example shows how to push a sample `user/plugin`.
 
-  ```bash
+  ```console
   $ docker plugin ls
 
   ID             NAME                    DESCRIPTION                  ENABLED

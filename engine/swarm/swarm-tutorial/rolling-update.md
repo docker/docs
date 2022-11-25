@@ -17,7 +17,7 @@ Redis 3.0.7 container image using rolling updates.
 2.  Deploy your Redis tag to the swarm and configure the swarm with a 10 second
     update delay. Note that the following example shows an older Redis tag:
 
-    ```bash
+    ```console
     $ docker service create \
       --replicas 3 \
       --name redis \
@@ -47,7 +47,7 @@ Redis 3.0.7 container image using rolling updates.
 
 3.  Inspect the `redis` service:
 
-    ```bash
+    ```console
     $ docker service inspect --pretty redis
 
     ID:             0u6a4s31ybk7yw2wyvtikmu50
@@ -68,7 +68,7 @@ Redis 3.0.7 container image using rolling updates.
 4.  Now you can update the container image for `redis`. The swarm  manager
     applies the update to nodes according to the `UpdateConfig` policy:
 
-    ```bash
+    ```console
     $ docker service update --image redis:3.0.7 redis
     redis
     ```
@@ -86,7 +86,7 @@ Redis 3.0.7 container image using rolling updates.
 5.  Run `docker service inspect --pretty redis` to see the new image in the
     desired state:
 
-    ```bash
+    ```console
     $ docker service inspect --pretty redis
 
     ID:             0u6a4s31ybk7yw2wyvtikmu50
@@ -106,7 +106,7 @@ Redis 3.0.7 container image using rolling updates.
 
     The output of `service inspect` shows if your update paused due to failure:
 
-    ```bash
+    ```console
     $ docker service inspect --pretty redis
 
     ID:             0u6a4s31ybk7yw2wyvtikmu50
@@ -121,8 +121,8 @@ Redis 3.0.7 container image using rolling updates.
 
     To restart a paused update run `docker service update <SERVICE-ID>`. For example:
 
-    ```bash
-    docker service update redis
+    ```console
+    $ docker service update redis
     ```
 
     To avoid repeating certain update failures, you may need to reconfigure the
@@ -130,7 +130,7 @@ Redis 3.0.7 container image using rolling updates.
 
 6.  Run `docker service ps <SERVICE-ID>` to watch the rolling update:
 
-    ```bash
+    ```console
     $ docker service ps redis
 
     NAME                                   IMAGE        NODE       DESIRED STATE  CURRENT STATE            ERROR

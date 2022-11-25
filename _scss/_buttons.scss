@@ -9,9 +9,8 @@ a.button {
 }
 
 a.button.outline-btn {
-    color: #0087C8;
+    color: $primary-links;
     float: none;
-    margin-bottom: 30px;
     display: inline-block;
 }
 
@@ -20,13 +19,14 @@ a.button.outline-btn.min-hgt {
 }
 
 .button {
+    display: inline-block;
     margin: 10px 10px 10px 0;
     font-family: $buttons;
-    padding: 12px 35px 10px;
+    padding: 12px 35px;
     min-width: 200px;
     box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
-    float: left;
     text-align: center;
+    white-space: nowrap;
     &:hover {
         color: #fff;
         opacity: 0.7;
@@ -34,10 +34,11 @@ a.button.outline-btn.min-hgt {
 }
 
 .primary-btn {
-    background: #1488C6;
+    background: $primary-links;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
+
 /*
 .secondary-btn {
     background-color: rgba(255, 255, 255, 0.2);

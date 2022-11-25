@@ -97,12 +97,16 @@ module Jekyll
       nil
     end
 
+    def mdtarget?(string)
+      string&.include?(".md")
+    end
+
     def fragment?(string)
       string&.start_with?("#")
     end
 
     def replaceable_link?(string)
-      !fragment?(string) && !absolute_url?(string)
+      mdtarget?(string) && !fragment?(string) && !absolute_url?(string)
     end
 
     def global_entry_filter

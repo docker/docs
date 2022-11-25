@@ -16,7 +16,7 @@ usage: docker swarm unlock
 pname: docker swarm
 plink: docker_swarm.yaml
 examples: |-
-  ```bash
+  ```console
   $ docker swarm unlock
   Please enter unlock key:
   ```

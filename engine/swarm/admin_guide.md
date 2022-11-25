@@ -133,8 +133,8 @@ operations like swarm heartbeat or leader elections.
 To avoid interference with manager node operation, you can drain manager nodes
 to make them unavailable as worker nodes:
 
-```bash
-docker node update --availability drain <NODE>
+```console
+$ docker node update --availability drain <NODE>
 ```
 
 When you drain a node, the scheduler reassigns any tasks running on the node to
@@ -161,8 +161,8 @@ From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
 {% raw %}
-```bash
-docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
+```console
+$ docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
 ```
 {% endraw %}
@@ -170,8 +170,8 @@ reachable
 To query the status of the node as a worker that accept tasks:
 
 {% raw %}
-```bash
-docker node inspect manager1 --format "{{ .Status.State }}"
+```console
+$ docker node inspect manager1 --format "{{ .Status.State }}"
 ready
 ```
 {% endraw %}
@@ -190,9 +190,8 @@ manager:
 Alternatively you can also get an overview of the swarm health from a manager
 node with `docker node ls`:
 
-```bash
-
-docker node ls
+```console
+$ docker node ls
 ID                           HOSTNAME  MEMBERSHIP  STATUS  AVAILABILITY  MANAGER STATUS
 1mhtdwhvsgr3c26xxbnzdc3yp    node05    Accepted    Ready   Active
 516pacagkqp2xc3fk9t1dhjor    node02    Accepted    Ready   Active        Reachable
@@ -280,10 +279,10 @@ restore the data to a new swarm.
 
 1.  Shut down Docker on the target host machine for the restored swarm.
 
-3.  Remove the contents of the `/var/lib/docker/swarm` directory on the new
+2.  Remove the contents of the `/var/lib/docker/swarm` directory on the new
     swarm.
 
-4.  Restore the `/var/lib/docker/swarm` directory with the contents of the
+3.  Restore the `/var/lib/docker/swarm` directory with the contents of the
     backup.
 
     > Note
@@ -296,26 +295,26 @@ restore the data to a new swarm.
     > same as on the old swarm, and the unlock key is needed to restore the
     > swarm.
 
-5.  Start Docker on the new node. Unlock the swarm if necessary. Re-initialize
+4.  Start Docker on the new node. Unlock the swarm if necessary. Re-initialize
     the swarm using the following command, so that this node does not attempt
     to connect to nodes that were part of the old swarm, and presumably no
     longer exist.
 
-    ```bash
+    ```console
     $ docker swarm init --force-new-cluster
     ```
 
-6.  Verify that the state of the swarm is as expected. This may include
+5.  Verify that the state of the swarm is as expected. This may include
     application-specific tests or simply checking the output of
     `docker service ls` to be sure that all expected services are present.
 
-7.  If you use auto-lock,
+6.  If you use auto-lock,
     [rotate the unlock key](swarm_manager_locking.md#rotate-the-unlock-key).
 
-8.  Add manager and worker nodes to bring your new swarm up to operating
+7.  Add manager and worker nodes to bring your new swarm up to operating
     capacity.
 
-9.  Reinstate your previous backup regimen on the new swarm.
+8.  Reinstate your previous backup regimen on the new swarm.
 
 ### Recover from losing the quorum
 
@@ -350,9 +349,10 @@ except the manager the command was run from. The quorum is achieved because
 there is now only one manager. Promote nodes to be managers until you have the
 desired number of managers.
 
-```bash
-# From the node to recover
-docker swarm init --force-new-cluster --advertise-addr node01:2377
+From the node to recover, run:
+
+```console
+$ docker swarm init --force-new-cluster --advertise-addr node01:2377
 ```
 
 When you run the `docker swarm init` command with the `--force-new-cluster`

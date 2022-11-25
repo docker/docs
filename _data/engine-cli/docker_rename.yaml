@@ -5,7 +5,7 @@ usage: docker rename CONTAINER NEW_NAME
 pname: docker
 plink: docker.yaml
 examples: |-
-  ```bash
+  ```console
   $ docker rename my_container my_new_container
   ```
 deprecated: false

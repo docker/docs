@@ -7,6 +7,24 @@ redirect_from:
 - /engine/reference/api/docker_remote_api/
 - /reference/api/
 - /reference/api/docker_remote_api/
+- /reference/api/docker_remote_api_v1.0/
+- /reference/api/docker_remote_api_v1.1/
+- /reference/api/docker_remote_api_v1.2/
+- /reference/api/docker_remote_api_v1.3/
+- /reference/api/docker_remote_api_v1.4/
+- /reference/api/docker_remote_api_v1.5/
+- /reference/api/docker_remote_api_v1.6/
+- /reference/api/docker_remote_api_v1.7/
+- /reference/api/docker_remote_api_v1.8/
+- /reference/api/docker_remote_api_v1.9/
+- /reference/api/docker_remote_api_v1.10/
+- /reference/api/docker_remote_api_v1.11/
+- /reference/api/docker_remote_api_v1.12/
+- /reference/api/docker_remote_api_v1.13/
+- /reference/api/docker_remote_api_v1.14/
+- /reference/api/docker_remote_api_v1.15/
+- /reference/api/docker_remote_api_v1.16/
+- /reference/api/docker_remote_api_v1.17/
 ---
 
 Docker provides an API for interacting with the Docker daemon (called the Docker
@@ -52,7 +70,7 @@ unless you need to take advantage of new features.
 To see the highest version of the API your Docker daemon and client support, use
 `docker version`:
 
-```bash
+```console
 $ docker version
 
 Client: Docker Engine - Community
@@ -85,12 +103,12 @@ You can specify the API version to use, in one of the following ways:
   `/v1.41/containers/`.
 
 - To force the Docker CLI or the Docker Engine SDKs to use an old version
-  version of the API than the version reported by `docker version`, set the
+  of the API than the version reported by `docker version`, set the
   environment variable `DOCKER_API_VERSION` to the correct version. This works
   on Linux, Windows, or macOS clients.
 
-  ```bash
-  DOCKER_API_VERSION='1.41'
+  ```console
+  $ DOCKER_API_VERSION='1.41'
   ```
 
   While the environment variable is set, that version of the API is used, even
@@ -106,8 +124,13 @@ You can specify the API version to use, in one of the following ways:
   parameter to the `client` object. See the
   [Go constructor](https://github.com/moby/moby/blob/v19.03.6/client/client.go#L119){: target="_blank" rel="noopener" class="_"}
   or the
-  [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
+  [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html){: target="_blank" rel="noopener" class="_"}.
 
 ### API version matrix
 
 {% include api-version-matrix.md %}
+
+### Archived API versions
+
+Documentation for older versions of the API has been archived, but can be found
+in the [docker code repository on GitHub](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api){: target="_blank" rel="noopener" class="_"}

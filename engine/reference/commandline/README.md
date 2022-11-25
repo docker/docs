@@ -14,9 +14,9 @@ The output files are composed from two sources:
   the CLI source code in that repository.
 
 - The **Extended Description** and **Examples** sections are pulled into the
-  YAML from the files in [https://github.com/docker/cli/tree/master/docs/reference/commandline](https://github.com/docker/cli/tree/master/docs/reference/commandline)
+  YAML from the files in [https://github.com/docker/cli/tree/master/docs/reference/commandline](https://github.com/docker/cli/tree/master/docs/reference/commandline) for Docker CLI commands and [https://github.com/docker/compose/tree/v2/docs/reference](https://github.com/docker/compose/tree/v2/docs/reference) for Docker Compose commands.
   Specifically, the Markdown inside the `## Description` and `## Examples`
-  headings are parsed. Submit corrections to the text in that repository.
+  headings are parsed. Submit corrections to the text in those repositories.
 
 # Updating the YAML files
 
@@ -25,5 +25,5 @@ The process for generating the YAML files is still in flux. Check with
 release branch of `docker/cli`, for example, the `19.03` branch.
 
 After generating the YAML files, replace the YAML files in
-[https://github.com/docker/docker.github.io/tree/master/_data/engine-cli](https://github.com/docker/docker.github.io/tree/master/_data/engine-cli)
+[https://github.com/docker/docs/tree/main/_data/engine-cli](https://github.com/docker/docs/tree/main/_data/engine-cli)
 with the newly-generated files. Submit a pull request.

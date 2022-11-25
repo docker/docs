@@ -6,7 +6,7 @@ notoc: true
 ---
 
 You can control the order of service startup and shutdown with the
-[depends_on](compose-file/index.md#depends_on) option. Compose always starts and stops
+[depends_on](compose-file/compose-file-v3.md#depends_on) option. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
@@ -29,7 +29,7 @@ need this level of resilience, you can work around the problem with a wrapper
 script:
 
 - Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-  [dockerize](https://github.com/jwilder/dockerize), sh-compatible
+  [dockerize](https://github.com/powerman/dockerize), [Wait4X](https://github.com/atkrad/wait4x), sh-compatible
   [wait-for](https://github.com/Eficode/wait-for), or [RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) template. These are small
   wrapper scripts which you can include in your application's image to
   poll a given host and port until it's accepting TCP connections.
@@ -68,16 +68,26 @@ script:
   set -e
   
   host="$1"
+  # Shift arguments with mapping:
+  # - $0 => $0
+  # - $1 => <discarded>
+  # - $2 => $1
+  # - $3 => $2
+  # - ...
+  # This is done for `exec "$@"` below to work correctly
   shift
-  cmd="$@"
   
+  # Login for user (`-U`) and once logged in execute quit ( `-c \q` )
+  # If we can not login sleep for 1 sec
   until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
     >&2 echo "Postgres is unavailable - sleeping"
     sleep 1
   done
   
   >&2 echo "Postgres is up - executing command"
-  exec $cmd
+  # Print and execute all other arguments starting with `$1`
+  # So `exec "$1" "$2" "$3" ...`
+  exec "$@"
   ```
 
   You can use this as a wrapper script as in the previous example, by setting:
@@ -90,7 +100,7 @@ script:
 ## Compose documentation
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
+- [Installing Compose](install/index.md)
 - [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)

@@ -1,0 +1,7 @@
+extends: occurrence
+message: "Try to keep link text short (< 5 words)."
+scope: link
+link: https://docs.docker.com/contribute/style/formatting/#links
+level: suggestion
+max: 5
+token: \b(\w+)\b

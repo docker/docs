@@ -11,7 +11,7 @@ options:
   value_type: string
   description: |
     Default orchestrator for stack operations to use with this context (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -37,15 +37,15 @@ options:
   value_type: stringToString
   default_value: '[]'
   description: set the kubernetes endpoint
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
-  kubernetes: false
+  kubernetes: true
   swarm: false
 examples: |-
   ### Update an existing context
 
-  ```bash
+  ```console
   $ docker context update \
       --description "some description" \
       --docker "host=tcp://myserver:2376,ca=~/ca-file,cert=~/cert-file,key=~/key-file" \

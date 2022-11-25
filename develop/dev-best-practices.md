@@ -7,7 +7,7 @@ keywords: application, development
 The following development patterns have proven to be helpful for people
 building applications with Docker. If you have discovered something we should
 add,
-[let us know](https://github.com/docker/docker.github.io/issues/new){: target="_blank" rel="noopener" class="_"}.
+[let us know]({{ site.repo }}/issues/new){: target="_blank" rel="noopener" class="_"}.
 
 ## How to keep your images small
 
@@ -20,7 +20,7 @@ keep image size small:
   starting with a generic `ubuntu` image and installing `openjdk` as part of the
   Dockerfile.
 
-- [Use multistage builds](develop-images/multistage-build.md). For
+- [Use multistage builds](../build/building/multi-stage.md). For
   instance, you can use the `maven` image to build your Java application, then
   reset to the `tomcat` image and copy the Java artifacts into the correct
   location to deploy your app, all in the same Dockerfile. This means that your
@@ -45,7 +45,7 @@ keep image size small:
     ```
 
 - If you have multiple images with a lot in common, consider creating your own
-  [base image](develop-images/baseimages.md) with the shared
+  [base image](../build/building/base-images.md) with the shared
   components, and basing your unique images on that. Docker only needs to load
   the common layers once, and they are cached. This means that your
   derivative images use memory on the Docker host more efficiently and load more

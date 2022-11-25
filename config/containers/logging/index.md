@@ -26,9 +26,8 @@ In some cases, `docker logs` may not show useful information unless you take
 additional steps.
 
 - If you use a [logging driver](configure.md) which sends logs to a file, an
-  external host, a database, or another logging back-end, `docker logs` may not
-  show useful information.
-
+  external host, a database, or another logging back-end, and have ["dual logging"](dual-logging.md)
+  disabled, `docker logs` may not show useful information.
 - If your image runs a non-interactive process such as a web server or a
   database, that application may send its output to log files instead of `STDOUT`
   and `STDERR`.

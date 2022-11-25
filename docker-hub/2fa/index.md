@@ -16,6 +16,7 @@ app. See [Recover your Docker Hub account](recover-hub-account/).
 
 
 ## Prerequisites
+
 You need a mobile phone with a time-based one-time password authenticator
 application installed. Common examples include Google Authenticator or Yubico
 Authenticator with a registered YubiKey.
@@ -26,6 +27,7 @@ Authenticator with a registered YubiKey.
 {: .important}
 
 ## Enable two-factor authentication
+
 To enable two-factor authentication, log in to your Docker Hub account. Click
 on your username and select **Account Settings**. Go to Security and click
 **Enable Two-Factor Authentication**.

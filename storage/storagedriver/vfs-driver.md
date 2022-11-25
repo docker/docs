@@ -17,7 +17,7 @@ mechanism to verify other storage back-ends against, in a testing environment.
 
 1. Stop Docker.
 
-   ```bash
+   ```console
    $ sudo systemctl stop docker
    ```
 
@@ -44,14 +44,14 @@ mechanism to verify other storage back-ends against, in a testing environment.
 
 3.  Start Docker.
 
-    ```bash
+    ```console
     $ sudo systemctl start docker
     ```
 
 4.  Verify that the daemon is using the `vfs` storage driver.
     Use the `docker info` command and look for `Storage Driver`.
 
-    ```bash
+    ```console
     $ docker info
 
     Storage Driver: vfs
@@ -79,7 +79,7 @@ it is a deep copy of its parent layer. These layers are all located under
 The following `docker pull` command shows a Docker host downloading a Docker
 image comprising five layers.
 
-```bash
+```console
 $ docker pull ubuntu
 
 Using default tag: latest
@@ -99,7 +99,7 @@ image layer IDs shown in the `docker pull` command. To see the size taken up on
 disk by each layer, you can use the `du -sh` command, which gives the size as a
 human-readable value.
 
-```bash
+```console
 $ ls -l /var/lib/docker/vfs/dir/
 
 total 0
@@ -111,7 +111,7 @@ drwxr-xr-x. 21 root root 224 Aug  2 18:23 a292ac6341a65bf3a5da7b7c251e19de1294bd
 drwxr-xr-x. 21 root root 224 Aug  2 18:23 e92be7a4a4e3ccbb7dd87695bca1a0ea373d4f673f455491b1342b33ed91446b
 ```
 
-```bash
+```console
 $ du -sh /var/lib/docker/vfs/dir/*
 
 4.0K	/var/lib/docker/vfs/dir/3262dfbe53dac3e1ab7dcc8ad5d8c4d586a11d2ac3c4234892e34bff7f6b821e

@@ -37,7 +37,7 @@ need to have Docker installed and running.
     swarm on this Docker daemon. You may see different networks, but you should
     at least see these (the network IDs will be different):
 
-    ```bash
+    ```console
     $ docker network ls
 
     NETWORK ID          NAME                DRIVER              SCOPE
@@ -60,7 +60,7 @@ need to have Docker installed and running.
     container's ID will be printed. Because you have not specified any
     `--network` flags, the containers connect to the default `bridge` network.
 
-    ```bash
+    ```console
     $ docker run -dit --name alpine1 alpine ash
 
     $ docker run -dit --name alpine2 alpine ash
@@ -68,7 +68,7 @@ need to have Docker installed and running.
 
     Check that both containers are actually started:
 
-    ```bash
+    ```console
     $ docker container ls
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -78,7 +78,7 @@ need to have Docker installed and running.
 
 3.  Inspect the `bridge` network to see what containers are connected to it.
 
-    ```bash
+    ```console
     $ docker network inspect bridge
 
     [
@@ -139,7 +139,7 @@ need to have Docker installed and running.
 4.  The containers are running in the background. Use the `docker attach`
     command to connect to `alpine1`.
 
-    ```bash
+    ```console
     $ docker attach alpine1
 
     / #
@@ -149,7 +149,7 @@ need to have Docker installed and running.
     the container. Use the `ip addr show` command to show the network interfaces
     for `alpine1` as they look from within the container:
 
-    ```bash
+    ```console
     # ip addr show
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
@@ -174,7 +174,7 @@ need to have Docker installed and running.
     pinging `google.com`. The `-c 2` flag limits the command to two `ping`
     attempts.
 
-    ```bash
+    ```console
     # ping -c 2 google.com
 
     PING google.com (172.217.3.174): 56 data bytes
@@ -189,7 +189,7 @@ need to have Docker installed and running.
 6.  Now try to ping the second container. First, ping it by its IP address,
     `172.17.0.3`:
 
-    ```bash
+    ```console
     # ping -c 2 172.17.0.3
 
     PING 172.17.0.3 (172.17.0.3): 56 data bytes
@@ -204,7 +204,7 @@ need to have Docker installed and running.
     This succeeds. Next, try pinging the `alpine2` container by container
     name. This will fail.
 
-    ```bash
+    ```console
     # ping -c 2 alpine2
 
     ping: bad address 'alpine2'
@@ -217,7 +217,7 @@ need to have Docker installed and running.
 
 8.  Stop and remove both containers.
 
-    ```bash
+    ```console
     $ docker container stop alpine1 alpine2
     $ docker container rm alpine1 alpine2
     ```
@@ -238,13 +238,13 @@ connected to both networks.
 1.  Create the `alpine-net` network. You do not need the `--driver bridge` flag
     since it's the default, but this example shows how to specify it.
 
-    ```bash
+    ```console
     $ docker network create --driver bridge alpine-net
     ```
 
 2.  List Docker's networks:
 
-    ```bash
+    ```console
     $ docker network ls
 
     NETWORK ID          NAME                DRIVER              SCOPE
@@ -257,7 +257,7 @@ connected to both networks.
     Inspect the `alpine-net` network. This shows you its IP address and the fact
     that no containers are connected to it:
 
-    ```bash
+    ```console
     $ docker network inspect alpine-net
 
     [
@@ -296,7 +296,7 @@ connected to both networks.
     `docker network connect` afterward to connect `alpine4` to the `bridge`
     network as well.
 
-    ```bash
+    ```console
     $ docker run -dit --name alpine1 --network alpine-net alpine ash
 
     $ docker run -dit --name alpine2 --network alpine-net alpine ash
@@ -310,7 +310,7 @@ connected to both networks.
 
     Verify that all containers are running:
 
-    ```bash
+    ```console
     $ docker container ls
 
     CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
@@ -322,7 +322,7 @@ connected to both networks.
 
 4.  Inspect the `bridge` network and the `alpine-net` network again:
 
-    ```bash
+    ```console
     $ docker network inspect bridge
 
     [
@@ -376,7 +376,7 @@ connected to both networks.
 
     Containers `alpine3` and `alpine4` are connected to the `bridge` network.
 
-    ```bash
+    ```console
     $ docker network inspect alpine-net
 
     [
@@ -437,7 +437,7 @@ connected to both networks.
     connect to `alpine1` and test this out. `alpine1` should be able to resolve
     `alpine2` and `alpine4` (and `alpine1`, itself) to IP addresses.
 
-    ```bash
+    ```console
     $ docker container attach alpine1
 
     # ping -c 2 alpine2
@@ -474,7 +474,7 @@ connected to both networks.
 6.  From `alpine1`, you should not be able to connect to `alpine3` at all, since
     it is not on the `alpine-net` network.
 
-    ```bash
+    ```console
     # ping -c 2 alpine3
 
     ping: bad address 'alpine3'
@@ -485,7 +485,7 @@ connected to both networks.
     `bridge` network and find `alpine3`'s IP address: `172.17.0.2` Try to ping
     it.
 
-    ```bash
+    ```console
     # ping -c 2 172.17.0.2
 
     PING 172.17.0.2 (172.17.0.2): 56 data bytes
@@ -502,7 +502,7 @@ connected to both networks.
     However, you will need to address `alpine3` by its IP address. Attach to it
     and run the tests.
 
-    ```bash
+    ```console
     $ docker container attach alpine4
 
     # ping -c 2 alpine1
@@ -556,7 +556,7 @@ connected to both networks.
     connect to `alpine1` (which is only connected to the `alpine-net` network)
     and try again.
 
-    ```bash
+    ```console
     # ping -c 2 google.com
 
     PING google.com (172.217.3.174): 56 data bytes

@@ -29,7 +29,7 @@ rotate this key encryption key at any time.
 When you initialize a new swarm, you can use the `--autolock` flag to
 enable autolocking of swarm manager nodes when Docker restarts.
 
-```bash
+```console
 $ docker swarm init --autolock
 
 Swarm initialized: current node (k1q27tfyx9rncpixhk69sa61v) is now a manager.
@@ -54,7 +54,7 @@ When Docker restarts, you need to [unlock the swarm](#unlock-a-swarm). A locked
 swarm causes an error like the following when you try to start or restart a
 service:
 
-```bash
+```console
 $ sudo service docker restart
 
 $ docker service ls
@@ -66,7 +66,7 @@ Error response from daemon: Swarm is encrypted and needs to be unlocked before i
 
 To enable autolock on an existing swarm, set the `autolock` flag to `true`.
 
-```bash
+```console
 $ docker swarm update --autolock=true
 
 Swarm updated.
@@ -85,7 +85,7 @@ disk. There is a trade-off between the risk of storing the encryption key
 unencrypted at rest and the convenience of restarting a swarm without
 needing to unlock each manager.
 
-```bash
+```console
 $ docker swarm update --autolock=false
 ```
 
@@ -96,7 +96,7 @@ a manager goes down while it is still configured to lock using the old key.
 
 To unlock a locked swarm, use `docker swarm unlock`.
 
-```bash
+```console
 $ docker swarm unlock
 
 Please enter unlock key:
@@ -116,7 +116,7 @@ If the key has not been rotated since the node left the swarm, and you have a
 quorum of functional manager nodes in the swarm, you can view the current unlock
 key using `docker swarm unlock-key` without any arguments.
 
-```bash
+```console
 $ docker swarm unlock-key
 
 To unlock a swarm manager after it restarts, run the `docker swarm unlock`
@@ -136,7 +136,7 @@ the swarm and join it back to the swarm as a new manager.
 
 You should rotate the locked swarm's unlock key on a regular schedule.
 
-```bash
+```console
 $ docker swarm unlock-key --rotate
 
 Successfully rotated manager unlock key.

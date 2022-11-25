@@ -29,14 +29,6 @@ use unless you have substantial experience with ZFS on Linux.
 
 - ZFS requires one or more dedicated block devices, preferably solid-state
   drives (SSDs).
-- ZFS is only supported on Docker Engine - Community with Ubuntu 14.04 or higher, with the `zfs`
-  package (16.04 and higher) or `zfs-native` and `ubuntu-zfs` packages (14.04)
-  installed.
-  - For Ubuntu 14.04, you need to enable a supplemental package repository
-    `ppa:zfs-native/stable` before you can install the package. See
-    [https://launchpad.net/~zfs-native/+archive/ubuntu/stable](https://launchpad.net/~zfs-native/+archive/ubuntu/stable){: target="_blank" rel="noopener" class="_" }
-    for instructions.
-- ZFS is not supported on Docker EE or CS-Engine, or any other Linux platforms.
 - The `/var/lib/docker/` directory must be mounted on a ZFS-formatted
   filesystem.
 - Changing the storage driver makes any containers you have already
@@ -46,8 +38,8 @@ use unless you have substantial experience with ZFS on Linux.
 
 > **Note**
 >
-> There is no need to use `MountFlags=slave` with Docker Engine 18.09 or
-> later because `dockerd` and `containerd` are in different mount namespaces. 
+> There is no need to use `MountFlags=slave` because `dockerd` and `containerd`
+> are in different mount namespaces. 
 
 ## Configure Docker with the `zfs` storage driver
 
@@ -56,7 +48,7 @@ use unless you have substantial experience with ZFS on Linux.
 2.  Copy the contents of `/var/lib/docker/` to `/var/lib/docker.bk` and remove
     the contents of `/var/lib/docker/`.
 
-    ```bash
+    ```console
     $ sudo cp -au /var/lib/docker /var/lib/docker.bk
 
     $ sudo rm -rf /var/lib/docker/*
@@ -67,7 +59,7 @@ use unless you have substantial experience with ZFS on Linux.
     have specified the correct devices, because this is a destructive operation.
     This example adds two devices to the pool.
 
-    ```bash
+    ```console
     $ sudo zpool create -f zpool-docker -m /var/lib/docker /dev/xvdf /dev/xvdg
     ```
 
@@ -75,14 +67,14 @@ use unless you have substantial experience with ZFS on Linux.
     display purposes only, and you can use a different name. Check that the pool
     was created and mounted correctly using `zfs list`.
 
-    ```bash
+    ```console
     $ sudo zfs list
 
     NAME           USED  AVAIL  REFER  MOUNTPOINT
     zpool-docker    55K  96.4G    19K  /var/lib/docker
     ```
 
-3.  Configure Docker to use `zfs`. Edit `/etc/docker/daemon.json` and set the
+4.  Configure Docker to use `zfs`. Edit `/etc/docker/daemon.json` and set the
     `storage-driver` to `zfs`. If the file was empty before, it should now look
     like this:
 
@@ -94,9 +86,9 @@ use unless you have substantial experience with ZFS on Linux.
 
     Save and close the file.
 
-4.  Start Docker. Use `docker info` to verify that the storage driver is `zfs`.
+5.  Start Docker. Use `docker info` to verify that the storage driver is `zfs`.
 
-    ```bash
+    ```console
     $ sudo docker info
       Containers: 0
        Running: 0
@@ -112,7 +104,7 @@ use unless you have substantial experience with ZFS on Linux.
        Space Available: 103498395648
        Parent Quota: no
        Compression: off
-    <output truncated>
+    <...>
     ```
 
 ## Manage `zfs`
@@ -122,7 +114,7 @@ use unless you have substantial experience with ZFS on Linux.
 To increase the size of the `zpool`, you need to add a dedicated block device to
 the Docker host, and then add it to the `zpool` using the `zpool add` command:
 
-```bash
+```console
 $ sudo zpool add zpool-docker /dev/xvdh
 ```
 
@@ -142,7 +134,7 @@ Edit `/etc/docker/daemon.json` and add the following:
 ```
 
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
+[daemon reference documentation](/engine/reference/commandline/dockerd/#daemon-storage-driver)
 
 Save and close the file, and restart Docker.
 

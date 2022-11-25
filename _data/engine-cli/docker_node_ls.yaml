@@ -44,7 +44,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker node ls
 
   ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
@@ -52,6 +52,7 @@ examples: |-
   38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active
   e216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready   Active        Leader
   ```
+
   > **Note**
   >
   > In the above example output, there is a hidden column of `.Self` that indicates
@@ -68,6 +69,7 @@ examples: |-
 
   * [id](#id)
   * [label](#label)
+  * [node.label](#nodelabel)
   * [membership](#membership)
   * [name](#name)
   * [role](#role)
@@ -76,7 +78,7 @@ examples: |-
 
   The `id` filter matches all or part of a node's id.
 
-  ```bash
+  ```console
   $ docker node ls -f id=1
 
   ID                         HOSTNAME       STATUS  AVAILABILITY  MANAGER STATUS
@@ -85,15 +87,54 @@ examples: |-
 
   #### label
 
-  The `label` filter matches nodes based on engine labels and on the presence of a `label` alone or a `label` and a value. Node labels are currently not used for filtering.
+  The `label` filter matches nodes based on engine labels and on the presence of a
+  `label` alone or a `label` and a value. Engine labels are configured in
+  the [daemon configuration](dockerd.md#daemon-configuration-file). To filter on
+  Swarm `node` labels, use [`node.label` instead](#nodelabel).
 
   The following filter matches nodes with the `foo` label regardless of its value.
 
-  ```bash
+  ```console
   $ docker node ls -f "label=foo"
 
   ID                         HOSTNAME       STATUS  AVAILABILITY  MANAGER STATUS
   1bcef6utixb0l0ca7gxuivsj0  swarm-worker2  Ready   Active
+  ```
+
+  #### node.label
+
+  The `node.label` filter matches nodes based on node labels and on the presence
+  of a `node.label` alone or a `node.label` and a value.
+
+  The following filter updates nodes to have a `region` node label:
+
+  ```console
+  $ docker node update --label-add region=region-a swarm-test-01
+  $ docker node update --label-add region=region-a swarm-test-02
+  $ docker node update --label-add region=region-b swarm-test-03
+  $ docker node update --label-add region=region-b swarm-test-04
+  ```
+
+  Show all nodes that have a `region` node label set:
+
+  ```console
+  $ docker node ls --filter node.label=region
+
+  ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+  yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+  2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
+  hc0pu7ntc7s4uvj4pv7z7pz15     swarm-test-03   Ready     Active         Reachable        20.10.2
+  n41b2cijmhifxxvz56vwrs12q     swarm-test-04   Ready     Active                          20.10.2
+  ```
+
+  Show all nodes that have a `region` node label, with value `region-a`:
+
+  ```console
+  $ docker node ls --filter node.label=region=region-a
+
+  ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+  yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+  2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
   ```
 
   #### membership
@@ -103,7 +144,7 @@ examples: |-
 
   The following filter matches nodes with the `membership` of `accepted`.
 
-  ```bash
+  ```console
   $ docker node ls -f "membership=accepted"
 
   ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
@@ -117,7 +158,7 @@ examples: |-
 
   The following filter matches the nodes with a name equal to `swarm-master` string.
 
-  ```bash
+  ```console
   $ docker node ls -f name=swarm-manager1
 
   ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
@@ -130,7 +171,7 @@ examples: |-
 
   The following filter matches nodes with the `manager` role.
 
-  ```bash
+  ```console
   $ docker node ls -f "role=manager"
 
   ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
@@ -144,16 +185,16 @@ examples: |-
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder      | Description
-  -----------------|------------------------------------------------------------------------------------------
-  `.ID`            | Node ID
-  `.Self`          | Node of the daemon (`true/false`, `true`indicates that the node is the same as current docker daemon)
-  `.Hostname`      | Node hostname
-  `.Status`        | Node status
-  `.Availability`  | Node availability ("active", "pause", or "drain")
-  `.ManagerStatus` | Manager status of the node
-  `.TLSStatus`     | TLS status of the node ("Ready", or "Needs Rotation" has TLS certificate signed by an old CA)
-  `.EngineVersion` | Engine version
+  | Placeholder      | Description                                                                                           |
+  |------------------|-------------------------------------------------------------------------------------------------------|
+  | `.ID`            | Node ID                                                                                               |
+  | `.Self`          | Node of the daemon (`true/false`, `true`indicates that the node is the same as current docker daemon) |
+  | `.Hostname`      | Node hostname                                                                                         |
+  | `.Status`        | Node status                                                                                           |
+  | `.Availability`  | Node availability ("active", "pause", or "drain")                                                     |
+  | `.ManagerStatus` | Manager status of the node                                                                            |
+  | `.TLSStatus`     | TLS status of the node ("Ready", or "Needs Rotation" has TLS certificate signed by an old CA)         |
+  | `.EngineVersion` | Engine version                                                                                        |
 
   When using the `--format` option, the `node ls` command will either
   output the data exactly as the template declares or, when using the
@@ -163,8 +204,9 @@ examples: |-
   `ID`, `Hostname`, and `TLS Status` entries separated by a colon (`:`) for all
   nodes:
 
-  ```bash
+  ```console
   $ docker node ls --format "{{.ID}}: {{.Hostname}} {{.TLSStatus}}"
+
   e216jshn25ckzbvmwlnh5jr3g: swarm-manager1 Ready
   35o6tiywb700jesrt3dmllaza: swarm-worker1 Needs Rotation
   ```

@@ -52,14 +52,14 @@ If you want to understand, you should read [How to Write Go Code](https://golang
 Copy the registry configuration file in place:
 
     mkdir /Users/Shared/Registry
-    cp docs/osx/config.yml /Users/Shared/Registry/config.yml
+    cp docs/recipes/osx/config.yml /Users/Shared/Registry/config.yml
 
 ## Run the Docker Registry under launchd
 
 Copy the Docker registry plist into place:
 
-    plutil -lint registry/recipes/osx/com.docker.registry.plist
-    cp registry/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
+    plutil -lint docs/recipes/osx/com.docker.registry.plist
+    cp docs/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
     chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
 
 Start the Docker registry:

@@ -4,7 +4,7 @@ keywords: orchestration, deploy, kubernetes, swarm,
 description: Get oriented on some basics of Docker and install Docker Desktop.
 ---
 
-The portability and reproducibility of a containerized process mean we have an opportunity to move and scale our containerized applications across clouds and datacenters. Containers effectively guarantee that those applications run the same way anywhere, allowing us to quickly and easily take advantage of all these environments. Furthermore, as we scale our applications up, we'll want some tooling to help automate the maintenance of those applications, able to replace failed containers automatically, and manage the rollout of updates and reconfigurations of those containers during their lifecycle.
+The portability and reproducibility of a containerized process provides an opportunity to move and scale our containerized applications across clouds and datacenters. Containers effectively guarantee that those applications run the same way anywhere, allowing us to quickly and easily take advantage of all these environments. Additionally, as we scale our applications up, we need some tooling to help automate the maintenance of those applications, enable the replacement of failed containers automatically, and manage the rollout of updates and reconfigurations of those containers during their lifecycle.
 
 Tools to manage, scale, and maintain containerized applications are called _orchestrators_, and the most common examples of these are _Kubernetes_ and _Docker Swarm_. Development environment deployments of both of these
 orchestrators are provided by Docker Desktop, which we'll use throughout
@@ -43,7 +43,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 
@@ -51,14 +51,14 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 4.  In a terminal, navigate to where you created `pod.yaml` and create your pod:
 
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 
 5.  Check that your pod is up and running:
 
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 
     You should see something like:
@@ -70,8 +70,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 6.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -86,8 +86,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 7.  Finally, tear down your test pod:
 
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 
 {% endcapture %}
@@ -113,7 +113,7 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
     spec:
       containers:
       - name: testpod
-        image: alpine:3.5
+        image: alpine:latest
         command: ["ping", "8.8.8.8"]
     ```
 
@@ -121,14 +121,14 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 4.  In PowerShell, navigate to where you created `pod.yaml` and create your pod:
 
-    ```shell
-    kubectl apply -f pod.yaml
+    ```console
+    $ kubectl apply -f pod.yaml
     ```
 
 5.  Check that your pod is up and running:
 
-    ```shell
-    kubectl get pods
+    ```console
+    $ kubectl get pods
     ```
 
     You should see something like:
@@ -140,8 +140,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 6.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    kubectl logs demo
+    ```console
+    $ kubectl logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -156,8 +156,8 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 7.  Finally, tear down your test pod:
 
-    ```shell
-    kubectl delete -f pod.yaml
+    ```console
+    $ kubectl delete -f pod.yaml
     ```
 
 {% endcapture %}
@@ -182,8 +182,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 1.  Open a terminal, and initialize Docker Swarm mode:
 
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 
     If all goes well, you should see a message similar to the following:
@@ -200,27 +200,27 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 
 3.  Check that your service created one running container:
 
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 
     You should see something like:
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 
 4.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -235,8 +235,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 5.  Finally, tear down your test service:
 
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 
 {% endcapture %}
@@ -250,8 +250,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 1.  Open a powershell, and initialize Docker Swarm mode:
 
-    ```shell
-    docker swarm init
+    ```console
+    $ docker swarm init
     ```
 
     If all goes well, you should see a message similar to the following:
@@ -268,27 +268,27 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 2.  Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
-    ```shell
-    docker service create --name demo alpine:3.5 ping 8.8.8.8
+    ```console
+    $ docker service create --name demo alpine:latest ping 8.8.8.8
     ```
 
 3.  Check that your service created one running container:
 
-    ```shell
-    docker service ps demo
+    ```console
+    $ docker service ps demo
     ```
 
     You should see something like:
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
-    463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
+    463j2s3y4b5o        demo.1              alpine:latest       docker-desktop      Running             Running 8 seconds ago
     ```
 
 4.  Check that you get the logs you'd expect for a ping process:
 
-    ```shell
-    docker service logs demo
+    ```console
+    $ docker service logs demo
     ```
 
     You should see the output of a healthy ping process:
@@ -303,8 +303,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 5.  Finally, tear down your test service:
 
-    ```shell
-    docker service rm demo
+    ```console
+    $ docker service rm demo
     ```
 
 {% endcapture %}
@@ -317,7 +317,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 At this point, you've confirmed that you can run simple containerized workloads in Kubernetes and Swarm. The next step will be to write the Kubernetes yaml that describes how to run and manage these containers on Kubernetes.
 
-[On to deploying to Kubernetes >>](kube-deploy.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 200%"}
+[On to deploying to Kubernetes >>](kube-deploy.md){: class="button primary-btn" style="margin-bottom: 30px; margin-right: 200%"}
 
 To learn how to write the stack file to help you run and manage containers on Swarm, see [Deploying to Swarm](swarm-deploy.md).
 
@@ -329,5 +329,5 @@ Further documentation for all CLI commands used in this article are available he
 - [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
 - [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)
 - [`kubectl delete`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#delete)
-- [`docker swarm init`](https://docs.docker.com/engine/reference/commandline/swarm_init/)
-- [`docker service *`](https://docs.docker.com/engine/reference/commandline/service/)
+- [`docker swarm init`](/engine/reference/commandline/swarm_init/)
+- [`docker service *`](/engine/reference/commandline/service/)

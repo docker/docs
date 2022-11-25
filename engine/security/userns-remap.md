@@ -76,7 +76,7 @@ avoid these situations.
 
     To verify this, use the `id` command:
 
-    ```bash
+    ```console
     $ id testuser
 
     uid=1001(testuser) gid=1001(testuser) groups=1001(testuser)
@@ -135,7 +135,7 @@ procedure to configure the daemon using the `daemon.json` configuration file.
 The `daemon.json` method is recommended. If you use the flag, use the following
 command as a model:
 
-```bash
+```console
 $ dockerd --userns-remap="testuser:testuser"
 ```
 
@@ -168,7 +168,7 @@ $ dockerd --userns-remap="testuser:testuser"
 2.  If you are using the `dockremap` user, verify that Docker created it using
     the `id` command.
 
-    ```bash
+    ```console
     $ id dockremap
 
     uid=112(dockremap) gid=116(dockremap) groups=116(dockremap)
@@ -176,7 +176,7 @@ $ dockerd --userns-remap="testuser:testuser"
 
     Verify that the entry has been added to `/etc/subuid` and `/etc/subgid`:
 
-    ```bash
+    ```console
     $ grep dockremap /etc/subuid
 
     dockremap:231072:65536
@@ -196,16 +196,16 @@ $ dockerd --userns-remap="testuser:testuser"
 
 4.  Start a container from the `hello-world` image.
 
-    ```bash
+    ```console
     $ docker run hello-world
     ```
 
-4.  Verify that a namespaced directory exists within `/var/lib/docker/` named
+5.  Verify that a namespaced directory exists within `/var/lib/docker/` named
     with the UID and GID of the namespaced user, owned by that UID and GID,
     and not group-or-world-readable. Some of the subdirectories are still
     owned by `root` and have different permissions.
 
-    ```bash
+    ```console
     $ sudo ls -ld /var/lib/docker/231072.231072/
 
     drwx------ 11 231072 231072 11 Jun 21 21:19 /var/lib/docker/231072.231072/

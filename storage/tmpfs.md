@@ -72,7 +72,7 @@ second uses the `--tmpfs` flag.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name tmptest \
@@ -83,7 +83,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="tmpfs-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name tmptest \
@@ -94,21 +94,19 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Verify that the mount is a `tmpfs` mount by running `docker container inspect
-tmptest` and looking for the `Mounts` section:
+Verify that the mount is a `tmpfs` mount by looking in the `Mounts` section of
+the `docker inspect` output:
 
-```json
-"Tmpfs": {
-    "/app": ""
-},
+```console
+$ docker inspect tmptest --format '{{ json .Mounts }}'
+[{"Type":"tmpfs","Source":"","Destination":"/app","Mode":"","RW":true,"Propagation":""}]
 ```
 
-Remove the container:
+Stop and remove the container:
 
-```bash
-$ docker container stop tmptest
-
-$ docker container rm tmptest
+```console
+$ docker stop tmptest
+$ docker rm tmptest
 ```
 
 ### Specify tmpfs options
@@ -125,7 +123,7 @@ as the `--tmpfs` flag does not support them.
 The following example sets the `tmpfs-mode` to `1770`, so that it is not
 world-readable within the container.
 
-```bash
+```console
 docker run -d \
   -it \
   --name tmptest \

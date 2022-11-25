@@ -1,97 +1,251 @@
 command: docker buildx bake
-aliases: f
+aliases: docker buildx bake, docker buildx f
 short: Build from a file
-long: Build from a file
+long: |-
+    Bake is a high-level build command. Each specified target will run in parallel
+    as part of the build.
+
+    Read [High-level build options with Bake](/build/bake/)
+    guide for introduction to writing bake files.
+
+    > **Note**
+    >
+    > `buildx bake` command may receive backwards incompatible features in the future
+    > if needed. We are looking for feedback on improving the command and extending
+    > the functionality further.
 usage: docker buildx bake [OPTIONS] [TARGET...]
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
-- option: file
-  shorthand: f
-  value_type: stringArray
-  default_value: '[]'
-  description: Build definition file
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: load
-  value_type: bool
-  default_value: "false"
-  description: Shorthand for --set=*.output=type=docker
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: no-cache
-  value_type: bool
-  default_value: "false"
-  description: Do not use cache when building the image
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: print
-  value_type: bool
-  default_value: "false"
-  description: Print the options without building
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: progress
-  value_type: string
-  default_value: auto
-  description: |
-    Set type of progress output (auto, plain, tty). Use plain to show container output
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: pull
-  value_type: bool
-  default_value: "false"
-  description: Always attempt to pull a newer version of the image
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: push
-  value_type: bool
-  default_value: "false"
-  description: Shorthand for --set=*.output=type=registry
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
-- option: set
-  value_type: stringArray
-  default_value: '[]'
-  description: 'Override target value (eg: targetpattern.key=value)'
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: file
+      shorthand: f
+      value_type: stringArray
+      default_value: '[]'
+      description: Build definition file
+      details_url: '#file'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: load
+      value_type: bool
+      default_value: "false"
+      description: Shorthand for `--set=*.output=type=docker`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: metadata-file
+      value_type: string
+      description: Write build result metadata to the file
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: no-cache
+      value_type: bool
+      default_value: "false"
+      description: Do not use cache when building the image
+      details_url: '#no-cache'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: print
+      value_type: bool
+      default_value: "false"
+      description: Print the options without building
+      details_url: '#print'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: progress
+      value_type: string
+      default_value: auto
+      description: |
+        Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
+      details_url: '#progress'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: pull
+      value_type: bool
+      default_value: "false"
+      description: Always attempt to pull all referenced images
+      details_url: '#pull'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: push
+      value_type: bool
+      default_value: "false"
+      description: Shorthand for `--set=*.output=type=registry`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: set
+      value_type: stringArray
+      default_value: '[]'
+      description: Override target value (e.g., `targetpattern.key=value`)
+      details_url: '#set'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
-- option: builder
-  value_type: string
-  description: Override the configured builder instance
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: builder
+      value_type: string
+      description: Override the configured builder instance
+      details_url: '#builder'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### Override the configured builder instance (--builder) {#builder}
+
+    Same as [`buildx --builder`](buildx.md#builder).
+
+    ### Specify a build definition file (-f, --file) {#file}
+
+    Use the `-f` / `--file` option to specify the build definition file to use.
+    The file can be an HCL, JSON or Compose file. If multiple files are specified
+    they are all read and configurations are combined.
+
+    You can pass the names of the targets to build, to build only specific target(s).
+    The following example builds the `db` and `webapp-release` targets that are
+    defined in the `docker-bake.dev.hcl` file:
+
+    ```hcl
+    # docker-bake.dev.hcl
+    group "default" {
+      targets = ["db", "webapp-dev"]
+    }
+
+    target "webapp-dev" {
+      dockerfile = "Dockerfile.webapp"
+      tags = ["docker.io/username/webapp"]
+    }
+
+    target "webapp-release" {
+      inherits = ["webapp-dev"]
+      platforms = ["linux/amd64", "linux/arm64"]
+    }
+
+    target "db" {
+      dockerfile = "Dockerfile.db"
+      tags = ["docker.io/username/db"]
+    }
+    ```
+
+    ```console
+    $ docker buildx bake -f docker-bake.dev.hcl db webapp-release
+    ```
+
+    See our [file definition](/build/bake/file-definition/)
+    guide for more details.
+
+    ### Do not use cache when building the image (--no-cache) {#no-cache}
+
+    Same as `build --no-cache`. Do not use cache when building the image.
+
+    ### Print the options without building (--print) {#print}
+
+    Prints the resulting options of the targets desired to be built, in a JSON
+    format, without starting a build.
+
+    ```console
+    $ docker buildx bake -f docker-bake.hcl --print db
+    {
+      "group": {
+        "default": {
+          "targets": [
+            "db"
+          ]
+        }
+      },
+      "target": {
+        "db": {
+          "context": "./",
+          "dockerfile": "Dockerfile",
+          "tags": [
+            "docker.io/tiborvass/db"
+          ]
+        }
+      }
+    }
+    ```
+
+    ### Set type of progress output (--progress) {#progress}
+
+    Same as [`build --progress`](buildx_build.md#progress).
+
+    ### Always attempt to pull a newer version of the image (--pull) {#pull}
+
+    Same as `build --pull`.
+
+    ### Override target configurations from command line (--set) {#set}
+
+    ```
+    --set targetpattern.key[.subkey]=value
+    ```
+
+    Override target configurations from command line. The pattern matching syntax
+    is defined in https://golang.org/pkg/path/#Match.
+
+    ```console
+    $ docker buildx bake --set target.args.mybuildarg=value
+    $ docker buildx bake --set target.platform=linux/arm64
+    $ docker buildx bake --set foo*.args.mybuildarg=value # overrides build arg for all targets starting with 'foo'
+    $ docker buildx bake --set *.platform=linux/arm64     # overrides platform for all targets
+    $ docker buildx bake --set foo*.no-cache              # bypass caching only for targets starting with 'foo'
+    ```
+
+    Complete list of overridable fields:
+
+    * `args`
+    * `cache-from`
+    * `cache-to`
+    * `context`
+    * `dockerfile`
+    * `labels`
+    * `no-cache`
+    * `no-cache-filter`
+    * `output`
+    * `platform`
+    * `pull`
+    * `push`
+    * `secrets`
+    * `ssh`
+    * `tags`
+    * `target`
 deprecated: false
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

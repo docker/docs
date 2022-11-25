@@ -59,7 +59,7 @@ Restart Docker for the changes to take effect.
 >
 > `log-opts` configuration options in the `daemon.json` configuration file must
 > be provided as strings. Boolean and numeric values (such as the value for
-> `fluentd-async-connect` or `fluentd-max-retries`) must therefore be enclosed
+> `fluentd-async` or `fluentd-max-retries`) must therefore be enclosed
 > in quotes (`"`).
 
 To set the logging driver for a specific container, pass the
@@ -74,7 +74,7 @@ connects to this daemon through `localhost:24224` by default. Use the
     docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 
 If container cannot connect to the Fluentd daemon, the container stops
-immediately unless the `fluentd-async-connect` option is used.
+immediately unless the `fluentd-async` option is used.
 
 ## Options
 
@@ -98,26 +98,29 @@ Refer to the [log tag option documentation](log_tags.md) for customizing
 the log tag format.
 
 
-### labels, env, and env-regex
+### labels, labels-regex, env, and env-regex
 
 The `labels` and `env` options each take a comma-separated list of keys. If
 there is collision between `label` and `env` keys, the value of the `env` takes
 precedence. Both options add additional fields to the extra attributes of a
 logging message.
 
-The `env-regex` option is similar to and compatible with `env`. Its value is a
-regular expression to match logging-related environment variables. It is used
-for advanced [log tag options](log_tags.md).
+The `env-regex` and `labels-regex` options are similar to and compatible with
+respectively `env` and `labels`. Their values are regular expressions to match
+logging-related environment variables and labels. It is used for advanced
+[log tag options](log_tags.md).
 
-### fluentd-async-connect
+### fluentd-async
 
 Docker connects to Fluentd in the background. Messages are buffered until the
 connection is established. Defaults to `false`.
 
 ### fluentd-buffer-limit
 
-The amount of data to buffer before flushing to disk. Defaults to the amount of RAM
-available to the container.
+Sets the number of events buffered on the memory. Records will be stored in memory
+up to this number. If the buffer is full, the call to record logs will fail.
+The default is 8192.
+(https://github.com/fluent/fluent-logger-golang/tree/master#bufferlimit)
 
 ### fluentd-retry-wait
 

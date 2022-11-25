@@ -15,7 +15,7 @@ usage: docker pause CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
 examples: |-
-  ```bash
+  ```console
   $ docker pause my_container
   ```
 deprecated: false

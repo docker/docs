@@ -1,0 +1,5 @@
+##
+# This file overrides options set in _config.yml for staging environment (https://docs-stage.docker.com/)
+##
+
+hotjar_id: 3218181

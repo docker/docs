@@ -7,15 +7,19 @@ redirect_from:
 - /docker-cloud/builds/automated-build/
 - /docker-cloud/builds/
 - /docker-hub/builds/classic/
-title: Set up automated builds
+title: Set up Automated Builds
 ---
 
+{% include upgrade-cta.html
+  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images. If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target='_blank' rel='noopener' class='_'} program to learn how Docker can support your project on Docker Hub."
+  header-text="This feature requires a Docker subscription"
+  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
+%}
 
 ## How Automated Builds work
 
 Docker Hub can automatically build images from source code in an external
-repository and automatically push the built image to your Docker
-repositories.
+repository and automatically push the built image to your Docker repositories.
 
 When you set up automated builds (also called autobuilds), you create a list of
 branches and tags that you want to build into Docker images. When you push code
@@ -30,17 +34,17 @@ repositories with Automated Builds configured.
 
 If you have automated tests configured, these run after building but before
 pushing to the registry. You can use these tests to create a continuous
-integration workflow where a build that fails its tests does not push the built
-image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
+integration workflow where a build that fails its tests doesn't push the built
+image. Automated tests don't push images to the registry on their own. [Learn about automated image testing](automated-testing.md).
 
-Depending on your [plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}, you may get parallel builds, which means that `N`
-autobuilds can be run at the same time. `N` is configured by the plan that you
-subscribe to. Once `N+1` builds are running, any additional builds are
-queued to be run later.
+Depending on your [subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"},
+you may get concurrent builds, which means that `N` autobuilds can be run at the
+same time. `N` is configured according to your subscription. Once `N+1` builds
+are running, any additional builds go into a queue to be run later.
 
-> **Note**
->
-> The total number of pending builds in the queue is limited to 30 and further requests will be discarded.
+The maximum number of pending builds in the queue is 30 and Docker Hub discards further
+requests. The number of concurrent builds for Pro is 5 and
+for Team and Business is 15.
 
 ![An automated build dashboard](images/index-dashboard.png)
 
@@ -51,29 +55,32 @@ build an image each time you push new code to your source provider. If you have
 [automated tests](automated-testing.md) configured, the new image is only pushed
 when the tests succeed.
 
-Builds can be added to existing repositories, or added when you create a repository.
+You can add builds to existing repositories, or add them when you create a repository.
 
-1. From the **Repositories** section, click into a repository to view its details.
+1. From the **Repositories** section, select a repository to view its details.
 
-2. Click the **Builds** tab.
+2. Select the **Builds** tab.
 
-3. If you are setting up automated builds for the first time, select
-the code repository service (GitHub or Bitbucket) where the image's source code is stored.
-You might redirected to the settings page to [link](link-source.md) the code repository service.
+3. If you are setting up automated builds for the first time, select the code
+   repository service (GitHub or Bitbucket) where the image's source code is stored.
 
-    Otherwise, if you are editing the build settings for an existing automated
-    build, click **Configure automated builds**.
+   > Note
+   >
+   > You may be redirected to the settings page to [link](link-source.md) the
+   > code repository service. Otherwise, if you are editing the build settings
+   > for an existing automated build, click **Configure automated builds**.
 
 4. Select the **source repository** to build the Docker images from.
 
-    You might need to specify an organization or user (the _namespace_) from the
-    source code provider. Once you select a namespace, its source code
-    repositories appear in the **Select repository** dropdown list.
+   > Note
+   > You might need to specify an organization or user (the _namespace_) from
+   > the source code provider. Once you select a namespace, its source code
+   > repositories appear in the **Select repository** dropdown list.
 
-5.  Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
+5. Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 
-6.  Review the default **Build Rules**, and optionally click the
-**plus sign** to add and configure more build rules.
+6. Review the default **Build Rules**, and optionally select the
+   **plus sign** to add and configure more build rules.
 
     _Build rules_ control what Docker Hub builds into images from the contents
     of the source code repository, and how the resulting images are tagged
@@ -83,26 +90,29 @@ You might redirected to the settings page to [link](link-source.md) the code rep
     default set builds from the `Branch` in your source code repository called
     `master`, and creates a Docker image tagged with `latest`.
 
-7.  For each branch or tag, enable or disable the **Autobuild** toggle.
+7. For each branch or tag, enable or disable the **Autobuild** toggle.
 
-    Only branches or tags with autobuild enabled are built, tested, *and* have
+    Only branches or tags with autobuild enabled are built, tested, and have
     the resulting image pushed to the repository. Branches with autobuild
     disabled are built for test purposes (if enabled at the repository
-    level), but the built Docker image is not pushed to the repository.
+    level), but the built Docker image isn't pushed to the repository.
 
 8. For each branch or tag, enable or disable the **Build Caching** toggle.
 
-    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache) can save time if you are building a large image frequently or have
-    many dependencies. You might want to leave build caching disabled to
+    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache)
+    can save time if you are building a large image frequently or have
+    many dependencies. Leave the build caching disabled to
     make sure all of your dependencies are resolved at build time, or if
-    you have a large layer that is quicker to build locally.
+    you have a large layer that's quicker to build locally.
 
 9. Click **Save** to save the settings, or click **Save and build** to save and
-run an initial test.
+   run an initial test.
 
-    A webhook is automatically added to your source code repository to notify
-    Docker Hub on every push. Only pushes to branches that are listed as the
-    source for one or more tags trigger a build.
+    > Note
+    >
+    > A webhook is automatically added to your source code repository to notify
+    > Docker Hub on every push. Only pushes to branches that's listed as the
+    > source for one or more tags trigger a build.
 
 ### Set up build rules
 
@@ -115,9 +125,8 @@ In the **Build Rules** section, enter one or more sources to build.
 
 For each source:
 
-* Select the **Source type** to build either a **tag** or a
-    **branch**. This tells the build system what to look for in the source code
-    repository.
+* Select the **Source type** to build either a tag or a branch. This
+  tells the build system what to look for in the source code repository.
 
 * Enter the name of the **Source** branch or tag you want to build.
 
@@ -135,11 +144,14 @@ For each source:
   capture groups and use its result as part of the tag. To learn more, see
   [regexes](index.md#regexes-and-automated-builds).
 
-* Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
+* Specify the **Dockerfile location** as a path relative to the root of the source code repository. If the Dockerfile is at the repository root, leave this path set to `/`.
 
 > **Note**
 >
-> When Docker Hub pulls a branch from a source code repository, it performs a shallow clone (only the tip of the specified branch).  Refer to [Advanced options for Autobuild and Autotest](advanced.md) for more information.
+> When Docker Hub pulls a branch from a source code repository, it performs a
+> shallow clone (only the tip of the specified branch). Refer to
+> [Advanced options for Autobuild and Autotest](advanced.md#source-repository--branch-clones)
+> for more information.
 
 ### Environment variables for builds
 
@@ -148,15 +160,16 @@ when you configure an automated build. Add your build environment variables by
 clicking the plus sign next to the **Build environment variables** section, and
 then entering a variable name and the value.
 
-When you set variable values from the Docker Hub UI, they can be used by the
-commands you set in `hooks` files, but they are stored so that only users who
-have `admin` access to the Docker Hub repository can see their values. This
-means you can use them to safely store access tokens or other information that
+When you set variable values from the Docker Hub UI, you can use them by the
+commands you set in `hooks` files. However, they're stored so that only users who have `admin` access to the Docker Hub repository can see their values. This
+means you can use them to store access tokens or other information that
 should remain secret.
 
-> **Note**: The variables set on the build configuration screen are used during
-the build processes _only_ and should not be confused with the environment
-values used by your service (for example to create service links).
+> **Note**
+>
+> The variables set on the build configuration screen are used during
+> the build processes only and shouldn't get confused with the environment
+> values used by your service (for example to create service links).
 
 ## Check your active builds
 
@@ -168,53 +181,65 @@ repository.
 
 ![Active Builds](images/index-active.png)
 
-From either location, you can click a build job to view its build report. The
-build report shows information about the build job including the source
-repository and branch (or tag), the build duration, creation time and location,
-and the user namespace the build occurred in.
+From either location, you can select a build job to view its build report. The
+build report shows information about the build job. This includes the source
+repository and branch (or tag), the build logs, the build duration, creation time and location, and the user namespace the build occurred in.
 
-![Build Report](images/index-report.png)
+>**Note**
+>
+> You can now view the progress of your builds every 30 seconds when you
+> refresh the Builds page. With the in-progress build logs, you can debug your
+> builds before they're finished.
+
+![Build Report](/docker-hub/images/index-report.png)
 
 ## Cancel or retry a build
 
-While a build is queued or running, a **Cancel** icon appears next to its build
+While a build is in queue or running, a **Cancel** icon appears next to its build
 report link on the General tab and on the Builds tab. You can also click the
-**Cancel** button from the build report page, or from the Timeline tab's logs
+**Cancel** on the build report page, or from the Timeline tab's logs
 display for the build.
 
 ![list of builds showing the cancel icon](images/build-cancelicon.png)
 
+## Failing builds
+
 If a build fails, a **Retry** icon appears next to the build report line on the
-General and Builds tabs, and the build report page and Timeline logs also
-display a **Retry** button.
+**General** and **Builds** tabs. The **Build report** page and **Timeline logs** also display a **Retry** button.
 
 ![Timeline view showing the retry build button](images/retry-build.png)
 
 > **Note**
 >
-> If you are viewing the build details for a repository that belongs
-to an Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
+> If you are viewing the build details for a repository that belongs to an
+> Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
 
+Automated builds have a 4-hour execution time limit. If a build reaches this time limit, it's
+automatically cancelled, and the build logs display the following message:
+
+```text
+2022-11-02T17:42:27Z The build was cancelled or exceeded the maximum execution time.
+```
+
+This log message is the same as when you actively cancel a build. To identify
+whether a build was automatically cancelled, check the build duration.
 
 ## Disable an automated build
 
 Automated builds are enabled per branch or tag, and can be disabled and
-re-enabled easily. You might do this when you want to only build manually for
-a while, for example when you are doing major refactoring in your code. Disabling
-autobuilds does not disable [autotests](automated-testing.md).
+re-enabled. You might do this when you want to only build manually for
+a while, for example when you are doing major refactoring in your code. When you disable autobuilds doesn't disable [autotests](automated-testing.md).
 
 To disable an automated build:
 
-1. From the **Repositories** page, click into a repository, and click the **Builds** tab.
+1. From the **Repositories** page, select a repository, and select the **Builds** tab.
 
 2. Click **Configure automated builds** to edit the repository's build settings.
 
 3. In the **Build Rules** section, locate the branch or tag you no longer want
 to automatically build.
 
-4. Click the **autobuild** toggle next to the configuration line.
-
-    The toggle turns gray when disabled.
+4. Click the **autobuild** toggle next to the configuration line. When disabled the toggle is gray.
 
 5. Click **Save** to save your changes.
 
@@ -228,46 +253,53 @@ use regular expressions (regexes) to dynamically select source code to build and
 create dynamic tags.
 
 All of these options are available from the **Build configuration** screen for
-each repository. Click **Repositories** from the left navigation, click the name
-of the repository you want to edit, click the **Builds** tab, and click
-**Configure Automated builds**.
+each repository. Select **Repositories** from the left navigation, and select the name of the repository you want to edit. Select the **Builds** tab, and click **Configure Automated builds**.
 
-### Tag and Branch builds
+### Tag and branch builds
 
 You can configure your automated builds so that pushes to specific branches or tags triggers a build.
 
 1. In the **Build Rules** section, click the plus sign to add more sources to build.
 
-2.  Select the **Source type** to build: either a **tag** or a **branch**.
+2.  Select the **Source type** to build: either a tag or a branch.
 
-    This tells the build system what type of source to look for in the code
-    repository.
+    > Note
+    >
+    > This tells the build system what type of source to look for in the code
+    > repository.
 
 3. Enter the name of the **Source** branch or tag you want to build.
 
-    You can enter a name, or use a regex to match which source branch or tag
-    names to build. To learn more, see
-    [regexes](index.md#regexes-and-automated-builds).
+    > Note
+    >
+    > You can enter a name, or use a regex to match which source branch or tag
+    > names to build. To learn more, see [regexes](index.md#regexes-and-automated-builds).
 
 4. Enter the tag to apply to Docker images built from this source.
 
-    If you configured a regex to select the source, you can reference the
-    capture groups and use its result as part of the tag. To learn more, see
-    [regexes](index.md#regexes-and-automated-builds).
+   > Note
+   >
+   > If you configured a regex to select the source, you can reference the
+   > capture groups and use its result as part of the tag. To learn more, see
+   > [regexes](index.md#regexes-and-automated-builds).
 
 5. Repeat steps 2 through 4 for each new build rule you set up.
 
 ### Set the build context and Dockerfile location
 
-Depending on how the files are arranged in your source code repository, the
+Depending on how you arrange the files in your source code repository, the
 files required to build your images may not be at the repository root. If that's
 the case, you can specify a path where the build looks for the files.
 
-The _build context_ is the path to the files needed for the build, relative to the root of the repository. Enter the path to these files in the **Build context** field. Enter `/` to set the build context as the root of the source code repository.
+The _build context_ is the path to the files needed for the build, relative to
+the root of the repository. Enter the path to these files in the **Build context** field. Enter `/` to set the build context as the root of the source code repository.
 
 > **Note**
 >
-> If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
+> If you delete the default path `/` from the **Build context** field and leave
+> it blank, the build system uses the path to the Dockerfile as the build
+> context. However, to avoid confusion it's recommended that you specify the
+> complete path.
 
 You can specify the **Dockerfile location** as a path relative to the build
 context. If the Dockerfile is at the root of the build context path, leave the
@@ -278,7 +310,7 @@ to the Dockerfile from the root of the source repository.)
 
 You can specify a regular expression (regex) so that only matching branches or
 tags are built. You can also use the results of the regex to create the Docker
-tag that is applied to the built image.
+tag that's applied to the built image.
 
 You can use up to nine regular expression capture groups
 (expressions enclosed in parentheses) to select a source to build, and reference
@@ -287,16 +319,16 @@ these in the **Docker Tag** field using `{\1}` through `{\9}`.
 <!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
 
-You could also use capture groups to build and label images that come from various sources. For example, you might have
+You could also use capture groups to build and label images that come from various
+sources. For example, you might have
 
 `/(alice|bob)-v([0-9.]+)/` -->
 
 ### Build images with BuildKit
 
-You can enable the BuildKit builder by setting the `DOCKER_BUILDKIT=1`
-[environment variable](#environment-variables-for-builds) in the
-[Configure automated build settings](#configure-automated-build-settings) section.
-Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+Autobuilds use the BuildKit build system by default. If you want to use the legacy
+Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"}
+`DOCKER_BUILDKIT=0`. Refer to the [BuildKit](../../build/buildkit/index.md)
 page for more information on BuildKit.
 
 ## Build repositories with linked private submodules
@@ -308,11 +340,16 @@ submodules (or requires that you clone other private repositories to build),
 Docker Hub cannot access these additional repos, your build cannot complete,
 and an error is logged in your build timeline.
 
-To work around this, you can set up your automated build using the `SSH_PRIVATE` environment variable to override the deployment key and grant Docker Hub's build system access to the repositories.
+To work around this, you can set up your automated build using the `SSH_PRIVATE`
+environment variable to override the deployment key and grant Docker Hub's build
+system access to the repositories.
 
 > **Note**
 >
-> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Hub's access to your source repositories.
+> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds)
+> instead, and configure a service user for your source code provider. You can
+> also do this for an individual account to limit Docker Hub's access to your
+> source repositories.
 
 1. Generate a SSH keypair that you use for builds only, and add the public key to your source code provider account.
 
@@ -327,11 +364,13 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 
 > **Note**
 >
-> You must configure your private git submodules using git clone over SSH (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
+> You must configure your private git submodules using git clone over SSH
+> (`git@submodule.tld:some-submodule.git`) rather than HTTPS.
 
 ## Autobuild for Teams
 
-When you create an automated build repository in your own account namespace, you can start, cancel, and retry builds, and edit and delete your own repositories.
+When you create an automated build repository in your own account namespace, you
+can start, cancel, and retry builds, and edit and delete your own repositories.
 
 These same actions are also available for team repositories from Docker Hub if
 you are a member of the Organization's `Owners` team. If you are a member of a
@@ -357,10 +396,9 @@ your source code repositories using OAuth tied to a specific user account. This
 means that Docker Hub has access to everything that the linked source provider
 account can access.
 
-For organizations and teams, we recommend creating a dedicated service account
-(or "machine user") to grant access to the source provider. This ensures that no
+For organizations and teams, it's recommended you create a dedicated service account (or "machine user") to grant access to the source provider. This ensures that no
 builds break as individual users' access permissions change, and that an
-individual user's personal projects are not exposed to an entire organization.
+individual user's personal projects aren't exposed to an entire organization.
 
 This service account should have access to any repositories to be built,
 and must have administrative access to the source code repositories so it can
@@ -375,7 +413,9 @@ variable to automated builds associated with the account.
 2. Create a "build" team in your organization.
 3. Ensure that the new "build" team has access to each repository and submodule you need to build.
 
-    Go to the repository's **Settings** page. On GitHub, add the new "build" team to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team to the list of approved users on the **Access management** screen.
+    Go to the repository's **Settings** page. On GitHub, add the new "build" team
+    to the list of **Collaborators and Teams**. On Bitbucket, add the "build" team
+    to the list of approved users on the **Access management** screen.
 
 4. Add the service user to the "build" team on the source provider.
 
@@ -402,4 +442,4 @@ integrates seamlessly with autobuild and autoredeploy.
 > **Note**
 >
 > While the Autotest feature builds an image for testing purposes, it
-does not push the resulting image to Docker Hub.
+> doesn't push the resulting image to Docker Hub.

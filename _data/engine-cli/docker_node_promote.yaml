@@ -13,7 +13,7 @@ usage: docker node promote NODE [NODE...]
 pname: docker node
 plink: docker_node.yaml
 examples: |-
-  ```bash
+  ```console
   $ docker node promote <node name>
   ```
 deprecated: false

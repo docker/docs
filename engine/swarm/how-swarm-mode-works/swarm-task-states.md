@@ -48,7 +48,7 @@ Run `docker service ps <service-name>` to get the state of a task. The
 `CURRENT STATE` field shows the task's state and how long it's been
 there.
 
-```bash
+```console
 $ docker service ps webserver
 ID             NAME              IMAGE    NODE        DESIRED STATE  CURRENT STATE            ERROR                              PORTS
 owsz0yp6z375   webserver.1       nginx    UbuntuVM    Running        Running 44 seconds ago

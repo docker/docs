@@ -37,7 +37,7 @@ The network named `bridge` is a special network. Unless you tell it otherwise, D
 
 Inspecting the network is an easy way to find out the container's IP address.
 
-```bash
+```console
 $ docker network inspect bridge
 
 [

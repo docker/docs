@@ -1,4 +1,0 @@
-{%- assign words = content | number_of_words -%}
-{%- if words >= 360 -%}
-<p><em class="reading-time">Estimated reading time: {{ words | divided_by:180 }} minutes</em></p>
-{%- endif -%}

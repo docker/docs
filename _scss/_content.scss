@@ -1,6 +1,7 @@
 
 .content, p {
   line-height: 24px;
+  clear:       both;
 
   img {
     display:   block;
@@ -45,6 +46,15 @@ code {
 
 .highlighter-rouge {
   margin: 15px 0;
+  position: relative;
+
+  button.copy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+  }
 }
 
 /*
@@ -52,33 +62,42 @@ code {
  */
 
 .component-container {
-    padding: 0;
-    margin: 0 0 50px;
-    width: 100%;
-}
+  padding:  0;
+  margin:   0 0 50px;
+  width:    100%;
 
-.component {
-    padding: 15px 25px 5px 15px;
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  // "get-docker" tiles
+  .row > .block {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .component {
+    padding: 15px 25px 15px 15px;
     text-align: center;
-    margin: 0 8px 15px;
-    float: left;
-    height: 250px;
+    height: 100%;
     width: 100%;
     background: $bg-component;
     img {
-      width: 70px;
       height: 70px;
     }
     .component-icon {
-      margin: 0 auto;
-      width: 70px;
+      display: flex;
+      justify-content: center;
     }
     h2 {
-      font-size: 22px;
+      font-size: 18px;
     }
     h2, h3, p {
       margin: 0;
     }
+  }
 }
 
 a.anchorLink {
@@ -100,4 +119,8 @@ a.glossary {
      &:hover {
         opacity: 1;
     }
+}
+
+a.accept-eula {
+  font-weight: bold;
 }

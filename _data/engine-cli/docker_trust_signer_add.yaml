@@ -18,7 +18,7 @@ examples: |-
 
   To add a new signer, `alice`, to this repository:
 
-  ```bash
+  ```console
   $ docker trust inspect --pretty example/trust-demo
 
   No signatures for example/trust-demo
@@ -36,7 +36,7 @@ examples: |-
 
   Add `alice` with `docker trust signer add`:
 
-  ```bash
+  ```console
   $ docker trust signer add alice example/trust-demo --key alice.crt
     Adding signer "alice" to example/trust-demo...
     Enter passphrase for repository key with ID 642692c:
@@ -45,7 +45,7 @@ examples: |-
 
   `docker trust inspect --pretty` now lists `alice` as a valid signer:
 
-  ```bash
+  ```console
   $ docker trust inspect --pretty example/trust-demo
 
   No signatures for example/trust-demo

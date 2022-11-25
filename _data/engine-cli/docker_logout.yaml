@@ -5,7 +5,7 @@ usage: docker logout [SERVER]
 pname: docker
 plink: docker.yaml
 examples: |-
-  ```bash
+  ```console
   $ docker logout localhost:8080
   ```
 deprecated: false
