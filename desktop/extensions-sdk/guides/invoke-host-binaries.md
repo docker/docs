@@ -59,7 +59,7 @@ In this example, the binary returns a string as result, obtained by `result?.std
 </ul>
 
 <div class="tab-content">
-  <div id="react-dockerfile" class="tab-pane fade in active" markdown="1">
+  <div id="react-app" class="tab-pane fade in active" markdown="1">
 
 ```typescript
 export function App() {
