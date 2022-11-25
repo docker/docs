@@ -32,7 +32,9 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
 
-- **Use gRPC FUSE for file sharing**. Clear this check box to use the legacy
+- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. The **VirtioFS** option is not available for macOS versions below 12.5.
+
+**Use gRPC FUSE for file sharing**. Clear this check box to use the legacy
   osxfs file sharing instead.
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
@@ -214,20 +216,6 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 ### Beta features
 
 {% include beta.md %}
-
-#### Enable VirtioFS
-
- Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
-
-To enable virtioFS:
-
-1. Verify that you are on the following macOS version:
-   - macOS 12.2 or later (for Apple Silicon)
-   - macOS 12.3 or later (for Intel)
-
-2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
-
-3. Click **Apply & Restart**.
 
 #### Enable containerd
 
