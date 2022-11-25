@@ -4,19 +4,22 @@ description: Add invocations to host binaries from the frontend with the extensi
 keywords: Docker, extensions, sdk, build
 ---
 
-In some cases, your extension needs to invoke some command from the host (the computer of your users). For example, you 
-might wand to invoke the CLI of your cloud provider to create a new resource, or the CLI of a tool your extension 
-provides. 
-You could do that executing the CLI from a container with the extension SDK. But this CLI needs to access the host's 
+In some cases, your extension needs to invoke some command from the host (the computer of your users). For example, you
+might want to invoke the CLI of your cloud provider to create a new resource, or the CLI of a tool your extension
+provides, or even a shell script that you want to run on the host. You could do that executing the CLI from a container with the extension SDK. But this CLI needs to access the host's
 filesystem, which isn't possible if it runs in a container.
-Host binaries allows exactly this: to invoke binaries from the host. As extensions can run on multiple platforms, 
-this means that you need to ship the binaries for all the platforms you want to support.
+Host binaries allow exactly this: to invoke from the extension those executables (e.g. binaries, shell scripts) that are
+shipped as part of your extension and have been deployed to host. As extensions can run on multiple platforms, this
+means that you need to ship the executables for all the platforms you want to support.
+
+> **Note**
+> Only executables shipped as part of the extension can be invoked with the SDK.
 
 In this example, this CLI will be a simple `Hello world` script that must be invoked with a parameter and will return a 
 string. Since the extension will support multiple platforms, the script will be written in `bash` for macOS and Linux, 
 and in `powershell` for Windows.
 
-## Add the binaries to the extension
+## Add the executables to the extension
 Create a file `binaries/unix/hello.sh` with the following content:
 
 ```bash
@@ -36,7 +39,7 @@ Make them both executable:
 chmod +x binaries/*
 ```
 
-Then update the `Dockerfile` to copy the `binaries` folder into the extension container.
+Then update the `Dockerfile` to copy the `binaries` folder into the extension's container filesystem.
 
 ```dockerfile
 # Copy the binaries into the right folder
@@ -45,11 +48,11 @@ COPY binaries/unix/hello.sh /linux/hello.sh
 COPY binaries/unix/hello.sh /darwin/hello.sh
 ```
 
-## Invoke the host binary from the UI
+## Invoke the executable from the UI
 
-In your app, use the Docker Desktop Client object and then invoke the binary provided by the extension with the 
-`ddClient.extension.host.cli.exec()` function.
-In this example, the binary returns a string as result, obtained by `result?.stdout`, as soon as the app starts.
+In your extension, use the Docker Desktop Client object to [invoke the shell script](../dev/api/backend.md#invoke-an-extension-binary-on-the-host)
+provided by the extension with the `ddClient.extension.host.cli.exec()` function.
+In this example, the binary returns a string as result, obtained by `result?.stdout`, as soon as the extension view is rendered.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#react-app" data-group="react">For React</a></li>
@@ -62,7 +65,6 @@ In this example, the binary returns a string as result, obtained by `result?.std
   <div id="react-dockerfile" class="tab-pane fade in active" markdown="1">
 
 ```typescript
-
 export function App() {
   const ddClient = createDockerDesktopClient();
   const [hello, setHello] = useState("");
@@ -125,7 +127,8 @@ export function App() {
 
 ## Configure the metadata file
 
-The host binaries must be specified in the `metadata.json` so that Docker Desktop copies them on the host when installing the extension.
+The host binaries must be specified in the `metadata.json` so that Docker Desktop copies them on the host when installing
+the extension. Once the extension is uninstalled, the binaries that were copied will be removed as well.
 
 ```json
 {
