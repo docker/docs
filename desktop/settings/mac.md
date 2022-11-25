@@ -32,7 +32,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
 
-- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. The **VirtioFS** option is not available for macOS versions below 12.5.
+- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. The **VirtioFS** option isn't available for macOS versions below 12.5.
 
 **Use gRPC FUSE for file sharing**. Clear this check box to use the legacy
   osxfs file sharing instead.

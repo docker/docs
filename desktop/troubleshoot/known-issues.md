@@ -10,20 +10,6 @@ title: Known issues for Docker Desktop on Mac
 <div class="tab-content">
 <div id="tab3" class="tab-pane fade in active" markdown="1">
 <br>
-* The following issues are seen when using the `virtualization.framework` experimental feature:
-
-  * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
-
-    This is an interaction between `vmnet.framework` (as used by `virtualization.framework`) and the VPN clients.
-
-  * Some container disk I/O is much slower than expected. See [docker/for-mac#5389](https://github.com/docker/for-mac/issues/5389){:target="_blank" rel="noopener" class="_"}. Disk flushes are particularly slow due to the need to guarantee data is written to stable storage on the host. We have also observed specific performance problems when using the `virtualization.framework` on Intel chips on MacOS Monterey.
-
-    This is an artifact of the new `virtualization.framework`. 
-
-  * The Linux Kernel may occasionally crash. Docker now detects this problem and pops up an error dialog offering the user the ability to quickly restart Linux.
-
-    We are still gathering data and testing alternate kernel versions.
-
 * IPv6 is not (yet) supported on Docker Desktop.
 
 * On Apple silicon in native `arm64` containers, older versions of `libssl` such as `debian:buster`, `ubuntu:20.04`, and `centos:8` will segfault when connected to some TLS servers, for example, `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04`, and `fedora:35`.
