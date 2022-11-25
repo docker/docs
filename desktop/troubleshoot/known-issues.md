@@ -10,6 +10,24 @@ title: Known issues for Docker Desktop on Mac
 <div class="tab-content">
 <div id="tab3" class="tab-pane fade in active" markdown="1">
 <br>
+
+* For various reasons the symlinks necessary for the Docker to function properly don't get created during the Docker install process.
+  
+  Below is a list of symlinks that users have reported as missing and must exist in order for Docker to function properly. 
+
+```shell
+ln -s /Applications/Docker.app/Contents/Resources/cli-plugins /usr/local/lib/docker/cli-plugins
+ln -s /Applications/Docker.app/Contents/Resources/bin/docker /usr/local/bin/docker 
+ln -s /Applications/Docker.app/Contents/Resources/bin/com.docker.cli /usr/local/bin/com.docker.cli
+ln -s /Applications/Docker.app/Contents/Resources/bin/docker-compose /usr/local/bin/docker-compose
+ln -s /Applications/Docker.app/Contents/Resources/bin/docker-compose-v1/docker-compose /usr/local/bin/docker-compose-v1
+ln -s /Applications/Docker.app/Contents/Resources/bin/docker-index /usr/local/bin/docker-index
+ln -s /Applications/Docker.app/Contents/Resources/bin/docker-credential-desktop /usr/local/bin/docker-credential-desktop
+ln -s /Applications/Docker.app/Contents/Resources/bin/docker-credential-osxkeychain /usr/local/bin/docker-credential-osxkeychain
+ln -s /Applications/Docker.app/Contents/Resources/bin/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
+ln -s /Applications/Docker.app/Contents/Resources/bin/kubectl /usr/local/bin/kubectl.docker 
+```
+
 * The following issues are seen when using the `virtualization.framework` experimental feature:
 
   * Some VPN clients can prevent the VM running Docker from communicating with the host, preventing Docker Desktop starting correctly. See [docker/for-mac#5208](https://github.com/docker/for-mac/issues/5208).
