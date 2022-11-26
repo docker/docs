@@ -78,8 +78,8 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-   FROM node:12-alpine
-   RUN apk add --no-cache python2 g++ make
+   FROM node:18-alpine
+   RUN apk add --no-cache python3 g++ make
    WORKDIR /app
    COPY . .
    RUN yarn install --production
