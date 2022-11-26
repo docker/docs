@@ -15,7 +15,6 @@ For more information, refer to the following topics:
 * [Best practices for writing Dockerfiles](../develop/develop-images/dockerfile_best-practices.md)
 * [Docker development best practices](../develop/dev-best-practices.md)
 * [Build images with BuildKit](../build/buildkit/index.md#getting-started)
-* [Manage images](../develop/develop-images/image_management.md)
 
 ## Language-specific getting started guides
 

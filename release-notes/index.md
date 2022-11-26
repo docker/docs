@@ -13,3 +13,4 @@ that you regularly visit the release notes to learn about updates.
 - [Docker Desktop](../desktop/release-notes.md)
 - [Docker Hub](../docker-hub/release-notes.md)
 - [Docker Compose](../compose/release-notes.md)
+- [Docker Build](../build/release-notes.md)
