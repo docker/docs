@@ -112,12 +112,15 @@ you need to add this configuration in the Docker systemd service file.
     Environment="HTTPS_PROXY=https://proxy.example.com:443"
     ```
         
-    If you have to use special characters in the proxy value they must be both URL encoded and escape the % signs with double %%.
-    
-    ```
-    [Service]
-    Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:8080/"
-    ```
+    > **Note**
+    >
+    > Special characters in the proxy value, such as `#?!()[]{}`, must be double
+    > escaped using `%%`. For example:
+    > 
+    > ```
+    > [Service]
+    > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:8080/"
+    > ```
      
 3.  If you have internal Docker registries that you need to contact without
     proxying you can specify them via the `NO_PROXY` environment variable.
@@ -195,12 +198,15 @@ you need to add this configuration in the Docker systemd service file.
     Environment="HTTPS_PROXY=https://proxy.example.com:443"
     ```
     
-    If you have to use special characters in the proxy value they must be both URL encoded and escape the % signs with double %%.
-    
-    ```
-    [Service]
-    Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:8080/"
-    ```
+    > **Note**
+    >
+    > Special characters in the proxy value, such as `#?!()[]{}`, must be double
+    > escaped using `%%`. For example:
+    > 
+    > ```
+    > [Service]
+    > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:8080/"
+    > ```
      
 3.  If you have internal Docker registries that you need to contact without
     proxying, you can specify them via the `NO_PROXY` environment variable.
