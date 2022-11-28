@@ -43,6 +43,7 @@
 .nav-sidebar li a {
     cursor: pointer;
     color: $light-palette-grey-800;
+    font-weight: bold;
 }
 
 .nav-sidebar>li>a {
@@ -61,7 +62,7 @@
     list-style: none;
     padding: 0;
     text-align: left;
-
+    padding-top: 32px;
     li {
         display: block;
     }
@@ -83,7 +84,8 @@
 }
 
 .nav-sidebar .nav > li > a {
-  padding-left: 22px; // left-padding to align with logo
+  padding: 12px 22px; // left-padding to align with logo
+  border: 0px;
   &.active {
     padding-left: 19px; // compensate for 1px -> 4px border-width
   }
@@ -108,6 +110,36 @@
 .nav-sidebar .caret {
     float: right;
     margin-top: 10px;
+}
+
+.nav-sidebar ul .divider{
+  border-top: 1px solid;
+  margin: auto 22px;
+  border-color: $light-palette-grey-100;
+}
+
+.nav-sidebar ul .divider:last-child{
+  border: 0px;
+}
+
+.nav-sidebar ul .title{
+  padding: 12px 22px 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: $light-palette-grey-500;
+}
+
+.nav-sidebar ul .subNavItem a{
+  padding: 12px 32px;
+}
+
+.nav-sidebar ul .weakNavItem{
+  font-size: 12px;
+  color: $light-palette-grey-500;  
+  a{
+    padding: 8px 22px;
+    font-weight: lighter;
+  }
 }
 
 /* pointer for collapsed sidebar list items */

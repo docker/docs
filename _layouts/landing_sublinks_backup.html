@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- Page generated {{ site.time }} -->
+<html lang="en">
+{%- include head.html -%}
+<body id="landing" class="landing colums">
+  <header>
+    {% include header.html %}
+  </header>  
+  <div class="wrapper right-open">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-body">
+                <main class="col-content content">
+                    <section class="section">
+                      <h1>Content</h1>  
+                    </section>
+                </main>
+                <nav class="col-nav">
+                    <div id="sidebar-nav" class="sidebar hidden-sm hidden-xs">
+                        <div id="navbar" class="nav-sidebar">
+                            <ul class="nav hidden-md hidden-lg"></ul>
+                            <!-- <ul class="nav" id="jsTOCLeftNav"></ul> -->
+                            <ul class="nav" id="landingLeftNav">
+                              {%- for entry in site.data.toc.horizontalnav -%}
+                                <li>
+                                  <a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a>
+                                </li>
+                                {% if entry.sublinks %}
+                                  <ul>  
+                                    {% for sublink in entry.sublinks %}
+                                      {% if sublink.title == "separator"%}
+                                          <li>-</li>
+                                      {% else %}
+                                        <li><a href="{{ sublink.path }}" id="{{ sublink.node }}">{{ sublink.title }}</a></li>
+                                      {% endif %}
+                                    {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              {% endfor %}                              
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="col-toc"></div>
+            </div>
+        </div>
+    </div>
+
+  <footer class="footer">
+    {% include footer.html %}
+  </footer>
+
+  <script>
+    window.onChangeHelpTab = function (name) {
+      const currentActiveTab = document.querySelector(".help-by-product ul.nav li.active");
+      if (currentActiveTab) currentActiveTab.classList.remove("active");
+      const currentActiveBody = document.querySelector(".help-by-product div.row.active[data-tab]");
+      if (currentActiveBody) currentActiveBody.classList.remove("active");
+      const nextActiveTab = document.querySelector('.help-by-product ul.nav li[data-tab="' + name + '"]');
+      if (nextActiveTab) nextActiveTab.classList.add("active");
+      const nextActiveBody = document.querySelector('.help-by-product div.row[data-tab="' + name + '"]');
+      if (nextActiveBody) nextActiveBody.classList.add("active");
+    };
+    window.onChangeHelpOs = function (os) {
+      const container = document.querySelector('div[data-tab="desktop"]');
+      if (container) container.setAttribute("data-os", os);
+    };
+  </script>
+</body>
+</html>

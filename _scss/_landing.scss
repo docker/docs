@@ -158,10 +158,10 @@ body.landing {
     box-shadow: 0 3px 6px rgba(11, 33, 74, 0.09),
       0 -2px 2px rgba(11, 33, 74, 0.03);
     padding: 24px 36px;
-    min-height: 100px;
+    min-height: 224px;
 
     @include sm-width {
-      min-height: 185px;
+      min-height: 224px;
     }
 
     @each $icon in $icons {
@@ -174,24 +174,24 @@ body.landing {
     .title {
       font-size: 16px;
       line-height: 16px;
-      margin: 10px 0;
+      margin: 10px 0 20px;
 
       @include sm-width {
         font-size: 18px;
         line-height: 18px;
-        margin: 6px 0;
+        margin: 6px 0 12px;
       }
 
       @include md-width {
         font-size: 20px;
         line-height: 20px;
-        margin: 6px 0;
+        margin: 6px 0 12px;
       }
 
       @include lg-width {
         font-size: 22px;
         line-height: 22px;
-        margin: 8px 0;
+        margin: 8px 0 16px;
       }
     }
 
@@ -347,4 +347,30 @@ body.landing {
       color: white;
     }
   }
+}
+
+// Experimental styles
+.home-docker-onboarding .image{
+  background-image: url(/assets/images/laptop.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 32px;
+  width: 130px;
+  height: 130px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-docker-onboarding{
+  padding-bottom: 24px;
+}
+
+.navbar-collapse .search-form{
+  width: 80%;
+}
+
+.navbar-collapse .search-form .form-inline{
+  margin: 5px auto;
+  float: none;
+  width: 50%;
 }

@@ -67,7 +67,7 @@ function renderNav() {
             if (item.sublinks){
                 for (const sublink of item.sublinks) {
                     if (sublink.path === pageURL || pageIsInSection(data[sublink.node])) {
-                        _('#'+sublink.node).closest("li").classList.add("active")
+                        // _('#'+sublink.node).closest("li").classList.add("active")
                         walkTree(data[sublink.node]);
                         _("#jsTOCLeftNav").innerHTML = outputLetNav.join("");
                     }
@@ -76,7 +76,7 @@ function renderNav() {
             if (item.path === pageURL || pageIsInSection(data[item.node])) {
                 // This is the current section. Set the corresponding header-nav link
                 // to active, and build the left-hand (vertical) navigation
-                _('#'+item.node).closest("li").classList.add("active")
+                // _('#'+item.node).closest("li").classList.add("active")
                 walkTree(data[item.node]);
                 _("#jsTOCLeftNav").innerHTML = outputLetNav.join("");
             }

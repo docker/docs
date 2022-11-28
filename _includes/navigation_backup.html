@@ -20,11 +20,8 @@
     </button>
 </div>
 <div class="nav-container hidden-sm hidden-xs">
-    <div style="display: none !important;">
+    <div>
         <ul class="nav navbar-nav">
-            <li>
-                <a href="/">← Back</a>
-            </li>
             {%- for entry in site.data.toc.horizontalnav -%}
             {% if entry.sublinks %}
             <li class="nav-item">
