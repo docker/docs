@@ -122,7 +122,7 @@ FROM ubuntu:22.04
 Here the [`FROM` instruction](../../engine/reference/builder.md#from) sets our
 base image to the 22.04 release of Ubuntu. All following instructions are
 executed on this base image, in this case, an Ubuntu environment. The notation
-`ubuntu:22:04`, follows the `name:tag` standard for naming docker images. When
+`ubuntu:22.04`, follows the `name:tag` standard for naming docker images. When
 you build your image you use this notation to name your images and use it to
 specify any existing Docker image. There are many public images you can
 leverage in your projects. Explore [Docker Hub](https://hub.docker.com/search?image_filter=official&q=&type=image){:target="_blank" rel="noopener" class="_"}
