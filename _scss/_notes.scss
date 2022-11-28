@@ -64,6 +64,9 @@ blockquote {
         $body-text-color: $white,
         $icon: "\f06a"
       );
+      a {
+        color: $dark-blue-800;
+      };
     }
 
     &.important {
@@ -118,7 +121,7 @@ blockquote {
     &:not(.important):not(.warning):not(.restricted):not(.experimental):not(.tip) {
       @include notification(
         $bg-color: $light-blue-100,
-        $header-color: $light-blue-500,
+        $header-color: $light-blue-600,
         $body-text-color: inherit,
         $icon: "\f05a"
       );
@@ -127,7 +130,7 @@ blockquote {
     &.important {
       @include notification(
         $bg-color: $light-amber-100,
-        $header-color: $light-amber-500,
+        $header-color: $dark-amber-300,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -136,7 +139,7 @@ blockquote {
     &.warning {
       @include notification(
         $bg-color: $light-red-300,
-        $header-color: $light-red-500,
+        $header-color: $light-red-700,
         $body-text-color: inherit,
         $icon: "\f06a"
       );
@@ -145,7 +148,7 @@ blockquote {
     &.restricted {
       @include notification(
         $bg-color: $light-viole-200,
-        $header-color: $light-viole-500,
+        $header-color: $light-viole-600,
         $body-text-color: inherit,
         $icon: "\f135"
       );
@@ -163,7 +166,7 @@ blockquote {
     &.tip {
       @include notification(
         $bg-color: $light-green-200,
-        $header-color: $light-green-500,
+        $header-color: $light-green-600,
         $body-text-color: inherit,
         $icon: "\f164"
       )

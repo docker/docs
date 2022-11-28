@@ -53,8 +53,8 @@
 .nav-sidebar>.active>a,
 .nav-sidebar>.active>a:focus,
 .nav-sidebar>.active>a:hover {
-    color: $light-blue-400;
-    background-color: $light-blue-400;
+    color: $light-blue-600;
+    background-color: $light-blue-500;
 }
 
 .nav-sidebar ul {
@@ -79,7 +79,7 @@
 .nav-sidebar ul li a,
 .nav-sidebar ul li a:focus {
     border-bottom: none;
-    border-left:   1px solid $light-grey-200;
+    // border-left:   1px solid $light-grey-200;
 }
 
 .nav-sidebar .nav > li > a {
@@ -95,9 +95,9 @@
 .nav-sidebar ul li a.active,
 .nav-sidebar.nav > li > a:focus {
     background:  $bg-sidebar-active;
-    border-left: 4px solid $primary-links;
+    border-left: 4px solid $light-blue-500;
     font-weight: 600;
-    color: $light-blue-400;
+    color: $light-blue-500;
 }
 
 .nav-sidebar ul li ul li a {

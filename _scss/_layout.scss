@@ -138,7 +138,7 @@ footer {
     li {
         margin-bottom: 10px;
         a {
-            color: $light-grey-400;
+            color: $light-grey-500;
             font-size: 12px;
             line-height: 16px;
         }
@@ -157,7 +157,7 @@ footer {
             margin-left: 10px;
             padding-bottom: 6px;
             a {
-                color: $light-grey-400;
+                color: $white;
                 font-size: 12px;
             }
         }
@@ -179,7 +179,7 @@ footer {
 .footer-copyright p {
     font-size: 12px;
     line-height: 17px;
-    color: $light-grey-400;
+    color: $light-grey-500;
     margin-bottom: 0;
     padding: 0 0 15px;
 }
