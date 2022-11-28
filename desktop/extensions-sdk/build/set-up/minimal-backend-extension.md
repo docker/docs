@@ -12,7 +12,7 @@ For extensions with a backend service running REST services over sockets or name
 
 > Note
 >
-> Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 > Note
 >
@@ -48,7 +48,7 @@ If you want to set up user authentication for the extension, see [Authentication
 
 ## Invoke the extension backend from your javascript code
 
-Using the [React extension example](./react-extension.md), we can invoke our extension backend from the App.tsx file.
+Using the [advanced frontend extension example](./frontend-extension-tutorial.md), we can invoke our extension backend from the `App.tsx` file.
 
 Use the Docker Desktop Client object and then invoke a binary provided in our backend container (that lives inside the Docker Desktop VM) with `ddClient.docker.extension.vm.cli.exec()`.
 In our example, our hello.sh script returns a string as result, we obtain it with `result?.stdout`.

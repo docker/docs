@@ -10,7 +10,7 @@ To start creating your extension, you first need a directory with files which ra
 
 > Note
 >
-> Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 > Note
 >
@@ -77,4 +77,5 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 
 ## What's next?
 
-Learn how to [build and install your extension](../build-install.md).
+- Learn how to [build and install your extension](../build-install.md).
+- Build a more advanced frontend extension by following the [Advanced frontend extension tutorial](./frontend-extension-tutorial.md).
