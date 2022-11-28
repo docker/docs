@@ -204,6 +204,13 @@ View Tags on DockerHub to see multi-platform result:
 ![containerd_feature_tags](../images/containerd_feature_tags.png){:width="750px"}
 
 ## Containerd Image Store Release Notes
+### 2022-12-1
+
+#### Bug fixes
+* Containers will restore correctly on restart with the containerd integration
+* Fixed listing multi-platform images with the containerd integration
+* Better handling of dangling images with the containerd integration
+* Implement "reference" filter for images with the containerd integration
 
 ### 2022-10-19 
 New commands and multiple bug fixes included with Docker Desktop 4.13.0.
