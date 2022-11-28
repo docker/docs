@@ -86,5 +86,5 @@ $ docker extension rm <name-of-your-extension>
 
 - Explore our [design principles](../design/design-principles.md).
 - Take a look at our [UI styling guidelines](../design/overview.md).
-- Set up [authentication for your extension](../dev/oauth2-flow.md)
+- Set up [authentication for your extension](../guides/oauth2-flow.md)
 - Learn how to [publish your extension](../extensions/index.md).

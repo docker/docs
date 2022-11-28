@@ -1271,7 +1271,7 @@ manuals:
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
-    - sectiontitle: Hardened Desktop
+    - sectiontitle: Hardened Docker Desktop
       section:
         - path: /desktop/hardened-desktop/
           title: Overview
@@ -1331,10 +1331,8 @@ manuals:
               section:
                 - title: ...a minimal frontend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
-                - title: ... a ReactJS-based extension
-                  path: /desktop/extensions-sdk/build/set-up/react-extension/
-                - title: ... a minimal extension invoking Docker commands
-                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
+                - title: ... an advanced frontend extension
+                  path: /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
                 - title: ... a minimal backend extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
             - title: "Step two: Build and install"
@@ -1363,12 +1361,16 @@ manuals:
                path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
+        - sectiontitle: "Developer Guides"
+          section:
+            - title: Invoke host binaries
+              path: /desktop/extensions-sdk/guides/invoke-host-binaries/
+            - title: Interacting with Kubernetes
+              path: /desktop/extensions-sdk/guides/kubernetes/
+            - title: Authentication
+              path: /desktop/extensions-sdk/guides/oauth2-flow/
         - sectiontitle: Developer SDK tools
           section:
-            - title: Interacting with Kubernetes
-              path: /desktop/extensions-sdk/dev/kubernetes/          
-            - title: Authentication
-              path: /desktop/extensions-sdk/dev/oauth2-flow/
             - title: CLI reference
               path: /desktop/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs

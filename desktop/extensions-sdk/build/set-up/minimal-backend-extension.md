@@ -12,7 +12,7 @@ For extensions with a backend service running REST services over sockets or name
 
 > Note
 >
-> Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 > Note
 >
@@ -44,11 +44,11 @@ Although you can start from an empty directory, it is highly recommended that yo
 4. A file that provides information about the extension such as the name, description, and version.
 5. The source folder that contains all your HTML, CSS and JS files. There can also be other static assets such as logos and icons. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
-If you want to set up user authentication for the extension, see [Authentication](../../dev/oauth2-flow.md).
+If you want to set up user authentication for the extension, see [Authentication](../../guides/oauth2-flow.md).
 
 ## Invoke the extension backend from your javascript code
 
-Using the [React extension example](./react-extension.md), we can invoke our extension backend from the App.tsx file.
+Using the [advanced frontend extension example](./frontend-extension-tutorial.md), we can invoke our extension backend from the `App.tsx` file.
 
 Use the Docker Desktop Client object and then invoke a binary provided in our backend container (that lives inside the Docker Desktop VM) with `ddClient.docker.extension.vm.cli.exec()`.
 In our example, our hello.sh script returns a string as result, we obtain it with `result?.stdout`.

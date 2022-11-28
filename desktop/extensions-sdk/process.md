@@ -17,7 +17,7 @@ The build process consists of:
 - Building and installing the extension.
 - Testing and debugging the extension.
 
-There are also instructions on [how to set authentication](dev/oauth2-flow.md) for your extension.
+There are also instructions on [how to set authentication](guides/oauth2-flow.md) for your extension.
 
 This build section provides sample folders with ready-to-go examples that walk you through building:
 

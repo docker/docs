@@ -82,5 +82,5 @@ Learn more about:
 
 - [Building and installing an extension](build/build-install.md)
 - [Testing and debugging](build/test-debug.md)
-- [Setting up authentication](dev/oauth2-flow.md)
+- [Setting up authentication](guides/oauth2-flow.md)
 - [Designing the UI](design/design-guidelines.md)

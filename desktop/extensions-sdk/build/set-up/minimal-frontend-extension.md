@@ -10,7 +10,7 @@ To start creating your extension, you first need a directory with files which ra
 
 > Note
 >
-> Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 > Note
 >
@@ -34,7 +34,7 @@ Although you can start from an empty directory, it is highly recommended that yo
 2. A file that provides information about the extension such as the name, description, and version.
 3. The source folder that contains all your HTML, CSS and JS files. There can also be other static assets such as logos and icons. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
-If you want to set up user authentication for the extension, see [Authentication](../../dev/oauth2-flow.md).
+If you want to set up user authentication for the extension, see [Authentication](../../guides/oauth2-flow.md).
 
 ## Create a Dockerfile
 
@@ -77,4 +77,5 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 
 ## What's next?
 
-Learn how to [build and install your extension](../build-install.md).
+- Learn how to [build and install your extension](../build-install.md).
+- Build a more advanced frontend extension by following the [Advanced frontend extension tutorial](./frontend-extension-tutorial.md).
