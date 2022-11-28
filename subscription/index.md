@@ -53,7 +53,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 **Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and speed up their secure software supply chain initiatives.
 
-In addition to all the features available in Docker Pro and Docker Team, Docker Business includes [Hardened Desktop](../desktop/hardened-desktop/index.md) enhanced container isolation and settings management, centralized management, [Image Access Management](../docker-hub/image-access-management.md) with the ability to control what registries and content developers can access, ensuring teams are building secure from the start by only pulling trusted base images,[Single Sign-On](../single-sign-on/index.md),[System for Cross-domain Identity Management](../docker-hub/scim.md) and more.
+In addition to all the features available in Docker Pro and Docker Team, Docker Business includes [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) enhanced container isolation and settings management, centralized management, [Image Access Management](../docker-hub/image-access-management.md) with the ability to control what registries and content developers can access, ensuring teams are building secure from the start by only pulling trusted base images,[Single Sign-On](../single-sign-on/index.md),[System for Cross-domain Identity Management](../docker-hub/scim.md) and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
