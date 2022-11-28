@@ -53,30 +53,18 @@ For now, we will create the network first and attach the MySQL container at star
         -v todo-mysql-data:/var/lib/mysql \
         -e MYSQL_ROOT_PASSWORD=secret \
         -e MYSQL_DATABASE=todos \
-        mysql:5.7
-    ```
-    
-    If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
-    
-    ```console
-    $ docker run -d \
-        --network todo-app --network-alias mysql \
-        --platform "linux/amd64" \
-        -v todo-mysql-data:/var/lib/mysql \
-        -e MYSQL_ROOT_PASSWORD=secret \
-        -e MYSQL_DATABASE=todos \
-        mysql:5.7
+        mysql:8.0
     ```
 
     If you are using Windows then use this command in PowerShell.
 
     ```powershell
-    PS> docker run -d `
+    $ docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
         -e MYSQL_ROOT_PASSWORD=secret `
         -e MYSQL_DATABASE=todos `
-        mysql:5.7
+        mysql:8.0
     ```
 
     You'll also see we specified the `--network-alias` flag. We'll come back to that in just a moment.
@@ -145,7 +133,7 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
     And you'll get an output like this...
 
     ```text
-    ; <<>> DiG 9.14.1 <<>> mysql
+    ; <<>> DiG 9.18.8 <<>> mysql
     ;; global options: +cmd
     ;; Got answer:
     ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 32162
@@ -183,7 +171,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 > **Setting Connection Settings via Env Vars**
 >
 > While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
-> when running applications in production. Diogo Monica, the former lead of security at Docker,
+> when running applications in production. Diogo Monica, a former lead of security at Docker,
 > [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"}
 > explaining why.
 >
@@ -212,34 +200,21 @@ With all of that explained, let's start our dev-ready container!
       -e MYSQL_USER=root \
       -e MYSQL_PASSWORD=secret \
       -e MYSQL_DB=todos \
-      node:12-alpine \
+      node:18-alpine \
       sh -c "yarn install && yarn run dev"
-    ```
-    If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
-    
-    ```console
-    $ docker run -dp 3000:3000 \
-      -w /app -v "$(pwd):/app" \
-      --network todo-app \
-      -e MYSQL_HOST=mysql \
-      -e MYSQL_USER=root \
-      -e MYSQL_PASSWORD=secret \
-      -e MYSQL_DB=todos \
-      node:12-alpine \
-      sh -c "apk add --no-cache python2 g++ make && yarn install && yarn run dev"
     ```
 
     If you are using Windows then use this command in PowerShell.
 
     ```powershell
-    PS> docker run -dp 3000:3000 `
+    $ docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
       -e MYSQL_HOST=mysql `
       -e MYSQL_USER=root `
       -e MYSQL_PASSWORD=secret `
       -e MYSQL_DB=todos `
-      node:12-alpine `
+      node:18-alpine `
       sh -c "yarn install && yarn run dev"
     ```
 3. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
@@ -247,7 +222,7 @@ With all of that explained, let's start our dev-ready container!
 
     ```console
     $ nodemon src/index.js
-    [nodemon] 1.19.2
+    [nodemon] 2.0.20
     [nodemon] to restart at any time, enter `rs`
     [nodemon] watching dir(s): *.*
     [nodemon] starting `node src/index.js`

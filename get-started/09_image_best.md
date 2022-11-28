@@ -105,9 +105,7 @@ times for your container images.
 Let's look at the Dockerfile we were using one more time...
 
 ```dockerfile
-# syntax=docker/dockerfile:1
-FROM node:12-alpine
-RUN apk add --no-cache python2 g++ make
+FROM node:18-alpine
 WORKDIR /app
 COPY . .
 RUN yarn install --production
@@ -126,9 +124,7 @@ a change to the `package.json`. Make sense?
 1. Update the Dockerfile to copy in the `package.json` first, install dependencies, and then copy everything else in.
 
     ```dockerfile
-    # syntax=docker/dockerfile:1
-    FROM node:12-alpine
-    RUN apk add --no-cache python2 g++ make
+    FROM node:18-alpine
     WORKDIR /app
     COPY package.json yarn.lock ./
     RUN yarn install --production
@@ -160,34 +156,23 @@ a change to the `package.json`. Make sense?
     You should see output like this...
 
     ```plaintext
-    Sending build context to Docker daemon  219.1kB
-    Step 1/6 : FROM node:12-alpine
-    ---> b0dc3a5e5e9e
-    Step 2/6 : WORKDIR /app
-    ---> Using cache
-    ---> 9577ae713121
-    Step 3/6 : COPY package.json yarn.lock ./
-    ---> bd5306f49fc8
-    Step 4/6 : RUN yarn install --production
-    ---> Running in d53a06c9e4c2
-    yarn install v1.17.3
-    [1/4] Resolving packages...
-    [2/4] Fetching packages...
-    info fsevents@1.2.9: The platform "linux" is incompatible with this module.
-    info "fsevents@1.2.9" is an optional dependency and failed compatibility check. Excluding it from installation.
-    [3/4] Linking dependencies...
-    [4/4] Building fresh packages...
-    Done in 10.89s.
-    Removing intermediate container d53a06c9e4c2
-    ---> 4e68fbc2d704
-    Step 5/6 : COPY . .
-    ---> a239a11f68d8
-    Step 6/6 : CMD ["node", "src/index.js"]
-    ---> Running in 49999f68df8f
-    Removing intermediate container 49999f68df8f
-    ---> e709c03bc597
-    Successfully built e709c03bc597
-    Successfully tagged getting-started:latest
+    [+] Building 16.1s (10/10) FINISHED
+    => [internal] load build definition from Dockerfile
+    => => transferring dockerfile: 175B
+    => [internal] load .dockerignore
+    => => transferring context: 2B
+    => [internal] load metadata for docker.io/library/node:18-alpine
+    => [internal] load build context
+    => => transferring context: 53.37MB
+    => [1/5] FROM docker.io/library/node:18-alpine
+    => CACHED [2/5] WORKDIR /app
+    => [3/5] COPY package.json yarn.lock ./
+    => [4/5] RUN yarn install --production
+    => [5/5] COPY . .
+    => exporting to image
+    => => exporting layers
+    => => writing image     sha256:d6f819013566c54c50124ed94d5e66c452325327217f4f04399b45f94e37d25
+    => => naming to docker.io/library/getting-started
     ```
 
     You'll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.
@@ -197,30 +182,26 @@ a change to the `package.json`. Make sense?
 5. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
 
     ```plaintext
-    Sending build context to Docker daemon  219.1kB
-    Step 1/6 : FROM node:12-alpine
-    ---> b0dc3a5e5e9e
-    Step 2/6 : WORKDIR /app
-    ---> Using cache
-    ---> 9577ae713121
-    Step 3/6 : COPY package.json yarn.lock ./
-    ---> Using cache
-    ---> bd5306f49fc8
-    Step 4/6 : RUN yarn install --production
-    ---> Using cache
-    ---> 4e68fbc2d704
-    Step 5/6 : COPY . .
-    ---> cccde25a3d9a
-    Step 6/6 : CMD ["node", "src/index.js"]
-    ---> Running in 2be75662c150
-    Removing intermediate container 2be75662c150
-    ---> 458e5c6f080c
-    Successfully built 458e5c6f080c
-    Successfully tagged getting-started:latest
+    [+] Building 1.2s (10/10) FINISHED
+    => [internal] load build definition from Dockerfile
+    => => transferring dockerfile: 37B
+    => [internal] load .dockerignore
+    => => transferring context: 2B
+    => [internal] load metadata for docker.io/library/node:18-alpine
+    => [internal] load build context
+    => => transferring context: 450.43kB
+    => [1/5] FROM docker.io/library/node:18-alpine
+    => CACHED [2/5] WORKDIR /app
+    => CACHED [3/5] COPY package.json yarn.lock ./
+    => CACHED [4/5] RUN yarn install --production
+    => [5/5] COPY . .
+    => exporting to image
+    => => exporting layers
+    => => writing image     sha256:91790c87bcb096a83c2bd4eb512bc8b134c757cda0bdee4038187f98148e2eda
+    => => naming to docker.io/library/getting-started
     ```
 
-    First off, you should notice that the build was MUCH faster! And, you'll see that steps 1-4 all have
-    `Using cache`. So, hooray! We're using the build cache. Pushing and pulling this image and updates to it
+    First off, you should notice that the build was MUCH faster! And, you'll see that several steps are using previously cached layers. So, hooray! We're using the build cache. Pushing and pulling this image and updates to it
     will be much faster as well. Hooray!
 
 ## Multi-stage builds
@@ -238,7 +219,6 @@ that JDK isn't needed in production. Also, you might be using tools like Maven o
 Those also aren't needed in our final image. Multi-stage builds help.
 
 ```dockerfile
-# syntax=docker/dockerfile:1
 FROM maven AS build
 WORKDIR /app
 COPY . .
@@ -259,8 +239,7 @@ and more into static HTML, JS, and CSS. If we aren't doing server-side rendering
 for our production build. Why not ship the static resources in a static nginx container?
 
 ```dockerfile
-# syntax=docker/dockerfile:1
-FROM node:12 AS build
+FROM node:18 AS build
 WORKDIR /app
 COPY package* yarn.lock ./
 RUN yarn install
@@ -272,7 +251,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-Here, we are using a `node:12` image to perform the build (maximizing layer caching) and then copying the output
+Here, we are using a `node:18` image to perform the build (maximizing layer caching) and then copying the output
 into an nginx container. Cool, huh?
 
 ## Next steps
