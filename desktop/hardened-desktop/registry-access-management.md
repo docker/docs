@@ -1,6 +1,6 @@
 ---
 description: Registry Access Management
-keywords: registry access managment, Hardened Desktop, Docker Desktop, images, Docker Hub
+keywords: registry access managment, Hardened Docker Desktop, Docker Desktop, images, Docker Hub
 title: Registry Access Management
 redirect_from: 
 - /docker-hub/registry-access-management/

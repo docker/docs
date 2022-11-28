@@ -1271,7 +1271,7 @@ manuals:
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
-    - sectiontitle: Hardened Desktop
+    - sectiontitle: Hardened Docker Desktop
       section:
         - path: /desktop/hardened-desktop/
           title: Overview
