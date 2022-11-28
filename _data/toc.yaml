@@ -1361,12 +1361,16 @@ manuals:
                path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
+        - sectiontitle: "Developer Guides"
+          section:
+            - title: Invoke host binaries
+              path: /desktop/extensions-sdk/guides/invoke-host-binaries/
+            - title: Interacting with Kubernetes
+              path: /desktop/extensions-sdk/guides/kubernetes/
+            - title: Authentication
+              path: /desktop/extensions-sdk/guides/oauth2-flow/
         - sectiontitle: Developer SDK tools
           section:
-            - title: Interacting with Kubernetes
-              path: /desktop/extensions-sdk/dev/kubernetes/          
-            - title: Authentication
-              path: /desktop/extensions-sdk/dev/oauth2-flow/
             - title: CLI reference
               path: /desktop/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs

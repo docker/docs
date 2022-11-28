@@ -2,6 +2,8 @@
 title: OAuth 2.0 flow
 description: Docker extension OAuth 2.0 flow
 keywords: Docker, extensions, sdk, OAuth 2.0
+redirect_from:
+  - /desktop/extensions-sdk/dev/oauth2-flow/
 ---
 
 > Note
@@ -37,7 +39,8 @@ Once the user enters the username and password, they are successfully authentica
 
 From the extension UI, you can provide a button that, when selected, opens a new window in a browser to authenticate the user.
 
-Use the [ddClient.host.openExternal](api/dashboard.md#open-a-url) API to open a browser to the auth URL. For example:
+Use the [ddClient.host.openExternal](../dev/api/dashboard.md#open-a-url) API to open a browser to the auth URL. For
+example:
 
 ```typescript
 window.ddClient.openExternal("https://authorization-server.com/authorize?

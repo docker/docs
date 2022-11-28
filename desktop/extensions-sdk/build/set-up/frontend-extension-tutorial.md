@@ -317,5 +317,5 @@ export function App() {
 
 - Learn how to [build and install your extension](../build-install.md).
 - For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
-- If you want to set up user authentication for the extension, see [Authentication](../../dev/oauth2-flow.md).
+- If you want to set up user authentication for the extension, see [Authentication](../../guides/oauth2-flow.md).
 
