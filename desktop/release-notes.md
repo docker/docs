@@ -24,12 +24,94 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.15.0
+
+2022-12-01
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### New
+
+- Added webassembly capabilities, use with the beta containerd integration.
+- Containers will be restored on restart with the containerd integration.
+- Fixed listing multi-platform images with the containerd integration.
+- Better handling of dangling images with the containerd integration.
+- Implement "reference" filter for images with the containerd integration.
+- Add support for selecting upstream HTTP/HTTPS proxies automatically via `proxy.pac` in containers, `docker pull` etc.
+- Support custom names for new Dev Environments.
+- Updated the beta features settings to better describe experimental features and how people can access them.
+- Show available disk space of VM in footer.
+- Show disk space warning in footer if available space is below 3GB.
+- Support creating Dev Environments by cloning a Git repository to a local bind mount.
+- Updated colours and typography to be in line with Docker Design System.
+- Added a Build tab inside Extensions containing all necessary resources to build an extension.
+- Added the ability to share extensions more easily, either with `docker extension share` CLI or the share button in extensions "Manage" tab.
+- Display number of installs in the extensions marketplace, and ability to sort by number of installs.
+- Adds button to open DevEnv folder from UI.
+
+### Upgrades
+
+- [Compose v2.13.0](https://github.com/docker/compose/releases/tag/v2.13.0)
+- [Containerd v1.6.10](https://github.com/containerd/containerd/releases/tag/v1.6.10)
+- [Docker Hub Tool v0.4.5](https://github.com/docker/hub-tool/releases/tag/v0.4.5)
+- [Docker Scan v0.22.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.22.0)
+
+### Bug fixes and minor changes
+
+#### For all platforms
+
+- Fixed regressions when parsing image references on pull. Fixes [docker/for-win#13053](https://github.com/docker/for-win/issues/13053), [docker/for-mac#6560](https://github.com/docker/for-mac/issues/6560), and [docker/for-mac#6540](https://github.com/docker/for-mac/issues/6540).
+
+#### For Mac
+
+- Improve performance of `docker pull`.
+
+#### For Windows
+
+- Fixed an issue where the system HTTP proxies were not used when Docker starts and the developer logs in.
+- When Docker Desktop is using "system" proxies and if the Windows settings change, Docker Desktop will use the new Windows settings without a restart.
+
+#### For Linux
+
+- Fixes hot-reload issue on Linux. Fixes [docker/desktop-linux#30](https://github.com/docker/desktop-linux/issues/30).
+- Disable tray icon animations on linux, which fixes crashes for some users.
+
 ## 4.14.1
 {% include release-date.html date="2022-11-17" %}
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/91661/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/91661/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/91661/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSeven">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 1e6d8fadff3393110029eeda2e40344e6a99a90ec69dab0b92327e79afef30c6</li>
+      <li><b>Mac Intel:</b> SHA-256 c70534abce8e288178fdff9fa89d110a93257b008e1e69c69465f6b41d26155f</li>
+      <li><b>Mac Arm:</b> SHA-256 d244fb20ffb94d0ea3837c0b55555f983881405d22fce1e187ced39efbb188a1</li>
+      <li><b>Linux DEB:</b> SHA-256 97698848c1ac1f1b8a6144c497f113cd2ca9e6c3399de7af981d12d1957da1de</li>
+      <li><b>Linux RPM:</b> SHA-256 4393c1ff4da3adac51dbe735d3a498167c59efc9d67d11f3a5c8aac3b629e59c</li>
+      <li><b>Linux Arch:</b> SHA-256 992c0f599234ea88f0af731bff3de3ba35a76366164eae6b755aaf41ef098b24</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Bug fixes and enhancements
 
