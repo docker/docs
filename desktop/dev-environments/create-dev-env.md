@@ -79,7 +79,7 @@ To launch a dev environment:
 1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started**. 
 3. Optional: Provide a name for you dev environment.
-4. Select **Existing Git repo** as the source and then paste your Git repository link into the **Enter the Git Repository** field.
+4. Select **Existing Git repo** as the source and then paste your Git repository link into the field provided.
 5. Choose your IDE. You can choose either:
     - **Visual Studio Code**. The Git repository is cloned into a Volume and attaches to your containers. This allows you to develop directly inside of them using Visual Studio Code.
     - **Other**. The Git repository is cloned into your chosen local directory and attaches to your containers as a bind mount. This shares the directory from your computer to the container, and allows you to develop using any local editor or IDE.
@@ -109,7 +109,7 @@ Docker then clones the repository with your specified branch or tag.
 1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started**.
 3. Optional: Provide a name for you dev environment.
-4. Select **Existing Git repo** as the source and then paste the link of your Git repo subfolder into the **Enter the Git Repository** field.
+4. Select **Existing Git repo** as the source and then paste the link of your Git repo subfolder into the field provided.
 5. Choose your IDE. You can choose either:
     - **Visual Studio Code**. The Git repository is cloned into a Volume and attaches to your containers. This allows you to develop directly inside of them using Visual Studio Code.
     - **Other**. The Git repository is cloned into your chosen local directory and attaches to your containers as a bind mount. This shares the directory from your computer to the container, and allows you to develop using any local editor or IDE.
