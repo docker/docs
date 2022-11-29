@@ -80,7 +80,7 @@ a {
     }
     .navbar-nav > li.active > a {
       border-color: $dark-blue-600;
-      border-bottom: 4px solid $dark-blue-500;
+      border-bottom: 4px solid $white;
     }
     .slider {
         background-color: #344658;
@@ -177,7 +177,7 @@ a {
         border-top: 1px solid rgb(31, 52, 66);
     }
     .footer_links li a {
-        color: $dark-grey-700;
+        color: $white;
     }
     .bottom_footer {
         border-top: 1px solid rgb(78, 93, 106);
@@ -186,10 +186,10 @@ a {
         background-color: #2f2f2f;
     }
     .footer_sub_nav ul li a {
-        color: $dark-grey-700;
+        color: $white;
     }
     .footer-copyright p {
-        color: $dark-grey-700;
+        color: $white;
     }
 
     /* syntax highlighting */

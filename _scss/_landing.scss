@@ -250,8 +250,8 @@ body.landing {
     }
 
     a.btn {
-      background:  $dark-red-400;
-      color:       white;
+      background:  $white;
+      color:       $dark-blue-400;
       font-size:   17px;
       margin-top:  20px;
       padding:     15px 30px;
@@ -291,7 +291,7 @@ body.landing {
       li.active a {
         background-color: inherit;
         border: none;
-        border-bottom: 5px solid $dark-blue;
+        border-bottom: 5px solid $dark-blue-500;
       }
     }
 

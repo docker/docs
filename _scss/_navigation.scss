@@ -167,6 +167,7 @@ div.side-toc-title {
     font-size: 12px;
     font-weight: bold;
     margin: 11px 0 10px 13px;
+    color: $light-grey-500;
 }
 
 .edit {
@@ -271,13 +272,13 @@ input:checked+.slider:before {
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.17);
-      border-bottom:    4px solid rgba($white, 0.75);
+      border-bottom:    4px solid $white;
     }
   }
   .navbar-nav > li.active > a {
     cursor:        default;
     border-left:   none;
-    border-bottom: 4px solid rgba($white, 0.5);
+    border-bottom: 4px solid $white;
   }
 }
 
