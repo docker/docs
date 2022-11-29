@@ -37,11 +37,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above. 
 - Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
 - Added [WebAssembly capabilities](wasm/index.md). Use with the [containerd integration](containerd/index.md).
-- Containers will be restored on restart with the containerd integration.
-- Fixed listing multi-platform images with the containerd integration.
-- Better handling of dangling images with the containerd integration.
-- Implement "reference" filter for images with the containerd integration.
-- Add support for selecting upstream HTTP/HTTPS proxies automatically via `proxy.pac` in containers, `docker pull` etc.
 - Docker now supports custom names for new dev environments.
 - Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
 - Available disk space of VM now displays in the footer of Docker Dashboard.
@@ -64,6 +59,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
+- Containers are now restored on restart with the containerd integration.
+- Fixed listing multi-platform images with the containerd integration.
+- Better handling of dangling images with the containerd integration.
+- Implement "reference" filter for images with the containerd integration.
+- Added support for selecting upstream HTTP/HTTPS proxies automatically via `proxy.pac` in containers, `docker pull` etc.
 - Fixed regressions when parsing image references on pull. Fixes [docker/for-win#13053](https://github.com/docker/for-win/issues/13053), [docker/for-mac#6560](https://github.com/docker/for-mac/issues/6560), and [docker/for-mac#6540](https://github.com/docker/for-mac/issues/6540).
 
 #### For Mac
