@@ -12,30 +12,6 @@ Now that you've built an image, you can share it. To share Docker images, you ha
 >
 > A Docker ID allows you to access Docker Hub which is the world's largest library and community for container images. Create a [Docker ID](https://hub.docker.com/signup){:target="_blank" rel="noopener" class="_"} for free if you don't have one.
 
-## Build a multi-platform image
-
-Before you add the image to a registry, you should consider the architecture of your image. The image that you have built will only run on platforms using the same architecture as your development machine. If you want to share and run the image on machines with different architectures, you can use buildx to build a [multi-platform image](../build/building/multi-platform.md).
-
-In the following steps, you will build a multi-platform image that can run on AMD64 and ARM64/v8.
-
-1. In a terminal, run the following command to create and use a new builder with the `docker-container` driver which gives you access to more complex features like multi-platform builds.
-
-   ```console
-   $ docker buildx create --name mybuilder --driver docker-container --bootstrap --use
-   ```
-
-2. In a terminal, change directory to the directory containing your Dockerfile and then run the following command to build a multi-platform image.
-
-   ```console
-    $ docker buildx build --platform linux/amd64,linux/arm/v8 -t getting-started .
-   ```
-   In the command above, you use `--platform` to specify the OS and architecture for the image, and `-t` to tag or name the image.
-
-3. The `docker-container` driver, by default, doesn't make the image available in your local image store. To make the image available, you must use the `--load` flag.
-
-   ```console
-   $ docker buildx build --load -t getting-started .
-   ```
 
 ## Create a repository
 
@@ -77,37 +53,65 @@ To push an image, you first need to create a repository on Docker Hub.
 
 ## Run the image on a new instance
 
-Now that your image has been built and pushed to a registry, try running your app on a brand new instance that has never seen this container image. To do this, you will use Play with Docker.
+Now that your image has been built and pushed to a registry, any device with Docker can run your image.
 
-
-1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
-
-2. Select **Login** and then select **docker** from the drop-down list.
-
-3. Connect with your Docker Hub account.
-
-4. Once you're logged in, select the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
-
-5. In the terminal, start your freshly pushed app. Replace `<your-docker-id>` with your Docker ID.
+To run the image on another device with Docker, use the `docker run` command and replace `<your-docker-id>` with your Docker ID.
 
    ```console
    $ docker run -dp 3000:3000 <your-docker-id>/getting-started
    ```
 
-   You should see the image get pulled down and eventually start up.
+If you don't have another device to try, you can delete the image from your device, which will allow you to simulate running the image on a new device.
 
-   > **Note**
-   >
-   > Play with Docker is a free service with limited capacity. If you encounter `no space left on device` errors, you can try again later or skip this section.
+To remove the image, you must first stop and remove the container.
 
-6. Select the 3000 badge when it comes up and you should see the app with your modifications.
-   If the 3000 badge doesn't show up, you can select the **Open Port** button and type in 3000.
+1. Get the ID of the container by using the `docker ps` command. Use the `--all` flag to list all running and stopped containers.
+
+   ```console
+   $ docker ps --all
+   ```
+
+2. If the container is running, use the `docker stop` command to stop the container. Replace `<the-container-id>` with the ID from `docker ps`.
+
+   ```console
+   $ docker stop <the-container-id>
+   ```
+
+3. Once the container has stopped, you can remove it by using the `docker rm` command. Replace `<the-container-id>` with the ID from `docker ps`.
+
+   ```console
+   $ docker rm <the-container-id>
+   ```
+
+4. Now that the container has been removed, you can remove the image. Get the ID of the image by using the `docker image ls` command.
+
+   ```console
+   $ docker image ls
+   ```
+
+5. Remove the image using the `docker image rm` command. Replace `<the-image-id>` with the ID from `docker image ls`.
+
+   ```console
+   $ docker image rm <the-image-id>
+   ```
+
+   Your device no longer has the image. In order to run the image, you can rebuild it, or pull it from Docker Hub.
+
+6. Pull and run the image from Docker Hub using the `docker run` command. Replace `<your-docker-id>` with your Docker ID.
+
+   ```console
+   $ docker run -dp 3000:3000 <your-docker-id>/getting-started
+   ```
+
+   Docker pulls the image from Docker Hub and runs it.
+
+7. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
+   You should see your app.
 
 ## Next steps
 
-In this section, you learned how to build a multi-platform image and share it by pushing it to a registry. You then went to a
-brand new instance and were able to run the freshly pushed image. This is quite common in CI pipelines, where the pipeline will create the image and push it to a registry and then the production environment can use the latest version of the image.
+In this section, you learned how to share an image by pushing it to a registry. You then pulled the image from the registry and ran it. Using images from a registry is quite common in CI pipelines, where the pipeline will create the image and push it to a registry and then the production environment can use the latest version of the image.
 
-In the next part,  you'll learn how you can persist data across container restarts.
+In the next part, you'll learn how you can persist data across container restarts.
 
 [Persist the DB](05_persisting_data.md){: .button  .primary-btn}
