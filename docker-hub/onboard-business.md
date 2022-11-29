@@ -59,7 +59,7 @@ Add members to your organization using a CSV file, or by entering their email ad
 ## Step 5: Manage members with SSO and SCIM
 
 Automate adding members to your organization using the following:
-   - Single Sign-on: Automatically provision and add members when they sign in to Docker through your identity provider. For details, see [Single Sign-on overview](../single-sign-on/index.md).
+   - Single Sign-on: Automatically provision and add members when they sign in to Docker Hub through your identity provider. For details, see [Single Sign-on overview](../single-sign-on/index.md).
    - System for Cross-domain Identity Management: Automatically provision, add, and de-provision members from your identity provider. For details, see [SCIM](../docker-hub/scim.md).
 
 ## Step 6: Enforce sign-in for Docker Desktop
