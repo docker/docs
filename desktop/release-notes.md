@@ -26,7 +26,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ## 4.15.0
 
-2022-12-01
+{% include release-date.html date="2022-12-01" %}
 
 > Download Docker Desktop
 >
@@ -34,21 +34,23 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Added webassembly capabilities, use with the beta containerd integration.
+- Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above. 
+- Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
+- Added [WebAssembly capabilities](wasm/index.md). Use with the [containerd integration](containerd/index.md).
 - Containers will be restored on restart with the containerd integration.
 - Fixed listing multi-platform images with the containerd integration.
 - Better handling of dangling images with the containerd integration.
 - Implement "reference" filter for images with the containerd integration.
 - Add support for selecting upstream HTTP/HTTPS proxies automatically via `proxy.pac` in containers, `docker pull` etc.
-- Support custom names for new Dev Environments.
-- Updated the beta features settings to better describe experimental features and how people can access them.
-- Show available disk space of VM in footer.
-- Show disk space warning in footer if available space is below 3GB.
-- Support creating Dev Environments by cloning a Git repository to a local bind mount.
+- Docker now supports custom names for new dev environments.
+- Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
+- Available disk space of VM now displays in the footer of Docker Dashboard.
+- A disk space warning now displays in the footer if available space is below 3GB.
+- A dev environment can now be created by cloning a Git repository to a local bind mount.
 - Updated colours and typography to be in line with Docker Design System.
-- Added a Build tab inside Extensions containing all necessary resources to build an extension.
-- Added the ability to share extensions more easily, either with `docker extension share` CLI or the share button in extensions "Manage" tab.
-- Display number of installs in the extensions marketplace, and ability to sort by number of installs.
+- Added a **Build** tab inside **Extensions** which contains all the necessary resources to build an extension.
+- Added the ability to share extensions more easily, either with `docker extension share` CLI or with the share button in the extensions **Manage** tab.
+- Extensions in the Marketplace now display the number of installs. You can also sort extensions by the number of installs.
 - Adds button to open DevEnv folder from UI.
 
 ### Upgrades
@@ -58,7 +60,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - [Docker Hub Tool v0.4.5](https://github.com/docker/hub-tool/releases/tag/v0.4.5)
 - [Docker Scan v0.22.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.22.0)
 
-### Bug fixes and minor changes
+### Bug fixes and enhancements
 
 #### For all platforms
 
@@ -66,17 +68,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Mac
 
-- Improve performance of `docker pull`.
+- Improved the performance of `docker pull`.
 
 #### For Windows
 
 - Fixed an issue where the system HTTP proxies were not used when Docker starts and the developer logs in.
-- When Docker Desktop is using "system" proxies and if the Windows settings change, Docker Desktop will use the new Windows settings without a restart.
+- When Docker Desktop is using "system" proxies and if the Windows settings change, Docker Desktop now uses the new Windows settings without a restart.
 
 #### For Linux
 
-- Fixes hot-reload issue on Linux. Fixes [docker/desktop-linux#30](https://github.com/docker/desktop-linux/issues/30).
-- Disable tray icon animations on linux, which fixes crashes for some users.
+- Fixed hot-reload issue on Linux. Fixes [docker/desktop-linux#30](https://github.com/docker/desktop-linux/issues/30).
+- Disabled tray icon animations on Linux which fixes crashes for some users.
 
 ## 4.14.1
 {% include release-date.html date="2022-11-17" %}
