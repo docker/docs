@@ -14,7 +14,6 @@ Before you start to on board your organization, ensure that you've completed the
 - You have a Docker Team subscription. [Buy now](https://www.docker.com/pricing/) if you haven't subscribed to Docker Team yet.
 - You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
 
-
 ## Step 1: Identify your Docker users and their Docker accounts
 
 To begin, you should identify which users you will need to add to your Docker Team organization. Identifying your users will help you efficiently allocate your subscription's seats and manage access.
@@ -38,11 +37,6 @@ To add an owner, invite a user to the **owners** team. For more details, see [In
 ## Step 3: Invite members
 
 Add members to your organization using a CSV file, or by entering their email addresses. For more details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}
-
-> **Note**
->
-> Before you invite members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.
-
 
 ## Step 4: Enforce sign-in for Docker Desktop
 

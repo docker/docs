@@ -56,16 +56,11 @@ To add an owner, invite a user to the **owners** team. For more details, see [In
 
 Add members to your organization using a CSV file, or by entering their email addresses. For more details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}
 
-> **Note**
->
-> Before you invite members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.
-
 ## Step 5: Manage members with SSO and SCIM
 
 Automate adding members to your organization using the following:
    - Single Sign-on: Automatically provision and add members when they sign in to Docker through your identity provider. For details, see [Single Sign-on overview](../single-sign-on/index.md).
    - System for Cross-domain Identity Management: Automatically provision, add, and de-provision members from your identity provider. For details, see [SCIM](../docker-hub/scim.md).
-
 
 ## Step 6: Enforce sign-in for Docker Desktop
 
