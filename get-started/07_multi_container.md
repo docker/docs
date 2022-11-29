@@ -217,7 +217,7 @@ With all of that explained, let's start our dev-ready container!
       node:18-alpine `
       sh -c "yarn install && yarn run dev"
     ```
-3. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
+3. If we look at the logs for the container (`docker logs -f <container-id>`), we should see a message indicating it's
    using the mysql database.
 
     ```console

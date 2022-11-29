@@ -7,7 +7,7 @@ title: Try Docker Compose
 This tutorial is designed to introduce the key concepts of Docker Compose whilst building a simple Python web application. The application uses the Flask framework and maintains a hit counter in
 Redis. 
 
-The concepts demonstrated here should be understandable even if you're not familiar Python. 
+The concepts demonstrated here should be understandable even if you're not familiar with Python. 
 
 ## Prerequisites
 
