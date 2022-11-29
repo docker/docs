@@ -2,6 +2,6 @@ Beta features provides access to future product functionality.
 These features are intended for testing and feedback only as they may change
 between releases without warning or remove them entirely from a future
 release. Beta features must not be used in production environments.
-Docker does not offer support for beta features. 
+Docker doesn't offer support for beta features. 
 
 
